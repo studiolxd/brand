@@ -106,17 +106,6 @@ export const Deshabilitado: Story = {
   ),
 };
 
-/** Sobre superficie oscura el separador y el anillo de foco pasan a blanco por token. */
-export const SuperficieOscura: Story = {
-  name: 'Superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <Accordion type="single" defaultValue="item-1">
-      {preguntas}
-    </Accordion>
-  ),
-};
-
 /** Test: patrón WAI-ARIA — el disparador es un botón dentro de un heading, con
  *  `aria-expanded` y `aria-controls` al panel `role="region"`. */
 export const Contrato: Story = {

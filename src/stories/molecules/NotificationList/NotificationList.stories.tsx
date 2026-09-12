@@ -93,11 +93,6 @@ export const EnMovil: Story = {
   globals: { viewport: { value: { width: '375px', height: '720px' } } },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-};
-
 export const ContratoIndicador: Story = {
   name: 'Test — la columna del punto se reserva también en las leídas',
   tags: ['!dev'],

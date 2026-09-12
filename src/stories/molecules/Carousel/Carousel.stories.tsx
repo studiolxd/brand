@@ -98,13 +98,6 @@ export const ContratoPausa: Story = {
   },
 };
 
-/** Sobre superficie oscura: indicadores, botones y texto voltean con la superficie. */
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: PorDefecto.args,
-};
-
 /** Sin indicadores ni botones: queda el desplazamiento nativo, que sigue funcionando. */
 export const SoloPista: Story = {
   name: 'Solo pista',

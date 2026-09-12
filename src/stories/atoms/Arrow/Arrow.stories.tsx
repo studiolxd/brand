@@ -39,19 +39,6 @@ export const Sizes: Story = {
   ),
 };
 
-/** `currentColor` hereda el color del contexto: sobre `.surface-dark` se lee en blanco. */
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-      <Arrow size="sm" />
-      <Arrow size="md" />
-      <Arrow size="lg" />
-    </div>
-  ),
-};
-
 export const TestContrato: Story = {
   name: 'Test — decorativa y oculta a lectores de pantalla',
   tags: ['!dev'],

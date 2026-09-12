@@ -81,22 +81,6 @@ export const Copiable: Story = {
   ),
 };
 
-/** Sobre superficie oscura los bordes y los dos textos pasan a blanco por token. */
-export const SuperficieOscura: Story = {
-  name: 'Superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { children: null },
-  render: () => (
-    <DescriptionList>
-      <DescriptionTerm>Cliente</DescriptionTerm><DescriptionDetails>Studio LXD</DescriptionDetails>
-      <DescriptionTerm>Servicio</DescriptionTerm><DescriptionDetails>Diseño de producto y marca</DescriptionDetails>
-      <DescriptionTerm>Año</DescriptionTerm><DescriptionDetails>2024</DescriptionDetails>
-      <DescriptionTerm>Identificador</DescriptionTerm>
-      <DescriptionDetails copyable>org_8f2c19ab</DescriptionDetails>
-    </DescriptionList>
-  ),
-};
-
 /** Por debajo de `md` término y descripción se apilan en una columna: con
  * términos largos, dos columnas apretaba el valor contra el borde. */
 export const Estrecha: Story = {

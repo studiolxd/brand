@@ -86,16 +86,6 @@ export const EstadoDelGrupo: Story = {
   ),
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <Fieldset legend="Periodicidad del pago">
-      <RadioGroup defaultValue="anual">{opciones}</RadioGroup>
-    </Fieldset>
-  ),
-};
-
 /** Test: el grupo reparte `name`, marca una sola opción y avisa al cambiar. */
 export const Contrato: Story = {
   name: 'Test — name compartido, exclusión y aviso',

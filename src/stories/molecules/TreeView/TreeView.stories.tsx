@@ -99,17 +99,6 @@ export const ConIconos: Story = {
   },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: {
-    items: matriz,
-    label: 'Matriz del curso',
-    defaultExpanded: ['modulo-1'],
-    defaultSelected: 'leccion-1-2',
-  },
-};
-
 export const TestEstructura: Story = {
   name: 'Test — monta el patrón tree con niveles y estado',
   tags: ['!dev'],
@@ -289,29 +278,6 @@ export const CuatroNiveles: Story = {
         items={carpetas}
         defaultExpanded={['raiz', 'formacion', 'prl']}
         defaultSelected="prl-oficina"
-      />
-    </EnLaBarra>
-  ),
-};
-
-export const CarpetasEnSuperficieOscura: Story = {
-  name: 'Carpetas en superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <EnLaBarra>
-      <TreeView
-        label="Carpetas"
-        defaultExpanded={['raiz', 'formacion']}
-        defaultSelected="datos"
-        items={[
-          {
-            ...carpetas[0],
-            children: [
-              (carpetas[0].children as TreeViewNode[])[0],
-              { ...(carpetas[0].children as TreeViewNode[])[1], dropTarget: true },
-            ],
-          },
-        ]}
       />
     </EnLaBarra>
   ),

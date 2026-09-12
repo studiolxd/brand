@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { ProgressBar } from './ProgressBar';
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const meta: Meta<typeof ProgressBar> = {
   title: 'Atoms/ProgressBar',
@@ -93,10 +94,14 @@ export const UmbralDeLaCifra: Story = {
   ),
 };
 
-/** Sobre superficie oscura el carril y la cifra de fuera pasan a sus valores oscuros. */
+/**
+ * Sobre superficie oscura la variante `primary` invierte el relleno a blanco
+ * —su prusia es el lienzo—, como hacen `Tag` y `NumberBadge`; el carril y la
+ * cifra de fuera pasan a sus valores oscuros. Las de acento no cambian.
+ */
 export const SuperficieOscura: Story = {
   name: 'Superficie oscura',
-  parameters: { surface: 'dark' },
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   render: () => (
     <div style={columna}>
       <ProgressBar value={65} variant="primary" label="Primaria" />
@@ -151,7 +156,7 @@ export const ContratoValor: Story = {
 export const ContratoCifraDentroEnOscuro: Story = {
   name: 'Test — la cifra de dentro contrasta en oscuro',
   tags: ['!dev'],
-  parameters: { surface: 'dark' },
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   args: { value: 65, variant: 'primary', label: 'Progreso' },
   play: async ({ canvasElement }) => {
     const relleno = canvasElement.querySelector('.progress-bar__fill') as HTMLElement;

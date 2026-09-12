@@ -93,12 +93,6 @@ type Story = StoryObj<typeof Invitaciones>;
 /** Paso 4 de 4: la lista de invitaciones en `FieldRows`. El correo crece, el rol lleva su ancho y el aspa va al final, fuera de la columna de los campos; la etiqueta solo se ve en la primera fila. */
 export const PorDefecto: Story = {};
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { theme: 'dark' },
-};
-
 export const Contrato: Story = {
   name: 'Test — último paso, tres filas, sin Atrás, y la principal cierra el alta',
   tags: ['!dev'],

@@ -17,6 +17,7 @@ import { Tag } from '../../atoms/Tag/Tag';
 import { RadioField } from '../RadioField/RadioField';
 import { RadioGroup } from '../../atoms/RadioGroup/RadioGroup';
 import { useState } from 'react';
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const foto = {
   src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=960&q=80',
@@ -382,7 +383,7 @@ export const ComoEnlaceDelRouter: Story = {
 
 export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '24rem' }}>
       <Card href="#" color="primary" title="Diseño instruccional" description="Fondo lavanda autocontenido, como Button primary." ctaLabel="Ver más" />

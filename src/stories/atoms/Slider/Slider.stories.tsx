@@ -67,12 +67,6 @@ export const Deshabilitado: Story = {
   args: { label: 'Espaciado', defaultValue: 40, disabled: true },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { label: 'Espaciado', defaultValue: 40, showValue: true },
-};
-
 export const TestTeclado: Story = {
   name: 'Test — el pulgar se mueve con el teclado',
   tags: ['!dev'],

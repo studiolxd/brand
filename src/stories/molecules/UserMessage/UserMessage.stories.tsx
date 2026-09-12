@@ -56,12 +56,6 @@ export const OtroIdioma: Story = {
   },
 };
 
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { timestamp: MOMENTO },
-};
-
 /** Test: el `<time>` lleva la hora legible por máquina y el texto formateado. */
 export const ContratoTiempo: Story = {
   name: 'Test — el tiempo es legible por máquina',

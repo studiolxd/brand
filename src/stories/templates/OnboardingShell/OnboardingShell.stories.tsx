@@ -133,11 +133,6 @@ export const FlujoDeUnPaso: Story = {
   },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-};
-
 export const Contrato: Story = {
   name: 'Test — main acotado, progreso y jerarquía de acciones',
   tags: ['!dev'],

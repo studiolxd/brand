@@ -83,11 +83,6 @@ type Story = StoryObj<typeof FieldRow>;
  */
 export const PorDefecto: Story = {};
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-};
-
 /** La misma lista dentro de un `Form` de talla `lg`: la fila hereda la talla y el hueco de la etiqueta sube con ella. */
 export const DentroDeUnFormulario: Story = {
   name: 'Dentro de un formulario',

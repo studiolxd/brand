@@ -37,12 +37,6 @@ export const FocoVisible: Story = {
   parameters: { pseudo: { focusVisible: true } },
 };
 
-/** Sobre superficie oscura toma la tinta clara, sin configuración. */
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-};
-
 export const SinHover: Story = {
   name: 'Test — mide su caja y no pinta fondo en ningún estado',
   tags: ['!dev'],

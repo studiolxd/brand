@@ -80,17 +80,6 @@ export const Deshabilitado: Story = {
   ),
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <Collapsible defaultOpen>
-      <CollapsibleTrigger>Detalles de publicación</CollapsibleTrigger>
-      <CollapsibleContent>{detalle}</CollapsibleContent>
-    </Collapsible>
-  ),
-};
-
 export const TestAbreYCierra: Story = {
   name: 'Test — el disparador abre y cierra el panel',
   tags: ['!dev'],

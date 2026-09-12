@@ -35,13 +35,6 @@ export const Tallas: Story = {
   ),
 };
 
-/** El trazado toma su color de un token con par oscuro: en una banda oscura pasa a claro solo. */
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => <Logomark size="xl" />,
-};
-
 /** Con `title` deja de ser decorativo y se anuncia como imagen con nombre. */
 export const ConNombre: Story = {
   name: 'Con nombre accesible',

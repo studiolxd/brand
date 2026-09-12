@@ -92,19 +92,6 @@ export const Semantica: Story = {
   ),
 };
 
-/** Sobre superficie oscura la línea remapea su color por token, sin CSS propio. */
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <div>
-      <Paragraph>Lo de arriba.</Paragraph>
-      <Separator />
-      <Paragraph>Lo de abajo.</Paragraph>
-    </div>
-  ),
-};
-
 /** Test: elemento, clases de talla y orientación, y paso de props. */
 export const Contrato: Story = {
   name: 'Test — elemento, modificadores y paso de props',

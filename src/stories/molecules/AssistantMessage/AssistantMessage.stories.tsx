@@ -47,12 +47,6 @@ export const SinModelo: Story = {
   args: { model: undefined, timestamp: MOMENTO },
 };
 
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { timestamp: MOMENTO },
-};
-
 /** Test: el `<time>` lleva la hora legible por máquina, y no aparece mientras se genera. */
 export const ContratoTiempo: Story = {
   name: 'Test — el tiempo es legible por máquina',

@@ -128,20 +128,15 @@ El orden importa: `string.regexp` va antes que `string`, y `keyword.operator` an
 
 Con prism el mecanismo es el mismo cambiando la tabla: sus tipos (`token keyword`, `token punctuation`) ya se parecen a estos quince.
 
-<Canvas of={CodeBlockStories.ResaltadoSuperficieOscura} />
-
 ## Una línea
 
 Para enseñar un valor de una sola línea —una URL, un comando corto— con botón de copiar: el código a la izquierda, con su propio scroll horizontal si no cabe, y el lenguaje y el botón de copiar a la derecha, **centrados en vertical**, en una sola fila. Sin la cabecera aparte de la variante multilínea, que dejaba un hueco vacío encima del texto cuando el bloque era corto.
 
 <Canvas of={CodeBlockStories.UnaLinea} />
-<Canvas of={CodeBlockStories.UnaLineaSuperficieOscura} />
 
 Se detecta sola: `children` como cadena sin saltos de línea (`\n`) es una línea; con saltos de línea, o con nodos ya resaltados por un highlighter externo (no se pueden inspeccionar como cadena), es multilínea. La prop `singleLine` fuerza cualquiera de las dos variantes cuando la detección automática no sirve — por ejemplo, un highlighter externo que produce nodos de una sola línea.
 
 ## Superficie oscura
-
-<Canvas of={CodeBlockStories.SuperficieOscura} />
 
 El fondo, el borde y la tinta pasan a su par oscuro por la regla de derivación: la misma superficie clara secundaria (`color.surface.secondary-on-light` / `-on-dark`) que usan `Kbd` y el pie de `Table`, más el borde y el anillo de foco a `color.text.on-dark`. `Code` (el átomo en línea) y `Prose` heredan el mismo par por referencia a estos tokens, sin declarar los suyos propios.
 

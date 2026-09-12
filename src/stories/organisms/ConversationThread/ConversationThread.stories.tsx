@@ -95,11 +95,6 @@ export const ContenidoPropio: Story = {
   ),
 };
 
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-};
-
 /**
  * Test: el `aria-label` del `role="log"` usa el castellano por defecto y se
  * sustituye cuando el consumidor lo pasa traducido.

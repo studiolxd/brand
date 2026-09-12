@@ -30,18 +30,6 @@ export const EnUnParrafo: Story = {
   ),
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <Paragraph>
-      El fondo y la tinta del fragmento son el par oscuro de{' '}
-      <Code>CodeBlock</Code>: la misma superficie clara secundaria, en su
-      variante para <Code>.surface-dark</Code>.
-    </Paragraph>
-  ),
-};
-
 /** Test: es un `<code>` con la clase del sistema y no rompe la línea del párrafo. */
 export const Contrato: Story = {
   name: 'Test — elemento, clase y altura de línea',

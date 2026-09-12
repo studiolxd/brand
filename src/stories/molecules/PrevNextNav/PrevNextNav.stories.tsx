@@ -100,15 +100,6 @@ export const ConTitulosSinSiguiente: Story = {
   },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: {
-    prevHref: '/planning?week=2025-W20',
-    nextHref: '/planning?week=2025-W22',
-  },
-};
-
 /**
  * Test: con título, el nombre accesible sale del texto visible (no de un
  * `aria-label` que lo taparía), y sin `label` no se pinta rótulo central.

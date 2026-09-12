@@ -114,12 +114,6 @@ export const EtiquetaOculta: Story = {
   args: { query: '', results: [], labelHidden: true, onQueryChange: () => {} },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { query: 'tokens', results: corpus.slice(0, 3), onQueryChange: () => {} },
-};
-
 /**
  * Test: el campo es un `combobox` con nombre, la lista un `listbox` con
  * nombre, y hay un `option` por resultado — sin que el componente filtre nada.

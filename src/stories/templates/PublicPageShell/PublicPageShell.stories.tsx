@@ -133,12 +133,6 @@ export const ConPanelAnclado: Story = {
   },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: ConCabeceraYPie.args,
-};
-
 export const Contrato: Story = {
   name: 'Test — main acotado con id y tabindex, cabecera y pie',
   tags: ['!dev'],

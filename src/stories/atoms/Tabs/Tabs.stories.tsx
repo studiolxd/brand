@@ -146,29 +146,6 @@ export const WithDisabled: Story = {
   ),
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-      <Tabs defaultValue="mes">
-        <TabsList variant="pill">
-          <TabsTrigger value="semana">Semana</TabsTrigger>
-          <TabsTrigger value="mes">Mes</TabsTrigger>
-          <TabsTrigger value="año">Año</TabsTrigger>
-        </TabsList>
-      </Tabs>
-      <Tabs defaultValue="general">
-        <TabsList>
-          <TabsTrigger value="general">General</TabsTrigger>
-          <TabsTrigger value="seguridad">Seguridad</TabsTrigger>
-          <TabsTrigger value="notificaciones">Notificaciones</TabsTrigger>
-        </TabsList>
-      </Tabs>
-    </div>
-  ),
-};
-
 export const TestContrato: Story = {
   name: 'Test — rol, activación y teclado',
   tags: ['!dev'],

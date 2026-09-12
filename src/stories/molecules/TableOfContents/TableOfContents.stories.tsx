@@ -72,12 +72,6 @@ export const Fijo: Story = {
   },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { items, title: 'En esta página', activeId: 'paquete' },
-};
-
 /**
  * Test: el índice es un `nav` con nombre, sus entradas apuntan al ancla del
  * encabezado, la sangría sale del nivel relativo y solo la sección actual

@@ -53,8 +53,6 @@ La baldosa no sabe nada de rejillas: se reparten con `Columns`, que es el molde 
 
 La baldosa **no lleva fondo propio**: la cifra se lee sobre el lienzo de la página, así que funciona igual en las dos superficies sin un fondo que mantener en dos versiones. Etiqueta, icono, cifra y descripción tienen su par; el borde lo hereda de `Card` outline, que ya lo tenía. Los rellenos del `Tag` son saturados y contrastan en cualquier fondo.
 
-<Canvas of={StatTileStories.EnSuperficieOscura} />
-
 ## Textos
 
 `delta.label` es el texto que explica la dirección a quien no ve la flecha. Su default es castellano según `direction` («Sube», «Baja», «Sin cambio»); en una métrica invertida conviene escribirlo («Empeora»).

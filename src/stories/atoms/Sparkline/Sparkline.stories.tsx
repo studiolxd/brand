@@ -34,11 +34,6 @@ export const Descriptiva: Story = {
   args: { ariaLabel: 'Usuarios activos: sube de 12 a 31 en doce meses' },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-};
-
 export const TestDecorativaPorDefecto: Story = {
   name: 'Test — sin ariaLabel la chispa es decorativa',
   tags: ['!dev'],

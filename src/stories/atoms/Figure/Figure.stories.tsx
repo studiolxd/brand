@@ -67,12 +67,6 @@ export const ConImagenDelConsumidor: Story = {
   ),
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { ratio: '16:9' },
-};
-
 /** Test: la figura es semántica, el pie cuelga de ella y la proporción sale del token. */
 export const Contrato: Story = {
   name: 'Test — semántica, pie y proporción',

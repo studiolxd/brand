@@ -28,19 +28,6 @@ export const Sizes: Story = {
   ),
 };
 
-/** El contorno se dibuja con `currentColor`: sigue la tinta de la superficie sin tokens propios. */
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-      <Spinner size="sm" />
-      <Spinner size="md" />
-      <Spinner size="lg" />
-    </div>
-  ),
-};
-
 /** Test: rol y anuncio accesible; el contorno es un `<rect>` sin radio con `pathLength="100"`. */
 export const Accesibilidad: Story = {
   name: 'Test — rol, label y contorno cuadrado',

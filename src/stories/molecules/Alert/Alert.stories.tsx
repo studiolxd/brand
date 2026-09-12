@@ -3,6 +3,7 @@ import { expect, userEvent, within, fn } from 'storybook/test';
 import { Alert, AlertTitle, AlertDescription } from './Alert';
 import { Button } from '../../atoms/Button/Button';
 import { Link } from '../../atoms/Link/Link';
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const meta = {
   title: 'Molecules/Alert',
@@ -88,7 +89,7 @@ export const Composicion: Story = {
  */
 export const SuperficieOscura: Story = {
   name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   render: () => (
     <div style={{ display: 'grid', gap: '1rem' }}>
       <Alert dismissible title="Aviso" description="Sobre una página oscura." />

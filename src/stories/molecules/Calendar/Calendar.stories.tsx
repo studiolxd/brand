@@ -195,15 +195,6 @@ export const TecladoAnos: Story = {
   },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: (args) => {
-    const [value, setValue] = useState<Date | null>(STORY_TODAY);
-    return <Calendar {...args} value={value} onChange={setValue} />;
-  },
-};
-
 /**
  * Test: la rejilla es una sola parada de tabulador y se recorre con el teclado
  * — flechas de día, Inicio/Fin de semana, RePág/AvPág de mes.

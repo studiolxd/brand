@@ -36,13 +36,6 @@ export const VariasAcciones: Story = {
   },
 };
 
-/** Sobre superficie oscura (`parameters.surface = 'dark'`): la sección no pinta fondo; el lienzo y el color los pone la superficie. */
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: VariasAcciones.args,
-};
-
 /**
  * A sangre: la portada se cuelga de la página sin envoltorio. Trae su propio
  * aire vertical y su `Container` interior para el lateral, así que se ve igual

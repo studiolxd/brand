@@ -67,13 +67,6 @@ export const BusquedaTallas: Story = {
   ),
 };
 
-/** La misma variante sobre el lienzo oscuro: lupa y aspa toman la tinta blanca por token. */
-export const BusquedaEnSuperficieOscura: Story = {
-  name: 'Búsqueda en superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { kind: 'search', clearable: true, label: 'Buscar', labelHidden: true, defaultValue: 'Ada Lovelace' },
-};
-
 export const ContratoBusqueda: Story = {
   name: 'Test — la variante de búsqueda no usa el campo nativo',
   tags: ['!dev'],

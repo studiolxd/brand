@@ -9,6 +9,7 @@ import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Stack } from '../../atoms/Stack/Stack';
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 /** Los seis dígitos de un TOTP. */
 const DIGITOS = 6;
@@ -101,9 +102,11 @@ export const CodigoInvalido: Story = { name: 'Código inválido', args: { invali
 /** Sin el teléfono: uno de los códigos de respaldo, que es texto y no seis dígitos. */
 export const CodigoDeRecuperacion: Story = { name: 'Código de recuperación', args: { recovery: true } };
 
+/** La prop `surface` de `AuthPage`: la página pinta su propia banda oscura y
+ *  el conmutador de tema la acompaña. No hace falta `parameters.surface`. */
 export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
+  parameters: { chromatic: SOLO_OSCURO },
   args: { surface: 'dark' },
 };
 

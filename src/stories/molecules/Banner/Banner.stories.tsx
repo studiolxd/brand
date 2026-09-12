@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
 import { Banner } from './Banner';
 import { Button } from '../../atoms/Button/Button';
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const meta: Meta<typeof Banner> = {
   title: 'Molecules/Banner',
@@ -87,7 +88,7 @@ export const AvisoConCierre: Story = {
  */
 export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   args: {
     actions: <Button variant="outline" size="sm">Dejar de suplantar</Button>,
     onDismiss: fn(),

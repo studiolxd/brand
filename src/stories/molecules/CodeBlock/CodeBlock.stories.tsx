@@ -100,21 +100,6 @@ export const UnaLinea: Story = {
   ),
 };
 
-/** La misma variante de una línea, en superficie oscura: su propio par oscuro. */
-export const UnaLineaSuperficieOscura: Story = {
-  name: 'Una línea — en superficie oscura',
-  parameters: { surface: 'dark' },
-  args: {
-    copyable: true,
-    children: 'https://api.ejemplo.com/mcp/aipricing',
-  },
-  render: (args) => (
-    <div style={{ maxWidth: '24rem' }}>
-      <CodeBlock {...args} />
-    </div>
-  ),
-};
-
 /** `children` como nodos ya resaltados por un highlighter externo, no como texto plano. */
 export const ConNodosResaltados: Story = {
   render: () => (
@@ -165,15 +150,6 @@ export const Resaltado: Story = {
   ),
 };
 
-/** Las mismas tintas en superficie oscura: cada tipo pasa a su par por token. */
-export const ResaltadoSuperficieOscura: Story = {
-  name: 'Resaltado de sintaxis — en superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <CodeBlock language="ts" copyable singleLine={false}>{fragmentoResaltado}</CodeBlock>
-  ),
-};
-
 /** Las dos líneas de un diff van como relleno, no como tinta suelta. */
 export const ResaltadoDiff: Story = {
   name: 'Resaltado de sintaxis — diff',
@@ -183,21 +159,6 @@ export const ResaltadoDiff: Story = {
       <CodeToken type="inserted">+ const precio = 2900;</CodeToken>
     </CodeBlock>
   ),
-};
-
-/**
- * Superficie oscura: fondo, borde y tinta pasan a su par oscuro (la misma
- * superficie clara secundaria que usan `Kbd` y el pie de `Table`, en su
- * variante para `.surface-dark`).
- */
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: {
-    language: 'tsx',
-    copyable: true,
-    children: `<CodeBlock language="tsx" copyable>{codigo}</CodeBlock>`,
-  },
 };
 
 /**

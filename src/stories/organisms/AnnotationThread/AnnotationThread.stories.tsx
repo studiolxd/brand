@@ -102,12 +102,6 @@ export const PanelDeRevision: Story = {
   ),
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { annotation: raiz, replies: respuestas, actions: accionesDeHilo },
-};
-
 export const TestEstructura: Story = {
   name: 'Test — estado, autor, fecha legible por máquina y recuento',
   tags: ['!dev'],

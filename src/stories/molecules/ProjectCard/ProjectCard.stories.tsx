@@ -41,12 +41,6 @@ export const ComoEnlaceDelRouter: Story = {
   },
 };
 
-/** Sobre superficie oscura: texto, etiquetas y foco voltean con la superficie. */
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-};
-
 export const Contrato: Story = {
   name: 'Test — un solo enlace, con el nombre del proyecto',
   tags: ['!dev'],

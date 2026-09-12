@@ -93,12 +93,6 @@ export const SinMedida: Story = {
   args: { as: 'article', measure: false, children: documento },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { as: 'article', children: documento },
-};
-
 /**
  * Test: el contenedor toma el elemento de `as`, la clase de talla y la de
  * medida, y el contenido crudo conserva su semántica (títulos, listas, tabla).

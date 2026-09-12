@@ -68,16 +68,6 @@ export const Small: Story = {
   },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: {
-    icon: <Icon name="folder" size="lg" />,
-    description: 'Esta carpeta está vacía. Crea un proyecto para empezar.',
-    action: { label: 'Crear proyecto', onClick: fn() },
-  },
-};
-
 export const TestContrato: Story = {
   name: 'Test — anuncio y acción',
   tags: ['!dev'],

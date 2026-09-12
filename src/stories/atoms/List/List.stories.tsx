@@ -103,12 +103,6 @@ export const ConListItem: Story = {
   ),
 };
 
-/** Sobre superficie oscura el texto pasa a blanco por token. */
-export const SuperficieOscura: Story = {
-  name: 'Superficie oscura',
-  parameters: { surface: 'dark' },
-};
-
 /** Test: el elemento sigue al tipo, las clases se componen y las props se reenvían. */
 export const Contrato: Story = {
   name: 'Test — elemento por tipo y paso de props',

@@ -273,43 +273,6 @@ export const Lg: Story = {
   },
 };
 
-/** Las tres tallas sobre superficie oscura, con los mismos estados. */
-export const TallasEnSuperficieOscura: Story = {
-  name: 'Tallas en superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-      {(['sm', 'md', 'lg'] as const).map((talla) => (
-        <Pagination
-          key={talla}
-          size={talla}
-          total={200}
-          page={1}
-          pageSize={10}
-          ariaLabel={`Paginación ${talla}`}
-        />
-      ))}
-    </div>
-  ),
-};
-
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => {
-    const [page, setPage] = useState(3);
-    return (
-      <Pagination
-        total={100}
-        page={page}
-        pageSize={10}
-        showTotal
-        onPageChange={setPage}
-      />
-    );
-  },
-};
-
 /** Listados por cursor: no se sabe cuántas páginas hay; solo anterior y siguiente, por enlace o por manejador. */
 export const PorCursor: Story = {
   args: { mode: 'cursor', nextHref: '?cursor=abc', previousHref: undefined },

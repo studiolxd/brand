@@ -58,12 +58,6 @@ export const PorDefecto: Story = {};
 /** Cuando crear organización se ofrece pero no se exige, aparece la salida. */
 export const Opcional: Story = { args: { opcional: true } };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { theme: 'dark' },
-};
-
 export const Contrato: Story = {
   name: 'Test — segundo paso, sin Atrás y sin ningún paso alcanzable',
   tags: ['!dev'],

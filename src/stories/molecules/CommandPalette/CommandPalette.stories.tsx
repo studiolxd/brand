@@ -77,12 +77,6 @@ export const SinResultados: Story = {
   },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { ...base, open: true, onOpenChange: () => {} },
-};
-
 export const ConAtajo: Story = {
   name: 'Con atajo ⌘K',
   args: { ...base, open: false, onOpenChange: () => {} },

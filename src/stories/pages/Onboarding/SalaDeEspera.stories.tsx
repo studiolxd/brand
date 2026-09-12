@@ -49,12 +49,6 @@ type Story = StoryObj<typeof SalaDeEspera>;
  */
 export const PorDefecto: Story = {};
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { theme: 'dark' },
-};
-
 export const Contrato: Story = {
   name: 'Test — dos columnas, sin pie de acciones, con salida',
   tags: ['!dev'],

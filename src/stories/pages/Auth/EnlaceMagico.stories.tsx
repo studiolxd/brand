@@ -3,6 +3,7 @@ import { expect, within } from 'storybook/test';
 import { AuthPage } from './AuthPage';
 import { Form } from '../../molecules/Form/Form';
 import { Link } from '../../atoms/Link/Link';
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const AVISO = 'Revisa tu correo para encontrar el enlace de acceso.';
 
@@ -53,9 +54,11 @@ export const PorDefecto: Story = {};
 /** Con el registro cerrado no hay nada que ofrecer bajo el título. */
 export const RegistroCerrado: Story = { name: 'Registro cerrado', args: { signupOpen: false } };
 
+/** La prop `surface` de `AuthPage`: la página pinta su propia banda oscura y
+ *  el conmutador de tema la acompaña. No hace falta `parameters.surface`. */
 export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
+  parameters: { chromatic: SOLO_OSCURO },
   args: { surface: 'dark' },
 };
 

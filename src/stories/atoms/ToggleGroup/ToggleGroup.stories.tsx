@@ -92,17 +92,6 @@ export const Deshabilitado: Story = {
   ),
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <ToggleGroup defaultValue={['anual']} aria-label="Periodo de facturación">
-      <Toggle value="mensual">Mensual</Toggle>
-      <Toggle value="anual">Anual</Toggle>
-    </ToggleGroup>
-  ),
-};
-
 export const TestExclusivo: Story = {
   name: 'Test — exclusivo: elegir uno suelta el anterior',
   tags: ['!dev'],
