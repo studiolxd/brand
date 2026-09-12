@@ -60,8 +60,8 @@ export const VariosValores: Story = {
 
 /**
  * Ficha de conexión: los valores que se copian —una URL de callback, el valor
- * de un TXT— van con `copyable`. Siguen siendo texto corriente; el botón se
- * alinea al margen derecho de la fila.
+ * de un TXT— van con `copyable`. Siguen siendo texto corriente; el botón va en
+ * línea, pegado al final del valor.
  */
 export const Copiable: Story = {
   args: { children: null },
@@ -74,6 +74,26 @@ export const Copiable: Story = {
       <DescriptionTerm>Valor del TXT</DescriptionTerm>
       <DescriptionDetails copyable copyLabel="Copiar el valor del registro TXT">
         slxd-verify=8f2c19ab
+      </DescriptionDetails>
+      <DescriptionTerm>Estado</DescriptionTerm>
+      <DescriptionDetails>Pendiente de verificar</DescriptionDetails>
+    </DescriptionList>
+  ),
+};
+
+/**
+ * El botón de copiar es un nodo en línea más: con un valor largo sin puntos
+ * de corte, el texto ocupa varias líneas y el botón se queda pegado al final
+ * de la última, nunca arriba a la derecha ni suelto debajo.
+ */
+export const CopiableValorLargo: Story = {
+  name: 'Copiable con valor largo',
+  args: { children: null },
+  render: () => (
+    <DescriptionList aria-label="Conexión SSO">
+      <DescriptionTerm>URL de callback</DescriptionTerm>
+      <DescriptionDetails copyable copyLabel="Copiar la URL de callback">
+        https://cuenta.studiolxd.com/realms/slxd/broker/oidc/endpoint/callback?state=8f2c19ab-3d4e-4f21-9c88-7a1b2c3d4e5f&session_state=1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d&code=AQICAHjklm0987654321zyxwvutsrqponmlkjihgfedcba
       </DescriptionDetails>
       <DescriptionTerm>Estado</DescriptionTerm>
       <DescriptionDetails>Pendiente de verificar</DescriptionDetails>
@@ -220,14 +240,15 @@ export const ContratoCopiable: Story = {
     await expect(copiable.querySelector('.description-list__value')!.compareDocumentPosition(boton))
       .toBe(Node.DOCUMENT_POSITION_FOLLOWING);
 
-    // El botón se centra con la PRIMERA línea del valor, no con el bloque
-    // entero: es lo que sostiene el aire del valor, así que se comprueba.
-    const primeraLinea = document.createRange();
-    primeraLinea.selectNodeContents(copiable.querySelector('.description-list__value')!);
-    const [rectLinea] = Array.from(primeraLinea.getClientRects());
+    // El botón es un nodo en línea pegado al final del valor: comparte línea
+    // con la última línea de texto (aquí, la única), no queda arriba a la
+    // derecha ni suelto debajo de ella.
+    const rangoValor = document.createRange();
+    rangoValor.selectNodeContents(copiable.querySelector('.description-list__value')!);
+    const [rectValor] = Array.from(rangoValor.getClientRects()).slice(-1);
     const rectBoton = boton.getBoundingClientRect();
     const centro = (rect: DOMRect) => rect.top + rect.height / 2;
-    await expect(Math.abs(centro(rectLinea as DOMRect) - centro(rectBoton))).toBeLessThan(1.5);
+    await expect(Math.abs(centro(rectValor as DOMRect) - centro(rectBoton))).toBeLessThan(6);
 
     // El navegador del test no concede permiso de portapapeles real: sin este
     // mock, `writeText` rechaza y no hay acuse (mismo patrón que `CopyButton`).
@@ -243,5 +264,51 @@ export const ContratoCopiable: Story = {
       await expect(copiado).toBe('org_8f2c19ab');
       await expect(within(copiable).getByRole('status')).toHaveTextContent('Copiado');
     });
+  },
+};
+
+/**
+ * Test: con un valor largo que ocupa varias líneas —en la maqueta estrecha de
+ * una columna, que es donde se vio el bug original—, el botón se queda
+ * pegado al final de la ÚLTIMA línea. Nunca arriba a la derecha (donde caía
+ * con el flex antiguo) ni solo en una línea propia debajo.
+ */
+export const ContratoCopiableValorLargo: Story = {
+  name: 'Test — copyable con valor largo no separa el botón',
+  tags: ['!dev'],
+  globals: { viewport: { value: 'mobile1' } },
+  args: { children: null },
+  render: () => (
+    <DescriptionList aria-label="conexión">
+      <DescriptionTerm>URL de callback</DescriptionTerm>
+      <DescriptionDetails copyable copyLabel="Copiar la URL de callback">
+        https://cuenta.studiolxd.com/realms/slxd/broker/oidc/endpoint/callback?state=8f2c19ab-3d4e-4f21&code=abc123
+      </DescriptionDetails>
+    </DescriptionList>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const copiable = canvas.getByLabelText('conexión').querySelector('dd')!;
+    const valor = copiable.querySelector('.description-list__value')!;
+    const boton = canvas.getByRole('button', { name: 'Copiar la URL de callback' });
+
+    const rangoCompleto = document.createRange();
+    rangoCompleto.selectNodeContents(valor);
+    const lineas = Array.from(rangoCompleto.getClientRects());
+    // El ancho de la maqueta estrecha fuerza varias líneas: si esto fallara,
+    // la comprobación de abajo no probaría nada.
+    await expect(lineas.length).toBeGreaterThan(1);
+
+    const ultimaLinea = lineas[lineas.length - 1] as DOMRect;
+    const rectBoton = boton.getBoundingClientRect();
+    const solapaVerticalmente = (rect: DOMRect) =>
+      rectBoton.top < rect.bottom && rectBoton.bottom > rect.top;
+    // Comparte línea (solapa en vertical) con la última línea del valor…
+    await expect(solapaVerticalmente(ultimaLinea)).toBe(true);
+    // …y no con ninguna de las anteriores, que es justo el bug que se corrigió:
+    // el botón arriba a la derecha, lejos del final del valor.
+    for (const linea of lineas.slice(0, -1)) {
+      await expect(solapaVerticalmente(linea as DOMRect)).toBe(false);
+    }
   },
 };

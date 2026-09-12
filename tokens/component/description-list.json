@@ -16,8 +16,7 @@
     "value-font-weight":   { "$value": "{font-weight.default}",     "$type": "number",    "$description": "Peso del valor" },
     "value-line-height":   { "$value": "{text.line-height}",        "$type": "number",    "$description": "Interlineado heredado del cuerpo de la superficie" },
     "value-color":         { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color del valor" },
-    "copy-gap":            { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Aire mínimo entre el valor y el botón de copiar de una fila `copyable`" },
-    "copy-value-padding-block": { "$value": "max(0px, calc(({size-component.sm} - 1lh) / 2))", "$type": "dimension", "$description": "Aire que se le da al valor de una fila `copyable` para que su PRIMERA línea quede centrada con el botón: la mitad de lo que el botón (`{size-component.sm}`, la talla `sm` de `Button`) le saca a una línea de texto. La línea va en `lh` —no en font-size × line-height— para que el valor lo resuelva el propio elemento y salga bien en las dos superficies de lectura sin pasar por `surface-public.css`. Con varias líneas el aire es simétrico, así que el bloque sigue equilibrado" },
+    "copy-gap":            { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Aire mínimo entre el final del valor y el botón de copiar de una fila `copyable`, en línea" },
     "surface-dark-border-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Borde — surface-dark" },
     "surface-dark-term-color":   { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Término — surface-dark" },
     "surface-dark-value-color":  { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Valor — surface-dark" }

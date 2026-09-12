@@ -27,9 +27,10 @@ export interface DescriptionDetailsProps extends React.ComponentPropsWithoutRef<
   as?: React.ElementType;
   children?: React.ReactNode;
   /**
-   * Añade un botón de copiar al final del valor, alineado al margen derecho.
-   * Es para los datos que se copian —una URL de callback, un identificador, el
-   * valor de un registro TXT—: siguen siendo texto corriente, no código.
+   * Añade un botón de copiar en línea, pegado al final del valor (nunca al
+   * margen ni en su propia línea). Es para los datos que se copian —una URL
+   * de callback, un identificador, el valor de un registro TXT—: siguen
+   * siendo texto corriente, no código.
    */
   copyable?: boolean;
   /**
@@ -137,6 +138,23 @@ export const DescriptionDetails = forwardRef<HTMLElement, DescriptionDetailsProp
     return (
       <Element ref={ref} className={classes} {...rest}>
         <span ref={valueRef} className="description-list__value">{children}</span>
+        {/*
+          Separador de unión (WORD JOINER, U+2060): un carácter sin ancho que
+          prohíbe el salto de línea a ambos lados. Va como nodo de texto
+          propio, pegado sin espacio al `span` y al `Button`, para que el
+          botón nunca quede solo en su línea, separado del valor por un hueco
+          en blanco. Se prefiere a un envoltorio `white-space: nowrap`
+          alrededor del botón porque ese envoltorio solo protege su propio
+          interior: no impide el corte justo en el borde entre el valor y el
+          envoltorio, que es el punto que hay que sellar. El joiner sella
+          exactamente ese punto y no depende de qué sean los `children` del
+          valor (texto, un icono, lo que sea) — es un hermano, no algo que
+          haya que tocar dentro del valor. Cuando ni con el hueco sellado cabe
+          el botón en lo que resta de la última línea, el flujo normal lo
+          manda a la siguiente — pegado a su principio, como cualquier
+          palabra que no cabe, nunca suelto en el margen.
+        */}
+        {'⁠'}
         <Button
           iconOnly
           variant="ghost"

@@ -47,10 +47,11 @@ role="term"` / `role="definition"`). Solo entonces: dentro de una
 
 ## Valores que se copian
 
-`DescriptionDetails` acepta `copyable`: el valor gana un botón de copiar al
-final de la fila, pegado al margen derecho. Es lo que pide una **ficha de
-conexión** —la URL de callback de un SSO, la URL de acceso, el nombre y el valor
-de un registro TXT—: datos que nadie teclea a mano.
+`DescriptionDetails` acepta `copyable`: el valor gana un botón de copiar en
+línea, pegado al final del último carácter del valor —nunca al margen derecho
+de la celda ni en su propia línea—. Es lo que pide una **ficha de conexión**
+—la URL de callback de un SSO, la URL de acceso, el nombre y el valor de un
+registro TXT—: datos que nadie teclea a mano.
 
 <Canvas of={DescriptionListStories.Copiable} />
 
@@ -79,10 +80,14 @@ Fuera de un `<dl>` —un dato suelto en una tarjeta, en una cabecera— no hay `
 que pueda ponerlo por su cuenta: ahí el botón se compone a mano con `CopyButton`.
 
 Un valor copiable puede ser largo y no tener dónde partir: se parte con
-`overflow-wrap: anywhere` y el botón no se encoge. El botón es más alto que una
-línea de texto, así que lo que lo centra con la **primera** línea es el aire del
-valor (`--description-list-copy-value-padding-block`), no un desplazamiento del
-botón; con varias líneas, ese aire es simétrico y el bloque sigue equilibrado.
+`overflow-wrap: anywhere`. El botón fluye como un nodo más del texto —en línea,
+centrado en su propia línea (siempre la última, la que termina con el valor)
+con `vertical-align: middle`— y un separador de unión sin ancho entre el
+último carácter del valor y el botón impide que este salte solo a la línea
+siguiente. Con un valor de varias líneas, el botón se queda pegado al final de
+la última, nunca arriba a la derecha ni suelto debajo.
+
+<Canvas of={DescriptionListStories.CopiableValorLargo} />
 
 ## Pantalla estrecha
 
