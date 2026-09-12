@@ -1,7 +1,8 @@
-import { Body as e, Button as t, Container as n, Font as r, Head as i, Heading as a, Hr as o, Html as s, Img as c, Link as l, Preview as u, Section as d, Text as f } from "react-email";
-import { Fragment as p, jsx as m, jsxs as h } from "react/jsx-runtime";
+import { EMAIL_FONT_FILENAME as e, EMAIL_LOGO_FILENAME as t } from "./brand-assets.js";
+import { Body as n, Button as r, Container as i, Font as a, Head as o, Heading as s, Hr as c, Html as l, Img as u, Link as d, Preview as f, Section as p, Text as m } from "react-email";
+import { Fragment as h, jsx as g, jsxs as _ } from "react/jsx-runtime";
 //#region src/stories/email/emailTokens.ts
-var g = {
+var v = {
 	"--email-max-width": "600px",
 	"--email-font-family": "\"Google Sans Flex\", system-ui, sans-serif",
 	"--email-font-size": "20px",
@@ -72,171 +73,171 @@ var g = {
 };
 //#endregion
 //#region src/stories/email/emailTheme.ts
-function _(e) {
-	return g[e];
+function y(e) {
+	return v[e];
 }
-var v = {
-	canvas: _("--email-canvas-bg"),
-	background: _("--email-bg"),
-	text: _("--email-color"),
-	muted: _("--email-muted-color"),
-	border: _("--email-border-color")
-}, y = _("--email-font-family"), b = _("--email-font-weight-range"), x = _("--email-max-width"), S = {
-	size: Number.parseFloat(_("--email-logo-mark-size")) + Number.parseFloat(_("--email-logo-padding")) * 2,
-	filename: "logo-v1.png"
-}, C = "https://slxd.app/brand/email", w = "google-sans-flex-normal-latin-v1.woff2", T = {
-	color: v.muted,
-	fontFamily: y,
-	fontWeight: Number(_("--email-font-weight")),
-	fontSize: _("--email-note-font-size"),
-	lineHeight: _("--email-note-line-height"),
+var b = {
+	canvas: y("--email-canvas-bg"),
+	background: y("--email-bg"),
+	text: y("--email-color"),
+	muted: y("--email-muted-color"),
+	border: y("--email-border-color")
+}, x = y("--email-font-family"), S = y("--email-font-weight-range"), C = y("--email-max-width"), w = {
+	size: Number.parseFloat(y("--email-logo-mark-size")) + Number.parseFloat(y("--email-logo-padding")) * 2,
+	filename: t
+}, T = "https://slxd.app/brand/email", E = e, D = {
+	color: b.muted,
+	fontFamily: x,
+	fontWeight: Number(y("--email-font-weight")),
+	fontSize: y("--email-note-font-size"),
+	lineHeight: y("--email-note-line-height"),
 	margin: 0
-}, E = {
+}, O = {
 	heading: {
-		color: v.text,
-		fontFamily: y,
-		fontSize: _("--email-heading-font-size"),
-		fontWeight: Number(_("--email-heading-font-weight")),
-		lineHeight: _("--email-heading-line-height"),
-		margin: `0 0 ${_("--email-heading-margin-block-end")}`
+		color: b.text,
+		fontFamily: x,
+		fontSize: y("--email-heading-font-size"),
+		fontWeight: Number(y("--email-heading-font-weight")),
+		lineHeight: y("--email-heading-line-height"),
+		margin: `0 0 ${y("--email-heading-margin-block-end")}`
 	},
 	text: {
-		color: v.text,
-		fontFamily: y,
-		fontWeight: Number(_("--email-font-weight")),
-		fontSize: _("--email-font-size"),
-		lineHeight: _("--email-line-height"),
-		margin: `0 0 ${_("--email-text-margin-block-end")}`
+		color: b.text,
+		fontFamily: x,
+		fontWeight: Number(y("--email-font-weight")),
+		fontSize: y("--email-font-size"),
+		lineHeight: y("--email-line-height"),
+		margin: `0 0 ${y("--email-text-margin-block-end")}`
 	},
-	textEmphasis: { fontWeight: Number(_("--email-text-emphasis-font-weight")) },
-	muted: T,
+	textEmphasis: { fontWeight: Number(y("--email-text-emphasis-font-weight")) },
+	muted: D,
 	footnote: {
-		color: v.text,
-		fontFamily: y,
-		fontWeight: Number(_("--email-font-weight")),
-		fontSize: _("--email-note-font-size"),
-		lineHeight: _("--email-note-line-height"),
+		color: b.text,
+		fontFamily: x,
+		fontWeight: Number(y("--email-font-weight")),
+		fontSize: y("--email-note-font-size"),
+		lineHeight: y("--email-note-line-height"),
 		margin: 0
 	},
 	button: {
-		backgroundColor: _("--email-button-bg"),
-		color: _("--email-button-color"),
+		backgroundColor: y("--email-button-bg"),
+		color: y("--email-button-color"),
 		display: "block",
-		width: _("--email-button-width"),
+		width: y("--email-button-width"),
 		textAlign: "center",
-		fontFamily: y,
-		fontSize: _("--email-button-font-size"),
-		fontWeight: Number(_("--email-button-font-weight")),
-		padding: `${_("--email-button-padding-block")} 0`,
+		fontFamily: x,
+		fontSize: y("--email-button-font-size"),
+		fontWeight: Number(y("--email-button-font-weight")),
+		padding: `${y("--email-button-padding-block")} 0`,
 		textDecoration: "none",
-		marginBottom: _("--email-button-margin-block-end")
+		marginBottom: y("--email-button-margin-block-end")
 	},
 	buttonFallback: {
-		...T,
-		margin: `${_("--email-button-fallback-margin-block-start")} 0 ${_("--email-button-margin-block-end")}`
+		...D,
+		margin: `${y("--email-button-fallback-margin-block-start")} 0 ${y("--email-button-margin-block-end")}`
 	},
 	buttonFallbackUrl: {
-		color: v.text,
+		color: b.text,
 		wordBreak: "break-all",
 		wordWrap: "break-word"
 	},
 	link: {
-		color: v.text,
-		fontFamily: y,
-		fontWeight: Number(_("--email-font-weight")),
+		color: b.text,
+		fontFamily: x,
+		fontWeight: Number(y("--email-font-weight")),
 		textDecoration: "underline"
 	},
 	heading2: {
-		color: _("--email-heading-2-color"),
-		fontFamily: y,
-		fontSize: _("--email-heading-2-font-size"),
-		fontWeight: Number(_("--email-heading-2-font-weight")),
-		lineHeight: _("--email-heading-2-line-height"),
-		margin: `${_("--email-heading-2-margin-block-start")} 0 ${_("--email-heading-2-margin-block-end")}`
+		color: y("--email-heading-2-color"),
+		fontFamily: x,
+		fontSize: y("--email-heading-2-font-size"),
+		fontWeight: Number(y("--email-heading-2-font-weight")),
+		lineHeight: y("--email-heading-2-line-height"),
+		margin: `${y("--email-heading-2-margin-block-start")} 0 ${y("--email-heading-2-margin-block-end")}`
 	},
 	list: {
-		color: v.text,
-		fontFamily: y,
-		fontSize: _("--email-font-size"),
-		fontWeight: Number(_("--email-font-weight")),
-		lineHeight: _("--email-line-height"),
-		margin: `0 0 ${_("--email-list-margin-block-end")}`,
-		paddingLeft: _("--email-list-padding-inline-start")
+		color: b.text,
+		fontFamily: x,
+		fontSize: y("--email-font-size"),
+		fontWeight: Number(y("--email-font-weight")),
+		lineHeight: y("--email-line-height"),
+		margin: `0 0 ${y("--email-list-margin-block-end")}`,
+		paddingLeft: y("--email-list-padding-inline-start")
 	},
-	listItem: { margin: `0 0 ${_("--email-list-item-margin-block-end")}` },
+	listItem: { margin: `0 0 ${y("--email-list-item-margin-block-end")}` },
 	quote: {
-		borderLeft: `${_("--email-quote-border-width")} solid ${_("--email-quote-border-color")}`,
-		margin: `0 0 ${_("--email-quote-margin-block-end")}`,
-		paddingLeft: _("--email-quote-padding-inline-start")
+		borderLeft: `${y("--email-quote-border-width")} solid ${y("--email-quote-border-color")}`,
+		margin: `0 0 ${y("--email-quote-margin-block-end")}`,
+		paddingLeft: y("--email-quote-padding-inline-start")
 	},
 	tag: {
-		borderRadius: _("--email-tag-border-radius"),
+		borderRadius: y("--email-tag-border-radius"),
 		display: "inline-block",
-		fontFamily: y,
-		fontSize: _("--email-tag-font-size"),
-		fontWeight: Number(_("--email-tag-font-weight")),
-		padding: `${_("--email-tag-padding-block")} ${_("--email-tag-padding-inline")}`
+		fontFamily: x,
+		fontSize: y("--email-tag-font-size"),
+		fontWeight: Number(y("--email-tag-font-weight")),
+		padding: `${y("--email-tag-padding-block")} ${y("--email-tag-padding-inline")}`
 	},
 	divider: {
 		border: 0,
-		borderTop: `${_("--email-divider-width")} solid ${_("--email-divider-color")}`,
-		margin: `${_("--email-divider-margin-block")} 0`,
+		borderTop: `${y("--email-divider-width")} solid ${y("--email-divider-color")}`,
+		margin: `${y("--email-divider-margin-block")} 0`,
 		width: "100%"
 	}
-}, D = {
+}, k = {
 	success: {
-		backgroundColor: _("--email-tone-success-bg"),
-		color: _("--email-tone-success-color")
+		backgroundColor: y("--email-tone-success-bg"),
+		color: y("--email-tone-success-color")
 	},
 	warning: {
-		backgroundColor: _("--email-tone-warning-bg"),
-		color: _("--email-tone-warning-color")
+		backgroundColor: y("--email-tone-warning-bg"),
+		color: y("--email-tone-warning-color")
 	},
 	error: {
-		backgroundColor: _("--email-tone-error-bg"),
-		color: _("--email-tone-error-color")
+		backgroundColor: y("--email-tone-error-bg"),
+		color: y("--email-tone-error-color")
 	}
-}, O = "email-button", k = `
+}, A = "email-button", j = `
   a:hover { text-decoration: none !important; }
-  a.${O}:hover {
-    background-color: ${_("--email-button-hover-bg")} !important;
-    color: ${_("--email-button-hover-color")} !important;
+  a.${A}:hover {
+    background-color: ${y("--email-button-hover-bg")} !important;
+    color: ${y("--email-button-hover-color")} !important;
   }
 `;
 //#endregion
 //#region src/stories/email/EmailLayout.tsx
-function A(e) {
-	if (e.reasonLabel !== void 0) return /* @__PURE__ */ h(f, {
-		style: E.footnote,
+function M(e) {
+	if (e.reasonLabel !== void 0) return /* @__PURE__ */ _(m, {
+		style: O.footnote,
 		children: [
 			e.reasonLabel,
 			" ",
-			/* @__PURE__ */ m(l, {
+			/* @__PURE__ */ g(d, {
 				href: e.unsubscribeUrl,
-				style: E.link,
+				style: O.link,
 				children: e.unsubscribeLabel
 			})
 		]
 	});
-	let { unsubscribeUrl: t, preferencesUrl: n, manageLabel: r = "Para dejar de recibir estos avisos,", unsubscribeLabel: i = n ? "Darse de baja" : "date de baja", manageBeforeLabel: a = " o ", managePreferencesLabel: o = "gestiona tus preferencias", manageAfterLabel: s = "." } = e, c = /* @__PURE__ */ m(l, {
+	let { unsubscribeUrl: t, preferencesUrl: n, manageLabel: r = "Para dejar de recibir estos avisos,", unsubscribeLabel: i = n ? "Darse de baja" : "date de baja", manageBeforeLabel: a = " o ", managePreferencesLabel: o = "gestiona tus preferencias", manageAfterLabel: s = "." } = e, c = /* @__PURE__ */ g(d, {
 		href: t,
-		style: E.link,
+		style: O.link,
 		children: i
 	});
-	return n ? /* @__PURE__ */ h(f, {
-		style: E.footnote,
+	return n ? /* @__PURE__ */ _(m, {
+		style: O.footnote,
 		children: [
 			c,
 			a,
-			/* @__PURE__ */ m(l, {
+			/* @__PURE__ */ g(d, {
 				href: n,
-				style: E.link,
+				style: O.link,
 				children: o
 			}),
 			s
 		]
-	}) : /* @__PURE__ */ h(f, {
-		style: E.footnote,
+	}) : /* @__PURE__ */ _(m, {
+		style: O.footnote,
 		children: [
 			r,
 			" ",
@@ -244,77 +245,77 @@ function A(e) {
 		]
 	});
 }
-function j({ preview: t, appName: a, locale: o = "es", assetsBaseUrl: l = C, logoAlt: f, optOut: p, children: g }) {
-	let y = l.replace(/\/$/, "");
-	return /* @__PURE__ */ h(s, {
-		lang: o,
+function N({ preview: e, appName: t, locale: r = "es", assetsBaseUrl: s = T, logoAlt: c, optOut: d, children: m }) {
+	let h = s.replace(/\/$/, "");
+	return /* @__PURE__ */ _(l, {
+		lang: r,
 		children: [
-			/* @__PURE__ */ h(i, { children: [/* @__PURE__ */ m(r, {
+			/* @__PURE__ */ _(o, { children: [/* @__PURE__ */ g(a, {
 				fontFamily: "Google Sans Flex",
 				fallbackFontFamily: "sans-serif",
 				webFont: {
-					url: `${y}/${w}`,
+					url: `${h}/${E}`,
 					format: "woff2"
 				},
-				fontWeight: b,
+				fontWeight: S,
 				fontStyle: "normal"
-			}), /* @__PURE__ */ m("style", { dangerouslySetInnerHTML: { __html: k } })] }),
-			/* @__PURE__ */ m(u, { children: t }),
-			/* @__PURE__ */ m(e, {
+			}), /* @__PURE__ */ g("style", { dangerouslySetInnerHTML: { __html: j } })] }),
+			/* @__PURE__ */ g(f, { children: e }),
+			/* @__PURE__ */ g(n, {
 				style: {
-					backgroundColor: v.canvas,
-					color: v.text,
-					fontFamily: E.text.fontFamily,
-					fontSize: E.text.fontSize,
-					fontWeight: E.text.fontWeight,
-					lineHeight: E.text.lineHeight,
+					backgroundColor: b.canvas,
+					color: b.text,
+					fontFamily: O.text.fontFamily,
+					fontSize: O.text.fontSize,
+					fontWeight: O.text.fontWeight,
+					lineHeight: O.text.lineHeight,
 					margin: 0,
 					padding: 0
 				},
-				children: /* @__PURE__ */ h(d, {
+				children: /* @__PURE__ */ _(p, {
 					style: {
-						backgroundColor: v.canvas,
-						padding: `${_("--email-canvas-padding-block")} ${_("--email-canvas-padding-inline")}`,
+						backgroundColor: b.canvas,
+						padding: `${y("--email-canvas-padding-block")} ${y("--email-canvas-padding-inline")}`,
 						width: "100%"
 					},
 					children: [
-						/* @__PURE__ */ m(n, {
+						/* @__PURE__ */ g(i, {
 							style: {
-								backgroundColor: v.background,
+								backgroundColor: b.background,
 								margin: "0 auto",
-								maxWidth: x,
-								padding: `${_("--email-brand-padding-block")} ${_("--email-brand-padding-inline")}`
+								maxWidth: C,
+								padding: `${y("--email-brand-padding-block")} ${y("--email-brand-padding-inline")}`
 							},
-							children: /* @__PURE__ */ m(c, {
-								src: `${y}/${S.filename}`,
-								alt: f ?? a,
-								width: S.size,
-								height: S.size,
+							children: /* @__PURE__ */ g(u, {
+								src: `${h}/${w.filename}`,
+								alt: c ?? t,
+								width: w.size,
+								height: w.size,
 								style: {
 									border: 0,
 									display: "block"
 								}
 							})
 						}),
-						/* @__PURE__ */ m(n, {
+						/* @__PURE__ */ g(i, {
 							style: {
-								backgroundColor: v.background,
-								border: `${_("--email-border-width")} solid ${v.border}`,
+								backgroundColor: b.background,
+								border: `${y("--email-border-width")} solid ${b.border}`,
 								borderRadius: 0,
 								margin: "0 auto",
-								maxWidth: x,
-								padding: `${_("--email-padding-block")} ${_("--email-padding-inline")}`
+								maxWidth: C,
+								padding: `${y("--email-padding-block")} ${y("--email-padding-inline")}`
 							},
-							children: /* @__PURE__ */ m(d, { children: g })
+							children: /* @__PURE__ */ g(p, { children: m })
 						}),
-						p && /* @__PURE__ */ m(n, {
+						d && /* @__PURE__ */ g(i, {
 							style: {
-								backgroundColor: v.canvas,
+								backgroundColor: b.canvas,
 								margin: "0 auto",
-								maxWidth: x,
-								padding: `${_("--email-opt-out-margin-block-start")} 0 0`
+								maxWidth: C,
+								padding: `${y("--email-opt-out-margin-block-start")} 0 0`
 							},
-							children: /* @__PURE__ */ m(A, { ...p })
+							children: /* @__PURE__ */ g(M, { ...d })
 						})
 					]
 				})
@@ -324,9 +325,9 @@ function j({ preview: t, appName: a, locale: o = "es", assetsBaseUrl: l = C, log
 }
 //#endregion
 //#region src/stories/email/EmailPrimitives.tsx
-function M({ children: e, level: t = 1, style: n }) {
-	let r = t === 1 ? E.heading : E.heading2;
-	return /* @__PURE__ */ m(a, {
+function P({ children: e, level: t = 1, style: n }) {
+	let r = t === 1 ? O.heading : O.heading2;
+	return /* @__PURE__ */ g(s, {
 		as: `h${t}`,
 		style: {
 			...r,
@@ -335,99 +336,99 @@ function M({ children: e, level: t = 1, style: n }) {
 		children: e
 	});
 }
-function N({ children: e, emphasis: t = !1, style: n }) {
-	return /* @__PURE__ */ m(f, {
+function F({ children: e, emphasis: t = !1, style: n }) {
+	return /* @__PURE__ */ g(m, {
 		style: {
-			...E.text,
-			...t && E.textEmphasis,
+			...O.text,
+			...t && O.textEmphasis,
 			...n
 		},
 		children: e
 	});
 }
-function P({ children: e, ordered: t = !1, style: n }) {
-	return /* @__PURE__ */ m(t ? "ol" : "ul", {
+function I({ children: e, ordered: t = !1, style: n }) {
+	return /* @__PURE__ */ g(t ? "ol" : "ul", {
 		style: {
-			...E.list,
+			...O.list,
 			...n
 		},
 		children: e
 	});
 }
-function F({ children: e, style: t }) {
-	return /* @__PURE__ */ m("li", {
+function L({ children: e, style: t }) {
+	return /* @__PURE__ */ g("li", {
 		style: {
-			...E.listItem,
+			...O.listItem,
 			...t
 		},
 		children: e
 	});
 }
-function I({ children: e, style: t }) {
-	return /* @__PURE__ */ m(d, {
+function R({ children: e, style: t }) {
+	return /* @__PURE__ */ g(p, {
 		style: {
-			...E.quote,
+			...O.quote,
 			...t
 		},
 		children: e
 	});
 }
-function L({ children: e, tone: t, style: n }) {
-	return /* @__PURE__ */ m("span", {
+function z({ children: e, tone: t, style: n }) {
+	return /* @__PURE__ */ g("span", {
 		style: {
-			...E.tag,
-			...D[t],
+			...O.tag,
+			...k[t],
 			...n
 		},
 		children: e
 	});
 }
-function R({ style: e }) {
-	return /* @__PURE__ */ m(o, { style: {
-		...E.divider,
+function B({ style: e }) {
+	return /* @__PURE__ */ g(c, { style: {
+		...O.divider,
 		...e
 	} });
 }
-function z({ children: e, tone: t = "muted", style: n }) {
-	return /* @__PURE__ */ m(f, {
+function V({ children: e, tone: t = "muted", style: n }) {
+	return /* @__PURE__ */ g(m, {
 		style: {
-			...t === "muted" ? E.muted : E.footnote,
+			...t === "muted" ? O.muted : O.footnote,
 			...n
 		},
 		children: e
 	});
 }
-function B({ href: e, children: t, style: n }) {
-	return /* @__PURE__ */ m(l, {
+function H({ href: e, children: t, style: n }) {
+	return /* @__PURE__ */ g(d, {
 		href: e,
 		style: {
-			...E.link,
+			...O.link,
 			...n
 		},
 		children: t
 	});
 }
-function V({ href: e, children: n, fallbackLabel: r, style: i }) {
-	return /* @__PURE__ */ h(p, { children: [/* @__PURE__ */ m(t, {
+function U({ href: e, children: t, fallbackLabel: n, style: i }) {
+	return /* @__PURE__ */ _(h, { children: [/* @__PURE__ */ g(r, {
 		href: e,
-		className: O,
+		className: A,
 		style: {
-			...E.button,
+			...O.button,
 			marginBottom: 0,
 			...i
 		},
-		children: n
-	}), /* @__PURE__ */ h(f, {
-		style: E.buttonFallback,
+		children: t
+	}), /* @__PURE__ */ _(m, {
+		style: O.buttonFallback,
 		children: [
-			r,
-			/* @__PURE__ */ m("br", {}),
-			/* @__PURE__ */ m("span", {
-				style: E.buttonFallbackUrl,
+			n,
+			/* @__PURE__ */ g("br", {}),
+			/* @__PURE__ */ g("span", {
+				style: O.buttonFallbackUrl,
 				children: e
 			})
 		]
 	})] });
 }
 //#endregion
-export { V as EmailButton, R as EmailDivider, M as EmailHeading, j as EmailLayout, B as EmailLink, P as EmailList, F as EmailListItem, z as EmailNote, I as EmailQuote, L as EmailTag, N as EmailText, C as emailAssetsBaseUrl, y as emailFontFamily, w as emailFontFilename, S as emailLogo, x as emailMaxWidth, v as emailPalette, k as emailStyleSheet, E as emailStyles, D as emailTones };
+export { U as EmailButton, B as EmailDivider, P as EmailHeading, N as EmailLayout, H as EmailLink, I as EmailList, L as EmailListItem, V as EmailNote, R as EmailQuote, z as EmailTag, F as EmailText, T as emailAssetsBaseUrl, x as emailFontFamily, E as emailFontFilename, w as emailLogo, C as emailMaxWidth, b as emailPalette, j as emailStyleSheet, O as emailStyles, k as emailTones };

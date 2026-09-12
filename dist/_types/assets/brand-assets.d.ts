@@ -23,7 +23,7 @@ export interface BrandIconAsset {
     path: string;
     /** Lado en píxeles (icons cuadrados) — `undefined` para el SVG y el manifest, que no tienen talla fija. */
     size?: number;
-    type: 'image/svg+xml' | 'image/png' | 'image/vnd.microsoft.icon' | 'application/manifest+json';
+    type: 'image/svg+xml' | 'image/png' | 'image/vnd.microsoft.icon' | 'application/manifest+json' | 'font/woff2';
     /** Uso pensado, para documentación y para que un script de instalación sepa qué `<link>` generar. */
     purpose: 'source' | 'favicon' | 'apple-touch-icon' | 'pwa-icon' | 'pwa-icon-maskable' | 'manifest';
 }
@@ -31,3 +31,29 @@ export interface BrandIconAsset {
 export declare const BRAND_SOURCE_ASSETS: readonly BrandIconAsset[];
 /** El juego de iconos generado por `scripts/build-icons.mjs`, publicado en `dist/assets/icons/`. */
 export declare const BRAND_ICON_ASSETS: readonly BrandIconAsset[];
+/**
+ * El nombre del PNG del logotipo del correo, versionado: Gmail proxea y
+ * cachea las imágenes de los correos y no hay forma de forzar un refresco,
+ * así que cambiar el logotipo es publicar un nombre nuevo (`logo-v2.png`), no
+ * sobrescribir este. `emailTheme.ts` (`emailLogo.filename`) y
+ * `scripts/build-email-assets.mjs` leen de aquí en vez de repetirlo.
+ */
+export declare const EMAIL_LOGO_FILENAME = "logo-v1.png";
+/**
+ * El nombre del woff2 de la cara latina de la sans que usa el correo, mismo
+ * criterio de versión que `EMAIL_LOGO_FILENAME`.
+ */
+export declare const EMAIL_FONT_FILENAME = "google-sans-flex-normal-latin-v1.woff2";
+/**
+ * El juego de assets del correo generado por `scripts/build-email-assets.mjs`,
+ * publicado en `dist/assets/email/` (subpath `@studiolxd/brand/assets/email/...`)
+ * — mismo mecanismo que `BRAND_ICON_ASSETS` para los iconos de aplicación.
+ *
+ * `public/email/` es un segundo destino del mismo origen, no una fuente
+ * distinta: sirve para que Storybook enseñe el correo en local
+ * (`assetsBaseUrl="/email"` en las stories) sin depender del paquete
+ * publicado. En producción, el host de assets del correo
+ * (`https://slxd.app/brand/email`) sirve estos mismos ficheros desde
+ * `dist/assets/email/`.
+ */
+export declare const BRAND_EMAIL_ASSETS: readonly BrandIconAsset[];

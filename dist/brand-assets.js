@@ -55,6 +55,14 @@ var e = "#BAABFF", t = "#111E30", n = [
 		type: "application/manifest+json",
 		purpose: "manifest"
 	}
-];
+], i = "logo-v1.png", a = "google-sans-flex-normal-latin-v1.woff2", o = [{
+	path: `assets/email/${i}`,
+	type: "image/png",
+	purpose: "source"
+}, {
+	path: `assets/email/${a}`,
+	type: "font/woff2",
+	purpose: "source"
+}];
 //#endregion
-export { r as BRAND_ICON_ASSETS, e as BRAND_ICON_BG_COLOR, t as BRAND_ICON_INK_COLOR, n as BRAND_SOURCE_ASSETS };
+export { o as BRAND_EMAIL_ASSETS, r as BRAND_ICON_ASSETS, e as BRAND_ICON_BG_COLOR, t as BRAND_ICON_INK_COLOR, n as BRAND_SOURCE_ASSETS, a as EMAIL_FONT_FILENAME, i as EMAIL_LOGO_FILENAME };

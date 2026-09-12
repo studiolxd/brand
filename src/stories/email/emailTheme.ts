@@ -22,6 +22,7 @@
  */
 import type { CSSProperties } from 'react';
 
+import { EMAIL_FONT_FILENAME, EMAIL_LOGO_FILENAME } from '../../assets/brand-assets';
 import { emailTokens, type EmailTokenName } from './emailTokens';
 
 /** El valor de un token del correo, ya resuelto y en píxeles. */
@@ -72,7 +73,7 @@ export const emailMaxWidth = emailToken('--email-max-width');
 export const emailLogo = {
   size: Number.parseFloat(emailToken('--email-logo-mark-size')) + Number.parseFloat(emailToken('--email-logo-padding')) * 2,
   /** El nombre lleva versión: Gmail cachea las imágenes y no admite refresco. */
-  filename: 'logo-v1.png',
+  filename: EMAIL_LOGO_FILENAME,
 } as const;
 
 /**
@@ -85,7 +86,7 @@ export const emailLogo = {
 export const emailAssetsBaseUrl = 'https://slxd.app/brand/email';
 
 /** La cara latina de la sans, servida desde el mismo sitio que el logotipo. */
-export const emailFontFilename = 'google-sans-flex-normal-latin-v1.woff2';
+export const emailFontFilename = EMAIL_FONT_FILENAME;
 
 /**
  * Estilos inline compartidos por las plantillas.

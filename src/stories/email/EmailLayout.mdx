@@ -89,12 +89,38 @@ El PNG lo genera `pnpm build:email-assets` a partir de `src/assets/logomark.svg`
 
 La URL base es la prop `assetsBaseUrl`, y su valor por defecto es `https://slxd.app/brand/email` — el dominio de la marca, el más estable a largo plazo. **Es un valor por defecto, no una constante escondida**: un consumidor que sirva los assets en otro sitio lo cambia sin tocar el DS.
 
-De esa base cuelgan dos ficheros, el logotipo y la cara latina de la sans. Los dos los prepara `pnpm build:email-assets` en `public/email/`, que es lo que hay que publicar tal cual:
+De esa base cuelgan dos ficheros, el logotipo y la cara latina de la sans:
 
 ```
 https://slxd.app/brand/email/logo-v1.png
 https://slxd.app/brand/email/google-sans-flex-normal-latin-v1.woff2
 ```
+
+Los dos los prepara `pnpm build:email-assets` (parte de `build:all`, y por tanto
+de `release:check`) en **dos destinos, un mismo origen** — igual que
+`BRAND_ICON_ASSETS` para los iconos de aplicación:
+
+- **`dist/assets/email/`** — lo que viaja en el paquete publicado, bajo el
+  subpath `@studiolxd/brand/assets/email/...` (`BRAND_EMAIL_ASSETS` en
+  `src/assets/brand-assets.ts`). Es lo que el host de marketing sirve tal cual
+  en `https://slxd.app/brand/email/*`: se copian estos dos ficheros del
+  paquete instalado al hosting, sin regenerarlos.
+- **`public/email/`** — para que Storybook enseñe el correo en local
+  (`assetsBaseUrl="/email"` en las stories de este catálogo) sin depender de
+  que el paquete esté publicado.
+
+`EMAIL_LOGO_FILENAME` y `EMAIL_FONT_FILENAME` (también en `brand-assets.ts`) son
+la fuente única de los dos nombres de fichero: `emailTheme.ts` y
+`scripts/build-email-assets.mjs` los leen de ahí, nunca repetidos a mano.
+
+**Cambiar el logotipo es publicar un nombre nuevo, no sobrescribir el que hay.**
+Gmail proxea y cachea las imágenes de los correos y no admite forzar un
+refresco: subir un `logo-v1.png` nuevo con el mismo contenido no llega a quien
+ya lo tiene cacheado. Para cambiarlo: nueva constante `EMAIL_LOGO_FILENAME =
+'logo-v2.png'` en `brand-assets.ts`, `pnpm build:email-assets` para
+regenerarlo con ese nombre, y publicar el `logo-v2.png` resultante en el host
+de marketing junto al `v1` (que se retira cuando ya no quede correo enviado con
+la URL vieja en la bandeja).
 
 ## Por qué no hay modo oscuro
 

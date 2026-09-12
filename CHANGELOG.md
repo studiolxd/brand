@@ -7,6 +7,34 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.0.5] — 2026-09-12
+
+> **Patch.** Los activos del correo (logotipo y fuente) viajan en el paquete, como los
+> iconos: `pnpm build:email-assets` ahora escribe también en `dist/assets/email/` y entra en
+> `build:all`/`release:check`.
+
+- **`scripts/build-email-assets.mjs` escribe en dos destinos, un origen.** Además de
+  `public/email/` (para Storybook en local), genera el logotipo y la fuente en
+  `dist/assets/email/` — lo que de verdad viaja al instalar el paquete y lo que el host de
+  marketing (`https://slxd.app/brand/email/*`) debe servir. Antes solo se generaba
+  `public/email/`, que `package.json › files` nunca publicaba: quien instalaba el paquete no
+  recibía esos ficheros y nadie los servía en producción.
+- **`build:email-assets` entra en `build:all`** (y por tanto en la comprobación de sync de
+  `release:check`), después de `build:icons`.
+- **`src/assets/brand-assets.ts`: nuevas `BRAND_EMAIL_ASSETS`, `EMAIL_LOGO_FILENAME` y
+  `EMAIL_FONT_FILENAME`.** Mismo mecanismo que `BRAND_ICON_ASSETS` para los iconos.
+  `emailTheme.ts` y `scripts/build-email-assets.mjs` leen los dos nombres de fichero de ahí en
+  vez de repetirlos como literales.
+- **Fix: `scripts/build-email-assets.mjs` leía un token que ya no existe.** `--email-light-bg`
+  se retiró junto con el modo oscuro del correo; el script llevaba tiempo rompiendo en cuanto
+  se ejecutara con los tokens actuales (nadie lo había corrido porque no estaba en
+  `build:all`). Ahora lee `--email-bg`, el fondo de la caja donde vive el logotipo.
+- Test unitario (`src/assets/build-email-assets.test.ts`): los ficheros de `BRAND_EMAIL_ASSETS`
+  existen en `dist/assets/email/` tras el build, en los dos destinos.
+- Doc: `EmailLayout.mdx` § «Dónde se aloja» explica los dos destinos y que cambiar el
+  logotipo es publicar un nombre nuevo (`logo-v2.png`), nunca sobrescribir el que hay — la
+  caché de Gmail no admite forzar un refresco.
+
 ## [38.0.4] — 2026-09-12
 
 > **Patch.** Ajustes en los correos de ejemplo: la entrada de «Nuevas licitaciones» ya no
