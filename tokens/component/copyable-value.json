@@ -1,0 +1,5 @@
+{
+  "copyable-value": {
+    "gap": { "$value": "{spacing.3}", "$type": "dimension", "$description": "Aire mínimo entre el final del valor y el botón de copiar, en línea" }
+  }
+}

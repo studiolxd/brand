@@ -1,0 +1,82 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as CopyableValueStories from "./CopyableValue.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { copyableValueTokens } from "../../../tokens/components/copyable-value";
+
+<Meta of={CopyableValueStories} />
+
+# CopyableValue
+
+Un valor con su botón de copiar pegado al final: nunca al margen ni en su
+propia línea. Es el mecanismo de `DescriptionDetails copyable` suelto de la
+lista de definición, para cualquier dato que se copia y **no vive en una
+`<dl>`**: una celda de tabla con una URL de endpoint, un identificador dentro
+de un párrafo.
+
+<Canvas of={CopyableValueStories.PorDefecto} />
+
+## Cuándo usarlo
+
+- **Dentro de una `DescriptionList`**, el camino es `DescriptionDetails
+  copyable` — que ya usa este componente por dentro—, no `CopyableValue` a
+  mano.
+- **Fuera de una lista de definición**, aquí: una celda de `Table`, un párrafo,
+  la cabecera de una ficha.
+- **Un dato que se copia es texto, no código.** La tentación es envolverlo en
+  un `Code` para heredar un botón, y entonces una URL o un identificador se ven
+  como código —tipografía monoespaciada— cuando no lo son. `children` puede
+  ser texto o nodos (un `Code`, un icono) cuando el propio dato sí lo es.
+
+<Canvas of={CopyableValueStories.EnUnaCelda} />
+<Canvas of={CopyableValueStories.ConCodigo} />
+
+## Cómo se pega el botón
+
+Un valor copiable puede ser largo y no tener dónde partir: se parte con
+`overflow-wrap: anywhere`. El botón fluye como un nodo más del texto —en
+línea, centrado en su propia línea (siempre la última, la que termina con el
+valor) con `vertical-align: middle`— y un separador de unión sin ancho entre
+el último carácter del valor y el botón impide que este salte solo a la línea
+siguiente. Con un valor de varias líneas, el botón se queda pegado al final de
+la última, nunca arriba a la derecha ni suelto debajo.
+
+## Qué se copia
+
+Por defecto se copia el texto de `children`; `copyText` solo hace falta cuando
+lo que se ve y lo que se copia no coinciden —un valor abreviado, una URL con
+el protocolo escondido—.
+
+```tsx
+<CopyableValue copyText="https://cuenta.studiolxd.com/callback" copyLabel="Copiar la URL">
+  cuenta.studiolxd.com/callback
+</CopyableValue>
+```
+
+Los textos van por prop, con default castellano: `copyLabel` (nombre accesible
+del botón, «Copiar») y `copiedLabel` (el acuse, «Copiado»).
+
+## Superficie oscura
+
+No tiene nada que remapear: la cara es la del `Button`, que ya reacciona a
+`.surface-dark` y a `html.dark` / `[data-theme="dark"]`.
+
+---
+
+## Tokens
+
+<TokenTable tokens={copyableValueTokens} />
+
+El resto —altura, relleno, radio, foco, colores del botón— son los de
+`Button`, y se personalizan ahí.
+
+## Accesibilidad
+
+- El acuse es doble: el icono pasa a un tic para quien ve y una región viva
+  (`role="status"`) anuncia `copiedLabel` para quien escucha. Un cambio de
+  icono, solo, no es feedback accesible.
+- El botón lleva `aria-label` (`copyLabel`): un botón de solo icono sin nombre
+  no existe para un lector de pantalla.
+
+## Props
+
+<ArgTypes of={CopyableValueStories} />

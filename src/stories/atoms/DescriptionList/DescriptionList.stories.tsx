@@ -237,14 +237,14 @@ export const ContratoCopiable: Story = {
     const boton = canvas.getByRole('button', { name: 'Copiar el identificador' });
     await expect(copiable).toContainElement(boton);
     // El botón va DESPUÉS del valor dentro del `<dd>`.
-    await expect(copiable.querySelector('.description-list__value')!.compareDocumentPosition(boton))
+    await expect(copiable.querySelector('.copyable-value__value')!.compareDocumentPosition(boton))
       .toBe(Node.DOCUMENT_POSITION_FOLLOWING);
 
     // El botón es un nodo en línea pegado al final del valor: comparte línea
     // con la última línea de texto (aquí, la única), no queda arriba a la
     // derecha ni suelto debajo de ella.
     const rangoValor = document.createRange();
-    rangoValor.selectNodeContents(copiable.querySelector('.description-list__value')!);
+    rangoValor.selectNodeContents(copiable.querySelector('.copyable-value__value')!);
     const [rectValor] = Array.from(rangoValor.getClientRects()).slice(-1);
     const rectBoton = boton.getBoundingClientRect();
     const centro = (rect: DOMRect) => rect.top + rect.height / 2;
@@ -289,7 +289,7 @@ export const ContratoCopiableValorLargo: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const copiable = canvas.getByLabelText('conexión').querySelector('dd')!;
-    const valor = copiable.querySelector('.description-list__value')!;
+    const valor = copiable.querySelector('.copyable-value__value')!;
     const boton = canvas.getByRole('button', { name: 'Copiar la URL de callback' });
 
     const rangoCompleto = document.createRange();

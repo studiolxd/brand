@@ -6,7 +6,6 @@
   --description-list-border-style: var(--control-border-style); /** Estilo del borde */
   --description-list-cell-padding-block: var(--spacing-3); /** Aire vertical de cada celda */
   --description-list-cell-padding-inline: var(--spacing-4); /** Aire horizontal de cada celda */
-  --description-list-copy-gap: var(--spacing-3); /** Aire mínimo entre el final del valor y el botón de copiar de una fila `copyable`, en línea */
   --description-list-border-color: var(--color-primary); /** Color del borde: tinta de la superficie */
   --description-list-term-font-family: var(--label-font-family); /** Tipografía del término (dt): la de las etiquetas */
   --description-list-term-font-size: var(--label-font-size); /** Cuerpo del término: el de las etiquetas, no el de la prosa */

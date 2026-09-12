@@ -1,0 +1,19 @@
+/* En línea con lo que lo rodee: un párrafo, una celda de tabla, un `Code`. El
+   componente no impone `display` propio — el envoltorio es un `<span>`, así
+   que fluye como el texto que envuelve. */
+
+/* Un valor copiable suele ser una URL o un token: sin punto donde partir, una
+   línea larga desbordaba su contenedor. */
+.copyable-value__value {
+  overflow-wrap: anywhere;
+}
+
+/* En línea con el texto, centrado en su propia línea (la última del valor,
+   que es donde cae siempre al ir pegado al final). `margin-inline-start` pone
+   el aire mínimo hacia el valor; como no hay hueco en blanco entre el `span`
+   del valor y el botón (ver el separador de unión en el JSX), ese margen no
+   abre un punto de corte nuevo. */
+.copyable-value__copy {
+  vertical-align: middle;
+  margin-inline-start: var(--copyable-value-gap);
+}

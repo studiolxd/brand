@@ -12,6 +12,8 @@ export { Arrow } from './stories/atoms/Arrow/Arrow';
 export type { ArrowProps } from './stories/atoms/Arrow/Arrow';
 export { DescriptionList, DescriptionTerm, DescriptionDetails } from './stories/atoms/DescriptionList/DescriptionList';
 export type { DescriptionListProps, DescriptionTermProps, DescriptionDetailsProps } from './stories/atoms/DescriptionList/DescriptionList';
+export { CopyableValue } from './stories/atoms/CopyableValue/CopyableValue';
+export type { CopyableValueProps } from './stories/atoms/CopyableValue/CopyableValue';
 export { Avatar } from './stories/atoms/Avatar/Avatar';
 export { Button } from './stories/atoms/Button/Button';
 export type { ButtonProps } from './stories/atoms/Button/Button';

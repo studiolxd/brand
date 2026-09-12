@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "38.1.1",
+  "version": "38.2.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -50,6 +50,10 @@
     "./description-list": {
       "types": "./dist/_types/atoms/DescriptionList/DescriptionList.d.ts",
       "import": "./dist/description-list.js"
+    },
+    "./copyable-value": {
+      "types": "./dist/_types/atoms/CopyableValue/CopyableValue.d.ts",
+      "import": "./dist/copyable-value.js"
     },
     "./async-multi-select": {
       "types": "./dist/_types/atoms/AsyncMultiSelect/AsyncMultiSelect.d.ts",

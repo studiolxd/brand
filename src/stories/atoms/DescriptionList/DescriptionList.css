@@ -84,20 +84,7 @@
 
 /* Fila copiable: el valor fluye como texto corriente (el `<dd>` no cambia de
    `display`) y el botón es un nodo en línea más, pegado al final del último
-   carácter — así nunca se separa del valor, ni a otra línea ni al margen. */
-
-/* Un valor copiable suele ser una URL o un token: sin punto donde partir, una
-   línea larga desbordaba la celda. */
-.description-list__details--copyable .description-list__value {
-  overflow-wrap: anywhere;
-}
-
-/* En línea con el texto, centrado en su propia línea (la última del valor,
-   que es donde cae siempre al ir pegado al final). `margin-inline-start` pone
-   el aire mínimo hacia el valor; como no hay hueco en blanco entre el `span`
-   del valor y el botón (ver el separador de unión en el JSX), ese margen no
-   abre un punto de corte nuevo. */
-.description-list__details--copyable .description-list__copy {
-  vertical-align: middle;
-  margin-inline-start: var(--description-list-copy-gap);
-}
+   carácter — así nunca se separa del valor, ni a otra línea ni al margen. El
+   mecanismo (el separador de unión, el `overflow-wrap`, el aire hacia el
+   botón) vive en `CopyableValue`, que `DescriptionDetails copyable` monta por
+   dentro; aquí no queda nada que pintar aparte de la clase modificadora. */

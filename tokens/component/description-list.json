@@ -16,7 +16,6 @@
     "value-font-weight":   { "$value": "{font-weight.default}",     "$type": "number",    "$description": "Peso del valor" },
     "value-line-height":   { "$value": "{text.line-height}",        "$type": "number",    "$description": "Interlineado heredado del cuerpo de la superficie" },
     "value-color":         { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color del valor" },
-    "copy-gap":            { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Aire mínimo entre el final del valor y el botón de copiar de una fila `copyable`, en línea" },
     "surface-dark-border-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Borde — surface-dark" },
     "surface-dark-term-color":   { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Término — surface-dark" },
     "surface-dark-value-color":  { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Valor — surface-dark" }

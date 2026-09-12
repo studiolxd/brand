@@ -7,6 +7,29 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.2.0] — 2026-09-12
+
+> **Minor.** Nuevo átomo `CopyableValue`: el valor con su botón de copiar pegado, reutilizable
+> fuera de `DescriptionList`.
+
+### `CopyableValue`
+
+- **Nuevo átomo**, subpath `@studiolxd/brand/copyable-value`. Es el mecanismo de
+  `DescriptionDetails copyable` —el valor con el botón de copiar pegado al final, nunca al margen
+  ni en su propia línea— suelto de la lista de definición: para el dato que se copia y no cuelga
+  de un `<dl>` (una celda de tabla con una URL de endpoint, un identificador dentro de un
+  párrafo). Mismo botón `ghost sm iconOnly`, mismo anuncio accesible, mismo `useCopyToClipboard` y
+  el mismo separador de unión para el pegado. `children` acepta texto o nodos (un `Code`, un
+  icono). Props: `children`, `copyText`, `copyLabel`, `copiedLabel`, `className`.
+
+### `DescriptionList`
+
+- `DescriptionDetails copyable` monta ahora `CopyableValue` por dentro. Sin cambios de API ni de
+  aspecto; el DOM interno de la fila copiable pasa a tener un `<span class="copyable-value">`
+  envolvente y las clases del valor y el botón cambian de `description-list__value` /
+  `description-list__copy` a `copyable-value__value` / `copyable-value__copy` — el token
+  `--description-list-copy-gap` se retira (el aire ahora sale de `--copyable-value-gap`).
+
 ## [38.1.1] — 2026-09-12
 
 > **Patch.** El botón de copiar de `DescriptionDetails copyable` ya no se va al margen derecho:

@@ -1,10 +1,7 @@
 'use client';
 
-import { forwardRef, useRef } from 'react';
-import { Button } from '../Button/Button';
-import { Icon } from '../Icon/Icon';
-import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
-import { useCopyToClipboard } from '../../constants/copy-to-clipboard';
+import { forwardRef } from 'react';
+import { CopyableValue } from '../CopyableValue/CopyableValue';
 import './DescriptionList.css';
 
 export interface DescriptionTermProps extends React.ComponentPropsWithoutRef<'dt'> {
@@ -117,10 +114,6 @@ export const DescriptionDetails = forwardRef<HTMLElement, DescriptionDetailsProp
     copiedLabel = 'Copiado',
     ...rest
   }, ref) {
-    const valueRef = useRef<HTMLSpanElement>(null);
-    const { status, copy } = useCopyToClipboard();
-    const copied = status === 'copied';
-
     const classes = [
       'description-list__details',
       copyable ? 'description-list__details--copyable' : '',
@@ -137,36 +130,9 @@ export const DescriptionDetails = forwardRef<HTMLElement, DescriptionDetailsProp
 
     return (
       <Element ref={ref} className={classes} {...rest}>
-        <span ref={valueRef} className="description-list__value">{children}</span>
-        {/*
-          Separador de unión (WORD JOINER, U+2060): un carácter sin ancho que
-          prohíbe el salto de línea a ambos lados. Va como nodo de texto
-          propio, pegado sin espacio al `span` y al `Button`, para que el
-          botón nunca quede solo en su línea, separado del valor por un hueco
-          en blanco. Se prefiere a un envoltorio `white-space: nowrap`
-          alrededor del botón porque ese envoltorio solo protege su propio
-          interior: no impide el corte justo en el borde entre el valor y el
-          envoltorio, que es el punto que hay que sellar. El joiner sella
-          exactamente ese punto y no depende de qué sean los `children` del
-          valor (texto, un icono, lo que sea) — es un hermano, no algo que
-          haya que tocar dentro del valor. Cuando ni con el hueco sellado cabe
-          el botón en lo que resta de la última línea, el flujo normal lo
-          manda a la siguiente — pegado a su principio, como cualquier
-          palabra que no cabe, nunca suelto en el margen.
-        */}
-        {'⁠'}
-        <Button
-          iconOnly
-          variant="ghost"
-          size="sm"
-          aria-label={copyLabel}
-          onClick={() => copy(() => copyText ?? valueRef.current?.textContent ?? '')}
-          className="description-list__copy"
-        >
-          <Icon name={copied ? 'check' : 'copy'} size="sm" />
-        </Button>
-        {/* El icono cambia para quien ve; para quien escucha, este anuncio. */}
-        <VisuallyHidden role="status">{copied ? copiedLabel : ''}</VisuallyHidden>
+        <CopyableValue copyText={copyText} copyLabel={copyLabel} copiedLabel={copiedLabel}>
+          {children}
+        </CopyableValue>
       </Element>
     );
   },

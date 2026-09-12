@@ -42,7 +42,7 @@ describe('DescriptionDetails copiable', () => {
     expect(valor).toHaveClass('description-list__details--copyable');
 
     const boton = within(valor).getByRole('button', { name: 'Copiar' });
-    const texto = valor.querySelector('.description-list__value')!;
+    const texto = valor.querySelector('.copyable-value__value')!;
     expect(texto).toHaveTextContent('org_8f2c19ab');
     expect(texto.compareDocumentPosition(boton)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
   });

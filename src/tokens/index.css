@@ -123,6 +123,7 @@
 @import "./components/file-upload.css";
 @import "./molecules/file-upload-field.css";
 @import "./components/description-list.css";
+@import "./components/copyable-value.css";
 @import "./components/number-badge.css";
 @import "./components/chat.css";
 @import "./components/message-bubble.css";
