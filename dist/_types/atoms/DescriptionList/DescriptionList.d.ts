@@ -18,9 +18,10 @@ export interface DescriptionDetailsProps extends React.ComponentPropsWithoutRef<
     as?: React.ElementType;
     children?: React.ReactNode;
     /**
-     * Añade un botón de copiar al final del valor, alineado al margen derecho.
-     * Es para los datos que se copian —una URL de callback, un identificador, el
-     * valor de un registro TXT—: siguen siendo texto corriente, no código.
+     * Añade un botón de copiar en línea, pegado al final del valor (nunca al
+     * margen ni en su propia línea). Es para los datos que se copian —una URL
+     * de callback, un identificador, el valor de un registro TXT—: siguen
+     * siendo texto corriente, no código.
      */
     copyable?: boolean;
     /**

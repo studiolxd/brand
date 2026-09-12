@@ -699,7 +699,6 @@ var e = {
 	"--description-list-value-line-height": "1.5",
 	"--description-list-value-color": "#111e30",
 	"--description-list-copy-gap": "0.75rem",
-	"--description-list-copy-value-padding-block": "max(0px, calc((2rem - 1lh) / 2))",
 	"--email-max-width": "600px",
 	"--email-font-family": "\"Google Sans Flex\", system-ui, sans-serif",
 	"--email-font-size": "1.25rem",

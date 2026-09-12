@@ -7,6 +7,24 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.1.1] — 2026-09-12
+
+> **Patch.** El botón de copiar de `DescriptionDetails copyable` ya no se va al margen derecho:
+> ahora va en línea, pegado al final del valor.
+
+### `DescriptionList`
+
+- **El botón de copiar va en línea, nunca separado del valor.** Con la fila copiable en flex y
+  `margin-inline-start: auto`, un valor largo (una URL) que ocupaba varias líneas dejaba el botón
+  arriba a la derecha, lejos del final del texto; en la maqueta de una columna, incluso suelto
+  debajo. Ahora el valor fluye como texto corriente y el botón es un nodo en línea más, pegado al
+  final del último carácter con un separador de unión (`WORD JOINER`, U+2060) que impide el corte
+  entre ambos — y si ni así cabe en lo que resta de la última línea, el flujo normal lo manda a la
+  siguiente, pegado a su principio, nunca al margen.
+- Retirado el token `copy-value-padding-block` (centraba el botón con la PRIMERA línea del flex
+  antiguo; con el botón en línea, `vertical-align: middle` basta).
+- Nueva story «Copiable con valor largo» y doc actualizada en `DescriptionList.mdx`.
+
 ## [38.1.0] — 2026-09-12
 
 > **Minor.** El `Alert` `default` deja de ser prusia sobre página oscura: ahí invierte a

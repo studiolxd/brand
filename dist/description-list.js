@@ -37,6 +37,7 @@ var c = o(function({ className: e, children: t, ...n }, r) {
 				className: "description-list__value",
 				children: l
 			}),
+			"⁠",
 			/* @__PURE__ */ i(n, {
 				iconOnly: !0,
 				variant: "ghost",
