@@ -2,6 +2,7 @@
 // Do not edit directly, this file was auto-generated.
 
 $lxd-notification-panel-inline-size: min(22.5rem, calc(100vw - 2 * 1.5rem)); // Ancho del panel (360px), con tope para que no se salga en una pantalla estrecha. Medida de maqueta, como la de la Sidebar: no pertenece a la escala de tallas
+$lxd-notification-panel-offset: 0.25rem; // Separación entre la campana y el panel: el desplazamiento compartido de los flotantes de la cabecera
 $lxd-notification-panel-padding-inline: 1rem; // Aire lateral de las filas, del bloque de marcar todas y del pie: el mismo, para que todo alinee en una sola columna
 $lxd-notification-panel-mark-all-padding-block: 0.75rem; // Aire vertical del bloque de «Marcar todas», entre la lista y el pie
 $lxd-notification-panel-list-max-block-size: 21rem; // Alto máximo de la lista (336px): pasado ese alto la lista hace scroll y la cabecera y el pie se quedan quietos. Medida de maqueta

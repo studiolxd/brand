@@ -7,6 +7,27 @@ import type { MenuItem, MenuRenderLinkProps } from '../Menu/Menu';
 import { renderDropdownItems } from '../_shared/dropdownItems';
 import './UserMenu.css';
 
+/**
+ * Convierte una longitud CSS (`4px`, `0.25rem`) a píxeles. Sin unidad
+ * reconocible devuelve 0: el token viaja siempre con el CSS del componente.
+ */
+function cssLengthToPx(raw: string): number {
+  const value = parseFloat(raw);
+  if (Number.isNaN(value)) return 0;
+  if (raw.endsWith('rem')) return value * parseFloat(getComputedStyle(document.documentElement).fontSize);
+  return value;
+}
+
+/**
+ * `sideOffset` por defecto: el Positioner de Base UI necesita un número, así que
+ * el token `--user-menu-offset` (el desplazamiento compartido de los flotantes
+ * de la cabecera) se lee en runtime sobre `<html>` en cada cálculo de posición.
+ */
+function tokenSideOffset(): number {
+  const root = document.documentElement;
+  return cssLengthToPx(getComputedStyle(root).getPropertyValue('--user-menu-offset').trim());
+}
+
 export interface UserMenuProps {
   name: string;
   email: string;
@@ -67,7 +88,7 @@ export function UserMenu({
       </BaseMenu.Trigger>
 
       <BaseMenu.Portal>
-        <BaseMenu.Positioner className="user-menu__positioner" sideOffset={4} align="start">
+        <BaseMenu.Positioner className="user-menu__positioner" sideOffset={tokenSideOffset} align="start">
         <BaseMenu.Popup className="user-menu__content">
           <div className="user-menu__header">
             <span className="user-menu__header-name">{name}</span>

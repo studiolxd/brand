@@ -24,6 +24,7 @@
   --user-menu-item-font-family: var(--font-family-sans); /** Tipografía de ítems */
   --user-menu-item-font-size: var(--font-size-2); /** Tamaño de texto de ítems */
   --user-menu-disabled-opacity: var(--opacity-disabled); /** Opacidad de ítems deshabilitados */
+  --user-menu-offset: var(--app-header-flyout-offset); /** Separación entre el disparador y el panel: el desplazamiento compartido de los flotantes de la cabecera */
   --user-menu-trigger-border-radius: var(--border-radius-default); /** Radio del trigger */
   --user-menu-focus-ring-color: var(--color-primary); /** Color del focus ring */
   --user-menu-focus-ring-width: var(--border-width-focus); /** Grosor del focus ring */

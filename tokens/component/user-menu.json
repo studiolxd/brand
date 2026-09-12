@@ -1,5 +1,6 @@
 {
   "user-menu": {
+    "offset":                 { "$value": "{app-header.flyout-offset}",    "$type": "dimension", "$description": "Separación entre el disparador y el panel: el desplazamiento compartido de los flotantes de la cabecera" },
     "trigger-padding-block":  { "$value": "{spacing.2}",                   "$type": "dimension", "$description": "Padding vertical del trigger" },
     "trigger-padding-inline": { "$value": "{spacing.3}",                   "$type": "dimension", "$description": "Padding horizontal del trigger" },
     "trigger-compact-padding-inline": { "$value": "{spacing.1}",             "$type": "dimension", "$description": "Padding horizontal del botón compacto (solo avatar)" },

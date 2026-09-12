@@ -7,6 +7,27 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.0.6] — 2026-09-12
+
+> **Patch.** Los dos flotantes de la cabecera de aplicación —el menú de usuario y el panel
+> de notificaciones— se abren ahora a la misma distancia bajo el header.
+
+- **Token compartido `app-header.flyout-offset`** (`{spacing.1}`, 4px): la separación entre
+  el borde inferior de la cabecera y el flotante que ancla cada disparador. De él beben
+  `user-menu.offset` y `notification-panel.offset`.
+- **`UserMenu`: fuera el `sideOffset={4}` cableado en TSX.** El `BaseMenu.Positioner` lee
+  ahora `--user-menu-offset` en runtime (mismo patrón que ya usaba `Popover` para
+  `--popover-offset`), así que el número deja de estar fijo en el componente.
+- **`NotificationPanel` pasa su propio `sideOffset` al `Popover`**, leyendo
+  `--notification-panel-offset` en vez de heredar el `--popover-offset` genérico (8px, el
+  de cualquier otro `Popover` de contenido libre): antes el panel se abría con el doble de
+  aire que el menú de usuario y su borde superior quedaba pegado a la línea del header.
+- `Popover`: `sideOffset` acepta ahora también una función (la forma de Base UI), no solo un
+  número — lo que permite a un consumidor (aquí, `NotificationPanel`) leer su propio token
+  en vez del de `Popover`.
+- Medido en Storybook: antes del cambio, `UserMenu` abría a ~4px y el `Popover` del panel de
+  notificaciones a 8px (`--popover-offset`); con el token compartido, los dos quedan en 4px.
+
 ## [38.0.5] — 2026-09-12
 
 > **Patch.** Los activos del correo (logotipo y fuente) viajan en el paquete, como los

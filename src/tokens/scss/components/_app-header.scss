@@ -9,4 +9,5 @@ $lxd-app-header-border-width: 1px; // Borde inferior que la separa del contenido
 $lxd-app-header-border-color: #111e30; // Color del borde
 $lxd-app-header-padding-inline: 1rem; // Aire lateral
 $lxd-app-header-gap: 0.75rem; // Entre el botón de menú, el inicio y los controles del final
+$lxd-app-header-flyout-offset: 0.25rem; // Separación compartida entre el borde inferior de la cabecera y el flotante que anclan sus disparadores (menú de usuario, panel de notificaciones): la que ya tenía el menú de usuario
 $lxd-app-header-z-index: 100; // Capa de barra fija

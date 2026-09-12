@@ -11,6 +11,28 @@ import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { NotificationButton } from '../NotificationButton/NotificationButton';
 import './NotificationPanel.css';
 
+/**
+ * Convierte una longitud CSS (`4px`, `0.25rem`) a píxeles. Sin unidad
+ * reconocible devuelve 0: el token viaja siempre con el CSS del componente.
+ */
+function cssLengthToPx(raw: string): number {
+  const value = parseFloat(raw);
+  if (Number.isNaN(value)) return 0;
+  if (raw.endsWith('rem')) return value * parseFloat(getComputedStyle(document.documentElement).fontSize);
+  return value;
+}
+
+/**
+ * `sideOffset` del `Popover`: el token `--notification-panel-offset` (el
+ * desplazamiento compartido de los flotantes de la cabecera, no el
+ * `--popover-offset` genérico) se lee en runtime sobre `<html>` en cada
+ * cálculo de posición.
+ */
+function tokenSideOffset(): number {
+  const root = document.documentElement;
+  return cssLengthToPx(getComputedStyle(root).getPropertyValue('--notification-panel-offset').trim());
+}
+
 /** Una notificación tal y como la enseña el panel: ya resuelta, sin datos crudos. */
 export interface NotificationPanelItem {
   id: string;
@@ -192,6 +214,7 @@ export function NotificationPanel({
       trigger={<NotificationButton count={count} max={max} label={label} countLabel={countLabel} />}
       label={panelLabel}
       align="end"
+      sideOffset={tokenSideOffset}
       open={open}
       defaultOpen={defaultOpen}
       onOpenChange={handleOpenChange}

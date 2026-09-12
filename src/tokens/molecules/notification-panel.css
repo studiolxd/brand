@@ -21,6 +21,7 @@
   --notification-panel-empty-padding-block: var(--spacing-6); /** Aire vertical del estado vacío: el hueco de la lista sin encogerse */
   --notification-panel-footer-padding-block: var(--spacing-3); /** Aire vertical del pie */
   --notification-panel-footer-gap: var(--spacing-2); /** Aire entre los enlaces del pie */
+  --notification-panel-offset: var(--app-header-flyout-offset); /** Separación entre la campana y el panel: el desplazamiento compartido de los flotantes de la cabecera */
   --notification-panel-item-border-radius: var(--border-radius-default); /** Radio de cada notificación: recto, como todo el sistema */
   --notification-panel-item-title-font-size: var(--text-font-size); /** El título de una notificación es texto corriente: hereda el cuerpo de la superficie */
   --notification-panel-item-title-font-weight: var(--font-weight-default); /** Peso del título, leída o sin leer: el del cuerpo de texto. Lo no leído lo dice el punto del indicador, no el peso */

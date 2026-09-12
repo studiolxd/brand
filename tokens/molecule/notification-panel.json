@@ -1,6 +1,7 @@
 {
   "notification-panel": {
     "inline-size":            { "$value": "min(22.5rem, calc(100vw - 2 * {spacing.5}))", "$type": "dimension", "$description": "Ancho del panel (360px), con tope para que no se salga en una pantalla estrecha. Medida de maqueta, como la de la Sidebar: no pertenece a la escala de tallas" },
+    "offset":                 { "$value": "{app-header.flyout-offset}",    "$type": "dimension", "$description": "Separación entre la campana y el panel: el desplazamiento compartido de los flotantes de la cabecera" },
 
     "padding-inline":         { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Aire lateral de las filas, del bloque de marcar todas y del pie: el mismo, para que todo alinee en una sola columna" },
     "mark-all-padding-block": { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Aire vertical del bloque de «Marcar todas», entre la lista y el pie" },

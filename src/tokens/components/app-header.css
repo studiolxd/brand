@@ -7,6 +7,7 @@
   --app-header-padding-block: var(--spacing-2); /** Aire arriba y abajo del contenido */
   --app-header-padding-inline: var(--spacing-4); /** Aire lateral */
   --app-header-gap: var(--spacing-3); /** Entre el botón de menú, el inicio y los controles del final */
+  --app-header-flyout-offset: var(--spacing-1); /** Separación compartida entre el borde inferior de la cabecera y el flotante que anclan sus disparadores (menú de usuario, panel de notificaciones): la que ya tenía el menú de usuario */
   --app-header-z-index: var(--z-index-bar); /** Capa de barra fija */
   --app-header-height: calc(var(--app-header-content-height) + 2 * var(--app-header-padding-block)); /** Altura de la barra: compuesta, 56px */
   --app-header-bg: var(--color-background-light); /** Fondo */

@@ -68,8 +68,12 @@ export interface PopoverProps {
   onEscapeKeyDown?: (details: PopoverChangeDetails) => void;
   side?: 'top' | 'right' | 'bottom' | 'left';
   align?: 'start' | 'center' | 'end';
-  /** Separación en px con el disparador. Sin ella se lee el token `--popover-offset`. */
-  sideOffset?: number;
+  /**
+   * Separación en px con el disparador, o una función que la calcule (misma
+   * forma que el `sideOffset` de Base UI). Sin ella se lee el token
+   * `--popover-offset`.
+   */
+  sideOffset?: React.ComponentProps<typeof BasePopover.Positioner>['sideOffset'];
   /**
    * Qué recibe el foco al abrirse. Por defecto lo recibe el propio panel, que
    * es lo correcto para un panel de lectura. Un panel cuyo contenido es una

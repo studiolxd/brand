@@ -8,6 +8,7 @@
     "border-color":    { "$value": "{color.primary}",     "$type": "color",     "$description": "Color del borde" },
     "padding-inline":  { "$value": "{spacing.4}",   "$type": "dimension", "$description": "Aire lateral" },
     "gap":             { "$value": "{spacing.3}",   "$type": "dimension", "$description": "Entre el botón de menú, el inicio y los controles del final" },
+    "flyout-offset":   { "$value": "{spacing.1}",   "$type": "dimension", "$description": "Separación compartida entre el borde inferior de la cabecera y el flotante que anclan sus disparadores (menú de usuario, panel de notificaciones): la que ya tenía el menú de usuario" },
     "z-index":         { "$value": "{z-index.bar}", "$type": "number",    "$description": "Capa de barra fija" },
     "surface-dark-bg":           { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo — surface-dark" },
     "surface-dark-border-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Borde — surface-dark" }
