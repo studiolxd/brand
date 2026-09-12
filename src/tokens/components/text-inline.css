@@ -10,6 +10,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --text-inline-muted-color: var(--color-text-muted-on-dark); /** Texto secundario en línea — surface-dark */

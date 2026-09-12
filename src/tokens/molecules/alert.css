@@ -12,14 +12,14 @@
   --alert-close-inset: var(--spacing-2); /** Distancia del botón de cierre a la esquina superior derecha (8px) */
   --alert-border-radius: var(--border-radius-default); /** Sin radio de esquinas */
   --alert-border-width: var(--border-width-default); /** Grosor del borde */
-  --alert-bg: var(--color-primary); /** Fondo por defecto — prussian. Es el mismo en las dos superficies: el relleno del alert es autocontenido y su contenido lee siempre en oscuro (la raíz lleva `.surface-dark`) */
-  --alert-border-color: var(--color-text-on-dark); /** Borde por defecto — blanco. Dibuja el contorno también cuando la página ya es oscura y el relleno prusia coincide con el fondo */
+  --alert-bg: var(--color-primary); /** Fondo por defecto — prussian. El relleno neutro invierte el lienzo: sobre página clara es prusia y sobre página oscura, blanco (ver `surface-dark-bg`) */
+  --alert-border-color: var(--color-text-on-dark); /** Borde por defecto — blanco. Sobre página clara dibuja el contorno del relleno prusia */
   --alert-title-font-size: var(--text-font-size); /** El título hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
   --alert-title-font-weight: var(--font-weight-emphasis); /** Peso del título */
-  --alert-title-color: var(--color-text-on-dark); /** Texto blanco sobre fondo oscuro */
+  --alert-title-color: var(--color-text-on-dark); /** Texto blanco sobre el relleno prusia */
   --alert-description-font-size: var(--text-font-size); /** La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
   --alert-description-line-height: var(--text-line-height); /** Interlineado de la descripción — el del cuerpo */
-  --alert-description-color: var(--color-text-on-dark); /** Descripción blanca sobre fondo oscuro — igual que el título */
+  --alert-description-color: var(--color-text-on-dark); /** Descripción blanca sobre el relleno prusia — igual que el título */
   --alert-success-bg: var(--color-success-fill); /** Fondo success — verde semántico */
   --alert-success-border-color: var(--color-success-fill); /** Borde igual al fondo success */
   --alert-success-title-color: var(--color-success-fill-text); /** Título blanco sobre fondo success */
@@ -33,4 +33,14 @@
   --alert-warning-title-color: var(--color-warning-fill-text); /** Título prusia sobre fondo warning (11,17:1, AAA) */
   --alert-warning-description-color: var(--color-warning-fill-text); /** Descripción prusia sobre fondo warning */
   --alert-warning-close-color: var(--color-warning-fill-text); /** Aspa y su anillo de foco sobre el relleno de aviso. Es el único relleno claro del componente, así que el aspa no puede tomar la tinta ambiente: con `[data-theme="dark"]` en la raíz saldría blanca sobre amarillo (1,50:1). Va fijada a la tinta del rol, que es universal */
+}
+
+.surface-dark,
+.surface-invert,
+[data-theme="dark"],
+html.dark {
+  --alert-bg: var(--color-text-on-dark); /** Fondo por defecto — surface-dark: blanco. El relleno neutro es el lienzo invertido, y sobre una página prusia el prusia desaparecería (mismo motivo que `Tag`/`NumberBadge` primary, que también invierten en vez de pasar a lavanda) */
+  --alert-border-color: var(--color-text-on-dark); /** Borde por defecto — surface-dark: igual al fondo, como en `success`/`error`/`warning`. El relleno blanco ya se separa solo de la página oscura y no necesita filete */
+  --alert-title-color: var(--color-primary); /** Título — surface-dark: tinta prusia sobre el relleno blanco (16,77:1, AAA) */
+  --alert-description-color: var(--color-primary); /** Descripción — surface-dark: tinta prusia, igual que el título */
 }

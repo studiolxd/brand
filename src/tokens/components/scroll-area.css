@@ -16,6 +16,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --scroll-area-thumb-bg: var(--color-text-on-dark); /** Pulgar — surface-dark */

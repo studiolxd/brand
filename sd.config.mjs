@@ -1,7 +1,7 @@
 import StyleDictionary from 'style-dictionary';
 import { readdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import { registerDarkModeFormat, registerJsonVariablesFormat, isDarkToken } from './sd.formats.mjs';
+import { registerDarkModeFormat, registerJsonVariablesFormat, isDarkToken, DARK_SELECTORS } from './sd.formats.mjs';
 
 registerDarkModeFormat(StyleDictionary);
 registerJsonVariablesFormat(StyleDictionary);
@@ -665,15 +665,67 @@ const darkLines = [
   ' * property se resuelve en el elemento que la declara, no en el que la usa.',
   ' */',
   '',
-  '.surface-dark,',
-  '[data-theme="dark"],',
-  'html.dark {',
+  `${DARK_SELECTORS.join(',\n')} {`,
   ...[...derivedDark].map(([path, value]) => `  ${cssName(path.split('.'))}: ${value};`),
   '}',
   '',
 ];
 writeFileSync('src/tokens/surface-dark-derived.css', darkLines.join('\n'));
 console.log('✔︎ src/tokens/surface-dark-derived.css');
+
+/* ---------------------------------------------------------------------------
+ * Superficie invertida: `.surface-invert`
+ *
+ * El relleno de un componente puede ser el lienzo AL REVÉS: el `Alert`
+ * `default` es prusia sobre una página clara y blanco sobre una oscura. Lo que
+ * se componga dentro (enlaces, botones, el aspa) tiene que leer sobre ese
+ * relleno, no sobre la página — y esa cara cambia con la superficie ambiente,
+ * así que ni `.surface-dark` (siempre oscura) ni el tema de la página valen.
+ *
+ * `.surface-invert` es esa región. Está en `DARK_SELECTORS`, así que sobre una
+ * página clara ya trae los valores oscuros; lo que falta es el camino de
+ * vuelta: dentro de una superficie oscura tiene que devolver los tokens a su
+ * valor claro. Eso es este bloque, que gana por especificidad (0,1,1 contra
+ * 0,1,0) a los bloques oscuros sin tocarlos.
+ *
+ * Se genera con los mismos nombres que voltean en oscuro —los pares
+ * `surface-dark-*` y sus derivados— y con el valor claro de cada uno: la
+ * referencia si el token la tiene (así un override del consumidor sigue
+ * llegando) y, si no, el valor ya resuelto que salió a `tokens.json`.
+ * ------------------------------------------------------------------------- */
+{
+  const resueltos = JSON.parse(readFileSync('src/tokens/tokens.json', 'utf-8'));
+  const valorClaro = ({ path, value }) => {
+    const ref = typeof value === 'string' && value.match(/^\{(.+)\}$/)?.[1];
+    return ref ? `var(${cssName(ref.split('.'))})` : resueltos[cssName(path)];
+  };
+
+  const invertidos = allTokens
+    .filter(({ path }) => darkKnown.has(path.join('.')) && path[0] !== 'email')
+    .map((token) => [cssName(token.path), valorClaro(token)])
+    .filter(([, value]) => value !== undefined);
+
+  const invertSelectors = DARK_SELECTORS
+    .filter((selector) => selector !== '.surface-invert')
+    .map((selector) => `${selector} .surface-invert`);
+
+  const invertLines = [
+    '/**',
+    ' * Do not edit directly, this file was auto-generated.',
+    ' *',
+    ' * Superficie invertida dentro de una oscura: `.surface-invert` vuelve a poner',
+    ' * en claro todo token que el modo oscuro haya volteado. Sobre página clara no',
+    ' * hace falta bloque: `.surface-invert` ya es uno de los selectores oscuros.',
+    ' */',
+    '',
+    `${invertSelectors.join(',\n')} {`,
+    ...invertidos.map(([name, value]) => `  ${name}: ${value};`),
+    '}',
+    '',
+  ];
+  writeFileSync('src/tokens/surface-invert.css', invertLines.join('\n'));
+  console.log('✔︎ src/tokens/surface-invert.css');
+}
 
 const surfaceMap = new Map(
   Object.entries(surfaceSeeds).map(([path, target]) => [path, `var(${target})`]),

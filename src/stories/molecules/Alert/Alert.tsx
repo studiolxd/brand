@@ -99,17 +99,25 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
   const classes = [
     'alert',
     variant !== 'default' ? `alert--${variant}` : '',
-    // El relleno del alert es oscuro salvo en `warning`, que es el amarillo
-    // del rol de aviso con tinta prusia encima: la raíz se declara superficie
-    // oscura para que lo que se componga dentro (enlaces, botones, el propio
-    // cierre) tome su cara clara — y el aviso queda fuera, porque ahí la
-    // superficie es clara.
-    variant !== 'warning' ? 'surface-dark' : '',
+    // `success` y `error` son rellenos saturados: su cara es oscura en las dos
+    // superficies, y la raíz puede declararla porque ninguno de sus tokens
+    // voltea con el tema. El `default` NO puede —sus tokens sí voltean, y un
+    // selector de tema sobre la propia raíz le daría el valor de la otra cara—,
+    // así que su superficie interior va en el contenido y en el aspa
+    // (`interiorSurface`). `warning` es el único relleno claro y no declara
+    // ninguna: lee con la superficie ambiente.
+    variant === 'success' || variant === 'error' ? 'surface-dark' : '',
     dismissible ? 'alert--dismissible' : '',
     className ?? '',
   ]
     .filter(Boolean)
     .join(' ');
+
+  // El relleno del `default` es el lienzo invertido: prusia sobre una página
+  // clara, blanco sobre una oscura. Lo que se componga dentro (enlaces,
+  // botones, el aspa) lee sobre ese relleno, no sobre la página — que es lo
+  // que declara `.surface-invert`.
+  const interiorSurface = variant === 'default' ? ' surface-invert' : '';
 
   /**
    * Saca el foco del botón de cierre antes de que desaparezca. Con
@@ -143,13 +151,13 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
 
   return (
     <div ref={ref} role={role ?? ROLE_BY_VARIANT[variant]} className={classes} {...rest}>
-      <div className="alert__content">
+      <div className={`alert__content${interiorSurface}`}>
         {title && <p className="alert__title">{title}</p>}
         {description && <div className="alert__description">{description}</div>}
         {children}
       </div>
       {dismissible && (
-        <CloseButton className="alert__close" label={closeLabel} onClick={handleDismiss} />
+        <CloseButton className={`alert__close${interiorSurface}`} label={closeLabel} onClick={handleDismiss} />
       )}
     </div>
   );

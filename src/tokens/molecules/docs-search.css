@@ -30,6 +30,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --docs-search-result-color: var(--color-text-on-dark); /** Color del resultado — surface-dark */

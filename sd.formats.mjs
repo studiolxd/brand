@@ -8,8 +8,15 @@ import { formattedVariables, fileHeader } from 'style-dictionary/utils';
 // root-level — no hace falta lógica distinta.
 // Se exporta para que `src/stylesheets/color-scheme.test.ts` compruebe contra la
 // fuente de verdad que el `color-scheme: dark` de base.css cubre estos mismos
-// tres selectores, en vez de mantener una copia de la lista que se desincronice.
-export const DARK_SELECTORS = ['.surface-dark', '[data-theme="dark"]', 'html.dark'];
+// selectores, en vez de mantener una copia de la lista que se desincronice.
+//
+// `.surface-invert` es la superficie CONTRARIA a la ambiente: sobre una página
+// clara activa los mismos valores oscuros que `.surface-dark` —por eso está en
+// esta lista—, y sobre una oscura los vuelve a poner claros con el bloque que
+// genera `sd.config.mjs` en `src/tokens/surface-invert.css`, que gana por
+// especificidad. Sirve al interior de un relleno que invierte el lienzo (el
+// `Alert` `default`: prusia sobre página clara, blanco sobre página oscura).
+export const DARK_SELECTORS = ['.surface-dark', '.surface-invert', '[data-theme="dark"]', 'html.dark'];
 
 // Marcador de los tokens auto-remapeados por este formato. Deliberadamente
 // distinto de "dark-" a secas: algunos componentes (ej. header.json:

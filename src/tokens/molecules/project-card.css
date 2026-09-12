@@ -14,6 +14,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --project-card-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */

@@ -16,6 +16,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --user-message-author-color: var(--color-text-muted-on-dark); /** Tinta del nombre del autor — superficie oscura */

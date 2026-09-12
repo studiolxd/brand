@@ -123,12 +123,14 @@ El theming oscuro se genera desde el propio sistema de tokens. Un token de compo
 
 ```css
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --button-primary-bg: var(--color-background-dark);
 }
 ```
 
+- **`.surface-invert` — la superficie CONTRARIA a la ambiente** (v38.1.0). Para el interior de un relleno que invierte el lienzo: el `Alert` `default` es prusia sobre página clara y blanco con tinta prusia sobre página oscura, y lo que se componga dentro (enlaces, botones, el aspa) tiene que leer sobre ese relleno. Está en `DARK_SELECTORS`, así que sobre página clara ya trae los valores oscuros; `src/tokens/surface-invert.css` —generado, no editar— los devuelve a claro cuando la clase cae dentro de una superficie oscura, ganando por especificidad. Dos reglas: (1) **no pinta el lienzo**, solo lleva la tinta —el relleno ya lo pinta el componente que la abre—; (2) **no va en el elemento que consume los tokens volteados**: un selector de tema sobre esa misma raíz le daría el valor de la otra cara, así que el `Alert` la pone en `.alert__content` y en el aspa y copia antes su tinta en un alias (`--alert-title-ink`). El porqué, en Foundations → Colores § «La superficie contraria a la ambiente».
 - **Activación contextual** (`.surface-dark` en cualquier contenedor anidado) y **activación root-level** (`[data-theme="dark"]` o `html.dark`, para theme managers como `next-themes`) usan el mismo mecanismo — las custom properties se heredan por cascada, así que basta con que el selector matchee un ancestro. **No usar la clase `.dark` a secas fuera de este selector combinado.**
 - **Añadir soporte oscuro a un token existente**: añadir el token hermano `surface-dark-<nombre>` en el JSON de `tokens/component/` o `tokens/molecule/` correspondiente (mismo grupo, mismo nombre con el prefijo) y ejecutar `pnpm build:tokens` — sin CSS a mano.
 - `src/stylesheets/surface.css` **no existe** (retirado en v21.0.0): todo el modo oscuro sale de tokens `surface-dark-*`; no hay overrides a mano. `.surface-dark` es un lienzo (fondo y color emparejados, en `base.css`).

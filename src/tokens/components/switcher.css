@@ -33,6 +33,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --switcher-error-ring-color: var(--color-error-text-on-dark); /** Anillo de error — surface-dark */

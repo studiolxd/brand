@@ -44,6 +44,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --dropdown-field-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */

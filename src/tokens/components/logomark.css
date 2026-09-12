@@ -11,6 +11,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --logomark-color: var(--color-text-on-dark); /** Color del trazado — surface-dark */

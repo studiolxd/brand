@@ -38,6 +38,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --modal-bg: var(--color-background-dark); /** Fondo del panel — surface-dark */

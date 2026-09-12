@@ -7,6 +7,38 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.1.0] — 2026-09-12
+
+> **Minor.** El `Alert` `default` deja de ser prusia sobre página oscura: ahí invierte a
+> **relleno blanco con tinta prusia** (16,77:1, AAA), con el borde igual al fondo, como las
+> tres intenciones de feedback. Tokens nuevos y un mecanismo nuevo de superficie.
+
+### `Alert`
+
+- **`default` invierte en superficie oscura.** Cuatro tokens nuevos en `tokens/component/alert.json`:
+  `surface-dark-bg` y `surface-dark-border-color` (`{color.text.on-dark}`, blanco) y
+  `surface-dark-title-color` / `surface-dark-description-color` (`{color.primary}`, prusia). En
+  superficie clara no cambia nada. `success`, `error` y `warning` tampoco: sus rellenos son
+  universales. Hasta aquí el relleno neutro seguía siendo prusia sobre página prusia y el filete
+  blanco de 1px era el único separador; era una decisión declarada en la doc, y cambia.
+- La superficie interior del relleno ya no se declara en la raíz sino en el contenido y en el aspa
+  (`.surface-invert` en `default`; `.surface-dark` sigue en la raíz de `success`/`error`). La raíz
+  del `default` no puede declararla: sus propios tokens voltean con el tema, y un selector de tema
+  sobre ella le daría el valor de la otra cara.
+- `Alert.css` copia la tinta del alert en `--alert-title-ink` / `--alert-description-ink` sobre la
+  raíz, para que el texto de dentro siga leyendo la cara de fuera.
+
+### Tokens
+
+- **`.surface-invert`: la superficie contraria a la ambiente.** Nuevo selector del sistema de
+  temas, en `DARK_SELECTORS` (`sd.formats.mjs`): sobre página clara trae los valores oscuros y,
+  dentro de una superficie oscura, `src/tokens/surface-invert.css` —generado por `pnpm build:tokens`,
+  como el derivado— devuelve a claro todo token que el modo oscuro voltea, ganando por
+  especificidad. Es para el interior de un relleno que invierte el lienzo. No pinta el lienzo: solo
+  lleva la tinta. Documentado en Foundations › Colores § «La superficie contraria a la ambiente».
+- `base.css` añade `.surface-invert` al `color-scheme: dark` y le devuelve `color-scheme: light`
+  cuando cae dentro de una superficie oscura.
+
 ## [38.0.6] — 2026-09-12
 
 > **Patch.** Los dos flotantes de la cabecera de aplicación —el menú de usuario y el panel

@@ -40,6 +40,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --step-pending-bg: var(--color-background-dark); /** Fondo de la marca hueca — surface-dark */

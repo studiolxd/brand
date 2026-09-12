@@ -29,11 +29,11 @@ var a = {
 	let y = [
 		"alert",
 		r === "default" ? "" : `alert--${r}`,
-		r === "warning" ? "" : "surface-dark",
+		r === "success" || r === "error" ? "surface-dark" : "",
 		c ? "alert--dismissible" : "",
 		f ?? ""
-	].filter(Boolean).join(" ");
-	function b() {
+	].filter(Boolean).join(" "), b = r === "default" ? " surface-invert" : "";
+	function x() {
 		if (typeof document > "u") return;
 		let e = u?.current;
 		if (e) {
@@ -43,8 +43,8 @@ var a = {
 		let t = document.body, n = t.hasAttribute("tabindex");
 		n || t.setAttribute("tabindex", "-1"), t.focus(), n || t.removeAttribute("tabindex");
 	}
-	function x() {
-		b(), l ? l() : v(!0);
+	function S() {
+		x(), l ? l() : v(!0);
 	}
 	return /* @__PURE__ */ n("div", {
 		ref: g,
@@ -52,7 +52,7 @@ var a = {
 		className: y,
 		...h,
 		children: [/* @__PURE__ */ n("div", {
-			className: "alert__content",
+			className: `alert__content${b}`,
 			children: [
 				o && /* @__PURE__ */ t("p", {
 					className: "alert__title",
@@ -65,9 +65,9 @@ var a = {
 				p
 			]
 		}), c && /* @__PURE__ */ t(e, {
-			className: "alert__close",
+			className: `alert__close${b}`,
 			label: d,
-			onClick: x
+			onClick: S
 		})]
 	});
 }), l = Object.assign(c, {

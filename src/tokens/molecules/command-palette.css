@@ -36,6 +36,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --command-palette-empty-color: var(--color-text-muted-on-dark); /** Color del estado vacío — surface-dark */

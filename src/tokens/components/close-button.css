@@ -14,6 +14,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --close-button-color: var(--color-text-on-dark); /** Color del glifo — surface-dark */

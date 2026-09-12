@@ -29,6 +29,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --stepper-label-color: var(--color-text-on-dark); /** Etiqueta de un paso hecho o actual — surface-dark */

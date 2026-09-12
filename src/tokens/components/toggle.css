@@ -37,6 +37,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --toggle-border-color: var(--color-text-on-dark); /** Borde sin pulsar — surface-dark */

@@ -37,6 +37,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --tree-view-chevron-color: var(--color-text-muted-on-dark); /** Tinta del chevron — surface-dark */

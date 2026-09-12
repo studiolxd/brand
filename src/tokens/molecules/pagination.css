@@ -49,6 +49,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --pagination-summary-color: var(--color-text-on-dark); /** Color del resumen — surface-dark */

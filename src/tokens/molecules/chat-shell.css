@@ -18,6 +18,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --chat-shell-border-color: var(--color-text-on-dark); /** Color de las líneas que separan las tres zonas — superficie oscura */

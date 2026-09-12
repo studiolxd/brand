@@ -181,10 +181,11 @@ Se queda como fondo de un **control deshabilitado** (`input`, `textarea`, `butto
 
 ## Tema claro y oscuro
 
-No hay dos paletas: hay **una**, y cada token que necesita cambiar en oscuro lleva un par `surface-dark-*` en su JSON. Al generar el CSS, ese par remapea la **misma** custom property bajo tres selectores:
+No hay dos paletas: hay **una**, y cada token que necesita cambiar en oscuro lleva un par `surface-dark-*` en su JSON. Al generar el CSS, ese par remapea la **misma** custom property bajo cuatro selectores:
 
 ```css
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --text-background: var(--color-background-dark);
@@ -193,22 +194,23 @@ html.dark {
 }
 ```
 
-Los tres activan lo mismo, a distinta escala:
+Los cuatro activan lo mismo, a distinta escala:
 
 - **`html.dark`** o **`[data-theme="dark"]`** en la raíz: toda la página. Es lo que usa un gestor de tema (`next-themes`).
 - **`.surface-dark`** en cualquier contenedor: solo lo que hay dentro. Sirve para una banda oscura en una página clara — un `Container` con esta clase voltea el header, los botones y el texto que contiene.
+- **`.surface-invert`** en el interior de un relleno que invierte el lienzo: oscuro sobre página clara y claro sobre página oscura (§ «La superficie contraria a la ambiente»).
 
 Las custom properties se heredan por cascada, así que basta con que el selector alcance a un ancestro. Los componentes no saben en qué tema están: leen su token y ya.
 
 **El lienzo va emparejado.** `body` fija a la vez `background-color` y `color` con `--text-background` y `--text-color`, ambos con par oscuro. Fijar un fondo sin su color —o al revés— es el error clásico: los componentes de superficie oscura se vuelven ilegibles sobre un fondo que no volteó con ellos.
 
-**El chrome nativo va con el lienzo.** Hay una parte de la página que no pinta el CSS sino el navegador: los scrollbars, los *pickers* nativos de fecha y hora, el desplegable de un `<select>` y el fondo del autorrelleno. Eso lo decide `color-scheme`, y por eso viaja con los mismos tres selectores: `base.css` declara `color-scheme: light` en `html` y `color-scheme: dark` bajo `.surface-dark`, `[data-theme="dark"]` y `html.dark`. Como la propiedad se hereda, una banda oscura anidada también oscurece los controles nativos que contiene.
+**El chrome nativo va con el lienzo.** Hay una parte de la página que no pinta el CSS sino el navegador: los scrollbars, los *pickers* nativos de fecha y hora, el desplegable de un `<select>` y el fondo del autorrelleno. Eso lo decide `color-scheme`, y por eso viaja con los mismos selectores: `base.css` declara `color-scheme: light` en `html` y `color-scheme: dark` bajo `.surface-dark`, `.surface-invert`, `[data-theme="dark"]` y `html.dark` (y `color-scheme: light` de vuelta en un `.surface-invert` que ya esté dentro de una superficie oscura). Como la propiedad se hereda, una banda oscura anidada también oscurece los controles nativos que contiene.
 
 Lo que **no** se hace es anunciar `color-scheme: light dark`. Eso le dice al navegador «sigo la preferencia del sistema», y el sistema de tokens no la sigue: aquí el tema se voltea por clase o atributo, nunca con `prefers-color-scheme`. Un producto que quiera seguir al SO lo escucha él y aplica `html.dark` —es el `system` del `ThemeSwitcher`—, y entonces los tokens y el chrome nativo voltean juntos. Anunciar los dos esquemas rompía justo ese emparejado: con el SO en oscuro y la app en claro, el navegador oscurecía los controles nativos por encima de un CSS que seguía calculando en claro, y los campos autorrellenados quedaban como barras negras ilegibles.
 
 Los controles del DS no dependen de esto: van repintados enteros con tokens (`all: unset` en `Checkbox` y `Switcher`, `appearance: none` en `Radio`, disparador propio en `Select`). `color-scheme` solo alcanza a lo que no se puede repintar.
 
-**Si tu aplicación tiene su propio selector de tema oscuro** —uno que no sea ninguno de los tres— declara también `color-scheme: dark` en él. Los tokens del brand tampoco voltean con un selector propio, así que el modo oscuro completo es cosa tuya: esta es la línea que se olvida.
+**Si tu aplicación tiene su propio selector de tema oscuro** —uno que no sea ninguno de los cuatro— declara también `color-scheme: dark` en él. Los tokens del brand tampoco voltean con un selector propio, así que el modo oscuro completo es cosa tuya: esta es la línea que se olvida.
 
 ### La regla de derivación
 
@@ -223,12 +225,22 @@ El valor oscuro de un token **no se decide, se deriva**. Se mira a qué rol apun
 | **Feedback** | `*-text-on-light` / `*-fill` | `*-text-on-dark` / el mismo `*-fill` (es universal) |
 | **Deshabilitado** | `grey-light` / `grey-lightest` | Sin par: el estado apagado se dice con `--opacity-disabled`, y un control apagado está exento de contraste |
 
-Dos matices de la fila de marca, los únicos que hacen falta recordar:
+Tres matices de la fila de marca, los únicos que hacen falta recordar:
 
 - **Si el componente ya usa lavanda para otra cosa**, el par no puede ser lavanda: se invierte, relleno `color.text.on-dark` (blanco) con tinta prusia. Es el caso de `Tag` (`primary` e `info`, con `accent-1` ocupada por otra variante), `NumberBadge` y `ProgressBar`.
 - **Un relleno autocontenido no deriva**: si el par fondo/texto no depende de la superficie que lo rodea —`Button` variante `primary` (lavanda con tinta prusia), `Card primary`, los rellenos saturados de `Alert`, `Tag` y `Card` (`accent-*`, `support-*`) y los `*-fill` de feedback— se queda igual en las dos superficies y **no lleva par oscuro**. Añadírselo es el error contrario.
+- **Un relleno que invierte el lienzo tampoco deriva por rol: se da la vuelta.** El `default` del `Alert` es prusia sobre página clara y **blanco con tinta prusia** sobre página oscura (16,77:1, AAA). No es un neutro oscuro nuevo en la paleta —no hay ninguno— sino el lienzo al revés, la misma inversión que ya hacen `Tag`, `NumberBadge` y `ProgressBar` en `primary`. El `Toast` `default` sigue siendo prusia con filete blanco en las dos superficies: es efímero y se apila sobre el contenido, así que no compite con el lienzo como lo hace un aviso que se queda en el flujo.
 
-`Alert` y `Toast` en su variante `default` son la excepción declarada: su relleno es prusia en las dos superficies. Sobre página oscura el aviso no se distingue por el fondo sino por su borde blanco de 1px. No se ha añadido un neutro oscuro a la paleta para este caso porque sería un color sin rol en el resto del sistema.
+### La superficie contraria a la ambiente
+
+Un relleno que invierte el lienzo plantea un problema que `.surface-dark` no resuelve: **lo que se componga dentro** —un enlace, un botón, el aspa de cierre— tiene que leer sobre ese relleno, y esa cara cambia con la superficie ambiente. Sobre página clara el interior es oscuro; sobre página oscura, claro.
+
+Esa región es **`.surface-invert`**. Está en la lista de selectores oscuros, así que sobre página clara ya trae los valores oscuros; y `src/tokens/surface-invert.css` —generado, como el derivado— devuelve cada uno de esos tokens a su valor claro cuando la clase cae dentro de una superficie oscura, ganando por especificidad (`[data-theme="dark"] .surface-invert` contra `.surface-invert`).
+
+Dos reglas de uso:
+
+- **No pinta el lienzo.** A diferencia de `.surface-dark`, solo lleva la tinta: se aplica dentro de un relleno que ya está pintado por el componente que la abre, y volver a pintarlo lo taparía.
+- **No va en el elemento que consume los tokens volteados.** Un selector de tema sobre la propia raíz le daría a esa raíz el valor de la otra cara: el `Alert` la pone en el contenido y en el aspa, no en el `<div>` que pinta el relleno, y copia antes su tinta en un alias (`--alert-title-ink`) para que el texto de dentro siga leyendo la cara de fuera.
 
 ### Un token que hereda de otro no hereda su modo oscuro
 

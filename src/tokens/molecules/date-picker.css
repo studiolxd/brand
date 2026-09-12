@@ -29,6 +29,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --date-picker-button-color: var(--color-text-on-dark); /** Color del glifo — surface-dark */

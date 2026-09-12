@@ -28,6 +28,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --prev-next-nav-eyebrow-color: var(--color-text-muted-on-dark); /** Color del rótulo de dirección — surface-dark */

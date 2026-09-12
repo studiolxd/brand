@@ -16,6 +16,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --skip-link-bg: var(--color-text-on-dark); /** Fondo — surface-dark: el relleno se invierte para verse sobre prusia */

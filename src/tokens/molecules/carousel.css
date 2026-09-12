@@ -18,6 +18,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --carousel-indicator-color: var(--color-text-muted-on-dark); /** Barra de diapositiva no visible — surface-dark */

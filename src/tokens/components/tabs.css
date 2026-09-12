@@ -29,6 +29,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --tabs-list-border-color: var(--color-text-on-dark); /** Borde inferior de la lista — surface-dark */

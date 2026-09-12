@@ -19,6 +19,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --site-footer-legal-separator-color: var(--color-text-on-dark); /** Línea sobre el bloque legal — surface-dark */

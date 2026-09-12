@@ -20,6 +20,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --message-bubble-color: var(--color-text-on-dark); /** Tinta del mensaje — superficie oscura */

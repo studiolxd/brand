@@ -24,6 +24,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --field-row-empty-color: var(--color-text-muted-on-dark); /** Color del aviso de lista vacía — surface-dark */

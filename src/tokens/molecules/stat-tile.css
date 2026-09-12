@@ -35,6 +35,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --stat-tile-label-color: var(--color-text-muted-on-dark); /** Color de la etiqueta — surface-dark */

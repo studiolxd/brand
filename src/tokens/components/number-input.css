@@ -46,6 +46,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --number-input-btn-color: var(--color-text-on-dark); /** Icono de los botones +/− — surface-dark */

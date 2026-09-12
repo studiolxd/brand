@@ -34,6 +34,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --notification-panel-focus-ring-color: var(--color-text-on-dark); /** Color del anillo de foco — superficie oscura */

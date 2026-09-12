@@ -34,6 +34,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --card-outline-bg: var(--color-background-dark); /** Variante outline — fondo, surface-dark */

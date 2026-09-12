@@ -33,6 +33,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --tag-primary-bg: var(--color-text-on-dark); /** Marca primaria, relleno — surface-dark (invertido: el prusia es el fondo de la superficie y el tag desaparecería) */

@@ -29,7 +29,9 @@ Los dos modos se combinan: `title`/`description` para el caso simple, `children`
 
 <Canvas of={AlertStories.Variantes} />
 
-`default` es prusia con borde blanco; `success`, `error` y `warning` toman el relleno sólido de feedback (`*-fill`) con su texto (`*-fill-text`). Las cuatro leen en oscuro: la raíz se declara `.surface-dark`, así que lo que se componga dentro —enlaces, botones, el propio cierre— toma su cara clara sin que el consumidor haga nada.
+`default` es prusia con borde blanco sobre página clara, y **blanco con tinta prusia** sobre página oscura: el relleno neutro es el lienzo al revés (§ «Superficie oscura»). `success`, `error` y `warning` toman el relleno sólido de feedback (`*-fill`) con su texto (`*-fill-text`), el mismo en las dos superficies.
+
+Lo que se componga dentro —enlaces, botones, el propio cierre— lee sobre el relleno sin que el consumidor haga nada: `success` y `error` declaran `.surface-dark` y el `default`, `.surface-invert`, la superficie contraria a la ambiente. `warning` es el único relleno claro y no declara ninguna.
 
 `warning` es el amarillo con tinta prusia, pero desde el rol de aviso ya no lo pide como color de marca: lo pide como `warning-fill` / `warning-fill-text`. El píxel es el mismo; lo que cambia es de dónde viene, y que si el aviso deja de ser amarillo se cambia en un sitio.
 
@@ -55,11 +57,13 @@ El aspa desaparece con el alert, así que el foco se quedaría sin sitio. Pasa e
 
 <Canvas of={AlertStories.SuperficieOscura} />
 
-El relleno es autocontenido: no hay tokens `surface-dark-*`, el alert se ve igual sobre una página clara y sobre una oscura. El borde blanco del `default` existe precisamente para eso — cuando la página ya es prusia, es lo que dibuja el contorno.
+Los tres rellenos saturados —`success`, `error`, `warning`— son universales: se ven igual sobre una página clara y sobre una oscura, y por eso no llevan par `surface-dark-*`.
 
-**La decisión, explícita:** en superficie oscura el relleno del aviso neutro sigue siendo prusia —el mismo color que el fondo de la página— y **el borde es el único separador**. No se añade un neutro oscuro a la paleta para darle cuerpo propio: la paleta tiene un solo azul de fondo, y meter un segundo gris oscuro solo para este caso crearía un color sin rol en el resto del sistema. Un aviso que necesite destacarse sobre una página oscura no es el neutro: es una de las tres intenciones con relleno saturado (`success`, `error`, `warning`).
+El `default` sí voltea. **La decisión, explícita (12-09-2026):** sobre página oscura el aviso neutro es **blanco con tinta prusia**, y el borde va igual al fondo, como en las otras tres intenciones. Hasta aquí el relleno seguía siendo prusia y el borde blanco de 1px era el único separador; el aviso quedaba como un contorno sobre el lienzo, sin cuerpo. La inversión no añade ningún color a la paleta —es el lienzo al revés— y es la misma que ya hacen `Tag`, `NumberBadge` y `ProgressBar` en su variante `primary`.
 
-Lo mismo vale para el `Toast`, que comparte este juego de tokens.
+Lo que se compone dentro voltea con el relleno: el contenido y el aspa declaran `.surface-invert`, la superficie contraria a la ambiente, así que un enlace o un botón dentro del aviso leen oscuro sobre página clara y claro sobre página oscura. El mecanismo, con sus dos reglas de uso, en **Fundamentos › Colores § «La superficie contraria a la ambiente»**.
+
+El `Toast` **no** cambia: su `default` sigue siendo prusia con filete blanco en las dos superficies. Es efímero y se apila sobre el contenido, así que no compite con el lienzo como lo hace un aviso que se queda en el flujo de la página.
 
 ---
 
@@ -73,14 +77,14 @@ Lo mismo vale para el `Toast`, que comparte este juego de tokens.
 
 <TokenTable tokens={alertVariantTokens} />
 
-El color del aspa no es un token del alert: lo pone `CloseButton`, que toma la tinta de la superficie del relleno por la cascada de `.surface-dark`. El aviso solo le dice su talla (`alert.close-size`) y dónde va (`alert.close-inset`). El aspa **no tiene hover**.
+El color del aspa no es un token del alert: lo pone `CloseButton`, que toma la tinta de la superficie del relleno por la cascada —`.surface-dark` en `success`/`error`, `.surface-invert` en `default`—. La excepción es `warning`, el único relleno que no declara superficie: ahí el aspa va fijada por token (`alert.warning-close-color`), porque con la página en oscuro habría salido blanca sobre amarillo. El aviso solo le dice su talla (`alert.close-size`) y dónde va (`alert.close-inset`). El aspa **no tiene hover**.
 
 ## Accesibilidad
 
 - **Rol por intención**: `error` y `warning` son `role="alert"` (live assertive, interrumpe al lector de pantalla); `default` y `success`, `role="status"` (live polite, espera turno). La prop `role` lo fuerza cuando el consumidor sabe más que el componente.
 - Un alert que ya está en la página al cargarla **no se anuncia**: las regiones live solo anuncian cambios. Si el aviso aparece como respuesta a una acción, móntalo en ese momento.
 - El **cierre** es un `<button>` con nombre accesible (`closeLabel`, «Cerrar» por defecto), de 32px de lado —la talla mínima del sistema— y con el anillo de foco del `Button`.
-- **Contraste**: los cuatro pares pasan AAA — texto blanco sobre prusia, verde y rojo, y **tinta prusia** sobre el amarillo del aviso (11,17:1), que es el único relleno que lee en claro.
+- **Contraste**: todos los pares pasan AAA — texto blanco sobre prusia, verde y rojo; **tinta prusia** sobre el amarillo del aviso (11,17:1); y, cuando el `default` invierte sobre página oscura, **tinta prusia sobre blanco (16,77:1)**, el par de mayor contraste del sistema.
 - Al **descartar**, el foco no se pierde: va a `finalFocus` si se ha pasado y, si no, al `<body>`. Un foco huérfano manda al lector de pantalla al principio del documento.
 - El alert **no es un `Modal`**: no atrapa el foco ni bloquea la página.
 

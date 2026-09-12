@@ -18,6 +18,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --date-time-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */

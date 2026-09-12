@@ -20,6 +20,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --star-rating-track-color: var(--color-text-on-dark); /** Contorno de la estrella sin ganar — surface-dark */
