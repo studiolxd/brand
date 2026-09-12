@@ -15,6 +15,7 @@ import {
   EmailTag,
   EmailText,
 } from './EmailPrimitives';
+import { SOLO_CLARO } from '../utils/chromaticModes';
 
 /*
  * Dos correos enteros, con datos falsos, del mismo corte que los que manda hoy
@@ -31,7 +32,8 @@ import {
  */
 const meta: Meta = {
   title: 'Email/Correos de ejemplo',
-  parameters: { layout: 'fullscreen' },
+  // El correo no gestiona modo oscuro (ver § «El correo» en CLAUDE.md).
+  parameters: { layout: 'fullscreen', chromatic: SOLO_CLARO },
 };
 export default meta;
 type Story = StoryObj;

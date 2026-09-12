@@ -14,6 +14,7 @@ import {
   EmailTag,
   EmailText,
 } from './EmailPrimitives';
+import { SOLO_CLARO } from '../utils/chromaticModes';
 
 /*
  * Las primitivas no se pueden enseñar sueltas: fuera de un `EmailLayout` no
@@ -26,7 +27,8 @@ import {
  */
 const meta: Meta = {
   title: 'Email/Primitivas',
-  parameters: { layout: 'fullscreen' },
+  // El correo no gestiona modo oscuro (ver § «El correo» en CLAUDE.md).
+  parameters: { layout: 'fullscreen', chromatic: SOLO_CLARO },
 };
 export default meta;
 type Story = StoryObj;
