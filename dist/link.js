@@ -8,7 +8,7 @@ import { useRender as a } from "@base-ui/react/use-render";
 var o = i(function({ href: i, children: o, external: s = !1, tone: c = "accent", icon: l, iconPosition: u = "start", render: d, className: f, ...p }, m) {
 	let h = [
 		"link",
-		c === "ink" ? "link--ink" : "",
+		c === "ink" ? "link--ink" : c === "accent-1" ? "link--accent-1" : "",
 		l ? "link--with-icon" : "",
 		f
 	].filter(Boolean).join(" "), g = l ? /* @__PURE__ */ n(e, {

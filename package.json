@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "38.2.1",
+  "version": "38.3.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -676,7 +676,7 @@
     "build:css": "postcss src/index.css --use postcss-import -o dist/brand.css",
     "build:tokens-css": "postcss src/tokens/index.css --use postcss-import -o dist/tokens.css",
     "build:fonts-css": "node scripts/build-fonts-css.mjs",
-  "build:icons": "node scripts/build-icons.mjs",
+    "build:icons": "node scripts/build-icons.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "build:tokens": "node sd.config.mjs",
