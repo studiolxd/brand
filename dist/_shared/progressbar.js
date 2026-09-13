@@ -83,6 +83,16 @@ var n = Number({ "progress-bar": {
 		$type: "color",
 		$description: "Color del filete del relleno: la tinta del sistema, que contrasta a la vez con el carril y con los rellenos claros"
 	},
+	"track-border-width": {
+		$value: "{border-width.default}",
+		$type: "dimension",
+		$description: "Filete de contorno del carril, a juego con el del relleno"
+	},
+	"track-border-color": {
+		$value: "{color.text.on-light}",
+		$type: "color",
+		$description: "Color del filete del carril: la tinta del sistema, que lo distingue de la superficie ambiente"
+	},
 	"primary-fill": {
 		$value: "{color.primary}",
 		$type: "color",
@@ -142,6 +152,11 @@ var n = Number({ "progress-bar": {
 		$value: "{color.text.on-dark}",
 		$type: "color",
 		$description: "Filete del relleno — surface-dark"
+	},
+	"surface-dark-track-border-color": {
+		$value: "{color.text.on-dark}",
+		$type: "color",
+		$description: "Filete del carril — surface-dark"
 	},
 	"surface-dark-track-bg": {
 		$value: "{color.surface.secondary-on-dark}",

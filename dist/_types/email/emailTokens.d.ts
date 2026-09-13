@@ -59,7 +59,7 @@ export declare const emailTokens: {
     readonly '--email-button-width': "100%";
     readonly '--email-button-fallback-margin-block-start': "12px";
     readonly '--email-button-margin-block-end': "24px";
-    readonly '--email-logo-height': "32px";
+    readonly '--email-logo-height': "85.33333333333333px";
     readonly '--email-logo-padding': "8px";
     readonly '--email-canvas-bg': "#ffffff";
     readonly '--email-bg': "#ffffff";

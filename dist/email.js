@@ -63,7 +63,7 @@ var y = {
 	"--email-button-width": "100%",
 	"--email-button-fallback-margin-block-start": "12px",
 	"--email-button-margin-block-end": "24px",
-	"--email-logo-height": "32px",
+	"--email-logo-height": "85.33333333333333px",
 	"--email-logo-padding": "8px",
 	"--email-canvas-bg": "#ffffff",
 	"--email-bg": "#ffffff",
@@ -84,7 +84,7 @@ var x = {
 	border: b("--email-border-color")
 }, S = b("--email-font-family"), C = b("--email-font-weight-range"), w = b("--email-max-width"), T = Number.parseFloat(b("--email-logo-height")), E = Number.parseFloat(b("--email-logo-padding")), D = {
 	width: n(T) + E * 2,
-	height: T + E * 2,
+	height: Math.round(T + E * 2),
 	filename: t
 }, O = "https://slxd.app/brand/email", k = e, A = {
 	color: x.muted,
