@@ -7,6 +7,27 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.5.0] — 2026-09-14
+
+> **Minor.** El carril de `ProgressBar` lleva ahora su propio filete de contorno,
+> a juego con el que ya llevaba el relleno.
+
+### Tokens (`progress-bar`)
+
+- **`track-border-width`** (`{border-width.default}`) y **`track-border-color`**
+  (`{color.text.on-light}`, prusia) — filete del carril en superficie clara.
+- **`surface-dark-track-border-color`** (`{color.text.on-dark}`, blanco) — el
+  mismo filete en superficie oscura.
+- Mismo criterio que `fill-border-width`/`fill-border-color`, ya existentes: el
+  carril es una superficie plana y, sin borde, un carril vacío o casi vacío es
+  solo un bloque de fondo sin límite visible sobre la superficie ambiente.
+
+### `ProgressBar`
+
+- `.progress-bar__track` pinta el filete con `box-shadow: inset` (igual que el
+  relleno), para no alterar la caja del carril. Story y MDX actualizados para
+  enseñar el borde en ambas superficies.
+
 ## [38.4.0] — 2026-09-13
 
 > **Minor.** La cabecera del correo pasa del isotipo al **logotipo completo** ("Studio LXD").

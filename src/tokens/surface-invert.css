@@ -285,6 +285,7 @@ html.dark .surface-invert {
   --popover-focus-ring-color: var(--color-primary);
   --progress-bar-track-bg: var(--color-surface-secondary-on-light);
   --progress-bar-fill-border-color: var(--color-text-on-light);
+  --progress-bar-track-border-color: var(--color-text-on-light);
   --progress-bar-primary-fill: var(--color-primary);
   --progress-bar-primary-label-inside-color: var(--color-text-on-dark);
   --progress-bar-label-outside-color: var(--color-text-on-light);

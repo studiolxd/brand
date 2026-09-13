@@ -17,7 +17,9 @@ servidor—, lo que toca es `Spinner`.
 
 Un carril con un relleno que crece de izquierda a derecha, y la cifra del
 porcentaje. El carril es superficie clara secundaria; el relleno, color de marca.
-Esquinas rectas, como todo el sistema.
+Esquinas rectas, como todo el sistema. El carril lleva también un filete de
+tinta —igual que el relleno—: sin él, un carril vacío o casi vacío es solo un
+bloque de color de fondo, sin borde que lo distinga de la superficie ambiente.
 
 La cifra se escribe **dentro** del relleno cuando cabe (a partir del 15%) y
 **fuera**, junto al borde del relleno, cuando no. Es un detalle de presentación:
@@ -41,7 +43,8 @@ control —la barra no es un control—, son alturas de carril.
 
 ## Superficie oscura
 
-El carril pasa al gris oscuro y la cifra de fuera, a blanco. Los rellenos de
+El carril pasa al gris oscuro y la cifra de fuera, a blanco. El filete del
+carril pasa de prusia a blanco, igual que el del relleno. Los rellenos de
 marca no cambian: contrastan en las dos superficies.
 
 <Canvas of={ProgressBarStories.SuperficieOscura} />
@@ -80,6 +83,10 @@ marca no cambian: contrastan en las dos superficies.
   saturados —lavanda, amarillo, esmeralda—: contra un carril claro no llegan a
   los 3:1 que pide WCAG 1.4.11, y el filete es lo que hace visible hasta dónde
   llega el avance.
+- El carril también lleva su propio filete
+  (`track-border-width`/`track-border-color`, prusia en superficie clara y
+  blanco en oscura): lo distingue de la superficie ambiente incluso sin
+  avance.
 
 ## Props
 

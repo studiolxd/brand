@@ -7,6 +7,10 @@
   height: var(--progress-bar-height-md);
   background-color: var(--progress-bar-track-bg);
   border-radius: var(--progress-bar-border-radius);
+  /* Igual que el relleno: `box-shadow: inset` en vez de `border`, para no
+     alterar la caja del carril (el `overflow` que recorta el relleno ya
+     cuenta con las dimensiones actuales). */
+  box-shadow: inset 0 0 0 var(--progress-bar-track-border-width) var(--progress-bar-track-border-color);
 }
 
 .progress-bar--sm .progress-bar__track { height: var(--progress-bar-height-sm); }
