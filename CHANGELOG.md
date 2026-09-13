@@ -7,6 +7,18 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.4.0] — 2026-09-13
+
+> **Patch.** `Link`: el ejemplo de «¿olvidaste la contraseña?» de la story vuelve a tono `accent`.
+
+### `Link`
+
+- **Story de `Link`: el ejemplo de contraseña vuelve a tone `accent`.** El cambio a `accent-1`
+  de v38.3.0 fue un error: «¿olvidaste la contraseña?» es el ejemplo canónico del tono `accent`
+  (el de texto y acciones), no el de `accent-1`. La story `Tonos` mantiene los tres tones con
+  ejemplos coherentes — `accent` recupera «¿olvidaste la contraseña?», `ink` sigue con «Aviso
+  legal» y `accent-1` pasa a «Descubre las novedades».
+
 ## [38.3.0] — 2026-09-12
 
 > **Minor.** `Link`: nuevo tono `accent-1`.

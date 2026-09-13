@@ -112,17 +112,17 @@ export const ContratoBoton: Story = {
 };
 
 /**
- * Tres tonos: `accent` para texto y acciones; `ink` para lo utilitario
- * (legal, volver); `accent-1` para lo que quiere destacar con el acento 1 de
- * la paleta sin ser un enlace de acción principal (¿olvidaste la
- * contraseña?).
+ * Tres tonos: `accent` (por defecto) para texto y acciones —el ejemplo es
+ * «¿olvidaste la contraseña?»—; `ink` para lo utilitario (legal, volver);
+ * `accent-1` para lo que quiere destacar con el acento 1 de la paleta sin
+ * ser un enlace de acción principal.
  */
 export const Tonos: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: 'var(--spacing-5)' }}>
-      <Link href="#registro">Regístrate</Link>
+      <Link href="#recuperar">¿Olvidaste tu contraseña?</Link>
       <Link href="#legal" tone="ink">Aviso legal</Link>
-      <Link href="#recuperar" tone="accent-1">¿Olvidaste tu contraseña?</Link>
+      <Link href="#novedades" tone="accent-1">Descubre las novedades</Link>
     </div>
   ),
 };
@@ -141,7 +141,7 @@ export const ContratoInk: Story = {
 export const ContratoAccent1: Story = {
   name: 'Test — el tono accent-1 lleva su clase y su color de acento 1',
   tags: ['!dev'],
-  render: () => <Link href="#recuperar" tone="accent-1" data-testid="accent-1">¿Olvidaste tu contraseña?</Link>,
+  render: () => <Link href="#novedades" tone="accent-1" data-testid="accent-1">Descubre las novedades</Link>,
   play: async ({ canvasElement }) => {
     const a = canvasElement.querySelector('[data-testid="accent-1"]') as HTMLElement;
     await expect(a).toHaveClass('link--accent-1');
