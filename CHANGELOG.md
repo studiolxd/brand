@@ -46,6 +46,14 @@ Nada que tocar en las apps: `EmailLayout` sigue con la misma API. Al bumpear el 
 **volver a publicar `dist/assets/email/*` en el host de assets del correo**
 (`https://slxd.app/brand/email/`), que ahora incluye `logo-v2.png`.
 
+### `Link`
+
+- **Story de `Link`: el ejemplo de contraseña vuelve a tone `accent`.** El cambio a `accent-1`
+  de v38.3.0 fue un error: «¿olvidaste la contraseña?» es el ejemplo canónico del tono `accent`
+  (el de texto y acciones), no el de `accent-1`. La story `Tonos` mantiene los tres tones con
+  ejemplos coherentes — `accent` recupera «¿olvidaste la contraseña?», `ink` sigue con «Aviso
+  legal» y `accent-1` pasa a «Descubre las novedades».
+
 ## [38.3.0] — 2026-09-12
 
 > **Minor.** `Link`: nuevo tono `accent-1`.
