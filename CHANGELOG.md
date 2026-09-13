@@ -9,8 +9,8 @@ para breaking changes.
 
 ## [38.5.0] — 2026-09-14
 
-> **Minor.** El carril de `ProgressBar` lleva ahora su propio filete de contorno,
-> a juego con el que ya llevaba el relleno.
+> **Minor.** `ProgressBar` gana el filete de contorno del carril, y el logotipo de la
+> cabecera del correo sube a la talla de la cabecera del sitio (`xxl`).
 
 ### Tokens (`progress-bar`)
 
@@ -27,6 +27,19 @@ para breaking changes.
 - `.progress-bar__track` pinta el filete con `box-shadow: inset` (igual que el
   relleno), para no alterar la caja del carril. Story y MDX actualizados para
   enseñar el borde en ambas superficies.
+
+### Correo (`EmailLayout`)
+
+- **Logotipo a la talla de la cabecera del sitio.** `tokens/component/email.json ›
+  logo-height` pasa de `{logo.height-sm}` a `{logo.height-xxl}`: a 32px se veía diminuto
+  junto al resto de la marca del correo, y la cabecera del sitio (`SiteHeader`, prop
+  `logoSize`) usa `xxl` por defecto. El PNG generado (`logo-v2.png`, sin cambio de
+  nombre: no se ha enviado ningún correo real con él) pasa a verse a 313×101px (626×202px
+  a 2x); sobra ancho de sobra en la banda de marca (568px útiles en los 600px del correo).
+- `scripts/build-email-assets.mjs` y el generador de `src/stories/email/emailTokens.ts`
+  (`sd.config.mjs`) ahora resuelven tokens en `calc()` (p. ej. `calc(64px * 4 / 3)`, la
+  talla xxl del logotipo): antes solo sabían leer `rem` y `px` sueltos, y con `xxl` el
+  build de assets del correo rompía (`magick: must specify image size`).
 
 ## [38.4.0] — 2026-09-13
 

@@ -301,9 +301,9 @@
       "$description": "Separación bajo el bloque del botón —botón y enlace de respaldo— para que el descargo que lo sigue no quede pegado. La lleva el propio bloque, no un envoltorio, para que viaje con él a todas las plantillas"
     },
     "logo-height": {
-      "$value": "{logo.height-sm}",
+      "$value": "{logo.height-xxl}",
       "$type": "dimension",
-      "$description": "Alto al que se ve el logotipo completo dentro del PNG. El ancho no es un token: sale de la proporción del trazado de `assets/logo.svg` (925,5 × 265,5), que calcula `scripts/build-email-assets.mjs` a partir del propio SVG. Es la talla sm de la escala del logotipo (32px): a la altura del isotipo destacado el logotipo completo se comería el ancho de la banda"
+      "$description": "Alto al que se ve el logotipo completo dentro del PNG. El ancho no es un token: sale de la proporción del trazado de `assets/logo.svg` (925,5 × 265,5), que calcula `scripts/build-email-assets.mjs` a partir del propio SVG. Es la talla xxl de la escala del logotipo (85,33px): la misma que usa `SiteHeader` por defecto (`logoSize=\"xxl\"`, `src/stories/sections/SiteHeader/SiteHeader.tsx`) para la cabecera del sitio. Antes iba a `height-sm` (32px) y se veía diminuto junto al resto de la cabecera de marca del correo — decisión del 2026-09-14: que se lea a la misma talla que en la web"
     },
     "logo-padding": {
       "$value": "{spacing.2}",

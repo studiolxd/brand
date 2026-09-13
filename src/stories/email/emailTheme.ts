@@ -78,7 +78,11 @@ const emailLogoPadding = Number.parseFloat(emailToken('--email-logo-padding'));
 
 export const emailLogo = {
   width: emailLogoWidthFor(emailLogoHeight) + emailLogoPadding * 2,
-  height: emailLogoHeight + emailLogoPadding * 2,
+  // Redondeado: el alto puede venir de un `calc()` fraccionario (la talla xxl
+  // da 85,33px) y el PNG que genera `build-email-assets.mjs` redondea igual —
+  // un `height` con decimales en el `<img>` no puede coincidir con un fichero
+  // que sí tiene un número entero de píxeles.
+  height: Math.round(emailLogoHeight + emailLogoPadding * 2),
   /** El nombre lleva versión: Gmail cachea las imágenes y no admite refresco. */
   filename: EMAIL_LOGO_FILENAME,
 } as const;

@@ -789,7 +789,21 @@ console.log('✔︎ src/tokens/surface-public.css');
   const ROOT_FONT_SIZE = 16;
   const toPx = (value) => {
     const rem = value.match(/^(-?[\d.]+)rem$/);
-    return rem ? `${Number(rem[1]) * ROOT_FONT_SIZE}px` : value;
+    if (rem) return `${Number(rem[1]) * ROOT_FONT_SIZE}px`;
+    // Un token del correo puede resolver a un `calc()` (p. ej. la talla xxl
+    // del logotipo, `calc(64px * 4 / 3)`): solo lleva número, `px`, `*` y `/`,
+    // así que basta evaluarlo a mano — Outlook no resuelve `calc()` y el
+    // correo necesita el número ya hecho.
+    const calc = value.match(/^calc\(([\d.\s*/px]+)\)$/);
+    if (calc) {
+      const expr = calc[1].replace(/px/g, '');
+      if (!/^[\d.\s*/]+$/.test(expr)) throw new Error(`calc() no soportado: ${value}`);
+      const result = expr
+        .split('*')
+        .reduce((acc, term) => acc * term.trim().split('/').map(Number).reduce((n, d) => n / d), 1);
+      return `${result}px`;
+    }
+    return value;
   };
 
   // Comillas simples, como el resto del repo: hay valores que llevan comillas
