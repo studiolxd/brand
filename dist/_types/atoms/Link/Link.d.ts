@@ -8,12 +8,12 @@ export interface LinkProps extends React.ComponentPropsWithoutRef<'a'> {
     external?: boolean;
     /**
      * Tono. `accent` (por defecto): el enlace de texto y de acción — prusia con
-     * línea en claro, amarillo con línea en hover en oscuro. `ink`: el enlace
-     * utilitario (legal, volver) — tinta, línea en reposo y ninguna en hover,
-     * en las dos superficies. `accent-1`: acento 1 de la paleta (lavanda) —
-     * color saturado que ya contrasta en cualquier superficie, línea en reposo
-     * que desaparece en hover, igual en las dos (el ejemplo es «¿olvidaste la
-     * contraseña?»).
+     * línea en claro, amarillo con línea en hover en oscuro (el ejemplo es
+     * «¿olvidaste la contraseña?»). `ink`: el enlace utilitario (legal,
+     * volver) — tinta, línea en reposo y ninguna en hover, en las dos
+     * superficies. `accent-1`: acento 1 de la paleta (lavanda) — color
+     * saturado que ya contrasta en cualquier superficie, línea en reposo que
+     * desaparece en hover, igual en las dos.
      */
     tone?: 'accent' | 'ink' | 'accent-1';
     /** Un icono junto al texto («← Volver», «Descargar ↓»). Decorativo: el texto ya lo dice. */

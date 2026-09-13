@@ -55,14 +55,21 @@ var e = "#BAABFF", t = "#111E30", n = [
 		type: "application/manifest+json",
 		purpose: "manifest"
 	}
-], i = "logo-v1.png", a = "google-sans-flex-normal-latin-v1.woff2", o = [{
+], i = "logo-v2.png", a = {
+	width: 925.5,
+	height: 265.5
+};
+function o(e) {
+	return Math.round(e * a.width / a.height);
+}
+var s = "google-sans-flex-normal-latin-v1.woff2", c = [{
 	path: `assets/email/${i}`,
 	type: "image/png",
 	purpose: "source"
 }, {
-	path: `assets/email/${a}`,
+	path: `assets/email/${s}`,
 	type: "font/woff2",
 	purpose: "source"
 }];
 //#endregion
-export { o as BRAND_EMAIL_ASSETS, r as BRAND_ICON_ASSETS, e as BRAND_ICON_BG_COLOR, t as BRAND_ICON_INK_COLOR, n as BRAND_SOURCE_ASSETS, a as EMAIL_FONT_FILENAME, i as EMAIL_LOGO_FILENAME };
+export { c as BRAND_EMAIL_ASSETS, r as BRAND_ICON_ASSETS, e as BRAND_ICON_BG_COLOR, t as BRAND_ICON_INK_COLOR, n as BRAND_SOURCE_ASSETS, s as EMAIL_FONT_FILENAME, i as EMAIL_LOGO_FILENAME, a as EMAIL_LOGO_VIEW_BOX, o as emailLogoWidthFor };

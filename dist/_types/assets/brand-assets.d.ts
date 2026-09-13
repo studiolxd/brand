@@ -34,11 +34,33 @@ export declare const BRAND_ICON_ASSETS: readonly BrandIconAsset[];
 /**
  * El nombre del PNG del logotipo del correo, versionado: Gmail proxea y
  * cachea las imágenes de los correos y no hay forma de forzar un refresco,
- * así que cambiar el logotipo es publicar un nombre nuevo (`logo-v2.png`), no
+ * así que cambiar el logotipo es publicar un nombre nuevo (`logo-v3.png`), no
  * sobrescribir este. `emailTheme.ts` (`emailLogo.filename`) y
  * `scripts/build-email-assets.mjs` leen de aquí en vez de repetirlo.
+ *
+ * `v2` es el salto del isotipo (`logomark.svg`) al logotipo completo
+ * (`logo.svg`, "Studio LXD") en la cabecera del correo: la imagen cambió de
+ * contenido y de proporción, así que tenía que cambiar de URL. El `v1`
+ * cuadrado ya no se genera.
  */
-export declare const EMAIL_LOGO_FILENAME = "logo-v1.png";
+export declare const EMAIL_LOGO_FILENAME = "logo-v2.png";
+/**
+ * La caja de dibujo del logotipo completo (`assets/logo.svg`), de donde sale
+ * su proporción. Está aquí —y no solo en el SVG— porque el `<img>` del correo
+ * necesita `width`/`height` explícitos en tiempo de ejecución, donde no se
+ * puede leer el fichero; `scripts/build-email-assets.mjs` comprueba que el
+ * SVG siga declarando exactamente este `viewBox` y falla si se separan.
+ */
+export declare const EMAIL_LOGO_VIEW_BOX: {
+    readonly width: 925.5;
+    readonly height: 265.5;
+};
+/**
+ * El ancho del logotipo para un alto dado, redondeado a píxel entero: el
+ * único sitio donde se aplica la proporción, para que la imagen generada y
+ * los atributos del `<img>` no puedan discrepar.
+ */
+export declare function emailLogoWidthFor(height: number): number;
 /**
  * El nombre del woff2 de la cara latina de la sans que usa el correo, mismo
  * criterio de versión que `EMAIL_LOGO_FILENAME`.

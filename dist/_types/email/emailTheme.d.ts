@@ -32,15 +32,11 @@ export declare const emailFontFamily: string;
 export declare const emailFontWeightRange: string;
 /** Ancho del correo. Fuera de 600px, el panel de lectura obliga a scroll. */
 export declare const emailMaxWidth: string;
-/**
- * El logotipo, tal como lo sirve el PNG generado por `scripts/build-email-assets.mjs`:
- * el isotipo a `logo-mark-size` con `logo-padding` de blanco horneado alrededor.
- * `width`/`height` van explícitos en el `<img>` — el archivo es el doble.
- */
 export declare const emailLogo: {
-    readonly size: number;
+    readonly width: number;
+    readonly height: number;
     /** El nombre lleva versión: Gmail cachea las imágenes y no admite refresco. */
-    readonly filename: "logo-v1.png";
+    readonly filename: "logo-v2.png";
 };
 /**
  * De dónde cuelgan los assets del correo (logotipo y fuente web).
