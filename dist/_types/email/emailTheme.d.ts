@@ -36,7 +36,7 @@ export declare const emailLogo: {
     readonly width: number;
     readonly height: number;
     /** El nombre lleva versión: Gmail cachea las imágenes y no admite refresco. */
-    readonly filename: "logo-v2.png";
+    readonly filename: "logo-v3.png";
 };
 /**
  * De dónde cuelgan los assets del correo (logotipo y fuente web).

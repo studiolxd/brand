@@ -57,16 +57,18 @@ export const BRAND_ICON_ASSETS: readonly BrandIconAsset[] = [
 /**
  * El nombre del PNG del logotipo del correo, versionado: Gmail proxea y
  * cachea las imágenes de los correos y no hay forma de forzar un refresco,
- * así que cambiar el logotipo es publicar un nombre nuevo (`logo-v3.png`), no
- * sobrescribir este. `emailTheme.ts` (`emailLogo.filename`) y
+ * así que cambiar el logotipo (contenido O medidas) es publicar un nombre
+ * nuevo, no sobrescribir este. `emailTheme.ts` (`emailLogo.filename`) y
  * `scripts/build-email-assets.mjs` leen de aquí en vez de repetirlo.
  *
- * `v2` es el salto del isotipo (`logomark.svg`) al logotipo completo
- * (`logo.svg`, "Studio LXD") en la cabecera del correo: la imagen cambió de
- * contenido y de proporción, así que tenía que cambiar de URL. El `v1`
- * cuadrado ya no se genera.
+ * `v2` fue el salto del isotipo (`logomark.svg`) al logotipo completo
+ * (`logo.svg`, "Studio LXD") en la cabecera del correo. `v3` (2026-09-14,
+ * F1) corrige un incidente: en v38.5.0 la imagen pasó de 256×96 a 626×202
+ * conservando el nombre `logo-v2.png`; Gmail ya tenía esa URL cacheada con
+ * las medidas viejas y la estiró, deformada y pixelada. El `v1` cuadrado ya
+ * no se genera.
  */
-export const EMAIL_LOGO_FILENAME = 'logo-v2.png';
+export const EMAIL_LOGO_FILENAME = 'logo-v3.png';
 
 /**
  * La caja de dibujo del logotipo completo (`assets/logo.svg`), de donde sale

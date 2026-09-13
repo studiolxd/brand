@@ -1,4 +1,4 @@
-import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { beforeAll, describe, expect, it } from 'vitest';
@@ -9,6 +9,19 @@ import { BRAND_EMAIL_ASSETS, EMAIL_FONT_FILENAME, EMAIL_LOGO_FILENAME } from './
 function pngSize(file: string) {
   const buf = readFileSync(file);
   return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
+}
+
+/**
+ * El mínimo de bytes que `pngSize` necesita para leer un ancho/alto en las
+ * mismas posiciones que la cabecera IHDR real (offsets 16 y 20): no hace
+ * falta un PNG válido, solo un fichero que la guarda del build lea como si lo
+ * fuera.
+ */
+function pngBuffer(width: number, height: number) {
+  const buf = Buffer.alloc(24);
+  buf.writeUInt32BE(width, 16);
+  buf.writeUInt32BE(height, 20);
+  return buf;
 }
 
 // El script vive en scripts/ (fuera de src/), igual que build-icons.mjs; se
@@ -68,5 +81,26 @@ describe('build-email-assets.mjs', () => {
       `assets/email/${EMAIL_LOGO_FILENAME}`,
       `assets/email/${EMAIL_FONT_FILENAME}`,
     ]);
+  });
+
+  it('falla si ya hay un PNG con ese nombre y OTRAS medidas, en vez de sobrescribirlo en silencio', () => {
+    // El incidente que motivó esta guarda (2026-09-14, v38.5.0→v38.5.1): el
+    // PNG del logotipo pasó de 256×96 a 626×202 conservando `logo-v2.png`, y
+    // Gmail —que cachea por URL sin forma de forzar un refresco— sirvió la
+    // versión vieja cacheada estirada a las medidas nuevas: deformada y
+    // pixelada. El build tiene que negarse a repetirlo.
+    const tmp = mkdtempSync(join(tmpdir(), 'brand-email-assets-'));
+    const distOutDir = join(tmp, 'dist-assets-email');
+    const publicOutDir = join(tmp, 'public-email');
+    mkdirSync(distOutDir, { recursive: true });
+
+    // Un PNG "ya publicado" con el mismo nombre pero otro tamaño (1×1, el
+    // caso más simple: basta con que difiera de lo que el token actual va a
+    // generar).
+    writeFileSync(join(distOutDir, EMAIL_LOGO_FILENAME), pngBuffer(1, 1));
+
+    expect(() => buildEmailAssets({ distOutDir, publicOutDir })).toThrow(/otras medidas/);
+
+    rmSync(tmp, { recursive: true, force: true });
   });
 });

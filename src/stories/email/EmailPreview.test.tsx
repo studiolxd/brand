@@ -7,6 +7,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
+import { EMAIL_LOGO_FILENAME } from '../../assets/brand-assets';
 import { EmailLayout } from './EmailLayout';
 import { EmailPreview } from './EmailPreview';
 import { EmailText } from './EmailPrimitives';
@@ -26,6 +27,6 @@ describe('EmailPreview', () => {
 
     expect(doc).toContain(`<base href="${document.baseURI}">`);
     // Y va dentro del <head>, antes de cualquier URL relativa.
-    expect(doc.indexOf('<base')).toBeLessThan(doc.indexOf('/email/logo-v2.png'));
+    expect(doc.indexOf('<base')).toBeLessThan(doc.indexOf(`/email/${EMAIL_LOGO_FILENAME}`));
   });
 });

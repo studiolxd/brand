@@ -20,11 +20,14 @@
  *   un `background-color: #fff` no sobrevive a esa inversión; una imagen sí.
  * - Se exporta a 2x y se sirve con `width`/`height` explícitos, para que se vea
  *   nítido en pantallas densas sin que el cliente tenga que adivinar el hueco.
- * - El nombre lleva versión (`logo-v2.png`). Gmail proxea y cachea las imágenes
+ * - El nombre lleva versión (`logo-v3.png`). Gmail proxea y cachea las imágenes
  *   de los correos y no hay forma de forzar un refresco: cambiar el logotipo
- *   obliga a publicar una URL nueva. Si algún día cambia, se sube `logo-v3.png`
- *   y se cambia el nombre en `EMAIL_LOGO_FILENAME` (`src/assets/brand-assets.ts`),
- *   fuente única de la que lee este script y `emailTheme.ts`.
+ *   —contenido O medidas— obliga a publicar una URL nueva. `v2` lo aprendió
+ *   por las malas (2026-09-14): la imagen pasó de 256×96 a 626×202 sin cambiar
+ *   de nombre, y Gmail sirvió la versión vieja cacheada estirada a las medidas
+ *   nuevas. Si algún día cambia, se sube `logo-v4.png` y se cambia el nombre
+ *   en `EMAIL_LOGO_FILENAME` (`src/assets/brand-assets.ts`), fuente única de
+ *   la que lee este script y `emailTheme.ts`.
  *
  * Qué se dibuja: el LOGOTIPO COMPLETO (`src/assets/logo.svg`, "Studio LXD"), no
  * el isotipo. La cabecera de un correo no tiene barra de navegación ni dominio
@@ -38,7 +41,7 @@
  * (`src/assets/brand-assets.ts`) como único sitio donde se aplica.
  */
 import { execFileSync } from 'node:child_process';
-import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 
 import {
   EMAIL_FONT_FILENAME,
@@ -53,6 +56,12 @@ const SOURCE = 'src/assets/logo.svg';
 const FONT_SOURCE = 'src/assets/fonts/google-sans-flex/google-sans-flex-normal-latin.woff2';
 /** Factor de exportación: el PNG se genera al doble del tamaño al que se ve. */
 const SCALE = 2;
+
+/** Lado del PNG leído de su cabecera IHDR — igual que en el test del script. */
+function pngSize(file) {
+  const buf = readFileSync(file);
+  return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
+}
 
 const px = (name) => {
   const value = tokens[name];
@@ -138,6 +147,27 @@ export function buildEmailAssets({ distOutDir = 'dist/assets/email', publicOutDi
   mkdirSync(publicOutDir, { recursive: true });
 
   const primaryOut = logoOutputs[0];
+
+  /* Guarda contra el incidente de v2 (2026-09-14): un `logo-v2.png` ya
+     publicado y cacheado por Gmail cambió de 256×96 a 626×202 sin cambiar de
+     nombre, y Gmail sirvió la versión vieja estirada a las medidas nuevas —
+     deformada y pixelada. Si el fichero que ya vive bajo `EMAIL_LOGO_FILENAME`
+     (el que hay comprometido en el repo, no uno generado por este mismo build)
+     tiene otras medidas que las que va a escribir el token actual, algo
+     cambió (contenido o token) sin subir de versión: falla en vez de
+     sobrescribir en silencio un nombre que un cliente de correo ya tiene
+     cacheado. */
+  if (existsSync(primaryOut)) {
+    const existing = pngSize(primaryOut);
+    if (existing.width !== pngWidth || existing.height !== pngHeight) {
+      throw new Error(
+        `${primaryOut} ya existe con otras medidas (${existing.width}×${existing.height} ` +
+          `frente a ${pngWidth}×${pngHeight} nuevo): Gmail cachea por URL y no admite forzar un ` +
+          `refresco. Sube el nombre en EMAIL_LOGO_FILENAME (src/assets/brand-assets.ts) a una ` +
+          `versión nueva en vez de sobrescribir esta.`,
+      );
+    }
+  }
   const tmp = `${primaryOut}.svg`;
   writeFileSync(tmp, `${composed}\n`);
   try {

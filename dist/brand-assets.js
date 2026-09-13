@@ -55,7 +55,7 @@ var e = "#BAABFF", t = "#111E30", n = [
 		type: "application/manifest+json",
 		purpose: "manifest"
 	}
-], i = "logo-v2.png", a = {
+], i = "logo-v3.png", a = {
 	width: 925.5,
 	height: 265.5
 };

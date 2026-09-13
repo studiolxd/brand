@@ -7,6 +7,29 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.5.1] — 2026-09-14
+
+> **Patch.** Corrige el incidente de producción del logotipo del correo:
+> `v38.5.0` cambió sus medidas conservando el nombre del PNG.
+
+### Correo (`EmailLayout`)
+
+- **`EMAIL_LOGO_FILENAME` sube a `logo-v3.png`.** `v38.5.0` (más abajo, misma
+  fecha) dio por hecho que "no se ha enviado ningún correo real" con
+  `logo-v2.png` y por eso mantuvo el nombre al llevar el logotipo de 256×96 a
+  626×202 (talla `xxl`) — el supuesto era falso: sí se habían enviado correos
+  con esa URL. Gmail proxea y cachea las imágenes de los correos por URL, y no
+  hay forma de forzar un refresco: siguió sirviendo el PNG viejo de 256×96
+  cacheado, estirado a las medidas nuevas — deformado y pixelado en la
+  bandeja. Con el nombre nuevo, `logo-v2.png` queda huérfano (se retira de
+  `public/email/` y `dist/assets/email/`) y cada cliente de correo pide de
+  cero `logo-v3.png`.
+- **Guarda en `scripts/build-email-assets.mjs`**: si el PNG que ya vive bajo
+  `EMAIL_LOGO_FILENAME` (el comprometido en el repo) tiene otras medidas que
+  las que va a generar el build, falla en vez de sobrescribirlo en
+  silencio — pide subir el nombre. Es la comprobación que habría cogido este
+  incidente antes de publicarlo.
+
 ## [38.5.0] — 2026-09-14
 
 > **Minor.** `ProgressBar` gana el filete de contorno del carril, y el logotipo de la

@@ -8,6 +8,7 @@ import type { ReactElement } from 'react';
 import { render } from 'react-email';
 import { describe, expect, it } from 'vitest';
 
+import { EMAIL_LOGO_FILENAME } from '../../assets/brand-assets';
 import { EmailButton, EmailHeading, EmailNote, EmailText } from './EmailPrimitives';
 import { EmailLayout } from './EmailLayout';
 import { emailLogo } from './emailTheme';
@@ -41,7 +42,7 @@ describe('EmailLayout', () => {
     const out = await html(mensaje);
 
     // PNG, no SVG: Gmail y Outlook no renderizan SVG.
-    expect(out).toContain('logo-v2.png');
+    expect(out).toContain(EMAIL_LOGO_FILENAME);
     expect(out).not.toContain('logomark.svg');
     // Muchos clientes bloquean las imágenes: sin alt no se sabe quién escribe.
     expect(out).toContain('alt="Bricks"');
@@ -58,9 +59,9 @@ describe('EmailLayout', () => {
       </EmailLayout>,
     );
 
-    expect(out).toContain('https://cdn.example.com/e/logo-v2.png');
+    expect(out).toContain(`https://cdn.example.com/e/${EMAIL_LOGO_FILENAME}`);
     // La barra final de la base no puede duplicarse en la URL.
-    expect(out).not.toContain('e//logo-v2.png');
+    expect(out).not.toContain(`e//${EMAIL_LOGO_FILENAME}`);
   });
 
   it('no gestiona modo oscuro', async () => {
