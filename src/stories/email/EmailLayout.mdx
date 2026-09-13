@@ -87,8 +87,10 @@ decisión detrás de ella es una cicatriz de un cliente concreto:
 | Nombre versionado (`logo-v2.png`) | Gmail proxea y cachea las imágenes y no admite forzar un refresco: cada versión tiene que ser una URL nueva — el `v1`, cuadrado y con el isotipo, ya no se genera |
 
 El PNG lo genera `pnpm build:email-assets` a partir de `src/assets/logo.svg`. El
-alto lo dice el token `--email-logo-height` (32px, la talla sm de la escala del
-logotipo) y el aire horneado `--email-logo-padding`; el **ancho no es un token**:
+alto lo dice el token `--email-logo-height` (85,33px, la talla xxl de la escala
+del logotipo — la misma que usa `SiteHeader` por defecto para la cabecera del
+sitio; antes iba a `height-sm`, 32px, y se veía diminuto) y el aire horneado
+`--email-logo-padding`; el **ancho no es un token**:
 sale de la proporción del trazado (`viewBox` 925,5 × 265,5) con
 `emailLogoWidthFor` de `brand-assets.ts`, el único sitio donde se aplica, para
 que la imagen y los `width`/`height` del `<img>` no puedan discrepar.

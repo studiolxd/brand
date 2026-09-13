@@ -57,6 +57,19 @@ const SCALE = 2;
 const px = (name) => {
   const value = tokens[name];
   if (value === undefined) throw new Error(`Token desconocido: ${name}`);
+  /* `--email-logo-height` puede resolver a un `calc()` (p. ej. la talla xxl del
+     logotipo, `calc(64px * 4 / 3)`): solo lleva número, `px`, `*` y `/`, así
+     que basta evaluar la expresión a mano en vez de tirar de `eval`. */
+  const calc = value.match(/^calc\(([\d.\s*/px]+)\)$/);
+  if (calc) {
+    const expr = calc[1].replace(/px/g, '');
+    if (!/^[\d.\s*/]+$/.test(expr)) throw new Error(`Token no soportado: ${name} = ${value}`);
+    return expr.split('*').reduce((acc, term) => {
+      const factors = term.trim().split('/').map(Number);
+      const termValue = factors.slice(1).reduce((n, d) => n / d, factors[0]);
+      return acc * termValue;
+    }, 1);
+  }
   const rem = value.match(/^(-?[\d.]+)rem$/);
   return rem ? Number(rem[1]) * 16 : Number(value.replace('px', ''));
 };
@@ -72,7 +85,12 @@ export function buildEmailAssets({ distOutDir = 'dist/assets/email', publicOutDi
   const padding = px('--email-logo-padding');
   const logoWidth = emailLogoWidthFor(logoHeight);
   const boxWidth = logoWidth + padding * 2;
-  const boxHeight = logoHeight + padding * 2;
+  /* Redondeado: `logoHeight` puede venir de un `calc()` fraccionario (la talla
+     xxl del logotipo da 85,33px) y un PNG no tiene medio píxel — sin redondear
+     aquí, el tamaño real del fichero queda a merced de cómo `magick` redondee
+     el `-resize`, y puede no coincidir con los atributos `width`/`height` que
+     calcula `emailLogo` en `emailTheme.ts` a partir del mismo token. */
+  const boxHeight = Math.round(logoHeight + padding * 2);
   const ink = tokens['--logo-color'];
   /* `--email-bg`: el fondo de la caja (banda de marca incluida), no
      `--email-canvas-bg` (el lienzo fuera de la caja) — el logotipo vive dentro

@@ -7,6 +7,24 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.5.0] — 2026-09-14
+
+> **Minor.** El logotipo de la cabecera del correo sube de talla: de `sm` (32px) a `xxl`
+> (85,33px), la misma que usa `SiteHeader` por defecto para la cabecera del sitio.
+
+### Correo (`EmailLayout`)
+
+- **Logotipo a la talla de la cabecera del sitio.** `tokens/component/email.json ›
+  logo-height` pasa de `{logo.height-sm}` a `{logo.height-xxl}`: a 32px se veía diminuto
+  junto al resto de la marca del correo, y la cabecera del sitio (`SiteHeader`, prop
+  `logoSize`) usa `xxl` por defecto. El PNG generado (`logo-v2.png`, sin cambio de
+  nombre: no se ha enviado ningún correo real con él) pasa a verse a 313×101px (626×202px
+  a 2x); sobra ancho de sobra en la banda de marca (568px útiles en los 600px del correo).
+- `scripts/build-email-assets.mjs` y el generador de `src/stories/email/emailTokens.ts`
+  (`sd.config.mjs`) ahora resuelven tokens en `calc()` (p. ej. `calc(64px * 4 / 3)`, la
+  talla xxl del logotipo): antes solo sabían leer `rem` y `px` sueltos, y con `xxl` el
+  build de assets del correo rompía (`magick: must specify image size`).
+
 ## [38.4.0] — 2026-09-13
 
 > **Minor.** La cabecera del correo pasa del isotipo al **logotipo completo** ("Studio LXD").
