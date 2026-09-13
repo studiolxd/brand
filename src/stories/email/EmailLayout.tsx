@@ -232,10 +232,12 @@ export function EmailLayout({
             width: '100%',
           }}
         >
-          {/* La banda de marca. El logotipo es un PNG con el blanco horneado
-              dentro: Outlook Windows y Gmail Android invierten colores por su
-              cuenta y un `background-color` no sobrevive a esa inversión, una
-              imagen sí. */}
+          {/* La banda de marca: el logotipo completo ("Studio LXD"), no el
+              isotipo — un correo no trae barra de navegación ni dominio a la
+              vista que digan de quién es, así que la marca tiene que leerse.
+              Es un PNG con el blanco horneado dentro: Outlook Windows y Gmail
+              Android invierten colores por su cuenta y un `background-color`
+              no sobrevive a esa inversión, una imagen sí. */}
           <Container
             style={{
               backgroundColor: emailPalette.background,
@@ -247,8 +249,8 @@ export function EmailLayout({
             <Img
               src={`${base}/${emailLogo.filename}`}
               alt={logoAlt ?? appName}
-              width={emailLogo.size}
-              height={emailLogo.size}
+              width={emailLogo.width}
+              height={emailLogo.height}
               style={{ border: 0, display: 'block' }}
             />
           </Container>

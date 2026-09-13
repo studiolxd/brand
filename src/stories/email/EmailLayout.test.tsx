@@ -10,6 +10,7 @@ import { describe, expect, it } from 'vitest';
 
 import { EmailButton, EmailHeading, EmailNote, EmailText } from './EmailPrimitives';
 import { EmailLayout } from './EmailLayout';
+import { emailLogo } from './emailTheme';
 import { emailTokens } from './emailTokens';
 
 const URL =
@@ -40,11 +41,14 @@ describe('EmailLayout', () => {
     const out = await html(mensaje);
 
     // PNG, no SVG: Gmail y Outlook no renderizan SVG.
-    expect(out).toContain('logo-v1.png');
+    expect(out).toContain('logo-v2.png');
     expect(out).not.toContain('logomark.svg');
     // Muchos clientes bloquean las imágenes: sin alt no se sabe quién escribe.
     expect(out).toContain('alt="Bricks"');
-    expect(out).toMatch(/width="64"[^>]*height="64"|height="64"[^>]*width="64"/);
+    // Rectangular: es el logotipo completo, no el isotipo cuadrado.
+    expect(out).toContain(`width="${emailLogo.width}"`);
+    expect(out).toContain(`height="${emailLogo.height}"`);
+    expect(emailLogo.width).not.toBe(emailLogo.height);
   });
 
   it('sirve los assets desde la base que le pasen', async () => {
@@ -54,9 +58,9 @@ describe('EmailLayout', () => {
       </EmailLayout>,
     );
 
-    expect(out).toContain('https://cdn.example.com/e/logo-v1.png');
+    expect(out).toContain('https://cdn.example.com/e/logo-v2.png');
     // La barra final de la base no puede duplicarse en la URL.
-    expect(out).not.toContain('e//logo-v1.png');
+    expect(out).not.toContain('e//logo-v2.png');
   });
 
   it('no gestiona modo oscuro', async () => {

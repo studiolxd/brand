@@ -22,7 +22,7 @@
  */
 import type { CSSProperties } from 'react';
 
-import { EMAIL_FONT_FILENAME, EMAIL_LOGO_FILENAME } from '../../assets/brand-assets';
+import { EMAIL_FONT_FILENAME, EMAIL_LOGO_FILENAME, emailLogoWidthFor } from '../../assets/brand-assets';
 import { emailTokens, type EmailTokenName } from './emailTokens';
 
 /** El valor de un token del correo, ya resuelto y en píxeles. */
@@ -67,11 +67,18 @@ export const emailMaxWidth = emailToken('--email-max-width');
 
 /**
  * El logotipo, tal como lo sirve el PNG generado por `scripts/build-email-assets.mjs`:
- * el isotipo a `logo-mark-size` con `logo-padding` de blanco horneado alrededor.
- * `width`/`height` van explícitos en el `<img>` — el archivo es el doble.
+ * el logotipo completo ("Studio LXD") a `logo-height` con `logo-padding` de
+ * blanco horneado alrededor. No es cuadrado —el alto lo dice el token y el ancho
+ * sale de la proporción del trazado, con `emailLogoWidthFor`—, así que van las
+ * dos medidas. `width`/`height` van explícitos en el `<img>`: el archivo es el
+ * doble.
  */
+const emailLogoHeight = Number.parseFloat(emailToken('--email-logo-height'));
+const emailLogoPadding = Number.parseFloat(emailToken('--email-logo-padding'));
+
 export const emailLogo = {
-  size: Number.parseFloat(emailToken('--email-logo-mark-size')) + Number.parseFloat(emailToken('--email-logo-padding')) * 2,
+  width: emailLogoWidthFor(emailLogoHeight) + emailLogoPadding * 2,
+  height: emailLogoHeight + emailLogoPadding * 2,
   /** El nombre lleva versión: Gmail cachea las imágenes y no admite refresco. */
   filename: EMAIL_LOGO_FILENAME,
 } as const;

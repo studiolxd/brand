@@ -7,6 +7,45 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.4.0] — 2026-09-13
+
+> **Minor.** La cabecera del correo pasa del isotipo al **logotipo completo** ("Studio LXD").
+> El PNG cambia de nombre (`logo-v2.png`) y de proporción.
+
+### Correo (`EmailLayout`)
+
+- **El logotipo completo en la banda de marca.** `scripts/build-email-assets.mjs` genera el PNG
+  a partir de `src/assets/logo.svg` en vez de `src/assets/logomark.svg`: un correo no trae barra
+  de navegación ni dominio a la vista que digan de quién es el mensaje, así que la marca tiene
+  que poder leerse y un isotipo suelto no se lee. Mismo fondo blanco horneado, mismo aire, misma
+  exportación a 2x.
+- **Nombre nuevo: `logo-v2.png`.** `EMAIL_LOGO_FILENAME` sube a `logo-v2.png`. Gmail proxea y
+  cachea las imágenes de los correos y no admite forzar un refresco: cambiar la imagen obliga a
+  publicar una URL nueva. El `logo-v1.png` cuadrado **ya no se genera** y sale de
+  `dist/assets/email/`; el host de assets lo mantiene mientras queden correos viejos en las
+  bandejas.
+- **Medidas.** El PNG pasa de 128 × 128 px (visto a 64 × 64) a **256 × 96 px, visto a 128 × 48**.
+  `emailLogo` deja de ser cuadrado: `{ width, height, filename }` en vez de `{ size, filename }`,
+  y el `<img>` de `EmailLayout` lleva las dos medidas por separado.
+
+### Tokens
+
+- **Nuevo `email.logo-height`** (`--email-logo-height`, `{logo.height-sm}` = 32px): el alto al
+  que se ve el logotipo dentro del PNG. **Retirado `email.logo-mark-size`**
+  (`--email-logo-mark-size`), que medía el lado del isotipo cuadrado y no tenía más consumidores
+  que el correo.
+- `email.logo-padding` se mantiene sin cambios (8px de blanco horneado por los cuatro costados).
+- **El ancho no es un token**: sale de la proporción del trazado de `assets/logo.svg` (`viewBox`
+  925,5 × 265,5), con `emailLogoWidthFor` (`src/assets/brand-assets.ts`) como único sitio donde
+  se aplica, para que la imagen generada y los atributos del `<img>` no puedan discrepar. El
+  script comprueba que el SVG siga declarando ese `viewBox` y falla si se separan.
+
+### Migración
+
+Nada que tocar en las apps: `EmailLayout` sigue con la misma API. Al bumpear el pin hay que
+**volver a publicar `dist/assets/email/*` en el host de assets del correo**
+(`https://slxd.app/brand/email/`), que ahora incluye `logo-v2.png`.
+
 ## [38.3.0] — 2026-09-12
 
 > **Minor.** `Link`: nuevo tono `accent-1`.

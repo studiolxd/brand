@@ -13,30 +13,42 @@
  *
  * Por qué un PNG y no el SVG que usa la web:
  *
- * - Gmail y Outlook no renderizan SVG. Un correo con el isotipo vectorial se
+ * - Gmail y Outlook no renderizan SVG. Un correo con el logotipo vectorial se
  *   ve sin marca en los dos clientes que más pesan.
  * - El fondo blanco va HORNEADO en el píxel, con su aire alrededor. Outlook
  *   Windows y Gmail Android invierten colores por su cuenta en modo oscuro y
  *   un `background-color: #fff` no sobrevive a esa inversión; una imagen sí.
  * - Se exporta a 2x y se sirve con `width`/`height` explícitos, para que se vea
  *   nítido en pantallas densas sin que el cliente tenga que adivinar el hueco.
- * - El nombre lleva versión (`logo-v1.png`). Gmail proxea y cachea las imágenes
+ * - El nombre lleva versión (`logo-v2.png`). Gmail proxea y cachea las imágenes
  *   de los correos y no hay forma de forzar un refresco: cambiar el logotipo
- *   obliga a publicar una URL nueva. Si algún día cambia, se sube `logo-v2.png`
+ *   obliga a publicar una URL nueva. Si algún día cambia, se sube `logo-v3.png`
  *   y se cambia el nombre en `EMAIL_LOGO_FILENAME` (`src/assets/brand-assets.ts`),
  *   fuente única de la que lee este script y `emailTheme.ts`.
  *
- * Las medidas salen de los tokens (`--email-logo-mark-size`, `--email-logo-padding`,
+ * Qué se dibuja: el LOGOTIPO COMPLETO (`src/assets/logo.svg`, "Studio LXD"), no
+ * el isotipo. La cabecera de un correo no tiene barra de navegación ni dominio
+ * a la vista que digan de quién es el mensaje: la marca tiene que leerse, y un
+ * isotipo suelto no se lee.
+ *
+ * Las medidas salen de los tokens (`--email-logo-height`, `--email-logo-padding`,
  * `--logo-color`), así que la imagen y los atributos `width`/`height` que emite
- * `EmailBrandHeader` no pueden separarse: los dos leen el mismo sitio.
+ * `EmailLayout` no pueden separarse: los dos leen el mismo sitio. El ANCHO no es
+ * un token: sale de la proporción del propio SVG, con `emailLogoWidthFor`
+ * (`src/assets/brand-assets.ts`) como único sitio donde se aplica.
  */
 import { execFileSync } from 'node:child_process';
 import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 
-import { EMAIL_FONT_FILENAME, EMAIL_LOGO_FILENAME } from '../src/assets/brand-assets.ts';
+import {
+  EMAIL_FONT_FILENAME,
+  EMAIL_LOGO_FILENAME,
+  EMAIL_LOGO_VIEW_BOX,
+  emailLogoWidthFor,
+} from '../src/assets/brand-assets.ts';
 import tokens from '../src/tokens/tokens.json' with { type: 'json' };
 
-const SOURCE = 'src/assets/logomark.svg';
+const SOURCE = 'src/assets/logo.svg';
 /* La fuente va versionada por lo mismo que el logotipo: el cliente la cachea. */
 const FONT_SOURCE = 'src/assets/fonts/google-sans-flex/google-sans-flex-normal-latin.woff2';
 /** Factor de exportación: el PNG se genera al doble del tamaño al que se ve. */
@@ -56,9 +68,11 @@ const px = (name) => {
  * que `buildIcons` en `scripts/build-icons.mjs`.
  */
 export function buildEmailAssets({ distOutDir = 'dist/assets/email', publicOutDir = 'public/email' } = {}) {
-  const markSize = px('--email-logo-mark-size');
+  const logoHeight = px('--email-logo-height');
   const padding = px('--email-logo-padding');
-  const boxSize = markSize + padding * 2;
+  const logoWidth = emailLogoWidthFor(logoHeight);
+  const boxWidth = logoWidth + padding * 2;
+  const boxHeight = logoHeight + padding * 2;
   const ink = tokens['--logo-color'];
   /* `--email-bg`: el fondo de la caja (banda de marca incluida), no
      `--email-canvas-bg` (el lienzo fuera de la caja) — el logotipo vive dentro
@@ -66,26 +80,34 @@ export function buildEmailAssets({ distOutDir = 'dist/assets/email', publicOutDi
      existe desde que se retiró el modo oscuro del correo (paleta única). */
   const paper = tokens['--email-bg'];
 
-  /* El isotipo de la web, tal cual: solo se le quita el envoltorio para
-     recolocarlo. Su viewBox no arranca en el origen, así que hay que trasladarlo
-     antes de escalarlo. */
+  /* El logotipo de la web, tal cual: solo se le quita el envoltorio para
+     recolocarlo. Su viewBox podría no arrancar en el origen, así que se traslada
+     antes de escalarlo. La proporción se comprueba contra `EMAIL_LOGO_VIEW_BOX`:
+     el `<img>` del correo la necesita en tiempo de ejecución, donde no se puede
+     leer este fichero, y las dos no pueden separarse. */
   const source = readFileSync(SOURCE, 'utf-8');
   const viewBox = source.match(/viewBox="([^"]+)"/)?.[1];
   if (!viewBox) throw new Error(`${SOURCE} no declara viewBox`);
   const [minX, minY, vbWidth, vbHeight] = viewBox.split(/[\s,]+/).map(Number);
-  if (vbWidth !== vbHeight) throw new Error(`El isotipo dejó de ser cuadrado: ${viewBox}`);
+  if (vbWidth !== EMAIL_LOGO_VIEW_BOX.width || vbHeight !== EMAIL_LOGO_VIEW_BOX.height) {
+    throw new Error(
+      `El viewBox del logotipo cambió (${viewBox}); actualiza EMAIL_LOGO_VIEW_BOX en src/assets/brand-assets.ts`,
+    );
+  }
 
   const paths = [...source.matchAll(/<path\b[^>]*\/>/g)].map((m) => m[0]);
   if (paths.length === 0) throw new Error(`${SOURCE} no tiene paths`);
 
-  const side = boxSize * SCALE;
-  const markSide = markSize * SCALE;
+  const pngWidth = boxWidth * SCALE;
+  const pngHeight = boxHeight * SCALE;
   const offset = padding * SCALE;
-  const ratio = markSide / vbWidth;
+  /* Un solo factor para los dos ejes: el logotipo no se deforma. Manda el alto,
+     que es lo que dice el token; el ancho ya salió de la proporción. */
+  const ratio = (logoHeight * SCALE) / vbHeight;
 
   const composed = [
-    `<svg xmlns="http://www.w3.org/2000/svg" width="${side}" height="${side}" viewBox="0 0 ${side} ${side}">`,
-    `  <rect width="${side}" height="${side}" fill="${paper}"/>`,
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${pngWidth}" height="${pngHeight}" viewBox="0 0 ${pngWidth} ${pngHeight}">`,
+    `  <rect width="${pngWidth}" height="${pngHeight}" fill="${paper}"/>`,
     `  <g transform="translate(${offset} ${offset}) scale(${ratio}) translate(${-minX} ${-minY})" fill="${ink}">`,
     ...paths.map((p) => `    ${p.replace(/\s*fill="[^"]*"/, '')}`),
     '  </g>',
@@ -103,7 +125,7 @@ export function buildEmailAssets({ distOutDir = 'dist/assets/email', publicOutDi
   try {
     execFileSync('magick', [
       '-background', paper, '-density', '288', tmp,
-      '-resize', `${side}x${side}`,
+      '-resize', `${pngWidth}x${pngHeight}!`,
       // 8 bits y sin metadatos: el PNG viaja en cada correo enviado.
       '-depth', '8', '-strip', primaryOut,
     ]);
@@ -112,7 +134,8 @@ export function buildEmailAssets({ distOutDir = 'dist/assets/email', publicOutDi
   }
   for (const secondaryOut of logoOutputs.slice(1)) copyFileSync(primaryOut, secondaryOut);
 
-  for (const out of logoOutputs) console.log(`✔︎ ${out} — ${side}×${side} px (se ve a ${boxSize}×${boxSize})`);
+  for (const out of logoOutputs)
+    console.log(`✔︎ ${out} — ${pngWidth}×${pngHeight} px (se ve a ${boxWidth}×${boxHeight})`);
 
   /* Solo la cara latina: es la que cubre el castellano y el resto de idiomas de
      la suite, y un correo no es sitio para bajarse dos ficheros de fuente. */

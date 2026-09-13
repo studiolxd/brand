@@ -300,15 +300,15 @@
       "$type": "dimension",
       "$description": "Separación bajo el bloque del botón —botón y enlace de respaldo— para que el descargo que lo sigue no quede pegado. La lleva el propio bloque, no un envoltorio, para que viaje con él a todas las plantillas"
     },
-    "logo-mark-size": {
-      "$value": "{logomark.size-lg}",
+    "logo-height": {
+      "$value": "{logo.height-sm}",
       "$type": "dimension",
-      "$description": "Tamaño al que se ve el logotipo dentro del PNG"
+      "$description": "Alto al que se ve el logotipo completo dentro del PNG. El ancho no es un token: sale de la proporción del trazado de `assets/logo.svg` (925,5 × 265,5), que calcula `scripts/build-email-assets.mjs` a partir del propio SVG. Es la talla sm de la escala del logotipo (32px): a la altura del isotipo destacado el logotipo completo se comería el ancho de la banda"
     },
     "logo-padding": {
       "$value": "{spacing.2}",
       "$type": "dimension",
-      "$description": "Aire blanco horneado alrededor del logotipo dentro del PNG. El blanco va en la imagen, no en un `background-color`: Outlook Windows y Gmail Android invierten colores por su cuenta y un fondo CSS no sobrevive, una imagen sí"
+      "$description": "Aire blanco horneado alrededor del logotipo dentro del PNG, por los cuatro costados. El blanco va en la imagen, no en un `background-color`: Outlook Windows y Gmail Android invierten colores por su cuenta y un fondo CSS no sobrevive, una imagen sí"
     },
     "canvas-bg": {
       "$value": "{color.background.light}",

@@ -26,6 +26,6 @@ describe('EmailPreview', () => {
 
     expect(doc).toContain(`<base href="${document.baseURI}">`);
     // Y va dentro del <head>, antes de cualquier URL relativa.
-    expect(doc.indexOf('<base')).toBeLessThan(doc.indexOf('/email/logo-v1.png'));
+    expect(doc.indexOf('<base')).toBeLessThan(doc.indexOf('/email/logo-v2.png'));
   });
 });

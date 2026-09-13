@@ -67,7 +67,7 @@ export const emailTokens = {
   '--email-button-width': '100%',
   '--email-button-fallback-margin-block-start': '12px',
   '--email-button-margin-block-end': '24px',
-  '--email-logo-mark-size': '48px',
+  '--email-logo-height': '32px',
   '--email-logo-padding': '8px',
   '--email-canvas-bg': '#ffffff',
   '--email-bg': '#ffffff',
