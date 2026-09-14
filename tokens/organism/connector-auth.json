@@ -1,0 +1,13 @@
+{
+  "connector-auth": {
+    "untrusted": {
+      "max-lines":        { "$value": "3",                                 "$type": "number",    "$description": "Cuántas líneas se ve de un valor de fuera —nombre de herramienta, cuenta, host— antes de recortarlo. Tres: bastantes para leer un nombre normal entero, pocas para que un nombre de 300 caracteres no empuje la decisión fuera de la pantalla" },
+      "toggle-gap":       { "$value": "{spacing.1}",                       "$type": "dimension", "$description": "Aire entre el valor recortado y el desplegador que lo enseña entero" },
+      "toggle-font-size": { "$value": "{text.paragraph.small.font-size}",  "$type": "dimension", "$description": "Tamaño del desplegador: letra menor, porque no es el dato sino la manera de verlo entero" },
+      "toggle-cursor":    { "$value": "{link.cursor}",                     "$type": "string",    "$description": "Cursor del desplegador — el del enlace, que es la cara que lleva" },
+      "focus-ring-width": { "$value": "{link.focus-ring-width}",           "$type": "dimension", "$description": "Grosor del anillo de foco del desplegador — el del enlace" },
+      "focus-ring-offset":{ "$value": "{link.focus-ring-offset}",          "$type": "dimension", "$description": "Separación del anillo de foco — la del enlace" },
+      "focus-ring-color": { "$value": "{link.focus-ring-color}",           "$type": "color",     "$description": "Anillo de foco del desplegador — el del enlace, con su mismo par oscuro" }
+    }
+  }
+}

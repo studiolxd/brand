@@ -84,4 +84,5 @@ html.dark {
   --stat-tile-border-color: var(--card-outline-border-color);
   --chart-tooltip-bg: var(--tooltip-bg);
   --chart-tooltip-color: var(--tooltip-color);
+  --connector-auth-untrusted-focus-ring-color: var(--link-focus-ring-color);
 }

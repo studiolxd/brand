@@ -2,6 +2,7 @@
 
 import type { ReactNode } from 'react';
 import { ConnectorAuthShell, type ConnectorAuthChromeProps } from './ConnectorAuthShell';
+import { UntrustedText } from './UntrustedText';
 import { Alert } from '../../molecules/Alert/Alert';
 import { Button } from '../../atoms/Button/Button';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
@@ -42,6 +43,12 @@ export interface ConnectorExternalSignInPageProps extends ConnectorAuthChromePro
   intro?: (parts: { platform: ReactNode }) => ReactNode;
   /** La frase que confirma a dónde se entra, con `organization`. Default castellano. */
   signingInTo?: (parts: { organization: ReactNode }) => ReactNode;
+  /**
+   * Las comillas que enmarcan la organización en la frase de confirmación:
+   * viene de la petición, así que es dato de fuera y se pinta como tal. Default
+   * castellano: `['«', '»']`.
+   */
+  valueQuotes?: [string, string];
   /** Etiqueta del campo de organización. Default castellano: «Tu organización». */
   organizationLabel?: string;
   /** Etiqueta de la acción. Recibe el nombre de la instalación. Default castellano. */
@@ -94,6 +101,7 @@ export function ConnectorExternalSignInPage({
     </>
   ),
   signingInTo = ({ organization: org }) => <>Iniciarás sesión en {org}.</>,
+  valueQuotes,
   organizationLabel = 'Tu organización',
   submitLabel = ({ platform }) => <>Iniciar sesión con {platform}</>,
   extra,
@@ -147,7 +155,15 @@ export function ConnectorExternalSignInPage({
               required
             />
           ) : (
-            <Paragraph>{signingInTo({ organization: <strong>{organization}</strong> })}</Paragraph>
+            <Paragraph>
+              {signingInTo({
+                organization: (
+                  <strong>
+                    <UntrustedText value={organization} quotes={valueQuotes} />
+                  </strong>
+                ),
+              })}
+            </Paragraph>
           )}
         </Form>
 

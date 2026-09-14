@@ -147,4 +147,5 @@
   --annotation-thread-body-font-size: var(--text-font-size);
   --annotation-thread-body-line-height: var(--text-line-height);
   --annotation-thread-replies-label-font-size: var(--text-paragraph-small-font-size);
+  --connector-auth-untrusted-toggle-font-size: var(--text-paragraph-small-font-size);
 }

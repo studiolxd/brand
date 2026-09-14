@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
+import { expect, waitFor, within } from 'storybook/test';
 import { ConnectorConsentPage } from './ConnectorConsentPage';
 import { ConnectorSignInPage } from './ConnectorSignInPage';
 import { ConnectorExternalSignInPage } from './ConnectorExternalSignInPage';
@@ -93,8 +93,12 @@ export const ConsentimientoDeEscritura: Story = {
 /**
  * El nombre de la herramienta lo eligió quien la registró, y el registro es
  * abierto: aquí, 180 caracteres sin un solo espacio. Ni se sale de la columna
- * ni empuja el ancho de la página — y el host de retorno, que es el dato que
- * quien ataca NO elige, sigue en su sitio.
+ * ni empuja el ancho de la página, y además **se recorta a tres líneas** para
+ * que la decisión no quede fuera de la vista: el nombre entero sigue en el
+ * documento —un lector de pantalla lo lee completo— y se despliega con «Ver el
+ * valor completo», que es un `<details>` nativo y no necesita JavaScript. En la
+ * frase de la cabecera se recorta igual, sin desplegador, porque el sitio para
+ * verlo entero es la ficha.
  */
 export const NombreLargo: Story = {
   name: 'Nombre de herramienta larguísimo',
@@ -107,10 +111,16 @@ export const NombreLargo: Story = {
 };
 
 /**
- * Y con caracteres raros: marcado, comillas, saltos de dirección del texto y
- * un emoji. Todo llega como **texto plano** —React lo escapa, y la plantilla no
- * tiene ninguna vía de HTML crudo—, así que no hay forma de que un nombre
- * pinte negrita, un enlace o un título falso.
+ * Y con caracteres raros: marcado, comillas, saltos de dirección del texto y un
+ * emoji. Todo llega como **texto plano** —React lo escapa, y la plantilla no
+ * tiene ninguna vía de HTML crudo—, así que no hay forma de que un nombre pinte
+ * negrita, un enlace o un título falso. Que el `<strong>` se lea con sus signos
+ * **es la defensa funcionando**; las comillas están para que se lea como lo que
+ * es, la cadena que alguien registró, y no como un fallo de la interfaz.
+ *
+ * El control de dirección (`U+202E`) sale escrito: marcado ya no puede dar la
+ * vuelta a nada, y como no se borra, dos nombres que solo se diferencien en él
+ * siguen viéndose distintos.
  */
 export const NombreHostil: Story = {
   name: 'Nombre de herramienta con caracteres raros',
@@ -118,6 +128,24 @@ export const NombreHostil: Story = {
     ...Consentimiento.args,
     clientName: '<strong>Claude</strong> · "oficial" ‮/gro.dlxoiduts// :sptth‬ 🔐 & Co.',
     redirectHost: 'xn--clude-6qa.ai',
+  },
+};
+
+/**
+ * El caso más grave, y por eso tiene historia propia: el **host de retorno**
+ * con un control de dirección delante. Sin defensa, `gro.odigirroc-eldoom` se
+ * pinta como si fuera `moodle-corregido.org` y el destino del acceso parece uno
+ * cuando es otro — suplantación, no fealdad. Aquí el control se ve escrito
+ * (`[U+202E]`), el valor va aislado en un `<bdi>` —así tampoco puede reordenar
+ * el texto de la frase que lo rodea— y lo que queda a la vista es exactamente
+ * lo que se va a usar.
+ */
+export const HostDadoLaVuelta: Story = {
+  name: 'Host de retorno con la dirección invertida',
+  args: {
+    ...Consentimiento.args,
+    clientName: 'Claude',
+    redirectHost: '\u202Egro.odigirroc-eldoom',
   },
 };
 
@@ -266,5 +294,53 @@ export const TestNombreEsTexto: Story = {
     expect(valor).not.toBeNull();
     expect(valor!.querySelector('strong')).toBeNull();
     expect(valor!.textContent).toContain('<strong>Claude</strong>');
+    // Entrecomillado: se lee como la cadena que alguien registró.
+    expect(valor!.textContent!.startsWith('«')).toBe(true);
+  },
+};
+
+/**
+ * Ningún control de dirección sobrevive en la página, ni en la ficha ni en las
+ * frases: no queda nada que el motor pueda aplicar para leer un host al revés.
+ */
+export const TestSinControlesDeDireccion: Story = {
+  name: 'Test — no queda ningún control de dirección',
+  tags: ['!dev'],
+  args: { ...HostDadoLaVuelta.args },
+  play: async ({ canvasElement }) => {
+    expect(canvasElement.textContent).not.toMatch(/[\u202A-\u202E\u2066-\u2069]/);
+    expect(canvasElement.textContent).toContain('[U+202E]');
+    // Y el valor sigue aislado, así que tampoco reordena lo que tiene alrededor.
+    expect(canvasElement.querySelector('.connector-untrusted bdi')).not.toBeNull();
+  },
+};
+
+/**
+ * El recorte medido en el navegador: un nombre larguísimo ocupa como mucho las
+ * líneas del token, y al desplegar el `<details>` crece. El texto completo
+ * estaba ahí desde el principio.
+ */
+export const TestRecorteDelNombre: Story = {
+  name: 'Test — el recorte del nombre y su desplegador',
+  tags: ['!dev'],
+  args: { ...NombreLargo.args },
+  play: async ({ canvasElement }) => {
+    const ficha = canvasElement.querySelector('.connector-request-summary__untrusted')!;
+    const recortado = ficha.querySelector('.connector-untrusted__value--clamped') as HTMLElement;
+    expect(recortado).not.toBeNull();
+
+    // El nombre entero está en el documento aunque no se vea entero.
+    expect(ficha.querySelector('bdi')!.textContent).toBe(NombreLargo.args!.clientName);
+
+    const estilo = getComputedStyle(recortado);
+    const lineas = Number(estilo.getPropertyValue('--connector-auth-untrusted-max-lines'));
+    const alto = parseFloat(estilo.lineHeight) * lineas;
+    const cerrado = recortado.getBoundingClientRect().height;
+    expect(cerrado).toBeLessThanOrEqual(alto + 1);
+
+    // Desplegado ocupa más: el mismo dato, entero, sin una línea de JavaScript.
+    const detalle = ficha.querySelector('details') as HTMLDetailsElement;
+    detalle.open = true;
+    await waitFor(() => expect(recortado.getBoundingClientRect().height).toBeGreaterThan(cerrado));
   },
 };

@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { DescriptionList, DescriptionTerm, DescriptionDetails } from '../../atoms/DescriptionList/DescriptionList';
+import { UntrustedText } from './UntrustedText';
 import './ConnectorRequestSummary.css';
 
 /** Qué se le concede al conector: leer, o leer y modificar. Son los dos únicos alcances que emite el servidor de autorización (`mcp:read` y `mcp:write`). */
@@ -11,10 +12,11 @@ export interface ConnectorRequestSummaryProps {
    *
    * **Es dato de quien registró el cliente, no de la suite.** El registro es
    * abierto: cualquiera puede darse de alta con el nombre que quiera, así que
-   * un «Claude» falso es indistinguible del real. Aquí se pinta como **texto
-   * plano** —React lo escapa, y la plantilla no tiene ni una sola vía de HTML
-   * crudo— y se deja partir por cualquier punto para que un nombre de 300
-   * caracteres sin espacios no se salga de la columna. Nunca lo pases por
+   * un «Claude» falso es indistinguible del real. Pásalo como **cadena**: así
+   * lo pinta `UntrustedText` —texto plano entrecomillado, con los caracteres
+   * invisibles a la vista, aislado de dirección y recortado si es larguísimo—.
+   * Un `ReactNode` se pinta tal cual, sin ese tratamiento, porque ya no es
+   * texto de fuera sino algo que compusiste tú. Nunca lo pases por
    * `dangerouslySetInnerHTML` ni lo uses para componer una URL.
    */
   clientName: ReactNode;
@@ -47,6 +49,12 @@ export interface ConnectorRequestSummaryProps {
   scopeReadLabel?: ReactNode;
   /** Valor del permiso de lectura y escritura. Default castellano, el del servidor de autorización. */
   scopeWriteLabel?: ReactNode;
+  /** Etiqueta del desplegador de un valor recortado. Default castellano: «Ver el valor completo». */
+  expandLabel?: string;
+  /** Etiqueta del desplegador abierto. Default castellano: «Ver menos». */
+  collapseLabel?: string;
+  /** Las comillas que enmarcan los valores de fuera. Default castellano: `['«', '»']`. */
+  valueQuotes?: [string, string];
   /** Se añade DESPUÉS de las clases propias. */
   className?: string;
 }
@@ -62,8 +70,11 @@ export interface ConnectorRequestSummaryProps {
  * su rótulo y se pueda comparar con lo que uno esperaba. Los dos textos dicen
  * lo mismo y conviven: la frase explica, la ficha verifica.
  *
- * Los valores que vienen de fuera —el nombre de la herramienta y el host— se
- * pintan como texto plano y se parten por donde haga falta.
+ * Los tres valores que vienen de fuera —el nombre de la herramienta, la cuenta
+ * y el host— pasan por `UntrustedText`: texto plano entrecomillado, con los
+ * caracteres invisibles a la vista, aislados de dirección y recortados con
+ * desplegador si son larguísimos. Ver ahí el porqué de cada una de las tres
+ * cosas.
  */
 export function ConnectorRequestSummary({
   clientName,
@@ -78,12 +89,21 @@ export function ConnectorRequestSummary({
   redirectLabel = 'Destino',
   scopeReadLabel = 'leer los datos de este producto',
   scopeWriteLabel = 'leer y modificar los datos de este producto',
+  expandLabel,
+  collapseLabel,
+  valueQuotes,
   className,
 }: ConnectorRequestSummaryProps) {
+  // Los tres valores de fuera se pintan igual, y aquí —la ficha, que es donde
+  // el dato se compara con lo que uno esperaba— el recorte trae desplegador.
+  const ajeno = (value: ReactNode) => (
+    <UntrustedText value={value} expandable expandLabel={expandLabel} collapseLabel={collapseLabel} quotes={valueQuotes} />
+  );
+
   return (
     <DescriptionList className={['connector-request-summary', className].filter(Boolean).join(' ')}>
       <DescriptionTerm>{clientLabel}</DescriptionTerm>
-      <DescriptionDetails className="connector-request-summary__untrusted">{clientName}</DescriptionDetails>
+      <DescriptionDetails className="connector-request-summary__untrusted">{ajeno(clientName)}</DescriptionDetails>
 
       {productName !== undefined && (
         <>
@@ -95,7 +115,7 @@ export function ConnectorRequestSummary({
       {accountEmail !== undefined && (
         <>
           <DescriptionTerm>{accountLabel}</DescriptionTerm>
-          <DescriptionDetails className="connector-request-summary__untrusted">{accountEmail}</DescriptionDetails>
+          <DescriptionDetails className="connector-request-summary__untrusted">{ajeno(accountEmail)}</DescriptionDetails>
         </>
       )}
 
@@ -109,7 +129,7 @@ export function ConnectorRequestSummary({
       {redirectHost !== undefined && (
         <>
           <DescriptionTerm>{redirectLabel}</DescriptionTerm>
-          <DescriptionDetails className="connector-request-summary__untrusted">{redirectHost}</DescriptionDetails>
+          <DescriptionDetails className="connector-request-summary__untrusted">{ajeno(redirectHost)}</DescriptionDetails>
         </>
       )}
     </DescriptionList>

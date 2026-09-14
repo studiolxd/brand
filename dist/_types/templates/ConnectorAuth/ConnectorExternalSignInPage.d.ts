@@ -37,6 +37,12 @@ export interface ConnectorExternalSignInPageProps extends ConnectorAuthChromePro
     signingInTo?: (parts: {
         organization: ReactNode;
     }) => ReactNode;
+    /**
+     * Las comillas que enmarcan la organización en la frase de confirmación:
+     * viene de la petición, así que es dato de fuera y se pinta como tal. Default
+     * castellano: `['«', '»']`.
+     */
+    valueQuotes?: [string, string];
     /** Etiqueta del campo de organización. Default castellano: «Tu organización». */
     organizationLabel?: string;
     /** Etiqueta de la acción. Recibe el nombre de la instalación. Default castellano. */
@@ -74,4 +80,4 @@ export interface ConnectorExternalSignInPageProps extends ConnectorAuthChromePro
  * `Card` dentro de una columna estrecha, sin cabecera pública ni pie: al
  * cablearla, ese molde propio se retira y lo pone la plantilla.
  */
-export declare function ConnectorExternalSignInPage({ platformName, organization, organizationDefaultValue, organizationName, action, onSubmit, hiddenFields, error, title, intro, signingInTo, organizationLabel, submitLabel, extra, links, header, footer, preferences, preferencesLabel, id, shell, }: ConnectorExternalSignInPageProps): import("react/jsx-runtime").JSX.Element;
+export declare function ConnectorExternalSignInPage({ platformName, organization, organizationDefaultValue, organizationName, action, onSubmit, hiddenFields, error, title, intro, signingInTo, valueQuotes, organizationLabel, submitLabel, extra, links, header, footer, preferences, preferencesLabel, id, shell, }: ConnectorExternalSignInPageProps): import("react/jsx-runtime").JSX.Element;

@@ -40,6 +40,12 @@ export interface ConnectorSignInPageProps extends ConnectorAuthChromeProps {
     scopeReadLabel?: string;
     /** Ídem, lectura y escritura. Default castellano. */
     scopeWriteLabel?: string;
+    /** Etiqueta del desplegador de un valor de fuera recortado. Default castellano: «Ver el valor completo». */
+    expandLabel?: string;
+    /** Etiqueta del desplegador abierto. Default castellano: «Ver menos». */
+    collapseLabel?: string;
+    /** Las comillas que enmarcan los datos de fuera. Default castellano: `['«', '»']`. */
+    valueQuotes?: [string, string];
     /** Rótulos de la ficha. Ver `ConnectorRequestSummary`. */
     summaryLabels?: Pick<React.ComponentProps<typeof ConnectorRequestSummary>, 'clientLabel' | 'productLabel' | 'scopeLabel' | 'redirectLabel'>;
     /** Bajo la acción: «¿No tienes cuenta?», ayuda. Se pinta en `links` del `Form`. */
@@ -60,4 +66,4 @@ export interface ConnectorSignInPageProps extends ConnectorAuthChromeProps {
  * refresco de sesión del hub— y la que hace falta en cuanto la vuelta falla o
  * el usuario se planta en medio del camino.
  */
-export declare function ConnectorSignInPage({ clientName, productName, scope, redirectHost, signInHref, onSignIn, action, hiddenFields, title, intro, fallbackProductName, signInLabel, scopeReadLabel, scopeWriteLabel, summaryLabels, links, header, footer, preferences, preferencesLabel, id, shell, }: ConnectorSignInPageProps): import("react/jsx-runtime").JSX.Element;
+export declare function ConnectorSignInPage({ clientName, productName, scope, redirectHost, signInHref, onSignIn, action, hiddenFields, title, intro, fallbackProductName, signInLabel, scopeReadLabel, scopeWriteLabel, expandLabel, collapseLabel, valueQuotes, summaryLabels, links, header, footer, preferences, preferencesLabel, id, shell, }: ConnectorSignInPageProps): import("react/jsx-runtime").JSX.Element;

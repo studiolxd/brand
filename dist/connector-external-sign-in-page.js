@@ -6,62 +6,66 @@ import { Alert as r } from "./alert.js";
 import { Form as i } from "./form.js";
 import { InputField as a } from "./input-field.js";
 import { ConnectorAuthShell as o } from "./connector-auth-shell.js";
-import { Fragment as s, jsx as c, jsxs as l } from "react/jsx-runtime";
+import { t as s } from "./_shared/untrustedtext.js";
+import { Fragment as c, jsx as l, jsxs as u } from "react/jsx-runtime";
 //#region src/stories/templates/ConnectorAuth/ConnectorExternalSignInPage.tsx
-function u({ platformName: u = "tu Moodle", organization: d, organizationDefaultValue: f, organizationName: p = "org", action: m, onSubmit: h, hiddenFields: g, error: _, title: v = "Autorizar la conexión", intro: y = ({ platform: e }) => /* @__PURE__ */ l(s, { children: [
+function d({ platformName: d = "tu Moodle", organization: f, organizationDefaultValue: p, organizationName: m = "org", action: h, onSubmit: g, hiddenFields: _, error: v, title: y = "Autorizar la conexión", intro: b = ({ platform: e }) => /* @__PURE__ */ u(c, { children: [
 	"Tu asistente de IA solicita acceso a ",
 	e,
 	". Inicia sesión con tu cuenta para autorizarlo."
-] }), signingInTo: b = ({ organization: e }) => /* @__PURE__ */ l(s, { children: [
+] }), signingInTo: x = ({ organization: e }) => /* @__PURE__ */ u(c, { children: [
 	"Iniciarás sesión en ",
 	e,
 	"."
-] }), organizationLabel: x = "Tu organización", submitLabel: S = ({ platform: e }) => /* @__PURE__ */ l(s, { children: ["Iniciar sesión con ", e] }), extra: C, links: w, header: T, footer: E, preferences: D, preferencesLabel: O, id: k, shell: A }) {
-	return /* @__PURE__ */ c(o, {
-		title: v,
-		description: y({ platform: u }),
-		header: T,
-		footer: E,
-		preferences: D,
-		preferencesLabel: O,
-		id: k,
-		shell: A,
-		children: /* @__PURE__ */ l(t, {
+] }), valueQuotes: S, organizationLabel: C = "Tu organización", submitLabel: w = ({ platform: e }) => /* @__PURE__ */ u(c, { children: ["Iniciar sesión con ", e] }), extra: T, links: E, header: D, footer: O, preferences: k, preferencesLabel: A, id: j, shell: M }) {
+	return /* @__PURE__ */ l(o, {
+		title: y,
+		description: b({ platform: d }),
+		header: D,
+		footer: O,
+		preferences: k,
+		preferencesLabel: A,
+		id: j,
+		shell: M,
+		children: /* @__PURE__ */ u(t, {
 			align: "stretch",
 			children: [
-				_ !== void 0 && /* @__PURE__ */ c(r, {
+				v !== void 0 && /* @__PURE__ */ l(r, {
 					role: "alert",
 					variant: "error",
-					description: _
+					description: v
 				}),
-				/* @__PURE__ */ l(i, {
+				/* @__PURE__ */ u(i, {
 					size: "lg",
 					blockActions: !0,
-					method: m === void 0 ? void 0 : "post",
-					action: m,
-					onSubmit: h,
-					links: w,
-					actions: /* @__PURE__ */ c(e, {
+					method: h === void 0 ? void 0 : "post",
+					action: h,
+					onSubmit: g,
+					links: E,
+					actions: /* @__PURE__ */ l(e, {
 						type: "submit",
-						children: S({ platform: u })
+						children: w({ platform: d })
 					}),
-					children: [g && Object.entries(g).map(([e, t]) => /* @__PURE__ */ c("input", {
+					children: [_ && Object.entries(_).map(([e, t]) => /* @__PURE__ */ l("input", {
 						type: "hidden",
 						name: e,
 						value: t
-					}, e)), d === void 0 ? /* @__PURE__ */ c(a, {
-						id: p,
-						name: p,
-						label: x,
-						defaultValue: f,
+					}, e)), f === void 0 ? /* @__PURE__ */ l(a, {
+						id: m,
+						name: m,
+						label: C,
+						defaultValue: p,
 						autoComplete: "off",
 						required: !0
-					}) : /* @__PURE__ */ c(n, { children: b({ organization: /* @__PURE__ */ c("strong", { children: d }) }) })]
+					}) : /* @__PURE__ */ l(n, { children: x({ organization: /* @__PURE__ */ l("strong", { children: /* @__PURE__ */ l(s, {
+						value: f,
+						quotes: S
+					}) }) }) })]
 				}),
-				C
+				T
 			]
 		})
 	});
 }
 //#endregion
-export { u as ConnectorExternalSignInPage };
+export { d as ConnectorExternalSignInPage };

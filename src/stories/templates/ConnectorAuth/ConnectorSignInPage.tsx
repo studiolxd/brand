@@ -3,6 +3,7 @@
 import type { ReactNode } from 'react';
 import { ConnectorAuthShell, type ConnectorAuthChromeProps } from './ConnectorAuthShell';
 import { ConnectorRequestSummary, type ConnectorScope } from './ConnectorRequestSummary';
+import { UntrustedText } from './UntrustedText';
 import { Button } from '../../atoms/Button/Button';
 import { Form } from '../../molecules/Form/Form';
 
@@ -42,6 +43,12 @@ export interface ConnectorSignInPageProps extends ConnectorAuthChromeProps {
   scopeReadLabel?: string;
   /** Ídem, lectura y escritura. Default castellano. */
   scopeWriteLabel?: string;
+  /** Etiqueta del desplegador de un valor de fuera recortado. Default castellano: «Ver el valor completo». */
+  expandLabel?: string;
+  /** Etiqueta del desplegador abierto. Default castellano: «Ver menos». */
+  collapseLabel?: string;
+  /** Las comillas que enmarcan los datos de fuera. Default castellano: `['«', '»']`. */
+  valueQuotes?: [string, string];
   /** Rótulos de la ficha. Ver `ConnectorRequestSummary`. */
   summaryLabels?: Pick<
     React.ComponentProps<typeof ConnectorRequestSummary>,
@@ -85,6 +92,9 @@ export function ConnectorSignInPage({
   signInLabel = 'Iniciar sesión',
   scopeReadLabel,
   scopeWriteLabel,
+  expandLabel,
+  collapseLabel,
+  valueQuotes,
   summaryLabels,
   links,
   header,
@@ -108,7 +118,11 @@ export function ConnectorSignInPage({
     <ConnectorAuthShell
       title={title}
       description={intro({
-        client: <strong>{clientName}</strong>,
+        client: (
+          <strong>
+            <UntrustedText value={clientName} quotes={valueQuotes} />
+          </strong>
+        ),
         product: productName ?? fallbackProductName,
       })}
       header={header}
@@ -138,6 +152,9 @@ export function ConnectorSignInPage({
           redirectHost={redirectHost}
           scopeReadLabel={scopeReadLabel}
           scopeWriteLabel={scopeWriteLabel}
+          expandLabel={expandLabel}
+          collapseLabel={collapseLabel}
+          valueQuotes={valueQuotes}
           {...summaryLabels}
         />
       </Form>

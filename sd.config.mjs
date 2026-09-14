@@ -169,6 +169,7 @@ const filters = {
   'avatar-upload':      (t) => t.path[0] === 'avatar-upload',
   'uptime-bars':        (t) => t.path[0] === 'uptime-bars',
   'recovery-codes':     (t) => t.path[0] === 'recovery-codes',
+  'connector-auth':     (t) => t.path[0] === 'connector-auth',
 };
 
 function cssFile(destination, filterKey) {
@@ -350,6 +351,7 @@ const sd = new StyleDictionary({
         cssFile('components/text-inline.css',       'text-inline'),
         cssFile('molecules/uptime-bars.css',        'uptime-bars'),
         cssFile('molecules/recovery-codes.css',     'recovery-codes'),
+        cssFile('molecules/connector-auth.css',     'connector-auth'),
       ],
     },
     scss: {
@@ -516,6 +518,7 @@ const sd = new StyleDictionary({
         scssFile('components/_text-inline.scss',     'text-inline'),
         scssFile('molecules/_uptime-bars.scss',      'uptime-bars'),
         scssFile('molecules/_recovery-codes.scss',   'recovery-codes'),
+        scssFile('molecules/_connector-auth.scss',   'connector-auth'),
       ],
     },
     /*

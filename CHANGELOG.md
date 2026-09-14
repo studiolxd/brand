@@ -7,6 +7,55 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.9.0] — 2026-09-14
+
+> **Minor.** El texto que escribe un tercero deja de poder desmontar —ni
+> falsear— la pantalla donde se conceden permisos. El nombre con el que se
+> registró una herramienta, la cuenta y el host de retorno pasan ahora por una
+> sola pieza, `UntrustedText`, en las cuatro plantillas de `ConnectorAuth`:
+> **caracteres invisibles a la vista, dirección aislada, valor entrecomillado y
+> recorte con desplegador**. Ninguna prop existente cambia.
+
+### `ConnectorAuth` — todo dato de fuera se pinta igual
+
+El registro de clientes del conector es abierto: **el nombre lo escribe quien
+quiere pedir acceso** y llega tal cual. Lo mismo vale para la cuenta y para el
+host de retorno, que es donde más daño hace. Tres problemas, tres respuestas, y
+las tres en la plantilla:
+
+- **Los caracteres invisibles se marcan, no se borran.** `U+202E` y compañía
+  salen escritos (`[U+202E]`): un control de dirección convertía
+  `gro.odigirroc-eldoom` en `moodle-corregido.org`, que en esta pantalla es
+  suplantación y no fealdad. Marcados, el efecto desaparece igual que
+  borrándolos, pero dos nombres que solo se diferencien en un carácter invisible
+  **se siguen viendo distintos**. Entran controles y aislantes bidireccionales y
+  espacios de anchura cero; **no** entran los juntadores `U+200C`/`U+200D`, que
+  no reordenan nada y los necesitan el persa y los emojis compuestos.
+- **El valor va aislado** en un `<bdi>` (`unicode-bidi: isolate`): tampoco puede
+  reordenar el texto que lo rodea, y un nombre legítimamente en árabe o hebreo
+  se sigue pintando en su sentido.
+- **El valor va entrecomillado** (`valueQuotes`, por defecto `« »`). Que un
+  nombre registrado como `<strong>Claude</strong>` se lea con sus signos es la
+  defensa funcionando y no se toca; las comillas están para que se lea como lo
+  que es —una cadena que alguien eligió— y no como un fallo de la interfaz.
+- **Un valor larguísimo se recorta** a tres líneas
+  (`--connector-auth-untrusted-max-lines`) y deja de empujar la decisión fuera
+  de la vista. El recorte es solo visual —el texto completo sigue en el
+  documento, y un lector de pantalla lo lee entero— y en la ficha hay un
+  desplegador, «Ver el valor completo», que es un `<details>` nativo: **sin una
+  línea de JavaScript**, como el resto de la pantalla.
+
+Props nuevas, todas opcionales y con default castellano: `expandLabel`,
+`collapseLabel` y `valueQuotes` en `ConnectorConsentPage`, `ConnectorSignInPage`
+y `ConnectorRequestSummary`; `valueQuotes` en `ConnectorExternalSignInPage`,
+cuya organización viene también de la petición.
+
+### Tokens
+
+- **`connector-auth.untrusted.*`** (`tokens/organism/connector-auth.json`) —
+  cuántas líneas se ve de un valor de fuera y cómo se viste su desplegador. El
+  anillo de foco y el cursor beben de `link.*`, así que el par oscuro sale solo.
+
 ## [38.8.0] — 2026-09-14
 
 > **Minor.** Las pantallas del conector MCP —consentimiento, inicio de sesión,

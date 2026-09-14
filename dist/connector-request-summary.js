@@ -1,28 +1,36 @@
 import './connector-request-summary.css';
 import { DescriptionDetails as e, DescriptionList as t, DescriptionTerm as n } from "./description-list.js";
-import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
+import { t as r } from "./_shared/untrustedtext.js";
+import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/templates/ConnectorAuth/ConnectorRequestSummary.tsx
-function o({ clientName: o, productName: s, accountEmail: c, scope: l, redirectHost: u, clientLabel: d = "Herramienta", productLabel: f = "Producto", accountLabel: p = "Cuenta", scopeLabel: m = "Permiso", redirectLabel: h = "Destino", scopeReadLabel: g = "leer los datos de este producto", scopeWriteLabel: _ = "leer y modificar los datos de este producto", className: v }) {
-	return /* @__PURE__ */ a(t, {
-		className: ["connector-request-summary", v].filter(Boolean).join(" "),
+function s({ clientName: s, productName: c, accountEmail: l, scope: u, redirectHost: d, clientLabel: f = "Herramienta", productLabel: p = "Producto", accountLabel: m = "Cuenta", scopeLabel: h = "Permiso", redirectLabel: g = "Destino", scopeReadLabel: _ = "leer los datos de este producto", scopeWriteLabel: v = "leer y modificar los datos de este producto", expandLabel: y, collapseLabel: b, valueQuotes: x, className: S }) {
+	let C = (e) => /* @__PURE__ */ a(r, {
+		value: e,
+		expandable: !0,
+		expandLabel: y,
+		collapseLabel: b,
+		quotes: x
+	});
+	return /* @__PURE__ */ o(t, {
+		className: ["connector-request-summary", S].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ i(n, { children: d }),
-			/* @__PURE__ */ i(e, {
+			/* @__PURE__ */ a(n, { children: f }),
+			/* @__PURE__ */ a(e, {
 				className: "connector-request-summary__untrusted",
-				children: o
+				children: C(s)
 			}),
-			s !== void 0 && /* @__PURE__ */ a(r, { children: [/* @__PURE__ */ i(n, { children: f }), /* @__PURE__ */ i(e, { children: s })] }),
-			c !== void 0 && /* @__PURE__ */ a(r, { children: [/* @__PURE__ */ i(n, { children: p }), /* @__PURE__ */ i(e, {
+			c !== void 0 && /* @__PURE__ */ o(i, { children: [/* @__PURE__ */ a(n, { children: p }), /* @__PURE__ */ a(e, { children: c })] }),
+			l !== void 0 && /* @__PURE__ */ o(i, { children: [/* @__PURE__ */ a(n, { children: m }), /* @__PURE__ */ a(e, {
 				className: "connector-request-summary__untrusted",
-				children: c
+				children: C(l)
 			})] }),
-			l !== void 0 && /* @__PURE__ */ a(r, { children: [/* @__PURE__ */ i(n, { children: m }), /* @__PURE__ */ i(e, { children: l === "read" ? g : _ })] }),
-			u !== void 0 && /* @__PURE__ */ a(r, { children: [/* @__PURE__ */ i(n, { children: h }), /* @__PURE__ */ i(e, {
+			u !== void 0 && /* @__PURE__ */ o(i, { children: [/* @__PURE__ */ a(n, { children: h }), /* @__PURE__ */ a(e, { children: u === "read" ? _ : v })] }),
+			d !== void 0 && /* @__PURE__ */ o(i, { children: [/* @__PURE__ */ a(n, { children: g }), /* @__PURE__ */ a(e, {
 				className: "connector-request-summary__untrusted",
-				children: u
+				children: C(d)
 			})] })
 		]
 	});
 }
 //#endregion
-export { o as ConnectorRequestSummary };
+export { s as ConnectorRequestSummary };

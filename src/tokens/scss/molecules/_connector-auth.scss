@@ -1,0 +1,10 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-connector-auth-untrusted-max-lines: 3; // Cuántas líneas se ve de un valor de fuera —nombre de herramienta, cuenta, host— antes de recortarlo. Tres: bastantes para leer un nombre normal entero, pocas para que un nombre de 300 caracteres no empuje la decisión fuera de la pantalla
+$lxd-connector-auth-untrusted-toggle-gap: 0.25rem; // Aire entre el valor recortado y el desplegador que lo enseña entero
+$lxd-connector-auth-untrusted-toggle-font-size: 0.875rem; // Tamaño del desplegador: letra menor, porque no es el dato sino la manera de verlo entero
+$lxd-connector-auth-untrusted-toggle-cursor: pointer; // Cursor del desplegador — el del enlace, que es la cara que lleva
+$lxd-connector-auth-untrusted-focus-ring-width: 2px; // Grosor del anillo de foco del desplegador — el del enlace
+$lxd-connector-auth-untrusted-focus-ring-offset: 1px; // Separación del anillo de foco — la del enlace
+$lxd-connector-auth-untrusted-focus-ring-color: #111e30; // Anillo de foco del desplegador — el del enlace, con su mismo par oscuro

@@ -6,6 +6,7 @@ import { ConnectorSignInPage } from "./ConnectorSignInPage";
 import { ConnectorExternalSignInPage } from "./ConnectorExternalSignInPage";
 import { ConnectorRejectionPage } from "./ConnectorRejectionPage";
 import { ConnectorRequestSummary } from "./ConnectorRequestSummary";
+import { UntrustedText } from "./UntrustedText";
 
 <Meta of={ConnectorAuthStories} />
 
@@ -105,22 +106,83 @@ exactamente lo mismo.
 <Canvas of={ConnectorAuthStories.NombreLargo} />
 
 El registro de clientes es abierto: el nombre lo elige quien da de alta la
-herramienta, así que un «Claude» falso es indistinguible del real y lo que
-llega puede ser hostil. Dos reglas, y las dos están en la plantilla, no en la
-aplicación que la monte:
+herramienta, así que un «Claude» falso es indistinguible del real y lo que llega
+puede ser hostil. **No es solo el nombre**: la cuenta y el host de retorno pasan
+por lo mismo, y los tres se pintan igual — `UntrustedText`, una pieza interna de
+la familia por la que pasa todo dato de fuera, aquí y en las frases de la
+cabecera.
 
-1. **Es texto plano.** Se pinta como hijo de React —que lo escapa— y no hay en
-   toda la familia una sola vía de HTML crudo. Un nombre con `<strong>` se lee
-   con sus signos.
-2. **No puede desmontar la maqueta.** Los valores de fuera se parten por
-   cualquier punto (`overflow-wrap: anywhere`), de modo que 180 caracteres sin
-   un espacio no empujan el ancho de la página ni dejan la decisión medio fuera
-   de la pantalla.
+Cuatro reglas, y las cuatro están en la plantilla, no en la aplicación que la
+monte.
+
+**1. Es texto plano, y eso se nota.** Se pinta como hijo de React —que lo
+escapa— y no hay en toda la familia una sola vía de HTML crudo. Un nombre
+registrado como `<strong>Claude</strong>` se lee con sus signos.
 
 <Canvas of={ConnectorAuthStories.NombreHostil} />
 
-Lo que la plantilla **no** puede hacer por nadie: decidir si el nombre es
-legítimo. Para eso está el host.
+**Que se vea así es la defensa funcionando, y no se toca.** Interpretar ese
+marcado sería dejar que un tercero inyecte contenido en la pantalla donde se
+conceden permisos: la negrita de hoy es el enlace, el título falso o el botón de
+mañana. Lo único que había que arreglar es que no pareciera un fallo de la
+interfaz, y para eso **el valor va entrecomillado** (`valueQuotes`, por defecto
+`« »`, que cambia con el idioma): unas comillas dicen que eso es una cadena que
+alguien eligió al registrarse —igual que se entrecomilla una cita— y marcan
+dónde empieza y dónde acaba el texto ajeno. Si alguna vez alguien se propone
+«arreglar» esto pintando el marcado, que lea antes esta línea: no es un fallo,
+es el único comportamiento correcto.
+
+**2. Los caracteres invisibles se ven.** Es el problema más grave de los tres, y
+el que menos se parece a un problema de maqueta.
+
+<Canvas of={ConnectorAuthStories.HostDadoLaVuelta} />
+
+Unicode tiene caracteres que no dibujan nada y solo sirven para **reordenar el
+texto**: el peor es `U+202E` (*right-to-left override*), que hace que
+`gro.odigirroc-eldoom` se pinte como `moodle-corregido.org`. En una pantalla
+donde se decide dar acceso a un Moodle, eso no es fealdad: es **suplantación**, y
+donde más daño hace es justo en el host de retorno, que es el dato que dice a
+dónde sale el acceso.
+
+De las tres salidas posibles —borrarlos, hacerlos visibles, o aislar el texto con
+las herramientas del motor— la plantilla hace **dos, y descarta la primera**:
+
+- **Se marcan, no se borran.** Cada carácter invisible se sustituye por su punto
+  de código escrito: `[U+202E]`. Marcado ya no queda nada que el motor pueda
+  aplicar, así que el efecto desaparece igual que borrándolo. Y a diferencia de
+  borrarlo, **dos nombres registrados que solo se diferencien en un carácter
+  invisible se siguen viendo distintos**: borrar los pintaría idénticos, que es
+  exactamente la suplantación que se quiere evitar, solo que sin dejar pista.
+  Entran los controles y aislantes bidireccionales (`U+061C`, `U+200E`,
+  `U+200F`, `U+202A`–`U+202E`, `U+2060`–`U+2064`, `U+2066`–`U+2069`) y los
+  espacios de anchura cero (`U+200B`, `U+FEFF`). **No entran `U+200C` ni
+  `U+200D`**, los juntadores: no reordenan nada y hay escrituras —el persa— y
+  emojis compuestos que los necesitan; marcarlos rompería nombres legítimos sin
+  quitar ningún peligro.
+- **Y además se aísla**, en un `<bdi>` con `unicode-bidi: isolate`, que es la
+  herramienta del propio motor para esto. El marcado resuelve lo que llega
+  dentro del valor; el aislamiento resuelve lo de al lado: un valor de fuera no
+  puede reordenar el texto de la frase que lo rodea. Un nombre legítimamente en
+  árabe o en hebreo se sigue pintando en su sentido, que es lo que un filtro a
+  mano no sabe hacer.
+
+**3. Un valor larguísimo se recorta, pero no se pierde.** Los valores de fuera
+se parten por cualquier punto (`overflow-wrap: anywhere`), así que 300
+caracteres sin un espacio no empujan el ancho de la página; pero ocupaban media
+pantalla y dejaban la decisión fuera de la vista. Ahora se ven
+`--connector-auth-untrusted-max-lines` líneas (tres) y siguen con puntos
+suspensivos.
+
+El recorte es **solo visual**: el texto completo está en el documento desde el
+primer render, de modo que un lector de pantalla lo lee entero. Y para verlo
+entero con los ojos hay un desplegador —«Ver el valor completo»— que es un
+`<details>` nativo: **sin una línea de JavaScript**, como toda esta pantalla. En
+la ficha hay desplegador; en las frases de la cabecera no, porque un `<details>`
+no puede vivir dentro de un `<p>` — ahí el valor se recorta y el sitio para
+verlo entero es la ficha, que es donde el dato se compara de todas formas.
+
+**4. Nada de esto decide si el nombre es legítimo.** Eso no lo puede hacer la
+plantilla por nadie. Para eso está el host.
 
 ## Inicio de sesión requerido
 
@@ -234,3 +296,11 @@ de Moodle, que sí vive dentro de su app.
 ### ConnectorAuthShell
 
 <ArgTypes of={ConnectorAuthShell} />
+
+### UntrustedText
+
+Pieza **interna** de la familia: no se exporta en el paquete, porque no hay que
+llamarla para nada — las cuatro plantillas ya pasan por ella todo lo que viene
+de fuera. Se documenta aquí para que se vea qué hace con cada valor.
+
+<ArgTypes of={UntrustedText} />

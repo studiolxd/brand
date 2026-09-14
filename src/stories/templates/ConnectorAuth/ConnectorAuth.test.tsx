@@ -60,12 +60,66 @@ describe('ConnectorConsentPage', () => {
     expect(onApprove).toHaveBeenCalledOnce();
   });
 
-  it('el nombre del cliente se pinta como texto, nunca como marcado', () => {
+  it('el nombre del cliente se pinta como texto entrecomillado, nunca como marcado', () => {
     const { container } = render(<Consentimiento clientName='<strong>Claude</strong>' />);
     const valor = container.querySelector('.connector-request-summary__untrusted')!;
 
     expect(valor.querySelector('strong')).toBeNull();
-    expect(valor.textContent).toBe('<strong>Claude</strong>');
+    // El texto llega intacto dentro del aislante; las comillas son nuestras y
+    // van fuera, para que se lea como la cadena que alguien registró.
+    expect(valor.querySelector('bdi')!.textContent).toBe('<strong>Claude</strong>');
+    expect(valor.textContent).toBe('«<strong>Claude</strong>»');
+  });
+
+  it('los tres datos de fuera van aislados de dirección, no solo el nombre', () => {
+    const { container } = render(<Consentimiento />);
+    const valores = container.querySelectorAll('.connector-request-summary__untrusted');
+
+    // Herramienta, cuenta y destino.
+    expect(valores).toHaveLength(3);
+    valores.forEach((valor) => expect(valor.querySelector('bdi')).not.toBeNull());
+  });
+
+  it('los caracteres que dan la vuelta al texto se ven, y también en el host', () => {
+    const { container } = render(
+      <Consentimiento clientName={'Claude\u202E'} redirectHost={'\u202Egro.olpmeje.eldoom'} />,
+    );
+    const [herramienta, , destino] = Array.from(
+      container.querySelectorAll('.connector-request-summary__untrusted'),
+    );
+
+    expect(herramienta.textContent).toBe('«Claude[U+202E]»');
+    expect(destino.textContent).toBe('«[U+202E]gro.olpmeje.eldoom»');
+    // Ya no queda ningún control en el documento: no hay nada que el motor
+    // pueda aplicar para leer la dirección al revés.
+    expect(container.textContent).not.toMatch(/[\u202A-\u202E\u2066-\u2069]/);
+  });
+
+  it('los juntadores de glifo no se tocan: no reordenan nada y hay escrituras que los necesitan', () => {
+    const { container } = render(<Consentimiento clientName={'Claude\u200Dtool'} />);
+    const valor = container.querySelector('.connector-request-summary__untrusted')!;
+    expect(valor.querySelector('bdi')!.textContent).toBe('Claude\u200Dtool');
+  });
+
+  it('un nombre larguísimo se recorta, y el nombre entero sigue en el documento y a un clic', () => {
+    const largo = 'Claude'.repeat(40);
+    const { container } = render(<Consentimiento clientName={largo} />);
+    const valor = container.querySelector('.connector-request-summary__untrusted')!;
+
+    // El recorte es visual: el texto completo no se pierde.
+    expect(valor.querySelector('bdi')!.textContent).toBe(largo);
+    expect(valor.querySelector('.connector-untrusted__value--clamped')).not.toBeNull();
+    // Y hay una salida sin JavaScript para verlo entero.
+    expect(valor.querySelector('details > summary')).not.toBeNull();
+    expect(screen.getByText('Ver el valor completo')).toBeInTheDocument();
+  });
+
+  it('un nombre normal no lleva ni recorte ni desplegador', () => {
+    const { container } = render(<Consentimiento />);
+    const valor = container.querySelector('.connector-request-summary__untrusted')!;
+
+    expect(valor.querySelector('.connector-untrusted__value--clamped')).toBeNull();
+    expect(valor.querySelector('details')).toBeNull();
   });
 
   it('el alcance decide la fila del permiso', () => {

@@ -8,10 +8,11 @@ export interface ConnectorRequestSummaryProps {
      *
      * **Es dato de quien registró el cliente, no de la suite.** El registro es
      * abierto: cualquiera puede darse de alta con el nombre que quiera, así que
-     * un «Claude» falso es indistinguible del real. Aquí se pinta como **texto
-     * plano** —React lo escapa, y la plantilla no tiene ni una sola vía de HTML
-     * crudo— y se deja partir por cualquier punto para que un nombre de 300
-     * caracteres sin espacios no se salga de la columna. Nunca lo pases por
+     * un «Claude» falso es indistinguible del real. Pásalo como **cadena**: así
+     * lo pinta `UntrustedText` —texto plano entrecomillado, con los caracteres
+     * invisibles a la vista, aislado de dirección y recortado si es larguísimo—.
+     * Un `ReactNode` se pinta tal cual, sin ese tratamiento, porque ya no es
+     * texto de fuera sino algo que compusiste tú. Nunca lo pases por
      * `dangerouslySetInnerHTML` ni lo uses para componer una URL.
      */
     clientName: ReactNode;
@@ -44,6 +45,12 @@ export interface ConnectorRequestSummaryProps {
     scopeReadLabel?: ReactNode;
     /** Valor del permiso de lectura y escritura. Default castellano, el del servidor de autorización. */
     scopeWriteLabel?: ReactNode;
+    /** Etiqueta del desplegador de un valor recortado. Default castellano: «Ver el valor completo». */
+    expandLabel?: string;
+    /** Etiqueta del desplegador abierto. Default castellano: «Ver menos». */
+    collapseLabel?: string;
+    /** Las comillas que enmarcan los valores de fuera. Default castellano: `['«', '»']`. */
+    valueQuotes?: [string, string];
     /** Se añade DESPUÉS de las clases propias. */
     className?: string;
 }
@@ -58,7 +65,10 @@ export interface ConnectorRequestSummaryProps {
  * su rótulo y se pueda comparar con lo que uno esperaba. Los dos textos dicen
  * lo mismo y conviven: la frase explica, la ficha verifica.
  *
- * Los valores que vienen de fuera —el nombre de la herramienta y el host— se
- * pintan como texto plano y se parten por donde haga falta.
+ * Los tres valores que vienen de fuera —el nombre de la herramienta, la cuenta
+ * y el host— pasan por `UntrustedText`: texto plano entrecomillado, con los
+ * caracteres invisibles a la vista, aislados de dirección y recortados con
+ * desplegador si son larguísimos. Ver ahí el porqué de cada una de las tres
+ * cosas.
  */
-export declare function ConnectorRequestSummary({ clientName, productName, accountEmail, scope, redirectHost, clientLabel, productLabel, accountLabel, scopeLabel, redirectLabel, scopeReadLabel, scopeWriteLabel, className, }: ConnectorRequestSummaryProps): import("react/jsx-runtime").JSX.Element;
+export declare function ConnectorRequestSummary({ clientName, productName, accountEmail, scope, redirectHost, clientLabel, productLabel, accountLabel, scopeLabel, redirectLabel, scopeReadLabel, scopeWriteLabel, expandLabel, collapseLabel, valueQuotes, className, }: ConnectorRequestSummaryProps): import("react/jsx-runtime").JSX.Element;

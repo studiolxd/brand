@@ -85,6 +85,15 @@ export interface ConnectorConsentPageProps extends ConnectorAuthChromeProps {
     scopeReadLabel?: string;
     /** Ídem, lectura y escritura. Default castellano. */
     scopeWriteLabel?: string;
+    /** Etiqueta del desplegador de un valor de fuera recortado. Default castellano: «Ver el valor completo». */
+    expandLabel?: string;
+    /** Etiqueta del desplegador abierto. Default castellano: «Ver menos». */
+    collapseLabel?: string;
+    /**
+     * Las comillas que enmarcan los datos de fuera —la herramienta, la cuenta, el
+     * host—, aquí y en la ficha. Default castellano: `['«', '»']`.
+     */
+    valueQuotes?: [string, string];
     /** Rótulos de la ficha. Ver `ConnectorRequestSummary`. */
     summaryLabels?: Pick<React.ComponentProps<typeof ConnectorRequestSummary>, 'clientLabel' | 'productLabel' | 'accountLabel' | 'scopeLabel' | 'redirectLabel'>;
     /** Bajo las acciones: un enlace de ayuda, la política de la suite. Se pinta en `links` del `Form`. */
@@ -117,4 +126,4 @@ export interface ConnectorConsentPageProps extends ConnectorAuthChromeProps {
  * `action` es una pantalla de React con dos callbacks. Las dos formas pintan
  * exactamente lo mismo.
  */
-export declare function ConnectorConsentPage({ clientName, productName, accountEmail, scope, redirectHost, action, hiddenFields, decisionName, approveValue, denyValue, onApprove, onDeny, denyHref, initialFocus, title, intro, redirectNotice, approveLabel, denyLabel, scopeReadLabel, scopeWriteLabel, summaryLabels, links, header, footer, preferences, preferencesLabel, id, shell, }: ConnectorConsentPageProps): import("react/jsx-runtime").JSX.Element;
+export declare function ConnectorConsentPage({ clientName, productName, accountEmail, scope, redirectHost, action, hiddenFields, decisionName, approveValue, denyValue, onApprove, onDeny, denyHref, initialFocus, title, intro, redirectNotice, approveLabel, denyLabel, scopeReadLabel, scopeWriteLabel, expandLabel, collapseLabel, valueQuotes, summaryLabels, links, header, footer, preferences, preferencesLabel, id, shell, }: ConnectorConsentPageProps): import("react/jsx-runtime").JSX.Element;

@@ -1,0 +1,13 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --connector-auth-untrusted-max-lines: 3; /** Cuántas líneas se ve de un valor de fuera —nombre de herramienta, cuenta, host— antes de recortarlo. Tres: bastantes para leer un nombre normal entero, pocas para que un nombre de 300 caracteres no empuje la decisión fuera de la pantalla */
+  --connector-auth-untrusted-toggle-gap: var(--spacing-1); /** Aire entre el valor recortado y el desplegador que lo enseña entero */
+  --connector-auth-untrusted-toggle-cursor: var(--link-cursor); /** Cursor del desplegador — el del enlace, que es la cara que lleva */
+  --connector-auth-untrusted-toggle-font-size: var(--text-paragraph-small-font-size); /** Tamaño del desplegador: letra menor, porque no es el dato sino la manera de verlo entero */
+  --connector-auth-untrusted-focus-ring-width: var(--link-focus-ring-width); /** Grosor del anillo de foco del desplegador — el del enlace */
+  --connector-auth-untrusted-focus-ring-offset: var(--link-focus-ring-offset); /** Separación del anillo de foco — la del enlace */
+  --connector-auth-untrusted-focus-ring-color: var(--link-focus-ring-color); /** Anillo de foco del desplegador — el del enlace, con su mismo par oscuro */
+}

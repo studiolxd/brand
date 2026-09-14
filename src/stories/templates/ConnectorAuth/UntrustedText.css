@@ -1,0 +1,76 @@
+/* El nombre de la herramienta, la cuenta y el host de retorno son texto de
+   fuera: el registro de clientes es abierto y nadie garantiza que lo que llegue
+   quepa en la columna, ni que se lea en el sentido en que está escrito.
+
+   `anywhere` y no `break-word`: el objetivo no es que quede bonito, es que no
+   haya ningún texto capaz de desmontar la maqueta de una pantalla donde se
+   concede acceso. No lleva token porque no toma ningún valor de diseño: es una
+   palabra clave del motor, como el `display: grid` de al lado. */
+.connector-untrusted {
+  overflow-wrap: anywhere;
+}
+
+/* El aislamiento de dirección, declarado y no heredado del navegador: es la
+   defensa, no un estilo, y no puede depender de que la hoja de usuario del
+   motor traiga el valor por defecto de `<bdi>`. Lo que va dentro no reordena
+   el texto de alrededor; lo que va dentro y esté legítimamente en árabe o
+   hebreo se sigue pintando en su sentido. */
+.connector-untrusted bdi {
+  unicode-bidi: isolate;
+}
+
+/* El límite visual: un nombre largo se ve hasta cierto número de líneas y sigue
+   con puntos suspensivos. El texto completo NO se toca —sigue entero en el
+   documento, y un lector de pantalla lo lee entero—: lo único que se recorta es
+   lo que ocupa en la pantalla, para que la decisión no quede fuera de la vista.
+
+   Las dos propiedades, la con prefijo y la estándar: el recorte por líneas solo
+   funciona con la caja `-webkit-box` en los motores que aún no implementan
+   `line-clamp` a secas. */
+.connector-untrusted__value.connector-untrusted__value--clamped {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--connector-auth-untrusted-max-lines);
+  line-clamp: var(--connector-auth-untrusted-max-lines);
+  overflow: hidden;
+}
+
+/* Desplegado: el mismo valor, entero. */
+.connector-untrusted--expandable[open] .connector-untrusted__value.connector-untrusted__value--clamped {
+  display: block;
+  overflow: visible;
+}
+
+/* El desplegador es un `<details>` nativo: la pantalla se sirve con
+   `Content-Security-Policy: default-src 'none'` y no hay JavaScript que abrir
+   nada. Fuera el triángulo del motor —la afordancia la da la etiqueta, que se
+   lee como enlace (clase `link`)—, en las dos sintaxis que hacen falta. */
+.connector-untrusted__summary {
+  display: block;
+  list-style: none;
+  cursor: var(--connector-auth-untrusted-toggle-cursor);
+}
+.connector-untrusted__summary::-webkit-details-marker {
+  display: none;
+}
+.connector-untrusted__summary::marker {
+  content: "";
+}
+.connector-untrusted__summary:focus-visible {
+  outline: var(--connector-auth-untrusted-focus-ring-width) solid var(--connector-auth-untrusted-focus-ring-color);
+  outline-offset: var(--connector-auth-untrusted-focus-ring-offset);
+}
+
+/* La etiqueta cae en su propia línea porque el valor recortado es una caja de
+   bloque. Letra menor: no es el dato, es la manera de verlo entero. */
+.connector-untrusted__toggle {
+  display: inline-block;
+  margin-block-start: var(--connector-auth-untrusted-toggle-gap);
+  font-size: var(--connector-auth-untrusted-toggle-font-size);
+}
+
+/* Una etiqueta por estado, y el estado lo lleva el propio `<details>`. */
+.connector-untrusted--expandable[open] .connector-untrusted__more,
+.connector-untrusted--expandable:not([open]) .connector-untrusted__less {
+  display: none;
+}

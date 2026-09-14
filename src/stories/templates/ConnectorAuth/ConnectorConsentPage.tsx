@@ -3,6 +3,7 @@
 import type { ReactNode } from 'react';
 import { ConnectorAuthShell, type ConnectorAuthChromeProps } from './ConnectorAuthShell';
 import { ConnectorRequestSummary, type ConnectorScope } from './ConnectorRequestSummary';
+import { UntrustedText } from './UntrustedText';
 import { Button } from '../../atoms/Button/Button';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Form } from '../../molecules/Form/Form';
@@ -85,6 +86,15 @@ export interface ConnectorConsentPageProps extends ConnectorAuthChromeProps {
   scopeReadLabel?: string;
   /** Ídem, lectura y escritura. Default castellano. */
   scopeWriteLabel?: string;
+  /** Etiqueta del desplegador de un valor de fuera recortado. Default castellano: «Ver el valor completo». */
+  expandLabel?: string;
+  /** Etiqueta del desplegador abierto. Default castellano: «Ver menos». */
+  collapseLabel?: string;
+  /**
+   * Las comillas que enmarcan los datos de fuera —la herramienta, la cuenta, el
+   * host—, aquí y en la ficha. Default castellano: `['«', '»']`.
+   */
+  valueQuotes?: [string, string];
   /** Rótulos de la ficha. Ver `ConnectorRequestSummary`. */
   summaryLabels?: Pick<
     React.ComponentProps<typeof ConnectorRequestSummary>,
@@ -147,6 +157,9 @@ export function ConnectorConsentPage({
   denyLabel = 'Denegar',
   scopeReadLabel = 'leer los datos de este producto',
   scopeWriteLabel = 'leer y modificar los datos de este producto',
+  expandLabel,
+  collapseLabel,
+  valueQuotes,
   summaryLabels,
   links,
   header,
@@ -158,6 +171,11 @@ export function ConnectorConsentPage({
 }: ConnectorConsentPageProps) {
   const nativo = action !== undefined;
   const alcance = scope === 'read' ? scopeReadLabel : scopeWriteLabel;
+
+  // Dentro de una frase el valor de fuera va sin desplegador: un `<details>` no
+  // puede vivir dentro de un `<p>`. El recorte sí, y el texto completo se ve
+  // desplegando el mismo dato en la ficha.
+  const ajeno = (value: string) => <UntrustedText value={value} quotes={valueQuotes} />;
 
   // Denegar: enlace si el servidor ya compuso la vuelta, envío si la pantalla
   // es nativa, botón si vive dentro de una aplicación React.
@@ -193,9 +211,9 @@ export function ConnectorConsentPage({
     <ConnectorAuthShell
       title={title}
       description={intro({
-        client: <strong>{clientName}</strong>,
+        client: <strong>{ajeno(clientName)}</strong>,
         what: alcance,
-        email: <strong>{accountEmail}</strong>,
+        email: <strong>{ajeno(accountEmail)}</strong>,
       })}
       header={header}
       footer={footer}
@@ -230,10 +248,13 @@ export function ConnectorConsentPage({
           redirectHost={redirectHost}
           scopeReadLabel={scopeReadLabel}
           scopeWriteLabel={scopeWriteLabel}
+          expandLabel={expandLabel}
+          collapseLabel={collapseLabel}
+          valueQuotes={valueQuotes}
           {...summaryLabels}
         />
 
-        <Paragraph>{redirectNotice({ host: <strong>{redirectHost}</strong> })}</Paragraph>
+        <Paragraph>{redirectNotice({ host: <strong>{ajeno(redirectHost)}</strong> })}</Paragraph>
       </Form>
     </ConnectorAuthShell>
   );
