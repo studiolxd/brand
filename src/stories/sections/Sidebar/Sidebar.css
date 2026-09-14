@@ -128,6 +128,12 @@
   /* Bajo la barra superior: el botón de menú sigue a la vista para cerrar */
   inset-block-start: calc(var(--app-header-height) + env(safe-area-inset-top));
   inset-block-end: 0;
+  /* Los dos insets ya fijan el alto. El `block-size: 100%` de `.sidebar` se
+     resuelve, en un elemento fijo, contra el viewport ENTERO: el cajón medía
+     la pantalla completa empezando la altura de la cabecera más abajo, así
+     que sobresalía justo esa altura por el pie — y el pie es donde va el
+     lanzador de aplicaciones, que en móvil no se veía (2026-09-14). */
+  block-size: auto;
   inset-inline-start: 0;
   inline-size: min(var(--sidebar-width), 100% - var(--size-component-lg));
   max-inline-size: 100%;

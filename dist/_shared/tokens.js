@@ -935,6 +935,7 @@ var e = {
 	"--hero-space-block-end": "4rem",
 	"--hero-space-block-start-compact": "3rem",
 	"--hero-space-block-end-compact": "3rem",
+	"--hero-title-size-compact": "2.5rem",
 	"--highlight-actions-space-before": "2rem",
 	"--highlight-space-block-start": "4rem",
 	"--highlight-space-block-end": "4rem",

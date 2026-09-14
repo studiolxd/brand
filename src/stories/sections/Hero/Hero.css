@@ -14,11 +14,26 @@
     --hero-space-block-start: var(--hero-space-block-start-compact);
     --hero-space-block-end: var(--hero-space-block-end-compact);
   }
+
+  /* Y el título baja de talla. El paso 10 de la escala son 96px en CUALQUIER
+     anchura —la escala de títulos no tiene peldaño móvil—, y a 360px una sola
+     palabra de ocho letras ya no cabe: la portada desbordaba el ancho de la
+     pantalla y aparecía scroll horizontal (2026-09-14). La talla se declara en
+     el propio título porque `--text-size-10` la lee su clase `heading`. */
+  .hero__title {
+    --text-size-10: var(--hero-title-size-compact);
+  }
 }
 
 .hero__title,
 .hero__description {
   max-inline-size: var(--content-measure);
+}
+
+/* Cinturón y tirantes: un nombre propio largo o una palabra compuesta alemana
+   («Lernerfahrungen») desbordan su caja aunque la talla haya bajado. */
+.hero__title {
+  overflow-wrap: break-word;
 }
 
 .hero .hero__description {

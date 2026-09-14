@@ -5,6 +5,8 @@
     "space-block-start": { "$value": "{section.padding-block.2xl}", "$type": "dimension", "$description": "Aire sobre la portada (64px): el ritmo de una banda destacada. Es de la sección, no del envoltorio" },
     "space-block-end":   { "$value": "{section.padding-block.2xl}", "$type": "dimension", "$description": "Aire bajo la portada (64px)" },
     "space-block-start-compact": { "$value": "{section.padding-block.xl}", "$type": "dimension", "$description": "Aire sobre la portada en móvil (48px, por debajo de md): la pantalla es más corta y el aire baja un peldaño" },
-    "space-block-end-compact":   { "$value": "{section.padding-block.xl}", "$type": "dimension", "$description": "Aire bajo la portada en móvil (48px, por debajo de md)" }
+    "space-block-end-compact":   { "$value": "{section.padding-block.xl}", "$type": "dimension", "$description": "Aire bajo la portada en móvil (48px, por debajo de md)" },
+
+    "title-size-compact": { "$value": "{font-size.7}", "$type": "dimension", "$description": "Talla del título de la portada en móvil (40px, por debajo de md): el paso 10 de la escala son 96px fijos en toda anchura y no cabe en una pantalla de 360px" }
   }
 }

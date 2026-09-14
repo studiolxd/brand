@@ -7,6 +7,38 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.10.0] — 2026-09-14
+
+> **Minor.** Dos bugs de móvil que estaban en el DS, no en las apps: la portada
+> pública desbordaba el ancho de la pantalla y el pie de la barra lateral
+> —donde vive el lanzador de aplicaciones— caía fuera de la pantalla. Un token
+> nuevo, `--hero-title-size-compact`; ninguna prop cambia.
+
+### `Hero` — el título ya cabe en una pantalla de 360px
+
+El paso 10 de la escala de títulos son 96px en **cualquier** anchura: la escala
+no tiene peldaño móvil, y `.hero__title` no declaraba `overflow-wrap`. Medido a
+360px, el documento medía 528px de ancho: scroll horizontal en las tres
+portadas públicas de la suite y en `studiolxd.com`.
+
+Bajo `md` el título pasa a `--hero-title-size-compact` (40px, el paso 7 de la
+escala que ya existía) y declara `overflow-wrap: break-word`, que es lo que
+salva una palabra compuesta alemana aunque la talla haya bajado. Con el parche,
+el ancho del documento coincide con el de la pantalla a 360 y a 390.
+
+### `Sidebar` — el pie del cajón vuelve a la pantalla
+
+`.sidebar` declara `block-size: 100%` y `.sidebar--drawer` lo pone
+`position: fixed` bajo la cabecera sin redeclarar el alto. En un elemento fijo
+ese `100%` se resuelve contra el viewport entero, así que el cajón medía la
+pantalla completa empezando la altura de la cabecera más abajo: sobresalía
+justo esos 56px por el pie. Como `.sidebar__inner` es una columna flex con el
+panel en `flex: 1` y el pie al final, lo que se perdía era exactamente el pie.
+
+`block-size: auto` en el cajón: los dos insets ya fijan el alto. Medido a
+390×780, el pie pasa de 796-836 (entero fuera) a 740-780. Afecta a las diez
+apps con `AppShell`, no solo al lanzador del hub.
+
 ## [38.9.0] — 2026-09-14
 
 > **Minor.** El texto que escribe un tercero deja de poder desmontar —ni
