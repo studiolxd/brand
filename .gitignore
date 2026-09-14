@@ -39,3 +39,6 @@ chromatic-diagnostics.json
 chromatic.log
 diag.json
 chromatic-build-*
+
+# Credencial temporal de `pnpm release:npm`, nunca versionada.
+.npmrc.publish

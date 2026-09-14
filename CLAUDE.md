@@ -333,12 +333,22 @@ publicar no pida el segundo factor.
 set -a; . ~/.config/slxd/npm-studiolxd.env; set +a
 ```
 
-**Pendiente (2026-09-14)**: el paquete todavía se consume por tag de git
-(`github:studiolxd/brand#vX` en el catálogo de la suite) y no está publicado en
-npm. El nombre `@studiolxd/brand` está libre y el repo ya es público, así que
-publicar no expone nada nuevo; falta registrar el scope, añadir
-`publishConfig.access: "public"` y encadenar el `npm publish` detrás de
-`release:check`.
+Publicar es `pnpm release:npm` (`scripts/publish-npm.mjs`): lee ese fichero,
+escribe un `.npmrc` temporal, publica y lo borra. **Va después de
+`release:check` y del tag**, nunca antes: se publica lo que ya pasó la puerta
+de calidad.
+
+> **El token tiene que ser de tipo «Automation».** Uno de publicación normal
+> respeta la verificación en dos pasos y npm corta con `EOTP` pidiendo un
+> código por navegador, que un script no puede teclear (comprobado el
+> 2026-09-14 con el primer token). Se ve en
+> `registry.npmjs.org/-/npm/v1/tokens`: el campo `automation` tiene que venir a
+> `true`.
+
+**Pendiente (2026-09-14)**: el catálogo de la suite sigue consumiendo el
+paquete por tag de git (`github:studiolxd/brand#vX`). En cuanto haya una
+versión publicada en el registro, esa línea pasa a ser la versión a secas y el
+`pnpm install` de las apps deja de bajar un tarball de 6 MB de codeload.
 
 ### Flujo al publicar cambios
 
@@ -350,6 +360,8 @@ publicar no expone nada nuevo; falta registrar el scope, añadir
    git tag -a v<version> -m "v<version>"
    git push origin main --tags
    ```
+5. Publicar en el registro: `pnpm release:npm` (ver § «Dónde está la
+   credencial de npm»).
 
 > **IMPORTANTE:** Cada push a `main` debe ir acompañado de un tag si incluye cambios funcionales. Los commits puramente internos (docs, refactors sin impacto en consumidores) pueden agruparse bajo un solo tag.
 

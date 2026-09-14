@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "38.12.3",
+  "version": "38.12.4",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -693,6 +693,9 @@
     "src/tokens",
     "CHANGELOG.md"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -711,7 +714,8 @@
     "test": "vitest run --project unit --project components",
     "test:stories": "vitest run --project storybook",
     "build:all": "pnpm build:tokens && pnpm build:lib && pnpm build:css && pnpm build:tokens-css && pnpm build:fonts-css && pnpm build:icons && pnpm build:email-assets",
-    "release:check": "node scripts/release-check.mjs"
+    "release:check": "node scripts/release-check.mjs",
+    "release:npm": "node scripts/publish-npm.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

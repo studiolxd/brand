@@ -7,6 +7,15 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.12.4] — 2026-09-14
+
+> **Patch.** El paquete queda listo para publicarse en npm. Nada de código.
+
+`publishConfig.access: "public"` y `pnpm release:npm`, que lee el token de
+`~/.config/slxd/npm-studiolxd.env`, escribe un `.npmrc` temporal, publica y lo
+borra — sin `npm login` ni credenciales en la máquina. Va detrás de
+`release:check` y del tag: se publica lo que ya pasó la puerta de calidad.
+
 ## [38.12.3] — 2026-09-14
 
 > **Patch.** `action` de las pantallas del conector acepta una acción de
