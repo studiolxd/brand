@@ -7,6 +7,66 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.11.0] — 2026-09-14
+
+> **Minor.** Seis arreglos de móvil y un modificador nuevo. La portada crece y
+> apila sus botones, la barra pública se queda con lo imprescindible, el cajón
+> lateral se aparta cuando se abre un diálogo desde dentro, un enlace de menú
+> deja de teñirse de amarillo y el hilo de conversación ya no corta los picos
+> de los globos. Ninguna prop existente cambia.
+
+### `Hero` — la portada, a la medida de una pantalla estrecha
+
+El título de móvil sube de 40 a 56px (`--hero-title-size-compact`, paso 8 de
+la escala) y las acciones se apilan a todo el ancho por debajo de `md`
+(`--hero-actions-block-width`). Dos botones en fila en 360px se reparten un
+sitio que no da para su texto; apilados, el primario manda y el segundo se lee
+igual. Medido con los títulos reales: el de `aipricing` y una palabra
+compuesta alemana caben a 360 y a 390 sin desbordar.
+
+### `SiteHeader` — en móvil, logotipo y menú
+
+Lo que va en `actions` —hoy el botón «Panel»— se esconde por debajo de `md`
+dentro de un `.site-header__actions` nuevo, que existe justo para poder
+ocultarlo sin llevarse por delante el botón de menú. En una barra estrecha ese
+botón aprieta el menú, y su destino cabe dentro del panel.
+
+### `Sidebar` — el cajón se aparta cuando se abre un diálogo
+
+Navegar cerraba el cajón móvil; abrir un diálogo desde dentro, no. El lanzador
+de aplicaciones vive en el pie del cajón y se presenta como modal a pantalla
+completa —la misma capa que el propio cajón—, así que los dos se quedaban
+abiertos, con el velo del modal por debajo del cajón: la barra lateral sin
+oscurecer, pegada al diálogo. Ahora un clic en `[aria-haspopup="dialog"]` lo
+cierra, igual que un enlace. Los controles que abren capas ancladas (un menú,
+un select) siguen sin cerrarlo: se usan dentro.
+
+### `Menu` — un ítem que es enlace no se pinta como enlace
+
+`Link.css` estila todo `<a>` que no sea botón, y ese selector pesa más que
+`.menu__item` en cuanto el ítem entra en estado: con el puntero encima —o con
+el dedo en móvil, antes de que Base UI marque `data-highlighted`— el ítem se
+teñía del color de enlace y se subrayaba. En superficie oscura, amarillo de
+marca. `Menu.css` lo neutraliza sin tocar el estado resaltado, que es del
+menú. Lo vigila una prueba sobre las dos hojas: una story no sirve, porque el
+`hover` de testing-library es sintético y no enciende el `:hover` del motor de
+CSS.
+
+### `Button` — `block="mobile"`
+
+`block` acepta ahora `'mobile'`: ancho completo por debajo de `md` y ancho
+natural a partir de ahí. Es lo que quiere un botón suelto dentro de una
+página; en una pantalla estrecha, media línea de botón y media vacía se lee
+como un error.
+
+### `ConversationThread` — el pasillo de las colas es suyo
+
+El relleno lateral que deja sitio al pico del globo valía cero por defecto y
+solo lo declaraba `ChatShell`, así que un hilo montado a pelo salía con los
+dos picos cortados contra el canto del desplazamiento. Ahora vale por defecto
+exactamente lo que la cola sobresale. Quien necesite otro ancho sigue pisando
+la variable.
+
 ## [38.10.0] — 2026-09-14
 
 > **Minor.** Dos bugs de móvil que estaban en el DS, no en las apps: la portada

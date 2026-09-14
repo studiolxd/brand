@@ -23,6 +23,19 @@
   .hero__title {
     --text-size-10: var(--hero-title-size-compact);
   }
+
+  /* Las acciones se apilan y cada una ocupa el ancho. En una pantalla
+     estrecha, dos botones en fila se reparten un sitio que no da para su
+     texto: o se parten en dos líneas o se quedan minúsculos. Apilados, el
+     primario manda y el segundo se lee igual de bien. */
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__actions > * {
+    inline-size: var(--hero-actions-block-width);
+  }
 }
 
 .hero__title,

@@ -170,3 +170,40 @@ export const Contrato3: Story = {
     await expect(trigger).toHaveFocus();
   },
 };
+
+/**
+ * El cajón se cierra al abrir un diálogo desde dentro: el lanzador de
+ * aplicaciones vive en el pie y se presenta como modal a pantalla completa,
+ * que es la misma capa que el propio cajón. Sin esto los dos quedaban
+ * abiertos, con el velo del modal por debajo del cajón. Los controles que
+ * abren capas ancladas (un menú, un select) no lo cierran: se usan dentro.
+ */
+export const Contrato4: Story = {
+  name: 'Test — abrir un diálogo desde el cajón lo cierra; abrir un menú, no',
+  tags: ['!dev'],
+  render: (args) => (
+    <DrawerHarness
+      {...args}
+      footer={
+        <>
+          <button type="button" aria-haspopup="dialog">Aplicaciones</button>
+          <button type="button" aria-haspopup="menu">Cuenta</button>
+        </>
+      }
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const abrir = canvas.getByRole('button', { name: 'Abrir menú' });
+
+    // Un menú anclado no se lleva el cajón por delante.
+    await userEvent.click(abrir);
+    await expect(await canvas.findByRole('dialog', { name: 'Barra lateral' })).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole('button', { name: 'Cuenta' }));
+    await expect(canvas.getByRole('dialog', { name: 'Barra lateral' })).toBeInTheDocument();
+
+    // Un diálogo sí: el cajón ya ha hecho su trabajo.
+    await userEvent.click(canvas.getByRole('button', { name: 'Aplicaciones' }));
+    await expect(canvas.queryByRole('dialog', { name: 'Barra lateral' })).not.toBeInTheDocument();
+  },
+};

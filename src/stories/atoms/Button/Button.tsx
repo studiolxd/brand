@@ -28,8 +28,13 @@ export interface ButtonBaseProps
   destructive?: boolean;
   /** Size of the button */
   size?: 'sm' | 'md' | 'lg';
-  /** Stretches the button to full container width */
-  block?: boolean;
+  /**
+   * Estira el botón hasta el ancho de su contenedor. `'mobile'` lo hace solo
+   * por debajo de `md`: es lo que quiere un botón suelto dentro de una página
+   * —una acción que en escritorio se lee bien con su ancho natural y en una
+   * pantalla estrecha queda mejor ocupando la línea entera.
+   */
+  block?: boolean | 'mobile';
   /**
    * Renders a square, icon-only button (aspect-ratio 1). Composable with `variant`
    * and `size`. Con `iconOnly` el tipo exige `aria-label` o `aria-labelledby`:
@@ -83,7 +88,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
     variant === 'text' && tone === 'ink' ? 'button--ink' : '',
     destructive ? 'button--destructive-intent' : '',
     size !== 'md' ? `button--${size}` : '',
-    block ? 'button--block' : '',
+    block === 'mobile' ? 'button--block-mobile' : block ? 'button--block' : '',
     iconOnly ? 'button--icon-only' : '',
     className ?? '',
   ].filter(Boolean).join(' ');

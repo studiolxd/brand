@@ -68,6 +68,28 @@
   color: var(--menu-item-highlighted-color);
 }
 
+/* Un ítem de menú que además es un enlace NO se pinta como un enlace del
+   texto. El DS estila todo `<a>` que no sea botón con un selector global
+   (`a:where(:not(.button)):hover`, Link.css): color de enlace y subrayado.
+   Ese selector pesa más que `.menu__item` en cuanto entra un estado, así que
+   al pasar el puntero —o al tener el dedo encima en móvil, donde Base UI aún
+   no ha marcado `data-highlighted`— el ítem se teñía del color de enlace y se
+   subrayaba. En superficie oscura eso es el amarillo de marca (2026-09-14).
+
+   Se excluye el ítem resaltado a propósito: ese estado es del menú y manda
+   él. `:not([data-highlighted])` sube el peso lo justo para ganarle al
+   selector global sin depender de en qué orden se carguen las dos hojas. */
+.menu__item:is(a):hover:not([data-highlighted]),
+.menu__item:is(a):focus-visible:not([data-highlighted]) {
+  color: var(--menu-item-color);
+  box-shadow: none;
+}
+
+.menu__item.menu__item--destructive:is(a):hover:not([data-highlighted]),
+.menu__item.menu__item--destructive:is(a):focus-visible:not([data-highlighted]) {
+  color: var(--menu-item-destructive-color);
+}
+
 .menu__item[data-disabled] {
   opacity: var(--menu-disabled-opacity);
   cursor: not-allowed;

@@ -90,3 +90,4 @@ export const Contrato: Story = {
     await expect((args.items[0] as { onClick: () => void }).onClick).toHaveBeenCalled();
   },
 };
+

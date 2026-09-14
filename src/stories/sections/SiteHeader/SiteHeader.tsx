@@ -131,7 +131,12 @@ export function SiteHeader({
         {renderLogoLink({ href: logoHref, className: 'site-header__logo', 'aria-label': logoLabel, children: logo })}
 
         <div className="site-header__controls">
-          {actions}
+          {/* Las acciones se esconden en móvil: la barra estrecha es del
+              logotipo y del botón de menú, y lo que haya aquí —el botón
+              «Panel», hoy el único— cabe dentro del panel, que es donde se
+              busca en una pantalla pequeña. El envoltorio existe justo para
+              poder ocultarlas sin llevarse por delante el botón de menú. */}
+          {actions && <div className="site-header__actions">{actions}</div>}
           {/* Sin panel no hay menú: un botón que no abre nada es un control muerto */}
           {hasPanel && (
             <MenuButton

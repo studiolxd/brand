@@ -81,6 +81,21 @@
   gap: var(--site-header-gap);
 }
 
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--site-header-gap);
+}
+
+/* Móvil: solo logotipo y botón de menú. Lo que vaya en `actions` sigue
+   disponible dentro del panel; en la barra no cabe sin apretar el menú
+   (2026-09-14). */
+@media (max-width: 767.98px) /* < --breakpoint-md */ {
+  .site-header__actions {
+    display: none;
+  }
+}
+
 
 /* El panel: a pantalla completa bajo la barra, en la capa modal. Cerrado sigue
    en el DOM pero inerte e invisible, para que la entrada y la salida puedan

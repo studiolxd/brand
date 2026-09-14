@@ -12,7 +12,7 @@ var i = n(function({ variant: n = "primary", tone: i = "accent", destructive: a 
 		n === "text" && i === "ink" ? "button--ink" : "",
 		a ? "button--destructive-intent" : "",
 		y === "md" ? "" : `button--${y}`,
-		s ? "button--block" : "",
+		s === "mobile" ? "button--block-mobile" : s ? "button--block" : "",
 		c ? "button--icon-only" : "",
 		g ?? ""
 	].filter(Boolean).join(" "), x = (e) => {

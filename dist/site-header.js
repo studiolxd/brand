@@ -44,7 +44,10 @@ function l({ logoHref: l = "/", logoLabel: u = "Studio LXD — ir al inicio", me
 				}),
 				/* @__PURE__ */ i("div", {
 					className: "site-header__controls",
-					children: [C, k && /* @__PURE__ */ r(t, {
+					children: [C && /* @__PURE__ */ r("div", {
+						className: "site-header__actions",
+						children: C
+					}), k && /* @__PURE__ */ r(t, {
 						ref: j,
 						isOpen: O,
 						onClick: () => M(!O),

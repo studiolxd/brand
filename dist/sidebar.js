@@ -25,7 +25,7 @@ function d({ logo: e, children: d, footer: f, id: p, label: m = "Barra lateral",
 		Object.values(t).every(Number.isFinite) && E(t);
 	}, []);
 	let D = (e) => {
-		!S || !v || e.target.closest("a[href]") && v.closeSidebar();
+		!S || !v || e.target.closest("a[href], [aria-haspopup=\"dialog\"]") && v.closeSidebar();
 	}, O = a((e) => {
 		let t = C.current;
 		if (!t || !v) return;

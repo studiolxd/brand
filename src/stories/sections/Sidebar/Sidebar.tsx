@@ -78,10 +78,19 @@ export function Sidebar({
     if (Object.values(next).every(Number.isFinite)) setBounds(next);
   }, []);
 
-  // En móvil, navegar cierra el cajón.
+  // En móvil, navegar cierra el cajón. Y con él cuenta abrir un DIÁLOGO desde
+  // dentro: el lanzador de aplicaciones, que vive en el pie, se presenta como
+  // un modal a pantalla completa —misma capa que el propio cajón— y sin esto
+  // los dos se quedaban abiertos a la vez, con el velo del modal por debajo
+  // del cajón: la barra lateral sin oscurecer, pegada al diálogo (2026-09-14).
+  // El criterio es `aria-haspopup="dialog"` y no cualquier botón a propósito:
+  // el acordeón de navegación, el selector de organización y el menú de
+  // cuenta abren capas ancladas (`menu`, `listbox`), no compiten con el cajón
+  // y deben poder usarse sin cerrarlo.
   const onClick = (e: React.MouseEvent) => {
     if (!drawer || !shell) return;
-    if ((e.target as HTMLElement).closest('a[href]')) shell.closeSidebar();
+    const objetivo = (e.target as HTMLElement).closest('a[href], [aria-haspopup="dialog"]');
+    if (objetivo) shell.closeSidebar();
   };
 
   // ── Redimensión (solo escritorio, desplegada) ──

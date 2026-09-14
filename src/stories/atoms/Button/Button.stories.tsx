@@ -40,8 +40,10 @@ const meta: Meta<typeof Button> = {
       description: 'Tamaño del botón.',
     },
     block: {
-      control: { type: 'boolean' },
-      description: 'Ocupa todo el ancho del contenedor.',
+      control: { type: 'select' },
+      options: [false, true, 'mobile'],
+      description:
+        'Ocupa todo el ancho del contenedor. «mobile», solo por debajo de md.',
     },
     iconOnly: {
       control: { type: 'boolean' },
@@ -219,6 +221,49 @@ export const OutlineOnLight: Story = {
 
 export const Block: Story = {
   args: { variant: 'primary', block: true },
+};
+
+/**
+ * `block="mobile"`: ancho completo por debajo de `md` y ancho natural a partir
+ * de ahí. Es lo que quiere un botón suelto dentro de una página — en una
+ * pantalla estrecha, media línea de botón y media vacía se lee como un error.
+ * Estrecha el navegador para verlo.
+ */
+export const BlockMovil: Story = {
+  name: 'Block solo en móvil',
+  args: { variant: 'primary', block: 'mobile' },
+};
+
+/** Test: `block="mobile"` no estira en escritorio; `block` sí, en cualquier ancho. */
+export const ContratoBlockMovil: Story = {
+  name: 'Test — block="mobile" solo estira por debajo de md',
+  tags: ['!dev'],
+  render: () => (
+    // Mismo texto en los tres: lo que se compara es el ancho que impone cada
+    // modificador, no lo que mide su etiqueta.
+    <div style={{ inlineSize: '900px' }}>
+      <Button block="mobile" data-caso="movil">Acción</Button>
+      <Button block data-caso="siempre">Acción</Button>
+      <Button data-caso="natural">Acción</Button>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const ancho = (caso: string) =>
+      canvasElement
+        .querySelector<HTMLElement>(`[data-caso="${caso}"]`)!
+        .getBoundingClientRect().width;
+
+    // `block` estira en cualquier anchura.
+    await expect(ancho('siempre')).toBeGreaterThan(ancho('natural'));
+
+    // `block="mobile"` depende de la anchura del runner, que no fijamos aquí.
+    const movil = window.matchMedia('(max-width: 767.98px)').matches;
+    if (movil) {
+      await expect(ancho('movil')).toBe(ancho('siempre'));
+    } else {
+      await expect(ancho('movil')).toBe(ancho('natural'));
+    }
+  },
 };
 
 export const Small: Story = {
