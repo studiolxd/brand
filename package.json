@@ -1,6 +1,12 @@
 {
   "name": "@studiolxd/brand",
-  "version": "38.12.4",
+  "version": "38.13.0",
+  "description": "El sistema de diseño de Studio LXD: componentes React, tokens y documentación de la suite SLXD.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/studiolxd/brand.git"
+  },
+  "homepage": "https://github.com/studiolxd/brand#readme",
   "type": "module",
   "exports": {
     "./accordion": {

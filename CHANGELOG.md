@@ -7,6 +7,37 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.13.0] — 2026-09-15
+
+> **Minor.** Las burbujas del chat parten el texto que no cabe, una fila puede
+> apilarse en móvil, y el paquete estrena README de verdad.
+
+### `MessageBubble` — una URL ya no se come el pico
+
+`.message-bubble` no declaraba `overflow-wrap`, así que una URL o una palabra
+larga sin espacios no partía: el texto se salía por la derecha, cruzaba el
+borde del globo, tapaba su cola y abría scroll horizontal en el hilo. Medido a
+390px, un globo de 273px con 431px de contenido. Ahora es `anywhere`, que
+además encoge el tamaño mínimo intrínseco de la caja y hace que el globo
+respete su `max-width`. De cinturón, `ConversationThread` recorta el eje
+horizontal (`overflow-x: clip`, que no crea contexto de desplazamiento): un
+bloque que aun así desborde —un `<pre>`, una tabla— no abre una barra.
+
+### `Inline` — `stack="mobile"`
+
+Por debajo de `md` la fila pasa a columna y cada pieza ocupa el ancho. Es lo
+que quiere una fila de un control con su acción —un campo de mes y
+«Descargar», un selector y un botón— en una pantalla estrecha, donde repartir
+dos piezas deja a las dos sin sitio. La envoltura de `flex-wrap` no servía:
+baja la pieza de línea pero la deja a su ancho natural.
+
+### El README
+
+Era literalmente la plantilla de Vite. Ahora cuenta qué es el paquete, cómo se
+instala y se importa, qué trae, de dónde salen los tokens y qué NO es. Con él,
+`description`, `repository` y `homepage`, que es lo que la página de npm
+enseña.
+
 ## [38.12.4] — 2026-09-14
 
 > **Patch.** El paquete queda listo para publicarse en npm. Nada de código.

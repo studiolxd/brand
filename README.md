@@ -132,8 +132,8 @@ claro y en oscuro.
 
 Esto no es una librería de propósito general ni pretende serlo. Es el sistema
 de diseño de una suite concreta, y se publica porque las aplicaciones que lo
-consumen lo instalan como cualquier otra dependencia. Es de código abierto y
-se puede leer, estudiar y usar; lo que no está abierto es el diseño: la
+consumen lo instalan como cualquier otra dependencia. El código está a la
+vista y se puede leer y estudiar; lo que no está abierto es el diseño: la
 paleta, la escala tipográfica, las variantes de cada componente y las reglas
 que las gobiernan responden a la marca de Studio LXD y se deciden aquí
 dentro. Si el sistema le sirve tal cual a alguien más, encantados; si hace

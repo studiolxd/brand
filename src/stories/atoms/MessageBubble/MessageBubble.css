@@ -19,6 +19,13 @@
   border-color: var(--message-bubble-border-color);
   color: var(--message-bubble-color);
   max-width: var(--message-bubble-max-width);
+  /* Una URL o una palabra sin espacios no parte por sí sola: se salía de la
+     burbuja por la derecha, cruzaba el borde y se comía el pico, además de
+     abrir scroll horizontal en el hilo (medido a 390px: una burbuja de 273px
+     con 431px de contenido, 2026-09-14). `anywhere` y no `break-word` porque
+     además encoge el tamaño mínimo intrínseco de la caja, que es lo que hace
+     que la burbuja respete su `max-width`. */
+  overflow-wrap: anywhere;
 
   font-family: var(--message-bubble-font-family);
   font-size: var(--message-bubble-font-size);

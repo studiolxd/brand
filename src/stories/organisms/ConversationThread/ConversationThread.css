@@ -15,6 +15,11 @@
   min-block-size: 0;
   gap: var(--conversation-thread-gap);
   overflow-y: auto;
+  /* Cinturón: un bloque que aun así desborde —un `<pre>`, una tabla de
+     Markdown— no abre una barra horizontal en el hilo. `clip` y no `hidden`
+     porque no crea contexto de desplazamiento, así que el `overflow-y: auto`
+     de arriba sigue siendo el único scroll. */
+  overflow-x: clip;
   /* El pasillo de las colas. Es del hilo, no de quien lo monta: la cola del
      globo nace FUERA de su caja, y el elemento que recorta es este —el que
      lleva el desplazamiento, y un `overflow-y` distinto de `visible` recorta

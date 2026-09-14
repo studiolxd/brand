@@ -4,6 +4,7 @@ import { Inline } from './Inline';
 import { Button } from '../Button/Button';
 import { Link } from '../Link/Link';
 import { Tag } from '../Tag/Tag';
+import { InputField } from '../../molecules/InputField/InputField';
 import { Heading } from '../Heading/Heading';
 
 const meta: Meta<typeof Inline> = {
@@ -160,5 +161,52 @@ export const ContratoPassthrough: Story = {
     await expect(fila).toHaveAttribute('aria-label', 'Acciones del documento');
     await expect(fila).toHaveAttribute('id', 'barra');
     await expect(fila).toHaveAttribute('data-zona', 'acciones');
+  },
+};
+
+/**
+ * `stack="mobile"`: la fila se apila y cada pieza ocupa el ancho por debajo de
+ * `md`. Para una fila de un control con su acción, que en una pantalla
+ * estrecha no cabe repartida. Estrecha el navegador para verlo.
+ */
+export const ApiladoEnMovil: Story = {
+  name: 'Apilado en móvil',
+  args: {
+    stack: 'mobile',
+    children: (
+      <>
+        <InputField id="mes" label="Mes" defaultValue="2026-09" />
+        <Button>Descargar</Button>
+      </>
+    ),
+  },
+};
+
+/** Test: `stack="mobile"` no cambia la fila en escritorio. */
+export const ContratoApilado: Story = {
+  name: 'Test — stack="mobile" solo apila por debajo de md',
+  tags: ['!dev'],
+  render: () => (
+    <div style={{ inlineSize: '900px' }}>
+      <Inline stack="mobile" data-caso="apilable">
+        <Button>Uno</Button>
+        <Button>Dos</Button>
+      </Inline>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const fila = canvasElement.querySelector<HTMLElement>('[data-caso="apilable"]')!;
+    const [uno, dos] = [...fila.querySelectorAll('button')];
+    const movil = window.matchMedia('(max-width: 767.98px)').matches;
+
+    if (movil) {
+      // Apilados: mismo borde izquierdo, uno debajo del otro.
+      await expect(uno!.getBoundingClientRect().left).toBe(dos!.getBoundingClientRect().left);
+      await expect(dos!.getBoundingClientRect().top).toBeGreaterThan(uno!.getBoundingClientRect().top);
+    } else {
+      // En fila: misma línea, cada uno a su ancho.
+      await expect(uno!.getBoundingClientRect().top).toBe(dos!.getBoundingClientRect().top);
+      await expect(dos!.getBoundingClientRect().left).toBeGreaterThan(uno!.getBoundingClientRect().left);
+    }
   },
 };

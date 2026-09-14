@@ -14,6 +14,15 @@ export interface InlineProps extends React.ComponentPropsWithoutRef<'div'> {
      * separadas a los extremos.
      */
     justify?: 'start' | 'center' | 'end' | 'between';
+    /**
+     * `mobile`: por debajo de `md` la fila se apila y cada pieza ocupa el ancho.
+     * Es lo que quiere una fila de un control con su acción —un selector y un
+     * botón, un campo de mes y «Descargar»— en una pantalla estrecha, donde
+     * repartir dos piezas a lo ancho deja a las dos sin sitio. La envoltura de
+     * `flex-wrap` no vale: baja la pieza de línea, pero la deja a su ancho
+     * natural (2026-09-14).
+     */
+    stack?: 'mobile';
     children: ReactNode;
     /** Se añade DESPUÉS de las clases propias. */
     className?: string;
@@ -31,4 +40,4 @@ export interface InlineProps extends React.ComponentPropsWithoutRef<'div'> {
  * fila puede ser un grupo o una barra de herramientas con nombre accesible sin
  * envolverla en otro elemento.
  */
-export declare function Inline({ gap, align, justify, children, className, ...rest }: InlineProps): import("react/jsx-runtime").JSX.Element;
+export declare function Inline({ gap, align, justify, stack, children, className, ...rest }: InlineProps): import("react/jsx-runtime").JSX.Element;
