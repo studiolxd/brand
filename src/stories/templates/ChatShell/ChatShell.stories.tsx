@@ -308,9 +308,9 @@ export const ContratoSinRelleno: Story = {
       await expect(`${clase} ${estilo.paddingBlockStart} ${estilo.paddingBlockEnd}`).toBe(`${clase} 0px 0px`);
       await expect(`${clase} ${estilo.paddingInlineStart} ${estilo.paddingInlineEnd}`).toBe(`${clase} 0px 0px`);
     }
-    // El hilo tampoco: es del otro componente, pero se mide aquí montado.
-    const hilo = getComputedStyle(canvasElement.querySelector('.conversation-thread') as HTMLElement);
-    await expect(`${hilo.paddingBlockStart} ${hilo.paddingInlineStart}`).toBe('0px 0px');
+    // El hilo ya no entra aquí: desde el 2026-09-14 lleva relleno lateral a
+    // propósito —es donde cabe la cola del globo sin cortarse— y el vertical
+    // lo pone la ranura. Ese contrato lo mide «el aire de la ranura del hilo».
 
     // Ninguna línea interior: la del composer era la última y se retiró.
     const composer = getComputedStyle(zona('.chat-shell__composer'));

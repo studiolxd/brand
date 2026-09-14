@@ -239,7 +239,9 @@ export const ContratoBocadillo: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const corto = canvas.getByRole('button', { name: 'Hola' });
-    const largo = canvas.getByRole('button', { name: /Migración del esquema/ });
+    // Nombre exacto, no un trozo: el botón de borrar lleva el mismo título
+    // dentro de su propia etiqueta («Eliminar conversación "…"»).
+    const largo = canvas.getByRole('button', { name: 'Migración del esquema de facturación a la nueva pasarela de pagos' });
 
     // El corto cabe: no hay bocadillo por mucho que se apunte.
     await userEvent.hover(corto);
@@ -274,7 +276,7 @@ export const ContratoBocadilloTeclado: Story = {
     await userEvent.tab(); // Nueva conversación
     await userEvent.tab(); // el título
 
-    await expect(canvas.getByRole('button', { name: /Migración del esquema/ })).toHaveFocus();
+    await expect(canvas.getByRole('button', { name: 'Migración del esquema de facturación a la nueva pasarela de pagos' })).toHaveFocus();
     await waitFor(() => expect(document.querySelector('[role="tooltip"]')).not.toBeNull());
   },
 };
