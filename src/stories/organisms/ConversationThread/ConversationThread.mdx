@@ -42,6 +42,14 @@ En cuanto hay **dos bloques**, o el contenido pasa del alto disponible, los már
 
 El centrado solo se aplica a lo que entra por **`children`**, nunca a los globos que monta el hilo desde `messages`: una conversación de un solo mensaje es un hilo que empieza, y ese mensaje va arriba como irán los siguientes, sin saltar al centro para volver en cuanto llegue la respuesta. El hilo lo publica en el DOM como `data-content="children" | "messages"`, que es lo que lee el CSS.
 
+## El hilo no se rellena
+
+El hilo **no tiene relleno propio**: lo único que espacia es el `gap` entre mensajes. El aire alrededor de los globos —arriba, abajo y a los lados— lo pone quien monta el hilo, que es quien sabe dónde vive la pantalla y cuánto tiene que respirar.
+
+Es el mismo principio que sigue `ChatShell`, que también se quedó sin rellenos: **quien compone, espacia; los hijos no se auto-rellenan.** Un componente que se rellena por su cuenta toma por el consumidor una decisión que es suya y le obliga a deshacerla. Los tokens `conversation-thread.padding-block` y `conversation-thread.padding-inline` se retiran.
+
+La consecuencia práctica: montado a pelo, el hilo toca los cantos. Dentro de un `ChatShell` a sangre también, porque el armazón tampoco rellena — ver **Templates › ChatShell → «Ni líneas ni rellenos»**.
+
 ## El autoscroll
 
 Al final del hilo hay un **centinela sin altura** (`aria-hidden`) al que se le pide `scrollIntoView` cada vez que cambian los mensajes. Se hace así para no tener que calcular la altura del contenedor ni la del último mensaje, que además crece mientras la respuesta se genera.
@@ -50,7 +58,7 @@ El movimiento **respeta `prefers-reduced-motion`**: el hilo consulta la media qu
 
 ## Superficie oscura
 
-El hilo no pinta color: el par claro/oscuro lo traen los globos y las marcas de tiempo.
+El hilo no pinta color ni tiene tokens de superficie: el par claro/oscuro lo traen los globos y las marcas de tiempo.
 
 ## Accesibilidad
 

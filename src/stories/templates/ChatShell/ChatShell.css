@@ -2,7 +2,13 @@
    columna de conversaciones aparece al lado a partir del punto de ruptura; por
    debajo no está en el árbol —vive en el cajón (`Sheet`)—, así que la maqueta
    no tiene que preverle sitio. Quién decide es JS, no una media query: la
-   lista cambia de sitio, no solo de forma. */
+   lista cambia de sitio, no solo de forma.
+
+   El armazón no tiene NINGÚN relleno propio —ni aquí, ni en la columna, ni en
+   la cabecera, ni en la caja de escribir— ni ninguna línea interior. Quien
+   compone, espacia: el aire alrededor del chat lo pone quien lo monta, y lo
+   único que aporta el armazón es la separación ENTRE sus dos columnas, que es
+   suya porque es lo único que nadie de fuera puede poner. */
 .chat-shell {
   display: flex;
   flex-direction: column;
@@ -12,23 +18,21 @@
 }
 
 /* La columna de conversaciones: solo se monta a partir del punto de ruptura,
-   con su propio scroll. No lleva línea que la separe del hilo —se retiró: la
-   separación la hace el aire—, así que la columna se pone su propio pasillo a
-   los dos lados, que es lo que la despega del canto de la ventana y del hilo.
-   Sumado al aire del hilo (`conversation-thread.padding-inline`) quedan 40px
-   entre la lista y los globos. El paso es corto a propósito: cada píxel de
-   pasillo se lo quita al título de la conversación, que se trunca. */
+   con su propio scroll. Ni línea que la separe del hilo ni pasillo propio —los
+   dos se retiraron—: lo que la despega del hilo es el `gap` del contenedor. */
 .chat-shell__list {
   flex-shrink: 0;
   inline-size: var(--chat-shell-list-width);
   block-size: 100%;
   overflow-y: auto;
-  padding-block: var(--chat-shell-list-padding-block);
-  padding-inline: var(--chat-shell-list-padding-inline);
 }
 
+/* Dos columnas, y el aire entre ellas lo pone el contenedor. Va aquí y no en
+   `.chat-shell` a secas porque sin lista solo hay un hijo y el `gap` no
+   separaría nada. */
 .chat-shell.chat-shell--with-list {
   flex-direction: row;
+  gap: var(--chat-shell-gap);
 }
 
 /* El hilo, la cabecera y el composer comparten columna: el que crece es el
@@ -46,8 +50,6 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--chat-shell-header-gap);
-  padding-block: var(--chat-shell-header-padding-block);
-  padding-inline: var(--chat-shell-header-padding-inline);
 }
 
 /* El botón que abre el cajón de conversaciones: solo existe por debajo del
@@ -75,17 +77,10 @@
   overflow-y: auto;
 }
 
-/* La única línea que queda del armazón: la que separa la caja de escribir del
-   hilo. Las otras dos —la de la columna de conversaciones y la de debajo de la
-   cabecera— se retiraron; los tokens `--chat-shell-border-*` son ya solo de
-   esta. Aquí la línea sí trabaja: el hilo se desplaza por detrás y el composer
-   se queda quieto, así que sin ella el último globo se metería debajo del
-   campo de escribir sin que se notara dónde acaba uno y empieza el otro. */
+/* La caja de escribir se queda quieta mientras el hilo se desplaza por detrás.
+   Ya no lleva línea encima: era la última del armazón y se retiró con las otras
+   dos. Lo que separa el último globo del campo de escribir es el aire que ponga
+   quien monta el chat. */
 .chat-shell__composer {
   flex-shrink: 0;
-  padding-block: var(--chat-shell-composer-padding-block);
-  padding-inline: var(--chat-shell-composer-padding-inline);
-  border-block-start-width: var(--chat-shell-border-width);
-  border-block-start-style: var(--chat-shell-border-style);
-  border-block-start-color: var(--chat-shell-border-color);
 }

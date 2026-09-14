@@ -69,7 +69,9 @@ Como el cuadrado y el radio los pone ahora `Button`, `conversation-list.delete-s
 
 ## Superficie oscura
 
-Tinta, relleno de la fila, aspa y anillo de foco tienen par oscuro. La conversación abierta se marca en lavanda, como en el `SidebarNav`: sobre prusia, la tinta plena no destacaría.
+Tinta, relleno de la fila, aspa y anillo de foco tienen par oscuro, cada uno por la regla de derivación: el rol claro con su `-on-dark`.
+
+La conversación abierta va **en tinta plena** (`color.text.on-dark`), exactamente igual que en superficie clara. Estuvo en lavanda, tomada del `SidebarNav`, y se ha retirado: aquí la conversación abierta no se dice con un color de marca sino **con tinta y peso**, que es la regla del componente en las dos superficies. Como en claro, coincide con el color del puntero; quien la separa del resto de la lista es el **peso** (`item-active-font-weight`) frente al gris de reposo, y el `aria-current="page"` para quien no ve ninguno de los dos.
 
 ## Accesibilidad
 

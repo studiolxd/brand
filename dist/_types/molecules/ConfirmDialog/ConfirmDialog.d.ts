@@ -24,6 +24,20 @@ export interface ConfirmDialogProps {
      */
     onConfirmError?: (error: unknown) => void;
     /**
+     * Rótulo de una **tercera acción**, que se coloca entre la de cancelar y la
+     * de confirmar: la variante de la respuesta afirmativa que no es la que se
+     * ofrece por defecto («Permitir siempre» junto a «Permitir», «Guardar como
+     * copia» junto a «Guardar»). No tiene default —es texto del producto, como
+     * `title`— y solo se pinta si viene con `onSecondaryAction`.
+     */
+    secondaryActionLabel?: string;
+    /**
+     * Se llama al pulsar la acción intermedia. Cerrar el diálogo es del
+     * consumidor, igual que en `onConfirm` sin promesa: el diálogo no supone que
+     * la tercera acción termine la conversación.
+     */
+    onSecondaryAction?: () => void;
+    /**
      * La acción destructiva no se puede deshacer: el botón de confirmar cambia
      * al lenguaje destructivo del sistema.
      */
@@ -57,8 +71,9 @@ export interface ConfirmDialogProps {
  * La pregunta antes de una acción que no se puede deshacer: borrar una
  * organización, revocar una clave, expulsar a alguien de un equipo.
  *
- * Es el `Modal` del sistema con dos botones y una decisión de diseño: **el
- * foco arranca en «Cancelar»**. Un diálogo destructivo que abre con el foco en
+ * Es el `Modal` del sistema con dos botones —tres si el producto pasa una
+ * acción intermedia— y una decisión de diseño: **el foco arranca en
+ * «Cancelar»**. Un diálogo destructivo que abre con el foco en
  * el botón que destruye convierte un `Enter` de más en una pérdida de datos.
  *
  * `onConfirm` puede devolver una promesa. Mientras está en curso el diálogo se
@@ -66,4 +81,4 @@ export interface ConfirmDialogProps {
  * se cierra solo al resolver. Si rechaza, sigue abierto: el error lo cuenta el
  * consumidor, que es quien sabe qué ha pasado.
  */
-export declare function ConfirmDialog({ open, title, description, children, onConfirm, onCancel, onConfirmError, destructive, confirmLabel, cancelLabel, pendingLabel, closeLabel, container, className, }: ConfirmDialogProps): import("react/jsx-runtime").JSX.Element;
+export declare function ConfirmDialog({ open, title, description, children, onConfirm, onCancel, onConfirmError, secondaryActionLabel, onSecondaryAction, destructive, confirmLabel, cancelLabel, pendingLabel, closeLabel, container, className, }: ConfirmDialogProps): import("react/jsx-runtime").JSX.Element;

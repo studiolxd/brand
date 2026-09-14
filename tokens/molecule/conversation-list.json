@@ -28,7 +28,7 @@
 
     "surface-dark-item-color":                  { "$value": "{color.text.muted-on-dark}",        "$type": "color", "$description": "Tinta de una conversación en reposo — superficie oscura" },
     "surface-dark-item-hover-color":            { "$value": "{color.text.on-dark}",             "$type": "color", "$description": "Tinta de la conversación bajo el puntero — superficie oscura: tinta plena" },
-    "surface-dark-item-active-color":           { "$value": "{color.accent-1}",                  "$type": "color", "$description": "Tinta de la conversación abierta — superficie oscura: lavanda, como en el SidebarNav" },
+    "surface-dark-item-active-color":           { "$value": "{color.text.on-dark}",              "$type": "color", "$description": "Tinta de la conversación abierta — superficie oscura: tinta plena, el par por la regla de derivación del valor claro. La abierta se dice con tinta y peso, no con un color de marca: coincide con el hover igual que en claro, y quien la distingue del resto es el peso (`item-active-font-weight`) sobre el gris de reposo" },
     "surface-dark-delete-color":                { "$value": "{color.text.muted-on-dark}",        "$type": "color", "$description": "Tinta del aspa en reposo — superficie oscura" },
     "surface-dark-delete-hover-color":          { "$value": "{color.destructive-text-on-dark}",  "$type": "color", "$description": "Tinta del aspa bajo el puntero — superficie oscura" },
     "surface-dark-focus-ring-color":            { "$value": "{color.text.on-dark}",              "$type": "color", "$description": "Color del anillo de foco — superficie oscura" }

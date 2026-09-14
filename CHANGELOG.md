@@ -7,6 +7,107 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.7.0] — 2026-09-14
+
+> **Minor.** El chat se queda sin ningún relleno propio y sin ninguna línea
+> interior, la conversación abierta se dice en tinta también en oscuro, y
+> `ConfirmDialog` aprende a llevar una tercera acción en el pie. Cae la tercera y última línea de `ChatShell` —la de encima de la
+> caja de escribir— y se retiran los cuatro rellenos del armazón y el del hilo.
+> Queda una sola medida de espaciado en toda la familia: el aire ENTRE la
+> columna de conversaciones y el hilo, que ahora lo pone el contenedor con un
+> `gap` en vez de ponérselo cada hijo. El principio: **quien compone, espacia;
+> los hijos no se auto-rellenan**. Cambio visual deliberado en los tres
+> productos que montan el chat (lmsmcp, lrs y tender); ninguna prop cambia.
+
+### `ChatShell` — ni rellenos ni líneas
+
+- **Fuera el `border-block-start` del composer**, la última línea que le
+  quedaba al armazón. Con las dos que se retiraron en v38.6.0 —la de la columna
+  de conversaciones y la de debajo de la cabecera—, el armazón se queda sin
+  ninguna línea interior.
+- **Fuera el relleno de `.chat-shell__list`, `.chat-shell__header` y
+  `.chat-shell__composer`.** El aire alrededor del chat es una decisión de la
+  pantalla que lo monta —cuánto respira, si va a sangre o dentro de un
+  contenedor que ya tiene su propio inset—: un componente que se rellena por su
+  cuenta la toma por ella y obliga a deshacerla.
+- **Nuevo token `chat-shell.gap`** (`{spacing.6}`, 32px): la separación entre la
+  columna de conversaciones y el hilo, que sobrevive al relleno que la ponía.
+  Va como `gap` de `.chat-shell--with-list`, es decir **la pone el contenedor**,
+  no cada hijo, y es la única medida de espaciado que le queda al armazón —
+  porque es lo único que el consumidor no puede poner desde fuera. Sustituye
+  al par `list-padding-inline` (8px) + `conversation-thread.padding-inline`
+  (32px), que sumaban 40px de pasillo.
+- **Tokens retirados**: `chat-shell.list-padding-block`,
+  `chat-shell.list-padding-inline`, `chat-shell.header-padding-block`,
+  `chat-shell.header-padding-inline`, `chat-shell.composer-padding-block`,
+  `chat-shell.composer-padding-inline`, `chat-shell.border-width`,
+  `chat-shell.border-style`, `chat-shell.border-color` y
+  `chat-shell.surface-dark-border-color`. En v38.6.0 los `border-*` se
+  conservaron porque todavía pintaban la línea del composer; ahora no pintan
+  nada, y un token que no pinta nada es deuda. Del armazón siguen vivos
+  `list-width`, `gap`, `header-gap`, `bg`, `breakpoint` y `surface-dark-bg`.
+- **Consecuencia práctica, dicha en la doc**: montado a pelo, el chat toca los
+  cantos. El aire lo pone el consumidor, alrededor del armazón o dentro de los
+  slots. El cajón de pantalla estrecha no se ve afectado: ahí la lista va
+  dentro de un `Sheet`, que pone su propio relleno.
+- **Documentación**: `ChatShell.mdx` cambia la sección «Una sola línea» por
+  «Ni líneas ni rellenos», con el principio y con la lista de lo retirado.
+  Story nueva `Test — ni rellenos ni líneas`, que mide en navegador que las
+  tres zonas van a cero, que no queda borde y que el `gap` sí está.
+
+### `ConversationThread` — el hilo tampoco se rellena
+
+- **Fuera `padding-block` y `padding-inline` del hilo**, y con ellos los tokens
+  `conversation-thread.padding-block` y `conversation-thread.padding-inline`.
+  Queda solo `conversation-thread.gap`, la separación entre mensajes.
+- El centrado de la conversación sin mensajes **no cambia**: sigue siendo
+  márgenes automáticos sobre el bloque que va solo. El test
+  `Test — lo que va solo se centra` mide ahora contra cero en vez de contra el
+  relleno que había.
+- **Documentación**: sección nueva «El hilo no se rellena» en
+  `ConversationThread.mdx`, que remite al mismo principio.
+
+### `ConversationList` — la conversación abierta, en tinta también en oscuro
+
+- **`conversation-list.surface-dark-item-active-color` pasa de
+  `{color.accent-1}` (lavanda) a `{color.text.on-dark}`** (tinta plena). La
+  lavanda venía del `SidebarNav`, pero la regla de este componente es que la
+  conversación abierta **se dice con tinta y peso, no con un color de marca** —
+  que es justo lo que ya hacía en superficie clara.
+- **Coincide con el color del puntero, igual que en claro**, y no hace falta
+  compensarlo: quien separa la abierta del resto de la lista es el peso
+  (`item-active-font-weight`) frente al gris de reposo
+  (`color.text.muted-on-dark`), más el `aria-current="page"` para quien no ve
+  ninguno de los dos. Comprobado en el navegador sobre la superficie oscura.
+  **Sin colores nuevos**: no se ha tocado la paleta.
+
+### `ConfirmDialog` — una tercera acción en el pie
+
+- **Nuevas props `secondaryActionLabel` + `onSecondaryAction`**: una acción
+  intermedia que el diálogo coloca **entre la de descartar y la principal**
+  («Permitir siempre» entre «Denegar» y «Permitir»). Se pinta solo si vienen
+  las dos; **sin ellas el diálogo no cambia en nada**, así que no rompe a
+  ninguno de los consumidores actuales.
+- **El orden del pie es descartar → intermedia → principal**, y va así en el
+  DOM: de ahí sale sola la colocación en las dos maquetas que ya tenía el pie
+  (fila a la derecha en escritorio; apilada a todo el ancho en
+  `column-reverse` por debajo de `--breakpoint-md`, con la principal arriba).
+  Tres botones no se amontonan en estrecho porque a esa anchura no comparten
+  fila.
+- **La intermedia va en `outline`** —como la de descartar— y **se deshabilita
+  mientras la acción principal está en curso**: el pie solo tiene dos niveles
+  de énfasis, la principal y el resto.
+- Es una prop y no un slot por lo mismo que el pie de un diálogo no se escribe
+  a mano (regla 10 del sistema): el orden y el énfasis los pone el componente.
+  La alternativa que se venía usando —meter el tercer botón por `children`— lo
+  dejaba arriba, suelto y alineado a la izquierda.
+- `secondaryActionLabel` **no tiene default castellano**: es texto del
+  producto, de la misma familia que `title` y `description`, no algo que el
+  diálogo diga por su cuenta. Anotado en Foundations › Internacionalización.
+- Story «Con una acción intermedia», test de story
+  `Test — el sitio de la acción intermedia` y dos pruebas unitarias (con y sin
+  las props); sección nueva «Una tercera acción en el pie» en la `.mdx`.
+
 ## [38.6.0] — 2026-09-14
 
 > **Minor.** El chat afina: `ChatShell` pierde dos de sus tres líneas —la que

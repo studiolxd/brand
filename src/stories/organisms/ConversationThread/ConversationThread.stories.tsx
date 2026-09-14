@@ -170,10 +170,11 @@ export const ContratoHiloVacio: Story = {
   play: async ({ canvasElement }) => {
     const hilo = (id: string) =>
       canvasElement.querySelector(`[data-testid="${id}"] .conversation-thread`) as HTMLElement;
-    // Lo que separa el primer bloque del canto del hilo. Si solo es el padding,
-    // está pegado arriba; si es más, los márgenes automáticos lo han centrado.
-    // (No se mide `marginBlockStart`: el navegador devuelve `0px` para un
-    // margen automático, no el valor que acaba usando.)
+    // Lo que separa el primer bloque del canto del hilo. El hilo ya no se
+    // rellena a sí mismo, así que pegado arriba es cero: cualquier hueco lo han
+    // puesto los márgenes automáticos. (No se mide `marginBlockStart`: el
+    // navegador devuelve `0px` para un margen automático, no el valor que acaba
+    // usando.)
     const hueco = (t: HTMLElement) =>
       Math.round(
         (t.firstElementChild as HTMLElement).getBoundingClientRect().top - t.getBoundingClientRect().top,
@@ -184,16 +185,17 @@ export const ContratoHiloVacio: Story = {
     // El hilo ocupa el alto que le dan, no el de su contenido.
     await waitFor(() => expect(Math.round(solo.getBoundingClientRect().height)).toBe(260));
 
-    const aire = Math.round(parseFloat(getComputedStyle(solo).paddingBlockStart));
-    await waitFor(() => expect(hueco(solo)).toBeGreaterThan(aire));
+    // El hilo no pone relleno: sin centrar, el primer bloque toca el canto.
+    await expect(Math.round(parseFloat(getComputedStyle(solo).paddingBlockStart))).toBe(0);
+    await waitFor(() => expect(hueco(solo)).toBeGreaterThan(0));
 
     // Dos bloques: sin márgenes automáticos, pegados arriba.
-    await expect(hueco(hilo('dos'))).toBe(aire);
+    await expect(hueco(hilo('dos'))).toBe(0);
 
     // Un solo mensaje montado por el hilo: arriba, como irán los siguientes.
     const unMensaje = hilo('un-mensaje');
     await expect(unMensaje.getAttribute('data-content')).toBe('messages');
-    await expect(hueco(unMensaje)).toBe(aire);
+    await expect(hueco(unMensaje)).toBe(0);
   },
 };
 

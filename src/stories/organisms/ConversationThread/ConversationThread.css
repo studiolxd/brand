@@ -3,15 +3,17 @@
    dentro se queda pegado arriba aunque sobre sitio. `min-block-size: 0` es lo
    que deja que siga encogiendo —y por tanto desplazándose— cuando el contenido
    pasa del alto disponible. Fuera de un contenedor flex las dos se ignoran y
-   el hilo crece con su contenido, como siempre. */
+   el hilo crece con su contenido, como siempre.
+
+   El hilo no se rellena a sí mismo: lo único que espacia es el `gap` entre
+   mensajes. El aire alrededor de los globos lo pone quien monta el hilo —quien
+   compone, espacia—, que es también quien sabe cuánto respira la pantalla. */
 .conversation-thread {
   display: flex;
   flex-direction: column;
   flex: 1;
   min-block-size: 0;
   gap: var(--conversation-thread-gap);
-  padding-block: var(--conversation-thread-padding-block);
-  padding-inline: var(--conversation-thread-padding-inline);
   overflow-y: auto;
 }
 

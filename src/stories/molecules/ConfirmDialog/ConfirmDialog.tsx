@@ -28,6 +28,20 @@ export interface ConfirmDialogProps {
    */
   onConfirmError?: (error: unknown) => void;
   /**
+   * Rótulo de una **tercera acción**, que se coloca entre la de cancelar y la
+   * de confirmar: la variante de la respuesta afirmativa que no es la que se
+   * ofrece por defecto («Permitir siempre» junto a «Permitir», «Guardar como
+   * copia» junto a «Guardar»). No tiene default —es texto del producto, como
+   * `title`— y solo se pinta si viene con `onSecondaryAction`.
+   */
+  secondaryActionLabel?: string;
+  /**
+   * Se llama al pulsar la acción intermedia. Cerrar el diálogo es del
+   * consumidor, igual que en `onConfirm` sin promesa: el diálogo no supone que
+   * la tercera acción termine la conversación.
+   */
+  onSecondaryAction?: () => void;
+  /**
    * La acción destructiva no se puede deshacer: el botón de confirmar cambia
    * al lenguaje destructivo del sistema.
    */
@@ -62,8 +76,9 @@ export interface ConfirmDialogProps {
  * La pregunta antes de una acción que no se puede deshacer: borrar una
  * organización, revocar una clave, expulsar a alguien de un equipo.
  *
- * Es el `Modal` del sistema con dos botones y una decisión de diseño: **el
- * foco arranca en «Cancelar»**. Un diálogo destructivo que abre con el foco en
+ * Es el `Modal` del sistema con dos botones —tres si el producto pasa una
+ * acción intermedia— y una decisión de diseño: **el foco arranca en
+ * «Cancelar»**. Un diálogo destructivo que abre con el foco en
  * el botón que destruye convierte un `Enter` de más en una pérdida de datos.
  *
  * `onConfirm` puede devolver una promesa. Mientras está en curso el diálogo se
@@ -79,6 +94,8 @@ export function ConfirmDialog({
   onConfirm,
   onCancel,
   onConfirmError,
+  secondaryActionLabel,
+  onSecondaryAction,
   destructive = false,
   confirmLabel = 'Confirmar',
   cancelLabel = 'Cancelar',
@@ -137,6 +154,18 @@ export function ConfirmDialog({
           <Button ref={cancelRef} variant="outline" onClick={handleCancel} disabled={pending}>
             {cancelLabel}
           </Button>
+          {/* La tercera acción va ENTRE las otras dos, nunca en el cuerpo: el
+              orden del pie es descartar → intermedia → principal, y de ese
+              orden sale solo la colocación en las dos maquetas (fila a la
+              derecha en escritorio; apilada con la principal arriba por debajo
+              del punto de ruptura, que el pie invierte). Va en `outline` como
+              la de descartar porque el pie solo tiene dos niveles de énfasis:
+              la principal y el resto. */}
+          {secondaryActionLabel && onSecondaryAction && (
+            <Button variant="outline" onClick={onSecondaryAction} disabled={pending}>
+              {secondaryActionLabel}
+            </Button>
+          )}
           <Button
             variant={destructive ? 'outline' : 'primary'}
             destructive={destructive}

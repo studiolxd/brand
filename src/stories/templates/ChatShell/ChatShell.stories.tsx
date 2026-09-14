@@ -290,3 +290,34 @@ export const ContratoZonas: Story = {
     await expect(getComputedStyle(zonaHilo).overflowY).toBe('auto');
   },
 };
+
+/**
+ * Test: el armazón no se rellena ni se raya — ninguna de sus tres zonas pone
+ * padding y no queda ninguna línea interior. Lo único que espacia es el `gap`
+ * entre las dos columnas.
+ */
+export const ContratoSinRelleno: Story = {
+  name: 'Test — ni rellenos ni líneas',
+  tags: ['!dev'],
+  args: PorDefecto.args,
+  play: async ({ canvasElement }) => {
+    const zona = (clase: string) => canvasElement.querySelector(clase) as HTMLElement;
+
+    for (const clase of ['.chat-shell__list', '.chat-shell__header', '.chat-shell__composer']) {
+      const estilo = getComputedStyle(zona(clase));
+      await expect(`${clase} ${estilo.paddingBlockStart} ${estilo.paddingBlockEnd}`).toBe(`${clase} 0px 0px`);
+      await expect(`${clase} ${estilo.paddingInlineStart} ${estilo.paddingInlineEnd}`).toBe(`${clase} 0px 0px`);
+    }
+    // El hilo tampoco: es del otro componente, pero se mide aquí montado.
+    const hilo = getComputedStyle(canvasElement.querySelector('.conversation-thread') as HTMLElement);
+    await expect(`${hilo.paddingBlockStart} ${hilo.paddingInlineStart}`).toBe('0px 0px');
+
+    // Ninguna línea interior: la del composer era la última y se retiró.
+    const composer = getComputedStyle(zona('.chat-shell__composer'));
+    await expect(composer.borderBlockStartWidth).toBe('0px');
+
+    // Y lo que separa la columna del hilo es el aire del contenedor.
+    const armazon = getComputedStyle(zona('.chat-shell'));
+    await expect(parseFloat(armazon.columnGap)).toBeGreaterThan(0);
+  },
+};

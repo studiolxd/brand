@@ -677,6 +677,5 @@ html.dark .surface-invert {
   --chart-tooltip-bg: var(--tooltip-bg);
   --chart-tooltip-color: var(--tooltip-color);
   --chart-crosshair-color: var(--color-icon-secondary-on-light);
-  --chat-shell-border-color: var(--color-primary);
   --chat-shell-bg: var(--color-background-light);
 }

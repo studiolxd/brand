@@ -52,6 +52,34 @@ describe('ConfirmDialog', () => {
     await waitFor(() => expect(onCancel).toHaveBeenCalled());
   });
 
+  it('sin las props de acción intermedia el pie sigue teniendo dos botones', () => {
+    renderDialog();
+    const pie = document.querySelector('.confirm-dialog__actions') as HTMLElement;
+    expect(Array.from(pie.querySelectorAll('button')).map((b) => b.textContent)).toEqual([
+      'Cancelar',
+      'Confirmar',
+    ]);
+  });
+
+  it('coloca la acción intermedia entre descartar y la principal, y avisa al pulsarla', async () => {
+    const onSecondaryAction = vi.fn();
+    renderDialog({
+      cancelLabel: 'Denegar',
+      confirmLabel: 'Permitir',
+      secondaryActionLabel: 'Permitir siempre',
+      onSecondaryAction,
+    });
+    const pie = document.querySelector('.confirm-dialog__actions') as HTMLElement;
+    expect(Array.from(pie.querySelectorAll('button')).map((b) => b.textContent)).toEqual([
+      'Denegar',
+      'Permitir siempre',
+      'Permitir',
+    ]);
+
+    await userEvent.click(screen.getByRole('button', { name: 'Permitir siempre' }));
+    expect(onSecondaryAction).toHaveBeenCalledTimes(1);
+  });
+
   it('usa el lenguaje destructivo en el botón de confirmar cuando toca', () => {
     renderDialog({ destructive: true, confirmLabel: 'Borrar' });
     const confirmar = screen.getByRole('button', { name: 'Borrar' });

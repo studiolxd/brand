@@ -5,49 +5,58 @@ import { Modal as t } from "./modal.js";
 import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
 import { useEffect as a, useRef as o, useState as s } from "react";
 //#region src/stories/molecules/ConfirmDialog/ConfirmDialog.tsx
-function c({ open: c, title: l, description: u, children: d, onConfirm: f, onCancel: p, onConfirmError: m, destructive: h = !1, confirmLabel: g = "Confirmar", cancelLabel: _ = "Cancelar", pendingLabel: v = "Confirmando…", closeLabel: y = "Cerrar", container: b, className: x }) {
-	let S = o(null), [C, w] = s(!1);
+function c({ open: c, title: l, description: u, children: d, onConfirm: f, onCancel: p, onConfirmError: m, secondaryActionLabel: h, onSecondaryAction: g, destructive: _ = !1, confirmLabel: v = "Confirmar", cancelLabel: y = "Cancelar", pendingLabel: b = "Confirmando…", closeLabel: x = "Cerrar", container: S, className: C }) {
+	let w = o(null), [T, E] = s(!1);
 	a(() => {
-		c || w(!1);
+		c || E(!1);
 	}, [c]);
-	let T = () => {
-		C || p();
-	}, E = async () => {
-		if (C) return;
+	let D = () => {
+		T || p();
+	}, O = async () => {
+		if (T) return;
 		let e = f();
 		if (e instanceof Promise) {
-			w(!0);
+			E(!0);
 			try {
 				await e;
 			} catch (e) {
 				m?.(e);
 			} finally {
-				w(!1);
+				E(!1);
 			}
 		}
 	};
 	return /* @__PURE__ */ r(t, {
 		open: c,
-		onClose: T,
+		onClose: D,
 		title: l,
-		closeLabel: y,
-		container: b,
-		initialFocus: S,
+		closeLabel: x,
+		container: S,
+		initialFocus: w,
 		...u == null ? {} : { description: u },
-		footerClassName: ["confirm-dialog__actions", x].filter(Boolean).join(" "),
-		footer: /* @__PURE__ */ i(n, { children: [/* @__PURE__ */ r(e, {
-			ref: S,
-			variant: "outline",
-			onClick: T,
-			disabled: C,
-			children: _
-		}), /* @__PURE__ */ r(e, {
-			variant: h ? "outline" : "primary",
-			destructive: h,
-			onClick: E,
-			disabled: C,
-			children: C ? v : g
-		})] }),
+		footerClassName: ["confirm-dialog__actions", C].filter(Boolean).join(" "),
+		footer: /* @__PURE__ */ i(n, { children: [
+			/* @__PURE__ */ r(e, {
+				ref: w,
+				variant: "outline",
+				onClick: D,
+				disabled: T,
+				children: y
+			}),
+			h && g && /* @__PURE__ */ r(e, {
+				variant: "outline",
+				onClick: g,
+				disabled: T,
+				children: h
+			}),
+			/* @__PURE__ */ r(e, {
+				variant: _ ? "outline" : "primary",
+				destructive: _,
+				onClick: O,
+				disabled: T,
+				children: T ? b : v
+			})
+		] }),
 		children: d
 	});
 }

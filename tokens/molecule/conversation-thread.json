@@ -1,7 +1,5 @@
 {
   "conversation-thread": {
-    "gap":            { "$value": "{spacing.4}",  "$type": "dimension", "$description": "Separación vertical entre mensajes" },
-    "padding-block":  { "$value": "{spacing.6}",  "$type": "dimension", "$description": "Padding vertical del hilo" },
-    "padding-inline": { "$value": "{spacing.6}",  "$type": "dimension", "$description": "Padding horizontal del hilo" }
+    "gap":            { "$value": "{spacing.4}",  "$type": "dimension", "$description": "Separación vertical entre mensajes. Es la única medida de espaciado del hilo: el relleno se retiró —quien compone, espacia—, así que el aire alrededor de los globos lo pone quien monta el hilo" }
   }
 }

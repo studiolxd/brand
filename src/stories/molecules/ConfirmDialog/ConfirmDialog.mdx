@@ -24,7 +24,7 @@ Es el `Modal` del sistema con el cuerpo ya escrito:
 - **Título** (`title`) — la pregunta, no la palabra «Confirmar».
 - **Descripción** (`description`) — qué va a pasar y qué no se puede deshacer. Va como `Dialog.Description`, así que queda enlazada al diálogo con `aria-describedby`.
 - **Contenido extra** (`children`) — el detalle de lo que se pierde, cuando hace falta.
-- **Acciones** — cancelar y confirmar, en un `Inline justify="end"`.
+- **Acciones** — cancelar y confirmar, en un `Inline justify="end"`; entre las dos cabe una tercera (`secondaryActionLabel`).
 
 <Canvas of={ConfirmDialogStories.ConDetalle} />
 
@@ -33,6 +33,34 @@ Es el `Modal` del sistema con el cuerpo ya escrito:
 `destructive` pasa el botón de confirmar al lenguaje destructivo del sistema (`outline` con la tinta roja), que es donde vive esa intención: el rojo no es un relleno, es una tinta y un borde.
 
 <Canvas of={ConfirmDialogStories.Destructivo} />
+
+## Una tercera acción en el pie
+
+A veces la respuesta afirmativa tiene dos formas —«Permitir» y «Permitir siempre», «Guardar» y «Guardar como copia»— y la segunda no puede ser la principal. Para eso están **`secondaryActionLabel` + `onSecondaryAction`**: una acción más que el diálogo coloca **entre la de descartar y la principal**.
+
+<Canvas of={ConfirmDialogStories.AccionIntermedia} />
+
+```tsx
+<ConfirmDialog
+  open={open}
+  title="¿Permitir que el asistente use esta herramienta?"
+  description="Va a consultar las calificaciones del curso en Moodle."
+  cancelLabel="Denegar"
+  confirmLabel="Permitir"
+  secondaryActionLabel="Permitir siempre"
+  onSecondaryAction={permitirSiempre}
+  onConfirm={permitirUnaVez}
+  onCancel={denegar}
+/>
+```
+
+Tres cosas, y las tres son del sistema, no de este diálogo:
+
+- **El orden del pie es descartar → intermedia → principal**, y va en el DOM en ese orden. De ahí sale sola la colocación en las dos maquetas: fila alineada a la derecha en escritorio, y por debajo de `--breakpoint-md` apilada a todo el ancho en `column-reverse`, con la principal arriba —al alcance del pulgar— y la de descartar abajo. Tres botones no se amontonan porque a esa anchura no comparten fila.
+- **La intermedia va en `outline`**, como la de descartar: el pie solo tiene dos niveles de énfasis, la principal y el resto. Lo que la distingue de «Denegar» es su sitio y su rótulo, no un color más.
+- **Se deshabilita mientras la acción principal está en curso**, igual que las otras dos.
+
+Es una prop, no un slot, por lo mismo que el pie de un diálogo no se escribe a mano (regla 10 del sistema): el orden y el énfasis los pone el componente. **Sin las dos props, el diálogo no cambia en nada** — sigue teniendo dos botones. Y lo que NO se hace es meter esa tercera acción por `children`: ahí aparece arriba, suelta y alineada a la izquierda, lejos de las otras dos.
 
 ## Acción en curso
 
@@ -52,7 +80,7 @@ No tiene nada que remapear: la superficie es la del `Modal` y los botones son lo
 
 ## Textos
 
-`confirmLabel`, `cancelLabel`, `pendingLabel` y `closeLabel` son props con default castellano. El `confirmLabel` gana mucho si dice **qué** se confirma («Borrar la organización») en vez de «Confirmar»: quien lea solo el botón sabrá qué está a punto de pasar.
+`confirmLabel`, `cancelLabel`, `pendingLabel` y `closeLabel` son props con default castellano. `secondaryActionLabel` **no tiene default**: como `title` y `description`, es texto del producto —no algo que el diálogo diga por su cuenta—, y sin él la tercera acción no existe. El `confirmLabel` gana mucho si dice **qué** se confirma («Borrar la organización») en vez de «Confirmar»: quien lea solo el botón sabrá qué está a punto de pasar.
 
 ---
 

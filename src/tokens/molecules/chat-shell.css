@@ -3,18 +3,10 @@
  */
 
 :root {
-  --chat-shell-border-style: solid; /** Estilo de la línea que separa la caja de escribir del hilo — la única del armazón */
   --chat-shell-list-width: var(--sidebar-width); /** Ancho de la columna de conversaciones — cascada desde `sidebar`, que es donde suele vivir esa columna dentro de una aplicación */
-  --chat-shell-list-padding-block: var(--spacing-4); /** Aire vertical de la columna de conversaciones */
-  --chat-shell-list-padding-inline: var(--spacing-2); /** Aire horizontal de la columna de conversaciones. Ya no hay línea que la separe del hilo: la separación la hace este pasillo, que sumado al aire del hilo deja 40px entre la lista y los globos. Es un paso corto a propósito: cada píxel de más se lo quita al título de la conversación, que se trunca */
-  --chat-shell-header-padding-block: var(--spacing-3); /** Aire vertical de la cabecera del hilo */
-  --chat-shell-header-padding-inline: var(--spacing-6); /** Aire horizontal de la cabecera del hilo */
+  --chat-shell-gap: var(--spacing-6); /** El aire entre la columna de conversaciones y el hilo. Lo pone el contenedor, no los hijos: el armazón no tiene ningún relleno propio, así que esta es la única medida de espaciado que aporta y la única que separa las dos columnas — ya no hay línea ni pasillo que lo haga */
   --chat-shell-header-gap: var(--spacing-3); /** Separación entre lo que va en la cabecera del hilo */
-  --chat-shell-composer-padding-block: var(--spacing-4); /** Aire vertical de la zona de escribir */
-  --chat-shell-composer-padding-inline: var(--spacing-6); /** Aire horizontal de la zona de escribir */
   --chat-shell-breakpoint: var(--breakpoint-lg); /** Donde el armazón pasa de dos columnas a una. El mismo punto en el que el chrome de aplicación pasa de barra superior a barra lateral */
-  --chat-shell-border-width: var(--border-width-default); /** Grosor de la línea que separa la caja de escribir del hilo — la única del armazón */
-  --chat-shell-border-color: var(--color-primary); /** Color de la línea que separa la caja de escribir del hilo. Es el único separador del armazón: el sistema no proyecta sombra */
   --chat-shell-bg: var(--color-background-light); /** Fondo del armazón */
 }
 
@@ -22,6 +14,5 @@
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --chat-shell-border-color: var(--color-text-on-dark); /** Color de la línea que separa la caja de escribir del hilo — superficie oscura */
   --chat-shell-bg: var(--color-background-dark); /** Fondo del armazón — superficie oscura */
 }

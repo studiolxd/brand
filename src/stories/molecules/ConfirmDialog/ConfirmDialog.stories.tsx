@@ -83,6 +83,24 @@ export const ConPromesa: Story = {
  * Test: el diálogo abre con el foco en «Cancelar» —no en el botón que
  * destruye— y expone su título y su descripción.
  */
+/**
+ * Una **tercera acción** entre la de descartar y la principal: la variante de
+ * la respuesta afirmativa que no se ofrece por defecto. El pie queda
+ * descartar → intermedia → principal, que es el orden del sistema.
+ */
+export const AccionIntermedia: Story = {
+  name: 'Con una acción intermedia',
+  args: {
+    ...base,
+    title: '¿Permitir que el asistente use esta herramienta?',
+    description: 'Va a consultar las calificaciones del curso en Moodle.',
+    cancelLabel: 'Denegar',
+    confirmLabel: 'Permitir',
+    secondaryActionLabel: 'Permitir siempre',
+    onSecondaryAction: () => {},
+  },
+};
+
 export const TestFocoInicial: Story = {
   name: 'Test — foco inicial en cancelar',
   tags: ['!dev'],
@@ -129,3 +147,38 @@ export const TestAcciones: Story = {
 async function screenDialog(): Promise<HTMLElement> {
   return within(document.body).findByRole('dialog');
 }
+
+/**
+ * Test: la acción intermedia va entre las otras dos en el DOM —de ahí sale su
+ * sitio en las dos maquetas del pie— y avisa a quien corresponde. Sin ella, el
+ * pie sigue teniendo dos botones.
+ */
+export const TestAccionIntermedia: Story = {
+  name: 'Test — el sitio de la acción intermedia',
+  tags: ['!dev'],
+  args: base,
+  render: (args) => {
+    const [ultimo, setUltimo] = useState('');
+    return (
+      <>
+        <ConfirmDialog
+          {...args}
+          cancelLabel="Denegar"
+          confirmLabel="Permitir"
+          secondaryActionLabel="Permitir siempre"
+          onSecondaryAction={() => setUltimo('siempre')}
+        />
+        <p data-testid="ultimo">{ultimo}</p>
+      </>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const dialog = await screenDialog();
+    const pie = dialog.querySelector('.confirm-dialog__actions') as HTMLElement;
+    const rotulos = Array.from(pie.querySelectorAll('button')).map((b) => b.textContent);
+    await expect(rotulos).toEqual(['Denegar', 'Permitir siempre', 'Permitir']);
+
+    await userEvent.click(within(dialog).getByRole('button', { name: 'Permitir siempre' }));
+    await expect(within(canvasElement).getByTestId('ultimo')).toHaveTextContent('siempre');
+  },
+};

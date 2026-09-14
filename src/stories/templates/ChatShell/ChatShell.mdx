@@ -30,21 +30,25 @@ Las tres se resumen en una: **el chat no se explica con la forma**. La forma aco
 | `list` | Un `ConversationList` | Columna lateral con scroll propio, separada del hilo por el aire; cajón por debajo del punto de ruptura |
 | `header` | El título de la conversación y sus controles | Fila fija arriba, sin línea debajo |
 | `children` | Un `ConversationThread` | La zona que crece, **la única con scroll** |
-| `composer` | Un `MessageComposer` | Fila fija abajo, con línea encima — la única del armazón |
+| `composer` | Un `MessageComposer` | Fila fija abajo, sin línea encima |
 
 Todos menos `children` son opcionales. Lo que hace que un chat se comporte es que **el scroll vive solo en el hilo**: la cabecera y la caja de escribir se quedan quietas mientras la conversación se desplaza detrás.
 
 <Canvas of={ChatShellStories.Minimo} />
 
-### Una sola línea
+### Ni líneas ni rellenos
 
-El armazón tuvo tres líneas: la de la columna de conversaciones, la de debajo de la cabecera y la de encima de la caja de escribir. **Queda una.** Las dos primeras se retiraron porque no separaban nada que no se viera solo: la columna ya se lee como columna por su ancho y por su aire, y la cabecera es una fila corta de título sobre un hilo que empieza más abajo — subrayarla solo cargaba de trazo una pantalla que se mira durante horas.
+El armazón tuvo tres líneas —la de la columna de conversaciones, la de debajo de la cabecera y la de encima de la caja de escribir— y cuatro rellenos propios —los de la columna, la cabecera, la caja de escribir y el hilo—. **No queda ninguno de los siete.**
 
-La de la caja de escribir se queda, y es la única que hace trabajo: el hilo se desplaza **por detrás** mientras el composer se queda quieto, así que sin ella el último globo pasaría bajo el campo de escribir sin que se notara dónde acaba uno y empieza el otro.
+Las líneas se fueron porque no separaban nada que no se viera solo: la columna ya se lee como columna por su ancho, la cabecera es una fila corta de título sobre un hilo que empieza más abajo, y el canto de la caja de escribir lo marca el propio campo. Subrayarlas solo cargaba de trazo una pantalla que se mira durante horas. La separación pasa de trazo a aire: la misma decisión, contada con otro material.
 
-A cambio de la línea de la columna, la columna se puso su **propio pasillo** a los dos lados (`chat-shell.list-padding-inline`, un paso de 8px): sumado al aire del hilo quedan 40px entre la lista y los globos, y la columna deja de tocar el canto de la ventana. El paso es corto a propósito —cada píxel de pasillo se lo quita al título de la conversación, que se trunca—: para separar dos columnas que ya se distinguen por su ancho no hace falta más. La separación pasa de trazo a aire: la misma decisión, contada con otro material.
+Los rellenos se fueron por una razón distinta, y es el principio que ordena el resto: **quien compone, espacia; los hijos no se auto-rellenan.** El aire alrededor del chat es una decisión de la pantalla que lo monta —cuánto respira, si va a sangre o dentro de un contenedor que ya tiene su propio inset—, y un componente que se rellena por su cuenta la toma por ella y obliga a deshacerla. Lo mismo vale para el hilo: `ConversationThread` tampoco tiene relleno.
 
-Los tokens `chat-shell.border-*` siguen existiendo con el mismo nombre —no se renombran, que rompería a quien los remapee— pero ahora describen una sola línea, la del composer.
+Lo único que el armazón sí aporta es lo que nadie de fuera puede poner: **la separación entre sus dos columnas**, `chat-shell.gap` (32px), un `gap` del contenedor y no un pasillo de cada hijo. Es la última medida de espaciado que queda en el componente.
+
+De ahí se sigue una cosa práctica: **montado a pelo, el chat toca los cantos**. El aire lo pone el consumidor, alrededor del armazón o dentro de los slots, según dónde viva la pantalla.
+
+Los tokens `chat-shell.border-*`, `chat-shell.list-padding-*`, `chat-shell.header-padding-*` y `chat-shell.composer-padding-*` se retiran: ya no pintan nada, y un token que no pinta nada es deuda.
 
 ## La conversación sin mensajes
 
@@ -80,7 +84,7 @@ Un hilo de chat se monta **siempre** dentro de `ChatShell` —directamente sobre
 
 ## Superficie oscura
 
-El fondo y la línea del composer tienen par oscuro. No hay sombras: lo que el sistema dibuja para separar es una línea de 1px, aquí y en todas partes.
+El armazón solo pinta el fondo, y ese es el único token con par oscuro. No hay sombras ni líneas interiores que llevar a la otra superficie: lo que separa aquí es el aire.
 
 ## La pantalla entera
 

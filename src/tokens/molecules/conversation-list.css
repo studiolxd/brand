@@ -32,7 +32,7 @@
 html.dark {
   --conversation-list-item-color: var(--color-text-muted-on-dark); /** Tinta de una conversación en reposo — superficie oscura */
   --conversation-list-item-hover-color: var(--color-text-on-dark); /** Tinta de la conversación bajo el puntero — superficie oscura: tinta plena */
-  --conversation-list-item-active-color: var(--color-accent-1); /** Tinta de la conversación abierta — superficie oscura: lavanda, como en el SidebarNav */
+  --conversation-list-item-active-color: var(--color-text-on-dark); /** Tinta de la conversación abierta — superficie oscura: tinta plena, el par por la regla de derivación del valor claro. La abierta se dice con tinta y peso, no con un color de marca: coincide con el hover igual que en claro, y quien la distingue del resto es el peso (`item-active-font-weight`) sobre el gris de reposo */
   --conversation-list-delete-color: var(--color-text-muted-on-dark); /** Tinta del aspa en reposo — superficie oscura */
   --conversation-list-delete-hover-color: var(--color-destructive-text-on-dark); /** Tinta del aspa bajo el puntero — superficie oscura */
   --conversation-list-focus-ring-color: var(--color-text-on-dark); /** Color del anillo de foco — superficie oscura */

@@ -3,7 +3,5 @@
  */
 
 :root {
-  --conversation-thread-gap: var(--spacing-4); /** Separación vertical entre mensajes */
-  --conversation-thread-padding-block: var(--spacing-6); /** Padding vertical del hilo */
-  --conversation-thread-padding-inline: var(--spacing-6); /** Padding horizontal del hilo */
+  --conversation-thread-gap: var(--spacing-4); /** Separación vertical entre mensajes. Es la única medida de espaciado del hilo: el relleno se retiró —quien compone, espacia—, así que el aire alrededor de los globos lo pone quien monta el hilo */
 }
