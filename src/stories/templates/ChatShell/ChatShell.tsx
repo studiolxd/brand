@@ -81,6 +81,20 @@ export const ChatShell = forwardRef<HTMLDivElement, ChatShellProps>(function Cha
     typeof window === 'undefined' ? true : window.matchMedia(DESKTOP_MQ).matches,
   );
   const [selfOpen, setSelfOpen] = useState(false);
+  /*
+   * El nodo raíz, en estado y no en una ref: el `container` del cajón tiene
+   * que estar disponible en el render en el que el cajón se monta, y una ref
+   * no provoca repintado cuando se rellena.
+   */
+  const [root, setRoot] = useState<HTMLDivElement | null>(null);
+  const setRefs = useCallback(
+    (node: HTMLDivElement | null) => {
+      setRoot(node);
+      if (typeof ref === 'function') ref(node);
+      else if (ref) ref.current = node;
+    },
+    [ref],
+  );
 
   useEffect(() => {
     const mq = window.matchMedia(DESKTOP_MQ);
@@ -116,7 +130,7 @@ export const ChatShell = forwardRef<HTMLDivElement, ChatShellProps>(function Cha
   ].filter(Boolean).join(' ');
 
   return (
-    <div ref={ref} className={classes} {...rest}>
+    <div ref={setRefs} className={classes} {...rest}>
       {asColumn && (
         <aside className="chat-shell__list" aria-label={listLabel}>
           {list}
@@ -137,7 +151,11 @@ export const ChatShell = forwardRef<HTMLDivElement, ChatShellProps>(function Cha
                 className="chat-shell__list-trigger"
                 onClick={() => setDrawerOpen(true)}
               >
-                <Icon name="menu" size="sm" />
+                {/* La barra lateral, no tres rayas: este botón despliega y
+                    pliega la columna de conversaciones, y el glifo de menú lo
+                    confundía con el menú de navegación de la aplicación, que
+                    está a dos dedos en la misma cabecera (2026-09-14). */}
+                <Icon name="layout-sidebar" size="sm" />
               </Button>
             )}
             {header && <div className="chat-shell__header-content">{header}</div>}
@@ -153,6 +171,14 @@ export const ChatShell = forwardRef<HTMLDivElement, ChatShellProps>(function Cha
           open={drawerOpen}
           onOpenChange={setDrawerOpen}
           title={listLabel}
+          /* El título sigue nombrando el diálogo para quien lo escucha, pero
+             no se pinta: la lista se explica sola y el rótulo se comía una
+             línea de pantalla en la que caben dos conversaciones. */
+          titleHidden
+          /* Dentro del armazón, no en `document.body`: el cajón es de la
+             pantalla de chat y se queda en ella —con su velo— en vez de
+             tapar la aplicación entera. */
+          container={root ?? undefined}
           className="chat-shell__drawer"
         >
           {list}

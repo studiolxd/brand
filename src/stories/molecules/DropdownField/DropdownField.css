@@ -16,6 +16,14 @@
   flex-basis: 100%;
 }
 
+/* Apilado —la forma de campo de formulario— el control ocupa la línea entera,
+   como `SelectField` o `InputField`: media línea de control y media vacía no
+   se lee como un campo. En línea conserva su ancho natural, que es lo que lo
+   deja caber junto a su etiqueta en una barra (2026-09-14). */
+.dropdown-field:not(.dropdown-field--inline) .dropdown-field__control {
+  inline-size: 100%;
+}
+
 /* La misma cara que el trigger del Select: rectangular, a la altura del sistema. */
 .dropdown-field__control {
   display: inline-flex;

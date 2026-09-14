@@ -7,6 +7,33 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.12.0] — 2026-09-14
+
+> **Minor.** El chat en móvil y dos selectores que ahora saben ser campo de
+> formulario. Ninguna prop existente cambia.
+
+### `ChatShell` — el cajón es de la pantalla de chat
+
+Tres cosas del cajón de conversaciones en pantallas estrechas:
+
+- **Se queda dentro del armazón**, con su velo, en vez de tapar la aplicación
+  entera: se monta en el propio `.chat-shell` y se mide contra él.
+- **Su rótulo no se pinta.** Sigue nombrando el diálogo para quien lo escucha,
+  pero se comía una línea de pantalla en la que caben dos conversaciones.
+- **El botón que lo abre lleva el glifo de barra lateral**, no el de menú: con
+  tres rayas se confundía con el menú de navegación de la aplicación, que está
+  a dos dedos en la misma cabecera.
+
+### `LanguageSwitcher` y `ThemeSwitcher` — `layout="stacked"`
+
+Los dos nacieron para el chrome, donde la etiqueta va delante del control. En
+un formulario de ajustes eso desentona con el resto de campos, que ponen la
+etiqueta encima y el control a todo el ancho. `layout="stacked"` hace eso; el
+valor por defecto sigue siendo `inline`.
+
+De paso, un `DropdownField` apilado estira su control hasta el ancho del
+campo, como `SelectField` o `InputField`. En línea conserva su ancho natural.
+
 ## [38.11.0] — 2026-09-14
 
 > **Minor.** Seis arreglos de móvil y un modificador nuevo. La portada crece y

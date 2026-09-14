@@ -135,3 +135,13 @@ export const ContratoLista: Story = {
     await expect(within(nav).getByRole('link', { name: 'Deutsch' })).toHaveAttribute('href', '/de');
   },
 };
+
+/**
+ * `layout="stacked"`: la etiqueta encima y el control a todo el ancho, como
+ * cualquier otro campo de un formulario. Es la forma de «Mi cuenta», donde el
+ * idioma es un ajuste más y no un control de la barra.
+ */
+export const Apilado: Story = {
+  name: 'Apilado (formulario)',
+  args: { layout: 'stacked' },
+};

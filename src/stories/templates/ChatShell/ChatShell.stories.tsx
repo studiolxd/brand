@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { ChatShell } from './ChatShell';
 import { ConversationList } from '../../molecules/ConversationList/ConversationList';
 import type { ConversationItem } from '../../molecules/ConversationList/ConversationList';
@@ -358,5 +358,47 @@ export const ContratoPasillo: Story = {
 
     // Sin barra horizontal: lo que cae en el relleno no desborda.
     expect(hilo.scrollWidth).toBeLessThanOrEqual(hilo.clientWidth);
+  },
+};
+
+/**
+ * El cajón de conversaciones es de la pantalla de chat: se abre DENTRO del
+ * armazón, con su velo, en vez de taparlo todo. Y su rótulo no se pinta —la
+ * lista se explica sola— aunque sigue nombrando el diálogo para quien lo
+ * escucha.
+ */
+export const ContratoCajonEnElArmazon: Story = {
+  name: 'Test — el cajón se queda dentro del armazón',
+  tags: ['!dev'],
+  globals: { viewport: { value: 'mobile1' } },
+  args: PorDefecto.args,
+  render: (args) => (
+    // El armazón NO llena la ventana: es la única forma de ver la diferencia
+    // entre medirse contra él y medirse contra la pantalla.
+    <div style={{ blockSize: '100dvh', paddingBlock: '80px' }}>
+      <ChatShell {...args} />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Abrir conversaciones' }));
+
+    const armazon = canvasElement.querySelector<HTMLElement>('.chat-shell')!;
+    const cajon = await waitFor(() => {
+      const el = canvasElement.querySelector<HTMLElement>('.chat-shell__drawer');
+      expect(el).not.toBeNull();
+      return el!;
+    });
+
+    // Dentro del armazón, en el árbol y en la pantalla.
+    await expect(armazon.contains(cajon)).toBe(true);
+    const caja = armazon.getBoundingClientRect();
+    const suya = cajon.getBoundingClientRect();
+    await expect(Math.round(suya.top)).toBe(Math.round(caja.top));
+    await expect(Math.round(suya.bottom)).toBe(Math.round(caja.bottom));
+
+    // El diálogo sigue teniendo nombre aunque no se pinte el rótulo.
+    const dialogo = within(armazon).getByRole('dialog');
+    await expect(dialogo).toHaveAccessibleName('Conversaciones');
   },
 };

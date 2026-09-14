@@ -69,3 +69,9 @@ export const ContratoLista: Story = {
     await expect(within(grupo).getByRole('button', { name: 'Sistema' })).toHaveAttribute('aria-pressed', 'false');
   },
 };
+
+/** `layout="stacked"`: etiqueta encima y control a todo el ancho, como el resto de campos. */
+export const Apilado: Story = {
+  name: 'Apilado (formulario)',
+  args: { layout: 'stacked' },
+};

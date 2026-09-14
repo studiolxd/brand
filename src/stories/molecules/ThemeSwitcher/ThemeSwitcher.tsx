@@ -31,6 +31,14 @@ export interface ThemeSwitcherProps {
    */
   variant?: 'compact' | 'list' | 'icon';
   /** Talla del control compacto (32/40/48): `lg` en superficies públicas, `md` en las aplicaciones. */
+  /**
+   * Disposición de la etiqueta. `inline` (por defecto) la pone delante del
+   * control, que es como va en la barra y en el panel; `stacked` la pone
+   * encima con el control a todo el ancho, que es la forma del resto de
+   * campos de un formulario — la de «Mi cuenta», donde este selector es un
+   * ajuste más y no un control de chrome.
+   */
+  layout?: 'inline' | 'stacked';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
@@ -47,7 +55,7 @@ const OPTIONS: Array<{ value: Theme; icon: IconName }> = [
  * opciones exclusivas; en lista, las opciones desplegadas para el pie. Aplicar el tema y
  * recordarlo es del producto; el componente solo muestra y elige.
  */
-export function ThemeSwitcher({ value, onChange, labels, id = 'theme-switcher', variant = 'compact', size = 'md', className }: ThemeSwitcherProps) {
+export function ThemeSwitcher({ value, onChange, labels, id = 'theme-switcher', variant = 'compact', layout = 'inline', size = 'md', className }: ThemeSwitcherProps) {
   const text = { group: 'Tema', light: 'Claro', dark: 'Oscuro', system: 'Sistema', ...labels };
   const current = OPTIONS.find((o) => o.value === value) ?? OPTIONS[2];
 
@@ -115,7 +123,7 @@ export function ThemeSwitcher({ value, onChange, labels, id = 'theme-switcher', 
     <DropdownField
       id={id}
       label={text.group}
-      inline
+      inline={layout === 'inline'}
       size={size}
       className={classes}
       value={value}

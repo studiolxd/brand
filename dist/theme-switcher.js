@@ -20,22 +20,22 @@ var o = [
 		icon: "device-desktop"
 	}
 ];
-function s({ value: s, onChange: c, labels: l, id: u = "theme-switcher", variant: d = "compact", size: f = "md", className: p }) {
-	let m = {
+function s({ value: s, onChange: c, labels: l, id: u = "theme-switcher", variant: d = "compact", layout: f = "inline", size: p = "md", className: m }) {
+	let h = {
 		group: "Tema",
 		light: "Claro",
 		dark: "Oscuro",
 		system: "Sistema",
 		...l
-	}, h = o.find((e) => e.value === s) ?? o[2];
+	}, g = o.find((e) => e.value === s) ?? o[2];
 	if (d === "list") return /* @__PURE__ */ i("div", {
 		className: [
 			"theme-switcher",
 			"theme-switcher--list",
-			p
+			m
 		].filter(Boolean).join(" "),
 		role: "group",
-		"aria-label": m.group,
+		"aria-label": h.group,
 		children: /* @__PURE__ */ i("ul", {
 			className: "theme-switcher__list",
 			children: o.map(({ value: t, icon: n }) => {
@@ -48,12 +48,12 @@ function s({ value: s, onChange: c, labels: l, id: u = "theme-switcher", variant
 					children: [/* @__PURE__ */ i(e, {
 						name: n,
 						size: "sm"
-					}), /* @__PURE__ */ i("span", { children: m[t] })]
+					}), /* @__PURE__ */ i("span", { children: h[t] })]
 				}) }, t);
 			})
 		})
 	});
-	let g = o.map(({ value: t, icon: n }) => ({
+	let _ = o.map(({ value: t, icon: n }) => ({
 		type: "radio",
 		value: t,
 		label: /* @__PURE__ */ a("span", {
@@ -61,45 +61,45 @@ function s({ value: s, onChange: c, labels: l, id: u = "theme-switcher", variant
 			children: [/* @__PURE__ */ i(e, {
 				name: n,
 				size: "sm"
-			}), m[t]]
+			}), h[t]]
 		})
 	}));
 	if (d === "icon") return /* @__PURE__ */ i(n, {
-		className: p,
+		className: m,
 		align: "end",
-		size: f,
+		size: p,
 		value: s,
 		onValueChange: (e) => c?.(e),
-		items: g,
+		items: _,
 		trigger: /* @__PURE__ */ i(t, {
 			variant: "ghost",
-			size: f,
+			size: p,
 			iconOnly: !0,
-			"aria-label": `${m.group}: ${m[h.value]}`,
+			"aria-label": `${h.group}: ${h[g.value]}`,
 			children: /* @__PURE__ */ i(e, {
-				name: h.icon,
+				name: g.icon,
 				size: "md"
 			})
 		})
 	});
-	let _ = [
+	let v = [
 		"theme-switcher",
 		"theme-switcher--compact",
-		p
+		m
 	].filter(Boolean).join(" ");
 	return /* @__PURE__ */ a(r, {
 		id: u,
-		label: m.group,
-		inline: !0,
-		size: f,
-		className: _,
+		label: h.group,
+		inline: f === "inline",
+		size: p,
+		className: v,
 		value: s,
 		onValueChange: (e) => c?.(e),
-		items: g,
+		items: _,
 		children: [/* @__PURE__ */ i(e, {
-			name: h.icon,
+			name: g.icon,
 			size: "sm"
-		}), m[h.value]]
+		}), h[g.value]]
 	});
 }
 //#endregion

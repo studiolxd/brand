@@ -12,12 +12,12 @@ function n({ href: e, lang: n, children: r, className: i, "aria-current": a }) {
 		children: r
 	});
 }
-function r({ languages: r, value: i, onChange: a, label: o = "Idioma", id: s = "language-switcher", labelHidden: c, variant: l = "compact", size: u = "md", hrefFor: d, renderLink: f = n, className: p }) {
-	return l === "list" ? /* @__PURE__ */ t("nav", {
+function r({ languages: r, value: i, onChange: a, label: o = "Idioma", id: s = "language-switcher", labelHidden: c, variant: l = "compact", layout: u = "inline", size: d = "md", hrefFor: f, renderLink: p = n, className: m }) {
+	if (l === "list") return /* @__PURE__ */ t("nav", {
 		className: [
 			"language-switcher",
 			"language-switcher--list",
-			p
+			m
 		].filter(Boolean).join(" "),
 		"aria-label": o,
 		children: /* @__PURE__ */ t("ul", {
@@ -29,8 +29,8 @@ function r({ languages: r, value: i, onChange: a, label: o = "Idioma", id: s = "
 					className: o,
 					"aria-current": "true",
 					children: n
-				}) : d ? f({
-					href: d(e),
+				}) : f ? p({
+					href: f(e),
 					lang: e,
 					className: o,
 					children: n
@@ -43,18 +43,20 @@ function r({ languages: r, value: i, onChange: a, label: o = "Idioma", id: s = "
 				}) }, e);
 			})
 		})
-	}) : /* @__PURE__ */ t(e, {
+	});
+	let h = [
+		"language-switcher",
+		"language-switcher--compact",
+		m
+	].filter(Boolean).join(" ");
+	return /* @__PURE__ */ t(e, {
 		id: s,
 		label: o,
 		labelHidden: c,
-		inline: !0,
-		size: u,
+		inline: u === "inline",
+		size: d,
 		align: "end",
-		className: [
-			"language-switcher",
-			"language-switcher--compact",
-			p
-		].filter(Boolean).join(" "),
+		className: h,
 		value: i,
 		onValueChange: (e) => a?.(e),
 		items: r.map(({ code: e, label: n }) => ({

@@ -16,6 +16,21 @@
   block-size: 100%;
   min-block-size: 0;
   background-color: var(--chat-shell-bg);
+  /* El cajón de conversaciones se monta DENTRO de este elemento y se mide
+     contra él (ver abajo): sin contexto de posicionamiento se iría al
+     viewport, que es justo lo que se quería evitar. */
+  position: relative;
+}
+
+/* El cajón de conversaciones es de la pantalla de chat, no de la aplicación:
+   se queda dentro del armazón —con su velo— en vez de taparlo todo. El
+   `Sheet` nace `fixed`, que se mide contra la ventana; aquí pasa a `absolute`,
+   que se mide contra `.chat-shell` (2026-09-14). Solo se toca el cajón de este
+   armazón: cualquier otro `Sheet` de la página sigue siendo de pantalla
+   completa. */
+.chat-shell .chat-shell__drawer,
+.chat-shell .sheet__overlay {
+  position: absolute;
 }
 
 /* La columna de conversaciones: solo se monta a partir del punto de ruptura,

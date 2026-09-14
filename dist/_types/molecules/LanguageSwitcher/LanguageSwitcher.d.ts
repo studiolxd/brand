@@ -36,6 +36,14 @@ export interface LanguageSwitcherProps {
      */
     hrefFor?: (code: string) => string;
     renderLink?: (props: LanguageSwitcherRenderLinkProps) => ReactNode;
+    /**
+     * Disposición de la etiqueta. `inline` (por defecto) la pone delante del
+     * control, que es como va en la barra y en el panel; `stacked` la pone
+     * encima con el control a todo el ancho, que es la forma del resto de
+     * campos de un formulario — la de «Mi cuenta», donde este selector es un
+     * ajuste más y no un control de chrome.
+     */
+    layout?: 'inline' | 'stacked';
     /** Talla del control compacto (32/40/48): `lg` en superficies públicas, `md` en las aplicaciones. */
     size?: 'sm' | 'md' | 'lg';
     className?: string;
@@ -47,4 +55,4 @@ export interface LanguageSwitcherProps {
  * componente del sistema porque aparece en el menú y en el pie de todos los
  * sitios; el enrutado y la persistencia se quedan en el producto.
  */
-export declare function LanguageSwitcher({ languages, value, onChange, label, id, labelHidden, variant, size, hrefFor, renderLink, className, }: LanguageSwitcherProps): import("react/jsx-runtime").JSX.Element;
+export declare function LanguageSwitcher({ languages, value, onChange, label, id, labelHidden, variant, layout, size, hrefFor, renderLink, className, }: LanguageSwitcherProps): import("react/jsx-runtime").JSX.Element;
