@@ -38,7 +38,7 @@ function d({ platformName: d = "tu Moodle", organization: f, organizationDefault
 				/* @__PURE__ */ u(i, {
 					size: "lg",
 					blockActions: !0,
-					method: h === void 0 ? void 0 : "post",
+					method: typeof h == "string" ? "post" : void 0,
 					action: h,
 					onSubmit: g,
 					links: E,

@@ -23,7 +23,7 @@ export interface ConnectorConsentPageProps extends ConnectorAuthChromeProps {
      * Sin `action`, los botones son botones y la decisión sale por `onApprove` /
      * `onDeny`: el modo de montarla dentro de una aplicación React.
      */
-    action?: string;
+    action?: string | ((formData: FormData) => void | Promise<void>);
     /**
      * Los parámetros de OAuth que tienen que viajar con la decisión —`client_id`,
      * `redirect_uri`, `code_challenge`, `state`, `scope`, `consent_nonce`—, como

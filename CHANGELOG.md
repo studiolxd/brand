@@ -7,6 +7,19 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.12.3] — 2026-09-14
+
+> **Patch.** `action` de las pantallas del conector acepta una acción de
+> servidor, no solo una URL.
+
+`ConnectorConsentPage` y `ConnectorExternalSignInPage` tipaban `action` como
+`string`. El `<form>` de React 19 acepta además una función, y es lo que
+necesita el flujo de lmsmcp para arrancar el salto a la instalación del
+cliente: al cablearlo hubo que pasar por un cast. El tipo se ensancha a
+`string | ((formData: FormData) => void | Promise<void>)` y el `method="post"`
+se pone solo cuando la acción es una URL — con una acción de servidor lo
+gobierna React.
+
 ## [38.12.2] — 2026-09-14
 
 > **Patch.** El chrome de las pantallas del conector, al criterio con el que se

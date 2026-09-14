@@ -29,8 +29,12 @@ export interface ConnectorExternalSignInPageProps extends ConnectorAuthChromePro
   organizationDefaultValue?: string;
   /** `name` del campo de organización en el envío. Default: `'org'`. */
   organizationName?: string;
-  /** Destino del envío. La acción de servidor que arranca el salto a la instalación. */
-  action?: string;
+  /**
+   * Destino del envío. Una URL, o la acción de servidor que arranca el salto a
+   * la instalación: el `<form>` de React 19 acepta las dos, y el flujo de
+   * lmsmcp necesita la segunda (2026-09-14).
+   */
+  action?: string | ((formData: FormData) => void | Promise<void>);
   /** El envío, en modo React (sin `action`). */
   onSubmit?: React.FormEventHandler<HTMLFormElement>;
   /** Los parámetros de OAuth que tienen que sobrevivir al salto, como `<input type="hidden">`. */
@@ -134,7 +138,7 @@ export function ConnectorExternalSignInPage({
         <Form
           size="lg"
           blockActions
-          method={action !== undefined ? 'post' : undefined}
+          method={typeof action === 'string' ? 'post' : undefined}
           action={action}
           onSubmit={onSubmit}
           links={links}

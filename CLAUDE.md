@@ -321,6 +321,25 @@ El paquete sigue **semver** y se distribuye vía git tags. Los consumidores pine
 - **minor** (`0.1.0` → `0.2.0`): nuevos componentes, nuevas props, nuevas variantes, nuevos tokens.
 - **major** (`0.2.0` → `1.0.0`): breaking changes — props renombradas/eliminadas, clases BEM renombradas, tokens eliminados.
 
+### Dónde está la credencial de npm
+
+El token para publicar en el registro vive en
+**`~/.config/slxd/npm-studiolxd.env`** (`NPM_TOKEN`, fuera del repo, 0600),
+junto al resto de secretos de trabajo. Es un token granular con permiso de
+lectura y escritura sobre el scope `@studiolxd`, de tipo «Automation» para que
+publicar no pida el segundo factor.
+
+```sh
+set -a; . ~/.config/slxd/npm-studiolxd.env; set +a
+```
+
+**Pendiente (2026-09-14)**: el paquete todavía se consume por tag de git
+(`github:studiolxd/brand#vX` en el catálogo de la suite) y no está publicado en
+npm. El nombre `@studiolxd/brand` está libre y el repo ya es público, así que
+publicar no expone nada nuevo; falta registrar el scope, añadir
+`publishConfig.access: "public"` y encadenar el `npm publish` detrás de
+`release:check`.
+
 ### Flujo al publicar cambios
 
 1. Actualizar `"version"` en `package.json` según el tipo de cambio y añadir la entrada correspondiente en `CHANGELOG.md`.

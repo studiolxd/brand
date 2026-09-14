@@ -57,7 +57,7 @@ function l({ clientName: l, productName: u, accountEmail: d, scope: f = "read", 
 		children: /* @__PURE__ */ c(n, {
 			size: "lg",
 			blockActions: !0,
-			method: V ? "post" : void 0,
+			method: typeof m == "string" ? "post" : void 0,
 			action: m,
 			links: P,
 			actions: /* @__PURE__ */ c(o, { children: [W, G] }),
