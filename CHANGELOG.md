@@ -7,6 +7,23 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.12.2] — 2026-09-14
+
+> **Patch.** El chrome de las pantallas del conector, al criterio con el que se
+> van a cablear. Solo cambian las stories y la documentación: las plantillas no
+> se tocan.
+
+Las cuatro pantallas montaban el idioma y el tema dentro de la barra superior.
+Van **en la banda de preferencias del pie**, que es donde están en el resto de
+páginas públicas de la suite, y la barra se queda **solo con el logotipo**:
+quien está autorizando un conector no está navegando, y un menú ahí no ofrece
+más que salidas de un flujo que hay que terminar o rechazar. La ranura
+`preferences` ya existía en `ConnectorAuthShell` para esto.
+
+Una story de contrato lo fija, para que la integración no se desvíe: un único
+control en la barra, sin nada desplegable, y los dos selectores por debajo del
+contenido.
+
 ## [38.12.1] — 2026-09-14
 
 > **Patch.** Con cinco grupos, el menú del sitio dejaba el quinto solo en una

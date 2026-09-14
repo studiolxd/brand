@@ -31,11 +31,25 @@ const LEGAL = [
 /**
  * El chrome que el servidor de autorización tiene que pasar por props: no le
  * llega de ningún layout, porque sirve la pantalla fuera de la aplicación.
- * Sin índice del sitio —desde aquí no hay a dónde navegar—, pero con idioma y
- * tema, que en esta pantalla son necesarios.
+ *
+ * **Sin índice del sitio y sin nada más en la barra**: quien está autorizando
+ * un conector no está navegando, y un menú aquí solo ofrece salidas de un
+ * flujo que hay que terminar o rechazar.
+ *
+ * **Idioma y tema van en la banda de preferencias del pie**, como en el resto
+ * de páginas públicas de la suite (2026-09-14). En estas pantallas el idioma
+ * no es un adorno: el servidor lo saca de la cookie o de `Accept-Language`, y
+ * quien llegue en el idioma equivocado no tiene ninguna otra pantalla
+ * alrededor donde cambiarlo.
  */
 const CHROME = {
-  header: <SiteHeader settings={<ThemeSwitcher size="lg" value="light" />} language={<LanguageSwitcher size="lg" value="es" languages={IDIOMAS} />} />,
+  header: <SiteHeader />,
+  preferences: (
+    <>
+      <LanguageSwitcher value="es" languages={IDIOMAS} />
+      <ThemeSwitcher value="light" />
+    </>
+  ),
   footer: <LegalFooter links={LEGAL} />,
 };
 
@@ -342,5 +356,32 @@ export const TestRecorteDelNombre: Story = {
     const detalle = ficha.querySelector('details') as HTMLDetailsElement;
     detalle.open = true;
     await waitFor(() => expect(recortado.getBoundingClientRect().height).toBeGreaterThan(cerrado));
+  },
+};
+
+/**
+ * El chrome de estas pantallas, tal como lo pide la decisión: la barra solo
+ * con el logotipo —sin índice del sitio ni selectores— y el idioma y el tema
+ * abajo, en la banda de preferencias, encima del pie legal.
+ */
+export const ContratoChrome: Story = {
+  name: 'Test — la barra sin menú y las preferencias en el pie',
+  tags: ['!dev'],
+  args: Consentimiento.args,
+  play: async ({ canvasElement }) => {
+    const barra = canvasElement.querySelector('.site-header')!;
+    const banda = canvasElement.querySelector('.public-page-shell__preferences')!;
+    const principal = canvasElement.querySelector('main')!;
+
+    // En la barra, un solo control: el logotipo. Ni menú ni selectores.
+    await expect(barra.querySelectorAll('button, a')).toHaveLength(1);
+    await expect(barra.querySelector('[aria-haspopup]')).toBeNull();
+
+    // Idioma y tema, abajo: después del contenido, no en la cabecera.
+    await expect(banda.contains(barra)).toBe(false);
+    await expect(
+      banda.getBoundingClientRect().top,
+    ).toBeGreaterThan(principal.getBoundingClientRect().top);
+    await expect(banda.querySelectorAll('button').length).toBeGreaterThanOrEqual(2);
   },
 };
