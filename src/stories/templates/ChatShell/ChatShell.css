@@ -15,9 +15,9 @@
    con su propio scroll. No lleva línea que la separe del hilo —se retiró: la
    separación la hace el aire—, así que la columna se pone su propio pasillo a
    los dos lados, que es lo que la despega del canto de la ventana y del hilo.
-   Sumado al aire del hilo (`conversation-thread.padding-inline`), entre el
-   título de una conversación y el primer globo queda un pasillo del ancho de
-   la cabecera. */
+   Sumado al aire del hilo (`conversation-thread.padding-inline`) quedan 40px
+   entre la lista y los globos. El paso es corto a propósito: cada píxel de
+   pasillo se lo quita al título de la conversación, que se trunca. */
 .chat-shell__list {
   flex-shrink: 0;
   inline-size: var(--chat-shell-list-width);

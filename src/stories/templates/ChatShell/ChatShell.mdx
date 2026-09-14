@@ -42,7 +42,7 @@ El armazón tuvo tres líneas: la de la columna de conversaciones, la de debajo 
 
 La de la caja de escribir se queda, y es la única que hace trabajo: el hilo se desplaza **por detrás** mientras el composer se queda quieto, así que sin ella el último globo pasaría bajo el campo de escribir sin que se notara dónde acaba uno y empieza el otro.
 
-A cambio de la línea de la columna, la columna se puso su **propio pasillo** a los dos lados (`chat-shell.list-padding-inline`): sumado al aire del hilo, entre el título de una conversación y el primer globo queda un hueco del ancho de la cabecera. La separación pasa de trazo a aire: la misma decisión, contada con otro material.
+A cambio de la línea de la columna, la columna se puso su **propio pasillo** a los dos lados (`chat-shell.list-padding-inline`, un paso de 8px): sumado al aire del hilo quedan 40px entre la lista y los globos, y la columna deja de tocar el canto de la ventana. El paso es corto a propósito —cada píxel de pasillo se lo quita al título de la conversación, que se trunca—: para separar dos columnas que ya se distinguen por su ancho no hace falta más. La separación pasa de trazo a aire: la misma decisión, contada con otro material.
 
 Los tokens `chat-shell.border-*` siguen existiendo con el mismo nombre —no se renombran, que rompería a quien los remapee— pero ahora describen una sola línea, la del composer.
 

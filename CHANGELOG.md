@@ -27,11 +27,13 @@ para breaking changes.
   desplaza por detrás mientras la caja de escribir se queda quieta, así que sin
   ella el último globo pasaría bajo el campo sin que se notara dónde acaba uno
   y empieza el otro.
-- **Nuevo token `chat-shell.list-padding-inline`** (`{spacing.4}`): a cambio de
-  la línea, la columna se pone su propio pasillo a los dos lados. Sumado al
-  aire del hilo (`conversation-thread.padding-inline`), entre el título de una
-  conversación y el primer globo queda un hueco del ancho de la cabecera — la
-  separación pasa de trazo a aire. Sin colores nuevos: no se tiñe la columna.
+- **Nuevo token `chat-shell.list-padding-inline`** (`{spacing.2}`, 8px): a
+  cambio de la línea, la columna se pone su propio pasillo a los dos lados —
+  antes solo tenía `padding-block`—. Sumado al aire del hilo
+  (`conversation-thread.padding-inline`) quedan 40px entre la lista y los
+  globos: la separación pasa de trazo a aire. El paso es corto a propósito,
+  porque cada píxel de pasillo se lo quita al título de la conversación, que se
+  trunca. Sin colores nuevos: la columna no se tiñe.
 - **Los tokens `chat-shell.border-width|style|color` y
   `chat-shell.surface-dark-border-color` NO se retiran ni se renombran** —eso
   sería breaking para quien los remapee—: se quedan con el mismo nombre y con

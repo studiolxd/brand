@@ -6,7 +6,7 @@
   --chat-shell-border-style: solid; /** Estilo de la línea que separa la caja de escribir del hilo — la única del armazón */
   --chat-shell-list-width: var(--sidebar-width); /** Ancho de la columna de conversaciones — cascada desde `sidebar`, que es donde suele vivir esa columna dentro de una aplicación */
   --chat-shell-list-padding-block: var(--spacing-4); /** Aire vertical de la columna de conversaciones */
-  --chat-shell-list-padding-inline: var(--spacing-4); /** Aire horizontal de la columna de conversaciones. Ya no hay línea que la separe del hilo: la separación la hace este pasillo, que sumado al aire del hilo deja entre los dos el ancho de la cabecera */
+  --chat-shell-list-padding-inline: var(--spacing-2); /** Aire horizontal de la columna de conversaciones. Ya no hay línea que la separe del hilo: la separación la hace este pasillo, que sumado al aire del hilo deja 40px entre la lista y los globos. Es un paso corto a propósito: cada píxel de más se lo quita al título de la conversación, que se trunca */
   --chat-shell-header-padding-block: var(--spacing-3); /** Aire vertical de la cabecera del hilo */
   --chat-shell-header-padding-inline: var(--spacing-6); /** Aire horizontal de la cabecera del hilo */
   --chat-shell-header-gap: var(--spacing-3); /** Separación entre lo que va en la cabecera del hilo */

@@ -151,18 +151,18 @@ export const ContratoHiloVacio: Story = {
   tags: ['!dev'],
   render: () => (
     <>
-      <div style={{ height: '300px', display: 'flex', flexDirection: 'column' }} data-testid="solo">
+      <div style={{ flex: '0 0 260px', minHeight: 0, display: 'flex', flexDirection: 'column' }} data-testid="solo">
         <ConversationThread messages={[]}>
           <EmptyState title="Empieza la conversación" />
         </ConversationThread>
       </div>
-      <div style={{ height: '300px', display: 'flex', flexDirection: 'column' }} data-testid="dos">
+      <div style={{ flex: '0 0 260px', minHeight: 0, display: 'flex', flexDirection: 'column' }} data-testid="dos">
         <ConversationThread messages={[]}>
           <MessageBubble role="user">Uno</MessageBubble>
           <MessageBubble role="assistant">Dos</MessageBubble>
         </ConversationThread>
       </div>
-      <div style={{ height: '300px', display: 'flex', flexDirection: 'column' }} data-testid="un-mensaje">
+      <div style={{ flex: '0 0 260px', minHeight: 0, display: 'flex', flexDirection: 'column' }} data-testid="un-mensaje">
         <ConversationThread messages={[MESSAGES[0]]} />
       </div>
     </>
@@ -170,22 +170,30 @@ export const ContratoHiloVacio: Story = {
   play: async ({ canvasElement }) => {
     const hilo = (id: string) =>
       canvasElement.querySelector(`[data-testid="${id}"] .conversation-thread`) as HTMLElement;
+    // Lo que separa el primer bloque del canto del hilo. Si solo es el padding,
+    // está pegado arriba; si es más, los márgenes automáticos lo han centrado.
+    // (No se mide `marginBlockStart`: el navegador devuelve `0px` para un
+    // margen automático, no el valor que acaba usando.)
+    const hueco = (t: HTMLElement) =>
+      Math.round(
+        (t.firstElementChild as HTMLElement).getBoundingClientRect().top - t.getBoundingClientRect().top,
+      );
 
-    // Un bloque solo: el hilo ocupa todo el alto y el bloque queda centrado.
     const solo = hilo('solo');
     await expect(solo.getAttribute('data-content')).toBe('children');
-    await waitFor(() => expect(solo.getBoundingClientRect().height).toBe(300));
-    const bloque = solo.firstElementChild as HTMLElement;
-    await expect(getComputedStyle(bloque).marginBlockStart).not.toBe('0px');
+    // El hilo ocupa el alto que le dan, no el de su contenido.
+    await waitFor(() => expect(Math.round(solo.getBoundingClientRect().height)).toBe(260));
+
+    const aire = Math.round(parseFloat(getComputedStyle(solo).paddingBlockStart));
+    await waitFor(() => expect(hueco(solo)).toBeGreaterThan(aire));
 
     // Dos bloques: sin márgenes automáticos, pegados arriba.
-    const primeroDeDos = hilo('dos').firstElementChild as HTMLElement;
-    await expect(getComputedStyle(primeroDeDos).marginBlockStart).toBe('0px');
+    await expect(hueco(hilo('dos'))).toBe(aire);
 
     // Un solo mensaje montado por el hilo: arriba, como irán los siguientes.
     const unMensaje = hilo('un-mensaje');
     await expect(unMensaje.getAttribute('data-content')).toBe('messages');
-    await expect(getComputedStyle(unMensaje.firstElementChild as HTMLElement).marginBlockStart).toBe('0px');
+    await expect(hueco(unMensaje)).toBe(aire);
   },
 };
 
