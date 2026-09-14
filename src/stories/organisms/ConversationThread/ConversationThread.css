@@ -1,8 +1,34 @@
+/* El hilo ocupa todo el alto que le dé quien lo monte, no el de su contenido:
+   sin `flex: 1` un hilo corto mide lo que miden sus globos y lo que haya
+   dentro se queda pegado arriba aunque sobre sitio. `min-block-size: 0` es lo
+   que deja que siga encogiendo —y por tanto desplazándose— cuando el contenido
+   pasa del alto disponible. Fuera de un contenedor flex las dos se ignoran y
+   el hilo crece con su contenido, como siempre. */
 .conversation-thread {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-block-size: 0;
   gap: var(--conversation-thread-gap);
   padding-block: var(--conversation-thread-padding-block);
   padding-inline: var(--conversation-thread-padding-inline);
   overflow-y: auto;
+}
+
+/* Lo que el producto mete SOLO en el hilo se centra en el alto disponible: es
+   el caso de la conversación sin mensajes, donde la pantalla pone un bloque
+   —hoy un `EmptyState`, mañana lo que decida— en lugar de los globos. La regla
+   no nombra a ese componente: cuenta bloques. El centinela del autoscroll no
+   cuenta porque siempre cierra el hilo, así que el único bloque real es
+   `:first-child:nth-last-child(2)`.
+
+   Solo aplica cuando el contenido lo pone el producto (`children`), no cuando
+   los globos los monta el hilo desde `messages`: una conversación de un solo
+   mensaje es un hilo que empieza, y ese mensaje va arriba como irán los
+   siguientes, sin saltar al centro y volver.
+
+   En cuanto hay dos bloques —o el contenido desborda— los márgenes
+   automáticos valen cero y todo vuelve arriba con el scroll de siempre. */
+.conversation-thread[data-content="children"] > :first-child:nth-last-child(2) {
+  margin-block: auto;
 }

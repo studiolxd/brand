@@ -17,6 +17,7 @@ var c = i(function({ messages: i = [], children: c, streamingLabel: l, ariaLabel
 		className: `conversation-thread${p ? ` ${p}` : ""}`,
 		role: "log",
 		"aria-label": u,
+		"data-content": c == null ? "messages" : "children",
 		...m,
 		children: [c ?? i.map((r) => r.role === "user" ? /* @__PURE__ */ n(e, {
 			timestamp: r.timestamp,

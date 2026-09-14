@@ -39,9 +39,27 @@ type Story = StoryObj<typeof meta>;
 
 export const PorDefecto: Story = {};
 
+/**
+ * Sin conversaciones, la lista pinta **ella** el estado vacío, con su texto
+ * castellano por defecto («Todavía no hay conversaciones»): quien no pase
+ * `emptyMessage` se lleva ese, así que la pantalla no tiene que añadir un
+ * aviso propio —si lo añade, se ven dos—.
+ */
 export const SinConversaciones: Story = {
   name: 'Sin conversaciones',
   args: { conversations: [], activeId: undefined },
+};
+
+/** Con `emptyMessage`, el mismo hueco con el texto del producto (o traducido). */
+export const SinConversacionesTraducida: Story = {
+  name: 'Sin conversaciones — texto propio',
+  args: {
+    conversations: [],
+    activeId: undefined,
+    emptyMessage: 'No conversations yet',
+    navLabel: 'Conversations',
+    newLabel: 'New conversation',
+  },
 };
 
 /** Cargando: en el hueco de la lista van marcadores y el `<nav>` se anuncia ocupado. */

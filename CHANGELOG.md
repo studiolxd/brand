@@ -9,10 +9,11 @@ para breaking changes.
 
 ## [38.6.0] — 2026-09-14
 
-> **Minor.** `ChatShell` pierde dos de sus tres líneas: la que separaba la
-> columna de conversaciones del hilo y la de debajo de la cabecera. Cambio
-> visual deliberado en los tres productos que montan el chat (lmsmcp, lrs y
-> tender); no toca la API del componente.
+> **Minor.** El chat afina: `ChatShell` pierde dos de sus tres líneas —la que
+> separaba la columna de conversaciones del hilo y la de debajo de la cabecera—
+> y `ConversationThread` centra verticalmente la conversación que todavía no
+> tiene mensajes. Cambio visual deliberado en los tres productos que montan el
+> chat (lmsmcp, lrs y tender); ninguna prop cambia.
 
 ### `ChatShell`
 
@@ -41,6 +42,34 @@ para breaking changes.
   quita y de lo que se queda. El cajón de pantalla estrecha (`Sheet`) no cambia:
   ahí la lista no pasa por `.chat-shell__list`, así que nunca tuvo esa línea ni
   ese pasillo.
+
+### `ConversationThread` — la conversación sin mensajes se centra
+
+- **El hilo ocupa todo el alto que le dan** (`flex: 1` + `min-block-size: 0`),
+  no el de su contenido. Fuera de un contenedor flex las dos declaraciones se
+  ignoran y el hilo sigue creciendo con su contenido, como antes.
+- **Lo que va solo en el hilo se centra** en el alto disponible con márgenes
+  automáticos: es la conversación recién abierta, donde la pantalla mete un
+  bloque —normalmente un `EmptyState`— en lugar de los globos. La regla **no
+  nombra a ese componente**: cuenta bloques (`:first-child:nth-last-child(2)`,
+  porque el centinela del autoscroll siempre cierra el hilo). Con dos bloques,
+  o con el contenido desbordando, los márgenes valen cero y todo vuelve arriba
+  con el scroll de siempre — el hilo con mensajes no cambia en nada.
+- **Nuevo atributo `data-content="children" | "messages"`** en el `<div>` del
+  hilo: dice si los globos los monta el hilo o el producto. El centrado solo
+  se aplica al caso `children`: así, una conversación de un solo mensaje lo deja
+  arriba —donde irán los siguientes— en vez de pintarlo centrado y subirlo en
+  cuanto llega la respuesta.
+- Stories nuevas: «Conversación sin mensajes» en `ConversationThread` y en
+  `ChatShell`, más el test `Test — lo que va solo se centra`.
+
+### `ConversationList` — el texto de la lista vacía, documentado como default
+
+- Sin cambios de API. Se aclara en el JSDoc de `emptyMessage`, en la `.mdx` y en
+  una story nueva («Sin conversaciones — texto propio») que **la lista pinta
+  ella el estado vacío con texto castellano por defecto** («Todavía no hay
+  conversaciones»): quien no pase `emptyMessage` no se queda sin aviso, así que
+  la pantalla no debe añadir uno propio encima — si lo añade, se ven dos.
 
 ## [38.5.2] — 2026-09-14
 

@@ -45,6 +45,14 @@ conversaciones cargadas.
 `isLoading` y `emptyMessage` se llaman igual que en `DataTable`, que resuelve lo mismo para una
 tabla.
 
+**La lista vacía la pinta la lista, y el texto por defecto es castellano.** `emptyMessage` es
+opcional y su default es «Todavía no hay conversaciones»: un consumidor que no la pase **no se
+queda sin aviso**, se lleva el del sistema en castellano. De ahí se sigue lo que hay que evitar —y
+lo que ya pasó— : **la pantalla no debe añadir su propio aviso de lista vacía encima**, porque
+entonces se ven dos, el del DS y el suyo. Quien necesite otro texto —u otro idioma— pasa
+`emptyMessage`; quien no lo necesite, no pone nada. Es la misma regla que `listLabel` en
+`ChatShell` y que todos los textos del sistema: ver **Foundations › Internacionalización**.
+
 <Canvas of={ConversationListStories.Cargando} />
 <Canvas of={ConversationListStories.ConError} />
 <Canvas of={ConversationListStories.SinConversaciones} />

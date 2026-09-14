@@ -79,6 +79,11 @@ export const ConversationThread = forwardRef<HTMLDivElement, ConversationThreadP
       className={`conversation-thread${className ? ` ${className}` : ''}`}
       role="log"
       aria-label={ariaLabel}
+      // Qué está pintando el hilo: sus propios globos o el bloque que le pasa
+      // el producto. Lo lee el CSS para centrar lo que va solo —la
+      // conversación sin mensajes— sin centrar el primer mensaje de una
+      // conversación que arranca.
+      data-content={children != null ? 'children' : 'messages'}
       {...rest}
     >
       {children ?? messages.map((message) =>

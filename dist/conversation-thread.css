@@ -1,1 +1,1 @@
-.conversation-thread{gap:var(--conversation-thread-gap);padding-block:var(--conversation-thread-padding-block);padding-inline:var(--conversation-thread-padding-inline);flex-direction:column;display:flex;overflow-y:auto}
+.conversation-thread{gap:var(--conversation-thread-gap);min-block-size:0;padding-block:var(--conversation-thread-padding-block);padding-inline:var(--conversation-thread-padding-inline);flex-direction:column;flex:1;display:flex;overflow-y:auto}.conversation-thread[data-content=children]>:first-child:nth-last-child(2){margin-block:auto}

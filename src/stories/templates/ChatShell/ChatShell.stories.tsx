@@ -7,6 +7,7 @@ import type { ConversationItem } from '../../molecules/ConversationList/Conversa
 import { ConversationThread } from '../../organisms/ConversationThread/ConversationThread';
 import type { ConversationMessage } from '../../organisms/ConversationThread/ConversationThread';
 import { MessageComposer } from '../../molecules/MessageComposer/MessageComposer';
+import { EmptyState } from '../../molecules/EmptyState/EmptyState';
 import { Heading } from '../../atoms/Heading/Heading';
 import { SelectField } from '../../molecules/SelectField/SelectField';
 import { STORY_TODAY } from '../../utils/storyDate';
@@ -89,6 +90,27 @@ export const PorDefecto: Story = {
     children: <ConversationThread messages={MENSAJES} />,
     composer: (
       <MessageComposer value="" onChange={() => {}} onSend={() => {}} inputLabel="Mensaje" />
+    ),
+  },
+};
+
+/**
+ * La conversación recién abierta, sin mensajes: la pantalla mete un bloque en
+ * el hilo en lugar de los globos y el hilo lo **centra** en el alto
+ * disponible. Ver **Organisms › ConversationThread → «La conversación sin
+ * mensajes»**.
+ */
+export const ConversacionVacia: Story = {
+  name: 'Conversación sin mensajes',
+  args: {
+    ...PorDefecto.args,
+    children: (
+      <ConversationThread messages={[]}>
+        <EmptyState
+          title="Empieza la conversación"
+          description="Escribe abajo para preguntar lo que necesites."
+        />
+      </ConversationThread>
     ),
   },
 };

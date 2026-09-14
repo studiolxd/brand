@@ -37,7 +37,13 @@ export interface ConversationListProps
    * este contenido. Manda sobre `isLoading` y sobre la lista vacía.
    */
   error?: ReactNode;
-  /** Título del `EmptyState` cuando no hay conversaciones. Default castellano. */
+  /**
+   * Título del `EmptyState` que la lista pinta **ella misma** cuando no hay
+   * conversaciones. Default: "Todavía no hay conversaciones" (castellano). Sin
+   * pasarla, el consumidor se lleva ese texto: el hueco vacío nunca se queda en
+   * blanco, así que la pantalla no tiene que añadir un aviso propio encima —si
+   * lo añade, se ven dos.
+   */
   emptyMessage?: string;
   /** `title` del `Alert` de error. Default castellano. */
   errorTitle?: string;

@@ -46,6 +46,12 @@ A cambio de la línea de la columna, la columna se puso su **propio pasillo** a 
 
 Los tokens `chat-shell.border-*` siguen existiendo con el mismo nombre —no se renombran, que rompería a quien los remapee— pero ahora describen una sola línea, la del composer.
 
+## La conversación sin mensajes
+
+<Canvas of={ChatShellStories.ConversacionVacia} />
+
+Una conversación recién abierta no tiene globos: la pantalla mete en el hilo **un bloque** —un `EmptyState`, normalmente— en lugar de los mensajes, y el hilo lo **centra** en el alto disponible en vez de dejarlo pegado arriba. Lo resuelve `ConversationThread`, no el armazón; el porqué y sus dos reglas, en **Organisms › ConversationThread → «La conversación sin mensajes»**.
+
 ## Con y sin columna
 
 <Canvas of={ChatShellStories.SinColumna} />

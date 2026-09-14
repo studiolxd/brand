@@ -29,6 +29,19 @@ Las dos no se mezclan: si hay `children`, `messages` se ignora.
 
 Un hilo sin mensajes es un contenedor vacío, no un `EmptyState`: quien decide qué enseñar cuando no hay nada es la pantalla que lo monta.
 
+## La conversación sin mensajes
+
+<Canvas of={ConversationThreadStories.ConversacionSinMensajes} />
+
+Cuando la pantalla mete **un solo bloque** en lugar de los globos —hoy suele ser un `EmptyState`, pero el hilo no le pide que lo sea—, el hilo lo **centra en el alto disponible** en vez de dejarlo pegado arriba, que es donde queda cualquier cosa dentro de una columna. Son dos reglas de CSS y ninguna nombra al componente que va dentro:
+
+- el hilo **ocupa todo el alto que le dan** (`flex: 1`), no el de su contenido — sin eso no hay hueco que repartir;
+- y **lo que va solo** —el centinela del autoscroll no cuenta, porque siempre cierra el hilo— se centra con márgenes automáticos.
+
+En cuanto hay **dos bloques**, o el contenido pasa del alto disponible, los márgenes automáticos valen cero y todo vuelve arriba con el scroll de siempre: el hilo con mensajes no cambia en nada.
+
+El centrado solo se aplica a lo que entra por **`children`**, nunca a los globos que monta el hilo desde `messages`: una conversación de un solo mensaje es un hilo que empieza, y ese mensaje va arriba como irán los siguientes, sin saltar al centro para volver en cuanto llegue la respuesta. El hilo lo publica en el DOM como `data-content="children" | "messages"`, que es lo que lee el CSS.
+
 ## El autoscroll
 
 Al final del hilo hay un **centinela sin altura** (`aria-hidden`) al que se le pide `scrollIntoView` cada vez que cambian los mensajes. Se hace así para no tener que calcular la altura del contenedor ni la del último mensaje, que además crece mientras la respuesta se genera.
