@@ -58,12 +58,12 @@
     "brand-padding-block": {
       "$value": "{spacing.4}",
       "$type": "dimension",
-      "$description": "Aire de la banda blanca de marca, por encima y por debajo del logotipo"
+      "$description": "Separación entre el logotipo y el recuadro del mensaje. Ya no es el padding de la celda de la banda de marca (retirado: desplazaba el logotipo hacia dentro respecto al recuadro) — es el `marginBottom` del `<Img>` en `EmailLayout`"
     },
     "brand-padding-inline": {
       "$value": "{spacing.4}",
       "$type": "dimension",
-      "$description": "Aire de la banda blanca de marca a los lados"
+      "$description": "Magnitud del `marginLeft` negativo del logotipo en `EmailLayout`: ya no es el padding lateral de la celda de la banda de marca (retirado: el aire de seguridad ya lo da el margen del lienzo y el PNG trae su propio padding horneado), sino cuánto se saca el logotipo hacia la izquierda para alinearlo con el borde del recuadro del mensaje en vez de con el de su propia celda"
     },
     "opt-out-margin-block-start": {
       "$value": "{spacing.4}",

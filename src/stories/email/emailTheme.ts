@@ -31,6 +31,19 @@ export function emailToken(name: EmailTokenName): string {
 }
 
 /**
+ * El negativo de un token del correo, para un margen que saca un elemento
+ * fuera de su caja (el logotipo de la banda de marca, ver `EmailLayout`).
+ *
+ * No se escribe `calc(-1 * ...)`: `emailToken` ya devuelve píxeles resueltos
+ * — un correo no tiene `var()` que negar — y el soporte de `calc()` en
+ * estilos en línea es flojo en los clientes de correo (el motor de Word de
+ * Outlook, notablemente). Con un número fijo no hace falta arriesgarlo.
+ */
+export function negatedEmailToken(name: EmailTokenName): string {
+  return `${-Number.parseFloat(emailToken(name))}px`;
+}
+
+/**
  * La paleta del correo. Un solo juego: el correo es solo claro.
  *
  * El modo oscuro se retiró a propósito, no por no haberlo probado. Eso NO

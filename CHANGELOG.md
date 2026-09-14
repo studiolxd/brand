@@ -7,6 +7,37 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.5.2] — 2026-09-14
+
+> **Patch.** El logotipo de la banda de marca del correo (`EmailLayout`)
+> quedaba inset respecto al recuadro del mensaje: la celda que lo envuelve
+> llevaba padding y el recuadro no, así que sus bordes izquierdos no
+> coincidían aunque comparten el mismo `maxWidth`.
+
+### Correo (`EmailLayout`)
+
+- **La celda de la banda de marca ya no lleva `padding`.** El aire de
+  seguridad ya lo da el margen del lienzo (`--email-canvas-padding-*`) y el
+  PNG trae su propio padding horneado (`--email-logo-padding`): el padding de
+  la celda solo desplazaba el logotipo hacia dentro respecto al recuadro del
+  mensaje.
+- **El `<Img>` sale con `marginLeft` negativo** — tanto como medía ese
+  padding lateral (`-{--email-brand-padding-inline}`, hoy 16px) — para
+  alinearse con el borde izquierdo del recuadro en vez de con el de su propia
+  celda. Se escribe como el negativo del valor ya resuelto en JS, no como
+  `calc(-1 * ...)`: `emailToken` ya devuelve píxeles absolutos (un correo no
+  tiene `var()` que negar) y el soporte de `calc()` en estilos en línea es
+  flojo en los clientes de correo. Nueva función `negatedEmailToken` en
+  `emailTheme.ts`.
+- **El `<Img>` gana un `marginBottom`** con el valor de
+  `--email-brand-padding-block` para conservar el aire que antes daba el
+  padding inferior de la celda respecto al recuadro de abajo — el resultado
+  visual no cambia en el eje vertical, solo en el horizontal.
+- **Tokens `email.brand-padding-block` y `email.brand-padding-inline`
+  reutilizados, no retirados**: sus `$description` se actualizan porque ya no
+  miden el padding de una celda, sino la magnitud del `marginBottom` y del
+  `marginLeft` negativo del logotipo, respectivamente.
+
 ## [38.5.1] — 2026-09-14
 
 > **Patch.** Corrige el incidente de producción del logotipo del correo:

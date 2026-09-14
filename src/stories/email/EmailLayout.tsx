@@ -19,6 +19,7 @@ import {
   emailStyleSheet,
   emailStyles,
   emailToken,
+  negatedEmailToken,
 } from './emailTheme';
 
 interface EmailOptOutBase {
@@ -237,13 +238,24 @@ export function EmailLayout({
               vista que digan de quién es, así que la marca tiene que leerse.
               Es un PNG con el blanco horneado dentro: Outlook Windows y Gmail
               Android invierten colores por su cuenta y un `background-color`
-              no sobrevive a esa inversión, una imagen sí. */}
+              no sobrevive a esa inversión, una imagen sí.
+
+              La celda va sin padding: el aire de seguridad ya lo da el margen
+              del lienzo (`canvas-padding-*`) y el PNG trae su propio padding
+              horneado, así que un padding aquí solo desplazaba el logotipo
+              hacia dentro respecto al recuadro del mensaje, que comparte el
+              mismo `maxWidth`/`margin: 0 auto` y por tanto el mismo borde
+              izquierdo. El logotipo sale con `marginLeft` negativo — tanto
+              como medía ese padding lateral — para quedar alineado con ese
+              borde en vez de con el de su propia celda, y con `marginBottom`
+              para conservar el aire que antes daba el padding inferior de la
+              banda respecto al recuadro de abajo. */}
           <Container
             style={{
               backgroundColor: emailPalette.background,
               margin: '0 auto',
               maxWidth: emailMaxWidth,
-              padding: `${emailToken('--email-brand-padding-block')} ${emailToken('--email-brand-padding-inline')}`,
+              padding: 0,
             }}
           >
             <Img
@@ -251,7 +263,12 @@ export function EmailLayout({
               alt={logoAlt ?? appName}
               width={emailLogo.width}
               height={emailLogo.height}
-              style={{ border: 0, display: 'block' }}
+              style={{
+                border: 0,
+                display: 'block',
+                marginBottom: emailToken('--email-brand-padding-block'),
+                marginLeft: negatedEmailToken('--email-brand-padding-inline'),
+              }}
             />
           </Container>
 

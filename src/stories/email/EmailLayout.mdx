@@ -85,6 +85,7 @@ decisión detrás de ella es una cicatriz de un cliente concreto:
 | Exportado a 2x, con `width`/`height` explícitos | Nítido en pantallas densas, y sin que el cliente tenga que adivinar el hueco mientras carga |
 | `alt` con el nombre de quien manda | Muchos clientes bloquean las imágenes de serie: sin `alt`, la cabecera sale en blanco |
 | Nombre versionado (`logo-v3.png`) | Gmail proxea y cachea las imágenes y no admite forzar un refresco: cada versión tiene que ser una URL nueva — el `v1`, cuadrado y con el isotipo, ya no se genera; `v2` cambió de medidas sin cambiar de nombre (256×96 → 626×202) y Gmail estiró la versión cacheada, deformada y pixelada — 2026-09-14 |
+| Celda sin padding, logotipo con `marginLeft` negativo | La celda de la banda de marca ya no lleva `padding`: el aire de seguridad lo da el margen del lienzo (`canvas-padding-*`) y el PNG trae su propio padding horneado, así que un padding aquí solo desplazaba el logotipo hacia dentro respecto al recuadro del mensaje, que comparte el mismo `maxWidth` y por tanto el mismo borde izquierdo. El `<Img>` sale con `marginLeft: -{--email-brand-padding-inline}` para alinearse con ese borde en vez de con el de su propia celda, y con `marginBottom: {--email-brand-padding-block}` para conservar el aire que antes daba el padding inferior de la banda — 2026-09-14 |
 
 El PNG lo genera `pnpm build:email-assets` a partir de `src/assets/logo.svg`. El
 alto lo dice el token `--email-logo-height` (85,33px, la talla xxl de la escala

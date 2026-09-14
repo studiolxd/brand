@@ -11,7 +11,7 @@ import { describe, expect, it } from 'vitest';
 import { EMAIL_LOGO_FILENAME } from '../../assets/brand-assets';
 import { EmailButton, EmailHeading, EmailNote, EmailText } from './EmailPrimitives';
 import { EmailLayout } from './EmailLayout';
-import { emailLogo } from './emailTheme';
+import { emailLogo, emailToken } from './emailTheme';
 import { emailTokens } from './emailTokens';
 
 const URL =
@@ -50,6 +50,23 @@ describe('EmailLayout', () => {
     expect(out).toContain(`width="${emailLogo.width}"`);
     expect(out).toContain(`height="${emailLogo.height}"`);
     expect(emailLogo.width).not.toBe(emailLogo.height);
+  });
+
+  it('saca el logotipo de su celda en vez de darle padding a la celda', async () => {
+    // La celda de la banda de marca (el Container que envuelve el logotipo)
+    // ya no lleva padding: lo desplazaba hacia dentro respecto al recuadro
+    // del mensaje, que comparte el mismo maxWidth y por tanto el mismo borde
+    // izquierdo. El logotipo se alinea con `marginLeft` negativo en vez de
+    // padding en la celda — 2026-09-14.
+    const out = await html(mensaje);
+
+    // La celda inmediatamente anterior al <img> es la de la banda de marca.
+    expect(out).toContain('<td style="padding:0">');
+
+    const negativo = `-${Number.parseFloat(emailToken('--email-brand-padding-inline'))}px`;
+    const img = out.match(/<img[^>]*>/)?.[0] ?? '';
+    expect(img).toContain(`margin-left:${negativo}`);
+    expect(img).toContain(`margin-bottom:${emailToken('--email-brand-padding-block')}`);
   });
 
   it('sirve los assets desde la base que le pasen', async () => {
