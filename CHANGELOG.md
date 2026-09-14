@@ -7,6 +7,21 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.12.1] — 2026-09-14
+
+> **Patch.** Con cinco grupos, el menú del sitio dejaba el quinto solo en una
+> segunda fila en pantallas anchas.
+
+El reparto de la última fila de cada tramo se colaba en el tramo siguiente:
+las medias queries de `min-width` se acumulan y esas reglas llevan dos
+pseudoclases, así que pesan más que la regla del tramo de arriba. El quinto
+grupo conservaba en el breakpoint ancho el `span 6` del tramo de tres
+columnas, caía solo a una segunda fila y abría un tramo de 0px. Ahora cada
+reparto vive en un rango cerrado; el del tramo más ancho se queda abierto,
+que no tiene ninguno por encima. Lo vigila una prueba sobre la hoja: la story
+que había solo podía comprobar `data-columns` —que estaba bien— porque el
+runner no fija el ancho del viewport.
+
 ## [38.12.0] — 2026-09-14
 
 > **Minor.** El chat en móvil y dos selectores que ahora saben ser campo de

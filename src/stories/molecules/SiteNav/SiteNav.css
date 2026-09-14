@@ -47,6 +47,14 @@
   /* Dos por fila: seis tramos cada uno. */
   .site-nav__group { grid-column: span 6; }
 
+}
+
+/* El reparto del sobrante de DOS por fila vale solo en su tramo: las medias
+   queries de `min-width` se acumulan, y un reparto pensado para dos columnas
+   pesa más (dos pseudoclases) que la regla del tramo siguiente, así que sin
+   cerrar el rango se colaba hacia arriba y descolocaba la última fila
+   (2026-09-14). Mismo motivo en el tramo de tres. */
+@media (min-width: 768px) and (max-width: 1023.98px) {
   /* Si sobra uno —el primero de una fila que además es el último—, la ocupa
      entera en vez de dejar media fila vacía. */
   .site-nav__group:nth-child(2n + 1):last-child { grid-column: span 12; }
@@ -56,6 +64,9 @@
   /* Tres por fila: cuatro tramos cada uno. */
   .site-nav__group { grid-column: span 4; }
 
+}
+
+@media (min-width: 1024px) and (max-width: 1279.98px) {
   /* Sobra uno: la fila entera. */
   .site-nav__group:nth-child(3n + 1):last-child { grid-column: span 12; }
 
