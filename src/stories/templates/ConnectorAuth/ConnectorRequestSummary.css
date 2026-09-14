@@ -1,0 +1,14 @@
+/* El nombre de la herramienta, la cuenta y el host de retorno son texto de
+   fuera: el registro de clientes es abierto y nadie garantiza que el nombre
+   quepa en la columna. Un nombre de 300 caracteres sin un solo espacio —que es
+   exactamente lo que llega cuando alguien prueba a romper la pantalla— no
+   parte por sí solo y se sale de la ficha, empujando el ancho de la página y
+   dejando la decisión medio fuera de la pantalla.
+
+   `anywhere` y no `break-word`: el objetivo no es que quede bonito, es que no
+   haya ningún texto capaz de desmontar la maqueta de una pantalla donde se
+   concede acceso. No lleva token porque no toma ningún valor de diseño: es una
+   palabra clave del motor, como el `display: grid` de al lado. */
+.connector-request-summary__untrusted {
+  overflow-wrap: anywhere;
+}

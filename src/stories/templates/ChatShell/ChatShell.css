@@ -4,11 +4,12 @@
    no tiene que preverle sitio. Quién decide es JS, no una media query: la
    lista cambia de sitio, no solo de forma.
 
-   El armazón no tiene NINGÚN relleno propio —ni aquí, ni en la columna, ni en
-   la cabecera, ni en la caja de escribir— ni ninguna línea interior. Quien
+   El armazón no tiene relleno propio —ni aquí, ni en la columna, ni en la
+   cabecera, ni en la caja de escribir— ni ninguna línea interior. Quien
    compone, espacia: el aire alrededor del chat lo pone quien lo monta, y lo
-   único que aporta el armazón es la separación ENTRE sus dos columnas, que es
-   suya porque es lo único que nadie de fuera puede poner. */
+   único que aporta el armazón es lo que nadie de fuera puede poner: la
+   separación ENTRE sus dos columnas y el aire de la ranura del hilo, que es
+   suyo porque separa sus propios bloques (ver `.chat-shell__thread`). */
 .chat-shell {
   display: flex;
   flex-direction: column;
@@ -69,12 +70,34 @@
   gap: var(--chat-shell-header-gap);
 }
 
+/* La ranura del hilo, y la única medida de espaciado que el armazón recuperó
+   de las siete que se retiraron en la v38.7.0. Quitarlas todas se pasó de
+   frenada justo aquí: sin nada por arriba el primer globo arrancaba tocando el
+   selector de modelo de la cabecera, y sin nada a los lados el pico de los
+   globos quedaba cortado contra el canto.
+
+   El aire de arriba y el de abajo van AQUÍ, en el envoltorio: así quedan fuera
+   del desplazamiento y el pasillo no se va con el scroll —la cabecera queda
+   siempre despejada y el último globo nunca se pega a la caja de escribir—.
+
+   El de los lados NO puede ir aquí, y es la única excepción: quien recorta es
+   el hilo, que es el elemento con el desplazamiento, y un `overflow-y`
+   distinto de `visible` recorta también el eje contrario. Por mucho aire que
+   haya por fuera, la cola —que nace fuera de la caja del globo— se corta
+   contra el canto del hilo. Así que el armazón se lo da POR DENTRO, declarando
+   aquí la variable que el hilo consume: el mismo camino por el que
+   `ConversationList` cambia los colores de su aspa o `OnboardingShell` la
+   altura de su logotipo. El hilo sigue sin rellenarse a sí mismo —su valor por
+   defecto es cero— y quien compone sigue siendo quien espacia. */
 .chat-shell__thread {
+  --conversation-thread-padding-inline: var(--chat-shell-thread-padding-inline);
+
   flex: 1;
   min-block-size: 0;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  padding-block: var(--chat-shell-thread-padding-block);
 }
 
 /* La caja de escribir se queda quieta mientras el hilo se desplaza por detrás.

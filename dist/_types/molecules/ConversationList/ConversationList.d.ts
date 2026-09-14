@@ -46,6 +46,10 @@ export interface ConversationListProps extends Omit<React.ComponentPropsWithoutR
  * La lista de conversaciones de un chat: el botón para abrir una nueva y la
  * navegación con las que ya existen, cada una con su aspa para borrarla.
  *
+ * Un título que no cabe se corta con puntos suspensivos y, **solo entonces**,
+ * se lee entero en un bocadillo al apuntar la fila o al enfocarla con el
+ * teclado. Ver la doc, «El título cortado se lee en un bocadillo».
+ *
  * Reenvía el resto de props del `<div>` (`data-*`, `id`…) y el `ref`.
  */
 export declare const ConversationList: import("react").ForwardRefExoticComponent<ConversationListProps & import("react").RefAttributes<HTMLDivElement>>;

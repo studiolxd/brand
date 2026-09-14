@@ -354,6 +354,18 @@ export type { HeroProps } from './stories/sections/Hero/Hero';
 // ─── Templates ──────────────────────────────────────────────
 export { ChatShell } from './stories/templates/ChatShell/ChatShell';
 export type { ChatShellProps } from './stories/templates/ChatShell/ChatShell';
+export { ConnectorAuthShell } from './stories/templates/ConnectorAuth/ConnectorAuthShell';
+export type { ConnectorAuthShellProps, ConnectorAuthChromeProps } from './stories/templates/ConnectorAuth/ConnectorAuthShell';
+export { ConnectorConsentPage } from './stories/templates/ConnectorAuth/ConnectorConsentPage';
+export type { ConnectorConsentPageProps } from './stories/templates/ConnectorAuth/ConnectorConsentPage';
+export { ConnectorExternalSignInPage } from './stories/templates/ConnectorAuth/ConnectorExternalSignInPage';
+export type { ConnectorExternalSignInPageProps } from './stories/templates/ConnectorAuth/ConnectorExternalSignInPage';
+export { ConnectorRejectionPage } from './stories/templates/ConnectorAuth/ConnectorRejectionPage';
+export type { ConnectorRejectionPageProps, ConnectorRejectionReason } from './stories/templates/ConnectorAuth/ConnectorRejectionPage';
+export { ConnectorRequestSummary } from './stories/templates/ConnectorAuth/ConnectorRequestSummary';
+export type { ConnectorRequestSummaryProps, ConnectorScope } from './stories/templates/ConnectorAuth/ConnectorRequestSummary';
+export { ConnectorSignInPage } from './stories/templates/ConnectorAuth/ConnectorSignInPage';
+export type { ConnectorSignInPageProps } from './stories/templates/ConnectorAuth/ConnectorSignInPage';
 export { OnboardingShell } from './stories/templates/OnboardingShell/OnboardingShell';
 export type { OnboardingShellProps } from './stories/templates/OnboardingShell/OnboardingShell';
 export { PublicPageShell } from './stories/templates/PublicPageShell/PublicPageShell';

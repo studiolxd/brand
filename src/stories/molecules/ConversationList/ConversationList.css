@@ -71,7 +71,9 @@
   outline-offset: calc(-1 * var(--conversation-list-focus-ring-width));
 }
 
-/* El aspa es un `Button` ghost del sistema (talla `sm`, solo icono): de ahí
+/* El aspa es un `Button` ghost del sistema (talla `sm`, solo icono) con el
+   icono a la talla que le toca a ese botón (`sm`, la pareja que usan todos los
+   `iconOnly` del sistema salvo esta fila, que se había quedado en `xs`): de ahí
    salen el cuadrado, el radio, el foco y la semántica. Lo que la familia
    cambia son los colores, y los cambia por el único camino permitido —
    remapear los tokens del propio Button en el ámbito de la pieza—, porque la
@@ -85,8 +87,12 @@
   --button-ghost-focus-ring-color: var(--conversation-list-focus-ring-color);
   --button-ghost-focus-ring-offset: var(--conversation-list-delete-focus-ring-offset);
 
+  /* Sin margen propio hacia el canto: el aire lateral de la columna lo pone
+     el contenedor de las filas (`.conversation-list__nav`, que ya lleva
+     `padding-inline`), no un margen de la pieza. Con el margen puesto, el aspa
+     quedaba descentrada respecto al cuadrado del botón y el objetivo táctil se
+     encogía por la derecha sin motivo. */
   flex-shrink: 0;
-  margin-inline-end: var(--conversation-list-delete-margin-inline-end);
   opacity: 0;
   transition:
     opacity var(--conversation-list-transition-duration) var(--conversation-list-transition-easing),

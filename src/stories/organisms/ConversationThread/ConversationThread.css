@@ -15,6 +15,15 @@
   min-block-size: 0;
   gap: var(--conversation-thread-gap);
   overflow-y: auto;
+  /* El pasillo de las colas, cero por defecto: el hilo NO se rellena a sí
+     mismo. Lo declara quien compone —`ChatShell` lo hace en su ranura— y tiene
+     que llegar hasta aquí y no al envoltorio, porque el elemento que recorta es
+     este: es el que lleva el desplazamiento, y un `overflow-y` distinto de
+     `visible` recorta también el eje contrario. La cola del globo nace fuera de
+     su caja, así que sin este pasillo se corta por mucho aire que haya por
+     fuera. Al ser relleno y no margen, lo que cae en él queda dentro de la caja
+     de relleno: se ve entero y no abre una barra horizontal. */
+  padding-inline: var(--conversation-thread-padding-inline, 0);
 }
 
 /* Lo que el producto mete SOLO en el hilo se centra en el alto disponible: es

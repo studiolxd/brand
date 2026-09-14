@@ -40,6 +40,25 @@ type Story = StoryObj<typeof meta>;
 export const PorDefecto: Story = {};
 
 /**
+ * Títulos largos y cortos en la misma lista. El que no cabe se corta con
+ * puntos suspensivos y **solo ese** enseña el título entero en un bocadillo al
+ * apuntarlo o al enfocarlo con el teclado; los que caben no lo enseñan, porque
+ * repetir un texto que ya se lee es ruido que además estorba al apuntar.
+ */
+export const TitulosLargos: Story = {
+  name: 'Títulos largos y cortos',
+  args: {
+    conversations: [
+      { id: 'c1', label: 'Hola' },
+      { id: 'c2', label: 'Migración del esquema de facturación a la nueva pasarela de pagos' },
+      { id: 'c3', label: 'Bug #412' },
+      { id: 'c4', label: 'Revisión de la política de retención de copias de seguridad cifradas' },
+    ],
+    activeId: 'c2',
+  },
+};
+
+/**
  * Sin conversaciones, la lista pinta **ella** el estado vacío, con su texto
  * castellano por defecto («Todavía no hay conversaciones»): quien no pase
  * `emptyMessage` se lleva ese, así que la pantalla no tiene que añadir un
@@ -199,5 +218,63 @@ export const ContratoActiva: Story = {
       .not.toBe(getComputedStyle(otra).fontWeight);
     await expect(getComputedStyle(activa).color)
       .not.toBe(getComputedStyle(otra).color);
+  },
+};
+
+/**
+ * Test: el bocadillo aparece **solo** cuando el título no cabe. Se mide en el
+ * propio evento que lo abriría (`scrollWidth` contra `clientWidth`), así que
+ * un título corto no abre nada por mucho que se apunte.
+ */
+export const ContratoBocadillo: Story = {
+  name: 'Test — el bocadillo solo sale con el título cortado',
+  tags: ['!dev'],
+  args: {
+    conversations: [
+      { id: 'corto', label: 'Hola' },
+      { id: 'largo', label: 'Migración del esquema de facturación a la nueva pasarela de pagos' },
+    ],
+    activeId: 'corto',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const corto = canvas.getByRole('button', { name: 'Hola' });
+    const largo = canvas.getByRole('button', { name: /Migración del esquema/ });
+
+    // El corto cabe: no hay bocadillo por mucho que se apunte.
+    await userEvent.hover(corto);
+    await expect(document.querySelector('[role="tooltip"]')).toBeNull();
+    await userEvent.unhover(corto);
+
+    // El largo está cortado: el bocadillo lo lee entero.
+    await userEvent.hover(largo);
+    const bocadillo = await waitFor(() => {
+      const el = document.querySelector('[role="tooltip"]');
+      expect(el).not.toBeNull();
+      return el!;
+    });
+    await expect(bocadillo).toHaveTextContent('Migración del esquema de facturación a la nueva pasarela de pagos');
+
+    // Y no le roba el nombre al disparador ni lo describe con lo mismo que ya
+    // lo nombra: el texto entero sigue en el DOM para el lector de pantalla.
+    await expect(largo).not.toHaveAttribute('aria-describedby');
+  },
+};
+
+/** Test: con el teclado, enfocar un título cortado también abre el bocadillo. */
+export const ContratoBocadilloTeclado: Story = {
+  name: 'Test — el bocadillo también se ve con el teclado',
+  tags: ['!dev'],
+  args: {
+    conversations: [{ id: 'largo', label: 'Migración del esquema de facturación a la nueva pasarela de pagos' }],
+    activeId: 'largo',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.tab(); // Nueva conversación
+    await userEvent.tab(); // el título
+
+    await expect(canvas.getByRole('button', { name: /Migración del esquema/ })).toHaveFocus();
+    await waitFor(() => expect(document.querySelector('[role="tooltip"]')).not.toBeNull());
   },
 };

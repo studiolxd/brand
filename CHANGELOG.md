@@ -7,6 +7,106 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.8.0] — 2026-09-14
+
+> **Minor.** Las pantallas del conector MCP —consentimiento, inicio de sesión,
+> rechazos y el caso de Moodle— dejan de ser HTML a mano y JSON en crudo y
+> pasan a ser plantillas del sistema, **de la misma familia que las de
+> acceso**. Y cuatro arreglos del chat y del menú público vistos en
+> producción: el aire de la ranura del hilo, el aspa de la lista de
+> conversaciones, el título cortado que se lee en un bocadillo y el reparto de
+> la última fila del índice del sitio. Ninguna prop existente cambia.
+
+### `ConnectorAuth` — el flujo OAuth del conector, como plantillas
+
+Cinco productos de la suite (bricks, lmsmcp, lrs, sharescorm y tender) sirven
+un conector MCP con su propio servidor de autorización. La pantalla de
+consentimiento era **una cadena de HTML con su `<style>` embebido**, sin una
+sola pieza del sistema, y los rechazos no tenían pantalla: eran respuestas
+JSON. Esta familia es ese flujo entero, hecho con el sistema. **No cablea
+nada**: son plantillas y sus stories, para revisar.
+
+- **`ConnectorAuthShell`** — el marco de las cuatro. Cuelga de
+  `PublicPageShell`, se maqueta en dos columnas y reparte talla `lg`: conectar
+  una herramienta es una pantalla pública de una sola decisión, de la familia
+  de iniciar sesión o recuperar la contraseña, y no un documento suelto con su
+  propio contenedor. Reenvía el `ref` al nodo del marco.
+- **`ConnectorConsentPage`** — la principal. Frase en la cabecera, ficha
+  verificable en la decisión y **las dos acciones** (hoy solo hay «permitir»).
+  Denegar va primera en el DOM, permitir es la principal, y al cargar **no se
+  enfoca nada** (`initialFocus`, que no admite `'approve'`). Con `action`
+  funciona **sin JavaScript**, que es como la sirve el servidor
+  (`default-src 'none'`).
+- **`ConnectorSignInPage`** — se llegó sin sesión: enseña ya la ficha de la
+  petición y manda a identificarse.
+- **`ConnectorRejectionPage`** — **una plantilla con cinco variantes**
+  (`invalid-client`, `invalid-redirect-uri`, `invalid-request`,
+  `access-denied`, `session-expired`), agrupadas en tres causas. Ninguna
+  ofrece reintentar en el sitio.
+- **`ConnectorExternalSignInPage`** — el caso de Moodle, donde el conector es
+  de la instalación del cliente y no hay nada que consentir en la suite.
+- **`ConnectorRequestSummary`** — la ficha de los cinco hechos. El nombre de la
+  herramienta es **dato de quien la registró**: se pinta como texto plano y se
+  parte por cualquier punto, para que ni un nombre con marcado ni uno de 180
+  caracteres puedan desmontar la pantalla.
+- Textos con default castellano —los reales del producto en consentimiento y
+  Moodle—; los que interpolan un valor son funciones, porque el orden cambia
+  con el idioma.
+
+### `ChatShell` — vuelve el aire de la ranura del hilo
+
+Remata la v38.7.0: quitar los siete rellenos de golpe se pasó de frenada justo
+aquí. El primer globo arrancaba tocando el selector de modelo de la cabecera y
+el pico de los globos quedaba cortado contra el canto.
+
+- **Nuevo `chat-shell.thread-padding-block`** (`{spacing.4}`): en el
+  envoltorio, fuera del desplazamiento, así el pasillo no se va con el scroll.
+- **Nuevo `chat-shell.thread-padding-inline`**
+  (`calc({message-bubble.tail-size} + {message-bubble.border-width})`): tiene
+  que llegar **por dentro** del hilo, que es el elemento que recorta —un
+  `overflow-y` distinto de `visible` recorta también el eje contrario— y la
+  cola del globo nace fuera de su caja. El armazón lo declara en su ranura y
+  `ConversationThread` lo consume con `--conversation-thread-padding-inline`,
+  **cero por defecto**: el hilo sigue sin rellenarse a sí mismo.
+
+### `ConversationList` — el aspa y el título cortado
+
+- **El icono del aspa pasa de `xs` a `sm`**, la pareja que usan todos los
+  botones de icono del sistema para un `iconOnly` de talla `sm`. Era la
+  excepción y se leía pequeña dentro de su cuadrado.
+- **Token retirado**: `conversation-list.delete-margin-inline-end`. El aire
+  hacia el canto lo pone el contenedor de las filas, no un margen de la pieza,
+  que además descentraba el aspa y encogía su objetivo táctil.
+- **El título cortado se lee entero en un bocadillo** al apuntar la fila o al
+  enfocarla con el teclado, y **solo si está cortado de verdad**: se mide
+  (`scrollWidth` contra `clientWidth`) en el propio evento que lo abriría, no
+  al pintar la lista. `ConversationList` pasa a ser componente cliente.
+
+### `Tooltip` — nueva prop `describe`
+
+`describe={false}` no enlaza el bocadillo por `aria-describedby`. Es para
+cuando el bocadillo **solo repite el nombre accesible del disparador** —un
+texto que corta el CSS y que sigue entero en el DOM—: describir con lo mismo
+que ya nombra hace que el lector de pantalla lo anuncie dos veces. Por defecto
+`true`: nada cambia para quien ya lo usaba.
+
+### `SiteNav` — la última fila reparte el sobrante
+
+Con cinco grupos en `lg` salían tres arriba y dos abajo dejando el tercio
+derecho vacío. **Cuántos grupos caben por fila no cambia** (1 / 2 / 3 / 4, y
+hasta cinco en `xl` por `data-columns`): lo que cambia es que una fila
+incompleta se reparte el ancho.
+
+- La rejilla pasa de una columna por grupo a **doce tramos**, y cada grupo
+  ocupa los que le tocan. Sigue siendo rejilla, sin anchos mínimos en píxeles y
+  sin ningún atributo `style` —`style-src 'self'` los descarta en silencio—.
+- Cuántos caen en la última fila se lee con `:nth-child`/`:nth-last-child`
+  dentro de cada media query, que es donde se sabe cuántos entran por fila: no
+  hace falta ningún atributo nuevo.
+- **Límite conocido y aceptado**: las filas solo alinean cuando el número de la
+  última divide al de una completa. Dos repartidos en el ancho de tres no
+  alinean, y se prefiere eso al hueco.
+
 ## [38.7.0] — 2026-09-14
 
 > **Minor.** El chat se queda sin ningún relleno propio y sin ninguna línea

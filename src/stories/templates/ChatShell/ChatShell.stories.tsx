@@ -321,3 +321,42 @@ export const ContratoSinRelleno: Story = {
     await expect(parseFloat(armazon.columnGap)).toBeGreaterThan(0);
   },
 };
+
+/**
+ * Test: el aire de la ranura del hilo. Arriba y abajo lo pone el envoltorio,
+ * así que el primer globo no arranca pegado a la cabecera ni el último a la
+ * caja de escribir; a los lados va por dentro del desplazamiento, que es el
+ * único sitio donde la cola del globo —que nace fuera de su caja— cabe sin
+ * cortarse.
+ */
+export const ContratoPasillo: Story = {
+  name: 'Test — el aire de la ranura del hilo',
+  tags: ['!dev'],
+  args: { ...PorDefecto.args },
+  play: async ({ canvasElement }) => {
+    const ranura = canvasElement.querySelector('.chat-shell__thread') as HTMLElement;
+    const hilo = canvasElement.querySelector('.conversation-thread') as HTMLElement;
+    const entrante = canvasElement.querySelector('.message-bubble--assistant') as HTMLElement;
+    const saliente = canvasElement.querySelector('.message-bubble--user') as HTMLElement;
+
+    // El aire vertical va fuera del desplazamiento: es de la ranura.
+    const ranuraEstilo = getComputedStyle(ranura);
+    expect(parseFloat(ranuraEstilo.paddingBlockStart)).toBeGreaterThan(0);
+    expect(parseFloat(ranuraEstilo.paddingBlockEnd)).toBeGreaterThan(0);
+
+    // El horizontal va dentro, en el elemento que recorta.
+    const cola = parseFloat(getComputedStyle(entrante).getPropertyValue('--message-bubble-tail-size'));
+    const pasillo = parseFloat(getComputedStyle(hilo).paddingInlineStart);
+    expect(pasillo).toBeGreaterThanOrEqual(cola);
+    expect(parseFloat(getComputedStyle(hilo).paddingInlineEnd)).toBeGreaterThanOrEqual(cola);
+
+    // Y con él, los dos picos caben: el del globo entrante por el lado de
+    // inicio y el del saliente por el de fin, dentro de la caja del hilo.
+    const caja = hilo.getBoundingClientRect();
+    expect(entrante.getBoundingClientRect().left - caja.left).toBeGreaterThanOrEqual(cola);
+    expect(caja.right - saliente.getBoundingClientRect().right).toBeGreaterThanOrEqual(cola);
+
+    // Sin barra horizontal: lo que cae en el relleno no desborda.
+    expect(hilo.scrollWidth).toBeLessThanOrEqual(hilo.clientWidth);
+  },
+};

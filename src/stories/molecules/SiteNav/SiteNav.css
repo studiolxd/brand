@@ -1,30 +1,94 @@
-/* Una columna en móvil; a partir de md, una columna por grupo, sin ancho
-   mínimo inventado. En el breakpoint ancho el número de columnas sigue al
-   número de grupos (`data-columns`, que escribe el componente, tope
-   `site-nav.columns-max`): un quinto grupo gana su propia columna en vez de
-   caer solo a una segunda fila.
+/* Sigue siendo una REJILLA —líneas comunes, filas alineadas—, pero de base más
+   fina: doce tramos, el clásico, en vez de una columna por grupo. Cada grupo
+   ocupa los tramos que le tocan, y de ahí salen los mismos grupos por fila de
+   siempre, que no cambian: uno en móvil, dos desde `md`, tres desde `lg` y
+   cuatro desde `xl`. En el breakpoint ancho ese número sigue además al número
+   real de grupos (`data-columns`, que escribe el componente, tope
+   `site-nav.columns-max`), para que un quinto grupo gane su propia columna en
+   vez de caer solo a una segunda fila.
 
-   El número va en un atributo `data-*` y no en `style`: una app servida con
-   `style-src 'self'` (sin `style-src-attr 'unsafe-inline'`) descarta en
-   silencio todo atributo `style` del HTML, y el panel perdía la columna. */
+   Lo que la base fina permite es repartir el sobrante: una ÚLTIMA FILA
+   INCOMPLETA no deja el hueco a la derecha, sus grupos se reparten los doce
+   tramos. Con cinco grupos en `lg` salían tres arriba y dos abajo ocupando dos
+   tercios, con el tercio derecho vacío; ahora esos dos toman seis tramos cada
+   uno y llegan al canto.
+
+   El límite es aritmético y es conocido: dos elementos repartidos en el ancho
+   de tres NO caen en las mismas líneas que los de arriba. Las filas solo
+   alinean cuando el número de la última divide al de una fila completa —cuatro
+   por fila con seis grupos, por ejemplo, sí cuadra—. No es un fallo de la
+   técnica: los números no dan, y se prefiere el reparto al hueco.
+
+   La medida de cada grupo sigue siendo una FRACCIÓN del contenedor, nunca un
+   ancho mínimo en píxeles: un mínimo inventado ataría el panel a un tamaño de
+   letra y a un idioma.
+
+   El número de columnas va en un atributo `data-*` y no en `style`: una app
+   servida con `style-src 'self'` (sin `style-src-attr 'unsafe-inline'`)
+   descarta en silencio todo atributo `style` del HTML, y el panel perdía la
+   columna. Cuántos caen en la última fila, en cambio, no necesita atributo
+   ninguno: depende de cuántos grupos por fila haya en ese tamaño —algo que
+   solo sabe la media query— y se lee con `:nth-child`/`:nth-last-child`, que
+   es la cuenta hecha por el propio selector. */
 .site-nav {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(12, 1fr);
   gap: var(--site-nav-group-gap);
 }
+
+/* Móvil: uno por fila, los doce tramos. */
+.site-nav__group {
+  grid-column: span 12;
+  /* Un enlace largo no ensancha su columna por encima de su parte. */
+  min-inline-size: 0;
+}
+
 @media (min-width: 768px) /* --breakpoint-md */ {
-  .site-nav { grid-template-columns: repeat(2, 1fr); }
+  /* Dos por fila: seis tramos cada uno. */
+  .site-nav__group { grid-column: span 6; }
+
+  /* Si sobra uno —el primero de una fila que además es el último—, la ocupa
+     entera en vez de dejar media fila vacía. */
+  .site-nav__group:nth-child(2n + 1):last-child { grid-column: span 12; }
 }
+
 @media (min-width: 1024px) /* --breakpoint-lg */ {
-  .site-nav { grid-template-columns: repeat(3, 1fr); }
+  /* Tres por fila: cuatro tramos cada uno. */
+  .site-nav__group { grid-column: span 4; }
+
+  /* Sobra uno: la fila entera. */
+  .site-nav__group:nth-child(3n + 1):last-child { grid-column: span 12; }
+
+  /* Sobran dos: la mitad cada uno. El selector nombra al PRIMERO de la última
+     fila —el que abre fila y tiene otro detrás— y arrastra a su hermano. */
+  .site-nav__group:nth-child(3n + 1):nth-last-child(2),
+  .site-nav__group:nth-child(3n + 1):nth-last-child(2) ~ .site-nav__group {
+    grid-column: span 6;
+  }
 }
+
 @media (min-width: 1280px) /* --breakpoint-xl */ {
-  .site-nav { grid-template-columns: repeat(4, 1fr); }
-  .site-nav[data-columns="1"] { grid-template-columns: repeat(1, 1fr); }
-  .site-nav[data-columns="2"] { grid-template-columns: repeat(2, 1fr); }
-  .site-nav[data-columns="3"] { grid-template-columns: repeat(3, 1fr); }
-  .site-nav[data-columns="4"] { grid-template-columns: repeat(4, 1fr); }
+  /* Cuatro por fila: tres tramos cada uno. Es el respaldo — aquí manda
+     `data-columns`, que el componente escribe siempre. */
+  .site-nav__group { grid-column: span 3; }
+
+  /* Uno, dos, tres o cuatro grupos: todos caben en una fila, y no hay
+     sobrante que repartir. */
+  .site-nav[data-columns="1"] > .site-nav__group { grid-column: span 12; }
+  .site-nav[data-columns="2"] > .site-nav__group { grid-column: span 6; }
+  .site-nav[data-columns="3"] > .site-nav__group { grid-column: span 4; }
+  .site-nav[data-columns="4"] > .site-nav__group { grid-column: span 3; }
+
+  /* Cinco o más: cinco por fila. Aquí la rejilla cambia de base —cinco tramos,
+     no doce—, porque doce no se divide entre cinco y la única base que serviría
+     para todos los repartos (sesenta tramos) dejaría más pasillo que columnas.
+     Con base cinco se reparte el caso que de verdad ocurre: un sexto grupo
+     suelto ocupa la fila entera. Siete u ocho grupos —dos o tres sueltos
+     abajo— se quedan con su ancho, que es donde la aritmética de esta base ya
+     no llega. */
   .site-nav[data-columns="5"] { grid-template-columns: repeat(5, 1fr); }
+  .site-nav[data-columns="5"] > .site-nav__group { grid-column: span 1; }
+  .site-nav[data-columns="5"] > .site-nav__group:nth-child(5n + 1):last-child { grid-column: span 5; }
 }
 
 /* Cabecera de grupo: un Heading normal (h2 con talla 6); solo se le quita el

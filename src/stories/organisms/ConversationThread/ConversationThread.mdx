@@ -48,7 +48,17 @@ El hilo **no tiene relleno propio**: lo único que espacia es el `gap` entre men
 
 Es el mismo principio que sigue `ChatShell`, que también se quedó sin rellenos: **quien compone, espacia; los hijos no se auto-rellenan.** Un componente que se rellena por su cuenta toma por el consumidor una decisión que es suya y le obliga a deshacerla. Los tokens `conversation-thread.padding-block` y `conversation-thread.padding-inline` se retiran.
 
-La consecuencia práctica: montado a pelo, el hilo toca los cantos. Dentro de un `ChatShell` a sangre también, porque el armazón tampoco rellena — ver **Templates › ChatShell → «Ni líneas ni rellenos»**.
+La consecuencia práctica: montado a pelo, el hilo toca los cantos.
+
+**Con una salvedad, y es geometría, no estilo:** el hilo es el elemento que
+lleva el desplazamiento, y un `overflow-y` distinto de `visible` recorta
+también el eje contrario. La cola del globo nace **fuera** de su caja, así que
+se corta contra el canto del hilo por mucho aire que haya por fuera. Para eso
+—y solo para eso— el hilo lee `--conversation-thread-padding-inline`, que vale
+**cero por defecto**: no se rellena a sí mismo, pero deja que quien compone le
+dé el pasillo por dentro. `ChatShell` lo hace en su ranura con
+`chat-shell.thread-padding-inline`, que mide exactamente lo que sobresale la
+cola — ver **Templates › ChatShell → «El aire de la ranura del hilo»**.
 
 ## El autoscroll
 

@@ -6,7 +6,9 @@
   --chat-shell-list-width: var(--sidebar-width); /** Ancho de la columna de conversaciones — cascada desde `sidebar`, que es donde suele vivir esa columna dentro de una aplicación */
   --chat-shell-gap: var(--spacing-6); /** El aire entre la columna de conversaciones y el hilo. Lo pone el contenedor, no los hijos: el armazón no tiene ningún relleno propio, así que esta es la única medida de espaciado que aporta y la única que separa las dos columnas — ya no hay línea ni pasillo que lo haga */
   --chat-shell-header-gap: var(--spacing-3); /** Separación entre lo que va en la cabecera del hilo */
+  --chat-shell-thread-padding-block: var(--spacing-4); /** Aire del hilo por arriba y por abajo, en la ranura del armazón. Arriba separa el primer globo de la cabecera —el selector de modelo— y abajo el último de la caja de escribir: la columna del chat no tiene `gap`, así que sin esta medida los tres bloques se tocan. Va en el envoltorio y no dentro del hilo a propósito: ahí queda fuera del desplazamiento y el pasillo no se va con el scroll, que es lo que deja la cabecera siempre despejada */
   --chat-shell-breakpoint: var(--breakpoint-lg); /** Donde el armazón pasa de dos columnas a una. El mismo punto en el que el chrome de aplicación pasa de barra superior a barra lateral */
+  --chat-shell-thread-padding-inline: calc(var(--message-bubble-tail-size) + var(--message-bubble-border-width)); /** Pasillo lateral del hilo: exactamente lo que sobresale la cola del globo, que nace FUERA de su caja (el lado del triángulo más su contorno). Sin él la cola se corta contra el canto del desplazamiento. No es un margen de página —el aire alrededor del chat sigue poniéndolo quien lo monta—: es la anchura justa para que el pico respire */
   --chat-shell-bg: var(--color-background-light); /** Fondo del armazón */
 }
 

@@ -48,6 +48,19 @@ Lo único que el armazón sí aporta es lo que nadie de fuera puede poner: **la 
 
 De ahí se sigue una cosa práctica: **montado a pelo, el chat toca los cantos**. El aire lo pone el consumidor, alrededor del armazón o dentro de los slots, según dónde viva la pantalla.
 
+### El aire de la ranura del hilo
+
+Quitar los siete de golpe se pasó de frenada en un sitio, y la v38.8.0 lo remata: **la ranura del hilo recupera su aire**, que es el único que no puede poner nadie de fuera porque separa bloques del propio armazón.
+
+Son dos medidas y cada una vive donde tiene que vivir:
+
+- `chat-shell.thread-padding-block` va **en el envoltorio**. Arriba separa el primer globo de la cabecera —sin él arrancaba tocando el selector de modelo— y abajo el último de la caja de escribir; la columna del chat no tiene `gap`, así que sin esta medida los tres bloques se tocan. Al estar fuera del desplazamiento, el pasillo **no se va con el scroll**: la cabecera queda siempre despejada.
+- `chat-shell.thread-padding-inline` tiene que llegar **por dentro**, y es la única excepción. Quien recorta es el hilo, que es el elemento con el desplazamiento, y un `overflow-y` distinto de `visible` recorta también el eje contrario: la cola del globo nace **fuera** de su caja, así que se cortaba contra el canto por mucho aire que hubiera por fuera. El armazón se lo da declarando en su ranura la variable que el hilo consume —el mismo camino por el que `ConversationList` cambia los colores de su aspa o `OnboardingShell` la altura de su logotipo—. El hilo sigue sin rellenarse a sí mismo: su valor por defecto es cero.
+
+La medida del pasillo no es un margen de página: es **exactamente lo que sobresale la cola** (el lado del triángulo más su contorno), ni un píxel más. Y al ser relleno y no margen, lo que cae en él queda dentro de la caja de relleno del hilo: el pico se ve entero y no aparece ninguna barra horizontal.
+
+Los tokens `chat-shell.border-*`, `chat-shell.list-padding-*`, `chat-shell.header-padding-*` y `chat-shell.composer-padding-*` siguen retirados: el aire que vuelve es el del hilo, no el de las otras tres zonas.
+
 Los tokens `chat-shell.border-*`, `chat-shell.list-padding-*`, `chat-shell.header-padding-*` y `chat-shell.composer-padding-*` se retiran: ya no pintan nada, y un token que no pinta nada es deuda.
 
 ## La conversación sin mensajes

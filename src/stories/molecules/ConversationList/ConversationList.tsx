@@ -1,9 +1,12 @@
-import { forwardRef, type ReactNode } from 'react';
+'use client';
+
+import { forwardRef, useState, type ReactNode } from 'react';
 import { Alert } from '../Alert/Alert';
 import { Button } from '../../atoms/Button/Button';
 import { EmptyState } from '../EmptyState/EmptyState';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Skeleton } from '../../atoms/Skeleton/Skeleton';
+import { Tooltip } from '../../atoms/Tooltip/Tooltip';
 import './ConversationList.css';
 
 export interface ConversationItem {
@@ -52,8 +55,26 @@ export interface ConversationListProps
 }
 
 /**
+ * ¿El título no cabe en su caja? `scrollWidth` es lo que mide el texto entero y
+ * `clientWidth` lo que se ve; si el primero es mayor, el CSS lo ha cortado con
+ * puntos suspensivos.
+ *
+ * Se llama **al apuntar o al enfocar una fila**, nunca al pintar la lista: es
+ * una lectura de maqueta por interacción, no N por render. El píxel de margen
+ * cubre el redondeo subpíxel de los navegadores, que da diferencias de 0,5px
+ * en textos que sí caben.
+ */
+function estaCortado(el: HTMLElement): boolean {
+  return el.scrollWidth > el.clientWidth + 1;
+}
+
+/**
  * La lista de conversaciones de un chat: el botón para abrir una nueva y la
  * navegación con las que ya existen, cada una con su aspa para borrarla.
+ *
+ * Un título que no cabe se corta con puntos suspensivos y, **solo entonces**,
+ * se lee entero en un bocadillo al apuntar la fila o al enfocarla con el
+ * teclado. Ver la doc, «El título cortado se lee en un bocadillo».
  *
  * Reenvía el resto de props del `<div>` (`data-*`, `id`…) y el `ref`.
  */
@@ -74,6 +95,10 @@ export const ConversationList = forwardRef<HTMLDivElement, ConversationListProps
   className,
   ...rest
 }, ref) {
+  // Qué fila tiene el bocadillo abierto. Uno solo a la vez y por `id`: no hace
+  // falta medir ni guardar nada de las demás.
+  const [bocadillo, setBocadillo] = useState<string | null>(null);
+
   // Prioridad: el error tapa todo, la carga tapa la lista, y la lista vacía
   // solo se anuncia cuando ya se sabe que está vacía.
   const estado = error !== undefined ? 'error' : isLoading ? 'loading' : conversations.length === 0 ? 'empty' : 'list';
@@ -109,14 +134,31 @@ export const ConversationList = forwardRef<HTMLDivElement, ConversationListProps
             const isActive = conv.id === activeId;
             return (
               <li key={conv.id} className="conversation-list__item">
-                <button
-                  type="button"
-                  className={`conversation-list__label${isActive ? ' conversation-list__label--active' : ''}`}
-                  aria-current={isActive ? 'page' : undefined}
-                  onClick={() => onSelect(conv.id)}
+                {/* El bocadillo lo abrimos NOSOTROS, no el motor: solo cuando el
+                    título está de verdad cortado. Por eso va controlado —
+                    `open`— y la medida se hace en el propio evento que lo
+                    abriría, con el elemento ya en la mano
+                    (`event.currentTarget`). Base UI sigue encargándose de
+                    cerrarlo (Escape, salir del disparador) y de colocarlo. */}
+                <Tooltip
+                  label={conv.label}
+                  describe={false}
+                  open={bocadillo === conv.id}
+                  onOpenChange={(abierto) => { if (!abierto) setBocadillo(null); }}
+                  onPointerEnter={(e) => { if (estaCortado(e.currentTarget)) setBocadillo(conv.id); }}
+                  onPointerLeave={() => setBocadillo(null)}
+                  onFocus={(e) => { if (estaCortado(e.currentTarget)) setBocadillo(conv.id); }}
+                  onBlur={() => setBocadillo(null)}
                 >
-                  {conv.label}
-                </button>
+                  <button
+                    type="button"
+                    className={`conversation-list__label${isActive ? ' conversation-list__label--active' : ''}`}
+                    aria-current={isActive ? 'page' : undefined}
+                    onClick={() => onSelect(conv.id)}
+                  >
+                    {conv.label}
+                  </button>
+                </Tooltip>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -125,7 +167,7 @@ export const ConversationList = forwardRef<HTMLDivElement, ConversationListProps
                   className="conversation-list__delete"
                   onClick={(e) => { e.stopPropagation(); onDelete(conv.id); }}
                 >
-                  <Icon name="close" size="xs" />
+                  <Icon name="close" size="sm" />
                 </Button>
               </li>
             );

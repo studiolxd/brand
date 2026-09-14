@@ -1,0 +1,236 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ConnectorAuthStories from "./ConnectorAuth.stories";
+import { ConnectorAuthShell } from "./ConnectorAuthShell";
+import { ConnectorConsentPage } from "./ConnectorConsentPage";
+import { ConnectorSignInPage } from "./ConnectorSignInPage";
+import { ConnectorExternalSignInPage } from "./ConnectorExternalSignInPage";
+import { ConnectorRejectionPage } from "./ConnectorRejectionPage";
+import { ConnectorRequestSummary } from "./ConnectorRequestSummary";
+
+<Meta of={ConnectorAuthStories} />
+
+# ConnectorAuth
+
+**El flujo entero de conectar una herramienta a la suite**, de punta a punta:
+quién pide acceso, qué se le concede, qué pasa si no hay sesión y qué se ve
+cuando no se concede nada.
+
+Cinco productos sirven hoy un conector MCP con su propio servidor de
+autorización —bricks, lmsmcp, lrs, sharescorm y tender—, y la pantalla que pide
+el consentimiento es **una cadena de HTML escrita a mano**: un documento entero
+con su `<style>` embebido, sin una sola pieza del sistema. Los rechazos ni
+siquiera tienen pantalla: son JSON en crudo. Esto es esa familia, hecha con el
+sistema.
+
+<Canvas of={ConnectorAuthStories.Consentimiento} />
+
+## Estas pantallas son públicas
+
+La primera decisión, y la que ordena todas las demás: **conectar una
+herramienta es una pantalla pública de la familia de acceso**, no una cosa
+aparte. Vive donde viven iniciar sesión, recuperar la contraseña, restablecerla
+y verificar el correo: el marco es `PublicPageShell` —cabecera pública, `main`
+acotado, banda de preferencias y pie legal—, la maqueta son dos columnas
+(`Columns`: la cabecera a la izquierda, la decisión a la derecha) y **los
+controles van a `lg`**, la talla de la superficie pública. Ninguna de las cuatro
+trae contenedor propio, ni se sirve como un documento suelto con su hoja de
+estilos.
+
+Eso lo pone `ConnectorAuthShell`, del que cuelgan las cuatro. Una pantalla nueva
+del flujo se monta sobre él y sale igual que las otras sin decidir nada.
+
+> **Lo que esta decisión le pide a quien la cablee.** El servidor de
+> autorización sirve el consentimiento **fuera de la aplicación**: no hay layout
+> que ponga el chrome. La cabecera, el pie y la banda de preferencias entran por
+> props (`header`, `footer`, `preferences`), y quien monte la pantalla tiene que
+> pasarlos —igual que hace el layout de `(auth)` del hub—. La plantilla reenvía
+> además el `ref` al nodo del marco, que es el `container` que pide un panel
+> flotante abierto desde la página.
+
+El idioma no es decoración en esta pantalla. El servidor elige el de la cookie
+`NEXT_LOCALE` o el de `Accept-Language`, y quien llegue en el idioma equivocado
+no tiene ninguna otra pantalla de la suite alrededor donde cambiarlo: el
+`LanguageSwitcher` de la banda de preferencias es la única salida.
+
+## El consentimiento
+
+<Canvas of={ConnectorAuthStories.ConsentimientoDeEscritura} />
+
+La cabecera cuenta la petición **en una frase** y la columna de la decisión la
+repite **como ficha**. No es redundancia: una frase se lee de corrido y se cree
+entera; una ficha —`ConnectorRequestSummary`, una `DescriptionList`— obliga a que
+cada dato tenga su rótulo y se pueda comparar con lo que uno esperaba. La frase
+explica, la ficha verifica.
+
+Los cinco hechos de la ficha son qué herramienta, a qué producto, con qué
+cuenta, con qué permiso y **a dónde sale el acceso**. Ese último es el que
+importa: el nombre lo eligió quien registró el cliente, pero el host del
+`redirect_uri` ya se validó contra lo registrado, así que es la única parte de
+la pantalla que quien ataca no elige. Va como fila de la ficha y, además, como
+frase debajo —a tamaño de cuerpo, no de nota al pie.
+
+Lo que **no** lleva: ni `Alert` ni color de aviso alrededor de ese texto. Un
+sello amarillo en cada conexión legítima enseña a ignorarlo, que es justo lo
+contrario de lo que se busca.
+
+### Las dos acciones
+
+Hoy la pantalla tiene **una sola**: permitir. Aquí son dos, porque una pantalla
+de la que solo se sale concediendo no es una decisión.
+
+- **Denegar va primera en el DOM**, como el `Cancelar` de un diálogo del
+  sistema: el recorrido del teclado abre por la salida segura. Visualmente la
+  principal es permitir —es la que ejecuta— y denegar va en `outline`.
+- **Al cargar no hay nada enfocado** (`initialFocus="none"`, el valor por
+  defecto): conceder acceso no puede estar a un Intro de distancia de abrir la
+  página. `initialFocus="deny"` enfoca la salida segura si el producto quiere un
+  punto de entrada explícito. Enfocar permitir no es una opción del tipo, y no
+  se va a añadir.
+- Apiladas (`blockActions`, como el resto de la familia de acceso) permitir
+  queda arriba y denegar debajo; el orden del DOM y el del tabulador no cambian.
+
+### Funciona sin JavaScript
+
+El servidor sirve esta pantalla con
+`Content-Security-Policy: default-src 'none'`: ni un script. Con `action`, el
+bloque de la decisión es un `<form method="post">` de verdad, los dos botones
+son `submit` y se distinguen por su `value` (`decision=approve` / `deny`); los
+parámetros de OAuth viajan en `hiddenFields` como `<input type="hidden">` —datos
+en tránsito, que la plantilla devuelve intactos sin leerlos—. Sin `action`, los
+mismos botones salen por `onApprove` / `onDeny`. Las dos formas pintan
+exactamente lo mismo.
+
+### El nombre de la herramienta es dato de quien la registró
+
+<Canvas of={ConnectorAuthStories.NombreLargo} />
+
+El registro de clientes es abierto: el nombre lo elige quien da de alta la
+herramienta, así que un «Claude» falso es indistinguible del real y lo que
+llega puede ser hostil. Dos reglas, y las dos están en la plantilla, no en la
+aplicación que la monte:
+
+1. **Es texto plano.** Se pinta como hijo de React —que lo escapa— y no hay en
+   toda la familia una sola vía de HTML crudo. Un nombre con `<strong>` se lee
+   con sus signos.
+2. **No puede desmontar la maqueta.** Los valores de fuera se parten por
+   cualquier punto (`overflow-wrap: anywhere`), de modo que 180 caracteres sin
+   un espacio no empujan el ancho de la página ni dejan la decisión medio fuera
+   de la pantalla.
+
+<Canvas of={ConnectorAuthStories.NombreHostil} />
+
+Lo que la plantilla **no** puede hacer por nadie: decidir si el nombre es
+legítimo. Para eso está el host.
+
+## Inicio de sesión requerido
+
+<Canvas of={ConnectorAuthStories.InicioDeSesion} />
+
+Se ha llegado al conector sin sesión: no hay con qué cuenta conceder nada. La
+pantalla enseña **ya** la ficha de la petición —menos la cuenta, que es justo lo
+que falta—, porque quien va a teclear una contraseña tiene derecho a saber antes
+qué herramienta está detrás y a dónde va a salir el acceso, y no enterarse dos
+pantallas más tarde.
+
+Aquí la única acción es identificarse, que no concede nada: por eso es la
+principal y sí puede llevarse el foco.
+
+## Los rechazos: una plantilla, cinco variantes
+
+<Canvas of={ConnectorAuthStories.RechazoRetornoNoPermitido} />
+
+Los cinco errores del servidor —`invalid_client`, `invalid_redirect_uri`,
+`invalid_request`, `access_denied`, `login_required`— son **una sola plantilla
+con una prop `reason`**, y no cinco pantallas, porque entre ellos solo cambia el
+texto: la maqueta es idéntica, el orden es idéntico y sobre todo lo es la
+postura —**ninguno ofrece reintentar en el sitio**—. La conexión se empieza donde
+se empezó, en la herramienta; un rechazo de autorización que se pueda reintentar
+a golpes desde la propia pantalla de rechazo es un fallo, no una comodidad.
+
+Agrupados por causa, que es lo que decide qué se le ofrece a quien lee:
+
+| Causa | Variantes | Salida |
+| --- | --- | --- |
+| La petición no vale | `invalid-client`, `invalid-redirect-uri`, `invalid-request` | Volver a la herramienta: el arreglo está allí |
+| No se ha concedido | `access-denied` | Cerrar, o pedir la conexión otra vez |
+| La sesión se ha acabado | `session-expired` | Identificarse y repetir |
+
+<Canvas of={ConnectorAuthStories.RechazoPermisoDenegado} />
+
+No llevan `Alert` ni color de error. Un rechazo aquí no es un fallo del sistema
+del que avisar: es una comprobación que ha hecho su trabajo —y en
+`access-denied`, ni siquiera eso: es lo que se ha pedido—. El código técnico
+(`code`) se pinta pequeño y aparte, para copiarlo en un correo a soporte, no
+para leerlo.
+
+<Canvas of={ConnectorAuthStories.RechazoSesionCaducada} />
+
+## El conector de Moodle
+
+<Canvas of={ConnectorAuthStories.ConectorDeMoodle} />
+
+Es el caso distinto, y tiene pantalla propia. En los conectores de la suite
+quien concede es la suite: hay sesión, hay consentimiento y el acceso sale de
+aquí. En el de Moodle **el conector es de la instalación del cliente**, así que
+no hay nada que consentir en la suite: la pantalla confirma a qué organización
+se entra y manda a identificarse a su Moodle, que es quien decide. De ahí que no
+lleve ni ficha de permisos ni botón de denegar — denegar, aquí, es no seguir.
+
+Es también la única de la familia que **pide un dato**: cuando la organización
+no viene en la petición (una conexión al dominio pelado) hay que escribirla; con
+la organización resuelta del subdominio, el campo desaparece y queda la frase de
+confirmación. La pantalla no pregunta lo que ya sabe.
+
+<Canvas of={ConnectorAuthStories.ConectorDeMoodleSinOrganizacion} />
+
+Hoy esa pantalla vive en el producto dentro de una `Card`, en una columna
+estrecha, sin cabecera pública ni pie. Al cablearla, ese molde propio se retira:
+lo pone la plantilla, que es lo que hace que las dos familias de conector se
+lean como hermanas. El andamio de desarrollo del producto —pegar una clave MCP—
+entra por la ranura `extra` y el sistema no lo conoce.
+
+## Textos
+
+Todo lo que estas plantillas escriben por su cuenta es una prop con **default en
+castellano**, como pide el sistema; el texto del consentimiento y el del conector
+de Moodle son literalmente los que ya sirve el producto en sus seis idiomas. Los
+de rechazo son nuevos: hoy no hay pantalla que los diga.
+
+Los textos que interpolan un valor son **funciones** (`intro`, `redirectNotice`,
+`signingInTo`, `submitLabel`), porque el orden cambia con el idioma: en alemán la
+cuenta va antes del permiso, y una plantilla que concatenara trozos no podría
+traducirse.
+
+## Sin marco
+
+<Canvas of={ConnectorAuthStories.SinMarco} />
+
+Con `shell={false}` las cuatro devuelven solo sus dos columnas, para pintarlas
+dentro de una aplicación que ya tiene su `main`. Es lo que necesita el conector
+de Moodle, que sí vive dentro de su app.
+
+## Props
+
+### ConnectorConsentPage
+
+<ArgTypes of={ConnectorConsentPage} />
+
+### ConnectorSignInPage
+
+<ArgTypes of={ConnectorSignInPage} />
+
+### ConnectorExternalSignInPage
+
+<ArgTypes of={ConnectorExternalSignInPage} />
+
+### ConnectorRejectionPage
+
+<ArgTypes of={ConnectorRejectionPage} />
+
+### ConnectorRequestSummary
+
+<ArgTypes of={ConnectorRequestSummary} />
+
+### ConnectorAuthShell
+
+<ArgTypes of={ConnectorAuthShell} />

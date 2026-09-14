@@ -26,6 +26,21 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLElement>, 'c
     onOpenChange?: (open: boolean) => void;
     /** Retardo propio en ms. Sin él hereda el del `TooltipProvider`. */
     delayDuration?: number;
+    /**
+     * Enlaza el bocadillo con su disparador por `aria-describedby`, que es lo
+     * normal: el bocadillo añade algo que el disparador no dice.
+     *
+     * `false` para el caso contrario —el bocadillo **solo repite el nombre
+     * accesible que el disparador ya tiene**, porque lo que lo corta es el CSS
+     * (`text-overflow: ellipsis`) y el texto entero sigue en el DOM—. Ahí
+     * describir con el mismo texto que nombra hace que el lector de pantalla
+     * anuncie la frase dos veces, sin aportar nada: el bocadillo es una ayuda
+     * para el ojo, no para el oído. Es lo que hace `ConversationList` con el
+     * título cortado de una conversación.
+     *
+     * @default true
+     */
+    describe?: boolean;
     /** Clase adicional para el **bocadillo** (no para el disparador). */
     className?: string;
 }

@@ -35,6 +35,16 @@ const cincoGrupos: SiteNavGroup[] = [
   ] },
 ];
 
+const cuatroGrupos: SiteNavGroup[] = cincoGrupos.slice(0, 4);
+
+const seisGrupos: SiteNavGroup[] = [
+  ...cincoGrupos,
+  { id: 'legal', label: 'Legal', items: [
+    { id: 'aviso', label: 'Aviso legal', href: '#aviso' },
+    { id: 'privacidad', label: 'Privacidad', href: '#privacidad' },
+  ] },
+];
+
 const meta: Meta<typeof SiteNav> = {
   title: 'Molecules/SiteNav',
   component: SiteNav,
@@ -63,11 +73,30 @@ export const SuperficieOscura: Story = {
 
 /**
  * Cinco grupos: en el breakpoint ancho ganan su propia columna cada uno, en
- * vez de que el quinto («Cuenta») caiga solo a una segunda fila.
+ * vez de que el quinto («Cuenta») caiga solo a una segunda fila. Por debajo de
+ * `xl` —tres por fila en `lg`— los dos que quedan en la última fila **se
+ * reparten el ancho entero** en vez de dejar el tercio derecho vacío.
  */
 export const CincoGrupos: Story = {
   name: 'Cinco grupos',
   args: { groups: cincoGrupos },
+};
+
+/** Cuatro grupos: la fila se completa en `xl` y en `lg` el cuarto ocupa él solo la segunda. */
+export const CuatroGrupos: Story = {
+  name: 'Cuatro grupos',
+  args: { groups: cuatroGrupos },
+};
+
+/**
+ * Seis grupos: pasado el tope de columnas (`site-nav.columns-max`), el sexto
+ * cae a la fila siguiente y la ocupa entera. Es el efecto buscado del reparto
+ * —la última fila queda más ancha y deja de alinearse con las de arriba— y se
+ * prefiere al hueco a la derecha.
+ */
+export const SeisGrupos: Story = {
+  name: 'Seis grupos',
+  args: { groups: seisGrupos },
 };
 
 export const ContratoCincoColumnas: Story = {
@@ -110,8 +139,48 @@ export const Contrato: Story = {
     const externo = canvas.getByRole('link', { name: 'Estado del servicio' });
     await expect(externo).toHaveAttribute('target', '_blank');
     await expect(externo).toHaveAttribute('rel', 'noopener noreferrer');
-    // columnas según el ancho: en el runner (>=1280) son cuatro pistas
-    const cols = getComputedStyle(nav).gridTemplateColumns.split(' ').length;
-    await expect(cols).toBeGreaterThanOrEqual(2);
+    // Sigue siendo una rejilla; lo que cambió es su base: doce tramos en vez
+    // de una columna por grupo (en el runner, >=1280, manda `data-columns`).
+    await expect(getComputedStyle(nav).display).toBe('grid');
+    await expect(getComputedStyle(nav).gridTemplateColumns.split(' ').length).toBeGreaterThanOrEqual(3);
+  },
+};
+
+/**
+ * Test: no queda hueco a la derecha. Sea cual sea el ancho de la ventana del
+ * runner —y con él cuántos grupos caben por fila—, la ÚLTIMA fila llega al
+ * canto: sus grupos se han repartido el sobrante, así que miden lo mismo que
+ * los de arriba (fila completa) o más (fila incompleta), nunca menos.
+ */
+export const ContratoReparto: Story = {
+  name: 'Test — la última fila reparte el sobrante',
+  tags: ['!dev'],
+  args: { groups: cincoGrupos },
+  play: async ({ canvasElement }) => {
+    const nav = canvasElement.querySelector('.site-nav') as HTMLElement;
+    const grupos = Array.from(nav.querySelectorAll('.site-nav__group')) as HTMLElement[];
+
+    // Las filas se leen por la vertical: la maqueta no las declara.
+    const filas = new Map<number, HTMLElement[]>();
+    for (const g of grupos) {
+      const y = Math.round(g.getBoundingClientRect().top);
+      filas.set(y, [...(filas.get(y) ?? []), g]);
+    }
+
+    const caja = nav.getBoundingClientRect();
+    const ancho = (el: HTMLElement) => el.getBoundingClientRect().width;
+    const porFila = [...filas.values()];
+    const primera = porFila[0]!;
+    const ultima = porFila[porFila.length - 1]!;
+
+    // Ninguna fila deja hueco a la derecha: la última, tampoco.
+    for (const fila of porFila) {
+      const derecha = fila[fila.length - 1]!.getBoundingClientRect().right;
+      await expect(Math.abs(derecha - caja.right)).toBeLessThan(2);
+    }
+
+    // Y los de la última no son más estrechos que los de la primera: o la fila
+    // estaba completa (miden igual) o se han repartido el sobrante (miden más).
+    await expect(ancho(ultima[0]!)).toBeGreaterThanOrEqual(ancho(primera[0]!) - 1);
   },
 };

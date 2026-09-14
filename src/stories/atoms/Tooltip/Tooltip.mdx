@@ -51,6 +51,19 @@ que abre el panel) se perdían.
 
 El bocadillo es `role="tooltip"` y, mientras está abierto, el disparador lo referencia con `aria-describedby` (Base UI no lo cablea por su cuenta). Se abre con hover y con foco de teclado; Escape lo cierra.
 
+### Cuando el bocadillo solo repite el nombre
+
+Con `describe={false}` el bocadillo **no** se enlaza por `aria-describedby`. Es
+para un caso concreto: el bocadillo dice exactamente lo mismo que el nombre
+accesible del disparador, porque lo que recorta el texto es el CSS
+(`text-overflow: ellipsis`) y la frase entera sigue en el DOM. Describir con el
+mismo texto que ya nombra hace que el lector de pantalla lo anuncie dos veces
+sin aportar nada: ahí el bocadillo es una ayuda para el ojo, no para el oído.
+Lo usa `ConversationList` con el título cortado de una conversación.
+
+Fuera de ese caso, no se toca: un bocadillo que añade algo tiene que estar
+enlazado, o no existe para quien no lo ve.
+
 ---
 
 ## Tokens

@@ -19,29 +19,29 @@ function c() {
 	let e = document.documentElement;
 	return s(getComputedStyle(e).getPropertyValue("--tooltip-offset").trim(), e);
 }
-var l = n(function({ label: n, children: o, side: s = "top", align: l = "center", sideOffset: u, open: d, defaultOpen: f, onOpenChange: p, delayDuration: m, className: h, ...g }, _) {
-	let v = r(), [y, b] = i(f ?? !1), x = d ?? y;
+var l = n(function({ label: n, children: o, side: s = "top", align: l = "center", sideOffset: u, open: d, defaultOpen: f, onOpenChange: p, delayDuration: m, describe: h = !0, className: g, ..._ }, v) {
+	let y = r(), [b, x] = i(f ?? !1), S = d ?? b;
 	return /* @__PURE__ */ t(a.Root, {
 		open: d,
 		defaultOpen: f,
 		onOpenChange: (e) => {
-			d === void 0 && b(e), p?.(e);
+			d === void 0 && x(e), p?.(e);
 		},
 		children: [/* @__PURE__ */ e(a.Trigger, {
-			ref: _,
+			ref: v,
 			render: o,
-			"aria-describedby": x ? v : void 0,
+			"aria-describedby": S && h ? y : void 0,
 			...m === void 0 ? {} : { delay: m },
-			...g
+			..._
 		}), /* @__PURE__ */ e(a.Portal, { children: /* @__PURE__ */ e(a.Positioner, {
 			className: "tooltip__positioner",
 			side: s,
 			align: l,
 			sideOffset: u ?? c,
 			children: /* @__PURE__ */ t(a.Popup, {
-				id: v,
+				id: y,
 				role: "tooltip",
-				className: ["tooltip", h].filter(Boolean).join(" "),
+				className: ["tooltip", g].filter(Boolean).join(" "),
 				children: [n, /* @__PURE__ */ e(a.Arrow, {
 					className: "tooltip__arrow",
 					children: /* @__PURE__ */ e("svg", {

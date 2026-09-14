@@ -67,6 +67,47 @@ Lo que la familia sí cambia son los colores, y los cambia por el único camino 
 
 Como el cuadrado y el radio los pone ahora `Button`, `conversation-list.delete-size` y `conversation-list.delete-border-radius` se han retirado: eran la misma medida escrita dos veces.
 
+**El icono va a la talla que le toca a su botón.** Un `iconOnly` de talla `sm`
+—o `md`— lleva el icono a `sm`, y solo el de talla `lg` lo lleva a `md`: es la
+pareja que usan todos los botones de icono del sistema. El aspa de la fila se
+había quedado en `xs`, un peldaño por debajo, y se leía pequeña dentro de su
+cuadrado. Era la excepción, no la regla, así que se ha corregido ella.
+
+**Y ya no tiene margen propio hacia el canto.** `conversation-list.delete-margin-inline-end`
+se retira —un token que no pinta nada es deuda—: el aire lateral de la columna
+lo pone el contenedor de las filas, que ya lleva su `padding-inline`, no un
+margen de la pieza. Con el margen puesto, el aspa quedaba descentrada respecto
+a su propio cuadrado y el objetivo táctil se encogía por la derecha sin motivo.
+
+## El título cortado se lee en un bocadillo
+
+<Canvas of={ConversationListStories.TitulosLargos} />
+
+Un título que no cabe se corta con puntos suspensivos y, **solo entonces**, se
+lee entero en un `Tooltip` al apuntar la fila o al enfocarla con el teclado. Es
+un bocadillo y no un `Popover` porque es una etiqueta descriptiva que aparece
+al apuntar, no una superficie con la que se interactúa.
+
+Tres decisiones que lo sostienen:
+
+- **Solo si está cortado de verdad.** Repetir en un bocadillo un texto que ya
+  se lee entero es ruido, y encima estorba al apuntar. La lista compara lo que
+  mide el texto con lo que se ve (`scrollWidth` contra `clientWidth`) **en el
+  propio evento que abriría el bocadillo** —el puntero entrando, el foco
+  llegando—, nunca al pintar la lista: es una lectura por interacción, no N
+  por render, así que una lista de doscientas conversaciones no mide nada hasta
+  que alguien apunta una.
+- **También con el teclado.** Quien navega sin ratón tiene el mismo problema,
+  así que el foco abre el bocadillo igual que el puntero.
+- **No se lo dice dos veces al lector de pantalla.** El texto entero sigue en
+  el DOM —lo corta el CSS, no el marcado—, así que el nombre accesible del
+  botón ya es el título completo. Por eso el bocadillo va con `describe={false}`:
+  sin ese ajuste, `aria-describedby` haría que se anunciara la misma frase dos
+  veces seguidas. El bocadillo es una ayuda para el ojo, no para el oído.
+
+El aspa de borrar y el bocadillo no compiten: el bocadillo lo dispara el
+título, y al pasar el puntero al aspa se cierra.
+
 ## Superficie oscura
 
 Tinta, relleno de la fila, aspa y anillo de foco tienen par oscuro, cada uno por la regla de derivación: el rol claro con su `-on-dark`.

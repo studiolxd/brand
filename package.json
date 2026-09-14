@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "38.7.0",
+  "version": "38.8.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -330,6 +330,30 @@
     "./onboarding-shell": {
       "types": "./dist/_types/templates/OnboardingShell/OnboardingShell.d.ts",
       "import": "./dist/onboarding-shell.js"
+    },
+    "./connector-auth-shell": {
+      "types": "./dist/_types/templates/ConnectorAuth/ConnectorAuthShell.d.ts",
+      "import": "./dist/connector-auth-shell.js"
+    },
+    "./connector-request-summary": {
+      "types": "./dist/_types/templates/ConnectorAuth/ConnectorRequestSummary.d.ts",
+      "import": "./dist/connector-request-summary.js"
+    },
+    "./connector-consent-page": {
+      "types": "./dist/_types/templates/ConnectorAuth/ConnectorConsentPage.d.ts",
+      "import": "./dist/connector-consent-page.js"
+    },
+    "./connector-sign-in-page": {
+      "types": "./dist/_types/templates/ConnectorAuth/ConnectorSignInPage.d.ts",
+      "import": "./dist/connector-sign-in-page.js"
+    },
+    "./connector-external-sign-in-page": {
+      "types": "./dist/_types/templates/ConnectorAuth/ConnectorExternalSignInPage.d.ts",
+      "import": "./dist/connector-external-sign-in-page.js"
+    },
+    "./connector-rejection-page": {
+      "types": "./dist/_types/templates/ConnectorAuth/ConnectorRejectionPage.d.ts",
+      "import": "./dist/connector-rejection-page.js"
     },
     "./not-found-page": {
       "types": "./dist/_types/templates/NotFoundPage/NotFoundPage.d.ts",

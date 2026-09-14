@@ -1,0 +1,117 @@
+import type { ReactNode } from 'react';
+import { DescriptionList, DescriptionTerm, DescriptionDetails } from '../../atoms/DescriptionList/DescriptionList';
+import './ConnectorRequestSummary.css';
+
+/** Qué se le concede al conector: leer, o leer y modificar. Son los dos únicos alcances que emite el servidor de autorización (`mcp:read` y `mcp:write`). */
+export type ConnectorScope = 'read' | 'write';
+
+export interface ConnectorRequestSummaryProps {
+  /**
+   * El nombre con el que la herramienta se registró.
+   *
+   * **Es dato de quien registró el cliente, no de la suite.** El registro es
+   * abierto: cualquiera puede darse de alta con el nombre que quiera, así que
+   * un «Claude» falso es indistinguible del real. Aquí se pinta como **texto
+   * plano** —React lo escapa, y la plantilla no tiene ni una sola vía de HTML
+   * crudo— y se deja partir por cualquier punto para que un nombre de 300
+   * caracteres sin espacios no se salga de la columna. Nunca lo pases por
+   * `dangerouslySetInnerHTML` ni lo uses para componer una URL.
+   */
+  clientName: ReactNode;
+  /** El producto de la suite al que se pide acceso: bricks, lmsmcp, lrs, sharescorm, tender. */
+  productName?: ReactNode;
+  /** La cuenta con la que se está decidiendo. Sin sesión —la pantalla de identificarse— no se pasa. */
+  accountEmail?: ReactNode;
+  /** El alcance concedido. Sin él, la fila no se pinta. */
+  scope?: ConnectorScope;
+  /**
+   * El host al que se enviará el acceso, sacado del `redirect_uri` ya validado
+   * contra lo registrado.
+   *
+   * **Es la única parte de la ficha que quien ataca NO elige**, y por eso está
+   * aquí y no en un párrafo suelto: el nombre lo puso quien registró, el host
+   * lo impone el registro.
+   */
+  redirectHost?: ReactNode;
+  /** Rótulo de la herramienta. Default castellano: «Herramienta». */
+  clientLabel?: string;
+  /** Rótulo del producto. Default castellano: «Producto». */
+  productLabel?: string;
+  /** Rótulo de la cuenta. Default castellano: «Cuenta». */
+  accountLabel?: string;
+  /** Rótulo del permiso. Default castellano: «Permiso». */
+  scopeLabel?: string;
+  /** Rótulo del destino. Default castellano: «Destino». */
+  redirectLabel?: string;
+  /** Valor del permiso de solo lectura. Default castellano, el del servidor de autorización. */
+  scopeReadLabel?: ReactNode;
+  /** Valor del permiso de lectura y escritura. Default castellano, el del servidor de autorización. */
+  scopeWriteLabel?: ReactNode;
+  /** Se añade DESPUÉS de las clases propias. */
+  className?: string;
+}
+
+/**
+ * La ficha de la petición: los cinco hechos que hay que mirar antes de
+ * conceder nada —qué herramienta, a qué producto, con qué cuenta, con qué
+ * permiso y a dónde va el acceso—, en una `DescriptionList`.
+ *
+ * Es una **lista de datos, no una frase**, a propósito. La frase de la
+ * cabecera («X quiere leer los datos de este producto como tú@ejemplo.com»)
+ * se lee de corrido y se cree entera; una ficha obliga a que cada dato tenga
+ * su rótulo y se pueda comparar con lo que uno esperaba. Los dos textos dicen
+ * lo mismo y conviven: la frase explica, la ficha verifica.
+ *
+ * Los valores que vienen de fuera —el nombre de la herramienta y el host— se
+ * pintan como texto plano y se parten por donde haga falta.
+ */
+export function ConnectorRequestSummary({
+  clientName,
+  productName,
+  accountEmail,
+  scope,
+  redirectHost,
+  clientLabel = 'Herramienta',
+  productLabel = 'Producto',
+  accountLabel = 'Cuenta',
+  scopeLabel = 'Permiso',
+  redirectLabel = 'Destino',
+  scopeReadLabel = 'leer los datos de este producto',
+  scopeWriteLabel = 'leer y modificar los datos de este producto',
+  className,
+}: ConnectorRequestSummaryProps) {
+  return (
+    <DescriptionList className={['connector-request-summary', className].filter(Boolean).join(' ')}>
+      <DescriptionTerm>{clientLabel}</DescriptionTerm>
+      <DescriptionDetails className="connector-request-summary__untrusted">{clientName}</DescriptionDetails>
+
+      {productName !== undefined && (
+        <>
+          <DescriptionTerm>{productLabel}</DescriptionTerm>
+          <DescriptionDetails>{productName}</DescriptionDetails>
+        </>
+      )}
+
+      {accountEmail !== undefined && (
+        <>
+          <DescriptionTerm>{accountLabel}</DescriptionTerm>
+          <DescriptionDetails className="connector-request-summary__untrusted">{accountEmail}</DescriptionDetails>
+        </>
+      )}
+
+      {scope !== undefined && (
+        <>
+          <DescriptionTerm>{scopeLabel}</DescriptionTerm>
+          <DescriptionDetails>{scope === 'read' ? scopeReadLabel : scopeWriteLabel}</DescriptionDetails>
+        </>
+      )}
+
+      {redirectHost !== undefined && (
+        <>
+          <DescriptionTerm>{redirectLabel}</DescriptionTerm>
+          <DescriptionDetails className="connector-request-summary__untrusted">{redirectHost}</DescriptionDetails>
+        </>
+      )}
+    </DescriptionList>
+  );
+}
