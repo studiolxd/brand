@@ -3181,6 +3181,7 @@ var e = {
 	"--chart-hover-opacity": "0.75",
 	"--chat-shell-list-width": "15rem",
 	"--chat-shell-list-padding-block": "1rem",
+	"--chat-shell-list-padding-inline": "1rem",
 	"--chat-shell-header-padding-block": "0.75rem",
 	"--chat-shell-header-padding-inline": "2rem",
 	"--chat-shell-header-gap": "0.75rem",

@@ -12,16 +12,19 @@
 }
 
 /* La columna de conversaciones: solo se monta a partir del punto de ruptura,
-   con su propio scroll y separada del hilo por línea. */
+   con su propio scroll. No lleva línea que la separe del hilo —se retiró: la
+   separación la hace el aire—, así que la columna se pone su propio pasillo a
+   los dos lados, que es lo que la despega del canto de la ventana y del hilo.
+   Sumado al aire del hilo (`conversation-thread.padding-inline`), entre el
+   título de una conversación y el primer globo queda un pasillo del ancho de
+   la cabecera. */
 .chat-shell__list {
   flex-shrink: 0;
   inline-size: var(--chat-shell-list-width);
   block-size: 100%;
   overflow-y: auto;
   padding-block: var(--chat-shell-list-padding-block);
-  border-inline-end-width: var(--chat-shell-border-width);
-  border-inline-end-style: var(--chat-shell-border-style);
-  border-inline-end-color: var(--chat-shell-border-color);
+  padding-inline: var(--chat-shell-list-padding-inline);
 }
 
 .chat-shell.chat-shell--with-list {
@@ -45,9 +48,6 @@
   gap: var(--chat-shell-header-gap);
   padding-block: var(--chat-shell-header-padding-block);
   padding-inline: var(--chat-shell-header-padding-inline);
-  border-block-end-width: var(--chat-shell-border-width);
-  border-block-end-style: var(--chat-shell-border-style);
-  border-block-end-color: var(--chat-shell-border-color);
 }
 
 /* El botón que abre el cajón de conversaciones: solo existe por debajo del
@@ -75,6 +75,12 @@
   overflow-y: auto;
 }
 
+/* La única línea que queda del armazón: la que separa la caja de escribir del
+   hilo. Las otras dos —la de la columna de conversaciones y la de debajo de la
+   cabecera— se retiraron; los tokens `--chat-shell-border-*` son ya solo de
+   esta. Aquí la línea sí trabaja: el hilo se desplaza por detrás y el composer
+   se queda quieto, así que sin ella el último globo se metería debajo del
+   campo de escribir sin que se notara dónde acaba uno y empieza el otro. */
 .chat-shell__composer {
   flex-shrink: 0;
   padding-block: var(--chat-shell-composer-padding-block);

@@ -7,6 +7,41 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.6.0] — 2026-09-14
+
+> **Minor.** `ChatShell` pierde dos de sus tres líneas: la que separaba la
+> columna de conversaciones del hilo y la de debajo de la cabecera. Cambio
+> visual deliberado en los tres productos que montan el chat (lmsmcp, lrs y
+> tender); no toca la API del componente.
+
+### `ChatShell`
+
+- **Fuera el borde `inline-end` de la columna de conversaciones** —el que el
+  usuario llama «el borde izquierdo que separa los chats»— y **fuera el borde
+  `block-end` de la cabecera**, el de debajo del título. La columna ya se lee
+  como columna por su ancho y por su aire, y la cabecera es una fila corta
+  sobre un hilo que empieza más abajo: ninguna de las dos líneas separaba algo
+  que no se viera solo.
+- **La línea del composer se queda.** Es la única que hace trabajo: el hilo se
+  desplaza por detrás mientras la caja de escribir se queda quieta, así que sin
+  ella el último globo pasaría bajo el campo sin que se notara dónde acaba uno
+  y empieza el otro.
+- **Nuevo token `chat-shell.list-padding-inline`** (`{spacing.4}`): a cambio de
+  la línea, la columna se pone su propio pasillo a los dos lados. Sumado al
+  aire del hilo (`conversation-thread.padding-inline`), entre el título de una
+  conversación y el primer globo queda un hueco del ancho de la cabecera — la
+  separación pasa de trazo a aire. Sin colores nuevos: no se tiñe la columna.
+- **Los tokens `chat-shell.border-width|style|color` y
+  `chat-shell.surface-dark-border-color` NO se retiran ni se renombran** —eso
+  sería breaking para quien los remapee—: se quedan con el mismo nombre y con
+  la `$description` corregida, porque ahora describen una sola línea, la del
+  composer.
+- **Documentación**: `ChatShell.mdx` deja de contar las tres líneas como parte
+  del diseño y gana la sección «Una sola línea», con el porqué de lo que se
+  quita y de lo que se queda. El cajón de pantalla estrecha (`Sheet`) no cambia:
+  ahí la lista no pasa por `.chat-shell__list`, así que nunca tuvo esa línea ni
+  ese pasillo.
+
 ## [38.5.2] — 2026-09-14
 
 > **Patch.** El logotipo de la banda de marca del correo (`EmailLayout`)

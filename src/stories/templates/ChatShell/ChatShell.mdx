@@ -7,7 +7,7 @@ import { chatShellTokens, chatShellDarkTokens } from "../../../tokens/components
 
 # ChatShell
 
-El **armazón de una pantalla de chat**: tres zonas —la columna de conversaciones, el hilo y la caja de escribir— colocadas, separadas por línea y con el scroll en el sitio correcto.
+El **armazón de una pantalla de chat**: tres zonas —la columna de conversaciones, el hilo y la caja de escribir— colocadas y con el scroll en el sitio correcto.
 
 Es **solo maqueta**. No lleva estado de producto, no sabe qué es un mensaje y no habla con ningún modelo: quién está abierto, qué se manda y qué llega lo lleva el producto y entra por los slots. Lo único que sí lleva es el cajón de conversaciones de las pantallas estrechas, que es maqueta también. Antes esto era una story que montaba a mano `AppShell` + `Sidebar` + los tres componentes de chat, sin componente detrás y sin poder usarse fuera de Storybook.
 
@@ -27,14 +27,24 @@ Las tres se resumen en una: **el chat no se explica con la forma**. La forma aco
 
 | Slot | Qué va | Qué hace el armazón |
 | --- | --- | --- |
-| `list` | Un `ConversationList` | Columna lateral con scroll propio; cajón por debajo del punto de ruptura |
-| `header` | El título de la conversación y sus controles | Fila fija arriba, con línea debajo |
+| `list` | Un `ConversationList` | Columna lateral con scroll propio, separada del hilo por el aire; cajón por debajo del punto de ruptura |
+| `header` | El título de la conversación y sus controles | Fila fija arriba, sin línea debajo |
 | `children` | Un `ConversationThread` | La zona que crece, **la única con scroll** |
-| `composer` | Un `MessageComposer` | Fila fija abajo, con línea encima |
+| `composer` | Un `MessageComposer` | Fila fija abajo, con línea encima — la única del armazón |
 
 Todos menos `children` son opcionales. Lo que hace que un chat se comporte es que **el scroll vive solo en el hilo**: la cabecera y la caja de escribir se quedan quietas mientras la conversación se desplaza detrás.
 
 <Canvas of={ChatShellStories.Minimo} />
+
+### Una sola línea
+
+El armazón tuvo tres líneas: la de la columna de conversaciones, la de debajo de la cabecera y la de encima de la caja de escribir. **Queda una.** Las dos primeras se retiraron porque no separaban nada que no se viera solo: la columna ya se lee como columna por su ancho y por su aire, y la cabecera es una fila corta de título sobre un hilo que empieza más abajo — subrayarla solo cargaba de trazo una pantalla que se mira durante horas.
+
+La de la caja de escribir se queda, y es la única que hace trabajo: el hilo se desplaza **por detrás** mientras el composer se queda quieto, así que sin ella el último globo pasaría bajo el campo de escribir sin que se notara dónde acaba uno y empieza el otro.
+
+A cambio de la línea de la columna, la columna se puso su **propio pasillo** a los dos lados (`chat-shell.list-padding-inline`): sumado al aire del hilo, entre el título de una conversación y el primer globo queda un hueco del ancho de la cabecera. La separación pasa de trazo a aire: la misma decisión, contada con otro material.
+
+Los tokens `chat-shell.border-*` siguen existiendo con el mismo nombre —no se renombran, que rompería a quien los remapee— pero ahora describen una sola línea, la del composer.
 
 ## Con y sin columna
 
@@ -64,7 +74,7 @@ Un hilo de chat se monta **siempre** dentro de `ChatShell` —directamente sobre
 
 ## Superficie oscura
 
-Fondo y líneas de separación tienen par oscuro. No hay sombras: las tres zonas se separan con línea de 1px, como todo el sistema.
+El fondo y la línea del composer tienen par oscuro. No hay sombras: lo que el sistema dibuja para separar es una línea de 1px, aquí y en todas partes.
 
 ## La pantalla entera
 
