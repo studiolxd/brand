@@ -15,7 +15,7 @@ primera a la segunda:
    inmensa mayoría de componentes.
 2. **El proveedor de textos** (`BrandMessagesProvider`) — el destino: el texto sale del catálogo
    de la aplicación y **no hay default**, así que olvidarlo es un error, no un castellano mudo.
-   Hoy lo usa `Pagination`.
+   Hoy lo usan `Pagination` y la **familia de tablas** (`Table`, `DataTable`).
 
 ## El proveedor de textos
 
@@ -36,6 +36,16 @@ import { BrandMessagesProvider } from '@studiolxd/brand/messages';
       total: (count) => t('pagination.total', { count }),
       allOption: t('pagination.allOption'),
     },
+    table: {
+      actions: t('table.actions'),
+      sortable: t('table.sortable'),
+      sortedAscending: t('table.sortedAscending'),
+      sortedDescending: t('table.sortedDescending'),
+    },
+    dataTable: {
+      empty: t('dataTable.empty'),
+      search: t('common.search.placeholder'),
+    },
   }}
 >
   {children}
@@ -53,8 +63,8 @@ A partir de ahí, un componente migrado se monta **sin una sola prop de texto**:
 - **El tipo nace en el DS.** `BrandMessages` es el contrato, y el catálogo de la app es quien lo
   satisface — nunca al revés. Si el tipo se generase desde el JSON de una suite, el DS dependería
   de un paquete de producto para declarar su propio contrato.
-- **Anidado por componente, no plano.** Un espacio por componente (`pagination`, y los que
-  vengan), calcando los que el catálogo de la suite ya tiene. Son 310 textos: una lista plana de
+- **Anidado por componente, no plano.** Un espacio por componente (`pagination`, `table`,
+  `dataTable`, y los que vengan), calcando los que el catálogo de la suite ya tiene. Son 310 textos: una lista plana de
   claves sueltas no se puede escribir ni revisar.
 - **Todas las claves son obligatorias** dentro de su espacio, como en `RecoveryCodesLabels`. Una
   app que se deje una **no compila**: ese es el punto entero del mecanismo.
@@ -161,7 +171,8 @@ pista, `maskLetters`:
 | `Calendar` | `previousMonthLabel`, `nextMonthLabel`, `previousYearsLabel`, `nextYearsLabel`, `yearGridLabel`, `gridLabel` — más `locale` |
 | `CalendarPlanner` | `previousMonthLabel`, `nextMonthLabel`, `gridLabel`, `moreLabel` — más `locale` |
 | `CalendarRoster` | `previousMonthLabel`, `nextMonthLabel`, `legendLabel`, `legendItems`, `nameLabel`, `birthdayPrefix` — más `locale` |
-| `Table` (`TableHeader`) | `actionsLabel`, `sortedAscLabel`, `sortedDescLabel`, `sortableLabel` |
+| `Table` (`TableHeader`) | **Migrado al proveedor** (`table.*`, sin defaults). Las props `actionsLabel`, `sortedAscLabel`, `sortedDescLabel` y `sortableLabel` siguen existiendo como anulación puntual |
+| `Table` (`TableProps`) | `caption` — el nombre de ESTA tabla, sin default y **fuera del proveedor**: no lo puede saber un catálogo común |
 | `Table` (`TableRow`) | `label` — el nombre accesible de la fila, sin default: solo lo escribe el consumidor |
 | `CodeBlock` | `copyLabel`, `copiedLabel`, `codeLabel` |
 | `DescriptionList` (`DescriptionDetails`) | `copyLabel`, `copiedLabel` — solo con `copyable` |
@@ -198,7 +209,7 @@ pista, `maskLetters`:
 | `InputField` | `clearLabel` — el aspa de la variante `kind="search"` con `clearable` |
 | `DocsSearch` | `label`, `placeholder`, `resultsLabel`, `emptyLabel`, `loadingLabel`, `clearLabel` |
 | `SearchForm` | `label`, `placeholder`, `submitLabel` |
-| `DataTable` | `searchPlaceholder`, `searchClearLabel`, `emptyMessage`, `ariaLabel`/`ariaLabelledBy` (el nombre de la tabla, sin default) — más `headerLabels` y `paginationLabels` para sus piezas |
+| `DataTable` | **Migrado al proveedor** (`dataTable.*`, sin defaults): `searchPlaceholder` cae en `dataTable.search` y `emptyMessage` en `dataTable.empty`, y las dos props siguen como anulación puntual. `ariaLabel`/`ariaLabelledBy` (el nombre de la tabla) y `searchClearLabel` quedan fuera del proveedor — el primero porque es de esta pantalla, el segundo porque lo pone `InputField`, que aún no está migrado. `headerLabels` y `paginationLabels` ya no hacen falta para traducir: sus piezas leen del proveedor solas |
 | `StatTile` | `delta.label` para leer la dirección de la tendencia |
 | `CopyButton` | `label`, `copiedLabel`, `errorLabel` |
 | `ConfirmDialog` | `confirmLabel`, `cancelLabel`, `pendingLabel`, `closeLabel` — más `secondaryActionLabel`, el rótulo de la acción intermedia, que es texto del producto y no tiene default, y `confirmPhraseLabel` / `confirmPhraseMismatch`, **obligatorios y sin default en cuanto se pasa `confirmPhrase`** |
@@ -228,7 +239,13 @@ y que tenga que reimplementar el componente entero para hacerlo.
 Lo que cambia con el proveedor es **de dónde sale el valor cuando la prop falta**: en un
 componente nuevo, declara su interfaz de textos junto a sus props (como `PaginationMessages`),
 añádela a `BrandMessages` y lee con `useBrandMessages('<espacio>')` en el punto donde el texto se
-pinta. Sin default castellano. Mientras un componente siga sin migrar, su prop mantiene el
+pinta. Sin default castellano.
+
+**Al proveedor va solo lo que el componente emite por su cuenta y dice lo mismo en toda la
+suite** —«Acciones», «Ordenado ascendente», el aviso de una tabla vacía—: es cromo del
+componente. Lo que es contenido de una pantalla concreta —el `caption` de ESA tabla, el vacío
+que explica algo del dominio, el nombre de una fila— **se queda como prop y sin default**: un
+catálogo común no puede saberlo, y meterlo ahí es peor error que dejarlo fuera. Mientras un componente siga sin migrar, su prop mantiene el
 default castellano y su JSDoc lo dice.
 
 ### Las excepciones: `EmailButton.fallbackLabel` y el pie de correo sin cuenta

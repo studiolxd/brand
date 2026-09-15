@@ -4,6 +4,36 @@ import { expect, userEvent, within } from 'storybook/test';
 import { Button } from '../../atoms/Button/Button';
 import { Link } from '../../atoms/Link/Link';
 import { Table, TableHead, TableBody, TableFooter, TableHeader, TableRow, TableCell } from './Table';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import type { BrandMessages } from '../../messages/BrandMessages';
+
+/**
+ * El catálogo de otra app, en inglés, para enseñar de dónde salen los textos
+ * cuando no se pasa ninguna prop. El Storybook monta el suyo (castellano) para
+ * todas las stories; este lo tapa solo aquí.
+ */
+const EN: BrandMessages = {
+  pagination: {
+    label: 'Pagination',
+    pagesGroup: 'Pages',
+    previous: 'Previous page',
+    next: 'Next page',
+    goToPage: (page) => `Page ${page}`,
+    perPage: 'Rows per page',
+    total: (total) => `${total} results`,
+    allOption: 'All',
+  },
+  table: {
+    actions: 'Actions',
+    sortable: 'Activate sorting',
+    sortedAscending: 'Sorted ascending',
+    sortedDescending: 'Sorted descending',
+  },
+  dataTable: {
+    empty: 'No results.',
+    search: 'Search…',
+  },
+};
 
 const meta: Meta<typeof Table> = {
   title: 'Molecules/Table',
@@ -264,51 +294,125 @@ export const Sm: Story = {
 };
 
 /**
- * Test: el texto accesible del estado de ordenación usa el castellano por defecto
- * y se sustituye cuando el consumidor lo pasa traducido.
+ * Test: el texto accesible del estado de ordenación sale del proveedor —aquí,
+ * el catálogo castellano del Storybook— y la prop suelta lo tapa. La tabla ya
+ * no trae ningún castellano puesto.
  */
 export const EtiquetasOrdenacion: Story = {
   name: 'Test — etiquetas de ordenación',
   tags: ['!dev'],
   render: () => (
     <>
-      <div data-testid="default">
+      <div data-testid="proveedor">
         <Table>
           <TableHead>
             <TableRow>
               <TableHeader sortable>Nombre</TableHeader>
               <TableHeader sortable sorted="asc">Fecha</TableHeader>
+              <TableHeader sortable sorted="desc">Importe</TableHeader>
+              <TableHeader actions />
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow><TableCell>a</TableCell><TableCell>b</TableCell></TableRow>
+            <TableRow><TableCell>a</TableCell><TableCell>b</TableCell><TableCell>c</TableCell><TableCell actions /></TableRow>
           </TableBody>
         </Table>
       </div>
-      <div data-testid="traducido">
+      <div data-testid="prop">
         <Table>
           <TableHead>
             <TableRow>
               <TableHeader sortable sortableLabel="Activate sorting">Name</TableHeader>
               <TableHeader sortable sorted="asc" sortedAscLabel="Sorted ascending">Date</TableHeader>
+              <TableHeader actions actionsLabel="Actions" />
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow><TableCell>a</TableCell><TableCell>b</TableCell></TableRow>
+            <TableRow><TableCell>a</TableCell><TableCell>b</TableCell><TableCell actions /></TableRow>
           </TableBody>
         </Table>
       </div>
     </>
   ),
   play: async ({ canvasElement }) => {
-    const def = within(canvasElement.querySelector('[data-testid="default"]') as HTMLElement);
-    await expect(def.getByText('Activar ordenación')).toBeInTheDocument();
-    await expect(def.getByText('Ordenado ascendente')).toBeInTheDocument();
+    const prov = within(canvasElement.querySelector('[data-testid="proveedor"]') as HTMLElement);
+    await expect(prov.getByText('Activar ordenación')).toBeInTheDocument();
+    await expect(prov.getByText('Ordenado ascendente')).toBeInTheDocument();
+    await expect(prov.getByText('Ordenado descendente')).toBeInTheDocument();
+    await expect(prov.getByText('Acciones')).toBeInTheDocument();
 
-    const en = within(canvasElement.querySelector('[data-testid="traducido"]') as HTMLElement);
-    await expect(en.getByText('Activate sorting')).toBeInTheDocument();
-    await expect(en.getByText('Sorted ascending')).toBeInTheDocument();
-    await expect(en.queryByText('Activar ordenación')).toBeNull();
+    const prop = within(canvasElement.querySelector('[data-testid="prop"]') as HTMLElement);
+    await expect(prop.getByText('Activate sorting')).toBeInTheDocument();
+    await expect(prop.getByText('Sorted ascending')).toBeInTheDocument();
+    await expect(prop.getByText('Actions')).toBeInTheDocument();
+    await expect(prop.queryByText('Activar ordenación')).toBeNull();
+  },
+};
+
+/**
+ * Los textos que la tabla emite por su cuenta —el estado de ordenación y el
+ * rótulo oculto de la columna de acciones— salen del `BrandMessagesProvider`
+ * que la aplicación monta en su raíz. Esta story tapa el del Storybook con uno
+ * en inglés: no se le pasa ni una prop de texto y las etiquetas cambian de
+ * idioma. Están ocultas a la vista, así que el canvas se ve igual — el cambio
+ * lo comprueba la story de al lado.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Table caption="Projects">
+        <Table.Head>
+          <Table.Row>
+            <Table.Header sortable sorted="asc">Name</Table.Header>
+            <Table.Header sortable>Client</Table.Header>
+            <Table.Header actions />
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
+          {PROYECTOS.map((p) => (
+            <Table.Row key={p.nombre}>
+              <Table.Cell>{p.nombre}</Table.Cell>
+              <Table.Cell>{p.cliente}</Table.Cell>
+              <Table.Cell actions>
+                <Button variant="ghost" size="sm">Edit</Button>
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el proveedor más cercano es el que manda, y no se mezcla con el de fuera. */
+export const ContratoTextosDelProveedor: Story = {
+  name: 'Test — manda el proveedor más cercano',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Table caption="Projects">
+        <Table.Head>
+          <Table.Row>
+            <Table.Header sortable sorted="asc">Name</Table.Header>
+            <Table.Header sortable>Client</Table.Header>
+            <Table.Header actions />
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
+          <Table.Row><Table.Cell>a</Table.Cell><Table.Cell>b</Table.Cell><Table.Cell actions /></Table.Row>
+        </Table.Body>
+      </Table>
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText('Sorted ascending')).toBeInTheDocument();
+    await expect(canvas.getByText('Activate sorting')).toBeInTheDocument();
+    await expect(canvas.getByText('Actions')).toBeInTheDocument();
+    // el catálogo castellano del Storybook queda tapado, no mezclado
+    await expect(canvas.queryByText('Ordenado ascendente')).toBeNull();
+    await expect(canvas.queryByText('Acciones')).toBeNull();
   },
 };
 

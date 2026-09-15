@@ -3,6 +3,8 @@ import { render, screen } from '@testing-library/react';
 import { BrandMessagesProvider } from './BrandMessagesProvider';
 import type { BrandMessages } from './BrandMessages';
 import { Pagination } from '../molecules/Pagination/Pagination';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../molecules/Table/Table';
+import { DataTable } from '../organisms/DataTable/DataTable';
 
 /**
  * El orden de resolución de un texto: **prop → proveedor → error**. Sin cuarto
@@ -19,6 +21,16 @@ const EN: BrandMessages = {
     perPage: 'Rows per page',
     total: (total) => `${total} results`,
     allOption: 'All',
+  },
+  table: {
+    actions: 'Actions',
+    sortable: 'Activate sorting',
+    sortedAscending: 'Sorted ascending',
+    sortedDescending: 'Sorted descending',
+  },
+  dataTable: {
+    empty: 'No results.',
+    search: 'Search…',
   },
 };
 
@@ -98,5 +110,126 @@ describe('BrandMessagesProvider', () => {
     );
 
     expect(screen.getByRole('navigation', { name: 'Pagination' })).toBeInTheDocument();
+  });
+});
+
+/** Una tabla mínima con una cabecera ordenable y una columna de acciones. */
+function TablaDePrueba(props: {
+  sortableLabel?: string;
+  actionsLabel?: string;
+  sortable?: boolean;
+  actions?: boolean;
+}) {
+  const { sortable = true, actions = true, ...labels } = props;
+  return (
+    <Table caption="Proyectos">
+      <TableHead>
+        <TableRow>
+          <TableHeader sortable={sortable} {...labels}>Nombre</TableHeader>
+          {actions && <TableHeader actions {...labels} />}
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>Uno</TableCell>
+          {actions && <TableCell actions />}
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+}
+
+describe('Table lee del proveedor', () => {
+  it('el estado de ordenación y el rótulo de acciones salen del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <TablaDePrueba />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByText('Activate sorting')).toBeInTheDocument();
+    expect(screen.getByText('Actions')).toBeInTheDocument();
+  });
+
+  it('la prop suelta gana al proveedor', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <TablaDePrueba sortableLabel="Trier" actionsLabel="Actions rapides" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByText('Trier')).toBeInTheDocument();
+    expect(screen.getByText('Actions rapides')).toBeInTheDocument();
+    expect(screen.queryByText('Activate sorting')).toBeNull();
+  });
+
+  it('sin proveedor y sin prop, revienta diciendo qué texto falta', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<TablaDePrueba />)).toThrow(/table\.sortable/);
+  });
+
+  it('una tabla sin cabecera ordenable ni acciones no exige ningún texto', () => {
+    expect(() =>
+      render(<TablaDePrueba sortable={false} actions={false} />),
+    ).not.toThrow();
+  });
+
+  it('el `caption` y el `label` de fila no salen del catálogo: son de esta pantalla', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <TablaDePrueba />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('table', { name: 'Proyectos' })).toBeInTheDocument();
+  });
+});
+
+describe('DataTable lee del proveedor', () => {
+  const columns = [
+    { accessorKey: 'name', header: 'Nombre' },
+  ];
+
+  it('el rótulo del buscador y el aviso de vacío salen del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <DataTable columns={columns} data={[]} searchColumnId="name" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('textbox', { name: 'Search…' })).toBeInTheDocument();
+    expect(screen.getByText('No results.')).toBeInTheDocument();
+  });
+
+  it('la prop suelta gana: el vacío de ESTA pantalla no está en el catálogo común', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <DataTable columns={columns} data={[]} emptyMessage="Todavía no has invitado a nadie" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByText('Todavía no has invitado a nadie')).toBeInTheDocument();
+    expect(screen.queryByText('No results.')).toBeNull();
+  });
+
+  it('sin proveedor y sin prop, revienta diciendo qué texto falta', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<DataTable columns={columns} data={[]} />)).toThrow(
+      /dataTable\.empty/,
+    );
+  });
+
+  it('una tabla con filas y sin buscador no exige ninguno de sus dos textos', () => {
+    const sinLosSuyos = { ...EN, dataTable: {} } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinLosSuyos}>
+          <DataTable columns={columns} data={[{ name: 'Uno' }]} />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
   });
 });

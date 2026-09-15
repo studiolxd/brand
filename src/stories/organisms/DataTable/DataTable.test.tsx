@@ -8,9 +8,10 @@ import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
 import { brandMessagesFixture } from '../../../../.storybook/brandMessagesFixture';
 
 /**
- * El pie de la tabla es el `Pagination` del DS, que ya no trae textos puestos:
- * los lee del `BrandMessagesProvider`. Una app que monte `DataTable` lo tiene
- * montado en su raíz; aquí se monta con el mismo catálogo que el Storybook.
+ * Ninguna de las tres piezas trae textos puestos: `DataTable` lee de
+ * `dataTable`, sus cabeceras de `table` y su pie de `pagination`, todos del
+ * `BrandMessagesProvider`. Una app que monte `DataTable` lo tiene montado en
+ * su raíz; aquí se monta con el mismo catálogo que el Storybook.
  */
 function Catalogo({ children }: { children: ReactNode }) {
   return <BrandMessagesProvider messages={brandMessagesFixture}>{children}</BrandMessagesProvider>;
