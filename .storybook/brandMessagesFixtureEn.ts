@@ -40,4 +40,11 @@ export const brandMessagesFixtureEn: BrandMessages = {
     empty: 'No results.',
     search: 'Search…',
   },
+  inputField: {
+    clear: 'Clear',
+  },
+  passwordField: {
+    show: 'Show password',
+    hide: 'Hide password',
+  },
 };

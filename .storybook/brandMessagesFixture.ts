@@ -36,4 +36,11 @@ export const brandMessagesFixture: BrandMessages = {
     empty: 'Sin resultados.',
     search: 'Buscar…',
   },
+  inputField: {
+    clear: 'Borrar',
+  },
+  passwordField: {
+    show: 'Mostrar contraseña',
+    hide: 'Ocultar contraseña',
+  },
 };

@@ -4,6 +4,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useRender } from '@base-ui/react/use-render';
 import { expect, userEvent, within } from 'storybook/test';
 import { PasswordField } from './PasswordField';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 /**
  * Inyecta props sobre su hijo con `useRender` de Base UI, igual que hace el
@@ -234,5 +236,39 @@ export const ContratoFocoDelToggle: Story = {
     // Y el anillo no es del color del fondo del campo: se ve.
     const fondo = getComputedStyle(canvasElement.querySelector('.input')!).backgroundColor;
     await expect(enFoco.outlineColor).not.toBe(fondo);
+  },
+};
+
+/**
+ * Las dos caras del interruptor —«Mostrar contraseña» / «Ocultar contraseña»—
+ * son cromo: dicen lo mismo en toda la suite y **no tienen valor por defecto**.
+ * Salen del `BrandMessagesProvider`, y esta story tapa el del catálogo con uno
+ * en inglés. El rótulo del campo, en cambio, lo escribe quien monta la
+ * pantalla.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <PasswordField label="Password" labelHidden={false} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: sin props de texto, el interruptor lee del proveedor. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el interruptor lee del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <PasswordField label="Password" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const toggle = canvas.getByRole('button', { name: 'Show password' });
+    await userEvent.click(toggle);
+    await expect(canvas.getByRole('button', { name: 'Hide password' })).toBeInTheDocument();
+    await expect(canvas.queryByRole('button', { name: 'Mostrar contraseña' })).toBeNull();
   },
 };

@@ -106,6 +106,16 @@ describe.each([
     'src/stories/organisms/DataTable/DataTable.tsx',
     ['Sin resultados', 'Buscar', 'Borrar'],
   ],
+  [
+    'InputField',
+    'src/stories/molecules/InputField/InputField.tsx',
+    ['Borrar'],
+  ],
+  [
+    'PasswordField',
+    'src/stories/molecules/PasswordField/PasswordField.tsx',
+    ['Mostrar contraseña', 'Ocultar contraseña'],
+  ],
 ])('%s no trae textos puestos', (_componente, ruta, textos) => {
   const fuente = readFileSync(join(repoRoot, ruta), 'utf8');
   // Solo el cuerpo: el JSDoc de las props nombra los textos para explicarlos.

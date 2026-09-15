@@ -7,4 +7,6 @@ export type {
   PaginationMessages,
   TableMessages,
   DataTableMessages,
+  InputFieldMessages,
+  PasswordFieldMessages,
 } from './BrandMessages';

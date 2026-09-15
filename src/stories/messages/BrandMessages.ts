@@ -1,6 +1,8 @@
 import type { PaginationMessages } from '../molecules/Pagination/Pagination';
 import type { TableMessages } from '../molecules/Table/Table';
 import type { DataTableMessages } from '../organisms/DataTable/DataTable';
+import type { InputFieldMessages } from '../molecules/InputField/InputField';
+import type { PasswordFieldMessages } from '../molecules/PasswordField/PasswordField';
 
 /**
  * El contrato de textos de la librería: un espacio por componente, y dentro
@@ -27,6 +29,14 @@ export interface BrandMessages {
   pagination: PaginationMessages;
   table: TableMessages;
   dataTable: DataTableMessages;
+  inputField: InputFieldMessages;
+  passwordField: PasswordFieldMessages;
 }
 
-export type { PaginationMessages, TableMessages, DataTableMessages };
+export type {
+  PaginationMessages,
+  TableMessages,
+  DataTableMessages,
+  InputFieldMessages,
+  PasswordFieldMessages,
+};

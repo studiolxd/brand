@@ -6,6 +6,22 @@ import { Input } from '../../atoms/Input/Input';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { Icon } from '../../atoms/Icon/Icon';
 import { ErrorText } from '../../atoms/ErrorText/ErrorText';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
+
+/**
+ * Los dos textos que el campo emite por su cuenta: las dos caras del
+ * interruptor de mostrar/ocultar. Son cromo —dicen lo mismo en toda la
+ * suite—, y por eso salen del catálogo común.
+ *
+ * El `label`, el `placeholder`, el `helperText` y el `errorMessage` no están
+ * aquí: son el contenido de ESTE campo.
+ */
+export interface PasswordFieldMessages {
+  /** Nombre accesible del interruptor con la contraseña oculta. */
+  show: string;
+  /** Nombre accesible del interruptor con la contraseña a la vista. */
+  hide: string;
+}
 
 export interface PasswordFieldProps
   extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size' | 'type'> {
@@ -27,9 +43,15 @@ export interface PasswordFieldProps
   action?: React.ReactNode;
   /** Tamaño del campo. */
   size?: 'sm' | 'md' | 'lg';
-  /** aria-label del toggle cuando la contraseña está oculta. Default: "Mostrar contraseña". */
+  /**
+   * aria-label del toggle cuando la contraseña está oculta. **Sin default**:
+   * sale de `passwordField.show` del `BrandMessagesProvider`.
+   */
   showPasswordLabel?: string;
-  /** aria-label del toggle cuando la contraseña es visible. Default: "Ocultar contraseña". */
+  /**
+   * aria-label del toggle cuando la contraseña es visible. **Sin default**:
+   * sale de `passwordField.hide` del `BrandMessagesProvider`.
+   */
   hidePasswordLabel?: string;
   /**
    * Se añade DESPUÉS de las clases propias, sobre el wrapper raíz `.password-field`.
@@ -55,14 +77,15 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(fu
   helperText,
   action,
   size: sizeProp,
-  showPasswordLabel = 'Mostrar contraseña',
-  hidePasswordLabel = 'Ocultar contraseña',
+  showPasswordLabel,
+  hidePasswordLabel,
   className,
   id,
   disabled,
   placeholder,
   ...rest
 }, ref) {
+  const t = useBrandMessages('passwordField');
   const size = useFormSize(sizeProp);
   const reactId = useId();
   const inputId = id ?? reactId;
@@ -94,7 +117,9 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(fu
           aria-controls={inputId}
           aria-pressed={visible}
         >
-          <VisuallyHidden>{visible ? hidePasswordLabel : showPasswordLabel}</VisuallyHidden>
+          <VisuallyHidden>
+            {visible ? t('hide', hidePasswordLabel) : t('show', showPasswordLabel)}
+          </VisuallyHidden>
           <Icon name={visible ? 'eye-off' : 'eye'} className="password-field__icon" />
         </button>
       </div>

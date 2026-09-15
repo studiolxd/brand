@@ -6,6 +6,8 @@ import { brandMessagesFixtureEn as EN } from '../../../.storybook/brandMessagesF
 import { Pagination } from '../molecules/Pagination/Pagination';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../molecules/Table/Table';
 import { DataTable } from '../organisms/DataTable/DataTable';
+import { InputField } from '../molecules/InputField/InputField';
+import { PasswordField } from '../molecules/PasswordField/PasswordField';
 
 /**
  * El orden de resolución de un texto: **prop → proveedor → error**. Sin cuarto
@@ -209,5 +211,74 @@ describe('DataTable lee del proveedor', () => {
         </BrandMessagesProvider>,
       ),
     ).not.toThrow();
+  });
+});
+
+describe('los átomos de formulario leen del proveedor', () => {
+  it('el aspa de un buscador toma su nombre del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <InputField id="q" label="Query" kind="search" clearable defaultValue="algo" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Clear' })).toBeInTheDocument();
+  });
+
+  it('un campo sin aspa no exige el texto del aspa', () => {
+    const sinLosSuyos = { ...EN, inputField: {} } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinLosSuyos}>
+          <InputField id="q" label="Query" />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  it('sin proveedor y sin prop, el aspa revienta diciendo qué texto falta', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() =>
+      render(<InputField id="q" label="Query" kind="search" clearable defaultValue="algo" />),
+    ).toThrow(/inputField\.clear/);
+  });
+
+  it('el `label` del campo NO sale del catálogo: es el contenido de esta pantalla', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <InputField id="q" label="Nombre del proyecto" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByLabelText('Nombre del proyecto')).toBeInTheDocument();
+  });
+
+  it('las dos caras del interruptor de contraseña salen del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <PasswordField label="Password" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Show password' })).toBeInTheDocument();
+  });
+
+  it('la prop suelta gana al proveedor también aquí', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <PasswordField label="Mot de passe" showPasswordLabel="Afficher le mot de passe" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Afficher le mot de passe' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Show password' })).toBeNull();
+  });
+
+  it('sin proveedor y sin props, el interruptor revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<PasswordField label="Password" />)).toThrow(/passwordField\.show/);
   });
 });
