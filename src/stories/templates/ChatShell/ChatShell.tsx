@@ -179,8 +179,24 @@ export const ChatShell = forwardRef<HTMLDivElement, ChatShellProps>(function Cha
              pantalla de chat y se queda en ella —con su velo— en vez de
              tapar la aplicación entera. */
           container={root ?? undefined}
+          /* Sin aspa: el cajón trae su propio botón, el MISMO que lo abrió
+             y en el mismo sitio, para que el glifo no cambie de forma al
+             desplegar. Dos controles de cierre con dibujos distintos en la
+             misma pantalla son dos maneras de decir lo mismo (2026-09-15). */
+          hideClose
           className="chat-shell__drawer"
         >
+          <Button
+            variant="ghost"
+            size="sm"
+            iconOnly
+            aria-label={listTriggerLabel}
+            aria-expanded
+            className="chat-shell__list-trigger"
+            onClick={() => setDrawerOpen(false)}
+          >
+            <Icon name="layout-sidebar" size="sm" />
+          </Button>
           {list}
         </Sheet>
       )}

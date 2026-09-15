@@ -21,6 +21,12 @@ export interface SheetProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
   footer?: ReactNode;
   children: ReactNode;
   closeLabel?: string;
+  /**
+   * Oculta el aspa de la esquina. Para un cajón cuyo propio disparador queda
+   * a la vista y ya sirve para cerrarlo: dos controles de cierre en la misma
+   * pantalla, con glifos distintos, son dos formas de decir lo mismo.
+   */
+  hideClose?: boolean;
   /** Elemento que abre el panel. Sin él, la apertura la controla el consumidor. */
   trigger?: ReactNode;
   /**
@@ -73,6 +79,7 @@ export function Sheet({
   footer,
   children,
   closeLabel = 'Cerrar',
+  hideClose = false,
   trigger,
   container,
   onAnimationEndCapture,
@@ -106,7 +113,9 @@ export function Sheet({
             )}
           </DialogHeader>
 
-          <Dialog.Close className="sheet__close" render={<CloseButton label={closeLabel} />} />
+          {!hideClose && (
+            <Dialog.Close className="sheet__close" render={<CloseButton label={closeLabel} />} />
+          )}
 
           <div className="sheet__body">{children}</div>
 

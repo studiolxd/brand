@@ -33,6 +33,14 @@
   position: absolute;
 }
 
+/* El cajón ocupa el ancho del armazón, no los 320px del Sheet: la lista de
+   conversaciones es la pantalla mientras está abierta, y el resto del chat
+   queda detrás del velo. Sin media query porque el cajón solo se monta por
+   debajo de --breakpoint-lg (2026-09-15). */
+.chat-shell .chat-shell__drawer {
+  --sheet-inline-size: 100%;
+}
+
 /* La columna de conversaciones: solo se monta a partir del punto de ruptura,
    con su propio scroll. Ni línea que la separe del hilo ni pasillo propio —los
    dos se retiraron—: lo que la despega del hilo es el `gap` del contenedor. */

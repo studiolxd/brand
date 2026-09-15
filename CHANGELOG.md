@@ -7,6 +7,23 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.15.0] — 2026-09-15
+
+> **Minor.** El cajón de conversaciones del chat, en móvil: ocupa el ancho y su
+> botón no cambia de forma al abrirse. `Sheet` gana `hideClose`.
+
+El cajón medía 320px de 390 porque heredaba el ancho lateral del `Sheet`.
+Mientras está abierto, la lista de conversaciones ES la pantalla: ahora mide lo
+que el armazón. Sin media query, porque el cajón solo se monta por debajo de
+`lg`.
+
+Y al abrirse aparecía el aspa del `Sheet` encima del disparador, así que el
+glifo cambiaba de «barra lateral» a «cerrar» según el estado. `Sheet` acepta
+`hideClose` —por defecto no cambia para nadie— y el armazón pinta dentro del
+cajón el MISMO botón que lo abrió, en el mismo sitio: pliega y despliega sin
+cambiar de dibujo. Dos controles de cierre con formas distintas en la misma
+pantalla son dos maneras de decir lo mismo.
+
 ## [38.14.0] — 2026-09-15
 
 > **Minor.** En móvil, las acciones ocupan la línea porque lo decide el sitio

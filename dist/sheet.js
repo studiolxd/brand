@@ -12,17 +12,17 @@ function c({ className: e, ...t }) {
 		...t
 	});
 }
-function l({ open: i, onOpenChange: l, side: u = "right", title: d, titleHidden: f = !1, description: p, footer: m, children: h, closeLabel: g = "Cerrar", trigger: _, container: v, onAnimationEndCapture: y, className: b, ...x }) {
+function l({ open: i, onOpenChange: l, side: u = "right", title: d, titleHidden: f = !1, description: p, footer: m, children: h, closeLabel: g = "Cerrar", hideClose: _ = !1, trigger: v, container: y, onAnimationEndCapture: b, className: x, ...S }) {
 	return /* @__PURE__ */ o(s.Root, {
 		open: i,
 		onOpenChange: (e) => l(e),
-		children: [_ && /* @__PURE__ */ a(s.Trigger, { render: _ }), /* @__PURE__ */ o(s.Portal, {
-			container: v,
+		children: [v && /* @__PURE__ */ a(s.Trigger, { render: v }), /* @__PURE__ */ o(s.Portal, {
+			container: y,
 			children: [/* @__PURE__ */ a(r, { className: "sheet__overlay" }), /* @__PURE__ */ o(s.Popup, {
-				className: ["sheet", b].filter(Boolean).join(" "),
+				className: ["sheet", x].filter(Boolean).join(" "),
 				"data-side": u,
-				onAnimationEndCapture: y,
-				...x,
+				onAnimationEndCapture: b,
+				...S,
 				children: [
 					/* @__PURE__ */ o(n, {
 						layout: "stacked",
@@ -35,7 +35,7 @@ function l({ open: i, onOpenChange: l, side: u = "right", title: d, titleHidden:
 							children: p
 						})]
 					}),
-					/* @__PURE__ */ a(s.Close, {
+					!_ && /* @__PURE__ */ a(s.Close, {
 						className: "sheet__close",
 						render: /* @__PURE__ */ a(t, { label: g })
 					}),

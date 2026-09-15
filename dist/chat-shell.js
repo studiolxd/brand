@@ -66,15 +66,28 @@ var l = "(min-width: 1024px)", u = a(function({ list: a, header: u, children: d,
 					})
 				]
 			}),
-			A && /* @__PURE__ */ r(n, {
+			A && /* @__PURE__ */ i(n, {
 				side: "left",
 				open: O,
 				onOpenChange: D,
 				title: p,
 				titleHidden: !0,
 				container: w ?? void 0,
+				hideClose: !0,
 				className: "chat-shell__drawer",
-				children: a
+				children: [/* @__PURE__ */ r(t, {
+					variant: "ghost",
+					size: "sm",
+					iconOnly: !0,
+					"aria-label": m,
+					"aria-expanded": !0,
+					className: "chat-shell__list-trigger",
+					onClick: () => D(!1),
+					children: /* @__PURE__ */ r(e, {
+						name: "layout-sidebar",
+						size: "sm"
+					})
+				}), a]
 			})
 		]
 	});

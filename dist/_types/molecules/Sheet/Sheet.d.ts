@@ -15,6 +15,12 @@ export interface SheetProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
     footer?: ReactNode;
     children: ReactNode;
     closeLabel?: string;
+    /**
+     * Oculta el aspa de la esquina. Para un cajón cuyo propio disparador queda
+     * a la vista y ya sirve para cerrarlo: dos controles de cierre en la misma
+     * pantalla, con glifos distintos, son dos formas de decir lo mismo.
+     */
+    hideClose?: boolean;
     /** Elemento que abre el panel. Sin él, la apertura la controla el consumidor. */
     trigger?: ReactNode;
     /**
@@ -53,4 +59,4 @@ export declare function SheetFooter({ className, ...props }: React.HTMLAttribute
  * handlers son lo que permite montar la barrera de eventos cuando el panel se
  * abre desde dentro de una tarjeta clicable, sin `div`s de producto alrededor.
  */
-export declare function Sheet({ open, onOpenChange, side, title, titleHidden, description, footer, children, closeLabel, trigger, container, onAnimationEndCapture, className, ...rest }: SheetProps): import("react/jsx-runtime").JSX.Element;
+export declare function Sheet({ open, onOpenChange, side, title, titleHidden, description, footer, children, closeLabel, hideClose, trigger, container, onAnimationEndCapture, className, ...rest }: SheetProps): import("react/jsx-runtime").JSX.Element;
