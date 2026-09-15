@@ -5,6 +5,8 @@ import { FilterBar } from './FilterBar';
 import { InputField } from '../InputField/InputField';
 import { SelectField } from '../SelectField/SelectField';
 import { DatePickerField } from '../DatePickerField/DatePickerField';
+import { SwitcherField } from '../SwitcherField/SwitcherField';
+import { MultiSelectField } from '../MultiSelectField/MultiSelectField';
 import { Button } from '../../atoms/Button/Button';
 
 const meta = {
@@ -20,6 +22,13 @@ const ESTADOS = [
   { value: 'todos', label: 'Todos los estados' },
   { value: 'activo', label: 'Activa' },
   { value: 'suspendido', label: 'Suspendida' },
+];
+
+const EQUIPOS = [
+  { value: 'diseno', label: 'Diseño' },
+  { value: 'contenidos', label: 'Contenidos' },
+  { value: 'soporte', label: 'Soporte' },
+  { value: 'ventas', label: 'Ventas' },
 ];
 
 const PAPELES = [
@@ -74,6 +83,50 @@ export const ConAcciones: Story = {
       <SelectField id="filtro-estado-acc" label="Estado" options={ESTADOS} defaultValue="todos" />
       <SelectField id="filtro-papel-acc" label="Papel" options={PAPELES} defaultValue="todos" />
       <DatePickerField id="filtro-desde-acc" label="Desde" />
+    </FilterBar>
+  ),
+};
+
+/**
+ * Un filtro **sin rótulo encima** —un interruptor, una casilla— junto a campos
+ * que sí lo llevan. La barra le reserva el renglón del rótulo, así que su
+ * control cae en la línea de los otros controles y no en la de las etiquetas.
+ * No hay que pedirle nada: lo decide la barra.
+ */
+export const ConInterruptor: Story = {
+  name: 'Con un interruptor entre los filtros',
+  render: () => (
+    <FilterBar
+      search={<Buscador />}
+      actions={<Button variant="outline">Limpiar filtros</Button>}
+    >
+      <DatePickerField id="filtro-desde-sw" label="Desde" />
+      <DatePickerField id="filtro-hasta-sw" label="Hasta" />
+      <SwitcherField id="filtro-solo-activas" label="Solo activas" />
+    </FilterBar>
+  ),
+};
+
+/**
+ * Un control que crece hacia abajo (un selector múltiple con fichas) al lado de
+ * uno bajo: los rótulos siguen en su línea y los controles empiezan todos en la
+ * misma: es el borde SUPERIOR lo que se alinea, no el inferior.
+ */
+export const ConControlAlto: Story = {
+  name: 'Con un control alto al lado de uno bajo',
+  render: () => (
+    <FilterBar
+      search={<Buscador />}
+      actions={<Button variant="outline">Limpiar filtros</Button>}
+    >
+      <MultiSelectField
+        id="filtro-equipos"
+        label="Equipos"
+        options={EQUIPOS}
+        defaultValue={['diseno', 'contenidos', 'soporte']}
+      />
+      <SelectField id="filtro-estado-alto" label="Estado" options={ESTADOS} defaultValue="todos" />
+      <SwitcherField id="filtro-solo-activas-alto" label="Solo activas" />
     </FilterBar>
   ),
 };
@@ -136,6 +189,111 @@ export const ContratoBuscadorEnSuLinea: Story = {
       .toBeCloseTo(tercero.getBoundingClientRect().bottom, 0);
     await expect(acciones.getBoundingClientRect().left)
       .toBeGreaterThan(tercero.getBoundingClientRect().right);
+  },
+};
+
+/**
+ * Test: un filtro sin rótulo encima se alinea con los CONTROLES, no con los
+ * rótulos. La barra le reserva el renglón de la etiqueta, así que el borde
+ * superior de su control cae donde el de los demás.
+ */
+export const ContratoInterruptorAlineadoConLosControles: Story = {
+  name: 'Test — el interruptor se alinea con los controles',
+  tags: ['!dev'],
+  render: () => (
+    <FilterBar search={<Buscador />} actions={<Button variant="outline">Limpiar filtros</Button>}>
+      <DatePickerField id="ti-desde" label="Desde" />
+      <SwitcherField id="ti-activas" label="Solo activas" />
+    </FilterBar>
+  ),
+  play: async ({ canvasElement }) => {
+    const [celdaFecha, celdaInterruptor] = Array.from(
+      canvasElement.querySelectorAll<HTMLElement>('.filter-bar__filter'),
+    );
+    const acciones = canvasElement.querySelector('.filter-bar__actions') as HTMLElement;
+    const rotulo = celdaFecha.querySelector('.label') as HTMLElement;
+    // El control del campo es lo que va justo debajo de su rótulo.
+    const control = rotulo.nextElementSibling as HTMLElement;
+    const interruptor = celdaInterruptor.querySelector('.switcher-field') as HTMLElement;
+    const boton = acciones.querySelector('.button') as HTMLElement;
+
+    // Las dos celdas empiezan en la misma línea: comparten renglón de rejilla.
+    await expect(celdaInterruptor.getBoundingClientRect().top).toBeCloseTo(
+      celdaFecha.getBoundingClientRect().top,
+      0,
+    );
+
+    // Pero el interruptor NO empieza donde el rótulo…
+    await expect(interruptor.getBoundingClientRect().top).toBeGreaterThan(
+      rotulo.getBoundingClientRect().bottom,
+    );
+    // …sino donde el control que ese rótulo encabeza.
+    await expect(interruptor.getBoundingClientRect().top).toBeCloseTo(
+      control.getBoundingClientRect().top,
+      0,
+    );
+    // Y el botón de las acciones, en esa misma línea.
+    await expect(boton.getBoundingClientRect().top).toBeCloseTo(
+      control.getBoundingClientRect().top,
+      0,
+    );
+  },
+};
+
+/**
+ * Test: con un control que crece hacia abajo (fichas) al lado de uno bajo, lo
+ * que se alinea es el borde SUPERIOR de los controles —el inferior mandaría el
+ * rótulo del campo bajo a media altura—.
+ */
+export const ContratoControlAltoNoDesalinea: Story = {
+  name: 'Test — un control alto no desalinea la fila',
+  tags: ['!dev'],
+  render: () => (
+    <FilterBar search={<Buscador />} actions={<Button variant="outline">Limpiar filtros</Button>}>
+      <MultiSelectField
+        id="tca-equipos"
+        label="Equipos"
+        options={EQUIPOS}
+        defaultValue={['diseno', 'contenidos', 'soporte']}
+      />
+      <SelectField id="tca-estado" label="Estado" options={ESTADOS} defaultValue="todos" />
+      <SwitcherField id="tca-activas" label="Solo activas" />
+    </FilterBar>
+  ),
+  play: async ({ canvasElement }) => {
+    const celdas = Array.from(
+      canvasElement.querySelectorAll<HTMLElement>('.filter-bar__filter'),
+    );
+    const [celdaAlta, celdaBaja, celdaInterruptor] = celdas;
+    const rotulos = celdas
+      .map((celda) => celda.querySelector('.label'))
+      .filter((rotulo): rotulo is HTMLElement => rotulo !== null);
+
+    // El control alto es de verdad más alto que el bajo. Se miden los campos,
+    // no las celdas: las celdas de una rejilla se estiran todas a la altura de
+    // la fila, así que medirlas no distinguiría nada.
+    const campoAlto = celdaAlta.firstElementChild as HTMLElement;
+    const campoBajo = celdaBaja.firstElementChild as HTMLElement;
+    await expect(campoAlto.getBoundingClientRect().height).toBeGreaterThan(
+      campoBajo.getBoundingClientRect().height,
+    );
+
+    // Los dos rótulos siguen en la misma línea: el alto no ha empujado a nadie.
+    await expect(rotulos).toHaveLength(2);
+    await expect(rotulos[1].getBoundingClientRect().top).toBeCloseTo(
+      rotulos[0].getBoundingClientRect().top,
+      0,
+    );
+
+    // Y el interruptor, en la línea de los controles, no en la de los rótulos
+    // ni al fondo de la fila alta.
+    const interruptor = celdaInterruptor.querySelector('.switcher-field') as HTMLElement;
+    await expect(interruptor.getBoundingClientRect().top).toBeGreaterThan(
+      rotulos[0].getBoundingClientRect().bottom,
+    );
+    await expect(interruptor.getBoundingClientRect().top).toBeLessThan(
+      celdaAlta.getBoundingClientRect().bottom,
+    );
   },
 };
 

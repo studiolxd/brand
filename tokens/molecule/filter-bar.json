@@ -4,6 +4,10 @@
     "column-gap": { "$value": "{field-row.column-gap}", "$type": "dimension", "$description": "Aire entre las columnas de filtros — el de las celdas de una fila de campos" },
     "row-gap":    { "$value": "{field-row.row-gap}",    "$type": "dimension", "$description": "Aire entre las filas de filtros cuando la rejilla envuelve, y entre los filtros apilados en móvil" },
     "column-min-inline-size": { "$value": "{field-row.cell-md}", "$type": "dimension", "$description": "Ancho mínimo de una columna de filtros (192px, el de una celda normal de `FieldRow`): es lo que decide cuántas caben por fila —tres o cuatro en una tabla de administración— antes de apilarse" },
-    "actions-gap": { "$value": "{form.actions-gap}",    "$type": "dimension", "$description": "Aire entre las acciones de la barra — el de los botones de un formulario: la fila de acciones del sistema es una sola" }
+    "actions-gap": { "$value": "{form.actions-gap}",    "$type": "dimension", "$description": "Aire entre las acciones de la barra — el de los botones de un formulario: la fila de acciones del sistema es una sola" },
+
+    "label-font-size":   { "$value": "{label.font-size}",   "$type": "dimension", "$description": "Cuerpo de la etiqueta que la barra reserva sobre lo que no la lleva (un interruptor, el botón de limpiar) — el del Label" },
+    "label-line-height": { "$value": "{label.line-height}", "$type": "number",    "$description": "Interlineado de la etiqueta — el del Label: con el cuerpo, da la altura del hueco" },
+    "label-gap":         { "$value": "{input-field.gap}",   "$type": "dimension", "$description": "Aire entre la etiqueta y su control — el de los campos: completa el hueco que baja hasta la línea de los controles lo que no lleva rótulo" }
   }
 }

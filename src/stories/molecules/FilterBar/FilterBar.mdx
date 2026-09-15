@@ -52,6 +52,20 @@ Por eso la rejilla es `auto-fill` y no `auto-fit`: **las pistas las decide el an
 <Canvas of={FilterBarStories.SoloBuscador} />
 <Canvas of={FilterBarStories.ConAcciones} />
 
+### Lo que no lleva rótulo se alinea con los controles
+
+Un filtro con etiqueta encima ocupa **dos renglones** —el rótulo y su control—, y lo que no la lleva —un `SwitcherField`, un `CheckboxField`, el botón de «Limpiar filtros»— solo uno. Sin más, ese control se pega **arriba**, a la altura de los rótulos: además de verse torcido, engaña, porque parece que pertenece a la fila de rótulos y no a la de controles.
+
+La barra le **reserva el renglón del rótulo**, con la misma receta que `FieldRow` usa para su acción: el hueco sale de los tokens del `Label` —cuerpo × interlineado, más el aire que lo separa de su control—, así que sigue al sistema y no a un número mágico. **No hay que pedirle nada a quien la usa**: lo decide la barra.
+
+<Canvas of={FilterBarStories.ConInterruptor} />
+
+Lo que se alinea es el **borde superior** de los controles, no el inferior. Cuando un control crece hacia abajo —un `MultiSelectField` con fichas—, alinear por abajo arrastraría el rótulo del campo bajo a media altura y desalinearía la fila entera; alineando por arriba, los rótulos siguen en su línea y los controles empiezan todos en la suya.
+
+<Canvas of={FilterBarStories.ConControlAlto} />
+
+Apilada (por debajo de `md`) el hueco no existe: sin columnas no hay nada con lo que alinearse y sería aire de más.
+
 ## En móvil
 
 Los filtros se apilan a ancho completo y las acciones caen al final, ocupando también la línea entera —la norma del sistema, en [Fundamentos › Puntos de ruptura](?path=/docs/foundations-puntos-de-ruptura--docs)—. La rejilla no necesita punto de ruptura para apilar: lo hace `minmax(min(<mínimo>, 100%), 1fr)`, que deja la columna encoger cuando la pantalla es más estrecha que el mínimo.
