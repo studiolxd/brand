@@ -58,7 +58,18 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
    * consumidor (varios párrafos, `<Tag>`, texto con formato…).
    */
   description?: React.ReactNode;
-  /** Texto accesible del CTA, visually-hidden (modo link — se espera junto a `href` o `render`). */
+  /**
+   * Texto accesible del CTA (modo link), *visually-hidden*. **Manda sobre la
+   * flecha**: con `ctaLabel` la tarjeta pinta la flecha Y su nombre accesible;
+   * sin `ctaLabel` no pinta ninguna de las dos cosas. Una sola decisión en vez
+   * de dos props que puedan contradecirse — no hay `showArrow`.
+   *
+   * Omitirlo es lo que se quiere en una rejilla de catálogo, donde la flecha
+   * repetida en cada tarjeta es ruido y el destino ya lo dice el título. Con
+   * él, en cambio, la tarjeta suelta de marketing gana la llamada visible y el
+   * enlace un nombre accesible completo («Ver más sobre plataformas LMS»)
+   * cuando lo único visible sería la flecha.
+   */
   ctaLabel?: string;
   /** Color de fondo. Default: `'outline'`. */
   color?: CardColor;
@@ -121,15 +132,22 @@ export const Card = forwardRef<HTMLElement, CardProps>(function Card({
   ].filter(Boolean).join(' ');
 
   // El contenido de la link-card: título, descripción, los hijos que traiga el
-  // consumidor, el CTA accesible y la flecha. La descripción en cadena la
-  // envuelve la tarjeta; si ya es un nodo, el marcado lo pone quien lo pasa.
+  // consumidor y —solo si hay `ctaLabel`— el CTA accesible con su flecha. Las
+  // dos van juntas a propósito: la flecha es el dibujo de esa llamada, así que
+  // no puede haber flecha muda ni nombre accesible sin señal visible. La
+  // descripción en cadena la envuelve la tarjeta; si ya es un nodo, el marcado
+  // lo pone quien lo pasa.
   const text = (
     <>
       {title !== undefined && <Heading level={2} size={8}>{title}</Heading>}
       {description && (typeof description === 'string' ? <p>{description}</p> : description)}
       {children}
-      {ctaLabel !== undefined && <VisuallyHidden>{ctaLabel}</VisuallyHidden>}
-      <Arrow size="lg" />
+      {ctaLabel !== undefined && (
+        <>
+          <VisuallyHidden>{ctaLabel}</VisuallyHidden>
+          <Arrow size="lg" />
+        </>
+      )}
     </>
   );
 
