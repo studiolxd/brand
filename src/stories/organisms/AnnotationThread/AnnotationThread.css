@@ -7,6 +7,12 @@
   border: var(--annotation-thread-border-width) var(--annotation-thread-border-style) var(--annotation-thread-border-color);
 }
 
+/* Un hilo atendido da un paso atrás: ya se ha mirado, pero sigue abierto. La
+   escala de presencia es el estado: plena → segundo plano → retirada. */
+.annotation-thread.annotation-thread--acknowledged {
+  opacity: var(--annotation-thread-acknowledged-opacity);
+}
+
 /* Un hilo resuelto se retira: sigue ahí, pero deja de pedir atención. */
 .annotation-thread.annotation-thread--resolved {
   opacity: var(--annotation-thread-resolved-opacity);

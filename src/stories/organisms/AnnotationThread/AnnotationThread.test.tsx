@@ -28,6 +28,28 @@ describe('AnnotationThread', () => {
     expect(within(hilo).getByText('Resuelta')).toBeInTheDocument();
   });
 
+  it('atendido cambia el estado y su rótulo, sin retirarse como el resuelto', () => {
+    render(<AnnotationThread annotation={raiz} status="acknowledged" />);
+    const hilo = screen.getByRole('article', { name: 'Hilo de anotaciones' });
+    expect(hilo).toHaveClass('annotation-thread--acknowledged');
+    expect(hilo).not.toHaveClass('annotation-thread--resolved');
+    expect(within(hilo).getByText('Atendida')).toBeInTheDocument();
+  });
+
+  it('el rótulo del estado atendido es una prop: un producto puede llamarlo como quiera', () => {
+    render(<AnnotationThread annotation={raiz} status="acknowledged" acknowledgedLabel="Verificada" />);
+    expect(screen.getByText('Verificada')).toBeInTheDocument();
+  });
+
+  it('cada estado pinta su variante de Tag, sin estrenar color', () => {
+    const { rerender } = render(<AnnotationThread annotation={raiz} />);
+    expect(screen.getByText('Abierta')).toHaveClass('tag--warning');
+    rerender(<AnnotationThread annotation={raiz} status="acknowledged" />);
+    expect(screen.getByText('Atendida')).toHaveClass('tag--info');
+    rerender(<AnnotationThread annotation={raiz} status="resolved" />);
+    expect(screen.getByText('Resuelta')).toHaveClass('tag--success');
+  });
+
   it('muestra autor, cuerpo y una fecha legible por máquina', () => {
     const { container } = render(<AnnotationThread annotation={raiz} />);
     expect(screen.getByText('Marta Ruiz')).toBeInTheDocument();

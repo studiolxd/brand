@@ -9,8 +9,8 @@ import { annotationThreadTokens, annotationThreadDarkTokens } from "../../../tok
 
 Un hilo de anotaciones sobre algo: el comentario de revisión de una lección, la
 nota sobre un segmento de traducción. Cada anotación lleva **autor, fecha y sus
-propias acciones**; el hilo tiene **estado** —abierta o resuelta— y se responde
-al pie.
+propias acciones**; el hilo tiene **estado** —abierta, atendida o resuelta— y se
+responde al pie.
 
 <Canvas of={AnnotationThreadStories.PorDefecto} />
 
@@ -27,14 +27,49 @@ patrón, ya resuelto.
 
 ## Estado
 
-`status` marca el hilo. Un hilo **resuelto** sigue ahí, pero se retira: baja de
-intensidad en vez de desaparecer, porque el historial de una revisión es parte
-de lo revisado.
+`status` marca el hilo, y son **tres**, en orden de flujo:
 
-<Canvas of={AnnotationThreadStories.Resuelto} />
+| Estado | Qué dice | Rótulo por defecto | `Tag` |
+|---|---|---|---|
+| `open` | Está planteado y nadie lo ha tocado: pide atención | «Abierta» | `warning` |
+| `acknowledged` | Alguien ya lo ha mirado, pero el asunto no está cerrado | «Atendida» | `info` |
+| `resolved` | Cerrado. Sigue ahí como historial | «Resuelta» | `success` |
+
+<Canvas of={AnnotationThreadStories.LosTresEstados} />
+
+El tercero **no es un matiz de color: es información de flujo**. Sin él, un
+panel de revisión que distingue «pendiente» de «ya comprobada» tiene que pintar
+las dos con el mismo rótulo, y la interfaz deja de decir si algo está revisado
+justo donde se decide qué queda por revisar.
+
+Lo que el estado dice es **dónde está el hilo**, no cómo lo llama cada producto:
+el rótulo es una prop, así que una revisión puede escribir «Verificada» sobre
+`acknowledged` sin que el sistema herede el vocabulario de un producto.
+
+```tsx
+<AnnotationThread annotation={c} status="acknowledged" acknowledgedLabel={t('review.verified')} />
+```
+
+### El tratamiento: una escala de presencia
+
+Los tres estados son el mismo hilo con **menos presencia** según avanza: plena
+(`open`), en segundo plano (`acknowledged`, `opacity.muted`) y retirada
+(`resolved`, `opacity.disabled`). No desaparece ninguno —el historial de una
+revisión es parte de lo revisado— y no se estrena ni un color: el `Tag` usa
+variantes que el sistema ya tenía. La opacidad además no depende de la
+superficie, así que la escala se lee igual en claro y en oscuro.
+
+<Canvas of={AnnotationThreadStories.Atendido} />
+
+### Las transiciones las pone el producto
 
 El componente **no decide** qué se puede hacer con el hilo: `actions` recibe los
-controles (resolver, reabrir, seguir) y el producto pone ahí sus permisos.
+controles (atender, resolver, reabrir) y el producto pone ahí sus permisos. El
+patrón habitual es ofrecer **a dónde se puede ir desde donde se está**:
+
+<Canvas of={AnnotationThreadStories.Transiciones} />
+
+<Canvas of={AnnotationThreadStories.Resuelto} />
 
 ## Respuestas
 
@@ -46,6 +81,19 @@ hilo, encabezadas por su recuento.
 Para responder, `reply` recibe lo que haga falta —un `MessageComposer`, un
 `TextareaField`, un `Button` que abre el formulario—: el hilo no impone un
 formulario propio.
+
+## Una captura y un enlace: las ranuras que ya hay
+
+Un comentario de revisión suele llevar algo más que texto —una **captura de
+pantalla** y un **enlace profundo** a lo comentado—. No hacen falta ranuras
+nuevas: la captura es un `Figure` dentro del `body` de la anotación (con su
+proporción y su `render` para el `<Image>` del producto), y el enlace va en las
+`actions` de esa anotación.
+
+<Canvas of={AnnotationThreadStories.ConCapturaYEnlace} />
+
+`body` y `actions` son `ReactNode`: lo que el hilo aporta es el marco —autor,
+fecha, estado, sangría de las respuestas—, no el contenido.
 
 ## Acciones por anotación
 
@@ -80,15 +128,16 @@ que ya contrastan en las dos superficies.
   `<article>` dentro: un lector de pantalla puede saltar de hilo en hilo.
 - La fecha es un `<time>` con `datetime` **en ISO**: la que se ve está
   formateada para leer; la de máquina, no.
-- El estado se lee en texto («Abierta» / «Resuelta»), no solo en el color del
-  `Tag`.
+- El estado se lee en texto («Abierta» / «Atendida» / «Resuelta»), no solo en el
+  color del `Tag`: los tres estados se distinguen sin ver el color, que es lo
+  que impide que el tercero sea un matiz.
 - El recuento de respuestas es texto real, no un número suelto sin contexto.
 
 ## Internacionalización
 
 Todos los textos que emite el componente son props con default castellano:
-`label`, `openLabel`, `resolvedLabel`, `editedLabel` y `repliesLabel` —que es
-una función porque interpola el número—. La fecha va por `locale` (por defecto
+`label`, `openLabel`, `acknowledgedLabel`, `resolvedLabel`, `editedLabel` y
+`repliesLabel` —que es una función porque interpola el número—. La fecha va por `locale` (por defecto
 `es-ES`) y `dateFormat`, delegando en `Intl`.
 
 ## Props

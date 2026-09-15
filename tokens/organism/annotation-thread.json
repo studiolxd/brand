@@ -24,6 +24,7 @@
     "body-color":             { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Tinta del cuerpo" },
     "replies-label-font-size":{ "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Tamaño del rótulo que cuenta las respuestas" },
     "replies-label-color":    { "$value": "{color.text.muted-on-light}", "$type": "color",  "$description": "Tinta del rótulo que cuenta las respuestas" },
+    "acknowledged-opacity":   { "$value": "{opacity.muted}",          "$type": "number",    "$description": "Un hilo atendido da un paso atrás: sigue vivo, pero ya no es lo primero que hay que mirar" },
     "resolved-opacity":       { "$value": "{opacity.disabled}",       "$type": "number",    "$description": "Un hilo resuelto se retira: baja de intensidad sin desaparecer" },
     "surface-dark-border-color":       { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Borde del hilo — surface-dark" },
     "surface-dark-reply-guide-color":  { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Guía de respuestas — surface-dark" },

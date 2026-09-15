@@ -19,13 +19,25 @@ export interface AnnotationEntry {
   actions?: ReactNode;
 }
 
+/**
+ * Los tres estados del hilo, en orden de flujo. El nombre dice **dónde está el
+ * hilo**, no cómo lo llama cada producto: el rótulo es una prop, así que una
+ * revisión puede escribir «Verificada» sobre `acknowledged` sin que el sistema
+ * herede el vocabulario de un producto.
+ */
+export type AnnotationThreadStatus = 'open' | 'acknowledged' | 'resolved';
+
 export interface AnnotationThreadProps extends React.ComponentPropsWithoutRef<'article'> {
   /** La anotación que abre el hilo. */
   annotation: AnnotationEntry;
   /** Las respuestas, en orden. */
   replies?: AnnotationEntry[];
-  /** Estado del hilo. Un hilo resuelto se retira visualmente sin desaparecer. */
-  status?: 'open' | 'resolved';
+  /**
+   * Estado del hilo, en orden de flujo. `open` pide atención; `acknowledged`
+   * es el hilo que alguien ya ha mirado y da un paso atrás sin cerrarse;
+   * `resolved` se retira visualmente sin desaparecer.
+   */
+  status?: AnnotationThreadStatus;
   /** Acciones del hilo entero: resolver, reabrir, seguir. Van al pie. */
   actions?: ReactNode;
   /** Con qué se responde: un `MessageComposer`, un `TextareaField`, un `Button`. */
@@ -36,6 +48,8 @@ export interface AnnotationThreadProps extends React.ComponentPropsWithoutRef<'a
   dateFormat?: Intl.DateTimeFormatOptions;
   /** Rótulo del estado abierto. Por defecto, en castellano: «Abierta». */
   openLabel?: string;
+  /** Rótulo del estado atendido. Por defecto, en castellano: «Atendida». */
+  acknowledgedLabel?: string;
   /** Rótulo del estado resuelto. Por defecto, en castellano: «Resuelta». */
   resolvedLabel?: string;
   /** Marca de anotación editada. Por defecto, en castellano: «editada». */
@@ -50,6 +64,17 @@ export interface AnnotationThreadProps extends React.ComponentPropsWithoutRef<'a
   /** Se añade DESPUÉS de las clases propias. */
   className?: string;
 }
+
+/**
+ * El color del estado: amarillo mientras pide atención, prusia cuando ya se ha
+ * mirado, verde cuando se cierra. Son variantes que el `Tag` ya tiene; el
+ * estado nuevo no estrena color.
+ */
+const STATUS_VARIANT: Record<AnnotationThreadStatus, 'warning' | 'info' | 'success'> = {
+  open: 'warning',
+  acknowledged: 'info',
+  resolved: 'success',
+};
 
 const DEFAULT_DATE_FORMAT: Intl.DateTimeFormatOptions = {
   day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit',
@@ -84,8 +109,8 @@ function Annotation({
 /**
  * Un hilo de anotaciones sobre algo: el comentario de revisión de una lección,
  * la nota sobre un segmento de traducción. Cada anotación lleva **autor, fecha
- * y sus propias acciones**, el hilo tiene **estado** (abierta o resuelta) y se
- * responde al pie.
+ * y sus propias acciones**, el hilo tiene **estado** (abierta, atendida o
+ * resuelta) y se responde al pie.
  *
  * No es `ConversationThread`: aquello es una conversación de usuario y
  * asistente, con burbujas, orden de emisor y desplazamiento automático. Aquí
@@ -101,6 +126,7 @@ export function AnnotationThread({
   locale = 'es-ES',
   dateFormat = DEFAULT_DATE_FORMAT,
   openLabel = 'Abierta',
+  acknowledgedLabel = 'Atendida',
   resolvedLabel = 'Resuelta',
   editedLabel = 'editada',
   repliesLabel = (count) => (count === 1 ? '1 respuesta' : `${count} respuestas`),
@@ -108,20 +134,20 @@ export function AnnotationThread({
   className,
   ...rest
 }: AnnotationThreadProps) {
-  const isResolved = status === 'resolved';
-
   const classes = [
     'annotation-thread',
-    isResolved ? 'annotation-thread--resolved' : '',
+    status === 'open' ? '' : `annotation-thread--${status}`,
     className ?? '',
   ].filter(Boolean).join(' ');
 
   // El estado no se emite además como `data-status`: lo dice ya el modificador
-  // `--resolved`, y ningún CSS leía el atributo.
+  // (`--acknowledged`, `--resolved`), y ningún CSS leía el atributo.
   return (
     <article className={classes} aria-label={label} {...rest}>
       <div className="annotation-thread__status">
-        <Tag variant={isResolved ? 'success' : 'warning'}>{isResolved ? resolvedLabel : openLabel}</Tag>
+        <Tag variant={STATUS_VARIANT[status]}>
+          {{ open: openLabel, acknowledged: acknowledgedLabel, resolved: resolvedLabel }[status]}
+        </Tag>
       </div>
 
       <Annotation

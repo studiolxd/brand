@@ -12,6 +12,7 @@
   --annotation-thread-item-gap: var(--spacing-2); /** Separación entre la cabecera, el cuerpo y las acciones de una anotación */
   --annotation-thread-items-gap: var(--spacing-4); /** Separación entre anotaciones */
   --annotation-thread-header-gap: var(--spacing-2); /** Separación entre autor, fecha y marca de editada */
+  --annotation-thread-acknowledged-opacity: var(--opacity-muted); /** Un hilo atendido da un paso atrás: sigue vivo, pero ya no es lo primero que hay que mirar */
   --annotation-thread-resolved-opacity: var(--opacity-disabled); /** Un hilo resuelto se retira: baja de intensidad sin desaparecer */
   --annotation-thread-border-width: var(--border-width-default); /** Grosor del borde del hilo */
   --annotation-thread-border-color: var(--color-border-default-on-light); /** Borde del hilo */

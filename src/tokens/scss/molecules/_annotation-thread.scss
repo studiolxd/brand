@@ -25,4 +25,5 @@ $lxd-annotation-thread-body-line-height: 1.5; // Interlineado del cuerpo
 $lxd-annotation-thread-body-color: #111e30; // Tinta del cuerpo
 $lxd-annotation-thread-replies-label-font-size: 0.875rem; // Tamaño del rótulo que cuenta las respuestas
 $lxd-annotation-thread-replies-label-color: #4a4a4a; // Tinta del rótulo que cuenta las respuestas
+$lxd-annotation-thread-acknowledged-opacity: 0.7; // Un hilo atendido da un paso atrás: sigue vivo, pero ya no es lo primero que hay que mirar
 $lxd-annotation-thread-resolved-opacity: 0.4; // Un hilo resuelto se retira: baja de intensidad sin desaparecer
