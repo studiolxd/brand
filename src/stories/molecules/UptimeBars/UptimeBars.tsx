@@ -3,7 +3,20 @@
 import { forwardRef, useRef, useState, type ComponentPropsWithoutRef, type KeyboardEvent, type ReactNode } from 'react';
 import { Tooltip } from '../../atoms/Tooltip/Tooltip';
 import { UPTIME_BARS_DEFAULT_THRESHOLDS, uptimeStatus, type UptimeBarsThresholds } from './uptimeStatus';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './UptimeBars.css';
+
+/**
+ * Los dos textos de la tira, y los dos son **cromo**: cómo se llama la región
+ * y cómo se dice que un punto no tiene dato. Ni las fechas ni los porcentajes
+ * pasan por aquí — son formato (`locale`) y los escribe quien pasa los puntos.
+ */
+export interface UptimeBarsMessages {
+  /** Nombre accesible de la tira cuando la pantalla no le da uno propio. */
+  label: string;
+  /** Cómo se dice que un punto no tiene dato (el monitor todavía no existía). */
+  noData: string;
+}
 
 export type { UptimeBarsThresholds, UptimeBarsStatus } from './uptimeStatus';
 
@@ -30,7 +43,10 @@ export interface UptimeBarsProps extends Omit<ComponentPropsWithoutRef<'div'>, '
    * tira: el dato que se lee sin mirar treinta rectángulos ni abrir un bocadillo.
    */
   summary: ReactNode;
-  /** Nombre accesible de la tira. Default castellano: «Disponibilidad». */
+  /**
+   * Nombre accesible de la tira. **Sin default**: sin él, sale de
+   * `uptimeBars.label` del `BrandMessagesProvider`.
+   */
   label?: string;
   /** Rótulo del extremo antiguo, bajo la primera barrita: «Hace 30 días». */
   startLabel?: ReactNode;
@@ -48,7 +64,11 @@ export interface UptimeBarsProps extends Omit<ComponentPropsWithoutRef<'div'>, '
    * «5 de septiembre: 100 %. Sin incidencias».
    */
   pointLabel?: (point: UptimeBarsPoint, formattedValue: string | null) => string;
-  /** Cómo se dice que un punto no tiene dato. Default castellano: «sin datos». */
+  /**
+   * Cómo se dice que un punto no tiene dato. **Sin default**: sin él, sale de
+   * `uptimeBars.noData`. Solo se lee cuando hay un punto sin dato y no hay
+   * `pointLabel` propio.
+   */
   noDataLabel?: string;
   /**
    * Bocadillo por barrita, con ratón y con teclado. Default `true`. Sin él las
@@ -73,18 +93,19 @@ export interface UptimeBarsProps extends Omit<ComponentPropsWithoutRef<'div'>, '
 export const UptimeBars = forwardRef<HTMLDivElement, UptimeBarsProps>(function UptimeBars({
   points,
   summary,
-  label = 'Disponibilidad',
+  label,
   startLabel,
   endLabel,
   thresholds,
   locale = 'es-ES',
   maximumFractionDigits = 2,
   pointLabel,
-  noDataLabel = 'sin datos',
+  noDataLabel,
   tooltips = true,
   className,
   ...rest
 }, ref) {
+  const t = useBrandMessages('uptimeBars');
   const cuts = { ...UPTIME_BARS_DEFAULT_THRESHOLDS, ...thresholds };
   const bars = useRef<(HTMLElement | null)[]>([]);
   // Tabulación itinerante: la tira entera es **una** parada de tabulador y las
@@ -97,7 +118,7 @@ export const UptimeBars = forwardRef<HTMLDivElement, UptimeBarsProps>(function U
 
   const name = (point: UptimeBarsPoint, formatted: string | null) => {
     if (pointLabel) return pointLabel(point, formatted);
-    const head = `${point.label}: ${formatted ?? noDataLabel}`;
+    const head = `${point.label}: ${formatted ?? t('noData', noDataLabel)}`;
     return point.detail ? `${head}. ${point.detail}` : head;
   };
 
@@ -128,7 +149,7 @@ export const UptimeBars = forwardRef<HTMLDivElement, UptimeBarsProps>(function U
 
   return (
     <div ref={ref} className={['uptime-bars', className].filter(Boolean).join(' ')} {...rest}>
-      <ol className="uptime-bars__list" aria-label={label}>
+      <ol className="uptime-bars__list" aria-label={t('label', label)}>
         {points.map((point, index) => {
           const formatted = format(point.value);
           const status = uptimeStatus(point.value, cuts);
@@ -153,7 +174,7 @@ export const UptimeBars = forwardRef<HTMLDivElement, UptimeBarsProps>(function U
                   label={
                     <span className="uptime-bars__tooltip">
                       <span className="uptime-bars__tooltip-label">{point.label}</span>
-                      <span>{formatted ?? noDataLabel}</span>
+                      <span>{formatted ?? t('noData', noDataLabel)}</span>
                       {point.detail ? <span>{point.detail}</span> : null}
                     </span>
                   }

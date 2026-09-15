@@ -2,6 +2,7 @@
 
 import type { ReactNode } from 'react';
 import { StepMarker } from '../../atoms/StepMarker/StepMarker';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import './Stepper.css';
 
@@ -35,12 +36,31 @@ export interface StepperStep {
 /** Estado de un paso dentro del flujo. Lo deduce el componente de `current`. */
 export type StepperStatus = 'completed' | 'current' | 'pending';
 
+/**
+ * El cromo del progreso: el nombre de la lista, la cuenta de la forma
+ * compacta y las tres marcas de estado que solo oye un lector de pantalla.
+ * Dicen en qué punto del flujo se está, no de qué flujo se trata: las
+ * etiquetas de cada paso son contenido y viajan en `steps`.
+ */
+export interface StepperMessages {
+  /** Nombre accesible de la lista de pasos. */
+  label: string;
+  /** La cuenta de la forma compacta: «Paso 2 de 4». Interpola, así que es función. */
+  compact: (current: number, total: number) => string;
+  /** Se antepone, solo para lectores de pantalla, a la etiqueta de un paso ya hecho. */
+  completed: string;
+  /** Ídem para el paso actual. */
+  current: string;
+  /** Ídem para un paso que aún no toca. */
+  pending: string;
+}
+
 export interface StepperLabels {
-  /** Se antepone, solo para lectores de pantalla, a la etiqueta de un paso ya hecho. Default: «Completado». */
+  /** Anulación puntual de `stepper.completed`. */
   completed?: string;
-  /** Ídem para el paso actual. Default: «Paso actual». */
+  /** Anulación puntual de `stepper.current`. */
   current?: string;
-  /** Ídem para un paso que aún no toca. Default: «Pendiente». */
+  /** Anulación puntual de `stepper.pending`. */
   pending?: string;
 }
 
@@ -55,15 +75,22 @@ export interface StepperProps {
    * `reachable`; por defecto, los completados.
    */
   onStepSelect?: (index: number, step: StepperStep) => void;
-  /** Nombre accesible de la lista. Default: «Progreso» (castellano). */
+  /**
+   * Nombre accesible de la lista. **Sin default**: sin él, sale de
+   * `stepper.label` del `BrandMessagesProvider`.
+   */
   label?: string;
   /**
    * El texto de la forma compacta (por debajo de `md`), donde no caben las
-   * etiquetas. Recibe el número de paso (base 1) y el total.
-   * Default: «Paso 2 de 4» (castellano).
+   * etiquetas. Recibe el número de paso (base 1) y el total. **Sin default**:
+   * sin él, sale de `stepper.compact`.
    */
   compactLabel?: (current: number, total: number) => string;
-  /** Textos de estado para lectores de pantalla. Todos con default castellano. */
+  /**
+   * Textos de estado para lectores de pantalla, clave a clave. **Sin
+   * defaults**: los que no se pasen salen de `stepper.completed`,
+   * `stepper.current` y `stepper.pending`.
+   */
   labels?: StepperLabels;
   className?: string;
   id?: string;
@@ -98,16 +125,19 @@ export function Stepper({
   steps,
   current,
   onStepSelect,
-  label = 'Progreso',
-  compactLabel = (paso, total) => `Paso ${paso} de ${total}`,
+  label,
+  compactLabel,
   labels,
   className,
   id,
 }: StepperProps) {
+  const t = useBrandMessages('stepper');
   // Un solo paso (o ninguno) no es un progreso: no hay nada que anunciar.
   if (steps.length < 2) return null;
 
-  const texto = { completed: 'Completado', current: 'Paso actual', pending: 'Pendiente', ...labels };
+  // Cada marca se lee DONDE se pinta: un progreso que empieza en el primer
+  // paso no tiene ninguno completado y no exige `stepper.completed`.
+  const texto = (status: StepperStatus) => t(status, labels?.[status]);
   const total = steps.length;
   const activo = Math.min(Math.max(current, 0), total - 1);
   const pasoActual = steps[activo];
@@ -115,11 +145,11 @@ export function Stepper({
   return (
     <div id={id} className={['stepper', className].filter(Boolean).join(' ')}>
       <p className="stepper__compact">
-        <span className="stepper__compact-count">{compactLabel(activo + 1, total)}</span>
+        <span className="stepper__compact-count">{t('compact', compactLabel)(activo + 1, total)}</span>
         <span className="stepper__compact-label">{pasoActual.label}</span>
       </p>
 
-      <ol className="stepper__list" aria-label={label}>
+      <ol className="stepper__list" aria-label={t('label', label)}>
         {steps.map((step, index) => {
           const status: StepperStatus = index < activo ? 'completed' : index === activo ? 'current' : 'pending';
           // Alcanzable = lo que diga el paso; sin decir nada, los completados.
@@ -135,7 +165,7 @@ export function Stepper({
                 className="stepper__marker"
               />
               <span className="stepper__text">
-                <VisuallyHidden>{texto[status]}: </VisuallyHidden>
+                <VisuallyHidden>{texto(status)}: </VisuallyHidden>
                 <span className="stepper__label">{step.label}</span>
                 {step.description && <span className="stepper__description">{step.description}</span>}
               </span>

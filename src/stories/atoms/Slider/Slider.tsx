@@ -1,7 +1,24 @@
 'use client';
 
 import { Slider as BaseSlider } from '@base-ui/react/slider';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './Slider.css';
+
+/**
+ * Los nombres genéricos de los pulgares, y son **cromo**: dicen qué pulgar es,
+ * no qué mide el deslizador. Lo que mide se dice con `label`, que es de la
+ * pantalla, y la cifra es formato.
+ */
+export interface SliderMessages {
+  /** Nombre del pulgar único cuando el deslizador no trae `label`. */
+  value: string;
+  /** Nombre del primer pulgar de un rango de dos. */
+  min: string;
+  /** Nombre del segundo pulgar de un rango de dos. */
+  max: string;
+  /** Nombre del pulgar n (base 1) con tres o más. Interpola, así que es función. */
+  valueAt: (index: number) => string;
+}
 
 type BaseSliderRootProps = Omit<
   React.ComponentPropsWithoutRef<typeof BaseSlider.Root>,
@@ -23,8 +40,10 @@ export interface SliderProps extends BaseSliderRootProps {
    */
   label?: string;
   /**
-   * Nombre accesible de cada pulgar. Por defecto, en castellano: con dos
-   * pulgares «Mínimo» y «Máximo»; con más, «Valor 1», «Valor 2»…
+   * Nombre accesible de cada pulgar. **Sin default**: sin él, con un pulgar es
+   * `label` —y en su defecto `slider.value`—, con dos son `slider.min` y
+   * `slider.max`, y con más, `slider.valueAt`. Cada clave se lee **donde se
+   * pinta**: un deslizador de un solo pulgar no exige las del rango.
    */
   thumbLabel?: (index: number, total: number) => string;
   /** Muestra el valor formateado junto a la banda. */
@@ -55,13 +74,14 @@ export function Slider({
   className,
   ...rest
 }: SliderProps) {
+  const t = useBrandMessages('slider');
   const actual = value ?? defaultValue ?? 0;
   const pulgares = Array.isArray(actual) ? actual.length : 1;
 
   const nombrePulgar = thumbLabel ?? ((index: number, total: number) => {
-    if (total === 1) return label ?? 'Valor';
-    if (total === 2) return index === 0 ? 'Mínimo' : 'Máximo';
-    return `Valor ${index + 1}`;
+    if (total === 1) return t('value', label);
+    if (total === 2) return index === 0 ? t('min') : t('max');
+    return t('valueAt')(index + 1);
   });
 
   const classes = [

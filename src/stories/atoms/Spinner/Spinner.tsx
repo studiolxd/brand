@@ -1,11 +1,27 @@
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './Spinner.css';
+
+/**
+ * El único texto de la espera, y es **cromo**: lo que se dice mientras no se
+ * sabe cuánto falta. Conserva los puntos suspensivos —es progreso, no una
+ * frase: ver Foundations → Redacción § «Los estados de carga llevan puntos
+ * suspensivos».
+ */
+export interface SpinnerMessages {
+  /** Texto anunciado por lectores de pantalla mientras se espera. */
+  label: string;
+}
 
 export type SpinnerSize = 'sm' | 'md' | 'lg';
 
 export interface SpinnerProps {
   size?: SpinnerSize;
-  /** Texto anunciado por lectores de pantalla. Default castellano: «Cargando…». Ignorado cuando aria-hidden es true. */
+  /**
+   * Texto anunciado por lectores de pantalla. **Sin default**: sin él, sale de
+   * `spinner.label` del `BrandMessagesProvider`. **No se lee** cuando
+   * `aria-hidden` es `true`: un spinner decorativo no exige la clave.
+   */
   label?: string;
   /** Cuando true, el spinner es puramente decorativo (sin rol ni anuncio). */
   'aria-hidden'?: boolean;
@@ -24,7 +40,10 @@ function Square() {
   );
 }
 
-export function Spinner({ size = 'md', label = 'Cargando…', 'aria-hidden': ariaHidden }: SpinnerProps) {
+export function Spinner({ size = 'md', label, 'aria-hidden': ariaHidden }: SpinnerProps) {
+  const t = useBrandMessages('spinner');
+  // El texto se lee DONDE se pinta: el spinner decorativo sale antes de
+  // llamar a `t`, así que no exige `spinner.label`.
   if (ariaHidden) {
     return (
       <span className={`spinner spinner--${size}`} aria-hidden="true">
@@ -32,10 +51,11 @@ export function Spinner({ size = 'md', label = 'Cargando…', 'aria-hidden': ari
       </span>
     );
   }
+  const texto = t('label', label);
   return (
-    <span className={`spinner spinner--${size}`} role="status" aria-label={label}>
+    <span className={`spinner spinner--${size}`} role="status" aria-label={texto}>
       <Square />
-      <VisuallyHidden>{label}</VisuallyHidden>
+      <VisuallyHidden>{texto}</VisuallyHidden>
     </span>
   );
 }

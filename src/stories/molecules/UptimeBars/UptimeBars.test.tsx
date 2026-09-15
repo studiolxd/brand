@@ -1,7 +1,24 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render as renderRTL, screen } from '@testing-library/react';
 import { UptimeBars, type UptimeBarsPoint } from './UptimeBars';
 import { uptimeStatus, UPTIME_BARS_DEFAULT_THRESHOLDS } from './uptimeStatus';
+import type { ReactNode } from 'react';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixture as ES } from '../../../../.storybook/brandMessagesFixture';
+
+/**
+ * Estas piezas ya no traen su castellano puesto: el cromo sale del catálogo.
+ * Aquí el catálogo lo monta este envoltorio, que es lo que hace la aplicación
+ * en su raíz. `rerender` lo reutiliza solo.
+ */
+const Catalogo = ({ children }: { children: ReactNode }) => (
+  <BrandMessagesProvider messages={ES}>{children}</BrandMessagesProvider>
+);
+
+function render(ui: React.ReactElement) {
+  return renderRTL(ui, { wrapper: Catalogo });
+}
+
 
 /** El mismo formato que pinta la tira: el porcentaje lleva espacio duro. */
 const pct = (n: number, locale = 'es-ES') =>

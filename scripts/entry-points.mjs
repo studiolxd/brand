@@ -255,4 +255,7 @@ export const clientComponents = new Set([
   'scroll-area',
   'slider',
   'tree-view',
+  'progress-bar',
+  'spinner',
+  'legal-footer',
 ]);

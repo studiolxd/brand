@@ -2,7 +2,17 @@
 
 import { useCallback, useId, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './TreeView.css';
+
+/**
+ * El único texto del árbol, y es **cromo**: el nombre genérico de la región.
+ * Qué árbol es —«Contenidos del curso»— lo dice la prop `label`, que gana.
+ */
+export interface TreeViewMessages {
+  /** Nombre accesible del árbol cuando la pantalla no le da uno propio. */
+  label: string;
+}
 
 export interface TreeViewNode {
   /** Identificador único en todo el árbol. */
@@ -60,8 +70,9 @@ export interface TreeViewProps extends Omit<React.ComponentPropsWithoutRef<'ul'>
   /** Se llama con el id del nodo elegido. */
   onSelectedChange?: (id: string) => void;
   /**
-   * Nombre accesible del árbol. Default: «Árbol» (castellano). Una app
-   * multiidioma debe pasarlo traducido.
+   * Nombre accesible del árbol. **Sin default**: sin él, sale de
+   * `treeView.label` del `BrandMessagesProvider`, que es el nombre genérico;
+   * esta prop es la que dice de qué árbol se trata.
    */
   label?: string;
   /**
@@ -124,12 +135,13 @@ export function TreeView({
   selected: selectedProp,
   defaultSelected,
   onSelectedChange,
-  label = 'Árbol',
+  label,
   truncateFromLevel = 4,
   nodeRef,
   className,
   ...rest
 }: TreeViewProps) {
+  const t = useBrandMessages('treeView');
   const baseId = useId();
   const contenedor = useRef<HTMLUListElement>(null);
 
@@ -368,7 +380,7 @@ export function TreeView({
     <ul
       ref={contenedor}
       role="tree"
-      aria-label={label}
+      aria-label={t('label', label)}
       className={['tree-view', className].filter(Boolean).join(' ')}
       {...rest}
     >

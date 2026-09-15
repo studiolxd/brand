@@ -4,7 +4,18 @@ import { Heading, type HeadingLevel, type HeadingSize } from '../../atoms/Headin
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Tag, type TagVariant } from '../../atoms/Tag/Tag';
 import type { CardMedia } from '../Card/Card';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './ProjectCard.css';
+
+/**
+ * El único texto de la tarjeta, y es **cromo**: cómo se llama la lista de
+ * etiquetas. Las etiquetas en sí son datos y viajan en `tags`; el título y la
+ * descripción son contenido.
+ */
+export interface ProjectCardMessages {
+  /** Nombre accesible de la lista de etiquetas de categoría. */
+  tags: string;
+}
 
 export type { TagVariant };
 
@@ -35,7 +46,11 @@ export interface ProjectCardProps {
   headingLevel?: HeadingLevel;
   /** Talla del título. Por defecto `5` (24px). */
   headingSize?: HeadingSize;
-  /** Nombre accesible de la lista de etiquetas. Por defecto «Categorías». */
+  /**
+   * Nombre accesible de la lista de etiquetas. **Sin default**: sin él, sale
+   * de `projectCard.tags` del `BrandMessagesProvider`. Solo se lee cuando hay
+   * etiquetas.
+   */
   tagsLabel?: string;
   className?: string;
   id?: string;
@@ -60,10 +75,11 @@ export function ProjectCard({
   render,
   headingLevel = 3,
   headingSize = 5,
-  tagsLabel = 'Categorías',
+  tagsLabel,
   className,
   id,
 }: ProjectCardProps) {
+  const t = useBrandMessages('projectCard');
   const rendered = useRender({
     render,
     enabled: render !== undefined,
@@ -81,7 +97,7 @@ export function ProjectCard({
         </div>
       )}
       {tags && tags.length > 0 && (
-        <ul className="project-card__tags" aria-label={tagsLabel}>
+        <ul className="project-card__tags" aria-label={t('tags', tagsLabel)}>
           {tags.map((tag) => (
             <li key={tag.id ?? tag.label}>
               <Tag variant={tag.variant ?? 'neutral'}>{tag.label}</Tag>

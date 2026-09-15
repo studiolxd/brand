@@ -5,6 +5,7 @@ import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { COPY_FEEDBACK_MS, useCopyToClipboard } from '../../constants/copy-to-clipboard';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './CopyButton.css';
 
 export interface CopyButtonProps
@@ -21,20 +22,19 @@ export interface CopyButtonProps
    */
   children?: ReactNode;
   /**
-   * Nombre accesible del botón. Default castellano.
-   * @default 'Copiar'
+   * Nombre accesible del botón. **Sin default**: sin él, sale de `copy.label`
+   * del `BrandMessagesProvider`. Solo se lee cuando el botón es de solo icono
+   * —con rótulo visible, lo nombra el rótulo.
    */
   label?: string;
   /**
    * Acuse tras copiar: se anuncia en una región viva y, si hay rótulo visible,
-   * lo sustituye mientras dura. Default castellano.
-   * @default 'Copiado'
+   * lo sustituye mientras dura. **Sin default**: sin él, sale de `copy.copied`.
    */
   copiedLabel?: string;
   /**
    * Aviso cuando el portapapeles no está disponible (contexto no seguro,
-   * permiso denegado). Default castellano.
-   * @default 'No se pudo copiar'
+   * permiso denegado). **Sin default**: sin él, sale de `copy.error`.
    */
   errorLabel?: string;
   /** Variante del botón. */
@@ -66,9 +66,9 @@ export interface CopyButtonProps
 export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(function CopyButton({
   value,
   children,
-  label = 'Copiar',
-  copiedLabel = 'Copiado',
-  errorLabel = 'No se pudo copiar',
+  label,
+  copiedLabel,
+  errorLabel,
   variant = 'ghost',
   size,
   feedbackDuration = COPY_FEEDBACK_MS,
@@ -77,6 +77,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(functio
   className,
   ...rest
 }: CopyButtonProps, ref) {
+  const t = useBrandMessages('copy');
   const { status, copy } = useCopyToClipboard(feedbackDuration);
 
   const handleClick = async () => {
@@ -85,9 +86,12 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(functio
     else onCopyError?.(result.error);
   };
 
-  const announcement = status === 'copied' ? copiedLabel : status === 'error' ? errorLabel : '';
+  // Cada texto se lee DONDE se pinta: un botón que nunca falla no exige
+  // `copy.error`, y uno que nunca se pulsa no exige `copy.copied`.
+  const announcement =
+    status === 'copied' ? t('copied', copiedLabel) : status === 'error' ? t('error', errorLabel) : '';
   const visible = children != null
-    ? (status === 'copied' ? copiedLabel : status === 'error' ? errorLabel : children)
+    ? (status === 'copied' ? t('copied', copiedLabel) : status === 'error' ? t('error', errorLabel) : children)
     : null;
 
   return (
@@ -102,7 +106,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(functio
           variant={variant}
           {...(size ? { size } : {})}
           iconOnly
-          aria-label={label}
+          aria-label={t('label', label)}
           onClick={handleClick}
           className={['copy-button', className].filter(Boolean).join(' ')}
         >

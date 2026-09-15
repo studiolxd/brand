@@ -3,19 +3,58 @@ import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { useCssProperties } from '../../constants/css-properties';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './Carousel.css';
+
+/**
+ * El cromo del carrusel: cómo se llaman la región y la pista, qué hacen sus
+ * mandos y qué se anuncia al cambiar de diapositiva. Todo cromo — dicen qué es
+ * y qué hace el carrusel, nunca qué hay dentro: el contenido de cada
+ * diapositiva lo pone quien la monta.
+ *
+ * Las dos `roleDescription` también van aquí: las lee el lector de pantalla en
+ * voz alta, así que son texto y no una palabra clave del motor.
+ */
+export interface CarouselMessages {
+  /** Nombre accesible de la región cuando la pantalla no le da uno propio. */
+  label: string;
+  /** `aria-roledescription` de la región: qué es esto. */
+  roleDescription: string;
+  /** Nombre accesible de la pista, la que recibe el foco para desplazarse. */
+  track: string;
+  /** Nombre accesible del botón de retroceso. */
+  previous: string;
+  /** Nombre accesible del botón de avance. */
+  next: string;
+  /** Nombre accesible del indicador n (base 0). Interpola, así que es función. */
+  indicator: (index: number) => string;
+  /** Nombre accesible del botón que detiene el avance automático. */
+  pause: string;
+  /** Nombre accesible del botón que lo reanuda. */
+  play: string;
+  /** Lo que se anuncia al cambiar de diapositiva. Interpola, así que es función. */
+  slideStatus: (index: number, total: number) => string;
+  /** `aria-roledescription` de cada diapositiva. */
+  slideRoleDescription: string;
+}
 
 export interface CarouselProps {
   /** Las diapositivas: uno o varios `CarouselSlide`. */
   children: React.ReactNode;
-  /** Nombre accesible de la región. Default: «Carrusel» (castellano). Una app multiidioma debe pasarlo traducido. */
+  /**
+   * Nombre accesible de la región. **Sin default**: sin él, sale de
+   * `carousel.label` del `BrandMessagesProvider`.
+   */
   label?: string;
   /**
-   * Texto de `aria-roledescription` de la región. Por defecto «carrusel», en
-   * castellano: es el lector de pantalla quien lo lee, así que se traduce.
+   * Texto de `aria-roledescription` de la región. **Sin default**: sin él,
+   * sale de `carousel.roleDescription`.
    */
   roleDescription?: string;
-  /** Nombre accesible de la pista, la que recibe el foco para desplazarse con el teclado. Default: «Diapositivas» (castellano). Una app multiidioma debe pasarlo traducido. */
+  /**
+   * Nombre accesible de la pista, la que recibe el foco para desplazarse con
+   * el teclado. **Sin default**: sin él, sale de `carousel.track`.
+   */
   trackLabel?: string;
   /**
    * Ancho de cada diapositiva — cualquier medida CSS (`'50%'`, `'18rem'`,
@@ -35,19 +74,34 @@ export interface CarouselProps {
    * movimiento automático: pararlo así es definitivo, no se reanuda solo.
    */
   autoplay?: number;
-  /** Texto accesible del botón «anterior». Default: «Anterior» (castellano). Una app multiidioma debe pasarlo traducido. */
+  /**
+   * Texto accesible del botón «anterior». **Sin default**: sin él, sale de
+   * `carousel.previous`. Solo se lee con `controls`.
+   */
   prevLabel?: string;
-  /** Texto accesible del botón «siguiente». Default: «Siguiente» (castellano). Una app multiidioma debe pasarlo traducido. */
+  /**
+   * Texto accesible del botón «siguiente». **Sin default**: sin él, sale de
+   * `carousel.next`. Solo se lee con `controls`.
+   */
   nextLabel?: string;
-  /** Texto accesible del indicador n. Default: «Ir a la diapositiva N» (castellano). Una app multiidioma debe pasarlo traducido. */
+  /**
+   * Texto accesible del indicador n. **Sin default**: sin él, sale de
+   * `carousel.indicator`. Solo se lee con `indicators`.
+   */
   indicatorLabel?: (index: number) => string;
-  /** Texto accesible del botón que detiene el avance automático. Por defecto «Pausar». */
+  /**
+   * Texto accesible del botón que detiene el avance automático. **Sin
+   * default**: sin él, sale de `carousel.pause`. Solo se lee con `autoplay`.
+   */
   pauseLabel?: string;
-  /** Texto accesible del botón que reanuda el avance automático. Por defecto «Reproducir». */
+  /**
+   * Texto accesible del botón que reanuda el avance automático. **Sin
+   * default**: sin él, sale de `carousel.play`. Solo se lee con `autoplay`.
+   */
   playLabel?: string;
   /**
-   * Texto que se anuncia al cambiar de diapositiva. Por defecto «Diapositiva N
-   * de M». Lo lee el lector de pantalla: se traduce.
+   * Texto que se anuncia al cambiar de diapositiva. **Sin default**: sin él,
+   * sale de `carousel.slideStatus`.
    */
   slideStatusLabel?: (index: number, count: number) => string;
   className?: string;
@@ -67,22 +121,23 @@ export interface CarouselProps {
  */
 export function Carousel({
   children,
-  label = 'Carrusel',
-  roleDescription = 'carrusel',
-  trackLabel = 'Diapositivas',
+  label,
+  roleDescription,
+  trackLabel,
   slideSize,
   controls = true,
   indicators = false,
   autoplay,
-  prevLabel = 'Anterior',
-  nextLabel = 'Siguiente',
-  indicatorLabel = (index) => `Ir a la diapositiva ${index + 1}`,
-  pauseLabel = 'Pausar',
-  playLabel = 'Reproducir',
-  slideStatusLabel = (index, total) => `Diapositiva ${index + 1} de ${total}`,
+  prevLabel,
+  nextLabel,
+  indicatorLabel,
+  pauseLabel,
+  playLabel,
+  slideStatusLabel,
   className,
   id,
 }: CarouselProps) {
+  const t = useBrandMessages('carousel');
   const trackRef = useRef<HTMLDivElement>(null);
   const [current, setCurrent] = useState(0);
   // El autoplay necesita la posición sin volver a montar su temporizador en
@@ -164,8 +219,8 @@ export function Carousel({
       ref={rootRef}
       className={['carousel', className].filter(Boolean).join(' ')}
       role="region"
-      aria-roledescription={roleDescription}
-      aria-label={label}
+      aria-roledescription={t('roleDescription', roleDescription)}
+      aria-label={t('label', label)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onFocus={() => setHovered(true)}
@@ -176,7 +231,7 @@ export function Carousel({
         className="carousel__track"
         tabIndex={0}
         role="group"
-        aria-label={trackLabel}
+        aria-label={t('track', trackLabel)}
         onKeyDown={onKeyDown}
       >
         {children}
@@ -186,7 +241,7 @@ export function Carousel({
           automático sería justo el ruido que evita WCAG. En cuanto se detiene
           —a mano o porque nunca hubo autoplay—, cada cambio se anuncia. */}
       <VisuallyHidden as="div" role="status" aria-live={playing ? 'off' : 'polite'} aria-atomic="true">
-        {slideStatusLabel(current, count)}
+        {t('slideStatus', slideStatusLabel)(current, count)}
       </VisuallyHidden>
 
       {(controls || indicators || autoplay !== undefined) && (
@@ -198,7 +253,7 @@ export function Carousel({
                   key={i}
                   type="button"
                   className="carousel__indicator"
-                  aria-label={indicatorLabel(i)}
+                  aria-label={t('indicator', indicatorLabel)(i)}
                   aria-current={i === current ? 'true' : undefined}
                   onClick={() => goTo(i)}
                 />
@@ -212,7 +267,7 @@ export function Carousel({
                 <Button
                   variant="ghost"
                   iconOnly
-                  aria-label={playing ? pauseLabel : playLabel}
+                  aria-label={playing ? t('pause', pauseLabel) : t('play', playLabel)}
                   onClick={() => setStopped((s) => !s)}
                 >
                   <Icon name={playing ? 'pause' : 'play'} />
@@ -220,10 +275,10 @@ export function Carousel({
               )}
               {controls && (
                 <>
-                  <Button variant="ghost" iconOnly aria-label={prevLabel} onClick={() => goTo(current - 1)}>
+                  <Button variant="ghost" iconOnly aria-label={t('previous', prevLabel)} onClick={() => goTo(current - 1)}>
                     <Icon name="arrow-left" />
                   </Button>
-                  <Button variant="ghost" iconOnly aria-label={nextLabel} onClick={() => goTo(current + 1)}>
+                  <Button variant="ghost" iconOnly aria-label={t('next', nextLabel)} onClick={() => goTo(current + 1)}>
                     <Icon name="arrow" />
                   </Button>
                 </>
@@ -238,8 +293,8 @@ export function Carousel({
 
 export interface CarouselSlideProps extends React.ComponentPropsWithoutRef<'div'> {
   /**
-   * Texto de `aria-roledescription` de la diapositiva. Por defecto
-   * «diapositiva», en castellano.
+   * Texto de `aria-roledescription` de la diapositiva. **Sin default**: sin
+   * él, sale de `carousel.slideRoleDescription` del `BrandMessagesProvider`.
    */
   roleDescription?: string;
   children: React.ReactNode;
@@ -251,16 +306,17 @@ export interface CarouselSlideProps extends React.ComponentPropsWithoutRef<'div'
  * quien la usa.
  */
 export function CarouselSlide({
-  roleDescription = 'diapositiva',
+  roleDescription,
   className,
   children,
   ...rest
 }: CarouselSlideProps) {
+  const t = useBrandMessages('carousel');
   return (
     <div
       className={['carousel__slide', className].filter(Boolean).join(' ')}
       role="group"
-      aria-roledescription={roleDescription}
+      aria-roledescription={t('slideRoleDescription', roleDescription)}
       {...rest}
     >
       {children}

@@ -45,6 +45,23 @@ import type { TableOfContentsMessages } from '../molecules/TableOfContents/Table
 import type { PrevNextNavMessages } from '../molecules/PrevNextNav/PrevNextNav';
 import type { PublicPageShellMessages } from '../templates/PublicPageShell/PublicPageShell';
 import type { OnboardingShellMessages } from '../templates/OnboardingShell/OnboardingShell';
+import type { CopyMessages } from '../constants/copy-to-clipboard';
+import type { CodeBlockMessages } from '../molecules/CodeBlock/CodeBlock';
+import type { DotsButtonMessages } from '../atoms/DotsButton/DotsButton';
+import type { ProgressBarMessages } from '../atoms/ProgressBar/ProgressBar';
+import type { SpinnerMessages } from '../atoms/Spinner/Spinner';
+import type { SliderMessages } from '../atoms/Slider/Slider';
+import type { TreeViewMessages } from '../molecules/TreeView/TreeView';
+import type { UptimeBarsMessages } from '../molecules/UptimeBars/UptimeBars';
+import type { ChartMessages } from '../organisms/Chart/Chart';
+import type { StepperMessages } from '../molecules/Stepper/Stepper';
+import type { CarouselMessages } from '../molecules/Carousel/Carousel';
+import type { LanguageSwitcherMessages } from '../molecules/LanguageSwitcher/LanguageSwitcher';
+import type { ProjectCardMessages } from '../molecules/ProjectCard/ProjectCard';
+import type { LegalFooterMessages } from '../sections/LegalFooter/LegalFooter';
+import type { CalendarRosterMessages } from '../molecules/CalendarRoster/CalendarRoster';
+import type { CalendarPlannerMessages } from '../molecules/CalendarPlanner/CalendarPlanner';
+import type { NotificationListMessages } from '../molecules/NotificationList/NotificationList';
 
 /**
  * El contrato de textos de la librería: un espacio por componente, y dentro
@@ -115,6 +132,23 @@ export interface BrandMessages {
   prevNextNav: PrevNextNavMessages;
   publicPageShell: PublicPageShellMessages;
   onboardingShell: OnboardingShellMessages;
+  copy: CopyMessages;
+  codeBlock: CodeBlockMessages;
+  dotsButton: DotsButtonMessages;
+  progressBar: ProgressBarMessages;
+  spinner: SpinnerMessages;
+  slider: SliderMessages;
+  treeView: TreeViewMessages;
+  uptimeBars: UptimeBarsMessages;
+  chart: ChartMessages;
+  stepper: StepperMessages;
+  carousel: CarouselMessages;
+  languageSwitcher: LanguageSwitcherMessages;
+  projectCard: ProjectCardMessages;
+  legalFooter: LegalFooterMessages;
+  calendarRoster: CalendarRosterMessages;
+  calendarPlanner: CalendarPlannerMessages;
+  notificationList: NotificationListMessages;
 }
 
 export type {
@@ -165,4 +199,21 @@ export type {
   PrevNextNavMessages,
   PublicPageShellMessages,
   OnboardingShellMessages,
+  CopyMessages,
+  CodeBlockMessages,
+  DotsButtonMessages,
+  ProgressBarMessages,
+  SpinnerMessages,
+  SliderMessages,
+  TreeViewMessages,
+  UptimeBarsMessages,
+  ChartMessages,
+  StepperMessages,
+  CarouselMessages,
+  LanguageSwitcherMessages,
+  ProjectCardMessages,
+  LegalFooterMessages,
+  CalendarRosterMessages,
+  CalendarPlannerMessages,
+  NotificationListMessages,
 };

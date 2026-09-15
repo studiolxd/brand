@@ -30,6 +30,24 @@ import { AvatarUpload } from '../molecules/AvatarUpload/AvatarUpload';
 import { ImageCropDialog } from '../molecules/ImageCropDialog/ImageCropDialog';
 import { CalendarPlanner } from '../molecules/CalendarPlanner/CalendarPlanner';
 import { CalendarRoster } from '../molecules/CalendarRoster/CalendarRoster';
+import { CopyButton } from '../molecules/CopyButton/CopyButton';
+import { CopyableValue } from '../atoms/CopyableValue/CopyableValue';
+import { CodeBlock } from '../molecules/CodeBlock/CodeBlock';
+import { DescriptionList, DescriptionTerm, DescriptionDetails } from '../atoms/DescriptionList/DescriptionList';
+import { DotsButton } from '../atoms/DotsButton/DotsButton';
+import { ContextMenu } from '../molecules/ContextMenu/ContextMenu';
+import { ProgressBar } from '../atoms/ProgressBar/ProgressBar';
+import { Spinner } from '../atoms/Spinner/Spinner';
+import { Slider } from '../atoms/Slider/Slider';
+import { TreeView } from '../molecules/TreeView/TreeView';
+import { UptimeBars } from '../molecules/UptimeBars/UptimeBars';
+import { Chart } from '../organisms/Chart/Chart';
+import { Stepper } from '../molecules/Stepper/Stepper';
+import { Carousel, CarouselSlide } from '../molecules/Carousel/Carousel';
+import { LanguageSwitcher } from '../molecules/LanguageSwitcher/LanguageSwitcher';
+import { ProjectCard } from '../molecules/ProjectCard/ProjectCard';
+import { LegalFooter } from '../sections/LegalFooter/LegalFooter';
+import { NotificationList } from '../molecules/NotificationList/NotificationList';
 import { MenuButton } from '../atoms/MenuButton/MenuButton';
 import { AppRoot } from '../sections/AppRoot/AppRoot';
 import { AppHeader } from '../sections/AppHeader/AppHeader';
@@ -941,9 +959,9 @@ describe('las subidas leen del proveedor', () => {
   it('sin proveedor y sin prop, el cuadrante revienta nombrando la clave', () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
 
-    expect(() => render(<CalendarRoster month={new Date(2026, 0, 1)} rows={[]} />)).toThrow(
-      /calendar\.previousMonth/,
-    );
+    expect(() =>
+      render(<CalendarRoster month={new Date(2026, 0, 1)} rows={[]} showLegend={false} />),
+    ).toThrow(/calendar\.previousMonth/);
   });
 });
 
@@ -1236,5 +1254,273 @@ describe('el cromo de navegación lee del proveedor', () => {
     expect(() =>
       render(<SiteNav groups={[{ id: 'p', label: 'P', items: [] }]} />),
     ).toThrow(/siteNav\.label/);
+  });
+});
+
+
+/**
+ * **Ola 8 — copiar, datos y estado.** La familia donde el cromo es más corto y
+ * más repetido: «Copiar», «Copiado», «Más opciones», «Cargando…». Tres cosas
+ * que enseña bien:
+ *
+ * - **`copy` es un espacio de conducta, no de componente.** Las mismas tres
+ *   palabras las dicen el botón suelto, el valor en línea y el bloque de
+ *   código; el catálogo de la suite también las tiene una sola vez.
+ * - **Un nombre genérico es cromo; el de ESTA pantalla es prop.** La barra de
+ *   progreso se llama «Progreso» en el catálogo y «Subiendo el vídeo» donde lo
+ *   sabe la pantalla, que gana.
+ * - **Una lista de datos se traduce clave a clave cuando es cerrada.** Los
+ *   seis tipos de la leyenda del cuadrante son del sistema, así que van al
+ *   catálogo; `legendItems` sigue sustituyéndola entera para cambiar el orden
+ *   o quitar tipos, no para traducir.
+ */
+describe('copiar, datos y estado leen del proveedor', () => {
+  it('las tres piezas de copiar comparten un solo espacio', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <CopyButton value="sk-live-42" />
+        <CopyableValue>org_8f2c19ab</CopyableValue>
+        <CodeBlock copyable language="bash">npm i</CodeBlock>
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getAllByRole('button', { name: 'Copy' })).toHaveLength(2);
+    expect(screen.getByRole('button', { name: 'Copy code' })).toBeInTheDocument();
+    expect(screen.getByRole('region', { name: 'bash code block' })).toBeInTheDocument();
+  });
+
+  it('el valor copiable de una ficha es un reenvío puro: no repite la clave', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <DescriptionList>
+          <DescriptionTerm>ID</DescriptionTerm>
+          <DescriptionDetails copyable>org_8f2c19ab</DescriptionDetails>
+        </DescriptionList>
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Copy' })).toBeInTheDocument();
+  });
+
+  it('el menú de acciones toma el nombre de su botón de tres puntos, sin repetir la clave', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <DotsButton />
+        <ContextMenu items={[{ id: 'del', label: 'Delete' }]} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getAllByRole('button', { name: 'More options' })).toHaveLength(2);
+  });
+
+  it('el nombre genérico sale del catálogo y el de la pantalla gana', () => {
+    const { rerender } = render(
+      <BrandMessagesProvider messages={EN}>
+        <ProgressBar value={40} />
+      </BrandMessagesProvider>,
+    );
+    expect(screen.getByRole('progressbar', { name: 'Progress' })).toBeInTheDocument();
+
+    rerender(
+      <BrandMessagesProvider messages={EN}>
+        <ProgressBar value={40} label="Uploading the video" />
+      </BrandMessagesProvider>,
+    );
+    expect(screen.getByRole('progressbar', { name: 'Uploading the video' })).toBeInTheDocument();
+  });
+
+  it('la espera lee su texto del catálogo, y la decorativa no exige ninguno', () => {
+    const sinSpinner = { ...EN, spinner: {} } as unknown as BrandMessages;
+
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <Spinner />
+      </BrandMessagesProvider>,
+    );
+    expect(screen.getByRole('status', { name: 'Loading…' })).toBeInTheDocument();
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinSpinner}>
+          <Spinner aria-hidden />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  it('un deslizador de un pulgar no exige los nombres del rango', () => {
+    const sinRango = {
+      ...EN,
+      slider: { value: 'Value' },
+    } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinRango}>
+          <Slider defaultValue={40} />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <Slider label="Price" defaultValue={[20, 80]} />
+      </BrandMessagesProvider>,
+    );
+    expect(screen.getByRole('slider', { name: 'Minimum' })).toBeInTheDocument();
+    expect(screen.getByRole('slider', { name: 'Maximum' })).toBeInTheDocument();
+  });
+
+  it('el árbol y la tira de disponibilidad toman su nombre genérico del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <TreeView items={[{ id: 'a', label: 'Unit 1' }]} />
+        <UptimeBars points={[{ value: null, label: '5 September' }]} summary="99.98%" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('tree', { name: 'Tree' })).toBeInTheDocument();
+    expect(screen.getByRole('list', { name: 'Uptime' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: '5 September: no data' })).toBeInTheDocument();
+  });
+
+  it('el gráfico nombra su tabla equivalente desde el catálogo, y su ariaLabel sigue siendo suyo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <Chart
+          type="pie"
+          data={[{ paso: 'A', total: 3 }]}
+          series={[{ key: 'total', label: 'Total' }]}
+          xKey="paso"
+          ariaLabel="Share by stage"
+        />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('table', { name: 'Chart data' })).toBeInTheDocument();
+    expect(screen.getByRole('columnheader', { name: 'Category' })).toBeInTheDocument();
+    expect(screen.getByRole('columnheader', { name: 'Share' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Share by stage' })).toBeInTheDocument();
+  });
+
+  it('un progreso que empieza en el primer paso no exige la marca de «completado»', () => {
+    const sinCompletado = {
+      ...EN,
+      stepper: { ...EN.stepper, completed: undefined },
+    } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinCompletado}>
+          <Stepper current={0} steps={[{ label: 'One' }, { label: 'Two' }]} />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+
+    expect(screen.getByText('Step 1 of 2')).toBeInTheDocument();
+    expect(screen.getByRole('list', { name: 'Progress' })).toBeInTheDocument();
+  });
+
+  it('el carrusel nombra región, pista, mandos y diapositiva desde el catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <Carousel>
+          <CarouselSlide>uno</CarouselSlide>
+          <CarouselSlide>dos</CarouselSlide>
+        </Carousel>
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('region', { name: 'Carousel' })).toBeInTheDocument();
+    expect(screen.getByRole('group', { name: 'Slides' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Previous' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Next' })).toBeInTheDocument();
+    expect(screen.getByText('Slide 1 of 2')).toBeInTheDocument();
+  });
+
+  it('el selector de idioma se rotula desde el catálogo y sus idiomas siguen siendo datos', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <LanguageSwitcher
+          variant="list"
+          value="es"
+          languages={[{ code: 'es', label: 'Español' }, { code: 'en', label: 'English' }]}
+        />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('navigation', { name: 'Language' })).toBeInTheDocument();
+    expect(screen.getByText('Español')).toBeInTheDocument();
+  });
+
+  it('la tarjeta de proyecto y el pie legal nombran sus listas desde el catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <ProjectCard title="Moodle" tags={[{ label: 'LMS' }]} />
+        <LegalFooter links={[{ id: 'p', label: 'Privacy', href: '#p' }]} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('list', { name: 'Categories' })).toBeInTheDocument();
+    expect(screen.getByRole('navigation', { name: 'Legal' })).toBeInTheDocument();
+  });
+
+  it('el cuadrante arma su leyenda con los seis tipos del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <CalendarRoster month={new Date(2026, 0, 1)} rows={[]} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('group', { name: 'Legend' })).toBeInTheDocument();
+    expect(screen.getByRole('columnheader', { name: 'Employee' })).toBeInTheDocument();
+    expect(screen.getByText('Public holiday')).toBeInTheDocument();
+    expect(screen.getByText('Non-working day')).toBeInTheDocument();
+  });
+
+  it('un cuadrante sin leyenda no exige ninguno de los seis tipos', () => {
+    const sinTipos = {
+      ...EN,
+      calendarRoster: { name: 'Employee' },
+    } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinTipos}>
+          <CalendarRoster month={new Date(2026, 0, 1)} rows={[]} showLegend={false} />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  it('la bandeja tiene espacio propio, distinto del panel de la cabecera', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <NotificationList
+          onMarkRead={() => {}}
+          items={[{ id: '1', title: 'New login', time: '5 min ago', unread: true }]}
+        />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('list', { name: 'Notifications' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Mark as read' })).toBeInTheDocument();
+    expect(screen.getByText('Unread')).toBeInTheDocument();
+  });
+
+  it('sin proveedor y sin prop, cada pieza de la ola revienta nombrando su clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<CopyButton value="x" />)).toThrow(/copy\.label/);
+    expect(() => render(<CopyableValue>x</CopyableValue>)).toThrow(/copy\.label/);
+    expect(() => render(<CodeBlock>npm i</CodeBlock>)).toThrow(/codeBlock\.region/);
+    expect(() => render(<DotsButton />)).toThrow(/dotsButton\.label/);
+    expect(() => render(<ProgressBar value={10} />)).toThrow(/progressBar\.label/);
+    expect(() => render(<Spinner />)).toThrow(/spinner\.label/);
+    expect(() => render(<TreeView items={[{ id: 'a', label: 'A' }]} />)).toThrow(/treeView\.label/);
+    expect(() => render(<LegalFooter links={[]} />)).toThrow(/legalFooter\.label/);
+    expect(() =>
+      render(<NotificationList items={[{ id: '1', title: 'A', time: 'ya', unread: false }]} />),
+    ).toThrow(/notificationList\.label/);
   });
 });

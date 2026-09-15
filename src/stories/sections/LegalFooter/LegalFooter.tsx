@@ -1,7 +1,18 @@
 import type { ReactNode } from 'react';
 import { Container, type ContainerWidth } from '../../atoms/Container/Container';
 import { Heading } from '../../atoms/Heading/Heading';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './LegalFooter.css';
+
+/**
+ * El único texto del pie, y es **cromo**: cómo se llama esa navegación. Los
+ * rótulos de los enlaces —aviso legal, privacidad, cookies— son datos y viajan
+ * en `links`; el `title` es el contenido de ESE pie.
+ */
+export interface LegalFooterMessages {
+  /** Nombre accesible del `nav` de enlaces legales. */
+  label: string;
+}
 
 export interface LegalFooterLink {
   id: string;
@@ -16,7 +27,10 @@ export type LegalFooterRenderLinkProps = {
 };
 
 export interface LegalFooterProps {
-  /** Nombre accesible del `nav`. */
+  /**
+   * Nombre accesible del `nav`. **Sin default**: sin él, sale de
+   * `legalFooter.label` del `BrandMessagesProvider`.
+   */
   label?: string;
   /** Título opcional sobre los enlaces. */
   title?: string;
@@ -42,7 +56,7 @@ function defaultRenderLink({ children, ...props }: LegalFooterRenderLinkProps) {
  * propio con más cosas.
  */
 export function LegalFooter({
-  label = 'Legal',
+  label,
   title,
   links,
   renderLink = defaultRenderLink,
@@ -50,11 +64,12 @@ export function LegalFooter({
   surface,
   className,
 }: LegalFooterProps) {
+  const t = useBrandMessages('legalFooter');
   return (
     <footer className={['legal-footer', surface === 'dark' && 'surface-dark', className].filter(Boolean).join(' ')}>
       <Container width={width} innerClassName="legal-footer__inner">
         {title && <Heading level={2} size={6} className="legal-footer__title">{title}</Heading>}
-        <nav aria-label={label}>
+        <nav aria-label={t('label', label)}>
           <ul className="legal-footer__links">
             {links.map((link) => (
               <li key={link.id}>

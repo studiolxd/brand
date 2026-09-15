@@ -47,3 +47,26 @@ export function useCopyToClipboard(feedbackDuration = COPY_FEEDBACK_MS) {
 
   return { status, copy };
 }
+
+/**
+ * Los tres textos de copiar al portapapeles, en **un solo espacio** para toda
+ * la familia: el botón suelto (`CopyButton`), el valor en línea
+ * (`CopyableValue`, y con él `DescriptionDetails copyable`) y el bloque de
+ * código (`CodeBlock`, que solo lee el acuse: su rótulo dice «Copiar código» y
+ * vive en `codeBlock.copy`).
+ *
+ * No es un espacio por componente como el resto, y es deliberado: son
+ * literalmente las mismas tres palabras en los tres sitios, el catálogo de la
+ * suite ya las tiene una sola vez (`common.copy`, `common.copied`) y repetir
+ * la clave por componente obligaría a la aplicación a escribir «Copiar» tres
+ * veces con el riesgo de que un día dijeran cosas distintas. Lo que comparten
+ * es la conducta —por eso este fichero existe—, y el texto va con ella.
+ */
+export interface CopyMessages {
+  /** Nombre accesible del botón de copiar. */
+  label: string;
+  /** Acuse tras copiar, anunciado en una región viva. */
+  copied: string;
+  /** Aviso cuando el portapapeles no está disponible (contexto no seguro, permiso denegado). */
+  error: string;
+}

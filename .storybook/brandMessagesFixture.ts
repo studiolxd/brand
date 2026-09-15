@@ -246,4 +246,89 @@ export const brandMessagesFixture: BrandMessages = {
   onboardingShell: {
     actions: 'Acciones del paso',
   },
+  copy: {
+    label: 'Copiar',
+    copied: 'Copiado',
+    error: 'No se pudo copiar',
+  },
+  codeBlock: {
+    copy: 'Copiar código',
+    region: (language) => (language ? `Bloque de código ${language}` : 'Bloque de código'),
+  },
+  dotsButton: {
+    label: 'Más opciones',
+  },
+  progressBar: {
+    label: 'Progreso',
+  },
+  spinner: {
+    label: 'Cargando…',
+  },
+  slider: {
+    value: 'Valor',
+    min: 'Mínimo',
+    max: 'Máximo',
+    valueAt: (index) => `Valor ${index}`,
+  },
+  treeView: {
+    label: 'Árbol',
+  },
+  uptimeBars: {
+    label: 'Disponibilidad',
+    noData: 'sin datos',
+  },
+  chart: {
+    tableCaption: 'Datos del gráfico',
+    tableHint: 'Los datos completos están en la tabla que sigue; flechas para recorrer el gráfico.',
+    category: 'Categoría',
+    value: 'Valor',
+    share: 'Porcentaje',
+    empty: 'Sin datos que mostrar',
+  },
+  stepper: {
+    label: 'Progreso',
+    compact: (current, total) => `Paso ${current} de ${total}`,
+    completed: 'Completado',
+    current: 'Paso actual',
+    pending: 'Pendiente',
+  },
+  carousel: {
+    label: 'Carrusel',
+    roleDescription: 'carrusel',
+    track: 'Diapositivas',
+    previous: 'Anterior',
+    next: 'Siguiente',
+    indicator: (index) => `Ir a la diapositiva ${index + 1}`,
+    pause: 'Pausar',
+    play: 'Reproducir',
+    slideStatus: (index, total) => `Diapositiva ${index + 1} de ${total}`,
+    slideRoleDescription: 'diapositiva',
+  },
+  languageSwitcher: {
+    label: 'Idioma',
+  },
+  projectCard: {
+    tags: 'Categorías',
+  },
+  legalFooter: {
+    label: 'Legal',
+  },
+  calendarRoster: {
+    name: 'Empleado',
+    legend: 'Leyenda',
+    holiday: 'Festivo',
+    vacation: 'Vacaciones',
+    absence: 'Ausencia',
+    recovery: 'Recuperación',
+    birthday: 'Cumpleaños',
+    nonWorking: 'No laborable',
+  },
+  calendarPlanner: {
+    more: (count) => `+${count} más`,
+  },
+  notificationList: {
+    label: 'Notificaciones',
+    unread: 'Sin leer',
+    markRead: 'Marcar como leída',
+  },
 };

@@ -5,6 +5,7 @@ import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import { useCopyToClipboard } from '../../constants/copy-to-clipboard';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './CopyableValue.css';
 
 export interface CopyableValueProps {
@@ -17,13 +18,13 @@ export interface CopyableValueProps {
    */
   copyText?: string;
   /**
-   * Nombre accesible del botón de copiar. Default castellano.
-   * @default 'Copiar'
+   * Nombre accesible del botón de copiar. **Sin default**: sin él, sale de
+   * `copy.label` del `BrandMessagesProvider`.
    */
   copyLabel?: string;
   /**
-   * Acuse tras copiar, anunciado en una región viva. Default castellano.
-   * @default 'Copiado'
+   * Acuse tras copiar, anunciado en una región viva. **Sin default**: sin él,
+   * sale de `copy.copied`. Solo se lee tras copiar.
    */
   copiedLabel?: string;
   /** Se añade DESPUÉS de las clases propias. */
@@ -104,10 +105,11 @@ export const CopyableValue = forwardRef<HTMLSpanElement, CopyableValueProps>(
   function CopyableValue({
     children,
     copyText,
-    copyLabel = 'Copiar',
-    copiedLabel = 'Copiado',
+    copyLabel,
+    copiedLabel,
     className,
   }, ref) {
+    const t = useBrandMessages('copy');
     const { status, copy } = useCopyToClipboard();
     const copied = status === 'copied';
 
@@ -128,7 +130,7 @@ export const CopyableValue = forwardRef<HTMLSpanElement, CopyableValueProps>(
         iconOnly
         variant="ghost"
         size="sm"
-        aria-label={copyLabel}
+        aria-label={t('label', copyLabel)}
         onClick={() => copy(() => copyText ?? defaultCopyText)}
         className="copyable-value__copy"
       >
@@ -181,7 +183,7 @@ export const CopyableValue = forwardRef<HTMLSpanElement, CopyableValueProps>(
       <span ref={ref} className={classes}>
         {content}
         {/* El icono cambia para quien ve; para quien escucha, este anuncio. */}
-        <VisuallyHidden role="status">{copied ? copiedLabel : ''}</VisuallyHidden>
+        <VisuallyHidden role="status">{copied ? t('copied', copiedLabel) : ''}</VisuallyHidden>
       </span>
     );
   },

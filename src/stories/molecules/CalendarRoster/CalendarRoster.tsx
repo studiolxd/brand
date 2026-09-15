@@ -6,6 +6,35 @@ import { isSameDay, shiftMonth } from '../_shared/calendarGrid';
 import './CalendarRoster.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
+/**
+ * El cromo del cuadrante: el encabezado de la columna de nombres y la leyenda
+ * con sus seis tipos. Las **flechas de mes no están aquí**: son el mismo texto
+ * que el del `Calendar` y salen de `calendar.previousMonth` / `.nextMonth`.
+ *
+ * Los seis tipos van clave a clave, no como lista: una lista en el catálogo
+ * obligaría a la aplicación a montar el array entero con sus `type` correctos
+ * solo para traducir seis palabras. `legendItems` sigue existiendo para
+ * sustituir la leyenda **entera** —otro orden, otros tipos—, y gana.
+ */
+export interface CalendarRosterMessages {
+  /** Encabezado de la columna de nombres (empleado, recurso, aula…). */
+  name: string;
+  /** Nombre accesible de la leyenda. */
+  legend: string;
+  /** Un día festivo. */
+  holiday: string;
+  /** Vacaciones. */
+  vacation: string;
+  /** Una ausencia. */
+  absence: string;
+  /** Una recuperación de horas. */
+  recovery: string;
+  /** Un cumpleaños. */
+  birthday: string;
+  /** Un día no laborable. */
+  nonWorking: string;
+}
+
 export type RosterCellType =
   | 'schedule'
   | 'holiday'
@@ -60,7 +89,10 @@ export interface CalendarRosterProps {
    * Cuando se pasa, sustituye al renderizado por defecto de chips/schedule.
    */
   renderCell?: (day: number, date: Date, cell: RosterCell | null) => ReactNode;
-  /** Etiqueta de la columna de nombre. Default: 'Empleado' */
+  /**
+   * Etiqueta de la columna de nombre. **Sin default**: sin ella, sale de
+   * `calendarRoster.name` del `BrandMessagesProvider`.
+   */
   nameLabel?: string;
   /**
    * Lo que precede a la etiqueta de un cumpleaños. Default: `'🎂 '`
@@ -71,13 +103,15 @@ export interface CalendarRosterProps {
   /** Muestra la leyenda al final. Default: true */
   showLegend?: boolean;
   /**
-   * Entradas de la leyenda, en orden. Default: las seis del sistema con sus etiquetas
-   * en castellano. Es texto **visible**: una app multiidioma debe pasarlas traducidas.
+   * Entradas de la leyenda, en orden. **Sin default**: sin ella, la leyenda se
+   * arma con los seis tipos del sistema y sus textos de
+   * `calendarRoster.*`. Se pasa entera para cambiar el orden o quitar tipos,
+   * no para traducir.
    */
   legendItems?: LegendItem[];
   /**
-   * aria-label de la leyenda. Default: "Leyenda" (castellano).
-   * Una app multiidioma debe pasarla traducida.
+   * aria-label de la leyenda. **Sin default**: sin ella, sale de
+   * `calendarRoster.legend`. Solo se lee con `showLegend`.
    */
   legendLabel?: string;
   /**
@@ -116,13 +150,17 @@ const CELL_TYPE_VARIANT: Record<Exclude<RosterCellType, 'schedule' | 'non-workin
   birthday: 'info',
 };
 
-const LEGEND_ITEMS: LegendItem[] = [
-  { type: 'holiday',     label: 'Festivo' },
-  { type: 'vacation',    label: 'Vacaciones' },
-  { type: 'absence',     label: 'Ausencia' },
-  { type: 'recovery',    label: 'Recuperación' },
-  { type: 'birthday',    label: 'Cumpleaños' },
-  { type: 'non-working', label: 'No laborable' },
+/**
+ * Los seis tipos de la leyenda y la clave del catálogo que los nombra, en el
+ * orden en que se pintan. El texto no está aquí: lo pone `calendarRoster.*`.
+ */
+const LEGEND_TYPES: { type: LegendItem['type']; key: 'holiday' | 'vacation' | 'absence' | 'recovery' | 'birthday' | 'nonWorking' }[] = [
+  { type: 'holiday',     key: 'holiday' },
+  { type: 'vacation',    key: 'vacation' },
+  { type: 'absence',     key: 'absence' },
+  { type: 'recovery',    key: 'recovery' },
+  { type: 'birthday',    key: 'birthday' },
+  { type: 'non-working', key: 'nonWorking' },
 ];
 
 export function CalendarRoster({
@@ -132,17 +170,21 @@ export function CalendarRoster({
   hrefBuilder,
   linkComponent,
   renderCell,
-  nameLabel = 'Empleado',
+  nameLabel,
   birthdayPrefix = '🎂 ',
   showLegend = true,
   locale = 'es-ES',
-  legendItems = LEGEND_ITEMS,
-  legendLabel = 'Leyenda',
+  legendItems,
+  legendLabel,
   previousMonthLabel,
   nextMonthLabel,
   className,
 }: CalendarRosterProps) {
   const t = useBrandMessages('calendar');
+  const tr = useBrandMessages('calendarRoster');
+  // La leyenda se arma DONDE se pinta: sin `showLegend` no se exige ninguna
+  // de las seis claves.
+  const leyenda = legendItems ?? (showLegend ? LEGEND_TYPES.map(({ type, key }) => ({ type, label: tr(key) })) : []);
   const today = new Date();
   const days = getDaysInMonth(month);
 
@@ -189,7 +231,7 @@ export function CalendarRoster({
           <thead>
             <tr>
               <th className="calendar-roster__th-name" scope="col">
-                {nameLabel}
+                {tr('name', nameLabel)}
               </th>
               {days.map((day) => {
                 const isToday = isSameDay(day, today);
@@ -270,8 +312,8 @@ export function CalendarRoster({
 
       {/* Leyenda */}
       {showLegend && (
-        <div className="calendar-roster__legend" role="group" aria-label={legendLabel}>
-          {legendItems.map(({ type, label }) => (
+        <div className="calendar-roster__legend" role="group" aria-label={tr('legend', legendLabel)}>
+          {leyenda.map(({ type, label }) => (
             <span key={type} className="calendar-roster__legend-item">
               {type === 'non-working' ? (
                 <>

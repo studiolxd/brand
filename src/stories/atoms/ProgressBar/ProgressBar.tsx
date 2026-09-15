@@ -1,5 +1,16 @@
 import progressBarTokens from '../../../../tokens/component/progress-bar.json';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './ProgressBar.css';
+
+/**
+ * El único texto de la barra, y es **cromo**: el nombre genérico de lo que
+ * avanza. Lo que avanza **de verdad** en una pantalla concreta —«Subiendo el
+ * vídeo»— se dice con la prop `label`, que gana.
+ */
+export interface ProgressBarMessages {
+  /** Nombre accesible de la barra cuando la pantalla no dice qué avanza. */
+  label: string;
+}
 
 export type ProgressBarVariant = 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
 export type ProgressBarSize = 'sm' | 'md' | 'lg';
@@ -12,8 +23,9 @@ export interface ProgressBarProps {
   /** Talla de la barra. En `sm` no se muestra la cifra. */
   size?: ProgressBarSize;
   /**
-   * Nombre accesible de la barra: qué está avanzando. Default: «Progreso»
-   * (castellano). Una app multiidioma debe pasarlo traducido.
+   * Nombre accesible de la barra: qué está avanzando. **Sin default**: sin él,
+   * sale de `progressBar.label` del `BrandMessagesProvider`, que es el nombre
+   * genérico; esta prop es la que dice qué avanza en ESTA pantalla.
    */
   label?: string;
   /** Clases adicionales para el contenedor. */
@@ -37,9 +49,10 @@ export function ProgressBar({
   value,
   variant = 'primary',
   size = 'md',
-  label = 'Progreso',
+  label,
   className,
 }: ProgressBarProps) {
+  const t = useBrandMessages('progressBar');
   const clamped = Math.min(100, Math.max(0, Math.round(value)));
   const showLabel = size !== 'sm';
   const labelInside = showLabel && clamped >= INSIDE_THRESHOLD;
@@ -54,7 +67,7 @@ export function ProgressBar({
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuetext={`${clamped}%`}
-        aria-label={label}
+        aria-label={t('label', label)}
         data-value={clamped}
       >
         <div className="progress-bar__fill">

@@ -5,7 +5,33 @@ import { useCssProperties } from '../../constants/css-properties';
 import { Inline } from '../../atoms/Inline/Inline';
 import { Tag } from '../../atoms/Tag/Tag';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './Chart.css';
+
+/**
+ * El cromo del gráfico: el nombre de la tabla equivalente, sus encabezados, la
+ * pista que se lee al enfocar el lienzo y el aviso de serie vacía. Dicen lo
+ * mismo en cualquier gráfico de la suite.
+ *
+ * **Lo que NO está aquí, y no es olvido:** `ariaLabel` —qué cuenta ESTE
+ * gráfico— sigue siendo obligatorio y sin default; el `title`, el `caption` y
+ * los nombres de las series son contenido; y las cifras son formato, que sale
+ * de `locale` con `Intl`.
+ */
+export interface ChartMessages {
+  /** Título de la tabla equivalente oculta. */
+  tableCaption: string;
+  /** Frase que describe el gráfico para quien lo enfoca. */
+  tableHint: string;
+  /** Encabezado de la primera columna de la tabla. */
+  category: string;
+  /** Encabezado de la columna de valores en `pie`/`donut`. */
+  value: string;
+  /** Encabezado de la columna de porcentaje en `pie`/`donut`. */
+  share: string;
+  /** Texto cuando no hay datos que mostrar. */
+  empty: string;
+}
 
 export type ChartType =
   | 'line' | 'area' | 'bar' | 'scatter'
@@ -97,21 +123,35 @@ export interface ChartProps extends Omit<React.ComponentPropsWithoutRef<'figure'
   valueLabels?: ChartValueLabels;
   /** Locale con el que se formatean los números. Default `'es-ES'`. */
   locale?: string;
-  /** Título de la tabla equivalente oculta. Default: «Datos del gráfico» (castellano). */
+  /**
+   * Título de la tabla equivalente oculta. **Sin default**: sin él, sale de
+   * `chart.tableCaption` del `BrandMessagesProvider`.
+   */
   tableCaption?: string;
   /**
-   * Frase que describe el gráfico para quien lo enfoca. Default: «Los datos
-   * completos están en la tabla que sigue; flechas para recorrer el gráfico.»
-   * (castellano).
+   * Frase que describe el gráfico para quien lo enfoca. **Sin default**: sin
+   * él, sale de `chart.tableHint`.
    */
   tableHint?: string;
-  /** Encabezado de la primera columna de la tabla. Default: «Categoría» (castellano). */
+  /**
+   * Encabezado de la primera columna de la tabla. **Sin default**: sin él,
+   * sale de `chart.category`.
+   */
   categoryLabel?: string;
-  /** Encabezado de la columna de valores en `pie`/`donut`. Default: «Valor» (castellano). */
+  /**
+   * Encabezado de la columna de valores en `pie`/`donut`. **Sin default**: sin
+   * él, sale de `chart.value`. Solo se lee en esos dos tipos.
+   */
   valueLabel?: string;
-  /** Encabezado de la columna de porcentaje en `pie`/`donut`. Default: «Porcentaje» (castellano). */
+  /**
+   * Encabezado de la columna de porcentaje en `pie`/`donut`. **Sin default**:
+   * sin él, sale de `chart.share`. Solo se lee en esos dos tipos.
+   */
   shareLabel?: string;
-  /** Texto cuando no hay datos. Default: «Sin datos que mostrar» (castellano). */
+  /**
+   * Texto cuando no hay datos. **Sin default**: sin él, sale de `chart.empty`.
+   * Solo se lee cuando no hay nada que pintar.
+   */
   emptyMessage?: string;
   /** Se añade DESPUÉS de las clases propias del componente. */
   className?: string;
@@ -359,12 +399,12 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
   tooltip = true,
   valueLabels,
   locale = 'es-ES',
-  tableCaption = 'Datos del gráfico',
-  tableHint = 'Los datos completos están en la tabla que sigue; flechas para recorrer el gráfico.',
-  categoryLabel = 'Categoría',
-  valueLabel = 'Valor',
-  shareLabel = 'Porcentaje',
-  emptyMessage = 'Sin datos que mostrar',
+  tableCaption,
+  tableHint,
+  categoryLabel,
+  valueLabel,
+  shareLabel,
+  emptyMessage,
   className,
   ...rest
 }, ref) {
@@ -376,6 +416,7 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
   const hintId = useId();
 
   const numberFormat = useMemo(() => new Intl.NumberFormat(locale), [locale]);
+  const t = useBrandMessages('chart');
   const percentFormat = useMemo(() => new Intl.NumberFormat(locale, { style: 'percent', maximumFractionDigits: 1 }), [locale]);
   const fmtValue = (value: number, s?: ChartSeries) => (formatValue ? formatValue(value, s) : numberFormat.format(value));
   const fmtX = (value: string | number) => (formatX ? formatX(value) : String(value));
@@ -807,7 +848,7 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
       {title ? <figcaption className="chart__title">{title}</figcaption> : null}
 
       {empty ? (
-        <p className="chart__empty">{emptyMessage}</p>
+        <p className="chart__empty">{t('empty', emptyMessage)}</p>
       ) : (
         <div className="chart__plot" ref={plotRef}>
           <svg
@@ -957,18 +998,18 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
       {caption ? <p className="chart__caption">{caption}</p> : null}
 
       <VisuallyHidden role="status">{liveMessage}</VisuallyHidden>
-      <VisuallyHidden id={hintId}>{tableHint}</VisuallyHidden>
+      <VisuallyHidden id={hintId}>{t('tableHint', tableHint)}</VisuallyHidden>
 
       <VisuallyHidden as="div">
         <table className="chart__table">
-          <caption>{tableCaption}</caption>
+          <caption>{t('tableCaption', tableCaption)}</caption>
           <thead>
             <tr>
-              <th scope="col">{categoryLabel}</th>
+              <th scope="col">{t('category', categoryLabel)}</th>
               {isSlice ? (
                 <>
-                  <th scope="col">{valueLabel}</th>
-                  <th scope="col">{shareLabel}</th>
+                  <th scope="col">{t('value', valueLabel)}</th>
+                  <th scope="col">{t('share', shareLabel)}</th>
                 </>
               ) : (
                 series.map((s) => <th key={s.key} scope="col">{s.label}</th>)

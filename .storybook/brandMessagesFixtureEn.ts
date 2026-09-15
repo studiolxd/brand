@@ -250,4 +250,89 @@ export const brandMessagesFixtureEn: BrandMessages = {
   onboardingShell: {
     actions: 'Step actions',
   },
+  copy: {
+    label: 'Copy',
+    copied: 'Copied',
+    error: 'Could not copy',
+  },
+  codeBlock: {
+    copy: 'Copy code',
+    region: (language) => (language ? `${language} code block` : 'Code block'),
+  },
+  dotsButton: {
+    label: 'More options',
+  },
+  progressBar: {
+    label: 'Progress',
+  },
+  spinner: {
+    label: 'Loading…',
+  },
+  slider: {
+    value: 'Value',
+    min: 'Minimum',
+    max: 'Maximum',
+    valueAt: (index) => `Value ${index}`,
+  },
+  treeView: {
+    label: 'Tree',
+  },
+  uptimeBars: {
+    label: 'Uptime',
+    noData: 'no data',
+  },
+  chart: {
+    tableCaption: 'Chart data',
+    tableHint: 'The full data is in the table that follows; use the arrow keys to walk the chart.',
+    category: 'Category',
+    value: 'Value',
+    share: 'Share',
+    empty: 'No data to show',
+  },
+  stepper: {
+    label: 'Progress',
+    compact: (current, total) => `Step ${current} of ${total}`,
+    completed: 'Completed',
+    current: 'Current step',
+    pending: 'Pending',
+  },
+  carousel: {
+    label: 'Carousel',
+    roleDescription: 'carousel',
+    track: 'Slides',
+    previous: 'Previous',
+    next: 'Next',
+    indicator: (index) => `Go to slide ${index + 1}`,
+    pause: 'Pause',
+    play: 'Play',
+    slideStatus: (index, total) => `Slide ${index + 1} of ${total}`,
+    slideRoleDescription: 'slide',
+  },
+  languageSwitcher: {
+    label: 'Language',
+  },
+  projectCard: {
+    tags: 'Categories',
+  },
+  legalFooter: {
+    label: 'Legal',
+  },
+  calendarRoster: {
+    name: 'Employee',
+    legend: 'Legend',
+    holiday: 'Public holiday',
+    vacation: 'Holiday',
+    absence: 'Absence',
+    recovery: 'Time off in lieu',
+    birthday: 'Birthday',
+    nonWorking: 'Non-working day',
+  },
+  calendarPlanner: {
+    more: (count) => `+${count} more`,
+  },
+  notificationList: {
+    label: 'Notifications',
+    unread: 'Unread',
+    markRead: 'Mark as read',
+  },
 };

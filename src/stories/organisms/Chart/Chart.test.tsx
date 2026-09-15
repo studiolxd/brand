@@ -1,7 +1,29 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen, within } from '@testing-library/react';
+import { render as renderRTL, screen, within } from '@testing-library/react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { Chart, type ChartDatum, type ChartSeries } from './Chart';
+import type { ReactNode } from 'react';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixture as ES } from '../../../../.storybook/brandMessagesFixture';
+
+/**
+ * Estas piezas ya no traen su castellano puesto: el cromo sale del catálogo.
+ * Aquí el catálogo lo monta este envoltorio, que es lo que hace la aplicación
+ * en su raíz. `rerender` lo reutiliza solo.
+ */
+const Catalogo = ({ children }: { children: ReactNode }) => (
+  <BrandMessagesProvider messages={ES}>{children}</BrandMessagesProvider>
+);
+
+function render(ui: React.ReactElement) {
+  return renderRTL(ui, { wrapper: Catalogo });
+}
+
+/** El HTML del servidor también necesita el catálogo: es la raíz de la app. */
+function renderServidor(ui: React.ReactElement) {
+  return renderToStaticMarkup(<Catalogo>{ui}</Catalogo>);
+}
+
 
 const porciones: ChartDatum[] = [
   { paso: 'Visitas', personas: 400 },
@@ -64,7 +86,7 @@ describe('Chart — color por dato', () => {
 // pasa por esa puerta.
 describe('Chart — sin atributo style en el HTML del servidor', () => {
   it('ni las marcas ni las muestras salen con style, ni con paleta de dato', () => {
-    const html = renderToStaticMarkup(
+    const html = renderServidor(
       <Chart type="bar" data={porciones} series={seriePorciones} xKey="paso"
         colors={['#1E7FF6']} ariaLabel="Barras" />,
     );
@@ -72,7 +94,7 @@ describe('Chart — sin atributo style en el HTML del servidor', () => {
   });
 
   it('tampoco las formas de porción, que colorean por categoría', () => {
-    const html = renderToStaticMarkup(
+    const html = renderServidor(
       <Chart type="treemap" data={porciones} series={seriePorciones} xKey="paso" ariaLabel="Treemap" />,
     );
     expect(html).not.toContain('style=');

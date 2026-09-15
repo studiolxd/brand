@@ -2,7 +2,18 @@
 
 import type { ReactNode } from 'react';
 import { DropdownField } from '../DropdownField/DropdownField';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './LanguageSwitcher.css';
+
+/**
+ * El único texto del selector, y es **cromo**: cómo se llama el control. Los
+ * nombres de los idiomas **no** están aquí y no es olvido: van cada uno en su
+ * propio idioma («Español», «English») y viajan en `languages`, que son datos.
+ */
+export interface LanguageSwitcherMessages {
+  /** Etiqueta del control (visible en `compact`, nombre del `nav` en `list`). */
+  label: string;
+}
 
 export interface Language {
   /** Código BCP 47 (`es`, `en`, `pt-BR`). Es el valor; en el control se muestra el nombre. */
@@ -25,7 +36,10 @@ export interface LanguageSwitcherProps {
   value: string;
   /** Cambio de idioma. Qué hacer con él (enrutar, persistir) es del producto. */
   onChange?: (code: string) => void;
-  /** Nombre accesible del control (la etiqueta del campo). */
+  /**
+   * Nombre accesible del control (la etiqueta del campo). **Sin default**: sin
+   * él, sale de `languageSwitcher.label` del `BrandMessagesProvider`.
+   */
   label?: string;
   /** `id` del control en compacto (enlaza la etiqueta). */
   id?: string;
@@ -74,7 +88,7 @@ export function LanguageSwitcher({
   languages,
   value,
   onChange,
-  label = 'Idioma',
+  label,
   id = 'language-switcher',
   labelHidden,
   variant = 'compact',
@@ -84,10 +98,12 @@ export function LanguageSwitcher({
   renderLink = defaultRenderLink,
   className,
 }: LanguageSwitcherProps) {
+  const t = useBrandMessages('languageSwitcher');
+  const rotulo = t('label', label);
   if (variant === 'list') {
     const classes = ['language-switcher', 'language-switcher--list', className].filter(Boolean).join(' ');
     return (
-      <nav className={classes} aria-label={label}>
+      <nav className={classes} aria-label={rotulo}>
         <ul className="language-switcher__list">
           {languages.map(({ code, label: name }) => {
             const current = code === value;
@@ -116,7 +132,7 @@ export function LanguageSwitcher({
   return (
     <DropdownField
       id={id}
-      label={label}
+      label={rotulo}
       labelHidden={labelHidden}
       inline={layout === 'inline'}
       size={size}

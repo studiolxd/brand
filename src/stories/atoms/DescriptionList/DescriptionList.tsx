@@ -37,13 +37,14 @@ export interface DescriptionDetailsProps extends React.ComponentPropsWithoutRef<
    */
   copyText?: string;
   /**
-   * Nombre accesible del botón de copiar. Default castellano.
-   * @default 'Copiar'
+   * Nombre accesible del botón de copiar. **Reenvío puro** al `CopyableValue`
+   * de dentro, que lee `copy.label` del `BrandMessagesProvider`: no hace falta
+   * pasarla para traducir.
    */
   copyLabel?: string;
   /**
-   * Acuse tras copiar, anunciado en una región viva. Default castellano.
-   * @default 'Copiado'
+   * Acuse tras copiar. **Reenvío puro** al `CopyableValue`, que lee
+   * `copy.copied`.
    */
   copiedLabel?: string;
 }
@@ -110,8 +111,8 @@ export const DescriptionDetails = forwardRef<HTMLElement, DescriptionDetailsProp
     children,
     copyable = false,
     copyText,
-    copyLabel = 'Copiar',
-    copiedLabel = 'Copiado',
+    copyLabel,
+    copiedLabel,
     ...rest
   }, ref) {
     const classes = [
