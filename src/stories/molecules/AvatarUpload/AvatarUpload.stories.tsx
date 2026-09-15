@@ -340,7 +340,9 @@ export const ContratoPesoPorLocale: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByRole('button', { name: 'Upload the photo' }))
-      .toHaveAccessibleDescription('JPEG, PNG or WEBP · max. 5.0 MB');
+      // Coma de Oxford incluida: la conjunción la escribe `Intl.ListFormat`,
+      // que es justo lo que un `join(', ')` con una «or» pegada no sabe hacer.
+      .toHaveAccessibleDescription('JPEG, PNG, or WEBP · max. 5.0 MB');
     await expect(canvas.getByRole('button', { name: 'Upload the logo' }))
       .toHaveAccessibleDescription('JPEG, PNG o WEBP · max. 5,0 MB');
   },
