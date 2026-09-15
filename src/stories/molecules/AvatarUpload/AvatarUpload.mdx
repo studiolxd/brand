@@ -37,21 +37,24 @@ El `<input type="file">` real vive oculto y fuera del tabulador; el botón lo di
 
 **El botón cierra a la altura del avatar, no a media altura.** La columna del botón se alinea con el borde inferior del retrato (`align-items: flex-end`), y no con su centro: bajo el botón va la pista de arrastre, que habla del avatar, así que la columna termina donde termina aquello de lo que habla. Flotando a media altura, el par botón + pista quedaba descolgado de un retrato de 192px sin línea de base común con nada.
 
-**Y bajo el botón, la pista de arrastre.** `dropHintLabel` —«…o arrastra la imagen hasta el avatar» por defecto— es la única cosa de esta pieza que no se adivina mirándola: la diana es el avatar, y eso no lo dice ni el botón ni el retrato. Va **visible**, con la tipografía y el color del texto de ayuda de los campos (`{form.helper.*}`), porque es exactamente eso. Con `dropHintLabel=""` no se pinta.
+**Y bajo el botón, la pista de arrastre.** `dropHintLabel` —sin ella, `avatarUpload.dropHint` con el `subject`: «…o arrastra la imagen hasta el avatar»— es la única cosa de esta pieza que no se adivina mirándola: la diana es el avatar, y eso no lo dice ni el botón ni el retrato. Va **visible**, con la tipografía y el color del texto de ayuda de los campos (`{form.helper.*}`), porque es exactamente eso. Con `dropHintLabel=""` no se pinta.
 
 No entra en la descripción accesible del botón: ahí siguen los formatos y el peso, que es lo que hace falta saber **antes** de elegir un archivo. Quien usa lector de pantalla oye la pista en su sitio, después del botón, y quien arrastra con el ratón tiene además el aviso en vivo de la región `role="status"`.
 
 ## Los dos textos del botón
 
-El texto **visible** es corto —"Subir"— y el nombre **accesible** dice de qué es —"Subir avatar", "Subir logo"—. Son dos props, `buttonLabel` y `buttonAccessibleLabel`, y el consumidor pone las dos.
+El texto **visible** es corto —"Subir"— y el nombre **accesible** dice de qué es —"Subir el avatar", "Subir el logo"—. Los dos salen del **catálogo**, y lo único que pone la pantalla es **qué** se sube: la prop `subject`.
 
 > **WCAG 2.5.3 (Label in Name).** El nombre accesible tiene que **contener** el texto visible. Quien navega por voz dice lo que ve ("pulsa Subir"), y el asistente busca ese texto en el nombre del control.
 >
-> - ✓ visible `Subir` · accesible `Subir logo`
-> - ✓ visible `Subir` · accesible `Subir avatar`
+> - ✓ visible `Subir` · accesible `Subir el logo`
 > - ✗ visible `Subir` · accesible `Cargar imagen de la organización` — el control queda inalcanzable por voz.
->
-> En desarrollo, el componente avisa por consola si el nombre accesible no contiene el visible.
+
+**Por eso el par no se parte entre dos ficheros.** Si el visible saliera del catálogo común y el accesible de la pantalla, los dos lados del contrato vivirían en catálogos distintos y una traducción podría desparejarlos sin que nada fallara. El catálogo trae los dos: `avatarUpload.button`, el verbo suelto, y `avatarUpload.buttonFor`, la **plantilla** que lo envuelve con el sujeto — con la regla, escrita en el catálogo, de que `buttonFor(x)` contenga `button`.
+
+Y es una plantilla, no una suma en el componente, porque **el orden lo manda el idioma**: «Subir el logo» y *«Upload the logo»* ponen el verbo delante, pero el alemán lo pone al final (*«das Logo hochladen»*). Un `${verbo} ${sujeto}` cableado en el TSX sería castellano disfrazado.
+
+`buttonAccessibleLabel` sigue existiendo como salida de emergencia —el nombre accesible entero, de una pieza—, pero el camino normal es `subject`. En desarrollo, el componente avisa por consola si el nombre accesible no contiene el visible, venga de donde venga.
 
 ## Lo que se acepta no se enseña de primeras
 
@@ -60,7 +63,9 @@ Los formatos y el peso máximo **no se pintan**: ensucian una pantalla en la que
 - **Se dicen cuando la validación falla**, y el mensaje dice qué SÍ vale: `Formato no admitido. Se aceptan JPEG, PNG, WEBP.` Por el camino del botón este error es imposible —el `accept` filtra el diálogo del sistema—, pero arrastrando no hay filtro: ahí se puede soltar un PDF de 40 MB.
 - **Siguen siendo la descripción accesible del botón** (`aria-describedby` sobre texto oculto), porque el `accept` del input no lo anuncia ningún lector de pantalla: sin ese texto, quien no ve la pantalla no sabe qué puede subir.
 
-El texto sale de `accept` y `maxSize` ("JPEG, PNG, WEBP · máx. 5.0 MB"); `hintLabel`, `formatsLabel`, `invalidTypeError` y `tooLargeError` lo sustituyen entero cuando el producto quiere su propia redacción — como todo texto del DS.
+El texto sale de `accept` y `maxSize` ("JPEG, PNG o WEBP · máx. 5,0 MB"); `hintLabel`, `formatsLabel`, `invalidTypeError` y `tooLargeError` lo sustituyen entero cuando el producto quiere su propia redacción — como todo texto del DS.
+
+La lista de formatos lleva **la conjunción del idioma** («o», *«or»*, *«oder»*), que pone `Intl.ListFormat` con el `locale`: un `join(", ")` con una «o» pegada dejaría castellano dentro de una frase traducida. Y el peso lo escribe `Intl.NumberFormat`, no el catálogo — el porqué, en § «Internacionalización».
 
 <Canvas of={AvatarUploadStories.ArchivoInvalido} />
 
@@ -105,6 +110,64 @@ La subida de verdad —el endpoint, el tRPC, a dónde va el archivo— es del pr
 En superficie oscura, el anillo pasa a ser la tinta de la superficie —la misma regla que el borde del `FileUpload`— y el error, el rojo sobre oscuro:
 
 <TokenTable tokens={avatarUploadDarkTokens} />
+
+## Internacionalización
+
+Diez textos salen del `BrandMessagesProvider` que la aplicación monta en su raíz, **sin valor por defecto**. Lo que **no** sale del catálogo son las dos cosas que cambian de una pantalla a otra: `subject` (qué se sube) y `cropTitle` (qué se recorta, obligatorio y sin default como el `title` del `ImageCropDialog`).
+
+```tsx
+import { BrandMessagesProvider } from "@studiolxd/brand/messages";
+
+<BrandMessagesProvider
+  messages={{
+    avatarUpload: {
+      button: t("avatarUpload.button"),
+      // Tiene que CONTENER a `button`: WCAG 2.5.3.
+      buttonFor: (subject) => t("avatarUpload.buttonFor", { subject }),
+      subject: t("avatarUpload.subject"),
+      dropHint: (subject) => t("avatarUpload.dropHint", { subject }),
+      dropActive: (subject) => t("avatarUpload.dropActive", { subject }),
+      maxSize: (size) => t("avatarUpload.maxSize", { size }),
+      invalidType: (formats) => t("avatarUpload.invalidType", { formats }),
+      tooLarge: (size) => t("avatarUpload.tooLarge", { size }),
+      cropCancel: t("avatarUpload.cropCancel"),
+      cropConfirm: t("avatarUpload.cropConfirm"),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={AvatarUploadStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `buttonLabel` | `avatarUpload.button` | texto visible del botón |
+| `buttonAccessibleLabel` | `avatarUpload.buttonFor` (con `subject`) | nombre accesible del botón |
+| `subject` | `avatarUpload.subject` | qué se sube; entra en las tres plantillas |
+| `dropHintLabel` | `avatarUpload.dropHint` | pista visible bajo el botón |
+| `dropActiveMessage` | `avatarUpload.dropActive` | aviso en vivo (`role="status"`) al empezar un arrastre |
+| `maxSizeHint` | `avatarUpload.maxSize` | pista de peso, dentro de la descripción del botón |
+| `invalidTypeError` | `avatarUpload.invalidType` | error de formato, en `role="alert"` |
+| `tooLargeError` | `avatarUpload.tooLarge` | error de peso, en `role="alert"` |
+| `cropCancelLabel` | `avatarUpload.cropCancel` | botón que descarta el recorte |
+| `cropConfirmLabel` | `avatarUpload.cropConfirm` | botón que confirma el recorte |
+
+`cropCloseLabel`, `cropLoadingLabel` y `cropErrorMessage` son **reenvíos puros** al `ImageCropDialog`: sin ellas, el diálogo lee sus dos textos de `imageCropDialog.*`, y el aspa sigue siendo la del `Modal`, que todavía no lee del proveedor.
+
+> **`cropCancelLabel` y `cropConfirmLabel` salen del catálogo aquí y son obligatorias en `ImageCropDialog`.** No es una incoherencia: el diálogo genérico no sabe qué confirma («Aplicar», «Usar esta imagen»), y esta subida sí — se descarta o se guarda un recorte, y eso vale igual en todas las pantallas.
+
+El orden es **prop → proveedor → error**. El texto se lee **donde se pinta**: una subida sin `maxSize` no exige su pista, y una que nunca ha rechazado un archivo no exige los dos errores.
+
+### El peso y la lista de formatos son formato, no idioma
+
+Dos cosas de esta pieza **no** se deciden en el catálogo sino con el `locale` (default `'es-ES'`):
+
+- **El peso.** «2,5 MB» en `es-ES` y «2.5 MB» en `en-US`, con el mismo catálogo: el separador decimal y el espacio antes del símbolo los escribe `Intl.NumberFormat` con `style: "unit"`. El símbolo `MB` no se traduce —es una unidad, no una palabra—, así que al catálogo va la **plantilla** («máx. {size}») y nunca la cifra.
+- **La conjunción de la lista de formatos.** «JPEG, PNG o WEBP», *«JPEG, PNG, or WEBP»*, *«JPEG, PNG oder WEBP»*: la partícula, la coma de Oxford y el espaciado los pone `Intl.ListFormat` con `type: "disjunction"`. Antes se unían con comas y no había conjunción en ningún idioma.
+
+La regla, la misma de la máscara de fecha: **si cambia al cambiar de idioma es cromo y va al catálogo; si cambia al cambiar de país es formato y sale del `locale`.**
 
 ## Props
 

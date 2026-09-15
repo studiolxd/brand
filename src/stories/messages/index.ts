@@ -22,4 +22,7 @@ export type {
   CalendarMessages,
   DatePickerMessages,
   TimeSelectMessages,
+  FileUploadMessages,
+  ImageCropDialogMessages,
+  AvatarUploadMessages,
 } from './BrandMessages';

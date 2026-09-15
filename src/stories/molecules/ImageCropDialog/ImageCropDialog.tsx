@@ -7,11 +7,32 @@ import { Spinner } from '../../atoms/Spinner/Spinner';
 import { Alert } from '../Alert/Alert';
 import { Modal } from '../Modal/Modal';
 import { cropImageToBlob, initialCrop } from './crop';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 // El recortador es inservible sin su propia hoja (marco de selección y
 // tiradores). El DS la carga aquí para que ningún consumidor tenga que
 // acordarse — misma regla que el CSS BEM de cualquier otro componente.
 import 'react-image-crop/dist/ReactCrop.css';
 import './ImageCropDialog.css';
+
+/**
+ * El cromo del recortador, y **solo el cromo**: lo que el diálogo dice por su
+ * cuenta mientras la imagen va y viene.
+ *
+ * Aquí se ve la distinción que gobierna la campaña entera. El título, el
+ * «Cancelar» y el «Guardar» **no** están en este espacio y siguen siendo props
+ * obligatorias sin valor por defecto: el diálogo no sabe qué se está
+ * recortando —una foto de perfil, un logo, la portada de un curso— ni qué pasa
+ * al confirmar, y eso es contenido de la pantalla que lo abre, no un rótulo
+ * del sistema. Lo que sí sabe es que la imagen puede tardar y puede fallar: el
+ * aviso de carga y el de error son suyos, valen igual en todas las pantallas y
+ * por eso salen del catálogo.
+ */
+export interface ImageCropDialogMessages {
+  /** Lo que se dice mientras la imagen se descarga y descodifica. Se anuncia y se ve. */
+  loading: string;
+  /** Lo que se dice cuando la imagen no se puede cargar. */
+  error: string;
+}
 
 export interface ImageCropDialogProps {
   /** Object URL del fichero elegido; el diálogo está abierto mientras no sea null. */
@@ -28,16 +49,21 @@ export interface ImageCropDialogProps {
   busy?: boolean;
   cancelLabel: ReactNode;
   confirmLabel: ReactNode;
-  /** Etiqueta del botón de cierre del diálogo. */
+  /**
+   * Etiqueta del botón de cierre del diálogo. Se reenvía **tal cual** al
+   * `Modal`, que todavía no lee del proveedor: mientras no se migre, sin esta
+   * prop el aspa sigue diciendo lo que diga `Modal`.
+   */
   closeLabel?: string;
   /**
    * Lo que se dice mientras la imagen se descarga y descodifica. Se anuncia y
-   * se ve. Default castellano: «Cargando imagen…».
+   * se ve. **Sin default**: sin él, sale de `imageCropDialog.loading` del
+   * `BrandMessagesProvider`.
    */
   loadingLabel?: string;
   /**
-   * Lo que se dice cuando la imagen no se puede cargar. Default castellano:
-   * «No hemos podido cargar la imagen. Prueba con otro archivo.».
+   * Lo que se dice cuando la imagen no se puede cargar. **Sin default**: sin
+   * él, sale de `imageCropDialog.error` del `BrandMessagesProvider`.
    */
   errorMessage?: string;
   onConfirm: (blob: Blob) => void | Promise<void>;
@@ -64,12 +90,13 @@ export function ImageCropDialog({
   cancelLabel,
   confirmLabel,
   closeLabel,
-  loadingLabel = 'Cargando imagen…',
-  errorMessage = 'No hemos podido cargar la imagen. Prueba con otro archivo.',
+  loadingLabel,
+  errorMessage,
   onConfirm,
   onClose,
   className,
 }: ImageCropDialogProps) {
+  const t = useBrandMessages('imageCropDialog');
   const imgRef = useRef<HTMLImageElement>(null);
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
@@ -134,9 +161,13 @@ export function ImageCropDialog({
             llegar la imagen: la señal de carga, el error y la propia imagen
             comparten la misma celda. */}
         <div className="image-crop-dialog__area">
-          {status === 'loading' && <Spinner size="lg" label={loadingLabel} />}
+          {status === 'loading' && <Spinner size="lg" label={t('loading', loadingLabel)} />}
           {status === 'error' && (
-            <Alert variant="error" description={errorMessage} className="image-crop-dialog__error" />
+            <Alert
+              variant="error"
+              description={t('error', errorMessage)}
+              className="image-crop-dialog__error"
+            />
           )}
           {sourceUrl && status !== 'error' && (
             <ReactCrop

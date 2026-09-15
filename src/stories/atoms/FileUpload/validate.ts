@@ -4,13 +4,61 @@
  * otra cosa (la diana es el avatar, no una zona de arrastre), pero acepta y
  * rechaza exactamente por la misma regla, y una segunda copia de esta función
  * sería una segunda definición de qué archivo vale.
+ *
+ * Aquí vive además la mitad **de formato** de esta familia: el peso escrito y
+ * la lista de formatos. La regla de la campaña del proveedor es la misma que
+ * en la máscara de fecha: *si cambia al cambiar de idioma es cromo y va al
+ * catálogo; si cambia al cambiar de país es formato y sale del `locale`*.
  */
 
-/** El peso de un archivo, en la unidad que toque. */
-export function formatBytes(bytes: number): string {
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+/** El locale que se usa cuando el componente no recibe ninguno. */
+export const DEFAULT_LOCALE = 'es-ES';
+
+/**
+ * El peso de un archivo, escrito **en el locale**: `2,5 MB` en `es-ES` y
+ * `2.5 MB` en `en-US`.
+ *
+ * «2,5 MB» tiene dos mitades, igual que `dd/mm/aaaa`:
+ *
+ * - **El símbolo no se traduce.** `MB` es `MB` en las seis lenguas de la
+ *   suite; no es una palabra, es una unidad del SI.
+ * - **El separador decimal y la colocación del sufijo son formato.** La coma
+ *   o el punto, el espacio antes de la unidad y hasta si va delante o detrás
+ *   los decide el `locale`, no el idioma de la interfaz.
+ *
+ * Por eso esto no es una plantilla del catálogo sino `Intl.NumberFormat` con
+ * `style: 'unit'`: la cifra la escribe el navegador. Al catálogo va solo la
+ * frase que la envuelve («Máximo {size}»), que sí es cromo.
+ */
+export function formatFileSize(bytes: number, locale: string = DEFAULT_LOCALE): string {
+  const [value, unit, decimals] =
+    bytes < 1024
+      ? ([bytes, 'byte', 0] as const)
+      : bytes < 1024 * 1024
+        ? ([bytes / 1024, 'kilobyte', 1] as const)
+        : ([bytes / (1024 * 1024), 'megabyte', 1] as const);
+
+  return new Intl.NumberFormat(locale, {
+    style: 'unit',
+    unit,
+    unitDisplay: 'short',
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  }).format(value);
+}
+
+/**
+ * Una lista de cosas escrita con la conjunción del idioma: `JPEG, PNG o WEBP`
+ * en castellano, `JPEG, PNG, or WEBP` en inglés, `JPEG, PNG oder WEBP` en
+ * alemán.
+ *
+ * Es `Intl.ListFormat` y no un `join(', ')` con una «o» pegada: la conjunción,
+ * la coma de Oxford y el espaciado cambian de una lengua a otra, y pegarlos a
+ * mano deja el texto en castellano dentro de una frase traducida. `disjunction`
+ * porque se acepta **uno** de los formatos, no todos.
+ */
+export function formatList(items: string[], locale: string = DEFAULT_LOCALE): string {
+  return new Intl.ListFormat(locale, { style: 'long', type: 'disjunction' }).format(items);
 }
 
 /**
@@ -23,9 +71,10 @@ export function validateFile(
   maxSize: number | undefined,
   tooLargeError: (maxSize: string) => string,
   invalidTypeError: string,
+  locale: string = DEFAULT_LOCALE,
 ): string | null {
   if (maxSize !== undefined && file.size > maxSize) {
-    return tooLargeError(formatBytes(maxSize));
+    return tooLargeError(formatFileSize(maxSize, locale));
   }
   if (accept) {
     const patterns = accept.split(',').map(s => s.trim());

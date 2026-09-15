@@ -96,6 +96,12 @@ El campo solo aporta el ritmo (`gap`) y los textos de ayuda y error, que referen
 
 <TokenTable tokens={fileUploadFieldHelperTokens} />
 
+## Internacionalización
+
+El campo **no emite ningún texto propio**: `label`, `helperText` y `errorMessage` son contenido de esta pantalla y los pone quien lo usa. Todo el cromo de dentro —la zona de arrastre, las pistas de límite, los errores de validación— lo lee el `FileUpload` de su espacio `fileUpload` del `BrandMessagesProvider`; el proveedor llega por contexto, así que no hay nada que enhebrar desde aquí. La tabla de claves, en la doc de `FileUpload` § «Internacionalización».
+
+La prop `locale` viaja también al `FileUpload` y decide **cómo se escribe el peso** («2,5 MB» / «2.5 MB»), no el idioma de los textos.
+
 ## Props
 
 <ArgTypes of={FileUploadFieldStories} />

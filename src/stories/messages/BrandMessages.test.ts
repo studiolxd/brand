@@ -188,6 +188,61 @@ describe.each([
     'src/stories/atoms/TimeSelect/TimeSelect.tsx',
     ["'Horas'", "'Minutos'", "'HH'", "'MM'"],
   ],
+  [
+    'FileUpload',
+    'src/stories/atoms/FileUpload/FileUpload.tsx',
+    [
+      'Arrastra archivos aquí',
+      'Suelta los archivos aquí',
+      'o haz clic para seleccionar',
+      'máx. ',
+      'hasta ',
+      'Archivos seleccionados',
+      'Progreso de subida',
+      'Eliminar ',
+      'Archivo demasiado grande',
+      'Tipo de archivo no permitido',
+    ],
+  ],
+  [
+    // La mitad de FORMATO de la familia. Aquí no puede quedar ni una cifra
+    // escrita a mano: el peso lo escribe `Intl.NumberFormat` con el locale, y
+    // `toFixed` era justo el punto decimal inglés cableado.
+    'validate',
+    'src/stories/atoms/FileUpload/validate.ts',
+    ['toFixed', "' KB'", "' MB'", "join(', ')"],
+  ],
+  [
+    'ImageCropDialog',
+    'src/stories/molecules/ImageCropDialog/ImageCropDialog.tsx',
+    ['Cargando imagen', 'No hemos podido cargar la imagen'],
+  ],
+  [
+    'AvatarUpload',
+    'src/stories/molecules/AvatarUpload/AvatarUpload.tsx',
+    [
+      "'Subir'",
+      "'Cancelar'",
+      "'Guardar'",
+      "'Cerrar'",
+      'Recortar imagen',
+      'Suelta la imagen sobre',
+      'arrastra la imagen hasta',
+      'Formato no admitido',
+      'pesa demasiado',
+      'máx. ',
+    ],
+  ],
+  [
+    'CalendarPlanner',
+    'src/stories/molecules/CalendarPlanner/CalendarPlanner.tsx',
+    ["'Mes anterior'", "'Mes siguiente'"],
+  ],
+  [
+    'CalendarRoster',
+    'src/stories/molecules/CalendarRoster/CalendarRoster.tsx',
+    ["'Mes anterior'", "'Mes siguiente'"],
+  ],
 ])('%s no trae textos puestos', (_componente, ruta, textos) => {
   const fuente = readFileSync(join(repoRoot, ruta), 'utf8');
   // Solo el cuerpo: el JSDoc de las props nombra los textos para explicarlos.

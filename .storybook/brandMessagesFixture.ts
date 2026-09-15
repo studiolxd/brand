@@ -107,4 +107,38 @@ export const brandMessagesFixture: BrandMessages = {
     maskHours: 'HH',
     maskMinutes: 'MM',
   },
+  fileUpload: {
+    dropzone: 'Arrastra archivos aquí',
+    dropzoneActive: 'Suelta los archivos aquí',
+    dropzoneHint: 'o haz clic para seleccionar',
+    // El peso llega ya escrito en el locale («2,5 MB»): la plantilla solo lo
+    // envuelve. Escribir aquí la cifra metería el separador decimal de una
+    // lengua en la interfaz de otro país.
+    maxSize: (max) => `máx. ${max}`,
+    maxFiles: (n) => `hasta ${n} archivos`,
+    files: 'Archivos seleccionados',
+    progress: 'Progreso de subida',
+    removeFile: (fileName) => `Eliminar ${fileName}`,
+    tooLarge: (max) => `Archivo demasiado grande (máx. ${max})`,
+    invalidType: 'Tipo de archivo no permitido',
+  },
+  imageCropDialog: {
+    loading: 'Cargando imagen…',
+    error: 'No hemos podido cargar la imagen. Prueba con otro archivo.',
+  },
+  avatarUpload: {
+    button: 'Subir',
+    // `buttonFor` CONTIENE a `button`: WCAG 2.5.3 (Label in Name) exige que el
+    // nombre accesible incluya el texto visible.
+    buttonFor: (subject) => `Subir ${subject}`,
+    subject: 'el avatar',
+    dropHint: (subject) => `…o arrastra la imagen hasta ${subject}`,
+    dropActive: (subject) => `Suelta la imagen sobre ${subject} para subirla`,
+    maxSize: (max) => `máx. ${max}`,
+    // Los formatos llegan ya unidos con la conjunción del locale.
+    invalidType: (formats) => `Formato no admitido. Se aceptan ${formats}.`,
+    tooLarge: (max) => `El archivo pesa demasiado. El máximo es ${max}.`,
+    cropCancel: 'Cancelar',
+    cropConfirm: 'Guardar',
+  },
 };

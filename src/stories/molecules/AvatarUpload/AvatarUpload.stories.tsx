@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, screen, userEvent, waitFor, within, fn } from 'storybook/test';
 import { FormSizeContext } from '../../constants/form-size';
 import { AvatarUpload } from './AvatarUpload';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta = {
   title: 'Molecules/AvatarUpload',
@@ -17,8 +19,9 @@ const meta = {
     name: 'Ana García',
     src: 'https://i.pravatar.cc/128?img=47',
     maxSize: 5 * 1024 * 1024,
-    buttonLabel: 'Subir',
-    buttonAccessibleLabel: 'Subir avatar',
+    // Qué se sube es contenido de la pantalla y entra por `subject`; el verbo
+    // («Subir») y la plantilla que lo envuelve salen del catálogo.
+    cropTitle: 'Recortar la imagen',
     onChange: fn(),
   },
 } satisfies Meta<typeof AvatarUpload>;
@@ -64,8 +67,8 @@ export const Organizacion: Story = {
     src: undefined,
     shape: 'square',
     outputMimeType: 'image/png',
-    buttonAccessibleLabel: 'Subir logo',
-    cropTitle: 'Recortar logotipo',
+    subject: 'el logo',
+    cropTitle: 'Recortar el logotipo',
   },
 };
 
@@ -89,14 +92,16 @@ export const ArchivoInvalido: Story = {
       new File(['x'], 'contrato.pdf', { type: 'application/pdf' }),
     ]);
     await expect(await canvas.findByRole('alert')).toHaveTextContent(
-      'Formato no admitido. Se aceptan JPEG, PNG, WEBP.',
+      'Formato no admitido. Se aceptan JPEG, PNG o WEBP.',
     );
   },
 };
 
 /** Mientras el consumidor sube: el botón y la diana quedan bloqueados. */
 export const Subiendo: Story = {
-  args: { busy: true, buttonLabel: 'Subiendo…', buttonAccessibleLabel: 'Subiendo avatar…' },
+  // Con el verbo cambiado, el nombre accesible se pasa entero: la plantilla
+  // del catálogo dice «Subir …», y aquí ya no se está subiendo, se subió.
+  args: { busy: true, buttonLabel: 'Subiendo…', buttonAccessibleLabel: 'Subiendo…' },
 };
 
 /**
@@ -141,14 +146,14 @@ export const ContratoTeclado: Story = {
   args: { src: undefined },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const boton = canvas.getByRole('button', { name: 'Subir avatar' });
+    const boton = canvas.getByRole('button', { name: 'Subir el avatar' });
 
     // El único camino de teclado es el botón: el input real no es una parada.
     await userEvent.tab();
     await expect(boton).toHaveFocus();
 
     // Y describe lo que se puede subir, que el `accept` no anuncia solo.
-    await expect(boton).toHaveAccessibleDescription('JPEG, PNG, WEBP · máx. 5.0 MB');
+    await expect(boton).toHaveAccessibleDescription('JPEG, PNG o WEBP · máx. 5,0 MB');
 
     // Enter sobre el botón dispara el input oculto.
     const input = canvasElement.querySelector<HTMLInputElement>('.avatar-upload__input')!;
@@ -210,7 +215,7 @@ export const ContratoTalla: Story = {
   args: { src: undefined },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByRole('button', { name: 'Subir avatar' })).toHaveClass('button--lg');
+    await expect(canvas.getByRole('button', { name: 'Subir el avatar' })).toHaveClass('button--lg');
     await expect(canvasElement.querySelector('.avatar')).toHaveClass('avatar--4xl');
     await expect(
       Math.round(canvasElement.querySelector('.avatar')!.getBoundingClientRect().width),
@@ -234,7 +239,7 @@ export const ContratoCabeEnMovil: Story = {
       </FormSizeContext.Provider>
     </div>
   ),
-  args: { src: undefined, buttonLabel: 'Subir', buttonAccessibleLabel: 'Subir logo', shape: 'square' },
+  args: { src: undefined, subject: 'el logo', shape: 'square' },
   play: async ({ canvasElement }) => {
     const fila = canvasElement.querySelector('.avatar-upload') as HTMLElement;
     // Sin desbordar: la fila envuelve en vez de sacar barra horizontal.
@@ -242,7 +247,7 @@ export const ContratoCabeEnMovil: Story = {
     const avatar = canvasElement.querySelector('.avatar')!.getBoundingClientRect();
     await expect(Math.round(avatar.width)).toBe(192);
     // El botón baja: ya no cabe al lado de un retrato de 192px.
-    const boton = within(canvasElement).getByRole('button', { name: 'Subir logo' }).getBoundingClientRect();
+    const boton = within(canvasElement).getByRole('button', { name: 'Subir el logo' }).getBoundingClientRect();
     await expect(boton.top).toBeGreaterThanOrEqual(avatar.bottom);
   },
 };
@@ -263,7 +268,82 @@ export const ContratoAlPie: Story = {
     await expect(Math.round(columna.bottom)).toBe(Math.round(diana.bottom));
 
     const pista = canvas.getByText('…o arrastra la imagen hasta el avatar');
-    const boton = canvas.getByRole('button', { name: 'Subir avatar' }).getBoundingClientRect();
+    const boton = canvas.getByRole('button', { name: 'Subir el avatar' }).getBoundingClientRect();
     await expect(pista.getBoundingClientRect().top).toBeGreaterThanOrEqual(boton.bottom);
+  },
+};
+
+
+/**
+ * El mismo componente con un catálogo inglés montado encima: cambian el verbo
+ * del botón, la pista de arrastre y los dos mensajes de validación. Lo que NO
+ * cambia con el idioma es el sujeto —qué se sube— ni el título del recorte:
+ * son de la pantalla.
+ *
+ * Y el peso se escribe con el `locale`, no con el idioma: los dos bloques
+ * llevan el mismo catálogo inglés, y el de arriba dice «5.0 MB» y el de abajo
+ * «5,0 MB».
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  args: { src: undefined },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        <AvatarUpload {...args} locale="en-US" subject="the profile photo" cropTitle="Crop your photo" />
+        <AvatarUpload {...args} locale="es-ES" subject="the logo" shape="square" cropTitle="Crop your logo" />
+      </div>
+    </BrandMessagesProvider>
+  ),
+};
+
+/**
+ * Test: el par visible/accesible del botón sale ENTERO del catálogo, y el
+ * accesible contiene al visible (WCAG 2.5.3) en el idioma que sea.
+ */
+export const ContratoProveedor: Story = {
+  name: 'Test — el par del botón sale entero del catálogo',
+  tags: ['!dev'],
+  args: { src: undefined },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <AvatarUpload {...args} subject="the logo" cropTitle="Crop your logo" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const boton = canvas.getByRole('button', { name: 'Upload the logo' });
+    // Lo visible es el verbo suelto; el nombre accesible lo contiene.
+    await expect(boton).toHaveTextContent('Upload');
+    await expect(boton.getAttribute('aria-label')).toContain('Upload');
+    await expect(canvas.queryByText('Subir')).toBeNull();
+    await expect(canvas.getByText('…or drag the image onto the logo')).toBeInTheDocument();
+  },
+};
+
+/**
+ * Test: el peso se escribe con el `locale` aunque el catálogo sea otro. Mismo
+ * catálogo inglés, dos locales: «5.0 MB» y «5,0 MB».
+ */
+export const ContratoPesoPorLocale: Story = {
+  name: 'Test — el peso lo escribe el locale, no el catálogo',
+  tags: ['!dev'],
+  args: { src: undefined },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <div>
+        <AvatarUpload {...args} locale="en-US" subject="the photo" cropTitle="Crop" />
+        <AvatarUpload {...args} locale="es-ES" subject="the logo" cropTitle="Crop" />
+      </div>
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('button', { name: 'Upload the photo' }))
+      // Coma de Oxford incluida: la conjunción la escribe `Intl.ListFormat`,
+      // que es justo lo que un `join(', ')` con una «or» pegada no sabe hacer.
+      .toHaveAccessibleDescription('JPEG, PNG, or WEBP · max. 5.0 MB');
+    await expect(canvas.getByRole('button', { name: 'Upload the logo' }))
+      .toHaveAccessibleDescription('JPEG, PNG o WEBP · max. 5,0 MB');
   },
 };

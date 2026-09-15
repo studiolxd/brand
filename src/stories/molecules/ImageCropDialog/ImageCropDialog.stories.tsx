@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { Button } from '../../atoms/Button/Button';
 import { ImageCropDialog } from './ImageCropDialog';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta = {
   title: 'Molecules/ImageCropDialog',
@@ -99,5 +102,60 @@ export const DesdeUnBoton: Story = {
         />
       </>
     );
+  },
+};
+
+
+/**
+ * Un catálogo inglés montado encima. Cambian **solo los dos textos del
+ * diálogo** —el aviso de carga y el de error—, que es todo lo que el
+ * recortador dice por su cuenta.
+ *
+ * El título y las dos acciones siguen viniendo de fuera, y por eso aquí están
+ * en inglés porque quien abre el diálogo los ha traducido: el recortador no
+ * sabe qué se está recortando ni qué pasa al confirmar. Esa es la línea que
+ * separa el cromo del contenido en toda la campaña.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  args: {
+    ...base,
+    title: 'Crop your photo',
+    cancelLabel: 'Discard',
+    confirmLabel: 'Use this image',
+    sourceUrl: 'https://10.255.255.1/logotipo.png',
+  },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <ImageCropDialog {...args} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el cromo sale del catálogo y el contenido sigue llegando por prop. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el cromo lee del proveedor, el contenido no',
+  tags: ['!dev'],
+  args: {
+    ...base,
+    title: 'Crop your photo',
+    cancelLabel: 'Discard',
+    confirmLabel: 'Use this image',
+    sourceUrl: 'https://10.255.255.1/logotipo.png',
+  },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <ImageCropDialog {...args} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const body = within(canvasElement.ownerDocument.body);
+    const panel = await body.findByRole('dialog', { name: 'Crop your photo' });
+    await expect(panel).toBeInTheDocument();
+    // El cromo, del catálogo.
+    await expect(body.getByText('Loading image…')).toBeInTheDocument();
+    await expect(body.queryByText('Cargando imagen…')).toBeNull();
+    // El contenido, de quien abre el diálogo.
+    await expect(body.getByRole('button', { name: 'Use this image' })).toBeInTheDocument();
   },
 };

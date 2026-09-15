@@ -4,6 +4,7 @@ import type { TagVariant } from '../../atoms/Tag/Tag';
 import { PrevNextNav } from '../PrevNextNav/PrevNextNav';
 import { isSameDay, shiftMonth } from '../_shared/calendarGrid';
 import './CalendarRoster.css';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
 export type RosterCellType =
   | 'schedule'
@@ -80,13 +81,14 @@ export interface CalendarRosterProps {
    */
   legendLabel?: string;
   /**
-   * aria-label del botón de mes anterior. Default: "Mes anterior" (castellano).
-   * Una app multiidioma debe pasarla traducida.
+   * aria-label del botón de mes anterior. **Sin default**: sin él, sale de
+   * `calendar.previousMonth` del `BrandMessagesProvider` — es el mismo texto
+   * que el del `Calendar`, así que es el mismo espacio.
    */
   previousMonthLabel?: string;
   /**
-   * aria-label del botón de mes siguiente. Default: "Mes siguiente" (castellano).
-   * Una app multiidioma debe pasarla traducida.
+   * aria-label del botón de mes siguiente. **Sin default**: sin él, sale de
+   * `calendar.nextMonth` del `BrandMessagesProvider`.
    */
   nextMonthLabel?: string;
   /** Locale para nombres de mes y día. Default: 'es-ES' */
@@ -136,10 +138,11 @@ export function CalendarRoster({
   locale = 'es-ES',
   legendItems = LEGEND_ITEMS,
   legendLabel = 'Leyenda',
-  previousMonthLabel = 'Mes anterior',
-  nextMonthLabel = 'Mes siguiente',
+  previousMonthLabel,
+  nextMonthLabel,
   className,
 }: CalendarRosterProps) {
+  const t = useBrandMessages('calendar');
   const today = new Date();
   const days = getDaysInMonth(month);
 
@@ -174,8 +177,8 @@ export function CalendarRoster({
           nextHref={hrefBuilder?.(nextMonth)}
           prevOnClick={navHandler?.(prevMonth)}
           nextOnClick={navHandler?.(nextMonth)}
-          prevLabel={previousMonthLabel}
-          nextLabel={nextMonthLabel}
+          prevLabel={t('previousMonth', previousMonthLabel)}
+          nextLabel={t('nextMonth', nextMonthLabel)}
           linkComponent={linkComponent}
         />
       </div>

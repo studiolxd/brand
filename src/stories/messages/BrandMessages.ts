@@ -16,6 +16,9 @@ import type { FilterBarMessages } from '../molecules/FilterBar/FilterBar';
 import type { CalendarMessages } from '../molecules/Calendar/Calendar';
 import type { DatePickerMessages } from '../molecules/DatePicker/DatePicker';
 import type { TimeSelectMessages } from '../atoms/TimeSelect/TimeSelect';
+import type { FileUploadMessages } from '../atoms/FileUpload/FileUpload';
+import type { ImageCropDialogMessages } from '../molecules/ImageCropDialog/ImageCropDialog';
+import type { AvatarUploadMessages } from '../molecules/AvatarUpload/AvatarUpload';
 
 /**
  * El contrato de textos de la librería: un espacio por componente, y dentro
@@ -57,6 +60,9 @@ export interface BrandMessages {
   calendar: CalendarMessages;
   datePicker: DatePickerMessages;
   timeSelect: TimeSelectMessages;
+  fileUpload: FileUploadMessages;
+  imageCropDialog: ImageCropDialogMessages;
+  avatarUpload: AvatarUploadMessages;
 }
 
 export type {
@@ -78,4 +84,7 @@ export type {
   CalendarMessages,
   DatePickerMessages,
   TimeSelectMessages,
+  FileUploadMessages,
+  ImageCropDialogMessages,
+  AvatarUploadMessages,
 };

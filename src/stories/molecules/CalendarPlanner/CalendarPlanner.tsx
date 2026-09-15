@@ -14,6 +14,7 @@ import {
   useCalendarGridNavigation,
 } from '../_shared/calendarGrid';
 import './CalendarPlanner.css';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
 export interface PlannerEvent {
   id: string;
@@ -58,13 +59,14 @@ export interface CalendarPlannerProps {
   /** Locale para nombres de mes y día. Default: 'es-ES' */
   locale?: string;
   /**
-   * aria-label del botón de mes anterior. Default: "Mes anterior" (castellano).
-   * Una app multiidioma debe pasarla traducida.
+   * aria-label del botón de mes anterior. **Sin default**: sin él, sale de
+   * `calendar.previousMonth` del `BrandMessagesProvider` — es el mismo texto
+   * que el del `Calendar`, así que es el mismo espacio.
    */
   previousMonthLabel?: string;
   /**
-   * aria-label del botón de mes siguiente. Default: "Mes siguiente" (castellano).
-   * Una app multiidioma debe pasarla traducida.
+   * aria-label del botón de mes siguiente. **Sin default**: sin él, sale de
+   * `calendar.nextMonth` del `BrandMessagesProvider`.
    */
   nextMonthLabel?: string;
   /**
@@ -96,8 +98,8 @@ export function CalendarPlanner({
   onMonthChange,
   navigable = true,
   locale = 'es-ES',
-  previousMonthLabel = 'Mes anterior',
-  nextMonthLabel = 'Mes siguiente',
+  previousMonthLabel,
+  nextMonthLabel,
   gridLabel,
   moreLabel = (count) => `+${count} más`,
   size = 'md',
@@ -124,6 +126,7 @@ export function CalendarPlanner({
     [onMonthChange]
   );
 
+  const t = useBrandMessages('calendar');
   const today = new Date();
   const chevronSize = size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm';
 
@@ -174,8 +177,10 @@ export function CalendarPlanner({
         title,
         titleId,
         navigable,
-        previousLabel: previousMonthLabel,
-        nextLabel: nextMonthLabel,
+        // Los dos textos se leen **solo si hay flechas**: un planificador
+        // estático (`navigable={false}`) no pinta ninguna y no los exige.
+        previousLabel: navigable ? t('previousMonth', previousMonthLabel) : undefined,
+        nextLabel: navigable ? t('nextMonth', nextMonthLabel) : undefined,
         onPrev: () => handleMonthChange(prevMonth),
         onNext: () => handleMonthChange(nextMonth),
         chevronSize,

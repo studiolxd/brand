@@ -72,6 +72,19 @@ vacío para quitar el emoji, u otro texto para sustituirlo.
 - El texto de la leyenda y el de los chips es la fuente de la categoría: el
   fondo de la celda no la codifica por sí solo.
 
+## Internacionalización
+
+Los `aria-label` de las dos flechas de mes salen del `BrandMessagesProvider`, **sin valor por defecto**, y del espacio **`calendar`**: es el mismo texto que el del `Calendar`.
+
+| Prop | Clave del catálogo |
+| --- | --- |
+| `previousMonthLabel` | `calendar.previousMonth` |
+| `nextMonthLabel` | `calendar.nextMonth` |
+
+El orden es **prop → proveedor → error**.
+
+`nameLabel`, `legendLabel` y `birthdayPrefix` **no** salen todavía del catálogo: siguen con su castellano puesto, pendientes de migrar.
+
 ## Props
 
 <ArgTypes of={CalendarRosterStories} />

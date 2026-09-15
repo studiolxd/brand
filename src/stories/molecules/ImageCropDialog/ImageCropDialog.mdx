@@ -31,7 +31,9 @@ selección; el DS pone el diálogo, las acciones y el volcado a lienzo
 ## El copy lo pone el consumidor
 
 `title`, `cancelLabel` y `confirmLabel` son obligatorias y no tienen default:
-el diálogo no sabe qué se está recortando. Dos criterios para escribirlas:
+el diálogo no sabe qué se está recortando. **Tampoco salen del catálogo
+común** — son contenido de la pantalla, no cromo del sistema; el porqué, en
+§ «Internacionalización». Dos criterios para escribirlas:
 
 - **El título nombra la acción, no invita a hacerla**: «Recortar imagen»,
   «Recortar logotipo». Sin segunda persona («Recorta tu logo») — es un título
@@ -126,6 +128,47 @@ oscura…) los hereda por composición — no se repiten aquí.
 - La imagen dentro del área de recorte lleva `alt=""`: es puramente
   interactiva (el usuario la ve y la arrastra), no aporta información que no
   esté ya en el `title` del diálogo.
+
+## Internacionalización
+
+Este diálogo es **el modelo de la distinción** que gobierna toda la campaña del
+proveedor de textos. Los seis textos que puede emitir se reparten en dos
+montones que no se deciden igual:
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Contenido** | `title`, `cancelLabel`, `confirmLabel` | props **obligatorias** | El diálogo no sabe qué se recorta —una foto de perfil, un logo, la portada de un curso— ni qué pasa al confirmar («Guardar», «Aplicar», «Usar esta imagen»). Eso lo sabe la pantalla que lo abre. |
+| **Cromo** | `loadingLabel`, `errorMessage` | `imageCropDialog.*` del proveedor | Que la imagen puede tardar y puede fallar sí lo sabe el diálogo, y lo dice igual en todas las pantallas. |
+| **Reenvío** | `closeLabel` | se pasa tal cual al `Modal` | El `Modal` todavía no lee del proveedor. Mientras no se migre, sin esta prop el aspa dice lo que diga `Modal`. |
+
+La regla, en una línea: **si el texto cambia de una pantalla a otra, es
+contenido y es prop; si vale igual en todas, es cromo y es catálogo.** No se
+decide por el espacio de nombres ni por si el texto «parece» genérico.
+
+```tsx
+import { BrandMessagesProvider } from "@studiolxd/brand/messages";
+
+<BrandMessagesProvider
+  messages={{
+    imageCropDialog: {
+      loading: t("imageCrop.loading"),
+      error: t("imageCrop.error"),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={ImageCropDialogStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `loadingLabel` | `imageCropDialog.loading` | rótulo del `Spinner` mientras la imagen viaja |
+| `errorMessage` | `imageCropDialog.error` | descripción del `Alert` de error |
+
+El orden es **prop → proveedor → error**. El texto se lee **donde se pinta**:
+un diálogo con la imagen ya cargada no exige ninguno de los dos.
 
 ## Props
 

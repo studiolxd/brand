@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { useState } from 'react';
 import { FileUpload } from './FileUpload';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta = {
   title: 'Atoms/FileUpload',
@@ -221,5 +223,73 @@ export const ContratoSemanticaNativa: Story = {
     // El id viene de `useId` y lleva dos puntos: no vale como selector CSS
     const descrito = input.getAttribute('aria-describedby')!;
     await expect(canvasElement.ownerDocument.getElementById(descrito)).toHaveTextContent('Arrastra archivos aquí');
+  },
+};
+
+
+/**
+ * El mismo componente con un catálogo inglés montado encima: cambian el texto
+ * de la zona, la pista y las dos frases de límite.
+ *
+ * Lo que **no** cambia con el idioma es la cifra del peso. Los dos bloques
+ * llevan el mismo catálogo inglés; el de arriba lo escribe con `es-ES` («máx.
+ * 2,5 MB») y el de abajo con `en-US` («max. 2.5 MB»). La frase es idioma; el
+ * separador decimal es formato.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        <FileUpload aria-label="Attachments (es-ES)" locale="es-ES" maxSize={2621440} />
+        <FileUpload aria-label="Attachments (en-US)" locale="en-US" maxSize={2621440} />
+      </div>
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: sin props, todo el cromo de la zona sale del proveedor. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el cromo lee del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <FileUpload aria-label="Attachments" multiple maxFiles={3} progress={20} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('Drag files here')).toBeInTheDocument();
+    await expect(canvas.getByText('or click to browse')).toBeInTheDocument();
+    await expect(canvas.getByRole('progressbar', { name: 'Upload progress' })).toBeInTheDocument();
+    await expect(canvas.queryByText('Arrastra archivos aquí')).toBeNull();
+  },
+};
+
+/**
+ * Test: **«2,5 MB» tiene dos mitades.** La frase la pone el catálogo y la
+ * cifra el `locale`: mismo catálogo inglés, «2,5 MB» en `es-ES` y «2.5 MB» en
+ * `en-US`. Que no acabe nunca en el catálogo un «2.5 MB» con punto.
+ */
+export const ContratoPesoPorLocale: Story = {
+  name: 'Test — el peso lo escribe el locale, no el catálogo',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <>
+        <div data-testid="es">
+          <FileUpload aria-label="es" locale="es-ES" maxSize={2621440} />
+        </div>
+        <div data-testid="en">
+          <FileUpload aria-label="en" locale="en-US" maxSize={2621440} />
+        </div>
+      </>
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const es = within(canvasElement.querySelector('[data-testid="es"]') as HTMLElement);
+    const en = within(canvasElement.querySelector('[data-testid="en"]') as HTMLElement);
+
+    await expect(es.getAllByText(/max\. 2,5 MB/).length).toBeGreaterThan(0);
+    await expect(en.getAllByText(/max\. 2\.5 MB/).length).toBeGreaterThan(0);
   },
 };

@@ -45,11 +45,63 @@ envejezcan por separado.
 
 Todos los colores tienen par oscuro por la regla de derivación (Foundations → Colores): la zona pasa a la superficie secundaria oscura, la tinta y el borde a blanco, y el icono de archivo genérico deja `grey-dark` —que no llega a 3:1 sobre prusia— por el gris de texto secundario.
 
-## Textos
+## Internacionalización
 
-Todo lo que el componente escribe por su cuenta es una prop con default en castellano: `dropzoneLabel`, `dropzoneActiveLabel`, `dropzoneHintLabel`, `maxSizeHint`, `maxFilesHint`, `filesLabel`, `progressLabel`, `removeFileLabel`, `tooLargeError` e `invalidTypeError`.
+Los diez textos que la zona escribe por su cuenta salen del `BrandMessagesProvider` que la aplicación monta en su raíz, **sin valor por defecto**. La prop suelta sigue existiendo como anulación puntual de ese uso.
+
+```tsx
+import { BrandMessagesProvider } from "@studiolxd/brand/messages";
+
+<BrandMessagesProvider
+  messages={{
+    fileUpload: {
+      dropzone: t("upload.dropzone"),
+      dropzoneActive: t("upload.dropzoneActive"),
+      dropzoneHint: t("upload.dropzoneHint"),
+      maxSize: (size) => t("upload.maxSize", { size }),
+      maxFiles: (count) => t("upload.maxFiles", { count }),
+      files: t("upload.files"),
+      progress: t("upload.progress"),
+      removeFile: (name) => t("upload.removeFile", { name }),
+      tooLarge: (size) => t("upload.tooLarge", { size }),
+      invalidType: t("upload.invalidType"),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={FileUploadStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `dropzoneLabel` | `fileUpload.dropzone` | texto visible de la zona, en reposo |
+| `dropzoneActiveLabel` | `fileUpload.dropzoneActive` | texto visible mientras se arrastra encima |
+| `dropzoneHintLabel` | `fileUpload.dropzoneHint` | segunda línea: que además se puede hacer clic |
+| `maxSizeHint` | `fileUpload.maxSize` | pista de peso, en el subtexto |
+| `maxFilesHint` | `fileUpload.maxFiles` | pista de número de archivos |
+| `filesLabel` | `fileUpload.files` | `aria-label` de la lista de archivos |
+| `progressLabel` | `fileUpload.progress` | `aria-label` de la barra de progreso |
+| `removeFileLabel` | `fileUpload.removeFile` | `aria-label` del aspa de cada fila |
+| `tooLargeError` | `fileUpload.tooLarge` | error de peso, en `role="alert"` |
+| `invalidTypeError` | `fileUpload.invalidType` | error de tipo, en `role="alert"` |
+
+El orden es **prop → proveedor → error**. El texto se lee **donde se pinta**: una zona sin `maxSize` no exige su pista, y una sin `progress` no exige el rótulo de la barra.
 
 <Canvas of={FileUploadStories.Etiquetas} />
+
+### «2,5 MB»: la mitad es idioma y la mitad es formato
+
+El peso máximo parece un solo texto y son dos, decididos en sitios distintos — exactamente como la máscara `dd/mm/aaaa` del `DatePicker`:
+
+- **La frase es idioma.** «máx. …», *«max. …»*, *«höchstens …»* se traducen, así que van al catálogo. Y van como **plantilla**, no como frase hecha: reciben el peso ya escrito.
+- **La cifra es formato.** El separador decimal (`2,5` en España, `2.5` en Estados Unidos), la agrupación de millares y el espacio antes del símbolo los decide el **`locale`**, no el idioma de la interfaz. Los escribe `Intl.NumberFormat` con `style: "unit"`.
+
+El símbolo en sí —`MB`— no se traduce: es una unidad, no una palabra. Por eso el catálogo **nunca** debe contener un «2.5 MB» escrito a mano: metería el punto decimal inglés en una interfaz española. Lo que el catálogo recibe es el peso ya formateado.
+
+La prop `locale` (default `'es-ES'`) decide solo esa cifra, no los textos. La story de arriba lleva el mismo catálogo inglés en dos locales para que se vea.
+
 
 ## Accesibilidad
 

@@ -90,6 +90,19 @@ una acción distinta de abrir el día.
   gris de estado; una celda pulsable bajo el puntero no se rellena: lleva la
   línea de tinta del sistema, heredada del `Calendar`.
 
+## Internacionalización
+
+Los `aria-label` de las dos flechas de mes salen del `BrandMessagesProvider`, **sin valor por defecto**, y del espacio **`calendar`**: es literalmente el mismo texto que el del `Calendar` y no merece un espacio propio.
+
+| Prop | Clave del catálogo |
+| --- | --- |
+| `previousMonthLabel` | `calendar.previousMonth` |
+| `nextMonthLabel` | `calendar.nextMonth` |
+
+El orden es **prop → proveedor → error**, y el texto se lee **donde se pinta**: con `navigable={false}` no hay flechas y no se exige ninguno de los dos.
+
+`gridLabel` y `moreLabel` **no** salen del catálogo: el primero nombra a ESTE planificador y el segundo todavía trae su castellano puesto — pendiente de migrar.
+
 ## Props
 
 <ArgTypes of={CalendarPlannerStories} />

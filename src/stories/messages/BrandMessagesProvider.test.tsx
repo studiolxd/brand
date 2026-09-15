@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrandMessagesProvider } from './BrandMessagesProvider';
 import type { BrandMessages } from './BrandMessages';
@@ -24,6 +24,12 @@ import { DatePicker } from '../molecules/DatePicker/DatePicker';
 import { DatePickerField } from '../molecules/DatePickerField/DatePickerField';
 import { DateTimeField } from '../molecules/DateTimeField/DateTimeField';
 import { TimeField } from '../molecules/TimeField/TimeField';
+import { FileUpload } from '../atoms/FileUpload/FileUpload';
+import { FileUploadField } from '../molecules/FileUploadField/FileUploadField';
+import { AvatarUpload } from '../molecules/AvatarUpload/AvatarUpload';
+import { ImageCropDialog } from '../molecules/ImageCropDialog/ImageCropDialog';
+import { CalendarPlanner } from '../molecules/CalendarPlanner/CalendarPlanner';
+import { CalendarRoster } from '../molecules/CalendarRoster/CalendarRoster';
 
 /**
  * El orden de resolución de un texto: **prop → proveedor → error**. Sin cuarto
@@ -671,5 +677,257 @@ describe('la fecha y la hora leen del proveedor', () => {
 
     expect(screen.getByRole('group', { name: 'Hora de la cita' })).toBeInTheDocument();
     expect(screen.getByText('Elige una hora posterior')).toBeInTheDocument();
+  });
+});
+
+
+describe('las subidas leen del proveedor', () => {
+  const soltar = (target: Element, files: File[]) =>
+    fireEvent.drop(target, { dataTransfer: { files, types: ['Files'], dropEffect: 'none' } });
+
+  it('la zona de arrastre toma su texto, sus pistas y su lista del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <FileUpload aria-label="Attachments" multiple maxSize={2621440} maxFiles={3} progress={40} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByText('Drag files here')).toBeInTheDocument();
+    expect(screen.getByText('or click to browse')).toBeInTheDocument();
+    expect(screen.getByRole('progressbar', { name: 'Upload progress' })).toBeInTheDocument();
+    // Dos veces: en la zona (que va `aria-hidden`) y en la descripción que se
+    // le sirve al lector desde el `VisuallyHidden`.
+    expect(screen.getAllByText(/up to 3 files/)).toHaveLength(2);
+  });
+
+  it('la prop suelta gana también aquí', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <FileUpload aria-label="Attachments" dropzoneLabel="Dépose tes fichiers ici" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByText('Dépose tes fichiers ici')).toBeInTheDocument();
+    expect(screen.queryByText('Drag files here')).toBeNull();
+  });
+
+  it('sin proveedor y sin prop, la zona revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<FileUpload aria-label="Attachments" />)).toThrow(/fileUpload\.dropzone/);
+  });
+
+  it('una zona sin límites ni progreso no exige los textos que no pinta', () => {
+    const sinLosSuyos = {
+      ...EN,
+      fileUpload: {
+        dropzone: EN.fileUpload.dropzone,
+        dropzoneHint: EN.fileUpload.dropzoneHint,
+      },
+    } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinLosSuyos}>
+          <FileUpload aria-label="Attachments" />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  it('el campo reenvía: el `label` es suyo y el cromo de dentro sale del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <FileUploadField label="Documentación" maxFiles={2} multiple />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByText('Documentación')).toBeInTheDocument();
+    expect(screen.getByText('Drag files here')).toBeInTheDocument();
+  });
+
+  /**
+   * **«2,5 MB» tiene dos mitades**, igual que `dd/mm/aaaa`. La frase que lo
+   * envuelve («max. …») es idioma y sale del catálogo; la cifra —el separador
+   * decimal, el espacio antes del símbolo— es formato y la escribe
+   * `Intl.NumberFormat` con el `locale`. Con el MISMO catálogo inglés, `es-ES`
+   * tiene que dar «2,5 MB» y `en-US` «2.5 MB».
+   */
+  it('el peso lo escribe el locale y la frase el catálogo', () => {
+    const { unmount } = render(
+      <BrandMessagesProvider messages={EN}>
+        <FileUpload aria-label="Attachments" locale="es-ES" maxSize={2621440} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getAllByText(/max\. 2,5 MB/).length).toBeGreaterThan(0);
+    unmount();
+
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <FileUpload aria-label="Attachments" locale="en-US" maxSize={2621440} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getAllByText(/max\. 2\.5 MB/).length).toBeGreaterThan(0);
+  });
+
+  it('el recortador exige el título y las dos acciones, y solo lee su cromo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <ImageCropDialog
+          sourceUrl="blob:fake"
+          title="Crop your photo"
+          cancelLabel="Discard"
+          confirmLabel="Use this image"
+          outputMimeType="image/jpeg"
+          onConfirm={() => {}}
+          onClose={() => {}}
+        />
+      </BrandMessagesProvider>,
+    );
+
+    // El título y las acciones son de la pantalla: no salen del catálogo.
+    expect(screen.getByRole('dialog', { name: 'Crop your photo' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Use this image' })).toBeInTheDocument();
+    // El aviso de carga sí: es cromo del diálogo.
+    expect(screen.getByText('Loading image…')).toBeInTheDocument();
+  });
+
+  it('sin proveedor y sin prop, el recortador revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() =>
+      render(
+        <ImageCropDialog
+          sourceUrl="blob:fake"
+          title="Crop"
+          cancelLabel="Cancel"
+          confirmLabel="Save"
+          outputMimeType="image/jpeg"
+          onConfirm={() => {}}
+          onClose={() => {}}
+        />,
+      ),
+    ).toThrow(/imageCropDialog\.loading/);
+  });
+
+  /**
+   * El par visible/accesible del botón sale ENTERO del catálogo. Es la única
+   * forma de que WCAG 2.5.3 (Label in Name) no se pueda romper al traducir: si
+   * el visible viniera del catálogo común y el accesible de la pantalla, los
+   * dos lados del contrato vivirían en ficheros distintos.
+   */
+  it('el botón del avatar saca de una pieza su texto visible y su nombre accesible', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <AvatarUpload name="Ada" subject="the logo" cropTitle="Crop your logo" onChange={() => {}} />
+      </BrandMessagesProvider>,
+    );
+
+    const boton = screen.getByRole('button', { name: 'Upload the logo' });
+    expect(boton).toHaveTextContent('Upload');
+    // WCAG 2.5.3: el nombre accesible contiene el visible, en el idioma que sea.
+    expect(boton.getAttribute('aria-label')).toContain('Upload');
+    expect(screen.getByText('…or drag the image onto the logo')).toBeInTheDocument();
+  });
+
+  it('el `subject` y el `cropTitle` NO salen del catálogo: son de esta pantalla', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <AvatarUpload
+          name="Ada"
+          subject="la foto de perfil"
+          cropTitle="Recorta tu foto"
+          onChange={() => {}}
+        />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Upload la foto de perfil' })).toBeInTheDocument();
+  });
+
+  /**
+   * La lista de formatos necesita la conjunción del idioma: es
+   * `Intl.ListFormat`, no un `join(', ')` con una «o» pegada. Antes no había
+   * conjunción ninguna («JPEG, PNG, WEBP»).
+   */
+  it('la lista de formatos usa la conjunción del locale, no una coma pelada', () => {
+    const { container, unmount } = render(
+      <BrandMessagesProvider messages={EN}>
+        <AvatarUpload
+          name="Ada"
+          locale="en-US"
+          maxSize={2621440}
+          cropTitle="Crop"
+          onChange={() => {}}
+        />
+      </BrandMessagesProvider>,
+    );
+
+    soltar(container.querySelector('.avatar-upload__target')!, [
+      new File(['x'], 'contrato.pdf', { type: 'application/pdf' }),
+    ]);
+    expect(screen.getByRole('alert')).toHaveTextContent(
+      'Format not supported. We accept JPEG, PNG, or WEBP.',
+    );
+    unmount();
+
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <AvatarUpload
+          name="Ada"
+          locale="es-ES"
+          maxSize={2621440}
+          cropTitle="Crop"
+          onChange={() => {}}
+        />
+      </BrandMessagesProvider>,
+    );
+    // Mismo catálogo inglés, conjunción española: la lista es formato.
+    expect(screen.getByText(/JPEG, PNG o WEBP/)).toBeInTheDocument();
+  });
+
+  it('sin proveedor y sin prop, el avatar revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() =>
+      render(<AvatarUpload name="Ada" cropTitle="Crop" onChange={() => {}} />),
+    ).toThrow(/avatarUpload\./);
+  });
+
+  it('el planificador y el cuadrante leen las dos flechas del espacio `calendar`', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <>
+          <CalendarPlanner month={new Date(2026, 0, 1)} gridLabel="Planner" />
+          <CalendarRoster month={new Date(2026, 0, 1)} rows={[]} />
+        </>
+      </BrandMessagesProvider>,
+    );
+
+    // Dos piezas, un solo espacio: es el mismo texto que el del `Calendar`.
+    expect(screen.getAllByLabelText('Previous month')).toHaveLength(2);
+    expect(screen.getAllByLabelText('Next month')).toHaveLength(2);
+  });
+
+  it('un planificador sin flechas no exige los textos de las flechas', () => {
+    const sinLosSuyos = { ...EN, calendar: {} } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinLosSuyos}>
+          <CalendarPlanner month={new Date(2026, 0, 1)} navigable={false} gridLabel="Planner" />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  it('sin proveedor y sin prop, el cuadrante revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<CalendarRoster month={new Date(2026, 0, 1)} rows={[]} />)).toThrow(
+      /calendar\.previousMonth/,
+    );
   });
 });
