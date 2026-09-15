@@ -4,6 +4,14 @@ import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import './PageIntro.css';
 
 export interface PageIntroProps {
+  /**
+   * Encima del título: una `Tag` de estado, una categoría, un `Breadcrumb`
+   * corto. No es un subtítulo ni acepta una frase larga —para eso está
+   * `description`—, es una pieza pequeña que sitúa la página antes de
+   * nombrarla. Con `actions`, queda en la columna del título, nunca en la
+   * de las acciones.
+   */
+  eyebrow?: ReactNode;
   /** El título de la página: un `Heading` de nivel 1 (o el que diga `level`). */
   title: ReactNode;
   /**
@@ -46,6 +54,7 @@ export interface PageIntroProps {
  * (`level={2}`): el título a la izquierda y la acción principal a la derecha.
  */
 export function PageIntro({
+  eyebrow,
   title,
   description,
   actions,
@@ -56,16 +65,22 @@ export function PageIntro({
   children,
 }: PageIntroProps) {
   const heading = <Heading level={level} size={size}>{title}</Heading>;
+  const titleGroup = (
+    <>
+      {eyebrow && <div className="page-intro__eyebrow">{eyebrow}</div>}
+      {heading}
+    </>
+  );
 
   return (
     <Tag className={['page-intro', className].filter(Boolean).join(' ')}>
       {actions ? (
         <div className="page-intro__row">
-          {heading}
+          <div className="page-intro__title-group">{titleGroup}</div>
           <div className="page-intro__actions">{actions}</div>
         </div>
       ) : (
-        heading
+        titleGroup
       )}
       {description && <Paragraph size="large">{description}</Paragraph>}
       {children}

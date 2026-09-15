@@ -19,6 +19,15 @@
   margin-block-start: var(--spacing-3);
 }
 
+/* Encima del título: mismo hueco pequeño que ya separa título y acciones
+   apiladas (`--page-intro-row-gap`), nada nuevo. Un `margin-block-end`
+   simple: sin fila (sin `actions`) es hijo directo del `header` y el hueco
+   sale de aquí; con fila, vive dentro de `.page-intro__title-group`, que no
+   es un contenedor flex, así que el margen se comporta igual. */
+.page-intro__eyebrow {
+  margin-block-end: var(--page-intro-row-gap);
+}
+
 /* La fila del título: solo existe cuando hay acciones. Sin ellas el título
    sigue siendo hijo directo de la cabecera y nada de esto se aplica.
 
@@ -33,7 +42,7 @@
   row-gap: var(--page-intro-row-gap);
 }
 
-.page-intro__row > .heading {
+.page-intro__row > .page-intro__title-group > .heading {
   margin-block-end: 0;
 }
 
@@ -64,19 +73,23 @@
     row-gap: 0;
   }
 
-  /* El título se queda con el ancho sobrante y puede encoger por debajo de su
-     contenido: sin `min-inline-size: 0` un título largo empujaría las acciones
-     fuera del margen. Y el aire bajo el bloque vuelve a ponerlo el título en
-     em, igual que en una cabecera sin acciones. */
-  .page-intro__row > .heading {
+  /* La columna del título (eyebrow + título) se queda con el ancho sobrante
+     y puede encoger por debajo de su contenido: sin `min-inline-size: 0` un
+     título largo empujaría las acciones fuera del margen. */
+  .page-intro__row > .page-intro__title-group {
     flex: 1;
     min-inline-size: 0;
+  }
+
+  /* Y el aire bajo el bloque vuelve a ponerlo el título en em, igual que en
+     una cabecera sin acciones. */
+  .page-intro__row > .page-intro__title-group > .heading {
     margin-block-end: var(--page-intro-title-space-after);
   }
 
   /* Si la fila cierra la cabecera no deja hueco al final: la misma regla que
      un título suelto (`:last-child` de la base). */
-  .page-intro__row:last-child > .heading {
+  .page-intro__row:last-child > .page-intro__title-group > .heading {
     margin-block-end: 0;
   }
 

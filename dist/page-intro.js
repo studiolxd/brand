@@ -1,31 +1,37 @@
 import './page-intro.css';
 import { Heading as e } from "./heading.js";
 import { Paragraph as t } from "./paragraph.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/molecules/PageIntro/PageIntro.tsx
-function i({ title: i, description: a, actions: o, level: s = 1, size: c, as: l = "header", className: u, children: d }) {
-	let f = /* @__PURE__ */ n(e, {
-		level: s,
-		size: c,
-		children: i
-	});
-	return /* @__PURE__ */ r(l, {
-		className: ["page-intro", u].filter(Boolean).join(" "),
+function a({ eyebrow: a, title: o, description: s, actions: c, level: l = 1, size: u, as: d = "header", className: f, children: p }) {
+	let m = /* @__PURE__ */ i(n, { children: [a && /* @__PURE__ */ r("div", {
+		className: "page-intro__eyebrow",
+		children: a
+	}), /* @__PURE__ */ r(e, {
+		level: l,
+		size: u,
+		children: o
+	})] });
+	return /* @__PURE__ */ i(d, {
+		className: ["page-intro", f].filter(Boolean).join(" "),
 		children: [
-			o ? /* @__PURE__ */ r("div", {
+			c ? /* @__PURE__ */ i("div", {
 				className: "page-intro__row",
-				children: [f, /* @__PURE__ */ n("div", {
+				children: [/* @__PURE__ */ r("div", {
+					className: "page-intro__title-group",
+					children: m
+				}), /* @__PURE__ */ r("div", {
 					className: "page-intro__actions",
-					children: o
+					children: c
 				})]
-			}) : f,
-			a && /* @__PURE__ */ n(t, {
+			}) : m,
+			s && /* @__PURE__ */ r(t, {
 				size: "large",
-				children: a
+				children: s
 			}),
-			d
+			p
 		]
 	});
 }
 //#endregion
-export { i as PageIntro };
+export { a as PageIntro };

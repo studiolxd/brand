@@ -32,6 +32,57 @@ export const ConMasTexto: Story = {
 };
 
 /**
+ * Encima del título: una `Tag` de estado, una categoría, un `Breadcrumb`
+ * corto. No es un subtítulo —`description` sigue debajo del título, no del
+ * eyebrow—. Con `actions`, el eyebrow se queda en la columna del título.
+ */
+export const ConEyebrow: Story = {
+  name: 'Con eyebrow',
+  render: () => (
+    <Stack gap="lg">
+      <PageIntro
+        eyebrow={<Tag variant="info">Beta</Tag>}
+        title="Automatizaciones"
+        description="Reglas que se disparan solas cuando algo cambia en la organización."
+      >
+        <Paragraph>Disponible solo para el plan Studio.</Paragraph>
+      </PageIntro>
+      <PageIntro
+        eyebrow={<Tag variant="info">Beta</Tag>}
+        title="Webhooks"
+        actions={<Button>Crear webhook</Button>}
+      />
+    </Stack>
+  ),
+};
+
+export const ContratoEyebrow: Story = {
+  name: 'Test — el eyebrow precede al título y el título sigue siendo el h1',
+  tags: ['!dev'],
+  render: () => (
+    <PageIntro
+      eyebrow={<Tag data-testid="eyebrow">Beta</Tag>}
+      title="Automatizaciones"
+      actions={<Button>Crear regla</Button>}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const heading = canvas.getByRole('heading', { level: 1 });
+    await expect(heading).toHaveTextContent('Automatizaciones');
+    const eyebrow = canvasElement.querySelector('[data-testid="eyebrow"]')!;
+    // El eyebrow precede al título en el DOM.
+    await expect(
+      Boolean(eyebrow.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING),
+    ).toBe(true);
+    // Y queda en la columna del título, no en la de las acciones.
+    await expect(eyebrow.closest('.page-intro__title-group')).toBeInTheDocument();
+    const actionsSlot = canvasElement.querySelector('.page-intro__actions');
+    await expect(actionsSlot?.contains(eyebrow)).toBe(false);
+  },
+};
+
+/**
  * La acción principal de la página, a la derecha del título. En pantalla
  * estrecha cae bajo el título, a todo el ancho.
  */
@@ -205,8 +256,9 @@ export const ContratoFila: Story = {
     await expect(row).toBeInTheDocument();
     const heading = canvas.getByRole('heading', { level: 1 });
     const actions = canvasElement.querySelector('.page-intro__actions')!;
-    // Orden en el DOM: primero el título, después las acciones.
-    await expect(row.children[0]).toBe(heading);
+    // Orden en el DOM: primero la columna del título, después las acciones.
+    await expect(row.children[0]).toHaveClass('page-intro__title-group');
+    await expect(row.children[0]).toContainElement(heading);
     await expect(row.children[1]).toBe(actions);
     await expect(actions).toContainElement(canvas.getByRole('button', { name: 'Invitar miembro' }));
     // La entradilla queda fuera de la fila, a ancho completo.

@@ -15,6 +15,19 @@ para breaking changes.
 > el `fix` suelto que viaja en la misma release: un `Link` dejaba de medir su texto al ser
 > ítem directo de un `Stack align="stretch"`.
 
+### `PageIntro` gana `eyebrow`: la ranura encima del título
+
+Prop nueva, `eyebrow?: ReactNode`: lo que va **encima** del título —una `Tag` de estado,
+una categoría, un `Breadcrumb` corto—, nunca un subtítulo ni una frase larga (para eso
+sigue estando `description`). Con `actions`, el eyebrow se queda en la **columna del
+título**, nunca en la de las acciones: el título y las acciones pasan a compartir fila
+dentro de una nueva `.page-intro__title-group` que agrupa eyebrow y título, y las reglas
+de la fila (ancho flexible, línea base, aire bajo el bloque) se mueven de `.heading` a
+ese grupo. El hueco entre eyebrow y título es `--page-intro-row-gap`, el mismo que ya
+separaba el título de las acciones apiladas — ningún token nuevo. Sin `eyebrow`, el
+marcado es exactamente el de siempre. Story «Con eyebrow» y su test de contrato en
+`Molecules/PageIntro`.
+
 ### Redacción: subtítulo y estado vacío terminan en punto
 
 Página nueva, `Foundations/Redacción`: todo subtítulo (`Hero.description`,

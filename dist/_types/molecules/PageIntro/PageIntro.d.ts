@@ -2,6 +2,14 @@ import type { ReactNode } from 'react';
 import { type HeadingProps } from '../../atoms/Heading/Heading';
 import './PageIntro.css';
 export interface PageIntroProps {
+    /**
+     * Encima del título: una `Tag` de estado, una categoría, un `Breadcrumb`
+     * corto. No es un subtítulo ni acepta una frase larga —para eso está
+     * `description`—, es una pieza pequeña que sitúa la página antes de
+     * nombrarla. Con `actions`, queda en la columna del título, nunca en la
+     * de las acciones.
+     */
+    eyebrow?: ReactNode;
     /** El título de la página: un `Heading` de nivel 1 (o el que diga `level`). */
     title: ReactNode;
     /**
@@ -42,4 +50,4 @@ export interface PageIntroProps {
  * Con `actions` sirve además de cabecera de una sección dentro de la página
  * (`level={2}`): el título a la izquierda y la acción principal a la derecha.
  */
-export declare function PageIntro({ title, description, actions, level, size, as: Tag, className, children, }: PageIntroProps): import("react/jsx-runtime").JSX.Element;
+export declare function PageIntro({ eyebrow, title, description, actions, level, size, as: Tag, className, children, }: PageIntroProps): import("react/jsx-runtime").JSX.Element;

@@ -27,6 +27,23 @@ La razón es de dibujo, no de gramática: la entradilla se pinta como cuerpo (`P
 
 Vale para las dos caras de la pieza, la cabecera de página y la de sección. Lo que va en `children` es cuerpo normal y sigue las reglas del cuerpo.
 
+## El eyebrow: encima del título
+
+`eyebrow` va **encima** del título: una `Tag` de estado, una categoría, un `Breadcrumb`
+corto. No es un subtítulo ni acepta una frase larga —para eso está `description`, que
+sigue debajo del título, no del eyebrow—: es una pieza pequeña que sitúa la página antes
+de nombrarla.
+
+<Canvas of={PageIntroStories.ConEyebrow} />
+
+Con `actions`, el eyebrow se queda en la **columna del título**, nunca en la de las
+acciones: la fila reparte título y acciones, y el eyebrow vive dentro de la columna del
+título, encima de él. El hueco entre los dos es el mismo que ya separa el título de las
+acciones cuando caen debajo (`--page-intro-row-gap`) — no hay un token nuevo para esto.
+
+Sin `eyebrow`, ni un píxel cambia: es una ranura vacía por defecto, no una fila que se
+reserva.
+
 ## La acción principal de la página
 
 `actions` pone la acción que abre la página —«Invitar miembro», «Crear webhook», «Nueva organización»— **a la derecha del título, en su misma fila**. Es el sitio estable: se lee con el nombre de la página, no se mezcla con los filtros y no se pierde al hacer scroll por la tabla.
@@ -103,7 +120,7 @@ Una página de listado tiene acciones de tres alcances distintos, y cada una tie
 | --- | --- |
 | `--page-intro-title-space-after` | Aire bajo el título cuando comparte fila con las acciones: el mismo em que deja un título suelto, para que una cabecera con acciones y una sin ellas separen igual el título de la entradilla |
 | `--page-intro-row-column-gap` | Aire entre el título y las acciones cuando comparten fila (a partir de `md`) |
-| `--page-intro-row-gap` | Aire entre el título y las acciones cuando caen debajo (por debajo de `md`) |
+| `--page-intro-row-gap` | Aire entre el título y las acciones cuando caen debajo (por debajo de `md`); el mismo que separa el `eyebrow` del título |
 | `--page-intro-actions-gap` | Aire entre las acciones entre sí |
 
 ## Props
