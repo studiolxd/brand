@@ -389,6 +389,154 @@ export const ConSubpartes: Story = {
 };
 
 /**
+ * **El pie es una ranura de acciones del sistema**: por debajo de `md` apila y
+ * cada acción ocupa la línea entera, sin pedirle nada al que la usa. Es la
+ * norma de Fundamentos › Puntos de ruptura, la misma que cumplen el pie de un
+ * `Form` o las acciones de un `Alert`.
+ */
+export const PieEnMovil: Story = {
+  name: 'El pie en móvil',
+  globals: { viewport: { value: 'mobile1' } },
+  render: () => (
+    <Card>
+      <CardHeader>
+        <CardTitle>Clave de API</CardTitle>
+        <CardDescription>Solo lectura</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Paragraph>Creada el 12 de marzo.</Paragraph>
+      </CardContent>
+      <CardFooter>
+        <Button size="sm">Copiar</Button>
+        <Button variant="outline" size="sm" destructive>Revocar</Button>
+      </CardFooter>
+    </Card>
+  ),
+};
+
+/**
+ * `direction="column"` apila **siempre, también donde hay sitio**: para un pie
+ * con una línea de texto sobre el botón que debe quedar pegada a él, y para una
+ * tarjeta que se sabe estrecha en escritorio —una rejilla de tres columnas—,
+ * porque el pie mide su hueco y no la ventana.
+ */
+export const PieApiladoSiempre: Story = {
+  name: 'Pie apilado siempre (direction="column")',
+  render: () => (
+    <Card>
+      <CardHeader>
+        <CardTitle>Plan Team</CardTitle>
+        <CardDescription>15 €/asiento/mes</CardDescription>
+      </CardHeader>
+      <CardFooter direction="column">
+        <Paragraph size="small">Catorce días de prueba, sin tarjeta.</Paragraph>
+        <Button>Empezar la prueba</Button>
+      </CardFooter>
+    </Card>
+  ),
+};
+
+/**
+ * Test: la norma, medida. En móvil el pie apila y cada acción ocupa la ranura
+ * entera; en escritorio vuelve a ser una fila.
+ */
+export const ContratoPieEnMovil: Story = {
+  name: 'Test — en móvil el pie da la línea entera a cada acción',
+  tags: ['!dev'],
+  globals: { viewport: { value: 'mobile1' } },
+  render: () => (
+    <Card>
+      <CardHeader>
+        <CardTitle>Clave de API</CardTitle>
+      </CardHeader>
+      <CardFooter>
+        <Button size="sm">Copiar</Button>
+        <Button variant="outline" size="sm" destructive>Revocar</Button>
+      </CardFooter>
+    </Card>
+  ),
+  play: async ({ canvasElement }) => {
+    const pie = canvasElement.querySelector('.card__footer') as HTMLElement;
+    const botones = Array.from(pie.querySelectorAll<HTMLElement>('.button'));
+
+    await expect(botones).toHaveLength(2);
+    for (const boton of botones) {
+      await expect(boton.getBoundingClientRect().width).toBeCloseTo(
+        pie.getBoundingClientRect().width,
+        0,
+      );
+    }
+    // Uno debajo de otro.
+    await expect(botones[1].getBoundingClientRect().top).toBeGreaterThanOrEqual(
+      botones[0].getBoundingClientRect().bottom,
+    );
+  },
+};
+
+/**
+ * Test: en escritorio el pie sigue siendo una fila con los botones a su ancho
+ * natural —salvo `direction="column"`, que apila igualmente—.
+ */
+export const ContratoPieEnEscritorio: Story = {
+  name: 'Test — en escritorio el pie es una fila, salvo column',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <div data-testid="fila">
+        <Card>
+          <CardFooter>
+            <Button size="sm">Copiar</Button>
+            <Button variant="outline" size="sm" destructive>Revocar</Button>
+          </CardFooter>
+        </Card>
+      </div>
+      <div data-testid="columna">
+        <Card>
+          <CardFooter direction="column">
+            <Button size="sm">Copiar</Button>
+            <Button variant="outline" size="sm" destructive>Revocar</Button>
+          </CardFooter>
+        </Card>
+      </div>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const botonesDe = (testId: string) =>
+      Array.from(
+        canvasElement.querySelectorAll<HTMLElement>(
+          `[data-testid="${testId}"] .card__footer .button`,
+        ),
+      );
+
+    // Fila: comparten renglón y ninguno ocupa la ranura entera.
+    const [copiar, revocar] = botonesDe('fila');
+    const pieFila = canvasElement.querySelector(
+      '[data-testid="fila"] .card__footer',
+    ) as HTMLElement;
+    await expect(copiar.getBoundingClientRect().top).toBeCloseTo(
+      revocar.getBoundingClientRect().top,
+      0,
+    );
+    await expect(copiar.getBoundingClientRect().width).toBeLessThan(
+      pieFila.getBoundingClientRect().width,
+    );
+
+    // Columna: uno debajo de otro y a todo el ancho, también aquí.
+    const [arriba, abajo] = botonesDe('columna');
+    const pieColumna = canvasElement.querySelector(
+      '[data-testid="columna"] .card__footer',
+    ) as HTMLElement;
+    await expect(abajo.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+      arriba.getBoundingClientRect().bottom,
+    );
+    await expect(arriba.getBoundingClientRect().width).toBeCloseTo(
+      pieColumna.getBoundingClientRect().width,
+      0,
+    );
+  },
+};
+
+/**
  * El nivel del título es independiente de su tamaño: el nivel dice de qué
  * encabezado cuelga la tarjeta, el tamaño cómo se ve.
  */

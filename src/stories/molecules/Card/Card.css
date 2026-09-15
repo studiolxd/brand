@@ -50,7 +50,11 @@
   cursor: pointer;
 }
 
-/* `direction="column"`: las piezas del pie apiladas y a todo el ancho. */
+/* `direction="column"`: apilado SIEMPRE, también donde hay sitio. Ya no es lo
+   que resuelve el móvil —eso lo hace la norma, más abajo— sino la excepción
+   declarada: un pie con una línea de texto sobre el botón (una nota de prueba,
+   una condición) que tiene que quedar pegada a él aunque la tarjeta sea ancha.
+   Por eso la regla de escritorio lo deja fuera con `:not()`. */
 .card__footer.card__footer--column {
   flex-direction: column;
   align-items: stretch;
@@ -205,11 +209,43 @@
 
 /* El pie se ancla abajo: cuando la tarjeta se estira más que su contenido
    (una rejilla con `align="stretch"`), los botones de tarjetas hermanas
-   quedan a la misma altura aunque el texto de cada una mida distinto. */
+   quedan a la misma altura aunque el texto de cada una mida distinto.
+
+   Y es una ranura de acciones del sistema, así que cumple la norma sin que
+   nadie se lo pida (Fundamentos › Puntos de ruptura): por debajo de `md`
+   apila y cada pieza ocupa la línea entera. Antes había que acordarse de
+   pedirlo con `direction="column"`, que es la prop de escape que la norma vino
+   a quitar, solo que en el contenedor en vez de en el botón.
+
+   El umbral es de VENTANA y no de contenedor, a diferencia del pie de un
+   diálogo. No es por gusto: la consulta de contenedor obliga a poner
+   `container-type: inline-size` en la tarjeta, y eso le quita el ancho que
+   saca de su contenido —medido: una tarjeta-opción dentro de un `Inline` pasa
+   de medir lo que mide su texto a 34px, el de su propio aire—. Una tarjeta se
+   usa de las dos maneras (la estira su hueco, o la mide su contenido), así que
+   no puede ser contenedor. Para el pie estrecho en pantalla ancha —una tarjeta
+   en una rejilla de tres columnas— queda `direction="column"`, que ahora
+   significa justo eso y solo eso. */
 .card__footer {
   display: flex;
+  flex-direction: column;
+  align-items: stretch;
   gap: var(--card-footer-gap);
   margin-block-start: auto;
+}
+
+.card__footer > * {
+  inline-size: 100%;
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .card__footer:not(.card__footer--column) {
+    flex-direction: row;
+  }
+
+  .card__footer:not(.card__footer--column) > * {
+    inline-size: auto;
+  }
 }
 
 /* --------------------------------------------------------------------------
