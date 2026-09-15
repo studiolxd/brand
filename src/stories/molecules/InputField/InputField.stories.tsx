@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { InputField } from './InputField';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof InputField> = {
   title: 'Molecules/InputField',
@@ -189,5 +191,39 @@ export const ContratoFocoDelAspa: Story = {
     await expect(parseFloat(enFoco.outlineWidth)).toBeGreaterThan(0);
     const fondo = getComputedStyle(control).backgroundColor;
     await expect(enFoco.outlineColor).not.toBe(fondo);
+  },
+};
+
+/**
+ * El único texto que el campo emite por su cuenta —el nombre accesible del
+ * aspa— sale del `BrandMessagesProvider` que la aplicación monta en su raíz.
+ * Esta story tapa el del catálogo con uno en inglés: no se le pasa ni una prop
+ * de texto de cromo y el aspa cambia de idioma. El **rótulo** del campo no:
+ * ese es el contenido de esta pantalla y lo sigue escribiendo quien la monta.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <div style={{ inlineSize: '20rem' }}>
+        <InputField id="q-en" label="Search projects" kind="search" clearable defaultValue="Ada" />
+      </div>
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: sin prop, el aspa toma su nombre del proveedor más cercano. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el aspa lee del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <InputField id="q-prov" label="Search" kind="search" clearable defaultValue="Ada" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('button', { name: 'Clear' })).toBeInTheDocument();
+    await expect(canvas.queryByRole('button', { name: 'Borrar' })).toBeNull();
   },
 };

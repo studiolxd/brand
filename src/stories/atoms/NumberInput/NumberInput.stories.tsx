@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { useState } from 'react';
 import { NumberInput } from './NumberInput';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta = {
   title: 'Atoms/NumberInput',
@@ -121,5 +123,35 @@ export const ContratoTalla: Story = {
     await expect(alto('[data-t="sm"] .number-input')).toBe(32);
     await expect(alto('[data-t="md"] .number-input')).toBe(40);
     await expect(alto('[data-t="lg"] .number-input')).toBe(48);
+  },
+};
+
+/**
+ * Los nombres accesibles de los dos botones son cromo del sistema y **no
+ * tienen valor por defecto**: salen del `BrandMessagesProvider`. Esta story lo
+ * tapa con uno en inglés.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <NumberInput defaultValue={3} aria-label="Seats" />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: sin props, los dos botones leen del proveedor. */
+export const ContratoProveedor: Story = {
+  name: 'Test — los botones leen del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <NumberInput defaultValue={3} aria-label="Seats" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('button', { name: 'Increase' })).toBeInTheDocument();
+    await expect(canvas.queryByRole('button', { name: 'Incrementar' })).toBeNull();
   },
 };

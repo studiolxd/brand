@@ -33,7 +33,7 @@ La barra de filtros de un listado: **el buscador en su línea** y, debajo, los f
 
 Cuando un listado se filtra por **más de una cosa**: un buscador y dos, tres o cuatro campos. Con un solo filtro junto al buscador no hace falta — cabe en el `toolbar` de la tabla.
 
-Existe porque montar esa barra a mano en un `Inline` se rompe en pantalla estrecha: los campos no encogen por debajo de su contenido y la fila se sale. Aquí la rejilla es `auto-fill` sobre un ancho mínimo por token (`column-min-inline-size`), así que **el número de columnas lo decide el sitio disponible y solo él** y en móvil queda una sola, a ancho completo.
+Existe porque montar esa barra a mano en un `Inline` se rompe en pantalla estrecha: los campos no encogen por debajo de su contenido y la fila se sale. Aquí, de `md` para arriba, la rejilla es `auto-fill` sobre un ancho mínimo por token (`column-min-inline-size`), así que **el número de columnas lo decide el sitio disponible y solo él**; por debajo de `md` es una sola columna a ancho completo, sin excepción.
 
 ## Anatomía
 
@@ -75,7 +75,9 @@ Si **ningún** filtro lleva rótulo no hay línea de rótulos que respetar y no 
 
 ## En móvil
 
-Los filtros se apilan a ancho completo y las acciones caen al final, ocupando también la línea entera —la norma del sistema, en [Fundamentos › Puntos de ruptura](?path=/docs/foundations-puntos-de-ruptura--docs)—. La rejilla no necesita punto de ruptura para apilar: lo hace `minmax(min(<mínimo>, 100%), 1fr)`, que deja la columna encoger cuando la pantalla es más estrecha que el mínimo.
+Los filtros se apilan a ancho completo y las acciones caen al final, ocupando también la línea entera —la norma del sistema, en [Fundamentos › Puntos de ruptura](?path=/docs/foundations-puntos-de-ruptura--docs)—.
+
+**Las columnas empiezan en `md`, no antes.** Antes se dejaba apilar a la aritmética de la rejilla —`minmax(min(<mínimo>, 100%), 1fr)`, que deja la columna encoger cuando la caja es más estrecha que el mínimo—, y eso apilaba de verdad solo por debajo de unos 400px: medido, un contenedor de 430px ya daba **dos** columnas de 207px y uno de 700px, **tres**. Entre ese punto y `md` la barra contradecía su propia norma y la de sus acciones, que sí conmutan en `md`: un selector en un móvil apaisado o en una tableta en vertical se quedaba a media línea. El `min(…, 100%)` se conserva para el caso contrario —una barra dentro de una caja estrecha en una pantalla ancha, un panel lateral—, donde la rejilla sí está activa.
 
 <Canvas of={FilterBarStories.Movil} />
 
@@ -103,6 +105,22 @@ La barra no pinta ni un color: lo que se ve es de los campos, que ya traen su pa
 - La barra es un punto de referencia `search` con nombre accesible (`ariaLabel`, default «Filtros»): el lector de pantalla la anuncia como el bloque de búsqueda del listado, y se salta a ella sin recorrer la tabla.
 - Las etiquetas de los filtros van **visibles**. Ocultarlas (`labelHidden`) deja el nombre accesible pero quita el rótulo a quien mira, que es justo a quien le hace falta con tres filtros seguidos.
 - El orden del DOM es el de lectura: buscador, filtros, acciones.
+
+## Internacionalización
+
+El nombre accesible de la barra —el del punto de referencia `search`— es el único texto que emite
+por su cuenta, y **no tiene valor por defecto**: sale del `BrandMessagesProvider`.
+
+<Canvas of={FilterBarStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `ariaLabel` | `filterBar.label` | `aria-label` del `role="search"` de la barra |
+
+Los **rótulos de los filtros** no pasan por el catálogo: los escribe cada campo, porque dicen qué
+filtra cada uno. El orden es **prop → proveedor → error**.
+
+La convención completa está en **Foundations › Internacionalización**.
 
 ## Props
 

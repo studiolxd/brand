@@ -40,13 +40,47 @@ La **lupa va siempre a la vista** al inicio del campo, esté vacío o escrito: e
 
 <Canvas of={InputFieldStories.Busqueda} />
 
-`clearable` añade al final un botón con el aspa **del sistema** (`Icon name="close"`, el mismo trazo del resto del set), que aparece solo cuando hay algo que borrar: vacía el campo y devuelve el foco al control, para seguir escribiendo sin volver a apuntar. Su nombre accesible es `clearLabel` («Borrar» por defecto). El hueco de la derecha lo reserva la variante entera, no la presencia del aspa: si dependiera del aspa, el texto saltaría al escribir la primera letra.
+`clearable` añade al final un botón con el aspa **del sistema** (`Icon name="close"`, el mismo trazo del resto del set), que aparece solo cuando hay algo que borrar: vacía el campo y devuelve el foco al control, para seguir escribiendo sin volver a apuntar. Su nombre accesible **no tiene valor por defecto**: sale de `inputField.clear` del catálogo (ver § «Internacionalización»), y `clearLabel` es la anulación puntual. El hueco de la derecha lo reserva la variante entera, no la presencia del aspa: si dependiera del aspa, el texto saltaría al escribir la primera letra.
 
 <Canvas of={InputFieldStories.BusquedaConBorrado} />
 
 <Canvas of={InputFieldStories.BusquedaTallas} />
 
 La variante es el campo de búsqueda de todo el sistema: la usan `DataTable` para filtrar filas y `DocsSearch` para autocompletar. `SearchForm` es de la misma familia —comparte el `Input`, así que el alto, el borde y el anillo de foco salen de los mismos tokens `input.*`—, pero no lleva lupa: su icono es la flecha de envío al final, y un buscador que envía no ofrece borrado.
+
+## Internacionalización
+
+El aspa de borrado es el único texto que el campo emite por su cuenta, y **no tiene valor por
+defecto**: sale del `BrandMessagesProvider` que la aplicación monta una vez en su raíz.
+
+```tsx
+import { BrandMessagesProvider } from '@studiolxd/brand/messages';
+
+<BrandMessagesProvider
+  messages={{
+    inputField: { clear: t('common.filters.clearSearch') },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={InputFieldStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `clearLabel` | `inputField.clear` | `aria-label` del aspa de `clearable` |
+
+El orden es **prop → proveedor → error**, sin cuarto escalón: un campo de búsqueda con `clearable`
+montado sin proveedor y sin `clearLabel` revienta diciendo qué texto falta. El error se lanza
+**donde el texto se pinta**, así que un campo normal —o uno de búsqueda sin `clearable`— no lo exige.
+
+Lo que **no** sale del catálogo son `label`, `placeholder`, `helperText` y `errorMessage`: son el
+contenido de ESTE campo, y ningún catálogo común puede saber qué dicen. `label` sigue siendo
+obligatorio y sin default — un campo sin rótulo es un error de quien lo monta, no algo que el
+sistema tape con un texto.
+
+La convención completa está en **Foundations › Internacionalización**.
 
 ## Estados
 

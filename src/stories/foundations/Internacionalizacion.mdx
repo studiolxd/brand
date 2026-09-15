@@ -52,6 +52,12 @@ import { BrandMessagesProvider } from '@studiolxd/brand/messages';
 </BrandMessagesProvider>
 ```
 
+El catálogo va creciendo ola a ola: además de `pagination`, `table` y `dataTable`, hoy están los
+espacios de los átomos de formulario —`inputField`, `passwordField`, `select`, `multiSelect`,
+`numberInput`, `otpInput`, `inputPhone`, `asyncSelect`, `asyncMultiSelect`, `searchForm`,
+`docsSearch` y `filterBar`—. No hace falta memorizarlos: el tipo `BrandMessages` los lleva todos y
+**una app que se deje uno no compila**. La tabla de más abajo dice qué prop cae en qué clave.
+
 A partir de ahí, un componente migrado se monta **sin una sola prop de texto**:
 
 ```tsx
@@ -159,15 +165,15 @@ pista, `maskLetters`:
 | Componente | Props |
 | --- | --- |
 | `Pagination` | **Migrado al proveedor** (`pagination.*`, sin defaults). Las props `ariaLabel`, `pageLabel`, `previousLabel`, `nextLabel`, `pagesGroupLabel`, `pageSizeLabel` y `totalLabel` siguen existiendo como anulación puntual; `pageSizeOptions` sustituye la lista entera del selector |
-| `AsyncSelect`, `AsyncSelectField` | `emptyMessage`, `loadingLabel`, `clearLabel`, `placeholder` |
-| `AsyncMultiSelect`, `AsyncMultiSelectField` | `emptyMessage`, `loadingLabel`, `removeLabel`, `placeholder` |
+| `AsyncSelect`, `AsyncSelectField` | **Migrado al proveedor** (`asyncSelect.*`, sin defaults). `placeholder`, `emptyMessage`, `loadingLabel` y `clearLabel` siguen como anulación puntual; `AsyncSelectField` las reenvía |
+| `AsyncMultiSelect`, `AsyncMultiSelectField` | **Migrado al proveedor** (`asyncMultiSelect.*`, sin defaults). `placeholder`, `emptyMessage`, `loadingLabel` y `removeLabel` siguen como anulación puntual; `AsyncMultiSelectField` las reenvía |
 | `FileUpload` | `dropzoneLabel`, `dropzoneActiveLabel`, `dropzoneHintLabel`, `maxSizeHint`, `maxFilesHint`, `filesLabel`, `progressLabel`, `removeFileLabel`, `tooLargeError`, `invalidTypeError` |
 | `AvatarUpload` | `buttonLabel` (el texto visible) y `buttonAccessibleLabel` (el nombre completo), `hintLabel`, `formatsLabel`, `maxSizeHint`, `invalidTypeError`, `tooLargeError`, `dropActiveMessage`, `cropTitle`, `cropDescription`, `cropCancelLabel`, `cropConfirmLabel`, `cropCloseLabel`, `cropLoadingLabel`, `cropErrorMessage`, `dropHintLabel` — al traducir los dos textos del botón, el accesible tiene que **contener** el visible (WCAG 2.5.3) |
 | `ImageCropDialog` | `closeLabel`, `loadingLabel`, `errorMessage` — `title`, `cancelLabel` y `confirmLabel` son obligatorias y sin default: el diálogo no sabe qué se está recortando |
-| `NumberInput` | `decrementLabel`, `incrementLabel` |
-| `OtpInput`, `OtpField` | `digitLabel` — el nombre de cada celda; `groupLabel` en `OtpInput` suelto (dentro de `OtpField` lo nombra la etiqueta) |
+| `NumberInput`, `NumberInputField` | **Migrado al proveedor** (`numberInput.decrement`, `numberInput.increment`, sin defaults). Las props siguen como anulación puntual |
+| `OtpInput`, `OtpField` | **Migrado al proveedor** (`otpInput.digit`, `otpInput.group`, sin defaults). `digitLabel` nombra cada celda y `groupLabel` el grupo del control suelto (dentro de `OtpField` lo nombra la etiqueta del campo y `otpInput.group` no se lee); las dos siguen como anulación puntual |
 | `TimeSelect` | `hoursLabel`, `minutesLabel`, `hoursPlaceholder`, `minutesPlaceholder` |
-| `InputPhone` | `countryLabel`, `internationalLabel` |
+| `InputPhone`, `InputPhoneField` | **Migrado al proveedor** (`inputPhone.country`, sin default); `countryLabel` sigue como anulación puntual. `internationalLabel` **conserva su default** (`🌐`): un glifo no se traduce, y meterlo en el catálogo obligaría a repetirlo seis veces |
 | `Calendar` | `previousMonthLabel`, `nextMonthLabel`, `previousYearsLabel`, `nextYearsLabel`, `yearGridLabel`, `gridLabel` — más `locale` |
 | `CalendarPlanner` | `previousMonthLabel`, `nextMonthLabel`, `gridLabel`, `moreLabel` — más `locale` |
 | `CalendarRoster` | `previousMonthLabel`, `nextMonthLabel`, `legendLabel`, `legendItems`, `nameLabel`, `birthdayPrefix` — más `locale` |
@@ -190,10 +196,11 @@ pista, `maskLetters`:
 | `Stepper` | `label` (el nombre de la lista de progreso), `compactLabel` (recibe el paso y el total: «Paso 2 de 4») y `labels` con los estados `completed`, `current` y `pending` |
 | `OnboardingShell` | `actionsLabel` — el nombre del grupo de acciones del pie |
 | `LoginForm` | `title`, `emailLabel`, `passwordLabel`, `submitLabel`, `loadingLabel` |
-| `PasswordField` | `showPasswordLabel`, `hidePasswordLabel` |
+| `PasswordField` | **Migrado al proveedor** (`passwordField.show`, `passwordField.hide`, sin defaults). `label`, `placeholder`, `helperText` y `errorMessage` quedan fuera: son el contenido de ese campo |
 | `ContextMenu`, `DotsButton` | `label` / `aria-label` |
 | `Modal` | `fallbackTitle`, `closeLabel` |
-| `Select`, `MultiSelect` | `placeholder` |
+| `Select`, `SelectField` | **Migrado al proveedor** (`select.placeholder`, sin default). La prop `placeholder` sigue como anulación puntual y es la que se usa cuando el marcador dice algo de ESE campo. Las `options` son datos y no pasan por el catálogo |
+| `MultiSelect`, `MultiSelectField` | **Migrado al proveedor** (`multiSelect.placeholder`, `multiSelect.remove`, sin defaults). `placeholder` y `removeLabel` siguen como anulación puntual |
 | `DatePicker`, `DatePickerField`, `DateTimeField` | `calendarLabel`, `openCalendarLabel`, `invalidMessage` y `maskLetters` — las letras de la máscara del campo (`dd/mm/aaaa`); el **orden** de día, mes y año no es prop: sale de `locale` con `Intl`. `placeholder` sustituye la máscara entera. Los del calendario que abre se reexponen sueltos, con los nombres de `Calendar`: `previousMonthLabel`, `nextMonthLabel`, `previousYearsLabel`, `nextYearsLabel`, `yearGridLabel` y `gridLabel` (este último cae a `calendarLabel`). `DateTimeField` añade `hoursLabel` y `minutesLabel` para su selector de hora |
 | `Spinner`, `TypingIndicator` | `label` |
 | `NotificationButton` | `label` sin contador y `countLabel` con él — la frase se rehace con el número dentro |
@@ -206,10 +213,11 @@ pista, `maskLetters`:
 | `ConsentPreferences` | `title`, `acceptAllLabel`, `rejectAllLabel`, `closeLabel`, `alwaysOnLabel` — y `categories` para los nombres y las explicaciones de cada categoría |
 | `TableOfContents` | `ariaLabel`, `title` |
 | `PrevNextNav` | `prevLabel`, `nextLabel` — el `aria-label` de cada control; con `prevTitle`/`nextTitle` pasan a ser el rótulo visible |
-| `InputField` | `clearLabel` — el aspa de la variante `kind="search"` con `clearable` |
-| `DocsSearch` | `label`, `placeholder`, `resultsLabel`, `emptyLabel`, `loadingLabel`, `clearLabel` |
-| `SearchForm` | `label`, `placeholder`, `submitLabel` |
-| `DataTable` | **Migrado al proveedor** (`dataTable.*`, sin defaults): `searchPlaceholder` cae en `dataTable.search` y `emptyMessage` en `dataTable.empty`, y las dos props siguen como anulación puntual. `ariaLabel`/`ariaLabelledBy` (el nombre de la tabla) y `searchClearLabel` quedan fuera del proveedor — el primero porque es de esta pantalla, el segundo porque lo pone `InputField`, que aún no está migrado. `headerLabels` y `paginationLabels` ya no hacen falta para traducir: sus piezas leen del proveedor solas |
+| `InputField` | **Migrado al proveedor** (`inputField.clear`, sin default) — el aspa de la variante `kind="search"` con `clearable`; `clearLabel` sigue como anulación puntual. `label` (obligatoria), `placeholder`, `helperText` y `errorMessage` quedan **fuera** del proveedor: son el contenido de ESE campo |
+| `DocsSearch` | **Migrado al proveedor** (`docsSearch.label`, `.placeholder`, `.results`, `.empty`, `.loading`, sin defaults). `clearLabel` **no tiene clave propia**: el aspa es la del `InputField` de debajo y sale de `inputField.clear`; la prop sigue como reenvío puro |
+| `FilterBar` | **Migrado al proveedor** (`filterBar.label`, sin default) — el nombre del punto de referencia `search`. Los rótulos de los filtros no pasan por el catálogo: los escribe cada campo |
+| `SearchForm` | **Migrado al proveedor** (`searchForm.label`, `.placeholder`, `.submit`, sin defaults). Las tres props siguen como anulación puntual |
+| `DataTable` | **Migrado al proveedor** (`dataTable.*`, sin defaults): `searchPlaceholder` cae en `dataTable.search` y `emptyMessage` en `dataTable.empty`, y las dos props siguen como anulación puntual. `ariaLabel`/`ariaLabelledBy` (el nombre de la tabla) quedan fuera del proveedor: son de esta pantalla. `searchClearLabel` es un **reenvío puro** al `InputField`, que desde la ola de formularios lee `inputField.clear` por su cuenta: ya no hace falta pasarlo para traducir. `headerLabels` y `paginationLabels` ya no hacen falta para traducir: sus piezas leen del proveedor solas |
 | `StatTile` | `delta.label` para leer la dirección de la tendencia |
 | `CopyButton` | `label`, `copiedLabel`, `errorLabel` |
 | `ConfirmDialog` | `confirmLabel`, `cancelLabel`, `pendingLabel`, `closeLabel` — más `secondaryActionLabel`, el rótulo de la acción intermedia, que es texto del producto y no tiene default, y `confirmPhraseLabel` / `confirmPhraseMismatch`, **obligatorios y sin default en cuanto se pasa `confirmPhrase`** |

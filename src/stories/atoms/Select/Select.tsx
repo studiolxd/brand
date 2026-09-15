@@ -15,7 +15,21 @@ import type { ReactNode } from 'react';
 import { Select as BaseSelect } from '@base-ui/react/select';
 import type { SeparatorProps as BaseSeparatorProps } from '@base-ui/react/separator';
 import { Icon } from '../Icon/Icon';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './Select.css';
+
+/**
+ * El único texto que el desplegable emite por su cuenta: el marcador de sitio
+ * genérico del disparador, el que dice «aquí no has elegido nada todavía».
+ *
+ * Es cromo, no contenido: cuando el marcador dice algo de ESTE campo («Elige
+ * un país») lo escribe quien monta el campo y viaja por la prop `placeholder`,
+ * que sigue ganando. Las **opciones** tampoco están aquí: son datos.
+ */
+export interface SelectMessages {
+  /** Marcador de sitio del disparador sin valor elegido. */
+  placeholder: string;
+}
 
 export interface SelectOption {
   value: string;
@@ -58,7 +72,12 @@ export interface SelectProps {
   options: SelectOptionOrGroup[];
   value?: string;
   defaultValue?: string;
-  /** Placeholder del trigger. Default: "Seleccionar…" (en la API compuesta lo pone cada consumidor vía `Select.Value`). */
+  /**
+   * Placeholder del trigger. **Sin default**: sale de `select.placeholder` del
+   * `BrandMessagesProvider`, y esta prop es la anulación puntual cuando el
+   * marcador dice algo de este campo concreto. En la API compuesta lo pone cada
+   * consumidor vía `Select.Value`.
+   */
   placeholder?: string;
   disabled?: boolean;
   readOnly?: boolean;
@@ -291,11 +310,21 @@ function renderOption({ value, label, 'aria-label': optionAriaLabel }: SelectOpt
   );
 }
 
+/**
+ * El marcador de sitio, leído **solo cuando se pinta**. `SelectValue` monta
+ * este nodo únicamente si no hay valor elegido, así que un desplegable con
+ * valor no exige el texto — la misma regla que en el resto de la campaña.
+ */
+function SelectPlaceholder({ override }: { override?: string }) {
+  const t = useBrandMessages('select');
+  return <>{t('placeholder', override)}</>;
+}
+
 const SelectClosed = forwardRef<HTMLButtonElement, SelectProps>(function SelectClosed({
   options,
   value,
   defaultValue,
-  placeholder = 'Seleccionar…',
+  placeholder,
   disabled,
   readOnly,
   size = 'md',
@@ -320,7 +349,7 @@ const SelectClosed = forwardRef<HTMLButtonElement, SelectProps>(function SelectC
       onValueChange={onValueChange}
     >
       <SelectTrigger ref={ref} size={size} id={id} onBlur={onBlur} aria-label={ariaLabel} aria-describedby={ariaDescribedBy} aria-invalid={ariaInvalid || undefined}>
-        <SelectValue placeholder={placeholder} />
+        <SelectValue placeholder={<SelectPlaceholder override={placeholder} />} />
       </SelectTrigger>
       <SelectContent size={size} container={container}>
         {options.map((entry, index) =>

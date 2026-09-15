@@ -23,6 +23,11 @@ export interface MultiSelectFieldProps {
   options: MultiSelectOption[];
   value?: string[];
   defaultValue?: string[];
+  /**
+   * Marcador de sitio del control sin valor elegido. Reenvío puro al `MultiSelect`:
+   * sin él, el texto sale de `multiSelect.placeholder` del `BrandMessagesProvider`.
+   * Se pasa solo cuando el marcador dice algo de ESTE campo.
+   */
   placeholder?: string;
   /** Nombre del campo en el formulario: se monta un input oculto por valor elegido. */
   name?: string;
@@ -37,7 +42,10 @@ export interface MultiSelectFieldProps {
   size?: 'sm' | 'md' | 'lg';
   /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
   className?: string;
-  /** aria-label del botón que quita un valor. Default: `Quitar ${etiqueta}` (castellano). */
+  /**
+   * aria-label del botón que quita un valor. Reenvío puro al `MultiSelect`:
+   * sin él, el texto sale de `multiSelect.remove` del `BrandMessagesProvider`.
+   */
   removeLabel?: (label: string) => string;
   onValueChange?: (value: string[]) => void;
   onBlur?: React.FocusEventHandler<HTMLDivElement>;

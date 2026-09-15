@@ -1,5 +1,19 @@
+import type { ReactElement } from 'react';
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render as renderRaw, screen , type RenderOptions } from '@testing-library/react';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixture } from '../../../../.storybook/brandMessagesFixture';
+
+/**
+ * Montar el buscador es ser «la aplicación»: desde la campaña del proveedor,
+ * su cromo sale del catálogo y no de un default castellano del paquete.
+ */
+function render(ui: ReactElement, options?: RenderOptions) {
+  return renderRaw(
+    <BrandMessagesProvider messages={brandMessagesFixture}>{ui}</BrandMessagesProvider>,
+    options,
+  );
+}
 import userEvent from '@testing-library/user-event';
 import { DocsSearch, type DocsSearchResult } from './DocsSearch';
 

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { AsyncMultiSelect } from './AsyncMultiSelect';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 import type { AsyncMultiSelectOption } from './AsyncMultiSelect';
 
 const EMPLOYEES: AsyncMultiSelectOption[] = [
@@ -221,4 +223,24 @@ export const ContratoTalla: Story = {
     await expect(alto('[data-t="md"] .async-multi-select')).toBe(40);
     await expect(alto('[data-t="lg"] .async-multi-select')).toBe(48);
   },
+};
+
+/**
+ * La pista del campo, el aviso de vacío, el del spinner y el nombre del aspa de
+ * cada ficha son cromo del sistema y **no tienen valor por defecto**: salen del
+ * `BrandMessagesProvider`. Esta story lo tapa con uno en inglés — la etiqueta de
+ * la ficha sigue siendo un dato de la pantalla.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <AsyncMultiSelect
+        onSearch={mockSearch}
+        aria-label="Owners"
+        defaultValue={['1']}
+        selectedOptions={[EMPLOYEES[0]]}
+      />
+    </BrandMessagesProvider>
+  ),
 };

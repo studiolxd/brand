@@ -2,37 +2,27 @@ import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { BrandMessagesProvider } from './BrandMessagesProvider';
 import type { BrandMessages } from './BrandMessages';
+import { brandMessagesFixtureEn as EN } from '../../../.storybook/brandMessagesFixtureEn';
 import { Pagination } from '../molecules/Pagination/Pagination';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../molecules/Table/Table';
 import { DataTable } from '../organisms/DataTable/DataTable';
+import { InputField } from '../molecules/InputField/InputField';
+import { PasswordField } from '../molecules/PasswordField/PasswordField';
+import { SelectField } from '../molecules/SelectField/SelectField';
+import { MultiSelectField } from '../molecules/MultiSelectField/MultiSelectField';
+import { NumberInput } from '../atoms/NumberInput/NumberInput';
+import { OtpInput } from '../atoms/OtpInput/OtpInput';
+import { InputPhone } from '../atoms/InputPhone/InputPhone';
+import { AsyncSelect } from '../atoms/AsyncSelect/AsyncSelect';
+import { AsyncMultiSelect } from '../atoms/AsyncMultiSelect/AsyncMultiSelect';
+import { SearchForm } from '../molecules/SearchForm/SearchForm';
+import { DocsSearch } from '../molecules/DocsSearch/DocsSearch';
+import { FilterBar } from '../molecules/FilterBar/FilterBar';
 
 /**
  * El orden de resolución de un texto: **prop → proveedor → error**. Sin cuarto
  * escalón — ningún componente trae el castellano puesto.
  */
-
-const EN: BrandMessages = {
-  pagination: {
-    label: 'Pagination',
-    pagesGroup: 'Pages',
-    previous: 'Previous page',
-    next: 'Next page',
-    goToPage: (page) => `Page ${page}`,
-    perPage: 'Rows per page',
-    total: (total) => `${total} results`,
-    allOption: 'All',
-  },
-  table: {
-    actions: 'Actions',
-    sortable: 'Activate sorting',
-    sortedAscending: 'Sorted ascending',
-    sortedDescending: 'Sorted descending',
-  },
-  dataTable: {
-    empty: 'No results.',
-    search: 'Search…',
-  },
-};
 
 afterEach(() => {
   vi.restoreAllMocks();
@@ -231,5 +221,258 @@ describe('DataTable lee del proveedor', () => {
         </BrandMessagesProvider>,
       ),
     ).not.toThrow();
+  });
+});
+
+describe('los átomos de formulario leen del proveedor', () => {
+  it('el aspa de un buscador toma su nombre del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <InputField id="q" label="Query" kind="search" clearable defaultValue="algo" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Clear' })).toBeInTheDocument();
+  });
+
+  it('un campo sin aspa no exige el texto del aspa', () => {
+    const sinLosSuyos = { ...EN, inputField: {} } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinLosSuyos}>
+          <InputField id="q" label="Query" />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  it('sin proveedor y sin prop, el aspa revienta diciendo qué texto falta', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() =>
+      render(<InputField id="q" label="Query" kind="search" clearable defaultValue="algo" />),
+    ).toThrow(/inputField\.clear/);
+  });
+
+  it('el `label` del campo NO sale del catálogo: es el contenido de esta pantalla', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <InputField id="q" label="Nombre del proyecto" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByLabelText('Nombre del proyecto')).toBeInTheDocument();
+  });
+
+  it('las dos caras del interruptor de contraseña salen del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <PasswordField label="Password" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Show password' })).toBeInTheDocument();
+  });
+
+  it('la prop suelta gana al proveedor también aquí', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <PasswordField label="Mot de passe" showPasswordLabel="Afficher le mot de passe" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Afficher le mot de passe' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Show password' })).toBeNull();
+  });
+
+  it('sin proveedor y sin props, el interruptor revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<PasswordField label="Password" />)).toThrow(/passwordField\.show/);
+  });
+});
+
+describe('los desplegables leen del proveedor', () => {
+  const OPCIONES = [{ value: 'a', label: 'Uno' }];
+
+  it('el marcador de sitio genérico sale del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <SelectField id="s" label="Role" options={OPCIONES} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByText('Select…')).toBeInTheDocument();
+  });
+
+  it('un marcador que dice algo de ESTE campo se pasa por prop y gana', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <SelectField id="s" label="Role" options={OPCIONES} placeholder="Elige un papel" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByText('Elige un papel')).toBeInTheDocument();
+    expect(screen.queryByText('Select…')).toBeNull();
+  });
+
+  it('un desplegable con valor elegido no exige el marcador de sitio', () => {
+    const sinLosSuyos = { ...EN, select: {} } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinLosSuyos}>
+          <SelectField id="s" label="Role" options={OPCIONES} defaultValue="a" />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  it('sin proveedor y sin prop, revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<SelectField id="s" label="Role" options={OPCIONES} />)).toThrow(
+      /select\.placeholder/,
+    );
+  });
+
+  it('el aspa de una ficha toma su nombre del catálogo, con la etiqueta interpolada', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <MultiSelectField id="m" label="Roles" options={OPCIONES} defaultValue={['a']} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Remove Uno' })).toBeInTheDocument();
+  });
+
+  it('las etiquetas de las OPCIONES no salen del catálogo: son datos', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <MultiSelectField id="m" label="Roles" options={OPCIONES} defaultValue={['a']} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByText('Uno')).toBeInTheDocument();
+  });
+});
+
+describe('los controles con cromo propio leen del proveedor', () => {
+  it('los dos botones del contador toman su nombre del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <NumberInput aria-label="Seats" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Increase' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Decrease' })).toBeInTheDocument();
+  });
+
+  it('el grupo y las celdas del código salen del catálogo, con la posición interpolada', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <OtpInput length={4} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('group', { name: 'Verification code' })).toBeInTheDocument();
+    expect(screen.getByLabelText('Digit 1 of 4')).toBeInTheDocument();
+  });
+
+  it('el selector de país toma su nombre del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <InputPhone aria-label="Phone" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('combobox', { name: 'Country' })).toBeInTheDocument();
+  });
+
+  it('sin proveedor y sin prop, el contador revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<NumberInput aria-label="Seats" />)).toThrow(/numberInput\./);
+  });
+});
+
+describe('los buscadores asíncronos leen del proveedor', () => {
+  const buscar = async () => [];
+
+  it('la pista del campo sale del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <AsyncSelect onSearch={buscar} aria-label="Owner" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByPlaceholderText('Search…')).toBeInTheDocument();
+  });
+
+  it('el aspa de cada ficha interpola la etiqueta de su opción', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <AsyncMultiSelect
+          onSearch={buscar}
+          aria-label="Owners"
+          defaultValue={['1']}
+          selectedOptions={[{ value: '1', label: 'Ada Lovelace' }]}
+        />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Remove Ada Lovelace' })).toBeInTheDocument();
+  });
+
+  it('sin proveedor y sin prop, revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<AsyncSelect onSearch={buscar} aria-label="Owner" />)).toThrow(
+      /asyncSelect\.placeholder/,
+    );
+  });
+});
+
+describe('los buscadores y la barra de filtros leen del proveedor', () => {
+  it('el buscador de sitio toma su rótulo, su pista y su botón del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <SearchForm />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('search', { name: 'Search' })).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Search…')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Search' })).toBeInTheDocument();
+  });
+
+  it('el buscador de documentación toma los suyos, y el aspa sigue siendo la del InputField', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <DocsSearch query="zzz" onQueryChange={() => {}} results={[]} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('combobox', { name: 'Search the documentation' })).toBeInTheDocument();
+    expect(screen.getByText('No results.')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Clear' })).toBeInTheDocument();
+  });
+
+  it('la barra de filtros toma su nombre del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <FilterBar search={<span />} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('search', { name: 'Filters' })).toBeInTheDocument();
+  });
+
+  it('sin proveedor y sin prop, la barra revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<FilterBar search={<span />} />)).toThrow(/filterBar\.label/);
   });
 });

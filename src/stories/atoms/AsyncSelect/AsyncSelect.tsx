@@ -4,11 +4,28 @@ import { forwardRef, useState, useRef, useId, useEffect, useCallback, type Ref }
 import { Popover as BasePopover } from '@base-ui/react/popover';
 import { Icon } from '../Icon/Icon';
 import { Spinner } from '../Spinner/Spinner';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './AsyncSelect.css';
 
 export interface AsyncSelectOption {
   value: string;
   label: string;
+}
+
+/**
+ * Los textos que el control emite por su cuenta. Todos son cromo: dicen lo
+ * mismo en toda la suite y no hablan de lo que se busca. Lo que sí es de esta
+ * pantalla —las opciones que devuelve `onSearch`— no pasa por aquí.
+ */
+export interface AsyncSelectMessages {
+  /** Pista dentro del campo de búsqueda. */
+  placeholder: string;
+  /** Aviso cuando la búsqueda no devuelve opciones. */
+  empty: string;
+  /** Nombre accesible del spinner mientras se busca. */
+  loading: string;
+  /** Nombre accesible del botón que vacía la selección. */
+  clear: string;
 }
 
 export interface AsyncSelectProps {
@@ -17,6 +34,10 @@ export interface AsyncSelectProps {
   onValueChange?: (value: string | null, option: AsyncSelectOption | null) => void;
   /** Label of the currently selected option — required when `value` is set so the component can display it */
   selectedOption?: AsyncSelectOption | null;
+  /**
+   * Pista dentro del campo de búsqueda. **Sin default**: sale de la clave
+   * `placeholder` del espacio de este control.
+   */
   placeholder?: string;
   disabled?: boolean;
   readOnly?: boolean;
@@ -50,18 +71,19 @@ export interface AsyncSelectProps {
   'aria-label'?: string;
   'aria-describedby'?: string;
   /**
-   * Texto mostrado cuando la búsqueda no devuelve opciones. Default: "Sin resultados"
-   * (castellano). Es texto **visible**: una app multiidioma debe pasarlo traducido.
+   * Texto mostrado cuando la búsqueda no devuelve opciones. **Sin default**:
+   * sale de la clave `empty` del espacio de este control en el
+   * `BrandMessagesProvider`.
    */
   emptyMessage?: string;
   /**
-   * Etiqueta accesible del spinner mientras se busca. Default: "Buscando…" (castellano).
-   * Una app multiidioma debe pasarla traducida.
+   * Etiqueta accesible del spinner mientras se busca. **Sin default**: sale de
+   * la clave `loading` del espacio de este control.
    */
   loadingLabel?: string;
   /**
-   * aria-label del botón de limpiar selección. Default: "Limpiar selección" (castellano).
-   * Una app multiidioma debe pasarla traducida.
+   * aria-label del botón de limpiar selección. **Sin default**: sale de
+   * `asyncSelect.clear`.
    */
   clearLabel?: string;
   /**
@@ -89,7 +111,7 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
   value,
   onValueChange,
   selectedOption,
-  placeholder = 'Buscar…',
+  placeholder,
   disabled,
   readOnly,
   size = 'md',
@@ -102,11 +124,12 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
   className,
   'aria-label': ariaLabel,
   'aria-describedby': ariaDescribedby,
-  emptyMessage = 'Sin resultados',
-  loadingLabel = 'Buscando…',
-  clearLabel = 'Limpiar selección',
+  emptyMessage,
+  loadingLabel,
+  clearLabel,
   container,
 }: AsyncSelectProps, ref) {
+  const t = useBrandMessages('asyncSelect');
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
@@ -287,7 +310,7 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
           onChange={handleInputChange}
           onPointerDown={handleInputPointerDown}
           onKeyDown={handleKeyDown}
-          placeholder={placeholder}
+          placeholder={t('placeholder', placeholder)}
           disabled={disabled}
           readOnly={readOnly}
           aria-label={ariaLabel}
@@ -312,7 +335,7 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
           <button
             type="button"
             className="async-select__clear"
-            aria-label={clearLabel}
+            aria-label={t('clear', clearLabel)}
             tabIndex={-1}
             onMouseDown={handleClear}
           >
@@ -331,16 +354,16 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
           <BasePopover.Popup className={contentClass} initialFocus={false} finalFocus={false}>
             <div
               role="listbox"
-              aria-label={ariaLabel ?? placeholder}
+              aria-label={ariaLabel ?? t('placeholder', placeholder)}
               id={listboxId}
             >
               {loading && (
                 <div className="async-select__loading">
-                  <Spinner size="sm" label={loadingLabel} />
+                  <Spinner size="sm" label={t('loading', loadingLabel)} />
                 </div>
               )}
               {!loading && hasSearched && results.length === 0 && (
-                <div className="async-select__empty">{emptyMessage}</div>
+                <div className="async-select__empty">{t('empty', emptyMessage)}</div>
               )}
               {!loading && results.map((option, index) => {
                 const isSelected = option.value === currentValue;

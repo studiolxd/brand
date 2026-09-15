@@ -27,16 +27,31 @@ function ficherosDe(dir: string, ext: string[]): string[] {
   return salida;
 }
 
-describe('el fixture de textos se queda fuera del paquete', () => {
-  it('ningún fichero de src/ importa el fixture ni nada de .storybook/', () => {
+/** Los fixtures del Storybook, por nombre: hoy el castellano y el inglés. */
+const fixtures = readdirSync(join(repoRoot, '.storybook'))
+  .filter((entrada) => /^brandMessagesFixture.*\.ts$/.test(entrada))
+  .map((entrada) => entrada.replace(/\.ts$/, ''));
+
+describe('los fixtures de textos se quedan fuera del paquete', () => {
+  it('hay más de uno, y el inglés está entre ellos', () => {
+    // Si el inglés desapareciera, las stories de «otro idioma» volverían al
+    // literal copiado en cada fichero, que es lo que este fixture evita.
+    expect(fixtures).toContain('brandMessagesFixtureEn');
+    expect(fixtures).toContain('brandMessagesFixture');
+  });
+
+  it('ningún fichero de src/ importa un fixture ni nada de .storybook/', () => {
     const culpables = ficherosDe(join(repoRoot, 'src'), ['.ts', '.tsx'])
       // Los tests y las stories tampoco viajan en el paquete; lo que se vigila
       // aquí es el código que sí se compila a `dist/`.
       .filter((ruta) => !/\.(test|stories)\.tsx?$/.test(ruta))
       .filter((ruta) => {
         const código = readFileSync(ruta, 'utf8');
+        const cuerpo = código.replace(/`[^`]*`|\/\*[\s\S]*?\*\/|\/\/.*/g, '');
         return /from\s+['"][^'"]*\.storybook\//.test(código)
-          || /brandMessagesFixture/.test(código.replace(/`[^`]*`|\/\*[\s\S]*?\*\/|\/\/.*/g, ''));
+          // Uno por uno y no por prefijo: un fixture nuevo entra en la lista
+          // solo por existir en `.storybook/`, sin tocar este test.
+          || fixtures.some((nombre) => cuerpo.includes(nombre));
       })
       .map((ruta) => relative(repoRoot, ruta));
 
@@ -90,6 +105,66 @@ describe.each([
     'DataTable',
     'src/stories/organisms/DataTable/DataTable.tsx',
     ['Sin resultados', 'Buscar', 'Borrar'],
+  ],
+  [
+    'InputField',
+    'src/stories/molecules/InputField/InputField.tsx',
+    ['Borrar'],
+  ],
+  [
+    'PasswordField',
+    'src/stories/molecules/PasswordField/PasswordField.tsx',
+    ['Mostrar contraseña', 'Ocultar contraseña'],
+  ],
+  [
+    'Select',
+    'src/stories/atoms/Select/Select.tsx',
+    ['Seleccionar…'],
+  ],
+  [
+    'MultiSelect',
+    'src/stories/atoms/MultiSelect/MultiSelect.tsx',
+    ['Seleccionar…', 'Quitar '],
+  ],
+  [
+    'NumberInput',
+    'src/stories/atoms/NumberInput/NumberInput.tsx',
+    ['Decrementar', 'Incrementar'],
+  ],
+  [
+    'OtpInput',
+    'src/stories/atoms/OtpInput/OtpInput.tsx',
+    ['Código de verificación', 'Dígito '],
+  ],
+  [
+    'InputPhone',
+    'src/stories/atoms/InputPhone/InputPhone.tsx',
+    ["'País'"],
+  ],
+  [
+    'AsyncSelect',
+    'src/stories/atoms/AsyncSelect/AsyncSelect.tsx',
+    ['Buscar…', 'Sin resultados', 'Buscando…', 'Limpiar selección'],
+  ],
+  [
+    'AsyncMultiSelect',
+    'src/stories/atoms/AsyncMultiSelect/AsyncMultiSelect.tsx',
+    ['Buscar…', 'Sin resultados', 'Buscando…', 'Quitar '],
+  ],
+  [
+    'SearchForm',
+    'src/stories/molecules/SearchForm/SearchForm.tsx',
+    ["'Buscar'", 'Buscar…'],
+  ],
+  [
+    'DocsSearch',
+    'src/stories/molecules/DocsSearch/DocsSearch.tsx',
+    ['Buscar en la documentación', 'Buscar…', 'Borrar', 'Resultados', 'Sin resultados.', 'Buscando…'],
+  ],
+  [
+    'FilterBar',
+    'src/stories/molecules/FilterBar/FilterBar.tsx',
+    ["'Filtros'"],
   ],
 ])('%s no trae textos puestos', (_componente, ruta, textos) => {
   const fuente = readFileSync(join(repoRoot, ruta), 'utf8');

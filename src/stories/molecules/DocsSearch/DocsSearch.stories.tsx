@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { DocsSearch, type DocsSearchResult } from './DocsSearch';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta = {
   title: 'Molecules/DocsSearch',
@@ -164,4 +166,20 @@ export const TestEstadoVacio: Story = {
     await expect(canvas.getByRole('status')).toHaveTextContent('Sin resultados.');
     await expect(canvas.queryAllByRole('option')).toHaveLength(0);
   },
+};
+
+/**
+ * El rótulo, la pista, el nombre de la lista y los dos avisos son cromo del
+ * sistema y **no tienen valor por defecto**: salen del `BrandMessagesProvider`.
+ * El aspa no tiene clave propia: es la del `InputField` de debajo y sale de
+ * `inputField.clear`, la misma palabra en el mismo botón.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  args: { query: 'zzz', onQueryChange: () => {}, results: [] },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <DocsSearch {...args} />
+    </BrandMessagesProvider>
+  ),
 };

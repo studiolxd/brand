@@ -26,6 +26,11 @@ export interface SelectFieldProps {
   options: SelectOptionOrGroup[];
   value?: string;
   defaultValue?: string;
+  /**
+   * Marcador de sitio del control sin valor elegido. Reenvío puro al `Select`:
+   * sin él, el texto sale de `select.placeholder` del `BrandMessagesProvider`.
+   * Se pasa solo cuando el marcador dice algo de ESTE campo.
+   */
   placeholder?: string;
   /** Nombre del campo en el formulario: Base UI monta un input oculto con el valor. */
   name?: string;

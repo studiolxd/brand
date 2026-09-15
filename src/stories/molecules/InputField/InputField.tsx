@@ -8,6 +8,21 @@ import { Label } from '../../atoms/Label/Label';
 import { Input } from '../../atoms/Input/Input';
 import { Icon } from '../../atoms/Icon/Icon';
 import { ErrorText } from '../../atoms/ErrorText/ErrorText';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
+
+/**
+ * El único texto que el campo emite por su cuenta: el nombre accesible del
+ * aspa de borrado. Es cromo —dice la misma cosa en toda la suite—, así que
+ * sale del catálogo común y no de quien monta el campo.
+ *
+ * El `label`, el `placeholder`, el `helperText` y el `errorMessage` NO están
+ * aquí: son el contenido de ESTE campo, y ningún catálogo común puede saber
+ * qué dicen.
+ */
+export interface InputFieldMessages {
+  /** Nombre accesible del botón que vacía un campo de búsqueda. */
+  clear: string;
+}
 
 export interface InputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue'> {
   id: string;
@@ -42,8 +57,9 @@ export interface InputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>,
    */
   clearable?: boolean;
   /**
-   * Nombre accesible del botón de borrado. Default castellano.
-   * @default 'Borrar'
+   * Nombre accesible del botón de borrado. **Sin default**: sale de
+   * `inputField.clear` del `BrandMessagesProvider`, y esta prop es la
+   * anulación puntual de un uso concreto.
    */
   clearLabel?: string;
   /** Se llama tras vaciar el campo desde el aspa, ya con el foco devuelto. */
@@ -75,7 +91,7 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function
   type,
   kind = 'text',
   clearable = false,
-  clearLabel = 'Borrar',
+  clearLabel,
   onClear,
   placeholder,
   value,
@@ -92,6 +108,7 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function
   className,
   ...rest
 }: InputFieldProps, ref) {
+  const t = useBrandMessages('inputField');
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   const errorId = errorMessage ? `${id}-error` : undefined;
@@ -176,7 +193,7 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function
             <button
               type="button"
               className="input-field__clear"
-              aria-label={clearLabel}
+              aria-label={t('clear', clearLabel)}
               aria-controls={id}
               onClick={handleClear}
             >

@@ -36,4 +36,56 @@ export const brandMessagesFixture: BrandMessages = {
     empty: 'Sin resultados.',
     search: 'Buscar…',
   },
+  inputField: {
+    clear: 'Borrar',
+  },
+  passwordField: {
+    show: 'Mostrar contraseña',
+    hide: 'Ocultar contraseña',
+  },
+  select: {
+    placeholder: 'Seleccionar…',
+  },
+  multiSelect: {
+    placeholder: 'Seleccionar…',
+    remove: (label) => `Quitar ${label}`,
+  },
+  numberInput: {
+    decrement: 'Decrementar',
+    increment: 'Incrementar',
+  },
+  otpInput: {
+    group: 'Código de verificación',
+    digit: (index, length) => `Dígito ${index} de ${length}`,
+  },
+  inputPhone: {
+    country: 'País',
+  },
+  asyncSelect: {
+    placeholder: 'Buscar…',
+    empty: 'Sin resultados',
+    loading: 'Buscando…',
+    clear: 'Limpiar selección',
+  },
+  asyncMultiSelect: {
+    placeholder: 'Buscar…',
+    empty: 'Sin resultados',
+    loading: 'Buscando…',
+    remove: (label) => `Quitar ${label}`,
+  },
+  searchForm: {
+    label: 'Buscar',
+    placeholder: 'Buscar…',
+    submit: 'Buscar',
+  },
+  docsSearch: {
+    label: 'Buscar en la documentación',
+    placeholder: 'Buscar…',
+    results: 'Resultados',
+    empty: 'Sin resultados.',
+    loading: 'Buscando…',
+  },
+  filterBar: {
+    label: 'Filtros',
+  },
 };

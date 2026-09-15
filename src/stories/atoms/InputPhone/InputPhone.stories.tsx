@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { InputPhone } from './InputPhone';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof InputPhone> = {
   title: 'Atoms/InputPhone',
@@ -85,5 +87,36 @@ export const ContratoTalla: Story = {
     await expect(alto('[data-t="sm"] .input-phone')).toBe(32);
     await expect(alto('[data-t="md"] .input-phone')).toBe(40);
     await expect(alto('[data-t="lg"] .input-phone')).toBe(48);
+  },
+};
+
+/**
+ * El nombre accesible del selector de país **no tiene valor por defecto**: sale
+ * del `BrandMessagesProvider`. Los nombres de los países no pasan por ahí — los
+ * resuelve `Intl` desde el `locale`—, y el glifo `🌐` tampoco: un glifo no se
+ * traduce.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <InputPhone aria-label="Phone number" />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: sin prop, el selector de país lee del proveedor. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el selector de país lee del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <InputPhone aria-label="Phone number" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('combobox', { name: 'Country' })).toBeInTheDocument();
+    await expect(canvas.queryByRole('combobox', { name: 'País' })).toBeNull();
   },
 };

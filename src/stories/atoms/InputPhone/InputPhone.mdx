@@ -78,10 +78,29 @@ El focus ring se aplica al contenedor completo (selector de país + campo numér
 
 ## Internacionalización
 
-El `aria-label` del selector de país se traduce con la prop `countryLabel`, y lo
-que enseña el selector cuando aún no hay país —el glifo `🌐`— es la prop
-`internationalLabel`: se sustituye por otro texto o glifo sin tocar el
-componente.
+El `aria-label` del selector de país es el único texto que el campo emite por su cuenta, y **no
+tiene valor por defecto**: sale del `BrandMessagesProvider` que la aplicación monta en su raíz.
 
-Los textos por defecto están en castellano. Ver **Foundations › Internacionalización** para la
-convención completa.
+```tsx
+<BrandMessagesProvider messages={{ inputPhone: { country: t("inputPhone.country") } }}>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={InputPhoneStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `countryLabel` | `inputPhone.country` | `aria-label` del selector de prefijo |
+
+El orden es **prop → proveedor → error**, sin cuarto escalón.
+
+Dos cosas **no** pasan por el catálogo, y es deliberado:
+
+- **Los nombres de los países** los resuelve `Intl` desde el `locale`, como los meses y los
+  formatos de fecha. No son props de texto.
+- **`internationalLabel`** —el glifo `🌐` que se ve cuando aún no hay país— sigue teniendo su
+  default: un glifo no se traduce, dice lo mismo en los seis idiomas, y meterlo en el catálogo
+  obligaría a repetir el mismo carácter seis veces. Se sustituye por prop quien no lo quiera.
+
+Ver **Foundations › Internacionalización** para la convención completa.

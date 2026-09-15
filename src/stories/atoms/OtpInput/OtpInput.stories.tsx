@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn, expect, userEvent, waitFor } from 'storybook/test';
 import { useState } from 'react';
 import { OtpInput } from './OtpInput';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof OtpInput> = {
   title: 'Atoms/OtpInput',
@@ -179,5 +181,36 @@ export const ContratoTalla: Story = {
     await expect(alto('[data-t="sm"] .input')).toBe(32);
     await expect(alto('[data-t="md"] .input')).toBe(40);
     await expect(alto('[data-t="lg"] .input')).toBe(48);
+  },
+};
+
+/**
+ * El nombre del grupo y el de cada celda son cromo del sistema y **no tienen
+ * valor por defecto**: salen del `BrandMessagesProvider`. Esta story lo tapa con
+ * uno en inglés. La posición de la celda se interpola en la frase del catálogo,
+ * que se traduce entera — el orden de las palabras cambia de un idioma a otro.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <OtpInput length={6} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: sin props, el grupo y las celdas leen del proveedor. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el grupo y las celdas leen del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <OtpInput length={4} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('group', { name: 'Verification code' })).toBeInTheDocument();
+    await expect(canvas.getByLabelText('Digit 1 of 4')).toBeInTheDocument();
+    await expect(canvas.queryByLabelText('Dígito 1 de 4')).toBeNull();
   },
 };

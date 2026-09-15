@@ -36,6 +36,35 @@ Elegir una opción de una lista. Un `combobox` de Base UI: foco, ARIA y teclado 
 
 El control hereda los tokens de `.surface-dark` por cascada. El desplegable va en un portal en `document.body`, que hereda el tema activado en la raíz (`html.dark` / `[data-theme="dark"]`); solo si el Select vive en un `.surface-dark` **anidado** hay que pasar `container` para montar el portal dentro.
 
+## Internacionalización
+
+El marcador de sitio genérico —lo que se lee en el disparador cuando no hay valor elegido— es
+cromo del sistema: dice lo mismo en toda la suite. **No tiene valor por defecto**; sale del
+`BrandMessagesProvider` que la aplicación monta una vez en su raíz.
+
+```tsx
+import { BrandMessagesProvider } from "@studiolxd/brand/messages";
+
+<BrandMessagesProvider messages={{ select: { placeholder: t("select.placeholder") } }}>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={SelectStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `placeholder` | `select.placeholder` | texto del disparador sin valor elegido |
+
+El orden es **prop → proveedor → error**. La prop sigue existiendo, y es la que se usa cuando el
+marcador dice algo de ESTE campo («Elige un país»): eso es contenido de la pantalla, no cromo.
+El texto se lee **donde se pinta**, así que un desplegable con valor elegido no lo exige.
+
+Las **opciones** no pasan por aquí en ningún caso: son datos, y los pasa entero quien monta el
+campo (`options`), traducidos por su cuenta.
+
+La convención completa está en **Foundations › Internacionalización**.
+
 ## Accesibilidad
 
 - El control necesita nombre: en un formulario lo pone la etiqueta del `SelectField`; suelto, `aria-label`.

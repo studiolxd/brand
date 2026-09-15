@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { AsyncSelect } from './AsyncSelect';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 import type { AsyncSelectOption } from './AsyncSelect';
 
 const EMPLOYEES: AsyncSelectOption[] = [
@@ -91,8 +93,9 @@ export const Controlled: Story = {
 const emptySearch = (): Promise<AsyncSelectOption[]> => Promise.resolve([]);
 
 /**
- * Test: el mensaje de "sin resultados" (texto **visible**) usa el castellano por
- * defecto y se sustituye cuando el consumidor lo pasa traducido.
+ * Test: el mensaje de «sin resultados» (texto **visible**) sale del catálogo
+ * que monta la aplicación —aquí, el castellano del Storybook— y lo gana la
+ * prop cuando el consumidor la pasa.
  */
 export const MensajeVacio: Story = {
   name: 'Test — mensaje de sin resultados',
@@ -223,5 +226,40 @@ export const ContratoTalla: Story = {
     await expect(alto('[data-t="sm"] .async-select')).toBe(32);
     await expect(alto('[data-t="md"] .async-select')).toBe(40);
     await expect(alto('[data-t="lg"] .async-select')).toBe(48);
+  },
+};
+
+/**
+ * Los cuatro textos que el control emite por su cuenta —la pista del campo, el
+ * aviso de vacío, el del spinner y el nombre del aspa— son cromo del sistema y
+ * **no tienen valor por defecto**: salen del `BrandMessagesProvider`. Esta story
+ * lo tapa con uno en inglés; las opciones que devuelve `onSearch` siguen siendo
+ * datos de la pantalla.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <AsyncSelect onSearch={mockSearch} aria-label="Owner" />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: sin props de texto, la pista y el vacío leen del proveedor. */
+export const ContratoProveedor: Story = {
+  name: 'Test — la pista y el vacío leen del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <AsyncSelect onSearch={emptySearch} aria-label="Owner" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+    const campo = canvas.getByPlaceholderText('Search…');
+    await userEvent.type(campo, 'zzz');
+    await expect(await body.findByText('No results')).toBeInTheDocument();
+    await expect(body.queryByText('Sin resultados')).toBeNull();
   },
 };
