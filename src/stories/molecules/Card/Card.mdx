@@ -174,9 +174,21 @@ escriben en el orden en que se leen, sin envoltorios.
 | `CardDescription` | `Paragraph` | El texto secundario bajo el título. `lines={1\|2\|3}` reserva esa altura aunque el texto sea más corto, para que lo que sigue (un precio) quede a la misma altura en tarjetas hermanas |
 | `CardAction` | `<div class="card__action">` | La acción de la cabecera: un menú, un botón |
 | `CardContent` | `<div class="card__content">` | El cuerpo |
-| `CardFooter` | `<div class="card__footer">` | El pie, con sus acciones en fila; `direction="column"` las apila a todo el ancho (una nota sobre el botón) |
+| `CardFooter` | `<div class="card__footer">` | El pie y sus acciones: fila en escritorio, apiladas a todo el ancho en móvil (la norma del sistema); `direction="column"` las apila también donde hay sitio |
 
 <Canvas of={CardStories.ConSubpartes} />
+
+### El pie cumple la norma solo
+
+El pie es una **ranura de acciones del sistema**, así que por debajo de `md` apila y cada acción ocupa la línea entera **sin que haya que pedirlo** —igual que el pie de un `Form` o las acciones de un `Alert`, la norma de [Fundamentos › Puntos de ruptura](?path=/docs/foundations-puntos-de-ruptura--docs)—. Hasta ahora eso había que acordarse de pedirlo con `direction="column"`: la prop de escape que la norma vino a quitar, solo que en el contenedor en vez de en el botón.
+
+<Canvas of={CardStories.PieEnMovil} />
+
+**El umbral es de ventana, no de contenedor**, a diferencia del pie de un diálogo. No es por gusto: una consulta de contenedor obliga a declarar `container-type: inline-size` en la tarjeta, y eso le quita el ancho que saca de su contenido. Medido: una tarjeta-opción dentro de un `Inline` pasa de medir lo que mide su texto a **34px**, el de su propio aire. Una tarjeta se usa de las dos maneras —la estira su hueco, o la mide su contenido—, así que no puede ser contenedor.
+
+De ahí que `direction="column"` **siga teniendo uso**, y ahora uno solo y más claro: apilar **siempre, también donde hay sitio**. Para un pie con una línea de texto sobre el botón que debe quedar pegada a él, y para la tarjeta que se sabe estrecha en escritorio —una rejilla de tres columnas—, donde la ventana no dice nada de lo que mide el pie.
+
+<Canvas of={CardStories.PieApiladoSiempre} />
 
 ### El título es un encabezado
 

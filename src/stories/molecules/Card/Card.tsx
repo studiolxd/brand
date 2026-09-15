@@ -309,14 +309,23 @@ export const CardContent = forwardRef<HTMLDivElement, CardPartProps>(function Ca
 
 export interface CardFooterProps extends CardPartProps {
   /**
-   * `row` (por defecto): las acciones en fila. `column`: apiladas y a todo
-   * el ancho — para un pie con una línea de texto sobre el botón (una nota
-   * de prueba, una condición) que debe quedar pegada a él.
+   * `row` (por defecto): las acciones en fila **en escritorio**; por debajo de
+   * `md` apilan y ocupan la línea entera solas, que es la norma del sistema
+   * (Fundamentos › Puntos de ruptura) — no hay que pedirlo.
+   *
+   * `column`: apiladas y a todo el ancho **siempre, también donde hay sitio**.
+   * Es la excepción declarada, para un pie con una línea de texto sobre el
+   * botón (una nota de prueba, una condición) que debe quedar pegada a él, y
+   * para una tarjeta que se sabe estrecha en escritorio —una rejilla de tres
+   * columnas—, porque el pie mide su hueco y no la ventana.
    */
   direction?: 'row' | 'column';
 }
 
-/** Pie de la tarjeta: sus acciones, en fila o apiladas. */
+/**
+ * Pie de la tarjeta: sus acciones. En móvil apila y da la línea entera a cada
+ * una; en escritorio, fila —salvo `direction="column"`—.
+ */
 export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(function CardFooter(
   { direction = 'row', className, ...rest },
   ref,

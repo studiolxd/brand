@@ -96,10 +96,12 @@ La norma solo se puede seguir si se sabe **dónde poner un botón**. Estas son l
 | `RecoveryCodes` › `actions` | Pie del bloque de códigos | Línea entera por debajo de `md` |
 | `OnboardingShell` › acciones | Pie del paso | Línea entera por debajo de `md` |
 | `AnnotationThread` › `actions` | Pie del hilo | Línea entera **siempre**: vive en un panel estrecho también en escritorio |
+| `Card` › `CardFooter` | Pie de la tarjeta | Línea entera por debajo de `md`; `direction="column"` apila también donde hay sitio |
 | `EmptyState` › `action` | Bloque vacío | Un solo botón, centrado a su ancho natural |
-| `Card` › `CardFooter` | Pie de la tarjeta | Fila; la columna se pide a mano (`direction="column"`) |
 
 Y las ranuras de acción que **no** estiran, a propósito, porque viven **dentro de una fila** al lado de otro contenido: `NotificationList` (por notificación), `TreeView` (por fila), `MessageComposer`, `SiteHeader` (en móvil no se pintan: van al menú), `AnnotationThread` › `annotation.actions` (por anotación), `FieldRow` › `action`, `Table` (columna de acciones), `DataTable` (barra y pie) y `PasswordField` › `action` (dentro del campo).
+
+**Cuándo la consulta de contenedor no está disponible.** El pie de una `Card` es el caso: por su hueco sería el mismo problema que el del diálogo —una tarjeta en una rejilla de tres columnas tiene el pie estrecho aunque la ventana sea ancha—, pero `container-type: inline-size` le quita al elemento el ancho que saca de su contenido, y una tarjeta se usa de las dos maneras: unas veces la estira su hueco y otras la mide su texto. Medido: una tarjeta-opción dentro de un `Inline` pasa de medir lo que mide su texto a 34px, el de su propio aire. Cuando un bloque no puede ser contenedor, la norma se aplica por ventana y el caso estrecho se declara a mano —en `Card`, con `direction="column"`—.
 
 **Dónde NO se aplica, y por qué.** No es una norma universal: solo vale para el **pie o la cabecera de un bloque que ya ocupa el ancho**. En las ranuras de la segunda lista estirar el botón rompería la fila, que es lo que da sentido a la pieza. Y los componentes que se reorganizan por el **ancho de su hueco** y no por el de la ventana (un panel lateral estrecho también en escritorio) son caso de `@container` —o, cuando el hueco es estrecho *siempre*, de columna sin punto de ruptura, como el pie de `AnnotationThread`—.
 
