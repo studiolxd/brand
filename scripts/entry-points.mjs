@@ -246,6 +246,7 @@ export const clientComponents = new Set([
   'uptime-bars',
   'confirm-dialog',
   'search-form',
+  'filter-bar',
   'floating-dock',
   'star-rating',
   'toggle',

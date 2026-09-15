@@ -1,5 +1,16 @@
 import { Children, type ComponentPropsWithoutRef, type ReactNode } from 'react';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './FilterBar.css';
+
+/**
+ * El único texto que la barra emite por su cuenta: su nombre accesible como
+ * punto de referencia de búsqueda. Los rótulos de los filtros no están aquí —
+ * los escribe cada campo, y dicen qué filtran.
+ */
+export interface FilterBarMessages {
+  /** Nombre accesible del punto de referencia `search` que es la barra. */
+  label: string;
+}
 
 export interface FilterBarProps extends Omit<ComponentPropsWithoutRef<'div'>, 'children'> {
   /**
@@ -23,7 +34,7 @@ export interface FilterBarProps extends Omit<ComponentPropsWithoutRef<'div'>, 'c
   actions?: ReactNode;
   /**
    * Nombre accesible del punto de referencia `search` que es la barra.
-   * Default: «Filtros» (castellano). Una app multiidioma debe pasarlo traducido.
+   * **Sin default**: sale de `filterBar.label` del `BrandMessagesProvider`.
    */
   ariaLabel?: string;
   /** Se añade DESPUÉS de las clases propias. */
@@ -47,17 +58,18 @@ export function FilterBar({
   search,
   children,
   actions,
-  ariaLabel = 'Filtros',
+  ariaLabel,
   className,
   ...rest
 }: FilterBarProps) {
+  const t = useBrandMessages('filterBar');
   const filters = Children.toArray(children);
 
   return (
     <div
       className={['filter-bar', className].filter(Boolean).join(' ')}
       role="search"
-      aria-label={ariaLabel}
+      aria-label={t('label', ariaLabel)}
       {...rest}
     >
       {search && <div className="filter-bar__search">{search}</div>}

@@ -151,6 +151,21 @@ describe.each([
     'src/stories/atoms/AsyncMultiSelect/AsyncMultiSelect.tsx',
     ['Buscar…', 'Sin resultados', 'Buscando…', 'Quitar '],
   ],
+  [
+    'SearchForm',
+    'src/stories/molecules/SearchForm/SearchForm.tsx',
+    ["'Buscar'", 'Buscar…'],
+  ],
+  [
+    'DocsSearch',
+    'src/stories/molecules/DocsSearch/DocsSearch.tsx',
+    ['Buscar en la documentación', 'Buscar…', 'Borrar', 'Resultados', 'Sin resultados.', 'Buscando…'],
+  ],
+  [
+    'FilterBar',
+    'src/stories/molecules/FilterBar/FilterBar.tsx',
+    ["'Filtros'"],
+  ],
 ])('%s no trae textos puestos', (_componente, ruta, textos) => {
   const fuente = readFileSync(join(repoRoot, ruta), 'utf8');
   // Solo el cuerpo: el JSDoc de las props nombra los textos para explicarlos.

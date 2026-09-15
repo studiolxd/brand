@@ -104,6 +104,22 @@ La barra no pinta ni un color: lo que se ve es de los campos, que ya traen su pa
 - Las etiquetas de los filtros van **visibles**. Ocultarlas (`labelHidden`) deja el nombre accesible pero quita el rótulo a quien mira, que es justo a quien le hace falta con tres filtros seguidos.
 - El orden del DOM es el de lectura: buscador, filtros, acciones.
 
+## Internacionalización
+
+El nombre accesible de la barra —el del punto de referencia `search`— es el único texto que emite
+por su cuenta, y **no tiene valor por defecto**: sale del `BrandMessagesProvider`.
+
+<Canvas of={FilterBarStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `ariaLabel` | `filterBar.label` | `aria-label` del `role="search"` de la barra |
+
+Los **rótulos de los filtros** no pasan por el catálogo: los escribe cada campo, porque dicen qué
+filtra cada uno. El orden es **prop → proveedor → error**.
+
+La convención completa está en **Foundations › Internacionalización**.
+
 ## Props
 
 <ArgTypes of={FilterBar} />

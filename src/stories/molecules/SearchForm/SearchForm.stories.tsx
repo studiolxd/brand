@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
 import { Stack } from '../../atoms/Stack/Stack';
 import { SearchForm } from './SearchForm';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const meta = {
@@ -227,5 +229,36 @@ export const TestEnter: Story = {
     await userEvent.type(canvas.getByRole('textbox', { name: 'Buscar' }), 'tokens{Enter}');
 
     await expect(args.onSubmit).toHaveBeenCalledWith('tokens');
+  },
+};
+
+/**
+ * Los tres textos del buscador —el rótulo, la pista y el nombre del botón de
+ * envío— son cromo del sistema y **no tienen valor por defecto**: salen del
+ * `BrandMessagesProvider`. Esta story lo tapa con uno en inglés.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <SearchForm />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: sin props de texto, los tres salen del proveedor. */
+export const ContratoProveedor: Story = {
+  name: 'Test — los textos leen del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <SearchForm />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('search', { name: 'Search' })).toBeInTheDocument();
+    await expect(canvas.getByPlaceholderText('Search…')).toBeInTheDocument();
+    await expect(canvas.queryByRole('search', { name: 'Buscar' })).toBeNull();
   },
 };

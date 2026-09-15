@@ -91,6 +91,30 @@ Todo texto que emite el componente es prop con default castellano: `label`, `pla
 
 Los tokens del campo son los de `InputField`; los de aquí visten la lista y el aviso.
 
+## Internacionalización
+
+Los cinco textos que el buscador emite por su cuenta **no tienen valor por defecto**: salen del
+`BrandMessagesProvider` que la aplicación monta en su raíz.
+
+<Canvas of={DocsSearchStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `label` | `docsSearch.label` | etiqueta del campo |
+| `placeholder` | `docsSearch.placeholder` | pista dentro del campo |
+| `resultsLabel` | `docsSearch.results` | `aria-label` de la lista de resultados |
+| `emptyLabel` | `docsSearch.empty` | aviso cuando no se encuentra nada |
+| `loadingLabel` | `docsSearch.loading` | aviso mientras se busca |
+
+**`clearLabel` no tiene clave propia**, y es deliberado: el aspa es la del `InputField` que hay
+debajo y su nombre sale de `inputField.clear`. Es la misma palabra en el mismo botón; darle una
+clave aquí obligaría a traducir «Borrar» dos veces y a que las dos coincidieran. La prop sigue
+existiendo como reenvío puro.
+
+Los **resultados** tampoco: llegan por `results` y son datos del índice del producto.
+
+La convención completa está en **Foundations › Internacionalización**.
+
 ## Accesibilidad
 
 - Patrón **combobox con lista** de WAI-ARIA: campo `role="combobox"`, lista `role="listbox"` con nombre, resultados `role="option"`. El resaltado viaja en `aria-activedescendant` sin mover el foco real.

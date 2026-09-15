@@ -16,4 +16,7 @@ export type {
   InputPhoneMessages,
   AsyncSelectMessages,
   AsyncMultiSelectMessages,
+  DocsSearchMessages,
+  SearchFormMessages,
+  FilterBarMessages,
 } from './BrandMessages';

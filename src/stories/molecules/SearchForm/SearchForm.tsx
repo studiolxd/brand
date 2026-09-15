@@ -4,7 +4,22 @@ import { forwardRef, useId } from 'react';
 import { useFormSize } from '../../constants/form-size';
 import { Icon } from '../../atoms/Icon/Icon';
 import { InputField } from '../InputField/InputField';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './SearchForm.css';
+
+/**
+ * Los tres textos que el buscador emite por su cuenta. Son cromo: el buscador
+ * de sitio se llama igual en toda la suite, y ni el rótulo ni la pista dicen
+ * nada de lo que se busca en ESTA pantalla.
+ */
+export interface SearchFormMessages {
+  /** Etiqueta del campo; nombra también el punto de referencia `search`. */
+  label: string;
+  /** Pista dentro del campo. */
+  placeholder: string;
+  /** Nombre accesible del botón de envío. */
+  submit: string;
+}
 
 export interface SearchFormProps {
   /** `id` del campo. Si no se pasa, el componente genera uno estable. */
@@ -35,8 +50,7 @@ export interface SearchFormProps {
   method?: 'get' | 'post';
   /**
    * Etiqueta del campo. Nombra también el punto de referencia `search`.
-   * Default castellano.
-   * @default 'Buscar'
+   * **Sin default**: sale de `searchForm.label` del `BrandMessagesProvider`.
    */
   label?: string;
   /**
@@ -45,13 +59,13 @@ export interface SearchFormProps {
    */
   labelHidden?: boolean;
   /**
-   * Pista dentro del campo. Default castellano.
-   * @default 'Buscar…'
+   * Pista dentro del campo. **Sin default**: sale de
+   * `searchForm.placeholder`.
    */
   placeholder?: string;
   /**
-   * Nombre accesible del botón de envío. Default castellano.
-   * @default 'Buscar'
+   * Nombre accesible del botón de envío. **Sin default**: sale de
+   * `searchForm.submit`.
    */
   submitLabel?: string;
   /**
@@ -80,13 +94,14 @@ export const SearchForm = forwardRef<HTMLInputElement, SearchFormProps>(function
   onSubmit,
   action,
   method = 'get',
-  label = 'Buscar',
+  label,
   labelHidden = true,
-  placeholder = 'Buscar…',
-  submitLabel = 'Buscar',
+  placeholder,
+  submitLabel,
   size: sizeProp,
   disabled,
 }: SearchFormProps, ref) {
+  const t = useBrandMessages('searchForm');
   // `xl` no es una talla de formulario: no viaja por el contexto de `Form` ni
   // se le pregunta a `useFormSize`, que solo conoce `sm|md|lg`. Cuando se pide
   // manda tal cual; el campo interior va a `lg` y el propio buscador lo estira
@@ -115,7 +130,7 @@ export const SearchForm = forwardRef<HTMLInputElement, SearchFormProps>(function
     <form
       className={['search-form', size !== 'md' ? `search-form--${size}` : ''].filter(Boolean).join(' ')}
       role="search"
-      aria-label={label}
+      aria-label={t('label', label)}
       action={action}
       method={method}
       onSubmit={handleSubmit}
@@ -125,7 +140,7 @@ export const SearchForm = forwardRef<HTMLInputElement, SearchFormProps>(function
         className="search-form__field"
         id={fieldId}
         name={name}
-        label={label}
+        label={t('label', label)}
         labelHidden={labelHidden}
         // `type="search"` pintaría el aspa de borrado del navegador, que no
         // es del sistema y no se puede vestir: el campo es de texto. Tampoco
@@ -135,7 +150,7 @@ export const SearchForm = forwardRef<HTMLInputElement, SearchFormProps>(function
         type="text"
         autoComplete="off"
         enterKeyHint="search"
-        placeholder={placeholder}
+        placeholder={t('placeholder', placeholder)}
         value={value}
         defaultValue={defaultValue}
         disabled={disabled}
@@ -150,7 +165,7 @@ export const SearchForm = forwardRef<HTMLInputElement, SearchFormProps>(function
         className="search-form__submit"
         type="submit"
         disabled={disabled}
-        aria-label={submitLabel}
+        aria-label={t('submit', submitLabel)}
       >
         <Icon name="arrow" className="search-form__submit-glyph" />
       </button>

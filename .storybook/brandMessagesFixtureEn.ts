@@ -77,4 +77,19 @@ export const brandMessagesFixtureEn: BrandMessages = {
     loading: 'Searching…',
     remove: (label) => `Remove ${label}`,
   },
+  searchForm: {
+    label: 'Search',
+    placeholder: 'Search…',
+    submit: 'Search',
+  },
+  docsSearch: {
+    label: 'Search the documentation',
+    placeholder: 'Search…',
+    results: 'Results',
+    empty: 'No results.',
+    loading: 'Searching…',
+  },
+  filterBar: {
+    label: 'Filters',
+  },
 };

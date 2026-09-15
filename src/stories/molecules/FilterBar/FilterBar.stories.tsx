@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect } from 'storybook/test';
 import { FilterBar } from './FilterBar';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 import { InputField } from '../InputField/InputField';
 import { SelectField } from '../SelectField/SelectField';
 import { DatePickerField } from '../DatePickerField/DatePickerField';
@@ -480,4 +482,26 @@ export const ContratoColumnasIndependientesDeLasAcciones: Story = {
       0,
     );
   },
+};
+
+/**
+ * El nombre accesible de la barra es cromo del sistema y **no tiene valor por
+ * defecto**: sale del `BrandMessagesProvider`. Los rótulos de los filtros no —
+ * los escribe cada campo, porque dicen qué filtran.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <FilterBar
+        search={<InputField id="q-en" kind="search" clearable label="Search" labelHidden />}
+      >
+        <SelectField
+          id="estado-en"
+          label="Status"
+          options={[{ value: 'all', label: 'All' }, { value: 'on', label: 'Active' }]}
+        />
+      </FilterBar>
+    </BrandMessagesProvider>
+  ),
 };

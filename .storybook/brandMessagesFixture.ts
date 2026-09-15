@@ -73,4 +73,19 @@ export const brandMessagesFixture: BrandMessages = {
     loading: 'Buscando…',
     remove: (label) => `Quitar ${label}`,
   },
+  searchForm: {
+    label: 'Buscar',
+    placeholder: 'Buscar…',
+    submit: 'Buscar',
+  },
+  docsSearch: {
+    label: 'Buscar en la documentación',
+    placeholder: 'Buscar…',
+    results: 'Resultados',
+    empty: 'Sin resultados.',
+    loading: 'Buscando…',
+  },
+  filterBar: {
+    label: 'Filtros',
+  },
 };

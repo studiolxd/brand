@@ -15,6 +15,9 @@ import { OtpInput } from '../atoms/OtpInput/OtpInput';
 import { InputPhone } from '../atoms/InputPhone/InputPhone';
 import { AsyncSelect } from '../atoms/AsyncSelect/AsyncSelect';
 import { AsyncMultiSelect } from '../atoms/AsyncMultiSelect/AsyncMultiSelect';
+import { SearchForm } from '../molecules/SearchForm/SearchForm';
+import { DocsSearch } from '../molecules/DocsSearch/DocsSearch';
+import { FilterBar } from '../molecules/FilterBar/FilterBar';
 
 /**
  * El orden de resolución de un texto: **prop → proveedor → error**. Sin cuarto
@@ -429,5 +432,47 @@ describe('los buscadores asíncronos leen del proveedor', () => {
     expect(() => render(<AsyncSelect onSearch={buscar} aria-label="Owner" />)).toThrow(
       /asyncSelect\.placeholder/,
     );
+  });
+});
+
+describe('los buscadores y la barra de filtros leen del proveedor', () => {
+  it('el buscador de sitio toma su rótulo, su pista y su botón del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <SearchForm />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('search', { name: 'Search' })).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Search…')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Search' })).toBeInTheDocument();
+  });
+
+  it('el buscador de documentación toma los suyos, y el aspa sigue siendo la del InputField', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <DocsSearch query="zzz" onQueryChange={() => {}} results={[]} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('combobox', { name: 'Search the documentation' })).toBeInTheDocument();
+    expect(screen.getByText('No results.')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Clear' })).toBeInTheDocument();
+  });
+
+  it('la barra de filtros toma su nombre del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <FilterBar search={<span />} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('search', { name: 'Filters' })).toBeInTheDocument();
+  });
+
+  it('sin proveedor y sin prop, la barra revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<FilterBar search={<span />} />)).toThrow(/filterBar\.label/);
   });
 });

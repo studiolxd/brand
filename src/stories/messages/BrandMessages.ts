@@ -10,6 +10,9 @@ import type { OtpInputMessages } from '../atoms/OtpInput/OtpInput';
 import type { InputPhoneMessages } from '../atoms/InputPhone/InputPhone';
 import type { AsyncSelectMessages } from '../atoms/AsyncSelect/AsyncSelect';
 import type { AsyncMultiSelectMessages } from '../atoms/AsyncMultiSelect/AsyncMultiSelect';
+import type { DocsSearchMessages } from '../molecules/DocsSearch/DocsSearch';
+import type { SearchFormMessages } from '../molecules/SearchForm/SearchForm';
+import type { FilterBarMessages } from '../molecules/FilterBar/FilterBar';
 
 /**
  * El contrato de textos de la librería: un espacio por componente, y dentro
@@ -45,6 +48,9 @@ export interface BrandMessages {
   inputPhone: InputPhoneMessages;
   asyncSelect: AsyncSelectMessages;
   asyncMultiSelect: AsyncMultiSelectMessages;
+  docsSearch: DocsSearchMessages;
+  searchForm: SearchFormMessages;
+  filterBar: FilterBarMessages;
 }
 
 export type {
@@ -60,4 +66,7 @@ export type {
   InputPhoneMessages,
   AsyncSelectMessages,
   AsyncMultiSelectMessages,
+  DocsSearchMessages,
+  SearchFormMessages,
+  FilterBarMessages,
 };
