@@ -50,7 +50,18 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
      * consumidor (varios párrafos, `<Tag>`, texto con formato…).
      */
     description?: React.ReactNode;
-    /** Texto accesible del CTA, visually-hidden (modo link — se espera junto a `href` o `render`). */
+    /**
+     * Texto accesible del CTA (modo link), *visually-hidden*. **Manda sobre la
+     * flecha**: con `ctaLabel` la tarjeta pinta la flecha Y su nombre accesible;
+     * sin `ctaLabel` no pinta ninguna de las dos cosas. Una sola decisión en vez
+     * de dos props que puedan contradecirse — no hay `showArrow`.
+     *
+     * Omitirlo es lo que se quiere en una rejilla de catálogo, donde la flecha
+     * repetida en cada tarjeta es ruido y el destino ya lo dice el título. Con
+     * él, en cambio, la tarjeta suelta de marketing gana la llamada visible y el
+     * enlace un nombre accesible completo («Ver más sobre plataformas LMS»)
+     * cuando lo único visible sería la flecha.
+     */
     ctaLabel?: string;
     /** Color de fondo. Default: `'outline'`. */
     color?: CardColor;

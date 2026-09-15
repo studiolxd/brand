@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
 import { type ModalProps } from '../Modal/Modal';
 import './ConfirmDialog.css';
-export interface ConfirmDialogProps {
+export interface ConfirmDialogBaseProps {
     open: boolean;
     /** Título del diálogo: la pregunta, no «Confirmar». */
     title: string;
@@ -68,6 +68,42 @@ export interface ConfirmDialogProps {
     className?: string;
 }
 /**
+ * La frase de confirmación y sus dos textos viajan juntos: sin `confirmPhrase`
+ * no hay campo que rotular ni discrepancia que contar, y con ella los dos
+ * textos los pasa el producto —dicen QUÉ hay que teclear—, así que no llevan
+ * default castellano.
+ */
+export type ConfirmDialogPhraseProps = {
+    /**
+     * Exige teclear una frase exacta —el nombre de la organización, el del
+     * plugin— antes de poder confirmar. El botón de confirmar nace apagado y
+     * solo se enciende cuando lo tecleado coincide.
+     */
+    confirmPhrase?: undefined;
+    confirmPhraseLabel?: string;
+    confirmPhraseMismatch?: string;
+} | {
+    /**
+     * La frase exacta que hay que teclear para poder confirmar. Se compara
+     * sin los espacios de los extremos —un espacio pegado al pegar no es un
+     * error de la persona— pero sin tocar nada más: ni la caja ni los
+     * acentos, que es de lo que vive esta barrera.
+     */
+    confirmPhrase: string;
+    /**
+     * Rótulo del campo. **Obligatorio** con `confirmPhrase`, sin default: es
+     * donde el producto dice qué hay que teclear («Escribe *acme* para
+     * confirmar»), y eso el diálogo no lo sabe.
+     */
+    confirmPhraseLabel: string;
+    /**
+     * Mensaje cuando lo tecleado no coincide. **Obligatorio** con
+     * `confirmPhrase`, sin default, por lo mismo.
+     */
+    confirmPhraseMismatch: string;
+};
+export type ConfirmDialogProps = ConfirmDialogBaseProps & ConfirmDialogPhraseProps;
+/**
  * La pregunta antes de una acción que no se puede deshacer: borrar una
  * organización, revocar una clave, expulsar a alguien de un equipo.
  *
@@ -80,5 +116,9 @@ export interface ConfirmDialogProps {
  * queda abierto y ocupado —no se cierra en falso ni deja pulsar dos veces— y
  * se cierra solo al resolver. Si rechaza, sigue abierto: el error lo cuenta el
  * consumidor, que es quien sabe qué ha pasado.
+ *
+ * Con `confirmPhrase` monta además la **barrera de teclear el identificador**
+ * —el patrón de «escribe el nombre de la organización para borrarla»—: un campo
+ * bajo la pregunta y el botón de confirmar apagado hasta que coincida.
  */
-export declare function ConfirmDialog({ open, title, description, children, onConfirm, onCancel, onConfirmError, secondaryActionLabel, onSecondaryAction, destructive, confirmLabel, cancelLabel, pendingLabel, closeLabel, container, className, }: ConfirmDialogProps): import("react/jsx-runtime").JSX.Element;
+export declare function ConfirmDialog({ open, title, description, children, onConfirm, onCancel, onConfirmError, secondaryActionLabel, onSecondaryAction, destructive, confirmLabel, cancelLabel, pendingLabel, closeLabel, confirmPhrase, confirmPhraseLabel, confirmPhraseMismatch, container, className, }: ConfirmDialogProps): import("react/jsx-runtime").JSX.Element;

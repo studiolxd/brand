@@ -7,6 +7,85 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [39.0.0] — 2026-09-15
+
+> **Major.** `StarRating` deja de traer sus textos puestos: ahora se le pasan, y el
+> compilador lo exige. Además, la flecha de la tarjeta enlazada es opcional, el
+> `ConfirmDialog` sabe pedir una frase de confirmación y el término de una lista de
+> descripción deja de verse diminuto en superficie pública.
+
+### Breaking — `StarRating`: el componente recibe su texto
+
+Los cinco textos pasan a ser props **obligatorias y sin valor por defecto**, exigidas por
+el tipo en cuanto el componente puede emitirlas: `valueLabel` siempre en lectura;
+`countLabel` en cuanto se pasa `reviewCount`; `emptyLabel` en cuanto `value` puede ser
+`null`; `optionLabel` y `groupLabel` en modo entrada. El corte lo hace el tipo, no la
+documentación: si el valor de tu API es `number` no se te pide `emptyLabel`, y el día que
+pase a `number | null` el compilador te lo reclama en vez de dejarte pintar cinco estrellas
+vacías —que es el dibujo de «valorado con 0», una nota real y la peor de todas.
+
+Van con ello otros tres cambios incompatibles: **`value` pasa a obligatorio** en lectura
+(antes omitirlo pintaba cero estrellas, o sea un olvido disfrazado de valoración);
+**`locale` desaparece**, porque el componente ya no escribe ninguna cifra y quien compone
+la frase es quien la escribe; y el modo se elige con `readOnly` **literal**.
+
+Qué hacer al actualizar: `StarRating.mdx` § «Qué se rompe al actualizar» trae el código
+exacto de los textos que había, para copiarlos tal cual si tu app está en castellano.
+
+> La regla del repo sobre textos de componente —prop opcional con el castellano por
+> defecto— queda en revisión: hay ya cuatro piezas que no la cumplen, y lo que decida esa
+> revisión se escribirá en su sitio, no aquí.
+
+### `Card`: la flecha la manda `ctaLabel`
+
+En modo enlace, la flecha y el nombre accesible del CTA aparecen **con `ctaLabel` y solo
+con él**. Sin la prop no hay ninguno de los dos: una rejilla de catálogo donde cada tarjeta
+repite la misma flecha es ruido, no señal. No hay `showArrow`/`hideArrow` — una sola cosa
+que decidir, no dos que se puedan contradecir. Ningún consumidor del repo se ve afectado:
+los veinte usos del modo enlace ya pasaban `ctaLabel`.
+
+### `ConfirmDialog`: frase de confirmación
+
+Nueva prop `confirmPhrase` —la frase exacta que hay que teclear para que la acción se
+habilite— con `confirmPhraseLabel` y `confirmPhraseMismatch`, obligatorias en cuanto se usa
+la primera, porque el rótulo es donde el producto dice QUÉ hay que escribir y eso el diálogo
+no lo sabe. El botón de confirmar nace apagado; el error sale **tras un intento** —salir del
+campo con algo escrito, o pulsar Intro—, nunca mientras se teclea, y seguir escribiendo lo
+retira. Con la frase puesta, Intro confirma desde el propio campo. La comparación perdona
+los espacios de los extremos y nada más: ni caja ni acentos, que es de lo que vive la
+barrera. Con la frase, el foco entra en el campo y no en «Cancelar»: lo que la regla del
+foco evita es que un Intro de más caiga sobre la acción que destruye, y aquí el botón nace
+apagado.
+
+Existía porque faltaba: tres sitios de la suite resolvían este patrón de tres maneras
+distintas, dos dejando el botón vivo y lanzando desde `onConfirm` para que el diálogo no se
+cerrara, y otro saltándose el `ConfirmDialog` entero para montar un `Modal` a mano.
+
+### `DescriptionList`: el término, proporcionado en superficie pública
+
+El bloque `.site-shell` subía el valor a `--text-font-size` (20px) y **no tocaba el
+término**, que se quedaba en `--label-font-size` (14px): dentro de `AppShell` el par es
+14/16 y no canta, en superficie pública era 14/20 y el término se veía diminuto al lado de
+su valor. El término pasa a `{text.paragraph.small.font-size}`, que ES el peldaño
+inmediatamente por debajo del valor por definición: **la superficie de aplicación queda
+idéntica** (14/16) y la pública pasa a 16/20. Cambia el aspecto de toda ficha pública de la
+suite que monte una `DescriptionList` dentro de un `SiteShell`, incluidas las pantallas de
+conexión de conector.
+
+No había ninguna historia que montara una `DescriptionList` dentro de un `SiteShell` — por
+eso nadie lo había visto. Ahora la hay. Y `Typography.mdx` gana el escalón que le faltaba a
+la doctrina: **«hereda un peldaño por debajo»**, entre «hereda el cuerpo» y «talla propia»,
+donde encajan el término de la ficha, el Breadcrumb, el pie de `Figure`, la ayuda de
+formulario y el índice del `Accordion`.
+
+### Publicación
+
+`scripts/publish-npm.mjs` sube el paquete con `npm stage publish` en vez de publicarlo
+directo, y termina imprimiendo el identificador del stage: el segundo factor se difiere a
+una persona, que aprueba con su sesión. El camino del token «Automation» queda documentado
+como lo que es —npm está restringiendo los tokens que se saltan el 2FA— y el ritual de
+`release:check` + tag no cambia.
+
 ## [38.17.0] — 2026-09-15
 
 > **Minor.** En `ChatShell`, el botón que despliega el cajón de conversaciones

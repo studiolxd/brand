@@ -24,8 +24,7 @@ var l = s(function({ href: r, render: s, external: l = !1, title: u, description
 		}),
 		d && (typeof d == "string" ? /* @__PURE__ */ a("p", { children: d }) : d),
 		y,
-		f !== void 0 && /* @__PURE__ */ a(e, { children: f }),
-		/* @__PURE__ */ a(t, { size: "lg" })
+		f !== void 0 && /* @__PURE__ */ o(i, { children: [/* @__PURE__ */ a(e, { children: f }), /* @__PURE__ */ a(t, { size: "lg" })] })
 	] }), w = h && /* @__PURE__ */ a("div", {
 		className: "card__media",
 		children: /* @__PURE__ */ a("img", {

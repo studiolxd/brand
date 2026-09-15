@@ -23,54 +23,68 @@ function c({ fill: t }) {
 		})]
 	});
 }
-function l({ value: e, defaultValue: l, onValueChange: u, max: d = 5, readOnly: f = !0, disabled: p = !1, size: m = "md", name: h, locale: g = "es-ES", valueLabel: _ = (e, t) => `${e.toLocaleString(g)} de ${t} estrellas`, optionLabel: v = (e, t) => `${e.toLocaleString(g)} de ${t} estrellas`, groupLabel: y = "Valoración", className: b, ...x }) {
-	let S = i(), [C, w] = a(l), [T, E] = a(void 0), D = e !== void 0, O = (D ? e : C) ?? 0, k = [
+function l(e) {
+	let { value: l, defaultValue: u, onValueChange: d, max: f = 5, reviewCount: p, readOnly: m = !0, disabled: h = !1, size: g = "md", name: _, valueLabel: v, optionLabel: y, groupLabel: b, countLabel: x, emptyLabel: S, className: C, ...w } = e, T = i(), [E, D] = a(u), [O, k] = a(void 0), A = l !== void 0, j = (A ? l : E) ?? 0, M = [
 		"star-rating",
-		m === "md" ? "" : `star-rating--${m}`,
-		f ? "" : "star-rating--input",
-		b ?? ""
-	].filter(Boolean).join(" "), A = Array.from({ length: d }, (e, t) => t);
-	if (f) {
-		let e = o(O, d);
-		return /* @__PURE__ */ n("div", {
-			className: k,
+		g === "md" ? "" : `star-rating--${g}`,
+		m ? "" : "star-rating--input",
+		C ?? ""
+	].filter(Boolean).join(" "), N = Array.from({ length: f }, (e, t) => t);
+	if (m) {
+		if (l === null) return /* @__PURE__ */ n("div", {
+			className: M,
+			...w,
+			children: /* @__PURE__ */ n("span", {
+				className: "star-rating__empty",
+				children: S ?? ""
+			})
+		});
+		let e = o(j, f);
+		return /* @__PURE__ */ r("div", {
+			className: M,
 			role: "img",
-			"aria-label": _(e, d),
-			...x,
-			children: A.map((t) => /* @__PURE__ */ n(c, { fill: s(t, e) }, t))
+			"aria-label": v?.(e, f, p) ?? "",
+			...w,
+			children: [/* @__PURE__ */ n("span", {
+				className: "star-rating__stars",
+				children: N.map((t) => /* @__PURE__ */ n(c, { fill: s(t, e) }, t))
+			}), p !== void 0 && /* @__PURE__ */ n("span", {
+				className: "star-rating__count",
+				children: x?.(p) ?? ""
+			})]
 		});
 	}
-	function j(e) {
-		D || w(e), u?.(e);
+	function P(e) {
+		A || D(e), d?.(e);
 	}
-	let M = T ?? Math.round(O);
+	let F = O ?? Math.round(j);
 	return /* @__PURE__ */ n("div", {
-		className: k,
+		className: M,
 		role: "radiogroup",
-		"aria-label": y,
-		onPointerLeave: () => E(void 0),
-		...x,
-		children: A.map((e) => {
+		"aria-label": b ?? "",
+		onPointerLeave: () => k(void 0),
+		...w,
+		children: N.map((e) => {
 			let i = e + 1;
 			return /* @__PURE__ */ r("label", {
 				className: "star-rating__option",
 				onPointerEnter: () => {
-					p || E(i);
+					h || k(i);
 				},
 				children: [
 					/* @__PURE__ */ n("input", {
 						className: "star-rating__input visually-hidden",
 						type: "radio",
-						name: h ?? S,
+						name: _ ?? T,
 						value: i,
-						checked: Math.round(O) === i,
-						disabled: p,
-						onChange: () => j(i),
-						onFocus: () => E(i),
-						onBlur: () => E(void 0)
+						checked: Math.round(j) === i,
+						disabled: h,
+						onChange: () => P(i),
+						onFocus: () => k(i),
+						onBlur: () => k(void 0)
 					}),
-					/* @__PURE__ */ n(c, { fill: i <= M ? "full" : "empty" }),
-					/* @__PURE__ */ n(t, { children: v(i, d) })
+					/* @__PURE__ */ n(c, { fill: i <= F ? "full" : "empty" }),
+					/* @__PURE__ */ n(t, { children: y?.(i, f) ?? "" })
 				]
 			}, i);
 		})
