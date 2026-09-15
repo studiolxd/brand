@@ -3,7 +3,21 @@
 import { forwardRef, useState, useRef, useEffect, useId, type Ref } from 'react';
 import { Popover as BasePopover } from '@base-ui/react/popover';
 import { Icon } from '../Icon/Icon';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './MultiSelect.css';
+
+/**
+ * Los dos textos que el control emite por su cuenta: el marcador de sitio sin
+ * nada elegido y el nombre del aspa de cada ficha. Los dos son cromo — dicen
+ * lo mismo en toda la suite, y el segundo solo interpola la etiqueta de la
+ * opción, que es un dato.
+ */
+export interface MultiSelectMessages {
+  /** Marcador de sitio de la caja sin valores elegidos. */
+  placeholder: string;
+  /** Nombre accesible del aspa de una ficha, con la etiqueta de su opción. */
+  remove: (label: string) => string;
+}
 
 export interface MultiSelectOption {
   value: string;
@@ -15,6 +29,10 @@ export interface MultiSelectProps {
   options: MultiSelectOption[];
   value?: string[];
   defaultValue?: string[];
+  /**
+   * Marcador de sitio sin valores elegidos. **Sin default**: sale de
+   * `multiSelect.placeholder` del `BrandMessagesProvider`.
+   */
   placeholder?: string;
   disabled?: boolean;
   readOnly?: boolean;
@@ -38,7 +56,10 @@ export interface MultiSelectProps {
   'aria-labelledby'?: string;
   /** Ids de ayuda/error que describen el control (lo pone el campo). */
   'aria-describedby'?: string;
-  /** aria-label del botón que quita un valor. Default: `Quitar ${etiqueta}` (castellano). */
+  /**
+   * aria-label del botón que quita un valor. **Sin default**: sale de
+   * `multiSelect.remove` del `BrandMessagesProvider`.
+   */
   removeLabel?: (label: string) => string;
   /**
    * Nodo DOM donde montar el portal del dropdown (reenviado a Base UI
@@ -73,7 +94,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
   options,
   value,
   defaultValue = [],
-  placeholder = 'Seleccionar…',
+  placeholder,
   disabled,
   readOnly,
   size = 'md',
@@ -86,9 +107,10 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   'aria-describedby': ariaDescribedBy,
-  removeLabel = (label) => `Quitar ${label}`,
+  removeLabel,
   container,
 }: MultiSelectProps, ref) {
+  const t = useBrandMessages('multiSelect');
   const [open, setOpen] = useState(false);
   const [internalValues, setInternalValues] = useState<string[]>(defaultValue);
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -252,7 +274,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
                   <button
                     type="button"
                     className="multi-select__pill-remove"
-                    aria-label={removeLabel(option.label)}
+                    aria-label={t('remove', removeLabel)(option.label)}
                     tabIndex={-1}
                     onClick={e => { e.stopPropagation(); toggleValue(v); comboboxRef.current?.focus(); }}
                   >
@@ -273,7 +295,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
             // `aria-controls` a un id inexistente es una referencia rota.
             aria-controls={open ? listboxId : undefined}
             aria-activedescendant={open && activeIndex >= 0 ? itemId(activeIndex) : undefined}
-            aria-label={ariaLabelledBy ? undefined : (ariaLabel ?? placeholder)}
+            aria-label={ariaLabelledBy ? undefined : (ariaLabel ?? t('placeholder', placeholder))}
             aria-labelledby={ariaLabelledBy}
             aria-describedby={ariaDescribedBy}
             aria-invalid={error || undefined}
@@ -284,7 +306,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
             onBlur={onBlur}
           >
             {currentValues.length === 0 && (
-              <span className="multi-select__placeholder">{placeholder}</span>
+              <span className="multi-select__placeholder">{t('placeholder', placeholder)}</span>
             )}
           </div>
         </div>

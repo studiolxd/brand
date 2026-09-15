@@ -8,6 +8,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 import { DataTable } from '../organisms/DataTable/DataTable';
 import { InputField } from '../molecules/InputField/InputField';
 import { PasswordField } from '../molecules/PasswordField/PasswordField';
+import { SelectField } from '../molecules/SelectField/SelectField';
+import { MultiSelectField } from '../molecules/MultiSelectField/MultiSelectField';
 
 /**
  * El orden de resolución de un texto: **prop → proveedor → error**. Sin cuarto
@@ -280,5 +282,70 @@ describe('los átomos de formulario leen del proveedor', () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
 
     expect(() => render(<PasswordField label="Password" />)).toThrow(/passwordField\.show/);
+  });
+});
+
+describe('los desplegables leen del proveedor', () => {
+  const OPCIONES = [{ value: 'a', label: 'Uno' }];
+
+  it('el marcador de sitio genérico sale del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <SelectField id="s" label="Role" options={OPCIONES} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByText('Select…')).toBeInTheDocument();
+  });
+
+  it('un marcador que dice algo de ESTE campo se pasa por prop y gana', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <SelectField id="s" label="Role" options={OPCIONES} placeholder="Elige un papel" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByText('Elige un papel')).toBeInTheDocument();
+    expect(screen.queryByText('Select…')).toBeNull();
+  });
+
+  it('un desplegable con valor elegido no exige el marcador de sitio', () => {
+    const sinLosSuyos = { ...EN, select: {} } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinLosSuyos}>
+          <SelectField id="s" label="Role" options={OPCIONES} defaultValue="a" />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  it('sin proveedor y sin prop, revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<SelectField id="s" label="Role" options={OPCIONES} />)).toThrow(
+      /select\.placeholder/,
+    );
+  });
+
+  it('el aspa de una ficha toma su nombre del catálogo, con la etiqueta interpolada', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <MultiSelectField id="m" label="Roles" options={OPCIONES} defaultValue={['a']} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Remove Uno' })).toBeInTheDocument();
+  });
+
+  it('las etiquetas de las OPCIONES no salen del catálogo: son datos', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <MultiSelectField id="m" label="Roles" options={OPCIONES} defaultValue={['a']} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByText('Uno')).toBeInTheDocument();
   });
 });

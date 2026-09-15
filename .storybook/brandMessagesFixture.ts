@@ -43,4 +43,11 @@ export const brandMessagesFixture: BrandMessages = {
     show: 'Mostrar contraseña',
     hide: 'Ocultar contraseña',
   },
+  select: {
+    placeholder: 'Seleccionar…',
+  },
+  multiSelect: {
+    placeholder: 'Seleccionar…',
+    remove: (label) => `Quitar ${label}`,
+  },
 };

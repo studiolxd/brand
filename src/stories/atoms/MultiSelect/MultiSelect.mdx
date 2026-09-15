@@ -53,6 +53,37 @@ tinta prusia.
 
 ---
 
+## Internacionalización
+
+Los dos textos que el control emite por su cuenta —el marcador de sitio y el nombre accesible del
+aspa de cada ficha— **no tienen valor por defecto**: salen del `BrandMessagesProvider`.
+
+```tsx
+<BrandMessagesProvider
+  messages={{
+    multiSelect: {
+      placeholder: t("select.placeholder"),
+      remove: (label) => t("multiSelect.remove", { label }),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={MultiSelectStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `placeholder` | `multiSelect.placeholder` | texto de la caja sin valores elegidos |
+| `removeLabel` | `multiSelect.remove` | `aria-label` del aspa de cada ficha |
+
+`remove` recibe la etiqueta de la opción y devuelve la frase entera: el orden de las palabras
+cambia de un idioma a otro, así que se traduce la frase, no se concatena. La etiqueta en sí es un
+dato de `options` y no sale del catálogo. El orden es **prop → proveedor → error**.
+
+La convención completa está en **Foundations › Internacionalización**.
+
 ## Teclado
 
 Patrón **combobox** de WAI-ARIA, el mismo que `AsyncSelect`. El foco del DOM no sale nunca de

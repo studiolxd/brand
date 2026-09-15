@@ -9,4 +9,6 @@ export type {
   DataTableMessages,
   InputFieldMessages,
   PasswordFieldMessages,
+  SelectMessages,
+  MultiSelectMessages,
 } from './BrandMessages';

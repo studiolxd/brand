@@ -116,6 +116,16 @@ describe.each([
     'src/stories/molecules/PasswordField/PasswordField.tsx',
     ['Mostrar contraseña', 'Ocultar contraseña'],
   ],
+  [
+    'Select',
+    'src/stories/atoms/Select/Select.tsx',
+    ['Seleccionar…'],
+  ],
+  [
+    'MultiSelect',
+    'src/stories/atoms/MultiSelect/MultiSelect.tsx',
+    ['Seleccionar…', 'Quitar '],
+  ],
 ])('%s no trae textos puestos', (_componente, ruta, textos) => {
   const fuente = readFileSync(join(repoRoot, ruta), 'utf8');
   // Solo el cuerpo: el JSDoc de las props nombra los textos para explicarlos.

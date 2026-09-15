@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Select, SelectRoot, SelectTrigger, SelectValue, SelectContent, SelectItem } from './Select';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const options = [
   { value: 'es', label: 'Español' },
@@ -158,5 +160,37 @@ export const ContratoPartes: Story = {
     await expect(within(listbox).getByText('rica').tagName).toBe('EM');
     await userEvent.keyboard('{Escape}');
     await waitFor(() => expect(within(document.body).queryByRole('listbox')).toBeNull());
+  },
+};
+
+/**
+ * El marcador de sitio genérico —el «Seleccionar…» de un desplegable sin valor
+ * elegido— es cromo del sistema y **no tiene valor por defecto**: sale del
+ * `BrandMessagesProvider` que la aplicación monta en su raíz. Esta story tapa el
+ * del catálogo con uno en inglés. Las **opciones** no cambian de idioma: son
+ * datos, y los pone quien monta el campo.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Select options={options} aria-label="Language" />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: sin prop, el marcador sale del proveedor más cercano. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el marcador lee del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Select options={options} aria-label="Language" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText('Select…')).toBeInTheDocument();
+    await expect(canvas.queryByText('Seleccionar…')).toBeNull();
   },
 };

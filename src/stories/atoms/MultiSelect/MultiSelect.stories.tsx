@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { MultiSelect } from './MultiSelect';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const options = [
   { value: 'design', label: 'Diseño' },
@@ -159,5 +161,37 @@ export const ContratoPildorasFuera: Story = {
     await expect(combobox.contains(aspa)).toBe(false);
     await userEvent.click(aspa);
     await expect(canvas.queryByText('Diseño')).toBeNull();
+  },
+};
+
+/**
+ * El marcador de sitio y el nombre del aspa de cada ficha son cromo del
+ * sistema y **no tienen valor por defecto**: salen del `BrandMessagesProvider`.
+ * Esta story lo tapa con uno en inglés — fíjate en que la etiqueta de la ficha
+ * («Diseño») sigue en castellano: es un dato de las opciones, no un texto del
+ * catálogo.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <MultiSelect options={options} defaultValue={['design']} aria-label="Skills" />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: sin props, el marcador y el aspa leen del proveedor. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el marcador y el aspa leen del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <MultiSelect options={options} defaultValue={['design']} aria-label="Skills" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('button', { name: 'Remove Diseño' })).toBeInTheDocument();
+    await expect(canvas.queryByRole('button', { name: 'Quitar Diseño' })).toBeNull();
   },
 };

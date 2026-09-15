@@ -1,5 +1,20 @@
+import type { ReactElement } from 'react';
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render as renderRaw, screen, type RenderOptions } from '@testing-library/react';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixture } from '../../../../.storybook/brandMessagesFixture';
+
+/**
+ * Un test que monta campos del sistema es «la aplicación»: desde la campaña
+ * del proveedor de textos, el cromo sale del catálogo y no de un default
+ * castellano, así que hay que montarlo igual que lo monta el Storybook.
+ */
+function render(ui: ReactElement, options?: RenderOptions) {
+  return renderRaw(
+    <BrandMessagesProvider messages={brandMessagesFixture}>{ui}</BrandMessagesProvider>,
+    options,
+  );
+}
 import { FieldRow, FieldRows } from './FieldRow';
 import { InputField } from '../InputField/InputField';
 import { SelectField } from '../SelectField/SelectField';

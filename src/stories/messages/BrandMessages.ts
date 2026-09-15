@@ -3,6 +3,8 @@ import type { TableMessages } from '../molecules/Table/Table';
 import type { DataTableMessages } from '../organisms/DataTable/DataTable';
 import type { InputFieldMessages } from '../molecules/InputField/InputField';
 import type { PasswordFieldMessages } from '../molecules/PasswordField/PasswordField';
+import type { SelectMessages } from '../atoms/Select/Select';
+import type { MultiSelectMessages } from '../atoms/MultiSelect/MultiSelect';
 
 /**
  * El contrato de textos de la librería: un espacio por componente, y dentro
@@ -31,6 +33,8 @@ export interface BrandMessages {
   dataTable: DataTableMessages;
   inputField: InputFieldMessages;
   passwordField: PasswordFieldMessages;
+  select: SelectMessages;
+  multiSelect: MultiSelectMessages;
 }
 
 export type {
@@ -39,4 +43,6 @@ export type {
   DataTableMessages,
   InputFieldMessages,
   PasswordFieldMessages,
+  SelectMessages,
+  MultiSelectMessages,
 };
