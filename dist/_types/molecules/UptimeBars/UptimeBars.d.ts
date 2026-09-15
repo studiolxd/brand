@@ -1,6 +1,17 @@
 import { type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import { type UptimeBarsThresholds } from './uptimeStatus';
 import './UptimeBars.css';
+/**
+ * Los dos textos de la tira, y los dos son **cromo**: cómo se llama la región
+ * y cómo se dice que un punto no tiene dato. Ni las fechas ni los porcentajes
+ * pasan por aquí — son formato (`locale`) y los escribe quien pasa los puntos.
+ */
+export interface UptimeBarsMessages {
+    /** Nombre accesible de la tira cuando la pantalla no le da uno propio. */
+    label: string;
+    /** Cómo se dice que un punto no tiene dato (el monitor todavía no existía). */
+    noData: string;
+}
 export type { UptimeBarsThresholds, UptimeBarsStatus } from './uptimeStatus';
 /** Un punto de la serie: un día, una hora, un despliegue. La tira no lo sabe. */
 export interface UptimeBarsPoint {
@@ -23,7 +34,10 @@ export interface UptimeBarsProps extends Omit<ComponentPropsWithoutRef<'div'>, '
      * tira: el dato que se lee sin mirar treinta rectángulos ni abrir un bocadillo.
      */
     summary: ReactNode;
-    /** Nombre accesible de la tira. Default castellano: «Disponibilidad». */
+    /**
+     * Nombre accesible de la tira. **Sin default**: sin él, sale de
+     * `uptimeBars.label` del `BrandMessagesProvider`.
+     */
     label?: string;
     /** Rótulo del extremo antiguo, bajo la primera barrita: «Hace 30 días». */
     startLabel?: ReactNode;
@@ -41,7 +55,11 @@ export interface UptimeBarsProps extends Omit<ComponentPropsWithoutRef<'div'>, '
      * «5 de septiembre: 100 %. Sin incidencias».
      */
     pointLabel?: (point: UptimeBarsPoint, formattedValue: string | null) => string;
-    /** Cómo se dice que un punto no tiene dato. Default castellano: «sin datos». */
+    /**
+     * Cómo se dice que un punto no tiene dato. **Sin default**: sin él, sale de
+     * `uptimeBars.noData`. Solo se lee cuando hay un punto sin dato y no hay
+     * `pointLabel` propio.
+     */
     noDataLabel?: string;
     /**
      * Bocadillo por barrita, con ratón y con teclado. Default `true`. Sin él las

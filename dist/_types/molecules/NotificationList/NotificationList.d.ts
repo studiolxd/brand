@@ -1,5 +1,23 @@
 import type { ReactNode } from 'react';
 import './NotificationList.css';
+/**
+ * El cromo de la bandeja: cómo se llama la lista, cómo se marca una fila sin
+ * leer y qué dice el botón de marcarla. **Espacio propio y no el del
+ * `NotificationPanel`**: son dos piezas distintas —la bandeja a página
+ * completa y el flotante de la cabecera— y el catálogo de la suite también las
+ * tiene aparte (`notifications.inbox.*` frente a `notifications.panel.*`).
+ *
+ * Lo que cuenta cada notificación —título, cuerpo, hora ya formateada— es
+ * contenido y viaja en `items`.
+ */
+export interface NotificationListMessages {
+    /** Nombre accesible de la lista. No se pinta: el título lo pone la página. */
+    label: string;
+    /** Texto, solo para lectores de pantalla, que marca una fila sin leer. */
+    unread: string;
+    /** Rótulo del botón de marcar una fila como leída. */
+    markRead: string;
+}
 /** Una notificación tal y como la enseña la lista: ya resuelta, sin datos crudos. */
 export interface NotificationListItem {
     id: string;
@@ -59,11 +77,23 @@ export interface NotificationListProps {
      * acciones del producto; sin ella no se pinta.
      */
     onMarkRead?: (id: string) => void;
-    /** Nombre accesible de la lista. **No se pinta**: el título lo pone la página. Default «Notificaciones». */
+    /**
+     * Nombre accesible de la lista. **No se pinta**: el título lo pone la
+     * página. **Sin default**: sin él, sale de `notificationList.label` del
+     * `BrandMessagesProvider`.
+     */
     label?: string;
-    /** Texto solo para lectores de pantalla que marca una fila sin leer. Default «Sin leer». */
+    /**
+     * Texto solo para lectores de pantalla que marca una fila sin leer. **Sin
+     * default**: sin él, sale de `notificationList.unread`. Solo se lee cuando
+     * hay alguna fila sin leer y esa fila no trae el suyo.
+     */
     unreadLabel?: string;
-    /** Rótulo del botón de marcar una fila. Default «Marcar como leída». */
+    /**
+     * Rótulo del botón de marcar una fila. **Sin default**: sin él, sale de
+     * `notificationList.markRead`. Solo se lee cuando hay `onMarkRead` y alguna
+     * fila sin leer.
+     */
     markReadLabel?: string;
     /** Se añade DESPUÉS de las clases propias de la lista (el consumidor añade, no sustituye). */
     className?: string;

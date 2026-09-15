@@ -7,6 +7,134 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [48.0.0] — 2026-09-16
+
+> **Major.** Novena familia al proveedor de textos: copiar, datos y estado. Diecisiete
+> espacios nuevos, y con ellos el primero que **no es de un componente sino de una
+> conducta**: `copy`, las tres palabras que dicen por igual el botón suelto, el valor en
+> línea y el bloque de código. Además, la banda de preferencias de `PublicPageShell` se
+> puede pedir a otra medida, y `Foundations/Redacción` fija por escrito que los estados de
+> carga conservan sus puntos suspensivos.
+
+### Copiar, datos y estado leen del proveedor
+
+Diecisiete espacios nuevos en `BrandMessages`: `copy`, `codeBlock`, `dotsButton`,
+`progressBar`, `spinner`, `slider`, `treeView`, `uptimeBars`, `chart`, `stepper`,
+`carousel`, `languageSwitcher`, `projectCard`, `legalFooter`, `calendarRoster`,
+`calendarPlanner` y `notificationList`. Mismo orden —**prop → proveedor → error**— y cada
+texto se lee **donde se pinta**: un botón que nunca falla no exige el aviso de
+portapapeles roto, un spinner decorativo no exige su texto, un progreso que empieza en el
+primer paso no exige la marca de «completado», un deslizador de un pulgar no exige los dos
+nombres del rango y un cuadrante sin leyenda no exige ninguno de sus seis tipos.
+
+### `copy` es un espacio de conducta, y es la primera excepción a «un espacio por componente»
+
+`CopyButton`, `CopyableValue`, `DescriptionDetails copyable` y el acuse de `CodeBlock`
+dicen **las mismas tres palabras**: «Copiar», «Copiado», «No se pudo copiar». Un espacio
+por componente habría obligado a la aplicación a escribirlas tres veces, con el riesgo de
+que un día dijeran cosas distintas; el catálogo de la suite ya las tiene una sola vez
+(`common.copy`, `common.copied`). Así que la interfaz `CopyMessages` vive donde ya vivía
+la conducta compartida —`src/stories/constants/copy-to-clipboard.ts`— y no junto a un
+componente: lo que comparten es el comportamiento, y el texto va con él.
+
+`CodeBlock` es el caso que lo enseña: lee de **dos** espacios, porque su rótulo dice
+«Copiar código» (suyo, `codeBlock.copy`) y su acuse dice «Copiado» (de todos,
+`copy.copied`). Y `codeBlock.region` —el nombre del área desplazable— interpola el
+lenguaje, así que es función.
+
+### Un nombre genérico es cromo; el de ESTA pantalla sigue siendo prop
+
+`ProgressBar` y `TreeView` son la pareja que mejor lo enseña. El catálogo pone «Progreso»
+y «Árbol», que valen en cualquier pantalla; lo que avanza de verdad —«Subiendo el
+vídeo»— y de qué árbol se trata —«Matriz de contenidos»— lo sabe solo la pantalla, y para
+eso siguen estando las props, que ganan. Lo mismo en `Chart`: el cromo de la tabla
+equivalente es catálogo, pero **`ariaLabel` sigue obligatorio y fuera** —un texto común lo
+dejaría diciendo «Gráfico» en todas partes sin que nada fallara—.
+
+### Cuatro piezas entran al alcance por arrastre
+
+`Spinner` no estaba en la lista y entra: es el estado por excelencia, y su «Cargando…» es
+exactamente el texto que la norma de redacción de esta misma release declara excepción.
+`Slider` tenía tres palabras cableadas dentro del default de `thumbLabel` («Valor»,
+«Mínimo», «Máximo») que ninguna prop de texto dejaba ver. `CalendarPlanner` comparte
+familia con `CalendarRoster` y se habría quedado con su «+N más» en castellano.
+`DescriptionDetails` y `ContextMenu` pasan a ser **reenvíos puros**: sus props siguen
+existiendo como anulación puntual, pero ya no hacen falta para traducir.
+
+`MessageComposer`, `ConversationList`, `ConversationThread`, `AssistantMessage`,
+`AnnotationThread`, `ChatShell`, `TypingIndicator` y las pantallas de `ConnectorAuth`
+**no entran**: son texto de producto y legal, y tienen ola propia.
+
+### La leyenda del cuadrante va clave a clave, contra la regla general
+
+La norma del sistema es que una **lista** se traduce pasándola entera, no con una prop de
+texto por elemento. Los seis tipos de la leyenda de `CalendarRoster` son la excepción: es
+un vocabulario **cerrado** del componente —festivo, vacaciones, ausencia, recuperación,
+cumpleaños, no laborable—, y obligar a la aplicación a montar el array con sus `type`
+correctos solo para traducir seis palabras era peor que darles seis claves.
+`legendItems` sigue existiendo para sustituir la leyenda **entera** —otro orden, otros
+tipos— y gana. `birthdayPrefix` se queda fuera: es un emoji, y un emoji no se traduce.
+
+### Redacción: los estados de carga conservan los puntos suspensivos
+
+Sección propia en `Foundations/Redacción`, con sus ejemplos ✓/✗. «Buscando…»,
+«Cargando…», «Guardando…» no son una frase que se corta: son **progreso**, y los tres
+puntos dicen que algo está pasando ahora mismo y que va a terminar. Quitárselos convierte
+el estado en un rótulo. Vale igual para el texto visible y para el que solo oye un lector
+de pantalla. Lo que **no** es un estado en curso sigue sin llevarlos, aunque hable de algo
+que tarda.
+
+### La banda de preferencias de `PublicPageShell` se puede pedir a otra medida
+
+Prop nueva, `preferencesWidth?: ContainerWidth`, con el prefijo de la ranura —como
+`mainWidth`— porque el marco tiene cuatro y un `width` pelado no diría cuál gobierna. El
+default es `'xl'`, lo de hoy, **así que esta parte no es breaking**. Una página que lee a
+`lg` pide `preferencesWidth="lg"` y la banda estrecha con ella.
+
+Lo que resolvía el hueco hasta hoy —anidar un `Container width="lg"` dentro de
+`preferences`— metía un `container__inner` dentro de otro: el relleno lateral se contaba
+dos veces y la banda dejaba de alinear con el `main`. Sin CSS nuevo.
+
+### Para quien actualice
+
+El catálogo del `BrandMessagesProvider` tiene que crecer con los diecisiete espacios, o la
+primera pantalla con un `CopyButton`, un `Spinner` o una `ProgressBar` **lanza en render**.
+Estas son las claves que hay que aportar:
+
+| Espacio | Claves | Qué es |
+| --- | --- | --- |
+| `copy` | `label`, `copied`, `error` | copiar al portapapeles, para toda la familia |
+| `codeBlock` | `copy`, `region(language?)` | el rótulo propio del bloque y el nombre de su área |
+| `dotsButton` | `label` | el botón de tres puntos — lo reenvía `ContextMenu` |
+| `progressBar` | `label` | el nombre genérico de lo que avanza |
+| `spinner` | `label` | la espera, con sus puntos suspensivos |
+| `slider` | `value`, `min`, `max`, `valueAt(index)` | los nombres de los pulgares |
+| `treeView` | `label` | el nombre genérico del árbol |
+| `uptimeBars` | `label`, `noData` | la tira y cómo se dice que un punto no tiene dato |
+| `chart` | `tableCaption`, `tableHint`, `category`, `value`, `share`, `empty` | el cromo de la tabla equivalente |
+| `stepper` | `label`, `compact(current, total)`, `completed`, `current`, `pending` | el progreso y sus tres marcas de estado |
+| `carousel` | `label`, `roleDescription`, `track`, `previous`, `next`, `indicator(index)`, `pause`, `play`, `slideStatus(index, total)`, `slideRoleDescription` | todo el cromo del carrusel |
+| `languageSwitcher` | `label` | la etiqueta del selector — **no** los idiomas |
+| `projectCard` | `tags` | la lista de etiquetas de categoría |
+| `legalFooter` | `label` | la navegación del pie legal |
+| `calendarRoster` | `name`, `legend`, `holiday`, `vacation`, `absence`, `recovery`, `birthday`, `nonWorking` | la columna de nombres y los seis tipos de la leyenda |
+| `calendarPlanner` | `more(count)` | el botón de desbordamiento de una celda |
+| `notificationList` | `label`, `unread`, `markRead` | la bandeja — **no** el panel de la cabecera |
+
+Seis de ellas interpolan un dato (`codeBlock.region`, `slider.valueAt`, `stepper.compact`,
+`carousel.indicator`, `carousel.slideStatus`, `calendarPlanner.more`), así que son
+funciones.
+
+A cambio, dejan de hacer falta para traducir `DescriptionDetails.copyLabel` y
+`copiedLabel`, y `ContextMenu.label`: son reenvíos puros y siguen existiendo solo como
+anulación puntual. `RecoveryCodes` mantiene sus tres `labels` obligatorias —«Copiar todos»
+no es «Copiar»—, pero su botón lee `copy.error` si el portapapeles falla.
+
+**Ojo con dos valores.** `spinner.label` lleva **puntos suspensivos** dentro («Cargando…»):
+son parte del texto, no adorno. Y `notificationList.*` no es `notificationPanel.*`: en el
+catálogo de la suite son `notifications.inbox.*` y `notifications.panel.*`, y mezclarlos
+deja la bandeja diciendo lo del flotante.
+
 ## [47.1.0] — 2026-09-15
 
 > **Minor.** La norma de puntuación de subtítulos y estados vacíos, fijada por escrito en

@@ -10,13 +10,13 @@ export interface CopyableValueProps {
      */
     copyText?: string;
     /**
-     * Nombre accesible del botón de copiar. Default castellano.
-     * @default 'Copiar'
+     * Nombre accesible del botón de copiar. **Sin default**: sin él, sale de
+     * `copy.label` del `BrandMessagesProvider`.
      */
     copyLabel?: string;
     /**
-     * Acuse tras copiar, anunciado en una región viva. Default castellano.
-     * @default 'Copiado'
+     * Acuse tras copiar, anunciado en una región viva. **Sin default**: sin él,
+     * sale de `copy.copied`. Solo se lee tras copiar.
      */
     copiedLabel?: string;
     /** Se añade DESPUÉS de las clases propias. */

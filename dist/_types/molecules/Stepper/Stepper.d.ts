@@ -28,12 +28,30 @@ export interface StepperStep {
 }
 /** Estado de un paso dentro del flujo. Lo deduce el componente de `current`. */
 export type StepperStatus = 'completed' | 'current' | 'pending';
+/**
+ * El cromo del progreso: el nombre de la lista, la cuenta de la forma
+ * compacta y las tres marcas de estado que solo oye un lector de pantalla.
+ * Dicen en qué punto del flujo se está, no de qué flujo se trata: las
+ * etiquetas de cada paso son contenido y viajan en `steps`.
+ */
+export interface StepperMessages {
+    /** Nombre accesible de la lista de pasos. */
+    label: string;
+    /** La cuenta de la forma compacta: «Paso 2 de 4». Interpola, así que es función. */
+    compact: (current: number, total: number) => string;
+    /** Se antepone, solo para lectores de pantalla, a la etiqueta de un paso ya hecho. */
+    completed: string;
+    /** Ídem para el paso actual. */
+    current: string;
+    /** Ídem para un paso que aún no toca. */
+    pending: string;
+}
 export interface StepperLabels {
-    /** Se antepone, solo para lectores de pantalla, a la etiqueta de un paso ya hecho. Default: «Completado». */
+    /** Anulación puntual de `stepper.completed`. */
     completed?: string;
-    /** Ídem para el paso actual. Default: «Paso actual». */
+    /** Anulación puntual de `stepper.current`. */
     current?: string;
-    /** Ídem para un paso que aún no toca. Default: «Pendiente». */
+    /** Anulación puntual de `stepper.pending`. */
     pending?: string;
 }
 export interface StepperProps {
@@ -47,15 +65,22 @@ export interface StepperProps {
      * `reachable`; por defecto, los completados.
      */
     onStepSelect?: (index: number, step: StepperStep) => void;
-    /** Nombre accesible de la lista. Default: «Progreso» (castellano). */
+    /**
+     * Nombre accesible de la lista. **Sin default**: sin él, sale de
+     * `stepper.label` del `BrandMessagesProvider`.
+     */
     label?: string;
     /**
      * El texto de la forma compacta (por debajo de `md`), donde no caben las
-     * etiquetas. Recibe el número de paso (base 1) y el total.
-     * Default: «Paso 2 de 4» (castellano).
+     * etiquetas. Recibe el número de paso (base 1) y el total. **Sin default**:
+     * sin él, sale de `stepper.compact`.
      */
     compactLabel?: (current: number, total: number) => string;
-    /** Textos de estado para lectores de pantalla. Todos con default castellano. */
+    /**
+     * Textos de estado para lectores de pantalla, clave a clave. **Sin
+     * defaults**: los que no se pasen salen de `stepper.completed`,
+     * `stepper.current` y `stepper.pending`.
+     */
     labels?: StepperLabels;
     className?: string;
     id?: string;

@@ -1,55 +1,56 @@
 'use client';
 import './project-card.css';
-import { Heading as e } from "./heading.js";
-import { Paragraph as t } from "./paragraph.js";
-import { Tag as n } from "./tag.js";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
-import { useRender as a } from "@base-ui/react/use-render";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Heading as t } from "./heading.js";
+import { Paragraph as n } from "./paragraph.js";
+import { Tag as r } from "./tag.js";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { useRender as o } from "@base-ui/react/use-render";
 //#region src/stories/molecules/ProjectCard/ProjectCard.tsx
-function o({ title: o, description: s, media: c, tags: l, href: u, render: d, headingLevel: f = 3, headingSize: p = 5, tagsLabel: m = "Categorías", className: h, id: g }) {
-	let _ = a({
-		render: d,
-		enabled: d !== void 0,
+function s({ title: s, description: c, media: l, tags: u, href: d, render: f, headingLevel: p = 3, headingSize: m = 5, tagsLabel: h, className: g, id: _ }) {
+	let v = e("projectCard"), y = o({
+		render: f,
+		enabled: f !== void 0,
 		props: {
 			className: "project-card__link",
-			children: o
+			children: s
 		}
-	}) ?? (u === void 0 ? o : /* @__PURE__ */ r("a", {
-		href: u,
+	}) ?? (d === void 0 ? s : /* @__PURE__ */ i("a", {
+		href: d,
 		className: "project-card__link",
-		children: o
+		children: s
 	}));
-	return /* @__PURE__ */ i("article", {
-		id: g,
-		className: ["project-card", h].filter(Boolean).join(" "),
+	return /* @__PURE__ */ a("article", {
+		id: _,
+		className: ["project-card", g].filter(Boolean).join(" "),
 		children: [
-			c && /* @__PURE__ */ r("div", {
+			l && /* @__PURE__ */ i("div", {
 				className: "project-card__media",
-				children: /* @__PURE__ */ r("img", {
-					src: c.src,
-					alt: c.alt
+				children: /* @__PURE__ */ i("img", {
+					src: l.src,
+					alt: l.alt
 				})
 			}),
-			l && l.length > 0 && /* @__PURE__ */ r("ul", {
+			u && u.length > 0 && /* @__PURE__ */ i("ul", {
 				className: "project-card__tags",
-				"aria-label": m,
-				children: l.map((e) => /* @__PURE__ */ r("li", { children: /* @__PURE__ */ r(n, {
+				"aria-label": v("tags", h),
+				children: u.map((e) => /* @__PURE__ */ i("li", { children: /* @__PURE__ */ i(r, {
 					variant: e.variant ?? "neutral",
 					children: e.label
 				}) }, e.id ?? e.label))
 			}),
-			/* @__PURE__ */ r(e, {
-				level: f,
-				size: p,
+			/* @__PURE__ */ i(t, {
+				level: p,
+				size: m,
 				className: "project-card__title",
-				children: _
+				children: y
 			}),
-			s && /* @__PURE__ */ r(t, {
+			c && /* @__PURE__ */ i(n, {
 				className: "project-card__description",
-				children: s
+				children: c
 			})
 		]
 	});
 }
 //#endregion
-export { o as ProjectCard };
+export { s as ProjectCard };

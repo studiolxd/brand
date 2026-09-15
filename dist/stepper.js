@@ -1,67 +1,64 @@
 'use client';
 import './stepper.css';
-import { VisuallyHidden as e } from "./visually-hidden.js";
-import { StepMarker as t } from "./step-marker.js";
-import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { VisuallyHidden as t } from "./visually-hidden.js";
+import { StepMarker as n } from "./step-marker.js";
+import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/molecules/Stepper/Stepper.tsx
-function a({ steps: a, current: o, onStepSelect: s, label: c = "Progreso", compactLabel: l = (e, t) => `Paso ${e} de ${t}`, labels: u, className: d, id: f }) {
-	if (a.length < 2) return null;
-	let p = {
-		completed: "Completado",
-		current: "Paso actual",
-		pending: "Pendiente",
-		...u
-	}, m = a.length, h = Math.min(Math.max(o, 0), m - 1), g = a[h];
-	return /* @__PURE__ */ i("div", {
-		id: f,
-		className: ["stepper", d].filter(Boolean).join(" "),
-		children: [/* @__PURE__ */ i("p", {
+function o({ steps: o, current: s, onStepSelect: c, label: l, compactLabel: u, labels: d, className: f, id: p }) {
+	let m = e("stepper");
+	if (o.length < 2) return null;
+	let h = (e) => m(e, d?.[e]), g = o.length, _ = Math.min(Math.max(s, 0), g - 1), v = o[_];
+	return /* @__PURE__ */ a("div", {
+		id: p,
+		className: ["stepper", f].filter(Boolean).join(" "),
+		children: [/* @__PURE__ */ a("p", {
 			className: "stepper__compact",
-			children: [/* @__PURE__ */ r("span", {
+			children: [/* @__PURE__ */ i("span", {
 				className: "stepper__compact-count",
-				children: l(h + 1, m)
-			}), /* @__PURE__ */ r("span", {
+				children: m("compact", u)(_ + 1, g)
+			}), /* @__PURE__ */ i("span", {
 				className: "stepper__compact-label",
-				children: g.label
+				children: v.label
 			})]
-		}), /* @__PURE__ */ r("ol", {
+		}), /* @__PURE__ */ i("ol", {
 			className: "stepper__list",
-			"aria-label": c,
-			children: a.map((a, o) => {
-				let c = o < h ? "completed" : o === h ? "current" : "pending", l = s !== void 0 && c !== "current" && (a.reachable ?? c === "completed"), u = /* @__PURE__ */ i(n, { children: [/* @__PURE__ */ r(t, {
-					state: c === "completed" ? "done" : c === "current" ? "current" : "pending",
+			"aria-label": m("label", l),
+			children: o.map((e, o) => {
+				let s = o < _ ? "completed" : o === _ ? "current" : "pending", l = c !== void 0 && s !== "current" && (e.reachable ?? s === "completed"), u = /* @__PURE__ */ a(r, { children: [/* @__PURE__ */ i(n, {
+					state: s === "completed" ? "done" : s === "current" ? "current" : "pending",
 					count: o + 1,
 					className: "stepper__marker"
-				}), /* @__PURE__ */ i("span", {
+				}), /* @__PURE__ */ a("span", {
 					className: "stepper__text",
 					children: [
-						/* @__PURE__ */ i(e, { children: [p[c], ": "] }),
-						/* @__PURE__ */ r("span", {
+						/* @__PURE__ */ a(t, { children: [h(s), ": "] }),
+						/* @__PURE__ */ i("span", {
 							className: "stepper__label",
-							children: a.label
+							children: e.label
 						}),
-						a.description && /* @__PURE__ */ r("span", {
+						e.description && /* @__PURE__ */ i("span", {
 							className: "stepper__description",
-							children: a.description
+							children: e.description
 						})
 					]
 				})] });
-				return /* @__PURE__ */ r("li", {
-					className: `stepper__step stepper__step--${c}`,
-					children: l ? /* @__PURE__ */ r("button", {
+				return /* @__PURE__ */ i("li", {
+					className: `stepper__step stepper__step--${s}`,
+					children: l ? /* @__PURE__ */ i("button", {
 						type: "button",
 						className: "stepper__item stepper__item--action",
-						onClick: () => s(o, a),
+						onClick: () => c(o, e),
 						children: u
-					}) : /* @__PURE__ */ r("span", {
+					}) : /* @__PURE__ */ i("span", {
 						className: "stepper__item",
-						"aria-current": c === "current" ? "step" : void 0,
+						"aria-current": s === "current" ? "step" : void 0,
 						children: u
 					})
-				}, a.id ?? o);
+				}, e.id ?? o);
 			})
 		})]
 	});
 }
 //#endregion
-export { a as Stepper };
+export { o as Stepper };

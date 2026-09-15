@@ -3,6 +3,15 @@ import { type HeadingLevel, type HeadingSize } from '../../atoms/Heading/Heading
 import { type TagVariant } from '../../atoms/Tag/Tag';
 import type { CardMedia } from '../Card/Card';
 import './ProjectCard.css';
+/**
+ * El único texto de la tarjeta, y es **cromo**: cómo se llama la lista de
+ * etiquetas. Las etiquetas en sí son datos y viajan en `tags`; el título y la
+ * descripción son contenido.
+ */
+export interface ProjectCardMessages {
+    /** Nombre accesible de la lista de etiquetas de categoría. */
+    tags: string;
+}
 export type { TagVariant };
 export interface ProjectCardTag {
     /** Clave de React. Sin ella se usa la etiqueta. */
@@ -30,7 +39,11 @@ export interface ProjectCardProps {
     headingLevel?: HeadingLevel;
     /** Talla del título. Por defecto `5` (24px). */
     headingSize?: HeadingSize;
-    /** Nombre accesible de la lista de etiquetas. Por defecto «Categorías». */
+    /**
+     * Nombre accesible de la lista de etiquetas. **Sin default**: sin él, sale
+     * de `projectCard.tags` del `BrandMessagesProvider`. Solo se lee cuando hay
+     * etiquetas.
+     */
     tagsLabel?: string;
     className?: string;
     id?: string;

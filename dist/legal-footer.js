@@ -1,34 +1,37 @@
+'use client';
 import './legal-footer.css';
-import { Container as e } from "./container.js";
-import { Heading as t } from "./heading.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Container as t } from "./container.js";
+import { Heading as n } from "./heading.js";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/sections/LegalFooter/LegalFooter.tsx
-function i({ children: e, ...t }) {
-	return /* @__PURE__ */ n("a", {
+function a({ children: e, ...t }) {
+	return /* @__PURE__ */ r("a", {
 		...t,
 		children: e
 	});
 }
-function a({ label: a = "Legal", title: o, links: s, renderLink: c = i, width: l = "xl", surface: u, className: d }) {
-	return /* @__PURE__ */ n("footer", {
+function o({ label: o, title: s, links: c, renderLink: l = a, width: u = "xl", surface: d, className: f }) {
+	let p = e("legalFooter");
+	return /* @__PURE__ */ r("footer", {
 		className: [
 			"legal-footer",
-			u === "dark" && "surface-dark",
-			d
+			d === "dark" && "surface-dark",
+			f
 		].filter(Boolean).join(" "),
-		children: /* @__PURE__ */ r(e, {
-			width: l,
+		children: /* @__PURE__ */ i(t, {
+			width: u,
 			innerClassName: "legal-footer__inner",
-			children: [o && /* @__PURE__ */ n(t, {
+			children: [s && /* @__PURE__ */ r(n, {
 				level: 2,
 				size: 6,
 				className: "legal-footer__title",
-				children: o
-			}), /* @__PURE__ */ n("nav", {
-				"aria-label": a,
-				children: /* @__PURE__ */ n("ul", {
+				children: s
+			}), /* @__PURE__ */ r("nav", {
+				"aria-label": p("label", o),
+				children: /* @__PURE__ */ r("ul", {
 					className: "legal-footer__links",
-					children: s.map((e) => /* @__PURE__ */ n("li", { children: c({
+					children: c.map((e) => /* @__PURE__ */ r("li", { children: l({
 						href: e.href,
 						className: "legal-footer__link link--ink",
 						children: e.label
@@ -39,4 +42,4 @@ function a({ label: a = "Legal", title: o, links: s, renderLink: c = i, width: l
 	});
 }
 //#endregion
-export { a as LegalFooter };
+export { o as LegalFooter };

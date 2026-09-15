@@ -1,29 +1,30 @@
 'use client';
 import './dots-button.css';
-import { Icon as e } from "./icon.js";
-import { Button as t } from "./button.js";
-import { forwardRef as n } from "react";
-import { jsx as r } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Icon as t } from "./icon.js";
+import { Button as n } from "./button.js";
+import { forwardRef as r } from "react";
+import { jsx as i } from "react/jsx-runtime";
 //#region src/stories/atoms/DotsButton/DotsButton.tsx
-var i = n(function({ size: n = "md", orientation: i = "horizontal", "aria-label": a = "Más opciones", className: o, ...s }, c) {
-	let l = [
+var a = r(function({ size: r = "md", orientation: a = "horizontal", "aria-label": o, className: s, ...c }, l) {
+	let u = e("dotsButton"), d = [
 		"dots-button",
-		i === "vertical" ? "dots-button--vertical" : "",
-		o
+		a === "vertical" ? "dots-button--vertical" : "",
+		s
 	].filter(Boolean).join(" ");
-	return /* @__PURE__ */ r(t, {
-		ref: c,
+	return /* @__PURE__ */ i(n, {
+		ref: l,
 		variant: "ghost",
 		iconOnly: !0,
-		size: n,
-		"aria-label": a,
-		className: l,
-		...s,
-		children: /* @__PURE__ */ r(e, {
+		size: r,
+		"aria-label": u("label", o),
+		className: d,
+		...c,
+		children: /* @__PURE__ */ i(t, {
 			name: "dots",
-			size: n === "lg" ? "md" : "sm"
+			size: r === "lg" ? "md" : "sm"
 		})
 	});
 });
 //#endregion
-export { i as DotsButton };
+export { a as DotsButton };

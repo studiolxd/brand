@@ -1,6 +1,15 @@
 import type { ReactNode } from 'react';
 import { type ContainerWidth } from '../../atoms/Container/Container';
 import './LegalFooter.css';
+/**
+ * El único texto del pie, y es **cromo**: cómo se llama esa navegación. Los
+ * rótulos de los enlaces —aviso legal, privacidad, cookies— son datos y viajan
+ * en `links`; el `title` es el contenido de ESE pie.
+ */
+export interface LegalFooterMessages {
+    /** Nombre accesible del `nav` de enlaces legales. */
+    label: string;
+}
 export interface LegalFooterLink {
     id: string;
     label: string;
@@ -12,7 +21,10 @@ export type LegalFooterRenderLinkProps = {
     children: ReactNode;
 };
 export interface LegalFooterProps {
-    /** Nombre accesible del `nav`. */
+    /**
+     * Nombre accesible del `nav`. **Sin default**: sin él, sale de
+     * `legalFooter.label` del `BrandMessagesProvider`.
+     */
     label?: string;
     /** Título opcional sobre los enlaces. */
     title?: string;

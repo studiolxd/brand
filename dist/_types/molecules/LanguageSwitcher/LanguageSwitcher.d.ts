@@ -1,5 +1,14 @@
 import type { ReactNode } from 'react';
 import './LanguageSwitcher.css';
+/**
+ * El único texto del selector, y es **cromo**: cómo se llama el control. Los
+ * nombres de los idiomas **no** están aquí y no es olvido: van cada uno en su
+ * propio idioma («Español», «English») y viajan en `languages`, que son datos.
+ */
+export interface LanguageSwitcherMessages {
+    /** Etiqueta del control (visible en `compact`, nombre del `nav` en `list`). */
+    label: string;
+}
 export interface Language {
     /** Código BCP 47 (`es`, `en`, `pt-BR`). Es el valor; en el control se muestra el nombre. */
     code: string;
@@ -19,7 +28,10 @@ export interface LanguageSwitcherProps {
     value: string;
     /** Cambio de idioma. Qué hacer con él (enrutar, persistir) es del producto. */
     onChange?: (code: string) => void;
-    /** Nombre accesible del control (la etiqueta del campo). */
+    /**
+     * Nombre accesible del control (la etiqueta del campo). **Sin default**: sin
+     * él, sale de `languageSwitcher.label` del `BrandMessagesProvider`.
+     */
     label?: string;
     /** `id` del control en compacto (enlaza la etiqueta). */
     id?: string;

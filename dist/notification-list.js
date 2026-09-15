@@ -1,71 +1,73 @@
 'use client';
 import './notification-list.css';
-import { Icon as e } from "./icon.js";
-import { VisuallyHidden as t } from "./visually-hidden.js";
-import { Button as n } from "./button.js";
-import { Text as r } from "./text.js";
-import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Icon as t } from "./icon.js";
+import { VisuallyHidden as n } from "./visually-hidden.js";
+import { Button as r } from "./button.js";
+import { Text as i } from "./text.js";
+import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
 //#region src/stories/molecules/NotificationList/NotificationList.tsx
-function s({ children: e, ...t }) {
-	return /* @__PURE__ */ a("a", {
+function c({ children: e, ...t }) {
+	return /* @__PURE__ */ o("a", {
 		...t,
 		children: e
 	});
 }
-function c({ items: c, renderLink: l = s, renderActions: u, onItemClick: d, onMarkRead: f, label: p = "Notificaciones", unreadLabel: m = "Sin leer", markReadLabel: h = "Marcar como leída", className: g }) {
-	return c.length === 0 ? null : /* @__PURE__ */ a("ul", {
-		className: ["notification-list", g].filter(Boolean).join(" "),
-		"aria-label": p,
-		children: c.map((s) => {
-			let c = s.unread, p = u?.(s);
-			return /* @__PURE__ */ o("li", {
+function l({ items: l, renderLink: u = c, renderActions: d, onItemClick: f, onMarkRead: p, label: m, unreadLabel: h, markReadLabel: g, className: _ }) {
+	let v = e("notificationList");
+	return l.length === 0 ? null : /* @__PURE__ */ o("ul", {
+		className: ["notification-list", _].filter(Boolean).join(" "),
+		"aria-label": v("label", m),
+		children: l.map((e) => {
+			let c = e.unread, l = d?.(e);
+			return /* @__PURE__ */ s("li", {
 				className: "notification-list__item",
 				children: [
-					/* @__PURE__ */ a("span", {
+					/* @__PURE__ */ o("span", {
 						className: "notification-list__indicator",
-						children: c && /* @__PURE__ */ o(i, { children: [/* @__PURE__ */ a(e, {
+						children: c && /* @__PURE__ */ s(a, { children: [/* @__PURE__ */ o(t, {
 							name: "dot",
 							size: "sm",
 							className: "notification-list__dot"
-						}), /* @__PURE__ */ a(t, { children: s.unreadLabel ?? m })] })
+						}), /* @__PURE__ */ o(n, { children: e.unreadLabel ?? v("unread", h) })] })
 					}),
-					/* @__PURE__ */ o("div", {
+					/* @__PURE__ */ s("div", {
 						className: "notification-list__text",
-						children: [s.href ? l({
-							href: s.href,
+						children: [e.href ? u({
+							href: e.href,
 							className: "notification-list__title",
-							onClick: d ? () => d(s) : void 0,
-							children: s.title
-						}) : /* @__PURE__ */ a(r, {
+							onClick: f ? () => f(e) : void 0,
+							children: e.title
+						}) : /* @__PURE__ */ o(i, {
 							className: "notification-list__title",
-							children: s.title
-						}), s.body && /* @__PURE__ */ a(r, {
+							children: e.title
+						}), e.body && /* @__PURE__ */ o(i, {
 							tone: "muted",
 							className: "notification-list__body",
-							children: s.body
+							children: e.body
 						})]
 					}),
-					(f || p) && /* @__PURE__ */ o("div", {
+					(p || l) && /* @__PURE__ */ s("div", {
 						className: "notification-list__actions",
-						children: [f && c && /* @__PURE__ */ a(n, {
+						children: [p && c && /* @__PURE__ */ o(r, {
 							variant: "text",
 							size: "sm",
-							onClick: () => f(s.id),
-							children: h
-						}), p]
+							onClick: () => p(e.id),
+							children: v("markRead", g)
+						}), l]
 					}),
-					s.timeDateTime ? /* @__PURE__ */ a("time", {
+					e.timeDateTime ? /* @__PURE__ */ o("time", {
 						className: "notification-list__time",
-						dateTime: s.timeDateTime,
-						children: s.time
-					}) : /* @__PURE__ */ a("span", {
+						dateTime: e.timeDateTime,
+						children: e.time
+					}) : /* @__PURE__ */ o("span", {
 						className: "notification-list__time",
-						children: s.time
+						children: e.time
 					})
 				]
-			}, s.id);
+			}, e.id);
 		})
 	});
 }
 //#endregion
-export { c as NotificationList };
+export { l as NotificationList };

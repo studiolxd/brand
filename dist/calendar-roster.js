@@ -23,48 +23,51 @@ var u = {
 }, d = [
 	{
 		type: "holiday",
-		label: "Festivo"
+		key: "holiday"
 	},
 	{
 		type: "vacation",
-		label: "Vacaciones"
+		key: "vacation"
 	},
 	{
 		type: "absence",
-		label: "Ausencia"
+		key: "absence"
 	},
 	{
 		type: "recovery",
-		label: "Recuperación"
+		key: "recovery"
 	},
 	{
 		type: "birthday",
-		label: "Cumpleaños"
+		key: "birthday"
 	},
 	{
 		type: "non-working",
-		label: "No laborable"
+		key: "nonWorking"
 	}
 ];
-function f({ rows: f, month: p, onMonthChange: m, hrefBuilder: h, linkComponent: g, renderCell: _, nameLabel: v = "Empleado", birthdayPrefix: y = "🎂 ", showLegend: b = !0, locale: x = "es-ES", legendItems: S = d, legendLabel: C = "Leyenda", previousMonthLabel: w, nextMonthLabel: T, className: E }) {
-	let D = e("calendar"), O = /* @__PURE__ */ new Date(), k = l(p), A = r(p, -1), j = r(p, 1), M = new Intl.DateTimeFormat(x, {
+function f({ rows: f, month: p, onMonthChange: m, hrefBuilder: h, linkComponent: g, renderCell: _, nameLabel: v, birthdayPrefix: y = "🎂 ", showLegend: b = !0, locale: x = "es-ES", legendItems: S, legendLabel: C, previousMonthLabel: w, nextMonthLabel: T, className: E }) {
+	let D = e("calendar"), O = e("calendarRoster"), k = S ?? (b ? d.map(({ type: e, key: t }) => ({
+		type: e,
+		label: O(t)
+	})) : []), A = /* @__PURE__ */ new Date(), j = l(p), M = r(p, -1), N = r(p, 1), P = new Intl.DateTimeFormat(x, {
 		month: "long",
 		year: "numeric"
-	}).format(p), N = new Intl.DateTimeFormat(x, { weekday: "narrow" }), P = new Intl.DateTimeFormat(x, { weekday: "long" }), F = m ? (e) => (t) => {
+	}).format(p), F = new Intl.DateTimeFormat(x, { weekday: "narrow" }), I = new Intl.DateTimeFormat(x, { weekday: "long" }), L = m ? (e) => (t) => {
 		h && t.preventDefault(), m(e);
-	} : void 0, I = `roster-title-${p.getFullYear()}-${p.getMonth()}`;
+	} : void 0, R = `roster-title-${p.getFullYear()}-${p.getMonth()}`;
 	return /* @__PURE__ */ s("div", {
 		className: ["calendar-roster", E].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ o("div", {
 				className: "calendar-roster__nav",
 				children: /* @__PURE__ */ o(n, {
-					label: M,
-					labelId: I,
-					prevHref: h?.(A),
-					nextHref: h?.(j),
-					prevOnClick: F?.(A),
-					nextOnClick: F?.(j),
+					label: P,
+					labelId: R,
+					prevHref: h?.(M),
+					nextHref: h?.(N),
+					prevOnClick: L?.(M),
+					nextOnClick: L?.(N),
 					prevLabel: D("previousMonth", w),
 					nextLabel: D("nextMonth", T),
 					linkComponent: g
@@ -74,17 +77,17 @@ function f({ rows: f, month: p, onMonthChange: m, hrefBuilder: h, linkComponent:
 				className: "calendar-roster__wrap",
 				children: /* @__PURE__ */ s("table", {
 					className: "calendar-roster__table",
-					"aria-labelledby": I,
+					"aria-labelledby": R,
 					children: [/* @__PURE__ */ o("thead", { children: /* @__PURE__ */ s("tr", { children: [/* @__PURE__ */ o("th", {
 						className: "calendar-roster__th-name",
 						scope: "col",
-						children: v
-					}), k.map((e) => {
-						let t = i(e, O), n = [
+						children: O("name", v)
+					}), j.map((e) => {
+						let t = i(e, A), n = [
 							"calendar-roster__th-day",
 							c(e) && "calendar-roster__th-day--weekend",
 							t && "calendar-roster__th-day--today"
-						].filter(Boolean).join(" "), r = String(e.getDate()).padStart(2, "0"), a = N.format(e), l = P.format(e);
+						].filter(Boolean).join(" "), r = String(e.getDate()).padStart(2, "0"), a = F.format(e), l = I.format(e);
 						return /* @__PURE__ */ s("th", {
 							className: n,
 							scope: "col",
@@ -104,8 +107,8 @@ function f({ rows: f, month: p, onMonthChange: m, hrefBuilder: h, linkComponent:
 						className: "calendar-roster__th-name-row",
 						title: e.name,
 						children: e.name
-					}), k.map((n) => {
-						let r = n.getDate(), l = e.cells[r] ?? null, d = c(n), f = i(n, O), p = l?.type === "holiday", m = l?.type === "non-working";
+					}), j.map((n) => {
+						let r = n.getDate(), l = e.cells[r] ?? null, d = c(n), f = i(n, A), p = l?.type === "holiday", m = l?.type === "non-working";
 						return /* @__PURE__ */ o("td", {
 							className: [
 								"calendar-roster__cell",
@@ -128,8 +131,8 @@ function f({ rows: f, month: p, onMonthChange: m, hrefBuilder: h, linkComponent:
 			b && /* @__PURE__ */ o("div", {
 				className: "calendar-roster__legend",
 				role: "group",
-				"aria-label": C,
-				children: S.map(({ type: e, label: n }) => /* @__PURE__ */ o("span", {
+				"aria-label": O("legend", C),
+				children: k.map(({ type: e, label: n }) => /* @__PURE__ */ o("span", {
 					className: "calendar-roster__legend-item",
 					children: e === "non-working" ? /* @__PURE__ */ s(a, { children: [/* @__PURE__ */ o("span", { className: "calendar-roster__legend-swatch calendar-roster__legend-swatch--non-working" }), n] }) : /* @__PURE__ */ o(t, {
 						variant: u[e],

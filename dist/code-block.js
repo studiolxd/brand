@@ -1,69 +1,69 @@
 'use client';
 import './code-block.css';
-import { Icon as e } from "./icon.js";
-import { VisuallyHidden as t } from "./visually-hidden.js";
-import { Button as n } from "./button.js";
-import { n as r } from "./_shared/copy-to-clipboard.js";
-import { Tag as i } from "./tag.js";
-import { useRef as a } from "react";
-import { Fragment as o, jsx as s, jsxs as c } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Icon as t } from "./icon.js";
+import { VisuallyHidden as n } from "./visually-hidden.js";
+import { Button as r } from "./button.js";
+import { n as i } from "./_shared/copy-to-clipboard.js";
+import { Tag as a } from "./tag.js";
+import { useRef as o } from "react";
+import { Fragment as s, jsx as c, jsxs as l } from "react/jsx-runtime";
 //#region src/stories/molecules/CodeBlock/CodeBlock.tsx
-var l = (e) => e ? `Bloque de código ${e}` : "Bloque de código";
-function u({ children: u, language: d, copyable: f = !1, singleLine: p, copyLabel: m = "Copiar código", copiedLabel: h = "Copiado", codeLabel: g = l, className: _, ...v }) {
-	let y = a(null), { status: b, copy: x } = r(), S = b === "copied", C = () => x(() => y.current?.textContent ?? ""), w = typeof u == "string" && !u.includes("\n"), T = p ?? w, E = !!d || f, D = [
+function u({ children: u, language: d, copyable: f = !1, singleLine: p, copyLabel: m, copiedLabel: h, codeLabel: g, className: _, ...v }) {
+	let y = e("codeBlock"), b = e("copy"), x = o(null), { status: S, copy: C } = i(), w = S === "copied", T = () => C(() => x.current?.textContent ?? ""), E = typeof u == "string" && !u.includes("\n"), D = p ?? E, O = !!d || f, k = [
 		"code-block",
-		T ? "code-block--single-line" : "",
+		D ? "code-block--single-line" : "",
 		_ ?? ""
-	].filter(Boolean).join(" "), O = d && /* @__PURE__ */ s(i, {
+	].filter(Boolean).join(" "), A = d && /* @__PURE__ */ c(a, {
 		variant: "neutral",
 		className: "code-block__language",
 		children: d
-	}), k = f && /* @__PURE__ */ c(o, { children: [/* @__PURE__ */ s(n, {
+	}), j = f && /* @__PURE__ */ l(s, { children: [/* @__PURE__ */ c(r, {
 		iconOnly: !0,
 		variant: "ghost",
 		size: "sm",
-		"aria-label": m,
-		onClick: C,
+		"aria-label": y("copy", m),
+		onClick: T,
 		className: "code-block__copy",
-		children: /* @__PURE__ */ s(e, {
-			name: S ? "check" : "copy",
+		children: /* @__PURE__ */ c(t, {
+			name: w ? "check" : "copy",
 			size: "sm"
 		})
-	}), /* @__PURE__ */ s(t, {
+	}), /* @__PURE__ */ c(n, {
 		role: "status",
-		children: S ? h : ""
-	})] }), A = /* @__PURE__ */ s("pre", {
+		children: w ? b("copied", h) : ""
+	})] }), M = /* @__PURE__ */ c("pre", {
 		className: "code-block__pre",
 		tabIndex: 0,
 		role: "region",
-		"aria-label": g(d),
-		children: /* @__PURE__ */ s("code", {
-			ref: y,
+		"aria-label": y("region", g)(d),
+		children: /* @__PURE__ */ c("code", {
+			ref: x,
 			className: "code-block__code",
 			children: u
 		})
 	});
-	return T ? /* @__PURE__ */ s("div", {
-		className: D,
+	return D ? /* @__PURE__ */ c("div", {
+		className: k,
 		...v,
-		children: /* @__PURE__ */ c("div", {
+		children: /* @__PURE__ */ l("div", {
 			className: "code-block__row",
-			children: [A, E && /* @__PURE__ */ c("div", {
+			children: [M, O && /* @__PURE__ */ l("div", {
 				className: "code-block__controls",
-				children: [O, k]
+				children: [A, j]
 			})]
 		})
-	}) : /* @__PURE__ */ c("div", {
-		className: D,
+	}) : /* @__PURE__ */ l("div", {
+		className: k,
 		...v,
-		children: [E && /* @__PURE__ */ c("div", {
+		children: [O && /* @__PURE__ */ l("div", {
 			className: "code-block__header",
-			children: [O, k]
-		}), A]
+			children: [A, j]
+		}), M]
 	});
 }
 function d({ type: e, className: t, children: n, ...r }) {
-	return /* @__PURE__ */ s("span", {
+	return /* @__PURE__ */ c("span", {
 		className: [
 			"code-block__token",
 			`code-block__token--${e}`,

@@ -1,15 +1,52 @@
 import './Carousel.css';
+/**
+ * El cromo del carrusel: cómo se llaman la región y la pista, qué hacen sus
+ * mandos y qué se anuncia al cambiar de diapositiva. Todo cromo — dicen qué es
+ * y qué hace el carrusel, nunca qué hay dentro: el contenido de cada
+ * diapositiva lo pone quien la monta.
+ *
+ * Las dos `roleDescription` también van aquí: las lee el lector de pantalla en
+ * voz alta, así que son texto y no una palabra clave del motor.
+ */
+export interface CarouselMessages {
+    /** Nombre accesible de la región cuando la pantalla no le da uno propio. */
+    label: string;
+    /** `aria-roledescription` de la región: qué es esto. */
+    roleDescription: string;
+    /** Nombre accesible de la pista, la que recibe el foco para desplazarse. */
+    track: string;
+    /** Nombre accesible del botón de retroceso. */
+    previous: string;
+    /** Nombre accesible del botón de avance. */
+    next: string;
+    /** Nombre accesible del indicador n (base 0). Interpola, así que es función. */
+    indicator: (index: number) => string;
+    /** Nombre accesible del botón que detiene el avance automático. */
+    pause: string;
+    /** Nombre accesible del botón que lo reanuda. */
+    play: string;
+    /** Lo que se anuncia al cambiar de diapositiva. Interpola, así que es función. */
+    slideStatus: (index: number, total: number) => string;
+    /** `aria-roledescription` de cada diapositiva. */
+    slideRoleDescription: string;
+}
 export interface CarouselProps {
     /** Las diapositivas: uno o varios `CarouselSlide`. */
     children: React.ReactNode;
-    /** Nombre accesible de la región. Default: «Carrusel» (castellano). Una app multiidioma debe pasarlo traducido. */
+    /**
+     * Nombre accesible de la región. **Sin default**: sin él, sale de
+     * `carousel.label` del `BrandMessagesProvider`.
+     */
     label?: string;
     /**
-     * Texto de `aria-roledescription` de la región. Por defecto «carrusel», en
-     * castellano: es el lector de pantalla quien lo lee, así que se traduce.
+     * Texto de `aria-roledescription` de la región. **Sin default**: sin él,
+     * sale de `carousel.roleDescription`.
      */
     roleDescription?: string;
-    /** Nombre accesible de la pista, la que recibe el foco para desplazarse con el teclado. Default: «Diapositivas» (castellano). Una app multiidioma debe pasarlo traducido. */
+    /**
+     * Nombre accesible de la pista, la que recibe el foco para desplazarse con
+     * el teclado. **Sin default**: sin él, sale de `carousel.track`.
+     */
     trackLabel?: string;
     /**
      * Ancho de cada diapositiva — cualquier medida CSS (`'50%'`, `'18rem'`,
@@ -29,19 +66,34 @@ export interface CarouselProps {
      * movimiento automático: pararlo así es definitivo, no se reanuda solo.
      */
     autoplay?: number;
-    /** Texto accesible del botón «anterior». Default: «Anterior» (castellano). Una app multiidioma debe pasarlo traducido. */
+    /**
+     * Texto accesible del botón «anterior». **Sin default**: sin él, sale de
+     * `carousel.previous`. Solo se lee con `controls`.
+     */
     prevLabel?: string;
-    /** Texto accesible del botón «siguiente». Default: «Siguiente» (castellano). Una app multiidioma debe pasarlo traducido. */
+    /**
+     * Texto accesible del botón «siguiente». **Sin default**: sin él, sale de
+     * `carousel.next`. Solo se lee con `controls`.
+     */
     nextLabel?: string;
-    /** Texto accesible del indicador n. Default: «Ir a la diapositiva N» (castellano). Una app multiidioma debe pasarlo traducido. */
+    /**
+     * Texto accesible del indicador n. **Sin default**: sin él, sale de
+     * `carousel.indicator`. Solo se lee con `indicators`.
+     */
     indicatorLabel?: (index: number) => string;
-    /** Texto accesible del botón que detiene el avance automático. Por defecto «Pausar». */
+    /**
+     * Texto accesible del botón que detiene el avance automático. **Sin
+     * default**: sin él, sale de `carousel.pause`. Solo se lee con `autoplay`.
+     */
     pauseLabel?: string;
-    /** Texto accesible del botón que reanuda el avance automático. Por defecto «Reproducir». */
+    /**
+     * Texto accesible del botón que reanuda el avance automático. **Sin
+     * default**: sin él, sale de `carousel.play`. Solo se lee con `autoplay`.
+     */
     playLabel?: string;
     /**
-     * Texto que se anuncia al cambiar de diapositiva. Por defecto «Diapositiva N
-     * de M». Lo lee el lector de pantalla: se traduce.
+     * Texto que se anuncia al cambiar de diapositiva. **Sin default**: sin él,
+     * sale de `carousel.slideStatus`.
      */
     slideStatusLabel?: (index: number, count: number) => string;
     className?: string;
@@ -61,8 +113,8 @@ export interface CarouselProps {
 export declare function Carousel({ children, label, roleDescription, trackLabel, slideSize, controls, indicators, autoplay, prevLabel, nextLabel, indicatorLabel, pauseLabel, playLabel, slideStatusLabel, className, id, }: CarouselProps): import("react/jsx-runtime").JSX.Element;
 export interface CarouselSlideProps extends React.ComponentPropsWithoutRef<'div'> {
     /**
-     * Texto de `aria-roledescription` de la diapositiva. Por defecto
-     * «diapositiva», en castellano.
+     * Texto de `aria-roledescription` de la diapositiva. **Sin default**: sin
+     * él, sale de `carousel.slideRoleDescription` del `BrandMessagesProvider`.
      */
     roleDescription?: string;
     children: React.ReactNode;

@@ -1,100 +1,101 @@
 'use client';
 import './copyable-value.css';
-import { Icon as e } from "./icon.js";
-import { VisuallyHidden as t } from "./visually-hidden.js";
-import { Button as n } from "./button.js";
-import { n as r } from "./_shared/copy-to-clipboard.js";
-import { forwardRef as i, isValidElement as a } from "react";
-import { Fragment as o, jsx as s, jsxs as c } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Icon as t } from "./icon.js";
+import { VisuallyHidden as n } from "./visually-hidden.js";
+import { Button as r } from "./button.js";
+import { n as i } from "./_shared/copy-to-clipboard.js";
+import { forwardRef as a, isValidElement as o } from "react";
+import { Fragment as s, jsx as c, jsxs as l } from "react/jsx-runtime";
 //#region src/stories/atoms/CopyableValue/CopyableValue.tsx
-var l = 6, u = 12, d = new Set([
+var u = 6, d = 12, f = new Set([
 	"/",
 	"-",
 	"_",
 	"."
 ]);
-function f(e) {
-	if (e.length <= l) return {
+function p(e) {
+	if (e.length <= u) return {
 		head: "",
 		tail: e
 	};
-	let t = Math.max(0, e.length - u);
-	for (let n = e.length - 2; n >= t; n--) if (d.has(e[n])) return {
+	let t = Math.max(0, e.length - d);
+	for (let n = e.length - 2; n >= t; n--) if (f.has(e[n])) return {
 		head: e.slice(0, n),
 		tail: e.slice(n)
 	};
 	return {
-		head: e.slice(0, e.length - l),
-		tail: e.slice(e.length - l)
+		head: e.slice(0, e.length - u),
+		tail: e.slice(e.length - u)
 	};
 }
-function p(e) {
+function m(e) {
 	if (e == null || typeof e == "boolean") return "";
 	if (typeof e == "string") return e;
 	if (typeof e == "number") return String(e);
 	if (Array.isArray(e)) {
 		let t = "";
 		for (let n of e) {
-			let e = p(n);
+			let e = m(n);
 			if (e === null) return null;
 			t += e;
 		}
 		return t;
 	}
-	return a(e) ? p(e.props.children) : null;
+	return o(e) ? m(e.props.children) : null;
 }
-var m = 24, h = i(function({ children: i, copyText: a, copyLabel: l = "Copiar", copiedLabel: u = "Copiado", className: d }, h) {
-	let { status: g, copy: _ } = r(), v = g === "copied", y = ["copyable-value", d].filter(Boolean).join(" "), b = typeof i == "string", x = b ? f(i) : null, S = b ? null : p(i), C = b ? i : S ?? "", w = !b && S !== null && !/\s/.test(S) && S.length <= m, T = /* @__PURE__ */ s(n, {
+var h = 24, g = a(function({ children: a, copyText: o, copyLabel: u, copiedLabel: d, className: f }, g) {
+	let _ = e("copy"), { status: v, copy: y } = i(), b = v === "copied", x = ["copyable-value", f].filter(Boolean).join(" "), S = typeof a == "string", C = S ? p(a) : null, w = S ? null : m(a), T = S ? a : w ?? "", E = !S && w !== null && !/\s/.test(w) && w.length <= h, D = /* @__PURE__ */ c(r, {
 		iconOnly: !0,
 		variant: "ghost",
 		size: "sm",
-		"aria-label": l,
-		onClick: () => _(() => a ?? C),
+		"aria-label": _("label", u),
+		onClick: () => y(() => o ?? T),
 		className: "copyable-value__copy",
-		children: /* @__PURE__ */ s(e, {
-			name: v ? "check" : "copy",
+		children: /* @__PURE__ */ c(t, {
+			name: b ? "check" : "copy",
 			size: "sm"
 		})
-	}), E;
-	if (b) {
-		let { head: e, tail: t } = x;
-		E = /* @__PURE__ */ c("span", {
+	}), O;
+	if (S) {
+		let { head: e, tail: t } = C;
+		O = /* @__PURE__ */ l("span", {
 			className: "copyable-value__value",
-			children: [e, /* @__PURE__ */ c("span", {
+			children: [e, /* @__PURE__ */ l("span", {
 				className: "copyable-value__tail",
 				children: [
 					t,
 					"⁠",
-					T
+					D
 				]
 			})]
 		});
-	} else E = w ? /* @__PURE__ */ c("span", {
+	} else O = E ? /* @__PURE__ */ l("span", {
 		className: "copyable-value__tail",
 		children: [
-			/* @__PURE__ */ s("span", {
+			/* @__PURE__ */ c("span", {
 				className: "copyable-value__value",
-				children: i
+				children: a
 			}),
 			"⁠",
-			T
+			D
 		]
-	}) : /* @__PURE__ */ c(o, { children: [
-		/* @__PURE__ */ s("span", {
+	}) : /* @__PURE__ */ l(s, { children: [
+		/* @__PURE__ */ c("span", {
 			className: "copyable-value__value",
-			children: i
+			children: a
 		}),
 		"⁠",
-		T
+		D
 	] });
-	return /* @__PURE__ */ c("span", {
-		ref: h,
-		className: y,
-		children: [E, /* @__PURE__ */ s(t, {
+	return /* @__PURE__ */ l("span", {
+		ref: g,
+		className: x,
+		children: [O, /* @__PURE__ */ c(n, {
 			role: "status",
-			children: v ? u : ""
+			children: b ? _("copied", d) : ""
 		})]
 	});
 });
 //#endregion
-export { h as CopyableValue };
+export { g as CopyableValue };

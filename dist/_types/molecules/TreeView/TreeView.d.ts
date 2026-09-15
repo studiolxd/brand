@@ -1,5 +1,13 @@
 import { type ReactNode } from 'react';
 import './TreeView.css';
+/**
+ * El único texto del árbol, y es **cromo**: el nombre genérico de la región.
+ * Qué árbol es —«Contenidos del curso»— lo dice la prop `label`, que gana.
+ */
+export interface TreeViewMessages {
+    /** Nombre accesible del árbol cuando la pantalla no le da uno propio. */
+    label: string;
+}
 export interface TreeViewNode {
     /** Identificador único en todo el árbol. */
     id: string;
@@ -55,8 +63,9 @@ export interface TreeViewProps extends Omit<React.ComponentPropsWithoutRef<'ul'>
     /** Se llama con el id del nodo elegido. */
     onSelectedChange?: (id: string) => void;
     /**
-     * Nombre accesible del árbol. Default: «Árbol» (castellano). Una app
-     * multiidioma debe pasarlo traducido.
+     * Nombre accesible del árbol. **Sin default**: sin él, sale de
+     * `treeView.label` del `BrandMessagesProvider`, que es el nombre genérico;
+     * esta prop es la que dice de qué árbol se trata.
      */
     label?: string;
     /**

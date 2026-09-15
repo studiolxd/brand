@@ -1,6 +1,16 @@
 import { type ReactNode } from 'react';
 import type { TagVariant } from '../../atoms/Tag/Tag';
 import './CalendarPlanner.css';
+/**
+ * El único texto propio del planificador: el botón que abre los eventos que no
+ * caben en una celda. Las **flechas de mes no están aquí** —son el mismo texto
+ * que el del `Calendar` y salen de `calendar.previousMonth` / `.nextMonth`—, y
+ * `gridLabel` tampoco: nombra a ESE planificador.
+ */
+export interface CalendarPlannerMessages {
+    /** Rótulo del botón de desbordamiento: «+3 más». Interpola, así que es función. */
+    more: (count: number) => string;
+}
 export interface PlannerEvent {
     id: string;
     date: Date;
@@ -60,9 +70,9 @@ export interface CalendarPlannerProps {
      */
     gridLabel?: string;
     /**
-     * Rótulo visible del botón que abre los eventos ocultos de una celda.
-     * Default: `+N más` (castellano). Interpola el número, así que es una
-     * función: una app multiidioma debe pasarla traducida.
+     * Rótulo visible del botón que abre los eventos ocultos de una celda. **Sin
+     * default**: sin él, sale de `calendarPlanner.more` del
+     * `BrandMessagesProvider`. Solo se lee cuando alguna celda desborda.
      */
     moreLabel?: (count: number) => string;
     /** Tamaño del componente. Default: 'md' */

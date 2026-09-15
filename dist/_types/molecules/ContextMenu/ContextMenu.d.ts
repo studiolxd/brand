@@ -14,7 +14,11 @@ export interface ContextMenuProps {
     /** Talla del botón de tres puntos (talla del sistema). */
     triggerSize?: 'sm' | 'md' | 'lg';
     triggerOrientation?: 'horizontal' | 'vertical';
-    /** Nombre accesible del botón. */
+    /**
+     * Nombre accesible del botón. **Reenvío puro** al `DotsButton`, que lee
+     * `dotsButton.label` del `BrandMessagesProvider`: no hace falta pasarlo para
+     * traducir.
+     */
     label?: string;
 }
 /**

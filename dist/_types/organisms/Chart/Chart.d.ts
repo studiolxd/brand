@@ -1,5 +1,29 @@
 import { type ReactNode } from 'react';
 import './Chart.css';
+/**
+ * El cromo del gráfico: el nombre de la tabla equivalente, sus encabezados, la
+ * pista que se lee al enfocar el lienzo y el aviso de serie vacía. Dicen lo
+ * mismo en cualquier gráfico de la suite.
+ *
+ * **Lo que NO está aquí, y no es olvido:** `ariaLabel` —qué cuenta ESTE
+ * gráfico— sigue siendo obligatorio y sin default; el `title`, el `caption` y
+ * los nombres de las series son contenido; y las cifras son formato, que sale
+ * de `locale` con `Intl`.
+ */
+export interface ChartMessages {
+    /** Título de la tabla equivalente oculta. */
+    tableCaption: string;
+    /** Frase que describe el gráfico para quien lo enfoca. */
+    tableHint: string;
+    /** Encabezado de la primera columna de la tabla. */
+    category: string;
+    /** Encabezado de la columna de valores en `pie`/`donut`. */
+    value: string;
+    /** Encabezado de la columna de porcentaje en `pie`/`donut`. */
+    share: string;
+    /** Texto cuando no hay datos que mostrar. */
+    empty: string;
+}
 export type ChartType = 'line' | 'area' | 'bar' | 'scatter' | 'pie' | 'donut' | 'funnel' | 'treemap' | 'radial-bar' | 'radar';
 export interface ChartSeries {
     /** Clave del valor dentro de cada fila de `data`. */
@@ -83,21 +107,35 @@ export interface ChartProps extends Omit<React.ComponentPropsWithoutRef<'figure'
     valueLabels?: ChartValueLabels;
     /** Locale con el que se formatean los números. Default `'es-ES'`. */
     locale?: string;
-    /** Título de la tabla equivalente oculta. Default: «Datos del gráfico» (castellano). */
+    /**
+     * Título de la tabla equivalente oculta. **Sin default**: sin él, sale de
+     * `chart.tableCaption` del `BrandMessagesProvider`.
+     */
     tableCaption?: string;
     /**
-     * Frase que describe el gráfico para quien lo enfoca. Default: «Los datos
-     * completos están en la tabla que sigue; flechas para recorrer el gráfico.»
-     * (castellano).
+     * Frase que describe el gráfico para quien lo enfoca. **Sin default**: sin
+     * él, sale de `chart.tableHint`.
      */
     tableHint?: string;
-    /** Encabezado de la primera columna de la tabla. Default: «Categoría» (castellano). */
+    /**
+     * Encabezado de la primera columna de la tabla. **Sin default**: sin él,
+     * sale de `chart.category`.
+     */
     categoryLabel?: string;
-    /** Encabezado de la columna de valores en `pie`/`donut`. Default: «Valor» (castellano). */
+    /**
+     * Encabezado de la columna de valores en `pie`/`donut`. **Sin default**: sin
+     * él, sale de `chart.value`. Solo se lee en esos dos tipos.
+     */
     valueLabel?: string;
-    /** Encabezado de la columna de porcentaje en `pie`/`donut`. Default: «Porcentaje» (castellano). */
+    /**
+     * Encabezado de la columna de porcentaje en `pie`/`donut`. **Sin default**:
+     * sin él, sale de `chart.share`. Solo se lee en esos dos tipos.
+     */
     shareLabel?: string;
-    /** Texto cuando no hay datos. Default: «Sin datos que mostrar» (castellano). */
+    /**
+     * Texto cuando no hay datos. **Sin default**: sin él, sale de `chart.empty`.
+     * Solo se lee cuando no hay nada que pintar.
+     */
     emptyMessage?: string;
     /** Se añade DESPUÉS de las clases propias del componente. */
     className?: string;

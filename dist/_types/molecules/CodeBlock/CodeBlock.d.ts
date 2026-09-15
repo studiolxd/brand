@@ -1,4 +1,17 @@
 import './CodeBlock.css';
+/**
+ * Los dos textos propios del bloque de código. El acuse de copiar **no está
+ * aquí**: es el de toda la familia y sale de `copy.copied`.
+ */
+export interface CodeBlockMessages {
+    /** Nombre accesible del botón de copiar. Dice qué se copia: código. */
+    copy: string;
+    /**
+     * Nombre accesible del área de código, que es focalizable por tener scroll
+     * horizontal propio. Recibe el lenguaje cuando lo hay.
+     */
+    region: (language?: string) => string;
+}
 export interface CodeBlockProps extends React.ComponentPropsWithoutRef<'div'> {
     /** Código a mostrar. Texto plano o nodos ya resaltados por un highlighter externo. */
     children: React.ReactNode;
@@ -17,18 +30,19 @@ export interface CodeBlockProps extends React.ComponentPropsWithoutRef<'div'> {
      */
     singleLine?: boolean;
     /**
-     * aria-label del botón de copiar. Default: "Copiar código" (castellano).
-     * Una app multiidioma debe pasarla traducida.
+     * aria-label del botón de copiar. **Sin default**: sin él, sale de
+     * `codeBlock.copy` del `BrandMessagesProvider`. Solo se lee con `copyable`.
      */
     copyLabel?: string;
     /**
-     * Texto que se anuncia al lector de pantalla tras copiar. Default: "Copiado"
-     * (castellano).
+     * Texto que se anuncia al lector de pantalla tras copiar. **Sin default**:
+     * sin él, sale de `copy.copied` —el acuse de toda la familia de copiar, no
+     * uno propio del bloque.
      */
     copiedLabel?: string;
     /**
-     * Nombre accesible del área de código, que es focalizable por tener scroll
-     * horizontal propio. Recibe el `language` cuando lo hay. Default en castellano.
+     * Nombre accesible del área de código. Recibe el `language` cuando lo hay.
+     * **Sin default**: sin él, sale de `codeBlock.region`.
      */
     codeLabel?: (language?: string) => string;
     /** Se añade DESPUÉS de las clases propias del componente. */

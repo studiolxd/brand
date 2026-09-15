@@ -1,165 +1,166 @@
 'use client';
 import './tree-view.css';
-import { Icon as e } from "./icon.js";
-import { useCallback as t, useId as n, useMemo as r, useRef as i, useState as a } from "react";
-import { jsx as o, jsxs as s } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Icon as t } from "./icon.js";
+import { useCallback as n, useId as r, useMemo as i, useRef as a, useState as o } from "react";
+import { jsx as s, jsxs as c } from "react/jsx-runtime";
 //#region src/stories/molecules/TreeView/TreeView.tsx
-var c = 500;
-function l(e, t, n = 1, r) {
+var l = 500;
+function u(e, t, n = 1, r) {
 	return e.flatMap((e) => [{
 		node: e,
 		level: n,
 		parentId: r
-	}, ...e.children && t.has(e.id) ? l(e.children, t, n + 1, e.id) : []]);
+	}, ...e.children && t.has(e.id) ? u(e.children, t, n + 1, e.id) : []]);
 }
-function u({ items: u, expanded: d, defaultExpanded: f, onExpandedChange: p, selected: m, defaultSelected: h, onSelectedChange: g, label: _ = "Árbol", truncateFromLevel: v = 4, nodeRef: y, className: b, ...x }) {
-	let S = n(), C = i(null), [w, T] = a(f ?? []), E = d !== void 0, D = E ? d : w, [O, k] = a(h), A = m !== void 0, j = A ? m : O, M = r(() => new Set(D), [D]), N = r(() => l(u, M), [u, M]), [P, F] = a(void 0), I = P && N.some((e) => e.node.id === P) ? P : j && N.some((e) => e.node.id === j) ? j : N[0]?.node.id, L = i(""), R = i(0), z = t((e) => {
-		E || T(e), p?.(e);
-	}, [E, p]), B = t((e, t) => {
-		let n = M.has(e), r = t ?? !n;
-		r !== n && z(r ? [...D, e] : D.filter((t) => t !== e));
+function d({ items: d, expanded: f, defaultExpanded: p, onExpandedChange: m, selected: h, defaultSelected: g, onSelectedChange: _, label: v, truncateFromLevel: y = 4, nodeRef: b, className: x, ...S }) {
+	let C = e("treeView"), w = r(), T = a(null), [E, D] = o(p ?? []), O = f !== void 0, k = O ? f : E, [A, j] = o(g), M = h !== void 0, N = M ? h : A, P = i(() => new Set(k), [k]), F = i(() => u(d, P), [d, P]), [I, L] = o(void 0), R = I && F.some((e) => e.node.id === I) ? I : N && F.some((e) => e.node.id === N) ? N : F[0]?.node.id, z = a(""), B = a(0), V = n((e) => {
+		O || D(e), m?.(e);
+	}, [O, m]), H = n((e, t) => {
+		let n = P.has(e), r = t ?? !n;
+		r !== n && V(r ? [...k, e] : k.filter((t) => t !== e));
 	}, [
-		D,
-		M,
-		z
-	]), V = t((e) => {
-		A || k(e), g?.(e);
-	}, [A, g]), H = t((e) => {
-		let t = N.filter((t) => t.parentId === e.parentId && t.node.children?.length).map((e) => e.node.id).filter((e) => !M.has(e));
-		t.length !== 0 && z([...D, ...t]);
+		k,
+		P,
+		V
+	]), U = n((e) => {
+		M || j(e), _?.(e);
+	}, [M, _]), W = n((e) => {
+		let t = F.filter((t) => t.parentId === e.parentId && t.node.children?.length).map((e) => e.node.id).filter((e) => !P.has(e));
+		t.length !== 0 && V([...k, ...t]);
 	}, [
-		D,
-		N,
-		M,
-		z
-	]), U = t((e) => `${S}-${e}`, [S]), W = t((e) => {
-		e && (F(e), C.current?.querySelector(`[data-tree-item="${CSS.escape(e)}"]`)?.focus());
-	}, []), G = t((e, t) => {
-		let n = Date.now(), r = n - R.current > c ? e : L.current + e;
-		L.current = r, R.current = n;
+		k,
+		F,
+		P,
+		V
+	]), G = n((e) => `${w}-${e}`, [w]), K = n((e) => {
+		e && (L(e), T.current?.querySelector(`[data-tree-item="${CSS.escape(e)}"]`)?.focus());
+	}, []), q = n((e, t) => {
+		let n = Date.now(), r = n - B.current > l ? e : z.current + e;
+		z.current = r, B.current = n;
 		let i = r.length === 1 ? t + 1 : Math.max(t, 0), a = r.toLowerCase();
-		for (let e = 0; e < N.length; e++) {
-			let t = N[(i + e) % N.length].node.id;
-			if ((C.current?.querySelector(`[data-tree-item="${CSS.escape(t)}"] > .tree-view__row .tree-view__label`)?.textContent ?? "").trim().toLowerCase().startsWith(a)) {
-				W(t);
+		for (let e = 0; e < F.length; e++) {
+			let t = F[(i + e) % F.length].node.id;
+			if ((T.current?.querySelector(`[data-tree-item="${CSS.escape(t)}"] > .tree-view__row .tree-view__label`)?.textContent ?? "").trim().toLowerCase().startsWith(a)) {
+				K(t);
 				return;
 			}
 		}
-	}, [N, W]);
-	function K(e, t) {
-		let { node: n, parentId: r } = t, i = N.findIndex((e) => e.node.id === n.id), a = !!n.children?.length, o = M.has(n.id);
+	}, [F, K]);
+	function J(e, t) {
+		let { node: n, parentId: r } = t, i = F.findIndex((e) => e.node.id === n.id), a = !!n.children?.length, o = P.has(n.id);
 		switch (e.key) {
 			case "ArrowDown":
-				e.preventDefault(), W(N[i + 1]?.node.id);
+				e.preventDefault(), K(F[i + 1]?.node.id);
 				break;
 			case "ArrowUp":
-				e.preventDefault(), W(N[i - 1]?.node.id);
+				e.preventDefault(), K(F[i - 1]?.node.id);
 				break;
 			case "ArrowRight":
-				e.preventDefault(), a && !o ? B(n.id, !0) : a && o && W(N[i + 1]?.node.id);
+				e.preventDefault(), a && !o ? H(n.id, !0) : a && o && K(F[i + 1]?.node.id);
 				break;
 			case "ArrowLeft":
-				e.preventDefault(), a && o ? B(n.id, !1) : r && W(r);
+				e.preventDefault(), a && o ? H(n.id, !1) : r && K(r);
 				break;
 			case "Home":
-				e.preventDefault(), W(N[0]?.node.id);
+				e.preventDefault(), K(F[0]?.node.id);
 				break;
 			case "End":
-				e.preventDefault(), W(N[N.length - 1]?.node.id);
+				e.preventDefault(), K(F[F.length - 1]?.node.id);
 				break;
 			case "Enter":
 			case " ":
-				e.preventDefault(), n.disabled || V(n.id);
+				e.preventDefault(), n.disabled || U(n.id);
 				break;
 			case "*":
-				e.preventDefault(), H(t);
+				e.preventDefault(), W(t);
 				break;
 			default:
-				e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey && (e.preventDefault(), G(e.key, i));
+				e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey && (e.preventDefault(), q(e.key, i));
 				break;
 		}
 	}
-	function q(t, n, r) {
-		return t.map((t) => {
-			let i = !!t.children?.length, a = i && M.has(t.id), c = j === t.id, l = a && t.iconExpanded || t.icon, u = n >= v, d = u && typeof t.label == "string" ? t.label : void 0, f = t.dropTarget ? "target" : t.dropDisabled ? "disabled" : void 0;
-			return /* @__PURE__ */ s("li", {
+	function Y(e, n, r) {
+		return e.map((e) => {
+			let i = !!e.children?.length, a = i && P.has(e.id), o = N === e.id, l = a && e.iconExpanded || e.icon, u = n >= y, d = u && typeof e.label == "string" ? e.label : void 0, f = e.dropTarget ? "target" : e.dropDisabled ? "disabled" : void 0;
+			return /* @__PURE__ */ c("li", {
 				role: "treeitem",
-				"data-tree-item": t.id,
-				"aria-labelledby": U(t.id),
+				"data-tree-item": e.id,
+				"aria-labelledby": G(e.id),
 				"aria-expanded": i ? a : void 0,
-				"aria-selected": c,
+				"aria-selected": o,
 				"aria-level": n,
-				"aria-disabled": t.disabled || void 0,
+				"aria-disabled": e.disabled || void 0,
 				"data-drop": f,
-				tabIndex: I === t.id ? 0 : -1,
+				tabIndex: R === e.id ? 0 : -1,
 				className: [
 					"tree-view__item",
-					c ? "tree-view__item--selected" : "",
-					t.disabled ? "tree-view__item--disabled" : "",
-					t.dropTarget ? "tree-view__item--drop-target" : "",
-					t.dropDisabled ? "tree-view__item--drop-disabled" : ""
+					o ? "tree-view__item--selected" : "",
+					e.disabled ? "tree-view__item--disabled" : "",
+					e.dropTarget ? "tree-view__item--drop-target" : "",
+					e.dropDisabled ? "tree-view__item--drop-disabled" : ""
 				].filter(Boolean).join(" "),
-				onKeyDown: (e) => {
-					e.target === e.currentTarget && K(e, {
-						node: t,
+				onKeyDown: (t) => {
+					t.target === t.currentTarget && J(t, {
+						node: e,
 						level: n,
 						parentId: r
 					});
 				},
-				onFocus: (e) => {
-					e.target === e.currentTarget && F(t.id);
+				onFocus: (t) => {
+					t.target === t.currentTarget && L(e.id);
 				},
-				onClick: t.disabled ? void 0 : (e) => {
-					e.stopPropagation(), i && B(t.id), V(t.id), W(t.id);
+				onClick: e.disabled ? void 0 : (t) => {
+					t.stopPropagation(), i && H(e.id), U(e.id), K(e.id);
 				},
-				children: [/* @__PURE__ */ s("span", {
+				children: [/* @__PURE__ */ c("span", {
 					className: "tree-view__row",
-					ref: y ? (e) => y(t.id, e) : void 0,
+					ref: b ? (t) => b(e.id, t) : void 0,
 					children: [
-						/* @__PURE__ */ o("span", {
+						/* @__PURE__ */ s("span", {
 							className: "tree-view__chevron-slot",
 							"aria-hidden": "true",
-							children: i && /* @__PURE__ */ o(e, {
+							children: i && /* @__PURE__ */ s(t, {
 								name: "chevron",
 								className: "tree-view__chevron",
 								size: "sm"
 							})
 						}),
-						l && /* @__PURE__ */ o("span", {
+						l && /* @__PURE__ */ s("span", {
 							className: "tree-view__icon",
 							"aria-hidden": "true",
 							children: l
 						}),
-						/* @__PURE__ */ o("span", {
+						/* @__PURE__ */ s("span", {
 							className: ["tree-view__label", u ? "tree-view__label--truncated" : ""].filter(Boolean).join(" "),
-							id: U(t.id),
+							id: G(e.id),
 							title: d,
-							children: t.label
+							children: e.label
 						}),
-						t.actions && /* @__PURE__ */ o("span", {
+						e.actions && /* @__PURE__ */ s("span", {
 							className: "tree-view__actions",
 							onClick: (e) => e.stopPropagation(),
 							onKeyDown: (e) => e.stopPropagation(),
 							onKeyUp: (e) => e.stopPropagation(),
-							children: t.actions
+							children: e.actions
 						})
 					]
-				}), i && a && /* @__PURE__ */ o("ul", {
+				}), i && a && /* @__PURE__ */ s("ul", {
 					role: "group",
 					className: "tree-view__group",
-					children: q(t.children, n + 1, t.id)
+					children: Y(e.children, n + 1, e.id)
 				})]
-			}, t.id);
+			}, e.id);
 		});
 	}
-	return /* @__PURE__ */ o("ul", {
-		ref: C,
+	return /* @__PURE__ */ s("ul", {
+		ref: T,
 		role: "tree",
-		"aria-label": _,
-		className: ["tree-view", b].filter(Boolean).join(" "),
-		...x,
-		children: q(u, 1)
+		"aria-label": C("label", v),
+		className: ["tree-view", x].filter(Boolean).join(" "),
+		...S,
+		children: Y(d, 1)
 	});
 }
 //#endregion
-export { u as TreeView };
+export { d as TreeView };

@@ -18,7 +18,7 @@ var r = t(function({ className: e, children: t, ...r }, i) {
 		...i,
 		children: r
 	});
-}), a = t(function({ as: t = "dd", className: r, children: i, copyable: a = !1, copyText: o, copyLabel: s = "Copiar", copiedLabel: c = "Copiado", ...l }, u) {
+}), a = t(function({ as: t = "dd", className: r, children: i, copyable: a = !1, copyText: o, copyLabel: s, copiedLabel: c, ...l }, u) {
 	let d = [
 		"description-list__details",
 		a ? "description-list__details--copyable" : "",

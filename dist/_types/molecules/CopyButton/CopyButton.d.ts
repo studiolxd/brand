@@ -13,20 +13,19 @@ export interface CopyButtonProps extends Omit<ComponentPropsWithoutRef<'button'>
      */
     children?: ReactNode;
     /**
-     * Nombre accesible del botón. Default castellano.
-     * @default 'Copiar'
+     * Nombre accesible del botón. **Sin default**: sin él, sale de `copy.label`
+     * del `BrandMessagesProvider`. Solo se lee cuando el botón es de solo icono
+     * —con rótulo visible, lo nombra el rótulo.
      */
     label?: string;
     /**
      * Acuse tras copiar: se anuncia en una región viva y, si hay rótulo visible,
-     * lo sustituye mientras dura. Default castellano.
-     * @default 'Copiado'
+     * lo sustituye mientras dura. **Sin default**: sin él, sale de `copy.copied`.
      */
     copiedLabel?: string;
     /**
      * Aviso cuando el portapapeles no está disponible (contexto no seguro,
-     * permiso denegado). Default castellano.
-     * @default 'No se pudo copiar'
+     * permiso denegado). **Sin default**: sin él, sale de `copy.error`.
      */
     errorLabel?: string;
     /** Variante del botón. */
