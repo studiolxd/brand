@@ -56,7 +56,7 @@ solo iconos, códigos crípticos—: entonces se pasa el nombre a mano.
 ## Con columna de acciones
 
 `Table.Header actions` marca la columna de acciones: su rótulo se oculta visualmente
-(default `"Acciones"`, prop `actionsLabel`) y la columna se encoge a su contenido.
+(`table.actions` del catálogo, o la prop `actionsLabel`) y la columna se encoge a su contenido.
 
 <Canvas of={TableStories.ConColumnaDeAcciones} />
 
@@ -147,14 +147,57 @@ columna se queda estrecha.
 
 ## Internacionalización de las etiquetas
 
-Todos los textos que la tabla emite por su cuenta están en **castellano por defecto**.
+Los textos que la tabla emite por su cuenta —el estado de ordenación y el rótulo oculto de la
+columna de acciones— **no tienen valor por defecto**. Salen del `BrandMessagesProvider` que la
+aplicación monta una vez en su raíz, alimentado desde su catálogo de idioma:
 
-| Prop | Default | Dónde aparece |
+```tsx
+import { BrandMessagesProvider } from '@studiolxd/brand/messages';
+
+<BrandMessagesProvider
+  messages={{
+    table: {
+      actions: t('table.actions'),
+      sortable: t('table.sortable'),
+      sortedAscending: t('table.sortedAscending'),
+      sortedDescending: t('table.sortedDescending'),
+    },
+    // …los demás espacios
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+A partir de ahí la tabla se monta sin una sola prop de texto:
+
+```tsx
+<Table.Header sortable sorted="asc">Nombre</Table.Header>
+<Table.Header actions />
+```
+
+<Canvas of={TableStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
 | --- | --- | --- |
-| `sortableLabel` | `"Activar ordenación"` | texto oculto de una columna ordenable sin ordenar |
-| `sortedAscLabel` | `"Ordenado ascendente"` | texto oculto de la columna ordenada de forma ascendente |
-| `sortedDescLabel` | `"Ordenado descendente"` | texto oculto de la columna ordenada de forma descendente |
-| `actionsLabel` | `"Acciones"` | rótulo oculto de la cabecera de la columna de acciones |
+| `sortableLabel` | `table.sortable` | texto oculto de una columna ordenable sin ordenar |
+| `sortedAscLabel` | `table.sortedAscending` | texto oculto de la columna ordenada de forma ascendente |
+| `sortedDescLabel` | `table.sortedDescending` | texto oculto de la columna ordenada de forma descendente |
+| `actionsLabel` | `table.actions` | rótulo oculto de la cabecera de la columna de acciones |
+
+El orden de resolución es **prop → proveedor → error**, y no hay cuarto escalón: si faltan las
+dos, la tabla revienta diciendo qué texto falta. El error se lanza **donde el texto se pinta**,
+así que una tabla sin columnas ordenables ni columna de acciones no exige ninguno.
+
+### Lo que NO sale del catálogo
+
+| Prop | Por qué se queda como prop |
+| --- | --- |
+| `caption` | Es el nombre de **esta** tabla («Listado de proyectos»), no cromo del componente. Un catálogo común no puede saberlo |
+| `TableRow.label` | Identifica a **esa** fila. Igual |
+
+El contrato es el tipo `TableMessages`, que se exporta junto al componente y es una de las
+entradas de `BrandMessages`: si una app monta el proveedor y se deja una clave, **no compila**.
 
 La convención completa está en **Foundations › Internacionalización**.
 

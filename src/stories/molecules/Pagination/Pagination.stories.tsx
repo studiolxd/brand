@@ -22,6 +22,16 @@ const EN: BrandMessages = {
     total: (total) => `${total} results`,
     allOption: 'All',
   },
+  table: {
+    actions: 'Actions',
+    sortable: 'Activate sorting',
+    sortedAscending: 'Sorted ascending',
+    sortedDescending: 'Sorted descending',
+  },
+  dataTable: {
+    empty: 'No results.',
+    search: 'Search…',
+  },
 };
 
 const meta: Meta<typeof Pagination> = {

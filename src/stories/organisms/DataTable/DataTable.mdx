@@ -24,7 +24,8 @@ sobre qué columna busca el buscador.
 El buscador es `InputField kind="search" clearable`, la misma variante que usa `DocsSearch`:
 campo `type="text"` con la lupa fija al inicio —nunca `type="search"`, cuya X la pinta el
 navegador— y un aspa del sistema al final que vacía el filtro y devuelve el foco. Su
-etiqueta es `searchPlaceholder`, oculta a la vista; el nombre del aspa, `searchClearLabel`.
+etiqueta sale de `dataTable.search` (o de la prop `searchPlaceholder`) y va oculta a la vista;
+el nombre del aspa, de `searchClearLabel`.
 
 <Canvas of={DataTableStories.Default} />
 
@@ -163,18 +164,38 @@ peso**, no con un fondo. El detalle está en la doc de `Table`.
 
 ## Internacionalización
 
-`DataTable` no cablea ningún texto propio salvo el `"Buscar"` del buscador
-(`searchPlaceholder`), el `"Borrar"` de su aspa (`searchClearLabel`) y el `"Sin resultados"`
-del estado vacío (`emptyMessage`). El resto
-se reenvía a sus piezas:
+`DataTable` no trae ningún texto puesto. Los dos que emite por su cuenta salen del espacio
+`dataTable` del `BrandMessagesProvider`, y los de sus piezas de los suyos:
 
-| Prop | Va a | Contiene |
+| Texto | Clave del catálogo | Prop de anulación |
 | --- | --- | --- |
-| `headerLabels` | `Table.Header` | `sortableLabel`, `sortedAscLabel`, `sortedDescLabel`, `actionsLabel` |
-| `paginationLabels` | `Pagination` | `ariaLabel`, `pageLabel`, `previousLabel`, `nextLabel`, `pagesGroupLabel`, `pageSizeLabel`, `totalLabel`, `pageSizeOptions` |
+| Rótulo y placeholder del buscador | `dataTable.search` | `searchPlaceholder` |
+| Aviso del estado vacío | `dataTable.empty` | `emptyMessage` |
+| Estado de ordenación y rótulo de acciones | `table.*` (los pone `Table`) | `headerLabels` |
+| Todo el pie | `pagination.*` (los pone `Pagination`) | `paginationLabels` |
 
-Sin ellas, cada pieza cae a sus castellanos por defecto. La convención completa está en
-**Foundations › Internacionalización**.
+Montado el proveedor, la tabla se monta sin una sola prop de texto — y `headerLabels` /
+`paginationLabels` dejan de hacer falta para traducir: siguen ahí solo como anulación puntual.
+
+```tsx
+<DataTable columns={columns} data={data} searchColumnId="name" ariaLabel={t('members.title')} />
+```
+
+<Canvas of={DataTableStories.TextosDelProveedor} />
+
+El orden es **prop → proveedor → error**, sin cuarto escalón, y el error se lanza donde el texto
+se pinta: una tabla sin buscador no exige el rótulo del buscador, y una con filas no exige el
+aviso de vacío.
+
+### Lo que NO sale del catálogo
+
+| Prop | Por qué se queda como prop |
+| --- | --- |
+| `ariaLabel` / `ariaLabelledBy` | Es el nombre de **esta** lista. Solo el consumidor sabe qué lista es |
+| `emptyMessage` (cuando se pasa) | El catálogo pone el aviso genérico; esta prop es para lo que explica algo del dominio («Todavía no has invitado a nadie») |
+| `searchClearLabel` | No lo pone `DataTable`: lo pone `InputField`, que todavía no está migrado al proveedor. Hasta que lo esté, una app no castellana tiene que pasarlo |
+
+La convención completa está en **Foundations › Internacionalización**.
 
 ---
 

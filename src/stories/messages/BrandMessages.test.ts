@@ -59,23 +59,44 @@ describe('el fixture de textos se queda fuera del paquete', () => {
   });
 });
 
-describe('Pagination no trae textos puestos', () => {
-  const fuente = readFileSync(
-    join(repoRoot, 'src/stories/molecules/Pagination/Pagination.tsx'),
-    'utf8',
-  );
+/**
+ * Un componente migrado no puede traer su castellano puesto: si quedara, la
+ * prop ausente caería en él en vez de llegar al proveedor, y una app en
+ * francés pintaría «Acciones» sin que falle nada.
+ *
+ * Se mira **el cuerpo**, no el JSDoc: la doc de una prop nombra el texto para
+ * explicarlo, y eso no es un camino de ejecución.
+ */
+describe.each([
+  [
+    'Pagination',
+    'src/stories/molecules/Pagination/Pagination.tsx',
+    [
+      'Paginación',
+      'Páginas',
+      'Página anterior',
+      'Página siguiente',
+      'Registros por página',
+      'resultados',
+      'Todos',
+    ],
+  ],
+  [
+    'Table',
+    'src/stories/molecules/Table/Table.tsx',
+    ['Acciones', 'Activar ordenación', 'Ordenado ascendente', 'Ordenado descendente'],
+  ],
+  [
+    'DataTable',
+    'src/stories/organisms/DataTable/DataTable.tsx',
+    ['Sin resultados', 'Buscar', 'Borrar'],
+  ],
+])('%s no trae textos puestos', (_componente, ruta, textos) => {
+  const fuente = readFileSync(join(repoRoot, ruta), 'utf8');
   // Solo el cuerpo: el JSDoc de las props nombra los textos para explicarlos.
   const código = fuente.replace(/\/\*\*[\s\S]*?\*\//g, '');
 
-  it.each([
-    'Paginación',
-    'Páginas',
-    'Página anterior',
-    'Página siguiente',
-    'Registros por página',
-    'resultados',
-    'Todos',
-  ])('no queda ningún «%s» cableado', (texto) => {
+  it.each(textos)('no queda ningún «%s» cableado', (texto) => {
     expect(código).not.toContain(texto);
   });
 });

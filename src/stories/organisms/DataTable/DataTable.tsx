@@ -19,6 +19,7 @@ import { InputField } from '../../molecules/InputField/InputField';
 import { Skeleton } from '../../atoms/Skeleton/Skeleton';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { Pagination, type PaginationProps } from '../../molecules/Pagination/Pagination';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import {
   Table,
   TableBody,
@@ -29,6 +30,19 @@ import {
   type TableHeaderProps,
 } from '../../molecules/Table/Table';
 import './DataTable.css';
+
+/**
+ * Los textos que la tabla de datos emite por su cuenta. Son dos, y los dos son
+ * cromo: el rótulo del buscador y el aviso de que no hay filas. El resto de su
+ * texto o llega por props de contenido (`ariaLabel`) o lo ponen sus piezas
+ * (`Table`, `Pagination`), cada una desde su propio espacio.
+ */
+export interface DataTableMessages {
+  /** Aviso del estado vacío cuando no hay filas que pintar. */
+  empty: string;
+  /** Rótulo —oculto a la vista— y placeholder del buscador. */
+  search: string;
+}
 
 /** Alineación del contenido de una columna. `start` es el default. */
 export type DataTableAlign = 'start' | 'center' | 'end';
@@ -128,9 +142,15 @@ export interface DataTableProps<TData, TValue> {
   searchColumnId?: string;
   /** Buscador controlado desde fuera, para filtrar en servidor. */
   search?: { value: string; onChange: (value: string) => void };
-  /** Placeholder y nombre accesible del buscador. */
+  /**
+   * Placeholder y nombre accesible del buscador. Sin default: cuando no se
+   * pasa, sale de `dataTable.search` del `BrandMessagesProvider`.
+   */
   searchPlaceholder?: string;
-  /** Nombre accesible del botón que vacía el buscador. Default castellano. */
+  /**
+   * Nombre accesible del botón que vacía el buscador. `DataTable` no le pone
+   * ninguno: sin esta prop manda el de `InputField`.
+   */
   searchClearLabel?: string;
   /** Se renderiza a la derecha del buscador. */
   toolbar?: ReactNode;
@@ -143,7 +163,11 @@ export interface DataTableProps<TData, TValue> {
   footerActions?: ReactNode;
   /** Filas por página cuando la tabla pagina en cliente. */
   pageSize?: number;
-  /** Texto del estado vacío. */
+  /**
+   * Texto del estado vacío. Sin default: sale de `dataTable.empty`. Pásalo
+   * cuando esta pantalla tenga algo propio que decir («Aún no has invitado a
+   * nadie»), que un catálogo común no puede saber.
+   */
   emptyMessage?: string;
   isLoading?: boolean;
   pagination?: DataTableServerPagination;
@@ -157,9 +181,9 @@ export interface DataTableProps<TData, TValue> {
  * paginación (en cliente o en servidor) sobre el `Table` y el `Pagination` del
  * DS. El comportamiento lo aporta TanStack Table.
  *
- * Los textos accesibles llegan por props (el DS no habla de i18n): los de
- * `Table` caen a sus castellanos por defecto, y los de `Pagination` —que ya no
- * tiene ninguno— al `BrandMessagesProvider` que la aplicación monta en su raíz.
+ * Ningún texto viene puesto: los propios salen del espacio `dataTable` del
+ * `BrandMessagesProvider`, y los de sus piezas de los suyos (`table`,
+ * `pagination`). Las props de texto siguen ahí como anulación puntual.
  */
 export function DataTable<TData, TValue>({
   columns,
@@ -173,7 +197,7 @@ export function DataTable<TData, TValue>({
   toolbar,
   footerActions,
   pageSize = 10,
-  emptyMessage = 'Sin resultados',
+  emptyMessage,
   isLoading,
   pagination,
   headerLabels,
@@ -183,6 +207,9 @@ export function DataTable<TData, TValue>({
   // useReactTable devuelve refs de función inestables, incompatibles con el
   // React Compiler.
   'use no memo';
+  // Cada texto se lee donde se pinta: una tabla sin buscador no exige el
+  // rótulo del buscador, y una con filas no exige el aviso de vacío.
+  const t = useBrandMessages('dataTable');
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
@@ -207,7 +234,8 @@ export function DataTable<TData, TValue>({
   });
 
   const skeletonRows = pagination?.pageSize ?? pageSize;
-  const searchLabel = searchPlaceholder ?? 'Buscar';
+  const hasSearch = !!searchColumnId || !!search;
+  const searchLabel = hasSearch ? t('search', searchPlaceholder) : '';
   const searchId = `${useId()}-search`;
 
   return (
@@ -289,7 +317,7 @@ export function DataTable<TData, TValue>({
             ) : table.getRowModel().rows.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={columns.length}>
-                  <EmptyState size="sm" title={emptyMessage} />
+                  <EmptyState size="sm" title={t('empty', emptyMessage)} />
                 </TableCell>
               </TableRow>
             ) : (

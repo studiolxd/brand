@@ -118,7 +118,7 @@ export {
   useFormField,
 } from './stories/molecules/FormField/FormField';
 export { DataTable } from './stories/organisms/DataTable/DataTable';
-export type { DataTableProps, DataTableServerPagination, DataTableHeaderLabels, DataTablePaginationLabels } from './stories/organisms/DataTable/DataTable';
+export type { DataTableProps, DataTableServerPagination, DataTableHeaderLabels, DataTablePaginationLabels, DataTableMessages } from './stories/organisms/DataTable/DataTable';
 export { Sheet, SheetFooter } from './stories/molecules/Sheet/Sheet';
 export type { SheetProps } from './stories/molecules/Sheet/Sheet';
 export { Menu } from './stories/molecules/Menu/Menu';
@@ -292,7 +292,7 @@ export type { TreeViewProps, TreeViewNode } from './stories/molecules/TreeView/T
 export {
   Table, TableHead, TableBody, TableFooter, TableHeader, TableRow, TableCell,
 } from './stories/molecules/Table/Table';
-export type { TableProps, TableHeaderProps, TableRowProps, TableCellProps } from './stories/molecules/Table/Table';
+export type { TableProps, TableHeaderProps, TableRowProps, TableCellProps, TableMessages } from './stories/molecules/Table/Table';
 export { TableOfContents } from './stories/molecules/TableOfContents/TableOfContents';
 export type { TableOfContentsProps, TableOfContentsItem } from './stories/molecules/TableOfContents/TableOfContents';
 export { TextareaField } from './stories/molecules/TextareaField/TextareaField';

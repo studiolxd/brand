@@ -26,4 +26,14 @@ export const brandMessagesFixture: BrandMessages = {
     total: (total) => `${total} resultados`,
     allOption: 'Todos',
   },
+  table: {
+    actions: 'Acciones',
+    sortable: 'Activar ordenación',
+    sortedAscending: 'Ordenado ascendente',
+    sortedDescending: 'Ordenado descendente',
+  },
+  dataTable: {
+    empty: 'Sin resultados.',
+    search: 'Buscar…',
+  },
 };

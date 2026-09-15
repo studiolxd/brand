@@ -1,10 +1,41 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect } from 'storybook/test';
+import { expect, within } from 'storybook/test';
 import type { ColumnDef } from '@tanstack/react-table';
 import { Button } from '../../atoms/Button/Button';
 import { Tag } from '../../atoms/Tag/Tag';
 import { DataTable } from './DataTable';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import type { BrandMessages } from '../../messages/BrandMessages';
+
+/**
+ * El catálogo de otra app, en inglés, para enseñar de dónde salen los textos
+ * cuando no se pasa ninguna prop. El Storybook monta el suyo (castellano) para
+ * todas las stories; este lo tapa solo aquí. La tabla de datos consume tres
+ * espacios: el suyo, el de `Table` y el de `Pagination`.
+ */
+const EN: BrandMessages = {
+  pagination: {
+    label: 'Pagination',
+    pagesGroup: 'Pages',
+    previous: 'Previous page',
+    next: 'Next page',
+    goToPage: (page) => `Page ${page}`,
+    perPage: 'Rows per page',
+    total: (total) => `${total} results`,
+    allOption: 'All',
+  },
+  table: {
+    actions: 'Actions',
+    sortable: 'Activate sorting',
+    sortedAscending: 'Sorted ascending',
+    sortedDescending: 'Sorted descending',
+  },
+  dataTable: {
+    empty: 'No results.',
+    search: 'Search…',
+  },
+};
 
 type Member = {
   id: string;
@@ -213,9 +244,56 @@ export const Cargando: Story = {
   args: { columns, data: [], isLoading: true, pageSize: 5 },
 };
 
+/**
+ * Sin `emptyMessage` el aviso sale de `dataTable.empty` del proveedor. La prop
+ * se pasa cuando esta pantalla tiene algo propio que decir —«Todavía no hay
+ * miembros»—, que un catálogo común no puede saber.
+ */
 export const Vacia: Story = {
   name: 'Sin resultados',
   args: { columns, data: [], emptyMessage: 'Todavía no hay miembros' },
+};
+
+/**
+ * Los textos que la tabla de datos emite por su cuenta —el rótulo del buscador
+ * y el aviso de vacío—, más los de sus piezas (`Table`, `Pagination`), salen del
+ * `BrandMessagesProvider` que la aplicación monta en su raíz. Esta story tapa el
+ * del Storybook con uno en inglés y no le pasa ni una prop de texto.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  args: { columns, data, searchColumnId: 'name', pageSize: 5 },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <MemberTable {...args} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/**
+ * Test: los tres espacios llegan del mismo proveedor y ningún castellano del
+ * catálogo del Storybook se cuela.
+ */
+export const ContratoTextosDelProveedor: Story = {
+  name: 'Test — los tres espacios salen del proveedor',
+  tags: ['!dev'],
+  args: { columns, data: [], searchColumnId: 'name', pageSize: 5 },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <MemberTable {...args} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    // el suyo
+    await expect(canvas.getByRole('textbox', { name: 'Search…' })).toBeInTheDocument();
+    await expect(canvas.getByText('No results.')).toBeInTheDocument();
+    // el de Table, en cada cabecera ordenable
+    await expect(canvas.getAllByText('Activate sorting')).toHaveLength(3);
+    // nada del catálogo castellano del Storybook sobrevive
+    await expect(canvas.queryByText('Sin resultados.')).toBeNull();
+    await expect(canvas.queryByText('Activar ordenación')).toBeNull();
+  },
 };
 
 export const PaginadaEnServidor: Story = {
