@@ -55,9 +55,25 @@ enlace de acento —abrir o cerrar un bloque, deshacer—. Solo tiene efecto en 
 
 <Canvas of={ButtonStories.TextInk} />
 
-## Block
+## Block — la excepción marcada
 
-Cualquier variante admite el modificador `block` para ocupar todo el ancho del contenedor.
+Cualquier variante admite `block` para ocupar todo el ancho del contenedor
+(`block="mobile"`, solo por debajo de `md`). **No es el camino normal.**
+
+> **Todo botón vive en una ranura de acciones.** Si no hay ranura que le
+> encaje, eso es un hueco del sistema que se reporta — no un `block` que se
+> añade.
+
+El ancho lo decide **dónde vive el botón**, no el botón: las ranuras de
+acciones del sistema —el pie de un `Form` o de un diálogo, las `actions` de un
+`Alert`, de una `FilterBar`, de un `Hero`…— ya dan la línea entera en móvil
+desde su propio CSS, sin prop que acordarse de pasar. Dentro de una de ellas,
+`block` no hace falta. La norma, con la lista de ranuras y qué hacer cuando no
+hay ninguna, está en Fundamentos › **Puntos de ruptura**.
+
+Queda para el botón que de verdad **no** está en una ranura de acciones: la
+llamada a la acción dentro de un texto, o la fila que un producto monta a mano
+mientras el sistema no tiene su ranura.
 
 <Canvas of={ButtonStories.Block} />
 

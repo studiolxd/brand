@@ -29,10 +29,23 @@ export interface ButtonBaseProps
   /** Size of the button */
   size?: 'sm' | 'md' | 'lg';
   /**
-   * Estira el botón hasta el ancho de su contenedor. `'mobile'` lo hace solo
-   * por debajo de `md`: es lo que quiere un botón suelto dentro de una página
-   * —una acción que en escritorio se lee bien con su ancho natural y en una
-   * pantalla estrecha queda mejor ocupando la línea entera.
+   * Estira el botón hasta el ancho de su contenedor (`'mobile'`, solo por
+   * debajo de `md`). **Es la excepción marcada, no el camino normal.**
+   *
+   * Todo botón vive en una **ranura de acciones**: el pie de un `Form` o de un
+   * diálogo, las `actions` de un `Alert`, de una `FilterBar`, de un `Hero`, de
+   * un `PageIntro`… Y el ancho lo decide la ranura, no el botón: la norma del
+   * sistema (Fundamentos › **Puntos de ruptura**) hace que en móvil las
+   * acciones tomen la línea entera desde el CSS del contenedor, sin prop que
+   * acordarse de pasar. Dentro de una ranura del sistema `block` no hace falta,
+   * y pasarlo es pelearse con ella.
+   *
+   * **Si no hay ranura que le encaje, eso es un hueco del sistema y se
+   * reporta** — no un `block` que se añade.
+   *
+   * Queda, entonces, para el botón que de verdad NO está en una ranura de
+   * acciones: la llamada a la acción dentro de un texto, o la fila que un
+   * producto monta a mano mientras el sistema no tiene su ranura.
    */
   block?: boolean | 'mobile';
   /**

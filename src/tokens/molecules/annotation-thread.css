@@ -18,6 +18,7 @@
   --annotation-thread-border-color: var(--color-border-default-on-light); /** Borde del hilo */
   --annotation-thread-reply-guide-width: var(--border-width-default); /** Grosor de la guía que acompaña a las respuestas */
   --annotation-thread-reply-guide-color: var(--color-border-default-on-light); /** Color de la guía de respuestas */
+  --annotation-thread-actions-gap: var(--form-actions-gap); /** Aire entre las acciones del pie del hilo — el de los botones de un formulario: la fila de acciones del sistema es una sola */
   --annotation-thread-author-font-family: var(--control-font-family); /** Familia del autor */
   --annotation-thread-author-font-size: var(--text-paragraph-small-font-size); /** Tamaño del autor: la letra menor del texto corriente */
   --annotation-thread-author-font-weight: var(--font-weight-emphasis); /** Peso del autor */

@@ -71,6 +71,34 @@ patrón habitual es ofrecer **a dónde se puede ir desde donde se está**:
 
 <Canvas of={AnnotationThreadStories.Resuelto} />
 
+### El pie da la línea entera a cada acción
+
+La norma del sistema (Fundamentos › **Puntos de ruptura**) dice que el ancho de
+una acción lo decide el contenedor donde vive. El contenedor de este pie es un
+**panel de revisión**: una columna estrecha en un teléfono y una columna
+estrecha en una pantalla de 27 pulgadas. Por eso aquí no hay punto de ruptura
+que levantar —la anchura de la ventana no dice nada de lo que mide este hueco—
+y las acciones van **siempre** apiladas, una por línea.
+
+Se pasan **sueltas**, no envueltas en un `Inline`: el envoltorio se llevaría la
+línea y los botones se quedarían a su ancho natural dentro de él.
+
+```tsx
+<AnnotationThread
+  annotation={c}
+  actions={
+    <>
+      <Button variant="outline">Resolver</Button>
+      <Button variant="ghost">Responder</Button>
+    </>
+  }
+/>
+```
+
+Las acciones **por anotación** (`annotation.actions`) son otra cosa y siguen en
+fila: viven dentro de la anotación, al lado de su contenido, como las de una
+fila de `NotificationList` — estirarlas rompería la fila que les da sentido.
+
 ## Respuestas
 
 `replies` son las respuestas en orden, sangradas bajo la anotación que abre el

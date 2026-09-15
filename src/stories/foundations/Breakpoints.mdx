@@ -78,11 +78,38 @@ Cuando en la columna la acción principal debe quedar **arriba** —al alcance d
 }
 ```
 
-**Dónde está ya puesta:** `Form` (`.form__actions`, el modelo), el pie compartido de `Modal` y `Sheet` (`.dialog-footer`, por contenedor, y con él `ConfirmDialog` e `ImageCropDialog`), `PageIntro`, `Hero`, `Highlight`, `Alert`, `Banner`, `ConsentBanner`, `FilterBar`, `RecoveryCodes` y `OnboardingShell`.
+### Las ranuras de acciones del sistema
 
-**Dónde NO se aplica, y por qué.** No es una norma universal: solo vale para el **pie o la cabecera de un bloque que ya ocupa el ancho**. Quedan fuera las acciones que viven **dentro de una fila**, al lado de otro contenido —`NotificationList`, `TreeView`, `MessageComposer`, `SiteHeader`—: ahí estirar el botón rompería la fila, que es lo que da sentido a la pieza. También quedan fuera los componentes que se reorganizan por el **ancho de su hueco** y no por el de la ventana (un panel lateral estrecho también en escritorio): esos son caso de `@container`.
+La norma solo se puede seguir si se sabe **dónde poner un botón**. Estas son las ranuras que el sistema ofrece hoy, y lo que hace cada una con el ancho:
 
-**Las prop de escape siguen existiendo** —`Button block="mobile"` e `Inline stack="mobile"`— para las filas que un producto monta a mano; pero dentro de un contenedor de acciones del sistema ya no hacen falta.
+| Ranura | Dónde | Qué hace con el ancho |
+|---|---|---|
+| `Form` › `actions` | Pie del formulario | Línea entera por debajo de `md` — **el modelo** |
+| `Modal` / `Sheet` › `footer` | Pie del diálogo (`.dialog-footer`; con él `ConfirmDialog` e `ImageCropDialog`) | Línea entera por **contenedor** (`@container`, umbral `sm`) |
+| `PageIntro` › `actions` | Cabecera de página | Línea entera por debajo de `md` |
+| `Hero` › `actions` | Portada pública | Línea entera por debajo de `md` |
+| `Highlight` › `actions` | Bloque destacado | Línea entera por debajo de `md` |
+| `Alert` › `actions` | Pie del aviso | Línea entera por debajo de `md` |
+| `Banner` › `actions` | Franja de aviso | Línea entera por debajo de `md` |
+| `Consent` › acciones | Banda de consentimiento | Línea entera por debajo de `md` |
+| `FilterBar` › `actions` | Final de la fila de filtros | Línea entera por debajo de `md`; en columnas, alineada con los **controles** |
+| `RecoveryCodes` › `actions` | Pie del bloque de códigos | Línea entera por debajo de `md` |
+| `OnboardingShell` › acciones | Pie del paso | Línea entera por debajo de `md` |
+| `AnnotationThread` › `actions` | Pie del hilo | Línea entera **siempre**: vive en un panel estrecho también en escritorio |
+| `EmptyState` › `action` | Bloque vacío | Un solo botón, centrado a su ancho natural |
+| `Card` › `CardFooter` | Pie de la tarjeta | Fila; la columna se pide a mano (`direction="column"`) |
+
+Y las ranuras de acción que **no** estiran, a propósito, porque viven **dentro de una fila** al lado de otro contenido: `NotificationList` (por notificación), `TreeView` (por fila), `MessageComposer`, `SiteHeader` (en móvil no se pintan: van al menú), `AnnotationThread` › `annotation.actions` (por anotación), `FieldRow` › `action`, `Table` (columna de acciones), `DataTable` (barra y pie) y `PasswordField` › `action` (dentro del campo).
+
+**Dónde NO se aplica, y por qué.** No es una norma universal: solo vale para el **pie o la cabecera de un bloque que ya ocupa el ancho**. En las ranuras de la segunda lista estirar el botón rompería la fila, que es lo que da sentido a la pieza. Y los componentes que se reorganizan por el **ancho de su hueco** y no por el de la ventana (un panel lateral estrecho también en escritorio) son caso de `@container` —o, cuando el hueco es estrecho *siempre*, de columna sin punto de ruptura, como el pie de `AnnotationThread`—.
+
+### Y cuando no hay ranura
+
+> **Todo botón vive en una ranura de acciones. Si no hay ranura que le encaje, eso es un hueco del sistema que se reporta — no un `block` que se añade.**
+
+Es la mitad negativa de la norma, y la que evita que se deshaga: en cuanto un producto tapa el hueco con `Button block`, el ancho vuelve a decidirlo el botón pieza por pieza, que es justo lo que esto vino a quitar. Lo que se hace es al revés: se dice **qué bloque necesitaba ranura y no la tenía**, y la ranura se añade aquí, con su CSS, para todos.
+
+**`Button block` es la excepción marcada**, no el atajo: queda para el botón que de verdad no está en una ranura de acciones —una llamada a la acción dentro de un texto— y para la fila que un producto monta a mano mientras el sistema no tiene su ranura. `Inline stack="mobile"` es el equivalente para esa fila. Dentro de una ranura del sistema, ninguna de las dos hace falta.
 
 ---
 

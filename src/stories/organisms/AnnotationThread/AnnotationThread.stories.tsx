@@ -47,11 +47,13 @@ const respuestas: AnnotationEntry[] = [
   },
 ];
 
+/* Las acciones del pie se pasan sueltas: es el pie quien les da la línea
+   entera, y un `Inline` por medio se la quedaría él. */
 const accionesDeHilo = (
-  <Inline gap="sm">
+  <>
     <Button size="sm" variant="outline">Resolver</Button>
     <Button size="sm" variant="ghost">Responder</Button>
-  </Inline>
+  </>
 );
 
 /** Un hilo abierto: estado, autor, fecha y acciones. */
@@ -71,10 +73,10 @@ export const Atendido: Story = {
     replies: respuestas,
     status: 'acknowledged',
     actions: (
-      <Inline gap="sm">
+      <>
         <Button size="sm" variant="outline">Resolver</Button>
         <Button size="sm" variant="ghost">Reabrir</Button>
-      </Inline>
+      </>
     ),
   },
 };
@@ -161,15 +163,11 @@ function HiloConTransiciones() {
       annotation={raiz}
       replies={respuestas}
       status={status}
-      actions={
-        <Inline gap="sm">
-          {ESTADOS.filter((otro) => otro !== status).map((otro) => (
-            <Button key={otro} size="sm" variant="outline" onClick={() => setStatus(otro)}>
-              Marcar como {ROTULOS[otro].toLowerCase()}
-            </Button>
-          ))}
-        </Inline>
-      }
+      actions={ESTADOS.filter((otro) => otro !== status).map((otro) => (
+        <Button key={otro} size="sm" variant="outline" onClick={() => setStatus(otro)}>
+          Marcar como {ROTULOS[otro].toLowerCase()}
+        </Button>
+      ))}
     />
   );
 }
@@ -289,6 +287,34 @@ export const TestTransiciones: Story = {
     await userEvent.click(within(hilo).getByRole('button', { name: 'Marcar como resuelta' }));
     await expect(within(hilo).getByText('Resuelta')).toBeInTheDocument();
     await expect(hilo).toHaveClass('annotation-thread--resolved');
+  },
+};
+
+/**
+ * Test: el pie da la línea entera a cada acción, y lo hace también en
+ * escritorio —la ventana del test es ancha—: el hilo vive en un panel de
+ * revisión, así que lo que mide el hueco no lo dice la anchura de la pantalla.
+ */
+export const TestAccionesALaLinea: Story = {
+  name: 'Test — el pie da la línea entera a cada acción',
+  tags: ['!dev'],
+  args: { annotation: raiz, actions: accionesDeHilo },
+  play: async ({ canvasElement }) => {
+    const pie = canvasElement.querySelector('.annotation-thread__actions') as HTMLElement;
+    const botones = Array.from(pie.querySelectorAll<HTMLElement>('.button'));
+    await expect(botones).toHaveLength(2);
+
+    // Cada botón, la ranura entera…
+    for (const boton of botones) {
+      await expect(boton.getBoundingClientRect().width).toBeCloseTo(
+        pie.getBoundingClientRect().width,
+        0,
+      );
+    }
+    // …y uno debajo de otro, no en fila.
+    await expect(botones[1].getBoundingClientRect().top).toBeGreaterThanOrEqual(
+      botones[0].getBoundingClientRect().bottom,
+    );
   },
 };
 

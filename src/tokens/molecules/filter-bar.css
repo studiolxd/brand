@@ -8,4 +8,7 @@
   --filter-bar-column-gap: var(--field-row-column-gap); /** Aire entre las columnas de filtros — el de las celdas de una fila de campos */
   --filter-bar-row-gap: var(--field-row-row-gap); /** Aire entre las filas de filtros cuando la rejilla envuelve, y entre los filtros apilados en móvil */
   --filter-bar-actions-gap: var(--form-actions-gap); /** Aire entre las acciones de la barra — el de los botones de un formulario: la fila de acciones del sistema es una sola */
+  --filter-bar-label-font-size: var(--label-font-size); /** Cuerpo de la etiqueta que la barra reserva sobre lo que no la lleva (un interruptor, el botón de limpiar) — el del Label */
+  --filter-bar-label-line-height: var(--label-line-height); /** Interlineado de la etiqueta — el del Label: con el cuerpo, da la altura del hueco */
+  --filter-bar-label-gap: var(--input-field-gap); /** Aire entre la etiqueta y su control — el de los campos: completa el hueco que baja hasta la línea de los controles lo que no lleva rótulo */
 }

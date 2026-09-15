@@ -58,16 +58,11 @@
 /* Norma del sistema (ver Fundamentos › Puntos de ruptura): por debajo de `md`
    la barra entera es una columna —el buscador al 100%, los filtros en una sola
    columna— y sus acciones no son la excepción: toman la línea entera, como
-   todo lo demás.
-
-   `align-self: end` es lo que cuadra el botón con los controles y no con los
-   rótulos que llevan encima: la celda se estira con las demás y el contenido
-   se va al final. */
+   todo lo demás. */
 .filter-bar__actions {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  align-self: end;
   gap: var(--filter-bar-actions-gap);
   min-inline-size: 0;
 }
@@ -85,5 +80,40 @@
 
   .filter-bar__actions > * {
     inline-size: auto;
+  }
+
+  /* El hueco del rótulo. En columnas, un filtro con etiqueta encima ocupa dos
+     renglones —el rótulo y su control— y lo que no la lleva (un interruptor,
+     una casilla, el botón de «Limpiar filtros») solo uno. Sin más, ese
+     control se pega ARRIBA, a la altura de los rótulos: parece que pertenece a
+     la fila de rótulos y no a la de controles.
+
+     Se arregla RESERVÁNDOLE el renglón del rótulo, que es lo que ya hace
+     `FieldRow` con su acción (`.field-row__action-offset`): el hueco se
+     calcula con los tokens del `Label` —cuerpo × interlineado + el aire que lo
+     separa de su control—, así que sigue al sistema y no a un número mágico.
+     Con él, los BORDES SUPERIORES de todos los controles caen en la misma
+     línea, que es la alineación de verdad: alinear los inferiores cuadraría
+     también los rótulos… salvo cuando un control crece hacia abajo (un
+     selector múltiple con fichas), y entonces desalinearía toda la fila.
+
+     Dos condiciones, las dos por `:has()`, para que el hueco solo exista donde
+     hay algo que alinear:
+     · el renglón tiene al menos un rótulo visible (`.label` sin ocultar) —si
+       ningún filtro lleva etiqueta no hay línea de rótulos que respetar—;
+     · y la celda no lo lleva. `.label` es la clase del átomo `Label`, o sea el
+       rótulo ENCIMA del control: el `<label>` que un `SwitcherField` o un
+       `CheckboxField` ponen a la derecha de su control no cuenta, que es justo
+       lo que hace falta distinguir.
+
+     Fuera de columnas (por debajo de `md`) no se aplica: apilados, no hay nada
+     con lo que alinearse y el hueco sería aire de más. */
+  .filter-bar__row:has(.label:not(.visually-hidden)) .filter-bar__filter:not(:has(.label:not(.visually-hidden))),
+  .filter-bar__row:has(.label:not(.visually-hidden)) > .filter-bar__actions {
+    align-self: start;
+    padding-block-start: calc(
+      var(--filter-bar-label-font-size) * var(--filter-bar-label-line-height) +
+      var(--filter-bar-label-gap)
+    );
   }
 }
