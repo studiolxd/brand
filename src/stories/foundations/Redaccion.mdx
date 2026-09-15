@@ -1,0 +1,89 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundations/Redacción" />
+
+# Redacción
+
+Reglas de puntuación para el texto que el propio DS pone en pantalla: la frase bajo un
+título, el rótulo de un estado vacío. No son de estilo de marca (eso vive en
+[Marca](?path=/docs/foundations-marca--docs)) ni de idioma (eso vive en
+[Internacionalización](?path=/docs/foundations-internacionalizacion--docs)): son de
+puntuación, y valen igual en cualquier idioma al que se traduzca un texto.
+
+## El subtítulo y la descripción de un estado vacío terminan en punto
+
+**Todo subtítulo y toda descripción de estado vacío termina en punto.** Es la frase que
+cuelga bajo un título — la entradilla de `PageIntro`, la de `Hero`, la `description` de
+`EmptyState` — y una frase sin punto final se lee como si le faltara algo, o como si fuera
+ella misma un título menor.
+
+```tsx
+// ✓ Correcto
+<Hero title="Aprender es lo primero" description="La suite de Studio LXD para diseñar, impartir y gestionar formación." />
+<PageIntro title="Miembros" description="Quién entra en la organización y con qué permisos." />
+<EmptyState title="Sin resultados" description="No se han encontrado coincidencias para tu búsqueda." />
+
+// ✗ Incorrecto — la frase queda coja
+<Hero title="Aprender es lo primero" description="La suite de Studio LXD para diseñar, impartir y gestionar formación" />
+<EmptyState title="Sin resultados" description="No se han encontrado coincidencias para tu búsqueda" />
+```
+
+`EmptyState.title`, en cambio, **no lleva punto**: es el rótulo del estado, no una frase —
+como el `title` de un `Hero` o de un `PageIntro`.
+
+```tsx
+// ✓ Correcto — el título es un rótulo
+<EmptyState title="Sin resultados" description="Prueba con otros filtros." />
+
+// ✗ Incorrecto — el título no es una frase
+<EmptyState title="Sin resultados." description="Prueba con otros filtros." />
+```
+
+## Títulos, rótulos, botones y tags: sin punto
+
+Un título (`Hero.title`, `PageIntro.title`, `EmptyState.title`), un rótulo de campo, el
+texto de un botón o el contenido de un `Tag` no son una frase — son un nombre o una
+instrucción corta — y no llevan punto final.
+
+```tsx
+// ✓ Correcto
+<Button>Crear proyecto</Button>
+<Tag>Propietaria</Tag>
+
+// ✗ Incorrecto
+<Button>Crear proyecto.</Button>
+<Tag>Propietaria.</Tag>
+```
+
+## Puntuación que no se usa
+
+- **Los puntos suspensivos («…») no se usan** para indicar continuación o suspense en un
+  subtítulo o una descripción. La única excepción es la que ya usa el sistema para un
+  estado **en curso** («Buscando…», «Cargando imagen…», «Confirmando…»): ahí los tres
+  puntos dicen que algo está pasando, no que la frase se corta.
+- **El signo de exclamación («!») no se usa.** Ni para énfasis ni para llamar la
+  atención: el DS no grita.
+- **El signo de interrogación («?») solo si la frase es una pregunta de verdad** —
+  `PageIntro title="¿Olvidaste tu contraseña?"` lo es—, nunca como forma retórica de
+  suavizar una instrucción.
+
+```tsx
+// ✓ Correcto — pregunta real
+<PageIntro title="¿Olvidaste tu contraseña?" />
+
+// ✓ Correcto — el estado dice que algo está en curso
+<Button loading>Guardando…</Button>
+
+// ✗ Incorrecto — signo de exclamación
+<EmptyState title="¡Sin resultados!" />
+
+// ✗ Incorrecto — puntos suspensivos que no son un estado en curso
+<PageIntro description="Aún queda trabajo por hacer…" />
+```
+
+## Al escribir un componente nuevo
+
+Si el componente tiene una prop que se pinta como una frase bajo un título —una
+entradilla, la descripción de un estado vacío, el cuerpo de un aviso—, su JSDoc remite a
+esta página. Si la prop es un rótulo, un botón o una etiqueta, no necesita decir nada: la
+ausencia de punto es la norma general y no la anulación.

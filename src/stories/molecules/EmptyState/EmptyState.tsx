@@ -8,7 +8,9 @@ export interface EmptyStateAction {
 }
 
 export interface EmptyStateProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
+  /** El rótulo del estado: sin punto (ver Foundations → Redacción). */
   title: string;
+  /** La frase que lo explica, opcional: termina en punto (ver Foundations → Redacción). */
   description?: string;
   icon?: React.ReactNode;
   action?: EmptyStateAction;

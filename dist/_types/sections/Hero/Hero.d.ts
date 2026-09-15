@@ -4,7 +4,10 @@ import './Hero.css';
 export interface HeroProps {
     /** El título de la portada: un `Heading` de nivel 1 a talla 10 (display). */
     title: ReactNode;
-    /** La frase bajo el título, opcional: `Paragraph size="large"`. */
+    /**
+     * La frase bajo el título, opcional: `Paragraph size="large"`. Termina en
+     * punto (ver Foundations → Redacción).
+     */
     description?: ReactNode;
     /** Uno o varios botones (`Button`), en fila con envoltura (`Inline`), bajo el texto. Van a talla `lg`: la escala del Hero lo pide, y el consumidor no tiene que acordarse de pasarla. */
     actions?: ReactNode;

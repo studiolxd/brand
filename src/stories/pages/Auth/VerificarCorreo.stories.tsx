@@ -10,7 +10,7 @@ function Verificar({ sent, surface }: Args) {
   return (
     <AuthPage
       title="Revisa tu correo"
-      description="Enviamos un enlace de verificación a ana@studiolxd.com"
+      description="Enviamos un enlace de verificación a ana@studiolxd.com."
       aside={<Link href="#acceso" icon="arrow-left">Iniciar sesión con otra cuenta</Link>}
       surface={surface}
     >

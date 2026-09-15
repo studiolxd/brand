@@ -7,6 +7,35 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [47.1.0] — 2026-09-15
+
+> **Minor.** La norma de puntuación de subtítulos y estados vacíos, fijada por escrito en
+> Foundations → Redacción, con el JSDoc de `Hero`, `PageIntro` y `EmptyState` remitiendo a
+> ella. Documentación y ejemplos, sin cambios de comportamiento ni de CSS de por sí — salvo
+> el `fix` suelto que viaja en la misma release: un `Link` dejaba de medir su texto al ser
+> ítem directo de un `Stack align="stretch"`.
+
+### Redacción: subtítulo y estado vacío terminan en punto
+
+Página nueva, `Foundations/Redacción`: todo subtítulo (`Hero.description`,
+`PageIntro.description`) y toda `EmptyState.description` terminan en punto; el `title` de
+`EmptyState`, los rótulos, los botones y los tags, no. Sin puntos suspensivos ni
+exclamación; el signo de interrogación solo si la frase es una pregunta de verdad. El
+JSDoc de las tres props afectadas remite a la página. `dataTable.empty` del catálogo de
+Storybook (`.storybook/brandMessagesFixture.ts`) llevaba un punto de más: alimenta el
+`title` de `EmptyState` dentro de `DataTable`, y un título no lleva punto.
+
+### Fix: un `Link` directo de un `Stack align="stretch"` no se estira
+
+`Link` fijaba su color, su subrayado y su relleno pero no su ancho: como ítem de un flex en
+columna con `align-items: stretch`, ocupaba todo el ancho del `Stack` y la línea de su
+subrayado cruzaba la página entera —el caso de un «← Volver» sobre un `PageIntro`—. Ahora
+`inline-size: fit-content` en la cara base del enlace (`a:not(.button)`, `.link`): su caja
+vuelve a ser la de su texto, sin tocar el enlace suelto en un párrafo (donde `width` no
+aplica a una caja `inline`) ni el centrado vertical de `Inline` (`align-items: center`),
+que un `align-self` habría descuadrado. Story «El enlace dentro de una columna» en
+`Atoms/Link`, con su test de contrato.
+
 ## [47.0.0] — 2026-09-15
 
 > **Major.** Octava familia al proveedor de textos: el cromo de aplicación y la navegación.

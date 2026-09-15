@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { Link } from './Link';
 import { Paragraph } from '../Paragraph/Paragraph';
+import { Stack } from '../Stack/Stack';
+import { PageIntro } from '../../molecules/PageIntro/PageIntro';
 
 const meta: Meta<typeof Link> = {
   title: 'Atoms/Link',
@@ -146,5 +148,34 @@ export const ContratoAccent1: Story = {
     const a = canvasElement.querySelector('[data-testid="accent-1"]') as HTMLElement;
     await expect(a).toHaveClass('link--accent-1');
     await expect(getComputedStyle(a).boxShadow).not.toBe('none');
+  },
+};
+
+/**
+ * Un enlace de vuelta sobre una cabecera, dentro de un `Stack align="stretch"`
+ * (la columna raíz de una página con contenido ancho). El enlace no se estira
+ * al ancho del `Stack`: mide su texto, igual que si estuviera en `align="start"`.
+ */
+export const EnColumna: Story = {
+  name: 'El enlace dentro de una columna',
+  render: () => (
+    <Stack align="stretch" data-testid="columna">
+      <Link href="#modelos" icon="arrow-left" data-testid="enlace">Volver a los modelos</Link>
+      <PageIntro title="Editar modelo" description="Cambia el nombre, el color y los campos del modelo." />
+    </Stack>
+  ),
+};
+
+export const ContratoColumna: Story = {
+  name: 'Test — no se estira dentro de un Stack align="stretch"',
+  tags: ['!dev'],
+  render: EnColumna.render,
+  play: async ({ canvasElement }) => {
+    const columna = canvasElement.querySelector('[data-testid="columna"]') as HTMLElement;
+    const enlace = canvasElement.querySelector('[data-testid="enlace"]') as HTMLElement;
+    await expect(enlace.getBoundingClientRect().width).toBeLessThan(columna.getBoundingClientRect().width);
+    // El ancho del enlace es el de su propio contenido, no el que le da el padre.
+    await expect(Math.round(enlace.getBoundingClientRect().width))
+      .toBe(Math.round(enlace.scrollWidth));
   },
 };

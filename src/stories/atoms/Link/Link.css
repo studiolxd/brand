@@ -35,6 +35,16 @@ a:where(:not(.button)),
   padding-block-end: var(--link-underline-offset);
   box-shadow: inset 0 calc(-1 * var(--link-underline-width)) 0 0 currentColor;
   cursor: var(--link-cursor);
+  /* Un enlace nunca es un ítem estirado: su caja es la de su texto, no la del
+     hueco que le da el padre. `inline-size` (no `align-self`) porque solo
+     debe fijar el eje del ancho — `align-self` tocaría también el cruzado y
+     rompería el centrado vertical de `Inline` (`align-items: center`, para
+     que un enlace y un botón de distinta altura compartan eje). Como
+     `width`/`inline-size` no aplica a una caja `inline` de verdad, no afecta
+     al enlace suelto en un párrafo; solo entra en juego cuando el enlace se
+     convierte en ítem de flex/grid (`Stack`, `Inline`), que es justo donde
+     `align-items: stretch` lo estiraría. */
+  inline-size: fit-content;
 }
 
 a:where(:not(.button)):hover,

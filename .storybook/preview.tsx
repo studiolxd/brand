@@ -159,6 +159,7 @@ const preview: Preview = {
             'Capas',
             'Iconografía',
             'Internacionalización',
+            'Redacción',
           ],
           'Atoms',
           'Molecules',

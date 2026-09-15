@@ -8,12 +8,9 @@ export interface PageIntroProps {
   title: ReactNode;
   /**
    * La frase bajo el título, opcional: va como entradilla (`Paragraph
-   * size="large"`, un peldaño por encima del cuerpo).
-   *
-   * **Es una frase y termina con puntuación final** —un punto, o el signo que
-   * le toque—: no es un rótulo ni un subtítulo. Sin el punto, el párrafo se
-   * lee como un `Heading` menor y la jerarquía de la cabecera se deshace. Lo
-   * que no llegue a frase o cabe en el título, o va en `children`.
+   * size="large"`, un peldaño por encima del cuerpo). Termina en punto (ver
+   * Foundations → Redacción). Lo que no llegue a frase, o cabe en el título,
+   * o va en `children`.
    */
   description?: ReactNode;
   /** Más texto bajo la frase (otro `Paragraph`, una lista…): mismo aire. */
