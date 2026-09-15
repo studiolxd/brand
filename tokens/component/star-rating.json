@@ -4,7 +4,10 @@
     "star-size":           { "$value": "1.25em",                   "$type": "dimension", "$description": "Tamaño de la estrella — relativo al texto que la rodea, como el resto de marcas en línea" },
     "sm-star-size":        { "$value": "1em",                      "$type": "dimension", "$description": "Tamaño de la estrella — talla sm" },
     "lg-star-size":        { "$value": "1.5em",                    "$type": "dimension", "$description": "Tamaño de la estrella — talla lg" },
+    "count-gap":           { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Separación entre las estrellas y el recuento de reseñas: más aire que entre estrella y estrella, para que el recuento se lea como otra cosa" },
     "track-color":         { "$value": "{color.icon.secondary-on-light}", "$type": "color",     "$description": "Contorno de la estrella sin ganar" },
+    "count-color":         { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Tinta del recuento de reseñas: texto secundario, es un metadato junto a la valoración" },
+    "empty-color":         { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Tinta del «todavía sin reseñas»: texto secundario, igual que el recuento" },
     "fill-color":          { "$value": "{color.primary}",          "$type": "color",     "$description": "Relleno y contorno de la estrella ganada" },
     "cursor":              { "$value": "pointer",                  "$type": "string",    "$description": "Cursor sobre una estrella elegible" },
     "disabled-cursor":     { "$value": "not-allowed",              "$type": "string",    "$description": "Cursor cuando la entrada está deshabilitada" },
@@ -15,6 +18,8 @@
     "focus-ring-offset":   { "$value": "{border-width.default}",   "$type": "dimension", "$description": "Separación del anillo de foco" },
     "focus-ring-color":    { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del anillo de foco" },
     "surface-dark-track-color":      { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Contorno de la estrella sin ganar — surface-dark" },
+    "surface-dark-count-color":      { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Tinta del recuento — surface-dark" },
+    "surface-dark-empty-color":      { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Tinta del «todavía sin reseñas» — surface-dark" },
     "surface-dark-fill-color":       { "$value": "{color.accent-1}",     "$type": "color", "$description": "Relleno de la estrella ganada — surface-dark. `fill-color` (prussian) coincide con el fondo de la superficie y quedaría invisible." },
     "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco — surface-dark" }
   }

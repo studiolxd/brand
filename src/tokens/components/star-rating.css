@@ -9,10 +9,13 @@
   --star-rating-cursor: pointer; /** Cursor sobre una estrella elegible */
   --star-rating-disabled-cursor: not-allowed; /** Cursor cuando la entrada está deshabilitada */
   --star-rating-gap: var(--spacing-1); /** Separación entre estrellas */
+  --star-rating-count-gap: var(--spacing-2); /** Separación entre las estrellas y el recuento de reseñas: más aire que entre estrella y estrella, para que el recuento se lea como otra cosa */
   --star-rating-disabled-opacity: var(--opacity-disabled); /** Opacidad cuando la entrada está deshabilitada */
   --star-rating-transition-duration: var(--motion-duration-fast); /** Duración del cambio de relleno */
   --star-rating-transition-easing: var(--motion-easing-default); /** Easing del cambio de relleno */
   --star-rating-track-color: var(--color-icon-secondary-on-light); /** Contorno de la estrella sin ganar */
+  --star-rating-count-color: var(--color-text-muted-on-light); /** Tinta del recuento de reseñas: texto secundario, es un metadato junto a la valoración */
+  --star-rating-empty-color: var(--color-text-muted-on-light); /** Tinta del «todavía sin reseñas»: texto secundario, igual que el recuento */
   --star-rating-fill-color: var(--color-primary); /** Relleno y contorno de la estrella ganada */
   --star-rating-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
   --star-rating-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco */
@@ -24,6 +27,8 @@
 [data-theme="dark"],
 html.dark {
   --star-rating-track-color: var(--color-text-on-dark); /** Contorno de la estrella sin ganar — surface-dark */
+  --star-rating-count-color: var(--color-text-muted-on-dark); /** Tinta del recuento — surface-dark */
+  --star-rating-empty-color: var(--color-text-muted-on-dark); /** Tinta del «todavía sin reseñas» — surface-dark */
   --star-rating-fill-color: var(--color-accent-1); /** Relleno de la estrella ganada — surface-dark. `fill-color` (prussian) coincide con el fondo de la superficie y quedaría invisible. */
   --star-rating-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
 }

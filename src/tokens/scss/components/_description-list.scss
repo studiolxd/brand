@@ -7,7 +7,7 @@ $lxd-description-list-border-color: #111e30; // Color del borde: tinta de la sup
 $lxd-description-list-cell-padding-block: 0.75rem; // Aire vertical de cada celda
 $lxd-description-list-cell-padding-inline: 1rem; // Aire horizontal de cada celda
 $lxd-description-list-term-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía del término (dt): la de las etiquetas
-$lxd-description-list-term-font-size: 0.875rem; // Cuerpo del término: el de las etiquetas, no el de la prosa
+$lxd-description-list-term-font-size: 0.875rem; // Cuerpo del término: un peldaño por debajo del valor, la misma relación en las dos superficies (14/16 en aplicación, 16/20 en la pública). Es el mismo 14px que daba 0.875rem en aplicación, pero atado al cuerpo de la superficie: dentro de un SiteShell el valor sube a 20px y el término tenía que subir con él
 $lxd-description-list-term-font-weight: 500; // Peso del término
 $lxd-description-list-term-line-height: 1.5; // Interlineado del término
 $lxd-description-list-term-letter-spacing: 0em; // Tracking del término

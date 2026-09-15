@@ -8,7 +8,7 @@
   --description-list-cell-padding-inline: var(--spacing-4); /** Aire horizontal de cada celda */
   --description-list-border-color: var(--color-primary); /** Color del borde: tinta de la superficie */
   --description-list-term-font-family: var(--label-font-family); /** Tipografía del término (dt): la de las etiquetas */
-  --description-list-term-font-size: var(--label-font-size); /** Cuerpo del término: el de las etiquetas, no el de la prosa */
+  --description-list-term-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del término: un peldaño por debajo del valor, la misma relación en las dos superficies (14/16 en aplicación, 16/20 en la pública). Es el mismo 14px que daba 0.875rem en aplicación, pero atado al cuerpo de la superficie: dentro de un SiteShell el valor sube a 20px y el término tenía que subir con él */
   --description-list-term-line-height: var(--label-line-height); /** Interlineado del término */
   --description-list-term-letter-spacing: var(--label-letter-spacing); /** Tracking del término */
   --description-list-term-color: var(--color-text-on-light); /** Color del término */

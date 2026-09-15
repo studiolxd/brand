@@ -31,6 +31,7 @@
   --breadcrumb-font-size: var(--text-paragraph-small-font-size);
   --code-block-font-size: var(--text-paragraph-small-font-size);
   --code-font-size: var(--code-block-font-size);
+  --description-list-term-font-size: var(--text-paragraph-small-font-size);
   --description-list-value-font-size: var(--text-font-size);
   --description-list-value-line-height: var(--text-line-height);
   --empty-state-description-font-size: var(--text-font-size);

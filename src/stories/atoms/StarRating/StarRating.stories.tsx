@@ -11,6 +11,7 @@ const meta: Meta<typeof StarRating> = {
   parameters: { layout: 'padded' },
   argTypes: {
     value: { control: { type: 'number', min: 0, max: 5, step: 0.5 } },
+    reviewCount: { control: { type: 'number', min: 0 } },
     max: { control: { type: 'number', min: 1, max: 10 } },
     size: { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg'] },
     readOnly: { control: { type: 'boolean' } },
@@ -64,6 +65,35 @@ export const Entrada: Story = {
   },
 };
 
+/**
+ * Con `reviewCount`, la media viene acompañada de cuántas reseñas la sostienen:
+ * «4,5 ★★★★☆ (24)». El recuento entra también en el nombre accesible, que se lee
+ * entero de una vez.
+ */
+export const ConRecuento: Story = {
+  name: 'Con recuento de reseñas',
+  args: { value: 4.5, reviewCount: 24 },
+};
+
+/**
+ * **Sin `reviewCount`** la nota es la de UNA reseña suelta —la que firma una
+ * persona al pie de su comentario—, donde un recuento no significa nada.
+ */
+export const SinRecuento: Story = {
+  name: 'Sin recuento (una reseña suelta)',
+  args: { value: 4 },
+};
+
+/**
+ * `value={null}` es «todavía sin reseñas», que **no es cero**. No se dibuja la
+ * escala: cinco estrellas vacías son el dibujo de «valorado con 0» —una nota de
+ * verdad, y la peor—, así que el estado sin datos se dice con palabras.
+ */
+export const SinResenas: Story = {
+  name: 'Todavía sin reseñas (null)',
+  args: { value: null },
+};
+
 /** Una escala de diez, para cuando el producto no puntúa sobre cinco. */
 export const EscalaDeDiez: Story = {
   args: { value: 7.5, max: 10 },
@@ -99,5 +129,28 @@ export const TestEntrada: Story = {
     dos.focus();
     await userEvent.keyboard('{ArrowRight}');
     await expect(canvas.getByRole('radio', { name: '3 de 5 estrellas' })).toBeChecked();
+  },
+};
+
+export const TestSinResenas: Story = {
+  name: 'Test — null no dibuja estrellas ni se anuncia como una nota',
+  tags: ['!dev'],
+  args: { value: null },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText('Todavía sin reseñas')).toBeInTheDocument();
+    await expect(canvas.queryByRole('img')).not.toBeInTheDocument();
+    await expect(canvasElement.querySelectorAll('.star-rating__star')).toHaveLength(0);
+  },
+};
+
+export const TestRecuento: Story = {
+  name: 'Test — el recuento se ve y entra en el nombre accesible',
+  tags: ['!dev'],
+  args: { value: 4.5, reviewCount: 24 },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('img', { name: '4,5 de 5 estrellas, 24 reseñas' })).toBeInTheDocument();
+    await expect(canvas.getByText('(24)')).toBeInTheDocument();
   },
 };

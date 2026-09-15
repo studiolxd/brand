@@ -1,8 +1,29 @@
+/* El aire del bloque separa la escala de su recuento; el de dentro de la
+   escala, estrella de estrella. En entrada no hay recuento y las opciones
+   cuelgan de la raíz, así que ahí la raíz recupera el aire entre estrellas. */
 .star-rating {
   display: inline-flex;
   align-items: center;
-  gap: var(--star-rating-gap);
+  gap: var(--star-rating-count-gap);
   color: var(--star-rating-track-color);
+}
+
+.star-rating__stars {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--star-rating-gap);
+}
+
+/* El recuento de reseñas: metadato junto a la valoración, a la talla del texto
+   que la rodea (como la propia estrella, que se mide en `em`). */
+.star-rating__count {
+  color: var(--star-rating-count-color);
+}
+
+/* «Todavía sin reseñas»: la escala no se dibuja, así que esta frase ocupa su
+   sitio. Misma tinta secundaria que el recuento — es el mismo rango de dato. */
+.star-rating__empty {
+  color: var(--star-rating-empty-color);
 }
 
 .star-rating__star {
@@ -35,6 +56,10 @@
 }
 
 /* ─── Entrada ────────────────────────────────────────────────── */
+.star-rating.star-rating--input {
+  gap: var(--star-rating-gap);
+}
+
 .star-rating__option {
   display: inline-flex;
   cursor: var(--star-rating-cursor);

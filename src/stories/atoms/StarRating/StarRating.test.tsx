@@ -59,6 +59,47 @@ describe('StarRating', () => {
     expect(screen.getByRole('img', { name: '4 out of 5 stars' })).toBeInTheDocument();
   });
 
+  it('con reviewCount, el recuento se ve y entra en el nombre accesible', () => {
+    render(<StarRating value={4.5} reviewCount={24} />);
+    expect(screen.getByRole('img', { name: '4,5 de 5 estrellas, 24 reseñas' })).toBeInTheDocument();
+    expect(screen.getByText('(24)')).toBeInTheDocument();
+  });
+
+  it('una sola reseña se cuenta en singular', () => {
+    render(<StarRating value={5} reviewCount={1} />);
+    expect(screen.getByRole('img', { name: '5 de 5 estrellas, 1 reseña' })).toBeInTheDocument();
+  });
+
+  it('sin reviewCount no hay recuento: es la nota de una reseña suelta', () => {
+    const { container } = render(<StarRating value={4} />);
+    expect(screen.getByRole('img', { name: '4 de 5 estrellas' })).toBeInTheDocument();
+    expect(container.querySelector('.star-rating__count')).toBeNull();
+  });
+
+  it('`null` es «todavía sin reseñas»: ni estrellas ni nota anunciada', () => {
+    const { container } = render(<StarRating value={null} />);
+    expect(screen.getByText('Todavía sin reseñas')).toBeInTheDocument();
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
+    expect(container.querySelectorAll('.star-rating__star')).toHaveLength(0);
+  });
+
+  it('el texto de «sin reseñas» y el del recuento también son props', () => {
+    const { rerender } = render(<StarRating value={null} emptyLabel="No reviews yet" />);
+    expect(screen.getByText('No reviews yet')).toBeInTheDocument();
+
+    rerender(
+      <StarRating
+        value={4}
+        reviewCount={24}
+        countLabel={(n) => `${n} reviews`}
+        valueLabel={(v, m, n) => `${v} out of ${m} stars, ${n} reviews`}
+        locale="en-US"
+      />,
+    );
+    expect(screen.getByRole('img', { name: '4 out of 5 stars, 24 reviews' })).toBeInTheDocument();
+    expect(screen.getByText('24 reviews')).toBeInTheDocument();
+  });
+
   it('el name viaja a los radios para el envío del formulario', () => {
     render(<StarRating readOnly={false} name="valoracion" />);
     expect(screen.getByRole('radio', { name: '3 de 5 estrellas' })).toHaveAttribute('name', 'valoracion');
