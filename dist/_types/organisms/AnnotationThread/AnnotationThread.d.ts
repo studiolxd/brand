@@ -43,7 +43,16 @@ export interface AnnotationThreadProps extends React.ComponentPropsWithoutRef<'a
      * `resolved` se retira visualmente sin desaparecer.
      */
     status?: AnnotationThreadStatus;
-    /** Acciones del hilo entero: resolver, reabrir, seguir. Van al pie. */
+    /**
+     * Acciones del hilo entero: resolver, reabrir, seguir. Van al pie, **una por
+     * línea y a la línea entera**, siempre: el hilo vive en un panel de revisión
+     * —una columna estrecha también en escritorio—, así que el ancho de la
+     * ventana no dice nada de lo que mide este hueco.
+     *
+     * Se pasan sueltas (`<><Button/><Button/></>`), sin envolverlas en un
+     * `Inline`: el envoltorio se llevaría la línea y los botones se quedarían a
+     * su ancho natural dentro de él.
+     */
     actions?: ReactNode;
     /** Con qué se responde: un `MessageComposer`, un `TextareaField`, un `Button`. */
     reply?: ReactNode;

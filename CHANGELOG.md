@@ -7,6 +7,60 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [41.1.0] — 2026-09-15
+
+> **Minor.** El interruptor de la barra de filtros se centra con el campo que tiene al
+> lado, el pie de una tarjeta cumple la norma de las acciones por sí solo, y `block` queda
+> escrito como lo que es: la excepción.
+
+### `FilterBar`: un control sin rótulo, a la altura del que sí lo lleva
+
+Un interruptor no lleva rótulo encima y un campo sí, así que en la rejilla el interruptor
+se pegaba arriba, a la altura de los **rótulos** en vez de a la de los **campos**. Ahora la
+barra le reserva a esa celda el renglón del rótulo —medido por token, no a ojo— y, en el
+espacio que queda, abre una caja de **la altura de un campo** y centra el control dentro.
+
+Medido en Chromium: los centros de la caja del campo, del interruptor y del botón de las
+acciones caen en el mismo píxel. La referencia es la **talla estándar del campo**, no el
+alto real del renglón, y eso es lo que permite tener las dos cosas a la vez: un control que
+crece hacia abajo —un selector múltiple con fichas— sigue creciendo sin mover a nadie, y
+los rótulos siguen todos en su línea. Donde ningún filtro lleva rótulo no se reserva nada,
+y apilado, por debajo del punto de ruptura, tampoco.
+
+### `CardFooter` cumple la norma solo
+
+Era la única ranura de acciones del sistema que no lo hacía: siempre una fila, con la
+columna a pedir a mano — la prop de escape que la norma vino a quitar, mudada del botón al
+contenedor. Ahora, por debajo de `md`, sus acciones ocupan la línea como en las otras once
+ranuras.
+
+`direction="column"` **se queda**, y con un significado más limpio: ya no es «acuérdate de
+apilar en móvil», sino «apila **siempre**, también donde hay sitio» — el pie con una línea
+de texto sobre el botón, o la tarjeta que se sabe estrecha en escritorio.
+
+**Por qué por ventana y no por contenedor**, que es el hallazgo que merece quedar escrito:
+se intentó como el pie de un diálogo y se midió antes de darlo por bueno. Declarar la
+tarjeta como contenedor (`container-type: inline-size`) le quita el ancho que saca de su
+contenido: dos tarjetas dentro de un `Inline` pasan de medir lo que mide su texto a 34px,
+solo su propio aire. **Una tarjeta no puede ser contenedor** porque se usa de las dos
+maneras —unas veces la estira su hueco, otras la mide su contenido—; un diálogo sí, porque
+su ancho siempre viene de fuera. Queda en `Foundations › Puntos de ruptura` como el primer
+límite documentado de la técnica.
+
+### `Button.block`, escrito al derecho
+
+Su documentación decía que era «lo que quiere un botón suelto dentro de una página», que es
+justo la invitación a usarlo en vez de buscar la ranura. Ahora dice lo contrario, y la
+norma tiene su mitad negativa escrita:
+
+> Todo botón vive en una ranura de acciones. Si no hay ranura que le encaje, eso es un
+> hueco del sistema que se reporta — no un `block` que se añade.
+
+Con la lista de las ranuras que dan la línea entera y de las que no la dan a propósito
+—las que viven dentro de una fila, donde estirar rompería la fila que les da sentido—.
+`AnnotationThread` sale de la lista de dudosos: vive en un panel estrecho también en
+escritorio, así que sus acciones ocupan la línea **siempre**, sin punto de ruptura.
+
 ## [41.0.0] — 2026-09-15
 
 > **Major.** Segunda familia al proveedor de textos: `Table` y `DataTable` pierden sus
