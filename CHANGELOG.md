@@ -7,6 +7,47 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [41.0.0] — 2026-09-15
+
+> **Major.** Segunda familia al proveedor de textos: `Table` y `DataTable` pierden sus
+> textos castellano por defecto.
+
+### Las tablas leen del proveedor
+
+Mismo mecanismo que estrenó `Pagination` en la v40.0.0 y mismo orden —**prop → proveedor →
+error**—, ahora en la familia que más superficie ocupa en una aplicación. `BrandMessages`
+gana dos espacios:
+
+- **`table`** — `actions`, `sortable`, `sortedAscending`, `sortedDescending`.
+- **`dataTable`** — `empty`, `search`.
+
+Los cinco calcan clave a clave el catálogo de la suite, así que montarlos es mapear y no
+traducir de nuevo. Es incompatible **en tiempo de compilación**, que es justo lo que se
+busca: el contrato exige los dos espacios, así que ninguna aplicación compila hasta
+añadirlos — nadie se entera en producción de que le falta un texto.
+
+### Lo que NO se fue al proveedor, y por qué
+
+La distinción que gobierna toda la campaña: al catálogo común va lo que el componente emite
+**por su cuenta** e igual en toda la suite; se queda como prop lo que es **contenido de esa
+pantalla**.
+
+- `Table.caption` y `TableRow.label` nombran ESA tabla y ESA fila.
+- `DataTable.ariaLabel` nombra ESA lista.
+- `DataTable.emptyMessage` **sobrevive como anulación**: el catálogo pone el aviso genérico,
+  y la prop queda para el que explica algo del dominio —«todavía no has invitado a nadie»—.
+  No es una concesión: en la suite ya hay pantallas que dan un vacío distinto según haya
+  filtros o no, y eso ningún catálogo común puede saberlo.
+
+`DataTable.searchClearLabel` se queda como **reenvío puro**: ese texto no lo emite la tabla,
+lo emite el `InputField` que lleva dentro, y ese átomo todavía no está migrado.
+
+### Lo que esta ola enseña sobre las que vienen
+
+Una familia no queda limpia del todo mientras reenvíe texto a un componente sin migrar, y
+eso **no se ve desde dentro de la familia**. De ahí que las olas siguientes se ordenen para
+que los átomos de formulario caigan pronto: medio catálogo termina reenviando a ellos.
+
 ## [40.1.0] — 2026-09-15
 
 > **Minor.** `AnnotationThread` gana un tercer estado y una ranura para la coordenada de

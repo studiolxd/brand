@@ -1,5 +1,25 @@
 import type { ReactNode } from 'react';
 import './Table.css';
+/**
+ * Los textos que la tabla emite por su cuenta: el cromo de la cabecera —el
+ * estado de ordenación y el rótulo de la columna de acciones—, igual en toda
+ * la suite. Los nombres calcan el espacio `table` del catálogo, así que
+ * montarlo es mapear clave a clave y no traducir de nuevo.
+ *
+ * Lo que NO está aquí es deliberado: el `caption` de una tabla y el `label`
+ * de una fila son contenido de ESA pantalla, no cromo del componente, y
+ * siguen siendo props sin valor por defecto.
+ */
+export interface TableMessages {
+    /** Rótulo oculto de la cabecera de la columna de acciones. */
+    actions: string;
+    /** Texto oculto de una columna ordenable que todavía no ordena. */
+    sortable: string;
+    /** Texto oculto de la columna ordenada de forma ascendente. */
+    sortedAscending: string;
+    /** Texto oculto de la columna ordenada de forma descendente. */
+    sortedDescending: string;
+}
 export interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> {
     /**
      * Texto de `<caption>` (se oculta visualmente). **Opcional**: sin `caption` no se
@@ -19,7 +39,10 @@ export interface TableHeaderProps extends React.ThHTMLAttributes<HTMLTableCellEl
     onSort?: () => void;
     /** Marca esta columna como columna de acciones: ancho mínimo y cabecera oculta visualmente */
     actions?: boolean;
-    /** Texto accesible de la cabecera de acciones. Default: «Acciones» (castellano). Una app multiidioma debe pasarlo traducido. */
+    /**
+     * Texto accesible de la cabecera de acciones. Sin default: cuando no se
+     * pasa, sale de `table.actions` del `BrandMessagesProvider`.
+     */
     actionsLabel?: string;
     /**
      * Pega la columna al borde final (`inset-inline-end: 0`) cuando la tabla
@@ -29,13 +52,13 @@ export interface TableHeaderProps extends React.ThHTMLAttributes<HTMLTableCellEl
      */
     sticky?: 'end';
     /**
-     * Texto accesible del estado de ordenación ascendente. Default: "Ordenado ascendente"
-     * (castellano). Una app multiidioma debe pasarlo traducido.
+     * Texto accesible del estado de ordenación ascendente. Sin default:
+     * `table.sortedAscending`.
      */
     sortedAscLabel?: string;
-    /** Texto accesible del estado descendente. Default: «Ordenado descendente» (castellano). Una app multiidioma debe pasarlo traducido. */
+    /** Texto accesible del estado descendente. Sin default: `table.sortedDescending`. */
     sortedDescLabel?: string;
-    /** Texto accesible de la columna ordenable sin ordenar. Default: «Activar ordenación» (castellano). Una app multiidioma debe pasarlo traducido. */
+    /** Texto accesible de la columna ordenable sin ordenar. Sin default: `table.sortable`. */
     sortableLabel?: string;
     /**
      * Impide que el rótulo de esta columna se parta en dos líneas. Mismo valor
@@ -55,8 +78,8 @@ export interface TableRowProps extends Omit<React.HTMLAttributes<HTMLTableRowEle
     /**
      * Nombre accesible de la fila. Por defecto el rol `row` toma su nombre del
      * contenido de sus celdas; pásalo solo cuando ese texto no identifique la
-     * fila (celdas de solo iconos, datos crípticos). Default: castellano — no
-     * hay texto por defecto, es el consumidor quien lo escribe.
+     * fila (celdas de solo iconos, datos crípticos). No sale del catálogo
+     * común: identifica a ESTA fila, así que lo escribe el consumidor.
      */
     label?: string;
     children: ReactNode;

@@ -1,4 +1,6 @@
 import type { PaginationMessages } from '../molecules/Pagination/Pagination';
+import type { TableMessages } from '../molecules/Table/Table';
+import type { DataTableMessages } from '../organisms/DataTable/DataTable';
 /**
  * El contrato de textos de la librería: un espacio por componente, y dentro
  * de cada espacio **todas las claves obligatorias**.
@@ -22,5 +24,7 @@ import type { PaginationMessages } from '../molecules/Pagination/Pagination';
  */
 export interface BrandMessages {
     pagination: PaginationMessages;
+    table: TableMessages;
+    dataTable: DataTableMessages;
 }
-export type { PaginationMessages };
+export type { PaginationMessages, TableMessages, DataTableMessages };
