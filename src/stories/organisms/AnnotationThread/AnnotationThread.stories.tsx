@@ -191,10 +191,10 @@ export const LosTresEstados: Story = {
 };
 
 /**
- * Lo que un comentario de revisión lleva además del texto —una **captura** y un
- * **enlace a la lección**— entra por las ranuras que ya hay: la captura es un
- * `Figure` dentro de `body`, y el enlace, un `Link` en las acciones de la
- * anotación. El organismo no necesita ranuras propias para esto.
+ * Lo que un comentario de revisión lleva además del texto: la **captura** entra
+ * por `body` —un `Figure`, que es quien tiene la proporción—, y el **enlace a la
+ * lección** por `meta`, al lado de la fecha, porque es la coordenada de la
+ * anotación y no una acción sobre ella.
  */
 export const ConCapturaYEnlace: Story = {
   name: 'Con captura y enlace a la lección',
@@ -202,6 +202,7 @@ export const ConCapturaYEnlace: Story = {
     status: 'acknowledged',
     annotation: {
       ...raiz,
+      meta: <Link href="#leccion-4">Evaluación por rúbrica</Link>,
       body: (
         <Stack gap="md">
           <p>El botón de la lección se sale de la caja a partir de 900px de ancho.</p>
@@ -214,12 +215,60 @@ export const ConCapturaYEnlace: Story = {
       ),
       actions: (
         <Inline gap="sm">
-          <Link href="#leccion-4">Ir a la lección «Evaluación por rúbrica»</Link>
+          <Button size="sm" variant="ghost">Editar</Button>
+          <Button size="sm" variant="ghost" destructive>Borrar</Button>
         </Inline>
       ),
     },
     actions: <Button size="sm" variant="outline">Resolver</Button>,
   },
+};
+
+/**
+ * `meta` es **por anotación**: cada una tiene su fecha y su coordenada, y la
+ * respuesta puede apuntar a otro sitio que la anotación que abre el hilo.
+ */
+export const CoordenadaPorAnotacion: Story = {
+  name: 'Coordenada por anotación',
+  args: {
+    annotation: {
+      ...raiz,
+      meta: <Link href="#leccion-4">Evaluación por rúbrica</Link>,
+    },
+    replies: [
+      {
+        ...respuestas[0],
+        meta: <Link href="#glosario">Glosario del proyecto</Link>,
+      },
+      respuestas[1],
+    ],
+    actions: accionesDeHilo,
+  },
+};
+
+/**
+ * Una coordenada larga no echa la fecha de la vista: va la última de la fila,
+ * así que baja de línea, y si es un texto sin espacios se parte dentro. El hilo
+ * va aquí dentro de una caja estrecha para enseñarlo sin redimensionar nada.
+ */
+export const CoordenadaLarga: Story = {
+  name: 'Coordenada larga',
+  render: () => (
+    <div style={{ maxInlineSize: '20rem' }}>
+      <AnnotationThread
+        annotation={{
+          ...raiz,
+          edited: true,
+          meta: (
+            <Link href="#leccion-4">
+              Módulo 3 · Evaluación por rúbrica y retroalimentación entre iguales
+            </Link>
+          ),
+        }}
+        actions={accionesDeHilo}
+      />
+    </div>
+  ),
 };
 
 export const TestTransiciones: Story = {
@@ -240,5 +289,68 @@ export const TestTransiciones: Story = {
     await userEvent.click(within(hilo).getByRole('button', { name: 'Marcar como resuelta' }));
     await expect(within(hilo).getByText('Resuelta')).toBeInTheDocument();
     await expect(hilo).toHaveClass('annotation-thread--resolved');
+  },
+};
+
+export const TestCoordenada: Story = {
+  name: 'Test — la coordenada va en la fila de la fecha, no en el pie',
+  tags: ['!dev'],
+  args: {
+    annotation: {
+      ...raiz,
+      meta: <Link href="#leccion-4">Evaluación por rúbrica</Link>,
+      actions: <Button size="sm" variant="ghost">Editar</Button>,
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const enlace = canvas.getByRole('link', { name: 'Evaluación por rúbrica' });
+
+    // La coordenada vive en la cabecera, con la fecha; no en las acciones.
+    const cabecera = enlace.closest('.annotation-thread__header');
+    await expect(cabecera).not.toBeNull();
+    await expect(cabecera!.querySelector('time')).not.toBeNull();
+    await expect(enlace.closest('.annotation-thread__item-actions')).toBeNull();
+
+    // Y va DESPUÉS de la fecha: al estrecharse baja ella, no la fecha.
+    const fecha = cabecera!.querySelector('time')!;
+    await expect(
+      fecha.compareDocumentPosition(enlace) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  },
+};
+
+export const TestCoordenadaEstrecha: Story = {
+  name: 'Test — al estrecharse baja la coordenada, no la fecha',
+  tags: ['!dev'],
+  render: () => (
+    <div style={{ maxInlineSize: '20rem' }}>
+      <AnnotationThread
+        annotation={{
+          ...raiz,
+          meta: (
+            <Link href="#leccion-4">
+              Módulo 3 · Evaluación por rúbrica y retroalimentación entre iguales
+            </Link>
+          ),
+        }}
+      />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const cabecera = canvas
+      .getByRole('link', { name: /Módulo 3/ })
+      .closest('.annotation-thread__header') as HTMLElement;
+    const fecha = cabecera.querySelector('time') as HTMLElement;
+    const coordenada = cabecera.querySelector('.annotation-thread__meta') as HTMLElement;
+
+    // La fecha se queda en la primera línea de la fila; la coordenada baja.
+    await expect(coordenada.offsetTop).toBeGreaterThan(fecha.offsetTop);
+    // Y no desborda el hilo: se parte dentro de la ranura.
+    const hilo = canvas.getByRole('article', { name: 'Hilo de anotaciones' });
+    await expect(coordenada.getBoundingClientRect().right).toBeLessThanOrEqual(
+      Math.ceil(hilo.getBoundingClientRect().right),
+    );
   },
 };

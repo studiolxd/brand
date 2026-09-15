@@ -54,6 +54,21 @@
   color: var(--annotation-thread-meta-color);
 }
 
+/* La coordenada de la anotación, al lado de la fecha. Va la última de la fila,
+   así que cuando no cabe es ELLA la que baja de línea: la fecha no se va de la
+   vista. Y si lo que trae es un texto largo sin espacios —el título de una
+   lección—, se parte dentro en vez de desbordar el hilo. */
+.annotation-thread__meta {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--annotation-thread-header-gap);
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+  font-size: var(--annotation-thread-meta-font-size);
+  color: var(--annotation-thread-meta-color);
+}
+
 .annotation-thread__body {
   font-size: var(--annotation-thread-body-font-size);
   line-height: var(--annotation-thread-body-line-height);

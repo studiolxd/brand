@@ -73,6 +73,38 @@ describe('AnnotationThread', () => {
     expect(screen.getByText('editada')).toBeInTheDocument();
   });
 
+  it('la coordenada de una anotación va en la fila de la fecha, después de ella', () => {
+    const { container } = render(
+      <AnnotationThread
+        annotation={{ ...raiz, edited: true, meta: <a href="#l4">Lección 4</a> }}
+      />,
+    );
+    const cabecera = container.querySelector('.annotation-thread__header')!;
+    const enlace = screen.getByRole('link', { name: 'Lección 4' });
+    const fecha = cabecera.querySelector('time')!;
+
+    expect(cabecera).toContainElement(enlace);
+    expect(screen.getByText('editada')).toBeInTheDocument();
+    expect(fecha.compareDocumentPosition(enlace) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(container.querySelector('.annotation-thread__item-actions')).toBeNull();
+  });
+
+  it('la coordenada es de cada anotación, no del hilo', () => {
+    render(
+      <AnnotationThread
+        annotation={{ ...raiz, meta: <a href="#l4">Lección 4</a> }}
+        replies={[{ ...respuestas[0], meta: <a href="#glosario">Glosario</a> }]}
+      />,
+    );
+    expect(screen.getByRole('link', { name: 'Lección 4' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Glosario' })).toBeInTheDocument();
+  });
+
+  it('sin coordenada no monta la ranura', () => {
+    const { container } = render(<AnnotationThread annotation={raiz} />);
+    expect(container.querySelector('.annotation-thread__meta')).toBeNull();
+  });
+
   it('pinta las acciones del hilo y las de cada anotación', () => {
     render(
       <AnnotationThread

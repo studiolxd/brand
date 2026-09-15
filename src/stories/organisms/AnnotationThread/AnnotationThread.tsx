@@ -15,6 +15,15 @@ export interface AnnotationEntry {
   avatar?: ReactNode;
   /** Se marca como editada junto a la fecha. */
   edited?: boolean;
+  /**
+   * Lo que el producto añade **a la fila de metadatos**, al lado de la fecha:
+   * la coordenada de la anotación —el enlace a la lección, al segmento, a la
+   * versión—, no una acción sobre ella (para eso está `actions`).
+   *
+   * Se añade DESPUÉS de la fecha y de la marca de editada: no las sustituye, y
+   * al estrecharse cae a su propia línea sin empujarlas fuera de la vista.
+   */
+  meta?: ReactNode;
   /** Acciones de **esta** anotación: editar, borrar, citar. */
   actions?: ReactNode;
 }
@@ -99,6 +108,7 @@ function Annotation({
         {/* `datetime` en ISO: la fecha visible está formateada, la de máquina no. */}
         <time className="annotation-thread__date" dateTime={date.toISOString()}>{formatted}</time>
         {entry.edited && <span className="annotation-thread__edited">{editedLabel}</span>}
+        {entry.meta && <span className="annotation-thread__meta">{entry.meta}</span>}
       </header>
       <div className="annotation-thread__body">{entry.body}</div>
       {entry.actions && <div className="annotation-thread__item-actions">{entry.actions}</div>}

@@ -82,18 +82,55 @@ Para responder, `reply` recibe lo que haga falta —un `MessageComposer`, un
 `TextareaField`, un `Button` que abre el formulario—: el hilo no impone un
 formulario propio.
 
-## Una captura y un enlace: las ranuras que ya hay
+## La coordenada: `meta`
 
-Un comentario de revisión suele llevar algo más que texto —una **captura de
-pantalla** y un **enlace profundo** a lo comentado—. No hacen falta ranuras
-nuevas: la captura es un `Figure` dentro del `body` de la anotación (con su
-proporción y su `render` para el `<Image>` del producto), y el enlace va en las
-`actions` de esa anotación.
+La fila de metadatos —avatar, autor, fecha, marca de editada— la pinta el
+organismo, y **`meta` es lo que el producto añade al lado**: el enlace a la
+lección, al segmento, a la versión. La coordenada de la anotación, dónde está lo
+que se comenta.
+
+```tsx
+<AnnotationThread
+  annotation={{
+    ...comentario,
+    meta: <Link href={`/lecciones/${leccionId}`}>{tituloDeLaLeccion}</Link>,
+  }}
+/>
+```
+
+**No es `actions`, y la diferencia no es de sitio.** `actions` son las cosas que
+se le hacen a la anotación (editar, borrar, citar); la coordenada es parte de lo
+que la anotación **es**. Bajarla al pie, entre los botones, la convierte en otra
+cosa: en un botón más.
+
+Es **por anotación**, no del hilo: cada una tiene su fecha y su coordenada, y una
+respuesta puede apuntar a otro sitio que la anotación que abre el hilo.
+
+<Canvas of={AnnotationThreadStories.CoordenadaPorAnotacion} />
+
+`meta` **añade, no sustituye**: el avatar, el autor, la fecha y la marca de
+editada siguen siendo del organismo, y la ranura se pinta después de ellos.
+
+### Cuando se estrecha
+
+La fila envuelve, y `meta` va **la última**: cuando deja de caber, la que baja de
+línea es la coordenada, nunca la fecha —que es lo que no puede irse de la vista—.
+Y si lo que trae es un texto largo sin espacios, se parte dentro de la ranura
+(`overflow-wrap`) en vez de desbordar el hilo.
+
+<Canvas of={AnnotationThreadStories.CoordenadaLarga} />
+
+## Y la captura, por `body`
+
+La otra cosa que un comentario de revisión lleva además del texto —una **captura
+de pantalla**— no necesita ranura propia: es un `Figure` dentro del `body` de la
+anotación, que es quien tiene la proporción y el `render` para el `<Image>` del
+producto.
 
 <Canvas of={AnnotationThreadStories.ConCapturaYEnlace} />
 
-`body` y `actions` son `ReactNode`: lo que el hilo aporta es el marco —autor,
-fecha, estado, sangría de las respuestas—, no el contenido.
+`meta`, `body` y `actions` son `ReactNode`: lo que el hilo aporta es el marco
+—autor, fecha, estado, sangría de las respuestas—, no el contenido.
 
 ## Acciones por anotación
 
@@ -126,6 +163,9 @@ que ya contrastan en las dos superficies.
 
 - El hilo es un `<article>` con nombre (`label`), y cada anotación otro
   `<article>` dentro: un lector de pantalla puede saltar de hilo en hilo.
+- La coordenada (`meta`) va dentro del `<header>` de su anotación, junto al
+  autor y a la fecha: se lee como parte de la anotación, no como una acción
+  suelta al final.
 - La fecha es un `<time>` con `datetime` **en ISO**: la que se ve está
   formateada para leer; la de máquina, no.
 - El estado se lee en texto («Abierta» / «Atendida» / «Resuelta»), no solo en el
