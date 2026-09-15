@@ -33,6 +33,9 @@
   --multi-select-item-padding-block: var(--select-item-padding-block); /** Padding block de cada opción */
   --multi-select-pill-bg: var(--color-primary); /** Fondo de la pill de valor seleccionado */
   --multi-select-pill-border-radius: var(--border-radius-round); /** Radio de la pill */
+  --multi-select-icon-size: var(--select-icon-size); /** Glifo del chevron del trigger — el del Select */
+  --multi-select-sm-icon-size: var(--select-sm-icon-size); /** Glifo del chevron — variante sm */
+  --multi-select-lg-icon-size: var(--select-lg-icon-size); /** Glifo del chevron — variante lg */
   --multi-select-sm-font-size: var(--select-sm-font-size); /** Tamaño de fuente — variante sm */
   --multi-select-sm-padding-inline: var(--select-sm-padding-inline); /** Padding inline del trigger — variante sm */
   --multi-select-sm-item-padding-block: var(--select-sm-item-padding-block); /** Padding block de cada opción — variante sm */

@@ -45,7 +45,7 @@ Definido en `tokens/size/target.json`.
 
 ## Dónde va cada talla
 
-- **Superficies públicas** (la web, el hub sin autenticar): los controles van a **`lg`** — botones, campos, selectores de idioma y tema. El logotipo de la cabecera va a su talla de marca (`xl`).
+- **Superficies públicas** (la web, el hub sin autenticar): los controles van a **`lg`** — botones, campos, selectores de idioma y tema. **No hay que pedirlo**: dentro de un `SiteShell` la talla de partida de un control ya es `lg`, igual que el cuerpo de texto ya es de 20px, y una talla explícita (`size="sm"`) sigue mandando sobre ella. El logotipo de la cabecera va a su talla de marca (`xl`).
 - **Dentro de las aplicaciones**: **`md`**, la talla por defecto de todos los controles.
 - **`sm`**: barras y tablas densas dentro de las aplicaciones.
 

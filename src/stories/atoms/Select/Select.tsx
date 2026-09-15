@@ -217,7 +217,6 @@ export const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(f
       <Icon
         name="chevron"
         className="select__icon"
-        size={size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm'}
       />
     </BaseSelect.Trigger>
   );

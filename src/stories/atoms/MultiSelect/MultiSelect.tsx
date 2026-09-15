@@ -313,7 +313,6 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
         <Icon
           name="chevron"
           className="multi-select__icon"
-          size={size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm'}
         />
         {/* Lo que se envía con el formulario: un input oculto por valor. */}
         {name && currentValues.map((v) => (

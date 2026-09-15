@@ -733,9 +733,33 @@ console.log('✔︎ src/tokens/surface-dark-derived.css');
   console.log('✔︎ src/tokens/surface-invert.css');
 }
 
-const surfaceMap = new Map(
-  Object.entries(surfaceSeeds).map(([path, target]) => [path, `var(${target})`]),
-);
+/* En la superficie pública la talla de partida de un control es `lg`.
+ *
+ * No hace falta enumerarlos: un control declara su talla lg en tokens
+ * hermanos (`input.lg-height` junto a `input.height`), que es de donde bebe su
+ * modificador `.input--lg`. Así que la regla es la misma que aplica esa clase,
+ * pero en el bloque de la superficie: todo token con hermano `lg-<nombre>`
+ * arranca apuntando a él. De ahí salen también las semillas del punto fijo, así
+ * que lo que herede de un control (el `control-block-size` contra el que la
+ * FilterBar centra el interruptor) sube con él. Un `size="sm"` dentro del shell
+ * sigue mandando: su modificador declara la variable en el propio elemento y
+ * gana a la heredada del `.site-shell`. */
+const lgSeeds = {};
+{
+  const declared = new Set(allTokens.map(({ path }) => path.join('.')));
+  for (const { path } of allTokens) {
+    const name = path[path.length - 1];
+    if (typeof name !== 'string' || !name.startsWith('lg-')) continue;
+    const base = [...path.slice(0, -1), name.slice(3)];
+    if (!declared.has(base.join('.'))) continue;
+    lgSeeds[base.join('.')] = `var(${cssName(path)})`;
+  }
+}
+
+const surfaceMap = new Map([
+  ...Object.entries(lgSeeds),
+  ...Object.entries(surfaceSeeds).map(([path, target]) => [path, `var(${target})`]),
+]);
 for (let changed = true; changed; ) {
   changed = false;
   for (const { path, value } of allTokens) {
@@ -746,9 +770,14 @@ for (let changed = true; changed; ) {
     // a CSS, así que arrastrarlos aquí solo deja custom properties muertas.
     if (path[0] === 'email') continue;
     if (path.some((segment) => segment.startsWith('surface-dark-'))) continue;
-    const ref = typeof value === 'string' && value.match(/^\{(.+)\}$/)?.[1];
-    if (!ref || !surfaceMap.has(ref)) continue;
-    surfaceMap.set(dotted, `var(${cssName(ref.split('.'))})`);
+    if (typeof value !== 'string') continue;
+    // Una referencia suelta (`{control.height}`) o dentro de una fórmula
+    // (`calc({label.font-size} * {label.line-height} + …)`, el renglón que la
+    // FilterBar reserva sobre lo que no lleva rótulo): las dos arrastran, y la
+    // fórmula se reescribe entera igual que la escribe Style Dictionary.
+    const refs = [...value.matchAll(/\{([^}]+)\}/g)].map((m) => m[1]);
+    if (!refs.some((ref) => surfaceMap.has(ref))) continue;
+    surfaceMap.set(dotted, value.replace(/\{([^}]+)\}/g, (_, ref) => `var(${cssName(ref.split('.'))})`));
     changed = true;
   }
 }

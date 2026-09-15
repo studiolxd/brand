@@ -16,6 +16,9 @@
   --select-content-bg: var(--color-white); /** Fondo del dropdown */
   --select-content-z-index: var(--z-index-floating); /** Capa del desplegable: flotante */
   --select-item-padding-block: var(--spacing-2); /** Padding block de cada opción */
+  --select-icon-size: var(--icon-size-sm); /** Glifo del chevron del trigger: la talla de icono que va con la talla de partida del control. Es un token y no la prop `size` del `Icon` para que suba con el control cuando lo hace la superficie (la pública parte de lg) */
+  --select-sm-icon-size: var(--icon-size-xs); /** Glifo del chevron — variante sm */
+  --select-lg-icon-size: var(--icon-size-md); /** Glifo del chevron — variante lg */
   --select-sm-font-size: var(--font-size-1); /** Cuerpo — sm */
   --select-sm-padding-inline: var(--spacing-2); /** Padding inline del trigger — variante sm */
   --select-sm-item-padding-block: var(--spacing-1); /** Padding block de cada opción — variante sm */
