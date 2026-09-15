@@ -189,8 +189,20 @@ export const ContratoLicitaciones: Story = {
       'Vista previa del correo',
     )) as HTMLIFrameElement;
 
-    await waitFor(() =>
-      expect(marco.contentDocument?.body.textContent ?? '').toContain('Tres licitaciones nuevas'),
+    /* Con margen, y no por capricho: aquí se esperan DOS cosas en cadena —la
+       promesa que compone el correo a texto y la carga del documento que el
+       iframe monta con ese `srcDoc`—, y el segundo depende del navegador, no
+       del test. Con el plazo por defecto (1 s) esta espera agota en una máquina
+       cargada y el fallo sale como «expected '' to contain…», que se lee como
+       una regresión sin serlo: pasó dos veces el 2026-09-15, con varios agentes
+       a la vez, y en una máquina libre pasa siempre. No se afloja ninguna
+       comprobación, solo lo que está dispuesta a esperar. */
+    await waitFor(
+      () =>
+        expect(marco.contentDocument?.body.textContent ?? '').toContain(
+          'Tres licitaciones nuevas',
+        ),
+      { timeout: 10_000 },
     );
 
     const correo = within(marco.contentDocument!.body);
