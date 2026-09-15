@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react';
+import { type ContainerSpace, type ContainerWidth } from '../../atoms/Container/Container';
 import './PublicPageShell.css';
 export interface PublicPageShellProps {
     /** El contenido de la página: lo que va dentro del `main`. */
@@ -25,6 +26,25 @@ export interface PublicPageShellProps {
      * lee cuando hay banda.
      */
     preferencesLabel?: string;
+    /**
+     * Medida del contenido del `main`, tal cual la de `Container`. Por defecto
+     * `'xl'` (1280px), el ancho de las páginas públicas; `'full'` para que el
+     * contenido llegue tan lejos como la banda, que es lo que necesita una
+     * portada que abre con un `Hero` de lado a lado.
+     */
+    mainWidth?: ContainerWidth;
+    /**
+     * Aire vertical del `main`. Por defecto `'xl'`, el de una página pública
+     * corriente; `'none'` cuando lo que va dentro son secciones que ya traen su
+     * propio aire (ver `Container` § «Las secciones traen su aire»).
+     */
+    mainSpace?: ContainerSpace;
+    /**
+     * Quita el aire lateral del `main`, para contenido que debe tocar el borde
+     * de la pantalla. Por defecto `false`. Va con `mainWidth="full"`: sin él, el
+     * contenido seguiría acotado y solo se perdería el margen.
+     */
+    mainFlush?: boolean;
     /** `id` del `main` (`main-content` por defecto, destino del `SkipLink`). */
     id?: string;
     /**
@@ -54,11 +74,15 @@ export interface PublicPageShellProps {
  * flotante abierto desde la página —`ConsentPreferences`, un `Modal`, un
  * `Sheet`—: su portal monta por defecto en `document.body`, que no es
  * descendiente de `.site-shell` y por tanto no hereda el remapeo de superficie
- * pública. Apuntarlo al `main` no serviría: el `main` es un `Container`
- * acotado y con su aire, así que el panel quedaría metido dentro de la columna
- * de contenido en vez de flotar sobre la página. Con `shell={false}` no hay
- * marco y el `ref` se queda sin asignar: ahí el contenedor es el `AppShell` de
- * la app.
+ * pública. Apuntarlo al `main` no serviría: el `main` es un `Container` —por
+ * defecto acotado y con su aire—, así que el panel quedaría metido dentro de
+ * la columna de contenido en vez de flotar sobre la página. Con `shell={false}`
+ * no hay marco y el `ref` se queda sin asignar: ahí el contenedor es el
+ * `AppShell` de la app.
+ *
+ * **El `main` lleva los mismos mandos que un `Container`** (`mainWidth`,
+ * `mainSpace`, `mainFlush`), con los defaults de siempre. Es lo que permite que
+ * una portada abra con un `Hero` de lado a lado sin salirse del marco.
  */
 /**
  * El único texto del marco, y es **cromo**: el nombre de la banda donde viven
