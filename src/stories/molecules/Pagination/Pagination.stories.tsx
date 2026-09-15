@@ -387,18 +387,87 @@ export const ContratoRanuraTrasElSelector: Story = {
   },
 };
 
-/** Test: con la ranura llena el nav se pinta aunque no haya nada que paginar. */
-export const ContratoRanuraSinPaginas: Story = {
-  name: 'Test — la ranura se pinta sin páginas',
+/**
+ * Test: con `total` DESCONOCIDO (no informado, no es que sea cero) y como
+ * mucho una página, la ranura llena sigue pintando el nav — una tabla que
+ * todavía no ha resuelto su total pero ya trae algo que exportar.
+ */
+export const ContratoRanuraSinTotalConocido: Story = {
+  name: 'Test — la ranura se pinta con el total sin resolver',
   tags: ['!dev'],
   render: () => (
-    <Pagination total={0} afterPageSize={<button type="button">Exportar</button>} />
+    <Pagination afterPageSize={<button type="button">Exportar</button>} />
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByRole('button', { name: 'Exportar' })).toBeInTheDocument();
     // Sin páginas no hay botones de página que recorrer.
     await expect(canvasElement.querySelector('.pagination__controls')).toBeNull();
+  },
+};
+
+/**
+ * Con `total={0}` el paginador no se pinta NUNCA, aunque traiga `showTotal`,
+ * el selector de tamaño y la ranura llena: con 0 registros no hay nada que
+ * paginar, ni que resumir, ni que exportar. Esta story está deliberadamente
+ * vacía — es lo que demuestra.
+ */
+export const SinRegistros: Story = {
+  name: 'Sin registros',
+  render: () => (
+    <Pagination
+      total={0}
+      showTotal
+      onPageSizeChange={() => {}}
+      afterPageSize={<Button variant="outline">Exportar</Button>}
+    />
+  ),
+};
+
+/** Test: con `total={0}` el nav no se pinta pase lo que pase en sus otras props. */
+export const ContratoSinRegistrosNoSePinta: Story = {
+  name: 'Test — sin registros el nav no se pinta',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <div data-testid="solo-total">
+        <Pagination total={0} ariaLabel="Solo total" />
+      </div>
+      <div data-testid="con-total">
+        <Pagination total={0} showTotal ariaLabel="Con total" />
+      </div>
+      <div data-testid="con-selector">
+        <Pagination total={0} onPageSizeChange={() => {}} ariaLabel="Con selector" />
+      </div>
+      <div data-testid="con-ranura">
+        <Pagination
+          total={0}
+          afterPageSize={<button type="button">Exportar</button>}
+          ariaLabel="Con ranura"
+        />
+      </div>
+      <div data-testid="con-page-count">
+        <Pagination total={0} pageCount={5} ariaLabel="Con pageCount" />
+      </div>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    for (const testId of ['solo-total', 'con-total', 'con-selector', 'con-ranura', 'con-page-count']) {
+      const contenedor = canvasElement.querySelector(`[data-testid="${testId}"]`) as HTMLElement;
+      await expect(contenedor.querySelector('nav')).toBeNull();
+    }
+  },
+};
+
+/** Test: `pageCount={0}` no se pinta, igual que `total={0}`. */
+export const ContratoPageCountCero: Story = {
+  name: 'Test — pageCount 0 tampoco se pinta',
+  tags: ['!dev'],
+  render: () => (
+    <Pagination pageCount={0} afterPageSize={<button type="button">Exportar</button>} ariaLabel="Sin páginas" />
+  ),
+  play: async ({ canvasElement }) => {
+    await expect(canvasElement.querySelector('nav')).toBeNull();
   },
 };
 

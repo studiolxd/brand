@@ -44,9 +44,10 @@ export interface FilterBarProps extends Omit<ComponentPropsWithoutRef<'div'>, 'c
  * consumidor, igual que en un formulario.
  *
  * Existe porque montarla a mano en un `Inline` se rompe en móvil: los campos
- * no encogen por debajo de su contenido y la fila se sale. Aquí la rejilla es
- * `auto-fit` sobre un ancho mínimo por token, así que el número de columnas lo
- * decide el sitio disponible y en pantalla estrecha queda una sola.
+ * no encogen por debajo de su contenido y la fila se sale. Aquí las columnas
+ * son fijas por punto de corte —4 en escritorio, 2 en tableta, 1 antes de
+ * `md`— y `auto-fit` hace que los filtros que haya llenen la fila entera, sin
+ * hueco a la derecha cuando hay menos de los que caben.
  *
  * `{...rest}` (`id`, `data-*`, `aria-*`…) va al `<div>`.
  */

@@ -2546,7 +2546,6 @@ var e = {
 	"--filter-bar-gap": "1.5rem",
 	"--filter-bar-column-gap": "1rem",
 	"--filter-bar-row-gap": "0.75rem",
-	"--filter-bar-column-min-inline-size": "12rem",
 	"--filter-bar-actions-gap": "0.75rem",
 	"--filter-bar-label-offset": "calc(0.875rem * 1.5 + 0.5rem)",
 	"--filter-bar-control-block-size": "2.5rem",

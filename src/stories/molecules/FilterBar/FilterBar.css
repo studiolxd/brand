@@ -23,23 +23,26 @@
    Medido a 1024px con cuatro filtros: sin el botón, una fila de cuatro
    columnas; con él, dos filas y 733px de hueco.
 
-   `auto-fill` (y no `auto-fit`) es lo que cierra el caso del todo: las pistas
-   las decide SOLO el ancho disponible, no cuántas celdas hay, así que ni el
-   número de columnas ni el ancho de los campos cambian porque aparezca o
-   desaparezca el botón. La contrapartida —con pocos filtros sobra sitio a la
-   derecha— es la buena: un filtro mide lo que mide una celda del sistema
-   (`field-row.cell-md`), no media pantalla.
+   Columnas por punto de corte —4 en escritorio (`lg`), 2 en tableta (`md`),
+   1 antes de `md`—, no por aritmética del ancho disponible: antes la rejilla
+   era `auto-fill` sobre un mínimo fijo (`field-row.cell-md`, 192px), así que
+   el número de columnas lo decidía el contenedor y no el punto de corte —a
+   1024px ya cabían cinco, y con cuatro filtros sobraba una columna vacía a la
+   derecha en vez de repartir la fila entre los cuatro—.
 
-   Las columnas empiezan en `md`, no antes. Dejarlas a la aritmética de la
-   rejilla —`min(…, 100%)` y un mínimo de 192px— apilaba de verdad solo por
-   debajo de unos 400px: medido, un contenedor de 430px ya daba DOS columnas de
-   207px y uno de 700px, TRES. O sea que entre ese punto y `md` la barra
-   contradecía su propia norma (y la de sus acciones, que sí conmutan en `md`):
-   un selector en un móvil apaisado, o en una tableta en vertical, se quedaba a
-   media línea. De ahí el aviso de que «Conexión» y «Tiempo» no llegaban al
-   borde. Por debajo de `md`, una columna y punto; el `min(…, 100%)` se queda
-   para el caso contrario —una barra dentro de una caja estrecha en una pantalla
-   ancha, un panel lateral—, donde la rejilla sí está activa. */
+   `auto-fit` con un mínimo que es una FRACCIÓN del contenedor —no un píxel
+   fijo— es lo que da las dos cosas a la vez: nunca más pistas que las del
+   punto de corte (el mínimo ya ocupa toda la pista posible, así que no cabe
+   una quinta) y, con menos filtros que columnas, `auto-fit` colapsa las pistas
+   vacías y las que quedan se reparten el sobrante por su `1fr` — tres filtros
+   en escritorio dan tres columnas iguales que llenan la fila, no tres de
+   cuatro con hueco. Con más filtros que columnas, la quinta y siguientes caen
+   a la fila de abajo: ahí SÍ hay contenido en las cuatro pistas de la primera
+   fila, así que ninguna colapsa y las cuatro se miden igual que un
+   `repeat(4, 1fr)` normal.
+
+   Las columnas empiezan en `md`, no antes: por debajo, una columna y punto,
+   igual que sus acciones (que también conmutan en `md`). */
 .filter-bar__row {
   display: grid;
   grid-template-columns: 1fr;
@@ -76,10 +79,12 @@
 }
 
 @media (min-width: 768px) /* --breakpoint-md */ {
+  /* Mínimo = una pista de dos, menos la mitad del hueco entre ellas: es lo
+     que hace que quepan exactamente 2 y no 3. */
   .filter-bar__row {
     grid-template-columns: repeat(
-      auto-fill,
-      minmax(min(var(--filter-bar-column-min-inline-size), 100%), 1fr)
+      auto-fit,
+      minmax(calc((100% - var(--filter-bar-column-gap)) / 2), 1fr)
     );
   }
 
@@ -153,5 +158,16 @@
      crece con ellas en vez de derramarlas. */
   .filter-bar__row:has(.label:not(.visually-hidden)) > .filter-bar__actions {
     min-block-size: calc(var(--filter-bar-label-offset) + var(--filter-bar-control-block-size));
+  }
+}
+
+/* Escritorio: el total sube de 2 a 4. Mismo cálculo, mínimo = una pista de
+   cuatro menos su parte de los tres huecos entre columnas. */
+@media (min-width: 1024px) /* --breakpoint-lg */ {
+  .filter-bar__row {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(calc((100% - 3 * var(--filter-bar-column-gap)) / 4), 1fr)
+    );
   }
 }

@@ -82,10 +82,24 @@ la misma pregunta (qué parte de la lista miro y qué hago con ella entera), mie
 recorrer páginas es otra tarea, y por eso los botones de página se quedan solos al otro
 extremo. Por debajo de `md` la ranura baja a su propia línea, bajo el selector.
 
-Con la ranura llena el `nav` se pinta aunque no haya páginas que recorrer: una lista
-vacía se sigue pudiendo exportar. `DataTable` la usa para su prop `footerActions`.
+Con la ranura llena el `nav` se pinta aunque no haya páginas que recorrer y **el total no se
+conozca todavía** —una tabla que aún no ha resuelto su total pero ya trae algo que exportar—.
+`DataTable` la usa para su prop `footerActions`.
 
 <Canvas of={PaginationStories.ConRanuraTrasElSelector} />
+
+## Sin registros
+
+Con `total={0}` el paginador **no se pinta nunca**, con independencia de lo demás: ni
+`showTotal`, ni el selector de registros por página, ni la ranura `afterPageSize` llena lo
+resucitan. Es distinto de «el total todavía no se sabe» (§ anterior): ahí el `total` no se ha
+informado y la ranura sí puede pintar el `nav`; aquí el total **se conoce y es cero**, así que
+no hay nada que paginar ni que exportar. `pageCount={0}` sigue la misma regla.
+
+La story de abajo pasa los tres a la vez —`showTotal`, selector y ranura— y no sale nada:
+es justo lo que demuestra.
+
+<Canvas of={PaginationStories.SinRegistros} />
 
 ## Pocas páginas
 

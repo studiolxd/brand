@@ -38,9 +38,23 @@ export interface PaginationProps {
    * (`cursor`): para listados por cursor, donde no se sabe cuántas páginas hay.
    */
   mode?: 'pages' | 'cursor';
-  /** Total de registros. Con `pageCount` o en modo `cursor` no hace falta. */
+  /**
+   * Total de registros. Con `pageCount` o en modo `cursor` no hace falta.
+   * Con `0` el paginador **no se pinta nunca** —ni con `pageCount` informado,
+   * ni con `showTotal`, ni con la ranura `afterPageSize` llena: no hay nada
+   * que paginar ni que exportar—. Ver la regla completa en `pageCount`.
+   */
   total?: number;
-  /** Número de páginas, cuando quien pagina ya lo sabe (en vez de `total` + `pageSize`). */
+  /**
+   * Número de páginas, cuando quien pagina ya lo sabe (en vez de `total` +
+   * `pageSize`). Con `0`, igual que `total={0}`: el paginador no se pinta.
+   *
+   * Regla completa de cuándo el `<nav>` devuelve `null` (modo `pages`; en
+   * `cursor` no aplica, ver su prop): `total === 0`, o `pageCount === 0`, o
+   * (`total` sin informar y `pageCount` sin informar o `<= 1` y sin
+   * `afterPageSize`). Con una sola página pero `total` informado y mayor que
+   * 0, como hoy: se pinta si hay selector, ranura o `showTotal`.
+   */
   pageCount?: number;
   /** Página activa (1-indexed). En modo `cursor`, opcional. */
   page?: number;
@@ -142,7 +156,7 @@ function getPageWindow(page: number, totalPages: number): (number | '...')[] {
 
 export function Pagination({
   mode = 'pages',
-  total = 0,
+  total,
   pageCount,
   page = 1,
   pageSize = 10,
@@ -201,12 +215,18 @@ export function Pagination({
     );
   }
 
-  // Sin nada que paginar el nav no se pinta… salvo que traiga la ranura: lo
-  // que hay en ella no depende de que haya páginas (una tabla vacía sigue
-  // pudiendo exportarse).
-  if (pageCount === undefined && total === 0 && !afterPageSize) return null;
+  // Con 0 registros conocidos —por `total` o por `pageCount`— el nav no se
+  // pinta NUNCA: no hay nada que paginar, y tampoco nada que exportar por la
+  // ranura o resumir con `showTotal`. Con `total` sin informar (no es que sea
+  // cero: es que no se sabe) y como mucho una página, sí cede ante la ranura
+  // —una tabla que aún no ha resuelto su total pero ya trae algo que
+  // exportar—; el selector y `showTotal` no bastan, porque `showTotal` sin
+  // total no tiene qué mostrar.
+  if (total === 0 || pageCount === 0) return null;
+  if (total === undefined && (pageCount ?? 1) <= 1 && !afterPageSize) return null;
 
-  const totalPages = pageCount ?? (pageSize === 'all' ? 1 : Math.ceil(total / pageSize));
+  const totalForCalc = total ?? 0;
+  const totalPages = pageCount ?? (pageSize === 'all' ? 1 : Math.ceil(totalForCalc / pageSize));
   const pageItems = totalPages > 1 ? getPageWindow(page, totalPages) : [];
 
   function renderPageItem(item: number | '...', index: number) {
@@ -305,7 +325,7 @@ export function Pagination({
       {hasMeta && (
         <div className="pagination__meta">
           {showTotal && (
-            <span className="pagination__summary">{t('total', totalLabel)(total)}</span>
+            <span className="pagination__summary">{t('total', totalLabel)(totalForCalc)}</span>
           )}
           {onPageSizeChange && (
             <div className="pagination__size-selector">

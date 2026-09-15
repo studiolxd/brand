@@ -7,6 +7,39 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [48.1.0] — 2026-09-16
+
+> **Minor.** `FilterBar` pasa a columnas fijas por punto de corte —4 en escritorio, 2 en
+> tableta, 1 antes de `md`— que llenan la fila entera en vez de dejar hueco a la derecha.
+> Y `Pagination` deja de pintarse con 0 registros, sea cual sea el resto de sus props.
+
+### `FilterBar`: columnas por punto de corte, no por aritmética del ancho disponible
+
+`.filter-bar__row` era `repeat(auto-fill, minmax(<mínimo>, 1fr))`: el número de columnas
+lo decidía solo el ancho disponible, así que cuatro filtros en escritorio podían dejar una
+columna vacía a la derecha en vez de llenar la fila. Ahora el máximo de columnas es fijo
+por punto de corte —4 en `lg`, 2 en `md`, 1 antes— y la rejilla es `auto-fit` con un
+mínimo que es una fracción del contenedor: con menos filtros que el máximo, las columnas
+que sobran colapsan y las que tienen contenido se reparten el ancho sobrante, así que la
+fila siempre queda llena — tres filtros en escritorio son tres columnas iguales, no tres
+de cuatro con hueco. Con más filtros que el máximo, saltan de fila como antes. El botón de
+`actions` sigue siendo una celda más de la misma rejilla, así que participa del reparto.
+
+Se retira el token `filter-bar.column-min-inline-size` (ya no decide nada: el máximo de
+columnas es fijo en el CSS, no una medida). El resto de los tokens de la barra no cambia.
+
+### `Pagination`: con 0 registros, nunca se pinta
+
+`total === 0` dejaba de pintar el `<nav>` solo si además `pageCount` no estaba informado y
+`afterPageSize` estaba vacío — con `showTotal`, con el selector de página o con la ranura
+llena, un listado sin resultados seguía sacando un paginador sin nada que paginar. Ahora
+`total === 0` (o `pageCount === 0`) no pinta el `<nav>` **nunca**, con independencia de las
+demás props. La ranura sigue salvando al paginador solo cuando el total **no se conoce
+todavía** (la prop no se ha informado) y hay como mucho una página — una tabla que aún no
+ha resuelto su total pero ya trae algo que exportar—; con una página y registros de verdad
+(`total` informado y mayor que 0) se sigue pintando si hay selector, ranura o total, como
+antes.
+
 ## [48.0.0] — 2026-09-16
 
 > **Major.** Novena familia al proveedor de textos: copiar, datos y estado. Diecisiete

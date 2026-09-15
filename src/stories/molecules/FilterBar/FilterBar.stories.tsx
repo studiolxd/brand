@@ -133,6 +133,69 @@ export const ConControlAlto: Story = {
   ),
 };
 
+/**
+ * Cuatro filtros en escritorio: la fila justa, a celda por filtro —el máximo
+ * del punto de corte—.
+ */
+export const ConCuatroFiltros: Story = {
+  name: 'Cuatro filtros en escritorio',
+  render: () => (
+    <FilterBar search={<Buscador />} actions={<Button variant="outline">Limpiar filtros</Button>}>
+      <SelectField id="filtro4-estado" label="Estado" options={ESTADOS} defaultValue="todos" />
+      <SelectField id="filtro4-papel" label="Papel" options={PAPELES} defaultValue="todos" />
+      <SelectField id="filtro4-equipo" label="Equipo" options={EQUIPOS} defaultValue="diseno" />
+      <DatePickerField id="filtro4-desde" label="Desde" />
+    </FilterBar>
+  ),
+};
+
+/**
+ * Tres filtros en escritorio: por debajo del máximo del punto de corte
+ * (cuatro), reparten la fila entera en tres columnas iguales — no quedan tres
+ * de cuatro con un hueco a la derecha.
+ */
+export const ConTresFiltros: Story = {
+  name: 'Tres filtros en escritorio',
+  render: () => (
+    <FilterBar search={<Buscador />} actions={<Button variant="outline">Limpiar filtros</Button>}>
+      <SelectField id="filtro3-estado" label="Estado" options={ESTADOS} defaultValue="todos" />
+      <SelectField id="filtro3-papel" label="Papel" options={PAPELES} defaultValue="todos" />
+      <DatePickerField id="filtro3-desde" label="Desde" />
+    </FilterBar>
+  ),
+};
+
+/** Dos filtros en escritorio: se reparten la fila a mitades. */
+export const ConDosFiltros: Story = {
+  name: 'Dos filtros en escritorio',
+  render: () => (
+    <FilterBar search={<Buscador />} actions={<Button variant="outline">Limpiar filtros</Button>}>
+      <SelectField id="filtro2-estado" label="Estado" options={ESTADOS} defaultValue="todos" />
+      <SelectField id="filtro2-papel" label="Papel" options={PAPELES} defaultValue="todos" />
+    </FilterBar>
+  ),
+};
+
+/**
+ * Seis filtros en escritorio: más que el máximo del punto de corte (cuatro),
+ * así que saltan de fila — la primera, a celda justa; la segunda, con los dos
+ * que sobran, sin repartir el resto del ancho porque la primera fila ya ha
+ * fijado el tamaño de las cuatro columnas.
+ */
+export const ConSeisFiltros: Story = {
+  name: 'Seis filtros en escritorio (saltan de fila)',
+  render: () => (
+    <FilterBar search={<Buscador />} actions={<Button variant="outline">Limpiar filtros</Button>}>
+      <SelectField id="filtro6-estado" label="Estado" options={ESTADOS} defaultValue="todos" />
+      <SelectField id="filtro6-papel" label="Papel" options={PAPELES} defaultValue="todos" />
+      <SelectField id="filtro6-equipo" label="Equipo" options={EQUIPOS} defaultValue="diseno" />
+      <DatePickerField id="filtro6-desde" label="Desde" />
+      <DatePickerField id="filtro6-hasta" label="Hasta" />
+      <SwitcherField id="filtro6-activas" label="Solo activas" />
+    </FilterBar>
+  ),
+};
+
 /** En móvil los filtros se apilan a ancho completo y las acciones caen al final. */
 export const Movil: Story = {
   name: 'En móvil',
@@ -426,15 +489,15 @@ export const ContratoAccionesAnchoCompletoEnMovil: Story = {
 };
 
 /**
- * Test: el número de columnas y el ancho de los campos los decide el sitio
- * disponible, NO si hay botón. El de «Limpiar filtros» solo se pinta cuando ya
- * hay algo que limpiar —o sea, mientras se escribe—, y con la maqueta anterior
- * su aparición le robaba el ancho a la rejilla y tiraba un filtro a la línea
- * siguiente. Dos barras idénticas salvo por las acciones, en el mismo hueco:
- * sus filtros tienen que caer en el mismo sitio y medir lo mismo.
+ * Test: el botón es una celda más de la MISMA rejilla que los filtros, no un
+ * bloque anclado al extremo que le resta ancho desde fuera. Con tres filtros,
+ * el botón es la cuarta celda —la fila llena su máximo de cuatro—; sin él,
+ * son los tres filtros los que se reparten la fila entera entre ellos. Las
+ * dos barras llenan su fila de punta a punta en los dos casos: lo que cambia
+ * es CUÁNTAS celdas la llenan, no que quede hueco.
  */
-export const ContratoColumnasIndependientesDeLasAcciones: Story = {
-  name: 'Test — las columnas no dependen del botón',
+export const ContratoAccionesLlenanLaRejilla: Story = {
+  name: 'Test — las acciones son una celda que llena la rejilla',
   tags: ['!dev'],
   render: () => (
     <>
@@ -455,32 +518,112 @@ export const ContratoColumnasIndependientesDeLasAcciones: Story = {
     </>
   ),
   play: async ({ canvasElement }) => {
-    const celdas = (testId: string) =>
+    const fila = (testId: string) =>
+      canvasElement.querySelector(`[data-testid="${testId}"] .filter-bar__row`) as HTMLElement;
+    const ultimaCelda = (testId: string, selector: string) =>
       Array.from(
         canvasElement
           .querySelector(`[data-testid="${testId}"]`)!
-          .querySelectorAll<HTMLElement>('.filter-bar__filter'),
-      ).map((celda) => celda.getBoundingClientRect());
+          .querySelectorAll<HTMLElement>(selector),
+      ).at(-1) as HTMLElement;
 
-    const sin = celdas('sin-acciones');
-    const con = celdas('con-acciones');
+    // Sin acciones: los tres filtros llenan la fila — el último llega al borde.
+    await expect(ultimaCelda('sin-acciones', '.filter-bar__filter').getBoundingClientRect().right)
+      .toBeCloseTo(fila('sin-acciones').getBoundingClientRect().right, 0);
 
-    await expect(con).toHaveLength(sin.length);
-    for (let i = 0; i < sin.length; i += 1) {
-      // Mismo ancho de columna…
-      await expect(con[i].width).toBeCloseTo(sin[i].width, 0);
-      // …y misma posición horizontal: ningún filtro se ha movido de columna.
-      await expect(con[i].left - con[0].left).toBeCloseTo(sin[i].left - sin[0].left, 0);
-    }
+    // Con acciones: es el BOTÓN el que llega al borde, como cuarta celda.
+    const accionesConBoton = ultimaCelda('con-acciones', '.filter-bar__actions');
+    await expect(accionesConBoton.getBoundingClientRect().right)
+      .toBeCloseTo(fila('con-acciones').getBoundingClientRect().right, 0);
 
-    // Y el botón es una celda más: comparte línea con los filtros.
-    const barraConAcciones = canvasElement.querySelector(
-      '[data-testid="con-acciones"] .filter-bar__actions',
-    ) as HTMLElement;
-    await expect(barraConAcciones.getBoundingClientRect().bottom).toBeCloseTo(
-      con[0].bottom,
-      0,
+    // Y comparte línea con los filtros, no una línea propia al margen.
+    const ultimoFiltroConAcciones = ultimaCelda('con-acciones', '.filter-bar__filter');
+    await expect(accionesConBoton.getBoundingClientRect().bottom)
+      .toBeCloseTo(ultimoFiltroConAcciones.getBoundingClientRect().bottom, 0);
+  },
+};
+
+/** Los cuatro filtros de los tres tests de punto de corte que siguen. */
+function FiltrosContratoColumnas() {
+  return (
+    <FilterBar search={<Buscador />} actions={<Button variant="outline">Limpiar filtros</Button>}>
+      <SelectField id="tpc-estado" label="Estado" options={ESTADOS} defaultValue="todos" />
+      <SelectField id="tpc-papel" label="Papel" options={PAPELES} defaultValue="todos" />
+      <SelectField id="tpc-equipo" label="Equipo" options={EQUIPOS} defaultValue="diseno" />
+      <DatePickerField id="tpc-desde" label="Desde" />
+    </FilterBar>
+  );
+}
+
+/**
+ * Test: el número de columnas es fijo por punto de corte —4 en escritorio, 2
+ * en tableta, 1 antes de `md`— y no una cuenta de cuánto cabe. Mismo
+ * `FilterBar`, cuatro filtros, medido a 375px: una columna, apilados.
+ */
+export const ContratoColumnasPorPuntoDeCorteMovil: Story = {
+  name: 'Test — columnas por punto de corte — móvil (1 columna)',
+  tags: ['!dev'],
+  globals: { viewport: { value: 'mobile1' } },
+  render: () => <FiltrosContratoColumnas />,
+  play: async ({ canvasElement }) => {
+    const filtros = Array.from(
+      canvasElement.querySelectorAll<HTMLElement>('.filter-bar__filter'),
     );
+    await expect(filtros).toHaveLength(4);
+    for (let i = 1; i < filtros.length; i += 1) {
+      await expect(filtros[i].getBoundingClientRect().top)
+        .toBeGreaterThanOrEqual(filtros[i - 1].getBoundingClientRect().bottom);
+    }
+  },
+};
+
+/** Medido a 900px (tableta, entre `md` y `lg`): dos columnas. */
+export const ContratoColumnasPorPuntoDeCorteMedio: Story = {
+  name: 'Test — columnas por punto de corte — medio (2 columnas)',
+  tags: ['!dev'],
+  parameters: {
+    viewport: { options: { contratoMedio: { name: 'Medio', styles: { width: '900px', height: '900px' } } } },
+  },
+  globals: { viewport: { value: 'contratoMedio' } },
+  render: () => <FiltrosContratoColumnas />,
+  play: async ({ canvasElement }) => {
+    const filtros = Array.from(
+      canvasElement.querySelectorAll<HTMLElement>('.filter-bar__filter'),
+    );
+    await expect(filtros).toHaveLength(4);
+    // Dos filas de dos: el primero y el segundo comparten renglón…
+    await expect(filtros[0].getBoundingClientRect().top)
+      .toBeCloseTo(filtros[1].getBoundingClientRect().top, 0);
+    // …y el tercero cae a la fila siguiente.
+    await expect(filtros[2].getBoundingClientRect().top)
+      .toBeGreaterThan(filtros[0].getBoundingClientRect().bottom - 1);
+  },
+};
+
+/** Medido a 1280px (escritorio): cuatro columnas, la fila entera en una línea. */
+export const ContratoColumnasPorPuntoDeCorteEscritorio: Story = {
+  name: 'Test — columnas por punto de corte — escritorio (4 columnas)',
+  tags: ['!dev'],
+  parameters: {
+    viewport: { options: { contratoEscritorio: { name: 'Escritorio', styles: { width: '1280px', height: '900px' } } } },
+  },
+  globals: { viewport: { value: 'contratoEscritorio' } },
+  render: () => <FiltrosContratoColumnas />,
+  play: async ({ canvasElement }) => {
+    const filtros = Array.from(
+      canvasElement.querySelectorAll<HTMLElement>('.filter-bar__filter'),
+    );
+    await expect(filtros).toHaveLength(4);
+    // Las cuatro celdas comparten renglón: una sola fila.
+    for (const filtro of filtros) {
+      await expect(filtro.getBoundingClientRect().top)
+        .toBeCloseTo(filtros[0].getBoundingClientRect().top, 0);
+    }
+    // Y el botón de acciones, como quinta celda, cae a la fila siguiente:
+    // cuatro filtros ya llenan el máximo de columnas del punto de corte.
+    const acciones = canvasElement.querySelector('.filter-bar__actions') as HTMLElement;
+    await expect(acciones.getBoundingClientRect().top)
+      .toBeGreaterThan(filtros[0].getBoundingClientRect().bottom - 1);
   },
 };
 

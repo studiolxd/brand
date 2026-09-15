@@ -207,7 +207,6 @@
   --field-row-empty-font-size: var(--text-paragraph-small-font-size);
   --file-upload-field-error-font-size: var(--form-error-font-size);
   --file-upload-field-helper-font-size: var(--form-helper-font-size);
-  --filter-bar-column-min-inline-size: var(--field-row-cell-md);
   --filter-bar-label-offset: calc(var(--label-font-size) * var(--label-line-height) + var(--input-field-gap));
   --filter-bar-control-block-size: var(--control-height);
   --input-field-search-input-padding-inline-start: var(--input-field-search-slot-size);

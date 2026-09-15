@@ -33,7 +33,7 @@ La barra de filtros de un listado: **el buscador en su línea** y, debajo, los f
 
 Cuando un listado se filtra por **más de una cosa**: un buscador y dos, tres o cuatro campos. Con un solo filtro junto al buscador no hace falta — cabe en el `toolbar` de la tabla.
 
-Existe porque montar esa barra a mano en un `Inline` se rompe en pantalla estrecha: los campos no encogen por debajo de su contenido y la fila se sale. Aquí, de `md` para arriba, la rejilla es `auto-fill` sobre un ancho mínimo por token (`column-min-inline-size`), así que **el número de columnas lo decide el sitio disponible y solo él**; por debajo de `md` es una sola columna a ancho completo, sin excepción.
+Existe porque montar esa barra a mano en un `Inline` se rompe en pantalla estrecha: los campos no encogen por debajo de su contenido y la fila se sale. Aquí el número de columnas es **fijo por punto de corte** —4 en escritorio (`lg`), 2 en tableta (`md`), 1 antes de `md`— y los filtros **llenan la fila**: con menos de los que caben, se reparten el ancho a partes iguales en vez de dejar hueco a la derecha. El detalle, en § «Cuántos filtros por fila».
 
 ## Anatomía
 
@@ -47,7 +47,7 @@ Sin filtros ni acciones no se pinta la fila; sin buscador, no se pinta su línea
 
 Las acciones **no son una caja aparte**: son una celda de la misma rejilla que los filtros. Antes eran un bloque anclado al extremo de la fila, y eso traía dos defectos que se veían a diario. El botón de «Limpiar filtros» solo se pinta cuando ya hay algo que limpiar —o sea, **mientras se escribe**—, y al aparecer le restaba a la rejilla su ancho más el hueco: si ese recorte cruzaba un múltiplo del mínimo de columna, la rejilla perdía una columna de golpe y un filtro se caía a la línea siguiente. Y entre el último campo y el botón quedaba siempre el hueco de su ancho.
 
-Por eso la rejilla es `auto-fill` y no `auto-fit`: **las pistas las decide el ancho disponible, no cuántas celdas hay**, así que ni el número de columnas ni el ancho de los campos cambian porque el botón aparezca o desaparezca. La contrapartida —con dos filtros en una pantalla ancha sobra sitio a la derecha— es la buena: un filtro mide lo que mide una celda del sistema, no media pantalla.
+Por eso las acciones son una celda más de la MISMA rejilla que los filtros —no una caja aparte anclada al extremo—: cuando el botón aparece, es un elemento más que llenar la fila, igual que un filtro; nunca un bloque que le resta ancho a la rejilla desde fuera.
 
 <Canvas of={FilterBarStories.SoloBuscador} />
 <Canvas of={FilterBarStories.ConAcciones} />
@@ -73,11 +73,24 @@ La caja de referencia es la del campo **estándar**, no el alto real del rengló
 
 Si **ningún** filtro lleva rótulo no hay línea de rótulos que respetar y no se reserva nada. Y apilada (por debajo de `md`) tampoco: sin columnas no hay con qué alinearse y el hueco sería aire de más.
 
+## Cuántos filtros por fila
+
+Las columnas son **fijas por punto de corte**, no una cuenta de cuántas caben en el ancho disponible: **4 en escritorio** (`lg`, 1024px), **2 en tableta** (`md`, 768px), **1 antes de `md`**. Con exactamente ese número de filtros, la fila queda a celda justa; con menos, `auto-fit` colapsa las columnas que se quedan sin filtro y reparte el ancho sobrante entre las que sí tienen uno, así que **siempre llenan la fila, sin hueco a la derecha**: tres filtros en escritorio son tres columnas iguales, no tres de cuatro con un cuarto vacío. Con más filtros que columnas, los que sobran caen a la fila siguiente —ahí las cuatro pistas de la primera fila ya tienen contenido, así que no colapsa ninguna y se miden como una rejilla normal de 4 columnas—.
+
+<Canvas of={FilterBarStories.ConCuatroFiltros} />
+<Canvas of={FilterBarStories.ConTresFiltros} />
+<Canvas of={FilterBarStories.ConDosFiltros} />
+<Canvas of={FilterBarStories.ConSeisFiltros} />
+
+Las acciones (`actions`) son una celda más de esa misma rejilla, así que participan del reparto: con tres filtros y el botón de «Limpiar filtros», son cuatro celdas las que llenan la fila de cuatro, no tres filtros repartiéndose el ancho y un botón añadido aparte.
+
+Por qué `auto-fit` (que colapsa pistas vacías) y no `auto-fill` (que las deja midiendo su mínimo, aunque estén vacías): con `auto-fill` sobraría el hueco de las columnas de más, exactamente el defecto que se corrige aquí. La contrapartida de `auto-fit` —que el ancho de una columna cambia con cuántos filtros hay— es la buena en esta pieza: lo que se quiere es que la fila se vea completa, no que cada filtro mida siempre lo mismo.
+
 ## En móvil
 
 Los filtros se apilan a ancho completo y las acciones caen al final, ocupando también la línea entera —la norma del sistema, en [Fundamentos › Puntos de ruptura](?path=/docs/foundations-puntos-de-ruptura--docs)—.
 
-**Las columnas empiezan en `md`, no antes.** Antes se dejaba apilar a la aritmética de la rejilla —`minmax(min(<mínimo>, 100%), 1fr)`, que deja la columna encoger cuando la caja es más estrecha que el mínimo—, y eso apilaba de verdad solo por debajo de unos 400px: medido, un contenedor de 430px ya daba **dos** columnas de 207px y uno de 700px, **tres**. Entre ese punto y `md` la barra contradecía su propia norma y la de sus acciones, que sí conmutan en `md`: un selector en un móvil apaisado o en una tableta en vertical se quedaba a media línea. El `min(…, 100%)` se conserva para el caso contrario —una barra dentro de una caja estrecha en una pantalla ancha, un panel lateral—, donde la rejilla sí está activa.
+**Las columnas empiezan en `md`, no antes.** Antes se dejaba apilar a la aritmética de la rejilla —`minmax(min(<mínimo>, 100%), 1fr)`, que deja la columna encoger cuando la caja es más estrecha que el mínimo—, y eso apilaba de verdad solo por debajo de unos 400px: medido, un contenedor de 430px ya daba **dos** columnas de 207px y uno de 700px, **tres**. Entre ese punto y `md` la barra contradecía su propia norma y la de sus acciones, que sí conmutan en `md`: un selector en un móvil apaisado o en una tableta en vertical se quedaba a media línea. Con columnas fijas por punto de corte ese problema no puede volver: no hay aritmética de ancho mínimo de la que depender.
 
 <Canvas of={FilterBarStories.Movil} />
 
@@ -130,4 +143,4 @@ La convención completa está en **Foundations › Internacionalización**.
 
 <TokenTable tokens={filterBarTokens} />
 
-`column-min-inline-size` es lo único que decide cuántas columnas caben (y, con `auto-fill`, también el ancho de los campos: las pistas reparten el hueco a partes iguales): subirlo da filas de tres, bajarlo de cuatro o cinco. Los demás son aire, y salen por referencia del formulario (`form.gap`, `form.actions-gap`) y de la fila de campos (`field-row.column-gap`, `field-row.row-gap`): la barra no inventa medidas propias.
+El número de columnas por punto de corte (4 en escritorio, 2 en tableta) no sale de un token: es la norma de § «Cuántos filtros por fila», fija en el CSS como `Columns` fija sus `repeat(N, 1fr)`. Los tokens de la barra son solo aire —`gap`, `column-gap`, `row-gap`, `actions-gap`— y salen por referencia del formulario (`form.gap`, `form.actions-gap`) y de la fila de campos (`field-row.column-gap`, `field-row.row-gap`): la barra no inventa medidas propias.

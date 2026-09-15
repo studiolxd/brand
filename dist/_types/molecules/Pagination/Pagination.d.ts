@@ -33,9 +33,23 @@ export interface PaginationProps {
      * (`cursor`): para listados por cursor, donde no se sabe cuántas páginas hay.
      */
     mode?: 'pages' | 'cursor';
-    /** Total de registros. Con `pageCount` o en modo `cursor` no hace falta. */
+    /**
+     * Total de registros. Con `pageCount` o en modo `cursor` no hace falta.
+     * Con `0` el paginador **no se pinta nunca** —ni con `pageCount` informado,
+     * ni con `showTotal`, ni con la ranura `afterPageSize` llena: no hay nada
+     * que paginar ni que exportar—. Ver la regla completa en `pageCount`.
+     */
     total?: number;
-    /** Número de páginas, cuando quien pagina ya lo sabe (en vez de `total` + `pageSize`). */
+    /**
+     * Número de páginas, cuando quien pagina ya lo sabe (en vez de `total` +
+     * `pageSize`). Con `0`, igual que `total={0}`: el paginador no se pinta.
+     *
+     * Regla completa de cuándo el `<nav>` devuelve `null` (modo `pages`; en
+     * `cursor` no aplica, ver su prop): `total === 0`, o `pageCount === 0`, o
+     * (`total` sin informar y `pageCount` sin informar o `<= 1` y sin
+     * `afterPageSize`). Con una sola página pero `total` informado y mayor que
+     * 0, como hoy: se pinta si hay selector, ranura o `showTotal`.
+     */
     pageCount?: number;
     /** Página activa (1-indexed). En modo `cursor`, opcional. */
     page?: number;
