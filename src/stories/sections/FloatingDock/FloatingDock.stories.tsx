@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { FloatingDock } from './FloatingDock';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 import { ChatShell } from '../../templates/ChatShell/ChatShell';
 import { ConversationThread, type ConversationMessage } from '../../organisms/ConversationThread/ConversationThread';
 import { MessageComposer } from '../../molecules/MessageComposer/MessageComposer';
@@ -231,5 +233,55 @@ export const ContratoAnclaje: Story = {
     await expect(cs.insetBlockEnd).toBe('24px');
     await expect(cs.insetInlineEnd).toBe('24px');
     await expect(cs.zIndex).toBe('100');
+  },
+};
+
+/**
+ * El dock solo dice dos cosas por su cuenta: cómo se llama el aspa y cómo se
+ * lee el contador. Las dos son cromo y salen de **`floatingDock.*`**, un
+ * espacio propio: el panel no es un `Modal` —es un diálogo no modal, sin velo,
+ * montado dentro del propio ancla— así que no hereda `modal.close`. El
+ * `label` del lanzador y el `title` del panel son contenido: los escribe el
+ * producto, y por eso siguen en castellano con el catálogo en inglés.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  args: {
+    label: 'Abrir el asistente',
+    title: 'Asistente',
+    defaultOpen: true,
+    badge: 3,
+    children: <Paragraph>El aspa y el contador leen del catálogo; esto no.</Paragraph>,
+  },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <Pagina />
+      <FloatingDock {...args} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el aspa sale de `floatingDock.close`, no de `modal.close`. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el cromo del dock lee de su propio espacio',
+  tags: ['!dev'],
+  args: {
+    label: 'Abrir el asistente',
+    title: 'Asistente',
+    defaultOpen: true,
+    badge: 3,
+    children: <Paragraph>Contenido</Paragraph>,
+  },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <FloatingDock {...args} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const panel = await canvas.findByRole('dialog', { name: 'Asistente' });
+    await expect(within(panel).getByRole('button', { name: 'Close' })).toBeInTheDocument();
+    await expect(within(panel).queryByRole('button', { name: 'Cerrar' })).toBeNull();
+    await expect(canvas.getByText('3 new messages')).toBeInTheDocument();
   },
 };

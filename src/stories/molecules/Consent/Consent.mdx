@@ -107,12 +107,62 @@ propia; es un `Button variant="text"` que llama a lo mismo que
 
 <Canvas of={ConsentStories.FlujoCompleto} />
 
-## Textos
+## Internacionalización
 
-Todos los textos son props con default castellano, incluidos los nombres y las
-descripciones de las categorías, que viajan en la propia lista `categories` (la
-lista entera se traduce, no una prop de texto por categoría). Ver Foundations →
-Internacionalización.
+El consentimiento emite **siete** textos por su cuenta y los siete son
+**cromo**: salen del catálogo del `BrandMessagesProvider` y ya **no traen
+castellano puesto**. La línea cae aquí en medio de una pieza legal, así que
+conviene decirla entera.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `title`, `regionLabel`, `acceptAllLabel`, `rejectAllLabel`, `preferencesLabel`, el `title` del panel, `alwaysOnLabel` | `consent.*` del proveedor | Los botones nombran las tres salidas que pide la ePrivacy, y son las mismas en todos los sitios: no describen qué se guarda, describen qué hace el botón. «Cookies» nombra el mecanismo, no la política de nadie. |
+| **Contenido** | `description`, `policyLabel`, los `name` y `description` de cada categoría | props de la aplicación | El texto legal depende de la jurisdicción y de lo que el producto guarde de verdad. Un default de catálogo lo haría decir lo mismo en todas partes, que es justo lo que un texto legal no puede hacer. |
+| **Reenvío puro** | `closeLabel` | `modal.close` / `sheet.close` | El aspa la pinta el diálogo sobre el que se abre el panel. El espacio `consent` no repite la clave. |
+
+**`description` y `policyLabel` son obligatorias y sin default**, como el
+`confirmLabel` del `ConfirmDialog`: siendo opcionales, nadie llegaría a
+escribir la buena. `policyLabel` lo exige el tipo en cuanto hay `policyHref`
+—o el enlace no está, o está entero—, así que una política sin nombre no
+compila.
+
+```tsx
+import { BrandMessagesProvider } from "@studiolxd/brand/messages";
+
+<BrandMessagesProvider
+  messages={{
+    consent: {
+      title: t("consent.title"),
+      regionLabel: t("consent.regionLabel"),
+      acceptAll: t("consent.acceptAll"),
+      rejectAll: t("consent.rejectAll"),
+      preferences: t("consent.preferences"),
+      preferencesTitle: t("consent.preferencesTitle"),
+      alwaysOn: t("consent.alwaysOn"),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={ConsentStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `title` | `consent.title` | título de la banda |
+| `regionLabel` | `consent.regionLabel` | nombre accesible de la región |
+| `acceptAllLabel` | `consent.acceptAll` | botón de aceptar |
+| `rejectAllLabel` | `consent.rejectAll` | botón de rechazar |
+| `preferencesLabel` | `consent.preferences` | botón de preferencias (solo con `onOpenPreferences`) |
+| `title` (panel) | `consent.preferencesTitle` | título del panel |
+| `alwaysOnLabel` | `consent.alwaysOn` | marca accesible de una categoría necesaria |
+
+El orden es **prop → proveedor → error**, y el texto se lee **donde se pinta**:
+una banda sin `onOpenPreferences` no exige `consent.preferences`.
+
+Las categorías se traducen pasando la lista entera (`categories`), no con una
+prop de texto por categoría. Ver Foundations → Internacionalización.
 
 ## Superficie oscura
 
@@ -174,7 +224,7 @@ Definidos en `tokens/molecule/consent.json`.
 | `onSave` | `(value) => void` | — | **Deprecado**, alias de `onChange`: se llama en el mismo momento y con la misma decisión |
 | `surface` | `'sheet' \| 'modal'` | `'modal'` | Sobre qué se abre: modal (decisión del sistema, 2026-08-29) o sheet lateral, que se conserva para usos futuros |
 | `side` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Borde de entrada (solo `sheet`) |
-| `title` | `ReactNode` | `'Preferencias de cookies'` | Título del panel |
+| `title` | `ReactNode` | — | Título del panel; sin él, `consent.preferencesTitle` del proveedor |
 | `closeLabel` | `string` | — | Reenvío puro al `Modal`/`Sheet`: sin él, el aspa lee `modal.close` / `sheet.close` del `BrandMessagesProvider` |
-| `alwaysOnLabel` | `string` | `'Siempre activa'` | Marca de una categoría necesaria (accesible, no visible) |
+| `alwaysOnLabel` | `string` | — | Marca de una categoría necesaria (accesible, no visible); sin ella, `consent.alwaysOn` del proveedor |
 | `container` | `React.ComponentPropsWithoutRef<typeof Modal>['container']` | — | Nodo del portal; el `ref` de `SiteShell` cuando el panel vive en la web pública |

@@ -162,4 +162,40 @@ export const brandMessagesFixture: BrandMessages = {
     container: 'Notificaciones',
     close: 'Cerrar',
   },
+  consent: {
+    title: 'Cookies',
+    regionLabel: 'Consentimiento de cookies',
+    acceptAll: 'Aceptar todas',
+    rejectAll: 'Rechazar',
+    preferences: 'Preferencias',
+    preferencesTitle: 'Preferencias de cookies',
+    alwaysOn: 'Siempre activa',
+  },
+  commandPalette: {
+    title: 'Buscar un comando',
+    placeholder: 'Escribe para buscar…',
+    empty: 'Sin resultados.',
+    list: 'Sugerencias',
+  },
+  appLauncher: {
+    open: 'Abrir el lanzador de aplicaciones',
+    new: 'Nuevo',
+    title: 'Aplicaciones',
+  },
+  floatingDock: {
+    close: 'Cerrar',
+    badge: (count) => `${count} mensajes nuevos`,
+  },
+  notificationButton: {
+    label: 'Notificaciones',
+    countLabel: (count) => `Notificaciones: ${count} sin leer`,
+  },
+  notificationPanel: {
+    panel: 'Notificaciones',
+    unread: 'Sin leer',
+    empty: 'Estás al día',
+    all: 'Ver todas las notificaciones',
+    preferences: 'Preferencias de notificaciones',
+    markAllRead: 'Marcar todas como leídas',
+  },
 };

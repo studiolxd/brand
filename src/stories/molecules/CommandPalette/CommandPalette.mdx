@@ -50,9 +50,43 @@ El foco **nunca sale del buscador**: la lista se recorre con foco virtual (`aria
 
 Los tokens `surface-dark-*` cubren cabeceras, ítems, resaltado y estado vacío. No hace falta ninguna prop: la paleta reacciona a `.surface-dark` y a `html.dark` / `[data-theme="dark"]`.
 
-## Textos
+## Internacionalización
 
-Todo texto que emite la paleta es prop: `title`, `placeholder`, `emptyLabel`, `listLabel` y `closeLabel`. `listLabel` es el nombre accesible del `listbox`: sin ella la lista se queda sin nombre, así que pásala siempre.
+La paleta emite **cuatro** textos por su cuenta, y los cuatro son **cromo**: la paleta se llama igual en todas las pantallas, el buscador pide lo mismo, el vacío dice que no hay nada y la lista solo necesita un nombre para el lector. Salen del catálogo del `BrandMessagesProvider` y ya **no traen castellano puesto** — antes eran props obligatorias en el call-site.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `title`, `placeholder`, `emptyLabel`, `listLabel` | `commandPalette.*` del proveedor | Ninguno nombra un comando: describen la paleta, que es la misma en toda la aplicación. |
+| **Contenido** | el `heading` de cada grupo y el `label` de cada comando | `groups`, de la aplicación | Los comandos son del producto: la paleta no sabe qué se puede hacer en esta app. |
+| **Reenvío puro** | `closeLabel` | `modal.close` | El aspa la pinta el `Modal`. El espacio `commandPalette` no repite la clave. |
+
+```tsx
+import { BrandMessagesProvider } from "@studiolxd/brand/messages";
+
+<BrandMessagesProvider
+  messages={{
+    commandPalette: {
+      title: t("commandPalette.title"),
+      placeholder: t("commandPalette.placeholder"),
+      empty: t("commandPalette.empty"),
+      list: t("commandPalette.list"),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={CommandPaletteStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `title` | `commandPalette.title` | título del diálogo |
+| `placeholder` | `commandPalette.placeholder` | marcador del buscador |
+| `emptyLabel` | `commandPalette.empty` | estado «sin resultados» |
+| `listLabel` | `commandPalette.list` | nombre accesible del `listbox` |
+
+El orden es **prop → proveedor → error**. La prop sigue existiendo como anulación puntual: una paleta concreta puede llamarse de otra forma sin cambiar el catálogo.
 
 ---
 

@@ -124,7 +124,7 @@ export type { SheetProps } from './stories/molecules/Sheet/Sheet';
 export { Menu } from './stories/molecules/Menu/Menu';
 export type { MenuProps, MenuItem, MenuButtonItem, MenuLinkItem, MenuSeparatorItem, MenuRadioItem, MenuLabelItem, MenuRenderLinkProps } from './stories/molecules/Menu/Menu';
 export { CommandPalette } from './stories/molecules/CommandPalette/CommandPalette';
-export type { CommandPaletteProps, CommandPaletteGroup, CommandPaletteItem } from './stories/molecules/CommandPalette/CommandPalette';
+export type { CommandPaletteProps, CommandPaletteGroup, CommandPaletteItem, CommandPaletteMessages } from './stories/molecules/CommandPalette/CommandPalette';
 export type { TooltipProps, TooltipProviderProps } from './stories/atoms/Tooltip/Tooltip';
 export { MultiSelect } from './stories/atoms/MultiSelect/MultiSelect';
 export type { MultiSelectOption, MultiSelectProps } from './stories/atoms/MultiSelect/MultiSelect';
@@ -234,7 +234,7 @@ export type { InputPhoneFieldProps } from './stories/molecules/InputPhoneField/I
 export { Pagination } from './stories/molecules/Pagination/Pagination';
 export type { PaginationProps, PaginationMessages } from './stories/molecules/Pagination/Pagination';
 export { ConsentBanner, ConsentPreferences } from './stories/molecules/Consent/Consent';
-export type { ConsentBannerProps, ConsentPreferencesProps, ConsentCategory, ConsentValue } from './stories/molecules/Consent/Consent';
+export type { ConsentBannerProps, ConsentBannerBaseProps, ConsentPolicyProps, ConsentPreferencesProps, ConsentCategory, ConsentValue, ConsentMessages } from './stories/molecules/Consent/Consent';
 export { Prose } from './stories/molecules/Prose/Prose';
 export type { ProseProps, ProseElement } from './stories/molecules/Prose/Prose';
 export { PrevNextNav } from './stories/molecules/PrevNextNav/PrevNextNav';
@@ -242,7 +242,7 @@ export type { PrevNextNavProps } from './stories/molecules/PrevNextNav/PrevNextN
 export { OrgSwitcher } from './stories/molecules/OrgSwitcher/OrgSwitcher';
 export type { OrgSwitcherProps, OrgOption } from './stories/molecules/OrgSwitcher/OrgSwitcher';
 export { AppLauncher } from './stories/molecules/AppLauncher/AppLauncher';
-export type { AppLauncherProps, LauncherApp, AppLauncherLabels } from './stories/molecules/AppLauncher/AppLauncher';
+export type { AppLauncherProps, LauncherApp, AppLauncherLabels, AppLauncherMessages } from './stories/molecules/AppLauncher/AppLauncher';
 export { RadioField } from './stories/molecules/RadioField/RadioField';
 export type { RadioFieldProps } from './stories/molecules/RadioField/RadioField';
 export { RecoveryCodes } from './stories/molecules/RecoveryCodes/RecoveryCodes';
@@ -258,7 +258,7 @@ export type { SwitcherFieldProps } from './stories/molecules/SwitcherField/Switc
 export { MultiSelectField } from './stories/molecules/MultiSelectField/MultiSelectField';
 export type { MultiSelectFieldProps } from './stories/molecules/MultiSelectField/MultiSelectField';
 export { NotificationButton } from './stories/molecules/NotificationButton/NotificationButton';
-export type { NotificationButtonProps } from './stories/molecules/NotificationButton/NotificationButton';
+export type { NotificationButtonProps, NotificationButtonMessages } from './stories/molecules/NotificationButton/NotificationButton';
 export { NotificationList } from './stories/molecules/NotificationList/NotificationList';
 export type {
   NotificationListProps,
@@ -272,6 +272,7 @@ export type {
   NotificationPanelItem,
   NotificationPanelLinkProps,
   RenderNotificationPanelLink,
+  NotificationPanelMessages,
 } from './stories/molecules/NotificationPanel/NotificationPanel';
 export { DropdownField } from './stories/molecules/DropdownField/DropdownField';
 export type { DropdownFieldProps } from './stories/molecules/DropdownField/DropdownField';
@@ -330,7 +331,7 @@ export type { AppShellContextValue } from './stories/sections/AppShell/AppShellC
 export { AppHeader } from './stories/sections/AppHeader/AppHeader';
 export type { AppHeaderProps } from './stories/sections/AppHeader/AppHeader';
 export { FloatingDock } from './stories/sections/FloatingDock/FloatingDock';
-export type { FloatingDockProps, FloatingDockPosition } from './stories/sections/FloatingDock/FloatingDock';
+export type { FloatingDockProps, FloatingDockPosition, FloatingDockMessages } from './stories/sections/FloatingDock/FloatingDock';
 export { Sidebar, SidebarGroup, SidebarGroupContent, SidebarSeparator, useSidebar } from './stories/sections/Sidebar/Sidebar';
 export type { SidebarProps } from './stories/sections/Sidebar/Sidebar';
 

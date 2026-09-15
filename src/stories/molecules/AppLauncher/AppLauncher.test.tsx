@@ -5,6 +5,7 @@ import { AppLauncher, type LauncherApp } from './AppLauncher';
 import type { ReactNode } from 'react';
 import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
 import { brandMessagesFixture as ES } from '../../../../.storybook/brandMessagesFixture';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 /**
  * Estas piezas ya no traen su castellano puesto: el cromo sale del catálogo.
@@ -119,5 +120,44 @@ describe('AppLauncher — presentation="popover"', () => {
     expect(screen.getByRole('list')).toBeInTheDocument();
     await user.keyboard('{Escape}');
     expect(screen.queryByRole('list')).not.toBeInTheDocument();
+  });
+});
+
+describe('el cromo sale del catálogo', () => {
+  it('sin `labels`, el disparador, el título y la marca de novedad leen del proveedor', async () => {
+    const user = userEvent.setup();
+    renderRTL(
+      <BrandMessagesProvider messages={EN}>
+        <AppLauncher apps={apps} currentAppId="b" />
+      </BrandMessagesProvider>,
+    );
+    const trigger = screen.getByRole('button', { name: 'Open the app launcher' });
+    await user.click(trigger);
+    const dialog = screen.getByRole('dialog', { name: 'Applications' });
+    expect(within(dialog).getByText('New')).toBeInTheDocument();
+    // Los nombres de las apps son contenido y viajan en `apps`.
+    expect(within(dialog).getByRole('link', { name: /Alfa/ })).toBeInTheDocument();
+  });
+
+  it('`labels` gana al catálogo, clave a clave', async () => {
+    const user = userEvent.setup();
+    renderRTL(
+      <BrandMessagesProvider messages={EN}>
+        <AppLauncher apps={apps} labels={{ title: 'Jump to an app' }} />
+      </BrandMessagesProvider>,
+    );
+    await user.click(screen.getByRole('button', { name: 'Open the app launcher' }));
+    expect(screen.getByRole('dialog', { name: 'Jump to an app' })).toBeInTheDocument();
+  });
+
+  it('una rejilla sin novedades no exige `appLauncher.new`', () => {
+    const sinNovedades: LauncherApp[] = apps.map((app) => ({ ...app, isNew: false }));
+    expect(() =>
+      renderRTL(
+        <BrandMessagesProvider messages={EN}>
+          <AppLauncher apps={sinNovedades} defaultOpen />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
   });
 });

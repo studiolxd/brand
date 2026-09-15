@@ -55,7 +55,10 @@ import { BrandMessagesProvider } from '@studiolxd/brand/messages';
 El catálogo va creciendo ola a ola: además de `pagination`, `table` y `dataTable`, hoy están los
 espacios de los átomos de formulario —`inputField`, `passwordField`, `select`, `multiSelect`,
 `numberInput`, `otpInput`, `inputPhone`, `asyncSelect`, `asyncMultiSelect`, `searchForm`,
-`docsSearch` y `filterBar`— y los de fecha y hora —`calendar`, `datePicker` y `timeSelect`—. No hace falta memorizarlos: el tipo `BrandMessages` los lleva todos y
+`docsSearch` y `filterBar`—, los de fecha y hora —`calendar`, `datePicker` y `timeSelect`—, los
+de subida y diálogo —`fileUpload`, `imageCropDialog`, `avatarUpload`, `modal`, `sheet`,
+`confirmDialog`, `alert`, `banner` y `toaster`— y los de los envoltorios de diálogo —`consent`,
+`commandPalette`, `appLauncher`, `floatingDock`, `notificationButton` y `notificationPanel`—. No hace falta memorizarlos: el tipo `BrandMessages` los lleva todos y
 **una app que se deje uno no compila**. La tabla de más abajo dice qué prop cae en qué clave.
 
 A partir de ahí, un componente migrado se monta **sin una sola prop de texto**:
@@ -239,18 +242,19 @@ La misma regla, aplicada a la familia de subidas:
 | `ContextMenu`, `DotsButton` | `label` / `aria-label` |
 | `Sheet` | **Migrado al proveedor** (`sheet.close`, sin default). `closeLabel` sigue como anulación puntual y solo se lee cuando el aspa se pinta (sin `hideClose`). `title` —obligatorio—, `description` y el `footer` son contenido |
 | `Modal` | **Migrado al proveedor** (`modal.close`, `modal.fallbackTitle`, sin defaults). Las dos props siguen como anulación puntual; `modal.fallbackTitle` solo se lee cuando NO hay `title`. Todos los diálogos construidos sobre él (`ConfirmDialog`, `ImageCropDialog`, `AvatarUpload`, `CommandPalette`, `Consent`) reenvían su `closeLabel` **sin repetir la clave** |
+| `CommandPalette` | **Migrado al proveedor** (`commandPalette.title`, `.placeholder`, `.empty`, `.list`, sin defaults) — antes eran props **obligatorias** en cada call-site. Las cuatro siguen como anulación puntual. `closeLabel` es un reenvío puro al `Modal`. Los grupos y los comandos son contenido y viajan en `groups` |
 | `Select`, `SelectField` | **Migrado al proveedor** (`select.placeholder`, sin default). La prop `placeholder` sigue como anulación puntual y es la que se usa cuando el marcador dice algo de ESE campo. Las `options` son datos y no pasan por el catálogo |
 | `MultiSelect`, `MultiSelectField` | **Migrado al proveedor** (`multiSelect.placeholder`, `multiSelect.remove`, sin defaults). `placeholder` y `removeLabel` siguen como anulación puntual |
 | `DatePicker`, `DatePickerField`, `DateTimeField` | **Migrado al proveedor** (`datePicker.openCalendar`, `.invalid`, `.calendar`, `.maskLetters`, sin defaults). Las props siguen como anulación puntual, y `placeholder` sustituye la máscara entera cuando el marcador dice algo de ESE campo. `maskLetters` guarda solo las **letras**: el orden y el separador salen de `locale` (ver § «Una máscara tiene dos mitades»). Los cinco del calendario se siguen reexponiendo con los nombres de `Calendar`, pero **ya no hay que pasarlos para traducir**: el `Calendar` de dentro lee `calendar.*` por contexto; `gridLabel` cae al nombre del panel, y ese cae a la etiqueta del campo. `DateTimeField` añade `hoursLabel` y `minutesLabel`, también reenvíos puros a `timeSelect.*`. `label`, `helperText` y `errorMessage` de los campos quedan fuera: son su contenido |
 | `Spinner`, `TypingIndicator` | `label` |
-| `NotificationButton` | `label` sin contador y `countLabel` con él — la frase se rehace con el número dentro |
-| `NotificationPanel` | los dos de `NotificationButton` (`label`, `countLabel`) más `panelLabel`, `unreadLabel`, `emptyLabel`, `allLabel`, `preferencesLabel` y `markAllReadLabel`. La fecha de cada notificación **no** es prop de texto: llega ya formateada en `items[].time` |
-| `ConsentBanner` | `title`, `description`, `policyLabel`, `acceptAllLabel`, `rejectAllLabel`, `preferencesLabel`, `regionLabel` |
+| `NotificationButton` | **Migrado al proveedor** (`notificationButton.label`, `.countLabel`, sin defaults). Las dos props siguen como anulación puntual, y cada una se lee **donde se pinta**: sin contador no se exige `countLabel`, con contador no se exige `label`. La frase con número es una función, para que la cifra vaya donde el idioma la coloque |
+| `NotificationPanel` | **Migrado al proveedor** (`notificationPanel.panel`, `.unread`, `.empty`, `.all`, `.preferences`, `.markAllRead`, sin defaults). Las seis props siguen como anulación puntual; `markAllRead` solo se lee cuando el botón se pinta. `label` y `countLabel` son **reenvíos puros** al `NotificationButton`, que lee `notificationButton.*` por su cuenta: el panel no repite la clave. La fecha de cada notificación **no** es prop de texto: llega ya formateada en `items[].time` |
+| `ConsentBanner` | **Migrado al proveedor** (`consent.title`, `.regionLabel`, `.acceptAll`, `.rejectAll`, `.preferences`, sin defaults) — los botones nombran las tres salidas que pide la ePrivacy y son las mismas en todos los sitios. **`description` y `policyLabel` quedan fuera y son obligatorias**: el texto legal depende de la jurisdicción y de lo que el producto guarde de verdad, y el tipo exige `policyLabel` en cuanto hay `policyHref` — o el enlace no está, o está entero |
 | `Carousel` | `label`, `roleDescription`, `trackLabel`, `prevLabel`, `nextLabel`, `indicatorLabel`, `pauseLabel`, `playLabel`, `slideStatusLabel` — y `roleDescription` en `CarouselSlide` |
 | `ProjectCard` | `tagsLabel` |
 | `Chart` | `ariaLabel`, `tableCaption`, `tableHint`, `categoryLabel`, `valueLabel`, `shareLabel`, `emptyMessage` — más `locale`, `formatValue` y `formatX` |
 | `Sparkline` | `ariaLabel` |
-| `ConsentPreferences` | `title`, `acceptAllLabel`, `rejectAllLabel`, `closeLabel`, `alwaysOnLabel` — y `categories` para los nombres y las explicaciones de cada categoría |
+| `ConsentPreferences` | **Migrado al proveedor** (`consent.preferencesTitle`, `consent.alwaysOn`, sin defaults) — el mismo espacio que la banda, porque es la misma pieza. `closeLabel` es un reenvío puro al `Modal`/`Sheet` (`modal.close` / `sheet.close`). Los nombres y las explicaciones de cada categoría son contenido y se traducen pasando `categories` entera |
 | `TableOfContents` | `ariaLabel`, `title` |
 | `PrevNextNav` | `prevLabel`, `nextLabel` — el `aria-label` de cada control; con `prevTitle`/`nextTitle` pasan a ser el rótulo visible |
 | `InputField` | **Migrado al proveedor** (`inputField.clear`, sin default) — el aspa de la variante `kind="search"` con `clearable`; `clearLabel` sigue como anulación puntual. `label` (obligatoria), `placeholder`, `helperText` y `errorMessage` quedan **fuera** del proveedor: son el contenido de ESE campo |
@@ -271,12 +275,12 @@ La misma regla, aplicada a la familia de subidas:
 | `Breadcrumb` | `ariaLabel` |
 | `Sidebar` | `label`, `resizerLabel`, `resizerValueText` — el ancho hablado del asa, con su unidad |
 | `AppShell` | `skipLabel` — el enlace de salto al contenido |
-| `FloatingDock` | `label` (el nombre del lanzador, sin default), `closeLabel`, `badgeLabel` — cómo se lee el contador de novedades |
-| `AppLauncher` | `labels.open` (nombre accesible del disparador cuando es solo icono), `labels.new` (badge de app nueva), `labels.trigger` — texto visible del disparador (opcional: sin él, el disparador se queda como icono solo con `open`), `labels.title` — título del modal en `presentation="modal"` (default «Aplicaciones»; sin uso en `presentation="popover"`) |
+| `FloatingDock` | **Migrado al proveedor, con espacio propio** (`floatingDock.close`, `floatingDock.badge`, sin defaults). **No hereda `modal.close`, a propósito**: su panel no es un `Modal` —es un diálogo no modal, sin velo, que no atrapa el foco, montado por portal dentro del propio ancla y anclado a una esquina—, así que hacerlo pasar por `Modal` habría sido cambiar el componente, no quitar una clave. `label` (el nombre del lanzador) sigue **obligatorio y fuera del catálogo**: nombra lo que el dock abre, y eso lo sabe el producto |
+| `AppLauncher` | **Migrado al proveedor** (`appLauncher.open`, `.new`, `.title`, sin defaults). `labels` **deja de ser obligatoria** y queda como anulación puntual, clave a clave. `labels.trigger` **no va al catálogo**: no es un texto de más, su presencia decide la cara del disparador (solo icono, o icono con rótulo), y un texto de catálogo está siempre presente — es una decisión de maqueta del sitio donde se monta. Los nombres de las apps viajan en `apps` |
 | `EmailLayout` | `optOut.manageLabel`, `optOut.unsubscribeLabel`, `optOut.manageBeforeLabel`, `optOut.managePreferencesLabel`, `optOut.manageAfterLabel` — la frase de baja, partida porque los idiomas no coinciden en si hay texto tras el enlace |
 | `EmailLayout` (pie sin cuenta) | `optOut.reasonLabel` y `optOut.unsubscribeLabel` (**obligatorias, sin default**) — el motivo por el que le llega el correo a quien no tiene cuenta, y la frase de baja que lo cierra |
 | `EmailButton` | `fallbackLabel` (**obligatoria, sin default**) — la frase que presenta el enlace de respaldo |
-| `RecoveryCodes` | `labels.list`, `labels.copy`, `labels.copied` (**las tres obligatorias, sin default**, como `AppLauncherLabels`) — nombre accesible de la lista numerada, rótulo del botón de copiar todos y su acuse |
+| `RecoveryCodes` | `labels.list`, `labels.copy`, `labels.copied` (**las tres obligatorias, sin default**) — nombre accesible de la lista numerada, rótulo del botón de copiar todos y su acuse |
 
 ## Al añadir un componente nuevo
 

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, userEvent, screen, waitFor, fn } from 'storybook/test';
+import { expect, userEvent, screen, waitFor, within, fn } from 'storybook/test';
 import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { CommandPalette, type CommandPaletteGroup } from './CommandPalette';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta = {
   title: 'Molecules/CommandPalette',
@@ -44,13 +46,13 @@ const groups: CommandPaletteGroup[] = [
   },
 ];
 
+/**
+ * Solo los comandos: el título, el marcador, el vacío y el nombre de la lista
+ * son cromo y salen del catálogo que el Storybook monta en `preview.tsx`, como
+ * los montaría la aplicación.
+ */
 const base = {
   groups,
-  title: 'Buscar un comando',
-  placeholder: 'Escribe para buscar…',
-  emptyLabel: 'Sin resultados.',
-  listLabel: 'Sugerencias',
-  closeLabel: 'Cerrar',
 };
 
 export const PorDefecto: Story = {
@@ -181,5 +183,44 @@ export const TestFocoEnElBuscador: Story = {
     await waitFor(async () => {
       await expect(input).toHaveFocus();
     });
+  },
+};
+
+/**
+ * La paleta solo dice cuatro cosas por su cuenta —cómo se llama, qué pide el
+ * buscador, cómo se llama la lista y qué dice cuando no encuentra nada—, y las
+ * cuatro son cromo: salen de `commandPalette.*` del catálogo. Los grupos y los
+ * comandos son contenido y siguen viniendo de `groups`, así que con el
+ * catálogo en inglés el diálogo se llama «Search for a command» y los comandos
+ * siguen en castellano.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  args: { ...base, open: true, onOpenChange: () => {} },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <CommandPalette {...args} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: sin props de texto, el cromo de la paleta sale del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el cromo de la paleta lee del proveedor',
+  tags: ['!dev'],
+  args: { ...base, open: true, onOpenChange: fn() },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <CommandPalette {...args} />
+    </BrandMessagesProvider>
+  ),
+  play: async () => {
+    const dialog = await screen.findByRole('dialog', { name: 'Search for a command' });
+    await expect(within(dialog).getByPlaceholderText('Type to search…')).toBeInTheDocument();
+    await expect(within(dialog).getByRole('listbox', { name: 'Suggestions' })).toBeInTheDocument();
+    // El aspa es un reenvío puro al `Modal`: sale de `modal.close`.
+    await expect(within(dialog).getByRole('button', { name: 'Close' })).toBeInTheDocument();
+    // Los comandos son contenido: no los toca el catálogo.
+    await expect(within(dialog).getByRole('option', { name: 'Inicio' })).toBeInTheDocument();
   },
 };

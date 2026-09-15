@@ -166,4 +166,40 @@ export const brandMessagesFixtureEn: BrandMessages = {
     container: 'Notifications',
     close: 'Close',
   },
+  consent: {
+    title: 'Cookies',
+    regionLabel: 'Cookie consent',
+    acceptAll: 'Accept all',
+    rejectAll: 'Reject',
+    preferences: 'Preferences',
+    preferencesTitle: 'Cookie preferences',
+    alwaysOn: 'Always on',
+  },
+  commandPalette: {
+    title: 'Search for a command',
+    placeholder: 'Type to search…',
+    empty: 'No results.',
+    list: 'Suggestions',
+  },
+  appLauncher: {
+    open: 'Open the app launcher',
+    new: 'New',
+    title: 'Applications',
+  },
+  floatingDock: {
+    close: 'Close',
+    badge: (count) => `${count} new messages`,
+  },
+  notificationButton: {
+    label: 'Notifications',
+    countLabel: (count) => `Notifications: ${count} unread`,
+  },
+  notificationPanel: {
+    panel: 'Notifications',
+    unread: 'Unread',
+    empty: "You're all caught up",
+    all: 'See all notifications',
+    preferences: 'Notification preferences',
+    markAllRead: 'Mark all as read',
+  },
 };

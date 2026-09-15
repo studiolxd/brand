@@ -268,12 +268,59 @@ describe.each([
     ["'Notificaciones'", "'Cerrar'"],
   ],
   [
-    // Consent todavía no está migrado, pero su `closeLabel` ya no puede traer
-    // default: es un reenvío puro al `Modal`/`Sheet`, y un «Cerrar» aquí
-    // taparía el `modal.close` del proveedor.
+    // El `closeLabel` sigue siendo un reenvío puro al `Modal`/`Sheet` —un
+    // «Cerrar» aquí taparía el `modal.close` del proveedor—, y el resto del
+    // cromo sale ya del espacio `consent`. El texto legal (`description`,
+    // `policyLabel`) no está en esta lista porque tampoco está en el
+    // componente: es obligatorio y lo escribe la aplicación.
     'Consent',
     'src/stories/molecules/Consent/Consent.tsx',
-    ["closeLabel = 'Cerrar'"],
+    [
+      "closeLabel = 'Cerrar'",
+      "'Cookies'",
+      "'Consentimiento de cookies'",
+      "'Aceptar todas'",
+      "'Rechazar'",
+      "'Preferencias'",
+      "'Preferencias de cookies'",
+      "'Siempre activa'",
+      'Usamos cookies propias',
+      "'Política de cookies'",
+    ],
+  ],
+  [
+    'CommandPalette',
+    'src/stories/molecules/CommandPalette/CommandPalette.tsx',
+    ["'Buscar un comando'", "'Escribe para buscar…'", "'Sin resultados.'", "'Sugerencias'", "'Cerrar'"],
+  ],
+  [
+    'AppLauncher',
+    'src/stories/molecules/AppLauncher/AppLauncher.tsx',
+    ["'Aplicaciones'", "'Nuevo'", 'Abrir launcher', 'Abrir el lanzador'],
+  ],
+  [
+    // El aspa del dock tiene espacio PROPIO (`floatingDock.close`) y no hereda
+    // `modal.close`: su panel no es un `Modal` — ver `FloatingDockMessages`.
+    'FloatingDock',
+    'src/stories/sections/FloatingDock/FloatingDock.tsx',
+    ["'Cerrar'", 'mensajes nuevos'],
+  ],
+  [
+    'NotificationButton',
+    'src/stories/molecules/NotificationButton/NotificationButton.tsx',
+    ["'Notificaciones'", 'sin leer`'],
+  ],
+  [
+    'NotificationPanel',
+    'src/stories/molecules/NotificationPanel/NotificationPanel.tsx',
+    [
+      "'Notificaciones'",
+      "'Sin leer'",
+      "'Estás al día'",
+      "'Ver todas las notificaciones'",
+      "'Preferencias de notificaciones'",
+      "'Marcar todas como leídas'",
+    ],
   ],
   [
     'CalendarPlanner',

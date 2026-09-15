@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { NotificationButton } from './NotificationButton';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof NotificationButton> = {
   title: 'Molecules/NotificationButton',
@@ -45,5 +47,38 @@ export const Contrato: Story = {
     // Con contador manda `countLabel`; `label` solo se ve cuando no lo hay
     const tope = canvas.getByRole('button', { name: 'Avisos: 150 sin leer' });
     await expect(tope.textContent).toContain('99+');
+  },
+};
+
+/**
+ * La campana solo dice cómo se llama, con contador y sin él, y las dos formas
+ * son cromo: salen de `notificationButton.*` del catálogo. Con el catálogo en
+ * inglés el botón se llama «Notifications: 3 unread» sin tocar ninguna prop.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <NotificationButton count={3} />
+      <NotificationButton count={0} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: los dos nombres de la campana leen del proveedor. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el nombre de la campana lee del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <NotificationButton count={3} />
+      <NotificationButton count={0} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('button', { name: 'Notifications: 3 unread' })).toBeInTheDocument();
+    await expect(canvas.getByRole('button', { name: 'Notifications' })).toBeInTheDocument();
+    await expect(canvas.queryByRole('button', { name: 'Notificaciones' })).toBeNull();
   },
 };

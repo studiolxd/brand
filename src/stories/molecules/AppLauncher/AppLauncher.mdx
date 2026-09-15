@@ -16,7 +16,7 @@ app es un enlace real (`<a href>`), no un `onClick`: funciona con cmd+click y SE
 el mismo en los dos casos, solo cambia lo que lo envuelve:
 
 - **`'modal'`** (por defecto desde v35): diálogo centrado, como `CommandPalette` — foco
-  atrapado con `Modal`, título (`labels.title`, por defecto «Aplicaciones») y más sitio
+  atrapado con `Modal`, título (`labels.title`, o `appLauncher.title` del catálogo) y más sitio
   para crecer (descripciones, más apps) sin pelearse con el ancho de un popover anclado.
 - **`'popover'`**: el panel flotante anclado al disparador que tenía el componente hasta
   v34. Se pide explícitamente con `presentation="popover"` — un consumidor que ya lo usaba
@@ -37,8 +37,8 @@ al actualizar — para conservar el popover, añadir `presentation="popover"` ex
 ## Título del modal
 
 Con `presentation="modal"`, `labels.title` es el título del diálogo (`Dialog.Title` de
-`Modal`) — por defecto «Aplicaciones». Sin uso en `presentation="popover"`, que no tiene
-título.
+`Modal`). Sin él, sale de `appLauncher.title` del proveedor. Sin uso en
+`presentation="popover"`, que no tiene título.
 
 <Canvas of={AppLauncherStories.ConTitulo} />
 
@@ -68,6 +68,41 @@ El disparador de solo icono no cambia: conserva su línea.
 ## Pocas apps
 
 <Canvas of={AppLauncherStories.PocasApps} />
+
+## Internacionalización
+
+El lanzador emite **tres** textos por su cuenta y los tres son **cromo**: el lanzador es el
+mismo mueble en todas las apps de la suite, y ninguno nombra una aplicación concreta. Salen
+del catálogo del `BrandMessagesProvider` y ya **no traen castellano puesto**; `labels` deja
+de ser obligatoria y queda como anulación puntual.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `labels.open`, `labels.new`, `labels.title` | `appLauncher.*` del proveedor | Describen el mueble —el botón que lo abre, el diálogo y la marca de novedad—, no su contenido. |
+| **Contenido** | el `name` de cada app | `apps`, de la aplicación | Las apps de la suite se llaman como se llaman, en cualquier idioma. |
+| **Ni una cosa ni otra** | `labels.trigger` | prop, sin catálogo | No es un texto de más: su **presencia** decide la cara del disparador (solo icono, o icono con rótulo), y un texto de catálogo está siempre presente. Es una decisión de maqueta del sitio donde se monta. |
+
+```tsx
+import { BrandMessagesProvider } from "@studiolxd/brand/messages";
+
+<BrandMessagesProvider
+  messages={{
+    appLauncher: {
+      open: t("appLauncher.open"),
+      new: t("appLauncher.new"),
+      title: t("appLauncher.title"),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={AppLauncherStories.TextosDelProveedor} />
+
+El orden es **prop → proveedor → error**, y el texto se lee **donde se pinta**: una rejilla
+sin novedades no exige `appLauncher.new`, y un lanzador en `presentation="popover"` no exige
+`appLauncher.title`.
 
 ## Superficie oscura
 

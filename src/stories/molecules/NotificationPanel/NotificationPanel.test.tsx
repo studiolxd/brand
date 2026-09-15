@@ -1,11 +1,29 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { render as renderRTL, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   NotificationPanel,
   type NotificationPanelItem,
   type NotificationPanelProps,
 } from './NotificationPanel';
+import type { ReactNode } from 'react';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixture as ES } from '../../../../.storybook/brandMessagesFixture';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
+
+/**
+ * Estas piezas ya no traen su castellano puesto: el cromo sale del catálogo.
+ * Aquí el catálogo lo monta este envoltorio, que es lo que hace la aplicación
+ * en su raíz. `rerender` lo reutiliza solo.
+ */
+const Catalogo = ({ children }: { children: ReactNode }) => (
+  <BrandMessagesProvider messages={ES}>{children}</BrandMessagesProvider>
+);
+
+function render(ui: React.ReactElement) {
+  return renderRTL(ui, { wrapper: Catalogo });
+}
+
 
 const items: NotificationPanelItem[] = [
   { id: '1', title: 'Marta ha comentado', body: 'Revisa la fase 2', time: 'hace 5 min', unread: true },
@@ -278,5 +296,52 @@ describe('NotificationPanel — pie y estado vacío', () => {
     const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
     expect(within(panel).getByText('Estás al día')).toBeInTheDocument();
     expect(within(panel).queryByRole('list')).toBeNull();
+  });
+});
+
+describe('el cromo sale del catálogo', () => {
+  it('el panel entero lee del proveedor, y la campana de su propio espacio', async () => {
+    const user = userEvent.setup();
+    renderRTL(
+      <BrandMessagesProvider messages={EN}>
+        <NotificationPanel
+          items={items}
+          count={2}
+          onRead={vi.fn()}
+          onMarkAllRead={vi.fn()}
+          allHref="/notifications"
+          preferencesHref="/notifications/preferences"
+          renderLink={renderLink}
+        />
+      </BrandMessagesProvider>,
+    );
+    // Reenvío puro: el nombre de la campana sale de `notificationButton`.
+    await user.click(screen.getByRole('button', { name: 'Notifications: 2 unread' }));
+    const panel = await screen.findByRole('dialog', { name: 'Notifications' });
+    expect(within(panel).getAllByText('Unread').length).toBeGreaterThan(0);
+    expect(within(panel).getByRole('button', { name: 'Mark all as read' })).toBeInTheDocument();
+    expect(within(panel).getByRole('link', { name: 'See all notifications' })).toBeInTheDocument();
+    expect(within(panel).getByRole('link', { name: 'Notification preferences' })).toBeInTheDocument();
+    // Las notificaciones son contenido: viajan en `items`.
+    expect(within(panel).getByText('Marta ha comentado')).toBeInTheDocument();
+  });
+
+  it('el vacío lee `notificationPanel.empty`', async () => {
+    const user = userEvent.setup();
+    renderRTL(
+      <BrandMessagesProvider messages={EN}>
+        <NotificationPanel
+          items={[]}
+          count={0}
+          onRead={vi.fn()}
+          allHref="/notifications"
+          preferencesHref="/notifications/preferences"
+          renderLink={renderLink}
+        />
+      </BrandMessagesProvider>,
+    );
+    await user.click(screen.getByRole('button', { name: 'Notifications' }));
+    const panel = await screen.findByRole('dialog', { name: 'Notifications' });
+    expect(within(panel).getByText("You're all caught up")).toBeInTheDocument();
   });
 });
