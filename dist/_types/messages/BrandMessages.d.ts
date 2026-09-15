@@ -19,6 +19,12 @@ import type { TimeSelectMessages } from '../atoms/TimeSelect/TimeSelect';
 import type { FileUploadMessages } from '../atoms/FileUpload/FileUpload';
 import type { ImageCropDialogMessages } from '../molecules/ImageCropDialog/ImageCropDialog';
 import type { AvatarUploadMessages } from '../molecules/AvatarUpload/AvatarUpload';
+import type { ModalMessages } from '../molecules/Modal/Modal';
+import type { SheetMessages } from '../molecules/Sheet/Sheet';
+import type { ConfirmDialogMessages } from '../molecules/ConfirmDialog/ConfirmDialog';
+import type { AlertMessages } from '../molecules/Alert/Alert';
+import type { BannerMessages } from '../molecules/Banner/Banner';
+import type { ToasterMessages } from '../molecules/Toast/Toaster';
 /**
  * El contrato de textos de la librería: un espacio por componente, y dentro
  * de cada espacio **todas las claves obligatorias**.
@@ -62,5 +68,11 @@ export interface BrandMessages {
     fileUpload: FileUploadMessages;
     imageCropDialog: ImageCropDialogMessages;
     avatarUpload: AvatarUploadMessages;
+    modal: ModalMessages;
+    sheet: SheetMessages;
+    confirmDialog: ConfirmDialogMessages;
+    alert: AlertMessages;
+    banner: BannerMessages;
+    toaster: ToasterMessages;
 }
-export type { PaginationMessages, TableMessages, DataTableMessages, InputFieldMessages, PasswordFieldMessages, SelectMessages, MultiSelectMessages, NumberInputMessages, OtpInputMessages, InputPhoneMessages, AsyncSelectMessages, AsyncMultiSelectMessages, DocsSearchMessages, SearchFormMessages, FilterBarMessages, CalendarMessages, DatePickerMessages, TimeSelectMessages, FileUploadMessages, ImageCropDialogMessages, AvatarUploadMessages, };
+export type { PaginationMessages, TableMessages, DataTableMessages, InputFieldMessages, PasswordFieldMessages, SelectMessages, MultiSelectMessages, NumberInputMessages, OtpInputMessages, InputPhoneMessages, AsyncSelectMessages, AsyncMultiSelectMessages, DocsSearchMessages, SearchFormMessages, FilterBarMessages, CalendarMessages, DatePickerMessages, TimeSelectMessages, FileUploadMessages, ImageCropDialogMessages, AvatarUploadMessages, ModalMessages, SheetMessages, ConfirmDialogMessages, AlertMessages, BannerMessages, ToasterMessages, };

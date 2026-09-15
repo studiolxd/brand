@@ -1,17 +1,31 @@
 import { type ToastIntent } from './toast';
 import './Toast.css';
+/**
+ * El cromo de la cola de avisos. Los dos textos son del punto de montaje, no
+ * de ningún aviso concreto: el rótulo de la región donde aterrizan y el aspa
+ * que los cierra. Lo que DICE cada aviso —su título, su descripción, el
+ * rótulo de su acción— lo pasa quien llama a `toast(...)`, y ya no tiene
+ * default castellano.
+ */
+export interface ToasterMessages {
+    /** Nombre accesible de la región donde se apilan los avisos. */
+    container: string;
+    /** Nombre accesible del aspa que cierra un aviso. */
+    close: string;
+}
 export type ToastPosition = 'bottom-right' | 'bottom-left' | 'bottom-center' | 'top-right' | 'top-left' | 'top-center';
 export interface ToasterProps {
     /** Esquina de la ventana donde se monta la pila. Default: `bottom-right`. */
     position?: ToastPosition;
     /**
-     * Nombre accesible de la región de notificaciones. Default: «Notificaciones»
-     * (castellano). Una app multiidioma debe pasarlo traducido.
+     * Nombre accesible de la región de notificaciones. **Sin default**: sin él,
+     * sale de `toaster.container` del `BrandMessagesProvider`.
      */
     containerAriaLabel?: string;
     /**
-     * Etiqueta accesible del aspa de cierre. Default: «Cerrar» (castellano).
-     * Una app multiidioma debe pasarla traducida.
+     * Nombre accesible del aspa de cierre. **Sin default**: sin él, sale de
+     * `toaster.close` del `BrandMessagesProvider`. Solo se lee cuando el aspa se
+     * pinta: un `Toaster` con `closeButton={false}` no lo exige.
      */
     closeLabel?: string;
     /** Muestra el aspa de cierre en cada aviso. Default: `true`. */

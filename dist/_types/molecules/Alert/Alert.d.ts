@@ -1,4 +1,14 @@
 import './Alert.css';
+/**
+ * El cromo del aviso. Solo hay uno: el aspa que lo descarta, que dice lo
+ * mismo en todos los avisos del sistema. El `title`, la `description` y lo
+ * que digan las acciones son contenido —el aviso habla de lo que ha pasado en
+ * ESA pantalla— y siguen llegando por props.
+ */
+export interface AlertMessages {
+    /** Nombre accesible del aspa que descarta el aviso. */
+    close: string;
+}
 export type AlertVariant = 'default' | 'success' | 'error' | 'warning';
 export interface AlertProps extends React.ComponentPropsWithoutRef<'div'> {
     variant?: AlertVariant;
@@ -24,8 +34,9 @@ export interface AlertProps extends React.ComponentPropsWithoutRef<'div'> {
      */
     finalFocus?: React.RefObject<HTMLElement | null>;
     /**
-     * Etiqueta accesible del botón de cierre. Default: «Cerrar» (castellano).
-     * Una app multiidioma debe pasarla traducida.
+     * Nombre accesible del botón de cierre. **Sin default**: sin él, sale de
+     * `alert.close` del `BrandMessagesProvider`. Solo se lee cuando el aspa se
+     * pinta: un aviso sin `dismissible` no lo exige.
      */
     closeLabel?: string;
 }

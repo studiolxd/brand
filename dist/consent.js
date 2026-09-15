@@ -60,7 +60,7 @@ function m(e, t) {
 	for (let e of t) e.required && (n[e.id] = !0);
 	return n;
 }
-function h({ open: t, onOpenChange: n, categories: r, value: i, onChange: p, onSave: h, surface: g = "modal", side: _ = "right", title: v = "Preferencias de cookies", closeLabel: y = "Cerrar", alwaysOnLabel: b = "Siempre activa", container: x, className: S }) {
+function h({ open: t, onOpenChange: n, categories: r, value: i, onChange: p, onSave: h, surface: g = "modal", side: _ = "right", title: v = "Preferencias de cookies", closeLabel: y, alwaysOnLabel: b = "Siempre activa", container: x, className: S }) {
 	let C = p !== void 0, [w, T] = l(() => m(i, r));
 	c(() => {
 		t && !C && T(m(i, r));
@@ -92,7 +92,7 @@ function h({ open: t, onOpenChange: n, categories: r, value: i, onChange: p, onS
 		open: t,
 		onClose: () => n(!1),
 		title: typeof v == "string" ? v : void 0,
-		closeLabel: y,
+		...y === void 0 ? {} : { closeLabel: y },
 		container: x,
 		children: k
 	}) : /* @__PURE__ */ d(o, {
@@ -100,7 +100,7 @@ function h({ open: t, onOpenChange: n, categories: r, value: i, onChange: p, onS
 		onOpenChange: n,
 		side: _,
 		title: v,
-		closeLabel: y,
+		...y === void 0 ? {} : { closeLabel: y },
 		container: x,
 		children: k
 	});

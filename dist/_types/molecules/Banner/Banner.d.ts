@@ -1,4 +1,13 @@
 import './Banner.css';
+/**
+ * El cromo de la barra. Solo hay uno: el aspa. Lo que la barra DICE
+ * (`children`) y lo que ofrezcan sus acciones son contenido —«estás viendo la
+ * aplicación como alguien», «dejar de suplantar»— y los pone la aplicación.
+ */
+export interface BannerMessages {
+    /** Nombre accesible del aspa que descarta la barra. */
+    dismiss: string;
+}
 export type BannerVariant = 'info' | 'warning';
 export interface BannerProps extends React.ComponentPropsWithoutRef<'div'> {
     /** Intención de la barra. Default `'info'` (relleno prusia); `'warning'` es el relleno de aviso. */
@@ -14,8 +23,9 @@ export interface BannerProps extends React.ComponentPropsWithoutRef<'div'> {
      */
     onDismiss?: () => void;
     /**
-     * Nombre accesible del aspa. Default: «Descartar aviso» (castellano). Una app
-     * multiidioma debe pasarlo traducido.
+     * Nombre accesible del aspa. **Sin default**: sin él, sale de
+     * `banner.dismiss` del `BrandMessagesProvider`. Solo se lee cuando el aspa
+     * se pinta, o sea cuando hay `onDismiss`.
      */
     dismissLabel?: string;
 }

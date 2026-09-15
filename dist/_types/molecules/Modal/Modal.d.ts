@@ -1,18 +1,35 @@
 import { Dialog } from '@base-ui/react/dialog';
 import './Modal.css';
+/**
+ * El cromo del diálogo, y solo el cromo: las dos cosas que el `Modal` dice por
+ * su cuenta, sin que se las pase nadie.
+ *
+ * Aquí no hay nada que decidir por pantalla. El aspa cierra el diálogo —este y
+ * todos—, y el nombre de respaldo es lo que se anuncia cuando el diálogo no
+ * trae título: ninguno de los dos cambia de una pantalla a otra, así que los
+ * dos son catálogo. El `title`, la `description` y lo que digan los botones del
+ * pie son contenido y siguen viniendo de quien abre el diálogo.
+ */
+export interface ModalMessages {
+    /** Nombre accesible del aspa que cierra el diálogo. */
+    close: string;
+    /** Nombre accesible del diálogo cuando no hay `title`. */
+    fallbackTitle: string;
+}
 export interface ModalProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title' | 'className'> {
     open: boolean;
     onClose: () => void;
     title?: string;
     children: React.ReactNode;
     /**
-     * Nombre accesible del aspa de cierre. Default: «Cerrar» (castellano).
-     * Una app multiidioma debe pasarlo traducido.
+     * Nombre accesible del aspa de cierre. **Sin default**: sin él, sale de
+     * `modal.close` del `BrandMessagesProvider`.
      */
     closeLabel?: string;
     /**
-     * Nombre accesible del diálogo cuando no hay `title`. Default: «Diálogo»
-     * (castellano). Una app multiidioma debe pasarlo traducido.
+     * Nombre accesible del diálogo cuando no hay `title`. **Sin default**: sin
+     * él, sale de `modal.fallbackTitle` del `BrandMessagesProvider`. Solo se
+     * lee cuando de verdad no hay título: un diálogo con `title` no lo exige.
      */
     fallbackTitle?: string;
     /**

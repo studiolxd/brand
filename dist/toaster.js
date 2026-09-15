@@ -1,80 +1,81 @@
 'use client';
 import './toaster.css';
-import { Button as e } from "./button.js";
-import { CloseButton as t } from "./close-button.js";
-import { t as n } from "./_shared/css-properties.js";
-import { TOAST_DURATION as r, setToastDefaultDuration as i, syncLiveToasts as a, toastManager as o } from "./toast.js";
-import { useEffect as s } from "react";
-import { jsx as c, jsxs as l } from "react/jsx-runtime";
-import { Toast as u } from "@base-ui/react/toast";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Button as t } from "./button.js";
+import { CloseButton as n } from "./close-button.js";
+import { t as r } from "./_shared/css-properties.js";
+import { TOAST_DURATION as i, setToastDefaultDuration as a, syncLiveToasts as o, toastManager as s } from "./toast.js";
+import { useEffect as c } from "react";
+import { jsx as l, jsxs as u } from "react/jsx-runtime";
+import { Toast as d } from "@base-ui/react/toast";
 //#region src/stories/molecules/Toast/Toaster.tsx
-var d = 8, f = {
+var f = 8, p = {
 	success: "alert--success",
 	error: "alert--error",
 	warning: "alert--warning"
 };
-function p(e, t) {
+function m(e, t) {
 	return [
 		"alert",
-		f[e ?? ""] ?? "",
+		p[e ?? ""] ?? "",
 		e === "warning" ? "" : "surface-dark",
 		t ? "alert--dismissible" : "",
 		"toast"
 	].filter(Boolean).join(" ");
 }
-function m({ position: r, containerAriaLabel: i, closeLabel: o, closeButton: d, gap: f, expand: m }) {
-	let { toasts: h } = u.useToastManager(), [g, _] = r.split("-"), v = h.map((e) => e.id).join(",");
-	s(() => {
-		a(v ? v.split(",") : []);
-	}, [v]);
-	let y = n({ "--toast-gap": `${f}px` }), b = [
+function h({ position: i, containerAriaLabel: a, closeLabel: s, closeButton: f, gap: p, expand: h }) {
+	let g = e("toaster"), { toasts: _ } = d.useToastManager(), [v, y] = i.split("-"), b = _.map((e) => e.id).join(",");
+	c(() => {
+		o(b ? b.split(",") : []);
+	}, [b]);
+	let x = r({ "--toast-gap": `${p}px` }), S = [
 		"toaster",
-		g === "top" ? "toaster--top" : "",
-		_ === "right" ? "" : `toaster--${_}`,
-		m ? "toaster--expanded" : ""
+		v === "top" ? "toaster--top" : "",
+		y === "right" ? "" : `toaster--${y}`,
+		h ? "toaster--expanded" : ""
 	].filter(Boolean).join(" ");
-	return /* @__PURE__ */ c(u.Portal, { children: /* @__PURE__ */ c(u.Viewport, {
-		ref: y,
-		className: b,
-		"aria-label": i,
-		children: h.map((n) => /* @__PURE__ */ l(u.Root, {
-			toast: n,
-			className: p(n.type, d),
-			children: [/* @__PURE__ */ l("div", {
+	return /* @__PURE__ */ l(d.Portal, { children: /* @__PURE__ */ l(d.Viewport, {
+		ref: x,
+		className: S,
+		"aria-label": g("container", a),
+		children: _.map((e) => /* @__PURE__ */ u(d.Root, {
+			toast: e,
+			className: m(e.type, f),
+			children: [/* @__PURE__ */ u("div", {
 				className: "alert__content",
 				children: [
-					/* @__PURE__ */ c(u.Title, { className: "alert__title" }),
-					/* @__PURE__ */ c(u.Description, { className: "alert__description" }),
-					/* @__PURE__ */ c(u.Action, {
+					/* @__PURE__ */ l(d.Title, { className: "alert__title" }),
+					/* @__PURE__ */ l(d.Description, { className: "alert__description" }),
+					/* @__PURE__ */ l(d.Action, {
 						className: "toast__action",
-						render: /* @__PURE__ */ c(e, {
+						render: /* @__PURE__ */ l(t, {
 							variant: "ghost",
 							size: "sm"
 						})
 					})
 				]
-			}), d && /* @__PURE__ */ c(u.Close, {
+			}), f && /* @__PURE__ */ l(d.Close, {
 				className: "alert__close",
-				render: /* @__PURE__ */ c(t, { label: o })
+				render: /* @__PURE__ */ l(n, { label: g("close", s) })
 			})]
-		}, n.id))
+		}, e.id))
 	}) });
 }
-function h({ position: e = "bottom-right", containerAriaLabel: t = "Notificaciones", closeLabel: n = "Cerrar", closeButton: a = !0, duration: l = r, gap: f = d, visibleToasts: p = 3, expand: h = !1 }) {
-	let g = Number.isFinite(l) ? l : 0;
-	return s(() => i(g), [g]), /* @__PURE__ */ c(u.Provider, {
-		toastManager: o,
+function g({ position: e = "bottom-right", containerAriaLabel: t, closeLabel: n, closeButton: r = !0, duration: o = i, gap: u = f, visibleToasts: p = 3, expand: m = !1 }) {
+	let g = Number.isFinite(o) ? o : 0;
+	return c(() => a(g), [g]), /* @__PURE__ */ l(d.Provider, {
+		toastManager: s,
 		timeout: g,
 		limit: p,
-		children: /* @__PURE__ */ c(m, {
+		children: /* @__PURE__ */ l(h, {
 			position: e,
 			containerAriaLabel: t,
 			closeLabel: n,
-			closeButton: a,
-			gap: f,
-			expand: h
+			closeButton: r,
+			gap: u,
+			expand: m
 		})
 	});
 }
 //#endregion
-export { h as Toaster };
+export { g as Toaster };

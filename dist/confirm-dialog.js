@@ -1,87 +1,88 @@
 'use client';
 import './confirm-dialog.css';
-import { Button as e } from "./button.js";
-import { Modal as t } from "./modal.js";
-import { InputField as n } from "./input-field.js";
-import { useEffect as r, useId as i, useRef as a, useState as o } from "react";
-import { Fragment as s, jsx as c, jsxs as l } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Button as t } from "./button.js";
+import { Modal as n } from "./modal.js";
+import { InputField as r } from "./input-field.js";
+import { useEffect as i, useId as a, useRef as o, useState as s } from "react";
+import { Fragment as c, jsx as l, jsxs as u } from "react/jsx-runtime";
 //#region src/stories/molecules/ConfirmDialog/ConfirmDialog.tsx
-function u({ open: u, title: d, description: f, children: p, onConfirm: m, onCancel: h, onConfirmError: g, secondaryActionLabel: _, onSecondaryAction: v, destructive: y = !1, confirmLabel: b = "Confirmar", cancelLabel: x = "Cancelar", pendingLabel: S = "Confirmando…", closeLabel: C = "Cerrar", confirmPhrase: w, confirmPhraseLabel: T, confirmPhraseMismatch: E, container: D, className: O }) {
-	let k = a(null), A = a(null), j = i(), [M, N] = o(!1), [P, F] = o(""), [I, L] = o(!1), R = w === void 0 || P.trim() === w, z = I && !R;
-	r(() => {
-		u || (N(!1), F(""), L(!1));
-	}, [u]);
-	let B = () => {
-		M || h();
-	}, V = async () => {
-		if (M || !R) return;
-		let e = m();
+function d({ open: d, title: f, description: p, children: m, onConfirm: h, onCancel: g, onConfirmError: _, secondaryActionLabel: v, onSecondaryAction: y, destructive: b = !1, confirmLabel: x, cancelLabel: S, pendingLabel: C, closeLabel: w, confirmPhrase: T, confirmPhraseLabel: E, confirmPhraseMismatch: D, container: O, className: k }) {
+	let A = e("confirmDialog"), j = o(null), M = o(null), N = a(), [P, F] = s(!1), [I, L] = s(""), [R, z] = s(!1), B = T === void 0 || I.trim() === T, V = R && !B;
+	i(() => {
+		d || (F(!1), L(""), z(!1));
+	}, [d]);
+	let H = () => {
+		P || g();
+	}, U = async () => {
+		if (P || !B) return;
+		let e = h();
 		if (e instanceof Promise) {
-			N(!0);
+			F(!0);
 			try {
 				await e;
 			} catch (e) {
-				g?.(e);
+				_?.(e);
 			} finally {
-				N(!1);
+				F(!1);
 			}
 		}
 	};
-	return /* @__PURE__ */ l(t, {
-		open: u,
-		onClose: B,
-		title: d,
-		closeLabel: C,
-		container: D,
-		initialFocus: w === void 0 ? k : A,
-		...f == null ? {} : { description: f },
-		footerClassName: ["confirm-dialog__actions", O].filter(Boolean).join(" "),
-		footer: /* @__PURE__ */ l(s, { children: [
-			/* @__PURE__ */ c(e, {
-				ref: k,
+	return /* @__PURE__ */ u(n, {
+		open: d,
+		onClose: H,
+		title: f,
+		...w === void 0 ? {} : { closeLabel: w },
+		container: O,
+		initialFocus: T === void 0 ? j : M,
+		...p == null ? {} : { description: p },
+		footerClassName: ["confirm-dialog__actions", k].filter(Boolean).join(" "),
+		footer: /* @__PURE__ */ u(c, { children: [
+			/* @__PURE__ */ l(t, {
+				ref: j,
 				variant: "outline",
-				onClick: B,
-				disabled: M,
-				children: x
+				onClick: H,
+				disabled: P,
+				children: A("cancel", S)
 			}),
-			_ && v && /* @__PURE__ */ c(e, {
+			v && y && /* @__PURE__ */ l(t, {
 				variant: "outline",
-				onClick: v,
-				disabled: M,
-				children: _
+				onClick: y,
+				disabled: P,
+				children: v
 			}),
-			/* @__PURE__ */ c(e, {
-				variant: y ? "outline" : "primary",
-				destructive: y,
-				onClick: V,
-				disabled: M || !R,
-				children: M ? S : b
+			/* @__PURE__ */ l(t, {
+				variant: b ? "outline" : "primary",
+				destructive: b,
+				onClick: U,
+				disabled: P || !B,
+				children: P ? A("pending", C) : x
 			})
 		] }),
-		children: [p, w !== void 0 && /* @__PURE__ */ c(n, {
-			ref: A,
-			id: `${j}-confirm-phrase`,
+		children: [m, T !== void 0 && /* @__PURE__ */ l(r, {
+			ref: M,
+			id: `${N}-confirm-phrase`,
 			className: "confirm-dialog__phrase",
-			label: T ?? "",
-			value: P,
-			disabled: M,
+			label: E ?? "",
+			value: I,
+			disabled: P,
 			autoComplete: "off",
 			autoCorrect: "off",
 			autoCapitalize: "none",
 			spellCheck: !1,
-			error: z,
-			...z ? { errorMessage: E } : {},
+			error: V,
+			...V ? { errorMessage: D } : {},
 			onChange: (e) => {
-				F(e.target.value), L(!1);
+				L(e.target.value), z(!1);
 			},
 			onBlur: () => {
-				P !== "" && L(!0);
+				I !== "" && z(!0);
 			},
 			onKeyDown: (e) => {
-				e.key === "Enter" && (e.preventDefault(), R ? V() : P !== "" && L(!0));
+				e.key === "Enter" && (e.preventDefault(), B ? U() : I !== "" && z(!0));
 			}
 		})]
 	});
 }
 //#endregion
-export { u as ConfirmDialog };
+export { d as ConfirmDialog };

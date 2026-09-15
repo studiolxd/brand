@@ -1,6 +1,30 @@
 import { type ReactNode } from 'react';
 import { type ModalProps } from '../Modal/Modal';
 import './ConfirmDialog.css';
+/**
+ * El cromo de la confirmación, y **solo el cromo**. Aquí la línea entre
+ * cromo y contenido cae en medio del pie, así que conviene decirla entera:
+ *
+ * - **`cancel` es cromo.** La salida segura no cambia de una pantalla a otra:
+ *   se sale de todas igual, y «Cancelar» describe lo único que hace el botón
+ *   —no seguir—. No nombra ninguna consecuencia porque no la tiene.
+ * - **`pending` es cromo.** Es un estado, no una decisión: se pinta sobre el
+ *   botón ya deshabilitado, mientras la acción corre. Nadie elige nada
+ *   leyéndolo, así que no tiene que nombrar el verbo de la acción.
+ * - **`confirmLabel` NO está aquí y es una prop obligatoria.** Es la única
+ *   parte del diálogo donde se toma la decisión, y por eso tiene que nombrar
+ *   lo que va a pasar: «Eliminar la organización», «Revocar la clave»,
+ *   «Expulsar del equipo». Un default de catálogo lo haría decir «Confirmar»
+ *   en todas partes sin que nada fallara, que es exactamente el rótulo que el
+ *   sistema no quiere — y, siendo opcional, nadie llegaría a escribir el
+ *   bueno. Obligatoria, como el `confirmLabel` del `ImageCropDialog`.
+ */
+export interface ConfirmDialogMessages {
+    /** Rótulo del botón que cancela. */
+    cancel: string;
+    /** Rótulo del botón de confirmar mientras la acción está en curso. */
+    pending: string;
+}
 export interface ConfirmDialogBaseProps {
     open: boolean;
     /** Título del diálogo: la pregunta, no «Confirmar». */
@@ -43,23 +67,26 @@ export interface ConfirmDialogBaseProps {
      */
     destructive?: boolean;
     /**
-     * Rótulo del botón que confirma. Default castellano.
-     * @default 'Confirmar'
+     * Rótulo del botón que confirma. **Obligatorio y sin default**: es donde se
+     * toma la decisión, así que tiene que nombrar lo que va a pasar («Eliminar
+     * la organización»), y eso lo sabe la pantalla, no el diálogo. No sale del
+     * catálogo a propósito — ver `ConfirmDialogMessages`.
      */
-    confirmLabel?: string;
+    confirmLabel: string;
     /**
-     * Rótulo del botón que cancela. Default castellano.
-     * @default 'Cancelar'
+     * Rótulo del botón que cancela. **Sin default**: sin él, sale de
+     * `confirmDialog.cancel` del `BrandMessagesProvider`.
      */
     cancelLabel?: string;
     /**
-     * Rótulo del botón de confirmar mientras la acción está en curso. Default castellano.
-     * @default 'Confirmando…'
+     * Rótulo del botón de confirmar mientras la acción está en curso. **Sin
+     * default**: sin él, sale de `confirmDialog.pending`. Solo se lee mientras
+     * la acción corre.
      */
     pendingLabel?: string;
     /**
-     * Etiqueta del aspa de cierre. Default castellano.
-     * @default 'Cerrar'
+     * Nombre accesible del aspa de cierre. **Reenvío puro al `Modal`**: sin él,
+     * el aspa lee `modal.close` del proveedor, como cualquier otro diálogo.
      */
     closeLabel?: string;
     /** Nodo donde montar el portal, como en `Modal`. */

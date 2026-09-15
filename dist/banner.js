@@ -1,39 +1,40 @@
 'use client';
 import './banner.css';
-import { CloseButton as e } from "./close-button.js";
-import { forwardRef as t } from "react";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { CloseButton as t } from "./close-button.js";
+import { forwardRef as n } from "react";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/molecules/Banner/Banner.tsx
-var i = t(function({ variant: t = "info", children: i, actions: a, onDismiss: o, dismissLabel: s = "Descartar aviso", className: c, role: l, "aria-live": u, ...d }, f) {
-	let p = [
+var a = n(function({ variant: n = "info", children: a, actions: o, onDismiss: s, dismissLabel: c, className: l, role: u, "aria-live": d, ...f }, p) {
+	let m = e("banner"), h = [
 		"banner",
-		`banner--${t}`,
-		t === "info" ? "surface-dark" : "",
-		o ? "banner--dismissible" : "",
-		c ?? ""
+		`banner--${n}`,
+		n === "info" ? "surface-dark" : "",
+		s ? "banner--dismissible" : "",
+		l ?? ""
 	].filter(Boolean).join(" ");
-	return /* @__PURE__ */ r("div", {
-		ref: f,
-		role: l ?? "status",
-		"aria-live": u ?? "polite",
-		className: p,
-		...d,
+	return /* @__PURE__ */ i("div", {
+		ref: p,
+		role: u ?? "status",
+		"aria-live": d ?? "polite",
+		className: h,
+		...f,
 		children: [
-			/* @__PURE__ */ n("div", {
+			/* @__PURE__ */ r("div", {
 				className: "banner__content",
-				children: i
-			}),
-			a && /* @__PURE__ */ n("div", {
-				className: "banner__actions",
 				children: a
 			}),
-			o && /* @__PURE__ */ n(e, {
+			o && /* @__PURE__ */ r("div", {
+				className: "banner__actions",
+				children: o
+			}),
+			s && /* @__PURE__ */ r(t, {
 				className: "banner__close",
-				label: s,
-				onClick: o
+				label: m("dismiss", c),
+				onClick: s
 			})
 		]
 	});
 });
 //#endregion
-export { i as Banner };
+export { a as Banner };

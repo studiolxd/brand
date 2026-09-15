@@ -7,6 +7,49 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [45.0.0] — 2026-09-15
+
+> **Major.** Sexta familia al proveedor de textos: diálogos y superficies. `Modal`, `Sheet`,
+> `ConfirmDialog`, `Alert`, `Banner` y `Toaster` dejan de traer castellano puesto — y el
+> botón de confirmar de un diálogo pasa a exigir su texto.
+
+### Los diálogos leen del proveedor
+
+Seis espacios nuevos en `BrandMessages`: `modal` (close, fallbackTitle), `sheet` (close),
+`confirmDialog` (cancel, pending), `alert` (close), `banner` (dismiss) y `toaster`
+(container, close). Mismo orden —**prop → proveedor → error**— y cada texto se lee **donde
+se pinta**: el título de respaldo solo sin `title`, el aspa del aviso solo si es
+descartable, el «Confirmando…» solo mientras la promesa corre. La mayoría de los usos no
+exige ninguna clave nueva.
+
+Con ello se cierran los dos reenvíos que la v44 dejó apuntados (`ImageCropDialog.closeLabel`
+y `AvatarUpload.cropCloseLabel` llegan ya a un `Modal` que lee del proveedor), y
+`Consent.closeLabel` pierde su default por lo mismo: tapaba el del `Modal`.
+
+### Breaking — `ConfirmDialog.confirmLabel` es obligatorio
+
+Pasa a **obligatorio y sin default**, y **no entra en el catálogo** aunque `common.confirm`
+exista. El botón de confirmar es el único punto del diálogo donde se toma la decisión, y
+por eso es el único donde el texto tiene que nombrar la consecuencia —«Borrar la
+organización», «Revocar la clave»—. Un default lo haría decir «Confirmar» en todas partes
+sin que nada fallara, que es justo el rótulo que la documentación del componente lleva
+pidiendo que no se use; y siendo opcional, nadie llegaría a escribir el bueno: el default
+es lo que quita la presión de pensarlo. Mismo trato que el de `ImageCropDialog`.
+
+`pendingLabel`, en cambio, sí es cromo aunque se pinte sobre el mismo botón: se lee
+**mientras ya se ejecuta**, sobre un control deshabilitado. Nadie decide nada leyéndolo.
+
+### Lo que se queda como prop
+
+`title`, `description`, los pies, el texto de cada aviso, `secondaryActionLabel`, y los
+`confirmPhraseLabel` / `confirmPhraseMismatch` de la v39, que siguen obligatorios.
+
+### Para quien actualice
+
+El `<Toaster />` tiene que quedar **dentro** del `BrandMessagesProvider`: montado como
+hermano suyo revienta en el primer render. Y cada `ConfirmDialog` sin `confirmLabel` deja de
+compilar — los que hoy caían en «Confirmar» son exactamente los que estaban mal.
+
 ## [44.1.0] — 2026-09-15
 
 > **Minor.** Las estrellas ganadas de `StarRating` se rellenan en accent-2 sobre superficie

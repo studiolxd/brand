@@ -1,56 +1,57 @@
 'use client';
 import './modal.css';
-import { VisuallyHidden as e } from "./visually-hidden.js";
-import { CloseButton as t } from "./close-button.js";
-import { n, r, t as i } from "./_shared/dialogsurface.js";
-import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
-import { Dialog as c } from "@base-ui/react/dialog";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { VisuallyHidden as t } from "./visually-hidden.js";
+import { CloseButton as n } from "./close-button.js";
+import { n as r, r as i, t as a } from "./_shared/dialogsurface.js";
+import { Fragment as o, jsx as s, jsxs as c } from "react/jsx-runtime";
+import { Dialog as l } from "@base-ui/react/dialog";
 //#region src/stories/molecules/Modal/Modal.tsx
-function l({ open: l, onClose: u, title: d, children: f, closeLabel: p = "Cerrar", fallbackTitle: m = "Diálogo", container: h, description: g, "aria-describedby": _, initialFocus: v, footer: y, footerClassName: b, ...x }) {
-	let S = _ === void 0 ? {} : { "aria-describedby": _ }, C = v === void 0 ? {} : { initialFocus: v };
-	return /* @__PURE__ */ o(c.Root, {
-		open: l,
+function u({ open: u, onClose: d, title: f, children: p, closeLabel: m, fallbackTitle: h, container: g, description: _, "aria-describedby": v, initialFocus: y, footer: b, footerClassName: x, ...S }) {
+	let C = e("modal"), w = v === void 0 ? {} : { "aria-describedby": v }, T = y === void 0 ? {} : { initialFocus: y };
+	return /* @__PURE__ */ s(l.Root, {
+		open: u,
 		onOpenChange: (e) => {
-			e || u();
+			e || d();
 		},
-		children: /* @__PURE__ */ s(c.Portal, {
-			container: h,
-			children: [/* @__PURE__ */ o(r, { className: "modal__overlay" }), /* @__PURE__ */ s(c.Popup, {
+		children: /* @__PURE__ */ c(l.Portal, {
+			container: g,
+			children: [/* @__PURE__ */ s(i, { className: "modal__overlay" }), /* @__PURE__ */ c(l.Popup, {
 				className: "modal__content",
+				...w,
+				...T,
 				...S,
-				...C,
-				...x,
 				children: [
-					d ? /* @__PURE__ */ s(n, {
+					f ? /* @__PURE__ */ c(r, {
 						layout: "inline",
 						className: "modal__header",
-						children: [/* @__PURE__ */ o(c.Title, {
+						children: [/* @__PURE__ */ s(l.Title, {
 							className: "modal__title",
-							children: d
-						}), /* @__PURE__ */ o(c.Close, {
+							children: f
+						}), /* @__PURE__ */ s(l.Close, {
 							className: "modal__close",
-							render: /* @__PURE__ */ o(t, { label: p })
+							render: /* @__PURE__ */ s(n, { label: C("close", m) })
 						})]
-					}) : /* @__PURE__ */ s(a, { children: [/* @__PURE__ */ o(c.Title, { render: /* @__PURE__ */ o(e, { children: m }) }), /* @__PURE__ */ o(n, {
+					}) : /* @__PURE__ */ c(o, { children: [/* @__PURE__ */ s(l.Title, { render: /* @__PURE__ */ s(t, { children: C("fallbackTitle", h) }) }), /* @__PURE__ */ s(r, {
 						layout: "inline",
 						noTitle: !0,
 						className: "modal__header modal__header--no-title",
-						children: /* @__PURE__ */ o(c.Close, {
+						children: /* @__PURE__ */ s(l.Close, {
 							className: "modal__close",
-							render: /* @__PURE__ */ o(t, { label: p })
+							render: /* @__PURE__ */ s(n, { label: C("close", m) })
 						})
 					})] }),
-					g != null && /* @__PURE__ */ o(c.Description, {
+					_ != null && /* @__PURE__ */ s(l.Description, {
 						className: "modal__description",
-						children: g
+						children: _
 					}),
-					/* @__PURE__ */ o("div", {
+					/* @__PURE__ */ s("div", {
 						className: "modal__body",
-						children: f
+						children: p
 					}),
-					y != null && /* @__PURE__ */ o(i, {
-						className: ["modal__footer", b].filter(Boolean).join(" "),
-						children: y
+					b != null && /* @__PURE__ */ s(a, {
+						className: ["modal__footer", x].filter(Boolean).join(" "),
+						children: b
 					})
 				]
 			})]
@@ -58,4 +59,4 @@ function l({ open: l, onClose: u, title: d, children: f, closeLabel: p = "Cerrar
 	});
 }
 //#endregion
-export { l as Modal };
+export { u as Modal };
