@@ -4,15 +4,22 @@ import { Button } from '../../atoms/Button/Button';
 import { Toaster } from './Toaster';
 import { toast } from './toast';
 import { SOLO_OSCURO } from '../../utils/chromaticModes';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta = {
   title: 'Molecules/Toast',
   component: Toaster,
   parameters: { layout: 'centered' },
   decorators: [
+    // El punto de montaje lo pone el catálogo de stories, como lo pondría la
+    // raíz de una aplicación. Las stories que necesitan montarlo ellas —las
+    // que lo meten dentro de su propio `BrandMessagesProvider`— lo apagan con
+    // `parameters.ownToaster`: los decorators se COMPONEN, no se sustituyen, y
+    // sin esto quedaban dos colas en pantalla.
     (Story, context) => (
       <>
-        <Toaster {...context.args} />
+        {!context.parameters.ownToaster && <Toaster {...context.args} />}
         <Story />
       </>
     ),
@@ -28,7 +35,7 @@ const meta = {
     visibleToasts: { control: 'number', description: 'Avisos visibles a la vez. Default 3.' },
     expand: { control: 'boolean', description: 'Despliega la pila en vez de recogerla.' },
     closeButton: { control: 'boolean', description: 'Muestra el aspa de cierre.' },
-    closeLabel: { control: 'text', description: 'Etiqueta accesible del aspa. Default «Cerrar».' },
+    closeLabel: { control: 'text', description: 'Nombre accesible del aspa. Sin default: sale de `toaster.close` del proveedor.' },
   },
   args: { position: 'bottom-right' },
 } satisfies Meta<typeof Toaster>;
@@ -265,5 +272,59 @@ export const ContratoRegion: Story = {
         document.querySelector('.toaster[aria-label="Notificaciones DS"]'),
       ).not.toBeNull();
     });
+  },
+};
+
+/**
+ * El punto de montaje dice dos cosas por su cuenta —el nombre de la región
+ * donde aterrizan los avisos y el del aspa que los cierra— y las dos salen de
+ * `toaster.*`. Lo que DICE cada aviso lo pasa quien llama a `toast(...)`: aquí
+ * va en inglés porque lo escribe esta story, no el catálogo.
+ *
+ * El `Toaster` se monta **dentro** del proveedor, como en la raíz de una
+ * aplicación: por eso esta story reemplaza el decorator del meta.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  parameters: { ownToaster: true },
+  decorators: [
+    (Story, context) => (
+      <BrandMessagesProvider messages={EN}>
+        <Toaster {...context.args} />
+        <Story />
+      </BrandMessagesProvider>
+    ),
+  ],
+  render: () => (
+    <Button onClick={() => toast.success('Project saved')}>Show notification</Button>
+  ),
+};
+
+/** Test: la región y el aspa salen de `toaster.container` y `toaster.close`. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el cromo de la cola lee del proveedor',
+  tags: ['!dev'],
+  parameters: { ownToaster: true },
+  decorators: [
+    (Story, context) => (
+      <BrandMessagesProvider messages={EN}>
+        <Toaster {...context.args} />
+        <Story />
+      </BrandMessagesProvider>
+    ),
+  ],
+  render: () => <Button onClick={() => toast('A notification')}>Launch</Button>,
+  play: async ({ canvasElement }) => {
+    await waitFor(async () => {
+      await expect(document.querySelector('.toaster[aria-label="Notifications"]')).not.toBeNull();
+    });
+    await userEvent.click(within(canvasElement).getByRole('button', { name: 'Launch' }));
+    const aspa = await waitFor(() => {
+      const el = document.querySelector<HTMLElement>('.toast .alert__close');
+      if (!el) throw new Error('sin aspa');
+      return el;
+    });
+    await expect(aspa.getAttribute('aria-label')).toBe('Close');
+    toast.dismiss();
   },
 };

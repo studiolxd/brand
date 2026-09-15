@@ -1,7 +1,25 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render as renderRTL, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ConfirmDialog } from './ConfirmDialog';
+import type { ReactNode } from 'react';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixture as ES } from '../../../../.storybook/brandMessagesFixture';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
+
+/**
+ * Estas piezas ya no traen su castellano puesto: el cromo sale del catálogo.
+ * Aquí el catálogo lo monta este envoltorio, que es lo que hace la aplicación
+ * en su raíz. `rerender` lo reutiliza solo.
+ */
+const Catalogo = ({ children }: { children: ReactNode }) => (
+  <BrandMessagesProvider messages={ES}>{children}</BrandMessagesProvider>
+);
+
+function render(ui: React.ReactElement) {
+  return renderRTL(ui, { wrapper: Catalogo });
+}
+
 
 function renderDialog(props: Partial<React.ComponentProps<typeof ConfirmDialog>> = {}) {
   const onConfirm = vi.fn();
@@ -11,6 +29,10 @@ function renderDialog(props: Partial<React.ComponentProps<typeof ConfirmDialog>>
       open
       title="¿Borrar la organización?"
       description="Se borrarán sus proyectos y sus miembros. No se puede deshacer."
+      // `confirmLabel` es obligatoria: el diálogo nunca se inventa el rótulo
+      // del botón que decide. Aquí lo pone el arnés, como lo pondría una
+      // pantalla; el resto de los casos lo sobrescriben con el suyo.
+      confirmLabel="Confirmar"
       onConfirm={onConfirm}
       onCancel={onCancel}
       {...props}
@@ -231,5 +253,47 @@ describe('ConfirmDialog', () => {
   it('no monta nada cuando está cerrado', () => {
     renderDialog({ open: false });
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+});
+
+describe('el cromo sale del catálogo y `confirmLabel` no', () => {
+  it('con el catálogo en inglés cambian «Cancelar» y el aspa, pero no el botón que decide', () => {
+    renderRTL(
+      <BrandMessagesProvider messages={EN}>
+        <ConfirmDialog
+          open
+          title="Delete the organisation?"
+          confirmLabel="Delete the organisation"
+          onConfirm={vi.fn()}
+          onCancel={vi.fn()}
+        />
+      </BrandMessagesProvider>,
+    );
+    expect(screen.getByRole('button', { name: 'Cancel' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Cancelar' })).toBeNull();
+    // El aspa la pinta el `Modal`, que lee `modal.close`.
+    expect(screen.getByRole('button', { name: 'Close' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Delete the organisation' })).toBeInTheDocument();
+  });
+
+  it('el rótulo de la espera sale de `confirmDialog.pending`', async () => {
+    let resolver: (() => void) | undefined;
+    renderRTL(
+      <BrandMessagesProvider messages={EN}>
+        <ConfirmDialog
+          open
+          title="Delete the organisation?"
+          confirmLabel="Delete the organisation"
+          onConfirm={() => new Promise<void>((resolve) => { resolver = resolve; })}
+          onCancel={vi.fn()}
+        />
+      </BrandMessagesProvider>,
+    );
+    await userEvent.click(screen.getByRole('button', { name: 'Delete the organisation' }));
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Confirming…' })).toBeInTheDocument());
+    resolver?.();
+    await waitFor(() =>
+      expect(screen.getByRole('button', { name: 'Delete the organisation' })).toBeEnabled(),
+    );
   });
 });

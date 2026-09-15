@@ -6,6 +6,8 @@ import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Sheet } from './Sheet';
 import { SiteShell } from '../../sections/SiteShell/SiteShell';
 import { SOLO_OSCURO } from '../../utils/chromaticModes';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta = {
   title: 'Molecules/Sheet',
@@ -345,5 +347,49 @@ export const ContratoPieApilaEnElCajon: Story = {
     await expect(botones.at(-1)!.getBoundingClientRect().bottom).toBeLessThanOrEqual(
       botones[0].getBoundingClientRect().top,
     );
+  },
+};
+
+/**
+ * El panel solo dice una cosa por su cuenta: el nombre del aspa, que sale de
+ * `sheet.close`. El título y la descripción son contenido y siguen siendo
+ * props —el título, además, obligatorio—.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  args: {
+    open: true,
+    onOpenChange: () => {},
+    title: 'Block settings',
+    description: 'Changes are saved on close.',
+    children: body,
+  },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <Sheet {...args} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el aspa del cajón sale de `sheet.close`. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el aspa del cajón lee del proveedor',
+  tags: ['!dev'],
+  args: {
+    open: true,
+    onOpenChange: () => {},
+    title: 'Block settings',
+    children: body,
+  },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <Sheet {...args} />
+    </BrandMessagesProvider>
+  ),
+  play: async () => {
+    const escena = within(document.body);
+    await escena.findByRole('dialog', { name: 'Block settings' });
+    await expect(escena.getByRole('button', { name: 'Close' })).toBeInTheDocument();
+    await expect(escena.queryByRole('button', { name: 'Cerrar' })).toBeNull();
   },
 };

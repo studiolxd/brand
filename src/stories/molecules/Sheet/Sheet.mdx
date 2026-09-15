@@ -126,6 +126,30 @@ const [shellNode, setShellNode] = useState<HTMLDivElement | null>(null);
   lo devuelve al disparador (`trigger`) al cerrarlo.
 - El velo (`Dialog.Backdrop`) cierra el panel al pulsarlo, y Escape también.
 
+## Internacionalización
+
+El panel emite **un** solo texto por su cuenta: el nombre del aspa. Es cromo
+—cierra el cajón, este y todos— y sale del catálogo del
+`BrandMessagesProvider`, sin default castellano.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `closeLabel` | `sheet.close` del proveedor | El aspa cierra el panel. No cambia de una pantalla a otra. |
+| **Contenido** | `title` (obligatorio), `description`, el `footer` | props de quien abre el panel | El panel no sabe qué se está editando. |
+
+```tsx
+<BrandMessagesProvider messages={{ sheet: { close: t("common.close") } }}>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={SheetStories.TextosDelProveedor} />
+
+El orden es **prop → proveedor → error**, y el texto se lee **donde se pinta**:
+un panel con `hideClose` no exige `sheet.close`.
+
+---
+
 ## Props
 
 <ArgTypes of={SheetStories} />

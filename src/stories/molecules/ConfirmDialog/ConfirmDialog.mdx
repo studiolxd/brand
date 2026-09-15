@@ -109,9 +109,57 @@ Si la promesa rechaza, el diálogo **sigue abierto** y llama a `onConfirmError`.
 
 No tiene nada que remapear: la superficie es la del `Modal` y los botones son los del sistema, y los dos ya reaccionan a `.surface-dark` y a `html.dark` / `[data-theme="dark"]`.
 
-## Textos
+## Internacionalización
 
-`confirmLabel`, `cancelLabel`, `pendingLabel` y `closeLabel` son props con default castellano. `secondaryActionLabel` **no tiene default**: como `title` y `description`, es texto del producto —no algo que el diálogo diga por su cuenta—, y sin él la tercera acción no existe. Lo mismo vale para `confirmPhraseLabel` y `confirmPhraseMismatch`, que además son obligatorios en cuanto se pasa `confirmPhrase`. El `confirmLabel` gana mucho si dice **qué** se confirma («Borrar la organización») en vez de «Confirmar»: quien lea solo el botón sabrá qué está a punto de pasar.
+Aquí la línea entre cromo y contenido cae **en medio del pie**, y por eso
+conviene decirla entera.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `cancelLabel`, `pendingLabel` | `confirmDialog.*` del proveedor | La salida segura se sale igual en todas las pantallas, y el rótulo de la espera es un **estado** sobre un botón ya deshabilitado: nadie decide nada leyéndolo. |
+| **Contenido** | `confirmLabel` (**obligatorio**), `title`, `description`, `secondaryActionLabel`, `confirmPhraseLabel`, `confirmPhraseMismatch` | props de la pantalla | Es donde se decide, y tiene que nombrar lo que va a pasar. |
+| **Reenvío** | `closeLabel` | se pasa tal cual al `Modal` | Sin él, el aspa lee `modal.close`. |
+
+### Por qué «Confirmar» no está en el catálogo
+
+Hasta la v44, `confirmLabel` traía `'Confirmar'` puesto. **Ya no**: es una prop
+obligatoria y sin default, como el `confirmLabel` del `ImageCropDialog`.
+
+El botón de confirmar es la **única** parte del diálogo donde se toma la
+decisión, y por eso es el único sitio donde el texto tiene que nombrar la
+consecuencia: «Borrar la organización», «Revocar la clave», «Expulsar del
+equipo». Un default de catálogo lo haría decir «Confirmar» en todas partes sin
+que nada fallara — justo el rótulo que esta misma documentación lleva pidiendo
+que no se use. Y siendo opcional, nadie llegaría a escribir el bueno: el
+default es lo que quita la presión de pensarlo.
+
+`cancelLabel` sí es cromo, y no por simetría inversa: «Cancelar» describe lo
+único que hace ese botón, que es **no seguir**. No tiene consecuencia que
+nombrar, así que no cambia de una pantalla a otra.
+
+`pendingLabel` también es cromo, aunque se pinte sobre el mismo botón que
+`confirmLabel`. La diferencia es de función: uno se lee **para decidir** y el
+otro **mientras ya se ejecuta**, sobre un control deshabilitado. Si en tu
+pantalla el gerundio pega más («Borrando…»), la prop sigue ahí para pasarlo.
+
+```tsx
+<BrandMessagesProvider
+  messages={{
+    confirmDialog: {
+      cancel: t("common.cancel"),
+      pending: t("common.confirming"),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={ConfirmDialogStories.TextosDelProveedor} />
+
+El orden es **prop → proveedor → error**. `pendingLabel` se lee **solo mientras
+la acción corre**: un diálogo cuyo `onConfirm` no devuelve una promesa nunca lo
+exige.
 
 ---
 

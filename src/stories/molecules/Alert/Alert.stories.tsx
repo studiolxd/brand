@@ -4,6 +4,8 @@ import { Alert, AlertTitle, AlertDescription } from './Alert';
 import { Button } from '../../atoms/Button/Button';
 import { Link } from '../../atoms/Link/Link';
 import { SOLO_OSCURO } from '../../utils/chromaticModes';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta = {
   title: 'Molecules/Alert',
@@ -16,7 +18,7 @@ const meta = {
       description: 'Intención del aviso. Decide el relleno y el rol ARIA.',
     },
     dismissible: { control: 'boolean', description: 'Añade el botón de cierre.' },
-    closeLabel: { control: 'text', description: 'Etiqueta accesible del cierre. Default «Cerrar».' },
+    closeLabel: { control: 'text', description: 'Nombre accesible del cierre. Sin default: sale de `alert.close` del proveedor.' },
   },
   args: {
     title: 'Título del alert',
@@ -372,5 +374,46 @@ export const ContratoAccionesEnFilaEnEscritorio: Story = {
     await expect(botones[0].getBoundingClientRect().width).toBeLessThan(
       acciones.getBoundingClientRect().width,
     );
+  },
+};
+
+/**
+ * Lo único que el aviso dice por su cuenta es el nombre del aspa, y sale de
+ * `alert.close`. El título y la descripción cuentan **qué ha pasado en esta
+ * pantalla**: son contenido y los pone el consumidor, aquí ya en inglés.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  args: {
+    dismissible: true,
+    title: 'Your changes were not saved',
+    description: 'The connection dropped halfway through. Try again.',
+    variant: 'error',
+  },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <Alert {...args} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el aspa lee de `alert.close`, y un aviso sin `dismissible` no la exige. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el aspa del aviso lee del proveedor',
+  tags: ['!dev'],
+  args: { dismissible: true, title: 'Your changes were not saved' },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <Alert {...args} />
+      <Alert title="No close button here" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const escena = within(canvasElement);
+    await expect(escena.getByRole('button', { name: 'Close' })).toBeInTheDocument();
+    await expect(escena.queryByRole('button', { name: 'Cerrar' })).toBeNull();
+    // El segundo aviso no pinta aspa: no lee la clave, y por eso no revienta
+    // aunque el catálogo no la trajera.
+    await expect(escena.getAllByRole('button')).toHaveLength(1);
   },
 };

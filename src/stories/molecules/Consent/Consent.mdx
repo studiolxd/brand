@@ -175,6 +175,6 @@ Definidos en `tokens/molecule/consent.json`.
 | `surface` | `'sheet' \| 'modal'` | `'modal'` | Sobre qué se abre: modal (decisión del sistema, 2026-08-29) o sheet lateral, que se conserva para usos futuros |
 | `side` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Borde de entrada (solo `sheet`) |
 | `title` | `ReactNode` | `'Preferencias de cookies'` | Título del panel |
-| `closeLabel` | `string` | `'Cerrar'` | |
+| `closeLabel` | `string` | — | Reenvío puro al `Modal`/`Sheet`: sin él, el aspa lee `modal.close` / `sheet.close` del `BrandMessagesProvider` |
 | `alwaysOnLabel` | `string` | `'Siempre activa'` | Marca de una categoría necesaria (accesible, no visible) |
 | `container` | `React.ComponentPropsWithoutRef<typeof Modal>['container']` | — | Nodo del portal; el `ref` de `SiteShell` cuando el panel vive en la web pública |

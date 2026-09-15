@@ -216,9 +216,9 @@ export interface AvatarUploadProps {
    */
   cropConfirmLabel?: ReactNode;
   /**
-   * Etiqueta del aspa de cerrar. Se reenvía **tal cual** al `ImageCropDialog`
-   * y de ahí al `Modal`, que todavía no lee del proveedor: mientras no se
-   * migre, sin esta prop el aspa dice lo que diga `Modal`.
+   * Nombre accesible del aspa de cerrar. **Reenvío puro** al
+   * `ImageCropDialog` y de ahí al `Modal`: sin esta prop, el aspa lee
+   * `modal.close` del `BrandMessagesProvider`.
    */
   cropCloseLabel?: string;
   /**

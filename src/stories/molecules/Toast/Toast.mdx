@@ -144,7 +144,30 @@ El relleno, el borde, el aire, la tipografía y las cuatro intenciones salen del
 
 ## Internacionalización
 
-`containerAriaLabel` y `closeLabel` traducen los dos textos que emite el componente. El resto —títulos, descripciones y el rótulo de la acción— lo pone el consumidor en cada llamada a `toast(...)`. Ver **Foundations › Internacionalización**.
+El punto de montaje emite **dos** textos por su cuenta, y los dos son cromo:
+salen del catálogo del `BrandMessagesProvider` y ya no traen castellano puesto.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `containerAriaLabel`, `closeLabel` | `toaster.*` del proveedor | Son del `Toaster`, no de ningún aviso: la región donde aterrizan y el aspa que los cierra. |
+| **Contenido** | el título, la `description` y el `label` de la `action` de cada `toast(...)` | quien lanza el aviso | Cada aviso cuenta una cosa distinta. El `label` de la acción nunca tuvo default. |
+
+El `Toaster` se monta **dentro** del proveedor, en la raíz de la aplicación —lo
+mismo que ya hace con el resto del árbol—:
+
+```tsx
+<BrandMessagesProvider messages={{ toaster: { container: t("a11y.notifications"), close: t("common.close") } }}>
+  {children}
+  <Toaster />
+</BrandMessagesProvider>
+```
+
+<Canvas of={ToastStories.TextosDelProveedor} />
+
+El orden es **prop → proveedor → error**, y el texto se lee **donde se pinta**:
+un `Toaster` con `closeButton={false}` no exige `toaster.close`.
+
+Ver también **Foundations › Internacionalización**.
 
 ---
 

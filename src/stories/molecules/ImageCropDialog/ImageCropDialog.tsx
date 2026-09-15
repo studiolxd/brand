@@ -50,9 +50,9 @@ export interface ImageCropDialogProps {
   cancelLabel: ReactNode;
   confirmLabel: ReactNode;
   /**
-   * Etiqueta del botón de cierre del diálogo. Se reenvía **tal cual** al
-   * `Modal`, que todavía no lee del proveedor: mientras no se migre, sin esta
-   * prop el aspa sigue diciendo lo que diga `Modal`.
+   * Nombre accesible del botón de cierre del diálogo. **Reenvío puro** al
+   * `Modal`: sin esta prop, el aspa lee `modal.close` del
+   * `BrandMessagesProvider`, como la de cualquier otro diálogo del sistema.
    */
   closeLabel?: string;
   /**

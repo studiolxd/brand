@@ -141,4 +141,25 @@ export const brandMessagesFixture: BrandMessages = {
     cropCancel: 'Cancelar',
     cropConfirm: 'Guardar',
   },
+  modal: {
+    close: 'Cerrar',
+    fallbackTitle: 'Diálogo',
+  },
+  sheet: {
+    close: 'Cerrar',
+  },
+  confirmDialog: {
+    cancel: 'Cancelar',
+    pending: 'Confirmando…',
+  },
+  alert: {
+    close: 'Cerrar',
+  },
+  banner: {
+    dismiss: 'Descartar aviso',
+  },
+  toaster: {
+    container: 'Notificaciones',
+    close: 'Cerrar',
+  },
 };
