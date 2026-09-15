@@ -1,6 +1,23 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render as renderRTL, screen } from '@testing-library/react';
 import { CalendarRoster } from './CalendarRoster';
+import type { ReactNode } from 'react';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixture as ES } from '../../../../.storybook/brandMessagesFixture';
+
+/**
+ * Estas piezas ya no traen su castellano puesto: el cromo sale del catálogo.
+ * Aquí el catálogo lo monta este envoltorio, que es lo que hace la aplicación
+ * en su raíz. `rerender` lo reutiliza solo.
+ */
+const Catalogo = ({ children }: { children: ReactNode }) => (
+  <BrandMessagesProvider messages={ES}>{children}</BrandMessagesProvider>
+);
+
+function render(ui: React.ReactElement) {
+  return renderRTL(ui, { wrapper: Catalogo });
+}
+
 
 const MES = new Date(2026, 0, 1);
 

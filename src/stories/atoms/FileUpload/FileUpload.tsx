@@ -3,8 +3,45 @@ import { Icon } from '../Icon/Icon';
 import { ProgressBar } from '../ProgressBar/ProgressBar';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import { useFormSize, type FormSize } from '../../constants/form-size';
-import { formatBytes, validateFile } from './validate';
+import { DEFAULT_LOCALE, formatFileSize, validateFile } from './validate';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './FileUpload.css';
+
+/**
+ * El cromo de la zona de subida: lo que dice la zona, lo que dice de los
+ * límites y lo que dice cuando un archivo no vale.
+ *
+ * Las dos pistas de límite son **plantillas y no frases hechas**, y ahí está
+ * la parte interesante. «Máximo 2,5 MB» tiene dos mitades que se deciden en
+ * sitios distintos, igual que `dd/mm/aaaa`: la frase es idioma y sale de aquí;
+ * la cifra —la coma o el punto decimal, el espacio antes de `MB`— es formato y
+ * la escribe `Intl.NumberFormat` con el `locale` del componente. Por eso el
+ * catálogo recibe el peso **ya formateado** y solo lo envuelve: una traducción
+ * que escribiera «max. 2.5 MB» a mano metería el punto inglés en una interfaz
+ * española.
+ */
+export interface FileUploadMessages {
+  /** Texto visible de la zona de arrastre en reposo. */
+  dropzone: string;
+  /** Texto visible mientras se arrastra un archivo por encima. */
+  dropzoneActive: string;
+  /** Texto visible secundario: que además se puede hacer clic. */
+  dropzoneHint: string;
+  /** Pista de peso máximo. Recibe el peso **ya escrito en el locale** («2,5 MB»). */
+  maxSize: (maxSize: string) => string;
+  /** Pista de número máximo de archivos. */
+  maxFiles: (maxFiles: number) => string;
+  /** aria-label de la lista de archivos elegidos. */
+  files: string;
+  /** aria-label de la barra de progreso. */
+  progress: string;
+  /** aria-label del botón de quitar un archivo de la lista. */
+  removeFile: (fileName: string) => string;
+  /** Error de archivo demasiado pesado. Recibe el peso ya escrito en el locale. */
+  tooLarge: (maxSize: string) => string;
+  /** Error de tipo de archivo no admitido. */
+  invalidType: string;
+}
 
 export interface FileUploadProps {
   multiple?: boolean;
@@ -41,27 +78,60 @@ export interface FileUploadProps {
   /** Se añade DESPUÉS de las clases propias del componente. */
   className?: string;
   /**
-   * Texto visible de la zona de arrastre. Default: "Arrastra archivos aquí" (castellano).
-   * Una app multiidioma debe pasarlo traducido — igual que el resto de props de texto.
+   * Locale con el que se escriben **los pesos** («2,5 MB» / «2.5 MB»). No
+   * decide el idioma de los textos —eso es el catálogo— sino el formato de la
+   * cifra. Default `'es-ES'`.
+   */
+  locale?: string;
+  /**
+   * Texto visible de la zona de arrastre. **Sin default**: sin él, sale de
+   * `fileUpload.dropzone` del `BrandMessagesProvider`.
    */
   dropzoneLabel?: string;
-  /** Texto visible mientras se arrastra encima. Default: "Suelta los archivos aquí" */
+  /**
+   * Texto visible mientras se arrastra encima. **Sin default**: sin él, sale
+   * de `fileUpload.dropzoneActive`.
+   */
   dropzoneActiveLabel?: string;
-  /** Texto visible secundario de la zona. Default: "o haz clic para seleccionar" */
+  /**
+   * Texto visible secundario de la zona. **Sin default**: sin él, sale de
+   * `fileUpload.dropzoneHint`.
+   */
   dropzoneHintLabel?: string;
-  /** Pista de tamaño máximo. Default: `máx. ${size}` (el tamaño ya viene formateado) */
+  /**
+   * Pista de peso máximo. Recibe el peso **ya escrito en el locale**.
+   * **Sin default**: sin ella, sale de `fileUpload.maxSize`.
+   */
   maxSizeHint?: (maxSize: string) => string;
-  /** Pista de número máximo de archivos. Default: `hasta ${n} archivos` */
+  /**
+   * Pista de número máximo de archivos. **Sin default**: sin ella, sale de
+   * `fileUpload.maxFiles`.
+   */
   maxFilesHint?: (maxFiles: number) => string;
-  /** aria-label de la lista de archivos. Default: "Archivos seleccionados" */
+  /**
+   * aria-label de la lista de archivos. **Sin default**: sin él, sale de
+   * `fileUpload.files`.
+   */
   filesLabel?: string;
-  /** aria-label de la barra de progreso. Default: "Progreso de subida" */
+  /**
+   * aria-label de la barra de progreso. **Sin default**: sin él, sale de
+   * `fileUpload.progress`.
+   */
   progressLabel?: string;
-  /** aria-label del botón de eliminar archivo. Default: `Eliminar ${nombre}` */
+  /**
+   * aria-label del botón de quitar un archivo. **Sin default**: sin él, sale
+   * de `fileUpload.removeFile`.
+   */
   removeFileLabel?: (fileName: string) => string;
-  /** Error de archivo demasiado grande. Default: `Archivo demasiado grande (máx. ${size})` */
+  /**
+   * Error de archivo demasiado pesado. **Sin default**: sin él, sale de
+   * `fileUpload.tooLarge`.
+   */
   tooLargeError?: (maxSize: string) => string;
-  /** Error de tipo no admitido. Default: "Tipo de archivo no permitido" */
+  /**
+   * Error de tipo no admitido. **Sin default**: sin él, sale de
+   * `fileUpload.invalidType`.
+   */
   invalidTypeError?: string;
 }
 
@@ -122,18 +192,20 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
   required,
   onBlur,
   className,
-  dropzoneLabel = 'Arrastra archivos aquí',
-  dropzoneActiveLabel = 'Suelta los archivos aquí',
-  dropzoneHintLabel = 'o haz clic para seleccionar',
-  maxSizeHint = (size) => `máx. ${size}`,
-  maxFilesHint = (n) => `hasta ${n} archivos`,
-  filesLabel = 'Archivos seleccionados',
-  progressLabel = 'Progreso de subida',
-  removeFileLabel = (fileName) => `Eliminar ${fileName}`,
-  tooLargeError = (size) => `Archivo demasiado grande (máx. ${size})`,
-  invalidTypeError = 'Tipo de archivo no permitido',
+  locale = DEFAULT_LOCALE,
+  dropzoneLabel,
+  dropzoneActiveLabel,
+  dropzoneHintLabel,
+  maxSizeHint,
+  maxFilesHint,
+  filesLabel,
+  progressLabel,
+  removeFileLabel,
+  tooLargeError,
+  invalidTypeError,
   size: sizeProp,
 }: FileUploadProps, ref) {
+  const t = useBrandMessages('fileUpload');
   const size = useFormSize(sizeProp);
   // El icono del dropzone mide con la escala del propio `Icon`, que es de donde
   // salían los tokens de tamaño que tenía antes el componente.
@@ -172,7 +244,14 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
 
     for (const file of arr) {
       if (maxFiles !== undefined && nextFiles.filter(f => !errors.has(f)).length >= maxFiles) break;
-      const err = validateFile(file, accept, maxSize, tooLargeError, invalidTypeError);
+      const err = validateFile(
+        file,
+        accept,
+        maxSize,
+        t('tooLarge', tooLargeError),
+        t('invalidType', invalidTypeError),
+        locale,
+      );
       if (err) errors.set(file, err);
       nextFiles.push(file);
     }
@@ -180,7 +259,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
     setFileErrors(errors);
     if (!isControlled) setInternalFiles(nextFiles);
     onChange?.(nextFiles.filter(f => !errors.has(f)));
-  }, [disabled, accept, maxSize, maxFiles, isControlled, value, internalFiles, fileErrors, onChange, tooLargeError, invalidTypeError]);
+  }, [disabled, accept, maxSize, maxFiles, isControlled, value, internalFiles, fileErrors, onChange, t, tooLargeError, invalidTypeError, locale]);
 
   const removeFile = useCallback((file: File) => {
     const current = isControlled ? (value ?? []) : internalFiles;
@@ -237,10 +316,14 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
   const hintId = `${inputId}-hint`;
   const describedByIds = [describedBy ?? ariaDescribedBy, hintId].filter(Boolean).join(' ');
 
+  const dropzoneText = t('dropzone', dropzoneLabel);
+  const dropzoneHintText = t('dropzoneHint', dropzoneHintLabel);
+
   const subtextParts: string[] = [];
   if (accept) subtextParts.push(accept);
-  if (maxSize) subtextParts.push(maxSizeHint(formatBytes(maxSize)));
-  if (multiple && maxFiles) subtextParts.push(maxFilesHint(maxFiles));
+  // El peso llega ya escrito en el locale; el catálogo solo lo envuelve.
+  if (maxSize) subtextParts.push(t('maxSize', maxSizeHint)(formatFileSize(maxSize, locale)));
+  if (multiple && maxFiles) subtextParts.push(t('maxFiles', maxFilesHint)(maxFiles));
 
   return (
     <div className={wrapperClasses}>
@@ -276,10 +359,10 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
       >
         <Icon name="upload" size={iconSize} className="file-upload__icon" />
         <span className="file-upload__text">
-          {isDragging ? dropzoneActiveLabel : dropzoneLabel}
+          {isDragging ? t('dropzoneActive', dropzoneActiveLabel) : dropzoneText}
         </span>
         <span className="file-upload__text file-upload__text--secondary">
-          {dropzoneHintLabel}
+          {dropzoneHintText}
         </span>
         {subtextParts.length > 0 && (
           <span className="file-upload__subtext">{subtextParts.join(' · ')}</span>
@@ -288,11 +371,11 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
       {/* La misma instrucción, ya sin duplicar en el árbol visible: la zona va
           `aria-hidden`, así que el texto para el lector se sirve desde aquí. */}
       <VisuallyHidden id={hintId}>
-        {[dropzoneLabel, dropzoneHintLabel, ...subtextParts].join('. ')}
+        {[dropzoneText, dropzoneHintText, ...subtextParts].join('. ')}
       </VisuallyHidden>
 
       {files.length > 0 && (
-        <ul className="file-upload__list" aria-label={filesLabel}>
+        <ul className="file-upload__list" aria-label={t('files', filesLabel)}>
           {files.map((file, i) => {
             const err = fileErrors.get(file);
             const thumb = thumbUrlFor(file);
@@ -306,7 +389,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
                 </div>
                 <div className="file-upload__item-info">
                   <span className="file-upload__item-name">{file.name}</span>
-                  <span className="file-upload__item-size">{formatBytes(file.size)}</span>
+                  <span className="file-upload__item-size">{formatFileSize(file.size, locale)}</span>
                   {err && (
                     <span className="file-upload__item-error-msg" role="alert">{err}</span>
                   )}
@@ -315,7 +398,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
                   className="file-upload__item-remove"
                   type="button"
                   onClick={() => removeFile(file)}
-                  aria-label={removeFileLabel(file.name)}
+                  aria-label={t('removeFile', removeFileLabel)(file.name)}
                 >
                   <Icon name="close" size="sm" />
                 </button>
@@ -328,7 +411,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
       {progress !== undefined && (
         <ProgressBar
           value={progress}
-          label={progressLabel}
+          label={t('progress', progressLabel)}
           size="sm"
           className="file-upload__progress"
         />

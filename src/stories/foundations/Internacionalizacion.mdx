@@ -180,6 +180,25 @@ arma el componente poniendo las letras en el orden del locale:
 La regla, en una frase: **si cambia al cambiar de idioma, es cromo y va al catálogo; si cambia
 al cambiar de país, es formato y va por `locale`.**
 
+### «2,5 MB» tiene dos mitades, y una lista necesita la conjunción del idioma
+
+La misma regla, aplicada a la familia de subidas:
+
+- **El peso.** «máx. 2,5 MB» son dos cosas. La frase es idioma y va al catálogo, **como
+  plantilla**; la cifra es formato y la escribe `Intl.NumberFormat` con `style: "unit"` — el
+  separador decimal, la agrupación y el espacio antes del símbolo salen del `locale`. El
+  símbolo `MB` no se traduce: es una unidad, no una palabra. **Al catálogo no baja nunca un
+  «2.5 MB» escrito a mano**, que metería el punto inglés en una interfaz española.
+- **La lista de formatos.** «JPEG, PNG o WEBP» no es un `join(", ")` con una «o» pegada: la
+  conjunción, la coma de Oxford y el espaciado cambian con la lengua, y la lista acaba dentro
+  de una frase traducida. Es `Intl.ListFormat` con `type: "disjunction"`.
+
+```tsx
+// mismo catálogo inglés, dos locales
+<FileUpload locale="es-ES" maxSize={2621440} />   {/* max. 2,5 MB */}
+<FileUpload locale="en-US" maxSize={2621440} />   {/* max. 2.5 MB */}
+```
+
 ## Componentes con props de texto
 
 | Componente | Props |
@@ -187,16 +206,16 @@ al cambiar de país, es formato y va por `locale`.**
 | `Pagination` | **Migrado al proveedor** (`pagination.*`, sin defaults). Las props `ariaLabel`, `pageLabel`, `previousLabel`, `nextLabel`, `pagesGroupLabel`, `pageSizeLabel` y `totalLabel` siguen existiendo como anulación puntual; `pageSizeOptions` sustituye la lista entera del selector |
 | `AsyncSelect`, `AsyncSelectField` | **Migrado al proveedor** (`asyncSelect.*`, sin defaults). `placeholder`, `emptyMessage`, `loadingLabel` y `clearLabel` siguen como anulación puntual; `AsyncSelectField` las reenvía |
 | `AsyncMultiSelect`, `AsyncMultiSelectField` | **Migrado al proveedor** (`asyncMultiSelect.*`, sin defaults). `placeholder`, `emptyMessage`, `loadingLabel` y `removeLabel` siguen como anulación puntual; `AsyncMultiSelectField` las reenvía |
-| `FileUpload` | `dropzoneLabel`, `dropzoneActiveLabel`, `dropzoneHintLabel`, `maxSizeHint`, `maxFilesHint`, `filesLabel`, `progressLabel`, `removeFileLabel`, `tooLargeError`, `invalidTypeError` |
-| `AvatarUpload` | `buttonLabel` (el texto visible) y `buttonAccessibleLabel` (el nombre completo), `hintLabel`, `formatsLabel`, `maxSizeHint`, `invalidTypeError`, `tooLargeError`, `dropActiveMessage`, `cropTitle`, `cropDescription`, `cropCancelLabel`, `cropConfirmLabel`, `cropCloseLabel`, `cropLoadingLabel`, `cropErrorMessage`, `dropHintLabel` — al traducir los dos textos del botón, el accesible tiene que **contener** el visible (WCAG 2.5.3) |
-| `ImageCropDialog` | `closeLabel`, `loadingLabel`, `errorMessage` — `title`, `cancelLabel` y `confirmLabel` son obligatorias y sin default: el diálogo no sabe qué se está recortando |
+| `FileUpload`, `FileUploadField` | **Migrado al proveedor** (`fileUpload.dropzone`, `.dropzoneActive`, `.dropzoneHint`, `.maxSize`, `.maxFiles`, `.files`, `.progress`, `.removeFile`, `.tooLarge`, `.invalidType`, sin defaults). Las diez props siguen como anulación puntual. Las dos pistas de límite y el error de peso son **plantillas** que reciben el peso **ya escrito por `Intl.NumberFormat`** con el `locale`: la frase es idioma, la cifra es formato (ver § «"2,5 MB" tiene dos mitades»). `FileUploadField` no emite texto propio: reenvía todo por contexto, y `label`, `helperText` y `errorMessage` son su contenido |
+| `AvatarUpload` | **Migrado al proveedor** (`avatarUpload.button`, `.buttonFor`, `.subject`, `.dropHint`, `.dropActive`, `.maxSize`, `.invalidType`, `.tooLarge`, `.cropCancel`, `.cropConfirm`, sin defaults). **El par visible/accesible del botón va entero en el catálogo**: WCAG 2.5.3 exige que el nombre accesible contenga el visible, y partirlo entre el catálogo común y el de la pantalla dejaría los dos lados del contrato en ficheros distintos. `buttonFor` es una **plantilla** —el orden del verbo y del sujeto es del idioma— y el catálogo lleva la regla escrita: `buttonFor(x)` contiene `button`. Fuera del catálogo quedan `subject` (qué se sube: es de la pantalla) y `cropTitle` (obligatorio y sin default, como el `title` del `ImageCropDialog`). `cropCloseLabel`, `cropLoadingLabel` y `cropErrorMessage` son reenvíos puros al diálogo |
+| `ImageCropDialog` | **Migrado al proveedor** (`imageCropDialog.loading`, `.error`, sin defaults) — `title`, `cancelLabel` y `confirmLabel` siguen siendo obligatorias y sin default, y **no** van al catálogo: el diálogo no sabe qué se está recortando ni qué pasa al confirmar, y eso es contenido de la pantalla. Es el ejemplo canónico de la línea cromo/contenido. `closeLabel` es reenvío puro al `Modal`, que aún no lee del proveedor |
 | `NumberInput`, `NumberInputField` | **Migrado al proveedor** (`numberInput.decrement`, `numberInput.increment`, sin defaults). Las props siguen como anulación puntual |
 | `OtpInput`, `OtpField` | **Migrado al proveedor** (`otpInput.digit`, `otpInput.group`, sin defaults). `digitLabel` nombra cada celda y `groupLabel` el grupo del control suelto (dentro de `OtpField` lo nombra la etiqueta del campo y `otpInput.group` no se lee); las dos siguen como anulación puntual |
 | `TimeSelect`, `TimeField` | **Migrado al proveedor** (`timeSelect.hours`, `.minutes`, `.maskHours`, `.maskMinutes`, sin defaults). Las cuatro props (`hoursLabel`, `minutesLabel`, `hoursPlaceholder`, `minutesPlaceholder`) siguen como anulación puntual; `TimeField` reenvía las dos primeras. Las **máscaras** están en el catálogo porque `HH`/`MM` se traducen (`SS`/`MM` en alemán); el dibujo —dos cifras y los dos puntos— no. `label`, `helperText` y `errorMessage` de `TimeField` quedan fuera: son el contenido de ese campo |
 | `InputPhone`, `InputPhoneField` | **Migrado al proveedor** (`inputPhone.country`, sin default); `countryLabel` sigue como anulación puntual. `internationalLabel` **conserva su default** (`🌐`): un glifo no se traduce, y meterlo en el catálogo obligaría a repetirlo seis veces |
 | `Calendar` | **Migrado al proveedor** (`calendar.previousMonth`, `.nextMonth`, `.previousYears`, `.nextYears`, `.yearGrid`, sin defaults). Las cinco props siguen como anulación puntual. `gridLabel` queda **fuera** del proveedor: nombra a ESE calendario, y sin él la rejilla toma el título del mes. Meses, días, cifras del año y el nombre de cada celda salen de `locale` con `Intl`: no son texto |
-| `CalendarPlanner` | `previousMonthLabel`, `nextMonthLabel`, `gridLabel`, `moreLabel` — más `locale`. **Sin migrar**: comparte el cromo de `Calendar` (las dos flechas son el mismo texto) y es candidato claro a leer de `calendar.*` en una ola posterior |
-| `CalendarRoster` | `previousMonthLabel`, `nextMonthLabel`, `legendLabel`, `legendItems`, `nameLabel`, `birthdayPrefix` — más `locale`. **Sin migrar**, igual que `CalendarPlanner` |
+| `CalendarPlanner` | **Las dos flechas, migradas** a `calendar.previousMonth` / `.nextMonth` — el mismo espacio que `Calendar`, porque es literalmente el mismo texto. `gridLabel` queda fuera (nombra a ESE planificador); `moreLabel` sigue **sin migrar**, con su castellano puesto |
+| `CalendarRoster` | **Las dos flechas, migradas** a `calendar.previousMonth` / `.nextMonth`. `legendLabel`, `nameLabel` y `birthdayPrefix` siguen **sin migrar**; `legendItems` es una lista de datos y se traduce pasándola entera |
 | `Table` (`TableHeader`) | **Migrado al proveedor** (`table.*`, sin defaults). Las props `actionsLabel`, `sortedAscLabel`, `sortedDescLabel` y `sortableLabel` siguen existiendo como anulación puntual |
 | `Table` (`TableProps`) | `caption` — el nombre de ESTA tabla, sin default y **fuera del proveedor**: no lo puede saber un catálogo común |
 | `Table` (`TableRow`) | `label` — el nombre accesible de la fila, sin default: solo lo escribe el consumidor |

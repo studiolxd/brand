@@ -1,7 +1,24 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render as renderRTL, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AvatarUpload } from './AvatarUpload';
+import type { ReactNode } from 'react';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixture as ES } from '../../../../.storybook/brandMessagesFixture';
+
+/**
+ * Estas piezas ya no traen su castellano puesto: el cromo sale del catálogo.
+ * Aquí el catálogo lo monta este envoltorio, que es lo que hace la aplicación
+ * en su raíz. `rerender` lo reutiliza solo.
+ */
+const Catalogo = ({ children }: { children: ReactNode }) => (
+  <BrandMessagesProvider messages={ES}>{children}</BrandMessagesProvider>
+);
+
+function render(ui: React.ReactElement) {
+  return renderRTL(ui, { wrapper: Catalogo });
+}
+
 
 /**
  * Contrato del AvatarUpload. Lo que se fija aquí es lo que no se ve en una
@@ -10,7 +27,9 @@ import { AvatarUpload } from './AvatarUpload';
  * archivo llega igual por el botón que soltándolo.
  */
 describe('AvatarUpload', () => {
-  const base = { name: 'Ana García', onChange: vi.fn() };
+  // `cropTitle` es obligatorio y sin default, como el `title` del propio
+  // `ImageCropDialog`: qué se recorta es contenido de la pantalla.
+  const base = { name: 'Ana García', cropTitle: 'Recortar la imagen', onChange: vi.fn() };
   const png = () => new File([new Uint8Array(8)], 'retrato.png', { type: 'image/png' });
   const dataTransfer = (files: File[]) => ({ files, types: ['Files'], dropEffect: 'none' });
 
@@ -29,7 +48,7 @@ describe('AvatarUpload', () => {
     expect(input.tabIndex).toBe(-1);
 
     await userEvent.tab();
-    expect(screen.getByRole('button', { name: 'Subir' })).toHaveFocus();
+    expect(screen.getByRole('button', { name: 'Subir el avatar' })).toHaveFocus();
   });
 
   it('el botón dispara el input oculto', async () => {
@@ -38,32 +57,42 @@ describe('AvatarUpload', () => {
     const click = vi.fn();
     input.addEventListener('click', click);
 
-    await userEvent.click(screen.getByRole('button', { name: 'Subir' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Subir el avatar' }));
     expect(click).toHaveBeenCalledTimes(1);
   });
 
-  it('separa el texto visible del nombre accesible', () => {
-    render(<AvatarUpload {...base} buttonLabel="Subir" buttonAccessibleLabel="Subir logo" />);
-    const boton = screen.getByRole('button', { name: 'Subir logo' });
+  it('separa el texto visible del nombre accesible, y los dos salen del catálogo', () => {
+    render(<AvatarUpload {...base} subject="el logo" />);
+    const boton = screen.getByRole('button', { name: 'Subir el logo' });
+    // Lo visible es el verbo suelto; el accesible lo envuelve con el sujeto.
     expect(boton).toHaveTextContent('Subir');
+  });
+
+  it('el nombre accesible lo arma la plantilla del catálogo, no una suma aquí', () => {
+    // El sujeto es lo único que cambia entre pantallas; el orden del verbo y
+    // del sujeto es del idioma y por eso vive en `avatarUpload.buttonFor`.
+    render(<AvatarUpload {...base} subject="la foto de perfil" />);
+    expect(screen.getByRole('button', { name: 'Subir la foto de perfil' })).toBeInTheDocument();
   });
 
   it('avisa en desarrollo si el nombre accesible no contiene el texto visible (WCAG 2.5.3)', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    render(<AvatarUpload {...base} buttonLabel="Subir" buttonAccessibleLabel="Cargar imagen" />);
+    render(<AvatarUpload {...base} buttonAccessibleLabel="Cargar imagen" />);
     expect(warn).toHaveBeenCalledWith(expect.stringContaining('2.5.3'));
 
     warn.mockClear();
-    render(<AvatarUpload {...base} buttonLabel="Subir" buttonAccessibleLabel="Subir logo" />);
+    // Por el camino normal —el sujeto y la plantilla del catálogo— no puede
+    // fallar: el verbo visible y el accesible salen del mismo fichero.
+    render(<AvatarUpload {...base} subject="el logo" />);
     expect(warn).not.toHaveBeenCalled();
   });
 
   it('lo aceptado no se pinta, pero describe el botón', () => {
     render(<AvatarUpload {...base} maxSize={5 * 1024 * 1024} />);
-    const boton = screen.getByRole('button', { name: 'Subir' });
-    expect(boton).toHaveAccessibleDescription('JPEG, PNG, WEBP · máx. 5.0 MB');
+    const boton = screen.getByRole('button', { name: 'Subir el avatar' });
+    expect(boton).toHaveAccessibleDescription('JPEG, PNG o WEBP · máx. 5,0 MB');
     // No se ve: es texto para el lector, no una pista en pantalla.
-    expect(screen.getByText('JPEG, PNG, WEBP · máx. 5.0 MB')).toHaveClass('visually-hidden');
+    expect(screen.getByText('JPEG, PNG o WEBP · máx. 5,0 MB')).toHaveClass('visually-hidden');
   });
 
   it('el error de formato dice qué SÍ se acepta', () => {
@@ -73,7 +102,8 @@ describe('AvatarUpload', () => {
       dataTransfer: dataTransfer([new File(['x'], 'contrato.pdf', { type: 'application/pdf' })]),
     });
 
-    const mensaje = 'Formato no admitido. Se aceptan JPEG, PNG, WEBP.';
+    // La conjunción la pone `Intl.ListFormat` con el locale, no un join a mano.
+    const mensaje = 'Formato no admitido. Se aceptan JPEG, PNG o WEBP.';
     expect(screen.getByRole('alert')).toHaveTextContent(mensaje);
     expect(onError).toHaveBeenCalledWith(mensaje);
   });
@@ -83,7 +113,7 @@ describe('AvatarUpload', () => {
     fireEvent.drop(container.querySelector('.avatar-upload__target')!, {
       dataTransfer: dataTransfer([new File([new Uint8Array(4096)], 'grande.png', { type: 'image/png' })]),
     });
-    expect(screen.getByRole('alert')).toHaveTextContent('El archivo pesa demasiado. El máximo es 1.0 KB.');
+    expect(screen.getByRole('alert')).toHaveTextContent('El archivo pesa demasiado. El máximo es 1,0 kB.');
   });
 
   it('un archivo válido soltado sobre el avatar abre el recorte', () => {
@@ -94,7 +124,7 @@ describe('AvatarUpload', () => {
     });
 
     expect(onSelect).toHaveBeenCalledTimes(1);
-    expect(screen.getByRole('dialog', { name: 'Recortar imagen' })).toBeInTheDocument();
+    expect(screen.getByRole('dialog', { name: 'Recortar la imagen' })).toBeInTheDocument();
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });
 
@@ -125,7 +155,7 @@ describe('AvatarUpload', () => {
   it('con busy no acepta nada: ni el botón ni la diana', () => {
     const onSelect = vi.fn();
     const { container } = render(<AvatarUpload {...base} busy onSelect={onSelect} />);
-    expect(screen.getByRole('button', { name: 'Subir' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Subir el avatar' })).toBeDisabled();
 
     fireEvent.drop(container.querySelector('.avatar-upload__target')!, {
       dataTransfer: dataTransfer([png()]),
@@ -153,8 +183,8 @@ describe('AvatarUpload', () => {
 
   it('la pista no se cuela en la descripción del botón: ahí van los formatos', () => {
     render(<AvatarUpload {...base} maxSize={5 * 1024 * 1024} />);
-    expect(screen.getByRole('button', { name: 'Subir' })).toHaveAccessibleDescription(
-      'JPEG, PNG, WEBP · máx. 5.0 MB',
+    expect(screen.getByRole('button', { name: 'Subir el avatar' })).toHaveAccessibleDescription(
+      'JPEG, PNG o WEBP · máx. 5,0 MB',
     );
   });
 

@@ -114,4 +114,35 @@ export const brandMessagesFixtureEn: BrandMessages = {
     maskHours: 'HH',
     maskMinutes: 'MM',
   },
+  fileUpload: {
+    dropzone: 'Drag files here',
+    dropzoneActive: 'Drop the files here',
+    dropzoneHint: 'or click to browse',
+    // El peso llega ya escrito en el locale: con este mismo catálogo inglés,
+    // «2,5 MB» en `es-ES` y «2.5 MB» en `en-US`.
+    maxSize: (max) => `max. ${max}`,
+    maxFiles: (n) => `up to ${n} files`,
+    files: 'Selected files',
+    progress: 'Upload progress',
+    removeFile: (fileName) => `Remove ${fileName}`,
+    tooLarge: (max) => `File too large (max. ${max})`,
+    invalidType: 'File type not allowed',
+  },
+  imageCropDialog: {
+    loading: 'Loading image…',
+    error: 'We could not load the image. Try another file.',
+  },
+  avatarUpload: {
+    button: 'Upload',
+    // Contiene a `button`, como exige WCAG 2.5.3.
+    buttonFor: (subject) => `Upload ${subject}`,
+    subject: 'the avatar',
+    dropHint: (subject) => `…or drag the image onto ${subject}`,
+    dropActive: (subject) => `Drop the image onto ${subject} to upload it`,
+    maxSize: (max) => `max. ${max}`,
+    invalidType: (formats) => `Format not supported. We accept ${formats}.`,
+    tooLarge: (max) => `The file is too heavy. The maximum is ${max}.`,
+    cropCancel: 'Cancel',
+    cropConfirm: 'Save',
+  },
 };
