@@ -3183,6 +3183,7 @@ var e = {
 	"--chat-shell-list-width": "15rem",
 	"--chat-shell-gap": "2rem",
 	"--chat-shell-header-gap": "0.75rem",
+	"--chat-shell-drawer-gap": "1rem",
 	"--chat-shell-thread-padding-block": "1rem",
 	"--chat-shell-thread-padding-inline": "calc(0.75rem + 1px)",
 	"--chat-shell-bg": "#ffffff",

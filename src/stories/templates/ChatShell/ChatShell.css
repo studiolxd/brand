@@ -36,9 +36,45 @@
 /* El cajón ocupa el ancho del armazón, no los 320px del Sheet: la lista de
    conversaciones es la pantalla mientras está abierta, y el resto del chat
    queda detrás del velo. Sin media query porque el cajón solo se monta por
-   debajo de --breakpoint-lg (2026-09-15). */
+   debajo de --breakpoint-lg (2026-09-15).
+
+   Y sin el relleno propio del `Sheet`: el cajón no es un panel que se asome
+   sobre el chat, es la MISMA maqueta del armazón con la lista en lugar del
+   hilo, así que empieza donde empieza el armazón. Ese relleno era justo lo
+   que hacía saltar al disparador —el botón del cajón caía 48px por debajo y
+   32px a la derecha del de la cabecera, que es el relleno vertical del panel
+   más su `gap` y su relleno lateral—. Con las tres medidas a cero, la fila
+   del cajón nace en el mismo punto que la cabecera y los dos botones se
+   superponen (2026-09-15). El aire lo siguen poniendo, como en la columna
+   principal, los bloques de dentro. */
 .chat-shell .chat-shell__drawer {
   --sheet-inline-size: 100%;
+  --sheet-padding-block: 0;
+  --sheet-padding-inline: 0;
+  --sheet-gap: 0;
+  /* Quien se desplaza es la lista, no el panel: así la fila del disparador
+     se queda quieta igual que la cabecera del hilo. Y el panel no recorta:
+     sin relleno propio, el disparador nace pegado a su canto y un
+     `overflow` distinto de `visible` se comía dos lados de su anillo de
+     foco. Aquí no hay nada que recortar —la lista se recorta a sí misma—,
+     así que el anillo se pinta entero, igual que el del botón de la
+     cabecera. */
+  overflow: visible;
+}
+
+/* Dentro del cajón, las mismas dos piezas que en la columna principal: la
+   fila de cabecera arriba y, debajo, lo que se desplaza. */
+.chat-shell__drawer .sheet__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--chat-shell-drawer-gap);
+  min-block-size: 0;
+}
+
+.chat-shell__drawer-list {
+  flex: 1;
+  min-block-size: 0;
+  overflow-y: auto;
 }
 
 /* La columna de conversaciones: solo se monta a partir del punto de ruptura,
@@ -77,9 +113,20 @@
 }
 
 /* El botón que abre el cajón de conversaciones: solo existe por debajo del
-   punto de ruptura, pegado al canto de inicio de la cabecera. */
+   punto de ruptura, pegado al canto de inicio de la cabecera.
+
+   Y anclado al canto de ARRANQUE de la fila, no a su centro. La cabecera es
+   tan alta como lo que el producto meta en ella —un título de dos líneas, un
+   selector de modelo—, y eso el armazón no puede adivinarlo: centrado, el
+   botón bajaba con la fila mientras el del cajón, que solo se tiene a sí
+   mismo, se quedaba arriba, y el glifo volvía a saltar al desplegar. Anclado
+   al arranque los dos caen en el mismo punto sea cual sea el alto de la
+   cabecera. Es el mismo criterio con el que el aspa de un diálogo se alinea
+   con la PRIMERA línea del título y no con el centro del bloque
+   (`dialogSurface.css`). */
 .chat-shell__list-trigger {
   flex-shrink: 0;
+  align-self: flex-start;
 }
 
 /* Lo que el producto pone en la cabecera sigue repartiéndose a los extremos,

@@ -150,6 +150,36 @@ export const CajonDeConversaciones: Story = {
 };
 
 /**
+ * El mismo cajón, ya desplegado. Es lo que se ve al tocar el botón: la lista
+ * ocupa el ancho del armazón, el chat queda detrás del velo y el disparador
+ * **no se mueve** —ni de tamaño ni de sitio—, porque el cajón repite la fila
+ * de cabecera del armazón y anula el relleno propio del `Sheet`. Vuelve a
+ * tocarlo para plegarla: es el mismo control, el mismo glifo y el mismo punto
+ * de la pantalla.
+ *
+ * El armazón va aquí con aire alrededor, que es como lo monta una aplicación:
+ * el cajón se mide contra el armazón, no contra la ventana, así que la
+ * coincidencia se mantiene con o sin relleno de quien compone.
+ *
+ * El anillo que rodea al glifo es el **foco**: la story arranca con el cajón
+ * ya abierto y el diálogo lleva el foco a su primer control. Abriéndolo con el
+ * dedo o el ratón no aparece — se ve tocando el botón dos veces.
+ */
+export const CajonAbierto: Story = {
+  name: 'Cajón desplegado en pantalla estrecha',
+  globals: { viewport: { value: 'mobile1' } },
+  args: PorDefecto.args,
+  render: (args) => {
+    const [abierto, setAbierto] = useState(true);
+    return (
+      <div style={{ blockSize: '100%', padding: '24px' }}>
+        <ChatShell {...args} listOpen={abierto} onListOpenChange={setAbierto} />
+      </div>
+    );
+  },
+};
+
+/**
  * La pantalla entera funcionando: abrir conversaciones, borrarlas, escribir y
  * recibir respuesta. El estado lo lleva la story, que es el papel del producto;
  * el armazón solo coloca.
@@ -400,5 +430,70 @@ export const ContratoCajonEnElArmazon: Story = {
     // El diálogo sigue teniendo nombre aunque no se pinte el rótulo.
     const dialogo = within(armazon).getByRole('dialog');
     await expect(dialogo).toHaveAccessibleName('Conversaciones');
+  },
+};
+
+/**
+ * Test: el disparador del cajón no se mueve al abrirlo. Hay dos elementos —el
+ * de la cabecera y el que el cajón repite en su propia fila— y tienen que dar
+ * la MISMA caja: mismo tamaño y mismo punto de la pantalla, para que el glifo
+ * no salte al desplegar.
+ *
+ * Dos condiciones que el armazón no controla y con las que tiene que salir
+ * igual: el aire que ponga alrededor quien lo monta, y una cabecera MÁS ALTA
+ * que el botón —aquí, un título más un selector de modelo—, que es lo que en
+ * la aplicación de verdad hay dentro.
+ */
+export const ContratoDisparador: Story = {
+  name: 'Test — el disparador no salta al abrir el cajón',
+  tags: ['!dev'],
+  globals: { viewport: { value: 'mobile1' } },
+  args: {
+    ...PorDefecto.args,
+    header: (
+      <>
+        <Heading level={2} size={6}>Autenticación JWT</Heading>
+        <SelectField
+          id="modelo-test"
+          label="Modelo"
+          labelHidden
+          options={MODELOS}
+          value="opus"
+          onValueChange={() => {}}
+        />
+      </>
+    ),
+  },
+  render: (args) => (
+    <div style={{ blockSize: '100dvh', padding: '24px' }}>
+      <ChatShell {...args} />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const cerrado = canvas.getByRole('button', { name: 'Abrir conversaciones' });
+    const antes = cerrado.getBoundingClientRect();
+
+    await userEvent.click(cerrado);
+    const cajon = await canvas.findByRole('dialog', { name: 'Conversaciones' });
+    // Se espera al valor final, no a `animationend`: donde las animaciones
+    // están apagadas ese evento no llega nunca. El cajón ha terminado de
+    // entrar cuando su canto coincide con el del armazón.
+    const armazon = canvasElement.querySelector<HTMLElement>('.chat-shell')!;
+    const abierto = await waitFor(() => {
+      const el = within(cajon).getByRole('button', { name: 'Abrir conversaciones' });
+      expect(Math.round(cajon.getBoundingClientRect().left)).toBe(
+        Math.round(armazon.getBoundingClientRect().left),
+      );
+      return el;
+    });
+    const despues = abierto.getBoundingClientRect();
+
+    // Mismo tamaño.
+    await expect(Math.round(despues.width)).toBe(Math.round(antes.width));
+    await expect(Math.round(despues.height)).toBe(Math.round(antes.height));
+    // Y el mismo punto: misma línea horizontal y misma columna.
+    await expect(Math.round(despues.top)).toBe(Math.round(antes.top));
+    await expect(Math.round(despues.left)).toBe(Math.round(antes.left));
   },
 };

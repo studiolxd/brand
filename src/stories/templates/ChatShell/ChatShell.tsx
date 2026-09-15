@@ -179,25 +179,37 @@ export const ChatShell = forwardRef<HTMLDivElement, ChatShellProps>(function Cha
              pantalla de chat y se queda en ella —con su velo— en vez de
              tapar la aplicación entera. */
           container={root ?? undefined}
-          /* Sin aspa: el cajón trae su propio botón, el MISMO que lo abrió
-             y en el mismo sitio, para que el glifo no cambie de forma al
-             desplegar. Dos controles de cierre con dibujos distintos en la
-             misma pantalla son dos maneras de decir lo mismo (2026-09-15). */
+          /* Sin aspa: el cajón repite la cabecera del armazón con el mismo
+             botón, en el mismo punto de la pantalla, así que el glifo no
+             cambia de forma ni de sitio al desplegar. Dos controles de cierre
+             con dibujos distintos en la misma pantalla son dos maneras de
+             decir lo mismo (2026-09-15). */
           hideClose
           className="chat-shell__drawer"
         >
-          <Button
-            variant="ghost"
-            size="sm"
-            iconOnly
-            aria-label={listTriggerLabel}
-            aria-expanded
-            className="chat-shell__list-trigger"
-            onClick={() => setDrawerOpen(false)}
-          >
-            <Icon name="layout-sidebar" size="sm" />
-          </Button>
-          {list}
+          {/* La MISMA fila que la cabecera de la columna principal, y no un
+              botón suelto: el cajón se mide contra `.chat-shell` igual que
+              ella, y con el relleno del `Sheet` anulado (ver ChatShell.css)
+              la fila nace donde nace la cabecera. No es un solo elemento
+              compartido —el cajón vive en un portal y un nodo no está en dos
+              árboles a la vez—, son dos botones gemelos que caen en el mismo
+              punto: el de la cabecera queda justo debajo, tapado por el
+              cajón. El invariante lo fija el test «el disparador no salta al
+              abrir el cajón». */}
+          <header className="chat-shell__header">
+            <Button
+              variant="ghost"
+              size="sm"
+              iconOnly
+              aria-label={listTriggerLabel}
+              aria-expanded
+              className="chat-shell__list-trigger"
+              onClick={() => setDrawerOpen(false)}
+            >
+              <Icon name="layout-sidebar" size="sm" />
+            </Button>
+          </header>
+          <div className="chat-shell__drawer-list">{list}</div>
         </Sheet>
       )}
     </div>

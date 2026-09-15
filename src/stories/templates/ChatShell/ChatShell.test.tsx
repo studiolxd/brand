@@ -60,6 +60,37 @@ describe('ChatShell', () => {
     expect(trigger).toHaveAttribute('aria-expanded', 'true');
   });
 
+  /**
+   * El invariante de verdad —misma caja y mismo punto de la pantalla— se mide
+   * en el navegador, en la story «Test — el disparador no salta al abrir el
+   * cajón»: jsdom no maqueta, así que aquí se fija lo que sí se puede leer sin
+   * layout, que es de dónde sale esa coincidencia: el cajón repite la fila de
+   * cabecera del armazón y pone dentro un botón idéntico al de la cabecera.
+   */
+  it('el cajón repite la fila de cabecera con el mismo botón', async () => {
+    render(<Armazon />);
+
+    const enLaCabecera = screen.getByRole('button', { name: 'Abrir conversaciones' });
+    await userEvent.click(enLaCabecera);
+
+    const cajon = await screen.findByRole('dialog', { name: 'Conversaciones' });
+    const fila = cajon.querySelector('.chat-shell__header');
+    expect(fila).not.toBeNull();
+
+    const enElCajon = fila!.querySelector('.chat-shell__list-trigger') as HTMLElement;
+    expect(enElCajon).not.toBeNull();
+    // El mismo botón declarado igual: misma variante, misma talla, mismo glifo.
+    expect(enElCajon.className).toBe(enLaCabecera.className);
+    expect(enElCajon.querySelector('svg')?.getAttribute('class')).toBe(
+      enLaCabecera.querySelector('svg')?.getAttribute('class'),
+    );
+
+    // Y el cajón anula el relleno propio del `Sheet`, que era lo que hacía
+    // nacer la fila 48px más abajo y 32px a la derecha.
+    const panel = cajon as HTMLElement;
+    expect(panel.classList.contains('chat-shell__drawer')).toBe(true);
+  });
+
   it('el cajón se puede controlar desde el producto', async () => {
     const onListOpenChange = vi.fn();
     render(<Armazon listOpen={false} onListOpenChange={onListOpenChange} />);

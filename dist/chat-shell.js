@@ -75,19 +75,25 @@ var l = "(min-width: 1024px)", u = a(function({ list: a, header: u, children: d,
 				container: w ?? void 0,
 				hideClose: !0,
 				className: "chat-shell__drawer",
-				children: [/* @__PURE__ */ r(t, {
-					variant: "ghost",
-					size: "sm",
-					iconOnly: !0,
-					"aria-label": m,
-					"aria-expanded": !0,
-					className: "chat-shell__list-trigger",
-					onClick: () => D(!1),
-					children: /* @__PURE__ */ r(e, {
-						name: "layout-sidebar",
-						size: "sm"
+				children: [/* @__PURE__ */ r("header", {
+					className: "chat-shell__header",
+					children: /* @__PURE__ */ r(t, {
+						variant: "ghost",
+						size: "sm",
+						iconOnly: !0,
+						"aria-label": m,
+						"aria-expanded": !0,
+						className: "chat-shell__list-trigger",
+						onClick: () => D(!1),
+						children: /* @__PURE__ */ r(e, {
+							name: "layout-sidebar",
+							size: "sm"
+						})
 					})
-				}), a]
+				}), /* @__PURE__ */ r("div", {
+					className: "chat-shell__drawer-list",
+					children: a
+				})]
 			})
 		]
 	});
