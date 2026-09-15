@@ -7,6 +7,43 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.17.0] — 2026-09-15
+
+> **Minor.** En `ChatShell`, el botón que despliega el cajón de conversaciones
+> deja de saltar: cerrado y abierto cae en el mismo punto exacto de la pantalla.
+
+**`ChatShell` — el disparador del cajón no se mueve al desplegar.** En pantalla
+estrecha hay dos botones gemelos con el mismo glifo: el de la cabecera, que abre
+el cajón, y el del propio cajón, que lo cierra. La v38.15.0 ya los dejó
+idénticos de forma —misma variante, misma talla, mismo icono— pero no de sitio,
+porque cada uno se medía contra un origen distinto: el de la cabecera contra el
+relleno que ponga quien monta el armazón (el armazón no tiene relleno propio: quien
+compone, espacia) y el del cajón contra el `padding-block`, el `padding-inline` y el
+`gap` del `Sheet`. Medido en `mobile1` con 24px de aire alrededor: cerrado caía en
+(24,24) y abierto en (56,72) — 48px más abajo y 32 a la derecha, con la misma caja
+de 32×32. Al plegar y desplegar, el glifo daba un salto.
+
+Ahora el cajón **repite la misma fila `chat-shell__header`** que la columna
+principal, con el botón dentro y la lista debajo en `chat-shell__drawer-list`;
+`.chat-shell__drawer` anula el relleno propio del `Sheet` para que esa fila nazca
+donde nace la cabecera, y no recorta (`overflow: visible`), que si no se comía dos
+lados del anillo de foco. El disparador gana además `align-self: flex-start`: sin
+eso el arreglo solo valía con cabeceras bajitas —con un título y un selector de
+modelo, la fila crece, el botón centrado baja con ella y el del cajón se queda
+arriba, y volvía a saltar 22px—. Anclado al arranque coinciden sea cual sea el alto
+de la cabecera, el mismo criterio con el que el aspa de un diálogo se alinea con la
+primera línea del título. Verificado en Chromium: (24,24,32,32) antes y después.
+
+**Token nuevo:** `chat-shell.drawer-gap`, en cascada desde
+`chat-shell.thread-padding-block` — la lista del cajón arranca donde arranca el
+hilo. Ningún color nuevo.
+
+**Para consumidores:** ninguna prop cambia. Dos efectos visibles: el disparador de
+la cabecera pasa a ir pegado al canto superior de su fila en vez de centrado, así
+que con cabeceras altas el glifo sube unos píxeles; y dentro del cajón hay marcado
+nuevo (`.chat-shell__header`, `.chat-shell__drawer-list`), que afecta a quien
+estuviera pintando a mano el interior de `.chat-shell__drawer`. `Sheet` no se toca.
+
 ## [38.16.0] — 2026-09-15
 
 > **Minor.** La barra de filtros deja de reorganizarse mientras escribes,
