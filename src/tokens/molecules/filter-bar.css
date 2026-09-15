@@ -8,7 +8,6 @@
   --filter-bar-column-gap: var(--field-row-column-gap); /** Aire entre las columnas de filtros — el de las celdas de una fila de campos */
   --filter-bar-row-gap: var(--field-row-row-gap); /** Aire entre las filas de filtros cuando la rejilla envuelve, y entre los filtros apilados en móvil */
   --filter-bar-actions-gap: var(--form-actions-gap); /** Aire entre las acciones de la barra — el de los botones de un formulario: la fila de acciones del sistema es una sola */
-  --filter-bar-label-font-size: var(--label-font-size); /** Cuerpo de la etiqueta que la barra reserva sobre lo que no la lleva (un interruptor, el botón de limpiar) — el del Label */
-  --filter-bar-label-line-height: var(--label-line-height); /** Interlineado de la etiqueta — el del Label: con el cuerpo, da la altura del hueco */
-  --filter-bar-label-gap: var(--input-field-gap); /** Aire entre la etiqueta y su control — el de los campos: completa el hueco que baja hasta la línea de los controles lo que no lleva rótulo */
+  --filter-bar-label-offset: calc(var(--label-font-size) * var(--label-line-height) + var(--input-field-gap)); /** El renglón que ocupa un rótulo sobre su control: cuerpo × interlineado del `Label` más el aire que los separa en un campo (29px). Es lo que la barra reserva sobre lo que NO lleva rótulo —un interruptor, el botón de limpiar— para que no se suba a la línea de las etiquetas */
+  --filter-bar-control-block-size: var(--control-height); /** La caja de un campo de una línea (40px, la talla md del sistema). Es la referencia contra la que se centra lo que no lleva rótulo: el interruptor queda a la altura óptica del recuadro que tiene al lado, no del renglón entero —que con un control alto al lado sería otra altura cada vez— */
 }

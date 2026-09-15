@@ -56,15 +56,22 @@ Por eso la rejilla es `auto-fill` y no `auto-fit`: **las pistas las decide el an
 
 Un filtro con etiqueta encima ocupa **dos renglones** —el rótulo y su control—, y lo que no la lleva —un `SwitcherField`, un `CheckboxField`, el botón de «Limpiar filtros»— solo uno. Sin más, ese control se pega **arriba**, a la altura de los rótulos: además de verse torcido, engaña, porque parece que pertenece a la fila de rótulos y no a la de controles.
 
-La barra le **reserva el renglón del rótulo**, con la misma receta que `FieldRow` usa para su acción: el hueco sale de los tokens del `Label` —cuerpo × interlineado, más el aire que lo separa de su control—, así que sigue al sistema y no a un número mágico. **No hay que pedirle nada a quien la usa**: lo decide la barra.
+La barra lo resuelve en dos pasos, y los dos miden con tokens:
+
+1. **Reserva el renglón del rótulo** (`--filter-bar-label-offset`: cuerpo × interlineado del `Label` más el aire que lo separa de su control, 29px), con la misma receta que `FieldRow` usa para su acción.
+2. Y debajo abre **una caja de la altura de un campo** (`--filter-bar-control-block-size`, la talla `md` del sistema, 40px) y **centra el control dentro de ella**.
+
+El segundo paso no es un adorno: bajar el control el renglón entero y dejarlo ahí lo descoloca igual, solo que hacia el otro lado —un interruptor mide menos que la caja de un campo, así que cuadrar los bordes superiores no es cuadrarlos a la vista—. Lo que tiene que coincidir es **el centro del control con el centro del recuadro que tiene al lado**. Medido: la celda mide 69px (29 + 40), la caja del campo empieza en 29 y su centro cae en 49; el interruptor cae ahí también.
+
+**No hay que pedirle nada a quien la usa**: lo decide la barra.
 
 <Canvas of={FilterBarStories.ConInterruptor} />
 
-Lo que se alinea es el **borde superior** de los controles, no el inferior. Cuando un control crece hacia abajo —un `MultiSelectField` con fichas—, alinear por abajo arrastraría el rótulo del campo bajo a media altura y desalinearía la fila entera; alineando por arriba, los rótulos siguen en su línea y los controles empiezan todos en la suya.
+La caja de referencia es la del campo **estándar**, no el alto real del renglón. Por eso un control que crece hacia abajo —un `MultiSelectField` con fichas— crece y ya: no arrastra al interruptor a la mitad de su altura, los rótulos siguen en su línea y el interruptor sigue a la altura óptica del campo normal.
 
 <Canvas of={FilterBarStories.ConControlAlto} />
 
-Apilada (por debajo de `md`) el hueco no existe: sin columnas no hay nada con lo que alinearse y sería aire de más.
+Si **ningún** filtro lleva rótulo no hay línea de rótulos que respetar y no se reserva nada. Y apilada (por debajo de `md`) tampoco: sin columnas no hay con qué alinearse y el hueco sería aire de más.
 
 ## En móvil
 

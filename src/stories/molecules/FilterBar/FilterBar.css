@@ -82,20 +82,33 @@
     inline-size: auto;
   }
 
-  /* El hueco del rótulo. En columnas, un filtro con etiqueta encima ocupa dos
-     renglones —el rótulo y su control— y lo que no la lleva (un interruptor,
-     una casilla, el botón de «Limpiar filtros») solo uno. Sin más, ese
-     control se pega ARRIBA, a la altura de los rótulos: parece que pertenece a
-     la fila de rótulos y no a la de controles.
+  /* El hueco del rótulo, y la caja del campo. En columnas, un filtro con
+     etiqueta encima ocupa dos renglones —el rótulo y su control— y lo que no la
+     lleva (un interruptor, una casilla, el botón de «Limpiar filtros») solo
+     uno. Sin más, ese control se pega ARRIBA, a la altura de los rótulos:
+     parece que pertenece a la fila de rótulos y no a la de controles.
 
-     Se arregla RESERVÁNDOLE el renglón del rótulo, que es lo que ya hace
-     `FieldRow` con su acción (`.field-row__action-offset`): el hueco se
-     calcula con los tokens del `Label` —cuerpo × interlineado + el aire que lo
-     separa de su control—, así que sigue al sistema y no a un número mágico.
-     Con él, los BORDES SUPERIORES de todos los controles caen en la misma
-     línea, que es la alineación de verdad: alinear los inferiores cuadraría
-     también los rótulos… salvo cuando un control crece hacia abajo (un
-     selector múltiple con fichas), y entonces desalinearía toda la fila.
+     Se arregla en dos pasos, y los dos miden con tokens, no a ojo:
+
+     1. Se RESERVA el renglón del rótulo (`label-offset`: cuerpo ×
+        interlineado del `Label` más el aire que lo separa de su control), que
+        es lo que ya hace `FieldRow` con su acción
+        (`.field-row__action-offset`).
+     2. Y debajo se abre una caja de la ALTURA DE UN CAMPO
+        (`control-block-size`, la talla md del sistema), dentro de la cual el
+        control se centra. Bajarlo el renglón entero y dejarlo ahí no basta:
+        un interruptor mide menos que la caja de un campo, así que hacer
+        coincidir los bordes superiores lo deja descolocado igual, solo que
+        hacia el otro lado. Lo que tiene que cuadrar es su centro con el centro
+        del recuadro que tiene al lado.
+
+     La caja es la del campo ESTÁNDAR, no el alto real del renglón: por eso un
+     control que crece hacia abajo (un `MultiSelectField` con fichas) sigue sin
+     mover a nadie —crece hacia abajo y ya—, y el interruptor sigue a la altura
+     óptica del campo normal. `block-size` fija esa caja en vez de `min`, que
+     volvería a crecer con el contenido y devolvería el control a su borde
+     superior; si lo que va dentro es más alto que un campo, el centrado de
+     flex lo reparte a los dos lados en vez de empujarlo hacia abajo.
 
      Dos condiciones, las dos por `:has()`, para que el hueco solo exista donde
      hay algo que alinear:
@@ -111,9 +124,23 @@
   .filter-bar__row:has(.label:not(.visually-hidden)) .filter-bar__filter:not(:has(.label:not(.visually-hidden))),
   .filter-bar__row:has(.label:not(.visually-hidden)) > .filter-bar__actions {
     align-self: start;
-    padding-block-start: calc(
-      var(--filter-bar-label-font-size) * var(--filter-bar-label-line-height) +
-      var(--filter-bar-label-gap)
-    );
+    padding-block-start: var(--filter-bar-label-offset);
+  }
+
+  /* La celda es una caja de bloque: se convierte en columna para poder centrar
+     dentro, y su caja se fija a la de un campo. */
+  .filter-bar__row:has(.label:not(.visually-hidden)) .filter-bar__filter:not(:has(.label:not(.visually-hidden))) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    block-size: calc(var(--filter-bar-label-offset) + var(--filter-bar-control-block-size));
+  }
+
+  /* Las acciones ya son una fila con `align-items: center`: centran solas
+     dentro de la caja. Aquí el mínimo SÍ es un mínimo —y no una caja fija—
+     porque son varias y pueden envolver: si bajan a dos renglones, la celda
+     crece con ellas en vez de derramarlas. */
+  .filter-bar__row:has(.label:not(.visually-hidden)) > .filter-bar__actions {
+    min-block-size: calc(var(--filter-bar-label-offset) + var(--filter-bar-control-block-size));
   }
 }

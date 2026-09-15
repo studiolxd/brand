@@ -193,12 +193,12 @@ export const ContratoBuscadorEnSuLinea: Story = {
 };
 
 /**
- * Test: un filtro sin rótulo encima se alinea con los CONTROLES, no con los
- * rótulos. La barra le reserva el renglón de la etiqueta, así que el borde
- * superior de su control cae donde el de los demás.
+ * Test: un filtro sin rótulo encima queda **centrado respecto a la caja del
+ * campo** que tiene al lado —no a la altura de los rótulos, ni pegado al borde
+ * superior del control, ni al inferior—.
  */
-export const ContratoInterruptorAlineadoConLosControles: Story = {
-  name: 'Test — el interruptor se alinea con los controles',
+export const ContratoInterruptorCentradoConLaCajaDelCampo: Story = {
+  name: 'Test — el interruptor se centra con la caja del campo',
   tags: ['!dev'],
   render: () => (
     <FilterBar search={<Buscador />} actions={<Button variant="outline">Limpiar filtros</Button>}>
@@ -212,10 +212,17 @@ export const ContratoInterruptorAlineadoConLosControles: Story = {
     );
     const acciones = canvasElement.querySelector('.filter-bar__actions') as HTMLElement;
     const rotulo = celdaFecha.querySelector('.label') as HTMLElement;
-    // El control del campo es lo que va justo debajo de su rótulo.
-    const control = rotulo.nextElementSibling as HTMLElement;
-    const interruptor = celdaInterruptor.querySelector('.switcher-field') as HTMLElement;
+    // La caja del campo es lo que va justo debajo de su rótulo.
+    const caja = rotulo.nextElementSibling as HTMLElement;
+    // El interruptor de verdad, el track: es lo que se ve, y lo que tiene que
+    // quedar a la altura del recuadro de al lado.
+    const interruptor = celdaInterruptor.querySelector('.switcher') as HTMLElement;
     const boton = acciones.querySelector('.button') as HTMLElement;
+
+    const centro = (elemento: HTMLElement) => {
+      const rect = elemento.getBoundingClientRect();
+      return rect.top + rect.height / 2;
+    };
 
     // Las dos celdas empiezan en la misma línea: comparten renglón de rejilla.
     await expect(celdaInterruptor.getBoundingClientRect().top).toBeCloseTo(
@@ -223,27 +230,23 @@ export const ContratoInterruptorAlineadoConLosControles: Story = {
       0,
     );
 
-    // Pero el interruptor NO empieza donde el rótulo…
+    // El interruptor NO está a la altura del rótulo…
     await expect(interruptor.getBoundingClientRect().top).toBeGreaterThan(
-      rotulo.getBoundingClientRect().bottom,
+      rotulo.getBoundingClientRect().top,
     );
-    // …sino donde el control que ese rótulo encabeza.
-    await expect(interruptor.getBoundingClientRect().top).toBeCloseTo(
-      control.getBoundingClientRect().top,
-      0,
-    );
-    // Y el botón de las acciones, en esa misma línea.
-    await expect(boton.getBoundingClientRect().top).toBeCloseTo(
-      control.getBoundingClientRect().top,
-      0,
-    );
+    // …y su centro cuadra con el centro de la caja del campo. Es el criterio:
+    // ni borde superior ni borde inferior, el medio.
+    await expect(centro(interruptor)).toBeCloseTo(centro(caja), 0);
+    // El botón de las acciones, en esa misma línea media.
+    await expect(centro(boton)).toBeCloseTo(centro(caja), 0);
   },
 };
 
 /**
- * Test: con un control que crece hacia abajo (fichas) al lado de uno bajo, lo
- * que se alinea es el borde SUPERIOR de los controles —el inferior mandaría el
- * rótulo del campo bajo a media altura—.
+ * Test: con un control que crece hacia abajo (fichas) al lado de uno bajo, el
+ * interruptor sigue centrado con la caja de un campo NORMAL: la referencia es
+ * la talla del campo, no el alto real del renglón —que con el control alto
+ * sería otro cada vez—.
  */
 export const ContratoControlAltoNoDesalinea: Story = {
   name: 'Test — un control alto no desalinea la fila',
@@ -269,6 +272,11 @@ export const ContratoControlAltoNoDesalinea: Story = {
       .map((celda) => celda.querySelector('.label'))
       .filter((rotulo): rotulo is HTMLElement => rotulo !== null);
 
+    const centro = (elemento: HTMLElement) => {
+      const rect = elemento.getBoundingClientRect();
+      return rect.top + rect.height / 2;
+    };
+
     // El control alto es de verdad más alto que el bajo. Se miden los campos,
     // no las celdas: las celdas de una rejilla se estiran todas a la altura de
     // la fila, así que medirlas no distinguiría nada.
@@ -285,15 +293,67 @@ export const ContratoControlAltoNoDesalinea: Story = {
       0,
     );
 
-    // Y el interruptor, en la línea de los controles, no en la de los rótulos
-    // ni al fondo de la fila alta.
-    const interruptor = celdaInterruptor.querySelector('.switcher-field') as HTMLElement;
-    await expect(interruptor.getBoundingClientRect().top).toBeGreaterThan(
-      rotulos[0].getBoundingClientRect().bottom,
+    // Y el interruptor sigue centrado con la caja del campo BAJO, que es la del
+    // campo estándar: el alto crece hacia abajo y no se lo lleva con él.
+    const cajaBaja = rotulos[1].nextElementSibling as HTMLElement;
+    const interruptor = celdaInterruptor.querySelector('.switcher') as HTMLElement;
+    await expect(centro(interruptor)).toBeCloseTo(centro(cajaBaja), 0);
+  },
+};
+
+/**
+ * Test: si NINGÚN filtro lleva rótulo no hay línea de rótulos que respetar, y
+ * la barra no reserva hueco ninguno: los controles empiezan arriba del todo.
+ */
+export const ContratoSinRotulosNoHayHueco: Story = {
+  name: 'Test — sin rótulos no se reserva hueco',
+  tags: ['!dev'],
+  render: () => (
+    <FilterBar search={<Buscador />} actions={<Button variant="outline">Limpiar filtros</Button>}>
+      <SwitcherField id="tsr-activas" label="Solo activas" />
+      <SwitcherField id="tsr-archivadas" label="Con archivadas" />
+    </FilterBar>
+  ),
+  play: async ({ canvasElement }) => {
+    const fila = canvasElement.querySelector('.filter-bar__row') as HTMLElement;
+    const celdas = Array.from(
+      canvasElement.querySelectorAll<HTMLElement>('.filter-bar__filter'),
     );
-    await expect(interruptor.getBoundingClientRect().top).toBeLessThan(
-      celdaAlta.getBoundingClientRect().bottom,
-    );
+    const acciones = canvasElement.querySelector('.filter-bar__actions') as HTMLElement;
+
+    await expect(fila.querySelector('.label')).toBeNull();
+    for (const celda of [...celdas, acciones]) {
+      await expect(getComputedStyle(celda).paddingBlockStart).toBe('0px');
+      await expect(celda.getBoundingClientRect().top).toBeCloseTo(
+        fila.getBoundingClientRect().top,
+        0,
+      );
+    }
+  },
+};
+
+/**
+ * Test: apilada (por debajo de `md`) no se reserva hueco ni se fija caja: sin
+ * columnas no hay nada con lo que alinearse.
+ */
+export const ContratoSinHuecoEnMovil: Story = {
+  name: 'Test — apilado no reserva hueco',
+  tags: ['!dev'],
+  globals: { viewport: { value: 'mobile1' } },
+  render: () => (
+    <FilterBar search={<Buscador />} actions={<Button variant="outline">Limpiar filtros</Button>}>
+      <DatePickerField id="tsm-desde" label="Desde" />
+      <SwitcherField id="tsm-activas" label="Solo activas" />
+    </FilterBar>
+  ),
+  play: async ({ canvasElement }) => {
+    const celdaInterruptor = Array.from(
+      canvasElement.querySelectorAll<HTMLElement>('.filter-bar__filter'),
+    )[1];
+    const acciones = canvasElement.querySelector('.filter-bar__actions') as HTMLElement;
+
+    await expect(getComputedStyle(celdaInterruptor).paddingBlockStart).toBe('0px');
+    await expect(getComputedStyle(acciones).paddingBlockStart).toBe('0px');
   },
 };
 
