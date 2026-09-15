@@ -12,7 +12,7 @@ para breaking changes.
 > **Major.** Octava familia al proveedor de textos: el cromo de aplicación y la navegación.
 > Catorce espacios nuevos, y con ellos la familia donde más claves ya existían en el
 > catálogo de la suite. Además, los portales dejan de abrirse en la talla equivocada dentro
-> de una página pública.
+> de una página pública, y el `main` de `PublicPageShell` se puede pedir a sangre.
 
 ### La navegación lee del proveedor
 
@@ -91,6 +91,23 @@ arreglo es montar ahí el mismo proveedor: una línea.
 Los campos `*Field` siguen **sin** reenviar `container`, y también a propósito: obligar a
 cada app a pasar un nodo en cada uso era el problema, no la solución. La escotilla vive en
 el primitivo.
+
+### El `main` de `PublicPageShell` se puede pedir a sangre
+
+`PublicPageShell` montaba su `main` como `Container as="main" space="xl"` fijo. Es lo que
+quiere una página corriente, pero no una **portada**: la que abre con un `Hero` de lado a
+lado no cabía en el molde y tenía que montarse a mano con `SiteShell` + `Container`, que es
+justo lo que el molde único existe para evitar.
+
+El `main` lleva ahora los mismos tres mandos que un `Container` —`mainWidth`, `mainSpace` y
+`mainFlush`—, con el prefijo de la ranura porque el marco tiene cuatro y un `width` pelado
+no diría cuál gobierna. **Los defaults son los de hoy** (`'xl'`, `'xl'`, `false`): quien no
+los toque se pinta exactamente igual, así que esta parte no es breaking. Una portada pide
+`mainWidth="full" mainSpace="none" mainFlush` y apila secciones, poniendo su propio
+`Container` a lo que quiera columna.
+
+El `main` sigue siendo el `main`, con su `id` y su `tabIndex`, así que el enlace de salto al
+contenido llega igual a una portada abierta a sangre.
 
 ### Para quien actualice
 

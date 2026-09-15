@@ -9,6 +9,9 @@ import { Stack } from '../../atoms/Stack/Stack';
 import { SiteHeader } from '../../sections/SiteHeader/SiteHeader';
 import { SiteNav } from '../../molecules/SiteNav/SiteNav';
 import { LegalFooter } from '../../sections/LegalFooter/LegalFooter';
+import { Hero } from '../../sections/Hero/Hero';
+import { Container } from '../../atoms/Container/Container';
+import { Button } from '../../atoms/Button/Button';
 import { LanguageSwitcher } from '../../molecules/LanguageSwitcher/LanguageSwitcher';
 import { ThemeSwitcher } from '../../molecules/ThemeSwitcher/ThemeSwitcher';
 
@@ -55,6 +58,7 @@ const meta: Meta<typeof PublicPageShell> = {
     footer: { table: { disable: true } },
     preferences: { table: { disable: true } },
     id: { table: { disable: true } },
+    mainFlush: { control: { type: 'boolean' } },
   },
 };
 export default meta;
@@ -223,5 +227,90 @@ export const ContratoSinShell: Story = {
     // Sin marco tampoco hay banda de preferencias: no hay ranura de pie donde
     // ponerla, igual que con `header` y `footer`.
     await expect(canvasElement.querySelector('.public-page-shell__preferences')).not.toBeInTheDocument();
+  },
+};
+
+/**
+ * **El `main` a sangre.** El marco pone el `main` acotado y con su aire, que es
+ * lo que quiere una página corriente. Una **portada** no: abre con un `Hero` que
+ * llega de lado a lado, y el aire vertical lo trae cada sección por su cuenta
+ * (ver `Container` § «Las secciones traen su aire»).
+ *
+ * Para eso el `main` lleva los mismos tres mandos que un `Container`:
+ * `mainWidth="full"`, `mainSpace="none"` y `mainFlush`. La portada pasa a
+ * apilar secciones, y lo que necesite columna se pone su propio `Container`
+ * dentro — como hace el párrafo de debajo del `Hero`.
+ *
+ * Es exactamente la maqueta que una portada tenía que montar a mano con
+ * `SiteShell` + `Container` para no poder usar esta plantilla.
+ */
+export const MainASangre: Story = {
+  name: 'El main a sangre',
+  args: {
+    header: <SiteHeader><SiteNav groups={indice} /></SiteHeader>,
+    footer: <LegalFooter links={legal} />,
+    mainWidth: 'full',
+    mainSpace: 'none',
+    mainFlush: true,
+    children: (
+      <>
+        <Hero
+          title="Precios que se entienden"
+          description="Una portada abre de lado a lado: el Hero trae su propio aire y su propia columna."
+          actions={<Button>Ver planes</Button>}
+        />
+        <Container space="xl">
+          <Paragraph>
+            Debajo del Hero, lo que quiera columna se pone su propio `Container`: el
+            marco ya no decide por la página.
+          </Paragraph>
+        </Container>
+      </>
+    ),
+  },
+};
+
+/**
+ * Test: los tres mandos llegan al `Container` del `main`, y el `main` sigue
+ * siendo el `main` —con su `id` y su `tabindex`— para que el salto al contenido
+ * no se rompa por abrir la portada a sangre.
+ */
+export const ContratoMainASangre: Story = {
+  name: 'Test — el main a sangre sigue siendo el destino del salto',
+  tags: ['!dev'],
+  args: MainASangre.args,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const main = canvas.getByRole('main');
+
+    // Sigue siendo el destino del `SkipLink`.
+    await expect(main).toHaveAttribute('id', 'main-content');
+    await expect(main).toHaveAttribute('tabindex', '-1');
+    await expect(main).toHaveClass('container');
+
+    // `mainSpace="none"` y `mainFlush`: sin aire vertical y sin aire lateral.
+    await expect(main).not.toHaveClass('container--space-xl');
+    await expect(main).toHaveClass('container--flush');
+
+    // `mainWidth="full"`: el interior no lleva modificador de medida, así que
+    // el contenido llega tan lejos como la banda.
+    const inner = main.querySelector('.container__inner')!;
+    await expect(inner.className).toBe('container__inner');
+
+    // Y el Hero de dentro sí tiene su columna: el ancho lo decide la sección.
+    await expect(canvasElement.querySelector('.hero .container__inner--xl')).toBeInTheDocument();
+  },
+};
+
+/** Test: sin pasar nada, el `main` sigue exactamente como antes de la v47. */
+export const ContratoMainPorDefecto: Story = {
+  name: 'Test — el main por defecto no cambia',
+  tags: ['!dev'],
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const main = canvas.getByRole('main');
+    await expect(main).toHaveClass('container--space-xl');
+    await expect(main).not.toHaveClass('container--flush');
+    await expect(main.querySelector('.container__inner--xl')).toBeInTheDocument();
   },
 };

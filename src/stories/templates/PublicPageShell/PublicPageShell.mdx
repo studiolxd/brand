@@ -5,9 +5,9 @@ import * as PublicPageShellStories from "./PublicPageShell.stories";
 
 # PublicPageShell
 
-El marco de una página pública, en una sola pieza: `SiteShell` con cabecera y pie opcionales y, dentro, el `main` acotado (`Container as="main" space="xl"`) al que apunta el `SkipLink`. No pone contenido: solo el molde.
+El marco de una página pública, en una sola pieza: `SiteShell` con cabecera y pie opcionales y, dentro, el `main` (`Container as="main"`, acotado y con su aire por defecto) al que apunta el `SkipLink`. No pone contenido: solo el molde.
 
-Es el molde **único**. `ErrorPage`, `NotFoundPage`, `OnboardingShell` y la maqueta de acceso (`Pages/Acceso` y sus hermanas) cuelgan todas de aquí, así que ninguna puede divergir del marco real: el `id` del `main`, su `tabIndex`, el ancho y el aire vertical se deciden en un sitio.
+Es el molde **único**. `ErrorPage`, `NotFoundPage`, `OnboardingShell` y la maqueta de acceso (`Pages/Acceso` y sus hermanas) cuelgan todas de aquí, así que ninguna puede divergir del marco real: el `id` del `main`, su `tabIndex`, el ancho y el aire vertical se deciden en un sitio. Ese ancho y ese aire son **regulables** desde la v47 (§ «El `main`»), sin que cambie lo que ve quien no los toca.
 
 <Canvas of={PublicPageShellStories.SinCabeceraNiPie} />
 <Canvas of={PublicPageShellStories.ConCabeceraYPie} />
@@ -68,6 +68,37 @@ const marco = useRef<HTMLDivElement>(null);
   {children}
 </PublicPageShell>
 <ConsentPreferences container={marco} … />
+```
+
+## El `main`: acotado por defecto, a sangre cuando la portada lo pide
+
+El `main` es un `Container`, y lleva sus **mismos tres mandos**: `mainWidth`, `mainSpace` y `mainFlush`. Los defaults son lo de siempre —`xl`, `xl` y `false`—, así que una página que no los toque se pinta exactamente igual que antes de la v47.
+
+| Prop | Default | Equivale a |
+| --- | --- | --- |
+| `mainWidth` | `'xl'` | `Container width` — la medida del contenido; `'full'` para que llegue tan lejos como la banda |
+| `mainSpace` | `'xl'` | `Container space` — el aire vertical; `'none'` cuando lo de dentro ya trae el suyo |
+| `mainFlush` | `false` | `Container flush` — quita el aire lateral, para tocar el borde de la pantalla |
+
+Se llaman con el prefijo de la ranura, como `preferencesLabel`: el marco tiene cuatro —cabecera, `main`, banda de preferencias y pie—, y un `width` pelado no diría cuál gobierna.
+
+**Para qué sirve.** Una portada no se acota: abre con un `Hero` que llega de lado a lado, y el aire vertical lo trae cada sección por su cuenta (la regla, en [Container → Las secciones traen su aire](?path=/docs/atoms-container--docs)). Con el `main` fijo, esa portada no podía colgar de esta plantilla y tenía que montarse a mano con `SiteShell` + `Container` — que es justo lo que el molde único existe para evitar. Los tres mandos juntos (`mainWidth="full" mainSpace="none" mainFlush`) le dan la maqueta que necesita sin salirse del marco.
+
+<Canvas of={PublicPageShellStories.MainASangre} />
+
+Lo que **no** cambia: el `main` sigue siendo el `main`, con su `id` y su `tabIndex`, así que el enlace de salto al contenido sigue llegando. Y lo que quiera columna dentro de una portada a sangre se pone su propio `Container`, como el párrafo de debajo del `Hero`.
+
+```tsx
+<PublicPageShell
+  header={<PublicHeader auth={false} />}
+  footer={<PublicFooter />}
+  mainWidth="full"
+  mainSpace="none"
+  mainFlush
+>
+  <Hero title={t('title')} description={t('description')} />
+  <Container space="xl">…</Container>
+</PublicPageShell>
 ```
 
 ## Superficie pública
