@@ -2,6 +2,18 @@ import type { ReactNode } from 'react';
 import { Select as BaseSelect } from '@base-ui/react/select';
 import type { SeparatorProps as BaseSeparatorProps } from '@base-ui/react/separator';
 import './Select.css';
+/**
+ * El único texto que el desplegable emite por su cuenta: el marcador de sitio
+ * genérico del disparador, el que dice «aquí no has elegido nada todavía».
+ *
+ * Es cromo, no contenido: cuando el marcador dice algo de ESTE campo («Elige
+ * un país») lo escribe quien monta el campo y viaja por la prop `placeholder`,
+ * que sigue ganando. Las **opciones** tampoco están aquí: son datos.
+ */
+export interface SelectMessages {
+    /** Marcador de sitio del disparador sin valor elegido. */
+    placeholder: string;
+}
 export interface SelectOption {
     value: string;
     label: string;
@@ -34,7 +46,12 @@ export interface SelectProps {
     options: SelectOptionOrGroup[];
     value?: string;
     defaultValue?: string;
-    /** Placeholder del trigger. Default: "Seleccionar…" (en la API compuesta lo pone cada consumidor vía `Select.Value`). */
+    /**
+     * Placeholder del trigger. **Sin default**: sale de `select.placeholder` del
+     * `BrandMessagesProvider`, y esta prop es la anulación puntual cuando el
+     * marcador dice algo de este campo concreto. En la API compuesta lo pone cada
+     * consumidor vía `Select.Value`.
+     */
     placeholder?: string;
     disabled?: boolean;
     readOnly?: boolean;

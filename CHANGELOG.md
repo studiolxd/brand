@@ -7,6 +7,71 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [42.0.0] — 2026-09-15
+
+> **Major.** Tercera familia al proveedor de textos: los átomos y moléculas de formulario
+> dejan de traer castellano puesto. Y la barra de filtros apila de verdad por debajo del
+> punto de ruptura, no solo cuando la aritmética de la rejilla lo permitía.
+
+### Los formularios leen del proveedor
+
+Doce componentes, doce espacios nuevos en `BrandMessages`: `inputField`, `passwordField`,
+`select`, `multiSelect`, `numberInput`, `otpInput`, `inputPhone`, `asyncSelect`,
+`asyncMultiSelect`, `searchForm`, `docsSearch` y `filterBar`. Los `*Field` que los envuelven
+son reenvío puro y no tienen espacio propio: pasan la prop al átomo, y el átomo lee del
+catálogo. Mismo orden que en las dos olas anteriores —**prop → proveedor → error**— y
+mismo carácter: incompatible **en tiempo de compilación**, que es lo que se busca.
+
+Esta familia iba ahora, y no más tarde, por un reenvío: `DataTable` pasaba
+`searchClearLabel` a un `InputField` que seguía con su «Borrar» cableado, así que las
+tablas no quedaban limpias del todo en una aplicación francesa hasta que cayera el átomo.
+Ese reenvío está cerrado. Y de paso se ha visto lo que tapaba: `removeLabel`,
+`decrementLabel`, `incrementLabel`, `digitLabel`, `countryLabel` y `loadingLabel` **no se
+pasaban en ningún sitio de la suite** — esos controles salían en castellano dentro de las
+aplicaciones en francés, alemán, neerlandés y portugués, y nadie lo había parcheado porque
+nadie lo veía. Con el proveedor se corrigen sin tocar un solo punto de uso.
+
+### Lo que se queda como prop, y las dudosas
+
+`label`, `helperText`, `errorMessage` y el `placeholder` que dice algo del campo son
+**contenido de ese campo** y siguen siendo props; ninguno traía castellano que retirar. Las
+que hubo que decidir mirando **el valor y no el nombre**: `Select.placeholder`
+(«Seleccionar…») es cromo, y la prop gana cuando el marcador dice algo del campo;
+`SearchForm.label` («Buscar») es cromo, porque el buscador de sitio se llama igual en toda
+la suite; `AsyncSelect.emptyMessage` («Sin resultados») es cromo, con la prop intacta para
+un vacío propio. `DocsSearch.clearLabel` no tiene clave: el aspa es la del `InputField` de
+debajo, y darle clave obligaría a traducir «Borrar» dos veces y a que coincidieran.
+`InputPhone.internationalLabel` conserva su «🌐»: un glifo no se traduce.
+
+El sistema **no tiene marca de obligatorio ni de «opcional»** — ni `Label` ni ningún
+`*Field` la emiten. No había nada que migrar ahí; si algún día se quiere, es una pieza
+nueva.
+
+### `FilterBar`: una columna por debajo de `md`, de verdad
+
+Su documentación prometía una columna por debajo del punto de ruptura y sus acciones sí
+conmutaban ahí, pero los filtros se dejaban a la aritmética de la rejilla
+(`minmax(min(192px, 100%), 1fr)`), que solo apila por fuerza por debajo de unos 400px.
+Medido en Chromium: a 320 y 390px, una columna; **a 430, 600, 700 y 760px, dos o tres
+columnas y un selector a media línea**. Es justo lo que se veía en un teléfono apaisado.
+Ahora la base es `1fr` y la rejilla `auto-fill` vive dentro del `@media (min-width: 768px)`
+que ya existía.
+
+El test que debía haberlo cogido medía la caja equivocada: comprobaba que la **celda**
+llenaba la línea —y lo hacía siempre—, no el **control** de dentro, que era lo que se
+quedaba corto, y solo en una franja que ningún preset de ventana de Storybook toca. El test
+nuevo mide el control y mide a 600px.
+
+`FilterBar` pasa a ser componente cliente: leer del contexto lo exige.
+
+### Un solo fixture inglés para las historias
+
+Las historias «Textos desde el proveedor (otro idioma)» de esta ola y de las dos anteriores
+importan un único `.storybook/brandMessagesFixtureEn.ts`, hermano del castellano, en vez de
+repetir el literal en cada una. El test que vigila que ningún fixture se publica ahora
+enumera lo que hay en `.storybook/`, así que el de la próxima ola queda cubierto por
+existir.
+
 ## [41.1.0] — 2026-09-15
 
 > **Minor.** El interruptor de la barra de filtros se centra con el campo que tiene al

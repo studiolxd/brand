@@ -1,5 +1,17 @@
 import { Popover as BasePopover } from '@base-ui/react/popover';
 import './MultiSelect.css';
+/**
+ * Los dos textos que el control emite por su cuenta: el marcador de sitio sin
+ * nada elegido y el nombre del aspa de cada ficha. Los dos son cromo — dicen
+ * lo mismo en toda la suite, y el segundo solo interpola la etiqueta de la
+ * opción, que es un dato.
+ */
+export interface MultiSelectMessages {
+    /** Marcador de sitio de la caja sin valores elegidos. */
+    placeholder: string;
+    /** Nombre accesible del aspa de una ficha, con la etiqueta de su opción. */
+    remove: (label: string) => string;
+}
 export interface MultiSelectOption {
     value: string;
     label: string;
@@ -9,6 +21,10 @@ export interface MultiSelectProps {
     options: MultiSelectOption[];
     value?: string[];
     defaultValue?: string[];
+    /**
+     * Marcador de sitio sin valores elegidos. **Sin default**: sale de
+     * `multiSelect.placeholder` del `BrandMessagesProvider`.
+     */
     placeholder?: string;
     disabled?: boolean;
     readOnly?: boolean;
@@ -32,7 +48,10 @@ export interface MultiSelectProps {
     'aria-labelledby'?: string;
     /** Ids de ayuda/error que describen el control (lo pone el campo). */
     'aria-describedby'?: string;
-    /** aria-label del botón que quita un valor. Default: `Quitar ${etiqueta}` (castellano). */
+    /**
+     * aria-label del botón que quita un valor. **Sin default**: sale de
+     * `multiSelect.remove` del `BrandMessagesProvider`.
+     */
     removeLabel?: (label: string) => string;
     /**
      * Nodo DOM donde montar el portal del dropdown (reenviado a Base UI

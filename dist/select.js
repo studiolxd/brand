@@ -1,156 +1,160 @@
 'use client';
 import './select.css';
-import { Icon as e } from "./icon.js";
-import { Children as t, createContext as n, forwardRef as r, isValidElement as i, useContext as a, useMemo as o } from "react";
-import { jsx as s, jsxs as c } from "react/jsx-runtime";
-import { Select as l } from "@base-ui/react/select";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Icon as t } from "./icon.js";
+import { Children as n, createContext as r, forwardRef as i, isValidElement as a, useContext as o, useMemo as s } from "react";
+import { Fragment as c, jsx as l, jsxs as u } from "react/jsx-runtime";
+import { Select as d } from "@base-ui/react/select";
 //#region src/stories/atoms/Select/Select.tsx
-function u(e) {
+function f(e) {
 	return Array.isArray(e.options);
 }
-var d = n(null);
-function f(e, n) {
-	t.forEach(e, (e) => {
-		if (!i(e)) return;
-		let t = e.props ?? {};
-		if (e.type === v || typeof t.value == "string" && e.type !== p) {
-			typeof t.value == "string" && n.set(t.value, t.children);
+var p = r(null);
+function m(e, t) {
+	n.forEach(e, (e) => {
+		if (!a(e)) return;
+		let n = e.props ?? {};
+		if (e.type === b || typeof n.value == "string" && e.type !== h) {
+			typeof n.value == "string" && t.set(n.value, n.children);
 			return;
 		}
-		t.children != null && f(t.children, n);
+		n.children != null && m(n.children, t);
 	});
 }
-function p({ children: e, onValueChange: t, ...n }) {
-	let r = o(() => {
+function h({ children: e, onValueChange: t, ...n }) {
+	let r = s(() => {
 		let t = /* @__PURE__ */ new Map();
-		return f(e, t), t;
+		return m(e, t), t;
 	}, [e]);
-	return /* @__PURE__ */ s(d.Provider, {
+	return /* @__PURE__ */ l(p.Provider, {
 		value: r,
-		children: /* @__PURE__ */ s(l.Root, {
+		children: /* @__PURE__ */ l(d.Root, {
 			onValueChange: t ? (e) => t(e) : void 0,
 			...n,
 			children: e
 		})
 	});
 }
-var m = r(function({ placeholder: e, children: t, ...n }, r) {
-	let i = a(d);
-	return /* @__PURE__ */ s(l.Value, {
+var g = i(function({ placeholder: e, children: t, ...n }, r) {
+	let i = o(p);
+	return /* @__PURE__ */ l(d.Value, {
 		ref: r,
 		...n,
 		children: (n) => typeof t == "function" ? t(n) : t ?? (n == null || n === "" ? e ?? null : i?.get(n) ?? n)
 	});
-}), h = r(function({ className: e, children: t, ...n }, r) {
+}), _ = i(function({ className: e, children: t, ...n }, r) {
 	let i = ["select__group", e ?? ""].filter(Boolean).join(" ");
-	return /* @__PURE__ */ s(l.Group, {
+	return /* @__PURE__ */ l(d.Group, {
 		ref: r,
 		className: i,
 		...n,
 		children: t
 	});
-}), g = r(function({ size: t = "md", className: n, children: r, ...i }, a) {
+}), v = i(function({ size: e = "md", className: n, children: r, ...i }, a) {
 	let o = [
 		"select",
-		t === "md" ? "" : `select--${t}`,
+		e === "md" ? "" : `select--${e}`,
 		n ?? ""
 	].filter(Boolean).join(" ");
-	return /* @__PURE__ */ c(l.Trigger, {
+	return /* @__PURE__ */ u(d.Trigger, {
 		ref: a,
 		className: o,
 		...i,
-		children: [r, /* @__PURE__ */ s(e, {
+		children: [r, /* @__PURE__ */ l(t, {
 			name: "chevron",
 			className: "select__icon",
-			size: t === "sm" ? "xs" : t === "lg" ? "md" : "sm"
+			size: e === "sm" ? "xs" : e === "lg" ? "md" : "sm"
 		})]
 	});
-}), _ = r(function({ size: e = "md", container: t, className: n, children: r, side: i = "bottom", align: a = "start", sideOffset: o = -1, ...c }, u) {
-	let d = [
+}), y = i(function({ size: e = "md", container: t, className: n, children: r, side: i = "bottom", align: a = "start", sideOffset: o = -1, ...s }, c) {
+	let u = [
 		"select__content",
 		e === "md" ? "" : `select__content--${e}`,
 		n ?? ""
 	].filter(Boolean).join(" ");
-	return /* @__PURE__ */ s(l.Portal, {
+	return /* @__PURE__ */ l(d.Portal, {
 		container: t,
-		children: /* @__PURE__ */ s(l.Positioner, {
+		children: /* @__PURE__ */ l(d.Positioner, {
 			className: "select__positioner",
 			side: i,
 			align: a,
 			sideOffset: o,
 			alignItemWithTrigger: !1,
-			children: /* @__PURE__ */ s(l.Popup, {
-				ref: u,
-				className: d,
-				...c,
+			children: /* @__PURE__ */ l(d.Popup, {
+				ref: c,
+				className: u,
+				...s,
 				children: r
 			})
 		})
 	});
-}), v = r(function({ className: e, children: t, ...n }, r) {
+}), b = i(function({ className: e, children: t, ...n }, r) {
 	let i = ["select__item", e ?? ""].filter(Boolean).join(" ");
-	return /* @__PURE__ */ s(l.Item, {
+	return /* @__PURE__ */ l(d.Item, {
 		ref: r,
 		className: i,
 		...n,
-		children: /* @__PURE__ */ s(l.ItemText, { children: t })
+		children: /* @__PURE__ */ l(d.ItemText, { children: t })
 	});
-}), y = r(function({ className: e, children: t, ...n }, r) {
+}), x = i(function({ className: e, children: t, ...n }, r) {
 	let i = ["select__label", e ?? ""].filter(Boolean).join(" ");
-	return /* @__PURE__ */ s(l.GroupLabel, {
+	return /* @__PURE__ */ l(d.GroupLabel, {
 		ref: r,
 		className: i,
 		...n,
 		children: t
 	});
-}), b = r(function({ className: e, ...t }, n) {
+}), S = i(function({ className: e, ...t }, n) {
 	let r = ["select__separator", e ?? ""].filter(Boolean).join(" ");
-	return /* @__PURE__ */ s(l.Separator, {
+	return /* @__PURE__ */ l(d.Separator, {
 		ref: n,
 		className: r,
 		...t
 	});
 });
-function x({ value: e, label: t, "aria-label": n }) {
-	return /* @__PURE__ */ s(v, {
+function C({ value: e, label: t, "aria-label": n }) {
+	return /* @__PURE__ */ l(b, {
 		value: e,
 		"aria-label": n,
 		children: t
 	}, e);
 }
-var S = r(function({ options: e, value: t, defaultValue: n, placeholder: r = "Seleccionar…", disabled: i, readOnly: a, size: o = "md", onValueChange: l, id: d, name: f, required: v, onBlur: b, "aria-label": S, "aria-describedby": C, "aria-invalid": w, container: T }, E) {
-	return /* @__PURE__ */ c(p, {
+function w({ override: t }) {
+	return /* @__PURE__ */ l(c, { children: e("select")("placeholder", t) });
+}
+var T = i(function({ options: e, value: t, defaultValue: n, placeholder: r, disabled: i, readOnly: a, size: o = "md", onValueChange: s, id: c, name: d, required: p, onBlur: m, "aria-label": b, "aria-describedby": S, "aria-invalid": T, container: E }, D) {
+	return /* @__PURE__ */ u(h, {
 		value: t,
 		defaultValue: n,
 		disabled: i,
 		readOnly: a,
-		name: f,
-		required: v,
-		onValueChange: l,
-		children: [/* @__PURE__ */ s(g, {
-			ref: E,
+		name: d,
+		required: p,
+		onValueChange: s,
+		children: [/* @__PURE__ */ l(v, {
+			ref: D,
 			size: o,
-			id: d,
-			onBlur: b,
-			"aria-label": S,
-			"aria-describedby": C,
-			"aria-invalid": w || void 0,
-			children: /* @__PURE__ */ s(m, { placeholder: r })
-		}), /* @__PURE__ */ s(_, {
+			id: c,
+			onBlur: m,
+			"aria-label": b,
+			"aria-describedby": S,
+			"aria-invalid": T || void 0,
+			children: /* @__PURE__ */ l(g, { placeholder: /* @__PURE__ */ l(w, { override: r }) })
+		}), /* @__PURE__ */ l(y, {
 			size: o,
-			container: T,
-			children: e.map((e, t) => u(e) ? /* @__PURE__ */ c(h, { children: [/* @__PURE__ */ s(y, { children: e.label }), e.options.map(x)] }, `group-${t}`) : x(e))
+			container: E,
+			children: e.map((e, t) => f(e) ? /* @__PURE__ */ u(_, { children: [/* @__PURE__ */ l(x, { children: e.label }), e.options.map(C)] }, `group-${t}`) : C(e))
 		})]
 	});
-}), C = Object.assign(S, {
-	Root: p,
-	Trigger: g,
-	Value: m,
-	Content: _,
-	Group: h,
-	Label: y,
-	Item: v,
-	Separator: b
+}), E = Object.assign(T, {
+	Root: h,
+	Trigger: v,
+	Value: g,
+	Content: y,
+	Group: _,
+	Label: x,
+	Item: b,
+	Separator: S
 });
 //#endregion
-export { C as Select, _ as SelectContent, h as SelectGroup, v as SelectItem, y as SelectLabel, p as SelectRoot, b as SelectSeparator, g as SelectTrigger, m as SelectValue, u as isSelectOptionGroup };
+export { E as Select, y as SelectContent, _ as SelectGroup, b as SelectItem, x as SelectLabel, h as SelectRoot, S as SelectSeparator, v as SelectTrigger, g as SelectValue, f as isSelectOptionGroup };

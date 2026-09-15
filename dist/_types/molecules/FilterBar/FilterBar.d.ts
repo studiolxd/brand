@@ -1,5 +1,14 @@
 import { type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import './FilterBar.css';
+/**
+ * El único texto que la barra emite por su cuenta: su nombre accesible como
+ * punto de referencia de búsqueda. Los rótulos de los filtros no están aquí —
+ * los escribe cada campo, y dicen qué filtran.
+ */
+export interface FilterBarMessages {
+    /** Nombre accesible del punto de referencia `search` que es la barra. */
+    label: string;
+}
 export interface FilterBarProps extends Omit<ComponentPropsWithoutRef<'div'>, 'children'> {
     /**
      * El buscador: el campo de búsqueda del sistema —un `InputField kind="search"`,
@@ -22,7 +31,7 @@ export interface FilterBarProps extends Omit<ComponentPropsWithoutRef<'div'>, 'c
     actions?: ReactNode;
     /**
      * Nombre accesible del punto de referencia `search` que es la barra.
-     * Default: «Filtros» (castellano). Una app multiidioma debe pasarlo traducido.
+     * **Sin default**: sale de `filterBar.label` del `BrandMessagesProvider`.
      */
     ariaLabel?: string;
     /** Se añade DESPUÉS de las clases propias. */

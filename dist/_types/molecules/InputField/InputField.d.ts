@@ -1,5 +1,18 @@
 import { type ComponentPropsWithoutRef } from 'react';
 import './InputField.css';
+/**
+ * El único texto que el campo emite por su cuenta: el nombre accesible del
+ * aspa de borrado. Es cromo —dice la misma cosa en toda la suite—, así que
+ * sale del catálogo común y no de quien monta el campo.
+ *
+ * El `label`, el `placeholder`, el `helperText` y el `errorMessage` NO están
+ * aquí: son el contenido de ESTE campo, y ningún catálogo común puede saber
+ * qué dicen.
+ */
+export interface InputFieldMessages {
+    /** Nombre accesible del botón que vacía un campo de búsqueda. */
+    clear: string;
+}
 export interface InputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue'> {
     id: string;
     label: string;
@@ -33,8 +46,9 @@ export interface InputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>,
      */
     clearable?: boolean;
     /**
-     * Nombre accesible del botón de borrado. Default castellano.
-     * @default 'Borrar'
+     * Nombre accesible del botón de borrado. **Sin default**: sale de
+     * `inputField.clear` del `BrandMessagesProvider`, y esta prop es la
+     * anulación puntual de un uso concreto.
      */
     clearLabel?: string;
     /** Se llama tras vaciar el campo desde el aspa, ya con el foco devuelto. */

@@ -1,6 +1,15 @@
 import { Select as BaseSelect } from '@base-ui/react/select';
 import type { Country } from 'react-phone-number-input';
 import './InputPhone.css';
+/**
+ * El único texto que el campo emite por su cuenta: el nombre accesible del
+ * selector de país. Los **nombres de los países** no están aquí: los resuelve
+ * `Intl` desde el `locale`, como los meses y las fechas.
+ */
+export interface InputPhoneMessages {
+    /** Nombre accesible del selector de prefijo/país. */
+    country: string;
+}
 export interface InputPhoneProps {
     value?: string;
     defaultCountry?: Country;
@@ -24,14 +33,16 @@ export interface InputPhoneProps {
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
     /**
-     * aria-label del selector de país. Default: "País" (castellano).
-     * Una app multiidioma debe pasarla traducida.
+     * aria-label del selector de país. **Sin default**: sale de
+     * `inputPhone.country` del `BrandMessagesProvider`.
      */
     countryLabel?: string;
     /**
      * Lo que enseña el selector cuando no hay país elegido (número en formato
-     * internacional). Default: "🌐". Es contenido visible: una app que no quiera
-     * el emoji pasa aquí su propio texto o glifo.
+     * internacional). Default: "🌐". **No pasa por el catálogo de textos a
+     * propósito**: un glifo no se traduce, dice lo mismo en los seis idiomas y
+     * meterlo en el catálogo obligaría a repetirlo seis veces. Una app que no
+     * quiera el emoji pasa aquí su propio texto o glifo.
      */
     internationalLabel?: string;
     /**

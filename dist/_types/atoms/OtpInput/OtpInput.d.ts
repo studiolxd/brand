@@ -1,4 +1,15 @@
 import './OtpInput.css';
+/**
+ * Los textos que el control emite por su cuenta: el nombre del grupo cuando va
+ * suelto y el de cada celda. Cromo — el segundo solo interpola la posición de
+ * la celda, que es una cifra.
+ */
+export interface OtpInputMessages {
+    /** Nombre accesible del grupo de celdas cuando el control va suelto. */
+    group: string;
+    /** Nombre accesible de una celda, con su posición y el total. */
+    digit: (index: number, length: number) => string;
+}
 export interface OtpInputProps {
     /** Número de celdas a renderizar. Requerido. */
     length: number;
@@ -22,8 +33,8 @@ export interface OtpInputProps {
     'aria-labelledby'?: string;
     /**
      * Nombre accesible del grupo cuando no se pasa `aria-label` ni
-     * `aria-labelledby` — el caso del control suelto. Default: "Código de
-     * verificación" (castellano). Una app multiidioma debe pasarla traducida.
+     * `aria-labelledby` — el caso del control suelto. **Sin default**: sale de
+     * `otpInput.group` del `BrandMessagesProvider`.
      */
     groupLabel?: string;
     id?: string;
@@ -39,8 +50,8 @@ export interface OtpInputProps {
     /** Se añade DESPUÉS de las clases propias del componente. */
     className?: string;
     /**
-     * Etiqueta accesible de cada celda. Default: `Dígito N de M` (castellano).
-     * Una app multiidioma debe pasarla traducida.
+     * Etiqueta accesible de cada celda. **Sin default**: sale de
+     * `otpInput.digit` del `BrandMessagesProvider`.
      */
     digitLabel?: (index: number, length: number) => string;
 }

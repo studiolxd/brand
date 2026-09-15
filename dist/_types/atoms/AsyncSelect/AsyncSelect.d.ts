@@ -4,12 +4,31 @@ export interface AsyncSelectOption {
     value: string;
     label: string;
 }
+/**
+ * Los textos que el control emite por su cuenta. Todos son cromo: dicen lo
+ * mismo en toda la suite y no hablan de lo que se busca. Lo que sí es de esta
+ * pantalla —las opciones que devuelve `onSearch`— no pasa por aquí.
+ */
+export interface AsyncSelectMessages {
+    /** Pista dentro del campo de búsqueda. */
+    placeholder: string;
+    /** Aviso cuando la búsqueda no devuelve opciones. */
+    empty: string;
+    /** Nombre accesible del spinner mientras se busca. */
+    loading: string;
+    /** Nombre accesible del botón que vacía la selección. */
+    clear: string;
+}
 export interface AsyncSelectProps {
     onSearch: (query: string) => Promise<AsyncSelectOption[]>;
     value?: string | null;
     onValueChange?: (value: string | null, option: AsyncSelectOption | null) => void;
     /** Label of the currently selected option — required when `value` is set so the component can display it */
     selectedOption?: AsyncSelectOption | null;
+    /**
+     * Pista dentro del campo de búsqueda. **Sin default**: sale de la clave
+     * `placeholder` del espacio de este control.
+     */
     placeholder?: string;
     disabled?: boolean;
     readOnly?: boolean;
@@ -43,18 +62,19 @@ export interface AsyncSelectProps {
     'aria-label'?: string;
     'aria-describedby'?: string;
     /**
-     * Texto mostrado cuando la búsqueda no devuelve opciones. Default: "Sin resultados"
-     * (castellano). Es texto **visible**: una app multiidioma debe pasarlo traducido.
+     * Texto mostrado cuando la búsqueda no devuelve opciones. **Sin default**:
+     * sale de la clave `empty` del espacio de este control en el
+     * `BrandMessagesProvider`.
      */
     emptyMessage?: string;
     /**
-     * Etiqueta accesible del spinner mientras se busca. Default: "Buscando…" (castellano).
-     * Una app multiidioma debe pasarla traducida.
+     * Etiqueta accesible del spinner mientras se busca. **Sin default**: sale de
+     * la clave `loading` del espacio de este control.
      */
     loadingLabel?: string;
     /**
-     * aria-label del botón de limpiar selección. Default: "Limpiar selección" (castellano).
-     * Una app multiidioma debe pasarla traducida.
+     * aria-label del botón de limpiar selección. **Sin default**: sale de
+     * `asyncSelect.clear`.
      */
     clearLabel?: string;
     /**

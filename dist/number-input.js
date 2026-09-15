@@ -1,83 +1,84 @@
 'use client';
 import './number-input.css';
-import { Icon as e } from "./icon.js";
-import { forwardRef as t, useCallback as n, useState as r } from "react";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Icon as t } from "./icon.js";
+import { forwardRef as n, useCallback as r, useState as i } from "react";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/atoms/NumberInput/NumberInput.tsx
-var o = t(function({ value: t, defaultValue: o = 0, min: s, max: c, step: l = 1, decimal: u = !1, disabled: d = !1, readOnly: f = !1, size: p = "md", error: m = !1, id: h, name: g, describedBy: _, ariaLabel: v, decrementLabel: y = "Decrementar", incrementLabel: b = "Incrementar", className: x, onChange: S, onBlur: C, onFocus: w, ...T }, E) {
-	let D = t !== void 0, [O, k] = r(o), [A, j] = r(!1), [M, N] = r(null), P = D ? t : O, F = M === null ? String(P) : M, I = n((e) => {
+var s = n(function({ value: n, defaultValue: s = 0, min: c, max: l, step: u = 1, decimal: d = !1, disabled: f = !1, readOnly: p = !1, size: m = "md", error: h = !1, id: g, name: _, describedBy: v, ariaLabel: y, decrementLabel: b, incrementLabel: x, className: S, onChange: C, onBlur: w, onFocus: T, ...E }, D) {
+	let O = e("numberInput"), k = n !== void 0, [A, j] = i(s), [M, N] = i(!1), [P, F] = i(null), I = k ? n : A, L = P === null ? String(I) : P, R = r((e) => {
 		let t = e;
-		return s !== void 0 && (t = Math.max(s, t)), c !== void 0 && (t = Math.min(c, t)), t;
-	}, [s, c]), L = n((e) => {
-		let t = I(e);
-		D || k(t), S?.(t);
+		return c !== void 0 && (t = Math.max(c, t)), l !== void 0 && (t = Math.min(l, t)), t;
+	}, [c, l]), z = r((e) => {
+		let t = R(e);
+		k || j(t), C?.(t);
 	}, [
-		I,
-		D,
-		S
-	]), R = () => {
-		d || f || (N(null), L(P - l));
-	}, z = () => {
-		d || f || (N(null), L(P + l));
-	}, B = (e) => {
-		let t = e.target.value;
-		N(t);
-		let n = u ? t.replace(",", ".") : t, r = parseFloat(n);
-		isNaN(r) || L(r);
-	}, V = (e) => {
-		j(!0), w?.(e);
+		R,
+		k,
+		C
+	]), B = () => {
+		f || p || (F(null), z(I - u));
+	}, V = () => {
+		f || p || (F(null), z(I + u));
 	}, H = (e) => {
-		j(!1), N(null), C?.(e);
-	}, U = [
+		let t = e.target.value;
+		F(t);
+		let n = d ? t.replace(",", ".") : t, r = parseFloat(n);
+		isNaN(r) || z(r);
+	}, U = (e) => {
+		N(!0), T?.(e);
+	}, W = (e) => {
+		N(!1), F(null), w?.(e);
+	}, G = [
 		"number-input",
-		p === "md" ? "" : `number-input--${p}`,
-		m ? "number-input--error" : "",
-		d ? "number-input--disabled" : "",
-		A ? "number-input--focused" : "",
-		x ?? ""
-	].filter(Boolean).join(" "), W = d || f || s !== void 0 && P <= s, G = d || f || c !== void 0 && P >= c;
-	return /* @__PURE__ */ a("div", {
-		className: U,
+		m === "md" ? "" : `number-input--${m}`,
+		h ? "number-input--error" : "",
+		f ? "number-input--disabled" : "",
+		M ? "number-input--focused" : "",
+		S ?? ""
+	].filter(Boolean).join(" "), K = f || p || c !== void 0 && I <= c, q = f || p || l !== void 0 && I >= l;
+	return /* @__PURE__ */ o("div", {
+		className: G,
 		children: [
-			/* @__PURE__ */ i("button", {
+			/* @__PURE__ */ a("button", {
 				className: "number-input__btn number-input__btn--decrement",
 				type: "button",
-				onClick: R,
-				disabled: W,
-				"aria-label": y,
+				onClick: B,
+				disabled: K,
+				"aria-label": O("decrement", b),
 				tabIndex: -1,
-				children: /* @__PURE__ */ i(e, {
+				children: /* @__PURE__ */ a(t, {
 					name: "minus",
 					size: "sm"
 				})
 			}),
-			/* @__PURE__ */ i("input", {
-				ref: E,
+			/* @__PURE__ */ a("input", {
+				ref: D,
 				className: "number-input__field",
 				type: "text",
-				inputMode: u ? "decimal" : "numeric",
-				pattern: u ? "[0-9]*[.,]?[0-9]*" : "[0-9]*",
-				"aria-invalid": m || void 0,
-				"aria-describedby": _,
-				"aria-label": v,
-				...T,
-				id: h,
-				name: g,
-				value: F,
-				disabled: d,
-				readOnly: f,
-				onChange: B,
-				onFocus: V,
-				onBlur: H
+				inputMode: d ? "decimal" : "numeric",
+				pattern: d ? "[0-9]*[.,]?[0-9]*" : "[0-9]*",
+				"aria-invalid": h || void 0,
+				"aria-describedby": v,
+				"aria-label": y,
+				...E,
+				id: g,
+				name: _,
+				value: L,
+				disabled: f,
+				readOnly: p,
+				onChange: H,
+				onFocus: U,
+				onBlur: W
 			}),
-			/* @__PURE__ */ i("button", {
+			/* @__PURE__ */ a("button", {
 				className: "number-input__btn number-input__btn--increment",
 				type: "button",
-				onClick: z,
-				disabled: G,
-				"aria-label": b,
+				onClick: V,
+				disabled: q,
+				"aria-label": O("increment", x),
 				tabIndex: -1,
-				children: /* @__PURE__ */ i(e, {
+				children: /* @__PURE__ */ a(t, {
 					name: "plus",
 					size: "sm"
 				})
@@ -86,4 +87,4 @@ var o = t(function({ value: t, defaultValue: o = 0, min: s, max: c, step: l = 1,
 	});
 });
 //#endregion
-export { o as NumberInput };
+export { s as NumberInput };

@@ -17,6 +17,27 @@ export type DocsSearchRenderLinkProps = React.AnchorHTMLAttributes<HTMLAnchorEle
     href: string;
     className: string;
 };
+/**
+ * Los textos que el buscador emite por su cuenta. Los seis son cromo: en toda
+ * la suite el buscador de la documentación se llama igual y avisa igual. Los
+ * **resultados** no están aquí — son datos que llegan por `results`.
+ *
+ * El nombre del aspa tampoco: el aspa es la del `InputField` que hay debajo y
+ * sale de `inputField.clear`. Es la misma palabra y el mismo botón; darle una
+ * clave propia solo obligaría a traducir «Borrar» dos veces.
+ */
+export interface DocsSearchMessages {
+    /** Etiqueta del campo, que nombra también el punto de referencia. */
+    label: string;
+    /** Pista dentro del campo. */
+    placeholder: string;
+    /** Nombre accesible de la lista de resultados. */
+    results: string;
+    /** Aviso cuando la búsqueda no encuentra nada. */
+    empty: string;
+    /** Aviso mientras se busca. */
+    loading: string;
+}
 export interface DocsSearchProps {
     /** `id` del campo. Ata la etiqueta con el campo y el campo con la lista. */
     id?: string;
@@ -29,15 +50,14 @@ export interface DocsSearchProps {
     /** Hay una búsqueda en curso: el aviso de estado lo dice. */
     loading?: boolean;
     /**
-     * Etiqueta del campo. Default castellano.
-     * @default 'Buscar en la documentación'
+     * Etiqueta del campo. **Sin default**: sale de `docsSearch.label` del
+     * `BrandMessagesProvider`.
      */
     label?: string;
     /** Oculta la etiqueta a la vista; el lector de pantalla la sigue leyendo. */
     labelHidden?: boolean;
     /**
-     * Pista dentro del campo. Default castellano.
-     * @default 'Buscar…'
+     * Pista dentro del campo. **Sin default**: sale de `docsSearch.placeholder`.
      */
     placeholder?: string;
     /**
@@ -47,23 +67,22 @@ export interface DocsSearchProps {
      */
     clearable?: boolean;
     /**
-     * Nombre accesible del botón de borrado. Default castellano.
-     * @default 'Borrar'
+     * Nombre accesible del botón de borrado. Reenvío puro al `InputField`: sin
+     * él, el texto sale de `inputField.clear` del `BrandMessagesProvider`.
      */
     clearLabel?: string;
     /**
-     * Nombre accesible de la lista de resultados. Default castellano.
-     * @default 'Resultados'
+     * Nombre accesible de la lista de resultados. **Sin default**: sale de
+     * `docsSearch.results`.
      */
     resultsLabel?: string;
     /**
-     * Aviso cuando la búsqueda no encuentra nada. Default castellano.
-     * @default 'Sin resultados.'
+     * Aviso cuando la búsqueda no encuentra nada. **Sin default**: sale de
+     * `docsSearch.empty`.
      */
     emptyLabel?: string;
     /**
-     * Aviso mientras se busca. Default castellano.
-     * @default 'Buscando…'
+     * Aviso mientras se busca. **Sin default**: sale de `docsSearch.loading`.
      */
     loadingLabel?: string;
     /** Talla del campo. */

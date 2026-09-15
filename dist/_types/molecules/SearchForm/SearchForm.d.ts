@@ -1,4 +1,17 @@
 import './SearchForm.css';
+/**
+ * Los tres textos que el buscador emite por su cuenta. Son cromo: el buscador
+ * de sitio se llama igual en toda la suite, y ni el rótulo ni la pista dicen
+ * nada de lo que se busca en ESTA pantalla.
+ */
+export interface SearchFormMessages {
+    /** Etiqueta del campo; nombra también el punto de referencia `search`. */
+    label: string;
+    /** Pista dentro del campo. */
+    placeholder: string;
+    /** Nombre accesible del botón de envío. */
+    submit: string;
+}
 export interface SearchFormProps {
     /** `id` del campo. Si no se pasa, el componente genera uno estable. */
     id?: string;
@@ -28,8 +41,7 @@ export interface SearchFormProps {
     method?: 'get' | 'post';
     /**
      * Etiqueta del campo. Nombra también el punto de referencia `search`.
-     * Default castellano.
-     * @default 'Buscar'
+     * **Sin default**: sale de `searchForm.label` del `BrandMessagesProvider`.
      */
     label?: string;
     /**
@@ -38,13 +50,13 @@ export interface SearchFormProps {
      */
     labelHidden?: boolean;
     /**
-     * Pista dentro del campo. Default castellano.
-     * @default 'Buscar…'
+     * Pista dentro del campo. **Sin default**: sale de
+     * `searchForm.placeholder`.
      */
     placeholder?: string;
     /**
-     * Nombre accesible del botón de envío. Default castellano.
-     * @default 'Buscar'
+     * Nombre accesible del botón de envío. **Sin default**: sale de
+     * `searchForm.submit`.
      */
     submitLabel?: string;
     /**

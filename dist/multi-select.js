@@ -1,166 +1,167 @@
 'use client';
 import './multi-select.css';
-import { Icon as e } from "./icon.js";
-import { forwardRef as t, useEffect as n, useId as r, useRef as i, useState as a } from "react";
-import { jsx as o, jsxs as s } from "react/jsx-runtime";
-import { Popover as c } from "@base-ui/react/popover";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Icon as t } from "./icon.js";
+import { forwardRef as n, useEffect as r, useId as i, useRef as a, useState as o } from "react";
+import { jsx as s, jsxs as c } from "react/jsx-runtime";
+import { Popover as l } from "@base-ui/react/popover";
 //#region src/stories/atoms/MultiSelect/MultiSelect.tsx
-function l(e, t) {
+function u(e, t) {
 	typeof e == "function" ? e(t) : e && (e.current = t);
 }
-var u = 500, d = t(function({ options: t, value: d, defaultValue: f = [], placeholder: p = "Seleccionar…", disabled: m, readOnly: h, size: g = "md", onValueChange: _, id: v, name: y, error: b = !1, onBlur: x, className: S, "aria-label": C, "aria-labelledby": w, "aria-describedby": T, removeLabel: E = (e) => `Quitar ${e}`, container: D }, O) {
-	let [k, A] = a(!1), [j, M] = a(f), [N, P] = a(-1), F = i(null), I = i(null), L = r(), R = r(), z = i(""), B = i(0), V = d === void 0 ? j : d, H = (e) => `${R}-opt-${e}`;
-	function U(e) {
-		let t = V.includes(e) ? V.filter((t) => t !== e) : [...V, e];
-		d === void 0 && M(t), _?.(t);
+var d = 500, f = n(function({ options: n, value: f, defaultValue: p = [], placeholder: m, disabled: h, readOnly: g, size: _ = "md", onValueChange: v, id: y, name: b, error: x = !1, onBlur: S, className: C, "aria-label": w, "aria-labelledby": T, "aria-describedby": E, removeLabel: D, container: O }, k) {
+	let A = e("multiSelect"), [j, M] = o(!1), [N, P] = o(p), [F, I] = o(-1), L = a(null), R = a(null), z = i(), B = i(), V = a(""), H = a(0), U = f === void 0 ? N : f, W = (e) => `${B}-opt-${e}`;
+	function G(e) {
+		let t = U.includes(e) ? U.filter((t) => t !== e) : [...U, e];
+		f === void 0 && P(t), v?.(t);
 	}
-	function W(e) {
-		m || h || (A(!0), P(t.length === 0 ? -1 : e));
+	function K(e) {
+		h || g || (M(!0), I(n.length === 0 ? -1 : e));
 	}
-	function G() {
-		A(!1), P(-1), z.current = "";
+	function q() {
+		M(!1), I(-1), V.current = "";
 	}
-	function K(e, t) {
+	function J(e, t) {
 		if (!e) {
 			if (t.reason === "outside-press") {
 				let e = t.event?.target;
-				if (e instanceof Node && F.current?.contains(e)) return;
+				if (e instanceof Node && L.current?.contains(e)) return;
 			}
-			G();
+			q();
 		}
 	}
-	function q(e) {
-		if (t.length === 0) return;
-		let n = Date.now(), r = n - B.current > u ? e : z.current + e;
-		z.current = r, B.current = n;
-		let i = r.length === 1 ? N + 1 : Math.max(N, 0), a = r.toLowerCase();
-		for (let e = 0; e < t.length; e++) {
-			let n = (i + e) % t.length;
-			if (t[n].label.toLowerCase().startsWith(a)) {
-				P(n), k || A(!0);
+	function Y(e) {
+		if (n.length === 0) return;
+		let t = Date.now(), r = t - H.current > d ? e : V.current + e;
+		V.current = r, H.current = t;
+		let i = r.length === 1 ? F + 1 : Math.max(F, 0), a = r.toLowerCase();
+		for (let e = 0; e < n.length; e++) {
+			let t = (i + e) % n.length;
+			if (n[t].label.toLowerCase().startsWith(a)) {
+				I(t), j || M(!0);
 				return;
 			}
 		}
 	}
-	function J(e) {
-		if (m || h) return;
-		let n = t.length - 1;
-		if (e.key === "ArrowDown") e.preventDefault(), k ? P((e) => Math.min(e + 1, n)) : W(0);
-		else if (e.key === "ArrowUp") e.preventDefault(), k ? P((e) => Math.max(e - 1, 0)) : W(n);
-		else if (e.key === "Home") e.preventDefault(), k ? P(t.length === 0 ? -1 : 0) : W(0);
-		else if (e.key === "End") e.preventDefault(), k ? P(n) : W(n);
-		else if (e.key === "Enter" || e.key === " ") e.preventDefault(), k ? N >= 0 && N < t.length && U(t[N].value) : W(0);
+	function X(e) {
+		if (h || g) return;
+		let t = n.length - 1;
+		if (e.key === "ArrowDown") e.preventDefault(), j ? I((e) => Math.min(e + 1, t)) : K(0);
+		else if (e.key === "ArrowUp") e.preventDefault(), j ? I((e) => Math.max(e - 1, 0)) : K(t);
+		else if (e.key === "Home") e.preventDefault(), j ? I(n.length === 0 ? -1 : 0) : K(0);
+		else if (e.key === "End") e.preventDefault(), j ? I(t) : K(t);
+		else if (e.key === "Enter" || e.key === " ") e.preventDefault(), j ? F >= 0 && F < n.length && G(n[F].value) : K(0);
 		else if (e.key === "Escape") {
-			if (!k) return;
-			e.preventDefault(), G();
-		} else e.key === "Tab" ? k && G() : e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey && (e.preventDefault(), q(e.key));
+			if (!j) return;
+			e.preventDefault(), q();
+		} else e.key === "Tab" ? j && q() : e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey && (e.preventDefault(), Y(e.key));
 	}
-	function Y(e) {
-		m || h || e.target instanceof Element && e.target.closest(".multi-select__pill-remove") || (e.preventDefault(), I.current?.focus(), k ? G() : W(0));
+	function Z(e) {
+		h || g || e.target instanceof Element && e.target.closest(".multi-select__pill-remove") || (e.preventDefault(), R.current?.focus(), j ? q() : K(0));
 	}
-	n(() => {
-		!k || N < 0 || document.getElementById(H(N))?.scrollIntoView({ block: "nearest" });
+	r(() => {
+		!j || F < 0 || document.getElementById(W(F))?.scrollIntoView({ block: "nearest" });
 	}, [
-		k,
-		N,
-		R
+		j,
+		F,
+		B
 	]);
-	let X = [
+	let Q = [
 		"multi-select",
-		g === "md" ? "" : `multi-select--${g}`,
-		m ? "multi-select--disabled" : "",
-		b ? "multi-select--error" : "",
-		S ?? ""
-	].filter(Boolean).join(" "), Z = ["multi-select__content", g === "md" ? "" : `multi-select__content--${g}`].filter(Boolean).join(" ");
-	return /* @__PURE__ */ s(c.Root, {
-		open: k,
-		onOpenChange: K,
-		children: [/* @__PURE__ */ s("div", {
-			ref: F,
-			className: X,
-			"data-popup-open": k || void 0,
-			onPointerDown: Y,
+		_ === "md" ? "" : `multi-select--${_}`,
+		h ? "multi-select--disabled" : "",
+		x ? "multi-select--error" : "",
+		C ?? ""
+	].filter(Boolean).join(" "), $ = ["multi-select__content", _ === "md" ? "" : `multi-select__content--${_}`].filter(Boolean).join(" ");
+	return /* @__PURE__ */ c(l.Root, {
+		open: j,
+		onOpenChange: J,
+		children: [/* @__PURE__ */ c("div", {
+			ref: L,
+			className: Q,
+			"data-popup-open": j || void 0,
+			onPointerDown: Z,
 			children: [
-				/* @__PURE__ */ s("div", {
+				/* @__PURE__ */ c("div", {
 					className: "multi-select__values",
-					children: [V.map((n) => {
-						let r = t.find((e) => e.value === n);
-						return r ? /* @__PURE__ */ s("span", {
+					children: [U.map((e) => {
+						let r = n.find((t) => t.value === e);
+						return r ? /* @__PURE__ */ c("span", {
 							className: "multi-select__pill",
-							children: [/* @__PURE__ */ o("span", {
+							children: [/* @__PURE__ */ s("span", {
 								className: "multi-select__pill-label",
 								children: r.label
-							}), !m && !h && /* @__PURE__ */ o("button", {
+							}), !h && !g && /* @__PURE__ */ s("button", {
 								type: "button",
 								className: "multi-select__pill-remove",
-								"aria-label": E(r.label),
+								"aria-label": A("remove", D)(r.label),
 								tabIndex: -1,
-								onClick: (e) => {
-									e.stopPropagation(), U(n), I.current?.focus();
+								onClick: (t) => {
+									t.stopPropagation(), G(e), R.current?.focus();
 								},
-								children: /* @__PURE__ */ o(e, {
+								children: /* @__PURE__ */ s(t, {
 									name: "close",
 									size: "xs"
 								})
 							})]
-						}, n) : null;
-					}), /* @__PURE__ */ o("div", {
+						}, e) : null;
+					}), /* @__PURE__ */ s("div", {
 						ref: (e) => {
-							I.current = e, l(O, e);
+							R.current = e, u(k, e);
 						},
 						className: "multi-select__combobox",
-						tabIndex: m ? -1 : 0,
+						tabIndex: h ? -1 : 0,
 						role: "combobox",
-						"aria-expanded": k,
+						"aria-expanded": j,
 						"aria-haspopup": "listbox",
-						"aria-controls": k ? L : void 0,
-						"aria-activedescendant": k && N >= 0 ? H(N) : void 0,
-						"aria-label": w ? void 0 : C ?? p,
-						"aria-labelledby": w,
-						"aria-describedby": T,
-						"aria-invalid": b || void 0,
-						"aria-disabled": m || void 0,
-						"aria-readonly": h || void 0,
-						id: v,
-						onKeyDown: J,
-						onBlur: x,
-						children: V.length === 0 && /* @__PURE__ */ o("span", {
+						"aria-controls": j ? z : void 0,
+						"aria-activedescendant": j && F >= 0 ? W(F) : void 0,
+						"aria-label": T ? void 0 : w ?? A("placeholder", m),
+						"aria-labelledby": T,
+						"aria-describedby": E,
+						"aria-invalid": x || void 0,
+						"aria-disabled": h || void 0,
+						"aria-readonly": g || void 0,
+						id: y,
+						onKeyDown: X,
+						onBlur: S,
+						children: U.length === 0 && /* @__PURE__ */ s("span", {
 							className: "multi-select__placeholder",
-							children: p
+							children: A("placeholder", m)
 						})
 					})]
 				}),
-				/* @__PURE__ */ o(e, {
+				/* @__PURE__ */ s(t, {
 					name: "chevron",
 					className: "multi-select__icon",
-					size: g === "sm" ? "xs" : g === "lg" ? "md" : "sm"
+					size: _ === "sm" ? "xs" : _ === "lg" ? "md" : "sm"
 				}),
-				y && V.map((e) => /* @__PURE__ */ o("input", {
+				b && U.map((e) => /* @__PURE__ */ s("input", {
 					type: "hidden",
-					name: y,
+					name: b,
 					value: e
 				}, e))
 			]
-		}), /* @__PURE__ */ o(c.Portal, {
-			container: D,
-			children: /* @__PURE__ */ o(c.Positioner, {
+		}), /* @__PURE__ */ s(l.Portal, {
+			container: O,
+			children: /* @__PURE__ */ s(l.Positioner, {
 				className: "multi-select__positioner",
-				anchor: F,
+				anchor: L,
 				align: "start",
 				sideOffset: -1,
-				children: /* @__PURE__ */ o(c.Popup, {
-					className: Z,
+				children: /* @__PURE__ */ s(l.Popup, {
+					className: $,
 					initialFocus: !1,
 					finalFocus: !1,
-					children: /* @__PURE__ */ o("div", {
+					children: /* @__PURE__ */ s("div", {
 						role: "listbox",
 						"aria-multiselectable": "true",
-						"aria-label": C ?? p,
-						id: L,
-						children: t.map((e, t) => {
-							let n = V.includes(e.value), r = N === t;
-							return /* @__PURE__ */ s("div", {
-								id: H(t),
+						"aria-label": w ?? m,
+						id: z,
+						children: n.map((e, t) => {
+							let n = U.includes(e.value), r = F === t;
+							return /* @__PURE__ */ c("div", {
+								id: W(t),
 								role: "option",
 								"aria-selected": n,
 								"aria-label": e["aria-label"] ?? e.label,
@@ -173,13 +174,13 @@ var u = 500, d = t(function({ options: t, value: d, defaultValue: f = [], placeh
 									e.preventDefault(), e.stopPropagation();
 								},
 								onClick: () => {
-									U(e.value), P(t), I.current?.focus();
+									G(e.value), I(t), R.current?.focus();
 								},
-								children: [/* @__PURE__ */ o("span", {
+								children: [/* @__PURE__ */ s("span", {
 									className: "multi-select__item-check",
 									"aria-hidden": "true",
-									children: /* @__PURE__ */ o("span", { className: "multi-select__item-check-mark" })
-								}), /* @__PURE__ */ o("span", { children: e.label })]
+									children: /* @__PURE__ */ s("span", { className: "multi-select__item-check-mark" })
+								}), /* @__PURE__ */ s("span", { children: e.label })]
 							}, e.value);
 						})
 					})
@@ -189,4 +190,4 @@ var u = 500, d = t(function({ options: t, value: d, defaultValue: f = [], placeh
 	});
 });
 //#endregion
-export { d as MultiSelect };
+export { f as MultiSelect };

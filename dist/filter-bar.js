@@ -1,31 +1,33 @@
+'use client';
 import './filter-bar.css';
-import { Children as e } from "react";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Children as t } from "react";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/molecules/FilterBar/FilterBar.tsx
-function r({ search: r, children: i, actions: a, ariaLabel: o = "Filtros", className: s, ...c }) {
-	let l = e.toArray(i);
-	return /* @__PURE__ */ n("div", {
-		className: ["filter-bar", s].filter(Boolean).join(" "),
+function i({ search: i, children: a, actions: o, ariaLabel: s, className: c, ...l }) {
+	let u = e("filterBar"), d = t.toArray(a);
+	return /* @__PURE__ */ r("div", {
+		className: ["filter-bar", c].filter(Boolean).join(" "),
 		role: "search",
-		"aria-label": o,
-		...c,
-		children: [r && /* @__PURE__ */ t("div", {
+		"aria-label": u("label", s),
+		...l,
+		children: [i && /* @__PURE__ */ n("div", {
 			className: "filter-bar__search",
-			children: r
-		}), (l.length > 0 || a) && /* @__PURE__ */ n("div", {
+			children: i
+		}), (d.length > 0 || o) && /* @__PURE__ */ r("div", {
 			className: "filter-bar__row",
-			children: [l.length > 0 && /* @__PURE__ */ t("div", {
+			children: [d.length > 0 && /* @__PURE__ */ n("div", {
 				className: "filter-bar__filters",
-				children: l.map((e, n) => /* @__PURE__ */ t("div", {
+				children: d.map((e, t) => /* @__PURE__ */ n("div", {
 					className: "filter-bar__filter",
 					children: e
-				}, n))
-			}), a && /* @__PURE__ */ t("div", {
+				}, t))
+			}), o && /* @__PURE__ */ n("div", {
 				className: "filter-bar__actions",
-				children: a
+				children: o
 			})]
 		})]
 	});
 }
 //#endregion
-export { r as FilterBar };
+export { i as FilterBar };
