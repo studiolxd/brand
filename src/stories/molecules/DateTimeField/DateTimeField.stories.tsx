@@ -5,6 +5,8 @@ import { useForm, type ResolverResult } from 'react-hook-form';
 import { Button } from '../../atoms/Button/Button';
 import { FormProvider, FormField } from '../FormField/FormField';
 import { DateTimeField } from './DateTimeField';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof DateTimeField> = {
   title: 'Molecules/DateTimeField',
@@ -184,5 +186,47 @@ export const ConReactHookForm: Story = {
     await expect(grupo.querySelector('.date-picker__input')).toHaveAttribute('aria-invalid', 'true');
     await expect(canvas.getByRole('combobox', { name: 'Horas' })).toHaveAttribute('aria-invalid', 'true');
     await expect(canvas.getByRole('combobox', { name: 'Minutos' })).toHaveAttribute('aria-invalid', 'true');
+  },
+};
+
+/**
+ * El campo que junta las dos familias: la fecha lee de `datePicker` y de
+ * `calendar`, la hora de `timeSelect`, y la etiqueta sigue siendo contenido de
+ * la pantalla. Ninguno de los once textos se enhebra desde aquí: el proveedor
+ * llega por contexto a cada pieza.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <div style={{ inlineSize: '28rem' }}>
+        <DateTimeField id="appointment" label="Appointment" locale="en-GB" />
+      </div>
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: cada texto sale del espacio de la pieza que lo pinta. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el cromo lee del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <DateTimeField id="appointment" label="Appointment" locale="en-GB" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvas, canvasElement }) => {
+    await expect(canvas.getByRole('combobox', { name: 'Hours' })).toBeInTheDocument();
+    // `getByLabelText` aquí encontraría dos: el campo de texto y el grupo, que
+    // comparten la etiqueta del campo. El que lleva la máscara es el campo.
+    await expect(canvas.getByRole('textbox', { name: 'Appointment' })).toHaveAttribute(
+      'placeholder',
+      'dd/mm/yyyy',
+    );
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Open calendar' }));
+    const body = within(canvasElement.ownerDocument.body);
+    await expect(body.getByRole('dialog', { name: 'Appointment' })).toBeInTheDocument();
+    await expect(body.getByLabelText('Previous month')).toBeInTheDocument();
   },
 };

@@ -36,9 +36,16 @@ export interface TimeFieldProps {
   helperText?: string;
   /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
   className?: string;
-  /** aria-label del desplegable de horas. Default: "Horas" (castellano). */
+  /**
+   * aria-label del desplegable de horas. **Sin default**: sin él, el texto
+   * sale de `timeSelect.hours` del `BrandMessagesProvider`, que el
+   * `TimeSelect` de dentro lee por contexto.
+   */
   hoursLabel?: string;
-  /** aria-label del desplegable de minutos. Default: "Minutos" (castellano). */
+  /**
+   * aria-label del desplegable de minutos. **Sin default**: sin él, sale de
+   * `timeSelect.minutes` del `BrandMessagesProvider`.
+   */
   minutesLabel?: string;
   onChange?: (value: TimeValue) => void;
   onBlur?: React.FocusEventHandler<HTMLButtonElement>;

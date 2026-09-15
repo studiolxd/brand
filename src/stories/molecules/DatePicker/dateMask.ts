@@ -13,14 +13,20 @@
 
 export type DatePartName = 'day' | 'month' | 'year';
 
-/** Letras de la máscara del marcador de posición: `dd/mm/aaaa` en castellano. */
+/**
+ * Letras de la máscara del marcador de posición, una por parte.
+ *
+ * **No hay juego por defecto, y es deliberado**: las letras se traducen
+ * (`aaaa` es «año», `yyyy` es *year*, `jjjj` es *Jahr*), así que salen del
+ * catálogo de la aplicación —`datePicker.maskLetters`— igual que cualquier
+ * otro rótulo. Lo que este módulo decide es el **orden** y el **separador**,
+ * que son formato y salen del `locale`.
+ */
 export interface DateMaskLetters {
   day: string;
   month: string;
   year: string;
 }
-
-export const SPANISH_MASK_LETTERS: DateMaskLetters = { day: 'dd', month: 'mm', year: 'aaaa' };
 
 export interface DateMask {
   /** Orden de las partes en ese locale, p. ej. `['day', 'month', 'year']`. */

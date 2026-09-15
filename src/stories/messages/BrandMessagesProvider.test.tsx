@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { BrandMessagesProvider } from './BrandMessagesProvider';
 import type { BrandMessages } from './BrandMessages';
 import { brandMessagesFixtureEn as EN } from '../../../.storybook/brandMessagesFixtureEn';
@@ -18,6 +19,11 @@ import { AsyncMultiSelect } from '../atoms/AsyncMultiSelect/AsyncMultiSelect';
 import { SearchForm } from '../molecules/SearchForm/SearchForm';
 import { DocsSearch } from '../molecules/DocsSearch/DocsSearch';
 import { FilterBar } from '../molecules/FilterBar/FilterBar';
+import { Calendar } from '../molecules/Calendar/Calendar';
+import { DatePicker } from '../molecules/DatePicker/DatePicker';
+import { DatePickerField } from '../molecules/DatePickerField/DatePickerField';
+import { DateTimeField } from '../molecules/DateTimeField/DateTimeField';
+import { TimeField } from '../molecules/TimeField/TimeField';
 
 /**
  * El orden de resolución de un texto: **prop → proveedor → error**. Sin cuarto
@@ -474,5 +480,196 @@ describe('los buscadores y la barra de filtros leen del proveedor', () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
 
     expect(() => render(<FilterBar search={<span />} />)).toThrow(/filterBar\.label/);
+  });
+});
+
+describe('la fecha y la hora leen del proveedor', () => {
+  it('las dos flechas del calendario y la rejilla de años salen del catálogo', async () => {
+    const user = userEvent.setup();
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <Calendar defaultMonth={new Date(2026, 8, 1)} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByLabelText('Previous month')).toBeInTheDocument();
+    expect(screen.getByLabelText('Next month')).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: /2026/ }));
+    expect(screen.getByRole('grid', { name: 'Choose year' })).toBeInTheDocument();
+    expect(screen.getByLabelText('Previous years')).toBeInTheDocument();
+  });
+
+  it('un calendario estático no exige los textos de unas flechas que no pinta', () => {
+    const sinLosSuyos = { ...EN, calendar: {} } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinLosSuyos}>
+          <Calendar navigable={false} />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  it('sin proveedor y sin prop, el calendario revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<Calendar />)).toThrow(/calendar\.previousMonth/);
+  });
+
+  it('el `gridLabel` NO sale del catálogo: nombra a ESTE calendario', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <Calendar gridLabel="Fecha de alta" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('grid', { name: 'Fecha de alta' })).toBeInTheDocument();
+  });
+
+  it('el botón, el panel y el aviso del selector de fecha salen del catálogo', async () => {
+    const user = userEvent.setup();
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <DatePicker aria-label="Start date" />
+      </BrandMessagesProvider>,
+    );
+
+    const abrir = screen.getByRole('button', { name: 'Open calendar' });
+    await user.click(abrir);
+    expect(screen.getByRole('dialog', { name: 'Calendar' })).toBeInTheDocument();
+    await user.keyboard('{Escape}');
+
+    await user.type(screen.getByRole('textbox', { name: 'Start date' }), '25/09');
+    expect(screen.getByRole('alert')).toHaveTextContent('Enter a complete, valid date.');
+  });
+
+  it('un campo con fecha válida no exige el aviso de fecha incompleta', () => {
+    const sinAviso = { ...EN, datePicker: { ...EN.datePicker } } as BrandMessages;
+    delete (sinAviso.datePicker as Partial<BrandMessages['datePicker']>).invalid;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinAviso}>
+          <DatePicker aria-label="Start date" value={new Date(2026, 8, 25)} />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  /**
+   * La máscara tiene dos mitades y se deciden en sitios distintos: **las
+   * letras** salen del catálogo (son idioma: `aaaa`, `yyyy`, `jjjj`) y **el
+   * orden y el separador** salen del `locale` (son formato). Un catálogo en
+   * inglés sobre fechas españolas tiene que dar `dd/mm/yyyy`, no `mm/dd/yyyy`.
+   */
+  it('la máscara toma las letras del catálogo y el orden del locale', () => {
+    const { unmount } = render(
+      <BrandMessagesProvider messages={EN}>
+        <DatePicker aria-label="Start date" locale="es-ES" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('textbox', { name: 'Start date' })).toHaveAttribute(
+      'placeholder',
+      'dd/mm/yyyy',
+    );
+    unmount();
+
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <DatePicker aria-label="Start date" locale="de-DE" />
+      </BrandMessagesProvider>,
+    );
+
+    // Mismas letras del catálogo inglés, separador y orden alemanes.
+    expect(screen.getByRole('textbox', { name: 'Start date' })).toHaveAttribute(
+      'placeholder',
+      'dd.mm.yyyy',
+    );
+  });
+
+  it('un `placeholder` propio gana a la máscara: es contenido de este campo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <DatePicker aria-label="Start date" placeholder="Desde" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('textbox', { name: 'Start date' })).toHaveAttribute(
+      'placeholder',
+      'Desde',
+    );
+  });
+
+  it('el campo reenvía su etiqueta como nombre del panel, y el resto sale del catálogo', async () => {
+    const user = userEvent.setup();
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <DatePickerField label="Joined on" />
+      </BrandMessagesProvider>,
+    );
+
+    await user.click(screen.getByRole('button', { name: 'Open calendar' }));
+    expect(screen.getByRole('dialog', { name: 'Joined on' })).toBeInTheDocument();
+    expect(screen.getByLabelText('Previous month')).toBeInTheDocument();
+  });
+
+  it('los dos desplegables de la hora toman su nombre y su máscara del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <TimeField label="Starts at" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('combobox', { name: 'Hours' })).toBeInTheDocument();
+    expect(screen.getByRole('combobox', { name: 'Minutes' })).toBeInTheDocument();
+    expect(screen.getByText('HH')).toBeInTheDocument();
+    expect(screen.getByText('MM')).toBeInTheDocument();
+  });
+
+  it('con hora elegida no se exigen las máscaras: no se pintan', () => {
+    const sinMascaras = { ...EN, timeSelect: { ...EN.timeSelect } } as BrandMessages;
+    delete (sinMascaras.timeSelect as Partial<BrandMessages['timeSelect']>).maskHours;
+    delete (sinMascaras.timeSelect as Partial<BrandMessages['timeSelect']>).maskMinutes;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinMascaras}>
+          <TimeField label="Starts at" value={{ h: 9, m: 30 }} />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  it('sin proveedor y sin prop, la hora revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<TimeField label="Starts at" />)).toThrow(/timeSelect\./);
+  });
+
+  it('fecha y hora en un campo: cada texto sale del espacio de quien lo pinta', async () => {
+    const user = userEvent.setup();
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <DateTimeField label="Starts at" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('combobox', { name: 'Hours' })).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Open calendar' }));
+    expect(screen.getByLabelText('Next month')).toBeInTheDocument();
+  });
+
+  it('el `label` y el `errorMessage` del campo NO salen del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <TimeField label="Hora de la cita" errorMessage="Elige una hora posterior" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('group', { name: 'Hora de la cita' })).toBeInTheDocument();
+    expect(screen.getByText('Elige una hora posterior')).toBeInTheDocument();
   });
 });

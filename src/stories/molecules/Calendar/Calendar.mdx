@@ -127,6 +127,55 @@ los extremos de la docena, <kbd>RePág</kbd>/<kbd>AvPág</kbd> la docena entera 
   texto—: lo que las señala es el anillo de foco. El relleno se reserva para el
   día **elegido**, que es un valor y no un estado.
 
+## Internacionalización
+
+El calendario emite por su cuenta cinco textos, todos cromo: las dos flechas —que cambian de
+nombre cuando el título abre la vista de años— y el rótulo de esa rejilla. **No tienen valor
+por defecto**; salen del `BrandMessagesProvider` que la aplicación monta en su raíz.
+
+```tsx
+import { BrandMessagesProvider } from "@studiolxd/brand/messages";
+
+<BrandMessagesProvider
+  messages={{
+    calendar: {
+      previousMonth: t("calendar.previousMonth"),
+      nextMonth: t("calendar.nextMonth"),
+      previousYears: t("calendar.previousYears"),
+      nextYears: t("calendar.nextYears"),
+      yearGrid: t("calendar.yearGrid"),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={CalendarStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `previousMonthLabel` | `calendar.previousMonth` | flecha izquierda sobre la rejilla de días |
+| `nextMonthLabel` | `calendar.nextMonth` | flecha derecha sobre la rejilla de días |
+| `previousYearsLabel` | `calendar.previousYears` | flecha izquierda en la vista de años |
+| `nextYearsLabel` | `calendar.nextYears` | flecha derecha en la vista de años |
+| `yearGridLabel` | `calendar.yearGrid` | nombre de la rejilla de años |
+
+El orden es **prop → proveedor → error**. El texto se lee **donde se pinta**: un calendario
+`navigable={false}` no tiene flechas y no exige sus dos textos.
+
+**Lo que no está en el catálogo, y no es olvido.** Los nombres de los meses y de los días, las
+cifras del año y el nombre accesible de cada celda («lunes, 15 de enero de 2025») no son texto
+de interfaz sino **formato de fecha**: salen de `locale` con `Intl`, que además es quien sabe
+en qué día empieza la semana. Son dos ejes independientes —un catálogo en inglés con
+`locale="es-ES"` da flechas inglesas y meses españoles, que es exactamente lo que quiere una
+app inglesa enseñando fechas españolas—, y la story de arriba los enseña cruzados.
+
+`gridLabel` tampoco: nombra a ESTE calendario («Fecha de alta»), que es contenido de la
+pantalla. Sin él, la rejilla toma como nombre el título del mes visible.
+
+La convención completa está en **Foundations › Internacionalización**.
+
 ## Props
 
 <ArgTypes of={CalendarStories} />

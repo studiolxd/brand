@@ -19,4 +19,7 @@ export type {
   DocsSearchMessages,
   SearchFormMessages,
   FilterBarMessages,
+  CalendarMessages,
+  DatePickerMessages,
+  TimeSelectMessages,
 } from './BrandMessages';

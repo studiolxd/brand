@@ -5,6 +5,8 @@ import { useForm, type ResolverResult } from 'react-hook-form';
 import { Button } from '../../atoms/Button/Button';
 import { FormProvider, FormField } from '../FormField/FormField';
 import { DatePickerField } from './DatePickerField';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof DatePickerField> = {
   title: 'Molecules/DatePickerField',
@@ -174,5 +176,47 @@ export const ConReactHookForm: Story = {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole('button', { name: 'Guardar' }));
     await expect(await canvas.findByRole('alert')).toHaveTextContent('Elige una fecha de inicio.');
+  },
+};
+
+/**
+ * El campo pone el **contenido** —la etiqueta, la ayuda, el error— y el
+ * `BrandMessagesProvider` pone el **cromo**: el botón del calendario, las
+ * flechas del mes y las letras de la máscara. La etiqueta del campo viaja
+ * además como nombre del panel, que es lo que hace que el diálogo se llame
+ * «Joined on» y no «Calendar».
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <div style={{ inlineSize: '20rem' }}>
+        <DatePickerField
+          id="joined"
+          label="Joined on"
+          locale="en-GB"
+          helperText="The day the account was created."
+        />
+      </div>
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el cromo sale del catálogo y la etiqueta del campo nombra el panel. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el cromo lee del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <DatePickerField id="joined" label="Joined on" locale="en-GB" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvas, canvasElement }) => {
+    await expect(canvas.getByLabelText('Joined on')).toHaveAttribute('placeholder', 'dd/mm/yyyy');
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Open calendar' }));
+    const body = within(canvasElement.ownerDocument.body);
+    await expect(body.getByRole('dialog', { name: 'Joined on' })).toBeInTheDocument();
+    await expect(body.getByLabelText('Next month')).toBeInTheDocument();
   },
 };

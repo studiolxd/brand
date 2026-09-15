@@ -72,9 +72,29 @@ El contrato es `value` / `onChange` + `name` + `ref` al desplegable de horas. `o
 
 ## Accesibilidad
 
-- La etiqueta nombra el grupo; cada desplegable tiene su propia etiqueta, traducible con `hoursLabel` y `minutesLabel`.
+- La etiqueta nombra el grupo; cada desplegable tiene su propia etiqueta, del catálogo (ver § «Internacionalización»).
 - Ayuda y error llegan al grupo por `aria-describedby`; el error marca `aria-invalid`.
 - El mensaje de error se anuncia (`role="alert"`).
+
+## Internacionalización
+
+El campo pone el **contenido** —`label`, `helperText`, `errorMessage`— y el
+`BrandMessagesProvider` pone el **cromo** de los dos desplegables: sus nombres accesibles y
+sus máscaras. No hay que enhebrar nada desde aquí; el `TimeSelect` de dentro lee su espacio
+`timeSelect` por contexto.
+
+<Canvas of={TimeFieldStories.TextosDelProveedor} />
+
+| Qué | De dónde sale |
+| --- | --- |
+| `label`, `helperText`, `errorMessage` | prop, siempre: son de esta pantalla |
+| «Horas» y «Minutos» | `timeSelect.hours` / `timeSelect.minutes` |
+| las máscaras `HH` y `MM` | `timeSelect.maskHours` / `timeSelect.maskMinutes` |
+
+`hoursLabel` y `minutesLabel` se siguen reexponiendo como anulación puntual de ese uso. Las
+máscaras están en el catálogo porque las letras se traducen (`SS`/`MM` en alemán); lo que no
+cambia es el dibujo. El porqué, en la doc de `TimeSelect`; la convención, en **Foundations ›
+Internacionalización**.
 
 ## Tokens
 

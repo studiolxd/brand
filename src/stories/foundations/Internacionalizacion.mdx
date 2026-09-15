@@ -55,7 +55,7 @@ import { BrandMessagesProvider } from '@studiolxd/brand/messages';
 El catálogo va creciendo ola a ola: además de `pagination`, `table` y `dataTable`, hoy están los
 espacios de los átomos de formulario —`inputField`, `passwordField`, `select`, `multiSelect`,
 `numberInput`, `otpInput`, `inputPhone`, `asyncSelect`, `asyncMultiSelect`, `searchForm`,
-`docsSearch` y `filterBar`—. No hace falta memorizarlos: el tipo `BrandMessages` los lleva todos y
+`docsSearch` y `filterBar`— y los de fecha y hora —`calendar`, `datePicker` y `timeSelect`—. No hace falta memorizarlos: el tipo `BrandMessages` los lleva todos y
 **una app que se deje uno no compila**. La tabla de más abajo dice qué prop cae en qué clave.
 
 A partir de ahí, un componente migrado se monta **sin una sola prop de texto**:
@@ -151,14 +151,34 @@ esos componentes cubren solo lo que `Intl` no da — los `aria-label` de navegac
 <Calendar locale="de-DE" previousMonthLabel="Vorheriger Monat" nextMonthLabel="Nächster Monat" />
 ```
 
-Lo mismo vale para el **orden de la fecha escrita** en `DatePicker`: `25/09/2026` en `es`,
-`09/25/2026` en `en-US` y `25.09.2026` en `de` salen de `Intl.DateTimeFormat().formatToParts()`,
-no de una tabla por idioma. Lo único traducible son las letras de la máscara que se ve como
-pista, `maskLetters`:
+```tsx
+<Calendar locale="de-DE" />   {/* las flechas salen de `calendar.*` del proveedor */}
+```
+
+### Una máscara tiene dos mitades, y no se deciden en el mismo sitio
+
+`dd/mm/aaaa` parece una sola cosa. No lo es, y la campaña del proveedor obliga a separarlas:
+
+- **El orden y el separador son formato.** `25/09/2026` en `es`, `09/25/2026` en `en-US` y
+  `25.09.2026` en `de` salen de `Intl.DateTimeFormat().formatToParts()`. No son prop, no están
+  en el catálogo y no se cablean por idioma: dependen del `locale`, que es de qué convención de
+  escritura se habla, no de en qué idioma está la interfaz. Una app inglesa que enseña fechas
+  españolas las quiere en orden español.
+- **Las letras son idioma.** `aaaa` es «año», `yyyy` es *year*, `jjjj` es *Jahr*; `HH`/`MM` son
+  hora y minuto, y en alemán `SS`/`MM`. Son la abreviatura de una palabra, así que se traducen:
+  **son cromo y van al catálogo**, como cualquier otro rótulo.
+
+Por eso el catálogo guarda las **letras sueltas** y nunca la máscara montada — la máscara la
+arma el componente poniendo las letras en el orden del locale:
 
 ```tsx
-<DatePicker locale="en-US" maskLetters={{ day: 'dd', month: 'mm', year: 'yyyy' }} />
+// mismo catálogo, dos locales: las letras no se mueven, el orden sí
+<DatePicker locale="es-ES" />   {/* dd/mm/yyyy */}
+<DatePicker locale="en-US" />   {/* mm/dd/yyyy */}
 ```
+
+La regla, en una frase: **si cambia al cambiar de idioma, es cromo y va al catálogo; si cambia
+al cambiar de país, es formato y va por `locale`.**
 
 ## Componentes con props de texto
 
@@ -172,11 +192,11 @@ pista, `maskLetters`:
 | `ImageCropDialog` | `closeLabel`, `loadingLabel`, `errorMessage` — `title`, `cancelLabel` y `confirmLabel` son obligatorias y sin default: el diálogo no sabe qué se está recortando |
 | `NumberInput`, `NumberInputField` | **Migrado al proveedor** (`numberInput.decrement`, `numberInput.increment`, sin defaults). Las props siguen como anulación puntual |
 | `OtpInput`, `OtpField` | **Migrado al proveedor** (`otpInput.digit`, `otpInput.group`, sin defaults). `digitLabel` nombra cada celda y `groupLabel` el grupo del control suelto (dentro de `OtpField` lo nombra la etiqueta del campo y `otpInput.group` no se lee); las dos siguen como anulación puntual |
-| `TimeSelect` | `hoursLabel`, `minutesLabel`, `hoursPlaceholder`, `minutesPlaceholder` |
+| `TimeSelect`, `TimeField` | **Migrado al proveedor** (`timeSelect.hours`, `.minutes`, `.maskHours`, `.maskMinutes`, sin defaults). Las cuatro props (`hoursLabel`, `minutesLabel`, `hoursPlaceholder`, `minutesPlaceholder`) siguen como anulación puntual; `TimeField` reenvía las dos primeras. Las **máscaras** están en el catálogo porque `HH`/`MM` se traducen (`SS`/`MM` en alemán); el dibujo —dos cifras y los dos puntos— no. `label`, `helperText` y `errorMessage` de `TimeField` quedan fuera: son el contenido de ese campo |
 | `InputPhone`, `InputPhoneField` | **Migrado al proveedor** (`inputPhone.country`, sin default); `countryLabel` sigue como anulación puntual. `internationalLabel` **conserva su default** (`🌐`): un glifo no se traduce, y meterlo en el catálogo obligaría a repetirlo seis veces |
-| `Calendar` | `previousMonthLabel`, `nextMonthLabel`, `previousYearsLabel`, `nextYearsLabel`, `yearGridLabel`, `gridLabel` — más `locale` |
-| `CalendarPlanner` | `previousMonthLabel`, `nextMonthLabel`, `gridLabel`, `moreLabel` — más `locale` |
-| `CalendarRoster` | `previousMonthLabel`, `nextMonthLabel`, `legendLabel`, `legendItems`, `nameLabel`, `birthdayPrefix` — más `locale` |
+| `Calendar` | **Migrado al proveedor** (`calendar.previousMonth`, `.nextMonth`, `.previousYears`, `.nextYears`, `.yearGrid`, sin defaults). Las cinco props siguen como anulación puntual. `gridLabel` queda **fuera** del proveedor: nombra a ESE calendario, y sin él la rejilla toma el título del mes. Meses, días, cifras del año y el nombre de cada celda salen de `locale` con `Intl`: no son texto |
+| `CalendarPlanner` | `previousMonthLabel`, `nextMonthLabel`, `gridLabel`, `moreLabel` — más `locale`. **Sin migrar**: comparte el cromo de `Calendar` (las dos flechas son el mismo texto) y es candidato claro a leer de `calendar.*` en una ola posterior |
+| `CalendarRoster` | `previousMonthLabel`, `nextMonthLabel`, `legendLabel`, `legendItems`, `nameLabel`, `birthdayPrefix` — más `locale`. **Sin migrar**, igual que `CalendarPlanner` |
 | `Table` (`TableHeader`) | **Migrado al proveedor** (`table.*`, sin defaults). Las props `actionsLabel`, `sortedAscLabel`, `sortedDescLabel` y `sortableLabel` siguen existiendo como anulación puntual |
 | `Table` (`TableProps`) | `caption` — el nombre de ESTA tabla, sin default y **fuera del proveedor**: no lo puede saber un catálogo común |
 | `Table` (`TableRow`) | `label` — el nombre accesible de la fila, sin default: solo lo escribe el consumidor |
@@ -201,7 +221,7 @@ pista, `maskLetters`:
 | `Modal` | `fallbackTitle`, `closeLabel` |
 | `Select`, `SelectField` | **Migrado al proveedor** (`select.placeholder`, sin default). La prop `placeholder` sigue como anulación puntual y es la que se usa cuando el marcador dice algo de ESE campo. Las `options` son datos y no pasan por el catálogo |
 | `MultiSelect`, `MultiSelectField` | **Migrado al proveedor** (`multiSelect.placeholder`, `multiSelect.remove`, sin defaults). `placeholder` y `removeLabel` siguen como anulación puntual |
-| `DatePicker`, `DatePickerField`, `DateTimeField` | `calendarLabel`, `openCalendarLabel`, `invalidMessage` y `maskLetters` — las letras de la máscara del campo (`dd/mm/aaaa`); el **orden** de día, mes y año no es prop: sale de `locale` con `Intl`. `placeholder` sustituye la máscara entera. Los del calendario que abre se reexponen sueltos, con los nombres de `Calendar`: `previousMonthLabel`, `nextMonthLabel`, `previousYearsLabel`, `nextYearsLabel`, `yearGridLabel` y `gridLabel` (este último cae a `calendarLabel`). `DateTimeField` añade `hoursLabel` y `minutesLabel` para su selector de hora |
+| `DatePicker`, `DatePickerField`, `DateTimeField` | **Migrado al proveedor** (`datePicker.openCalendar`, `.invalid`, `.calendar`, `.maskLetters`, sin defaults). Las props siguen como anulación puntual, y `placeholder` sustituye la máscara entera cuando el marcador dice algo de ESE campo. `maskLetters` guarda solo las **letras**: el orden y el separador salen de `locale` (ver § «Una máscara tiene dos mitades»). Los cinco del calendario se siguen reexponiendo con los nombres de `Calendar`, pero **ya no hay que pasarlos para traducir**: el `Calendar` de dentro lee `calendar.*` por contexto; `gridLabel` cae al nombre del panel, y ese cae a la etiqueta del campo. `DateTimeField` añade `hoursLabel` y `minutesLabel`, también reenvíos puros a `timeSelect.*`. `label`, `helperText` y `errorMessage` de los campos quedan fuera: son su contenido |
 | `Spinner`, `TypingIndicator` | `label` |
 | `NotificationButton` | `label` sin contador y `countLabel` con él — la frase se rehace con el número dentro |
 | `NotificationPanel` | los dos de `NotificationButton` (`label`, `countLabel`) más `panelLabel`, `unreadLabel`, `emptyLabel`, `allLabel`, `preferencesLabel` y `markAllReadLabel`. La fecha de cada notificación **no** es prop de texto: llega ya formateada en `items[].time` |

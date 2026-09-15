@@ -5,6 +5,8 @@ import { useForm, type ResolverResult } from 'react-hook-form';
 import { Button } from '../../atoms/Button/Button';
 import { FormProvider, FormField } from '../FormField/FormField';
 import { TimeField } from './TimeField';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 import type { TimeValue } from '../../atoms/TimeSelect/TimeSelect';
 
 const meta: Meta<typeof TimeField> = {
@@ -164,5 +166,35 @@ export const ConReactHookForm: Story = {
     await userEvent.click(canvas.getByRole('button', { name: 'Guardar' }));
     await expect(await canvas.findByRole('alert')).toHaveTextContent('Elige una hora.');
     await expect(canvas.getByRole('group', { name: 'Hora de inicio' })).toHaveAttribute('aria-invalid', 'true');
+  },
+};
+
+/**
+ * La etiqueta, la ayuda y el error son de esta pantalla; los nombres de los
+ * dos desplegables y sus máscaras salen del `BrandMessagesProvider`.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <TimeField id="starts" label="Starts at" helperText="Local time." />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: los dos rótulos y las dos máscaras salen del catálogo montado. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el cromo lee del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <TimeField id="starts" label="Starts at" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('combobox', { name: 'Hours' })).toBeInTheDocument();
+    await expect(canvas.getByRole('combobox', { name: 'Minutes' })).toBeInTheDocument();
+    await expect(canvas.getByText('HH')).toBeInTheDocument();
+    await expect(canvas.queryByRole('combobox', { name: 'Horas' })).toBeNull();
   },
 };

@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { getDateMask, SPANISH_MASK_LETTERS } from './dateMask';
+import { getDateMask } from './dateMask';
+
+/** Las letras castellanas, escritas aquí porque el módulo ya no las trae. */
+const LETRAS_ES = { day: 'dd', month: 'mm', year: 'aaaa' };
 
 describe('dateMask — el orden lo pone el locale, no una tabla a mano', () => {
   it('escribe la fecha corta en el orden de cada locale', () => {
@@ -11,8 +14,8 @@ describe('dateMask — el orden lo pone el locale, no una tabla a mano', () => {
   });
 
   it('enseña la máscara con las letras que le den', () => {
-    expect(getDateMask('es-ES').mask(SPANISH_MASK_LETTERS)).toBe('dd/mm/aaaa');
-    expect(getDateMask('en-US').mask(SPANISH_MASK_LETTERS)).toBe('mm/dd/aaaa');
+    expect(getDateMask('es-ES').mask(LETRAS_ES)).toBe('dd/mm/aaaa');
+    expect(getDateMask('en-US').mask(LETRAS_ES)).toBe('mm/dd/aaaa');
     expect(getDateMask('en-US').mask({ day: 'dd', month: 'mm', year: 'yyyy' })).toBe('mm/dd/yyyy');
   });
 

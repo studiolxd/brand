@@ -2,13 +2,25 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Calendar } from './Calendar';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixture as ES } from '../../../../.storybook/brandMessagesFixture';
+
+/**
+ * El calendario ya no trae su castellano puesto: las flechas y la rejilla de
+ * años salen del catálogo. Estos tests son la aplicación que lo monta, así que
+ * montan el proveedor con el fixture castellano — el mismo que usa el
+ * Storybook— y siguen afirmando sobre los textos de siempre.
+ */
+function conCatalogo(ui: React.ReactElement) {
+  return <BrandMessagesProvider messages={ES}>{ui}</BrandMessagesProvider>;
+}
 
 /** Enero de 2025 empieza en miércoles; los lunes son 6, 13, 20 y 27. */
 const ENERO_2025 = new Date(2025, 0, 1);
 
 function renderCalendar(props: Partial<React.ComponentProps<typeof Calendar>> = {}) {
   return render(
-    <Calendar defaultMonth={ENERO_2025} value={new Date(2025, 0, 15)} {...props} />
+    conCatalogo(<Calendar defaultMonth={ENERO_2025} value={new Date(2025, 0, 15)} {...props} />)
   );
 }
 
@@ -47,7 +59,7 @@ describe('Calendar — rejilla accesible', () => {
 
   it('marca hoy con aria-current y la selección con aria-selected', () => {
     const hoy = new Date();
-    render(<Calendar value={hoy} />);
+    render(conCatalogo(<Calendar value={hoy} />));
     const grid = screen.getByRole('grid');
     const seleccionada = within(grid)
       .getAllByRole('gridcell')
@@ -111,7 +123,7 @@ describe('Calendar — rejilla accesible', () => {
 
   it('cruza el borde del mes con las flechas y arrastra el mes visible', async () => {
     const user = userEvent.setup();
-    render(<Calendar defaultMonth={ENERO_2025} value={new Date(2025, 0, 31)} />);
+    render(conCatalogo(<Calendar defaultMonth={ENERO_2025} value={new Date(2025, 0, 31)} />));
     celdaActiva().focus();
 
     await user.keyboard('{ArrowRight}');
@@ -137,12 +149,14 @@ describe('Calendar — rejilla accesible', () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
     render(
-      <Calendar
-        defaultMonth={ENERO_2025}
-        value={new Date(2025, 0, 15)}
-        disabledDates={[new Date(2025, 0, 16)]}
-        onChange={onChange}
-      />
+      conCatalogo(
+        <Calendar
+          defaultMonth={ENERO_2025}
+          value={new Date(2025, 0, 15)}
+          disabledDates={[new Date(2025, 0, 16)]}
+          onChange={onChange}
+        />
+      )
     );
 
     const dia16 = within(screen.getByRole('grid'))
