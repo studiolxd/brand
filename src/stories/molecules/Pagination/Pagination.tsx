@@ -2,15 +2,35 @@ import type { ComponentType, ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Select } from '../../atoms/Select/Select';
 import type { SelectOption } from '../../atoms/Select/Select';
+import { useBrandMessages } from '../../../messages/BrandMessagesContext';
 import './Pagination.css';
 
-const DEFAULT_PAGE_SIZE_OPTIONS: SelectOption[] = [
-  { label: '10', value: '10' },
-  { label: '20', value: '20' },
-  { label: '50', value: '50' },
-  { label: '100', value: '100' },
-  { label: 'Todos', value: 'all' },
-];
+/**
+ * Los textos que el paginador emite por su cuenta. Los nombres calcan el
+ * espacio `pagination` del catálogo de la suite, así que montarlo es mapear
+ * clave a clave y no traducir de nuevo.
+ *
+ * Todas obligatorias: es el proveedor quien garantiza que ninguna falte, y
+ * quien las pinta ya no tiene un castellano por defecto donde caer.
+ */
+export interface PaginationMessages {
+  /** `aria-label` del `<nav>`. */
+  label: string;
+  /** `aria-label` del `role="group"` que envuelve los controles de página. */
+  pagesGroup: string;
+  /** `aria-label` del control «anterior». */
+  previous: string;
+  /** `aria-label` del control «siguiente». */
+  next: string;
+  /** `aria-label` de cada botón/enlace de página, con su número. */
+  goToPage: (page: number) => string;
+  /** `aria-label` del selector de registros por página. */
+  perPage: string;
+  /** Sumario de `showTotal`, con el número de registros. */
+  total: (total: number) => string;
+  /** Rótulo de la opción «sin paginar» del selector de registros por página. */
+  allOption: string;
+}
 
 export interface PaginationProps {
   /**
@@ -47,7 +67,10 @@ export interface PaginationProps {
   hrefBuilder?: (page: number) => string;
   /** Si se pasa, aparece el selector de registros por página */
   onPageSizeChange?: (size: string) => void;
-  /** Opciones del selector. Default: 10, 20, 50, 100, Todos */
+  /**
+   * Opciones del selector. Sin ellas, 10/20/50/100 y la opción «sin paginar»,
+   * cuyo rótulo sale de `pagination.allOption` (las cifras no se traducen).
+   */
   pageSizeOptions?: SelectOption[];
   /**
    * Ranura a continuación del selector de registros por página, dentro del
@@ -67,39 +90,41 @@ export interface PaginationProps {
   linkComponent?: ComponentType<any>;
   /** Tamaño del componente. Default: "md" */
   size?: 'sm' | 'md' | 'lg';
-  /** aria-label del <nav>. Default: «Paginación» (castellano). Una app multiidioma debe pasarlo traducido. */
+  /**
+   * `aria-label` del `<nav>`. Sin default: cuando no se pasa, sale de
+   * `pagination.label` del `BrandMessagesProvider`.
+   */
   ariaLabel?: string;
-  /**
-   * aria-label de cada botón/enlace de página. Default: `Página ${page}` (castellano).
-   * Una app multiidioma debe pasarla traducida.
-   */
+  /** `aria-label` de cada botón/enlace de página. Sin default: `pagination.goToPage`. */
   pageLabel?: (page: number) => string;
-  /**
-   * aria-label del botón "anterior". Default: "Página anterior" (castellano).
-   * Una app multiidioma debe pasarla traducida.
-   */
+  /** `aria-label` del botón «anterior». Sin default: `pagination.previous`. */
   previousLabel?: string;
-  /**
-   * aria-label del botón "siguiente". Default: "Página siguiente" (castellano).
-   * Una app multiidioma debe pasarla traducida.
-   */
+  /** `aria-label` del botón «siguiente». Sin default: `pagination.next`. */
   nextLabel?: string;
   /**
-   * aria-label del `role="group"` que envuelve los controles de página.
-   * Default: "Páginas" (castellano). Una app multiidioma debe pasarla traducida.
+   * `aria-label` del `role="group"` que envuelve los controles de página.
+   * Sin default: `pagination.pagesGroup`.
    */
   pagesGroupLabel?: string;
-  /**
-   * aria-label del selector de registros por página.
-   * Default: "Registros por página" (castellano). Una app multiidioma debe pasarla traducida.
-   */
+  /** `aria-label` del selector de registros por página. Sin default: `pagination.perPage`. */
   pageSizeLabel?: string;
-  /**
-   * Texto del sumario que muestra `showTotal`. Default: `${total} resultados` (castellano).
-   * Una app multiidioma debe pasarla traducida.
-   */
+  /** Texto del sumario que muestra `showTotal`. Sin default: `pagination.total`. */
   totalLabel?: (total: number) => string;
   className?: string;
+}
+
+/**
+ * Las opciones del selector cuando el consumidor no pasa las suyas. Las cifras
+ * no son texto traducible; la opción «sin paginar» sí, y llega del catálogo.
+ */
+function defaultPageSizeOptions(allLabel: string): SelectOption[] {
+  return [
+    { label: '10', value: '10' },
+    { label: '20', value: '20' },
+    { label: '50', value: '50' },
+    { label: '100', value: '100' },
+    { label: allLabel, value: 'all' },
+  ];
 }
 
 function getPageWindow(page: number, totalPages: number): (number | '...')[] {
@@ -130,19 +155,22 @@ export function Pagination({
   hrefBuilder: hrefBuilderProp,
   linkComponent,
   onPageSizeChange,
-  pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS,
+  pageSizeOptions,
   afterPageSize,
   showTotal = false,
   size = 'md',
-  ariaLabel = 'Paginación',
-  pageLabel = (p) => `Página ${p}`,
-  previousLabel = 'Página anterior',
-  nextLabel = 'Página siguiente',
-  pagesGroupLabel = 'Páginas',
-  pageSizeLabel = 'Registros por página',
-  totalLabel = (t) => `${t} resultados`,
+  ariaLabel,
+  pageLabel,
+  previousLabel,
+  nextLabel,
+  pagesGroupLabel,
+  pageSizeLabel,
+  totalLabel,
   className,
 }: PaginationProps) {
+  // Cada texto se lee donde se pinta, nunca antes: un paginador sin selector
+  // de tamaño no exige el texto del selector.
+  const t = useBrandMessages('pagination');
   const hrefBuilder = hrefBuilderProp ?? (hrefs ? (p: number) => hrefs[p] : undefined);
   const A = linkComponent ?? 'a';
 
@@ -152,7 +180,7 @@ export function Pagination({
       const href = direction === 'prev' ? previousHref : nextHref;
       const handler = direction === 'prev' ? onPrevious : onNext;
       const disabled = !href && !handler;
-      const label = direction === 'prev' ? previousLabel : nextLabel;
+      const label = direction === 'prev' ? t('previous', previousLabel) : t('next', nextLabel);
       const icon = <Icon name="chevron" size={chevronSize} className={direction === 'prev' ? 'pagination__chevron--prev' : undefined} />;
       if (href) {
         return (
@@ -164,8 +192,8 @@ export function Pagination({
       );
     };
     return (
-      <nav className={['pagination', `pagination--${size}`, className].filter(Boolean).join(' ')} aria-label={ariaLabel}>
-        <div className="pagination__controls" role="group" aria-label={pagesGroupLabel}>
+      <nav className={['pagination', `pagination--${size}`, className].filter(Boolean).join(' ')} aria-label={t('label', ariaLabel)}>
+        <div className="pagination__controls" role="group" aria-label={t('pagesGroup', pagesGroupLabel)}>
           {nav('prev')}
           {nav('next')}
         </div>
@@ -203,7 +231,7 @@ export function Pagination({
           key={item}
           href={hrefBuilder(item)}
           className={btnClass}
-          aria-label={pageLabel(item)}
+          aria-label={t('goToPage', pageLabel)(item)}
           onClick={
             onPageChange
               ? (e) => { e.preventDefault(); onPageChange(item as number); }
@@ -221,7 +249,7 @@ export function Pagination({
         type="button"
         className={btnClass}
         aria-current={isCurrent ? 'page' : undefined}
-        aria-label={pageLabel(item)}
+        aria-label={t('goToPage', pageLabel)(item)}
         onClick={isCurrent ? undefined : () => onPageChange?.(item as number)}
       >
         {item}
@@ -230,7 +258,7 @@ export function Pagination({
   }
 
   function renderNavBtn(targetPage: number, direction: 'prev' | 'next', isDisabled: boolean) {
-    const ariaLabelText = direction === 'prev' ? previousLabel : nextLabel;
+    const ariaLabelText = direction === 'prev' ? t('previous', previousLabel) : t('next', nextLabel);
     const chevronClass = direction === 'prev' ? 'pagination__chevron--prev' : undefined;
     const chevronSize = size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm';
     const icon = <Icon name="chevron" size={chevronSize} className={chevronClass} />;
@@ -272,20 +300,20 @@ export function Pagination({
   return (
     <nav
       className={['pagination', `pagination--${size}`, className].filter(Boolean).join(' ')}
-      aria-label={ariaLabel}
+      aria-label={t('label', ariaLabel)}
     >
       {hasMeta && (
         <div className="pagination__meta">
           {showTotal && (
-            <span className="pagination__summary">{totalLabel(total)}</span>
+            <span className="pagination__summary">{t('total', totalLabel)(total)}</span>
           )}
           {onPageSizeChange && (
             <div className="pagination__size-selector">
               <Select
-                options={pageSizeOptions}
+                options={pageSizeOptions ?? defaultPageSizeOptions(t('allOption'))}
                 value={pageSize === 'all' ? 'all' : String(pageSize)}
                 onValueChange={onPageSizeChange}
-                aria-label={pageSizeLabel}
+                aria-label={t('perPage', pageSizeLabel)}
                 size={size}
               />
             </div>
@@ -296,7 +324,7 @@ export function Pagination({
         </div>
       )}
       {totalPages > 1 && (
-        <div className="pagination__controls" role="group" aria-label={pagesGroupLabel}>
+        <div className="pagination__controls" role="group" aria-label={t('pagesGroup', pagesGroupLabel)}>
           {renderNavBtn(page - 1, 'prev', page <= 1)}
           {pageItems.map((item, i) => renderPageItem(item, i))}
           {renderNavBtn(page + 1, 'next', page >= totalPages)}

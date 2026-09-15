@@ -157,8 +157,9 @@ export interface DataTableProps<TData, TValue> {
  * paginación (en cliente o en servidor) sobre el `Table` y el `Pagination` del
  * DS. El comportamiento lo aporta TanStack Table.
  *
- * Los textos accesibles llegan por props (el DS no habla de i18n): sin ellos
- * caen a los castellanos por defecto de `Table` y `Pagination`.
+ * Los textos accesibles llegan por props (el DS no habla de i18n): los de
+ * `Table` caen a sus castellanos por defecto, y los de `Pagination` —que ya no
+ * tiene ninguno— al `BrandMessagesProvider` que la aplicación monta en su raíz.
  */
 export function DataTable<TData, TValue>({
   columns,

@@ -61,7 +61,9 @@ La prop `showTotal` añade el texto "X resultados" antes de los controles.
 
 ## Con selector de registros por página
 
-Cuando se pasa `onPageSizeChange`, aparece un `Select` con las opciones de página. Las opciones por defecto son 10, 20, 50, 100 y Todos; se pueden personalizar con `pageSizeOptions`.
+Cuando se pasa `onPageSizeChange`, aparece un `Select` con las opciones de página. Sin
+`pageSizeOptions`, las opciones son 10, 20, 50, 100 y una de «sin paginar» cuyo rótulo sale
+del catálogo (`pagination.allOption`): las cifras no se traducen, esa palabra sí.
 
 <Canvas of={PaginationStories.ConSelectorDePagina} />
 
@@ -125,45 +127,67 @@ Sin `onPageChange`, la navegación ocurre únicamente mediante el href nativo.
 
 ## Internacionalización de las etiquetas
 
-Todos los textos que el componente emite por su cuenta —los `aria-label` de los controles y el
-sumario de `showTotal`— están en **castellano por defecto**. Una aplicación multiidioma debe pasar
-sus propias traducciones; si no lo hace, un usuario de lector de pantalla en inglés o alemán oirá
-"Página 3".
-
-| Prop | Default | Dónde aparece |
-| --- | --- | --- |
-| `ariaLabel` | `"Paginación"` | `aria-label` del `<nav>` |
-| `pageLabel` | `` (page) => `Página ${page}` `` | `aria-label` de cada botón/enlace de página |
-| `previousLabel` | `"Página anterior"` | `aria-label` del control anterior |
-| `nextLabel` | `"Página siguiente"` | `aria-label` del control siguiente |
-| `pagesGroupLabel` | `"Páginas"` | `aria-label` del `role="group"` de los controles |
-| `pageSizeLabel` | `"Registros por página"` | `aria-label` del `Select` de registros por página |
-| `totalLabel` | `` (total) => `${total} resultados` `` | texto del sumario cuando `showTotal` |
+Los textos que el paginador emite por su cuenta —los `aria-label` de los controles y el sumario
+de `showTotal`— **no tienen valor por defecto**. Salen del `BrandMessagesProvider` que la
+aplicación monta una vez en su raíz, alimentado desde su catálogo de idioma:
 
 ```tsx
-const t = useTranslations('pagination');
+import { BrandMessagesProvider } from '@studiolxd/brand/messages';
 
-<Pagination
-  total={200}
-  page={currentPage}
-  pageSize={10}
-  showTotal
-  onPageChange={setPage}
-  ariaLabel={t('label')}
-  pageLabel={(p) => t('page', { page: p })}
-  previousLabel={t('previous')}
-  nextLabel={t('next')}
-  pagesGroupLabel={t('pages')}
-  pageSizeLabel={t('pageSize')}
-  totalLabel={(n) => t('total', { count: n })}
-/>
+<BrandMessagesProvider
+  messages={{
+    pagination: {
+      label: t('pagination.label'),
+      pagesGroup: t('pagination.pagesGroup'),
+      previous: t('pagination.previous'),
+      next: t('pagination.next'),
+      goToPage: (page) => t('pagination.goToPage', { page }),
+      perPage: t('pagination.perPage'),
+      total: (count) => t('pagination.total', { count }),
+      allOption: t('pagination.allOption'),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
 ```
 
-Las etiquetas de las opciones del selector de registros por página (incluida `"Todos"`) no son
-props de texto: se traducen pasando `pageSizeOptions` con los `label` ya traducidos.
+A partir de ahí el paginador se monta sin una sola prop de texto:
 
-La convención completa (qué componentes tienen props de texto, cómo se nombran, cómo se traducen
-fechas) está en **Foundations › Internacionalización**.
+```tsx
+<Pagination total={200} page={page} pageSize={10} showTotal onPageChange={setPage} />
+```
+
+<Canvas of={PaginationStories.TextosDelProveedor} />
+
+### El orden: prop → proveedor → error
+
+| Escalón | Cuándo |
+| --- | --- |
+| **La prop** | Cuando se pasa. Es la **anulación puntual**: el `ariaLabel` de un paginador concreto («Resultados de la búsqueda») no es el de todos los de la app |
+| **El proveedor** | Cuando la prop falta. El texto sale del catálogo del idioma vigente |
+| **Un error** | Cuando faltan las dos. El componente revienta diciendo qué texto falta — no hay castellano de respaldo |
+
+No hay cuarto escalón, y es deliberado: un default castellano dentro del paquete es un camino de
+ejecución que pinta «Página 3» en una página en francés sin que falle nada ni lo vea ningún test.
+El error se lanza **donde el texto se pinta**, así que un paginador sin selector de registros no
+exige el texto del selector.
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `ariaLabel` | `pagination.label` | `aria-label` del `<nav>` |
+| `pageLabel` | `pagination.goToPage` | `aria-label` de cada botón/enlace de página |
+| `previousLabel` | `pagination.previous` | `aria-label` del control anterior |
+| `nextLabel` | `pagination.next` | `aria-label` del control siguiente |
+| `pagesGroupLabel` | `pagination.pagesGroup` | `aria-label` del `role="group"` de los controles |
+| `pageSizeLabel` | `pagination.perPage` | `aria-label` del `Select` de registros por página |
+| `totalLabel` | `pagination.total` | texto del sumario cuando `showTotal` |
+| `pageSizeOptions` | `pagination.allOption` | solo el rótulo de la opción «sin paginar»; el resto son cifras |
+
+El contrato es el tipo `PaginationMessages`, que se exporta junto al componente y es una de las
+entradas de `BrandMessages`: si una app monta el proveedor y se deja una clave, **no compila**.
+
+La convención completa está en **Foundations › Internacionalización**.
 
 ## Accesibilidad
 

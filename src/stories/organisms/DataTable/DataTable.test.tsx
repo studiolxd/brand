@@ -1,8 +1,23 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, within } from '@testing-library/react';
+import type { ReactNode } from 'react';
+import { render as rtlRender, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { ColumnDef } from '@tanstack/react-table';
 import { DataTable } from './DataTable';
+import { BrandMessagesProvider } from '../../../messages/BrandMessagesProvider';
+import { brandMessagesFixture } from '../../../../.storybook/brandMessagesFixture';
+
+/**
+ * El pie de la tabla es el `Pagination` del DS, que ya no trae textos puestos:
+ * los lee del `BrandMessagesProvider`. Una app que monte `DataTable` lo tiene
+ * montado en su raíz; aquí se monta con el mismo catálogo que el Storybook.
+ */
+function Catalogo({ children }: { children: ReactNode }) {
+  return <BrandMessagesProvider messages={brandMessagesFixture}>{children}</BrandMessagesProvider>;
+}
+
+const render: typeof rtlRender = (ui, options) =>
+  rtlRender(ui, { wrapper: Catalogo, ...options });
 
 type Row = { id: string; name: string; email: string };
 
