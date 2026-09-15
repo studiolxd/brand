@@ -301,3 +301,49 @@ export const ContratoPanelOpacoOscuro: Story = {
     });
   },
 };
+
+/**
+ * Test: el pie del cajón apila **también en escritorio**. El panel mide lo
+ * mismo —320px— en un teléfono que en una pantalla de 27 pulgadas, así que la
+ * colocación de su pie la decide el ancho del cajón y no el de la ventana
+ * (`@container`, en `dialogSurface.css`). Con la media query de viewport, dos
+ * botones se repartían 256px de hueco útil y se quedaban sin sitio para su
+ * etiqueta — el caso real es «Cancelar + Guardar» del espacio de trabajo de
+ * una oferta.
+ */
+export const ContratoPieApilaEnElCajon: Story = {
+  name: 'Test — el pie del cajón apila aunque la ventana sea ancha',
+  tags: ['!dev'],
+  args: {
+    ...Default.args,
+    footer: (
+      <>
+        <Button variant="outline">Cancelar</Button>
+        <Button>Guardar</Button>
+      </>
+    ),
+  },
+  render: Demo,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Abrir panel' }));
+
+    const dialog = await screen.findByRole('dialog', { name: 'Ajustes del bloque' });
+    const pie = dialog.querySelector('.sheet__footer') as HTMLElement;
+    const botones = Array.from(pie.querySelectorAll<HTMLElement>('.button'));
+
+    // Cada botón ocupa el pie entero…
+    for (const boton of botones) {
+      await expect(boton.getBoundingClientRect().width).toBeCloseTo(
+        pie.getBoundingClientRect().width,
+        0,
+      );
+    }
+    // …y la acción principal —la última del DOM— queda arriba, por el
+    // `column-reverse` que comparte con el pie de un `Form`.
+    await expect(botones.at(-1)?.textContent).toBe('Guardar');
+    await expect(botones.at(-1)!.getBoundingClientRect().bottom).toBeLessThanOrEqual(
+      botones[0].getBoundingClientRect().top,
+    );
+  },
+};

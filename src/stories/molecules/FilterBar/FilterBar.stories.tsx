@@ -126,10 +126,16 @@ export const ContratoBuscadorEnSuLinea: Story = {
     await expect(tercero.getBoundingClientRect().left)
       .toBeGreaterThan(primero.getBoundingClientRect().right);
 
-    // Y las acciones, al final de esa fila.
+    // Y las acciones, en la celda siguiente de la MISMA rejilla: comparten
+    // línea con los filtros y empiezan donde acaba el último, no al otro
+    // extremo de la fila.
+    // Se compara por el borde inferior: la celda del botón se alinea con los
+    // CONTROLES, no con los rótulos que llevan encima.
     const acciones = canvasElement.querySelector('.filter-bar__actions') as HTMLElement;
-    await expect(acciones.getBoundingClientRect().right)
-      .toBeCloseTo(fila.getBoundingClientRect().right, 0);
+    await expect(acciones.getBoundingClientRect().bottom)
+      .toBeCloseTo(tercero.getBoundingClientRect().bottom, 0);
+    await expect(acciones.getBoundingClientRect().left)
+      .toBeGreaterThan(tercero.getBoundingClientRect().right);
   },
 };
 
@@ -149,7 +155,7 @@ export const ContratoApiladoEnMovil: Story = {
     const filtros = Array.from(
       canvasElement.querySelectorAll<HTMLElement>('.filter-bar__filter'),
     );
-    const rejilla = canvasElement.querySelector('.filter-bar__filters') as HTMLElement;
+    const rejilla = canvasElement.querySelector('.filter-bar__row') as HTMLElement;
     const anchoRejilla = rejilla.getBoundingClientRect().width;
     for (const filtro of filtros) {
       await expect(filtro.getBoundingClientRect().width).toBeCloseTo(anchoRejilla, 0);
@@ -178,7 +184,9 @@ export const ContratoAccionesAnchoCompletoEnMovil: Story = {
     const fila = canvasElement.querySelector('.filter-bar__row') as HTMLElement;
     const acciones = canvasElement.querySelector('.filter-bar__actions') as HTMLElement;
     const boton = acciones.querySelector('.button') as HTMLElement;
-    const filtros = canvasElement.querySelector('.filter-bar__filters') as HTMLElement;
+    const ultimoFiltro = Array.from(
+      canvasElement.querySelectorAll<HTMLElement>('.filter-bar__filter'),
+    ).at(-1) as HTMLElement;
 
     // La ranura ocupa la fila entera…
     await expect(acciones.getBoundingClientRect().width).toBeCloseTo(
@@ -192,7 +200,66 @@ export const ContratoAccionesAnchoCompletoEnMovil: Story = {
     );
     // En su propia línea, debajo de los filtros.
     await expect(acciones.getBoundingClientRect().top).toBeGreaterThanOrEqual(
-      filtros.getBoundingClientRect().bottom,
+      ultimoFiltro.getBoundingClientRect().bottom,
+    );
+  },
+};
+
+/**
+ * Test: el número de columnas y el ancho de los campos los decide el sitio
+ * disponible, NO si hay botón. El de «Limpiar filtros» solo se pinta cuando ya
+ * hay algo que limpiar —o sea, mientras se escribe—, y con la maqueta anterior
+ * su aparición le robaba el ancho a la rejilla y tiraba un filtro a la línea
+ * siguiente. Dos barras idénticas salvo por las acciones, en el mismo hueco:
+ * sus filtros tienen que caer en el mismo sitio y medir lo mismo.
+ */
+export const ContratoColumnasIndependientesDeLasAcciones: Story = {
+  name: 'Test — las columnas no dependen del botón',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <div data-testid="sin-acciones">
+        <FilterBar>
+          <SelectField id="ci-estado" label="Estado" options={ESTADOS} defaultValue="todos" />
+          <SelectField id="ci-papel" label="Papel" options={PAPELES} defaultValue="todos" />
+          <DatePickerField id="ci-desde" label="Desde" />
+        </FilterBar>
+      </div>
+      <div data-testid="con-acciones">
+        <FilterBar actions={<Button variant="outline">Limpiar filtros</Button>}>
+          <SelectField id="ca-estado" label="Estado" options={ESTADOS} defaultValue="todos" />
+          <SelectField id="ca-papel" label="Papel" options={PAPELES} defaultValue="todos" />
+          <DatePickerField id="ca-desde" label="Desde" />
+        </FilterBar>
+      </div>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const celdas = (testId: string) =>
+      Array.from(
+        canvasElement
+          .querySelector(`[data-testid="${testId}"]`)!
+          .querySelectorAll<HTMLElement>('.filter-bar__filter'),
+      ).map((celda) => celda.getBoundingClientRect());
+
+    const sin = celdas('sin-acciones');
+    const con = celdas('con-acciones');
+
+    await expect(con).toHaveLength(sin.length);
+    for (let i = 0; i < sin.length; i += 1) {
+      // Mismo ancho de columna…
+      await expect(con[i].width).toBeCloseTo(sin[i].width, 0);
+      // …y misma posición horizontal: ningún filtro se ha movido de columna.
+      await expect(con[i].left - con[0].left).toBeCloseTo(sin[i].left - sin[0].left, 0);
+    }
+
+    // Y el botón es una celda más: comparte línea con los filtros.
+    const barraConAcciones = canvasElement.querySelector(
+      '[data-testid="con-acciones"] .filter-bar__actions',
+    ) as HTMLElement;
+    await expect(barraConAcciones.getBoundingClientRect().bottom).toBeCloseTo(
+      con[0].bottom,
+      0,
     );
   },
 };

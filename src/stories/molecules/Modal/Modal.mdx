@@ -122,11 +122,19 @@ sitios distintos, se ve distinto.
 ## El pie: cuándo hay Cancelar
 
 La prop `footer` es el sitio de los botones del diálogo. El pie los reparte a
-la derecha en una fila y, **por debajo del punto de ruptura `md` (768px), los
-apila a todo el ancho con la acción principal arriba**: es el mismo criterio
-—y el mismo detalle de orden, un `column-reverse`— que las acciones de `Form`.
-Se pasan en el orden de la fila (la principal, la última) y el pie se encarga
-del resto.
+la derecha en una fila y, **cuando el diálogo no da para una fila, los apila a
+todo el ancho con la acción principal arriba**: es el mismo criterio —y el
+mismo detalle de orden, un `column-reverse`— que las acciones de `Form`. Se
+pasan en el orden de la fila (la principal, la última) y el pie se encarga del
+resto.
+
+Lo decide el ancho **del diálogo**, no el de la ventana: es una consulta de
+contenedor (`@container`) con umbral `sm` (480px de hueco útil), que es lo que
+hace falta para que dos botones con su etiqueta quepan en una fila. El diálogo
+centrado mide hasta 560px, así que en escritorio conserva su fila y en móvil
+apila, como siempre. El [Sheet](?path=/docs/molecules-sheet--docs), que comparte
+esta misma pieza, mide 320px en cualquier pantalla y por eso apila también en
+escritorio.
 
 <Canvas of={ModalStories.ConPie} />
 

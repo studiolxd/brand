@@ -7,6 +7,8 @@ $lxd-alert-border-radius: 0px; // Sin radio de esquinas
 $lxd-alert-border-width: 1px; // Grosor del borde
 $lxd-alert-gap: 0.75rem; // Aire entre el contenido y el botón de cierre (12px)
 $lxd-alert-content-gap: 0.5rem; // Aire entre el título y la descripción, y entre los bloques de la descripción (8px)
+$lxd-alert-actions-gap: 0.75rem; // Aire entre las acciones del aviso — el de los botones de un formulario: la fila de acciones del sistema es una sola
+$lxd-alert-actions-margin-block-start: 0.75rem; // Aire entre el cuerpo del aviso y su fila de acciones (12px): más que el que separa título y descripción, porque lo que viene ya no es texto
 $lxd-alert-bg: #111e30; // Fondo por defecto — prussian. El relleno neutro invierte el lienzo: sobre página clara es prusia y sobre página oscura, blanco (ver `surface-dark-bg`)
 $lxd-alert-border-color: #ffffff; // Borde por defecto — blanco. Sobre página clara dibuja el contorno del relleno prusia
 $lxd-alert-title-font-size: 1rem; // El título hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)

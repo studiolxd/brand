@@ -33,22 +33,28 @@ La barra de filtros de un listado: **el buscador en su línea** y, debajo, los f
 
 Cuando un listado se filtra por **más de una cosa**: un buscador y dos, tres o cuatro campos. Con un solo filtro junto al buscador no hace falta — cabe en el `toolbar` de la tabla.
 
-Existe porque montar esa barra a mano en un `Inline` se rompe en pantalla estrecha: los campos no encogen por debajo de su contenido y la fila se sale. Aquí la rejilla es `auto-fit` sobre un ancho mínimo por token (`column-min-inline-size`), así que **el número de columnas lo decide el sitio disponible** y en móvil queda una sola, a ancho completo.
+Existe porque montar esa barra a mano en un `Inline` se rompe en pantalla estrecha: los campos no encogen por debajo de su contenido y la fila se sale. Aquí la rejilla es `auto-fill` sobre un ancho mínimo por token (`column-min-inline-size`), así que **el número de columnas lo decide el sitio disponible y solo él** y en móvil queda una sola, a ancho completo.
 
 ## Anatomía
 
 - **`search`**: el campo de búsqueda del sistema —un `InputField kind="search"`, que es el que trae la lupa, o el [SearchForm](?path=/docs/molecules-searchform--docs) cuando la consulta viaja a otra página—. Ocupa **su propia línea entera, siempre**: es lo primero que se toca y lo que más se escribe, y compartir línea con un select lo dejaría en un tercio del ancho.
 - **`children`**: los filtros, un campo por filtro, **con su etiqueta visible**. Un filtro sin rótulo obliga a abrirlo para saber qué filtra; es la diferencia entre un buscador (uno solo, evidente) y una rejilla de tres.
-- **`actions`**: opcional, al final de la fila de filtros y alineada **con los controles**, no con sus rótulos. Es el sitio de «Limpiar filtros».
+- **`actions`**: opcional, **una celda más de la rejilla** —la siguiente al último filtro—, alineada **con los controles** y no con sus rótulos. Es el sitio de «Limpiar filtros».
 
 Sin filtros ni acciones no se pinta la fila; sin buscador, no se pinta su línea.
+
+### Una sola rejilla, filtros y acciones
+
+Las acciones **no son una caja aparte**: son una celda de la misma rejilla que los filtros. Antes eran un bloque anclado al extremo de la fila, y eso traía dos defectos que se veían a diario. El botón de «Limpiar filtros» solo se pinta cuando ya hay algo que limpiar —o sea, **mientras se escribe**—, y al aparecer le restaba a la rejilla su ancho más el hueco: si ese recorte cruzaba un múltiplo del mínimo de columna, la rejilla perdía una columna de golpe y un filtro se caía a la línea siguiente. Y entre el último campo y el botón quedaba siempre el hueco de su ancho.
+
+Por eso la rejilla es `auto-fill` y no `auto-fit`: **las pistas las decide el ancho disponible, no cuántas celdas hay**, así que ni el número de columnas ni el ancho de los campos cambian porque el botón aparezca o desaparezca. La contrapartida —con dos filtros en una pantalla ancha sobra sitio a la derecha— es la buena: un filtro mide lo que mide una celda del sistema, no media pantalla.
 
 <Canvas of={FilterBarStories.SoloBuscador} />
 <Canvas of={FilterBarStories.ConAcciones} />
 
 ## En móvil
 
-Los filtros se apilan a ancho completo y las acciones caen al final, alineadas al margen. No hay punto de ruptura: lo hace `minmax(min(<mínimo>, 100%), 1fr)`, que deja la columna encoger cuando la pantalla es más estrecha que el mínimo.
+Los filtros se apilan a ancho completo y las acciones caen al final, ocupando también la línea entera —la norma del sistema, en [Fundamentos › Puntos de ruptura](?path=/docs/foundations-puntos-de-ruptura--docs)—. La rejilla no necesita punto de ruptura para apilar: lo hace `minmax(min(<mínimo>, 100%), 1fr)`, que deja la columna encoger cuando la pantalla es más estrecha que el mínimo.
 
 <Canvas of={FilterBarStories.Movil} />
 
@@ -85,4 +91,4 @@ La barra no pinta ni un color: lo que se ve es de los campos, que ya traen su pa
 
 <TokenTable tokens={filterBarTokens} />
 
-`column-min-inline-size` es lo único que decide cuántas columnas caben: subirlo da filas de tres, bajarlo de cuatro o cinco. Los demás son aire, y salen por referencia del formulario (`form.gap`, `form.actions-gap`) y de la fila de campos (`field-row.column-gap`, `field-row.row-gap`): la barra no inventa medidas propias.
+`column-min-inline-size` es lo único que decide cuántas columnas caben (y, con `auto-fill`, también el ancho de los campos: las pistas reparten el hueco a partes iguales): subirlo da filas de tres, bajarlo de cuatro o cinco. Los demás son aire, y salen por referencia del formulario (`form.gap`, `form.actions-gap`) y de la fila de campos (`field-row.column-gap`, `field-row.row-gap`): la barra no inventa medidas propias.

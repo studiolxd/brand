@@ -727,3 +727,48 @@ export const ContratoAspaEnLaPrimeraLinea: Story = {
     await expect(Math.abs(centroAspa - centroBloque)).toBeGreaterThan(1);
   },
 };
+
+/**
+ * Test: el diálogo centrado conserva su pie en fila. Lo decide el ancho del
+ * propio diálogo (`@container`, en `dialogSurface.css`), no el de la ventana:
+ * con 560px de panel hay sitio de sobra para dos botones con su etiqueta, y
+ * ahí no cambia nada. Es la otra cara del cajón, que con 320px apila siempre.
+ */
+export const ContratoPieEnFilaEnElDialogo: Story = {
+  name: 'Test — el pie del diálogo sigue en fila',
+  tags: ['!dev'],
+  render: () => (
+    <Modal
+      open
+      onClose={fn()}
+      title="Guardar cambios"
+      footer={
+        <>
+          <Button variant="outline">Cancelar</Button>
+          <Button>Guardar</Button>
+        </>
+      }
+    >
+      <p>Contenido</p>
+    </Modal>
+  ),
+  play: async () => {
+    const popup = await screen.findByRole('dialog');
+    const pie = popup.querySelector('.modal__footer') as HTMLElement;
+    const botones = Array.from(pie.querySelectorAll<HTMLElement>('.button'));
+
+    // Los dos en la misma línea y a su ancho natural.
+    await expect(botones[0].getBoundingClientRect().top).toBeCloseTo(
+      botones[1].getBoundingClientRect().top,
+      0,
+    );
+    await expect(botones[1].getBoundingClientRect().width).toBeLessThan(
+      pie.getBoundingClientRect().width,
+    );
+    // Y alineados al final del pie.
+    await expect(botones.at(-1)!.getBoundingClientRect().right).toBeCloseTo(
+      pie.getBoundingClientRect().right,
+      0,
+    );
+  },
+};

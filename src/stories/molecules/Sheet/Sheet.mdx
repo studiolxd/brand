@@ -30,7 +30,9 @@ tokens `sheet.*`, que siguen mandando sobre la superficie.
   Tokens propios `sheet.close-*`, prestados de `modal.close-*`.
 - **Cuerpo** (`children`): con scroll propio.
 - **Pie** (`footer` o `<SheetFooter>`, para paneles que cambian de acciones
-  según el paso en el que están): fila de acciones alineada a la derecha.
+  según el paso en el que están): las acciones del panel, **apiladas a ancho
+  completo** con la principal arriba. Es la misma pieza que el pie del
+  [Modal](?path=/docs/molecules-modal--docs) (§ «Con acciones al pie»).
 
 ## Lado de entrada
 
@@ -40,6 +42,19 @@ tokens `sheet.*`, que siguen mandando sobre la superficie.
 ## Con acciones al pie
 
 <Canvas of={SheetStories.ConPie} />
+
+El pie es la misma pieza que la del diálogo centrado (`.dialog-footer`, en la
+superficie de diálogo compartida) — el cajón solo le pasa su token de aire. Lo
+que cambia es el resultado: **en el cajón las acciones apilan siempre**, también
+en escritorio.
+
+No es una excepción, es la norma bien medida. La colocación del pie la decide
+el ancho **del diálogo** y no el de la ventana (`@container`, umbral `sm`): un
+cajón lateral mide lo mismo —320px, 256 de hueco útil— en un teléfono que en
+una pantalla de 27 pulgadas, y ahí dos botones con su etiqueta no caben en una
+fila. El diálogo centrado, con 560px, sí cabe y conserva su fila. Es el caso
+que [Fundamentos › Puntos de ruptura](?path=/docs/foundations-puntos-de-ruptura--docs)
+señala como propio de una consulta de contenedor.
 
 ## Título solo accesible
 

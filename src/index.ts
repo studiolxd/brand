@@ -165,8 +165,8 @@ export type { ErrorBoundaryProps } from './stories/atoms/ErrorBoundary/ErrorBoun
 export { VisuallyHidden } from './stories/atoms/VisuallyHidden/VisuallyHidden';
 
 // ─── Molecules ───────────────────────────────────────────────
-export { Alert, AlertTitle, AlertDescription } from './stories/molecules/Alert/Alert';
-export type { AlertProps, AlertTitleProps, AlertDescriptionProps } from './stories/molecules/Alert/Alert';
+export { Alert, AlertTitle, AlertDescription, AlertActions } from './stories/molecules/Alert/Alert';
+export type { AlertProps, AlertTitleProps, AlertDescriptionProps, AlertActionsProps } from './stories/molecules/Alert/Alert';
 export { Banner } from './stories/molecules/Banner/Banner';
 export type { BannerProps, BannerVariant } from './stories/molecules/Banner/Banner';
 export { AsyncMultiSelectField } from './stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField';

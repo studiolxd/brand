@@ -5,6 +5,13 @@ export interface AlertProps extends React.ComponentPropsWithoutRef<'div'> {
     /** Título del alert. **Opcional**: en modo composición usa `children` (p. ej. `<Alert.Title>`). */
     title?: string;
     description?: React.ReactNode;
+    /**
+     * Ranura de acciones del aviso —normalmente un `Button` del sistema—, al pie
+     * del cuerpo. Los botones van **aquí y no dentro de la descripción**: la
+     * ranura es la que aplica la norma del sistema (por debajo de `md` apilan y
+     * cada uno ocupa la línea), y dentro del texto se quedan a medio ancho.
+     */
+    actions?: React.ReactNode;
     dismissible?: boolean;
     onDismiss?: () => void;
     /**
@@ -24,10 +31,16 @@ export interface AlertProps extends React.ComponentPropsWithoutRef<'div'> {
 }
 export type AlertTitleProps = React.ComponentPropsWithoutRef<'p'>;
 export type AlertDescriptionProps = React.ComponentPropsWithoutRef<'div'>;
+export type AlertActionsProps = React.ComponentPropsWithoutRef<'div'>;
 /** Subparte de composición: título del alert. */
 export declare const AlertTitle: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, "ref"> & import("react").RefAttributes<HTMLParagraphElement>>;
 /** Subparte de composición: descripción del alert. */
 export declare const AlertDescription: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+/**
+ * Subparte de composición: las acciones del alert. Equivale a la prop
+ * `actions` y es la pieza para el modo composición.
+ */
+export declare const AlertActions: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
 /**
  * Namespace de composición. Las subpartes también están disponibles como **named
  * exports** (`AlertTitle`, `AlertDescription`): en **Server Components (RSC)** usa los
@@ -36,4 +49,5 @@ export declare const AlertDescription: import("react").ForwardRefExoticComponent
 export declare const Alert: import("react").ForwardRefExoticComponent<AlertProps & import("react").RefAttributes<HTMLDivElement>> & {
     Title: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, "ref"> & import("react").RefAttributes<HTMLParagraphElement>>;
     Description: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+    Actions: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
 };

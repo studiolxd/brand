@@ -13,6 +13,10 @@
 .sheet {
   position: fixed;
   z-index: var(--sheet-z-index);
+  /* El panel es el contenedor de consulta de la superficie de diálogo: su pie
+     se coloca según el ancho del cajón —siempre el mismo, en un teléfono y en
+     un escritorio— y no según el de la ventana (ver `dialogSurface.css`). */
+  container: dialog / inline-size;
   display: flex;
   flex-direction: column;
   gap: var(--sheet-gap);

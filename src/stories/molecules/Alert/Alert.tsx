@@ -16,6 +16,13 @@ export interface AlertProps extends React.ComponentPropsWithoutRef<'div'> {
   /** Título del alert. **Opcional**: en modo composición usa `children` (p. ej. `<Alert.Title>`). */
   title?: string;
   description?: React.ReactNode;
+  /**
+   * Ranura de acciones del aviso —normalmente un `Button` del sistema—, al pie
+   * del cuerpo. Los botones van **aquí y no dentro de la descripción**: la
+   * ranura es la que aplica la norma del sistema (por debajo de `md` apilan y
+   * cada uno ocupa la línea), y dentro del texto se quedan a medio ancho.
+   */
+  actions?: React.ReactNode;
   dismissible?: boolean;
   onDismiss?: () => void;
   /**
@@ -36,6 +43,7 @@ export interface AlertProps extends React.ComponentPropsWithoutRef<'div'> {
 
 export type AlertTitleProps = React.ComponentPropsWithoutRef<'p'>;
 export type AlertDescriptionProps = React.ComponentPropsWithoutRef<'div'>;
+export type AlertActionsProps = React.ComponentPropsWithoutRef<'div'>;
 
 /**
  * Rol ARIA por variante. `error` y `warning` interrumpen (`alert`, live
@@ -70,6 +78,19 @@ export const AlertDescription = forwardRef<HTMLDivElement, AlertDescriptionProps
 });
 
 /**
+ * Subparte de composición: las acciones del alert. Equivale a la prop
+ * `actions` y es la pieza para el modo composición.
+ */
+export const AlertActions = forwardRef<HTMLDivElement, AlertActionsProps>(function AlertActions(
+  { className, children, ...rest }, ref) {
+  return (
+    <div ref={ref} className={['alert__actions', className ?? ''].filter(Boolean).join(' ')} {...rest}>
+      {children}
+    </div>
+  );
+});
+
+/**
  * Alert. Dos modos, combinables:
  * - **Props**: `title` (+ `description`) para el caso simple.
  * - **Composición**: `children` (p. ej. `<Alert.Title>` / `<Alert.Description>` o nodos
@@ -83,6 +104,7 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
   variant = 'default',
   title,
   description,
+  actions,
   dismissible = false,
   onDismiss,
   finalFocus,
@@ -155,6 +177,7 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
         {title && <p className="alert__title">{title}</p>}
         {description && <div className="alert__description">{description}</div>}
         {children}
+        {actions && <div className="alert__actions">{actions}</div>}
       </div>
       {dismissible && (
         <CloseButton className={`alert__close${interiorSurface}`} label={closeLabel} onClick={handleDismiss} />
@@ -171,4 +194,5 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
 export const Alert = Object.assign(AlertRoot, {
   Title: AlertTitle,
   Description: AlertDescription,
+  Actions: AlertActions,
 });

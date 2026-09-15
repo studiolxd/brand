@@ -267,3 +267,110 @@ export const ContratoCuerpo: Story = {
     await expect(px(canvas.getByText('Con su descripción.'))).toBe(16);
   },
 };
+
+/**
+ * Un aviso que además ofrece una salida: el botón va en la ranura `actions`,
+ * no dentro del cuerpo. El caso de referencia es «quitar la marca de revisión»
+ * sobre un envío marcado.
+ */
+export const ConAcciones: Story = {
+  name: 'Con acciones',
+  args: {
+    variant: 'warning',
+    title: 'Marcado para revisión',
+    description: 'Alguien pidió revisar este envío antes de publicarlo.',
+    actions: <Button variant="outline">Quitar marca de revisión</Button>,
+  },
+};
+
+/**
+ * Norma del sistema (Fundamentos › Puntos de ruptura): por debajo de `md` las
+ * acciones apilan y cada una ocupa la línea. Metidas dentro del cuerpo —que es
+ * lo que había que hacer antes de que el aviso tuviera ranura— se quedaban a
+ * medio ancho.
+ */
+export const AccionesEnMovil: Story = {
+  name: 'Acciones en móvil',
+  globals: { viewport: { value: 'mobile1' } },
+  args: {
+    variant: 'default',
+    title: 'Queda una cosa por hacer',
+    description: 'Confirma tu dirección de correo para recibir los avisos.',
+    actions: (
+      <>
+        <Button variant="outline">Más tarde</Button>
+        <Button>Confirmar</Button>
+      </>
+    ),
+  },
+};
+
+/**
+ * Test: en móvil la ranura de acciones ocupa la línea entera y cada botón,
+ * la ranura entera — la misma norma que `Banner` y `ConsentBanner`.
+ */
+export const ContratoAccionesAnchoCompletoEnMovil: Story = {
+  name: 'Test — en móvil las acciones ocupan la línea',
+  tags: ['!dev'],
+  globals: { viewport: { value: 'mobile1' } },
+  args: {
+    title: 'Marcado para revisión',
+    description: 'Alguien pidió revisar este envío antes de publicarlo.',
+    actions: (
+      <>
+        <Button variant="outline">Más tarde</Button>
+        <Button>Quitar marca</Button>
+      </>
+    ),
+  },
+  play: async ({ canvasElement }) => {
+    const contenido = canvasElement.querySelector('.alert__content') as HTMLElement;
+    const acciones = canvasElement.querySelector('.alert__actions') as HTMLElement;
+    const botones = Array.from(acciones.querySelectorAll<HTMLElement>('.button'));
+
+    await expect(acciones.getBoundingClientRect().width).toBeCloseTo(
+      contenido.getBoundingClientRect().width,
+      0,
+    );
+    for (const boton of botones) {
+      await expect(boton.getBoundingClientRect().width).toBeCloseTo(
+        acciones.getBoundingClientRect().width,
+        0,
+      );
+    }
+    // Uno debajo de otro, no repartidos en una fila.
+    await expect(botones[1].getBoundingClientRect().top).toBeGreaterThanOrEqual(
+      botones[0].getBoundingClientRect().bottom,
+    );
+    // La ranura vive dentro del contenido: es lo que declara la superficie del
+    // relleno, y un botón fuera de ella leería con la página.
+    await expect(acciones.closest('.alert__content')).not.toBeNull();
+  },
+};
+
+/** Test: en escritorio las acciones vuelven a ser una fila a su ancho natural. */
+export const ContratoAccionesEnFilaEnEscritorio: Story = {
+  name: 'Test — en escritorio las acciones van en fila',
+  tags: ['!dev'],
+  args: {
+    title: 'Marcado para revisión',
+    actions: (
+      <>
+        <Button variant="outline">Más tarde</Button>
+        <Button>Quitar marca</Button>
+      </>
+    ),
+  },
+  play: async ({ canvasElement }) => {
+    const acciones = canvasElement.querySelector('.alert__actions') as HTMLElement;
+    const botones = Array.from(acciones.querySelectorAll<HTMLElement>('.button'));
+
+    await expect(botones[0].getBoundingClientRect().top).toBeCloseTo(
+      botones[1].getBoundingClientRect().top,
+      0,
+    );
+    await expect(botones[0].getBoundingClientRect().width).toBeLessThan(
+      acciones.getBoundingClientRect().width,
+    );
+  },
+};

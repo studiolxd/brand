@@ -21,6 +21,7 @@ Un rectángulo de relleno sólido con borde de 1px y esquina recta, y dentro:
 
 - **Título** (`title` o `<Alert.Title>`): el rótulo del aviso, en peso de énfasis.
 - **Descripción** (`description` o `<Alert.Description>`): el detalle, opcional. Apila sus hijos, así que admite un enlace o un botón de acción.
+- **Acciones** (`actions` o `<Alert.Actions>`): la ranura de la salida que ofrece el aviso, al pie del cuerpo. Opcional.
 - **Cierre** (`dismissible`): el [CloseButton](?path=/docs/atoms-closebutton--docs) del sistema a talla `sm` en la esquina superior derecha. Hasta v30.7.0 era un `Button` ghost, que pintaba un relleno al pasar el puntero; el aspa del sistema no lo pinta.
 
 Los dos modos se combinan: `title`/`description` para el caso simple, `children` cuando el consumidor arma el contenido.
@@ -40,6 +41,16 @@ Ese amarillo es también el hover del botón primario. **Se distinguen por conte
 <Canvas of={AlertStories.ConDescripcion} />
 
 <Canvas of={AlertStories.SoloDescripcion} />
+
+## Acciones
+
+<Canvas of={AlertStories.ConAcciones} />
+
+Cuando el aviso ofrece una salida —«quitar la marca de revisión», «reintentar»—, el botón va en la ranura `actions`, **no dentro de la descripción**. La descripción apila lo que le eches y admite un botón, pero ahí el botón se queda a su ancho natural: en móvil, medio ancho de la tarjeta. La ranura es la que aplica la norma del sistema —por debajo de `md` las acciones apilan y cada una ocupa la línea, [Fundamentos › Puntos de ruptura](?path=/docs/foundations-puntos-de-ruptura--docs)—, la misma que ya cumplen [Banner](?path=/docs/molecules-banner--docs) y el banner de consentimiento.
+
+<Canvas of={AlertStories.AccionesEnMovil} />
+
+La ranura vive **dentro del contenido**, no como hermana suya: es el contenido el que declara la superficie interior del relleno (`.surface-invert` en el neutro), y un botón fuera de ella leería con la página en vez de con el aviso.
 
 ## Cerrable
 

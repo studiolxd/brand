@@ -21,6 +21,9 @@
 
 .modal__content {
   position: fixed;
+  /* Contenedor de consulta de la superficie de diálogo: el pie se coloca por
+     el ancho del diálogo, no por el de la ventana (ver `dialogSurface.css`). */
+  container: dialog / inline-size;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

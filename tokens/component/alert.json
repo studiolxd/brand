@@ -6,6 +6,8 @@
     "border-width":         { "$value": "{border-width.default}",       "$type": "dimension", "$description": "Grosor del borde" },
     "gap":                  { "$value": "{spacing.3}",                  "$type": "dimension", "$description": "Aire entre el contenido y el botón de cierre (12px)" },
     "content-gap":          { "$value": "{spacing.2}",                  "$type": "dimension", "$description": "Aire entre el título y la descripción, y entre los bloques de la descripción (8px)" },
+    "actions-gap":          { "$value": "{form.actions-gap}",           "$type": "dimension", "$description": "Aire entre las acciones del aviso — el de los botones de un formulario: la fila de acciones del sistema es una sola" },
+    "actions-margin-block-start": { "$value": "{spacing.3}",            "$type": "dimension", "$description": "Aire entre el cuerpo del aviso y su fila de acciones (12px): más que el que separa título y descripción, porque lo que viene ya no es texto" },
 
     "bg":                   { "$value": "{color.primary}",              "$type": "color",     "$description": "Fondo por defecto — prussian. El relleno neutro invierte el lienzo: sobre página clara es prusia y sobre página oscura, blanco (ver `surface-dark-bg`)" },
     "border-color":         { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Borde por defecto — blanco. Sobre página clara dibuja el contorno del relleno prusia" },

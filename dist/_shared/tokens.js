@@ -141,6 +141,8 @@ var e = {
 	"--alert-border-width": "1px",
 	"--alert-gap": "0.75rem",
 	"--alert-content-gap": "0.5rem",
+	"--alert-actions-gap": "0.75rem",
+	"--alert-actions-margin-block-start": "0.75rem",
 	"--alert-bg": "#111e30",
 	"--alert-border-color": "#ffffff",
 	"--alert-title-font-size": "1rem",

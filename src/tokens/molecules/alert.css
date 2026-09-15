@@ -7,11 +7,13 @@
   --alert-padding-inline: var(--spacing-5); /** Padding horizontal del alert (24px) */
   --alert-gap: var(--spacing-3); /** Aire entre el contenido y el botón de cierre (12px) */
   --alert-content-gap: var(--spacing-2); /** Aire entre el título y la descripción, y entre los bloques de la descripción (8px) */
+  --alert-actions-margin-block-start: var(--spacing-3); /** Aire entre el cuerpo del aviso y su fila de acciones (12px): más que el que separa título y descripción, porque lo que viene ya no es texto */
   --alert-title-line-height: var(--line-height-snug); /** Interlineado del título — el de un rótulo corto */
   --alert-close-size: var(--size-component-sm); /** Lado del botón de cierre — talla sm (32px), la mínima del sistema. El color del aspa y su hover los pone el Button ghost, que voltea con la superficie del relleno */
   --alert-close-inset: var(--spacing-2); /** Distancia del botón de cierre a la esquina superior derecha (8px) */
   --alert-border-radius: var(--border-radius-default); /** Sin radio de esquinas */
   --alert-border-width: var(--border-width-default); /** Grosor del borde */
+  --alert-actions-gap: var(--form-actions-gap); /** Aire entre las acciones del aviso — el de los botones de un formulario: la fila de acciones del sistema es una sola */
   --alert-bg: var(--color-primary); /** Fondo por defecto — prussian. El relleno neutro invierte el lienzo: sobre página clara es prusia y sobre página oscura, blanco (ver `surface-dark-bg`) */
   --alert-border-color: var(--color-text-on-dark); /** Borde por defecto — blanco. Sobre página clara dibuja el contorno del relleno prusia */
   --alert-title-font-size: var(--text-font-size); /** El título hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública) */

@@ -7,6 +7,59 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.16.0] — 2026-09-15
+
+> **Minor.** La barra de filtros deja de reorganizarse mientras escribes,
+> `Alert` gana ranura de acciones y el pie de un diálogo se coloca por el ancho
+> del diálogo, no por el de la ventana.
+
+**`FilterBar` — una sola rejilla para los filtros y sus acciones.** Eran dos
+cajas hermanas: la rejilla `auto-fit` de filtros y, aparte, un bloque de
+acciones `flex: none` anclado al extremo con `margin-inline-start: auto`. De
+ahí salían los dos defectos que se veían a diario. El botón de «Limpiar
+filtros» solo se pinta cuando ya hay algo que limpiar —o sea, **mientras se
+escribe**— y, al aparecer, le restaba a la rejilla su ancho más el hueco: si
+ese recorte cruzaba un múltiplo del mínimo de columna, la rejilla perdía una
+columna de golpe y un filtro se caía a la línea siguiente. Medido a 1024px con
+cuatro filtros: sin el botón, una fila de cuatro columnas; con él, dos filas y
+733px de hueco. A 768px con tres filtros, lo mismo: de tres columnas a dos, con
+467px de hueco.
+
+Ahora el botón es **una celda más de la misma rejilla**, la siguiente al último
+filtro, alineada con los controles. Y la rejilla es `auto-fill` en vez de
+`auto-fit`: las pistas las decide el ancho disponible y **solo** el ancho
+disponible, así que ni el número de columnas ni el ancho de los campos cambian
+porque el botón aparezca o desaparezca — medido a 1536, 1280, 1024, 900, 768,
+640 y 390px, con dos, tres y cuatro filtros. La contrapartida —con dos filtros
+en una pantalla ancha sobra sitio a la derecha— es la buena: un filtro mide lo
+que mide una celda del sistema (192px, `field-row.cell-md`), no media pantalla.
+`.filter-bar__filters` pasa a `display: contents`: el envoltorio conserva su
+clase pero deja de ser una caja.
+
+**`Alert` gana ranura de acciones** (`actions`, o `<Alert.Actions>` para el
+modo composición), con la misma norma y el mismo nombre de clase que sus
+hermanos `Banner` y `ConsentBanner`: por debajo de `md` apila y cada botón
+ocupa la línea. Hasta ahora, quien necesitaba un botón en un aviso lo metía
+dentro de la descripción y en móvil se quedaba a medio ancho. La ranura vive
+**dentro** de `.alert__content`, que es quien declara la superficie interior
+del relleno: un botón fuera de ella leería con la página en vez de con el
+aviso. Tokens nuevos: `alert.actions-gap` y
+`alert.actions-margin-block-start`.
+
+**El pie de un diálogo se coloca por el ancho del diálogo** (`@container`, con
+umbral `sm`), no por el de la ventana. `Sheet` ya usaba la pieza compartida
+`.dialog-footer` y apilaba en móvil; el fallo estaba en escritorio, donde un
+cajón lateral mide lo mismo que en un teléfono —320px, 256 de hueco útil— y el
+pie seguía siendo una fila: dos botones con su etiqueta no cabían. Ahora
+`.sheet` y `.modal__content` se declaran contenedor de consulta, y el umbral es
+el que hace falta para una fila de dos botones, no el ancho de una pantalla. El
+cajón apila siempre; el diálogo centrado (560px, 494 de hueco) conserva su fila
+donde la tenía. Es el caso que Fundamentos › Puntos de ruptura ya señalaba como
+propio de `@container`.
+
+Nueve historias de contrato nuevas o actualizadas, en el viewport que le toca a
+cada una.
+
 ## [38.15.0] — 2026-09-15
 
 > **Minor.** El cajón de conversaciones del chat, en móvil: ocupa el ancho y su

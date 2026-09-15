@@ -66,7 +66,19 @@ Es la única situación en la que un valor del sistema aparece a mano en un CSS 
 
 Cuando en la columna la acción principal debe quedar **arriba** —al alcance del pulgar— y en la fila de escritorio **al final**, la columna es `column-reverse` y el marcado va siempre en el orden del renglón: así el recorrido del teclado no cambia con el ancho. Es lo que hacen el pie de un `Form` y el de un diálogo.
 
-**Dónde está ya puesta:** `Form` (`.form__actions`, el modelo), el pie compartido de `Modal` y `Sheet` (`.dialog-footer`, y con él `ConfirmDialog` e `ImageCropDialog`), `PageIntro`, `Hero`, `Highlight`, `Banner`, `ConsentBanner`, `FilterBar`, `RecoveryCodes` y `OnboardingShell`.
+**Cuando el bloque no mide lo que mide la ventana, la condición es de contenedor.** El pie compartido de `Modal` y `Sheet` es el ejemplo: un cajón lateral mide 320px en un teléfono y 320px en una pantalla de 27 pulgadas, así que con una media query de viewport en escritorio seguía siendo una fila y dos botones no cabían. Ahí la regla es `@container` sobre el propio diálogo, con umbral `sm` (480px) —que no es el ancho de una pantalla, sino el que hace falta para que dos botones con su etiqueta quepan en un renglón—:
+
+```css
+.dialogo { container: dialog / inline-size; }
+
+.dialog-footer { flex-direction: column-reverse; }
+
+@container dialog (min-width: 480px) /* --breakpoint-sm */ {
+  .dialog-footer { flex-direction: row; }
+}
+```
+
+**Dónde está ya puesta:** `Form` (`.form__actions`, el modelo), el pie compartido de `Modal` y `Sheet` (`.dialog-footer`, por contenedor, y con él `ConfirmDialog` e `ImageCropDialog`), `PageIntro`, `Hero`, `Highlight`, `Alert`, `Banner`, `ConsentBanner`, `FilterBar`, `RecoveryCodes` y `OnboardingShell`.
 
 **Dónde NO se aplica, y por qué.** No es una norma universal: solo vale para el **pie o la cabecera de un bloque que ya ocupa el ancho**. Quedan fuera las acciones que viven **dentro de una fila**, al lado de otro contenido —`NotificationList`, `TreeView`, `MessageComposer`, `SiteHeader`—: ahí estirar el botón rompería la fila, que es lo que da sentido a la pieza. También quedan fuera los componentes que se reorganizan por el **ancho de su hueco** y no por el de la ventana (un panel lateral estrecho también en escritorio): esos son caso de `@container`.
 

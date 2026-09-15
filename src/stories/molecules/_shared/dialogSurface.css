@@ -68,10 +68,26 @@
 
 /* ── Pie de acciones ───────────────────────────────────────── */
 /* El mismo criterio que las acciones de `Form`, con su mismo detalle de orden:
-   por debajo del punto de ruptura los botones se apilan a todo el ancho en
-   `column-reverse`, de modo que la acción principal —la última del DOM, la de
-   la derecha en la fila— queda arriba, al alcance del pulgar. A partir de ahí
-   vuelve a ser una fila alineada a la derecha. */
+   en la columna los botones se apilan a todo el ancho en `column-reverse`, de
+   modo que la acción principal —la última del DOM, la de la derecha en la
+   fila— queda arriba, al alcance del pulgar. Con sitio, vuelve a ser una fila
+   alineada a la derecha.
+
+   Lo decide el ancho del DIÁLOGO, no el de la ventana (`@container`, y por eso
+   `.sheet` y `.modal__content` se declaran contenedor). Un cajón lateral mide
+   lo mismo —320px— en un teléfono que en un escritorio de 27 pulgadas: con la
+   media query de viewport, en escritorio el pie seguía siendo una fila y dos
+   botones no cabían en 256px de hueco útil. Es el caso que Fundamentos ›
+   Puntos de ruptura ya anticipaba: lo que se reorganiza por su hueco y no por
+   la ventana es caso de consulta de contenedor.
+
+   El umbral es `sm` (480px) y no `md`: no es el ancho de una pantalla, es el
+   que hace falta para que dos botones con su etiqueta quepan en una fila. El
+   diálogo centrado (máximo 560px) sigue en fila donde lo estaba, y el cajón
+   (320px) pasa a apilar siempre, que es lo que le corresponde.
+
+   Sin contenedor a la vista —un pie usado fuera de un diálogo del sistema— la
+   consulta no casa y queda la columna, que es el lado seguro. */
 .dialog-footer {
   display: flex;
   flex-direction: column-reverse;
@@ -82,7 +98,7 @@
   inline-size: 100%;
 }
 
-@media (min-width: 768px) /* --breakpoint-md */ {
+@container dialog (min-width: 480px) /* --breakpoint-sm */ {
   .dialog-footer {
     flex-direction: row;
     justify-content: flex-end;

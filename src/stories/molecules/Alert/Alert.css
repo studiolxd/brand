@@ -57,6 +57,37 @@
   gap: var(--alert-content-gap);
 }
 
+/* ── Acciones ───────────────────────────────────────────────── */
+/* Norma del sistema (ver Fundamentos › Puntos de ruptura): el pie de acciones
+   de un bloque a ancho completo apila y cada pieza ocupa la línea por debajo
+   de `md`. La ranura vive DENTRO del contenido, no como hermana suya: el
+   contenido es el que declara la superficie interior del relleno
+   (`.surface-invert` en el neutro), y un botón fuera de ella leería con la
+   página en vez de con el aviso. */
+.alert__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--alert-actions-gap);
+  margin-block-start: var(--alert-actions-margin-block-start);
+}
+
+.alert__actions > * {
+  inline-size: 100%;
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .alert__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .alert__actions > * {
+    inline-size: auto;
+  }
+}
+
 /* ── Botón de cierre — esquina superior derecha ─────────────── */
 /* El aspa es el `CloseButton` del sistema: sin hover —era el relleno del
    `Button` ghost lo que sobraba aquí— y con el anillo de foco. El color no se

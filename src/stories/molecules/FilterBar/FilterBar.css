@@ -11,31 +11,42 @@
   inline-size: 100%;
 }
 
-/* Los filtros y, al final, sus acciones. Alineadas abajo (`flex-end`): el
-   botón cuadra con los controles, no con los rótulos que llevan encima. */
-.filter-bar__row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  column-gap: var(--filter-bar-column-gap);
-  row-gap: var(--filter-bar-row-gap);
-}
+/* UNA rejilla para los filtros Y sus acciones: el botón es una celda más,
+   alineada con los campos, no un bloque aparte al otro extremo de la fila.
 
-/* La rejilla decide sola cuántas columnas caben: `auto-fit` sobre el ancho
-   mínimo del token. El `min(…, 100%)` es lo que la deja apilar en móvil —sin
-   él, una columna de 192px desborda una pantalla de 320px—, así que no hace
-   falta punto de ruptura. `1 1 <mínimo>` deja que las acciones compartan
-   línea cuando queda sitio y que bajen a la suya cuando no. */
-.filter-bar__filters {
-  flex: 1 1 var(--filter-bar-column-min-inline-size);
-  min-inline-size: 0;
+   Antes eran dos cajas flex hermanas —la rejilla de filtros y las acciones,
+   `flex: none` y ancladas con `margin-inline-start: auto`—, y de ahí salían
+   los dos defectos: (1) el botón se llevaba su parte del ancho, así que al
+   pintarse —solo aparece cuando ya hay algo que limpiar, o sea, mientras
+   escribes— la rejilla perdía una columna DE GOLPE y un filtro bajaba de fila;
+   (2) entre el último campo y el botón quedaba siempre el hueco de su ancho.
+   Medido a 1024px con cuatro filtros: sin el botón, una fila de cuatro
+   columnas; con él, dos filas y 733px de hueco.
+
+   `auto-fill` (y no `auto-fit`) es lo que cierra el caso del todo: las pistas
+   las decide SOLO el ancho disponible, no cuántas celdas hay, así que ni el
+   número de columnas ni el ancho de los campos cambian porque aparezca o
+   desaparezca el botón. La contrapartida —con pocos filtros sobra sitio a la
+   derecha— es la buena: un filtro mide lo que mide una celda del sistema
+   (`field-row.cell-md`), no media pantalla.
+
+   El `min(…, 100%)` es lo que la deja apilar en móvil —sin él, una columna de
+   192px desborda una pantalla de 320px—, así que no hace falta punto de
+   ruptura. */
+.filter-bar__row {
   display: grid;
   grid-template-columns: repeat(
-    auto-fit,
+    auto-fill,
     minmax(min(var(--filter-bar-column-min-inline-size), 100%), 1fr)
   );
   column-gap: var(--filter-bar-column-gap);
   row-gap: var(--filter-bar-row-gap);
+}
+
+/* El envoltorio de los filtros no es una caja: sus hijos son celdas de la
+   rejilla de la fila, igual que las acciones. */
+.filter-bar__filters {
+  display: contents;
 }
 
 /* Cada filtro es una celda que puede encoger por debajo de su contenido: es lo
@@ -47,28 +58,29 @@
 /* Norma del sistema (ver Fundamentos › Puntos de ruptura): por debajo de `md`
    la barra entera es una columna —el buscador al 100%, los filtros en una sola
    columna— y sus acciones no son la excepción: toman la línea entera, como
-   todo lo demás. */
+   todo lo demás.
+
+   `align-self: end` es lo que cuadra el botón con los controles y no con los
+   rótulos que llevan encima: la celda se estira con las demás y el contenido
+   se va al final. */
 .filter-bar__actions {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  align-self: end;
   gap: var(--filter-bar-actions-gap);
-  flex: 1 1 100%;
+  min-inline-size: 0;
 }
 
 .filter-bar__actions > * {
   inline-size: 100%;
 }
 
-/* Al final de la fila: el margen automático las ancla al extremo, compartan
-   línea con los filtros o hayan bajado a la suya. */
 @media (min-width: 768px) /* --breakpoint-md */ {
   .filter-bar__actions {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    flex: 0 0 auto;
-    margin-inline-start: auto;
   }
 
   .filter-bar__actions > * {
