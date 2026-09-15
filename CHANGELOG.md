@@ -7,6 +7,66 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [44.0.0] — 2026-09-15
+
+> **Major.** Quinta familia al proveedor de textos: las subidas. `FileUpload`,
+> `AvatarUpload` e `ImageCropDialog` dejan de traer castellano puesto, el peso de un
+> archivo lo escribe el `locale`, y una lista de formatos lleva la conjunción de su idioma.
+
+### Las subidas leen del proveedor
+
+Tres espacios nuevos en `BrandMessages`: **`fileUpload`**, **`imageCropDialog`** y
+**`avatarUpload`**, veintidós claves. `CalendarPlanner` y `CalendarRoster` no estrenan
+espacio: sus dos flechas leen `calendar.previousMonth` y `calendar.nextMonth`, que es
+literalmente el mismo texto que el del `Calendar`. Mismo orden —**prop → proveedor →
+error**— y misma naturaleza: incompatible **en tiempo de compilación**.
+
+Un cambio incompatible más, de props: `AvatarUpload.cropTitle` pasa a **obligatorio**. El
+diálogo no sabe qué se recorta —«Recorta tu foto», «Recorta tu logo»—, y eso es contenido de
+la pantalla, no del sistema.
+
+### «2,5 MB» tiene dos mitades
+
+`formatBytes` hacía `toFixed(1) + ' KB'`: punto decimal inglés cableado, en todos los
+idiomas. Ahora el peso lo escribe `Intl.NumberFormat` con `style: 'unit'` en el `locale`
+del componente, y al catálogo va solo la plantilla que lo envuelve («máx. {size}»). Con el
+mismo catálogo inglés, `es-ES` escribe «max. 2,5 MB» y `en-US` «max. 2.5 MB». Es la regla
+de la v43 aplicada a otra cosa: *si cambia al cambiar de idioma es cromo; si cambia al
+cambiar de país es formato.*
+
+Efecto de asumir CLDR: las unidades son las suyas —«kB» y no «KB»— y por debajo de un
+kilobyte un `en-US` escribe «500 byte». La alternativa era volver a decidir a mano la
+colocación del sufijo, que es justo lo que la regla prohíbe.
+
+### Dos textos que no se pueden traducir por separado
+
+`AvatarUpload` tiene un botón con texto visible («Subir») y un nombre accesible («Subir el
+logo»), y WCAG 2.5.3 exige que el segundo **contenga** al primero. Traducirlos en dos
+sitios distintos es dejar que una traducción los despareje sin que falle nada; concatenarlos
+en el componente es castellano disfrazado, porque el orden es del idioma —«Subir el logo»
+lleva el verbo delante, «das Logo hochladen» lo lleva detrás—. Así que van los dos al
+catálogo, `avatarUpload.button` y `avatarUpload.buttonFor(subject)`, con la regla escrita
+al lado; la pantalla solo aporta el sujeto. El aviso de consola en desarrollo sigue
+vigilando la contención.
+
+### Una lista lleva la conjunción de su idioma
+
+Los formatos admitidos se unían con `join(', ')` y no ponían conjunción en ningún idioma:
+«JPEG, PNG, WEBP». Ahora es `Intl.ListFormat` con `type: 'disjunction'`: «JPEG, PNG o
+WEBP», «JPEG, PNG, or WEBP», «JPEG, PNG oder WEBP».
+
+### Lo que se queda como prop
+
+`ImageCropDialog.title`, `cancelLabel` y `confirmLabel` eran ya obligatorias y sin default,
+y son el modelo de toda la ola: el diálogo no sabe qué se recorta ni qué pasa al confirmar.
+En `AvatarUpload`, en cambio, `cropCancel` y `cropConfirm` sí salen del catálogo, y no es
+incoherencia: esa subida sí sabe lo que confirma —se guarda un recorte—, y vale igual en
+todas las pantallas.
+
+Quedan dos reenvíos puros a una pieza sin migrar: `ImageCropDialog.closeLabel` y
+`AvatarUpload.cropCloseLabel` van al `Modal`, que aún trae su «Cerrar». Es la deuda que
+esta ola deja apuntada, y es por donde sigue la siguiente.
+
 ## [43.0.0] — 2026-09-15
 
 > **Major.** Cuarta familia al proveedor de textos: fecha y hora. `Calendar`, `DatePicker`

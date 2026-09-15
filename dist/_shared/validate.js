@@ -1,9 +1,35 @@
 //#region src/stories/atoms/FileUpload/validate.ts
-function e(e) {
-	return e < 1024 ? `${e} B` : e < 1024 * 1024 ? `${(e / 1024).toFixed(1)} KB` : `${(e / (1024 * 1024)).toFixed(1)} MB`;
+var e = "es-ES";
+function t(t, n = e) {
+	let [r, i, a] = t < 1024 ? [
+		t,
+		"byte",
+		0
+	] : t < 1024 * 1024 ? [
+		t / 1024,
+		"kilobyte",
+		1
+	] : [
+		t / (1024 * 1024),
+		"megabyte",
+		1
+	];
+	return new Intl.NumberFormat(n, {
+		style: "unit",
+		unit: i,
+		unitDisplay: "short",
+		minimumFractionDigits: a,
+		maximumFractionDigits: a
+	}).format(r);
 }
-function t(t, n, r, i, a) {
-	return r !== void 0 && t.size > r ? i(e(r)) : n && !n.split(",").map((e) => e.trim()).some((e) => e.startsWith(".") ? t.name.toLowerCase().endsWith(e.toLowerCase()) : e.endsWith("/*") ? t.type.startsWith(e.slice(0, -2)) : t.type === e) ? a : null;
+function n(t, n = e) {
+	return new Intl.ListFormat(n, {
+		style: "long",
+		type: "disjunction"
+	}).format(t);
+}
+function r(n, r, i, a, o, s = e) {
+	return i !== void 0 && n.size > i ? a(t(i, s)) : r && !r.split(",").map((e) => e.trim()).some((e) => e.startsWith(".") ? n.name.toLowerCase().endsWith(e.toLowerCase()) : e.endsWith("/*") ? n.type.startsWith(e.slice(0, -2)) : n.type === e) ? o : null;
 }
 //#endregion
-export { t as n, e as t };
+export { r as i, t as n, n as r, e as t };

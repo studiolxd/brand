@@ -1,19 +1,20 @@
 'use client';
 import './calendar-planner.css';
-import { VisuallyHidden as e } from "./visually-hidden.js";
-import { Tag as t } from "./tag.js";
-import { Modal as n } from "./modal.js";
-import { c as r, i, l as a, n as o, o as s, r as c, s as l, t as u } from "./_shared/calendargrid.js";
-import { useCallback as d, useId as f, useState as p } from "react";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { VisuallyHidden as t } from "./visually-hidden.js";
+import { Tag as n } from "./tag.js";
+import { Modal as r } from "./modal.js";
+import { c as i, i as a, l as o, n as s, o as c, r as l, s as u, t as d } from "./_shared/calendargrid.js";
+import { useCallback as f, useId as ee, useState as p } from "react";
 import { Fragment as m, jsx as h, jsxs as g } from "react/jsx-runtime";
 //#region src/stories/molecules/CalendarPlanner/CalendarPlanner.tsx
-function _({ events: _ = [], renderDay: v, maxItemsPerDay: y = 3, onMoreClick: b, showMoreDialog: x, onDayClick: S, month: C, defaultMonth: w, onMonthChange: T, navigable: E = !0, locale: D = "es-ES", previousMonthLabel: O = "Mes anterior", nextMonthLabel: k = "Mes siguiente", gridLabel: A, moreLabel: j = (e) => `+${e} más`, size: M = "md", className: N }) {
-	let [P, F] = p(() => C ?? w ?? /* @__PURE__ */ new Date()), [I, L] = p(null), R = x ?? !b, z = d(() => L(null), []), B = C ?? P, V = d((e) => {
-		F(e), T?.(e);
-	}, [T]), H = /* @__PURE__ */ new Date(), U = M === "sm" ? "xs" : M === "lg" ? "md" : "sm", W = new Intl.DateTimeFormat(D, {
+function _({ events: _ = [], renderDay: v, maxItemsPerDay: y = 3, onMoreClick: b, showMoreDialog: x, onDayClick: S, month: C, defaultMonth: w, onMonthChange: T, navigable: E = !0, locale: D = "es-ES", previousMonthLabel: O, nextMonthLabel: k, gridLabel: A, moreLabel: te = (e) => `+${e} más`, size: j = "md", className: M }) {
+	let [N, P] = p(() => C ?? w ?? /* @__PURE__ */ new Date()), [F, I] = p(null), L = x ?? !b, R = f(() => I(null), []), z = C ?? N, B = f((e) => {
+		P(e), T?.(e);
+	}, [T]), V = e("calendar"), H = /* @__PURE__ */ new Date(), U = j === "sm" ? "xs" : j === "lg" ? "md" : "sm", W = new Intl.DateTimeFormat(D, {
 		month: "long",
 		year: "numeric"
-	}).format(B), G = new Intl.DateTimeFormat(D, {
+	}).format(z), G = new Intl.DateTimeFormat(D, {
 		weekday: "long",
 		day: "numeric",
 		month: "long",
@@ -23,27 +24,27 @@ function _({ events: _ = [], renderDay: v, maxItemsPerDay: y = 3, onMoreClick: b
 		day: "numeric",
 		month: "long",
 		year: "numeric"
-	}), q = c(D, "short"), J = u(o(B)), Y = r(B, -1), X = r(B, 1), Z = (e) => _.filter((t) => i(t.date, e)), Q = a({
-		month: B,
-		onMonthChange: V,
+	}), q = l(D, "short"), J = d(s(z)), Y = i(z, -1), X = i(z, 1), Z = (e) => _.filter((t) => a(t.date, e)), Q = o({
+		month: z,
+		onMonthChange: B,
 		onActivate: S ? (e) => S(e, Z(e)) : void 0
-	}), $ = `${f()}-planner-title-${B.getFullYear()}-${B.getMonth()}`;
+	}), $ = `${ee()}-planner-title-${z.getFullYear()}-${z.getMonth()}`;
 	return /* @__PURE__ */ g("div", {
 		className: [
 			"calendar-planner",
-			`calendar-planner--${M}`,
-			N
+			`calendar-planner--${j}`,
+			M
 		].filter(Boolean).join(" "),
 		children: [
-			s({
+			c({
 				block: "calendar-planner",
 				title: W,
 				titleId: $,
 				navigable: E,
-				previousLabel: O,
-				nextLabel: k,
-				onPrev: () => V(Y),
-				onNext: () => V(X),
+				previousLabel: E ? V("previousMonth", O) : void 0,
+				nextLabel: E ? V("nextMonth", k) : void 0,
+				onPrev: () => B(Y),
+				onNext: () => B(X),
 				chevronSize: U
 			}),
 			/* @__PURE__ */ g("div", {
@@ -52,65 +53,65 @@ function _({ events: _ = [], renderDay: v, maxItemsPerDay: y = 3, onMoreClick: b
 				"aria-label": A,
 				"aria-labelledby": A ? void 0 : $,
 				onKeyDown: S ? Q.onKeyDown : void 0,
-				children: [l({
+				children: [u({
 					block: "calendar-planner",
 					rowModifier: "header",
 					weekdays: q
-				}), J.map((n, r) => /* @__PURE__ */ h("div", {
+				}), J.map((e, r) => /* @__PURE__ */ h("div", {
 					role: "row",
 					className: "calendar-planner__row",
-					children: n.map(({ date: n, outside: r }) => {
-						let a = i(n, H), o = Z(n), s = o.slice(0, y), c = o.length - s.length, l = [
+					children: e.map(({ date: e, outside: r }) => {
+						let i = a(e, H), o = Z(e), s = o.slice(0, y), c = o.length - s.length, l = [
 							"calendar-planner__cell",
 							r && "calendar-planner__cell--outside",
-							a && "calendar-planner__cell--today"
+							i && "calendar-planner__cell--today"
 						].filter(Boolean).join(" "), u = [
 							"calendar-planner__day-number",
-							a && "calendar-planner__day-number--today",
+							i && "calendar-planner__day-number--today",
 							r && "calendar-planner__day-number--outside"
 						].filter(Boolean).join(" ");
 						return /* @__PURE__ */ g("div", {
-							ref: S ? Q.cellRef(n) : void 0,
+							ref: S ? Q.cellRef(e) : void 0,
 							role: "gridcell",
 							className: [l, S ? "calendar-planner__cell--clickable" : ""].filter(Boolean).join(" "),
-							"aria-current": a ? "date" : void 0,
-							tabIndex: S ? Q.isTabbable(n) ? 0 : -1 : void 0,
-							onFocus: S ? () => Q.onCellFocus(n) : void 0,
-							onClick: S ? () => S(n, o) : void 0,
+							"aria-current": i ? "date" : void 0,
+							tabIndex: S ? Q.isTabbable(e) ? 0 : -1 : void 0,
+							onFocus: S ? () => Q.onCellFocus(e) : void 0,
+							onClick: S ? () => S(e, o) : void 0,
 							children: [/* @__PURE__ */ g("span", {
 								className: u,
-								children: [/* @__PURE__ */ h(e, { children: G.format(n) }), /* @__PURE__ */ h("span", {
+								children: [/* @__PURE__ */ h(t, { children: G.format(e) }), /* @__PURE__ */ h("span", {
 									"aria-hidden": "true",
-									children: n.getDate()
+									children: e.getDate()
 								})]
 							}), /* @__PURE__ */ h("div", {
 								className: "calendar-planner__cell-body",
-								children: v ? v(n, o) : /* @__PURE__ */ g(m, { children: [s.map((e) => /* @__PURE__ */ h(t, {
+								children: v ? v(e, o) : /* @__PURE__ */ g(m, { children: [s.map((e) => /* @__PURE__ */ h(n, {
 									variant: e.variant ?? "neutral",
 									children: e.label
 								}, e.id)), c > 0 && /* @__PURE__ */ h("button", {
 									type: "button",
 									className: "calendar-planner__more",
-									onClick: (e) => {
-										e.stopPropagation(), R && L({
-											date: n,
+									onClick: (t) => {
+										t.stopPropagation(), L && I({
+											date: e,
 											events: o
-										}), b?.(n, o);
+										}), b?.(e, o);
 									},
-									children: j(c)
+									children: te(c)
 								})] })
 							})]
-						}, n.toISOString());
+						}, e.toISOString());
 					})
 				}, r))]
 			}),
-			/* @__PURE__ */ h(n, {
-				open: I !== null,
-				onClose: z,
-				title: I ? K.format(I.date) : void 0,
+			/* @__PURE__ */ h(r, {
+				open: F !== null,
+				onClose: R,
+				title: F ? K.format(F.date) : void 0,
 				children: /* @__PURE__ */ h("div", {
 					className: "calendar-planner__modal-events",
-					children: I?.events.map((e) => /* @__PURE__ */ h(t, {
+					children: F?.events.map((e) => /* @__PURE__ */ h(n, {
 						variant: e.variant ?? "neutral",
 						children: e.label
 					}, e.id))

@@ -43,13 +43,14 @@ export interface CalendarPlannerProps {
     /** Locale para nombres de mes y día. Default: 'es-ES' */
     locale?: string;
     /**
-     * aria-label del botón de mes anterior. Default: "Mes anterior" (castellano).
-     * Una app multiidioma debe pasarla traducida.
+     * aria-label del botón de mes anterior. **Sin default**: sin él, sale de
+     * `calendar.previousMonth` del `BrandMessagesProvider` — es el mismo texto
+     * que el del `Calendar`, así que es el mismo espacio.
      */
     previousMonthLabel?: string;
     /**
-     * aria-label del botón de mes siguiente. Default: "Mes siguiente" (castellano).
-     * Una app multiidioma debe pasarla traducida.
+     * aria-label del botón de mes siguiente. **Sin default**: sin él, sale de
+     * `calendar.nextMonth` del `BrandMessagesProvider`.
      */
     nextMonthLabel?: string;
     /**

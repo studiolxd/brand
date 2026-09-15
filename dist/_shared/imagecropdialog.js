@@ -1,29 +1,30 @@
 import '../imagecropdialog.css';
-import { Spinner as e } from "../spinner.js";
-import { Button as t } from "../button.js";
-import { Alert as n } from "../alert.js";
-import { Modal as r } from "../modal.js";
-import i, { PureComponent as a, createRef as o, useRef as s, useState as c } from "react";
-import { Fragment as l, jsx as u, jsxs as d } from "react/jsx-runtime";
+import { n as e } from "./brandmessagescontext.js";
+import { Spinner as t } from "../spinner.js";
+import { Button as n } from "../button.js";
+import { Alert as r } from "../alert.js";
+import { Modal as i } from "../modal.js";
+import a, { PureComponent as o, createRef as s, useRef as c, useState as l } from "react";
+import { Fragment as u, jsx as d, jsxs as f } from "react/jsx-runtime";
 //#region node_modules/.pnpm/react-image-crop@11.1.2_react@19.2.4/node_modules/react-image-crop/dist/index.js
-var f = {
+var p = {
 	x: 0,
 	y: 0,
 	width: 0,
 	height: 0,
 	unit: "px"
-}, p = (e, t, n) => Math.min(Math.max(e, t), n), m = (...e) => e.filter((e) => e && typeof e == "string").join(" "), h = (e, t) => e === t || e.width === t.width && e.height === t.height && e.x === t.x && e.y === t.y && e.unit === t.unit;
-function g(e, t, n, r) {
-	let i = y(e, n, r);
-	return e.width && (i.height = i.width / t), e.height && (i.width = i.height * t), i.y + i.height > r && (i.height = r - i.y, i.width = i.height * t), i.x + i.width > n && (i.width = n - i.x, i.height = i.width / t), e.unit === "%" ? v(i, n, r) : i;
-}
-function _(e, t, n) {
-	let r = y(e, t, n);
-	return r.x = (t - r.width) / 2, r.y = (n - r.height) / 2, e.unit === "%" ? v(r, t, n) : r;
+}, m = (e, t, n) => Math.min(Math.max(e, t), n), h = (...e) => e.filter((e) => e && typeof e == "string").join(" "), g = (e, t) => e === t || e.width === t.width && e.height === t.height && e.x === t.x && e.y === t.y && e.unit === t.unit;
+function _(e, t, n, r) {
+	let i = b(e, n, r);
+	return e.width && (i.height = i.width / t), e.height && (i.width = i.height * t), i.y + i.height > r && (i.height = r - i.y, i.width = i.height * t), i.x + i.width > n && (i.width = n - i.x, i.height = i.width / t), e.unit === "%" ? y(i, n, r) : i;
 }
 function v(e, t, n) {
+	let r = b(e, t, n);
+	return r.x = (t - r.width) / 2, r.y = (n - r.height) / 2, e.unit === "%" ? y(r, t, n) : r;
+}
+function y(e, t, n) {
 	return e.unit === "%" ? {
-		...f,
+		...p,
 		...e,
 		unit: "%"
 	} : {
@@ -34,9 +35,9 @@ function v(e, t, n) {
 		height: e.height ? e.height / n * 100 : 0
 	};
 }
-function y(e, t, n) {
+function b(e, t, n) {
 	return !e.unit || e.unit === "px" ? {
-		...f,
+		...p,
 		...e,
 		unit: "px"
 	} : {
@@ -47,7 +48,7 @@ function y(e, t, n) {
 		height: e.height ? e.height * n / 100 : 0
 	};
 }
-function b(e, t, n, r, i, a = 0, o = 0, s = r, c = i) {
+function x(e, t, n, r, i, a = 0, o = 0, s = r, c = i) {
 	let l = { ...e }, u = Math.min(a, r), d = Math.min(o, i), f = Math.min(s, r), p = Math.min(c, i);
 	t && (t > 1 ? (u = o ? o * t : u, d = u / t, f = s * t) : (d = a ? a / t : d, u = d * t, p = c / t)), l.y < 0 && (l.height = Math.max(l.height + l.y, d), l.y = 0), l.x < 0 && (l.width = Math.max(l.width + l.x, u), l.x = 0);
 	let m = r - (l.x + l.width);
@@ -65,14 +66,14 @@ function b(e, t, n, r, i, a = 0, o = 0, s = r, c = i) {
 	}
 	return l;
 }
-function x(e, t, n, r) {
+function S(e, t, n, r) {
 	let i = { ...e };
 	return t === "ArrowLeft" ? r === "nw" ? (i.x -= n, i.y -= n, i.width += n, i.height += n) : r === "w" ? (i.x -= n, i.width += n) : r === "sw" ? (i.x -= n, i.width += n, i.height += n) : r === "ne" ? (i.y += n, i.width -= n, i.height -= n) : r === "e" ? i.width -= n : r === "se" && (i.width -= n, i.height -= n) : t === "ArrowRight" && (r === "nw" ? (i.x += n, i.y += n, i.width -= n, i.height -= n) : r === "w" ? (i.x += n, i.width -= n) : r === "sw" ? (i.x += n, i.width -= n, i.height -= n) : r === "ne" ? (i.y -= n, i.width += n, i.height += n) : r === "e" ? i.width += n : r === "se" && (i.width += n, i.height += n)), t === "ArrowUp" ? r === "nw" ? (i.x -= n, i.y -= n, i.width += n, i.height += n) : r === "n" ? (i.y -= n, i.height += n) : r === "ne" ? (i.y -= n, i.width += n, i.height += n) : r === "sw" ? (i.x += n, i.width -= n, i.height -= n) : r === "s" ? i.height -= n : r === "se" && (i.width -= n, i.height -= n) : t === "ArrowDown" && (r === "nw" ? (i.x += n, i.y += n, i.width -= n, i.height -= n) : r === "n" ? (i.y += n, i.height -= n) : r === "ne" ? (i.y += n, i.width -= n, i.height -= n) : r === "sw" ? (i.x -= n, i.width += n, i.height += n) : r === "s" ? i.height += n : r === "se" && (i.width += n, i.height += n)), i;
 }
-var S = {
+var C = {
 	capture: !0,
 	passive: !1
-}, C = 0, w = class e extends a {
+}, w = 0, T = class e extends o {
 	static xOrds = ["e", "w"];
 	static yOrds = ["n", "s"];
 	static xyOrds = [
@@ -110,11 +111,11 @@ var S = {
 		clientY: 0,
 		isResize: !0
 	};
-	componentRef = o();
-	mediaRef = o();
+	componentRef = s();
+	mediaRef = s();
 	resizeObserver;
 	initChangeCalled = !1;
-	instanceId = `rc-${C++}`;
+	instanceId = `rc-${w++}`;
 	state = {
 		cropIsActive: !1,
 		newCropIsBeingDrawn: !1
@@ -139,22 +140,22 @@ var S = {
 		let { crop: t, onComplete: n } = this.props;
 		if (n && !e.crop && t) {
 			let { width: e, height: r } = this.getBox();
-			e && r && n(y(t, e, r), v(t, e, r));
+			e && r && n(b(t, e, r), y(t, e, r));
 		}
 	}
 	componentWillUnmount() {
 		this.resizeObserver && this.resizeObserver.disconnect(), this.unbindDocMove();
 	}
 	bindDocMove() {
-		this.docMoveBound ||= (this.document.addEventListener("pointermove", this.onDocPointerMove, S), this.document.addEventListener("pointerup", this.onDocPointerDone, S), this.document.addEventListener("pointercancel", this.onDocPointerDone, S), !0);
+		this.docMoveBound ||= (this.document.addEventListener("pointermove", this.onDocPointerMove, C), this.document.addEventListener("pointerup", this.onDocPointerDone, C), this.document.addEventListener("pointercancel", this.onDocPointerDone, C), !0);
 	}
 	unbindDocMove() {
-		this.docMoveBound &&= (this.document.removeEventListener("pointermove", this.onDocPointerMove, S), this.document.removeEventListener("pointerup", this.onDocPointerDone, S), this.document.removeEventListener("pointercancel", this.onDocPointerDone, S), !1);
+		this.docMoveBound &&= (this.document.removeEventListener("pointermove", this.onDocPointerMove, C), this.document.removeEventListener("pointerup", this.onDocPointerDone, C), this.document.removeEventListener("pointercancel", this.onDocPointerDone, C), !1);
 	}
 	onCropPointerDown = (e) => {
 		let { crop: t, disabled: n } = this.props, r = this.getBox();
 		if (!t) return;
-		let i = y(t, r.width, r.height);
+		let i = b(t, r.width, r.height);
 		if (n) return;
 		e.cancelable && e.preventDefault(), this.bindDocMove(), this.componentRef.current.focus({ preventScroll: !0 });
 		let a = e.target.dataset.ord, o = !!a, s = e.clientX, c = e.clientY, l = i.x, u = i.y;
@@ -192,7 +193,7 @@ var S = {
 			clientX: e.clientX,
 			clientY: e.clientY,
 			isResize: !0
-		}, this.mouseDownOnCrop = !0, a(y(l, o.width, o.height), v(l, o.width, o.height)), this.setState({
+		}, this.mouseDownOnCrop = !0, a(b(l, o.width, o.height), y(l, o.width, o.height)), this.setState({
 			cropIsActive: !0,
 			newCropIsBeingDrawn: !0
 		});
@@ -204,7 +205,7 @@ var S = {
 		let { evData: o } = this;
 		o.clientX = e.clientX, o.clientY = e.clientY;
 		let s;
-		s = o.isResize ? this.resizeCrop() : this.dragCrop(), h(t, s) || r(y(s, a.width, a.height), v(s, a.width, a.height));
+		s = o.isResize ? this.resizeCrop() : this.dragCrop(), g(t, s) || r(b(s, a.width, a.height), y(s, a.width, a.height));
 	};
 	onComponentKeyDown = (t) => {
 		let { crop: n, disabled: r, onChange: i, onComplete: a } = this.props;
@@ -213,8 +214,8 @@ var S = {
 		if (!n) return;
 		let c = this.getBox(), l = this.makePixelCrop(c), u = (navigator.platform.match("Mac") ? t.metaKey : t.ctrlKey) ? e.nudgeStepLarge : t.shiftKey ? e.nudgeStepMedium : e.nudgeStep;
 		if (o === "ArrowLeft" ? (l.x -= u, s = !0) : o === "ArrowRight" ? (l.x += u, s = !0) : o === "ArrowUp" ? (l.y -= u, s = !0) : o === "ArrowDown" && (l.y += u, s = !0), s) {
-			t.cancelable && t.preventDefault(), l.x = p(l.x, 0, c.width - l.width), l.y = p(l.y, 0, c.height - l.height);
-			let e = y(l, c.width, c.height), n = v(l, c.width, c.height);
+			t.cancelable && t.preventDefault(), l.x = m(l.x, 0, c.width - l.width), l.y = m(l.y, 0, c.height - l.height);
+			let e = b(l, c.width, c.height), n = y(l, c.width, c.height);
 			i(e, n), a && a(e, n);
 		}
 	};
@@ -223,15 +224,15 @@ var S = {
 		if (a || !i) return;
 		if (t.key === "ArrowUp" || t.key === "ArrowDown" || t.key === "ArrowLeft" || t.key === "ArrowRight") t.stopPropagation(), t.preventDefault();
 		else return;
-		let p = (navigator.platform.match("Mac") ? t.metaKey : t.ctrlKey) ? e.nudgeStepLarge : t.shiftKey ? e.nudgeStepMedium : e.nudgeStep, m = b(x(y(i, f.width, f.height), t.key, p, n), r, n, f.width, f.height, o, s, c, l);
-		if (!h(i, m)) {
-			let e = v(m, f.width, f.height);
+		let p = (navigator.platform.match("Mac") ? t.metaKey : t.ctrlKey) ? e.nudgeStepLarge : t.shiftKey ? e.nudgeStepMedium : e.nudgeStep, m = x(S(b(i, f.width, f.height), t.key, p, n), r, n, f.width, f.height, o, s, c, l);
+		if (!g(i, m)) {
+			let e = y(m, f.width, f.height);
 			u(m, e), d && d(m, e);
 		}
 	};
 	onDocPointerDone = (e) => {
 		let { crop: t, disabled: n, onComplete: r, onDragEnd: i } = this.props, a = this.getBox();
-		this.unbindDocMove(), !(n || !t) && this.mouseDownOnCrop && (this.mouseDownOnCrop = !1, this.dragStarted = !1, i && i(e), r && r(y(t, a.width, a.height), v(t, a.width, a.height)), this.setState({
+		this.unbindDocMove(), !(n || !t) && this.mouseDownOnCrop && (this.mouseDownOnCrop = !1, this.dragStarted = !1, i && i(e), r && r(b(t, a.width, a.height), y(t, a.width, a.height)), this.setState({
 			cropIsActive: !1,
 			newCropIsBeingDrawn: !1
 		}));
@@ -250,7 +251,7 @@ var S = {
 	}
 	dragCrop() {
 		let { evData: e } = this, t = this.getBox(), n = this.makePixelCrop(t), r = e.clientX - e.startClientX, i = e.clientY - e.startClientY;
-		return n.x = p(e.startCropX + r, 0, t.width - n.width), n.y = p(e.startCropY + i, 0, t.height - n.height), n;
+		return n.x = m(e.startCropX + r, 0, t.width - n.width), n.y = m(e.startCropY + i, 0, t.height - n.height), n;
 	}
 	getPointRegion(e, t, n, r) {
 		let { evData: i } = this, a = i.clientX - e.x, o = i.clientY - e.y, s;
@@ -265,20 +266,20 @@ var S = {
 	resizeCrop() {
 		let { evData: t } = this, { aspect: n = 0, maxWidth: r, maxHeight: i } = this.props, a = this.getBox(), [o, s] = this.resolveMinDimensions(a, n, this.props.minWidth, this.props.minHeight), c = this.makePixelCrop(a), l = this.getPointRegion(a, t.ord, o, s), u = t.ord || l, d = t.clientX - t.startClientX, f = t.clientY - t.startClientY;
 		(o && u === "nw" || u === "w" || u === "sw") && (d = Math.min(d, -o)), (s && u === "nw" || u === "n" || u === "ne") && (f = Math.min(f, -s));
-		let m = {
+		let p = {
 			unit: "px",
 			x: 0,
 			y: 0,
 			width: 0,
 			height: 0
 		};
-		l === "ne" ? (m.x = t.startCropX, m.width = d, n ? (m.height = m.width / n, m.y = t.startCropY - m.height) : (m.height = Math.abs(f), m.y = t.startCropY - m.height)) : l === "se" ? (m.x = t.startCropX, m.y = t.startCropY, m.width = d, n ? m.height = m.width / n : m.height = f) : l === "sw" ? (m.x = t.startCropX + d, m.y = t.startCropY, m.width = Math.abs(d), n ? m.height = m.width / n : m.height = f) : l === "nw" && (m.x = t.startCropX + d, m.width = Math.abs(d), n ? (m.height = m.width / n, m.y = t.startCropY - m.height) : (m.height = Math.abs(f), m.y = t.startCropY + f));
-		let h = b(m, n, l, a.width, a.height, o, s, r, i);
-		return n || e.xyOrds.indexOf(u) > -1 ? c = h : e.xOrds.indexOf(u) > -1 ? (c.x = h.x, c.width = h.width) : e.yOrds.indexOf(u) > -1 && (c.y = h.y, c.height = h.height), c.x = p(c.x, 0, a.width - c.width), c.y = p(c.y, 0, a.height - c.height), c;
+		l === "ne" ? (p.x = t.startCropX, p.width = d, n ? (p.height = p.width / n, p.y = t.startCropY - p.height) : (p.height = Math.abs(f), p.y = t.startCropY - p.height)) : l === "se" ? (p.x = t.startCropX, p.y = t.startCropY, p.width = d, n ? p.height = p.width / n : p.height = f) : l === "sw" ? (p.x = t.startCropX + d, p.y = t.startCropY, p.width = Math.abs(d), n ? p.height = p.width / n : p.height = f) : l === "nw" && (p.x = t.startCropX + d, p.width = Math.abs(d), n ? (p.height = p.width / n, p.y = t.startCropY - p.height) : (p.height = Math.abs(f), p.y = t.startCropY + f));
+		let h = x(p, n, l, a.width, a.height, o, s, r, i);
+		return n || e.xyOrds.indexOf(u) > -1 ? c = h : e.xOrds.indexOf(u) > -1 ? (c.x = h.x, c.width = h.width) : e.yOrds.indexOf(u) > -1 && (c.y = h.y, c.height = h.height), c.x = m(c.x, 0, a.width - c.width), c.y = m(c.y, 0, a.height - c.height), c;
 	}
 	renderCropSelection() {
-		let { ariaLabels: t = e.defaultProps.ariaLabels, disabled: n, locked: r, renderSelectionAddon: a, ruleOfThirds: o, crop: s } = this.props, c = this.getCropStyle();
-		if (s) return /* @__PURE__ */ i.createElement("div", {
+		let { ariaLabels: t = e.defaultProps.ariaLabels, disabled: n, locked: r, renderSelectionAddon: i, ruleOfThirds: o, crop: s } = this.props, c = this.getCropStyle();
+		if (s) return /* @__PURE__ */ a.createElement("div", {
 			style: c,
 			className: "ReactCrop__crop-selection",
 			onPointerDown: this.onCropPointerDown,
@@ -286,119 +287,119 @@ var S = {
 			tabIndex: 0,
 			onKeyDown: this.onComponentKeyDown,
 			role: "group"
-		}, !n && !r && /* @__PURE__ */ i.createElement("div", {
+		}, !n && !r && /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-elements",
 			onFocus: this.onDragFocus
-		}, /* @__PURE__ */ i.createElement("div", {
+		}, /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-bar ord-n",
 			"data-ord": "n"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-bar ord-e",
 			"data-ord": "e"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-bar ord-s",
 			"data-ord": "s"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-bar ord-w",
 			"data-ord": "w"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-handle ord-nw",
 			"data-ord": "nw",
 			tabIndex: 0,
 			"aria-label": t.nwDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "nw"),
 			role: "button"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-handle ord-n",
 			"data-ord": "n",
 			tabIndex: 0,
 			"aria-label": t.nDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "n"),
 			role: "button"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-handle ord-ne",
 			"data-ord": "ne",
 			tabIndex: 0,
 			"aria-label": t.neDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "ne"),
 			role: "button"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-handle ord-e",
 			"data-ord": "e",
 			tabIndex: 0,
 			"aria-label": t.eDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "e"),
 			role: "button"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-handle ord-se",
 			"data-ord": "se",
 			tabIndex: 0,
 			"aria-label": t.seDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "se"),
 			role: "button"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-handle ord-s",
 			"data-ord": "s",
 			tabIndex: 0,
 			"aria-label": t.sDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "s"),
 			role: "button"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-handle ord-sw",
 			"data-ord": "sw",
 			tabIndex: 0,
 			"aria-label": t.swDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "sw"),
 			role: "button"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-handle ord-w",
 			"data-ord": "w",
 			tabIndex: 0,
 			"aria-label": t.wDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "w"),
 			role: "button"
-		})), a && /* @__PURE__ */ i.createElement("div", {
+		})), i && /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__selection-addon",
 			onPointerDown: (e) => e.stopPropagation()
-		}, a(this.state)), o && /* @__PURE__ */ i.createElement(i.Fragment, null, /* @__PURE__ */ i.createElement("div", { className: "ReactCrop__rule-of-thirds-hz" }), /* @__PURE__ */ i.createElement("div", { className: "ReactCrop__rule-of-thirds-vt" })));
+		}, i(this.state)), o && /* @__PURE__ */ a.createElement(a.Fragment, null, /* @__PURE__ */ a.createElement("div", { className: "ReactCrop__rule-of-thirds-hz" }), /* @__PURE__ */ a.createElement("div", { className: "ReactCrop__rule-of-thirds-vt" })));
 	}
 	makePixelCrop(e) {
-		return y({
-			...f,
+		return b({
+			...p,
 			...this.props.crop || {}
 		}, e.width, e.height);
 	}
 	render() {
-		let { aspect: e, children: t, circularCrop: n, className: r, crop: a, disabled: o, locked: s, style: c, ruleOfThirds: l } = this.props, { cropIsActive: u, newCropIsBeingDrawn: d } = this.state, f = a ? this.renderCropSelection() : null, p = m("ReactCrop", r, u && "ReactCrop--active", o && "ReactCrop--disabled", s && "ReactCrop--locked", d && "ReactCrop--new-crop", a && e && "ReactCrop--fixed-aspect", a && n && "ReactCrop--circular-crop", a && l && "ReactCrop--rule-of-thirds", !this.dragStarted && a && !a.width && !a.height && "ReactCrop--invisible-crop", n && "ReactCrop--no-animate");
-		return /* @__PURE__ */ i.createElement("div", {
+		let { aspect: e, children: t, circularCrop: n, className: r, crop: i, disabled: o, locked: s, style: c, ruleOfThirds: l } = this.props, { cropIsActive: u, newCropIsBeingDrawn: d } = this.state, f = i ? this.renderCropSelection() : null, p = h("ReactCrop", r, u && "ReactCrop--active", o && "ReactCrop--disabled", s && "ReactCrop--locked", d && "ReactCrop--new-crop", i && e && "ReactCrop--fixed-aspect", i && n && "ReactCrop--circular-crop", i && l && "ReactCrop--rule-of-thirds", !this.dragStarted && i && !i.width && !i.height && "ReactCrop--invisible-crop", n && "ReactCrop--no-animate");
+		return /* @__PURE__ */ a.createElement("div", {
 			ref: this.componentRef,
 			className: p,
 			style: c
-		}, /* @__PURE__ */ i.createElement("div", {
+		}, /* @__PURE__ */ a.createElement("div", {
 			ref: this.mediaRef,
 			className: "ReactCrop__child-wrapper",
 			onPointerDown: this.onComponentPointerDown
-		}, t), a ? /* @__PURE__ */ i.createElement("svg", {
+		}, t), i ? /* @__PURE__ */ a.createElement("svg", {
 			className: "ReactCrop__crop-mask",
 			width: "100%",
 			height: "100%"
-		}, /* @__PURE__ */ i.createElement("defs", null, /* @__PURE__ */ i.createElement("mask", { id: `hole-${this.instanceId}` }, /* @__PURE__ */ i.createElement("rect", {
+		}, /* @__PURE__ */ a.createElement("defs", null, /* @__PURE__ */ a.createElement("mask", { id: `hole-${this.instanceId}` }, /* @__PURE__ */ a.createElement("rect", {
 			width: "100%",
 			height: "100%",
 			fill: "white"
-		}), n ? /* @__PURE__ */ i.createElement("ellipse", {
-			cx: `${a.x + a.width / 2}${a.unit}`,
-			cy: `${a.y + a.height / 2}${a.unit}`,
-			rx: `${a.width / 2}${a.unit}`,
-			ry: `${a.height / 2}${a.unit}`,
+		}), n ? /* @__PURE__ */ a.createElement("ellipse", {
+			cx: `${i.x + i.width / 2}${i.unit}`,
+			cy: `${i.y + i.height / 2}${i.unit}`,
+			rx: `${i.width / 2}${i.unit}`,
+			ry: `${i.height / 2}${i.unit}`,
 			fill: "black"
-		}) : /* @__PURE__ */ i.createElement("rect", {
-			x: `${a.x}${a.unit}`,
-			y: `${a.y}${a.unit}`,
-			width: `${a.width}${a.unit}`,
-			height: `${a.height}${a.unit}`,
+		}) : /* @__PURE__ */ a.createElement("rect", {
+			x: `${i.x}${i.unit}`,
+			y: `${i.y}${i.unit}`,
+			width: `${i.width}${i.unit}`,
+			height: `${i.height}${i.unit}`,
 			fill: "black"
-		}))), /* @__PURE__ */ i.createElement("rect", {
+		}))), /* @__PURE__ */ a.createElement("rect", {
 			fill: "black",
 			fillOpacity: .5,
 			width: "100%",
@@ -410,7 +411,7 @@ var S = {
 Math.PI / 180;
 //#endregion
 //#region src/stories/molecules/ImageCropDialog/crop.ts
-async function T(e, t, n = {}) {
+async function E(e, t, n = {}) {
 	let r = n.outputSize ?? 512, i = n.mimeType ?? "image/jpeg", a = n.quality ?? .9, o = document.createElement("canvas");
 	o.width = r, o.height = r;
 	let s = o.getContext("2d");
@@ -420,8 +421,8 @@ async function T(e, t, n = {}) {
 		o.toBlob((n) => n ? e(n) : t(/* @__PURE__ */ Error("Canvas toBlob returned null")), i, a);
 	});
 }
-function E(e, t, n) {
-	return _(g(t / n >= e ? {
+function D(e, t, n) {
+	return v(_(t / n >= e ? {
 		unit: "%",
 		height: 100
 	} : {
@@ -431,68 +432,68 @@ function E(e, t, n) {
 }
 //#endregion
 //#region src/stories/molecules/ImageCropDialog/ImageCropDialog.tsx
-function D({ sourceUrl: i, title: a, description: o, circularCrop: f = !1, aspect: p = 1, outputSize: m = 512, outputMimeType: h, busy: g = !1, cancelLabel: _, confirmLabel: v, closeLabel: y, loadingLabel: b = "Cargando imagen…", errorMessage: x = "No hemos podido cargar la imagen. Prueba con otro archivo.", onConfirm: S, onClose: C, className: D }) {
-	let O = s(null), [k, A] = c(), [j, M] = c(), [N, P] = c("loading"), [F, I] = c(i);
-	i !== F && (I(i), P("loading"), A(void 0), M(void 0));
-	let L = () => {
-		A(void 0), M(void 0), C();
-	}, R = async () => {
-		let e = O.current;
-		!e || !j || j.width === 0 || (await S(await T(e, j, {
-			mimeType: h,
-			outputSize: m
-		})), L());
+function O({ sourceUrl: a, title: o, description: s, circularCrop: p = !1, aspect: m = 1, outputSize: h = 512, outputMimeType: g, busy: _ = !1, cancelLabel: v, confirmLabel: y, closeLabel: b, loadingLabel: x, errorMessage: S, onConfirm: C, onClose: w, className: O }) {
+	let k = e("imageCropDialog"), A = c(null), [j, M] = l(), [N, P] = l(), [F, I] = l("loading"), [L, R] = l(a);
+	a !== L && (R(a), I("loading"), M(void 0), P(void 0));
+	let z = () => {
+		M(void 0), P(void 0), w();
+	}, B = async () => {
+		let e = A.current;
+		!e || !N || N.width === 0 || (await C(await E(e, N, {
+			mimeType: g,
+			outputSize: h
+		})), z());
 	};
-	return /* @__PURE__ */ u(r, {
-		open: i !== null,
+	return /* @__PURE__ */ d(i, {
+		open: a !== null,
 		onClose: () => {
-			g || L();
+			_ || z();
 		},
-		title: a,
-		...y ? { closeLabel: y } : {},
-		...o == null ? {} : { description: o },
+		title: o,
+		...b ? { closeLabel: b } : {},
+		...s == null ? {} : { description: s },
 		footerClassName: "image-crop-dialog__actions",
-		footer: /* @__PURE__ */ d(l, { children: [/* @__PURE__ */ u(t, {
+		footer: /* @__PURE__ */ f(u, { children: [/* @__PURE__ */ d(n, {
 			variant: "outline",
-			disabled: g,
-			onClick: L,
-			children: _
-		}), /* @__PURE__ */ u(t, {
-			disabled: g || !j?.width,
-			onClick: R,
+			disabled: _,
+			onClick: z,
 			children: v
+		}), /* @__PURE__ */ d(n, {
+			disabled: _ || !N?.width,
+			onClick: B,
+			children: y
 		})] }),
-		children: /* @__PURE__ */ u("div", {
-			className: ["image-crop-dialog", D].filter(Boolean).join(" "),
-			children: /* @__PURE__ */ d("div", {
+		children: /* @__PURE__ */ d("div", {
+			className: ["image-crop-dialog", O].filter(Boolean).join(" "),
+			children: /* @__PURE__ */ f("div", {
 				className: "image-crop-dialog__area",
 				children: [
-					N === "loading" && /* @__PURE__ */ u(e, {
+					F === "loading" && /* @__PURE__ */ d(t, {
 						size: "lg",
-						label: b
+						label: k("loading", x)
 					}),
-					N === "error" && /* @__PURE__ */ u(n, {
+					F === "error" && /* @__PURE__ */ d(r, {
 						variant: "error",
-						description: x,
+						description: k("error", S),
 						className: "image-crop-dialog__error"
 					}),
-					i && N !== "error" && /* @__PURE__ */ u(w, {
-						crop: k,
-						onChange: (e, t) => A(t),
-						onComplete: (e) => M(e),
-						aspect: p,
-						circularCrop: f,
+					a && F !== "error" && /* @__PURE__ */ d(T, {
+						crop: j,
+						onChange: (e, t) => M(t),
+						onComplete: (e) => P(e),
+						aspect: m,
+						circularCrop: p,
 						minWidth: 64,
 						keepSelection: !0,
-						children: /* @__PURE__ */ u("img", {
-							ref: O,
-							src: i,
+						children: /* @__PURE__ */ d("img", {
+							ref: A,
+							src: a,
 							alt: "",
 							onLoad: (e) => {
 								let { width: t, height: n } = e.currentTarget;
-								P("ready"), A(E(p, t, n));
+								I("ready"), M(D(m, t, n));
 							},
-							onError: () => P("error")
+							onError: () => I("error")
 						})
 					})
 				]
@@ -501,4 +502,4 @@ function D({ sourceUrl: i, title: a, description: o, circularCrop: f = !1, aspec
 	});
 }
 //#endregion
-export { D as t };
+export { O as t };

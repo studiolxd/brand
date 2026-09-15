@@ -16,6 +16,9 @@ import type { FilterBarMessages } from '../molecules/FilterBar/FilterBar';
 import type { CalendarMessages } from '../molecules/Calendar/Calendar';
 import type { DatePickerMessages } from '../molecules/DatePicker/DatePicker';
 import type { TimeSelectMessages } from '../atoms/TimeSelect/TimeSelect';
+import type { FileUploadMessages } from '../atoms/FileUpload/FileUpload';
+import type { ImageCropDialogMessages } from '../molecules/ImageCropDialog/ImageCropDialog';
+import type { AvatarUploadMessages } from '../molecules/AvatarUpload/AvatarUpload';
 /**
  * El contrato de textos de la librería: un espacio por componente, y dentro
  * de cada espacio **todas las claves obligatorias**.
@@ -56,5 +59,8 @@ export interface BrandMessages {
     calendar: CalendarMessages;
     datePicker: DatePickerMessages;
     timeSelect: TimeSelectMessages;
+    fileUpload: FileUploadMessages;
+    imageCropDialog: ImageCropDialogMessages;
+    avatarUpload: AvatarUploadMessages;
 }
-export type { PaginationMessages, TableMessages, DataTableMessages, InputFieldMessages, PasswordFieldMessages, SelectMessages, MultiSelectMessages, NumberInputMessages, OtpInputMessages, InputPhoneMessages, AsyncSelectMessages, AsyncMultiSelectMessages, DocsSearchMessages, SearchFormMessages, FilterBarMessages, CalendarMessages, DatePickerMessages, TimeSelectMessages, };
+export type { PaginationMessages, TableMessages, DataTableMessages, InputFieldMessages, PasswordFieldMessages, SelectMessages, MultiSelectMessages, NumberInputMessages, OtpInputMessages, InputPhoneMessages, AsyncSelectMessages, AsyncMultiSelectMessages, DocsSearchMessages, SearchFormMessages, FilterBarMessages, CalendarMessages, DatePickerMessages, TimeSelectMessages, FileUploadMessages, ImageCropDialogMessages, AvatarUploadMessages, };
