@@ -22,6 +22,7 @@ function c({ title: c, description: l, actions: u, media: d, mediaPosition: f = 
 				children: l
 			}),
 			u && /* @__PURE__ */ o(n, {
+				stack: "mobile",
 				className: "highlight__actions",
 				children: u
 			})

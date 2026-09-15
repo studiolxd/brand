@@ -7,6 +7,34 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.14.0] — 2026-09-15
+
+> **Minor.** En móvil, las acciones ocupan la línea porque lo decide el sitio
+> donde viven, no cada botón. Ninguna prop cambia; el dibujo sí, en cinco
+> componentes.
+
+### La norma: el ancho lo decide el contenedor
+
+`.form__actions` ya lo hacía y los otros catorce contenedores de acciones no,
+así que un botón suelto solo se estiraba si alguien se acordaba de pedírselo
+pieza por pieza. Ahora la norma es del sistema y está escrita en
+`Foundations/Breakpoints`, con el patrón, dónde se aplica y —sobre todo—
+dónde NO.
+
+Entran `Banner`, `ConsentBanner`, `FilterBar`, `Highlight` y
+`RecoveryCodes`. Se quedan fuera, a propósito, las acciones que viven DENTRO
+de una fila y no son un pie: las de `NotificationList`, `TreeView` y
+`MessageComposer` —estirarlas rompería la fila que les da sentido— y las de
+`SiteHeader`, que en móvil ni se pintan. `AnnotationThread` queda anotado
+como dudoso: vive en un panel estrecho también en escritorio, así que su caso
+es de consulta de contenedor, no de anchura de ventana.
+
+### `DescriptionList` mide su hueco
+
+No fijaba su ancho, así que dependía de dónde se pusiera: dentro de un
+contenedor que alinea al principio se encogía al contenido y los filetes
+salían a media línea, en móvil y en escritorio. Ahora el ancho es de la ficha.
+
 ## [38.13.0] — 2026-09-15
 
 > **Minor.** Las burbujas del chat parten el texto que no cabe, una fila puede

@@ -21,6 +21,7 @@ function i({ codes: i, columns: a = 2, labels: o, actions: s, className: c, id: 
 			}, t))
 		}), /* @__PURE__ */ r(e, {
 			gap: "sm",
+			stack: "mobile",
 			className: "recovery-codes__actions",
 			children: [/* @__PURE__ */ n(t, {
 				value: () => i.join("\n"),
