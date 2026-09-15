@@ -61,4 +61,16 @@ export const brandMessagesFixture: BrandMessages = {
   inputPhone: {
     country: 'País',
   },
+  asyncSelect: {
+    placeholder: 'Buscar…',
+    empty: 'Sin resultados',
+    loading: 'Buscando…',
+    clear: 'Limpiar selección',
+  },
+  asyncMultiSelect: {
+    placeholder: 'Buscar…',
+    empty: 'Sin resultados',
+    loading: 'Buscando…',
+    remove: (label) => `Quitar ${label}`,
+  },
 };

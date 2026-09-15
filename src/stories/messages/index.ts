@@ -14,4 +14,6 @@ export type {
   NumberInputMessages,
   OtpInputMessages,
   InputPhoneMessages,
+  AsyncSelectMessages,
+  AsyncMultiSelectMessages,
 } from './BrandMessages';

@@ -13,6 +13,8 @@ import { MultiSelectField } from '../molecules/MultiSelectField/MultiSelectField
 import { NumberInput } from '../atoms/NumberInput/NumberInput';
 import { OtpInput } from '../atoms/OtpInput/OtpInput';
 import { InputPhone } from '../atoms/InputPhone/InputPhone';
+import { AsyncSelect } from '../atoms/AsyncSelect/AsyncSelect';
+import { AsyncMultiSelect } from '../atoms/AsyncMultiSelect/AsyncMultiSelect';
 
 /**
  * El orden de resolución de un texto: **prop → proveedor → error**. Sin cuarto
@@ -390,5 +392,42 @@ describe('los controles con cromo propio leen del proveedor', () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
 
     expect(() => render(<NumberInput aria-label="Seats" />)).toThrow(/numberInput\./);
+  });
+});
+
+describe('los buscadores asíncronos leen del proveedor', () => {
+  const buscar = async () => [];
+
+  it('la pista del campo sale del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <AsyncSelect onSearch={buscar} aria-label="Owner" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByPlaceholderText('Search…')).toBeInTheDocument();
+  });
+
+  it('el aspa de cada ficha interpola la etiqueta de su opción', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <AsyncMultiSelect
+          onSearch={buscar}
+          aria-label="Owners"
+          defaultValue={['1']}
+          selectedOptions={[{ value: '1', label: 'Ada Lovelace' }]}
+        />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Remove Ada Lovelace' })).toBeInTheDocument();
+  });
+
+  it('sin proveedor y sin prop, revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<AsyncSelect onSearch={buscar} aria-label="Owner" />)).toThrow(
+      /asyncSelect\.placeholder/,
+    );
   });
 });

@@ -40,6 +40,26 @@ Las tres del sistema: 32, 40 y 48 con una línea de pills. Sin `size`, la del `F
 
 <Canvas of={AsyncMultiSelectStories.Disabled} />
 
+## Internacionalización
+
+Los cuatro textos que el control emite por su cuenta **no tienen valor por defecto**: salen del
+`BrandMessagesProvider` que la aplicación monta en su raíz.
+
+<Canvas of={AsyncMultiSelectStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `placeholder` | `asyncMultiSelect.placeholder` | pista del campo de búsqueda |
+| `emptyMessage` | `asyncMultiSelect.empty` | aviso cuando la búsqueda no devuelve nada |
+| `loadingLabel` | `asyncMultiSelect.loading` | nombre accesible del spinner |
+| `removeLabel` | `asyncMultiSelect.remove` | `aria-label` del aspa de cada ficha |
+
+`remove` recibe la etiqueta de la opción y devuelve la frase entera: el orden de las palabras
+cambia de un idioma a otro. La etiqueta en sí es un dato de la pantalla. El orden es **prop →
+proveedor → error**.
+
+La convención completa está en **Foundations › Internacionalización**.
+
 ## Accesibilidad
 
 El aspa de cada píldora es un atajo de **ratón**: está fuera del tabulador, como en el `MultiSelect`, pero conserva su nombre accesible porque un lector de pantalla sí llega a ella. La salida con teclado es <kbd>Retroceso</kbd> con el campo de búsqueda vacío, que quita el último valor elegido.

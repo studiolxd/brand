@@ -37,6 +37,25 @@ Las tres del sistema: 32, 40 y 48. Sin `size`, la del `Form` que lo envuelva; si
 
 <Canvas of={AsyncSelectStories.Disabled} />
 
+## Internacionalización
+
+Los cuatro textos que el control emite por su cuenta **no tienen valor por defecto**: salen del
+`BrandMessagesProvider` que la aplicación monta en su raíz.
+
+<Canvas of={AsyncSelectStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `placeholder` | `asyncSelect.placeholder` | pista del campo de búsqueda |
+| `emptyMessage` | `asyncSelect.empty` | aviso cuando la búsqueda no devuelve nada |
+| `loadingLabel` | `asyncSelect.loading` | nombre accesible del spinner |
+| `clearLabel` | `asyncSelect.clear` | `aria-label` del aspa que vacía la selección |
+
+El orden es **prop → proveedor → error**. Las **opciones** que devuelve `onSearch` no pasan por
+el catálogo en ningún caso: son datos de la pantalla.
+
+La convención completa está en **Foundations › Internacionalización**.
+
 ## Accesibilidad
 
 El aspa de limpiar es un atajo de **ratón**: está fuera del tabulador, como en el resto de la familia (`MultiSelect`, `NumberInput`), pero conserva su nombre accesible porque un lector de pantalla sí llega a ella con el cursor virtual o el gesto táctil. La salida con teclado es <kbd>Retroceso</kbd> (o <kbd>Supr</kbd>) con el campo vacío, el mismo gesto que quita la última píldora en el `AsyncMultiSelect`.

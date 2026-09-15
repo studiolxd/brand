@@ -4,11 +4,28 @@ import { forwardRef, useState, useRef, useId, useEffect, useCallback, type Ref }
 import { Popover as BasePopover } from '@base-ui/react/popover';
 import { Icon } from '../Icon/Icon';
 import { Spinner } from '../Spinner/Spinner';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './AsyncMultiSelect.css';
 
 export interface AsyncMultiSelectOption {
   value: string;
   label: string;
+}
+
+/**
+ * Los textos que el control emite por su cuenta. Todos son cromo: dicen lo
+ * mismo en toda la suite y no hablan de lo que se busca. Lo que sí es de esta
+ * pantalla —las opciones que devuelve `onSearch`— no pasa por aquí.
+ */
+export interface AsyncMultiSelectMessages {
+  /** Pista dentro del campo de búsqueda. */
+  placeholder: string;
+  /** Aviso cuando la búsqueda no devuelve opciones. */
+  empty: string;
+  /** Nombre accesible del spinner mientras se busca. */
+  loading: string;
+  /** Nombre accesible del aspa de cada ficha, con la etiqueta de su opción. */
+  remove: (label: string) => string;
 }
 
 export interface AsyncMultiSelectProps {
@@ -28,6 +45,10 @@ export interface AsyncMultiSelectProps {
    * componente las recuerda—, solo para los valores de `defaultValue`.
    */
   selectedOptions?: AsyncMultiSelectOption[];
+  /**
+   * Pista dentro del campo de búsqueda. **Sin default**: sale de la clave
+   * `placeholder` del espacio de este control.
+   */
   placeholder?: string;
   disabled?: boolean;
   readOnly?: boolean;
@@ -60,16 +81,20 @@ export interface AsyncMultiSelectProps {
    */
   'aria-label'?: string;
   'aria-describedby'?: string;
-  /** aria-label del botón que quita un valor. Default: `Quitar ${etiqueta}` (castellano). */
+  /**
+   * aria-label del botón que quita un valor. **Sin default**: sale de
+   * `asyncMultiSelect.remove`.
+   */
   removeLabel?: (label: string) => string;
   /**
-   * Texto mostrado cuando la búsqueda no devuelve opciones. Default: "Sin resultados"
-   * (castellano). Es texto **visible**: una app multiidioma debe pasarlo traducido.
+   * Texto mostrado cuando la búsqueda no devuelve opciones. **Sin default**:
+   * sale de la clave `empty` del espacio de este control en el
+   * `BrandMessagesProvider`.
    */
   emptyMessage?: string;
   /**
-   * Etiqueta accesible del spinner mientras se busca. Default: "Buscando…" (castellano).
-   * Una app multiidioma debe pasarla traducida.
+   * Etiqueta accesible del spinner mientras se busca. **Sin default**: sale de
+   * la clave `loading` del espacio de este control.
    */
   loadingLabel?: string;
   /**
@@ -99,7 +124,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
   defaultValue = [],
   onValueChange,
   selectedOptions,
-  placeholder = 'Buscar…',
+  placeholder,
   disabled,
   readOnly,
   size = 'md',
@@ -112,11 +137,12 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
   className,
   'aria-label': ariaLabel,
   'aria-describedby': ariaDescribedby,
-  removeLabel = (label) => `Quitar ${label}`,
-  emptyMessage = 'Sin resultados',
-  loadingLabel = 'Buscando…',
+  removeLabel,
+  emptyMessage,
+  loadingLabel,
   container,
 }: AsyncMultiSelectProps, ref) {
+  const t = useBrandMessages('asyncMultiSelect');
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
@@ -283,7 +309,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
                 <button
                   type="button"
                   className="async-multi-select__pill-remove"
-                  aria-label={removeLabel(opt.label)}
+                  aria-label={t('remove', removeLabel)(opt.label)}
                   tabIndex={-1}
                   onMouseDown={e => { e.preventDefault(); toggleValue(opt.value); }}
                 >
@@ -301,7 +327,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
             onChange={handleInputChange}
             onPointerDown={handleInputPointerDown}
             onKeyDown={handleKeyDown}
-            placeholder={currentValues.length === 0 ? placeholder : undefined}
+            placeholder={currentValues.length === 0 ? t('placeholder', placeholder) : undefined}
             disabled={disabled}
             readOnly={readOnly}
             aria-label={ariaLabel}
@@ -338,16 +364,16 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
             <div
               role="listbox"
               aria-multiselectable="true"
-              aria-label={ariaLabel ?? placeholder}
+              aria-label={ariaLabel ?? t('placeholder', placeholder)}
               id={listboxId}
             >
               {loading && (
                 <div className="async-multi-select__loading">
-                  <Spinner size="sm" label={loadingLabel} />
+                  <Spinner size="sm" label={t('loading', loadingLabel)} />
                 </div>
               )}
               {!loading && hasSearched && results.length === 0 && (
-                <div className="async-multi-select__empty">{emptyMessage}</div>
+                <div className="async-multi-select__empty">{t('empty', emptyMessage)}</div>
               )}
               {!loading && results.map((option, index) => {
                 const isSelected = currentValues.includes(option.value);

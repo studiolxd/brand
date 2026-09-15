@@ -141,6 +141,16 @@ describe.each([
     'src/stories/atoms/InputPhone/InputPhone.tsx',
     ["'País'"],
   ],
+  [
+    'AsyncSelect',
+    'src/stories/atoms/AsyncSelect/AsyncSelect.tsx',
+    ['Buscar…', 'Sin resultados', 'Buscando…', 'Limpiar selección'],
+  ],
+  [
+    'AsyncMultiSelect',
+    'src/stories/atoms/AsyncMultiSelect/AsyncMultiSelect.tsx',
+    ['Buscar…', 'Sin resultados', 'Buscando…', 'Quitar '],
+  ],
 ])('%s no trae textos puestos', (_componente, ruta, textos) => {
   const fuente = readFileSync(join(repoRoot, ruta), 'utf8');
   // Solo el cuerpo: el JSDoc de las props nombra los textos para explicarlos.
