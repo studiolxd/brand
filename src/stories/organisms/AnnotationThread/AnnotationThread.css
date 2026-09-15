@@ -96,8 +96,24 @@
   color: var(--annotation-thread-replies-label-color);
 }
 
+/* El pie del hilo: cada acción ocupa la línea entera, SIEMPRE — no solo por
+   debajo de `md`. La norma del sistema (ver Fundamentos › Puntos de ruptura)
+   dice que el ancho lo decide el contenedor, y el contenedor de este pie es un
+   panel de revisión: una columna estrecha también en una pantalla de 27
+   pulgadas. Por eso aquí no hay punto de ruptura que levantar —la anchura de
+   la ventana no dice nada de lo que mide este hueco— y la columna es el único
+   dibujo.
+
+   Las acciones se pasan sueltas (`<><Button/><Button/></>`), no envueltas en
+   un `Inline`: el envoltorio se llevaría la línea entera y dejaría los botones
+   a su ancho natural dentro. */
 .annotation-thread__actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--annotation-thread-header-gap);
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--annotation-thread-actions-gap);
+}
+
+.annotation-thread__actions > * {
+  inline-size: 100%;
 }
