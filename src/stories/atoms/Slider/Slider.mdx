@@ -89,8 +89,19 @@ token `surface-dark-*`.
 
 ## Internacionalización
 
-`label` y `thumbLabel` son props con default castellano. El número se formatea
-con `format` y `locale` de Base UI, delegando en `Intl`.
+Los nombres de los pulgares salen del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`slider`**.
+
+| Clave del catálogo | Cuándo se lee |
+| --- | --- |
+| `slider.value` | un solo pulgar y sin `label` |
+| `slider.min` / `slider.max` | un rango de dos pulgares |
+| `slider.valueAt` | tres o más pulgares (interpola: es función) |
+
+El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**.
+
+`label` dice **qué mide** este deslizador y es de la pantalla, así que gana sobre `slider.value`. `thumbLabel` sustituye el nombre de todos los pulgares de una vez. El número se formatea con `format` y `locale` de Base UI, delegando en `Intl`: es formato, no texto.
+
+<Canvas of={SliderStories.TextosDelProveedor} />
 
 ## Props
 

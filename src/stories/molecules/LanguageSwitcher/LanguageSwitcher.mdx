@@ -45,6 +45,20 @@ En la lista, el idioma actual va en énfasis y **no se pulsa**: es un dato (`ari
 
 <TokenTable tokens={languageSwitcherTokens} />
 
+## Internacionalización
+
+La etiqueta del control sale del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`languageSwitcher`**.
+
+| Prop | Clave del catálogo |
+| --- | --- |
+| `label` | `languageSwitcher.label` |
+
+El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**.
+
+Los **nombres de los idiomas no pasan por el catálogo, y no es olvido**: cada uno va en su propio idioma —«Español», «English», «Deutsch»— precisamente para que se reconozca sin entender la interfaz. Son datos y viajan en `languages`.
+
+<Canvas of={LanguageSwitcherStories.TextosDelProveedor} />
+
 ## Props
 
 <ArgTypes of={LanguageSwitcherStories} />

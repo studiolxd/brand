@@ -107,6 +107,24 @@ Va en el paso y no en una prop del componente porque es un hecho de ese paso, co
 />
 ```
 
+## Internacionalización
+
+Los cinco textos salen del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`stepper`**.
+
+| Prop | Clave del catálogo | Cuándo se lee |
+| --- | --- | --- |
+| `label` | `stepper.label` | siempre |
+| `compactLabel` | `stepper.compact` | siempre (interpola: es función) |
+| `labels.completed` | `stepper.completed` | solo si hay algún paso ya hecho |
+| `labels.current` | `stepper.current` | siempre |
+| `labels.pending` | `stepper.pending` | solo si queda algún paso por delante |
+
+El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**.
+
+`labels` sigue siendo una anulación **clave a clave**: lo que no se pasa sale del catálogo. Las etiquetas y las descripciones de cada paso son contenido y viajan en `steps`.
+
+<Canvas of={StepperStories.TextosDelProveedor} />
+
 ## Props
 
 <ArgTypes of={StepperStories} />

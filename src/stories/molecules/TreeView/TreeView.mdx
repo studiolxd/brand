@@ -199,8 +199,17 @@ si la pinta.
 
 ## Internacionalización
 
-`label` es una prop con default castellano («Árbol»). Los rótulos de los nodos
-vienen en los datos.
+El nombre accesible del árbol sale del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`treeView`**.
+
+| Prop | Clave del catálogo |
+| --- | --- |
+| `label` | `treeView.label` |
+
+El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**.
+
+El catálogo pone el nombre **genérico** («Árbol»); el de ESTE árbol —«Matriz de contenidos»— es de la pantalla y se dice con la prop, que gana. Los rótulos de los nodos son datos y vienen en `items`.
+
+<Canvas of={TreeViewStories.TextosDelProveedor} />
 
 ## Props
 

@@ -131,9 +131,26 @@ La misma información llega **con el teclado**: el área de dibujo se enfoca con
 - Explorar con el **teclado** no es mudo: mientras se recorren los puntos con las flechas, una región viva anuncia el que está enfocado (el mismo dato que enseña el bocadillo, que va `aria-hidden` por ser la versión que se ve). Con el puntero no se anuncia nada: ahí el bocadillo ya está a la vista y una región viva persiguiendo al ratón sería ruido.
 - La **leyenda aparece desde dos series** —es el canal de identidad fiable— y se monta con `Inline` de `Tag`. Con una sola serie no hay leyenda: el título ya la nombra.
 
-## Textos
+## Internacionalización
 
-Todo texto que el gráfico emite por su cuenta es una prop con default castellano: `tableCaption`, `tableHint`, `categoryLabel`, `valueLabel`, `shareLabel`, `emptyMessage`. Los números y los porcentajes salen de `Intl` con `locale` (default `es-ES`), y `formatValue` / `formatX` mandan sobre él.
+El cromo del gráfico sale del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`chart`**.
+
+| Prop | Clave del catálogo | Cuándo se lee |
+| --- | --- | --- |
+| `tableCaption` | `chart.tableCaption` | siempre (la tabla equivalente va siempre) |
+| `tableHint` | `chart.tableHint` | siempre |
+| `categoryLabel` | `chart.category` | siempre |
+| `valueLabel` | `chart.value` | solo en `pie` y `donut` |
+| `shareLabel` | `chart.share` | solo en `pie` y `donut` |
+| `emptyMessage` | `chart.empty` | solo cuando no hay nada que pintar |
+
+El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**.
+
+**`ariaLabel` no va al catálogo y sigue siendo obligatorio**: dice qué cuenta ESTE gráfico —«Precio por millón de tokens, por mes»—, y un texto común lo dejaría diciendo «Gráfico» en todas partes sin que nada fallara. Es el mismo criterio que el `caption` de una `Table`. El `title`, el `caption` y los nombres de las series también son contenido.
+
+Los números y los porcentajes salen de `Intl` con `locale` (default `es-ES`), y `formatValue` / `formatX` mandan sobre él: son formato, no texto.
+
+<Canvas of={ChartStories.TextosDelProveedor} />
 
 <Canvas of={ChartStories.Vacio} />
 

@@ -24,6 +24,20 @@ Los del `Button`: hover con el relleno de marca, deshabilitado atenuado, anillo 
 
 Es un botón de solo icono: **siempre** con `aria-label` («Más opciones» por defecto; el producto lo traduce y, si hay varios en una lista, lo contextualiza: «Más opciones de Proyecto X»).
 
+## Internacionalización
+
+El nombre accesible sale del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`dotsButton`**.
+
+| Prop | Clave del catálogo |
+| --- | --- |
+| `aria-label` | `dotsButton.label` |
+
+El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**.
+
+El `ContextMenu` que lo monta **no repite la clave**: su `label` es un reenvío puro.
+
+<Canvas of={DotsButtonStories.TextosDelProveedor} />
+
 ## Props
 
 <ArgTypes of={DotsButtonStories} />

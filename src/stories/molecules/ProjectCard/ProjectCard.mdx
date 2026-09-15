@@ -42,6 +42,20 @@ La tarjeta no tiene color propio —fondo, texto y etiquetas los resuelve la sup
 
 <TokenTable tokens={projectCardDarkTokens} />
 
+## Internacionalización
+
+El nombre accesible de la lista de etiquetas sale del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`projectCard`**.
+
+| Prop | Clave del catálogo | Cuándo se lee |
+| --- | --- | --- |
+| `tagsLabel` | `projectCard.tags` | solo cuando hay etiquetas |
+
+El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**.
+
+El título, la descripción y los rótulos de las etiquetas son contenido de ESE proyecto.
+
+<Canvas of={ProjectCardStories.TextosDelProveedor} />
+
 ## Props
 
 <ArgTypes of={ProjectCardStories} />

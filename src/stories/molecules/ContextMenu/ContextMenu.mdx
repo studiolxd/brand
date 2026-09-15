@@ -36,6 +36,12 @@ Por defecto abre abajo alineado al final (`side="bottom"`, `align="end"`), que e
 
 No tiene: usa los de `Menu` (panel, ítems, destructivo, separadores) y los del `Button` ghost para el disparador.
 
+## Internacionalización
+
+El menú **no tiene texto propio**: el nombre del disparador lo pone el `DotsButton`, que lee `dotsButton.label` del `BrandMessagesProvider`. `label` sigue existiendo como **reenvío puro** —para nombrar ESTE menú cuando «Más opciones» se queda corto—, pero **ya no hace falta para traducir**.
+
+Los rótulos de los ítems son datos y viajan en `items`.
+
 ## Props
 
 <ArgTypes of={ContextMenuStories} />

@@ -88,6 +88,20 @@ marca no cambian: contrastan en las dos superficies.
   blanco en oscura): lo distingue de la superficie ambiente incluso sin
   avance.
 
+## Internacionalización
+
+El nombre accesible sale del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`progressBar`**.
+
+| Prop | Clave del catálogo |
+| --- | --- |
+| `label` | `progressBar.label` |
+
+El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**.
+
+La frontera se ve bien aquí: el catálogo pone el nombre **genérico** («Progreso»), que vale en cualquier pantalla; lo que avanza **de verdad** —«Subiendo el vídeo»— lo sabe solo la pantalla y se dice con la prop, que gana. La cifra no pasa por el catálogo: es un número.
+
+<Canvas of={ProgressBarStories.TextosDelProveedor} />
+
 ## Props
 
 <ArgTypes of={ProgressBarStories} />

@@ -81,9 +81,23 @@ Los `aria-label` de las dos flechas de mes salen del `BrandMessagesProvider`, **
 | `previousMonthLabel` | `calendar.previousMonth` |
 | `nextMonthLabel` | `calendar.nextMonth` |
 
-El orden es **prop → proveedor → error**.
+El resto del cromo del cuadrante sale de su propio espacio, **`calendarRoster`**:
 
-`nameLabel`, `legendLabel` y `birthdayPrefix` **no** salen todavía del catálogo: siguen con su castellano puesto, pendientes de migrar.
+| Prop | Clave del catálogo | Cuándo se lee |
+| --- | --- | --- |
+| `nameLabel` | `calendarRoster.name` | siempre |
+| `legendLabel` | `calendarRoster.legend` | con `showLegend` |
+| — | `calendarRoster.holiday`, `.vacation`, `.absence`, `.recovery`, `.birthday`, `.nonWorking` | con `showLegend` y sin `legendItems` |
+
+El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**.
+
+**Los seis tipos van clave a clave y no como lista**, aunque la regla general del sistema sea traducir una lista pasándola entera: es un vocabulario **cerrado** del componente, y obligar a la aplicación a montar el array con sus `type` correctos solo para traducir seis palabras era peor. `legendItems` sigue existiendo para sustituir la leyenda **entera** —otro orden, otros tipos— y gana.
+
+`birthdayPrefix` **no** va al catálogo: es un emoji (`🎂 `), y un emoji no se traduce. Sigue siendo prop para poder quitarlo o cambiarlo.
+
+Los meses, los días y las cifras del año salen de `locale` con `Intl`: son formato. Los nombres de las filas y los rótulos de cada celda son datos.
+
+<Canvas of={CalendarRosterStories.TextosDelProveedor} />
 
 ## Props
 

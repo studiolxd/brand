@@ -99,9 +99,17 @@ Los `aria-label` de las dos flechas de mes salen del `BrandMessagesProvider`, **
 | `previousMonthLabel` | `calendar.previousMonth` |
 | `nextMonthLabel` | `calendar.nextMonth` |
 
-El orden es **prop → proveedor → error**, y el texto se lee **donde se pinta**: con `navigable={false}` no hay flechas y no se exige ninguno de los dos.
+El botón de desbordamiento tiene espacio propio, **`calendarPlanner`**:
 
-`gridLabel` y `moreLabel` **no** salen del catálogo: el primero nombra a ESTE planificador y el segundo todavía trae su castellano puesto — pendiente de migrar.
+| Prop | Clave del catálogo | Cuándo se lee |
+| --- | --- | --- |
+| `moreLabel` | `calendarPlanner.more` | solo cuando alguna celda desborda (interpola: es función) |
+
+El orden es **prop → proveedor → error**, y el texto se lee **donde se pinta**: con `navigable={false}` no hay flechas y no se exige ninguna de las dos del calendario.
+
+`gridLabel` **no** sale del catálogo: nombra a ESTE planificador. Los rótulos de los eventos son datos y viajan en `events`.
+
+<Canvas of={CalendarPlannerStories.TextosDelProveedor} />
 
 ## Props
 

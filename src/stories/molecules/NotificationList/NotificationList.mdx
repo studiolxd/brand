@@ -91,6 +91,24 @@ Todo el color sale de la regla de derivación: la hora pasa a `text.muted-on-dar
 
 <TokenTable tokens={notificationListTokens} />
 
+## Internacionalización
+
+Los tres textos salen del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`notificationList`**.
+
+| Prop | Clave del catálogo | Cuándo se lee |
+| --- | --- | --- |
+| `label` | `notificationList.label` | siempre |
+| `unreadLabel` | `notificationList.unread` | con alguna fila sin leer que no traiga el suyo |
+| `markReadLabel` | `notificationList.markRead` | con `onMarkRead` y alguna fila sin leer |
+
+El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**.
+
+Es **espacio propio y no el del `NotificationPanel`**: son dos piezas distintas —la bandeja a página completa y el flotante de la cabecera— y el catálogo de la suite también las tiene aparte (`notifications.inbox.*` frente a `notifications.panel.*`).
+
+El título, el cuerpo y la hora **ya formateada** de cada notificación son contenido y viajan en `items`.
+
+<Canvas of={NotificationListStories.TextosDelProveedor} />
+
 ## Props
 
 <ArgTypes of={Stories} />

@@ -98,6 +98,21 @@ El resto —altura, relleno, radio, foco, colores del botón— son los de
 - El botón lleva `aria-label` (`copyLabel`): un botón de solo icono sin nombre
   no existe para un lector de pantalla.
 
+## Internacionalización
+
+Los dos textos salen del `BrandMessagesProvider`, **sin valor por defecto**, y del espacio **`copy`**, el mismo que usa `CopyButton`: son literalmente las mismas dos palabras.
+
+| Prop | Clave del catálogo |
+| --- | --- |
+| `copyLabel` | `copy.label` |
+| `copiedLabel` | `copy.copied` |
+
+El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**.
+
+`copyText` no es texto de interfaz: es el dato que se copia.
+
+<Canvas of={CopyableValueStories.TextosDelProveedor} />
+
 ## Props
 
 <ArgTypes of={CopyableValueStories} />

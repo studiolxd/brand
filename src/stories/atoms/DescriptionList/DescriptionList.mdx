@@ -139,6 +139,12 @@ Bordes, término y valor pasan a blanco por tokens `surface-dark-*`.
 - Término y valor van en la tinta de la superficie (prusia o blanco), ambos AAA:
   la jerarquía la marca el cuerpo de la letra, no un gris más claro.
 
+## Internacionalización
+
+`DescriptionDetails` con `copyable` **no tiene textos propios**: monta un `CopyableValue`, que lee `copy.label` y `copy.copied` del `BrandMessagesProvider` por su cuenta. `copyLabel` y `copiedLabel` siguen existiendo como **reenvíos puros** —anulación puntual de ese uso—, pero **ya no hacen falta para traducir**.
+
+Los términos y los valores son contenido: los escribe quien monta la ficha.
+
 ## Props
 
 <ArgTypes of={DescriptionListStories} />

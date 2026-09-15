@@ -60,6 +60,27 @@ Indicadores y anillo de foco tienen su par `surface-dark`; los botones y el text
 
 <TokenTable tokens={carouselDarkTokens} />
 
+## Internacionalización
+
+Los diez textos salen del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`carousel`**.
+
+| Prop | Clave del catálogo | Cuándo se lee |
+| --- | --- | --- |
+| `label` | `carousel.label` | siempre |
+| `roleDescription` | `carousel.roleDescription` | siempre |
+| `trackLabel` | `carousel.track` | siempre |
+| `slideStatusLabel` | `carousel.slideStatus` | siempre (interpola) |
+| `prevLabel` / `nextLabel` | `carousel.previous` / `.next` | con `controls` |
+| `indicatorLabel` | `carousel.indicator` | con `indicators` (interpola) |
+| `pauseLabel` / `playLabel` | `carousel.pause` / `.play` | con `autoplay` |
+| `CarouselSlide roleDescription` | `carousel.slideRoleDescription` | en cada diapositiva |
+
+El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**.
+
+Las dos `aria-roledescription` **son texto**, no una palabra clave del motor: las lee el lector de pantalla en voz alta, así que se traducen. Lo que va dentro de cada diapositiva es contenido.
+
+<Canvas of={CarouselStories.TextosDelProveedor} />
+
 ## Props
 
 <ArgTypes of={CarouselStories} />

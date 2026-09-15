@@ -41,6 +41,20 @@ Con `prefers-reduced-motion: reduce` no hay animación: el cuadrado se muestra c
 
 <TokenTable tokens={spinnerTokens} />
 
+## Internacionalización
+
+El texto de la espera sale del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`spinner`**.
+
+| Prop | Clave del catálogo | Cuándo se lee |
+| --- | --- | --- |
+| `label` | `spinner.label` | solo sin `aria-hidden`: un spinner decorativo no anuncia nada |
+
+El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**.
+
+El texto **conserva los puntos suspensivos** («Cargando…»): es progreso, no una frase. La norma, en [Foundations → Redacción](?path=/docs/foundations-redaccion--docs) § «Los estados de carga llevan puntos suspensivos».
+
+<Canvas of={SpinnerStories.TextosDelProveedor} />
+
 ## Props
 
 <ArgTypes of={SpinnerStories} />

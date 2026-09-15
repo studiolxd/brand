@@ -95,6 +95,21 @@ Todo el copy lo pone el consumidor. Los que la tira escribiría por su cuenta va
 
 <TokenTable tokens={uptimeBarsDarkTokens} />
 
+## Internacionalización
+
+Los dos textos que la tira emite por su cuenta salen del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`uptimeBars`**.
+
+| Prop | Clave del catálogo | Cuándo se lee |
+| --- | --- | --- |
+| `label` | `uptimeBars.label` | siempre |
+| `noDataLabel` | `uptimeBars.noData` | solo con algún punto sin dato y sin `pointLabel` propio |
+
+El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**.
+
+**Lo que no pasa por el catálogo:** las fechas de cada punto y la media del periodo llegan **ya escritas** en `points[].label` y en `summary` —la tira no sabe de tiempo—, y el porcentaje lo formatea `Intl` con `locale`. `pointLabel` compone el nombre de cada barrita y sigue siendo prop: el orden de sus piezas es de quien lo monta.
+
+<Canvas of={UptimeBarsStories.TextosDelProveedor} />
+
 ## Props
 
 <ArgTypes of={UptimeBarsStories} />

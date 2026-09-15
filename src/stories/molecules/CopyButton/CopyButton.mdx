@@ -81,6 +81,20 @@ El `ref` va al `<button>` —el componente devuelve además la región viva, que
 - El fallo del portapapeles se anuncia por el mismo canal que el éxito.
 - El botón no se deshabilita durante el acuse: volver a pulsarlo copia otra vez, que es lo que espera quien no está seguro de haber acertado.
 
+## Internacionalización
+
+Los tres textos salen del `BrandMessagesProvider`, **sin valor por defecto**, y del espacio **`copy`** — que es un espacio de **conducta y no de componente**: las mismas tres palabras las dicen `CopyableValue`, `DescriptionDetails copyable` y el acuse de `CodeBlock`, y el catálogo de la suite también las tiene una sola vez (`common.copy`, `common.copied`).
+
+| Prop | Clave del catálogo | Cuándo se lee |
+| --- | --- | --- |
+| `label` | `copy.label` | solo sin rótulo visible: con texto, lo nombra el texto |
+| `copiedLabel` | `copy.copied` | tras copiar |
+| `errorLabel` | `copy.error` | solo cuando el portapapeles falla |
+
+El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**.
+
+<Canvas of={CopyButtonStories.TextosDelProveedor} />
+
 ## Props
 
 <ArgTypes of={CopyButtonStories} />

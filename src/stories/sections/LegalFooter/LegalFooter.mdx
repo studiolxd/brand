@@ -33,6 +33,20 @@ El pie **no fija tamaño de texto**: no tiene token de cuerpo y hereda el de la 
 
 <TokenTable tokens={legalFooterTokens} />
 
+## Internacionalización
+
+El nombre accesible de la navegación sale del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`legalFooter`**.
+
+| Prop | Clave del catálogo |
+| --- | --- |
+| `label` | `legalFooter.label` |
+
+El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**.
+
+Los rótulos de los enlaces son datos y viajan en `links`; el `title` es el contenido de ESE pie.
+
+<Canvas of={LegalFooterStories.TextosDelProveedor} />
+
 ## Props
 
 <ArgTypes of={LegalFooterStories} />

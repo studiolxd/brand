@@ -58,9 +58,8 @@ instrucción corta — y no llevan punto final.
 ## Puntuación que no se usa
 
 - **Los puntos suspensivos («…») no se usan** para indicar continuación o suspense en un
-  subtítulo o una descripción. La única excepción es la que ya usa el sistema para un
-  estado **en curso** («Buscando…», «Cargando imagen…», «Confirmando…»): ahí los tres
-  puntos dicen que algo está pasando, no que la frase se corta.
+  subtítulo o una descripción. La única excepción son los **estados de carga**, y tiene
+  sección propia más abajo.
 - **El signo de exclamación («!») no se usa.** Ni para énfasis ni para llamar la
   atención: el DS no grita.
 - **El signo de interrogación («?») solo si la frase es una pregunta de verdad** —
@@ -81,9 +80,44 @@ instrucción corta — y no llevan punto final.
 <PageIntro description="Aún queda trabajo por hacer…" />
 ```
 
+## Los estados de carga llevan puntos suspensivos
+
+**Excepción declarada a la regla anterior, y no se amplía:** el texto de un estado **en
+curso** conserva sus puntos suspensivos. «Buscando…», «Cargando…», «Guardando…»,
+«Confirmando…», «Dándote de baja…». No son una frase que se corta: son **progreso**, y los
+tres puntos dicen que algo está pasando ahora mismo y que va a terminar. Quitárselos
+convierte el estado en una afirmación («Cargando») que se lee como un rótulo y no como una
+espera.
+
+Vale igual para el texto visible y para el que solo oye un lector de pantalla
+(`Spinner.label`, `spinner.label` del catálogo).
+
+```tsx
+// ✓ Correcto — el estado está en curso
+<Spinner label="Cargando…" />
+<Button loading>Guardando…</Button>
+<AsyncSelect loadingLabel="Buscando…" />
+
+// ✗ Incorrecto — sin los puntos, el estado se lee como un rótulo
+<Spinner label="Cargando" />
+<Button loading>Guardando</Button>
+```
+
+Lo que **no** es un estado en curso no los lleva, aunque hable de algo que tarda:
+
+```tsx
+// ✗ Incorrecto — es una descripción, no un progreso
+<EmptyState title="Sin informes" description="Los informes tardan unos minutos en generarse…" />
+
+// ✓ Correcto
+<EmptyState title="Sin informes" description="Los informes tardan unos minutos en generarse." />
+```
+
 ## Al escribir un componente nuevo
 
 Si el componente tiene una prop que se pinta como una frase bajo un título —una
 entradilla, la descripción de un estado vacío, el cuerpo de un aviso—, su JSDoc remite a
 esta página. Si la prop es un rótulo, un botón o una etiqueta, no necesita decir nada: la
-ausencia de punto es la norma general y no la anulación.
+ausencia de punto es la norma general y no la anulación. Si la prop es el texto de un
+**estado en curso**, su JSDoc remite a § «Los estados de carga llevan puntos
+suspensivos»: ahí los tres puntos son parte del texto y quitarlos es el error.
