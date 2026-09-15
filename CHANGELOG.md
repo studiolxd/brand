@@ -7,6 +7,42 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [45.1.0] — 2026-09-15
+
+> **Minor.** La superficie pública pone los controles en talla lg, igual que hace con el
+> texto.
+
+### `.site-shell` parte de lg también en los controles
+
+El bloque subía el cuerpo a 20px y dejaba los campos en la talla de aplicación: en una
+página pública el texto era grande y los buscadores, filtros y botones de al lado no. Misma
+omisión que tenía el término de la ficha hasta la v39.0.0, y misma respuesta: en el bloque,
+no en cada app.
+
+No se enumeran controles a mano. Cada control ya declara su talla lg en tokens hermanos
+(`input.lg-height` junto a `input.height`), de donde bebe su modificador `--lg`; ahora
+`.site-shell` apunta cada token de partida a su hermano `lg-*`, y lo que hereda de un
+control sube con él. Un control nuevo entra solo por tener sus tokens `lg-*`. La familia
+base (`control.*`) estrena su par lg, y el motor de tokens arrastra ahora una referencia
+metida dentro de una fórmula —sin eso el renglón reservado para el rótulo de la barra de
+filtros se quedaba corto y descolocaba el interruptor—.
+
+**El botón entra**: 40→48px y 16→20px, porque un botón md junto a un campo de 48 se lee
+como un control de otra talla justo donde más se juntan. **El chevron del `Select`** era lo
+único de la caja que no subía —su tamaño salía de una prop de React y no de un token— y
+ahora es token (16→24px).
+
+Medido en Chromium: dentro del shell, campo, selector, selector múltiple, campo de fecha y
+botón a 48px/20px, exactamente lg; fuera, 40px/16px. El interruptor, su campo y el botón de
+acciones de la barra siguen con el centro en el mismo píxel.
+
+**Dos matices, documentados.** `size="sm"` sigue mandando dentro del shell; lo que ya no
+se distingue de lg es un `size="md"` escrito a mano. Y **lo que sale por un portal** —la
+lista de un `Select`, el calendario de un `DatePicker`— monta en `document.body` y no
+hereda la superficie: el disparador va a 48/20 y su lista se queda en la talla de
+aplicación. Es el mismo caso que `Modal` y `Sheet` documentan, y la misma respuesta
+(`container`), pero los campos `*Field` no lo exponen todavía.
+
 ## [45.0.0] — 2026-09-15
 
 > **Major.** Sexta familia al proveedor de textos: diálogos y superficies. `Modal`, `Sheet`,

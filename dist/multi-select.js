@@ -133,8 +133,7 @@ var d = 500, f = n(function({ options: n, value: f, defaultValue: p = [], placeh
 				}),
 				/* @__PURE__ */ s(t, {
 					name: "chevron",
-					className: "multi-select__icon",
-					size: _ === "sm" ? "xs" : _ === "lg" ? "md" : "sm"
+					className: "multi-select__icon"
 				}),
 				b && U.map((e) => /* @__PURE__ */ s("input", {
 					type: "hidden",

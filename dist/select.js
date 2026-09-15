@@ -62,8 +62,7 @@ var g = i(function({ placeholder: e, children: t, ...n }, r) {
 		...i,
 		children: [r, /* @__PURE__ */ l(t, {
 			name: "chevron",
-			className: "select__icon",
-			size: e === "sm" ? "xs" : e === "lg" ? "md" : "sm"
+			className: "select__icon"
 		})]
 	});
 }), y = i(function({ size: e = "md", container: t, className: n, children: r, side: i = "bottom", align: a = "start", sideOffset: o = -1, ...s }, c) {
