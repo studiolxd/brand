@@ -2,6 +2,7 @@ import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { BrandMessagesProvider } from './BrandMessagesProvider';
 import type { BrandMessages } from './BrandMessages';
+import { brandMessagesFixtureEn as EN } from '../../../.storybook/brandMessagesFixtureEn';
 import { Pagination } from '../molecules/Pagination/Pagination';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../molecules/Table/Table';
 import { DataTable } from '../organisms/DataTable/DataTable';
@@ -10,29 +11,6 @@ import { DataTable } from '../organisms/DataTable/DataTable';
  * El orden de resolución de un texto: **prop → proveedor → error**. Sin cuarto
  * escalón — ningún componente trae el castellano puesto.
  */
-
-const EN: BrandMessages = {
-  pagination: {
-    label: 'Pagination',
-    pagesGroup: 'Pages',
-    previous: 'Previous page',
-    next: 'Next page',
-    goToPage: (page) => `Page ${page}`,
-    perPage: 'Rows per page',
-    total: (total) => `${total} results`,
-    allOption: 'All',
-  },
-  table: {
-    actions: 'Actions',
-    sortable: 'Activate sorting',
-    sortedAscending: 'Sorted ascending',
-    sortedDescending: 'Sorted descending',
-  },
-  dataTable: {
-    empty: 'No results.',
-    search: 'Search…',
-  },
-};
 
 afterEach(() => {
   vi.restoreAllMocks();

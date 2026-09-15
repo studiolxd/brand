@@ -27,16 +27,31 @@ function ficherosDe(dir: string, ext: string[]): string[] {
   return salida;
 }
 
-describe('el fixture de textos se queda fuera del paquete', () => {
-  it('ningún fichero de src/ importa el fixture ni nada de .storybook/', () => {
+/** Los fixtures del Storybook, por nombre: hoy el castellano y el inglés. */
+const fixtures = readdirSync(join(repoRoot, '.storybook'))
+  .filter((entrada) => /^brandMessagesFixture.*\.ts$/.test(entrada))
+  .map((entrada) => entrada.replace(/\.ts$/, ''));
+
+describe('los fixtures de textos se quedan fuera del paquete', () => {
+  it('hay más de uno, y el inglés está entre ellos', () => {
+    // Si el inglés desapareciera, las stories de «otro idioma» volverían al
+    // literal copiado en cada fichero, que es lo que este fixture evita.
+    expect(fixtures).toContain('brandMessagesFixtureEn');
+    expect(fixtures).toContain('brandMessagesFixture');
+  });
+
+  it('ningún fichero de src/ importa un fixture ni nada de .storybook/', () => {
     const culpables = ficherosDe(join(repoRoot, 'src'), ['.ts', '.tsx'])
       // Los tests y las stories tampoco viajan en el paquete; lo que se vigila
       // aquí es el código que sí se compila a `dist/`.
       .filter((ruta) => !/\.(test|stories)\.tsx?$/.test(ruta))
       .filter((ruta) => {
         const código = readFileSync(ruta, 'utf8');
+        const cuerpo = código.replace(/`[^`]*`|\/\*[\s\S]*?\*\/|\/\/.*/g, '');
         return /from\s+['"][^'"]*\.storybook\//.test(código)
-          || /brandMessagesFixture/.test(código.replace(/`[^`]*`|\/\*[\s\S]*?\*\/|\/\/.*/g, ''));
+          // Uno por uno y no por prefijo: un fixture nuevo entra en la lista
+          // solo por existir en `.storybook/`, sin tocar este test.
+          || fixtures.some((nombre) => cuerpo.includes(nombre));
       })
       .map((ruta) => relative(repoRoot, ruta));
 

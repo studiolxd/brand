@@ -6,36 +6,7 @@ import { Button } from '../../atoms/Button/Button';
 import { Tag } from '../../atoms/Tag/Tag';
 import { DataTable } from './DataTable';
 import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
-import type { BrandMessages } from '../../messages/BrandMessages';
-
-/**
- * El catálogo de otra app, en inglés, para enseñar de dónde salen los textos
- * cuando no se pasa ninguna prop. El Storybook monta el suyo (castellano) para
- * todas las stories; este lo tapa solo aquí. La tabla de datos consume tres
- * espacios: el suyo, el de `Table` y el de `Pagination`.
- */
-const EN: BrandMessages = {
-  pagination: {
-    label: 'Pagination',
-    pagesGroup: 'Pages',
-    previous: 'Previous page',
-    next: 'Next page',
-    goToPage: (page) => `Page ${page}`,
-    perPage: 'Rows per page',
-    total: (total) => `${total} results`,
-    allOption: 'All',
-  },
-  table: {
-    actions: 'Actions',
-    sortable: 'Activate sorting',
-    sortedAscending: 'Sorted ascending',
-    sortedDescending: 'Sorted descending',
-  },
-  dataTable: {
-    empty: 'No results.',
-    search: 'Search…',
-  },
-};
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 type Member = {
   id: string;
