@@ -4,3 +4,10 @@
 .confirm-dialog__actions.modal__footer {
   margin-block-start: var(--confirm-dialog-actions-space-before);
 }
+
+/* El campo de la frase va bajo la pregunta y pegado a ella: todavía es parte de
+   lo que se pregunta, no de la respuesta —esa es el pie—, así que su aire es
+   menor que el que separa el cuerpo de las acciones. */
+.confirm-dialog__phrase {
+  margin-block-start: var(--confirm-dialog-phrase-space-before);
+}

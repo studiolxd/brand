@@ -17,6 +17,8 @@ Es la decisión de diseño del componente. Un diálogo destructivo que abre con 
 
 `Modal` no mueve el foco al abrir, que es lo correcto para un diálogo genérico; este sí lo hace, en el frame siguiente al montaje.
 
+**Con `confirmPhrase` el foco entra en el campo**, no en «Cancelar». No es una excepción a lo de arriba sino su consecuencia: lo que la regla evita es que el `Enter` de más caiga sobre la acción que destruye, y ahí el botón de confirmar nace apagado, así que ese `Enter` no puede llegar a ninguna parte. El foco va donde hay algo que hacer.
+
 ## Anatomía
 
 Es el `Modal` del sistema con el cuerpo ya escrito:
@@ -27,6 +29,35 @@ Es el `Modal` del sistema con el cuerpo ya escrito:
 - **Acciones** — cancelar y confirmar, en un `Inline justify="end"`; entre las dos cabe una tercera (`secondaryActionLabel`).
 
 <Canvas of={ConfirmDialogStories.ConDetalle} />
+
+## Frase de confirmación (`confirmPhrase`)
+
+El patrón de **«escribe el nombre de la organización para borrarla»**: la barrera que se pone delante de lo que no se puede deshacer. Con `confirmPhrase`, el diálogo monta un campo bajo la pregunta y el botón de confirmar **nace apagado**; solo se enciende cuando lo tecleado coincide.
+
+<Canvas of={ConfirmDialogStories.FraseDeConfirmacion} />
+
+```tsx
+<ConfirmDialog
+  open={open}
+  destructive
+  title="¿Borrar la organización?"
+  description="Se borrarán también sus proyectos y sus miembros. No se puede deshacer."
+  confirmLabel="Borrar la organización"
+  confirmPhrase={organizacion.slug}
+  confirmPhraseLabel={`Escribe ${organizacion.slug} para confirmar`}
+  confirmPhraseMismatch="El nombre no coincide."
+  onConfirm={borrar}
+  onCancel={cerrar}
+/>
+```
+
+Tres cosas del comportamiento, que son las que divergían cuando cada aplicación se lo montaba por su cuenta:
+
+- **El error aparece tras un intento, no mientras se teclea.** Un intento es salir del campo con algo escrito, o pulsar `Intro`. Quien está escribiendo «acme» no ve «no coincide» desde la primera letra; y seguir tecleando retira el error en vez de insistir.
+- **Con la frase puesta, `Intro` confirma** desde el propio campo, sin tener que ir al botón.
+- **La comparación perdona los espacios de los extremos** —uno pegado al pegar no es un error de la persona— y nada más: ni la caja ni los acentos, que es justo de lo que vive la barrera.
+
+`confirmPhraseLabel` y `confirmPhraseMismatch` son **obligatorios con `confirmPhrase` y no tienen default**: el rótulo es donde se dice qué hay que teclear, y eso el diálogo no lo sabe. Sin `confirmPhrase` no hay campo ni barrera, y el diálogo es el de siempre.
 
 ## Acción destructiva
 
@@ -80,7 +111,7 @@ No tiene nada que remapear: la superficie es la del `Modal` y los botones son lo
 
 ## Textos
 
-`confirmLabel`, `cancelLabel`, `pendingLabel` y `closeLabel` son props con default castellano. `secondaryActionLabel` **no tiene default**: como `title` y `description`, es texto del producto —no algo que el diálogo diga por su cuenta—, y sin él la tercera acción no existe. El `confirmLabel` gana mucho si dice **qué** se confirma («Borrar la organización») en vez de «Confirmar»: quien lea solo el botón sabrá qué está a punto de pasar.
+`confirmLabel`, `cancelLabel`, `pendingLabel` y `closeLabel` son props con default castellano. `secondaryActionLabel` **no tiene default**: como `title` y `description`, es texto del producto —no algo que el diálogo diga por su cuenta—, y sin él la tercera acción no existe. Lo mismo vale para `confirmPhraseLabel` y `confirmPhraseMismatch`, que además son obligatorios en cuanto se pasa `confirmPhrase`. El `confirmLabel` gana mucho si dice **qué** se confirma («Borrar la organización») en vez de «Confirmar»: quien lea solo el botón sabrá qué está a punto de pasar.
 
 ---
 
@@ -93,7 +124,8 @@ El panel, el velo, el título y la descripción son los del `Modal`; el aire ent
 ## Accesibilidad
 
 - El diálogo atrapa el foco, lo devuelve al elemento que lo abrió y responde a `Esc`: todo eso lo pone `Modal` sobre Base UI.
-- El foco inicial va a la acción segura, no a la destructiva.
+- El foco inicial va a la acción segura, no a la destructiva; con `confirmPhrase`, al campo, que tampoco lo es.
+- El campo de la frase es un `InputField` del sistema: su rótulo lo nombra y el mensaje de discrepancia le llega por `aria-describedby`, con el campo marcado como inválido.
 - La descripción está enlazada por `aria-describedby`, así que se anuncia con el título al abrir.
 - Mientras la acción está en curso los botones se deshabilitan y el rótulo cambia: el estado ocupado se ve y se lee, no solo se intuye porque no pasa nada.
 
