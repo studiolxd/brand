@@ -7,6 +7,59 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [43.0.0] — 2026-09-15
+
+> **Major.** Cuarta familia al proveedor de textos: fecha y hora. `Calendar`, `DatePicker`
+> y `TimeSelect` dejan de traer castellano puesto, y con ellos se cierran los reenvíos que
+> las olas anteriores dejaron inventariados.
+
+### Fecha y hora leen del proveedor
+
+Tres espacios nuevos en `BrandMessages`: **`calendar`** (previousMonth, nextMonth,
+previousYears, nextYears, yearGrid), **`datePicker`** (openCalendar, invalid, calendar y
+las letras de la máscara) y **`timeSelect`** (hours, minutes y sus máscaras). Los campos
+que los envuelven —`DatePickerField`, `DateTimeField`, `TimeField`— no pierden props: sus
+reenvíos quedan como anulación puntual, pero ya no hay que enhebrar nada para traducir,
+porque el proveedor llega por contexto a la pieza que pinta el texto. Se ha retirado
+`SPANISH_MASK_LETTERS`, el último juego de letras castellanas vivo en el código.
+
+Mismo orden que en las tres olas anteriores —**prop → proveedor → error**— y misma
+naturaleza: incompatible **en tiempo de compilación**. El texto que no se pinta no se
+exige: un `Calendar` sin navegación no pide las flechas, un `DatePicker` con fecha válida no
+pide el aviso, un `TimeSelect` con hora no pide las máscaras.
+
+### Una máscara tiene dos mitades
+
+`dd/mm/aaaa` no es una cosa, son dos decididas en sitios distintos. **El orden y el
+separador son formato**: salen del `locale` vía `Intl.DateTimeFormat`, y una aplicación en
+inglés que enseñe fechas españolas las quiere en orden español. **Las letras son idioma**:
+`aaaa` es «año», `yyyy` es *year*, `jjjj` es *Jahr* — la abreviatura de una palabra, y se
+traduce. Por eso el catálogo guarda las tres letras sueltas y nunca la máscara montada: la
+arma el componente poniendo las letras en el orden del `locale`.
+
+Lo mismo con `HH/MM`: parecen notación técnica, pero son la inicial de una palabra, y en
+alemán son `SS/MM`. Lo que no se traduce es el dibujo —dos cifras, la hora antes que el
+minuto, dos puntos en medio—.
+
+La regla, en una frase, escrita en `Foundations › Internacionalización`: **si cambia al
+cambiar de idioma es cromo; si cambia al cambiar de país es formato.**
+
+### Lo que se queda como prop
+
+`label`, `helperText` y `errorMessage` de los tres campos; `gridLabel` del `Calendar`, que
+nombra a ESE calendario («Fecha de alta») y sin el cual la rejilla toma el título del mes,
+que ya viene del `locale`; `calendarLabel` cuando lo pone un campo, porque es su etiqueta;
+y el `placeholder` del `DatePicker` cuando dice algo del campo («Desde»), que sustituye a la
+máscara entera.
+
+### Pendiente, anotado
+
+`CalendarPlanner` y `CalendarRoster` siguen con «Mes anterior» y «Mes siguiente» cableados:
+es el mismo texto que `Calendar` y pueden leer de `calendar.*` tal cual. Y `TimeSelect` es
+de 24 horas por construcción; el reloj de 12 con AM/PM es cosa del `locale`, no del idioma,
+y hoy una aplicación en inglés americano ve las horas en formato militar. No es un texto,
+y queda por decidir.
+
 ## [42.0.0] — 2026-09-15
 
 > **Major.** Tercera familia al proveedor de textos: los átomos y moléculas de formulario

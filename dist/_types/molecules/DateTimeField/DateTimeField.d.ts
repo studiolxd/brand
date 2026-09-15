@@ -33,29 +33,29 @@ export interface DateTimeFieldProps {
     locale?: string;
     /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
     className?: string;
-    /** Nombre accesible del panel del calendario. Default: la etiqueta del campo. */
+    /** Nombre accesible del panel del calendario. Sin él, la etiqueta del campo. */
     calendarLabel?: DatePickerProps['calendarLabel'];
-    /** Nombre accesible del botón que abre el calendario. Default castellano. */
+    /** Nombre accesible del botón que abre el calendario. Sin él, `datePicker.openCalendar`. */
     openCalendarLabel?: DatePickerProps['openCalendarLabel'];
-    /** Mensaje de fecha incompleta del campo de texto. Default castellano. */
+    /** Mensaje de fecha incompleta del campo de texto. Sin él, `datePicker.invalid`. */
     invalidMessage?: DatePickerProps['invalidMessage'];
-    /** Letras de la máscara del marcador de posición. Default castellano. */
+    /** Letras de la máscara del marcador de posición. Sin ellas, `datePicker.maskLetters`. */
     maskLetters?: DatePickerProps['maskLetters'];
-    /** aria-label del botón de mes anterior del calendario. Default castellano. */
+    /** aria-label del botón de mes anterior. Sin él, `calendar.previousMonth`. */
     previousMonthLabel?: DatePickerProps['previousMonthLabel'];
-    /** aria-label del botón de mes siguiente. Default castellano. */
+    /** aria-label del botón de mes siguiente. Sin él, `calendar.nextMonth`. */
     nextMonthLabel?: DatePickerProps['nextMonthLabel'];
-    /** aria-label del botón de retroceso en la vista de años. Default castellano. */
+    /** aria-label del retroceso en la vista de años. Sin él, `calendar.previousYears`. */
     previousYearsLabel?: DatePickerProps['previousYearsLabel'];
-    /** aria-label del botón de avance en la vista de años. Default castellano. */
+    /** aria-label del avance en la vista de años. Sin él, `calendar.nextYears`. */
     nextYearsLabel?: DatePickerProps['nextYearsLabel'];
-    /** aria-label de la rejilla de años. Default castellano. */
+    /** aria-label de la rejilla de años. Sin él, `calendar.yearGrid`. */
     yearGridLabel?: DatePickerProps['yearGridLabel'];
-    /** aria-label de la rejilla de días. Default: `calendarLabel`. */
+    /** aria-label de la rejilla de días. Sin él, el nombre del panel. */
     gridLabel?: DatePickerProps['gridLabel'];
-    /** aria-label del desplegable de horas. Default: "Horas" (castellano). */
+    /** aria-label del desplegable de horas. Sin él, `timeSelect.hours`. */
     hoursLabel?: string;
-    /** aria-label del desplegable de minutos. Default: "Minutos" (castellano). */
+    /** aria-label del desplegable de minutos. Sin él, `timeSelect.minutes`. */
     minutesLabel?: string;
     onChange?: (date: Date | null) => void;
     /** Se llama al salir de cualquiera de los dos controles: el campo de fecha (un `<input>`) o los desplegables de hora (dos `<button>`). */

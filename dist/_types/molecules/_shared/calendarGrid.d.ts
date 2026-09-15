@@ -51,10 +51,14 @@ export interface CalendarMonthNavOptions {
     /**
      * Nombre accesible del botón de retroceso. Depende de la vista: «Mes
      * anterior» sobre la rejilla de días, «Años anteriores» sobre la de años.
+     *
+     * Opcional porque sin `navigable` no se pinta ningún botón: quien la monta
+     * lee el texto de su catálogo **solo cuando hay flechas**, y un calendario
+     * estático no exige un texto que nadie va a ver.
      */
-    previousLabel: string;
+    previousLabel?: string;
     /** Nombre accesible del botón de avance, también según la vista. */
-    nextLabel: string;
+    nextLabel?: string;
     prevDisabled?: boolean;
     nextDisabled?: boolean;
     onPrev: () => void;

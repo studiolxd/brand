@@ -1,84 +1,85 @@
 'use client';
 import './time-select.css';
-import { Select as e } from "./select.js";
-import { forwardRef as t, useMemo as n } from "react";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Select as t } from "./select.js";
+import { forwardRef as n, useMemo as r } from "react";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/atoms/TimeSelect/TimeSelect.tsx
-function a(e) {
+function o(e) {
 	return String(e).padStart(2, "0");
 }
-var o = t(function({ value: t, onChange: o, step: s = 5, size: c = "md", disabled: l, readOnly: u, error: d, id: f, name: p, required: m, "aria-labelledby": h, "aria-describedby": g, onBlur: _, className: v, hoursLabel: y = "Horas", minutesLabel: b = "Minutos", hoursPlaceholder: x = "HH", minutesPlaceholder: S = "MM" }, C) {
-	let w = n(() => Array.from({ length: 24 }, (e, t) => ({
+var s = n(function({ value: n, onChange: s, step: c = 5, size: l = "md", disabled: u, readOnly: d, error: f, id: p, name: m, required: h, "aria-labelledby": g, "aria-describedby": _, onBlur: v, className: y, hoursLabel: b, minutesLabel: x, hoursPlaceholder: S, minutesPlaceholder: C }, w) {
+	let T = e("timeSelect"), E = r(() => Array.from({ length: 24 }, (e, t) => ({
 		value: String(t),
-		label: a(t)
-	})), []), T = n(() => {
+		label: o(t)
+	})), []), D = r(() => {
 		let e = [];
-		for (let t = 0; t < 60; t += s) e.push({
+		for (let t = 0; t < 60; t += c) e.push({
 			value: String(t),
-			label: a(t)
+			label: o(t)
 		});
 		return e;
-	}, [s]), E = (e) => {
-		let n = parseInt(e, 10), r = t?.m ?? 0;
-		o?.({
-			h: n,
+	}, [c]), O = (e) => {
+		let t = parseInt(e, 10), r = n?.m ?? 0;
+		s?.({
+			h: t,
 			m: r
 		});
-	}, D = (e) => {
-		let n = t?.h ?? 0;
-		o?.({
-			h: n,
+	}, k = (e) => {
+		let t = n?.h ?? 0;
+		s?.({
+			h: t,
 			m: parseInt(e, 10)
 		});
-	}, O = ["time-select", v ?? ""].filter(Boolean).join(" "), k = t == null ? "" : String(t.h), A = t == null ? "" : String(t.m);
-	return /* @__PURE__ */ i("div", {
-		className: O,
+	}, A = ["time-select", y ?? ""].filter(Boolean).join(" "), j = n == null ? "" : String(n.h), M = n == null ? "" : String(n.m);
+	return /* @__PURE__ */ a("div", {
+		className: A,
 		role: "group",
-		"aria-labelledby": h,
-		"aria-describedby": g,
-		"aria-invalid": d || void 0,
-		"aria-required": m || void 0,
+		"aria-labelledby": g,
+		"aria-describedby": _,
+		"aria-invalid": f || void 0,
+		"aria-required": h || void 0,
 		children: [
-			/* @__PURE__ */ r(e, {
-				ref: C,
-				id: f,
-				options: w,
-				value: k,
-				placeholder: x,
-				size: c,
-				disabled: l,
-				readOnly: u,
-				required: m,
-				"aria-label": y,
-				"aria-invalid": d,
-				onValueChange: E,
-				onBlur: _
+			/* @__PURE__ */ i(t, {
+				ref: w,
+				id: p,
+				options: E,
+				value: j,
+				placeholder: j === "" ? T("maskHours", S) : void 0,
+				size: l,
+				disabled: u,
+				readOnly: d,
+				required: h,
+				"aria-label": T("hours", b),
+				"aria-invalid": f,
+				onValueChange: O,
+				onBlur: v
 			}),
-			/* @__PURE__ */ r("span", {
+			/* @__PURE__ */ i("span", {
 				className: "time-select__sep",
 				"aria-hidden": "true",
 				children: ":"
 			}),
-			/* @__PURE__ */ r(e, {
-				options: T,
-				value: A,
-				placeholder: S,
-				size: c,
-				disabled: l,
-				readOnly: u,
-				required: m,
-				"aria-label": b,
-				"aria-invalid": d,
-				onValueChange: D,
-				onBlur: _
+			/* @__PURE__ */ i(t, {
+				options: D,
+				value: M,
+				placeholder: M === "" ? T("maskMinutes", C) : void 0,
+				size: l,
+				disabled: u,
+				readOnly: d,
+				required: h,
+				"aria-label": T("minutes", x),
+				"aria-invalid": f,
+				onValueChange: k,
+				onBlur: v
 			}),
-			p && /* @__PURE__ */ r("input", {
+			m && /* @__PURE__ */ i("input", {
 				type: "hidden",
-				name: p,
-				value: t == null ? "" : `${a(t.h)}:${a(t.m)}`
+				name: m,
+				value: n == null ? "" : `${o(n.h)}:${o(n.m)}`
 			})
 		]
 	});
 });
 //#endregion
-export { o as TimeSelect };
+export { s as TimeSelect };
