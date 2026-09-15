@@ -10,6 +10,9 @@ import { InputField } from '../molecules/InputField/InputField';
 import { PasswordField } from '../molecules/PasswordField/PasswordField';
 import { SelectField } from '../molecules/SelectField/SelectField';
 import { MultiSelectField } from '../molecules/MultiSelectField/MultiSelectField';
+import { NumberInput } from '../atoms/NumberInput/NumberInput';
+import { OtpInput } from '../atoms/OtpInput/OtpInput';
+import { InputPhone } from '../atoms/InputPhone/InputPhone';
 
 /**
  * El orden de resolución de un texto: **prop → proveedor → error**. Sin cuarto
@@ -347,5 +350,45 @@ describe('los desplegables leen del proveedor', () => {
     );
 
     expect(screen.getByText('Uno')).toBeInTheDocument();
+  });
+});
+
+describe('los controles con cromo propio leen del proveedor', () => {
+  it('los dos botones del contador toman su nombre del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <NumberInput aria-label="Seats" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Increase' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Decrease' })).toBeInTheDocument();
+  });
+
+  it('el grupo y las celdas del código salen del catálogo, con la posición interpolada', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <OtpInput length={4} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('group', { name: 'Verification code' })).toBeInTheDocument();
+    expect(screen.getByLabelText('Digit 1 of 4')).toBeInTheDocument();
+  });
+
+  it('el selector de país toma su nombre del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <InputPhone aria-label="Phone" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('combobox', { name: 'Country' })).toBeInTheDocument();
+  });
+
+  it('sin proveedor y sin prop, el contador revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<NumberInput aria-label="Seats" />)).toThrow(/numberInput\./);
   });
 });

@@ -68,6 +68,25 @@ del `Input`, que ya trae su par oscuro. Sobre `.surface-dark` no hay nada que re
 La primera celda lleva `autocomplete="one-time-code"`: en iOS y macOS el código llega del SMS
 sin teclearlo.
 
+## Internacionalización
+
+El nombre del grupo y el de cada celda **no tienen valor por defecto**: salen del
+`BrandMessagesProvider` que la aplicación monta en su raíz.
+
+<Canvas of={OtpInputStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `groupLabel` | `otpInput.group` | `aria-label` del grupo cuando el control va suelto |
+| `digitLabel` | `otpInput.digit` | `aria-label` de cada celda, con su posición y el total |
+
+`digit` recibe la posición y el total y devuelve la frase entera: el orden de las palabras cambia
+de un idioma a otro, así que se traduce la frase y no se concatena. El orden es **prop → proveedor
+→ error**; dentro de un `OtpField` la etiqueta del campo nombra el grupo por `aria-labelledby` y
+`otpInput.group` no se lee.
+
+La convención completa está en **Foundations › Internacionalización**.
+
 ## Accesibilidad
 
 Las celdas viven en un `role="group"`: el lector anuncia el conjunto una vez y luego cada

@@ -1,4 +1,5 @@
 import { forwardRef, useMemo, type Ref } from 'react';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { Select as BaseSelect } from '@base-ui/react/select';
 // `getCountryCallingCode` se toma de `react-phone-number-input`, que lo
 // reexporta ya atado a sus metadatos: una sola librería en el componente y
@@ -22,7 +23,8 @@ interface CountrySelectProps {
   container?: React.ComponentPropsWithoutRef<typeof BaseSelect.Portal>['container'];
 }
 
-function CountrySelect({ value, onChange, options, disabled, size = 'md', countryLabel = 'País', internationalLabel = '🌐', container }: CountrySelectProps) {
+function CountrySelect({ value, onChange, options, disabled, size = 'md', countryLabel, internationalLabel = '🌐', container }: CountrySelectProps) {
+  const t = useBrandMessages('inputPhone');
   const INTL = '__intl__';
   const toVal = (c: Country | undefined) => c ?? INTL;
   const fromVal = (v: string): Country => (v === INTL ? (undefined as unknown as Country) : (v as Country));
@@ -38,7 +40,7 @@ function CountrySelect({ value, onChange, options, disabled, size = 'md', countr
       onValueChange={(v) => onChange(fromVal(v as string))}
       disabled={disabled}
     >
-      <BaseSelect.Trigger className="input-phone__country" aria-label={countryLabel}>
+      <BaseSelect.Trigger className="input-phone__country" aria-label={t('country', countryLabel)}>
         <BaseSelect.Value>
           {value ? `+${getCountryCallingCode(value)}` : internationalLabel}
         </BaseSelect.Value>
@@ -69,6 +71,16 @@ function CountrySelect({ value, onChange, options, disabled, size = 'md', countr
   );
 }
 
+/**
+ * El único texto que el campo emite por su cuenta: el nombre accesible del
+ * selector de país. Los **nombres de los países** no están aquí: los resuelve
+ * `Intl` desde el `locale`, como los meses y las fechas.
+ */
+export interface InputPhoneMessages {
+  /** Nombre accesible del selector de prefijo/país. */
+  country: string;
+}
+
 export interface InputPhoneProps {
   value?: string;
   defaultCountry?: Country;
@@ -92,14 +104,16 @@ export interface InputPhoneProps {
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   /**
-   * aria-label del selector de país. Default: "País" (castellano).
-   * Una app multiidioma debe pasarla traducida.
+   * aria-label del selector de país. **Sin default**: sale de
+   * `inputPhone.country` del `BrandMessagesProvider`.
    */
   countryLabel?: string;
   /**
    * Lo que enseña el selector cuando no hay país elegido (número en formato
-   * internacional). Default: "🌐". Es contenido visible: una app que no quiera
-   * el emoji pasa aquí su propio texto o glifo.
+   * internacional). Default: "🌐". **No pasa por el catálogo de textos a
+   * propósito**: un glifo no se traduce, dice lo mismo en los seis idiomas y
+   * meterlo en el catálogo obligaría a repetirlo seis veces. Una app que no
+   * quiera el emoji pasa aquí su propio texto o glifo.
    */
   internationalLabel?: string;
   /**

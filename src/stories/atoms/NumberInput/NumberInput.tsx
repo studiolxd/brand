@@ -1,6 +1,18 @@
 import { forwardRef, useState, useCallback, type ComponentPropsWithoutRef } from 'react';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { Icon } from '../Icon/Icon';
 import './NumberInput.css';
+
+/**
+ * Los dos textos que el control emite por su cuenta: los nombres accesibles de
+ * sus dos botones. Cromo puro — no dicen nada de qué se cuenta.
+ */
+export interface NumberInputMessages {
+  /** Nombre accesible del botón que resta un paso. */
+  decrement: string;
+  /** Nombre accesible del botón que suma un paso. */
+  increment: string;
+}
 
 export interface NumberInputProps
   extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue' | 'onChange'> {
@@ -23,13 +35,13 @@ export interface NumberInputProps
   /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
   className?: string;
   /**
-   * aria-label del botón de decremento. Default: "Decrementar" (castellano).
-   * Una app multiidioma debe pasarla traducida.
+   * aria-label del botón de decremento. **Sin default**: sale de
+   * `numberInput.decrement` del `BrandMessagesProvider`.
    */
   decrementLabel?: string;
   /**
-   * aria-label del botón de incremento. Default: "Incrementar" (castellano).
-   * Una app multiidioma debe pasarla traducida.
+   * aria-label del botón de incremento. **Sin default**: sale de
+   * `numberInput.increment` del `BrandMessagesProvider`.
    */
   incrementLabel?: string;
   onChange?: (value: number) => void;
@@ -58,14 +70,15 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
   name,
   describedBy,
   ariaLabel,
-  decrementLabel = 'Decrementar',
-  incrementLabel = 'Incrementar',
+  decrementLabel,
+  incrementLabel,
   className,
   onChange,
   onBlur,
   onFocus,
   ...rest
 }: NumberInputProps, ref) {
+  const t = useBrandMessages('numberInput');
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<number>(defaultValue);
   const [focused, setFocused] = useState(false);
@@ -137,7 +150,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
         type="button"
         onClick={handleDecrement}
         disabled={isDecrementDisabled}
-        aria-label={decrementLabel}
+        aria-label={t('decrement', decrementLabel)}
         tabIndex={-1}
       >
         <Icon name="minus" size="sm" />
@@ -166,7 +179,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
         type="button"
         onClick={handleIncrement}
         disabled={isIncrementDisabled}
-        aria-label={incrementLabel}
+        aria-label={t('increment', incrementLabel)}
         tabIndex={-1}
       >
         <Icon name="plus" size="sm" />

@@ -1,6 +1,19 @@
 import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { Input } from '../Input/Input';
 import './OtpInput.css';
+
+/**
+ * Los textos que el control emite por su cuenta: el nombre del grupo cuando va
+ * suelto y el de cada celda. Cromo — el segundo solo interpola la posición de
+ * la celda, que es una cifra.
+ */
+export interface OtpInputMessages {
+  /** Nombre accesible del grupo de celdas cuando el control va suelto. */
+  group: string;
+  /** Nombre accesible de una celda, con su posición y el total. */
+  digit: (index: number, length: number) => string;
+}
 
 export interface OtpInputProps {
   /** Número de celdas a renderizar. Requerido. */
@@ -25,8 +38,8 @@ export interface OtpInputProps {
   'aria-labelledby'?: string;
   /**
    * Nombre accesible del grupo cuando no se pasa `aria-label` ni
-   * `aria-labelledby` — el caso del control suelto. Default: "Código de
-   * verificación" (castellano). Una app multiidioma debe pasarla traducida.
+   * `aria-labelledby` — el caso del control suelto. **Sin default**: sale de
+   * `otpInput.group` del `BrandMessagesProvider`.
    */
   groupLabel?: string;
   id?: string;
@@ -42,8 +55,8 @@ export interface OtpInputProps {
   /** Se añade DESPUÉS de las clases propias del componente. */
   className?: string;
   /**
-   * Etiqueta accesible de cada celda. Default: `Dígito N de M` (castellano).
-   * Una app multiidioma debe pasarla traducida.
+   * Etiqueta accesible de cada celda. **Sin default**: sale de
+   * `otpInput.digit` del `BrandMessagesProvider`.
    */
   digitLabel?: (index: number, length: number) => string;
 }
@@ -66,13 +79,14 @@ export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>(function Otp
   'aria-describedby': ariaDescribedBy,
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
-  groupLabel = 'Código de verificación',
+  groupLabel,
   id,
   name,
   onBlur,
   className,
-  digitLabel = (index, total) => `Dígito ${index} de ${total}`,
+  digitLabel,
 }: OtpInputProps, ref) {
+  const t = useBrandMessages('otpInput');
   const isControlled = value !== undefined;
 
   const [internalCells, setInternalCells] = useState<string[]>(() => {
@@ -165,7 +179,7 @@ export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>(function Otp
     <div
       ref={containerRef}
       role="group"
-      aria-label={ariaLabelledBy ? undefined : (ariaLabel ?? groupLabel)}
+      aria-label={ariaLabelledBy ? undefined : (ariaLabel ?? t('group', groupLabel))}
       aria-labelledby={ariaLabelledBy}
       aria-describedby={describedBy ?? ariaDescribedBy}
       aria-invalid={error || undefined}
@@ -194,7 +208,7 @@ export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>(function Otp
           pattern="\d*"
           maxLength={1}
           autoComplete={i === 0 ? 'one-time-code' : 'off'}
-          aria-label={digitLabel(i + 1, length)}
+          aria-label={t('digit', digitLabel)(i + 1, length)}
           value={cells[i]}
           onChange={handleChange(i)}
           onKeyDown={handleKeyDown(i)}

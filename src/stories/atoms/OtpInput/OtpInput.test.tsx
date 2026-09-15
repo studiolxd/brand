@@ -1,11 +1,26 @@
+import type { ReactElement } from 'react';
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render as renderRaw, screen, type RenderOptions } from '@testing-library/react';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixture } from '../../../../.storybook/brandMessagesFixture';
+
+/**
+ * Montar el control es ser «la aplicación»: desde la campaña del proveedor, el
+ * nombre del grupo y el de cada celda salen del catálogo y no de un default
+ * castellano del paquete.
+ */
+function render(ui: ReactElement, options?: RenderOptions) {
+  return renderRaw(
+    <BrandMessagesProvider messages={brandMessagesFixture}>{ui}</BrandMessagesProvider>,
+    options,
+  );
+}
 import userEvent from '@testing-library/user-event';
 import { OtpInput } from './OtpInput';
 import { OtpField } from '../../molecules/OtpField/OtpField';
 
 describe('OtpInput — nombre accesible del grupo', () => {
-  it('suelto, el grupo se llama con el default castellano', () => {
+  it('suelto, el grupo se llama con el texto del catálogo', () => {
     render(<OtpInput length={6} />);
     expect(screen.getByRole('group', { name: 'Código de verificación' })).toBeInTheDocument();
   });
@@ -20,7 +35,7 @@ describe('OtpInput — nombre accesible del grupo', () => {
     expect(screen.getByRole('group', { name: 'Código SMS' })).toBeInTheDocument();
   });
 
-  it('dentro de OtpField manda la etiqueta del campo, no el default', () => {
+  it('dentro de OtpField manda la etiqueta del campo, no la del catálogo', () => {
     render(<OtpField label="Código enviado por SMS" length={4} />);
     expect(screen.getByRole('group', { name: 'Código enviado por SMS' })).toBeInTheDocument();
     expect(screen.queryByRole('group', { name: 'Código de verificación' })).not.toBeInTheDocument();

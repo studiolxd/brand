@@ -51,6 +51,24 @@ se recortan al rango.
 
 ---
 
+## Internacionalización
+
+Los nombres accesibles de los dos botones son cromo del sistema —no dicen nada de qué se cuenta—
+y **no tienen valor por defecto**: salen del `BrandMessagesProvider` que la aplicación monta en su
+raíz.
+
+<Canvas of={NumberInputStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `decrementLabel` | `numberInput.decrement` | `aria-label` del botón que resta |
+| `incrementLabel` | `numberInput.increment` | `aria-label` del botón que suma |
+
+El orden es **prop → proveedor → error**, sin cuarto escalón. El nombre del campo (`aria-label`)
+no sale del catálogo: es de esta pantalla.
+
+La convención completa está en **Foundations › Internacionalización**.
+
 ## Accesibilidad
 
 El campo es un `<input type="text">` con `inputMode` numérico, no un `type="number"`: el

@@ -126,6 +126,21 @@ describe.each([
     'src/stories/atoms/MultiSelect/MultiSelect.tsx',
     ['Seleccionar…', 'Quitar '],
   ],
+  [
+    'NumberInput',
+    'src/stories/atoms/NumberInput/NumberInput.tsx',
+    ['Decrementar', 'Incrementar'],
+  ],
+  [
+    'OtpInput',
+    'src/stories/atoms/OtpInput/OtpInput.tsx',
+    ['Código de verificación', 'Dígito '],
+  ],
+  [
+    'InputPhone',
+    'src/stories/atoms/InputPhone/InputPhone.tsx',
+    ["'País'"],
+  ],
 ])('%s no trae textos puestos', (_componente, ruta, textos) => {
   const fuente = readFileSync(join(repoRoot, ruta), 'utf8');
   // Solo el cuerpo: el JSDoc de las props nombra los textos para explicarlos.

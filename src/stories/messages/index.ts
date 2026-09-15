@@ -11,4 +11,7 @@ export type {
   PasswordFieldMessages,
   SelectMessages,
   MultiSelectMessages,
+  NumberInputMessages,
+  OtpInputMessages,
+  InputPhoneMessages,
 } from './BrandMessages';

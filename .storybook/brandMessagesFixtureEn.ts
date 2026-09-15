@@ -54,4 +54,15 @@ export const brandMessagesFixtureEn: BrandMessages = {
     placeholder: 'Select…',
     remove: (label) => `Remove ${label}`,
   },
+  numberInput: {
+    decrement: 'Decrease',
+    increment: 'Increase',
+  },
+  otpInput: {
+    group: 'Verification code',
+    digit: (index, length) => `Digit ${index} of ${length}`,
+  },
+  inputPhone: {
+    country: 'Country',
+  },
 };

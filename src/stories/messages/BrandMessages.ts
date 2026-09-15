@@ -5,6 +5,9 @@ import type { InputFieldMessages } from '../molecules/InputField/InputField';
 import type { PasswordFieldMessages } from '../molecules/PasswordField/PasswordField';
 import type { SelectMessages } from '../atoms/Select/Select';
 import type { MultiSelectMessages } from '../atoms/MultiSelect/MultiSelect';
+import type { NumberInputMessages } from '../atoms/NumberInput/NumberInput';
+import type { OtpInputMessages } from '../atoms/OtpInput/OtpInput';
+import type { InputPhoneMessages } from '../atoms/InputPhone/InputPhone';
 
 /**
  * El contrato de textos de la librería: un espacio por componente, y dentro
@@ -35,6 +38,9 @@ export interface BrandMessages {
   passwordField: PasswordFieldMessages;
   select: SelectMessages;
   multiSelect: MultiSelectMessages;
+  numberInput: NumberInputMessages;
+  otpInput: OtpInputMessages;
+  inputPhone: InputPhoneMessages;
 }
 
 export type {
@@ -45,4 +51,7 @@ export type {
   PasswordFieldMessages,
   SelectMessages,
   MultiSelectMessages,
+  NumberInputMessages,
+  OtpInputMessages,
+  InputPhoneMessages,
 };
