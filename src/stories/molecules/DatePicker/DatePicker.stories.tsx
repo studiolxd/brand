@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn, expect, userEvent, waitFor, within } from 'storybook/test';
 import { DatePicker } from './DatePicker';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof DatePicker> = {
   title: 'Molecules/DatePicker',
@@ -263,5 +265,54 @@ export const ContratoTalla: Story = {
     await expect(alto('[data-t="sm"] .date-picker__input')).toBe(32);
     await expect(alto('[data-t="md"] .date-picker__input')).toBe(40);
     await expect(alto('[data-t="lg"] .date-picker__input')).toBe(48);
+  },
+};
+
+/**
+ * El cromo del selector —el botón, el panel, el aviso y **las letras de la
+ * máscara**— sale del `BrandMessagesProvider`.
+ *
+ * Los dos campos de aquí abajo llevan el **mismo catálogo inglés** y distinto
+ * `locale`, que es la manera de ver la distinción de un vistazo: las letras
+ * son las del catálogo (`yyyy`), y el orden y el separador los del locale
+ * —`dd/mm/yyyy` en España, `mm/dd/yyyy` en Estados Unidos—. El idioma no
+ * reordena una fecha, y el locale no traduce una letra.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <DatePicker aria-label="Start date (es-ES)" locale="es-ES" value={null} />
+        <DatePicker aria-label="Start date (en-US)" locale="en-US" value={null} />
+      </div>
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: sin props, los cuatro textos del selector salen del proveedor. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el cromo lee del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <DatePicker aria-label="Start date" locale="es-ES" value={null} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvas, canvasElement }) => {
+    const campo = canvas.getByRole('textbox', { name: 'Start date' });
+    // Letras del catálogo inglés, orden del locale español.
+    await expect(campo).toHaveAttribute('placeholder', 'dd/mm/yyyy');
+
+    await userEvent.type(campo, '25/09');
+    await expect(canvas.getByRole('alert')).toHaveTextContent('Enter a complete, valid date.');
+
+    await userEvent.clear(campo);
+    await userEvent.click(canvas.getByRole('button', { name: 'Open calendar' }));
+
+    const body = within(canvasElement.ownerDocument.body);
+    await expect(body.getByRole('dialog', { name: 'Calendar' })).toBeInTheDocument();
+    await expect(body.getByLabelText('Previous month')).toBeInTheDocument();
+    await expect(body.queryByLabelText('Mes anterior')).toBeNull();
   },
 };

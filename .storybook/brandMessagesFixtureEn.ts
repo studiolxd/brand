@@ -92,4 +92,26 @@ export const brandMessagesFixtureEn: BrandMessages = {
   filterBar: {
     label: 'Filters',
   },
+  calendar: {
+    previousMonth: 'Previous month',
+    nextMonth: 'Next month',
+    previousYears: 'Previous years',
+    nextYears: 'Next years',
+    yearGrid: 'Choose year',
+  },
+  datePicker: {
+    openCalendar: 'Open calendar',
+    invalid: 'Enter a complete, valid date.',
+    calendar: 'Calendar',
+    // Las letras cambian con el idioma; el orden y el separador, con el
+    // `locale`: en `en-GB` esto se pinta `dd/mm/yyyy`, y en `en-US`,
+    // `mm/dd/yyyy`, sin tocar el catálogo.
+    maskLetters: { day: 'dd', month: 'mm', year: 'yyyy' },
+  },
+  timeSelect: {
+    hours: 'Hours',
+    minutes: 'Minutes',
+    maskHours: 'HH',
+    maskMinutes: 'MM',
+  },
 };

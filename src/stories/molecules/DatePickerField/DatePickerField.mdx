@@ -77,11 +77,29 @@ El control es de Base UI, así que el contrato **no** es el spread del `field`: 
 - El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
 - Meses y días del calendario salen de `Intl` con el `locale`: no son props de texto.
 
-## Textos
+## Internacionalización
 
-Los del `DatePicker` se reexponen tal cual, incluidos los del calendario
-(`previousMonthLabel`, `nextMonthLabel`, `previousYearsLabel`, `nextYearsLabel`,
-`yearGridLabel`, `gridLabel`). `calendarLabel` cae por defecto a la etiqueta del campo.
+El campo pone el **contenido** de la pantalla —`label`, `helperText`, `errorMessage`— y el
+`BrandMessagesProvider` pone el **cromo** del control: el botón del calendario, el aviso de
+fecha incompleta, las letras de la máscara y las flechas del calendario. Ninguno de esos tiene
+valor por defecto, y ninguno hay que enhebrarlo desde aquí: el proveedor llega por contexto al
+`DatePicker` y al `Calendar` de dentro.
+
+<Canvas of={DatePickerFieldStories.TextosDelProveedor} />
+
+| Qué | De dónde sale |
+| --- | --- |
+| `label`, `helperText`, `errorMessage` | prop, siempre: son de esta pantalla |
+| botón, aviso, letras de la máscara | `datePicker.*` del proveedor |
+| flechas del mes y de los años | `calendar.*` del proveedor |
+| nombre del panel | la etiqueta del campo; sin ella, `datePicker.calendar` |
+| meses, días y orden de la fecha | `locale`, con `Intl` — no son texto |
+
+Las props del `DatePicker` se siguen reexponiendo tal cual (`openCalendarLabel`,
+`invalidMessage`, `maskLetters`, `previousMonthLabel`, `nextMonthLabel`,
+`previousYearsLabel`, `nextYearsLabel`, `yearGridLabel`, `gridLabel`) como anulación puntual
+de un uso concreto. El reparto completo, con el caso de la máscara, en la doc de `DatePicker`
+§ «Internacionalización»; la convención, en **Foundations › Internacionalización**.
 
 ## Tokens
 

@@ -142,7 +142,7 @@ export type {
   SelectItemProps, SelectLabelProps, SelectSeparatorProps,
 } from './stories/atoms/Select/Select';
 export { TimeSelect } from './stories/atoms/TimeSelect/TimeSelect';
-export type { TimeSelectProps, TimeValue } from './stories/atoms/TimeSelect/TimeSelect';
+export type { TimeSelectProps, TimeValue, TimeSelectMessages } from './stories/atoms/TimeSelect/TimeSelect';
 export { SkipLink } from './stories/atoms/SkipLink/SkipLink';
 export { Sparkline } from './stories/atoms/Sparkline/Sparkline';
 export type { SparklineProps, SparklineSeries } from './stories/atoms/Sparkline/Sparkline';
@@ -188,13 +188,13 @@ export type { EmptyStateProps, EmptyStateAction } from './stories/molecules/Empt
 export { DocsSearch } from './stories/molecules/DocsSearch/DocsSearch';
 export type { DocsSearchProps, DocsSearchResult, DocsSearchRenderLinkProps } from './stories/molecules/DocsSearch/DocsSearch';
 export { DatePicker } from './stories/molecules/DatePicker/DatePicker';
-export type { DatePickerProps } from './stories/molecules/DatePicker/DatePicker';
+export type { DatePickerProps, DatePickerMessages } from './stories/molecules/DatePicker/DatePicker';
 export { DatePickerField } from './stories/molecules/DatePickerField/DatePickerField';
 export type { DatePickerFieldProps } from './stories/molecules/DatePickerField/DatePickerField';
 export { DateTimeField } from './stories/molecules/DateTimeField/DateTimeField';
 export type { DateTimeFieldProps } from './stories/molecules/DateTimeField/DateTimeField';
 export { Calendar } from './stories/molecules/Calendar/Calendar';
-export type { CalendarProps } from './stories/molecules/Calendar/Calendar';
+export type { CalendarProps, CalendarMessages } from './stories/molecules/Calendar/Calendar';
 export { CalendarPlanner } from './stories/molecules/CalendarPlanner/CalendarPlanner';
 export type { CalendarPlannerProps, PlannerEvent } from './stories/molecules/CalendarPlanner/CalendarPlanner';
 export { CalendarRoster } from './stories/molecules/CalendarRoster/CalendarRoster';

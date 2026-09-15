@@ -13,6 +13,9 @@ import type { AsyncMultiSelectMessages } from '../atoms/AsyncMultiSelect/AsyncMu
 import type { DocsSearchMessages } from '../molecules/DocsSearch/DocsSearch';
 import type { SearchFormMessages } from '../molecules/SearchForm/SearchForm';
 import type { FilterBarMessages } from '../molecules/FilterBar/FilterBar';
+import type { CalendarMessages } from '../molecules/Calendar/Calendar';
+import type { DatePickerMessages } from '../molecules/DatePicker/DatePicker';
+import type { TimeSelectMessages } from '../atoms/TimeSelect/TimeSelect';
 
 /**
  * El contrato de textos de la librería: un espacio por componente, y dentro
@@ -51,6 +54,9 @@ export interface BrandMessages {
   docsSearch: DocsSearchMessages;
   searchForm: SearchFormMessages;
   filterBar: FilterBarMessages;
+  calendar: CalendarMessages;
+  datePicker: DatePickerMessages;
+  timeSelect: TimeSelectMessages;
 }
 
 export type {
@@ -69,4 +75,7 @@ export type {
   DocsSearchMessages,
   SearchFormMessages,
   FilterBarMessages,
+  CalendarMessages,
+  DatePickerMessages,
+  TimeSelectMessages,
 };

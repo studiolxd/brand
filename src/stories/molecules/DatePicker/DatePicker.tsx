@@ -6,8 +6,42 @@ import { Input } from '../../atoms/Input/Input';
 import { Popover } from '../../atoms/Popover/Popover';
 import { Calendar } from '../Calendar/Calendar';
 import type { CalendarProps } from '../Calendar/Calendar';
-import { getDateMask, SPANISH_MASK_LETTERS, type DateMaskLetters } from './dateMask';
+import { getDateMask, type DateMaskLetters } from './dateMask';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './DatePicker.css';
+
+/**
+ * El cromo del selector de fecha: el botón que abre el calendario, el aviso de
+ * fecha incompleta, el nombre del panel y **las letras de la máscara**.
+ *
+ * Las letras están aquí a propósito, y son el caso interesante de esta
+ * familia. `dd/mm/aaaa` tiene dos mitades que no se deciden igual:
+ *
+ * - **El orden y el separador son formato**: que `es` escriba 25/09/2026,
+ *   `en-US` 09/25/2026 y `de` 25.09.2026 sale del `locale` con `Intl`
+ *   (`dateMask.ts`), no de una prop ni del catálogo. Una app en inglés
+ *   mostrando fechas españolas las quiere en orden español.
+ * - **Las letras son idioma**: `aaaa` es «año», `yyyy` es *year* y `jjjj` es
+ *   *Jahr*. Son la abreviatura de una palabra, así que se traducen — y por eso
+ *   son cromo y salen del catálogo, como cualquier otro rótulo.
+ *
+ * Por eso el catálogo trae solo las tres letras y no la máscara montada: la
+ * máscara la arma el componente poniendo las letras en el orden del locale.
+ */
+export interface DatePickerMessages {
+  /** Nombre accesible del botón que abre el calendario. */
+  openCalendar: string;
+  /** Aviso de fecha incompleta o inexistente, anunciado con `role="alert"`. */
+  invalid: string;
+  /** Nombre accesible del panel del calendario (`role="dialog"`). */
+  calendar: string;
+  /**
+   * Las letras de la máscara, una por parte: `{ day: 'dd', month: 'mm',
+   * year: 'aaaa' }`. El orden y el separador NO están aquí: salen del
+   * `locale`.
+   */
+  maskLetters: DateMaskLetters;
+}
 
 export interface DatePickerProps {
   value?: Date | null;
@@ -17,23 +51,28 @@ export interface DatePickerProps {
    */
   onChange?: (date: Date | null) => void;
   /**
-   * Pista dentro del campo. Por defecto, la máscara del locale con las letras
-   * castellanas (`dd/mm/aaaa`, `mm/dd/aaaa` en `en-US`). Una app multiidioma
-   * pasa `maskLetters` para traducir las letras sin tocar el orden.
+   * Pista dentro del campo. Sin ella, la máscara del locale con las letras
+   * del catálogo (`dd/mm/aaaa`, `mm/dd/aaaa` en `en-US`). Es la anulación
+   * puntual: un campo que quiere decir otra cosa («Desde») la pasa.
    */
   placeholder?: string;
   /**
-   * Letras de la máscara del marcador de posición. Default castellano
-   * (`{ day: 'dd', month: 'mm', year: 'aaaa' }`). El orden y el separador no
-   * son props: salen del `locale` con `Intl`.
+   * Letras de la máscara del marcador de posición. **Sin default**: sin
+   * ellas, salen de `datePicker.maskLetters` del `BrandMessagesProvider`. El
+   * orden y el separador no son props ni catálogo: salen del `locale` con
+   * `Intl`.
    */
   maskLetters?: DateMaskLetters;
   /**
-   * Mensaje cuando lo escrito no es una fecha completa y válida. Default
-   * castellano; se anuncia con `role="alert"`.
+   * Mensaje cuando lo escrito no es una fecha completa y válida. **Sin
+   * default**: sin él, sale de `datePicker.invalid` del
+   * `BrandMessagesProvider`; se anuncia con `role="alert"`.
    */
   invalidMessage?: string;
-  /** Nombre accesible del botón que abre el calendario. Default castellano. */
+  /**
+   * Nombre accesible del botón que abre el calendario. **Sin default**: sin
+   * él, sale de `datePicker.openCalendar` del `BrandMessagesProvider`.
+   */
   openCalendarLabel?: string;
   minDate?: CalendarProps['minDate'];
   maxDate?: CalendarProps['maxDate'];
@@ -51,29 +90,27 @@ export interface DatePickerProps {
   'aria-describedby'?: string;
   /** Nombre accesible cuando el control va suelto. En un campo lo nombra la etiqueta. */
   'aria-label'?: string;
-  /** Nombre accesible del panel del calendario (`role="dialog"`). */
+  /**
+   * Nombre accesible del panel del calendario (`role="dialog"`). **Sin
+   * default**: sin él, sale de `datePicker.calendar` del
+   * `BrandMessagesProvider`. En un campo lo pone la etiqueta del campo, que es
+   * contenido de la pantalla y gana como cualquier prop.
+   */
   calendarLabel?: string;
-  /**
-   * aria-label del botón de mes anterior del calendario. Default: «Mes
-   * anterior» (castellano). Una app multiidioma debe pasarla traducida.
-   */
+  /* Los cinco textos del calendario se reenvían tal cual. **Sin default**:
+     sin ellos, el `Calendar` de dentro los lee él mismo de su espacio
+     `calendar` del `BrandMessagesProvider` — el proveedor llega por contexto,
+     así que no hay nada que enhebrar desde fuera. La prop sigue siendo la
+     anulación puntual de ese uso. */
+  /** aria-label del botón de mes anterior. Sin él, `calendar.previousMonth`. */
   previousMonthLabel?: CalendarProps['previousMonthLabel'];
-  /**
-   * aria-label del botón de mes siguiente. Default: «Mes siguiente»
-   * (castellano).
-   */
+  /** aria-label del botón de mes siguiente. Sin él, `calendar.nextMonth`. */
   nextMonthLabel?: CalendarProps['nextMonthLabel'];
-  /**
-   * aria-label del botón de retroceso **en la vista de años**. Default: «Años
-   * anteriores» (castellano).
-   */
+  /** aria-label del retroceso en la vista de años. Sin él, `calendar.previousYears`. */
   previousYearsLabel?: CalendarProps['previousYearsLabel'];
-  /**
-   * aria-label del botón de avance en la vista de años. Default: «Años
-   * siguientes» (castellano).
-   */
+  /** aria-label del avance en la vista de años. Sin él, `calendar.nextYears`. */
   nextYearsLabel?: CalendarProps['nextYearsLabel'];
-  /** aria-label de la rejilla de años. Default: «Elegir año» (castellano). */
+  /** aria-label de la rejilla de años. Sin él, `calendar.yearGrid`. */
   yearGridLabel?: CalendarProps['yearGridLabel'];
   /**
    * aria-label de la rejilla de días. Por defecto toma `calendarLabel`, que ya
@@ -108,9 +145,9 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
   value,
   onChange,
   placeholder,
-  maskLetters = SPANISH_MASK_LETTERS,
-  invalidMessage = 'Escribe una fecha completa, con el día, el mes y el año.',
-  openCalendarLabel = 'Abrir calendario',
+  maskLetters,
+  invalidMessage,
+  openCalendarLabel,
   minDate,
   maxDate,
   disabledDates,
@@ -124,7 +161,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
   describedBy,
   'aria-describedby': ariaDescribedBy,
   'aria-label': ariaLabel,
-  calendarLabel = 'Calendario',
+  calendarLabel,
   previousMonthLabel,
   nextMonthLabel,
   previousYearsLabel,
@@ -134,6 +171,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
   onBlur,
   className,
 }: DatePickerProps, ref) {
+  const t = useBrandMessages('datePicker');
   const [open, setOpen] = useState(false);
   const mask = useMemo(() => getDateMask(locale), [locale]);
 
@@ -230,7 +268,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
     <button
       type="button"
       className="date-picker__button"
-      aria-label={openCalendarLabel}
+      aria-label={t('openCalendar', openCalendarLabel)}
       aria-haspopup="dialog"
       aria-expanded={open}
       disabled={disabled}
@@ -242,6 +280,10 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
       <Icon name="calendar" size="sm" className="date-picker__glyph" />
     </button>
   );
+
+  // El panel se nombra una vez y sirve dos veces: al diálogo y, salvo que se
+  // pase `gridLabel`, a la rejilla de días de dentro.
+  const panelLabel = t('calendar', calendarLabel);
 
   const rootClass = [
     'date-picker',
@@ -270,7 +312,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
           size={size}
           error={hasError}
           value={text}
-          placeholder={placeholder ?? mask.mask(maskLetters)}
+          placeholder={placeholder ?? mask.mask(t('maskLetters', maskLetters))}
           disabled={disabled}
           readOnly={readOnly}
           aria-label={ariaLabel}
@@ -281,7 +323,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
         />
         <Popover
           trigger={trigger}
-          label={calendarLabel}
+          label={panelLabel}
           open={open}
           onOpenChange={handleOpenChange}
           side="bottom"
@@ -292,7 +334,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
           <Calendar
             value={parsed ?? value ?? null}
             onChange={handleSelect}
-            gridLabel={gridLabel ?? calendarLabel}
+            gridLabel={gridLabel ?? panelLabel}
             previousMonthLabel={previousMonthLabel}
             nextMonthLabel={nextMonthLabel}
             previousYearsLabel={previousYearsLabel}
@@ -308,7 +350,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
       </div>
       {invalid && (
         <span id={invalidId} className="date-picker__message" role="alert">
-          {invalidMessage}
+          {t('invalid', invalidMessage)}
         </span>
       )}
     </div>

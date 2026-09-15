@@ -72,21 +72,39 @@ El contrato es `value` / `onChange` + `name` + `ref` al campo de la fecha. `onCh
 
 ## Accesibilidad
 
-- La etiqueta nombra el grupo de los dos controles; cada uno conserva su propio nombre («Horas», «Minutos», traducibles con `hoursLabel` y `minutesLabel`).
+- La etiqueta nombra el grupo de los dos controles; cada uno conserva su propio nombre («Horas», «Minutos», del catálogo — ver § «Internacionalización»).
 - Ayuda y error llegan al grupo por `aria-describedby`. El `aria-invalid` no va
   en el grupo —es un atributo de los widgets de entrada, donde no está definido
   no aporta nada—: lo llevan los dos controles de dentro, que reciben `error`.
 - El mensaje de error se anuncia (`role="alert"`).
 - Meses y días del calendario salen de `Intl` con el `locale`: no son props de texto.
 
-## Textos
+## Internacionalización
 
-Todos los del `DatePicker` se reexponen con los mismos nombres y defaults
-(`openCalendarLabel`, `invalidMessage`, `maskLetters` y los del calendario:
-`previousMonthLabel`, `nextMonthLabel`, `previousYearsLabel`, `nextYearsLabel`,
-`yearGridLabel`, `gridLabel`), más `hoursLabel` y `minutesLabel` para el selector de
-hora. `calendarLabel` cae por defecto a la etiqueta del campo. La convención completa
-está en **Foundations › Internacionalización**.
+Es el campo que junta las dos familias, así que sus textos salen de **tres espacios** del
+`BrandMessagesProvider` y ninguno hay que enhebrarlo desde aquí: cada pieza lee el suyo por
+contexto.
+
+<Canvas of={DateTimeFieldStories.TextosDelProveedor} />
+
+| Qué | De dónde sale |
+| --- | --- |
+| `label`, `helperText`, `errorMessage` | prop, siempre: son de esta pantalla |
+| botón del calendario, aviso, letras de la máscara | `datePicker.*` |
+| flechas del mes y de los años | `calendar.*` |
+| «Horas», «Minutos» y sus máscaras | `timeSelect.*` |
+| nombre del panel | la etiqueta del campo; sin ella, `datePicker.calendar` |
+| meses, días y orden de la fecha | `locale`, con `Intl` — no son texto |
+
+Las once props de texto siguen reexpuestas con los mismos nombres (`openCalendarLabel`,
+`invalidMessage`, `maskLetters`, `previousMonthLabel`, `nextMonthLabel`,
+`previousYearsLabel`, `nextYearsLabel`, `yearGridLabel`, `gridLabel`, `hoursLabel`,
+`minutesLabel`) como anulación puntual de ese uso.
+
+Las **máscaras** —las letras de la fecha y el `HH`/`MM` de la hora— están en el catálogo
+porque se traducen; el **orden** de la fecha y el dibujo de la hora, no: eso es formato. El
+porqué, en la doc de `DatePicker` § «Internacionalización». La convención completa está en
+**Foundations › Internacionalización**.
 
 ## Tokens
 

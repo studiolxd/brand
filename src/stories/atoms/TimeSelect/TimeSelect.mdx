@@ -48,9 +48,53 @@ separador «:», que sube a `color.text.on-dark`.
 ## Accesibilidad
 
 Los dos desplegables viven en un `role="group"`: la etiqueta del campo nombra al grupo
-(`aria-labelledby`) y cada desplegable conserva el suyo, «Horas» y «Minutos» —props
-traducibles (`hoursLabel`, `minutesLabel`)—. Así el lector anuncia una sola vez de qué hora se
-trata y luego qué parte se está eligiendo. Los dos puntos son decoración: van `aria-hidden`.
+(`aria-labelledby`) y cada desplegable conserva el suyo, «Horas» y «Minutos» —del catálogo,
+ver § «Internacionalización»—. Así el lector anuncia una sola vez de qué hora se trata y luego
+qué parte se está eligiendo. Los dos puntos son decoración: van `aria-hidden`.
+
+## Internacionalización
+
+Los cuatro textos que el control emite por su cuenta —los dos nombres accesibles y las dos
+máscaras— son cromo del sistema: dicen lo mismo en toda la suite. **No tienen valor por
+defecto**; salen del `BrandMessagesProvider` que la aplicación monta una vez en su raíz.
+
+```tsx
+import { BrandMessagesProvider } from "@studiolxd/brand/messages";
+
+<BrandMessagesProvider
+  messages={{
+    timeSelect: {
+      hours: t("timeSelect.hours"),
+      minutes: t("timeSelect.minutes"),
+      maskHours: t("timeSelect.maskHours"),
+      maskMinutes: t("timeSelect.maskMinutes"),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={TimeSelectStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `hoursLabel` | `timeSelect.hours` | nombre accesible del desplegable de horas |
+| `minutesLabel` | `timeSelect.minutes` | nombre accesible del de minutos |
+| `hoursPlaceholder` | `timeSelect.maskHours` | lo que pone en horas sin valor elegido |
+| `minutesPlaceholder` | `timeSelect.maskMinutes` | ídem, en minutos |
+
+El orden es **prop → proveedor → error**.
+
+**Las dos máscaras están en el catálogo a propósito.** `HH` y `MM` parecen notación técnica,
+pero son la inicial de una palabra —hora y minuto— y cambian con ella: en alemán se escriben
+`SS`/`MM` (*Stunde*, *Minute*). Lo que **no** se traduce es el dibujo: dos cifras, la hora
+antes que el minuto y los dos puntos en medio. Eso no lo decide ni la prop ni el catálogo, y
+tampoco es una decisión de este componente.
+
+Las **cifras de las opciones** (`00`…`23`) tampoco pasan por aquí: son datos.
+
+La convención completa está en **Foundations › Internacionalización**.
 
 ## Uso
 

@@ -166,6 +166,28 @@ describe.each([
     'src/stories/molecules/FilterBar/FilterBar.tsx',
     ["'Filtros'"],
   ],
+  [
+    'Calendar',
+    'src/stories/molecules/Calendar/Calendar.tsx',
+    ["'Mes anterior'", "'Mes siguiente'", "'Años anteriores'", "'Años siguientes'", "'Elegir año'"],
+  ],
+  [
+    // Las letras de la máscara entran en esta lista como cualquier otro
+    // rótulo: `aaaa` es castellano, y el componente ya no lo trae.
+    'DatePicker',
+    'src/stories/molecules/DatePicker/DatePicker.tsx',
+    ["'Abrir calendario'", "'Calendario'", 'Escribe una fecha completa', "'aaaa'"],
+  ],
+  [
+    'dateMask',
+    'src/stories/molecules/DatePicker/dateMask.ts',
+    ["'aaaa'", 'SPANISH_MASK_LETTERS'],
+  ],
+  [
+    'TimeSelect',
+    'src/stories/atoms/TimeSelect/TimeSelect.tsx',
+    ["'Horas'", "'Minutos'", "'HH'", "'MM'"],
+  ],
 ])('%s no trae textos puestos', (_componente, ruta, textos) => {
   const fuente = readFileSync(join(repoRoot, ruta), 'utf8');
   // Solo el cuerpo: el JSDoc de las props nombra los textos para explicarlos.

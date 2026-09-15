@@ -88,4 +88,23 @@ export const brandMessagesFixture: BrandMessages = {
   filterBar: {
     label: 'Filtros',
   },
+  calendar: {
+    previousMonth: 'Mes anterior',
+    nextMonth: 'Mes siguiente',
+    previousYears: 'Años anteriores',
+    nextYears: 'Años siguientes',
+    yearGrid: 'Elegir año',
+  },
+  datePicker: {
+    openCalendar: 'Abrir calendario',
+    invalid: 'Escribe una fecha completa, con el día, el mes y el año.',
+    calendar: 'Calendario',
+    maskLetters: { day: 'dd', month: 'mm', year: 'aaaa' },
+  },
+  timeSelect: {
+    hours: 'Horas',
+    minutes: 'Minutos',
+    maskHours: 'HH',
+    maskMinutes: 'MM',
+  },
 };

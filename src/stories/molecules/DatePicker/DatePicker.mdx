@@ -20,13 +20,13 @@ Con `name`, además, se monta un `<input type="hidden">` con la fecha en `yyyy-m
 
 ## Escribir y borrar
 
-El campo acepta la fecha tecleada, con ceros por delante o sin ellos (`5/9/2026` vale). En cuanto está **completa y existe**, sube por `onChange`. Si está a medias o es imposible —`25/09`, `31/02/2026`— no sube nada: el campo se pone en error y enseña `invalidMessage` (prop con default castellano) enlazado por `aria-describedby`. El año va entero: `26` no se convierte en 2026, porque adivinar el siglo cambiaría la fecha sin avisar.
+El campo acepta la fecha tecleada, con ceros por delante o sin ellos (`5/9/2026` vale). En cuanto está **completa y existe**, sube por `onChange`. Si está a medias o es imposible —`25/09`, `31/02/2026`— no sube nada: el campo se pone en error y enseña el aviso de fecha incompleta (`invalidMessage`, o `datePicker.invalid` del catálogo) enlazado por `aria-describedby`. El año va entero: `26` no se convierte en 2026, porque adivinar el siglo cambiaría la fecha sin avisar.
 
 **Vaciar el campo borra la fecha**: `onChange` recibe `null`. Por eso su firma es `(date: Date | null) => void`.
 
 <Canvas of={DatePickerStories.Escribir} />
 
-El marcador de posición es la máscara del propio locale (`dd/mm/aaaa`). Las letras se traducen con `maskLetters`; el orden, no: es cosa de `locale`.
+El marcador de posición es la máscara: las **letras** salen del catálogo (`maskLetters`) y el **orden y el separador**, del `locale`. Las dos mitades, con el porqué, en § «Internacionalización».
 
 <Canvas of={DatePickerStories.OtroLocale} />
 
@@ -83,37 +83,81 @@ El campo es el `Input` del sistema y el calendario voltea con los tokens de `Cal
 
 ## Accesibilidad
 
-- El control es un `<input type="text">` con `inputMode="numeric"`; quien abre el panel es el botón del final, un `<button>` con nombre accesible propio (`openCalendarLabel`), `aria-haspopup="dialog"` y `aria-expanded`. El panel es un `role="dialog"` cuyo nombre accesible es `calendarLabel` (por defecto «Calendario», en castellano).
+- El control es un `<input type="text">` con `inputMode="numeric"`; quien abre el panel es el botón del final, un `<button>` con nombre accesible propio (`openCalendarLabel`), `aria-haspopup="dialog"` y `aria-expanded`. El panel es un `role="dialog"` cuyo nombre accesible es `calendarLabel`, del catálogo cuando no se pasa.
 - La flecha abajo abre el calendario desde el campo y `Escape` lo cierra.
 - Cuando lo escrito no es una fecha, el campo lleva `aria-invalid` y el aviso va en un `role="alert"` enlazado por `aria-describedby`.
 - Suelto, el nombre del control va en `aria-label`; dentro de un campo lo pone la etiqueta por `htmlFor`/`id`, y ahí **no** se pasa `aria-label`.
 - Los `id` de ayuda y error llegan por `aria-describedby`, que el campo compone.
 - La rejilla del calendario es una sola parada de tabulador y se recorre con las flechas, Inicio/Fin e RePág/AvPág: el detalle está en la doc de `Calendar`.
 
-## Textos
+## Internacionalización
 
-`placeholder` (o solo sus letras, con `maskLetters`), `invalidMessage`, `openCalendarLabel` y `calendarLabel` son los textos que emite por su cuenta, todos con default en castellano. El orden de la fecha y los nombres de mes y día no son props: salen de `locale` con `Intl`.
-
-Los del **calendario** se reexponen sueltos, con los mismos nombres y defaults que en
-`Calendar` —no agrupados en un objeto, porque `Calendar` tampoco los agrupa—:
-`previousMonthLabel`, `nextMonthLabel`, `previousYearsLabel`, `nextYearsLabel`,
-`yearGridLabel` y `gridLabel`. Los tres de años nombran la **vista de años**, la que abre
-el título del mes. `gridLabel` (el nombre de la rejilla de días) toma por defecto
-`calendarLabel`, que ya nombra el panel entero.
+Cuatro textos salen del `BrandMessagesProvider` que la aplicación monta en su raíz, **sin
+valor por defecto**: el botón que abre el calendario, el nombre del panel, el aviso de fecha
+incompleta y **las letras de la máscara**.
 
 ```tsx
-<DatePicker
-  locale="en-GB"
-  calendarLabel="Start date"
-  previousMonthLabel="Previous month"
-  nextMonthLabel="Next month"
-  previousYearsLabel="Previous years"
-  nextYearsLabel="Next years"
-  yearGridLabel="Choose year"
-/>
+import { BrandMessagesProvider } from "@studiolxd/brand/messages";
+
+<BrandMessagesProvider
+  messages={{
+    datePicker: {
+      openCalendar: t("datePicker.openCalendar"),
+      invalid: t("datePicker.invalid"),
+      calendar: t("datePicker.calendar"),
+      maskLetters: {
+        day: t("datePicker.maskDay"),
+        month: t("datePicker.maskMonth"),
+        year: t("datePicker.maskYear"),
+      },
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
 ```
 
-`DatePickerField` y `DateTimeField` los reexponen tal cual.
+<Canvas of={DatePickerStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `openCalendarLabel` | `datePicker.openCalendar` | nombre accesible del botón del final |
+| `calendarLabel` | `datePicker.calendar` | nombre del panel (`role="dialog"`) |
+| `invalidMessage` | `datePicker.invalid` | aviso de fecha a medias, en `role="alert"` |
+| `maskLetters` | `datePicker.maskLetters` | letras del marcador de posición |
+
+El orden es **prop → proveedor → error**. El texto se lee **donde se pinta**: un campo con
+fecha válida no exige el aviso, y uno con `placeholder` propio no exige las letras.
+
+### La máscara: la mitad es idioma y la mitad es formato
+
+`dd/mm/aaaa` parece una sola cosa y son dos, decididas en sitios distintos:
+
+- **El orden y el separador son formato.** Que `es` escriba 25/09/2026, `en-US` 09/25/2026 y
+  `de` 25.09.2026 sale del `locale` con `Intl.DateTimeFormat().formatToParts()`. No es una
+  prop, no está en el catálogo y no se cablea por idioma: una app inglesa que enseña fechas
+  españolas las quiere en orden español.
+- **Las letras son idioma.** `aaaa` es «año», `yyyy` es *year* y `jjjj` es *Jahr*: son la
+  abreviatura de una palabra, así que se traducen. Por eso son cromo y van al catálogo, como
+  cualquier otro rótulo.
+
+Por eso el catálogo trae las **tres letras sueltas** y no la máscara montada: la máscara la
+arma el componente poniendo las letras en el orden del locale. La story de arriba lleva el
+mismo catálogo inglés en dos locales para que se vea: `dd/mm/yyyy` y `mm/dd/yyyy`.
+
+Cuando lo que hay que decir no es la máscara sino algo de ESTE campo («Desde»), eso es
+contenido y va en `placeholder`, que gana.
+
+### Los textos del calendario
+
+Los cinco del `Calendar` (`previousMonthLabel`, `nextMonthLabel`, `previousYearsLabel`,
+`nextYearsLabel`, `yearGridLabel`) siguen reexpuestos con los mismos nombres, pero **ya no hay
+nada que enhebrar**: el `Calendar` de dentro los lee él mismo del espacio `calendar` del
+proveedor, que le llega por contexto. Las props quedan como anulación puntual de ese uso.
+`gridLabel` (el nombre de la rejilla de días) toma por defecto el del panel.
+
+`DatePickerField` y `DateTimeField` los reexponen tal cual. La convención completa está en
+**Foundations › Internacionalización**.
 
 ## Tokens
 

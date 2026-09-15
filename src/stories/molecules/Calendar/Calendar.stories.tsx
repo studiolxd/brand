@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { Calendar } from './Calendar';
 import { STORY_TODAY } from '../../utils/storyDate';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof Calendar> = {
   title: 'Molecules/Calendar',
@@ -128,31 +130,49 @@ export const Tamanos: Story = {
 };
 
 /**
- * Test: los `aria-label` de navegación de mes usan el castellano por defecto y se
- * sustituyen cuando el consumidor los pasa traducidos.
+ * El cromo del calendario —las dos flechas y la rejilla de años— sale del
+ * `BrandMessagesProvider`. Los **nombres de los meses y de los días** no: eso
+ * es formato y sale de `locale`, así que aquí siguen en castellano aunque el
+ * catálogo esté en inglés. Son dos ejes distintos, y esta story los enseña
+ * cruzados a propósito.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Calendar locale="en-GB" defaultMonth={STORY_TODAY} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/**
+ * Test: sin props, las flechas salen del proveedor; con ellas, ganan las
+ * props. No hay castellano de respaldo dentro del componente.
  */
 export const Etiquetas: Story = {
   name: 'Test — etiquetas de navegación',
   tags: ['!dev'],
   render: () => (
     <>
-      <div data-testid="default">
+      <div data-testid="proveedor">
         <Calendar />
       </div>
       <div data-testid="traducido">
-        <Calendar previousMonthLabel="Previous month" nextMonthLabel="Next month" />
+        <Calendar previousMonthLabel="Mois précédent" nextMonthLabel="Mois suivant" />
       </div>
     </>
   ),
   play: async ({ canvasElement }) => {
-    const def = within(canvasElement.querySelector('[data-testid="default"]') as HTMLElement);
-    await expect(def.getByLabelText('Mes anterior')).toBeInTheDocument();
-    await expect(def.getByLabelText('Mes siguiente')).toBeInTheDocument();
+    // El Storybook monta el catálogo castellano en la raíz: de ahí salen estos
+    // dos textos, y no de un default dentro del componente.
+    const catalogo = within(canvasElement.querySelector('[data-testid="proveedor"]') as HTMLElement);
+    await expect(catalogo.getByLabelText('Mes anterior')).toBeInTheDocument();
+    await expect(catalogo.getByLabelText('Mes siguiente')).toBeInTheDocument();
 
-    const en = within(canvasElement.querySelector('[data-testid="traducido"]') as HTMLElement);
-    await expect(en.getByLabelText('Previous month')).toBeInTheDocument();
-    await expect(en.getByLabelText('Next month')).toBeInTheDocument();
-    await expect(en.queryByLabelText('Mes anterior')).toBeNull();
+    const fr = within(canvasElement.querySelector('[data-testid="traducido"]') as HTMLElement);
+    await expect(fr.getByLabelText('Mois précédent')).toBeInTheDocument();
+    await expect(fr.getByLabelText('Mois suivant')).toBeInTheDocument();
+    await expect(fr.queryByLabelText('Mes anterior')).toBeNull();
   },
 };
 

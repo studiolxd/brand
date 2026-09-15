@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn, expect, userEvent, within } from 'storybook/test';
 import { TimeSelect } from './TimeSelect';
 import type { TimeValue } from './TimeSelect';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof TimeSelect> = {
   title: 'Atoms/TimeSelect',
@@ -120,36 +122,55 @@ export const ChangeMinute: Story = {
 };
 
 /**
- * Test: los `aria-label` y los placeholders de hora/minuto usan el castellano por
- * defecto y se sustituyen cuando el consumidor los pasa traducidos.
+ * Los dos rótulos y las dos máscaras salen del `BrandMessagesProvider`. Las
+ * máscaras están ahí porque `HH`/`MM` son la inicial de una palabra y cambian
+ * con el idioma; lo que no cambia es el dibujo —dos cifras y los dos puntos—,
+ * que no depende ni de la prop ni del catálogo.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <TimeSelect />
+    </BrandMessagesProvider>
+  ),
+};
+
+/**
+ * Test: sin props, los cuatro textos salen del proveedor; con ellas, ganan las
+ * props. No hay castellano de respaldo en el componente.
  */
 export const Etiquetas: Story = {
   name: 'Test — etiquetas accesibles',
   tags: ['!dev'],
   render: () => (
     <>
-      <div data-testid="default">
-        <TimeSelect value={{ h: 9, m: 30 }} />
+      <div data-testid="proveedor">
+        <TimeSelect />
       </div>
       <div data-testid="traducido">
         <TimeSelect
-          value={{ h: 9, m: 30 }}
-          hoursLabel="Hours"
+          hoursLabel="Heures"
           minutesLabel="Minutes"
           hoursPlaceholder="hh"
-          minutesPlaceholder="mm"
+          minutesPlaceholder="mn"
         />
       </div>
     </>
   ),
   play: async ({ canvasElement }) => {
-    const def = within(canvasElement.querySelector('[data-testid="default"]') as HTMLElement);
-    await expect(def.getByLabelText('Horas')).toBeInTheDocument();
-    await expect(def.getByLabelText('Minutos')).toBeInTheDocument();
+    // El Storybook monta el catálogo castellano en la raíz: eso es lo que se
+    // lee cuando no hay prop, y no un default dentro del componente.
+    const catalogo = within(canvasElement.querySelector('[data-testid="proveedor"]') as HTMLElement);
+    await expect(catalogo.getByLabelText('Horas')).toBeInTheDocument();
+    await expect(catalogo.getByLabelText('Minutos')).toBeInTheDocument();
+    await expect(catalogo.getByText('HH')).toBeInTheDocument();
+    await expect(catalogo.getByText('MM')).toBeInTheDocument();
 
-    const en = within(canvasElement.querySelector('[data-testid="traducido"]') as HTMLElement);
-    await expect(en.getByLabelText('Hours')).toBeInTheDocument();
-    await expect(en.getByLabelText('Minutes')).toBeInTheDocument();
-    await expect(en.queryByLabelText('Horas')).toBeNull();
+    const fr = within(canvasElement.querySelector('[data-testid="traducido"]') as HTMLElement);
+    await expect(fr.getByLabelText('Heures')).toBeInTheDocument();
+    await expect(fr.getByLabelText('Minutes')).toBeInTheDocument();
+    await expect(fr.getByText('hh')).toBeInTheDocument();
+    await expect(fr.queryByLabelText('Horas')).toBeNull();
   },
 };

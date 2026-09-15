@@ -3,6 +3,17 @@ import { useState } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { DatePicker } from './DatePicker';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixture as ES } from '../../../../.storybook/brandMessagesFixture';
+
+/**
+ * El selector ya no trae su castellano puesto: el botón, el aviso, el nombre
+ * del panel y las letras de la máscara salen del catálogo. Estos tests son la
+ * aplicación que lo monta.
+ */
+function conCatalogo(ui: React.ReactElement) {
+  return <BrandMessagesProvider messages={ES}>{ui}</BrandMessagesProvider>;
+}
 
 /** El control con estado, como lo monta un formulario de verdad. */
 function DatePickerControlado({
@@ -10,7 +21,7 @@ function DatePickerControlado({
   ...props
 }: Partial<React.ComponentProps<typeof DatePicker>> = {}) {
   const [value, setValue] = useState<Date | null>(props.value ?? null);
-  return (
+  return conCatalogo(
     <DatePicker
       aria-label="Fecha"
       {...props}
@@ -29,16 +40,16 @@ function campo(): HTMLInputElement {
 
 describe('DatePicker — el campo se escribe', () => {
   it('enseña la fecha en el formato numérico del locale', () => {
-    render(<DatePicker aria-label="Fecha" value={new Date(2026, 8, 25)} />);
+    render(conCatalogo(<DatePicker aria-label="Fecha" value={new Date(2026, 8, 25)} />));
     expect(campo()).toHaveValue('25/09/2026');
   });
 
   it('enseña la máscara del locale como pista', () => {
-    const { unmount } = render(<DatePicker aria-label="Fecha" />);
+    const { unmount } = render(conCatalogo(<DatePicker aria-label="Fecha" />));
     expect(campo()).toHaveAttribute('placeholder', 'dd/mm/aaaa');
     unmount();
 
-    render(<DatePicker aria-label="Fecha" locale="en-US" />);
+    render(conCatalogo(<DatePicker aria-label="Fecha" locale="en-US" />));
     expect(campo()).toHaveAttribute('placeholder', 'mm/dd/aaaa');
   });
 
@@ -79,7 +90,7 @@ describe('DatePicker — el campo se escribe', () => {
     expect(screen.queryByRole('alert')).toBeNull();
   });
 
-  it('el mensaje de fecha incompleta es una prop con default castellano', async () => {
+  it('el mensaje de fecha incompleta es una prop que gana al catálogo', async () => {
     const user = userEvent.setup();
     render(<DatePickerControlado invalidMessage="Enter a full date." />);
 
@@ -124,7 +135,7 @@ describe('DatePicker — el calendario', () => {
     expect(screen.queryByRole('dialog')).toBeNull();
   });
 
-  it('reenvía al calendario los textos de sus flechas y de la vista de años', async () => {
+  it('los textos del calendario se pueden anular desde aquí, uso a uso', async () => {
     const user = userEvent.setup();
     render(
       <DatePickerControlado
@@ -160,7 +171,7 @@ describe('DatePicker — el calendario', () => {
 
   it('el input oculto del formulario lleva la fecha local, no la UTC', () => {
     const { container } = render(
-      <DatePicker aria-label="Fecha" name="fecha" value={new Date(2026, 0, 1, 0, 30)} />
+      conCatalogo(<DatePicker aria-label="Fecha" name="fecha" value={new Date(2026, 0, 1, 0, 30)} />)
     );
     expect(container.querySelector<HTMLInputElement>('input[name="fecha"]')).toHaveValue('2026-01-01');
   });
