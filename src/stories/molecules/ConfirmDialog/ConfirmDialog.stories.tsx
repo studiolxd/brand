@@ -4,6 +4,8 @@ import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Alert, AlertDescription } from '../Alert/Alert';
 import { Button } from '../../atoms/Button/Button';
 import { ConfirmDialog } from './ConfirmDialog';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta = {
   title: 'Molecules/ConfirmDialog',
@@ -17,6 +19,9 @@ const base = {
   open: true,
   title: '¿Borrar la organización?',
   description: 'Se borrarán también sus proyectos y sus miembros. No se puede deshacer.',
+  // `confirmLabel` es obligatoria y nombra lo que va a pasar: es donde se toma
+  // la decisión. «Confirmar» no está en el catálogo a propósito.
+  confirmLabel: 'Borrar la organización',
   onConfirm: () => {},
   onCancel: () => {},
 };
@@ -28,7 +33,7 @@ export const PorDefecto: Story = {
 
 /** La acción que no se puede deshacer cambia al lenguaje destructivo. */
 export const Destructivo: Story = {
-  args: { ...base, destructive: true, confirmLabel: 'Borrar la organización' },
+  args: { ...base, destructive: true },
 };
 
 /** `children` añade el detalle de lo que se va a perder. */
@@ -135,7 +140,7 @@ export const TestAcciones: Story = {
   },
   play: async ({ canvasElement }) => {
     const dialog = await screenDialog();
-    await userEvent.click(within(dialog).getByRole('button', { name: 'Confirmar' }));
+    await userEvent.click(within(dialog).getByRole('button', { name: 'Borrar la organización' }));
     await expect(within(canvasElement).getByTestId('ultimo')).toHaveTextContent('confirmado');
 
     await userEvent.click(within(dialog).getByRole('button', { name: 'Cancelar' }));
@@ -260,6 +265,7 @@ export const TestFraseIntroConfirma: Story = {
   tags: ['!dev'],
   args: {
     ...base,
+    confirmLabel: 'Borrar',
     confirmPhrase: 'acme',
     confirmPhraseLabel: 'Escribe acme para confirmar',
     confirmPhraseMismatch: 'El nombre no coincide.',
@@ -281,5 +287,55 @@ export const TestFraseIntroConfirma: Story = {
     await waitFor(async () => {
       await expect(within(canvasElement).getByTestId('ultimo')).toHaveTextContent('confirmado');
     });
+  },
+};
+
+/**
+ * El cromo del pie —«Cancelar» y el «Confirmando…» de la espera— sale del
+ * catálogo; `confirmLabel` no, porque es donde se toma la decisión y tiene que
+ * nombrar lo que va a pasar. Con el catálogo en inglés se ve la línea: el
+ * botón de descartar cambia de idioma solo, y el principal sigue diciendo lo
+ * que le pasa la pantalla.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  args: {
+    ...base,
+    destructive: true,
+    title: 'Delete the organisation?',
+    description: 'Its projects and members go with it. This cannot be undone.',
+    confirmLabel: 'Delete the organisation',
+  },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <ConfirmDialog {...args} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el cromo del pie sale del catálogo y `confirmLabel` sigue siendo de la pantalla. */
+export const TestContratoProveedor: Story = {
+  name: 'Test — el cromo del pie lee del proveedor, el confirmar no',
+  tags: ['!dev'],
+  args: {
+    ...base,
+    title: 'Delete the organisation?',
+    confirmLabel: 'Delete the organisation',
+  },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <ConfirmDialog {...args} />
+    </BrandMessagesProvider>
+  ),
+  play: async () => {
+    const dialog = await screenDialog();
+    const escena = within(dialog);
+    // El cromo, del catálogo.
+    await expect(escena.getByRole('button', { name: 'Cancel' })).toBeInTheDocument();
+    await expect(escena.queryByRole('button', { name: 'Cancelar' })).toBeNull();
+    // El aspa la lee el `Modal`, de `modal.close`.
+    await expect(escena.getByRole('button', { name: 'Close' })).toBeInTheDocument();
+    // El botón que decide, de la pantalla.
+    await expect(escena.getByRole('button', { name: 'Delete the organisation' })).toBeInTheDocument();
   },
 };

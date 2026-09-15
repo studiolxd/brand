@@ -12,7 +12,22 @@ import {
   toastManager,
   type ToastIntent,
 } from './toast';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './Toast.css';
+
+/**
+ * El cromo de la cola de avisos. Los dos textos son del punto de montaje, no
+ * de ningún aviso concreto: el rótulo de la región donde aterrizan y el aspa
+ * que los cierra. Lo que DICE cada aviso —su título, su descripción, el
+ * rótulo de su acción— lo pasa quien llama a `toast(...)`, y ya no tiene
+ * default castellano.
+ */
+export interface ToasterMessages {
+  /** Nombre accesible de la región donde se apilan los avisos. */
+  container: string;
+  /** Nombre accesible del aspa que cierra un aviso. */
+  close: string;
+}
 
 /**
  * Aire entre avisos desplegados, en píxeles — `toast.gap` (8px). El apilado lo
@@ -29,13 +44,14 @@ export interface ToasterProps {
   /** Esquina de la ventana donde se monta la pila. Default: `bottom-right`. */
   position?: ToastPosition;
   /**
-   * Nombre accesible de la región de notificaciones. Default: «Notificaciones»
-   * (castellano). Una app multiidioma debe pasarlo traducido.
+   * Nombre accesible de la región de notificaciones. **Sin default**: sin él,
+   * sale de `toaster.container` del `BrandMessagesProvider`.
    */
   containerAriaLabel?: string;
   /**
-   * Etiqueta accesible del aspa de cierre. Default: «Cerrar» (castellano).
-   * Una app multiidioma debe pasarla traducida.
+   * Nombre accesible del aspa de cierre. **Sin default**: sin él, sale de
+   * `toaster.close` del `BrandMessagesProvider`. Solo se lee cuando el aspa se
+   * pinta: un `Toaster` con `closeButton={false}` no lo exige.
    */
   closeLabel?: string;
   /** Muestra el aspa de cierre en cada aviso. Default: `true`. */
@@ -78,11 +94,14 @@ function toastClasses(type: string | undefined, dismissible: boolean) {
   ].filter(Boolean).join(' ');
 }
 
-interface ToastListProps extends Required<Pick<ToasterProps, 'position' | 'containerAriaLabel' | 'closeLabel' | 'closeButton' | 'gap'>> {
+interface ToastListProps extends Required<Pick<ToasterProps, 'position' | 'closeButton' | 'gap'>> {
+  containerAriaLabel?: string;
+  closeLabel?: string;
   expand?: boolean;
 }
 
 function ToastList({ position, containerAriaLabel, closeLabel, closeButton, gap, expand }: ToastListProps) {
+  const t = useBrandMessages('toaster');
   const { toasts } = Toast.useToastManager();
   const [side, align] = position.split('-') as ['top' | 'bottom', 'right' | 'left' | 'center'];
 
@@ -108,7 +127,7 @@ function ToastList({ position, containerAriaLabel, closeLabel, closeButton, gap,
       <Toast.Viewport
         ref={viewportRef}
         className={classes}
-        aria-label={containerAriaLabel}
+        aria-label={t('container', containerAriaLabel)}
       >
         {toasts.map((item) => (
           <Toast.Root
@@ -124,7 +143,7 @@ function ToastList({ position, containerAriaLabel, closeLabel, closeButton, gap,
             {closeButton && (
               <Toast.Close
                 className="alert__close"
-                render={<CloseButton label={closeLabel} />}
+                render={<CloseButton label={t('close', closeLabel)} />}
               />
             )}
           </Toast.Root>
@@ -145,8 +164,8 @@ function ToastList({ position, containerAriaLabel, closeLabel, closeButton, gap,
  */
 export function Toaster({
   position = 'bottom-right',
-  containerAriaLabel = 'Notificaciones',
-  closeLabel = 'Cerrar',
+  containerAriaLabel,
+  closeLabel,
   closeButton = true,
   duration = TOAST_DURATION,
   gap = GAP,

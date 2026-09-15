@@ -25,7 +25,7 @@ tokens (`modal.*` / `sheet.*`), así que sobrescribirlos sigue mandando.
 Base UI `Dialog` aporta el portal, el velo, la trampa de foco y el cierre con
 Escape o clic fuera; el DS pone la superficie, el título y el aspa.
 
-- **Título** (`title`): opcional. Sin él, `fallbackTitle` (default «Diálogo»)
+- **Título** (`title`): opcional. Sin él, `fallbackTitle` (de `modal.fallbackTitle` del proveedor)
   se renderiza oculto solo para el nombre accesible — el modal siempre tiene
   uno, lo vea o no el usuario.
 - **Cierre**: `Dialog.Close` sobre el [CloseButton](?path=/docs/atoms-closebutton--docs)
@@ -202,7 +202,48 @@ El pie vive en `Modal` una sola vez: `ConfirmDialog`, `ImageCropDialog`,
 `CommandPalette` y `ConsentPreferences` son `Modal`, así que ninguno lo repite.
 `footerClassName` es el enganche para quien necesite ajustar solo el aire.
 
-## Textos personalizados (i18n)
+## Internacionalización
+
+El `Modal` emite **dos** textos por su cuenta, y los dos son **cromo**: valen
+igual en todas las pantallas, así que salen del catálogo del
+`BrandMessagesProvider` y ya **no traen castellano puesto**.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `closeLabel`, `fallbackTitle` | `modal.*` del proveedor | El aspa cierra el diálogo —este y todos—, y el nombre de respaldo solo dice «esto es un diálogo». Ninguno cambia de pantalla a pantalla. |
+| **Contenido** | `title`, `description`, lo que digan los botones del `footer` | props de quien abre el diálogo | El diálogo no sabe de qué va: eso lo escribe la pantalla. |
+
+```tsx
+import { BrandMessagesProvider } from "@studiolxd/brand/messages";
+
+<BrandMessagesProvider
+  messages={{
+    modal: {
+      close: t("common.close"),
+      fallbackTitle: t("common.dialog"),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={ModalStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `closeLabel` | `modal.close` | nombre accesible del aspa |
+| `fallbackTitle` | `modal.fallbackTitle` | nombre accesible del diálogo **sin** `title` |
+
+El orden es **prop → proveedor → error**. El texto se lee **donde se pinta**:
+un diálogo con `title` no exige `modal.fallbackTitle`.
+
+Los diálogos que se construyen sobre este —`ConfirmDialog`, `ImageCropDialog`,
+`AvatarUpload`, `CommandPalette`, `Consent`— **no repiten la clave**: su
+`closeLabel` es un reenvío puro, y sin él el aspa lee `modal.close` como
+cualquier otra.
+
+### Textos personalizados en un uso concreto
 
 <Canvas of={ModalStories.CustomLabels} />
 

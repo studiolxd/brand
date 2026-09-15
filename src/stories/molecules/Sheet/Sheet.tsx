@@ -5,7 +5,19 @@ import { Dialog } from '@base-ui/react/dialog';
 import { CloseButton } from '../../atoms/CloseButton/CloseButton';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { DialogFooter, DialogHeader, DialogOverlay } from '../_shared/dialogSurface';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './Sheet.css';
+
+/**
+ * El cromo del panel. Solo hay uno: el aspa cierra el cajón, aquí y en
+ * cualquier otro, así que es catálogo. El `title` y la `description` son
+ * contenido y los sigue pasando quien abre el panel — este componente los
+ * exige como props, y el título además es obligatorio.
+ */
+export interface SheetMessages {
+  /** Nombre accesible del aspa que cierra el panel. */
+  close: string;
+}
 
 export interface SheetProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
   open: boolean;
@@ -20,6 +32,11 @@ export interface SheetProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
   /** Fila de acciones al pie del panel. */
   footer?: ReactNode;
   children: ReactNode;
+  /**
+   * Nombre accesible del aspa de cierre. **Sin default**: sin él, sale de
+   * `sheet.close` del `BrandMessagesProvider`. Solo se lee cuando el aspa se
+   * pinta: un panel con `hideClose` no lo exige.
+   */
   closeLabel?: string;
   /**
    * Oculta el aspa de la esquina. Para un cajón cuyo propio disparador queda
@@ -78,7 +95,7 @@ export function Sheet({
   description,
   footer,
   children,
-  closeLabel = 'Cerrar',
+  closeLabel,
   hideClose = false,
   trigger,
   container,
@@ -86,6 +103,8 @@ export function Sheet({
   className,
   ...rest
 }: SheetProps) {
+  const t = useBrandMessages('sheet');
+
   return (
     <Dialog.Root open={open} onOpenChange={(next) => onOpenChange(next)}>
       {trigger && (
@@ -114,7 +133,7 @@ export function Sheet({
           </DialogHeader>
 
           {!hideClose && (
-            <Dialog.Close className="sheet__close" render={<CloseButton label={closeLabel} />} />
+            <Dialog.Close className="sheet__close" render={<CloseButton label={t('close', closeLabel)} />} />
           )}
 
           <div className="sheet__body">{children}</div>

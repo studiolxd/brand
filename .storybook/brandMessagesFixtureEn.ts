@@ -145,4 +145,25 @@ export const brandMessagesFixtureEn: BrandMessages = {
     cropCancel: 'Cancel',
     cropConfirm: 'Save',
   },
+  modal: {
+    close: 'Close',
+    fallbackTitle: 'Dialog',
+  },
+  sheet: {
+    close: 'Close',
+  },
+  confirmDialog: {
+    cancel: 'Cancel',
+    pending: 'Confirming…',
+  },
+  alert: {
+    close: 'Close',
+  },
+  banner: {
+    dismiss: 'Dismiss notice',
+  },
+  toaster: {
+    container: 'Notifications',
+    close: 'Close',
+  },
 };

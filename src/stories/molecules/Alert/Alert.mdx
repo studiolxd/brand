@@ -105,4 +105,23 @@ El color del aspa no es un token del alert: lo pone `CloseButton`, que toma la t
 
 ## Internacionalización
 
-`closeLabel` traduce el nombre accesible del cierre. El resto del texto lo pone el consumidor. Ver **Foundations › Internacionalización**.
+El aviso emite **un** solo texto por su cuenta: el nombre del aspa. Es cromo y
+sale del catálogo del `BrandMessagesProvider`, sin default castellano.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `closeLabel` | `alert.close` del proveedor | El aspa descarta el aviso. Dice lo mismo en todos. |
+| **Contenido** | `title`, `description`, `children`, lo que digan las `actions` | props del consumidor | El aviso cuenta **qué ha pasado en esta pantalla**. |
+
+```tsx
+<BrandMessagesProvider messages={{ alert: { close: t("common.close") } }}>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={AlertStories.TextosDelProveedor} />
+
+El orden es **prop → proveedor → error**, y el texto se lee **donde se pinta**:
+un aviso sin `dismissible` —la gran mayoría— no exige `alert.close`.
+
+Ver también **Foundations › Internacionalización**.

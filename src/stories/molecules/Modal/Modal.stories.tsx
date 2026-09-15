@@ -10,6 +10,8 @@ import { AsyncMultiSelectField } from '../AsyncMultiSelectField/AsyncMultiSelect
 import type { AsyncMultiSelectOption } from '../AsyncMultiSelectField/AsyncMultiSelectField';
 import { SiteShell } from '../../sections/SiteShell/SiteShell';
 import { SOLO_OSCURO } from '../../utils/chromaticModes';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof Modal> = {
   title: 'Molecules/Modal',
@@ -450,8 +452,13 @@ export const WithExternalDescription: Story = {
   },
 };
 
+/**
+ * La prop sigue existiendo como **anulación puntual**, para el diálogo cuyo
+ * aspa tenga que decir otra cosa. Lo normal es no pasarla y dejar que lea
+ * `modal.close` del proveedor.
+ */
 export const CustomLabels: Story = {
-  name: 'Textos personalizados (i18n)',
+  name: 'Textos personalizados en un uso concreto',
   render: () => {
     const [open, setOpen] = useState(true);
     return (
@@ -462,7 +469,7 @@ export const CustomLabels: Story = {
         fallbackTitle="Dialog"
       >
         <p style={{ margin: 0, color: 'var(--color-text-on-light)' }}>
-          Modal sin título con `closeLabel`/`fallbackTitle` en inglés.
+          Modal sin título con `closeLabel`/`fallbackTitle` pasados a mano.
         </p>
       </Modal>
     );
@@ -770,5 +777,69 @@ export const ContratoPieEnFilaEnElDialogo: Story = {
       pie.getBoundingClientRect().right,
       0,
     );
+  },
+};
+
+/**
+ * El `Modal` solo dice dos cosas por su cuenta: el nombre del aspa y, cuando
+ * no hay `title`, el nombre de respaldo del diálogo. Las dos son cromo y salen
+ * de `modal.*` del catálogo. Todo lo demás —el título, la descripción, lo que
+ * digan los botones del pie— es contenido y lo pone quien abre el diálogo: con
+ * el catálogo en inglés, el aspa dice «Close» y el pie sigue diciendo lo que
+ * le pasa esta story.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Modal
+        open
+        onClose={() => {}}
+        title="Request time off"
+        footer={<Button>Save</Button>}
+      >
+        <p>The close button reads its name from the catalogue; this text does not.</p>
+      </Modal>
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el aspa sale de `modal.close` y el respaldo, de `modal.fallbackTitle`. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el cromo del diálogo lee del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Modal open onClose={() => {}} title="Request time off">
+        <p>Body</p>
+      </Modal>
+    </BrandMessagesProvider>
+  ),
+  play: async () => {
+    const body = within(document.body);
+    const dialog = await body.findByRole('dialog', { name: 'Request time off' });
+    await expect(within(dialog).getByRole('button', { name: 'Close' })).toBeInTheDocument();
+    await expect(within(dialog).queryByRole('button', { name: 'Cerrar' })).toBeNull();
+  },
+};
+
+/**
+ * Test: sin `title`, el nombre accesible del diálogo sale de
+ * `modal.fallbackTitle` — y solo entonces se lee: un diálogo con título no
+ * exige esa clave.
+ */
+export const ContratoProveedorSinTitulo: Story = {
+  name: 'Test — el nombre de respaldo lee del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Modal open onClose={() => {}}>
+        <p>Body</p>
+      </Modal>
+    </BrandMessagesProvider>
+  ),
+  play: async () => {
+    const body = within(document.body);
+    await expect(await body.findByRole('dialog', { name: 'Dialog' })).toBeInTheDocument();
   },
 };

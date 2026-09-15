@@ -156,7 +156,13 @@ export interface ConsentPreferencesProps {
   side?: 'top' | 'right' | 'bottom' | 'left';
   /** Título del panel. Default castellano: `'Preferencias de cookies'`. */
   title?: ReactNode;
-  /** Etiqueta del botón de cerrar. Default castellano: `'Cerrar'`. */
+  /**
+   * Nombre accesible del botón de cerrar. **Reenvío puro** al `Modal` o al
+   * `Sheet` sobre el que se abre el panel: sin él, el aspa lee `modal.close`
+   * o `sheet.close` del `BrandMessagesProvider`. El resto de los textos de
+   * `Consent` sigue con su default castellano — este componente todavía no
+   * está migrado al proveedor.
+   */
   closeLabel?: string;
   /** Marca de una categoría necesaria. Default castellano: `'Siempre activa'`. */
   alwaysOnLabel?: string;
@@ -207,7 +213,7 @@ export function ConsentPreferences({
   surface = 'modal',
   side = 'right',
   title = 'Preferencias de cookies',
-  closeLabel = 'Cerrar',
+  closeLabel,
   alwaysOnLabel = 'Siempre activa',
   container,
   className,
@@ -273,7 +279,7 @@ export function ConsentPreferences({
         open={open}
         onClose={() => onOpenChange(false)}
         title={typeof title === 'string' ? title : undefined}
-        closeLabel={closeLabel}
+        {...(closeLabel !== undefined ? { closeLabel } : {})}
         container={container}
       >
         {body}
@@ -287,7 +293,7 @@ export function ConsentPreferences({
       onOpenChange={onOpenChange}
       side={side}
       title={title}
-      closeLabel={closeLabel}
+      {...(closeLabel !== undefined ? { closeLabel } : {})}
       container={container}
     >
       {body}

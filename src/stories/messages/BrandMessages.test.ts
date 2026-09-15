@@ -234,6 +234,48 @@ describe.each([
     ],
   ],
   [
+    'Modal',
+    'src/stories/molecules/Modal/Modal.tsx',
+    ["'Cerrar'", "'Diálogo'"],
+  ],
+  [
+    'Sheet',
+    'src/stories/molecules/Sheet/Sheet.tsx',
+    ["'Cerrar'"],
+  ],
+  [
+    // `'Confirmar'` no está en esta lista porque no está en NINGUNA parte: no
+    // es un default retirado, es un rótulo que el componente nunca tuvo
+    // derecho a poner. `confirmLabel` es obligatoria y no tiene espacio en el
+    // catálogo — ver `ConfirmDialogMessages`.
+    'ConfirmDialog',
+    'src/stories/molecules/ConfirmDialog/ConfirmDialog.tsx',
+    ["'Confirmar'", "'Cancelar'", "'Confirmando…'", "'Cerrar'"],
+  ],
+  [
+    'Alert',
+    'src/stories/molecules/Alert/Alert.tsx',
+    ["'Cerrar'"],
+  ],
+  [
+    'Banner',
+    'src/stories/molecules/Banner/Banner.tsx',
+    ["'Descartar aviso'"],
+  ],
+  [
+    'Toaster',
+    'src/stories/molecules/Toast/Toaster.tsx',
+    ["'Notificaciones'", "'Cerrar'"],
+  ],
+  [
+    // Consent todavía no está migrado, pero su `closeLabel` ya no puede traer
+    // default: es un reenvío puro al `Modal`/`Sheet`, y un «Cerrar» aquí
+    // taparía el `modal.close` del proveedor.
+    'Consent',
+    'src/stories/molecules/Consent/Consent.tsx',
+    ["closeLabel = 'Cerrar'"],
+  ],
+  [
     'CalendarPlanner',
     'src/stories/molecules/CalendarPlanner/CalendarPlanner.tsx',
     ["'Mes anterior'", "'Mes siguiente'"],

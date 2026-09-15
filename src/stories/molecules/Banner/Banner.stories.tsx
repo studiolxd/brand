@@ -3,6 +3,8 @@ import { expect, fn, userEvent, within } from 'storybook/test';
 import { Banner } from './Banner';
 import { Button } from '../../atoms/Button/Button';
 import { SOLO_OSCURO } from '../../utils/chromaticModes';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof Banner> = {
   title: 'Molecules/Banner',
@@ -180,5 +182,47 @@ export const ContratoAccionesAnchoCompletoEnMovil: Story = {
     await expect(botones[1].getBoundingClientRect().top).toBeGreaterThanOrEqual(
       botones[0].getBoundingClientRect().bottom,
     );
+  },
+};
+
+/**
+ * La barra solo dice una cosa por su cuenta: el nombre del aspa, de
+ * `banner.dismiss`. Lo que la barra CUENTA y lo que ofrezca su acción son
+ * contenido de la aplicación —«estás viendo la aplicación como alguien»— y
+ * aquí van ya en inglés.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  args: {
+    children: 'You are viewing the application as Ada Lovelace.',
+    actions: <Button variant="outline" size="sm">Stop impersonating</Button>,
+    onDismiss: () => {},
+  },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <Banner {...args} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el aspa lee de `banner.dismiss`; sin `onDismiss` no se lee la clave. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el aspa de la barra lee del proveedor',
+  tags: ['!dev'],
+  args: {
+    children: 'You are viewing the application as Ada Lovelace.',
+    onDismiss: () => {},
+  },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <Banner {...args} />
+      <Banner>No close button here.</Banner>
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const escena = within(canvasElement);
+    await expect(escena.getByRole('button', { name: 'Dismiss notice' })).toBeInTheDocument();
+    await expect(escena.queryByRole('button', { name: 'Descartar aviso' })).toBeNull();
+    await expect(escena.getAllByRole('button')).toHaveLength(1);
   },
 };

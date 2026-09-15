@@ -2,7 +2,18 @@
 
 import { forwardRef } from 'react';
 import { CloseButton } from '../../atoms/CloseButton/CloseButton';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './Banner.css';
+
+/**
+ * El cromo de la barra. Solo hay uno: el aspa. Lo que la barra DICE
+ * (`children`) y lo que ofrezcan sus acciones son contenido —«estás viendo la
+ * aplicación como alguien», «dejar de suplantar»— y los pone la aplicación.
+ */
+export interface BannerMessages {
+  /** Nombre accesible del aspa que descarta la barra. */
+  dismiss: string;
+}
 
 export type BannerVariant = 'info' | 'warning';
 
@@ -20,8 +31,9 @@ export interface BannerProps extends React.ComponentPropsWithoutRef<'div'> {
    */
   onDismiss?: () => void;
   /**
-   * Nombre accesible del aspa. Default: «Descartar aviso» (castellano). Una app
-   * multiidioma debe pasarlo traducido.
+   * Nombre accesible del aspa. **Sin default**: sin él, sale de
+   * `banner.dismiss` del `BrandMessagesProvider`. Solo se lee cuando el aspa
+   * se pinta, o sea cuando hay `onDismiss`.
    */
   dismissLabel?: string;
 }
@@ -49,12 +61,13 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner({
   children,
   actions,
   onDismiss,
-  dismissLabel = 'Descartar aviso',
+  dismissLabel,
   className,
   role,
   'aria-live': ariaLive,
   ...rest
 }, ref) {
+  const t = useBrandMessages('banner');
   const classes = [
     'banner',
     `banner--${variant}`,
@@ -80,7 +93,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner({
       <div className="banner__content">{children}</div>
       {actions && <div className="banner__actions">{actions}</div>}
       {onDismiss && (
-        <CloseButton className="banner__close" label={dismissLabel} onClick={onDismiss} />
+        <CloseButton className="banner__close" label={t('dismiss', dismissLabel)} onClick={onDismiss} />
       )}
     </div>
   );

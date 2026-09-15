@@ -7,7 +7,19 @@
    de librería. */
 import { forwardRef, useState } from 'react';
 import { CloseButton } from '../../atoms/CloseButton/CloseButton';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './Alert.css';
+
+/**
+ * El cromo del aviso. Solo hay uno: el aspa que lo descarta, que dice lo
+ * mismo en todos los avisos del sistema. El `title`, la `description` y lo
+ * que digan las acciones son contenido —el aviso habla de lo que ha pasado en
+ * ESA pantalla— y siguen llegando por props.
+ */
+export interface AlertMessages {
+  /** Nombre accesible del aspa que descarta el aviso. */
+  close: string;
+}
 
 export type AlertVariant = 'default' | 'success' | 'error' | 'warning';
 
@@ -35,8 +47,9 @@ export interface AlertProps extends React.ComponentPropsWithoutRef<'div'> {
    */
   finalFocus?: React.RefObject<HTMLElement | null>;
   /**
-   * Etiqueta accesible del botón de cierre. Default: «Cerrar» (castellano).
-   * Una app multiidioma debe pasarla traducida.
+   * Nombre accesible del botón de cierre. **Sin default**: sin él, sale de
+   * `alert.close` del `BrandMessagesProvider`. Solo se lee cuando el aspa se
+   * pinta: un aviso sin `dismissible` no lo exige.
    */
   closeLabel?: string;
 }
@@ -108,12 +121,13 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
   dismissible = false,
   onDismiss,
   finalFocus,
-  closeLabel = 'Cerrar',
+  closeLabel,
   className,
   children,
   role,
   ...rest
 }, ref) {
+  const t = useBrandMessages('alert');
   const [dismissed, setDismissed] = useState(false);
 
   if (dismissed) return null;
@@ -180,7 +194,7 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
         {actions && <div className="alert__actions">{actions}</div>}
       </div>
       {dismissible && (
-        <CloseButton className={`alert__close${interiorSurface}`} label={closeLabel} onClick={handleDismiss} />
+        <CloseButton className={`alert__close${interiorSurface}`} label={t('close', closeLabel)} onClick={handleDismiss} />
       )}
     </div>
   );
