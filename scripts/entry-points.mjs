@@ -2,6 +2,9 @@ export const entryPoints = {
   // Tokens
   'tokens':              'src/tokens/tokens.ts',
 
+  // Textos: el proveedor y el contrato que las apps satisfacen
+  'messages':            'src/messages/index.ts'          ,
+
   // Activos de marca (metadatos, no componentes)
   'brand-assets':        'src/assets/brand-assets.ts',
 
@@ -183,6 +186,7 @@ export const entryPoints = {
 };
 
 export const clientComponents = new Set([
+  'messages',
   'alert', 'banner', 'accordion', 'async-multi-select', 'async-multi-select-field', 'async-select', 'async-select-field', 'code-block',
   'button', 'checkbox', 'radio', 'radio-group', 'switcher', 'menu-button', 'close-button', 'input',
   'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'switcher-field', 'form', 'hero',

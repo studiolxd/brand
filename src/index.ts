@@ -1,6 +1,10 @@
 // Tokens & base styles — importado como side-effect para que Vite lo incluya en el CSS bundle
 import './index.css';
 
+// ─── Textos (proveedor y contrato) ───────────────────────────
+export { BrandMessagesProvider, useBrandMessages } from './messages';
+export type { BrandMessagesProviderProps, BrandMessagesReader, BrandMessages } from './messages';
+
 // ─── Atoms ───────────────────────────────────────────────────
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from './stories/atoms/Accordion/Accordion';
 export type { AccordionProps, AccordionItemProps, AccordionTriggerProps, AccordionContentProps } from './stories/atoms/Accordion/Accordion';
@@ -228,7 +232,7 @@ export type { ModalProps } from './stories/molecules/Modal/Modal';
 export { InputPhoneField } from './stories/molecules/InputPhoneField/InputPhoneField';
 export type { InputPhoneFieldProps } from './stories/molecules/InputPhoneField/InputPhoneField';
 export { Pagination } from './stories/molecules/Pagination/Pagination';
-export type { PaginationProps } from './stories/molecules/Pagination/Pagination';
+export type { PaginationProps, PaginationMessages } from './stories/molecules/Pagination/Pagination';
 export { ConsentBanner, ConsentPreferences } from './stories/molecules/Consent/Consent';
 export type { ConsentBannerProps, ConsentPreferencesProps, ConsentCategory, ConsentValue } from './stories/molecules/Consent/Consent';
 export { Prose } from './stories/molecules/Prose/Prose';
