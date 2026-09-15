@@ -5,7 +5,7 @@ import { t } from "./_shared/appshellcontext.js";
 import { useContext as n, useState as r } from "react";
 import { jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/sections/AppHeader/AppHeader.tsx
-function o({ start: o, notifications: s, end: c, menuLabel: l = "Menú de navegación", menuCloseLabel: u, sidebarId: d }) {
+function o({ start: o, notifications: s, end: c, menuLabel: l, menuCloseLabel: u, sidebarId: d }) {
 	let f = n(t), [p, m] = r(!1), h = f ? f.sidebar === "open" : p;
 	return /* @__PURE__ */ a("header", {
 		className: "app-header",

@@ -7,9 +7,15 @@ export interface AppHeaderProps {
     notifications?: ReactNode;
     /** Al final, siempre: el `UserMenu` (compacto). */
     end?: ReactNode;
-    /** Texto accesible del botón de menú. */
+    /**
+     * Texto accesible del botón de menú. **Reenvío puro** al `MenuButton`: sin
+     * él, el botón lee `menuButton.open` del `BrandMessagesProvider`.
+     */
     menuLabel?: string;
-    /** Texto accesible del botón cuando la sidebar está abierta («Cerrar menú»). */
+    /**
+     * Texto accesible del botón con la sidebar abierta. **Reenvío puro** al
+     * `MenuButton`: sin él, lee `menuButton.close`.
+     */
     menuCloseLabel?: string;
     /** id de la sidebar que gobierna el botón (`aria-controls`). */
     sidebarId?: string;

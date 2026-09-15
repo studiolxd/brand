@@ -1,6 +1,20 @@
 import { type ReactNode } from 'react';
 import './Sidebar.css';
 export { useSidebar } from './SidebarContext';
+/**
+ * Lo que la barra dice por su cuenta, y todo es **cromo**: su nombre de región,
+ * el nombre del asa que la ensancha y cómo se lee su ancho. Ninguno depende de
+ * qué haya dentro —eso lo escribe el producto en `children`—, así que los tres
+ * van al catálogo.
+ */
+export interface SidebarMessages {
+    /** Nombre accesible del `aside`. */
+    label: string;
+    /** Nombre accesible del asa de redimensión. */
+    resizer: string;
+    /** Valor hablado del asa: el ancho con su unidad. */
+    resizerValue: (width: number) => string;
+}
 export interface SidebarProps {
     /** Arriba del todo (un `Logo`). */
     logo?: ReactNode;
@@ -9,11 +23,21 @@ export interface SidebarProps {
     /** Pie fijo, fuera del scroll del panel. */
     footer?: ReactNode;
     id?: string;
-    /** Nombre accesible del `aside`. Default: «Barra lateral» (castellano). Una app multiidioma debe pasarlo traducido. */
+    /**
+     * Nombre accesible del `aside`. **Sin default**: sin él, sale de
+     * `sidebar.label` del `BrandMessagesProvider`.
+     */
     label?: string;
-    /** Texto accesible del asa de redimensión. Default: «Ancho de la barra lateral» (castellano). Una app multiidioma debe pasarlo traducido. */
+    /**
+     * Nombre accesible del asa de redimensión. **Sin default**: sale de
+     * `sidebar.resizer`. Solo se lee cuando el asa existe (escritorio, dentro de
+     * un `AppShell`, con la barra no cerrada).
+     */
     resizerLabel?: string;
-    /** Valor hablado del asa: el ancho con su unidad. Default: «N píxeles» (castellano). Una app multiidioma debe pasarlo traducido. */
+    /**
+     * Valor hablado del asa: el ancho con su unidad. **Sin default**: sale de
+     * `sidebar.resizerValue`. Interpola el ancho, así que es una función.
+     */
     resizerValueText?: (width: number) => string;
     /** Fuerza el modo sin `AppShell` (Storybook, pruebas). Con shell, lo decide el shell. */
     mode?: 'open' | 'rail';

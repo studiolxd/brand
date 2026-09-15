@@ -17,10 +17,16 @@ export interface SiteShellProps {
  * Para las aplicaciones con barra y sidebar está `AppShell`.
  */
 /**
- * Reenvía el `ref` al nodo raíz (`.site-shell`): un `Modal`/`Sheet` abierto
- * desde dentro necesita apuntar su `container` aquí para heredar los tokens
- * de la superficie pública — el portal por defecto monta en `document.body`,
- * que no es descendiente de `.site-shell` (a diferencia del tema oscuro, que
- * se activa en `<html>` y sí llega a cualquier portal sin configuración).
+ * **Los portales que se abran dentro heredan la superficie.** El shell publica
+ * su nodo raíz por `PortalContainerContext`, y todo componente con portal
+ * —`Select`, `MultiSelect`, `DatePicker`, `Popover`, `Tooltip`, `Menu`,
+ * `Modal`, `Sheet`, `Toaster`…— lo toma como destino cuando no recibe
+ * `container`. Sin eso, la lista de un `Select` montaba en `document.body`,
+ * fuera de `.site-shell`, y se abría a la talla de aplicación mientras su
+ * campo iba a la pública. No hay nada que pasar en cada uso; la prop
+ * `container` sigue ahí para quien quiera otro destino y gana siempre.
+ *
+ * Reenvía además el `ref` al nodo raíz (`.site-shell`), para quien necesite
+ * apuntar ahí a mano.
  */
 export declare const SiteShell: import("react").ForwardRefExoticComponent<SiteShellProps & import("react").RefAttributes<HTMLDivElement>>;

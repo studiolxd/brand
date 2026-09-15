@@ -54,6 +54,13 @@ export interface PopoverProps {
      * un `ref`, o una función que lo devuelva. Es la prop de Base UI, tal cual.
      */
     initialFocus?: React.ComponentProps<typeof BasePopover.Popup>['initialFocus'];
+    /**
+     * Nodo DOM donde montar el portal. Por defecto, el nodo de la superficie que
+     * llegue por contexto —`SiteShell` publica el suyo, para que la capa herede
+     * la talla de la superficie pública— y, si no hay ninguna, `document.body`.
+     * Pásalo solo para llevar la capa a otro sitio: gana siempre.
+     */
+    container?: HTMLElement | null;
     /** Clase adicional para el panel. */
     className?: string;
 }
@@ -67,4 +74,4 @@ export interface PopoverProps {
  * mantener el panel abierto cuando el clic cae en algo que el motor no
  * reconoce como suyo.
  */
-export declare function Popover({ trigger, children, label, open, defaultOpen, onOpenChange, onPointerDownOutside, onFocusOutside, onEscapeKeyDown, side, align, sideOffset, initialFocus, className, }: PopoverProps): import("react/jsx-runtime").JSX.Element;
+export declare function Popover({ trigger, children, label, open, defaultOpen, onOpenChange, onPointerDownOutside, onFocusOutside, onEscapeKeyDown, side, align, sideOffset, initialFocus, container, className, }: PopoverProps): import("react/jsx-runtime").JSX.Element;

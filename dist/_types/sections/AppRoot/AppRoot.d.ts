@@ -1,6 +1,17 @@
 import type { ReactNode } from 'react';
-export interface AppRootProps {
+/**
+ * El único texto de la raíz, y es **cromo**: el enlace de salto al contenido
+ * dice lo mismo en todo el documento y en todos los productos.
+ */
+export interface AppRootMessages {
     /** Texto del enlace de salto al contenido. */
+    skipToContent: string;
+}
+export interface AppRootProps {
+    /**
+     * Texto del enlace de salto al contenido. **Sin default**: sin él, sale de
+     * `appRoot.skipToContent` del `BrandMessagesProvider`.
+     */
     skipLabel?: string;
     /** Destino del salto: el `id` del contenido principal de la página. */
     skipHref?: string;

@@ -19,7 +19,11 @@ export interface PublicPageShellProps {
      * pie, igual que `header` y `footer`.
      */
     preferences?: ReactNode;
-    /** Nombre accesible de la banda de preferencias. Default: «Preferencias» (castellano). */
+    /**
+     * Nombre accesible de la banda de preferencias. **Sin default**: sin él,
+     * sale de `publicPageShell.preferences` del `BrandMessagesProvider`. Solo se
+     * lee cuando hay banda.
+     */
     preferencesLabel?: string;
     /** `id` del `main` (`main-content` por defecto, destino del `SkipLink`). */
     id?: string;
@@ -56,4 +60,12 @@ export interface PublicPageShellProps {
  * marco y el `ref` se queda sin asignar: ahí el contenedor es el `AppShell` de
  * la app.
  */
+/**
+ * El único texto del marco, y es **cromo**: el nombre de la banda donde viven
+ * el idioma y el tema. Lo que se ponga dentro es **contenido**.
+ */
+export interface PublicPageShellMessages {
+    /** Nombre accesible de la banda de preferencias. */
+    preferences: string;
+}
 export declare const PublicPageShell: import("react").ForwardRefExoticComponent<PublicPageShellProps & import("react").RefAttributes<HTMLDivElement>>;

@@ -11,11 +11,20 @@ export type SiteHeaderLogoLinkProps = {
 export interface SiteHeaderProps {
     /** Destino del logotipo. */
     logoHref?: string;
-    /** Texto accesible del enlace del logotipo. */
+    /**
+     * Texto accesible del enlace del logotipo. **Sin default**: sin él, sale de
+     * `siteHeader.logo` del `BrandMessagesProvider`.
+     */
     logoLabel?: string;
-    /** aria-label del botón de menú. */
+    /**
+     * aria-label del botón de menú. **Reenvío puro** al `MenuButton`: sin él, el
+     * botón lee `menuButton.open`.
+     */
     menuLabel?: string;
-    /** aria-label del botón de menú cuando está abierto («Cerrar menú»). */
+    /**
+     * aria-label del botón de menú abierto. **Reenvío puro** al `MenuButton`:
+     * sin él, lee `menuButton.close`.
+     */
     menuCloseLabel?: string;
     /** La marca. Por defecto el `Logo` de Studio LXD a `logoSize`; un producto de la suite pone la suya. */
     logo?: ReactNode;
@@ -55,4 +64,14 @@ export interface SiteHeaderProps {
  * El enlace de salto al contenido no va aquí: lo pone `AppRoot`, una vez por
  * documento.
  */
+/**
+ * El único texto propio de la cabecera, y es **cromo**: qué hace el logotipo
+ * («ir al inicio»), no qué marca es. Lo que dice el botón de menú no se repite
+ * aquí —es un reenvío puro al `MenuButton`—, y los enlaces de `actions` y del
+ * panel son **contenido** del producto.
+ */
+export interface SiteHeaderMessages {
+    /** Texto accesible del enlace del logotipo. */
+    logo: string;
+}
 export declare function SiteHeader({ logoHref, logoLabel, menuLabel, menuCloseLabel, logoSize, logo, menuButtonSize, renderLogoLink, width, open, onOpenChange, children, settings, panelId, actions, language, }: SiteHeaderProps): import("react/jsx-runtime").JSX.Element;

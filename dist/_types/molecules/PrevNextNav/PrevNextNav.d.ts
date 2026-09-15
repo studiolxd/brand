@@ -16,10 +16,14 @@ export interface PrevNextNavProps {
     /**
      * Rótulo del control anterior. Sin `prevTitle` es el `aria-label` del
      * chevron; con `prevTitle` es el rótulo **visible** que lo encabeza.
-     * Default: "Anterior"
+     * **Sin default**: sin él, sale de `prevNextNav.previous` del
+     * `BrandMessagesProvider`.
      */
     prevLabel?: string;
-    /** Rótulo del control siguiente. Mismo contrato que `prevLabel`. Default: "Siguiente" */
+    /**
+     * Rótulo del control siguiente. Mismo contrato que `prevLabel`. **Sin
+     * default**: sale de `prevNextNav.next`.
+     */
     nextLabel?: string;
     /**
      * Título visible del destino anterior (el de la página, el capítulo…). Con
@@ -46,5 +50,16 @@ export interface PrevNextNavProps {
     linkComponent?: ComponentType<any>;
     /** Variante de densidad. Default: "md" */
     size?: 'sm' | 'md';
+}
+/**
+ * Los dos textos del par, y los dos son **cromo**: «anterior» y «siguiente»
+ * dicen la dirección, no el destino. El destino —`prevTitle`, `nextTitle`, el
+ * rótulo del medio— es **contenido** y lo escribe la página.
+ */
+export interface PrevNextNavMessages {
+    /** Rótulo del control anterior. */
+    previous: string;
+    /** Rótulo del control siguiente. */
+    next: string;
 }
 export declare function PrevNextNav({ prevHref, nextHref, prevOnClick, nextOnClick, prevLabel, nextLabel, prevTitle, nextTitle, label, labelId, linkComponent, size, }: PrevNextNavProps): import("react/jsx-runtime").JSX.Element;

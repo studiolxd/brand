@@ -1,69 +1,70 @@
 'use client';
 import './onboarding-shell.css';
-import { t as e } from "./_shared/form-size.js";
-import { Container as t } from "./container.js";
-import { PublicPageShell as n } from "./public-page-shell.js";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { t } from "./_shared/form-size.js";
+import { Container as n } from "./container.js";
+import { PublicPageShell as r } from "./public-page-shell.js";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/templates/OnboardingShell/OnboardingShell.tsx
-function a({ children: a, brand: o, preferences: s, switchers: c, preferencesLabel: l, stepper: u, primaryAction: d, backAction: f, exitAction: p, actionsLabel: m = "Acciones del paso", id: h = "main-content", shell: g = !0, width: _ = "md", className: v }) {
-	let y = !!(d || f || p), b = s ?? c, x = o && /* @__PURE__ */ r("div", {
+function o({ children: o, brand: s, preferences: c, switchers: l, preferencesLabel: u, stepper: d, primaryAction: f, backAction: p, exitAction: m, actionsLabel: h, id: g = "main-content", shell: _ = !0, width: v = "md", className: y }) {
+	let b = e("onboardingShell"), x = e("publicPageShell"), S = !!(f || p || m), C = c ?? l, w = s && /* @__PURE__ */ i("div", {
 		className: "onboarding-shell__brand",
-		children: o
+		children: s
 	});
-	return /* @__PURE__ */ r(n, {
-		id: h,
-		shell: g,
-		header: x && /* @__PURE__ */ r(t, {
+	return /* @__PURE__ */ i(r, {
+		id: g,
+		shell: _,
+		header: w && /* @__PURE__ */ i(n, {
 			as: "header",
 			className: "onboarding-shell__top onboarding-shell__top--band",
 			innerClassName: "onboarding-shell__bar",
-			children: x
+			children: w
 		}),
-		preferences: b,
-		preferencesLabel: l,
-		children: /* @__PURE__ */ i("div", {
-			className: ["onboarding-shell", v].filter(Boolean).join(" "),
+		preferences: C,
+		preferencesLabel: u,
+		children: /* @__PURE__ */ a("div", {
+			className: ["onboarding-shell", y].filter(Boolean).join(" "),
 			children: [
-				!g && x && /* @__PURE__ */ r("header", {
+				!_ && w && /* @__PURE__ */ i("header", {
 					className: "onboarding-shell__top onboarding-shell__bar",
-					children: x
+					children: w
 				}),
-				/* @__PURE__ */ r(e.Provider, {
+				/* @__PURE__ */ i(t.Provider, {
 					value: "lg",
-					children: /* @__PURE__ */ i("div", {
-						className: ["onboarding-shell__step", _ === "wide" ? "onboarding-shell__step--wide" : ""].filter(Boolean).join(" "),
+					children: /* @__PURE__ */ a("div", {
+						className: ["onboarding-shell__step", v === "wide" ? "onboarding-shell__step--wide" : ""].filter(Boolean).join(" "),
 						children: [
-							u && /* @__PURE__ */ r("div", {
+							d && /* @__PURE__ */ i("div", {
 								className: "onboarding-shell__progress",
-								children: u
+								children: d
 							}),
-							/* @__PURE__ */ r("div", {
+							/* @__PURE__ */ i("div", {
 								className: "onboarding-shell__body",
-								children: a
+								children: o
 							}),
-							y && /* @__PURE__ */ i("div", {
+							S && /* @__PURE__ */ a("div", {
 								className: "onboarding-shell__actions",
 								role: "group",
-								"aria-label": m,
-								children: [f, (p || d) && /* @__PURE__ */ i("div", {
+								"aria-label": b("actions", h),
+								children: [p, (m || f) && /* @__PURE__ */ a("div", {
 									className: "onboarding-shell__decisions",
-									children: [p && /* @__PURE__ */ r("div", {
+									children: [m && /* @__PURE__ */ i("div", {
 										className: "onboarding-shell__exit",
-										children: p
-									}), d]
+										children: m
+									}), f]
 								})]
 							})
 						]
 					})
 				}),
-				!g && b && /* @__PURE__ */ r("section", {
+				!_ && C && /* @__PURE__ */ i("section", {
 					className: "onboarding-shell__settings",
-					"aria-label": l ?? "Preferencias",
-					children: b
+					"aria-label": x("preferences", u),
+					children: C
 				})
 			]
 		})
 	});
 }
 //#endregion
-export { a as OnboardingShell };
+export { o as OnboardingShell };

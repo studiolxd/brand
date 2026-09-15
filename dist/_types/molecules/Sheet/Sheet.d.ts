@@ -39,13 +39,14 @@ export interface SheetProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
     /** Elemento que abre el panel. Sin él, la apertura la controla el consumidor. */
     trigger?: ReactNode;
     /**
-     * Nodo DOM donde montar el portal del panel (reenviado a Base UI
-     * `Portal.container`). Por defecto se monta en `document.body`, que
-     * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
-     * sin configuración adicional. Solo hace falta pasarlo cuando el Sheet
-     * vive dentro de una superficie **anidada** (un `.surface-dark` que no está
-     * en la raíz, o dentro de `SiteShell`/`.site-shell`), ya que ese contexto
-     * no llega a `document.body` por la cascada.
+     * Nodo DOM donde montar el portal del panel (reenviado a Base UI `Portal.container`).
+     * Por defecto, el nodo de la superficie que llegue por contexto:
+     * `SiteShell` publica el suyo, de modo que la capa hereda la talla de la
+     * superficie pública en vez de abrirse a la de aplicación. Si no hay
+     * superficie, `document.body` — que ya hereda el tema activado en la raíz
+     * (`html.dark`/`[data-theme="dark"]`) sin configuración adicional. Pásalo
+     * solo para llevar la capa a otro sitio: un `.surface-dark` **anidado**, el
+     * cajón de un shell propio. Gana siempre.
      */
     container?: React.ComponentPropsWithoutRef<typeof Dialog.Portal>['container'];
     /**

@@ -2,54 +2,55 @@
 import './sheet.css';
 import { n as e } from "./_shared/brandmessagescontext.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
-import { CloseButton as n } from "./close-button.js";
-import { n as r, r as i, t as a } from "./_shared/dialogsurface.js";
-import { jsx as o, jsxs as s } from "react/jsx-runtime";
-import { Dialog as c } from "@base-ui/react/dialog";
+import { n } from "./_shared/portal-container.js";
+import { CloseButton as r } from "./close-button.js";
+import { n as i, r as a, t as o } from "./_shared/dialogsurface.js";
+import { jsx as s, jsxs as c } from "react/jsx-runtime";
+import { Dialog as l } from "@base-ui/react/dialog";
 //#region src/stories/molecules/Sheet/Sheet.tsx
-function l({ className: e, ...t }) {
-	return /* @__PURE__ */ o(a, {
+function u({ className: e, ...t }) {
+	return /* @__PURE__ */ s(o, {
 		className: ["sheet__footer", e].filter(Boolean).join(" "),
 		...t
 	});
 }
-function u({ open: a, onOpenChange: u, side: d = "right", title: f, titleHidden: p = !1, description: m, footer: h, children: g, closeLabel: _, hideClose: v = !1, trigger: y, container: b, onAnimationEndCapture: x, className: S, ...C }) {
-	let w = e("sheet");
-	return /* @__PURE__ */ s(c.Root, {
-		open: a,
-		onOpenChange: (e) => u(e),
-		children: [y && /* @__PURE__ */ o(c.Trigger, { render: y }), /* @__PURE__ */ s(c.Portal, {
-			container: b,
-			children: [/* @__PURE__ */ o(i, { className: "sheet__overlay" }), /* @__PURE__ */ s(c.Popup, {
-				className: ["sheet", S].filter(Boolean).join(" "),
-				"data-side": d,
-				onAnimationEndCapture: x,
-				...C,
+function d({ open: o, onOpenChange: d, side: f = "right", title: p, titleHidden: m = !1, description: h, footer: g, children: _, closeLabel: v, hideClose: y = !1, trigger: b, container: x, onAnimationEndCapture: S, className: C, ...w }) {
+	let T = e("sheet"), E = n(x);
+	return /* @__PURE__ */ c(l.Root, {
+		open: o,
+		onOpenChange: (e) => d(e),
+		children: [b && /* @__PURE__ */ s(l.Trigger, { render: b }), /* @__PURE__ */ c(l.Portal, {
+			container: E,
+			children: [/* @__PURE__ */ s(a, { className: "sheet__overlay" }), /* @__PURE__ */ c(l.Popup, {
+				className: ["sheet", C].filter(Boolean).join(" "),
+				"data-side": f,
+				onAnimationEndCapture: S,
+				...w,
 				children: [
-					/* @__PURE__ */ s(r, {
+					/* @__PURE__ */ c(i, {
 						layout: "stacked",
 						className: "sheet__header",
-						children: [p ? /* @__PURE__ */ o(c.Title, { render: /* @__PURE__ */ o(t, { children: f }) }) : /* @__PURE__ */ o(c.Title, {
+						children: [m ? /* @__PURE__ */ s(l.Title, { render: /* @__PURE__ */ s(t, { children: p }) }) : /* @__PURE__ */ s(l.Title, {
 							className: "sheet__title",
-							children: f
-						}), m != null && /* @__PURE__ */ o(c.Description, {
+							children: p
+						}), h != null && /* @__PURE__ */ s(l.Description, {
 							className: "sheet__description",
-							children: m
+							children: h
 						})]
 					}),
-					!v && /* @__PURE__ */ o(c.Close, {
+					!y && /* @__PURE__ */ s(l.Close, {
 						className: "sheet__close",
-						render: /* @__PURE__ */ o(n, { label: w("close", _) })
+						render: /* @__PURE__ */ s(r, { label: T("close", v) })
 					}),
-					/* @__PURE__ */ o("div", {
+					/* @__PURE__ */ s("div", {
 						className: "sheet__body",
-						children: g
+						children: _
 					}),
-					h && /* @__PURE__ */ o(l, { children: h })
+					g && /* @__PURE__ */ s(u, { children: g })
 				]
 			})]
 		})]
 	});
 }
 //#endregion
-export { u as Sheet, l as SheetFooter };
+export { d as Sheet, u as SheetFooter };

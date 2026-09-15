@@ -29,7 +29,10 @@ export interface OnboardingShellProps {
      * @deprecated Usa `preferences`.
      */
     switchers?: ReactNode;
-    /** Nombre accesible de la banda de preferencias. Default: «Preferencias» (castellano). */
+    /**
+     * Nombre accesible de la banda de preferencias. **Reenvío puro** al
+     * `PublicPageShell`: sin él, la banda lee `publicPageShell.preferences`.
+     */
     preferencesLabel?: string;
     /**
      * El progreso: un `Stepper`. La ranura se monta siempre; es el `Stepper`
@@ -47,7 +50,11 @@ export interface OnboardingShellProps {
      * escritorio, y debajo y centrada en móvil.
      */
     exitAction?: ReactNode;
-    /** Nombre accesible del grupo de acciones del pie. Default: «Acciones del paso» (castellano). */
+    /**
+     * Nombre accesible del grupo de acciones del pie. **Sin default**: sin él,
+     * sale de `onboardingShell.actions` del `BrandMessagesProvider`. Solo se lee
+     * cuando el paso trae alguna acción.
+     */
     actionsLabel?: string;
     /** `id` del `main` (`main-content` por defecto, destino del `SkipLink`). */
     id?: string;
@@ -101,4 +108,14 @@ export interface OnboardingShellProps {
  * dentro —un `Form`, un campo suelto, un `AvatarUpload`— sale a la talla que
  * le toca sin que la aplicación tenga que acordarse de pedirla.
  */
+/**
+ * El único texto propio de la plantilla, y es **cromo**: el nombre del grupo de
+ * acciones del pie. Lo que digan los botones —«Continuar», «Atrás», «Omitir por
+ * ahora»— es **contenido** y viene en las ranuras. El nombre de la banda de
+ * preferencias tampoco está aquí: es un reenvío puro al `PublicPageShell`.
+ */
+export interface OnboardingShellMessages {
+    /** Nombre accesible del grupo de acciones del pie. */
+    actions: string;
+}
 export declare function OnboardingShell({ children, brand, preferences, switchers, preferencesLabel, stepper, primaryAction, backAction, exitAction, actionsLabel, id, shell, width, className, }: OnboardingShellProps): import("react/jsx-runtime").JSX.Element;

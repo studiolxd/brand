@@ -7,6 +7,123 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [47.0.0] — 2026-09-15
+
+> **Major.** Octava familia al proveedor de textos: el cromo de aplicación y la navegación.
+> Catorce espacios nuevos, y con ellos la familia donde más claves ya existían en el
+> catálogo de la suite. Además, los portales dejan de abrirse en la talla equivocada dentro
+> de una página pública.
+
+### La navegación lee del proveedor
+
+Catorce espacios nuevos en `BrandMessages`: `menuButton`, `appRoot`, `appShell`, `sidebar`,
+`sidebarNav`, `siteNav`, `siteHeader`, `userMenu`, `orgSwitcher`, `breadcrumb`,
+`tableOfContents`, `prevNextNav`, `publicPageShell` y `onboardingShell`. Mismo orden —**prop
+→ proveedor → error**— y cada texto se lee **donde se pinta**: una barra fuera de un
+`AppShell` no tiene asa y no exige sus dos textos, una navegación sin entradas vacías no
+exige su marca, un menú de cuenta sin contador no exige el plural, un paso sin acciones no
+exige el nombre de su pie.
+
+La frontera se decide por el valor. **Cromo**: el nombre de una región de navegación
+(«Principal», «En esta página», «Migas de pan»), el salto al contenido, qué hace el
+logotipo, la dirección de un par anterior/siguiente. **Contenido**: los ítems de un menú,
+los nombres de las organizaciones, el nombre de la persona, los títulos de destino del
+`PrevNextNav`, el rótulo visible de un índice. `PrevNextNav` es el caso que mejor lo
+enseña: «Anterior» y «Siguiente» son catálogo, pero un par que navega semanas quiere decir
+«Semana anterior» y para eso siguen estando las props, que ganan.
+
+### Tres piezas entran al alcance por arrastre
+
+`MenuButton` es donde vivía el castellano que reenviaban las dos cabeceras: migrarlo deja
+`AppHeader.menuLabel` y `SiteHeader.menuLabel` como **reenvíos puros**, una sola clave en
+vez de tres. `AppRoot` tiene la misma frase de salto que `AppShell` y se habría quedado
+cableada. Y `PublicPageShell` tenía que migrar para que `OnboardingShell.preferencesLabel`
+pudiera ser reenvío puro: es la misma banda y la misma clave.
+
+`Switcher` estaba en la lista y **no entra**: no emite ningún texto propio. Lo nombra la
+etiqueta de su campo.
+
+### Breaking — `MenuButton` abierto dice «cerrar»
+
+El nombre accesible pasa a seguir al estado: cerrado lee `menuButton.open`, abierto lee
+`menuButton.close`. Antes, con el menú abierto el botón seguía llamándose igual salvo que
+el consumidor pasara `closeLabel` a mano, así que la cara de cerrar casi nunca se pintaba.
+Ahora que el catálogo trae las dos, el nombre ya no se queda a medias. **Un test que
+consulte el botón por su nombre con la barra abierta deja de encontrarlo**: es el punto
+donde esto rompe en silencio.
+
+`UserMenu` tenía un texto que ni siquiera era prop —el contador de notificaciones llevaba
+`${count} notificaciones sin leer` escrito en el JSX—. Ahora es `userMenu.unread`, una
+función, y `notifications.unreadCount` de la suite ya la satisface con su plural.
+
+### Los portales heredan la superficie
+
+La v45.1.0 puso los controles en talla `lg` dentro de `.site-shell` por herencia CSS, y
+dejó apuntado lo que no cubría: la lista de un `Select` y el calendario de un `DatePicker`
+los monta un portal en `document.body`, que no es descendiente del bloque. El campo se
+pintaba a 48px/20 y su lista se abría a 40px/16. El tema oscuro no tenía este problema
+porque se activa en `<html>` y cascadea a todo el documento; la superficie de lectura se
+activa a media altura del árbol.
+
+`SiteShell` publica ahora su nodo raíz por `PortalContainerContext`, y todo componente con
+portal lo toma como destino cuando no recibe `container`. La resolución es **prop →
+contexto → `document.body`**, y la prop gana siempre. No hay nada que pasar en cada uso: el
+árbol de React sabe dónde está el shell aunque el árbol del DOM no lo sepa. El nodo viaja
+en **estado y no en una ref**, porque el destino tiene que existir en el render en el que
+el portal se monta — el mismo patrón que `ChatShell` ya usaba para el `container` de su
+cajón. `SiteShell` pasa a ser componente cliente.
+
+Lo consumen por defecto `Select`, `MultiSelect`, `AsyncSelect`, `AsyncMultiSelect`,
+`InputPhone`, `Modal`, `Sheet`, `AppLauncher`, `OrgSwitcher`, `UserMenu` y `Toaster`.
+`Popover`, `Tooltip` y `Menu` **estrenan prop `container`** —son los primitivos
+componibles, y sin ella no había escotilla—, y con ellos heredan sin tocar nada
+`DatePicker`, `DateTimeField`, `TimeSelect`, `TimeField`, `ContextMenu`, `DropdownField`,
+`NotificationButton`, `ConfirmDialog`, `ImageCropDialog`, `AvatarUpload`, `CommandPalette`
+y `Consent`. `FloatingDock` queda intacto: monta su panel dentro de su propia ancla a
+propósito y no pasa por el contexto.
+
+**`AppShell` no provee el contexto, y es deliberado.** La superficie de aplicación es la
+del `:root`, así que `document.body` ya resuelve los mismos valores; meter los portales
+dentro de `.app-shell` —que es `overflow: clip` y de altura fija— solo añadiría riesgo de
+recorte sin arreglar nada. El día que la superficie de aplicación cambie de talla, el
+arreglo es montar ahí el mismo proveedor: una línea.
+
+Los campos `*Field` siguen **sin** reenviar `container`, y también a propósito: obligar a
+cada app a pasar un nodo en cada uso era el problema, no la solución. La escotilla vive en
+el primitivo.
+
+### Para quien actualice
+
+El catálogo del `BrandMessagesProvider` tiene que crecer con los catorce espacios, o la
+primera pantalla con un `Breadcrumb`, un `AppRoot` o un `MenuButton` **lanza en render**.
+Estas son las claves que hay que aportar:
+
+| Espacio | Claves | Qué es |
+| --- | --- | --- |
+| `menuButton` | `open`, `close` | qué hace el botón de menú, en sus dos caras |
+| `appRoot` | `skipToContent` | el salto al contenido del documento |
+| `appShell` | `skipToContent` | el salto al contenido de la aplicación |
+| `sidebar` | `label`, `resizer`, `resizerValue(width)` | la región, el asa y su ancho hablado |
+| `sidebarNav` | `label`, `empty` | la región y la marca de una entrada sin contenido |
+| `siteNav` | `label` | la región del índice del sitio |
+| `siteHeader` | `logo` | qué hace el logotipo — **lleva la marca dentro** |
+| `userMenu` | `trigger(name)`, `unread(count)` | el botón de cuenta y su contador |
+| `orgSwitcher` | `trigger(name)` | el botón del conmutador de organización |
+| `breadcrumb` | `label` | la región del rastro |
+| `tableOfContents` | `label` | la región del índice de la página |
+| `prevNextNav` | `previous`, `next` | la dirección, no el destino |
+| `publicPageShell` | `preferences` | la banda de idioma y tema |
+| `onboardingShell` | `actions` | el grupo de acciones del pie del alta |
+
+Cuatro de ellas interpolan un dato (`sidebar.resizerValue`, `userMenu.trigger`,
+`userMenu.unread`, `orgSwitcher.trigger`), así que son funciones. `siteHeader.logo` la
+escribe cada producto con su propia marca: el default retirado decía «Studio LXD — ir al
+inicio».
+
+A cambio, dejan de hacer falta para traducir `AppHeader.menuLabel` y `menuCloseLabel`,
+`SiteHeader.menuLabel` y `menuCloseLabel`, y `OnboardingShell.preferencesLabel`: son
+reenvíos puros y siguen existiendo solo como anulación puntual.
+
 ## [46.0.0] — 2026-09-15
 
 > **Major.** Séptima familia al proveedor de textos: los envoltorios de diálogo. `Consent`,

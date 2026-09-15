@@ -1,60 +1,61 @@
 'use client';
 import './sidebar-nav.css';
-import { Icon as e } from "./icon.js";
-import { Tooltip as t } from "./tooltip.js";
-import { Menu as n } from "./menu.js";
-import { n as r } from "./_shared/sidebarcontext.js";
-import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
-import { Accordion as s } from "@base-ui/react/accordion";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Icon as t } from "./icon.js";
+import { Tooltip as n } from "./tooltip.js";
+import { Menu as r } from "./menu.js";
+import { n as i } from "./_shared/sidebarcontext.js";
+import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
+import { Accordion as c } from "@base-ui/react/accordion";
 //#region src/stories/molecules/SidebarNav/SidebarNav.tsx
-function c({ children: e, ...t }) {
-	return /* @__PURE__ */ a("a", {
+function l({ children: e, ...t }) {
+	return /* @__PURE__ */ o("a", {
 		...t,
 		children: e
 	});
 }
-function l({ label: l = "Navegación principal", emptyLabel: u = "sin docs", rail: d, entries: f, defaultValue: p, value: m, onValueChange: h, renderLink: g = c }) {
-	let _ = m === void 0 ? { defaultValue: p } : {
-		value: m,
-		onValueChange: (e) => h?.(e ?? [])
-	}, v = r();
-	return d ?? v.rail ? /* @__PURE__ */ a("nav", {
+function u({ label: u, emptyLabel: d, rail: f, entries: p, defaultValue: m, value: h, onValueChange: g, renderLink: _ = l }) {
+	let v = e("sidebarNav"), y = h === void 0 ? { defaultValue: m } : {
+		value: h,
+		onValueChange: (e) => g?.(e ?? [])
+	}, b = i();
+	return f ?? b.rail ? /* @__PURE__ */ o("nav", {
 		className: "sidebar-nav sidebar-nav--rail",
-		"aria-label": l,
-		children: /* @__PURE__ */ a("ul", {
+		"aria-label": v("label", u),
+		children: /* @__PURE__ */ o("ul", {
 			className: "sidebar-nav__rail",
 			role: "list",
-			children: f.map((e) => {
-				let r = /* @__PURE__ */ a("span", {
+			children: p.map((e) => {
+				let t = /* @__PURE__ */ o("span", {
 					className: "sidebar-nav__rail-icon",
 					"aria-hidden": "true",
-					children: e.icon ?? /* @__PURE__ */ a("span", {
+					children: e.icon ?? /* @__PURE__ */ o("span", {
 						className: "sidebar-nav__rail-initial",
 						children: e.label.charAt(0)
 					})
 				});
-				if (e.kind === "link") return e.empty ? /* @__PURE__ */ a("li", { children: /* @__PURE__ */ a(t, {
-					label: `${e.label} — ${u}`,
+				if (e.kind === "link") return e.empty ? /* @__PURE__ */ o("li", { children: /* @__PURE__ */ o(n, {
+					label: `${e.label} — ${v("empty", d)}`,
 					side: "right",
-					children: /* @__PURE__ */ a("span", {
+					children: /* @__PURE__ */ o("span", {
 						className: "sidebar-nav__rail-item sidebar-nav__rail-item--empty",
 						"aria-disabled": "true",
-						"aria-label": `${e.label} — ${u}`,
-						children: r
+						"aria-label": `${e.label} — ${v("empty", d)}`,
+						children: t
 					})
-				}) }, e.id) : /* @__PURE__ */ a("li", { children: /* @__PURE__ */ a(t, {
+				}) }, e.id) : /* @__PURE__ */ o("li", { children: /* @__PURE__ */ o(n, {
 					label: e.label,
 					side: "right",
-					children: g({
+					children: _({
 						href: e.href,
 						className: ["sidebar-nav__rail-item", e.active ? "sidebar-nav__rail-item--active" : ""].filter(Boolean).join(" "),
 						"aria-current": e.active ? "page" : void 0,
 						"aria-label": e.label,
-						children: r
+						children: t
 					})
 				}) }, e.id);
 				let i = e.items.some((e) => e.active);
-				return /* @__PURE__ */ a("li", { children: /* @__PURE__ */ a(n, {
+				return /* @__PURE__ */ o("li", { children: /* @__PURE__ */ o(r, {
 					items: [
 						e.href ? {
 							type: "link",
@@ -67,7 +68,7 @@ function l({ label: l = "Navegación principal", emptyLabel: u = "sin docs", rai
 						...e.href ? [{ type: "separator" }] : [],
 						...e.items.map((e) => e.empty ? {
 							type: "label",
-							label: `${e.label} · ${u}`
+							label: `${e.label} · ${v("empty", d)}`
 						} : {
 							type: "link",
 							label: e.label,
@@ -77,137 +78,137 @@ function l({ label: l = "Navegación principal", emptyLabel: u = "sin docs", rai
 					side: "right",
 					align: "start",
 					openOnHover: !0,
-					renderLink: (e) => g({
+					renderLink: (e) => _({
 						...e,
 						href: e.href,
 						className: e.className,
 						children: e.children
 					}),
-					trigger: /* @__PURE__ */ a("button", {
+					trigger: /* @__PURE__ */ o("button", {
 						type: "button",
 						className: ["sidebar-nav__rail-item", i ? "sidebar-nav__rail-item--active" : ""].filter(Boolean).join(" "),
 						"aria-label": e.label,
-						children: r
+						children: t
 					})
 				}) }, e.id);
 			})
 		})
-	}) : /* @__PURE__ */ a("nav", {
+	}) : /* @__PURE__ */ o("nav", {
 		className: "sidebar-nav",
-		"aria-label": l,
-		children: /* @__PURE__ */ a(s.Root, {
+		"aria-label": v("label", u),
+		children: /* @__PURE__ */ o(c.Root, {
 			className: "sidebar-nav__accordion",
 			multiple: !0,
-			..._,
-			children: f.map((t) => {
-				if (t.kind === "link") {
-					let e = ["sidebar-nav__top-link", t.active ? "sidebar-nav__top-link--active" : ""].filter(Boolean).join(" ");
-					return t.empty ? /* @__PURE__ */ a("div", { children: /* @__PURE__ */ o("span", {
-						className: `${e} sidebar-nav__top-link--empty`,
+			...y,
+			children: p.map((e) => {
+				if (e.kind === "link") {
+					let t = ["sidebar-nav__top-link", e.active ? "sidebar-nav__top-link--active" : ""].filter(Boolean).join(" ");
+					return e.empty ? /* @__PURE__ */ o("div", { children: /* @__PURE__ */ s("span", {
+						className: `${t} sidebar-nav__top-link--empty`,
 						"aria-disabled": "true",
-						title: t.label,
+						title: e.label,
 						children: [
-							t.icon && /* @__PURE__ */ a("span", {
+							e.icon && /* @__PURE__ */ o("span", {
 								className: "sidebar-nav__item-icon",
 								"aria-hidden": "true",
-								children: t.icon
+								children: e.icon
 							}),
-							/* @__PURE__ */ a("span", {
+							/* @__PURE__ */ o("span", {
 								className: "sidebar-nav__item-label",
-								children: t.label
+								children: e.label
 							}),
-							/* @__PURE__ */ a("span", {
+							/* @__PURE__ */ o("span", {
 								className: "sidebar-nav__empty-mark",
-								children: u
+								children: v("empty", d)
 							})
 						]
-					}) }, t.id) : /* @__PURE__ */ a("div", { children: g({
-						href: t.href,
-						className: e,
-						title: t.label,
-						"aria-current": t.active ? "page" : void 0,
-						children: /* @__PURE__ */ o(i, { children: [t.icon && /* @__PURE__ */ a("span", {
+					}) }, e.id) : /* @__PURE__ */ o("div", { children: _({
+						href: e.href,
+						className: t,
+						title: e.label,
+						"aria-current": e.active ? "page" : void 0,
+						children: /* @__PURE__ */ s(a, { children: [e.icon && /* @__PURE__ */ o("span", {
 							className: "sidebar-nav__item-icon",
 							"aria-hidden": "true",
-							children: t.icon
-						}), /* @__PURE__ */ a("span", {
+							children: e.icon
+						}), /* @__PURE__ */ o("span", {
 							className: "sidebar-nav__item-label",
-							children: t.label
+							children: e.label
 						})] })
-					}) }, t.id);
+					}) }, e.id);
 				}
-				return /* @__PURE__ */ o(s.Item, {
-					value: t.id,
+				return /* @__PURE__ */ s(c.Item, {
+					value: e.id,
 					className: "sidebar-nav__group",
-					children: [/* @__PURE__ */ o(s.Header, {
+					children: [/* @__PURE__ */ s(c.Header, {
 						className: "sidebar-nav__group-header",
-						children: [t.href ? g({
-							href: t.href,
+						children: [e.href ? _({
+							href: e.href,
 							className: "sidebar-nav__group-label",
-							title: t.label,
-							children: /* @__PURE__ */ o(i, { children: [t.icon && /* @__PURE__ */ a("span", {
+							title: e.label,
+							children: /* @__PURE__ */ s(a, { children: [e.icon && /* @__PURE__ */ o("span", {
 								className: "sidebar-nav__item-icon",
 								"aria-hidden": "true",
-								children: t.icon
-							}), /* @__PURE__ */ a("span", {
+								children: e.icon
+							}), /* @__PURE__ */ o("span", {
 								className: "sidebar-nav__item-label",
-								children: t.label
+								children: e.label
 							})] })
-						}) : /* @__PURE__ */ o("span", {
+						}) : /* @__PURE__ */ s("span", {
 							className: "sidebar-nav__group-label",
-							title: t.label,
-							children: [t.icon && /* @__PURE__ */ a("span", {
+							title: e.label,
+							children: [e.icon && /* @__PURE__ */ o("span", {
 								className: "sidebar-nav__item-icon",
 								"aria-hidden": "true",
-								children: t.icon
-							}), /* @__PURE__ */ a("span", {
+								children: e.icon
+							}), /* @__PURE__ */ o("span", {
 								className: "sidebar-nav__item-label",
-								children: t.label
+								children: e.label
 							})]
-						}), /* @__PURE__ */ a(s.Trigger, {
+						}), /* @__PURE__ */ o(c.Trigger, {
 							className: "sidebar-nav__group-chevron",
-							children: /* @__PURE__ */ a(e, {
+							children: /* @__PURE__ */ o(t, {
 								name: "chevron",
 								className: "sidebar-nav__group-chevron-icon",
 								size: "sm"
 							})
 						})]
-					}), /* @__PURE__ */ a(s.Panel, {
+					}), /* @__PURE__ */ o(c.Panel, {
 						className: "sidebar-nav__group-content",
-						children: /* @__PURE__ */ a("div", {
+						children: /* @__PURE__ */ o("div", {
 							className: "sidebar-nav__group-content-inner",
-							children: /* @__PURE__ */ a("ul", {
+							children: /* @__PURE__ */ o("ul", {
 								className: "sidebar-nav__items",
 								role: "list",
-								children: t.items.map((e) => {
+								children: e.items.map((e) => {
 									let t = ["sidebar-nav__item", e.active ? "sidebar-nav__item--active" : ""].filter(Boolean).join(" ");
-									return e.empty ? /* @__PURE__ */ a("li", { children: /* @__PURE__ */ o("span", {
+									return e.empty ? /* @__PURE__ */ o("li", { children: /* @__PURE__ */ s("span", {
 										className: `${t} sidebar-nav__item--empty`,
 										"aria-disabled": "true",
 										children: [
-											e.icon && /* @__PURE__ */ a("span", {
+											e.icon && /* @__PURE__ */ o("span", {
 												className: "sidebar-nav__item-icon",
 												"aria-hidden": "true",
 												children: e.icon
 											}),
-											/* @__PURE__ */ a("span", {
+											/* @__PURE__ */ o("span", {
 												className: "sidebar-nav__item-label",
 												children: e.label
 											}),
-											/* @__PURE__ */ a("span", {
+											/* @__PURE__ */ o("span", {
 												className: "sidebar-nav__empty-mark",
-												children: u
+												children: v("empty", d)
 											})
 										]
-									}) }, e.id) : /* @__PURE__ */ a("li", { children: g({
+									}) }, e.id) : /* @__PURE__ */ o("li", { children: _({
 										href: e.href,
 										className: t,
 										"aria-current": e.active ? "page" : void 0,
-										children: /* @__PURE__ */ o(i, { children: [e.icon && /* @__PURE__ */ a("span", {
+										children: /* @__PURE__ */ s(a, { children: [e.icon && /* @__PURE__ */ o("span", {
 											className: "sidebar-nav__item-icon",
 											"aria-hidden": "true",
 											children: e.icon
-										}), /* @__PURE__ */ a("span", {
+										}), /* @__PURE__ */ o("span", {
 											className: "sidebar-nav__item-label",
 											children: e.label
 										})] })
@@ -216,10 +217,10 @@ function l({ label: l = "Navegación principal", emptyLabel: u = "sin docs", rai
 							})
 						})
 					})]
-				}, t.id);
+				}, e.id);
 			})
 		})
 	});
 }
 //#endregion
-export { l as SidebarNav };
+export { u as SidebarNav };

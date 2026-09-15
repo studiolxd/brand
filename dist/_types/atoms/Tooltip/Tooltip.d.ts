@@ -41,6 +41,13 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLElement>, 'c
      * @default true
      */
     describe?: boolean;
+    /**
+     * Nodo DOM donde montar el portal. Por defecto, el nodo de la superficie que
+     * llegue por contexto —`SiteShell` publica el suyo, para que la capa herede
+     * la talla de la superficie pública— y, si no hay ninguna, `document.body`.
+     * Pásalo solo para llevar la capa a otro sitio: gana siempre.
+     */
+    container?: HTMLElement | null;
     /** Clase adicional para el **bocadillo** (no para el disparador). */
     className?: string;
 }

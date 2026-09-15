@@ -31,6 +31,20 @@ import type { AppLauncherMessages } from '../molecules/AppLauncher/AppLauncher';
 import type { FloatingDockMessages } from '../sections/FloatingDock/FloatingDock';
 import type { NotificationButtonMessages } from '../molecules/NotificationButton/NotificationButton';
 import type { NotificationPanelMessages } from '../molecules/NotificationPanel/NotificationPanel';
+import type { MenuButtonMessages } from '../atoms/MenuButton/MenuButton';
+import type { AppRootMessages } from '../sections/AppRoot/AppRoot';
+import type { AppShellMessages } from '../sections/AppShell/AppShell';
+import type { SidebarMessages } from '../sections/Sidebar/Sidebar';
+import type { SidebarNavMessages } from '../molecules/SidebarNav/SidebarNav';
+import type { SiteNavMessages } from '../molecules/SiteNav/SiteNav';
+import type { SiteHeaderMessages } from '../sections/SiteHeader/SiteHeader';
+import type { UserMenuMessages } from '../molecules/UserMenu/UserMenu';
+import type { OrgSwitcherMessages } from '../molecules/OrgSwitcher/OrgSwitcher';
+import type { BreadcrumbMessages } from '../molecules/Breadcrumb/Breadcrumb';
+import type { TableOfContentsMessages } from '../molecules/TableOfContents/TableOfContents';
+import type { PrevNextNavMessages } from '../molecules/PrevNextNav/PrevNextNav';
+import type { PublicPageShellMessages } from '../templates/PublicPageShell/PublicPageShell';
+import type { OnboardingShellMessages } from '../templates/OnboardingShell/OnboardingShell';
 /**
  * El contrato de textos de la librería: un espacio por componente, y dentro
  * de cada espacio **todas las claves obligatorias**.
@@ -86,5 +100,19 @@ export interface BrandMessages {
     floatingDock: FloatingDockMessages;
     notificationButton: NotificationButtonMessages;
     notificationPanel: NotificationPanelMessages;
+    menuButton: MenuButtonMessages;
+    appRoot: AppRootMessages;
+    appShell: AppShellMessages;
+    sidebar: SidebarMessages;
+    sidebarNav: SidebarNavMessages;
+    siteNav: SiteNavMessages;
+    siteHeader: SiteHeaderMessages;
+    userMenu: UserMenuMessages;
+    orgSwitcher: OrgSwitcherMessages;
+    breadcrumb: BreadcrumbMessages;
+    tableOfContents: TableOfContentsMessages;
+    prevNextNav: PrevNextNavMessages;
+    publicPageShell: PublicPageShellMessages;
+    onboardingShell: OnboardingShellMessages;
 }
-export type { PaginationMessages, TableMessages, DataTableMessages, InputFieldMessages, PasswordFieldMessages, SelectMessages, MultiSelectMessages, NumberInputMessages, OtpInputMessages, InputPhoneMessages, AsyncSelectMessages, AsyncMultiSelectMessages, DocsSearchMessages, SearchFormMessages, FilterBarMessages, CalendarMessages, DatePickerMessages, TimeSelectMessages, FileUploadMessages, ImageCropDialogMessages, AvatarUploadMessages, ModalMessages, SheetMessages, ConfirmDialogMessages, AlertMessages, BannerMessages, ToasterMessages, ConsentMessages, CommandPaletteMessages, AppLauncherMessages, FloatingDockMessages, NotificationButtonMessages, NotificationPanelMessages, };
+export type { PaginationMessages, TableMessages, DataTableMessages, InputFieldMessages, PasswordFieldMessages, SelectMessages, MultiSelectMessages, NumberInputMessages, OtpInputMessages, InputPhoneMessages, AsyncSelectMessages, AsyncMultiSelectMessages, DocsSearchMessages, SearchFormMessages, FilterBarMessages, CalendarMessages, DatePickerMessages, TimeSelectMessages, FileUploadMessages, ImageCropDialogMessages, AvatarUploadMessages, ModalMessages, SheetMessages, ConfirmDialogMessages, AlertMessages, BannerMessages, ToasterMessages, ConsentMessages, CommandPaletteMessages, AppLauncherMessages, FloatingDockMessages, NotificationButtonMessages, NotificationPanelMessages, MenuButtonMessages, AppRootMessages, AppShellMessages, SidebarMessages, SidebarNavMessages, SiteNavMessages, SiteHeaderMessages, UserMenuMessages, OrgSwitcherMessages, BreadcrumbMessages, TableOfContentsMessages, PrevNextNavMessages, PublicPageShellMessages, OnboardingShellMessages, };

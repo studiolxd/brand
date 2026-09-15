@@ -70,13 +70,14 @@ export interface SelectProps {
     /** Estado de error accesible (lo pone el campo). */
     'aria-invalid'?: boolean;
     /**
-     * Nodo DOM donde montar el portal del dropdown (reenviado a `Select.Portal`
-     * de Base UI). Por defecto el portal se monta en `document.body`, que hereda
-     * el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`) sin
-     * configuración adicional. Solo hace falta pasar `container` cuando el Select
-     * vive dentro de un `.surface-dark` **anidado** (no en la raíz): ese contexto
-     * no llega a `document.body` por la cascada, así que hay que montar el portal
-     * dentro del propio contenedor con la clase.
+     * Nodo DOM donde montar el portal del dropdown (reenviado a `Select.Portal` de Base UI).
+     * Por defecto, el nodo de la superficie que llegue por contexto:
+     * `SiteShell` publica el suyo, de modo que la capa hereda la talla de la
+     * superficie pública en vez de abrirse a la de aplicación. Si no hay
+     * superficie, `document.body` — que ya hereda el tema activado en la raíz
+     * (`html.dark`/`[data-theme="dark"]`) sin configuración adicional. Pásalo
+     * solo para llevar la capa a otro sitio: un `.surface-dark` **anidado**, el
+     * cajón de un shell propio. Gana siempre.
      */
     container?: SelectPortalContainer;
 }

@@ -1,20 +1,28 @@
+'use client';
 import './site-shell.css';
-import { forwardRef as e } from "react";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { t as e } from "./_shared/portal-container.js";
+import { forwardRef as t, useCallback as n, useState as r } from "react";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/sections/SiteShell/SiteShell.tsx
-var r = e(function({ header: e, footer: r, children: i, className: a }, o) {
-	return /* @__PURE__ */ n("div", {
-		ref: o,
-		className: ["site-shell", a].filter(Boolean).join(" "),
-		children: [
-			e,
-			/* @__PURE__ */ t("div", {
-				className: "site-shell__main",
-				children: i
-			}),
-			r
-		]
+var o = t(function({ header: t, footer: o, children: s, className: c }, l) {
+	let [u, d] = r(null);
+	return /* @__PURE__ */ i("div", {
+		ref: n((e) => {
+			d(e), typeof l == "function" ? l(e) : l && (l.current = e);
+		}, [l]),
+		className: ["site-shell", c].filter(Boolean).join(" "),
+		children: /* @__PURE__ */ a(e.Provider, {
+			value: u,
+			children: [
+				t,
+				/* @__PURE__ */ i("div", {
+					className: "site-shell__main",
+					children: s
+				}),
+				o
+			]
+		})
 	});
 });
 //#endregion
-export { r as SiteShell };
+export { o as SiteShell };

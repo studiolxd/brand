@@ -1,122 +1,123 @@
 'use client';
 import './sidebar.css';
-import { n as e, t } from "./_shared/sidebarcontext.js";
-import { t as n } from "./_shared/appshellcontext.js";
-import { useCallback as r, useContext as i, useEffect as a, useRef as o, useState as s } from "react";
-import { jsx as c, jsxs as l } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { n as t, t as n } from "./_shared/sidebarcontext.js";
+import { t as r } from "./_shared/appshellcontext.js";
+import { useCallback as i, useContext as a, useEffect as o, useRef as s, useState as c } from "react";
+import { jsx as l, jsxs as u } from "react/jsx-runtime";
 //#region src/stories/sections/Sidebar/Sidebar.tsx
-function u(e, t) {
+function d(e, t) {
 	let n = document.createElement("div");
 	n.style.position = "absolute", n.style.inlineSize = `var(${t})`, e.appendChild(n);
 	let r = parseFloat(getComputedStyle(n).inlineSize);
 	return n.remove(), r;
 }
-function d({ logo: e, children: d, footer: f, id: p, label: m = "Barra lateral", resizerLabel: h = "Ancho de la barra lateral", resizerValueText: g = (e) => `${e} píxeles`, mode: _ }) {
-	let v = i(n), y = v ? v.sidebar : _ ?? "open", b = v ? v.isDesktop : !0, x = b && y === "rail", S = !b, C = o(null), w = o(null), [T, E] = s(null);
-	a(() => {
-		let e = C.current;
+function f({ logo: t, children: f, footer: p, id: m, label: h, resizerLabel: g, resizerValueText: _, mode: v }) {
+	let y = e("sidebar"), b = a(r), x = b ? b.sidebar : v ?? "open", S = b ? b.isDesktop : !0, C = S && x === "rail", w = !S, T = s(null), E = s(null), [D, O] = c(null);
+	o(() => {
+		let e = T.current;
 		if (!e) return;
 		let t = {
-			min: u(e, "--sidebar-min-width"),
-			max: u(e, "--sidebar-max-width"),
-			rail: u(e, "--sidebar-rail-width"),
-			base: u(e, "--sidebar-width")
+			min: d(e, "--sidebar-min-width"),
+			max: d(e, "--sidebar-max-width"),
+			rail: d(e, "--sidebar-rail-width"),
+			base: d(e, "--sidebar-width")
 		};
-		Object.values(t).every(Number.isFinite) && E(t);
+		Object.values(t).every(Number.isFinite) && O(t);
 	}, []);
-	let D = (e) => {
-		!S || !v || e.target.closest("a[href], [aria-haspopup=\"dialog\"]") && v.closeSidebar();
-	}, O = r((e) => {
-		let t = C.current;
-		if (!t || !v) return;
-		let n = u(t, "--sidebar-min-width"), r = u(t, "--sidebar-max-width");
-		e < u(t, "--sidebar-rail-width") ? v.setSidebar("closed") : e < n ? v.setSidebar("rail") : (v.setSidebar("open"), v.setSidebarWidth(Math.min(r, Math.round(e))));
-	}, [v]), k = (e) => {
-		if (!C.current) return;
+	let k = (e) => {
+		!w || !b || e.target.closest("a[href], [aria-haspopup=\"dialog\"]") && b.closeSidebar();
+	}, A = i((e) => {
+		let t = T.current;
+		if (!t || !b) return;
+		let n = d(t, "--sidebar-min-width"), r = d(t, "--sidebar-max-width");
+		e < d(t, "--sidebar-rail-width") ? b.setSidebar("closed") : e < n ? b.setSidebar("rail") : (b.setSidebar("open"), b.setSidebarWidth(Math.min(r, Math.round(e))));
+	}, [b]), j = (e) => {
+		if (!T.current) return;
 		e.preventDefault();
 		let t = e.currentTarget;
 		t.setPointerCapture(e.pointerId), t.dataset.dragging = "true";
-		let n = C.current.getBoundingClientRect().left, r = (e) => O(e.clientX - n), i = () => {
+		let n = T.current.getBoundingClientRect().left, r = (e) => A(e.clientX - n), i = () => {
 			delete t.dataset.dragging, t.removeEventListener("pointermove", r), t.removeEventListener("pointerup", i), t.removeEventListener("pointercancel", i);
 		};
 		t.addEventListener("pointermove", r), t.addEventListener("pointerup", i), t.addEventListener("pointercancel", i);
-	}, A = (e) => {
-		if (!C.current || !v) return;
-		let t = u(C.current, "--sidebar-resize-step-px"), n = C.current.getBoundingClientRect().width;
-		e.key === "ArrowLeft" && (e.preventDefault(), O(n - t)), e.key === "ArrowRight" && (e.preventDefault(), y === "open" ? O(n + t) : v.setSidebar("open")), e.key === "Home" && (e.preventDefault(), v.setSidebar("rail")), e.key === "End" && (e.preventDefault(), O(u(C.current, "--sidebar-max-width")));
+	}, M = (e) => {
+		if (!T.current || !b) return;
+		let t = d(T.current, "--sidebar-resize-step-px"), n = T.current.getBoundingClientRect().width;
+		e.key === "ArrowLeft" && (e.preventDefault(), A(n - t)), e.key === "ArrowRight" && (e.preventDefault(), x === "open" ? A(n + t) : b.setSidebar("open")), e.key === "Home" && (e.preventDefault(), b.setSidebar("rail")), e.key === "End" && (e.preventDefault(), A(d(T.current, "--sidebar-max-width")));
 	};
-	a(() => {
-		if (!S) return;
-		if (y === "open") {
-			w.current = document.activeElement, C.current?.focus();
+	o(() => {
+		if (!w) return;
+		if (x === "open") {
+			E.current = document.activeElement, T.current?.focus();
 			return;
 		}
-		let e = C.current, t = document.activeElement;
-		(e && t instanceof Node && e.contains(t) || t === document.body || t === null) && w.current?.focus?.(), w.current = null;
-	}, [S, y]);
-	let j = Math.round(y === "rail" ? T?.rail ?? 0 : (v?.sidebarWidth || T?.base) ?? 0), M = ["sidebar", S ? "sidebar--drawer" : `sidebar--${y}`].join(" ");
-	return /* @__PURE__ */ c(t.Provider, {
-		value: { rail: x },
-		children: /* @__PURE__ */ l("aside", {
-			ref: C,
-			id: p,
-			className: M,
-			"aria-label": m,
-			role: S && y === "open" ? "dialog" : void 0,
-			"aria-modal": S && y === "open" ? !0 : void 0,
-			"data-state": y,
-			tabIndex: S ? -1 : void 0,
-			inert: S && y === "closed" ? !0 : void 0,
-			onClick: D,
-			children: [/* @__PURE__ */ l("div", {
+		let e = T.current, t = document.activeElement;
+		(e && t instanceof Node && e.contains(t) || t === document.body || t === null) && E.current?.focus?.(), E.current = null;
+	}, [w, x]);
+	let N = Math.round(x === "rail" ? D?.rail ?? 0 : (b?.sidebarWidth || D?.base) ?? 0), P = ["sidebar", w ? "sidebar--drawer" : `sidebar--${x}`].join(" ");
+	return /* @__PURE__ */ l(n.Provider, {
+		value: { rail: C },
+		children: /* @__PURE__ */ u("aside", {
+			ref: T,
+			id: m,
+			className: P,
+			"aria-label": y("label", h),
+			role: w && x === "open" ? "dialog" : void 0,
+			"aria-modal": w && x === "open" ? !0 : void 0,
+			"data-state": x,
+			tabIndex: w ? -1 : void 0,
+			inert: w && x === "closed" ? !0 : void 0,
+			onClick: k,
+			children: [/* @__PURE__ */ u("div", {
 				className: "sidebar__inner",
 				children: [
-					e && /* @__PURE__ */ c("div", {
+					t && /* @__PURE__ */ l("div", {
 						className: "sidebar__header",
-						children: e
+						children: t
 					}),
-					/* @__PURE__ */ c("div", {
+					/* @__PURE__ */ l("div", {
 						className: "sidebar__panel",
-						children: d
-					}),
-					f && /* @__PURE__ */ c("div", {
-						className: "sidebar__footer",
 						children: f
+					}),
+					p && /* @__PURE__ */ l("div", {
+						className: "sidebar__footer",
+						children: p
 					})
 				]
-			}), b && v && y !== "closed" && /* @__PURE__ */ c("div", {
+			}), S && b && x !== "closed" && /* @__PURE__ */ l("div", {
 				className: "sidebar__resizer",
 				role: "separator",
 				"aria-orientation": "vertical",
-				"aria-label": h,
-				"aria-valuenow": j,
-				"aria-valuemin": T ? Math.round(T.rail) : void 0,
-				"aria-valuemax": T ? Math.round(T.max) : void 0,
-				"aria-valuetext": g(j),
+				"aria-label": y("resizer", g),
+				"aria-valuenow": N,
+				"aria-valuemin": D ? Math.round(D.rail) : void 0,
+				"aria-valuemax": D ? Math.round(D.max) : void 0,
+				"aria-valuetext": y("resizerValue", _)(N),
 				tabIndex: 0,
-				onPointerDown: k,
-				onKeyDown: A
+				onPointerDown: j,
+				onKeyDown: M
 			})]
 		})
 	});
 }
-function f({ className: e, ...t }) {
-	return /* @__PURE__ */ c("div", {
+function p({ className: e, ...t }) {
+	return /* @__PURE__ */ l("div", {
 		className: ["sidebar__group", e].filter(Boolean).join(" "),
 		...t
 	});
 }
-function p({ className: e, ...t }) {
-	return /* @__PURE__ */ c("div", {
+function m({ className: e, ...t }) {
+	return /* @__PURE__ */ l("div", {
 		className: ["sidebar__group-content", e].filter(Boolean).join(" "),
 		...t
 	});
 }
-function m({ className: e, ...t }) {
-	return /* @__PURE__ */ c("hr", {
+function h({ className: e, ...t }) {
+	return /* @__PURE__ */ l("hr", {
 		className: ["sidebar__separator", e].filter(Boolean).join(" "),
 		...t
 	});
 }
 //#endregion
-export { d as Sidebar, f as SidebarGroup, p as SidebarGroupContent, m as SidebarSeparator, e as useSidebar };
+export { f as Sidebar, p as SidebarGroup, m as SidebarGroupContent, h as SidebarSeparator, t as useSidebar };

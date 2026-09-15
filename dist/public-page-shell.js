@@ -1,34 +1,36 @@
 'use client';
 import './public-page-shell.css';
-import { Container as e } from "./container.js";
-import { ErrorBoundary as t } from "./error-boundary.js";
-import { SiteShell as n } from "./site-shell.js";
-import { forwardRef as r } from "react";
-import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Container as t } from "./container.js";
+import { ErrorBoundary as n } from "./error-boundary.js";
+import { SiteShell as r } from "./site-shell.js";
+import { forwardRef as i } from "react";
+import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
 //#region src/stories/templates/PublicPageShell/PublicPageShell.tsx
-var s = r(function({ children: r, header: s, footer: c, preferences: l, preferencesLabel: u = "Preferencias", id: d = "main-content", shell: f = !0 }, p) {
-	if (!f) return /* @__PURE__ */ a(i, { children: r });
-	let m = l && /* @__PURE__ */ a(e, {
+var c = i(function({ children: i, header: c, footer: l, preferences: u, preferencesLabel: d, id: f = "main-content", shell: p = !0 }, m) {
+	let h = e("publicPageShell");
+	if (!p) return /* @__PURE__ */ o(a, { children: i });
+	let g = u && /* @__PURE__ */ o(t, {
 		as: "section",
 		className: "public-page-shell__preferences",
-		"aria-label": u,
-		children: /* @__PURE__ */ a("div", {
+		"aria-label": h("preferences", d),
+		children: /* @__PURE__ */ o("div", {
 			className: "public-page-shell__preferences-row",
-			children: l
+			children: u
 		})
 	});
-	return /* @__PURE__ */ a(n, {
-		ref: p,
-		header: s && /* @__PURE__ */ a(t, { children: s }),
-		footer: (m || c) && /* @__PURE__ */ o(i, { children: [m && /* @__PURE__ */ a(t, { children: m }), c && /* @__PURE__ */ a(t, { children: c })] }),
-		children: /* @__PURE__ */ a(e, {
+	return /* @__PURE__ */ o(r, {
+		ref: m,
+		header: c && /* @__PURE__ */ o(n, { children: c }),
+		footer: (g || l) && /* @__PURE__ */ s(a, { children: [g && /* @__PURE__ */ o(n, { children: g }), l && /* @__PURE__ */ o(n, { children: l })] }),
+		children: /* @__PURE__ */ o(t, {
 			as: "main",
-			id: d,
+			id: f,
 			tabIndex: -1,
 			space: "xl",
-			children: r
+			children: i
 		})
 	});
 });
 //#endregion
-export { s as PublicPageShell };
+export { c as PublicPageShell };

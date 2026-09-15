@@ -49,4 +49,13 @@ export interface SiteNavProps {
  * `style-src 'self'` descarta el atributo sin avisar y el grupo de más caía
  * a la segunda fila.
  */
+/**
+ * El único texto que el índice dice por su cuenta, y es **cromo**: el nombre de
+ * la región de navegación. Los grupos y sus enlaces son **contenido** y vienen
+ * en `groups`.
+ */
+export interface SiteNavMessages {
+    /** Nombre accesible del `nav`. */
+    label: string;
+}
 export declare function SiteNav({ groups, label, renderLink, className, }: SiteNavProps): import("react/jsx-runtime").JSX.Element;

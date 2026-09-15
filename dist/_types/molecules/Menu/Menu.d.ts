@@ -29,6 +29,13 @@ export interface MenuProps {
     maxWidth?: string;
     /** Talla de los ítems, la del disparador (32/40/48): el panel desplegado casa con el control plegado, como en el Select. */
     size?: 'sm' | 'md' | 'lg';
+    /**
+     * Nodo DOM donde montar el portal. Por defecto, el nodo de la superficie que
+     * llegue por contexto —`SiteShell` publica el suyo, para que la capa herede
+     * la talla de la superficie pública— y, si no hay ninguna, `document.body`.
+     * Pásalo solo para llevar la capa a otro sitio: gana siempre.
+     */
+    container?: HTMLElement | null;
     className?: string;
 }
 /**
@@ -36,4 +43,4 @@ export interface MenuProps {
  * (tokens `menu.*`) de todos los menús; `ContextMenu`, `UserMenu`,
  * `OrgSwitcher` o `DropdownField` son este menú con un disparador concreto.
  */
-export declare function Menu({ trigger, items, value, onValueChange, renderLink, open, defaultOpen, onOpenChange, openOnHover, hoverDelay, side, align, sideOffset, minWidth, maxWidth, size, className, }: MenuProps): import("react/jsx-runtime").JSX.Element;
+export declare function Menu({ trigger, items, value, onValueChange, renderLink, open, defaultOpen, onOpenChange, openOnHover, hoverDelay, side, align, sideOffset, minWidth, maxWidth, size, container, className, }: MenuProps): import("react/jsx-runtime").JSX.Element;

@@ -1,39 +1,42 @@
+'use client';
 import './breadcrumb.css';
-import { jsx as e, jsxs as t } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { jsx as t, jsxs as n } from "react/jsx-runtime";
 //#region src/stories/molecules/Breadcrumb/Breadcrumb.tsx
-function n({ children: t, ...n }) {
-	return /* @__PURE__ */ e("a", {
+function r({ children: e, ...n }) {
+	return /* @__PURE__ */ t("a", {
 		...n,
-		children: t
+		children: e
 	});
 }
-function r({ items: r, renderLink: i = n, separator: a = "/", ariaLabel: o = "Migas de pan", className: s }) {
-	return /* @__PURE__ */ e("nav", {
-		"aria-label": o,
-		className: ["breadcrumb", s].filter(Boolean).join(" "),
-		children: /* @__PURE__ */ e("ol", {
+function i({ items: i, renderLink: a = r, separator: o = "/", ariaLabel: s, className: c }) {
+	let l = e("breadcrumb");
+	return /* @__PURE__ */ t("nav", {
+		"aria-label": l("label", s),
+		className: ["breadcrumb", c].filter(Boolean).join(" "),
+		children: /* @__PURE__ */ t("ol", {
 			className: "breadcrumb__list",
-			children: r.map((n, o) => {
-				let s = o === r.length - 1;
-				return /* @__PURE__ */ t("li", {
+			children: i.map((e, r) => {
+				let s = r === i.length - 1;
+				return /* @__PURE__ */ n("li", {
 					className: ["breadcrumb__item", s ? "breadcrumb__item--current" : ""].filter(Boolean).join(" "),
-					children: [s || !n.href ? /* @__PURE__ */ e("span", {
+					children: [s || !e.href ? /* @__PURE__ */ t("span", {
 						className: s ? "breadcrumb__current" : "breadcrumb__static",
 						...s ? { "aria-current": "page" } : {},
-						children: n.label
-					}) : i({
-						href: n.href,
-						children: n.label,
+						children: e.label
+					}) : a({
+						href: e.href,
+						children: e.label,
 						className: "breadcrumb__link"
-					}), !s && /* @__PURE__ */ e("span", {
+					}), !s && /* @__PURE__ */ t("span", {
 						className: "breadcrumb__separator",
 						"aria-hidden": "true",
-						children: a
+						children: o
 					})]
-				}, `${n.label}-${o}`);
+				}, `${e.label}-${r}`);
 			})
 		})
 	});
 }
 //#endregion
-export { r as Breadcrumb };
+export { i as Breadcrumb };

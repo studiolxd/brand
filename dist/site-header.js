@@ -1,74 +1,75 @@
 'use client';
 import './site-header.css';
-import { Container as e } from "./container.js";
-import { MenuButton as t } from "./menu-button.js";
-import { t as n } from "./_shared/logo.js";
-import { useEffect as r, useRef as i, useState as a } from "react";
-import { jsx as o, jsxs as s } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Container as t } from "./container.js";
+import { MenuButton as n } from "./menu-button.js";
+import { t as r } from "./_shared/logo.js";
+import { useEffect as i, useRef as a, useState as o } from "react";
+import { jsx as s, jsxs as c } from "react/jsx-runtime";
 //#region src/stories/sections/SiteHeader/SiteHeader.tsx
-function c({ children: e, ...t }) {
-	return /* @__PURE__ */ o("a", {
+function l({ children: e, ...t }) {
+	return /* @__PURE__ */ s("a", {
 		...t,
 		children: e
 	});
 }
-function l({ logoHref: l = "/", logoLabel: u = "Studio LXD — ir al inicio", menuLabel: d = "Menú de navegación", menuCloseLabel: f, logoSize: p = "xxl", logo: m = /* @__PURE__ */ o(n, { size: p }), menuButtonSize: h = "lg", renderLogoLink: g = c, width: _ = "xl", open: v, onOpenChange: y, children: b, settings: x, panelId: S = "site-header-panel", actions: C, language: w }) {
-	let [T, E] = a(!1), D = v !== void 0, O = D ? v : T, k = !!(b || x || w), A = i(null), j = i(null), M = (e) => {
-		D || E(e), y?.(e);
+function u({ logoHref: u = "/", logoLabel: d, menuLabel: f, menuCloseLabel: p, logoSize: m = "xxl", logo: h = /* @__PURE__ */ s(r, { size: m }), menuButtonSize: g = "lg", renderLogoLink: _ = l, width: v = "xl", open: y, onOpenChange: b, children: x, settings: S, panelId: C = "site-header-panel", actions: w, language: T }) {
+	let E = e("siteHeader"), [D, O] = o(!1), k = y !== void 0, A = k ? y : D, j = !!(x || S || T), M = a(null), N = a(null), P = (e) => {
+		k || O(e), b?.(e);
 	};
-	return r(() => {
-		if (!O) return;
+	return i(() => {
+		if (!A) return;
 		let e = (e) => {
-			e.key === "Escape" && (M(!1), j.current?.focus());
+			e.key === "Escape" && (P(!1), N.current?.focus());
 		}, t = (e) => {
 			let t = e.target;
-			A.current?.contains(t) || t?.closest("[role=\"menu\"], [role=\"listbox\"], [role=\"dialog\"]") || M(!1);
+			M.current?.contains(t) || t?.closest("[role=\"menu\"], [role=\"listbox\"], [role=\"dialog\"]") || P(!1);
 		};
 		document.addEventListener("keydown", e), document.addEventListener("pointerdown", t);
 		let n = document.body.style.overflow;
 		return document.body.style.overflow = "hidden", () => {
 			document.removeEventListener("keydown", e), document.removeEventListener("pointerdown", t), document.body.style.overflow = n;
 		};
-	}, [O]), /* @__PURE__ */ o("header", {
-		ref: A,
+	}, [A]), /* @__PURE__ */ s("header", {
+		ref: M,
 		className: "site-header",
-		children: /* @__PURE__ */ s(e, {
-			width: _,
+		children: /* @__PURE__ */ c(t, {
+			width: v,
 			innerClassName: "site-header__bar",
 			children: [
-				g({
-					href: l,
+				_({
+					href: u,
 					className: "site-header__logo",
-					"aria-label": u,
-					children: m
+					"aria-label": E("logo", d),
+					children: h
 				}),
-				/* @__PURE__ */ s("div", {
+				/* @__PURE__ */ c("div", {
 					className: "site-header__controls",
-					children: [C && /* @__PURE__ */ o("div", {
+					children: [w && /* @__PURE__ */ s("div", {
 						className: "site-header__actions",
-						children: C
-					}), k && /* @__PURE__ */ o(t, {
-						ref: j,
-						isOpen: O,
-						onClick: () => M(!O),
-						label: d,
-						closeLabel: f,
-						size: h,
-						"aria-controls": S
+						children: w
+					}), j && /* @__PURE__ */ s(n, {
+						ref: N,
+						isOpen: A,
+						onClick: () => P(!A),
+						label: f,
+						closeLabel: p,
+						size: g,
+						"aria-controls": C
 					})]
 				}),
-				k && /* @__PURE__ */ o("div", {
-					className: ["site-header__panel", O ? "site-header__panel--open" : ""].filter(Boolean).join(" "),
-					id: S,
-					inert: !O,
-					"aria-hidden": !O,
-					children: /* @__PURE__ */ s(e, {
-						width: _,
+				j && /* @__PURE__ */ s("div", {
+					className: ["site-header__panel", A ? "site-header__panel--open" : ""].filter(Boolean).join(" "),
+					id: C,
+					inert: !A,
+					"aria-hidden": !A,
+					children: /* @__PURE__ */ c(t, {
+						width: v,
 						space: "none",
 						innerClassName: "site-header__panel-inner",
-						children: [b, (w || x) && /* @__PURE__ */ s("div", {
+						children: [x, (T || S) && /* @__PURE__ */ c("div", {
 							className: "site-header__settings",
-							children: [w, x]
+							children: [T, S]
 						})]
 					})
 				})
@@ -77,4 +78,4 @@ function l({ logoHref: l = "/", logoLabel: u = "Studio LXD — ir al inicio", me
 	});
 }
 //#endregion
-export { l as SiteHeader };
+export { u as SiteHeader };

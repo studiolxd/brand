@@ -14,10 +14,18 @@ export interface BreadcrumbProps {
     renderLink?: (props: BreadcrumbRenderLinkProps) => ReactNode;
     separator?: ReactNode;
     /**
-     * `aria-label` del `<nav>`. Default: «Migas de pan» (castellano).
-     * Una app multiidioma debe pasarlo traducido.
+     * `aria-label` del `<nav>`. **Sin default**: sin él, sale de
+     * `breadcrumb.label` del `BrandMessagesProvider`.
      */
     ariaLabel?: string;
     className?: string;
+}
+/**
+ * El único texto que las migas dicen por su cuenta, y es **cromo**: el nombre de
+ * la región. Los rótulos del rastro son **contenido** y vienen en `items`.
+ */
+export interface BreadcrumbMessages {
+    /** Nombre accesible del `nav`. */
+    label: string;
 }
 export declare function Breadcrumb({ items, renderLink, separator, ariaLabel, className, }: BreadcrumbProps): import("react/jsx-runtime").JSX.Element;

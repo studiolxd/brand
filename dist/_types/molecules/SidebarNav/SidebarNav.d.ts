@@ -41,11 +41,14 @@ export type SidebarNavRenderLinkProps = React.AnchorHTMLAttributes<HTMLAnchorEle
     'aria-current'?: 'page';
 };
 export interface SidebarNavProps {
-    /** Nombre accesible del `nav`. */
+    /**
+     * Nombre accesible del `nav`. **Sin default**: sin él, sale de
+     * `sidebarNav.label` del `BrandMessagesProvider`.
+     */
     label?: string;
     /**
-     * Marca de las entradas vacías (`empty`). Por defecto, en castellano:
-     * «sin docs».
+     * Marca de las entradas vacías (`empty`). **Sin default**: sale de
+     * `sidebarNav.empty`. Solo se lee cuando hay alguna entrada vacía.
      */
     emptyLabel?: string;
     /** Solo iconos: los enlaces con tooltip, los grupos como menú. Sin él, lo decide la `Sidebar` (rail). */
@@ -55,5 +58,17 @@ export interface SidebarNavProps {
     value?: string[];
     onValueChange?: (value: string[]) => void;
     renderLink?: (props: SidebarNavRenderLinkProps) => ReactNode;
+}
+/**
+ * Los dos textos de la navegación, los dos **cromo**: el nombre de la región
+ * («Principal», el mismo en toda la suite) y la marca que se pone a una entrada
+ * sin contenido. Los rótulos de las entradas son **contenido** y siguen
+ * viniendo en `entries`.
+ */
+export interface SidebarNavMessages {
+    /** Nombre accesible del `nav`. */
+    label: string;
+    /** Marca de las entradas sin contenido. */
+    empty: string;
 }
 export declare function SidebarNav({ label, emptyLabel, rail, entries, defaultValue, value, onValueChange, renderLink, }: SidebarNavProps): import("react/jsx-runtime").JSX.Element;

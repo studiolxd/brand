@@ -17,8 +17,21 @@ export interface AppShellProps {
     /** Ancho inicial de la sidebar desplegada (px). Sin él, el token `sidebar.width`. */
     defaultSidebarWidth?: number;
     onSidebarWidthChange?: (width: number) => void;
-    /** Texto del enlace de salto al contenido (`SkipLink`). Default: castellano. */
+    /**
+     * Texto del enlace de salto al contenido (`SkipLink`). **Sin default**: sin
+     * él, sale de `appShell.skipToContent` del `BrandMessagesProvider`.
+     */
     skipLabel?: string;
+}
+/**
+ * El único texto que el armazón dice por su cuenta, y es **cromo**: el enlace
+ * de salto al contenido dice lo mismo en todas las pantallas de todas las
+ * aplicaciones. Lo que hay dentro del armazón —la barra, la navegación, la
+ * página— lo escribe el producto.
+ */
+export interface AppShellMessages {
+    /** Texto del enlace de salto al contenido. */
+    skipToContent: string;
 }
 /**
  * El armazón de una aplicación: barra superior, barra lateral y contenido.

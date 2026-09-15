@@ -1,11 +1,13 @@
-import { SkipLink as e } from "./skip-link.js";
-import { Fragment as t, jsx as n, jsxs as r } from "react/jsx-runtime";
+'use client';
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { SkipLink as t } from "./skip-link.js";
+import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/sections/AppRoot/AppRoot.tsx
-function i({ skipLabel: i = "Saltar al contenido principal", skipHref: a = "#main-content", children: o }) {
-	return /* @__PURE__ */ r(t, { children: [/* @__PURE__ */ n(e, {
-		href: a,
-		children: i
-	}), o] });
+function a({ skipLabel: a, skipHref: o = "#main-content", children: s }) {
+	return /* @__PURE__ */ i(n, { children: [/* @__PURE__ */ r(t, {
+		href: o,
+		children: e("appRoot")("skipToContent", a)
+	}), s] });
 }
 //#endregion
-export { i as AppRoot };
+export { a as AppRoot };

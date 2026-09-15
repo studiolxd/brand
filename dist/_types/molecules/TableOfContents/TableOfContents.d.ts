@@ -17,8 +17,8 @@ export interface TableOfContentsProps extends Omit<React.ComponentPropsWithoutRe
      */
     activeId?: string;
     /**
-     * Nombre accesible del `nav`. Por defecto, en castellano.
-     * @default 'En esta página'
+     * Nombre accesible del `nav`. **Sin default**: sin él, sale de
+     * `tableOfContents.label` del `BrandMessagesProvider`.
      */
     ariaLabel?: string;
     /** Rótulo visible sobre la lista. Sin él, no se pinta ninguno. */
@@ -46,4 +46,13 @@ export interface TableOfContentsProps extends Omit<React.ComponentPropsWithoutRe
  * `{...rest}` (`id`, `data-*`, `role`…) se reenvía al `<nav>`. El nombre
  * accesible sigue siendo `ariaLabel`.
  */
+/**
+ * El único texto que el índice dice por su cuenta, y es **cromo**: «En esta
+ * página» nombra la región, no la página. El rótulo visible (`title`) y los
+ * encabezados (`items`) son **contenido**.
+ */
+export interface TableOfContentsMessages {
+    /** Nombre accesible del `nav`. */
+    label: string;
+}
 export declare const TableOfContents: import("react").ForwardRefExoticComponent<TableOfContentsProps & import("react").RefAttributes<HTMLElement>>;

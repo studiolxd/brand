@@ -1,78 +1,79 @@
 'use client';
 import './app-shell.css';
-import { SkipLink as e } from "./skip-link.js";
-import { TooltipProvider as t } from "./tooltip.js";
-import { t as n } from "./_shared/css-properties.js";
-import { n as r, t as i } from "./_shared/appshellcontext.js";
-import { useCallback as a, useEffect as o, useMemo as s, useState as c } from "react";
-import { jsx as l, jsxs as u } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { SkipLink as t } from "./skip-link.js";
+import { TooltipProvider as n } from "./tooltip.js";
+import { t as r } from "./_shared/css-properties.js";
+import { n as i, t as a } from "./_shared/appshellcontext.js";
+import { useCallback as o, useEffect as s, useMemo as c, useState as l } from "react";
+import { jsx as u, jsxs as d } from "react/jsx-runtime";
 //#region src/stories/sections/AppShell/AppShell.tsx
-var d = "(min-width: 1024px)";
-function f() {
-	let [e, t] = c(() => typeof window > "u" ? !0 : window.matchMedia(d).matches);
-	return o(() => {
-		let e = window.matchMedia(d), n = () => t(e.matches);
+var f = "(min-width: 1024px)";
+function p() {
+	let [e, t] = l(() => typeof window > "u" ? !0 : window.matchMedia(f).matches);
+	return s(() => {
+		let e = window.matchMedia(f), n = () => t(e.matches);
 		return n(), e.addEventListener("change", n), () => e.removeEventListener("change", n);
 	}, []), e;
 }
-function p({ header: r, sidebar: d, children: p, defaultSidebar: m = "open", sidebarState: h, onSidebarChange: g, defaultSidebarWidth: _, onSidebarWidthChange: v, skipLabel: y = "Saltar al contenido principal" }) {
-	let b = f(), [x, S] = c(m), [C, w] = c(!1), [T, E] = c(_), D = b ? h ?? x : C ? "open" : "closed", O = a((e) => {
-		b ? (S(e), g?.(e)) : w(e === "open");
-	}, [b, g]), k = a(() => O(D === "open" ? "closed" : "open"), [O, D]), A = a(() => O("closed"), [O]), j = a((e) => {
-		E(e), v?.(e);
-	}, [v]);
-	o(() => {
-		if (b || !C) return;
+function m({ header: i, sidebar: f, children: m, defaultSidebar: h = "open", sidebarState: g, onSidebarChange: _, defaultSidebarWidth: v, onSidebarWidthChange: y, skipLabel: b }) {
+	let x = e("appShell"), S = p(), [C, w] = l(h), [T, E] = l(!1), [D, O] = l(v), k = S ? g ?? C : T ? "open" : "closed", A = o((e) => {
+		S ? (w(e), _?.(e)) : E(e === "open");
+	}, [S, _]), j = o(() => A(k === "open" ? "closed" : "open"), [A, k]), M = o(() => A("closed"), [A]), N = o((e) => {
+		O(e), y?.(e);
+	}, [y]);
+	s(() => {
+		if (S || !T) return;
 		let e = (e) => {
-			e.key === "Escape" && w(!1);
+			e.key === "Escape" && E(!1);
 		};
 		document.addEventListener("keydown", e);
 		let t = document.body.style.overflow;
 		return document.body.style.overflow = "hidden", () => {
 			document.removeEventListener("keydown", e), document.body.style.overflow = t;
 		};
-	}, [b, C]);
-	let M = s(() => ({
-		sidebar: D,
-		setSidebar: O,
-		sidebarWidth: T ?? 0,
-		setSidebarWidth: j,
-		toggleSidebar: k,
-		closeSidebar: A,
-		isDesktop: b
+	}, [S, T]);
+	let P = c(() => ({
+		sidebar: k,
+		setSidebar: A,
+		sidebarWidth: D ?? 0,
+		setSidebarWidth: N,
+		toggleSidebar: j,
+		closeSidebar: M,
+		isDesktop: S
 	}), [
-		D,
-		O,
-		T,
-		j,
 		k,
 		A,
-		b
-	]), N = n({ "--app-shell-sidebar-width": T ? `${T}px` : void 0 }), P = !b && C;
-	return /* @__PURE__ */ l(i.Provider, {
-		value: M,
-		children: /* @__PURE__ */ u(t, { children: [/* @__PURE__ */ l(e, {
+		D,
+		N,
+		j,
+		M,
+		S
+	]), F = r({ "--app-shell-sidebar-width": D ? `${D}px` : void 0 }), I = !S && T;
+	return /* @__PURE__ */ u(a.Provider, {
+		value: P,
+		children: /* @__PURE__ */ d(n, { children: [/* @__PURE__ */ u(t, {
 			href: "#main-content",
-			children: y
-		}), /* @__PURE__ */ u("div", {
-			ref: N,
+			children: x("skipToContent", b)
+		}), /* @__PURE__ */ d("div", {
+			ref: F,
 			className: "app-shell",
-			"data-sidebar": D,
-			children: [r, /* @__PURE__ */ u("div", {
+			"data-sidebar": k,
+			children: [i, /* @__PURE__ */ d("div", {
 				className: "app-shell__body",
 				children: [
-					d,
-					P && /* @__PURE__ */ l("div", {
+					f,
+					I && /* @__PURE__ */ u("div", {
 						className: "app-shell__backdrop",
-						onClick: A,
+						onClick: M,
 						"aria-hidden": "true"
 					}),
-					/* @__PURE__ */ l("main", {
+					/* @__PURE__ */ u("main", {
 						id: "main-content",
 						tabIndex: -1,
 						className: "app-shell__content",
-						inert: P || void 0,
-						children: p
+						inert: I || void 0,
+						children: m
 					})
 				]
 			})]
@@ -80,4 +81,4 @@ function p({ header: r, sidebar: d, children: p, defaultSidebar: m = "open", sid
 	});
 }
 //#endregion
-export { p as AppShell, r as useAppShell };
+export { m as AppShell, i as useAppShell };

@@ -1,54 +1,56 @@
+'use client';
 import './site-nav.css';
-import { Heading as e } from "./heading.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Heading as t } from "./heading.js";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/molecules/SiteNav/SiteNav.tsx
-function r({ href: e, children: n, className: r, "aria-current": i, target: a, rel: o }) {
-	return /* @__PURE__ */ t("a", {
+function i({ href: e, children: t, className: r, "aria-current": i, target: a, rel: o }) {
+	return /* @__PURE__ */ n("a", {
 		href: e,
 		className: r,
 		"aria-current": i,
 		target: a,
 		rel: o,
-		children: n
+		children: t
 	});
 }
-function i(e, t) {
+function a(e, t) {
 	return t || (e === "_blank" ? "noopener noreferrer" : void 0);
 }
-var a = 5;
-function o({ groups: o, label: s = "Navegación del sitio", renderLink: c = r, className: l }) {
-	let u = ["site-nav", l].filter(Boolean).join(" "), d = Math.min(o.length, a) || 1;
-	return /* @__PURE__ */ t("nav", {
-		className: u,
-		"aria-label": s,
-		"data-columns": d,
-		children: o.map((r) => /* @__PURE__ */ n("div", {
+var o = 5;
+function s({ groups: s, label: c, renderLink: l = i, className: u }) {
+	let d = e("siteNav"), f = ["site-nav", u].filter(Boolean).join(" "), p = Math.min(s.length, o) || 1;
+	return /* @__PURE__ */ n("nav", {
+		className: f,
+		"aria-label": d("label", c),
+		"data-columns": p,
+		children: s.map((e) => /* @__PURE__ */ r("div", {
 			className: "site-nav__group",
-			children: [/* @__PURE__ */ t(e, {
+			children: [/* @__PURE__ */ n(t, {
 				level: 2,
 				size: 6,
 				className: "site-nav__label",
-				children: r.href ? c({
-					href: r.href,
+				children: e.href ? l({
+					href: e.href,
 					className: "site-nav__label-link",
-					children: r.label
-				}) : r.label
-			}), /* @__PURE__ */ t("ul", {
+					children: e.label
+				}) : e.label
+			}), /* @__PURE__ */ n("ul", {
 				className: "site-nav__list",
-				children: r.items.map((e) => /* @__PURE__ */ t("li", {
+				children: e.items.map((e) => /* @__PURE__ */ n("li", {
 					className: "site-nav__item",
-					children: c({
+					children: l({
 						href: e.href,
 						className: ["site-nav__link", e.current ? "site-nav__link--current" : ""].filter(Boolean).join(" "),
 						"aria-current": e.current ? "page" : void 0,
 						target: e.target,
-						rel: i(e.target, e.rel),
+						rel: a(e.target, e.rel),
 						children: e.label
 					})
 				}, e.id))
 			})]
-		}, r.id))
+		}, e.id))
 	});
 }
 //#endregion
-export { o as SiteNav };
+export { s as SiteNav };
