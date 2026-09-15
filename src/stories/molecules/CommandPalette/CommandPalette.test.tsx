@@ -5,6 +5,7 @@ import { CommandPalette, type CommandPaletteGroup } from './CommandPalette';
 import type { ReactNode } from 'react';
 import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
 import { brandMessagesFixture as ES } from '../../../../.storybook/brandMessagesFixture';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 /**
  * Estas piezas ya no traen su castellano puesto: el cromo sale del catálogo.
@@ -271,5 +272,47 @@ describe('CommandPalette', () => {
       window.dispatchEvent(new KeyboardEvent('keydown', {}));
     }).not.toThrow();
     expect(onOpenChange).not.toHaveBeenCalled();
+  });
+});
+
+describe('el cromo sale del catálogo', () => {
+  it('sin props de texto, el título, el buscador, la lista y el vacío leen del proveedor', async () => {
+    const user = userEvent.setup();
+    const { groups } = makeGroups();
+    renderRTL(
+      <BrandMessagesProvider messages={EN}>
+        <CommandPalette open onOpenChange={vi.fn()} groups={groups} />
+      </BrandMessagesProvider>,
+    );
+    const dialog = await screen.findByRole('dialog', { name: 'Search for a command' });
+    expect(within(dialog).getByPlaceholderText('Type to search…')).toBeInTheDocument();
+    expect(within(dialog).getByRole('listbox', { name: 'Suggestions' })).toBeInTheDocument();
+    // El aspa es un reenvío puro: la pinta el `Modal` y sale de `modal.close`.
+    expect(within(dialog).getByRole('button', { name: 'Close' })).toBeInTheDocument();
+
+    await user.type(within(dialog).getByRole('combobox'), 'zzzz');
+    expect(await within(dialog).findByText('No results.')).toBeInTheDocument();
+  });
+
+  it('la prop gana al catálogo', async () => {
+    const { groups } = makeGroups();
+    renderRTL(
+      <BrandMessagesProvider messages={EN}>
+        <CommandPalette open onOpenChange={vi.fn()} groups={groups} title="Jump to" />
+      </BrandMessagesProvider>,
+    );
+    expect(await screen.findByRole('dialog', { name: 'Jump to' })).toBeInTheDocument();
+  });
+
+  it('los grupos y los ítems son contenido: no salen del catálogo', async () => {
+    const { groups } = makeGroups();
+    renderRTL(
+      <BrandMessagesProvider messages={EN}>
+        <CommandPalette open onOpenChange={vi.fn()} groups={groups} />
+      </BrandMessagesProvider>,
+    );
+    const dialog = await screen.findByRole('dialog');
+    expect(within(dialog).getByText('Navegación')).toBeInTheDocument();
+    expect(within(dialog).getByRole('option', { name: 'Inicio' })).toBeInTheDocument();
   });
 });

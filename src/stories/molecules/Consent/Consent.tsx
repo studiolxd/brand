@@ -8,6 +8,45 @@ import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { SwitcherField } from '../SwitcherField/SwitcherField';
 import { Sheet } from '../Sheet/Sheet';
 import { Modal } from '../Modal/Modal';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
+
+/**
+ * El cromo del consentimiento, y **solo el cromo**: lo que la banda y el
+ * panel dicen por su cuenta y vale igual en cualquier sitio que los monte.
+ *
+ * La línea cae aquí en medio de una pieza legal, así que conviene decirla
+ * entera:
+ *
+ * - **Los botones son cromo.** «Aceptar todas», «Rechazar» y «Preferencias»
+ *   nombran las tres salidas que la ePrivacy pide, y son las mismas en todos
+ *   los sitios: no describen qué se guarda, describen qué hace el botón.
+ * - **El título y el nombre de la región son cromo.** «Cookies» nombra el
+ *   mecanismo, no la política de nadie.
+ * - **`description` y `policyLabel` NO están aquí y son obligatorias.** El
+ *   texto legal depende de la jurisdicción y de lo que cada producto guarde
+ *   de verdad: un default de catálogo lo haría decir lo mismo en todas partes
+ *   —que es exactamente lo que un texto legal no puede hacer— y, siendo
+ *   opcional, nadie llegaría a escribir el bueno. Como el `confirmLabel` del
+ *   `ConfirmDialog`.
+ * - **Las categorías tampoco.** Su nombre y su descripción son contenido: qué
+ *   guarda cada una lo sabe el producto.
+ */
+export interface ConsentMessages {
+  /** Título de la banda. */
+  title: string;
+  /** Nombre accesible de la región de la banda (`role="region"`). */
+  regionLabel: string;
+  /** Rótulo del botón que acepta todas las categorías. */
+  acceptAll: string;
+  /** Rótulo del botón que rechaza las opcionales. */
+  rejectAll: string;
+  /** Rótulo del botón que abre el panel de preferencias. */
+  preferences: string;
+  /** Título del panel de preferencias. */
+  preferencesTitle: string;
+  /** Marca, solo para lectores de pantalla, de una categoría necesaria. */
+  alwaysOn: string;
+}
 
 /** Una categoría de tecnologías sobre la que se pide (o no) consentimiento. */
 export interface ConsentCategory {
@@ -28,8 +67,28 @@ export interface ConsentCategory {
 /** La decisión: qué categorías están aceptadas, por `id`. */
 export type ConsentValue = Record<string, boolean>;
 
-export interface ConsentBannerProps
-  extends Omit<React.ComponentPropsWithoutRef<'aside'>, 'title' | 'children' | 'onChange'> {
+/**
+ * El enlace a la política: o no está, o está **entero**. El texto del enlace
+ * es contenido —lo escribe la app y depende de la jurisdicción—, así que no
+ * sale del catálogo, y una `policyHref` sin `policyLabel` dejaría un enlace
+ * sin nombre. El tipo lo impide en compilación.
+ */
+export type ConsentPolicyProps =
+  | { policyHref?: undefined; policyLabel?: undefined; policyExternal?: undefined }
+  | {
+      /** URL de la política de cookies. */
+      policyHref: string;
+      /** Texto del enlace a la política. **Obligatorio con `policyHref`**: es contenido, no sale del catálogo. */
+      policyLabel: string;
+      /** Abre la política en otra pestaña (la política suele vivir en la web pública). */
+      policyExternal?: boolean;
+    };
+
+export interface ConsentBannerBaseProps
+  extends Omit<
+    React.ComponentPropsWithoutRef<'aside'>,
+    'title' | 'children' | 'onChange'
+  > {
   /**
    * Muestra la banda. Es la primera visita, o la decisión ha caducado: quién lo
    * sabe es el consumidor, que es también quien guarda la cookie. Default: `true`.
@@ -41,28 +100,42 @@ export interface ConsentBannerProps
   onRejectAll: () => void;
   /** Abre el panel de preferencias. Sin ella no se pinta el botón. */
   onOpenPreferences?: () => void;
-  /** Título de la banda. Default castellano: `'Cookies'`. */
+  /**
+   * Título de la banda. **Sin default**: sin él, sale de `consent.title` del
+   * `BrandMessagesProvider`.
+   */
   title?: ReactNode;
-  /** Texto de la banda. Default castellano. */
-  description?: ReactNode;
-  /** URL de la política de cookies. Sin ella no se pinta el enlace. */
-  policyHref?: string;
-  /** Texto del enlace a la política. Default castellano: `'Política de cookies'`. */
-  policyLabel?: string;
-  /** Abre la política en otra pestaña (la política suele vivir en la web pública). */
-  policyExternal?: boolean;
-  /** Etiqueta del botón de aceptar. Default castellano: `'Aceptar todas'`. */
+  /**
+   * Texto de la banda: qué se guarda y por qué. **Obligatorio y sin default**
+   * — es el texto legal, depende de la jurisdicción y de lo que el producto
+   * guarde de verdad, así que no sale del catálogo. Ver `ConsentMessages`.
+   */
+  description: ReactNode;
+  /**
+   * Etiqueta del botón de aceptar. **Sin default**: sin ella, sale de
+   * `consent.acceptAll` del proveedor.
+   */
   acceptAllLabel?: string;
-  /** Etiqueta del botón de rechazar. Default castellano: `'Rechazar'`. */
+  /**
+   * Etiqueta del botón de rechazar. **Sin default**: sin ella, sale de
+   * `consent.rejectAll` del proveedor.
+   */
   rejectAllLabel?: string;
-  /** Etiqueta del botón de preferencias. Default castellano: `'Preferencias'`. */
+  /**
+   * Etiqueta del botón de preferencias. **Sin default**: sin ella, sale de
+   * `consent.preferences` del proveedor. Solo se lee si hay
+   * `onOpenPreferences`: sin botón no se exige su texto.
+   */
   preferencesLabel?: string;
   /**
-   * Nombre accesible de la región. Default: el propio `title` cuando es texto;
-   * si el título lleva JSX, pásalo. Default castellano: `'Consentimiento de cookies'`.
+   * Nombre accesible de la región. **Sin default**: sin él, sale de
+   * `consent.regionLabel` del proveedor. Pásalo cuando el título lleve JSX y
+   * quieras que la región se nombre con otra cosa.
    */
   regionLabel?: string;
 }
+
+export type ConsentBannerProps = ConsentBannerBaseProps & ConsentPolicyProps;
 
 /**
  * La banda de consentimiento: qué se quiere guardar y tres salidas —aceptar,
@@ -79,30 +152,35 @@ export function ConsentBanner({
   onAcceptAll,
   onRejectAll,
   onOpenPreferences,
-  title = 'Cookies',
-  description = 'Usamos cookies propias y de terceros para que el sitio funcione y para entender cómo se usa. Puedes aceptarlas todas, rechazarlas o elegir por categorías.',
+  title,
+  description,
   policyHref,
-  policyLabel = 'Política de cookies',
+  policyLabel,
   policyExternal = false,
-  acceptAllLabel = 'Aceptar todas',
-  rejectAllLabel = 'Rechazar',
-  preferencesLabel = 'Preferencias',
-  regionLabel = 'Consentimiento de cookies',
+  acceptAllLabel,
+  rejectAllLabel,
+  preferencesLabel,
+  regionLabel,
   className,
   ...rest
 }: ConsentBannerProps) {
+  const t = useBrandMessages('consent');
   if (!open) return null;
 
   return (
     <aside
       className={['consent-banner', className].filter(Boolean).join(' ')}
       role="region"
-      aria-label={regionLabel}
+      aria-label={t('regionLabel', regionLabel)}
       {...rest}
     >
       <div className="consent-banner__inner">
         <div className="consent-banner__text">
-          <Heading level={2} size={3} className="consent-banner__title">{title}</Heading>
+          <Heading level={2} size={3} className="consent-banner__title">
+            {/* `title` es un `ReactNode`: se resuelve con el ternario en vez
+                de con el lector, que solo sabe de cadenas. */}
+            {title !== undefined ? title : t('title')}
+          </Heading>
           <Paragraph className="consent-banner__description">
             {description}
             {policyHref !== undefined && (
@@ -115,10 +193,12 @@ export function ConsentBanner({
         </div>
 
         <div className="consent-banner__actions">
-          <Button onClick={onAcceptAll}>{acceptAllLabel}</Button>
-          <Button onClick={onRejectAll}>{rejectAllLabel}</Button>
+          <Button onClick={onAcceptAll}>{t('acceptAll', acceptAllLabel)}</Button>
+          <Button onClick={onRejectAll}>{t('rejectAll', rejectAllLabel)}</Button>
           {onOpenPreferences && (
-            <Button variant="outline" onClick={onOpenPreferences}>{preferencesLabel}</Button>
+            <Button variant="outline" onClick={onOpenPreferences}>
+              {t('preferences', preferencesLabel)}
+            </Button>
           )}
         </div>
       </div>
@@ -154,17 +234,22 @@ export interface ConsentPreferencesProps {
   surface?: 'sheet' | 'modal';
   /** Borde por el que entra el panel (solo con `surface="sheet"`, la alternativa lateral que el sistema conserva para otros usos). Default: `'right'`. */
   side?: 'top' | 'right' | 'bottom' | 'left';
-  /** Título del panel. Default castellano: `'Preferencias de cookies'`. */
+  /**
+   * Título del panel. **Sin default**: sin él, sale de
+   * `consent.preferencesTitle` del `BrandMessagesProvider`.
+   */
   title?: ReactNode;
   /**
    * Nombre accesible del botón de cerrar. **Reenvío puro** al `Modal` o al
    * `Sheet` sobre el que se abre el panel: sin él, el aspa lee `modal.close`
-   * o `sheet.close` del `BrandMessagesProvider`. El resto de los textos de
-   * `Consent` sigue con su default castellano — este componente todavía no
-   * está migrado al proveedor.
+   * o `sheet.close` del `BrandMessagesProvider`. El espacio `consent` no
+   * repite la clave.
    */
   closeLabel?: string;
-  /** Marca de una categoría necesaria. Default castellano: `'Siempre activa'`. */
+  /**
+   * Marca de una categoría necesaria, solo para lectores de pantalla. **Sin
+   * default**: sin ella, sale de `consent.alwaysOn` del proveedor.
+   */
   alwaysOnLabel?: string;
   /**
    * Nodo DOM donde montar el portal del panel, reenviado a `Modal`/`Sheet`.
@@ -212,12 +297,13 @@ export function ConsentPreferences({
   onSave,
   surface = 'modal',
   side = 'right',
-  title = 'Preferencias de cookies',
+  title,
   closeLabel,
-  alwaysOnLabel = 'Siempre activa',
+  alwaysOnLabel,
   container,
   className,
 }: ConsentPreferencesProps) {
+  const t = useBrandMessages('consent');
   const controlled = onChange !== undefined;
   const [draft, setDraft] = useState<ConsentValue>(() => withRequired(value, categories));
 
@@ -256,7 +342,7 @@ export function ConsentPreferences({
                     dos elementos en línea puede colapsarse al calcular el nombre
                     accesible y dejar "NecesariasSiempre activa" pegado (detectado
                     en producción por public-shell). La coma no se colapsa nunca. */}
-                    <VisuallyHidden>{`, ${alwaysOnLabel}`}</VisuallyHidden>
+                    <VisuallyHidden>{`, ${t('alwaysOn', alwaysOnLabel)}`}</VisuallyHidden>
                   </>
                 ) : (
                   category.name
@@ -273,12 +359,16 @@ export function ConsentPreferences({
     </div>
   );
 
+  // `title` es un `ReactNode`: se resuelve con el ternario en vez de con el
+  // lector, que solo sabe de cadenas.
+  const resolvedTitle = title !== undefined ? title : t('preferencesTitle');
+
   if (surface === 'modal') {
     return (
       <Modal
         open={open}
         onClose={() => onOpenChange(false)}
-        title={typeof title === 'string' ? title : undefined}
+        title={typeof resolvedTitle === 'string' ? resolvedTitle : undefined}
         {...(closeLabel !== undefined ? { closeLabel } : {})}
         container={container}
       >
@@ -292,7 +382,7 @@ export function ConsentPreferences({
       open={open}
       onOpenChange={onOpenChange}
       side={side}
-      title={title}
+      title={resolvedTitle}
       {...(closeLabel !== undefined ? { closeLabel } : {})}
       container={container}
     >

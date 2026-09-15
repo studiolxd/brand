@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { expect, fn, screen, userEvent, waitFor, within } from 'storybook/test';
 import { NotificationPanel, type NotificationPanelItem } from './NotificationPanel';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const items: NotificationPanelItem[] = [
   {
@@ -377,5 +379,50 @@ export const ContratoSinCabecera: Story = {
     const primera = within(panel).getAllByRole('button')[0];
     await expect(primera.getBoundingClientRect().top - panel.getBoundingClientRect().top)
       .toBeLessThan(24);
+  },
+};
+
+/**
+ * El panel dice seis cosas por su cuenta —cómo se llama, qué marca una fila
+ * sin leer, qué dice cuando no hay nada, los dos destinos del pie y la acción
+ * sobre el conjunto— y las seis son cromo: salen de `notificationPanel.*`. El
+ * nombre de la campana es un **reenvío puro** al `NotificationButton`, que
+ * tiene su propio espacio. Las notificaciones son contenido: viajan en `items`
+ * con su hora ya formateada, así que siguen en castellano.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  args: { defaultOpen: true, onMarkAllRead: fn() },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <NotificationPanel {...args} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el cromo del panel y el de la campana leen cada uno de su espacio. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el cromo del panel lee del proveedor',
+  tags: ['!dev'],
+  args: { defaultOpen: true, onMarkAllRead: fn() },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <NotificationPanel {...args} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    // Reenvío puro: la campana sale de `notificationButton.countLabel`.
+    await expect(
+      within(canvasElement).getByRole('button', { name: 'Notifications: 2 unread' }),
+    ).toBeInTheDocument();
+    const panel = await screen.findByRole('dialog', { name: 'Notifications' });
+    await expect(within(panel).getByRole('button', { name: 'Mark all as read' })).toBeInTheDocument();
+    await expect(within(panel).getByRole('link', { name: 'See all notifications' })).toBeInTheDocument();
+    await expect(
+      within(panel).getByRole('link', { name: 'Notification preferences' }),
+    ).toBeInTheDocument();
+    await expect(within(panel).getAllByText('Unread').length).toBeGreaterThan(0);
+    // Las notificaciones no las toca el catálogo.
+    await expect(within(panel).getByText('hace 5 min')).toBeInTheDocument();
   },
 };

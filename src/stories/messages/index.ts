@@ -31,4 +31,10 @@ export type {
   AlertMessages,
   BannerMessages,
   ToasterMessages,
+  ConsentMessages,
+  CommandPaletteMessages,
+  AppLauncherMessages,
+  FloatingDockMessages,
+  NotificationButtonMessages,
+  NotificationPanelMessages,
 } from './BrandMessages';

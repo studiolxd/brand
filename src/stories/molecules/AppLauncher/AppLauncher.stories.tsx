@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within, screen, waitFor } from 'storybook/test';
 import { AppLauncher } from './AppLauncher';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 import type { LauncherApp } from './AppLauncher';
 
 const meta: Meta<typeof AppLauncher> = {
@@ -25,7 +27,16 @@ const demoApps: LauncherApp[] = [
   { id: 'aipricing', name: 'AI Pricing', url: 'https://aipricing.slxd.app', isNew: true },
 ];
 
-const labels = { open: 'Abrir launcher de apps', new: 'Nuevo' };
+/**
+ * El nombre accesible del disparador, el título del diálogo y la marca de app
+ * nueva son cromo y salen del catálogo que el Storybook monta en
+ * `preview.tsx`. Aquí solo queda lo que no es catálogo (`trigger`) o lo que
+ * una story concreta quiere anular.
+ */
+const labels = {};
+
+/** Lo que dice el catálogo castellano para el disparador sin rótulo. */
+const NOMBRE_DISPARADOR = 'Abrir el lanzador de aplicaciones';
 
 /**
  * `presentation` por defecto es `'modal'` desde v35: diálogo centrado, como
@@ -115,7 +126,7 @@ export const TestContrato: Story = {
     currentAppId: 'bricks',
   },
   play: async ({ canvasElement }) => {
-    const trigger = within(canvasElement).getByRole('button', { name: labels.open });
+    const trigger = within(canvasElement).getByRole('button', { name: NOMBRE_DISPARADOR });
     await expect(trigger).toHaveAttribute('aria-haspopup', 'dialog');
 
     await userEvent.click(trigger);
@@ -185,7 +196,7 @@ export const TestContratoPopover: Story = {
     presentation: 'popover',
   },
   play: async ({ canvasElement }) => {
-    const trigger = within(canvasElement).getByRole('button', { name: labels.open });
+    const trigger = within(canvasElement).getByRole('button', { name: NOMBRE_DISPARADOR });
     await expect(trigger).toHaveAttribute('aria-haspopup', 'dialog');
 
     await userEvent.click(trigger);
@@ -198,5 +209,49 @@ export const TestContratoPopover: Story = {
 
     await userEvent.keyboard('{Escape}');
     await waitFor(() => expect(screen.queryByRole('list')).not.toBeInTheDocument());
+  },
+};
+
+/**
+ * El lanzador dice tres cosas por su cuenta —cómo se llama su botón, cómo se
+ * titula el diálogo y qué marca una app nueva— y las tres son cromo: el
+ * lanzador es el mismo mueble en todas las apps de la suite. Los nombres de
+ * las aplicaciones son contenido y viajan en `apps`, así que con el catálogo
+ * en inglés el diálogo se llama «Applications» y las apps siguen llamándose
+ * como se llaman.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  args: { apps: demoApps, defaultOpen: true },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <AppLauncher {...args} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/**
+ * Test: sin `labels`, el cromo del lanzador sale del catálogo. El disparador se
+ * comprueba **antes** de abrir: con el diálogo abierto, Base UI deja el resto
+ * de la página inerte y el botón sale del árbol de accesibilidad.
+ */
+export const ContratoProveedor: Story = {
+  name: 'Test — el cromo del lanzador lee del proveedor',
+  tags: ['!dev'],
+  args: { apps: demoApps },
+  render: (args) => (
+    <BrandMessagesProvider messages={EN}>
+      <AppLauncher {...args} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const trigger = await within(canvasElement).findByRole('button', {
+      name: 'Open the app launcher',
+    });
+    await userEvent.click(trigger);
+
+    const dialog = await screen.findByRole('dialog', { name: 'Applications' });
+    await expect(within(dialog).getAllByText('New').length).toBeGreaterThan(0);
+    await expect(within(dialog).getByRole('link', { name: /Bricks/ })).toBeInTheDocument();
   },
 };

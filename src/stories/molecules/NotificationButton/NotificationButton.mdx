@@ -21,6 +21,34 @@ Es `color.error-fill`, el relleno de error del sistema: universal, el mismo en s
 
 El nombre del botón lleva el contador («Notificaciones: 3 sin leer»); el badge visible es decorativo para no leerlo dos veces. Las dos frases se traducen por separado: `label` es el nombre sin contador y `countLabel` es una función que recibe el número, para que la cifra pueda ir donde el idioma la coloque.
 
+## Internacionalización
+
+La campana solo dice cómo se llama, y las dos formas son **cromo**: salen de `notificationButton.*` del `BrandMessagesProvider` y ya **no traen castellano puesto**.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `label`, `countLabel` | `notificationButton.*` del proveedor | La campana se llama igual en toda la aplicación; lo único que cambia es el número, y por eso `countLabel` es una función. |
+| **Contenido** | — | — | La campana no enseña ninguna notificación: solo el contador. |
+
+```tsx
+import { BrandMessagesProvider } from "@studiolxd/brand/messages";
+
+<BrandMessagesProvider
+  messages={{
+    notificationButton: {
+      label: t("a11y.notifications"),
+      countLabel: (count) => t("notifications.unreadCount", { count }),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={Stories.TextosDelProveedor} />
+
+El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**: una campana sin contador no exige `countLabel`, y una con contador no exige `label`. El `NotificationPanel`, que monta esta campana, **no repite las claves**: sus props `label` y `countLabel` son un reenvío puro.
+
 ## Tokens
 
 <TokenTable tokens={notificationButtonTokens} />

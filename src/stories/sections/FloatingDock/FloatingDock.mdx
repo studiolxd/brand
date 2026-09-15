@@ -66,7 +66,8 @@ barra de gestos el dock se separa de ella en vez de meterse debajo.
 <Canvas of={FloatingDockStories.ConContador} />
 
 Con `badge` mayor que cero aparece el contador y se anuncia una vez por
-`aria-live="polite"` con `badgeLabel` («3 mensajes nuevos» por defecto). Para
+`aria-live="polite"` con `badgeLabel`, que sin prop sale de `floatingDock.badge`
+del proveedor. Para
 un contador que no son novedades —tareas pendientes, elementos de una lista—,
 `badgeLive={false}`: anunciarlo interrumpiría sin aportar.
 
@@ -123,6 +124,56 @@ panel aparece y desaparece sin moverse.
 
 ---
 
+## Internacionalización
+
+El dock emite **dos** textos por su cuenta —cómo se llama el aspa y cómo se lee
+el contador— y los dos son **cromo**: salen de `floatingDock.*` del
+`BrandMessagesProvider` y ya **no traen castellano puesto**.
+
+### Por qué tiene espacio propio y no hereda `modal.close`
+
+Es la pregunta que había que responder antes de migrarlo, y la respuesta es que
+**el panel del dock no es un `Modal` y no puede serlo**. Son cuatro diferencias,
+y las cuatro son de hoy, no históricas:
+
+1. Es un diálogo **no modal** (`modal={false}`): no hay velo y la página de
+   detrás sigue viva.
+2. **No atrapa el foco**: se puede tabular fuera y seguir trabajando mientras
+   está abierto.
+3. Su portal monta **dentro del propio ancla**, no en `document.body`, para
+   heredar por cascada la superficie donde el consumidor lo haya puesto.
+4. Va **anclado a una esquina** de la ventana, no centrado, y el aspa vive
+   fuera de la cabecera.
+
+El `Modal` del sistema es lo contrario en las cuatro. Hacerlo pasar por él no
+habría sido quitar una clave del catálogo: habría sido cambiar el componente.
+Así que el aspa se llama aquí, en `floatingDock.close`.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `closeLabel`, `badgeLabel` | `floatingDock.*` del proveedor | El aspa cierra el panel y el contador se lee igual en cualquier dock. |
+| **Contenido** | `label`, `title`, `description`, `children` | props del producto | `label` nombra lo que abre el dock («Abrir el asistente»), y eso lo sabe la aplicación. Sigue siendo obligatorio. |
+
+```tsx
+import { BrandMessagesProvider } from "@studiolxd/brand/messages";
+
+<BrandMessagesProvider
+  messages={{
+    floatingDock: {
+      close: t("floatingDock.close"),
+      badge: (count) => t("floatingDock.badge", { count }),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={FloatingDockStories.TextosDelProveedor} />
+
+El orden es **prop → proveedor → error**, y el texto se lee **donde se pinta**:
+un dock sin contador no exige `floatingDock.badge`.
+
 ## Tokens
 
 <TokenTable tokens={floatingDockTokens} />
@@ -139,6 +190,7 @@ panel aparece y desaparece sin moverse.
   cierre con Escape o con el aspa. No queda atrapado: se puede tabular fuera y
   seguir trabajando en la página.
 - **Aspa**: el [CloseButton](?path=/docs/atoms-closebutton--docs) del sistema,
+  con su nombre en `floatingDock.close` (espacio propio, no `modal.close`),
   a 32px de caja y 24px de glifo, en la tinta desde el reposo, con su propio
   anillo de `:focus-visible` — nunca fondo ni cambio de color en hover.
 - **Contador**: `aria-hidden` en el número; el anuncio va por la región

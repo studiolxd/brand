@@ -6,6 +6,8 @@ import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { SiteShell } from '../../sections/SiteShell/SiteShell';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const categorias: ConsentCategory[] = [
   {
@@ -28,6 +30,15 @@ const categorias: ConsentCategory[] = [
 
 const decisionInicial: ConsentValue = { necessary: true, analytics: false, marketing: false };
 
+/**
+ * El texto legal. Es **contenido**: lo escribe la aplicación y depende de la
+ * jurisdicción y de lo que el producto guarde de verdad, así que
+ * `description` es obligatoria y no sale del catálogo. Aquí vive en la story
+ * porque la story es quien hace de aplicación.
+ */
+const textoLegal =
+  'Usamos cookies propias y de terceros para que el sitio funcione y para entender cómo se usa. Puedes aceptarlas todas, rechazarlas o elegir por categorías.';
+
 const meta: Meta<typeof ConsentBanner> = {
   title: 'Molecules/Consent',
   component: ConsentBanner,
@@ -35,7 +46,9 @@ const meta: Meta<typeof ConsentBanner> = {
     layout: 'fullscreen',
   },
   args: {
+    description: textoLegal,
     policyHref: '#politica-de-cookies',
+    policyLabel: 'Política de cookies',
   },
 };
 
@@ -195,7 +208,9 @@ export const FlujoCompleto: Story = {
 
           <ConsentBanner
             open={!decidido}
+            description={textoLegal}
             policyHref="#politica-de-cookies"
+            policyLabel="Política de cookies"
             onAcceptAll={() => { setDecision(todas); setDecidido(true); }}
             onRejectAll={() => { setDecision(decisionInicial); setDecidido(true); }}
             onOpenPreferences={() => setAbierto(true)}
@@ -223,7 +238,9 @@ export const ContratoBanner: Story = {
     <>
       <Pagina />
       <ConsentBanner
+        description={textoLegal}
         policyHref="#politica"
+        policyLabel="Política de cookies"
         onAcceptAll={() => {}}
         onRejectAll={() => {}}
         onOpenPreferences={() => {}}
@@ -262,6 +279,7 @@ export const ContratoTeclado: Story = {
         <>
           <p data-testid="ultima">{ultima}</p>
           <ConsentBanner
+            description={textoLegal}
             onAcceptAll={() => setUltima('aceptar')}
             onRejectAll={() => setUltima('rechazar')}
             onOpenPreferences={() => setUltima('preferencias')}
@@ -483,6 +501,7 @@ export const ContratoAccionesAnchoCompletoEnMovil: Story = {
   render: () => (
     <ConsentBanner
       open
+      description={textoLegal}
       onAcceptAll={() => {}}
       onRejectAll={() => {}}
       onOpenPreferences={() => {}}
@@ -500,5 +519,97 @@ export const ContratoAccionesAnchoCompletoEnMovil: Story = {
     await expect(botones[1].getBoundingClientRect().top).toBeGreaterThanOrEqual(
       botones[0].getBoundingClientRect().bottom,
     );
+  },
+};
+
+/**
+ * La línea entre cromo y contenido cae aquí en medio de una pieza legal. Los
+ * **botones**, el título de la banda, el nombre de su región, el título del
+ * panel y la marca «Siempre activa» son cromo: nombran las tres salidas que
+ * pide la ePrivacy y el mecanismo, valen igual en cualquier sitio y salen de
+ * `consent.*`. El **texto legal** (`description`), el **enlace a la política**
+ * (`policyLabel`) y las **categorías** con sus descripciones son contenido:
+ * dependen de la jurisdicción y de lo que el producto guarde de verdad, así
+ * que los escribe la aplicación — con el catálogo en inglés siguen diciendo lo
+ * que les pasa esta story.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Pagina />
+      <ConsentBanner
+        description={textoLegal}
+        policyHref="#politica-de-cookies"
+        policyLabel="Política de cookies"
+        onAcceptAll={() => {}}
+        onRejectAll={() => {}}
+        onOpenPreferences={() => {}}
+      />
+    </BrandMessagesProvider>
+  ),
+};
+
+/**
+ * Test: con el catálogo en inglés cambian los tres botones y el nombre de la
+ * región; el texto legal y el enlace a la política, que los escribe la
+ * aplicación, no.
+ */
+export const ContratoProveedor: Story = {
+  name: 'Test — el cromo del consentimiento lee del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <ConsentBanner
+        description={textoLegal}
+        policyHref="#politica"
+        policyLabel="Política de cookies"
+        onAcceptAll={() => {}}
+        onRejectAll={() => {}}
+        onOpenPreferences={() => {}}
+      />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const region = canvas.getByRole('region', { name: 'Cookie consent' });
+    await expect(within(region).getByRole('button', { name: 'Accept all' })).toBeVisible();
+    await expect(within(region).getByRole('button', { name: 'Reject' })).toBeVisible();
+    await expect(within(region).getByRole('button', { name: 'Preferences' })).toBeVisible();
+    await expect(within(region).queryByRole('button', { name: 'Aceptar todas' })).toBeNull();
+    // Contenido: lo escribe la aplicación y el catálogo no lo toca.
+    await expect(within(region).getByRole('link', { name: 'Política de cookies' })).toBeVisible();
+    await expect(within(region).getByText(/Usamos cookies propias/)).toBeVisible();
+  },
+};
+
+/**
+ * Test: el panel de preferencias también lee del catálogo — su título, la
+ * marca de la categoría necesaria y el aspa (reenvío puro al `Modal`)—,
+ * mientras que las categorías siguen siendo contenido.
+ */
+export const ContratoProveedorPanel: Story = {
+  name: 'Test — el cromo del panel lee del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <ConsentPreferences
+        surface="modal"
+        open
+        onOpenChange={() => {}}
+        categories={categorias}
+        value={decisionInicial}
+        onChange={() => {}}
+      />
+    </BrandMessagesProvider>
+  ),
+  play: async () => {
+    const panel = within(document.body);
+    const dialog = await panel.findByRole('dialog', { name: 'Cookie preferences' });
+    const dentro = within(dialog);
+    await expect(dentro.getByRole('button', { name: 'Close' })).toBeInTheDocument();
+    await expect(dentro.getByText(', Always on')).toHaveClass('visually-hidden');
+    // Las categorías son contenido: no las toca el catálogo.
+    await expect(dentro.getByRole('switch', { name: /Analítica/ })).toBeInTheDocument();
   },
 };

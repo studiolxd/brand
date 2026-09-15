@@ -7,7 +7,33 @@ import { CloseButton } from '../../atoms/CloseButton/CloseButton';
 import { Icon } from '../../atoms/Icon/Icon';
 import { NumberBadge } from '../../atoms/NumberBadge/NumberBadge';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './FloatingDock.css';
+
+/**
+ * El cromo del dock, y **solo el cromo**: el aspa y cómo se lee el contador.
+ *
+ * **Tiene espacio propio y no hereda `modal.close`, a propósito.** El panel del
+ * dock no es un `Modal` y no puede serlo: es un diálogo **no modal**
+ * (`modal={false}`) sin velo, que no atrapa el foco y deja la página viva
+ * detrás, montado por portal **dentro del propio ancla** para heredar por
+ * cascada la superficie donde el consumidor lo haya puesto, anclado a una
+ * esquina de la ventana y con el aspa fuera de la cabecera. El `Modal` del
+ * sistema es lo contrario en las cuatro cosas —velo, foco atrapado, portal en
+ * `document.body`, diálogo centrado—, así que hacerlo pasar por él no era
+ * quitar una clave: era cambiar el componente. La razón es real y de hoy, no
+ * histórica, y por eso el aspa se llama aquí.
+ *
+ * El `label` del lanzador **no está aquí**: nombra lo que abre el dock —«Abrir
+ * el asistente», «Abrir el chat de soporte»— y eso lo sabe el producto. Sigue
+ * siendo prop obligatoria.
+ */
+export interface FloatingDockMessages {
+  /** Nombre accesible del aspa que cierra el panel. */
+  close: string;
+  /** Cómo se lee el contador de novedades. Interpola el número. */
+  badge: (count: number) => string;
+}
 
 /** Esquina de la ventana a la que se ancla el dock. */
 export type FloatingDockPosition = 'bottom-end' | 'bottom-start' | 'top-end' | 'top-start';
@@ -37,15 +63,21 @@ export interface FloatingDockProps
   defaultOpen?: boolean;
   /** Se llama al abrirse y al cerrarse, en controlado y en no controlado. */
   onOpenChange?: (open: boolean) => void;
-  /** `aria-label` del aspa. Default: «Cerrar» (castellano). */
+  /**
+   * `aria-label` del aspa. **Sin default**: sin él, sale de
+   * `floatingDock.close` del `BrandMessagesProvider` — espacio propio, no
+   * `modal.close`: el panel del dock no es un `Modal` (ver
+   * `FloatingDockMessages`).
+   */
   closeLabel?: string;
   /** Novedades sin ver. Con 0 (o sin él) no hay contador. */
   badge?: number;
   /** Tope del contador («99+»). */
   badgeMax?: number;
   /**
-   * Cómo se lee el contador. Default: «N mensajes nuevos» (castellano).
-   * Interpola el número, así que es una función.
+   * Cómo se lee el contador. **Sin default**: sin ella, sale de
+   * `floatingDock.badge` del proveedor. Interpola el número, así que es una
+   * función. Solo se lee cuando hay contador y `badgeLive`.
    */
   badgeLabel?: (count: number) => string;
   /**
@@ -92,15 +124,17 @@ export function FloatingDock({
   open,
   defaultOpen,
   onOpenChange,
-  closeLabel = 'Cerrar',
+  closeLabel,
   badge = 0,
   badgeMax = 99,
-  badgeLabel = (count) => `${count} mensajes nuevos`,
+  badgeLabel,
   badgeLive = true,
   dismissOnOutsidePress = false,
   className,
   ...rest
 }: FloatingDockProps) {
+  const t = useBrandMessages('floatingDock');
+
   /**
    * El panel se monta DENTRO del ancla (`Dialog.Portal container`), no en
    * `document.body`: así hereda por cascada la superficie donde el consumidor
@@ -146,7 +180,7 @@ export function FloatingDock({
 
         {/* El contador se lee cuando cambia, sin robar el foco. */}
         {badgeLive && badge > 0 && (
-          <VisuallyHidden aria-live="polite">{badgeLabel(badge)}</VisuallyHidden>
+          <VisuallyHidden aria-live="polite">{t('badge', badgeLabel)(badge)}</VisuallyHidden>
         )}
 
         {dockNode && (
@@ -165,7 +199,7 @@ export function FloatingDock({
                 )}
               </header>
 
-              <Dialog.Close className="floating-dock__close" render={<CloseButton label={closeLabel} />} />
+              <Dialog.Close className="floating-dock__close" render={<CloseButton label={t('close', closeLabel)} />} />
 
               <div className="floating-dock__body">{children}</div>
             </Dialog.Popup>

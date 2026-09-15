@@ -9,7 +9,33 @@ import { Popover, type PopoverChangeDetails } from '../../atoms/Popover/Popover'
 import { Text } from '../../atoms/Text/Text';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { NotificationButton } from '../NotificationButton/NotificationButton';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './NotificationPanel.css';
+
+/**
+ * El cromo del panel, y **solo el cromo**: cómo se llama el panel, la marca de
+ * una fila sin leer, el vacío, los dos destinos del pie y la acción sobre el
+ * conjunto. Ninguno nombra una notificación: eso viaja en `items` y lo escribe
+ * el producto —título, cuerpo y la hora, ya formateada por el consumidor—.
+ *
+ * Los textos de la campana **no están aquí**: `label` y `countLabel` son un
+ * reenvío puro al `NotificationButton`, que tiene su propio espacio. El panel
+ * no repite la clave.
+ */
+export interface NotificationPanelMessages {
+  /** Nombre del panel (`role="dialog"`) y de la lista. No se pinta. */
+  panel: string;
+  /** Texto, solo para lectores de pantalla, que marca una fila sin leer. */
+  unread: string;
+  /** Mensaje cuando no hay notificaciones. */
+  empty: string;
+  /** Rótulo del enlace a la bandeja. */
+  all: string;
+  /** Rótulo del enlace a las preferencias. */
+  preferences: string;
+  /** Rótulo del botón de marcar todas como leídas. */
+  markAllRead: string;
+}
 
 /**
  * Convierte una longitud CSS (`4px`, `0.25rem`) a píxeles. Sin unidad
@@ -92,24 +118,46 @@ export interface NotificationPanelProps {
    */
   renderLink?: RenderNotificationPanelLink;
 
-  /** Nombre accesible de la campana sin contador. Default castellano. */
+  /**
+   * Nombre accesible de la campana sin contador. **Reenvío puro** al
+   * `NotificationButton`: sin ella, sale de `notificationButton.label`.
+   */
   label?: string;
-  /** Nombre accesible de la campana con contador. Recibe el número. Default castellano. */
+  /**
+   * Nombre accesible de la campana con contador. **Reenvío puro** al
+   * `NotificationButton`: sin ella, sale de `notificationButton.countLabel`.
+   */
   countLabel?: (count: number) => string;
   /**
    * Nombre del panel (`role="dialog"`) y de la lista. **No se pinta**: el
-   * panel no lleva cabecera visible. Default «Notificaciones».
+   * panel no lleva cabecera visible. **Sin default**: sin él, sale de
+   * `notificationPanel.panel` del `BrandMessagesProvider`.
    */
   panelLabel?: string;
-  /** Texto solo para lectores de pantalla que marca una fila sin leer. Default «Sin leer». */
+  /**
+   * Texto solo para lectores de pantalla que marca una fila sin leer. **Sin
+   * default**: sin él, sale de `notificationPanel.unread`.
+   */
   unreadLabel?: string;
-  /** Mensaje cuando no hay notificaciones. Default «Estás al día». */
+  /**
+   * Mensaje cuando no hay notificaciones. **Sin default**: sin él, sale de
+   * `notificationPanel.empty`.
+   */
   emptyLabel?: string;
-  /** Rótulo del enlace a la bandeja. Default «Ver todas las notificaciones». */
+  /**
+   * Rótulo del enlace a la bandeja. **Sin default**: sin él, sale de
+   * `notificationPanel.all`.
+   */
   allLabel?: string;
-  /** Rótulo del enlace a las preferencias. Default «Preferencias de notificaciones». */
+  /**
+   * Rótulo del enlace a las preferencias. **Sin default**: sin él, sale de
+   * `notificationPanel.preferences`.
+   */
   preferencesLabel?: string;
-  /** Rótulo del botón de marcar todas. Default «Marcar todas como leídas». */
+  /**
+   * Rótulo del botón de marcar todas. **Sin default**: sin él, sale de
+   * `notificationPanel.markAllRead`. Solo se lee cuando el botón se pinta.
+   */
   markAllReadLabel?: string;
 
   open?: boolean;
@@ -153,17 +201,18 @@ export function NotificationPanel({
   renderLink = defaultRenderLink,
   label,
   countLabel,
-  panelLabel = 'Notificaciones',
-  unreadLabel = 'Sin leer',
-  emptyLabel = 'Estás al día',
-  allLabel = 'Ver todas las notificaciones',
-  preferencesLabel = 'Preferencias de notificaciones',
-  markAllReadLabel = 'Marcar todas como leídas',
+  panelLabel,
+  unreadLabel,
+  emptyLabel,
+  allLabel,
+  preferencesLabel,
+  markAllReadLabel,
   open,
   defaultOpen,
   onOpenChange,
   className,
 }: NotificationPanelProps) {
+  const t = useBrandMessages('notificationPanel');
   const baseId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
   /**
@@ -208,11 +257,14 @@ export function NotificationPanel({
   };
 
   const headingId = `${baseId}-title`;
+  // El panel se nombra dos veces con el mismo texto —el diálogo y el título
+  // oculto—, así que se resuelve una sola vez.
+  const panel = t('panel', panelLabel);
 
   return (
     <Popover
       trigger={<NotificationButton count={count} max={max} label={label} countLabel={countLabel} />}
-      label={panelLabel}
+      label={panel}
       align="end"
       sideOffset={tokenSideOffset}
       open={open}
@@ -226,13 +278,13 @@ export function NotificationPanel({
             nombrar la lista y para quien lee con lector de pantalla. */}
         <VisuallyHidden>
           <Heading level={2} size={3} id={headingId}>
-            {panelLabel}
+            {panel}
           </Heading>
         </VisuallyHidden>
 
         {items.length === 0 ? (
           <div className="notification-panel__empty">
-            <Paragraph size="small">{emptyLabel}</Paragraph>
+            <Paragraph size="small">{t('empty', emptyLabel)}</Paragraph>
           </div>
         ) : (
           <ul className="notification-panel__list" aria-labelledby={headingId}>
@@ -255,7 +307,7 @@ export function NotificationPanel({
                       {unread && (
                         <>
                           <Icon name="dot" size="sm" className="notification-panel__dot" />
-                          <VisuallyHidden>{unreadLabel}</VisuallyHidden>
+                          <VisuallyHidden>{t('unread', unreadLabel)}</VisuallyHidden>
                         </>
                       )}
                     </span>
@@ -294,7 +346,7 @@ export function NotificationPanel({
         {onMarkAllRead && hayNoLeidas && (
           <div className="notification-panel__mark-all">
             <Button variant="outline" size="sm" block onClick={markAll}>
-              {markAllReadLabel}
+              {t('markAllRead', markAllReadLabel)}
             </Button>
           </div>
         )}
@@ -305,11 +357,15 @@ export function NotificationPanel({
             Sin línea que lo separe de la lista: solo el aire del pie. */}
         <div className="notification-panel__footer">
           <div className="notification-panel__footer-links">
-            {renderLink({ href: allHref, className: FOOTER_LINK_CLASS, children: allLabel })}
+            {renderLink({
+              href: allHref,
+              className: FOOTER_LINK_CLASS,
+              children: t('all', allLabel),
+            })}
             {renderLink({
               href: preferencesHref,
               className: FOOTER_LINK_CLASS,
-              children: preferencesLabel,
+              children: t('preferences', preferencesLabel),
             })}
           </div>
         </div>
