@@ -336,6 +336,8 @@ html.dark .surface-invert {
   --sparkline-accent-color: var(--chart-series-1);
   --sparkline-baseline-color: var(--chart-axis-color);
   --star-rating-track-color: var(--color-icon-secondary-on-light);
+  --star-rating-count-color: var(--color-text-muted-on-light);
+  --star-rating-empty-color: var(--color-text-muted-on-light);
   --star-rating-fill-color: var(--color-primary);
   --star-rating-focus-ring-color: var(--color-primary);
   --step-pending-bg: var(--color-background-light);

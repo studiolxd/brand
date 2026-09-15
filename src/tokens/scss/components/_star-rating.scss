@@ -5,7 +5,10 @@ $lxd-star-rating-gap: 0.25rem; // Separación entre estrellas
 $lxd-star-rating-star-size: 1.25em; // Tamaño de la estrella — relativo al texto que la rodea, como el resto de marcas en línea
 $lxd-star-rating-sm-star-size: 1em; // Tamaño de la estrella — talla sm
 $lxd-star-rating-lg-star-size: 1.5em; // Tamaño de la estrella — talla lg
+$lxd-star-rating-count-gap: 0.5rem; // Separación entre las estrellas y el recuento de reseñas: más aire que entre estrella y estrella, para que el recuento se lea como otra cosa
 $lxd-star-rating-track-color: #6b6b6b; // Contorno de la estrella sin ganar
+$lxd-star-rating-count-color: #4a4a4a; // Tinta del recuento de reseñas: texto secundario, es un metadato junto a la valoración
+$lxd-star-rating-empty-color: #4a4a4a; // Tinta del «todavía sin reseñas»: texto secundario, igual que el recuento
 $lxd-star-rating-fill-color: #111e30; // Relleno y contorno de la estrella ganada
 $lxd-star-rating-cursor: pointer; // Cursor sobre una estrella elegible
 $lxd-star-rating-disabled-cursor: not-allowed; // Cursor cuando la entrada está deshabilitada

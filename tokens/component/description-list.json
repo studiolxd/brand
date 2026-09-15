@@ -6,7 +6,7 @@
     "cell-padding-block":  { "$value": "{spacing.3}",               "$type": "dimension", "$description": "Aire vertical de cada celda" },
     "cell-padding-inline": { "$value": "{spacing.4}",               "$type": "dimension", "$description": "Aire horizontal de cada celda" },
     "term-font-family":    { "$value": "{label.font-family}",       "$type": "string",    "$description": "Tipografía del término (dt): la de las etiquetas" },
-    "term-font-size":      { "$value": "{label.font-size}",         "$type": "dimension", "$description": "Cuerpo del término: el de las etiquetas, no el de la prosa" },
+    "term-font-size":      { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Cuerpo del término: un peldaño por debajo del valor, la misma relación en las dos superficies (14/16 en aplicación, 16/20 en la pública). Es el mismo 14px que daba {label.font-size} en aplicación, pero atado al cuerpo de la superficie: dentro de un SiteShell el valor sube a 20px y el término tenía que subir con él" },
     "term-font-weight":    { "$value": "{label.font-weight}",       "$type": "number",    "$description": "Peso del término" },
     "term-line-height":    { "$value": "{label.line-height}",       "$type": "number",    "$description": "Interlineado del término" },
     "term-letter-spacing": { "$value": "{label.letter-spacing}",    "$type": "dimension", "$description": "Tracking del término" },

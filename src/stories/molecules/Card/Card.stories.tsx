@@ -11,6 +11,7 @@ import {
 } from './Card';
 import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
+import { Columns } from '../../atoms/Columns/Columns';
 import { Inline } from '../../atoms/Inline/Inline';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Tag } from '../../atoms/Tag/Tag';
@@ -259,6 +260,55 @@ export const ContratoHijosEnEnlace: Story = {
       .toBeTruthy();
     // Y el CTA accesible sigue nombrando el enlace.
     await expect(enlace).toHaveAccessibleName(/Ver el curso/);
+  },
+};
+
+/**
+ * La flecha la manda `ctaLabel`. Sin él, la tarjeta-enlace no pinta ni flecha
+ * ni nombre accesible extra: es lo que quiere una rejilla de catálogo, donde la
+ * flecha repetida en cada celda es ruido y el destino ya lo dice el título.
+ */
+export const RejillaSinFlecha: Story = {
+  name: 'Rejilla de catálogo (sin ctaLabel)',
+  render: () => (
+    <Columns columns={3} align="stretch">
+      <Card href="#" color="outline" title="Certificados" description="Emisión y verificación de certificados de un curso." />
+      <Card
+        href="#"
+        color="outline"
+        title="Pasarela de pagos"
+        description="Cobra matrículas con Stripe desde el propio catálogo, con facturación y reembolsos."
+      />
+      <Card href="#" color="outline" title="Informes" description="Cuadro de mando de progreso." />
+    </Columns>
+  ),
+};
+
+/**
+ * Test: `ctaLabel` manda sobre las dos señales del CTA. Sin él no hay flecha NI
+ * texto oculto; con él están las dos.
+ */
+export const ContratoFlechaAtadaAlCta: Story = {
+  name: 'Test — la flecha y el nombre accesible van con ctaLabel',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <Card href="/sin" title="Certificados" description="Sin ctaLabel." data-caso="sin" />
+      <Card href="/con" title="Certificados" description="Con ctaLabel." ctaLabel="Ver certificados" data-caso="con" />
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const sin = canvasElement.querySelector('a[data-caso="sin"]')!;
+    await expect(sin.querySelector('.arrow')).toBeNull();
+    await expect(sin.querySelector('.visually-hidden')).toBeNull();
+    // El nombre accesible queda en el texto visible, sin sufijo inventado.
+    await expect(sin).toHaveAccessibleName(/Certificados/);
+    await expect(sin).not.toHaveAccessibleName(/Ver certificados/);
+
+    const con = canvasElement.querySelector('a[data-caso="con"]')!;
+    await expect(con.querySelector('.arrow')).not.toBeNull();
+    await expect(con.querySelector('.visually-hidden')).not.toBeNull();
+    await expect(con).toHaveAccessibleName(/Ver certificados/);
   },
 };
 

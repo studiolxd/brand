@@ -9,9 +9,58 @@ import { starRatingTokens, starRatingDarkTokens } from "../../../tokens/componen
 
 Una valoración en estrellas: la media de un curso en un catálogo, la puntuación
 que deja quien lo ha hecho. Cubre los dos usos —**mostrar** y **capturar**— con
-el mismo dibujo.
+el mismo dibujo, y distingue tres cosas que no son la misma: una media (con
+media estrella de verdad), una media sin reseñas todavía (`null`) y un cero.
 
 <Canvas of={StarRatingStories.PorDefecto} />
+
+## Los textos se pasan (cambio de v39.0.0)
+
+**El componente recibe su texto: no lo trae puesto.** Todo lo que emite por su
+cuenta es una prop obligatoria y sin default castellano.
+
+Cada texto se exige cuando el componente puede emitirlo, y eso lo impone el tipo:
+
+| Prop | Qué es | Cuándo es obligatoria |
+| --- | --- | --- |
+| `valueLabel` | Nombre accesible de la valoración: recibe el valor redondeado, el máximo y el recuento si lo hay | En lectura, siempre |
+| `countLabel` | Cómo se escribe el recuento visible | En cuanto se pasa `reviewCount` |
+| `emptyLabel` | Qué se lee y se ve con `value={null}` | En cuanto `value` puede ser `null` |
+| `optionLabel` | Nombre de cada estrella elegible | En entrada (`readOnly={false}`), siempre |
+| `groupLabel` | Nombre del grupo de radios | En entrada, siempre |
+
+Así, una tarjeta de catálogo que nunca pasa recuento no carga con `countLabel`;
+y el día que el valor de tu API deje de ser `number` y pase a ser `number | null`,
+el compilador te pide `emptyLabel` en vez de dejarte pintar cinco estrellas
+vacías.
+
+### Qué se rompe al actualizar
+
+`StarRating` es lo único que cambia en la v39.0.0. Si ya lo usabas:
+
+1. **Pasa los textos.** Antes eran opcionales con default castellano; ahora el
+   `tsc` los reclama. Lo que traías por defecto, escrito a mano, era esto:
+
+   ```tsx
+   valueLabel={(valor, maximo, recuento) =>
+     `${valor.toLocaleString('es-ES')} de ${maximo} estrellas` +
+     (recuento === undefined ? '' : `, ${recuento.toLocaleString('es-ES')} ${recuento === 1 ? 'reseña' : 'reseñas'}`)}
+   countLabel={(recuento) => `(${recuento.toLocaleString('es-ES')})`}
+   emptyLabel="Todavía sin reseñas"
+   optionLabel={(valor, maximo) => `${valor.toLocaleString('es-ES')} de ${maximo} estrellas`}
+   groupLabel="Valoración"
+   ```
+
+   En una app multiidioma, pásalos por su función de traducción en vez de copiar
+   esto: es justo para eso que el cambio existe.
+2. **`value` es obligatorio en lectura.** Antes se podía omitir y la escala salía
+   a cero, que es una nota real: un olvido se pintaba como «valorado con 0».
+3. **`locale` ya no existe.** El componente no escribe ningún número; lo escribe
+   quien compone la frase, que es quien sabe en qué idioma va. Si lo pasabas,
+   bórralo y usa ese mismo `locale` dentro de tus `valueLabel`/`countLabel`.
+4. **El modo se elige con `readOnly` literal.** El tipo es una unión
+   (lectura / entrada), así que `readOnly={unBooleano}` ya no compila: usa
+   `readOnly={false}` para la entrada y omítelo para la lectura.
 
 ## Lectura y entrada
 
@@ -36,6 +85,35 @@ media: `3,7` se dibuja como `3,5`.
 **La entrada va en pasos enteros.** La media estrella describe una media
 calculada; nadie elige «tres y media» al valorar, y ofrecer dos mitades por
 estrella duplica los destinos de clic sin que nadie los pida.
+
+## Recuento de reseñas
+
+Con `reviewCount`, la media viene acompañada de cuántas reseñas la sostienen:
+«★★★★⯪ (24)». **Sin él**, la nota es la de **una reseña suelta** —la que firma
+una persona al pie de su comentario—, donde un recuento no significa nada.
+
+<Canvas of={StarRatingStories.ConRecuento} />
+<Canvas of={StarRatingStories.SinRecuento} />
+
+El recuento visible y el nombre accesible no son dos textos que haya que
+cuadrar: el recuento entra en `valueLabel`, así que un lector de pantalla oye
+«4,5 de 5 estrellas, 24 reseñas» de una vez y no una imagen seguida de un «(24)»
+que tuviera que juntar por su cuenta.
+
+## Todavía sin reseñas (`value={null}`)
+
+`null` **no es cero**. Cero es una nota de verdad —la peor— y se dibuja con
+cinco estrellas vacías; «todavía no ha valorado nadie» no tiene dibujo posible
+con estrellas sin decir esa otra cosa. Así que con `null` la escala **no se
+dibuja**: en su sitio va `emptyLabel` como texto («Todavía sin reseñas»), que es
+lo que se ve y lo que se lee, y el componente no se anuncia como una valoración
+(no hay `role="img"`).
+
+<Canvas of={StarRatingStories.SinResenas} />
+
+En una rejilla de catálogo eso deja la fila del producto sin valorar visiblemente
+distinta de la del producto valorado con cero, que es justo la distinción que el
+dato necesita.
 
 ## Escala
 
@@ -73,9 +151,13 @@ la tinta clara. Todo por token `surface-dark-*`, sin CSS propio.
 
 ## Accesibilidad
 
-- En lectura es **una sola imagen** (`role="img"`) cuyo nombre accesible lleva
-  el valor exacto: «4,5 de 5 estrellas». Quien usa un lector de pantalla oye la
-  valoración, no cuenta cinco iconos sueltos.
+- En lectura es **una sola imagen** (`role="img"`) cuyo nombre accesible —
+  `valueLabel`, que pasa el consumidor— lleva el valor exacto y, si lo hay, el
+  recuento: «4,5 de 5 estrellas, 24 reseñas». Quien usa un lector de pantalla
+  oye la valoración, no cuenta cinco iconos sueltos.
+- Con `value={null}` **no hay imagen**: lo que hay es la frase «Todavía sin
+  reseñas», que se lee como texto corriente. Anunciar una valoración que no
+  existe sería anunciar un dato falso.
 - En entrada es un `role="radiogroup"` con radios nativos: el teclado (flechas
   para recorrer y elegir, `Tab` para entrar y salir del grupo) y el envío del
   formulario vienen del navegador.
@@ -87,9 +169,11 @@ la tinta clara. Todo por token `surface-dark-*`, sin CSS propio.
 
 ## Internacionalización
 
-Todos los textos que emite el componente son props con default castellano:
-`valueLabel`, `optionLabel` y `groupLabel`. El número se escribe con `locale`
-(por defecto `es-ES`), delegando en `Intl`.
+Todos los textos que emite el componente son props **obligatorias y sin default**:
+`valueLabel`, `countLabel`, `emptyLabel`, `optionLabel` y `groupLabel`, cada una
+cuando el componente puede emitirla (ver § «Los textos se pasan»). No hay prop
+`locale`: el componente no escribe ningún número, así que la cifra se escribe
+dentro de los textos que compone el consumidor.
 
 ## Props
 

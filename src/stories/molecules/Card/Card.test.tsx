@@ -60,4 +60,20 @@ describe('Card — tarjeta-acción (render sobre <button>)', () => {
     expect(enlace.tagName).toBe('A');
     expect(enlace).toHaveAttribute('href', '/destino');
   });
+
+  it('sin `ctaLabel` no hay flecha NI texto oculto: la llamada es una sola decisión', () => {
+    render(<Card href="/certificados" title="Certificados" description="Emisión y verificación." />);
+    const enlace = screen.getByRole('link');
+    expect(enlace.querySelector('.arrow')).toBeNull();
+    expect(enlace.querySelector('.visually-hidden')).toBeNull();
+  });
+
+  it('con `ctaLabel` están las dos: la flecha visible y su nombre accesible', () => {
+    render(
+      <Card href="/certificados" title="Certificados" description="Emisión y verificación." ctaLabel="Ver certificados" />,
+    );
+    const enlace = screen.getByRole('link', { name: /Ver certificados/ });
+    expect(enlace.querySelector('.arrow')).not.toBeNull();
+    expect(enlace.querySelector('.visually-hidden')).toHaveTextContent('Ver certificados');
+  });
 });

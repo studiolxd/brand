@@ -138,6 +138,96 @@ describe('ConfirmDialog', () => {
     expect(screen.getByText('Se borrarán 42 proyectos.')).toBeInTheDocument();
   });
 
+  describe('con frase de confirmación', () => {
+    const frase = {
+      confirmPhrase: 'acme',
+      confirmPhraseLabel: 'Escribe acme para confirmar',
+      confirmPhraseMismatch: 'El nombre no coincide.',
+    };
+
+    it('nace con el botón apagado y sin acusar nada', () => {
+      renderDialog(frase);
+      expect(screen.getByRole('button', { name: 'Confirmar' })).toBeDisabled();
+      expect(screen.getByLabelText('Escribe acme para confirmar')).toBeInTheDocument();
+      expect(screen.queryByText('El nombre no coincide.')).not.toBeInTheDocument();
+    });
+
+    it('no acusa mientras se teclea: el error espera a un intento', async () => {
+      const user = userEvent.setup();
+      renderDialog(frase);
+      const campo = screen.getByLabelText('Escribe acme para confirmar');
+
+      await user.type(campo, 'acm');
+      expect(screen.queryByText('El nombre no coincide.')).not.toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Confirmar' })).toBeDisabled();
+
+      // Salir del campo con algo escrito y sin coincidir SÍ es un intento.
+      await user.tab();
+      expect(screen.getByText('El nombre no coincide.')).toBeInTheDocument();
+    });
+
+    it('salir del campo en blanco no es un intento fallido', async () => {
+      const user = userEvent.setup();
+      renderDialog(frase);
+      screen.getByLabelText('Escribe acme para confirmar').focus();
+      await user.tab();
+      expect(screen.queryByText('El nombre no coincide.')).not.toBeInTheDocument();
+    });
+
+    it('seguir tecleando retira el error en vez de insistir', async () => {
+      const user = userEvent.setup();
+      renderDialog(frase);
+      const campo = screen.getByLabelText('Escribe acme para confirmar');
+
+      await user.type(campo, 'acm{Enter}');
+      expect(screen.getByText('El nombre no coincide.')).toBeInTheDocument();
+
+      await user.type(campo, 'e');
+      expect(screen.queryByText('El nombre no coincide.')).not.toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Confirmar' })).toBeEnabled();
+    });
+
+    it('con la frase puesta se confirma con el botón y con Intro', async () => {
+      const user = userEvent.setup();
+      const { onConfirm } = renderDialog(frase);
+      const campo = screen.getByLabelText('Escribe acme para confirmar');
+
+      await user.type(campo, 'acme');
+      await user.click(screen.getByRole('button', { name: 'Confirmar' }));
+      expect(onConfirm).toHaveBeenCalledTimes(1);
+
+      await user.type(campo, '{Enter}');
+      expect(onConfirm).toHaveBeenCalledTimes(2);
+    });
+
+    it('perdona los espacios de los extremos, pero no la caja ni los acentos', async () => {
+      const user = userEvent.setup();
+      const { onConfirm } = renderDialog(frase);
+      const campo = screen.getByLabelText('Escribe acme para confirmar');
+
+      await user.type(campo, '  acme  ');
+      expect(screen.getByRole('button', { name: 'Confirmar' })).toBeEnabled();
+
+      await user.clear(campo);
+      await user.type(campo, 'ACME');
+      expect(screen.getByRole('button', { name: 'Confirmar' })).toBeDisabled();
+      expect(onConfirm).not.toHaveBeenCalled();
+    });
+
+    it('el foco entra en el campo, que no es la acción que destruye', async () => {
+      renderDialog(frase);
+      await waitFor(() =>
+        expect(screen.getByLabelText('Escribe acme para confirmar')).toHaveFocus(),
+      );
+    });
+
+    it('sin `confirmPhrase` no hay campo ni barrera', () => {
+      renderDialog();
+      expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Confirmar' })).toBeEnabled();
+    });
+  });
+
   it('no monta nada cuando está cerrado', () => {
     renderDialog({ open: false });
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();

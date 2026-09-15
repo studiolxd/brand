@@ -8,7 +8,7 @@ import { cardTokens, cardDarkTokens } from "../../../tokens/components/card";
 # Card
 
 Dos modos. **Enlace** (`href` o `render`): *link-card* — todo el bloque es un enlace (título +
-descripción + `children` + flecha), pensado para navegación. **Contenedor** (sin ninguno de los dos): un `<div>`
+descripción + `children` y, si hay `ctaLabel`, la flecha), pensado para navegación. **Contenedor** (sin ninguno de los dos): un `<div>`
 con `children` arbitrarios (formularios, botones), para superficies de aplicación.
 
 ## Modo link — colores
@@ -79,6 +79,27 @@ Es el hueco para lo que no cabe en `title`/`description` sin tener que envolver 
 Los hijos de una link-card **no pueden ser interactivos**: el bloque entero ya es un enlace, y un
 botón o un enlace anidado dentro de un `<a>` no es marcado válido. Si la tarjeta necesita acciones,
 es una tarjeta contenedora con su `CardFooter`.
+
+## La flecha la manda `ctaLabel`
+
+En modo enlace, `ctaLabel` decide las **dos** señales del CTA a la vez:
+
+- **Con `ctaLabel`** hay flecha y hay nombre accesible. Es la tarjeta suelta de marketing: la
+  llamada se ve, y el enlace se anuncia entero («Ver más sobre plataformas LMS») aunque lo único
+  visible sea una flecha.
+- **Sin `ctaLabel`** no hay ninguna de las dos. Es lo que quiere una **rejilla de catálogo**: la
+  misma flecha repetida en cada celda es ruido, y el título ya dice adónde va cada tarjeta.
+
+Es una sola decisión, no dos props que puedan contradecirse — no existe `showArrow`/`hideArrow`,
+y se descartó a propósito: una flecha muda (sin nombre accesible) o un nombre accesible sin señal
+visible son los dos estados que esa segunda prop permitiría y que aquí no pueden darse.
+
+<Canvas of={CardStories.RejillaSinFlecha} />
+
+Sin flecha, el alto de la tarjeta no cambia: quien estira las tarjetas hermanas de una rejilla es
+la celda (`Columns align="stretch"`), y en modo contenedor quien ancla el pie abajo es
+`.card__footer`, que ya lleva su propio `margin-block-start: auto`. El `margin-block-start: auto`
+de la flecha solo empuja a la flecha.
 
 ## Enlace externo
 
@@ -187,7 +208,8 @@ párrafo de la superficie de lectura (Foundations → Tipografía): dentro de un
 - Con `external`, avisa en el `ctaLabel` de que el enlace abre una pestaña nueva: el `target` por
   sí solo no se anuncia.
 - `ctaLabel` da al enlace un nombre accesible completo («Ver más sobre plataformas LMS») cuando la
-  llamada visible es solo una flecha.
+  llamada visible es solo una flecha. Omitirlo retira las dos cosas: sin flecha, el nombre
+  accesible del enlace es su propio texto (título y descripción), que ya se lee.
 - `outline` es la única variante con par `surface-dark-*` propio (fondo y borde cambian sobre
   `.surface-dark`/`html.dark`).
 - `primary` usa el mismo patrón que `button.primary`: fondo lavanda (`color.accent-1`) con texto

@@ -103,6 +103,7 @@ La escala vive en `--text-size-1`…`--text-size-10`, y de ella beben los seis n
 La línea divisoria es si el componente **muestra texto corriente** o si es **interfaz con talla propia**:
 
 - **Hereda el cuerpo** (`{text.font-size}`): el título y la descripción de un `Alert` o un `Toast`, la descripción de un `Modal` o un `EmptyState`, el valor de una `DescriptionList`, las celdas de una `Table`, el rótulo de `PrevNextNav`, un `MessageBubble`, el nombre de archivo de `FileUpload` y el mensaje de éxito de un formulario. Son prosa: si la superficie lee más grande, ellos también. El caso límite es `LegalFooter`, que directamente **no tiene token de cuerpo**: hereda por cascada, como un `<p>` cualquiera.
+- **Hereda un peldaño por debajo** (`{text.paragraph.small.font-size}`): el `Breadcrumb`, el pie de una `Figure`, los mensajes de ayuda y de error de un formulario, el índice de un `Accordion` y el **término de una `DescriptionList`**. Son letra menor de prosa: no tienen talla propia, se miden contra el cuerpo de la superficie y suben con él. El término de la ficha es el caso que lo enseña — atado a la talla fija de las etiquetas de interfaz se quedaba en 14px al lado de un valor de 20 en la superficie pública.
 - **Talla propia**: campos, `Select`, `Textarea`, botones, menús, `Kbd`, `Tabs`, `Pagination`, avatares, navegación lateral, paleta de comandos, conmutadores y calendarios. Su tamaño sale de su talla (`sm`/`md`/`lg`), que es la que fija el producto, no de la superficie. Un campo dentro de una tabla sigue siendo un campo.
 
 ---

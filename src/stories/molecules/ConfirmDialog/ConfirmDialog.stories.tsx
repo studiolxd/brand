@@ -182,3 +182,104 @@ export const TestAccionIntermedia: Story = {
     await expect(within(canvasElement).getByTestId('ultimo')).toHaveTextContent('siempre');
   },
 };
+
+/**
+ * **La barrera de teclear el identificador.** Con `confirmPhrase`, el diálogo
+ * monta un campo bajo la pregunta y el botón de confirmar nace apagado: solo se
+ * enciende cuando lo tecleado coincide con la frase exacta. Es el patrón de
+ * «escribe el nombre de la organización para borrarla», que tres apps de la
+ * suite se estaban maquetando por su cuenta, cada una de una manera.
+ *
+ * Sus dos textos —el rótulo del campo, que es donde se dice QUÉ hay que
+ * teclear, y el mensaje de discrepancia— son obligatorios y sin default: el
+ * diálogo no sabe qué se está borrando.
+ */
+export const FraseDeConfirmacion: Story = {
+  name: 'Con frase de confirmación',
+  args: {
+    ...base,
+    destructive: true,
+    confirmLabel: 'Borrar la organización',
+    confirmPhrase: 'acme',
+    confirmPhraseLabel: 'Escribe acme para confirmar',
+    confirmPhraseMismatch: 'El nombre no coincide.',
+  },
+};
+
+/**
+ * Test: el botón nace apagado, se enciende al coincidir, y el error del campo
+ * aparece solo tras un intento —no mientras se teclea—.
+ */
+export const TestFraseDeConfirmacion: Story = {
+  name: 'Test — la frase apaga el botón hasta que coincide',
+  tags: ['!dev'],
+  args: {
+    ...base,
+    destructive: true,
+    confirmLabel: 'Borrar',
+    confirmPhrase: 'acme',
+    confirmPhraseLabel: 'Escribe acme para confirmar',
+    confirmPhraseMismatch: 'El nombre no coincide.',
+  },
+  play: async ({ canvasElement }) => {
+    const dialog = await screenDialog();
+    const escena = within(dialog);
+    const boton = escena.getByRole('button', { name: 'Borrar' });
+    const campo = escena.getByLabelText('Escribe acme para confirmar');
+
+    // Nace apagado, y el foco entra en el campo: es lo que hay que hacer, y no
+    // es la acción que destruye.
+    await expect(boton).toBeDisabled();
+    await waitFor(async () => { await expect(campo).toHaveFocus(); });
+    await expect(escena.queryByText('El nombre no coincide.')).not.toBeInTheDocument();
+
+    // Mientras se teclea mal, NO se acusa: el error espera a un intento.
+    await userEvent.type(campo, 'acm');
+    await expect(escena.queryByText('El nombre no coincide.')).not.toBeInTheDocument();
+    await expect(boton).toBeDisabled();
+
+    // Intro con el campo a medias es un intento: ahí sí aparece el error.
+    await userEvent.keyboard('{Enter}');
+    await waitFor(async () => {
+      await expect(escena.getByText('El nombre no coincide.')).toBeInTheDocument();
+    });
+    await expect(boton).toBeDisabled();
+
+    // Seguir tecleando retira el error en vez de insistir.
+    await userEvent.type(campo, 'e');
+    await expect(escena.queryByText('El nombre no coincide.')).not.toBeInTheDocument();
+    await waitFor(async () => { await expect(boton).toBeEnabled(); });
+
+    void canvasElement;
+  },
+};
+
+/** Test: con la frase coincidente, `Enter` en el campo confirma. */
+export const TestFraseIntroConfirma: Story = {
+  name: 'Test — con la frase puesta, Intro confirma',
+  tags: ['!dev'],
+  args: {
+    ...base,
+    confirmPhrase: 'acme',
+    confirmPhraseLabel: 'Escribe acme para confirmar',
+    confirmPhraseMismatch: 'El nombre no coincide.',
+  },
+  render: (args) => {
+    const [ultimo, setUltimo] = useState('');
+    return (
+      <>
+        <ConfirmDialog {...args} onConfirm={() => setUltimo('confirmado')} />
+        <p data-testid="ultimo">{ultimo}</p>
+      </>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const dialog = await screenDialog();
+    const campo = within(dialog).getByLabelText('Escribe acme para confirmar');
+    await userEvent.type(campo, 'acme');
+    await userEvent.keyboard('{Enter}');
+    await waitFor(async () => {
+      await expect(within(canvasElement).getByTestId('ultimo')).toHaveTextContent('confirmado');
+    });
+  },
+};

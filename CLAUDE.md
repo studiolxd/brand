@@ -323,27 +323,55 @@ El paquete sigue **semver** y se distribuye vía git tags. Los consumidores pine
 
 ### Dónde está la credencial de npm
 
-El token para publicar en el registro vive en
+El token para subir el paquete al registro vive en
 **`~/.config/slxd/npm-studiolxd.env`** (`NPM_TOKEN`, fuera del repo, 0600),
 junto al resto de secretos de trabajo. Es un token granular con permiso de
-lectura y escritura sobre el scope `@studiolxd`, de tipo «Automation» para que
-publicar no pida el segundo factor.
+lectura y escritura sobre el scope `@studiolxd`.
 
 ```sh
 set -a; . ~/.config/slxd/npm-studiolxd.env; set +a
 ```
 
-Publicar es `pnpm release:npm` (`scripts/publish-npm.mjs`): lee ese fichero,
-escribe un `.npmrc` temporal, publica y lo borra. **Va después de
-`release:check` y del tag**, nunca antes: se publica lo que ya pasó la puerta
-de calidad.
+**Publicar son dos pasos, y el segundo lo da una persona.** `pnpm release:npm`
+(`scripts/publish-npm.mjs`) no publica: hace `npm stage publish`, que sube el
+paquete a un **área de preparación** y **difiere la prueba de presencia** (el
+segundo factor) a un momento posterior. El paquete queda subido y a la espera, y
+**no existe en el registro** hasta que alguien lo aprueba con su propia sesión y
+su segundo factor. El script lee el fichero de arriba, escribe un `.npmrc`
+temporal, sube el stage, lo borra, y termina imprimiendo el **identificador del
+stage** bien visible: sin él no se puede aprobar.
 
-> **El token tiene que ser de tipo «Automation».** Uno de publicación normal
-> respeta la verificación en dos pasos y npm corta con `EOTP` pidiendo un
-> código por navegador, que un script no puede teclear (comprobado el
-> 2026-09-14 con el primer token). Se ve en
-> `registry.npmjs.org/-/npm/v1/tokens`: el campo `automation` tiene que venir a
-> `true`.
+Va **después de `release:check` y del tag**, nunca antes: lo que se sube es lo
+que ya pasó la puerta de calidad.
+
+```sh
+pnpm release:npm                 # el agente: sube el stage y escupe el stage-id
+npm stage approve <stage-id>     # una persona, con su sesión y su 2FA
+```
+
+Aprobar también se puede desde npmjs.com, en el área de paquetes preparados.
+
+**Antes de aprobar**, las órdenes de inspección y de retirada — la forma de
+mirar o quitar lo subido **mientras todavía no existe en el registro**, que es
+justo lo que no se podía hacer publicando directo:
+
+| Orden | Para qué |
+| --- | --- |
+| `npm stage list [<pkg>@<versión>]` | Qué hay subido a la espera, y su `stage-id` |
+| `npm stage view <stage-id>` | El detalle de un stage concreto |
+| `npm stage download <stage-id>` | Baja el tarball para inspeccionarlo antes de aprobar |
+| `npm stage reject <stage-id>` | Lo retira: la versión nunca llega a existir |
+
+> **El token ya NO tiene que ser de tipo «Automation».** El flujo anterior
+> publicaba directo y por eso necesitaba un token que se saltara el 2FA: uno
+> normal cortaba con `EOTP` pidiendo un código por navegador, que un script no
+> puede teclear. Con `npm stage publish` el segundo factor lo pone quien aprueba,
+> así que basta un token granular de lectura y escritura sobre el scope. Y
+> conviene: npm avisa en su propia salida de que **los tokens que se saltan el
+> 2FA están siendo restringidos**
+> (gh.io/npm-gat-bypass2fa-deprecation), o sea que el camino del «Automation»
+> tiene fecha de caducidad. Corregido el 2026-09-15 al publicar la v38.17.0, que
+> es donde se vio que la respuesta buena era esta y no generar otro token.
 
 **Pendiente (2026-09-14)**: el catálogo de la suite sigue consumiendo el
 paquete por tag de git (`github:studiolxd/brand#vX`). En cuanto haya una
@@ -360,8 +388,12 @@ versión publicada en el registro, esa línea pasa a ser la versión a secas y e
    git tag -a v<version> -m "v<version>"
    git push origin main --tags
    ```
-5. Publicar en el registro: `pnpm release:npm` (ver § «Dónde está la
-   credencial de npm»).
+5. Subir el paquete al área de preparación: `pnpm release:npm`. **No publica**:
+   deja el stage a la espera y escupe su `stage-id`.
+6. Aprobarlo a mano, con sesión y segundo factor: `npm stage approve <stage-id>`
+   (o desde npmjs.com). Hasta aquí la versión no existe en el registro, así que
+   este es el último momento para mirarla (`npm stage view`/`download`) o
+   retirarla (`npm stage reject`). Ver § «Dónde está la credencial de npm».
 
 > **IMPORTANTE:** Cada push a `main` debe ir acompañado de un tag si incluye cambios funcionales. Los commits puramente internos (docs, refactors sin impacto en consumidores) pueden agruparse bajo un solo tag.
 

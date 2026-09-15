@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { Button } from '../../atoms/Button/Button';
+import { InputField } from '../InputField/InputField';
 import { Modal, type ModalProps } from '../Modal/Modal';
 import './ConfirmDialog.css';
 
-export interface ConfirmDialogProps {
+export interface ConfirmDialogBaseProps {
   open: boolean;
   /** Título del diálogo: la pregunta, no «Confirmar». */
   title: string;
@@ -73,6 +74,46 @@ export interface ConfirmDialogProps {
 }
 
 /**
+ * La frase de confirmación y sus dos textos viajan juntos: sin `confirmPhrase`
+ * no hay campo que rotular ni discrepancia que contar, y con ella los dos
+ * textos los pasa el producto —dicen QUÉ hay que teclear—, así que no llevan
+ * default castellano.
+ */
+export type ConfirmDialogPhraseProps =
+  | {
+      /**
+       * Exige teclear una frase exacta —el nombre de la organización, el del
+       * plugin— antes de poder confirmar. El botón de confirmar nace apagado y
+       * solo se enciende cuando lo tecleado coincide.
+       */
+      confirmPhrase?: undefined;
+      confirmPhraseLabel?: string;
+      confirmPhraseMismatch?: string;
+    }
+  | {
+      /**
+       * La frase exacta que hay que teclear para poder confirmar. Se compara
+       * sin los espacios de los extremos —un espacio pegado al pegar no es un
+       * error de la persona— pero sin tocar nada más: ni la caja ni los
+       * acentos, que es de lo que vive esta barrera.
+       */
+      confirmPhrase: string;
+      /**
+       * Rótulo del campo. **Obligatorio** con `confirmPhrase`, sin default: es
+       * donde el producto dice qué hay que teclear («Escribe *acme* para
+       * confirmar»), y eso el diálogo no lo sabe.
+       */
+      confirmPhraseLabel: string;
+      /**
+       * Mensaje cuando lo tecleado no coincide. **Obligatorio** con
+       * `confirmPhrase`, sin default, por lo mismo.
+       */
+      confirmPhraseMismatch: string;
+    };
+
+export type ConfirmDialogProps = ConfirmDialogBaseProps & ConfirmDialogPhraseProps;
+
+/**
  * La pregunta antes de una acción que no se puede deshacer: borrar una
  * organización, revocar una clave, expulsar a alguien de un equipo.
  *
@@ -85,6 +126,10 @@ export interface ConfirmDialogProps {
  * queda abierto y ocupado —no se cierra en falso ni deja pulsar dos veces— y
  * se cierra solo al resolver. Si rechaza, sigue abierto: el error lo cuenta el
  * consumidor, que es quien sabe qué ha pasado.
+ *
+ * Con `confirmPhrase` monta además la **barrera de teclear el identificador**
+ * —el patrón de «escribe el nombre de la organización para borrarla»—: un campo
+ * bajo la pregunta y el botón de confirmar apagado hasta que coincida.
  */
 export function ConfirmDialog({
   open,
@@ -101,16 +146,35 @@ export function ConfirmDialog({
   cancelLabel = 'Cancelar',
   pendingLabel = 'Confirmando…',
   closeLabel = 'Cerrar',
+  confirmPhrase,
+  confirmPhraseLabel,
+  confirmPhraseMismatch,
   container,
   className,
 }: ConfirmDialogProps) {
   const cancelRef = useRef<HTMLElement>(null);
+  const phraseRef = useRef<HTMLInputElement>(null);
+  const campoId = useId();
   const [pending, setPending] = useState(false);
+  const [tecleado, setTecleado] = useState('');
+  // Si el error del campo se pintara mientras se teclea, la persona vería
+  // «no coincide» desde la primera letra de una frase que está escribiendo
+  // bien. Solo se pinta tras un INTENTO: salir del campo o pulsar Intro.
+  const [intento, setIntento] = useState(false);
+
+  // Se compara sin los espacios de los extremos —uno pegado al pegar no es un
+  // error de la persona—, pero sin normalizar caja ni acentos: la barrera vive
+  // justo de que haya que escribirlo igual.
+  const coincide = confirmPhrase === undefined || tecleado.trim() === confirmPhrase;
+  const discrepa = intento && !coincide;
 
   // Una acción que falla deja el diálogo abierto; al cerrarlo, el botón vuelve
-  // a estar disponible para el siguiente intento.
+  // a estar disponible para el siguiente intento y la barrera se rearma.
   useEffect(() => {
-    if (!open) setPending(false);
+    if (open) return;
+    setPending(false);
+    setTecleado('');
+    setIntento(false);
   }, [open]);
 
   const handleCancel = () => {
@@ -119,7 +183,7 @@ export function ConfirmDialog({
   };
 
   const handleConfirm = async () => {
-    if (pending) return;
+    if (pending || !coincide) return;
     const result = onConfirm();
     if (!(result instanceof Promise)) return;
     setPending(true);
@@ -144,7 +208,12 @@ export function ConfirmDialog({
       // El foco entra en la salida segura, no en la acción que destruye. Se lo
       // pide al gestor de foco de Base UI (por `Modal`) en vez de moverlo a
       // mano tras el montaje: él corre el último y ganaría él.
-      initialFocus={cancelRef}
+      //
+      // Con la barrera de la frase entra en el campo, que es lo que hay que
+      // hacer y NO es la acción que destruye: el botón de confirmar nace
+      // apagado, así que el `Enter` de más contra el que protege la regla ya no
+      // puede llegar a ninguna parte.
+      initialFocus={confirmPhrase !== undefined ? phraseRef : cancelRef}
       {...(description != null ? { description } : {})}
       // El pie lo reparte `Modal`: fila a la derecha, y apilado a todo el
       // ancho con la acción principal arriba por debajo del punto de ruptura.
@@ -170,7 +239,7 @@ export function ConfirmDialog({
             variant={destructive ? 'outline' : 'primary'}
             destructive={destructive}
             onClick={handleConfirm}
-            disabled={pending}
+            disabled={pending || !coincide}
           >
             {pending ? pendingLabel : confirmLabel}
           </Button>
@@ -178,6 +247,40 @@ export function ConfirmDialog({
       }
     >
       {children}
+      {confirmPhrase !== undefined && (
+        <InputField
+          ref={phraseRef}
+          id={`${campoId}-confirm-phrase`}
+          className="confirm-dialog__phrase"
+          label={confirmPhraseLabel ?? ''}
+          value={tecleado}
+          disabled={pending}
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="none"
+          spellCheck={false}
+          error={discrepa}
+          {...(discrepa ? { errorMessage: confirmPhraseMismatch } : {})}
+          onChange={(event) => {
+            setTecleado(event.target.value);
+            // Vuelve a tecleares: se retira el error y se espera al próximo intento.
+            setIntento(false);
+          }}
+          onBlur={() => {
+            // Salir del campo en blanco no es un intento fallido: es no haber
+            // empezado.
+            if (tecleado !== '') setIntento(true);
+          }}
+          onKeyDown={(event) => {
+            if (event.key !== 'Enter') return;
+            // El botón de confirmar nace apagado, así que el envío implícito
+            // del formulario no llegaría: el Intro lo atiende el campo.
+            event.preventDefault();
+            if (coincide) void handleConfirm();
+            else if (tecleado !== '') setIntento(true);
+          }}
+        />
+      )}
     </Modal>
   );
 }

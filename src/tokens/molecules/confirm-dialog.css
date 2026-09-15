@@ -4,4 +4,5 @@
 
 :root {
   --confirm-dialog-actions-space-before: var(--spacing-5); /** Aire entre el cuerpo del diálogo y su fila de acciones: separa la pregunta de la respuesta. El aire ENTRE los dos botones es el de `Inline` en su paso compacto */
+  --confirm-dialog-phrase-space-before: var(--spacing-4); /** Aire entre el cuerpo del diálogo y el campo de la frase de confirmación: menos que el del pie, porque el campo todavía es parte de la pregunta */
 }

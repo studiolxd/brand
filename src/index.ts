@@ -50,7 +50,11 @@ export type { StackProps } from './stories/atoms/Stack/Stack';
 export { StepMarker } from './stories/atoms/StepMarker/StepMarker';
 export type { StepMarkerProps, StepMarkerState, StepMarkerTone, StepMarkerSize } from './stories/atoms/StepMarker/StepMarker';
 export { StarRating } from './stories/atoms/StarRating/StarRating';
-export type { StarRatingProps } from './stories/atoms/StarRating/StarRating';
+export type {
+  StarRatingProps,
+  StarRatingReadProps,
+  StarRatingInputProps,
+} from './stories/atoms/StarRating/StarRating';
 export type { InputProps } from './stories/atoms/Input/Input';
 export { NumberInput } from './stories/atoms/NumberInput/NumberInput';
 export type { NumberInputProps } from './stories/atoms/NumberInput/NumberInput';

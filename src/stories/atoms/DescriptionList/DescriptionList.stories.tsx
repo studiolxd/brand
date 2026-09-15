@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { DescriptionList, DescriptionTerm, DescriptionDetails } from './DescriptionList';
+import { SiteShell } from '../../sections/SiteShell/SiteShell';
+import { Container } from '../Container/Container';
+import { Heading } from '../Heading/Heading';
 
 const meta = {
   title: 'Atoms/DescriptionList',
@@ -319,6 +322,80 @@ export const ContratoCopiableValorLargo: Story = {
     rangoCola.selectNodeContents(cola);
     const rectsCola = Array.from(rangoCola.getClientRects()).filter((r) => r.width > 0);
     await expect(enUnaSolaLinea(rectsCola)).toBe(true);
+  },
+};
+
+/**
+ * La misma ficha en la **superficie pública** (dentro de un `SiteShell`): el
+ * cuerpo lee a 20px, así que el valor sube a 20px y el término sube con él, a
+ * 16px. Los dos guardan la misma relación que en aplicación —el término un
+ * peldaño por debajo del valor—, que es justo lo que faltaba: el término se
+ * quedaba en 14px al lado de un valor de 20 y se veía diminuto.
+ */
+export const EnSuperficiePublica: Story = {
+  name: 'En superficie pública',
+  args: { children: null },
+  parameters: { layout: 'fullscreen' },
+  render: () => (
+    <SiteShell>
+      <Container as="main" space="xl">
+        <Heading level={1} size={7}>Ficha del proyecto</Heading>
+        <DescriptionList>
+          <DescriptionTerm>Cliente</DescriptionTerm><DescriptionDetails>Studio LXD</DescriptionDetails>
+          <DescriptionTerm>Servicio</DescriptionTerm><DescriptionDetails>Diseño de producto y marca</DescriptionDetails>
+          <DescriptionTerm>Año</DescriptionTerm><DescriptionDetails>2024</DescriptionDetails>
+        </DescriptionList>
+      </Container>
+    </SiteShell>
+  ),
+};
+
+/**
+ * Test: dentro de un `SiteShell` el par término/valor guarda la misma relación
+ * que fuera —el término un peldaño por debajo— en vez de quedarse clavado en la
+ * talla de aplicación mientras el valor sube.
+ */
+export const ContratoTallaEnSuperficiePublica: Story = {
+  name: 'Test — el término sube con el valor en superficie pública',
+  tags: ['!dev'],
+  args: { children: null },
+  parameters: { layout: 'fullscreen' },
+  render: () => (
+    <>
+      <div data-caso="aplicacion">
+        <DescriptionList>
+          <DescriptionTerm>Cliente</DescriptionTerm><DescriptionDetails>Studio LXD</DescriptionDetails>
+        </DescriptionList>
+      </div>
+      <SiteShell>
+        <div data-caso="publica">
+          <DescriptionList>
+            <DescriptionTerm>Cliente</DescriptionTerm><DescriptionDetails>Studio LXD</DescriptionDetails>
+          </DescriptionList>
+        </div>
+      </SiteShell>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const talla = (caso: string, selector: string) =>
+      parseFloat(
+        getComputedStyle(
+          canvasElement.querySelector(`[data-caso="${caso}"] ${selector}`) as HTMLElement,
+        ).fontSize,
+      );
+
+    // Aplicación: 14 / 16 — el término, un peldaño por debajo del valor.
+    const terminoApp = talla('aplicacion', 'dt');
+    const valorApp = talla('aplicacion', 'dd');
+    await expect(terminoApp).toBeLessThan(valorApp);
+
+    // Pública: el valor sube y el término sube con él, sin quedarse atrás.
+    const terminoPub = talla('publica', 'dt');
+    const valorPub = talla('publica', 'dd');
+    await expect(valorPub).toBeGreaterThan(valorApp);
+    await expect(terminoPub).toBeGreaterThan(terminoApp);
+    await expect(terminoPub).toBe(valorApp);
+    await expect(terminoPub).toBeLessThan(valorPub);
   },
 };
 

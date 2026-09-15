@@ -20,9 +20,16 @@ la del valor ocupa el resto. Dentro van pares de término y valor en ese orden
 —`DescriptionTerm` y `DescriptionDetails`, o los `<dt>`/`<dd>` a pelo—; el
 componente solo aporta la caja, los separadores y la tipografía.
 
-El término se viste como una **etiqueta** (el cuerpo de interfaz, 14px) y el
-valor como **texto corriente**, que sigue el cuerpo de la superficie: 16px en
-aplicación, 20px dentro de un `SiteShell`.
+El valor se viste como **texto corriente**: sigue el cuerpo de la superficie,
+16px en aplicación y 20px dentro de un `SiteShell`. El término va **un peldaño
+por debajo del valor** —14px en aplicación, 16px en la pública—, así que el par
+guarda la misma relación en las dos superficies.
+
+<Canvas of={DescriptionListStories.EnSuperficiePublica} />
+
+Antes el término estaba atado a la talla de las etiquetas de interfaz (14px
+fijos) y no subía con su valor: dentro de un `SiteShell` el par quedaba en 14/20
+y el término se veía diminuto al lado de lo que describe.
 
 <Canvas of={DescriptionListStories.ConTextoLargo} />
 
