@@ -505,3 +505,54 @@ export const TextosDelProveedor: Story = {
     </BrandMessagesProvider>
   ),
 };
+
+/**
+ * Test: por debajo de `md` la barra es UNA columna, y lo que hay que medir es
+ * el control, no la celda que lo envuelve.
+ *
+ * La medida se toma a 600px —ancho de tableta en vertical, todavía por debajo
+ * de `md`— porque ahí es donde estaba el fallo: con la rejilla librada a su
+ * aritmética, un contenedor de 430px ya daba dos columnas de 207px. A 320px
+ * nunca se vio nada raro, y por eso el test que solo miraba el móvil estrecho
+ * lo dejó pasar.
+ */
+export const ContratoControlAnchoCompletoBajoMd: Story = {
+  name: 'Test — bajo md el control llena la línea',
+  tags: ['!dev'],
+  parameters: {
+    viewport: { options: { bajoMd: { name: 'Bajo md', styles: { width: '600px', height: '800px' } } } },
+  },
+  globals: { viewport: { value: 'bajoMd' } },
+  render: () => (
+    <FilterBar search={<Buscador />}>
+      <SelectField id="tcc-conexion" label="Conexión" options={ESTADOS} defaultValue="todos" />
+      <SelectField id="tcc-tiempo" label="Tiempo" options={PAPELES} defaultValue="todos" />
+      <DatePickerField id="tcc-desde" label="Desde" />
+    </FilterBar>
+  ),
+  play: async ({ canvasElement }) => {
+    const rejilla = canvasElement.querySelector('.filter-bar__row') as HTMLElement;
+    const ancho = rejilla.getBoundingClientRect().width;
+
+    // Una sola columna: las tres celdas empiezan en la misma abscisa y ninguna
+    // comparte renglón con otra.
+    const celdas = Array.from(
+      canvasElement.querySelectorAll<HTMLElement>('.filter-bar__filter'),
+    );
+    await expect(celdas).toHaveLength(3);
+    for (const celda of celdas) {
+      await expect(celda.getBoundingClientRect().width).toBeCloseTo(ancho, 0);
+    }
+
+    // Y el CONTROL llena la celda: el selector y el campo de fecha, no su
+    // envoltorio, que ya ocupaba la línea entera cuando llegó el aviso.
+    const controles = [
+      ...canvasElement.querySelectorAll<HTMLElement>('.filter-bar__filter .select'),
+      ...canvasElement.querySelectorAll<HTMLElement>('.filter-bar__filter .date-picker__control'),
+    ];
+    await expect(controles).toHaveLength(3);
+    for (const control of controles) {
+      await expect(control.getBoundingClientRect().width).toBeCloseTo(ancho, 0);
+    }
+  },
+};
