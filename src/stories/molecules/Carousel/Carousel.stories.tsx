@@ -4,6 +4,8 @@ import { Carousel, CarouselSlide } from './Carousel';
 import { Card } from '../Card/Card';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Logo } from '../../atoms/Logo/Logo';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const proyectos = [
   { id: 'junta', title: 'Formación para la Junta de Andalucía', description: 'Catálogo de cursos y tutorías para 4.000 empleados públicos.' },
@@ -127,5 +129,44 @@ export const Contrato: Story = {
     const siguiente = canvas.getByRole('button', { name: 'Siguiente' });
     await userEvent.click(siguiente);
     await expect(siguiente).toBeInTheDocument();
+  },
+};
+
+/**
+ * Los diez textos del carrusel salen de `carousel.*`, las dos
+ * `aria-roledescription` incluidas: las lee el lector de pantalla en voz alta,
+ * así que son texto y no una palabra clave del motor.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Carousel indicators>
+        <CarouselSlide><Paragraph>One</Paragraph></CarouselSlide>
+        <CarouselSlide><Paragraph>Two</Paragraph></CarouselSlide>
+        <CarouselSlide><Paragraph>Three</Paragraph></CarouselSlide>
+      </Carousel>
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: región, pista, mandos y anuncio de posición salen del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el carrusel lee su cromo del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Carousel>
+        <CarouselSlide><Paragraph>One</Paragraph></CarouselSlide>
+        <CarouselSlide><Paragraph>Two</Paragraph></CarouselSlide>
+      </Carousel>
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('region', { name: 'Carousel' })).toBeInTheDocument();
+    await expect(canvas.getByRole('group', { name: 'Slides' })).toBeInTheDocument();
+    await expect(canvas.getByRole('button', { name: 'Previous' })).toBeInTheDocument();
+    await expect(canvas.getByText('Slide 1 of 2')).toBeInTheDocument();
   },
 };

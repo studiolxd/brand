@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { LegalFooter } from './LegalFooter';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const links = [
   { id: 'aviso', label: 'Aviso legal', href: '#aviso-legal' },
@@ -35,5 +37,39 @@ export const Contrato: Story = {
     await expect(enlaces[1]).toHaveAttribute('href', '#privacidad');
     await expect(enlaces[1]).toHaveAttribute('data-router', 'sí');
     await expect(canvas.getByRole('contentinfo')).toBeInTheDocument();
+  },
+};
+
+/**
+ * El nombre de la navegación sale de `legalFooter.label`. Los rótulos de los
+ * enlaces son datos y viajan en `links`; el `title` es el contenido de ESE pie.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <LegalFooter
+        links={[
+          { id: 'legal', label: 'Legal notice', href: '#legal' },
+          { id: 'privacy', label: 'Privacy', href: '#privacy' },
+          { id: 'cookies', label: 'Cookies', href: '#cookies' },
+        ]}
+      />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el pie toma el nombre de su navegación del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el pie lee el nombre de su navegación del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <LegalFooter links={[{ id: 'privacy', label: 'Privacy', href: '#privacy' }]} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('navigation', { name: 'Legal' })).toBeInTheDocument();
   },
 };

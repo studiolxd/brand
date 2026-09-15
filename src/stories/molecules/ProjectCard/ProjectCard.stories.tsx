@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { ProjectCard } from './ProjectCard';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const foto = {
   src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=960&q=80',
@@ -57,5 +59,38 @@ export const Contrato: Story = {
     // Las etiquetas son una lista con nombre.
     const lista = canvas.getByRole('list', { name: 'Categorías' });
     await expect(within(lista).getAllByRole('listitem')).toHaveLength(2);
+  },
+};
+
+/**
+ * El nombre de la lista de etiquetas sale de `projectCard.tags`. El título, la
+ * descripción y las etiquetas en sí son contenido.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <ProjectCard
+        title="Moodle for the regional government"
+        description="Rollout, theming and migration."
+        tags={[{ label: 'LMS' }, { label: 'Moodle' }]}
+        href="#proyecto"
+      />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: la lista de etiquetas toma su nombre del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — la tarjeta lee el nombre de sus etiquetas del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <ProjectCard title="Moodle" tags={[{ label: 'LMS' }]} href="#proyecto" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('list', { name: 'Categories' })).toBeInTheDocument();
   },
 };

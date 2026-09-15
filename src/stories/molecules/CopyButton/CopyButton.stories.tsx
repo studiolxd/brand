@@ -8,6 +8,8 @@ import {
 } from '../../atoms/DescriptionList/DescriptionList';
 import { Inline } from '../../atoms/Inline/Inline';
 import { CopyButton } from './CopyButton';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta = {
   title: 'Molecules/CopyButton',
@@ -122,5 +124,42 @@ export const TestAcuse: Story = {
       await expect(canvas.getByRole('status')).toHaveTextContent('Copiado');
     });
     await expect(button).toHaveTextContent('Copiado');
+  },
+};
+
+/**
+ * Los tres textos del botón —el nombre, el acuse y el aviso de que el
+ * portapapeles no está— salen de `copy.*` del catálogo, que es **un espacio de
+ * conducta y no de componente**: los mismos tres los dicen `CopyableValue` y el
+ * acuse de `CodeBlock`.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  args: { value: 'sk-live-42' },
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Inline gap="md">
+        <CopyButton value="sk-live-42" />
+        <CopyButton value="sk-live-42">Copy key</CopyButton>
+      </Inline>
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el nombre y el acuse salen del catálogo, no de un default. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el botón lee su nombre y su acuse del proveedor',
+  args: { value: 'sk-live-42' },
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <CopyButton value="sk-live-42" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const boton = canvas.getByRole('button', { name: 'Copy' });
+    await userEvent.click(boton);
+    await waitFor(() => expect(canvas.getByRole('status')).toHaveTextContent('Copied'));
   },
 };

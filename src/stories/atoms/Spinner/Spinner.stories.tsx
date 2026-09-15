@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { Spinner } from './Spinner';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof Spinner> = {
   title: 'Atoms/Spinner',
@@ -51,5 +53,35 @@ export const Decorativo: Story = {
   play: async ({ canvasElement }) => {
     await expect(within(canvasElement).queryByRole('status')).toBeNull();
     await expect(canvasElement.querySelector('.spinner')).toHaveAttribute('aria-hidden', 'true');
+  },
+};
+
+/**
+ * El texto de la espera sale de `spinner.label`. Conserva los puntos
+ * suspensivos: es progreso, no una frase (Foundations → Redacción § «Los
+ * estados de carga llevan puntos suspensivos»). Un spinner decorativo
+ * (`aria-hidden`) **no exige la clave**: no anuncia nada.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Spinner />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: la espera lee del catálogo y conserva los puntos suspensivos. */
+export const ContratoProveedor: Story = {
+  name: 'Test — la espera lee su texto del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Spinner />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('status', { name: 'Loading…' })).toBeInTheDocument();
   },
 };

@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, within } from 'storybook/test';
 import { Button } from '../../atoms/Button/Button';
 import { NotificationList, type NotificationListItem } from './NotificationList';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const items: NotificationListItem[] = [
   {
@@ -294,5 +296,47 @@ export const ContratoMarcarLeida: Story = {
     const [primero, segundo] = Array.from(fila.querySelectorAll('.button'));
     await expect(primero).toHaveTextContent('Marcar como leída');
     await expect(segundo).toHaveTextContent('Eliminar');
+  },
+};
+
+/**
+ * Los tres textos de la bandeja salen de `notificationList.*`, un espacio
+ * **propio y distinto del `notificationPanel`**: son dos piezas distintas —la
+ * bandeja a página completa y el flotante de la cabecera— y el catálogo de la
+ * suite también las tiene aparte. Lo que cuenta cada notificación es contenido
+ * y viaja en `items`.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <NotificationList
+        onMarkRead={() => {}}
+        items={[
+          { id: '1', title: 'New sign-in', body: 'From a new device.', time: '5 min ago', unread: true },
+          { id: '2', title: 'Invoice paid', time: 'yesterday', unread: false },
+        ]}
+      />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: la lista, la marca de no leída y el botón salen del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — la bandeja lee sus textos del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <NotificationList
+        onMarkRead={() => {}}
+        items={[{ id: '1', title: 'New sign-in', time: '5 min ago', unread: true }]}
+      />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('list', { name: 'Notifications' })).toBeInTheDocument();
+    await expect(canvas.getByRole('button', { name: 'Mark as read' })).toBeInTheDocument();
+    await expect(canvas.getByText('Unread')).toBeInTheDocument();
   },
 };

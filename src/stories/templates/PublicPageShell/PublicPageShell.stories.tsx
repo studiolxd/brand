@@ -90,6 +90,23 @@ export const ConPreferencias: Story = {
   },
 };
 
+/**
+ * La banda de preferencias alinea con el contenido, no al revés: una página
+ * que lee a `lg` pide `preferencesWidth="lg"` y la banda estrecha con ella.
+ * **No se anida un `Container` dentro de `preferences`** —eso dobla el relleno
+ * lateral y desalinea—. El `main` no se entera: lleva su propio `mainWidth`.
+ */
+export const PreferenciasAOtraMedida: Story = {
+  name: 'La banda de preferencias a otra medida',
+  args: {
+    header: <SiteHeader><SiteNav groups={indice} /></SiteHeader>,
+    preferences: conmutadores,
+    preferencesWidth: 'lg',
+    mainWidth: 'lg',
+    footer: <LegalFooter links={legal} />,
+  },
+};
+
 /** La cabecera lanza al renderizar: desaparece ella, no la página. */
 export const CabeceraQueFalla: Story = {
   name: 'Con una cabecera que falla',
@@ -170,6 +187,21 @@ export const ContratoPreferencias: Story = {
     await expect(main.compareDocumentPosition(banda) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     await expect(banda.compareDocumentPosition(pie) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     await expect(banda.querySelector('.public-page-shell__preferences-row')).not.toBeNull();
+  },
+};
+
+export const ContratoPreferenciasWidth: Story = {
+  name: 'Test — la banda toma la medida que se le pide y el main no se entera',
+  tags: ['!dev'],
+  args: { ...ConPreferencias.args, preferencesWidth: 'lg' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const banda = canvas.getByRole('region', { name: 'Preferencias' });
+    await expect(banda.querySelector('.container__inner--lg')).not.toBeNull();
+    // Un solo `Container`: la banda no anida otro dentro de la ranura.
+    await expect(banda.querySelectorAll('.container__inner')).toHaveLength(1);
+    // El `main` conserva su medida por defecto.
+    await expect(canvas.getByRole('main').querySelector('.container__inner--xl')).not.toBeNull();
   },
 };
 

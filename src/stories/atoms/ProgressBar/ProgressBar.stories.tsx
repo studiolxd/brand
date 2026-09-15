@@ -1,7 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { ProgressBar } from './ProgressBar';
+import { Stack } from '../Stack/Stack';
 import { SOLO_OSCURO } from '../../utils/chromaticModes';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof ProgressBar> = {
   title: 'Atoms/ProgressBar',
@@ -163,5 +166,41 @@ export const ContratoCifraDentroEnOscuro: Story = {
     const cifra = canvasElement.querySelector('.progress-bar__label--inside') as HTMLElement;
     await expect(cifra).toBeInTheDocument();
     await expect(getComputedStyle(cifra).color).not.toBe(getComputedStyle(relleno).backgroundColor);
+  },
+};
+
+/**
+ * El nombre **genérico** de la barra sale de `progressBar.label`; el de ESTA
+ * pantalla —qué está avanzando de verdad— sigue siendo la prop `label`, que
+ * gana. Las dos barras de abajo lo enseñan juntas.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Stack gap="md">
+        <ProgressBar value={40} />
+        <ProgressBar value={72} label="Uploading the video" />
+      </Stack>
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: sin prop manda el catálogo; con prop, la pantalla. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el nombre genérico sale del proveedor y la prop gana',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <ProgressBar value={40} />
+      <ProgressBar value={72} label="Uploading the video" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('progressbar', { name: 'Progress' })).toBeInTheDocument();
+    await expect(
+      canvas.getByRole('progressbar', { name: 'Uploading the video' }),
+    ).toBeInTheDocument();
   },
 };

@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { CalendarRoster, type RosterRow } from './CalendarRoster';
 import { STORY_TODAY } from '../../utils/storyDate';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof CalendarRoster> = {
   title: 'Molecules/CalendarRoster',
@@ -269,5 +271,37 @@ export const NavegacionCompartida: Story = {
 
     const tabla = canvas.getByRole('table');
     await expect(tabla).toHaveAccessibleName(/mayo de 2026/i);
+  },
+};
+
+/**
+ * El encabezado de la columna de nombres y los seis tipos de la leyenda salen
+ * de `calendarRoster.*`; las dos flechas de mes, de `calendar.previousMonth` y
+ * `.nextMonth` —el mismo texto que el del `Calendar`, así que el mismo
+ * espacio—. Los meses y los días los escribe `Intl` desde `locale`.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <CalendarRoster month={new Date(2026, 0, 1)} rows={[]} locale="en-GB" />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: la leyenda se arma con los seis tipos del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el cuadrante arma su leyenda desde el proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <CalendarRoster month={new Date(2026, 0, 1)} rows={[]} locale="en-GB" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('group', { name: 'Legend' })).toBeInTheDocument();
+    await expect(canvas.getByRole('columnheader', { name: 'Employee' })).toBeInTheDocument();
+    await expect(canvas.getByText('Non-working day')).toBeInTheDocument();
   },
 };

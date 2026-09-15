@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { Chart } from './Chart';
 import type { ChartDatum, ChartSeries } from './Chart';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 /** Precio por millón de tokens de tres modelos, tal y como lo guarda aipricing. */
 const PRECIOS: ChartDatum[] = [
@@ -399,5 +401,51 @@ export const TestColorPorDato: Story = {
     // comprueba que efectivamente pinta, que es el contrato.
     await expect(barra).toHaveAttribute('fill', '#1E7FF6');
     await expect(getComputedStyle(barra).fill).toBe('rgb(30, 127, 246)');
+  },
+};
+
+/**
+ * El cromo del gráfico —el nombre de la tabla equivalente, sus encabezados, la
+ * pista que se lee al enfocar el lienzo y el aviso de serie vacía— sale de
+ * `chart.*`. **`ariaLabel` no**: dice qué cuenta ESTE gráfico y sigue siendo
+ * obligatorio y sin default.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Chart
+        type="donut"
+        data={[{ etapa: 'Won', total: 24 }, { etapa: 'Lost', total: 9 }]}
+        series={[{ key: 'total', label: 'Deals' }]}
+        xKey="etapa"
+        ariaLabel="Deals by stage"
+        locale="en-GB"
+      />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: la tabla equivalente se nombra desde el catálogo; el gráfico, no. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el gráfico lee el cromo de su tabla del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Chart
+        type="donut"
+        data={[{ etapa: 'Won', total: 24 }]}
+        series={[{ key: 'total', label: 'Deals' }]}
+        xKey="etapa"
+        ariaLabel="Deals by stage"
+        locale="en-GB"
+      />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('table', { name: 'Chart data' })).toBeInTheDocument();
+    await expect(canvas.getByRole('columnheader', { name: 'Category' })).toBeInTheDocument();
+    await expect(canvas.getByRole('img', { name: 'Deals by stage' })).toBeInTheDocument();
   },
 };

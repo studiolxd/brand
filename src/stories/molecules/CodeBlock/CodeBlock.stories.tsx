@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { CodeBlock, CodeToken } from './CodeBlock';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof CodeBlock> = {
   title: 'Molecules/CodeBlock',
@@ -341,5 +343,36 @@ export const ContratoCodeToken: Story = {
     }
 
     await expect(canvas.getByText('+ añadida')).toHaveClass('code-block__token--inserted');
+  },
+};
+
+/**
+ * El bloque lee de **dos espacios**: el suyo (`codeBlock.copy`, que dice
+ * «Copiar código» y no solo «Copiar», y `codeBlock.region`, el nombre del área
+ * desplazable) y el de la familia (`copy.copied`, el acuse, que es el mismo en
+ * todas partes).
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <CodeBlock language="bash" copyable>pnpm add @studiolxd/brand</CodeBlock>
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el rótulo propio y el acuse compartido salen cada uno de su espacio. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el bloque lee de codeBlock y de copy',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <CodeBlock language="bash" copyable>pnpm add @studiolxd/brand</CodeBlock>
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('button', { name: 'Copy code' })).toBeInTheDocument();
+    await expect(canvas.getByRole('region', { name: 'bash code block' })).toBeInTheDocument();
   },
 };

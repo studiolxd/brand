@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { Slider } from './Slider';
 import { Stack } from '../Stack/Stack';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof Slider> = {
   title: 'Atoms/Slider',
@@ -91,5 +93,39 @@ export const TestRango: Story = {
     await expect(canvas.getAllByRole('slider')).toHaveLength(2);
     await expect(canvas.getByRole('slider', { name: 'Mínimo' })).toHaveValue('20');
     await expect(canvas.getByRole('slider', { name: 'Máximo' })).toHaveValue('80');
+  },
+};
+
+/**
+ * Los nombres de los pulgares salen de `slider.*`: con uno solo, el `label` de
+ * la pantalla y en su defecto `slider.value`; con dos, `slider.min` y
+ * `slider.max`; con más, `slider.valueAt`. Cada clave se lee **donde se
+ * pinta**, así que un deslizador de un pulgar no exige las del rango.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Stack gap="lg">
+        <Slider defaultValue={40} />
+        <Slider label="Price" defaultValue={[20, 80]} />
+      </Stack>
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el rango toma sus dos nombres del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — los pulgares leen su nombre del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Slider label="Price" defaultValue={[20, 80]} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('slider', { name: 'Minimum' })).toBeInTheDocument();
+    await expect(canvas.getByRole('slider', { name: 'Maximum' })).toBeInTheDocument();
   },
 };

@@ -33,6 +33,18 @@ export interface PublicPageShellProps {
    */
   preferencesLabel?: string;
   /**
+   * Medida del contenido de la banda de preferencias, tal cual la de
+   * `Container`. Por defecto `'xl'`, la misma que el `main` de una página
+   * pública corriente. Se baja a `'lg'` cuando la página entera lee a esa
+   * medida: la banda tiene que alinear con el contenido, no al revés. Lleva el
+   * prefijo de la ranura —como `mainWidth`— porque el marco tiene cuatro y un
+   * `width` pelado no diría cuál gobierna.
+   *
+   * No se resuelve anidando un `Container` dentro de `preferences`: eso dobla
+   * el relleno lateral y desalinea la banda con el `main`.
+   */
+  preferencesWidth?: ContainerWidth;
+  /**
    * Medida del contenido del `main`, tal cual la de `Container`. Por defecto
    * `'xl'` (1280px), el ancho de las páginas públicas; `'full'` para que el
    * contenido llegue tan lejos como la banda, que es lo que necesita una
@@ -89,7 +101,9 @@ export interface PublicPageShellProps {
  *
  * **El `main` lleva los mismos mandos que un `Container`** (`mainWidth`,
  * `mainSpace`, `mainFlush`), con los defaults de siempre. Es lo que permite que
- * una portada abra con un `Hero` de lado a lado sin salirse del marco.
+ * una portada abra con un `Hero` de lado a lado sin salirse del marco. La
+ * banda de preferencias tiene el suyo, `preferencesWidth`, para que pueda
+ * alinear con un contenido más estrecho sin anidar otro `Container` dentro.
  */
 /**
  * El único texto del marco, y es **cromo**: el nombre de la banda donde viven
@@ -107,6 +121,7 @@ export const PublicPageShell = forwardRef<HTMLDivElement, PublicPageShellProps>(
     footer,
     preferences,
     preferencesLabel,
+    preferencesWidth = 'xl',
     mainWidth = 'xl',
     mainSpace = 'xl',
     mainFlush = false,
@@ -119,7 +134,12 @@ export const PublicPageShell = forwardRef<HTMLDivElement, PublicPageShellProps>(
   if (!shell) return <>{children}</>;
 
   const banda = preferences && (
-    <Container as="section" className="public-page-shell__preferences" aria-label={t('preferences', preferencesLabel)}>
+    <Container
+      as="section"
+      width={preferencesWidth}
+      className="public-page-shell__preferences"
+      aria-label={t('preferences', preferencesLabel)}
+    >
       <div className="public-page-shell__preferences-row">{preferences}</div>
     </Container>
   );

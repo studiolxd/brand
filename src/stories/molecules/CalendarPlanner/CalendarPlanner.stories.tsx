@@ -4,6 +4,8 @@ import { expect, userEvent, within } from 'storybook/test';
 import { Tag } from '../../atoms/Tag/Tag';
 import { CalendarPlanner, type PlannerEvent } from './CalendarPlanner';
 import { STORY_TODAY } from '../../utils/storyDate';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof CalendarPlanner> = {
   title: 'Molecules/CalendarPlanner',
@@ -236,5 +238,52 @@ export const TecladoDeCeldas: Story = {
     await userEvent.keyboard('{ArrowRight}');
     await expect(document.activeElement?.textContent).not.toBe(inicial);
     await expect(document.activeElement).toHaveAttribute('role', 'gridcell');
+  },
+};
+
+/**
+ * El botón de desbordamiento —«+3 más»— sale de `calendarPlanner.more`, y las
+ * dos flechas de mes de `calendar.previousMonth` / `.nextMonth`. `gridLabel`
+ * queda fuera: nombra a ESTE planificador.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <CalendarPlanner
+        month={new Date(2026, 0, 1)}
+        locale="en-GB"
+        maxItemsPerDay={1}
+        events={[
+          { id: 'a', date: new Date(2026, 0, 14), label: 'Kick-off' },
+          { id: 'b', date: new Date(2026, 0, 14), label: 'Review' },
+          { id: 'c', date: new Date(2026, 0, 14), label: 'Retro' },
+        ]}
+      />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el botón de desbordamiento sale del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el desbordamiento lee su rótulo del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <CalendarPlanner
+        month={new Date(2026, 0, 1)}
+        locale="en-GB"
+        maxItemsPerDay={1}
+        events={[
+          { id: 'a', date: new Date(2026, 0, 14), label: 'Kick-off' },
+          { id: 'b', date: new Date(2026, 0, 14), label: 'Review' },
+          { id: 'c', date: new Date(2026, 0, 14), label: 'Retro' },
+        ]}
+      />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText('+2 more')).toBeInTheDocument();
   },
 };

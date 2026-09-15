@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { DotsButton } from './DotsButton';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta = {
   title: 'Atoms/DotsButton',
@@ -52,5 +54,33 @@ export const Contrato: Story = {
       await expect(Math.round(r.height)).toBe(px);
       await expect(b).toHaveClass('button--ghost');
     }
+  },
+};
+
+/**
+ * El nombre del botón sale de `dotsButton.label`. El `ContextMenu` que lo monta
+ * **no repite la clave**: su `label` es un reenvío puro.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <DotsButton />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el botón toma su nombre del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el botón lee su nombre del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <DotsButton />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('button', { name: 'More options' })).toBeInTheDocument();
   },
 };

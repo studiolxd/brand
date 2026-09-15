@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { TooltipProvider } from '../../atoms/Tooltip/Tooltip';
 import { UptimeBars, type UptimeBarsPoint } from './UptimeBars';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta = {
   title: 'Molecules/UptimeBars',
@@ -199,5 +201,44 @@ export const ContratoCabeEnMovil: Story = {
     await expect(lista.scrollWidth).toBeLessThanOrEqual(lista.clientWidth);
     const primera = lista.querySelector('.uptime-bars__bar')!.getBoundingClientRect();
     await expect(primera.width).toBeGreaterThan(0);
+  },
+};
+
+/**
+ * El nombre de la tira y la forma de decir «no hay dato» salen de
+ * `uptimeBars.*`. Las fechas y los porcentajes **no**: son formato, y los
+ * escribe quien pasa los puntos.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  args: { points: [], summary: '99.98% uptime' },
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <UptimeBars
+        points={[
+          { value: null, label: '3 September' },
+          { value: 100, label: '4 September', detail: 'No incidents' },
+          { value: 92.4, label: '5 September', detail: 'Down for 2 h 14 min' },
+        ]}
+        summary="97.4% uptime"
+      />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el nombre de la tira y el «sin dato» salen del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — la tira lee sus textos del proveedor',
+  args: { points: [], summary: '99.98% uptime' },
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <UptimeBars points={[{ value: null, label: '5 September' }]} summary="99.98% uptime" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('list', { name: 'Uptime' })).toBeInTheDocument();
+    await expect(canvas.getByRole('img', { name: '5 September: no data' })).toBeInTheDocument();
   },
 };

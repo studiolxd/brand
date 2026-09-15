@@ -6,6 +6,8 @@ import { Icon } from '../../atoms/Icon/Icon';
 import { Stack } from '../../atoms/Stack/Stack';
 import { Button } from '../../atoms/Button/Button';
 import { Menu } from '../Menu/Menu';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof TreeView> = {
   title: 'Molecules/TreeView',
@@ -341,5 +343,34 @@ export const TestArrastre: Story = {
     await expect(prohibida).toHaveAttribute('data-drop', 'disabled');
     // Prohibida para soltar, pero NO deshabilitada: sigue navegable y elegible.
     await expect(prohibida).not.toHaveAttribute('aria-disabled');
+  },
+};
+
+/**
+ * El nombre **genérico** del árbol sale de `treeView.label`; el de ESTE árbol
+ * —«Matriz de contenidos»— sigue siendo la prop, que gana. Los rótulos de las
+ * ramas son datos y viajan en `items`.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <TreeView items={[{ id: 'a', label: 'Unit 1', children: [{ id: 'b', label: 'Lesson 1' }] }]} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el árbol toma su nombre genérico del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el árbol lee su nombre del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <TreeView items={[{ id: 'a', label: 'Unit 1' }]} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('tree', { name: 'Tree' })).toBeInTheDocument();
   },
 };

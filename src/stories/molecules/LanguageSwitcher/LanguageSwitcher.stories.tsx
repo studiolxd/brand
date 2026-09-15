@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within, userEvent, waitFor } from 'storybook/test';
 import { LanguageSwitcher, type Language } from './LanguageSwitcher';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const idiomas: Language[] = [
   { code: 'es', label: 'Español' },
@@ -144,4 +146,46 @@ export const ContratoLista: Story = {
 export const Apilado: Story = {
   name: 'Apilado (formulario)',
   args: { layout: 'stacked' },
+};
+
+/**
+ * La etiqueta del control sale de `languageSwitcher.label`. Los nombres de los
+ * idiomas **no pasan por el catálogo y no es olvido**: van cada uno en su
+ * propio idioma y viajan en `languages`, que son datos.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <LanguageSwitcher
+        variant="list"
+        value="es"
+        languages={[
+          { code: 'es', label: 'Español' },
+          { code: 'en', label: 'English' },
+          { code: 'pt', label: 'Português' },
+        ]}
+      />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el rótulo sale del catálogo y los idiomas siguen en su idioma. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el selector lee su rótulo del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <LanguageSwitcher
+        variant="list"
+        value="es"
+        languages={[{ code: 'es', label: 'Español' }, { code: 'en', label: 'English' }]}
+      />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('navigation', { name: 'Language' })).toBeInTheDocument();
+    await expect(canvas.getByText('Español')).toBeInTheDocument();
+  },
 };

@@ -4,6 +4,8 @@ import { expect, userEvent, within } from 'storybook/test';
 import { Stepper, type StepperStep } from './Stepper';
 import { InputField } from '../InputField/InputField';
 import { Stack } from '../../atoms/Stack/Stack';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const ALTA: StepperStep[] = [
   { id: 'perfil', label: 'Perfil' },
@@ -182,5 +184,38 @@ export const ContratoAlcanzables: Story = {
     const items = within(canvas.getByRole('list', { name: 'Progreso' })).getAllByRole('listitem');
     await expect(items[0]).toHaveClass('stepper__step--current');
     await expect(canvas.queryAllByRole('button')).toHaveLength(0);
+  },
+};
+
+/**
+ * El nombre de la lista, la cuenta de la forma compacta y las tres marcas de
+ * estado salen de `stepper.*`. Las etiquetas de cada paso son contenido y
+ * viajan en `steps`.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Stepper
+        current={1}
+        steps={[{ label: 'Profile' }, { label: 'Organisation' }, { label: 'Invites' }]}
+      />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: la cuenta compacta y el nombre de la lista salen del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el progreso lee sus textos del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Stepper current={1} steps={[{ label: 'Profile' }, { label: 'Organisation' }]} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('list', { name: 'Progress' })).toBeInTheDocument();
+    await expect(canvas.getByText('Step 2 of 2')).toBeInTheDocument();
   },
 };

@@ -37,6 +37,18 @@ Se pasan los conmutadores sueltos. La banda la pone la plantilla: una `section` 
 
 Es la banda que cierra el panel de estado y el alta (`OnboardingShell`, que la pasa por debajo con su prop `preferences`): las dos pantallas la montaban a mano, cada una con su aire, y ahora la decisión vive en un solo sitio. Con `shell={false}` no se pinta, igual que `header` y `footer`: sin marco no hay ranura de pie.
 
+### La banda alinea con el contenido, no al revés
+
+El `Container` de la banda lleva su propio mando, `preferencesWidth` (default `'xl'`, lo de siempre). Una página que lee a `lg` lo baja, y la banda estrecha con ella:
+
+```tsx
+<PublicPageShell preferencesWidth="lg" mainWidth="lg" …>
+```
+
+**Lo que no se hace es anidar un `Container` dentro de `preferences`.** Parece que funciona, pero mete un `container__inner` dentro de otro: el relleno lateral se cuenta dos veces y la banda deja de alinear con el `main`. El prefijo del nombre es el de la ranura, como `mainWidth`: el marco tiene cuatro y un `width` pelado no diría cuál gobierna.
+
+<Canvas of={PublicPageShellStories.PreferenciasAOtraMedida} />
+
 ## Cabecera y pie, a salvo
 
 `header`, `preferences` y `footer` van cada uno dentro de un `ErrorBoundary` (fallback `null`): si la cabecera lanza al renderizar, desaparece ella y la página sigue. Nació de la página de error —que no puede depender del layout que pudo fallar—, y el resto de plantillas hereda la garantía sin pedirla.

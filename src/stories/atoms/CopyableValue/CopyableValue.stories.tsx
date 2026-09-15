@@ -3,6 +3,8 @@ import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { CopyableValue } from './CopyableValue';
 import { Code } from '../Code/Code';
 import { Table, TableHead, TableBody, TableRow, TableHeader, TableCell } from '../../molecules/Table/Table';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta = {
   title: 'Atoms/CopyableValue',
@@ -191,5 +193,35 @@ export const ContratoCeldaEstrecha: Story = {
     rangoCola.selectNodeContents(cola);
     const rectsCola = Array.from(rangoCola.getClientRects()).filter((r) => r.width > 0);
     await expect(enUnaSolaLinea(rectsCola)).toBe(true);
+  },
+};
+
+/**
+ * El nombre del botón y el acuse salen de `copy.*` — el mismo espacio que usa
+ * `CopyButton`, porque son literalmente las mismas dos palabras.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  args: { children: 'org_8f2c19ab' },
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <CopyableValue>org_8f2c19ab</CopyableValue>
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el valor en línea comparte espacio con el botón suelto. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el valor lee sus textos del proveedor',
+  args: { children: 'org_8f2c19ab' },
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <CopyableValue>org_8f2c19ab</CopyableValue>
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('button', { name: 'Copy' })).toBeInTheDocument();
   },
 };
