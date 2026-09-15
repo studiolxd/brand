@@ -147,3 +147,38 @@ export const ContratoCierre: Story = {
     await expect(canvas.getByText('Con cierre')).toBeInTheDocument();
   },
 };
+
+/**
+ * Test: norma del sistema — por debajo de `md` las acciones apilan y cada una
+ * ocupa la línea. No depende de que el consumidor pase `block="mobile"`.
+ */
+export const ContratoAccionesAnchoCompletoEnMovil: Story = {
+  name: 'Test — en móvil las acciones ocupan la línea',
+  tags: ['!dev'],
+  globals: { viewport: { value: 'mobile1' } },
+  render: () => (
+    <Banner
+      actions={
+        <>
+          <Button variant="outline">Dejar de suplantar</Button>
+          <Button variant="text">Saber más</Button>
+        </>
+      }
+    >
+      Estás viendo la aplicación como ana.perez@studiolxd.com.
+    </Banner>
+  ),
+  play: async ({ canvasElement }) => {
+    const ranura = canvasElement.querySelector('.banner__actions') as HTMLElement;
+    const botones = Array.from(ranura.querySelectorAll<HTMLElement>('.button'));
+    const anchoRanura = ranura.getBoundingClientRect().width;
+
+    for (const boton of botones) {
+      await expect(boton.getBoundingClientRect().width).toBeCloseTo(anchoRanura, 0);
+    }
+    // Uno debajo de otro, no repartidos en la misma línea.
+    await expect(botones[1].getBoundingClientRect().top).toBeGreaterThanOrEqual(
+      botones[0].getBoundingClientRect().bottom,
+    );
+  },
+};

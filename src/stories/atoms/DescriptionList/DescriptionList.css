@@ -1,5 +1,12 @@
+/* Ocupa el ancho de su hueco, siempre. Es una ficha de datos con filetes, no
+   un texto: encogida al contenido, los separadores se quedan a media línea y
+   la columna del valor no tiene dónde partir. Sin esta regla dependía de dónde
+   se pusiera —dentro de un `Stack` (que alinea al principio) se encogía, y en
+   uno `align="stretch"` no—, que es justo lo que el sistema no debe delegar en
+   el consumidor. */
 .description-list {
   display: grid;
+  inline-size: 100%;
   grid-template-columns: 1fr;
   border-width: var(--description-list-border-width);
   border-style: var(--description-list-border-style);

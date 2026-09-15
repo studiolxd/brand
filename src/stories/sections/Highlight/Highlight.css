@@ -25,6 +25,9 @@
   margin: 0;
 }
 
+/* La fila de botones es un `Inline stack="mobile"` (norma del sistema: por
+   debajo de `md` apila y cada acción ocupa la línea — ver Fundamentos › Puntos
+   de ruptura); la sección solo pone el aire que la separa del texto. */
 .highlight__actions {
   margin-block-start: var(--highlight-actions-space-before);
 }

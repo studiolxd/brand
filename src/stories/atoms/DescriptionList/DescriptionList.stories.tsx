@@ -321,3 +321,33 @@ export const ContratoCopiableValorLargo: Story = {
     await expect(enUnaSolaLinea(rectsCola)).toBe(true);
   },
 };
+
+/**
+ * Test: la lista ocupa el ancho de su hueco aunque el padre alinee al
+ * principio —un `Stack` sin `align="stretch"`—. El ancho es de la ficha, no
+ * de quien la coloca.
+ */
+export const ContratoAnchoDelHueco: Story = {
+  name: 'Test — ocupa el ancho de su hueco',
+  tags: ['!dev'],
+  args: { children: null },
+  render: () => (
+    <div
+      data-testid="hueco"
+      style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 600 }}
+    >
+      <DescriptionList>
+        <DescriptionTerm>Plan</DescriptionTerm>
+        <DescriptionDetails>Equipo</DescriptionDetails>
+      </DescriptionList>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const hueco = within(canvasElement).getByTestId('hueco');
+    const lista = canvasElement.querySelector('.description-list') as HTMLElement;
+    await expect(lista.getBoundingClientRect().width).toBeCloseTo(
+      hueco.getBoundingClientRect().width,
+      0,
+    );
+  },
+};

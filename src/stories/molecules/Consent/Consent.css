@@ -47,13 +47,36 @@
   color: inherit;
 }
 
-/* Las tres salidas, en fila y con el mismo peso: aceptar no está destacado
-   sobre rechazar más que por su variante de botón. */
+/* Las tres salidas, con el mismo peso: aceptar no está destacado sobre
+   rechazar más que por su variante de botón.
+
+   Norma del sistema (ver Fundamentos › Puntos de ruptura): por debajo de `md`
+   apilan y cada una ocupa la línea. Tres botones repartidos en una pantalla de
+   teléfono no dejan sitio para su etiqueta, y la banda es lo único que se ve.
+   Se estira contra el `align-items: center` de la fila interior. */
 .consent-banner__actions {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
+  align-self: stretch;
   gap: var(--consent-banner-actions-gap);
+}
+
+.consent-banner__actions > * {
+  inline-size: 100%;
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .consent-banner__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-self: auto;
+  }
+
+  .consent-banner__actions > * {
+    inline-size: auto;
+  }
 }
 
 /* --------------------------------------------------------------------------

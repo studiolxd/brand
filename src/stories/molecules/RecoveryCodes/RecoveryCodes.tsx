@@ -77,7 +77,7 @@ export function RecoveryCodes({
       </ol>
       {/* Fila de acciones: se oculta al imprimir (regla `@media print` en el
           CSS) para que solo quede la rejilla numerada en la página impresa. */}
-      <Inline gap="sm" className="recovery-codes__actions">
+      <Inline gap="sm" stack="mobile" className="recovery-codes__actions">
         <CopyButton
           value={() => codes.join('\n')}
           copiedLabel={labels.copied}

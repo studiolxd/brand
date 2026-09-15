@@ -37,11 +37,19 @@
   min-inline-size: 0;
 }
 
+/* Norma del sistema (ver Fundamentos › Puntos de ruptura): el pie de acciones
+   de un bloque a ancho completo apila y ocupa la línea por debajo de `md`. La
+   cinta ya es una columna ahí, así que la ranura además se estira
+   (`align-self`) contra el `align-items: flex-start` del padre. */
 .banner__actions {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
+  align-self: stretch;
   gap: var(--banner-gap);
+}
+.banner__actions > * {
+  inline-size: 100%;
 }
 
 /* ── Botón de cierre — esquina superior derecha ─────────────── */
@@ -66,6 +74,17 @@
 
   .banner__content {
     flex: 1;
+  }
+
+  .banner__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-self: auto;
+  }
+
+  .banner__actions > * {
+    inline-size: auto;
   }
 }
 

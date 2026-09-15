@@ -61,7 +61,11 @@ export function Highlight({
     <div className="highlight__text">
       <Heading level={titleLevel} size={titleSize} className="highlight__title">{title}</Heading>
       {description && <Paragraph size="large" className="highlight__description">{description}</Paragraph>}
-      {actions && <Inline className="highlight__actions">{actions}</Inline>}
+      {actions && (
+        <Inline stack="mobile" className="highlight__actions">
+          {actions}
+        </Inline>
+      )}
     </div>
   );
 

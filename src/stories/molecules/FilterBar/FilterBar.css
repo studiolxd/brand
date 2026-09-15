@@ -44,13 +44,34 @@
   min-inline-size: 0;
 }
 
-/* Al final de la fila: el margen automático las ancla al extremo, compartan
-   línea con los filtros o hayan bajado a la suya. */
+/* Norma del sistema (ver Fundamentos › Puntos de ruptura): por debajo de `md`
+   la barra entera es una columna —el buscador al 100%, los filtros en una sola
+   columna— y sus acciones no son la excepción: toman la línea entera, como
+   todo lo demás. */
 .filter-bar__actions {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
   gap: var(--filter-bar-actions-gap);
-  flex: 0 0 auto;
-  margin-inline-start: auto;
+  flex: 1 1 100%;
+}
+
+.filter-bar__actions > * {
+  inline-size: 100%;
+}
+
+/* Al final de la fila: el margen automático las ancla al extremo, compartan
+   línea con los filtros o hayan bajado a la suya. */
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .filter-bar__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    flex: 0 0 auto;
+    margin-inline-start: auto;
+  }
+
+  .filter-bar__actions > * {
+    inline-size: auto;
+  }
 }

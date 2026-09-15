@@ -37,6 +37,43 @@ Es la única situación en la que un valor del sistema aparece a mano en un CSS 
 
 ---
 
+## Las acciones ocupan la línea en móvil
+
+**Por debajo de `md`, un contenedor de acciones apila sus piezas y cada una ocupa la línea entera.** Dos botones repartidos en una pantalla de teléfono no dejan sitio para su etiqueta: o se parten en dos renglones o se quedan minúsculos. Apilados, el principal manda y el segundo se lee igual de bien.
+
+**Lo decide el sitio, no el botón.** La regla vive en el CSS del contenedor, no en una prop que hay que acordarse de pasar en cada llamada:
+
+```css
+.bloque__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--bloque-actions-gap);
+}
+.bloque__actions > * {
+  inline-size: 100%;
+}
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .bloque__actions {
+    flex-direction: row;
+    align-items: center;
+  }
+  .bloque__actions > * {
+    inline-size: auto;
+  }
+}
+```
+
+Cuando en la columna la acción principal debe quedar **arriba** —al alcance del pulgar— y en la fila de escritorio **al final**, la columna es `column-reverse` y el marcado va siempre en el orden del renglón: así el recorrido del teclado no cambia con el ancho. Es lo que hacen el pie de un `Form` y el de un diálogo.
+
+**Dónde está ya puesta:** `Form` (`.form__actions`, el modelo), el pie compartido de `Modal` y `Sheet` (`.dialog-footer`, y con él `ConfirmDialog` e `ImageCropDialog`), `PageIntro`, `Hero`, `Highlight`, `Banner`, `ConsentBanner`, `FilterBar`, `RecoveryCodes` y `OnboardingShell`.
+
+**Dónde NO se aplica, y por qué.** No es una norma universal: solo vale para el **pie o la cabecera de un bloque que ya ocupa el ancho**. Quedan fuera las acciones que viven **dentro de una fila**, al lado de otro contenido —`NotificationList`, `TreeView`, `MessageComposer`, `SiteHeader`—: ahí estirar el botón rompería la fila, que es lo que da sentido a la pieza. También quedan fuera los componentes que se reorganizan por el **ancho de su hueco** y no por el de la ventana (un panel lateral estrecho también en escritorio): esos son caso de `@container`.
+
+**Las prop de escape siguen existiendo** —`Button block="mobile"` e `Inline stack="mobile"`— para las filas que un producto monta a mano; pero dentro de un contenedor de acciones del sistema ya no hacen falta.
+
+---
+
 ## Tokens
 
 <TokenTable tokens={breakpointTokens} />

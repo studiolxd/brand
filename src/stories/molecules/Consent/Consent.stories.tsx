@@ -471,3 +471,34 @@ export const ContratoSinAccionesGlobales: Story = {
     await expect(dentro.getAllByRole('switch').length).toBeGreaterThan(0);
   },
 };
+
+/**
+ * Test: norma del sistema — por debajo de `md` las tres salidas apilan y cada
+ * una ocupa la línea. Repartidas, ninguna tiene sitio para su etiqueta.
+ */
+export const ContratoAccionesAnchoCompletoEnMovil: Story = {
+  name: 'Test — en móvil las acciones ocupan la línea',
+  tags: ['!dev'],
+  globals: { viewport: { value: 'mobile1' } },
+  render: () => (
+    <ConsentBanner
+      open
+      onAcceptAll={() => {}}
+      onRejectAll={() => {}}
+      onOpenPreferences={() => {}}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const ranura = canvasElement.querySelector('.consent-banner__actions') as HTMLElement;
+    const botones = Array.from(ranura.querySelectorAll<HTMLElement>('.button'));
+    const anchoRanura = ranura.getBoundingClientRect().width;
+
+    await expect(botones).toHaveLength(3);
+    for (const boton of botones) {
+      await expect(boton.getBoundingClientRect().width).toBeCloseTo(anchoRanura, 0);
+    }
+    await expect(botones[1].getBoundingClientRect().top).toBeGreaterThanOrEqual(
+      botones[0].getBoundingClientRect().bottom,
+    );
+  },
+};

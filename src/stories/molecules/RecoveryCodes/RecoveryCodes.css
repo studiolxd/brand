@@ -38,6 +38,10 @@
   font-family: var(--recovery-codes-font-family);
 }
 
+/* Es un `Inline stack="mobile"`: por debajo de `md` los botones apilan y cada
+   uno ocupa la línea, como el pie de un `Form` (norma del sistema — ver
+   Fundamentos › Puntos de ruptura). Aquí solo el aire que lo separa de la
+   rejilla de códigos. */
 .recovery-codes__actions {
   margin-block-start: var(--recovery-codes-actions-margin-block-start);
 }

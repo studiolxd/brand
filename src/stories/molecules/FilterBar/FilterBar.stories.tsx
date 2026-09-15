@@ -159,3 +159,40 @@ export const ContratoApiladoEnMovil: Story = {
       .toBeGreaterThanOrEqual(filtros[0].getBoundingClientRect().bottom);
   },
 };
+
+/**
+ * Test: norma del sistema — por debajo de `md` las acciones de la barra
+ * ocupan la línea entera, como el buscador y los filtros.
+ */
+export const ContratoAccionesAnchoCompletoEnMovil: Story = {
+  name: 'Test — en móvil las acciones ocupan la línea',
+  tags: ['!dev'],
+  globals: { viewport: { value: 'mobile1' } },
+  render: () => (
+    <FilterBar search={<Buscador />} actions={<Button variant="outline">Limpiar filtros</Button>}>
+      <SelectField id="tma-estado" label="Estado" options={ESTADOS} defaultValue="todos" />
+      <SelectField id="tma-papel" label="Papel" options={PAPELES} defaultValue="todos" />
+    </FilterBar>
+  ),
+  play: async ({ canvasElement }) => {
+    const fila = canvasElement.querySelector('.filter-bar__row') as HTMLElement;
+    const acciones = canvasElement.querySelector('.filter-bar__actions') as HTMLElement;
+    const boton = acciones.querySelector('.button') as HTMLElement;
+    const filtros = canvasElement.querySelector('.filter-bar__filters') as HTMLElement;
+
+    // La ranura ocupa la fila entera…
+    await expect(acciones.getBoundingClientRect().width).toBeCloseTo(
+      fila.getBoundingClientRect().width,
+      0,
+    );
+    // …y el botón, la ranura entera.
+    await expect(boton.getBoundingClientRect().width).toBeCloseTo(
+      acciones.getBoundingClientRect().width,
+      0,
+    );
+    // En su propia línea, debajo de los filtros.
+    await expect(acciones.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+      filtros.getBoundingClientRect().bottom,
+    );
+  },
+};
