@@ -3,6 +3,26 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { Pagination } from './Pagination';
 import { Button } from '../../atoms/Button/Button';
+import { BrandMessagesProvider } from '../../../messages/BrandMessagesProvider';
+import type { BrandMessages } from '../../../messages/BrandMessages';
+
+/**
+ * El catálogo de otra app, en inglés, para enseñar de dónde salen los textos
+ * cuando no se pasa ninguna prop. El Storybook monta el suyo (castellano) para
+ * todas las stories; este lo tapa solo aquí.
+ */
+const EN: BrandMessages = {
+  pagination: {
+    label: 'Pagination',
+    pagesGroup: 'Pages',
+    previous: 'Previous page',
+    next: 'Next page',
+    goToPage: (page) => `Page ${page}`,
+    perPage: 'Rows per page',
+    total: (total) => `${total} results`,
+    allOption: 'All',
+  },
+};
 
 const meta: Meta<typeof Pagination> = {
   title: 'Molecules/Pagination',
@@ -41,11 +61,12 @@ export const Default: Story = {
 };
 
 /**
- * Test: sin props de etiqueta se siguen emitiendo los textos por defecto en castellano
- * (retrocompatibilidad — nadie que ya use el componente debe ver un cambio).
+ * Test: sin props de etiqueta, los textos salen del `BrandMessagesProvider`
+ * que monta la aplicación — aquí, el catálogo castellano del Storybook. El
+ * componente ya no trae ningún texto puesto.
  */
 export const EtiquetasPorDefecto: Story = {
-  name: 'Test — etiquetas por defecto (castellano)',
+  name: 'Test — los textos salen del proveedor',
   tags: ['!dev'],
   args: { total: 100, page: 3, pageSize: 10 },
   render: (args) => (
@@ -66,11 +87,11 @@ export const EtiquetasPorDefecto: Story = {
 };
 
 /**
- * Test: pasando las props de etiqueta, se usan en los `aria-label` y en el sumario
- * (caso de una app multiidioma que inyecta sus traducciones).
+ * Test: la prop suelta gana al proveedor. Es la anulación puntual — el
+ * `ariaLabel` de un paginador concreto no tiene por qué ser el de todos.
  */
 export const EtiquetasTraducidas: Story = {
-  name: 'Test — etiquetas traducidas',
+  name: 'Test — la prop gana al proveedor',
   tags: ['!dev'],
   args: { total: 100, page: 3, pageSize: 10 },
   render: (args) => (
@@ -102,6 +123,46 @@ export const EtiquetasTraducidas: Story = {
     // ninguna etiqueta en castellano sobrevive
     await expect(canvas.queryByLabelText('Página 3')).toBeNull();
     await expect(canvas.queryByLabelText('Página anterior')).toBeNull();
+  },
+};
+
+/**
+ * Los textos que el paginador emite por su cuenta —los `aria-label` y el
+ * sumario de `showTotal`— salen del `BrandMessagesProvider` que la aplicación
+ * monta en su raíz. Esta story tapa el del catálogo con uno en inglés: no se
+ * le pasa ni una prop de texto y el sumario cambia de idioma.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: (args) => {
+    const [page, setPage] = useState(args.page);
+    return (
+      <BrandMessagesProvider messages={EN}>
+        <Pagination {...args} page={page} onPageChange={setPage} showTotal />
+      </BrandMessagesProvider>
+    );
+  },
+};
+
+/** Test: el proveedor más cercano es el que manda. */
+export const ContratoProveedorAnidado: Story = {
+  name: 'Test — manda el proveedor más cercano',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Pagination total={100} page={3} pageSize={10} showTotal onPageSizeChange={() => {}} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('navigation', { name: 'Pagination' })).toBeInTheDocument();
+    await expect(canvas.getByLabelText('Page 3')).toBeInTheDocument();
+    await expect(canvas.getByLabelText('Rows per page')).toBeInTheDocument();
+    await expect(canvasElement.querySelector('.pagination__summary')).toHaveTextContent(
+      '100 results',
+    );
+    // el catálogo castellano del Storybook queda tapado, no mezclado
+    await expect(canvas.queryByLabelText('Página 3')).toBeNull();
   },
 };
 

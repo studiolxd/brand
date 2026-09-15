@@ -7,6 +7,8 @@ import './preview.css'
 import studiolxdTheme from './studiolxdTheme'
 import { STORY_TODAY } from '../src/stories/utils/storyDate'
 import { MODOS_CHROMATIC } from '../src/stories/utils/chromaticModes'
+import { BrandMessagesProvider } from '../src/messages/BrandMessagesProvider'
+import { brandMessagesFixture } from './brandMessagesFixture'
 
 /**
  * El catálogo vive siempre en la misma fecha. Sin esto, cualquier componente o
@@ -82,8 +84,26 @@ const withSurface: Decorator = (Story, context) => {
   return <Story />;
 };
 
+/**
+ * El catálogo de textos, para todas las stories. Los componentes ya no traen
+ * el castellano puesto: lo leen del `BrandMessagesProvider`, así que el
+ * Storybook —que es la aplicación que los monta— tiene que montarlo igual que
+ * lo hará cada app de la suite.
+ *
+ * El fixture es castellano por comodidad, pero no reintroduce el default que
+ * se quitó: vive en `.storybook/`, fuera del paquete publicado, y ningún
+ * código de un consumidor lo alcanza (ver `brandMessagesFixture.ts` y el test
+ * `src/messages/BrandMessages.test.ts`). Una story que quiera enseñar otro
+ * idioma envuelve su propio proveedor por encima de este.
+ */
+const withBrandMessages: Decorator = (Story) => (
+  <BrandMessagesProvider messages={brandMessagesFixture}>
+    <Story />
+  </BrandMessagesProvider>
+);
+
 const preview: Preview = {
-  decorators: [withSurface],
+  decorators: [withSurface, withBrandMessages],
   initialGlobals: {
     // La clave de la opción, no el color: es lo que espera el addon de fondos
     // (y lo que mueven los modos de Chromatic).
