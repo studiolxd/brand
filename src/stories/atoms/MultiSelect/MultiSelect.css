@@ -104,6 +104,12 @@
 }
 
 /* ─── Icon ────────────────────────────────────────────────── */
+/* El glifo se mide con un token del control, no con la prop `size` del `Icon`:
+   ver la nota del mismo bloque en `Select.css`. */
+.multi-select .multi-select__icon {
+  --icon-size: var(--multi-select-icon-size);
+}
+
 .multi-select__icon {
   flex-shrink: 0;
   transform: rotate(90deg);
@@ -220,6 +226,7 @@
   font-size: var(--multi-select-sm-font-size);
   --multi-select-height: var(--multi-select-sm-height);
   padding-inline: var(--multi-select-sm-padding-inline);
+  --multi-select-icon-size: var(--multi-select-sm-icon-size);
 }
 
 .multi-select__content--sm .multi-select__item {
@@ -232,6 +239,7 @@
   font-size: var(--multi-select-lg-font-size);
   --multi-select-height: var(--multi-select-lg-height);
   padding-inline: var(--multi-select-lg-padding-inline);
+  --multi-select-icon-size: var(--multi-select-lg-icon-size);
 }
 
 .multi-select__content--lg .multi-select__item {

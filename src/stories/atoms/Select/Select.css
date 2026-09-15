@@ -43,6 +43,14 @@
   border-color: var(--select-error-border-color);
 }
 
+/* El glifo se mide con un token del control, no con la prop `size` del `Icon`:
+   así sube con el trigger también cuando quien cambia la talla es la superficie
+   (la pública parte de `lg`) y no una prop. Gana a `.icon` por especificidad,
+   sin depender del orden en que se junten las hojas. */
+.select .select__icon {
+  --icon-size: var(--select-icon-size);
+}
+
 .select__icon {
   flex-shrink: 0;
   transform: rotate(90deg);
@@ -118,6 +126,7 @@
   block-size: var(--select-sm-height);
   font-size: var(--select-sm-font-size);
   padding-inline: var(--select-sm-padding-inline);
+  --select-icon-size: var(--select-sm-icon-size);
 }
 
 .select__content--sm .select__item {
@@ -130,6 +139,7 @@
   block-size: var(--select-lg-height);
   font-size: var(--select-lg-font-size);
   padding-inline: var(--select-lg-padding-inline);
+  --select-icon-size: var(--select-lg-icon-size);
 }
 
 .select__content--lg .select__item {

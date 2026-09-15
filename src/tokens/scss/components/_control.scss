@@ -4,7 +4,7 @@
 $lxd-control-border-style: solid; // Estilo del borde
 $lxd-control-border-radius: 0px; // Radio del borde
 $lxd-control-border-width: 1px; // Grosor del borde
-$lxd-control-height: 2.5rem; // Altura del control de una línea: la talla md del sistema
+$lxd-control-height: 2.5rem; // Altura del control de una línea: la talla md del sistema. Es la talla de PARTIDA, y la superficie pública la apunta a `lg-height`
 $lxd-control-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica
 $lxd-control-font-size: 1rem; // Tamaño de fuente
 $lxd-control-font-weight: 300; // Peso tipográfico
@@ -17,3 +17,6 @@ $lxd-control-focus-ring-width: 2px; // Grosor del anillo de foco
 $lxd-control-focus-ring-inset-offset: 1px; // Separación entre borde y anillo de foco
 $lxd-control-padding-inline: 1rem; // Padding inline — compartido por controles y elementos de formulario
 $lxd-control-padding-block: 1rem; // Padding block — solo para lo multilínea (Textarea) y para el aire de las filas de formulario. Los controles de una línea fijan su altura a la talla (`height`) con padding vertical 0
+$lxd-control-lg-height: 3rem; // Altura del control en talla lg: la talla lg del sistema. Es lo que la superficie pública pone como talla de partida (`.site-shell`)
+$lxd-control-lg-font-size: 1.25rem; // Tamaño de fuente en talla lg (20px), el cuerpo de la superficie pública
+$lxd-control-lg-padding-inline: 1.5rem; // Padding inline en talla lg
