@@ -7,6 +7,15 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [44.1.0] — 2026-09-15
+
+> **Minor.** Las estrellas ganadas de `StarRating` se rellenan en accent-2 sobre superficie
+> oscura.
+
+Un solo token, `star-rating.surface-dark-fill-color`, pasa de `{color.accent-1}` a
+`{color.accent-2}` (decisión del 2026-09-15). Sobre superficie clara sigue en prusia, que
+ahí sí contrasta. Ningún color nuevo.
+
 ## [44.0.0] — 2026-09-15
 
 > **Major.** Quinta familia al proveedor de textos: las subidas. `FileUpload`,

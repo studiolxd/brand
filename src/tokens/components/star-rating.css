@@ -29,6 +29,6 @@ html.dark {
   --star-rating-track-color: var(--color-text-on-dark); /** Contorno de la estrella sin ganar — surface-dark */
   --star-rating-count-color: var(--color-text-muted-on-dark); /** Tinta del recuento — surface-dark */
   --star-rating-empty-color: var(--color-text-muted-on-dark); /** Tinta del «todavía sin reseñas» — surface-dark */
-  --star-rating-fill-color: var(--color-accent-1); /** Relleno de la estrella ganada — surface-dark. `fill-color` (prussian) coincide con el fondo de la superficie y quedaría invisible. */
+  --star-rating-fill-color: var(--color-accent-2); /** Relleno de la estrella ganada — surface-dark. `fill-color` (prussian) coincide con el fondo de la superficie y quedaría invisible; accent-2 y no accent-1 por decisión del 2026-09-15. */
   --star-rating-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
 }
