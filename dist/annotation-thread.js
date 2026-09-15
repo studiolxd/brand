@@ -4,12 +4,16 @@ import "react";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
 //#region src/stories/organisms/AnnotationThread/AnnotationThread.tsx
 var r = {
+	open: "warning",
+	acknowledged: "info",
+	resolved: "success"
+}, i = {
 	day: "numeric",
 	month: "short",
 	hour: "2-digit",
 	minute: "2-digit"
 };
-function i({ entry: e, locale: r, dateFormat: i, editedLabel: a }) {
+function a({ entry: e, locale: r, dateFormat: i, editedLabel: a }) {
 	let o = e.date instanceof Date ? e.date : new Date(e.date), s = new Intl.DateTimeFormat(r, i).format(o);
 	return /* @__PURE__ */ n("article", {
 		className: "annotation-thread__item",
@@ -33,6 +37,10 @@ function i({ entry: e, locale: r, dateFormat: i, editedLabel: a }) {
 					e.edited && /* @__PURE__ */ t("span", {
 						className: "annotation-thread__edited",
 						children: a
+					}),
+					e.meta && /* @__PURE__ */ t("span", {
+						className: "annotation-thread__meta",
+						children: e.meta
 					})
 				]
 			}),
@@ -47,52 +55,55 @@ function i({ entry: e, locale: r, dateFormat: i, editedLabel: a }) {
 		]
 	});
 }
-function a({ annotation: a, replies: o = [], status: s = "open", actions: c, reply: l, locale: u = "es-ES", dateFormat: d = r, openLabel: f = "Abierta", resolvedLabel: p = "Resuelta", editedLabel: m = "editada", repliesLabel: h = (e) => e === 1 ? "1 respuesta" : `${e} respuestas`, label: g = "Hilo de anotaciones", className: _, ...v }) {
-	let y = s === "resolved";
+function o({ annotation: o, replies: s = [], status: c = "open", actions: l, reply: u, locale: d = "es-ES", dateFormat: f = i, openLabel: p = "Abierta", acknowledgedLabel: m = "Atendida", resolvedLabel: h = "Resuelta", editedLabel: g = "editada", repliesLabel: _ = (e) => e === 1 ? "1 respuesta" : `${e} respuestas`, label: v = "Hilo de anotaciones", className: y, ...b }) {
 	return /* @__PURE__ */ n("article", {
 		className: [
 			"annotation-thread",
-			y ? "annotation-thread--resolved" : "",
-			_ ?? ""
+			c === "open" ? "" : `annotation-thread--${c}`,
+			y ?? ""
 		].filter(Boolean).join(" "),
-		"aria-label": g,
-		...v,
+		"aria-label": v,
+		...b,
 		children: [
 			/* @__PURE__ */ t("div", {
 				className: "annotation-thread__status",
 				children: /* @__PURE__ */ t(e, {
-					variant: y ? "success" : "warning",
-					children: y ? p : f
+					variant: r[c],
+					children: {
+						open: p,
+						acknowledged: m,
+						resolved: h
+					}[c]
 				})
 			}),
-			/* @__PURE__ */ t(i, {
-				entry: a,
-				locale: u,
-				dateFormat: d,
-				editedLabel: m
+			/* @__PURE__ */ t(a, {
+				entry: o,
+				locale: d,
+				dateFormat: f,
+				editedLabel: g
 			}),
-			o.length > 0 && /* @__PURE__ */ n("div", {
+			s.length > 0 && /* @__PURE__ */ n("div", {
 				className: "annotation-thread__replies",
 				children: [/* @__PURE__ */ t("p", {
 					className: "annotation-thread__replies-label",
-					children: h(o.length)
-				}), o.map((e) => /* @__PURE__ */ t(i, {
+					children: _(s.length)
+				}), s.map((e) => /* @__PURE__ */ t(a, {
 					entry: e,
-					locale: u,
-					dateFormat: d,
-					editedLabel: m
+					locale: d,
+					dateFormat: f,
+					editedLabel: g
 				}, e.id))]
 			}),
-			l && /* @__PURE__ */ t("div", {
+			u && /* @__PURE__ */ t("div", {
 				className: "annotation-thread__reply",
-				children: l
+				children: u
 			}),
-			c && /* @__PURE__ */ t("footer", {
+			l && /* @__PURE__ */ t("footer", {
 				className: "annotation-thread__actions",
-				children: c
+				children: l
 			})
 		]
 	});
 }
 //#endregion
-export { a as AnnotationThread };
+export { o as AnnotationThread };

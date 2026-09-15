@@ -7,6 +7,51 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [40.1.0] — 2026-09-15
+
+> **Minor.** `AnnotationThread` gana un tercer estado y una ranura para la coordenada de
+> cada anotación.
+
+### El tercer estado: `acknowledged`
+
+El organismo tenía dos estados, `open` y `resolved`, y le faltaba el peldaño de en medio.
+No es un matiz visual: donde se usa, el pie ofrece **las transiciones disponibles desde
+donde estás**, así que colapsar «planteada» y «atendida» en un mismo `open` hace que el
+rótulo diga lo mismo en dos estados entre los que se puede mover, y la interfaz deja de
+decir si alguien se ha hecho cargo.
+
+Se llama `acknowledged` —«Atendida» por defecto, con su `acknowledgedLabel`— y no
+`verified`, que es el vocabulario de UN producto: donde nació, «verificada» significa que
+alguien comprobó el arreglo, pero en una nota de traducción el mismo peldaño es «alguien ya
+se ha hecho cargo». El nombre del sistema dice **dónde está el hilo** —planteado, atendido,
+cerrado—, no qué significa en tu dominio; el rótulo es prop, así que cada producto sigue
+diciendo su palabra. Se descartó `reviewed` por colisión: el componente vive en paneles de
+revisión, donde «revisada» ya se lee como otra cosa.
+
+El tratamiento es una **escala de presencia** —plena, segundo plano, retirada— con un solo
+token nuevo, `annotation-thread.acknowledged-opacity`, hermano del `resolved-opacity` que ya
+existía. Ningún color nuevo: el `Tag` usa su variante `info`. Y por ser opacidad se lee
+igual en superficie clara y oscura, así que no hizo falta ningún par `surface-dark-*`.
+
+### `AnnotationEntry.meta`: la coordenada de una anotación
+
+Ranura nueva **por anotación**, no del hilo: cada una tiene su fecha y su sitio, y una
+respuesta puede apuntar a otro lugar que la anotación que abre el hilo. Se pinta dentro de
+la cabecera de esa anotación, después del avatar, el autor, la fecha y la marca de editada
+— añade, no sustituye.
+
+No es `actions`, y la diferencia no es de colocación: `actions` son las cosas que se le
+hacen a la anotación —editar, borrar, citar—; la coordenada es parte de **lo que la
+anotación es**. Puesta entre los botones del pie se convertía en un botón más.
+
+Cuando no cabe, la que baja de línea es la coordenada y nunca la fecha: lo garantiza el
+orden del marcado, no una media query. Una coordenada larga —el título de una lección— se
+parte dentro en vez de desbordar el hilo. Las dos cosas las mide un test en un navegador de
+verdad, dentro de una caja estrecha.
+
+La ranura lee los tokens `meta-*` que el organismo ya tenía para la fecha, así que no
+estrena ninguno.
+
 ## [40.0.0] — 2026-09-15
 
 > **Major.** El sistema estrena **proveedor de textos**: un catálogo que se monta una vez

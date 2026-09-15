@@ -3104,6 +3104,7 @@ var e = {
 	"--annotation-thread-body-color": "#111e30",
 	"--annotation-thread-replies-label-font-size": "0.875rem",
 	"--annotation-thread-replies-label-color": "#4a4a4a",
+	"--annotation-thread-acknowledged-opacity": "0.7",
 	"--annotation-thread-resolved-opacity": "0.4",
 	"--chart-series-1": "#1e7ff6",
 	"--chart-series-2": "#f16123",
