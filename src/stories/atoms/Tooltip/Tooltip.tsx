@@ -4,6 +4,7 @@ import { forwardRef, useId, useState } from 'react';
 import type { ReactNode } from 'react';
 import { Tooltip as BaseTooltip } from '@base-ui/react/tooltip';
 import './Tooltip.css';
+import { usePortalContainer } from '../../constants/portal-container';
 
 export interface TooltipProviderProps {
   children: ReactNode;
@@ -85,6 +86,13 @@ export interface TooltipProps
    * @default true
    */
   describe?: boolean;
+  /**
+   * Nodo DOM donde montar el portal. Por defecto, el nodo de la superficie que
+   * llegue por contexto —`SiteShell` publica el suyo, para que la capa herede
+   * la talla de la superficie pública— y, si no hay ninguna, `document.body`.
+   * Pásalo solo para llevar la capa a otro sitio: gana siempre.
+   */
+  container?: HTMLElement | null;
   /** Clase adicional para el **bocadillo** (no para el disparador). */
   className?: string;
 }
@@ -114,9 +122,11 @@ export const Tooltip = forwardRef<HTMLElement, TooltipProps>(function Tooltip({
   onOpenChange,
   delayDuration,
   describe = true,
+  container,
   className,
   ...rest
 }, ref) {
+  const portalContainer = usePortalContainer(container);
   const popupId = useId();
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen ?? false);
   const isOpen = open ?? uncontrolledOpen;
@@ -138,7 +148,7 @@ export const Tooltip = forwardRef<HTMLElement, TooltipProps>(function Tooltip({
         {...rest}
       />
 
-      <BaseTooltip.Portal>
+      <BaseTooltip.Portal container={portalContainer}>
         <BaseTooltip.Positioner className="tooltip__positioner" side={side} align={align} sideOffset={sideOffset ?? tokenSideOffset}>
           <BaseTooltip.Popup
             id={popupId}

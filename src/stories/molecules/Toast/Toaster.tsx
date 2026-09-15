@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { Toast } from '@base-ui/react/toast';
 import { useCssProperties } from '../../constants/css-properties';
+import { usePortalContainer } from '../../constants/portal-container';
 import { Button } from '../../atoms/Button/Button';
 import { CloseButton } from '../../atoms/CloseButton/CloseButton';
 import {
@@ -114,6 +115,7 @@ function ToastList({ position, containerAriaLabel, closeLabel, closeButton, gap,
   // escribe por el CSSOM, nunca en un atributo `style` (que una app con
   // `style-src 'self'` descartaría sin avisar).
   const viewportRef = useCssProperties({ '--toast-gap': `${gap}px` });
+  const portalContainer = usePortalContainer(undefined);
 
   const classes = [
     'toaster',
@@ -123,7 +125,7 @@ function ToastList({ position, containerAriaLabel, closeLabel, closeButton, gap,
   ].filter(Boolean).join(' ');
 
   return (
-    <Toast.Portal>
+    <Toast.Portal container={portalContainer}>
       <Toast.Viewport
         ref={viewportRef}
         className={classes}

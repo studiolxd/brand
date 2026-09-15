@@ -37,6 +37,20 @@ No es una prop ni un tema: el marco vuelve a declarar los tokens de texto en su 
 
 Los componentes con talla propia (cabecera, pie, campos, botones, menús, calendarios) siguen sus tokens y no cambian aquí. Qué hereda y qué no, en Foundations → Tipografía.
 
+## Los portales heredan la superficie
+
+La lista de un `Select`, el calendario de un `DatePicker`, el panel de un `Popover` o el velo de un `Modal` **no viven donde vive el campo que los abre**: los monta un portal. Hasta la v46 ese portal iba a `document.body`, que no es descendiente de `.site-shell`, así que el campo se pintaba a 48px/20 y su lista se abría a 40px/16. El tema oscuro no tenía este problema porque se activa en `<html>` y cascadea a todo el documento; la superficie de lectura se activa a media altura del árbol.
+
+El shell **publica su nodo raíz por contexto** y todo componente con portal lo toma como destino cuando no recibe `container`: la capa monta dentro de `.site-shell` y hereda los tokens como cualquier otro descendiente. No hay nada que pasar en cada uso.
+
+<Canvas of={SiteShellStories.PortalesEnSuperficiePublica} />
+
+Lo hacen por defecto `Select`, `MultiSelect`, `AsyncSelect`, `AsyncMultiSelect`, `InputPhone`, `Popover` (y con él `DatePicker`, `DateTimeField`, `NotificationButton`), `Tooltip`, `Menu` (y con él `ContextMenu`, `DropdownField`, `OrgSwitcher`, `UserMenu`), `Modal` (y con él `ConfirmDialog`, `ImageCropDialog`, `AvatarUpload`, `CommandPalette`, `Consent`), `Sheet`, `AppLauncher` y `Toaster`. `TimeSelect` va con su `Select`.
+
+La prop `container` sigue existiendo y **gana siempre**: es la salida para quien quiera otro destino. `FloatingDock` es el caso: monta su panel dentro de su propia ancla a propósito, y no pasa por el contexto.
+
+`AppShell` **no** provee el contexto, y es deliberado: la superficie de aplicación es la del `:root`, así que `document.body` ya resuelve los mismos valores; meter los portales dentro de `.app-shell` —que es `overflow: clip` y de altura fija— solo añadiría riesgo de recorte sin arreglar nada. El día que la superficie de aplicación cambie de talla, el arreglo es montar ahí el mismo proveedor.
+
 ## Portada de referencia
 
 La página **solo apila secciones**: cabecera, portada, bandas y pie, uno detrás de otro, sin envolverlos en nada. Cada sección trae su aire —el vertical por sus tokens `space-block-*`, el lateral por su `Container` interior—, así que todas caen en la misma columna y miden lo mismo en cualquier web. Es la maqueta que se copia; la regla, en [Container → Las secciones traen su aire](?path=/docs/atoms-container--docs).

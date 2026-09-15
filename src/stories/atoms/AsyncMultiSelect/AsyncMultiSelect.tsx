@@ -6,6 +6,7 @@ import { Icon } from '../Icon/Icon';
 import { Spinner } from '../Spinner/Spinner';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './AsyncMultiSelect.css';
+import { usePortalContainer } from '../../constants/portal-container';
 
 export interface AsyncMultiSelectOption {
   value: string;
@@ -98,13 +99,14 @@ export interface AsyncMultiSelectProps {
    */
   loadingLabel?: string;
   /**
-   * Nodo DOM donde montar el portal del dropdown (reenviado a Base UI
-   * `Portal.container`). Por defecto se monta en `document.body`, que
-   * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
-   * sin configuración adicional. Solo hace falta pasarlo cuando el
-   * AsyncMultiSelect vive dentro de un `.surface-dark` **anidado** (no en
-   * la raíz), ya que ese contexto no llega a `document.body` por la
-   * cascada.
+   * Nodo DOM donde montar el portal del dropdown (reenviado a Base UI `Portal.container`).
+   * Por defecto, el nodo de la superficie que llegue por contexto:
+   * `SiteShell` publica el suyo, de modo que la capa hereda la talla de la
+   * superficie pública en vez de abrirse a la de aplicación. Si no hay
+   * superficie, `document.body` — que ya hereda el tema activado en la raíz
+   * (`html.dark`/`[data-theme="dark"]`) sin configuración adicional. Pásalo
+   * solo para llevar la capa a otro sitio: un `.surface-dark` **anidado**, el
+   * cajón de un shell propio. Gana siempre.
    */
   container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
 }
@@ -143,6 +145,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
   container,
 }: AsyncMultiSelectProps, ref) {
   const t = useBrandMessages('asyncMultiSelect');
+  const portalContainer = usePortalContainer(container);
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
@@ -353,7 +356,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
         {loading && <Spinner size="sm" aria-hidden />}
       </div>
 
-      <BasePopover.Portal container={container}>
+      <BasePopover.Portal container={portalContainer}>
         <BasePopover.Positioner
           className="async-multi-select__positioner"
           anchor={anchorRef}

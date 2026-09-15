@@ -8,6 +8,7 @@ import {
   type MenuRenderLinkProps,
 } from '../_shared/dropdownItems';
 import './Menu.css';
+import { usePortalContainer } from '../../constants/portal-container';
 
 export type {
   MenuItem,
@@ -46,6 +47,13 @@ export interface MenuProps {
   maxWidth?: string;
   /** Talla de los ítems, la del disparador (32/40/48): el panel desplegado casa con el control plegado, como en el Select. */
   size?: 'sm' | 'md' | 'lg';
+  /**
+   * Nodo DOM donde montar el portal. Por defecto, el nodo de la superficie que
+   * llegue por contexto —`SiteShell` publica el suyo, para que la capa herede
+   * la talla de la superficie pública— y, si no hay ninguna, `document.body`.
+   * Pásalo solo para llevar la capa a otro sitio: gana siempre.
+   */
+  container?: HTMLElement | null;
   className?: string;
 }
 
@@ -77,8 +85,10 @@ export function Menu({
   minWidth = '10rem',
   maxWidth,
   size = 'md',
+  container,
   className,
 }: MenuProps) {
+  const portalContainer = usePortalContainer(container);
   // Base UI reconoce «su» disparador comparando el id del DOM con el id que él
   // mismo asigna al Trigger: si el `id` va solo en el elemento de `render`, no
   // casan y el disparador nunca recibe `aria-expanded` ni `data-popup-open`
@@ -92,7 +102,7 @@ export function Menu({
   return (
     <BaseMenu.Root open={open} defaultOpen={defaultOpen} onOpenChange={(next) => onOpenChange?.(next)}>
       <BaseMenu.Trigger id={triggerId} render={triggerElement} openOnHover={openOnHover} delay={hoverDelay} />
-      <BaseMenu.Portal>
+      <BaseMenu.Portal container={portalContainer}>
         <BaseMenu.Positioner className="menu__positioner" side={side} align={align} sideOffset={sideOffset}>
           <BaseMenu.Popup
             ref={popupRef}

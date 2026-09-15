@@ -5,6 +5,7 @@ import { Tag } from '../../atoms/Tag/Tag';
 import { Modal } from '../Modal/Modal';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './AppLauncher.css';
+import { usePortalContainer } from '../../constants/portal-container';
 
 /**
  * El cromo del lanzador, y **solo el cromo**: el nombre accesible del
@@ -143,6 +144,7 @@ function AppLauncherPopover({
   onOpenChange,
 }: AppLauncherPresentationProps) {
   const t = useBrandMessages('appLauncher');
+  const portalContainer = usePortalContainer(undefined);
   return (
     <BasePopover.Root
       open={open}
@@ -164,7 +166,7 @@ function AppLauncherPopover({
         }
       />
 
-      <BasePopover.Portal>
+      <BasePopover.Portal container={portalContainer}>
         <BasePopover.Positioner className="app-launcher__positioner" sideOffset={4} align="end">
           <BasePopover.Popup className="app-launcher__content">
             <AppLauncherGrid apps={apps} currentAppId={currentAppId} newLabel={labels.new} />

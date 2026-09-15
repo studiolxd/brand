@@ -3,6 +3,7 @@
 import type { ReactNode } from 'react';
 import { Popover as BasePopover } from '@base-ui/react/popover';
 import './Popover.css';
+import { usePortalContainer } from '../../constants/portal-container';
 
 /**
  * Convierte una longitud CSS (`8px`, `0.5rem`) a píxeles. Sin unidad
@@ -81,6 +82,13 @@ export interface PopoverProps {
    * un `ref`, o una función que lo devuelva. Es la prop de Base UI, tal cual.
    */
   initialFocus?: React.ComponentProps<typeof BasePopover.Popup>['initialFocus'];
+  /**
+   * Nodo DOM donde montar el portal. Por defecto, el nodo de la superficie que
+   * llegue por contexto —`SiteShell` publica el suyo, para que la capa herede
+   * la talla de la superficie pública— y, si no hay ninguna, `document.body`.
+   * Pásalo solo para llevar la capa a otro sitio: gana siempre.
+   */
+  container?: HTMLElement | null;
   /** Clase adicional para el panel. */
   className?: string;
 }
@@ -109,8 +117,10 @@ export function Popover({
   align = 'start',
   sideOffset,
   initialFocus,
+  container,
   className,
 }: PopoverProps) {
+  const portalContainer = usePortalContainer(container);
   return (
     <BasePopover.Root
       open={open}
@@ -128,7 +138,7 @@ export function Popover({
     >
       <BasePopover.Trigger render={trigger as React.ReactElement<Record<string, unknown>>} />
 
-      <BasePopover.Portal>
+      <BasePopover.Portal container={portalContainer}>
         <BasePopover.Positioner
           className="popover__positioner"
           side={side}

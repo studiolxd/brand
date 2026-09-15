@@ -17,6 +17,7 @@ import type { SeparatorProps as BaseSeparatorProps } from '@base-ui/react/separa
 import { Icon } from '../Icon/Icon';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './Select.css';
+import { usePortalContainer } from '../../constants/portal-container';
 
 /**
  * El único texto que el desplegable emite por su cuenta: el marcador de sitio
@@ -96,13 +97,14 @@ export interface SelectProps {
   /** Estado de error accesible (lo pone el campo). */
   'aria-invalid'?: boolean;
   /**
-   * Nodo DOM donde montar el portal del dropdown (reenviado a `Select.Portal`
-   * de Base UI). Por defecto el portal se monta en `document.body`, que hereda
-   * el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`) sin
-   * configuración adicional. Solo hace falta pasar `container` cuando el Select
-   * vive dentro de un `.surface-dark` **anidado** (no en la raíz): ese contexto
-   * no llega a `document.body` por la cascada, así que hay que montar el portal
-   * dentro del propio contenedor con la clase.
+   * Nodo DOM donde montar el portal del dropdown (reenviado a `Select.Portal` de Base UI).
+   * Por defecto, el nodo de la superficie que llegue por contexto:
+   * `SiteShell` publica el suyo, de modo que la capa hereda la talla de la
+   * superficie pública en vez de abrirse a la de aplicación. Si no hay
+   * superficie, `document.body` — que ya hereda el tema activado en la raíz
+   * (`html.dark`/`[data-theme="dark"]`) sin configuración adicional. Pásalo
+   * solo para llevar la capa a otro sitio: un `.surface-dark` **anidado**, el
+   * cajón de un shell propio. Gana siempre.
    */
   container?: SelectPortalContainer;
 }
@@ -237,13 +239,14 @@ export interface SelectContentProps
 /** Dropdown del Select: Portal → Positioner → Popup (`.select__content`). */
 export const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(function SelectContent(
   { size = 'md', container, className, children, side = 'bottom', align = 'start', sideOffset = -1, ...rest }, ref) {
+  const portalContainer = usePortalContainer(container);
   const classes = [
     'select__content',
     size !== 'md' ? `select__content--${size}` : '',
     className ?? '',
   ].filter(Boolean).join(' ');
   return (
-    <BaseSelect.Portal container={container}>
+    <BaseSelect.Portal container={portalContainer}>
       <BaseSelect.Positioner
         className="select__positioner"
         side={side}

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
+import { expect, waitFor, within } from 'storybook/test';
 import { SiteShell } from './SiteShell';
 import { SiteHeader } from '../SiteHeader/SiteHeader';
 import { SiteNav } from '../../molecules/SiteNav/SiteNav';
@@ -241,9 +241,10 @@ function FiltrosDelCatalogo({ prefijo }: { prefijo: string }) {
  * variable en el propio elemento y gana a la que hereda de la superficie.
  *
  * Lo que sale por un portal (la lista de un `Select`, el calendario de un
- * `DatePicker`) monta en `document.body` y no es descendiente de `.site-shell`,
- * así que no hereda la superficie — el mismo caso que ya documenta `SiteShell`
- * para `Modal`/`Sheet`, y la misma respuesta: apuntar ahí el `container`.
+ * `DatePicker`) **también** arranca en `lg`: el shell publica su nodo raíz por
+ * contexto y los componentes con portal lo toman como destino por defecto, así
+ * que la capa monta dentro de `.site-shell` y hereda la superficie como
+ * cualquier descendiente. Ver «Los portales heredan la superficie».
  */
 export const ControlesEnSuperficiePublica: Story = {
   name: 'Los controles arrancan en talla lg',
@@ -372,5 +373,119 @@ export const ContratoControlesLg: Story = {
       .toBeCloseTo(centro(cajaDelCampo), 0);
     await expect(centro(barra.querySelector<HTMLElement>('.filter-bar__actions .button')!))
       .toBeCloseTo(centro(cajaDelCampo), 0);
+  },
+};
+
+/**
+ * **Los portales heredan la superficie.** La lista de un `Select` y el
+ * calendario de un `DatePicker` no viven donde vive su campo: los monta un
+ * portal, y hasta la v46 ese portal iba a `document.body`, que no es
+ * descendiente de `.site-shell`. El campo se pintaba a la talla pública y su
+ * lista se abría a la de aplicación.
+ *
+ * El shell publica ahora su nodo raíz por contexto y **todo componente con
+ * portal lo toma como destino cuando no recibe `container`**, así que la capa
+ * monta dentro de `.site-shell` y hereda los tokens como cualquier otro
+ * descendiente. No hay nada que pasar en cada uso. La prop `container` sigue
+ * ahí para quien quiera otro destino y gana siempre.
+ *
+ * Abre el selector y el calendario: la lista lee al mismo cuerpo que el campo.
+ */
+export const PortalesEnSuperficiePublica: Story = {
+  name: 'Los portales heredan la superficie',
+  args: {
+    children: (
+      <Container as="main" id="main-content" tabIndex={-1} space="xl">
+        <Heading level={1} size={7}>Catálogo</Heading>
+        <Paragraph>La lista del selector se abre a la talla de la página, no a la de aplicación.</Paragraph>
+        <SelectField id="portal-estado" label="Estado" options={ESTADOS} defaultValue="todos" />
+        <DatePickerField id="portal-desde" label="Desde" />
+      </Container>
+    ),
+  },
+};
+
+/**
+ * Test: el mismo `Select` y el mismo `DatePicker`, dentro y fuera del shell.
+ * Dentro, la capa monta bajo `.site-shell` y mide lo que mide el campo que la
+ * abre; fuera, monta en `document.body` y se queda en la talla de aplicación.
+ *
+ * Se abre de uno en uno —dos portales abiertos a la vez harían ambiguo el
+ * selector— y se espera al popup con `findBy`, que es lo que monta el efecto.
+ */
+export const ContratoPortales: Story = {
+  name: 'Test — el portal monta en el shell y lee su talla',
+  tags: ['!dev'],
+  args: {
+    header: undefined,
+    footer: undefined,
+    children: (
+      <Container as="main" id="main-content" tabIndex={-1} space="xl">
+        <SelectField id="dentro-estado" label="Estado dentro" options={ESTADOS} defaultValue="todos" />
+        <DatePickerField id="dentro-desde" label="Desde dentro" />
+      </Container>
+    ),
+  },
+  render: (args) => (
+    <>
+      <SiteShell {...args} />
+      {/* El mismo par, fuera del shell: la superficie de aplicación. */}
+      <div data-testid="fuera">
+        <SelectField id="fuera-estado" label="Estado fuera" options={ESTADOS} defaultValue="todos" />
+        <DatePickerField id="fuera-desde" label="Desde fuera" />
+      </div>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const lienzo = within(canvasElement);
+
+    /**
+     * Abre una capa y la mide. No se cierra nada entre medias: las dos capas
+     * se distinguen por **dónde** montan, que es justo lo que se comprueba, y
+     * cerrar a ciegas dependería de una animación de salida.
+     */
+    const abrirYMedir = async (disparador: HTMLElement, selectorCapa: string, dentro: boolean) => {
+      disparador.click();
+      const capa = await waitFor(() => {
+        const nodo = Array.from(document.body.querySelectorAll<HTMLElement>(selectorCapa)).find(
+          (candidato) => (candidato.closest('.site-shell') !== null) === dentro,
+        );
+        if (!nodo) throw new Error(`no hay ${selectorCapa} ${dentro ? 'dentro' : 'fuera'} del shell`);
+        return nodo;
+      });
+      return Math.round(parseFloat(getComputedStyle(capa).fontSize));
+    };
+
+    // ── El selector ────────────────────────────────────────────────────────
+    const dentroSelect = await abrirYMedir(
+      lienzo.getByLabelText('Estado dentro'),
+      '.select__content',
+      true,
+    );
+    const fueraSelect = await abrirYMedir(
+      lienzo.getByLabelText('Estado fuera'),
+      '.select__content',
+      false,
+    );
+
+    // La lista del shell lee más grande que la de la superficie de aplicación:
+    // es exactamente el desajuste que el contexto arregla.
+    await expect(dentroSelect).toBeGreaterThan(fueraSelect);
+
+    // ── El calendario ──────────────────────────────────────────────────────
+    // Los dos botones se llaman igual (`datePicker.openCalendar` es cromo, no
+    // dice de qué campo es), así que se distinguen por dónde están.
+    const boton = (raiz: string) =>
+      canvasElement.querySelector<HTMLElement>(`${raiz} .date-picker__button`)!;
+    const dentroFecha = await abrirYMedir(boton('.site-shell'), '.date-picker__popover', true);
+    const fueraFecha = await abrirYMedir(
+      boton('[data-testid="fuera"]'),
+      '.date-picker__popover',
+      false,
+    );
+
+    // El calendario no fija su cuerpo, lo hereda: dentro del shell lee como la
+    // página, fuera como la aplicación.
+    await expect(dentroFecha).toBeGreaterThan(fueraFecha);
   },
 };

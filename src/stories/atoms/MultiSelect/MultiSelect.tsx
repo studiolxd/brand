@@ -5,6 +5,7 @@ import { Popover as BasePopover } from '@base-ui/react/popover';
 import { Icon } from '../Icon/Icon';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './MultiSelect.css';
+import { usePortalContainer } from '../../constants/portal-container';
 
 /**
  * Los dos textos que el control emite por su cuenta: el marcador de sitio sin
@@ -62,12 +63,14 @@ export interface MultiSelectProps {
    */
   removeLabel?: (label: string) => string;
   /**
-   * Nodo DOM donde montar el portal del dropdown (reenviado a Base UI
-   * `Portal.container`). Por defecto se monta en `document.body`, que
-   * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
-   * sin configuración adicional. Solo hace falta pasarlo cuando el
-   * MultiSelect vive dentro de un `.surface-dark` **anidado** (no en la
-   * raíz), ya que ese contexto no llega a `document.body` por la cascada.
+   * Nodo DOM donde montar el portal del dropdown (reenviado a Base UI `Portal.container`).
+   * Por defecto, el nodo de la superficie que llegue por contexto:
+   * `SiteShell` publica el suyo, de modo que la capa hereda la talla de la
+   * superficie pública en vez de abrirse a la de aplicación. Si no hay
+   * superficie, `document.body` — que ya hereda el tema activado en la raíz
+   * (`html.dark`/`[data-theme="dark"]`) sin configuración adicional. Pásalo
+   * solo para llevar la capa a otro sitio: un `.surface-dark` **anidado**, el
+   * cajón de un shell propio. Gana siempre.
    */
   container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
 }
@@ -111,6 +114,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
   container,
 }: MultiSelectProps, ref) {
   const t = useBrandMessages('multiSelect');
+  const portalContainer = usePortalContainer(container);
   const [open, setOpen] = useState(false);
   const [internalValues, setInternalValues] = useState<string[]>(defaultValue);
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -320,7 +324,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
         ))}
       </div>
 
-      <BasePopover.Portal container={container}>
+      <BasePopover.Portal container={portalContainer}>
         <BasePopover.Positioner
           className="multi-select__positioner"
           anchor={anchorRef}

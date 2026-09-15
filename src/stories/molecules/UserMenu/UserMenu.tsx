@@ -6,6 +6,7 @@ import { NumberBadge } from '../../atoms/NumberBadge/NumberBadge';
 import type { MenuItem, MenuRenderLinkProps } from '../Menu/Menu';
 import { renderDropdownItems } from '../_shared/dropdownItems';
 import './UserMenu.css';
+import { usePortalContainer } from '../../constants/portal-container';
 
 /**
  * Convierte una longitud CSS (`4px`, `0.25rem`) a píxeles. Sin unidad
@@ -69,6 +70,7 @@ export function UserMenu({
   onOpenChange,
   defaultOpen,
 }: UserMenuProps) {
+  const portalContainer = usePortalContainer(undefined);
   return (
     <BaseMenu.Root onOpenChange={(open) => onOpenChange?.(open)} defaultOpen={defaultOpen}>
       <BaseMenu.Trigger className={['user-menu__trigger', compact ? 'user-menu__trigger--compact' : ''].filter(Boolean).join(' ')} aria-label={label ?? `Cuenta de ${name}`}>
@@ -87,7 +89,7 @@ export function UserMenu({
           <Icon name="chevron" size="sm" className="user-menu__chevron" />
       </BaseMenu.Trigger>
 
-      <BaseMenu.Portal>
+      <BaseMenu.Portal container={portalContainer}>
         <BaseMenu.Positioner className="user-menu__positioner" sideOffset={tokenSideOffset} align="start">
         <BaseMenu.Popup className="user-menu__content">
           <div className="user-menu__header">

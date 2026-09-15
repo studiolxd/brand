@@ -192,7 +192,7 @@ export const clientComponents = new Set([
   'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'switcher-field', 'form', 'hero',
   'input-field', 'otp-input', 'otp-field', 'multi-select-field', 'select-field', 'input-phone-field', 'textarea-field', 'dots-button', 'context-menu', 'popover', 'pagination', 'table',
   'steps', 'stepper',
-  'app-shell', 'error-boundary', 'public-page-shell', 'not-found-page', 'error-page', 'onboarding-shell',
+  'app-shell', 'site-shell', 'error-boundary', 'public-page-shell', 'not-found-page', 'error-page', 'onboarding-shell',
   'connector-auth-shell', 'connector-consent-page', 'connector-sign-in-page', 'connector-external-sign-in-page', 'connector-rejection-page',
   'avatar',
   'card',

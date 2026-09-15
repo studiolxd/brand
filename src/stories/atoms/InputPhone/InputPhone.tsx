@@ -8,6 +8,7 @@ import PhoneInputLib, { getCountryCallingCode } from 'react-phone-number-input';
 import type { Country } from 'react-phone-number-input';
 import { Icon } from '../Icon/Icon';
 import './InputPhone.css';
+import { usePortalContainer } from '../../constants/portal-container';
 
 interface CountrySelectProps {
   value?: Country;
@@ -25,6 +26,7 @@ interface CountrySelectProps {
 
 function CountrySelect({ value, onChange, options, disabled, size = 'md', countryLabel, internationalLabel = '🌐', container }: CountrySelectProps) {
   const t = useBrandMessages('inputPhone');
+  const portalContainer = usePortalContainer(container);
   const INTL = '__intl__';
   const toVal = (c: Country | undefined) => c ?? INTL;
   const fromVal = (v: string): Country => (v === INTL ? (undefined as unknown as Country) : (v as Country));
@@ -47,7 +49,7 @@ function CountrySelect({ value, onChange, options, disabled, size = 'md', countr
         <Icon name="chevron" className="input-phone__country-icon" size={chevronSize} />
       </BaseSelect.Trigger>
 
-      <BaseSelect.Portal container={container}>
+      <BaseSelect.Portal container={portalContainer}>
         <BaseSelect.Positioner
           className="input-phone__country-positioner"
           side="bottom"
@@ -118,11 +120,14 @@ export interface InputPhoneProps {
   internationalLabel?: string;
   /**
    * Nodo DOM donde montar el portal del dropdown de país (reenviado a
-   * `Select.Portal` de Base UI). Por defecto se monta en `document.body`, que
-   * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
-   * sin configuración adicional. Solo hace falta pasarlo cuando el
-   * InputPhone vive dentro de un `.surface-dark` **anidado** (no en la
-   * raíz), ya que ese contexto no llega a `document.body` por la cascada.
+   * `Select.Portal` de Base UI).
+   * Por defecto, el nodo de la superficie que llegue por contexto:
+   * `SiteShell` publica el suyo, de modo que la capa hereda la talla de la
+   * superficie pública en vez de abrirse a la de aplicación. Si no hay
+   * superficie, `document.body` — que ya hereda el tema activado en la raíz
+   * (`html.dark`/`[data-theme="dark"]`) sin configuración adicional. Pásalo
+   * solo para llevar la capa a otro sitio: un `.surface-dark` **anidado**, el
+   * cajón de un shell propio. Gana siempre.
    */
   container?: React.ComponentPropsWithoutRef<typeof BaseSelect.Portal>['container'];
 }

@@ -7,6 +7,7 @@ import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { DialogFooter, DialogHeader, DialogOverlay } from '../_shared/dialogSurface';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './Sheet.css';
+import { usePortalContainer } from '../../constants/portal-container';
 
 /**
  * El cromo del panel. Solo hay uno: el aspa cierra el cajón, aquí y en
@@ -47,13 +48,14 @@ export interface SheetProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
   /** Elemento que abre el panel. Sin él, la apertura la controla el consumidor. */
   trigger?: ReactNode;
   /**
-   * Nodo DOM donde montar el portal del panel (reenviado a Base UI
-   * `Portal.container`). Por defecto se monta en `document.body`, que
-   * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
-   * sin configuración adicional. Solo hace falta pasarlo cuando el Sheet
-   * vive dentro de una superficie **anidada** (un `.surface-dark` que no está
-   * en la raíz, o dentro de `SiteShell`/`.site-shell`), ya que ese contexto
-   * no llega a `document.body` por la cascada.
+   * Nodo DOM donde montar el portal del panel (reenviado a Base UI `Portal.container`).
+   * Por defecto, el nodo de la superficie que llegue por contexto:
+   * `SiteShell` publica el suyo, de modo que la capa hereda la talla de la
+   * superficie pública en vez de abrirse a la de aplicación. Si no hay
+   * superficie, `document.body` — que ya hereda el tema activado en la raíz
+   * (`html.dark`/`[data-theme="dark"]`) sin configuración adicional. Pásalo
+   * solo para llevar la capa a otro sitio: un `.surface-dark` **anidado**, el
+   * cajón de un shell propio. Gana siempre.
    */
   container?: React.ComponentPropsWithoutRef<typeof Dialog.Portal>['container'];
   /**
@@ -104,6 +106,7 @@ export function Sheet({
   ...rest
 }: SheetProps) {
   const t = useBrandMessages('sheet');
+  const portalContainer = usePortalContainer(container);
 
   return (
     <Dialog.Root open={open} onOpenChange={(next) => onOpenChange(next)}>
@@ -111,7 +114,7 @@ export function Sheet({
         <Dialog.Trigger render={trigger as React.ReactElement<Record<string, unknown>>} />
       )}
 
-      <Dialog.Portal container={container}>
+      <Dialog.Portal container={portalContainer}>
         <DialogOverlay className="sheet__overlay" />
         <Dialog.Popup
           className={['sheet', className].filter(Boolean).join(' ')}

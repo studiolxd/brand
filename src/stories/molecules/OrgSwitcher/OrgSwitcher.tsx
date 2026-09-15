@@ -6,6 +6,7 @@ import type { MenuItem, MenuRenderLinkProps } from '../Menu/Menu';
 import { renderDropdownItems, defaultRenderLink } from '../_shared/dropdownItems';
 import { useSidebar } from '../../sections/Sidebar/SidebarContext';
 import './OrgSwitcher.css';
+import { usePortalContainer } from '../../constants/portal-container';
 
 
 export interface OrgOption {
@@ -30,6 +31,7 @@ export interface OrgSwitcherProps {
 }
 
 export function OrgSwitcher({ label, block = false, compact, current, organizations, onOrgChange, defaultOpen, items, renderLink = defaultRenderLink }: OrgSwitcherProps) {
+  const portalContainer = usePortalContainer(undefined);
   const others = organizations.filter((o) => o.id !== current.id);
   const sidebar = useSidebar();
   const isCompact = compact ?? sidebar.rail;
@@ -42,7 +44,7 @@ export function OrgSwitcher({ label, block = false, compact, current, organizati
           {!isCompact && <Icon name="chevron" size="sm" className="org-switcher__chevron" />}
       </BaseMenu.Trigger>
 
-      <BaseMenu.Portal>
+      <BaseMenu.Portal container={portalContainer}>
         <BaseMenu.Positioner className="org-switcher__positioner" sideOffset={4} align="start">
         <BaseMenu.Popup className="org-switcher__content">
           <BaseMenu.CheckboxItem
