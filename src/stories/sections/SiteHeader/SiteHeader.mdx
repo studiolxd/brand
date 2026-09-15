@@ -147,6 +147,31 @@ La marca a `xxl` cabe junto al botón de menú hasta bien entrado el móvil, per
   un control que no abre nada es un control muerto. `menuCloseLabel` da el
   nombre del botón cuando está abierto («Cerrar menú»).
 
+## Internacionalización
+
+La cabecera emite **un** texto por su cuenta y es **cromo**: sale de
+`siteHeader.logo` del `BrandMessagesProvider` y ya **no trae castellano
+puesto**.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `logoLabel` | `siteHeader.logo` del proveedor | Dice qué hace el logotipo —llevar al inicio—, y eso vale para cualquier producto de la suite. |
+| **Reenvío puro** | `menuLabel`, `menuCloseLabel` | `menuButton.*` | Los pinta el `MenuButton`. La cabecera no repite la clave. |
+| **Contenido** | el índice del panel, las acciones, los ajustes | `children`, `actions`, `settings`, `language` | Los escribe el producto. |
+
+```tsx
+<BrandMessagesProvider
+  messages={{ siteHeader: { logo: t("a11y.logoHome") } }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+Ojo con el valor: el default retirado decía «Studio LXD — ir al inicio», con la
+marca dentro. Un producto de la suite pone la suya («Bricks — ir al inicio»), así
+que la clave del catálogo la escribe cada app con su nombre; `logoLabel` sigue
+como anulación puntual para una cabecera concreta.
+
 ## Tokens
 
 <TokenTable tokens={siteHeaderTokens} />

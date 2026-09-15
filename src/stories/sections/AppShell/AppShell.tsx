@@ -6,6 +6,7 @@ import { TooltipProvider } from '../../atoms/Tooltip/Tooltip';
 import { SkipLink } from '../../atoms/SkipLink/SkipLink';
 import { useCssProperties } from '../../constants/css-properties';
 import './AppShell.css';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
 // Re-export de API pública del subpath ./app-shell; solo penaliza el HMR de
 // desarrollo (full reload en lugar de hot reload para este archivo).
@@ -30,8 +31,22 @@ export interface AppShellProps {
   /** Ancho inicial de la sidebar desplegada (px). Sin él, el token `sidebar.width`. */
   defaultSidebarWidth?: number;
   onSidebarWidthChange?: (width: number) => void;
-  /** Texto del enlace de salto al contenido (`SkipLink`). Default: castellano. */
+  /**
+   * Texto del enlace de salto al contenido (`SkipLink`). **Sin default**: sin
+   * él, sale de `appShell.skipToContent` del `BrandMessagesProvider`.
+   */
   skipLabel?: string;
+}
+
+/**
+ * El único texto que el armazón dice por su cuenta, y es **cromo**: el enlace
+ * de salto al contenido dice lo mismo en todas las pantallas de todas las
+ * aplicaciones. Lo que hay dentro del armazón —la barra, la navegación, la
+ * página— lo escribe el producto.
+ */
+export interface AppShellMessages {
+  /** Texto del enlace de salto al contenido. */
+  skipToContent: string;
 }
 
 function useIsDesktop() {
@@ -64,8 +79,9 @@ export function AppShell({
   onSidebarChange,
   defaultSidebarWidth,
   onSidebarWidthChange,
-  skipLabel = 'Saltar al contenido principal',
+  skipLabel,
 }: AppShellProps) {
+  const t = useBrandMessages('appShell');
   const isDesktop = useIsDesktop();
   const [desktopState, setDesktopState] = useState<SidebarState>(defaultSidebar);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -137,7 +153,7 @@ export function AppShell({
   return (
     <AppShellContext.Provider value={value}>
       <TooltipProvider>
-        <SkipLink href="#main-content">{skipLabel}</SkipLink>
+        <SkipLink href="#main-content">{t('skipToContent', skipLabel)}</SkipLink>
         <div
           ref={shellRef}
           className="app-shell"

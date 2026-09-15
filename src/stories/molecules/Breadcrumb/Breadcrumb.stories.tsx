@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { Breadcrumb } from './Breadcrumb';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof Breadcrumb> = {
   title: 'Molecules/Breadcrumb',
@@ -99,3 +101,35 @@ export const TestRenderLinkPropagaProps: Story = {
   },
 };
 
+/**
+ * El nombre de la región sale de `breadcrumb.label` del catálogo; los rótulos
+ * del rastro son datos de la pantalla y no se traducen aquí. Con el catálogo en
+ * inglés, el `nav` se llama «Breadcrumb» y el rastro sigue diciendo lo que le
+ * pasa esta story.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Breadcrumb items={[{ label: 'Inicio', href: '#' }, { label: 'Ajustes' }]} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el nombre del `nav` sale de `breadcrumb.label`, no de un default. */
+export const ContratoProveedor: Story = {
+  name: 'Test — las migas leen su nombre del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Breadcrumb items={[{ label: 'Inicio', href: '#' }, { label: 'Ajustes' }]} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('navigation', { name: 'Breadcrumb' })).toBeInTheDocument();
+    await expect(canvas.queryByRole('navigation', { name: 'Migas de pan' })).toBeNull();
+    // Y el rastro sigue siendo dato: no lo toca el catálogo.
+    await expect(canvas.getByText('Ajustes')).toBeInTheDocument();
+  },
+};

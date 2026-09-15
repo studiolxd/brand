@@ -29,6 +29,29 @@ Primero la organización actual, marcada (`menuitemcheckbox` activo); después l
 - El botón se llama «Organización: ‹nombre›» (`label` para traducirlo).
 - La actual se distingue por `aria-checked`, no solo por el peso.
 
+## Internacionalización
+
+El conmutador emite **un** texto por su cuenta y es **cromo**: sale de
+`orgSwitcher.trigger` del `BrandMessagesProvider` y ya **no trae castellano
+puesto**. Interpola la organización activa, así que es una función.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `label` | `orgSwitcher.trigger` del proveedor | Dice qué es el botón —el conmutador de organización—, y la frase es la misma siempre. |
+| **Contenido** | los nombres de las organizaciones, los ítems | `current`, `organizations`, `items` | Son datos: el nombre de una organización no se traduce. |
+
+```tsx
+<BrandMessagesProvider
+  messages={{
+    orgSwitcher: { trigger: (name) => t("a11y.orgSwitcher", { name }) },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={OrgSwitcherStories.TextosDelProveedor} />
+
 ## Tokens
 
 <TokenTable tokens={orgSwitcherTokens} />

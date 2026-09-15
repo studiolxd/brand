@@ -6,6 +6,7 @@ import type { MenuItem, MenuRenderLinkProps } from '../Menu/Menu';
 import { renderDropdownItems, defaultRenderLink } from '../_shared/dropdownItems';
 import { useSidebar } from '../../sections/Sidebar/SidebarContext';
 import './OrgSwitcher.css';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { usePortalContainer } from '../../constants/portal-container';
 
 
@@ -15,8 +16,23 @@ export interface OrgOption {
   logoUrl?: string;
 }
 
+/**
+ * El único texto que el conmutador dice por su cuenta, y es **cromo**: cómo se
+ * nombra su botón. Interpola la organización activa, así que es una función.
+ * Los nombres de las organizaciones son **contenido** y vienen en
+ * `organizations`.
+ */
+export interface OrgSwitcherMessages {
+  /** Nombre accesible del botón, a partir del nombre de la organización. */
+  trigger: (name: string) => string;
+}
+
 export interface OrgSwitcherProps {
-  /** Nombre accesible del botón. Por defecto, «Organización: ‹nombre›». */
+  /**
+   * Nombre accesible del botón. **Sin default**: sin él, sale de
+   * `orgSwitcher.trigger` del `BrandMessagesProvider`, que recibe el nombre de
+   * la organización activa.
+   */
   label?: string;
   /** Ocupa todo el ancho disponible (en la Sidebar). Por defecto mide lo que su contenido. */
   block?: boolean;
@@ -31,6 +47,7 @@ export interface OrgSwitcherProps {
 }
 
 export function OrgSwitcher({ label, block = false, compact, current, organizations, onOrgChange, defaultOpen, items, renderLink = defaultRenderLink }: OrgSwitcherProps) {
+  const t = useBrandMessages('orgSwitcher');
   const portalContainer = usePortalContainer(undefined);
   const others = organizations.filter((o) => o.id !== current.id);
   const sidebar = useSidebar();
@@ -38,7 +55,7 @@ export function OrgSwitcher({ label, block = false, compact, current, organizati
 
   return (
     <BaseMenu.Root defaultOpen={defaultOpen}>
-      <BaseMenu.Trigger className={['org-switcher__trigger', block && !isCompact ? 'org-switcher__trigger--block' : '', isCompact ? 'org-switcher__trigger--compact' : ''].filter(Boolean).join(' ')} aria-label={label ?? `Organización: ${current.name}`}>
+      <BaseMenu.Trigger className={['org-switcher__trigger', block && !isCompact ? 'org-switcher__trigger--block' : '', isCompact ? 'org-switcher__trigger--compact' : ''].filter(Boolean).join(' ')} aria-label={label ?? t('trigger')(current.name)}>
           <Avatar src={current.logoUrl} name={current.name} alt="" size="sm" shape="square" />
           {!isCompact && <span className="org-switcher__name">{current.name}</span>}
           {!isCompact && <Icon name="chevron" size="sm" className="org-switcher__chevron" />}

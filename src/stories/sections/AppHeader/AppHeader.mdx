@@ -25,6 +25,19 @@ Dentro de `AppShell` el botón gobierna la sidebar del shell; suelto, lleva su p
 - Es el `banner` de la aplicación.
 - El botón de menú dice qué controla (`sidebarId` → `aria-controls`) y si está abierto (`aria-expanded`).
 
+## Internacionalización
+
+La barra **no emite ningún texto propio**: el único que sale de ella lo pinta el
+`MenuButton`, que tiene su propio espacio en el catálogo.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Reenvío puro** | `menuLabel`, `menuCloseLabel` | `menuButton.*` | Los pinta el `MenuButton`. La barra no repite la clave: sin pasar nada, el botón lee el catálogo. |
+| **Contenido** | lo que haya en `start`, `notifications` y `end` | props | Son piezas del producto, con sus propios textos. |
+
+Las dos props siguen existiendo como anulación puntual, pero ya **no hacen falta
+para traducir**.
+
 ## Tokens
 
 <TokenTable tokens={appHeaderTokens} />

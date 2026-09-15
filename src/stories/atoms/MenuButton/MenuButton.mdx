@@ -33,6 +33,49 @@ Las dos formas no pueden divergir: `close` se define a partir de la geometría d
 
 <Canvas of={MenuButtonStories.FocoVisible} />
 
+## Internacionalización
+
+El botón emite **dos** textos por su cuenta y los dos son **cromo**: salen de
+`menuButton.*` del `BrandMessagesProvider` y ya **no traen castellano puesto**.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `label`, `closeLabel` | `menuButton.*` del proveedor | Dicen qué hace el botón —abrir o cerrar un menú—, no de qué menú es. Es el mismo botón en la cabecera de la aplicación y en la del sitio. |
+
+```tsx
+import { BrandMessagesProvider } from "@studiolxd/brand/messages";
+
+<BrandMessagesProvider
+  messages={{
+    menuButton: {
+      open: t("a11y.menu"),
+      close: t("a11y.closeMenu"),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={MenuButtonStories.TextosDelProveedor} />
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `label` | `menuButton.open` | nombre accesible con el menú cerrado |
+| `closeLabel` | `menuButton.close` | nombre accesible con el menú abierto |
+
+El orden es **prop → proveedor → error**, y el texto se lee **donde se pinta**:
+un botón que nunca se abre no exige `menuButton.close`.
+
+**El nombre sigue al estado.** Antes, con el menú abierto el botón seguía
+llamándose igual salvo que el consumidor pasara `closeLabel` a mano; ahora que
+el catálogo siempre trae las dos caras, abierto dice «Cerrar menú» y cerrado
+dice lo otro. `aria-expanded` sigue estando; el nombre ya no se queda a medias.
+
+`AppHeader` y `SiteHeader` **no repiten la clave**: sus `menuLabel` y
+`menuCloseLabel` son **reenvíos puros** a este botón, y sin ellos el botón lee
+el catálogo como en cualquier otro sitio.
+
 ## Tokens
 
 <TokenTable tokens={menuButtonTokens} />

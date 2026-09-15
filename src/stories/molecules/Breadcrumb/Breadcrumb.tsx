@@ -1,5 +1,6 @@
 import type { AnchorHTMLAttributes, ReactNode } from 'react';
 import './Breadcrumb.css';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
 export type BreadcrumbItem = {
   label: string;
@@ -17,8 +18,8 @@ export interface BreadcrumbProps {
   renderLink?: (props: BreadcrumbRenderLinkProps) => ReactNode;
   separator?: ReactNode;
   /**
-   * `aria-label` del `<nav>`. Default: «Migas de pan» (castellano).
-   * Una app multiidioma debe pasarlo traducido.
+   * `aria-label` del `<nav>`. **Sin default**: sin él, sale de
+   * `breadcrumb.label` del `BrandMessagesProvider`.
    */
   ariaLabel?: string;
   className?: string;
@@ -30,16 +31,26 @@ function defaultRenderLink({ children, ...props }: BreadcrumbRenderLinkProps) {
   return <a {...props}>{children}</a>;
 }
 
+/**
+ * El único texto que las migas dicen por su cuenta, y es **cromo**: el nombre de
+ * la región. Los rótulos del rastro son **contenido** y vienen en `items`.
+ */
+export interface BreadcrumbMessages {
+  /** Nombre accesible del `nav`. */
+  label: string;
+}
+
 export function Breadcrumb({
   items,
   renderLink = defaultRenderLink,
   separator = '/',
-  ariaLabel = 'Migas de pan',
+  ariaLabel,
   className,
 }: BreadcrumbProps) {
+  const t = useBrandMessages('breadcrumb');
   return (
     <nav
-      aria-label={ariaLabel}
+      aria-label={t('label', ariaLabel)}
       className={['breadcrumb', className].filter(Boolean).join(' ')}
     >
       <ol className="breadcrumb__list">

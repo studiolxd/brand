@@ -5,6 +5,7 @@ import { Container, type ContainerWidth } from '../../atoms/Container/Container'
 import { Logo, type LogoSize } from '../../atoms/Logo/Logo';
 import { MenuButton } from '../../atoms/MenuButton/MenuButton';
 import './SiteHeader.css';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
 export type SiteHeaderLogoLinkProps = {
   href: string;
@@ -20,11 +21,20 @@ function defaultRenderLogoLink({ children, ...props }: SiteHeaderLogoLinkProps) 
 export interface SiteHeaderProps {
   /** Destino del logotipo. */
   logoHref?: string;
-  /** Texto accesible del enlace del logotipo. */
+  /**
+   * Texto accesible del enlace del logotipo. **Sin default**: sin él, sale de
+   * `siteHeader.logo` del `BrandMessagesProvider`.
+   */
   logoLabel?: string;
-  /** aria-label del botón de menú. */
+  /**
+   * aria-label del botón de menú. **Reenvío puro** al `MenuButton`: sin él, el
+   * botón lee `menuButton.open`.
+   */
   menuLabel?: string;
-  /** aria-label del botón de menú cuando está abierto («Cerrar menú»). */
+  /**
+   * aria-label del botón de menú abierto. **Reenvío puro** al `MenuButton`:
+   * sin él, lee `menuButton.close`.
+   */
   menuCloseLabel?: string;
   /** La marca. Por defecto el `Logo` de Studio LXD a `logoSize`; un producto de la suite pone la suya. */
   logo?: ReactNode;
@@ -65,10 +75,21 @@ export interface SiteHeaderProps {
  * El enlace de salto al contenido no va aquí: lo pone `AppRoot`, una vez por
  * documento.
  */
+/**
+ * El único texto propio de la cabecera, y es **cromo**: qué hace el logotipo
+ * («ir al inicio»), no qué marca es. Lo que dice el botón de menú no se repite
+ * aquí —es un reenvío puro al `MenuButton`—, y los enlaces de `actions` y del
+ * panel son **contenido** del producto.
+ */
+export interface SiteHeaderMessages {
+  /** Texto accesible del enlace del logotipo. */
+  logo: string;
+}
+
 export function SiteHeader({
   logoHref = '/',
-  logoLabel = 'Studio LXD — ir al inicio',
-  menuLabel = 'Menú de navegación',
+  logoLabel,
+  menuLabel,
   menuCloseLabel,
   logoSize = 'xxl',
   logo = <Logo size={logoSize} />,
@@ -83,6 +104,7 @@ export function SiteHeader({
   actions,
   language,
 }: SiteHeaderProps) {
+  const t = useBrandMessages('siteHeader');
   const [internalOpen, setInternalOpen] = useState(false);
   const isControlled = open !== undefined;
   const isOpen = isControlled ? open : internalOpen;
@@ -128,7 +150,7 @@ export function SiteHeader({
   return (
     <header ref={headerRef} className="site-header">
       <Container width={width} innerClassName="site-header__bar">
-        {renderLogoLink({ href: logoHref, className: 'site-header__logo', 'aria-label': logoLabel, children: logo })}
+        {renderLogoLink({ href: logoHref, className: 'site-header__logo', 'aria-label': t('logo', logoLabel), children: logo })}
 
         <div className="site-header__controls">
           {/* Las acciones se esconden en móvil: la barra estrecha es del

@@ -6,6 +6,8 @@ import { Heading } from '../../atoms/Heading/Heading';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Stack } from '../../atoms/Stack/Stack';
 import { TableOfContents, type TableOfContentsItem } from './TableOfContents';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta = {
   title: 'Molecules/TableOfContents',
@@ -146,5 +148,43 @@ export const ContratoPassthrough: Story = {
     await expect(nav).toHaveAttribute('aria-describedby', 'pista');
     // el nombre accesible sigue saliendo de `ariaLabel`
     await expect(nav).toHaveAttribute('aria-label', 'En esta página');
+  },
+};
+
+/**
+ * «En esta página» nombra la región, no la página: sale de
+ * `tableOfContents.label` del catálogo. Los encabezados son datos y siguen
+ * viniendo en `items`.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  args: { items: [] },
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <TableOfContents
+        items={[
+          { id: 'instalacion', label: 'Instalación', level: 2 },
+          { id: 'uso', label: 'Uso', level: 2 },
+        ]}
+        title="On this page"
+      />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el nombre del `nav` sale de `tableOfContents.label`. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el índice lee su nombre del proveedor',
+  tags: ['!dev'],
+  args: { items: [] },
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <TableOfContents items={[{ id: 'uso', label: 'Uso', level: 2 }]} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('navigation', { name: 'On this page' })).toBeInTheDocument();
+    await expect(canvas.queryByRole('navigation', { name: 'En esta página' })).toBeNull();
   },
 };

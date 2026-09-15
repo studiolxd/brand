@@ -5,6 +5,7 @@ import { PublicPageShell } from '../PublicPageShell/PublicPageShell';
 import { Container } from '../../atoms/Container/Container';
 import { FormSizeContext } from '../../constants/form-size';
 import './OnboardingShell.css';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
 export interface OnboardingShellProps {
   /** El cuerpo del paso: el formulario, la explicación, lo que toque. */
@@ -35,7 +36,10 @@ export interface OnboardingShellProps {
    * @deprecated Usa `preferences`.
    */
   switchers?: ReactNode;
-  /** Nombre accesible de la banda de preferencias. Default: «Preferencias» (castellano). */
+  /**
+   * Nombre accesible de la banda de preferencias. **Reenvío puro** al
+   * `PublicPageShell`: sin él, la banda lee `publicPageShell.preferences`.
+   */
   preferencesLabel?: string;
   /**
    * El progreso: un `Stepper`. La ranura se monta siempre; es el `Stepper`
@@ -53,7 +57,11 @@ export interface OnboardingShellProps {
    * escritorio, y debajo y centrada en móvil.
    */
   exitAction?: ReactNode;
-  /** Nombre accesible del grupo de acciones del pie. Default: «Acciones del paso» (castellano). */
+  /**
+   * Nombre accesible del grupo de acciones del pie. **Sin default**: sin él,
+   * sale de `onboardingShell.actions` del `BrandMessagesProvider`. Solo se lee
+   * cuando el paso trae alguna acción.
+   */
   actionsLabel?: string;
   /** `id` del `main` (`main-content` por defecto, destino del `SkipLink`). */
   id?: string;
@@ -108,6 +116,17 @@ export interface OnboardingShellProps {
  * dentro —un `Form`, un campo suelto, un `AvatarUpload`— sale a la talla que
  * le toca sin que la aplicación tenga que acordarse de pedirla.
  */
+/**
+ * El único texto propio de la plantilla, y es **cromo**: el nombre del grupo de
+ * acciones del pie. Lo que digan los botones —«Continuar», «Atrás», «Omitir por
+ * ahora»— es **contenido** y viene en las ranuras. El nombre de la banda de
+ * preferencias tampoco está aquí: es un reenvío puro al `PublicPageShell`.
+ */
+export interface OnboardingShellMessages {
+  /** Nombre accesible del grupo de acciones del pie. */
+  actions: string;
+}
+
 export function OnboardingShell({
   children,
   brand,
@@ -118,12 +137,17 @@ export function OnboardingShell({
   primaryAction,
   backAction,
   exitAction,
-  actionsLabel = 'Acciones del paso',
+  actionsLabel,
   id = 'main-content',
   shell = true,
   width = 'md',
   className,
 }: OnboardingShellProps) {
+  const t = useBrandMessages('onboardingShell');
+  // Es la MISMA banda y la MISMA clave: con marco la pinta `PublicPageShell`
+  // (y `preferencesLabel` es un reenvío puro); sin marco (`shell={false}`) la
+  // pinta esta plantilla, y entonces el texto lo tiene que leer ella.
+  const tMarco = useBrandMessages('publicPageShell');
   const hayAcciones = Boolean(primaryAction || backAction || exitAction);
   // `switchers` es el nombre viejo de la misma ranura: manda el nuevo.
   const conmutadores = preferences ?? switchers;
@@ -162,7 +186,7 @@ export function OnboardingShell({
             <div className="onboarding-shell__body">{children}</div>
 
             {hayAcciones && (
-              <div className="onboarding-shell__actions" role="group" aria-label={actionsLabel}>
+              <div className="onboarding-shell__actions" role="group" aria-label={t('actions', actionsLabel)}>
                 {backAction}
                 {(exitAction || primaryAction) && (
                   <div className="onboarding-shell__decisions">
@@ -176,7 +200,7 @@ export function OnboardingShell({
         </FormSizeContext.Provider>
 
         {!shell && conmutadores && (
-          <section className="onboarding-shell__settings" aria-label={preferencesLabel ?? 'Preferencias'}>
+          <section className="onboarding-shell__settings" aria-label={tMarco('preferences', preferencesLabel)}>
             {conmutadores}
           </section>
         )}

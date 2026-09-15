@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within, userEvent } from 'storybook/test';
 import { UserMenu } from './UserMenu';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const items = [
   { type: 'link' as const, label: 'Mi cuenta', href: '#cuenta' },
@@ -70,5 +72,37 @@ export const Contrato: Story = {
     await expect(within(menu).getByText('ana.garcia@studiolxd.com')).toBeInTheDocument();
     await expect(within(menu).getByRole('menuitem', { name: 'Mi cuenta' })).toHaveAttribute('href', '#cuenta');
     await expect(within(menu).getAllByRole('menuitem')).toHaveLength(3);
+  },
+};
+
+/**
+ * Los dos textos del menú de cuenta interpolan un dato —el nombre, el número de
+ * sin leer— y salen de `userMenu.*` del catálogo. El nombre, el correo y los
+ * ítems son contenido: con el catálogo en inglés el botón se llama «Ada
+ * Lovelace's account» y los ítems siguen diciendo lo que les pasa la app.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <UserMenu name="Ada Lovelace" email="ada@studiolxd.com" notificationCount={3} items={items} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el nombre del botón y el del contador salen del catálogo, interpolados. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el menú de cuenta lee su cromo del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <UserMenu name="Ada Lovelace" email="ada@studiolxd.com" notificationCount={3} items={items} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('button', { name: "Ada Lovelace's account" })).toBeInTheDocument();
+    await expect(canvas.getByLabelText('3 unread notifications')).toBeInTheDocument();
+    await expect(canvas.queryByRole('button', { name: 'Cuenta de Ada Lovelace' })).toBeNull();
   },
 };

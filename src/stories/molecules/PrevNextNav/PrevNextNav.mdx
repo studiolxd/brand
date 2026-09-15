@@ -59,6 +59,33 @@ que pasa a amarillo (`color.accent-2`), el mismo criterio que `SiteNav`.
 
 ---
 
+## Internacionalización
+
+El par emite **dos** textos por su cuenta y los dos son **cromo**: salen de
+`prevNextNav.*` del `BrandMessagesProvider` y ya **no traen castellano puesto**.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `prevLabel`, `nextLabel` | `prevNextNav.*` del proveedor | Dicen la **dirección**, no el destino: «anterior» y «siguiente» valen en cualquier par. |
+| **Contenido** | `prevTitle`, `nextTitle`, `label` | props | El destino y el rótulo del medio son de esta pantalla: el título de un capítulo, la semana que se está mirando. |
+
+```tsx
+<BrandMessagesProvider
+  messages={{
+    prevNextNav: { previous: t("common.previous"), next: t("common.next") },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={PrevNextNavStories.TextosDelProveedor} />
+
+Ojo con un caso que es **contenido y no cromo**: un `PrevNextNav` que navega
+semanas quiere decir «Semana anterior», no «Anterior». Para eso siguen estando
+las props, que ganan al catálogo — es exactamente la anulación puntual para la
+que existen.
+
 ## Tokens
 
 <TokenTable tokens={prevNextNavTokens} />

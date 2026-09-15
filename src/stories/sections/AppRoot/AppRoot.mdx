@@ -21,6 +21,28 @@ Un destino enfocable: el contenido principal con `id="main-content"` y `tabIndex
 
 `AppRoot` no pinta nodo: el marco que coloca cabecera, contenido y pie —con la altura mínima de la pantalla y el pie abajo— es `SiteShell` en las webs y `AppShell` en las aplicaciones.
 
+## Internacionalización
+
+La raíz emite **un** texto por su cuenta y es **cromo**: sale de
+`appRoot.skipToContent` del `BrandMessagesProvider` y ya **no trae castellano
+puesto**.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `skipLabel` | `appRoot.skipToContent` del proveedor | El salto al contenido dice lo mismo en todo el documento y en todos los productos. |
+
+```tsx
+<BrandMessagesProvider
+  messages={{
+    appRoot: { skipToContent: t("a11y.skipToContent") },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+`skipHref` **no** es texto: es el destino del salto, un `id` de la página.
+
 ## Props
 
 <ArgTypes of={AppRootStories} />

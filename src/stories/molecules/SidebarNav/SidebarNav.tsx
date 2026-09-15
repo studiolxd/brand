@@ -5,6 +5,7 @@ import { Menu } from '../Menu/Menu';
 import { Tooltip } from '../../atoms/Tooltip/Tooltip';
 import { useSidebar } from '../../sections/Sidebar/SidebarContext';
 import './SidebarNav.css';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
 export interface SidebarNavItem {
   id: string;
@@ -52,11 +53,14 @@ export type SidebarNavRenderLinkProps = React.AnchorHTMLAttributes<HTMLAnchorEle
 };
 
 export interface SidebarNavProps {
-  /** Nombre accesible del `nav`. */
+  /**
+   * Nombre accesible del `nav`. **Sin default**: sin él, sale de
+   * `sidebarNav.label` del `BrandMessagesProvider`.
+   */
   label?: string;
   /**
-   * Marca de las entradas vacías (`empty`). Por defecto, en castellano:
-   * «sin docs».
+   * Marca de las entradas vacías (`empty`). **Sin default**: sale de
+   * `sidebarNav.empty`. Solo se lee cuando hay alguna entrada vacía.
    */
   emptyLabel?: string;
   /** Solo iconos: los enlaces con tooltip, los grupos como menú. Sin él, lo decide la `Sidebar` (rail). */
@@ -73,9 +77,22 @@ function defaultRenderLink({ children, ...props }: SidebarNavRenderLinkProps) {
   return <a {...props}>{children}</a>;
 }
 
+/**
+ * Los dos textos de la navegación, los dos **cromo**: el nombre de la región
+ * («Principal», el mismo en toda la suite) y la marca que se pone a una entrada
+ * sin contenido. Los rótulos de las entradas son **contenido** y siguen
+ * viniendo en `entries`.
+ */
+export interface SidebarNavMessages {
+  /** Nombre accesible del `nav`. */
+  label: string;
+  /** Marca de las entradas sin contenido. */
+  empty: string;
+}
+
 export function SidebarNav({
-  label = 'Navegación principal',
-  emptyLabel = 'sin docs',
+  label,
+  emptyLabel,
   rail,
   entries,
   defaultValue,
@@ -83,6 +100,7 @@ export function SidebarNav({
   onValueChange,
   renderLink = defaultRenderLink,
 }: SidebarNavProps) {
+  const t = useBrandMessages('sidebarNav');
   const accordionProps = value !== undefined
     ? {
         value,
@@ -96,7 +114,7 @@ export function SidebarNav({
 
   if (isRail) {
     return (
-      <nav className="sidebar-nav sidebar-nav--rail" aria-label={label}>
+      <nav className="sidebar-nav sidebar-nav--rail" aria-label={t('label', label)}>
         <ul className="sidebar-nav__rail" role="list">
           {entries.map((entry) => {
             const glyph = (
@@ -109,11 +127,11 @@ export function SidebarNav({
               if (entry.empty) {
                 return (
                   <li key={entry.id}>
-                    <Tooltip label={`${entry.label} — ${emptyLabel}`} side="right">
+                    <Tooltip label={`${entry.label} — ${t('empty', emptyLabel)}`} side="right">
                       <span
                         className="sidebar-nav__rail-item sidebar-nav__rail-item--empty"
                         aria-disabled="true"
-                        aria-label={`${entry.label} — ${emptyLabel}`}
+                        aria-label={`${entry.label} — ${t('empty', emptyLabel)}`}
                       >
                         {glyph}
                       </span>
@@ -145,7 +163,7 @@ export function SidebarNav({
               // Una entrada vacía no es un enlace: en el menú queda como rótulo.
               ...entry.items.map((item) => (
                 item.empty
-                  ? { type: 'label' as const, label: `${item.label} · ${emptyLabel}` }
+                  ? { type: 'label' as const, label: `${item.label} · ${t('empty', emptyLabel)}` }
                   : { type: 'link' as const, label: item.label, href: item.href }
               )),
             ];
@@ -176,7 +194,7 @@ export function SidebarNav({
   }
 
   return (
-    <nav className="sidebar-nav" aria-label={label}>
+    <nav className="sidebar-nav" aria-label={t('label', label)}>
       <BaseAccordion.Root className="sidebar-nav__accordion" multiple {...accordionProps}>
         {entries.map((entry) => {
           if (entry.kind === 'link') {
@@ -193,7 +211,7 @@ export function SidebarNav({
                       <span className="sidebar-nav__item-icon" aria-hidden="true">{entry.icon}</span>
                     )}
                     <span className="sidebar-nav__item-label">{entry.label}</span>
-                    <span className="sidebar-nav__empty-mark">{emptyLabel}</span>
+                    <span className="sidebar-nav__empty-mark">{t('empty', emptyLabel)}</span>
                   </span>
                 </div>
               );
@@ -264,7 +282,7 @@ export function SidebarNav({
                                 <span className="sidebar-nav__item-icon" aria-hidden="true">{item.icon}</span>
                               )}
                               <span className="sidebar-nav__item-label">{item.label}</span>
-                              <span className="sidebar-nav__empty-mark">{emptyLabel}</span>
+                              <span className="sidebar-nav__empty-mark">{t('empty', emptyLabel)}</span>
                             </span>
                           </li>
                         );

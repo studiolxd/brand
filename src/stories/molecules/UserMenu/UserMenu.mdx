@@ -33,6 +33,36 @@ Un `Menu` de Base UI. Cabecera con nombre y correo (no es un ítem: no se enfoca
 - El botón se llama «Cuenta de ‹nombre›» (`label` para traducirlo); abre un `menu` que se recorre con las flechas y se cierra con Escape.
 - El badge dice «N notificaciones sin leer», no solo el número.
 
+## Internacionalización
+
+El menú emite **dos** textos por su cuenta y los dos son **cromo**: salen de
+`userMenu.*` del `BrandMessagesProvider` y ya **no traen castellano puesto**.
+Los dos **interpolan un dato**, así que son funciones.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `label`, el nombre del contador | `userMenu.trigger`, `userMenu.unread` | Dicen qué es el botón («la cuenta de alguien») y qué cuenta el contador. La frase es la misma siempre; lo que cambia es el dato que lleva dentro. |
+| **Contenido** | `name`, `email`, los ítems | props | El nombre de una persona no se traduce, y los ítems los escribe la aplicación. |
+
+```tsx
+<BrandMessagesProvider
+  messages={{
+    userMenu: {
+      trigger: (name) => t("a11y.userMenu", { name }),
+      unread: (count) => t("notifications.unreadCount", { count }),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={UserMenuStories.TextosDelProveedor} />
+
+El orden es **prop → proveedor → error**. `unread` se lee **donde se pinta**: un
+menú sin `notificationCount` no lo exige. `notifications.unreadCount` ya existe
+en el catálogo de la suite, con su plural.
+
 ## Tokens
 
 Panel, ítems y separador referencian los de `context-menu`/`floating-panel`: el UserMenu no tiene un menú propio, tiene el del sistema.

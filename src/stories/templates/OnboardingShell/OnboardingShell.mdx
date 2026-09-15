@@ -91,6 +91,30 @@ de página pública (1280px, `onboarding-shell.max-width-wide`). Los demás paso
 
 <Canvas of={OnboardingShellStories.Ancho} />
 
+## Internacionalización
+
+La plantilla emite **un** texto por su cuenta y es **cromo**: sale de
+`onboardingShell.actions` del `BrandMessagesProvider` y ya **no trae castellano
+puesto**.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `actionsLabel` | `onboardingShell.actions` del proveedor | Nombra el grupo del pie, no lo que hacen sus botones. |
+| **Reenvío puro** | `preferencesLabel` | `publicPageShell.preferences` | Es la misma banda del marco público, con la misma clave. La plantilla no la repite. |
+| **Contenido** | lo que digan «Continuar», «Atrás» y la salida; el paso | `primaryAction`, `backAction`, `exitAction`, `children` | Los escribe el flujo de alta del producto. |
+
+```tsx
+<BrandMessagesProvider
+  messages={{ onboardingShell: { actions: t("onboarding.actionsLabel") } }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+El texto se lee **donde se pinta**: un paso sin acciones no exige la clave. Con
+`shell={false}` la banda de preferencias la pinta esta plantilla en vez del
+marco, pero la clave sigue siendo la misma.
+
 ## Props
 
 <ArgTypes of={OnboardingShellStories} />

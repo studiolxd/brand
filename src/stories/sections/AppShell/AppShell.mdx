@@ -32,6 +32,33 @@ La misma sidebar entra como cajón sobre un velo; el contenido queda `inert` y s
 - Los tooltips del rail salen de un único `TooltipProvider` que pone el shell.
 - El shell monta el `SkipLink` (enlace de salto al contenido) como primer elemento enfocable, apuntando al `<main id="main-content" tabIndex={-1}>` que ya renderiza: la app con sesión tiene salto al contenido sin que el producto lo monte aparte. `skipLabel` cambia su texto (default «Saltar al contenido principal»).
 
+## Internacionalización
+
+El armazón emite **un** texto por su cuenta y es **cromo**: sale de
+`appShell.skipToContent` del `BrandMessagesProvider` y ya **no trae castellano
+puesto**.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `skipLabel` | `appShell.skipToContent` del proveedor | El salto al contenido dice lo mismo en todas las pantallas de todas las aplicaciones. |
+| **Reenvío puro** | el nombre de la barra, el del asa, el del botón de menú | `sidebar.*`, `menuButton.*` | Los pintan el `Sidebar` y el `AppHeader` que se le pasan; el armazón no repite ninguna clave. |
+| **Contenido** | la página | `children` | Lo escribe el producto. |
+
+```tsx
+<BrandMessagesProvider
+  messages={{
+    appShell: { skipToContent: t("a11y.skipToContent") },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+El orden es **prop → proveedor → error**. `AppRoot` tiene su propio espacio con
+la misma clave (`appRoot.skipToContent`): son dos piezas distintas —una es la
+raíz del documento, la otra el armazón de la aplicación— y cada una declara lo
+suyo, aunque la aplicación las alimente desde el mismo `t()`.
+
 ## Props
 
 <ArgTypes of={AppShellStories} />

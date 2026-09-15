@@ -85,6 +85,28 @@ El marco es `SiteShell`, así que todo lo que va dentro lee en la **superficie p
 </PublicPageShell>
 ```
 
+## Internacionalización
+
+El marco emite **un** texto por su cuenta y es **cromo**: sale de
+`publicPageShell.preferences` del `BrandMessagesProvider` y ya **no trae
+castellano puesto**.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `preferencesLabel` | `publicPageShell.preferences` del proveedor | Nombra la banda donde viven el idioma y el tema. Es la misma banda en todas las páginas públicas. |
+| **Contenido** | la cabecera, el pie, la página | `header`, `footer`, `children` | Los escribe el producto. |
+
+```tsx
+<BrandMessagesProvider
+  messages={{ publicPageShell: { preferences: t("a11y.preferences") } }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+El texto se lee **donde se pinta**: un marco sin `preferences` no tiene banda y
+no exige la clave.
+
 ## Props
 
 <ArgTypes of={PublicPageShellStories} />

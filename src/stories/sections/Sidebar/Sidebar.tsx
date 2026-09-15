@@ -4,9 +4,25 @@ import { useCallback, useContext, useEffect, useRef, useState, type ReactNode } 
 import { AppShellContext } from '../AppShell/AppShellContext';
 import { SidebarContext } from './SidebarContext';
 import './Sidebar.css';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export { useSidebar } from './SidebarContext';
+
+/**
+ * Lo que la barra dice por su cuenta, y todo es **cromo**: su nombre de región,
+ * el nombre del asa que la ensancha y cómo se lee su ancho. Ninguno depende de
+ * qué haya dentro —eso lo escribe el producto en `children`—, así que los tres
+ * van al catálogo.
+ */
+export interface SidebarMessages {
+  /** Nombre accesible del `aside`. */
+  label: string;
+  /** Nombre accesible del asa de redimensión. */
+  resizer: string;
+  /** Valor hablado del asa: el ancho con su unidad. */
+  resizerValue: (width: number) => string;
+}
 
 export interface SidebarProps {
   /** Arriba del todo (un `Logo`). */
@@ -16,11 +32,21 @@ export interface SidebarProps {
   /** Pie fijo, fuera del scroll del panel. */
   footer?: ReactNode;
   id?: string;
-  /** Nombre accesible del `aside`. Default: «Barra lateral» (castellano). Una app multiidioma debe pasarlo traducido. */
+  /**
+   * Nombre accesible del `aside`. **Sin default**: sin él, sale de
+   * `sidebar.label` del `BrandMessagesProvider`.
+   */
   label?: string;
-  /** Texto accesible del asa de redimensión. Default: «Ancho de la barra lateral» (castellano). Una app multiidioma debe pasarlo traducido. */
+  /**
+   * Nombre accesible del asa de redimensión. **Sin default**: sale de
+   * `sidebar.resizer`. Solo se lee cuando el asa existe (escritorio, dentro de
+   * un `AppShell`, con la barra no cerrada).
+   */
   resizerLabel?: string;
-  /** Valor hablado del asa: el ancho con su unidad. Default: «N píxeles» (castellano). Una app multiidioma debe pasarlo traducido. */
+  /**
+   * Valor hablado del asa: el ancho con su unidad. **Sin default**: sale de
+   * `sidebar.resizerValue`. Interpola el ancho, así que es una función.
+   */
   resizerValueText?: (width: number) => string;
   /** Fuerza el modo sin `AppShell` (Storybook, pruebas). Con shell, lo decide el shell. */
   mode?: 'open' | 'rail';
@@ -48,11 +74,12 @@ export function Sidebar({
   children,
   footer,
   id,
-  label = 'Barra lateral',
-  resizerLabel = 'Ancho de la barra lateral',
-  resizerValueText = (width) => `${width} píxeles`,
+  label,
+  resizerLabel,
+  resizerValueText,
   mode,
 }: SidebarProps) {
+  const t = useBrandMessages('sidebar');
   const shell = useContext(AppShellContext);
   const state = shell ? shell.sidebar : (mode ?? 'open');
   const isDesktop = shell ? shell.isDesktop : true;
@@ -186,7 +213,7 @@ export function Sidebar({
         ref={ref}
         id={id}
         className={classes}
-        aria-label={label}
+        aria-label={t('label', label)}
         // El cajón móvil abierto es un diálogo modal: el resto de la página
         // queda `inert` bajo el velo, así que se anuncia como tal.
         role={drawer && state === 'open' ? 'dialog' : undefined}
@@ -211,11 +238,11 @@ export function Sidebar({
             className="sidebar__resizer"
             role="separator"
             aria-orientation="vertical"
-            aria-label={resizerLabel}
+            aria-label={t('resizer', resizerLabel)}
             aria-valuenow={resizerNow}
             aria-valuemin={bounds ? Math.round(bounds.rail) : undefined}
             aria-valuemax={bounds ? Math.round(bounds.max) : undefined}
-            aria-valuetext={resizerValueText(resizerNow)}
+            aria-valuetext={t('resizerValue', resizerValueText)(resizerNow)}
             tabIndex={0}
             onPointerDown={onPointerDown}
             onKeyDown={onKeyDown}

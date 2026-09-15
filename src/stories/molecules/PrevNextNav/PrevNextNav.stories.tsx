@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
 import { PrevNextNav } from './PrevNextNav';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof PrevNextNav> = {
   title: 'Molecules/PrevNextNav',
@@ -166,5 +168,42 @@ export const Contrato: Story = {
     );
     await expect(primero.getByLabelText('Anterior')).toBeDisabled();
     await expect(primero.getByLabelText('Siguiente').tagName).toBe('A');
+  },
+};
+
+/**
+ * «Anterior» y «Siguiente» dicen la dirección, no el destino: salen de
+ * `prevNextNav.*` del catálogo. El destino —los títulos, el rótulo del medio—
+ * es contenido y lo escribe la página, así que aquí sigue en castellano aunque
+ * el catálogo esté en inglés.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <PrevNextNav
+        prevHref="#instalacion"
+        nextHref="#tokens"
+        prevTitle="Instalación"
+        nextTitle="Tokens"
+      />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: las dos direcciones salen de `prevNextNav.previous` y `.next`. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el par lee sus dos direcciones del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <PrevNextNav prevHref="#a" nextHref="#b" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('link', { name: 'Previous' })).toBeInTheDocument();
+    await expect(canvas.getByRole('link', { name: 'Next' })).toBeInTheDocument();
+    await expect(canvas.queryByRole('link', { name: 'Anterior' })).toBeNull();
   },
 };

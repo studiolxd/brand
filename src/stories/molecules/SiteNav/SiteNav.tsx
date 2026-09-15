@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Heading } from '../../atoms/Heading/Heading';
 import './SiteNav.css';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
 export interface SiteNavItem {
   id: string;
@@ -79,16 +80,27 @@ const COLUMNS_MAX = 5;
  * `style-src 'self'` descarta el atributo sin avisar y el grupo de más caía
  * a la segunda fila.
  */
+/**
+ * El único texto que el índice dice por su cuenta, y es **cromo**: el nombre de
+ * la región de navegación. Los grupos y sus enlaces son **contenido** y vienen
+ * en `groups`.
+ */
+export interface SiteNavMessages {
+  /** Nombre accesible del `nav`. */
+  label: string;
+}
+
 export function SiteNav({
   groups,
-  label = 'Navegación del sitio',
+  label,
   renderLink = defaultRenderLink,
   className,
 }: SiteNavProps) {
+  const t = useBrandMessages('siteNav');
   const classes = ['site-nav', className].filter(Boolean).join(' ');
   const wideColumns = Math.min(groups.length, COLUMNS_MAX) || 1;
   return (
-    <nav className={classes} aria-label={label} data-columns={wideColumns}>
+    <nav className={classes} aria-label={t('label', label)} data-columns={wideColumns}>
       {groups.map((group) => (
         <div key={group.id} className="site-nav__group">
           <Heading level={2} size={6} className="site-nav__label">

@@ -5,6 +5,7 @@ import { SiteShell } from '../../sections/SiteShell/SiteShell';
 import { Container } from '../../atoms/Container/Container';
 import { ErrorBoundary } from '../../atoms/ErrorBoundary/ErrorBoundary';
 import './PublicPageShell.css';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
 export interface PublicPageShellProps {
   /** El contenido de la página: lo que va dentro del `main`. */
@@ -25,7 +26,11 @@ export interface PublicPageShellProps {
    * pie, igual que `header` y `footer`.
    */
   preferences?: ReactNode;
-  /** Nombre accesible de la banda de preferencias. Default: «Preferencias» (castellano). */
+  /**
+   * Nombre accesible de la banda de preferencias. **Sin default**: sin él,
+   * sale de `publicPageShell.preferences` del `BrandMessagesProvider`. Solo se
+   * lee cuando hay banda.
+   */
   preferencesLabel?: string;
   /** `id` del `main` (`main-content` por defecto, destino del `SkipLink`). */
   id?: string;
@@ -63,14 +68,24 @@ export interface PublicPageShellProps {
  * marco y el `ref` se queda sin asignar: ahí el contenedor es el `AppShell` de
  * la app.
  */
+/**
+ * El único texto del marco, y es **cromo**: el nombre de la banda donde viven
+ * el idioma y el tema. Lo que se ponga dentro es **contenido**.
+ */
+export interface PublicPageShellMessages {
+  /** Nombre accesible de la banda de preferencias. */
+  preferences: string;
+}
+
 export const PublicPageShell = forwardRef<HTMLDivElement, PublicPageShellProps>(function PublicPageShell(
-  { children, header, footer, preferences, preferencesLabel = 'Preferencias', id = 'main-content', shell = true },
+  { children, header, footer, preferences, preferencesLabel, id = 'main-content', shell = true },
   ref,
 ) {
+  const t = useBrandMessages('publicPageShell');
   if (!shell) return <>{children}</>;
 
   const banda = preferences && (
-    <Container as="section" className="public-page-shell__preferences" aria-label={preferencesLabel}>
+    <Container as="section" className="public-page-shell__preferences" aria-label={t('preferences', preferencesLabel)}>
       <div className="public-page-shell__preferences-row">{preferences}</div>
     </Container>
   );

@@ -6,6 +6,7 @@ import { NumberBadge } from '../../atoms/NumberBadge/NumberBadge';
 import type { MenuItem, MenuRenderLinkProps } from '../Menu/Menu';
 import { renderDropdownItems } from '../_shared/dropdownItems';
 import './UserMenu.css';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { usePortalContainer } from '../../constants/portal-container';
 
 /**
@@ -29,11 +30,27 @@ function tokenSideOffset(): number {
   return cssLengthToPx(getComputedStyle(root).getPropertyValue('--user-menu-offset').trim());
 }
 
+/**
+ * Lo que el menú de cuenta dice por su cuenta, y es **cromo**: cómo se nombra
+ * su botón y cómo se cuentan las notificaciones sin leer. Los dos interpolan un
+ * dato —el nombre, el número—, así que son funciones. El nombre, el correo y
+ * los ítems son **contenido** y siguen viniendo por props.
+ */
+export interface UserMenuMessages {
+  /** Nombre accesible del botón, a partir del nombre del usuario. */
+  trigger: (name: string) => string;
+  /** Nombre accesible del contador de notificaciones sin leer. */
+  unread: (count: number) => string;
+}
+
 export interface UserMenuProps {
   name: string;
   email: string;
   avatarUrl?: string;
-  /** Nombre accesible del botón. Por defecto, «Cuenta de ‹nombre›». */
+  /**
+   * Nombre accesible del botón. **Sin default**: sin él, sale de
+   * `userMenu.trigger` del `BrandMessagesProvider`, que recibe el nombre.
+   */
   label?: string;
   /** Sin nombre — avatar, badge y chevron: para la barra del AppHeader. El nombre sigue en el panel y en el nombre accesible. */
   compact?: boolean;
@@ -70,17 +87,18 @@ export function UserMenu({
   onOpenChange,
   defaultOpen,
 }: UserMenuProps) {
+  const t = useBrandMessages('userMenu');
   const portalContainer = usePortalContainer(undefined);
   return (
     <BaseMenu.Root onOpenChange={(open) => onOpenChange?.(open)} defaultOpen={defaultOpen}>
-      <BaseMenu.Trigger className={['user-menu__trigger', compact ? 'user-menu__trigger--compact' : ''].filter(Boolean).join(' ')} aria-label={label ?? `Cuenta de ${name}`}>
+      <BaseMenu.Trigger className={['user-menu__trigger', compact ? 'user-menu__trigger--compact' : ''].filter(Boolean).join(' ')} aria-label={label ?? t('trigger')(name)}>
           <span className="user-menu__avatar-wrap">
             <Avatar src={avatarUrl} name={name} alt="" size="sm" />
             {!!notificationCount && notificationCount > 0 && (
               <NumberBadge
                 count={notificationCount}
                 variant="danger"
-                aria-label={`${notificationCount} notificaciones sin leer`}
+                aria-label={t('unread')(notificationCount)}
                 className="user-menu__notification-badge"
               />
             )}

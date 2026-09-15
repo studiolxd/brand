@@ -30,6 +30,21 @@ import { AvatarUpload } from '../molecules/AvatarUpload/AvatarUpload';
 import { ImageCropDialog } from '../molecules/ImageCropDialog/ImageCropDialog';
 import { CalendarPlanner } from '../molecules/CalendarPlanner/CalendarPlanner';
 import { CalendarRoster } from '../molecules/CalendarRoster/CalendarRoster';
+import { MenuButton } from '../atoms/MenuButton/MenuButton';
+import { AppRoot } from '../sections/AppRoot/AppRoot';
+import { AppHeader } from '../sections/AppHeader/AppHeader';
+import { AppShell } from '../sections/AppShell/AppShell';
+import { Sidebar } from '../sections/Sidebar/Sidebar';
+import { SidebarNav } from '../molecules/SidebarNav/SidebarNav';
+import { SiteNav } from '../molecules/SiteNav/SiteNav';
+import { SiteHeader } from '../sections/SiteHeader/SiteHeader';
+import { UserMenu } from '../molecules/UserMenu/UserMenu';
+import { OrgSwitcher } from '../molecules/OrgSwitcher/OrgSwitcher';
+import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb';
+import { TableOfContents } from '../molecules/TableOfContents/TableOfContents';
+import { PrevNextNav } from '../molecules/PrevNextNav/PrevNextNav';
+import { PublicPageShell } from '../templates/PublicPageShell/PublicPageShell';
+import { OnboardingShell } from '../templates/OnboardingShell/OnboardingShell';
 
 /**
  * El orden de resolución de un texto: **prop → proveedor → error**. Sin cuarto
@@ -929,5 +944,297 @@ describe('las subidas leen del proveedor', () => {
     expect(() => render(<CalendarRoster month={new Date(2026, 0, 1)} rows={[]} />)).toThrow(
       /calendar\.previousMonth/,
     );
+  });
+});
+
+/**
+ * **Ola 7 — el cromo de aplicación y la navegación.** Es la familia donde la
+ * frontera cromo/contenido se ve mejor: el nombre de una región de navegación
+ * («Principal», «En esta página», «Migas de pan») vale igual en todas las
+ * pantallas y es catálogo; los rótulos que hay DENTRO de esa región —los ítems
+ * del menú, los nombres de las organizaciones, los títulos de las páginas del
+ * `PrevNextNav`— son de la pantalla y siguen siendo props.
+ */
+describe('el cromo de navegación lee del proveedor', () => {
+  it('el botón de menú dice una cosa cerrado y otra abierto, las dos del catálogo', () => {
+    const { rerender } = render(
+      <BrandMessagesProvider messages={EN}>
+        <MenuButton />
+      </BrandMessagesProvider>,
+    );
+    expect(screen.getByRole('button', { name: 'Navigation menu' })).toBeInTheDocument();
+
+    rerender(
+      <BrandMessagesProvider messages={EN}>
+        <MenuButton isOpen />
+      </BrandMessagesProvider>,
+    );
+    expect(screen.getByRole('button', { name: 'Close menu' })).toBeInTheDocument();
+  });
+
+  it('un botón que nunca se abre no exige el texto de cerrar', () => {
+    const sinCerrar = { ...EN, menuButton: { open: 'Navigation menu' } } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinCerrar}>
+          <MenuButton />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  it('la cabecera de aplicación NO repite la clave: su `menuLabel` es un reenvío puro', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <AppHeader />
+      </BrandMessagesProvider>,
+    );
+    // Sin pasar nada, el botón lee `menuButton.open` — no hay una clave
+    // `appHeader.menu` que mantener en dos sitios.
+    expect(screen.getByRole('button', { name: 'Navigation menu' })).toBeInTheDocument();
+  });
+
+  it('los dos saltos al contenido salen del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <AppRoot />
+      </BrandMessagesProvider>,
+    );
+    expect(screen.getByRole('link', { name: 'Skip to main content' })).toBeInTheDocument();
+  });
+
+  it('el armazón nombra su salto y su barra desde el catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <AppShell header={<AppHeader />} sidebar={<Sidebar>panel</Sidebar>}>
+          contenido
+        </AppShell>
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('link', { name: 'Skip to main content' })).toBeInTheDocument();
+    expect(screen.getByRole('complementary', { name: 'Sidebar' })).toBeInTheDocument();
+  });
+
+  it('el asa nombra su control y dice el ancho, los dos del catálogo', () => {
+    // El asa solo existe en escritorio y dentro del armazón: jsdom responde
+    // `false` a toda media query, así que aquí se le dice que sí.
+    vi.spyOn(window, 'matchMedia').mockImplementation(
+      (query: string) => ({ matches: true, media: query, onchange: null,
+        addEventListener: vi.fn(), removeEventListener: vi.fn(), addListener: vi.fn(),
+        removeListener: vi.fn(), dispatchEvent: vi.fn() }) as unknown as MediaQueryList,
+    );
+
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <AppShell header={<AppHeader />} sidebar={<Sidebar>panel</Sidebar>} defaultSidebarWidth={280}>
+          contenido
+        </AppShell>
+      </BrandMessagesProvider>,
+    );
+
+    const asa = screen.getByRole('separator', { name: 'Sidebar width' });
+    expect(asa).toHaveAttribute('aria-valuetext', '280 pixels');
+  });
+
+  it('una barra suelta, sin armazón, no tiene asa y no exige sus dos textos', () => {
+    const soloNombre = { ...EN, sidebar: { label: 'Sidebar' } } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={soloNombre}>
+          <Sidebar>panel</Sidebar>
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  it('la navegación de la barra nombra su región y marca lo vacío desde el catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <SidebarNav
+          entries={[
+            { kind: 'link', id: 'lrs', label: 'LRS', href: '#lrs', empty: true },
+            { kind: 'link', id: 'docs', label: 'Docs', href: '#docs' },
+          ]}
+        />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('navigation', { name: 'Main' })).toBeInTheDocument();
+    expect(screen.getByText('no docs')).toBeInTheDocument();
+    // Y los rótulos de las entradas siguen siendo datos: no se traducen.
+    expect(screen.getByText('LRS')).toBeInTheDocument();
+  });
+
+  it('una navegación sin entradas vacías no exige la marca de vacío', () => {
+    const sinVacio = { ...EN, sidebarNav: { label: 'Main' } } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinVacio}>
+          <SidebarNav entries={[{ kind: 'link', id: 'docs', label: 'Docs', href: '#docs' }]} />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  it('el índice del sitio y la cabecera pública leen sus nombres del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <>
+          {/* El índice va suelto: dentro del panel cerrado de la cabecera está
+              `aria-hidden` y no se puede consultar por rol. */}
+          <SiteNav groups={[{ id: 'p', label: 'Product', items: [{ id: 'a', label: 'Pricing', href: '#a' }] }]} />
+          {/* Con panel: sin él la cabecera no pinta su botón de menú. */}
+          <SiteHeader settings={<button type="button">Theme</button>} />
+        </>
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('navigation', { name: 'Site navigation' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Studio LXD — go to the home page' })).toBeInTheDocument();
+    // El botón de la cabecera pública también es un reenvío puro al MenuButton.
+    expect(screen.getByRole('button', { name: 'Navigation menu' })).toBeInTheDocument();
+  });
+
+  it('el menú de cuenta y el de organización interpolan su dato en el texto del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <>
+          <UserMenu name="Ada Lovelace" email="ada@example.com" notificationCount={3} />
+          <OrgSwitcher
+            current={{ id: 'a', name: 'Acme' }}
+            organizations={[{ id: 'a', name: 'Acme' }]}
+            onOrgChange={() => {}}
+          />
+        </>
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: "Ada Lovelace's account" })).toBeInTheDocument();
+    expect(screen.getByLabelText('3 unread notifications')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Organisation: Acme' })).toBeInTheDocument();
+  });
+
+  it('un menú de cuenta sin contador no exige el texto del contador', () => {
+    const sinContador = {
+      ...EN,
+      userMenu: { trigger: (name: string) => `${name}'s account` },
+    } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinContador}>
+          <UserMenu name="Ada" email="ada@example.com" />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  it('las migas, el índice de página y el par anterior/siguiente leen del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <>
+          <Breadcrumb items={[{ label: 'Inicio', href: '#' }, { label: 'Ajustes' }]} />
+          <TableOfContents items={[{ id: 'uso', label: 'Uso', level: 2 }]} />
+          <PrevNextNav prevHref="#a" nextHref="#b" />
+        </>
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('navigation', { name: 'Breadcrumb' })).toBeInTheDocument();
+    expect(screen.getByRole('navigation', { name: 'On this page' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Previous' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Next' })).toBeInTheDocument();
+    // Los rótulos del rastro y los encabezados son datos de la pantalla.
+    expect(screen.getByText('Ajustes')).toBeInTheDocument();
+  });
+
+  it('el título del destino gana al rótulo de dirección y lo deja de exigir como nombre', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <PrevNextNav prevHref="#a" prevTitle="Instalación" />
+      </BrandMessagesProvider>,
+    );
+
+    // Con título, el nombre accesible es el texto visible entero: la dirección
+    // sigue saliendo del catálogo, pero como rótulo, no como `aria-label`.
+    expect(screen.getByRole('link', { name: /Instalación/ })).toBeInTheDocument();
+  });
+
+  it('el marco público nombra su banda de preferencias desde el catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <PublicPageShell preferences={<button type="button">Theme</button>}>
+          contenido
+        </PublicPageShell>
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('region', { name: 'Preferences' })).toBeInTheDocument();
+  });
+
+  it('un marco público sin banda no exige el texto de la banda', () => {
+    const sinBanda = { ...EN, publicPageShell: {} } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinBanda}>
+          <PublicPageShell>contenido</PublicPageShell>
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  it('el alta nombra su pie de acciones desde el catálogo, y los botones siguen siendo suyos', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <OnboardingShell primaryAction={<button type="button">Continue</button>}>
+          paso
+        </OnboardingShell>
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('group', { name: 'Step actions' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Continue' })).toBeInTheDocument();
+  });
+
+  it('un paso sin acciones no exige el nombre del pie de acciones', () => {
+    const sinAcciones = { ...EN, onboardingShell: {} } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinAcciones}>
+          <OnboardingShell>paso</OnboardingShell>
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  it('la prop suelta gana al proveedor también en la navegación', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <Breadcrumb ariaLabel="Ruta de esta sección" items={[{ label: 'Inicio' }]} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('navigation', { name: 'Ruta de esta sección' })).toBeInTheDocument();
+  });
+
+  it('sin proveedor y sin prop, cada pieza revienta nombrando su clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<Breadcrumb items={[{ label: 'Inicio' }]} />)).toThrow(/breadcrumb\.label/);
+    expect(() => render(<TableOfContents items={[{ id: 'a', label: 'Uso', level: 2 }]} />)).toThrow(
+      /tableOfContents\.label/,
+    );
+    expect(() => render(<PrevNextNav prevHref="#a" />)).toThrow(/prevNextNav\.previous/);
+    expect(() => render(<MenuButton />)).toThrow(/menuButton\.open/);
+    expect(() => render(<AppRoot />)).toThrow(/appRoot\.skipToContent/);
+    expect(() =>
+      render(<SiteNav groups={[{ id: 'p', label: 'P', items: [] }]} />),
+    ).toThrow(/siteNav\.label/);
   });
 });

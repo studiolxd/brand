@@ -79,6 +79,26 @@ Un `item` puede llevar `target` y `rel`. Con `target="_blank"` el enlace abre en
 - Las cabeceras de grupo son encabezados normales (`Heading` de nivel 2 y talla 6, sin estilo propio), así el índice se recorre por encabezados igual que una página.
 - La página actual lleva `aria-current="page"`; el peso es un refuerzo, no el único indicio.
 
+## Internacionalización
+
+El índice emite **un** texto por su cuenta y es **cromo**: sale de
+`siteNav.label` del `BrandMessagesProvider` y ya **no trae castellano puesto**.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `label` | `siteNav.label` del proveedor | Nombra la región de navegación, no el sitio. |
+| **Contenido** | los rótulos de los grupos y de sus enlaces | `groups` | Son el índice de ESTE sitio. |
+
+```tsx
+<BrandMessagesProvider
+  messages={{ siteNav: { label: t("a11y.siteNav") } }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={SiteNavStories.TextosDelProveedor} />
+
 ## Tokens
 
 <TokenTable tokens={siteNavTokens} />

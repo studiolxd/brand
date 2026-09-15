@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within, userEvent, fn } from 'storybook/test';
 import { OrgSwitcher } from './OrgSwitcher';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const orgs = [
   { id: 'studio', name: 'Studio LXD' },
@@ -56,5 +58,35 @@ export const Contrato: Story = {
     await expect(within(menu).getByRole('menuitemcheckbox', { name: 'Studio LXD' })).toHaveAttribute('aria-checked', 'true');
     await userEvent.click(within(menu).getByRole('menuitem', { name: 'Acme Corp' }));
     await expect(args.onOrgChange).toHaveBeenCalledWith('acme');
+  },
+};
+
+/**
+ * El único texto propio del conmutador es el nombre de su botón, que interpola
+ * la organización activa: sale de `orgSwitcher.trigger`. Los nombres de las
+ * organizaciones son datos y no se traducen.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <OrgSwitcher current={orgs[0]} organizations={orgs} onOrgChange={() => {}} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el nombre del botón sale de `orgSwitcher.trigger`, con el dato dentro. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el conmutador lee su nombre del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <OrgSwitcher current={orgs[0]} organizations={orgs} onOrgChange={() => {}} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('button', { name: 'Organisation: Studio LXD' })).toBeInTheDocument();
+    await expect(canvas.queryByRole('button', { name: 'Organización: Studio LXD' })).toBeNull();
   },
 };

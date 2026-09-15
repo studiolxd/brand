@@ -33,6 +33,41 @@ Es un `role="separator"` focusable, así que anuncia el recorrido entero: `aria-
 
 Por debajo del punto de ruptura la barra es un cajón que entra por la izquierda. Mientras está abierto es **un diálogo modal**: `role="dialog"` con `aria-modal="true"`, el contenido de la página en `inert` bajo el velo, el foco entrando en el panel al abrirse y **volviendo al botón que lo abrió** al cerrarse. Sin esa vuelta el foco se quedaría dentro de un panel ya oculto y caería al `<body>`, que es como perder el sitio.
 
+## Internacionalización
+
+La barra emite **tres** textos por su cuenta y los tres son **cromo**: salen de
+`sidebar.*` del `BrandMessagesProvider` y ya **no traen castellano puesto**.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `label`, `resizerLabel`, `resizerValueText` | `sidebar.*` del proveedor | Nombran la región, el control que la ensancha y cómo se lee su ancho. Ninguno depende de qué haya dentro. |
+| **Contenido** | el logotipo, el panel, el pie | `logo`, `children`, `footer` | Los escribe el producto, con sus propios textos. |
+
+```tsx
+<BrandMessagesProvider
+  messages={{
+    sidebar: {
+      label: t("a11y.sidebar"),
+      resizer: t("a11y.sidebarWidth"),
+      resizerValue: (width) => t("a11y.sidebarWidthValue", { width }),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+| Prop | Clave del catálogo | Dónde aparece |
+| --- | --- | --- |
+| `label` | `sidebar.label` | nombre accesible del `aside` |
+| `resizerLabel` | `sidebar.resizer` | nombre accesible del asa |
+| `resizerValueText` | `sidebar.resizerValue` | `aria-valuetext` del asa |
+
+`resizerValue` **interpola el ancho**, así que es una función, no una cadena. El
+orden es **prop → proveedor → error**, y los dos textos del asa se leen **donde
+se pintan**: una barra suelta —fuera de un `AppShell`, o en móvil— no tiene asa
+y no los exige.
+
 ## Tokens
 
 Los anchos son medidas de maqueta, como la de lectura; el rail se compone de la talla md.

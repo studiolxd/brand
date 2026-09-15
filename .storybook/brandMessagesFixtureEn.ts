@@ -202,4 +202,52 @@ export const brandMessagesFixtureEn: BrandMessages = {
     preferences: 'Notification preferences',
     markAllRead: 'Mark all as read',
   },
+  menuButton: {
+    open: 'Navigation menu',
+    close: 'Close menu',
+  },
+  appRoot: {
+    skipToContent: 'Skip to main content',
+  },
+  appShell: {
+    skipToContent: 'Skip to main content',
+  },
+  sidebar: {
+    label: 'Sidebar',
+    resizer: 'Sidebar width',
+    resizerValue: (width) => `${width} pixels`,
+  },
+  sidebarNav: {
+    label: 'Main',
+    empty: 'no docs',
+  },
+  siteNav: {
+    label: 'Site navigation',
+  },
+  siteHeader: {
+    logo: 'Studio LXD — go to the home page',
+  },
+  userMenu: {
+    trigger: (name) => `${name}'s account`,
+    unread: (count) => `${count} unread notifications`,
+  },
+  orgSwitcher: {
+    trigger: (name) => `Organisation: ${name}`,
+  },
+  breadcrumb: {
+    label: 'Breadcrumb',
+  },
+  tableOfContents: {
+    label: 'On this page',
+  },
+  prevNextNav: {
+    previous: 'Previous',
+    next: 'Next',
+  },
+  publicPageShell: {
+    preferences: 'Preferences',
+  },
+  onboardingShell: {
+    actions: 'Step actions',
+  },
 };

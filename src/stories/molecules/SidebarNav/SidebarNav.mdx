@@ -47,6 +47,35 @@ Nada se rellena (Foundations → Colores, «Estados: nada se rellena»): el hove
 - Los grupos son un acordeón: el chevron es un botón con `aria-expanded`; la cabecera-enlace navega y no pliega, para que una cosa no tape la otra.
 - `renderLink` para el router del producto, reenviando todas las props.
 
+## Internacionalización
+
+La navegación emite **dos** textos por su cuenta y los dos son **cromo**: salen
+de `sidebarNav.*` del `BrandMessagesProvider` y ya **no traen castellano
+puesto**.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `label`, `emptyLabel` | `sidebarNav.*` del proveedor | El nombre de la región es el mismo en toda la suite, y la marca de una entrada sin contenido dice «aquí todavía no hay nada», no de qué entrada se trata. |
+| **Contenido** | los rótulos de las entradas y de los grupos | `entries` | Son los datos de la navegación de esta aplicación. |
+
+```tsx
+<BrandMessagesProvider
+  messages={{
+    sidebarNav: {
+      label: t("a11y.primaryNav"),
+      empty: t("a11y.navEmpty"),
+    },
+  }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={SidebarNavStories.TextosDelProveedor} />
+
+El orden es **prop → proveedor → error**, y el texto se lee **donde se pinta**:
+una navegación sin entradas `empty` no exige `sidebarNav.empty`.
+
 ## Tokens
 
 <TokenTable tokens={sidebarNavTokens} />

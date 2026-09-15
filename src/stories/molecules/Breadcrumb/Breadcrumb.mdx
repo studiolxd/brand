@@ -40,6 +40,29 @@ con `{...props}`.
 
 ---
 
+## Internacionalización
+
+Las migas emiten **un** texto por su cuenta y es **cromo**: sale de
+`breadcrumb.label` del `BrandMessagesProvider` y ya **no trae castellano
+puesto**.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `ariaLabel` | `breadcrumb.label` del proveedor | Nombra la región: dice «esto es un rastro», no cuál. |
+| **Contenido** | los rótulos del rastro | `items` | Son las páginas de ESTA jerarquía. |
+
+```tsx
+<BrandMessagesProvider
+  messages={{ breadcrumb: { label: t("a11y.breadcrumb") } }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={BreadcrumbStories.TextosDelProveedor} />
+
+El `separator` tampoco pasa por el catálogo: es un glifo, no un texto.
+
 ## Tokens
 
 <TokenTable tokens={breadcrumbTokens} />

@@ -60,17 +60,35 @@ Ninguno pinta relleno. La entrada actual es la única que persiste cuando el rat
 
 La entrada actual pasa a lavanda (`color.accent-1`), tinta y barra emparejadas: el prusia de la superficie clara sería invisible sobre el fondo oscuro, igual que en `SidebarNav`. El resto sale de la regla de derivación.
 
-## Textos
-
-`ariaLabel` y `title` son props con default castellano. Los `label` de las entradas son datos: llegan con el documento.
-
----
-
 ## Atributos al `<nav>`
 
 Lo que no sea prop propia (`id`, `data-*`, `role`, `style`…) viaja al `<nav>`. El **nombre
 accesible sigue siendo `ariaLabel`**, no `aria-label` suelto: es la prop de texto del componente y
 la que se traduce.
+
+## Internacionalización
+
+El índice emite **un** texto por su cuenta y es **cromo**: sale de
+`tableOfContents.label` del `BrandMessagesProvider` y ya **no trae castellano
+puesto**.
+
+| | Textos | De dónde salen | Por qué |
+| --- | --- | --- | --- |
+| **Cromo** | `ariaLabel` | `tableOfContents.label` del proveedor | «En esta página» nombra la región, no la página. |
+| **Contenido** | `title` y los rótulos de las entradas | props | El rótulo visible y los encabezados son del documento. |
+
+```tsx
+<BrandMessagesProvider
+  messages={{ tableOfContents: { label: t("a11y.tableOfContents") } }}
+>
+  {children}
+</BrandMessagesProvider>
+```
+
+<Canvas of={TableOfContentsStories.TextosDelProveedor} />
+
+`title` **no** va al catálogo aunque suene igual: es el rótulo **visible** de
+este índice concreto, y hay páginas que no lo ponen.
 
 ## Tokens
 

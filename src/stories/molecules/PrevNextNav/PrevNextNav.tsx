@@ -1,6 +1,7 @@
 import type { ComponentType, MouseEvent, ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
 import './PrevNextNav.css';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
 export interface PrevNextNavProps {
   /** href del enlace anterior. Mutuamente exclusivo con prevOnClick */
@@ -18,10 +19,14 @@ export interface PrevNextNavProps {
   /**
    * Rótulo del control anterior. Sin `prevTitle` es el `aria-label` del
    * chevron; con `prevTitle` es el rótulo **visible** que lo encabeza.
-   * Default: "Anterior"
+   * **Sin default**: sin él, sale de `prevNextNav.previous` del
+   * `BrandMessagesProvider`.
    */
   prevLabel?: string;
-  /** Rótulo del control siguiente. Mismo contrato que `prevLabel`. Default: "Siguiente" */
+  /**
+   * Rótulo del control siguiente. Mismo contrato que `prevLabel`. **Sin
+   * default**: sale de `prevNextNav.next`.
+   */
   nextLabel?: string;
   /**
    * Título visible del destino anterior (el de la página, el capítulo…). Con
@@ -123,13 +128,25 @@ function NavControl({
   );
 }
 
+/**
+ * Los dos textos del par, y los dos son **cromo**: «anterior» y «siguiente»
+ * dicen la dirección, no el destino. El destino —`prevTitle`, `nextTitle`, el
+ * rótulo del medio— es **contenido** y lo escribe la página.
+ */
+export interface PrevNextNavMessages {
+  /** Rótulo del control anterior. */
+  previous: string;
+  /** Rótulo del control siguiente. */
+  next: string;
+}
+
 export function PrevNextNav({
   prevHref,
   nextHref,
   prevOnClick,
   nextOnClick,
-  prevLabel = 'Anterior',
-  nextLabel = 'Siguiente',
+  prevLabel,
+  nextLabel,
   prevTitle,
   nextTitle,
   label,
@@ -137,6 +154,7 @@ export function PrevNextNav({
   linkComponent,
   size = 'md',
 }: PrevNextNavProps) {
+  const t = useBrandMessages('prevNextNav');
   const chevronSize = size === 'sm' ? 'sm' : 'md';
   const titled = prevTitle !== undefined || nextTitle !== undefined;
   const classes = [
@@ -152,7 +170,7 @@ export function PrevNextNav({
       <NavControl
         href={prevHref}
         onClick={prevOnClick}
-        label={prevLabel}
+        label={t('previous', prevLabel)}
         disabled={!prevHref && !prevOnClick}
         direction="prev"
         title={prevTitle}
@@ -167,7 +185,7 @@ export function PrevNextNav({
       <NavControl
         href={nextHref}
         onClick={nextOnClick}
-        label={nextLabel}
+        label={t('next', nextLabel)}
         disabled={!nextHref && !nextOnClick}
         direction="next"
         title={nextTitle}

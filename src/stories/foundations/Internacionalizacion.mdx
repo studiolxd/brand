@@ -236,7 +236,7 @@ La misma regla, aplicada a la familia de subidas:
 | `MessageComposer` | `placeholder`, `sendLabel` — más `helperText`, **sin default en ningún idioma** |
 | `ChatShell` | `listLabel`, `listTriggerLabel` |
 | `Stepper` | `label` (el nombre de la lista de progreso), `compactLabel` (recibe el paso y el total: «Paso 2 de 4») y `labels` con los estados `completed`, `current` y `pending` |
-| `OnboardingShell` | `actionsLabel` — el nombre del grupo de acciones del pie |
+| `OnboardingShell` | **Migrado al proveedor** (`onboardingShell.actions`, sin default). `actionsLabel` sigue como anulación puntual y solo se lee cuando el paso trae alguna acción. `preferencesLabel` es un **reenvío puro** al `PublicPageShell`. Lo que digan «Continuar», «Atrás» y la salida es contenido del flujo |
 | `LoginForm` | `title`, `emailLabel`, `passwordLabel`, `submitLabel`, `loadingLabel` |
 | `PasswordField` | **Migrado al proveedor** (`passwordField.show`, `passwordField.hide`, sin defaults). `label`, `placeholder`, `helperText` y `errorMessage` quedan fuera: son el contenido de ese campo |
 | `ContextMenu`, `DotsButton` | `label` / `aria-label` |
@@ -255,8 +255,8 @@ La misma regla, aplicada a la familia de subidas:
 | `Chart` | `ariaLabel`, `tableCaption`, `tableHint`, `categoryLabel`, `valueLabel`, `shareLabel`, `emptyMessage` — más `locale`, `formatValue` y `formatX` |
 | `Sparkline` | `ariaLabel` |
 | `ConsentPreferences` | **Migrado al proveedor** (`consent.preferencesTitle`, `consent.alwaysOn`, sin defaults) — el mismo espacio que la banda, porque es la misma pieza. `closeLabel` es un reenvío puro al `Modal`/`Sheet` (`modal.close` / `sheet.close`). Los nombres y las explicaciones de cada categoría son contenido y se traducen pasando `categories` entera |
-| `TableOfContents` | `ariaLabel`, `title` |
-| `PrevNextNav` | `prevLabel`, `nextLabel` — el `aria-label` de cada control; con `prevTitle`/`nextTitle` pasan a ser el rótulo visible |
+| `TableOfContents` | **Migrado al proveedor** (`tableOfContents.label`, sin default). `ariaLabel` sigue como anulación puntual. `title` queda **fuera**: es el rótulo visible de ESE índice, y hay páginas que no lo ponen |
+| `PrevNextNav` | **Migrado al proveedor** (`prevNextNav.previous`, `.next`, sin defaults) — dicen la **dirección**, no el destino. Las dos props siguen como anulación puntual, y ahí está el caso de un par que navega semanas y quiere decir «Semana anterior». `prevTitle`, `nextTitle` y `label` quedan fuera: son de esta pantalla |
 | `InputField` | **Migrado al proveedor** (`inputField.clear`, sin default) — el aspa de la variante `kind="search"` con `clearable`; `clearLabel` sigue como anulación puntual. `label` (obligatoria), `placeholder`, `helperText` y `errorMessage` quedan **fuera** del proveedor: son el contenido de ESE campo |
 | `DocsSearch` | **Migrado al proveedor** (`docsSearch.label`, `.placeholder`, `.results`, `.empty`, `.loading`, sin defaults). `clearLabel` **no tiene clave propia**: el aspa es la del `InputField` de debajo y sale de `inputField.clear`; la prop sigue como reenvío puro |
 | `FilterBar` | **Migrado al proveedor** (`filterBar.label`, sin default) — el nombre del punto de referencia `search`. Los rótulos de los filtros no pasan por el catálogo: los escribe cada campo |
@@ -268,13 +268,22 @@ La misma regla, aplicada a la familia de subidas:
 | `StarRating` | `valueLabel`, `countLabel`, `emptyLabel`, `optionLabel`, `groupLabel` — **obligatorias y sin default**: el componente recibe su texto, no lo trae puesto. Cada una se exige cuando el componente puede emitirla (`valueLabel` en lectura; `countLabel` con `reviewCount`; `emptyLabel` si `value` puede ser `null`; `optionLabel` y `groupLabel` en entrada). No tiene `locale`: no escribe ningún número |
 | `Slider` | `label`, `thumbLabel` — más `format` y `locale` para el número |
 | `TreeView` | `label` — el nombre accesible del árbol |
-| `SidebarNav` | `label`, `emptyLabel` — la marca de las entradas sin contenido |
+| `SidebarNav` | **Migrado al proveedor** (`sidebarNav.label`, `.empty`, sin defaults). Las dos props siguen como anulación puntual; `sidebarNav.empty` solo se lee cuando hay alguna entrada `empty`. Los rótulos de `entries` son datos |
 | `AnnotationThread` | `label`, `openLabel`, `acknowledgedLabel`, `resolvedLabel`, `editedLabel`, `repliesLabel` — más `locale` y `dateFormat` |
 | `ScrollArea` | `label` — el nombre accesible de la región desplazable |
 | `ProgressBar` | `label` — qué está avanzando |
-| `Breadcrumb` | `ariaLabel` |
-| `Sidebar` | `label`, `resizerLabel`, `resizerValueText` — el ancho hablado del asa, con su unidad |
-| `AppShell` | `skipLabel` — el enlace de salto al contenido |
+| `Breadcrumb` | **Migrado al proveedor** (`breadcrumb.label`, sin default). `ariaLabel` sigue como anulación puntual. Los rótulos del rastro son datos, y `separator` es un glifo, no un texto |
+| `Sidebar` | **Migrado al proveedor** (`sidebar.label`, `.resizer`, `.resizerValue`, sin defaults). `resizerValue` **interpola el ancho**, así que es una función. Los dos textos del asa solo se leen cuando el asa existe: en escritorio, dentro de un `AppShell` y con la barra no cerrada |
+| `AppShell` | **Migrado al proveedor** (`appShell.skipToContent`, sin default). `skipLabel` sigue como anulación puntual. Lo demás son reenvíos: el nombre de la barra lo lee el `Sidebar` y el del botón, el `MenuButton` |
+| `AppRoot` | **Migrado al proveedor** (`appRoot.skipToContent`, sin default). Es la misma frase que la del `AppShell` pero **espacio propio**: son dos piezas distintas —la raíz del documento y el armazón de la aplicación— y cada una declara lo suyo, aunque la app las alimente del mismo `t()`. `skipHref` no es texto |
+| `MenuButton` | **Migrado al proveedor** (`menuButton.open`, `.close`, sin defaults). **El nombre sigue al estado**: abierto dice «cerrar», cerrado dice «abrir» — antes se quedaba en el mismo nombre salvo que el consumidor pasara `closeLabel` a mano. `menuButton.close` solo se lee cuando el menú se abre |
+| `AppHeader` | **No tiene texto propio.** `menuLabel` y `menuCloseLabel` son **reenvíos puros** al `MenuButton` y ya no hacen falta para traducir |
+| `SiteHeader` | **Migrado al proveedor** (`siteHeader.logo`, sin default). Ojo con el valor: el default retirado llevaba la marca dentro («Studio LXD — ir al inicio»), así que cada producto escribe la clave con la suya. `menuLabel`/`menuCloseLabel` son reenvíos puros al `MenuButton` |
+| `SiteNav` | **Migrado al proveedor** (`siteNav.label`, sin default). Los grupos y sus enlaces son el índice de ESE sitio |
+| `UserMenu` | **Migrado al proveedor** (`userMenu.trigger`, `.unread`, sin defaults). Las dos **interpolan un dato**, así que son funciones. `unread` ni siquiera era una prop antes: el contador traía el castellano cableado. `name`, `email` e `items` son contenido |
+| `OrgSwitcher` | **Migrado al proveedor** (`orgSwitcher.trigger`, sin default), que interpola la organización activa. Los nombres de las organizaciones son datos |
+| `PublicPageShell` | **Migrado al proveedor** (`publicPageShell.preferences`, sin default) — el nombre de la banda de idioma y tema. Solo se lee cuando hay banda |
+| `Switcher` | **No emite ningún texto.** Lo nombra la etiqueta de su campo (`SwitcherField`) |
 | `FloatingDock` | **Migrado al proveedor, con espacio propio** (`floatingDock.close`, `floatingDock.badge`, sin defaults). **No hereda `modal.close`, a propósito**: su panel no es un `Modal` —es un diálogo no modal, sin velo, que no atrapa el foco, montado por portal dentro del propio ancla y anclado a una esquina—, así que hacerlo pasar por `Modal` habría sido cambiar el componente, no quitar una clave. `label` (el nombre del lanzador) sigue **obligatorio y fuera del catálogo**: nombra lo que el dock abre, y eso lo sabe el producto |
 | `AppLauncher` | **Migrado al proveedor** (`appLauncher.open`, `.new`, `.title`, sin defaults). `labels` **deja de ser obligatoria** y queda como anulación puntual, clave a clave. `labels.trigger` **no va al catálogo**: no es un texto de más, su presencia decide la cara del disparador (solo icono, o icono con rótulo), y un texto de catálogo está siempre presente — es una decisión de maqueta del sitio donde se monta. Los nombres de las apps viajan en `apps` |
 | `EmailLayout` | `optOut.manageLabel`, `optOut.unsubscribeLabel`, `optOut.manageBeforeLabel`, `optOut.managePreferencesLabel`, `optOut.manageAfterLabel` — la frase de baja, partida porque los idiomas no coinciden en si hay texto tras el enlace |

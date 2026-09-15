@@ -69,12 +69,16 @@ export const Contrato: Story = {
   tags: ['!dev'],
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const boton = canvas.getByRole('button', { name: 'Menú de navegación' });
+    // La barra arranca abierta, así que el botón se llama por su cara de
+    // cerrar: el nombre sigue al estado (`menuButton.close` / `.open`).
+    const boton = canvas.getByRole('button', { name: 'Cerrar menú' });
     await expect(canvas.getByTestId('estado')).toHaveTextContent('open');
     await userEvent.click(boton);
     await expect(canvas.getByTestId('estado')).toHaveTextContent('closed');
+    await expect(boton).toHaveAccessibleName('Menú de navegación');
     await userEvent.click(boton);
     await expect(canvas.getByTestId('estado')).toHaveTextContent('open');
+    await expect(boton).toHaveAccessibleName('Cerrar menú');
     const asa = canvas.getByRole('separator', { name: 'Ancho de la barra lateral' });
     asa.focus();
     await userEvent.keyboard('{Home}');

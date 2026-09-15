@@ -2,6 +2,7 @@ import { forwardRef, type MouseEvent, type ReactNode } from 'react';
 import { List } from '../../atoms/List/List';
 import { Link } from '../../atoms/Link/Link';
 import './TableOfContents.css';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
 export interface TableOfContentsItem {
   /** `id` del encabezado al que apunta la entrada. El enlace será `#id`. */
@@ -21,8 +22,8 @@ export interface TableOfContentsProps extends Omit<React.ComponentPropsWithoutRe
    */
   activeId?: string;
   /**
-   * Nombre accesible del `nav`. Por defecto, en castellano.
-   * @default 'En esta página'
+   * Nombre accesible del `nav`. **Sin default**: sin él, sale de
+   * `tableOfContents.label` del `BrandMessagesProvider`.
    */
   ariaLabel?: string;
   /** Rótulo visible sobre la lista. Sin él, no se pinta ninguno. */
@@ -56,16 +57,27 @@ function depthOf(level: number, minLevel: number): number {
  * `{...rest}` (`id`, `data-*`, `role`…) se reenvía al `<nav>`. El nombre
  * accesible sigue siendo `ariaLabel`.
  */
+/**
+ * El único texto que el índice dice por su cuenta, y es **cromo**: «En esta
+ * página» nombra la región, no la página. El rótulo visible (`title`) y los
+ * encabezados (`items`) son **contenido**.
+ */
+export interface TableOfContentsMessages {
+  /** Nombre accesible del `nav`. */
+  label: string;
+}
+
 export const TableOfContents = forwardRef<HTMLElement, TableOfContentsProps>(function TableOfContents({
   items,
   activeId,
-  ariaLabel = 'En esta página',
+  ariaLabel,
   title,
   sticky = false,
   onItemClick,
   className,
   ...rest
 }, ref): ReactNode {
+  const t = useBrandMessages('tableOfContents');
   if (items.length === 0) return null;
 
   const minLevel = Math.min(...items.map((item) => item.level));
@@ -77,7 +89,7 @@ export const TableOfContents = forwardRef<HTMLElement, TableOfContentsProps>(fun
   ].filter(Boolean).join(' ');
 
   return (
-    <nav ref={ref} className={classes} aria-label={ariaLabel} {...rest}>
+    <nav ref={ref} className={classes} aria-label={t('label', ariaLabel)} {...rest}>
       {title && <p className="table-of-contents__title">{title}</p>}
       <List type="plain" className="table-of-contents__list">
         {items.map((item) => {

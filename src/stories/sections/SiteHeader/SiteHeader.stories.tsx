@@ -194,11 +194,12 @@ export const ContratoAjustes: Story = {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole('button', { name: 'Menú de navegación' }));
     await userEvent.click(canvas.getByRole('button', { name: 'Tema' }));
+    // Con el panel abierto el botón pasa a llamarse «Cerrar menú».
     const opcion = await within(document.body).findByRole('menuitemradio', { name: 'Oscuro' });
     await userEvent.click(opcion);
     // el menú se cierra; el panel sigue abierto
     await waitFor(() => expect(within(document.body).queryByRole('menu')).toBeNull());
-    await expect(canvas.getByRole('button', { name: 'Menú de navegación' })).toHaveAttribute('aria-expanded', 'true');
+    await expect(canvas.getByRole('button', { name: 'Cerrar menú' })).toHaveAttribute('aria-expanded', 'true');
   },
 };
 

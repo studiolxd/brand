@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { SiteNav, type SiteNavGroup } from './SiteNav';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 import { Container } from '../../atoms/Container/Container';
 
 const groups: SiteNavGroup[] = [
@@ -182,5 +184,34 @@ export const ContratoReparto: Story = {
     // Y los de la última no son más estrechos que los de la primera: o la fila
     // estaba completa (miden igual) o se han repartido el sobrante (miden más).
     await expect(ancho(ultima[0]!)).toBeGreaterThanOrEqual(ancho(primera[0]!) - 1);
+  },
+};
+
+/**
+ * El único texto propio del índice es el nombre de su región, y sale de
+ * `siteNav.label`. Los grupos y sus enlaces son contenido del sitio.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <SiteNav groups={groups} />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el nombre del `nav` sale de `siteNav.label`. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el índice lee su nombre del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <SiteNav groups={groups} />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('navigation', { name: 'Site navigation' })).toBeInTheDocument();
+    await expect(canvas.queryByRole('navigation', { name: 'Navegación del sitio' })).toBeNull();
   },
 };

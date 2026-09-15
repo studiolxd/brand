@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within, userEvent } from 'storybook/test';
 import { MenuButton } from './MenuButton';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 function Interactivo(props: React.ComponentProps<typeof MenuButton>) {
   const [open, setOpen] = useState(props.isOpen ?? false);
@@ -58,5 +60,39 @@ export const Comportamiento: Story = {
     const lineas = canvasElement.querySelectorAll('.menu-button__icon .icon__line');
     await expect(lineas.length).toBe(3);
     await expect(getComputedStyle(lineas[0]).strokeWidth).toBe('1px');
+  },
+};
+
+/**
+ * El botón dice una cosa cerrado y otra abierto, y las dos salen de
+ * `menuButton.*` del catálogo. Las dos cabeceras que lo montan —`AppHeader` y
+ * `SiteHeader`— **no repiten la clave**: sus `menuLabel`/`menuCloseLabel` son
+ * reenvíos puros.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Interactivo />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el nombre sigue al estado, y los dos salen del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el botón lee sus dos caras del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <Interactivo />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const boton = canvas.getByRole('button', { name: 'Navigation menu' });
+    await userEvent.click(boton);
+    await expect(boton).toHaveAccessibleName('Close menu');
+    await userEvent.click(boton);
+    await expect(boton).toHaveAccessibleName('Navigation menu');
   },
 };

@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within, userEvent } from 'storybook/test';
 import { SidebarNav } from './SidebarNav';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 import { Icon } from '../../atoms/Icon/Icon';
 
 const grupos = [
@@ -143,5 +145,50 @@ export const ContratoVacias: Story = {
     await expect(within(nav).queryByRole('link', { name: /Localizia/ })).toBeNull();
     await expect(within(nav).getByRole('link', { name: 'Bricks' })).toBeVisible();
     await expect(within(nav).getAllByText('sin docs')).toHaveLength(2);
+  },
+};
+
+/**
+ * Los dos textos de la navegación salen de `sidebarNav.*` del catálogo: el
+ * nombre de la región y la marca de una entrada sin contenido. Los rótulos de
+ * las entradas son datos y siguen viniendo en `entries`, así que con el
+ * catálogo en inglés la región se llama «Main», lo vacío dice «no docs» y las
+ * entradas siguen diciendo lo suyo.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <SidebarNav
+        entries={[
+          { kind: 'link', id: 'panel', label: 'Panel', href: '#panel' },
+          { kind: 'link', id: 'lrs', label: 'LRS', href: '#lrs', empty: true },
+        ]}
+      />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el nombre del `nav` y la marca de vacío salen del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — la navegación lee su cromo del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <SidebarNav
+        entries={[
+          { kind: 'link', id: 'panel', label: 'Panel', href: '#panel' },
+          { kind: 'link', id: 'lrs', label: 'LRS', href: '#lrs', empty: true },
+        ]}
+      />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('navigation', { name: 'Main' })).toBeInTheDocument();
+    await expect(canvas.getByText('no docs')).toBeInTheDocument();
+    await expect(canvas.queryByText('sin docs')).toBeNull();
+    // Los rótulos son datos: el catálogo no los toca.
+    await expect(canvas.getByText('Panel')).toBeInTheDocument();
   },
 };
