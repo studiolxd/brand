@@ -1,119 +1,125 @@
 'use client';
 import './app-launcher.css';
-import { Icon as e } from "./icon.js";
-import { Tag as t } from "./tag.js";
-import { Modal as n } from "./modal.js";
-import { useState as r } from "react";
-import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
-import { Popover as s } from "@base-ui/react/popover";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Icon as t } from "./icon.js";
+import { Tag as n } from "./tag.js";
+import { Modal as r } from "./modal.js";
+import { useState as i } from "react";
+import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
+import { Popover as c } from "@base-ui/react/popover";
 //#region src/stories/molecules/AppLauncher/AppLauncher.tsx
-function c({ app: e, isCurrent: n, newLabel: r }) {
-	return /* @__PURE__ */ o("a", {
-		href: e.url,
-		className: `app-launcher__tile${n ? " app-launcher__tile--active" : ""}`,
-		"aria-current": n ? "page" : void 0,
-		children: [/* @__PURE__ */ a("span", {
+function l({ app: t, isCurrent: r, newLabel: i }) {
+	let a = e("appLauncher");
+	return /* @__PURE__ */ s("a", {
+		href: t.url,
+		className: `app-launcher__tile${r ? " app-launcher__tile--active" : ""}`,
+		"aria-current": r ? "page" : void 0,
+		children: [/* @__PURE__ */ o("span", {
 			className: "app-launcher__tile-name",
-			children: e.name
-		}), e.isNew && /* @__PURE__ */ a(t, {
+			children: t.name
+		}), t.isNew && /* @__PURE__ */ o(n, {
 			variant: "info",
 			className: "app-launcher__tile-badge",
-			children: r
+			children: a("new", i)
 		})]
 	});
 }
-function l({ apps: e, currentAppId: t, newLabel: n }) {
-	return /* @__PURE__ */ a("ul", {
+function u({ apps: e, currentAppId: t, newLabel: n }) {
+	return /* @__PURE__ */ o("ul", {
 		className: "app-launcher__grid",
 		role: "list",
-		children: e.map((e) => /* @__PURE__ */ a("li", { children: /* @__PURE__ */ a(c, {
+		children: e.map((e) => /* @__PURE__ */ o("li", { children: /* @__PURE__ */ o(l, {
 			app: e,
 			isCurrent: e.id === t,
 			newLabel: n
 		}) }, e.id))
 	});
 }
-function u({ apps: t, labels: n, currentAppId: r, open: i, defaultOpen: c, onOpenChange: u }) {
-	return /* @__PURE__ */ o(s.Root, {
-		open: i,
-		defaultOpen: c,
-		onOpenChange: (e) => u?.(e),
-		children: [/* @__PURE__ */ a(s.Trigger, { render: n.trigger ? /* @__PURE__ */ o("button", {
+function d({ apps: n, labels: r, currentAppId: i, open: a, defaultOpen: l, onOpenChange: d }) {
+	let f = e("appLauncher");
+	return /* @__PURE__ */ s(c.Root, {
+		open: a,
+		defaultOpen: l,
+		onOpenChange: (e) => d?.(e),
+		children: [/* @__PURE__ */ o(c.Trigger, { render: r.trigger ? /* @__PURE__ */ s("button", {
 			type: "button",
 			className: "app-launcher__trigger app-launcher__trigger--label",
-			children: [/* @__PURE__ */ a(e, {
+			children: [/* @__PURE__ */ o(t, {
 				name: "grid",
 				size: "md"
-			}), /* @__PURE__ */ a("span", {
+			}), /* @__PURE__ */ o("span", {
 				className: "app-launcher__trigger-label",
-				children: n.trigger
+				children: r.trigger
 			})]
-		}) : /* @__PURE__ */ a("button", {
+		}) : /* @__PURE__ */ o("button", {
 			type: "button",
 			className: "app-launcher__trigger",
-			"aria-label": n.open,
-			children: /* @__PURE__ */ a(e, {
+			"aria-label": f("open", r.open),
+			children: /* @__PURE__ */ o(t, {
 				name: "grid",
 				size: "md"
 			})
-		}) }), /* @__PURE__ */ a(s.Portal, { children: /* @__PURE__ */ a(s.Positioner, {
+		}) }), /* @__PURE__ */ o(c.Portal, { children: /* @__PURE__ */ o(c.Positioner, {
 			className: "app-launcher__positioner",
 			sideOffset: 4,
 			align: "end",
-			children: /* @__PURE__ */ a(s.Popup, {
+			children: /* @__PURE__ */ o(c.Popup, {
 				className: "app-launcher__content",
-				children: /* @__PURE__ */ a(l, {
-					apps: t,
-					currentAppId: r,
-					newLabel: n.new
+				children: /* @__PURE__ */ o(u, {
+					apps: n,
+					currentAppId: i,
+					newLabel: r.new
 				})
 			})
 		}) })]
 	});
 }
-function d(e, t, n) {
-	let [i, a] = r(t ?? !1);
-	return [e ?? i, (t) => {
+function f(e, t, n) {
+	let [r, a] = i(t ?? !1);
+	return [e ?? r, (t) => {
 		e === void 0 && a(t), n?.(t);
 	}];
 }
-function f({ apps: t, labels: r, currentAppId: s, open: c, defaultOpen: u, onOpenChange: f }) {
-	let [p, m] = d(c, u, f);
-	return /* @__PURE__ */ o(i, { children: [r.trigger ? /* @__PURE__ */ o("button", {
+function p({ apps: n, labels: i, currentAppId: c, open: l, defaultOpen: d, onOpenChange: p }) {
+	let m = e("appLauncher"), [h, g] = f(l, d, p);
+	return /* @__PURE__ */ s(a, { children: [i.trigger ? /* @__PURE__ */ s("button", {
 		type: "button",
 		className: "app-launcher__trigger app-launcher__trigger--label",
 		"aria-haspopup": "dialog",
-		onClick: () => m(!0),
-		children: [/* @__PURE__ */ a(e, {
+		onClick: () => g(!0),
+		children: [/* @__PURE__ */ o(t, {
 			name: "grid",
 			size: "md"
-		}), /* @__PURE__ */ a("span", {
+		}), /* @__PURE__ */ o("span", {
 			className: "app-launcher__trigger-label",
-			children: r.trigger
+			children: i.trigger
 		})]
-	}) : /* @__PURE__ */ a("button", {
+	}) : /* @__PURE__ */ o("button", {
 		type: "button",
 		className: "app-launcher__trigger",
-		"aria-label": r.open,
+		"aria-label": m("open", i.open),
 		"aria-haspopup": "dialog",
-		onClick: () => m(!0),
-		children: /* @__PURE__ */ a(e, {
+		onClick: () => g(!0),
+		children: /* @__PURE__ */ o(t, {
 			name: "grid",
 			size: "md"
 		})
-	}), /* @__PURE__ */ a(n, {
-		open: p,
-		onClose: () => m(!1),
-		title: r.title ?? "Aplicaciones",
-		children: /* @__PURE__ */ a(l, {
-			apps: t,
-			currentAppId: s,
-			newLabel: r.new
+	}), /* @__PURE__ */ o(r, {
+		open: h,
+		onClose: () => g(!1),
+		title: m("title", i.title),
+		children: /* @__PURE__ */ o(u, {
+			apps: n,
+			currentAppId: c,
+			newLabel: i.new
 		})
 	})] });
 }
-function p({ presentation: e = "modal", ...t }) {
-	return a(e === "popover" ? u : f, { ...t });
+function m({ presentation: e = "modal", labels: t = {}, ...n }) {
+	return o(e === "popover" ? d : p, {
+		labels: t,
+		...n
+	});
 }
 //#endregion
-export { p as AppLauncher };
+export { m as AppLauncher };

@@ -25,6 +25,12 @@ import type { ConfirmDialogMessages } from '../molecules/ConfirmDialog/ConfirmDi
 import type { AlertMessages } from '../molecules/Alert/Alert';
 import type { BannerMessages } from '../molecules/Banner/Banner';
 import type { ToasterMessages } from '../molecules/Toast/Toaster';
+import type { ConsentMessages } from '../molecules/Consent/Consent';
+import type { CommandPaletteMessages } from '../molecules/CommandPalette/CommandPalette';
+import type { AppLauncherMessages } from '../molecules/AppLauncher/AppLauncher';
+import type { FloatingDockMessages } from '../sections/FloatingDock/FloatingDock';
+import type { NotificationButtonMessages } from '../molecules/NotificationButton/NotificationButton';
+import type { NotificationPanelMessages } from '../molecules/NotificationPanel/NotificationPanel';
 /**
  * El contrato de textos de la librería: un espacio por componente, y dentro
  * de cada espacio **todas las claves obligatorias**.
@@ -74,5 +80,11 @@ export interface BrandMessages {
     alert: AlertMessages;
     banner: BannerMessages;
     toaster: ToasterMessages;
+    consent: ConsentMessages;
+    commandPalette: CommandPaletteMessages;
+    appLauncher: AppLauncherMessages;
+    floatingDock: FloatingDockMessages;
+    notificationButton: NotificationButtonMessages;
+    notificationPanel: NotificationPanelMessages;
 }
-export type { PaginationMessages, TableMessages, DataTableMessages, InputFieldMessages, PasswordFieldMessages, SelectMessages, MultiSelectMessages, NumberInputMessages, OtpInputMessages, InputPhoneMessages, AsyncSelectMessages, AsyncMultiSelectMessages, DocsSearchMessages, SearchFormMessages, FilterBarMessages, CalendarMessages, DatePickerMessages, TimeSelectMessages, FileUploadMessages, ImageCropDialogMessages, AvatarUploadMessages, ModalMessages, SheetMessages, ConfirmDialogMessages, AlertMessages, BannerMessages, ToasterMessages, };
+export type { PaginationMessages, TableMessages, DataTableMessages, InputFieldMessages, PasswordFieldMessages, SelectMessages, MultiSelectMessages, NumberInputMessages, OtpInputMessages, InputPhoneMessages, AsyncSelectMessages, AsyncMultiSelectMessages, DocsSearchMessages, SearchFormMessages, FilterBarMessages, CalendarMessages, DatePickerMessages, TimeSelectMessages, FileUploadMessages, ImageCropDialogMessages, AvatarUploadMessages, ModalMessages, SheetMessages, ConfirmDialogMessages, AlertMessages, BannerMessages, ToasterMessages, ConsentMessages, CommandPaletteMessages, AppLauncherMessages, FloatingDockMessages, NotificationButtonMessages, NotificationPanelMessages, };

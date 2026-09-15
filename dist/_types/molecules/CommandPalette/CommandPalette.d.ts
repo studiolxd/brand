@@ -1,5 +1,27 @@
 import { type ReactNode } from 'react';
 import './CommandPalette.css';
+/**
+ * El cromo de la paleta, y **solo el cromo**: las cuatro cosas que la paleta
+ * dice por su cuenta, sin que se las pase nadie.
+ *
+ * Ninguna nombra un comando: la paleta se llama igual en todas las pantallas
+ * («Buscar un comando»), el buscador pide lo mismo, el vacío dice que no hay
+ * nada y la lista solo necesita un nombre para el lector. Lo que sí cambia
+ * —los grupos y sus ítems— viaja en `groups` y lo escribe la aplicación.
+ *
+ * El aspa **no está aquí**: es un reenvío puro al `Modal`, y sin `closeLabel`
+ * lee `modal.close` como cualquier otro diálogo.
+ */
+export interface CommandPaletteMessages {
+    /** Título accesible y visible del diálogo. */
+    title: string;
+    /** Marcador del buscador. */
+    placeholder: string;
+    /** Texto del estado «sin resultados». */
+    empty: string;
+    /** Nombre accesible de la lista de resultados (`role="listbox"`). */
+    list: string;
+}
 export interface CommandPaletteItem {
     /** Clave estable del ítem. */
     id: string;
@@ -24,17 +46,30 @@ export interface CommandPaletteProps {
      * filtrar no se renderizan — el call-site no necesita condicionarlos.
      */
     groups: CommandPaletteGroup[];
-    /** Título accesible y visible del diálogo. */
-    title: string;
-    placeholder: string;
-    /** Texto del estado "sin resultados". */
-    emptyLabel: string;
     /**
-     * Etiqueta accesible de la lista de resultados (`role="listbox"`). Sin ella
-     * el listbox se queda sin nombre: pásala siempre en apps multiidioma.
+     * Título accesible y visible del diálogo. **Sin default**: sin él, sale de
+     * `commandPalette.title` del `BrandMessagesProvider`.
+     */
+    title?: string;
+    /**
+     * Marcador del buscador. **Sin default**: sin él, sale de
+     * `commandPalette.placeholder` del proveedor.
+     */
+    placeholder?: string;
+    /**
+     * Texto del estado «sin resultados». **Sin default**: sin él, sale de
+     * `commandPalette.empty` del proveedor.
+     */
+    emptyLabel?: string;
+    /**
+     * Nombre accesible de la lista de resultados (`role="listbox"`). **Sin
+     * default**: sin ella, sale de `commandPalette.list` del proveedor.
      */
     listLabel?: string;
-    /** Etiqueta del botón de cierre del diálogo. */
+    /**
+     * Nombre accesible del aspa del diálogo. **Reenvío puro** al `Modal`: sin
+     * él, el aspa lee `modal.close` del proveedor.
+     */
     closeLabel?: string;
     /**
      * Tecla del atajo global (con ⌘ o Ctrl) que abre y cierra la paleta.

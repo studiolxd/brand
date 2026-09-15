@@ -1,109 +1,111 @@
 'use client';
 import './consent.css';
-import { VisuallyHidden as e } from "./visually-hidden.js";
-import { Button as t } from "./button.js";
-import { Heading as n } from "./heading.js";
-import { Link as r } from "./link.js";
-import { Paragraph as i } from "./paragraph.js";
-import { SwitcherField as a } from "./switcher-field.js";
-import { Sheet as o } from "./sheet.js";
-import { Modal as s } from "./modal.js";
-import { useEffect as c, useState as l } from "react";
-import { Fragment as u, jsx as d, jsxs as f } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { VisuallyHidden as t } from "./visually-hidden.js";
+import { Button as n } from "./button.js";
+import { Heading as r } from "./heading.js";
+import { Link as i } from "./link.js";
+import { Paragraph as a } from "./paragraph.js";
+import { SwitcherField as o } from "./switcher-field.js";
+import { Sheet as s } from "./sheet.js";
+import { Modal as c } from "./modal.js";
+import { useEffect as l, useState as u } from "react";
+import { Fragment as d, jsx as f, jsxs as p } from "react/jsx-runtime";
 //#region src/stories/molecules/Consent/Consent.tsx
-function p({ open: e = !0, onAcceptAll: a, onRejectAll: o, onOpenPreferences: s, title: c = "Cookies", description: l = "Usamos cookies propias y de terceros para que el sitio funcione y para entender cómo se usa. Puedes aceptarlas todas, rechazarlas o elegir por categorías.", policyHref: p, policyLabel: m = "Política de cookies", policyExternal: h = !1, acceptAllLabel: g = "Aceptar todas", rejectAllLabel: _ = "Rechazar", preferencesLabel: v = "Preferencias", regionLabel: y = "Consentimiento de cookies", className: b, ...x }) {
-	return e ? /* @__PURE__ */ d("aside", {
-		className: ["consent-banner", b].filter(Boolean).join(" "),
+function m({ open: t = !0, onAcceptAll: o, onRejectAll: s, onOpenPreferences: c, title: l, description: u, policyHref: m, policyLabel: h, policyExternal: g = !1, acceptAllLabel: _, rejectAllLabel: v, preferencesLabel: y, regionLabel: b, className: x, ...S }) {
+	let C = e("consent");
+	return t ? /* @__PURE__ */ f("aside", {
+		className: ["consent-banner", x].filter(Boolean).join(" "),
 		role: "region",
-		"aria-label": y,
-		...x,
-		children: /* @__PURE__ */ f("div", {
+		"aria-label": C("regionLabel", b),
+		...S,
+		children: /* @__PURE__ */ p("div", {
 			className: "consent-banner__inner",
-			children: [/* @__PURE__ */ f("div", {
+			children: [/* @__PURE__ */ p("div", {
 				className: "consent-banner__text",
-				children: [/* @__PURE__ */ d(n, {
+				children: [/* @__PURE__ */ f(r, {
 					level: 2,
 					size: 3,
 					className: "consent-banner__title",
-					children: c
-				}), /* @__PURE__ */ f(i, {
+					children: l === void 0 ? C("title") : l
+				}), /* @__PURE__ */ p(a, {
 					className: "consent-banner__description",
-					children: [l, p !== void 0 && /* @__PURE__ */ f(u, { children: [" ", /* @__PURE__ */ d(r, {
-						href: p,
-						external: h,
-						children: m
+					children: [u, m !== void 0 && /* @__PURE__ */ p(d, { children: [" ", /* @__PURE__ */ f(i, {
+						href: m,
+						external: g,
+						children: h
 					})] })]
 				})]
-			}), /* @__PURE__ */ f("div", {
+			}), /* @__PURE__ */ p("div", {
 				className: "consent-banner__actions",
 				children: [
-					/* @__PURE__ */ d(t, {
-						onClick: a,
-						children: g
-					}),
-					/* @__PURE__ */ d(t, {
+					/* @__PURE__ */ f(n, {
 						onClick: o,
-						children: _
+						children: C("acceptAll", _)
 					}),
-					s && /* @__PURE__ */ d(t, {
-						variant: "outline",
+					/* @__PURE__ */ f(n, {
 						onClick: s,
-						children: v
+						children: C("rejectAll", v)
+					}),
+					c && /* @__PURE__ */ f(n, {
+						variant: "outline",
+						onClick: c,
+						children: C("preferences", y)
 					})
 				]
 			})]
 		})
 	}) : null;
 }
-function m(e, t) {
+function h(e, t) {
 	let n = { ...e };
 	for (let e of t) e.required && (n[e.id] = !0);
 	return n;
 }
-function h({ open: t, onOpenChange: n, categories: r, value: i, onChange: p, onSave: h, surface: g = "modal", side: _ = "right", title: v = "Preferencias de cookies", closeLabel: y, alwaysOnLabel: b = "Siempre activa", container: x, className: S }) {
-	let C = p !== void 0, [w, T] = l(() => m(i, r));
-	c(() => {
-		t && !C && T(m(i, r));
-	}, [t, C]);
-	let E = C ? m(i, r) : w, D = (e) => {
-		C ? p(e) : T(e), h?.(e);
-	}, O = (e, t) => {
-		D({
-			...E,
+function g({ open: n, onOpenChange: r, categories: i, value: a, onChange: m, onSave: g, surface: _ = "modal", side: v = "right", title: y, closeLabel: b, alwaysOnLabel: x, container: S, className: C }) {
+	let w = e("consent"), T = m !== void 0, [E, D] = u(() => h(a, i));
+	l(() => {
+		n && !T && D(h(a, i));
+	}, [n, T]);
+	let O = T ? h(a, i) : E, k = (e) => {
+		T ? m(e) : D(e), g?.(e);
+	}, A = (e, t) => {
+		k({
+			...O,
 			[e]: t
 		});
-	}, k = /* @__PURE__ */ d("div", {
-		className: ["consent-preferences", S].filter(Boolean).join(" "),
-		children: /* @__PURE__ */ d("ul", {
+	}, j = /* @__PURE__ */ f("div", {
+		className: ["consent-preferences", C].filter(Boolean).join(" "),
+		children: /* @__PURE__ */ f("ul", {
 			className: "consent-preferences__list",
-			children: r.map((t) => /* @__PURE__ */ d("li", {
+			children: i.map((e) => /* @__PURE__ */ f("li", {
 				className: "consent-preferences__category",
-				children: /* @__PURE__ */ d(a, {
-					label: t.required ? /* @__PURE__ */ f(u, { children: [t.name, /* @__PURE__ */ d(e, { children: `, ${b}` })] }) : t.name,
-					helperText: t.description,
-					checked: t.required ? !0 : E[t.id] === !0,
-					disabled: t.required,
-					onCheckedChange: (e) => O(t.id, e)
+				children: /* @__PURE__ */ f(o, {
+					label: e.required ? /* @__PURE__ */ p(d, { children: [e.name, /* @__PURE__ */ f(t, { children: `, ${w("alwaysOn", x)}` })] }) : e.name,
+					helperText: e.description,
+					checked: e.required ? !0 : O[e.id] === !0,
+					disabled: e.required,
+					onCheckedChange: (t) => A(e.id, t)
 				})
-			}, t.id))
+			}, e.id))
 		})
-	});
-	return g === "modal" ? /* @__PURE__ */ d(s, {
-		open: t,
-		onClose: () => n(!1),
-		title: typeof v == "string" ? v : void 0,
-		...y === void 0 ? {} : { closeLabel: y },
-		container: x,
-		children: k
-	}) : /* @__PURE__ */ d(o, {
-		open: t,
-		onOpenChange: n,
-		side: _,
-		title: v,
-		...y === void 0 ? {} : { closeLabel: y },
-		container: x,
-		children: k
+	}), M = y === void 0 ? w("preferencesTitle") : y;
+	return _ === "modal" ? /* @__PURE__ */ f(c, {
+		open: n,
+		onClose: () => r(!1),
+		title: typeof M == "string" ? M : void 0,
+		...b === void 0 ? {} : { closeLabel: b },
+		container: S,
+		children: j
+	}) : /* @__PURE__ */ f(s, {
+		open: n,
+		onOpenChange: r,
+		side: v,
+		title: M,
+		...b === void 0 ? {} : { closeLabel: b },
+		container: S,
+		children: j
 	});
 }
 //#endregion
-export { p as ConsentBanner, h as ConsentPreferences };
+export { m as ConsentBanner, g as ConsentPreferences };

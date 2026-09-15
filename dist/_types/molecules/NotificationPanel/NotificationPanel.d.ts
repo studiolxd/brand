@@ -1,6 +1,30 @@
 import { type ReactNode } from 'react';
 import { type PopoverChangeDetails } from '../../atoms/Popover/Popover';
 import './NotificationPanel.css';
+/**
+ * El cromo del panel, y **solo el cromo**: cómo se llama el panel, la marca de
+ * una fila sin leer, el vacío, los dos destinos del pie y la acción sobre el
+ * conjunto. Ninguno nombra una notificación: eso viaja en `items` y lo escribe
+ * el producto —título, cuerpo y la hora, ya formateada por el consumidor—.
+ *
+ * Los textos de la campana **no están aquí**: `label` y `countLabel` son un
+ * reenvío puro al `NotificationButton`, que tiene su propio espacio. El panel
+ * no repite la clave.
+ */
+export interface NotificationPanelMessages {
+    /** Nombre del panel (`role="dialog"`) y de la lista. No se pinta. */
+    panel: string;
+    /** Texto, solo para lectores de pantalla, que marca una fila sin leer. */
+    unread: string;
+    /** Mensaje cuando no hay notificaciones. */
+    empty: string;
+    /** Rótulo del enlace a la bandeja. */
+    all: string;
+    /** Rótulo del enlace a las preferencias. */
+    preferences: string;
+    /** Rótulo del botón de marcar todas como leídas. */
+    markAllRead: string;
+}
 /** Una notificación tal y como la enseña el panel: ya resuelta, sin datos crudos. */
 export interface NotificationPanelItem {
     id: string;
@@ -56,24 +80,46 @@ export interface NotificationPanelProps {
      * `<a>` corriente.
      */
     renderLink?: RenderNotificationPanelLink;
-    /** Nombre accesible de la campana sin contador. Default castellano. */
+    /**
+     * Nombre accesible de la campana sin contador. **Reenvío puro** al
+     * `NotificationButton`: sin ella, sale de `notificationButton.label`.
+     */
     label?: string;
-    /** Nombre accesible de la campana con contador. Recibe el número. Default castellano. */
+    /**
+     * Nombre accesible de la campana con contador. **Reenvío puro** al
+     * `NotificationButton`: sin ella, sale de `notificationButton.countLabel`.
+     */
     countLabel?: (count: number) => string;
     /**
      * Nombre del panel (`role="dialog"`) y de la lista. **No se pinta**: el
-     * panel no lleva cabecera visible. Default «Notificaciones».
+     * panel no lleva cabecera visible. **Sin default**: sin él, sale de
+     * `notificationPanel.panel` del `BrandMessagesProvider`.
      */
     panelLabel?: string;
-    /** Texto solo para lectores de pantalla que marca una fila sin leer. Default «Sin leer». */
+    /**
+     * Texto solo para lectores de pantalla que marca una fila sin leer. **Sin
+     * default**: sin él, sale de `notificationPanel.unread`.
+     */
     unreadLabel?: string;
-    /** Mensaje cuando no hay notificaciones. Default «Estás al día». */
+    /**
+     * Mensaje cuando no hay notificaciones. **Sin default**: sin él, sale de
+     * `notificationPanel.empty`.
+     */
     emptyLabel?: string;
-    /** Rótulo del enlace a la bandeja. Default «Ver todas las notificaciones». */
+    /**
+     * Rótulo del enlace a la bandeja. **Sin default**: sin él, sale de
+     * `notificationPanel.all`.
+     */
     allLabel?: string;
-    /** Rótulo del enlace a las preferencias. Default «Preferencias de notificaciones». */
+    /**
+     * Rótulo del enlace a las preferencias. **Sin default**: sin él, sale de
+     * `notificationPanel.preferences`.
+     */
     preferencesLabel?: string;
-    /** Rótulo del botón de marcar todas. Default «Marcar todas como leídas». */
+    /**
+     * Rótulo del botón de marcar todas. **Sin default**: sin él, sale de
+     * `notificationPanel.markAllRead`. Solo se lee cuando el botón se pinta.
+     */
     markAllReadLabel?: string;
     open?: boolean;
     defaultOpen?: boolean;

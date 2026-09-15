@@ -1,5 +1,29 @@
 import { type ReactNode } from 'react';
 import './FloatingDock.css';
+/**
+ * El cromo del dock, y **solo el cromo**: el aspa y cómo se lee el contador.
+ *
+ * **Tiene espacio propio y no hereda `modal.close`, a propósito.** El panel del
+ * dock no es un `Modal` y no puede serlo: es un diálogo **no modal**
+ * (`modal={false}`) sin velo, que no atrapa el foco y deja la página viva
+ * detrás, montado por portal **dentro del propio ancla** para heredar por
+ * cascada la superficie donde el consumidor lo haya puesto, anclado a una
+ * esquina de la ventana y con el aspa fuera de la cabecera. El `Modal` del
+ * sistema es lo contrario en las cuatro cosas —velo, foco atrapado, portal en
+ * `document.body`, diálogo centrado—, así que hacerlo pasar por él no era
+ * quitar una clave: era cambiar el componente. La razón es real y de hoy, no
+ * histórica, y por eso el aspa se llama aquí.
+ *
+ * El `label` del lanzador **no está aquí**: nombra lo que abre el dock —«Abrir
+ * el asistente», «Abrir el chat de soporte»— y eso lo sabe el producto. Sigue
+ * siendo prop obligatoria.
+ */
+export interface FloatingDockMessages {
+    /** Nombre accesible del aspa que cierra el panel. */
+    close: string;
+    /** Cómo se lee el contador de novedades. Interpola el número. */
+    badge: (count: number) => string;
+}
 /** Esquina de la ventana a la que se ancla el dock. */
 export type FloatingDockPosition = 'bottom-end' | 'bottom-start' | 'top-end' | 'top-start';
 export interface FloatingDockProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title' | 'children'> {
@@ -26,15 +50,21 @@ export interface FloatingDockProps extends Omit<React.ComponentPropsWithoutRef<'
     defaultOpen?: boolean;
     /** Se llama al abrirse y al cerrarse, en controlado y en no controlado. */
     onOpenChange?: (open: boolean) => void;
-    /** `aria-label` del aspa. Default: «Cerrar» (castellano). */
+    /**
+     * `aria-label` del aspa. **Sin default**: sin él, sale de
+     * `floatingDock.close` del `BrandMessagesProvider` — espacio propio, no
+     * `modal.close`: el panel del dock no es un `Modal` (ver
+     * `FloatingDockMessages`).
+     */
     closeLabel?: string;
     /** Novedades sin ver. Con 0 (o sin él) no hay contador. */
     badge?: number;
     /** Tope del contador («99+»). */
     badgeMax?: number;
     /**
-     * Cómo se lee el contador. Default: «N mensajes nuevos» (castellano).
-     * Interpola el número, así que es una función.
+     * Cómo se lee el contador. **Sin default**: sin ella, sale de
+     * `floatingDock.badge` del proveedor. Interpola el número, así que es una
+     * función. Solo se lee cuando hay contador y `badgeLive`.
      */
     badgeLabel?: (count: number) => string;
     /**

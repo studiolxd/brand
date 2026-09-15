@@ -7,6 +7,40 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [46.0.0] — 2026-09-15
+
+> **Major.** Séptima familia al proveedor de textos: los envoltorios de diálogo. `Consent`,
+> `CommandPalette`, `AppLauncher`, `FloatingDock`, `NotificationButton` y
+> `NotificationPanel` dejan de traer castellano puesto.
+
+### Los envoltorios leen del proveedor
+
+Seis espacios nuevos en `BrandMessages`: `consent`, `commandPalette`, `appLauncher`,
+`floatingDock`, `notificationButton` y `notificationPanel`. Mismo orden —**prop →
+proveedor → error**—. `CommandPalette` y `AppLauncher` relajan su API de paso: los textos
+que antes eran props obligatorias en cada uso ahora son opcionales, porque los pone el
+catálogo.
+
+### Lo que se queda como prop, por valor y no por nombre
+
+`ConsentBanner.description` y `policyLabel` son **obligatorias y sin default**, como el
+`confirmLabel` de un diálogo: el texto legal depende de la jurisdicción y de lo que cada
+producto guarde. El tipo exige `policyLabel` en cuanto hay `policyHref` —o el enlace no
+está, o está entero—, así que una política sin nombre no compila.
+
+`AppLauncherLabels.trigger` no va al catálogo por una razón distinta: su **presencia**
+decide la cara del disparador (solo icono, o icono con rótulo), y un texto de catálogo está
+siempre presente. Meterlo ahí obligaría a todos los lanzadores de la suite a llevar rótulo.
+
+### `FloatingDock` tiene su propio aspa, y por qué no pasa por `Modal`
+
+Se miró antes de decidirlo, y la razón es real: es un diálogo **no modal** —sin velo, con
+la página viva detrás—, no atrapa el foco, su portal monta dentro del propio ancla para
+heredar la superficie por cascada, y va anclado a una esquina con el aspa fuera de la
+cabecera. El `Modal` del sistema es lo contrario en las cuatro cosas. Hacerlo pasar por él
+no era quitar una clave: era cambiar el componente. Queda escrito en el componente y en su
+documentación para que no se vuelva a abrir.
+
 ## [45.1.0] — 2026-09-15
 
 > **Minor.** La superficie pública pone los controles en talla lg, igual que hace con el
