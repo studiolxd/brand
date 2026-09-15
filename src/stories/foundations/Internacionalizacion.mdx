@@ -123,7 +123,7 @@ pista, `maskLetters`:
 | `StatTile` | `delta.label` para leer la dirección de la tendencia |
 | `CopyButton` | `label`, `copiedLabel`, `errorLabel` |
 | `ConfirmDialog` | `confirmLabel`, `cancelLabel`, `pendingLabel`, `closeLabel` — más `secondaryActionLabel`, el rótulo de la acción intermedia, que es texto del producto y no tiene default |
-| `StarRating` | `valueLabel`, `countLabel`, `emptyLabel`, `optionLabel`, `groupLabel` — más `locale` para escribir el número |
+| `StarRating` | `valueLabel`, `countLabel`, `emptyLabel`, `optionLabel`, `groupLabel` — **obligatorias y sin default**: el componente recibe su texto, no lo trae puesto. Cada una se exige cuando el componente puede emitirla (`valueLabel` en lectura; `countLabel` con `reviewCount`; `emptyLabel` si `value` puede ser `null`; `optionLabel` y `groupLabel` en entrada). No tiene `locale`: no escribe ningún número |
 | `Slider` | `label`, `thumbLabel` — más `format` y `locale` para el número |
 | `TreeView` | `label` — el nombre accesible del árbol |
 | `SidebarNav` | `label`, `emptyLabel` — la marca de las entradas sin contenido |
