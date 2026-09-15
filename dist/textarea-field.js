@@ -5,24 +5,24 @@ import { ErrorText as t } from "./error-text.js";
 import { Label as n } from "./label.js";
 import { Textarea as r } from "./textarea.js";
 import { n as i } from "./_shared/field-labels.js";
-import { jsx as a, jsxs as o } from "react/jsx-runtime";
-import { forwardRef as s } from "react";
+import { forwardRef as a } from "react";
+import { jsx as o, jsxs as s } from "react/jsx-runtime";
 //#region src/stories/molecules/TextareaField/TextareaField.tsx
-var c = s(function({ id: s, label: c, labelHidden: l, name: u, placeholder: d, value: f, defaultValue: p, rows: m, disabled: h, readOnly: g, size: _, error: v = !1, errorMessage: y, helperText: b, onChange: x, onBlur: S, onFocus: C, className: w, ...T }, E) {
-	let D = i(l), O = e(_), k = y ? `${s}-error` : void 0, A = b ? `${s}-helper` : void 0, j = [k, A].filter(Boolean).join(" ") || void 0, M = v || !!y;
-	return /* @__PURE__ */ o("div", {
+var c = a(function({ id: a, label: c, labelHidden: l, name: u, placeholder: d, value: f, defaultValue: p, rows: m, disabled: h, readOnly: g, size: _, error: v = !1, errorMessage: y, helperText: b, onChange: x, onBlur: S, onFocus: C, className: w, ...T }, E) {
+	let D = i(l), O = e(_), k = y ? `${a}-error` : void 0, A = b ? `${a}-helper` : void 0, j = [k, A].filter(Boolean).join(" ") || void 0, M = v || !!y;
+	return /* @__PURE__ */ s("div", {
 		className: ["textarea-field", w].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ a(n, {
-				htmlFor: s,
+			/* @__PURE__ */ o(n, {
+				htmlFor: a,
 				hidden: D,
 				size: O,
 				children: c
 			}),
-			/* @__PURE__ */ a(r, {
+			/* @__PURE__ */ o(r, {
 				ref: E,
 				...T,
-				id: s,
+				id: a,
 				name: u,
 				placeholder: d ?? (D ? c : void 0),
 				value: f,
@@ -37,11 +37,11 @@ var c = s(function({ id: s, label: c, labelHidden: l, name: u, placeholder: d, v
 				onBlur: S,
 				onFocus: C
 			}),
-			y && /* @__PURE__ */ a(t, {
+			y && /* @__PURE__ */ o(t, {
 				id: k,
 				children: y
 			}),
-			b && /* @__PURE__ */ a("span", {
+			b && /* @__PURE__ */ o("span", {
 				id: A,
 				className: "textarea-field__helper",
 				children: b

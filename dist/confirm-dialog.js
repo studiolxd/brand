@@ -3,12 +3,12 @@ import './confirm-dialog.css';
 import { Button as e } from "./button.js";
 import { Modal as t } from "./modal.js";
 import { InputField as n } from "./input-field.js";
-import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
-import { useEffect as o, useId as s, useRef as c, useState as l } from "react";
+import { useEffect as r, useId as i, useRef as a, useState as o } from "react";
+import { Fragment as s, jsx as c, jsxs as l } from "react/jsx-runtime";
 //#region src/stories/molecules/ConfirmDialog/ConfirmDialog.tsx
 function u({ open: u, title: d, description: f, children: p, onConfirm: m, onCancel: h, onConfirmError: g, secondaryActionLabel: _, onSecondaryAction: v, destructive: y = !1, confirmLabel: b = "Confirmar", cancelLabel: x = "Cancelar", pendingLabel: S = "Confirmando…", closeLabel: C = "Cerrar", confirmPhrase: w, confirmPhraseLabel: T, confirmPhraseMismatch: E, container: D, className: O }) {
-	let k = c(null), A = c(null), j = s(), [M, N] = l(!1), [P, F] = l(""), [I, L] = l(!1), R = w === void 0 || P.trim() === w, z = I && !R;
-	o(() => {
+	let k = a(null), A = a(null), j = i(), [M, N] = o(!1), [P, F] = o(""), [I, L] = o(!1), R = w === void 0 || P.trim() === w, z = I && !R;
+	r(() => {
 		u || (N(!1), F(""), L(!1));
 	}, [u]);
 	let B = () => {
@@ -27,7 +27,7 @@ function u({ open: u, title: d, description: f, children: p, onConfirm: m, onCan
 			}
 		}
 	};
-	return /* @__PURE__ */ a(t, {
+	return /* @__PURE__ */ l(t, {
 		open: u,
 		onClose: B,
 		title: d,
@@ -36,21 +36,21 @@ function u({ open: u, title: d, description: f, children: p, onConfirm: m, onCan
 		initialFocus: w === void 0 ? k : A,
 		...f == null ? {} : { description: f },
 		footerClassName: ["confirm-dialog__actions", O].filter(Boolean).join(" "),
-		footer: /* @__PURE__ */ a(r, { children: [
-			/* @__PURE__ */ i(e, {
+		footer: /* @__PURE__ */ l(s, { children: [
+			/* @__PURE__ */ c(e, {
 				ref: k,
 				variant: "outline",
 				onClick: B,
 				disabled: M,
 				children: x
 			}),
-			_ && v && /* @__PURE__ */ i(e, {
+			_ && v && /* @__PURE__ */ c(e, {
 				variant: "outline",
 				onClick: v,
 				disabled: M,
 				children: _
 			}),
-			/* @__PURE__ */ i(e, {
+			/* @__PURE__ */ c(e, {
 				variant: y ? "outline" : "primary",
 				destructive: y,
 				onClick: V,
@@ -58,7 +58,7 @@ function u({ open: u, title: d, description: f, children: p, onConfirm: m, onCan
 				children: M ? S : b
 			})
 		] }),
-		children: [p, w !== void 0 && /* @__PURE__ */ i(n, {
+		children: [p, w !== void 0 && /* @__PURE__ */ c(n, {
 			ref: A,
 			id: `${j}-confirm-phrase`,
 			className: "confirm-dialog__phrase",

@@ -2,7 +2,7 @@ import type { ComponentType, ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Select } from '../../atoms/Select/Select';
 import type { SelectOption } from '../../atoms/Select/Select';
-import { useBrandMessages } from '../../../messages/BrandMessagesContext';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './Pagination.css';
 
 /**

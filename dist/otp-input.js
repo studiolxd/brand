@@ -1,75 +1,75 @@
 'use client';
 import './otp-input.css';
 import { Input as e } from "./input.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
-import { forwardRef as r, useCallback as i, useEffect as a, useRef as o, useState as s } from "react";
+import { forwardRef as t, useCallback as n, useEffect as r, useRef as i, useState as a } from "react";
+import { jsx as o, jsxs as s } from "react/jsx-runtime";
 //#region src/stories/atoms/OtpInput/OtpInput.tsx
-var c = r(function({ length: r, value: c, defaultValue: l, onChange: u, onComplete: d, disabled: f, readOnly: p, error: m = !1, size: h = "md", describedBy: g, "aria-describedby": _, "aria-label": v, "aria-labelledby": y, groupLabel: b = "Código de verificación", id: x, name: S, onBlur: C, className: w, digitLabel: T = (e, t) => `Dígito ${e} de ${t}` }, E) {
-	let D = c !== void 0, [O, k] = s(() => {
+var c = t(function({ length: t, value: c, defaultValue: l, onChange: u, onComplete: d, disabled: f, readOnly: p, error: m = !1, size: h = "md", describedBy: g, "aria-describedby": _, "aria-label": v, "aria-labelledby": y, groupLabel: b = "Código de verificación", id: x, name: S, onBlur: C, className: w, digitLabel: T = (e, t) => `Dígito ${e} de ${t}` }, E) {
+	let D = c !== void 0, [O, k] = a(() => {
 		let e = l ?? "";
-		return Array.from({ length: r }, (t, n) => e[n] ?? "");
-	}), A = o(null), j = D ? Array.from({ length: r }, (e, t) => c[t] ?? "") : O;
-	a(() => {
+		return Array.from({ length: t }, (t, n) => e[n] ?? "");
+	}), A = i(null), j = D ? Array.from({ length: t }, (e, t) => c[t] ?? "") : O;
+	r(() => {
 		if (D) return;
 		let e = A.current?.closest("form");
 		if (!e) return;
-		let t = () => {
+		let n = () => {
 			let e = l ?? "";
-			k(Array.from({ length: r }, (t, n) => e[n] ?? ""));
+			k(Array.from({ length: t }, (t, n) => e[n] ?? ""));
 		};
-		return e.addEventListener("reset", t), () => e.removeEventListener("reset", t);
+		return e.addEventListener("reset", n), () => e.removeEventListener("reset", n);
 	}, [
 		D,
 		l,
-		r
+		t
 	]);
-	let M = i((e) => {
+	let M = n((e) => {
 		let t = A.current?.querySelectorAll("input");
 		t?.[e] && t[e].focus();
-	}, []), N = i((e) => {
+	}, []), N = n((e) => {
 		D || k(e);
-		let t = e.join("");
-		u?.(t), e.length === r && e.every((e) => e !== "") && d?.(t);
+		let n = e.join("");
+		u?.(n), e.length === t && e.every((e) => e !== "") && d?.(n);
 	}, [
 		D,
-		r,
+		t,
 		u,
 		d
-	]), P = i((e) => (t) => {
-		let n = t.target.value.replace(/\D/g, "").slice(-1);
-		if (!n) return;
+	]), P = n((e) => (n) => {
+		let r = n.target.value.replace(/\D/g, "").slice(-1);
+		if (!r) return;
 		let i = [...j];
-		i[e] = n, N(i), e < r - 1 && M(e + 1);
+		i[e] = r, N(i), e < t - 1 && M(e + 1);
 	}, [
 		j,
-		r,
+		t,
 		M,
 		N
-	]), F = i((e) => (t) => {
-		if (t.key === "Backspace") {
-			t.preventDefault();
-			let n = [...j];
-			n[e] === "" ? e > 0 && (n[e - 1] = "", N(n), M(e - 1)) : (n[e] = "", N(n));
-		} else t.key === "ArrowLeft" ? (t.preventDefault(), e > 0 && M(e - 1)) : t.key === "ArrowRight" && (t.preventDefault(), e < r - 1 && M(e + 1));
+	]), F = n((e) => (n) => {
+		if (n.key === "Backspace") {
+			n.preventDefault();
+			let t = [...j];
+			t[e] === "" ? e > 0 && (t[e - 1] = "", N(t), M(e - 1)) : (t[e] = "", N(t));
+		} else n.key === "ArrowLeft" ? (n.preventDefault(), e > 0 && M(e - 1)) : n.key === "ArrowRight" && (n.preventDefault(), e < t - 1 && M(e + 1));
 	}, [
 		j,
-		r,
+		t,
 		M,
 		N
-	]), I = i((e) => (t) => {
-		t.preventDefault();
-		let n = t.clipboardData.getData("text").replace(/\D/g, "");
-		if (!n) return;
+	]), I = n((e) => (n) => {
+		n.preventDefault();
+		let r = n.clipboardData.getData("text").replace(/\D/g, "");
+		if (!r) return;
 		let i = [...j], a = e;
-		for (let t = 0; t < n.length && e + t < r; t++) i[e + t] = n[t], a = e + t;
-		N(i), M(Math.min(a + 1, r - 1));
+		for (let n = 0; n < r.length && e + n < t; n++) i[e + n] = r[n], a = e + n;
+		N(i), M(Math.min(a + 1, t - 1));
 	}, [
 		j,
-		r,
+		t,
 		M,
 		N
 	]);
-	return /* @__PURE__ */ n("div", {
+	return /* @__PURE__ */ s("div", {
 		ref: A,
 		role: "group",
 		"aria-label": y ? void 0 : v ?? b,
@@ -83,28 +83,28 @@ var c = r(function({ length: r, value: c, defaultValue: l, onChange: u, onComple
 			f ? "otp-input--disabled" : "",
 			w ?? ""
 		].filter(Boolean).join(" "),
-		children: [Array.from({ length: r }, (n, i) => /* @__PURE__ */ t(e, {
+		children: [Array.from({ length: t }, (n, r) => /* @__PURE__ */ o(e, {
 			className: "otp-input__cell",
-			ref: i === 0 ? E : void 0,
-			id: x ? `${x}-${i}` : void 0,
-			name: S ? `${S}-${i}` : void 0,
+			ref: r === 0 ? E : void 0,
+			id: x ? `${x}-${r}` : void 0,
+			name: S ? `${S}-${r}` : void 0,
 			type: "text",
 			size: h,
 			error: m,
 			disabled: f,
 			readOnly: p,
-			"aria-describedby": i === 0 ? g ?? _ : void 0,
+			"aria-describedby": r === 0 ? g ?? _ : void 0,
 			inputMode: "numeric",
 			pattern: "\\d*",
 			maxLength: 1,
-			autoComplete: i === 0 ? "one-time-code" : "off",
-			"aria-label": T(i + 1, r),
-			value: j[i],
-			onChange: P(i),
-			onKeyDown: F(i),
-			onPaste: I(i),
+			autoComplete: r === 0 ? "one-time-code" : "off",
+			"aria-label": T(r + 1, t),
+			value: j[r],
+			onChange: P(r),
+			onKeyDown: F(r),
+			onPaste: I(r),
 			onBlur: C
-		}, i)), S && /* @__PURE__ */ t("input", {
+		}, r)), S && /* @__PURE__ */ o("input", {
 			type: "hidden",
 			name: S,
 			value: j.join("")

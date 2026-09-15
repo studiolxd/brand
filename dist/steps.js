@@ -4,52 +4,52 @@ import { Icon as e } from "./icon.js";
 import { Heading as t } from "./heading.js";
 import { Paragraph as n } from "./paragraph.js";
 import { StepMarker as r } from "./step-marker.js";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
-import { Children as o, createContext as s, useContext as c } from "react";
+import { Children as i, createContext as a, useContext as o } from "react";
+import { jsx as s, jsxs as c } from "react/jsx-runtime";
 //#region src/stories/organisms/Steps/Steps.tsx
-var l = s(null);
-function u({ items: s, orientation: c = "vertical", tone: u, badgeVariant: d, titleLevel: f = 3, titleSize: p = 1, label: m, children: h, className: g, id: _ }) {
+var l = a(null);
+function u({ items: a, orientation: o = "vertical", tone: u, badgeVariant: d, titleLevel: f = 3, titleSize: p = 1, label: m, children: h, className: g, id: _ }) {
 	let v = [
 		"steps",
-		`steps--${c}`,
+		`steps--${o}`,
 		g
 	].filter(Boolean).join(" "), y = u ?? d ?? "primary";
-	return h === void 0 ? /* @__PURE__ */ i("ol", {
+	return h === void 0 ? /* @__PURE__ */ s("ol", {
 		id: _,
 		className: v,
 		"aria-label": m,
-		children: (s ?? []).map((o, s) => /* @__PURE__ */ a("li", {
+		children: (a ?? []).map((i, a) => /* @__PURE__ */ c("li", {
 			className: "steps__item",
-			children: [/* @__PURE__ */ i("span", {
+			children: [/* @__PURE__ */ s("span", {
 				className: "steps__marker",
-				children: /* @__PURE__ */ i(r, {
+				children: /* @__PURE__ */ s(r, {
 					state: "neutral",
 					tone: y,
-					count: s + 1,
-					icon: o.icon,
+					count: a + 1,
+					icon: i.icon,
 					className: "steps__number"
 				})
-			}), /* @__PURE__ */ a("div", {
+			}), /* @__PURE__ */ c("div", {
 				className: "steps__body",
-				children: [/* @__PURE__ */ a(t, {
+				children: [/* @__PURE__ */ c(t, {
 					level: f,
 					size: p,
 					className: "steps__title",
-					children: [o.icon && /* @__PURE__ */ i(e, {
-						name: o.icon,
+					children: [i.icon && /* @__PURE__ */ s(e, {
+						name: i.icon,
 						className: "steps__icon"
-					}), o.title]
-				}), o.description && /* @__PURE__ */ i(n, {
+					}), i.title]
+				}), i.description && /* @__PURE__ */ s(n, {
 					className: "steps__description",
-					children: o.description
+					children: i.description
 				})]
 			})]
-		}, o.id ?? s))
-	}) : /* @__PURE__ */ i("ol", {
+		}, i.id ?? a))
+	}) : /* @__PURE__ */ s("ol", {
 		id: _,
 		className: v,
 		"aria-label": m,
-		children: o.map(h, (e, t) => /* @__PURE__ */ i(l.Provider, {
+		children: i.map(h, (e, t) => /* @__PURE__ */ s(l.Provider, {
 			value: {
 				index: t,
 				tone: y,
@@ -60,33 +60,33 @@ function u({ items: s, orientation: c = "vertical", tone: u, badgeVariant: d, ti
 		}))
 	});
 }
-function d({ title: n, icon: o, children: s, className: u, ...d }) {
-	let f = c(l);
+function d({ title: n, icon: i, children: a, className: u, ...d }) {
+	let f = o(l);
 	if (f === null) throw Error("`Step` solo funciona dentro de `Steps`: de ahí saca su número.");
 	let { index: p, tone: m, titleLevel: h, titleSize: g } = f;
-	return /* @__PURE__ */ a("li", {
+	return /* @__PURE__ */ c("li", {
 		className: ["steps__item", u].filter(Boolean).join(" "),
 		...d,
-		children: [/* @__PURE__ */ i("span", {
+		children: [/* @__PURE__ */ s("span", {
 			className: "steps__marker",
-			children: /* @__PURE__ */ i(r, {
+			children: /* @__PURE__ */ s(r, {
 				state: "neutral",
 				tone: m,
 				count: p + 1,
-				icon: o,
+				icon: i,
 				className: "steps__number"
 			})
-		}), /* @__PURE__ */ a("div", {
+		}), /* @__PURE__ */ c("div", {
 			className: "steps__body",
-			children: [/* @__PURE__ */ a(t, {
+			children: [/* @__PURE__ */ c(t, {
 				level: h,
 				size: g,
 				className: "steps__title",
-				children: [o && /* @__PURE__ */ i(e, {
-					name: o,
+				children: [i && /* @__PURE__ */ s(e, {
+					name: i,
 					className: "steps__icon"
 				}), n]
-			}), s]
+			}), a]
 		})]
 	});
 }

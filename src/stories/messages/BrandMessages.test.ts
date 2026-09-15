@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { entryPoints } from '../../scripts/entry-points.mjs';
+import { entryPoints } from '../../../scripts/entry-points.mjs';
 
 /**
  * El fixture de textos del Storybook **no puede viajar en el paquete**.
@@ -14,7 +14,7 @@ import { entryPoints } from '../../scripts/entry-points.mjs';
  * son la garantía, no el comentario que lo promete.
  */
 
-const repoRoot = fileURLToPath(new URL('../../', import.meta.url));
+const repoRoot = fileURLToPath(new URL('../../../', import.meta.url));
 
 function ficherosDe(dir: string, ext: string[]): string[] {
   const salida: string[] = [];

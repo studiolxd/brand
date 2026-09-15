@@ -1,9 +1,9 @@
 import './text.css';
-import { jsx as e } from "react/jsx-runtime";
-import { forwardRef as t } from "react";
+import { forwardRef as e } from "react";
+import { jsx as t } from "react/jsx-runtime";
 //#region src/stories/atoms/Text/Text.tsx
-var n = t(function({ as: t = "span", tone: n = "default", className: r, children: i, ...a }, o) {
-	return /* @__PURE__ */ e(t, {
+var n = e(function({ as: e = "span", tone: n = "default", className: r, children: i, ...a }, o) {
+	return /* @__PURE__ */ t(e, {
 		ref: o,
 		className: [
 			"text",
@@ -13,10 +13,10 @@ var n = t(function({ as: t = "span", tone: n = "default", className: r, children
 		...a,
 		children: i
 	});
-}), r = t(function({ className: t, ...n }, r) {
-	return /* @__PURE__ */ e("br", {
+}), r = e(function({ className: e, ...n }, r) {
+	return /* @__PURE__ */ t("br", {
 		ref: r,
-		className: ["text__break", t ?? ""].filter(Boolean).join(" "),
+		className: ["text__break", e ?? ""].filter(Boolean).join(" "),
 		...n
 	});
 });

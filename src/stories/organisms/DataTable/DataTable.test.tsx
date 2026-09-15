@@ -4,7 +4,7 @@ import { render as rtlRender, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { ColumnDef } from '@tanstack/react-table';
 import { DataTable } from './DataTable';
-import { BrandMessagesProvider } from '../../../messages/BrandMessagesProvider';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
 import { brandMessagesFixture } from '../../../../.storybook/brandMessagesFixture';
 
 /**

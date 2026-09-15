@@ -3,7 +3,7 @@ export const entryPoints = {
   'tokens':              'src/tokens/tokens.ts',
 
   // Textos: el proveedor y el contrato que las apps satisfacen
-  'messages':            'src/messages/index.ts'          ,
+  'messages':            'src/stories/messages/index.ts'          ,
 
   // Activos de marca (metadatos, no componentes)
   'brand-assets':        'src/assets/brand-assets.ts',

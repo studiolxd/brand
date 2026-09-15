@@ -4,24 +4,24 @@ import { SkipLink as e } from "./skip-link.js";
 import { TooltipProvider as t } from "./tooltip.js";
 import { t as n } from "./_shared/css-properties.js";
 import { n as r, t as i } from "./_shared/appshellcontext.js";
-import { jsx as a, jsxs as o } from "react/jsx-runtime";
-import { useCallback as s, useEffect as c, useMemo as l, useState as u } from "react";
+import { useCallback as a, useEffect as o, useMemo as s, useState as c } from "react";
+import { jsx as l, jsxs as u } from "react/jsx-runtime";
 //#region src/stories/sections/AppShell/AppShell.tsx
 var d = "(min-width: 1024px)";
 function f() {
-	let [e, t] = u(() => typeof window > "u" ? !0 : window.matchMedia(d).matches);
-	return c(() => {
+	let [e, t] = c(() => typeof window > "u" ? !0 : window.matchMedia(d).matches);
+	return o(() => {
 		let e = window.matchMedia(d), n = () => t(e.matches);
 		return n(), e.addEventListener("change", n), () => e.removeEventListener("change", n);
 	}, []), e;
 }
 function p({ header: r, sidebar: d, children: p, defaultSidebar: m = "open", sidebarState: h, onSidebarChange: g, defaultSidebarWidth: _, onSidebarWidthChange: v, skipLabel: y = "Saltar al contenido principal" }) {
-	let b = f(), [x, S] = u(m), [C, w] = u(!1), [T, E] = u(_), D = b ? h ?? x : C ? "open" : "closed", O = s((e) => {
+	let b = f(), [x, S] = c(m), [C, w] = c(!1), [T, E] = c(_), D = b ? h ?? x : C ? "open" : "closed", O = a((e) => {
 		b ? (S(e), g?.(e)) : w(e === "open");
-	}, [b, g]), k = s(() => O(D === "open" ? "closed" : "open"), [O, D]), A = s(() => O("closed"), [O]), j = s((e) => {
+	}, [b, g]), k = a(() => O(D === "open" ? "closed" : "open"), [O, D]), A = a(() => O("closed"), [O]), j = a((e) => {
 		E(e), v?.(e);
 	}, [v]);
-	c(() => {
+	o(() => {
 		if (b || !C) return;
 		let e = (e) => {
 			e.key === "Escape" && w(!1);
@@ -32,7 +32,7 @@ function p({ header: r, sidebar: d, children: p, defaultSidebar: m = "open", sid
 			document.removeEventListener("keydown", e), document.body.style.overflow = t;
 		};
 	}, [b, C]);
-	let M = l(() => ({
+	let M = s(() => ({
 		sidebar: D,
 		setSidebar: O,
 		sidebarWidth: T ?? 0,
@@ -49,25 +49,25 @@ function p({ header: r, sidebar: d, children: p, defaultSidebar: m = "open", sid
 		A,
 		b
 	]), N = n({ "--app-shell-sidebar-width": T ? `${T}px` : void 0 }), P = !b && C;
-	return /* @__PURE__ */ a(i.Provider, {
+	return /* @__PURE__ */ l(i.Provider, {
 		value: M,
-		children: /* @__PURE__ */ o(t, { children: [/* @__PURE__ */ a(e, {
+		children: /* @__PURE__ */ u(t, { children: [/* @__PURE__ */ l(e, {
 			href: "#main-content",
 			children: y
-		}), /* @__PURE__ */ o("div", {
+		}), /* @__PURE__ */ u("div", {
 			ref: N,
 			className: "app-shell",
 			"data-sidebar": D,
-			children: [r, /* @__PURE__ */ o("div", {
+			children: [r, /* @__PURE__ */ u("div", {
 				className: "app-shell__body",
 				children: [
 					d,
-					P && /* @__PURE__ */ a("div", {
+					P && /* @__PURE__ */ l("div", {
 						className: "app-shell__backdrop",
 						onClick: A,
 						"aria-hidden": "true"
 					}),
-					/* @__PURE__ */ a("main", {
+					/* @__PURE__ */ l("main", {
 						id: "main-content",
 						tabIndex: -1,
 						className: "app-shell__content",

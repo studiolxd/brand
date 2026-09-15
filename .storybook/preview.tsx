@@ -7,7 +7,7 @@ import './preview.css'
 import studiolxdTheme from './studiolxdTheme'
 import { STORY_TODAY } from '../src/stories/utils/storyDate'
 import { MODOS_CHROMATIC } from '../src/stories/utils/chromaticModes'
-import { BrandMessagesProvider } from '../src/messages/BrandMessagesProvider'
+import { BrandMessagesProvider } from '../src/stories/messages/BrandMessagesProvider'
 import { brandMessagesFixture } from './brandMessagesFixture'
 
 /**
@@ -93,7 +93,7 @@ const withSurface: Decorator = (Story, context) => {
  * El fixture es castellano por comodidad, pero no reintroduce el default que
  * se quitó: vive en `.storybook/`, fuera del paquete publicado, y ningún
  * código de un consumidor lo alcanza (ver `brandMessagesFixture.ts` y el test
- * `src/messages/BrandMessages.test.ts`). Una story que quiera enseñar otro
+ * `src/stories/messages/BrandMessages.test.ts`). Una story que quiera enseñar otro
  * idioma envuelve su propio proveedor por encima de este.
  */
 const withBrandMessages: Decorator = (Story) => (

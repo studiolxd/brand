@@ -5,12 +5,12 @@ import { n as t } from "./_shared/form-size.js";
 import { ErrorText as n } from "./error-text.js";
 import { Switcher as r } from "./switcher.js";
 import { n as i } from "./_shared/field-labels.js";
-import { jsx as a, jsxs as o } from "react/jsx-runtime";
-import { forwardRef as s, useId as c } from "react";
+import { forwardRef as a, useId as o } from "react";
+import { jsx as s, jsxs as c } from "react/jsx-runtime";
 //#region src/stories/molecules/SwitcherField/SwitcherField.tsx
-var l = s(function({ label: s, labelHidden: l, id: u, checked: d, defaultChecked: f, disabled: p, required: m, name: h, value: g, size: _, error: v = !1, errorMessage: y, helperText: b, className: x, onCheckedChange: S, onBlur: C }, w) {
-	let T = i(l), E = t(_), D = c(), O = u ?? D, k = y ? `${O}-error` : void 0, A = b ? `${O}-helper` : void 0, j = [k, A].filter(Boolean).join(" ") || void 0, M = v || !!y;
-	return /* @__PURE__ */ o("div", {
+var l = a(function({ label: a, labelHidden: l, id: u, checked: d, defaultChecked: f, disabled: p, required: m, name: h, value: g, size: _, error: v = !1, errorMessage: y, helperText: b, className: x, onCheckedChange: S, onBlur: C }, w) {
+	let T = i(l), E = t(_), D = o(), O = u ?? D, k = y ? `${O}-error` : void 0, A = b ? `${O}-helper` : void 0, j = [k, A].filter(Boolean).join(" ") || void 0, M = v || !!y;
+	return /* @__PURE__ */ c("div", {
 		className: [
 			"switcher-field",
 			E === "md" ? "" : `switcher-field--${E}`,
@@ -18,10 +18,10 @@ var l = s(function({ label: s, labelHidden: l, id: u, checked: d, defaultChecked
 			x
 		].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ o("label", {
+			/* @__PURE__ */ c("label", {
 				className: "switcher-field__control",
 				htmlFor: O,
-				children: [/* @__PURE__ */ a(r, {
+				children: [/* @__PURE__ */ s(r, {
 					ref: w,
 					id: O,
 					checked: d,
@@ -36,20 +36,20 @@ var l = s(function({ label: s, labelHidden: l, id: u, checked: d, defaultChecked
 					"aria-describedby": j,
 					onCheckedChange: S,
 					onBlur: C
-				}), T ? /* @__PURE__ */ a(e, {
+				}), T ? /* @__PURE__ */ s(e, {
 					id: `${O}-label`,
-					children: s
-				}) : /* @__PURE__ */ a("span", {
+					children: a
+				}) : /* @__PURE__ */ s("span", {
 					id: `${O}-label`,
 					className: "switcher-field__label",
-					children: s
+					children: a
 				})]
 			}),
-			y && /* @__PURE__ */ a(n, {
+			y && /* @__PURE__ */ s(n, {
 				id: k,
 				children: y
 			}),
-			b && /* @__PURE__ */ a("span", {
+			b && /* @__PURE__ */ s("span", {
 				id: A,
 				className: "switcher-field__helper",
 				children: b

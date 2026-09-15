@@ -4,11 +4,11 @@ import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { Button as n } from "./button.js";
 import { t as r } from "./_shared/css-properties.js";
-import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
-import { Children as s, useCallback as c, useEffect as l, useRef as u, useState as d } from "react";
+import { Children as i, useCallback as a, useEffect as o, useRef as s, useState as c } from "react";
+import { Fragment as l, jsx as u, jsxs as d } from "react/jsx-runtime";
 //#region src/stories/molecules/Carousel/Carousel.tsx
 function f({ children: f, label: p = "Carrusel", roleDescription: m = "carrusel", trackLabel: h = "Diapositivas", slideSize: g, controls: _ = !0, indicators: v = !1, autoplay: y, prevLabel: b = "Anterior", nextLabel: x = "Siguiente", indicatorLabel: S = (e) => `Ir a la diapositiva ${e + 1}`, pauseLabel: C = "Pausar", playLabel: w = "Reproducir", slideStatusLabel: T = (e, t) => `Diapositiva ${e + 1} de ${t}`, className: E, id: D }) {
-	let O = u(null), [k, A] = d(0), j = u(0), [M, N] = d(!1), [P, F] = d(!1), I = s.count(f), L = y !== void 0 && !P, R = (e) => Array.from(e.children), z = c((e) => {
+	let O = s(null), [k, A] = c(0), j = s(0), [M, N] = c(!1), [P, F] = c(!1), I = i.count(f), L = y !== void 0 && !P, R = (e) => Array.from(e.children), z = a((e) => {
 		let t = O.current;
 		if (!t) return;
 		let n = R(t);
@@ -19,7 +19,7 @@ function f({ children: f, label: p = "Carrusel", roleDescription: m = "carrusel"
 			behavior: i ? "auto" : "smooth"
 		});
 	}, []);
-	l(() => {
+	o(() => {
 		let e = O.current;
 		if (!e) return;
 		let t = () => {
@@ -32,7 +32,7 @@ function f({ children: f, label: p = "Carrusel", roleDescription: m = "carrusel"
 			}), j.current = r, A(r);
 		};
 		return t(), e.addEventListener("scroll", t, { passive: !0 }), () => e.removeEventListener("scroll", t);
-	}, [f]), l(() => {
+	}, [f]), o(() => {
 		if (!y || P || M || I < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 		let e = window.setInterval(() => z(j.current + 1), y);
 		return () => window.clearInterval(e);
@@ -46,7 +46,7 @@ function f({ children: f, label: p = "Carrusel", roleDescription: m = "carrusel"
 	let B = (e) => {
 		e.key === "ArrowRight" ? (e.preventDefault(), z(k + 1)) : e.key === "ArrowLeft" && (e.preventDefault(), z(k - 1));
 	};
-	return /* @__PURE__ */ o("div", {
+	return /* @__PURE__ */ d("div", {
 		id: D,
 		ref: r({ "--carousel-slide-size": g }),
 		className: ["carousel", E].filter(Boolean).join(" "),
@@ -58,7 +58,7 @@ function f({ children: f, label: p = "Carrusel", roleDescription: m = "carrusel"
 		onFocus: () => N(!0),
 		onBlur: () => N(!1),
 		children: [
-			/* @__PURE__ */ a("div", {
+			/* @__PURE__ */ u("div", {
 				ref: O,
 				className: "carousel__track",
 				tabIndex: 0,
@@ -67,44 +67,44 @@ function f({ children: f, label: p = "Carrusel", roleDescription: m = "carrusel"
 				onKeyDown: B,
 				children: f
 			}),
-			/* @__PURE__ */ a(t, {
+			/* @__PURE__ */ u(t, {
 				as: "div",
 				role: "status",
 				"aria-live": L ? "off" : "polite",
 				"aria-atomic": "true",
 				children: T(k, I)
 			}),
-			(_ || v || y !== void 0) && /* @__PURE__ */ o("div", {
+			(_ || v || y !== void 0) && /* @__PURE__ */ d("div", {
 				className: "carousel__controls",
-				children: [v && /* @__PURE__ */ a("div", {
+				children: [v && /* @__PURE__ */ u("div", {
 					className: "carousel__indicators",
-					children: Array.from({ length: I }, (e, t) => /* @__PURE__ */ a("button", {
+					children: Array.from({ length: I }, (e, t) => /* @__PURE__ */ u("button", {
 						type: "button",
 						className: "carousel__indicator",
 						"aria-label": S(t),
 						"aria-current": t === k ? "true" : void 0,
 						onClick: () => z(t)
 					}, t))
-				}), (_ || y !== void 0) && /* @__PURE__ */ o("div", {
+				}), (_ || y !== void 0) && /* @__PURE__ */ d("div", {
 					className: "carousel__buttons",
-					children: [y !== void 0 && /* @__PURE__ */ a(n, {
+					children: [y !== void 0 && /* @__PURE__ */ u(n, {
 						variant: "ghost",
 						iconOnly: !0,
 						"aria-label": L ? C : w,
 						onClick: () => F((e) => !e),
-						children: /* @__PURE__ */ a(e, { name: L ? "pause" : "play" })
-					}), _ && /* @__PURE__ */ o(i, { children: [/* @__PURE__ */ a(n, {
+						children: /* @__PURE__ */ u(e, { name: L ? "pause" : "play" })
+					}), _ && /* @__PURE__ */ d(l, { children: [/* @__PURE__ */ u(n, {
 						variant: "ghost",
 						iconOnly: !0,
 						"aria-label": b,
 						onClick: () => z(k - 1),
-						children: /* @__PURE__ */ a(e, { name: "arrow-left" })
-					}), /* @__PURE__ */ a(n, {
+						children: /* @__PURE__ */ u(e, { name: "arrow-left" })
+					}), /* @__PURE__ */ u(n, {
 						variant: "ghost",
 						iconOnly: !0,
 						"aria-label": x,
 						onClick: () => z(k + 1),
-						children: /* @__PURE__ */ a(e, { name: "arrow" })
+						children: /* @__PURE__ */ u(e, { name: "arrow" })
 					})] })]
 				})]
 			})
@@ -112,7 +112,7 @@ function f({ children: f, label: p = "Carrusel", roleDescription: m = "carrusel"
 	});
 }
 function p({ roleDescription: e = "diapositiva", className: t, children: n, ...r }) {
-	return /* @__PURE__ */ a("div", {
+	return /* @__PURE__ */ u("div", {
 		className: ["carousel__slide", t].filter(Boolean).join(" "),
 		role: "group",
 		"aria-roledescription": e,

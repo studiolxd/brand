@@ -1,6 +1,32 @@
 import type { ComponentType, ReactNode } from 'react';
 import type { SelectOption } from '../../atoms/Select/Select';
 import './Pagination.css';
+/**
+ * Los textos que el paginador emite por su cuenta. Los nombres calcan el
+ * espacio `pagination` del catálogo de la suite, así que montarlo es mapear
+ * clave a clave y no traducir de nuevo.
+ *
+ * Todas obligatorias: es el proveedor quien garantiza que ninguna falte, y
+ * quien las pinta ya no tiene un castellano por defecto donde caer.
+ */
+export interface PaginationMessages {
+    /** `aria-label` del `<nav>`. */
+    label: string;
+    /** `aria-label` del `role="group"` que envuelve los controles de página. */
+    pagesGroup: string;
+    /** `aria-label` del control «anterior». */
+    previous: string;
+    /** `aria-label` del control «siguiente». */
+    next: string;
+    /** `aria-label` de cada botón/enlace de página, con su número. */
+    goToPage: (page: number) => string;
+    /** `aria-label` del selector de registros por página. */
+    perPage: string;
+    /** Sumario de `showTotal`, con el número de registros. */
+    total: (total: number) => string;
+    /** Rótulo de la opción «sin paginar» del selector de registros por página. */
+    allOption: string;
+}
 export interface PaginationProps {
     /**
      * Con páginas numeradas (`pages`, por defecto) o solo anterior/siguiente
@@ -36,7 +62,10 @@ export interface PaginationProps {
     hrefBuilder?: (page: number) => string;
     /** Si se pasa, aparece el selector de registros por página */
     onPageSizeChange?: (size: string) => void;
-    /** Opciones del selector. Default: 10, 20, 50, 100, Todos */
+    /**
+     * Opciones del selector. Sin ellas, 10/20/50/100 y la opción «sin paginar»,
+     * cuyo rótulo sale de `pagination.allOption` (las cifras no se traducen).
+     */
     pageSizeOptions?: SelectOption[];
     /**
      * Ranura a continuación del selector de registros por página, dentro del
@@ -55,37 +84,25 @@ export interface PaginationProps {
     linkComponent?: ComponentType<any>;
     /** Tamaño del componente. Default: "md" */
     size?: 'sm' | 'md' | 'lg';
-    /** aria-label del <nav>. Default: «Paginación» (castellano). Una app multiidioma debe pasarlo traducido. */
+    /**
+     * `aria-label` del `<nav>`. Sin default: cuando no se pasa, sale de
+     * `pagination.label` del `BrandMessagesProvider`.
+     */
     ariaLabel?: string;
-    /**
-     * aria-label de cada botón/enlace de página. Default: `Página ${page}` (castellano).
-     * Una app multiidioma debe pasarla traducida.
-     */
+    /** `aria-label` de cada botón/enlace de página. Sin default: `pagination.goToPage`. */
     pageLabel?: (page: number) => string;
-    /**
-     * aria-label del botón "anterior". Default: "Página anterior" (castellano).
-     * Una app multiidioma debe pasarla traducida.
-     */
+    /** `aria-label` del botón «anterior». Sin default: `pagination.previous`. */
     previousLabel?: string;
-    /**
-     * aria-label del botón "siguiente". Default: "Página siguiente" (castellano).
-     * Una app multiidioma debe pasarla traducida.
-     */
+    /** `aria-label` del botón «siguiente». Sin default: `pagination.next`. */
     nextLabel?: string;
     /**
-     * aria-label del `role="group"` que envuelve los controles de página.
-     * Default: "Páginas" (castellano). Una app multiidioma debe pasarla traducida.
+     * `aria-label` del `role="group"` que envuelve los controles de página.
+     * Sin default: `pagination.pagesGroup`.
      */
     pagesGroupLabel?: string;
-    /**
-     * aria-label del selector de registros por página.
-     * Default: "Registros por página" (castellano). Una app multiidioma debe pasarla traducida.
-     */
+    /** `aria-label` del selector de registros por página. Sin default: `pagination.perPage`. */
     pageSizeLabel?: string;
-    /**
-     * Texto del sumario que muestra `showTotal`. Default: `${total} resultados` (castellano).
-     * Una app multiidioma debe pasarla traducida.
-     */
+    /** Texto del sumario que muestra `showTotal`. Sin default: `pagination.total`. */
     totalLabel?: (total: number) => string;
     className?: string;
 }

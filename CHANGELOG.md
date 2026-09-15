@@ -7,6 +7,68 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [40.0.0] — 2026-09-15
+
+> **Major.** El sistema estrena **proveedor de textos**: un catálogo que se monta una vez
+> en la raíz de la aplicación y del que los componentes leen lo que pintan. `Pagination`
+> es el primero en usarlo, y con él pierde sus textos castellano por defecto.
+
+### El proveedor de textos, y por qué
+
+Hasta hoy, todo texto que un componente emite por su cuenta venía en una prop opcional con
+el castellano puesto. En una suite de doce aplicaciones que hablan seis idiomas eso es un
+fallo silencioso: el componente pinta «Cancelar» dentro de una página en francés, no falla
+nada, ningún test lo ve, y se ve bien estando mal. Un inventario de hoy midió el tamaño del
+asunto: **111 componentes, 310 props de texto**.
+
+El mecanismo son cuatro piezas en `src/messages/`, y se importa desde
+`@studiolxd/brand/messages`:
+
+- **`BrandMessages`** — el contrato, anidado por componente. **El tipo nace aquí**, en el
+  sistema, y el catálogo de la aplicación lo satisface; no al revés, porque un sistema que
+  necesitara un paquete ajeno para declarar lo que necesita dejaría de sostenerse solo.
+- **`BrandMessagesProvider`** — se monta una vez, con el catálogo entero. Todas las claves
+  de cada espacio son **obligatorias**: si una aplicación se deja una, no compila.
+- **`useBrandMessages`** — el lector, para los componentes.
+
+El orden es **prop → proveedor → error**, y no hay cuarto escalón: ahí es donde estaba el
+castellano, y de ahí se ha ido. El error se lanza **donde el texto se pinta**, así que un
+paginador sin selector de registros no exige el texto del selector, y quien ya pasa todas
+las props sigue funcionando sin montar nada.
+
+Lo que se gana, dicho sin adornos: una clave que falta es un error de compilación; un
+proveedor sin montar es un fallo ruidoso e inmediato. Ninguno de los dos es un texto mudo
+en el idioma equivocado que nadie descubre.
+
+### Breaking — `Pagination` ya no trae sus textos
+
+Sus ocho textos —`label`, `pagesGroup`, `previous`, `next`, `goToPage`, `perPage`,
+`total` y el `allOption` del selector, que estaba cableado dentro— salen del proveedor o de
+las props. **Un `Pagination` sin proveedor y sin props de texto lanza en render.** Siete de
+las ocho claves ya existían tal cual en el espacio `pagination` de los catálogos de la
+suite; la octava se ha escrito en los seis idiomas.
+
+Alcanza a quien lo compone: `DataTable` monta un `Pagination`, así que una pantalla con
+tabla necesita el proveedor aunque no pagine a mano.
+
+### Storybook: un fixture, no un default por la puerta de atrás
+
+Las historias se envuelven en un decorador que monta el proveedor con un fixture
+castellano. No es el default de antes con otro nombre, y la diferencia es la que da sentido
+a todo lo anterior: el fixture vive fuera de `src/`, no es punto de entrada, ningún
+componente lo importa y `package.json#files` solo publica `dist/`, `src/tokens/` y el
+registro de cambios — así que **ningún código de un consumidor puede caer en él**. Un
+default viaja dentro del paquete y se alcanza en ejecución; un fixture no. Las cuatro
+condiciones las vigila un test, no un comentario.
+
+### Sobre lo que viene
+
+Esta versión es **una rebanada vertical**: una sola familia llevada hasta el final, con sus
+defaults retirados, para probar el patrón antes de comprometer los otros 110 componentes.
+El patrón aguanta. Lo que no es gratis, y conviene saberlo: retirar el default es
+incompatible por componente y se propaga a quien lo compone, así que lo que sigue se
+ordenará **por familias y con versión mayor**, no componente a componente.
+
 ## [39.0.0] — 2026-09-15
 
 > **Major.** `StarRating` deja de traer sus textos puestos: ahora se le pasan, y el

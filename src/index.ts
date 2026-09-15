@@ -2,8 +2,8 @@
 import './index.css';
 
 // ─── Textos (proveedor y contrato) ───────────────────────────
-export { BrandMessagesProvider, useBrandMessages } from './messages';
-export type { BrandMessagesProviderProps, BrandMessagesReader, BrandMessages } from './messages';
+export { BrandMessagesProvider, useBrandMessages } from './stories/messages';
+export type { BrandMessagesProviderProps, BrandMessagesReader, BrandMessages } from './stories/messages';
 
 // ─── Atoms ───────────────────────────────────────────────────
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from './stories/atoms/Accordion/Accordion';

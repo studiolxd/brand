@@ -1,9 +1,9 @@
 import './error-text.css';
-import { jsx as e } from "react/jsx-runtime";
-import { forwardRef as t } from "react";
+import { forwardRef as e } from "react";
+import { jsx as t } from "react/jsx-runtime";
 //#region src/stories/atoms/ErrorText/ErrorText.tsx
-var n = t(function({ as: t = "p", className: n, children: r, ...i }, a) {
-	return /* @__PURE__ */ e(t, {
+var n = e(function({ as: e = "p", className: n, children: r, ...i }, a) {
+	return /* @__PURE__ */ t(e, {
 		ref: a,
 		role: "alert",
 		className: ["error-text", n].filter(Boolean).join(" "),

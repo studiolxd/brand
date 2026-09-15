@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { Pagination } from './Pagination';
 import { Button } from '../../atoms/Button/Button';
-import { BrandMessagesProvider } from '../../../messages/BrandMessagesProvider';
-import type { BrandMessages } from '../../../messages/BrandMessages';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import type { BrandMessages } from '../../messages/BrandMessages';
 
 /**
  * El catálogo de otra app, en inglés, para enseñar de dónde salen los textos

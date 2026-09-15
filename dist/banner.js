@@ -1,33 +1,33 @@
 'use client';
 import './banner.css';
 import { CloseButton as e } from "./close-button.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
-import { forwardRef as r } from "react";
+import { forwardRef as t } from "react";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/molecules/Banner/Banner.tsx
-var i = r(function({ variant: r = "info", children: i, actions: a, onDismiss: o, dismissLabel: s = "Descartar aviso", className: c, role: l, "aria-live": u, ...d }, f) {
+var i = t(function({ variant: t = "info", children: i, actions: a, onDismiss: o, dismissLabel: s = "Descartar aviso", className: c, role: l, "aria-live": u, ...d }, f) {
 	let p = [
 		"banner",
-		`banner--${r}`,
-		r === "info" ? "surface-dark" : "",
+		`banner--${t}`,
+		t === "info" ? "surface-dark" : "",
 		o ? "banner--dismissible" : "",
 		c ?? ""
 	].filter(Boolean).join(" ");
-	return /* @__PURE__ */ n("div", {
+	return /* @__PURE__ */ r("div", {
 		ref: f,
 		role: l ?? "status",
 		"aria-live": u ?? "polite",
 		className: p,
 		...d,
 		children: [
-			/* @__PURE__ */ t("div", {
+			/* @__PURE__ */ n("div", {
 				className: "banner__content",
 				children: i
 			}),
-			a && /* @__PURE__ */ t("div", {
+			a && /* @__PURE__ */ n("div", {
 				className: "banner__actions",
 				children: a
 			}),
-			o && /* @__PURE__ */ t(e, {
+			o && /* @__PURE__ */ n(e, {
 				className: "banner__close",
 				label: s,
 				onClick: o

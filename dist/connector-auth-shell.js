@@ -4,16 +4,16 @@ import { Columns as t } from "./columns.js";
 import { Stack as n } from "./stack.js";
 import { PageIntro as r } from "./page-intro.js";
 import { PublicPageShell as i } from "./public-page-shell.js";
-import { jsx as a, jsxs as o } from "react/jsx-runtime";
-import { forwardRef as s } from "react";
+import { forwardRef as a } from "react";
+import { jsx as o, jsxs as s } from "react/jsx-runtime";
 //#region src/stories/templates/ConnectorAuth/ConnectorAuthShell.tsx
-var c = s(function({ title: s, description: c, intro: l, aside: u, children: d, header: f, footer: p, preferences: m, preferencesLabel: h, id: g, shell: _, className: v }, y) {
-	let b = /* @__PURE__ */ a(r, {
-		title: s,
+var c = a(function({ title: a, description: c, intro: l, aside: u, children: d, header: f, footer: p, preferences: m, preferencesLabel: h, id: g, shell: _, className: v }, y) {
+	let b = /* @__PURE__ */ o(r, {
+		title: a,
 		description: c,
 		children: l
 	});
-	return /* @__PURE__ */ a(i, {
+	return /* @__PURE__ */ o(i, {
 		ref: y,
 		header: f,
 		footer: p,
@@ -21,11 +21,11 @@ var c = s(function({ title: s, description: c, intro: l, aside: u, children: d, 
 		preferencesLabel: h,
 		id: g,
 		shell: _,
-		children: /* @__PURE__ */ a(e.Provider, {
+		children: /* @__PURE__ */ o(e.Provider, {
 			value: "lg",
-			children: /* @__PURE__ */ o(t, {
+			children: /* @__PURE__ */ s(t, {
 				className: v,
-				children: [u ? /* @__PURE__ */ o(n, {
+				children: [u ? /* @__PURE__ */ s(n, {
 					mobileOrder: "reverse",
 					children: [b, u]
 				}) : b, d]

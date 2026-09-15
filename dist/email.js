@@ -1,6 +1,6 @@
 import { EMAIL_FONT_FILENAME as e, EMAIL_LOGO_FILENAME as t, emailLogoWidthFor as n } from "./brand-assets.js";
-import { Body as r, Button as i, Container as a, Font as o, Head as s, Heading as c, Hr as l, Html as u, Img as d, Link as f, Preview as p, Section as m, Text as h } from "react-email";
-import { Fragment as g, jsx as _, jsxs as v } from "react/jsx-runtime";
+import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
+import { Body as o, Button as s, Container as c, Font as l, Head as u, Heading as d, Hr as f, Html as p, Img as m, Link as h, Preview as g, Section as _, Text as v } from "react-email";
 //#region src/stories/email/emailTokens.ts
 var y = {
 	"--email-max-width": "600px",
@@ -211,50 +211,50 @@ var S = {
 //#endregion
 //#region src/stories/email/EmailLayout.tsx
 function I(e) {
-	if (e.reasonLabel !== void 0) return /* @__PURE__ */ v(h, {
+	if (e.reasonLabel !== void 0) return /* @__PURE__ */ a(v, {
 		style: M.footnote,
 		children: [
 			e.reasonLabel,
 			" ",
-			/* @__PURE__ */ _(f, {
+			/* @__PURE__ */ i(h, {
 				href: e.unsubscribeUrl,
 				style: M.link,
 				children: e.unsubscribeLabel
 			})
 		]
 	});
-	let { unsubscribeUrl: t, preferencesUrl: n, manageLabel: r = "Para dejar de recibir estos avisos,", unsubscribeLabel: i = n ? "Darse de baja" : "date de baja", manageBeforeLabel: a = " o ", managePreferencesLabel: o = "gestiona tus preferencias", manageAfterLabel: s = "." } = e, c = /* @__PURE__ */ _(f, {
+	let { unsubscribeUrl: t, preferencesUrl: n, manageLabel: r = "Para dejar de recibir estos avisos,", unsubscribeLabel: o = n ? "Darse de baja" : "date de baja", manageBeforeLabel: s = " o ", managePreferencesLabel: c = "gestiona tus preferencias", manageAfterLabel: l = "." } = e, u = /* @__PURE__ */ i(h, {
 		href: t,
 		style: M.link,
-		children: i
+		children: o
 	});
-	return n ? /* @__PURE__ */ v(h, {
+	return n ? /* @__PURE__ */ a(v, {
 		style: M.footnote,
 		children: [
-			c,
-			a,
-			/* @__PURE__ */ _(f, {
+			u,
+			s,
+			/* @__PURE__ */ i(h, {
 				href: n,
 				style: M.link,
-				children: o
+				children: c
 			}),
-			s
+			l
 		]
-	}) : /* @__PURE__ */ v(h, {
+	}) : /* @__PURE__ */ a(v, {
 		style: M.footnote,
 		children: [
 			r,
 			" ",
-			c
+			u
 		]
 	});
 }
-function L({ preview: e, appName: t, locale: n = "es", assetsBaseUrl: i = k, logoAlt: c, optOut: l, children: f }) {
-	let h = i.replace(/\/$/, "");
-	return /* @__PURE__ */ v(u, {
+function L({ preview: e, appName: t, locale: n = "es", assetsBaseUrl: r = k, logoAlt: s, optOut: d, children: f }) {
+	let h = r.replace(/\/$/, "");
+	return /* @__PURE__ */ a(p, {
 		lang: n,
 		children: [
-			/* @__PURE__ */ v(s, { children: [/* @__PURE__ */ _(o, {
+			/* @__PURE__ */ a(u, { children: [/* @__PURE__ */ i(l, {
 				fontFamily: "Google Sans Flex",
 				fallbackFontFamily: "sans-serif",
 				webFont: {
@@ -263,9 +263,9 @@ function L({ preview: e, appName: t, locale: n = "es", assetsBaseUrl: i = k, log
 				},
 				fontWeight: w,
 				fontStyle: "normal"
-			}), /* @__PURE__ */ _("style", { dangerouslySetInnerHTML: { __html: F } })] }),
-			/* @__PURE__ */ _(p, { children: e }),
-			/* @__PURE__ */ _(r, {
+			}), /* @__PURE__ */ i("style", { dangerouslySetInnerHTML: { __html: F } })] }),
+			/* @__PURE__ */ i(g, { children: e }),
+			/* @__PURE__ */ i(o, {
 				style: {
 					backgroundColor: S.canvas,
 					color: S.text,
@@ -276,23 +276,23 @@ function L({ preview: e, appName: t, locale: n = "es", assetsBaseUrl: i = k, log
 					margin: 0,
 					padding: 0
 				},
-				children: /* @__PURE__ */ v(m, {
+				children: /* @__PURE__ */ a(_, {
 					style: {
 						backgroundColor: S.canvas,
 						padding: `${b("--email-canvas-padding-block")} ${b("--email-canvas-padding-inline")}`,
 						width: "100%"
 					},
 					children: [
-						/* @__PURE__ */ _(a, {
+						/* @__PURE__ */ i(c, {
 							style: {
 								backgroundColor: S.background,
 								margin: "0 auto",
 								maxWidth: T,
 								padding: 0
 							},
-							children: /* @__PURE__ */ _(d, {
+							children: /* @__PURE__ */ i(m, {
 								src: `${h}/${O.filename}`,
-								alt: c ?? t,
+								alt: s ?? t,
 								width: O.width,
 								height: O.height,
 								style: {
@@ -303,7 +303,7 @@ function L({ preview: e, appName: t, locale: n = "es", assetsBaseUrl: i = k, log
 								}
 							})
 						}),
-						/* @__PURE__ */ _(a, {
+						/* @__PURE__ */ i(c, {
 							style: {
 								backgroundColor: S.background,
 								border: `${b("--email-border-width")} solid ${S.border}`,
@@ -312,16 +312,16 @@ function L({ preview: e, appName: t, locale: n = "es", assetsBaseUrl: i = k, log
 								maxWidth: T,
 								padding: `${b("--email-padding-block")} ${b("--email-padding-inline")}`
 							},
-							children: /* @__PURE__ */ _(m, { children: f })
+							children: /* @__PURE__ */ i(_, { children: f })
 						}),
-						l && /* @__PURE__ */ _(a, {
+						d && /* @__PURE__ */ i(c, {
 							style: {
 								backgroundColor: S.canvas,
 								margin: "0 auto",
 								maxWidth: T,
 								padding: `${b("--email-opt-out-margin-block-start")} 0 0`
 							},
-							children: /* @__PURE__ */ _(I, { ...l })
+							children: /* @__PURE__ */ i(I, { ...d })
 						})
 					]
 				})
@@ -333,7 +333,7 @@ function L({ preview: e, appName: t, locale: n = "es", assetsBaseUrl: i = k, log
 //#region src/stories/email/EmailPrimitives.tsx
 function R({ children: e, level: t = 1, style: n }) {
 	let r = t === 1 ? M.heading : M.heading2;
-	return /* @__PURE__ */ _(c, {
+	return /* @__PURE__ */ i(d, {
 		as: `h${t}`,
 		style: {
 			...r,
@@ -343,7 +343,7 @@ function R({ children: e, level: t = 1, style: n }) {
 	});
 }
 function z({ children: e, emphasis: t = !1, style: n }) {
-	return /* @__PURE__ */ _(h, {
+	return /* @__PURE__ */ i(v, {
 		style: {
 			...M.text,
 			...t && M.textEmphasis,
@@ -353,7 +353,7 @@ function z({ children: e, emphasis: t = !1, style: n }) {
 	});
 }
 function B({ children: e, ordered: t = !1, style: n }) {
-	return /* @__PURE__ */ _(t ? "ol" : "ul", {
+	return /* @__PURE__ */ i(t ? "ol" : "ul", {
 		style: {
 			...M.list,
 			...n
@@ -362,7 +362,7 @@ function B({ children: e, ordered: t = !1, style: n }) {
 	});
 }
 function V({ children: e, style: t }) {
-	return /* @__PURE__ */ _("li", {
+	return /* @__PURE__ */ i("li", {
 		style: {
 			...M.listItem,
 			...t
@@ -371,7 +371,7 @@ function V({ children: e, style: t }) {
 	});
 }
 function H({ children: e, style: t }) {
-	return /* @__PURE__ */ _(m, {
+	return /* @__PURE__ */ i(_, {
 		style: {
 			...M.quote,
 			...t
@@ -380,7 +380,7 @@ function H({ children: e, style: t }) {
 	});
 }
 function U({ children: e, tone: t, style: n }) {
-	return /* @__PURE__ */ _("span", {
+	return /* @__PURE__ */ i("span", {
 		style: {
 			...M.tag,
 			...N[t],
@@ -390,13 +390,13 @@ function U({ children: e, tone: t, style: n }) {
 	});
 }
 function W({ style: e }) {
-	return /* @__PURE__ */ _(l, { style: {
+	return /* @__PURE__ */ i(f, { style: {
 		...M.divider,
 		...e
 	} });
 }
 function G({ children: e, tone: t = "muted", style: n }) {
-	return /* @__PURE__ */ _(h, {
+	return /* @__PURE__ */ i(v, {
 		style: {
 			...t === "muted" ? M.muted : M.footnote,
 			...n
@@ -405,7 +405,7 @@ function G({ children: e, tone: t = "muted", style: n }) {
 	});
 }
 function K({ href: e, children: t, style: n }) {
-	return /* @__PURE__ */ _(f, {
+	return /* @__PURE__ */ i(h, {
 		href: e,
 		style: {
 			...M.link,
@@ -414,22 +414,22 @@ function K({ href: e, children: t, style: n }) {
 		children: t
 	});
 }
-function q({ href: e, children: t, fallbackLabel: n, style: r }) {
-	return /* @__PURE__ */ v(g, { children: [/* @__PURE__ */ _(i, {
+function q({ href: e, children: t, fallbackLabel: n, style: o }) {
+	return /* @__PURE__ */ a(r, { children: [/* @__PURE__ */ i(s, {
 		href: e,
 		className: P,
 		style: {
 			...M.button,
 			marginBottom: 0,
-			...r
+			...o
 		},
 		children: t
-	}), /* @__PURE__ */ v(h, {
+	}), /* @__PURE__ */ a(v, {
 		style: M.buttonFallback,
 		children: [
 			n,
-			/* @__PURE__ */ _("br", {}),
-			/* @__PURE__ */ _("span", {
+			/* @__PURE__ */ i("br", {}),
+			/* @__PURE__ */ i("span", {
 				style: M.buttonFallbackUrl,
 				children: e
 			})

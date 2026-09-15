@@ -1,15 +1,15 @@
 'use client';
 import './button.css';
 import { n as e } from "./_shared/form-size.js";
-import { jsx as t } from "react/jsx-runtime";
-import { forwardRef as n } from "react";
+import { forwardRef as t } from "react";
+import { jsx as n } from "react/jsx-runtime";
 import { useRender as r } from "@base-ui/react/use-render";
 //#region src/stories/atoms/Button/Button.tsx
-var i = n(function({ variant: n = "primary", tone: i = "accent", destructive: a = !1, size: o, block: s = !1, iconOnly: c = !1, children: l, type: u = "button", disabled: d, onClick: f, href: p, external: m = !1, render: h, className: g, ..._ }, v) {
+var i = t(function({ variant: t = "primary", tone: i = "accent", destructive: a = !1, size: o, block: s = !1, iconOnly: c = !1, children: l, type: u = "button", disabled: d, onClick: f, href: p, external: m = !1, render: h, className: g, ..._ }, v) {
 	let y = e(o), b = [
 		"button",
-		`button--${n}`,
-		n === "text" && i === "ink" ? "button--ink" : "",
+		`button--${t}`,
+		t === "text" && i === "ink" ? "button--ink" : "",
 		a ? "button--destructive-intent" : "",
 		y === "md" ? "" : `button--${y}`,
 		s === "mobile" ? "button--block-mobile" : s ? "button--block" : "",
@@ -33,7 +33,7 @@ var i = n(function({ variant: n = "primary", tone: i = "accent", destructive: a 
 			..._,
 			children: l
 		}
-	}) || (p === void 0 ? /* @__PURE__ */ t("button", {
+	}) || (p === void 0 ? /* @__PURE__ */ n("button", {
 		ref: v,
 		className: b,
 		type: u,
@@ -41,7 +41,7 @@ var i = n(function({ variant: n = "primary", tone: i = "accent", destructive: a 
 		onClick: f,
 		..._,
 		children: l
-	}) : /* @__PURE__ */ t("a", {
+	}) : /* @__PURE__ */ n("a", {
 		ref: v,
 		className: b,
 		href: d ? void 0 : p,

@@ -1,11 +1,11 @@
 import './code.css';
-import { jsx as e } from "react/jsx-runtime";
-import { forwardRef as t } from "react";
+import { forwardRef as e } from "react";
+import { jsx as t } from "react/jsx-runtime";
 //#region src/stories/atoms/Code/Code.tsx
-var n = t(function({ className: t, children: n, ...r }, i) {
-	return /* @__PURE__ */ e("code", {
+var n = e(function({ className: e, children: n, ...r }, i) {
+	return /* @__PURE__ */ t("code", {
 		ref: i,
-		className: ["code", t].filter(Boolean).join(" "),
+		className: ["code", e].filter(Boolean).join(" "),
 		...r,
 		children: n
 	});

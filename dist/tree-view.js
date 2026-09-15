@@ -1,8 +1,8 @@
 'use client';
 import './tree-view.css';
 import { Icon as e } from "./icon.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
-import { useCallback as r, useId as i, useMemo as a, useRef as o, useState as s } from "react";
+import { useCallback as t, useId as n, useMemo as r, useRef as i, useState as a } from "react";
+import { jsx as o, jsxs as s } from "react/jsx-runtime";
 //#region src/stories/molecules/TreeView/TreeView.tsx
 var c = 500;
 function l(e, t, n = 1, r) {
@@ -13,18 +13,18 @@ function l(e, t, n = 1, r) {
 	}, ...e.children && t.has(e.id) ? l(e.children, t, n + 1, e.id) : []]);
 }
 function u({ items: u, expanded: d, defaultExpanded: f, onExpandedChange: p, selected: m, defaultSelected: h, onSelectedChange: g, label: _ = "Árbol", truncateFromLevel: v = 4, nodeRef: y, className: b, ...x }) {
-	let S = i(), C = o(null), [w, T] = s(f ?? []), E = d !== void 0, D = E ? d : w, [O, k] = s(h), A = m !== void 0, j = A ? m : O, M = a(() => new Set(D), [D]), N = a(() => l(u, M), [u, M]), [P, F] = s(void 0), I = P && N.some((e) => e.node.id === P) ? P : j && N.some((e) => e.node.id === j) ? j : N[0]?.node.id, L = o(""), R = o(0), z = r((e) => {
+	let S = n(), C = i(null), [w, T] = a(f ?? []), E = d !== void 0, D = E ? d : w, [O, k] = a(h), A = m !== void 0, j = A ? m : O, M = r(() => new Set(D), [D]), N = r(() => l(u, M), [u, M]), [P, F] = a(void 0), I = P && N.some((e) => e.node.id === P) ? P : j && N.some((e) => e.node.id === j) ? j : N[0]?.node.id, L = i(""), R = i(0), z = t((e) => {
 		E || T(e), p?.(e);
-	}, [E, p]), B = r((e, t) => {
+	}, [E, p]), B = t((e, t) => {
 		let n = M.has(e), r = t ?? !n;
 		r !== n && z(r ? [...D, e] : D.filter((t) => t !== e));
 	}, [
 		D,
 		M,
 		z
-	]), V = r((e) => {
+	]), V = t((e) => {
 		A || k(e), g?.(e);
-	}, [A, g]), H = r((e) => {
+	}, [A, g]), H = t((e) => {
 		let t = N.filter((t) => t.parentId === e.parentId && t.node.children?.length).map((e) => e.node.id).filter((e) => !M.has(e));
 		t.length !== 0 && z([...D, ...t]);
 	}, [
@@ -32,9 +32,9 @@ function u({ items: u, expanded: d, defaultExpanded: f, onExpandedChange: p, sel
 		N,
 		M,
 		z
-	]), U = r((e) => `${S}-${e}`, [S]), W = r((e) => {
+	]), U = t((e) => `${S}-${e}`, [S]), W = t((e) => {
 		e && (F(e), C.current?.querySelector(`[data-tree-item="${CSS.escape(e)}"]`)?.focus());
-	}, []), G = r((e, t) => {
+	}, []), G = t((e, t) => {
 		let n = Date.now(), r = n - R.current > c ? e : L.current + e;
 		L.current = r, R.current = n;
 		let i = r.length === 1 ? t + 1 : Math.max(t, 0), a = r.toLowerCase();
@@ -79,80 +79,80 @@ function u({ items: u, expanded: d, defaultExpanded: f, onExpandedChange: p, sel
 				break;
 		}
 	}
-	function q(r, i, a) {
-		return r.map((r) => {
-			let o = !!r.children?.length, s = o && M.has(r.id), c = j === r.id, l = s && r.iconExpanded || r.icon, u = i >= v, d = u && typeof r.label == "string" ? r.label : void 0, f = r.dropTarget ? "target" : r.dropDisabled ? "disabled" : void 0;
-			return /* @__PURE__ */ n("li", {
+	function q(t, n, r) {
+		return t.map((t) => {
+			let i = !!t.children?.length, a = i && M.has(t.id), c = j === t.id, l = a && t.iconExpanded || t.icon, u = n >= v, d = u && typeof t.label == "string" ? t.label : void 0, f = t.dropTarget ? "target" : t.dropDisabled ? "disabled" : void 0;
+			return /* @__PURE__ */ s("li", {
 				role: "treeitem",
-				"data-tree-item": r.id,
-				"aria-labelledby": U(r.id),
-				"aria-expanded": o ? s : void 0,
+				"data-tree-item": t.id,
+				"aria-labelledby": U(t.id),
+				"aria-expanded": i ? a : void 0,
 				"aria-selected": c,
-				"aria-level": i,
-				"aria-disabled": r.disabled || void 0,
+				"aria-level": n,
+				"aria-disabled": t.disabled || void 0,
 				"data-drop": f,
-				tabIndex: I === r.id ? 0 : -1,
+				tabIndex: I === t.id ? 0 : -1,
 				className: [
 					"tree-view__item",
 					c ? "tree-view__item--selected" : "",
-					r.disabled ? "tree-view__item--disabled" : "",
-					r.dropTarget ? "tree-view__item--drop-target" : "",
-					r.dropDisabled ? "tree-view__item--drop-disabled" : ""
+					t.disabled ? "tree-view__item--disabled" : "",
+					t.dropTarget ? "tree-view__item--drop-target" : "",
+					t.dropDisabled ? "tree-view__item--drop-disabled" : ""
 				].filter(Boolean).join(" "),
 				onKeyDown: (e) => {
 					e.target === e.currentTarget && K(e, {
-						node: r,
-						level: i,
-						parentId: a
+						node: t,
+						level: n,
+						parentId: r
 					});
 				},
 				onFocus: (e) => {
-					e.target === e.currentTarget && F(r.id);
+					e.target === e.currentTarget && F(t.id);
 				},
-				onClick: r.disabled ? void 0 : (e) => {
-					e.stopPropagation(), o && B(r.id), V(r.id), W(r.id);
+				onClick: t.disabled ? void 0 : (e) => {
+					e.stopPropagation(), i && B(t.id), V(t.id), W(t.id);
 				},
-				children: [/* @__PURE__ */ n("span", {
+				children: [/* @__PURE__ */ s("span", {
 					className: "tree-view__row",
-					ref: y ? (e) => y(r.id, e) : void 0,
+					ref: y ? (e) => y(t.id, e) : void 0,
 					children: [
-						/* @__PURE__ */ t("span", {
+						/* @__PURE__ */ o("span", {
 							className: "tree-view__chevron-slot",
 							"aria-hidden": "true",
-							children: o && /* @__PURE__ */ t(e, {
+							children: i && /* @__PURE__ */ o(e, {
 								name: "chevron",
 								className: "tree-view__chevron",
 								size: "sm"
 							})
 						}),
-						l && /* @__PURE__ */ t("span", {
+						l && /* @__PURE__ */ o("span", {
 							className: "tree-view__icon",
 							"aria-hidden": "true",
 							children: l
 						}),
-						/* @__PURE__ */ t("span", {
+						/* @__PURE__ */ o("span", {
 							className: ["tree-view__label", u ? "tree-view__label--truncated" : ""].filter(Boolean).join(" "),
-							id: U(r.id),
+							id: U(t.id),
 							title: d,
-							children: r.label
+							children: t.label
 						}),
-						r.actions && /* @__PURE__ */ t("span", {
+						t.actions && /* @__PURE__ */ o("span", {
 							className: "tree-view__actions",
 							onClick: (e) => e.stopPropagation(),
 							onKeyDown: (e) => e.stopPropagation(),
 							onKeyUp: (e) => e.stopPropagation(),
-							children: r.actions
+							children: t.actions
 						})
 					]
-				}), o && s && /* @__PURE__ */ t("ul", {
+				}), i && a && /* @__PURE__ */ o("ul", {
 					role: "group",
 					className: "tree-view__group",
-					children: q(r.children, i + 1, r.id)
+					children: q(t.children, n + 1, t.id)
 				})]
-			}, r.id);
+			}, t.id);
 		});
 	}
-	return /* @__PURE__ */ t("ul", {
+	return /* @__PURE__ */ o("ul", {
 		ref: C,
 		role: "tree",
 		"aria-label": _,

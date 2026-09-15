@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "39.0.0",
+  "version": "40.0.0",
   "description": "El sistema de diseño de Studio LXD: componentes React, tokens y documentación de la suite SLXD.",
   "repository": {
     "type": "git",
@@ -456,6 +456,10 @@
     "./otp-input": {
       "types": "./dist/_types/atoms/OtpInput/OtpInput.d.ts",
       "import": "./dist/otp-input.js"
+    },
+    "./messages": {
+      "types": "./dist/_types/messages/index.d.ts",
+      "import": "./dist/messages.js"
     },
     "./pagination": {
       "types": "./dist/_types/molecules/Pagination/Pagination.d.ts",

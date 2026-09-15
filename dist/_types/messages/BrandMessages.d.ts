@@ -1,5 +1,4 @@
-import type { PaginationMessages } from '../stories/molecules/Pagination/Pagination';
-
+import type { PaginationMessages } from '../molecules/Pagination/Pagination';
 /**
  * El contrato de textos de la librería: un espacio por componente, y dentro
  * de cada espacio **todas las claves obligatorias**.
@@ -22,7 +21,6 @@ import type { PaginationMessages } from '../stories/molecules/Pagination/Paginat
  * compila.
  */
 export interface BrandMessages {
-  pagination: PaginationMessages;
+    pagination: PaginationMessages;
 }
-
 export type { PaginationMessages };

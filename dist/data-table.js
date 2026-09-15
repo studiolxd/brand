@@ -6,9 +6,9 @@ import { Pagination as n } from "./pagination.js";
 import { Table as r, TableBody as i, TableCell as a, TableHead as o, TableHeader as s, TableRow as c } from "./table.js";
 import { InputField as l } from "./input-field.js";
 import { EmptyState as u } from "./empty-state.js";
-import { jsx as d, jsxs as f } from "react/jsx-runtime";
-import * as p from "react";
-import { useId as m, useState as h } from "react";
+import * as d from "react";
+import { useId as f, useState as p } from "react";
+import { jsx as m, jsxs as h } from "react/jsx-runtime";
 //#region node_modules/.pnpm/@tanstack+table-core@8.21.3/node_modules/@tanstack/table-core/build/lib/index.mjs
 function g(e, t) {
 	return typeof e == "function" ? e(t) : e;
@@ -1526,7 +1526,7 @@ function ze() {
 //#endregion
 //#region node_modules/.pnpm/@tanstack+react-table@8.21.3_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/@tanstack/react-table/build/lib/index.mjs
 function Be(e, t) {
-	return e ? Ve(e) ? /* @__PURE__ */ p.createElement(e, t) : e : null;
+	return e ? Ve(e) ? /* @__PURE__ */ d.createElement(e, t) : e : null;
 }
 function Ve(e) {
 	return He(e) || typeof e == "function" || Ue(e);
@@ -1546,7 +1546,7 @@ function We(e) {
 		onStateChange: () => {},
 		renderFallbackValue: null,
 		...e
-	}, [n] = p.useState(() => ({ current: je(t) })), [r, i] = p.useState(() => n.current.initialState);
+	}, [n] = d.useState(() => ({ current: je(t) })), [r, i] = d.useState(() => n.current.initialState);
 	return n.current.setOptions((t) => ({
 		...t,
 		...e,
@@ -1565,11 +1565,11 @@ function Ge(e, t) {
 	let n = t.columnDef.meta?.align;
 	return n && n !== "start" ? `data-table__${e}--${n}` : "";
 }
-function Ke({ columns: p, data: g, ariaLabel: _, ariaLabelledBy: v, searchColumnId: y, search: b, searchPlaceholder: x, searchClearLabel: S, toolbar: C, footerActions: ee, pageSize: w = 10, emptyMessage: T = "Sin resultados", isLoading: te, pagination: E, headerLabels: D, paginationLabels: O, className: k }) {
+function Ke({ columns: d, data: g, ariaLabel: _, ariaLabelledBy: v, searchColumnId: y, search: b, searchPlaceholder: x, searchClearLabel: S, toolbar: C, footerActions: ee, pageSize: w = 10, emptyMessage: T = "Sin resultados", isLoading: te, pagination: E, headerLabels: D, paginationLabels: O, className: k }) {
 	"use no memo";
-	let [A, j] = h([]), [M, N] = h([]), P = We({
+	let [A, j] = p([]), [M, N] = p([]), P = We({
 		data: g,
-		columns: p,
+		columns: d,
 		state: {
 			sorting: A,
 			columnFilters: M
@@ -1583,13 +1583,13 @@ function Ke({ columns: p, data: g, ariaLabel: _, ariaLabelledBy: v, searchColumn
 			getPaginationRowModel: Re(),
 			initialState: { pagination: { pageSize: w } }
 		}
-	}), ne = E?.pageSize ?? w, F = x ?? "Buscar", I = `${m()}-search`;
-	return /* @__PURE__ */ f("div", {
+	}), ne = E?.pageSize ?? w, F = x ?? "Buscar", I = `${f()}-search`;
+	return /* @__PURE__ */ h("div", {
 		className: ["data-table", k].filter(Boolean).join(" "),
 		children: [
-			(y || b || C) && /* @__PURE__ */ f("div", {
+			(y || b || C) && /* @__PURE__ */ h("div", {
 				className: "data-table__toolbar",
-				children: [b ? /* @__PURE__ */ d(l, {
+				children: [b ? /* @__PURE__ */ m(l, {
 					className: "data-table__search",
 					id: I,
 					kind: "search",
@@ -1599,7 +1599,7 @@ function Ke({ columns: p, data: g, ariaLabel: _, ariaLabelledBy: v, searchColumn
 					...S ? { clearLabel: S } : {},
 					value: b.value,
 					onChange: (e) => b.onChange(e.target.value)
-				}) : y && /* @__PURE__ */ d(l, {
+				}) : y && /* @__PURE__ */ m(l, {
 					className: "data-table__search",
 					id: I,
 					kind: "search",
@@ -1609,40 +1609,40 @@ function Ke({ columns: p, data: g, ariaLabel: _, ariaLabelledBy: v, searchColumn
 					...S ? { clearLabel: S } : {},
 					value: P.getColumn(y)?.getFilterValue() ?? "",
 					onChange: (e) => P.getColumn(y)?.setFilterValue(e.target.value)
-				}), C && /* @__PURE__ */ d("div", {
+				}), C && /* @__PURE__ */ m("div", {
 					className: "data-table__toolbar-actions",
 					children: C
 				})]
 			}),
-			/* @__PURE__ */ d("div", {
+			/* @__PURE__ */ m("div", {
 				className: "data-table__scroll",
-				children: /* @__PURE__ */ f(r, {
+				children: /* @__PURE__ */ h(r, {
 					"aria-label": _,
 					"aria-labelledby": v,
 					"aria-busy": te || void 0,
-					children: [/* @__PURE__ */ d(o, { children: P.getHeaderGroups().map((t) => /* @__PURE__ */ d(c, { children: t.headers.map((t) => {
+					children: [/* @__PURE__ */ m(o, { children: P.getHeaderGroups().map((t) => /* @__PURE__ */ m(c, { children: t.headers.map((t) => {
 						let n = t.column.getIsSorted(), r = t.column.getCanSort(), i = Ge("header-cell", t.column), a = t.column.columnDef.meta?.headerHidden === !0, o = t.isPlaceholder ? null : Be(t.column.columnDef.header, t.getContext());
-						return /* @__PURE__ */ d(s, {
+						return /* @__PURE__ */ m(s, {
 							className: ["data-table__header-cell", i].filter(Boolean).join(" "),
 							sortable: r,
 							sorted: n === "asc" || n === "desc" ? n : !1,
 							onSort: r ? () => t.column.toggleSorting() : void 0,
 							sticky: t.column.columnDef.meta?.sticky,
 							...D,
-							children: a ? /* @__PURE__ */ d(e, { children: o }) : o
+							children: a ? /* @__PURE__ */ m(e, { children: o }) : o
 						}, t.id);
-					}) }, t.id)) }), /* @__PURE__ */ d(i, { children: te ? Array.from({ length: ne }).map((e, n) => /* @__PURE__ */ d(c, {
+					}) }, t.id)) }), /* @__PURE__ */ m(i, { children: te ? Array.from({ length: ne }).map((e, n) => /* @__PURE__ */ m(c, {
 						"aria-hidden": "true",
-						children: p.map((e, n) => /* @__PURE__ */ d(a, { children: /* @__PURE__ */ d(t, {}) }, n))
-					}, n)) : P.getRowModel().rows.length === 0 ? /* @__PURE__ */ d(c, { children: /* @__PURE__ */ d(a, {
-						colSpan: p.length,
-						children: /* @__PURE__ */ d(u, {
+						children: d.map((e, n) => /* @__PURE__ */ m(a, { children: /* @__PURE__ */ m(t, {}) }, n))
+					}, n)) : P.getRowModel().rows.length === 0 ? /* @__PURE__ */ m(c, { children: /* @__PURE__ */ m(a, {
+						colSpan: d.length,
+						children: /* @__PURE__ */ m(u, {
 							size: "sm",
 							title: T
 						})
-					}) }) : P.getRowModel().rows.map((e) => /* @__PURE__ */ d(c, {
+					}) }) : P.getRowModel().rows.map((e) => /* @__PURE__ */ m(c, {
 						selected: e.getIsSelected(),
-						children: e.getVisibleCells().map((e) => /* @__PURE__ */ d(a, {
+						children: e.getVisibleCells().map((e) => /* @__PURE__ */ m(a, {
 							className: ["data-table__cell", Ge("cell", e.column)].filter(Boolean).join(" "),
 							sticky: e.column.columnDef.meta?.sticky,
 							children: Be(e.column.columnDef.cell, e.getContext())
@@ -1650,9 +1650,9 @@ function Ke({ columns: p, data: g, ariaLabel: _, ariaLabelledBy: v, searchColumn
 					}, e.id)) })]
 				})
 			}),
-			/* @__PURE__ */ d("div", {
+			/* @__PURE__ */ m("div", {
 				className: "data-table__footer",
-				children: E ? /* @__PURE__ */ d(n, {
+				children: E ? /* @__PURE__ */ m(n, {
 					total: E.total,
 					page: E.page,
 					pageSize: E.pageSize,
@@ -1661,7 +1661,7 @@ function Ke({ columns: p, data: g, ariaLabel: _, ariaLabelledBy: v, searchColumn
 					showTotal: !0,
 					afterPageSize: ee,
 					...O
-				}) : /* @__PURE__ */ d(n, {
+				}) : /* @__PURE__ */ m(n, {
 					total: P.getFilteredRowModel().rows.length,
 					page: P.getState().pagination.pageIndex + 1,
 					pageSize: P.getState().pagination.pageSize,

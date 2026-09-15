@@ -2,7 +2,7 @@ import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { BrandMessagesProvider } from './BrandMessagesProvider';
 import type { BrandMessages } from './BrandMessages';
-import { Pagination } from '../stories/molecules/Pagination/Pagination';
+import { Pagination } from '../molecules/Pagination/Pagination';
 
 /**
  * El orden de resolución de un texto: **prop → proveedor → error**. Sin cuarto

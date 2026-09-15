@@ -6,54 +6,54 @@ import { Skeleton as n } from "./skeleton.js";
 import { Tooltip as r } from "./tooltip.js";
 import { Alert as i } from "./alert.js";
 import { EmptyState as a } from "./empty-state.js";
-import { jsx as o, jsxs as s } from "react/jsx-runtime";
-import { forwardRef as c, useState as l } from "react";
+import { forwardRef as o, useState as s } from "react";
+import { jsx as c, jsxs as l } from "react/jsx-runtime";
 //#region src/stories/molecules/ConversationList/ConversationList.tsx
 function u(e) {
 	return e.scrollWidth > e.clientWidth + 1;
 }
-var d = c(function({ conversations: c, activeId: d, onNew: f, onSelect: p, onDelete: m, newLabel: h = "Nueva conversación", navLabel: g = "Conversaciones", deleteLabel: _ = (e) => `Eliminar conversación "${e}"`, isLoading: v = !1, loadingCount: y = 4, error: b, emptyMessage: x = "Todavía no hay conversaciones", errorTitle: S = "No se pudieron cargar las conversaciones", className: C, ...w }, T) {
-	let [E, D] = l(null), O = b === void 0 ? v ? "loading" : c.length === 0 ? "empty" : "list" : "error";
-	return /* @__PURE__ */ s("div", {
+var d = o(function({ conversations: o, activeId: d, onNew: f, onSelect: p, onDelete: m, newLabel: h = "Nueva conversación", navLabel: g = "Conversaciones", deleteLabel: _ = (e) => `Eliminar conversación "${e}"`, isLoading: v = !1, loadingCount: y = 4, error: b, emptyMessage: x = "Todavía no hay conversaciones", errorTitle: S = "No se pudieron cargar las conversaciones", className: C, ...w }, T) {
+	let [E, D] = s(null), O = b === void 0 ? v ? "loading" : o.length === 0 ? "empty" : "list" : "error";
+	return /* @__PURE__ */ l("div", {
 		ref: T,
 		className: `conversation-list${C ? ` ${C}` : ""}`,
 		...w,
-		children: [/* @__PURE__ */ o("div", {
+		children: [/* @__PURE__ */ c("div", {
 			className: "conversation-list__header",
-			children: /* @__PURE__ */ o(t, {
+			children: /* @__PURE__ */ c(t, {
 				variant: "outline",
 				block: !0,
 				onClick: f,
 				children: h
 			})
-		}), /* @__PURE__ */ s("nav", {
+		}), /* @__PURE__ */ l("nav", {
 			"aria-label": g,
 			className: "conversation-list__nav",
 			"aria-busy": v || void 0,
 			children: [
-				O === "error" && /* @__PURE__ */ o(i, {
+				O === "error" && /* @__PURE__ */ c(i, {
 					variant: "error",
 					title: S,
 					description: b,
 					className: "conversation-list__state"
 				}),
-				O === "loading" && /* @__PURE__ */ o("div", {
+				O === "loading" && /* @__PURE__ */ c("div", {
 					className: "conversation-list__loading",
-					children: Array.from({ length: y }, (e, t) => /* @__PURE__ */ o(n, {}, t))
+					children: Array.from({ length: y }, (e, t) => /* @__PURE__ */ c(n, {}, t))
 				}),
-				O === "empty" && /* @__PURE__ */ o(a, {
+				O === "empty" && /* @__PURE__ */ c(a, {
 					size: "sm",
 					title: x,
 					className: "conversation-list__state"
 				}),
-				O === "list" && /* @__PURE__ */ o("ul", {
+				O === "list" && /* @__PURE__ */ c("ul", {
 					className: "conversation-list__items",
 					role: "list",
-					children: c.map((n) => {
+					children: o.map((n) => {
 						let i = n.id === d;
-						return /* @__PURE__ */ s("li", {
+						return /* @__PURE__ */ l("li", {
 							className: "conversation-list__item",
-							children: [/* @__PURE__ */ o(r, {
+							children: [/* @__PURE__ */ c(r, {
 								label: n.label,
 								describe: !1,
 								open: E === n.id,
@@ -68,14 +68,14 @@ var d = c(function({ conversations: c, activeId: d, onNew: f, onSelect: p, onDel
 									u(e.currentTarget) && D(n.id);
 								},
 								onBlur: () => D(null),
-								children: /* @__PURE__ */ o("button", {
+								children: /* @__PURE__ */ c("button", {
 									type: "button",
 									className: `conversation-list__label${i ? " conversation-list__label--active" : ""}`,
 									"aria-current": i ? "page" : void 0,
 									onClick: () => p(n.id),
 									children: n.label
 								})
-							}), /* @__PURE__ */ o(t, {
+							}), /* @__PURE__ */ c(t, {
 								variant: "ghost",
 								size: "sm",
 								iconOnly: !0,
@@ -84,7 +84,7 @@ var d = c(function({ conversations: c, activeId: d, onNew: f, onSelect: p, onDel
 								onClick: (e) => {
 									e.stopPropagation(), m(n.id);
 								},
-								children: /* @__PURE__ */ o(e, {
+								children: /* @__PURE__ */ c(e, {
 									name: "close",
 									size: "sm"
 								})

@@ -1,14 +1,14 @@
 import './site-shell.css';
-import { jsx as e, jsxs as t } from "react/jsx-runtime";
-import { forwardRef as n } from "react";
+import { forwardRef as e } from "react";
+import { jsx as t, jsxs as n } from "react/jsx-runtime";
 //#region src/stories/sections/SiteShell/SiteShell.tsx
-var r = n(function({ header: n, footer: r, children: i, className: a }, o) {
-	return /* @__PURE__ */ t("div", {
+var r = e(function({ header: e, footer: r, children: i, className: a }, o) {
+	return /* @__PURE__ */ n("div", {
 		ref: o,
 		className: ["site-shell", a].filter(Boolean).join(" "),
 		children: [
-			n,
-			/* @__PURE__ */ e("div", {
+			e,
+			/* @__PURE__ */ t("div", {
 				className: "site-shell__main",
 				children: i
 			}),

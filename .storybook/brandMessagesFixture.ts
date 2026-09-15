@@ -1,4 +1,4 @@
-import type { BrandMessages } from '../src/messages/BrandMessages';
+import type { BrandMessages } from '../src/stories/messages/BrandMessages';
 
 /**
  * Los textos del catálogo, en castellano, **para el Storybook y solo para él**.
@@ -9,7 +9,7 @@ import type { BrandMessages } from '../src/messages/BrandMessages';
  * de `src/`, no es punto de entrada de la librería, no lo importa ningún
  * componente y `package.json#files` solo publica `dist/`, `src/tokens/` y el
  * `CHANGELOG` — así que ningún código de un consumidor puede caer aquí.
- * Lo vigila `src/messages/BrandMessages.test.ts`.
+ * Lo vigila `src/stories/messages/BrandMessages.test.ts`.
  *
  * El Storybook necesita un catálogo porque es la aplicación que monta los
  * componentes: sin proveedor, un paginador sin props revienta — que es

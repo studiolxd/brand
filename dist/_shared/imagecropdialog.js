@@ -3,8 +3,8 @@ import { Spinner as e } from "../spinner.js";
 import { Button as t } from "../button.js";
 import { Alert as n } from "../alert.js";
 import { Modal as r } from "../modal.js";
-import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
-import s, { PureComponent as c, createRef as l, useRef as u, useState as d } from "react";
+import i, { PureComponent as a, createRef as o, useRef as s, useState as c } from "react";
+import { Fragment as l, jsx as u, jsxs as d } from "react/jsx-runtime";
 //#region node_modules/.pnpm/react-image-crop@11.1.2_react@19.2.4/node_modules/react-image-crop/dist/index.js
 var f = {
 	x: 0,
@@ -72,7 +72,7 @@ function x(e, t, n, r) {
 var S = {
 	capture: !0,
 	passive: !1
-}, C = 0, w = class e extends c {
+}, C = 0, w = class e extends a {
 	static xOrds = ["e", "w"];
 	static yOrds = ["n", "s"];
 	static xyOrds = [
@@ -110,8 +110,8 @@ var S = {
 		clientY: 0,
 		isResize: !0
 	};
-	componentRef = l();
-	mediaRef = l();
+	componentRef = o();
+	mediaRef = o();
 	resizeObserver;
 	initChangeCalled = !1;
 	instanceId = `rc-${C++}`;
@@ -277,8 +277,8 @@ var S = {
 		return n || e.xyOrds.indexOf(u) > -1 ? c = h : e.xOrds.indexOf(u) > -1 ? (c.x = h.x, c.width = h.width) : e.yOrds.indexOf(u) > -1 && (c.y = h.y, c.height = h.height), c.x = p(c.x, 0, a.width - c.width), c.y = p(c.y, 0, a.height - c.height), c;
 	}
 	renderCropSelection() {
-		let { ariaLabels: t = e.defaultProps.ariaLabels, disabled: n, locked: r, renderSelectionAddon: i, ruleOfThirds: a, crop: o } = this.props, c = this.getCropStyle();
-		if (o) return /* @__PURE__ */ s.createElement("div", {
+		let { ariaLabels: t = e.defaultProps.ariaLabels, disabled: n, locked: r, renderSelectionAddon: a, ruleOfThirds: o, crop: s } = this.props, c = this.getCropStyle();
+		if (s) return /* @__PURE__ */ i.createElement("div", {
 			style: c,
 			className: "ReactCrop__crop-selection",
 			onPointerDown: this.onCropPointerDown,
@@ -286,81 +286,81 @@ var S = {
 			tabIndex: 0,
 			onKeyDown: this.onComponentKeyDown,
 			role: "group"
-		}, !n && !r && /* @__PURE__ */ s.createElement("div", {
+		}, !n && !r && /* @__PURE__ */ i.createElement("div", {
 			className: "ReactCrop__drag-elements",
 			onFocus: this.onDragFocus
-		}, /* @__PURE__ */ s.createElement("div", {
+		}, /* @__PURE__ */ i.createElement("div", {
 			className: "ReactCrop__drag-bar ord-n",
 			"data-ord": "n"
-		}), /* @__PURE__ */ s.createElement("div", {
+		}), /* @__PURE__ */ i.createElement("div", {
 			className: "ReactCrop__drag-bar ord-e",
 			"data-ord": "e"
-		}), /* @__PURE__ */ s.createElement("div", {
+		}), /* @__PURE__ */ i.createElement("div", {
 			className: "ReactCrop__drag-bar ord-s",
 			"data-ord": "s"
-		}), /* @__PURE__ */ s.createElement("div", {
+		}), /* @__PURE__ */ i.createElement("div", {
 			className: "ReactCrop__drag-bar ord-w",
 			"data-ord": "w"
-		}), /* @__PURE__ */ s.createElement("div", {
+		}), /* @__PURE__ */ i.createElement("div", {
 			className: "ReactCrop__drag-handle ord-nw",
 			"data-ord": "nw",
 			tabIndex: 0,
 			"aria-label": t.nwDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "nw"),
 			role: "button"
-		}), /* @__PURE__ */ s.createElement("div", {
+		}), /* @__PURE__ */ i.createElement("div", {
 			className: "ReactCrop__drag-handle ord-n",
 			"data-ord": "n",
 			tabIndex: 0,
 			"aria-label": t.nDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "n"),
 			role: "button"
-		}), /* @__PURE__ */ s.createElement("div", {
+		}), /* @__PURE__ */ i.createElement("div", {
 			className: "ReactCrop__drag-handle ord-ne",
 			"data-ord": "ne",
 			tabIndex: 0,
 			"aria-label": t.neDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "ne"),
 			role: "button"
-		}), /* @__PURE__ */ s.createElement("div", {
+		}), /* @__PURE__ */ i.createElement("div", {
 			className: "ReactCrop__drag-handle ord-e",
 			"data-ord": "e",
 			tabIndex: 0,
 			"aria-label": t.eDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "e"),
 			role: "button"
-		}), /* @__PURE__ */ s.createElement("div", {
+		}), /* @__PURE__ */ i.createElement("div", {
 			className: "ReactCrop__drag-handle ord-se",
 			"data-ord": "se",
 			tabIndex: 0,
 			"aria-label": t.seDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "se"),
 			role: "button"
-		}), /* @__PURE__ */ s.createElement("div", {
+		}), /* @__PURE__ */ i.createElement("div", {
 			className: "ReactCrop__drag-handle ord-s",
 			"data-ord": "s",
 			tabIndex: 0,
 			"aria-label": t.sDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "s"),
 			role: "button"
-		}), /* @__PURE__ */ s.createElement("div", {
+		}), /* @__PURE__ */ i.createElement("div", {
 			className: "ReactCrop__drag-handle ord-sw",
 			"data-ord": "sw",
 			tabIndex: 0,
 			"aria-label": t.swDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "sw"),
 			role: "button"
-		}), /* @__PURE__ */ s.createElement("div", {
+		}), /* @__PURE__ */ i.createElement("div", {
 			className: "ReactCrop__drag-handle ord-w",
 			"data-ord": "w",
 			tabIndex: 0,
 			"aria-label": t.wDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "w"),
 			role: "button"
-		})), i && /* @__PURE__ */ s.createElement("div", {
+		})), a && /* @__PURE__ */ i.createElement("div", {
 			className: "ReactCrop__selection-addon",
 			onPointerDown: (e) => e.stopPropagation()
-		}, i(this.state)), a && /* @__PURE__ */ s.createElement(s.Fragment, null, /* @__PURE__ */ s.createElement("div", { className: "ReactCrop__rule-of-thirds-hz" }), /* @__PURE__ */ s.createElement("div", { className: "ReactCrop__rule-of-thirds-vt" })));
+		}, a(this.state)), o && /* @__PURE__ */ i.createElement(i.Fragment, null, /* @__PURE__ */ i.createElement("div", { className: "ReactCrop__rule-of-thirds-hz" }), /* @__PURE__ */ i.createElement("div", { className: "ReactCrop__rule-of-thirds-vt" })));
 	}
 	makePixelCrop(e) {
 		return y({
@@ -369,36 +369,36 @@ var S = {
 		}, e.width, e.height);
 	}
 	render() {
-		let { aspect: e, children: t, circularCrop: n, className: r, crop: i, disabled: a, locked: o, style: c, ruleOfThirds: l } = this.props, { cropIsActive: u, newCropIsBeingDrawn: d } = this.state, f = i ? this.renderCropSelection() : null, p = m("ReactCrop", r, u && "ReactCrop--active", a && "ReactCrop--disabled", o && "ReactCrop--locked", d && "ReactCrop--new-crop", i && e && "ReactCrop--fixed-aspect", i && n && "ReactCrop--circular-crop", i && l && "ReactCrop--rule-of-thirds", !this.dragStarted && i && !i.width && !i.height && "ReactCrop--invisible-crop", n && "ReactCrop--no-animate");
-		return /* @__PURE__ */ s.createElement("div", {
+		let { aspect: e, children: t, circularCrop: n, className: r, crop: a, disabled: o, locked: s, style: c, ruleOfThirds: l } = this.props, { cropIsActive: u, newCropIsBeingDrawn: d } = this.state, f = a ? this.renderCropSelection() : null, p = m("ReactCrop", r, u && "ReactCrop--active", o && "ReactCrop--disabled", s && "ReactCrop--locked", d && "ReactCrop--new-crop", a && e && "ReactCrop--fixed-aspect", a && n && "ReactCrop--circular-crop", a && l && "ReactCrop--rule-of-thirds", !this.dragStarted && a && !a.width && !a.height && "ReactCrop--invisible-crop", n && "ReactCrop--no-animate");
+		return /* @__PURE__ */ i.createElement("div", {
 			ref: this.componentRef,
 			className: p,
 			style: c
-		}, /* @__PURE__ */ s.createElement("div", {
+		}, /* @__PURE__ */ i.createElement("div", {
 			ref: this.mediaRef,
 			className: "ReactCrop__child-wrapper",
 			onPointerDown: this.onComponentPointerDown
-		}, t), i ? /* @__PURE__ */ s.createElement("svg", {
+		}, t), a ? /* @__PURE__ */ i.createElement("svg", {
 			className: "ReactCrop__crop-mask",
 			width: "100%",
 			height: "100%"
-		}, /* @__PURE__ */ s.createElement("defs", null, /* @__PURE__ */ s.createElement("mask", { id: `hole-${this.instanceId}` }, /* @__PURE__ */ s.createElement("rect", {
+		}, /* @__PURE__ */ i.createElement("defs", null, /* @__PURE__ */ i.createElement("mask", { id: `hole-${this.instanceId}` }, /* @__PURE__ */ i.createElement("rect", {
 			width: "100%",
 			height: "100%",
 			fill: "white"
-		}), n ? /* @__PURE__ */ s.createElement("ellipse", {
-			cx: `${i.x + i.width / 2}${i.unit}`,
-			cy: `${i.y + i.height / 2}${i.unit}`,
-			rx: `${i.width / 2}${i.unit}`,
-			ry: `${i.height / 2}${i.unit}`,
+		}), n ? /* @__PURE__ */ i.createElement("ellipse", {
+			cx: `${a.x + a.width / 2}${a.unit}`,
+			cy: `${a.y + a.height / 2}${a.unit}`,
+			rx: `${a.width / 2}${a.unit}`,
+			ry: `${a.height / 2}${a.unit}`,
 			fill: "black"
-		}) : /* @__PURE__ */ s.createElement("rect", {
-			x: `${i.x}${i.unit}`,
-			y: `${i.y}${i.unit}`,
-			width: `${i.width}${i.unit}`,
-			height: `${i.height}${i.unit}`,
+		}) : /* @__PURE__ */ i.createElement("rect", {
+			x: `${a.x}${a.unit}`,
+			y: `${a.y}${a.unit}`,
+			width: `${a.width}${a.unit}`,
+			height: `${a.height}${a.unit}`,
 			fill: "black"
-		}))), /* @__PURE__ */ s.createElement("rect", {
+		}))), /* @__PURE__ */ i.createElement("rect", {
 			fill: "black",
 			fillOpacity: .5,
 			width: "100%",
@@ -431,9 +431,9 @@ function E(e, t, n) {
 }
 //#endregion
 //#region src/stories/molecules/ImageCropDialog/ImageCropDialog.tsx
-function D({ sourceUrl: s, title: c, description: l, circularCrop: f = !1, aspect: p = 1, outputSize: m = 512, outputMimeType: h, busy: g = !1, cancelLabel: _, confirmLabel: v, closeLabel: y, loadingLabel: b = "Cargando imagen…", errorMessage: x = "No hemos podido cargar la imagen. Prueba con otro archivo.", onConfirm: S, onClose: C, className: D }) {
-	let O = u(null), [k, A] = d(), [j, M] = d(), [N, P] = d("loading"), [F, I] = d(s);
-	s !== F && (I(s), P("loading"), A(void 0), M(void 0));
+function D({ sourceUrl: i, title: a, description: o, circularCrop: f = !1, aspect: p = 1, outputSize: m = 512, outputMimeType: h, busy: g = !1, cancelLabel: _, confirmLabel: v, closeLabel: y, loadingLabel: b = "Cargando imagen…", errorMessage: x = "No hemos podido cargar la imagen. Prueba con otro archivo.", onConfirm: S, onClose: C, className: D }) {
+	let O = s(null), [k, A] = c(), [j, M] = c(), [N, P] = c("loading"), [F, I] = c(i);
+	i !== F && (I(i), P("loading"), A(void 0), M(void 0));
 	let L = () => {
 		A(void 0), M(void 0), C();
 	}, R = async () => {
@@ -443,40 +443,40 @@ function D({ sourceUrl: s, title: c, description: l, circularCrop: f = !1, aspec
 			outputSize: m
 		})), L());
 	};
-	return /* @__PURE__ */ a(r, {
-		open: s !== null,
+	return /* @__PURE__ */ u(r, {
+		open: i !== null,
 		onClose: () => {
 			g || L();
 		},
-		title: c,
+		title: a,
 		...y ? { closeLabel: y } : {},
-		...l == null ? {} : { description: l },
+		...o == null ? {} : { description: o },
 		footerClassName: "image-crop-dialog__actions",
-		footer: /* @__PURE__ */ o(i, { children: [/* @__PURE__ */ a(t, {
+		footer: /* @__PURE__ */ d(l, { children: [/* @__PURE__ */ u(t, {
 			variant: "outline",
 			disabled: g,
 			onClick: L,
 			children: _
-		}), /* @__PURE__ */ a(t, {
+		}), /* @__PURE__ */ u(t, {
 			disabled: g || !j?.width,
 			onClick: R,
 			children: v
 		})] }),
-		children: /* @__PURE__ */ a("div", {
+		children: /* @__PURE__ */ u("div", {
 			className: ["image-crop-dialog", D].filter(Boolean).join(" "),
-			children: /* @__PURE__ */ o("div", {
+			children: /* @__PURE__ */ d("div", {
 				className: "image-crop-dialog__area",
 				children: [
-					N === "loading" && /* @__PURE__ */ a(e, {
+					N === "loading" && /* @__PURE__ */ u(e, {
 						size: "lg",
 						label: b
 					}),
-					N === "error" && /* @__PURE__ */ a(n, {
+					N === "error" && /* @__PURE__ */ u(n, {
 						variant: "error",
 						description: x,
 						className: "image-crop-dialog__error"
 					}),
-					s && N !== "error" && /* @__PURE__ */ a(w, {
+					i && N !== "error" && /* @__PURE__ */ u(w, {
 						crop: k,
 						onChange: (e, t) => A(t),
 						onComplete: (e) => M(e),
@@ -484,9 +484,9 @@ function D({ sourceUrl: s, title: c, description: l, circularCrop: f = !1, aspec
 						circularCrop: f,
 						minWidth: 64,
 						keepSelection: !0,
-						children: /* @__PURE__ */ a("img", {
+						children: /* @__PURE__ */ u("img", {
 							ref: O,
-							src: s,
+							src: i,
 							alt: "",
 							onLoad: (e) => {
 								let { width: t, height: n } = e.currentTarget;
