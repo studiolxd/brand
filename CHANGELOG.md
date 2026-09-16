@@ -7,6 +7,25 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.3.1] — 2026-09-17
+
+> **Patch.** La v49.0.1 estrechó a `:where(.link)` el `inline-size: fit-content` que evita
+> que un enlace suelto se estire dentro de un `Stack` — necesario para no encoger el `<a>`
+> que es pieza de otro componente (`menu__item`, `card`…). Pero dejó fuera el `<a>` de un
+> router de Server Component sin `class="link"` (el `Link` de next-intl, p. ej., que en RSC
+> no admite `render` sobre el `Link` de brand sin romper el prerender): el «← Volver» sobre
+> un `PageIntro` seguía necesitando un `Inline` envolvente para no estirar su subrayado por
+> toda la página.
+
+### El arreglo
+
+Nueva regla en `Link.css`, `:where(.stack > a:not([class]))`, aparte de `:where(.link)`:
+solo alcanza al `<a>` que es hijo DIRECTO de un `Stack` y no lleva ninguna clase. El `<a>`
+que es pieza de otro componente trae siempre su propia clase BEM (barrido en la v49.0.1),
+así que queda fuera sin tocarlo. Story de contrato nueva (`tags: ['!dev']`) en
+`Atoms/Stack` — «enlace suelto sin clase, hijo directo de un Stack, no se estira» — con el
+caso del «← Volver» sobre un `PageIntro` dentro de un `Stack align="stretch"`.
+
 ## [49.3.0] — 2026-09-17
 
 > **Minor.** Norma de redacción cerrada para el estado vacío: `EmptyState.title` nunca

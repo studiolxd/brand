@@ -59,6 +59,19 @@ a:where(:not(.button)),
   inline-size: fit-content;
 }
 
+/* El mismo caso, pero sin `class="link"`: el `<a>` de un router de Server
+   Component (el `Link` de next-intl, p. ej.) no puede llevar `render` sobre
+   el `Link` de brand sin romper el prerender — sigue siendo un `<a>` pelado.
+   Cuando ese `<a>` es hijo DIRECTO de un `.stack` (el "← Volver" sobre un
+   `PageIntro`), necesita el mismo ancho de contenido: si no, su subrayado
+   cruza la página entera. `:not([class])` lo acota a lo que de verdad va sin
+   vestir — cualquier `<a>` que sea pieza de otro componente (`menu__item`,
+   `breadcrumb__link`…) trae su propia clase BEM y queda fuera, así que
+   conserva el ancho de su layout igual que antes de esta regla. */
+:where(.stack > a:not([class])) {
+  inline-size: fit-content;
+}
+
 a:where(:not(.button)):hover,
 :where(.link):hover {
   color: var(--link-hover-color);

@@ -105,6 +105,31 @@ export const Contrato: Story = {
 };
 
 /**
+ * El «← Volver» de un router en Server Component (el `Link` de next-intl, p.
+ * ej.) es un `<a>` pelado: sin `class="link"`, porque en RSC no se puede
+ * envolverlo con `render` sobre el `Link` de brand sin romper el prerender.
+ * Como hijo directo de un `Stack`, no necesita un `Inline` alrededor para no
+ * estirarse — su subrayado no cruza la página.
+ */
+export const ContratoEnlaceSueltoSinClase: Story = {
+  name: 'Test — enlace suelto sin clase, hijo directo de un Stack, no se estira',
+  tags: ['!dev'],
+  render: () => (
+    <Stack align="stretch">
+      <a href="#volver">← Volver</a>
+      <PageIntro title="Solicitud #4821" description="Detalle de la licitación." />
+    </Stack>
+  ),
+  play: async ({ canvasElement }) => {
+    const stack = canvasElement.querySelector('.stack') as HTMLElement;
+    const link = stack.querySelector('a') as HTMLAnchorElement;
+    await expect(link).not.toHaveAttribute('class');
+    await expect(getComputedStyle(link).inlineSize).not.toBe('auto');
+    await expect(link.getBoundingClientRect().width).toBeLessThan(stack.getBoundingClientRect().width);
+  },
+};
+
+/**
  * La pila puede ser el grupo con nombre accesible: `role` y `aria-label` viajan
  * al `<div>`, sin necesidad de un `Fieldset` ni de un `<section>` alrededor.
  */
