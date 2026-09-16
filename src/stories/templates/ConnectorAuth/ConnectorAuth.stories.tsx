@@ -253,6 +253,8 @@ export const SinMarco: Story = {
     redirectHost: 'claude.ai',
     action: '/api/mcp/authorize',
     shell: false,
+    ...ALCANCE,
+    ...FRASES,
   },
 };
 
