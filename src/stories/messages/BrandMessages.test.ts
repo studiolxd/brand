@@ -332,6 +332,102 @@ describe.each([
     'src/stories/molecules/CalendarRoster/CalendarRoster.tsx',
     ["'Mes anterior'", "'Mes siguiente'"],
   ],
+  [
+    'MessageComposer',
+    'src/stories/molecules/MessageComposer/MessageComposer.tsx',
+    ["'Escribe un mensaje…'", "'Enviar'"],
+  ],
+  [
+    'ConversationList',
+    'src/stories/molecules/ConversationList/ConversationList.tsx',
+    [
+      "'Nueva conversación'",
+      "'Conversaciones'",
+      'Eliminar conversación',
+      "'Todavía no hay conversaciones'",
+      "'No se pudieron cargar las conversaciones'",
+    ],
+  ],
+  [
+    'ConversationThread',
+    'src/stories/organisms/ConversationThread/ConversationThread.tsx',
+    ["'Conversación'"],
+  ],
+  [
+    // La frase del estado de escritura tiene dos mitades: el verbo es del
+    // catálogo y el nombre viene en `name`. Ninguna de las dos se cablea.
+    'TypingIndicator',
+    'src/stories/atoms/TypingIndicator/TypingIndicator.tsx',
+    ['El asistente está escribiendo', 'está escribiendo'],
+  ],
+  [
+    'AnnotationThread',
+    'src/stories/organisms/AnnotationThread/AnnotationThread.tsx',
+    ["'Hilo de anotaciones'", "'Abierta'", "'Atendida'", "'Resuelta'", "'editada'", 'respuesta'],
+  ],
+  [
+    'ChatShell',
+    'src/stories/templates/ChatShell/ChatShell.tsx',
+    ["'Conversaciones'", "'Abrir conversaciones'"],
+  ],
+  [
+    'UntrustedText',
+    'src/stories/templates/ConnectorAuth/UntrustedText.tsx',
+    ["'Ver el valor completo'", "'Ver menos'", "['«', '»']"],
+  ],
+  [
+    // Ni el cromo (que sale del catálogo) ni lo que afirma qué se concede (que
+    // es prop obligatoria): de la ficha no puede quedar nada en castellano.
+    'ConnectorRequestSummary',
+    'src/stories/templates/ConnectorAuth/ConnectorRequestSummary.tsx',
+    ["'Herramienta'", "'Producto'", "'Cuenta'", "'Permiso'", "'Destino'", 'leer los datos de este producto'],
+  ],
+  [
+    'ConnectorConsentPage',
+    'src/stories/templates/ConnectorAuth/ConnectorConsentPage.tsx',
+    [
+      "'Conectar una herramienta'",
+      "'Permitir acceso'",
+      "'Denegar'",
+      'quiere {what}',
+      'El acceso se enviará a',
+      'leer los datos de este producto',
+    ],
+  ],
+  [
+    'ConnectorSignInPage',
+    'src/stories/templates/ConnectorAuth/ConnectorSignInPage.tsx',
+    ["'Inicia sesión para continuar'", "'Iniciar sesión'", "'este producto'", 'quiere conectarse a'],
+  ],
+  [
+    'ConnectorExternalSignInPage',
+    'src/stories/templates/ConnectorAuth/ConnectorExternalSignInPage.tsx',
+    [
+      "'tu Moodle'",
+      "'Autorizar la conexión'",
+      "'Tu organización'",
+      'Iniciar sesión con',
+      'Iniciarás sesión en',
+      'solicita acceso a',
+    ],
+  ],
+  [
+    // Los cinco motivos salían de un `Record` con veinte cadenas castellanas
+    // dentro. Desde la v49 los pone el producto: no puede volver ninguna.
+    'ConnectorRejectionPage',
+    'src/stories/templates/ConnectorAuth/ConnectorRejectionPage.tsx',
+    [
+      "'Código'",
+      'Esta herramienta no está registrada',
+      'La dirección de retorno no está permitida',
+      'La petición está incompleta',
+      'No se ha dado acceso',
+      'La sesión ha caducado',
+      'Volver a la herramienta',
+      'Volver a intentarlo',
+      "'Iniciar sesión'",
+    ],
+  ],
 ])('%s no trae textos puestos', (_componente, ruta, textos) => {
   const fuente = readFileSync(join(repoRoot, ruta), 'utf8');
   // Solo el cuerpo: el JSDoc de las props nombra los textos para explicarlos.

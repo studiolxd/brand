@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { AssistantMessage } from './AssistantMessage';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 /** Un instante fijo, para que la story no cambie entre ejecuciones. */
 const MOMENTO = new Date('2026-08-27T14:33:00Z');
@@ -12,6 +14,9 @@ const meta = {
   args: {
     children: 'Hola, soy tu asistente. ¿En qué puedo ayudarte hoy?',
     model: 'Claude Opus 5',
+    // Quién escribe mientras se genera la respuesta: contenido del producto,
+    // no cromo del sistema. El verbo lo pone `typingIndicator.typing`.
+    streamingName: 'Ola',
   },
   decorators: [
     (Story) => (
@@ -53,8 +58,8 @@ export const ContratoTiempo: Story = {
   tags: ['!dev'],
   render: () => (
     <>
-      <AssistantMessage timestamp={MOMENTO}>Terminado</AssistantMessage>
-      <AssistantMessage timestamp={MOMENTO} isStreaming streamingLabel="Escribiendo" />
+      <AssistantMessage timestamp={MOMENTO} streamingName="Ola">Terminado</AssistantMessage>
+      <AssistantMessage timestamp={MOMENTO} streamingName="Ola" isStreaming streamingLabel="Escribiendo" />
     </>
   ),
   play: async ({ canvasElement }) => {
@@ -69,7 +74,7 @@ export const ContratoModelo: Story = {
   name: 'Test — el modelo firma la respuesta en texto',
   tags: ['!dev'],
   render: () => (
-    <AssistantMessage model="Claude Opus 5" className="propia" data-testid="mensaje">
+    <AssistantMessage model="Claude Opus 5" streamingName="Ola" className="propia" data-testid="mensaje">
       Respuesta
     </AssistantMessage>
   ),
@@ -79,5 +84,34 @@ export const ContratoModelo: Story = {
     const el = canvas.getByTestId('mensaje');
     await expect(el).toHaveClass('assistant-message');
     await expect(el).toHaveClass('propia');
+  },
+};
+
+/**
+ * El mensaje **no tiene textos propios**: lo único que emite por su cuenta es
+ * el estado de escritura, y ese lo pinta el `TypingIndicator` con la plantilla
+ * del catálogo (`typingIndicator.typing`) y el nombre que llega en
+ * `streamingName`. Con el catálogo en inglés, «Ola is typing…».
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <AssistantMessage model="Claude Opus 5" streamingName="Ola" isStreaming />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el estado de escritura sale del catálogo, con el nombre de la prop. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el estado de escritura lee del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <AssistantMessage model="Claude Opus 5" streamingName="Ola" isStreaming />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    await expect(within(canvasElement).getByRole('status')).toHaveTextContent('Ola is typing…');
   },
 };

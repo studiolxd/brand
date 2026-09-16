@@ -1,102 +1,103 @@
 'use client';
 import './chat-shell.css';
-import { Icon as e } from "./icon.js";
-import { Button as t } from "./button.js";
-import { Sheet as n } from "./sheet.js";
-import { forwardRef as r, useCallback as i, useEffect as a, useState as o } from "react";
-import { jsx as s, jsxs as c } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Icon as t } from "./icon.js";
+import { Button as n } from "./button.js";
+import { Sheet as r } from "./sheet.js";
+import { forwardRef as i, useCallback as a, useEffect as o, useState as s } from "react";
+import { jsx as c, jsxs as l } from "react/jsx-runtime";
 //#region src/stories/templates/ChatShell/ChatShell.tsx
-var l = "(min-width: 1024px)", u = r(function({ list: r, header: u, children: d, composer: f, listLabel: p = "Conversaciones", listTriggerLabel: m = "Abrir conversaciones", listOpen: h, onListOpenChange: g, className: _, ...v }, y) {
-	let [b, x] = o(() => typeof window > "u" ? !0 : window.matchMedia(l).matches), [S, C] = o(!1), [w, T] = o(null), E = i((e) => {
-		T(e), typeof y == "function" ? y(e) : y && (y.current = e);
-	}, [y]);
-	a(() => {
-		let e = window.matchMedia(l), t = () => {
-			x(e.matches), e.matches && C(!1);
+var u = "(min-width: 1024px)", d = i(function({ list: i, header: d, children: f, composer: p, listLabel: m, listTriggerLabel: h, listOpen: g, onListOpenChange: _, className: v, ...y }, b) {
+	let x = e("chatShell"), [S, C] = s(() => typeof window > "u" ? !0 : window.matchMedia(u).matches), [w, T] = s(!1), [E, D] = s(null), O = a((e) => {
+		D(e), typeof b == "function" ? b(e) : b && (b.current = e);
+	}, [b]);
+	o(() => {
+		let e = window.matchMedia(u), t = () => {
+			C(e.matches), e.matches && T(!1);
 		};
 		return t(), e.addEventListener("change", t), () => e.removeEventListener("change", t);
 	}, []);
-	let D = i((e) => {
-		h === void 0 && C(e), g?.(e);
-	}, [h, g]), O = !b && (h ?? S), k = r != null && b, A = r != null && !b;
-	return /* @__PURE__ */ c("div", {
-		ref: E,
+	let k = a((e) => {
+		g === void 0 && T(e), _?.(e);
+	}, [g, _]), A = !S && (g ?? w), j = i != null && S, M = i != null && !S;
+	return /* @__PURE__ */ l("div", {
+		ref: O,
 		className: [
 			"chat-shell",
-			k ? "chat-shell--with-list" : "",
-			_ ?? ""
+			j ? "chat-shell--with-list" : "",
+			v ?? ""
 		].filter(Boolean).join(" "),
-		...v,
+		...y,
 		children: [
-			k && /* @__PURE__ */ s("aside", {
+			j && /* @__PURE__ */ c("aside", {
 				className: "chat-shell__list",
-				"aria-label": p,
-				children: r
+				"aria-label": x("list", m),
+				children: i
 			}),
-			/* @__PURE__ */ c("div", {
+			/* @__PURE__ */ l("div", {
 				className: "chat-shell__main",
 				children: [
-					(u || A) && /* @__PURE__ */ c("header", {
+					(d || M) && /* @__PURE__ */ l("header", {
 						className: "chat-shell__header",
-						children: [A && /* @__PURE__ */ s(t, {
+						children: [M && /* @__PURE__ */ c(n, {
 							variant: "ghost",
 							size: "sm",
 							iconOnly: !0,
-							"aria-label": m,
+							"aria-label": x("listTrigger", h),
 							"aria-haspopup": "dialog",
-							"aria-expanded": O,
+							"aria-expanded": A,
 							className: "chat-shell__list-trigger",
-							onClick: () => D(!0),
-							children: /* @__PURE__ */ s(e, {
+							onClick: () => k(!0),
+							children: /* @__PURE__ */ c(t, {
 								name: "layout-sidebar",
 								size: "sm"
 							})
-						}), u && /* @__PURE__ */ s("div", {
+						}), d && /* @__PURE__ */ c("div", {
 							className: "chat-shell__header-content",
-							children: u
+							children: d
 						})]
 					}),
-					/* @__PURE__ */ s("div", {
+					/* @__PURE__ */ c("div", {
 						className: "chat-shell__thread",
-						children: d
-					}),
-					f && /* @__PURE__ */ s("div", {
-						className: "chat-shell__composer",
 						children: f
+					}),
+					p && /* @__PURE__ */ c("div", {
+						className: "chat-shell__composer",
+						children: p
 					})
 				]
 			}),
-			A && /* @__PURE__ */ c(n, {
+			M && /* @__PURE__ */ l(r, {
 				side: "left",
-				open: O,
-				onOpenChange: D,
-				title: p,
+				open: A,
+				onOpenChange: k,
+				title: x("list", m),
 				titleHidden: !0,
-				container: w ?? void 0,
+				container: E ?? void 0,
 				hideClose: !0,
 				className: "chat-shell__drawer",
-				children: [/* @__PURE__ */ s("header", {
+				children: [/* @__PURE__ */ c("header", {
 					className: "chat-shell__header",
-					children: /* @__PURE__ */ s(t, {
+					children: /* @__PURE__ */ c(n, {
 						variant: "ghost",
 						size: "sm",
 						iconOnly: !0,
-						"aria-label": m,
+						"aria-label": x("listTrigger", h),
 						"aria-expanded": !0,
 						className: "chat-shell__list-trigger",
-						onClick: () => D(!1),
-						children: /* @__PURE__ */ s(e, {
+						onClick: () => k(!1),
+						children: /* @__PURE__ */ c(t, {
 							name: "layout-sidebar",
 							size: "sm"
 						})
 					})
-				}), /* @__PURE__ */ s("div", {
+				}), /* @__PURE__ */ c("div", {
 					className: "chat-shell__drawer-list",
-					children: r
+					children: i
 				})]
 			})
 		]
 	});
 });
 //#endregion
-export { u as ChatShell };
+export { d as ChatShell };

@@ -1,5 +1,34 @@
 import { type ReactNode } from 'react';
 import './AnnotationThread.css';
+/**
+ * El cromo del hilo de anotaciones: cómo se llama el hilo, cómo se dicen sus
+ * tres estados, cómo se marca una anotación editada y cómo se cuentan las
+ * respuestas.
+ *
+ * Los tres estados van **clave a clave** —como los seis tipos de la leyenda de
+ * `CalendarRoster`— porque son un vocabulario **cerrado** del componente: el
+ * hilo solo puede estar abierto, atendido o resuelto, y obligar a la
+ * aplicación a montar nada para traducir tres palabras era peor que darles
+ * tres claves. Las props siguen ganando: una revisión que llame «Verificada» a
+ * `acknowledged` sigue pudiendo.
+ *
+ * Quién escribió cada anotación, cuándo y qué dice son datos y viajan en
+ * `annotation` y `replies`.
+ */
+export interface AnnotationThreadMessages {
+    /** Nombre accesible del hilo. */
+    label: string;
+    /** Rótulo del estado abierto. */
+    open: string;
+    /** Rótulo del estado atendido. */
+    acknowledged: string;
+    /** Rótulo del estado resuelto. */
+    resolved: string;
+    /** Marca de anotación editada, junto a la fecha. */
+    edited: string;
+    /** Rótulo que cuenta las respuestas. Recibe cuántas son, con su plural. */
+    replies: (count: number) => string;
+}
 export interface AnnotationEntry {
     /** Identificador único dentro del hilo. */
     id: string;
@@ -60,20 +89,36 @@ export interface AnnotationThreadProps extends React.ComponentPropsWithoutRef<'a
     locale?: string;
     /** Formato de la fecha. Por defecto, día y hora cortos. */
     dateFormat?: Intl.DateTimeFormatOptions;
-    /** Rótulo del estado abierto. Por defecto, en castellano: «Abierta». */
+    /**
+     * Rótulo del estado abierto. **Sin default**: sin él, sale de
+     * `annotationThread.open` del `BrandMessagesProvider`. Solo se lee con el
+     * hilo en ese estado.
+     */
     openLabel?: string;
-    /** Rótulo del estado atendido. Por defecto, en castellano: «Atendida». */
+    /**
+     * Rótulo del estado atendido. **Sin default**: sin él, sale de
+     * `annotationThread.acknowledged`. Solo se lee con el hilo en ese estado.
+     */
     acknowledgedLabel?: string;
-    /** Rótulo del estado resuelto. Por defecto, en castellano: «Resuelta». */
+    /**
+     * Rótulo del estado resuelto. **Sin default**: sin él, sale de
+     * `annotationThread.resolved`. Solo se lee con el hilo en ese estado.
+     */
     resolvedLabel?: string;
-    /** Marca de anotación editada. Por defecto, en castellano: «editada». */
+    /**
+     * Marca de anotación editada. **Sin default**: sin ella, sale de
+     * `annotationThread.edited`, y solo se lee cuando alguna anotación lo está.
+     */
     editedLabel?: string;
     /**
-     * Rótulo que cuenta las respuestas. Por defecto, en castellano:
-     * «1 respuesta» / «N respuestas».
+     * Rótulo que cuenta las respuestas, con su plural. **Sin default**: sin él,
+     * sale de `annotationThread.replies`, y solo se lee cuando hay respuestas.
      */
     repliesLabel?: (count: number) => string;
-    /** Nombre accesible del hilo. Por defecto, en castellano: «Hilo de anotaciones». */
+    /**
+     * Nombre accesible del hilo. **Sin default**: sin él, sale de
+     * `annotationThread.label`.
+     */
     label?: string;
     /** Se añade DESPUÉS de las clases propias. */
     className?: string;

@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
 import { ConversationList } from './ConversationList';
 import type { ConversationItem } from './ConversationList';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const SAMPLE: ConversationItem[] = [
   { id: 'c1', label: 'Autenticación JWT' },
@@ -192,7 +194,7 @@ export const ContratoTeclado: Story = {
     await userEvent.tab(); // título de la primera
     await userEvent.tab(); // su aspa
 
-    const aspa = canvas.getByRole('button', { name: 'Eliminar conversación "Autenticación JWT"' });
+    const aspa = canvas.getByRole('button', { name: 'Eliminar la conversación «Autenticación JWT»' });
     await expect(aspa).toHaveFocus();
     // Y se ve: sin esto el foco caía en un botón invisible (la opacidad
     // entra con transición, de ahí la espera).
@@ -240,7 +242,7 @@ export const ContratoBocadillo: Story = {
     const canvas = within(canvasElement);
     const corto = canvas.getByRole('button', { name: 'Hola' });
     // Nombre exacto, no un trozo: el botón de borrar lleva el mismo título
-    // dentro de su propia etiqueta («Eliminar conversación "…"»).
+    // dentro de su propia etiqueta («Eliminar la conversación «…»»).
     const largo = canvas.getByRole('button', { name: 'Migración del esquema de facturación a la nueva pasarela de pagos' });
 
     // El corto cabe: no hay bocadillo por mucho que se apunte.
@@ -278,5 +280,62 @@ export const ContratoBocadilloTeclado: Story = {
 
     await expect(canvas.getByRole('button', { name: 'Migración del esquema de facturación a la nueva pasarela de pagos' })).toHaveFocus();
     await waitFor(() => expect(document.querySelector('[role="tooltip"]')).not.toBeNull());
+  },
+};
+
+/**
+ * Los cinco textos de la lista salen del catálogo (`conversationList.*`): el
+ * botón de abrir una conversación, el nombre de la navegación, el aspa de cada
+ * fila —que interpola el título, así que es función— y los dos estados que la
+ * lista pinta ella misma. Los títulos de las conversaciones son datos y viajan
+ * en `conversations`.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <ConversationList
+        conversations={[
+          { id: 'c1', label: 'JWT authentication' },
+          { id: 'c2', label: 'Relational database design' },
+        ]}
+        activeId="c1"
+        onNew={() => {}}
+        onSelect={() => {}}
+        onDelete={() => {}}
+      />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el botón, la navegación, el aspa y el estado vacío salen del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — la lista lee sus textos del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <div data-testid="con-filas">
+        <ConversationList
+          conversations={[{ id: 'c1', label: 'JWT authentication' }]}
+          onNew={() => {}}
+          onSelect={() => {}}
+          onDelete={() => {}}
+        />
+      </div>
+      <div data-testid="vacia">
+        <ConversationList conversations={[]} onNew={() => {}} onSelect={() => {}} onDelete={() => {}} />
+      </div>
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const conFilas = within(canvasElement.querySelector('[data-testid="con-filas"]') as HTMLElement);
+    await expect(conFilas.getByRole('button', { name: 'New conversation' })).toBeInTheDocument();
+    await expect(conFilas.getByRole('navigation', { name: 'Conversations' })).toBeInTheDocument();
+    await expect(
+      conFilas.getByRole('button', { name: 'Delete the conversation \u201cJWT authentication\u201d' }),
+    ).toBeInTheDocument();
+
+    const vacia = within(canvasElement.querySelector('[data-testid="vacia"]') as HTMLElement);
+    await expect(vacia.getByText('No conversations yet')).toBeInTheDocument();
   },
 };

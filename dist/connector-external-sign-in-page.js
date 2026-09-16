@@ -1,25 +1,19 @@
 'use client';
-import { Button as e } from "./button.js";
-import { Stack as t } from "./stack.js";
-import { Paragraph as n } from "./paragraph.js";
-import { Alert as r } from "./alert.js";
-import { Form as i } from "./form.js";
-import { InputField as a } from "./input-field.js";
-import { ConnectorAuthShell as o } from "./connector-auth-shell.js";
-import { t as s } from "./_shared/untrustedtext.js";
-import { Fragment as c, jsx as l, jsxs as u } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Button as t } from "./button.js";
+import { Stack as n } from "./stack.js";
+import { Paragraph as r } from "./paragraph.js";
+import { Alert as i } from "./alert.js";
+import { Form as a } from "./form.js";
+import { InputField as o } from "./input-field.js";
+import { ConnectorAuthShell as s } from "./connector-auth-shell.js";
+import { t as c } from "./_shared/untrustedtext.js";
+import { jsx as l, jsxs as u } from "react/jsx-runtime";
 //#region src/stories/templates/ConnectorAuth/ConnectorExternalSignInPage.tsx
-function d({ platformName: d = "tu Moodle", organization: f, organizationDefaultValue: p, organizationName: m = "org", action: h, onSubmit: g, hiddenFields: _, error: v, title: y = "Autorizar la conexión", intro: b = ({ platform: e }) => /* @__PURE__ */ u(c, { children: [
-	"Tu asistente de IA solicita acceso a ",
-	e,
-	". Inicia sesión con tu cuenta para autorizarlo."
-] }), signingInTo: x = ({ organization: e }) => /* @__PURE__ */ u(c, { children: [
-	"Iniciarás sesión en ",
-	e,
-	"."
-] }), valueQuotes: S, organizationLabel: C = "Tu organización", submitLabel: w = ({ platform: e }) => /* @__PURE__ */ u(c, { children: ["Iniciar sesión con ", e] }), extra: T, links: E, header: D, footer: O, preferences: k, preferencesLabel: A, id: j, shell: M }) {
-	return /* @__PURE__ */ l(o, {
-		title: y,
+function d({ platformName: d, organization: f, organizationDefaultValue: p, organizationName: m = "org", action: h, onSubmit: g, hiddenFields: _, error: v, title: y, intro: b, signingInTo: x, valueQuotes: S, organizationLabel: C, submitLabel: w, extra: T, links: E, header: D, footer: O, preferences: k, preferencesLabel: A, id: j, shell: M }) {
+	let N = e("connectorExternalSignIn");
+	return /* @__PURE__ */ l(s, {
+		title: y ?? N("title"),
 		description: b({ platform: d }),
 		header: D,
 		footer: O,
@@ -27,37 +21,37 @@ function d({ platformName: d = "tu Moodle", organization: f, organizationDefault
 		preferencesLabel: A,
 		id: j,
 		shell: M,
-		children: /* @__PURE__ */ u(t, {
+		children: /* @__PURE__ */ u(n, {
 			align: "stretch",
 			children: [
-				v !== void 0 && /* @__PURE__ */ l(r, {
+				v !== void 0 && /* @__PURE__ */ l(i, {
 					role: "alert",
 					variant: "error",
 					description: v
 				}),
-				/* @__PURE__ */ u(i, {
+				/* @__PURE__ */ u(a, {
 					size: "lg",
 					blockActions: !0,
 					method: typeof h == "string" ? "post" : void 0,
 					action: h,
 					onSubmit: g,
 					links: E,
-					actions: /* @__PURE__ */ l(e, {
+					actions: /* @__PURE__ */ l(t, {
 						type: "submit",
-						children: w({ platform: d })
+						children: N("submit", w)(d)
 					}),
 					children: [_ && Object.entries(_).map(([e, t]) => /* @__PURE__ */ l("input", {
 						type: "hidden",
 						name: e,
 						value: t
-					}, e)), f === void 0 ? /* @__PURE__ */ l(a, {
+					}, e)), f === void 0 ? /* @__PURE__ */ l(o, {
 						id: m,
 						name: m,
-						label: C,
+						label: N("organization", C),
 						defaultValue: p,
 						autoComplete: "off",
 						required: !0
-					}) : /* @__PURE__ */ l(n, { children: x({ organization: /* @__PURE__ */ l("strong", { children: /* @__PURE__ */ l(s, {
+					}) : /* @__PURE__ */ l(r, { children: x({ organization: /* @__PURE__ */ l("strong", { children: /* @__PURE__ */ l(c, {
 						value: f,
 						quotes: S
 					}) }) }) })]

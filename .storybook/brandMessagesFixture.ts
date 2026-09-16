@@ -331,4 +331,62 @@ export const brandMessagesFixture: BrandMessages = {
     unread: 'Sin leer',
     markRead: 'Marcar como leída',
   },
+  messageComposer: {
+    placeholder: 'Escribe un mensaje…',
+    send: 'Enviar',
+  },
+  conversationList: {
+    new: 'Nueva conversación',
+    nav: 'Conversaciones',
+    delete: (label) => `Eliminar la conversación «${label}»`,
+    empty: 'Todavía no hay conversaciones',
+    error: 'No se pudieron cargar las conversaciones',
+  },
+  conversationThread: {
+    label: 'Conversación',
+  },
+  typingIndicator: {
+    typing: (name) => `${name} está escribiendo…`,
+  },
+  annotationThread: {
+    label: 'Hilo de anotaciones',
+    open: 'Abierta',
+    acknowledged: 'Atendida',
+    resolved: 'Resuelta',
+    edited: 'editada',
+    replies: (count) => (count === 1 ? '1 respuesta' : `${count} respuestas`),
+  },
+  chatShell: {
+    list: 'Conversaciones',
+    listTrigger: 'Abrir conversaciones',
+  },
+  untrustedText: {
+    expand: 'Ver el valor completo',
+    collapse: 'Ver menos',
+    quotes: ['«', '»'],
+  },
+  connectorRequestSummary: {
+    client: 'Herramienta',
+    product: 'Producto',
+    account: 'Cuenta',
+    scope: 'Permiso',
+    redirect: 'Destino',
+  },
+  connectorConsent: {
+    title: 'Conectar una herramienta',
+    deny: 'Denegar',
+  },
+  connectorSignIn: {
+    title: 'Inicia sesión para continuar',
+    signIn: 'Iniciar sesión',
+    fallbackProduct: 'este producto',
+  },
+  connectorExternalSignIn: {
+    title: 'Autorizar la conexión',
+    organization: 'Tu organización',
+    submit: (platform) => `Iniciar sesión con ${platform}`,
+  },
+  connectorRejection: {
+    code: 'Código',
+  },
 };

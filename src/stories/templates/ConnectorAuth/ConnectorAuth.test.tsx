@@ -1,9 +1,36 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render as renderRTL, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ConnectorConsentPage } from './ConnectorConsentPage';
 import { ConnectorExternalSignInPage } from './ConnectorExternalSignInPage';
 import { ConnectorRejectionPage } from './ConnectorRejectionPage';
+import type { ReactNode } from 'react';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixture as ES } from '../../../../.storybook/brandMessagesFixture';
+
+/**
+ * Estas piezas ya no traen su castellano puesto: el cromo sale del catálogo.
+ * Aquí lo monta este envoltorio, que es lo que hace la aplicación en su raíz.
+ */
+const Catalogo = ({ children }: { children: ReactNode }) => (
+  <BrandMessagesProvider messages={ES}>{children}</BrandMessagesProvider>
+);
+
+function render(ui: React.ReactElement) {
+  return renderRTL(ui, { wrapper: Catalogo });
+}
+
+
+/**
+ * Lo que el producto tiene que poner y el sistema de diseño no: las frases que
+ * afirman qué se consiente, a dónde sale el acceso y qué se concede. Son props
+ * obligatorias y sin default desde la v49. Aquí las pone el arnés, como las
+ * pondría el servidor de autorización desde su catálogo.
+ */
+const ALCANCE = {
+  scopeReadLabel: 'leer los datos de este producto',
+  scopeWriteLabel: 'leer y modificar los datos de este producto',
+};
 
 function Consentimiento(props: Partial<React.ComponentProps<typeof ConnectorConsentPage>> = {}) {
   return (
@@ -12,6 +39,26 @@ function Consentimiento(props: Partial<React.ComponentProps<typeof ConnectorCons
       accountEmail="ana@ejemplo.com"
       redirectHost="claude.ai"
       productName="Bricks"
+      {...ALCANCE}
+      approveLabel="Permitir acceso"
+      intro={({ client, what, email }) => (
+        <>
+          {client} quiere {what} como {email}.
+        </>
+      )}
+      redirectNotice={({ host }) => <>El acceso se enviará a {host}. Continúa solo si lo reconoces.</>}
+      {...props}
+    />
+  );
+}
+
+/** El conector ajeno: el nombre de la instalación y sus dos frases, también del producto. */
+function Moodle(props: Partial<React.ComponentProps<typeof ConnectorExternalSignInPage>> = {}) {
+  return (
+    <ConnectorExternalSignInPage
+      platformName="tu Moodle"
+      intro={({ platform }) => <>Tu asistente de IA solicita acceso a {platform}.</>}
+      signingInTo={({ organization }) => <>Iniciarás sesión en {organization}.</>}
       {...props}
     />
   );
@@ -131,46 +178,70 @@ describe('ConnectorConsentPage', () => {
   });
 });
 
+/** Los cuatro textos del rechazo, que desde la v49 los pone el producto. */
+const RECHAZO = {
+  title: 'La petición está incompleta',
+  description: 'Falta algo en lo que ha pedido la herramienta.',
+  hint: 'Vuelve a la herramienta y empieza la conexión de nuevo.',
+  retryLabel: 'Volver a la herramienta',
+};
+
 describe('ConnectorRejectionPage', () => {
   it('cada motivo trae su título y su salida', () => {
-    const { rerender } = render(<ConnectorRejectionPage reason="access-denied" retryHref="#volver" />);
+    const { rerender } = render(
+      <ConnectorRejectionPage
+        title="No se ha dado acceso"
+        description="La conexión se ha cancelado."
+        hint="Puedes cerrar esta pantalla."
+        retryLabel="Volver a intentarlo"
+        retryHref="#volver"
+      />,
+    );
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('No se ha dado acceso');
     expect(screen.getByRole('link', { name: 'Volver a intentarlo' })).toBeInTheDocument();
 
-    rerender(<ConnectorRejectionPage reason="session-expired" retryHref="#acceso" />);
+    rerender(
+      <ConnectorRejectionPage
+        title="La sesión ha caducado"
+        description="Ha pasado demasiado tiempo."
+        hint="Inicia sesión otra vez."
+        retryLabel="Iniciar sesión"
+        retryHref="#acceso"
+      />,
+    );
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('La sesión ha caducado');
     expect(screen.getByRole('link', { name: 'Iniciar sesión' })).toBeInTheDocument();
   });
 
   it('sin salida no pinta ninguna: hay rechazos que no se reintentan desde aquí', () => {
-    render(<ConnectorRejectionPage reason="invalid-client" />);
+    render(<ConnectorRejectionPage {...RECHAZO} />);
     expect(screen.queryByRole('link')).toBeNull();
     expect(screen.queryByRole('button')).toBeNull();
   });
 
   it('el código técnico solo aparece si se pasa', () => {
-    const { rerender } = render(<ConnectorRejectionPage reason="invalid-request" />);
+    const { rerender } = render(<ConnectorRejectionPage {...RECHAZO} />);
     expect(screen.queryByText(/Código/)).toBeNull();
 
-    rerender(<ConnectorRejectionPage reason="invalid-request" code="invalid_request" />);
+    rerender(<ConnectorRejectionPage {...RECHAZO} code="invalid_request" />);
     expect(screen.getByText('invalid_request')).toBeInTheDocument();
   });
 });
 
 describe('ConnectorExternalSignInPage', () => {
   it('con la organización resuelta la confirma y no pide nada', () => {
-    render(<ConnectorExternalSignInPage organization="Universidad de Ejemplo" />);
+    render(<Moodle organization="Universidad de Ejemplo" />);
     expect(screen.getByText(/Iniciarás sesión en/)).toHaveTextContent('Universidad de Ejemplo');
     expect(screen.queryByLabelText('Tu organización')).toBeNull();
   });
 
   it('sin organización pide el dato', () => {
-    render(<ConnectorExternalSignInPage />);
+    render(<Moodle />);
     expect(screen.getByLabelText('Tu organización')).toBeRequired();
   });
 
   it('el fallo anterior se anuncia', () => {
-    render(<ConnectorExternalSignInPage error="No se ha encontrado ninguna conexión Moodle para esa organización." />);
+    render(<Moodle error="No se ha encontrado ninguna conexión Moodle para esa organización." />);
     expect(screen.getByRole('alert')).toHaveTextContent('No se ha encontrado ninguna conexión Moodle');
   });
 });

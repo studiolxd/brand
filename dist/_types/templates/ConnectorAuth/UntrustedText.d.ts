@@ -1,5 +1,24 @@
 import type { ReactNode } from 'react';
 import './UntrustedText.css';
+/**
+ * El cromo con el que se enmarca un dato de fuera: el desplegador de un valor
+ * recortado y las comillas que dicen dónde empieza y dónde acaba el texto
+ * ajeno.
+ *
+ * **Los tres son cromo y ninguno afirma nada**, así que van al catálogo: «Ver
+ * el valor completo» describe lo único que hace ese desplegador, y las
+ * comillas son puntuación del idioma (`['„', '“']` en alemán), no una decisión
+ * del producto. Lo que sí es de fuera —el valor— entra por `value` y nunca
+ * pasa por aquí.
+ */
+export interface UntrustedTextMessages {
+    /** Etiqueta del desplegador cerrado. */
+    expand: string;
+    /** Etiqueta del desplegador abierto. */
+    collapse: string;
+    /** Las comillas que enmarcan el valor, apertura y cierre. */
+    quotes: [string, string];
+}
 export interface UntrustedTextProps {
     /**
      * El valor. Si es una cadena recibe el tratamiento entero —marcado de
@@ -16,13 +35,21 @@ export interface UntrustedTextProps {
      * quiera verlo entero lo despliega en la ficha.
      */
     expandable?: boolean;
-    /** Etiqueta del desplegador cerrado. Default castellano: «Ver el valor completo». */
+    /**
+     * Etiqueta del desplegador cerrado. **Sin default**: sin ella, sale de
+     * `untrustedText.expand` del `BrandMessagesProvider`, y solo se lee cuando
+     * el valor se recorta con `expandable`.
+     */
     expandLabel?: string;
-    /** Etiqueta del desplegador abierto. Default castellano: «Ver menos». */
+    /**
+     * Etiqueta del desplegador abierto. **Sin default**: sin ella, sale de
+     * `untrustedText.collapse`, en el mismo caso.
+     */
     collapseLabel?: string;
     /**
-     * Las comillas que enmarcan el valor. Default castellano: `['«', '»']`. Van
-     * en prop porque cambian con el idioma (`['„', '“']` en alemán).
+     * Las comillas que enmarcan el valor. **Sin default**: sin ellas, salen de
+     * `untrustedText.quotes`. Cambian con el idioma (`['„', '“']` en alemán), y
+     * por eso están en el catálogo y no cableadas.
      */
     quotes?: [string, string];
     /** Se añade DESPUÉS de las clases propias. */

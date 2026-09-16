@@ -1,57 +1,58 @@
 'use client';
 import './message-composer.css';
-import { Button as e } from "./button.js";
-import { Textarea as t } from "./textarea.js";
-import { forwardRef as n, useId as r } from "react";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Button as t } from "./button.js";
+import { Textarea as n } from "./textarea.js";
+import { forwardRef as r, useId as i } from "react";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/molecules/MessageComposer/MessageComposer.tsx
-var o = n(function({ value: n, onChange: o, onSend: s, placeholder: c = "Escribe un mensaje…", disabled: l, sendLabel: u = "Enviar", helperText: d, actions: f, inputId: p, inputLabel: m, inputLabelledBy: h, rows: g = 2, className: _, ...v }, y) {
-	let b = `${r()}-helper`;
-	function x() {
-		n.trim() && s();
+var s = r(function({ value: r, onChange: s, onSend: c, placeholder: l, disabled: u, sendLabel: d, helperText: f, actions: p, inputId: m, inputLabel: h, inputLabelledBy: g, rows: _ = 2, className: v, ...y }, b) {
+	let x = e("messageComposer"), S = `${i()}-helper`;
+	function C() {
+		r.trim() && c();
 	}
-	function S(e) {
-		e.key === "Enter" && !e.shiftKey && (e.preventDefault(), x());
+	function w(e) {
+		e.key === "Enter" && !e.shiftKey && (e.preventDefault(), C());
 	}
-	return /* @__PURE__ */ a("div", {
-		ref: y,
+	return /* @__PURE__ */ o("div", {
+		ref: b,
 		className: [
 			"message-composer",
-			l ? "message-composer--disabled" : "",
-			_ ?? ""
+			u ? "message-composer--disabled" : "",
+			v ?? ""
 		].filter(Boolean).join(" "),
-		...v,
-		children: [/* @__PURE__ */ a("div", {
+		...y,
+		children: [/* @__PURE__ */ o("div", {
 			className: "message-composer__box",
-			children: [/* @__PURE__ */ i(t, {
+			children: [/* @__PURE__ */ a(n, {
 				bare: !0,
 				className: "message-composer__input",
-				id: p,
-				"aria-label": m,
-				"aria-labelledby": h,
-				"aria-describedby": d ? b : void 0,
-				placeholder: c,
-				value: n,
-				disabled: l,
-				rows: g,
-				onChange: (e) => o(e.target.value),
-				onKeyDown: S
-			}), /* @__PURE__ */ a("div", {
+				id: m,
+				"aria-label": h,
+				"aria-labelledby": g,
+				"aria-describedby": f ? S : void 0,
+				placeholder: x("placeholder", l),
+				value: r,
+				disabled: u,
+				rows: _,
+				onChange: (e) => s(e.target.value),
+				onKeyDown: w
+			}), /* @__PURE__ */ o("div", {
 				className: "message-composer__actions",
-				children: [/* @__PURE__ */ i(e, {
+				children: [/* @__PURE__ */ a(t, {
 					variant: "primary",
 					size: "md",
-					disabled: l || !n.trim(),
-					onClick: x,
-					children: u
-				}), f]
+					disabled: u || !r.trim(),
+					onClick: C,
+					children: x("send", d)
+				}), p]
 			})]
-		}), d && /* @__PURE__ */ i("p", {
+		}), f && /* @__PURE__ */ a("p", {
 			className: "message-composer__helper",
-			id: b,
-			children: d
+			id: S,
+			children: f
 		})]
 	});
 });
 //#endregion
-export { o as MessageComposer };
+export { s as MessageComposer };

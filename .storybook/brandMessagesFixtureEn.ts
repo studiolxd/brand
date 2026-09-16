@@ -335,4 +335,62 @@ export const brandMessagesFixtureEn: BrandMessages = {
     unread: 'Unread',
     markRead: 'Mark as read',
   },
+  messageComposer: {
+    placeholder: 'Write a message…',
+    send: 'Send',
+  },
+  conversationList: {
+    new: 'New conversation',
+    nav: 'Conversations',
+    delete: (label) => `Delete the conversation “${label}”`,
+    empty: 'No conversations yet',
+    error: 'The conversations could not be loaded',
+  },
+  conversationThread: {
+    label: 'Conversation',
+  },
+  typingIndicator: {
+    typing: (name) => `${name} is typing…`,
+  },
+  annotationThread: {
+    label: 'Annotation thread',
+    open: 'Open',
+    acknowledged: 'Acknowledged',
+    resolved: 'Resolved',
+    edited: 'edited',
+    replies: (count) => (count === 1 ? '1 reply' : `${count} replies`),
+  },
+  chatShell: {
+    list: 'Conversations',
+    listTrigger: 'Open conversations',
+  },
+  untrustedText: {
+    expand: 'Show the full value',
+    collapse: 'Show less',
+    quotes: ['\u201c', '\u201d'],
+  },
+  connectorRequestSummary: {
+    client: 'Tool',
+    product: 'Product',
+    account: 'Account',
+    scope: 'Permission',
+    redirect: 'Destination',
+  },
+  connectorConsent: {
+    title: 'Connect a tool',
+    deny: 'Deny',
+  },
+  connectorSignIn: {
+    title: 'Sign in to continue',
+    signIn: 'Sign in',
+    fallbackProduct: 'this product',
+  },
+  connectorExternalSignIn: {
+    title: 'Authorise the connection',
+    organization: 'Your organisation',
+    submit: (platform) => `Sign in with ${platform}`,
+  },
+  connectorRejection: {
+    code: 'Code',
+  },
 };

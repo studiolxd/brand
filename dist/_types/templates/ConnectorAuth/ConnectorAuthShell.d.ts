@@ -22,7 +22,12 @@ export interface ConnectorAuthChromeProps {
      * pantalla de la suite alrededor donde hacerlo.
      */
     preferences?: ReactNode;
-    /** Nombre accesible de la banda de preferencias. Default castellano: «Preferencias». */
+    /**
+     * Nombre accesible de la banda de preferencias. **Reenvío puro** al
+     * `PublicPageShell`, que lee `publicPageShell.preferences` del
+     * `BrandMessagesProvider` por su cuenta: ya no hace falta pasarlo para
+     * traducir, y el marco no repite la clave.
+     */
     preferencesLabel?: string;
     /** `id` del `main` (`main-content` por defecto, destino del `SkipLink`). */
     id?: string;

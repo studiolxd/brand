@@ -143,4 +143,13 @@ Aquí está funcionando de verdad: abrir conversaciones, borrarlas, escribir, ve
 
 ## Internacionalización
 
-`listLabel` (nombre de la columna y título del cajón) y `listTriggerLabel` (nombre del botón que abre el cajón) son los dos únicos textos que emite el armazón, los dos con default castellano. Ver **Foundations › Internacionalización**.
+Los dos textos del armazón salen del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`chatShell`**.
+
+| Prop | Clave del catálogo | Cuándo se lee |
+| --- | --- | --- |
+| `listLabel` | `chatShell.list` | con `list` |
+| `listTriggerLabel` | `chatShell.listTrigger` | por debajo del punto de ruptura, con `list` |
+
+Es **espacio propio y no el de `ConversationList`**, aunque hoy digan la misma palabra: son dos piezas distintas —el armazón de la pantalla y la lista que cuelga de él—, y el precedente ya está puesto con `appRoot.skipToContent` frente a `appShell.skipToContent`. Montado sin `list` —dentro de un `AppShell`, donde la columna vive en el `Sidebar`— no se lee ninguna de las dos.
+
+<Canvas of={ChatShellStories.TextosDelProveedor} />

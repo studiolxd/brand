@@ -3,15 +3,40 @@
 import { forwardRef, useId, type ComponentProps, type KeyboardEvent, type ReactNode } from 'react';
 import { Button } from '../../atoms/Button/Button';
 import { Textarea } from '../../atoms/Textarea/Textarea';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './MessageComposer.css';
+
+/**
+ * El cromo de la caja de escribir: el marcador del campo vacío y el rótulo del
+ * botón que manda. Son las dos palabras que dicen lo mismo en cualquier chat
+ * de la suite, así que van en el catálogo.
+ *
+ * Lo que NO va aquí es la línea de ayuda (`helperText`): la escribe el
+ * producto —el atajo de teclado, un aviso de privacidad— y nunca tuvo default
+ * en ningún idioma.
+ */
+export interface MessageComposerMessages {
+  /** Marcador del campo vacío. */
+  placeholder: string;
+  /** Rótulo del botón de enviar. Es también su nombre accesible. */
+  send: string;
+}
 
 export interface MessageComposerProps extends Omit<ComponentProps<'div'>, 'onChange'> {
   value: string;
   onChange: (value: string) => void;
   onSend: () => void;
+  /**
+   * Marcador del campo vacío. **Sin default**: sin él, sale de
+   * `messageComposer.placeholder` del `BrandMessagesProvider`.
+   */
   placeholder?: string;
   disabled?: boolean;
-  /** Texto del botón de enviar. Es también su nombre accesible: no hay `aria-label` que lo contradiga. */
+  /**
+   * Texto del botón de enviar. Es también su nombre accesible: no hay
+   * `aria-label` que lo contradiga. **Sin default**: sin él, sale de
+   * `messageComposer.send`.
+   */
   sendLabel?: string;
   /**
    * Línea de ayuda bajo el marco, enlazada al campo con `aria-describedby`
@@ -52,9 +77,9 @@ export const MessageComposer = forwardRef<HTMLDivElement, MessageComposerProps>(
   value,
   onChange,
   onSend,
-  placeholder = 'Escribe un mensaje…',
+  placeholder,
   disabled,
-  sendLabel = 'Enviar',
+  sendLabel,
   helperText,
   actions,
   inputId,
@@ -64,6 +89,7 @@ export const MessageComposer = forwardRef<HTMLDivElement, MessageComposerProps>(
   className,
   ...rest
 }, ref) {
+  const t = useBrandMessages('messageComposer');
   const helperId = `${useId()}-helper`;
 
   function handleSend() {
@@ -94,7 +120,7 @@ export const MessageComposer = forwardRef<HTMLDivElement, MessageComposerProps>(
           aria-label={inputLabel}
           aria-labelledby={inputLabelledBy}
           aria-describedby={helperText ? helperId : undefined}
-          placeholder={placeholder}
+          placeholder={t('placeholder', placeholder)}
           value={value}
           disabled={disabled}
           rows={rows}
@@ -108,7 +134,7 @@ export const MessageComposer = forwardRef<HTMLDivElement, MessageComposerProps>(
             disabled={disabled || !value.trim()}
             onClick={handleSend}
           >
-            {sendLabel}
+            {t('send', sendLabel)}
           </Button>
           {actions}
         </div>

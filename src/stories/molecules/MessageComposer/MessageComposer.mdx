@@ -105,6 +105,15 @@ Marco, fondo, anillo de foco y línea de ayuda tienen par oscuro.
 
 ## Internacionalización
 
-`placeholder` y `sendLabel` traen default castellano y se traducen pasándolos. `helperText` **no
-tiene default en ningún idioma**: el texto lo escribe el producto. Ver
-**Foundations › Internacionalización**.
+Los dos textos del composer salen del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`messageComposer`**.
+
+| Prop | Clave del catálogo | Cuándo se lee |
+| --- | --- | --- |
+| `placeholder` | `messageComposer.placeholder` | siempre |
+| `sendLabel` | `messageComposer.send` | siempre |
+
+El orden es **prop → proveedor → error**.
+
+`helperText` **no está en el catálogo y sigue sin default en ningún idioma**: la línea de ayuda cuenta el atajo de teclado o un aviso de privacidad de ESE chat, y eso no lo sabe un catálogo común. `inputLabel` tampoco: nombra ese campo.
+
+<Canvas of={MessageComposerStories.TextosDelProveedor} />

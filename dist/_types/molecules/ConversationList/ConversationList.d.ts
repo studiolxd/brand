@@ -1,5 +1,27 @@
 import { type ReactNode } from 'react';
 import './ConversationList.css';
+/**
+ * El cromo de la lista de conversaciones: el botón de abrir una nueva, el
+ * nombre de la navegación, el aspa de cada fila y los dos estados que la lista
+ * pinta ella misma —vacía y rota—.
+ *
+ * Los cinco son **genéricos**: dicen lo mismo en cualquier chat de la suite y
+ * ninguno afirma nada del producto. Los títulos de las conversaciones son
+ * datos y viajan en `conversations`; el detalle del fallo lo pone `error`, que
+ * nunca tuvo default.
+ */
+export interface ConversationListMessages {
+    /** Rótulo del botón que abre una conversación nueva. */
+    new: string;
+    /** Nombre accesible del `<nav>` que envuelve la lista. */
+    nav: string;
+    /** Nombre accesible del aspa de una fila. Recibe el título de la conversación. */
+    delete: (label: string) => string;
+    /** Título del estado vacío que la lista pinta ella misma. */
+    empty: string;
+    /** Título del aviso de que la lista no se pudo cargar. */
+    error: string;
+}
 export interface ConversationItem {
     id: string;
     label: string;
@@ -10,11 +32,20 @@ export interface ConversationListProps extends Omit<React.ComponentPropsWithoutR
     onNew: () => void;
     onSelect: (id: string) => void;
     onDelete: (id: string) => void;
-    /** Texto del botón que abre una conversación nueva. Default castellano. */
+    /**
+     * Texto del botón que abre una conversación nueva. **Sin default**: sin él,
+     * sale de `conversationList.new` del `BrandMessagesProvider`.
+     */
     newLabel?: string;
-    /** `aria-label` del `<nav>` que envuelve la lista. Default castellano. */
+    /**
+     * `aria-label` del `<nav>` que envuelve la lista. **Sin default**: sin él,
+     * sale de `conversationList.nav`.
+     */
     navLabel?: string;
-    /** Nombre accesible del aspa de cada fila. Recibe el título de la conversación. */
+    /**
+     * Nombre accesible del aspa de cada fila. Recibe el título de la
+     * conversación. **Sin default**: sin él, sale de `conversationList.delete`.
+     */
     deleteLabel?: (label: string) => string;
     /**
      * La lista aún está cargando: en su sitio se pintan marcadores (`Skeleton`)
@@ -31,13 +62,16 @@ export interface ConversationListProps extends Omit<React.ComponentPropsWithoutR
     error?: ReactNode;
     /**
      * Título del `EmptyState` que la lista pinta **ella misma** cuando no hay
-     * conversaciones. Default: "Todavía no hay conversaciones" (castellano). Sin
-     * pasarla, el consumidor se lleva ese texto: el hueco vacío nunca se queda en
-     * blanco, así que la pantalla no tiene que añadir un aviso propio encima —si
-     * lo añade, se ven dos.
+     * conversaciones. **Sin default**: sin él, sale de
+     * `conversationList.empty`, así que el hueco vacío nunca se queda en blanco
+     * y la pantalla no tiene que añadir un aviso propio encima —si lo añade, se
+     * ven dos—. Solo se lee con la lista vacía.
      */
     emptyMessage?: string;
-    /** `title` del `Alert` de error. Default castellano. */
+    /**
+     * `title` del `Alert` de error. **Sin default**: sin él, sale de
+     * `conversationList.error`, y solo se lee cuando hay `error`.
+     */
     errorTitle?: string;
     /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
     className?: string;

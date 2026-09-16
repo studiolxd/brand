@@ -60,4 +60,10 @@ Lo que dibuja el globo —contorno, aire, cola— sale de `message-bubble.*`. Ve
 
 ## Internacionalización
 
-`streamingLabel` traduce el texto del estado de escritura; `locale` y `timestampFormat` mueven el idioma y el formato de la hora. Ver **Foundations › Internacionalización**.
+El mensaje **no tiene texto propio**. Lo único que emite por su cuenta es el estado de escritura, y ese lo pinta el `TypingIndicator` con `typingIndicator.typing(name)` del `BrandMessagesProvider`.
+
+`streamingName` es **obligatoria y sin default**: el nombre del asistente es contenido del producto. Se pide siempre, aunque este mensaje no esté generándose — un mensaje del asistente puede estarlo en cualquier momento, y un nombre que aparece solo a veces es un texto sin traducir esperando su turno. `streamingLabel` sustituye la frase entera y sigue siendo anulación puntual.
+
+`model` es un dato, y `locale` y `timestampFormat` son formato: mueven el idioma y el formato de la hora, no su texto.
+
+<Canvas of={AssistantMessageStories.TextosDelProveedor} />

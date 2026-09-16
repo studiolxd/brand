@@ -4,6 +4,8 @@ import { ConversationThread } from './ConversationThread';
 import type { ConversationMessage } from './ConversationThread';
 import { MessageBubble } from '../../atoms/MessageBubble/MessageBubble';
 import { EmptyState } from '../../molecules/EmptyState/EmptyState';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const MESSAGES: ConversationMessage[] = [
   {
@@ -45,7 +47,12 @@ const meta = {
       </div>
     ),
   ],
-  args: { messages: MESSAGES },
+  args: {
+    messages: MESSAGES,
+    // Quién escribe mientras se genera una respuesta: contenido del producto.
+    // El verbo lo pone el catálogo (`typingIndicator.typing`).
+    streamingName: 'Ola',
+  },
 } satisfies Meta<typeof ConversationThread>;
 
 export default meta;
@@ -125,10 +132,10 @@ export const Etiquetas: Story = {
   render: () => (
     <>
       <div data-testid="default">
-        <ConversationThread messages={MESSAGES} />
+        <ConversationThread messages={MESSAGES} streamingName="Ola" />
       </div>
       <div data-testid="traducido">
-        <ConversationThread messages={MESSAGES} ariaLabel="Conversation" />
+        <ConversationThread messages={MESSAGES} streamingName="Ola" ariaLabel="Conversation" />
       </div>
     </>
   ),
@@ -152,18 +159,18 @@ export const ContratoHiloVacio: Story = {
   render: () => (
     <>
       <div style={{ flex: '0 0 260px', minHeight: 0, display: 'flex', flexDirection: 'column' }} data-testid="solo">
-        <ConversationThread messages={[]}>
+        <ConversationThread messages={[]} streamingName="Ola">
           <EmptyState title="Empieza la conversación" />
         </ConversationThread>
       </div>
       <div style={{ flex: '0 0 260px', minHeight: 0, display: 'flex', flexDirection: 'column' }} data-testid="dos">
-        <ConversationThread messages={[]}>
+        <ConversationThread messages={[]} streamingName="Ola">
           <MessageBubble role="user">Uno</MessageBubble>
           <MessageBubble role="assistant">Dos</MessageBubble>
         </ConversationThread>
       </div>
       <div style={{ flex: '0 0 260px', minHeight: 0, display: 'flex', flexDirection: 'column' }} data-testid="un-mensaje">
-        <ConversationThread messages={[MESSAGES[0]]} />
+        <ConversationThread messages={[MESSAGES[0]]} streamingName="Ola" />
       </div>
     </>
   ),
@@ -205,7 +212,7 @@ export const ContratoAutoscroll: Story = {
   tags: ['!dev'],
   render: () => (
     <div style={{ height: '200px', display: 'flex', flexDirection: 'column' }}>
-      <ConversationThread messages={MESSAGES} className="propia" data-testid="hilo" />
+      <ConversationThread messages={MESSAGES} streamingName="Ola" className="propia" data-testid="hilo" />
     </div>
   ),
   play: async ({ canvasElement }) => {
@@ -222,5 +229,46 @@ export const ContratoAutoscroll: Story = {
 
     // Y el hilo ha bajado del todo (el deslizamiento es asíncrono).
     await waitFor(() => expect(hilo.scrollTop).toBeGreaterThan(0));
+  },
+};
+
+/**
+ * El hilo tiene **un solo texto propio** —cómo se llama la región que anuncia
+ * los mensajes nuevos— y sale de `conversationThread.label`. El estado de
+ * escritura no es suyo: lo pinta el `TypingIndicator` con
+ * `typingIndicator.typing` y el nombre que llega en `streamingName`, que es
+ * contenido y por eso no se traduce.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <ConversationThread
+        streamingName="Ola"
+        messages={[
+          { id: '1', role: 'user', content: 'Can you summarise the report?' },
+          { id: '2', role: 'assistant', model: 'Claude Opus 5', isStreaming: true },
+        ]}
+      />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el nombre de la región y el estado de escritura salen del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el hilo lee sus textos del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <ConversationThread
+        streamingName="Ola"
+        messages={[{ id: '1', role: 'assistant', model: 'Claude Opus 5', isStreaming: true }]}
+      />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('log', { name: 'Conversation' })).toBeInTheDocument();
+    await expect(canvas.getByRole('status')).toHaveTextContent('Ola is typing…');
   },
 };

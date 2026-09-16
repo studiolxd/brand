@@ -5,12 +5,12 @@ import { t as n } from "./_shared/messagetimestamp.js";
 import { forwardRef as r } from "react";
 import { jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/molecules/AssistantMessage/AssistantMessage.tsx
-var o = r(function({ children: r, model: o, timestamp: s, locale: c, timestampFormat: l, isStreaming: u = !1, streamingLabel: d, className: f, ...p }, m) {
-	let h = n(s, c, l);
+var o = r(function({ children: r, model: o, timestamp: s, locale: c, timestampFormat: l, isStreaming: u = !1, streamingName: d, streamingLabel: f, className: p, ...m }, h) {
+	let g = n(s, c, l);
 	return /* @__PURE__ */ a("div", {
-		ref: m,
-		className: `assistant-message${f ? ` ${f}` : ""}`,
-		...p,
+		ref: h,
+		className: `assistant-message${p ? ` ${p}` : ""}`,
+		...m,
 		children: [
 			o && /* @__PURE__ */ i("span", {
 				className: "assistant-message__model",
@@ -18,12 +18,15 @@ var o = r(function({ children: r, model: o, timestamp: s, locale: c, timestampFo
 			}),
 			/* @__PURE__ */ i(e, {
 				role: "assistant",
-				children: u ? /* @__PURE__ */ i(t, { label: d }) : r
+				children: u ? /* @__PURE__ */ i(t, {
+					name: d,
+					label: f
+				}) : r
 			}),
-			h && !u && /* @__PURE__ */ i("time", {
+			g && !u && /* @__PURE__ */ i("time", {
 				className: "assistant-message__timestamp",
-				dateTime: h.dateTime,
-				children: h.label
+				dateTime: g.dateTime,
+				children: g.label
 			})
 		]
 	});

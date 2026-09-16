@@ -21,7 +21,7 @@ Los puntos son tinta, así que derivan: `dot-color` es la tinta clara y `surface
 
 ## Accesibilidad
 
-`role="status"` con el texto de `label` en `VisuallyHidden` (default castellano, «El asistente está escribiendo…»). Los puntos son decorativos (`aria-hidden`).
+`role="status"` con el anuncio en `VisuallyHidden`. Los puntos son decorativos (`aria-hidden`).
 
 ## Movimiento reducido
 
@@ -38,6 +38,21 @@ La duración bebe de `motion.duration.slow`, que pasa a 0ms con `prefers-reduced
 ### Superficie oscura
 
 <TokenTable tokens={typingIndicatorDarkTokens} />
+
+## Internacionalización
+
+La frase —«El asistente está escribiendo…»— tiene **dos mitades que no se deciden en el mismo sitio**, y por eso se parte.
+
+Que alguien esté escribiendo es **cromo**: lo dice igual cualquier chat de la suite y el orden de las piezas es del idioma, así que la plantilla sale del `BrandMessagesProvider`, del espacio **`typingIndicator`**. **Quién** escribe es **contenido**: el asistente se llama como lo llame el producto, y un catálogo común lo dejaría diciendo «El asistente» en un chat cuyo asistente tiene nombre propio.
+
+| Prop | Clave del catálogo | Cuándo se lee |
+| --- | --- | --- |
+| `name` | — (**obligatoria y sin default**) | siempre |
+| `label` | `typingIndicator.typing(name)` | siempre |
+
+La clave es una **función** porque interpola el nombre. `label` sustituye la frase entera y sigue siendo anulación puntual.
+
+<Canvas of={TypingIndicatorStories.TextosDelProveedor} />
 
 ## Props
 

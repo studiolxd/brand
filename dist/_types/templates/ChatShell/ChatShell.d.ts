@@ -1,5 +1,22 @@
 import { type ReactNode } from 'react';
 import './ChatShell.css';
+/**
+ * El cromo del armazón: cómo se llama la columna de conversaciones y cómo se
+ * llama el botón que la despliega en pantallas estrechas.
+ *
+ * **Espacio propio y no el de `ConversationList`**, aunque hoy digan la misma
+ * palabra. Son dos piezas distintas —el armazón de la pantalla y la lista que
+ * cuelga de él— y el precedente está puesto: `appRoot.skipToContent` y
+ * `appShell.skipToContent` son la misma frase en dos espacios. El armazón se
+ * monta también sin `list` —dentro de un `AppShell`, donde la columna vive en
+ * el `Sidebar`—, y entonces ninguna de las dos claves se lee.
+ */
+export interface ChatShellMessages {
+    /** Nombre accesible de la columna de conversaciones, y título del cajón en pantallas estrechas. */
+    list: string;
+    /** Nombre accesible del botón que abre el cajón de conversaciones. */
+    listTrigger: string;
+}
 export interface ChatShellProps extends React.ComponentPropsWithoutRef<'div'> {
     /**
      * La columna de conversaciones, normalmente un `ConversationList`. Sin ella,
@@ -18,13 +35,14 @@ export interface ChatShellProps extends React.ComponentPropsWithoutRef<'div'> {
     composer?: ReactNode;
     /**
      * `aria-label` de la columna de conversaciones y título del cajón en
-     * pantallas estrechas. Default: "Conversaciones" (castellano). Solo se usa
-     * si hay `list`.
+     * pantallas estrechas. **Sin default**: sin él, sale de `chatShell.list` del
+     * `BrandMessagesProvider`. Solo se lee si hay `list`.
      */
     listLabel?: string;
     /**
-     * Nombre accesible del botón que abre el cajón de conversaciones. Default:
-     * "Abrir conversaciones" (castellano).
+     * Nombre accesible del botón que abre el cajón de conversaciones. **Sin
+     * default**: sin él, sale de `chatShell.listTrigger`. Solo se lee por debajo
+     * del punto de ruptura, que es donde el botón existe.
      */
     listTriggerLabel?: string;
     /**

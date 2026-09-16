@@ -88,4 +88,16 @@ El hilo no pinta color ni tiene tokens de superficie: el par claro/oscuro lo tra
 
 ## Internacionalización
 
-`ariaLabel` y `streamingLabel` traducen los dos textos que emite el hilo; `locale` y `timestampFormat` bajan a las marcas de tiempo de cada mensaje. Ver **Foundations › Internacionalización**.
+El hilo tiene **un solo texto propio** y sale del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`conversationThread`**.
+
+| Prop | Clave del catálogo | Cuándo se lee |
+| --- | --- | --- |
+| `ariaLabel` | `conversationThread.label` | siempre |
+
+El estado de escritura **no es del hilo**: lo pinta el `TypingIndicator`, que lee `typingIndicator.typing(name)`. El hilo solo lo reenvía, y con él el nombre de quien escribe.
+
+`streamingName` es **obligatoria y sin default**: el nombre del asistente es contenido del producto —el verbo es cromo, el nombre no—. `streamingLabel` sustituye la frase entera y sigue siendo anulación puntual.
+
+`locale` y `timestampFormat` no son texto: bajan a las marcas de tiempo de cada mensaje, que se formatean con `Intl`.
+
+<Canvas of={ConversationThreadStories.TextosDelProveedor} />

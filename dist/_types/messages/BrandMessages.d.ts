@@ -62,6 +62,18 @@ import type { LegalFooterMessages } from '../sections/LegalFooter/LegalFooter';
 import type { CalendarRosterMessages } from '../molecules/CalendarRoster/CalendarRoster';
 import type { CalendarPlannerMessages } from '../molecules/CalendarPlanner/CalendarPlanner';
 import type { NotificationListMessages } from '../molecules/NotificationList/NotificationList';
+import type { MessageComposerMessages } from '../molecules/MessageComposer/MessageComposer';
+import type { ConversationListMessages } from '../molecules/ConversationList/ConversationList';
+import type { ConversationThreadMessages } from '../organisms/ConversationThread/ConversationThread';
+import type { TypingIndicatorMessages } from '../atoms/TypingIndicator/TypingIndicator';
+import type { AnnotationThreadMessages } from '../organisms/AnnotationThread/AnnotationThread';
+import type { ChatShellMessages } from '../templates/ChatShell/ChatShell';
+import type { UntrustedTextMessages } from '../templates/ConnectorAuth/UntrustedText';
+import type { ConnectorRequestSummaryMessages } from '../templates/ConnectorAuth/ConnectorRequestSummary';
+import type { ConnectorConsentMessages } from '../templates/ConnectorAuth/ConnectorConsentPage';
+import type { ConnectorSignInMessages } from '../templates/ConnectorAuth/ConnectorSignInPage';
+import type { ConnectorExternalSignInMessages } from '../templates/ConnectorAuth/ConnectorExternalSignInPage';
+import type { ConnectorRejectionMessages } from '../templates/ConnectorAuth/ConnectorRejectionPage';
 /**
  * El contrato de textos de la librería: un espacio por componente, y dentro
  * de cada espacio **todas las claves obligatorias**.
@@ -148,5 +160,17 @@ export interface BrandMessages {
     calendarRoster: CalendarRosterMessages;
     calendarPlanner: CalendarPlannerMessages;
     notificationList: NotificationListMessages;
+    messageComposer: MessageComposerMessages;
+    conversationList: ConversationListMessages;
+    conversationThread: ConversationThreadMessages;
+    typingIndicator: TypingIndicatorMessages;
+    annotationThread: AnnotationThreadMessages;
+    chatShell: ChatShellMessages;
+    untrustedText: UntrustedTextMessages;
+    connectorRequestSummary: ConnectorRequestSummaryMessages;
+    connectorConsent: ConnectorConsentMessages;
+    connectorSignIn: ConnectorSignInMessages;
+    connectorExternalSignIn: ConnectorExternalSignInMessages;
+    connectorRejection: ConnectorRejectionMessages;
 }
-export type { PaginationMessages, TableMessages, DataTableMessages, InputFieldMessages, PasswordFieldMessages, SelectMessages, MultiSelectMessages, NumberInputMessages, OtpInputMessages, InputPhoneMessages, AsyncSelectMessages, AsyncMultiSelectMessages, DocsSearchMessages, SearchFormMessages, FilterBarMessages, CalendarMessages, DatePickerMessages, TimeSelectMessages, FileUploadMessages, ImageCropDialogMessages, AvatarUploadMessages, ModalMessages, SheetMessages, ConfirmDialogMessages, AlertMessages, BannerMessages, ToasterMessages, ConsentMessages, CommandPaletteMessages, AppLauncherMessages, FloatingDockMessages, NotificationButtonMessages, NotificationPanelMessages, MenuButtonMessages, AppRootMessages, AppShellMessages, SidebarMessages, SidebarNavMessages, SiteNavMessages, SiteHeaderMessages, UserMenuMessages, OrgSwitcherMessages, BreadcrumbMessages, TableOfContentsMessages, PrevNextNavMessages, PublicPageShellMessages, OnboardingShellMessages, CopyMessages, CodeBlockMessages, DotsButtonMessages, ProgressBarMessages, SpinnerMessages, SliderMessages, TreeViewMessages, UptimeBarsMessages, ChartMessages, StepperMessages, CarouselMessages, LanguageSwitcherMessages, ProjectCardMessages, LegalFooterMessages, CalendarRosterMessages, CalendarPlannerMessages, NotificationListMessages, };
+export type { PaginationMessages, TableMessages, DataTableMessages, InputFieldMessages, PasswordFieldMessages, SelectMessages, MultiSelectMessages, NumberInputMessages, OtpInputMessages, InputPhoneMessages, AsyncSelectMessages, AsyncMultiSelectMessages, DocsSearchMessages, SearchFormMessages, FilterBarMessages, CalendarMessages, DatePickerMessages, TimeSelectMessages, FileUploadMessages, ImageCropDialogMessages, AvatarUploadMessages, ModalMessages, SheetMessages, ConfirmDialogMessages, AlertMessages, BannerMessages, ToasterMessages, ConsentMessages, CommandPaletteMessages, AppLauncherMessages, FloatingDockMessages, NotificationButtonMessages, NotificationPanelMessages, MenuButtonMessages, AppRootMessages, AppShellMessages, SidebarMessages, SidebarNavMessages, SiteNavMessages, SiteHeaderMessages, UserMenuMessages, OrgSwitcherMessages, BreadcrumbMessages, TableOfContentsMessages, PrevNextNavMessages, PublicPageShellMessages, OnboardingShellMessages, CopyMessages, CodeBlockMessages, DotsButtonMessages, ProgressBarMessages, SpinnerMessages, SliderMessages, TreeViewMessages, UptimeBarsMessages, ChartMessages, StepperMessages, CarouselMessages, LanguageSwitcherMessages, ProjectCardMessages, LegalFooterMessages, CalendarRosterMessages, CalendarPlannerMessages, NotificationListMessages, MessageComposerMessages, ConversationListMessages, ConversationThreadMessages, TypingIndicatorMessages, AnnotationThreadMessages, ChatShellMessages, UntrustedTextMessages, ConnectorRequestSummaryMessages, ConnectorConsentMessages, ConnectorSignInMessages, ConnectorExternalSignInMessages, ConnectorRejectionMessages, };

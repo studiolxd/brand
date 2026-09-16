@@ -1,27 +1,30 @@
+'use client';
 import './typing-indicator.css';
-import { VisuallyHidden as e } from "./visually-hidden.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { VisuallyHidden as t } from "./visually-hidden.js";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/atoms/TypingIndicator/TypingIndicator.tsx
-function r({ label: r = "El asistente está escribiendo…" }) {
-	return /* @__PURE__ */ n("span", {
+function i({ name: i, label: a }) {
+	let o = e("typingIndicator");
+	return /* @__PURE__ */ r("span", {
 		className: "typing-indicator",
 		role: "status",
 		children: [
-			/* @__PURE__ */ t("span", {
+			/* @__PURE__ */ n("span", {
 				className: "typing-indicator__dot",
 				"aria-hidden": "true"
 			}),
-			/* @__PURE__ */ t("span", {
+			/* @__PURE__ */ n("span", {
 				className: "typing-indicator__dot",
 				"aria-hidden": "true"
 			}),
-			/* @__PURE__ */ t("span", {
+			/* @__PURE__ */ n("span", {
 				className: "typing-indicator__dot",
 				"aria-hidden": "true"
 			}),
-			/* @__PURE__ */ t(e, { children: r })
+			/* @__PURE__ */ n(t, { children: a ?? o("typing")(i) })
 		]
 	});
 }
 //#endregion
-export { r as TypingIndicator };
+export { i as TypingIndicator };

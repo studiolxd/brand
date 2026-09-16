@@ -148,4 +148,18 @@ La conversación abierta va **en tinta plena** (`color.text.on-dark`), exactamen
 
 ## Internacionalización
 
-`newLabel`, `navLabel`, `emptyMessage`, `errorTitle` y `deleteLabel` —esta última es una función, porque interpola el título— traen default castellano. El **mensaje** de `error` lo escribe el producto. Ver **Foundations › Internacionalización**.
+Los cinco textos de la lista salen del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`conversationList`**.
+
+| Prop | Clave del catálogo | Cuándo se lee |
+| --- | --- | --- |
+| `newLabel` | `conversationList.new` | siempre |
+| `navLabel` | `conversationList.nav` | siempre |
+| `deleteLabel` | `conversationList.delete(label)` | con alguna fila |
+| `emptyMessage` | `conversationList.empty` | con la lista vacía |
+| `errorTitle` | `conversationList.error` | con `error` |
+
+`deleteLabel` interpola el título de la conversación, así que es **función**. El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**: una lista que carga bien no exige el título del aviso de error.
+
+El **mensaje** de `error` y los títulos de `conversations` quedan fuera: son datos de la pantalla.
+
+<Canvas of={ConversationListStories.TextosDelProveedor} />

@@ -1,6 +1,27 @@
 import type { ReactNode } from 'react';
 import { type ConnectorAuthChromeProps } from './ConnectorAuthShell';
 import { ConnectorRequestSummary, type ConnectorScope } from './ConnectorRequestSummary';
+/**
+ * El cromo de la pantalla de identificarse dentro del flujo del conector.
+ *
+ * Aquí **no se concede nada** —la única acción es iniciar sesión—, así que el
+ * título y el rótulo de la acción sí son cromo: describen lo que hace el
+ * control, no una consecuencia sobre los datos de nadie. La frase que cuenta
+ * qué pide la herramienta (`intro`) y qué se pedirá (`scopeReadLabel` /
+ * `scopeWriteLabel`) siguen fuera, obligatorias.
+ */
+export interface ConnectorSignInMessages {
+    /** Título de la pantalla. */
+    title: string;
+    /** Rótulo de la acción de identificarse. */
+    signIn: string;
+    /**
+     * Cómo se nombra el producto en la frase cuando la pantalla no recibe
+     * `productName` («este producto»). Es un relleno genérico, no el nombre de
+     * nada: el nombre de verdad viaja en `productName`.
+     */
+    fallbackProduct: string;
+}
 export interface ConnectorSignInPageProps extends ConnectorAuthChromeProps {
     /** El nombre con el que la herramienta se registró. **Dato de fuera**: ver `ConnectorRequestSummary`. */
     clientName: string;
@@ -22,29 +43,42 @@ export interface ConnectorSignInPageProps extends ConnectorAuthChromeProps {
     action?: string;
     /** Los parámetros de OAuth que tienen que sobrevivir al acceso, como `<input type="hidden">`. */
     hiddenFields?: Record<string, string>;
-    /** Título de la pantalla. Default castellano. */
+    /** Título de la pantalla. **Sin default**: sin él, sale de `connectorSignIn.title`. */
     title?: ReactNode;
     /**
      * La frase de la cabecera. Recibe la herramienta y el producto ya
-     * compuestos. Default castellano.
+     * compuestos.
+     *
+     * **Obligatoria y sin default**: cuenta qué herramienta hay detrás y para
+     * qué se está tecleando una contraseña. Eso no lo escribe un catálogo de
+     * cromo.
      */
-    intro?: (parts: {
+    intro: (parts: {
         client: ReactNode;
         product: ReactNode;
     }) => ReactNode;
-    /** Nombre del producto cuando no se pasa `productName`, para la frase. Default castellano: «este producto». */
+    /**
+     * Cómo se nombra el producto en la frase cuando no se pasa `productName`.
+     * **Sin default**: sin ella, sale de `connectorSignIn.fallbackProduct`, y
+     * solo se lee cuando falta `productName`.
+     */
     fallbackProductName?: ReactNode;
-    /** Etiqueta de la acción. Default castellano: «Iniciar sesión». */
+    /** Etiqueta de la acción. **Sin default**: sin ella, sale de `connectorSignIn.signIn`. */
     signInLabel?: string;
-    /** Alcance en texto. Default castellano. */
-    scopeReadLabel?: string;
-    /** Ídem, lectura y escritura. Default castellano. */
-    scopeWriteLabel?: string;
-    /** Etiqueta del desplegador de un valor de fuera recortado. Default castellano: «Ver el valor completo». */
+    /**
+     * Qué se pedirá con `mcp:read`. **Obligatoria y sin default**: ver
+     * `ConnectorRequestSummary`. Solo se pinta si hay `scope`, pero se pide
+     * siempre — un alcance que se muestra a veces no puede depender de que
+     * alguien se acordara de traducirlo.
+     */
+    scopeReadLabel: string;
+    /** Ídem, lectura y escritura. **Obligatoria y sin default**. */
+    scopeWriteLabel: string;
+    /** Reenvío puro a `UntrustedText` (`untrustedText.expand`). */
     expandLabel?: string;
-    /** Etiqueta del desplegador abierto. Default castellano: «Ver menos». */
+    /** Reenvío puro a `UntrustedText` (`untrustedText.collapse`). */
     collapseLabel?: string;
-    /** Las comillas que enmarcan los datos de fuera. Default castellano: `['«', '»']`. */
+    /** Reenvío puro a `UntrustedText` (`untrustedText.quotes`). */
     valueQuotes?: [string, string];
     /** Rótulos de la ficha. Ver `ConnectorRequestSummary`. */
     summaryLabels?: Pick<React.ComponentProps<typeof ConnectorRequestSummary>, 'clientLabel' | 'productLabel' | 'scopeLabel' | 'redirectLabel'>;

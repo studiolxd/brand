@@ -1,7 +1,23 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render as renderRTL, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ChatShell } from './ChatShell';
+import type { ReactNode } from 'react';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixture as ES } from '../../../../.storybook/brandMessagesFixture';
+
+/**
+ * Estas piezas ya no traen su castellano puesto: el cromo sale del catálogo.
+ * Aquí lo monta este envoltorio, que es lo que hace la aplicación en su raíz.
+ */
+const Catalogo = ({ children }: { children: ReactNode }) => (
+  <BrandMessagesProvider messages={ES}>{children}</BrandMessagesProvider>
+);
+
+function render(ui: React.ReactElement) {
+  return renderRTL(ui, { wrapper: Catalogo });
+}
+
 
 /**
  * `test/setup.ts` deja `matchMedia` siempre en `matches: false`, es decir

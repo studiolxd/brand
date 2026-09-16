@@ -1,7 +1,34 @@
+'use client';
+
 import type { ReactNode } from 'react';
 import { DescriptionList, DescriptionTerm, DescriptionDetails } from '../../atoms/DescriptionList/DescriptionList';
 import { UntrustedText } from './UntrustedText';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './ConnectorRequestSummary.css';
+
+/**
+ * Los cinco rótulos de la ficha. Son cromo: nombran **qué dato** va en cada
+ * fila —herramienta, producto, cuenta, permiso, destino—, que es el vocabulario
+ * cerrado de una petición de OAuth y dice lo mismo en los cinco productos de
+ * la suite.
+ *
+ * Lo que **no** está aquí es qué se concede (`scopeReadLabel`,
+ * `scopeWriteLabel`): eso afirma qué va a poder hacer la herramienta con los
+ * datos de quien lo lea, y el sistema de diseño no puede decidirlo. Son props
+ * obligatorias y sin default — ver `ConnectorRequestSummaryProps`.
+ */
+export interface ConnectorRequestSummaryMessages {
+  /** Rótulo de la herramienta. */
+  client: string;
+  /** Rótulo del producto. */
+  product: string;
+  /** Rótulo de la cuenta. */
+  account: string;
+  /** Rótulo del permiso. */
+  scope: string;
+  /** Rótulo del destino. */
+  redirect: string;
+}
 
 /** Qué se le concede al conector: leer, o leer y modificar. Son los dos únicos alcances que emite el servidor de autorización (`mcp:read` y `mcp:write`). */
 export type ConnectorScope = 'read' | 'write';
@@ -35,25 +62,33 @@ export interface ConnectorRequestSummaryProps {
    * lo impone el registro.
    */
   redirectHost?: ReactNode;
-  /** Rótulo de la herramienta. Default castellano: «Herramienta». */
+  /** Rótulo de la herramienta. **Sin default**: sin él, sale de `connectorRequestSummary.client`. */
   clientLabel?: string;
-  /** Rótulo del producto. Default castellano: «Producto». */
+  /** Rótulo del producto. **Sin default**: `connectorRequestSummary.product`, y solo con `productName`. */
   productLabel?: string;
-  /** Rótulo de la cuenta. Default castellano: «Cuenta». */
+  /** Rótulo de la cuenta. **Sin default**: `connectorRequestSummary.account`, y solo con `accountEmail`. */
   accountLabel?: string;
-  /** Rótulo del permiso. Default castellano: «Permiso». */
+  /** Rótulo del permiso. **Sin default**: `connectorRequestSummary.scope`, y solo con `scope`. */
   scopeLabel?: string;
-  /** Rótulo del destino. Default castellano: «Destino». */
+  /** Rótulo del destino. **Sin default**: `connectorRequestSummary.redirect`, y solo con `redirectHost`. */
   redirectLabel?: string;
-  /** Valor del permiso de solo lectura. Default castellano, el del servidor de autorización. */
-  scopeReadLabel?: ReactNode;
-  /** Valor del permiso de lectura y escritura. Default castellano, el del servidor de autorización. */
-  scopeWriteLabel?: ReactNode;
-  /** Etiqueta del desplegador de un valor recortado. Default castellano: «Ver el valor completo». */
+  /**
+   * Qué se concede con `mcp:read`, en texto.
+   *
+   * **Obligatoria y sin default, y fuera del catálogo**: es una afirmación
+   * sobre lo que la herramienta va a poder hacer con los datos de quien lee la
+   * pantalla, y eso lo sabe el servidor de autorización —que es quien emite el
+   * alcance— y no un catálogo de cromo. Un texto común aquí diría lo mismo en
+   * los cinco productos sin que nada fallara, que es exactamente el riesgo.
+   */
+  scopeReadLabel: ReactNode;
+  /** Ídem para `mcp:write`. **Obligatoria y sin default**, por lo mismo. */
+  scopeWriteLabel: ReactNode;
+  /** Reenvío puro a `UntrustedText`, que lee `untrustedText.expand` por su cuenta. */
   expandLabel?: string;
-  /** Etiqueta del desplegador abierto. Default castellano: «Ver menos». */
+  /** Reenvío puro a `UntrustedText` (`untrustedText.collapse`). */
   collapseLabel?: string;
-  /** Las comillas que enmarcan los valores de fuera. Default castellano: `['«', '»']`. */
+  /** Reenvío puro a `UntrustedText` (`untrustedText.quotes`). */
   valueQuotes?: [string, string];
   /** Se añade DESPUÉS de las clases propias. */
   className?: string;
@@ -82,18 +117,20 @@ export function ConnectorRequestSummary({
   accountEmail,
   scope,
   redirectHost,
-  clientLabel = 'Herramienta',
-  productLabel = 'Producto',
-  accountLabel = 'Cuenta',
-  scopeLabel = 'Permiso',
-  redirectLabel = 'Destino',
-  scopeReadLabel = 'leer los datos de este producto',
-  scopeWriteLabel = 'leer y modificar los datos de este producto',
+  clientLabel,
+  productLabel,
+  accountLabel,
+  scopeLabel,
+  redirectLabel,
+  scopeReadLabel,
+  scopeWriteLabel,
   expandLabel,
   collapseLabel,
   valueQuotes,
   className,
 }: ConnectorRequestSummaryProps) {
+  const t = useBrandMessages('connectorRequestSummary');
+
   // Los tres valores de fuera se pintan igual, y aquí —la ficha, que es donde
   // el dato se compara con lo que uno esperaba— el recorte trae desplegador.
   const ajeno = (value: ReactNode) => (
@@ -102,33 +139,33 @@ export function ConnectorRequestSummary({
 
   return (
     <DescriptionList className={['connector-request-summary', className].filter(Boolean).join(' ')}>
-      <DescriptionTerm>{clientLabel}</DescriptionTerm>
+      <DescriptionTerm>{t('client', clientLabel)}</DescriptionTerm>
       <DescriptionDetails className="connector-request-summary__untrusted">{ajeno(clientName)}</DescriptionDetails>
 
       {productName !== undefined && (
         <>
-          <DescriptionTerm>{productLabel}</DescriptionTerm>
+          <DescriptionTerm>{t('product', productLabel)}</DescriptionTerm>
           <DescriptionDetails>{productName}</DescriptionDetails>
         </>
       )}
 
       {accountEmail !== undefined && (
         <>
-          <DescriptionTerm>{accountLabel}</DescriptionTerm>
+          <DescriptionTerm>{t('account', accountLabel)}</DescriptionTerm>
           <DescriptionDetails className="connector-request-summary__untrusted">{ajeno(accountEmail)}</DescriptionDetails>
         </>
       )}
 
       {scope !== undefined && (
         <>
-          <DescriptionTerm>{scopeLabel}</DescriptionTerm>
+          <DescriptionTerm>{t('scope', scopeLabel)}</DescriptionTerm>
           <DescriptionDetails>{scope === 'read' ? scopeReadLabel : scopeWriteLabel}</DescriptionDetails>
         </>
       )}
 
       {redirectHost !== undefined && (
         <>
-          <DescriptionTerm>{redirectLabel}</DescriptionTerm>
+          <DescriptionTerm>{t('redirect', redirectLabel)}</DescriptionTerm>
           <DescriptionDetails className="connector-request-summary__untrusted">{ajeno(redirectHost)}</DescriptionDetails>
         </>
       )}

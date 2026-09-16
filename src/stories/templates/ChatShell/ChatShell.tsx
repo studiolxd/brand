@@ -4,7 +4,26 @@ import { forwardRef, useCallback, useEffect, useState, type ReactNode } from 're
 import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Sheet } from '../../molecules/Sheet/Sheet';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './ChatShell.css';
+
+/**
+ * El cromo del armazón: cómo se llama la columna de conversaciones y cómo se
+ * llama el botón que la despliega en pantallas estrechas.
+ *
+ * **Espacio propio y no el de `ConversationList`**, aunque hoy digan la misma
+ * palabra. Son dos piezas distintas —el armazón de la pantalla y la lista que
+ * cuelga de él— y el precedente está puesto: `appRoot.skipToContent` y
+ * `appShell.skipToContent` son la misma frase en dos espacios. El armazón se
+ * monta también sin `list` —dentro de un `AppShell`, donde la columna vive en
+ * el `Sidebar`—, y entonces ninguna de las dos claves se lee.
+ */
+export interface ChatShellMessages {
+  /** Nombre accesible de la columna de conversaciones, y título del cajón en pantallas estrechas. */
+  list: string;
+  /** Nombre accesible del botón que abre el cajón de conversaciones. */
+  listTrigger: string;
+}
 
 /**
  * Mismo punto de ruptura que `--breakpoint-lg` (token `chat-shell.breakpoint`):
@@ -32,13 +51,14 @@ export interface ChatShellProps extends React.ComponentPropsWithoutRef<'div'> {
   composer?: ReactNode;
   /**
    * `aria-label` de la columna de conversaciones y título del cajón en
-   * pantallas estrechas. Default: "Conversaciones" (castellano). Solo se usa
-   * si hay `list`.
+   * pantallas estrechas. **Sin default**: sin él, sale de `chatShell.list` del
+   * `BrandMessagesProvider`. Solo se lee si hay `list`.
    */
   listLabel?: string;
   /**
-   * Nombre accesible del botón que abre el cajón de conversaciones. Default:
-   * "Abrir conversaciones" (castellano).
+   * Nombre accesible del botón que abre el cajón de conversaciones. **Sin
+   * default**: sin él, sale de `chatShell.listTrigger`. Solo se lee por debajo
+   * del punto de ruptura, que es donde el botón existe.
    */
   listTriggerLabel?: string;
   /**
@@ -70,13 +90,14 @@ export const ChatShell = forwardRef<HTMLDivElement, ChatShellProps>(function Cha
   header,
   children,
   composer,
-  listLabel = 'Conversaciones',
-  listTriggerLabel = 'Abrir conversaciones',
+  listLabel,
+  listTriggerLabel,
   listOpen,
   onListOpenChange,
   className,
   ...rest
 }, ref) {
+  const t = useBrandMessages('chatShell');
   const [isDesktop, setIsDesktop] = useState(() =>
     typeof window === 'undefined' ? true : window.matchMedia(DESKTOP_MQ).matches,
   );
@@ -132,7 +153,7 @@ export const ChatShell = forwardRef<HTMLDivElement, ChatShellProps>(function Cha
   return (
     <div ref={setRefs} className={classes} {...rest}>
       {asColumn && (
-        <aside className="chat-shell__list" aria-label={listLabel}>
+        <aside className="chat-shell__list" aria-label={t('list', listLabel)}>
           {list}
         </aside>
       )}
@@ -145,7 +166,7 @@ export const ChatShell = forwardRef<HTMLDivElement, ChatShellProps>(function Cha
                 variant="ghost"
                 size="sm"
                 iconOnly
-                aria-label={listTriggerLabel}
+                aria-label={t('listTrigger', listTriggerLabel)}
                 aria-haspopup="dialog"
                 aria-expanded={drawerOpen}
                 className="chat-shell__list-trigger"
@@ -170,7 +191,7 @@ export const ChatShell = forwardRef<HTMLDivElement, ChatShellProps>(function Cha
           side="left"
           open={drawerOpen}
           onOpenChange={setDrawerOpen}
-          title={listLabel}
+          title={t('list', listLabel)}
           /* El título sigue nombrando el diálogo para quien lo escucha, pero
              no se pinta: la lista se explica sola y el rótulo se comía una
              línea de pantalla en la que caben dos conversaciones. */
@@ -201,7 +222,7 @@ export const ChatShell = forwardRef<HTMLDivElement, ChatShellProps>(function Cha
               variant="ghost"
               size="sm"
               iconOnly
-              aria-label={listTriggerLabel}
+              aria-label={t('listTrigger', listTriggerLabel)}
               aria-expanded
               className="chat-shell__list-trigger"
               onClick={() => setDrawerOpen(false)}

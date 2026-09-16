@@ -203,10 +203,24 @@ que ya contrastan en las dos superficies.
 
 ## Internacionalización
 
-Todos los textos que emite el componente son props con default castellano:
-`label`, `openLabel`, `acknowledgedLabel`, `resolvedLabel`, `editedLabel` y
-`repliesLabel` —que es una función porque interpola el número—. La fecha va por `locale` (por defecto
-`es-ES`) y `dateFormat`, delegando en `Intl`.
+Los seis textos del hilo salen del `BrandMessagesProvider`, **sin valor por defecto**, del espacio **`annotationThread`**.
+
+| Prop | Clave del catálogo | Cuándo se lee |
+| --- | --- | --- |
+| `label` | `annotationThread.label` | siempre |
+| `openLabel` | `annotationThread.open` | con el hilo abierto |
+| `acknowledgedLabel` | `annotationThread.acknowledged` | con el hilo atendido |
+| `resolvedLabel` | `annotationThread.resolved` | con el hilo resuelto |
+| `editedLabel` | `annotationThread.edited` | con alguna anotación editada |
+| `repliesLabel` | `annotationThread.replies(count)` | con respuestas |
+
+Los **tres estados van clave a clave** y no como una lista, contra la regla general: es un vocabulario **cerrado** del componente —abierta, atendida, resuelta— y obligar a la aplicación a montar nada para traducir tres palabras era peor que darles tres claves. Es el mismo caso que los seis tipos de la leyenda de `CalendarRoster`. Las props siguen ganando: una revisión que llame «Verificada» a `acknowledged` sigue pudiendo.
+
+`repliesLabel` lleva el plural, así que es **función**. Cada texto se lee **donde se pinta**: un hilo abierto no exige los rótulos de «atendida» ni de «resuelta», y uno sin respuestas no exige el recuento.
+
+La fecha no es texto: va por `locale` (por defecto `es-ES`) y `dateFormat`, delegando en `Intl`.
+
+<Canvas of={AnnotationThreadStories.TextosDelProveedor} />
 
 ## Props
 

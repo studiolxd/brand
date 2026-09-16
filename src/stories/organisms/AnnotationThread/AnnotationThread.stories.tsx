@@ -11,6 +11,8 @@ import { Figure } from '../../atoms/Figure/Figure';
 import { Inline } from '../../atoms/Inline/Inline';
 import { Link } from '../../atoms/Link/Link';
 import { Stack } from '../../atoms/Stack/Stack';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const meta: Meta<typeof AnnotationThread> = {
   title: 'Organisms/AnnotationThread',
@@ -378,5 +380,64 @@ export const TestCoordenadaEstrecha: Story = {
     await expect(coordenada.getBoundingClientRect().right).toBeLessThanOrEqual(
       Math.ceil(hilo.getBoundingClientRect().right),
     );
+  },
+};
+
+/**
+ * Los seis textos del hilo salen del catálogo (`annotationThread.*`): su
+ * nombre accesible, los tres estados —vocabulario cerrado, clave a clave, como
+ * los seis tipos de `CalendarRoster`—, la marca de editada y el recuento de
+ * respuestas, que lleva plural y por eso es función. Quién escribió cada
+ * anotación y qué dice son datos.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <AnnotationThread
+        status="acknowledged"
+        locale="en-GB"
+        annotation={{
+          id: 'a1',
+          author: 'Marta Ruiz',
+          date: '2026-08-24T10:12:00Z',
+          body: 'The image is missing its alternative text.',
+          edited: true,
+        }}
+        replies={[
+          { id: 'a2', author: 'Luis Peña', date: '2026-08-24T11:40:00Z', body: 'Fixed.' },
+          { id: 'a3', author: 'Ana Gil', date: '2026-08-24T12:02:00Z', body: 'Thanks.' },
+        ]}
+      />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el nombre, el estado, la marca de editada y el recuento salen del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el hilo lee sus textos del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <AnnotationThread
+        status="resolved"
+        locale="en-GB"
+        annotation={{
+          id: 'a1',
+          author: 'Marta Ruiz',
+          date: '2026-08-24T10:12:00Z',
+          body: 'The image is missing its alternative text.',
+          edited: true,
+        }}
+        replies={[{ id: 'a2', author: 'Luis Peña', date: '2026-08-24T11:40:00Z', body: 'Fixed.' }]}
+      />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const hilo = canvas.getByRole('article', { name: 'Annotation thread' });
+    await expect(within(hilo).getByText('Resolved')).toBeInTheDocument();
+    await expect(within(hilo).getByText('edited')).toBeInTheDocument();
+    await expect(within(hilo).getByText('1 reply')).toBeInTheDocument();
   },
 };

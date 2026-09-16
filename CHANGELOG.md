@@ -7,6 +7,143 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.0.0] — 2026-09-16
+
+> **Major.** La **última ola** del proveedor de textos, y la más distinta: el chat y las
+> pantallas del conector. Doce espacios nuevos, y con ellos la línea que faltaba por
+> trazar — **lo que afirma algo no se pone en un catálogo de cromo**. Los textos de
+> consentimiento, los cinco motivos de rechazo, qué se concede y el nombre del asistente
+> pasan a ser **props obligatorias y sin default**, como `confirmDialog.confirmLabel` en la
+> v45. Con esto, ningún componente del paquete trae ya castellano puesto.
+
+### El chat y el conector leen del proveedor
+
+Doce espacios nuevos en `BrandMessages`: `messageComposer`, `conversationList`,
+`conversationThread`, `typingIndicator`, `annotationThread`, `chatShell`, `untrustedText`,
+`connectorRequestSummary`, `connectorConsent`, `connectorSignIn`,
+`connectorExternalSignIn` y `connectorRejection`. Mismo orden —**prop → proveedor →
+error**— y cada texto se lee **donde se pinta**: una lista de conversaciones que carga bien
+no exige el título de su aviso de error, un hilo de anotaciones abierto no exige los
+rótulos de «atendida» ni de «resuelta», y un armazón de chat montado sin columna no exige
+ninguno de sus dos textos.
+
+### La línea de esta ola: el cromo nombra un control, el contenido afirma algo
+
+Es la distinción que las ocho olas anteriores rozaron y esta tiene que resolver, porque
+aquí casi todo el texto es una frase larga de producto o de consentimiento. La regla, en
+una línea: **si el texto nombra un control, un estado o un dato, es cromo y va al catálogo;
+si afirma algo —qué se concede, a dónde sale un acceso, qué comprobación ha fallado, cómo
+se llama el asistente—, es contenido y es prop obligatoria sin default.**
+
+Tres parejas la enseñan mejor que cualquier definición:
+
+- **`connectorConsent.deny` frente a `ConnectorConsentPage.approveLabel`.** «Denegar»
+  describe lo único que hace ese botón —no seguir— y no hay consecuencia que nombrar:
+  cromo. El otro es **donde se concede el acceso**, y tiene que nombrar la consecuencia:
+  obligatorio y fuera del catálogo. Es literalmente el caso de `confirmDialog.cancel`
+  frente a `ConfirmDialog.confirmLabel`, y se resuelve igual.
+- **`connectorRequestSummary.scope` frente a `scopeReadLabel`.** El rótulo «Permiso» nombra
+  qué dato va en esa fila de la ficha: cromo. Lo que ese permiso **es** —«leer los datos de
+  este producto»— afirma qué va a poder hacer una herramienta con los datos de quien lee la
+  pantalla, y eso lo sabe el servidor de autorización, no un catálogo común.
+- **`typingIndicator.typing(name)` frente a `TypingIndicator.name`.** Que alguien esté
+  escribiendo es cromo: lo dice igual cualquier chat, y el orden de las piezas es del
+  idioma. **Quién** escribe es contenido: un catálogo común dejaría diciendo «El asistente»
+  en un chat cuyo asistente tiene nombre propio.
+
+### `ConnectorRejectionPage` deja de traer los cinco rechazos dentro
+
+Era el caso más claro de todos y el que más cambia: un `Record` con **veinte cadenas
+castellanas** —título, explicación, qué hacer y rótulo de la salida, por cada uno de los
+cinco motivos— vivía dentro del componente, y la prop `reason` elegía cuatro. Cada una de
+esas veinte afirma algo sobre una comprobación de seguridad («no se ha enviado nada a
+ninguna parte», «si no la reconoces, no vuelvas a intentarlo»), y eso no lo decide el
+sistema de diseño.
+
+Así que el `Record` se retira entero, `reason` **desaparece** y `title`, `description`,
+`hint` y `retryLabel` pasan a ser obligatorias. El tipo `ConnectorRejectionReason` se
+queda —es el **vocabulario** de los cinco motivos, escrito en el sistema— para que la
+aplicación teclee contra él al sacar los cuatro textos de su catálogo. La maqueta, el
+orden y la postura no cambian: ninguno de los cinco ofrece reintentar en el sitio.
+
+### `untrustedText.quotes`: las comillas son puntuación del idioma
+
+Las comillas que enmarcan un dato de fuera no son una decisión del producto ni un adorno:
+son `« »` en castellano, `“ ”` en inglés y `„ “` en alemán. Al catálogo, como el resto del
+cromo. El **valor** que enmarcan sigue entrando por `value` y no pasa por ningún catálogo
+—es dato de un tercero—: por eso se pinta entrecomillado, aislado en un `<bdi>` y con los
+caracteres invisibles a la vista.
+
+### `chatShell.list` no es `conversationList.nav`, aunque hoy digan lo mismo
+
+Dos espacios para la misma palabra, a propósito: son dos piezas distintas —el armazón de la
+pantalla y la lista que cuelga de él—, y el armazón se monta también **sin lista**, dentro
+de un `AppShell` donde la columna vive en el `Sidebar`. El precedente ya estaba puesto con
+`appRoot.skipToContent` frente a `appShell.skipToContent`.
+
+### Los tres estados de `AnnotationThread` van clave a clave
+
+Contra la regla general de que una **lista** se traduce pasándola entera. Es la misma
+excepción que los seis tipos de la leyenda de `CalendarRoster`, y por la misma razón: es un
+vocabulario **cerrado** del componente —abierta, atendida, resuelta— y obligar a la
+aplicación a montar nada para traducir tres palabras era peor que darle tres claves. Las
+props siguen ganando, así que una revisión puede llamar «Verificada» a `acknowledged`.
+
+### Para quien actualice
+
+**1. El catálogo del `BrandMessagesProvider` tiene que crecer con los doce espacios**, o la
+primera pantalla de chat o de conector **lanza en render**:
+
+| Espacio | Claves | Qué es |
+| --- | --- | --- |
+| `messageComposer` | `placeholder`, `send` | el marcador del campo y el botón que manda |
+| `conversationList` | `new`, `nav`, `delete(label)`, `empty`, `error` | el cromo de la lista y sus dos estados propios |
+| `conversationThread` | `label` | el nombre de la región que anuncia los mensajes |
+| `typingIndicator` | `typing(name)` | la plantilla del estado de escritura |
+| `annotationThread` | `label`, `open`, `acknowledged`, `resolved`, `edited`, `replies(count)` | el hilo, sus tres estados, la marca de editada y el recuento |
+| `chatShell` | `list`, `listTrigger` | la columna de conversaciones y el botón que la despliega |
+| `untrustedText` | `expand`, `collapse`, `quotes` | el desplegador de un valor recortado y las comillas del idioma |
+| `connectorRequestSummary` | `client`, `product`, `account`, `scope`, `redirect` | los cinco rótulos de la ficha de la petición |
+| `connectorConsent` | `title`, `deny` | el título de la pantalla y la salida que no concede nada |
+| `connectorSignIn` | `title`, `signIn`, `fallbackProduct` | identificarse dentro del flujo del conector |
+| `connectorExternalSignIn` | `title`, `organization`, `submit(platform)` | el conector ajeno (hoy, el de Moodle) |
+| `connectorRejection` | `code` | el rótulo del código técnico |
+
+Cuatro de ellas interpolan un dato (`conversationList.delete`,
+`typingIndicator.typing`, `annotationThread.replies`, `connectorExternalSignIn.submit`),
+así que son funciones. Y `untrustedText.quotes` **no es una cadena**: es la pareja
+`[apertura, cierre]`.
+
+**2. Estas props pasan a ser obligatorias y sin default. Rompen a quien no las pase, y esa
+es la parte breaking de la release:**
+
+| Componente | Props que pasan a obligatorias |
+| --- | --- |
+| `TypingIndicator` | `name` |
+| `AssistantMessage` | `streamingName` |
+| `ConversationThread` | `streamingName` |
+| `ConnectorRequestSummary` | `scopeReadLabel`, `scopeWriteLabel` |
+| `ConnectorConsentPage` | `intro`, `redirectNotice`, `approveLabel`, `scopeReadLabel`, `scopeWriteLabel` |
+| `ConnectorSignInPage` | `intro`, `scopeReadLabel`, `scopeWriteLabel` |
+| `ConnectorExternalSignInPage` | `platformName`, `intro`, `signingInTo` |
+| `ConnectorRejectionPage` | `title`, `description`, `hint`, `retryLabel` |
+
+**3. Y estos dos cambios de forma:**
+
+- **`ConnectorRejectionPage.reason` desaparece.** Los cuatro textos que elegía ahora se
+  pasan. `ConnectorRejectionReason` sigue exportado, como vocabulario.
+- **`ConnectorExternalSignInPage.platformName` pasa de `ReactNode` a `string`**, porque el
+  catálogo la interpola dentro del rótulo del botón
+  (`connectorExternalSignIn.submit(platform)`). Y `submitLabel` pasa de
+  `(parts: { platform }) => ReactNode` a `(platform: string) => string`, la misma firma que
+  la clave a la que anula.
+
+**Ojo con dos valores.** `messageComposer.placeholder` y `typingIndicator.typing` llevan
+**puntos suspensivos** dentro («Escribe un mensaje…», «… está escribiendo…»): son parte del
+texto, no adorno — ver `Foundations/Redacción` § «Los estados de carga llevan puntos
+suspensivos». Y `conversationList.delete` recibe el título de la conversación **entero**, sin
+recortar: es el `aria-label` del aspa, y ahí el recorte visual de la fila no pinta nada.
+
 ## [48.1.0] — 2026-09-16
 
 > **Minor.** `FilterBar` pasa a columnas fijas por punto de corte —4 en escritorio, 2 en

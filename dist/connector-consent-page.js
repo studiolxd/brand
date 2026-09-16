@@ -1,89 +1,79 @@
 'use client';
-import { Button as e } from "./button.js";
-import { Paragraph as t } from "./paragraph.js";
-import { Form as n } from "./form.js";
-import { ConnectorAuthShell as r } from "./connector-auth-shell.js";
-import { t as i } from "./_shared/untrustedtext.js";
-import { ConnectorRequestSummary as a } from "./connector-request-summary.js";
-import { Fragment as o, jsx as s, jsxs as c } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Button as t } from "./button.js";
+import { Paragraph as n } from "./paragraph.js";
+import { Form as r } from "./form.js";
+import { ConnectorAuthShell as i } from "./connector-auth-shell.js";
+import { t as a } from "./_shared/untrustedtext.js";
+import { ConnectorRequestSummary as o } from "./connector-request-summary.js";
+import { Fragment as s, jsx as c, jsxs as l } from "react/jsx-runtime";
 //#region src/stories/templates/ConnectorAuth/ConnectorConsentPage.tsx
-function l({ clientName: l, productName: u, accountEmail: d, scope: f = "read", redirectHost: p, action: m, hiddenFields: h, decisionName: g = "decision", approveValue: _ = "approve", denyValue: v = "deny", onApprove: y, onDeny: b, denyHref: x, initialFocus: S = "none", title: C = "Conectar una herramienta", intro: w = ({ client: e, what: t, email: n }) => /* @__PURE__ */ c(o, { children: [
-	e,
-	" quiere ",
-	t,
-	" como ",
-	n,
-	"."
-] }), redirectNotice: T = ({ host: e }) => /* @__PURE__ */ c(o, { children: [
-	"El acceso se enviará a ",
-	e,
-	". Continúa solo si lo reconoces."
-] }), approveLabel: E = "Permitir acceso", denyLabel: D = "Denegar", scopeReadLabel: O = "leer los datos de este producto", scopeWriteLabel: k = "leer y modificar los datos de este producto", expandLabel: A, collapseLabel: j, valueQuotes: M, summaryLabels: N, links: P, header: F, footer: I, preferences: L, preferencesLabel: R, id: z, shell: B }) {
-	let V = m !== void 0, H = f === "read" ? O : k, U = (e) => /* @__PURE__ */ s(i, {
+function u({ clientName: u, productName: d, accountEmail: f, scope: p = "read", redirectHost: m, action: h, hiddenFields: g, decisionName: _ = "decision", approveValue: v = "approve", denyValue: y = "deny", onApprove: b, onDeny: x, denyHref: S, initialFocus: C = "none", title: w, intro: T, redirectNotice: E, approveLabel: D, denyLabel: O, scopeReadLabel: k, scopeWriteLabel: A, expandLabel: j, collapseLabel: M, valueQuotes: N, summaryLabels: P, links: F, header: I, footer: L, preferences: R, preferencesLabel: z, id: B, shell: V }) {
+	let H = e("connectorConsent"), U = h !== void 0, W = p === "read" ? k : A, G = (e) => /* @__PURE__ */ c(a, {
 		value: e,
-		quotes: M
-	}), W = x === void 0 ? /* @__PURE__ */ s(e, {
+		quotes: N
+	}), K = S === void 0 ? /* @__PURE__ */ c(t, {
 		variant: "outline",
-		type: V ? "submit" : "button",
-		name: V ? g : void 0,
-		value: V ? v : void 0,
+		type: U ? "submit" : "button",
+		name: U ? _ : void 0,
+		value: U ? y : void 0,
+		onClick: x,
+		autoFocus: C === "deny",
+		children: H("deny", O)
+	}) : /* @__PURE__ */ c(t, {
+		variant: "outline",
+		href: S,
+		children: H("deny", O)
+	}), q = /* @__PURE__ */ c(t, {
+		type: U ? "submit" : "button",
+		name: U ? _ : void 0,
+		value: U ? v : void 0,
 		onClick: b,
-		autoFocus: S === "deny",
 		children: D
-	}) : /* @__PURE__ */ s(e, {
-		variant: "outline",
-		href: x,
-		children: D
-	}), G = /* @__PURE__ */ s(e, {
-		type: V ? "submit" : "button",
-		name: V ? g : void 0,
-		value: V ? _ : void 0,
-		onClick: y,
-		children: E
 	});
-	return /* @__PURE__ */ s(r, {
-		title: C,
-		description: w({
-			client: /* @__PURE__ */ s("strong", { children: U(l) }),
-			what: H,
-			email: /* @__PURE__ */ s("strong", { children: U(d) })
+	return /* @__PURE__ */ c(i, {
+		title: w ?? H("title"),
+		description: T({
+			client: /* @__PURE__ */ c("strong", { children: G(u) }),
+			what: W,
+			email: /* @__PURE__ */ c("strong", { children: G(f) })
 		}),
-		header: F,
-		footer: I,
-		preferences: L,
-		preferencesLabel: R,
-		id: z,
-		shell: B,
-		children: /* @__PURE__ */ c(n, {
+		header: I,
+		footer: L,
+		preferences: R,
+		preferencesLabel: z,
+		id: B,
+		shell: V,
+		children: /* @__PURE__ */ l(r, {
 			size: "lg",
 			blockActions: !0,
-			method: typeof m == "string" ? "post" : void 0,
-			action: m,
-			links: P,
-			actions: /* @__PURE__ */ c(o, { children: [W, G] }),
+			method: typeof h == "string" ? "post" : void 0,
+			action: h,
+			links: F,
+			actions: /* @__PURE__ */ l(s, { children: [K, q] }),
 			children: [
-				h && Object.entries(h).map(([e, t]) => /* @__PURE__ */ s("input", {
+				g && Object.entries(g).map(([e, t]) => /* @__PURE__ */ c("input", {
 					type: "hidden",
 					name: e,
 					value: t
 				}, e)),
-				/* @__PURE__ */ s(a, {
-					clientName: l,
-					productName: u,
-					accountEmail: d,
-					scope: f,
-					redirectHost: p,
-					scopeReadLabel: O,
-					scopeWriteLabel: k,
-					expandLabel: A,
-					collapseLabel: j,
-					valueQuotes: M,
-					...N
+				/* @__PURE__ */ c(o, {
+					clientName: u,
+					productName: d,
+					accountEmail: f,
+					scope: p,
+					redirectHost: m,
+					scopeReadLabel: k,
+					scopeWriteLabel: A,
+					expandLabel: j,
+					collapseLabel: M,
+					valueQuotes: N,
+					...P
 				}),
-				/* @__PURE__ */ s(t, { children: T({ host: /* @__PURE__ */ s("strong", { children: U(p) }) }) })
+				/* @__PURE__ */ c(n, { children: E({ host: /* @__PURE__ */ c("strong", { children: G(m) }) }) })
 			]
 		})
 	});
 }
 //#endregion
-export { l as ConnectorConsentPage };
+export { u as ConnectorConsentPage };

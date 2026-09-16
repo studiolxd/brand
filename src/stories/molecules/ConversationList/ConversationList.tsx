@@ -7,7 +7,31 @@ import { EmptyState } from '../EmptyState/EmptyState';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Skeleton } from '../../atoms/Skeleton/Skeleton';
 import { Tooltip } from '../../atoms/Tooltip/Tooltip';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './ConversationList.css';
+
+/**
+ * El cromo de la lista de conversaciones: el botón de abrir una nueva, el
+ * nombre de la navegación, el aspa de cada fila y los dos estados que la lista
+ * pinta ella misma —vacía y rota—.
+ *
+ * Los cinco son **genéricos**: dicen lo mismo en cualquier chat de la suite y
+ * ninguno afirma nada del producto. Los títulos de las conversaciones son
+ * datos y viajan en `conversations`; el detalle del fallo lo pone `error`, que
+ * nunca tuvo default.
+ */
+export interface ConversationListMessages {
+  /** Rótulo del botón que abre una conversación nueva. */
+  new: string;
+  /** Nombre accesible del `<nav>` que envuelve la lista. */
+  nav: string;
+  /** Nombre accesible del aspa de una fila. Recibe el título de la conversación. */
+  delete: (label: string) => string;
+  /** Título del estado vacío que la lista pinta ella misma. */
+  empty: string;
+  /** Título del aviso de que la lista no se pudo cargar. */
+  error: string;
+}
 
 export interface ConversationItem {
   id: string;
@@ -21,11 +45,20 @@ export interface ConversationListProps
   onNew: () => void;
   onSelect: (id: string) => void;
   onDelete: (id: string) => void;
-  /** Texto del botón que abre una conversación nueva. Default castellano. */
+  /**
+   * Texto del botón que abre una conversación nueva. **Sin default**: sin él,
+   * sale de `conversationList.new` del `BrandMessagesProvider`.
+   */
   newLabel?: string;
-  /** `aria-label` del `<nav>` que envuelve la lista. Default castellano. */
+  /**
+   * `aria-label` del `<nav>` que envuelve la lista. **Sin default**: sin él,
+   * sale de `conversationList.nav`.
+   */
   navLabel?: string;
-  /** Nombre accesible del aspa de cada fila. Recibe el título de la conversación. */
+  /**
+   * Nombre accesible del aspa de cada fila. Recibe el título de la
+   * conversación. **Sin default**: sin él, sale de `conversationList.delete`.
+   */
   deleteLabel?: (label: string) => string;
   /**
    * La lista aún está cargando: en su sitio se pintan marcadores (`Skeleton`)
@@ -42,13 +75,16 @@ export interface ConversationListProps
   error?: ReactNode;
   /**
    * Título del `EmptyState` que la lista pinta **ella misma** cuando no hay
-   * conversaciones. Default: "Todavía no hay conversaciones" (castellano). Sin
-   * pasarla, el consumidor se lleva ese texto: el hueco vacío nunca se queda en
-   * blanco, así que la pantalla no tiene que añadir un aviso propio encima —si
-   * lo añade, se ven dos.
+   * conversaciones. **Sin default**: sin él, sale de
+   * `conversationList.empty`, así que el hueco vacío nunca se queda en blanco
+   * y la pantalla no tiene que añadir un aviso propio encima —si lo añade, se
+   * ven dos—. Solo se lee con la lista vacía.
    */
   emptyMessage?: string;
-  /** `title` del `Alert` de error. Default castellano. */
+  /**
+   * `title` del `Alert` de error. **Sin default**: sin él, sale de
+   * `conversationList.error`, y solo se lee cuando hay `error`.
+   */
   errorTitle?: string;
   /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
   className?: string;
@@ -84,20 +120,21 @@ export const ConversationList = forwardRef<HTMLDivElement, ConversationListProps
   onNew,
   onSelect,
   onDelete,
-  newLabel = 'Nueva conversación',
-  navLabel = 'Conversaciones',
-  deleteLabel = (label) => `Eliminar conversación "${label}"`,
+  newLabel,
+  navLabel,
+  deleteLabel,
   isLoading = false,
   loadingCount = 4,
   error,
-  emptyMessage = 'Todavía no hay conversaciones',
-  errorTitle = 'No se pudieron cargar las conversaciones',
+  emptyMessage,
+  errorTitle,
   className,
   ...rest
 }, ref) {
   // Qué fila tiene el bocadillo abierto. Uno solo a la vez y por `id`: no hace
   // falta medir ni guardar nada de las demás.
   const [bocadillo, setBocadillo] = useState<string | null>(null);
+  const t = useBrandMessages('conversationList');
 
   // Prioridad: el error tapa todo, la carga tapa la lista, y la lista vacía
   // solo se anuncia cuando ya se sabe que está vacía.
@@ -107,13 +144,13 @@ export const ConversationList = forwardRef<HTMLDivElement, ConversationListProps
     <div ref={ref} className={`conversation-list${className ? ` ${className}` : ''}`} {...rest}>
       <div className="conversation-list__header">
         <Button variant="outline" block onClick={onNew}>
-          {newLabel}
+          {t('new', newLabel)}
         </Button>
       </div>
 
-      <nav aria-label={navLabel} className="conversation-list__nav" aria-busy={isLoading || undefined}>
+      <nav aria-label={t('nav', navLabel)} className="conversation-list__nav" aria-busy={isLoading || undefined}>
         {estado === 'error' && (
-          <Alert variant="error" title={errorTitle} description={error} className="conversation-list__state" />
+          <Alert variant="error" title={t('error', errorTitle)} description={error} className="conversation-list__state" />
         )}
 
         {estado === 'loading' && (
@@ -125,7 +162,7 @@ export const ConversationList = forwardRef<HTMLDivElement, ConversationListProps
         )}
 
         {estado === 'empty' && (
-          <EmptyState size="sm" title={emptyMessage} className="conversation-list__state" />
+          <EmptyState size="sm" title={t('empty', emptyMessage)} className="conversation-list__state" />
         )}
 
         {estado === 'list' && (
@@ -163,7 +200,7 @@ export const ConversationList = forwardRef<HTMLDivElement, ConversationListProps
                   variant="ghost"
                   size="sm"
                   iconOnly
-                  aria-label={deleteLabel(conv.label)}
+                  aria-label={t('delete', deleteLabel)(conv.label)}
                   className="conversation-list__delete"
                   onClick={(e) => { e.stopPropagation(); onDelete(conv.id); }}
                 >

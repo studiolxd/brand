@@ -7,6 +7,30 @@ import { UntrustedText } from './UntrustedText';
 import { Button } from '../../atoms/Button/Button';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Form } from '../../molecules/Form/Form';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
+
+/**
+ * El cromo de la pantalla de consentimiento, y **solo el cromo**: cómo se
+ * titula y cómo se llama la salida que no concede nada.
+ *
+ * Todo lo demás de esta pantalla se queda fuera del catálogo y pasa a ser prop
+ * obligatoria, porque **afirma algo**: la frase que cuenta qué se pide
+ * (`intro`), el aviso de a dónde sale el acceso (`redirectNotice`), qué se
+ * concede (`scopeReadLabel`/`scopeWriteLabel`) y el rótulo del botón que
+ * concede (`approveLabel`). Es la misma línea que ya separa
+ * `confirmDialog.cancel` —cromo— de `ConfirmDialog.confirmLabel` —obligatoria,
+ * porque nombra la consecuencia—.
+ */
+export interface ConnectorConsentMessages {
+  /** Título de la pantalla. */
+  title: string;
+  /**
+   * Rótulo del botón que no concede nada. Es cromo por la misma razón que
+   * «Cancelar»: describe lo único que hace —no seguir— y no hay consecuencia
+   * que nombrar.
+   */
+  deny: string;
+}
 
 export interface ConnectorConsentPageProps extends ConnectorAuthChromeProps {
   /** El nombre con el que la herramienta se registró. **Dato de fuera**: ver `ConnectorRequestSummary`. */
@@ -62,38 +86,50 @@ export interface ConnectorConsentPageProps extends ConnectorAuthChromeProps {
    * abrir la página.
    */
   initialFocus?: 'none' | 'deny';
-  /** Título de la pantalla. Default castellano: «Conectar una herramienta». */
+  /** Título de la pantalla. **Sin default**: sin él, sale de `connectorConsent.title`. */
   title?: ReactNode;
   /**
    * La frase de la cabecera. Recibe las tres piezas ya compuestas —la
    * herramienta y la cuenta en negrita, el permiso en texto corriente— porque
    * el orden cambia con el idioma (en alemán la cuenta va antes del permiso).
-   * Default castellano.
+   *
+   * **Obligatoria y sin default**: es la frase que cuenta qué se está
+   * consintiendo, y el sistema de diseño no puede escribirla por el producto.
    */
-  intro?: (parts: { client: ReactNode; what: ReactNode; email: ReactNode }) => ReactNode;
+  intro: (parts: { client: ReactNode; what: ReactNode; email: ReactNode }) => ReactNode;
   /**
    * El aviso de a dónde se enviará el acceso, bajo la ficha. Recibe el host ya
    * en negrita. Va a tamaño de cuerpo, no de nota al pie: es la señal que
    * convierte una suplantación en visible y no puede leerse como letra
-   * pequeña. Default castellano.
+   * pequeña.
+   *
+   * **Obligatoria y sin default**: afirma a dónde sale el acceso y qué hacer
+   * si no se reconoce el destino. Un texto de catálogo la dejaría diciendo lo
+   * mismo en todas partes sin que nada fallara.
    */
-  redirectNotice?: (parts: { host: ReactNode }) => ReactNode;
-  /** Etiqueta del botón que concede. Default castellano: «Permitir acceso». */
-  approveLabel?: string;
-  /** Etiqueta del botón que deniega. Default castellano: «Denegar». */
-  denyLabel?: string;
-  /** Alcance en texto, para la frase y para la ficha. Default castellano. */
-  scopeReadLabel?: string;
-  /** Ídem, lectura y escritura. Default castellano. */
-  scopeWriteLabel?: string;
-  /** Etiqueta del desplegador de un valor de fuera recortado. Default castellano: «Ver el valor completo». */
-  expandLabel?: string;
-  /** Etiqueta del desplegador abierto. Default castellano: «Ver menos». */
-  collapseLabel?: string;
+  redirectNotice: (parts: { host: ReactNode }) => ReactNode;
   /**
-   * Las comillas que enmarcan los datos de fuera —la herramienta, la cuenta, el
-   * host—, aquí y en la ficha. Default castellano: `['«', '»']`.
+   * Etiqueta del botón que concede.
+   *
+   * **Obligatoria y sin default, y fuera del catálogo**: es donde se toma la
+   * decisión, y tiene que nombrar la consecuencia. Mismo caso —y misma
+   * respuesta— que `ConfirmDialog.confirmLabel`.
    */
+  approveLabel: string;
+  /** Etiqueta del botón que deniega. **Sin default**: sin ella, sale de `connectorConsent.deny`. */
+  denyLabel?: string;
+  /**
+   * Qué se concede con `mcp:read`, para la frase y para la ficha.
+   * **Obligatoria y sin default**: ver `ConnectorRequestSummary`.
+   */
+  scopeReadLabel: string;
+  /** Ídem, lectura y escritura. **Obligatoria y sin default**. */
+  scopeWriteLabel: string;
+  /** Reenvío puro a `UntrustedText` (`untrustedText.expand`). */
+  expandLabel?: string;
+  /** Reenvío puro a `UntrustedText` (`untrustedText.collapse`). */
+  collapseLabel?: string;
+  /** Reenvío puro a `UntrustedText` (`untrustedText.quotes`), aquí y en la ficha. */
   valueQuotes?: [string, string];
   /** Rótulos de la ficha. Ver `ConnectorRequestSummary`. */
   summaryLabels?: Pick<
@@ -146,17 +182,13 @@ export function ConnectorConsentPage({
   onDeny,
   denyHref,
   initialFocus = 'none',
-  title = 'Conectar una herramienta',
-  intro = ({ client, what, email }) => (
-    <>
-      {client} quiere {what} como {email}.
-    </>
-  ),
-  redirectNotice = ({ host }) => <>El acceso se enviará a {host}. Continúa solo si lo reconoces.</>,
-  approveLabel = 'Permitir acceso',
-  denyLabel = 'Denegar',
-  scopeReadLabel = 'leer los datos de este producto',
-  scopeWriteLabel = 'leer y modificar los datos de este producto',
+  title,
+  intro,
+  redirectNotice,
+  approveLabel,
+  denyLabel,
+  scopeReadLabel,
+  scopeWriteLabel,
   expandLabel,
   collapseLabel,
   valueQuotes,
@@ -169,6 +201,7 @@ export function ConnectorConsentPage({
   id,
   shell,
 }: ConnectorConsentPageProps) {
+  const t = useBrandMessages('connectorConsent');
   const nativo = action !== undefined;
   const alcance = scope === 'read' ? scopeReadLabel : scopeWriteLabel;
 
@@ -181,7 +214,7 @@ export function ConnectorConsentPage({
   // es nativa, botón si vive dentro de una aplicación React.
   const denegar = denyHref !== undefined ? (
     <Button variant="outline" href={denyHref}>
-      {denyLabel}
+      {t('deny', denyLabel)}
     </Button>
   ) : (
     <Button
@@ -192,7 +225,7 @@ export function ConnectorConsentPage({
       onClick={onDeny}
       autoFocus={initialFocus === 'deny'}
     >
-      {denyLabel}
+      {t('deny', denyLabel)}
     </Button>
   );
 
@@ -209,7 +242,7 @@ export function ConnectorConsentPage({
 
   return (
     <ConnectorAuthShell
-      title={title}
+      title={title ?? t('title')}
       description={intro({
         client: <strong>{ajeno(clientName)}</strong>,
         what: alcance,

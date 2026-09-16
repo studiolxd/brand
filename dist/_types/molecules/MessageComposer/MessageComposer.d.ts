@@ -1,12 +1,35 @@
 import { type ComponentProps, type ReactNode } from 'react';
 import './MessageComposer.css';
+/**
+ * El cromo de la caja de escribir: el marcador del campo vacío y el rótulo del
+ * botón que manda. Son las dos palabras que dicen lo mismo en cualquier chat
+ * de la suite, así que van en el catálogo.
+ *
+ * Lo que NO va aquí es la línea de ayuda (`helperText`): la escribe el
+ * producto —el atajo de teclado, un aviso de privacidad— y nunca tuvo default
+ * en ningún idioma.
+ */
+export interface MessageComposerMessages {
+    /** Marcador del campo vacío. */
+    placeholder: string;
+    /** Rótulo del botón de enviar. Es también su nombre accesible. */
+    send: string;
+}
 export interface MessageComposerProps extends Omit<ComponentProps<'div'>, 'onChange'> {
     value: string;
     onChange: (value: string) => void;
     onSend: () => void;
+    /**
+     * Marcador del campo vacío. **Sin default**: sin él, sale de
+     * `messageComposer.placeholder` del `BrandMessagesProvider`.
+     */
     placeholder?: string;
     disabled?: boolean;
-    /** Texto del botón de enviar. Es también su nombre accesible: no hay `aria-label` que lo contradiga. */
+    /**
+     * Texto del botón de enviar. Es también su nombre accesible: no hay
+     * `aria-label` que lo contradiga. **Sin default**: sin él, sale de
+     * `messageComposer.send`.
+     */
     sendLabel?: string;
     /**
      * Línea de ayuda bajo el marco, enlazada al campo con `aria-describedby`

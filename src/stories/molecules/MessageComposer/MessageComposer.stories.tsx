@@ -4,6 +4,8 @@ import { expect, fn, userEvent, within } from 'storybook/test';
 import { Button } from '../../atoms/Button/Button';
 import { Kbd } from '../../atoms/Kbd/Kbd';
 import { MessageComposer } from './MessageComposer';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 /** El atajo, dicho con las teclas de verdad. Lo escribe el producto, en su idioma. */
 const atajo = (
@@ -173,5 +175,37 @@ export const ContratoFoco: Story = {
     await expect(getComputedStyle(marco).boxShadow).not.toBe('none');
     // El campo no dibuja nada por su cuenta.
     await expect(getComputedStyle(campo).borderTopColor).toBe('rgba(0, 0, 0, 0)');
+  },
+};
+
+/**
+ * El marcador del campo y el rótulo del botón salen del catálogo
+ * (`messageComposer.placeholder`, `messageComposer.send`): son las dos
+ * palabras que dicen lo mismo en cualquier chat. La línea de ayuda **no** está
+ * ahí y nunca tuvo default: la escribe el producto, que es quien sabe qué
+ * atajo tiene su chat.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <MessageComposer value="" onChange={() => {}} onSend={() => {}} inputLabel="Message" />
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: el marcador y el botón salen del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el composer lee sus textos del proveedor',
+  tags: ['!dev'],
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <MessageComposer value="Hi" onChange={() => {}} onSend={() => {}} inputLabel="Message" />
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('button', { name: 'Send' })).toBeInTheDocument();
+    await expect(canvas.getByRole('textbox')).toHaveAttribute('placeholder', 'Write a message…');
   },
 };

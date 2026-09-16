@@ -23,7 +23,21 @@ export interface AssistantMessageProps extends React.ComponentPropsWithoutRef<'d
   timestampFormat?: Intl.DateTimeFormatOptions;
   /** Cuando true, muestra el indicador de escritura en lugar del contenido. */
   isStreaming?: boolean;
-  /** Texto anunciado por lectores de pantalla para el estado de escritura. */
+  /**
+   * Quién escribe mientras se genera la respuesta, para el `TypingIndicator`.
+   * **Obligatoria y sin default**: el nombre del asistente es contenido del
+   * producto, y el verbo lo pone el catálogo
+   * (`typingIndicator.typing(name)`). Se pide siempre, aunque este mensaje no
+   * esté generándose: el mensaje del asistente puede estarlo en cualquier
+   * momento, y un nombre que aparece solo a veces es un texto sin traducir
+   * esperando su turno.
+   */
+  streamingName: string;
+  /**
+   * La frase entera del estado de escritura, cuando la plantilla del catálogo
+   * no vale. **Sin default**: sin ella, sale de
+   * `typingIndicator.typing(streamingName)`.
+   */
   streamingLabel?: string;
   /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
   className?: string;
@@ -43,6 +57,7 @@ export const AssistantMessage = forwardRef<HTMLDivElement, AssistantMessageProps
   locale,
   timestampFormat,
   isStreaming = false,
+  streamingName,
   streamingLabel,
   className,
   ...rest
@@ -53,7 +68,7 @@ export const AssistantMessage = forwardRef<HTMLDivElement, AssistantMessageProps
     <div ref={ref} className={`assistant-message${className ? ` ${className}` : ''}`} {...rest}>
       {model && <span className="assistant-message__model">{model}</span>}
       <MessageBubble role="assistant">
-        {isStreaming ? <TypingIndicator label={streamingLabel} /> : children}
+        {isStreaming ? <TypingIndicator name={streamingName} label={streamingLabel} /> : children}
       </MessageBubble>
       {time && !isStreaming && (
         <time className="assistant-message__timestamp" dateTime={time.dateTime}>

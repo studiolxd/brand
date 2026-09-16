@@ -9,15 +9,42 @@ import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Stack } from '../../atoms/Stack/Stack';
 import { Form } from '../../molecules/Form/Form';
 import { InputField } from '../../molecules/InputField/InputField';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
+
+/**
+ * El cromo de la pantalla del conector ajeno: el título, el rótulo del único
+ * campo y la plantilla del botón.
+ *
+ * `submit` es una **función** por la misma razón que
+ * `typingIndicator.typing(name)`: la frase tiene dos mitades que no se deciden
+ * en el mismo sitio. «Iniciar sesión con …» es cromo —el verbo y el orden son
+ * del idioma—, pero **cómo se llama la instalación** es contenido del
+ * producto y entra por `platformName`, que es obligatoria.
+ *
+ * Fuera del catálogo se quedan las dos frases que afirman algo: la que cuenta
+ * qué se está autorizando (`intro`) y la que confirma a dónde se entra
+ * (`signingInTo`).
+ */
+export interface ConnectorExternalSignInMessages {
+  /** Título de la pantalla. */
+  title: string;
+  /** Etiqueta del campo de organización. */
+  organization: string;
+  /** Plantilla del botón. Recibe el nombre de la instalación. */
+  submit: (platform: string) => string;
+}
 
 export interface ConnectorExternalSignInPageProps extends ConnectorAuthChromeProps {
   /**
    * Cómo se llama la instalación de la que es el conector, para la frase y
-   * para el botón. Default castellano: «tu Moodle», que hoy es el único
-   * conector de esta forma; cambiarlo sirve a cualquier otra instalación
-   * ajena a la suite.
+   * para el botón.
+   *
+   * **Obligatoria y sin default**: nombra al producto —hoy «tu Moodle», que es
+   * el único conector de esta forma—, y un nombre de producto no lo pone el
+   * sistema de diseño. Es una **cadena** porque el catálogo la interpola
+   * dentro del rótulo del botón (`connectorExternalSignIn.submit`).
    */
-  platformName?: ReactNode;
+  platformName: string;
   /**
    * La organización a la que se va a entrar, **ya resuelta**: el conector vive
    * en un subdominio y el servidor la saca del `resource` de la petición. Con
@@ -41,22 +68,39 @@ export interface ConnectorExternalSignInPageProps extends ConnectorAuthChromePro
   hiddenFields?: Record<string, string>;
   /** Un fallo del intento anterior —«no hay ninguna conexión para esa organización»—, sobre el formulario. */
   error?: ReactNode;
-  /** Título de la pantalla. Default castellano: «Autorizar la conexión». */
+  /** Título de la pantalla. **Sin default**: sin él, sale de `connectorExternalSignIn.title`. */
   title?: ReactNode;
-  /** La frase de la cabecera. Recibe el nombre de la instalación. Default castellano. */
-  intro?: (parts: { platform: ReactNode }) => ReactNode;
-  /** La frase que confirma a dónde se entra, con `organization`. Default castellano. */
-  signingInTo?: (parts: { organization: ReactNode }) => ReactNode;
   /**
-   * Las comillas que enmarcan la organización en la frase de confirmación:
-   * viene de la petición, así que es dato de fuera y se pinta como tal. Default
-   * castellano: `['«', '»']`.
+   * La frase de la cabecera. Recibe el nombre de la instalación.
+   *
+   * **Obligatoria y sin default**: cuenta qué se está autorizando y con qué
+   * cuenta hay que identificarse. El sistema de diseño no puede afirmarlo por
+   * el producto.
+   */
+  intro: (parts: { platform: ReactNode }) => ReactNode;
+  /**
+   * La frase que confirma a dónde se entra, con `organization`.
+   *
+   * **Obligatoria y sin default**, por lo mismo que `intro`: afirma a dónde va
+   * la sesión, que es el dato que convierte una suplantación en visible.
+   */
+  signingInTo: (parts: { organization: ReactNode }) => ReactNode;
+  /**
+   * Reenvío puro a `UntrustedText` (`untrustedText.quotes`): la organización
+   * viene de la petición, así que es dato de fuera y se pinta como tal.
    */
   valueQuotes?: [string, string];
-  /** Etiqueta del campo de organización. Default castellano: «Tu organización». */
+  /**
+   * Etiqueta del campo de organización. **Sin default**: sin ella, sale de
+   * `connectorExternalSignIn.organization`, y solo se lee cuando hay que
+   * escribir la organización.
+   */
   organizationLabel?: string;
-  /** Etiqueta de la acción. Recibe el nombre de la instalación. Default castellano. */
-  submitLabel?: (parts: { platform: ReactNode }) => ReactNode;
+  /**
+   * Plantilla del rótulo de la acción, que recibe el nombre de la instalación.
+   * **Sin default**: sin ella, sale de `connectorExternalSignIn.submit`.
+   */
+  submitLabel?: (platform: string) => string;
   /**
    * Debajo del formulario: lo que no es del sistema de diseño. Es la ranura
    * donde el producto cuelga su andamio de desarrollo —pegar una clave de MCP,
@@ -90,7 +134,7 @@ export interface ConnectorExternalSignInPageProps extends ConnectorAuthChromePro
  * cablearla, ese molde propio se retira y lo pone la plantilla.
  */
 export function ConnectorExternalSignInPage({
-  platformName = 'tu Moodle',
+  platformName,
   organization,
   organizationDefaultValue,
   organizationName = 'org',
@@ -98,16 +142,12 @@ export function ConnectorExternalSignInPage({
   onSubmit,
   hiddenFields,
   error,
-  title = 'Autorizar la conexión',
-  intro = ({ platform }) => (
-    <>
-      Tu asistente de IA solicita acceso a {platform}. Inicia sesión con tu cuenta para autorizarlo.
-    </>
-  ),
-  signingInTo = ({ organization: org }) => <>Iniciarás sesión en {org}.</>,
+  title,
+  intro,
+  signingInTo,
   valueQuotes,
-  organizationLabel = 'Tu organización',
-  submitLabel = ({ platform }) => <>Iniciar sesión con {platform}</>,
+  organizationLabel,
+  submitLabel,
   extra,
   links,
   header,
@@ -117,9 +157,11 @@ export function ConnectorExternalSignInPage({
   id,
   shell,
 }: ConnectorExternalSignInPageProps) {
+  const t = useBrandMessages('connectorExternalSignIn');
+
   return (
     <ConnectorAuthShell
-      title={title}
+      title={title ?? t('title')}
       description={intro({ platform: platformName })}
       header={header}
       footer={footer}
@@ -142,7 +184,7 @@ export function ConnectorExternalSignInPage({
           action={action}
           onSubmit={onSubmit}
           links={links}
-          actions={<Button type="submit">{submitLabel({ platform: platformName })}</Button>}
+          actions={<Button type="submit">{t('submit', submitLabel)(platformName)}</Button>}
         >
           {hiddenFields &&
             Object.entries(hiddenFields).map(([name, value]) => (
@@ -153,7 +195,7 @@ export function ConnectorExternalSignInPage({
             <InputField
               id={organizationName}
               name={organizationName}
-              label={organizationLabel}
+              label={t('organization', organizationLabel)}
               defaultValue={organizationDefaultValue}
               autoComplete="off"
               required

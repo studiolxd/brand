@@ -64,7 +64,7 @@ function ChatDeEjemplo() {
         />
       }
     >
-      <ConversationThread messages={mensajes} />
+      <ConversationThread messages={mensajes} streamingName="Ola" />
     </ChatShell>
   );
 }

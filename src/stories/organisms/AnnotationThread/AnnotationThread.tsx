@@ -1,6 +1,39 @@
+'use client';
+
 import { type ReactNode } from 'react';
 import { Tag } from '../../atoms/Tag/Tag';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './AnnotationThread.css';
+
+/**
+ * El cromo del hilo de anotaciones: cómo se llama el hilo, cómo se dicen sus
+ * tres estados, cómo se marca una anotación editada y cómo se cuentan las
+ * respuestas.
+ *
+ * Los tres estados van **clave a clave** —como los seis tipos de la leyenda de
+ * `CalendarRoster`— porque son un vocabulario **cerrado** del componente: el
+ * hilo solo puede estar abierto, atendido o resuelto, y obligar a la
+ * aplicación a montar nada para traducir tres palabras era peor que darles
+ * tres claves. Las props siguen ganando: una revisión que llame «Verificada» a
+ * `acknowledged` sigue pudiendo.
+ *
+ * Quién escribió cada anotación, cuándo y qué dice son datos y viajan en
+ * `annotation` y `replies`.
+ */
+export interface AnnotationThreadMessages {
+  /** Nombre accesible del hilo. */
+  label: string;
+  /** Rótulo del estado abierto. */
+  open: string;
+  /** Rótulo del estado atendido. */
+  acknowledged: string;
+  /** Rótulo del estado resuelto. */
+  resolved: string;
+  /** Marca de anotación editada, junto a la fecha. */
+  edited: string;
+  /** Rótulo que cuenta las respuestas. Recibe cuántas son, con su plural. */
+  replies: (count: number) => string;
+}
 
 export interface AnnotationEntry {
   /** Identificador único dentro del hilo. */
@@ -64,20 +97,36 @@ export interface AnnotationThreadProps extends React.ComponentPropsWithoutRef<'a
   locale?: string;
   /** Formato de la fecha. Por defecto, día y hora cortos. */
   dateFormat?: Intl.DateTimeFormatOptions;
-  /** Rótulo del estado abierto. Por defecto, en castellano: «Abierta». */
+  /**
+   * Rótulo del estado abierto. **Sin default**: sin él, sale de
+   * `annotationThread.open` del `BrandMessagesProvider`. Solo se lee con el
+   * hilo en ese estado.
+   */
   openLabel?: string;
-  /** Rótulo del estado atendido. Por defecto, en castellano: «Atendida». */
+  /**
+   * Rótulo del estado atendido. **Sin default**: sin él, sale de
+   * `annotationThread.acknowledged`. Solo se lee con el hilo en ese estado.
+   */
   acknowledgedLabel?: string;
-  /** Rótulo del estado resuelto. Por defecto, en castellano: «Resuelta». */
+  /**
+   * Rótulo del estado resuelto. **Sin default**: sin él, sale de
+   * `annotationThread.resolved`. Solo se lee con el hilo en ese estado.
+   */
   resolvedLabel?: string;
-  /** Marca de anotación editada. Por defecto, en castellano: «editada». */
+  /**
+   * Marca de anotación editada. **Sin default**: sin ella, sale de
+   * `annotationThread.edited`, y solo se lee cuando alguna anotación lo está.
+   */
   editedLabel?: string;
   /**
-   * Rótulo que cuenta las respuestas. Por defecto, en castellano:
-   * «1 respuesta» / «N respuestas».
+   * Rótulo que cuenta las respuestas, con su plural. **Sin default**: sin él,
+   * sale de `annotationThread.replies`, y solo se lee cuando hay respuestas.
    */
   repliesLabel?: (count: number) => string;
-  /** Nombre accesible del hilo. Por defecto, en castellano: «Hilo de anotaciones». */
+  /**
+   * Nombre accesible del hilo. **Sin default**: sin él, sale de
+   * `annotationThread.label`.
+   */
   label?: string;
   /** Se añade DESPUÉS de las clases propias. */
   className?: string;
@@ -104,7 +153,8 @@ function Annotation({
   entry: AnnotationEntry;
   locale: string;
   dateFormat: Intl.DateTimeFormatOptions;
-  editedLabel: string;
+  /** Ya resuelto por el hilo, y **solo cuando hace falta**: una anotación sin editar no exige el texto. */
+  editedLabel: () => string;
 }) {
   const date = entry.date instanceof Date ? entry.date : new Date(entry.date);
   const formatted = new Intl.DateTimeFormat(locale, dateFormat).format(date);
@@ -116,7 +166,7 @@ function Annotation({
         <span className="annotation-thread__author">{entry.author}</span>
         {/* `datetime` en ISO: la fecha visible está formateada, la de máquina no. */}
         <time className="annotation-thread__date" dateTime={date.toISOString()}>{formatted}</time>
-        {entry.edited && <span className="annotation-thread__edited">{editedLabel}</span>}
+        {entry.edited && <span className="annotation-thread__edited">{editedLabel()}</span>}
         {entry.meta && <span className="annotation-thread__meta">{entry.meta}</span>}
       </header>
       <div className="annotation-thread__body">{entry.body}</div>
@@ -144,15 +194,16 @@ export function AnnotationThread({
   reply,
   locale = 'es-ES',
   dateFormat = DEFAULT_DATE_FORMAT,
-  openLabel = 'Abierta',
-  acknowledgedLabel = 'Atendida',
-  resolvedLabel = 'Resuelta',
-  editedLabel = 'editada',
-  repliesLabel = (count) => (count === 1 ? '1 respuesta' : `${count} respuestas`),
-  label = 'Hilo de anotaciones',
+  openLabel,
+  acknowledgedLabel,
+  resolvedLabel,
+  editedLabel,
+  repliesLabel,
+  label,
   className,
   ...rest
 }: AnnotationThreadProps) {
+  const t = useBrandMessages('annotationThread');
   const classes = [
     'annotation-thread',
     status === 'open' ? '' : `annotation-thread--${status}`,
@@ -162,10 +213,16 @@ export function AnnotationThread({
   // El estado no se emite además como `data-status`: lo dice ya el modificador
   // (`--acknowledged`, `--resolved`), y ningún CSS leía el atributo.
   return (
-    <article className={classes} aria-label={label} {...rest}>
+    <article className={classes} aria-label={t('label', label)} {...rest}>
       <div className="annotation-thread__status">
+        {/* Solo el estado vigente se lee del catálogo: un hilo abierto no
+            exige los textos de «atendida» ni de «resuelta». */}
         <Tag variant={STATUS_VARIANT[status]}>
-          {{ open: openLabel, acknowledged: acknowledgedLabel, resolved: resolvedLabel }[status]}
+          {{
+            open: () => t('open', openLabel),
+            acknowledged: () => t('acknowledged', acknowledgedLabel),
+            resolved: () => t('resolved', resolvedLabel),
+          }[status]()}
         </Tag>
       </div>
 
@@ -173,19 +230,19 @@ export function AnnotationThread({
         entry={annotation}
         locale={locale}
         dateFormat={dateFormat}
-        editedLabel={editedLabel}
+        editedLabel={() => t('edited', editedLabel)}
       />
 
       {replies.length > 0 && (
         <div className="annotation-thread__replies">
-          <p className="annotation-thread__replies-label">{repliesLabel(replies.length)}</p>
+          <p className="annotation-thread__replies-label">{t('replies', repliesLabel)(replies.length)}</p>
           {replies.map((entry) => (
             <Annotation
               key={entry.id}
               entry={entry}
               locale={locale}
               dateFormat={dateFormat}
-              editedLabel={editedLabel}
+              editedLabel={() => t('edited', editedLabel)}
             />
           ))}
         </div>

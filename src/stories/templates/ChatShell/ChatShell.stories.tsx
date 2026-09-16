@@ -11,6 +11,8 @@ import { EmptyState } from '../../molecules/EmptyState/EmptyState';
 import { Heading } from '../../atoms/Heading/Heading';
 import { SelectField } from '../../molecules/SelectField/SelectField';
 import { STORY_TODAY } from '../../utils/storyDate';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
 const MODELOS = [
   { value: 'opus', label: 'Claude Opus 5' },
@@ -87,7 +89,7 @@ export const PorDefecto: Story = {
       />
     ),
     header: <Heading level={2} size={6}>Autenticación JWT</Heading>,
-    children: <ConversationThread messages={MENSAJES} />,
+    children: <ConversationThread messages={MENSAJES} streamingName="Ola" />,
     composer: (
       <MessageComposer value="" onChange={() => {}} onSend={() => {}} inputLabel="Mensaje" />
     ),
@@ -105,7 +107,7 @@ export const ConversacionVacia: Story = {
   args: {
     ...PorDefecto.args,
     children: (
-      <ConversationThread messages={[]}>
+      <ConversationThread messages={[]} streamingName="Ola">
         <EmptyState
           title="Empieza la conversación"
           description="Escribe abajo para preguntar lo que necesites."
@@ -120,7 +122,7 @@ export const SinColumna: Story = {
   name: 'Sin columna de conversaciones',
   args: {
     header: <Heading level={2} size={6}>Autenticación JWT</Heading>,
-    children: <ConversationThread messages={MENSAJES} />,
+    children: <ConversationThread messages={MENSAJES} streamingName="Ola" />,
     composer: (
       <MessageComposer value="" onChange={() => {}} onSend={() => {}} inputLabel="Mensaje" />
     ),
@@ -131,7 +133,7 @@ export const SinColumna: Story = {
 export const Minimo: Story = {
   name: 'Mínimo',
   args: {
-    children: <ConversationThread messages={MENSAJES} />,
+    children: <ConversationThread messages={MENSAJES} streamingName="Ola" />,
     composer: (
       <MessageComposer value="" onChange={() => {}} onSend={() => {}} inputLabel="Mensaje" />
     ),
@@ -293,10 +295,7 @@ export const Integracion: Story = {
           />
         }
       >
-        <ConversationThread
-          messages={mensajes}
-          streamingLabel="El asistente está escribiendo"
-        />
+        <ConversationThread messages={mensajes} streamingName="Ola" />
       </ChatShell>
     );
   },
@@ -495,5 +494,71 @@ export const ContratoDisparador: Story = {
     // Y el mismo punto: misma línea horizontal y misma columna.
     await expect(Math.round(despues.top)).toBe(Math.round(antes.top));
     await expect(Math.round(despues.left)).toBe(Math.round(antes.left));
+  },
+};
+
+/**
+ * Los dos textos del armazón salen del catálogo (`chatShell.list`,
+ * `chatShell.listTrigger`). Es **espacio propio y no el de
+ * `ConversationList`**, aunque hoy digan la misma palabra: son dos piezas
+ * distintas, y el precedente es el de `appRoot.skipToContent` frente a
+ * `appShell.skipToContent`.
+ */
+export const TextosDelProveedor: Story = {
+  name: 'Textos desde el proveedor (otro idioma)',
+  args: { children: null },
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <ChatShell
+        list={
+          <ConversationList
+            conversations={[{ id: 'c1', label: 'JWT authentication' }]}
+            activeId="c1"
+            onNew={() => {}}
+            onSelect={() => {}}
+            onDelete={() => {}}
+          />
+        }
+        header={<Heading level={2} size={6}>JWT authentication</Heading>}
+        composer={<MessageComposer value="" onChange={() => {}} onSend={() => {}} inputLabel="Message" />}
+      >
+        <ConversationThread
+          streamingName="Ola"
+          messages={[{ id: '1', role: 'user', content: 'Can you summarise the report?' }]}
+        />
+      </ChatShell>
+    </BrandMessagesProvider>
+  ),
+};
+
+/** Test: en escritorio, la columna de conversaciones toma su nombre del catálogo. */
+export const ContratoProveedor: Story = {
+  name: 'Test — el armazón lee sus textos del proveedor',
+  tags: ['!dev'],
+  args: { children: null },
+  render: () => (
+    <BrandMessagesProvider messages={EN}>
+      <ChatShell
+        list={
+          <ConversationList
+            conversations={[{ id: 'c1', label: 'JWT authentication' }]}
+            onNew={() => {}}
+            onSelect={() => {}}
+            onDelete={() => {}}
+          />
+        }
+      >
+        <ConversationThread streamingName="Ola" messages={[]} />
+      </ChatShell>
+    </BrandMessagesProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    // En escritorio la lista es columna; por debajo del punto de ruptura, el
+    // cajón y su disparador. Uno de los dos existe siempre, y los dos toman su
+    // nombre del catálogo.
+    const enColumna = canvas.queryByRole('complementary', { name: 'Conversations' });
+    if (enColumna) await expect(enColumna).toBeInTheDocument();
+    else await expect(canvas.getByRole('button', { name: 'Open conversations' })).toBeInTheDocument();
   },
 };

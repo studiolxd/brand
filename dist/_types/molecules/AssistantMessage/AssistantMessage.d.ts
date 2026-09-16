@@ -19,7 +19,21 @@ export interface AssistantMessageProps extends React.ComponentPropsWithoutRef<'d
     timestampFormat?: Intl.DateTimeFormatOptions;
     /** Cuando true, muestra el indicador de escritura en lugar del contenido. */
     isStreaming?: boolean;
-    /** Texto anunciado por lectores de pantalla para el estado de escritura. */
+    /**
+     * Quién escribe mientras se genera la respuesta, para el `TypingIndicator`.
+     * **Obligatoria y sin default**: el nombre del asistente es contenido del
+     * producto, y el verbo lo pone el catálogo
+     * (`typingIndicator.typing(name)`). Se pide siempre, aunque este mensaje no
+     * esté generándose: el mensaje del asistente puede estarlo en cualquier
+     * momento, y un nombre que aparece solo a veces es un texto sin traducir
+     * esperando su turno.
+     */
+    streamingName: string;
+    /**
+     * La frase entera del estado de escritura, cuando la plantilla del catálogo
+     * no vale. **Sin default**: sin ella, sale de
+     * `typingIndicator.typing(streamingName)`.
+     */
     streamingLabel?: string;
     /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
     className?: string;

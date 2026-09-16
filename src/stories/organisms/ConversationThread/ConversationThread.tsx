@@ -4,7 +4,20 @@ import { forwardRef, useEffect, useRef, type ReactNode } from 'react';
 import { AssistantMessage } from '../../molecules/AssistantMessage/AssistantMessage';
 import { UserMessage } from '../../molecules/UserMessage/UserMessage';
 import type { MessageTimestamp } from '../../molecules/_shared/messageTimestamp';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './ConversationThread.css';
+
+/**
+ * El cromo del hilo: cómo se llama la región que anuncia los mensajes nuevos.
+ *
+ * Es una sola clave, y **no incluye el estado de escritura**: ese vive en
+ * `typingIndicator.typing(name)`, que es de quien lo pinta. El hilo solo lo
+ * reenvía.
+ */
+export interface ConversationThreadMessages {
+  /** Nombre accesible del `role="log"` que envuelve el hilo. */
+  label: string;
+}
 
 export interface ConversationMessage {
   id: string;
@@ -27,11 +40,23 @@ export interface ConversationThreadProps extends React.ComponentPropsWithoutRef<
   messages?: ConversationMessage[];
   /** Burbujas ya montadas por el producto (mensajes con herramientas, adjuntos…): el hilo pone el contenedor, el `role="log"` y el autoscroll. */
   children?: ReactNode;
-  /** Texto accesible para el indicador de escritura. */
+  /**
+   * Quién escribe mientras se genera una respuesta. **Obligatoria y sin
+   * default**: el nombre del asistente es contenido del producto; el verbo lo
+   * pone el catálogo (`typingIndicator.typing(name)`). Se reenvía a cada
+   * `AssistantMessage`.
+   */
+  streamingName: string;
+  /**
+   * La frase entera del estado de escritura, cuando la plantilla del catálogo
+   * no vale. **Sin default**: sin ella, sale de
+   * `typingIndicator.typing(streamingName)`. Se reenvía a cada
+   * `AssistantMessage`.
+   */
   streamingLabel?: string;
   /**
-   * aria-label del `role="log"` que envuelve el hilo. Default: "Conversación"
-   * (castellano). Una app multiidioma debe pasarla traducida.
+   * `aria-label` del `role="log"` que envuelve el hilo. **Sin default**: sin
+   * él, sale de `conversationThread.label` del `BrandMessagesProvider`.
    */
   ariaLabel?: string;
   /** Locale con el que se formatean las marcas de tiempo. Default `'es-ES'`. */
@@ -57,8 +82,9 @@ function scrollBehavior(): ScrollBehavior {
 export const ConversationThread = forwardRef<HTMLDivElement, ConversationThreadProps>(function ConversationThread({
   messages = [],
   children,
+  streamingName,
   streamingLabel,
-  ariaLabel = 'Conversación',
+  ariaLabel,
   locale,
   timestampFormat,
   className,
@@ -68,6 +94,7 @@ export const ConversationThread = forwardRef<HTMLDivElement, ConversationThreadP
   // scroll, así no hace falta calcular la altura del contenedor ni la del
   // último mensaje (que además cambia mientras se genera la respuesta).
   const bottomRef = useRef<HTMLDivElement>(null);
+  const t = useBrandMessages('conversationThread');
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: scrollBehavior() });
@@ -78,7 +105,7 @@ export const ConversationThread = forwardRef<HTMLDivElement, ConversationThreadP
       ref={ref}
       className={`conversation-thread${className ? ` ${className}` : ''}`}
       role="log"
-      aria-label={ariaLabel}
+      aria-label={t('label', ariaLabel)}
       // Qué está pintando el hilo: sus propios globos o el bloque que le pasa
       // el producto. Lo lee el CSS para centrar lo que va solo —la
       // conversación sin mensajes— sin centrar el primer mensaje de una
@@ -104,6 +131,7 @@ export const ConversationThread = forwardRef<HTMLDivElement, ConversationThreadP
             locale={locale}
             timestampFormat={timestampFormat}
             isStreaming={message.isStreaming}
+            streamingName={streamingName}
             streamingLabel={streamingLabel}
           >
             {message.content}

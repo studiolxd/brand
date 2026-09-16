@@ -5,17 +5,42 @@ import { type ConnectorAuthChromeProps } from './ConnectorAuthShell';
  * autorización devuelve hoy en crudo —`invalid_client`,
  * `invalid_redirect_uri`, `access_denied`, `invalid_request`,
  * `login_required`—, uno por uno y con el nombre que entiende quien los lee.
+ *
+ * **Es un vocabulario, no una prop.** Desde la v49 los cuatro textos del
+ * rechazo los pasa el producto (`title`, `description`, `hint`, `retryLabel`),
+ * así que el tipo ya no elige nada dentro del componente: está aquí para que
+ * la aplicación teclee el motivo contra él al sacar del catálogo los cuatro
+ * textos, y para que la lista de motivos siga siendo una sola y esté escrita
+ * en el sistema.
  */
 export type ConnectorRejectionReason = 'invalid-client' | 'invalid-redirect-uri' | 'invalid-request' | 'access-denied' | 'session-expired';
+/**
+ * El único texto del rechazo que es cromo: el rótulo del código técnico.
+ *
+ * Los otros cuatro —qué pasó, qué se puede hacer y cómo se llama la salida—
+ * **afirman algo sobre una comprobación de seguridad** («no se ha enviado nada
+ * a ninguna parte», «si no la reconoces, no vuelvas a intentarlo») y son props
+ * obligatorias: el sistema de diseño no puede decidir qué se le cuenta a
+ * alguien sobre un acceso que no se ha concedido.
+ */
+export interface ConnectorRejectionMessages {
+    /** Rótulo del código técnico, bajo la explicación. */
+    code: string;
+}
 export interface ConnectorRejectionPageProps extends ConnectorAuthChromeProps {
-    /** Por qué no se ha conectado nada. De él salen el título, la explicación y el texto de la salida. */
-    reason: ConnectorRejectionReason;
-    /** Título, si el producto quiere el suyo. Default: el de la variante, en castellano. */
-    title?: ReactNode;
-    /** La frase bajo el título. Default: la de la variante, en castellano. */
-    description?: ReactNode;
-    /** Qué se puede hacer, en la columna de la derecha. Default: el de la variante, en castellano. */
-    hint?: ReactNode;
+    /**
+     * Qué ha pasado.
+     *
+     * **Obligatorio y sin default**: los cinco motivos afirman cada uno algo
+     * sobre una comprobación de seguridad —qué se ha enviado y qué no—, y eso lo
+     * escribe quien conoce el servidor de autorización, no un catálogo de cromo.
+     * El vocabulario de los cinco está en `ConnectorRejectionReason`.
+     */
+    title: ReactNode;
+    /** La frase bajo el título. **Obligatoria y sin default**, por lo mismo. */
+    description: ReactNode;
+    /** Qué se puede hacer, en la columna de la derecha. **Obligatoria y sin default**, por lo mismo. */
+    hint: ReactNode;
     /**
      * El código técnico tal cual lo devuelve el servidor (`invalid_client`…),
      * bajo la explicación. No es para quien lee la pantalla: es para que pueda
@@ -23,14 +48,25 @@ export interface ConnectorRejectionPageProps extends ConnectorAuthChromeProps {
      * palabras. Sin él, no se pinta.
      */
     code?: string;
-    /** Rótulo del código. Default castellano: «Código». */
+    /**
+     * Rótulo del código. **Sin default**: sin él, sale de
+     * `connectorRejection.code` del `BrandMessagesProvider`, y solo se lee
+     * cuando hay `code`.
+     */
     codeLabel?: string;
     /** La salida, como enlace: la vuelta a la herramienta o al acceso. */
     retryHref?: string;
     /** La salida, en modo React (sin `retryHref`). */
     onRetry?: () => void;
-    /** Etiqueta de la salida. Default: la de la variante, en castellano. */
-    retryLabel?: string;
+    /**
+     * Etiqueta de la salida.
+     *
+     * **Obligatoria y sin default**: nombra a dónde lleva —volver a la
+     * herramienta, volver a intentarlo, iniciar sesión—, y de los cinco motivos
+     * salen tres salidas distintas. Se pide aunque la salida se monte entera con
+     * `retryAction`: un rótulo que se traduce solo a veces acaba sin traducir.
+     */
+    retryLabel: string;
     /**
      * La salida entera, ya montada, cuando no basta con un botón (el `Link` del
      * router, dos acciones). Manda sobre `retryHref` / `onRetry`.
@@ -43,14 +79,22 @@ export interface ConnectorRejectionPageProps extends ConnectorAuthChromeProps {
  * **Una sola plantilla para los cinco rechazos**, que hoy son cinco respuestas
  * JSON en crudo sin ninguna pantalla detrás.
  *
- * Son cinco variantes y no cinco plantillas porque lo único que cambia entre
- * ellas es el texto. La maqueta es idéntica —la explicación a la izquierda, qué
+ * Son cinco motivos y una sola plantilla porque lo único que cambia entre
+ * ellos es el texto — y ese texto lo pasa el producto: `title`, `description`,
+ * `hint` y `retryLabel` son **obligatorias y sin default** desde la v49,
+ * porque cada una afirma algo sobre una comprobación de seguridad y eso no lo
+ * decide el sistema de diseño (ver `ConnectorRejectionMessages`). El
+ * vocabulario de los cinco sigue escrito aquí, en
+ * `ConnectorRejectionReason`, para que la aplicación teclee contra él al sacar
+ * los cuatro textos de su catálogo.
+ *
+ * La maqueta es idéntica en los cinco —la explicación a la izquierda, qué
  * hacer y la salida a la derecha—, y sobre todo lo es la postura: **ninguna
  * ofrece reintentar en el sitio**. Ni un botón que repita la petición ni un
  * formulario que la arregle; la conexión se empieza donde se empezó, en la
  * herramienta. Un rechazo de autorización que se pueda reintentar a golpes
  * desde la propia pantalla de rechazo es un fallo de seguridad, no una
- * comodidad, y por eso la salida por defecto es «volver» y no «reintentar».
+ * comodidad, y por eso la salida se llama «volver» y no «reintentar».
  *
  * Los cinco se agrupan en tres causas, y el texto de cada uno lo dice sin
  * jerga:
@@ -66,4 +110,4 @@ export interface ConnectorRejectionPageProps extends ConnectorAuthChromeProps {
  * hecho su trabajo —y en `access-denied`, ni siquiera eso: es lo que se ha
  * pedido—. La página lo cuenta como cuenta cualquier otra cosa.
  */
-export declare function ConnectorRejectionPage({ reason, title, description, hint, code, codeLabel, retryHref, onRetry, retryLabel, retryAction, aside, header, footer, preferences, preferencesLabel, id, shell, }: ConnectorRejectionPageProps): import("react/jsx-runtime").JSX.Element;
+export declare function ConnectorRejectionPage({ title, description, hint, code, codeLabel, retryHref, onRetry, retryLabel, retryAction, aside, header, footer, preferences, preferencesLabel, id, shell, }: ConnectorRejectionPageProps): import("react/jsx-runtime").JSX.Element;

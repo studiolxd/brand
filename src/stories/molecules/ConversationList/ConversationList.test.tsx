@@ -1,9 +1,25 @@
 import { useState } from 'react';
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render as renderRTL, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ConversationList } from './ConversationList';
 import type { ConversationItem } from './ConversationList';
+import type { ReactNode } from 'react';
+import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
+import { brandMessagesFixture as ES } from '../../../../.storybook/brandMessagesFixture';
+
+/**
+ * Estas piezas ya no traen su castellano puesto: el cromo sale del catálogo.
+ * Aquí lo monta este envoltorio, que es lo que hace la aplicación en su raíz.
+ */
+const Catalogo = ({ children }: { children: ReactNode }) => (
+  <BrandMessagesProvider messages={ES}>{children}</BrandMessagesProvider>
+);
+
+function render(ui: React.ReactElement) {
+  return renderRTL(ui, { wrapper: Catalogo });
+}
+
 
 const SAMPLE: ConversationItem[] = [
   { id: 'c1', label: 'Autenticación JWT' },
@@ -35,7 +51,7 @@ describe('ConversationList', () => {
     expect(screen.getByRole('button', { name: 'Autenticación JWT' })).toHaveFocus();
     await userEvent.tab();
     expect(
-      screen.getByRole('button', { name: 'Eliminar conversación "Autenticación JWT"' }),
+      screen.getByRole('button', { name: 'Eliminar la conversación «Autenticación JWT»' }),
     ).toHaveFocus();
 
     await userEvent.keyboard('{Enter}');
@@ -48,7 +64,7 @@ describe('ConversationList', () => {
     render(<Lista onSelect={onSelect} onDelete={onDelete} />);
 
     await userEvent.click(
-      screen.getByRole('button', { name: 'Eliminar conversación "Diseño de base de datos"' }),
+      screen.getByRole('button', { name: 'Eliminar la conversación «Diseño de base de datos»' }),
     );
     expect(onDelete).toHaveBeenCalledWith('c2');
     expect(onSelect).not.toHaveBeenCalled();

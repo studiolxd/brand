@@ -204,17 +204,25 @@ pantallas más tarde.
 Aquí la única acción es identificarse, que no concede nada: por eso es la
 principal y sí puede llevarse el foco.
 
-## Los rechazos: una plantilla, cinco variantes
+## Los rechazos: una plantilla, cinco motivos
 
 <Canvas of={ConnectorAuthStories.RechazoRetornoNoPermitido} />
 
 Los cinco errores del servidor —`invalid_client`, `invalid_redirect_uri`,
-`invalid_request`, `access_denied`, `login_required`— son **una sola plantilla
-con una prop `reason`**, y no cinco pantallas, porque entre ellos solo cambia el
-texto: la maqueta es idéntica, el orden es idéntico y sobre todo lo es la
+`invalid_request`, `access_denied`, `login_required`— son **una sola plantilla**,
+y no cinco pantallas, porque entre ellos solo cambia el texto: la maqueta es idéntica, el orden es idéntico y sobre todo lo es la
 postura —**ninguno ofrece reintentar en el sitio**—. La conexión se empieza donde
 se empezó, en la herramienta; un rechazo de autorización que se pueda reintentar
 a golpes desde la propia pantalla de rechazo es un fallo, no una comodidad.
+
+Y ese texto lo pasa el producto. Desde la v49 `title`, `description`, `hint` y
+`retryLabel` son **obligatorias y sin default**: cada una afirma algo sobre una
+comprobación de seguridad —«no se ha enviado nada a ninguna parte», «si no la
+reconoces, no vuelvas a intentarlo»— y el sistema de diseño no puede decidir qué
+se le cuenta a alguien sobre un acceso que no se ha concedido. El vocabulario de
+los cinco sigue escrito en el sistema, en el tipo `ConnectorRejectionReason`,
+para que la aplicación teclee contra él al sacar los cuatro textos de su
+catálogo.
 
 Agrupados por causa, que es lo que decide qué se le ofrece a quien lee:
 
@@ -258,17 +266,60 @@ lo pone la plantilla, que es lo que hace que las dos familias de conector se
 lean como hermanas. El andamio de desarrollo del producto —pegar una clave MCP—
 entra por la ranura `extra` y el sistema no lo conoce.
 
-## Textos
+## Internacionalización
 
-Todo lo que estas plantillas escriben por su cuenta es una prop con **default en
-castellano**, como pide el sistema; el texto del consentimiento y el del conector
-de Moodle son literalmente los que ya sirve el producto en sus seis idiomas. Los
-de rechazo son nuevos: hoy no hay pantalla que los diga.
+Esta familia es donde la línea entre **cromo** y **contenido** se ve más clara, y
+por eso su tabla va entera aquí.
+
+**El cromo sale del `BrandMessagesProvider`, sin valor por defecto.** Son rótulos
+que nombran un control o un dato y dicen lo mismo en los cinco productos de la
+suite:
+
+| Prop | Clave del catálogo | Cuándo se lee |
+| --- | --- | --- |
+| `ConnectorConsentPage.title` | `connectorConsent.title` | siempre |
+| `ConnectorConsentPage.denyLabel` | `connectorConsent.deny` | siempre |
+| `ConnectorSignInPage.title` | `connectorSignIn.title` | siempre |
+| `ConnectorSignInPage.signInLabel` | `connectorSignIn.signIn` | siempre |
+| `ConnectorSignInPage.fallbackProductName` | `connectorSignIn.fallbackProduct` | sin `productName` |
+| `ConnectorExternalSignInPage.title` | `connectorExternalSignIn.title` | siempre |
+| `ConnectorExternalSignInPage.organizationLabel` | `connectorExternalSignIn.organization` | sin `organization` resuelta |
+| `ConnectorExternalSignInPage.submitLabel` | `connectorExternalSignIn.submit(platform)` | siempre |
+| `ConnectorRejectionPage.codeLabel` | `connectorRejection.code` | con `code` |
+| `ConnectorRequestSummary.clientLabel` … `redirectLabel` | `connectorRequestSummary.client`, `.product`, `.account`, `.scope`, `.redirect` | cada uno con su fila |
+| `UntrustedText.expandLabel` / `collapseLabel` | `untrustedText.expand` / `.collapse` | con el valor recortado y `expandable` |
+| `UntrustedText.quotes` | `untrustedText.quotes` | con un valor de fuera |
+
+Las comillas están en el catálogo y no cableadas porque son **puntuación del
+idioma**: `« »` en castellano, `“ ”` en inglés, `„ “` en alemán.
+`connectorExternalSignIn.submit` es **función** porque interpola el nombre de la
+instalación — el verbo es cromo, el nombre no.
+
+**Lo que afirma algo es prop obligatoria y sin default, y no va al catálogo.**
+Es la misma línea que ya separa `confirmDialog.cancel` —cromo— de
+`ConfirmDialog.confirmLabel` —obligatoria, porque nombra la consecuencia—:
+
+| Prop | Por qué está fuera |
+| --- | --- |
+| `ConnectorConsentPage.intro` | cuenta qué se está consintiendo |
+| `ConnectorConsentPage.redirectNotice` | afirma a dónde sale el acceso y qué hacer si no se reconoce el destino |
+| `ConnectorConsentPage.approveLabel` | es el botón que concede, y tiene que nombrar la consecuencia |
+| `scopeReadLabel` / `scopeWriteLabel` (consentimiento, acceso y ficha) | afirman qué va a poder hacer la herramienta con los datos de quien lee |
+| `ConnectorSignInPage.intro` | cuenta qué herramienta hay detrás de la contraseña que se va a teclear |
+| `ConnectorExternalSignInPage.platformName` | nombra al producto |
+| `ConnectorExternalSignInPage.intro` / `signingInTo` | cuentan qué se autoriza y a dónde va la sesión |
+| `ConnectorRejectionPage.title` / `description` / `hint` / `retryLabel` | afirman qué comprobación ha fallado y qué no se ha enviado |
 
 Los textos que interpolan un valor son **funciones** (`intro`, `redirectNotice`,
 `signingInTo`, `submitLabel`), porque el orden cambia con el idioma: en alemán la
 cuenta va antes del permiso, y una plantilla que concatenara trozos no podría
 traducirse.
+
+`preferencesLabel` es un **reenvío puro** al `PublicPageShell`, que lee
+`publicPageShell.preferences` por su cuenta: ya no hace falta pasarlo para
+traducir.
+
+<Canvas of={ConnectorAuthStories.TextosDelProveedor} />
 
 ## Sin marco
 

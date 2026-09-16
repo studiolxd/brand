@@ -1,95 +1,96 @@
 'use client';
 import './conversation-list.css';
-import { Icon as e } from "./icon.js";
-import { Button as t } from "./button.js";
-import { Skeleton as n } from "./skeleton.js";
-import { Tooltip as r } from "./tooltip.js";
-import { Alert as i } from "./alert.js";
-import { EmptyState as a } from "./empty-state.js";
-import { forwardRef as o, useState as s } from "react";
-import { jsx as c, jsxs as l } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Icon as t } from "./icon.js";
+import { Button as n } from "./button.js";
+import { Skeleton as r } from "./skeleton.js";
+import { Tooltip as i } from "./tooltip.js";
+import { Alert as a } from "./alert.js";
+import { EmptyState as o } from "./empty-state.js";
+import { forwardRef as s, useState as c } from "react";
+import { jsx as l, jsxs as u } from "react/jsx-runtime";
 //#region src/stories/molecules/ConversationList/ConversationList.tsx
-function u(e) {
+function d(e) {
 	return e.scrollWidth > e.clientWidth + 1;
 }
-var d = o(function({ conversations: o, activeId: d, onNew: f, onSelect: p, onDelete: m, newLabel: h = "Nueva conversación", navLabel: g = "Conversaciones", deleteLabel: _ = (e) => `Eliminar conversación "${e}"`, isLoading: v = !1, loadingCount: y = 4, error: b, emptyMessage: x = "Todavía no hay conversaciones", errorTitle: S = "No se pudieron cargar las conversaciones", className: C, ...w }, T) {
-	let [E, D] = s(null), O = b === void 0 ? v ? "loading" : o.length === 0 ? "empty" : "list" : "error";
-	return /* @__PURE__ */ l("div", {
-		ref: T,
-		className: `conversation-list${C ? ` ${C}` : ""}`,
-		...w,
-		children: [/* @__PURE__ */ c("div", {
+var f = s(function({ conversations: s, activeId: f, onNew: p, onSelect: m, onDelete: h, newLabel: g, navLabel: _, deleteLabel: v, isLoading: y = !1, loadingCount: b = 4, error: x, emptyMessage: S, errorTitle: C, className: w, ...T }, E) {
+	let [D, O] = c(null), k = e("conversationList"), A = x === void 0 ? y ? "loading" : s.length === 0 ? "empty" : "list" : "error";
+	return /* @__PURE__ */ u("div", {
+		ref: E,
+		className: `conversation-list${w ? ` ${w}` : ""}`,
+		...T,
+		children: [/* @__PURE__ */ l("div", {
 			className: "conversation-list__header",
-			children: /* @__PURE__ */ c(t, {
+			children: /* @__PURE__ */ l(n, {
 				variant: "outline",
 				block: !0,
-				onClick: f,
-				children: h
+				onClick: p,
+				children: k("new", g)
 			})
-		}), /* @__PURE__ */ l("nav", {
-			"aria-label": g,
+		}), /* @__PURE__ */ u("nav", {
+			"aria-label": k("nav", _),
 			className: "conversation-list__nav",
-			"aria-busy": v || void 0,
+			"aria-busy": y || void 0,
 			children: [
-				O === "error" && /* @__PURE__ */ c(i, {
+				A === "error" && /* @__PURE__ */ l(a, {
 					variant: "error",
-					title: S,
-					description: b,
+					title: k("error", C),
+					description: x,
 					className: "conversation-list__state"
 				}),
-				O === "loading" && /* @__PURE__ */ c("div", {
+				A === "loading" && /* @__PURE__ */ l("div", {
 					className: "conversation-list__loading",
-					children: Array.from({ length: y }, (e, t) => /* @__PURE__ */ c(n, {}, t))
+					children: Array.from({ length: b }, (e, t) => /* @__PURE__ */ l(r, {}, t))
 				}),
-				O === "empty" && /* @__PURE__ */ c(a, {
+				A === "empty" && /* @__PURE__ */ l(o, {
 					size: "sm",
-					title: x,
+					title: k("empty", S),
 					className: "conversation-list__state"
 				}),
-				O === "list" && /* @__PURE__ */ c("ul", {
+				A === "list" && /* @__PURE__ */ l("ul", {
 					className: "conversation-list__items",
 					role: "list",
-					children: o.map((n) => {
-						let i = n.id === d;
-						return /* @__PURE__ */ l("li", {
+					children: s.map((e) => {
+						let r = e.id === f;
+						return /* @__PURE__ */ u("li", {
 							className: "conversation-list__item",
-							children: [/* @__PURE__ */ c(r, {
-								label: n.label,
+							children: [/* @__PURE__ */ l(i, {
+								label: e.label,
 								describe: !1,
-								open: E === n.id,
+								open: D === e.id,
 								onOpenChange: (e) => {
-									e || D(null);
+									e || O(null);
 								},
-								onPointerEnter: (e) => {
-									u(e.currentTarget) && D(n.id);
+								onPointerEnter: (t) => {
+									d(t.currentTarget) && O(e.id);
 								},
-								onPointerLeave: () => D(null),
-								onFocus: (e) => {
-									u(e.currentTarget) && D(n.id);
+								onPointerLeave: () => O(null),
+								onFocus: (t) => {
+									d(t.currentTarget) && O(e.id);
 								},
-								onBlur: () => D(null),
-								children: /* @__PURE__ */ c("button", {
+								onBlur: () => O(null),
+								children: /* @__PURE__ */ l("button", {
 									type: "button",
-									className: `conversation-list__label${i ? " conversation-list__label--active" : ""}`,
-									"aria-current": i ? "page" : void 0,
-									onClick: () => p(n.id),
-									children: n.label
+									className: `conversation-list__label${r ? " conversation-list__label--active" : ""}`,
+									"aria-current": r ? "page" : void 0,
+									onClick: () => m(e.id),
+									children: e.label
 								})
-							}), /* @__PURE__ */ c(t, {
+							}), /* @__PURE__ */ l(n, {
 								variant: "ghost",
 								size: "sm",
 								iconOnly: !0,
-								"aria-label": _(n.label),
+								"aria-label": k("delete", v)(e.label),
 								className: "conversation-list__delete",
-								onClick: (e) => {
-									e.stopPropagation(), m(n.id);
+								onClick: (t) => {
+									t.stopPropagation(), h(e.id);
 								},
-								children: /* @__PURE__ */ c(e, {
+								children: /* @__PURE__ */ l(t, {
 									name: "close",
 									size: "sm"
 								})
 							})]
-						}, n.id);
+						}, e.id);
 					})
 				})
 			]
@@ -97,4 +98,4 @@ var d = o(function({ conversations: o, activeId: d, onNew: f, onSelect: p, onDel
 	});
 });
 //#endregion
-export { d as ConversationList };
+export { f as ConversationList };
