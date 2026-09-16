@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Button } from '../../atoms/Button/Button';
+import { Link } from '../../atoms/Link/Link';
 import { Toaster } from './Toaster';
 import { toast } from './toast';
 import { SOLO_OSCURO } from '../../utils/chromaticModes';
@@ -272,6 +273,69 @@ export const ContratoRegion: Story = {
         document.querySelector('.toaster[aria-label="Notificaciones DS"]'),
       ).not.toBeNull();
     });
+  },
+};
+
+/**
+ * Test: dentro del aviso todo enlace se pinta con la tinta del propio aviso,
+ * nunca con el acento — mismo contrato que `Alert` (comparten CSS). Se
+ * comprueba en un toast neutro, uno `warning` y uno `error`, con un
+ * `tone="accent"` explícito y sin `tone`. En `error` se comprueba además que
+ * la tinta no coincide con el acento de un enlace fuera del aviso; en
+ * `neutro`/`warning` no se hace esa comprobación: los dos tienen tinta
+ * `color.primary` (prusia) y en superficie clara el acento fuera del aviso
+ * resuelve al mismo primitivo, así que coincidirían por definición, no por
+ * un fallo de la regla.
+ */
+export const ContratoEnlacesEnTinta: Story = {
+  name: 'Test — los enlaces del aviso van en tinta, no en acento',
+  tags: ['!dev'],
+  render: () => {
+    const conEnlaces = (
+      <>
+        Con enlaces: <Link href="#a" tone="accent">acento explícito</Link> y{' '}
+        <Link href="#b">sin tone</Link>.
+      </>
+    );
+    return (
+      <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+        <Button onClick={() => toast('Neutro', { description: conEnlaces })}>Neutro</Button>
+        <Button onClick={() => toast.warning('Aviso', { description: conEnlaces })}>Aviso</Button>
+        <Button onClick={() => toast.error('Error', { description: conEnlaces })}>Error</Button>
+        <Link href="#fuera">Enlace fuera del aviso</Link>
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const acentoFuera = getComputedStyle(
+      canvas.getByRole('link', { name: 'Enlace fuera del aviso' }),
+    ).color;
+
+    const comprobar = async (boton: string, comprobarAcento: boolean) => {
+      await userEvent.click(canvas.getByRole('button', { name: boton }));
+      await waitFor(async () => {
+        const aviso = document.querySelector('.toast') as HTMLElement | null;
+        if (!aviso) throw new Error('sin aviso');
+        const tinta = getComputedStyle(aviso.querySelector('.alert__title')!).color;
+        // Consulta directa al DOM, no `getByRole`: el toast lleva `aria-hidden`
+        // mientras no tiene el foco (lo pone Base UI), y eso saca sus enlaces
+        // del árbol de accesibilidad que consultaría `within(...).getByRole`.
+        const enlaces = Array.from(aviso.querySelectorAll<HTMLAnchorElement>('.alert__description a'));
+        await expect(enlaces).toHaveLength(2);
+        for (const enlace of enlaces) {
+          await expect(getComputedStyle(enlace).color).toBe(tinta);
+          if (comprobarAcento) {
+            await expect(getComputedStyle(enlace).color).not.toBe(acentoFuera);
+          }
+        }
+      });
+      toast.dismiss();
+    };
+
+    await comprobar('Neutro', false);
+    await comprobar('Aviso', false);
+    await comprobar('Error', true);
   },
 };
 

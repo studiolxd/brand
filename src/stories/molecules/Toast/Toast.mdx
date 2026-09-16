@@ -112,6 +112,12 @@ En `toast.promise`, cada mensaje es un rótulo suelto o el juego completo de opc
 
 El relleno es autocontenido, igual que en el `Alert`: no hay tokens `surface-dark-*` y el aviso se ve igual sobre una página clara y sobre una oscura. El borde blanco del neutro existe precisamente para eso —cuando la página ya es prusia, es lo que dibuja el contorno—, y es también lo que separa el aviso del contenido sobre el que flota, porque el sistema no proyecta sombra.
 
+## Los enlaces van en tinta
+
+Un enlace en la `description` de un toast se pinta siempre con la tinta del propio aviso, nunca con el acento: la tarjeta **es un `Alert`** y comparte su clase (`.alert`), así que hereda la misma regla — ver `Alert` § «Los enlaces van en tinta» para el porqué y el mecanismo de CSS. No hay nada que hacer desde `Toast`: pasar un `<Link>` (con `tone="accent"` o sin `tone`) dentro de `description` u `options.description` ya sale en tinta.
+
+<Canvas of={ToastStories.ContratoEnlacesEnTinta} />
+
 ---
 
 ## Tokens

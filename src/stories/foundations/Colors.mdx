@@ -242,6 +242,12 @@ Dos reglas de uso:
 - **No pinta el lienzo.** A diferencia de `.surface-dark`, solo lleva la tinta: se aplica dentro de un relleno que ya está pintado por el componente que la abre, y volver a pintarlo lo taparía.
 - **No va en el elemento que consume los tokens volteados.** Un selector de tema sobre la propia raíz le daría a esa raíz el valor de la otra cara: el `Alert` la pone en el contenido y en el aspa, no en el `<div>` que pinta el relleno, y copia antes su tinta en un alias (`--alert-title-ink`) para que el texto de dentro siga leyendo la cara de fuera.
 
+### Un enlace dentro de un aviso lee en tinta, no en acento
+
+El acento de un enlace (`Link` sin `tone`, o `tone="accent"`) está pensado para leer sobre la página. Dentro de un relleno de estado —un `Alert` o un toast del `Toaster`— compite con dos cosas a la vez: el color de la propia intención (el amarillo de `warning`, el rojo de `error`) y la acción principal del aviso, si la tiene. La norma (16-09-2026): **un enlace embebido en el título o la descripción de un aviso se pinta siempre en tinta**, como si llevara `tone="ink"`, y esto lo garantiza el CSS del `Alert`, no la disciplina de quien lo usa — un `tone="accent"` explícito pierde igual, por especificidad de contenedor.
+
+El detalle está en la doc de `Alert` § «Los enlaces van en tinta»: la tinta que se usa no es la genérica de `Link` (pensada para la página, no para un relleno) sino la que ya resuelve el propio aviso por intención y por superficie —el mismo token que consume su título—, así que el enlace siempre contrasta con el relleno que lo rodea sin necesidad de un par por variante.
+
 ### Un token que hereda de otro no hereda su modo oscuro
 
 Un `var()` dentro de una custom property **se sustituye en el elemento que la declara**. `--sheet-title-color: var(--modal-title-color)` vive en `:root`, así que llega al `Sheet` ya resuelto al valor claro: remapear `--modal-title-color` bajo `.surface-dark` no lo arrastra.

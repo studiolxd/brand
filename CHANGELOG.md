@@ -7,6 +7,35 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.1.0] — 2026-09-16
+
+> **Minor.** Regla visual nueva, sin cambios de API: **un enlace dentro de un `Alert` o de un
+> toast del `Toaster` se pinta siempre en tinta (`tone="ink"`), nunca en acento.** El acento
+> compite con el color de estado del propio aviso (el amarillo de `warning`, el rojo de
+> `error`) y con la acción principal del aviso.
+
+### El porqué
+
+Hasta ahora un `<Link>` embebido en el título o la descripción de un aviso salía con el tono
+que le pasara el consumidor — normalmente el acento por defecto, pensado para leer sobre la
+página, no sobre un relleno de estado.
+
+### El arreglo
+
+Lo garantiza el CSS del `Alert`, no la disciplina de quien lo usa. Dentro de `.alert` (clase
+que también lleva cada toast del `Toaster`, que comparte su cara) todo `.link` y todo `<a>`
+suelto se pinta con el mismo token que ya usa el título y la descripción del aviso
+(`--alert-title-ink`/`--alert-description-ink`, iguales entre sí, y ya resueltos por
+intención y por superficie) en vez de con `--link-color`. Gana incluso un `tone="accent"`
+explícito, por especificidad de contenedor (`.alert .link` pesa más que la clase de tono
+sola) y sin `!important`.
+
+Documentado en `Alert` § «Los enlaces van en tinta», en `Toast` § «Los enlaces van en tinta»
+(remite al `Alert`, comparten CSS) y en Fundamentos › Colores § «Un enlace dentro de un
+aviso lee en tinta, no en acento». Contrato cubierto por una story de test en cada
+componente (`Molecules/Alert` y `Molecules/Toast`), que mide el color computado del enlace
+contra el del título del aviso en las variantes `default`/`warning`/`error`.
+
 ## [49.0.1] — 2026-09-16
 
 > **Patch.** Arregla una regresión de la v47.1.0: `Link.css` colgaba `inline-size:

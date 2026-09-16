@@ -157,6 +157,69 @@ export const InversionEnOscuro: Story = {
 };
 
 /**
+ * Test: dentro del aviso todo enlace se pinta con la tinta del propio aviso,
+ * nunca con el acento — compite con el color de estado y con la acción
+ * principal. Se comprueba en `default`/`warning`/`error`, con un `tone="accent"`
+ * explícito y sin `tone` (que también resuelve a acento): las dos formas dan el
+ * mismo color que el título del aviso (`--alert-title-ink`/`--alert-description-ink`,
+ * iguales). En `default`/`error` se comprueba además que ese color no coincide
+ * con el acento de un enlace fuera del aviso — en `warning` no: su tinta es
+ * `color.primary` (prusia) y en superficie clara el acento fuera del aviso
+ * resuelve al mismo primitivo (`color.text.on-light`), así que coincidirían
+ * por definición y no por un fallo de la regla; en superficie oscura sí se
+ * distinguen (el acento pasa a amarillo) y ahí la comparación con el título
+ * ya lo cubre. Los valores se resuelven con el navegador, corre en las dos
+ * superficies (`claro`/`oscuro`, sin forzar ninguna) porque la comparación es
+ * relativa.
+ */
+export const ContratoEnlacesEnTinta: Story = {
+  name: 'Test — los enlaces del aviso van en tinta, no en acento',
+  tags: ['!dev'],
+  render: () => (
+    <div style={{ display: 'grid', gap: '1rem' }}>
+      <Alert data-testid="default" title="Aviso">
+        <Alert.Description>
+          Con enlaces: <Link href="#a" tone="accent">acento explícito</Link> y{' '}
+          <Link href="#b">sin tone</Link>.
+        </Alert.Description>
+      </Alert>
+      <Alert data-testid="warning" variant="warning" title="Atención">
+        <Alert.Description>
+          Con enlaces: <Link href="#a" tone="accent">acento explícito</Link> y{' '}
+          <Link href="#b">sin tone</Link>.
+        </Alert.Description>
+      </Alert>
+      <Alert data-testid="error" variant="error" title="Error">
+        <Alert.Description>
+          Con enlaces: <Link href="#a" tone="accent">acento explícito</Link> y{' '}
+          <Link href="#b">sin tone</Link>.
+        </Alert.Description>
+      </Alert>
+      {/* Fuera del aviso: el enlace de referencia, en acento de verdad. */}
+      <Link href="#fuera">Enlace fuera del aviso</Link>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const acentoFuera = getComputedStyle(
+      within(canvasElement).getByRole('link', { name: 'Enlace fuera del aviso' }),
+    ).color;
+
+    for (const testid of ['default', 'warning', 'error'] as const) {
+      const alerta = canvasElement.querySelector(`[data-testid="${testid}"]`) as HTMLElement;
+      const tinta = getComputedStyle(alerta.querySelector('.alert__title')!).color;
+      const enlaces = within(alerta).getAllByRole('link');
+      await expect(enlaces).toHaveLength(2);
+      for (const enlace of enlaces) {
+        await expect(getComputedStyle(enlace).color).toBe(tinta);
+        if (testid !== 'warning') {
+          await expect(getComputedStyle(enlace).color).not.toBe(acentoFuera);
+        }
+      }
+    }
+  },
+};
+
+/**
  * Test: las subpartes están disponibles como **named exports** (RSC-safe) y son
  * el mismo componente que el namespace (`Alert.Title === AlertTitle`).
  */

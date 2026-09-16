@@ -64,6 +64,14 @@ El aspa desaparece con el alert, así que el foco se quedaría sin sitio. Pasa e
 
 <Canvas of={AlertStories.Composicion} />
 
+## Los enlaces van en tinta
+
+Un enlace dentro del título o la descripción se pinta siempre con `tone="ink"` —la tinta del propio aviso—, nunca con el acento (`tone="accent"`, el por defecto de `Link`): el acento compite con el color de estado del aviso (el amarillo de `warning`, el rojo de `error`) y con la acción principal de sus `actions`.
+
+Lo garantiza el CSS del `Alert`, no la disciplina del consumidor: dentro de `.alert` (y de un toast del `Toaster`, que comparte esta misma clase) todo `.link` y todo `<a>` suelto se pinta con el mismo token que ya usa el título y la descripción del aviso —`--alert-title-ink`/`--alert-description-ink`, iguales—, resuelto ya por intención y por superficie. Aunque el consumidor pase `tone="accent"` explícito, gana la regla del aviso, por especificidad de contenedor (`.alert .link` pesa más que la clase de tono sola) y sin `!important`; el grosor de la línea y del anillo de foco son los de `Link tone="ink"`.
+
+<Canvas of={AlertStories.ContratoEnlacesEnTinta} />
+
 ## Superficie oscura
 
 <Canvas of={AlertStories.SuperficieOscura} />

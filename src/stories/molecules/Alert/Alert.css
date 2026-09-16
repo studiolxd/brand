@@ -88,6 +88,39 @@
   }
 }
 
+/* ── Enlaces dentro del aviso: siempre en tinta ────────────────
+   El acento (`--link-color`) compite con el color de estado del aviso
+   (warning amarillo, error rojo) y con su acción principal, así que un
+   enlace embebido en el título o la descripción —del `Alert` o de un toast
+   del `Toaster`, que comparte esta misma clase— se pinta con la tinta que
+   YA lee el propio aviso: el mismo token, ya resuelto por variante y por
+   superficie, que consumen `alert__title`/`alert__description`
+   (`--alert-description-ink`, igual que `--alert-title-ink`), nunca con
+   `--link-color`. Así hace falta también en `default` sobre página clara,
+   donde el relleno es prusia y `--link-ink-color` (pensado para texto sobre
+   la página, no sobre un relleno) daría tinta oscura sobre tinta oscura.
+   Gana aquí incluso un `tone="accent"` explícito — y `ink`/`accent-1`,
+   que ya pintan lo mismo o cerca — por especificidad de contenedor (dos
+   clases contra una), sin `!important`. El grosor de la línea y del anillo
+   de foco son los de `Link tone="ink"`: geometría, no color, y no compiten
+   con nada. */
+.alert .link,
+.alert a:not(.button) {
+  color: var(--alert-description-ink);
+  box-shadow: inset 0 calc(-1 * var(--link-ink-underline-width)) 0 0 currentColor;
+}
+
+.alert .link:hover,
+.alert a:not(.button):hover {
+  color: var(--alert-description-ink);
+  box-shadow: inset 0 calc(-1 * var(--link-ink-hover-underline-width)) 0 0 currentColor;
+}
+
+.alert .link:focus-visible,
+.alert a:not(.button):focus-visible {
+  outline-color: var(--alert-description-ink);
+}
+
 /* ── Botón de cierre — esquina superior derecha ─────────────── */
 /* El aspa es el `CloseButton` del sistema: sin hover —era el relleno del
    `Button` ghost lo que sobraba aquí— y con el anillo de foco. El color no se
