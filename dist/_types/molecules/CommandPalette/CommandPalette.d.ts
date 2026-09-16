@@ -37,6 +37,13 @@ export interface CommandPaletteGroup {
     id: string;
     heading: string;
     items: CommandPaletteItem[];
+    /**
+     * Filtrado de este grupo. Anula al `filter` global de la paleta:
+     * - `'internal'` (por defecto, el del global): filtra por `label`/`keywords` como siempre.
+     * - `'none'`: el grupo enseña sus ítems tal cual, sin comparar con la consulta —
+     *   para un grupo que ya llega filtrado desde fuera (búsqueda en servidor).
+     */
+    filter?: 'internal' | 'none';
 }
 export interface CommandPaletteProps {
     open: boolean;
@@ -81,6 +88,27 @@ export interface CommandPaletteProps {
      * Por defecto, el del entorno.
      */
     locale?: Intl.LocalesArgument;
+    /**
+     * Filtrado global de la paleta:
+     * - `'internal'` (por defecto): filtra los ítems por `label`/`keywords` contra la consulta.
+     * - `'none'`: la paleta no filtra nada — enseña los ítems de `groups` tal cual se los
+     *   pasan. Es lo que necesita una búsqueda en servidor (con `onQueryChange` y su propio
+     *   debounce), que ya trae los resultados filtrados.
+     *
+     * Un grupo concreto puede anular este valor con `CommandPaletteGroup.filter`.
+     */
+    filter?: 'internal' | 'none';
+    /**
+     * Consulta del buscador, para controlarla desde fuera (p. ej. resetearla al elegir un
+     * filtro externo). Sin ella, la paleta lleva su propio estado interno.
+     */
+    query?: string;
+    /**
+     * Se llama con cada cambio del texto del buscador (ya recortado por el filtrado interno
+     * cuando lo hay) y con `""` al cerrarse la paleta. Es la vía de lectura de la consulta
+     * para quien necesite buscar en servidor sin envolver la paleta ni leer el DOM.
+     */
+    onQueryChange?: (query: string) => void;
     className?: string;
 }
 /**
@@ -92,4 +120,4 @@ export interface CommandPaletteProps {
  * de Base UI en modo `inline` — sin popup propio, porque la superficie ya la
  * pone el `Modal`, que también se queda con Escape y el foco atrapado.
  */
-export declare function CommandPalette({ open, onOpenChange, groups, title, placeholder, emptyLabel, listLabel, closeLabel, shortcut, locale, className, }: CommandPaletteProps): import("react/jsx-runtime").JSX.Element;
+export declare function CommandPalette({ open, onOpenChange, groups, title, placeholder, emptyLabel, listLabel, closeLabel, shortcut, locale, filter: filterMode, query, onQueryChange, className, }: CommandPaletteProps): import("react/jsx-runtime").JSX.Element;

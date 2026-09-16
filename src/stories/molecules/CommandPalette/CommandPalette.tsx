@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, type ReactNode } from 'react';
 import { Autocomplete } from '@base-ui/react/autocomplete';
 import { Modal } from '../Modal/Modal';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
@@ -45,6 +45,13 @@ export interface CommandPaletteGroup {
   id: string;
   heading: string;
   items: CommandPaletteItem[];
+  /**
+   * Filtrado de este grupo. Anula al `filter` global de la paleta:
+   * - `'internal'` (por defecto, el del global): filtra por `label`/`keywords` como siempre.
+   * - `'none'`: el grupo enseña sus ítems tal cual, sin comparar con la consulta —
+   *   para un grupo que ya llega filtrado desde fuera (búsqueda en servidor).
+   */
+  filter?: 'internal' | 'none';
 }
 
 export interface CommandPaletteProps {
@@ -90,6 +97,27 @@ export interface CommandPaletteProps {
    * Por defecto, el del entorno.
    */
   locale?: Intl.LocalesArgument;
+  /**
+   * Filtrado global de la paleta:
+   * - `'internal'` (por defecto): filtra los ítems por `label`/`keywords` contra la consulta.
+   * - `'none'`: la paleta no filtra nada — enseña los ítems de `groups` tal cual se los
+   *   pasan. Es lo que necesita una búsqueda en servidor (con `onQueryChange` y su propio
+   *   debounce), que ya trae los resultados filtrados.
+   *
+   * Un grupo concreto puede anular este valor con `CommandPaletteGroup.filter`.
+   */
+  filter?: 'internal' | 'none';
+  /**
+   * Consulta del buscador, para controlarla desde fuera (p. ej. resetearla al elegir un
+   * filtro externo). Sin ella, la paleta lleva su propio estado interno.
+   */
+  query?: string;
+  /**
+   * Se llama con cada cambio del texto del buscador (ya recortado por el filtrado interno
+   * cuando lo hay) y con `""` al cerrarse la paleta. Es la vía de lectura de la consulta
+   * para quien necesite buscar en servidor sin envolver la paleta ni leer el DOM.
+   */
+  onQueryChange?: (query: string) => void;
   className?: string;
 }
 
@@ -113,9 +141,21 @@ export function CommandPalette({
   closeLabel,
   shortcut = 'k',
   locale,
+  filter: filterMode = 'internal',
+  query,
+  onQueryChange,
   className,
 }: CommandPaletteProps) {
   const t = useBrandMessages('commandPalette');
+
+  // Se limpia al cerrar: el `Autocomplete` vive dentro del `Modal` y se
+  // desmonta con él, pero eso no dispara `onValueChange` — quien escucha la
+  // consulta desde fuera necesita el aviso explícito.
+  const wasOpen = useRef(open);
+  useEffect(() => {
+    if (wasOpen.current && !open) onQueryChange?.('');
+    wasOpen.current = open;
+  }, [open, onQueryChange]);
 
   useEffect(() => {
     if (shortcut === false) return;
@@ -134,13 +174,18 @@ export function CommandPalette({
 
   // `sensitivity: 'base'` iguala mayúsculas y acentos: "sesion" encuentra
   // "Cerrar sesión" y "перевод" no depende de cómo se teclee la diéresis.
-  const filter = Autocomplete.useFilter({ sensitivity: 'base', locale });
+  const textFilter = Autocomplete.useFilter({ sensitivity: 'base', locale });
 
   const matches = useCallback(
-    (item: CommandPaletteItem, query: string) =>
-      filter.contains(item.label, query) ||
-      (item.keywords ?? []).some((keyword) => filter.contains(keyword, query)),
-    [filter],
+    (item: CommandPaletteItem, itemQuery: string) => {
+      const group = groups.find((candidate) => candidate.items.includes(item));
+      if ((group?.filter ?? filterMode) === 'none') return true;
+      return (
+        textFilter.contains(item.label, itemQuery) ||
+        (item.keywords ?? []).some((keyword) => textFilter.contains(keyword, itemQuery))
+      );
+    },
+    [textFilter, groups, filterMode],
   );
 
   return (
@@ -159,6 +204,8 @@ export function CommandPalette({
         items={groups}
         filter={matches}
         autoHighlight="always"
+        {...(query !== undefined ? { value: query } : {})}
+        onValueChange={(value) => onQueryChange?.(value)}
       >
         <div className={['command-palette', className].filter(Boolean).join(' ')}>
           {/* El Modal lleva el foco al primer elemento focable (el aspa de

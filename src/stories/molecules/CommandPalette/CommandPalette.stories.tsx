@@ -96,6 +96,73 @@ export const ConAtajo: Story = {
 };
 
 /**
+ * Fuente falsa de una búsqueda en servidor: cada comando lleva un puñado de
+ * documentos, y la «API» tarda un poco en contestar — el `setTimeout` es el
+ * hueco donde en producción viajaría un `fetch`.
+ */
+const serverDocuments = [
+  { id: 'doc-1', label: 'Guía de accesibilidad' },
+  { id: 'doc-2', label: 'Guía de theming oscuro' },
+  { id: 'doc-3', label: 'Guía de tokens de color' },
+  { id: 'doc-4', label: 'Changelog de la v40' },
+];
+
+function searchServerDocuments(query: string): Promise<typeof serverDocuments> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const found = query
+        ? serverDocuments.filter((doc) => doc.label.toLowerCase().includes(query.toLowerCase()))
+        : serverDocuments;
+      resolve(found);
+    }, 400);
+  });
+}
+
+/**
+ * `filter="none"` es lo que pide una búsqueda en servidor: la paleta deja de
+ * comparar `label`/`keywords` contra la consulta y enseña tal cual lo que le
+ * llega en `groups`. `onQueryChange` sustituye a la lectura por la puerta de
+ * atrás (envolver la paleta y leer el `input` del árbol) que hacía el
+ * consumidor hasta ahora.
+ */
+export const BusquedaEnServidor: Story = {
+  name: 'Búsqueda en servidor',
+  args: { ...base, open: true, onOpenChange: () => {} },
+  render: () => {
+    const [open, setOpen] = useState(true);
+    const [results, setResults] = useState(serverDocuments);
+    const [loading, setLoading] = useState(false);
+
+    const handleQueryChange = (query: string) => {
+      setLoading(true);
+      searchServerDocuments(query).then((found) => {
+        setResults(found);
+        setLoading(false);
+      });
+    };
+
+    const documentGroup: CommandPaletteGroup = {
+      id: 'documents',
+      heading: 'Documentación',
+      filter: 'none',
+      items: loading
+        ? []
+        : results.map((doc) => ({ id: doc.id, label: doc.label, onSelect: () => {} })),
+    };
+
+    return (
+      <CommandPalette
+        open={open}
+        onOpenChange={setOpen}
+        onQueryChange={handleQueryChange}
+        groups={[documentGroup]}
+        emptyLabel={loading ? 'Buscando…' : 'Sin resultados.'}
+      />
+    );
+  },
+};
+
+/**
  * Test: el diálogo expone buscador `combobox`, lista `listbox` con nombre y
  * grupos con cabecera; escribir filtra ignorando acentos y mayúsculas.
  */

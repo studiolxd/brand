@@ -254,6 +254,74 @@ describe('CommandPalette', () => {
     expect(onOpenChange).not.toHaveBeenCalled();
   });
 
+  it('onQueryChange recibe lo tecleado, y "" al cerrarse', async () => {
+    const user = userEvent.setup();
+    const onQueryChange = vi.fn();
+    const { rerender } = renderPalette({ onQueryChange });
+    await user.type(screen.getByRole('combobox'), 'ses');
+    expect(onQueryChange).toHaveBeenCalledWith('s');
+    expect(onQueryChange).toHaveBeenCalledWith('se');
+    expect(onQueryChange).toHaveBeenCalledWith('ses');
+
+    onQueryChange.mockClear();
+    const { groups } = makeGroups();
+    rerender(
+      <CommandPalette
+        open={false}
+        onOpenChange={vi.fn()}
+        groups={groups}
+        title="Buscar un comando"
+        placeholder="Escribe para buscar…"
+        emptyLabel="Sin resultados."
+        listLabel="Sugerencias"
+        closeLabel="Cerrar"
+        onQueryChange={onQueryChange}
+      />,
+    );
+    expect(onQueryChange).toHaveBeenCalledWith('');
+  });
+
+  it('con filter="none" un ítem cuya etiqueta no contiene la consulta sigue visible', async () => {
+    const user = userEvent.setup();
+    renderPalette({ filter: 'none' });
+    await user.type(screen.getByRole('combobox'), 'zzz-no-existe');
+    expect(screen.getAllByRole('option')).toHaveLength(3);
+  });
+
+  it('filter="none" por grupo solo desactiva el filtrado de ese grupo', async () => {
+    const user = userEvent.setup();
+    const groups: CommandPaletteGroup[] = [
+      {
+        id: 'server',
+        heading: 'Resultados',
+        filter: 'none',
+        items: [{ id: 'remote-1', label: 'Cualquier cosa', onSelect: vi.fn() }],
+      },
+      {
+        id: 'navigation',
+        heading: 'Navegación',
+        items: [{ id: 'home', label: 'Inicio', onSelect: vi.fn() }],
+      },
+    ];
+    render(
+      <CommandPalette
+        open
+        onOpenChange={vi.fn()}
+        groups={groups}
+        title="Buscar un comando"
+        placeholder="Escribe para buscar…"
+        emptyLabel="Sin resultados."
+        listLabel="Sugerencias"
+      />,
+    );
+    await user.type(screen.getByRole('combobox'), 'inicio');
+    const options = screen.getAllByRole('option');
+    expect(options).toHaveLength(2);
+    expect(options.map((option) => option.textContent)).toEqual(
+      expect.arrayContaining(['Cualquier cosa', 'Inicio']),
+    );
+  });
+
   it('no revienta con un keydown sintético sin key (autocompletado del navegador)', () => {
     const onOpenChange = vi.fn();
     const { groups } = makeGroups();

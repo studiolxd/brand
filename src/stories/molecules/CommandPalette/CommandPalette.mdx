@@ -46,6 +46,28 @@ El foco **nunca sale del buscador**: la lista se recorre con foco virtual (`aria
 
 <Canvas of={CommandPaletteStories.ConAtajo} />
 
+## Buscar fuera de la paleta
+
+La paleta filtra por su cuenta y **no expone la consulta escrita**: es una decisión deliberada, no un descuido — un consumidor no tiene por qué leer el texto del buscador por el DOM. Pero una búsqueda en servidor (la que trae resultados de una API, con su propio *debounce*) sí lo necesita, y hasta ahora la única vía era envolver la paleta en un contenedor con `onInput` y leer el valor por el árbol: una lectura por la puerta de atrás. Dos props resuelven esto de frente:
+
+- **`onQueryChange`** se llama con cada cambio del texto del buscador, y con `""` cuando la paleta se cierra — así el consumidor no arrastra una consulta vieja a la siguiente apertura sin tener que vigilar `open` él mismo.
+- **`filter`** (`'internal'` por defecto, `'none'`): con `'none'` la paleta deja de comparar `label`/`keywords` contra la consulta y enseña los ítems de `groups` tal cual —lo que hace falta cuando esos ítems ya llegan filtrados desde el servidor, sin el apaño de meter la consulta en `keywords` de cada resultado. Se puede fijar por grupo (`CommandPaletteGroup.filter`) para mezclar, en la misma paleta, un grupo con filtrado interno y otro que ya llega filtrado de fuera; sin override, el grupo hereda el `filter` global.
+
+```tsx
+const [results, setResults] = useState(initialResults);
+
+<CommandPalette
+  open={open}
+  onOpenChange={setOpen}
+  onQueryChange={(query) => search(query).then(setResults)}
+  groups={[{ id: 'documents', heading: 'Documentación', filter: 'none', items: results }]}
+/>
+```
+
+<Canvas of={CommandPaletteStories.BusquedaEnServidor} />
+
+`query` permite además controlar la consulta desde fuera (por ejemplo, para vaciarla al aplicar un filtro externo); sin ella la paleta lleva su propio estado interno, como hasta ahora.
+
 ## Superficie oscura
 
 Los tokens `surface-dark-*` cubren cabeceras, ítems, resaltado y estado vacío. No hace falta ninguna prop: la paleta reacciona a `.surface-dark` y a `html.dark` / `[data-theme="dark"]`.

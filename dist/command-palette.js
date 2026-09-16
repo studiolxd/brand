@@ -2,63 +2,71 @@
 import './command-palette.css';
 import { n as e } from "./_shared/brandmessagescontext.js";
 import { Modal as t } from "./modal.js";
-import { useCallback as n, useEffect as r } from "react";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
-import { Autocomplete as o } from "@base-ui/react/autocomplete";
+import { useCallback as n, useEffect as r, useRef as i } from "react";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { Autocomplete as s } from "@base-ui/react/autocomplete";
 //#region src/stories/molecules/CommandPalette/CommandPalette.tsx
-function s({ open: s, onOpenChange: c, groups: l, title: u, placeholder: d, emptyLabel: f, listLabel: p, closeLabel: m, shortcut: h = "k", locale: g, className: _ }) {
-	let v = e("commandPalette");
+function c({ open: c, onOpenChange: l, groups: u, title: d, placeholder: f, emptyLabel: p, listLabel: m, closeLabel: h, shortcut: g = "k", locale: _, filter: v = "internal", query: y, onQueryChange: b, className: x }) {
+	let S = e("commandPalette"), C = i(c);
 	r(() => {
-		if (h === !1) return;
+		C.current && !c && b?.(""), C.current = c;
+	}, [c, b]), r(() => {
+		if (g === !1) return;
 		let e = (e) => {
-			typeof e.key == "string" && e.key.toLowerCase() === h && (e.metaKey || e.ctrlKey) && (e.preventDefault(), c(!s));
+			typeof e.key == "string" && e.key.toLowerCase() === g && (e.metaKey || e.ctrlKey) && (e.preventDefault(), l(!c));
 		};
 		return window.addEventListener("keydown", e), () => window.removeEventListener("keydown", e);
 	}, [
-		h,
-		s,
-		c
+		g,
+		c,
+		l
 	]);
-	let y = o.useFilter({
+	let w = s.useFilter({
 		sensitivity: "base",
-		locale: g
-	}), b = n((e, t) => y.contains(e.label, t) || (e.keywords ?? []).some((e) => y.contains(e, t)), [y]);
-	return /* @__PURE__ */ i(t, {
-		open: s,
-		onClose: () => c(!1),
-		title: v("title", u),
-		...m ? { closeLabel: m } : {},
-		children: /* @__PURE__ */ i(o.Root, {
+		locale: _
+	}), T = n((e, t) => (u.find((t) => t.items.includes(e))?.filter ?? v) === "none" ? !0 : w.contains(e.label, t) || (e.keywords ?? []).some((e) => w.contains(e, t)), [
+		w,
+		u,
+		v
+	]);
+	return /* @__PURE__ */ a(t, {
+		open: c,
+		onClose: () => l(!1),
+		title: S("title", d),
+		...h ? { closeLabel: h } : {},
+		children: /* @__PURE__ */ a(s.Root, {
 			inline: !0,
 			open: !0,
-			items: l,
-			filter: b,
+			items: u,
+			filter: T,
 			autoHighlight: "always",
-			children: /* @__PURE__ */ a("div", {
-				className: ["command-palette", _].filter(Boolean).join(" "),
+			...y === void 0 ? {} : { value: y },
+			onValueChange: (e) => b?.(e),
+			children: /* @__PURE__ */ o("div", {
+				className: ["command-palette", x].filter(Boolean).join(" "),
 				children: [
-					/* @__PURE__ */ i(o.Input, {
+					/* @__PURE__ */ a(s.Input, {
 						className: "command-palette__input",
-						placeholder: v("placeholder", d),
+						placeholder: S("placeholder", f),
 						autoFocus: !0
 					}),
-					/* @__PURE__ */ i(o.List, {
+					/* @__PURE__ */ a(s.List, {
 						className: "command-palette__list",
-						"aria-label": v("list", p),
-						children: (e) => /* @__PURE__ */ a(o.Group, {
+						"aria-label": S("list", m),
+						children: (e) => /* @__PURE__ */ o(s.Group, {
 							items: e.items,
 							className: "command-palette__group",
-							children: [/* @__PURE__ */ i(o.GroupLabel, {
+							children: [/* @__PURE__ */ a(s.GroupLabel, {
 								className: "command-palette__heading",
 								children: e.heading
-							}), /* @__PURE__ */ i(o.Collection, { children: (e) => /* @__PURE__ */ a(o.Item, {
+							}), /* @__PURE__ */ a(s.Collection, { children: (e) => /* @__PURE__ */ o(s.Item, {
 								value: e,
 								disabled: e.disabled,
 								className: "command-palette__item",
 								onClick: () => {
-									c(!1), e.onSelect();
+									l(!1), e.onSelect();
 								},
-								children: [e.icon && /* @__PURE__ */ i("span", {
+								children: [e.icon && /* @__PURE__ */ a("span", {
 									className: "command-palette__item-icon",
 									"aria-hidden": "true",
 									children: e.icon
@@ -66,9 +74,9 @@ function s({ open: s, onOpenChange: c, groups: l, title: u, placeholder: d, empt
 							}, e.id) })]
 						}, e.id)
 					}),
-					/* @__PURE__ */ i(o.Empty, {
+					/* @__PURE__ */ a(s.Empty, {
 						className: "command-palette__empty",
-						children: v("empty", f)
+						children: S("empty", p)
 					})
 				]
 			})
@@ -76,4 +84,4 @@ function s({ open: s, onOpenChange: c, groups: l, title: u, placeholder: d, empt
 	});
 }
 //#endregion
-export { s as CommandPalette };
+export { c as CommandPalette };

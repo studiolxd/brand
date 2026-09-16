@@ -7,6 +7,33 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.2.0] — 2026-09-16
+
+> **Minor.** `CommandPalette` deja de ser dueña exclusiva de su consulta: `onQueryChange`
+> avisa de cada cambio del texto del buscador (y de `""` al cerrarse) y `filter`
+> (`'internal'` | `'none'`, global o por grupo con `CommandPaletteGroup.filter`) permite
+> apagar el filtrado interno para un grupo que ya llega filtrado desde fuera.
+
+### El porqué
+
+Un consumidor que busca en servidor (el `PublicCommandMenu` de la suite, resultados de una
+API con *debounce*) no tenía forma de leer lo que el usuario tecleaba salvo envolviendo la
+paleta en un contenedor con `onInput` y leyendo el valor por el árbol — una lectura por la
+puerta de atrás. Ese mismo consumidor, además, tenía que meter la consulta en `keywords` de
+cada resultado para que el filtrado interno no se los comiera, aunque los resultados ya
+llegaran filtrados.
+
+### El arreglo
+
+`onQueryChange?: (query: string) => void` se llama con el texto tal cual lo escribe quien
+usa la paleta, y con `""` cuando la paleta se cierra, para que el consumidor no arrastre una
+consulta vieja a la siguiente apertura. `query?: string` permite además controlarla desde
+fuera. `filter?: 'internal' | 'none'` (por defecto `'internal'`, sin cambio de
+comportamiento) apaga el filtrado por `label`/`keywords` cuando vale `'none'`; se puede fijar
+también por grupo (`CommandPaletteGroup.filter`) para mezclar, en una misma paleta, un grupo
+con filtrado interno y otro que ya llega filtrado de fuera. Story «Búsqueda en servidor» y
+MDX § «Buscar fuera de la paleta».
+
 ## [49.1.0] — 2026-09-16
 
 > **Minor.** Regla visual nueva, sin cambios de API: **un enlace dentro de un `Alert` o de un
