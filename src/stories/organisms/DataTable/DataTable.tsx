@@ -169,6 +169,14 @@ export interface DataTableProps<TData, TValue> {
    * nadie»), que un catálogo común no puede saber.
    */
   emptyMessage?: string;
+  /**
+   * Segunda frase del estado vacío, opcional y **sin default de catálogo**:
+   * es de producto, no de cromo, así que solo se pinta cuando esta pantalla
+   * tiene algo propio que añadir tras `emptyMessage`. Termina en punto (ver
+   * Foundations → Redacción); `emptyMessage` sigue siendo el rótulo, nunca
+   * lleva punto.
+   */
+  emptyDescription?: string;
   isLoading?: boolean;
   pagination?: DataTableServerPagination;
   headerLabels?: DataTableHeaderLabels;
@@ -198,6 +206,7 @@ export function DataTable<TData, TValue>({
   footerActions,
   pageSize = 10,
   emptyMessage,
+  emptyDescription,
   isLoading,
   pagination,
   headerLabels,
@@ -317,7 +326,7 @@ export function DataTable<TData, TValue>({
             ) : table.getRowModel().rows.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={columns.length}>
-                  <EmptyState size="sm" title={t('empty', emptyMessage)} />
+                  <EmptyState size="sm" title={t('empty', emptyMessage)} description={emptyDescription} />
                 </TableCell>
               </TableRow>
             ) : (

@@ -13,41 +13,42 @@ import { jsx as l, jsxs as u } from "react/jsx-runtime";
 function d(e) {
 	return e.scrollWidth > e.clientWidth + 1;
 }
-var f = s(function({ conversations: s, activeId: f, onNew: p, onSelect: m, onDelete: h, newLabel: g, navLabel: _, deleteLabel: v, isLoading: y = !1, loadingCount: b = 4, error: x, emptyMessage: S, errorTitle: C, className: w, ...T }, E) {
-	let [D, O] = c(null), k = e("conversationList"), A = x === void 0 ? y ? "loading" : s.length === 0 ? "empty" : "list" : "error";
+var f = s(function({ conversations: s, activeId: f, onNew: p, onSelect: m, onDelete: h, newLabel: g, navLabel: _, deleteLabel: v, isLoading: y = !1, loadingCount: b = 4, error: x, emptyMessage: S, emptyDescription: C, errorTitle: w, className: T, ...E }, D) {
+	let [O, k] = c(null), A = e("conversationList"), j = x === void 0 ? y ? "loading" : s.length === 0 ? "empty" : "list" : "error";
 	return /* @__PURE__ */ u("div", {
-		ref: E,
-		className: `conversation-list${w ? ` ${w}` : ""}`,
-		...T,
+		ref: D,
+		className: `conversation-list${T ? ` ${T}` : ""}`,
+		...E,
 		children: [/* @__PURE__ */ l("div", {
 			className: "conversation-list__header",
 			children: /* @__PURE__ */ l(n, {
 				variant: "outline",
 				block: !0,
 				onClick: p,
-				children: k("new", g)
+				children: A("new", g)
 			})
 		}), /* @__PURE__ */ u("nav", {
-			"aria-label": k("nav", _),
+			"aria-label": A("nav", _),
 			className: "conversation-list__nav",
 			"aria-busy": y || void 0,
 			children: [
-				A === "error" && /* @__PURE__ */ l(a, {
+				j === "error" && /* @__PURE__ */ l(a, {
 					variant: "error",
-					title: k("error", C),
+					title: A("error", w),
 					description: x,
 					className: "conversation-list__state"
 				}),
-				A === "loading" && /* @__PURE__ */ l("div", {
+				j === "loading" && /* @__PURE__ */ l("div", {
 					className: "conversation-list__loading",
 					children: Array.from({ length: b }, (e, t) => /* @__PURE__ */ l(r, {}, t))
 				}),
-				A === "empty" && /* @__PURE__ */ l(o, {
+				j === "empty" && /* @__PURE__ */ l(o, {
 					size: "sm",
-					title: k("empty", S),
+					title: A("empty", S),
+					description: C,
 					className: "conversation-list__state"
 				}),
-				A === "list" && /* @__PURE__ */ l("ul", {
+				j === "list" && /* @__PURE__ */ l("ul", {
 					className: "conversation-list__items",
 					role: "list",
 					children: s.map((e) => {
@@ -57,18 +58,18 @@ var f = s(function({ conversations: s, activeId: f, onNew: p, onSelect: m, onDel
 							children: [/* @__PURE__ */ l(i, {
 								label: e.label,
 								describe: !1,
-								open: D === e.id,
+								open: O === e.id,
 								onOpenChange: (e) => {
-									e || O(null);
+									e || k(null);
 								},
 								onPointerEnter: (t) => {
-									d(t.currentTarget) && O(e.id);
+									d(t.currentTarget) && k(e.id);
 								},
-								onPointerLeave: () => O(null),
+								onPointerLeave: () => k(null),
 								onFocus: (t) => {
-									d(t.currentTarget) && O(e.id);
+									d(t.currentTarget) && k(e.id);
 								},
-								onBlur: () => O(null),
+								onBlur: () => k(null),
 								children: /* @__PURE__ */ l("button", {
 									type: "button",
 									className: `conversation-list__label${r ? " conversation-list__label--active" : ""}`,
@@ -80,7 +81,7 @@ var f = s(function({ conversations: s, activeId: f, onNew: p, onSelect: m, onDel
 								variant: "ghost",
 								size: "sm",
 								iconOnly: !0,
-								"aria-label": k("delete", v)(e.label),
+								"aria-label": A("delete", v)(e.label),
 								className: "conversation-list__delete",
 								onClick: (t) => {
 									t.stopPropagation(), h(e.id);

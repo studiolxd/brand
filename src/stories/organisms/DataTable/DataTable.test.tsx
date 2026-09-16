@@ -132,6 +132,24 @@ describe('DataTable', () => {
     expect(screen.getByText('Nada por aquí')).toBeInTheDocument();
   });
 
+  it('sin emptyDescription no pinta descripción en el estado vacío', () => {
+    render(<DataTable columns={columns} data={[]} emptyMessage="Nada por aquí" />);
+    expect(document.querySelector('.empty-state__description')).not.toBeInTheDocument();
+  });
+
+  it('con emptyDescription pinta el título y la descripción del estado vacío', () => {
+    render(
+      <DataTable
+        columns={columns}
+        data={[]}
+        emptyMessage="Nada por aquí"
+        emptyDescription="Invita a alguien para que aparezca aquí."
+      />,
+    );
+    expect(screen.getByText('Nada por aquí')).toBeInTheDocument();
+    expect(screen.getByText('Invita a alguien para que aparezca aquí.')).toBeInTheDocument();
+  });
+
   it('muestra filas de esqueleto mientras carga, ocultas a lectores de pantalla', () => {
     const { baseElement } = render(
       <DataTable columns={columns} data={[]} isLoading pageSize={4} />,

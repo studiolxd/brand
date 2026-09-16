@@ -226,6 +226,44 @@ export const Vacia: Story = {
 };
 
 /**
+ * `emptyDescription` es la segunda frase, opcional y sin default de
+ * catálogo: solo se pinta cuando la pantalla tiene algo propio que añadir
+ * tras `emptyMessage`. `emptyMessage` sigue siendo el rótulo (sin punto);
+ * `emptyDescription` termina en punto — Foundations → Redacción.
+ */
+export const VaciaConDescripcion: Story = {
+  name: 'Vacío con descripción',
+  args: {
+    columns,
+    data: [],
+    emptyMessage: 'Todavía no hay miembros',
+    emptyDescription: 'Invita a alguien para que aparezca aquí.',
+  },
+};
+
+/**
+ * Test: `emptyMessage` llega como título del `EmptyState` (sin punto) y
+ * `emptyDescription` como su descripción (con punto), los dos a la vez.
+ */
+export const ContratoVaciaConDescripcion: Story = {
+  name: 'Test — emptyMessage y emptyDescription juntos',
+  tags: ['!dev'],
+  args: {
+    columns,
+    data: [],
+    emptyMessage: 'Todavía no hay miembros',
+    emptyDescription: 'Invita a alguien para que aparezca aquí.',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const titulo = await canvas.findByText('Todavía no hay miembros');
+    await expect(titulo).toHaveClass('empty-state__title');
+    const descripcion = await canvas.findByText('Invita a alguien para que aparezca aquí.');
+    await expect(descripcion).toHaveClass('empty-state__description');
+  },
+};
+
+/**
  * Los textos que la tabla de datos emite por su cuenta —el rótulo del buscador
  * y el aviso de vacío—, más los de sus piezas (`Table`, `Pagination`), salen del
  * `BrandMessagesProvider` que la aplicación monta en su raíz. Esta story tapa el
@@ -258,7 +296,7 @@ export const ContratoTextosDelProveedor: Story = {
     const canvas = within(canvasElement);
     // el suyo
     await expect(canvas.getByRole('textbox', { name: 'Search…' })).toBeInTheDocument();
-    await expect(canvas.getByText('No results.')).toBeInTheDocument();
+    await expect(canvas.getByText('No results')).toBeInTheDocument();
     // el de Table, en cada cabecera ordenable
     await expect(canvas.getAllByText('Activate sorting')).toHaveLength(3);
     // nada del catálogo castellano del Storybook sobrevive

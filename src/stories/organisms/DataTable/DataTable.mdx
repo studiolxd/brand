@@ -146,6 +146,13 @@ que la tabla está trabajando y su contenido va a cambiar.
 
 <Canvas of={DataTableStories.Vacia} />
 
+`emptyMessage` es el rótulo (sin punto); `emptyDescription` es su segunda frase, opcional y
+sin default de catálogo —es de producto, no de cromo— y termina en punto. Regla completa en
+Foundations → Redacción § «El `title` de un `EmptyState` nunca lleva punto — y de dos frases
+se usan las dos props».
+
+<Canvas of={DataTableStories.VaciaConDescripcion} />
+
 ## Paginada en servidor
 
 Con `pagination`, `data` es **una página ya recortada** y los totales los pone el servidor;
@@ -171,6 +178,7 @@ peso**, no con un fondo. El detalle está en la doc de `Table`.
 | --- | --- | --- |
 | Rótulo y placeholder del buscador | `dataTable.search` | `searchPlaceholder` |
 | Aviso del estado vacío | `dataTable.empty` | `emptyMessage` |
+| Segunda frase del estado vacío | (sin catálogo, es de producto) | `emptyDescription` |
 | Estado de ordenación y rótulo de acciones | `table.*` (los pone `Table`) | `headerLabels` |
 | Todo el pie | `pagination.*` (los pone `Pagination`) | `paginationLabels` |
 
@@ -193,6 +201,7 @@ aviso de vacío.
 | --- | --- |
 | `ariaLabel` / `ariaLabelledBy` | Es el nombre de **esta** lista. Solo el consumidor sabe qué lista es |
 | `emptyMessage` (cuando se pasa) | El catálogo pone el aviso genérico; esta prop es para lo que explica algo del dominio («Todavía no has invitado a nadie») |
+| `emptyDescription` | Nunca tuvo catálogo: es la segunda frase del estado vacío, y solo la sabe la pantalla que la pasa |
 | `searchClearLabel` | No lo pone `DataTable`: lo pone `InputField`, que todavía no está migrado al proveedor. Hasta que lo esté, una app no castellana tiene que pasarlo |
 
 La convención completa está en **Foundations › Internacionalización**.

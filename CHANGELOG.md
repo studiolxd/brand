@@ -7,6 +7,37 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.3.0] — 2026-09-17
+
+> **Minor.** Norma de redacción cerrada para el estado vacío: `EmptyState.title` nunca
+> lleva punto, ni siquiera cuando el aviso son dos frases —esa se parte entre `title` y
+> `description`—, y `DataTable`/`ConversationList` reciben `emptyDescription` para poder
+> hacer esa partición desde fuera.
+
+### El porqué
+
+La regla de Redacción ya decía que `title` no lleva punto y que `description` sí, pero no
+cerraba el caso de un aviso de dos frases («Aún no hay perfiles. Crea uno para recibir
+avisos de licitaciones que encajen con el perfil.»): sin una norma explícita, ese texto
+podía acabar entero en `title`, con un punto interior y dos frases donde solo cabe un
+rótulo. Y aunque la norma estuviera clara, `DataTable` y `ConversationList` —los dos únicos
+componentes que pintan `EmptyState` por dentro— solo exponían `emptyMessage`: no había
+manera de pasarles la segunda frase aunque el consumidor la tuviera.
+
+### El arreglo
+
+`Foundations/Redacción` fija la partición: una sola frase va entera en `title`, sin punto;
+un aviso de dos frases pone la primera en `title` (sin punto) y el resto en `description`
+(con punto), nunca las dos en el título. `EmptyState.mdx` y el JSDoc de `EmptyState.title`
+remiten a la regla.
+
+`DataTable` y `ConversationList` suman `emptyDescription?: string`, sin default de
+catálogo —es de producto, no de cromo—, que llega tal cual a `EmptyState.description`
+junto al `emptyMessage` de siempre como `title`. Story «Vacío con descripción» y test de
+contrato en los dos. De paso, el fixture de textos en inglés de Storybook traía
+`dataTable.empty: 'No results.'` con un punto que incumplía la propia regla del `title`
+que pinta: pasa a `'No results'`.
+
 ## [49.2.0] — 2026-09-16
 
 > **Minor.** `CommandPalette` deja de ser dueña exclusiva de su consulta: `onQueryChange`

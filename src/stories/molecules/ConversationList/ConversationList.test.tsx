@@ -40,6 +40,23 @@ function Lista(props: Partial<React.ComponentProps<typeof ConversationList>>) {
 }
 
 describe('ConversationList', () => {
+  it('sin emptyDescription no pinta descripción en el estado vacío', () => {
+    render(<Lista conversations={[]} emptyMessage="Nada por aquí" />);
+    expect(document.querySelector('.empty-state__description')).not.toBeInTheDocument();
+  });
+
+  it('con emptyDescription pinta el título y la descripción del estado vacío', () => {
+    render(
+      <Lista
+        conversations={[]}
+        emptyMessage="Nada por aquí"
+        emptyDescription="Abre una nueva para empezar a hablar."
+      />,
+    );
+    expect(screen.getByText('Nada por aquí')).toBeInTheDocument();
+    expect(screen.getByText('Abre una nueva para empezar a hablar.')).toBeInTheDocument();
+  });
+
   it('el aspa de borrar se alcanza con el tabulador', async () => {
     const onDelete = vi.fn();
     render(<Lista onDelete={onDelete} />);

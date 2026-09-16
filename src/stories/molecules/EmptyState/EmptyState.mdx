@@ -19,6 +19,12 @@ Un icono opcional, un cuerpo (título + descripción opcional) y una acción
 opcional, en columna y centrados. El `title` es obligatorio: siempre hay que
 decir qué está vacío.
 
+`title` nunca lleva punto: es el rótulo del estado, no una frase. Si el aviso
+tiene dos frases, la primera es el `title` (sin punto) y el resto es la
+`description` (termina en punto) — nunca las dos juntas en el título. Regla
+completa, con el ejemplo partido, en Foundations → Redacción § «El `title` de
+un `EmptyState` nunca lleva punto — y de dos frases se usan las dos props».
+
 <Canvas of={EmptyStateStories.WithDescription} />
 <Canvas of={EmptyStateStories.WithIcon} />
 <Canvas of={EmptyStateStories.WithAction} />

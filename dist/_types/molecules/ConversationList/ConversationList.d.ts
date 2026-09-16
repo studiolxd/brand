@@ -69,6 +69,14 @@ export interface ConversationListProps extends Omit<React.ComponentPropsWithoutR
      */
     emptyMessage?: string;
     /**
+     * Segunda frase del `EmptyState` que la lista pinta ella misma, opcional y
+     * **sin default de catálogo**: es de producto, no de cromo, así que solo se
+     * pinta cuando esta lista tiene algo propio que añadir tras `emptyMessage`.
+     * Termina en punto (ver Foundations → Redacción); `emptyMessage` sigue
+     * siendo el rótulo, nunca lleva punto.
+     */
+    emptyDescription?: string;
+    /**
      * `title` del `Alert` de error. **Sin default**: sin él, sale de
      * `conversationList.error`, y solo se lee cuando hay `error`.
      */

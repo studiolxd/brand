@@ -83,6 +83,44 @@ export const SinConversacionesTraducida: Story = {
   },
 };
 
+/**
+ * `emptyDescription` es la segunda frase, opcional y sin default de
+ * catálogo: solo se pinta cuando la lista tiene algo propio que añadir tras
+ * `emptyMessage`. `emptyMessage` sigue siendo el rótulo (sin punto);
+ * `emptyDescription` termina en punto — Foundations → Redacción.
+ */
+export const VaciaConDescripcion: Story = {
+  name: 'Vacío con descripción',
+  args: {
+    conversations: [],
+    activeId: undefined,
+    emptyMessage: 'Aún no hay conversaciones',
+    emptyDescription: 'Abre una nueva para empezar a hablar.',
+  },
+};
+
+/**
+ * Test: `emptyMessage` llega como título del `EmptyState` (sin punto) y
+ * `emptyDescription` como su descripción (con punto), los dos a la vez.
+ */
+export const ContratoVaciaConDescripcion: Story = {
+  name: 'Test — emptyMessage y emptyDescription juntos',
+  tags: ['!dev'],
+  args: {
+    conversations: [],
+    activeId: undefined,
+    emptyMessage: 'Aún no hay conversaciones',
+    emptyDescription: 'Abre una nueva para empezar a hablar.',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const titulo = await canvas.findByText('Aún no hay conversaciones');
+    await expect(titulo).toHaveClass('empty-state__title');
+    const descripcion = await canvas.findByText('Abre una nueva para empezar a hablar.');
+    await expect(descripcion).toHaveClass('empty-state__description');
+  },
+};
+
 /** Cargando: en el hueco de la lista van marcadores y el `<nav>` se anuncia ocupado. */
 export const Cargando: Story = {
   args: { conversations: [], isLoading: true },

@@ -37,7 +37,7 @@ ella, con las piezas del sistema, y el botón de conversación nueva sigue estan
 |---|---|---|
 | Cargando | `isLoading` (y `loadingCount`, por defecto 4) | `Skeleton` en el hueco de las filas, y `aria-busy` en el `<nav>` |
 | Error | `error` (el mensaje) y `errorTitle` | `Alert variant="error"` |
-| Vacía | automático, con `emptyMessage` | `EmptyState size="sm"` |
+| Vacía | automático, con `emptyMessage` y `emptyDescription` | `EmptyState size="sm"` |
 
 La prioridad es **error → carga → vacía → lista**: un error tapa todo lo demás, aunque ya hubiera
 conversaciones cargadas.
@@ -53,9 +53,16 @@ entonces se ven dos, el del DS y el suyo. Quien necesite otro texto —u otro id
 `emptyMessage`; quien no lo necesite, no pone nada. Es la misma regla que `listLabel` en
 `ChatShell` y que todos los textos del sistema: ver **Foundations › Internacionalización**.
 
+`emptyDescription` es la segunda frase, opcional y **sin default de catálogo** —es de
+producto, no de cromo—: solo se pinta cuando esta lista tiene algo propio que añadir tras
+`emptyMessage`. `emptyMessage` sigue siendo el rótulo (sin punto); `emptyDescription`
+termina en punto. Regla completa en Foundations → Redacción § «El `title` de un
+`EmptyState` nunca lleva punto — y de dos frases se usan las dos props».
+
 <Canvas of={ConversationListStories.Cargando} />
 <Canvas of={ConversationListStories.ConError} />
 <Canvas of={ConversationListStories.SinConversaciones} />
+<Canvas of={ConversationListStories.VaciaConDescripcion} />
 
 ## El aspa de borrar
 
@@ -160,6 +167,8 @@ Los cinco textos de la lista salen del `BrandMessagesProvider`, **sin valor por 
 
 `deleteLabel` interpola el título de la conversación, así que es **función**. El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**: una lista que carga bien no exige el título del aviso de error.
 
-El **mensaje** de `error` y los títulos de `conversations` quedan fuera: son datos de la pantalla.
+El **mensaje** de `error`, los títulos de `conversations` y `emptyDescription` quedan
+fuera: son datos de la pantalla — `emptyDescription` nunca tuvo clave de catálogo (es
+la segunda frase del estado vacío, opcional, ver § «Carga, error y lista vacía»).
 
 <Canvas of={ConversationListStories.TextosDelProveedor} />

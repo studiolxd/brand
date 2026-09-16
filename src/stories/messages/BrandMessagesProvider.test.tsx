@@ -234,7 +234,7 @@ describe('DataTable lee del proveedor', () => {
     );
 
     expect(screen.getByRole('textbox', { name: 'Search…' })).toBeInTheDocument();
-    expect(screen.getByText('No results.')).toBeInTheDocument();
+    expect(screen.getByText('No results')).toBeInTheDocument();
   });
 
   it('la prop suelta gana: el vacío de ESTA pantalla no está en el catálogo común', () => {
@@ -245,7 +245,7 @@ describe('DataTable lee del proveedor', () => {
     );
 
     expect(screen.getByText('Todavía no has invitado a nadie')).toBeInTheDocument();
-    expect(screen.queryByText('No results.')).toBeNull();
+    expect(screen.queryByText('No results')).toBeNull();
   });
 
   it('sin proveedor y sin prop, revienta diciendo qué texto falta', () => {

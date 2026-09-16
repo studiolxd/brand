@@ -39,6 +39,42 @@ como el `title` de un `Hero` o de un `PageIntro`.
 <EmptyState title="Sin resultados." description="Prueba con otros filtros." />
 ```
 
+### El `title` de un `EmptyState` nunca lleva punto — y de dos frases se usan las dos props
+
+Un estado vacío de **una sola frase** («Aún no hay ofertas») va entero como `title`, sin
+punto: es el rótulo del estado, no una frase con final.
+
+```tsx
+// ✓ Correcto — una frase, título sin punto
+<EmptyState title="Aún no hay ofertas" />
+
+// ✗ Incorrecto — el título lleva punto
+<EmptyState title="Aún no hay ofertas." />
+```
+
+Un estado vacío de **dos frases se parte**: la primera es el `title` (sin punto) y el
+resto es la `description` (termina en punto, por la regla de arriba). Nunca las dos frases
+juntas en el título, y nunca un título con un punto en medio.
+
+Ejemplo canónico — «Aún no hay perfiles. Crea uno para recibir avisos de licitaciones que
+encajen con el perfil.» se parte así:
+
+```tsx
+// ✓ Correcto — partido en título + descripción
+<EmptyState
+  title="Aún no hay perfiles"
+  description="Crea uno para recibir avisos de licitaciones que encajen con el perfil."
+/>
+
+// ✗ Incorrecto — las dos frases juntas en el título
+<EmptyState title="Aún no hay perfiles. Crea uno para recibir avisos de licitaciones que encajen con el perfil." />
+```
+
+Esto vale para todo lo que pinte un `EmptyState` por dentro. `DataTable` (`emptyMessage` +
+`emptyDescription`) y `ConversationList` (`emptyMessage` + `emptyDescription`) siguen la
+misma partición: `emptyMessage` es el `title` (sin punto), `emptyDescription` es la
+`description` opcional (con punto).
+
 ## Títulos, rótulos, botones y tags: sin punto
 
 Un título (`Hero.title`, `PageIntro.title`, `EmptyState.title`), un rótulo de campo, el

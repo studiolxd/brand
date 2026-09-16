@@ -105,6 +105,14 @@ export interface DataTableProps<TData, TValue> {
      * nadie»), que un catálogo común no puede saber.
      */
     emptyMessage?: string;
+    /**
+     * Segunda frase del estado vacío, opcional y **sin default de catálogo**:
+     * es de producto, no de cromo, así que solo se pinta cuando esta pantalla
+     * tiene algo propio que añadir tras `emptyMessage`. Termina en punto (ver
+     * Foundations → Redacción); `emptyMessage` sigue siendo el rótulo, nunca
+     * lleva punto.
+     */
+    emptyDescription?: string;
     isLoading?: boolean;
     pagination?: DataTableServerPagination;
     headerLabels?: DataTableHeaderLabels;
@@ -120,4 +128,4 @@ export interface DataTableProps<TData, TValue> {
  * `BrandMessagesProvider`, y los de sus piezas de los suyos (`table`,
  * `pagination`). Las props de texto siguen ahí como anulación puntual.
  */
-export declare function DataTable<TData, TValue>({ columns, data, ariaLabel, ariaLabelledBy, searchColumnId, search, searchPlaceholder, searchClearLabel, toolbar, footerActions, pageSize, emptyMessage, isLoading, pagination, headerLabels, paginationLabels, className, }: DataTableProps<TData, TValue>): import("react/jsx-runtime").JSX.Element;
+export declare function DataTable<TData, TValue>({ columns, data, ariaLabel, ariaLabelledBy, searchColumnId, search, searchPlaceholder, searchClearLabel, toolbar, footerActions, pageSize, emptyMessage, emptyDescription, isLoading, pagination, headerLabels, paginationLabels, className, }: DataTableProps<TData, TValue>): import("react/jsx-runtime").JSX.Element;

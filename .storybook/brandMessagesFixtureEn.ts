@@ -37,7 +37,7 @@ export const brandMessagesFixtureEn: BrandMessages = {
     sortedDescending: 'Sorted descending',
   },
   dataTable: {
-    empty: 'No results.',
+    empty: 'No results',
     search: 'Search…',
   },
   inputField: {

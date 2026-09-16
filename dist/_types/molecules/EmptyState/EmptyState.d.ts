@@ -5,7 +5,11 @@ export interface EmptyStateAction {
     href?: string;
 }
 export interface EmptyStateProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
-    /** El rótulo del estado: sin punto (ver Foundations → Redacción). */
+    /**
+     * El rótulo del estado: sin punto, nunca dos frases (ver Foundations →
+     * Redacción). Un aviso de dos frases se parte: la primera aquí, el resto en
+     * `description`.
+     */
     title: string;
     /** La frase que lo explica, opcional: termina en punto (ver Foundations → Redacción). */
     description?: string;
