@@ -35,15 +35,27 @@ a:where(:not(.button)),
   padding-block-end: var(--link-underline-offset);
   box-shadow: inset 0 calc(-1 * var(--link-underline-width)) 0 0 currentColor;
   cursor: var(--link-cursor);
-  /* Un enlace nunca es un ítem estirado: su caja es la de su texto, no la del
-     hueco que le da el padre. `inline-size` (no `align-self`) porque solo
-     debe fijar el eje del ancho — `align-self` tocaría también el cruzado y
-     rompería el centrado vertical de `Inline` (`align-items: center`, para
-     que un enlace y un botón de distinta altura compartan eje). Como
-     `width`/`inline-size` no aplica a una caja `inline` de verdad, no afecta
-     al enlace suelto en un párrafo; solo entra en juego cuando el enlace se
-     convierte en ítem de flex/grid (`Stack`, `Inline`), que es justo donde
-     `align-items: stretch` lo estiraría. */
+}
+
+/* Un enlace nunca es un ítem estirado: su caja es la de su texto, no la del
+   hueco que le da el padre. `inline-size` (no `align-self`) porque solo debe
+   fijar el eje del ancho — `align-self` tocaría también el cruzado y
+   rompería el centrado vertical de `Inline` (`align-items: center`, para que
+   un enlace y un botón de distinta altura compartan eje). Como
+   `width`/`inline-size` no aplica a una caja `inline` de verdad, no afecta al
+   enlace suelto en un párrafo; solo entra en juego cuando el enlace se
+   convierte en ítem de flex/grid (`Stack`, `Inline`).
+
+   SOLO en `:where(.link)`, no en el `a:not(.button)` de arriba: ese selector
+   cubre TODO `<a>` del documento, incluido el que es pieza de otro componente
+   con su propia clase BEM (`menu__item`, `sidebar-nav__link`,
+   `breadcrumb__link`, `pagination__link`, `tabs__tab`, `site-nav__link`,
+   `card`…), que sí necesita ocupar el ancho que le da su layout (una fila de
+   tabla, una celda de grid). Esos componentes no ponen `class="link"` — solo
+   la suya propia — así que quedan fuera de esta regla sin tocarlos uno a uno.
+   Regresión de la v47.1.0: `a:not(.button)` encogía `<a class="menu__item">`
+   a su texto en las tablas de `ContextMenu`/`UserMenu`. */
+:where(.link) {
   inline-size: fit-content;
 }
 

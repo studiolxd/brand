@@ -7,6 +7,38 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.0.1] — 2026-09-16
+
+> **Patch.** Arregla una regresión de la v47.1.0: `Link.css` colgaba `inline-size:
+> fit-content` de TODO `<a>` del documento (`a:where(:not(.button))`), no solo del enlace
+> del sistema (`.link`). Cualquier `<a>` que fuera pieza de OTRO componente con su propia
+> clase BEM y que no fijara su propio ancho se encogía a su texto: el ítem `link` de `Menu`
+> (`<a class="menu__item">`, en `ContextMenu`/`UserMenu`) quedaba como una cajita junto a un
+> ítem `button` que sí ocupaba la fila, y una `Card` con `href` (o `render={<a/>}`) dentro de
+> una rejilla (`Columns align="stretch"`) se encogía a su título en vez de ocupar la celda —
+> más visible cuanto más corto el título, porque el texto largo ya llenaba el hueco y
+> disimulaba el bug.
+
+### El arreglo
+
+`inline-size: fit-content` sale del selector combinado y pasa a una regla aparte con
+`:where(.link)` en solitario: solo el enlace del sistema (el átomo `Link`, o cualquier cosa
+que lleve `class="link"`) se resiste a estirarse en un `Stack`/`Inline`. El `<a>` pelado
+sigue vistiéndose (color, subrayado, foco) desde el selector de siempre, sin el
+`inline-size`: lo que necesita su ancho de layout —`menu__item`, `card`, y cualquier otro
+`<a>` con clase propia que no lo pise ya con su propio `width`/`inline-size`/`flex`— deja de
+perderlo por una regla que no era la suya. Barrido el árbol de `src/`: ningún otro `<a>` de
+componente (`sidebar-nav__link`, `breadcrumb__link`, `pagination__link`, `tabs__tab`,
+`site-nav__link`, `project-card__link`…) dependía del `inline-size` que se retira — todos o
+fijan su propio ancho o son enlaces de una sola palabra donde `fit-content` nunca actuaba.
+
+Dos stories de contrato nuevas (`tags: ['!dev']`, corren en `test:stories`):
+`Molecules/Menu` → «el ítem enlace ocupa el mismo ancho que el ítem botón», y
+`Molecules/Card` → «cards enlazadas en rejilla ocupan su celda» (título corto y largo, mismo
+ancho de celda). La story de `Atoms/Link` → «no se estira dentro de un Stack
+`align="stretch"`» sigue en verde: sigue siendo `.link`, así que conserva su ancho de
+contenido.
+
 ## [49.0.0] — 2026-09-16
 
 > **Major.** La **última ola** del proveedor de textos, y la más distinta: el chat y las

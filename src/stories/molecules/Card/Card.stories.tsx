@@ -863,3 +863,42 @@ export const ContratoAccion: Story = {
     });
   },
 };
+
+/**
+ * Test: en una rejilla (`Columns align="stretch"`), una link-card ocupa el
+ * 100% de su celda — con título corto o largo. Misma regresión de la
+ * v47.1.0 que el ítem enlace de `Menu`: `inline-size: fit-content` colgaba de
+ * TODO `<a>` en `Link.css`, así que la tarjeta —un `<a class="card">», sin
+ * `class="link"`— se encogía a su texto en vez de estirarse a la celda; las
+ * de texto largo disimulaban el bug porque su texto ya llenaba el hueco.
+ */
+export const ContratoAnchoEnRejilla: Story = {
+  name: 'Test — cards enlazadas en rejilla ocupan su celda',
+  tags: ['!dev'],
+  render: () => (
+    <Columns columns={3} align="stretch">
+      <Card href="#" color="outline" title="LMS" description="Corto." />
+      <Card href="#" color="outline" title="Pasarela de pagos" description="Cobra matrículas con Stripe." />
+      <Card
+        href="#"
+        color="outline"
+        title="Informes y cuadro de mando"
+        description="Progreso, finalización y actividad de cada curso, en un único panel."
+      />
+    </Columns>
+  ),
+  play: async ({ canvasElement }) => {
+    const [corta, media, larga] = Array.from(
+      canvasElement.querySelectorAll<HTMLElement>('a.card'),
+    );
+    await expect(corta).toBeDefined();
+    await expect(media).toBeDefined();
+    await expect(larga).toBeDefined();
+
+    // Las tres celdas de una rejilla de 3 columnas miden lo mismo — con
+    // independencia de cuánto texto lleve el título/descripción de cada una.
+    const anchoLarga = larga.getBoundingClientRect().width;
+    await expect(corta.getBoundingClientRect().width).toBeCloseTo(anchoLarga, 0);
+    await expect(media.getBoundingClientRect().width).toBeCloseTo(anchoLarga, 0);
+  },
+};

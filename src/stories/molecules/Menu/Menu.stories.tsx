@@ -208,3 +208,38 @@ export const ContratoResaltado: Story = {
     });
   },
 };
+
+/**
+ * Test: un ítem `link` (`<a class="menu__item">`) ocupa la misma fila que un
+ * ítem `button` — ninguno de los dos se encoge a su texto. Regresión de la
+ * v47.1.0: `inline-size: fit-content` de `Link.css` colgaba de TODO `<a>`
+ * (incluido `menu__item`) en vez de solo `.link`, así que el ítem enlace
+ * salía como una cajita mientras el ítem botón ocupaba la fila entera.
+ */
+export const ContratoAnchoItemEnlace: Story = {
+  name: 'Test — el ítem enlace ocupa el mismo ancho que el ítem botón',
+  tags: ['!dev'],
+  args: {
+    trigger: <Button variant="outline">Fila</Button>,
+    items: [
+      { type: 'link', label: 'Ver', href: '/ver' },
+      { type: 'button', label: 'Ocultar', onClick: () => {} },
+    ],
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Fila' }));
+
+    const body = within(document.body);
+    const ver = await body.findByRole('menuitem', { name: 'Ver' });
+    const ocultar = await body.findByRole('menuitem', { name: 'Ocultar' });
+
+    // El ítem link es un `<a>` de verdad; el ítem button es el `<div
+    // role="menuitem">` que pinta Base UI por defecto — ninguno es un
+    // `<button>` nativo, y da igual: lo que se compara es el ancho.
+    await expect(ver.tagName).toBe('A');
+    await expect(ocultar.tagName).toBe('DIV');
+    await expect(ver.getBoundingClientRect().width)
+      .toBeCloseTo(ocultar.getBoundingClientRect().width, 0);
+  },
+};
