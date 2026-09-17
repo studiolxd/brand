@@ -7,6 +7,74 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.4.0] — 2026-09-17
+
+> **Minor.** Cuatro huecos que dejó al descubierto la campaña de crudos de bricks: un bocadillo
+> sobre un control apagado, la ranura de acciones de una tarjeta-enlace, dónde aterriza lo que
+> calcula un motor de arrastre, y el HTML que no viene de React.
+
+### `Tooltip disabledTrigger` — el motivo de un control deshabilitado
+
+Un control apagado es el que más necesita explicarse, y es justo el que no puede: un
+`button[disabled]` no recibe eventos de puntero ni foco, así que no dispara nada. Con
+`disabledTrigger`, el bocadillo se dispara desde un envoltorio focusable
+(`span.tooltip__trigger`, `tabIndex={0}`) que pone el propio componente, y el CSS apaga los
+eventos de puntero del hijo deshabilitado para que el hover **sobre el botón** llegue al
+envoltorio. Eso segundo es lo que falta siempre que esto se monta a mano —el `<span tabIndex={0}>`
+casero abre con el teclado pero no con el ratón—, y era el caso de `design-matrix-studio` en
+bricks. El control sigue deshabilitado de verdad; lo único que cambia es quién dispara.
+
+Se descartó la otra forma, un `Button disabledReason`: ataría el átomo más usado del sistema a
+`Tooltip` y a su proveedor, lo obligaría a ser componente de cliente en apps que hoy lo pintan
+desde el servidor, y no serviría para un `Select` o un `Switcher` apagados.
+
+### `Card linkOverlay` y `CardAction isolate` — la tarjeta que navega y lleva acciones
+
+Envolver una tarjeta con menú en el `<a>` del router mete un `<button>` dentro de un `<a>`: no es
+HTML válido, y el lector de pantalla lee un enlace cuyo nombre se traga el título, el estado, el
+pie y la etiqueta del menú. La forma del sistema es `Card linkOverlay`: la tarjeta es contenedora,
+el enlace es el del **título** y estira su área de pulsación a todo el bloque con una capa vacía;
+la ranura de acciones sube por encima y se pulsa sola.
+
+Y para lo que ya existe —una tarjeta envuelta en un enlace, una fila pulsable—, `CardAction`
+**aísla su ranura por defecto** (`isolate`): detiene la propagación y, **solo cuando cuelga de un
+enlace y solo para lo que se pulsa dentro de ella**, cancela la acción por defecto. Las dos cosas
+hacen falta: detener la propagación no cancela la navegación, y acotar el `preventDefault` es lo
+que evita romper un `type="submit"` de una tarjeta contenedora o el ítem de un `Menu`, que se
+pinta en un portal fuera del enlace.
+
+### `Sortable` — dónde aterriza lo que calcula un motor de arrastre
+
+El sistema no trae motor de arrastre y no va a traerlo. Lo que faltaba era dónde deja el motor lo
+que calcula en cada fotograma, porque la respuesta de manual —`style={{ transform: CSS.Transform
+.toString(transform) }}`— es justo lo que el sistema no puede emitir: una app con `style-src
+'self'` descarta el atributo `style` sin dejar ni una violación en consola.
+
+`Sortable` recibe el desplazamiento como **dato** (`transform`, con la forma que devuelven dnd-kit
+y compañía, para pasársela tal cual), lo escribe por el **CSSOM** en `--sortable-x`/`-y` y las dos
+escalas, y publica el estado como atributo (`data-dragging`). El `transform` y la atenuación del
+original (`--opacity-disabled`, sin token nuevo: el original queda fuera de juego) viven en la
+hoja del sistema. Reenvía `ref`, que es lo que el motor necesita para registrar el nodo, y anula
+la transición con `prefers-reduced-motion` —la dicta el motor en una cadena suya, así que no pasa
+por los tokens de duración—.
+
+### `Prose html` — el HTML que no viene de React
+
+`Prose` existía para vestir la semántica cruda de un documento, pero solo aceptaba `children`, así
+que el HTML de un parser de `.docx`/`.pdf` acababa en un `dangerouslySetInnerHTML` sobre un
+`<div>` desnudo —nueve sitios en una sola pantalla de bricks—, fuera de la escala, del ritmo y de
+la medida de lectura. Ahora entra por `html`, **excluyente con `children` por tipo**. El DS **no
+sanea**: la cadena llega ya limpia del consumidor, y por eso la prop es `string` y no un
+`ReactNode`. Se descartó una pieza aparte (`RawHtml`) dentro de `Prose`: obligaría a escribir dos
+componentes para una sola cosa y dejaría el HTML suelto sin vestir cuando se olvidara el de fuera.
+
+### Además
+
+- Norma en Foundations › Opacidad: el original de un arrastre usa `--opacity-disabled`, que es el
+  mismo estado de «fuera de juego» del rol — no es un valor nuevo.
+- `src/index.ts`, `scripts/entry-points.mjs` y `package.json#exports` registran `Sortable`
+  (componente de cliente).
+
 ## [49.3.1] — 2026-09-17
 
 > **Patch.** La v49.0.1 estrechó a `:where(.link)` el `inline-size: fit-content` que evita

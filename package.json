@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "49.3.1",
+  "version": "49.4.0",
   "description": "El sistema de diseño de Studio LXD: componentes React, tokens y documentación de la suite SLXD.",
   "repository": {
     "type": "git",
@@ -573,6 +573,10 @@
     "./sparkline": {
       "types": "./dist/_types/atoms/Sparkline/Sparkline.d.ts",
       "import": "./dist/sparkline.js"
+    },
+    "./sortable": {
+      "types": "./dist/_types/atoms/Sortable/Sortable.d.ts",
+      "import": "./dist/sortable.js"
     },
     "./spinner": {
       "types": "./dist/_types/atoms/Spinner/Spinner.d.ts",

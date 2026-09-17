@@ -20,31 +20,35 @@ function l() {
 	let e = document.documentElement;
 	return c(getComputedStyle(e).getPropertyValue("--tooltip-offset").trim(), e);
 }
-var u = t(function({ label: t, children: s, side: c = "top", align: u = "center", sideOffset: d, open: f, defaultOpen: p, onOpenChange: m, delayDuration: h, describe: g = !0, container: _, className: v, ...y }, b) {
-	let x = e(_), S = n(), [C, w] = r(p ?? !1), T = f ?? C;
+var u = t(function({ label: t, children: s, side: c = "top", align: u = "center", sideOffset: d, open: f, defaultOpen: p, onOpenChange: m, delayDuration: h, describe: g = !0, disabledTrigger: _ = !1, container: v, className: y, ...b }, x) {
+	let S = e(v), C = n(), [w, T] = r(p ?? !1), E = f ?? w;
 	return /* @__PURE__ */ a(o.Root, {
 		open: f,
 		defaultOpen: p,
 		onOpenChange: (e) => {
-			f === void 0 && w(e), m?.(e);
+			f === void 0 && T(e), m?.(e);
 		},
 		children: [/* @__PURE__ */ i(o.Trigger, {
-			ref: b,
-			render: s,
-			"aria-describedby": T && g ? S : void 0,
+			ref: x,
+			render: _ ? /* @__PURE__ */ i("span", {
+				className: "tooltip__trigger",
+				tabIndex: 0,
+				children: s
+			}) : s,
+			"aria-describedby": E && g ? C : void 0,
 			...h === void 0 ? {} : { delay: h },
-			...y
+			...b
 		}), /* @__PURE__ */ i(o.Portal, {
-			container: x,
+			container: S,
 			children: /* @__PURE__ */ i(o.Positioner, {
 				className: "tooltip__positioner",
 				side: c,
 				align: u,
 				sideOffset: d ?? l,
 				children: /* @__PURE__ */ a(o.Popup, {
-					id: S,
+					id: C,
 					role: "tooltip",
-					className: ["tooltip", v].filter(Boolean).join(" "),
+					className: ["tooltip", y].filter(Boolean).join(" "),
 					children: [t, /* @__PURE__ */ i(o.Arrow, {
 						className: "tooltip__arrow",
 						children: /* @__PURE__ */ i("svg", {

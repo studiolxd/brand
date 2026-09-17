@@ -2,8 +2,8 @@
 import './app-shell.css';
 import { n as e } from "./_shared/brandmessagescontext.js";
 import { SkipLink as t } from "./skip-link.js";
-import { TooltipProvider as n } from "./tooltip.js";
-import { t as r } from "./_shared/css-properties.js";
+import { t as n } from "./_shared/css-properties.js";
+import { TooltipProvider as r } from "./tooltip.js";
 import { n as i, t as a } from "./_shared/appshellcontext.js";
 import { useCallback as o, useEffect as s, useMemo as c, useState as l } from "react";
 import { jsx as u, jsxs as d } from "react/jsx-runtime";
@@ -49,10 +49,10 @@ function m({ header: i, sidebar: f, children: m, defaultSidebar: h = "open", sid
 		j,
 		M,
 		S
-	]), F = r({ "--app-shell-sidebar-width": D ? `${D}px` : void 0 }), I = !S && T;
+	]), F = n({ "--app-shell-sidebar-width": D ? `${D}px` : void 0 }), I = !S && T;
 	return /* @__PURE__ */ u(a.Provider, {
 		value: P,
-		children: /* @__PURE__ */ d(n, { children: [/* @__PURE__ */ u(t, {
+		children: /* @__PURE__ */ d(r, { children: [/* @__PURE__ */ u(t, {
 			href: "#main-content",
 			children: x("skipToContent", b)
 		}), /* @__PURE__ */ d("div", {

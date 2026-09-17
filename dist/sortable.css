@@ -1,0 +1,1 @@
+.sortable{transform:translate3d(var(--sortable-x,0px), var(--sortable-y,0px), 0) scale(var(--sortable-scale-x,1), var(--sortable-scale-y,1));transition:var(--sortable-transition,none)}.sortable[data-dragging]{opacity:var(--opacity-disabled)}@media (prefers-reduced-motion:reduce){.sortable{transition:none}}

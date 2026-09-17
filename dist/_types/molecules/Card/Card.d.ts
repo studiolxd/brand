@@ -68,6 +68,23 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
     /** Maqueta de la tarjeta. Default: `'default'`. */
     variant?: CardVariant;
     /**
+     * Modo contenedor: el enlace del **título** cubre toda la tarjeta. La
+     * tarjeta sigue siendo un `<div>` con contenido interactivo dentro —un menú
+     * en `CardAction`, un botón en el pie—, y quien navega es el `<a>` del
+     * título, que estira su área de pulsación a todo el bloque con una capa
+     * vacía (`::after`).
+     *
+     * Es la forma correcta de una «tarjeta que es enlace **y** lleva acciones»:
+     * meter un `<button>` dentro de un `<a>` —envolviendo la tarjeta en el
+     * `Link` del router— no es HTML válido, y un lector de pantalla anuncia un
+     * enlace cuyo nombre se come el título, el estado, el pie y la etiqueta del
+     * menú de una sentada. Con `linkOverlay` cada control conserva su papel: un
+     * enlace con el nombre del título, y un botón de menú aparte.
+     *
+     * La ranura de acciones queda por encima de la capa, así que se pulsa sola.
+     */
+    linkOverlay?: boolean;
+    /**
      * Modo contenedor: la tarjeta entera es la opción de un grupo. Dentro va
      * un `RadioField` (o `CheckboxField`) del DS, que la tarjeta extiende a todo
      * su bloque y deja invisible: pulsar en cualquier punto marca la opción y
@@ -136,8 +153,38 @@ export interface CardDescriptionProps extends Omit<ParagraphProps, 'children'> {
  * hereda el cuerpo de la superficie en la que viva la tarjeta.
  */
 export declare const CardDescription: import("react").ForwardRefExoticComponent<CardDescriptionProps & import("react").RefAttributes<HTMLParagraphElement>>;
-/** Acción alineada al extremo de la cabecera (menú, botón…). */
-export declare const CardAction: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+export interface CardActionProps extends CardPartProps {
+    /**
+     * La ranura **aísla sus eventos** de la tarjeta que la contiene, que es lo
+     * que se quiere siempre que la tarjeta sea a la vez un enlace (`Card href`,
+     * `Card render`, o un `<Link>` del router envolviéndola): pulsar el menú de
+     * la cabecera abre el menú, no navega.
+     *
+     * Hace dos cosas, y las dos hacen falta:
+     *
+     * - `stopPropagation`, para que el clic no llegue a un manejador que la
+     *   tarjeta o la fila tengan puesto más arriba;
+     * - `preventDefault` **solo cuando la ranura cuelga de un enlace** —se
+     *   comprueba en el DOM, buscando un `a[href]` por encima del propio nodo—
+     *   y **solo para lo que se pulsa dentro de ella**. Sin esto no basta:
+     *   detener la propagación no cancela la acción por defecto del navegador,
+     *   que sigue el enlace igual. Y acotarlo evita romper lo que sí depende de
+     *   su acción por defecto: un `type="submit"` dentro de una tarjeta
+     *   contenedora, o el ítem de un `Menu` que se pinta en un portal fuera del
+     *   enlace.
+     *
+     * `false` para la tarjeta que quiere lo contrario: que pulsar la acción
+     * cuente también como pulsar la tarjeta.
+     *
+     * @default true
+     */
+    isolate?: boolean;
+}
+/**
+ * Acción alineada al extremo de la cabecera (menú, botón…). Por defecto aísla
+ * sus eventos de la tarjeta-enlace que la contiene: ver `isolate`.
+ */
+export declare const CardAction: import("react").ForwardRefExoticComponent<CardActionProps & import("react").RefAttributes<HTMLDivElement>>;
 /** Cuerpo de la tarjeta. */
 export declare const CardContent: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
 export interface CardFooterProps extends CardPartProps {
