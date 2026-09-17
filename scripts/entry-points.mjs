@@ -77,6 +77,7 @@ export const entryPoints = {
   'message-bubble':      'src/stories/atoms/MessageBubble/MessageBubble.tsx',
   'typing-indicator':    'src/stories/atoms/TypingIndicator/TypingIndicator.tsx',
   'skeleton':            'src/stories/atoms/Skeleton/Skeleton.tsx',
+  'sortable':            'src/stories/atoms/Sortable/Sortable.tsx',
   'tooltip':             'src/stories/atoms/Tooltip/Tooltip.tsx',
   // Molecules
   'alert':                   'src/stories/molecules/Alert/Alert.tsx',
@@ -258,6 +259,7 @@ export const clientComponents = new Set([
   'collapsible',
   'scroll-area',
   'slider',
+  'sortable',
   'tree-view',
   'progress-bar',
   'spinner',

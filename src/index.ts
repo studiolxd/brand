@@ -148,6 +148,8 @@ export { Sparkline } from './stories/atoms/Sparkline/Sparkline';
 export type { SparklineProps, SparklineSeries } from './stories/atoms/Sparkline/Sparkline';
 export { Slider } from './stories/atoms/Slider/Slider';
 export type { SliderProps } from './stories/atoms/Slider/Slider';
+export { Sortable } from './stories/atoms/Sortable/Sortable';
+export type { SortableProps, SortableElement, SortableTransform } from './stories/atoms/Sortable/Sortable';
 export { Spinner } from './stories/atoms/Spinner/Spinner';
 export type { SpinnerProps, SpinnerSize } from './stories/atoms/Spinner/Spinner';
 export { Switcher } from './stories/atoms/Switcher/Switcher';
@@ -206,7 +208,7 @@ export type { CopyButtonProps } from './stories/molecules/CopyButton/CopyButton'
 export { ContextMenu } from './stories/molecules/ContextMenu/ContextMenu';
 export type { ContextMenuItem, ContextMenuProps, ContextMenuRenderLinkProps } from './stories/molecules/ContextMenu/ContextMenu';
 export { Card, CardHeader, CardTitle, CardDescription, CardAction, CardContent, CardFooter } from './stories/molecules/Card/Card';
-export type { CardProps, CardColor, CardVariant, CardMedia, CardPartProps, CardTitleProps, CardDescriptionProps } from './stories/molecules/Card/Card';
+export type { CardProps, CardColor, CardVariant, CardMedia, CardPartProps, CardActionProps, CardTitleProps, CardDescriptionProps } from './stories/molecules/Card/Card';
 export { Carousel, CarouselSlide } from './stories/molecules/Carousel/Carousel';
 export type { CarouselProps, CarouselSlideProps } from './stories/molecules/Carousel/Carousel';
 export { CodeBlock, CodeToken } from './stories/molecules/CodeBlock/CodeBlock';

@@ -1,0 +1,61 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SortableStories from "./Sortable.stories";
+
+<Meta of={SortableStories} />
+
+# Sortable
+
+El envoltorio de un elemento **ordenable por arrastre**: recibe del motor de arrastre de la aplicación lo que calcula en cada fotograma y lo convierte en algo que el sistema sabe pintar.
+
+<Canvas of={SortableStories.Default} />
+
+## Por qué existe
+
+El sistema **no trae motor de arrastre** y no va a traerlo: medir punteros, decidir el orden y anunciar el resultado es trabajo de una biblioteca especializada (dnd-kit, en la suite). Lo que faltaba no era el motor, era **dónde aterriza lo que el motor calcula**.
+
+La respuesta obvia —lo que sale en el `README` de cualquier biblioteca de arrastre— es un `style` inline:
+
+```tsx
+// ✗ Lo que el sistema no puede emitir
+<div ref={setNodeRef} style={{ transform: CSS.Transform.toString(transform), transition }}>
+```
+
+Y es justo lo que un componente del sistema no puede hacer: una app servida con `style-src 'self'` **descarta el atributo `style` sin dejar ni una violación en consola**, así que el arrastre se queda quieto y nadie sabe por qué. Es la norma del repositorio (ningún componente emite un atributo `style`), y aquí no hay excepción que valga: el arrastre es una pantalla de producto, no un correo ni una imagen rasterizada.
+
+`Sortable` es ese aterrizaje. El desplazamiento entra como **dato**, se escribe por el **CSSOM** —que la CSP sí permite— en las variables que consume la hoja, y el estado se publica como **atributo**. El aspecto vive en el CSS del sistema, no en la aplicación.
+
+```tsx
+const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
+
+<Sortable ref={setNodeRef} transform={transform} transition={transition} dragging={isDragging}>
+  <ChildCard dragHandleProps={{ ...attributes, ...listeners }} … />
+</Sortable>
+```
+
+`transform` tiene a propósito la forma que devuelven los motores al uso (`{ x, y, scaleX, scaleY }`): se les pasa tal cual, sin adaptador y sin que el sistema dependa de ninguno.
+
+## Qué pinta
+
+- **El desplazamiento**: `translate3d(var(--sortable-x), var(--sortable-y), 0)` más las dos escalas. En reposo, las variables no se declaran y no se mueve nada.
+- **La transición**: la cadena que dicte el motor (`transform 200ms ease`). Con `prefers-reduced-motion` la hoja la anula — esa transición no pasa por los tokens de duración, así que hay que apagarla aquí.
+- **El arrastre**: `data-dragging` en el nodo, de donde cuelga la atenuación del original (`--opacity-disabled`, el mismo velo de lo que está fuera de juego). El original se queda ocupando su hueco mientras la copia viaja con el puntero.
+
+<Canvas of={SortableStories.EnArrastre} />
+
+Las cinco variables **no son tokens**: son el hueco donde el motor deja lo que ha calculado. Lo único que decide el diseño aquí —cuánto se atenúa el original— sí sale de un rol del sistema.
+
+## Lo que no hace
+
+- **No arrastra.** No escucha punteros ni teclas: eso lo pone el motor de la aplicación con sus `listeners` sobre el asa.
+- **No es la capa que viaja.** La copia que sigue al puntero (el *drag overlay*) la monta el motor en su propio portal; `Sortable` viste el elemento que se queda en la lista.
+- **No ordena.** El orden es estado de la aplicación.
+
+## Accesibilidad
+
+El arrastre tiene que tener **una alternativa de teclado**, y la pone el motor: dnd-kit trae sensor de teclado y anuncios en una región `aria-live`. `Sortable` no estorba a ninguno de los dos —no captura foco ni añade roles—, pero tampoco los suple: una lista ordenable que solo funciona con el ratón está rota, y eso se comprueba en la aplicación.
+
+`data-dragging` es un atributo de presentación: lo que anuncia el arrastre a un lector de pantalla son los mensajes del motor, no este atributo.
+
+## Props
+
+<ArgTypes of={SortableStories} />

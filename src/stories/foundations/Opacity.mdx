@@ -16,6 +16,8 @@ Dos valores, y son roles, no una escala: el sistema solo atenúa en dos situacio
 
 <OpacityScale tokens={opacityTokens} />
 
+**El original de un arrastre también usa `--opacity-disabled`**: mientras su copia viaja con el puntero, el elemento se queda ocupando su hueco en la lista, atenuado — está fuera de juego, que es el mismo estado que el del rol. No es un valor nuevo, y lo aplica `Sortable` desde su `data-dragging`.
+
 ## Lo que no es opacidad
 
 - **Un control deshabilitado se atenúa entero con `disabled`**; no se le cambia el color del texto a un gris más claro. Así el estado se lee igual en cualquier superficie y el texto conserva su contraste relativo.
