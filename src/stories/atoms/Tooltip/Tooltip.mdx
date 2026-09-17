@@ -47,9 +47,36 @@ que abre el panel) se perdían.
 
 `className`, en cambio, sigue siendo del bocadillo.
 
+## Disparador deshabilitado
+
+Un control apagado es justo el que más necesita explicarse: quien no puede pulsarlo quiere saber por qué. Pero un `button[disabled]` **no sirve de disparador** — el navegador no le manda eventos de puntero y no lo deja recibir foco, así que el bocadillo no se abre ni con el ratón ni con el teclado.
+
+`disabledTrigger` resuelve las dos mitades: el bocadillo se dispara desde un envoltorio focusable (`span.tooltip__trigger`, `tabIndex={0}`) que pone el propio componente, y el CSS apaga los eventos de puntero del hijo deshabilitado para que el hover **sobre el botón** llegue al envoltorio en vez de perderse. Lo segundo es lo que suele faltar cuando esto se monta a mano: el `<span tabIndex={0}>` casero abre el bocadillo con el teclado pero no con el ratón, porque el puntero cae sobre un elemento que no emite nada.
+
+```tsx
+<Tooltip label="La matriz está bloqueada: publícala para poder generar los contenidos" disabledTrigger>
+  <Button disabled>Generar contenidos</Button>
+</Tooltip>
+```
+
+<Canvas of={TooltipStories.DisparadorDeshabilitado} />
+
+El control de dentro sigue **deshabilitado de verdad** (`disabled` nativo): no se envía, no se pulsa y el formulario no lo cuenta. Lo que cambia es quién dispara el bocadillo.
+
+La alternativa —que `Button` ganara un `disabledReason` y montara él el bocadillo— se descartó: ataría el átomo más usado del sistema a `Tooltip` y a su proveedor, y lo obligaría a ser componente de cliente en apps que hoy lo pintan desde el servidor. Y el problema no es de `Button`: le pasa igual a un `Select`, a un `Switcher` o a cualquier control apagado.
+
 ## Accesibilidad
 
 El bocadillo es `role="tooltip"` y, mientras está abierto, el disparador lo referencia con `aria-describedby` (Base UI no lo cablea por su cuenta). Se abre con hover y con foco de teclado; Escape lo cierra.
+
+### Un control deshabilitado con su motivo
+
+Con `disabledTrigger` el disparador es el envoltorio, así que es él quien recibe el foco y quien lleva el `aria-describedby` al bocadillo: con el teclado se llega al control apagado, se lee su texto y, a continuación, el motivo. Sin el envoltorio no se llegaría siquiera.
+
+Dos cosas que decidir al escribirlo:
+
+- **El motivo va en el bocadillo, no en el nombre del control.** El botón se sigue llamando «Generar contenidos»; lo que se añade es la descripción.
+- **Si el motivo tiene que estar siempre a la vista** —una condición que el usuario debe resolver antes de seguir— el bocadillo no es la pieza: es un `Alert` o un texto de ayuda junto al control. Un bocadillo es para la aclaración que se busca, no para la instrucción que hay que leer.
 
 ### Cuando el bocadillo solo repite el nombre
 

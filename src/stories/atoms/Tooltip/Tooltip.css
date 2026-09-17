@@ -83,3 +83,33 @@
 .tooltip__positioner {
   z-index: var(--tooltip-z-index);
 }
+
+/* ─── Disparador deshabilitado (`disabledTrigger`) ───────────────────────────
+   Un `button[disabled]` no recibe eventos de puntero ni foco, así que no puede
+   disparar nada: el envoltorio focusable es el que hace de disparador. Dos
+   detalles que lo hacen funcionar de verdad:
+
+   · `pointer-events: none` en el hijo deshabilitado — sin esto, el puntero
+     sobre el botón cae en un elemento que no emite eventos y el bocadillo solo
+     se abriría al pasar por el filo del envoltorio.
+   · `display: inline-flex` — el envoltorio mide el control y no arrastra el
+     hueco del descendente en línea, así que la ranura de acciones lo coloca
+     igual que a un botón suelto.
+
+   El anillo de foco es el del sistema (ancho de rol y tinta ambiente): quien
+   llega con el teclado tiene que ver dónde está, aunque lo que haya debajo
+   esté apagado. */
+
+.tooltip__trigger {
+  display: inline-flex;
+}
+
+.tooltip__trigger:focus-visible {
+  outline: var(--border-width-focus) solid currentColor;
+  outline-offset: var(--spacing-1);
+}
+
+.tooltip__trigger > :disabled,
+.tooltip__trigger > [aria-disabled='true'] {
+  pointer-events: none;
+}

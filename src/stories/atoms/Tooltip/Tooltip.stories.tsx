@@ -157,3 +157,58 @@ export const SuperficieOscura: Story = {
     defaultOpen: true,
   },
 };
+
+/**
+ * El caso real: una acción que hoy no se puede ejecutar («Generar contenidos»
+ * mientras la matriz está bloqueada). El botón queda deshabilitado de verdad y
+ * el bocadillo dice por qué; `disabledTrigger` pone el envoltorio focusable
+ * que hace de disparador, porque un `button[disabled]` no recibe ni puntero ni
+ * foco y el bocadillo no se abriría para nadie.
+ */
+export const DisparadorDeshabilitado: Story = {
+  name: 'Disparador deshabilitado',
+  args: {
+    label: 'La matriz está bloqueada: publícala para poder generar los contenidos',
+    disabledTrigger: true,
+    children: <Button disabled>Generar contenidos</Button>,
+  },
+};
+
+/**
+ * Test: con `disabledTrigger` el disparador es el envoltorio —focusable, y con
+ * el `aria-describedby` al bocadillo—, el control de dentro sigue
+ * deshabilitado, y el puntero sobre el propio botón abre el bocadillo (el CSS
+ * le apaga los eventos de puntero para que lleguen al envoltorio).
+ */
+export const TestDisparadorDeshabilitado: Story = {
+  name: 'Test — bocadillo sobre un control deshabilitado',
+  tags: ['!dev'],
+  args: {
+    label: 'La matriz está bloqueada: publícala para poder generar los contenidos',
+    disabledTrigger: true,
+    children: <Button disabled>Generar contenidos</Button>,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const boton = canvas.getByRole('button', { name: 'Generar contenidos' });
+    await expect(boton).toBeDisabled();
+
+    const envoltorio = boton.parentElement as HTMLElement;
+    await expect(envoltorio).toHaveClass('tooltip__trigger');
+    await expect(envoltorio).toHaveAttribute('tabindex', '0');
+    // El hijo apagado no se come el puntero: por eso el hover sobre el botón
+    // llega al envoltorio y abre el bocadillo.
+    await expect(getComputedStyle(boton).pointerEvents).toBe('none');
+
+    envoltorio.focus();
+    await expect(document.activeElement).toBe(envoltorio);
+
+    const popup = await waitFor(() => {
+      const el = document.querySelector<HTMLElement>('.tooltip');
+      if (!el) throw new Error('el bocadillo no se abrió con el foco');
+      return el;
+    });
+    await waitFor(() => expect(getComputedStyle(popup).opacity).toBe('1'));
+    await expect(envoltorio).toHaveAttribute('aria-describedby', popup.id);
+  },
+};

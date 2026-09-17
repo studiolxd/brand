@@ -87,6 +87,23 @@ export interface TooltipProps
    */
   describe?: boolean;
   /**
+   * El disparador está **deshabilitado** y el bocadillo es justo lo que
+   * explica por qué. Un `button[disabled]` no sirve de disparador: el
+   * navegador no le manda eventos de puntero ni lo deja recibir foco, así que
+   * el bocadillo no se abre ni con el ratón ni con el teclado — y quien no
+   * puede pulsar es precisamente quien necesita leer el motivo.
+   *
+   * Con `disabledTrigger` el bocadillo se dispara desde un envoltorio
+   * focusable (`span.tooltip__trigger`, `tabIndex={0}`) que pone el propio
+   * componente: es él quien recibe hover, foco y el `aria-describedby`,
+   * mientras el control de dentro sigue deshabilitado de verdad. El CSS
+   * apaga los eventos de puntero del hijo deshabilitado para que el hover
+   * sobre el botón llegue al envoltorio en vez de perderse.
+   *
+   * @default false
+   */
+  disabledTrigger?: boolean;
+  /**
    * Nodo DOM donde montar el portal. Por defecto, el nodo de la superficie que
    * llegue por contexto —`SiteShell` publica el suyo, para que la capa herede
    * la talla de la superficie pública— y, si no hay ninguna, `document.body`.
@@ -122,6 +139,7 @@ export const Tooltip = forwardRef<HTMLElement, TooltipProps>(function Tooltip({
   onOpenChange,
   delayDuration,
   describe = true,
+  disabledTrigger = false,
   container,
   className,
   ...rest
@@ -142,7 +160,15 @@ export const Tooltip = forwardRef<HTMLElement, TooltipProps>(function Tooltip({
     >
       <BaseTooltip.Trigger
         ref={ref as React.Ref<HTMLButtonElement>}
-        render={children as React.ReactElement<Record<string, unknown>>}
+        render={
+          disabledTrigger ? (
+            <span className="tooltip__trigger" tabIndex={0}>
+              {children}
+            </span>
+          ) : (
+            (children as React.ReactElement<Record<string, unknown>>)
+          )
+        }
         aria-describedby={isOpen && describe ? popupId : undefined}
         {...(delayDuration !== undefined ? { delay: delayDuration } : {})}
         {...rest}
