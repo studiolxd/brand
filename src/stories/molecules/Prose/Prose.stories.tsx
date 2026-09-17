@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { Prose } from './Prose';
+import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 
 const meta = {
   title: 'Molecules/Prose',
@@ -113,5 +114,67 @@ export const TestSemantica: Story = {
     await expect(canvas.getByRole('table')).toBeInTheDocument();
     await expect(canvas.getByRole('separator')).toBeInTheDocument();
     await expect(canvas.getByRole('link', { name: 'Foundations' })).toHaveAttribute('href', '#foundations');
+  },
+};
+
+/** El HTML que devuelve el parser de un `.docx`: etiquetas crudas, sin clases. */
+const htmlDeDocx =
+  '<h2>Objetivos de aprendizaje</h2>' +
+  '<p>Al terminar el módulo, el alumnado será capaz de <strong>identificar</strong> los huecos ' +
+  'de un ladrillo cerámico y de <em>justificar</em> su elección en un cerramiento.</p>' +
+  '<ul><li>Reconocer los formatos normalizados.</li><li>Calcular el peso propio del muro.</li></ul>' +
+  '<blockquote><p>El ladrillo perforado no es un ladrillo hueco: cambia la dirección de los huecos.</p></blockquote>';
+
+/**
+ * El uso real: contenido que no viene de React —lo que devuelve un parser de
+ * `.docx`/`.pdf`, un campo de un CMS, un markdown ya compilado— entra por
+ * `html`, **ya saneado por la aplicación**, y sale vestido con la escala, el
+ * ritmo y la medida del sistema. Sin esta prop, cada producto acababa con su
+ * propio `dangerouslySetInnerHTML` en un `<div>` desnudo, fuera de la hoja.
+ */
+export const ContenidoHtml: Story = {
+  name: 'Contenido en HTML (ya saneado)',
+  args: { html: htmlDeDocx },
+};
+
+/**
+ * `html` es excluyente con `children`, pero nada impide componer: el bloque de
+ * HTML y los nodos de React conviven como hermanos dentro de la misma tarjeta
+ * —el texto del documento arriba, la firma del sistema debajo—.
+ */
+export const HtmlJuntoAReact: Story = {
+  name: 'HTML y nodos de React, hermanos',
+  args: { children: null },
+  render: () => (
+    <div>
+      <Prose size="sm" measure={false} html={'<p>&ldquo;El ladrillo perforado no es un ladrillo hueco.&rdquo;</p>'} />
+      <Paragraph size="small">— Manual de construcción, cap. 4</Paragraph>
+    </div>
+  ),
+};
+
+/**
+ * Test: el HTML se pinta dentro del contenedor —que es quien lo viste— y
+ * conserva su semántica; las variantes (`as`, `size`, `measure`) mandan igual
+ * que con `children`.
+ */
+export const TestContenidoHtml: Story = {
+  name: 'Test — contenido en HTML',
+  tags: ['!dev'],
+  args: { as: 'article', size: 'sm', html: htmlDeDocx },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const article = canvasElement.querySelector('article.prose');
+    await expect(article).not.toBeNull();
+    await expect(article).toHaveClass('prose--sm');
+
+    const titulo = canvas.getByRole('heading', { level: 2, name: 'Objetivos de aprendizaje' });
+    await expect(titulo.closest('.prose')).toBe(article);
+    await expect(canvas.getByRole('list')).toBeInTheDocument();
+
+    // Lo pinta la hoja del sistema, no el marcado que viene de fuera.
+    await expect(getComputedStyle(titulo).fontFamily).toBe(
+      getComputedStyle(canvasElement.querySelector('article.prose p')!).fontFamily,
+    );
   },
 };
