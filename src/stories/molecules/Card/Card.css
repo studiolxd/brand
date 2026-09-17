@@ -297,3 +297,26 @@
      tarjeta, igual que hace `primary` con los encabezados. */
   --text-list-color: var(--card-accent-1-color);
 }
+
+/* ─── Tarjeta contenedora cuyo enlace es el del título (`linkOverlay`) ───────
+   La tarjeta que navega Y lleva acciones no puede ser un `<a>` con un botón
+   dentro: no es HTML válido, y el lector de pantalla lee el bloque entero como
+   nombre del enlace. Aquí el `<a>` es el del título y estira su área de
+   pulsación a toda la tarjeta con una capa vacía; la ranura de acciones sube
+   por encima de esa capa —un apilado interno de 1, que solo compite consigo
+   mismo (Fundamentos › Capas)— y se pulsa sola. */
+
+.card.card--link-overlay {
+  position: relative;
+}
+
+.card.card--link-overlay .card__title a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.card.card--link-overlay .card__action {
+  position: relative;
+  z-index: 1;
+}

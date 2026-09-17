@@ -15,6 +15,7 @@ import { Columns } from '../../atoms/Columns/Columns';
 import { Inline } from '../../atoms/Inline/Inline';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Tag } from '../../atoms/Tag/Tag';
+import { Menu } from '../Menu/Menu';
 import { RadioField } from '../RadioField/RadioField';
 import { RadioGroup } from '../../atoms/RadioGroup/RadioGroup';
 import { useState } from 'react';
@@ -900,5 +901,104 @@ export const ContratoAnchoEnRejilla: Story = {
     const anchoLarga = larga.getBoundingClientRect().width;
     await expect(corta.getBoundingClientRect().width).toBeCloseTo(anchoLarga, 0);
     await expect(media.getBoundingClientRect().width).toBeCloseTo(anchoLarga, 0);
+  },
+};
+
+/**
+ * Tarjeta que navega **y** lleva acciones. La tarjeta es contenedora; quien
+ * navega es el `<a>` del título, que con `linkOverlay` estira su área de
+ * pulsación a todo el bloque. El menú de la cabecera queda por encima de esa
+ * capa y se pulsa solo. Cada control conserva su papel: un enlace que se llama
+ * como el título y un botón de menú aparte — a diferencia de envolver la
+ * tarjeta entera en un `<a>`, que se traga el estado, el pie y el menú dentro
+ * del nombre del enlace.
+ */
+export const EnlaceConAcciones: Story = {
+  name: 'Tarjeta-enlace con menú de acciones',
+  render: () => (
+    <Card linkOverlay>
+      <CardHeader>
+        <CardTitle>
+          <a href="#guia-docente">Guía docente — Química II</a>
+        </CardTitle>
+        <CardAction>
+          <Menu
+            trigger={
+              <Button variant="ghost" iconOnly aria-label="Más opciones">
+                ⋯
+              </Button>
+            }
+            align="end"
+            items={[{ type: 'button', label: 'Mover a la papelera', onClick: () => {} }]}
+          />
+        </CardAction>
+      </CardHeader>
+      <CardContent>
+        <Inline gap="sm" align="center">
+          <Paragraph size="small">Estado</Paragraph>
+          <Tag variant="info">En edición</Tag>
+        </Inline>
+      </CardContent>
+      <CardFooter>
+        <Paragraph size="small">Marta Ruiz · 17 de septiembre de 2026</Paragraph>
+      </CardFooter>
+    </Card>
+  ),
+};
+
+/**
+ * Test: en una tarjeta-enlace, pulsar la acción de la cabecera abre el menú y
+ * NO navega. Se comprueban las dos mitades del aislamiento: el manejador de la
+ * tarjeta no se entera (propagación detenida) y el navegador no sigue el
+ * enlace (acción por defecto cancelada).
+ */
+export const TestAccionNoNavega: Story = {
+  name: 'Test — la acción de una tarjeta-enlace no navega',
+  tags: ['!dev'],
+  render: function TestAccionNoNavegaRender() {
+    const [clicsEnTarjeta, setClicsEnTarjeta] = useState(0);
+    return (
+      <>
+        <p data-testid="contador">{clicsEnTarjeta}</p>
+        <Card render={<a href="#destino" onClick={() => setClicsEnTarjeta((n) => n + 1)} />}>
+          <CardHeader>
+            <CardTitle>Guía docente</CardTitle>
+            <CardAction>
+              <Menu
+                trigger={
+                  <Button variant="ghost" iconOnly aria-label="Más opciones">
+                    ⋯
+                  </Button>
+                }
+                align="end"
+                items={[{ type: 'button', label: 'Mover a la papelera', onClick: () => {} }]}
+              />
+            </CardAction>
+          </CardHeader>
+        </Card>
+      </>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const hashPrevio = document.location.hash;
+
+    let navegaria = false;
+    const espia = (event: Event) => {
+      if (!event.defaultPrevented) navegaria = true;
+    };
+    document.addEventListener('click', espia, false);
+    try {
+      await userEvent.click(canvas.getByRole('button', { name: 'Más opciones' }));
+      await waitFor(async () => {
+        await expect(document.querySelector('.menu__popup, [role="menu"]')).not.toBeNull();
+      });
+    } finally {
+      document.removeEventListener('click', espia, false);
+    }
+
+    await expect(navegaria).toBe(false);
+    await expect(canvas.getByTestId('contador')).toHaveTextContent('0');
+    await expect(document.location.hash).toBe(hashPrevio);
   },
 };

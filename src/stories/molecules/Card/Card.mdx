@@ -162,6 +162,36 @@ depende de que el elemento sea un `<a>`.
 (un plan, una preferencia), es `selectable` con un `RadioField`/`CheckboxField` dentro; si
 pulsarla *ya* envía y avanza el formulario, es `render` sobre un `<button type="submit">`.
 
+## Tarjeta que navega y lleva acciones
+
+Es el caso de una bandeja de documentos: la tarjeta entera lleva a su detalle y la cabecera tiene un menú («mover a la papelera», «restaurar»). La forma obvia —envolver la tarjeta en el `<a>` del router— **no vale**: un `<button>` dentro de un `<a>` no es HTML válido, y un lector de pantalla lee un único enlace cuyo nombre se traga el título, el estado, el pie y la etiqueta del menú.
+
+La forma del sistema es `linkOverlay`: la tarjeta sigue siendo **contenedora** (`<div>`), el enlace es el del **título**, y ese enlace estira su área de pulsación a todo el bloque con una capa vacía (`::after`). La ranura de acciones queda por encima de la capa, así que se pulsa sola.
+
+```tsx
+<Card linkOverlay>
+  <CardHeader>
+    <CardTitle><Link href={`/disenos/${id}`}>{nombre}</Link></CardTitle>
+    <CardAction>
+      <Menu trigger={<Button variant="ghost" iconOnly aria-label="Más opciones">…</Button>} items={acciones} />
+    </CardAction>
+  </CardHeader>
+</Card>
+```
+
+<Canvas of={CardStories.EnlaceConAcciones} />
+
+Así cada control conserva su papel: un enlace que se llama como el título y un botón de menú aparte. Y el foco del teclado pasa por los dos, en ese orden.
+
+### La ranura de acciones aísla sus eventos
+
+`CardAction` **aísla por defecto** lo que se pulsa dentro de ella (`isolate`, `true` de fábrica). Hace dos cosas, y las dos hacen falta:
+
+- **detiene la propagación**, para que el clic no llegue a un manejador que la tarjeta o la fila tengan puesto más arriba;
+- **cancela la acción por defecto, y solo cuando la ranura cuelga de un enlace** —se comprueba en el DOM, buscando un `a[href]` por encima del propio nodo— **y solo para lo que se pulsa dentro de ella**. Sin esto no basta: detener la propagación **no** cancela la navegación del navegador, que sigue el enlace igual. Y acotarlo es lo que evita romper lo que sí depende de su acción por defecto —un `type="submit"` dentro de una tarjeta contenedora, o el ítem de un `Menu`, que se pinta en un portal fuera del enlace—.
+
+Esto cubre la tarjeta que ya está envuelta en un enlace del router (el caso heredado, mientras se migra a `linkOverlay`) y cualquier fila pulsable que la contenga. `isolate={false}` para la tarjeta que quiere lo contrario: que pulsar la acción cuente también como pulsar la tarjeta.
+
 ## Subpartes
 
 Seis piezas para no volver a maquetar a mano la cabecera, el pie ni el título. Son hermanas: se
@@ -215,8 +245,12 @@ párrafo de la superficie de lectura (Foundations → Tipografía): dentro de un
 - El título de la tarjeta es un encabezado real (`CardTitle` → `Heading`): elige el `level` según
   de qué encabezado cuelgue la tarjeta, no según el tamaño que quieras.
 - En modo enlace todo el bloque es un solo enlace: no metas dentro botones ni otros enlaces, ni en
-  `description` ni en `children`. Si la tarjeta necesita acciones, es una tarjeta contenedora con
-  su `CardFooter`.
+  `description` ni en `children`. Si la tarjeta necesita acciones, es una tarjeta **contenedora**:
+  con `linkOverlay` si además tiene que navegar entera (el enlace es el del título y la ranura de
+  acciones queda por encima de su capa), o con sus acciones en el `CardFooter` si no.
+- `CardAction` aísla por defecto los eventos de su ranura (`isolate`): pulsar el menú de la
+  cabecera no navega ni cuenta como pulsar la tarjeta. Es la red que sostiene la tarjeta que
+  todavía vive envuelta en un enlace del router; la forma correcta sigue siendo `linkOverlay`.
 - Con `external`, avisa en el `ctaLabel` de que el enlace abre una pestaña nueva: el `target` por
   sí solo no se anuncia.
 - `ctaLabel` da al enlace un nombre accesible completo («Ver más sobre plataformas LMS») cuando la
