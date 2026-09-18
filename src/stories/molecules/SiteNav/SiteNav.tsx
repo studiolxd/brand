@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { Heading } from '../../atoms/Heading/Heading';
+import { Tag } from '../../atoms/Tag/Tag';
 import './SiteNav.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
@@ -13,6 +14,18 @@ export interface SiteNavItem {
   target?: string;
   /** Relación del enlace. Con `target="_blank"` y sin valor, se aplica `noopener noreferrer`. */
   rel?: string;
+  /**
+   * Producto anunciado y todavía no disponible: el ítem se ve en su sitio pero
+   * **apagado y sin navegación** — no es un enlace, no pasa por `renderLink` y
+   * el tabulador no se detiene en él.
+   */
+  disabled?: boolean;
+  /**
+   * Texto del distintivo junto al rótulo («Próximamente», «Nuevo», «Beta»…).
+   * Llega **ya traducido**: es contenido de ESTE sitio, como el propio rótulo,
+   * no cromo del índice.
+   */
+  badge?: string;
 }
 
 export interface SiteNavGroup {
@@ -111,14 +124,36 @@ export function SiteNav({
           <ul className="site-nav__list">
             {group.items.map((item) => (
               <li key={item.id} className="site-nav__item">
-                {renderLink({
-                  href: item.href,
-                  className: ['site-nav__link', item.current ? 'site-nav__link--current' : ''].filter(Boolean).join(' '),
-                  'aria-current': item.current ? 'page' : undefined,
-                  target: item.target,
-                  rel: linkRel(item.target, item.rel),
-                  children: item.label,
-                })}
+                {item.disabled ? (
+                  /* Apagado NO es un enlace: no hay destino que seguir, así que
+                     tampoco pasa por `renderLink`. Se pinta como un enlace
+                     inactivo (`role="link"` + `aria-disabled`, donde el atributo
+                     sí es válido y el lector lo anuncia como no disponible) y
+                     sin `tabIndex`, de modo que el tabulador lo salta. */
+                  <span className="site-nav__link site-nav__link--disabled" role="link" aria-disabled="true">
+                    {item.label}
+                  </span>
+                ) : (
+                  renderLink({
+                    href: item.href,
+                    className: ['site-nav__link', item.current ? 'site-nav__link--current' : ''].filter(Boolean).join(' '),
+                    'aria-current': item.current ? 'page' : undefined,
+                    target: item.target,
+                    rel: linkRel(item.target, item.rel),
+                    children: item.label,
+                  })
+                )}
+                {item.badge && (
+                  /* El distintivo va FUERA del enlace, hermano suyo en el `li`:
+                     dentro, la línea de hover —que en el DS es una línea bajo el
+                     elemento, no `text-decoration`— cruzaría también la píldora.
+                     Apagado va en neutro: la píldora de información sobre un
+                     ítem que no lleva a ningún sitio se leería como una novedad
+                     disponible. */
+                  <Tag variant={item.disabled ? 'neutral' : 'info'} className="site-nav__badge">
+                    {item.badge}
+                  </Tag>
+                )}
               </li>
             ))}
           </ul>

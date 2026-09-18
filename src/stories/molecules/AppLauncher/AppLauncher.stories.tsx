@@ -68,6 +68,31 @@ export const PocasApps: Story = {
   },
 };
 
+/**
+ * La suite anuncia productos antes de abrirlos: se ven en su sitio pero
+ * **apagados** —sin enlace, sin foco y con la tinta de un control
+ * deshabilitado— y con un distintivo que dice en qué estado están. El texto
+ * del distintivo (`badge`) llega ya traducido desde la aplicación: es
+ * contenido de la suite, no cromo del lanzador.
+ *
+ * `badge` vale también para una app viva («Beta» aquí), y es lo que
+ * generaliza `isNew` —el mismo distintivo con el texto del catálogo—, que
+ * sigue funcionando (Tender).
+ */
+export const ConProductosProximamente: Story = {
+  name: 'Con productos próximamente',
+  args: {
+    apps: [
+      ...demoApps.slice(0, 3),
+      { id: 'atlas', name: 'Atlas', url: 'https://atlas.slxd.app', disabled: true, badge: 'Próximamente' },
+      { id: 'forja', name: 'Forja', url: 'https://forja.slxd.app', disabled: true, badge: 'Próximamente' },
+      { id: 'lrs', name: 'LRS', url: 'https://lrs.slxd.app', badge: 'Beta' },
+    ],
+    labels,
+    defaultOpen: true,
+  },
+};
+
 export const Cerrado: Story = {
   args: {
     apps: demoApps,
@@ -209,6 +234,36 @@ export const TestContratoPopover: Story = {
 
     await userEvent.keyboard('{Escape}');
     await waitFor(() => expect(screen.queryByRole('list')).not.toBeInTheDocument());
+  },
+};
+
+export const TestProximamente: Story = {
+  name: 'Test — baldosa apagada con distintivo',
+  tags: ['!dev'],
+  args: {
+    apps: [
+      { id: 'alfa', name: 'Alfa', url: 'https://alfa.slxd.app' },
+      { id: 'atlas', name: 'Atlas', url: 'https://atlas.slxd.app', disabled: true, badge: 'Próximamente' },
+    ],
+    labels: { ...labels, title: 'Aplicaciones' },
+    defaultOpen: true,
+  },
+  play: async () => {
+    const dialog = await screen.findByRole('dialog', { name: 'Aplicaciones' });
+
+    // La apagada no es un `<a>`: no hay `href` que seguir.
+    const apagada = within(dialog).getByRole('link', { name: /Atlas/ });
+    await expect(apagada.tagName).toBe('SPAN');
+    await expect(apagada).not.toHaveAttribute('href');
+    await expect(apagada).toHaveAttribute('aria-disabled', 'true');
+    await expect(within(dialog).getByText('Próximamente')).toBeVisible();
+
+    // Y el tabulador no se detiene en ella: el foco salta de la viva al aspa
+    // del diálogo sin pasar por la apagada.
+    const viva = within(dialog).getByRole('link', { name: /Alfa/ });
+    viva.focus();
+    await userEvent.tab();
+    await expect(document.activeElement).not.toBe(apagada);
   },
 };
 

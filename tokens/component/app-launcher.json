@@ -41,6 +41,7 @@
     "tile-name-line-height":  { "$value": "{menu.item-line-height}",      "$type": "number",    "$description": "Interlineado del nombre de app — el de un ítem de Menu, para que la altura case con las listas de opciones del DS" },
     "tile-name-color":        { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Color del nombre de app" },
     "tile-name-active-font-weight": { "$value": "{font-weight.emphasis}",   "$type": "number",    "$description": "Peso del nombre — app actual" },
+    "tile-disabled-color":    { "$value": "{color.disabled.text-on-light}", "$type": "color", "$description": "Nombre de una app apagada («próximamente»): la tinta de un control deshabilitado sobre superficie clara. No baja de 3:1 sobre el panel —el mínimo de WCAG 1.4.11 para un componente inactivo—, que es el suelo de esta tinta y el motivo de no inventar un gris más claro" },
 
     "surface-dark-trigger-color":       { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Icono de rejilla — surface-dark" },
     "surface-dark-trigger-label-color": { "$value": "{sidebar-nav.surface-dark-item-color}", "$type": "color", "$description": "Disparador con texto — surface-dark. Por referencia al par oscuro del ítem de SidebarNav" },
@@ -48,6 +49,7 @@
     "surface-dark-content-bg":            { "$value": "{floating-panel.surface-dark-bg}",           "$type": "color", "$description": "Fondo del panel — surface-dark" },
     "surface-dark-content-border-color":  { "$value": "{floating-panel.surface-dark-border-color}", "$type": "color", "$description": "Borde del panel — surface-dark" },
     "surface-dark-tile-name-color":        { "$value": "{color.text.on-dark}",   "$type": "color", "$description": "Nombre de app — surface-dark" },
+    "surface-dark-tile-disabled-color":    { "$value": "{color.disabled.text-on-dark}", "$type": "color", "$description": "Nombre de una app apagada — surface-dark" },
     "trigger-hover-bg":        { "$value": "{menu.item-highlighted-bg}", "$type": "color",  "$description": "Fondo del disparador (solo icono) bajo el puntero. Antes dejaba una línea de tinta debajo (regla de Colores), pero la línea bajo un glifo suelto —sin texto— se lee como un subrayado del icono; se sustituye por la misma inversión de marca que ya llevan los tiles del panel, la excepción declarada de este componente" },
     "trigger-hover-color":     { "$value": "{menu.item-highlighted-color}", "$type": "color", "$description": "Color del icono de rejilla bajo el puntero — el mismo par que `trigger-hover-bg`" },
     "tile-highlighted-bg":     { "$value": "{menu.item-highlighted-bg}", "$type": "color",  "$description": "Relleno del tile bajo el puntero o el teclado — el del Menu: la inversión de marca. La rejilla de apps es la lista de opciones del panel, excepción declarada a «los estados no se rellenan» (Foundations → Colores)" },

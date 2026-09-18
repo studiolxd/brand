@@ -123,6 +123,62 @@ describe('AppLauncher — presentation="popover"', () => {
   });
 });
 
+describe('AppLauncher — apps apagadas y distintivo', () => {
+  const conProximamente: LauncherApp[] = [
+    { id: 'a', name: 'Alfa', url: 'https://alfa.slxd.app' },
+    { id: 'z', name: 'Atlas', url: 'https://atlas.slxd.app', disabled: true, badge: 'Próximamente' },
+  ];
+
+  it('la baldosa apagada no es un enlace: sin `href` y con `aria-disabled`', () => {
+    render(<AppLauncher apps={conProximamente} labels={labels} defaultOpen />);
+    const apagada = screen.getByRole('link', { name: /Atlas/ });
+    expect(apagada.tagName).toBe('SPAN');
+    expect(apagada).not.toHaveAttribute('href');
+    expect(apagada).toHaveAttribute('aria-disabled', 'true');
+    expect(apagada).toHaveClass('app-launcher__tile--disabled');
+  });
+
+  it('el distintivo se ve dentro de la baldosa apagada', () => {
+    render(<AppLauncher apps={conProximamente} labels={labels} defaultOpen />);
+    const apagada = screen.getByRole('link', { name: /Atlas/ });
+    expect(within(apagada).getByText('Próximamente')).toBeInTheDocument();
+  });
+
+  it('el tabulador no se detiene en la baldosa apagada', async () => {
+    const user = userEvent.setup();
+    render(<AppLauncher apps={conProximamente} labels={labels} defaultOpen />);
+    const apagada = screen.getByRole('link', { name: /Atlas/ });
+    const viva = screen.getByRole('link', { name: /Alfa/ });
+
+    viva.focus();
+    await user.tab();
+    expect(document.activeElement).not.toBe(apagada);
+  });
+
+  it('`badge` vale también en una app viva, que sigue siendo enlace', () => {
+    const conBeta: LauncherApp[] = [{ id: 'd', name: 'Delta', url: 'https://delta.slxd.app', badge: 'Beta' }];
+    render(<AppLauncher apps={conBeta} labels={labels} defaultOpen />);
+    const enlace = screen.getByRole('link', { name: /Delta/ });
+    expect(enlace.tagName).toBe('A');
+    expect(enlace).toHaveAttribute('href', 'https://delta.slxd.app');
+    expect(within(enlace).getByText('Beta')).toBeInTheDocument();
+  });
+
+  it('`badge` manda sobre `isNew`, que se mantiene por compatibilidad', () => {
+    const ambos: LauncherApp[] = [
+      { id: 'n', name: 'Nueva', url: 'https://nueva.slxd.app', isNew: true },
+      { id: 'm', name: 'Mixta', url: 'https://mixta.slxd.app', isNew: true, badge: 'Beta' },
+    ];
+    render(<AppLauncher apps={ambos} labels={labels} defaultOpen />);
+    // `isNew` a secas sigue sacando su texto del catálogo.
+    expect(within(screen.getByRole('link', { name: /Nueva/ })).getByText('Nuevo')).toBeInTheDocument();
+    // Con `badge`, manda `badge`.
+    const mixta = screen.getByRole('link', { name: /Mixta/ });
+    expect(within(mixta).getByText('Beta')).toBeInTheDocument();
+    expect(within(mixta).queryByText('Nuevo')).not.toBeInTheDocument();
+  });
+});
+
 describe('el cromo sale del catálogo', () => {
   it('sin `labels`, el disparador, el título y la marca de novedad leen del proveedor', async () => {
     const user = userEvent.setup();

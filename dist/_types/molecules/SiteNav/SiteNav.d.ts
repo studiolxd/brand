@@ -10,6 +10,18 @@ export interface SiteNavItem {
     target?: string;
     /** Relación del enlace. Con `target="_blank"` y sin valor, se aplica `noopener noreferrer`. */
     rel?: string;
+    /**
+     * Producto anunciado y todavía no disponible: el ítem se ve en su sitio pero
+     * **apagado y sin navegación** — no es un enlace, no pasa por `renderLink` y
+     * el tabulador no se detiene en él.
+     */
+    disabled?: boolean;
+    /**
+     * Texto del distintivo junto al rótulo («Próximamente», «Nuevo», «Beta»…).
+     * Llega **ya traducido**: es contenido de ESTE sitio, como el propio rótulo,
+     * no cromo del índice.
+     */
+    badge?: string;
 }
 export interface SiteNavGroup {
     id: string;

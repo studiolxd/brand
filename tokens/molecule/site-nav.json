@@ -11,12 +11,15 @@
     "item-hover-color":     { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Enlaces en hover: en claro no cambia el color, aparece la línea" },
     "item-underline-offset": { "$value": "{border-width.focus}",   "$type": "dimension", "$description": "Separación entre el texto y la línea de hover (2px, más pegada que en los enlaces de texto). Se reserva siempre: la línea no desplaza nada al aparecer" },
     "item-hover-line-width": { "$value": "{link.underline-width}",    "$type": "dimension", "$description": "Enlaces en hover: la línea bajo el enlace (como los enlaces de texto), en claro" },
+    "item-disabled-color":  { "$value": "{color.disabled.text-on-light}", "$type": "color", "$description": "Ítem apagado («próximamente»): la tinta de un control deshabilitado sobre superficie clara. No baja de 3:1 sobre el lienzo —el mínimo de WCAG 1.4.11 para un componente inactivo—, que es el suelo de esta tinta" },
+    "item-badge-gap":       { "$value": "{spacing.2}",             "$type": "dimension", "$description": "Aire entre el rótulo del ítem y su distintivo" },
     "item-current-font-weight": { "$value": "{font-weight.default}", "$type": "number",  "$description": "Página actual: mismo peso que el resto (la marca aria-current y, si hace falta, el producto la resalta)" },
     "focus-ring-width":     { "$value": "{border-width.focus}",     "$type": "dimension", "$description": "Anillo de foco" },
     "focus-ring-offset":    { "$value": "{border-width.focus}",     "$type": "dimension", "$description": "Separación del anillo de foco" },
     "focus-ring-color":     { "$value": "{color.primary}",          "$type": "color",     "$description": "Anillo de foco" },
 
     "surface-dark-item-color":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Enlaces — surface-dark" },
+    "surface-dark-item-disabled-color": { "$value": "{color.disabled.text-on-dark}", "$type": "color", "$description": "Ítem apagado — surface-dark" },
     "surface-dark-item-hover-color": { "$value": "{color.accent-2}",        "$type": "color", "$description": "Enlaces en hover — surface-dark: amarillo (accent-2) en vez de línea" },
     "surface-dark-item-hover-line-width": { "$value": "0px",              "$type": "dimension", "$description": "Enlaces en hover — surface-dark: sin línea, cambia el color" },
     "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Anillo de foco — surface-dark" }

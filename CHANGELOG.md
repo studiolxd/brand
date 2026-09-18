@@ -7,6 +7,44 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.10.0] — 2026-09-18
+
+> **Minor.** La suite marca productos como «próximamente»: se ven en su sitio pero apagados,
+> sin navegación y con un distintivo. Ni la baldosa del `AppLauncher` ni el ítem del `SiteNav`
+> lo admitían.
+
+### La entrada apagada con distintivo, en el lanzador y en el índice del sitio
+
+`LauncherApp` y `SiteNavItem` ganan las mismas dos claves, `disabled` y `badge`.
+
+Con **`disabled`** la entrada se ve en su sitio pero **no navega**: deja de ser un `<a>` —en
+`SiteNav`, ni siquiera pasa por `renderLink`: no hay destino que dar—, se pinta como un enlace
+inactivo (`<span role="link" aria-disabled="true">`, donde el atributo sí es válido y el lector
+lo anuncia como no disponible) y **sin `tabIndex`**, así que el tabulador la salta. La tinta
+apagada es la de un control deshabilitado del sistema (`color.disabled.text-on-light|dark`), que
+no baja de 3:1 sobre la superficie — el mínimo de WCAG 1.4.11 para un componente inactivo, y el
+motivo de no inventar un gris más claro. Tampoco se rellena ni subraya bajo el puntero: el
+`:hover` alcanza también a un `<span>`, de ahí el `:not()` en las reglas de estado.
+
+**`badge`** es el distintivo, y su texto llega **ya traducido** desde la aplicación: es
+contenido —como el nombre de la app o el rótulo del ítem—, no cromo. Vale con `disabled`
+(«Próximamente») y sin él («Beta»), y sobre una entrada apagada va en `Tag neutral` en vez de
+`info`: una píldora de novedad sobre algo que no lleva a ningún sitio se leería como disponible.
+En `SiteNav` el distintivo es **hermano del enlace**, no hijo suyo — dentro, la línea de hover
+(que en el DS es una línea bajo el elemento, no `text-decoration`) cruzaría también la píldora,
+y el nombre accesible del enlace arrastraría el estado.
+
+`badge` **generaliza `isNew`** del lanzador, que es este mismo distintivo con el texto del
+catálogo (`appLauncher.new`). `isNew` **sigue funcionando y no se retira**; con los dos puestos,
+manda `badge`.
+
+Tokens nuevos: `app-launcher.tile-disabled-color`, `site-nav.item-disabled-color`,
+`site-nav.item-badge-gap` y sus pares `surface-dark-*`, todos por referencia a
+`color.disabled.text-on-light|dark` — sin colores nuevos en la paleta.
+
+De paso, la doc del `AppLauncher` pierde el apartado «Color de dato», que describía una prop
+`accent` de `LauncherApp` retirada hace versiones.
+
 ## [49.9.0] — 2026-09-18
 
 > **Minor.** Tres huecos del sistema: la segunda línea del ítem de menú admite un nodo, el

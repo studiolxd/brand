@@ -108,6 +108,16 @@
   margin-block: 0 var(--site-nav-label-margin-block-end);
 }
 
+/* El ítem es una fila: el rótulo y, si lo hay, su distintivo al lado. El
+   distintivo es hermano del enlace y no hijo suyo, para que la línea de hover
+   —una línea bajo el elemento, no `text-decoration`— no cruce la píldora. */
+.site-nav__item {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--site-nav-item-badge-gap);
+}
+
 .site-nav__list {
   list-style: none;
   margin: 0;
@@ -133,14 +143,25 @@
   line-height: var(--site-nav-item-line-height);
   color: var(--site-nav-item-color);
 }
-/* Hover: en claro, subrayado; en oscuro, color de acento sin subrayado (tokens). */
-.site-nav__link:hover,
+/* Hover: en claro, subrayado; en oscuro, color de acento sin subrayado (tokens).
+   El ítem apagado queda fuera: el `:hover` alcanza también a un `<span>`. */
+.site-nav__link:not(.site-nav__link--disabled):hover,
 .site-nav__label-link:hover {
   color: var(--site-nav-item-hover-color);
   box-shadow: inset 0 calc(-1 * var(--site-nav-item-hover-line-width)) 0 0 currentColor;
 }
 .site-nav__link.site-nav__link--current {
   font-weight: var(--site-nav-item-current-font-weight);
+}
+
+/* Ítem apagado («próximamente»): se ve en su sitio, apagado y sin navegación.
+   No es un enlace, así que no hay foco que recoger —el tabulador lo salta— ni
+   línea de hover que pintar. La tinta apagada es la de un control
+   deshabilitado del sistema: no baja de 3:1 sobre el lienzo, el mínimo de
+   WCAG 1.4.11. */
+.site-nav__link.site-nav__link--disabled {
+  color: var(--site-nav-item-disabled-color);
+  cursor: default;
 }
 
 .site-nav__link:focus-visible,

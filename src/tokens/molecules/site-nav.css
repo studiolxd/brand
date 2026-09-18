@@ -9,10 +9,12 @@
   --site-nav-item-gap: var(--spacing-3); /** Separación entre enlaces de un grupo */
   --site-nav-item-font-size: var(--font-size-4); /** Enlaces: un punto por debajo de la cabecera del grupo (Heading talla 6 = font-size.5) */
   --site-nav-item-line-height: var(--line-height-snug); /** Enlaces */
+  --site-nav-item-badge-gap: var(--spacing-2); /** Aire entre el rótulo del ítem y su distintivo */
   --site-nav-item-font-weight: var(--font-weight-default); /** Enlaces */
   --site-nav-item-color: var(--color-text-on-light); /** Enlaces */
   --site-nav-item-hover-color: var(--color-text-on-light); /** Enlaces en hover: en claro no cambia el color, aparece la línea */
   --site-nav-item-underline-offset: var(--border-width-focus); /** Separación entre el texto y la línea de hover (2px, más pegada que en los enlaces de texto). Se reserva siempre: la línea no desplaza nada al aparecer */
+  --site-nav-item-disabled-color: var(--color-disabled-text-on-light); /** Ítem apagado («próximamente»): la tinta de un control deshabilitado sobre superficie clara. No baja de 3:1 sobre el lienzo —el mínimo de WCAG 1.4.11 para un componente inactivo—, que es el suelo de esta tinta */
   --site-nav-item-current-font-weight: var(--font-weight-default); /** Página actual: mismo peso que el resto (la marca aria-current y, si hace falta, el producto la resalta) */
   --site-nav-focus-ring-width: var(--border-width-focus); /** Anillo de foco */
   --site-nav-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco */
@@ -26,6 +28,7 @@
 html.dark {
   --site-nav-item-hover-line-width: 0px; /** Enlaces en hover — surface-dark: sin línea, cambia el color */
   --site-nav-item-color: var(--color-text-on-dark); /** Enlaces — surface-dark */
+  --site-nav-item-disabled-color: var(--color-disabled-text-on-dark); /** Ítem apagado — surface-dark */
   --site-nav-item-hover-color: var(--color-accent-2); /** Enlaces en hover — surface-dark: amarillo (accent-2) en vez de línea */
   --site-nav-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
 }

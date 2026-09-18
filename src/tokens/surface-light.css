@@ -25,6 +25,7 @@ html.dark .surface-light {
   --app-launcher-content-bg: var(--floating-panel-bg);
   --app-launcher-content-border-color: var(--floating-panel-border-color);
   --app-launcher-tile-name-color: var(--color-text-on-light);
+  --app-launcher-tile-disabled-color: var(--color-disabled-text-on-light);
   --app-launcher-trigger-hover-bg: var(--menu-item-highlighted-bg);
   --app-launcher-trigger-hover-color: var(--menu-item-highlighted-color);
   --app-launcher-tile-highlighted-bg: var(--menu-item-highlighted-bg);
@@ -603,6 +604,7 @@ html.dark .surface-light {
   --site-nav-item-color: var(--color-text-on-light);
   --site-nav-item-hover-color: var(--color-text-on-light);
   --site-nav-item-hover-line-width: var(--link-underline-width);
+  --site-nav-item-disabled-color: var(--color-disabled-text-on-light);
   --site-nav-focus-ring-color: var(--color-primary);
   --stat-tile-border-color: var(--card-outline-border-color);
   --stat-tile-label-color: var(--color-text-muted-on-light);
