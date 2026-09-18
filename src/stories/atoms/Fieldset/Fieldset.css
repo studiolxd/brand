@@ -9,6 +9,7 @@
 
 .fieldset__legend {
   margin-block: 0;
+  margin-block-end: var(--fieldset-legend-space-after);
   margin-inline: 0;
   padding-inline: 0;
   display: block;

@@ -1,0 +1,5 @@
+{
+  "fieldset": {
+    "legend-space-after": { "$value": "{text.heading.space-after}", "$type": "dimension", "$description": "Aire bajo el legend — el mismo em que deja un Heading" }
+  }
+}
