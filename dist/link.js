@@ -13,7 +13,7 @@ var o = t(function({ href: t, children: o, external: s = !1, tone: c = "accent",
 		f
 	].filter(Boolean).join(" "), g = l ? /* @__PURE__ */ r(e, {
 		name: l,
-		size: "sm",
+		size: "text",
 		className: "link__icon"
 	}) : null, _ = /* @__PURE__ */ i(n, { children: [
 		u === "start" && g,

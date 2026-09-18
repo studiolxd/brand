@@ -7,6 +7,49 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.6.0] — 2026-09-18
+
+> **Minor.** El icono deja de tener talla propia dentro de un enlace y de un botón: mide el texto
+> que acompaña, y sube y baja con él.
+
+### `Icon size="text"` — el glifo que mide lo que el texto
+
+Las cinco tallas de icono (8/16/24/48/64) son medidas fijas, y junto a un texto eso se nota: el
+mismo enlace vive en un pie, en un párrafo y en un título, y un glifo de 16px se ve enorme en el
+primero y diminuto en el tercero. La talla nueva, `text`, no es una medida sino una relación — el
+icono vale `1em`, o sea el cuerpo de letra que lo rodea. No trae token ni color: `1em` ya **es** el
+tamaño del texto ambiente, y no hay valor de diseño que elegir. Las cinco tallas fijas se quedan
+exactamente donde estaban; esto solo añade una sexta opción.
+
+### El icono de `Link` sigue al texto del enlace
+
+El glifo de `icon` estaba clavado en `sm` (16px), de modo que un «← Volver» dentro de un título
+llevaba una flecha de letra pequeña. Ahora usa `size="text"`: mide el texto del enlace, delante
+(`iconPosition="start"`) y detrás (`end`). El aire entre icono y texto sigue siendo
+`--link-icon-gap`, espaciado del sistema, y no escala con la tipografía a propósito: es
+separación, no cuerpo de letra.
+
+### El icono de `Button` sigue al cuerpo de letra del control
+
+Un icono pasado como hijo de un `Button` ya no necesita `size`: dentro del botón mide `1em`, que es
+el `font-size` que cada talla fija (14, 16 y 20px en `sm`, `md` y `lg`), así que el glifo acompaña
+al control en los tres tamaños y también cuando quien sube la talla es la superficie pública. Lo
+hace una regla acotada en la hoja del botón, sin `data-slot` ni prop nueva.
+
+**`iconOnly` queda fuera de esa regla, a propósito.** Ahí el glifo no acompaña a un texto —no hay
+texto— sino que **es** el contenido del botón: su medida la decide la caja cuadrada (32/40/48), no
+la tipografía, y con `1em` un botón de 40px se habría quedado con un glifo de 16 flotando en el
+centro. En un botón de solo icono la talla la sigue poniendo el `Icon`.
+
+Cambio visible para quien ya ponía un icono dentro de un botón con texto: ese glifo pasa de su
+talla fija a la del texto (en un botón `lg`, de 16 a 20px). Es el efecto buscado y no cambia el
+marcado ni la API.
+
+Stories nuevas para verlo: «El icono sigue al texto» en `Link` (el mismo enlace en tres
+tipografías, y el caso de «Ver en la plataforma de origen» con el icono detrás) y en `Button` (el
+mismo botón en `sm`, `md` y `lg`), cada una con su test de contrato. Documentado en Foundations →
+Iconografía § «El icono que sigue al texto», con remisión desde `Icon`, `Link` y `Button`.
+
 ## [49.5.0] — 2026-09-18
 
 > **Minor.** La cuenta se lee en dos líneas: el ítem de menú acepta una segunda línea bajo la

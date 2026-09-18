@@ -16,7 +16,7 @@ export interface LinkProps extends React.ComponentPropsWithoutRef<'a'> {
      * desaparece en hover, igual en las dos.
      */
     tone?: 'accent' | 'ink' | 'accent-1';
-    /** Un icono junto al texto («← Volver», «Descargar ↓»). Decorativo: el texto ya lo dice. */
+    /** Un icono junto al texto («← Volver», «Descargar ↓»). Decorativo: el texto ya lo dice. Mide lo que el texto del enlace (`1em`) y sube y baja con él. */
     icon?: IconName;
     /** Dónde va el icono: delante (`start`, por defecto) o detrás del texto. */
     iconPosition?: 'start' | 'end';

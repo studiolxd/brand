@@ -328,7 +328,13 @@ export type IconName = keyof typeof ICONS;
 export declare const ICON_NAMES: IconName[];
 export interface IconProps {
     name: IconName;
-    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    /**
+     * Talla del glifo. Las cinco fijas del sistema (`xs`…`xl`) o `text`, que no
+     * es una talla sino una instrucción: el icono mide `1em`, o sea el tamaño
+     * de la tipografía que lo rodea, y sube y baja con ella. Es la que usan el
+     * enlace y el botón para que el glifo acompañe a su texto.
+     */
+    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'text';
     className?: string;
 }
 export declare function Icon({ name, size, className }: IconProps): import("react/jsx-runtime").JSX.Element;
