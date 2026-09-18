@@ -225,10 +225,47 @@ if (unresolved.length > 0) {
 
 console.log('✔ sin referencias de tokens sin resolver en dist/*.css');
 
+// --- La condición `default` de cada subruta condicional ---
+// Un Node CommonJS —los workers de la suite empaquetados con esbuild en formato
+// cjs, o un `tsx` cualquiera— hace `require('@studiolxd/brand/email')` y, si la
+// subruta solo declara `types` e `import`, muere con ERR_PACKAGE_PATH_NOT_EXPORTED:
+// `import` solo casa con la condición de importación. Con `default` apuntando al
+// MISMO fichero ESM, Node lo carga por `require(esm)` sin que haya que publicar
+// una segunda copia en CJS. No se añade a las subrutas que ya son una cadena
+// (CSS, SCSS, JSON, assets): una cadena vale para toda condición.
+console.log('\n▶ comprobando que toda subruta condicional de exports declara `default`');
+
+const pkg = JSON.parse(readFileSync('package.json', 'utf-8'));
+
+const sinDefault = Object.entries(pkg.exports ?? {})
+  .filter(([, entry]) => entry && typeof entry === 'object' && !('default' in entry))
+  .map(([name]) => name);
+
+if (sinDefault.length > 0) {
+  console.error('\n✗ release:check — subrutas de package.json#exports sin condición `default`:');
+  for (const name of sinDefault) console.error(`  - "${name}"`);
+  console.error('\nUn `require()` desde Node CommonJS fallaría con ERR_PACKAGE_PATH_NOT_EXPORTED.');
+  console.error('Añade `"default"` con el mismo valor que `"import"`, como última clave de la subruta.');
+  process.exit(1);
+}
+
+// Y que `default` no apunte a otro sitio que `import`: son el mismo fichero ESM,
+// no una segunda salida en CJS.
+const defaultDivergente = Object.entries(pkg.exports ?? {})
+  .filter(([, e]) => e && typeof e === 'object' && e.import && e.default !== e.import)
+  .map(([name, e]) => `${name}: import=${e.import} default=${e.default}`);
+
+if (defaultDivergente.length > 0) {
+  console.error('\n✗ release:check — `default` no coincide con `import` en:');
+  for (const line of defaultDivergente) console.error(`  - ${line}`);
+  process.exit(1);
+}
+
+console.log('✔ toda subruta condicional de exports declara `default` y apunta al mismo fichero que `import`');
+
 // --- Comprobación de sync de dist/ ---
 console.log('\n▶ comprobando que dist/ está regenerado y en sync');
 
-const pkg = JSON.parse(readFileSync('package.json', 'utf-8'));
 const missing = [];
 
 for (const [name, entry] of Object.entries(pkg.exports ?? {})) {

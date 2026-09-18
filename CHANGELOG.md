@@ -38,6 +38,22 @@ y el nombre accesible del enlace arrastraría el estado.
 catálogo (`appLauncher.new`). `isNew` **sigue funcionando y no se retira**; con los dos puestos,
 manda `badge`.
 
+### Los `exports` declaran `default`, para que un Node CommonJS pueda `require()`
+
+Las 170 subrutas condicionales de `package.json#exports` llevaban solo `types` e `import`.
+`import` casa únicamente con la condición de importación, así que un Node CommonJS —los
+workers de la suite empaquetados con esbuild en formato cjs, o un `tsx` cualquiera— que hiciera
+`require('@studiolxd/brand/email')` moría con `ERR_PACKAGE_PATH_NOT_EXPORTED`. Ahora cada
+subruta añade `default` apuntando **al mismo fichero ESM**, que es lo que Node necesita para
+cargarlo por `require(esm)`: no se publica una segunda copia en CJS ni cambia el formato de
+nada. Las subrutas que ya eran una cadena (CSS, SCSS, JSON, assets) no cambian — una cadena
+vale para toda condición.
+
+Lo vigilan dos guardianes, porque quedarse sin `default` no rompe ningún build: un test
+(`scripts/exports-default.test.ts`, en `pnpm test`) y un paso de `release:check`, ambos
+fallando si alguna subruta condicional se queda sin `default` o si `default` no apunta al mismo
+fichero que `import`.
+
 Tokens nuevos: `app-launcher.tile-disabled-color`, `site-nav.item-disabled-color`,
 `site-nav.item-badge-gap` y sus pares `surface-dark-*`, todos por referencia a
 `color.disabled.text-on-light|dark` — sin colores nuevos en la paleta.
