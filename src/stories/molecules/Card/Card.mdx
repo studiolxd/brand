@@ -192,17 +192,54 @@ Así cada control conserva su papel: un enlace que se llama como el título y un
 
 Esto cubre la tarjeta que ya está envuelta en un enlace del router (el caso heredado, mientras se migra a `linkOverlay`) y cualquier fila pulsable que la contenga. `isolate={false}` para la tarjeta que quiere lo contrario: que pulsar la acción cuente también como pulsar la tarjeta.
 
+### Enlace + selección + menú
+
+La misma tarjeta de la bandeja, cuando además **se marca**: una casilla para elegirla y un menú para actuar sobre ella. La casilla va en `CardSelection`, al principio de la cabecera, que es donde se busca al repasar una columna de tarjetas.
+
+```tsx
+<Card linkOverlay>
+  <CardHeader>
+    <CardSelection>
+      <CheckboxField label={`Seleccionar ${nombre}`} labelHidden checked={marcada} onCheckedChange={…} />
+    </CardSelection>
+    <CardTitle><Link href={`/guias/${id}`}>{nombre}</Link></CardTitle>
+    <CardAction>
+      <Menu trigger={<Button variant="ghost" iconOnly aria-label="Más opciones">…</Button>} items={acciones} />
+    </CardAction>
+  </CardHeader>
+</Card>
+```
+
+<Canvas of={CardStories.EnlaceConSeleccion} />
+
+**La capa del enlace no se come lo que está declarado como interactivo.** `::after` cubre el bloque entero y, con ella, cualquier control que no la gane: una casilla dentro de un `CardHeader` sin más deja de pulsarse, y de ahí venía el apaño de envolver la tarjeta en un `<Link>` con un botón dentro. Las **zonas interactivas declaradas** suben por encima (`position: relative` y un apilado interno de 1, que solo compite consigo mismo):
+
+| Zona | Cómo se declara |
+| --- | --- |
+| `CardAction` | sola: es una ranura interactiva por definición |
+| `CardSelection` | sola: ídem |
+| Cualquier otra subparte | `interactive` en ella (`<CardFooter interactive>`) |
+
+Lo que es solo texto se queda **debajo** a propósito: ahí la capa es lo que hace que pulsar en cualquier punto de la tarjeta abra su detalle.
+
+El **teclado** no depende de la capa: las tres paradas —casilla, enlace del título y menú— están en el orden en que se leen y se recorren con el tabulador como en cualquier otro sitio.
+
+`CardSelection` detiene la propagación igual que `CardAction`, pero **no cancela la acción por defecto**, ni siquiera colgando de un enlace: esa acción es justo la que marca la casilla. Lo que impide navegar es la capa. Una tarjeta envuelta a mano en un `<Link>` con la casilla dentro no tiene arreglo —es un control dentro de un enlace—: se escribe con `linkOverlay`.
+
+Y no se confunde con `selectable`, que es lo contrario: allí la tarjeta **entera** es la opción de un grupo y nada más dentro puede ser interactivo.
+
 ## Subpartes
 
-Seis piezas para no volver a maquetar a mano la cabecera, el pie ni el título. Son hermanas: se
+Siete piezas para no volver a maquetar a mano la cabecera, el pie ni el título. Son hermanas: se
 escriben en el orden en que se leen, sin envoltorios.
 
 | Subparte | Elemento | Para qué |
 |---|---|---|
-| `CardHeader` | `<div class="card__header">` | Rejilla de dos columnas: el texto a la izquierda, la acción anclada arriba a la derecha |
+| `CardHeader` | `<div class="card__header">` | Rejilla de dos columnas: el texto a la izquierda, la acción anclada arriba a la derecha (tres, con `CardSelection`) |
 | `CardTitle` | `Heading` | El título. Encabezado de verdad: cuenta para el esquema del documento |
 | `CardDescription` | `Paragraph` | El texto secundario bajo el título. `lines={1\|2\|3}` reserva esa altura aunque el texto sea más corto, para que lo que sigue (un precio) quede a la misma altura en tarjetas hermanas |
 | `CardAction` | `<div class="card__action">` | La acción de la cabecera: un menú, un botón |
+| `CardSelection` | `<div class="card__selection">` | La casilla (o el radio) con que se elige la tarjeta en un listado. Va la primera de la cabecera, y la vuelve una rejilla de tres columnas |
 | `CardContent` | `<div class="card__content">` | El cuerpo |
 | `CardFooter` | `<div class="card__footer">` | El pie y sus acciones: fila en escritorio, apiladas a todo el ancho en móvil (la norma del sistema); `direction="column"` las apila también donde hay sitio |
 
@@ -251,6 +288,10 @@ párrafo de la superficie de lectura (Foundations → Tipografía): dentro de un
 - `CardAction` aísla por defecto los eventos de su ranura (`isolate`): pulsar el menú de la
   cabecera no navega ni cuenta como pulsar la tarjeta. Es la red que sostiene la tarjeta que
   todavía vive envuelta en un enlace del router; la forma correcta sigue siendo `linkOverlay`.
+- Con `linkOverlay`, lo interactivo se **declara**: `CardAction` y `CardSelection` suben solas por
+  encima de la capa del enlace, y cualquier otra subparte lo pide con `interactive`. Un control que
+  no la gane queda tapado por la capa y deja de pulsarse — con el ratón; el tabulador llega a él
+  igual, que es la peor de las dos formas de romperse.
 - Con `external`, avisa en el `ctaLabel` de que el enlace abre una pestaña nueva: el `target` por
   sí solo no se anuncia.
 - `ctaLabel` da al enlace un nombre accesible completo («Ver más sobre plataformas LMS») cuando la

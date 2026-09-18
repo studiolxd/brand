@@ -182,6 +182,30 @@
   justify-self: end;
 }
 
+/* Con ranura de selección la cabecera tiene tres columnas: la casilla, el
+   bloque de texto y la acción. La casilla se alinea con la primera línea del
+   título, no con el centro del bloque: es la línea que se lee al repasar una
+   columna de tarjetas. */
+.card__header:has(> .card__selection) {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.card__header:has(> .card__selection) > * {
+  grid-column: 2;
+}
+
+.card__header > .card__selection {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+}
+
+.card__header:has(> .card__selection) > .card__action {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+}
+
 /* `CardTitle` ya ES el encabezado (`Heading`): el tamaño lo pone su prop `size`
    —que sigue la escala de títulos y sube un peldaño en la superficie pública—,
    y aquí solo se retira el aire que el encabezado trae del documento: dentro de
@@ -316,7 +340,16 @@
   inset: 0;
 }
 
-.card.card--link-overlay .card__action {
+/* Las zonas interactivas declaradas suben por encima de la capa: la ranura de
+   acciones y la de selección lo son por definición, y cualquier otra subparte
+   lo pide con `interactive`. El apilado es interno (1) y solo compite consigo
+   mismo (Fundamentos › Capas). Sin esto, la capa del título —que es la que
+   estira el área de pulsación a todo el bloque— se queda con la pulsación de
+   una casilla o de un botón del pie, que es justo el fallo que llevaba a
+   envolver la tarjeta en un `<Link>` con un botón dentro. */
+.card.card--link-overlay .card__action,
+.card.card--link-overlay .card__selection,
+.card.card--link-overlay .card__interactive {
   position: relative;
   z-index: 1;
 }

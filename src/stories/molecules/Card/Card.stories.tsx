@@ -6,6 +6,7 @@ import {
   CardTitle,
   CardDescription,
   CardAction,
+  CardSelection,
   CardContent,
   CardFooter,
 } from './Card';
@@ -16,6 +17,7 @@ import { Inline } from '../../atoms/Inline/Inline';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Tag } from '../../atoms/Tag/Tag';
 import { Menu } from '../Menu/Menu';
+import { CheckboxField } from '../CheckboxField/CheckboxField';
 import { RadioField } from '../RadioField/RadioField';
 import { RadioGroup } from '../../atoms/RadioGroup/RadioGroup';
 import { useState } from 'react';
@@ -944,6 +946,163 @@ export const EnlaceConAcciones: Story = {
       </CardFooter>
     </Card>
   ),
+};
+
+/**
+ * Enlace + selección + menú: la tarjeta de un listado que se abre pulsándola,
+ * se marca con su casilla y lleva su propio menú. Las tres cosas conviven
+ * porque la tarjeta es **contenedora**: quien navega es el `<a>` del título,
+ * que con `linkOverlay` estira su pulsación a todo el bloque, y las dos
+ * ranuras interactivas —`CardSelection` y `CardAction`— quedan por encima de
+ * esa capa. Envolver la tarjeta en un `<Link>` con la casilla dentro sería un
+ * control dentro de un enlace: ni es HTML válido ni se puede pulsar.
+ */
+export const EnlaceConSeleccion: Story = {
+  name: 'Tarjeta-enlace con selección y menú',
+  render: function EnlaceConSeleccionRender() {
+    const [marcadas, setMarcadas] = useState<string[]>([]);
+    const fichas = [
+      { id: 'quimica', titulo: 'Guía docente — Química II', autor: 'Marta Ruiz' },
+      { id: 'fisica', titulo: 'Guía docente — Física I', autor: 'Luis Prats' },
+    ];
+
+    return (
+      <Columns gap="md">
+        {fichas.map((ficha) => (
+          <Card key={ficha.id} linkOverlay>
+            <CardHeader>
+              <CardSelection>
+                <CheckboxField
+                  label={`Seleccionar ${ficha.titulo}`}
+                  labelHidden
+                  checked={marcadas.includes(ficha.id)}
+                  onCheckedChange={(checked) =>
+                    setMarcadas((previas) =>
+                      checked === true
+                        ? [...previas, ficha.id]
+                        : previas.filter((id) => id !== ficha.id),
+                    )
+                  }
+                />
+              </CardSelection>
+              <CardTitle>
+                <a href={`#${ficha.id}`}>{ficha.titulo}</a>
+              </CardTitle>
+              <CardAction>
+                <Menu
+                  trigger={
+                    <Button variant="ghost" iconOnly aria-label={`Más opciones de ${ficha.titulo}`}>
+                      ⋯
+                    </Button>
+                  }
+                  align="end"
+                  items={[{ type: 'button', label: 'Mover a la papelera', onClick: () => {} }]}
+                />
+              </CardAction>
+            </CardHeader>
+            <CardContent>
+              <Inline gap="sm" align="center">
+                <Paragraph size="small">Estado</Paragraph>
+                <Tag variant="info">En edición</Tag>
+              </Inline>
+            </CardContent>
+            <CardFooter>
+              <Paragraph size="small">{ficha.autor} · 17 de septiembre de 2026</Paragraph>
+            </CardFooter>
+          </Card>
+        ))}
+      </Columns>
+    );
+  },
+};
+
+/**
+ * Test: en una tarjeta `linkOverlay`, la casilla se marca y el menú se abre
+ * **sin** seguir el enlace del título; y el teclado llega a las dos sin salir
+ * de la tarjeta. Es el fallo que el patrón viene a arreglar: la capa del
+ * enlace cubre el bloque entero y, sin declarar las zonas interactivas, se
+ * queda con la pulsación de la casilla.
+ */
+export const TestSeleccionYMenuSobreLaCapa: Story = {
+  name: 'Test — la casilla y el menú se pulsan sin navegar',
+  tags: ['!dev'],
+  render: function TestSeleccionYMenuRender() {
+    const [marcada, setMarcada] = useState(false);
+    return (
+      <>
+        <p data-testid="estado">{marcada ? 'marcada' : 'sin marcar'}</p>
+        <Card linkOverlay>
+          <CardHeader>
+            <CardSelection>
+              <CheckboxField
+                label="Seleccionar la guía docente"
+                labelHidden
+                checked={marcada}
+                onCheckedChange={(checked) => setMarcada(checked === true)}
+              />
+            </CardSelection>
+            <CardTitle>
+              <a href="#guia-docente">Guía docente</a>
+            </CardTitle>
+            <CardAction>
+              <Menu
+                trigger={
+                  <Button variant="ghost" iconOnly aria-label="Más opciones">
+                    ⋯
+                  </Button>
+                }
+                align="end"
+                items={[{ type: 'button', label: 'Mover a la papelera', onClick: () => {} }]}
+              />
+            </CardAction>
+          </CardHeader>
+        </Card>
+      </>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const hashPrevio = document.location.hash;
+
+    // La casilla está por encima de la capa del enlace: en su centro, el
+    // elemento que recibe la pulsación es ella y no la tarjeta.
+    const casilla = canvas.getByRole('checkbox', { name: 'Seleccionar la guía docente' });
+    const caja = casilla.getBoundingClientRect();
+    const encima = document.elementFromPoint(caja.left + caja.width / 2, caja.top + caja.height / 2);
+    await expect(casilla.contains(encima) || casilla === encima).toBe(true);
+
+    let navegaria = false;
+    const espia = (event: Event) => {
+      if (!event.defaultPrevented) navegaria = true;
+    };
+
+    await userEvent.click(casilla);
+    await waitFor(async () => {
+      await expect(canvas.getByTestId('estado')).toHaveTextContent('marcada');
+    });
+
+    document.addEventListener('click', espia, false);
+    try {
+      await userEvent.click(canvas.getByRole('button', { name: 'Más opciones' }));
+      await waitFor(async () => {
+        await expect(document.querySelector('.menu__popup, [role="menu"]')).not.toBeNull();
+      });
+    } finally {
+      document.removeEventListener('click', espia, false);
+    }
+    await expect(navegaria).toBe(false);
+    await expect(document.location.hash).toBe(hashPrevio);
+
+    await userEvent.keyboard('{Escape}');
+
+    // Y el teclado las recorre en el orden en que se leen: casilla, enlace del
+    // título y menú. La capa no se lleva ninguna parada por delante.
+    casilla.focus();
+    await userEvent.tab();
+    await expect(canvas.getByRole('link', { name: 'Guía docente' })).toHaveFocus();
+    await userEvent.tab();
+    await expect(canvas.getByRole('button', { name: 'Más opciones' })).toHaveFocus();
+  },
 };
 
 /**

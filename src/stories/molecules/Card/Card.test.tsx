@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { FormEvent } from 'react';
-import { Card, CardAction, CardHeader, CardTitle } from './Card';
+import { Card, CardAction, CardContent, CardFooter, CardHeader, CardSelection, CardTitle } from './Card';
 
 describe('Card — tarjeta-acción (render sobre <button>)', () => {
   it('renderiza el <button> del consumidor con las clases y atributos de la tarjeta', () => {
@@ -197,5 +197,76 @@ describe('Card — `linkOverlay`', () => {
     // El botón NO cuelga del enlace: ni HTML inválido ni un nombre accesible
     // que se trague la tarjeta entera.
     expect(enlace.contains(boton)).toBe(false);
+  });
+});
+
+describe('Card — selección dentro de una tarjeta-enlace', () => {
+  it('la ranura de selección se declara interactiva y no cuelga del enlace', () => {
+    render(
+      <Card linkOverlay data-testid="tarjeta">
+        <CardHeader>
+          <CardSelection data-testid="seleccion">
+            <input type="checkbox" aria-label="Seleccionar la guía" />
+          </CardSelection>
+          <CardTitle>
+            <a href="/guias/1">Guía docente</a>
+          </CardTitle>
+        </CardHeader>
+      </Card>,
+    );
+
+    const seleccion = screen.getByTestId('seleccion');
+    expect(seleccion).toHaveClass('card__selection');
+
+    const enlace = screen.getByRole('link', { name: 'Guía docente' });
+    const casilla = screen.getByRole('checkbox', { name: 'Seleccionar la guía' });
+    expect(enlace.contains(casilla)).toBe(false);
+  });
+
+  it('marcar la casilla marca la casilla y no llega al manejador de la tarjeta', async () => {
+    const user = userEvent.setup();
+    const onCardClick = vi.fn();
+    render(
+      <Card linkOverlay onClick={onCardClick}>
+        <CardHeader>
+          <CardSelection>
+            <input type="checkbox" aria-label="Seleccionar la guía" />
+          </CardSelection>
+          <CardTitle>
+            <a href="/guias/1">Guía docente</a>
+          </CardTitle>
+        </CardHeader>
+      </Card>,
+    );
+
+    await user.click(screen.getByRole('checkbox', { name: 'Seleccionar la guía' }));
+
+    // La ranura corta la propagación, pero NO la acción por defecto: esa es
+    // justo la que marca la casilla.
+    expect(screen.getByRole('checkbox', { name: 'Seleccionar la guía' })).toBeChecked();
+    expect(onCardClick).not.toHaveBeenCalled();
+  });
+
+  it('`interactive` sube cualquier otra subparte por encima de la capa', () => {
+    render(
+      <Card linkOverlay>
+        <CardFooter interactive data-testid="pie">
+          <button type="button">Descargar</button>
+        </CardFooter>
+      </Card>,
+    );
+
+    const pie = screen.getByTestId('pie');
+    expect(pie).toHaveClass('card__footer');
+    expect(pie).toHaveClass('card__interactive');
+  });
+
+  it('sin `interactive`, la subparte se queda debajo de la capa', () => {
+    render(
+      <Card linkOverlay>
+        <CardContent data-testid="cuerpo">Estado: en edición</CardContent>
+      </Card>,
+    );
+    expect(screen.getByTestId('cuerpo')).not.toHaveClass('card__interactive');
   });
 });
