@@ -27,6 +27,12 @@ La única forma rellena son **los puntos** —`dot`, `dots`, `grid`—, porque u
 
 Un icono dentro de un control ocupa la talla del icono, no la del control: el botón mide su talla (32, 40 o 48) y el icono de 16 o 24 va centrado dentro.
 
+### El icono que sigue al texto
+
+Junto a un texto, las cinco tallas fijas se quedan cortas: el mismo enlace vive en un pie, en un párrafo y en un título, y un glifo de 16px se ve enorme en el primero y diminuto en el tercero. Para eso está `size="text"`, que **no es una talla sino una relación**: el icono mide `1em`, o sea el cuerpo de letra que lo rodea, y sube y baja con él. No lleva token porque no hay valor que elegir — `1em` ya ES el tamaño del texto.
+
+Es lo que llevan por dentro **`Link`** (el glifo de `icon` mide el texto del enlace) y **`Button`** (el icono que se le pasa como hijo mide el cuerpo de letra de la talla: 14, 16 y 20px en `sm`, `md` y `lg`). En un botón de **solo icono** no aplica: ahí el glifo no acompaña a un texto, es el contenido del botón, y su medida la decide la caja cuadrada — 16 o 24, de las tallas fijas.
+
 ## Accesibilidad
 
 El icono es **siempre decorativo** (`aria-hidden`): no tiene nombre ni se anuncia. El significado lo lleva el control que lo contiene —el `aria-label` de un botón de icono, el texto de un enlace—, nunca el icono. Un icono solo, sin texto ni etiqueta, no transmite nada a quien no lo ve.

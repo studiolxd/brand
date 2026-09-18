@@ -279,6 +279,21 @@
   }
 }
 
+/* El icono acompaña al texto del botón: `1em` es el `font-size` que ya fija
+   cada talla (sm 14px, md 16px, lg 20px), así que el glifo sube y baja con el
+   control sin enumerar tallas y sin que el consumidor pase `size` al `Icon`.
+   Gana a `.icon--md` y compañía por especificidad, que es lo que se quiere:
+   dentro de un botón manda el botón.
+
+   `iconOnly` queda FUERA a propósito. Ahí el glifo no acompaña a un texto —no
+   hay texto— sino que ES el contenido del botón: su talla la decide la caja
+   cuadrada (32/40/48), no la tipografía, y con `1em` un botón de 40px se
+   quedaría con un glifo de 16 flotando en el centro. En un botón de solo
+   icono la talla la sigue poniendo el `Icon` (`sm`/`md`). */
+.button:not(.button--icon-only) .icon {
+  --icon-size: 1em;
+}
+
 /* Icon-only — botón cuadrado: el lado es la altura de la talla.
    Va DESPUÉS de las reglas de tamaño para ganar a su padding-inline. */
 .button.button--icon-only {

@@ -16,10 +16,11 @@ import { Icon } from '@studiolxd/brand/icon';
 
 <Icon name="bell" />
 <Icon name="bell" size="sm" />
+<Icon name="bell" size="text" />   // mide el texto que lo rodea
 ```
 
 - **`name`** está tipado con los nombres del catálogo (`IconName`): un nombre que no existe no compila. `ICON_NAMES` expone la lista para selectores y catálogos.
-- **`size`** es una de las cinco tallas de icono, `md` por defecto. Los valores y su uso, en Iconografía.
+- **`size`** es una de las cinco tallas de icono, `md` por defecto, o `text`: esa no es una talla sino una relación — el glifo mide `1em`, o sea el texto que lo rodea, y sube y baja con él. Es la que llevan por dentro el enlace y el botón. Los valores y su uso, en Iconografía.
 - **No hay prop de color**: el icono es `currentColor`. Si un componente necesita un icono de otro color, lo fija en su propio token sobre el elemento que lo contiene.
 - **No admite `aria-label` ni `title`**: el icono es siempre decorativo y el nombre lo lleva el control que lo contiene. La regla y su porqué, en Iconografía.
 

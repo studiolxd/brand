@@ -69,6 +69,66 @@ export const ConIcono: Story = {
   ),
 };
 
+/**
+ * El icono mide el texto del enlace: no tiene talla propia, mide `1em`. Aquí
+ * el mismo enlace vive en tres tipografías —letra menor, cuerpo y título— y
+ * el glifo sube y baja con ellas; el último, con el icono detrás, es el caso
+ * de «Ver en la plataforma de origen».
+ */
+export const ElIconoSigueAlTexto: Story = {
+  name: 'El icono sigue al texto',
+  render: () => (
+    <Stack>
+      <div style={{ fontSize: 'var(--font-size-1)' }}>
+        <Link href="#acceso" icon="arrow-left">Volver a iniciar sesión</Link>
+      </div>
+      <div style={{ fontSize: 'var(--font-size-2)' }}>
+        <Link href="#acceso" icon="arrow-left">Volver a iniciar sesión</Link>
+      </div>
+      <div style={{ fontSize: 'var(--font-size-5)' }}>
+        <Link href="#acceso" icon="arrow-left">Volver a iniciar sesión</Link>
+      </div>
+      <div style={{ fontSize: 'var(--font-size-5)' }}>
+        <Link href="https://studiolxd.com" external icon="external-link" iconPosition="end">
+          Ver en la plataforma de origen
+        </Link>
+      </div>
+    </Stack>
+  ),
+};
+
+export const ContratoIconoTexto: Story = {
+  name: 'Test — el icono mide el texto del enlace, delante y detrás',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <div style={{ fontSize: '14px' }}>
+        <Link href="#" icon="arrow-left" data-testid="menor">Volver</Link>
+      </div>
+      <div style={{ fontSize: '32px' }}>
+        <Link href="#" icon="external-link" iconPosition="end" data-testid="mayor">
+          Ver en la plataforma de origen
+        </Link>
+      </div>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const medir = (testId: string) => {
+      const enlace = canvasElement.querySelector(`[data-testid="${testId}"]`) as HTMLElement;
+      const glifo = enlace.querySelector('.link__icon') as SVGElement;
+      return {
+        glifo: Math.round(glifo.getBoundingClientRect().width),
+        texto: Math.round(parseFloat(getComputedStyle(enlace).fontSize)),
+      };
+    };
+    const menor = medir('menor');
+    const mayor = medir('mayor');
+    await expect(menor.glifo).toBe(menor.texto);
+    await expect(mayor.glifo).toBe(mayor.texto);
+    await expect(mayor.glifo).toBeGreaterThan(menor.glifo);
+  },
+};
+
 /** Sobre el enlace del router: `render` recibe icono, clases y texto. */
 export const ConRender: Story = {
   render: () => <Link icon="arrow-left" render={<a href="#acceso" data-router="sí" />}>Volver a iniciar sesión</Link>,

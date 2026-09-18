@@ -27,6 +27,12 @@ Una acción que no navega (deshacer, volver un paso de un formulario) pero que s
 
 `Button variant="text"` sigue existiendo y toma su cara de estos mismos tokens (`button.text.*` → `link.*`): es el botón-enlace que vive entre botones (un pie de formulario, una barra de acciones). Y al revés, `Button href` es un `<a>` con cara de botón. Semántica según lo que hace; cara según lo que pide la maqueta.
 
+## El icono sigue al texto
+
+El glifo de `icon` **no tiene talla propia**: mide `1em`, o sea el texto del enlace. Un enlace en letra menor lleva un icono menor y uno dentro de un título, uno de título, sin que el consumidor enumere tallas. Vale igual delante (`iconPosition="start"`) y detrás (`end`). El aire entre icono y texto (`--link-icon-gap`) es espaciado del sistema y no escala con la tipografía: es separación, no cuerpo de letra.
+
+<Canvas of={LinkStories.ElIconoSigueAlTexto} />
+
 ## Tokens
 
 <TokenTable tokens={linkTokens} />

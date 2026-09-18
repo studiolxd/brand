@@ -19,7 +19,7 @@ export interface LinkProps extends React.ComponentPropsWithoutRef<'a'> {
    * desaparece en hover, igual en las dos.
    */
   tone?: 'accent' | 'ink' | 'accent-1';
-  /** Un icono junto al texto («← Volver», «Descargar ↓»). Decorativo: el texto ya lo dice. */
+  /** Un icono junto al texto («← Volver», «Descargar ↓»). Decorativo: el texto ya lo dice. Mide lo que el texto del enlace (`1em`) y sube y baja con él. */
   icon?: IconName;
   /** Dónde va el icono: delante (`start`, por defecto) o detrás del texto. */
   iconPosition?: 'start' | 'end';
@@ -44,7 +44,10 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
   // enlace) sale vestido igual.
   const toneClass = tone === 'ink' ? 'link--ink' : tone === 'accent-1' ? 'link--accent-1' : '';
   const classes = ['link', toneClass, icon ? 'link--with-icon' : '', className].filter(Boolean).join(' ');
-  const glyph = icon ? <Icon name={icon} size="sm" className="link__icon" /> : null;
+  // `size="text"`: el glifo mide `1em`, o sea el texto del enlace. Un enlace
+  // dentro de un título o de un pie de foto lleva su icono a esa misma talla
+  // sin que el consumidor tenga que enumerarla.
+  const glyph = icon ? <Icon name={icon} size="text" className="link__icon" /> : null;
   const content = (
     <>
       {iconPosition === 'start' && glyph}

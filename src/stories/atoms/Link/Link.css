@@ -92,6 +92,11 @@ a:focus-visible,
   align-items: center;
   gap: var(--link-icon-gap);
 }
+
+/* El glifo mide el texto del enlace (`Icon size="text"`, `1em`), así que un
+   enlace dentro de un título lleva un icono de título y uno en letra menor,
+   uno menor. El aire entre los dos (`--link-icon-gap`) es espaciado del
+   sistema, no tipografía: no escala con el texto a propósito. */
 .link__icon {
   flex-shrink: 0;
 }

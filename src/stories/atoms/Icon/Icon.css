@@ -11,3 +11,9 @@
 .icon--md { --icon-size: var(--icon-size-md); }
 .icon--lg { --icon-size: var(--icon-size-lg); }
 .icon--xl { --icon-size: var(--icon-size-xl); }
+
+/* `text`: el glifo mide la tipografía que lo rodea. No lleva token porque no
+   es un valor de diseño sino una relación — `1em` ES el tamaño del texto
+   ambiente, y por eso el icono de un enlace o de un botón escala con su
+   control sin que nadie enumere tallas. */
+.icon--text { --icon-size: 1em; }

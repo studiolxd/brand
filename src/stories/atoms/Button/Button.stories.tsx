@@ -284,6 +284,55 @@ export const Sizes: Story = {
   ),
 };
 
+/**
+ * El icono acompaña al texto del botón: mide `1em`, o sea el `font-size` de
+ * la talla (14, 16 y 20px en `sm`, `md` y `lg`), así que el glifo crece con
+ * el control sin pasarle `size` al `Icon`.
+ */
+export const ElIconoSigueAlTexto: Story = {
+  name: 'El icono sigue al texto',
+  render: () => (
+    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+      <Button variant="outline" size="sm"><Icon name="download" /> Exportar</Button>
+      <Button variant="outline" size="md"><Icon name="download" /> Exportar</Button>
+      <Button variant="outline" size="lg"><Icon name="download" /> Exportar</Button>
+    </div>
+  ),
+};
+
+export const ContratoIconoTexto: Story = {
+  name: 'Test — el glifo mide el texto del botón, salvo en iconOnly',
+  tags: ['!dev'],
+  render: () => (
+    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+      <Button variant="outline" size="sm" data-testid="sm"><Icon name="download" /> Exportar</Button>
+      <Button variant="outline" size="lg" data-testid="lg"><Icon name="download" /> Exportar</Button>
+      <Button variant="outline" size="lg" iconOnly aria-label="Exportar" data-testid="solo-icono">
+        <Icon name="download" />
+      </Button>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const medir = (testId: string) => {
+      const boton = canvasElement.querySelector(`[data-testid="${testId}"]`) as HTMLElement;
+      const glifo = boton.querySelector('.icon') as SVGElement;
+      return {
+        glifo: Math.round(glifo.getBoundingClientRect().width),
+        texto: Math.round(parseFloat(getComputedStyle(boton).fontSize)),
+      };
+    };
+    const sm = medir('sm');
+    const lg = medir('lg');
+    await expect(sm.glifo).toBe(sm.texto);
+    await expect(lg.glifo).toBe(lg.texto);
+    await expect(lg.glifo).toBeGreaterThan(sm.glifo);
+    // `iconOnly` queda fuera: ahí el glifo no acompaña a un texto, es el
+    // contenido del botón, y conserva la talla que le da el `Icon` (`md`).
+    const soloIcono = medir('solo-icono');
+    await expect(soloIcono.glifo).toBe(24);
+  },
+};
+
 export const Disabled: Story = {
   args: { variant: 'primary', disabled: true },
 };
