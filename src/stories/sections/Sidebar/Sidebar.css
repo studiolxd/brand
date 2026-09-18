@@ -125,8 +125,14 @@
 /* ── Móvil: cajón desde la izquierda ── */
 .sidebar.sidebar--drawer {
   position: fixed;
-  /* Bajo la barra superior: el botón de menú sigue a la vista para cerrar */
-  inset-block-start: calc(var(--app-header-height) + env(safe-area-inset-top));
+  /* Bajo la barra superior: el botón de menú sigue a la vista para cerrar. Y
+     bajo la barra de sistema, si el armazón la lleva: `AppShell` publica su
+     alto medido en `--app-shell-banner-height` y compone con él el offset. El
+     fallback es para un `Sidebar` fuera de un `AppShell`. */
+  inset-block-start: var(
+    --app-shell-chrome-block-start,
+    calc(var(--app-header-height) + env(safe-area-inset-top))
+  );
   inset-block-end: 0;
   /* Los dos insets ya fijan el alto. El `block-size: 100%` de `.sidebar` se
      resuelve, en un elemento fijo, contra el viewport ENTERO: el cajón medía

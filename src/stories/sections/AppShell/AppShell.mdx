@@ -20,6 +20,28 @@ El botón de menú alterna entre desplegada y cerrada (desde rail, despliega). E
 <Canvas of={AppShellStories.Rail} />
 <Canvas of={AppShellStories.Plegada} />
 
+## La barra de sistema
+
+La ranura `banner` es para el **estado de sesión que no se puede perder de vista**
+—la suplantación es el caso de referencia—: va **por encima de todo, incluida la
+cabecera**, a ancho completo. Recibe un `Banner`. Si el aviso habla de la
+pantalla y no de la sesión, no es esto: es un `Alert` dentro del contenido.
+
+<Canvas of={AppShellStories.ConBarraDeSistema} />
+
+La maqueta no cambia: el armazón sigue siendo una columna de `100dvh`, el cuerpo
+se queda con lo que sobra después de la barra y de la cabecera, y la sidebar
+sigue midiendo el cien por cien del cuerpo. No hay scroll de página.
+
+En móvil, el cajón de la sidebar y su velo arrancan **por debajo de cabecera más
+barra**. Como el alto de la barra lo decide su contenido —el mensaje parte en dos
+líneas, las acciones apilan— no se puede fijar: el armazón lo mide con un
+`ResizeObserver` y lo publica en `--app-shell-banner-height`, de donde sale el
+offset (`--app-shell-chrome-block-start`) que consumen el velo y el cajón. Sin
+ranura `banner` el valor es cero y todo arranca bajo la cabecera, como siempre.
+
+<Canvas of={AppShellStories.ConBarraDeSistemaEnMovil} />
+
 ## Móvil
 
 La misma sidebar entra como cajón sobre un velo; el contenido queda `inert` y sin scroll. Se cierra con Escape, tocando el velo, con el botón de menú o **al navegar** (cualquier enlace dentro de ella). No hay rail ni redimensión: solo abierto o cerrado.

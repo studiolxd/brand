@@ -18,6 +18,17 @@ export type { AppShellContextValue, SidebarState } from './AppShellContext';
 const DESKTOP_MQ = '(min-width: 1024px)';
 
 export interface AppShellProps {
+  /**
+   * Ranura para una barra de sistema (`Banner`), **por encima de todo, incluida
+   * la cabecera**. Es para el estado de sesión que no se puede perder de vista
+   * —la suplantación es el caso de referencia—, no para un aviso de pantalla:
+   * eso es un `Alert` dentro del contenido.
+   *
+   * El armazón la mide (`ResizeObserver`) y publica su alto en
+   * `--app-shell-banner-height`, de donde lo toman el cajón de la sidebar y su
+   * velo para arrancar por debajo de cabecera **más** barra en móvil.
+   */
+  banner?: ReactNode;
   /** La barra superior: un `AppHeader`. Siempre visible. */
   header: ReactNode;
   /** La barra lateral: un `Sidebar`. Columna en escritorio, cajón en móvil. */
@@ -71,6 +82,7 @@ function useIsDesktop() {
  * `onSidebarChange` / `onSidebarWidthChange` avisan de cada cambio.
  */
 export function AppShell({
+  banner,
   header,
   sidebar,
   children,
@@ -142,9 +154,30 @@ export function AppShell({
     [sidebarValue, setSidebar, width, setSidebarWidth, toggleSidebar, closeSidebar, isDesktop],
   );
 
+  // El alto de la barra de sistema no se puede dar por sabido: lo decide su
+  // contenido (el mensaje parte en dos líneas en móvil, las acciones apilan) y
+  // cambia al redimensionar. Se mide con un `ResizeObserver` y se publica en
+  // `--app-shell-banner-height`, que es lo que suman el cajón de la sidebar y
+  // su velo a la altura de la cabecera para arrancar por debajo de las dos.
+  const [bannerHeight, setBannerHeight] = useState(0);
+  const bannerRef = useCallback((node: HTMLDivElement | null) => {
+    if (!node) return;
+    const medir = () => setBannerHeight(node.getBoundingClientRect().height);
+    medir();
+    const observer = new ResizeObserver(medir);
+    observer.observe(node);
+    return () => {
+      observer.disconnect();
+      setBannerHeight(0);
+    };
+  }, []);
+
   // Al cruzar a escritorio el cajón deja de existir por construcción (`drawer`
   // exige !isDesktop); su flag se limpia en el siguiente cierre.
-  const shellRef = useCssProperties({ '--app-shell-sidebar-width': width ? `${width}px` : undefined });
+  const shellRef = useCssProperties({
+    '--app-shell-sidebar-width': width ? `${width}px` : undefined,
+    '--app-shell-banner-height': banner ? `${bannerHeight}px` : undefined,
+  });
   const drawer = !isDesktop && drawerOpen;
   // El ancho de la barra lo fija el usuario arrastrando: es un dato de cliente
   // y se escribe por el CSSOM, no en un atributo `style` (que una app con
@@ -159,6 +192,11 @@ export function AppShell({
           className="app-shell"
           data-sidebar={sidebarValue}
         >
+          {banner && (
+            <div ref={bannerRef} className="app-shell__banner">
+              {banner}
+            </div>
+          )}
           {header}
           <div className="app-shell__body">
             {sidebar}

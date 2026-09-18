@@ -2,10 +2,30 @@
 
 .app-shell {
   --app-shell-sidebar-width: var(--sidebar-width);
+  /* Sin ranura `banner` no hay barra que medir: el shell no publica la
+     propiedad y el valor de partida es cero, así que el cajón de la sidebar
+     arranca justo bajo la cabecera, como siempre. Con barra, el shell escribe
+     aquí su alto medido (ver AppShell.tsx). */
+  --app-shell-banner-height: 0px;
+  /* Por debajo de lo que empieza todo lo que va fijo dentro del armazón: el
+     cajón de la sidebar y su velo. La cabecera y la barra van en el flujo, así
+     que el offset es la suma de las dos más el safe area de arriba. */
+  --app-shell-chrome-block-start: calc(
+    var(--app-shell-banner-height) + var(--app-header-height) + env(safe-area-inset-top)
+  );
   display: flex;
   flex-direction: column;
   block-size: 100dvh;
   overflow: clip;
+}
+
+/* La barra de sistema, a ancho completo y por encima de la cabecera. No
+   necesita `position`: el shell es una columna y la barra es su primer hijo,
+   así que la cabecera —`sticky` contra un contenedor que no hace scroll— queda
+   debajo sin taparla ni quedar tapada. Lo que sí hace falta es que no se
+   encoja: el cuerpo es el que absorbe lo que sobra. */
+.app-shell__banner {
+  flex-shrink: 0;
 }
 
 .app-shell__body {
@@ -29,7 +49,7 @@
 .app-shell__backdrop {
   position: fixed;
   inset: 0;
-  inset-block-start: calc(var(--app-header-height) + env(safe-area-inset-top));
+  inset-block-start: var(--app-shell-chrome-block-start);
   background-color: var(--sidebar-backdrop-bg);
   opacity: var(--sidebar-backdrop-opacity);
   z-index: var(--sidebar-backdrop-z-index);

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within, userEvent } from 'storybook/test';
+import { expect, within, userEvent, waitFor } from 'storybook/test';
 import { AppShell, useAppShell } from './AppShell';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { Sidebar } from '../Sidebar/Sidebar';
@@ -11,6 +11,8 @@ import { SidebarNav } from '../../molecules/SidebarNav/SidebarNav';
 import { OrgSwitcher } from '../../molecules/OrgSwitcher/OrgSwitcher';
 import { UserMenu } from '../../molecules/UserMenu/UserMenu';
 import { NotificationButton } from '../../molecules/NotificationButton/NotificationButton';
+import { Banner } from '../../molecules/Banner/Banner';
+import { Button } from '../../atoms/Button/Button';
 import { navEntries, orgs } from './_datos';
 
 const header = (
@@ -51,7 +53,7 @@ const meta: Meta<typeof AppShell> = {
   component: AppShell,
   parameters: { layout: 'fullscreen' },
   args: { header, sidebar, children: contenido },
-  argTypes: { header: { table: { disable: true } }, sidebar: { table: { disable: true } }, children: { table: { disable: true } } },
+  argTypes: { banner: { table: { disable: true } }, header: { table: { disable: true } }, sidebar: { table: { disable: true } }, children: { table: { disable: true } } },
 };
 export default meta;
 type Story = StoryObj<typeof AppShell>;
@@ -63,6 +65,77 @@ export const PorDefecto: Story = {};
 export const Rail: Story = { args: { defaultSidebar: 'rail' } };
 
 export const Plegada: Story = { args: { defaultSidebar: 'closed' } };
+
+const barraDeSistema = (
+  <Banner
+    variant="error"
+    actions={<Button variant="outline" size="sm">Dejar de suplantar</Button>}
+  >
+    Estás viendo la aplicación como ana.perez@studiolxd.com.
+  </Banner>
+);
+
+/**
+ * La ranura `banner` va **por encima de todo, incluida la cabecera**: es para el
+ * estado de sesión que no se puede perder de vista. El cuerpo sigue ocupando el
+ * resto de la pantalla y la sidebar sigue midiendo el cien por cien del cuerpo.
+ */
+export const ConBarraDeSistema: Story = {
+  name: 'Con barra de sistema',
+  args: { banner: barraDeSistema },
+};
+
+/**
+ * En móvil la barra también manda: el cajón de la sidebar y su velo arrancan por
+ * debajo de cabecera **más** barra, con el alto que el armazón mide y publica en
+ * `--app-shell-banner-height`.
+ */
+export const ConBarraDeSistemaEnMovil: Story = {
+  name: 'Con barra de sistema (móvil)',
+  globals: { viewport: { value: 'mobile1' } },
+  args: { banner: barraDeSistema },
+};
+
+/**
+ * Test: la barra precede a la cabecera en el DOM y el cuerpo mide lo que queda
+ * de pantalla — `100dvh` menos cabecera menos barra.
+ */
+export const ContratoBarraPorEncimaDeLaCabecera: Story = {
+  name: 'Test — barra por encima de la cabecera',
+  tags: ['!dev'],
+  args: { banner: barraDeSistema },
+  play: async ({ canvasElement }) => {
+    const shell = canvasElement.querySelector('.app-shell') as HTMLElement;
+    const ranura = shell.querySelector('.app-shell__banner') as HTMLElement;
+    const cabecera = shell.querySelector('.app-header') as HTMLElement;
+    const cuerpo = shell.querySelector('.app-shell__body') as HTMLElement;
+    const barraLateral = shell.querySelector('.sidebar') as HTMLElement;
+
+    // Primero la barra, después la cabecera: en el DOM y en la pantalla.
+    await expect(
+      ranura.compareDocumentPosition(cabecera) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+
+    // El alto de la barra lo publica un `ResizeObserver`, que llega en un
+    // render posterior al montaje: se espera al valor, no se busca una vez.
+    await waitFor(async () => {
+      const barra = ranura.getBoundingClientRect();
+      await expect(barra.height).toBeGreaterThan(0);
+      const publicado = getComputedStyle(shell).getPropertyValue('--app-shell-banner-height');
+      await expect(Number.parseFloat(publicado)).toBeCloseTo(barra.height, 0);
+    });
+
+    const barra = ranura.getBoundingClientRect();
+    const chapa = cabecera.getBoundingClientRect();
+    await expect(chapa.top).toBeGreaterThanOrEqual(barra.bottom - 1);
+
+    // El cuerpo se queda con lo que sobra, y la sidebar lo mide entero.
+    const caja = cuerpo.getBoundingClientRect();
+    const alto = shell.getBoundingClientRect().height;
+    await expect(caja.height).toBeCloseTo(alto - barra.height - chapa.height, 0);
+    await expect(barraLateral.getBoundingClientRect().height).toBeCloseTo(caja.height, 0);
+  },
+};
 
 export const Contrato: Story = {
   name: 'Test — el botón de menú pliega y despliega; el asa redimensiona por teclado',
