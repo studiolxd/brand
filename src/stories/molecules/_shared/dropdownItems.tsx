@@ -15,8 +15,13 @@ export type MenuButtonItem = {
    * una acción. Con ella el ítem se pinta a dos líneas —`label` arriba,
    * `description` debajo— y el icono se alinea al bloque entero. Sin ella, el
    * ítem se pinta a una línea, exactamente igual que siempre.
+   *
+   * Admite un **nodo**, no solo texto: la línea de una cuenta lleva a menudo
+   * el correo y, al lado, el papel de esa cuenta (`<Tag>Principal</Tag>`).
+   * Lo que se pase se recorta igual con puntos suspensivos, así que va en una
+   * sola línea: dos renglones ahí desbaratan la altura del ítem.
    */
-  description?: string;
+  description?: ReactNode;
   icon?: ReactNode;
   onClick: () => void;
   disabled?: boolean;
@@ -32,8 +37,8 @@ export type MenuButtonItem = {
 export type MenuLinkItem = {
   type: 'link';
   label: string;
-  /** Segunda línea del ítem, más tenue. Igual que en el ítem `button`. */
-  description?: string;
+  /** Segunda línea del ítem, más tenue. Igual que en el ítem `button`: admite un nodo. */
+  description?: ReactNode;
   icon?: ReactNode;
   href: string;
   disabled?: boolean;
@@ -103,7 +108,7 @@ interface RenderDropdownItemsOptions {
   onRadioValueChange?: (value: string) => void;
 }
 
-function itemContent(label: ReactNode, icon?: ReactNode, description?: string, blockClass?: string) {
+function itemContent(label: ReactNode, icon?: ReactNode, description?: ReactNode, blockClass?: string) {
   // El texto solo se envuelve cuando hay segunda línea: sin ella el ítem
   // conserva su marcado de siempre (label suelto), y con él su caja.
   const text = description && blockClass

@@ -105,6 +105,34 @@ describe('Menu', () => {
     expect(anadir.querySelector('.menu__item-description')).toBeNull();
   });
 
+  it('admite un nodo en la segunda línea y lo pinta dentro de ella', async () => {
+    const user = userEvent.setup();
+    render(
+      <Menu
+        trigger={trigger}
+        items={[
+          {
+            type: 'button',
+            label: 'Ana García',
+            description: (
+              <>
+                ana@studiolxd.com <span data-testid="papel">Principal</span>
+              </>
+            ),
+            onClick: vi.fn(),
+          },
+        ]}
+      />,
+    );
+    await user.click(screen.getByRole('button', { name: 'Opciones' }));
+
+    const cuenta = await screen.findByRole('menuitem', { name: /Ana García/ });
+    const descripcion = cuenta.querySelector('.menu__item-description') as HTMLElement;
+    // El nodo entero vive en la segunda línea, no al lado del nombre.
+    expect(descripcion).toContainElement(screen.getByTestId('papel'));
+    expect(cuenta.querySelector('.menu__item-label')).toHaveTextContent('Ana García');
+  });
+
   it('pinta el ítem de enlace con description a dos líneas', async () => {
     const user = userEvent.setup();
     render(

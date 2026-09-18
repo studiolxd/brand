@@ -41,6 +41,10 @@ Sin `description`, el ítem se pinta **exactamente** como siempre: ni envoltorio
 
 <Canvas of={MenuStories.ItemDeCuenta} />
 
+La segunda línea admite un **nodo**, no solo texto: el correo y, al lado, el papel de esa cuenta (`<Tag>Principal</Tag>`), que es como el selector de cuentas dice cuál es la organización principal sin meterlo dentro del nombre. Va en una sola línea —lo que se pase se recorta igual con puntos suspensivos—, así que ahí no caben dos renglones: desbaratarían la altura del ítem.
+
+<Canvas of={MenuStories.ItemDeCuentaConNodo} />
+
 ## Enlaces del router
 
 `renderLink` recibe `href`, `children`, `className` **y las props que el motor inyecta** (rol, `tabIndex`, manejadores de teclado) y devuelve el enlace del producto. Tiene que propagarlas todas: sin ellas el ítem no se recorre con las flechas ni se activa con Enter.

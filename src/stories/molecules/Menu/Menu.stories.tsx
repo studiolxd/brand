@@ -4,6 +4,7 @@ import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Avatar } from '../../atoms/Avatar/Avatar';
 import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
+import { Tag } from '../../atoms/Tag/Tag';
 import { Menu } from './Menu';
 
 const meta = {
@@ -198,6 +199,40 @@ export const ItemDeCuenta: Story = {
       },
       { type: 'separator' },
       { type: 'button', label: 'Añadir otra cuenta', onClick: () => {} },
+    ],
+  },
+};
+
+/**
+ * La segunda línea admite un **nodo**, no solo texto: aquí el correo y, al
+ * lado, el papel de esa cuenta. Es lo que el selector de cuentas necesita para
+ * decir cuál es la organización principal sin meterlo dentro del nombre.
+ */
+export const ItemDeCuentaConNodo: Story = {
+  name: 'Ítem de cuenta (segunda línea con nodo)',
+  args: {
+    trigger: <Button variant="outline">Cambiar de organización</Button>,
+    align: 'start',
+    minWidth: '20rem',
+    items: [
+      {
+        type: 'button',
+        label: 'Ana García',
+        description: (
+          <>
+            ana.garcia@studiolxd.com <Tag variant="primary">Principal</Tag>
+          </>
+        ),
+        icon: <Avatar name="Ana García" alt="" size="sm" />,
+        onClick: () => {},
+      },
+      {
+        type: 'button',
+        label: 'Ana García (docencia)',
+        description: 'ana.garcia@universidad.example',
+        icon: <Avatar name="Ana García" alt="" size="sm" src="https://i.pravatar.cc/64?img=47" />,
+        onClick: () => {},
+      },
     ],
   },
 };
