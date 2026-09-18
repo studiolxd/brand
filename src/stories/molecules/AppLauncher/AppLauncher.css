@@ -133,13 +133,13 @@
 /* El tile bajo el puntero o el teclado se rellena con la inversión de marca:
    la rejilla de apps es la lista de opciones del panel (Foundations → Colores,
    la excepción declarada). El nombre invierte con el relleno. */
-.app-launcher__tile:hover,
+.app-launcher__tile:not(.app-launcher__tile--disabled):hover,
 .app-launcher__tile:focus-visible {
   background-color: var(--app-launcher-tile-highlighted-bg);
   color: var(--app-launcher-tile-highlighted-color);
 }
 
-.app-launcher__tile:hover .app-launcher__tile-name,
+.app-launcher__tile:not(.app-launcher__tile--disabled):hover .app-launcher__tile-name,
 .app-launcher__tile:focus-visible .app-launcher__tile-name {
   color: inherit;
 }
@@ -152,6 +152,20 @@
 /* La app actual se distingue solo por el peso del nombre — sin borde. */
 .app-launcher__tile--active .app-launcher__tile-name {
   font-weight: var(--app-launcher-tile-name-active-font-weight);
+}
+
+/* ─── Baldosa apagada («próximamente») ────────────────────────
+   Se ve en su sitio, apagada y sin navegación: no es un `<a>`, así que no
+   hay foco que recoger (el tabulador la salta) y el puntero no la rellena
+   —el `:hover` sí alcanza a un `<span>`, de ahí el `:not()` de la regla de
+   arriba—. La tinta apagada es la de un control deshabilitado del sistema:
+   no baja de 3:1 sobre el panel, el mínimo de WCAG 1.4.11. */
+.app-launcher__tile.app-launcher__tile--disabled {
+  cursor: default;
+}
+
+.app-launcher__tile--disabled .app-launcher__tile-name {
+  color: var(--app-launcher-tile-disabled-color);
 }
 
 /* ─── Nombre ─────────────────────────────────────────────── */
@@ -171,7 +185,7 @@
    revés, para seguir leyéndose como una píldora de contraste sobre el
    relleno (no la misma tinta plana que el nombre, que se fundiría con ella).
    Solo se toca la variable de color de la Tag, nunca su CSS. */
-.app-launcher__tile:hover .app-launcher__tile-badge,
+.app-launcher__tile:not(.app-launcher__tile--disabled):hover .app-launcher__tile-badge,
 .app-launcher__tile:focus-visible .app-launcher__tile-badge {
   --tag-info-bg: var(--app-launcher-tile-badge-hover-bg);
   --tag-info-color: var(--app-launcher-tile-badge-hover-color);

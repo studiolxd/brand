@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
+import { expect, userEvent, within } from 'storybook/test';
 import { SiteNav, type SiteNavGroup } from './SiteNav';
 import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
 import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
@@ -99,6 +99,65 @@ export const CuatroGrupos: Story = {
 export const SeisGrupos: Story = {
   name: 'Seis grupos',
   args: { groups: seisGrupos },
+};
+
+/**
+ * La suite anuncia productos antes de abrirlos: el ítem se ve en su sitio pero
+ * **apagado** —sin enlace, sin foco y con la tinta de un control
+ * deshabilitado— y con un distintivo al lado del rótulo que dice en qué estado
+ * está. El texto del distintivo (`badge`) llega ya traducido: es contenido de
+ * ESTE sitio, como el propio rótulo.
+ *
+ * `badge` vale igual en un ítem vivo («Beta» en Localizia). Vale en la
+ * cabecera y en el pie: los dos montan el mismo `SiteNav` con el mismo modelo.
+ */
+export const ConProductosProximamente: Story = {
+  name: 'Con productos próximamente',
+  args: {
+    groups: [
+      groups[0]!,
+      {
+        id: 'productos',
+        label: 'Productos',
+        items: [
+          { id: 'bricks', label: 'Bricks', href: '#bricks' },
+          { id: 'tender', label: 'Tender', href: '#tender' },
+          { id: 'localizia', label: 'Localizia', href: '#localizia', badge: 'Beta' },
+          { id: 'atlas', label: 'Atlas', href: '#atlas', disabled: true, badge: 'Próximamente' },
+          { id: 'forja', label: 'Forja', href: '#forja', disabled: true, badge: 'Próximamente' },
+        ],
+      },
+      groups[2]!,
+    ],
+  },
+};
+
+export const ContratoProximamente: Story = {
+  name: 'Test — ítem apagado con distintivo',
+  tags: ['!dev'],
+  args: ConProductosProximamente.args,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // El apagado no es un enlace: no hay `href` que seguir.
+    const apagado = canvas.getByRole('link', { name: 'Atlas' });
+    await expect(apagado.tagName).toBe('SPAN');
+    await expect(apagado).not.toHaveAttribute('href');
+    await expect(apagado).toHaveAttribute('aria-disabled', 'true');
+    await expect(canvas.getAllByText('Próximamente').length).toBe(2);
+
+    // Y el tabulador no se detiene en él: del ítem vivo anterior se salta al
+    // siguiente enlace de verdad.
+    const anterior = canvas.getByRole('link', { name: 'Localizia' });
+    anterior.focus();
+    await userEvent.tab();
+    await expect(document.activeElement).not.toBe(apagado);
+
+    // El distintivo de un ítem vivo no lo convierte en otra cosa.
+    const vivo = canvas.getByRole('link', { name: 'Localizia' });
+    await expect(vivo.tagName).toBe('A');
+    await expect(canvas.getByText('Beta')).toBeVisible();
+  },
 };
 
 export const ContratoCincoColumnas: Story = {

@@ -32,7 +32,26 @@ export interface LauncherApp {
   id: string;
   name: string;
   url: string;
+  /**
+   * Marca de app nueva. **`badge` lo generaliza**: `isNew` es el mismo
+   * distintivo con un único texto, el del catálogo (`appLauncher.new`). Se
+   * mantiene por compatibilidad y sigue valiendo; con `badge` puesto, manda
+   * `badge`.
+   */
   isNew?: boolean;
+  /**
+   * Producto anunciado y todavía no disponible: la baldosa se ve en su sitio
+   * pero **apagada y sin navegación** — no es un `<a>`, no tiene `href` que
+   * seguir y el tabulador no se detiene en ella.
+   */
+  disabled?: boolean;
+  /**
+   * Texto del distintivo de la baldosa («Próximamente», «Nuevo», «Beta»…).
+   * Llega **ya traducido** desde la aplicación: es contenido de la suite, como
+   * el nombre de la app, no cromo del lanzador. Generaliza `isNew`, que es
+   * este mismo distintivo con el texto del catálogo.
+   */
+  badge?: string;
 }
 
 export interface AppLauncherLabels {
@@ -88,19 +107,43 @@ export interface AppLauncherProps {
 
 function LauncherTile({ app, isCurrent, newLabel }: { app: LauncherApp; isCurrent: boolean; newLabel?: string }) {
   const t = useBrandMessages('appLauncher');
+  // El distintivo es uno solo: `badge` manda y trae su texto; `isNew` sigue
+  // valiendo y lo saca del catálogo. Se lee donde se pinta: una rejilla sin
+  // novedades no exige la clave.
+  const badge = app.badge ?? (app.isNew ? t('new', newLabel) : undefined);
+  const content = (
+    <>
+      <span className="app-launcher__tile-name">{app.name}</span>
+      {badge && (
+        // Apagada, el distintivo va en neutro: una píldora de información
+        // sobre una baldosa que no lleva a ningún sitio se leería como una
+        // novedad disponible.
+        <Tag variant={app.disabled ? 'neutral' : 'info'} className="app-launcher__tile-badge">
+          {badge}
+        </Tag>
+      )}
+    </>
+  );
+
+  // Apagada NO es un `<a>`: no hay destino que seguir. Se pinta como un enlace
+  // inactivo (`role="link"` + `aria-disabled`, donde el atributo sí es válido
+  // y el lector lo anuncia como no disponible) y sin `tabIndex`, así que el
+  // tabulador la salta.
+  if (app.disabled) {
+    return (
+      <span className="app-launcher__tile app-launcher__tile--disabled" role="link" aria-disabled="true">
+        {content}
+      </span>
+    );
+  }
+
   return (
     <a
       href={app.url}
       className={`app-launcher__tile${isCurrent ? ' app-launcher__tile--active' : ''}`}
       aria-current={isCurrent ? 'page' : undefined}
     >
-      <span className="app-launcher__tile-name">{app.name}</span>
-      {app.isNew && (
-        <Tag variant="info" className="app-launcher__tile-badge">
-          {/* Se lee donde se pinta: una rejilla sin novedades no exige la clave. */}
-          {t('new', newLabel)}
-        </Tag>
-      )}
+      {content}
     </a>
   );
 }

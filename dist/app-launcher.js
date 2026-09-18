@@ -10,19 +10,24 @@ import { Fragment as o, jsx as s, jsxs as c } from "react/jsx-runtime";
 import { Popover as l } from "@base-ui/react/popover";
 //#region src/stories/molecules/AppLauncher/AppLauncher.tsx
 function u({ app: t, isCurrent: n, newLabel: i }) {
-	let a = e("appLauncher");
-	return /* @__PURE__ */ c("a", {
+	let a = e("appLauncher"), l = t.badge ?? (t.isNew ? a("new", i) : void 0), u = /* @__PURE__ */ c(o, { children: [/* @__PURE__ */ s("span", {
+		className: "app-launcher__tile-name",
+		children: t.name
+	}), l && /* @__PURE__ */ s(r, {
+		variant: t.disabled ? "neutral" : "info",
+		className: "app-launcher__tile-badge",
+		children: l
+	})] });
+	return t.disabled ? /* @__PURE__ */ s("span", {
+		className: "app-launcher__tile app-launcher__tile--disabled",
+		role: "link",
+		"aria-disabled": "true",
+		children: u
+	}) : /* @__PURE__ */ s("a", {
 		href: t.url,
 		className: `app-launcher__tile${n ? " app-launcher__tile--active" : ""}`,
 		"aria-current": n ? "page" : void 0,
-		children: [/* @__PURE__ */ s("span", {
-			className: "app-launcher__tile-name",
-			children: t.name
-		}), t.isNew && /* @__PURE__ */ s(r, {
-			variant: "info",
-			className: "app-launcher__tile-badge",
-			children: a("new", i)
-		})]
+		children: u
 	});
 }
 function d({ apps: e, currentAppId: t, newLabel: n }) {

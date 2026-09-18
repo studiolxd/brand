@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "49.9.0",
+  "version": "49.10.0",
   "description": "El sistema de diseño de Studio LXD: componentes React, tokens y documentación de la suite SLXD.",
   "repository": {
     "type": "git",
@@ -11,491 +11,612 @@
   "exports": {
     "./accordion": {
       "types": "./dist/_types/atoms/Accordion/Accordion.d.ts",
-      "import": "./dist/accordion.js"
+      "import": "./dist/accordion.js",
+      "default": "./dist/accordion.js"
     },
     "./alert": {
       "types": "./dist/_types/molecules/Alert/Alert.d.ts",
-      "import": "./dist/alert.js"
+      "import": "./dist/alert.js",
+      "default": "./dist/alert.js"
     },
     "./banner": {
       "types": "./dist/_types/molecules/Banner/Banner.d.ts",
-      "import": "./dist/banner.js"
+      "import": "./dist/banner.js",
+      "default": "./dist/banner.js"
     },
     "./app-launcher": {
       "types": "./dist/_types/molecules/AppLauncher/AppLauncher.d.ts",
-      "import": "./dist/app-launcher.js"
+      "import": "./dist/app-launcher.js",
+      "default": "./dist/app-launcher.js"
     },
     "./app-shell": {
       "types": "./dist/_types/sections/AppShell/AppShell.d.ts",
-      "import": "./dist/app-shell.js"
+      "import": "./dist/app-shell.js",
+      "default": "./dist/app-shell.js"
     },
     "./app-header": {
       "types": "./dist/_types/sections/AppHeader/AppHeader.d.ts",
-      "import": "./dist/app-header.js"
+      "import": "./dist/app-header.js",
+      "default": "./dist/app-header.js"
     },
     "./arrow": {
       "types": "./dist/_types/atoms/Arrow/Arrow.d.ts",
-      "import": "./dist/arrow.js"
+      "import": "./dist/arrow.js",
+      "default": "./dist/arrow.js"
     },
     "./command-palette": {
       "types": "./dist/_types/molecules/CommandPalette/CommandPalette.d.ts",
-      "import": "./dist/command-palette.js"
+      "import": "./dist/command-palette.js",
+      "default": "./dist/command-palette.js"
     },
     "./chart": {
       "types": "./dist/_types/organisms/Chart/Chart.d.ts",
-      "import": "./dist/chart.js"
+      "import": "./dist/chart.js",
+      "default": "./dist/chart.js"
     },
     "./conversation-thread": {
       "types": "./dist/_types/organisms/ConversationThread/ConversationThread.d.ts",
-      "import": "./dist/conversation-thread.js"
+      "import": "./dist/conversation-thread.js",
+      "default": "./dist/conversation-thread.js"
     },
     "./data-table": {
       "types": "./dist/_types/organisms/DataTable/DataTable.d.ts",
-      "import": "./dist/data-table.js"
+      "import": "./dist/data-table.js",
+      "default": "./dist/data-table.js"
     },
     "./description-list": {
       "types": "./dist/_types/atoms/DescriptionList/DescriptionList.d.ts",
-      "import": "./dist/description-list.js"
+      "import": "./dist/description-list.js",
+      "default": "./dist/description-list.js"
     },
     "./copyable-value": {
       "types": "./dist/_types/atoms/CopyableValue/CopyableValue.d.ts",
-      "import": "./dist/copyable-value.js"
+      "import": "./dist/copyable-value.js",
+      "default": "./dist/copyable-value.js"
     },
     "./async-multi-select": {
       "types": "./dist/_types/atoms/AsyncMultiSelect/AsyncMultiSelect.d.ts",
-      "import": "./dist/async-multi-select.js"
+      "import": "./dist/async-multi-select.js",
+      "default": "./dist/async-multi-select.js"
     },
     "./async-multi-select-field": {
       "types": "./dist/_types/molecules/AsyncMultiSelectField/AsyncMultiSelectField.d.ts",
-      "import": "./dist/async-multi-select-field.js"
+      "import": "./dist/async-multi-select-field.js",
+      "default": "./dist/async-multi-select-field.js"
     },
     "./async-select": {
       "types": "./dist/_types/atoms/AsyncSelect/AsyncSelect.d.ts",
-      "import": "./dist/async-select.js"
+      "import": "./dist/async-select.js",
+      "default": "./dist/async-select.js"
     },
     "./async-select-field": {
       "types": "./dist/_types/molecules/AsyncSelectField/AsyncSelectField.d.ts",
-      "import": "./dist/async-select-field.js"
+      "import": "./dist/async-select-field.js",
+      "default": "./dist/async-select-field.js"
     },
     "./avatar": {
       "types": "./dist/_types/atoms/Avatar/Avatar.d.ts",
-      "import": "./dist/avatar.js"
+      "import": "./dist/avatar.js",
+      "default": "./dist/avatar.js"
     },
     "./avatar-upload": {
       "types": "./dist/_types/molecules/AvatarUpload/AvatarUpload.d.ts",
-      "import": "./dist/avatar-upload.js"
+      "import": "./dist/avatar-upload.js",
+      "default": "./dist/avatar-upload.js"
     },
     "./brand.css": "./dist/brand.css",
     "./fonts": "./dist/fonts.css",
     "./fonts.css": "./dist/fonts.css",
     "./breadcrumb": {
       "types": "./dist/_types/molecules/Breadcrumb/Breadcrumb.d.ts",
-      "import": "./dist/breadcrumb.js"
+      "import": "./dist/breadcrumb.js",
+      "default": "./dist/breadcrumb.js"
     },
     "./button": {
       "types": "./dist/_types/atoms/Button/Button.d.ts",
-      "import": "./dist/button.js"
+      "import": "./dist/button.js",
+      "default": "./dist/button.js"
     },
     "./calendar": {
       "types": "./dist/_types/molecules/Calendar/Calendar.d.ts",
-      "import": "./dist/calendar.js"
+      "import": "./dist/calendar.js",
+      "default": "./dist/calendar.js"
     },
     "./calendar-planner": {
       "types": "./dist/_types/molecules/CalendarPlanner/CalendarPlanner.d.ts",
-      "import": "./dist/calendar-planner.js"
+      "import": "./dist/calendar-planner.js",
+      "default": "./dist/calendar-planner.js"
     },
     "./calendar-roster": {
       "types": "./dist/_types/molecules/CalendarRoster/CalendarRoster.d.ts",
-      "import": "./dist/calendar-roster.js"
+      "import": "./dist/calendar-roster.js",
+      "default": "./dist/calendar-roster.js"
     },
     "./card": {
       "types": "./dist/_types/molecules/Card/Card.d.ts",
-      "import": "./dist/card.js"
+      "import": "./dist/card.js",
+      "default": "./dist/card.js"
     },
     "./carousel": {
       "types": "./dist/_types/molecules/Carousel/Carousel.d.ts",
-      "import": "./dist/carousel.js"
+      "import": "./dist/carousel.js",
+      "default": "./dist/carousel.js"
     },
     "./highlight": {
       "types": "./dist/_types/sections/Highlight/Highlight.d.ts",
-      "import": "./dist/highlight.js"
+      "import": "./dist/highlight.js",
+      "default": "./dist/highlight.js"
     },
     "./project-card": {
       "types": "./dist/_types/molecules/ProjectCard/ProjectCard.d.ts",
-      "import": "./dist/project-card.js"
+      "import": "./dist/project-card.js",
+      "default": "./dist/project-card.js"
     },
     "./site-footer": {
       "types": "./dist/_types/sections/SiteFooter/SiteFooter.d.ts",
-      "import": "./dist/site-footer.js"
+      "import": "./dist/site-footer.js",
+      "default": "./dist/site-footer.js"
     },
     "./step-marker": {
       "types": "./dist/_types/atoms/StepMarker/StepMarker.d.ts",
-      "import": "./dist/step-marker.js"
+      "import": "./dist/step-marker.js",
+      "default": "./dist/step-marker.js"
     },
     "./steps": {
       "types": "./dist/_types/organisms/Steps/Steps.d.ts",
-      "import": "./dist/steps.js"
+      "import": "./dist/steps.js",
+      "default": "./dist/steps.js"
     },
     "./stepper": {
       "types": "./dist/_types/molecules/Stepper/Stepper.d.ts",
-      "import": "./dist/stepper.js"
+      "import": "./dist/stepper.js",
+      "default": "./dist/stepper.js"
     },
     "./prose": {
       "types": "./dist/_types/molecules/Prose/Prose.d.ts",
-      "import": "./dist/prose.js"
+      "import": "./dist/prose.js",
+      "default": "./dist/prose.js"
     },
     "./table-of-contents": {
       "types": "./dist/_types/molecules/TableOfContents/TableOfContents.d.ts",
-      "import": "./dist/table-of-contents.js"
+      "import": "./dist/table-of-contents.js",
+      "default": "./dist/table-of-contents.js"
     },
     "./docs-search": {
       "types": "./dist/_types/molecules/DocsSearch/DocsSearch.d.ts",
-      "import": "./dist/docs-search.js"
+      "import": "./dist/docs-search.js",
+      "default": "./dist/docs-search.js"
     },
     "./stat-tile": {
       "types": "./dist/_types/molecules/StatTile/StatTile.d.ts",
-      "import": "./dist/stat-tile.js"
+      "import": "./dist/stat-tile.js",
+      "default": "./dist/stat-tile.js"
     },
     "./copy-button": {
       "types": "./dist/_types/molecules/CopyButton/CopyButton.d.ts",
-      "import": "./dist/copy-button.js"
+      "import": "./dist/copy-button.js",
+      "default": "./dist/copy-button.js"
     },
     "./recovery-codes": {
       "types": "./dist/_types/molecules/RecoveryCodes/RecoveryCodes.d.ts",
-      "import": "./dist/recovery-codes.js"
+      "import": "./dist/recovery-codes.js",
+      "default": "./dist/recovery-codes.js"
     },
     "./search-form": {
       "types": "./dist/_types/molecules/SearchForm/SearchForm.d.ts",
-      "import": "./dist/search-form.js"
+      "import": "./dist/search-form.js",
+      "default": "./dist/search-form.js"
     },
     "./confirm-dialog": {
       "types": "./dist/_types/molecules/ConfirmDialog/ConfirmDialog.d.ts",
-      "import": "./dist/confirm-dialog.js"
+      "import": "./dist/confirm-dialog.js",
+      "default": "./dist/confirm-dialog.js"
     },
     "./code-block": {
       "types": "./dist/_types/molecules/CodeBlock/CodeBlock.d.ts",
-      "import": "./dist/code-block.js"
+      "import": "./dist/code-block.js",
+      "default": "./dist/code-block.js"
     },
     "./checkbox": {
       "types": "./dist/_types/atoms/Checkbox/Checkbox.d.ts",
-      "import": "./dist/checkbox.js"
+      "import": "./dist/checkbox.js",
+      "default": "./dist/checkbox.js"
     },
     "./checkbox-field": {
       "types": "./dist/_types/molecules/CheckboxField/CheckboxField.d.ts",
-      "import": "./dist/checkbox-field.js"
+      "import": "./dist/checkbox-field.js",
+      "default": "./dist/checkbox-field.js"
     },
     "./context-menu": {
       "types": "./dist/_types/molecules/ContextMenu/ContextMenu.d.ts",
-      "import": "./dist/context-menu.js"
+      "import": "./dist/context-menu.js",
+      "default": "./dist/context-menu.js"
     },
     "./css": "./dist/brand.css",
     "./date-picker": {
       "types": "./dist/_types/molecules/DatePicker/DatePicker.d.ts",
-      "import": "./dist/date-picker.js"
+      "import": "./dist/date-picker.js",
+      "default": "./dist/date-picker.js"
     },
     "./date-picker-field": {
       "types": "./dist/_types/molecules/DatePickerField/DatePickerField.d.ts",
-      "import": "./dist/date-picker-field.js"
+      "import": "./dist/date-picker-field.js",
+      "default": "./dist/date-picker-field.js"
     },
     "./date-time-field": {
       "types": "./dist/_types/molecules/DateTimeField/DateTimeField.d.ts",
-      "import": "./dist/date-time-field.js"
+      "import": "./dist/date-time-field.js",
+      "default": "./dist/date-time-field.js"
     },
     "./dots-button": {
       "types": "./dist/_types/atoms/DotsButton/DotsButton.d.ts",
-      "import": "./dist/dots-button.js"
+      "import": "./dist/dots-button.js",
+      "default": "./dist/dots-button.js"
     },
     "./empty-state": {
       "types": "./dist/_types/molecules/EmptyState/EmptyState.d.ts",
-      "import": "./dist/empty-state.js"
+      "import": "./dist/empty-state.js",
+      "default": "./dist/empty-state.js"
     },
     "./fieldset": {
       "types": "./dist/_types/atoms/Fieldset/Fieldset.d.ts",
-      "import": "./dist/fieldset.js"
+      "import": "./dist/fieldset.js",
+      "default": "./dist/fieldset.js"
     },
     "./code": {
       "types": "./dist/_types/atoms/Code/Code.d.ts",
-      "import": "./dist/code.js"
+      "import": "./dist/code.js",
+      "default": "./dist/code.js"
     },
     "./figure": {
       "types": "./dist/_types/atoms/Figure/Figure.d.ts",
-      "import": "./dist/figure.js"
+      "import": "./dist/figure.js",
+      "default": "./dist/figure.js"
     },
     "./file-upload": {
       "types": "./dist/_types/atoms/FileUpload/FileUpload.d.ts",
-      "import": "./dist/file-upload.js"
+      "import": "./dist/file-upload.js",
+      "default": "./dist/file-upload.js"
     },
     "./file-upload-field": {
       "types": "./dist/_types/molecules/FileUploadField/FileUploadField.d.ts",
-      "import": "./dist/file-upload-field.js"
+      "import": "./dist/file-upload-field.js",
+      "default": "./dist/file-upload-field.js"
     },
     "./floating-dock": {
       "types": "./dist/_types/sections/FloatingDock/FloatingDock.d.ts",
-      "import": "./dist/floating-dock.js"
+      "import": "./dist/floating-dock.js",
+      "default": "./dist/floating-dock.js"
     },
     "./form": {
       "types": "./dist/_types/molecules/Form/Form.d.ts",
-      "import": "./dist/form.js"
+      "import": "./dist/form.js",
+      "default": "./dist/form.js"
     },
     "./form-field": {
       "types": "./dist/_types/molecules/FormField/FormField.d.ts",
-      "import": "./dist/form-field.js"
+      "import": "./dist/form-field.js",
+      "default": "./dist/form-field.js"
     },
     "./field-row": {
       "types": "./dist/_types/molecules/FieldRow/FieldRow.d.ts",
-      "import": "./dist/field-row.js"
+      "import": "./dist/field-row.js",
+      "default": "./dist/field-row.js"
     },
     "./filter-bar": {
       "types": "./dist/_types/molecules/FilterBar/FilterBar.d.ts",
-      "import": "./dist/filter-bar.js"
+      "import": "./dist/filter-bar.js",
+      "default": "./dist/filter-bar.js"
     },
     "./heading": {
       "types": "./dist/_types/atoms/Heading/Heading.d.ts",
-      "import": "./dist/heading.js"
+      "import": "./dist/heading.js",
+      "default": "./dist/heading.js"
     },
     "./icon": {
       "types": "./dist/_types/atoms/Icon/Icon.d.ts",
-      "import": "./dist/icon.js"
+      "import": "./dist/icon.js",
+      "default": "./dist/icon.js"
     },
     "./image-crop-dialog": {
       "types": "./dist/_types/molecules/ImageCropDialog/ImageCropDialog.d.ts",
-      "import": "./dist/image-crop-dialog.js"
+      "import": "./dist/image-crop-dialog.js",
+      "default": "./dist/image-crop-dialog.js"
     },
     "./input": {
       "types": "./dist/_types/atoms/Input/Input.d.ts",
-      "import": "./dist/input.js"
+      "import": "./dist/input.js",
+      "default": "./dist/input.js"
     },
     "./input-field": {
       "types": "./dist/_types/molecules/InputField/InputField.d.ts",
-      "import": "./dist/input-field.js"
+      "import": "./dist/input-field.js",
+      "default": "./dist/input-field.js"
     },
     "./input-phone": {
       "types": "./dist/_types/atoms/InputPhone/InputPhone.d.ts",
-      "import": "./dist/input-phone.js"
+      "import": "./dist/input-phone.js",
+      "default": "./dist/input-phone.js"
     },
     "./input-phone-field": {
       "types": "./dist/_types/molecules/InputPhoneField/InputPhoneField.d.ts",
-      "import": "./dist/input-phone-field.js"
+      "import": "./dist/input-phone-field.js",
+      "default": "./dist/input-phone-field.js"
     },
     "./label": {
       "types": "./dist/_types/atoms/Label/Label.d.ts",
-      "import": "./dist/label.js"
+      "import": "./dist/label.js",
+      "default": "./dist/label.js"
     },
     "./language-switcher": {
       "types": "./dist/_types/molecules/LanguageSwitcher/LanguageSwitcher.d.ts",
-      "import": "./dist/language-switcher.js"
+      "import": "./dist/language-switcher.js",
+      "default": "./dist/language-switcher.js"
     },
     "./columns": {
       "types": "./dist/_types/atoms/Columns/Columns.d.ts",
-      "import": "./dist/columns.js"
+      "import": "./dist/columns.js",
+      "default": "./dist/columns.js"
     },
     "./stack": {
       "types": "./dist/_types/atoms/Stack/Stack.d.ts",
-      "import": "./dist/stack.js"
+      "import": "./dist/stack.js",
+      "default": "./dist/stack.js"
     },
     "./inline": {
       "types": "./dist/_types/atoms/Inline/Inline.d.ts",
-      "import": "./dist/inline.js"
+      "import": "./dist/inline.js",
+      "default": "./dist/inline.js"
     },
     "./container": {
       "types": "./dist/_types/atoms/Container/Container.d.ts",
-      "import": "./dist/container.js"
+      "import": "./dist/container.js",
+      "default": "./dist/container.js"
     },
     "./site-nav": {
       "types": "./dist/_types/molecules/SiteNav/SiteNav.d.ts",
-      "import": "./dist/site-nav.js"
+      "import": "./dist/site-nav.js",
+      "default": "./dist/site-nav.js"
     },
     "./site-header": {
       "types": "./dist/_types/sections/SiteHeader/SiteHeader.d.ts",
-      "import": "./dist/site-header.js"
+      "import": "./dist/site-header.js",
+      "default": "./dist/site-header.js"
     },
     "./app-root": {
       "types": "./dist/_types/sections/AppRoot/AppRoot.d.ts",
-      "import": "./dist/app-root.js"
+      "import": "./dist/app-root.js",
+      "default": "./dist/app-root.js"
     },
     "./page-intro": {
       "types": "./dist/_types/molecules/PageIntro/PageIntro.d.ts",
-      "import": "./dist/page-intro.js"
+      "import": "./dist/page-intro.js",
+      "default": "./dist/page-intro.js"
     },
     "./hero": {
       "types": "./dist/_types/sections/Hero/Hero.d.ts",
-      "import": "./dist/hero.js"
+      "import": "./dist/hero.js",
+      "default": "./dist/hero.js"
     },
     "./error-text": {
       "types": "./dist/_types/atoms/ErrorText/ErrorText.d.ts",
-      "import": "./dist/error-text.js"
+      "import": "./dist/error-text.js",
+      "default": "./dist/error-text.js"
     },
     "./error-boundary": {
       "types": "./dist/_types/atoms/ErrorBoundary/ErrorBoundary.d.ts",
-      "import": "./dist/error-boundary.js"
+      "import": "./dist/error-boundary.js",
+      "default": "./dist/error-boundary.js"
     },
     "./public-page-shell": {
       "types": "./dist/_types/templates/PublicPageShell/PublicPageShell.d.ts",
-      "import": "./dist/public-page-shell.js"
+      "import": "./dist/public-page-shell.js",
+      "default": "./dist/public-page-shell.js"
     },
     "./onboarding-shell": {
       "types": "./dist/_types/templates/OnboardingShell/OnboardingShell.d.ts",
-      "import": "./dist/onboarding-shell.js"
+      "import": "./dist/onboarding-shell.js",
+      "default": "./dist/onboarding-shell.js"
     },
     "./connector-auth-shell": {
       "types": "./dist/_types/templates/ConnectorAuth/ConnectorAuthShell.d.ts",
-      "import": "./dist/connector-auth-shell.js"
+      "import": "./dist/connector-auth-shell.js",
+      "default": "./dist/connector-auth-shell.js"
     },
     "./connector-request-summary": {
       "types": "./dist/_types/templates/ConnectorAuth/ConnectorRequestSummary.d.ts",
-      "import": "./dist/connector-request-summary.js"
+      "import": "./dist/connector-request-summary.js",
+      "default": "./dist/connector-request-summary.js"
     },
     "./connector-consent-page": {
       "types": "./dist/_types/templates/ConnectorAuth/ConnectorConsentPage.d.ts",
-      "import": "./dist/connector-consent-page.js"
+      "import": "./dist/connector-consent-page.js",
+      "default": "./dist/connector-consent-page.js"
     },
     "./connector-sign-in-page": {
       "types": "./dist/_types/templates/ConnectorAuth/ConnectorSignInPage.d.ts",
-      "import": "./dist/connector-sign-in-page.js"
+      "import": "./dist/connector-sign-in-page.js",
+      "default": "./dist/connector-sign-in-page.js"
     },
     "./connector-external-sign-in-page": {
       "types": "./dist/_types/templates/ConnectorAuth/ConnectorExternalSignInPage.d.ts",
-      "import": "./dist/connector-external-sign-in-page.js"
+      "import": "./dist/connector-external-sign-in-page.js",
+      "default": "./dist/connector-external-sign-in-page.js"
     },
     "./connector-rejection-page": {
       "types": "./dist/_types/templates/ConnectorAuth/ConnectorRejectionPage.d.ts",
-      "import": "./dist/connector-rejection-page.js"
+      "import": "./dist/connector-rejection-page.js",
+      "default": "./dist/connector-rejection-page.js"
     },
     "./not-found-page": {
       "types": "./dist/_types/templates/NotFoundPage/NotFoundPage.d.ts",
-      "import": "./dist/not-found-page.js"
+      "import": "./dist/not-found-page.js",
+      "default": "./dist/not-found-page.js"
     },
     "./error-page": {
       "types": "./dist/_types/templates/ErrorPage/ErrorPage.d.ts",
-      "import": "./dist/error-page.js"
+      "import": "./dist/error-page.js",
+      "default": "./dist/error-page.js"
     },
     "./site-shell": {
       "types": "./dist/_types/sections/SiteShell/SiteShell.d.ts",
-      "import": "./dist/site-shell.js"
+      "import": "./dist/site-shell.js",
+      "default": "./dist/site-shell.js"
     },
     "./legal-footer": {
       "types": "./dist/_types/sections/LegalFooter/LegalFooter.d.ts",
-      "import": "./dist/legal-footer.js"
+      "import": "./dist/legal-footer.js",
+      "default": "./dist/legal-footer.js"
     },
     "./theme-switcher": {
       "types": "./dist/_types/molecules/ThemeSwitcher/ThemeSwitcher.d.ts",
-      "import": "./dist/theme-switcher.js"
+      "import": "./dist/theme-switcher.js",
+      "default": "./dist/theme-switcher.js"
     },
     "./dropdown-field": {
       "types": "./dist/_types/molecules/DropdownField/DropdownField.d.ts",
-      "import": "./dist/dropdown-field.js"
+      "import": "./dist/dropdown-field.js",
+      "default": "./dist/dropdown-field.js"
     },
     "./notification-button": {
       "types": "./dist/_types/molecules/NotificationButton/NotificationButton.d.ts",
-      "import": "./dist/notification-button.js"
+      "import": "./dist/notification-button.js",
+      "default": "./dist/notification-button.js"
     },
     "./notification-panel": {
       "types": "./dist/_types/molecules/NotificationPanel/NotificationPanel.d.ts",
-      "import": "./dist/notification-panel.js"
+      "import": "./dist/notification-panel.js",
+      "default": "./dist/notification-panel.js"
     },
     "./notification-list": {
       "types": "./dist/_types/molecules/NotificationList/NotificationList.d.ts",
-      "import": "./dist/notification-list.js"
+      "import": "./dist/notification-list.js",
+      "default": "./dist/notification-list.js"
     },
     "./link": {
       "types": "./dist/_types/atoms/Link/Link.d.ts",
-      "import": "./dist/link.js"
+      "import": "./dist/link.js",
+      "default": "./dist/link.js"
     },
     "./list": {
       "types": "./dist/_types/atoms/List/List.d.ts",
-      "import": "./dist/list.js"
+      "import": "./dist/list.js",
+      "default": "./dist/list.js"
     },
     "./logo": {
       "types": "./dist/_types/atoms/Logo/index.d.ts",
-      "import": "./dist/logo.js"
+      "import": "./dist/logo.js",
+      "default": "./dist/logo.js"
     },
     "./logomark": {
       "types": "./dist/_types/atoms/Logomark/index.d.ts",
-      "import": "./dist/logomark.js"
+      "import": "./dist/logomark.js",
+      "default": "./dist/logomark.js"
     },
     "./menu-button": {
       "types": "./dist/_types/atoms/MenuButton/MenuButton.d.ts",
-      "import": "./dist/menu-button.js"
+      "import": "./dist/menu-button.js",
+      "default": "./dist/menu-button.js"
     },
     "./close-button": {
       "types": "./dist/_types/atoms/CloseButton/CloseButton.d.ts",
-      "import": "./dist/close-button.js"
+      "import": "./dist/close-button.js",
+      "default": "./dist/close-button.js"
     },
     "./menu": {
       "types": "./dist/_types/molecules/Menu/Menu.d.ts",
-      "import": "./dist/menu.js"
+      "import": "./dist/menu.js",
+      "default": "./dist/menu.js"
     },
     "./modal": {
       "types": "./dist/_types/molecules/Modal/Modal.d.ts",
-      "import": "./dist/modal.js"
+      "import": "./dist/modal.js",
+      "default": "./dist/modal.js"
     },
     "./multi-select": {
       "types": "./dist/_types/atoms/MultiSelect/MultiSelect.d.ts",
-      "import": "./dist/multi-select.js"
+      "import": "./dist/multi-select.js",
+      "default": "./dist/multi-select.js"
     },
     "./multi-select-field": {
       "types": "./dist/_types/molecules/MultiSelectField/MultiSelectField.d.ts",
-      "import": "./dist/multi-select-field.js"
+      "import": "./dist/multi-select-field.js",
+      "default": "./dist/multi-select-field.js"
     },
     "./number-input": {
       "types": "./dist/_types/atoms/NumberInput/NumberInput.d.ts",
-      "import": "./dist/number-input.js"
+      "import": "./dist/number-input.js",
+      "default": "./dist/number-input.js"
     },
     "./number-input-field": {
       "types": "./dist/_types/molecules/NumberInputField/NumberInputField.d.ts",
-      "import": "./dist/number-input-field.js"
+      "import": "./dist/number-input-field.js",
+      "default": "./dist/number-input-field.js"
     },
     "./org-switcher": {
       "types": "./dist/_types/molecules/OrgSwitcher/OrgSwitcher.d.ts",
-      "import": "./dist/org-switcher.js"
+      "import": "./dist/org-switcher.js",
+      "default": "./dist/org-switcher.js"
     },
     "./otp-field": {
       "types": "./dist/_types/molecules/OtpField/OtpField.d.ts",
-      "import": "./dist/otp-field.js"
+      "import": "./dist/otp-field.js",
+      "default": "./dist/otp-field.js"
     },
     "./otp-input": {
       "types": "./dist/_types/atoms/OtpInput/OtpInput.d.ts",
-      "import": "./dist/otp-input.js"
+      "import": "./dist/otp-input.js",
+      "default": "./dist/otp-input.js"
     },
     "./messages": {
       "types": "./dist/_types/messages/index.d.ts",
-      "import": "./dist/messages.js"
+      "import": "./dist/messages.js",
+      "default": "./dist/messages.js"
     },
     "./pagination": {
       "types": "./dist/_types/molecules/Pagination/Pagination.d.ts",
-      "import": "./dist/pagination.js"
+      "import": "./dist/pagination.js",
+      "default": "./dist/pagination.js"
     },
     "./paragraph": {
       "types": "./dist/_types/atoms/Paragraph/Paragraph.d.ts",
-      "import": "./dist/paragraph.js"
+      "import": "./dist/paragraph.js",
+      "default": "./dist/paragraph.js"
     },
     "./password-field": {
       "types": "./dist/_types/molecules/PasswordField/PasswordField.d.ts",
-      "import": "./dist/password-field.js"
+      "import": "./dist/password-field.js",
+      "default": "./dist/password-field.js"
     },
     "./popover": {
       "types": "./dist/_types/atoms/Popover/Popover.d.ts",
-      "import": "./dist/popover.js"
+      "import": "./dist/popover.js",
+      "default": "./dist/popover.js"
     },
     "./consent": {
       "types": "./dist/_types/molecules/Consent/Consent.d.ts",
-      "import": "./dist/consent.js"
+      "import": "./dist/consent.js",
+      "default": "./dist/consent.js"
     },
     "./prev-next-nav": {
       "types": "./dist/_types/molecules/PrevNextNav/PrevNextNav.d.ts",
-      "import": "./dist/prev-next-nav.js"
+      "import": "./dist/prev-next-nav.js",
+      "default": "./dist/prev-next-nav.js"
     },
     "./progress-bar": {
       "types": "./dist/_types/atoms/ProgressBar/ProgressBar.d.ts",
-      "import": "./dist/progress-bar.js"
+      "import": "./dist/progress-bar.js",
+      "default": "./dist/progress-bar.js"
     },
     "./radio": {
       "types": "./dist/_types/atoms/Radio/Radio.d.ts",
-      "import": "./dist/radio.js"
+      "import": "./dist/radio.js",
+      "default": "./dist/radio.js"
     },
     "./radio-field": {
       "types": "./dist/_types/molecules/RadioField/RadioField.d.ts",
-      "import": "./dist/radio-field.js"
+      "import": "./dist/radio-field.js",
+      "default": "./dist/radio-field.js"
     },
     "./scss": "./src/tokens/scss/_index.scss",
     "./scss/legacy": "./src/tokens/scss/_index.legacy.scss",
@@ -504,201 +625,250 @@
     "./scss/molecules/*": "./src/tokens/scss/molecules/_*.scss",
     "./radio-group": {
       "types": "./dist/_types/atoms/RadioGroup/RadioGroup.d.ts",
-      "import": "./dist/radio-group.js"
+      "import": "./dist/radio-group.js",
+      "default": "./dist/radio-group.js"
     },
     "./separator": {
       "types": "./dist/_types/atoms/Separator/Separator.d.ts",
-      "import": "./dist/separator.js"
+      "import": "./dist/separator.js",
+      "default": "./dist/separator.js"
     },
     "./select": {
       "types": "./dist/_types/atoms/Select/Select.d.ts",
-      "import": "./dist/select.js"
+      "import": "./dist/select.js",
+      "default": "./dist/select.js"
     },
     "./select-field": {
       "types": "./dist/_types/molecules/SelectField/SelectField.d.ts",
-      "import": "./dist/select-field.js"
+      "import": "./dist/select-field.js",
+      "default": "./dist/select-field.js"
     },
     "./sheet": {
       "types": "./dist/_types/molecules/Sheet/Sheet.d.ts",
-      "import": "./dist/sheet.js"
+      "import": "./dist/sheet.js",
+      "default": "./dist/sheet.js"
     },
     "./sidebar": {
       "types": "./dist/_types/sections/Sidebar/Sidebar.d.ts",
-      "import": "./dist/sidebar.js"
+      "import": "./dist/sidebar.js",
+      "default": "./dist/sidebar.js"
     },
     "./sidebar-nav": {
       "types": "./dist/_types/molecules/SidebarNav/SidebarNav.d.ts",
-      "import": "./dist/sidebar-nav.js"
+      "import": "./dist/sidebar-nav.js",
+      "default": "./dist/sidebar-nav.js"
     },
     "./skeleton": {
       "types": "./dist/_types/atoms/Skeleton/Skeleton.d.ts",
-      "import": "./dist/skeleton.js"
+      "import": "./dist/skeleton.js",
+      "default": "./dist/skeleton.js"
     },
     "./skip-link": {
       "types": "./dist/_types/atoms/SkipLink/SkipLink.d.ts",
-      "import": "./dist/skip-link.js"
+      "import": "./dist/skip-link.js",
+      "default": "./dist/skip-link.js"
     },
     "./annotation-thread": {
       "types": "./dist/_types/organisms/AnnotationThread/AnnotationThread.d.ts",
-      "import": "./dist/annotation-thread.js"
+      "import": "./dist/annotation-thread.js",
+      "default": "./dist/annotation-thread.js"
     },
     "./tree-view": {
       "types": "./dist/_types/molecules/TreeView/TreeView.d.ts",
-      "import": "./dist/tree-view.js"
+      "import": "./dist/tree-view.js",
+      "default": "./dist/tree-view.js"
     },
     "./slider": {
       "types": "./dist/_types/atoms/Slider/Slider.d.ts",
-      "import": "./dist/slider.js"
+      "import": "./dist/slider.js",
+      "default": "./dist/slider.js"
     },
     "./scroll-area": {
       "types": "./dist/_types/atoms/ScrollArea/ScrollArea.d.ts",
-      "import": "./dist/scroll-area.js"
+      "import": "./dist/scroll-area.js",
+      "default": "./dist/scroll-area.js"
     },
     "./collapsible": {
       "types": "./dist/_types/atoms/Collapsible/Collapsible.d.ts",
-      "import": "./dist/collapsible.js"
+      "import": "./dist/collapsible.js",
+      "default": "./dist/collapsible.js"
     },
     "./toggle-group": {
       "types": "./dist/_types/atoms/ToggleGroup/ToggleGroup.d.ts",
-      "import": "./dist/toggle-group.js"
+      "import": "./dist/toggle-group.js",
+      "default": "./dist/toggle-group.js"
     },
     "./toggle": {
       "types": "./dist/_types/atoms/Toggle/Toggle.d.ts",
-      "import": "./dist/toggle.js"
+      "import": "./dist/toggle.js",
+      "default": "./dist/toggle.js"
     },
     "./star-rating": {
       "types": "./dist/_types/atoms/StarRating/StarRating.d.ts",
-      "import": "./dist/star-rating.js"
+      "import": "./dist/star-rating.js",
+      "default": "./dist/star-rating.js"
     },
     "./sparkline": {
       "types": "./dist/_types/atoms/Sparkline/Sparkline.d.ts",
-      "import": "./dist/sparkline.js"
+      "import": "./dist/sparkline.js",
+      "default": "./dist/sparkline.js"
     },
     "./sortable": {
       "types": "./dist/_types/atoms/Sortable/Sortable.d.ts",
-      "import": "./dist/sortable.js"
+      "import": "./dist/sortable.js",
+      "default": "./dist/sortable.js"
     },
     "./spinner": {
       "types": "./dist/_types/atoms/Spinner/Spinner.d.ts",
-      "import": "./dist/spinner.js"
+      "import": "./dist/spinner.js",
+      "default": "./dist/spinner.js"
     },
     "./switcher": {
       "types": "./dist/_types/atoms/Switcher/Switcher.d.ts",
-      "import": "./dist/switcher.js"
+      "import": "./dist/switcher.js",
+      "default": "./dist/switcher.js"
     },
     "./switcher-field": {
       "types": "./dist/_types/molecules/SwitcherField/SwitcherField.d.ts",
-      "import": "./dist/switcher-field.js"
+      "import": "./dist/switcher-field.js",
+      "default": "./dist/switcher-field.js"
     },
     "./table": {
       "types": "./dist/_types/molecules/Table/Table.d.ts",
-      "import": "./dist/table.js"
+      "import": "./dist/table.js",
+      "default": "./dist/table.js"
     },
     "./tabs": {
       "types": "./dist/_types/atoms/Tabs/Tabs.d.ts",
-      "import": "./dist/tabs.js"
+      "import": "./dist/tabs.js",
+      "default": "./dist/tabs.js"
     },
     "./tag": {
       "types": "./dist/_types/atoms/Tag/Tag.d.ts",
-      "import": "./dist/tag.js"
+      "import": "./dist/tag.js",
+      "default": "./dist/tag.js"
     },
     "./kbd": {
       "types": "./dist/_types/atoms/Kbd/Kbd.d.ts",
-      "import": "./dist/kbd.js"
+      "import": "./dist/kbd.js",
+      "default": "./dist/kbd.js"
     },
     "./text": {
       "types": "./dist/_types/atoms/Text/Text.d.ts",
-      "import": "./dist/text.js"
+      "import": "./dist/text.js",
+      "default": "./dist/text.js"
     },
     "./textarea": {
       "types": "./dist/_types/atoms/Textarea/Textarea.d.ts",
-      "import": "./dist/textarea.js"
+      "import": "./dist/textarea.js",
+      "default": "./dist/textarea.js"
     },
     "./textarea-field": {
       "types": "./dist/_types/molecules/TextareaField/TextareaField.d.ts",
-      "import": "./dist/textarea-field.js"
+      "import": "./dist/textarea-field.js",
+      "default": "./dist/textarea-field.js"
     },
     "./time-field": {
       "types": "./dist/_types/molecules/TimeField/TimeField.d.ts",
-      "import": "./dist/time-field.js"
+      "import": "./dist/time-field.js",
+      "default": "./dist/time-field.js"
     },
     "./time-select": {
       "types": "./dist/_types/atoms/TimeSelect/TimeSelect.d.ts",
-      "import": "./dist/time-select.js"
+      "import": "./dist/time-select.js",
+      "default": "./dist/time-select.js"
     },
     "./toaster": {
       "types": "./dist/_types/molecules/Toast/Toaster.d.ts",
-      "import": "./dist/toaster.js"
+      "import": "./dist/toaster.js",
+      "default": "./dist/toaster.js"
     },
     "./toast": {
       "types": "./dist/_types/molecules/Toast/toast.d.ts",
-      "import": "./dist/toast.js"
+      "import": "./dist/toast.js",
+      "default": "./dist/toast.js"
     },
     "./assistant-message": {
       "types": "./dist/_types/molecules/AssistantMessage/AssistantMessage.d.ts",
-      "import": "./dist/assistant-message.js"
+      "import": "./dist/assistant-message.js",
+      "default": "./dist/assistant-message.js"
     },
     "./number-badge": {
       "types": "./dist/_types/atoms/NumberBadge/NumberBadge.d.ts",
-      "import": "./dist/number-badge.js"
+      "import": "./dist/number-badge.js",
+      "default": "./dist/number-badge.js"
     },
     "./message-bubble": {
       "types": "./dist/_types/atoms/MessageBubble/MessageBubble.d.ts",
-      "import": "./dist/message-bubble.js"
+      "import": "./dist/message-bubble.js",
+      "default": "./dist/message-bubble.js"
     },
     "./chat-shell": {
       "types": "./dist/_types/templates/ChatShell/ChatShell.d.ts",
-      "import": "./dist/chat-shell.js"
+      "import": "./dist/chat-shell.js",
+      "default": "./dist/chat-shell.js"
     },
     "./conversation-list": {
       "types": "./dist/_types/molecules/ConversationList/ConversationList.d.ts",
-      "import": "./dist/conversation-list.js"
+      "import": "./dist/conversation-list.js",
+      "default": "./dist/conversation-list.js"
     },
     "./message-composer": {
       "types": "./dist/_types/molecules/MessageComposer/MessageComposer.d.ts",
-      "import": "./dist/message-composer.js"
+      "import": "./dist/message-composer.js",
+      "default": "./dist/message-composer.js"
     },
     "./tooltip": {
       "types": "./dist/_types/atoms/Tooltip/Tooltip.d.ts",
-      "import": "./dist/tooltip.js"
+      "import": "./dist/tooltip.js",
+      "default": "./dist/tooltip.js"
     },
     "./typing-indicator": {
       "types": "./dist/_types/atoms/TypingIndicator/TypingIndicator.d.ts",
-      "import": "./dist/typing-indicator.js"
+      "import": "./dist/typing-indicator.js",
+      "default": "./dist/typing-indicator.js"
     },
     "./uptime-bars": {
       "types": "./dist/_types/molecules/UptimeBars/UptimeBars.d.ts",
-      "import": "./dist/uptime-bars.js"
+      "import": "./dist/uptime-bars.js",
+      "default": "./dist/uptime-bars.js"
     },
     "./user-message": {
       "types": "./dist/_types/molecules/UserMessage/UserMessage.d.ts",
-      "import": "./dist/user-message.js"
+      "import": "./dist/user-message.js",
+      "default": "./dist/user-message.js"
     },
     "./email": {
       "types": "./dist/_types/email/Email.d.ts",
-      "import": "./dist/email.js"
+      "import": "./dist/email.js",
+      "default": "./dist/email.js"
     },
     "./og": {
       "types": "./dist/_types/og/index.d.ts",
-      "import": "./dist/og.js"
+      "import": "./dist/og.js",
+      "default": "./dist/og.js"
     },
     "./tokens": {
       "types": "./dist/_types/tokens/tokens.d.ts",
-      "import": "./dist/tokens.js"
+      "import": "./dist/tokens.js",
+      "default": "./dist/tokens.js"
     },
     "./tokens.json": "./src/tokens/tokens.json",
     "./brand-assets": {
       "types": "./dist/_types/assets/brand-assets.d.ts",
-      "import": "./dist/brand-assets.js"
+      "import": "./dist/brand-assets.js",
+      "default": "./dist/brand-assets.js"
     },
     "./tokens.css": "./dist/tokens.css",
     "./user-menu": {
       "types": "./dist/_types/molecules/UserMenu/UserMenu.d.ts",
-      "import": "./dist/user-menu.js"
+      "import": "./dist/user-menu.js",
+      "default": "./dist/user-menu.js"
     },
     "./visually-hidden": {
       "types": "./dist/_types/atoms/VisuallyHidden/VisuallyHidden.d.ts",
-      "import": "./dist/visually-hidden.js"
+      "import": "./dist/visually-hidden.js",
+      "default": "./dist/visually-hidden.js"
     },
     "./assets/*": "./dist/assets/*"
   },

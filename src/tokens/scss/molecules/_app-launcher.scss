@@ -38,6 +38,7 @@ $lxd-app-launcher-tile-name-font-weight: 300; // Peso del nombre de app
 $lxd-app-launcher-tile-name-line-height: 1.3; // Interlineado del nombre de app — el de un ítem de Menu, para que la altura case con las listas de opciones del DS
 $lxd-app-launcher-tile-name-color: #111e30; // Color del nombre de app
 $lxd-app-launcher-tile-name-active-font-weight: 500; // Peso del nombre — app actual
+$lxd-app-launcher-tile-disabled-color: #4a4a4a; // Nombre de una app apagada («próximamente»): la tinta de un control deshabilitado sobre superficie clara. No baja de 3:1 sobre el panel —el mínimo de WCAG 1.4.11 para un componente inactivo—, que es el suelo de esta tinta y el motivo de no inventar un gris más claro
 $lxd-app-launcher-trigger-hover-bg: #111e30; // Fondo del disparador (solo icono) bajo el puntero. Antes dejaba una línea de tinta debajo (regla de Colores), pero la línea bajo un glifo suelto —sin texto— se lee como un subrayado del icono; se sustituye por la misma inversión de marca que ya llevan los tiles del panel, la excepción declarada de este componente
 $lxd-app-launcher-trigger-hover-color: #ffffff; // Color del icono de rejilla bajo el puntero — el mismo par que `trigger-hover-bg`
 $lxd-app-launcher-tile-highlighted-bg: #111e30; // Relleno del tile bajo el puntero o el teclado — el del Menu: la inversión de marca. La rejilla de apps es la lista de opciones del panel, excepción declarada a «los estados no se rellenan» (Foundations → Colores)

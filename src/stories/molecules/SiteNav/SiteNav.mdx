@@ -61,6 +61,26 @@ estilo en silencio, y el panel llegó a perder una columna por eso.
 
 Los enlaces son grandes a propósito (`font-size.3`): el panel es una pantalla entera dedicada a navegar, no un menú apretado.
 
+## Productos próximamente
+
+La suite anuncia productos antes de abrirlos. Un `item` con `disabled: true` se ve **en su
+sitio pero apagado**: deja de ser un enlace —no pasa por `renderLink`, no hay destino que
+seguir—, pasa a la tinta de un control deshabilitado (`item-disabled-color`), no pinta la
+línea de hover y el tabulador no se detiene en él.
+
+`badge` es el distintivo que va **al lado del rótulo**, y su texto llega ya traducido: es
+contenido de ESTE sitio, como el propio rótulo. Vale con `disabled` («Próximamente») y sin
+él («Beta»), y sobre un ítem apagado va en neutro en vez de en información: una píldora de
+novedad junto a algo que no lleva a ningún sitio se leería como disponible.
+
+El distintivo es **hermano del enlace**, no hijo suyo. Dos motivos: la línea de hover —que
+en el DS es una línea bajo el elemento, no `text-decoration`— cruzaría también la píldora; y
+el nombre accesible del enlace se queda en el rótulo, sin arrastrar el estado.
+
+Vale igual en la cabecera y en el pie: los dos montan el mismo `SiteNav` con el mismo modelo.
+
+<Canvas of={SiteNavStories.ConProductosProximamente} />
+
 ## Enlaces fuera del sitio
 
 Un `item` puede llevar `target` y `rel`. Con `target="_blank"` el enlace abre en una pestaña nueva y, si no se pasa `rel`, `SiteNav` aplica `rel="noopener noreferrer"` — el caso típico es una página alojada en otro dominio, como el estado del servicio. Ambos llegan también a `renderLink`, así que el enlace del router del producto debe reenviarlos.
@@ -78,6 +98,11 @@ Un `item` puede llevar `target` y `rel`. Con `target="_blank"` el enlace abre en
 - Es un `nav` con nombre (`label`, "Navegación del sitio" por defecto): una región que el lector de pantalla lista y a la que se salta.
 - Las cabeceras de grupo son encabezados normales (`Heading` de nivel 2 y talla 6, sin estilo propio), así el índice se recorre por encabezados igual que una página.
 - La página actual lleva `aria-current="page"`; el peso es un refuerzo, no el único indicio.
+- Un ítem apagado (`disabled`) se pinta como un **enlace inactivo**: un `<span>` con
+  `role="link"` y `aria-disabled="true"` —donde el atributo sí es válido y el lector lo
+  anuncia como no disponible— y **sin `tabIndex`**, de modo que el tabulador lo salta. Su
+  tinta es la de un control deshabilitado del sistema (`color.disabled.text-on-*`), que no
+  baja de 3:1 sobre el lienzo: el mínimo de WCAG 1.4.11 para un componente inactivo.
 
 ## Internacionalización
 
@@ -87,7 +112,7 @@ El índice emite **un** texto por su cuenta y es **cromo**: sale de
 | | Textos | De dónde salen | Por qué |
 | --- | --- | --- | --- |
 | **Cromo** | `label` | `siteNav.label` del proveedor | Nombra la región de navegación, no el sitio. |
-| **Contenido** | los rótulos de los grupos y de sus enlaces | `groups` | Son el índice de ESTE sitio. |
+| **Contenido** | los rótulos de los grupos y de sus enlaces, y el `badge` de cada ítem | `groups` | Son el índice de ESTE sitio, y el estado de cada producto («Próximamente», «Beta») lo sabe el sitio, que lo manda ya traducido. |
 
 ```tsx
 <BrandMessagesProvider

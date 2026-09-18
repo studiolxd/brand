@@ -65,6 +65,25 @@ El disparador de solo icono no cambia: conserva su línea.
 
 <Canvas of={AppLauncherStories.ConAppActual} />
 
+## Productos próximamente
+
+La suite anuncia productos antes de abrirlos. Una app con `disabled: true` se ve **en su
+sitio pero apagada**: la baldosa deja de ser un `<a>` —no hay destino que seguir—, pasa a la
+tinta de un control deshabilitado (`tile-disabled-color`), no se rellena bajo el puntero y el
+tabulador no se detiene en ella.
+
+`badge` es el distintivo de la baldosa y su texto llega **ya traducido** desde la aplicación:
+es contenido de la suite, como el nombre de la app, no cromo del lanzador (ver
+«Internacionalización»). Vale con `disabled` («Próximamente») y sin él («Beta»), y sobre una
+baldosa apagada va en neutro en vez de en información: una píldora de novedad sobre algo que
+no lleva a ningún sitio se leería como disponible.
+
+`badge` **generaliza `isNew`**, que es este mismo distintivo con el texto del catálogo
+(`appLauncher.new`). `isNew` sigue funcionando y no se retira; con los dos puestos, manda
+`badge`.
+
+<Canvas of={AppLauncherStories.ConProductosProximamente} />
+
 ## Pocas apps
 
 <Canvas of={AppLauncherStories.PocasApps} />
@@ -79,7 +98,7 @@ de ser obligatoria y queda como anulación puntual.
 | | Textos | De dónde salen | Por qué |
 | --- | --- | --- | --- |
 | **Cromo** | `labels.open`, `labels.new`, `labels.title` | `appLauncher.*` del proveedor | Describen el mueble —el botón que lo abre, el diálogo y la marca de novedad—, no su contenido. |
-| **Contenido** | el `name` de cada app | `apps`, de la aplicación | Las apps de la suite se llaman como se llaman, en cualquier idioma. |
+| **Contenido** | el `name` y el `badge` de cada app | `apps`, de la aplicación | Las apps de la suite se llaman como se llaman, en cualquier idioma; y su estado («Próximamente», «Beta») lo sabe la aplicación, que lo manda ya traducido. `isNew` es la excepción, y por eso su texto sí es cromo: no trae texto, solo enciende el del catálogo. |
 | **Ni una cosa ni otra** | `labels.trigger` | prop, sin catálogo | No es un texto de más: su **presencia** decide la cara del disparador (solo icono, o icono con rótulo), y un texto de catálogo está siempre presente. Es una decisión de maqueta del sitio donde se monta. |
 
 ```tsx
@@ -114,15 +133,6 @@ coincidiría con el fondo ambiente, así que pasa a lavanda (`color.accent-1`) �
 activo del sistema, el mismo que usan `SidebarNav` y `Table`. El disparador de la barra, que no es
 una opción de la lista, conserva su línea de tinta (`hover-line-*`), blanca en oscuro.
 
----
-
-## Color de dato
-
-El cuadrado de icono de cada tile usa `style={{ backgroundColor: app.accent }}`: el color de marca
-de cada app externa llega por datos (`LauncherApp.accent`), no del sistema de tokens del DS. Es la
-única propiedad de color de este componente que no pasa por un token — deliberado, documentado en
-la prop.
-
 ## Accesibilidad
 
 - El disparador siempre anuncia `aria-haspopup="dialog"`: en `'popover'` lo pone
@@ -130,6 +140,11 @@ la prop.
   no está gestionado por Base UI (el `Dialog` que abre es `Modal`, montado aparte).
 - El nombre accesible del disparador es `labels.open` cuando es solo icono, y el propio texto
   visible (`labels.trigger`) cuando lo hay — nunca los dos a la vez.
+- Una baldosa apagada (`disabled`) se pinta como un **enlace inactivo**: un `<span>` con
+  `role="link"` y `aria-disabled="true"` —donde el atributo sí es válido y el lector lo
+  anuncia como no disponible— y **sin `tabIndex`**, de modo que el tabulador la salta. Su
+  tinta es la de un control deshabilitado del sistema (`color.disabled.text-on-*`), que no
+  baja de 3:1 sobre el panel: el mínimo de WCAG 1.4.11 para un componente inactivo.
 - En `'modal'`, el foco atrapado, el cierre con Escape, el aspa y el título los pone `Modal`
   (ver su doc). En `'popover'`, el panel va en un `Portal` de Base UI: vive fuera del árbol
   de la página, así que ningún selector CSS descendiente (`.surface-dark .app-launcher__…`)

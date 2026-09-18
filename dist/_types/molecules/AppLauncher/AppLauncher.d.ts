@@ -23,7 +23,26 @@ export interface LauncherApp {
     id: string;
     name: string;
     url: string;
+    /**
+     * Marca de app nueva. **`badge` lo generaliza**: `isNew` es el mismo
+     * distintivo con un único texto, el del catálogo (`appLauncher.new`). Se
+     * mantiene por compatibilidad y sigue valiendo; con `badge` puesto, manda
+     * `badge`.
+     */
     isNew?: boolean;
+    /**
+     * Producto anunciado y todavía no disponible: la baldosa se ve en su sitio
+     * pero **apagada y sin navegación** — no es un `<a>`, no tiene `href` que
+     * seguir y el tabulador no se detiene en ella.
+     */
+    disabled?: boolean;
+    /**
+     * Texto del distintivo de la baldosa («Próximamente», «Nuevo», «Beta»…).
+     * Llega **ya traducido** desde la aplicación: es contenido de la suite, como
+     * el nombre de la app, no cromo del lanzador. Generaliza `isNew`, que es
+     * este mismo distintivo con el texto del catálogo.
+     */
+    badge?: string;
 }
 export interface AppLauncherLabels {
     /**
