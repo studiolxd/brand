@@ -787,6 +787,7 @@ var e = {
 	"--empty-state-description-font-family": "\"Google Sans Flex\", system-ui, sans-serif",
 	"--empty-state-description-font-size": "1rem",
 	"--empty-state-description-color": "#4a4a4a",
+	"--fieldset-legend-space-after": "0.5em",
 	"--figure-media-bg": "#f2f2f2",
 	"--figure-caption-font-size": "0.875rem",
 	"--figure-caption-line-height": "1.5",

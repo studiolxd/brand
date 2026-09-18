@@ -7,6 +7,19 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.7.0] — 2026-09-18
+
+> **Minor.** El legend de `Fieldset` gana aire por debajo, igual que un `Heading` suelto.
+
+### El legend ya no queda pegado al primer campo
+
+`Fieldset` pintaba el `legend` con tipografía de heading pero sin separación con lo que
+venía debajo: el título quedaba pegado al primer campo. `.fieldset__legend` gana
+`margin-block-end: var(--fieldset-legend-space-after)` (`fieldset.legend-space-after` →
+`{text.heading.space-after}`, el mismo `em` que deja un `Heading` suelto, así que crece con
+el nivel/tamaño del legend en lugar de ser una cifra fija). El aire entre los campos del
+grupo sigue siendo cosa del consumidor, como hasta ahora.
+
 ## [49.6.0] — 2026-09-18
 
 > **Minor.** El icono deja de tener talla propia dentro de un enlace y de un botón: mide el texto
