@@ -115,9 +115,24 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
  * (`data-*`, `aria-*`, `id`…) se reenvía al `<div>`.
  */
 export declare const Card: import("react").ForwardRefExoticComponent<CardProps & import("react").RefAttributes<HTMLElement>>;
-export type CardPartProps = React.ComponentPropsWithoutRef<'div'>;
+export interface CardPartProps extends React.ComponentPropsWithoutRef<'div'> {
+    /**
+     * Declara la subparte como **zona interactiva** de una tarjeta `linkOverlay`:
+     * sube por encima de la capa del enlace (`position: relative` + un apilado
+     * interno de 1) para que lo que lleve dentro se pueda pulsar. Sin ella, la
+     * capa del título cubre el bloque entero y se queda con la pulsación — que
+     * es lo que se quiere en todo lo que es solo texto.
+     *
+     * No hace falta en `CardAction` ni en `CardSelection`, que ya son ranuras
+     * interactivas por definición y suben solas. Fuera de `linkOverlay` no hace
+     * nada: no hay capa a la que ganar.
+     *
+     * @default false
+     */
+    interactive?: boolean;
+}
 /** Fila superior: el bloque de título a un lado y la acción al otro. */
-export declare const CardHeader: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+export declare const CardHeader: import("react").ForwardRefExoticComponent<CardPartProps & import("react").RefAttributes<HTMLDivElement>>;
 export interface CardTitleProps extends Omit<React.ComponentPropsWithoutRef<'h3'>, 'children'> {
     /**
      * Nivel semántico del encabezado en el esquema del documento. Default: `3`
@@ -185,8 +200,40 @@ export interface CardActionProps extends CardPartProps {
  * sus eventos de la tarjeta-enlace que la contiene: ver `isolate`.
  */
 export declare const CardAction: import("react").ForwardRefExoticComponent<CardActionProps & import("react").RefAttributes<HTMLDivElement>>;
+export interface CardSelectionProps extends React.ComponentPropsWithoutRef<'div'> {
+    /**
+     * Detiene la propagación del clic: marcar la casilla marca la casilla y no
+     * llega al manejador que la tarjeta o la fila tengan puesto más arriba.
+     *
+     * A diferencia de `CardAction`, **no cancela la acción por defecto** aunque
+     * la ranura cuelgue de un enlace: la acción por defecto es justo lo que
+     * marca la casilla, así que cancelarla la dejaría sin marcar. Lo que impide
+     * que se navegue es la capa —dentro de `linkOverlay` la ranura queda por
+     * encima de ella y el enlace ni se entera—; una tarjeta envuelta a mano en un
+     * `<Link>` con la casilla dentro no tiene arreglo aquí, porque no lo tiene:
+     * es un control dentro de un enlace, y se escribe con `linkOverlay`.
+     *
+     * @default true
+     */
+    isolate?: boolean;
+}
+/**
+ * Ranura de **selección**: la casilla (o el radio) con que se elige la tarjeta
+ * dentro de una lista. Va al principio de la cabecera, antes del título, que es
+ * donde se busca al repasar una columna de tarjetas.
+ *
+ * Es la pieza que faltaba para la tarjeta que **navega y se selecciona**: en
+ * una `Card linkOverlay`, la capa del enlace del título cubre el bloque entero
+ * y se traga la pulsación de cualquier control que no la gane; esta ranura sube
+ * por encima de ella (`position: relative` + apilado interno de 1) y conserva su
+ * propio foco de teclado, en su sitio del orden de tabulación.
+ *
+ * No se confunde con `selectable`, que es lo contrario: ahí la tarjeta **entera**
+ * es la opción y nada más dentro puede ser interactivo.
+ */
+export declare const CardSelection: import("react").ForwardRefExoticComponent<CardSelectionProps & import("react").RefAttributes<HTMLDivElement>>;
 /** Cuerpo de la tarjeta. */
-export declare const CardContent: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+export declare const CardContent: import("react").ForwardRefExoticComponent<CardPartProps & import("react").RefAttributes<HTMLDivElement>>;
 export interface CardFooterProps extends CardPartProps {
     /**
      * `row` (por defecto): las acciones en fila **en escritorio**; por debajo de

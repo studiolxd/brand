@@ -37,11 +37,29 @@ function d(e) {
 	return a;
 }
 function f(e) {
+	let t = (e.getDay() + 6) % 7;
+	return new Date(e.getFullYear(), e.getMonth(), e.getDate() - t);
+}
+function p(e, t) {
+	let n = f(e);
+	return new Date(n.getFullYear(), n.getMonth(), n.getDate() + t * 7);
+}
+function m(e, t) {
+	let n = f(e);
+	return Array.from({ length: 7 }, (e, r) => {
+		let i = new Date(n.getFullYear(), n.getMonth(), n.getDate() + r);
+		return {
+			date: i,
+			outside: t ? !l(i, t) : !1
+		};
+	});
+}
+function h(e) {
 	let t = [];
 	for (let n = 0; n < e.length; n += 7) t.push(e.slice(n, n + 7));
 	return t;
 }
-function p(e, t = "narrow") {
+function g(e, t = "narrow") {
 	let n = new Intl.DateTimeFormat(e, { weekday: t }), r = new Intl.DateTimeFormat(e, { weekday: "long" });
 	return Array.from({ length: 7 }, (e, t) => {
 		let i = new Date(2025, 0, 6 + t);
@@ -51,7 +69,7 @@ function p(e, t = "narrow") {
 		};
 	});
 }
-function m({ block: e, rowModifier: t, weekdays: n }) {
+function _({ block: e, rowModifier: t, weekdays: n }) {
 	return /* @__PURE__ */ o("div", {
 		role: "row",
 		className: [`${e}__row`, t && `${e}__row--${t}`].filter(Boolean).join(" "),
@@ -66,7 +84,7 @@ function m({ block: e, rowModifier: t, weekdays: n }) {
 		}, n))
 	});
 }
-function h({ block: t, title: n, titleId: r, navigable: i = !0, previousLabel: a, nextLabel: c, prevDisabled: l = !1, nextDisabled: u = !1, onPrev: d, onNext: f, chevronSize: p, onTitleClick: m, titleExpanded: h, titleRef: g, children: _ }) {
+function v({ block: t, title: n, titleId: r, navigable: i = !0, previousLabel: a, nextLabel: c, prevDisabled: l = !1, nextDisabled: u = !1, onPrev: d, onNext: f, chevronSize: p, onTitleClick: m, titleExpanded: h, titleRef: g, children: _ }) {
 	return /* @__PURE__ */ s("div", {
 		className: `${t}__header`,
 		children: [
@@ -110,21 +128,21 @@ function h({ block: t, title: n, titleId: r, navigable: i = !0, previousLabel: a
 		]
 	});
 }
-function g(e, t, n) {
+function y(e, t, n) {
 	return t && e < t ? t : n && e > n ? n : e;
 }
-function _(e, t) {
+function b(e, t) {
 	return new Date(e.getFullYear(), e.getMonth(), e.getDate() + t);
 }
-function v(e, t) {
+function x(e, t) {
 	let n = new Date(e.getFullYear(), e.getMonth() + t, 1), r = new Date(n.getFullYear(), n.getMonth() + 1, 0).getDate();
 	return new Date(n.getFullYear(), n.getMonth(), Math.min(e.getDate(), r));
 }
-function y(e) {
+function S(e) {
 	return `${e.getFullYear()}-${e.getMonth()}-${e.getDate()}`;
 }
-function b({ month: e, onMonthChange: o, selected: s, onActivate: u, minDate: d, maxDate: f }) {
-	let [p, m] = a(() => s ?? /* @__PURE__ */ new Date()), h = i(/* @__PURE__ */ new Map()), b = i(!1), x = r(() => {
+function C({ month: e, onMonthChange: o, selected: s, onActivate: u, minDate: d, maxDate: f }) {
+	let [p, m] = a(() => s ?? /* @__PURE__ */ new Date()), h = i(/* @__PURE__ */ new Map()), g = i(!1), _ = r(() => {
 		if (l(p, e)) return p;
 		if (s && l(s, e)) return s;
 		let t = /* @__PURE__ */ new Date();
@@ -135,42 +153,42 @@ function b({ month: e, onMonthChange: o, selected: s, onActivate: u, minDate: d,
 		s
 	]);
 	n(() => {
-		b.current && (b.current = !1, h.current.get(y(x))?.focus());
-	}, [x]);
-	let S = t((t) => {
-		let n = g(t, d, f);
-		b.current = !0, m(n), l(n, e) || o(new Date(n.getFullYear(), n.getMonth(), 1));
+		g.current && (g.current = !1, h.current.get(S(_))?.focus());
+	}, [_]);
+	let v = t((t) => {
+		let n = y(t, d, f);
+		g.current = !0, m(n), l(n, e) || o(new Date(n.getFullYear(), n.getMonth(), 1));
 	}, [
 		f,
 		d,
 		e,
 		o
 	]), C = t((e) => {
-		let t = x, n = null;
+		let t = _, n = null;
 		switch (e.key) {
 			case "ArrowLeft":
-				n = _(t, -1);
+				n = b(t, -1);
 				break;
 			case "ArrowRight":
-				n = _(t, 1);
+				n = b(t, 1);
 				break;
 			case "ArrowUp":
-				n = _(t, -7);
+				n = b(t, -7);
 				break;
 			case "ArrowDown":
-				n = _(t, 7);
+				n = b(t, 7);
 				break;
 			case "Home":
-				n = _(t, -((t.getDay() + 6) % 7));
+				n = b(t, -((t.getDay() + 6) % 7));
 				break;
 			case "End":
-				n = _(t, 6 - (t.getDay() + 6) % 7);
+				n = b(t, 6 - (t.getDay() + 6) % 7);
 				break;
 			case "PageUp":
-				n = v(t, e.shiftKey ? -12 : -1);
+				n = x(t, e.shiftKey ? -12 : -1);
 				break;
 			case "PageDown":
-				n = v(t, e.shiftKey ? 12 : 1);
+				n = x(t, e.shiftKey ? 12 : 1);
 				break;
 			case "Enter":
 			case " ":
@@ -178,22 +196,85 @@ function b({ month: e, onMonthChange: o, selected: s, onActivate: u, minDate: d,
 				return;
 			default: return;
 		}
-		e.preventDefault(), S(n);
+		e.preventDefault(), v(n);
 	}, [
-		x,
-		S,
+		_,
+		v,
 		u
 	]), w = t((e) => (t) => {
-		let n = y(e);
+		let n = S(e);
 		t ? h.current.set(n, t) : h.current.delete(n);
 	}, []);
 	return {
-		activeDate: x,
-		isTabbable: t((e) => c(e, x), [x]),
+		activeDate: _,
+		isTabbable: t((e) => c(e, _), [_]),
 		cellRef: w,
 		onKeyDown: C,
 		onCellFocus: t((e) => m(e), [])
 	};
 }
+function w({ weekStart: e, onWeekChange: o, onActivate: s, minDate: l, maxDate: u }) {
+	let [d, p] = a(() => /* @__PURE__ */ new Date()), m = i(/* @__PURE__ */ new Map()), h = i(!1), g = r(() => f(e), [e]), _ = r(() => {
+		if (c(f(d), g)) return d;
+		let e = /* @__PURE__ */ new Date();
+		return c(f(e), g) ? e : g;
+	}, [d, g]);
+	n(() => {
+		h.current && (h.current = !1, m.current.get(S(_))?.focus());
+	}, [_]);
+	let v = t((e) => {
+		let t = y(e, l, u);
+		h.current = !0, p(t), c(f(t), g) || o(f(t));
+	}, [
+		u,
+		l,
+		o,
+		g
+	]), x = t((e) => {
+		let t = _, n = null;
+		switch (e.key) {
+			case "ArrowLeft":
+			case "ArrowUp":
+				n = b(t, -1);
+				break;
+			case "ArrowRight":
+			case "ArrowDown":
+				n = b(t, 1);
+				break;
+			case "Home":
+				n = f(t);
+				break;
+			case "End":
+				n = b(f(t), 6);
+				break;
+			case "PageUp":
+				n = b(t, -7);
+				break;
+			case "PageDown":
+				n = b(t, 7);
+				break;
+			case "Enter":
+			case " ":
+				s && (e.preventDefault(), s(t));
+				return;
+			default: return;
+		}
+		e.preventDefault(), v(n);
+	}, [
+		_,
+		v,
+		s
+	]), C = t((e) => (t) => {
+		let n = S(e);
+		t ? m.current.set(n, t) : m.current.delete(n);
+	}, []);
+	return {
+		activeDate: _,
+		isTabbable: t((e) => c(e, _), [_]),
+		cellRef: C,
+		onKeyDown: x,
+		onCellFocus: t((e) => p(e), [])
+	};
+}
 //#endregion
-export { l as a, u as c, c as i, b as l, d as n, h as o, p as r, m as s, f as t };
+export { c as a, _ as c, f as d, C as f, g as i, u as l, d as n, l as o, w as p, m as r, v as s, h as t, p as u };

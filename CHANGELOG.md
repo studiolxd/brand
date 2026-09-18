@@ -7,6 +7,78 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.9.0] — 2026-09-18
+
+> **Minor.** Tres huecos del sistema: la segunda línea del ítem de menú admite un nodo, el
+> planificador gana la vista de semana, y la tarjeta-enlace admite selección y acciones sobre
+> su capa.
+
+### La segunda línea del ítem de menú admite un nodo
+
+`description` —la segunda línea de un ítem `button` o `link`— era `string`: el selector de
+cuentas podía poner el correo debajo del nombre, pero no decir cuál es la **organización
+principal** sin meter esa palabra dentro del texto. Ahora es `ReactNode`, así que la línea lleva
+el correo y, al lado, el `Tag` del papel de esa cuenta.
+
+Sigue siendo una sola línea —se recorta con puntos suspensivos igual que antes—: dos renglones
+ahí desbaratan la altura del ítem.
+
+### El planificador gana la vista de semana
+
+`CalendarPlanner` solo sabía pintar el mes. `view="week"` cambia la parrilla por **siete columnas
+con el día completo**: el nombre y el número del día en la cabecera de cada columna y, debajo, los
+eventos de ese día —con la hora delante de los que la tengan y los de día entero arriba—.
+
+- **La lista de eventos es la misma.** `events` no cambia; la hora sale de la propia fecha (un
+  evento a las 00:00 es de día entero) y `allDay` lo dice de forma explícita cuando la fecha no
+  basta.
+- **La columna no trunca.** No hay «+N más» en la semana: `maxItemsPerDay` es cosa del mes, donde
+  la celda mide una fila de siete. Aquí la columna tiene alto de sobra y esconder eventos taparía
+  justo lo que se viene a leer.
+- **Las flechas pasan a ser de semana** y `onWeekChange` avisa con el **lunes** de la nueva.
+- **`viewSwitcher`** pinta el conmutador mes/semana en la cabecera (un `ToggleGroup` exclusivo).
+  Va **apagado** por defecto: un planificador ya montado no gana botones por actualizar el
+  paquete. La vista puede ir controlada (`view` + `onViewChange`) o dejarse al componente
+  (`defaultView`).
+- **Cambiar de vista no teletransporta**: se mueve lo justo para que las dos vistas se toquen. Si
+  la semana guardada no pisa el mes visible, al ir a la semana se abre la del día 1; al volver al
+  mes, si el mes visible no pisa la semana, se abre el mes de su lunes. Una semana a caballo de
+  dos meses pisa los dos, así que ir y volver deja al usuario donde estaba.
+
+El teclado de la semana vive en `_shared/calendarGrid` junto al del mes: la misma rejilla, con una
+sola fila. Los cinco textos nuevos (`previousWeekLabel`, `nextWeekLabel`, `monthViewLabel`,
+`weekViewLabel`, `viewSwitcherLabel`) van en **props con default castellano** y no en el catálogo:
+una clave obligatoria más en `CalendarPlannerMessages` dejaría sin compilar a toda aplicación que
+ya lo tiene montado, y esto es un minor. Pasarán al catálogo en el próximo major.
+
+Tokens nuevos: `calendar-planner.week-cell-min-height` (y sus `sm-`/`lg-`), `weekday-gap`,
+`event-time-font-size`, `event-time-color` y su par oscuro.
+
+### La tarjeta-enlace admite selección y acciones sobre su capa
+
+`Card linkOverlay` pinta la capa del enlace del título (`::after`) por encima de todo el bloque,
+así que una casilla de selección dentro del `CardHeader` **dejaba de pulsarse** — y de ahí venía
+el apaño del consumidor: envolver la tarjeta en un `<Link>` con un botón dentro, que no es HTML
+válido y deja un enlace cuyo nombre se traga la tarjeta entera.
+
+Llega **`CardSelection`**, la ranura de la casilla (la primera de la cabecera, que pasa a ser una
+rejilla de tres columnas: selección, texto y acción), y las zonas interactivas se **declaran**:
+
+| Zona | Cómo se declara |
+| --- | --- |
+| `CardAction` | sola: es una ranura interactiva por definición |
+| `CardSelection` | sola: ídem |
+| Cualquier otra subparte | `interactive` en ella (`<CardFooter interactive>`) |
+
+Lo declarado sube por encima de la capa (`position: relative` y un apilado interno de 1, que solo
+compite consigo mismo). Lo que es solo texto se queda **debajo a propósito**: ahí la capa es lo
+que hace que pulsar en cualquier punto abra el detalle. El teclado no depende de la capa: las tres
+paradas —casilla, enlace del título y menú— siguen en el orden en que se leen.
+
+`CardSelection` corta la propagación como `CardAction` pero **no** la acción por defecto, ni
+colgando de un enlace: esa acción es justo la que marca la casilla. Lo que impide navegar es la
+capa.
+
 ## [49.8.1] — 2026-09-18
 
 > **Patch.** `AppShell` ya no revienta sin `ResizeObserver`.

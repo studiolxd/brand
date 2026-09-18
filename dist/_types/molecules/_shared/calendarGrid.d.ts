@@ -13,6 +13,17 @@ export declare function shiftMonth(month: Date, delta: number): Date;
  * semana. Solo se completan las semanas que el mes realmente ocupa.
  */
 export declare function getCalendarDays(month: Date): CalendarDay[];
+/** Lunes de la semana a la que pertenece `date`. */
+export declare function startOfWeek(date: Date): Date;
+/** Lunes de la semana desplazada `delta` semanas respecto a la de `date`. */
+export declare function shiftWeek(date: Date, delta: number): Date;
+/**
+ * Los siete días de la semana de `date`, de lunes a domingo. `outside` sale de
+ * comparar con `month` cuando se pasa —la vista de semana atraviesa el cambio
+ * de mes—; sin él, ningún día es de fuera: la semana es la unidad y no cuelga
+ * de ningún mes.
+ */
+export declare function getWeekDays(date: Date, month?: Date): CalendarDay[];
 /** Agrupa días en semanas de 7. */
 export declare function chunkWeeks(days: CalendarDay[]): CalendarDay[][];
 /**
@@ -116,3 +127,24 @@ export interface CalendarGridNavigation {
  * Mayús de año.
  */
 export declare function useCalendarGridNavigation({ month, onMonthChange, selected, onActivate, minDate, maxDate, }: UseCalendarGridNavigationOptions): CalendarGridNavigation;
+export interface UseCalendarWeekNavigationOptions {
+    /** Lunes de la semana visible */
+    weekStart: Date;
+    /** Se llama cuando el teclado saca el foco fuera de la semana visible */
+    onWeekChange: (weekStart: Date) => void;
+    /** Activación de la columna enfocada con Enter/Espacio */
+    onActivate?: (date: Date) => void;
+    minDate?: Date;
+    maxDate?: Date;
+}
+/**
+ * El mismo roving tabindex del mes sobre las siete columnas de la semana: una
+ * sola parada de tabulador, flechas para moverse de día —y la semana cambia
+ * sola al salir por cualquiera de los dos extremos—, Inicio/Fin para el lunes
+ * y el domingo, RePág/AvPág para la semana anterior y la siguiente.
+ *
+ * Las flechas vertical y horizontal hacen lo mismo aquí: la semana es **una**
+ * fila de celdas, así que arriba y abajo no llevan a ninguna otra parte y se
+ * quedan recorriendo los días, como ↑/↓ en una lista.
+ */
+export declare function useCalendarWeekNavigation({ weekStart, onWeekChange, onActivate, minDate, maxDate, }: UseCalendarWeekNavigationOptions): CalendarGridNavigation;

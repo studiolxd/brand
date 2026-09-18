@@ -16,7 +16,20 @@ export interface PlannerEvent {
     date: Date;
     label: string;
     variant?: TagVariant;
+    /**
+     * El evento dura todo el día: la vista de semana lo pinta **sin hora**, el
+     * primero de la columna. Sin ella se deriva de la propia fecha —un evento a
+     * las 00:00 es de día entero—, que es lo que hace el mes desde siempre y lo
+     * que permite que la misma lista de eventos sirva para las dos vistas.
+     */
+    allDay?: boolean;
 }
+/**
+ * Las dos caras del planificador: el `month` de siempre —la parrilla del mes
+ * entera— y `week`, siete columnas con el día completo, donde los eventos con
+ * hora se leen en orden.
+ */
+export type CalendarPlannerView = 'month' | 'week';
 export interface CalendarPlannerProps {
     /** Eventos a mostrar en el planificador */
     events?: PlannerEvent[];
@@ -75,8 +88,48 @@ export interface CalendarPlannerProps {
      * `BrandMessagesProvider`. Solo se lee cuando alguna celda desborda.
      */
     moreLabel?: (count: number) => string;
+    /**
+     * Vista visible (modo controlado): la parrilla del mes o la semana.
+     * Default: `'month'` — el planificador de siempre.
+     */
+    view?: CalendarPlannerView;
+    /** Vista inicial en modo no controlado. Default: `'month'` */
+    defaultView?: CalendarPlannerView;
+    /** Callback al cambiar de vista, tanto desde el conmutador como al navegar. */
+    onViewChange?: (view: CalendarPlannerView) => void;
+    /**
+     * Pinta el conmutador mes/semana en la cabecera. Default: `false` — un
+     * planificador que ya está montado no gana botones por actualizar el
+     * paquete; quien quiera las dos vistas lo pide.
+     */
+    viewSwitcher?: boolean;
+    /**
+     * Semana visible (modo controlado). Vale cualquier día de ella: el
+     * componente se queda con su lunes.
+     */
+    week?: Date;
+    /** Semana inicial en modo no controlado. Default: la del mes visible, o hoy. */
+    defaultWeek?: Date;
+    /** Callback al cambiar de semana. Recibe el **lunes** de la nueva. */
+    onWeekChange?: (weekStart: Date) => void;
+    /**
+     * aria-label del botón de semana anterior. Default: `'Semana anterior'`
+     * (castellano). No sale del catálogo como las flechas de mes: añadirle una
+     * clave obligatoria a `CalendarPlannerMessages` rompería a todas las
+     * aplicaciones que ya lo tienen montado, así que estos cuatro textos entran
+     * como props y pasarán al catálogo en el próximo major.
+     */
+    previousWeekLabel?: string;
+    /** aria-label del botón de semana siguiente. Default: `'Semana siguiente'`. */
+    nextWeekLabel?: string;
+    /** Rótulo del botón de vista de mes del conmutador. Default: `'Mes'`. */
+    monthViewLabel?: string;
+    /** Rótulo del botón de vista de semana del conmutador. Default: `'Semana'`. */
+    weekViewLabel?: string;
+    /** Nombre accesible del conmutador de vista. Default: `'Vista del calendario'`. */
+    viewSwitcherLabel?: string;
     /** Tamaño del componente. Default: 'md' */
     size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
-export declare function CalendarPlanner({ events, renderDay, maxItemsPerDay, onMoreClick, showMoreDialog, onDayClick, month: monthProp, defaultMonth, onMonthChange, navigable, locale, previousMonthLabel, nextMonthLabel, gridLabel, moreLabel, size, className, }: CalendarPlannerProps): import("react/jsx-runtime").JSX.Element;
+export declare function CalendarPlanner({ events, renderDay, maxItemsPerDay, onMoreClick, showMoreDialog, onDayClick, month: monthProp, defaultMonth, onMonthChange, view: viewProp, defaultView, onViewChange, viewSwitcher, week: weekProp, defaultWeek, onWeekChange, navigable, locale, previousMonthLabel, nextMonthLabel, previousWeekLabel, nextWeekLabel, monthViewLabel, weekViewLabel, viewSwitcherLabel, gridLabel, moreLabel, size, className, }: CalendarPlannerProps): import("react/jsx-runtime").JSX.Element;

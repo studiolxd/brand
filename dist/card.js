@@ -61,13 +61,21 @@ var d = i(function({ href: r, render: i, external: a = !1, title: o, description
 		...x,
 		children: E
 	}));
-}), f = i(function({ className: e, ...t }, n) {
+});
+function f(e, t, n) {
+	return [
+		e,
+		t ? "card__interactive" : "",
+		n
+	].filter(Boolean).join(" ");
+}
+var p = i(function({ interactive: e, className: t, ...n }, r) {
 	return /* @__PURE__ */ c("div", {
-		ref: n,
-		className: ["card__header", e].filter(Boolean).join(" "),
-		...t
+		ref: r,
+		className: f("card__header", e, t),
+		...n
 	});
-}), p = i(function({ level: e = 3, size: t = 4, className: r, children: i, ...a }, o) {
+}), m = i(function({ level: e = 3, size: t = 4, className: r, children: i, ...a }, o) {
 	return /* @__PURE__ */ c(n, {
 		ref: o,
 		level: e,
@@ -76,7 +84,7 @@ var d = i(function({ href: r, render: i, external: a = !1, title: o, description
 		...a,
 		children: i
 	});
-}), m = i(function({ size: e = "small", lines: t, className: n, children: i, ...a }, o) {
+}), h = i(function({ size: e = "small", lines: t, className: n, children: i, ...a }, o) {
 	return /* @__PURE__ */ c(r, {
 		ref: o,
 		size: e,
@@ -88,7 +96,7 @@ var d = i(function({ href: r, render: i, external: a = !1, title: o, description
 		...a,
 		children: i
 	});
-}), h = i(function({ isolate: e = !0, className: t, onClick: n, ...r }, i) {
+}), g = i(function({ isolate: e = !0, className: t, onClick: n, ...r }, i) {
 	let s = o(null);
 	return /* @__PURE__ */ c("div", {
 		ref: a((e) => {
@@ -105,22 +113,27 @@ var d = i(function({ href: r, render: i, external: a = !1, title: o, description
 		},
 		...r
 	});
-}), g = i(function({ className: e, ...t }, n) {
+}), _ = i(function({ isolate: e = !0, className: t, onClick: n, ...r }, i) {
 	return /* @__PURE__ */ c("div", {
-		ref: n,
-		className: ["card__content", e].filter(Boolean).join(" "),
-		...t
+		ref: i,
+		className: ["card__selection", t].filter(Boolean).join(" "),
+		onClick: (t) => {
+			e && t.stopPropagation(), n?.(t);
+		},
+		...r
 	});
-}), _ = i(function({ direction: e = "row", className: t, ...n }, r) {
+}), v = i(function({ interactive: e, className: t, ...n }, r) {
 	return /* @__PURE__ */ c("div", {
 		ref: r,
-		className: [
-			"card__footer",
-			e === "column" ? "card__footer--column" : "",
-			t
-		].filter(Boolean).join(" "),
+		className: f("card__content", e, t),
 		...n
+	});
+}), y = i(function({ direction: e = "row", interactive: t, className: n, ...r }, i) {
+	return /* @__PURE__ */ c("div", {
+		ref: i,
+		className: f("card__footer", t, [e === "column" ? "card__footer--column" : "", n].filter(Boolean).join(" ") || void 0),
+		...r
 	});
 });
 //#endregion
-export { d as Card, h as CardAction, g as CardContent, m as CardDescription, _ as CardFooter, f as CardHeader, p as CardTitle };
+export { d as Card, g as CardAction, v as CardContent, h as CardDescription, y as CardFooter, p as CardHeader, _ as CardSelection, m as CardTitle };
