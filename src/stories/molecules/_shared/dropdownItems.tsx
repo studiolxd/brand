@@ -10,6 +10,13 @@ import { Menu as BaseMenu } from '@base-ui/react/menu';
 export type MenuButtonItem = {
   type: 'button';
   label: string;
+  /**
+   * Segunda línea del ítem, más tenue: el correo de una cuenta, el detalle de
+   * una acción. Con ella el ítem se pinta a dos líneas —`label` arriba,
+   * `description` debajo— y el icono se alinea al bloque entero. Sin ella, el
+   * ítem se pinta a una línea, exactamente igual que siempre.
+   */
+  description?: string;
   icon?: ReactNode;
   onClick: () => void;
   disabled?: boolean;
@@ -25,6 +32,8 @@ export type MenuButtonItem = {
 export type MenuLinkItem = {
   type: 'link';
   label: string;
+  /** Segunda línea del ítem, más tenue. Igual que en el ítem `button`. */
+  description?: string;
   icon?: ReactNode;
   href: string;
   disabled?: boolean;
@@ -81,17 +90,35 @@ interface RenderDropdownItemsOptions {
   renderLink: (props: MenuRenderLinkProps) => ReactNode;
   /** Clase del rótulo de sección (ítems `label`). Sin ella, no se renderizan. */
   labelClass?: string;
+  /**
+   * Bloque BEM del menú que renderiza (`menu`, `user-menu`…): de él salen las
+   * clases del icono y de las dos líneas del ítem (`<bloque>__item-icon`,
+   * `-text`, `-label`, `-description`). Sin él, el ítem se pinta como siempre
+   * —una línea y el icono sin clase— y `description` se ignora: un menú que no
+   * viste la segunda línea no la dibuja a medias.
+   */
+  blockClass?: string;
   /** Valor activo del grupo de radio. */
   radioValue?: string;
   onRadioValueChange?: (value: string) => void;
 }
 
-function itemContent(label: ReactNode, icon?: ReactNode) {
-  if (!icon) return <>{label}</>;
+function itemContent(label: ReactNode, icon?: ReactNode, description?: string, blockClass?: string) {
+  // El texto solo se envuelve cuando hay segunda línea: sin ella el ítem
+  // conserva su marcado de siempre (label suelto), y con él su caja.
+  const text = description && blockClass
+    ? (
+      <span className={`${blockClass}__item-text`}>
+        <span className={`${blockClass}__item-label`}>{label}</span>
+        <span className={`${blockClass}__item-description`}>{description}</span>
+      </span>
+    )
+    : label;
+  if (!icon) return <>{text}</>;
   return (
     <>
-      <span aria-hidden="true">{icon}</span>
-      {label}
+      <span aria-hidden="true" className={blockClass ? `${blockClass}__item-icon` : undefined}>{icon}</span>
+      {text}
     </>
   );
 }
@@ -114,6 +141,7 @@ export function renderDropdownItems({
   separatorClass,
   renderLink,
   labelClass,
+  blockClass,
   radioValue,
   onRadioValueChange,
 }: RenderDropdownItemsOptions): ReactNode {
@@ -139,11 +167,11 @@ export function renderDropdownItems({
           // Base UI deja abierto el menú al elegir un radio; en el sistema, elegir cierra
           closeOnClick={item.closeOnSelect !== false}
         >
-          {itemContent(item.label, item.icon)}
+          {itemContent(item.label, item.icon, undefined, blockClass)}
         </BaseMenu.RadioItem>
       );
     }
-    const content = itemContent(item.label, item.icon);
+    const content = itemContent(item.label, item.icon, item.description, blockClass);
     if (item.type === 'link') {
       if (item.disabled) {
         return (

@@ -79,6 +79,47 @@ describe('Menu', () => {
     expect(remove).toHaveClass('menu__item--destructive');
   });
 
+  it('pinta el ítem con description a dos líneas y deja intacto el de una', async () => {
+    const user = userEvent.setup();
+    render(
+      <Menu
+        trigger={trigger}
+        items={[
+          { type: 'button', label: 'Ana García', description: 'ana@studiolxd.com', onClick: vi.fn() },
+          { type: 'button', label: 'Añadir otra cuenta', onClick: vi.fn() },
+        ]}
+      />,
+    );
+    await user.click(screen.getByRole('button', { name: 'Opciones' }));
+
+    // El ítem se llama por sus dos líneas: el nombre accesible sale del texto
+    // que contiene, y lo contiene entero.
+    const cuenta = await screen.findByRole('menuitem', { name: /Ana García/ });
+    expect(cuenta).toHaveAccessibleName(/ana@studiolxd\.com/);
+    expect(cuenta.querySelector('.menu__item-label')).toHaveTextContent('Ana García');
+    expect(cuenta.querySelector('.menu__item-description')).toHaveTextContent('ana@studiolxd.com');
+
+    // Sin description, el marcado es el de siempre: ni envoltorio ni segunda línea.
+    const anadir = screen.getByRole('menuitem', { name: 'Añadir otra cuenta' });
+    expect(anadir.querySelector('.menu__item-text')).toBeNull();
+    expect(anadir.querySelector('.menu__item-description')).toBeNull();
+  });
+
+  it('pinta el ítem de enlace con description a dos líneas', async () => {
+    const user = userEvent.setup();
+    render(
+      <Menu
+        trigger={trigger}
+        items={[{ type: 'link', label: 'Ana García', description: 'ana@studiolxd.com', href: '/cuentas/ana' }]}
+      />,
+    );
+    await user.click(screen.getByRole('button', { name: 'Opciones' }));
+    const cuenta = await screen.findByRole('menuitem', { name: /Ana García/ });
+    expect(cuenta).toHaveAccessibleName(/ana@studiolxd\.com/);
+    expect(cuenta).toHaveAttribute('href', '/cuentas/ana');
+    expect(cuenta.querySelector('.menu__item-description')).toHaveTextContent('ana@studiolxd.com');
+  });
+
   it('rinde los enlaces con el renderLink del consumidor', async () => {
     const user = userEvent.setup();
     render(

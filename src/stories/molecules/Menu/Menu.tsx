@@ -113,6 +113,7 @@ export function Menu({
               itemClass,
               separatorClass: 'menu__separator',
               labelClass: 'menu__label',
+              blockClass: 'menu',
               radioValue: value,
               onRadioValueChange: onValueChange,
               renderLink,

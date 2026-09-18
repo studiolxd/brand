@@ -157,3 +157,40 @@
   width: var(--menu-lg-item-icon-size);
   height: var(--menu-lg-item-icon-size);
 }
+
+/* ─── Ítem de dos líneas ─────────────────────────────────────
+   Con `description`, el ítem pinta el `label` arriba y la segunda línea
+   debajo, más tenue —la letra y la tinta del rótulo de sección, que es el
+   papel que ya cumple en este menú—, y el icono (un avatar, en el selector de
+   cuentas) se centra contra el bloque de las dos líneas. Sin `description` el
+   ítem no lleva ninguna de estas clases: se pinta exactamente como siempre. */
+.menu__item-icon {
+  flex-shrink: 0;
+}
+
+.menu__item-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.menu__item-label,
+.menu__item-description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menu__item-description {
+  font-size: var(--menu-label-font-size);
+  color: var(--menu-label-color);
+}
+
+/* Resaltado y destructivo tiñen el ítem entero: la segunda línea va con la
+   tinta del ítem (`inherit`), no con la suya, o quedaría gris sobre el
+   relleno de marca. */
+.menu__item[data-highlighted] .menu__item-description,
+.menu__item.menu__item--destructive .menu__item-description {
+  color: inherit;
+}

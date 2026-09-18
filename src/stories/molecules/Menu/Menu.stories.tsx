@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
+import { Avatar } from '../../atoms/Avatar/Avatar';
 import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Menu } from './Menu';
@@ -165,6 +166,87 @@ export const MuchasOpciones: Story = {
       expect(ultimo.getBoundingClientRect().bottom).toBeLessThanOrEqual(menu.getBoundingClientRect().bottom + 1);
       expect(ultimo.getBoundingClientRect().top).toBeGreaterThanOrEqual(menu.getBoundingClientRect().top - 1);
     });
+  },
+};
+
+/**
+ * El ítem de cuenta: `description` pone una segunda línea más tenue bajo el
+ * `label`, y el icono —aquí el avatar de cada cuenta— se centra contra el
+ * bloque de las dos. Es lo que monta el selector de cuentas del shell: arriba
+ * el nombre, abajo el correo.
+ */
+export const ItemDeCuenta: Story = {
+  name: 'Ítem de cuenta (dos líneas)',
+  args: {
+    trigger: <Button variant="outline">Cambiar de cuenta</Button>,
+    align: 'start',
+    minWidth: '18rem',
+    items: [
+      {
+        type: 'button',
+        label: 'Ana García',
+        description: 'ana.garcia@studiolxd.com',
+        icon: <Avatar name="Ana García" alt="" size="sm" />,
+        onClick: () => {},
+      },
+      {
+        type: 'button',
+        label: 'Ana García (docencia)',
+        description: 'ana.garcia@universidad-con-un-dominio-muy-largo.example',
+        icon: <Avatar name="Ana García" alt="" size="sm" src="https://i.pravatar.cc/64?img=47" />,
+        onClick: () => {},
+      },
+      { type: 'separator' },
+      { type: 'button', label: 'Añadir otra cuenta', onClick: () => {} },
+    ],
+  },
+};
+
+/**
+ * Test: con `description` el ítem va a dos líneas y las dos se leen; sin ella,
+ * el ítem conserva su marcado de una línea (ni envoltorio de texto ni segunda
+ * línea), que es lo que no puede romperse en los menús de siempre.
+ */
+export const ContratoItemDosLineas: Story = {
+  name: 'Test — el ítem con descripción va a dos líneas',
+  tags: ['!dev'],
+  args: {
+    trigger: <Button variant="outline">Cuentas</Button>,
+    minWidth: '18rem',
+    items: [
+      {
+        type: 'button',
+        label: 'Ana García',
+        description: 'ana.garcia@studiolxd.com',
+        icon: <Avatar name="Ana García" alt="" size="sm" />,
+        onClick: () => {},
+      },
+      { type: 'button', label: 'Añadir otra cuenta', onClick: () => {} },
+    ],
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Cuentas' }));
+
+    const body = within(document.body);
+    const cuenta = await body.findByRole('menuitem', { name: /Ana García/ });
+    const etiqueta = cuenta.querySelector('.menu__item-label') as HTMLElement;
+    const descripcion = cuenta.querySelector('.menu__item-description') as HTMLElement;
+    await expect(etiqueta).not.toBeNull();
+    await expect(descripcion.textContent).toBe('ana.garcia@studiolxd.com');
+
+    // Dos líneas de verdad: la segunda va debajo, no al lado.
+    await waitFor(async () => {
+      await expect(descripcion.getBoundingClientRect().top)
+        .toBeGreaterThanOrEqual(etiqueta.getBoundingClientRect().bottom - 1);
+      // Y más tenue que la principal.
+      await expect(getComputedStyle(descripcion).color).not.toBe(getComputedStyle(etiqueta).color);
+    });
+
+    // El ítem de una línea sigue siendo el de siempre.
+    const anadir = body.getByRole('menuitem', { name: 'Añadir otra cuenta' });
+    await expect(anadir.querySelector('.menu__item-text')).toBeNull();
+    await expect(anadir.querySelector('.menu__item-description')).toBeNull();
   },
 };
 

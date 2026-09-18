@@ -23,7 +23,7 @@ El desplegable de acciones del sistema, con el disparador que haga falta. Define
 
 | `type` | Qué es |
 |---|---|
-| `button` | Una acción: `label`, `onClick`, `icon`, `destructive`, `disabled`. `closeOnSelect: false` deja el menú abierto tras la acción |
+| `button` | Una acción: `label`, `onClick`, `icon`, `description`, `destructive`, `disabled`. `closeOnSelect: false` deja el menú abierto tras la acción |
 | `link` | Un enlace: `href` y lo mismo. Lo renderiza `renderLink`, para que sea el enlace del router |
 | `separator` | Una línea entre grupos |
 | `label` | Un rótulo de sección, no interactivo |
@@ -32,6 +32,14 @@ El desplegable de acciones del sistema, con el disparador que haga falta. Define
 <Canvas of={MenuStories.ConRadio} />
 
 <Canvas of={MenuStories.Mixto} />
+
+## Ítem de dos líneas
+
+`description` añade una **segunda línea** al ítem —`button` o `link`—, más tenue, debajo del `label`: el correo de una cuenta, el detalle de una acción. Es lo que pide el selector de varias cuentas, que antes tenía que meter nombre y correo en una sola línea. El icono —ahí, el avatar de cada cuenta— se centra contra el bloque de las dos líneas, y cada línea se recorta con puntos suspensivos si no cabe, así que el panel no crece con un correo largo (`minWidth`/`maxWidth` lo miden).
+
+Sin `description`, el ítem se pinta **exactamente** como siempre: ni envoltorio de texto ni segunda línea. La letra y la tinta de la segunda línea son las del rótulo de sección (`label-font-size`, `label-color`), que es el papel que ya hacen en este menú; bajo el puntero o el teclado la línea va con la tinta del ítem resaltado, no con la suya.
+
+<Canvas of={MenuStories.ItemDeCuenta} />
 
 ## Enlaces del router
 
