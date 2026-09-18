@@ -72,6 +72,32 @@ export function getCalendarDays(month: Date): CalendarDay[] {
   return days;
 }
 
+/** Lunes de la semana a la que pertenece `date`. */
+export function startOfWeek(date: Date): Date {
+  const offset = (date.getDay() + 6) % 7;
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() - offset);
+}
+
+/** Lunes de la semana desplazada `delta` semanas respecto a la de `date`. */
+export function shiftWeek(date: Date, delta: number): Date {
+  const start = startOfWeek(date);
+  return new Date(start.getFullYear(), start.getMonth(), start.getDate() + delta * 7);
+}
+
+/**
+ * Los siete días de la semana de `date`, de lunes a domingo. `outside` sale de
+ * comparar con `month` cuando se pasa —la vista de semana atraviesa el cambio
+ * de mes—; sin él, ningún día es de fuera: la semana es la unidad y no cuelga
+ * de ningún mes.
+ */
+export function getWeekDays(date: Date, month?: Date): CalendarDay[] {
+  const start = startOfWeek(date);
+  return Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(start.getFullYear(), start.getMonth(), start.getDate() + i);
+    return { date: d, outside: month ? !isSameMonth(d, month) : false };
+  });
+}
+
 /** Agrupa días en semanas de 7. */
 export function chunkWeeks(days: CalendarDay[]): CalendarDay[][] {
   const weeks: CalendarDay[][] = [];
@@ -395,6 +421,126 @@ export function useCalendarGridNavigation({
       else cells.current.delete(key);
     },
     []
+  );
+
+  const isTabbable = useCallback((date: Date) => isSameDay(date, activeDate), [activeDate]);
+
+  const onCellFocus = useCallback((date: Date) => setFocusedDate(date), []);
+
+  return { activeDate, isTabbable, cellRef, onKeyDown, onCellFocus };
+}
+
+/* ── Teclado de la rejilla de semana ─────────────────────────────────────── */
+
+export interface UseCalendarWeekNavigationOptions {
+  /** Lunes de la semana visible */
+  weekStart: Date;
+  /** Se llama cuando el teclado saca el foco fuera de la semana visible */
+  onWeekChange: (weekStart: Date) => void;
+  /** Activación de la columna enfocada con Enter/Espacio */
+  onActivate?: (date: Date) => void;
+  minDate?: Date;
+  maxDate?: Date;
+}
+
+/**
+ * El mismo roving tabindex del mes sobre las siete columnas de la semana: una
+ * sola parada de tabulador, flechas para moverse de día —y la semana cambia
+ * sola al salir por cualquiera de los dos extremos—, Inicio/Fin para el lunes
+ * y el domingo, RePág/AvPág para la semana anterior y la siguiente.
+ *
+ * Las flechas vertical y horizontal hacen lo mismo aquí: la semana es **una**
+ * fila de celdas, así que arriba y abajo no llevan a ninguna otra parte y se
+ * quedan recorriendo los días, como ↑/↓ en una lista.
+ */
+export function useCalendarWeekNavigation({
+  weekStart,
+  onWeekChange,
+  onActivate,
+  minDate,
+  maxDate,
+}: UseCalendarWeekNavigationOptions): CalendarGridNavigation {
+  const [focusedDate, setFocusedDate] = useState<Date>(() => new Date());
+  const cells = useRef(new Map<string, HTMLElement>());
+  const pendingFocus = useRef(false);
+
+  const start = useMemo(() => startOfWeek(weekStart), [weekStart]);
+
+  // El tabindex vive siempre en un día de la semana visible: si el foco lógico
+  // se quedó en otra, cae en hoy si es de esta semana y, si no, en el lunes.
+  const activeDate = useMemo(() => {
+    if (isSameDay(startOfWeek(focusedDate), start)) return focusedDate;
+    const today = new Date();
+    if (isSameDay(startOfWeek(today), start)) return today;
+    return start;
+  }, [focusedDate, start]);
+
+  useEffect(() => {
+    if (!pendingFocus.current) return;
+    pendingFocus.current = false;
+    cells.current.get(dayKey(activeDate))?.focus();
+  }, [activeDate]);
+
+  const moveTo = useCallback(
+    (target: Date) => {
+      const next = clamp(target, minDate, maxDate);
+      pendingFocus.current = true;
+      setFocusedDate(next);
+      if (!isSameDay(startOfWeek(next), start)) onWeekChange(startOfWeek(next));
+    },
+    [maxDate, minDate, onWeekChange, start],
+  );
+
+  const onKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      const from = activeDate;
+      let target: Date | null = null;
+
+      switch (event.key) {
+        case 'ArrowLeft':
+        case 'ArrowUp':
+          target = addDays(from, -1);
+          break;
+        case 'ArrowRight':
+        case 'ArrowDown':
+          target = addDays(from, 1);
+          break;
+        case 'Home':
+          target = startOfWeek(from);
+          break;
+        case 'End':
+          target = addDays(startOfWeek(from), 6);
+          break;
+        case 'PageUp':
+          target = addDays(from, -7);
+          break;
+        case 'PageDown':
+          target = addDays(from, 7);
+          break;
+        case 'Enter':
+        case ' ':
+          if (onActivate) {
+            event.preventDefault();
+            onActivate(from);
+          }
+          return;
+        default:
+          return;
+      }
+
+      event.preventDefault();
+      moveTo(target);
+    },
+    [activeDate, moveTo, onActivate],
+  );
+
+  const cellRef = useCallback(
+    (date: Date) => (el: HTMLElement | null) => {
+      const key = dayKey(date);
+      if (el) cells.current.set(key, el);
+      else cells.current.delete(key);
+    },
+    [],
   );
 
   const isTabbable = useCallback((date: Date) => isSameDay(date, activeDate), [activeDate]);

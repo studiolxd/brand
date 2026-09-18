@@ -5,6 +5,9 @@
 :root {
   --calendar-planner-cell-min-height: 6rem; /** Altura mínima de cada celda de día — md */
   --calendar-planner-cell-bg: rgba(0, 0, 0, 0); /** Fondo base de las celdas */
+  --calendar-planner-week-cell-min-height: 12rem; /** Altura mínima de la columna de día en la vista de semana — md. La columna enseña el día entero, así que no trunca: parte alta y crece con lo que haya */
+  --calendar-planner-sm-week-cell-min-height: 8rem; /** Altura mínima de la columna de día en la vista de semana — sm */
+  --calendar-planner-lg-week-cell-min-height: 16rem; /** Altura mínima de la columna de día en la vista de semana — lg */
   --calendar-planner-sm-cell-min-height: 4rem; /** Altura mínima de celda — sm */
   --calendar-planner-lg-cell-min-height: 9rem; /** Altura mínima de celda — lg */
   --calendar-planner-weekday-padding-block: var(--spacing-2); /** Padding vertical de las cabeceras */
@@ -14,6 +17,8 @@
   --calendar-planner-day-number-size: var(--spacing-5); /** Tamaño (ancho y alto) del badge con el número */
   --calendar-planner-items-gap: var(--spacing-1); /** Gap entre elementos/tags dentro de la celda */
   --calendar-planner-more-font-size: var(--font-size-1); /** Tamaño del texto '+N más' */
+  --calendar-planner-weekday-gap: var(--spacing-1); /** Aire entre el nombre del día y su número en la cabecera de la vista de semana */
+  --calendar-planner-event-time-font-size: var(--font-size-1); /** Tamaño de la hora del evento en la vista de semana */
   --calendar-planner-gap: var(--calendar-gap); /** Gap entre cabecera y cuadrícula — hereda de Calendar */
   --calendar-planner-font-family: var(--calendar-font-family); /** Familia tipográfica base — hereda de Calendar */
   --calendar-planner-title-font-size: var(--calendar-title-font-size); /** Tamaño del título del mes — hereda de Calendar */
@@ -31,6 +36,7 @@
   --calendar-planner-more-focus-ring-color: var(--color-primary); /** Color del focus ring del botón '+N más' */
   --calendar-planner-transition-duration: var(--calendar-transition-duration); /** Duración de las transiciones — hereda de Calendar */
   --calendar-planner-transition-easing: var(--calendar-transition-easing); /** Easing de las transiciones — hereda de Calendar */
+  --calendar-planner-event-time-color: var(--color-text-muted-on-light); /** Color de la hora del evento: es el dato secundario del renglón, el evento manda */
   --calendar-planner-nav-color: var(--calendar-nav-color); /** Color de los botones prev/next — hereda de Calendar */
   --calendar-planner-nav-focus-ring-color: var(--calendar-nav-focus-ring-color); /** Color del focus ring de los botones de navegación — hereda de Calendar */
   --calendar-planner-nav-focus-ring-width: var(--calendar-nav-focus-ring-width); /** Grosor del focus ring — hereda de Calendar */
@@ -52,6 +58,7 @@
 .surface-invert,
 [data-theme="dark"],
 html.dark {
+  --calendar-planner-event-time-color: var(--color-text-muted-on-dark); /** Hora del evento — surface-dark */
   --calendar-planner-nav-color: var(--color-text-on-dark); /** Color de navegación — surface-dark */
   --calendar-planner-nav-focus-ring-color: var(--color-text-on-dark); /** Focus ring de navegación — surface-dark */
   --calendar-planner-title-color: var(--color-text-on-dark); /** Color del título — surface-dark */

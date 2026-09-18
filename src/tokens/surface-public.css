@@ -74,6 +74,7 @@
   --toggle-height: var(--toggle-lg-height);
   --toggle-padding-inline: var(--toggle-lg-padding-inline);
   --toggle-font-size: var(--toggle-lg-font-size);
+  --calendar-planner-week-cell-min-height: var(--calendar-planner-lg-week-cell-min-height);
   --calendar-planner-cell-min-height: var(--calendar-planner-lg-cell-min-height);
   --calendar-day-size: var(--calendar-lg-day-size);
   --calendar-title-font-size: var(--calendar-lg-title-font-size);

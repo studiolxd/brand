@@ -62,6 +62,37 @@ y flechas para recorrer los días, igual que en `Calendar`.
 El «+N más» es un control propio y mantiene su propia parada de tabulador: es
 una acción distinta de abrir el día.
 
+## La semana
+
+`view="week"` cambia la parrilla por **siete columnas con el día completo**: el nombre del día y su número arriba, en la cabecera de cada columna, y debajo los eventos de ese día. La lista de eventos es **la misma** que la del mes —`events` no cambia—; lo que cambia es cómo se lee.
+
+<Canvas of={CalendarPlannerStories.Semana} />
+
+- **La hora sale del propio evento.** Un evento con hora la enseña delante del rótulo; uno a las 00:00 se toma como de **día entero** y va arriba, sin hora. `allDay` lo dice de forma explícita cuando la fecha no basta (un día entero guardado a las 09:00, o una reunión que de verdad empieza a medianoche).
+- **La columna no trunca.** No hay «+N más» en la semana: `maxItemsPerDay` es cosa del mes, donde la celda mide una fila de siete. Aquí la columna tiene alto de sobra y esconder eventos taparía justo lo que se viene a leer.
+- **Las flechas son de semana**, y `onWeekChange` avisa con el **lunes** de la nueva. La semana empieza en lunes, como toda la rejilla del sistema.
+- `renderDay(date, events)` sigue valiendo, con la misma firma: sustituye el contenido de la columna.
+
+### El conmutador
+
+`viewSwitcher` pinta en la cabecera el conmutador mes/semana (un `ToggleGroup` exclusivo). Va apagado por defecto: un planificador ya montado no gana botones por actualizar el paquete. La vista puede llevarla el consumidor (`view` + `onViewChange`) o el componente (`defaultView`), igual que el mes.
+
+<Canvas of={CalendarPlannerStories.ConConmutador} />
+
+Cambiar de vista **no teletransporta**: se cambia lo justo para que las dos vistas se toquen. Si la semana guardada no pisa el mes visible, al ir a la semana se abre la del día 1; al volver al mes, si el mes visible no pisa la semana, se abre el mes de su lunes. Una semana a caballo de dos meses pisa los dos, así que ir y volver deja al usuario donde estaba.
+
+### Teclado de la semana
+
+Con `onDayClick`, la semana es una rejilla de una sola fila:
+
+| Tecla | Qué hace |
+|---|---|
+| <kbd>←</kbd> / <kbd>→</kbd> | Día anterior / siguiente; por los extremos, cambia de semana |
+| <kbd>↑</kbd> / <kbd>↓</kbd> | Lo mismo: la semana es **una** fila, arriba y abajo no llevan a otra parte |
+| <kbd>Inicio</kbd> / <kbd>Fin</kbd> | Lunes / domingo de la semana |
+| <kbd>RePág</kbd> / <kbd>AvPág</kbd> | Semana anterior / siguiente |
+| <kbd>Enter</kbd> / <kbd>Espacio</kbd> | Dispara `onDayClick` en el día enfocado |
+
 ## Tamaños
 
 <Canvas of={CalendarPlannerStories.Tamanos} />
@@ -104,6 +135,18 @@ El botón de desbordamiento tiene espacio propio, **`calendarPlanner`**:
 | Prop | Clave del catálogo | Cuándo se lee |
 | --- | --- | --- |
 | `moreLabel` | `calendarPlanner.more` | solo cuando alguna celda desborda (interpola: es función) |
+
+Los cuatro textos de la **vista de semana** son la excepción: van en props con **default castellano**, no en el catálogo.
+
+| Prop | Default |
+| --- | --- |
+| `previousWeekLabel` | `Semana anterior` |
+| `nextWeekLabel` | `Semana siguiente` |
+| `monthViewLabel` | `Mes` |
+| `weekViewLabel` | `Semana` |
+| `viewSwitcherLabel` | `Vista del calendario` |
+
+No es un capricho: añadirle una clave obligatoria a `CalendarPlannerMessages` deja sin compilar a toda aplicación que ya tenga el catálogo montado, y la semana llega en un **minor**. Pasarán al catálogo en el próximo major.
 
 El orden es **prop → proveedor → error**, y el texto se lee **donde se pinta**: con `navigable={false}` no hay flechas y no se exige ninguna de las dos del calendario.
 

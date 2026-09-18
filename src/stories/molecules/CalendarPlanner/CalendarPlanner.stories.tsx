@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Tag } from '../../atoms/Tag/Tag';
 import { CalendarPlanner, type PlannerEvent } from './CalendarPlanner';
 import { STORY_TODAY } from '../../utils/storyDate';
@@ -26,6 +26,13 @@ const meta: Meta<typeof CalendarPlanner> = {
     maxItemsPerDay:{ control: { type: 'number' } },
     locale:        { control: { type: 'text' } },
     size:          { control: { type: 'select' }, options: ['sm', 'md', 'lg'] },
+    view:          { control: { type: 'inline-radio' }, options: ['month', 'week'] },
+    defaultView:   { control: false },
+    onViewChange:  { control: false },
+    week:          { control: false },
+    defaultWeek:   { control: false },
+    onWeekChange:  { control: false },
+    viewSwitcher:  { control: { type: 'boolean' } },
   },
   args: {
     navigable: true,
@@ -176,6 +183,115 @@ export const Tamanos: Story = {
       </div>
     </div>
   ),
+};
+
+/** La semana de `STORY_TODAY`, con horas: es lo que la vista de semana enseña. */
+function makeWeekEvents(): PlannerEvent[] {
+  const y = STORY_TODAY.getFullYear();
+  const m = STORY_TODAY.getMonth();
+  const lunes = STORY_TODAY.getDate() - ((STORY_TODAY.getDay() + 6) % 7);
+  const dia = (offset: number, hora = 0, minuto = 0) => new Date(y, m, lunes + offset, hora, minuto);
+
+  return [
+    { id: 'w1', date: dia(0, 9, 0),   label: 'Daily',            variant: 'primary' },
+    { id: 'w2', date: dia(0, 12, 30), label: 'Comida con Marta', variant: 'neutral' },
+    { id: 'w3', date: dia(1),         label: 'Festivo local',    variant: 'accent-2', allDay: true },
+    { id: 'w4', date: dia(1, 16, 0),  label: 'Revisión diseño',  variant: 'accent-1' },
+    { id: 'w5', date: dia(2, 9, 0),   label: 'Daily',            variant: 'primary' },
+    { id: 'w6', date: dia(2, 11, 0),  label: 'Entrevista',       variant: 'info' },
+    { id: 'w7', date: dia(3, 9, 0),   label: 'Daily',            variant: 'primary' },
+    { id: 'w8', date: dia(3, 17, 30), label: 'Retrospectiva',    variant: 'warning' },
+    { id: 'w9', date: dia(4, 10, 0),  label: 'Deploy',           variant: 'success' },
+    { id: 'w10', date: dia(6),        label: 'Guardia',          variant: 'danger', allDay: true },
+  ];
+}
+
+/**
+ * La semana: siete columnas con el día completo, la hora delante de cada
+ * evento que la tenga y los de día entero arriba. La columna **no trunca** —no
+ * hay «+N más»—: tiene alto de sobra y lo que se viene a leer es justo eso.
+ */
+export const Semana: Story = {
+  name: 'Vista de semana',
+  args: { view: 'week' },
+  render: (args) => <CalendarPlanner {...args} events={makeWeekEvents()} />,
+};
+
+/**
+ * Con `viewSwitcher` la cabecera gana el conmutador mes/semana. La vista puede
+ * ir controlada (`view` + `onViewChange`) o dejarse al componente
+ * (`defaultView`); aquí la lleva el componente.
+ */
+export const ConConmutador: Story = {
+  name: 'Conmutador mes / semana',
+  args: { viewSwitcher: true },
+  render: (args) => <CalendarPlanner {...args} events={[...makeEvents(), ...makeWeekEvents()]} />,
+};
+
+/**
+ * Test: la semana pinta siete columnas fechadas, el evento con hora la enseña
+ * delante y el de día entero va primero — el orden con que se lee una columna.
+ */
+export const ContratoSemana: Story = {
+  name: 'Test — la semana enseña el día completo con su hora',
+  tags: ['!dev'],
+  args: { view: 'week' },
+  render: (args) => <CalendarPlanner {...args} events={makeWeekEvents()} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const columnas = canvas.getAllByRole('columnheader');
+    await expect(columnas).toHaveLength(7);
+
+    const celdas = canvas.getAllByRole('gridcell');
+    await expect(celdas).toHaveLength(7);
+
+    // El martes: el festivo de día entero arriba y sin hora, la revisión con la suya.
+    const renglones = Array.from(
+      celdas[1].querySelectorAll('.calendar-planner__event'),
+    ) as HTMLElement[];
+    await expect(renglones).toHaveLength(2);
+    await expect(renglones[0]).toHaveTextContent('Festivo local');
+    await expect(renglones[0].querySelector('.calendar-planner__event-time')).toBeNull();
+    await expect(renglones[1].querySelector('.calendar-planner__event-time')).not.toBeNull();
+
+    // La hora va delante del evento, en la misma línea.
+    const hora = renglones[1].querySelector('.calendar-planner__event-time') as HTMLElement;
+    const tag = renglones[1].querySelector('.tag') as HTMLElement;
+    await waitFor(async () => {
+      await expect(hora.getBoundingClientRect().right)
+        .toBeLessThanOrEqual(tag.getBoundingClientRect().left + 1);
+    });
+  },
+};
+
+/**
+ * Test: el conmutador cambia de vista y la navegación pasa a ser de semana.
+ */
+export const ContratoConmutador: Story = {
+  name: 'Test — el conmutador cambia de vista',
+  tags: ['!dev'],
+  args: { viewSwitcher: true },
+  render: (args) => <CalendarPlanner {...args} events={makeWeekEvents()} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Arranca en el mes: la parrilla trae más de una fila de celdas.
+    await expect(canvas.getAllByRole('gridcell').length).toBeGreaterThan(7);
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Semana' }));
+    await waitFor(async () => {
+      await expect(canvas.getAllByRole('gridcell')).toHaveLength(7);
+    });
+
+    // Y las flechas ya son de semana.
+    await expect(canvas.getByRole('button', { name: 'Semana siguiente' })).toBeInTheDocument();
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Mes' }));
+    await waitFor(async () => {
+      await expect(canvas.getAllByRole('gridcell').length).toBeGreaterThan(7);
+    });
+  },
 };
 
 /**

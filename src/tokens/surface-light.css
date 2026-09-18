@@ -453,6 +453,7 @@ html.dark .surface-light {
   --calendar-planner-more-color: var(--color-text-muted-on-light);
   --calendar-planner-more-hover-color: var(--color-text-on-light);
   --calendar-planner-more-focus-ring-color: var(--color-primary);
+  --calendar-planner-event-time-color: var(--color-text-muted-on-light);
   --calendar-planner-hover-line-color: var(--calendar-hover-line-color);
   --calendar-roster-border-color: var(--color-primary);
   --calendar-roster-th-name-color: var(--color-text-muted-on-light);

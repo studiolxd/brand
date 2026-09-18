@@ -212,3 +212,50 @@
   flex-direction: column;
   gap: var(--calendar-planner-items-gap);
 }
+
+/* ─── Vista de semana ─────────────────────────────────────────────────────
+   La misma parrilla, con una sola fila de siete columnas. Lo que cambia es
+   dónde vive el número del día —arriba, en la cabecera de su columna, junto
+   al nombre— y que la columna no trunca: enseña el día entero, con la hora
+   delante de cada evento que la tenga. */
+
+.calendar-planner__weekday.calendar-planner__weekday--dated {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--calendar-planner-weekday-gap);
+}
+
+.calendar-planner__cell.calendar-planner__cell--week {
+  min-height: var(--calendar-planner-week-cell-min-height);
+}
+
+.calendar-planner.calendar-planner--sm .calendar-planner__cell.calendar-planner__cell--week {
+  min-height: var(--calendar-planner-sm-week-cell-min-height);
+}
+
+.calendar-planner.calendar-planner--lg .calendar-planner__cell.calendar-planner__cell--week {
+  min-height: var(--calendar-planner-lg-week-cell-min-height);
+}
+
+/* El renglón del evento: la hora delante y el tag detrás, en la misma línea.
+   La hora no encoge —es corta y fija— y el tag se queda con lo que sobra. */
+.calendar-planner__event {
+  display: flex;
+  align-items: baseline;
+  gap: var(--calendar-planner-items-gap);
+  min-width: 0;
+}
+
+.calendar-planner__event-time {
+  flex-shrink: 0;
+  font-size: var(--calendar-planner-event-time-font-size);
+  color: var(--calendar-planner-event-time-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.calendar-planner__event .tag {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

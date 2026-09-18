@@ -51,6 +51,14 @@
     "transition-duration":     { "$value": "{calendar.transition-duration}", "$type": "number", "$description": "Duración de las transiciones — hereda de Calendar" },
     "transition-easing":       { "$value": "{calendar.transition-easing}",   "$type": "string", "$description": "Easing de las transiciones — hereda de Calendar" },
 
+    "week-cell-min-height":    { "$value": "12rem",                       "$type": "dimension", "$description": "Altura mínima de la columna de día en la vista de semana — md. La columna enseña el día entero, así que no trunca: parte alta y crece con lo que haya" },
+    "sm-week-cell-min-height": { "$value": "8rem",                        "$type": "dimension", "$description": "Altura mínima de la columna de día en la vista de semana — sm" },
+    "lg-week-cell-min-height": { "$value": "16rem",                       "$type": "dimension", "$description": "Altura mínima de la columna de día en la vista de semana — lg" },
+    "weekday-gap":             { "$value": "{spacing.1}",                 "$type": "dimension", "$description": "Aire entre el nombre del día y su número en la cabecera de la vista de semana" },
+    "event-time-font-size":    { "$value": "{font-size.1}",               "$type": "dimension", "$description": "Tamaño de la hora del evento en la vista de semana" },
+    "event-time-color":        { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Color de la hora del evento: es el dato secundario del renglón, el evento manda" },
+    "surface-dark-event-time-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Hora del evento — surface-dark" },
+
     "sm-cell-min-height":      { "$value": "4rem",                        "$type": "dimension", "$description": "Altura mínima de celda — sm" },
     "lg-cell-min-height":      { "$value": "9rem",                        "$type": "dimension", "$description": "Altura mínima de celda — lg" },
 

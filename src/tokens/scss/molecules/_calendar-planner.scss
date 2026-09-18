@@ -40,6 +40,12 @@ $lxd-calendar-planner-more-hover-color: #111e30; // Color hover del texto '+N m�
 $lxd-calendar-planner-more-focus-ring-color: #111e30; // Color del focus ring del botón '+N más'
 $lxd-calendar-planner-transition-duration: 150ms; // Duración de las transiciones — hereda de Calendar
 $lxd-calendar-planner-transition-easing: ease; // Easing de las transiciones — hereda de Calendar
+$lxd-calendar-planner-week-cell-min-height: 12rem; // Altura mínima de la columna de día en la vista de semana — md. La columna enseña el día entero, así que no trunca: parte alta y crece con lo que haya
+$lxd-calendar-planner-sm-week-cell-min-height: 8rem; // Altura mínima de la columna de día en la vista de semana — sm
+$lxd-calendar-planner-lg-week-cell-min-height: 16rem; // Altura mínima de la columna de día en la vista de semana — lg
+$lxd-calendar-planner-weekday-gap: 0.25rem; // Aire entre el nombre del día y su número en la cabecera de la vista de semana
+$lxd-calendar-planner-event-time-font-size: 0.875rem; // Tamaño de la hora del evento en la vista de semana
+$lxd-calendar-planner-event-time-color: #4a4a4a; // Color de la hora del evento: es el dato secundario del renglón, el evento manda
 $lxd-calendar-planner-sm-cell-min-height: 4rem; // Altura mínima de celda — sm
 $lxd-calendar-planner-lg-cell-min-height: 9rem; // Altura mínima de celda — lg
 $lxd-calendar-planner-hover-line-width: 1px; // Grosor de la línea de hover — hereda de Calendar

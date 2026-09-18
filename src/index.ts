@@ -198,7 +198,7 @@ export type { DateTimeFieldProps } from './stories/molecules/DateTimeField/DateT
 export { Calendar } from './stories/molecules/Calendar/Calendar';
 export type { CalendarProps, CalendarMessages } from './stories/molecules/Calendar/Calendar';
 export { CalendarPlanner } from './stories/molecules/CalendarPlanner/CalendarPlanner';
-export type { CalendarPlannerProps, PlannerEvent } from './stories/molecules/CalendarPlanner/CalendarPlanner';
+export type { CalendarPlannerProps, CalendarPlannerView, PlannerEvent } from './stories/molecules/CalendarPlanner/CalendarPlanner';
 export { CalendarRoster } from './stories/molecules/CalendarRoster/CalendarRoster';
 export type { CalendarRosterProps, RosterRow, RosterCell, RosterCellType, LegendItem } from './stories/molecules/CalendarRoster/CalendarRoster';
 export { ConfirmDialog } from './stories/molecules/ConfirmDialog/ConfirmDialog';
