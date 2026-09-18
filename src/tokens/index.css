@@ -170,6 +170,11 @@
    especificidad, para que se lea en el orden en que actúa. */
 @import "./surface-invert.css";
 
+/* Superficie siempre clara: el contrapunto de `.surface-dark`, para el interior
+   de un relleno claro universal (el amarillo del aviso). Solo actúa dentro de
+   una superficie oscura, que es donde hay algo que devolver a claro. */
+@import "./surface-light.css";
+
 /* Remapeo de la superficie pública (`.site-shell`) — va al final: los tokens
    que redefine tienen la misma especificidad que los `:root` de arriba. */
 @import "./surface-public.css";

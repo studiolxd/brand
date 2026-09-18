@@ -71,16 +71,22 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner({
   const classes = [
     'banner',
     `banner--${variant}`,
-    // El relleno de `info` es prusia: la raíz se declara superficie oscura para
-    // que lo que se componga dentro (el botón de las acciones, un enlace, el
-    // propio aspa) tome su cara clara. El aviso queda fuera, porque ahí el
-    // relleno es amarillo y la superficie es clara.
+    // El relleno de `info` es prusia y es universal: declara su cara en la raíz,
+    // así que lo que se componga dentro (el botón de las acciones, un enlace, el
+    // aspa) toma la cara clara sin configurarlo. El aviso queda fuera: su
+    // relleno es amarillo y su cara es la clara (`interiorSurface`).
     variant === 'info' ? 'surface-dark' : '',
     onDismiss ? 'banner--dismissible' : '',
     className ?? '',
   ]
     .filter(Boolean)
     .join(' ');
+
+  // El relleno del aviso es el único claro, y lo es en las dos superficies. Lo
+  // que cae dentro tiene que leer en oscuro también cuando la página es oscura
+  // y la tinta ambiente es blanca — que es lo que declara `.surface-light`. No
+  // va en la raíz: ahí es la superficie ambiente la que decide el relleno.
+  const interiorSurface = variant === 'warning' ? ' surface-light' : '';
 
   return (
     <div
@@ -90,10 +96,14 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner({
       className={classes}
       {...rest}
     >
-      <div className="banner__content">{children}</div>
-      {actions && <div className="banner__actions">{actions}</div>}
+      <div className={`banner__content${interiorSurface}`}>{children}</div>
+      {actions && <div className={`banner__actions${interiorSurface}`}>{actions}</div>}
       {onDismiss && (
-        <CloseButton className="banner__close" label={t('dismiss', dismissLabel)} onClick={onDismiss} />
+        <CloseButton
+          className={`banner__close${interiorSurface}`}
+          label={t('dismiss', dismissLabel)}
+          onClick={onDismiss}
+        />
       )}
     </div>
   );

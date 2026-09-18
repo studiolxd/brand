@@ -20,6 +20,13 @@
   font-size: var(--banner-font-size);
   line-height: var(--banner-line-height);
 
+  /* La tinta de la barra se copia aquí, en la raíz, y el contenido consume la
+     copia. En el aviso, el contenido y las acciones viven dentro de la
+     superficie interior (`.surface-light`), que declara `color` en el propio
+     elemento y se comería la tinta heredada del relleno. La raíz sí está en la
+     superficie ambiente, que es la que decide el relleno. */
+  --banner-ink: var(--banner-color);
+
   /* Por debajo de md el mensaje y las acciones apilan; a partir de md van en
      una fila. Móvil primero. */
   display: flex;
@@ -35,6 +42,14 @@
 
 .banner__content {
   min-inline-size: 0;
+}
+
+/* Doble clase: la tinta tiene que ganarle al `color` que `.surface-light` pone
+   en el propio elemento (misma especificidad, y el orden entre la hoja base y
+   la del componente no está garantizado en el bundle del consumidor). */
+.banner .banner__content,
+.banner .banner__actions {
+  color: var(--banner-ink);
 }
 
 /* Norma del sistema (ver Fundamentos › Puntos de ruptura): el pie de acciones
@@ -101,7 +116,9 @@
   --banner-color:        var(--banner-warning-color);
   --banner-border-color: var(--banner-warning-border-color);
   /* El aviso es el único relleno claro: el aspa no puede heredar la tinta
-     ambiente, que en tema oscuro es blanca. Se fija a la tinta del rol. */
+     ambiente, que en tema oscuro es blanca. Se fija a la tinta del rol —el
+     mismo prusia que le da la superficie interior, que es la que atiende al
+     resto del cromo (botones y enlaces de las acciones). */
   --close-button-color:            var(--banner-warning-close-color);
   --close-button-focus-ring-color: var(--banner-warning-close-color);
 }

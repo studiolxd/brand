@@ -97,6 +97,49 @@ export const EnSuperficieOscura: Story = {
   },
 };
 
+/**
+ * Test: lo que cae dentro de la barra lee con la tinta del relleno, no con la
+ * de la página. Sobre `.surface-dark` un botón `outline` heredaría el blanco
+ * ambiente: en `warning` saldría blanco sobre amarillo. Los colores no se
+ * parsean a mano — se resuelven con el navegador, por si el CSS compilado los
+ * minifica.
+ */
+export const ContratoTintaDeLasAcciones: Story = {
+  name: 'Test — botones dentro del aviso',
+  tags: ['!dev'],
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
+  render: () => (
+    <>
+      <Banner variant="warning" actions={<Button variant="outline" size="sm">Ver detalles</Button>}>
+        El mantenimiento previsto empieza hoy a las 22:00.
+      </Banner>
+      <Banner actions={<Button variant="outline" size="sm">Dejar de suplantar</Button>}>
+        Estás viendo la aplicación como ana.perez@studiolxd.com.
+      </Banner>
+      <span data-sonda="prusia" style={{ color: 'var(--color-primary)' }} />
+      <span data-sonda="blanco" style={{ color: 'var(--color-text-on-dark)' }} />
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const resuelto = (selector: string) =>
+      getComputedStyle(canvasElement.querySelector(selector) as HTMLElement).color;
+
+    const prusia = resuelto('[data-sonda="prusia"]');
+    const blanco = resuelto('[data-sonda="blanco"]');
+    await expect(prusia).not.toBe(blanco);
+
+    // El aviso es un relleno claro en las dos superficies: su botón lee prusia
+    // aunque la página esté en oscuro.
+    const aviso = canvasElement.querySelector('.banner--warning') as HTMLElement;
+    await expect(aviso.querySelector('.banner__actions')).toHaveClass('surface-light');
+    await expect(resuelto('.banner--warning .banner__actions .button')).toBe(prusia);
+
+    // Y el `info`, que es un relleno oscuro y universal, lee en blanco: la cara
+    // la declara su raíz.
+    await expect(resuelto('.banner--info .banner__actions .button')).toBe(blanco);
+  },
+};
+
 /** Test: rol, live region, variante por defecto y reenvío de props. */
 export const Contrato: Story = {
   name: 'Test — rol, variante y paso de props',
@@ -116,10 +159,12 @@ export const Contrato: Story = {
     await expect(porDefecto).toHaveAttribute('data-uso', 'prueba');
     await expect(porDefecto.className.trim().endsWith('extra')).toBe(true);
 
-    // El aviso es el único relleno claro: no se declara superficie oscura.
+    // El aviso es el único relleno claro: no se declara superficie oscura, sino
+    // la superficie interior en el contenido y en las acciones.
     const aviso = canvas.getByText('Aviso').parentElement!;
     await expect(aviso).toHaveClass('banner', 'banner--warning');
     await expect(aviso).not.toHaveClass('surface-dark');
+    await expect(canvas.getByText('Aviso')).toHaveClass('surface-light');
     await expect(aviso).toHaveAttribute('role', 'alert');
     await expect(aviso).toHaveAttribute('aria-live', 'assertive');
   },

@@ -70,6 +70,17 @@ const ROLE_BY_VARIANT: Record<AlertVariant, 'alert' | 'status'> = {
   warning: 'alert',
 };
 
+/**
+ * Superficie interior por variante — la cara del relleno, que no tiene por qué
+ * ser la de la página. Ver el comentario de `interiorSurface` más abajo.
+ */
+const INTERIOR_SURFACE: Record<AlertVariant, string> = {
+  default: ' surface-invert',
+  warning: ' surface-light',
+  success: '',
+  error: '',
+};
+
 /** Subparte de composición: título del alert. */
 export const AlertTitle = forwardRef<HTMLParagraphElement, AlertTitleProps>(function AlertTitle(
   { className, children, ...rest }, ref) {
@@ -140,8 +151,8 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
     // voltea con el tema. El `default` NO puede —sus tokens sí voltean, y un
     // selector de tema sobre la propia raíz le daría el valor de la otra cara—,
     // así que su superficie interior va en el contenido y en el aspa
-    // (`interiorSurface`). `warning` es el único relleno claro y no declara
-    // ninguna: lee con la superficie ambiente.
+    // (`interiorSurface`). `warning` tampoco: su cara es clara, y va por el
+    // mismo camino.
     variant === 'success' || variant === 'error' ? 'surface-dark' : '',
     dismissible ? 'alert--dismissible' : '',
     className ?? '',
@@ -149,11 +160,15 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
     .filter(Boolean)
     .join(' ');
 
-  // El relleno del `default` es el lienzo invertido: prusia sobre una página
-  // clara, blanco sobre una oscura. Lo que se componga dentro (enlaces,
-  // botones, el aspa) lee sobre ese relleno, no sobre la página — que es lo
-  // que declara `.surface-invert`.
-  const interiorSurface = variant === 'default' ? ' surface-invert' : '';
+  // La superficie interior del relleno: la cara sobre la que lee lo que se
+  // componga dentro (enlaces, botones, el aspa), que no es la de la página.
+  // El `default` es el lienzo invertido —prusia sobre página clara, blanco
+  // sobre oscura—, así que la suya es la contraria a la ambiente
+  // (`.surface-invert`). El `warning` es el único relleno claro, y lo es en las
+  // dos superficies: la suya es siempre la clara (`.surface-light`), o el botón
+  // de las acciones saldría blanco sobre amarillo con la página en oscuro.
+  // `success` y `error` no la necesitan: su cara la declara ya la raíz.
+  const interiorSurface = INTERIOR_SURFACE[variant];
 
   /**
    * Saca el foco del botón de cierre antes de que desaparezca. Con

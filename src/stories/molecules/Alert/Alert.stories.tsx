@@ -88,7 +88,9 @@ export const Composicion: Story = {
  * Superficie oscura. El `default` invierte: relleno blanco con tinta prusia, y el
  * borde igual al fondo. Lo que se compone dentro voltea con él —el enlace y el
  * aspa leen en claro—, porque el contenido declara `.surface-invert`. Los tres
- * rellenos saturados son universales y no cambian.
+ * rellenos saturados son universales y no cambian; el `warning`, que es claro en
+ * las dos superficies, declara su interior siempre claro (`.surface-light`) para
+ * que un botón no salga blanco sobre amarillo.
  */
 export const SuperficieOscura: Story = {
   name: 'En superficie oscura',
@@ -103,7 +105,11 @@ export const SuperficieOscura: Story = {
       </Alert>
       <Alert variant="success" title="Operación completada" />
       <Alert variant="error" title="Ha ocurrido un error" />
-      <Alert variant="warning" title="Atención requerida" />
+      <Alert
+        variant="warning"
+        title="Atención requerida"
+        actions={<Button variant="outline" size="sm">Revisar</Button>}
+      />
     </div>
   ),
 };

@@ -734,6 +734,40 @@ console.log('✔︎ src/tokens/surface-dark-derived.css');
   ];
   writeFileSync('src/tokens/surface-invert.css', invertLines.join('\n'));
   console.log('✔︎ src/tokens/surface-invert.css');
+
+  /* -------------------------------------------------------------------------
+   * Superficie SIEMPRE clara: `.surface-light`
+   *
+   * El contrapunto de `.surface-dark`. El relleno de un componente puede ser
+   * claro y universal —el amarillo del aviso, igual en las dos superficies—, y
+   * entonces lo que se componga dentro (un botón de las acciones, un enlace, el
+   * aspa) tiene que leer en oscuro SIEMPRE, también cuando la página es oscura
+   * y la tinta ambiente es blanca. Ni `.surface-dark` (justo al revés) ni
+   * `.surface-invert` (la cara contraria a la ambiente, o sea oscura sobre
+   * página clara) sirven: la cara de este relleno no depende de la página.
+   *
+   * No está en `DARK_SELECTORS`, así que sobre página clara no hace nada —los
+   * tokens ya están en claro—. Lo único que hace falta es el camino de vuelta
+   * dentro de una superficie oscura, que es este bloque: los mismos nombres y
+   * los mismos valores claros que `.surface-invert`, con su propio selector.
+   * ---------------------------------------------------------------------- */
+  const lightSelectors = DARK_SELECTORS.map((selector) => `${selector} .surface-light`);
+  const lightLines = [
+    '/**',
+    ' * Do not edit directly, this file was auto-generated.',
+    ' *',
+    ' * Superficie siempre clara: `.surface-light` devuelve a su valor claro todo',
+    ' * token que el modo oscuro haya volteado. Sobre página clara no hace falta',
+    ' * bloque: los tokens ya están en claro.',
+    ' */',
+    '',
+    `${lightSelectors.join(',\n')} {`,
+    ...invertidos.map(([name, value]) => `  ${name}: ${value};`),
+    '}',
+    '',
+  ];
+  writeFileSync('src/tokens/surface-light.css', lightLines.join('\n'));
+  console.log('✔︎ src/tokens/surface-light.css');
 }
 
 /* En la superficie pública la talla de partida de un control es `lg`.

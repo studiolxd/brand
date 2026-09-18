@@ -54,9 +54,17 @@ atención.
 
 ## Acciones
 
-`actions` es una ranura: recibe un `Button` del sistema. Sobre el relleno prusia
-el botón lee en su cara clara sin configurarlo, porque la barra se declara
-superficie oscura.
+`actions` es una ranura: recibe un `Button` del sistema. **Lo que cae dentro lee
+siempre con la tinta del relleno**, no con la de la página, y en todas las
+variantes: el consumidor no configura nada.
+
+Cada relleno declara su cara donde le toca. El prusia de `info` es oscuro y
+universal, así que la declara en la raíz (`.surface-dark`): ninguno de sus
+tokens voltea con el tema. El aviso es el único relleno claro, y lo es en
+las dos superficies, así que su cara va sobre lo que cae dentro
+(`.surface-light` en el contenido y en las acciones): sin eso, con la página en
+oscuro un botón `outline` heredaría el blanco ambiente y saldría blanco sobre
+amarillo.
 
 <Canvas of={BannerStories.ConAccion} />
 
@@ -68,8 +76,8 @@ superficie oscura.
 
 `info` mantiene el relleno prusia en las dos superficies —es autocontenido, como
 el `Alert` por defecto— y es su filete blanco el que dibuja el canto cuando la
-página ya es oscura. El aviso tampoco cambia: su relleno es universal, y solo el
-aspa se fija a la tinta del rol para no salir blanca sobre amarillo.
+página ya es oscura. El aviso tampoco cambia: su relleno es universal. Lo que cambia es de dónde sale la tinta de lo que llevan dentro —
+ver § «Acciones».
 
 <Canvas of={BannerStories.EnSuperficieOscura} />
 

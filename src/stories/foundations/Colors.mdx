@@ -199,6 +199,7 @@ Los cuatro activan lo mismo, a distinta escala:
 - **`html.dark`** o **`[data-theme="dark"]`** en la raíz: toda la página. Es lo que usa un gestor de tema (`next-themes`).
 - **`.surface-dark`** en cualquier contenedor: solo lo que hay dentro. Sirve para una banda oscura en una página clara — un `Container` con esta clase voltea el header, los botones y el texto que contiene.
 - **`.surface-invert`** en el interior de un relleno que invierte el lienzo: oscuro sobre página clara y claro sobre página oscura (§ «La superficie contraria a la ambiente»).
+- **`.surface-light`** en el interior de un relleno claro y universal —el amarillo del aviso—: siempre claro, sea cual sea la página (§ «La superficie siempre clara»).
 
 Las custom properties se heredan por cascada, así que basta con que el selector alcance a un ancestro. Los componentes no saben en qué tema están: leen su token y ya.
 
@@ -241,6 +242,14 @@ Dos reglas de uso:
 
 - **No pinta el lienzo.** A diferencia de `.surface-dark`, solo lleva la tinta: se aplica dentro de un relleno que ya está pintado por el componente que la abre, y volver a pintarlo lo taparía.
 - **No va en el elemento que consume los tokens volteados.** Un selector de tema sobre la propia raíz le daría a esa raíz el valor de la otra cara: el `Alert` la pone en el contenido y en el aspa, no en el `<div>` que pinta el relleno, y copia antes su tinta en un alias (`--alert-title-ink`) para que el texto de dentro siga leyendo la cara de fuera.
+
+### La superficie siempre clara
+
+Hay un relleno que no invierte nada y que tampoco es oscuro: **el amarillo del aviso**, que es universal —el mismo color en las dos superficies, por la regla de los `*-fill`—. Su cara es la clara, y lo es siempre. Ni `.surface-dark` (justo al revés) ni `.surface-invert` (que sobre página clara da la cara oscura) sirven ahí.
+
+Esa región es **`.surface-light`**, el contrapunto de `.surface-dark`. No está en la lista de selectores oscuros, así que sobre página clara no hace nada: los tokens ya están en claro. Lo único que hace falta es el camino de vuelta, y ese lo pone `src/tokens/surface-light.css` —generado, con los mismos nombres y los mismos valores claros que `surface-invert.css`—, que devuelve cada token volteado a su valor claro cuando la clase cae dentro de una superficie oscura.
+
+Se usa con las mismas dos reglas que `.surface-invert` —no pinta el lienzo, y no va en el elemento que consume los tokens volteados—. La abren el `Alert` y el `Banner` en su variante `warning`, sobre el contenido, las acciones y el aspa: sin ella, con la página en oscuro un `Button variant="outline"` dentro del aviso heredaría el blanco ambiente y saldría blanco sobre amarillo (1,50:1).
 
 ### Un enlace dentro de un aviso lee en tinta, no en acento
 

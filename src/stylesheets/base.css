@@ -79,6 +79,26 @@ html.dark .surface-invert,
   color-scheme: light;
 }
 
+/* La superficie SIEMPRE clara, el contrapunto de `.surface-dark`: el interior de
+   un relleno claro y universal —el amarillo del aviso, igual en las dos
+   superficies—, cuyo contenido tiene que leer en oscuro también cuando la
+   página es oscura. Sobre página clara no hace falta nada (los tokens ya están
+   en claro); dentro de una oscura, `src/tokens/surface-light.css` los devuelve
+   a su valor claro y aquí va con ellos el chrome nativo.
+
+   Como `.surface-invert`, NO pinta el lienzo: el relleno ya lo pinta el
+   componente que la abre. Sí lleva la tinta. */
+.surface-light {
+  color: var(--text-color);
+}
+
+.surface-dark .surface-light,
+.surface-invert .surface-light,
+[data-theme="dark"] .surface-light,
+html.dark .surface-light {
+  color-scheme: light;
+}
+
 /* El aire bajo un título es del título y escala con su tamaño (em): un h1
    grande deja más aire que un h4 pequeño sin que el contenedor lo sepa.
    El aire *antes* lo pone la maqueta. Un título solo (último hijo) no deja hueco. */
