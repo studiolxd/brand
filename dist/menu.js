@@ -42,6 +42,7 @@ function c({ trigger: c, items: l, value: u, onValueChange: d, renderLink: f = r
 						itemClass: s,
 						separatorClass: "menu__separator",
 						labelClass: "menu__label",
+						blockClass: "menu",
 						radioValue: u,
 						onRadioValueChange: d,
 						renderLink: f

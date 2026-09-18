@@ -7,6 +7,39 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.5.0] — 2026-09-18
+
+> **Minor.** La cuenta se lee en dos líneas: el ítem de menú acepta una segunda línea bajo la
+> etiqueta, y la cabecera del menú de cuenta enseña la foto de la cuenta activa.
+
+### `MenuItem description` — el ítem de dos líneas
+
+Un ítem de menú solo sabía decir una cosa: icono y una línea. El selector de varias cuentas del
+shell tenía que apretar ahí nombre y correo —«Ana García · ana@…»— con el avatar haciendo de
+icono, que es justo la información que se lee peor cuando hay tres cuentas parecidas.
+
+`description` (opcional, en los ítems `button` y `link`) pinta esa segunda línea debajo de la
+etiqueta, más tenue, y centra el icono —el avatar— contra el bloque de las dos. Cada línea se
+recorta con puntos suspensivos, así que un correo largo no ensancha el panel. Es **aditivo**: sin
+`description` el ítem sale con el marcado de siempre —ni envoltorio de texto ni segunda línea—, y
+los menús de una línea que ya existen no cambian ni un píxel.
+
+No hay tokens nuevos. La segunda línea toma la letra y la tinta del rótulo de sección
+(`menu.label-font-size`, `menu.label-color`), que es el papel que ya cumplen en este menú, y bajo
+el puntero o el teclado va con la tinta del ítem resaltado en vez de con la suya, para no quedarse
+gris sobre el relleno de marca. Las clases son `menu__item-icon`, `-text`, `-label` y
+`-description`; el `UserMenu` las tiene con su prefijo y su propia tinta (la del correo de la
+cabecera), para que una lista de cuentas dentro de ese panel se lea igual.
+
+### `UserMenu` — la cabecera enseña a quién pertenece la cuenta
+
+La cabecera del panel decía el nombre y el correo, pero no enseñaba la foto: el avatar solo
+estaba en el disparador, y al abrir el menú desaparecía justo cuando hace falta confirmar en qué
+cuenta estás. Ahora la cabecera es una fila: el `Avatar` de siempre a la izquierda (foto o, sin
+`avatarUrl`, las iniciales) y, al lado, nombre y correo en columna. Decorativo (`alt=""`), porque
+el nombre va escrito al lado. El aire entre foto y texto es el mismo que en el disparador
+(`user-menu.trigger-gap`): es la misma pareja. Sin tokens nuevos.
+
 ## [49.4.0] — 2026-09-17
 
 > **Minor.** Cuatro huecos que dejó al descubierto la campaña de crudos de bricks: un bocadillo

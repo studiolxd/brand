@@ -2,6 +2,13 @@ import type { ReactNode } from 'react';
 export type MenuButtonItem = {
     type: 'button';
     label: string;
+    /**
+     * Segunda línea del ítem, más tenue: el correo de una cuenta, el detalle de
+     * una acción. Con ella el ítem se pinta a dos líneas —`label` arriba,
+     * `description` debajo— y el icono se alinea al bloque entero. Sin ella, el
+     * ítem se pinta a una línea, exactamente igual que siempre.
+     */
+    description?: string;
     icon?: ReactNode;
     onClick: () => void;
     disabled?: boolean;
@@ -16,6 +23,8 @@ export type MenuButtonItem = {
 export type MenuLinkItem = {
     type: 'link';
     label: string;
+    /** Segunda línea del ítem, más tenue. Igual que en el ítem `button`. */
+    description?: string;
     icon?: ReactNode;
     href: string;
     disabled?: boolean;
@@ -63,9 +72,17 @@ interface RenderDropdownItemsOptions {
     renderLink: (props: MenuRenderLinkProps) => ReactNode;
     /** Clase del rótulo de sección (ítems `label`). Sin ella, no se renderizan. */
     labelClass?: string;
+    /**
+     * Bloque BEM del menú que renderiza (`menu`, `user-menu`…): de él salen las
+     * clases del icono y de las dos líneas del ítem (`<bloque>__item-icon`,
+     * `-text`, `-label`, `-description`). Sin él, el ítem se pinta como siempre
+     * —una línea y el icono sin clase— y `description` se ignora: un menú que no
+     * viste la segunda línea no la dibuja a medias.
+     */
+    blockClass?: string;
     /** Valor activo del grupo de radio. */
     radioValue?: string;
     onRadioValueChange?: (value: string) => void;
 }
-export declare function renderDropdownItems({ items, itemClass, separatorClass, renderLink, labelClass, radioValue, onRadioValueChange, }: RenderDropdownItemsOptions): ReactNode;
+export declare function renderDropdownItems({ items, itemClass, separatorClass, renderLink, labelClass, blockClass, radioValue, onRadioValueChange, }: RenderDropdownItemsOptions): ReactNode;
 export {};

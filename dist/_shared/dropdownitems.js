@@ -7,11 +7,22 @@ function i({ children: e, ...n }) {
 		children: e
 	});
 }
-function a(r, i) {
+function a(r, i, a, o) {
+	let s = a && o ? /* @__PURE__ */ n("span", {
+		className: `${o}__item-text`,
+		children: [/* @__PURE__ */ t("span", {
+			className: `${o}__item-label`,
+			children: r
+		}), /* @__PURE__ */ t("span", {
+			className: `${o}__item-description`,
+			children: a
+		})]
+	}) : r;
 	return i ? /* @__PURE__ */ n(e, { children: [/* @__PURE__ */ t("span", {
 		"aria-hidden": "true",
+		className: o ? `${o}__item-icon` : void 0,
 		children: i
-	}), r] }) : /* @__PURE__ */ t(e, { children: r });
+	}), s] }) : /* @__PURE__ */ t(e, { children: s });
 }
 function o(e) {
 	return e.reduce((e, t) => {
@@ -22,8 +33,8 @@ function o(e) {
 		}), e;
 	}, []);
 }
-function s({ items: e, itemClass: n, separatorClass: i, renderLink: s, labelClass: c, radioValue: l, onRadioValueChange: u }) {
-	let d = (e, o) => {
+function s({ items: e, itemClass: n, separatorClass: i, renderLink: s, labelClass: c, blockClass: l, radioValue: u, onRadioValueChange: d }) {
+	let f = (e, o) => {
 		if (e.type === "separator") return /* @__PURE__ */ t(r.Separator, { className: i }, o);
 		if (e.type === "label") return c ? /* @__PURE__ */ t(r.Group, { children: /* @__PURE__ */ t(r.GroupLabel, {
 			className: c,
@@ -34,20 +45,20 @@ function s({ items: e, itemClass: n, separatorClass: i, renderLink: s, labelClas
 			value: e.value,
 			disabled: e.disabled,
 			closeOnClick: e.closeOnSelect !== !1,
-			children: a(e.label, e.icon)
+			children: a(e.label, e.icon, void 0, l)
 		}, o);
-		let l = a(e.label, e.icon);
+		let u = a(e.label, e.icon, e.description, l);
 		return e.type === "link" ? e.disabled ? /* @__PURE__ */ t(r.Item, {
 			className: n(e.destructive),
 			disabled: !0,
-			children: l
+			children: u
 		}, o) : /* @__PURE__ */ t(r.Item, {
 			className: n(e.destructive),
 			render: (t) => s({
 				...t,
 				href: e.href,
 				className: t.className ?? n(e.destructive),
-				children: l
+				children: u
 			})
 		}, o) : /* @__PURE__ */ t(r.Item, {
 			className: n(e.destructive),
@@ -60,18 +71,18 @@ function s({ items: e, itemClass: n, separatorClass: i, renderLink: s, labelClas
 				}
 				setTimeout(() => e.onClick(), 0);
 			},
-			children: l
+			children: u
 		}, o);
-	}, f = e;
-	if (!f.some((e) => e.type === "radio")) return f.map(d);
-	let p = 0;
-	return o(f).map((e, n) => {
-		let i = p;
-		p += e.items.length;
-		let a = e.items.map((e, t) => d(e, i + t));
+	}, p = e;
+	if (!p.some((e) => e.type === "radio")) return p.map(f);
+	let m = 0;
+	return o(p).map((e, n) => {
+		let i = m;
+		m += e.items.length;
+		let a = e.items.map((e, t) => f(e, i + t));
 		return e.radio ? /* @__PURE__ */ t(r.RadioGroup, {
-			value: l,
-			onValueChange: (e) => u?.(String(e)),
+			value: u,
+			onValueChange: (e) => d?.(String(e)),
 			children: a
 		}, `radio-${n}`) : a;
 	});

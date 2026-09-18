@@ -69,17 +69,27 @@ function m({ name: u, email: m, avatarUrl: h, notificationCount: g, items: _ = [
 					className: "user-menu__content",
 					children: [/* @__PURE__ */ c("div", {
 						className: "user-menu__header",
-						children: [/* @__PURE__ */ s("span", {
-							className: "user-menu__header-name",
-							children: u
-						}), /* @__PURE__ */ s("span", {
-							className: "user-menu__header-email",
-							children: m
+						children: [/* @__PURE__ */ s(r, {
+							src: h,
+							name: u,
+							alt: "",
+							size: "md",
+							className: "user-menu__header-avatar"
+						}), /* @__PURE__ */ c("div", {
+							className: "user-menu__header-text",
+							children: [/* @__PURE__ */ s("span", {
+								className: "user-menu__header-name",
+								children: u
+							}), /* @__PURE__ */ s("span", {
+								className: "user-menu__header-email",
+								children: m
+							})]
 						})]
 					}), _.length > 0 && /* @__PURE__ */ c(o, { children: [/* @__PURE__ */ s(l.Separator, { className: "user-menu__separator" }), a({
 						items: _,
 						itemClass: p,
 						separatorClass: "user-menu__separator",
+						blockClass: "user-menu",
 						renderLink: b
 					})] })]
 				})
