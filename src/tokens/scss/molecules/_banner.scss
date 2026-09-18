@@ -16,3 +16,6 @@ $lxd-banner-warning-bg: #ffcd00; // Aviso — el relleno del rol: el amarillo de
 $lxd-banner-warning-color: #111e30; // Aviso — mensaje prusia sobre el relleno amarillo (11,17:1, AAA)
 $lxd-banner-warning-border-color: #ffcd00; // Aviso — filete igual al relleno: el amarillo ya se separa de cualquier fondo del sistema
 $lxd-banner-warning-close-color: #111e30; // Aviso — aspa y su anillo de foco. Es el único relleno claro de la barra, así que el aspa no puede tomar la tinta ambiente: con `[data-theme="dark"]` en la raíz saldría blanca sobre amarillo (1,50:1). Va fijada a la tinta del rol, que es universal
+$lxd-banner-error-bg: #b30000; // Error — el relleno del rol: el rojo semántico. Universal, igual en las dos superficies, como el de `Alert error`
+$lxd-banner-error-color: #ffffff; // Error — mensaje blanco sobre el relleno rojo
+$lxd-banner-error-border-color: #b30000; // Error — filete igual al relleno: el rojo ya se separa de cualquier fondo del sistema

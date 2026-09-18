@@ -52,15 +52,22 @@ atención.
 
 <Canvas of={BannerStories.Aviso} />
 
+`error` es para el estado que hay que ver antes que nada: la suplantación es el
+caso de referencia. Es el relleno de error del sistema —el mismo rol que el
+`Alert` de error, universal en las dos superficies—, con el aspa y las acciones
+en la tinta del relleno.
+
+<Canvas of={BannerStories.VarianteError} />
+
 ## Acciones
 
 `actions` es una ranura: recibe un `Button` del sistema. **Lo que cae dentro lee
 siempre con la tinta del relleno**, no con la de la página, y en todas las
 variantes: el consumidor no configura nada.
 
-Cada relleno declara su cara donde le toca. El prusia de `info` es oscuro y
-universal, así que la declara en la raíz (`.surface-dark`): ninguno de sus
-tokens voltea con el tema. El aviso es el único relleno claro, y lo es en
+Cada relleno declara su cara donde le toca. Los oscuros y universales —el prusia
+de `info`, el rojo de `error`— la declaran en la raíz (`.surface-dark`): ninguno
+de sus tokens voltea con el tema. El aviso es el único relleno claro, y lo es en
 las dos superficies, así que su cara va sobre lo que cae dentro
 (`.surface-light` en el contenido y en las acciones): sin eso, con la página en
 oscuro un botón `outline` heredaría el blanco ambiente y saldría blanco sobre
@@ -76,7 +83,8 @@ amarillo.
 
 `info` mantiene el relleno prusia en las dos superficies —es autocontenido, como
 el `Alert` por defecto— y es su filete blanco el que dibuja el canto cuando la
-página ya es oscura. El aviso tampoco cambia: su relleno es universal. Lo que cambia es de dónde sale la tinta de lo que llevan dentro —
+página ya es oscura. El aviso y el error tampoco cambian: sus rellenos son
+universales. Lo que cambia es de dónde sale la tinta de lo que llevan dentro —
 ver § «Acciones».
 
 <Canvas of={BannerStories.EnSuperficieOscura} />
@@ -93,9 +101,10 @@ ver § «Acciones».
 
 ## Accesibilidad
 
-- Anuncia como `role="status"` con `aria-live="polite"`: un aviso de sesión no
-  interrumpe lo que se esté haciendo. Ambos se pueden sobrescribir si el caso lo
-  pide (un corte de servicio inminente sí querría `alert` / `assertive`).
+- El rol sale de la variante, con el mismo criterio que en `Alert`: `warning` y
+  `error` interrumpen (`role="alert"`, `aria-live="assertive"`) e `info` informa
+  sin interrumpir (`role="status"`, `aria-live="polite"`). Ambos se pueden
+  sobrescribir con las props `role` y `aria-live`.
 - El aspa lleva nombre accesible por `dismissLabel`, que dice **qué** descarta.
   Default «Descartar aviso»; una app multiidioma lo pasa traducido.
 - Si el banner es `sticky`, la aplicación debe dejarle sitio al contenido: una

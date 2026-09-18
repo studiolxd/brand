@@ -16,6 +16,10 @@
     "warning-bg":           { "$value": "{color.warning-fill}",      "$type": "color", "$description": "Aviso — el relleno del rol: el amarillo de marca, aquí como feedback. Universal, igual en las dos superficies" },
     "warning-color":        { "$value": "{color.warning-fill-text}", "$type": "color", "$description": "Aviso — mensaje prusia sobre el relleno amarillo (11,17:1, AAA)" },
     "warning-border-color": { "$value": "{color.warning-fill}",      "$type": "color", "$description": "Aviso — filete igual al relleno: el amarillo ya se separa de cualquier fondo del sistema" },
-    "warning-close-color":  { "$value": "{color.warning-fill-text}", "$type": "color", "$description": "Aviso — aspa y su anillo de foco. Es el único relleno claro de la barra, así que el aspa no puede tomar la tinta ambiente: con `[data-theme=\"dark\"]` en la raíz saldría blanca sobre amarillo (1,50:1). Va fijada a la tinta del rol, que es universal" }
+    "warning-close-color":  { "$value": "{color.warning-fill-text}", "$type": "color", "$description": "Aviso — aspa y su anillo de foco. Es el único relleno claro de la barra, así que el aspa no puede tomar la tinta ambiente: con `[data-theme=\"dark\"]` en la raíz saldría blanca sobre amarillo (1,50:1). Va fijada a la tinta del rol, que es universal" },
+
+    "error-bg":           { "$value": "{color.error-fill}",      "$type": "color", "$description": "Error — el relleno del rol: el rojo semántico. Universal, igual en las dos superficies, como el de `Alert error`" },
+    "error-color":        { "$value": "{color.error-fill-text}", "$type": "color", "$description": "Error — mensaje blanco sobre el relleno rojo" },
+    "error-border-color": { "$value": "{color.error-fill}",      "$type": "color", "$description": "Error — filete igual al relleno: el rojo ya se separa de cualquier fondo del sistema" }
   }
 }

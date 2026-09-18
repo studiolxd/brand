@@ -15,7 +15,7 @@ const meta: Meta<typeof Banner> = {
   argTypes: {
     variant: {
       control: { type: 'inline-radio' },
-      options: ['info', 'warning'],
+      options: ['info', 'warning', 'error'],
       description: 'Intención de la barra.',
     },
     actions: { control: false },
@@ -45,6 +45,21 @@ export const Aviso: Story = {
   args: {
     variant: 'warning',
     children: 'El mantenimiento previsto empieza hoy a las 22:00 y durará una hora.',
+  },
+};
+
+/**
+ * `error` es para el estado que hay que ver antes que nada: la suplantación es
+ * el caso de referencia. Relleno rojo del sistema —el mismo rol que el `Alert`
+ * de error, universal en las dos superficies— con el aspa y las acciones en la
+ * tinta del relleno.
+ */
+export const VarianteError: Story = {
+  name: 'Error',
+  args: {
+    variant: 'error',
+    children: 'Estás viendo la aplicación como ana.perez@studiolxd.com.',
+    actions: <Button variant="outline" size="sm">Dejar de suplantar</Button>,
   },
 };
 
@@ -100,9 +115,9 @@ export const EnSuperficieOscura: Story = {
 /**
  * Test: lo que cae dentro de la barra lee con la tinta del relleno, no con la
  * de la página. Sobre `.surface-dark` un botón `outline` heredaría el blanco
- * ambiente: en `warning` saldría blanco sobre amarillo. Los colores no se
- * parsean a mano — se resuelven con el navegador, por si el CSS compilado los
- * minifica.
+ * ambiente: en `warning` saldría blanco sobre amarillo, y en `error` la tinta
+ * tiene que ser la del relleno igual. Los colores no se parsean a mano — se
+ * resuelven con el navegador, por si el CSS compilado los minifica.
  */
 export const ContratoTintaDeLasAcciones: Story = {
   name: 'Test — botones dentro del aviso',
@@ -113,7 +128,7 @@ export const ContratoTintaDeLasAcciones: Story = {
       <Banner variant="warning" actions={<Button variant="outline" size="sm">Ver detalles</Button>}>
         El mantenimiento previsto empieza hoy a las 22:00.
       </Banner>
-      <Banner actions={<Button variant="outline" size="sm">Dejar de suplantar</Button>}>
+      <Banner variant="error" actions={<Button variant="outline" size="sm">Dejar de suplantar</Button>}>
         Estás viendo la aplicación como ana.perez@studiolxd.com.
       </Banner>
       <span data-sonda="prusia" style={{ color: 'var(--color-primary)' }} />
@@ -134,9 +149,10 @@ export const ContratoTintaDeLasAcciones: Story = {
     await expect(aviso.querySelector('.banner__actions')).toHaveClass('surface-light');
     await expect(resuelto('.banner--warning .banner__actions .button')).toBe(prusia);
 
-    // Y el `info`, que es un relleno oscuro y universal, lee en blanco: la cara
-    // la declara su raíz.
-    await expect(resuelto('.banner--info .banner__actions .button')).toBe(blanco);
+    // El error es un relleno saturado: su cara es oscura y la declara la raíz.
+    const error = canvasElement.querySelector('.banner--error') as HTMLElement;
+    await expect(error).toHaveClass('surface-dark');
+    await expect(resuelto('.banner--error .banner__actions .button')).toBe(blanco);
   },
 };
 
@@ -147,7 +163,8 @@ export const Contrato: Story = {
   render: () => (
     <>
       <Banner data-uso="prueba" className="extra">Por defecto</Banner>
-      <Banner variant="warning" role="alert" aria-live="assertive">Aviso</Banner>
+      <Banner variant="warning">Aviso</Banner>
+      <Banner variant="error">Error</Banner>
     </>
   ),
   play: async ({ canvasElement }) => {
@@ -167,6 +184,12 @@ export const Contrato: Story = {
     await expect(canvas.getByText('Aviso')).toHaveClass('surface-light');
     await expect(aviso).toHaveAttribute('role', 'alert');
     await expect(aviso).toHaveAttribute('aria-live', 'assertive');
+
+    // El rol sale de la variante: `error` y `warning` interrumpen.
+    const error = canvas.getByText('Error').parentElement!;
+    await expect(error).toHaveClass('banner', 'banner--error', 'surface-dark');
+    await expect(error).toHaveAttribute('role', 'alert');
+    await expect(error).toHaveAttribute('aria-live', 'assertive');
   },
 };
 

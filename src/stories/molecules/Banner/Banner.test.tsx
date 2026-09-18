@@ -31,18 +31,27 @@ describe('Banner', () => {
     expect(screen.getByRole('alert')).toHaveAttribute('aria-live', 'assertive');
   });
 
-  it('la variante pone su clase y su superficie interior', () => {
+  it('la variante pone su clase y su superficie, y el rol sale de ella', () => {
     const { rerender } = render(<Banner>Info</Banner>);
     expect(screen.getByRole('status')).toHaveClass('banner', 'banner--info', 'surface-dark');
 
     rerender(<Banner variant="warning" actions={<button type="button">Ver</button>}>Aviso</Banner>);
-    const aviso = screen.getByRole('status');
+    // El aviso interrumpe, como en `Alert`.
+    const aviso = screen.getByRole('alert');
     expect(aviso).toHaveClass('banner', 'banner--warning');
+    expect(aviso).toHaveAttribute('aria-live', 'assertive');
     // El aviso es el único relleno claro: no se declara superficie oscura, sino
     // la superficie interior sobre lo que cae dentro.
     expect(aviso).not.toHaveClass('surface-dark');
     expect(aviso.querySelector('.banner__content')).toHaveClass('surface-light');
     expect(aviso.querySelector('.banner__actions')).toHaveClass('surface-light');
+
+    rerender(<Banner variant="error" actions={<button type="button">Ver</button>}>Error</Banner>);
+    const error = screen.getByRole('alert');
+    expect(error).toHaveClass('banner', 'banner--error', 'surface-dark');
+    expect(error).toHaveAttribute('aria-live', 'assertive');
+    // El relleno saturado declara su cara en la raíz: nada que envolver dentro.
+    expect(error.querySelector('.banner__actions')).not.toHaveClass('surface-light');
   });
 
   it('el aspa solo aparece con onDismiss, y la barra no se oculta sola', async () => {

@@ -16,6 +16,9 @@
   --banner-info-border-color: var(--color-text-on-dark); /** Información — filete blanco. Dibuja el canto también cuando la página ya es oscura y el relleno prusia coincide con el fondo, igual que en el alert `default` */
   --banner-warning-bg: var(--color-warning-fill); /** Aviso — el relleno del rol: el amarillo de marca, aquí como feedback. Universal, igual en las dos superficies */
   --banner-warning-border-color: var(--color-warning-fill); /** Aviso — filete igual al relleno: el amarillo ya se separa de cualquier fondo del sistema */
+  --banner-error-bg: var(--color-error-fill); /** Error — el relleno del rol: el rojo semántico. Universal, igual en las dos superficies, como el de `Alert error` */
+  --banner-error-color: var(--color-error-fill-text); /** Error — mensaje blanco sobre el relleno rojo */
+  --banner-error-border-color: var(--color-error-fill); /** Error — filete igual al relleno: el rojo ya se separa de cualquier fondo del sistema */
   --banner-warning-color: var(--color-warning-fill-text); /** Aviso — mensaje prusia sobre el relleno amarillo (11,17:1, AAA) */
   --banner-warning-close-color: var(--color-warning-fill-text); /** Aviso — aspa y su anillo de foco. Es el único relleno claro de la barra, así que el aspa no puede tomar la tinta ambiente: con `[data-theme="dark"]` en la raíz saldría blanca sobre amarillo (1,50:1). Va fijada a la tinta del rol, que es universal */
 }

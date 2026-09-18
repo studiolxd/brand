@@ -122,3 +122,9 @@
   --close-button-color:            var(--banner-warning-close-color);
   --close-button-focus-ring-color: var(--banner-warning-close-color);
 }
+
+.banner.banner--error {
+  --banner-bg:           var(--banner-error-bg);
+  --banner-color:        var(--banner-error-color);
+  --banner-border-color: var(--banner-error-border-color);
+}
