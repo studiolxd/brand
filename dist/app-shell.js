@@ -10,8 +10,9 @@ import { jsx as u, jsxs as d } from "react/jsx-runtime";
 //#region src/stories/sections/AppShell/AppShell.tsx
 var f = "(min-width: 1024px)";
 function p() {
-	let [e, t] = l(() => typeof window > "u" ? !0 : window.matchMedia(f).matches);
+	let [e, t] = l(() => typeof window > "u" || typeof window.matchMedia != "function" ? !0 : window.matchMedia(f).matches);
 	return s(() => {
+		if (typeof window.matchMedia != "function") return;
 		let e = window.matchMedia(f), n = () => t(e.matches);
 		return n(), e.addEventListener("change", n), () => e.removeEventListener("change", n);
 	}, []), e;
@@ -52,7 +53,7 @@ function m({ banner: i, header: f, sidebar: m, children: h, defaultSidebar: g = 
 	]), [I, L] = l(0), R = o((e) => {
 		if (!e) return;
 		let t = () => L(e.getBoundingClientRect().height);
-		t();
+		if (t(), typeof ResizeObserver > "u") return;
 		let n = new ResizeObserver(t);
 		return n.observe(e), () => {
 			n.disconnect(), L(0);

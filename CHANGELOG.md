@@ -7,6 +7,23 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.8.1] — 2026-09-18
+
+> **Patch.** `AppShell` ya no revienta sin `ResizeObserver`.
+
+### El armazón mide la barra de sistema solo si hay `ResizeObserver`
+
+Desde 49.8.0, `AppShell` medía la ranura `banner` con `new ResizeObserver(...)` en el
+callback ref de montaje. En Vitest + jsdom sin polyfill (o en cualquier entorno que no lo
+implemente) eso caía con `ReferenceError: ResizeObserver is not defined` — lo sufrió
+`@slxd/app-shell` de la suite, que lo tapó con un polyfill en su propio setup. Un componente
+del sistema tiene que ser inofensivo sin DOM real.
+
+`AppShell` guarda ahora la creación del observer tras `typeof ResizeObserver === 'undefined'`:
+sin él, mide una vez con `getBoundingClientRect` y no observa (la barra queda con el
+comportamiento previo, sin reobservar redimensionados). `useIsDesktop` aplica la misma guarda
+sobre `window.matchMedia`, la otra API de navegador que el armazón usa al montar.
+
 ## [49.8.0] — 2026-09-18
 
 > **Minor.** Lo que cae dentro de un `Banner` lee con la tinta del relleno en todas las
