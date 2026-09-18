@@ -76,6 +76,55 @@ export const Contrato: Story = {
 };
 
 /**
+ * La cabecera del panel es la cuenta activa: su foto a la izquierda y, al lado,
+ * nombre y correo. Sin `avatarUrl` cae a las iniciales, como el disparador.
+ */
+export const CabeceraConAvatar: Story = {
+  name: 'Cabecera con avatar',
+  args: { avatarUrl: 'https://i.pravatar.cc/64?img=47', defaultOpen: true },
+};
+
+/**
+ * Test: la cabecera pinta el avatar de la cuenta activa a la izquierda del
+ * nombre y del correo, con foto y sin ella (iniciales), y decorativo: quien no
+ * ve la pantalla ya tiene el nombre escrito al lado.
+ */
+export const ContratoCabeceraAvatar: Story = {
+  name: 'Test — la cabecera lleva el avatar de la cuenta activa',
+  tags: ['!dev'],
+  args: { avatarUrl: 'https://i.pravatar.cc/64?img=47' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Cuenta de Ana García' }));
+    const menu = await within(document.body).findByRole('menu');
+
+    const cabecera = menu.querySelector('.user-menu__header') as HTMLElement;
+    const avatar = cabecera.querySelector('.user-menu__header-avatar') as HTMLImageElement;
+    await expect(avatar.tagName).toBe('IMG');
+    await expect(avatar.getAttribute('alt')).toBe('');
+
+    // A la izquierda del bloque nombre + correo, no encima.
+    const texto = cabecera.querySelector('.user-menu__header-text') as HTMLElement;
+    await expect(avatar.getBoundingClientRect().right)
+      .toBeLessThanOrEqual(texto.getBoundingClientRect().left + 1);
+  },
+};
+
+/** Test: sin foto, la cabecera enseña las iniciales del nombre. */
+export const ContratoCabeceraIniciales: Story = {
+  name: 'Test — sin foto, la cabecera cae a las iniciales',
+  tags: ['!dev'],
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Cuenta de Ana García' }));
+    const menu = await within(document.body).findByRole('menu');
+    const avatar = menu.querySelector('.user-menu__header-avatar') as HTMLElement;
+    await expect(avatar.tagName).toBe('SPAN');
+    await expect(avatar.textContent).toBe('AG');
+  },
+};
+
+/**
  * Los dos textos del menú de cuenta interpolan un dato —el nombre, el número de
  * sin leer— y salen de `userMenu.*` del catálogo. El nombre, el correo y los
  * ítems son contenido: con el catálogo en inglés el botón se llama «Ada

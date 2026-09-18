@@ -111,8 +111,12 @@ export function UserMenu({
         <BaseMenu.Positioner className="user-menu__positioner" sideOffset={tokenSideOffset} align="start">
         <BaseMenu.Popup className="user-menu__content">
           <div className="user-menu__header">
-            <span className="user-menu__header-name">{name}</span>
-            <span className="user-menu__header-email">{email}</span>
+            {/* La foto de la cuenta activa, decorativa: el nombre va escrito al lado. */}
+            <Avatar src={avatarUrl} name={name} alt="" size="md" className="user-menu__header-avatar" />
+            <div className="user-menu__header-text">
+              <span className="user-menu__header-name">{name}</span>
+              <span className="user-menu__header-email">{email}</span>
+            </div>
           </div>
 
           {items.length > 0 && (
@@ -122,6 +126,7 @@ export function UserMenu({
                 items,
                 itemClass,
                 separatorClass: 'user-menu__separator',
+                blockClass: 'user-menu',
                 renderLink,
               })}
             </>
