@@ -4,6 +4,17 @@ import './AppShell.css';
 export { useAppShell } from './AppShellContext';
 export type { AppShellContextValue, SidebarState } from './AppShellContext';
 export interface AppShellProps {
+    /**
+     * Ranura para una barra de sistema (`Banner`), **por encima de todo, incluida
+     * la cabecera**. Es para el estado de sesión que no se puede perder de vista
+     * —la suplantación es el caso de referencia—, no para un aviso de pantalla:
+     * eso es un `Alert` dentro del contenido.
+     *
+     * El armazón la mide (`ResizeObserver`) y publica su alto en
+     * `--app-shell-banner-height`, de donde lo toman el cajón de la sidebar y su
+     * velo para arrancar por debajo de cabecera **más** barra en móvil.
+     */
+    banner?: ReactNode;
     /** La barra superior: un `AppHeader`. Siempre visible. */
     header: ReactNode;
     /** La barra lateral: un `Sidebar`. Columna en escritorio, cajón en móvil. */
@@ -40,4 +51,4 @@ export interface AppShellMessages {
  * modo y su asa) y `SidebarNav` (rail). Persistir el estado es del producto:
  * `onSidebarChange` / `onSidebarWidthChange` avisan de cada cambio.
  */
-export declare function AppShell({ header, sidebar, children, defaultSidebar, sidebarState, onSidebarChange, defaultSidebarWidth, onSidebarWidthChange, skipLabel, }: AppShellProps): import("react/jsx-runtime").JSX.Element;
+export declare function AppShell({ banner, header, sidebar, children, defaultSidebar, sidebarState, onSidebarChange, defaultSidebarWidth, onSidebarWidthChange, skipLabel, }: AppShellProps): import("react/jsx-runtime").JSX.Element;

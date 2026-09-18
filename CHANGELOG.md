@@ -7,6 +7,65 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.8.0] — 2026-09-18
+
+> **Minor.** Lo que cae dentro de un `Banner` lee con la tinta del relleno en todas las
+> variantes, llega `Banner variant="error"`, y `AppShell` gana la ranura `banner` por encima
+> de la cabecera.
+
+### Los botones dentro del aviso ya no salen blancos sobre amarillo
+
+`Banner` declaraba superficie solo en `info`: en `warning` fijaba a tinta el aspa y se
+olvidaba de la ranura de acciones, así que sobre página oscura un `Button variant="outline"`
+heredaba la tinta ambiente y salía **blanco sobre amarillo** (1,50:1). `Alert warning` tenía
+el mismo hueco.
+
+La respuesta no es un `!important` por componente sino la pieza que faltaba en el sistema de
+superficies: **`.surface-light`**, el contrapunto de `.surface-dark`, para el interior de un
+relleno **claro y universal**. `.surface-invert` no valía —es la cara *contraria* a la
+ambiente, o sea oscura sobre página clara— y `.surface-dark` es justo al revés. La clase no
+está en `DARK_SELECTORS`: sobre página clara no hace nada, porque los tokens ya están en
+claro, y `src/tokens/surface-light.css` —generado por `pnpm build:tokens`, con los mismos
+nombres y valores que `surface-invert.css`— los devuelve a claro cuando cae dentro de una
+superficie oscura.
+
+`Banner warning` la abre sobre el contenido, las acciones y el aspa (y copia antes su tinta
+en `--banner-ink`, que es lo que consumen contenido y acciones); `Alert warning` hace lo
+mismo por el camino que ya tenía (`interiorSurface`). Un botón, un enlace o el aspa dentro
+del aviso leen en prusia en las dos superficies **sin que el consumidor configure nada**.
+
+### `Banner variant="error"`
+
+`error` es para el estado que hay que ver antes que nada: la suplantación es el caso de
+referencia. Relleno de error del sistema —`error-fill` / `error-fill-text`, los mismos roles
+que `Alert error`, universales en las dos superficies— con el aspa y las acciones en la
+tinta del relleno, que declara la raíz (`.surface-dark`) como en `info`. Tokens
+`banner.error.*` calcados de `banner.warning.*`.
+
+Con la variante llega el **rol por variante**, el mismo criterio que en `Alert`: `warning` y
+`error` interrumpen (`role="alert"`, `aria-live="assertive"`) e `info` informa sin
+interrumpir (`role="status"`, `aria-live="polite"`). Las props `role` y `aria-live` siguen
+mandando. Es un cambio de comportamiento en `warning`, que antes anunciaba como `status`.
+
+### `AppShell`: la ranura `banner`, por encima de la cabecera
+
+Prop `banner?: ReactNode`, pintada **antes de `header`** dentro de `.app-shell` y a ancho
+completo. Es para el estado de sesión que no se puede perder de vista —la suplantación—: va
+por encima de todo, incluida la cabecera. La maqueta no cambia: el armazón sigue siendo una
+columna de `100dvh`, el cuerpo se queda con lo que sobra (`flex: 1; min-block-size: 0`) y la
+sidebar sigue midiendo el cien por cien del cuerpo. La cabecera es `sticky` contra un
+contenedor que no hace scroll, así que la barra ni la tapa ni queda tapada.
+
+En **móvil**, el cajón de la sidebar y su velo arrancaban en
+`calc(var(--app-header-height) + env(safe-area-inset-top))`: con barra tienen que arrancar
+por debajo de cabecera **más** barra. Como el alto de la barra lo decide su contenido —el
+mensaje parte en dos líneas, las acciones apilan— no se puede fijar: el armazón la mide con
+un `ResizeObserver` y publica el alto en `--app-shell-banner-height` por el CSSOM
+(`useCssProperties`, como ya hacía con `--app-shell-sidebar-width`). De ahí sale
+`--app-shell-chrome-block-start`, el offset único que consumen el velo (`AppShell.css`) y el
+cajón (`Sidebar.css`, con fallback para un `Sidebar` fuera de un `AppShell`). Sin ranura
+`banner` el valor es cero y todo queda como estaba.
+
 ## [49.7.0] — 2026-09-18
 
 > **Minor.** El legend de `Fieldset` gana aire por debajo, igual que un `Heading` suelto.

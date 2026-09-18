@@ -8,9 +8,13 @@ export interface BannerMessages {
     /** Nombre accesible del aspa que descarta la barra. */
     dismiss: string;
 }
-export type BannerVariant = 'info' | 'warning';
+export type BannerVariant = 'info' | 'warning' | 'error';
 export interface BannerProps extends React.ComponentPropsWithoutRef<'div'> {
-    /** Intención de la barra. Default `'info'` (relleno prusia); `'warning'` es el relleno de aviso. */
+    /**
+     * Intención de la barra. Default `'info'` (relleno prusia); `'warning'` es el
+     * relleno de aviso y `'error'` el de error, para el estado que hay que ver
+     * antes que nada.
+     */
     variant?: BannerVariant;
     /** El mensaje. Texto corriente: una frase, no un bloque. */
     children?: React.ReactNode;
@@ -42,8 +46,9 @@ export interface BannerProps extends React.ComponentPropsWithoutRef<'div'> {
  * No fija su posición: `sticky` lo decide la aplicación con el layout del
  * sistema. Tampoco se oculta sola — `onDismiss` avisa y la app decide.
  *
- * Anuncia como `role="status"` con `aria-live="polite"`, que es lo que
- * corresponde a un aviso que no interrumpe. Ambos se pueden sobrescribir.
+ * El rol sale de la variante, como en `Alert`: `error` y `warning` interrumpen
+ * (`alert`, live `assertive`) y `info` informa sin interrumpir (`status`, live
+ * `polite`). Ambos se pueden sobrescribir.
  *
  * Extiende los atributos nativos de `<div>` y reenvía `{...rest}` al raíz.
  */
