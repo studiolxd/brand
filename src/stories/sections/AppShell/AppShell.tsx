@@ -62,9 +62,12 @@ export interface AppShellMessages {
 
 function useIsDesktop() {
   const [isDesktop, setIsDesktop] = useState(() =>
-    typeof window === 'undefined' ? true : window.matchMedia(DESKTOP_MQ).matches,
+    typeof window === 'undefined' || typeof window.matchMedia !== 'function'
+      ? true
+      : window.matchMedia(DESKTOP_MQ).matches,
   );
   useEffect(() => {
+    if (typeof window.matchMedia !== 'function') return;
     const mq = window.matchMedia(DESKTOP_MQ);
     const onChange = () => setIsDesktop(mq.matches);
     onChange();
@@ -159,11 +162,13 @@ export function AppShell({
   // cambia al redimensionar. Se mide con un `ResizeObserver` y se publica en
   // `--app-shell-banner-height`, que es lo que suman el cajón de la sidebar y
   // su velo a la altura de la cabecera para arrancar por debajo de las dos.
+  // Sin `ResizeObserver` (jsdom sin polyfill) se mide una vez y no se observa.
   const [bannerHeight, setBannerHeight] = useState(0);
   const bannerRef = useCallback((node: HTMLDivElement | null) => {
     if (!node) return;
     const medir = () => setBannerHeight(node.getBoundingClientRect().height);
     medir();
+    if (typeof ResizeObserver === 'undefined') return;
     const observer = new ResizeObserver(medir);
     observer.observe(node);
     return () => {
