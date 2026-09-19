@@ -178,7 +178,11 @@ export const TestEscribirHoras: Story = {
     await userEvent.clear(campo);
     await userEvent.type(campo, '7,5');
     await userEvent.tab();
-    // El total de la fila pasa de 48,5 a 56 h.
-    expect(canvas.getByText('56 h')).toBeInTheDocument();
+
+    // El total de ESA fila pasa de 48,5 a 56 h. Se busca dentro de la fila y no
+    // en el canvas entero: el total general vale lo mismo en esta story, y un
+    // `getByText` suelto encontraría los dos.
+    const fila = canvas.getByRole('rowheader', { name: 'App de fichajes' }).closest('tr')!;
+    expect(within(fila).getByText('56 h')).toBeInTheDocument();
   },
 };
