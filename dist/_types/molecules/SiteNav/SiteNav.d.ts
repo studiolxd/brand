@@ -29,6 +29,16 @@ export interface SiteNavGroup {
     label: string;
     /** Si se indica, la cabecera es también un enlace (la portada de la sección). */
     href?: string;
+    /**
+     * En cuántas columnas se reparten los ítems de ESTE grupo, bajo **un solo
+     * título**. Por defecto `1`, el grupo de siempre. Con `2` —el caso de un
+     * grupo largo, como «Aplicaciones»— el grupo ocupa en la rejilla el ancho de
+     * dos y sus ítems se pintan en dos columnas dentro de él; por debajo de `md`
+     * vuelve a una, como todo lo demás. No es otro componente ni dos grupos: la
+     * cabecera sigue siendo una, y con ella el encabezado por el que se recorre
+     * el índice.
+     */
+    columns?: 1 | 2;
     items: SiteNavItem[];
 }
 export type SiteNavRenderLinkProps = {
@@ -60,6 +70,10 @@ export interface SiteNavProps {
  * en `data-columns`, no en un atributo `style`: una app con
  * `style-src 'self'` descarta el atributo sin avisar y el grupo de más caía
  * a la segunda fila.
+ *
+ * Un grupo puede valer por dos (`columns: 2`): ocupa el ancho de dos en la
+ * rejilla y reparte sus ítems en dos columnas bajo un solo título. El dato va
+ * también en un atributo, `data-group-columns`, por el mismo motivo.
  */
 /**
  * El único texto que el índice dice por su cuenta, y es **cromo**: el nombre de

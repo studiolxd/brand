@@ -16,7 +16,8 @@ $lxd-app-launcher-trigger-label-font-weight: 300; // Peso de texto del disparado
 $lxd-app-launcher-trigger-label-line-height: 1.3; // Interlineado del disparador con texto — el de un ítem de SidebarNav
 $lxd-app-launcher-trigger-label-color: #111e30; // Color del disparador con texto (icono y texto, por `currentColor`/herencia) — el de un ítem de SidebarNav
 $lxd-app-launcher-content-min-width: 20rem; // Ancho mínimo del popover
-$lxd-app-launcher-content-columns: 3; // Número de columnas de la rejilla de apps
+$lxd-app-launcher-content-columns: 3; // Número de columnas de la rejilla de apps a partir de `sm`
+$lxd-app-launcher-content-columns-narrow: 2; // Columnas de la rejilla por debajo de `sm`: dos. Con tres, doce baldosas en un panel estrecho dejaban el nombre de una app partido en tres líneas; con dos, la rejilla crece a lo alto lo justo y el panel sigue cabiendo entero
 $lxd-app-launcher-content-gap: 0.25rem; // Espacio entre tiles
 $lxd-app-launcher-content-bg: #ffffff; // Fondo del panel
 $lxd-app-launcher-content-border-width: 1px; // Borde del panel
@@ -24,14 +25,15 @@ $lxd-app-launcher-content-border-color: #111e30; // Color del borde del panel
 $lxd-app-launcher-content-border-radius: 0px; // Radio del panel
 $lxd-app-launcher-content-shadow: none; // Sombra del panel
 $lxd-app-launcher-content-z-index: 400; // Z-index del popover
-$lxd-app-launcher-content-max-height: var(--available-height); // Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — con muchas apps, el panel hace scroll en vez de salirse de la pantalla
+$lxd-app-launcher-content-max-height: var(--available-height); // Único tope del panel: el hueco que de verdad queda en la ventana, que Base UI mide y publica en `--available-height`. El panel NO tiene tope propio —crece con su contenido, y con doce apps se ve entero—; solo cuando ni ese hueco da, se recorta aquí y hace scroll
 $lxd-app-launcher-content-padding-block: 0.75rem; // Padding vertical del panel
 $lxd-app-launcher-content-padding-inline: 0.75rem; // Padding horizontal del panel
 $lxd-app-launcher-transition-duration: 150ms; // Duración de la animación de entrada/salida
 $lxd-app-launcher-transition-easing: ease; // Easing de la animación
 $lxd-app-launcher-tile-padding-block: 0.5rem; // Padding vertical de cada tile — el de un ítem de Menu, para que la altura case con las listas de opciones del DS
 $lxd-app-launcher-tile-padding-inline: 1rem; // Padding horizontal de cada tile — el de un ítem de Menu
-$lxd-app-launcher-tile-gap: 0.25rem; // Espacio entre el nombre y el badge «nuevo» dentro del tile
+$lxd-app-launcher-tile-gap: 0.25rem; // Espacio entre el distintivo y el nombre dentro del tile
+$lxd-app-launcher-tile-badge-block-size: calc(0.875rem * 1 + 2 * 0.25rem); // Alto de la fila del distintivo, que va ENCIMA del nombre. Es la caja de una `Tag` (cuerpo por interlineado más su aire) y se reserva SIEMPRE, lleve distintivo la baldosa o no: de ahí que todos los nombres de la rejilla queden a la misma altura. Sale de los tokens de `Tag`, así que sigue cuadrando si la píldora cambia de talla
 $lxd-app-launcher-tile-border-radius: 0px; // Radio de cada tile
 $lxd-app-launcher-tile-name-font-size: 0.875rem; // Tamaño de texto del nombre de app
 $lxd-app-launcher-tile-name-font-weight: 300; // Peso del nombre de app

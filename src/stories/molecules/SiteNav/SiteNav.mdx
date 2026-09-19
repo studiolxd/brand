@@ -55,6 +55,28 @@ componente sí escribe es `data-columns`, y va en un atributo `data-*` y nunca
 en `style`: una app servida con `style-src 'self'` descarta los atributos de
 estilo en silencio, y el panel llegó a perder una columna por eso.
 
+## Un grupo a dos columnas
+
+Un grupo largo —«Aplicaciones», con las diez o doce de la suite— no se parte en dos grupos
+con dos cabeceras: eso sería otro índice. Se declara `columns: 2` y entonces **ocupa el ancho
+de dos grupos** en la rejilla y reparte sus ítems en **dos columnas bajo un solo título**.
+
+- El pasillo entre esas dos columnas es el mismo que separa dos grupos (`item-column-gap`,
+  que apunta a `group-gap`): más estrecho, el grupo ancho se leería como dos grupos pegados.
+- Los ítems se leen **por filas**, en el orden del DOM: llenan la primera y bajan. En
+  serpentina por columnas habría que saber cuántos ítems hay antes de empezar a leer.
+- **Por debajo de `md` vuelve a una columna**, como todo el índice.
+- El grupo ancho cuenta **por dos** en el tope de columnas (`site-nav.columns-max`) y queda
+  fuera del reparto de la última fila: ya ocupa lo que le toca y no tiene sobrante que
+  recoger.
+- `disabled` y `badge` siguen valiendo dentro de las dos columnas: no son otro ítem, solo
+  están repartidos.
+
+El dato viaja en `data-group-columns`, nunca en un atributo `style` — el mismo motivo que
+`data-columns`.
+
+<Canvas of={SiteNavStories.GrupoADosColumnas} />
+
 ## Grupos
 
 `groups` describe el índice con datos, no con JSX: cada grupo tiene `label`, `items` y, opcionalmente, `href` — entonces la cabecera es también un enlace, la portada de esa sección. Los enlaces van un punto por debajo de la cabecera de su grupo en la escala tipográfica. Un `item` con `current: true` es la página actual y se marca con `aria-current="page"`; visualmente solo cambia el peso.

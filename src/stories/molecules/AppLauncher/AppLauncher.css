@@ -75,6 +75,13 @@
   transform-origin: var(--transform-origin);
   animation-duration: var(--app-launcher-transition-duration);
   animation-timing-function: var(--app-launcher-transition-easing);
+  /* El panel NO tiene tope propio: crece con su contenido, y con doce apps se
+     ve entero. El único límite es el hueco que de verdad queda en la ventana
+     —que Base UI mide y publica en `--available-height`, y que
+     `content-max-height` no hace más que nombrar—; solo cuando ni ese hueco
+     da, el panel se recorta ahí y hace scroll. De modo que no se añade aquí
+     ninguna medida fija: sería un tope artificial que recortaría la rejilla
+     teniendo pantalla de sobra. */
   max-height: var(--app-launcher-content-max-height, var(--available-height));
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -99,23 +106,40 @@
 }
 
 /* ─── Rejilla ────────────────────────────────────────────── */
+/* Dos columnas en un panel estrecho —el móvil—, tres desde `sm`. La rejilla
+   crece a lo alto lo que le pida el número de apps: no se recorta, que para
+   eso el panel no tiene tope propio (ver arriba). Con doce baldosas salen seis
+   filas en móvil y cuatro en escritorio, que caben de sobra. */
 .app-launcher__grid {
   display: grid;
-  grid-template-columns: repeat(var(--app-launcher-content-columns), 1fr);
+  grid-template-columns: repeat(var(--app-launcher-content-columns-narrow), 1fr);
   gap: var(--app-launcher-content-gap);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+@media (min-width: 480px) /* --breakpoint-sm */ {
+  .app-launcher__grid {
+    grid-template-columns: repeat(var(--app-launcher-content-columns), 1fr);
+  }
+}
+
+/* Una baldosa no ensancha su columna por encima de su parte: un nombre largo
+   se parte en dos líneas y la rejilla no descuadra. */
+.app-launcher__grid > li {
+  min-inline-size: 0;
+}
+
 /* ─── Tile ───────────────────────────────────────────────────
-   Solo texto: fila como un ítem de Menu, no columna centrada como cuando
-   había icono. Alto y padding vienen de `tile-padding-*` (referencian
-   `{menu.item-padding-*}`) para que casen con las listas de opciones del DS. */
+   Solo texto, en dos filas: el distintivo arriba y el nombre debajo. El padding
+   viene de `tile-padding-*` (referencian `{menu.item-padding-*}`) para que el
+   aire case con las listas de opciones del DS. */
 .app-launcher__tile {
   box-sizing: border-box;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: var(--app-launcher-tile-gap);
   padding-block: var(--app-launcher-tile-padding-block);
   padding-inline: var(--app-launcher-tile-padding-inline);
@@ -166,6 +190,18 @@
 
 .app-launcher__tile--disabled .app-launcher__tile-name {
   color: var(--app-launcher-tile-disabled-color);
+}
+
+/* ─── Fila del distintivo ─────────────────────────────────────
+   Va encima del nombre y OCUPA SU ALTO SIEMPRE, con distintivo o sin él: el
+   hueco reservado es lo que deja todos los nombres de la rejilla a la misma
+   altura, sin que una baldosa con píldora empuje a su vecina. El alto es el de
+   una `Tag` y sale de sus tokens (`tile-badge-block-size`), así que sigue
+   cuadrando si la píldora cambia de talla. */
+.app-launcher__tile-badge-row {
+  display: flex;
+  align-items: center;
+  min-block-size: var(--app-launcher-tile-badge-block-size);
 }
 
 /* ─── Nombre ─────────────────────────────────────────────── */

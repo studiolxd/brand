@@ -28,6 +28,27 @@ const demoApps: LauncherApp[] = [
 ];
 
 /**
+ * Las doce aplicaciones de la suite, que es el catálogo real: unas con
+ * distintivo, otras sin él y dos apagadas. Es la story donde se mira la
+ * alineación —todos los nombres a la misma altura— y que el panel se ve
+ * entero, sin scroll.
+ */
+const doceApps: LauncherApp[] = [
+  { id: 'lmsmarketplace', name: 'LMS Marketplace', url: 'https://lmsmarketplace.slxd.app' },
+  { id: 'bricks', name: 'Bricks', url: 'https://bricks.slxd.app' },
+  { id: 'tender', name: 'Tender', url: 'https://tender.slxd.app', badge: 'Nuevo' },
+  { id: 'localizia', name: 'Localizia', url: 'https://localizia.slxd.app', badge: 'Beta' },
+  { id: 'lrs', name: 'LRS', url: 'https://lrs.slxd.app' },
+  { id: 'sharescorm', name: 'ShareScorm', url: 'https://sharescorm.slxd.app' },
+  { id: 'moodlemcp', name: 'MoodleMCP', url: 'https://moodlemcp.slxd.app' },
+  { id: 'aipricing', name: 'AI Pricing', url: 'https://aipricing.slxd.app', isNew: true },
+  { id: 'academia', name: 'Academia', url: 'https://academia.slxd.app' },
+  { id: 'atlas', name: 'Atlas', url: 'https://atlas.slxd.app', disabled: true, badge: 'Próximamente' },
+  { id: 'forja', name: 'Forja', url: 'https://forja.slxd.app', disabled: true, badge: 'Próximamente' },
+  { id: 'sala', name: 'Sala', url: 'https://sala.slxd.app' },
+];
+
+/**
  * El nombre accesible del disparador, el título del diálogo y la marca de app
  * nueva son cromo y salen del catálogo que el Storybook monta en
  * `preview.tsx`. Aquí solo queda lo que no es catálogo (`trigger`) o lo que
@@ -89,6 +110,25 @@ export const ConProductosProximamente: Story = {
       { id: 'lrs', name: 'LRS', url: 'https://lrs.slxd.app', badge: 'Beta' },
     ],
     labels,
+    defaultOpen: true,
+  },
+};
+
+/**
+ * Las doce aplicaciones de la suite. El distintivo va **encima** del nombre, y
+ * las baldosas que no lo llevan reservan su hueco igual: por eso todos los
+ * nombres quedan a la misma altura, fila por fila, y la rejilla no baila.
+ *
+ * El panel **no tiene tope propio**: crece con su contenido y con doce apps se
+ * ve entero. Solo si ni el hueco de la ventana da, se recorta ahí y hace
+ * scroll.
+ */
+export const DoceApps: Story = {
+  name: 'Doce apps — la suite entera',
+  args: {
+    apps: doceApps,
+    labels,
+    currentAppId: 'bricks',
     defaultOpen: true,
   },
 };
@@ -256,6 +296,11 @@ export const TestProximamente: Story = {
     await expect(apagada.tagName).toBe('SPAN');
     await expect(apagada).not.toHaveAttribute('href');
     await expect(apagada).toHaveAttribute('aria-disabled', 'true');
+    // El diálogo entra con una animación que arranca en `opacity: 0`, y el
+    // `play` puede llegar antes de que acabe: se espera al VALOR FINAL, nunca a
+    // `animationend` —donde las animaciones están apagadas, ese evento no llega
+    // nunca y el `play` se cuelga hasta el timeout—.
+    await waitFor(() => expect(getComputedStyle(dialog).opacity).toBe('1'));
     await expect(within(dialog).getByText('Próximamente')).toBeVisible();
 
     // Y el tabulador no se detiene en ella: el foco salta de la viva al aspa
@@ -264,6 +309,56 @@ export const TestProximamente: Story = {
     viva.focus();
     await userEvent.tab();
     await expect(document.activeElement).not.toBe(apagada);
+  },
+};
+
+/**
+ * Test: la fila del distintivo se pinta SIEMPRE, con distintivo o sin él, y de
+ * ahí sale la alineación: todos los nombres de la rejilla arrancan a la misma
+ * altura dentro de su baldosa. Se comprueba con la caja de verdad, no con la
+ * hoja de estilos: la fila reservada mide lo mismo en la baldosa con píldora y
+ * en la que no la lleva, y el nombre queda debajo, no al lado.
+ */
+export const TestAlineacion: Story = {
+  name: 'Test — el hueco del distintivo se reserva siempre',
+  tags: ['!dev'],
+  args: {
+    apps: [
+      { id: 'alfa', name: 'Alfa', url: 'https://alfa.slxd.app' },
+      { id: 'beta', name: 'Beta', url: 'https://beta.slxd.app', badge: 'Nuevo' },
+    ],
+    labels: { ...labels, title: 'Aplicaciones' },
+    defaultOpen: true,
+  },
+  play: async () => {
+    const dialog = await screen.findByRole('dialog', { name: 'Aplicaciones' });
+
+    const sinDistintivo = within(dialog).getByRole('link', { name: 'Alfa' });
+    const conDistintivo = within(dialog).getByRole('link', { name: /Beta/ });
+
+    // La fila del distintivo existe en las dos y mide lo mismo.
+    const filaSin = sinDistintivo.querySelector('.app-launcher__tile-badge-row')!;
+    const filaCon = conDistintivo.querySelector('.app-launcher__tile-badge-row')!;
+    await expect(filaSin).toBeInTheDocument();
+    await expect(filaSin.textContent).toBe('');
+    await waitFor(() =>
+      expect(Math.round(filaSin.getBoundingClientRect().height)).toBe(
+        Math.round(filaCon.getBoundingClientRect().height),
+      ),
+    );
+
+    // Y los dos nombres arrancan a la misma altura: el distintivo está ENCIMA
+    // del nombre, no a su lado.
+    const nombreSin = sinDistintivo.querySelector('.app-launcher__tile-name')!;
+    const nombreCon = conDistintivo.querySelector('.app-launcher__tile-name')!;
+    await waitFor(() =>
+      expect(Math.round(nombreSin.getBoundingClientRect().top)).toBe(
+        Math.round(nombreCon.getBoundingClientRect().top),
+      ),
+    );
+    await expect(nombreCon.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+      filaCon.getBoundingClientRect().bottom - 1,
+    );
   },
 };
 

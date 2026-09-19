@@ -17,7 +17,8 @@
     "trigger-label-color":          { "$value": "{sidebar-nav.item-color}",          "$type": "color",     "$description": "Color del disparador con texto (icono y texto, por `currentColor`/herencia) — el de un ítem de SidebarNav" },
 
     "content-min-width":      { "$value": "20rem",                        "$type": "dimension", "$description": "Ancho mínimo del popover" },
-    "content-columns":        { "$value": "3",                            "$type": "number",    "$description": "Número de columnas de la rejilla de apps" },
+    "content-columns":        { "$value": "3",                            "$type": "number",    "$description": "Número de columnas de la rejilla de apps a partir de `sm`" },
+    "content-columns-narrow": { "$value": "2",                            "$type": "number",    "$description": "Columnas de la rejilla por debajo de `sm`: dos. Con tres, doce baldosas en un panel estrecho dejaban el nombre de una app partido en tres líneas; con dos, la rejilla crece a lo alto lo justo y el panel sigue cabiendo entero" },
     "content-gap":            { "$value": "{spacing.1}",                  "$type": "dimension", "$description": "Espacio entre tiles" },
     "content-bg":             { "$value": "{floating-panel.bg}",          "$type": "color",     "$description": "Fondo del panel" },
     "content-border-width":   { "$value": "{floating-panel.border-width}", "$type": "dimension", "$description": "Borde del panel" },
@@ -25,7 +26,7 @@
     "content-border-radius":  { "$value": "{floating-panel.border-radius}", "$type": "dimension", "$description": "Radio del panel" },
     "content-shadow":         { "$value": "{floating-panel.shadow}",      "$type": "shadow",    "$description": "Sombra del panel" },
     "content-z-index":        { "$value": "{floating-panel.z-index}",    "$type": "number",    "$description": "Z-index del popover" },
-    "content-max-height":     { "$value": "var(--available-height)", "$type": "string", "$description": "Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — con muchas apps, el panel hace scroll en vez de salirse de la pantalla" },
+    "content-max-height":     { "$value": "var(--available-height)", "$type": "string", "$description": "Único tope del panel: el hueco que de verdad queda en la ventana, que Base UI mide y publica en `--available-height`. El panel NO tiene tope propio —crece con su contenido, y con doce apps se ve entero—; solo cuando ni ese hueco da, se recorta aquí y hace scroll" },
     "content-padding-block":  { "$value": "{spacing.3}",                  "$type": "dimension", "$description": "Padding vertical del panel" },
     "content-padding-inline": { "$value": "{spacing.3}",                  "$type": "dimension", "$description": "Padding horizontal del panel" },
     "transition-duration":    { "$value": "{floating-panel.transition-duration}", "$type": "number", "$description": "Duración de la animación de entrada/salida" },
@@ -33,7 +34,8 @@
 
     "tile-padding-block":     { "$value": "{menu.item-padding-block}",    "$type": "dimension", "$description": "Padding vertical de cada tile — el de un ítem de Menu, para que la altura case con las listas de opciones del DS" },
     "tile-padding-inline":    { "$value": "{menu.item-padding-inline}",   "$type": "dimension", "$description": "Padding horizontal de cada tile — el de un ítem de Menu" },
-    "tile-gap":               { "$value": "{spacing.1}",                  "$type": "dimension", "$description": "Espacio entre el nombre y el badge «nuevo» dentro del tile" },
+    "tile-gap":               { "$value": "{spacing.1}",                  "$type": "dimension", "$description": "Espacio entre el distintivo y el nombre dentro del tile" },
+    "tile-badge-block-size":  { "$value": "calc({tag.font-size} * {tag.line-height} + 2 * {tag.padding-block})", "$type": "dimension", "$description": "Alto de la fila del distintivo, que va ENCIMA del nombre. Es la caja de una `Tag` (cuerpo por interlineado más su aire) y se reserva SIEMPRE, lleve distintivo la baldosa o no: de ahí que todos los nombres de la rejilla queden a la misma altura. Sale de los tokens de `Tag`, así que sigue cuadrando si la píldora cambia de talla" },
     "tile-border-radius":     { "$value": "{border-radius.default}",           "$type": "dimension", "$description": "Radio de cada tile" },
 
     "tile-name-font-size":    { "$value": "{font-size.1}",                "$type": "dimension", "$description": "Tamaño de texto del nombre de app" },

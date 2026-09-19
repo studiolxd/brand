@@ -84,6 +84,32 @@ no lleva a ningún sitio se leería como disponible.
 
 <Canvas of={AppLauncherStories.ConProductosProximamente} />
 
+## El distintivo va encima del nombre
+
+El distintivo se pinta **sobre** el nombre de la app, no a su lado, y su fila se
+reserva **siempre**, lleve distintivo la baldosa o no. De ahí sale la alineación: todos los
+nombres de la rejilla arrancan a la misma altura dentro de su baldosa, y una app que estrena
+píldora no empuja hacia abajo el nombre de su vecina.
+
+El alto de esa fila es el de una `Tag` y sale de sus tokens
+(`tile-badge-block-size` = cuerpo × interlineado + su aire), así que sigue cuadrando si la
+píldora cambia de talla. No hay medida escrita a mano.
+
+## El panel crece: no hace scroll
+
+El panel **no tiene tope propio**. Crece con su contenido, y con las doce aplicaciones de la
+suite se ve entero. El único límite es el hueco que de verdad queda en la ventana —lo mide
+Base UI y lo publica en `--available-height`, y `content-max-height` no hace más que
+nombrarlo—: solo cuando ni ese hueco da, el panel se recorta ahí y hace scroll. Un tope
+propio (una altura fija, «tantas filas») recortaría la rejilla teniendo pantalla de sobra, y
+por eso hay un guardián sobre la hoja que lo impide.
+
+La rejilla, por su parte, va a **dos columnas en un panel estrecho** y a **tres desde `sm`**
+(`content-columns-narrow` / `content-columns`): con tres columnas en móvil, doce baldosas
+dejaban los nombres partidos en tres líneas.
+
+<Canvas of={AppLauncherStories.DoceApps} />
+
 ## Pocas apps
 
 <Canvas of={AppLauncherStories.PocasApps} />

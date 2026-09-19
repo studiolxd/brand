@@ -217,3 +217,29 @@ describe('el cromo sale del catálogo', () => {
     ).not.toThrow();
   });
 });
+
+describe('AppLauncher — el distintivo, encima del nombre', () => {
+  const conYSin: LauncherApp[] = [
+    { id: 'a', name: 'Alfa', url: 'https://alfa.slxd.app' },
+    { id: 'b', name: 'Beta', url: 'https://beta.slxd.app', badge: 'Nuevo' },
+  ];
+
+  it('la fila del distintivo se pinta siempre, con distintivo o sin él', () => {
+    render(<AppLauncher apps={conYSin} labels={labels} defaultOpen />);
+    const filas = screen
+      .getByRole('list')
+      .querySelectorAll('.app-launcher__tile-badge-row');
+    expect(filas).toHaveLength(2);
+    // La de la baldosa sin distintivo está vacía: es el hueco reservado que
+    // deja los dos nombres a la misma altura.
+    expect(filas[0]!.textContent).toBe('');
+    expect(filas[1]!.textContent).toBe('Nuevo');
+  });
+
+  it('el distintivo va ANTES del nombre en el DOM, no después', () => {
+    render(<AppLauncher apps={conYSin} labels={labels} defaultOpen />);
+    const baldosa = screen.getByRole('link', { name: /Beta/ });
+    const hijos = Array.from(baldosa.children).map((el) => el.className.split(' ')[0]);
+    expect(hijos).toEqual(['app-launcher__tile-badge-row', 'app-launcher__tile-name']);
+  });
+});
