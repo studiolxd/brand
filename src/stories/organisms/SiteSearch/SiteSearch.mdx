@@ -54,13 +54,31 @@ Es la misma línea para cuatro de los cinco estados, así que no hay un aviso es
 
 Con paginación, `total` es el recuento de **toda** la búsqueda y `results` lo de la página que se ve: sin `total` se contaría solo la página.
 
+## El campo es el del menú del sitio
+
+No es un campo parecido: es **`SearchForm`**, el mismo componente. La flecha de envío vive dentro del borde del campo —un adorno clicable al final, sin caja propia ni fondo en hover—, y no en un botón aparte pegado al lado. Así el buscador del menú y la página de resultados no pueden separarse: lo que se arregle en uno sale en el otro.
+
+De ahí salen dos cosas que este buscador ya no tiene: la **lupa fija** al inicio y el **aspa de borrado**. Un campo tiene un solo icono de acción, y aquí es la flecha.
+
 ## Un resultado
 
-Cuatro líneas, y las tres de fuera del título son opcionales: la sección de la que viene («Documentación › Creator»), el título —que es un encabezado de verdad, con `headingLevel`, para poder recorrer la lista saltando de título en título—, el extracto y la dirección.
+Cuatro líneas, y las tres de fuera del título son opcionales: la sección de la que viene («Documentación › Creator»), el título —que es un **encabezado de verdad**, `h2` por defecto y configurable con `headingLevel`, para poder recorrer la lista saltando de título en título—, el extracto y la dirección.
+
+**Lo que separa un resultado del siguiente es el aire, no una línea.** Entre dos resultados hay 32px (`site-search.results-gap`) y entre las líneas de uno mismo 8px (`site-search.result-gap`): la diferencia basta para leer la lista como una lista. Un filete cada pocas líneas la trocea y compite con el título, que es lo que hay que ver.
 
 El extracto es un `ReactNode` para que quien busca resalte la coincidencia con `<mark>`; la hoja ya lo viste con el amarillo de marca. La dirección parte por donde haga falta: una ruta larga sin espacios no empuja la columna.
 
 `renderLink` pone el `Link` del router del producto, y **tiene que propagar todas las props que recibe**.
+
+## El resultado lee al cuerpo de la superficie
+
+El rastro de sección, el extracto y la dirección apuntan a `{text.font-size}`: el cuerpo de la superficie donde se monte el buscador. En una aplicación son 16px; dentro de `SiteShell` —que es donde vive una página de resultados pública— son **20px**, porque el remapeo de la superficie pública lo arrastra solo.
+
+El título va un peldaño por encima (`{text.paragraph.large.font-size}`: 20px en aplicación, 24px en la pública). No es la escala de títulos: un resultado no es una sección de la página, es una entrada de una lista, y lo que tiene que hacer su título es mandar sobre las tres líneas que lo acompañan.
+
+Lo que **no** sube es el aviso de estado, que sigue un peldaño por debajo del cuerpo: acompaña a los resultados, no compite con ellos.
+
+<Canvas of={SiteSearchStories.EnLaSuperficiePublica} />
 
 ## El pie y la barra
 
@@ -70,17 +88,21 @@ La paginación no está dentro por lo mismo que la búsqueda tampoco: quién pag
 
 ## Sin JavaScript
 
-El campo y el botón viven en un `<form role="search">` de verdad. Con `action` y sin `onSubmit`, enviar navega a la página de resultados con la consulta en la URL (`?q=`), que es lo que hace el buscador del menú del sitio. Con `onSubmit` se previene el envío y se recibe la consulta ya recortada; con el campo vacío no se llama.
+El campo y su flecha viven en un `<form role="search">` de verdad. Con `action` y sin `onSubmit`, enviar navega a la página de resultados con la consulta en la URL (`?q=`), que es lo que hace el buscador del menú del sitio. Con `onSubmit` se previene el envío y se recibe la consulta ya recortada; con el campo vacío no se llama.
 
-## A ancho de móvil
+## Ocupa el ancho de su hueco
 
-Una columna de bloques: nada flota y nada se posiciona. El campo y el botón comparten línea mientras caben y se parten en dos cuando no, sin media query — quien decide es el ancho del hueco donde se monte el buscador, no el de la ventana.
+Una columna de bloques: nada flota y nada se posiciona. El buscador declara `inline-size: 100%` (`site-search.inline-size`) en lugar de dejarlo al flujo, así que también ocupa todo el hueco cuando lo que lo envuelve es una fila flex o una celda de retícula, donde un bloque se encogería a su contenido. El campo va con él, y la flecha dentro del campo no lo acorta: el hueco se lo reserva el propio campo con su `padding`.
+
+Lo único acotado es el **extracto**, que no pasa de la medida de lectura del sistema (`content.measure`, 70ch): la lista y el campo son estructura y ocupan lo que hay, pero el texto que se lee para decidir si un resultado sirve no se estira a lo ancho de una pantalla grande.
+
+A 400px vale lo mismo, sin media query: la columna se estrecha con el hueco y nada desborda.
 
 <Canvas of={SiteSearchStories.AnchoDeMovil} />
 
 ## Superficie oscura
 
-Las tintas y el filete entre resultados cambian de cara por la regla de derivación. El resaltado de la coincidencia **no**: amarillo de marca con tinta prusia es un relleno autocontenido, y se ve igual en las dos superficies.
+Las tintas cambian de cara por la regla de derivación. El resaltado de la coincidencia **no**: amarillo de marca con tinta prusia es un relleno autocontenido, y se ve igual en las dos superficies.
 
 <Canvas of={SiteSearchStories.SuperficieOscura} />
 
@@ -89,18 +111,18 @@ Las tintas y el filete entre resultados cambian de cara por la regla de derivaci
 - **Una región de búsqueda nombrada** (`role="search"`), con el campo y su botón dentro.
 - **El recuento se anuncia** en una región viva que existe desde el primer render, y el campo la referencia con `aria-describedby`.
 - **Los resultados son una lista** (`<ol>` nombrada) de encabezados: se recorren saltando de título en título, y el orden es el del ranking.
-- **Todo se alcanza con el tabulador** en el orden en que se lee: campo → aspa → buscar → resultados → pie. El enlace de cada resultado lleva su anillo de foco propio, y el subrayado es una línea del sistema, no `text-decoration`.
+- **Todo se alcanza con el tabulador** en el orden en que se lee: campo → flecha de envío → resultados → pie. La flecha va dentro del campo, pero es un botón de verdad: se tabula, se pulsa y se nombra. El enlace de cada resultado lleva su anillo de foco propio, y el subrayado es una línea del sistema, no `text-decoration`.
 - **Los fantasmas de la carga están fuera del árbol de accesibilidad**: lo que se anuncia es el texto.
 
 ## Qué no hace
 
 - **No busca, no filtra, no rebota y no cancela.** Eso es de quien monta la pantalla; la story «El recorrido entero» enseña cómo se ata, con un índice de mentira.
 - **No autocompleta ni sugiere mientras se escribe.** Eso es `DocsSearch` (documentación) o `CommandPalette` (acciones).
-- **No es el campo del menú del sitio.** Ese es `SearchForm`: un campo y un envío que llevan aquí.
+- **No reinventa el campo del menú del sitio.** Lo usa: el campo de arriba es `SearchForm`, el mismo que abre el menú y trae hasta aquí.
 
 ## Textos
 
-Quince, todos cromo, en el espacio `siteSearch`. `minLength` y `results` son **funciones**: el mínimo y el par recuento/consulta. `emptyTitle` no lleva la consulta —ya la dice el recuento de arriba—, y los resultados son datos que escribe quien busca.
+Quince, todos cromo, en el espacio `siteSearch`. `submit` ya no es un rótulo que se vea: es el **nombre accesible de la flecha** dentro del campo. `minLength` y `results` son **funciones**: el mínimo y el par recuento/consulta. `emptyTitle` no lleva la consulta —ya la dice el recuento de arriba—, y los resultados son datos que escribe quien busca.
 
 ## Props
 

@@ -24,6 +24,8 @@ export interface SearchFormMessages {
 export interface SearchFormProps {
   /** `id` del campo. Si no se pasa, el componente genera uno estable. */
   id?: string;
+  /** Clase del `<form>`, para que quien lo monte lo coloque en su retícula. */
+  className?: string;
   /**
    * Nombre del parámetro con el que viaja la consulta en el envío sin JS.
    * @default 'q'
@@ -76,6 +78,17 @@ export interface SearchFormProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
   /** Deshabilita el campo y el botón. */
   disabled?: boolean;
+  /**
+   * `id` de lo que describe al campo: el aviso vivo de una página de
+   * resultados («23 resultados para «factura»»). El campo lo referencia con
+   * `aria-describedby`.
+   */
+  describedBy?: string;
+  /**
+   * `id` de la región que el campo gobierna: la lista de resultados que
+   * cambia al buscar. El campo lo referencia con `aria-controls`.
+   */
+  controls?: string;
 }
 
 /**
@@ -87,6 +100,7 @@ export interface SearchFormProps {
  */
 export const SearchForm = forwardRef<HTMLInputElement, SearchFormProps>(function SearchForm({
   id,
+  className,
   name = 'q',
   value,
   defaultValue,
@@ -100,6 +114,8 @@ export const SearchForm = forwardRef<HTMLInputElement, SearchFormProps>(function
   submitLabel,
   size: sizeProp,
   disabled,
+  describedBy,
+  controls,
 }: SearchFormProps, ref) {
   const t = useBrandMessages('searchForm');
   // `xl` no es una talla de formulario: no viaja por el contexto de `Form` ni
@@ -128,7 +144,9 @@ export const SearchForm = forwardRef<HTMLInputElement, SearchFormProps>(function
 
   return (
     <form
-      className={['search-form', size !== 'md' ? `search-form--${size}` : ''].filter(Boolean).join(' ')}
+      className={['search-form', size !== 'md' ? `search-form--${size}` : '', className]
+        .filter(Boolean)
+        .join(' ')}
       role="search"
       aria-label={t('label', label)}
       action={action}
@@ -156,6 +174,8 @@ export const SearchForm = forwardRef<HTMLInputElement, SearchFormProps>(function
         disabled={disabled}
         size={fieldSize}
         onChange={onChange}
+        aria-describedby={describedBy}
+        {...(controls ? { 'aria-controls': controls } : {})}
       />
       {/* La flecha va dentro del campo, no en una caja aparte: un adorno
           clicable al final del control, como el aspa de `InputField`. Es un

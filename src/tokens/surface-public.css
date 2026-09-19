@@ -279,6 +279,11 @@
   --annotation-thread-replies-label-font-size: var(--text-paragraph-small-font-size);
   --connector-auth-untrusted-toggle-font-size: var(--text-paragraph-small-font-size);
   --site-search-status-font-size: var(--text-paragraph-small-font-size);
-  --site-search-result-title-font-size: var(--text-font-size);
-  --site-search-result-excerpt-font-size: var(--text-paragraph-small-font-size);
+  --site-search-result-title-font-size: var(--text-paragraph-large-font-size);
+  --site-search-result-section-font-size: var(--text-font-size);
+  --site-search-result-section-line-height: var(--text-line-height);
+  --site-search-result-excerpt-font-size: var(--text-font-size);
+  --site-search-result-excerpt-line-height: var(--text-line-height);
+  --site-search-result-url-font-size: var(--text-font-size);
+  --site-search-result-url-line-height: var(--text-line-height);
 }

@@ -42,6 +42,17 @@ Con la etiqueta a la vista, la flecha se queda a la altura del campo, no de la e
 
 Los otros dos usan `InputField kind="search"`, con la **lupa fija** al inicio: son campos que filtran mientras se escribe, y la lupa lo dice sin gastar texto. Aquí no hay lupa: el icono de este campo es la **flecha de envío** al final, porque lo que hace no es filtrar sino ir a una página de resultados. Un solo icono de acción por campo, y siempre dentro del campo.
 
+## También es el campo de `SiteSearch`
+
+El mismo componente abre el menú del sitio y encabeza la **página de resultados**: `SiteSearch` no tiene campo propio, monta este. De ahí salen dos props que solo usa la página de resultados y que en el menú sobran:
+
+| Prop | Para qué |
+| --- | --- |
+| `describedBy` | `id` del aviso vivo que describe al campo («23 resultados para «factura»»), por `aria-describedby` |
+| `controls` | `id` de la lista de resultados que el campo gobierna, por `aria-controls` |
+
+Ninguna de las dos cambia el dibujo: son los dos hilos que atan el campo a lo que hay debajo cuando lo que hay debajo es una página de resultados.
+
 ## Sin aspa de borrado
 
 El campo es `type="text"`, no `type="search"` —prohibido en todo el sistema—. El tipo nativo pinta la **X de borrado del navegador**, que es distinta en cada uno, no se puede vestir y no sale de ningún token. Cuando un campo del sistema ofrece borrado, el aspa es la nuestra (`Icon name="close"`), como en `InputField kind="search" clearable`. Aquí no hay ninguna de las dos: para vaciar el campo está la tecla, y el gesto que importa es enviar, no deshacer.
