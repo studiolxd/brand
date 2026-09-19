@@ -833,6 +833,11 @@
       "import": "./dist/heatmap.js",
       "default": "./dist/heatmap.js"
     },
+    "./org-chart": {
+      "types": "./dist/_types/organisms/OrgChart/OrgChart.d.ts",
+      "import": "./dist/org-chart.js",
+      "default": "./dist/org-chart.js"
+    },
     "./planning-grid": {
       "types": "./dist/_types/organisms/PlanningGrid/PlanningGrid.d.ts",
       "import": "./dist/planning-grid.js",

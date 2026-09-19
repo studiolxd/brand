@@ -60,6 +60,7 @@ export type {
   TreeViewMessages,
   ClockWidgetMessages,
   HeatmapMessages,
+  OrgChartMessages,
   PlanningGridMessages,
   RecurrenceFieldMessages,
   TimelineMessages,

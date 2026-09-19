@@ -1,0 +1,59 @@
+{
+  "org-chart": {
+    "font-family":            { "$value": "{font-family.sans}",               "$type": "string",    "$description": "Familia tipográfica del organigrama" },
+    "gap":                    { "$value": "{spacing.3}",                      "$type": "dimension", "$description": "Separación entre el lienzo y sus controles" },
+
+    "viewport-block-size":    { "$value": "32rem",                            "$type": "dimension", "$description": "Alto del lienzo con desplazamiento" },
+    "viewport-padding":       { "$value": "{spacing.5}",                      "$type": "dimension", "$description": "Aire alrededor del árbol dentro del lienzo" },
+    "viewport-bg":            { "$value": "{color.surface.secondary-on-light}", "$type": "color",   "$description": "Fondo del lienzo — superficie secundaria: lo que separa el organigrama de la página" },
+    "viewport-radius":        { "$value": "{border-radius.default}",          "$type": "dimension", "$description": "Radio del lienzo" },
+    "viewport-border-color":  { "$value": "{color.border.default-on-light}",  "$type": "color",     "$description": "Borde del lienzo" },
+    "viewport-border-width":  { "$value": "{border-width.default}",           "$type": "dimension", "$description": "Grosor del borde del lienzo" },
+
+    "focus-ring-color":       { "$value": "{color.primary}",                  "$type": "color",     "$description": "Anillo de foco del lienzo" },
+    "focus-ring-width":       { "$value": "{border-width.focus}",             "$type": "dimension", "$description": "Grosor del anillo de foco" },
+    "focus-ring-offset":      { "$value": "{border-width.focus}",             "$type": "dimension", "$description": "Separación del anillo de foco" },
+
+    "sibling-gap":            { "$value": "{spacing.4}",                      "$type": "dimension", "$description": "Separación horizontal entre dos nodos hermanos" },
+    "connector-length":       { "$value": "{spacing.6}",                      "$type": "dimension", "$description": "Alto del tramo de líneas entre un nodo y sus hijos" },
+    "connector-color":        { "$value": "{color.border.default-on-light}",  "$type": "color",     "$description": "Color de las líneas que unen los nodos" },
+    "connector-width":        { "$value": "{border-width.default}",           "$type": "dimension", "$description": "Grosor de las líneas que unen los nodos" },
+
+    "card-inline-size":       { "$value": "14rem",                            "$type": "dimension", "$description": "Ancho de la tarjeta de un departamento" },
+    "card-bg":                { "$value": "{color.background.light}",         "$type": "color",     "$description": "Fondo de la tarjeta" },
+    "card-border-color":      { "$value": "{color.primary}",                  "$type": "color",     "$description": "Borde de la tarjeta" },
+    "card-border-width":      { "$value": "{border-width.default}",           "$type": "dimension", "$description": "Grosor del borde de la tarjeta" },
+    "card-radius":            { "$value": "{border-radius.default}",          "$type": "dimension", "$description": "Radio de la tarjeta" },
+    "card-padding-block":     { "$value": "{spacing.2}",                      "$type": "dimension", "$description": "Padding vertical de la tarjeta" },
+    "card-padding-inline":    { "$value": "{spacing.3}",                      "$type": "dimension", "$description": "Padding horizontal de la tarjeta" },
+    "card-gap":               { "$value": "{spacing.2}",                      "$type": "dimension", "$description": "Separación entre la cabecera y el cuerpo de la tarjeta" },
+
+    "name-font-size":         { "$value": "{font-size.1}",                    "$type": "dimension", "$description": "Tamaño del nombre del departamento" },
+    "name-font-weight":       { "$value": "{font-weight.emphasis}",           "$type": "number",    "$description": "Peso del nombre del departamento" },
+    "name-color":             { "$value": "{color.text.on-light}",            "$type": "color",     "$description": "Color del nombre del departamento" },
+
+    "group-font-size":        { "$value": "{font-size.0}",                    "$type": "dimension", "$description": "Tamaño del rótulo de un grupo de personas" },
+    "group-color":            { "$value": "{color.text.muted-on-light}",      "$type": "color",     "$description": "Color del rótulo de un grupo de personas" },
+    "group-gap":              { "$value": "{spacing.1}",                      "$type": "dimension", "$description": "Separación entre el rótulo y sus personas" },
+    "group-margin-block-start":{ "$value": "{spacing.2}",                     "$type": "dimension", "$description": "Aire entre dos grupos de personas" },
+
+    "person-font-size":       { "$value": "{font-size.1}",                    "$type": "dimension", "$description": "Tamaño del nombre de una persona" },
+    "person-color":           { "$value": "{color.text.on-light}",            "$type": "color",     "$description": "Color del nombre de una persona" },
+    "person-role-font-size":  { "$value": "{font-size.0}",                    "$type": "dimension", "$description": "Tamaño del puesto de una persona" },
+    "person-role-color":      { "$value": "{color.text.muted-on-light}",      "$type": "color",     "$description": "Color del puesto de una persona" },
+    "person-gap":             { "$value": "{spacing.1}",                      "$type": "dimension", "$description": "Separación entre personas" },
+    "empty-color":            { "$value": "{color.text.muted-on-light}",      "$type": "color",     "$description": "Color del «sin responsable» / «sin equipo»" },
+
+    "surface-dark-viewport-bg":           { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo del lienzo — surface-dark" },
+    "surface-dark-viewport-border-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Borde del lienzo — surface-dark" },
+    "surface-dark-focus-ring-color":      { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Anillo de foco — surface-dark" },
+    "surface-dark-connector-color":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de las líneas — surface-dark" },
+    "surface-dark-card-bg":               { "$value": "{color.background.dark}",    "$type": "color", "$description": "Fondo de la tarjeta — surface-dark" },
+    "surface-dark-card-border-color":     { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Borde de la tarjeta — surface-dark" },
+    "surface-dark-name-color":            { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del nombre del departamento — surface-dark" },
+    "surface-dark-group-color":           { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del rótulo de grupo — surface-dark" },
+    "surface-dark-person-color":          { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del nombre de una persona — surface-dark" },
+    "surface-dark-person-role-color":     { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del puesto — surface-dark" },
+    "surface-dark-empty-color":           { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del «sin equipo» — surface-dark" }
+  }
+}

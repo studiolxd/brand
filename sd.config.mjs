@@ -174,6 +174,7 @@ const filters = {
   heatmap:              (t) => t.path[0] === 'heatmap',
   'recurrence-field':   (t) => t.path[0] === 'recurrence-field',
   'planning-grid':      (t) => t.path[0] === 'planning-grid',
+  'org-chart':          (t) => t.path[0] === 'org-chart',
   'recovery-codes':     (t) => t.path[0] === 'recovery-codes',
   'connector-auth':     (t) => t.path[0] === 'connector-auth',
 };
@@ -362,6 +363,7 @@ const sd = new StyleDictionary({
         cssFile('molecules/heatmap.css',            'heatmap'),
         cssFile('molecules/recurrence-field.css',   'recurrence-field'),
         cssFile('molecules/planning-grid.css',      'planning-grid'),
+        cssFile('molecules/org-chart.css',          'org-chart'),
         cssFile('molecules/recovery-codes.css',     'recovery-codes'),
         cssFile('molecules/connector-auth.css',     'connector-auth'),
       ],
@@ -535,6 +537,7 @@ const sd = new StyleDictionary({
         scssFile('molecules/_heatmap.scss',          'heatmap'),
         scssFile('molecules/_recurrence-field.scss', 'recurrence-field'),
         scssFile('molecules/_planning-grid.scss',    'planning-grid'),
+        scssFile('molecules/_org-chart.scss',        'org-chart'),
         scssFile('molecules/_recovery-codes.scss',   'recovery-codes'),
         scssFile('molecules/_connector-auth.scss',   'connector-auth'),
       ],

@@ -716,6 +716,17 @@ html.dark .surface-invert {
   --chart-crosshair-color: var(--color-icon-secondary-on-light);
   --chat-shell-bg: var(--color-background-light);
   --connector-auth-untrusted-focus-ring-color: var(--link-focus-ring-color);
+  --org-chart-viewport-bg: var(--color-surface-secondary-on-light);
+  --org-chart-viewport-border-color: var(--color-border-default-on-light);
+  --org-chart-focus-ring-color: var(--color-primary);
+  --org-chart-connector-color: var(--color-border-default-on-light);
+  --org-chart-card-bg: var(--color-background-light);
+  --org-chart-card-border-color: var(--color-primary);
+  --org-chart-name-color: var(--color-text-on-light);
+  --org-chart-group-color: var(--color-text-muted-on-light);
+  --org-chart-person-color: var(--color-text-on-light);
+  --org-chart-person-role-color: var(--color-text-muted-on-light);
+  --org-chart-empty-color: var(--color-text-muted-on-light);
   --planning-grid-border-color: var(--color-primary);
   --planning-grid-row-header-color: var(--color-text-on-light);
   --planning-grid-row-header-bg: var(--color-background-light);

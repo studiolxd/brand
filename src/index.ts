@@ -259,6 +259,8 @@ export { Heatmap } from './stories/molecules/Heatmap/Heatmap';
 export type { HeatmapProps, HeatmapRow, HeatmapColumn, HeatmapCell, HeatmapMessages } from './stories/molecules/Heatmap/Heatmap';
 export { heatmapStep, heatmapRampIndex, HEATMAP_RAMP_STEPS } from './stories/molecules/Heatmap/heatmapScale';
 export type { HeatmapScale } from './stories/molecules/Heatmap/heatmapScale';
+export { OrgChart } from './stories/organisms/OrgChart/OrgChart';
+export type { OrgChartProps, OrgChartNode, OrgChartPerson, OrgChartMessages } from './stories/organisms/OrgChart/OrgChart';
 export { PlanningGrid } from './stories/organisms/PlanningGrid/PlanningGrid';
 export type {
   PlanningGridProps,

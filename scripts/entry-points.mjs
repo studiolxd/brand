@@ -189,6 +189,7 @@ export const entryPoints = {
   'conversation-thread': 'src/stories/organisms/ConversationThread/ConversationThread.tsx',
   'chart':               'src/stories/organisms/Chart/Chart.tsx',
   'planning-grid':       'src/stories/organisms/PlanningGrid/PlanningGrid.tsx',
+  'org-chart':           'src/stories/organisms/OrgChart/OrgChart.tsx',
 };
 
 export const clientComponents = new Set([
@@ -259,6 +260,7 @@ export const clientComponents = new Set([
   'heatmap',
   'recurrence-field',
   'planning-grid',
+  'org-chart',
   'confirm-dialog',
   'search-form',
   'filter-bar',

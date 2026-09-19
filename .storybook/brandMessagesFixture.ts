@@ -296,6 +296,18 @@ export const brandMessagesFixture: BrandMessages = {
     empty: 'sin dato',
     scale: 'Escala de color',
   },
+  orgChart: {
+    label: 'Organigrama',
+    managers: 'Responsables',
+    members: 'Equipo',
+    noManagers: 'Sin responsable',
+    noMembers: 'Sin equipo',
+    collapse: (name) => `Plegar ${name}`,
+    expand: (name) => `Desplegar ${name}`,
+    zoomIn: 'Acercar',
+    zoomOut: 'Alejar',
+    zoomReset: 'Tamaño natural',
+  },
   planningGrid: {
     label: 'Planificación',
     cellLabel: (row, column) => `Horas de ${row} en ${column}`,
