@@ -7,6 +7,22 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.13.0] — 2026-09-19
+
+> **Minor.** El buscador del sitio. Existían el campo del menú y el autocompletar de la
+> documentación; faltaba la página de resultados entera, que es lo que entra aquí.
+
+### `SiteSearch` — campo, estado y resultados
+
+Un organismo con los seis estados que de verdad tiene un buscador: en reposo, escribiendo,
+buscando, con resultados, **sin resultados** y **con error**. Los dos últimos son dos estados
+y no uno: hasta ahora la página de marketing se tragaba el fallo del índice y pintaba un
+vacío, que es mentirle a quien busca — no es que no haya nada, es que no hemos podido mirar.
+
+**No busca nada.** El estado se le pasa por prop, y la paginación y los filtros son ranuras
+que rellena quien lo use. Teclado y lectores de pantalla desde el principio: foco visible,
+recorrido con tabulador y el número de resultados anunciado.
+
 ## [49.12.0] — 2026-09-19
 
 > **Minor.** Las seis piezas que pedían People, Projects y Finance al partir el ERP interno en
