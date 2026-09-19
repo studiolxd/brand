@@ -7,6 +7,57 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.11.0] — 2026-09-19
+
+> **Minor.** Tres decisiones de maqueta sobre lo que la 49.10.0 dejó puesto: dónde va el
+> distintivo en el lanzador, que su panel crezca en vez de desplazarse, y que un grupo largo
+> del índice público quepa a dos columnas bajo un solo título.
+
+### El distintivo va encima del nombre, y su hueco se reserva siempre
+
+En `AppLauncher`, el distintivo de la baldosa se pinta **sobre** el nombre de la app, no a su
+lado. Y su fila se pinta **siempre**, lleve distintivo la baldosa o no: vacía es el hueco
+reservado que deja todos los nombres de la rejilla a la misma altura, de modo que una app que
+estrena píldora no empuja hacia abajo el nombre de su vecina.
+
+El alto de esa fila es el de una `Tag` y sale de sus tokens —
+`app-launcher.tile-badge-block-size` = `calc({tag.font-size} * {tag.line-height} + 2 *
+{tag.padding-block})` —, así que sigue cuadrando si la píldora cambia de talla. No hay medida
+escrita a mano.
+
+### El panel del lanzador crece con su contenido
+
+El panel **no tiene tope propio**: con las doce aplicaciones de la suite se ve entero. El único
+límite es el hueco que de verdad queda en la ventana (`--available-height`, que mide Base UI y
+que `app-launcher.content-max-height` no hace más que nombrar); solo cuando ni ese hueco da, el
+panel se recorta ahí y hace scroll. Un tope propio —una altura fija, «tantas filas»— recortaría
+la rejilla teniendo pantalla de sobra, y ahora lo impide un guardián sobre la hoja
+(`AppLauncher.panel.test.ts`).
+
+La rejilla pasa a **dos columnas en un panel estrecho** y tres desde `sm`
+(`app-launcher.content-columns-narrow`, nuevo, junto al `content-columns` de siempre): con tres
+columnas en móvil, doce baldosas dejaban los nombres partidos en tres líneas.
+
+### `SiteNav`: un grupo a dos columnas, bajo un solo título
+
+`SiteNavGroup` gana **`columns?: 1 | 2`** (por defecto `1`, el grupo de siempre). Con `2` el
+grupo ocupa en la rejilla el **ancho de dos** —doce tramos en `md`, ocho en `lg`, seis en `xl`—
+y reparte sus ítems en **dos columnas bajo un solo título**. Es lo que da sitio a un grupo largo
+—«Aplicaciones», con las diez o doce de la suite— sin partirlo en dos grupos con dos cabeceras,
+que sería otro índice.
+
+- El pasillo entre esas dos columnas es el mismo que separa dos grupos
+  (`site-nav.item-column-gap`, nuevo, que apunta a `group-gap`): más estrecho, el grupo ancho se
+  leería como dos grupos pegados.
+- Los ítems se leen **por filas**, en el orden del DOM.
+- **Por debajo de `md` vuelve a una columna**, como todo el índice.
+- El grupo ancho cuenta **por dos** en el tope de columnas (`site-nav.columns-max`) y queda
+  fuera del reparto de la última fila: ya ocupa lo que le toca y no tiene sobrante que recoger.
+- `disabled` y `badge` de la 49.10.0 siguen valiendo dentro de las dos columnas.
+
+El dato viaja en `data-group-columns`, nunca en un atributo `style` — el mismo motivo que
+`data-columns`.
+
 ## [49.10.0] — 2026-09-18
 
 > **Minor.** La suite marca productos como «próximamente»: se ven en su sitio pero apagados,

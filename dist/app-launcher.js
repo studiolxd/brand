@@ -11,12 +11,15 @@ import { Popover as l } from "@base-ui/react/popover";
 //#region src/stories/molecules/AppLauncher/AppLauncher.tsx
 function u({ app: t, isCurrent: n, newLabel: i }) {
 	let a = e("appLauncher"), l = t.badge ?? (t.isNew ? a("new", i) : void 0), u = /* @__PURE__ */ c(o, { children: [/* @__PURE__ */ s("span", {
+		className: "app-launcher__tile-badge-row",
+		children: l && /* @__PURE__ */ s(r, {
+			variant: t.disabled ? "neutral" : "info",
+			className: "app-launcher__tile-badge",
+			children: l
+		})
+	}), /* @__PURE__ */ s("span", {
 		className: "app-launcher__tile-name",
 		children: t.name
-	}), l && /* @__PURE__ */ s(r, {
-		variant: t.disabled ? "neutral" : "info",
-		className: "app-launcher__tile-badge",
-		children: l
 	})] });
 	return t.disabled ? /* @__PURE__ */ s("span", {
 		className: "app-launcher__tile app-launcher__tile--disabled",

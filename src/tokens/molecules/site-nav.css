@@ -15,6 +15,7 @@
   --site-nav-item-hover-color: var(--color-text-on-light); /** Enlaces en hover: en claro no cambia el color, aparece la línea */
   --site-nav-item-underline-offset: var(--border-width-focus); /** Separación entre el texto y la línea de hover (2px, más pegada que en los enlaces de texto). Se reserva siempre: la línea no desplaza nada al aparecer */
   --site-nav-item-disabled-color: var(--color-disabled-text-on-light); /** Ítem apagado («próximamente»): la tinta de un control deshabilitado sobre superficie clara. No baja de 3:1 sobre el lienzo —el mínimo de WCAG 1.4.11 para un componente inactivo—, que es el suelo de esta tinta */
+  --site-nav-item-column-gap: var(--site-nav-group-gap); /** Pasillo entre las dos columnas de un grupo ancho (`columns: 2`). Es el mismo que separa dos grupos: las columnas de dentro tienen que leerse con el mismo aire que las de fuera, o el grupo ancho parecería dos grupos pegados */
   --site-nav-item-current-font-weight: var(--font-weight-default); /** Página actual: mismo peso que el resto (la marca aria-current y, si hace falta, el producto la resalta) */
   --site-nav-focus-ring-width: var(--border-width-focus); /** Anillo de foco */
   --site-nav-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco */

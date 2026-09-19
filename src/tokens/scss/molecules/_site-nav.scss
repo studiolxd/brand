@@ -14,6 +14,7 @@ $lxd-site-nav-item-underline-offset: 2px; // Separación entre el texto y la lí
 $lxd-site-nav-item-hover-line-width: 1px; // Enlaces en hover: la línea bajo el enlace (como los enlaces de texto), en claro
 $lxd-site-nav-item-disabled-color: #4a4a4a; // Ítem apagado («próximamente»): la tinta de un control deshabilitado sobre superficie clara. No baja de 3:1 sobre el lienzo —el mínimo de WCAG 1.4.11 para un componente inactivo—, que es el suelo de esta tinta
 $lxd-site-nav-item-badge-gap: 0.5rem; // Aire entre el rótulo del ítem y su distintivo
+$lxd-site-nav-item-column-gap: 2rem; // Pasillo entre las dos columnas de un grupo ancho (`columns: 2`). Es el mismo que separa dos grupos: las columnas de dentro tienen que leerse con el mismo aire que las de fuera, o el grupo ancho parecería dos grupos pegados
 $lxd-site-nav-item-current-font-weight: 300; // Página actual: mismo peso que el resto (la marca aria-current y, si hace falta, el producto la resalta)
 $lxd-site-nav-focus-ring-width: 2px; // Anillo de foco
 $lxd-site-nav-focus-ring-offset: 2px; // Separación del anillo de foco

@@ -34,6 +34,16 @@ export interface SiteNavGroup {
   label: string;
   /** Si se indica, la cabecera es también un enlace (la portada de la sección). */
   href?: string;
+  /**
+   * En cuántas columnas se reparten los ítems de ESTE grupo, bajo **un solo
+   * título**. Por defecto `1`, el grupo de siempre. Con `2` —el caso de un
+   * grupo largo, como «Aplicaciones»— el grupo ocupa en la rejilla el ancho de
+   * dos y sus ítems se pintan en dos columnas dentro de él; por debajo de `md`
+   * vuelve a una, como todo lo demás. No es otro componente ni dos grupos: la
+   * cabecera sigue siendo una, y con ella el encabezado por el que se recorre
+   * el índice.
+   */
+  columns?: 1 | 2;
   items: SiteNavItem[];
 }
 
@@ -92,6 +102,10 @@ const COLUMNS_MAX = 5;
  * en `data-columns`, no en un atributo `style`: una app con
  * `style-src 'self'` descarta el atributo sin avisar y el grupo de más caía
  * a la segunda fila.
+ *
+ * Un grupo puede valer por dos (`columns: 2`): ocupa el ancho de dos en la
+ * rejilla y reparte sus ítems en dos columnas bajo un solo título. El dato va
+ * también en un atributo, `data-group-columns`, por el mismo motivo.
  */
 /**
  * El único texto que el índice dice por su cuenta, y es **cromo**: el nombre de
@@ -111,11 +125,22 @@ export function SiteNav({
 }: SiteNavProps) {
   const t = useBrandMessages('siteNav');
   const classes = ['site-nav', className].filter(Boolean).join(' ');
-  const wideColumns = Math.min(groups.length, COLUMNS_MAX) || 1;
+  // El tope de columnas cuenta TRAMOS, no grupos: un grupo ancho (`columns: 2`)
+  // vale por dos, que es lo que ocupa en la rejilla. Si no, cinco grupos con uno
+  // ancho pedían cinco columnas para seis tramos de contenido.
+  const tramos = groups.reduce((total, group) => total + (group.columns ?? 1), 0);
+  const wideColumns = Math.min(tramos, COLUMNS_MAX) || 1;
   return (
     <nav className={classes} aria-label={t('label', label)} data-columns={wideColumns}>
       {groups.map((group) => (
-        <div key={group.id} className="site-nav__group">
+        <div
+          key={group.id}
+          className="site-nav__group"
+          // El dato va en un atributo `data-*` y no en `style`, como
+          // `data-columns`: una app con `style-src 'self'` descarta los
+          // atributos de estilo en silencio y el grupo perdería su ancho.
+          data-group-columns={group.columns === 2 ? 2 : undefined}
+        >
           <Heading level={2} size={6} className="site-nav__label">
             {group.href
               ? renderLink({ href: group.href, className: 'site-nav__label-link', children: group.label })

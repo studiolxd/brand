@@ -20,13 +20,14 @@ function o(e, t) {
 }
 var s = 5;
 function c({ groups: c, label: l, renderLink: u = a, className: d }) {
-	let f = e("siteNav"), p = ["site-nav", d].filter(Boolean).join(" "), m = Math.min(c.length, s) || 1;
+	let f = e("siteNav"), p = ["site-nav", d].filter(Boolean).join(" "), m = c.reduce((e, t) => e + (t.columns ?? 1), 0), h = Math.min(m, s) || 1;
 	return /* @__PURE__ */ r("nav", {
 		className: p,
 		"aria-label": f("label", l),
-		"data-columns": m,
+		"data-columns": h,
 		children: c.map((e) => /* @__PURE__ */ i("div", {
 			className: "site-nav__group",
+			"data-group-columns": e.columns === 2 ? 2 : void 0,
 			children: [/* @__PURE__ */ r(t, {
 				level: 2,
 				size: 6,

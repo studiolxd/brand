@@ -4,13 +4,14 @@
 
 :root {
   --app-launcher-content-min-width: 20rem; /** Ancho mínimo del popover */
-  --app-launcher-content-columns: 3; /** Número de columnas de la rejilla de apps */
-  --app-launcher-content-max-height: var(--available-height); /** Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — con muchas apps, el panel hace scroll en vez de salirse de la pantalla */
+  --app-launcher-content-columns: 3; /** Número de columnas de la rejilla de apps a partir de `sm` */
+  --app-launcher-content-columns-narrow: 2; /** Columnas de la rejilla por debajo de `sm`: dos. Con tres, doce baldosas en un panel estrecho dejaban el nombre de una app partido en tres líneas; con dos, la rejilla crece a lo alto lo justo y el panel sigue cabiendo entero */
+  --app-launcher-content-max-height: var(--available-height); /** Único tope del panel: el hueco que de verdad queda en la ventana, que Base UI mide y publica en `--available-height`. El panel NO tiene tope propio —crece con su contenido, y con doce apps se ve entero—; solo cuando ni ese hueco da, se recorta aquí y hace scroll */
   --app-launcher-trigger-size: var(--size-component-md); /** Tamaño (cuadrado) del botón de rejilla */
   --app-launcher-content-gap: var(--spacing-1); /** Espacio entre tiles */
   --app-launcher-content-padding-block: var(--spacing-3); /** Padding vertical del panel */
   --app-launcher-content-padding-inline: var(--spacing-3); /** Padding horizontal del panel */
-  --app-launcher-tile-gap: var(--spacing-1); /** Espacio entre el nombre y el badge «nuevo» dentro del tile */
+  --app-launcher-tile-gap: var(--spacing-1); /** Espacio entre el distintivo y el nombre dentro del tile */
   --app-launcher-tile-name-font-size: var(--font-size-1); /** Tamaño de texto del nombre de app */
   --app-launcher-trigger-border-radius: var(--border-radius-default); /** Radio del trigger */
   --app-launcher-trigger-color: var(--color-text-on-light); /** Color del icono de rejilla */
@@ -27,6 +28,7 @@
   --app-launcher-transition-easing: var(--floating-panel-transition-easing); /** Easing de la animación */
   --app-launcher-tile-padding-block: var(--menu-item-padding-block); /** Padding vertical de cada tile — el de un ítem de Menu, para que la altura case con las listas de opciones del DS */
   --app-launcher-tile-padding-inline: var(--menu-item-padding-inline); /** Padding horizontal de cada tile — el de un ítem de Menu */
+  --app-launcher-tile-badge-block-size: calc(var(--tag-font-size) * var(--tag-line-height) + 2 * var(--tag-padding-block)); /** Alto de la fila del distintivo, que va ENCIMA del nombre. Es la caja de una `Tag` (cuerpo por interlineado más su aire) y se reserva SIEMPRE, lleve distintivo la baldosa o no: de ahí que todos los nombres de la rejilla queden a la misma altura. Sale de los tokens de `Tag`, así que sigue cuadrando si la píldora cambia de talla */
   --app-launcher-tile-border-radius: var(--border-radius-default); /** Radio de cada tile */
   --app-launcher-tile-name-font-weight: var(--font-weight-default); /** Peso del nombre de app */
   --app-launcher-tile-name-line-height: var(--menu-item-line-height); /** Interlineado del nombre de app — el de un ítem de Menu, para que la altura case con las listas de opciones del DS */

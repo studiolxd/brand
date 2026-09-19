@@ -113,15 +113,21 @@ function LauncherTile({ app, isCurrent, newLabel }: { app: LauncherApp; isCurren
   const badge = app.badge ?? (app.isNew ? t('new', newLabel) : undefined);
   const content = (
     <>
+      {/* El distintivo va ENCIMA del nombre, y su fila se pinta SIEMPRE, lleve
+          distintivo la baldosa o no: vacía es el hueco reservado que deja a
+          todos los nombres de la rejilla a la misma altura. El alto lo pone
+          `tile-badge-block-size`, que es la caja de una `Tag`. */}
+      <span className="app-launcher__tile-badge-row">
+        {badge && (
+          // Apagada, el distintivo va en neutro: una píldora de información
+          // sobre una baldosa que no lleva a ningún sitio se leería como una
+          // novedad disponible.
+          <Tag variant={app.disabled ? 'neutral' : 'info'} className="app-launcher__tile-badge">
+            {badge}
+          </Tag>
+        )}
+      </span>
       <span className="app-launcher__tile-name">{app.name}</span>
-      {badge && (
-        // Apagada, el distintivo va en neutro: una píldora de información
-        // sobre una baldosa que no lleva a ningún sitio se leería como una
-        // novedad disponible.
-        <Tag variant={app.disabled ? 'neutral' : 'info'} className="app-launcher__tile-badge">
-          {badge}
-        </Tag>
-      )}
     </>
   );
 

@@ -19,6 +19,12 @@
    por fila con seis grupos, por ejemplo, sí cuadra—. No es un fallo de la
    técnica: los números no dan, y se prefiere el reparto al hueco.
 
+   Un grupo puede además valer por DOS (`columns: 2`, `data-group-columns="2"`):
+   ocupa el doble de tramos en cada tamaño y reparte sus ítems en dos columnas
+   bajo un solo título. Es lo que da sitio a un grupo largo —«Aplicaciones»— sin
+   partirlo en dos grupos con dos cabeceras, que sería otro índice. Por debajo
+   de `md` no se aplica: ahí todo es una columna.
+
    La medida de cada grupo sigue siendo una FRACCIÓN del contenedor, nunca un
    ancho mínimo en píxeles: un mínimo inventado ataría el panel a un tamaño de
    letra y a un idioma.
@@ -47,6 +53,8 @@
   /* Dos por fila: seis tramos cada uno. */
   .site-nav__group { grid-column: span 6; }
 
+  /* El grupo ancho vale por dos: aquí, la fila entera. */
+  .site-nav > .site-nav__group[data-group-columns="2"] { grid-column: span 12; }
 }
 
 /* El reparto del sobrante de DOS por fila vale solo en su tramo: las medias
@@ -57,23 +65,31 @@
 @media (min-width: 768px) and (max-width: 1023.98px) {
   /* Si sobra uno —el primero de una fila que además es el último—, la ocupa
      entera en vez de dejar media fila vacía. */
-  .site-nav__group:nth-child(2n + 1):last-child { grid-column: span 12; }
+  .site-nav__group:nth-child(2n + 1):last-child:not([data-group-columns="2"]) { grid-column: span 12; }
 }
 
 @media (min-width: 1024px) /* --breakpoint-lg */ {
   /* Tres por fila: cuatro tramos cada uno. */
   .site-nav__group { grid-column: span 4; }
 
+  /* El grupo ancho vale por dos: ocho tramos, dos tercios de la fila. */
+  .site-nav > .site-nav__group[data-group-columns="2"] { grid-column: span 8; }
 }
 
 @media (min-width: 1024px) and (max-width: 1279.98px) {
   /* Sobra uno: la fila entera. */
-  .site-nav__group:nth-child(3n + 1):last-child { grid-column: span 12; }
+  .site-nav__group:nth-child(3n + 1):last-child:not([data-group-columns="2"]) { grid-column: span 12; }
 
   /* Sobran dos: la mitad cada uno. El selector nombra al PRIMERO de la última
-     fila —el que abre fila y tiene otro detrás— y arrastra a su hermano. */
-  .site-nav__group:nth-child(3n + 1):nth-last-child(2),
-  .site-nav__group:nth-child(3n + 1):nth-last-child(2) ~ .site-nav__group {
+     fila —el que abre fila y tiene otro detrás— y arrastra a su hermano.
+
+     El reparto deja FUERA al grupo ancho (`:not([data-group-columns="2"])`):
+     cuenta grupos, no tramos, y un grupo que ya vale por dos no tiene sobrante
+     que recoger. Sin la exclusión, además, estos selectores pesan más que la
+     regla del grupo ancho y le robaban su ancho. Mismo motivo en las otras
+     reglas de reparto. */
+  .site-nav__group:nth-child(3n + 1):nth-last-child(2):not([data-group-columns="2"]),
+  .site-nav__group:nth-child(3n + 1):nth-last-child(2) ~ .site-nav__group:not([data-group-columns="2"]) {
     grid-column: span 6;
   }
 }
@@ -90,6 +106,13 @@
   .site-nav[data-columns="3"] > .site-nav__group { grid-column: span 4; }
   .site-nav[data-columns="4"] > .site-nav__group { grid-column: span 3; }
 
+  /* El grupo ancho vale por dos columnas en cada uno de esos repartos. */
+  .site-nav > .site-nav__group[data-group-columns="2"] { grid-column: span 6; }
+  .site-nav[data-columns="1"] > .site-nav__group[data-group-columns="2"],
+  .site-nav[data-columns="2"] > .site-nav__group[data-group-columns="2"] { grid-column: span 12; }
+  .site-nav[data-columns="3"] > .site-nav__group[data-group-columns="2"] { grid-column: span 8; }
+  .site-nav[data-columns="4"] > .site-nav__group[data-group-columns="2"] { grid-column: span 6; }
+
   /* Cinco o más: cinco por fila. Aquí la rejilla cambia de base —cinco tramos,
      no doce—, porque doce no se divide entre cinco y la única base que serviría
      para todos los repartos (sesenta tramos) dejaría más pasillo que columnas.
@@ -99,7 +122,8 @@
      no llega. */
   .site-nav[data-columns="5"] { grid-template-columns: repeat(5, 1fr); }
   .site-nav[data-columns="5"] > .site-nav__group { grid-column: span 1; }
-  .site-nav[data-columns="5"] > .site-nav__group:nth-child(5n + 1):last-child { grid-column: span 5; }
+  .site-nav[data-columns="5"] > .site-nav__group:nth-child(5n + 1):last-child:not([data-group-columns="2"]) { grid-column: span 5; }
+  .site-nav[data-columns="5"] > .site-nav__group[data-group-columns="2"] { grid-column: span 2; }
 }
 
 /* Cabecera de grupo: un Heading normal (h2 con talla 6); solo se le quita el
@@ -125,6 +149,29 @@
   display: flex;
   flex-direction: column;
   gap: var(--site-nav-item-gap);
+}
+
+/* ── Grupo a dos columnas (`columns: 2`) ─────────────────────
+   UN solo título y sus ítems repartidos debajo en dos columnas. El grupo ocupa
+   en la rejilla el ancho de dos (arriba, en cada tramo), así que sus columnas
+   miden lo mismo que las de fuera y el pasillo entre ellas es el que separa
+   dos grupos (`item-column-gap`, que apunta a `group-gap`): si fuera más
+   estrecho, el grupo ancho se leería como dos grupos pegados.
+
+   La lista pasa de columna flexible a rejilla, y el orden sigue siendo el del
+   DOM: los ítems llenan la primera fila y bajan (`row`), que es como se lee un
+   índice — no en serpentina por columnas, que obligaría a saber cuántos ítems
+   hay antes de empezar a leer.
+
+   Por debajo de `md` no se aplica: ahí todo el índice es una columna, y un
+   grupo ancho no es la excepción. */
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .site-nav__group[data-group-columns="2"] > .site-nav__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--site-nav-item-column-gap);
+    row-gap: var(--site-nav-item-gap);
+  }
 }
 
 .site-nav__link,

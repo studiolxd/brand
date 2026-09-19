@@ -47,6 +47,34 @@ const seisGrupos: SiteNavGroup[] = [
   ] },
 ];
 
+/**
+ * El menú público de la suite: «Aplicaciones» es un grupo largo y se declara
+ * `columns: 2` — un solo título, sus ítems en dos columnas y el ancho de dos
+ * grupos en la rejilla.
+ */
+const conGrupoAncho: SiteNavGroup[] = [
+  groups[0]!,
+  {
+    id: 'aplicaciones',
+    label: 'Aplicaciones',
+    href: '#aplicaciones',
+    columns: 2,
+    items: [
+      { id: 'lmsmarketplace', label: 'LMS Marketplace', href: '#lmsmarketplace' },
+      { id: 'bricks', label: 'Bricks', href: '#bricks' },
+      { id: 'tender', label: 'Tender', href: '#tender', badge: 'Nuevo' },
+      { id: 'localizia', label: 'Localizia', href: '#localizia', badge: 'Beta' },
+      { id: 'lrs', label: 'LRS', href: '#lrs' },
+      { id: 'sharescorm', label: 'ShareScorm', href: '#sharescorm' },
+      { id: 'moodlemcp', label: 'MoodleMCP', href: '#moodlemcp' },
+      { id: 'aipricing', label: 'AI Pricing', href: '#aipricing' },
+      { id: 'atlas', label: 'Atlas', href: '#atlas', disabled: true, badge: 'Próximamente' },
+      { id: 'forja', label: 'Forja', href: '#forja', disabled: true, badge: 'Próximamente' },
+    ],
+  },
+  groups[2]!,
+];
+
 const meta: Meta<typeof SiteNav> = {
   title: 'Molecules/SiteNav',
   component: SiteNav,
@@ -99,6 +127,54 @@ export const CuatroGrupos: Story = {
 export const SeisGrupos: Story = {
   name: 'Seis grupos',
   args: { groups: seisGrupos },
+};
+
+/**
+ * Un grupo largo —«Aplicaciones»— con `columns: 2`: **un solo título** y sus
+ * ítems repartidos en dos columnas debajo. El grupo ocupa en la rejilla el
+ * ancho de dos, así que sus columnas miden lo mismo que las de los grupos
+ * vecinos y el índice sigue siendo una sola rejilla. Por debajo de `md`
+ * vuelve a una columna, como todo lo demás.
+ *
+ * Los ítems apagados y sus distintivos siguen valiendo dentro de las dos
+ * columnas: no son otro ítem, solo están repartidos.
+ */
+export const GrupoADosColumnas: Story = {
+  name: 'Grupo a dos columnas',
+  args: { groups: conGrupoAncho },
+};
+
+export const ContratoGrupoAncho: Story = {
+  name: 'Test — el grupo ancho pinta dos columnas bajo un solo título',
+  tags: ['!dev'],
+  args: { groups: conGrupoAncho },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const grupo = canvasElement.querySelector('[data-group-columns="2"]') as HTMLElement;
+    await expect(grupo).toBeInTheDocument();
+
+    // Un solo título: el grupo ancho no duplica su cabecera, así que el índice
+    // sigue teniendo un encabezado por grupo.
+    await expect(within(grupo).getAllByRole('heading', { level: 2 })).toHaveLength(1);
+    await expect(canvas.getAllByRole('heading', { level: 2 })).toHaveLength(3);
+
+    // Y sus ítems se pintan en una rejilla de dos columnas (el runner va por
+    // encima de `md`).
+    const lista = grupo.querySelector('.site-nav__list') as HTMLElement;
+    await expect(getComputedStyle(lista).display).toBe('grid');
+    await expect(getComputedStyle(lista).gridTemplateColumns.split(' ')).toHaveLength(2);
+
+    // El apagado y su distintivo siguen funcionando dentro de las dos columnas.
+    const apagado = within(grupo).getByRole('link', { name: 'Atlas' });
+    await expect(apagado.tagName).toBe('SPAN');
+    await expect(apagado).toHaveAttribute('aria-disabled', 'true');
+    await expect(within(grupo).getAllByText('Próximamente')).toHaveLength(2);
+    await expect(within(grupo).getByText('Beta')).toBeVisible();
+
+    // El grupo ancho vale por dos en el tope de columnas: dos grupos normales
+    // más uno ancho son cuatro tramos.
+    await expect(canvasElement.querySelector('.site-nav')!.getAttribute('data-columns')).toBe('4');
+  },
 };
 
 /**

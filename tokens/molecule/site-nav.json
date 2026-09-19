@@ -13,6 +13,7 @@
     "item-hover-line-width": { "$value": "{link.underline-width}",    "$type": "dimension", "$description": "Enlaces en hover: la línea bajo el enlace (como los enlaces de texto), en claro" },
     "item-disabled-color":  { "$value": "{color.disabled.text-on-light}", "$type": "color", "$description": "Ítem apagado («próximamente»): la tinta de un control deshabilitado sobre superficie clara. No baja de 3:1 sobre el lienzo —el mínimo de WCAG 1.4.11 para un componente inactivo—, que es el suelo de esta tinta" },
     "item-badge-gap":       { "$value": "{spacing.2}",             "$type": "dimension", "$description": "Aire entre el rótulo del ítem y su distintivo" },
+    "item-column-gap":      { "$value": "{site-nav.group-gap}",     "$type": "dimension", "$description": "Pasillo entre las dos columnas de un grupo ancho (`columns: 2`). Es el mismo que separa dos grupos: las columnas de dentro tienen que leerse con el mismo aire que las de fuera, o el grupo ancho parecería dos grupos pegados" },
     "item-current-font-weight": { "$value": "{font-weight.default}", "$type": "number",  "$description": "Página actual: mismo peso que el resto (la marca aria-current y, si hace falta, el producto la resalta)" },
     "focus-ring-width":     { "$value": "{border-width.focus}",     "$type": "dimension", "$description": "Anillo de foco" },
     "focus-ring-offset":    { "$value": "{border-width.focus}",     "$type": "dimension", "$description": "Separación del anillo de foco" },

@@ -84,3 +84,71 @@ describe('SiteNav — ítems apagados y distintivo', () => {
     expect(screen.getByText('Beta')).toBeInTheDocument();
   });
 });
+
+describe('SiteNav — grupo a dos columnas (`columns: 2`)', () => {
+  const conGrupoAncho: SiteNavGroup[] = [
+    {
+      id: 'aplicaciones',
+      label: 'Aplicaciones',
+      columns: 2,
+      items: [
+        { id: 'uno', label: 'Uno', href: '#uno' },
+        { id: 'dos', label: 'Dos', href: '#dos' },
+        { id: 'tres', label: 'Tres', href: '#tres', badge: 'Beta' },
+        { id: 'cuatro', label: 'Cuatro', href: '#cuatro', disabled: true, badge: 'Próximamente' },
+      ],
+    },
+    { id: 'estudio', label: 'Estudio', items: [{ id: 'equipo', label: 'Equipo', href: '#equipo' }] },
+  ];
+
+  it('el grupo ancho lo declara en `data-group-columns`, no en `style`', () => {
+    const { container } = render(<SiteNav groups={conGrupoAncho} />);
+    const grupos = container.querySelectorAll('.site-nav__group');
+    expect(grupos[0]).toHaveAttribute('data-group-columns', '2');
+    expect(grupos[0]).not.toHaveAttribute('style');
+    // El grupo normal no lleva el atributo: no es `1`, es nada.
+    expect(grupos[1]).not.toHaveAttribute('data-group-columns');
+  });
+
+  it('mantiene UN solo título: dos columnas no son dos grupos', () => {
+    render(<SiteNav groups={conGrupoAncho} />);
+    const titulos = screen.getAllByRole('heading', { level: 2 });
+    expect(titulos).toHaveLength(2);
+    expect(titulos[0]).toHaveTextContent('Aplicaciones');
+  });
+
+  it('sus ítems siguen en una sola lista, en el orden del DOM', () => {
+    const { container } = render(<SiteNav groups={conGrupoAncho} />);
+    const listas = container.querySelectorAll('.site-nav__group[data-group-columns="2"] .site-nav__list');
+    expect(listas).toHaveLength(1);
+    expect(within(listas[0] as HTMLElement).getAllByRole('link').map((a) => a.textContent)).toEqual([
+      'Uno',
+      'Dos',
+      'Tres',
+      'Cuatro',
+    ]);
+  });
+
+  it('`disabled` y `badge` siguen valiendo dentro de las dos columnas', () => {
+    render(<SiteNav groups={conGrupoAncho} />);
+    const apagado = screen.getByRole('link', { name: 'Cuatro' });
+    expect(apagado.tagName).toBe('SPAN');
+    expect(apagado).toHaveAttribute('aria-disabled', 'true');
+    expect(screen.getByText('Próximamente')).toBeInTheDocument();
+    expect(screen.getByText('Beta')).toBeInTheDocument();
+  });
+
+  it('el grupo ancho cuenta por dos en el tope de columnas', () => {
+    const { container } = render(<SiteNav groups={conGrupoAncho} />);
+    // Un grupo ancho + uno normal = tres tramos, no dos.
+    expect(container.querySelector('.site-nav')).toHaveAttribute('data-columns', '3');
+  });
+
+  it('`columns: 1` es el grupo de siempre y no escribe atributo', () => {
+    const { container } = render(
+      <SiteNav groups={[{ id: 'a', label: 'A', columns: 1, items: [{ id: 'x', label: 'X', href: '#x' }] }]} />,
+    );
+    expect(container.querySelector('.site-nav__group')).not.toHaveAttribute('data-group-columns');
+    expect(container.querySelector('.site-nav')).toHaveAttribute('data-columns', '1');
+  });
+});
