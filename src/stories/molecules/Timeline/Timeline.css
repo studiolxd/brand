@@ -1,0 +1,87 @@
+/* Timeline — el historial vertical de un expediente: qué le pasó, cuándo y
+   quién lo hizo. La lista es una `<ol>` de verdad, así que el orden y el
+   número de hitos se anuncian sin tener que escribirlos. */
+
+.timeline {
+  font-family: var(--timeline-font-family);
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: 0;
+  padding-inline: 0;
+  list-style: none;
+}
+
+/* El hito: la marca en la primera columna y el cuerpo en la segunda. */
+.timeline__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--timeline-column-gap);
+}
+
+/* El aire entre hitos lo pone el CUERPO, no el `<li>`: así la columna de la
+   marca —que se estira a la altura de la fila— también lo cubre, y el carril
+   llega hasta la marca siguiente sin medir nada. */
+.timeline__item:not(:last-child) .timeline__body {
+  padding-block-end: var(--timeline-gap);
+}
+
+.timeline__marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--timeline-rail-gap);
+}
+
+/* El carril baja desde la marca hasta la siguiente. El último hito no lo
+   pinta —no se renderiza— porque una línea que muere en el aire diría que
+   falta algo por venir. */
+.timeline__rail {
+  flex: 1 1 auto;
+  inline-size: var(--timeline-rail-width);
+  min-block-size: var(--timeline-gap);
+  background-color: var(--timeline-rail-color);
+}
+
+.timeline__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--timeline-body-gap);
+  min-inline-size: 0;
+}
+
+.timeline__title {
+  margin-block: 0;
+  font-size: var(--timeline-title-font-size);
+  font-weight: var(--timeline-title-font-weight);
+  line-height: var(--timeline-title-line-height);
+  color: var(--timeline-title-color);
+}
+
+.timeline__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--timeline-meta-gap);
+  margin-block: 0;
+  font-size: var(--timeline-meta-font-size);
+  color: var(--timeline-meta-color);
+}
+
+/* El punto que separa fecha y autor es decorativo: lo pinta el CSS para que
+   ningún lector de pantalla lo lea como contenido. */
+.timeline__date + .timeline__author::before {
+  content: "·";
+  margin-inline-end: var(--timeline-meta-gap);
+  color: var(--timeline-meta-separator-color);
+}
+
+.timeline__note {
+  margin-block: 0;
+  font-size: var(--timeline-note-font-size);
+  line-height: var(--timeline-note-line-height);
+  color: var(--timeline-note-color);
+}
+
+.timeline__actions {
+  margin-block-start: var(--timeline-actions-margin-block-start);
+}

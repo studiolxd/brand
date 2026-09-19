@@ -58,6 +58,7 @@ export type {
   SpinnerMessages,
   SliderMessages,
   TreeViewMessages,
+  TimelineMessages,
   UptimeBarsMessages,
   ChartMessages,
   StepperMessages,

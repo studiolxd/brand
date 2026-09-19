@@ -823,6 +823,11 @@
       "import": "./dist/tooltip.js",
       "default": "./dist/tooltip.js"
     },
+    "./timeline": {
+      "types": "./dist/_types/molecules/Timeline/Timeline.d.ts",
+      "import": "./dist/timeline.js",
+      "default": "./dist/timeline.js"
+    },
     "./typing-indicator": {
       "types": "./dist/_types/atoms/TypingIndicator/TypingIndicator.d.ts",
       "import": "./dist/typing-indicator.js",

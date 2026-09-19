@@ -630,6 +630,11 @@ html.dark .surface-invert {
   --theme-switcher-focus-ring-color: var(--color-primary);
   --time-field-error-color: var(--form-error-color);
   --time-field-helper-color: var(--form-helper-color);
+  --timeline-rail-color: var(--color-border-default-on-light);
+  --timeline-title-color: var(--color-text-on-light);
+  --timeline-meta-color: var(--color-text-muted-on-light);
+  --timeline-meta-separator-color: var(--color-border-default-on-light);
+  --timeline-note-color: var(--color-text-on-light);
   --tree-view-color: var(--sidebar-nav-item-color);
   --tree-view-selected-color: var(--sidebar-nav-item-color);
   --tree-view-chevron-color: var(--color-text-muted-on-light);

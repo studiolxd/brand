@@ -251,6 +251,8 @@ export { RecoveryCodes } from './stories/molecules/RecoveryCodes/RecoveryCodes';
 export type { RecoveryCodesProps, RecoveryCodesLabels } from './stories/molecules/RecoveryCodes/RecoveryCodes';
 export { StatTile } from './stories/molecules/StatTile/StatTile';
 export type { StatTileProps, StatTileDelta, StatTileDirection, StatTileTone } from './stories/molecules/StatTile/StatTile';
+export { Timeline } from './stories/molecules/Timeline/Timeline';
+export type { TimelineProps, TimelineItem, TimelineTone, TimelineMessages } from './stories/molecules/Timeline/Timeline';
 export { UptimeBars } from './stories/molecules/UptimeBars/UptimeBars';
 export type { UptimeBarsProps, UptimeBarsPoint } from './stories/molecules/UptimeBars/UptimeBars';
 export { uptimeStatus, UPTIME_BARS_DEFAULT_THRESHOLDS } from './stories/molecules/UptimeBars/uptimeStatus';

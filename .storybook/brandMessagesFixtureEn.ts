@@ -277,6 +277,10 @@ export const brandMessagesFixtureEn: BrandMessages = {
   treeView: {
     label: 'Tree',
   },
+  timeline: {
+    label: 'History',
+    current: 'current status',
+  },
   uptimeBars: {
     label: 'Uptime',
     noData: 'no data',

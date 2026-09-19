@@ -1,0 +1,73 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as TimelineStories from "./Timeline.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { timelineBaseTokens, timelineDarkTokens } from "../../../tokens/molecules/timeline";
+
+<Meta of={TimelineStories} />
+
+# Timeline
+
+El historial vertical de un expediente: un hito por cambio de estado, con su fecha, quien lo firmó y la nota que dejó. Es lo que llevan la ficha de un ticket y la de una candidatura.
+
+<Canvas of={TimelineStories.PorDefecto} />
+
+## No ordena ni interpreta
+
+El historial pinta los hitos **en el orden en que llegan**. Si el más reciente va arriba o abajo lo decide quien lo usa, porque depende del expediente: un ticket se lee de arriba abajo como una conversación, y un panel de actividad suele enseñar lo último primero.
+
+Tampoco deduce cuál es el estado vigente. Se marca con `current`, y como mucho hay uno: el historial no valida esa coherencia —no es su trabajo saber qué expedientes tienen sentido—, pero quien lo monta marca el último.
+
+Y **no formatea fechas**. `date` llega escrita («4 de marzo, 08:05»), por lo mismo por lo que `StatTile` no formatea su cifra y `UptimeBars` no sabe qué es un día: el formato de una fecha depende del idioma y del huso horario, y eso es `Intl`.
+
+## Anatomía
+
+- **La marca** — un `StepMarker` con el tono del hito. Por defecto lleva el punto (`dot`); un hito puede pedir otro icono con `icon`.
+- **El carril** — la línea que une una marca con la siguiente. **El último hito no la pinta**: una línea que muere en el aire diría que falta algo por venir.
+- **El cuerpo** — el título (el estado), la línea de metadatos (`date` · `author`) y la nota. Todo menos el título es opcional: un historial que solo registra estados y fechas se queda en dos líneas por hito.
+- **Las acciones** (`actions`) — lo que se puede hacer desde ese hito: abrir el documento que se adjuntó, ir al despliegue que lo cerró.
+
+<Canvas of={TimelineStories.SoloEstados} />
+<Canvas of={TimelineStories.ConAcciones} />
+
+## Los tonos
+
+El tono de la marca es el de `StepMarker`, sin traducción: `neutral` (el de partida), `primary`, `accent-1`, `accent-2`, `support-1`, `support-2`, `success` y `danger`. No hay un tono por «tipo de estado» porque el sistema no sabe qué estados tiene un ticket ni cuántos: los reparte quien los define.
+
+**El color nunca es la única señal.** El estado va escrito en el título de cada hito, y el vigente se anuncia además con un texto que no se ve (`timeline.current`). Quien no distingue el verde del rojo lee exactamente lo mismo.
+
+<Canvas of={TimelineStories.Candidatura} />
+
+## Un solo hito
+
+Un expediente recién abierto tiene un hito y ningún carril. No es un caso degenerado que haya que evitar: es el estado normal del primer día.
+
+<Canvas of={TimelineStories.UnSoloHito} />
+
+## Superficie oscura
+
+El carril y la tinta cambian de cara por la regla de derivación —la línea pasa a `color.text.on-dark`, el título y la nota a la tinta clara— y las marcas las resuelve `StepMarker` con sus propios pares. No hay CSS a mano.
+
+<Canvas of={TimelineStories.SuperficieOscura} />
+
+## Accesibilidad
+
+- **La lista es una `<ol>`**, no una pila de `<div>`: el lector de pantalla anuncia cuántos hitos hay y en qué posición va. El carril es decorativo y no está en el árbol de accesibilidad.
+- **El nombre de la lista** sale de `label` o de `timeline.label`. Cuando hay varios historiales en una página (el del ticket y el de la facturación), cada uno pasa el suyo.
+- **El estado vigente se lee**: el texto de `timeline.current` va tras el título del hito `current`, oculto a la vista.
+- El marcador de cada hito es `aria-hidden` por construcción (`StepMarker` lo es siempre): la información está en el texto.
+
+## Textos
+
+Dos, los dos cromo, en el espacio `timeline` del `BrandMessagesProvider`: `label` y `current`. Ni las fechas ni los nombres pasan por ahí — son contenido y los escribe quien pasa los hitos.
+
+## Props
+
+<ArgTypes of={TimelineStories.PorDefecto} />
+
+## Tokens
+
+<TokenTable tokens={timelineBaseTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={timelineDarkTokens} />
