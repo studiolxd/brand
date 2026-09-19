@@ -1,0 +1,39 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-org-chart-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica del organigrama
+$lxd-org-chart-gap: 0.75rem; // Separación entre el lienzo y sus controles
+$lxd-org-chart-viewport-block-size: 32rem; // Alto del lienzo con desplazamiento
+$lxd-org-chart-viewport-padding: 1.5rem; // Aire alrededor del árbol dentro del lienzo
+$lxd-org-chart-viewport-bg: #f2f2f2; // Fondo del lienzo — superficie secundaria: lo que separa el organigrama de la página
+$lxd-org-chart-viewport-radius: 0px; // Radio del lienzo
+$lxd-org-chart-viewport-border-color: #d0d0d0; // Borde del lienzo
+$lxd-org-chart-viewport-border-width: 1px; // Grosor del borde del lienzo
+$lxd-org-chart-focus-ring-color: #111e30; // Anillo de foco del lienzo
+$lxd-org-chart-focus-ring-width: 2px; // Grosor del anillo de foco
+$lxd-org-chart-focus-ring-offset: 2px; // Separación del anillo de foco
+$lxd-org-chart-sibling-gap: 1rem; // Separación horizontal entre dos nodos hermanos
+$lxd-org-chart-connector-length: 2rem; // Alto del tramo de líneas entre un nodo y sus hijos
+$lxd-org-chart-connector-color: #d0d0d0; // Color de las líneas que unen los nodos
+$lxd-org-chart-connector-width: 1px; // Grosor de las líneas que unen los nodos
+$lxd-org-chart-card-inline-size: 14rem; // Ancho de la tarjeta de un departamento
+$lxd-org-chart-card-bg: #ffffff; // Fondo de la tarjeta
+$lxd-org-chart-card-border-color: #111e30; // Borde de la tarjeta
+$lxd-org-chart-card-border-width: 1px; // Grosor del borde de la tarjeta
+$lxd-org-chart-card-radius: 0px; // Radio de la tarjeta
+$lxd-org-chart-card-padding-block: 0.5rem; // Padding vertical de la tarjeta
+$lxd-org-chart-card-padding-inline: 0.75rem; // Padding horizontal de la tarjeta
+$lxd-org-chart-card-gap: 0.5rem; // Separación entre la cabecera y el cuerpo de la tarjeta
+$lxd-org-chart-name-font-size: 0.875rem; // Tamaño del nombre del departamento
+$lxd-org-chart-name-font-weight: 500; // Peso del nombre del departamento
+$lxd-org-chart-name-color: #111e30; // Color del nombre del departamento
+$lxd-org-chart-group-font-size: 0.75rem; // Tamaño del rótulo de un grupo de personas
+$lxd-org-chart-group-color: #4a4a4a; // Color del rótulo de un grupo de personas
+$lxd-org-chart-group-gap: 0.25rem; // Separación entre el rótulo y sus personas
+$lxd-org-chart-group-margin-block-start: 0.5rem; // Aire entre dos grupos de personas
+$lxd-org-chart-person-font-size: 0.875rem; // Tamaño del nombre de una persona
+$lxd-org-chart-person-color: #111e30; // Color del nombre de una persona
+$lxd-org-chart-person-role-font-size: 0.75rem; // Tamaño del puesto de una persona
+$lxd-org-chart-person-role-color: #4a4a4a; // Color del puesto de una persona
+$lxd-org-chart-person-gap: 0.25rem; // Separación entre personas
+$lxd-org-chart-empty-color: #4a4a4a; // Color del «sin responsable» / «sin equipo»

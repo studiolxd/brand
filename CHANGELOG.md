@@ -7,6 +7,124 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.12.0] — 2026-09-19
+
+> **Minor.** Las seis piezas que pedían People, Projects y Finance al partir el ERP interno en
+> tres aplicaciones de la suite. Ninguna trae una dependencia nueva: lo que en el ERP hacían
+> `@xyflow/react` + `dagre`, `@tanstack/react-table` y una librería de calendario, aquí lo
+> hacen el CSS, una tabla y treinta líneas de gramática.
+
+### `Timeline` — el historial vertical de estados
+
+Un hito por cambio de estado, con su fecha, quien lo firmó y la nota. Es una `<ol>` de verdad,
+así que el orden y el número de hitos se anuncian solos. **No ordena, no interpreta y no
+formatea fechas**: los hitos se pintan en el orden en que llegan, el estado vigente se marca
+con `current` y la fecha llega escrita. El último hito no pinta carril —una línea que muere en
+el aire diría que falta algo por venir— y el estado vigente se **lee** además de pintarse.
+
+Subpath `@studiolxd/brand/timeline`. Textos en `timeline`.
+
+### `ClockWidget` — fichar entrada y salida
+
+En qué estado está el día, cuánto se lleva trabajado y los tramos ya fichados. **El botón es
+uno y lo decide el turno**: abierto ofrece fichar salida, cerrado ofrece fichar entrada, nunca
+los dos. Sin manejador no pinta botón y el widget se queda de solo lectura, que es lo que se ve
+en la ficha de otra persona.
+
+El reloj corre solo —un tic por segundo— mientras haya un tramo abierto, y `now` lo congela:
+es lo que hace que un test y una captura de Chromatic den siempre el mismo resultado. El tiempo
+trabajado va en `role="timer"`, que **no** anuncia cada segundo. En un día de vacaciones, de
+ausencia o no laborable dice por qué y no pinta ni botón ni reloj.
+
+La aritmética va aparte y exportada: `clockEntryMinutes`, `clockedMinutes`, `isClockRunning`.
+
+Subpath `@studiolxd/brand/clock-widget`. Textos en `clockWidget`, con `durationValue` como
+función de horas y minutos.
+
+### `Heatmap` — la matriz de valores con escala de color
+
+Competencias por persona, cobertura de puestos por trimestre. **La cifra va dentro de la
+celda**, así que el color no es nunca la única señal, y la tabla tiene encabezados de verdad en
+los dos ejes (`scope="row"`, `scope="col"`, `scope="colgroup"`).
+
+La rampa usa **seis de los siete peldaños** de la rampa secuencial del sistema. El que se queda
+fuera es `sequential-400`: la cifra que va dentro obliga a que cada relleno admita una de las
+dos tintas a 4,5:1, y sobre superficie oscura ese paso no llega con ninguna (4,34:1 con la
+tinta clara, 3,86:1 con la prusia). No se inventa un color para taparlo — regla 9.
+
+Una casilla ausente o con `value: null` es **sin dato**, no el mínimo: se pinta rayada sobre la
+superficie secundaria y se anuncia como tal.
+
+Subpath `@studiolxd/brand/heatmap`. Textos en `heatmap`. Helpers `heatmapStep`,
+`heatmapRampIndex`, `HEATMAP_RAMP_STEPS`.
+
+### `RecurrenceField` — el editor de recurrencia de un evento
+
+Cada cuánto, qué días y hasta cuándo, **enseñando solo lo que hace falta**: sin frecuencia el
+editor es un solo campo, y los días de la semana solo salen en la frecuencia semanal. `null` es
+«no se repite», que no es una repetición con los campos a cero.
+
+`buildRecurrenceRule` y `parseRecurrenceRule` escriben y leen el subconjunto de RFC 5545 que el
+editor expone (`FREQ`, `INTERVAL`, `BYDAY`, `UNTIL`/`COUNT`). **Lo que el editor no enseña se
+conserva**: `BYMONTHDAY`, `WKST` y demás se apartan al leer y se vuelven a escribir, así que
+editar la repetición no destruye lo que no se ve. `UNTIL` llega al final del día en UTC.
+
+Sin dependencia de calendario: lo que un campo de formulario necesita son treinta líneas de
+gramática, y una librería entera la pagarían las once aplicaciones que consumen el paquete.
+
+Los **días salen del `locale`** con `Intl`, no del catálogo de textos.
+
+Subpath `@studiolxd/brand/recurrence-field`. Textos en `recurrenceField`.
+
+### `PlanningGrid` — la rejilla editable de horas
+
+Fila × columna —proyecto por semana, persona por día—, con los totales de cada eje y la
+disponibilidad de cada columna al pie. No sabe qué hay en cada eje: es la misma pieza para la
+planificación semanal y para la dedicación diaria.
+
+`onCellChange` se llama al **confirmar** un cruce —al salir del campo o con Intro—, nunca en
+cada tecla. **El estado en vuelo y el error viajan en la propia celda** (`pending`, `error`),
+que es lo que permite dos cruces en vuelo a la vez sin que la rejilla lleve la cuenta. Lo que no
+se edita es **texto**, no un campo deshabilitado. Pasarse de la disponibilidad se pinta en el
+color de error **y se dice**.
+
+El campo admite coma y punto decimal; `parsePlanningHours` está exportado.
+
+Subpath `@studiolxd/brand/planning-grid`. Textos en `planningGrid`, con `cellLabel` como
+función de los dos ejes.
+
+### `OrgChart` — el organigrama de departamentos
+
+Quién responde de cada uno, quién está dentro y de quién cuelga. Plegable, con zoom y con
+desplazamiento.
+
+**Es un árbol de listas anidadas, no un lienzo de dibujo**: las líneas las pintan
+pseudoelementos, así que el orden del documento es el del árbol y un lector de pantalla recorre
+la jerarquía de verdad, sin necesidad de una alternativa en texto escrita aparte. No hay motor
+de disposición que mantener: un árbol se dibuja centrando cada nodo sobre sus hijos, y eso lo
+hace el CSS solo.
+
+El zoom usa **`zoom` y no `transform: scale()`**, porque `zoom` rehace la maqueta: el lienzo
+sigue sabiendo cuánto mide lo que tiene dentro y el desplazamiento llega justo al final. El
+valor lo escribe el CSSOM (`useCssProperties`), no un atributo `style`. Una rama plegada **no
+se renderiza**, para no dejar cientos de nodos en el árbol de accesibilidad y en el tabulador.
+
+Subpath `@studiolxd/brand/org-chart`. Textos en `orgChart`, con `collapse`/`expand` como
+funciones del nombre del departamento.
+
+### Tokens
+
+Seis conjuntos nuevos: `tokens/molecule/timeline.json`, `clock-widget.json`, `heatmap.json`,
+`recurrence-field.json` y `tokens/organism/planning-grid.json`, `org-chart.json`. Todos con sus
+pares `surface-dark-*` por la regla de derivación. Ningún color nuevo en `tokens/color/`.
+
+### Internacionalización
+
+Seis espacios nuevos en `BrandMessages`: `timeline`, `clockWidget`, `heatmap`,
+`recurrenceField`, `planningGrid` y `orgChart`. **Una aplicación que no los rellene no
+compila**, que es el contrato de siempre. La tabla de Foundations › Internacionalización queda
+actualizada.
+
 ## [49.11.0] — 2026-09-19
 
 > **Minor.** Tres decisiones de maqueta sobre lo que la 49.10.0 dejó puesto: dónde va el

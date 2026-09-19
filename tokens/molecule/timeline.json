@@ -1,0 +1,35 @@
+{
+  "timeline": {
+    "font-family":              { "$value": "{font-family.sans}",             "$type": "string",    "$description": "Familia tipográfica del historial" },
+
+    "gap":                      { "$value": "{spacing.5}",                    "$type": "dimension", "$description": "Separación vertical entre dos hitos" },
+    "column-gap":               { "$value": "{spacing.3}",                    "$type": "dimension", "$description": "Separación entre la marca y el cuerpo del hito" },
+
+    "rail-width":               { "$value": "{border-width.default}",         "$type": "dimension", "$description": "Grosor del carril que une las marcas" },
+    "rail-color":               { "$value": "{color.border.default-on-light}","$type": "color",     "$description": "Color del carril — la línea del sistema, no un borde que destaque" },
+    "rail-gap":                 { "$value": "{spacing.1}",                    "$type": "dimension", "$description": "Aire entre la marca y el carril, arriba y abajo" },
+
+    "title-font-size":          { "$value": "{text.font-size}",               "$type": "dimension", "$description": "Tamaño del título del hito — texto corriente" },
+    "title-font-weight":        { "$value": "{font-weight.emphasis}",         "$type": "number",    "$description": "Peso del título del hito" },
+    "title-line-height":        { "$value": "{line-height.snug}",             "$type": "dimension", "$description": "Interlineado del título" },
+    "title-color":              { "$value": "{color.text.on-light}",          "$type": "color",     "$description": "Color del título del hito" },
+
+    "meta-font-size":           { "$value": "{text.paragraph.small.font-size}","$type": "dimension","$description": "Tamaño de la fecha y el autor — letra menor" },
+    "meta-color":               { "$value": "{color.text.muted-on-light}",    "$type": "color",     "$description": "Color de la fecha y el autor" },
+    "meta-gap":                 { "$value": "{spacing.2}",                    "$type": "dimension", "$description": "Separación entre fecha y autor" },
+    "meta-separator-color":     { "$value": "{color.border.default-on-light}","$type": "color",     "$description": "Color del punto que separa fecha y autor" },
+
+    "note-font-size":           { "$value": "{text.font-size}",               "$type": "dimension", "$description": "Tamaño de la nota — texto corriente" },
+    "note-line-height":         { "$value": "{line-height.normal}",           "$type": "dimension", "$description": "Interlineado de la nota" },
+    "note-color":               { "$value": "{color.text.on-light}",          "$type": "color",     "$description": "Color de la nota" },
+
+    "body-gap":                 { "$value": "{spacing.1}",                    "$type": "dimension", "$description": "Separación entre título, metadatos y nota" },
+    "actions-margin-block-start":{ "$value": "{spacing.2}",                   "$type": "dimension", "$description": "Aire sobre las acciones del hito" },
+
+    "surface-dark-rail-color":            { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del carril — surface-dark" },
+    "surface-dark-title-color":           { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del título — surface-dark" },
+    "surface-dark-meta-color":            { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color de fecha y autor — surface-dark" },
+    "surface-dark-meta-separator-color":  { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del punto separador — surface-dark" },
+    "surface-dark-note-color":            { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de la nota — surface-dark" }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "49.11.0",
+  "version": "49.12.0",
   "description": "El sistema de diseño de Studio LXD: componentes React, tokens y documentación de la suite SLXD.",
   "repository": {
     "type": "git",
@@ -822,6 +822,36 @@
       "types": "./dist/_types/atoms/Tooltip/Tooltip.d.ts",
       "import": "./dist/tooltip.js",
       "default": "./dist/tooltip.js"
+    },
+    "./clock-widget": {
+      "types": "./dist/_types/molecules/ClockWidget/ClockWidget.d.ts",
+      "import": "./dist/clock-widget.js",
+      "default": "./dist/clock-widget.js"
+    },
+    "./heatmap": {
+      "types": "./dist/_types/molecules/Heatmap/Heatmap.d.ts",
+      "import": "./dist/heatmap.js",
+      "default": "./dist/heatmap.js"
+    },
+    "./org-chart": {
+      "types": "./dist/_types/organisms/OrgChart/OrgChart.d.ts",
+      "import": "./dist/org-chart.js",
+      "default": "./dist/org-chart.js"
+    },
+    "./planning-grid": {
+      "types": "./dist/_types/organisms/PlanningGrid/PlanningGrid.d.ts",
+      "import": "./dist/planning-grid.js",
+      "default": "./dist/planning-grid.js"
+    },
+    "./recurrence-field": {
+      "types": "./dist/_types/molecules/RecurrenceField/RecurrenceField.d.ts",
+      "import": "./dist/recurrence-field.js",
+      "default": "./dist/recurrence-field.js"
+    },
+    "./timeline": {
+      "types": "./dist/_types/molecules/Timeline/Timeline.d.ts",
+      "import": "./dist/timeline.js",
+      "default": "./dist/timeline.js"
     },
     "./typing-indicator": {
       "types": "./dist/_types/atoms/TypingIndicator/TypingIndicator.d.ts",

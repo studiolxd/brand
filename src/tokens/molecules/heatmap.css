@@ -1,0 +1,78 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --heatmap-row-header-width: 10rem; /** Ancho de la columna de filas */
+  --heatmap-column-header-width: 3rem; /** Ancho mínimo de una columna de datos */
+  --heatmap-font-family: var(--font-family-sans); /** Familia tipográfica de la matriz */
+  --heatmap-row-header-font-size: var(--font-size-1); /** Tamaño del nombre de la fila */
+  --heatmap-row-header-padding-block: var(--spacing-2); /** Padding vertical del nombre de la fila */
+  --heatmap-row-header-padding-inline: var(--spacing-3); /** Padding horizontal del nombre de la fila */
+  --heatmap-column-header-font-size: var(--font-size-0); /** Tamaño del nombre de la columna */
+  --heatmap-column-header-padding-block: var(--spacing-2); /** Padding vertical del encabezado de columna */
+  --heatmap-column-header-padding-inline: var(--spacing-2); /** Padding horizontal del encabezado de columna */
+  --heatmap-group-header-font-size: var(--font-size-0); /** Tamaño del nombre del grupo de columnas */
+  --heatmap-cell-padding-block: var(--spacing-2); /** Padding vertical de una celda de dato */
+  --heatmap-cell-padding-inline: var(--spacing-2); /** Padding horizontal de una celda de dato */
+  --heatmap-cell-font-size: var(--font-size-1); /** Tamaño de la cifra de la celda */
+  --heatmap-empty-pattern-width: var(--spacing-1); /** Ancho de la trama de la celda sin dato */
+  --heatmap-legend-gap: var(--spacing-2); /** Separación entre los elementos de la leyenda */
+  --heatmap-legend-font-size: var(--font-size-1); /** Tamaño del texto de la leyenda */
+  --heatmap-legend-swatch-size: var(--spacing-3); /** Lado del cuadradito de la leyenda */
+  --heatmap-legend-swatch-gap: var(--spacing-1); /** Separación entre cuadraditos de la leyenda */
+  --heatmap-margin-block-start: var(--spacing-3); /** Aire entre la matriz y su leyenda */
+  --heatmap-step-1-bg: var(--color-chart-sequential-100); /** Paso 1 de la rampa de la matriz — sequential-100 de la rampa secuencial del sistema */
+  --heatmap-step-2-bg: var(--color-chart-sequential-200); /** Paso 2 de la rampa de la matriz — sequential-200 de la rampa secuencial del sistema */
+  --heatmap-step-3-bg: var(--color-chart-sequential-300); /** Paso 3 de la rampa de la matriz — sequential-300 de la rampa secuencial del sistema */
+  --heatmap-step-4-bg: var(--color-chart-sequential-500); /** Paso 4 de la rampa de la matriz — sequential-500 de la rampa secuencial del sistema */
+  --heatmap-step-5-bg: var(--color-chart-sequential-600); /** Paso 5 de la rampa de la matriz — sequential-600 de la rampa secuencial del sistema */
+  --heatmap-step-6-bg: var(--color-chart-sequential-700); /** Paso 6 de la rampa de la matriz — sequential-700 de la rampa secuencial del sistema */
+  --heatmap-radius: var(--border-radius-default); /** Radio del marco de la matriz */
+  --heatmap-border-color: var(--color-primary); /** Color de la rejilla */
+  --heatmap-border-width: var(--border-width-default); /** Grosor de la rejilla */
+  --heatmap-row-header-color: var(--color-text-on-light); /** Color del nombre de la fila */
+  --heatmap-row-header-font-weight: var(--font-weight-default); /** Peso del nombre de la fila (la celda es th: el agente de usuario la pondría en negrita) */
+  --heatmap-row-header-bg: var(--color-background-light); /** Fondo sticky de la columna de filas */
+  --heatmap-column-header-font-weight: var(--font-weight-emphasis); /** Peso del nombre de la columna */
+  --heatmap-column-header-color: var(--color-text-muted-on-light); /** Color del nombre de la columna */
+  --heatmap-column-header-bg: var(--color-background-light); /** Fondo del encabezado de columna */
+  --heatmap-group-header-color: var(--color-text-muted-on-light); /** Color del nombre del grupo de columnas */
+  --heatmap-cell-font-weight: var(--font-weight-emphasis); /** Peso de la cifra de la celda */
+  --heatmap-empty-bg: var(--color-surface-secondary-on-light); /** Fondo de una celda sin dato — superficie secundaria, no un paso de la rampa */
+  --heatmap-empty-pattern-color: var(--color-border-default-on-light); /** Color de la trama de la celda sin dato: lo que la separa de la rampa sin depender del color */
+  --heatmap-legend-color: var(--color-text-muted-on-light); /** Color del texto de la leyenda */
+  --heatmap-step-1-color: var(--color-text-on-light); /** Tinta sobre el paso 1 — la que llega a 4,5:1 sobre ese relleno */
+  --heatmap-step-2-color: var(--color-text-on-light); /** Tinta sobre el paso 2 — la que llega a 4,5:1 sobre ese relleno */
+  --heatmap-step-3-color: var(--color-text-on-light); /** Tinta sobre el paso 3 — la que llega a 4,5:1 sobre ese relleno */
+  --heatmap-step-4-color: var(--color-text-on-light); /** Tinta sobre el paso 4 — la que llega a 4,5:1 sobre ese relleno */
+  --heatmap-step-5-color: var(--color-text-on-dark); /** Tinta sobre el paso 5 — la que llega a 4,5:1 sobre ese relleno */
+  --heatmap-step-6-color: var(--color-text-on-dark); /** Tinta sobre el paso 6 — la que llega a 4,5:1 sobre ese relleno */
+}
+
+.surface-dark,
+.surface-invert,
+[data-theme="dark"],
+html.dark {
+  --heatmap-step-1-bg: var(--color-chart-sequential-100-on-dark); /** Paso 1 de la rampa — surface-dark */
+  --heatmap-step-2-bg: var(--color-chart-sequential-200-on-dark); /** Paso 2 de la rampa — surface-dark */
+  --heatmap-step-3-bg: var(--color-chart-sequential-300-on-dark); /** Paso 3 de la rampa — surface-dark */
+  --heatmap-step-4-bg: var(--color-chart-sequential-500-on-dark); /** Paso 4 de la rampa — surface-dark */
+  --heatmap-step-5-bg: var(--color-chart-sequential-600-on-dark); /** Paso 5 de la rampa — surface-dark */
+  --heatmap-step-6-bg: var(--color-chart-sequential-700-on-dark); /** Paso 6 de la rampa — surface-dark */
+  --heatmap-step-1-color: var(--color-text-on-dark); /** Tinta sobre el paso 1 — surface-dark */
+  --heatmap-step-2-color: var(--color-text-on-dark); /** Tinta sobre el paso 2 — surface-dark */
+  --heatmap-step-3-color: var(--color-text-on-dark); /** Tinta sobre el paso 3 — surface-dark */
+  --heatmap-step-4-color: var(--color-text-on-light); /** Tinta sobre el paso 4 — surface-dark */
+  --heatmap-step-5-color: var(--color-text-on-light); /** Tinta sobre el paso 5 — surface-dark */
+  --heatmap-step-6-color: var(--color-text-on-light); /** Tinta sobre el paso 6 — surface-dark */
+  --heatmap-border-color: var(--color-text-on-dark); /** Color de la rejilla — surface-dark */
+  --heatmap-row-header-bg: var(--color-background-dark); /** Fondo de la columna de filas — surface-dark */
+  --heatmap-row-header-color: var(--color-text-on-dark); /** Color del nombre de la fila — surface-dark */
+  --heatmap-column-header-bg: var(--color-background-dark); /** Fondo del encabezado de columna — surface-dark */
+  --heatmap-column-header-color: var(--color-text-muted-on-dark); /** Color del encabezado de columna — surface-dark */
+  --heatmap-group-header-color: var(--color-text-muted-on-dark); /** Color del nombre del grupo — surface-dark */
+  --heatmap-empty-bg: var(--color-surface-secondary-on-dark); /** Fondo de una celda sin dato — surface-dark */
+  --heatmap-empty-pattern-color: var(--color-text-on-dark); /** Trama de la celda sin dato — surface-dark */
+  --heatmap-legend-color: var(--color-text-muted-on-dark); /** Color de la leyenda — surface-dark */
+}

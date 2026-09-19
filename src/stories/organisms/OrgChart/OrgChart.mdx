@@ -1,0 +1,85 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as OrgChartStories from "./OrgChart.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { orgChartBaseTokens, orgChartDarkTokens } from "../../../tokens/molecules/org-chart";
+
+<Meta of={OrgChartStories} />
+
+# OrgChart
+
+El organigrama de departamentos: quién responde de cada uno, quién está dentro y de quién cuelga. Plegable, con zoom y con desplazamiento.
+
+<Canvas of={OrgChartStories.PorDefecto} />
+
+## Un árbol de listas, no un lienzo de dibujo
+
+El organigrama es un `<ul>` anidado, y las líneas que unen los nodos las pintan **pseudoelementos**. De ahí sale casi todo lo demás:
+
+- **El orden del documento es el del árbol.** Un lector de pantalla recorre la jerarquía de verdad —lista dentro de lista—, no una alternativa en texto escrita aparte para compensar un lienzo inaccesible.
+- **No hay motor de disposición.** Un árbol se dibuja centrando cada nodo sobre sus hijos, y eso lo hace el CSS solo: no hay posiciones que calcular, ni aristas, ni un grafo que mantener en memoria.
+- **Se puede seleccionar y copiar**, y se imprime.
+
+## El zoom cambia la maqueta
+
+`zoom`, no `transform: scale()`. Con `transform` el contenido se pinta más pequeño pero **sigue midiendo lo mismo**: el lienzo no se entera, y el desplazamiento se queda corto o se pasa. Con `zoom` la maqueta se rehace, así que el contenedor sabe cuánto mide lo que tiene dentro y el desplazamiento llega justo al final.
+
+El valor lo escribe el **CSSOM** (`useCssProperties`), no un atributo `style`: las aplicaciones sirven `style-src 'self'` y el navegador descartaría el atributo en silencio. La hoja declara el `1` de partida, que es lo que se ve en el primer render del servidor.
+
+Es controlable (`zoom` / `onZoomChange`) y no controlado (`defaultZoom`), con `minZoom`, `maxZoom` y `zoomStep`. Los botones se apagan al llegar al tope, y el de tamaño natural cuando ya lo está.
+
+<Canvas of={OrgChartStories.Alejado} />
+<Canvas of={OrgChartStories.SinControles} />
+
+## Plegar
+
+Un departamento con hijos lleva un botón con `aria-expanded`. Plegado, sus hijos **no se renderizan**: un organigrama grande con todo desplegado son cientos de nodos, y esconderlos con CSS los dejaría en el árbol de accesibilidad y en el recorrido del tabulador.
+
+Como el zoom, admite las dos formas: `collapsed` / `onCollapsedChange` para llevarlo desde fuera —guardado en la URL, por ejemplo— y `defaultCollapsed` para que se lleve solo.
+
+<Canvas of={OrgChartStories.ConRamasPlegadas} />
+
+## La tarjeta
+
+El nombre del departamento, el botón de plegado y dos grupos de personas: **responsables** y **equipo**. Un grupo vacío se dice («Sin responsable», «Sin equipo») en vez de desaparecer: que un departamento no tenga responsable es un dato, y una tarjeta que se lo calla parece completa.
+
+`showPeople={false}` deja solo los departamentos, para cuando lo que se mira es la forma de la organización y no quién está en ella.
+
+Cada persona lleva su nombre y, debajo, su puesto. El `label` admite un nodo —un enlace a la ficha—, y el `name` en texto plano es lo que nombra el botón de plegado del departamento.
+
+<Canvas of={OrgChartStories.SoloDepartamentos} />
+<Canvas of={OrgChartStories.UnSoloDepartamento} />
+
+## Superficie oscura
+
+El lienzo, las tarjetas, las líneas y las dos tintas cambian de cara por la regla de derivación. Las líneas pasan a `color.text.on-dark`, como cualquier borde del sistema.
+
+<Canvas of={OrgChartStories.SuperficieOscura} />
+
+## Accesibilidad
+
+- **La jerarquía está en el HTML**: listas anidadas, un `<li>` por departamento. No hace falta una versión en texto aparte porque el árbol ya es texto.
+- **El lienzo recibe el foco** (`tabIndex={0}`) y se nombra con `role="group"`: un contenedor con desplazamiento que no recibe el foco deja fuera a quien no usa ratón.
+- **El botón de plegado lleva `aria-expanded`** y se nombra con el departamento («Plegar Tecnología»), no con un «plegar» suelto que se repite quince veces en la misma página.
+- **Las líneas son decorativas** y no están en el árbol de accesibilidad: lo que expresa la relación es el anidamiento.
+
+## Qué no hace
+
+- **No coloca nodos ni dibuja aristas.** Si un organigrama necesitara una disposición que el árbol no da —nodos sueltos, relaciones cruzadas, líneas de puntos—, eso no es este componente.
+- **No filtra ni busca.** Eso es de la pantalla que lo monta; `toolbar` es la ranura para poner ahí su buscador.
+- **No carga en diferido.** Recibe el árbol entero y pinta lo que no esté plegado.
+
+## Textos
+
+Diez, todos cromo, en el espacio `orgChart`. `collapse` y `expand` son **funciones** del nombre del departamento.
+
+## Props
+
+<ArgTypes of={OrgChartStories.PorDefecto} />
+
+## Tokens
+
+<TokenTable tokens={orgChartBaseTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={orgChartDarkTokens} />

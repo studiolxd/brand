@@ -1,0 +1,188 @@
+/* OrgChart — el organigrama de departamentos. Es un árbol de listas anidadas
+   con las líneas pintadas por pseudoelementos: no hay lienzo de dibujo, así
+   que el orden del documento y el del árbol son el mismo. */
+
+.org-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--org-chart-gap);
+  font-family: var(--org-chart-font-family);
+}
+
+.org-chart__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--org-chart-gap);
+}
+
+/* El lienzo: se desplaza en los dos ejes y recibe el foco, para que también se
+   pueda recorrer con el teclado. */
+.org-chart__viewport {
+  overflow: auto;
+  max-block-size: var(--org-chart-viewport-block-size);
+  padding-block: var(--org-chart-viewport-padding);
+  padding-inline: var(--org-chart-viewport-padding);
+  background-color: var(--org-chart-viewport-bg);
+  border: var(--org-chart-viewport-border-width) solid var(--org-chart-viewport-border-color);
+  border-radius: var(--org-chart-viewport-radius);
+}
+
+.org-chart__viewport:focus-visible {
+  outline: var(--org-chart-focus-ring-width) solid var(--org-chart-focus-ring-color);
+  outline-offset: var(--org-chart-focus-ring-offset);
+}
+
+/* El zoom cambia la maqueta, no solo la pintura: así el lienzo sigue sabiendo
+   cuánto mide lo que tiene dentro y el desplazamiento sigue llegando al final.
+   El valor lo escribe el CSSOM; la hoja declara el 1 de partida, que es lo que
+   se ve en el primer render del servidor. */
+.org-chart__canvas {
+  zoom: var(--org-chart-zoom, 1);
+  display: flex;
+  justify-content: center;
+  min-inline-size: max-content;
+}
+
+/* ─── El árbol ────────────────────────────────────────────────────────────── */
+
+.org-chart__level {
+  display: flex;
+  justify-content: center;
+  gap: var(--org-chart-sibling-gap);
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: 0;
+  padding-inline: 0;
+  list-style: none;
+}
+
+/* El tramo de líneas entre un nodo y sus hijos vive en el padding superior de
+   la lista de hijos: la vertical que baja del padre, la horizontal que une a
+   los hermanos y la vertical que sube a cada hijo. */
+.org-chart__level--children {
+  position: relative;
+  padding-block-start: var(--org-chart-connector-length);
+}
+
+.org-chart__level--children::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  inline-size: var(--org-chart-connector-width);
+  block-size: calc(var(--org-chart-connector-length) / 2);
+  background-color: var(--org-chart-connector-color);
+}
+
+.org-chart__node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* La vertical que sube de cada hijo hasta la horizontal. */
+.org-chart__level--children > .org-chart__node::before {
+  content: "";
+  position: absolute;
+  inset-block-start: calc(-1 * var(--org-chart-connector-length) / 2);
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  inline-size: var(--org-chart-connector-width);
+  block-size: calc(var(--org-chart-connector-length) / 2);
+  background-color: var(--org-chart-connector-color);
+}
+
+/* La horizontal que une a los hermanos. El primero la pinta a su derecha, el
+   último a su izquierda, y un hijo único no la pinta: no hay a quién unir. */
+.org-chart__level--children > .org-chart__node::after {
+  content: "";
+  position: absolute;
+  inset-block-start: calc(-1 * var(--org-chart-connector-length) / 2);
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: var(--org-chart-connector-width);
+  background-color: var(--org-chart-connector-color);
+}
+
+.org-chart__level--children > .org-chart__node:first-child::after {
+  inset-inline-start: 50%;
+  inline-size: 50%;
+}
+
+.org-chart__level--children > .org-chart__node:last-child::after {
+  inset-inline-start: 0;
+  inline-size: 50%;
+}
+
+.org-chart__level--children > .org-chart__node:only-child::after {
+  content: none;
+}
+
+/* ─── La tarjeta ──────────────────────────────────────────────────────────── */
+
+.org-chart__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--org-chart-card-gap);
+  inline-size: var(--org-chart-card-inline-size);
+  padding-block: var(--org-chart-card-padding-block);
+  padding-inline: var(--org-chart-card-padding-inline);
+  background-color: var(--org-chart-card-bg);
+  border: var(--org-chart-card-border-width) solid var(--org-chart-card-border-color);
+  border-radius: var(--org-chart-card-radius);
+  text-align: start;
+}
+
+.org-chart__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--org-chart-group-gap);
+}
+
+.org-chart__name {
+  margin-block: 0;
+  font-size: var(--org-chart-name-font-size);
+  font-weight: var(--org-chart-name-font-weight);
+  color: var(--org-chart-name-color);
+}
+
+.org-chart__group + .org-chart__group {
+  margin-block-start: var(--org-chart-group-margin-block-start);
+}
+
+.org-chart__group-label {
+  display: block;
+  margin-block-end: var(--org-chart-group-gap);
+  font-size: var(--org-chart-group-font-size);
+  color: var(--org-chart-group-color);
+}
+
+.org-chart__people {
+  display: flex;
+  flex-direction: column;
+  gap: var(--org-chart-person-gap);
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: 0;
+  padding-inline: 0;
+  list-style: none;
+}
+
+.org-chart__person {
+  font-size: var(--org-chart-person-font-size);
+  color: var(--org-chart-person-color);
+}
+
+.org-chart__role {
+  display: block;
+  font-size: var(--org-chart-person-role-font-size);
+  color: var(--org-chart-person-role-color);
+}
+
+.org-chart__empty {
+  font-size: var(--org-chart-person-font-size);
+  color: var(--org-chart-empty-color);
+}

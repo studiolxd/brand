@@ -1,0 +1,59 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --org-chart-viewport-block-size: 32rem; /** Alto del lienzo con desplazamiento */
+  --org-chart-card-inline-size: 14rem; /** Ancho de la tarjeta de un departamento */
+  --org-chart-font-family: var(--font-family-sans); /** Familia tipográfica del organigrama */
+  --org-chart-gap: var(--spacing-3); /** Separación entre el lienzo y sus controles */
+  --org-chart-viewport-padding: var(--spacing-5); /** Aire alrededor del árbol dentro del lienzo */
+  --org-chart-sibling-gap: var(--spacing-4); /** Separación horizontal entre dos nodos hermanos */
+  --org-chart-connector-length: var(--spacing-6); /** Alto del tramo de líneas entre un nodo y sus hijos */
+  --org-chart-card-padding-block: var(--spacing-2); /** Padding vertical de la tarjeta */
+  --org-chart-card-padding-inline: var(--spacing-3); /** Padding horizontal de la tarjeta */
+  --org-chart-card-gap: var(--spacing-2); /** Separación entre la cabecera y el cuerpo de la tarjeta */
+  --org-chart-name-font-size: var(--font-size-1); /** Tamaño del nombre del departamento */
+  --org-chart-group-font-size: var(--font-size-0); /** Tamaño del rótulo de un grupo de personas */
+  --org-chart-group-gap: var(--spacing-1); /** Separación entre el rótulo y sus personas */
+  --org-chart-group-margin-block-start: var(--spacing-2); /** Aire entre dos grupos de personas */
+  --org-chart-person-font-size: var(--font-size-1); /** Tamaño del nombre de una persona */
+  --org-chart-person-role-font-size: var(--font-size-0); /** Tamaño del puesto de una persona */
+  --org-chart-person-gap: var(--spacing-1); /** Separación entre personas */
+  --org-chart-viewport-bg: var(--color-surface-secondary-on-light); /** Fondo del lienzo — superficie secundaria: lo que separa el organigrama de la página */
+  --org-chart-viewport-radius: var(--border-radius-default); /** Radio del lienzo */
+  --org-chart-viewport-border-color: var(--color-border-default-on-light); /** Borde del lienzo */
+  --org-chart-viewport-border-width: var(--border-width-default); /** Grosor del borde del lienzo */
+  --org-chart-focus-ring-color: var(--color-primary); /** Anillo de foco del lienzo */
+  --org-chart-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
+  --org-chart-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco */
+  --org-chart-connector-color: var(--color-border-default-on-light); /** Color de las líneas que unen los nodos */
+  --org-chart-connector-width: var(--border-width-default); /** Grosor de las líneas que unen los nodos */
+  --org-chart-card-bg: var(--color-background-light); /** Fondo de la tarjeta */
+  --org-chart-card-border-color: var(--color-primary); /** Borde de la tarjeta */
+  --org-chart-card-border-width: var(--border-width-default); /** Grosor del borde de la tarjeta */
+  --org-chart-card-radius: var(--border-radius-default); /** Radio de la tarjeta */
+  --org-chart-name-font-weight: var(--font-weight-emphasis); /** Peso del nombre del departamento */
+  --org-chart-name-color: var(--color-text-on-light); /** Color del nombre del departamento */
+  --org-chart-group-color: var(--color-text-muted-on-light); /** Color del rótulo de un grupo de personas */
+  --org-chart-person-color: var(--color-text-on-light); /** Color del nombre de una persona */
+  --org-chart-person-role-color: var(--color-text-muted-on-light); /** Color del puesto de una persona */
+  --org-chart-empty-color: var(--color-text-muted-on-light); /** Color del «sin responsable» / «sin equipo» */
+}
+
+.surface-dark,
+.surface-invert,
+[data-theme="dark"],
+html.dark {
+  --org-chart-viewport-bg: var(--color-surface-secondary-on-dark); /** Fondo del lienzo — surface-dark */
+  --org-chart-viewport-border-color: var(--color-text-on-dark); /** Borde del lienzo — surface-dark */
+  --org-chart-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
+  --org-chart-connector-color: var(--color-text-on-dark); /** Color de las líneas — surface-dark */
+  --org-chart-card-bg: var(--color-background-dark); /** Fondo de la tarjeta — surface-dark */
+  --org-chart-card-border-color: var(--color-text-on-dark); /** Borde de la tarjeta — surface-dark */
+  --org-chart-name-color: var(--color-text-on-dark); /** Color del nombre del departamento — surface-dark */
+  --org-chart-group-color: var(--color-text-muted-on-dark); /** Color del rótulo de grupo — surface-dark */
+  --org-chart-person-color: var(--color-text-on-dark); /** Color del nombre de una persona — surface-dark */
+  --org-chart-person-role-color: var(--color-text-muted-on-dark); /** Color del puesto — surface-dark */
+  --org-chart-empty-color: var(--color-text-muted-on-dark); /** Color del «sin equipo» — surface-dark */
+}

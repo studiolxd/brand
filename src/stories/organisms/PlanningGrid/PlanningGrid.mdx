@@ -1,0 +1,86 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as PlanningGridStories from "./PlanningGrid.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { planningGridBaseTokens, planningGridDarkTokens } from "../../../tokens/molecules/planning-grid";
+
+<Meta of={PlanningGridStories} />
+
+# PlanningGrid
+
+La rejilla editable de horas: fila × columna —proyecto por semana, persona por día—, con los totales de cada eje y la disponibilidad de cada columna al pie.
+
+<Canvas of={PlanningGridStories.PorDefecto} />
+
+## No sabe qué hay en cada eje
+
+La rejilla recibe `rows` y `columns` y no pregunta qué son. En la planificación de una persona las filas son proyectos y las columnas semanas; en la dedicación de un proyecto las filas son personas y las columnas días. Es la misma pieza, y lo que cambia es lo que se le pasa.
+
+Por eso una fila y una columna llevan **`name` en texto plano** además de su `label`: el `name` es con lo que se nombra el campo de cada cruce (`Horas de {fila} en {columna}`), y una etiqueta que es un enlace no sirve para eso.
+
+<Canvas of={PlanningGridStories.PersonaPorDia} />
+
+## No guarda ni valida; suma
+
+`onCellChange` se llama al **confirmar** un cruce —al salir del campo o con Intro—, nunca en cada tecla: la rejilla guarda contra un servidor, y una petición por pulsación no es una rejilla, es una tormenta. Lo que pase después es de quien la monta, que le vuelve a pasar las celdas.
+
+**El estado en vuelo y el error viajan en la propia celda** (`pending`, `error`). Es lo que permite que dos cruces estén en vuelo a la vez sin que la rejilla tenga que llevar la cuenta de cuáles, y lo que hace que la pantalla no necesite un mapa de claves paralelo.
+
+Los totales sí los suma ella: son la suma de lo que tiene delante, y no hay dos formas de hacerla.
+
+<Canvas of={PlanningGridStories.ConCambioEnVueloYError} />
+
+## Lo que no se edita
+
+Una celda puede quedar bloqueada por cuatro sitios, y basta con uno: la rejilla entera (`readOnly`), la fila, la columna o el propio cruce. También lo está si no hay `onCellChange`, que es como se monta una rejilla de solo lectura.
+
+Una celda bloqueada **no es un campo deshabilitado**: es texto. Un campo deshabilitado invita a pulsarlo, no se puede copiar con comodidad y ocupa una parada de tabulador para nada.
+
+<Canvas of={PlanningGridStories.SoloLectura} />
+
+## El pie
+
+Hasta tres filas, y las tres opcionales:
+
+- **Total** (`showColumnTotals`, por defecto sí) — lo asignado en cada columna.
+- **Disponible** (`showCapacity`, por defecto no) — el tope de cada columna. Repetirlo en cada columna solo hace falta cuando cambia de una a otra.
+- **Sin asignar** (`showRemaining`, por defecto sí) — el resto. **Solo sale si alguna columna declara `capacity`**: sin tope no hay resto que calcular.
+
+Pasarse del tope pinta el resto en el color de error **y lo dice**: la celda lleva además el texto de `planningGrid.over`, oculto a la vista. El color no es la única señal.
+
+<Canvas of={PlanningGridStories.ConDisponibilidad} />
+
+## Las horas se escriben como se escriben
+
+El campo admite **coma y punto** decimal, porque en castellano se escribe «7,5». Va sin control interno sobre el número —el texto es el que manda mientras se escribe— porque un campo controlado por el valor numérico borraría el «7,» que hay a mitad de tecleo.
+
+Lo que no son horas vuelve al valor que había al salir: nada se guarda a medias. `parsePlanningHours` está exportado por si la pantalla necesita la misma lectura en otro sitio.
+
+## Superficie oscura
+
+La rejilla, los encabezados, el pie y las celdas bloqueadas cambian de cara por la regla de derivación; el recuadro de la columna en curso pasa a la tinta clara, y el resto negativo a `error-text-on-dark`. Todo por tokens.
+
+<Canvas of={PlanningGridStories.SuperficieOscura} />
+
+## Accesibilidad
+
+- **Es una `<table>`** con `<caption>` oculto, `<th scope="col">` por columna y `<th scope="row">` por fila —también en el pie—, así que un lector de pantalla sabe siempre en qué cruce está.
+- **Cada campo tiene nombre propio** además de los encabezados: `Horas de {fila} en {columna}`.
+- **El error de un cruce se anuncia** (`role="alert"`) y va enlazado al campo con `aria-describedby`. No se pinta a la vista porque no cabe en una celda sin romper la rejilla.
+- **La columna de filas se queda fija** al desplazar en horizontal.
+- El recorrido es el natural del tabulador: un campo por cruce editable, en el orden de lectura.
+
+## Textos
+
+Siete, todos cromo, en el espacio `planningGrid`. `cellLabel` es una **función** de los dos ejes.
+
+## Props
+
+<ArgTypes of={PlanningGridStories.PorDefecto} />
+
+## Tokens
+
+<TokenTable tokens={planningGridBaseTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={planningGridDarkTokens} />

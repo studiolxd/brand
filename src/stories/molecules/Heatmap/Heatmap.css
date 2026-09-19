@@ -1,0 +1,139 @@
+/* Heatmap — una matriz de valores con escala de color: competencias por
+   persona, cobertura por puesto. La cifra va DENTRO de la celda, así que el
+   color nunca es la única señal. */
+
+.heatmap {
+  font-family: var(--heatmap-font-family);
+}
+
+.heatmap__wrap {
+  overflow-x: auto;
+  overflow-y: visible;
+  border: var(--heatmap-border-width) solid var(--heatmap-border-color);
+  border-radius: var(--heatmap-radius);
+}
+
+.heatmap__table {
+  border-collapse: collapse;
+  inline-size: 100%;
+}
+
+/* ─── Encabezado de grupo de columnas ─────────────────────────────────────── */
+
+.heatmap__group {
+  padding-block: var(--heatmap-column-header-padding-block);
+  padding-inline: var(--heatmap-column-header-padding-inline);
+  font-size: var(--heatmap-group-header-font-size);
+  font-weight: var(--heatmap-column-header-font-weight);
+  color: var(--heatmap-group-header-color);
+  background-color: var(--heatmap-column-header-bg);
+  text-align: center;
+  border-block-end: var(--heatmap-border-width) solid var(--heatmap-border-color);
+  border-inline-end: var(--heatmap-border-width) solid var(--heatmap-border-color);
+}
+
+/* ─── Columna de filas (sticky) ───────────────────────────────────────────── */
+
+.heatmap__corner,
+.heatmap__row-header {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: 1;
+  min-inline-size: var(--heatmap-row-header-width);
+  max-inline-size: var(--heatmap-row-header-width);
+  padding-block: var(--heatmap-row-header-padding-block);
+  padding-inline: var(--heatmap-row-header-padding-inline);
+  text-align: start;
+  background-color: var(--heatmap-row-header-bg);
+  border-inline-end: var(--heatmap-border-width) solid var(--heatmap-border-color);
+}
+
+.heatmap__corner {
+  z-index: 2;
+  border-block-end: var(--heatmap-border-width) solid var(--heatmap-border-color);
+}
+
+.heatmap__row-header {
+  font-size: var(--heatmap-row-header-font-size);
+  font-weight: var(--heatmap-row-header-font-weight);
+  color: var(--heatmap-row-header-color);
+}
+
+/* ─── Encabezado de columna ───────────────────────────────────────────────── */
+
+.heatmap__column-header {
+  min-inline-size: var(--heatmap-column-header-width);
+  padding-block: var(--heatmap-column-header-padding-block);
+  padding-inline: var(--heatmap-column-header-padding-inline);
+  font-size: var(--heatmap-column-header-font-size);
+  font-weight: var(--heatmap-column-header-font-weight);
+  color: var(--heatmap-column-header-color);
+  background-color: var(--heatmap-column-header-bg);
+  text-align: center;
+  vertical-align: bottom;
+  border-block-end: var(--heatmap-border-width) solid var(--heatmap-border-color);
+  border-inline-end: var(--heatmap-border-width) solid var(--heatmap-border-color);
+}
+
+/* ─── Celdas ──────────────────────────────────────────────────────────────── */
+
+.heatmap__cell {
+  padding-block: var(--heatmap-cell-padding-block);
+  padding-inline: var(--heatmap-cell-padding-inline);
+  font-size: var(--heatmap-cell-font-size);
+  font-weight: var(--heatmap-cell-font-weight);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  border-inline-end: var(--heatmap-border-width) solid var(--heatmap-border-color);
+  border-block-end: var(--heatmap-border-width) solid var(--heatmap-border-color);
+}
+
+.heatmap__cell.heatmap__cell--step-1 { background-color: var(--heatmap-step-1-bg); color: var(--heatmap-step-1-color); }
+.heatmap__cell.heatmap__cell--step-2 { background-color: var(--heatmap-step-2-bg); color: var(--heatmap-step-2-color); }
+.heatmap__cell.heatmap__cell--step-3 { background-color: var(--heatmap-step-3-bg); color: var(--heatmap-step-3-color); }
+.heatmap__cell.heatmap__cell--step-4 { background-color: var(--heatmap-step-4-bg); color: var(--heatmap-step-4-color); }
+.heatmap__cell.heatmap__cell--step-5 { background-color: var(--heatmap-step-5-bg); color: var(--heatmap-step-5-color); }
+.heatmap__cell.heatmap__cell--step-6 { background-color: var(--heatmap-step-6-bg); color: var(--heatmap-step-6-color); }
+
+/* Sin dato no es el mínimo: no lleva ningún paso de la rampa, lleva la
+   superficie secundaria rayada. La trama es lo que lo separa del paso 1 sin
+   depender del color. */
+.heatmap__cell.heatmap__cell--empty {
+  background-color: var(--heatmap-empty-bg);
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--heatmap-empty-pattern-color) 0,
+    var(--heatmap-empty-pattern-color) var(--heatmap-empty-pattern-width),
+    transparent var(--heatmap-empty-pattern-width),
+    transparent calc(var(--heatmap-empty-pattern-width) * 2)
+  );
+}
+
+/* ─── Leyenda ─────────────────────────────────────────────────────────────── */
+
+.heatmap__legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--heatmap-legend-gap);
+  margin-block-start: var(--heatmap-margin-block-start);
+  font-size: var(--heatmap-legend-font-size);
+  color: var(--heatmap-legend-color);
+}
+
+.heatmap__ramp {
+  display: flex;
+  gap: var(--heatmap-legend-swatch-gap);
+}
+
+.heatmap__swatch {
+  inline-size: var(--heatmap-legend-swatch-size);
+  block-size: var(--heatmap-legend-swatch-size);
+}
+
+.heatmap__swatch.heatmap__swatch--step-1 { background-color: var(--heatmap-step-1-bg); }
+.heatmap__swatch.heatmap__swatch--step-2 { background-color: var(--heatmap-step-2-bg); }
+.heatmap__swatch.heatmap__swatch--step-3 { background-color: var(--heatmap-step-3-bg); }
+.heatmap__swatch.heatmap__swatch--step-4 { background-color: var(--heatmap-step-4-bg); }
+.heatmap__swatch.heatmap__swatch--step-5 { background-color: var(--heatmap-step-5-bg); }
+.heatmap__swatch.heatmap__swatch--step-6 { background-color: var(--heatmap-step-6-bg); }

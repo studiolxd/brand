@@ -1,0 +1,21 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --recurrence-field-interval-width: 8rem; /** Ancho del campo de intervalo — cabe un número de dos cifras y sus flechas, no la fila entera */
+  --recurrence-field-gap: var(--spacing-4); /** Separación entre los campos del editor de recurrencia */
+  --recurrence-field-row-gap: var(--spacing-3); /** Separación entre los campos que comparten fila */
+  --recurrence-field-weekdays-gap: var(--spacing-1); /** Separación entre los días de la semana */
+  --recurrence-field-legend-margin-block-end: var(--spacing-1); /** Aire entre la etiqueta del grupo de días y los días */
+  --recurrence-field-legend-font-size: var(--label-font-size); /** Tamaño de la etiqueta del grupo de días — el de una etiqueta de campo */
+  --recurrence-field-legend-color: var(--color-text-on-light); /** Color de la etiqueta del grupo de días */
+  --recurrence-field-legend-font-weight: var(--label-font-weight); /** Peso de la etiqueta del grupo de días — el de una etiqueta de campo */
+}
+
+.surface-dark,
+.surface-invert,
+[data-theme="dark"],
+html.dark {
+  --recurrence-field-legend-color: var(--color-text-on-dark); /** Color de la etiqueta del grupo de días — surface-dark */
+}

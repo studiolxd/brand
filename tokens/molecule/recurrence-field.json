@@ -1,0 +1,14 @@
+{
+  "recurrence-field": {
+    "gap":                 { "$value": "{spacing.4}",               "$type": "dimension", "$description": "Separación entre los campos del editor de recurrencia" },
+    "row-gap":             { "$value": "{spacing.3}",               "$type": "dimension", "$description": "Separación entre los campos que comparten fila" },
+    "interval-width":      { "$value": "8rem",                      "$type": "dimension", "$description": "Ancho del campo de intervalo — cabe un número de dos cifras y sus flechas, no la fila entera" },
+    "weekdays-gap":        { "$value": "{spacing.1}",               "$type": "dimension", "$description": "Separación entre los días de la semana" },
+    "legend-font-size":    { "$value": "{label.font-size}", "$type": "dimension", "$description": "Tamaño de la etiqueta del grupo de días — el de una etiqueta de campo" },
+    "legend-color":        { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color de la etiqueta del grupo de días" },
+    "legend-font-weight":  { "$value": "{label.font-weight}",       "$type": "number",    "$description": "Peso de la etiqueta del grupo de días — el de una etiqueta de campo" },
+    "legend-margin-block-end": { "$value": "{spacing.1}",           "$type": "dimension", "$description": "Aire entre la etiqueta del grupo de días y los días" },
+
+    "surface-dark-legend-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la etiqueta del grupo de días — surface-dark" }
+  }
+}

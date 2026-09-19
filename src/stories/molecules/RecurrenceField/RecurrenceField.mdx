@@ -1,0 +1,81 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as RecurrenceFieldStories from "./RecurrenceField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { recurrenceFieldBaseTokens, recurrenceFieldDarkTokens } from "../../../tokens/molecules/recurrence-field";
+
+<Meta of={RecurrenceFieldStories} />
+
+# RecurrenceField
+
+El editor de recurrencia de un evento: cada cuánto se repite, qué días y hasta cuándo. Produce y lee una regla `RRULE`.
+
+<Canvas of={RecurrenceFieldStories.CadaSemana} />
+
+## Enseña solo lo que hace falta
+
+Sin frecuencia no hay nada más que decidir, así que el editor es **un solo campo** hasta que se elige una. Los días de la semana solo aparecen en la frecuencia semanal, y el campo del final —una fecha o un número de veces— solo cuando se pide ese final. Un formulario que enseña siempre los siete campos obliga a leerlos siempre.
+
+<Canvas of={RecurrenceFieldStories.PorDefecto} />
+
+## `null` es «no se repite»
+
+No es una repetición con los campos a cero: es la ausencia de regla. Volver a «no se repite» llama a `onValueChange(null)`, y `buildRecurrenceRule(null)` da la cadena vacía, que es lo que se guarda.
+
+El campo es **controlado**, como el resto del sistema: recibe `value` y devuelve el valor entero.
+
+## La regla: un trozo de gramática, no una librería de calendario
+
+`buildRecurrenceRule` y `parseRecurrenceRule` escriben y leen el subconjunto de [RFC 5545](https://datatracker.ietf.org/doc/html/rfc5545) que el editor expone: `FREQ`, `INTERVAL`, `BYDAY` (en la semanal) y el final (ninguno, `UNTIL` o `COUNT`).
+
+**No expanden ocurrencias, no saben de husos y no validan contra un calendario.** Eso lo hace quien guarda la regla, del lado del servidor, con la librería que use. Por eso el sistema de diseño no se trae ninguna dependencia para esto: lo que un campo de formulario necesita son treinta líneas de gramática, y una dependencia de calendario entera en el paquete la pagarían las once aplicaciones que lo consumen.
+
+Dos detalles que sí están decididos:
+
+- **Lo que el editor no enseña, se conserva.** `BYMONTHDAY`, `WKST`, lo que sea: se aparta al leer (`rest`) y se vuelve a escribir al final. Editar la repetición de un evento no destruye lo que el editor no sabe pintar.
+- **`UNTIL` llega al final del día, en UTC** (`T235959Z`). Una regla que termina «el 30 de junio» incluye el 30 de junio, que es lo que espera cualquiera que rellene ese campo.
+
+<Canvas of={RecurrenceFieldStories.HastaFecha} />
+<Canvas of={RecurrenceFieldStories.PorNumeroDeVeces} />
+
+## Los días salen del locale
+
+Los siete nombres los escribe `Intl` a partir de `locale`, no el catálogo de textos: es lo que manda el sistema para meses, días y formatos de fecha. El botón enseña el nombre corto y se anuncia con el largo.
+
+`weekStartsOn` decide por dónde empieza la semana (`'monday'` por defecto). Es una prop y no una deducción del locale porque un equipo puede trabajar con la semana en lunes aunque la aplicación esté en inglés.
+
+<Canvas of={RecurrenceFieldStories.EnIngles} />
+
+## El título del grupo
+
+Con `legend`, el editor se envuelve en un `Fieldset`. **Sin él, no**: va suelto dentro del formulario que lo monta, que es lo normal cuando la repetición es una sección más de un formulario que ya tiene sus propios grupos.
+
+<Canvas of={RecurrenceFieldStories.SinTitulo} />
+<Canvas of={RecurrenceFieldStories.Deshabilitado} />
+
+## Superficie oscura
+
+Los campos son los del sistema (`SelectField`, `NumberInputField`, `DatePickerField`, `ToggleGroup`) y resuelven su propio oscuro. Lo único propio del editor es la etiqueta del grupo de días, que sigue la regla de derivación.
+
+<Canvas of={RecurrenceFieldStories.SuperficieOscura} />
+
+## Accesibilidad
+
+- **El grupo de días no es un `<label>`**: no es un control único, sino un `role="group"` nombrado con `aria-labelledby` sobre el propio grupo. Dentro se recorre con las flechas —una sola parada de tabulador— porque es un `ToggleGroup`.
+- **Cada día se anuncia con su nombre largo** («miércoles»), aunque el botón enseñe el corto.
+- Los campos que aparecen y desaparecen lo hacen **en el orden del documento**, detrás del control que los provocó: el foco no salta.
+
+## Textos
+
+Quince, en el espacio `recurrenceField`. `interval` es una **función** de la frecuencia —«Cada cuántas semanas»— porque la etiqueta cambia con ella. Los días no están: son `locale`.
+
+## Props
+
+<ArgTypes of={RecurrenceFieldStories.PorDefecto} />
+
+## Tokens
+
+<TokenTable tokens={recurrenceFieldBaseTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={recurrenceFieldDarkTokens} />

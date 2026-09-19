@@ -150,6 +150,10 @@ export const entryPoints = {
   'table-of-contents':   'src/stories/molecules/TableOfContents/TableOfContents.tsx',
   'docs-search':         'src/stories/molecules/DocsSearch/DocsSearch.tsx',
   'stat-tile':           'src/stories/molecules/StatTile/StatTile.tsx',
+  'timeline':            'src/stories/molecules/Timeline/Timeline.tsx',
+  'clock-widget':        'src/stories/molecules/ClockWidget/ClockWidget.tsx',
+  'heatmap':             'src/stories/molecules/Heatmap/Heatmap.tsx',
+  'recurrence-field':    'src/stories/molecules/RecurrenceField/RecurrenceField.tsx',
   'uptime-bars':         'src/stories/molecules/UptimeBars/UptimeBars.tsx',
   'copy-button':         'src/stories/molecules/CopyButton/CopyButton.tsx',
   'recovery-codes':      'src/stories/molecules/RecoveryCodes/RecoveryCodes.tsx',
@@ -184,6 +188,8 @@ export const entryPoints = {
   'data-table':          'src/stories/organisms/DataTable/DataTable.tsx',
   'conversation-thread': 'src/stories/organisms/ConversationThread/ConversationThread.tsx',
   'chart':               'src/stories/organisms/Chart/Chart.tsx',
+  'planning-grid':       'src/stories/organisms/PlanningGrid/PlanningGrid.tsx',
+  'org-chart':           'src/stories/organisms/OrgChart/OrgChart.tsx',
 };
 
 export const clientComponents = new Set([
@@ -249,6 +255,12 @@ export const clientComponents = new Set([
   'description-list',
   'copyable-value',
   'uptime-bars',
+  'timeline',
+  'clock-widget',
+  'heatmap',
+  'recurrence-field',
+  'planning-grid',
+  'org-chart',
   'confirm-dialog',
   'search-form',
   'filter-bar',

@@ -1,0 +1,36 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --clock-widget-font-family: var(--font-family-sans); /** Familia tipográfica del fichaje */
+  --clock-widget-gap: var(--spacing-4); /** Separación entre los bloques del fichaje */
+  --clock-widget-header-gap: var(--spacing-1); /** Separación entre el título y el día */
+  --clock-widget-status-gap: var(--spacing-2); /** Separación entre el punto de estado y su texto */
+  --clock-widget-status-dot-size: var(--spacing-2); /** Lado del punto de estado */
+  --clock-widget-elapsed-font-size: var(--font-size-6); /** Tamaño del tiempo transcurrido — la cifra grande del fichaje */
+  --clock-widget-elapsed-line-height: var(--line-height-tight); /** Interlineado del tiempo transcurrido */
+  --clock-widget-footer-margin-block-start: var(--spacing-2); /** Aire sobre el pie del fichaje */
+  --clock-widget-date-font-size: var(--text-paragraph-small-font-size); /** Tamaño del día — letra menor */
+  --clock-widget-date-color: var(--color-text-muted-on-light); /** Color del día */
+  --clock-widget-status-font-size: var(--text-paragraph-small-font-size); /** Tamaño del texto de estado */
+  --clock-widget-status-color: var(--color-text-muted-on-light); /** Color del texto de estado */
+  --clock-widget-status-dot-radius: var(--border-radius-round); /** Radio del punto de estado — redondo, es una luz, no una ficha */
+  --clock-widget-status-dot-open-bg: var(--color-success-fill); /** Punto de estado con el turno abierto — relleno universal de acierto */
+  --clock-widget-status-dot-closed-bg: var(--color-border-default-on-light); /** Punto de estado con el turno cerrado — la línea del sistema, sin color de feedback */
+  --clock-widget-elapsed-font-weight: var(--font-weight-emphasis); /** Peso del tiempo transcurrido */
+  --clock-widget-elapsed-color: var(--color-text-on-light); /** Color del tiempo transcurrido */
+  --clock-widget-elapsed-label-font-size: var(--text-paragraph-small-font-size); /** Tamaño de la etiqueta del tiempo transcurrido */
+  --clock-widget-elapsed-label-color: var(--color-text-muted-on-light); /** Color de la etiqueta del tiempo transcurrido */
+}
+
+.surface-dark,
+.surface-invert,
+[data-theme="dark"],
+html.dark {
+  --clock-widget-date-color: var(--color-text-muted-on-dark); /** Color del día — surface-dark */
+  --clock-widget-status-color: var(--color-text-muted-on-dark); /** Color del texto de estado — surface-dark */
+  --clock-widget-status-dot-closed-bg: var(--color-text-on-dark); /** Punto con el turno cerrado — surface-dark */
+  --clock-widget-elapsed-color: var(--color-text-on-dark); /** Color del tiempo transcurrido — surface-dark */
+  --clock-widget-elapsed-label-color: var(--color-text-muted-on-dark); /** Color de la etiqueta del tiempo — surface-dark */
+}

@@ -1,0 +1,58 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --planning-grid-row-header-width: 12rem; /** Ancho de la columna de filas */
+  --planning-grid-column-width: 6rem; /** Ancho mínimo de una columna de datos */
+  --planning-grid-cell-input-width: 4.5rem; /** Ancho del campo de horas dentro de la celda */
+  --planning-grid-font-family: var(--font-family-sans); /** Familia tipográfica de la rejilla */
+  --planning-grid-row-header-font-size: var(--font-size-1); /** Tamaño del nombre de la fila */
+  --planning-grid-row-header-padding-block: var(--spacing-2); /** Padding vertical del nombre de la fila */
+  --planning-grid-row-header-padding-inline: var(--spacing-3); /** Padding horizontal del nombre de la fila */
+  --planning-grid-column-header-font-size: var(--font-size-1); /** Tamaño del nombre de la columna */
+  --planning-grid-column-header-sub-font-size: var(--font-size-0); /** Tamaño de la segunda línea del encabezado */
+  --planning-grid-column-header-padding-block: var(--spacing-2); /** Padding vertical del encabezado de columna */
+  --planning-grid-cell-padding-block: var(--spacing-1); /** Padding vertical de una celda */
+  --planning-grid-cell-padding-inline: var(--spacing-1); /** Padding horizontal de una celda */
+  --planning-grid-cell-font-size: var(--font-size-1); /** Tamaño de la cifra de una celda de solo lectura */
+  --planning-grid-pending-opacity: var(--opacity-disabled); /** Opacidad de una celda cuyo cambio está en vuelo */
+  --planning-grid-radius: var(--border-radius-default); /** Radio del marco de la rejilla */
+  --planning-grid-border-color: var(--color-primary); /** Color de la rejilla */
+  --planning-grid-border-width: var(--border-width-default); /** Grosor de la rejilla */
+  --planning-grid-row-header-font-weight: var(--font-weight-default); /** Peso del nombre de la fila (la celda es th: el agente de usuario la pondría en negrita) */
+  --planning-grid-row-header-color: var(--color-text-on-light); /** Color del nombre de la fila */
+  --planning-grid-row-header-bg: var(--color-background-light); /** Fondo sticky de la columna de filas */
+  --planning-grid-column-header-font-weight: var(--font-weight-emphasis); /** Peso del nombre de la columna */
+  --planning-grid-column-header-color: var(--color-text-on-light); /** Color del nombre de la columna */
+  --planning-grid-column-header-sub-color: var(--color-text-muted-on-light); /** Color de la segunda línea del encabezado */
+  --planning-grid-column-header-bg: var(--color-background-light); /** Fondo del encabezado de columna */
+  --planning-grid-current-outline-color: var(--color-primary); /** Recuadro de la columna en curso */
+  --planning-grid-current-outline-width: var(--border-width-focus); /** Grosor del recuadro de la columna en curso */
+  --planning-grid-cell-color: var(--color-text-on-light); /** Color de la cifra de una celda */
+  --planning-grid-cell-readonly-color: var(--color-text-muted-on-light); /** Color de la cifra de una celda que no se edita */
+  --planning-grid-cell-readonly-bg: var(--color-surface-secondary-on-light); /** Fondo de una celda que no se edita — superficie secundaria */
+  --planning-grid-footer-bg: var(--color-surface-secondary-on-light); /** Fondo de las filas de totales */
+  --planning-grid-footer-font-weight: var(--font-weight-emphasis); /** Peso de las filas de totales */
+  --planning-grid-footer-color: var(--color-text-on-light); /** Color de las filas de totales */
+  --planning-grid-over-color: var(--color-error-text-on-light); /** Color de un resto negativo: hay más horas asignadas que disponibles */
+}
+
+.surface-dark,
+.surface-invert,
+[data-theme="dark"],
+html.dark {
+  --planning-grid-border-color: var(--color-text-on-dark); /** Color de la rejilla — surface-dark */
+  --planning-grid-row-header-bg: var(--color-background-dark); /** Fondo de la columna de filas — surface-dark */
+  --planning-grid-row-header-color: var(--color-text-on-dark); /** Color del nombre de la fila — surface-dark */
+  --planning-grid-column-header-bg: var(--color-background-dark); /** Fondo del encabezado de columna — surface-dark */
+  --planning-grid-column-header-color: var(--color-text-on-dark); /** Color del encabezado de columna — surface-dark */
+  --planning-grid-column-header-sub-color: var(--color-text-muted-on-dark); /** Color de la segunda línea del encabezado — surface-dark */
+  --planning-grid-current-outline-color: var(--color-text-on-dark); /** Recuadro de la columna en curso — surface-dark */
+  --planning-grid-cell-color: var(--color-text-on-dark); /** Color de la cifra de una celda — surface-dark */
+  --planning-grid-cell-readonly-color: var(--color-text-muted-on-dark); /** Color de una celda que no se edita — surface-dark */
+  --planning-grid-cell-readonly-bg: var(--color-surface-secondary-on-dark); /** Fondo de una celda que no se edita — surface-dark */
+  --planning-grid-footer-bg: var(--color-surface-secondary-on-dark); /** Fondo de las filas de totales — surface-dark */
+  --planning-grid-footer-color: var(--color-text-on-dark); /** Color de las filas de totales — surface-dark */
+  --planning-grid-over-color: var(--color-error-text-on-dark); /** Color de un resto negativo — surface-dark */
+}

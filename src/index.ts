@@ -251,6 +251,41 @@ export { RecoveryCodes } from './stories/molecules/RecoveryCodes/RecoveryCodes';
 export type { RecoveryCodesProps, RecoveryCodesLabels } from './stories/molecules/RecoveryCodes/RecoveryCodes';
 export { StatTile } from './stories/molecules/StatTile/StatTile';
 export type { StatTileProps, StatTileDelta, StatTileDirection, StatTileTone } from './stories/molecules/StatTile/StatTile';
+export { ClockWidget } from './stories/molecules/ClockWidget/ClockWidget';
+export type { ClockWidgetProps, ClockWidgetDayState, ClockWidgetMessages } from './stories/molecules/ClockWidget/ClockWidget';
+export { clockEntryMinutes, clockedMinutes, isClockRunning } from './stories/molecules/ClockWidget/clockDuration';
+export type { ClockEntry } from './stories/molecules/ClockWidget/clockDuration';
+export { Heatmap } from './stories/molecules/Heatmap/Heatmap';
+export type { HeatmapProps, HeatmapRow, HeatmapColumn, HeatmapCell, HeatmapMessages } from './stories/molecules/Heatmap/Heatmap';
+export { heatmapStep, heatmapRampIndex, HEATMAP_RAMP_STEPS } from './stories/molecules/Heatmap/heatmapScale';
+export type { HeatmapScale } from './stories/molecules/Heatmap/heatmapScale';
+export { OrgChart } from './stories/organisms/OrgChart/OrgChart';
+export type { OrgChartProps, OrgChartNode, OrgChartPerson, OrgChartMessages } from './stories/organisms/OrgChart/OrgChart';
+export { PlanningGrid } from './stories/organisms/PlanningGrid/PlanningGrid';
+export type {
+  PlanningGridProps,
+  PlanningGridRow,
+  PlanningGridColumn,
+  PlanningGridCell,
+  PlanningGridMessages,
+} from './stories/organisms/PlanningGrid/PlanningGrid';
+export { parsePlanningHours } from './stories/organisms/PlanningGrid/planningHours';
+export { RecurrenceField } from './stories/molecules/RecurrenceField/RecurrenceField';
+export type { RecurrenceFieldProps, RecurrenceFieldMessages } from './stories/molecules/RecurrenceField/RecurrenceField';
+export {
+  buildRecurrenceRule,
+  parseRecurrenceRule,
+  RECURRENCE_WEEKDAYS,
+  DEFAULT_RECURRENCE,
+} from './stories/molecules/RecurrenceField/recurrenceRule';
+export type {
+  RecurrenceValue,
+  RecurrenceFrequency,
+  RecurrenceWeekday,
+  RecurrenceEnd,
+} from './stories/molecules/RecurrenceField/recurrenceRule';
+export { Timeline } from './stories/molecules/Timeline/Timeline';
+export type { TimelineProps, TimelineItem, TimelineTone, TimelineMessages } from './stories/molecules/Timeline/Timeline';
 export { UptimeBars } from './stories/molecules/UptimeBars/UptimeBars';
 export type { UptimeBarsProps, UptimeBarsPoint } from './stories/molecules/UptimeBars/UptimeBars';
 export { uptimeStatus, UPTIME_BARS_DEFAULT_THRESHOLDS } from './stories/molecules/UptimeBars/uptimeStatus';

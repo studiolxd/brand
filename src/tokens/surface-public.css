@@ -192,6 +192,9 @@
   --checkbox-field-label-line-height: var(--text-line-height);
   --checkbox-field-error-font-size: var(--form-error-font-size);
   --checkbox-field-helper-font-size: var(--form-helper-font-size);
+  --clock-widget-date-font-size: var(--text-paragraph-small-font-size);
+  --clock-widget-status-font-size: var(--text-paragraph-small-font-size);
+  --clock-widget-elapsed-label-font-size: var(--text-paragraph-small-font-size);
   --consent-banner-title-font-size: var(--text-size-3);
   --consent-banner-description-font-size: var(--text-font-size);
   --conversation-list-item-font-size: var(--text-font-size);
@@ -243,6 +246,7 @@
   --radio-field-error-font-size: var(--form-error-font-size);
   --radio-field-helper-font-size: var(--form-helper-font-size);
   --recovery-codes-font-size: var(--text-paragraph-small-font-size);
+  --recurrence-field-legend-font-size: var(--label-font-size);
   --search-form-submit-input-padding-inline-end: var(--search-form-submit-slot-size);
   --select-field-error-font-size: var(--form-error-font-size);
   --select-field-helper-font-size: var(--form-helper-font-size);
@@ -262,6 +266,9 @@
   --textarea-field-helper-font-size: var(--form-helper-font-size);
   --time-field-error-font-size: var(--form-error-font-size);
   --time-field-helper-font-size: var(--form-helper-font-size);
+  --timeline-title-font-size: var(--text-font-size);
+  --timeline-meta-font-size: var(--text-paragraph-small-font-size);
+  --timeline-note-font-size: var(--text-font-size);
   --uptime-bars-footer-font-size: var(--text-paragraph-small-font-size);
   --user-message-author-font-size: var(--text-paragraph-small-font-size);
   --user-message-timestamp-font-size: var(--text-paragraph-small-font-size);
