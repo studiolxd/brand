@@ -1,0 +1,115 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SiteSearchStories from "./SiteSearch.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { siteSearchBaseTokens, siteSearchDarkTokens } from "../../../tokens/molecules/site-search";
+
+<Meta of={SiteSearchStories} />
+
+# SiteSearch
+
+El buscador del sitio: el campo, lo que está pasando y los resultados. Es la página de resultados entera, no solo el campo.
+
+<Canvas of={SiteSearchStories.ConResultados} />
+
+## No busca nada
+
+No hace `fetch`, no filtra, no rebota, no cancela respuestas tardías y no pagina: recibe `query`, `status` y `results`, y los pinta. El índice —Pagefind, Algolia, una ruta propia— es del producto.
+
+Por eso **el estado es una prop y no una deducción**: desde aquí no se puede saber si lo que hay en pantalla es lo último que se pidió. Quien busca lo sabe y lo dice.
+
+| `status` | Qué significa | Qué se ve |
+| --- | --- | --- |
+| `idle` | Todavía no se ha preguntado nada | La pista de partida y, si las hay, las búsquedas frecuentes |
+| `typing` | Hay algo escrito y aún no se ha buscado: falta longitud o el rebote está en marcha | Cuántos caracteres faltan, o que se pulse Intro |
+| `loading` | La consulta está en vuelo | «Buscando…» y los resultados fantasma |
+| `ready` | La respuesta llegó | Los resultados; **con `results` vacío, el «sin resultados»** |
+| `error` | La consulta falló | El aviso de error —un `role="alert"`, que se anuncia solo— y, con `onRetry`, el botón de reintentar |
+
+## El vacío y el error son dos estados, no uno
+
+Es la decisión de fondo del componente. «No hay nada para esto» y «no se ha podido buscar» dicen cosas distintas y piden cosas distintas: el vacío invita a **reformular** —revisa la ortografía, prueba con menos palabras—, y el error invita a **reintentar**, porque la pregunta era buena y quien falló fue el índice.
+
+Un buscador que pinta el vacío cuando lo que tiene es un error le está diciendo a quien busca que su pregunta no tiene respuesta. Es lo que hoy hace la página de búsqueda del sitio de producto, que traga la excepción y enseña el vacío; con este componente ya no hace falta.
+
+<Canvas of={SiteSearchStories.SinResultados} />
+<Canvas of={SiteSearchStories.ConError} />
+
+## Los otros tres
+
+En reposo no hay nada que contar, así que el sitio del recuento lo ocupa la invitación a escribir, y debajo las búsquedas frecuentes (`suggestions` + `onSuggestionSelect`) — botones de verdad, no texto que parece pulsable.
+
+Escribiendo se dice **qué falta** para que la búsqueda salga: el mínimo de caracteres (`minLength`, que solo se usa para redactar la frase: el componente no corta nada) o que se pulse Intro.
+
+Cargando se pintan fantasmas con la forma de la lista, no un spinner solo. Van con `aria-hidden`: lo que se anuncia es el «Buscando…» de arriba, no doce barras sin texto.
+
+<Canvas of={SiteSearchStories.EnReposo} />
+<Canvas of={SiteSearchStories.Escribiendo} />
+<Canvas of={SiteSearchStories.Buscando} />
+
+## El recuento es a la vez lo que se lee y lo que se anuncia
+
+La línea bajo el campo es una región viva (`role="status"`, `aria-live="polite"`) y **está desde el primer render**, también en reposo: una región que nace junto con su cambio no se anuncia, porque el lector solo lee lo que cambia dentro de algo que ya estaba.
+
+Es la misma línea para cuatro de los cinco estados, así que no hay un aviso escondido que le diga a unos lo que a otros se les niega. El campo la referencia con `aria-describedby`. En el error se calla: el aviso ya es un `role="alert"` y repetirlo lo diría dos veces.
+
+Con paginación, `total` es el recuento de **toda** la búsqueda y `results` lo de la página que se ve: sin `total` se contaría solo la página.
+
+## Un resultado
+
+Cuatro líneas, y las tres de fuera del título son opcionales: la sección de la que viene («Documentación › Creator»), el título —que es un encabezado de verdad, con `headingLevel`, para poder recorrer la lista saltando de título en título—, el extracto y la dirección.
+
+El extracto es un `ReactNode` para que quien busca resalte la coincidencia con `<mark>`; la hoja ya lo viste con el amarillo de marca. La dirección parte por donde haga falta: una ruta larga sin espacios no empuja la columna.
+
+`renderLink` pone el `Link` del router del producto, y **tiene que propagar todas las props que recibe**.
+
+## El pie y la barra
+
+`footer` es la ranura de la paginación, y solo se pinta **con resultados a la vista**: un vacío no se pagina. `toolbar`, entre el campo y los resultados, es donde va el `FilterBar` de la búsqueda.
+
+La paginación no está dentro por lo mismo que la búsqueda tampoco: quién pagina, con qué URL y con qué router es del producto.
+
+## Sin JavaScript
+
+El campo y el botón viven en un `<form role="search">` de verdad. Con `action` y sin `onSubmit`, enviar navega a la página de resultados con la consulta en la URL (`?q=`), que es lo que hace el buscador del menú del sitio. Con `onSubmit` se previene el envío y se recibe la consulta ya recortada; con el campo vacío no se llama.
+
+## A ancho de móvil
+
+Una columna de bloques: nada flota y nada se posiciona. El campo y el botón comparten línea mientras caben y se parten en dos cuando no, sin media query — quien decide es el ancho del hueco donde se monte el buscador, no el de la ventana.
+
+<Canvas of={SiteSearchStories.AnchoDeMovil} />
+
+## Superficie oscura
+
+Las tintas y el filete entre resultados cambian de cara por la regla de derivación. El resaltado de la coincidencia **no**: amarillo de marca con tinta prusia es un relleno autocontenido, y se ve igual en las dos superficies.
+
+<Canvas of={SiteSearchStories.SuperficieOscura} />
+
+## Accesibilidad
+
+- **Una región de búsqueda nombrada** (`role="search"`), con el campo y su botón dentro.
+- **El recuento se anuncia** en una región viva que existe desde el primer render, y el campo la referencia con `aria-describedby`.
+- **Los resultados son una lista** (`<ol>` nombrada) de encabezados: se recorren saltando de título en título, y el orden es el del ranking.
+- **Todo se alcanza con el tabulador** en el orden en que se lee: campo → aspa → buscar → resultados → pie. El enlace de cada resultado lleva su anillo de foco propio, y el subrayado es una línea del sistema, no `text-decoration`.
+- **Los fantasmas de la carga están fuera del árbol de accesibilidad**: lo que se anuncia es el texto.
+
+## Qué no hace
+
+- **No busca, no filtra, no rebota y no cancela.** Eso es de quien monta la pantalla; la story «El recorrido entero» enseña cómo se ata, con un índice de mentira.
+- **No autocompleta ni sugiere mientras se escribe.** Eso es `DocsSearch` (documentación) o `CommandPalette` (acciones).
+- **No es el campo del menú del sitio.** Ese es `SearchForm`: un campo y un envío que llevan aquí.
+
+## Textos
+
+Quince, todos cromo, en el espacio `siteSearch`. `minLength` y `results` son **funciones**: el mínimo y el par recuento/consulta. `emptyTitle` no lleva la consulta —ya la dice el recuento de arriba—, y los resultados son datos que escribe quien busca.
+
+## Props
+
+<ArgTypes of={SiteSearchStories.ConResultados} />
+
+## Tokens
+
+<TokenTable tokens={siteSearchBaseTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={siteSearchDarkTokens} />

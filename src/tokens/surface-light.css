@@ -741,4 +741,12 @@ html.dark .surface-light {
   --planning-grid-footer-bg: var(--color-surface-secondary-on-light);
   --planning-grid-footer-color: var(--color-text-on-light);
   --planning-grid-over-color: var(--color-error-text-on-light);
+  --site-search-status-color: var(--color-text-muted-on-light);
+  --site-search-result-separator-color: var(--color-border-default-on-light);
+  --site-search-result-title-color: var(--color-text-on-light);
+  --site-search-result-section-color: var(--color-text-muted-on-light);
+  --site-search-result-excerpt-color: var(--color-text-on-light);
+  --site-search-result-url-color: var(--color-text-muted-on-light);
+  --site-search-result-focus-ring-color: var(--color-primary);
+  --site-search-suggestions-label-color: var(--color-text-muted-on-light);
 }

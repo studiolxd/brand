@@ -838,6 +838,11 @@
       "import": "./dist/org-chart.js",
       "default": "./dist/org-chart.js"
     },
+    "./site-search": {
+      "types": "./dist/_types/organisms/SiteSearch/SiteSearch.d.ts",
+      "import": "./dist/site-search.js",
+      "default": "./dist/site-search.js"
+    },
     "./planning-grid": {
       "types": "./dist/_types/organisms/PlanningGrid/PlanningGrid.d.ts",
       "import": "./dist/planning-grid.js",

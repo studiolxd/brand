@@ -1,0 +1,192 @@
+/* SiteSearch — el buscador del sitio: el campo, lo que está pasando y los
+   resultados. Una columna de bloques: nada flota, nada se posiciona, así que
+   a 400px no hay nada que desbordar. */
+
+.site-search {
+  display: flex;
+  flex-direction: column;
+  gap: var(--site-search-gap);
+}
+
+/* El campo manda y el botón mide lo que su texto. `wrap` y no una media
+   query: quien decide si caben los dos en una línea es el ancho del sitio
+   donde se monte el buscador —una columna estrecha, un modal—, no el de la
+   ventana. */
+.site-search__form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--site-search-form-gap);
+}
+
+.site-search__field {
+  flex: 1 1 var(--site-search-field-basis);
+  min-inline-size: 0;
+}
+
+.site-search__submit {
+  flex: 0 0 auto;
+}
+
+/* ─── El aviso vivo ───────────────────────────────────────────────────────── */
+
+/* Siempre en el documento, también en reposo: una región viva que nace con el
+   cambio no se anuncia. */
+.site-search__status {
+  display: flex;
+  align-items: center;
+  gap: var(--site-search-status-gap);
+  margin-block: 0;
+  margin-inline: 0;
+  font-size: var(--site-search-status-font-size);
+  line-height: var(--site-search-status-line-height);
+  color: var(--site-search-status-color);
+}
+
+.site-search__status-text {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ─── Las sugerencias del reposo ──────────────────────────────────────────── */
+
+.site-search__suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--site-search-suggestions-gap);
+}
+
+.site-search__suggestions-label {
+  font-size: var(--site-search-suggestions-label-font-size);
+  color: var(--site-search-suggestions-label-color);
+}
+
+.site-search__suggestions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--site-search-suggestions-gap);
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: 0;
+  padding-inline: 0;
+  list-style: none;
+}
+
+/* ─── La carga ────────────────────────────────────────────────────────────── */
+
+.site-search__loading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--site-search-results-gap);
+}
+
+.site-search__ghost {
+  display: flex;
+  flex-direction: column;
+  gap: var(--site-search-skeleton-gap);
+}
+
+/* Las medidas de las barras van aquí y no en los atributos del `Skeleton`:
+   un atributo de presentación no resuelve `var()`, y una barra fantasma mide
+   lo que mide la línea que sustituye, que es una decisión de diseño. */
+.site-search__ghost-section {
+  inline-size: var(--site-search-ghost-section-inline-size);
+}
+
+.site-search__ghost-title {
+  inline-size: var(--site-search-ghost-title-inline-size);
+}
+
+.site-search__ghost-url {
+  inline-size: var(--site-search-ghost-url-inline-size);
+}
+
+/* ─── Los resultados ──────────────────────────────────────────────────────── */
+
+.site-search__results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--site-search-results-gap);
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: 0;
+  padding-inline: 0;
+  list-style: none;
+}
+
+/* El filete va arriba de cada resultado salvo el primero: así la lista no
+   termina en una línea suelta que la separaría de la paginación. */
+.site-search__result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--site-search-result-gap);
+}
+
+.site-search__result + .site-search__result {
+  padding-block-start: var(--site-search-result-padding-block);
+  border-block-start: var(--site-search-result-separator-width) solid
+    var(--site-search-result-separator-color);
+}
+
+.site-search__result-section,
+.site-search__result-excerpt,
+.site-search__result-url {
+  margin-block: 0;
+  margin-inline: 0;
+}
+
+.site-search__result-section {
+  font-size: var(--site-search-result-section-font-size);
+  color: var(--site-search-result-section-color);
+}
+
+.site-search__result-title {
+  margin-block: 0;
+  margin-inline: 0;
+  font-size: var(--site-search-result-title-font-size);
+  font-weight: var(--site-search-result-title-font-weight);
+  color: var(--site-search-result-title-color);
+}
+
+/* El título viste su propio enlace: aquí la línea es un estado del puntero y
+   no una marca en reposo, así que se anula la que la base pone a todo `<a>`
+   —sombra interior y su hueco—, igual que hace `ProjectCard`. */
+.site-search .site-search__result-link {
+  box-shadow: none;
+  padding-block-end: 0;
+  color: inherit;
+}
+
+.site-search .site-search__result-link:hover {
+  box-shadow: inset 0 calc(-1 * var(--site-search-result-link-hover-line-width)) 0 0 currentColor;
+  padding-block-end: var(--site-search-result-link-hover-line-offset);
+}
+
+.site-search .site-search__result-link:focus-visible {
+  outline: var(--site-search-result-focus-ring-width) solid var(--site-search-result-focus-ring-color);
+  outline-offset: var(--site-search-result-focus-ring-offset);
+}
+
+.site-search__result-excerpt {
+  font-size: var(--site-search-result-excerpt-font-size);
+  line-height: var(--site-search-result-excerpt-line-height);
+  color: var(--site-search-result-excerpt-color);
+  max-inline-size: var(--site-search-result-measure);
+  overflow-wrap: anywhere;
+}
+
+/* La coincidencia la resalta quien busca con `<mark>`; aquí solo se viste.
+   Relleno autocontenido —amarillo de marca con tinta prusia—, así que no
+   cambia en superficie oscura. */
+.site-search__result-excerpt mark {
+  background-color: var(--site-search-result-mark-bg);
+  color: var(--site-search-result-mark-color);
+}
+
+/* La dirección puede ser una ruta larga sin espacios: parte donde haga falta
+   antes que empujar la columna a 400px. */
+.site-search__result-url {
+  font-size: var(--site-search-result-url-font-size);
+  color: var(--site-search-result-url-color);
+  overflow-wrap: anywhere;
+}

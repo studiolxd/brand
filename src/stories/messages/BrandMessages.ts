@@ -12,6 +12,7 @@ import type { AsyncSelectMessages } from '../atoms/AsyncSelect/AsyncSelect';
 import type { AsyncMultiSelectMessages } from '../atoms/AsyncMultiSelect/AsyncMultiSelect';
 import type { DocsSearchMessages } from '../molecules/DocsSearch/DocsSearch';
 import type { SearchFormMessages } from '../molecules/SearchForm/SearchForm';
+import type { SiteSearchMessages } from '../organisms/SiteSearch/SiteSearch';
 import type { FilterBarMessages } from '../molecules/FilterBar/FilterBar';
 import type { CalendarMessages } from '../molecules/Calendar/Calendar';
 import type { DatePickerMessages } from '../molecules/DatePicker/DatePicker';
@@ -117,6 +118,7 @@ export interface BrandMessages {
   asyncMultiSelect: AsyncMultiSelectMessages;
   docsSearch: DocsSearchMessages;
   searchForm: SearchFormMessages;
+  siteSearch: SiteSearchMessages;
   filterBar: FilterBarMessages;
   calendar: CalendarMessages;
   datePicker: DatePickerMessages;
@@ -202,6 +204,7 @@ export type {
   AsyncMultiSelectMessages,
   DocsSearchMessages,
   SearchFormMessages,
+  SiteSearchMessages,
   FilterBarMessages,
   CalendarMessages,
   DatePickerMessages,
