@@ -7,7 +7,7 @@ import { Skeleton } from '../../atoms/Skeleton/Skeleton';
 import { Spinner } from '../../atoms/Spinner/Spinner';
 import { Alert } from '../../molecules/Alert/Alert';
 import { EmptyState } from '../../molecules/EmptyState/EmptyState';
-import { InputField } from '../../molecules/InputField/InputField';
+import { SearchForm } from '../../molecules/SearchForm/SearchForm';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './SiteSearch.css';
 
@@ -56,15 +56,16 @@ export type SiteSearchRenderLinkProps = ComponentPropsWithoutRef<'a'> & {
  * hay nada. Los resultados no están aquí — son datos que llegan por
  * `results`.
  *
- * El aspa del campo tampoco: es la del `InputField` de debajo y sale de
- * `inputField.clear`. Es la misma palabra y el mismo botón.
+ * El campo es el `SearchForm` del menú del sitio, así que el buscador no
+ * emite ningún texto más: la flecha de envío se nombra con `submit`, y su
+ * rótulo ya no se ve — es el nombre accesible del adorno dentro del campo.
  */
 export interface SiteSearchMessages {
   /** Etiqueta del campo, que nombra también la región de búsqueda. */
   label: string;
   /** Pista dentro del campo. */
   placeholder: string;
-  /** Rótulo del botón de buscar. */
+  /** Nombre accesible de la flecha de envío, dentro del campo. */
   submit: string;
   /** Lo que se dice antes de la primera búsqueda. */
   idle: string;
@@ -143,7 +144,7 @@ export interface SiteSearchProps extends Omit<ComponentPropsWithoutRef<'div'>, '
   footer?: ReactNode;
   /** Nivel del título de cada resultado. @default 2 */
   headingLevel?: HeadingLevel;
-  /** Talla del campo y del botón. */
+  /** Talla del campo y de su flecha. */
   size?: 'sm' | 'md' | 'lg';
   /** Cuántos resultados fantasma se pintan durante la carga. @default 3 */
   loadingRows?: number;
@@ -160,7 +161,7 @@ export interface SiteSearchProps extends Omit<ComponentPropsWithoutRef<'div'>, '
   labelHidden?: boolean;
   /** Pista dentro del campo. Sin ella, sale de `siteSearch.placeholder`. */
   placeholder?: string;
-  /** Rótulo del botón de buscar. Sin él, sale de `siteSearch.submit`. */
+  /** Nombre accesible de la flecha de envío. Sin él, sale de `siteSearch.submit`. */
   submitLabel?: string;
   /** Nombre accesible de la lista. Sin él, sale de `siteSearch.resultsLabel`. */
   resultsLabel?: string;
@@ -224,8 +225,11 @@ export const SiteSearch = forwardRef<HTMLInputElement, SiteSearchProps>(function
   const listaId = `${raíz}-results`;
 
   // El título de un resultado es un encabezado de verdad —así se recorre la
-  // lista saltando de título en título—, pero no pasa por `Heading`: su
-  // cuerpo es el del texto que indexa, no un peldaño de la escala de títulos.
+  // lista saltando de título en título— y por defecto un `h2`, que es el
+  // peldaño que le toca bajo el `h1` de la página. No pasa por `Heading`: un
+  // resultado no es una sección de la página sino una entrada de una lista,
+  // así que su cuerpo sale del texto que lo rodea y no de la escala de
+  // títulos — un peldaño por encima del cuerpo de la superficie.
   const Título = `h${headingLevel}` as const;
 
   const consulta = query.trim();
@@ -248,46 +252,29 @@ export const SiteSearch = forwardRef<HTMLInputElement, SiteSearchProps>(function
     : status === 'error' ? null
     : t('results')(recuento, consulta);
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    if (onSubmit) {
-      event.preventDefault();
-      if (consulta) onSubmit(consulta);
-      return;
-    }
-    if (!consulta) event.preventDefault();
-  }
-
   return (
     <div className={['site-search', className].filter(Boolean).join(' ')} {...rest}>
-      <form
+      {/* El campo es el del menú del sitio, tal cual: la flecha de envío vive
+          dentro del borde del campo y no en una caja aparte. Se reutiliza el
+          componente y no solo su dibujo, así que el buscador de la página de
+          resultados y el del menú no pueden separarse. */}
+      <SearchForm
+        ref={ref}
         className="site-search__form"
-        role="search"
-        aria-label={t('label', label)}
+        id={campoId}
+        name={name}
+        label={t('label', label)}
+        labelHidden={labelHidden}
+        placeholder={t('placeholder', placeholder)}
+        submitLabel={t('submit', submitLabel)}
+        value={query}
+        onChange={(event) => onQueryChange(event.target.value)}
+        {...(onSubmit ? { onSubmit } : {})}
         action={action}
-        method="get"
-        onSubmit={handleSubmit}
-      >
-        <InputField
-          ref={ref}
-          className="site-search__field"
-          id={campoId}
-          name={name}
-          kind="search"
-          clearable
-          label={t('label', label)}
-          labelHidden={labelHidden}
-          placeholder={t('placeholder', placeholder)}
-          value={query}
-          onChange={(event) => onQueryChange(event.target.value)}
-          onClear={() => onQueryChange('')}
-          aria-describedby={estadoId}
-          {...(hayResultados ? { 'aria-controls': listaId } : {})}
-          {...(size ? { size } : {})}
-        />
-        <Button className="site-search__submit" type="submit" {...(size ? { size } : {})}>
-          {t('submit', submitLabel)}
-        </Button>
-      </form>
+        describedBy={estadoId}
+        {...(hayResultados ? { controls: listaId } : {})}
+        {...(size ? { size } : {})}
+      />
 
       {toolbar ? <div className="site-search__toolbar">{toolbar}</div> : null}
 

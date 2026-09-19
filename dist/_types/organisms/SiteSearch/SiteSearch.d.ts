@@ -43,15 +43,16 @@ export type SiteSearchRenderLinkProps = ComponentPropsWithoutRef<'a'> & {
  * hay nada. Los resultados no están aquí — son datos que llegan por
  * `results`.
  *
- * El aspa del campo tampoco: es la del `InputField` de debajo y sale de
- * `inputField.clear`. Es la misma palabra y el mismo botón.
+ * El campo es el `SearchForm` del menú del sitio, así que el buscador no
+ * emite ningún texto más: la flecha de envío se nombra con `submit`, y su
+ * rótulo ya no se ve — es el nombre accesible del adorno dentro del campo.
  */
 export interface SiteSearchMessages {
     /** Etiqueta del campo, que nombra también la región de búsqueda. */
     label: string;
     /** Pista dentro del campo. */
     placeholder: string;
-    /** Rótulo del botón de buscar. */
+    /** Nombre accesible de la flecha de envío, dentro del campo. */
     submit: string;
     /** Lo que se dice antes de la primera búsqueda. */
     idle: string;
@@ -129,7 +130,7 @@ export interface SiteSearchProps extends Omit<ComponentPropsWithoutRef<'div'>, '
     footer?: ReactNode;
     /** Nivel del título de cada resultado. @default 2 */
     headingLevel?: HeadingLevel;
-    /** Talla del campo y del botón. */
+    /** Talla del campo y de su flecha. */
     size?: 'sm' | 'md' | 'lg';
     /** Cuántos resultados fantasma se pintan durante la carga. @default 3 */
     loadingRows?: number;
@@ -146,7 +147,7 @@ export interface SiteSearchProps extends Omit<ComponentPropsWithoutRef<'div'>, '
     labelHidden?: boolean;
     /** Pista dentro del campo. Sin ella, sale de `siteSearch.placeholder`. */
     placeholder?: string;
-    /** Rótulo del botón de buscar. Sin él, sale de `siteSearch.submit`. */
+    /** Nombre accesible de la flecha de envío. Sin él, sale de `siteSearch.submit`. */
     submitLabel?: string;
     /** Nombre accesible de la lista. Sin él, sale de `siteSearch.resultsLabel`. */
     resultsLabel?: string;

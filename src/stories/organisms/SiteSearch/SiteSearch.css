@@ -6,26 +6,11 @@
   display: flex;
   flex-direction: column;
   gap: var(--site-search-gap);
-}
-
-/* El campo manda y el botón mide lo que su texto. `wrap` y no una media
-   query: quien decide si caben los dos en una línea es el ancho del sitio
-   donde se monte el buscador —una columna estrecha, un modal—, no el de la
-   ventana. */
-.site-search__form {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  gap: var(--site-search-form-gap);
-}
-
-.site-search__field {
-  flex: 1 1 var(--site-search-field-basis);
-  min-inline-size: 0;
-}
-
-.site-search__submit {
-  flex: 0 0 auto;
+  /* Declarado y no heredado del flujo: el buscador es la página de
+     resultados entera, así que ocupa el ancho del hueco donde se monte —
+     también cuando ese hueco es una fila flex o una celda de retícula, donde
+     un bloque se encogería a su contenido. */
+  inline-size: var(--site-search-inline-size);
 }
 
 /* ─── El aviso vivo ───────────────────────────────────────────────────────── */
@@ -114,18 +99,14 @@
   list-style: none;
 }
 
-/* El filete va arriba de cada resultado salvo el primero: así la lista no
-   termina en una línea suelta que la separaría de la paginación. */
+/* Sin filete entre resultados: lo que separa un resultado del siguiente es el
+   aire, que es más de lo que hay entre las líneas de uno mismo. Una regla
+   horizontal cada pocas líneas trocea la lista y compite con el título, que
+   es lo que hay que ver. */
 .site-search__result {
   display: flex;
   flex-direction: column;
   gap: var(--site-search-result-gap);
-}
-
-.site-search__result + .site-search__result {
-  padding-block-start: var(--site-search-result-padding-block);
-  border-block-start: var(--site-search-result-separator-width) solid
-    var(--site-search-result-separator-color);
 }
 
 .site-search__result-section,
@@ -137,6 +118,7 @@
 
 .site-search__result-section {
   font-size: var(--site-search-result-section-font-size);
+  line-height: var(--site-search-result-section-line-height);
   color: var(--site-search-result-section-color);
 }
 
@@ -144,6 +126,7 @@
   margin-block: 0;
   margin-inline: 0;
   font-size: var(--site-search-result-title-font-size);
+  line-height: var(--site-search-result-title-line-height);
   font-weight: var(--site-search-result-title-font-weight);
   color: var(--site-search-result-title-color);
 }
@@ -187,6 +170,7 @@
    antes que empujar la columna a 400px. */
 .site-search__result-url {
   font-size: var(--site-search-result-url-font-size);
+  line-height: var(--site-search-result-url-line-height);
   color: var(--site-search-result-url-color);
   overflow-wrap: anywhere;
 }

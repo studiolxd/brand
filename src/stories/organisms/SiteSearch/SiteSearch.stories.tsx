@@ -8,6 +8,7 @@ import {
   type SiteSearchStatus,
 } from './SiteSearch';
 import { Pagination } from '../../molecules/Pagination/Pagination';
+import { SiteShell } from '../../sections/SiteShell/SiteShell';
 import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const meta = {
@@ -160,6 +161,22 @@ export const ConError: Story = {
   },
 };
 
+/**
+ * Su sitio real: una página pública dentro de `SiteShell`. Ahí el cuerpo de
+ * la superficie es de 20px, así que el rastro de sección, el extracto y la
+ * dirección leen a esa talla y el título sube un peldaño con ellos. Es la
+ * misma story que «Con resultados», solo que en la superficie que le toca.
+ */
+export const EnLaSuperficiePublica: Story = {
+  name: 'En la superficie pública',
+  args: ConResultados.args,
+  render: (args) => (
+    <SiteShell>
+      <SiteSearch {...args} />
+    </SiteShell>
+  ),
+};
+
 export const AnchoDeMovil: Story = {
   name: 'A ancho de móvil',
   args: ConResultados.args,
@@ -278,8 +295,8 @@ export const TestTeclado: Story = {
     const campo = canvas.getByRole('textbox', { name: 'Buscar en el sitio' });
     campo.focus();
 
-    // Campo → aspa de borrado → botón de buscar → primer resultado.
-    await userEvent.tab();
+    // Campo → flecha de envío → primer resultado. La flecha está dentro del
+    // campo, pero es un botón de verdad y se tabula.
     await userEvent.tab();
     await userEvent.tab();
 
@@ -301,5 +318,108 @@ export const TestVacioNoEsError: Story = {
     expect(canvas.getByText('Sin resultados')).toBeInTheDocument();
     expect(canvas.queryByRole('alert')).not.toBeInTheDocument();
     expect(canvas.queryByRole('button', { name: 'Reintentar' })).not.toBeInTheDocument();
+  },
+};
+
+export const TestAnchoCompleto: Story = {
+  name: 'Test — el buscador ocupa el ancho de su contenedor',
+  tags: ['!dev'],
+  args: ConResultados.args,
+  render: (args) => (
+    <div style={{ width: '600px' }}>
+      <SiteSearch {...args} />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const ancho = (selector: string) =>
+      canvasElement.querySelector(selector)!.getBoundingClientRect().width;
+
+    // El buscador entero, su campo y la lista miden lo que su hueco.
+    await expect(Math.round(ancho('.site-search'))).toBe(600);
+    await expect(Math.round(ancho('.site-search__form'))).toBe(600);
+    await expect(Math.round(ancho('.site-search__results'))).toBe(600);
+  },
+};
+
+export const TestFlechaDentroDelCampo: Story = {
+  name: 'Test — la flecha de envío vive dentro del campo, sin caja propia',
+  tags: ['!dev'],
+  args: ConResultados.args,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const campo = canvas.getByRole('textbox', { name: 'Buscar en el sitio' }).getBoundingClientRect();
+    const boton = canvas.getByRole('button', { name: 'Buscar' });
+    const flecha = boton.getBoundingClientRect();
+
+    // Encajada al final del campo, por dentro de su borde y no a continuación.
+    await expect(flecha.right).toBeLessThanOrEqual(campo.right + 1);
+    await expect(flecha.left).toBeGreaterThan(campo.left);
+    await expect(flecha.top).toBeGreaterThanOrEqual(campo.top - 1);
+    await expect(flecha.bottom).toBeLessThanOrEqual(campo.bottom + 1);
+
+    // Sin caja: ni fondo ni borde.
+    const estilo = getComputedStyle(boton);
+    await expect(estilo.backgroundColor).toBe('rgba(0, 0, 0, 0)');
+    await expect(estilo.borderTopWidth).toBe('0px');
+  },
+};
+
+export const TestSinFilete: Story = {
+  name: 'Test — entre dos resultados hay aire, no una línea',
+  tags: ['!dev'],
+  args: ConResultados.args,
+  play: async ({ canvasElement }) => {
+    const lista = canvasElement.querySelector('.site-search__results')!;
+    const resultados = [...canvasElement.querySelectorAll('.site-search__result')];
+
+    for (const resultado of resultados) {
+      const estilo = getComputedStyle(resultado);
+      await expect(estilo.borderTopWidth).toBe('0px');
+      await expect(estilo.borderBottomWidth).toBe('0px');
+    }
+
+    // El aire entre resultados es mayor que el que hay entre las líneas de uno
+    // mismo: es lo único que los separa.
+    const entreResultados = parseFloat(getComputedStyle(lista).rowGap);
+    const entreLineas = parseFloat(getComputedStyle(resultados[0]).rowGap);
+    await expect(entreResultados).toBeGreaterThan(entreLineas);
+    await expect(entreResultados).toBe(32);
+  },
+};
+
+export const TestTituloH2: Story = {
+  name: 'Test — el título de un resultado es un h2',
+  tags: ['!dev'],
+  args: ConResultados.args,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    // Sin `headingLevel`, el título de cada resultado es un h2: la página ya
+    // tiene su h1.
+    const títulos = canvas.getAllByRole('heading', { level: 2 });
+    await expect(títulos).toHaveLength(5);
+    await expect(títulos[0]).toHaveTextContent('Emitir una factura rectificativa');
+  },
+};
+
+export const TestCuerpoPublico: Story = {
+  name: 'Test — en la superficie pública el resultado lee al cuerpo grande',
+  tags: ['!dev'],
+  args: ConResultados.args,
+  render: (args) => (
+    <SiteShell>
+      <SiteSearch {...args} />
+    </SiteShell>
+  ),
+  play: async ({ canvasElement }) => {
+    const px = (selector: string) =>
+      parseFloat(getComputedStyle(canvasElement.querySelector(selector)!).fontSize);
+
+    // El cuerpo de la superficie pública, 20px: el rastro de sección, el
+    // extracto y la dirección.
+    await expect(px('.site-search__result-section')).toBe(20);
+    await expect(px('.site-search__result-excerpt')).toBe(20);
+    await expect(px('.site-search__result-url')).toBe(20);
+    // Y el título, un peldaño por encima.
+    await expect(px('.site-search__result-title')).toBe(24);
   },
 };

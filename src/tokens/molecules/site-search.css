@@ -3,36 +3,35 @@
  */
 
 :root {
-  --site-search-field-basis: 12rem; /** Ancho a partir del cual el campo y el botón dejan de caber en la misma línea: por debajo, el botón se va abajo. Es el ancho mínimo con el que el campo sigue siendo un campo de búsqueda y no una casilla */
   --site-search-ghost-section-inline-size: 30%; /** Ancho de la barra fantasma del rastro de sección */
   --site-search-ghost-title-inline-size: 70%; /** Ancho de la barra fantasma del título */
   --site-search-ghost-url-inline-size: 45%; /** Ancho de la barra fantasma de la dirección */
+  --site-search-inline-size: var(--input-width); /** Anchura del buscador: la de su contenedor. Es la página de resultados entera, así que ocupa todo el hueco donde se monte — declarada y no heredada del flujo, para que tampoco se encoja dentro de una fila flex o una celda de retícula */
   --site-search-gap: var(--spacing-5); /** Aire entre los bloques del buscador: el formulario, el aviso de estado, los resultados y el pie */
-  --site-search-form-gap: var(--spacing-2); /** Aire entre el campo y el botón de buscar */
   --site-search-block-gap: var(--spacing-3); /** Aire entre las líneas de un bloque de estado (reposo, escribiendo, carga) */
   --site-search-status-line-height: var(--line-height-normal); /** Interlineado del aviso de estado */
   --site-search-status-gap: var(--spacing-2); /** Aire entre el indicador de carga y su texto */
-  --site-search-results-gap: var(--spacing-4); /** Aire entre dos resultados */
-  --site-search-result-gap: var(--spacing-1); /** Aire entre las cuatro líneas de un resultado: sección, título, extracto y dirección */
-  --site-search-result-padding-block: var(--spacing-4); /** Aire sobre el separador de cada resultado */
-  --site-search-result-section-font-size: var(--font-size-0); /** Cuerpo del rastro de sección («Documentación › Creator») */
-  --site-search-result-excerpt-line-height: var(--line-height-normal); /** Interlineado del extracto */
+  --site-search-results-gap: var(--spacing-6); /** Aire entre dos resultados (32px). Sin filete que los separe, es el aire el que dice dónde acaba uno y empieza el siguiente: tiene que ser claramente mayor que el que hay entre las líneas de un mismo resultado */
+  --site-search-result-gap: var(--spacing-2); /** Aire entre las cuatro líneas de un resultado: sección, título, extracto y dirección */
+  --site-search-result-title-line-height: var(--line-height-snug); /** Interlineado del título del resultado: el de un título, más cerrado que el del texto que lleva debajo */
   --site-search-result-measure: var(--content-measure); /** Medida de lectura del extracto: la del sistema (70ch). El filete y la lista siguen ocupando todo el ancho —son estructura—, pero el texto que se lee para decidir si el resultado sirve no se estira a lo ancho de una pantalla grande */
-  --site-search-result-url-font-size: var(--font-size-0); /** Cuerpo de la dirección del resultado */
   --site-search-suggestions-gap: var(--spacing-2); /** Aire entre las sugerencias de búsqueda */
   --site-search-suggestions-label-font-size: var(--font-size-0); /** Cuerpo del rótulo de las sugerencias */
   --site-search-skeleton-gap: var(--spacing-2); /** Aire entre las barras de un resultado fantasma */
   --site-search-status-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del aviso de estado: cuántos resultados hay, que se está buscando o que no hay nada */
   --site-search-status-color: var(--color-text-muted-on-light); /** Color del aviso de estado — atenuado: acompaña a los resultados, no compite con ellos */
   --site-search-status-query-font-weight: var(--font-weight-emphasis); /** Peso de la consulta dentro del aviso: lo único que cambia de una búsqueda a otra */
-  --site-search-result-separator-color: var(--color-border-default-on-light); /** Filete que separa dos resultados */
-  --site-search-result-separator-width: var(--border-width-default); /** Grosor del filete que separa dos resultados */
-  --site-search-result-title-font-size: var(--text-font-size); /** Cuerpo del título del resultado: el del texto que indexa */
+  --site-search-result-title-font-size: var(--text-paragraph-large-font-size); /** Cuerpo del título del resultado: un peldaño por encima del cuerpo de la superficie, para que siga mandando ahora que el extracto y la dirección leen al cuerpo entero */
   --site-search-result-title-font-weight: var(--font-weight-emphasis); /** Peso del título del resultado */
   --site-search-result-title-color: var(--color-text-on-light); /** Color del título del resultado */
+  --site-search-result-section-font-size: var(--text-font-size); /** Cuerpo del rastro de sección («Documentación › Creator»): el cuerpo de la superficie, que en la página pública es el grande. Lo que lo separa del extracto es la tinta atenuada, no un cuerpo menor */
+  --site-search-result-section-line-height: var(--text-line-height); /** Interlineado del rastro de sección */
   --site-search-result-section-color: var(--color-text-muted-on-light); /** Color del rastro de sección — atenuado */
-  --site-search-result-excerpt-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del extracto: un peldaño por debajo del título */
+  --site-search-result-excerpt-font-size: var(--text-font-size); /** Cuerpo del extracto: el cuerpo de la superficie, que en la página pública es el grande (20px). Es el texto que se lee para decidir si el resultado sirve, así que lee a la talla de lectura de la página, no a una menor */
+  --site-search-result-excerpt-line-height: var(--text-line-height); /** Interlineado del extracto: el del cuerpo de la superficie */
   --site-search-result-excerpt-color: var(--color-text-on-light); /** Color del extracto — la tinta de la superficie: es lo que se lee para decidir si el resultado sirve */
+  --site-search-result-url-font-size: var(--text-font-size); /** Cuerpo de la dirección del resultado: el cuerpo de la superficie, el mismo que el extracto y el rastro de sección */
+  --site-search-result-url-line-height: var(--text-line-height); /** Interlineado de la dirección */
   --site-search-result-url-color: var(--color-text-muted-on-light); /** Color de la dirección — atenuada */
   --site-search-result-link-hover-line-width: var(--border-width-default); /** Grosor de la línea bajo el título del resultado con el puntero encima. Un estado se marca con una línea de tinta, nunca con relleno */
   --site-search-result-link-hover-line-offset: var(--link-underline-offset); /** Separación entre el título y su línea de hover. Apunta a la del enlace: en el DS todo subrayado se separa del texto lo mismo */
@@ -50,7 +49,6 @@
 html.dark {
   --site-search-result-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco del enlace del resultado — surface-dark */
   --site-search-status-color: var(--color-text-muted-on-dark); /** Aviso de estado — surface-dark */
-  --site-search-result-separator-color: var(--color-text-on-dark); /** Filete entre resultados — surface-dark */
   --site-search-result-title-color: var(--color-text-on-dark); /** Título del resultado — surface-dark */
   --site-search-result-section-color: var(--color-text-muted-on-dark); /** Rastro de sección — surface-dark */
   --site-search-result-excerpt-color: var(--color-text-on-dark); /** Extracto — surface-dark */

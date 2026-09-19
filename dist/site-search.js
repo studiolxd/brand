@@ -5,8 +5,8 @@ import { Spinner as t } from "./spinner.js";
 import { Button as n } from "./button.js";
 import { Skeleton as r } from "./skeleton.js";
 import { Alert as i } from "./alert.js";
-import { InputField as a } from "./input-field.js";
-import { EmptyState as o } from "./empty-state.js";
+import { EmptyState as a } from "./empty-state.js";
+import { SearchForm as o } from "./search-form.js";
 import { forwardRef as s, useId as c } from "react";
 import { jsx as l, jsxs as u } from "react/jsx-runtime";
 //#region src/stories/organisms/SiteSearch/SiteSearch.tsx
@@ -15,46 +15,26 @@ function d(e) {
 }
 var f = s(function({ query: s, onQueryChange: f, onSubmit: p, action: m, name: h = "q", status: g = "idle", results: _ = [], total: v, minLength: y = 2, suggestions: b, onSuggestionSelect: x, onRetry: S, toolbar: C, footer: w, headingLevel: T = 2, size: E, loadingRows: D = 3, onSelect: O, renderLink: k = d, label: A, labelHidden: j = !0, placeholder: M, submitLabel: N, resultsLabel: P, className: F, id: I, ...L }, R) {
 	let z = e("siteSearch"), B = c(), V = I ?? B, H = `${V}-input`, U = `${V}-status`, W = `${V}-results`, G = `h${T}`, K = s.trim(), q = v ?? _.length, J = g === "ready" && _.length > 0, Y = g === "idle" ? z("idle") : g === "typing" ? K.length < y ? z("minLength")(y) : z("pending") : g === "loading" ? z("loading") : g === "error" ? null : z("results")(q, K);
-	function X(e) {
-		if (p) {
-			e.preventDefault(), K && p(K);
-			return;
-		}
-		K || e.preventDefault();
-	}
 	return /* @__PURE__ */ u("div", {
 		className: ["site-search", F].filter(Boolean).join(" "),
 		...L,
 		children: [
-			/* @__PURE__ */ u("form", {
+			/* @__PURE__ */ l(o, {
+				ref: R,
 				className: "site-search__form",
-				role: "search",
-				"aria-label": z("label", A),
+				id: H,
+				name: h,
+				label: z("label", A),
+				labelHidden: j,
+				placeholder: z("placeholder", M),
+				submitLabel: z("submit", N),
+				value: s,
+				onChange: (e) => f(e.target.value),
+				...p ? { onSubmit: p } : {},
 				action: m,
-				method: "get",
-				onSubmit: X,
-				children: [/* @__PURE__ */ l(a, {
-					ref: R,
-					className: "site-search__field",
-					id: H,
-					name: h,
-					kind: "search",
-					clearable: !0,
-					label: z("label", A),
-					labelHidden: j,
-					placeholder: z("placeholder", M),
-					value: s,
-					onChange: (e) => f(e.target.value),
-					onClear: () => f(""),
-					"aria-describedby": U,
-					...J ? { "aria-controls": W } : {},
-					...E ? { size: E } : {}
-				}), /* @__PURE__ */ l(n, {
-					className: "site-search__submit",
-					type: "submit",
-					...E ? { size: E } : {},
-					children: z("submit", N)
-				})]
+				describedBy: U,
+				...J ? { controls: W } : {},
+				...E ? { size: E } : {}
 			}),
 			C ? /* @__PURE__ */ l("div", {
 				className: "site-search__toolbar",
@@ -134,7 +114,7 @@ var f = s(function({ query: s, onQueryChange: f, onSubmit: p, action: m, name: h
 					]
 				}, e.href))
 			}) : null,
-			g === "ready" && _.length === 0 ? /* @__PURE__ */ l(o, {
+			g === "ready" && _.length === 0 ? /* @__PURE__ */ l(a, {
 				className: "site-search__empty",
 				title: z("emptyTitle"),
 				description: z("emptyDescription")

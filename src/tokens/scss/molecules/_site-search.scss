@@ -1,30 +1,29 @@
 
 // Do not edit directly, this file was auto-generated.
 
+$lxd-site-search-inline-size: 100%; // Anchura del buscador: la de su contenedor. Es la página de resultados entera, así que ocupa todo el hueco donde se monte — declarada y no heredada del flujo, para que tampoco se encoja dentro de una fila flex o una celda de retícula
 $lxd-site-search-gap: 1.5rem; // Aire entre los bloques del buscador: el formulario, el aviso de estado, los resultados y el pie
-$lxd-site-search-form-gap: 0.5rem; // Aire entre el campo y el botón de buscar
-$lxd-site-search-field-basis: 12rem; // Ancho a partir del cual el campo y el botón dejan de caber en la misma línea: por debajo, el botón se va abajo. Es el ancho mínimo con el que el campo sigue siendo un campo de búsqueda y no una casilla
 $lxd-site-search-block-gap: 0.75rem; // Aire entre las líneas de un bloque de estado (reposo, escribiendo, carga)
 $lxd-site-search-status-font-size: 0.875rem; // Cuerpo del aviso de estado: cuántos resultados hay, que se está buscando o que no hay nada
 $lxd-site-search-status-line-height: 1.5; // Interlineado del aviso de estado
 $lxd-site-search-status-color: #4a4a4a; // Color del aviso de estado — atenuado: acompaña a los resultados, no compite con ellos
 $lxd-site-search-status-gap: 0.5rem; // Aire entre el indicador de carga y su texto
 $lxd-site-search-status-query-font-weight: 500; // Peso de la consulta dentro del aviso: lo único que cambia de una búsqueda a otra
-$lxd-site-search-results-gap: 1rem; // Aire entre dos resultados
-$lxd-site-search-result-gap: 0.25rem; // Aire entre las cuatro líneas de un resultado: sección, título, extracto y dirección
-$lxd-site-search-result-padding-block: 1rem; // Aire sobre el separador de cada resultado
-$lxd-site-search-result-separator-color: #d0d0d0; // Filete que separa dos resultados
-$lxd-site-search-result-separator-width: 1px; // Grosor del filete que separa dos resultados
-$lxd-site-search-result-title-font-size: 1rem; // Cuerpo del título del resultado: el del texto que indexa
+$lxd-site-search-results-gap: 2rem; // Aire entre dos resultados (32px). Sin filete que los separe, es el aire el que dice dónde acaba uno y empieza el siguiente: tiene que ser claramente mayor que el que hay entre las líneas de un mismo resultado
+$lxd-site-search-result-gap: 0.5rem; // Aire entre las cuatro líneas de un resultado: sección, título, extracto y dirección
+$lxd-site-search-result-title-font-size: 1.25rem; // Cuerpo del título del resultado: un peldaño por encima del cuerpo de la superficie, para que siga mandando ahora que el extracto y la dirección leen al cuerpo entero
+$lxd-site-search-result-title-line-height: 1.3; // Interlineado del título del resultado: el de un título, más cerrado que el del texto que lleva debajo
 $lxd-site-search-result-title-font-weight: 500; // Peso del título del resultado
 $lxd-site-search-result-title-color: #111e30; // Color del título del resultado
-$lxd-site-search-result-section-font-size: 0.75rem; // Cuerpo del rastro de sección («Documentación › Creator»)
+$lxd-site-search-result-section-font-size: 1rem; // Cuerpo del rastro de sección («Documentación › Creator»): el cuerpo de la superficie, que en la página pública es el grande. Lo que lo separa del extracto es la tinta atenuada, no un cuerpo menor
+$lxd-site-search-result-section-line-height: 1.5; // Interlineado del rastro de sección
 $lxd-site-search-result-section-color: #4a4a4a; // Color del rastro de sección — atenuado
-$lxd-site-search-result-excerpt-font-size: 0.875rem; // Cuerpo del extracto: un peldaño por debajo del título
-$lxd-site-search-result-excerpt-line-height: 1.5; // Interlineado del extracto
+$lxd-site-search-result-excerpt-font-size: 1rem; // Cuerpo del extracto: el cuerpo de la superficie, que en la página pública es el grande (20px). Es el texto que se lee para decidir si el resultado sirve, así que lee a la talla de lectura de la página, no a una menor
+$lxd-site-search-result-excerpt-line-height: 1.5; // Interlineado del extracto: el del cuerpo de la superficie
 $lxd-site-search-result-excerpt-color: #111e30; // Color del extracto — la tinta de la superficie: es lo que se lee para decidir si el resultado sirve
 $lxd-site-search-result-measure: 70ch; // Medida de lectura del extracto: la del sistema (70ch). El filete y la lista siguen ocupando todo el ancho —son estructura—, pero el texto que se lee para decidir si el resultado sirve no se estira a lo ancho de una pantalla grande
-$lxd-site-search-result-url-font-size: 0.75rem; // Cuerpo de la dirección del resultado
+$lxd-site-search-result-url-font-size: 1rem; // Cuerpo de la dirección del resultado: el cuerpo de la superficie, el mismo que el extracto y el rastro de sección
+$lxd-site-search-result-url-line-height: 1.5; // Interlineado de la dirección
 $lxd-site-search-result-url-color: #4a4a4a; // Color de la dirección — atenuada
 $lxd-site-search-result-link-hover-line-width: 1px; // Grosor de la línea bajo el título del resultado con el puntero encima. Un estado se marca con una línea de tinta, nunca con relleno
 $lxd-site-search-result-link-hover-line-offset: 0.25rem; // Separación entre el título y su línea de hover. Apunta a la del enlace: en el DS todo subrayado se separa del texto lo mismo

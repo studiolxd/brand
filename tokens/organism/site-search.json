@@ -1,8 +1,7 @@
 {
   "site-search": {
+    "inline-size":         { "$value": "{input.width}", "$type": "string", "$description": "Anchura del buscador: la de su contenedor. Es la página de resultados entera, así que ocupa todo el hueco donde se monte — declarada y no heredada del flujo, para que tampoco se encoja dentro de una fila flex o una celda de retícula" },
     "gap":                 { "$value": "{spacing.5}", "$type": "dimension", "$description": "Aire entre los bloques del buscador: el formulario, el aviso de estado, los resultados y el pie" },
-    "form-gap":            { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire entre el campo y el botón de buscar" },
-    "field-basis":         { "$value": "12rem", "$type": "dimension", "$description": "Ancho a partir del cual el campo y el botón dejan de caber en la misma línea: por debajo, el botón se va abajo. Es el ancho mínimo con el que el campo sigue siendo un campo de búsqueda y no una casilla" },
     "block-gap":           { "$value": "{spacing.3}", "$type": "dimension", "$description": "Aire entre las líneas de un bloque de estado (reposo, escribiendo, carga)" },
 
     "status-font-size":    { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Cuerpo del aviso de estado: cuántos resultados hay, que se está buscando o que no hay nada" },
@@ -11,27 +10,27 @@
     "status-gap":          { "$value": "{spacing.2}",                      "$type": "dimension", "$description": "Aire entre el indicador de carga y su texto" },
     "status-query-font-weight": { "$value": "{font-weight.emphasis}",      "$type": "number",    "$description": "Peso de la consulta dentro del aviso: lo único que cambia de una búsqueda a otra" },
 
-    "results-gap":         { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire entre dos resultados" },
+    "results-gap":         { "$value": "{spacing.6}", "$type": "dimension", "$description": "Aire entre dos resultados (32px). Sin filete que los separe, es el aire el que dice dónde acaba uno y empieza el siguiente: tiene que ser claramente mayor que el que hay entre las líneas de un mismo resultado" },
 
-    "result-gap":          { "$value": "{spacing.1}", "$type": "dimension", "$description": "Aire entre las cuatro líneas de un resultado: sección, título, extracto y dirección" },
-    "result-padding-block":{ "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire sobre el separador de cada resultado" },
-    "result-separator-color": { "$value": "{color.border.default-on-light}", "$type": "color",     "$description": "Filete que separa dos resultados" },
-    "result-separator-width": { "$value": "{border-width.default}",          "$type": "dimension", "$description": "Grosor del filete que separa dos resultados" },
+    "result-gap":          { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire entre las cuatro líneas de un resultado: sección, título, extracto y dirección" },
 
-    "result-title-font-size":   { "$value": "{text.font-size}",       "$type": "dimension", "$description": "Cuerpo del título del resultado: el del texto que indexa" },
+    "result-title-font-size":   { "$value": "{text.paragraph.large.font-size}", "$type": "dimension", "$description": "Cuerpo del título del resultado: un peldaño por encima del cuerpo de la superficie, para que siga mandando ahora que el extracto y la dirección leen al cuerpo entero" },
+    "result-title-line-height": { "$value": "{line-height.snug}",     "$type": "number",    "$description": "Interlineado del título del resultado: el de un título, más cerrado que el del texto que lleva debajo" },
     "result-title-font-weight": { "$value": "{font-weight.emphasis}", "$type": "number",    "$description": "Peso del título del resultado" },
     "result-title-color":       { "$value": "{color.text.on-light}",  "$type": "color",     "$description": "Color del título del resultado" },
 
-    "result-section-font-size": { "$value": "{font-size.0}",                 "$type": "dimension", "$description": "Cuerpo del rastro de sección («Documentación › Creator»)" },
-    "result-section-color":     { "$value": "{color.text.muted-on-light}",   "$type": "color",     "$description": "Color del rastro de sección — atenuado" },
+    "result-section-font-size":   { "$value": "{text.font-size}",               "$type": "dimension", "$description": "Cuerpo del rastro de sección («Documentación › Creator»): el cuerpo de la superficie, que en la página pública es el grande. Lo que lo separa del extracto es la tinta atenuada, no un cuerpo menor" },
+    "result-section-line-height": { "$value": "{text.line-height}",             "$type": "number",    "$description": "Interlineado del rastro de sección" },
+    "result-section-color":       { "$value": "{color.text.muted-on-light}",    "$type": "color",     "$description": "Color del rastro de sección — atenuado" },
 
-    "result-excerpt-font-size":   { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Cuerpo del extracto: un peldaño por debajo del título" },
-    "result-excerpt-line-height": { "$value": "{line-height.normal}",             "$type": "number",    "$description": "Interlineado del extracto" },
-    "result-excerpt-color":       { "$value": "{color.text.on-light}",            "$type": "color",     "$description": "Color del extracto — la tinta de la superficie: es lo que se lee para decidir si el resultado sirve" },
+    "result-excerpt-font-size":   { "$value": "{text.font-size}",     "$type": "dimension", "$description": "Cuerpo del extracto: el cuerpo de la superficie, que en la página pública es el grande (20px). Es el texto que se lee para decidir si el resultado sirve, así que lee a la talla de lectura de la página, no a una menor" },
+    "result-excerpt-line-height": { "$value": "{text.line-height}",   "$type": "number",    "$description": "Interlineado del extracto: el del cuerpo de la superficie" },
+    "result-excerpt-color":       { "$value": "{color.text.on-light}","$type": "color",     "$description": "Color del extracto — la tinta de la superficie: es lo que se lee para decidir si el resultado sirve" },
 
     "result-measure":       { "$value": "{content.measure}",         "$type": "dimension", "$description": "Medida de lectura del extracto: la del sistema (70ch). El filete y la lista siguen ocupando todo el ancho —son estructura—, pero el texto que se lee para decidir si el resultado sirve no se estira a lo ancho de una pantalla grande" },
-    "result-url-font-size": { "$value": "{font-size.0}",               "$type": "dimension", "$description": "Cuerpo de la dirección del resultado" },
-    "result-url-color":     { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Color de la dirección — atenuada" },
+    "result-url-font-size":   { "$value": "{text.font-size}",             "$type": "dimension", "$description": "Cuerpo de la dirección del resultado: el cuerpo de la superficie, el mismo que el extracto y el rastro de sección" },
+    "result-url-line-height": { "$value": "{text.line-height}",           "$type": "number",    "$description": "Interlineado de la dirección" },
+    "result-url-color":       { "$value": "{color.text.muted-on-light}",  "$type": "color",     "$description": "Color de la dirección — atenuada" },
 
     "result-link-hover-line-width":  { "$value": "{border-width.default}",  "$type": "dimension", "$description": "Grosor de la línea bajo el título del resultado con el puntero encima. Un estado se marca con una línea de tinta, nunca con relleno" },
     "result-link-hover-line-offset": { "$value": "{link.underline-offset}", "$type": "dimension", "$description": "Separación entre el título y su línea de hover. Apunta a la del enlace: en el DS todo subrayado se separa del texto lo mismo" },
@@ -53,7 +52,6 @@
 
     "surface-dark-result-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco del enlace del resultado — surface-dark" },
     "surface-dark-status-color":            { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Aviso de estado — surface-dark" },
-    "surface-dark-result-separator-color":  { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Filete entre resultados — surface-dark" },
     "surface-dark-result-title-color":      { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Título del resultado — surface-dark" },
     "surface-dark-result-section-color":    { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Rastro de sección — surface-dark" },
     "surface-dark-result-excerpt-color":    { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Extracto — surface-dark" },
