@@ -259,6 +259,20 @@ export { Heatmap } from './stories/molecules/Heatmap/Heatmap';
 export type { HeatmapProps, HeatmapRow, HeatmapColumn, HeatmapCell, HeatmapMessages } from './stories/molecules/Heatmap/Heatmap';
 export { heatmapStep, heatmapRampIndex, HEATMAP_RAMP_STEPS } from './stories/molecules/Heatmap/heatmapScale';
 export type { HeatmapScale } from './stories/molecules/Heatmap/heatmapScale';
+export { RecurrenceField } from './stories/molecules/RecurrenceField/RecurrenceField';
+export type { RecurrenceFieldProps, RecurrenceFieldMessages } from './stories/molecules/RecurrenceField/RecurrenceField';
+export {
+  buildRecurrenceRule,
+  parseRecurrenceRule,
+  RECURRENCE_WEEKDAYS,
+  DEFAULT_RECURRENCE,
+} from './stories/molecules/RecurrenceField/recurrenceRule';
+export type {
+  RecurrenceValue,
+  RecurrenceFrequency,
+  RecurrenceWeekday,
+  RecurrenceEnd,
+} from './stories/molecules/RecurrenceField/recurrenceRule';
 export { Timeline } from './stories/molecules/Timeline/Timeline';
 export type { TimelineProps, TimelineItem, TimelineTone, TimelineMessages } from './stories/molecules/Timeline/Timeline';
 export { UptimeBars } from './stories/molecules/UptimeBars/UptimeBars';

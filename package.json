@@ -833,6 +833,11 @@
       "import": "./dist/heatmap.js",
       "default": "./dist/heatmap.js"
     },
+    "./recurrence-field": {
+      "types": "./dist/_types/molecules/RecurrenceField/RecurrenceField.d.ts",
+      "import": "./dist/recurrence-field.js",
+      "default": "./dist/recurrence-field.js"
+    },
     "./timeline": {
       "types": "./dist/_types/molecules/Timeline/Timeline.d.ts",
       "import": "./dist/timeline.js",

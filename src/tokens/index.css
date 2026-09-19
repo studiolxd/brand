@@ -157,6 +157,7 @@
 @import "./molecules/timeline.css";
 @import "./molecules/clock-widget.css";
 @import "./molecules/heatmap.css";
+@import "./molecules/recurrence-field.css";
 @import "./molecules/copy-button.css";
 @import "./molecules/confirm-dialog.css";
 @import "./molecules/avatar-upload.css";

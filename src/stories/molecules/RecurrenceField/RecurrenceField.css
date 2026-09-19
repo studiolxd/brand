@@ -1,0 +1,40 @@
+/* RecurrenceField — el editor de recurrencia de un evento. Los campos que
+   aparecen dependen de lo elegido: sin frecuencia no hay nada más que decidir. */
+
+.recurrence-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--recurrence-field-gap);
+}
+
+/* Dos campos que comparten fila cuando caben, y se apilan cuando no. */
+.recurrence-field__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--recurrence-field-row-gap);
+}
+
+/* El intervalo no ocupa la fila entera: es un número de dos cifras. */
+.recurrence-field__interval {
+  inline-size: var(--recurrence-field-interval-width);
+  flex: 0 0 auto;
+}
+
+.recurrence-field__end {
+  flex: 1 1 12rem;
+  min-inline-size: 0;
+}
+
+.recurrence-field__weekdays-label {
+  display: block;
+  margin-block-end: var(--recurrence-field-legend-margin-block-end);
+  font-size: var(--recurrence-field-legend-font-size);
+  font-weight: var(--recurrence-field-legend-font-weight);
+  color: var(--recurrence-field-legend-color);
+}
+
+.recurrence-field__weekdays {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--recurrence-field-weekdays-gap);
+}
