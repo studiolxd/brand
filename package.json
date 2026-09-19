@@ -828,6 +828,11 @@
       "import": "./dist/clock-widget.js",
       "default": "./dist/clock-widget.js"
     },
+    "./heatmap": {
+      "types": "./dist/_types/molecules/Heatmap/Heatmap.d.ts",
+      "import": "./dist/heatmap.js",
+      "default": "./dist/heatmap.js"
+    },
     "./timeline": {
       "types": "./dist/_types/molecules/Timeline/Timeline.d.ts",
       "import": "./dist/timeline.js",

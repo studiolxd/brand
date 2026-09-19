@@ -1,0 +1,48 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-heatmap-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica de la matriz
+$lxd-heatmap-radius: 0px; // Radio del marco de la matriz
+$lxd-heatmap-border-color: #111e30; // Color de la rejilla
+$lxd-heatmap-border-width: 1px; // Grosor de la rejilla
+$lxd-heatmap-row-header-width: 10rem; // Ancho de la columna de filas
+$lxd-heatmap-row-header-font-size: 0.875rem; // Tamaño del nombre de la fila
+$lxd-heatmap-row-header-color: #111e30; // Color del nombre de la fila
+$lxd-heatmap-row-header-font-weight: 300; // Peso del nombre de la fila (la celda es th: el agente de usuario la pondría en negrita)
+$lxd-heatmap-row-header-bg: #ffffff; // Fondo sticky de la columna de filas
+$lxd-heatmap-row-header-padding-block: 0.5rem; // Padding vertical del nombre de la fila
+$lxd-heatmap-row-header-padding-inline: 0.75rem; // Padding horizontal del nombre de la fila
+$lxd-heatmap-column-header-font-size: 0.75rem; // Tamaño del nombre de la columna
+$lxd-heatmap-column-header-font-weight: 500; // Peso del nombre de la columna
+$lxd-heatmap-column-header-color: #4a4a4a; // Color del nombre de la columna
+$lxd-heatmap-column-header-bg: #ffffff; // Fondo del encabezado de columna
+$lxd-heatmap-column-header-padding-block: 0.5rem; // Padding vertical del encabezado de columna
+$lxd-heatmap-column-header-padding-inline: 0.5rem; // Padding horizontal del encabezado de columna
+$lxd-heatmap-column-header-width: 3rem; // Ancho mínimo de una columna de datos
+$lxd-heatmap-group-header-font-size: 0.75rem; // Tamaño del nombre del grupo de columnas
+$lxd-heatmap-group-header-color: #4a4a4a; // Color del nombre del grupo de columnas
+$lxd-heatmap-cell-padding-block: 0.5rem; // Padding vertical de una celda de dato
+$lxd-heatmap-cell-padding-inline: 0.5rem; // Padding horizontal de una celda de dato
+$lxd-heatmap-cell-font-size: 0.875rem; // Tamaño de la cifra de la celda
+$lxd-heatmap-cell-font-weight: 500; // Peso de la cifra de la celda
+$lxd-heatmap-empty-bg: #f2f2f2; // Fondo de una celda sin dato — superficie secundaria, no un paso de la rampa
+$lxd-heatmap-empty-pattern-color: #d0d0d0; // Color de la trama de la celda sin dato: lo que la separa de la rampa sin depender del color
+$lxd-heatmap-empty-pattern-width: 0.25rem; // Ancho de la trama de la celda sin dato
+$lxd-heatmap-legend-gap: 0.5rem; // Separación entre los elementos de la leyenda
+$lxd-heatmap-legend-font-size: 0.875rem; // Tamaño del texto de la leyenda
+$lxd-heatmap-legend-color: #4a4a4a; // Color del texto de la leyenda
+$lxd-heatmap-legend-swatch-size: 0.75rem; // Lado del cuadradito de la leyenda
+$lxd-heatmap-legend-swatch-gap: 0.25rem; // Separación entre cuadraditos de la leyenda
+$lxd-heatmap-margin-block-start: 0.75rem; // Aire entre la matriz y su leyenda
+$lxd-heatmap-step-1-bg: #dce9fc; // Paso 1 de la rampa de la matriz — sequential-100 de la rampa secuencial del sistema
+$lxd-heatmap-step-1-color: #111e30; // Tinta sobre el paso 1 — la que llega a 4,5:1 sobre ese relleno
+$lxd-heatmap-step-2-bg: #b6d2f8; // Paso 2 de la rampa de la matriz — sequential-200 de la rampa secuencial del sistema
+$lxd-heatmap-step-2-color: #111e30; // Tinta sobre el paso 2 — la que llega a 4,5:1 sobre ese relleno
+$lxd-heatmap-step-3-bg: #8fbaf5; // Paso 3 de la rampa de la matriz — sequential-300 de la rampa secuencial del sistema
+$lxd-heatmap-step-3-color: #111e30; // Tinta sobre el paso 3 — la que llega a 4,5:1 sobre ese relleno
+$lxd-heatmap-step-4-bg: #3b88ee; // Paso 4 de la rampa de la matriz — sequential-500 de la rampa secuencial del sistema
+$lxd-heatmap-step-4-color: #111e30; // Tinta sobre el paso 4 — la que llega a 4,5:1 sobre ese relleno
+$lxd-heatmap-step-5-bg: #236ac5; // Paso 5 de la rampa de la matriz — sequential-600 de la rampa secuencial del sistema
+$lxd-heatmap-step-5-color: #ffffff; // Tinta sobre el paso 5 — la que llega a 4,5:1 sobre ese relleno
+$lxd-heatmap-step-6-bg: #164b90; // Paso 6 de la rampa de la matriz — sequential-700 de la rampa secuencial del sistema
+$lxd-heatmap-step-6-color: #ffffff; // Tinta sobre el paso 6 — la que llega a 4,5:1 sobre ese relleno

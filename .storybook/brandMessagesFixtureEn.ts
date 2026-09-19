@@ -295,6 +295,11 @@ export const brandMessagesFixtureEn: BrandMessages = {
     durationValue: (hours, minutes) =>
       hours === 0 ? `${minutes}min` : minutes === 0 ? `${hours}h` : `${hours}h ${minutes}min`,
   },
+  heatmap: {
+    label: 'Matrix',
+    empty: 'no data',
+    scale: 'Colour scale',
+  },
   timeline: {
     label: 'History',
     current: 'current status',

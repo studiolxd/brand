@@ -53,6 +53,7 @@ import type { SpinnerMessages } from '../atoms/Spinner/Spinner';
 import type { SliderMessages } from '../atoms/Slider/Slider';
 import type { TreeViewMessages } from '../molecules/TreeView/TreeView';
 import type { ClockWidgetMessages } from '../molecules/ClockWidget/ClockWidget';
+import type { HeatmapMessages } from '../molecules/Heatmap/Heatmap';
 import type { TimelineMessages } from '../molecules/Timeline/Timeline';
 import type { UptimeBarsMessages } from '../molecules/UptimeBars/UptimeBars';
 import type { ChartMessages } from '../organisms/Chart/Chart';
@@ -154,6 +155,7 @@ export interface BrandMessages {
   slider: SliderMessages;
   treeView: TreeViewMessages;
   clockWidget: ClockWidgetMessages;
+  heatmap: HeatmapMessages;
   timeline: TimelineMessages;
   uptimeBars: UptimeBarsMessages;
   chart: ChartMessages;
@@ -235,6 +237,7 @@ export type {
   SliderMessages,
   TreeViewMessages,
   ClockWidgetMessages,
+  HeatmapMessages,
   TimelineMessages,
   UptimeBarsMessages,
   ChartMessages,

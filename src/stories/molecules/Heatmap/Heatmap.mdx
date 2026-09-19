@@ -1,0 +1,83 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as HeatmapStories from "./Heatmap.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { heatmapBaseTokens, heatmapDarkTokens } from "../../../tokens/molecules/heatmap";
+
+<Meta of={HeatmapStories} />
+
+# Heatmap
+
+Una matriz de valores con escala de color: competencias por persona, cobertura de puestos por trimestre. Dos ejes con nombre y una magnitud en cada cruce.
+
+<Canvas of={HeatmapStories.PorDefecto} />
+
+## La cifra va dentro de la celda
+
+No es un adorno ni una opción que se pueda quitar sin consecuencias: **el color nunca es la única señal**. Quien no distingue un azul de otro lee el número, y quien usa un lector de pantalla oye el nombre de la fila, el de la columna y el valor, porque la tabla tiene encabezados de verdad en los dos ejes (`scope="row"`, `scope="col"`, `scope="colgroup"`).
+
+`showValues={false}` la quita **de la vista**, no del documento: la cifra sigue ahí, oculta, para una matriz muy densa en la que el número no cabe.
+
+<Canvas of={HeatmapStories.SinCifras} />
+
+## La rampa tiene seis pasos, no siete
+
+La rampa secuencial del sistema tiene siete peldaños; la matriz usa **seis**. El que se queda fuera es `sequential-400`.
+
+El motivo es la cifra que va dentro. Cada relleno tiene que admitir una de las dos tintas del sistema a 4,5:1, y `sequential-400-on-dark` (#2978DE) no llega con ninguna: **4,34:1** con la tinta clara y **3,86:1** con la prusia. Los otros seis peldaños llegan en las dos superficies. Inventar un color para tapar ese hueco sería ampliar la paleta por un rol, que es justo lo que el sistema no hace (regla 9 de `CLAUDE.md`).
+
+`steps` va de 2 a 6 y por defecto son 5. Con menos de seis, la escala se reparte por la rampa entera: **el primer paso siempre es el peldaño 1 y el último siempre es el 6**, para que dos matrices con distinto número de pasos se lean igual de lejos.
+
+<Canvas of={HeatmapStories.SeisPasos} />
+
+## Sin dato no es el mínimo
+
+Una casilla que no viene en `cells` —o que viene con `value: null`— es **sin dato**: nadie midió ese cruce. No se pinta con el primer peldaño de la rampa, que significa «lo midieron y salió el mínimo», sino con la superficie secundaria **rayada**. La trama es lo que la separa del paso 1 sin depender del color, y también en una impresión en blanco y negro.
+
+En el árbol de accesibilidad la casilla dice `heatmap.empty` («sin dato»), así que tampoco se confunde con un 0 al oído.
+
+<Canvas of={HeatmapStories.Cobertura} />
+
+## El dominio
+
+`min` (0 por defecto) y `max` marcan de dónde a dónde va la magnitud. **Sin `max`, sale del mayor valor de las casillas**, que sirve para explorar una matriz suelta pero hace que dos matrices del mismo panel no se puedan comparar: en cuanto haya dos, se pasa.
+
+Lo que se sale del dominio se recorta contra él en vez de desbordar la rampa. La matriz no calcula nada más: ni medias, ni totales, ni filtros. Los filtros —categoría, nivel mínimo— son de la pantalla que la monta, y para eso está `FilterBar`.
+
+## La leyenda
+
+Una tira de cuadraditos con los dos extremos escritos a los lados. La tira es decorativa (`role="img"` con el nombre de `heatmap.scale`); lo que dice qué significa el color son los rótulos, y por eso van en texto. `minLabel` y `maxLabel` los sustituyen cuando el extremo tiene nombre («Sin experiencia», «Referente») en vez de cifra.
+
+<Canvas of={HeatmapStories.SinLeyenda} />
+
+## Los grupos de columnas
+
+Una columna puede declarar `group`. Las columnas **consecutivas** con el mismo grupo se juntan bajo una cabecera común, con `scope="colgroup"`. La matriz no reordena: si dos columnas del mismo grupo no van seguidas, salen dos cabeceras — el orden lo decide quien pasa las columnas.
+
+## Superficie oscura
+
+Los seis peldaños tienen su par `-on-dark` en la rampa del sistema, y la tinta de cada uno cambia con ellos: sobre página clara los cuatro primeros llevan prusia y los dos últimos blanco; sobre página oscura, al revés a partir del cuarto. Todo por tokens.
+
+<Canvas of={HeatmapStories.SuperficieOscura} />
+
+## Accesibilidad
+
+- **Es una `<table>`** con `<caption>` oculto, `<th scope="col">` por columna y `<th scope="row">` por fila: un lector de pantalla anuncia los dos encabezados al entrar en una celda.
+- **El valor está siempre en el documento**, se vea o no.
+- **La columna de filas se queda fija** al desplazar en horizontal, para no perder de vista de quién es la fila.
+- El color no identifica nada por sí solo: ni los pasos de la rampa, ni el «sin dato».
+
+## Textos
+
+Tres, todos cromo, en el espacio `heatmap`: `label`, `empty` y `scale`. Los nombres de filas y columnas son contenido y los escribe quien pasa los datos.
+
+## Props
+
+<ArgTypes of={HeatmapStories.PorDefecto} />
+
+## Tokens
+
+<TokenTable tokens={heatmapBaseTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={heatmapDarkTokens} />

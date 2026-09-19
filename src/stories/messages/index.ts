@@ -59,6 +59,7 @@ export type {
   SliderMessages,
   TreeViewMessages,
   ClockWidgetMessages,
+  HeatmapMessages,
   TimelineMessages,
   UptimeBarsMessages,
   ChartMessages,
