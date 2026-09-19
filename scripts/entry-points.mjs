@@ -190,6 +190,7 @@ export const entryPoints = {
   'chart':               'src/stories/organisms/Chart/Chart.tsx',
   'planning-grid':       'src/stories/organisms/PlanningGrid/PlanningGrid.tsx',
   'org-chart':           'src/stories/organisms/OrgChart/OrgChart.tsx',
+  'site-search':         'src/stories/organisms/SiteSearch/SiteSearch.tsx',
 };
 
 export const clientComponents = new Set([
@@ -261,6 +262,7 @@ export const clientComponents = new Set([
   'recurrence-field',
   'planning-grid',
   'org-chart',
+  'site-search',
   'confirm-dialog',
   'search-form',
   'filter-bar',

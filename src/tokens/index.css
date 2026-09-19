@@ -160,6 +160,7 @@
 @import "./molecules/recurrence-field.css";
 @import "./molecules/planning-grid.css";
 @import "./molecules/org-chart.css";
+@import "./molecules/site-search.css";
 @import "./molecules/copy-button.css";
 @import "./molecules/confirm-dialog.css";
 @import "./molecules/avatar-upload.css";

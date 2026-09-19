@@ -261,6 +261,14 @@ export { heatmapStep, heatmapRampIndex, HEATMAP_RAMP_STEPS } from './stories/mol
 export type { HeatmapScale } from './stories/molecules/Heatmap/heatmapScale';
 export { OrgChart } from './stories/organisms/OrgChart/OrgChart';
 export type { OrgChartProps, OrgChartNode, OrgChartPerson, OrgChartMessages } from './stories/organisms/OrgChart/OrgChart';
+export { SiteSearch } from './stories/organisms/SiteSearch/SiteSearch';
+export type {
+  SiteSearchProps,
+  SiteSearchResult,
+  SiteSearchStatus,
+  SiteSearchRenderLinkProps,
+  SiteSearchMessages,
+} from './stories/organisms/SiteSearch/SiteSearch';
 export { PlanningGrid } from './stories/organisms/PlanningGrid/PlanningGrid';
 export type {
   PlanningGridProps,

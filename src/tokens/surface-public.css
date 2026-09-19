@@ -278,4 +278,7 @@
   --annotation-thread-body-line-height: var(--text-line-height);
   --annotation-thread-replies-label-font-size: var(--text-paragraph-small-font-size);
   --connector-auth-untrusted-toggle-font-size: var(--text-paragraph-small-font-size);
+  --site-search-status-font-size: var(--text-paragraph-small-font-size);
+  --site-search-result-title-font-size: var(--text-font-size);
+  --site-search-result-excerpt-font-size: var(--text-paragraph-small-font-size);
 }

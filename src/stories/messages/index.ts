@@ -18,6 +18,7 @@ export type {
   AsyncMultiSelectMessages,
   DocsSearchMessages,
   SearchFormMessages,
+  SiteSearchMessages,
   FilterBarMessages,
   CalendarMessages,
   DatePickerMessages,
