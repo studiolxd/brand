@@ -7,6 +7,26 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.14.0] — 2026-09-20
+
+> **Minor.** El buscador, repasado con la página real delante. Seis cambios pedidos por
+> quien lo iba a usar después de verlo en producción, que es cuando se ven las cosas.
+
+### `SiteSearch` — lo que cambia
+
+Ocupa el ancho de su contenedor y ya no se encoge dentro de una fila flexible o una
+celda de retícula. Entre resultados hay aire de verdad, 32 píxeles, y dentro de cada
+uno 8. **Fuera la línea separadora**: la separación la hace el espacio.
+
+El título de cada resultado ya era un `h2`, pero leía al cuerpo de texto y no se
+distinguía; ahora sube un peldaño y lleva interlineado de título. El rastro de
+sección, el extracto y la dirección usan el cuerpo de las páginas públicas.
+
+**El campo pasa a ser `SearchForm`**, el mismo del menú, no una copia de su CSS: la
+flecha vive dentro del borde y no hay botón aparte. `SearchForm` gana `className`,
+`describedBy` y `controls`, que no cambian su dibujo. Como consecuencia buscada, el
+campo de la página y el del menú ya no pueden separarse.
+
 ## [49.13.0] — 2026-09-19
 
 > **Minor.** El buscador del sitio. Existían el campo del menú y el autocompletar de la
