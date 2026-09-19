@@ -496,6 +496,11 @@ html.dark .surface-light {
   --checkbox-field-label-color: var(--text-color);
   --checkbox-field-error-color: var(--form-error-color);
   --checkbox-field-helper-color: var(--form-helper-color);
+  --clock-widget-date-color: var(--color-text-muted-on-light);
+  --clock-widget-status-color: var(--color-text-muted-on-light);
+  --clock-widget-status-dot-closed-bg: var(--color-border-default-on-light);
+  --clock-widget-elapsed-color: var(--color-text-on-light);
+  --clock-widget-elapsed-label-color: var(--color-text-muted-on-light);
   --command-palette-input-border-color: var(--floating-panel-border-color);
   --command-palette-input-placeholder-color: var(--color-text-placeholder-on-light);
   --command-palette-input-focus-ring-color: var(--color-primary);

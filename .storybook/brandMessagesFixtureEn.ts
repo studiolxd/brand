@@ -277,6 +277,24 @@ export const brandMessagesFixtureEn: BrandMessages = {
   treeView: {
     label: 'Tree',
   },
+  clockWidget: {
+    title: 'Time clock',
+    clockIn: 'Clock in',
+    clockOut: 'Clock out',
+    pending: 'Clocking…',
+    elapsed: 'Worked today',
+    entries: "Today's entries",
+    in: 'In',
+    out: 'Out',
+    duration: 'Duration',
+    running: 'running',
+    total: 'Total',
+    nonWorking: 'Non-working day',
+    vacation: 'Day off',
+    absence: 'Absence',
+    durationValue: (hours, minutes) =>
+      hours === 0 ? `${minutes}min` : minutes === 0 ? `${hours}h` : `${hours}h ${minutes}min`,
+  },
   timeline: {
     label: 'History',
     current: 'current status',

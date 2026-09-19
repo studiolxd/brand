@@ -823,6 +823,11 @@
       "import": "./dist/tooltip.js",
       "default": "./dist/tooltip.js"
     },
+    "./clock-widget": {
+      "types": "./dist/_types/molecules/ClockWidget/ClockWidget.d.ts",
+      "import": "./dist/clock-widget.js",
+      "default": "./dist/clock-widget.js"
+    },
     "./timeline": {
       "types": "./dist/_types/molecules/Timeline/Timeline.d.ts",
       "import": "./dist/timeline.js",

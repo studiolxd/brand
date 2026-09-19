@@ -155,6 +155,7 @@
 @import "./molecules/stat-tile.css";
 @import "./molecules/uptime-bars.css";
 @import "./molecules/timeline.css";
+@import "./molecules/clock-widget.css";
 @import "./molecules/copy-button.css";
 @import "./molecules/confirm-dialog.css";
 @import "./molecules/avatar-upload.css";

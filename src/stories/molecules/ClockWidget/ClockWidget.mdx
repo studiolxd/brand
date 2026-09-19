@@ -1,0 +1,83 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ClockWidgetStories from "./ClockWidget.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { clockWidgetBaseTokens, clockWidgetDarkTokens } from "../../../tokens/molecules/clock-widget";
+
+<Meta of={ClockWidgetStories} />
+
+# ClockWidget
+
+El fichaje del día: en qué estado está, cuánto se lleva trabajado y los tramos ya fichados. Es la pieza que abre el escritorio de una persona.
+
+<Canvas of={ClockWidgetStories.TurnoAbierto} />
+
+## No ficha, ni sabe de permisos, ni de husos
+
+El widget recibe los tramos y llama a `onClockIn` / `onClockOut`. Quien lo usa decide qué pasa después —la acción de servidor, el registro, la validación— y le vuelve a pasar los tramos. Tampoco decide si hoy se trabaja: eso llega en `dayState`.
+
+**El día llega escrito** (`date`), no como fecha: el formato depende del idioma y del huso, y eso es `Intl`. Las horas de cada tramo sí las escribe el widget, porque son un dato del propio tramo, y para eso toma `locale` y `timeZone`.
+
+## El botón es uno, y lo decide el estado del turno
+
+Si algún tramo no tiene salida, el turno está **abierto**: se ofrece fichar salida y nada más. Si todos la tienen, está **cerrado**: se ofrece fichar entrada y nada más. No hay un momento en el que se puedan pulsar los dos, porque no hay un estado en el que las dos cosas tengan sentido.
+
+**Sin manejador no se pinta el botón**, y el widget se queda de solo lectura: es lo que se enseña en la ficha de otra persona, donde se mira el fichaje pero no se ficha.
+
+<Canvas of={ClockWidgetStories.SinFichar} />
+<Canvas of={ClockWidgetStories.JornadaCerrada} />
+
+## El reloj corre solo, y se puede congelar
+
+Mientras el turno esté abierto, el tiempo trabajado se recalcula **una vez por segundo**. Al cerrarlo, el tic se para: no hay nada que recontar.
+
+`now` congela el reloj. No es una prop de conveniencia: es lo que hace que un test y una captura de regresión visual den siempre el mismo resultado, igual que `STORY_TODAY` en el catálogo.
+
+## Los días en los que no se ficha
+
+`dayState` tiene cuatro valores: `working` —el de partida, y el único en el que se ficha— y `non-working`, `vacation` y `absence`. En los tres últimos el widget dice por qué y **no pinta ni el botón ni el reloj**: un botón deshabilitado invitaría a pulsarlo y no explicaría nada.
+
+<Canvas of={ClockWidgetStories.DiaDeVacaciones} />
+
+## El error
+
+Lo que falla al fichar llega en `error` y se pinta como `Alert` de error, que ya lleva `role="alert"`: se anuncia sin que el widget tenga que montar una región viva propia. El widget no valida nada por su cuenta, así que el único error posible es el que le pasan.
+
+<Canvas of={ClockWidgetStories.ConError} />
+<Canvas of={ClockWidgetStories.Fichando} />
+
+## El pie
+
+`footer` es la ranura del enlace al histórico («Ver mis fichajes»). No es una prop de texto ni de `href`: es un nodo, porque el enlace lo monta el router de la aplicación.
+
+<Canvas of={ClockWidgetStories.ConPie} />
+
+## Superficie oscura
+
+El punto de estado abierto es `success-fill`, un relleno **universal**: el mismo verde en las dos superficies, como manda el sufijo `-fill`. Lo que cambia de cara es la tinta y el punto de estado cerrado, que sigue la regla de derivación. La tabla de tramos y el `Alert` resuelven su propio oscuro.
+
+<Canvas of={ClockWidgetStories.SuperficieOscura} />
+
+## Accesibilidad
+
+- **El tiempo trabajado es un `role="timer"`**, que por definición **no anuncia cada cambio**: el lector de pantalla lo lee cuando el usuario llega, no sesenta veces por minuto.
+- **El punto de estado es decorativo** (`aria-hidden`): el texto que tiene al lado dice lo mismo, así que el color no es la única señal.
+- **La tabla de tramos es una tabla de verdad**, con su nombre accesible y sus encabezados de columna.
+- El error va en un `Alert` de variante `error`, que interrumpe (`role="alert"`).
+
+## Textos
+
+Quince, en el espacio `clockWidget`: el título, los dos botones, el texto de espera, la etiqueta de la cifra, los cuatro de la tabla, el total, los tres días en los que no se ficha y `durationValue`.
+
+`durationValue` es una **función** —`(horas, minutos) => string`— porque «2 h 14 min» no se escribe igual en todos los idiomas. `formatDuration` la anula para un uso concreto.
+
+## Props
+
+<ArgTypes of={ClockWidgetStories.TurnoAbierto} />
+
+## Tokens
+
+<TokenTable tokens={clockWidgetBaseTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={clockWidgetDarkTokens} />

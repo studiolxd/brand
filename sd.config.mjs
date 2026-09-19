@@ -170,6 +170,7 @@ const filters = {
   'avatar-upload':      (t) => t.path[0] === 'avatar-upload',
   'uptime-bars':        (t) => t.path[0] === 'uptime-bars',
   timeline:             (t) => t.path[0] === 'timeline',
+  'clock-widget':       (t) => t.path[0] === 'clock-widget',
   'recovery-codes':     (t) => t.path[0] === 'recovery-codes',
   'connector-auth':     (t) => t.path[0] === 'connector-auth',
 };
@@ -354,6 +355,7 @@ const sd = new StyleDictionary({
         cssFile('components/text-inline.css',       'text-inline'),
         cssFile('molecules/uptime-bars.css',        'uptime-bars'),
         cssFile('molecules/timeline.css',           'timeline'),
+        cssFile('molecules/clock-widget.css',       'clock-widget'),
         cssFile('molecules/recovery-codes.css',     'recovery-codes'),
         cssFile('molecules/connector-auth.css',     'connector-auth'),
       ],
@@ -523,6 +525,7 @@ const sd = new StyleDictionary({
         scssFile('components/_text-inline.scss',     'text-inline'),
         scssFile('molecules/_uptime-bars.scss',      'uptime-bars'),
         scssFile('molecules/_timeline.scss',         'timeline'),
+        scssFile('molecules/_clock-widget.scss',     'clock-widget'),
         scssFile('molecules/_recovery-codes.scss',   'recovery-codes'),
         scssFile('molecules/_connector-auth.scss',   'connector-auth'),
       ],

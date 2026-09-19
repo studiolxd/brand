@@ -52,6 +52,7 @@ import type { ProgressBarMessages } from '../atoms/ProgressBar/ProgressBar';
 import type { SpinnerMessages } from '../atoms/Spinner/Spinner';
 import type { SliderMessages } from '../atoms/Slider/Slider';
 import type { TreeViewMessages } from '../molecules/TreeView/TreeView';
+import type { ClockWidgetMessages } from '../molecules/ClockWidget/ClockWidget';
 import type { TimelineMessages } from '../molecules/Timeline/Timeline';
 import type { UptimeBarsMessages } from '../molecules/UptimeBars/UptimeBars';
 import type { ChartMessages } from '../organisms/Chart/Chart';
@@ -152,6 +153,7 @@ export interface BrandMessages {
   spinner: SpinnerMessages;
   slider: SliderMessages;
   treeView: TreeViewMessages;
+  clockWidget: ClockWidgetMessages;
   timeline: TimelineMessages;
   uptimeBars: UptimeBarsMessages;
   chart: ChartMessages;
@@ -232,6 +234,7 @@ export type {
   SpinnerMessages,
   SliderMessages,
   TreeViewMessages,
+  ClockWidgetMessages,
   TimelineMessages,
   UptimeBarsMessages,
   ChartMessages,

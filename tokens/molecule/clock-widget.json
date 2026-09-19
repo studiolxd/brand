@@ -1,0 +1,33 @@
+{
+  "clock-widget": {
+    "font-family":            { "$value": "{font-family.sans}",              "$type": "string",    "$description": "Familia tipográfica del fichaje" },
+    "gap":                    { "$value": "{spacing.4}",                     "$type": "dimension", "$description": "Separación entre los bloques del fichaje" },
+
+    "header-gap":             { "$value": "{spacing.1}",                     "$type": "dimension", "$description": "Separación entre el título y el día" },
+    "date-font-size":         { "$value": "{text.paragraph.small.font-size}","$type": "dimension", "$description": "Tamaño del día — letra menor" },
+    "date-color":             { "$value": "{color.text.muted-on-light}",     "$type": "color",     "$description": "Color del día" },
+
+    "status-gap":             { "$value": "{spacing.2}",                     "$type": "dimension", "$description": "Separación entre el punto de estado y su texto" },
+    "status-font-size":       { "$value": "{text.paragraph.small.font-size}","$type": "dimension", "$description": "Tamaño del texto de estado" },
+    "status-color":           { "$value": "{color.text.muted-on-light}",     "$type": "color",     "$description": "Color del texto de estado" },
+    "status-dot-size":        { "$value": "{spacing.2}",                     "$type": "dimension", "$description": "Lado del punto de estado" },
+    "status-dot-radius":      { "$value": "{border-radius.round}",           "$type": "dimension", "$description": "Radio del punto de estado — redondo, es una luz, no una ficha" },
+    "status-dot-open-bg":     { "$value": "{color.success-fill}",            "$type": "color",     "$description": "Punto de estado con el turno abierto — relleno universal de acierto" },
+    "status-dot-closed-bg":   { "$value": "{color.border.default-on-light}", "$type": "color",     "$description": "Punto de estado con el turno cerrado — la línea del sistema, sin color de feedback" },
+
+    "elapsed-font-size":      { "$value": "{font-size.6}",                   "$type": "dimension", "$description": "Tamaño del tiempo transcurrido — la cifra grande del fichaje" },
+    "elapsed-font-weight":    { "$value": "{font-weight.emphasis}",          "$type": "dimension", "$description": "Peso del tiempo transcurrido" },
+    "elapsed-line-height":    { "$value": "{line-height.tight}",             "$type": "dimension", "$description": "Interlineado del tiempo transcurrido" },
+    "elapsed-color":          { "$value": "{color.text.on-light}",           "$type": "color",     "$description": "Color del tiempo transcurrido" },
+    "elapsed-label-font-size":{ "$value": "{text.paragraph.small.font-size}","$type": "dimension", "$description": "Tamaño de la etiqueta del tiempo transcurrido" },
+    "elapsed-label-color":    { "$value": "{color.text.muted-on-light}",     "$type": "color",     "$description": "Color de la etiqueta del tiempo transcurrido" },
+
+    "footer-margin-block-start": { "$value": "{spacing.2}",                  "$type": "dimension", "$description": "Aire sobre el pie del fichaje" },
+
+    "surface-dark-date-color":           { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del día — surface-dark" },
+    "surface-dark-status-color":         { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del texto de estado — surface-dark" },
+    "surface-dark-status-dot-closed-bg": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Punto con el turno cerrado — surface-dark" },
+    "surface-dark-elapsed-color":        { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del tiempo transcurrido — surface-dark" },
+    "surface-dark-elapsed-label-color":  { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color de la etiqueta del tiempo — surface-dark" }
+  }
+}
