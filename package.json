@@ -833,6 +833,11 @@
       "import": "./dist/heatmap.js",
       "default": "./dist/heatmap.js"
     },
+    "./planning-grid": {
+      "types": "./dist/_types/organisms/PlanningGrid/PlanningGrid.d.ts",
+      "import": "./dist/planning-grid.js",
+      "default": "./dist/planning-grid.js"
+    },
     "./recurrence-field": {
       "types": "./dist/_types/molecules/RecurrenceField/RecurrenceField.d.ts",
       "import": "./dist/recurrence-field.js",

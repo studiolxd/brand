@@ -259,6 +259,15 @@ export { Heatmap } from './stories/molecules/Heatmap/Heatmap';
 export type { HeatmapProps, HeatmapRow, HeatmapColumn, HeatmapCell, HeatmapMessages } from './stories/molecules/Heatmap/Heatmap';
 export { heatmapStep, heatmapRampIndex, HEATMAP_RAMP_STEPS } from './stories/molecules/Heatmap/heatmapScale';
 export type { HeatmapScale } from './stories/molecules/Heatmap/heatmapScale';
+export { PlanningGrid } from './stories/organisms/PlanningGrid/PlanningGrid';
+export type {
+  PlanningGridProps,
+  PlanningGridRow,
+  PlanningGridColumn,
+  PlanningGridCell,
+  PlanningGridMessages,
+} from './stories/organisms/PlanningGrid/PlanningGrid';
+export { parsePlanningHours } from './stories/organisms/PlanningGrid/planningHours';
 export { RecurrenceField } from './stories/molecules/RecurrenceField/RecurrenceField';
 export type { RecurrenceFieldProps, RecurrenceFieldMessages } from './stories/molecules/RecurrenceField/RecurrenceField';
 export {

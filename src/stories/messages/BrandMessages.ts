@@ -54,6 +54,7 @@ import type { SliderMessages } from '../atoms/Slider/Slider';
 import type { TreeViewMessages } from '../molecules/TreeView/TreeView';
 import type { ClockWidgetMessages } from '../molecules/ClockWidget/ClockWidget';
 import type { HeatmapMessages } from '../molecules/Heatmap/Heatmap';
+import type { PlanningGridMessages } from '../organisms/PlanningGrid/PlanningGrid';
 import type { RecurrenceFieldMessages } from '../molecules/RecurrenceField/RecurrenceField';
 import type { TimelineMessages } from '../molecules/Timeline/Timeline';
 import type { UptimeBarsMessages } from '../molecules/UptimeBars/UptimeBars';
@@ -157,6 +158,7 @@ export interface BrandMessages {
   treeView: TreeViewMessages;
   clockWidget: ClockWidgetMessages;
   heatmap: HeatmapMessages;
+  planningGrid: PlanningGridMessages;
   recurrenceField: RecurrenceFieldMessages;
   timeline: TimelineMessages;
   uptimeBars: UptimeBarsMessages;
@@ -240,6 +242,7 @@ export type {
   TreeViewMessages,
   ClockWidgetMessages,
   HeatmapMessages,
+  PlanningGridMessages,
   RecurrenceFieldMessages,
   TimelineMessages,
   UptimeBarsMessages,

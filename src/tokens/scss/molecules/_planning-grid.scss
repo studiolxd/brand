@@ -1,0 +1,36 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-planning-grid-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica de la rejilla
+$lxd-planning-grid-radius: 0px; // Radio del marco de la rejilla
+$lxd-planning-grid-border-color: #111e30; // Color de la rejilla
+$lxd-planning-grid-border-width: 1px; // Grosor de la rejilla
+$lxd-planning-grid-row-header-width: 12rem; // Ancho de la columna de filas
+$lxd-planning-grid-row-header-font-size: 0.875rem; // Tamaño del nombre de la fila
+$lxd-planning-grid-row-header-font-weight: 300; // Peso del nombre de la fila (la celda es th: el agente de usuario la pondría en negrita)
+$lxd-planning-grid-row-header-color: #111e30; // Color del nombre de la fila
+$lxd-planning-grid-row-header-bg: #ffffff; // Fondo sticky de la columna de filas
+$lxd-planning-grid-row-header-padding-block: 0.5rem; // Padding vertical del nombre de la fila
+$lxd-planning-grid-row-header-padding-inline: 0.75rem; // Padding horizontal del nombre de la fila
+$lxd-planning-grid-column-header-font-size: 0.875rem; // Tamaño del nombre de la columna
+$lxd-planning-grid-column-header-font-weight: 500; // Peso del nombre de la columna
+$lxd-planning-grid-column-header-color: #111e30; // Color del nombre de la columna
+$lxd-planning-grid-column-header-sub-font-size: 0.75rem; // Tamaño de la segunda línea del encabezado
+$lxd-planning-grid-column-header-sub-color: #4a4a4a; // Color de la segunda línea del encabezado
+$lxd-planning-grid-column-header-bg: #ffffff; // Fondo del encabezado de columna
+$lxd-planning-grid-column-header-padding-block: 0.5rem; // Padding vertical del encabezado de columna
+$lxd-planning-grid-column-width: 6rem; // Ancho mínimo de una columna de datos
+$lxd-planning-grid-current-outline-color: #111e30; // Recuadro de la columna en curso
+$lxd-planning-grid-current-outline-width: 2px; // Grosor del recuadro de la columna en curso
+$lxd-planning-grid-cell-padding-block: 0.25rem; // Padding vertical de una celda
+$lxd-planning-grid-cell-padding-inline: 0.25rem; // Padding horizontal de una celda
+$lxd-planning-grid-cell-font-size: 0.875rem; // Tamaño de la cifra de una celda de solo lectura
+$lxd-planning-grid-cell-color: #111e30; // Color de la cifra de una celda
+$lxd-planning-grid-cell-readonly-color: #4a4a4a; // Color de la cifra de una celda que no se edita
+$lxd-planning-grid-cell-readonly-bg: #f2f2f2; // Fondo de una celda que no se edita — superficie secundaria
+$lxd-planning-grid-cell-input-width: 4.5rem; // Ancho del campo de horas dentro de la celda
+$lxd-planning-grid-footer-bg: #f2f2f2; // Fondo de las filas de totales
+$lxd-planning-grid-footer-font-weight: 500; // Peso de las filas de totales
+$lxd-planning-grid-footer-color: #111e30; // Color de las filas de totales
+$lxd-planning-grid-over-color: #b30000; // Color de un resto negativo: hay más horas asignadas que disponibles
+$lxd-planning-grid-pending-opacity: 0.4; // Opacidad de una celda cuyo cambio está en vuelo

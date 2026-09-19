@@ -300,6 +300,15 @@ export const brandMessagesFixtureEn: BrandMessages = {
     empty: 'no data',
     scale: 'Colour scale',
   },
+  planningGrid: {
+    label: 'Planning',
+    cellLabel: (row, column) => `Hours for ${row} in ${column}`,
+    rowTotal: 'Total',
+    columnTotal: 'Total',
+    capacity: 'Available',
+    remaining: 'Unassigned',
+    over: 'over capacity',
+  },
   recurrenceField: {
     legend: 'Repeat',
     frequency: 'Frequency',

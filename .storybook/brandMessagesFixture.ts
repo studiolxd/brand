@@ -296,6 +296,15 @@ export const brandMessagesFixture: BrandMessages = {
     empty: 'sin dato',
     scale: 'Escala de color',
   },
+  planningGrid: {
+    label: 'Planificación',
+    cellLabel: (row, column) => `Horas de ${row} en ${column}`,
+    rowTotal: 'Total',
+    columnTotal: 'Total',
+    capacity: 'Disponible',
+    remaining: 'Sin asignar',
+    over: 'sobreasignado',
+  },
   recurrenceField: {
     legend: 'Repetición',
     frequency: 'Frecuencia',

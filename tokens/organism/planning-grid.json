@@ -1,0 +1,57 @@
+{
+  "planning-grid": {
+    "font-family":                { "$value": "{font-family.sans}",               "$type": "string",    "$description": "Familia tipográfica de la rejilla" },
+    "radius":                     { "$value": "{border-radius.default}",          "$type": "dimension", "$description": "Radio del marco de la rejilla" },
+    "border-color":               { "$value": "{color.primary}",                  "$type": "color",     "$description": "Color de la rejilla" },
+    "border-width":               { "$value": "{border-width.default}",           "$type": "dimension", "$description": "Grosor de la rejilla" },
+
+    "row-header-width":           { "$value": "12rem",                            "$type": "dimension", "$description": "Ancho de la columna de filas" },
+    "row-header-font-size":       { "$value": "{font-size.1}",                    "$type": "dimension", "$description": "Tamaño del nombre de la fila" },
+    "row-header-font-weight":     { "$value": "{font-weight.default}",            "$type": "number",    "$description": "Peso del nombre de la fila (la celda es th: el agente de usuario la pondría en negrita)" },
+    "row-header-color":           { "$value": "{color.text.on-light}",            "$type": "color",     "$description": "Color del nombre de la fila" },
+    "row-header-bg":              { "$value": "{color.background.light}",         "$type": "color",     "$description": "Fondo sticky de la columna de filas" },
+    "row-header-padding-block":   { "$value": "{spacing.2}",                      "$type": "dimension", "$description": "Padding vertical del nombre de la fila" },
+    "row-header-padding-inline":  { "$value": "{spacing.3}",                      "$type": "dimension", "$description": "Padding horizontal del nombre de la fila" },
+
+    "column-header-font-size":    { "$value": "{font-size.1}",                    "$type": "dimension", "$description": "Tamaño del nombre de la columna" },
+    "column-header-font-weight":  { "$value": "{font-weight.emphasis}",           "$type": "number",    "$description": "Peso del nombre de la columna" },
+    "column-header-color":        { "$value": "{color.text.on-light}",            "$type": "color",     "$description": "Color del nombre de la columna" },
+    "column-header-sub-font-size":{ "$value": "{font-size.0}",                    "$type": "dimension", "$description": "Tamaño de la segunda línea del encabezado" },
+    "column-header-sub-color":    { "$value": "{color.text.muted-on-light}",      "$type": "color",     "$description": "Color de la segunda línea del encabezado" },
+    "column-header-bg":           { "$value": "{color.background.light}",         "$type": "color",     "$description": "Fondo del encabezado de columna" },
+    "column-header-padding-block":{ "$value": "{spacing.2}",                      "$type": "dimension", "$description": "Padding vertical del encabezado de columna" },
+    "column-width":               { "$value": "6rem",                             "$type": "dimension", "$description": "Ancho mínimo de una columna de datos" },
+
+    "current-outline-color":      { "$value": "{color.primary}",                  "$type": "color",     "$description": "Recuadro de la columna en curso" },
+    "current-outline-width":      { "$value": "{border-width.focus}",             "$type": "dimension", "$description": "Grosor del recuadro de la columna en curso" },
+
+    "cell-padding-block":         { "$value": "{spacing.1}",                      "$type": "dimension", "$description": "Padding vertical de una celda" },
+    "cell-padding-inline":        { "$value": "{spacing.1}",                      "$type": "dimension", "$description": "Padding horizontal de una celda" },
+    "cell-font-size":             { "$value": "{font-size.1}",                    "$type": "dimension", "$description": "Tamaño de la cifra de una celda de solo lectura" },
+    "cell-color":                 { "$value": "{color.text.on-light}",            "$type": "color",     "$description": "Color de la cifra de una celda" },
+    "cell-readonly-color":        { "$value": "{color.text.muted-on-light}",      "$type": "color",     "$description": "Color de la cifra de una celda que no se edita" },
+    "cell-readonly-bg":           { "$value": "{color.surface.secondary-on-light}","$type": "color",    "$description": "Fondo de una celda que no se edita — superficie secundaria" },
+    "cell-input-width":           { "$value": "4.5rem",                           "$type": "dimension", "$description": "Ancho del campo de horas dentro de la celda" },
+
+    "footer-bg":                  { "$value": "{color.surface.secondary-on-light}","$type": "color",    "$description": "Fondo de las filas de totales" },
+    "footer-font-weight":         { "$value": "{font-weight.emphasis}",           "$type": "number",    "$description": "Peso de las filas de totales" },
+    "footer-color":               { "$value": "{color.text.on-light}",            "$type": "color",     "$description": "Color de las filas de totales" },
+    "over-color":                 { "$value": "{color.error-text-on-light}",      "$type": "color",     "$description": "Color de un resto negativo: hay más horas asignadas que disponibles" },
+
+    "pending-opacity":            { "$value": "{opacity.disabled}",               "$type": "number",    "$description": "Opacidad de una celda cuyo cambio está en vuelo" },
+
+    "surface-dark-border-color":            { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de la rejilla — surface-dark" },
+    "surface-dark-row-header-bg":           { "$value": "{color.background.dark}",    "$type": "color", "$description": "Fondo de la columna de filas — surface-dark" },
+    "surface-dark-row-header-color":        { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del nombre de la fila — surface-dark" },
+    "surface-dark-column-header-bg":        { "$value": "{color.background.dark}",    "$type": "color", "$description": "Fondo del encabezado de columna — surface-dark" },
+    "surface-dark-column-header-color":     { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del encabezado de columna — surface-dark" },
+    "surface-dark-column-header-sub-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color de la segunda línea del encabezado — surface-dark" },
+    "surface-dark-current-outline-color":   { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Recuadro de la columna en curso — surface-dark" },
+    "surface-dark-cell-color":              { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de la cifra de una celda — surface-dark" },
+    "surface-dark-cell-readonly-color":     { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color de una celda que no se edita — surface-dark" },
+    "surface-dark-cell-readonly-bg":        { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo de una celda que no se edita — surface-dark" },
+    "surface-dark-footer-bg":               { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo de las filas de totales — surface-dark" },
+    "surface-dark-footer-color":            { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de las filas de totales — surface-dark" },
+    "surface-dark-over-color":              { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Color de un resto negativo — surface-dark" }
+  }
+}

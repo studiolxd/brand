@@ -188,6 +188,7 @@ export const entryPoints = {
   'data-table':          'src/stories/organisms/DataTable/DataTable.tsx',
   'conversation-thread': 'src/stories/organisms/ConversationThread/ConversationThread.tsx',
   'chart':               'src/stories/organisms/Chart/Chart.tsx',
+  'planning-grid':       'src/stories/organisms/PlanningGrid/PlanningGrid.tsx',
 };
 
 export const clientComponents = new Set([
@@ -257,6 +258,7 @@ export const clientComponents = new Set([
   'clock-widget',
   'heatmap',
   'recurrence-field',
+  'planning-grid',
   'confirm-dialog',
   'search-form',
   'filter-bar',
