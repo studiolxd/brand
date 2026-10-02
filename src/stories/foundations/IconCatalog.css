@@ -16,7 +16,8 @@
   color: var(--color-text-on-light);
 }
 .icon-catalog__item code,
-.icon-sizes__item code {
+.icon-sizes__item code,
+.icon-safe-area__item code {
   font-family: ui-monospace, monospace;
   font-size: 12px;
   color: #555;
@@ -35,4 +36,38 @@
   align-items: center;
   gap: var(--spacing-2);
   color: var(--color-text-on-light);
+}
+
+/* Retícula del área útil: el lienzo de 24 es la caja del icono (64px a talla
+   xl) y la mancha es el área de 18, de 3 a 21, o sea 3/24 = 12,5% de margen
+   por cada lado. */
+.icon-safe-area {
+  list-style: none;
+  margin: var(--spacing-4) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+  gap: var(--spacing-3);
+}
+.icon-safe-area__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding-block: var(--spacing-4);
+  padding-inline: var(--spacing-2);
+  color: var(--color-text-on-light);
+}
+.icon-safe-area__canvas {
+  position: relative;
+  outline: var(--border-width-default) solid var(--color-border-default-on-light);
+}
+.icon-safe-area__canvas::before {
+  content: '';
+  position: absolute;
+  inset: 12.5%;
+  background-color: var(--color-accent-1);
+}
+.icon-safe-area__canvas .icon {
+  position: relative;
 }

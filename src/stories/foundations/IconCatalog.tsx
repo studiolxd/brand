@@ -29,3 +29,24 @@ export function IconSizes() {
     </ul>
   );
 }
+
+/**
+ * El catálogo entero sobre su retícula: cada icono a 64px en el lienzo de 24
+ * (el marco) con el área útil de 18 —de 3 a 21 en los dos ejes— rellena
+ * detrás. Un glifo que se sale de la mancha o que no la llena salta a la
+ * vista sin medir nada.
+ */
+export function IconSafeArea() {
+  return (
+    <ul className="icon-safe-area">
+      {ICON_NAMES.map((name) => (
+        <li key={name} className="icon-safe-area__item">
+          <span className="icon-safe-area__canvas">
+            <Icon name={name} size="xl" />
+          </span>
+          <code>{name}</code>
+        </li>
+      ))}
+    </ul>
+  );
+}

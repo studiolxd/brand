@@ -62,3 +62,54 @@ export const Catalogo: Story = {
     }
   },
 };
+
+/**
+ * Glifos que pueden salirse del área útil de 18 (3–21), y por qué. Cualquier
+ * otro que se salga rompe el test: o se redibuja, o se apunta aquí con su
+ * razón.
+ */
+const FUERA_DEL_AREA: Partial<Record<(typeof ICON_NAMES)[number], string>> = {
+  arrow: 'glifo de marca: la flecha va de borde a borde del lienzo',
+  'arrow-left': 'glifo de marca: la flecha va de borde a borde del lienzo',
+  close: 'geometría compartida MENU_GLYPH: no se ajusta por separado de menu',
+  menu: 'geometría compartida MENU_GLYPH: no se ajusta por separado de close',
+  star: 'rebase óptico: la punta asoma a 2,8 para no parecer más baja que sus vecinos',
+  headset: 'el micro baja hasta 22: fuera de los cambios decididos, pendiente de redibujo',
+};
+
+/** Holgura para el redondeo de las curvas (moon llega a 2,99). */
+const HOLGURA = 0.05;
+
+export const AreaUtil: Story = {
+  name: 'Test — todo glifo cabe en el área útil de 18',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      {ICON_NAMES.map((name) => (
+        <span key={name} data-icon={name}>
+          <Icon name={name} />
+        </span>
+      ))}
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const fuera: string[] = [];
+    for (const span of canvasElement.querySelectorAll<HTMLElement>('[data-icon]')) {
+      const name = span.dataset.icon as (typeof ICON_NAMES)[number];
+      // getBBox del <svg> da la caja del dibujo en unidades del viewBox (sin
+      // el trazo), que es justo la retícula de 24.
+      const caja = span.querySelector('svg')!.getBBox();
+      const dentro =
+        caja.x >= 3 - HOLGURA &&
+        caja.y >= 3 - HOLGURA &&
+        caja.x + caja.width <= 21 + HOLGURA &&
+        caja.y + caja.height <= 21 + HOLGURA;
+      if (!dentro && !FUERA_DEL_AREA[name]) {
+        const r = (n: number) => Math.round(n * 100) / 100;
+        fuera.push(`${name}: x ${r(caja.x)}–${r(caja.x + caja.width)}, y ${r(caja.y)}–${r(caja.y + caja.height)}`);
+      }
+    }
+    await expect(canvasElement.querySelectorAll('[data-icon]').length).toBe(ICON_NAMES.length);
+    await expect(fuera).toEqual([]);
+  },
+};

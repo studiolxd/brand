@@ -1,6 +1,6 @@
 {
   "icon": {
-    "size-xs": { "$value": "8px",  "$type": "dimension", "$description": "Marca: el punto de estado, el chevron de un desplegable" },
+    "size-xs": { "$value": "8px",  "$type": "dimension", "$description": "Marca: el punto de estado" },
     "size-sm": { "$value": "16px", "$type": "dimension", "$description": "Dentro de un control: junto al texto de un botón, en una celda" },
     "size-md": { "$value": "24px", "$type": "dimension", "$description": "Por defecto: iconos-botón, navegación, listas" },
     "size-lg": { "$value": "48px", "$type": "dimension", "$description": "Destacado: cabecera de un estado vacío, un aviso" },

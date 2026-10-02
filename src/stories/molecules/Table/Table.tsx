@@ -180,7 +180,7 @@ export function TableHeader({
         */}
         <button type="button" className="table__header-content" onClick={onSort}>
           {children}
-          <Icon name="chevron" size="xs" className="table__sort-icon" />
+          <Icon name="chevron" size="sm" className="table__sort-icon" />
         </button>
         <VisuallyHidden>
           {sorted === 'asc'
