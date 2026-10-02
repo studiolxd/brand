@@ -28,10 +28,14 @@ const ICONS = {
       <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M24 12 H0 M8 4 L0 12 L8 20" />
     ),
   },
+  // Chevron: punta a 90° de 6×12 en el centro de la retícula, dentro del área
+  // de 18 como el resto del set. Los componentes lo giran por CSS sobre el
+  // centro, así que la caja centrada es lo que hace que cualquier giro caiga
+  // en su sitio.
   chevron: {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M6 0 L18 12 L6 24" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 6 L15 12 L9 18" />
     ),
   },
   close: {
@@ -349,12 +353,14 @@ const ICONS = {
       <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 12l5 5l10 -10" />
     ),
   },
+  // Los dos chevrons de `chevron-up`/`chevron-down` (12×6), separados 4 para
+  // que el par quepa en el área de 18.
   'chevrons-up-down': {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M8 9l4 -4l4 4" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M16 15l-4 4l-4 -4" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M6 10l6 -6l6 6" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M18 14l-6 6l-6 -6" />
       </>
     ),
   },
@@ -582,19 +588,19 @@ const ICONS = {
   'chevron-right': {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M6 0 L18 12 L6 24" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 6 L15 12 L9 18" />
     ),
   },
   'chevron-down': {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M24 6 L12 18 L0 6" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M18 9 L12 15 L6 9" />
     ),
   },
   'chevron-up': {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M0 18 L12 6 L24 18" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M6 15 L12 9 L18 15" />
     ),
   },
   info: {
