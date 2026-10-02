@@ -196,7 +196,7 @@ const ICONS = {
   'folder-open': {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 19l2.757 -7.351a1 1 0 0 1 .936 -.649h12.307a1 1 0 0 1 .986 1.164l-.996 5.211a2 2 0 0 1 -1.964 1.625h-14.026a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2h4l3 3h7a2 2 0 0 1 2 2v2" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 21a2 2 0 0 1 -2 -2V5a2 2 0 0 1 2 -2h5l2 3h7a2 2 0 0 1 2 2v2M4 21l2.75 -10.26a1 1 0 0 1 .97 -.74H21a1 1 0 0 1 .98 1.2l-1.65 8.2a2 2 0 0 1 -1.96 1.6z" />
     ),
   },
   trash: {
