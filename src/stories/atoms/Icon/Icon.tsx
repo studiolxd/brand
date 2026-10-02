@@ -73,8 +73,8 @@ const ICONS = {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M2 12 C7 5 17 5 22 12 C17 19 7 19 2 12 Z" />
-        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="12" r="3.5" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M3 12 C7.5 5.7 16.5 5.7 21 12 C16.5 18.3 7.5 18.3 3 12 Z" />
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="12" r="3.15" />
       </>
     ),
   },
@@ -82,8 +82,8 @@ const ICONS = {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M2 12 C7 5 17 5 22 12 C17 19 7 19 2 12 Z" />
-        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="12" r="3.5" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M3 12 C7.5 5.7 16.5 5.7 21 12 C16.5 18.3 7.5 18.3 3 12 Z" />
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="12" r="3.15" />
         <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M4 4 L20 20" />
       </>
     ),
@@ -116,10 +116,10 @@ const ICONS = {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4.5 3.5h4.5a1 1 0 0 1 1 1v6.5a1 1 0 0 1 -1 1h-4.5a1 1 0 0 1 -1 -1v-6.5a1 1 0 0 1 1 -1" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4.5 16h4.5a1 1 0 0 1 1 1v2.5a1 1 0 0 1 -1 1h-4.5a1 1 0 0 1 -1 -1v-2.5a1 1 0 0 1 1 -1" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M15 12h4.5a1 1 0 0 1 1 1v6.5a1 1 0 0 1 -1 1h-4.5a1 1 0 0 1 -1 -1v-6.5a1 1 0 0 1 1 -1" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M15 3.5h4.5a1 1 0 0 1 1 1v2.5a1 1 0 0 1 -1 1h-4.5a1 1 0 0 1 -1 -1v-2.5a1 1 0 0 1 1 -1" />
       </>
     ),
   },
@@ -138,10 +138,10 @@ const ICONS = {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 4l6 0" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M14 4l6 0" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 10a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2l0 -8" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M14 10a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2l0 -2" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3.5 3.5l6.5 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M14 3.5l6.5 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3.5 9.5a2 2 0 0 1 2 -2h2.5a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-2.5a2 2 0 0 1 -2 -2l0 -9" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M14 9.5a2 2 0 0 1 2 -2h2.5a2 2 0 0 1 2 2v2.5a2 2 0 0 1 -2 2h-2.5a2 2 0 0 1 -2 -2l0 -2.5" />
       </>
     ),
   },
@@ -169,7 +169,7 @@ const ICONS = {
   minus: {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 12l14 0" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 12l16 0" />
     ),
   },
   sparkles: {
@@ -194,13 +194,13 @@ const ICONS = {
   folder: {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M22 19a2 2 0 0 1 -2 2H4a2 2 0 0 1 -2 -2V5a2 2 0 0 1 2 -2h5l2 3h9a2 2 0 0 1 2 2z" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M21 18a2 2 0 0 1 -2 2H5a2 2 0 0 1 -2 -2V6a2 2 0 0 1 2 -2h4l2 3h8a2 2 0 0 1 2 2z" />
     ),
   },
   'folder-open': {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 21a2 2 0 0 1 -2 -2V5a2 2 0 0 1 2 -2h5l2 3h7a2 2 0 0 1 2 2v2M4 21l2.75 -10.26a1 1 0 0 1 .97 -.74H21a1 1 0 0 1 .98 1.2l-1.65 8.2a2 2 0 0 1 -1.96 1.6z" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 20a2 2 0 0 1 -2 -2V6a2 2 0 0 1 2 -2h4l2 3h6a2 2 0 0 1 2 2v2M5 20l2.21 -8.26a1 1 0 0 1 .97 -.74H20a1 1 0 0 1 .98 1.2l-1.25 6.2a2 2 0 0 1 -1.96 1.6z" />
     ),
   },
   trash: {
@@ -247,7 +247,7 @@ const ICONS = {
   retry: {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4.05 11 a8 8 0 1 1 .5 4 m-.5 5 v-5 h5" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3.07 10.875a9 9 0 1 1 .587 4.5m-.587 5.625v-5.625h5.625" />
     ),
   },
   lifebuoy: {
@@ -266,22 +266,22 @@ const ICONS = {
   play: {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinejoin="miter" d="M7 4 L20 12 L7 20 Z" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinejoin="miter" d="M6.5 3 L21 12 L6.5 21 Z" />
     ),
   },
   pause: {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M6 5a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M14 5a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5.25 4a1 1 0 0 1 1 -1h2.5a1 1 0 0 1 1 1v16a1 1 0 0 1 -1 1h-2.5a1 1 0 0 1 -1 -1z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M14.25 4a1 1 0 0 1 1 -1h2.5a1 1 0 0 1 1 1v16a1 1 0 0 1 -1 1h-2.5a1 1 0 0 1 -1 -1z" />
       </>
     ),
   },
   stop: {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinejoin="miter" d="M5 5 H19 V19 H5 Z" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinejoin="miter" d="M4 4 H20 V20 H4 Z" />
     ),
   },
   sun: {
@@ -350,7 +350,7 @@ const ICONS = {
   check: {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 12l5 5l10 -10" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 12l5.33 5.33l10.67 -10.67" />
     ),
   },
   // Los dos chevrons de `chevron-up`/`chevron-down` (12×6), separados 4 para
@@ -388,9 +388,9 @@ const ICONS = {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M7 11l5 5l5 -5" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 4l0 12" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 17v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2 -2v-2" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M6 10l6 6l6 -6" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 3l0 13" />
       </>
     ),
   },
@@ -398,8 +398,8 @@ const ICONS = {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M22 9l-10 -4l-10 4l10 4l10 -4v6" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M21 9.3l-9 -3.6l-9 3.6l9 3.6l9 -3.6v5.4" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M6.6 10.74v4.86a5.4 2.7 0 0 0 10.8 0v-4.86" />
       </>
     ),
   },
@@ -473,8 +473,8 @@ const ICONS = {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 4l0 16" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3.5 3.5m0 2a2 2 0 0 1 2 -2h13a2 2 0 0 1 2 2v13a2 2 0 0 1 -2 2h-13a2 2 0 0 1 -2 -2z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 3.5l0 17" />
       </>
     ),
   },
@@ -482,8 +482,8 @@ const ICONS = {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 5l0 14" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 12l14 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 4l0 16" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 12l16 0" />
       </>
     ),
   },
@@ -547,9 +547,9 @@ const ICONS = {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 16V4" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M6 10l6-6 6 6" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 20h16" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 17V3" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 -6l6 6" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 21h18" />
       </>
     ),
   },
@@ -688,7 +688,7 @@ const ICONS = {
   send: {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 20l16 -8l-16 -8l0 6.5l10 1.5l-10 1.5z" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 21l18 -9l-18 -9l0 7.31l11.25 1.69l-11.25 1.69z" />
     ),
   },
   'external-link': {
