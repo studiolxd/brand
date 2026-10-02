@@ -634,13 +634,15 @@ const ICONS = {
       </>
     ),
   },
+  // Enchufe: patillas, cuerpo y cable, todo dentro del área de 18 (el cable
+  // ya no baja hasta el borde del lienzo).
   connection: {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M9 3l0 4M15 3l0 4" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M7 7h10v3a5 5 0 0 1 -5 5a5 5 0 0 1 -5 -5z" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 15l0 3l-2 3h4l-2 3" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M9 3l0 3M15 3l0 3" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M6.5 6h11v2.5a5.5 5.5 0 0 1 -11 0z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 14l0 2l-2 2.5h4l-2 2.5" />
       </>
     ),
   },
