@@ -189,7 +189,7 @@ export function Pagination({
   const A = linkComponent ?? 'a';
 
   if (mode === 'cursor') {
-    const chevronSize = size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm';
+    const chevronSize = size === 'lg' ? 'md' : 'sm';
     const nav = (direction: 'prev' | 'next') => {
       const href = direction === 'prev' ? previousHref : nextHref;
       const handler = direction === 'prev' ? onPrevious : onNext;
@@ -280,7 +280,7 @@ export function Pagination({
   function renderNavBtn(targetPage: number, direction: 'prev' | 'next', isDisabled: boolean) {
     const ariaLabelText = direction === 'prev' ? t('previous', previousLabel) : t('next', nextLabel);
     const chevronClass = direction === 'prev' ? 'pagination__chevron--prev' : undefined;
-    const chevronSize = size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm';
+    const chevronSize = size === 'lg' ? 'md' : 'sm';
     const icon = <Icon name="chevron" size={chevronSize} className={chevronClass} />;
 
     // Sin página a la que ir no hay destino: igual que arriba, el enlace sin

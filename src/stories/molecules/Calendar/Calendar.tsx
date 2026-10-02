@@ -212,7 +212,7 @@ export function Calendar({
     else yearCells.current.get(focusedYear)?.focus();
   }, [view, focusedYear]);
 
-  const chevronSize = size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm';
+  const chevronSize = size === 'lg' ? 'md' : 'sm';
 
   const titleFormatter = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' });
   const monthTitle = titleFormatter.format(currentMonth);

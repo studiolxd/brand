@@ -269,7 +269,7 @@ export function CalendarPlanner({
   const t = useBrandMessages('calendar');
   const tp = useBrandMessages('calendarPlanner');
   const today = new Date();
-  const chevronSize = size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm';
+  const chevronSize = size === 'lg' ? 'md' : 'sm';
 
   const titleFormatter = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' });
   // El tramo de la semana lo compone `Intl` entero («5–11 de enero de 2026», y

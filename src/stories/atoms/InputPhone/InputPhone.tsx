@@ -30,7 +30,7 @@ function CountrySelect({ value, onChange, options, disabled, size = 'md', countr
   const INTL = '__intl__';
   const toVal = (c: Country | undefined) => c ?? INTL;
   const fromVal = (v: string): Country => (v === INTL ? (undefined as unknown as Country) : (v as Country));
-  const chevronSize = size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm';
+  const chevronSize = size === 'lg' ? 'md' : 'sm';
   const contentClass = [
     'input-phone__country-content',
     size !== 'md' ? `input-phone__country-content--${size}` : '',

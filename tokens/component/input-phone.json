@@ -7,7 +7,7 @@
     "content-z-index":      { "$value": "{z-index.floating}",                      "$type": "number",    "$description": "Z-index del dropdown de país" },
     "country-gap":          { "$value": "{spacing.1}",               "$type": "dimension", "$description": "Separación entre bandera/código y chevron en el selector de país" },
     "content-max-height":   { "$value": "17.5rem",                   "$type": "dimension", "$description": "Altura máxima del dropdown de país" },
-    "country-icon-size":    { "$value": "0.625rem",                  "$type": "dimension", "$description": "Ancho del icono chevron en el selector de país" },
+    "country-icon-size":    { "$value": "{icon.size-sm}",            "$type": "dimension", "$description": "Ancho de la caja del chevron en el selector de país: la talla sm de icono, la del chevron del Select md (el glifo mide 8×4 a cualquier talla del campo)" },
     "country-icon-transition-easing": { "$value": "{input.transition-easing}", "$type": "string", "$description": "Curva del giro del chevron: la de los campos" },
     "country-item-padding-block":     { "$value": "{select.item-padding-block}", "$type": "dimension", "$description": "Aire vertical de cada país en la lista: el de las opciones del Select" },
     "sm-country-width":     { "$value": "3.5rem",                    "$type": "dimension", "$description": "Ancho del selector de país — variante sm" },
