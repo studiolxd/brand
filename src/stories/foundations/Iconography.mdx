@@ -1,5 +1,5 @@
 import { Meta } from "@storybook/addon-docs/blocks";
-import { IconCatalog, IconSizes } from "./IconCatalog";
+import { IconCatalog, IconSizes, IconSafeArea } from "./IconCatalog";
 import { TokenTable } from "./TokenTable";
 import { iconSizeTokens } from "../../tokens/icon";
 
@@ -43,13 +43,28 @@ Cada glifo existe una sola vez. Cuando un componente necesita animar un icono �
 
 <IconCatalog />
 
+## El área útil
+
+El lienzo es de 24, pero el glifo se dibuja en el **área útil de 18**: de 3 a 21 en los dos ejes, con 3 de margen por cada lado. Es lo que hace que dos iconos puestos uno al lado del otro pesen lo mismo y que cualquier giro por CSS —el chevron de un acordeón, el de una tabla— caiga en su sitio: todo glifo está centrado en el lienzo.
+
+Dentro del área, la medida no es una cifra sino un peso, y se corrige a ojo:
+
+- **Lo redondo y lo abierto llena las 18**: el círculo de `info` o de `search`, la lupa, la flecha de `upload`.
+- **Lo cuadrado y lleno se queda en 16–17**: un rectángulo tiene más tinta que un círculo de la misma medida, así que `dashboard`, `layout-sidebar` o `stop` encogen un poco para pesar igual.
+- **Lo lineal y simple ronda las 16 de largo**: `plus`, `minus`, `check`.
+- **Las esquinas de un marco llevan radio 2** (`folder`, `copy`, `calendar`, `inbox`) y **las uniones son redondas** (`stroke-linejoin="round"`), también en `play` y `stop`. La excepción son los lomos de `library`: con 4 de ancho, el radio 2 los cerraría en semicírculo, así que llevan 1.
+
+<IconSafeArea />
+
+Se sale del área a propósito **la flecha** (`arrow`, `arrow-left`), que es glifo de marca y va de borde a borde. `close` y `menu` derivan de la geometría compartida `MENU_GLYPH` y no se ajustan por separado. `star` asoma la punta a 2,8: es el rebase óptico de un vértice agudo, que a la medida exacta parecería más bajo que sus vecinos. `headset` baja hasta 22 y queda pendiente de redibujo. Un test (`Atoms/Icon`, en navegador) mide con `getBBox()` cada glifo del catálogo y falla si alguno fuera de esa lista se sale de 3–21.
+
 ### Criterio de trazo para glifos nuevos
 
-Un glifo nuevo no se copia de una librería ajena (lucide, heroicons…): se dibuja en la retícula de 24 con el mismo trazo que el resto del catálogo — `vector-effect: non-scaling-stroke`, `stroke-width: 1`, esquinas rectas o con `stroke-linejoin="round"` donde el original ya lo usa (nunca curvas decorativas añadidas), y `fill="none"` salvo en los puntos (`dot`, `dots`, `grid`, y el centro de `target`, que es un anillo, no un relleno). Un punto suelto —el de `info`, el de `alert-triangle`— se dibuja como una línea de longitud cero con `stroke-linecap="round"`, igual que el punto de `briefcase`, no como un `<circle>` relleno.
+Un glifo nuevo no se copia de una librería ajena (lucide, heroicons…): se dibuja en la retícula de 24 con el mismo trazo que el resto del catálogo — `vector-effect: non-scaling-stroke`, `stroke-width: 1`, `stroke-linecap` y `stroke-linejoin` en `round`, marcos con radio 2 y el glifo dentro del área útil de 18 (nunca curvas decorativas añadidas), y `fill="none"` salvo en los puntos (`dot`, `dots`, `grid`, y el centro de `target`, que es un anillo, no un relleno). Un punto suelto —el de `info`, el de `alert-triangle`— se dibuja como una línea de longitud cero con `stroke-linecap="round"`, igual que el punto de `briefcase`, no como un `<circle>` relleno.
 
 Dos ejemplos del criterio en esta fase:
 
-- **`chevron-down`/`chevron-up`** no son un dibujo nuevo: son los mismos tres puntos de `chevron` girados 90° sobre el centro de la retícula. Es la misma lógica que ya usa `close` (líneas de `menu` giradas 45°) — una forma derivada de otra no diverge con el tiempo.
+- **`chevron-down`/`chevron-up`** no son un dibujo nuevo: son los mismos tres puntos de `chevron` (una punta de 6×12 centrada) girados 90° sobre el centro de la retícula, y `chevron-right` es el mismo objeto que `chevron` con otro nombre. Es la misma lógica que ya usa `close` (líneas de `menu` giradas 45°) — una forma derivada de otra no diverge con el tiempo.
 - **`languages`** no es el par de caracteres superpuestos de lucide/heroicons: es un globo —círculo, ecuador y meridiano—, construido con la misma lógica que `sun` (un círculo más unos trazos), para no depender de un alfabeto concreto.
 
 `spinner` no está en este catálogo a propósito: el spinner de carga es un componente propio, `Spinner` (con su propia animación), no un icono estático — ver `Atoms/Spinner`.
