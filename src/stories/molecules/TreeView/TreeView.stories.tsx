@@ -234,6 +234,16 @@ export const IconosAbiertoYCerrado: Story = {
   ),
 };
 
+/** Sin chevron: solo la marca de carpeta, abierta o cerrada. */
+export const SinChevron: Story = {
+  name: 'Sin chevron',
+  render: () => (
+    <EnLaBarra>
+      <TreeView label="Carpetas" items={carpetas} chevron={false} defaultExpanded={['raiz', 'formacion']} />
+    </EnLaBarra>
+  ),
+};
+
 /**
  * Durante un arrastre la aplicación marca cada carpeta: `dropTarget` la que
  * puede recibir lo que se suelta y `dropDisabled` la que no. El árbol solo

@@ -303,4 +303,20 @@ describe('TreeView', () => {
     expect(cuarto).toHaveClass('tree-view__label--truncated');
     expect(cuarto).toHaveAttribute('title', 'Cuatro, con un nombre largo de verdad');
   });
+
+  it('con chevron={false} no pinta chevron ni su ranura; por defecto sí', () => {
+    const { container, rerender } = render(<TreeView items={items} defaultExpanded={['a']} />);
+    expect(container.querySelector('.tree-view__chevron')).toBeInTheDocument();
+    expect(container.querySelector('.tree-view__chevron-slot')).toBeInTheDocument();
+
+    rerender(<TreeView items={items} defaultExpanded={['a']} chevron={false} />);
+    expect(container.querySelector('.tree-view__chevron')).not.toBeInTheDocument();
+    expect(container.querySelector('.tree-view__chevron-slot')).not.toBeInTheDocument();
+  });
+
+  it('cada fila declara su nivel en data-level, sin atributo style', () => {
+    render(<TreeView items={items} defaultExpanded={['a']} />);
+    expect(screen.getByRole('treeitem', { name: 'Lección A1' })).toHaveAttribute('data-level', '2');
+    expect(screen.getByRole('treeitem', { name: 'Módulo A' })).not.toHaveAttribute('style');
+  });
 });

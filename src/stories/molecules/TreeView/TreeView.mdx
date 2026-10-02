@@ -99,9 +99,18 @@ decisiones de cara:
 
 `--tree-view-indent` es exactamente **la marca más su hueco**
 (`icon-size` + `row-gap`), así que cada nivel se desplaza justo lo que ocupa el
-icono de su padre. A partir del **cuarto** nivel (`truncateFromLevel`) el rótulo
+icono de su padre. La sangría es el `padding-inline-start` de la propia fila
+(el padding base más nivel − 1 veces `--tree-view-indent`), no un margen del
+grupo: todas las filas miden el ancho completo del árbol, y el destino de
+arrastre, la selección y el anillo de foco ocupan toda la anchura en cualquier
+nivel. El nivel llega a la hoja por `data-level` (hasta el 12). A partir del **cuarto** nivel (`truncateFromLevel`) el rótulo
 se corta con puntos suspensivos y el nombre entero queda en `title`: la sangría
 ya se ha llevado el ancho útil de la barra.
+
+Con `chevron={false}` (por defecto `true`) no se pinta ni el chevron ni su
+ranura, en ningún nodo: queda solo la marca de carpeta, que ocupa su ranura fija
+y mantiene alineadas hojas y ramas. El clic, el teclado y `aria-expanded` no
+cambian.
 
 El **chevron** solo aparece en los nodos con hijos —en las hojas se reserva el
 hueco, para que los rótulos sigan alineados—, gira al abrir y va en tinta
@@ -111,6 +120,8 @@ carpeta: `icon` cerrada, `iconExpanded` abierta.
 <Canvas of={TreeViewStories.IconosAbiertoYCerrado} />
 
 <Canvas of={TreeViewStories.CuatroNiveles} />
+
+<Canvas of={TreeViewStories.SinChevron} />
 
 ### Acciones por carpeta
 
