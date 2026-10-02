@@ -7,6 +7,22 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.15.1] — 2026-10-02
+
+> **Patch.** Dos arreglos vistos en el árbol de contenidos de creator.
+
+### `ScrollArea` — sin barra cuando no hay nada que desplazar
+
+Las barras se montan siempre (`keepMounted`) y salían al pasar el puntero aunque el
+contenido no desbordara: un pulgar suelto en la esquina. Ahora cada barra solo se ve,
+y solo captura el puntero, si su eje desborda (`data-has-overflow-x/y` de Base UI).
+
+### `Icon` — `folder-open` del mismo tamaño que `folder`
+
+`folder-open` venía de otra familia y ocupaba menos (19 × 14 frente a 20 × 18 en el
+lienzo de 24): al abrir una carpeta la marca encogía. Redibujado sobre la misma caja
+y con la misma pestaña que `folder`; al abrir solo cambia la solapa.
+
 ## [49.15.0] — 2026-10-02
 
 > **Minor.** El árbol de carpetas de creator, más limpio: sin chevron cuando la marca ya
