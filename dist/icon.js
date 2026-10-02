@@ -18,6 +18,15 @@ var r = (() => {
 		}
 	};
 })(), i = {
+	viewBox: "0 0 24 24",
+	render: () => /* @__PURE__ */ t("path", {
+		vectorEffect: "non-scaling-stroke",
+		strokeWidth: "1",
+		strokeLinecap: "round",
+		strokeLinejoin: "round",
+		d: "M7.5 3 L16.5 12 L7.5 21"
+	})
+}, a = {
 	arrow: {
 		viewBox: "0 0 24 24",
 		render: () => /* @__PURE__ */ t("path", {
@@ -34,14 +43,7 @@ var r = (() => {
 			d: "M24 12 H0 M8 4 L0 12 L8 20"
 		})
 	},
-	chevron: {
-		viewBox: "0 0 24 24",
-		render: () => /* @__PURE__ */ t("path", {
-			vectorEffect: "non-scaling-stroke",
-			strokeWidth: "1",
-			d: "M6 0 L18 12 L6 24"
-		})
-	},
+	chevron: i,
 	close: {
 		viewBox: "0 0 24 24",
 		render: () => /* @__PURE__ */ t("path", {
@@ -77,13 +79,13 @@ var r = (() => {
 		render: () => /* @__PURE__ */ n(e, { children: [/* @__PURE__ */ t("path", {
 			vectorEffect: "non-scaling-stroke",
 			strokeWidth: "1",
-			d: "M2 12 C7 5 17 5 22 12 C17 19 7 19 2 12 Z"
+			d: "M3 12 C7.5 5.7 16.5 5.7 21 12 C16.5 18.3 7.5 18.3 3 12 Z"
 		}), /* @__PURE__ */ t("circle", {
 			vectorEffect: "non-scaling-stroke",
 			strokeWidth: "1",
 			cx: "12",
 			cy: "12",
-			r: "3.5"
+			r: "3.15"
 		})] })
 	},
 	"eye-off": {
@@ -92,14 +94,14 @@ var r = (() => {
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
 				strokeWidth: "1",
-				d: "M2 12 C7 5 17 5 22 12 C17 19 7 19 2 12 Z"
+				d: "M3 12 C7.5 5.7 16.5 5.7 21 12 C16.5 18.3 7.5 18.3 3 12 Z"
 			}),
 			/* @__PURE__ */ t("circle", {
 				vectorEffect: "non-scaling-stroke",
 				strokeWidth: "1",
 				cx: "12",
 				cy: "12",
-				r: "3.5"
+				r: "3.15"
 			}),
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
@@ -196,28 +198,28 @@ var r = (() => {
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1"
+				d: "M4.5 3.5h4.5a1 1 0 0 1 1 1v6.5a1 1 0 0 1 -1 1h-4.5a1 1 0 0 1 -1 -1v-6.5a1 1 0 0 1 1 -1"
 			}),
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1"
+				d: "M4.5 16h4.5a1 1 0 0 1 1 1v2.5a1 1 0 0 1 -1 1h-4.5a1 1 0 0 1 -1 -1v-2.5a1 1 0 0 1 1 -1"
 			}),
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1"
+				d: "M15 12h4.5a1 1 0 0 1 1 1v6.5a1 1 0 0 1 -1 1h-4.5a1 1 0 0 1 -1 -1v-6.5a1 1 0 0 1 1 -1"
 			}),
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1"
+				d: "M15 3.5h4.5a1 1 0 0 1 1 1v2.5a1 1 0 0 1 -1 1h-4.5a1 1 0 0 1 -1 -1v-2.5a1 1 0 0 1 1 -1"
 			})
 		] })
 	},
@@ -262,28 +264,28 @@ var r = (() => {
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M4 4l6 0"
+				d: "M3.5 3.5l6.5 0"
 			}),
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M14 4l6 0"
+				d: "M14 3.5l6.5 0"
 			}),
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M4 10a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2l0 -8"
+				d: "M3.5 9.5a2 2 0 0 1 2 -2h2.5a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-2.5a2 2 0 0 1 -2 -2l0 -9"
 			}),
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M14 10a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2l0 -2"
+				d: "M14 9.5a2 2 0 0 1 2 -2h2.5a2 2 0 0 1 2 2v2.5a2 2 0 0 1 -2 2h-2.5a2 2 0 0 1 -2 -2l0 -2.5"
 			})
 		] })
 	},
@@ -353,7 +355,7 @@ var r = (() => {
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M5 12l14 0"
+			d: "M4 12l16 0"
 		})
 	},
 	sparkles: {
@@ -420,7 +422,7 @@ var r = (() => {
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M22 19a2 2 0 0 1 -2 2H4a2 2 0 0 1 -2 -2V5a2 2 0 0 1 2 -2h5l2 3h9a2 2 0 0 1 2 2z"
+			d: "M21 18a2 2 0 0 1 -2 2H5a2 2 0 0 1 -2 -2V6a2 2 0 0 1 2 -2h4l2 3h8a2 2 0 0 1 2 2z"
 		})
 	},
 	"folder-open": {
@@ -430,7 +432,7 @@ var r = (() => {
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M4 21a2 2 0 0 1 -2 -2V5a2 2 0 0 1 2 -2h5l2 3h7a2 2 0 0 1 2 2v2M4 21l2.75 -10.26a1 1 0 0 1 .97 -.74H21a1 1 0 0 1 .98 1.2l-1.65 8.2a2 2 0 0 1 -1.96 1.6z"
+			d: "M5 20a2 2 0 0 1 -2 -2V6a2 2 0 0 1 2 -2h4l2 3h6a2 2 0 0 1 2 2v2M5 20l2.21 -8.26a1 1 0 0 1 .97 -.74H20a1 1 0 0 1 .98 1.2l-1.25 6.2a2 2 0 0 1 -1.96 1.6z"
 		})
 	},
 	trash: {
@@ -543,7 +545,7 @@ var r = (() => {
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M4.05 11 a8 8 0 1 1 .5 4 m-.5 5 v-5 h5"
+			d: "M3.07 10.875a9 9 0 1 1 .587 4.5m-.587 5.625v-5.625h5.625"
 		})
 	},
 	lifebuoy: {
@@ -594,8 +596,9 @@ var r = (() => {
 		render: () => /* @__PURE__ */ t("path", {
 			vectorEffect: "non-scaling-stroke",
 			strokeWidth: "1",
-			strokeLinejoin: "miter",
-			d: "M7 4 L20 12 L7 20 Z"
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+			d: "M6.5 3 L21 12 L6.5 21 Z"
 		})
 	},
 	pause: {
@@ -605,13 +608,13 @@ var r = (() => {
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M6 5a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"
+			d: "M5.25 4a1 1 0 0 1 1 -1h2.5a1 1 0 0 1 1 1v16a1 1 0 0 1 -1 1h-2.5a1 1 0 0 1 -1 -1z"
 		}), /* @__PURE__ */ t("path", {
 			vectorEffect: "non-scaling-stroke",
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M14 5a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"
+			d: "M14.25 4a1 1 0 0 1 1 -1h2.5a1 1 0 0 1 1 1v16a1 1 0 0 1 -1 1h-2.5a1 1 0 0 1 -1 -1z"
 		})] })
 	},
 	stop: {
@@ -619,8 +622,9 @@ var r = (() => {
 		render: () => /* @__PURE__ */ t("path", {
 			vectorEffect: "non-scaling-stroke",
 			strokeWidth: "1",
-			strokeLinejoin: "miter",
-			d: "M5 5 H19 V19 H5 Z"
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+			d: "M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-14a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1z"
 		})
 	},
 	sun: {
@@ -755,7 +759,7 @@ var r = (() => {
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M3 3v18h18"
+				d: "M3 3v16a2 2 0 0 0 2 2h16"
 			}),
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
@@ -801,7 +805,7 @@ var r = (() => {
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M5 12l5 5l10 -10"
+			d: "M4 12l5.33 5.33l10.67 -10.67"
 		})
 	},
 	"chevrons-up-down": {
@@ -811,13 +815,13 @@ var r = (() => {
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M8 9l4 -4l4 4"
+			d: "M5 10l7 -7l7 7"
 		}), /* @__PURE__ */ t("path", {
 			vectorEffect: "non-scaling-stroke",
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M16 15l-4 4l-4 -4"
+			d: "M19 14l-7 7l-7 -7"
 		})] })
 	},
 	"credit-card": {
@@ -877,21 +881,21 @@ var r = (() => {
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"
+				d: "M3 17v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2 -2v-2"
 			}),
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M7 11l5 5l5 -5"
+				d: "M6 10l6 6l6 -6"
 			}),
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M12 4l0 12"
+				d: "M12 3l0 13"
 			})
 		] })
 	},
@@ -902,13 +906,13 @@ var r = (() => {
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M22 9l-10 -4l-10 4l10 4l10 -4v6"
+			d: "M21 9.3l-9 -3.6l-9 3.6l9 3.6l9 -3.6v5.4"
 		}), /* @__PURE__ */ t("path", {
 			vectorEffect: "non-scaling-stroke",
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M6 10.6v5.4a6 3 0 0 0 12 0v-5.4"
+			d: "M6.6 10.74v4.86a5.4 2.7 0 0 0 10.8 0v-4.86"
 		})] })
 	},
 	key: {
@@ -1111,13 +1115,13 @@ var r = (() => {
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"
+			d: "M3.5 3.5m0 2a2 2 0 0 1 2 -2h13a2 2 0 0 1 2 2v13a2 2 0 0 1 -2 2h-13a2 2 0 0 1 -2 -2z"
 		}), /* @__PURE__ */ t("path", {
 			vectorEffect: "non-scaling-stroke",
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M9 4l0 16"
+			d: "M9 3.5l0 17"
 		})] })
 	},
 	plus: {
@@ -1127,13 +1131,13 @@ var r = (() => {
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M12 5l0 14"
+			d: "M12 4l0 16"
 		}), /* @__PURE__ */ t("path", {
 			vectorEffect: "non-scaling-stroke",
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M5 12l14 0"
+			d: "M4 12l16 0"
 		})] })
 	},
 	receipt: {
@@ -1260,21 +1264,21 @@ var r = (() => {
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M12 16V4"
+				d: "M12 17V3"
 			}),
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M6 10l6-6 6 6"
+				d: "M6 9l6 -6l6 6"
 			}),
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M4 20h16"
+				d: "M3 21h18"
 			})
 		] })
 	},
@@ -1336,20 +1340,15 @@ var r = (() => {
 			})
 		] })
 	},
-	"chevron-right": {
-		viewBox: "0 0 24 24",
-		render: () => /* @__PURE__ */ t("path", {
-			vectorEffect: "non-scaling-stroke",
-			strokeWidth: "1",
-			d: "M6 0 L18 12 L6 24"
-		})
-	},
+	"chevron-right": i,
 	"chevron-down": {
 		viewBox: "0 0 24 24",
 		render: () => /* @__PURE__ */ t("path", {
 			vectorEffect: "non-scaling-stroke",
 			strokeWidth: "1",
-			d: "M24 6 L12 18 L0 6"
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+			d: "M21 7.5 L12 16.5 L3 7.5"
 		})
 	},
 	"chevron-up": {
@@ -1357,7 +1356,9 @@ var r = (() => {
 		render: () => /* @__PURE__ */ t("path", {
 			vectorEffect: "non-scaling-stroke",
 			strokeWidth: "1",
-			d: "M0 18 L12 6 L24 18"
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+			d: "M3 16.5 L12 7.5 L21 16.5"
 		})
 	},
 	info: {
@@ -1430,21 +1431,21 @@ var r = (() => {
 				vectorEffect: "non-scaling-stroke",
 				strokeWidth: "1",
 				strokeLinecap: "round",
-				d: "M9 3l0 4M15 3l0 4"
+				d: "M9 3l0 3M15 3l0 3"
 			}),
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M7 7h10v3a5 5 0 0 1 -5 5a5 5 0 0 1 -5 -5z"
+				d: "M6.5 6h11v2.5a5.5 5.5 0 0 1 -11 0z"
 			}),
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M12 15l0 3l-2 3h4l-2 3"
+				d: "M12 14l0 2l-2 2.5h4l-2 2.5"
 			})
 		] })
 	},
@@ -1523,7 +1524,7 @@ var r = (() => {
 				strokeWidth: "1",
 				strokeLinecap: "round",
 				strokeLinejoin: "round",
-				d: "M5 21l0 -17a1 1 0 0 1 1 -1l12 0a1 1 0 0 1 1 1l0 17"
+				d: "M5 21l0 -16a2 2 0 0 1 2 -2l10 0a2 2 0 0 1 2 2l0 16"
 			}),
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
@@ -1546,7 +1547,7 @@ var r = (() => {
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M4 20l16 -8l-16 -8l0 6.5l10 1.5l-10 1.5z"
+			d: "M3 21l18 -9l-18 -9l0 7.31l11.25 1.69l-11.25 1.69z"
 		})
 	},
 	"external-link": {
@@ -1605,13 +1606,13 @@ var r = (() => {
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M3 5l4 0l2 4l6 0l2 -4l4 0"
+			d: "M3 12L6.45 5.11A2 2 0 0 1 8.24 4H15.76A2 2 0 0 1 17.55 5.11L21 12V18A2 2 0 0 1 19 20H5A2 2 0 0 1 3 18Z"
 		}), /* @__PURE__ */ t("path", {
 			vectorEffect: "non-scaling-stroke",
 			strokeWidth: "1",
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
-			d: "M3 5l0 11a2 2 0 0 0 2 2l14 0a2 2 0 0 0 2 -2l0 -11"
+			d: "M21 12h-5l-2 3h-4l-2 -3H3"
 		})] })
 	},
 	library: {
@@ -1652,11 +1653,14 @@ var r = (() => {
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
 				strokeWidth: "1",
-				d: "M3 6 H21 V21 H3 Z"
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M5 6h14a2 2 0 0 1 2 2v11a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2z"
 			}),
 			/* @__PURE__ */ t("path", {
 				vectorEffect: "non-scaling-stroke",
 				strokeWidth: "1",
+				strokeLinecap: "round",
 				d: "M3 10 H21"
 			}),
 			/* @__PURE__ */ t("path", {
@@ -1724,9 +1728,9 @@ var r = (() => {
 			})
 		] })
 	}
-}, a = Object.keys(i);
-function o({ name: e, size: n = "md", className: r }) {
-	let a = i[e];
+}, o = Object.keys(a);
+function s({ name: e, size: n = "md", className: r }) {
+	let i = a[e];
 	return /* @__PURE__ */ t("svg", {
 		className: [
 			"icon",
@@ -1735,11 +1739,11 @@ function o({ name: e, size: n = "md", className: r }) {
 		].filter(Boolean).join(" "),
 		"aria-hidden": "true",
 		xmlns: "http://www.w3.org/2000/svg",
-		viewBox: a.viewBox,
+		viewBox: i.viewBox,
 		fill: "none",
 		stroke: "currentColor",
-		children: a.render()
+		children: i.render()
 	});
 }
 //#endregion
-export { a as ICON_NAMES, o as Icon, r as MENU_GLYPH };
+export { o as ICON_NAMES, s as Icon, r as MENU_GLYPH };

@@ -39,7 +39,7 @@ function y({ value: y, onChange: te, defaultMonth: ne, month: b, onMonthChange: 
 		let e = W.current;
 		W.current = null, e === "title" ? H.current?.focus() : U.current.get(B)?.focus();
 	}, [I, B]);
-	let fe = k === "sm" ? "xs" : k === "lg" ? "md" : "sm", pe = new Intl.DateTimeFormat(E, {
+	let fe = k === "lg" ? "md" : "sm", pe = new Intl.DateTimeFormat(E, {
 		month: "long",
 		year: "numeric"
 	}).format(M), me = new Intl.DateTimeFormat(E, { year: "numeric" }), K = (e) => me.format(new Date(e, 0, 1)), he = Array.from({ length: g }, (e, t) => R + t), ge = `${K(R)}–${K(R + g - 1)}`, _e = new Intl.DateTimeFormat(E, {

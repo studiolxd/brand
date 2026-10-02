@@ -24,8 +24,8 @@ declare const ICONS: {
         readonly render: () => import("react/jsx-runtime").JSX.Element;
     };
     readonly chevron: {
-        readonly viewBox: "0 0 24 24";
-        readonly render: () => import("react/jsx-runtime").JSX.Element;
+        viewBox: string;
+        render: () => import("react/jsx-runtime").JSX.Element;
     };
     readonly close: {
         readonly viewBox: "0 0 24 24";
@@ -248,8 +248,8 @@ declare const ICONS: {
         readonly render: () => import("react/jsx-runtime").JSX.Element;
     };
     readonly 'chevron-right': {
-        readonly viewBox: "0 0 24 24";
-        readonly render: () => import("react/jsx-runtime").JSX.Element;
+        viewBox: string;
+        render: () => import("react/jsx-runtime").JSX.Element;
     };
     readonly 'chevron-down': {
         readonly viewBox: "0 0 24 24";

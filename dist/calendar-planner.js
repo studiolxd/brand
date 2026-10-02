@@ -34,7 +34,7 @@ function v({ events: v = [], renderDay: y, maxItemsPerDay: le = 3, onMoreClick: 
 		V,
 		H,
 		D
-	]), U = e("calendar"), Ae = e("calendarPlanner"), W = /* @__PURE__ */ new Date(), je = P === "sm" ? "xs" : P === "lg" ? "md" : "sm", Me = new Intl.DateTimeFormat(j, {
+	]), U = e("calendar"), Ae = e("calendarPlanner"), W = /* @__PURE__ */ new Date(), je = P === "lg" ? "md" : "sm", Me = new Intl.DateTimeFormat(j, {
 		month: "long",
 		year: "numeric"
 	}), Ne = new Intl.DateTimeFormat(j, {

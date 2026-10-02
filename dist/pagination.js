@@ -51,7 +51,7 @@ function o(e, t) {
 function s({ mode: s = "pages", total: c, pageCount: l, page: u = 1, pageSize: d = 10, hrefs: f, previousHref: p, nextHref: m, onPrevious: h, onNext: g, onPageChange: _, hrefBuilder: v, linkComponent: y, onPageSizeChange: b, pageSizeOptions: x, afterPageSize: S, showTotal: C = !1, size: w = "md", ariaLabel: T, pageLabel: E, previousLabel: D, nextLabel: O, pagesGroupLabel: k, pageSizeLabel: A, totalLabel: j, className: M }) {
 	let N = e("pagination"), P = v ?? (f ? (e) => f[e] : void 0), F = y ?? "a";
 	if (s === "cursor") {
-		let e = w === "sm" ? "xs" : w === "lg" ? "md" : "sm", n = (n) => {
+		let e = w === "lg" ? "md" : "sm", n = (n) => {
 			let i = n === "prev" ? p : m, a = n === "prev" ? h : g, o = !i && !a, s = n === "prev" ? N("previous", D) : N("next", O), c = /* @__PURE__ */ r(t, {
 				name: "chevron",
 				size: e,
@@ -115,7 +115,7 @@ function s({ mode: s = "pages", total: c, pageCount: l, page: u = 1, pageSize: d
 	function B(e, n, i) {
 		let a = n === "prev" ? N("previous", D) : N("next", O), o = /* @__PURE__ */ r(t, {
 			name: "chevron",
-			size: w === "sm" ? "xs" : w === "lg" ? "md" : "sm",
+			size: w === "lg" ? "md" : "sm",
 			className: n === "prev" ? "pagination__chevron--prev" : void 0
 		});
 		return P && !i ? /* @__PURE__ */ r(F, {

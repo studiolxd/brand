@@ -45,7 +45,7 @@ function c({ sortable: a = !1, sorted: o = !1, onSort: s, actions: c = !1, actio
 			onClick: s,
 			children: [h, /* @__PURE__ */ r(t, {
 				name: "chevron",
-				size: "xs",
+				size: "sm",
 				className: "table__sort-icon"
 			})]
 		}), /* @__PURE__ */ r(n, { children: o === "asc" ? y("sortedAscending", u) : o === "desc" ? y("sortedDescending", d) : y("sortable", f) })]
