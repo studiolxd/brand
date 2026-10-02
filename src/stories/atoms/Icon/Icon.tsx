@@ -13,6 +13,20 @@ export const MENU_GLYPH = (() => {
   return { size, inset, rows, step: rows[1] - rows[0], diag: { a: r(size / 2 - half), b: r(size / 2 + half) } };
 })();
 
+/**
+ * Chevron: punta a 90° de 6×12 en el centro de la retícula, dentro del área
+ * de 18 como el resto del set. Los componentes lo giran por CSS sobre el
+ * centro, así que la caja centrada es lo que hace que cualquier giro caiga en
+ * su sitio. Un solo objeto para `chevron` y `chevron-right`: dos nombres, un
+ * dibujo, que no pueden divergir.
+ */
+const CHEVRON = {
+  viewBox: '0 0 24 24',
+  render: () => (
+    <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 6 L15 12 L9 18" />
+  ),
+};
+
 const ICONS = {
   // Flecha: la punta es un tercio del largo y abre a 45° (proporción de la
   // marca), en trazo como el resto de iconos.
@@ -28,16 +42,7 @@ const ICONS = {
       <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M24 12 H0 M8 4 L0 12 L8 20" />
     ),
   },
-  // Chevron: punta a 90° de 6×12 en el centro de la retícula, dentro del área
-  // de 18 como el resto del set. Los componentes lo giran por CSS sobre el
-  // centro, así que la caja centrada es lo que hace que cualquier giro caiga
-  // en su sitio.
-  chevron: {
-    viewBox: '0 0 24 24',
-    render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 6 L15 12 L9 18" />
-    ),
-  },
+  chevron: CHEVRON,
   close: {
     viewBox: '0 0 24 24',
     // El aspa es exactamente lo que resulta de girar 45° las líneas 1 y 3 del
@@ -580,17 +585,12 @@ const ICONS = {
   // centro de la retícula — mismos tres puntos, mismo trazo — para los sitios
   // que necesitan una dirección fija (sin la rotación por CSS que ya usan
   // Pagination/PrevNextNav sobre `chevron`). `chevron-right` es el propio
-  // `chevron` con nombre explícito para quien migra 1:1 desde
-  // `ChevronRightIcon`; no resuelve el caso del triángulo de expandir/colapsar
+  // `chevron` (el mismo objeto, `CHEVRON`) con nombre explícito para quien
+  // migra 1:1 desde `ChevronRightIcon`; no resuelve el caso del triángulo de expandir/colapsar
   // del árbol de carpetas de bricks (necesita rotación y evento sobre el
   // propio `<svg>`, que `Icon` no reenvía) — ese hueco sigue documentado y en
   // lucide, ver ICONOS-2026-08-29.md.
-  'chevron-right': {
-    viewBox: '0 0 24 24',
-    render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 6 L15 12 L9 18" />
-    ),
-  },
+  'chevron-right': CHEVRON,
   'chevron-down': {
     viewBox: '0 0 24 24',
     render: () => (
@@ -716,12 +716,15 @@ const ICONS = {
       </>
     ),
   },
+  // Bandeja: borde superior estrecho, costados que abren hacia el canto
+  // (pendiente 1:2) y la muesca del canto, por donde entra lo que llega.
+  // Esquinas de radio 2, como todo marco del sistema.
   inbox: {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 5l4 0l2 4l6 0l2 -4l4 0" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 5l0 11a2 2 0 0 0 2 2l14 0a2 2 0 0 0 2 -2l0 -11" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 12L6.45 5.11A2 2 0 0 1 8.24 4H15.76A2 2 0 0 1 17.55 5.11L21 12V18A2 2 0 0 1 19 20H5A2 2 0 0 1 3 18Z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M21 12h-5l-2 3h-4l-2 -3H3" />
       </>
     ),
   },
