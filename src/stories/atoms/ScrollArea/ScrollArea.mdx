@@ -51,8 +51,10 @@ token `surface-dark-*`.
 - Por eso `label` importa: da nombre a la región (`role="region"` +
   `aria-label`) y evita el fallo de «región desplazable sin nombre». Sin él, el
   área no se anuncia como región.
-- La barra aparece al usar el área y mientras se arrastra; el contenido nunca
-  depende de que se vea la barra para poder leerse.
+- La barra aparece al usar el área y mientras se arrastra, **y solo si su eje
+  desborda**: sin nada que desplazar no se ve nunca (ni con el puntero encima)
+  y tampoco captura el puntero. El contenido nunca depende de que se vea la
+  barra para poder leerse.
 - `overscroll-behavior: contain`: el desplazamiento no se contagia a la página
   al llegar al final.
 
