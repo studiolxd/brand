@@ -81,6 +81,12 @@ export interface TreeViewProps extends Omit<React.ComponentPropsWithoutRef<'ul'>
      * No cambia el marcado: la fila sigue siendo el `role="treeitem"`.
      */
     nodeRef?: (id: string, el: HTMLElement | null) => void;
+    /**
+     * Pinta el chevron (y su ranura) en las ramas. Con `false` solo queda la
+     * marca (`icon`), que ocupa su propia ranura fija: hojas y ramas siguen
+     * alineadas. Default: `true`.
+     */
+    chevron?: boolean;
     /** Se añade DESPUÉS de las clases propias. */
     className?: string;
 }
@@ -99,4 +105,4 @@ export interface TreeViewProps extends Omit<React.ComponentPropsWithoutRef<'ul'>
  * para el único estado que sí lo pide: la carpeta que puede recibir lo que se
  * está arrastrando (`dropTarget`).
  */
-export declare function TreeView({ items, expanded: expandedProp, defaultExpanded, onExpandedChange, selected: selectedProp, defaultSelected, onSelectedChange, label, truncateFromLevel, nodeRef, className, ...rest }: TreeViewProps): import("react/jsx-runtime").JSX.Element;
+export declare function TreeView({ items, expanded: expandedProp, defaultExpanded, onExpandedChange, selected: selectedProp, defaultSelected, onSelectedChange, label, truncateFromLevel, nodeRef, chevron, className, ...rest }: TreeViewProps): import("react/jsx-runtime").JSX.Element;
