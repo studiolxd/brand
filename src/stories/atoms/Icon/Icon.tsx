@@ -266,7 +266,7 @@ const ICONS = {
   play: {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinejoin="miter" d="M6.5 3 L21 12 L6.5 21 Z" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M6.5 3 L21 12 L6.5 21 Z" />
     ),
   },
   pause: {
@@ -281,7 +281,7 @@ const ICONS = {
   stop: {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinejoin="miter" d="M4 4 H20 V20 H4 Z" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-14a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1z" />
     ),
   },
   sun: {
@@ -331,7 +331,7 @@ const ICONS = {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 3v18h18" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 3v16a2 2 0 0 0 2 2h16" />
         <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M8 17v-3" />
         <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M13 17V5" />
         <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M18 17V9" />
@@ -681,7 +681,7 @@ const ICONS = {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 21l0 -17a1 1 0 0 1 1 -1l12 0a1 1 0 0 1 1 1l0 17" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 21l0 -16a2 2 0 0 1 2 -2l10 0a2 2 0 0 1 2 2l0 16" />
         <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M3 21l18 0" />
         <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M9 8l.01 0M15 8l.01 0M9 12l.01 0M15 12l.01 0M9 16l.01 0M15 16l.01 0" />
       </>
@@ -727,6 +727,8 @@ const ICONS = {
   },
   // Tres lomos de libro a distinta altura sobre una balda: la misma idea de
   // "colección" que `book-open`, en vertical.
+  // Los lomos llevan radio 1, no el 2 de los marcos: con 4 de ancho, el
+  // radio 2 los cierra en semicírculo y se leen como arcos, no como libros.
   library: {
     viewBox: '0 0 24 24',
     render: () => (
@@ -738,14 +740,15 @@ const ICONS = {
       </>
     ),
   },
-  // Hoja de calendario: marco recto (como toda esquina del sistema), la línea
-  // de la cabecera y las dos anillas que la cruzan por arriba.
+  // Hoja de calendario: marco con esquinas de radio 2 (las de `folder`,
+  // `copy`, `credit-card`), la línea de la cabecera y las dos anillas que la
+  // cruzan por arriba.
   calendar: {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M3 6 H21 V21 H3 Z" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M3 10 H21" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 6h14a2 2 0 0 1 2 2v11a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M3 10 H21" />
         <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M8 4 V8" />
         <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M16 4 V8" />
       </>
