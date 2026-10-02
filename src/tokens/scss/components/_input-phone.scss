@@ -12,6 +12,7 @@ $lxd-input-phone-country-icon-size: 16px; // Ancho de la caja del chevron en el 
 $lxd-input-phone-country-icon-transition-easing: ease; // Curva del giro del chevron: la de los campos
 $lxd-input-phone-country-item-padding-block: 0.5rem; // Aire vertical de cada país en la lista: el de las opciones del Select
 $lxd-input-phone-sm-country-width: 3.5rem; // Ancho del selector de país — variante sm
+$lxd-input-phone-sm-country-icon-size: 0.625rem; // Ancho de la caja del chevron — variante sm: el prefijo es estrecho y a la caja de md el chevron se pega al separador (el glifo queda en 7,5×3,75)
 $lxd-input-phone-lg-country-width: 5.5rem; // Ancho del selector de país — variante lg
 $lxd-input-phone-country-item-highlighted-bg: #111e30; // Relleno del país resaltado en la lista — el del Select: la inversión de marca
 $lxd-input-phone-country-item-highlighted-color: #ffffff; // Texto del país resaltado — el del Select: el prefijo lo hereda por `currentColor`

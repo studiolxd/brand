@@ -162,6 +162,7 @@
   --input-padding-inline: var(--input-sm-padding-inline);
   --input-font-size: var(--input-sm-font-size);
   --input-phone-country-width: var(--input-phone-sm-country-width);
+  --input-phone-country-icon-size: var(--input-phone-sm-country-icon-size);
 }
 
 .input-phone.input-phone--lg {

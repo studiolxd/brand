@@ -7,6 +7,7 @@
   --input-phone-country-border-style: solid; /** Estilo del separador */
   --input-phone-content-max-height: 17.5rem; /** Altura máxima del dropdown de país */
   --input-phone-sm-country-width: 3.5rem; /** Ancho del selector de país — variante sm */
+  --input-phone-sm-country-icon-size: 0.625rem; /** Ancho de la caja del chevron — variante sm: el prefijo es estrecho y a la caja de md el chevron se pega al separador (el glifo queda en 7,5×3,75) */
   --input-phone-lg-country-width: 5.5rem; /** Ancho del selector de país — variante lg */
   --input-phone-content-z-index: var(--z-index-floating); /** Z-index del dropdown de país */
   --input-phone-country-gap: var(--spacing-1); /** Separación entre bandera/código y chevron en el selector de país */
