@@ -10,10 +10,9 @@
 /* Cada nivel gana una sangría y nada más: sin guías verticales. En una barra
    lateral estrecha la guía compite con el propio texto, y la jerarquía ya la
    dice la sangría (que mide exactamente la marca de la fila padre más su
-   hueco, ver `--tree-view-indent`). */
-.tree-view__group {
-  margin-inline-start: var(--tree-view-indent);
-}
+   hueco, ver `--tree-view-indent`). La sangría NO es un margen del grupo: es
+   `padding-inline-start` de la propia fila, así que todas las filas miden el
+   ancho del árbol y su fondo, borde y anillo de foco no encogen con el nivel. */
 
 .tree-view__item {
   color: var(--tree-view-color);
@@ -33,7 +32,8 @@
   align-items: center;
   gap: var(--tree-view-row-gap);
   padding-block: var(--tree-view-row-padding-block);
-  padding-inline: var(--tree-view-row-padding-inline);
+  padding-inline-start: calc(var(--tree-view-row-padding-inline) + var(--tree-view-level, 0) * var(--tree-view-indent));
+  padding-inline-end: var(--tree-view-row-padding-inline);
   border-radius: var(--tree-view-row-border-radius);
   /* El borde vive siempre, transparente: así el destino de arrastre puede
      pintarlo sin que la fila se mueva ni un píxel. */
@@ -44,6 +44,21 @@
   line-height: var(--tree-view-line-height);
   cursor: var(--tree-view-cursor);
 }
+
+/* Nivel de la fila (`data-level`, de 1 a 12): sin atributo `style`, el valor
+   calculado entra por una regla por nivel. Más allá del 12 la sangría se
+   queda en la del 12. */
+.tree-view__item[data-level="2"] > .tree-view__row { --tree-view-level: 1; }
+.tree-view__item[data-level="3"] > .tree-view__row { --tree-view-level: 2; }
+.tree-view__item[data-level="4"] > .tree-view__row { --tree-view-level: 3; }
+.tree-view__item[data-level="5"] > .tree-view__row { --tree-view-level: 4; }
+.tree-view__item[data-level="6"] > .tree-view__row { --tree-view-level: 5; }
+.tree-view__item[data-level="7"] > .tree-view__row { --tree-view-level: 6; }
+.tree-view__item[data-level="8"] > .tree-view__row { --tree-view-level: 7; }
+.tree-view__item[data-level="9"] > .tree-view__row { --tree-view-level: 8; }
+.tree-view__item[data-level="10"] > .tree-view__row { --tree-view-level: 9; }
+.tree-view__item[data-level="11"] > .tree-view__row { --tree-view-level: 10; }
+.tree-view__item[data-level="12"] > .tree-view__row { --tree-view-level: 11; }
 
 /* El hover no pinta nada —ni relleno ni línea—, como el ítem de `SidebarNav`:
    la fila del árbol es un ítem de la barra. `color` explícito aunque no cambie,

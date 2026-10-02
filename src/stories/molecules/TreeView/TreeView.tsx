@@ -88,6 +88,12 @@ export interface TreeViewProps extends Omit<React.ComponentPropsWithoutRef<'ul'>
    * No cambia el marcado: la fila sigue siendo el `role="treeitem"`.
    */
   nodeRef?: (id: string, el: HTMLElement | null) => void;
+  /**
+   * Pinta el chevron (y su ranura) en las ramas. Con `false` solo queda la
+   * marca (`icon`), que ocupa su propia ranura fija: hojas y ramas siguen
+   * alineadas. Default: `true`.
+   */
+  chevron?: boolean;
   /** Se añade DESPUÉS de las clases propias. */
   className?: string;
 }
@@ -138,6 +144,7 @@ export function TreeView({
   label,
   truncateFromLevel = 4,
   nodeRef,
+  chevron = true,
   className,
   ...rest
 }: TreeViewProps) {
@@ -309,6 +316,7 @@ export function TreeView({
           aria-expanded={tieneHijos ? abierto : undefined}
           aria-selected={esElegido}
           aria-level={level}
+          data-level={level}
           aria-disabled={node.disabled || undefined}
           data-drop={drop}
           tabIndex={conFoco === node.id ? 0 : -1}
@@ -339,9 +347,11 @@ export function TreeView({
             // que soltar sobre un hijo contara como soltar sobre el padre.
             ref={nodeRef ? (el) => nodeRef(node.id, el) : undefined}
           >
-            <span className="tree-view__chevron-slot" aria-hidden="true">
-              {tieneHijos && <Icon name="chevron" className="tree-view__chevron" size="sm" />}
-            </span>
+            {chevron && (
+              <span className="tree-view__chevron-slot" aria-hidden="true">
+                {tieneHijos && <Icon name="chevron" className="tree-view__chevron" size="sm" />}
+              </span>
+            )}
             {marca && <span className="tree-view__icon" aria-hidden="true">{marca}</span>}
             <span
               className={['tree-view__label', truncar ? 'tree-view__label--truncated' : ''].filter(Boolean).join(' ')}
