@@ -7,6 +7,22 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.15.0] — 2026-10-02
+
+> **Minor.** El árbol de carpetas de creator, más limpio: sin chevron cuando la marca ya
+> dice si la carpeta está abierta, y destinos de arrastre a todo el ancho.
+
+### `TreeView` — lo que cambia
+
+**Nueva prop `chevron`** (por defecto `true`). Con `chevron={false}` no se pinta ni el
+chevron ni su ranura: solo queda la marca (`icon`/`iconExpanded`), que ocupa su ranura
+fija, así que hojas y ramas siguen alineadas. El clic en la fila sigue abriendo y
+cerrando, y el teclado no cambia.
+
+**La sangría pasa de margen del grupo a `padding` de la fila.** Todas las filas miden
+el ancho del árbol en cualquier nivel: el destino de arrastre, la selección y el anillo
+de foco ya no encogen al bajar. Rótulo y marca quedan exactamente donde estaban.
+
 ## [49.14.0] — 2026-09-20
 
 > **Minor.** El buscador, repasado con la página real delante. Seis cambios pedidos por
