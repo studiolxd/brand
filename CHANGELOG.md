@@ -7,6 +7,39 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.16.0] — 2026-10-02
+
+> **Minor.** Los iconos, en una sola familia de tamaño y trazo: todo glifo cabe en el
+> área útil de 18 (3–21 del lienzo de 24), con caps y uniones redondeadas y marcos de
+> radio 2. Lo que más se nota: el chevron.
+
+### `Icon` — lo que cambia
+
+- **Chevron al máximo del área**: `chevron`/`chevron-right` 9×18, `chevron-down`/`up` la
+  misma punta girada (18×9), caps `round`. Antes iba de borde a borde (12×24). `chevron`
+  pasa a ser alias de `chevron-right` (mismo objeto; ningún nombre público cambia).
+  `chevrons-up-down`: dos chevrons de 14×7.
+- **Tamaños a la norma de 18** (regla óptica: cuadrados llenos a 17): bajan `folder` /
+  `folder-open` (siguen siendo la misma caja entre sí), `graduation-cap`, `eye` /
+  `eye-off`; suben `plus` / `minus`, `check`, `upload` / `download` / `send`, `retry`,
+  `play` / `pause` / `stop`; `dashboard`, `layout-kanban`, `layout-sidebar` a 17.
+- `connection` vuelve dentro del lienzo; `inbox` redibujado como bandeja.
+- Uniones y esquinas: `play` y `stop` redondeados como `pause`; radio 2 en `building`,
+  `calendar` y los ejes de `chart-bar`.
+- `arrow`, `arrow-left`, `close` y `menu` no cambian (glifos de marca / `MENU_GLYPH`).
+
+### Componentes con chevron
+
+Talla del chevron revisada por componente: Pagination, Calendar, CalendarPlanner,
+InputPhone, el orden de Table y la talla `sm` de Select/MultiSelect suben de `xs` a `sm`
+(token `select.sm-icon-size`, `input-phone.country-icon-size`). **Token nuevo**
+`input-phone.sm-country-icon-size` para la caja estrecha del prefijo en `sm`.
+
+### Foundations
+
+Iconografía gana la sección y la story «Área útil» (el catálogo sobre la retícula de 18),
+y un test de navegador que falla si un glifo se sale del área (excepciones comentadas).
+
 ## [49.15.1] — 2026-10-02
 
 > **Patch.** Dos arreglos vistos en el árbol de contenidos de creator.
