@@ -19,7 +19,7 @@ La única forma rellena son **los puntos** —`dot`, `dots`, `grid`—, porque u
 
 | Token | Valor | Para |
 |---|---|---|
-| `--icon-size-xs` | 8px | Marca: el punto de estado. No para el chevron: su glifo ocupa 6×12 de la retícula y a 8px no se lee — un desplegable lo lleva a `sm` |
+| `--icon-size-xs` | 8px | Marca: el punto de estado |
 | `--icon-size-sm` | 16px | Dentro de un control: junto al texto de un botón, en una celda |
 | `--icon-size-md` | 24px | Por defecto: iconos-botón, navegación, listas |
 | `--icon-size-lg` | 48px | Destacado: cabecera de un estado vacío, un aviso |
@@ -64,7 +64,7 @@ Un glifo nuevo no se copia de una librería ajena (lucide, heroicons…): se dib
 
 Dos ejemplos del criterio en esta fase:
 
-- **`chevron-down`/`chevron-up`** no son un dibujo nuevo: son los mismos tres puntos de `chevron` (una punta de 6×12 centrada) girados 90° sobre el centro de la retícula, y `chevron-right` es el mismo objeto que `chevron` con otro nombre. Es la misma lógica que ya usa `close` (líneas de `menu` giradas 45°) — una forma derivada de otra no diverge con el tiempo.
+- **`chevron-down`/`chevron-up`** no son un dibujo nuevo: son los mismos tres puntos de `chevron` (una punta de 9×18 centrada, la mayor que cabe en el área a 45°) girados 90° sobre el centro de la retícula, y `chevron-right` es el mismo objeto que `chevron` con otro nombre. Es la misma lógica que ya usa `close` (líneas de `menu` giradas 45°) — una forma derivada de otra no diverge con el tiempo.
 - **`languages`** no es el par de caracteres superpuestos de lucide/heroicons: es un globo —círculo, ecuador y meridiano—, construido con la misma lógica que `sun` (un círculo más unos trazos), para no depender de un alfabeto concreto.
 
 `spinner` no está en este catálogo a propósito: el spinner de carga es un componente propio, `Spinner` (con su propia animación), no un icono estático — ver `Atoms/Spinner`.

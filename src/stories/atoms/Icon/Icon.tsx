@@ -14,8 +14,8 @@ export const MENU_GLYPH = (() => {
 })();
 
 /**
- * Chevron: punta a 90° de 6×12 en el centro de la retícula, dentro del área
- * de 18 como el resto del set. Los componentes lo giran por CSS sobre el
+ * Chevron: punta a 90° de 9×18 en el centro de la retícula, tan grande como
+ * cabe en el área de 18 sin perder los 45° de cada brazo. Los componentes lo giran por CSS sobre el
  * centro, así que la caja centrada es lo que hace que cualquier giro caiga en
  * su sitio. Un solo objeto para `chevron` y `chevron-right`: dos nombres, un
  * dibujo, que no pueden divergir.
@@ -23,7 +23,7 @@ export const MENU_GLYPH = (() => {
 const CHEVRON = {
   viewBox: '0 0 24 24',
   render: () => (
-    <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 6 L15 12 L9 18" />
+    <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M7.5 3 L16.5 12 L7.5 21" />
   ),
 };
 
@@ -358,14 +358,14 @@ const ICONS = {
       <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 12l5.33 5.33l10.67 -10.67" />
     ),
   },
-  // Los dos chevrons de `chevron-up`/`chevron-down` (12×6), separados 4 para
-  // que el par quepa en el área de 18.
+  // Dos chevrons a 45° de 14×7, separados 4: lo más grandes que caben en el
+  // área de 18 con ese hueco (7 + 4 + 7 = 18).
   'chevrons-up-down': {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M6 10l6 -6l6 6" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M18 14l-6 6l-6 -6" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 10l7 -7l7 7" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7l-7 -7" />
       </>
     ),
   },
@@ -594,13 +594,13 @@ const ICONS = {
   'chevron-down': {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M18 9 L12 15 L6 9" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M21 7.5 L12 16.5 L3 7.5" />
     ),
   },
   'chevron-up': {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M6 15 L12 9 L18 15" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 16.5 L12 7.5 L21 16.5" />
     ),
   },
   info: {
