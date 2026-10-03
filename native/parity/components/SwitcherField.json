@@ -1,0 +1,91 @@
+{
+  "$schema": "../schema.json",
+  "component": "SwitcherField",
+  "react": {
+    "path": "src/stories/molecules/SwitcherField/SwitcherField.tsx",
+    "props": "SwitcherFieldProps"
+  },
+  "native": {
+    "swift": "BrandSwitcherField",
+    "kotlin": "BrandSwitcherField"
+  },
+  "props": {
+    "size": {
+      "type": "union",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    },
+    "labelHidden": {
+      "type": "boolean",
+      "default": false
+    },
+    "error": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "excluded": [
+    {
+      "prop": "label",
+      "reason": "En SwiftUI la etiqueta es el primer argumento del inicializador (`BrandSwitcherField(\"Texto\", isOn:)`), no una prop."
+    },
+    {
+      "prop": "id",
+      "reason": "El enlace etiqueta↔control lo resuelve SwiftUI (accesibilidad), sin `id` de DOM."
+    },
+    {
+      "prop": "checked",
+      "reason": "El estado es el `Binding<Bool>` `isOn`, que cubre `checked`, `defaultChecked` y `onCheckedChange`."
+    },
+    {
+      "prop": "defaultChecked",
+      "reason": "El estado es el `Binding<Bool>` `isOn`; el valor inicial es el del `@State` de quien lo usa."
+    },
+    {
+      "prop": "disabled",
+      "reason": "Se aplica con el modificador `.disabled(_:)` de SwiftUI, que baja por el entorno al interruptor."
+    },
+    {
+      "prop": "required",
+      "reason": "`required` es validación de formulario HTML; en nativo la validación es de la app (use `error`/`errorMessage`)."
+    },
+    {
+      "prop": "name",
+      "reason": "`name` y `value` son el envío de un `<form>` HTML; SwiftUI no tiene ese concepto."
+    },
+    {
+      "prop": "value",
+      "reason": "`name` y `value` son el envío de un `<form>` HTML; SwiftUI no tiene ese concepto."
+    },
+    {
+      "prop": "errorMessage",
+      "reason": "Existe como `errorMessage: String?`; es de tipo texto libre, que esta ficha no compara."
+    },
+    {
+      "prop": "helperText",
+      "reason": "Existe como `helperText: String?`; es de tipo texto libre, que esta ficha no compara."
+    },
+    {
+      "prop": "className",
+      "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
+    },
+    {
+      "prop": "onCheckedChange",
+      "reason": "Lo cubre el `Binding<Bool>` `isOn`: SwiftUI notifica el cambio escribiendo en él."
+    },
+    {
+      "prop": "onBlur",
+      "reason": "SwiftUI no expone la pérdida de foco de un control como evento; se observa con `@FocusState` en la app."
+    }
+  ],
+  "differences": [
+    "Con `labelHidden` la etiqueta no se pinta pero sigue nombrando el control para VoiceOver, como `VisuallyHidden`.",
+    "El mensaje de error se anuncia con `AccessibilityNotification.Announcement` al aparecer (equivale al `role=\"alert\"`).",
+    "La pista mide em×16 pt escaladas con el tipo dinámico; en la web las `em` siguen el cuerpo del navegador.",
+    "El interruptor se anuncia como interruptor nativo (rasgo `isToggle`): «activado/desactivado» lo dice el sistema en su idioma."
+  ]
+}
