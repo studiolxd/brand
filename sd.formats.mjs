@@ -181,7 +181,7 @@ export const NATIVE_COMPONENT_GROUPS = [
   'button', 'close-button', 'control', 'input', 'input-field', 'label', 'form-field', 'field-row',
   'number-input', 'number-input-field', 'select', 'select-field', 'dropdown-field', 'checkbox',
   'switcher', 'switcher-field', 'toggle', 'toggle-group', 'theme-switcher', 'text', 'link',
-  'tag', 'empty-state', 'skeleton', 'sheet', 'modal', 'confirm-dialog', 'toast', 'icon', 'spinner',
+  'tag', 'alert', 'text-inline', 'empty-state', 'skeleton', 'sheet', 'modal', 'confirm-dialog', 'toast', 'icon', 'spinner',
   'separator', 'form', 'fieldset', 'card', 'popover', 'menu',
 ];
 

@@ -1294,6 +1294,86 @@ public enum BrandTagTokens {
     public static let dangerColor: Color = Color(brandHex: 0xFFFFFF)
 }
 
+/// Tokens del componente `alert` (`tokens/**/alert.json`). Un token con par `surface-dark-*` (o que lo hereda) es un `Color` dinámico.
+public enum BrandAlertTokens {
+    /// Token `alert.padding-block` — Padding vertical del alert (16px)
+    public static let paddingBlock: CGFloat = 16
+    /// Token `alert.padding-inline` — Padding horizontal del alert (24px)
+    public static let paddingInline: CGFloat = 24
+    /// Token `alert.border-radius` — Sin radio de esquinas
+    public static let borderRadius: CGFloat = 0
+    /// Token `alert.border-width` — Grosor del borde
+    public static let borderWidth: CGFloat = 1
+    /// Token `alert.gap` — Aire entre el contenido y el botón de cierre (12px)
+    public static let gap: CGFloat = 12
+    /// Token `alert.content-gap` — Aire entre el título y la descripción, y entre los bloques de la descripción (8px)
+    public static let contentGap: CGFloat = 8
+    /// Token `alert.actions-gap` — Aire entre las acciones del aviso — el de los botones de un formulario: la fila de acciones del sistema es una sola
+    public static let actionsGap: CGFloat = 12
+    /// Token `alert.actions-margin-block-start` — Aire entre el cuerpo del aviso y su fila de acciones (12px): más que el que separa título y descripción, porque lo que viene ya no es texto
+    public static let actionsMarginBlockStart: CGFloat = 12
+    /// Token `alert.bg` — Fondo por defecto — prussian. El relleno neutro invierte el lienzo: sobre página clara es prusia y sobre página oscura, blanco (ver `surface-dark-bg`)
+    public static let bg: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+    /// Token `alert.border-color` — Borde por defecto — blanco. Sobre página clara dibuja el contorno del relleno prusia
+    public static let borderColor: Color = Color(brandHex: 0xFFFFFF)
+    /// Token `alert.title-font-size` — El título hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
+    public static let titleFontSize: CGFloat = 16
+    /// Token `alert.title-font-weight` — Peso del título
+    public static let titleFontWeight: Int = 500
+    /// Token `alert.title-line-height` — Interlineado del título — el de un rótulo corto
+    public static let titleLineHeight: CGFloat = 1.3
+    /// Token `alert.title-color` — Texto blanco sobre el relleno prusia
+    public static let titleColor: Color = Color(brandLight: Color(brandHex: 0xFFFFFF), dark: Color(brandHex: 0x111E30))
+    /// Token `alert.description-font-size` — La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
+    public static let descriptionFontSize: CGFloat = 16
+    /// Token `alert.description-line-height` — Interlineado de la descripción — el del cuerpo
+    public static let descriptionLineHeight: CGFloat = 1.5
+    /// Token `alert.description-color` — Descripción blanca sobre el relleno prusia — igual que el título
+    public static let descriptionColor: Color = Color(brandLight: Color(brandHex: 0xFFFFFF), dark: Color(brandHex: 0x111E30))
+    /// Token `alert.close-size` — Lado del botón de cierre — talla sm (32px), la mínima del sistema. El color del aspa y su hover los pone el Button ghost, que voltea con la superficie del relleno
+    public static let closeSize: CGFloat = 32
+    /// Token `alert.close-inset` — Distancia del botón de cierre a la esquina superior derecha (8px)
+    public static let closeInset: CGFloat = 8
+    /// Token `alert.success-bg` — Fondo success — verde semántico
+    public static let successBg: Color = Color(brandHex: 0x006616)
+    /// Token `alert.success-border-color` — Borde igual al fondo success
+    public static let successBorderColor: Color = Color(brandHex: 0x006616)
+    /// Token `alert.success-title-color` — Título blanco sobre fondo success
+    public static let successTitleColor: Color = Color(brandHex: 0xFFFFFF)
+    /// Token `alert.success-description-color` — Descripción blanca sobre fondo success
+    public static let successDescriptionColor: Color = Color(brandHex: 0xFFFFFF)
+    /// Token `alert.error-bg` — Fondo error — rojo semántico
+    public static let errorBg: Color = Color(brandHex: 0xB30000)
+    /// Token `alert.error-border-color` — Borde igual al fondo error
+    public static let errorBorderColor: Color = Color(brandHex: 0xB30000)
+    /// Token `alert.error-title-color` — Título blanco sobre fondo error
+    public static let errorTitleColor: Color = Color(brandHex: 0xFFFFFF)
+    /// Token `alert.error-description-color` — Descripción blanca sobre fondo error
+    public static let errorDescriptionColor: Color = Color(brandHex: 0xFFFFFF)
+    /// Token `alert.warning-bg` — Fondo warning — el relleno del rol de aviso. Es el amarillo de siempre, pero la procedencia es el rol de feedback, no la marca
+    public static let warningBg: Color = Color(brandHex: 0xFFCD00)
+    /// Token `alert.warning-border-color` — Borde igual al fondo warning
+    public static let warningBorderColor: Color = Color(brandHex: 0xFFCD00)
+    /// Token `alert.warning-title-color` — Título prusia sobre fondo warning (11,17:1, AAA)
+    public static let warningTitleColor: Color = Color(brandHex: 0x111E30)
+    /// Token `alert.warning-description-color` — Descripción prusia sobre fondo warning
+    public static let warningDescriptionColor: Color = Color(brandHex: 0x111E30)
+    /// Token `alert.warning-close-color` — Aspa y su anillo de foco sobre el relleno de aviso. Es el único relleno claro del componente, así que el aspa no puede tomar la tinta ambiente: con `[data-theme="dark"]` en la raíz saldría blanca sobre amarillo (1,50:1). Va fijada a la tinta del rol, que es universal
+    public static let warningCloseColor: Color = Color(brandHex: 0x111E30)
+}
+
+/// Tokens del componente `text-inline` (`tokens/**/text-inline.json`). Un token con par `surface-dark-*` (o que lo hereda) es un `Color` dinámico.
+public enum BrandTextInlineTokens {
+    /// Token `text-inline.emphasis-font-weight` — Peso del énfasis fuerte en línea
+    public static let emphasisFontWeight: Int = 500
+    /// Token `text-inline.muted-color` — Texto secundario en línea: una aclaración, un metadato
+    public static let mutedColor: Color = Color(brandLight: Color(brandHex: 0x4A4A4A), dark: Color(brandHex: 0xD0D0D0))
+    /// Token `text-inline.destructive-color` — Énfasis en línea con intención destructiva: la palabra que dice que algo se pierde. Es tinta sobre la superficie, nunca un relleno
+    public static let destructiveColor: Color = Color(brandLight: Color(brandHex: 0xB30000), dark: Color(brandHex: 0xFF8585))
+    /// Token `text-inline.success-color` — Énfasis en línea con intención de logro
+    public static let successColor: Color = Color(brandLight: Color(brandHex: 0x006616), dark: Color(brandHex: 0x00CC2C))
+}
+
 /// Tokens del componente `empty-state` (`tokens/**/empty-state.json`). Un token con par `surface-dark-*` (o que lo hereda) es un `Color` dinámico.
 public enum BrandEmptyStateTokens {
     /// Token `empty-state.gap` — Gap entre icono, cuerpo y acción

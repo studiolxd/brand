@@ -69,7 +69,13 @@
             "required": ["type"],
             "properties": {
               "type": { "const": "boolean" },
-              "default": { "description": "Valor por defecto, si lo hay. Informativo.", "type": "boolean" }
+              "default": { "description": "Valor por defecto, si lo hay. Informativo.", "type": "boolean" },
+              "reactOnlyValues": {
+                "description": "Literales de texto que React admite además del booleano (`block: boolean | 'mobile'`) y que no existen en nativo. Han de ser EXACTAMENTE los de React.",
+                "type": "array",
+                "uniqueItems": true,
+                "items": { "type": "string", "minLength": 1 }
+              }
             }
           }
         ]

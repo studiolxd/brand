@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema.json",
+  "component": "Text",
+  "react": {
+    "path": "src/stories/atoms/Text/Text.tsx",
+    "props": "TextProps"
+  },
+  "native": {
+    "swift": "BrandText",
+    "kotlin": "BrandText"
+  },
+  "props": {
+    "as": {
+      "type": "union",
+      "values": [
+        "span",
+        "em",
+        "strong"
+      ],
+      "default": "span"
+    },
+    "tone": {
+      "type": "union",
+      "values": [
+        "default",
+        "muted",
+        "destructive",
+        "success"
+      ],
+      "default": "default"
+    }
+  },
+  "excluded": [
+    {
+      "prop": "className",
+      "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
+    },
+    {
+      "prop": "lang",
+      "reason": "SwiftUI resuelve el idioma del fragmento desde el entorno (`.environment(\\.locale, …)`); no hay atributo por fragmento."
+    },
+    {
+      "prop": "dir",
+      "reason": "La dirección de escritura la decide el sistema según el idioma (`layoutDirection`); SwiftUI no la fija por fragmento."
+    }
+  ]
+}

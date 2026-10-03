@@ -1,0 +1,82 @@
+{
+  "$schema": "../schema.json",
+  "component": "Button",
+  "react": {
+    "path": "src/stories/atoms/Button/Button.tsx",
+    "props": "ButtonProps"
+  },
+  "native": {
+    "swift": "BrandButton",
+    "kotlin": "BrandButton"
+  },
+  "props": {
+    "variant": {
+      "type": "union",
+      "values": [
+        "primary",
+        "outline",
+        "ghost",
+        "text"
+      ],
+      "default": "primary"
+    },
+    "tone": {
+      "type": "union",
+      "values": [
+        "accent",
+        "ink"
+      ],
+      "default": "accent"
+    },
+    "size": {
+      "type": "union",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    },
+    "destructive": {
+      "type": "boolean",
+      "default": false
+    },
+    "iconOnly": {
+      "type": "boolean",
+      "default": false
+    },
+    "block": {
+      "type": "boolean",
+      "default": false,
+      "reactOnlyValues": [
+        "mobile"
+      ]
+    }
+  },
+  "excluded": [
+    {
+      "prop": "type",
+      "reason": "`type=\"submit\"|\"reset\"` es del formulario HTML; en SwiftUI el envío lo hace la acción del botón o el `.onSubmit` del formulario."
+    },
+    {
+      "prop": "onClick",
+      "reason": "En SwiftUI la acción es el cierre `action` del `Button`, no un manejador de evento del DOM."
+    },
+    {
+      "prop": "href",
+      "reason": "La navegación la resuelve la app (`NavigationLink`, `Link` nativo o `openURL`); el botón nativo no es un ancla."
+    },
+    {
+      "prop": "external",
+      "reason": "Solo acompaña a `href` (`target=\"_blank\"`): sin enlace no hay nada que abrir aparte."
+    },
+    {
+      "prop": "render",
+      "reason": "`render` sustituye el elemento HTML; en nativo el estilo (`.buttonStyle(.brand(…))`) se aplica a cualquier `Button`."
+    },
+    {
+      "prop": "className",
+      "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
+    }
+  ]
+}

@@ -62,7 +62,14 @@ export function readProps(checker, type, node) {
 function describe(type) {
   const parts = type.isUnion() ? type.types : [type];
   if (parts.every((t) => t.flags & ts.TypeFlags.BooleanLiteral)) return { kind: 'boolean' };
-  const literals = parts.filter((t) => t.isStringLiteral()).map((t) => t.value);
+  // `boolean | 'mobile'`: un booleano con literales extra que solo existen en la web (`Button block`).
+  const booleans = parts.filter((t) => t.flags & ts.TypeFlags.BooleanLiteral);
+  const strings = parts.filter((t) => t.isStringLiteral()).map((t) => t.value);
+  if (booleans.length > 0 && strings.length > 0 && booleans.length + strings.length === parts.length) {
+    return { kind: 'booleanPlus', values: strings };
+  }
+  // Los literales numéricos (`1 | 2 | 3`, el `level` de `Heading`) cuentan como texto: «1», «2», «3».
+  const literals = parts.filter((t) => t.isStringLiteral() || t.isNumberLiteral()).map((t) => String(t.value));
   // `'a' | 'b' | undefined` ya llega sin `undefined` por `getNonNullableType`.
   if (literals.length > 0 && literals.length === parts.length) return { kind: 'union', values: literals };
   return { kind: 'other' };
@@ -100,7 +107,19 @@ export function compareWithReact(card, reactProps) {
     } else if (excluded.has(name)) {
       problems.push(`props.${name}: está en \`props\` y en \`excluded\` a la vez`);
     } else if (declared.type === 'boolean') {
-      if (actual.kind !== 'boolean') problems.push(`props.${name}: la ficha dice boolean pero en React es ${describeKind(actual)}`);
+      const reactOnly = declared.reactOnlyValues ?? [];
+      if (actual.kind === 'booleanPlus') {
+        const want = new Set(actual.values);
+        const have = new Set(reactOnly);
+        const missing = [...want].filter((v) => !have.has(v));
+        const extra = [...have].filter((v) => !want.has(v));
+        if (missing.length) problems.push(`props.${name}: en React también admite ${missing.join(', ')}: decláralo en \`reactOnlyValues\``);
+        if (extra.length) problems.push(`props.${name}: reactOnlyValues lleva valores que React no tiene: ${extra.join(', ')}`);
+      } else if (actual.kind !== 'boolean') {
+        problems.push(`props.${name}: la ficha dice boolean pero en React es ${describeKind(actual)}`);
+      } else if (reactOnly.length) {
+        problems.push(`props.${name}: reactOnlyValues no aplica: en React es un booleano a secas`);
+      }
     } else if (actual.kind !== 'union') {
       problems.push(`props.${name}: la ficha dice union pero en React es ${describeKind(actual)}`);
     } else {
@@ -125,7 +144,7 @@ export function compareWithReact(card, reactProps) {
   return problems;
 }
 
-const describeKind = (shape) => (shape.kind === 'union' ? `una unión (${shape.values.join(' | ')})` : shape.kind === 'boolean' ? 'boolean' : 'otro tipo');
+const describeKind = (shape) => (shape.kind === 'union' ? `una unión (${shape.values.join(' | ')})` : shape.kind === 'boolean' ? 'boolean' : shape.kind === 'booleanPlus' ? `un booleano más ${shape.values.join(' | ')}` : 'otro tipo');
 
 /** Comprueba todas las fichas de una carpeta. Devuelve `{ checked, problems }`. */
 export function checkCards(dir = DEFAULT_DIR, root = ROOT) {
