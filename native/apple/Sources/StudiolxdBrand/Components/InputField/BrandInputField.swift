@@ -26,6 +26,17 @@ public typealias InputFieldSize = BrandControlSize
 /// Estados: reposo, foco (anillo interior), error (`error` o un `errorMessage`), deshabilitado (`.disabled(_:)`) y de
 /// solo lectura (`readOnly`). La altura y el tamaño de letra crecen con el tipo dinámico; en iOS toda la caja
 /// enfoca el campo y el aspa de borrado tiene zona táctil de 44 pt.
+///
+/// **Dar el foco desde fuera.** La app lleva el foco con su propio `@FocusState` y lo enlaza con
+/// `.brandFocused(_:)` (o `.brandFocused(_:equals:)` si es un enum con varios campos); el componente lo sincroniza con
+/// su `@FocusState` interno, el que pinta el anillo, sin que se pisen:
+///
+/// ```swift
+/// @FocusState private var addFocused: Bool
+///
+/// BrandInputField("Nueva tarea", text: $title).brandFocused($addFocused)
+/// Button("Añadir") { addFocused = true }.keyboardShortcut("n")   // el cursor salta al campo
+/// ```
 public struct BrandInputField: View {
     private let label: LocalizedStringKey
     @Binding private var text: String
@@ -209,6 +220,7 @@ public struct BrandInputField: View {
         }
         .textFieldStyle(.plain)
         .focused($isFocused)
+        .brandFocusApplied()
         .brandFont(size: fontSize, weight: T.fontWeight)
         .foregroundStyle(textColor)
         .tint(textColor)
@@ -269,8 +281,13 @@ private struct InputTraits: ViewModifier {
     @Previewable @State var text = ""
     @Previewable @State var filled = "Ada Lovelace"
     @Previewable @State var query = "casa"
+    @Previewable @State var task = ""
+    @Previewable @FocusState var taskFocused: Bool
     return ScrollView {
         VStack(alignment: .leading, spacing: BrandSpacing.s5) {
+            // Foco desde fuera: el botón (o un atajo) lleva el cursor al campo.
+            BrandInputField("Nueva tarea", text: $task, placeholder: "¿Qué hay que hacer?").brandFocused($taskFocused)
+            Button("Ir al campo") { taskFocused = true }.keyboardShortcut("n")
             BrandInputField("Nombre", text: $text, placeholder: "Escribe tu nombre")
             BrandInputField("Con valor y ayuda", text: $filled, helperText: "Así te verán los demás")
             BrandInputField("Con error", text: $text, errorMessage: "Este campo es obligatorio")

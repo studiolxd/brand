@@ -71,6 +71,39 @@ final class FormsSnapshotTests: XCTestCase {
         assertBrandSnapshots(view, width: 340, height: 280, named: "sizes")
     }
 
+    func testNumberInputFieldEmpty() {
+        let view = VStack(alignment: .leading, spacing: BrandSpacing.s4) {
+            BrandNumberInputField("Plazas", value: .constant(nil), placeholder: "Sin indicar", min: 0, max: 10,
+                                  helperText: "Déjalo vacío si no lo sabes.")
+            BrandNumberInputField("Sin marcador", value: .constant(nil), min: 0, max: 10)
+            BrandNumberInputField("Con error", value: .constant(nil), placeholder: "Sin indicar", errorMessage: "Indica las plazas")
+        }
+        assertBrandSnapshots(view, width: 340, height: 330, named: "empty")
+    }
+
+    // MARK: PasswordField
+
+    func testPasswordFieldStates() {
+        let view = VStack(alignment: .leading, spacing: BrandSpacing.s4) {
+            BrandPasswordField("Contraseña", text: .constant(""))
+            BrandPasswordField("Contraseña oculta", text: .constant("secreto123"), labelHidden: false, helperText: "Mínimo 8 caracteres")
+            BrandPasswordField("Contraseña visible", text: .constant("secreto123"), labelHidden: false, initiallyVisible: true)
+            BrandPasswordField("Con error", text: .constant("1234"), labelHidden: false, errorMessage: "Es demasiado corta")
+            BrandPasswordField("Deshabilitada", text: .constant("secreto123"), labelHidden: false).disabled(true)
+        }
+        assertBrandSnapshots(view, width: 340, height: 480, named: "states")
+    }
+
+    func testPasswordFieldSizes() {
+        let view = VStack(alignment: .leading, spacing: BrandSpacing.s4) {
+            ForEach(BrandControlSize.allCases, id: \.self) { size in
+                BrandPasswordField("Talla \(size.rawValue)", text: .constant("secreto123"), labelHidden: false, size: size)
+            }
+            BrandPasswordField("Talla lg visible", text: .constant("secreto123"), labelHidden: false, size: .lg, initiallyVisible: true)
+        }
+        assertBrandSnapshots(view, width: 340, height: 380, named: "sizes")
+    }
+
     // MARK: SelectField
 
     func testSelectFieldStates() {
@@ -116,6 +149,29 @@ final class FormsSnapshotTests: XCTestCase {
         assertBrandSnapshots(view, width: 352, height: 101, named: "compare-select", padding: 16)
     }
 
+    func testComparisonNumberEmpty() {
+        let view = BrandNumberInputField(
+            "Cantidad", value: .constant(nil), placeholder: "Sin indicar", helperText: "Déjalo vacío si no lo sabes.")
+            .frame(width: 224)
+        assertBrandSnapshots(view, width: 352, height: 130, named: "compare-number-empty", padding: 16)
+    }
+
+    func testComparisonPasswordDefault() {
+        assertBrandSnapshots(BrandPasswordField("Contraseña", text: .constant("")),
+                             width: 352, height: 72, named: "compare-password-default", padding: 16)
+    }
+
+    func testComparisonPasswordVisible() {
+        assertBrandSnapshots(BrandPasswordField("Contraseña", text: .constant(""), initiallyVisible: true),
+                             width: 352, height: 72, named: "compare-password-visible", padding: 16)
+    }
+
+    func testComparisonPasswordError() {
+        assertBrandSnapshots(
+            BrandPasswordField("Contraseña", text: .constant("1234"), errorMessage: "La contraseña es incorrecta."),
+            width: 352, height: 101, named: "compare-password-error", padding: 16)
+    }
+
     func testDynamicTypeAccessibility() {
         assertBrandSnapshots(
             BrandInputField("Nombre", text: .constant("Ada"), helperText: "Ayuda"),
@@ -130,6 +186,7 @@ final class FormsLogicTests: XCTestCase {
         XCTAssertEqual(InputFieldType.allCases.map(\.rawValue), ["text", "email", "password", "number", "tel", "url"])
         XCTAssertEqual(InputFieldKind.allCases.map(\.rawValue), ["text", "search"])
         XCTAssertEqual(InputFieldSize.allCases.map(\.rawValue), ["sm", "md", "lg"])
+        XCTAssertEqual(PasswordFieldSize.allCases.map(\.rawValue), ["sm", "md", "lg"])
     }
 
     func testControlHeightsComeFromTokens() {

@@ -45,6 +45,40 @@ final class ListsSnapshotTests: XCTestCase {
         assertBrandSnapshots(view, width: 340, height: 190, named: "rows")
     }
 
+    func testListRowsWithLeading() {
+        let view = BrandList(type: .plain, showSeparators: true) {
+            BrandListItem(leading: { BrandIcon(.bell) }, content: { Text("Notificaciones") },
+                          secondary: { Text("Avisos de la comunidad") }, trailing: { BrandIcon(.chevron, size: .sm) })
+            BrandListItem(leading: { BrandIcon(.languages) }, content: { Text("Idioma") },
+                          secondary: { EmptyView() }, trailing: { Text("Español").brand(tone: .muted) })
+            BrandListItem("Seguridad", leading: { BrandIcon(.key) })
+        }
+        assertBrandSnapshots(view, width: 340, height: 200, named: "leading")
+    }
+
+    func testComparisonListLeading() {
+        let view = BrandList(type: .plain, showSeparators: true) {
+            BrandListItem(leading: { BrandIcon(.bell) }, content: { Text("Notificaciones") },
+                          secondary: { Text("Avisos de la comunidad") }, trailing: { BrandIcon(.chevron, size: .sm) })
+            BrandListItem(leading: { BrandIcon(.languages) }, content: { Text("Idioma") },
+                          secondary: { EmptyView() }, trailing: { Text("Español") })
+            BrandListItem("Seguridad", leading: { BrandIcon(.key) })
+        }
+        assertBrandSnapshots(view, width: 352, height: 161, named: "compare-list-leading", padding: 16)
+    }
+
+    /// Una fila pulsable es una fila de lectura más; el estado pulsado no se captura (es transitorio): lo que se ve en
+    /// reposo es lo mismo que sin acción, y es lo que fija esta captura (el rasgo de botón lo comprueba `ListsLogicTests`).
+    func testListPressableRows() {
+        let view = BrandList(type: .plain, showSeparators: true) {
+            BrandListItem(action: {}, leading: { BrandIcon(.bell) }, content: { Text("Notificaciones") },
+                          secondary: { Text("Avisos de la comunidad") }, trailing: { BrandIcon(.chevron, size: .sm) })
+            BrandListItem("Seguridad", action: {}, leading: { BrandIcon(.key) })
+            BrandListItem("Cerrar sesión", action: {}).disabled(true)
+        }
+        assertBrandSnapshots(view, width: 340, height: 200, named: "pressable")
+    }
+
     func testEmptyStates() {
         assertBrandSnapshots(BrandEmptyState(title: "Sin resultados"), width: 360, height: 150, named: "title-only")
         assertBrandSnapshots(

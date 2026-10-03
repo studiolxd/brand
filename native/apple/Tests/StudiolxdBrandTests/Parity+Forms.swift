@@ -1,6 +1,6 @@
 import StudiolxdBrand
 
-/// Paridad de InputField, NumberInputField, SelectField. Cada entrada: nombre de la ficha → prop `union` → `rawValue` de los casos del enum.
+/// Paridad de InputField, NumberInputField, PasswordField, SelectField. Cada entrada: nombre de la ficha → prop `union` → `rawValue` de los casos del enum.
 let formsParity: [String: [String: [String]]] = [
     "InputField": [
         "type": InputFieldType.allCases.map(\.rawValue),
@@ -9,6 +9,9 @@ let formsParity: [String: [String: [String]]] = [
     ],
     "NumberInputField": [
         "size": NumberInputFieldSize.allCases.map(\.rawValue),
+    ],
+    "PasswordField": [
+        "size": PasswordFieldSize.allCases.map(\.rawValue),
     ],
     "SelectField": [
         "size": SelectFieldSize.allCases.map(\.rawValue),
