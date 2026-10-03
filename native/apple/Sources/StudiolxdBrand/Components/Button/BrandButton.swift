@@ -88,6 +88,7 @@ private struct BrandButtonBody: View {
     @Environment(\.isFocused) private var isFocused
     @Environment(\.brandControlSize) private var inheritedSize
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.colorScheme) private var scheme
     @State private var isHovering = false
     @ScaledMetric(relativeTo: .body) private var heightScale: CGFloat = 1
 
@@ -214,7 +215,7 @@ private struct BrandButtonBody: View {
             let border: Color = pressed ? T.textActiveBorder : hover ? T.textHoverBorder : T.textBorder
             let underline: CGFloat = ink
                 ? (active ? T.textInkHoverUnderlineWidth : T.textInkUnderlineWidth)
-                : (active ? T.textHoverUnderlineWidth : T.textUnderlineWidth)
+                : (active ? T.textHoverUnderlineWidth.value(for: scheme) : T.textUnderlineWidth.value(for: scheme))
             return ButtonColors(background: background, foreground: foreground, border: border, underline: underline)
         }
     }
@@ -224,7 +225,7 @@ private struct BrandButtonBody: View {
         case .primary: ButtonColors(background: T.primaryDisabledBg, foreground: T.primaryDisabledColor, border: T.primaryDisabledBorder)
         case .outline: ButtonColors(background: T.outlineBg, foreground: T.outlineDisabledColor, border: T.outlineDisabledBorder)
         case .ghost: ButtonColors(background: T.ghostBg, foreground: T.ghostDisabledColor, border: T.ghostBorder)
-        case .text: ButtonColors(background: T.textBg, foreground: T.textDisabledColor, border: T.textBorder, underline: T.textUnderlineWidth)
+        case .text: ButtonColors(background: T.textBg, foreground: T.textDisabledColor, border: T.textBorder, underline: T.textUnderlineWidth.value(for: scheme))
         }
     }
 
@@ -244,7 +245,7 @@ private struct BrandButtonBody: View {
             .frame(width: style.iconOnly ? scaledHeight : nil)
             .frame(minHeight: isText ? nil : scaledHeight)
             .frame(maxWidth: style.block ? .infinity : nil)
-            .padding(.bottom, isText ? T.textUnderlineOffset + colors.underline : 0)
+            .padding(.bottom, isText ? T.textUnderlineOffset : 0)
             .background(colors.background, in: shape)
             .overlay(alignment: .bottom) {
                 if isText, colors.underline > 0 {

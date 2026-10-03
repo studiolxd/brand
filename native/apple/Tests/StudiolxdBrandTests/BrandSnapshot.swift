@@ -43,10 +43,10 @@ func assertBrandSnapshots<V: View>(
             .transaction { $0.disablesAnimations = true }
 
         #if os(iOS)
-        let traits = UITraitCollection(traitsFrom: [
-            UITraitCollection(userInterfaceStyle: scheme == .dark ? .dark : .light),
-            UITraitCollection(displayScale: 2),
-        ])
+        let traits = UITraitCollection { mutableTraits in
+            mutableTraits.userInterfaceStyle = scheme == .dark ? .dark : .light
+            mutableTraits.displayScale = 2
+        }
         assertSnapshot(
             of: framed,
             as: .image(perceptualPrecision: 0.98, layout: .fixed(width: width, height: height), traits: traits),
@@ -55,9 +55,14 @@ func assertBrandSnapshots<V: View>(
         )
         #else
         // SnapshotTesting solo captura vistas SwiftUI en iOS: en macOS se aloja en una NSHostingView.
+        // Dentro de una ventana fuera de pantalla con espacio de color sRGB: sin ella la captura sale en el del
+        // monitor (P3) y todos los colores se desplazan respecto a los tokens y a las capturas de iOS y de la web.
         let hosting = NSHostingView(rootView: framed)
         hosting.frame = CGRect(x: 0, y: 0, width: width, height: height)
-        hosting.appearance = NSAppearance(named: scheme == .dark ? .darkAqua : .aqua)
+        let window = NSWindow(contentRect: hosting.frame, styleMask: [.borderless], backing: .buffered, defer: false)
+        window.colorSpace = .sRGB
+        window.appearance = NSAppearance(named: scheme == .dark ? .darkAqua : .aqua)
+        window.contentView = hosting
         assertSnapshot(
             of: hosting,
             as: .image(perceptualPrecision: 0.98),

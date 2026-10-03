@@ -614,9 +614,9 @@ export function buildComponentModel(dictionary) {
       const light = nativeValue(t.path, resolveToken(tokenMap, t, 'light'));
       if (!light) continue;
       let dark = null;
-      if (light.kind === 'color') {
+      if (light.kind === 'color' || light.kind === 'points') {
         const d = nativeValue(t.path, resolveToken(tokenMap, t, 'dark'));
-        if (d?.kind === 'color' && JSON.stringify(d.color) !== JSON.stringify(light.color)) dark = d;
+        if (d?.kind === light.kind && JSON.stringify(d.color ?? d.points) !== JSON.stringify(light.color ?? light.points)) dark = d;
       }
       tokens.push({
         name: numbered(camel(t.path.slice(1))),
@@ -652,7 +652,12 @@ function swiftComponentSource(groups, header) {
             ? `Color(brandLight: ${swiftColor(light.color)}, dark: ${swiftColor(dark.color)})`
             : swiftColor(light.color);
           break;
-        case 'points': type = 'CGFloat'; literal = trimNum(light.points); break;
+        case 'points':
+          // Una medida con par oscuro (el subrayado de `Link`, que en oscuro desaparece en reposo) no puede ser un
+          // número suelto: sale como `BrandSchemeValue`, que el componente resuelve con su `colorScheme`.
+          type = dark ? 'BrandSchemeValue<CGFloat>' : 'CGFloat';
+          literal = dark ? `BrandSchemeValue(light: ${trimNum(light.points)}, dark: ${trimNum(dark.points)})` : trimNum(light.points);
+          break;
         case 'em': type = 'CGFloat'; literal = trimNum(light.number); break;
         case 'weight': type = 'Int'; literal = trimNum(light.number); break;
         case 'duration': type = 'TimeInterval'; literal = trimNum(light.seconds); break;

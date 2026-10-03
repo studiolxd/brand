@@ -19,6 +19,17 @@ final class ButtonSnapshotTests: XCTestCase {
         }
     }
 
+    /// Un botón suelto por variante, a la medida de la story de Storybook (`atoms-button--primary` con
+    /// `variant` y `children: Guardar`): la pareja de `native/apple/Comparisons/Button/`.
+    func testComparisonSingles() {
+        for variant in ButtonVariant.allCases {
+            assertBrandSnapshots(
+                BrandButton("Guardar", variant: variant) {}.fixedSize(),
+                width: 160, height: variant == .text ? 56 : 72, named: "compare-\(variant.rawValue)", padding: 16
+            )
+        }
+    }
+
     func testTextInk() {
         assertBrandSnapshots(
             HStack(spacing: BrandSpacing.s4) {

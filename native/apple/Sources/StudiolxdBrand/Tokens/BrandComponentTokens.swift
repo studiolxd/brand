@@ -201,9 +201,9 @@ public enum BrandButtonTokens {
     /// Token `button.text.line-height` — Line height
     public static let textLineHeight: CGFloat = 1
     /// Token `button.text.underline-width` — Grosor de la línea en reposo. La variante `text` se subraya con la misma técnica que `Link` —sombra interior, no `text-decoration`— porque `text-decoration` no cubre un SVG y un botón con icono quedaba con la línea cortada. Apunta al token de `Link` para que las dos piezas no puedan separarse
-    public static let textUnderlineWidth: CGFloat = 1
+    public static let textUnderlineWidth: BrandSchemeValue<CGFloat> = BrandSchemeValue(light: 1, dark: 0)
     /// Token `button.text.hover-underline-width` — Grosor de la línea en hover y en activo — el de `Link`
-    public static let textHoverUnderlineWidth: CGFloat = 0
+    public static let textHoverUnderlineWidth: BrandSchemeValue<CGFloat> = BrandSchemeValue(light: 0, dark: 1)
     /// Token `button.text.ink-color` — tone=ink: la tinta de la superficie, como en Link
     public static let textInkColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
     /// Token `button.text.ink-underline-width` — tone=ink: grosor del subrayado en reposo
@@ -1207,9 +1207,9 @@ public enum BrandLinkTokens {
     /// Token `link.hover-color` — Color en hover
     public static let hoverColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFCD00))
     /// Token `link.underline-width` — El subrayado es una línea bajo el enlace (borde, no text-decoration): cubre texto e icono y se separa del texto. Su grosor
-    public static let underlineWidth: CGFloat = 1
+    public static let underlineWidth: BrandSchemeValue<CGFloat> = BrandSchemeValue(light: 1, dark: 0)
     /// Token `link.hover-underline-width` — Grosor de la línea en hover (en claro desaparece)
-    public static let hoverUnderlineWidth: CGFloat = 0
+    public static let hoverUnderlineWidth: BrandSchemeValue<CGFloat> = BrandSchemeValue(light: 0, dark: 1)
     /// Token `link.underline-offset` — Separación entre el texto y la línea
     public static let underlineOffset: CGFloat = 4
     /// Token `link.icon-gap` — Aire entre el icono y el texto del enlace
