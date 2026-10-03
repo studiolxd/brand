@@ -7,7 +7,12 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## [Sin publicar]
+## [49.19.0] — 2026-10-04
+
+> **Minor.** Primera versión con **Brand nativo**: tokens, fuentes y componentes para SwiftUI (iOS 17 y macOS 14) y
+> Jetpack Compose (Android), fuera del paquete npm. En React, opciones de fila en `List`/`ListItem`
+> (`showSeparators`, `secondary`, `trailing`, `leading`), `NumberInput` sin valor y el aviso neutro de `Toast` en
+> oscuro. Todo opcional: sin las props nuevas el HTML no cambia.
 
 ### React — huecos de la primera app nativa (minor)
 
