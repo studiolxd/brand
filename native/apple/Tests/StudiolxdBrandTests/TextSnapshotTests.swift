@@ -8,6 +8,44 @@ import XCTest
 final class TextSnapshotTests: XCTestCase {
     override func setUp() async throws { StudiolxdBrand.registerFonts() }
 
+    private static let lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
+
+    /// Parejas con Storybook (`atoms-heading--h2` con `level` y `children`): un solo título por captura.
+    func testComparisonHeading() {
+        for level in [HeadingLevel.h1, .h4] {
+            assertBrandSnapshots(
+                BrandHeading(verbatim: "Mi vivienda", level: level).fixedSize(),
+                width: 300, height: level == .h1 ? 76 : 63, named: "compare-h\(level.rawValue)", padding: 16
+            )
+        }
+        assertBrandSnapshots(
+            BrandHeading(verbatim: "Mi vivienda", level: .h2, size: .s4).fixedSize(),
+            width: 300, height: 54, named: "compare-h2-size4", padding: 16
+        )
+    }
+
+    /// Parejas con Storybook (`atoms-paragraph--por-defecto` con `size` y `children`).
+    func testComparisonParagraph() {
+        for size in ParagraphSize.allCases {
+            let height: CGFloat = size == .small ? 147 : size == .large ? 214 : 176
+            assertBrandSnapshots(
+                BrandParagraph(verbatim: Self.lorem, size: size).frame(width: 288, alignment: .leading),
+                width: 320, height: height, named: "compare-\(size.rawValue)", padding: 16
+            )
+        }
+    }
+
+    /// Pareja con la story `atoms-text--intencion-destructiva`.
+    func testComparisonInlineTones() {
+        let view = VStack(alignment: .leading, spacing: BrandSpacing.s4) {
+            BrandParagraph(Text("Al confirmar se ") + Text("borran").brand(.strong, tone: .destructive) + Text(" las 42 respuestas ya enviadas."))
+            BrandParagraph(Text("La revisión terminó ") + Text("sin incidencias").brand(.strong, tone: .success) + Text("."))
+            BrandParagraph(Text("Publicado el 12 de agosto ") + Text("(hace tres semanas)").brand(tone: .muted) + Text("."))
+        }
+        .frame(width: 448, alignment: .leading)
+        assertBrandSnapshots(view, width: 480, height: 152, named: "compare-inline-tones", padding: 16)
+    }
+
     func testHeadingLevels() {
         let view = VStack(alignment: .leading, spacing: BrandSpacing.s2) {
             ForEach(HeadingLevel.allCases, id: \.self) { level in

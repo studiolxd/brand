@@ -160,6 +160,16 @@ public struct BrandParagraph: View {
         self.size = size
     }
 
+    /// Un párrafo con fragmentos marcados: el contenido es un `Text` concatenado con `Text.brand(…)`.
+    ///
+    /// ```swift
+    /// BrandParagraph(Text("Al confirmar se ") + Text("borran").brand(.strong, tone: .destructive) + Text(" las respuestas."))
+    /// ```
+    public init(_ content: Text, size: ParagraphSize = .default) {
+        self.content = content
+        self.size = size
+    }
+
     public var body: some View {
         let points: CGFloat
         let lineHeight: CGFloat
