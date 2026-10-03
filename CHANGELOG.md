@@ -9,6 +9,20 @@ para breaking changes.
 
 ## [Sin publicar]
 
+### Nativo — Jetpack Compose con los mismos componentes que SwiftUI (minor)
+
+- **Tokens de componente en Kotlin**: `pnpm build:tokens` genera `BrandComponentTokens.kt` (mismos grupos y reglas que
+  `BrandComponentTokens.swift`; los colores y las medidas con par `surface-dark-*` salen como `BrandSchemeValue`, que se
+  resuelve con `.current`). El Swift generado no cambia.
+- **Componentes de Compose** (`native/android/brand`): `BrandButton`, `BrandCloseButton`, `BrandHeading`/`BrandParagraph`/
+  `BrandText`, `BrandIcon` (77 iconos; `pnpm build:native-icons` genera también `BrandIconData.kt`), `BrandInputField`,
+  `BrandNumberInputField`, `BrandSelectField`, `BrandSwitcherField`, `BrandToggleGroup`, `BrandThemeSwitcher`,
+  `BrandList`/`BrandListItem` (`showSeparators`, `secondary`, `trailing`), `BrandTag`, `BrandEmptyState`, `BrandSkeleton`,
+  `BrandSheet`, `BrandConfirmDialog` y `ToastCenter`/`ToastHost`, con estados, escala de fuente, TalkBack, 48 dp, claro y
+  oscuro y «quitar animaciones». Cumplen las fichas de paridad (`ParityTest`), con capturas Paparazzi en claro y oscuro,
+  `@Preview` y parejas React ↔ Compose en `native/android/Comparisons/`. Sin dependencias nuevas en producción.
+- Fichas de paridad: líneas «Android: …» en `differences`. `native/README.md` documenta los componentes de Compose.
+
 ### React — `List`/`ListItem` (minor) y `Toast` (patch)
 
 - **`List` `showSeparators`** (default `false`): línea entre filas con los tokens `separator.*`

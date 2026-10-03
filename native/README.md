@@ -4,9 +4,9 @@ Las versiones nativas de Brand para apps de **SwiftUI** (iOS 17 y macOS 14) y **
 Comparten con la web los mismos tokens —salen de los mismos JSON de `tokens/` con Style Dictionary— y se llevan al mismo
 paso que React: **solo se porta un componente cuando una app nativa lo necesita**, nunca el catálogo entero.
 
-> **Estado.** SwiftUI (iOS 17 y macOS 14) tiene ya sus componentes —ver [Componentes de SwiftUI](#componentes-de-swiftui)—;
-> Jetpack Compose tiene la infraestructura, los tokens, la tipografía y las pruebas, y recibirá los mismos componentes
-> en la tarea siguiente (cada ficha de `parity/components/` ya dice qué ha de cumplir Kotlin).
+> **Estado.** SwiftUI (iOS 17 y macOS 14) y Jetpack Compose tienen ya los mismos componentes —ver
+> [Componentes de SwiftUI](#componentes-de-swiftui) y [Componentes de Compose](#componentes-de-compose)—; cada ficha de
+> `parity/components/` declara qué cumplen las dos.
 
 **Lo nativo no se publica en npm.** Se distribuye por git: SwiftPM lee `Package.swift` de la raíz del repositorio y
 JitPack construye `native/android` (`jitpack.yml`). `package.json#files` solo lleva `dist`, `src/tokens` y el changelog,
@@ -28,7 +28,13 @@ native/
 │  ├─ Comparisons/<Componente>/   parejas React ↔ SwiftUI (ver Comparisons/README.md)
 │  └─ scripts/                    capture-story.mjs y pair-comparison.sh (las parejas)
 ├─ android/                       proyecto Gradle (Kotlin DSL), módulo `brand`
-│  └─ brand/src/…                tokens (GENERADO), tema, tipografía; res/font GENERADO; pruebas y capturas
+│  ├─ brand/src/main/…/components/<componente>/   los componentes (uno por paquete, con su `@Preview`)
+│  ├─ brand/src/main/…/support/   talla de control, foco, escala de fuente, «quitar animaciones», sombra…
+│  ├─ brand/src/main/…/tokens/    BrandTokens.kt y BrandComponentTokens.kt GENERADOS por `pnpm build:tokens`
+│  ├─ brand/src/main/…/icon/      BrandIconData.kt GENERADO por `pnpm build:native-icons`
+│  ├─ brand/src/test/…            tokens, paridad, lógica y capturas Paparazzi (`src/test/snapshots/`)
+│  ├─ Comparisons/<Componente>/   parejas React ↔ Compose (mismo criterio que las de Apple)
+│  └─ scripts/pair-comparison.sh  genera las parejas a la misma escala
 └─ parity/                        fichas de paridad con React (ver parity/README.md)
 ```
 
@@ -112,9 +118,8 @@ Un rol cuyo token solo define un lado (`color.surface.highlight` solo existe `on
 - **Pilas de fuentes de respaldo** (`system-ui, sans-serif`): solo sale el nombre de la primera familia; el respaldo lo
   decide cada sistema.
 - **Tokens con `var(`**: no hay ninguno entre los globales; si apareciera, se omitiría.
-- **Tokens de componente en Kotlin**: los de Swift ya se generan (abajo); los de Compose llegan con los componentes de Android.
 
-### Tokens de componente (Swift)
+### Tokens de componente (Swift y Kotlin)
 
 `pnpm build:tokens` genera además `BrandComponentTokens.swift`: un `enum Brand<Grupo>Tokens` por cada grupo de
 `NATIVE_COMPONENT_GROUPS` (`sd.formats.mjs`), p. ej. `BrandButtonTokens.primaryBg` ← `button.primary.bg`. La lista de
@@ -128,6 +133,10 @@ grupos crece con cada componente que se porta (sale de los `var(--…)` de su CS
   `BrandButtonTokens.textUnderlineWidth.value(for: scheme)`.
 - **`em`**: fracción del tamaño de fuente del propio componente (`switcher.track-width` = 2.75 → 2.75 × tamaño).
 - Duraciones (segundos), curvas (`BrandCubicBezier`), sombras (`BrandShadow`), pesos (`Int`) y familias (`String`).
+- **Kotlin** (`BrandComponentTokens.kt`, mismos grupos y mismas reglas): `object Brand<Grupo>Tokens`. Todo color es un
+  `BrandSchemeValue<Color>` (`light`/`dark`; los que no tienen par oscuro valen lo mismo en los dos) que se resuelve con
+  `.current` dentro de `BrandTheme`; una medida con par oscuro, `BrandSchemeValue<Dp>`. Medidas → `Dp`; `*font-size` →
+  `TextUnit` (sp); un número sin unidad (`line-height: 1.5`) → `Float`; `em` → `Float`; duraciones → `Int` en ms.
 - **Se omite el CSS puro**: `solid`, `center`, `pointer`, porcentajes, `vw`/`vh`, `min()`/`max()`/`clamp()`… (p. ej.
   `sheet.inline-size`, `sheet.block-size`, `modal.max-height`): el componente los resuelve con lo que SwiftUI ofrece y
   la ficha anota el valor copiado.
@@ -272,6 +281,126 @@ Intents de `Toast`: `default`, `success`, `error`, `warning`, `info` y `loading`
 `BrandDialogFooter`/`BrandDialogButton` (que apila con la acción principal arriba por debajo de 480 pt) son comunes a los
 tres.
 
+## Componentes de Compose
+
+Todo está en el módulo `brand`; los componentes cuelgan de `com.studiolxd.brand.components.<componente>` y se usan dentro
+de `BrandTheme { … }` (que además garantiza la zona táctil de 48 dp). Siguen a React y a SwiftUI en nombres de props y casos
+(`enum class` con el valor de React en `value`), usan solo tokens y cumplen, por construcción:
+
+- **Estados**: reposo, pulsado, deshabilitado (`enabled`), foco de teclado/DPAD (anillo `focus-ring-*`) y error.
+- **Escala de fuente del sistema**: tamaños en `sp` y alturas que crecen con `fontScale`.
+- **TalkBack**: roles (`Role.Button|Switch|RadioButton|Checkbox|DropdownList`), `heading()`, `error()`, `stateDescription`,
+  regiones vivas en los avisos.
+- **Zona táctil ≥ 48 dp** sin cambiar el aspecto ni la maqueta.
+- **Claro y oscuro** con `BrandTheme(darkTheme = …)` y «quitar animaciones» respetado (`rememberReduceMotion()`) en
+  `Skeleton`, `Sheet` y `Toast`.
+- Los textos que un componente emite por su cuenta son parámetros con el castellano por defecto.
+
+| React | Compose |
+| --- | --- |
+| `Button` | `BrandButton` · `BrandCloseButton` |
+| `Heading`, `Paragraph`, `Text` | `BrandHeading`, `BrandParagraph`, `BrandText` (+ `brandSpanStyle`) |
+| `Icon` | `BrandIcon` |
+| `InputField`, `NumberInputField`, `SelectField` | `BrandInputField`, `BrandNumberInputField`, `BrandSelectField` |
+| `SwitcherField` | `BrandSwitcherField` · `BrandSwitcher` |
+| `ToggleGroup` | `BrandToggleGroup` (+ `Item`) · `BrandToggle` |
+| `ThemeSwitcher` | `BrandThemeSwitcher` |
+| `List` + `ListItem` | `BrandList` + `BrandListItem` |
+| `Tag`, `EmptyState`, `Skeleton` | `BrandTag`, `BrandEmptyState`, `BrandSkeleton` |
+| `Sheet` | `BrandSheet` · `BrandSheetContent` |
+| `ConfirmDialog` | `BrandConfirmDialog` |
+| `Toast` / `Toaster` | `ToastCenter` · `ToastHost` |
+
+Cada componente lleva `@Preview` con todas sus variantes (en claro y oscuro). Las diferencias que se quedan a propósito
+respecto a React y a SwiftUI están en el campo `differences` de cada ficha (líneas «Android: …»).
+
+### Button, texto e iconos
+
+```kotlin
+BrandButton("Guardar", onClick = { save() })
+BrandButton("Eliminar", onClick = { delete() }, variant = ButtonVariant.Outline, destructive = true)
+BrandButton(BrandIconName.Close, contentDescription = "Cerrar", onClick = { dismiss() }, variant = ButtonVariant.Ghost) // iconOnly
+ProvideBrandControlSize(BrandControlSize.Lg) { /* la talla por defecto de los controles del árbol */ }
+
+BrandHeading("Tus viviendas")                                    // h2; TalkBack lo anuncia como encabezado
+BrandHeading("Resumen", level = HeadingLevel.H2, size = HeadingSize.S5)
+BrandParagraph("Revisa los datos.", size = ParagraphSize.Small)
+BrandParagraph(buildAnnotatedString {
+    append("Esta acción "); withStyle(brandSpanStyle(TextElement.Strong, TextTone.Destructive)) { append("borra") }; append(" el curso.")
+})
+BrandIcon(BrandIconName.Search, size = BrandIconSize.Lg, contentDescription = "Buscar")   // sin descripción: decorativo
+```
+
+`BrandIcon` dibuja los mismos 77 iconos que React (`pnpm build:native-icons` genera también `BrandIconData.kt`). En `Text`,
+la prop `as` de React se llama `element` (`as` es palabra reservada en Kotlin).
+
+### Campos de formulario
+
+Estado elevado (`value` / `onValueChange`); etiqueta, ayuda, error y talla comunes.
+
+```kotlin
+BrandInputField("Correo", email, { email = it }, type = InputFieldType.Email, helperText = "Te escribiremos aquí")
+BrandInputField("Buscar", q, { q = it }, labelHidden = true, kind = InputFieldKind.Search, clearable = true)
+BrandNumberInputField("Cantidad", qty, { qty = it }, min = 0.0, max = 99.0)       // −/+; `decimal = true`
+BrandSelectField("Idioma", lang, { lang = it },
+    listOf(BrandSelectEntry.option("es", "Español"), BrandSelectEntry.option("en", "Inglés")))
+BrandSwitcherField("Avisarme por correo", notify, { notify = it }, errorMessage = null)
+BrandToggleGroup(value = plan, onValueChange = { plan = it }, contentDescription = "Plan") {   // exclusivo…
+    Item("Mensual", Plan.Monthly); Item("Anual", Plan.Yearly)
+}
+BrandToggleGroup(filters, { filters = it }, multiple = true) { Item("Pagadas", F.Paid) }        // …o múltiple (conjunto)
+BrandThemeSwitcher(theme, { theme = it }, variant = ThemeSwitcherVariant.List)                  // solo la vista
+```
+
+`BrandSelectField` y `BrandThemeSwitcher` abren un desplegable propio (un `Popup` con los tokens `select.*`): Compose sin
+Material no trae `ExposedDropdownMenu` y la librería no añade dependencias. `InputFieldType.Password` lleva el ojo de
+mostrar/ocultar (`passwordToggle`).
+
+### Listas, etiquetas, estados vacíos y esqueletos
+
+```kotlin
+BrandList(type = ListType.Ordered) { item("Abre la app"); item("Elige tu vivienda") }
+
+// La fila de ajustes (la `ListRow` de Homenize): principal, secundario, accesorio final y separadores de brand
+BrandList(type = ListType.Plain, showSeparators = true) {
+    item {
+        BrandListItem(secondary = { BrandText("Avisos de la comunidad") },
+            trailing = { BrandIcon(BrandIconName.Chevron, size = BrandIconSize.Sm) }, onClick = { open() }) { BrandText("Notificaciones") }
+    }
+}
+BrandTag("Pagado", variant = TagVariant.Success)                                // las diez variantes de React
+BrandEmptyState(title = "Sin viviendas", description = "Añade tu primera vivienda para empezar.",
+    icon = BrandIconName.Folder, action = EmptyStateAction("Añadir vivienda") { add() })
+BrandSkeleton(width = 160.dp)                       // `circle = true` para un avatar; con «quitar animaciones», fondo plano
+```
+
+### Hojas, diálogos de confirmación y avisos
+
+```kotlin
+// Sheet: ventana propia con velo, detents y arrastre; cabecera, aspa y pie de marca. Cancelar primero (regla 10).
+BrandSheet(open = filtros, onDismissRequest = { filtros = false }, title = "Filtros", description = "Afina los resultados",
+    footer = {
+        BrandDialogButton("Cancelar", onClick = { filtros = false }, variant = ButtonVariant.Outline)
+        BrandDialogButton("Aplicar", onClick = { apply(); filtros = false })
+    }) { FilterForm() }
+
+// ConfirmDialog: `onConfirm` es suspend (ocupado mientras corre, se cierra al terminar, sigue abierto si lanza)
+BrandConfirmDialog(open = askDelete, onDismissRequest = { askDelete = false }, title = "¿Eliminar la vivienda?",
+    description = "Se borrarán sus documentos. No se puede deshacer.", confirmLabel = "Eliminar la vivienda",
+    destructive = true, onConfirm = { repository.delete(home) }, onConfirmError = { ToastCenter.shared.error("No se pudo eliminar") })
+// confirmPhrase = BrandConfirmPhrase("Casa del lago", "Escribe «Casa del lago»", "No coincide.")
+
+// Toast: el host se monta una vez en la raíz; los avisos se lanzan desde cualquier sitio.
+Box(Modifier.fillMaxSize()) { App(); ToastHost(position = ToastPosition.BottomRight) }
+ToastCenter.shared.success("Cambios guardados")
+val id = ToastCenter.shared.loading("Subiendo…")
+ToastCenter.shared.error("No se pudo subir", id = id, description = "Revisa la conexión.")   // actualiza en su sitio
+val saved = ToastCenter.shared.promise(loading = "Guardando…", success = { "Guardado" }, error = { "Falló" }) { repo.save() }
+```
+
+`BrandSheet` va sobre `Dialog` de compose-ui con arrastre propio (la librería no depende de Material 3), no sobre
+`ModalBottomSheet`. `BrandDialogFooter`/`BrandDialogButton` apilan con la acción principal arriba por debajo de 480 dp.
+
 ## Fuentes
 
 Las tres familias de la web, como TTF **variables** (el mismo diseño y los mismos ejes que el woff2 de la web), solo con la cara `latin`:
@@ -345,7 +474,7 @@ JDK 21 (Gradle lo localiza solo; con el JDK 26 de la máquina no compilan ni Gra
 6. La comprobación es automática: `pnpm native:parity` (ficha ↔ React) y las pruebas de paridad de cada plataforma
    (ficha ↔ nativo). Ver [parity/README.md](parity/README.md).
 
-Las capturas (swift-snapshot-testing en Apple, Paparazzi en Android) viven junto a las pruebas:
+Las parejas React ↔ plataforma viven en `native/apple/Comparisons/` y `native/android/Comparisons/`. Las capturas (swift-snapshot-testing en Apple, Paparazzi en Android) viven junto a las pruebas:
 `native/apple/Tests/StudiolxdBrandTests/__Snapshots__/` y `native/android/brand/src/test/snapshots/`. Las imágenes son
 **por plataforma**: se regraban con `swift test` (la primera vez graba y falla; la segunda compara) y con
 `./gradlew :brand:recordPaparazziDebug`.
