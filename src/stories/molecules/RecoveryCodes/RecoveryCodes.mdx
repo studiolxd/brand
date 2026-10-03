@@ -53,7 +53,7 @@ numerada.
 
 ## Textos
 
-`labels` no tiene default: los tres campos (`list`, `copy`, `copiado`) son obligatorios.
+`labels` no tiene default: los tres campos (`list`, `copy`, `copied`) son obligatorios. El cuarto, `error`, es opcional: sin él, el aviso de fallo del portapapeles sale de `copy.error` del `BrandMessagesProvider`, y sin ninguno de los dos el componente lanza al fallar la copia.
 Un código de recuperación es una credencial de seguridad y el texto que lo rodea no debe
 quedarse a medio traducir por accidente.
 
@@ -62,6 +62,7 @@ quedarse a medio traducir por accidente.
 | `labels.list` | Nombre accesible de la lista numerada (`aria-label`) |
 | `labels.copy` | Rótulo visible del botón que copia todos los códigos |
 | `labels.copied` | Acuse del botón de copiar, mientras dura |
+| `labels.error` | Opcional. Aviso del botón de copiar si el portapapeles falla |
 
 ## Accesibilidad
 

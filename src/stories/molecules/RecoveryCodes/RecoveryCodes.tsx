@@ -12,6 +12,12 @@ export interface RecoveryCodesLabels {
   copy: string;
   /** Acuse del botón de copiar, mientras dura. */
   copied: string;
+  /**
+   * Aviso del botón de copiar si el portapapeles falla (contexto no seguro,
+   * permiso denegado). Opcional: sin él sale de `copy.error` del
+   * `BrandMessagesProvider`, y sin ninguno de los dos el componente lanza.
+   */
+  error?: string;
 }
 
 export interface RecoveryCodesProps {
@@ -81,6 +87,7 @@ export function RecoveryCodes({
         <CopyButton
           value={() => codes.join('\n')}
           copiedLabel={labels.copied}
+          errorLabel={labels.error}
           variant="outline"
         >
           {labels.copy}

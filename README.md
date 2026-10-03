@@ -11,10 +11,10 @@ y el catálogo de Storybook es su fuente de verdad.
 pnpm add @studiolxd/brand
 ```
 
-El paquete declara como peer dependencies `react` y `react-dom` (>=18) y
-`react-hook-form` (>=7), del que dependen el `Form` y todos los campos que se
-atan a él. `react-email` (>=6) es un peer **opcional**: solo hace falta si se
-consume el subpath `@studiolxd/brand/email`.
+El paquete declara como peer dependencies `react` y `react-dom` (>=18). Hay
+dos peers **opcionales**, que solo hacen falta si se consume el subpath que
+los importa: `react-hook-form` (>=7) para `@studiolxd/brand/form-field`, y
+`react-email` (>=6) para `@studiolxd/brand/email`.
 
 ## Uso
 

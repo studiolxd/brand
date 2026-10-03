@@ -26,6 +26,7 @@ function i({ codes: i, columns: a = 2, labels: o, actions: s, className: c, id: 
 			children: [/* @__PURE__ */ n(t, {
 				value: () => i.join("\n"),
 				copiedLabel: o.copied,
+				errorLabel: o.error,
 				variant: "outline",
 				children: o.copy
 			}), s]

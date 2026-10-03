@@ -55,6 +55,15 @@ describe('RecoveryCodes', () => {
     expect(await screen.findByRole('button', { name: labels.copied })).toBeInTheDocument();
   });
 
+  it('si el portapapeles falla, el aviso usa `labels.error` sin necesitar proveedor', async () => {
+    mockClipboard(vi.fn().mockRejectedValue(new Error('denegado')));
+    render(<RecoveryCodes codes={CODES} labels={{ ...labels, error: 'No se pudo copiar' }} />);
+
+    await userEvent.click(screen.getByRole('button', { name: labels.copy }));
+
+    expect(await screen.findByRole('button', { name: 'No se pudo copiar' })).toBeInTheDocument();
+  });
+
   it('columns por defecto es 2', () => {
     render(<RecoveryCodes codes={CODES} labels={labels} />);
     const list = screen.getByRole('list', { name: labels.list });

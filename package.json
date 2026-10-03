@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "49.17.0",
+  "version": "49.18.0",
   "description": "El sistema de diseño de Studio LXD: componentes React, tokens y documentación de la suite SLXD.",
   "repository": {
     "type": "git",
@@ -955,6 +955,9 @@
   },
   "peerDependenciesMeta": {
     "react-email": {
+      "optional": true
+    },
+    "react-hook-form": {
       "optional": true
     }
   },

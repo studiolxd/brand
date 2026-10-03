@@ -7,6 +7,26 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.18.0] — 2026-10-03
+
+> **Minor.** `RecoveryCodes` deja pasar el aviso de portapapeles roto, y `react-hook-form`
+> pasa a peer opcional.
+
+### `RecoveryCodes` — `labels.error`
+
+- Nueva clave **opcional** `labels.error`: el aviso del botón de copiar cuando el
+  portapapeles falla (contexto no seguro, permiso denegado). Hasta ahora salía solo de
+  `copy.error` del `BrandMessagesProvider`, así que una app que pasara las props sueltas,
+  sin proveedor, lanzaba al fallar la copia (visto en keycloakify-starter al pasar a npm).
+  Sin `labels.error` el comportamiento no cambia.
+
+### `react-hook-form`, peer opcional
+
+- Solo lo importa `@studiolxd/brand/form-field`. Como `react-email`, pasa a
+  `peerDependenciesMeta.optional`: una app que no use ese subpath deja de instalarlo
+  (pnpm con `auto-install-peers` lo traía igualmente). Quien use `form-field` lo sigue
+  necesitando en sus `dependencies`.
+
 ## [49.17.0] — 2026-10-03
 
 > **Minor.** Componente nuevo: `EmbedFrame`, el marco embebido del sistema, y las tres
