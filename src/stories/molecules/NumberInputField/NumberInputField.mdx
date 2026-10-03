@@ -43,6 +43,12 @@ Siempre hay etiqueta (`label`), enlazada por `id`, y **por defecto se ve**. Sin 
 
 <Canvas of={NumberInputFieldStories.Tallas} />
 
+## Compacto y confirmar al salir
+
+`compact` y `commitMode` viajan al control tal cual: el primero lo encoge para una fila de lista (`trailing` de `ListItem`) y el segundo hace que lo escrito a mano se avise una sola vez, al salir del campo o con Enter. Su explicación completa, con las historias, está en la doc de **NumberInput**. En una fila lo normal es `labelHidden` y el nombre accesible en la etiqueta.
+
+<Canvas of={NumberInputFieldStories.CompactoEnFila} />
+
 ## Estados
 
 <Canvas of={NumberInputFieldStories.Deshabilitado} />

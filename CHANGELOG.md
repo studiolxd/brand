@@ -7,6 +7,25 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [Sin publicar]
+
+### NumberInput — confirmar al terminar, compacto y etiquetas tipadas (minor)
+
+Todo opcional y en las tres plataformas a la vez (React, SwiftUI y Compose): sin las props nuevas, el comportamiento y
+el HTML son los de 49.19.0 (pruebas en `NumberInput.test.tsx` y `NumberInputField.test.tsx`).
+
+- **`commitMode: 'change' | 'blur'`** (por defecto `'change'`). Con `'blur'`, lo escrito a mano se avisa **una sola
+  vez**, al salir del campo o con Enter (y solo si cambia el valor); Escape descarta lo escrito y vuelve al último
+  valor. Los botones − y + avisan al momento en los dos modos. Con `onEmpty`, vaciar y confirmar es «sin valor». Motivo:
+  una fila de lista donde cada aviso es una escritura en un servidor. Nativo: `commitMode: .blur` (SwiftUI, al perder el
+  foco o con «intro»; Escape con teclado físico) y `NumberInputCommitMode.Blur` (Compose, al perder el foco o «Hecho»).
+- **`compact`** (booleano). Variante para filas de lista, `trailing` de `ListItem`: 32 de alto, botones de 24 y cifra
+  de 40 de ancho, sin estirarse; manda sobre `size`. En nativo la zona táctil sigue llegando a 44 pt / 48 dp. Tokens
+  nuevos `number-input.compact-*` (`height`, `font-size`, `btn-width`, `field-width`, `padding-inline`).
+- **`decrementLabel` / `incrementLabel`** declaradas en `NumberInputFieldProps` (ya llegaban al control en ejecución
+  pero no estaban en el tipo). En nativo ya existían.
+- Fichas de paridad, capturas y pareja con Storybook (`native/apple/Comparisons/NumberInputField/compacto.*`) al día.
+
 ## [49.19.0] — 2026-10-04
 
 > **Minor.** Primera versión con **Brand nativo**: tokens, fuentes y componentes para SwiftUI (iOS 17 y macOS 14) y

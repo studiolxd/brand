@@ -72,3 +72,22 @@ describe('NumberInputField — sin valor (null)', () => {
     expect(onEmpty).not.toHaveBeenCalled();
   });
 });
+
+describe('NumberInputField — props nuevas', () => {
+  it('commitMode="blur" y compact llegan al control', () => {
+    const onChange = vi.fn();
+    const { container } = render(<NumberInputField id="c" label="Cantidad" defaultValue={1} compact commitMode="blur" onChange={onChange} />);
+    expect(container.querySelector('.number-input--compact')).not.toBeNull();
+    const input = container.querySelector('input')!;
+    fireEvent.change(input, { target: { value: '5' } });
+    expect(onChange).not.toHaveBeenCalled();
+    fireEvent.blur(input);
+    expect(onChange).toHaveBeenCalledWith(5);
+  });
+
+  it('decrementLabel e incrementLabel (declaradas en el tipo) nombran los botones', () => {
+    render(<NumberInputField id="l" label="Cantidad" decrementLabel="Menos" incrementLabel="Más" />);
+    expect(screen.getByRole('button', { name: 'Menos' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Más' })).toBeTruthy();
+  });
+});

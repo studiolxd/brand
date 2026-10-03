@@ -623,6 +623,16 @@ object BrandNumberInputTokens {
     val lgHeight: Dp = 48.dp
     /** Token `number-input.lg-padding-inline` — Padding horizontal — lg */
     val lgPaddingInline: Dp = 24.dp
+    /** Token `number-input.compact-height` — Altura — compacto (fila de lista): la talla mínima del sistema */
+    val compactHeight: Dp = 32.dp
+    /** Token `number-input.compact-font-size` — Font size — compacto */
+    val compactFontSize: TextUnit = 14.sp
+    /** Token `number-input.compact-btn-width` — Ancho de los botones +/− — compacto. En nativo la zona táctil se amplía a 44 pt / 48 dp sin cambiar este ancho */
+    val compactBtnWidth: Dp = 24.dp
+    /** Token `number-input.compact-field-width` — Ancho de la cifra — compacto: lo justo para 2–3 dígitos. El control no se estira */
+    val compactFieldWidth: Dp = 40.dp
+    /** Token `number-input.compact-padding-inline` — Padding horizontal de la cifra — compacto */
+    val compactPaddingInline: Dp = 4.dp
 }
 
 /** Tokens del componente `number-input-field` (`tokens/**/number-input-field.json`). Todo color es un [BrandSchemeValue]: se resuelve con `.current` (los que no tienen par oscuro valen lo mismo en los dos esquemas). */

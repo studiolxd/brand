@@ -41,3 +41,8 @@ $lxd-number-input-sm-padding-inline: 0.75rem; // Padding horizontal — sm
 $lxd-number-input-lg-font-size: 1.25rem; // Font size — lg
 $lxd-number-input-lg-height: 3rem; // Altura — lg
 $lxd-number-input-lg-padding-inline: 1.5rem; // Padding horizontal — lg
+$lxd-number-input-compact-height: 2rem; // Altura — compacto (fila de lista): la talla mínima del sistema
+$lxd-number-input-compact-font-size: 0.875rem; // Font size — compacto
+$lxd-number-input-compact-btn-width: 1.5rem; // Ancho de los botones +/− — compacto. En nativo la zona táctil se amplía a 44 pt / 48 dp sin cambiar este ancho
+$lxd-number-input-compact-field-width: 2.5rem; // Ancho de la cifra — compacto: lo justo para 2–3 dígitos. El control no se estira
+$lxd-number-input-compact-padding-inline: 0.25rem; // Padding horizontal de la cifra — compacto

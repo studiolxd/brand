@@ -7,6 +7,10 @@
   --number-input-btn-bg: transparent; /** Fondo de los botones */
   --number-input-btn-width: var(--spacing-6); /** Ancho de los botones +/− */
   --number-input-disabled-cursor: var(--input-disabled-cursor); /** Cursor cuando deshabilitado */
+  --number-input-compact-height: var(--size-component-sm); /** Altura — compacto (fila de lista): la talla mínima del sistema */
+  --number-input-compact-btn-width: var(--spacing-5); /** Ancho de los botones +/− — compacto. En nativo la zona táctil se amplía a 44 pt / 48 dp sin cambiar este ancho */
+  --number-input-compact-field-width: var(--size-component-md); /** Ancho de la cifra — compacto: lo justo para 2–3 dígitos. El control no se estira */
+  --number-input-compact-padding-inline: var(--spacing-1); /** Padding horizontal de la cifra — compacto */
   --number-input-bg: var(--input-bg); /** Fondo del contenedor */
   --number-input-font-family: var(--input-font-family); /** Font family */
   --number-input-font-size: var(--input-font-size); /** Font size */
@@ -24,6 +28,7 @@
   --number-input-lg-font-size: var(--input-lg-font-size); /** Font size — lg */
   --number-input-lg-height: var(--input-lg-height); /** Altura — lg */
   --number-input-lg-padding-inline: var(--input-lg-padding-inline); /** Padding horizontal — lg */
+  --number-input-compact-font-size: var(--input-sm-font-size); /** Font size — compacto */
   --number-input-border-radius: var(--input-border-radius); /** Border radius del contenedor */
   --number-input-border-width: var(--input-border-width); /** Grosor del borde */
   --number-input-border-color: var(--input-border-color); /** Color del borde */

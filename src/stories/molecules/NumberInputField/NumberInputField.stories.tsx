@@ -45,6 +45,12 @@ export const SinValor: Story = {
   args: { defaultValue: null, placeholder: 'Sin indicar', helperText: 'Déjalo vacío si no lo sabes.', onEmpty: () => {} },
 };
 
+/** `compact` + `commitMode="blur"` + `labelHidden`: la cantidad de una fila de lista. */
+export const CompactoEnFila: Story = {
+  name: 'Compacto en fila',
+  args: { label: 'Cantidad de leche', labelHidden: true, compact: true, commitMode: 'blur', defaultValue: 2, min: 0, max: 99 },
+};
+
 export const Deshabilitado: Story = { args: { disabled: true } };
 
 export const EtiquetaOculta: Story = { args: { labelHidden: true } };

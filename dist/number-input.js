@@ -5,47 +5,56 @@ import { Icon as t } from "./icon.js";
 import { forwardRef as n, useCallback as r, useState as i } from "react";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/atoms/NumberInput/NumberInput.tsx
-var s = n(function({ value: n, defaultValue: s = 0, min: c, max: l, step: u = 1, decimal: d = !1, disabled: f = !1, readOnly: p = !1, size: m = "md", error: h = !1, id: g, name: _, describedBy: v, ariaLabel: y, decrementLabel: b, incrementLabel: x, className: S, onChange: C, onEmpty: w, onBlur: T, onFocus: E, ...D }, O) {
-	let k = e("numberInput"), A = n !== void 0, [j, M] = i(s), [N, P] = i(!1), [F, I] = i(null), L = A ? n : j, R = F === null ? L === null ? "" : String(L) : F, z = L ?? 0, B = r((e) => {
+var s = n(function({ value: n, defaultValue: s = 0, min: c, max: l, step: u = 1, decimal: d = !1, disabled: f = !1, readOnly: p = !1, size: m = "md", compact: h = !1, commitMode: g = "change", error: _ = !1, id: v, name: y, describedBy: b, ariaLabel: x, decrementLabel: S, incrementLabel: C, className: w, onChange: T, onEmpty: E, onBlur: D, onFocus: O, onKeyDown: k, ...A }, j) {
+	let M = e("numberInput"), N = n !== void 0, [P, F] = i(s), [I, L] = i(!1), [R, z] = i(null), B = N ? n : P, V = R === null ? B === null ? "" : String(B) : R, H = B ?? 0, U = r((e) => {
 		let t = e;
 		return c !== void 0 && (t = Math.max(c, t)), l !== void 0 && (t = Math.min(l, t)), t;
-	}, [c, l]), V = r((e) => {
-		let t = B(e);
-		A || M(t), C?.(t);
+	}, [c, l]), W = r((e) => {
+		let t = U(e);
+		N || F(t), T?.(t);
 	}, [
-		B,
-		A,
-		C
-	]), H = () => {
-		f || p || (I(null), V(z - u));
-	}, U = () => {
-		f || p || (I(null), V(z + u));
-	}, W = (e) => {
+		U,
+		N,
+		T
+	]), G = () => {
+		f || p || (z(null), W(H - u));
+	}, K = () => {
+		f || p || (z(null), W(H + u));
+	}, q = (e) => {
+		let t = d ? e.replace(",", ".") : e, n = parseFloat(t);
+		if (!isNaN(n)) {
+			if (g === "blur" && U(n) === B) return;
+			W(n);
+		} else if (E && e.trim() === "") {
+			if (g === "blur" && B === null) return;
+			N || F(null), E();
+		}
+	}, J = (e) => {
 		let t = e.target.value;
-		I(t);
-		let n = d ? t.replace(",", ".") : t, r = parseFloat(n);
-		isNaN(r) ? w && t.trim() === "" && (A || M(null), w()) : V(r);
-	}, G = (e) => {
-		P(!0), E?.(e);
-	}, K = (e) => {
-		P(!1), I(null), T?.(e);
-	}, q = [
+		z(t), g === "change" && q(t);
+	}, Y = (e) => {
+		k?.(e), !(e.defaultPrevented || g !== "blur" || R === null) && (e.key === "Enter" ? (q(R), z(null)) : e.key === "Escape" && (e.preventDefault(), z(null)));
+	}, X = (e) => {
+		L(!0), O?.(e);
+	}, Z = (e) => {
+		L(!1), g === "blur" && R !== null && q(R), z(null), D?.(e);
+	}, Q = [
 		"number-input",
-		m === "md" ? "" : `number-input--${m}`,
-		h ? "number-input--error" : "",
+		h ? "number-input--compact" : m === "md" ? "" : `number-input--${m}`,
+		_ ? "number-input--error" : "",
 		f ? "number-input--disabled" : "",
-		N ? "number-input--focused" : "",
-		S ?? ""
-	].filter(Boolean).join(" "), J = f || p || L !== null && c !== void 0 && L <= c, Y = f || p || L !== null && l !== void 0 && L >= l;
+		I ? "number-input--focused" : "",
+		w ?? ""
+	].filter(Boolean).join(" "), $ = f || p || B !== null && c !== void 0 && B <= c, ee = f || p || B !== null && l !== void 0 && B >= l;
 	return /* @__PURE__ */ o("div", {
-		className: q,
+		className: Q,
 		children: [
 			/* @__PURE__ */ a("button", {
 				className: "number-input__btn number-input__btn--decrement",
 				type: "button",
-				onClick: H,
-				disabled: J,
-				"aria-label": k("decrement", b),
+				onClick: G,
+				disabled: $,
+				"aria-label": M("decrement", S),
 				tabIndex: -1,
 				children: /* @__PURE__ */ a(t, {
 					name: "minus",
@@ -53,30 +62,31 @@ var s = n(function({ value: n, defaultValue: s = 0, min: c, max: l, step: u = 1,
 				})
 			}),
 			/* @__PURE__ */ a("input", {
-				ref: O,
+				ref: j,
 				className: "number-input__field",
 				type: "text",
 				inputMode: d ? "decimal" : "numeric",
 				pattern: d ? "[0-9]*[.,]?[0-9]*" : "[0-9]*",
-				"aria-invalid": h || void 0,
-				"aria-describedby": v,
-				"aria-label": y,
-				...D,
-				id: g,
-				name: _,
-				value: R,
+				"aria-invalid": _ || void 0,
+				"aria-describedby": b,
+				"aria-label": x,
+				...A,
+				id: v,
+				name: y,
+				value: V,
 				disabled: f,
 				readOnly: p,
-				onChange: W,
-				onFocus: G,
-				onBlur: K
+				onChange: J,
+				onKeyDown: Y,
+				onFocus: X,
+				onBlur: Z
 			}),
 			/* @__PURE__ */ a("button", {
 				className: "number-input__btn number-input__btn--increment",
 				type: "button",
-				onClick: U,
-				disabled: Y,
-				"aria-label": k("increment", x),
+				onClick: K,
+				disabled: ee,
+				"aria-label": M("increment", C),
 				tabIndex: -1,
 				children: /* @__PURE__ */ a(t, {
 					name: "plus",
