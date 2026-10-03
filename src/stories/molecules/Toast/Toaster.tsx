@@ -79,20 +79,30 @@ const VARIANT_CLASS: Record<string, string> = {
 };
 
 /**
- * El relleno del aviso es oscuro salvo en `warning`, que es el amarillo del rol
- * con tinta prusia encima: la raíz se declara superficie oscura para que lo que
- * se componga dentro —el aspa, el botón de acción— tome su cara clara, y el
- * aviso queda fuera porque ahí la superficie es clara. Mismo criterio del
- * `Alert`.
+ * La superficie del relleno, como en el `Alert`. `success` y `error` son
+ * rellenos saturados con la misma cara en las dos superficies: la raíz declara
+ * `.surface-dark` y el aspa y el botón de acción leen con tinta clara. El
+ * neutro NO puede declararla en la raíz —sus tokens sí voltean con el tema, y
+ * el selector sobre la propia raíz le daría el relleno de la otra cara: blanco
+ * incluso sobre página clara—, así que su cara va en el contenido y en el aspa:
+ * `.surface-invert`, la contraria a la ambiente (prusia sobre página clara,
+ * blanco sobre oscura). `warning` es el amarillo con tinta prusia en las dos:
+ * `.surface-light`.
  */
 function toastClasses(type: string | undefined, dismissible: boolean) {
   return [
     'alert',
     VARIANT_CLASS[type ?? ''] ?? '',
-    type !== 'warning' ? 'surface-dark' : '',
+    type === 'success' || type === 'error' ? 'surface-dark' : '',
     dismissible ? 'alert--dismissible' : '',
     'toast',
   ].filter(Boolean).join(' ');
+}
+
+/** Superficie interior (contenido y aspa) que le toca a cada tipo de aviso. */
+function interiorSurface(type: string | undefined) {
+  if (type === 'success' || type === 'error') return '';
+  return type === 'warning' ? ' surface-light' : ' surface-invert';
 }
 
 interface ToastListProps extends Required<Pick<ToasterProps, 'position' | 'closeButton' | 'gap'>> {
@@ -137,14 +147,14 @@ function ToastList({ position, containerAriaLabel, closeLabel, closeButton, gap,
             toast={item}
             className={toastClasses(item.type, closeButton)}
           >
-            <div className="alert__content">
+            <div className={`alert__content${interiorSurface(item.type)}`}>
               <Toast.Title className="alert__title" />
               <Toast.Description className="alert__description" />
               <Toast.Action className="toast__action" render={<Button variant="ghost" size="sm" />} />
             </div>
             {closeButton && (
               <Toast.Close
-                className="alert__close"
+                className={`alert__close${interiorSurface(item.type)}`}
                 render={<CloseButton label={t('close', closeLabel)} />}
               />
             )}

@@ -157,3 +157,31 @@ describe('Toaster', () => {
     });
   });
 });
+
+describe('Toaster — superficie de cada tipo', () => {
+  const casos: Array<[string, () => void, string, string]> = [
+    ['neutro', () => toast('Neutro'), '', ' surface-invert'],
+    ['info', () => toast.info('Info'), '', ' surface-invert'],
+    ['loading', () => toast.loading('Cargando'), '', ' surface-invert'],
+    ['success', () => toast.success('Éxito'), 'surface-dark', ''],
+    ['error', () => toast.error('Error'), 'surface-dark', ''],
+    ['warning', () => toast.warning('Aviso'), '', ' surface-light'],
+  ];
+
+  it.each(casos)('%s: la raíz y el interior declaran la superficie que toca', async (_n, lanzador, raiz, interior) => {
+    render(<Toaster />);
+    lanzar(lanzador);
+    await waitFor(() => expect(tarjetas().length).toBeGreaterThan(0));
+    const tarjeta = tarjetas()[0];
+    expect(tarjeta.classList.contains('surface-dark')).toBe(raiz === 'surface-dark');
+    // El neutro no puede llevar `.surface-dark` en la raíz: sus tokens voltean con
+    // el tema y se pintaría blanco también sobre página clara, con el aspa blanca.
+    const sup = interior.trim();
+    for (const el of [tarjeta.querySelector('.alert__content'), tarjeta.querySelector('.alert__close')]) {
+      for (const clase of ['surface-invert', 'surface-light']) {
+        expect(el?.classList.contains(clase)).toBe(sup === clase);
+      }
+    }
+    lanzar(() => toast.dismiss());
+  });
+});
