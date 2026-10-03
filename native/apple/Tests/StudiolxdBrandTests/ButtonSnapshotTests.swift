@@ -44,7 +44,7 @@ final class ButtonSnapshotTests: XCTestCase {
         for variant in [ButtonVariant.primary, .outline] {
             let view = HStack(alignment: .center, spacing: BrandSpacing.s4) {
                 ForEach(ButtonSize.allCases, id: \.self) { size in
-                    BrandButton(variant: variant, size: size, action: {}) { Text(size.rawValue.uppercased()) }
+                    BrandButton(variant: variant, size: size, action: {}) { Text(size == .sm ? "Small" : size == .md ? "Medium" : "Large") }
                 }
             }
             assertBrandSnapshots(view, width: 360, height: 72, named: "sizes-\(variant.rawValue)")
