@@ -12,6 +12,13 @@ export interface ScrollAreaProps extends Omit<React.ComponentPropsWithoutRef<typ
      * que decir de qué es; sin él el lector solo anuncia «región desplazable».
      */
     label?: string;
+    /**
+     * Ocupa el alto que dejan sus hermanos en una columna con alto (`Stack fill`,
+     * la celda estirada de `Columns`), en vez de medirlo quien lo usa. Desde
+     * `md`; por debajo mide su contenido, porque ahí la columna ya no tiene alto
+     * propio (en móvil `Columns` apila).
+     */
+    fill?: boolean;
     children: ReactNode;
     /** Se añade DESPUÉS de las clases propias. */
     className?: string;
@@ -21,8 +28,8 @@ export interface ScrollAreaProps extends Omit<React.ComponentPropsWithoutRef<typ
  * Area): la lista de un panel lateral, el resultado largo de una consulta, el
  * lienzo de un editor.
  *
- * **El alto lo pone quien lo usa** (`className` o el contenedor): el componente
- * no decide cuánto mide el hueco, solo cómo se desplaza dentro.
+ * **El alto lo pone quien lo usa** (`className`, el contenedor o `fill`): el
+ * componente no decide cuánto mide el hueco, solo cómo se desplaza dentro.
  *
  * Base UI hace la zona alcanzable con el teclado cuando de verdad hay
  * desplazamiento, y la barra aparece al usarla.

@@ -17,63 +17,63 @@ function p() {
 		return n(), e.addEventListener("change", n), () => e.removeEventListener("change", n);
 	}, []), e;
 }
-function m({ banner: i, header: f, sidebar: m, children: h, defaultSidebar: g = "open", sidebarState: _, onSidebarChange: v, defaultSidebarWidth: y, onSidebarWidthChange: b, skipLabel: x }) {
-	let S = e("appShell"), C = p(), [w, T] = l(g), [E, D] = l(!1), [O, k] = l(y), A = C ? _ ?? w : E ? "open" : "closed", j = o((e) => {
-		C ? (T(e), v?.(e)) : D(e === "open");
-	}, [C, v]), M = o(() => j(A === "open" ? "closed" : "open"), [j, A]), N = o(() => j("closed"), [j]), P = o((e) => {
-		k(e), b?.(e);
-	}, [b]);
+function m({ banner: i, header: f, sidebar: m, children: h, contentFlush: g = !1, defaultSidebar: _ = "open", sidebarState: v, onSidebarChange: y, defaultSidebarWidth: b, onSidebarWidthChange: x, skipLabel: S }) {
+	let C = e("appShell"), w = p(), [T, E] = l(_), [D, O] = l(!1), [k, A] = l(b), j = w ? v ?? T : D ? "open" : "closed", M = o((e) => {
+		w ? (E(e), y?.(e)) : O(e === "open");
+	}, [w, y]), N = o(() => M(j === "open" ? "closed" : "open"), [M, j]), P = o(() => M("closed"), [M]), F = o((e) => {
+		A(e), x?.(e);
+	}, [x]);
 	s(() => {
-		if (C || !E) return;
+		if (w || !D) return;
 		let e = (e) => {
-			e.key === "Escape" && D(!1);
+			e.key === "Escape" && O(!1);
 		};
 		document.addEventListener("keydown", e);
 		let t = document.body.style.overflow;
 		return document.body.style.overflow = "hidden", () => {
 			document.removeEventListener("keydown", e), document.body.style.overflow = t;
 		};
-	}, [C, E]);
-	let F = c(() => ({
-		sidebar: A,
-		setSidebar: j,
-		sidebarWidth: O ?? 0,
-		setSidebarWidth: P,
-		toggleSidebar: M,
-		closeSidebar: N,
-		isDesktop: C
+	}, [w, D]);
+	let I = c(() => ({
+		sidebar: j,
+		setSidebar: M,
+		sidebarWidth: k ?? 0,
+		setSidebarWidth: F,
+		toggleSidebar: N,
+		closeSidebar: P,
+		isDesktop: w
 	}), [
-		A,
 		j,
-		O,
-		P,
 		M,
+		k,
+		F,
 		N,
-		C
-	]), [I, L] = l(0), R = o((e) => {
+		P,
+		w
+	]), [L, R] = l(0), z = o((e) => {
 		if (!e) return;
-		let t = () => L(e.getBoundingClientRect().height);
+		let t = () => R(e.getBoundingClientRect().height);
 		if (t(), typeof ResizeObserver > "u") return;
 		let n = new ResizeObserver(t);
 		return n.observe(e), () => {
-			n.disconnect(), L(0);
+			n.disconnect(), R(0);
 		};
-	}, []), z = n({
-		"--app-shell-sidebar-width": O ? `${O}px` : void 0,
-		"--app-shell-banner-height": i ? `${I}px` : void 0
-	}), B = !C && E;
+	}, []), B = n({
+		"--app-shell-sidebar-width": k ? `${k}px` : void 0,
+		"--app-shell-banner-height": i ? `${L}px` : void 0
+	}), V = !w && D;
 	return /* @__PURE__ */ u(a.Provider, {
-		value: F,
+		value: I,
 		children: /* @__PURE__ */ d(r, { children: [/* @__PURE__ */ u(t, {
 			href: "#main-content",
-			children: S("skipToContent", x)
+			children: C("skipToContent", S)
 		}), /* @__PURE__ */ d("div", {
-			ref: z,
+			ref: B,
 			className: "app-shell",
-			"data-sidebar": A,
+			"data-sidebar": j,
 			children: [
 				i && /* @__PURE__ */ u("div", {
-					ref: R,
+					ref: z,
 					className: "app-shell__banner",
 					children: i
 				}),
@@ -82,16 +82,16 @@ function m({ banner: i, header: f, sidebar: m, children: h, defaultSidebar: g = 
 					className: "app-shell__body",
 					children: [
 						m,
-						B && /* @__PURE__ */ u("div", {
+						V && /* @__PURE__ */ u("div", {
 							className: "app-shell__backdrop",
-							onClick: N,
+							onClick: P,
 							"aria-hidden": "true"
 						}),
 						/* @__PURE__ */ u("main", {
 							id: "main-content",
 							tabIndex: -1,
-							className: "app-shell__content",
-							inert: B || void 0,
+							className: g ? "app-shell__content app-shell__content--flush" : "app-shell__content",
+							inert: V || void 0,
 							children: h
 						})
 					]

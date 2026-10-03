@@ -2,12 +2,16 @@ import './embed-frame.css';
 import { forwardRef as e } from "react";
 import { jsx as t } from "react/jsx-runtime";
 //#region src/stories/atoms/EmbedFrame/EmbedFrame.tsx
-var n = e(function({ title: e, className: n, ...r }, i) {
+var n = e(function({ title: e, fill: n = "container", className: r, ...i }, a) {
 	return /* @__PURE__ */ t("iframe", {
-		ref: i,
-		className: ["embed-frame", n].filter(Boolean).join(" "),
+		ref: a,
+		className: [
+			"embed-frame",
+			n === "viewport" ? "embed-frame--viewport" : "",
+			r
+		].filter(Boolean).join(" "),
 		title: e,
-		...r
+		...i
 	});
 });
 //#endregion

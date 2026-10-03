@@ -23,6 +23,12 @@ export interface StackProps extends React.ComponentPropsWithoutRef<'div'> {
      * (un enlace de vuelta sobre la cabecera).
      */
     mobileOrder?: 'normal' | 'reverse';
+    /**
+     * Ocupa el alto de su contenedor. Con él, la pila es una columna con alto y
+     * una pieza que crece (`EmbedFrame`, `ScrollArea fill`) se queda con lo que
+     * dejan las demás. Para la raíz del contenido de `AppShell`.
+     */
+    fill?: boolean;
     children: ReactNode;
     /** Se añade DESPUÉS de las clases propias. */
     className?: string;
@@ -36,4 +42,4 @@ export interface StackProps extends React.ComponentPropsWithoutRef<'div'> {
  * pila puede ser el grupo con nombre accesible que pide un formulario sin
  * tener que envolverla en un elemento nativo aparte.
  */
-export declare function Stack({ gap, align, mobileOrder, children, className, ...rest }: StackProps): import("react/jsx-runtime").JSX.Element;
+export declare function Stack({ gap, align, mobileOrder, fill, children, className, ...rest }: StackProps): import("react/jsx-runtime").JSX.Element;
