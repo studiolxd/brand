@@ -78,5 +78,12 @@
       "prop": "className",
       "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
     }
+  ],
+  "differences": [
+    "El anillo de foco solo aparece con teclado (macOS con acceso total al teclado, iPad con teclado físico): en iOS táctil no hay foco visible, como en cualquier control nativo.",
+    "En iOS la zona táctil llega a 44 pt aunque el botón sm mida 32 (`brandHitTarget`, guías HIG); el aspecto y la maqueta no cambian.",
+    "La altura y el tamaño de letra crecen con el tipo dinámico (`@ScaledMetric`); en la web son fijos.",
+    "`block: 'mobile'` no existe en nativo: depende de un punto de ruptura de la web; en nativo `block` es solo `true`/`false`.",
+    "El hover es el del puntero (macOS, iPad con ratón); en iPhone solo hay reposo, pulsado y deshabilitado."
   ]
 }

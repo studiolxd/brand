@@ -81,6 +81,11 @@
         ]
       }
     },
+    "differences": {
+      "description": "Diferencias que se quedan A PROPÓSITO respecto a la versión de React (límites de SwiftUI/Compose, convenciones de la plataforma), una frase cada una. Lo que no se pueda igualar se aproxima y se explica aquí.",
+      "type": "array",
+      "items": { "type": "string", "minLength": 10 }
+    },
     "excluded": {
       "description": "Props propias del componente de React que NO se portan, cada una con su porqué.",
       "type": "array",

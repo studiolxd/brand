@@ -1,5 +1,3 @@
-import StudiolxdBrand
-
 /// Lo que cada componente nativo expone, por componente y por prop: los valores de sus enums.
 ///
 /// Es la mitad nativa de la paridad con React (ver `native/parity/README.md`). Al portar un componente se añade
@@ -15,21 +13,7 @@ import StudiolxdBrand
 ///
 /// El enum es `enum ButtonVariant: String, CaseIterable` y cada caso lleva como `rawValue` exactamente el valor de
 /// React (`case primary = "primary"`, `case iconOnly = "icon-only"`).
+/// Se compone con las entradas de cada grupo de componentes (`Parity+<Grupo>.swift`): así cada grupo toca solo su fichero.
 let parityRegistry: [String: [String: [String]]] = [
-    "Button": [
-        "variant": ButtonVariant.allCases.map(\.rawValue),
-        "tone": ButtonTone.allCases.map(\.rawValue),
-        "size": ButtonSize.allCases.map(\.rawValue),
-    ],
-    "Heading": [
-        "level": HeadingLevel.allCases.map { String($0.rawValue) },
-        "size": HeadingSize.allCases.map { String($0.rawValue) },
-    ],
-    "Paragraph": [
-        "size": ParagraphSize.allCases.map(\.rawValue),
-    ],
-    "Text": [
-        "as": TextElement.allCases.map(\.rawValue),
-        "tone": TextTone.allCases.map(\.rawValue),
-    ],
-]
+    coreParity, formsParity, togglesParity, listsParity, overlaysParity,
+].reduce(into: [:]) { registry, entries in registry.merge(entries) { current, _ in current } }
