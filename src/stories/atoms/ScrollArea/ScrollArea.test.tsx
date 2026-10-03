@@ -27,6 +27,16 @@ describe('ScrollArea', () => {
   // La esquina de Base UI solo se monta con overlape real medido (ResizeObserver
   // de verdad), que jsdom no ofrece — no verificable aquí, sí en Storybook/navegador.
 
+  it('sin fill no lleva la clase scroll-area--fill', () => {
+    const { container } = render(<ScrollArea>contenido</ScrollArea>);
+    expect(container.firstElementChild).not.toHaveClass('scroll-area--fill');
+  });
+
+  it('con fill lleva la clase scroll-area--fill', () => {
+    const { container } = render(<ScrollArea fill>contenido</ScrollArea>);
+    expect(container.firstElementChild).toHaveClass('scroll-area', 'scroll-area--fill');
+  });
+
   it('className se añade a las clases propias', () => {
     const { container } = render(<ScrollArea className="panel">contenido</ScrollArea>);
     expect(container.firstElementChild).toHaveClass('scroll-area', 'panel');

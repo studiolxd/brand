@@ -19,8 +19,20 @@ del navegador (rueda, gesto, teclado).
 ## El alto no lo pone el componente
 
 `ScrollArea` no decide cuánto mide el hueco, solo cómo se desplaza dentro: la
-medida la pone quien lo usa, con `className` o desde el contenedor. Sin una
-altura acotada no hay nada que desplazar.
+medida la pone quien lo usa, con `className`, desde el contenedor o con `fill`.
+Sin una altura acotada no hay nada que desplazar.
+
+### `fill`: el alto que dejan los hermanos
+
+Con `fill`, el área ocupa **el alto que dejan sus hermanos** en una columna
+con alto —un `Stack fill`, la celda estirada de `Columns align="stretch"`—: el
+título y el formulario de un panel de comentarios se quedan quietos y lo que
+se desplaza es la lista de en medio.
+
+Solo actúa **desde `md`**. Por debajo, `Columns` apila y la columna ya no
+tiene alto propio, así que el área mide su contenido y la que se desplaza es
+la página: un panel junto a un marco a ventana completa pasa a ir debajo de
+él, entero. El caso completo, en **Atoms › EmbedFrame**.
 
 ## Orientación
 

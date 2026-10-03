@@ -22,6 +22,15 @@ describe('Stack', () => {
     expect(container.querySelector('.stack')!.className).toBe('stack');
   });
 
+  it('con fill lleva la clase stack--fill', () => {
+    const { container } = render(
+      <Stack fill>
+        <span>a</span>
+      </Stack>
+    );
+    expect(container.querySelector('.stack')!).toHaveClass('stack--fill');
+  });
+
   it('con gap="sm" lleva la clase stack--gap-sm', () => {
     const { container } = render(
       <Stack gap="sm">

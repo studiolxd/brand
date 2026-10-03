@@ -34,6 +34,14 @@ export interface AppShellProps {
   /** La barra lateral: un `Sidebar`. Columna en escritorio, cajón en móvil. */
   sidebar: ReactNode;
   children: ReactNode;
+  /**
+   * Contenido a sangre: sin el relleno de sección del contenido principal, que
+   * llega al borde de la cabecera y de la sidebar. Para lo que trae sus propios
+   * márgenes —un `EmbedFrame` con el reproductor de un curso, cuyos márgenes
+   * son del tema del curso y no del armazón—. Respeta la zona segura del
+   * dispositivo.
+   */
+  contentFlush?: boolean;
   /** Estado inicial de la sidebar en escritorio (en móvil siempre arranca cerrada). */
   defaultSidebar?: SidebarState;
   /** Estado controlado de la sidebar en escritorio. */
@@ -89,6 +97,7 @@ export function AppShell({
   header,
   sidebar,
   children,
+  contentFlush = false,
   defaultSidebar = 'open',
   sidebarState,
   onSidebarChange,
@@ -206,7 +215,7 @@ export function AppShell({
           <div className="app-shell__body">
             {sidebar}
             {drawer && <div className="app-shell__backdrop" onClick={closeSidebar} aria-hidden="true" />}
-            <main id="main-content" tabIndex={-1} className="app-shell__content" inert={drawer || undefined}>
+            <main id="main-content" tabIndex={-1} className={contentFlush ? 'app-shell__content app-shell__content--flush' : 'app-shell__content'} inert={drawer || undefined}>
               {children}
             </main>
           </div>

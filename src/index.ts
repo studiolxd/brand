@@ -39,6 +39,8 @@ export { MenuButton } from './stories/atoms/MenuButton/MenuButton';
 export type { MenuButtonProps } from './stories/atoms/MenuButton/MenuButton';
 export { CloseButton } from './stories/atoms/CloseButton/CloseButton';
 export type { CloseButtonProps } from './stories/atoms/CloseButton/CloseButton';
+export { EmbedFrame } from './stories/atoms/EmbedFrame/EmbedFrame';
+export type { EmbedFrameProps } from './stories/atoms/EmbedFrame/EmbedFrame';
 export { ErrorText } from './stories/atoms/ErrorText/ErrorText';
 export type { ErrorTextProps } from './stories/atoms/ErrorText/ErrorText';
 export { Fieldset } from './stories/atoms/Fieldset/Fieldset';

@@ -45,6 +45,15 @@
   padding-inline-end: max(var(--section-padding-inline), env(safe-area-inset-right));
 }
 
+/* A sangre: sin relleno de sección, pero nunca bajo el bisel ni la barra de
+   inicio del dispositivo — la zona segura se mantiene. */
+.app-shell__content.app-shell__content--flush {
+  padding-block: 0;
+  padding-inline: 0;
+  padding-block-end: env(safe-area-inset-bottom);
+  padding-inline-end: env(safe-area-inset-right);
+}
+
 /* En móvil, la sidebar es un cajón sobre un velo (ver Sidebar.css). */
 .app-shell__backdrop {
   position: fixed;

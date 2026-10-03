@@ -24,6 +24,12 @@ export interface StackProps extends React.ComponentPropsWithoutRef<'div'> {
    * (un enlace de vuelta sobre la cabecera).
    */
   mobileOrder?: 'normal' | 'reverse';
+  /**
+   * Ocupa el alto de su contenedor. Con él, la pila es una columna con alto y
+   * una pieza que crece (`EmbedFrame`, `ScrollArea fill`) se queda con lo que
+   * dejan las demás. Para la raíz del contenido de `AppShell`.
+   */
+  fill?: boolean;
   children: ReactNode;
   /** Se añade DESPUÉS de las clases propias. */
   className?: string;
@@ -38,7 +44,7 @@ export interface StackProps extends React.ComponentPropsWithoutRef<'div'> {
  * pila puede ser el grupo con nombre accesible que pide un formulario sin
  * tener que envolverla en un elemento nativo aparte.
  */
-export function Stack({ gap = 'md', align = 'start', mobileOrder = 'normal', children, className, ...rest }: StackProps) {
-  const classes = ['stack', gap !== 'md' ? `stack--gap-${gap}` : '', align === 'stretch' ? 'stack--align-stretch' : '', mobileOrder === 'reverse' ? 'stack--mobile-reverse' : '', className].filter(Boolean).join(' ');
+export function Stack({ gap = 'md', align = 'start', mobileOrder = 'normal', fill = false, children, className, ...rest }: StackProps) {
+  const classes = ['stack', gap !== 'md' ? `stack--gap-${gap}` : '', align === 'stretch' ? 'stack--align-stretch' : '', mobileOrder === 'reverse' ? 'stack--mobile-reverse' : '', fill ? 'stack--fill' : '', className].filter(Boolean).join(' ');
   return <div className={classes} {...rest}>{children}</div>;
 }

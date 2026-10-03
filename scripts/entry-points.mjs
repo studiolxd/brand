@@ -33,6 +33,7 @@ export const entryPoints = {
   'menu-button':         'src/stories/atoms/MenuButton/MenuButton.tsx',
   'close-button':        'src/stories/atoms/CloseButton/CloseButton.tsx',
   'code':                'src/stories/atoms/Code/Code.tsx',
+  'embed-frame':         'src/stories/atoms/EmbedFrame/EmbedFrame.tsx',
   'error-text':          'src/stories/atoms/ErrorText/ErrorText.tsx',
   'fieldset':            'src/stories/atoms/Fieldset/Fieldset.tsx',
   'figure':              'src/stories/atoms/Figure/Figure.tsx',

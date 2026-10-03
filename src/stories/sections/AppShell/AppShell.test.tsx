@@ -58,3 +58,23 @@ describe('AppShell — banner sin ResizeObserver', () => {
     expect(shell.style.getPropertyValue('--app-shell-banner-height')).toMatch(/px$/);
   });
 });
+
+describe('AppShell — contentFlush', () => {
+  it('por defecto el contenido lleva su relleno: sin clase --flush', () => {
+    render(
+      <AppShell header={<div>Cabecera</div>} sidebar={<div>Sidebar</div>} skipLabel="Saltar al contenido">
+        Contenido
+      </AppShell>,
+    );
+    expect(screen.getByRole('main')).not.toHaveClass('app-shell__content--flush');
+  });
+
+  it('con contentFlush el contenido va a sangre', () => {
+    render(
+      <AppShell contentFlush header={<div>Cabecera</div>} sidebar={<div>Sidebar</div>} skipLabel="Saltar al contenido">
+        Contenido
+      </AppShell>,
+    );
+    expect(screen.getByRole('main')).toHaveClass('app-shell__content', 'app-shell__content--flush');
+  });
+});

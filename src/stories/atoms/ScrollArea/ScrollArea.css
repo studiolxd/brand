@@ -3,6 +3,16 @@
   overflow: hidden;
 }
 
+/* El alto que dejan los hermanos en una columna con alto. Solo desde md: por
+   debajo, `Columns` apila y la columna ya no tiene alto propio, así que crecer
+   desde cero dejaría el área a 0px; ahí mide su contenido. */
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .scroll-area.scroll-area--fill {
+    flex: 1 1 0;
+    min-block-size: 0;
+  }
+}
+
 .scroll-area__viewport {
   block-size: 100%;
   overscroll-behavior: contain;

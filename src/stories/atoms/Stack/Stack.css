@@ -20,6 +20,13 @@
   align-items: stretch;
 }
 
+/* El alto del contenedor: lo que crece dentro (un marco, un área con
+   desplazamiento) se queda con lo que dejan las demás piezas. */
+.stack.stack--fill {
+  block-size: 100%;
+  min-block-size: 0;
+}
+
 /* En móvil, la última pieza arriba; en escritorio, el orden del JSX. */
 .stack.stack--mobile-reverse {
   flex-direction: column-reverse;
