@@ -1,0 +1,74 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as EmbedFrameStories from "./EmbedFrame.stories";
+
+<Meta of={EmbedFrameStories} />
+
+# EmbedFrame
+
+Un documento dentro de la página: el `<iframe>` del sistema. Se usa cuando lo
+que se pinta tiene que quedar aislado de los estilos de la página que lo
+contiene —el reproductor de un curso, una vista previa—, y la página
+anfitriona solo tiene que colocarlo.
+
+<Canvas of={EmbedFrameStories.PorDefecto} />
+
+```tsx
+import { EmbedFrame } from '@studiolxd/brand/embed-frame';
+
+<EmbedFrame title="Reproductor del curso" src="/player/curso-1" />
+```
+
+## Llena su contenedor
+
+El marco ocupa **todo el ancho y todo el alto de la caja que le dan**, sin
+borde ni fondo propios, y el desplazamiento ocurre **dentro** del documento
+embebido, no en la página. El alto no lo decide el componente: lo pone el
+contenedor. En una columna flexible con alto toma el que dejan sus hermanos.
+
+Como contenido de `AppShell`, esa caja es el contenido principal, que ya mide
+el resto de la ventana bajo la cabecera y junto a la barra lateral:
+
+<Canvas of={EmbedFrameStories.EnElArmazon} />
+
+## Nombre accesible
+
+`title` es **obligatorio**: es lo que anuncia el lector de pantalla al entrar
+en el marco. Dice qué hay dentro («Reproductor del curso»), no que es un marco.
+No es un texto del sistema sino un dato del producto, así que no tiene valor
+por defecto.
+
+## Hablar con el documento embebido
+
+`ref` apunta al `<iframe>`, y de ahí sale `contentWindow` para `postMessage`:
+
+```tsx
+const marco = useRef<HTMLIFrameElement>(null);
+
+<EmbedFrame
+  ref={marco}
+  title="Reproductor del curso"
+  src="/player/curso-1"
+  onLoad={() => marco.current?.contentWindow?.postMessage({ tipo: 'iniciar' }, location.origin)}
+/>
+```
+
+Los atributos nativos del `<iframe>` —`allow`, `sandbox`, `loading`,
+`referrerPolicy`, `name`, `onLoad`, `srcDoc`, `aria-*`, `data-*`— se reenvían
+tal cual. `width`, `height` y `frameBorder` no se aceptan: la medida y el
+borde son del sistema.
+
+## Superficie oscura
+
+El marco no pinta nada propio, así que no cambia: lo que se ve es el
+documento de dentro, que decide su propio tema.
+
+---
+
+## Props
+
+<ArgTypes of={EmbedFrameStories} />
+
+## Tokens
+
+`EmbedFrame` no tiene tokens propios: no lleva color, borde ni medida que
+decidir.

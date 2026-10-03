@@ -1,0 +1,16 @@
+/* El marco llena la caja que le dan: todo el ancho y todo el alto. Sin borde
+   (el `inset` de 2px que el navegador pone a un `<iframe>`) y como bloque,
+   para que no deje bajo él el hueco de la línea de texto que deja un elemento
+   en línea. No pinta fondo: lo que se ve es el documento de dentro.
+
+   En una columna flexible (un `Stack` con alto, la celda estirada de
+   `Columns`) toma el alto que dejan sus hermanos: parte del 100% y encoge lo
+   que ocupan los demás, sin desbordar. */
+.embed-frame {
+  display: block;
+  flex: 1 1 auto;
+  inline-size: 100%;
+  block-size: 100%;
+  min-block-size: 0;
+  border: 0;
+}

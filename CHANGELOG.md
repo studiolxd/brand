@@ -7,6 +7,21 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [Siguiente]
+
+> **Minor.** Componente nuevo: `EmbedFrame`, el marco embebido del sistema.
+
+### `EmbedFrame` — nuevo
+
+- Pinta un `<iframe>` que **llena su contenedor**: todo el ancho y todo el alto, sin
+  borde ni fondo propios; el desplazamiento ocurre dentro del documento embebido. En
+  una columna flexible con alto toma el que dejan sus hermanos.
+- `title` **obligatorio** (nombre accesible del marco), `src`, `ref` al `<iframe>`
+  (para `contentWindow` y `postMessage`) y los atributos nativos (`allow`, `sandbox`,
+  `loading`, `referrerPolicy`, `name`, `onLoad`, `srcDoc`…). No acepta `width`,
+  `height` ni `frameBorder`.
+- Sin tokens propios. Import: `@studiolxd/brand/embed-frame` (también en el barril).
+
 ## [49.16.0] — 2026-10-02
 
 > **Minor.** Los iconos, en una sola familia de tamaño y trazo: todo glifo cabe en el

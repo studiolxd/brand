@@ -398,6 +398,11 @@
       "import": "./dist/hero.js",
       "default": "./dist/hero.js"
     },
+    "./embed-frame": {
+      "types": "./dist/_types/atoms/EmbedFrame/EmbedFrame.d.ts",
+      "import": "./dist/embed-frame.js",
+      "default": "./dist/embed-frame.js"
+    },
     "./error-text": {
       "types": "./dist/_types/atoms/ErrorText/ErrorText.d.ts",
       "import": "./dist/error-text.js",
