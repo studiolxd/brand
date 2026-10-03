@@ -64,3 +64,30 @@ describe('LineBreak', () => {
     expect(container.firstElementChild).toHaveClass('text__break', 'propia');
   });
 });
+
+const html = (el: React.ReactElement) => render(el).container.innerHTML;
+
+describe('Text — HTML sin la prop nueva (idéntico al anterior)', () => {
+  it('span, em, strong y tonos', () => {
+    expect(html(<Text>hola</Text>)).toBe('<span class="text">hola</span>');
+    expect(html(<Text as="em" tone="muted">x</Text>)).toBe('<em class="text text--muted">x</em>');
+    expect(html(<Text as="strong" tone="destructive" lang="en" dir="ltr" className="extra">x</Text>))
+      .toBe('<strong class="text text--destructive extra" lang="en" dir="ltr">x</strong>');
+  });
+});
+
+describe('Text — tachado', () => {
+  it('`strikethrough` añade la clase y no cambia el elemento', () => {
+    expect(html(<Text strikethrough>leche</Text>)).toBe('<span class="text text--strikethrough">leche</span>');
+  });
+
+  it('`del` y `s` son el elemento y van tachados sin la prop', () => {
+    expect(html(<Text as="del">49 €</Text>)).toBe('<del class="text text--strikethrough">49 €</del>');
+    expect(html(<Text as="s">gratis</Text>)).toBe('<s class="text text--strikethrough">gratis</s>');
+  });
+
+  it('con un tono, la clase del tono va después para ganarle el color', () => {
+    expect(html(<Text strikethrough tone="destructive">x</Text>))
+      .toBe('<span class="text text--strikethrough text--destructive">x</span>');
+  });
+});

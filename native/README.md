@@ -489,6 +489,14 @@ JDK 21 (Gradle lo localiza solo; con el JDK 26 de la máquina no compilan ni Gra
 6. La comprobación es automática: `pnpm native:parity` (ficha ↔ React) y las pruebas de paridad de cada plataforma
    (ficha ↔ nativo). Ver [parity/README.md](parity/README.md).
 
+### Candidatos (todavía solo React)
+
+Componentes que existen en React y **no** tienen versión nativa: se portan cuando una app nativa los pida (regla 1).
+
+- **`Autocomplete` / `AutocompleteField`**: campo de texto con sugerencias donde el valor es el texto escrito (se puede
+  elegir una sugerencia o quedarse con un texto libre). En nativo lo más cercano hoy es `BrandInputField` con la lista
+  de sugerencias montada por la app. Si una app lo pide, entra con ficha de paridad, pruebas y capturas.
+
 Las parejas React ↔ plataforma viven en `native/apple/Comparisons/` y `native/android/Comparisons/`. Las capturas (swift-snapshot-testing en Apple, Paparazzi en Android) viven junto a las pruebas:
 `native/apple/Tests/StudiolxdBrandTests/__Snapshots__/` y `native/android/brand/src/test/snapshots/`. Las imágenes son
 **por plataforma**: se regraban con `swift test` (la primera vez graba y falla; la segunda compara) y con

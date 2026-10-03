@@ -1,0 +1,157 @@
+/* ─── Trigger ─────────────────────────────────────────────── */
+.autocomplete {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--autocomplete-content-gap);
+
+  block-size: var(--autocomplete-height);
+  padding-block: 0;
+  padding-inline: var(--autocomplete-padding-inline);
+
+  font-family: var(--autocomplete-font-family);
+  font-size: var(--autocomplete-font-size);
+  line-height: var(--autocomplete-line-height);
+  font-weight: var(--autocomplete-font-weight);
+  color: var(--autocomplete-color);
+  background-color: var(--autocomplete-bg);
+
+  border-width: var(--autocomplete-border-width);
+  border-style: var(--autocomplete-border-style);
+  border-color: var(--autocomplete-border-color);
+  border-radius: var(--autocomplete-border-radius);
+  box-sizing: border-box;
+
+  width: 100%;
+
+  &:focus-within {
+    outline: var(--autocomplete-focus-ring-width) solid var(--autocomplete-focus-ring-color);
+    outline-offset: calc(-1 * (var(--autocomplete-focus-ring-width) + var(--autocomplete-border-width)));
+  }
+}
+
+.autocomplete.autocomplete--disabled {
+  opacity: 0.5;
+  cursor: var(--autocomplete-disabled-cursor);
+  pointer-events: none;
+}
+
+/* ─── Input ───────────────────────────────────────────────── */
+.autocomplete__input {
+  all: unset;
+  flex: 1;
+  min-width: 0;
+  cursor: text;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  color: inherit;
+
+  &::placeholder {
+    color: var(--autocomplete-placeholder-color);
+  }
+
+  &:disabled {
+    cursor: var(--autocomplete-disabled-cursor);
+  }
+}
+
+/* ─── Dropdown ────────────────────────────────────────────── */
+.autocomplete__content {
+  background-color: var(--autocomplete-content-bg);
+  border-width: var(--autocomplete-border-width);
+  border-style: var(--autocomplete-border-style);
+  border-color: var(--autocomplete-content-border-color);
+  min-width: var(--anchor-width);
+  max-height: var(--autocomplete-content-max-height, var(--available-height));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  &[data-side='bottom'] {
+    border-top: none;
+  }
+
+  &[data-side='top'] {
+    border-bottom: none;
+  }
+}
+
+/* ─── Items ───────────────────────────────────────────────── */
+.autocomplete__item {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-block: var(--autocomplete-item-padding-block);
+  padding-inline: var(--autocomplete-padding-inline);
+  font-size: var(--autocomplete-font-size);
+  font-family: var(--autocomplete-font-family);
+  color: var(--autocomplete-color);
+  cursor: pointer;
+
+  /* La opción bajo el puntero o el teclado se rellena con la inversión de
+     marca: excepción declarada de las listas de opciones desplegables
+     (Foundations → Colores). El texto invierte con el relleno. */
+  &:focus-visible,
+  &:hover {
+    background-color: var(--autocomplete-item-highlighted-bg);
+    color: var(--autocomplete-item-highlighted-color);
+  }
+
+  &.autocomplete__item--selected {
+    font-weight: var(--autocomplete-item-selected-font-weight);
+  }
+
+  /* La opción que recorre el teclado (foco virtual): el mismo relleno. */
+  &.autocomplete__item--active {
+    background-color: var(--autocomplete-item-highlighted-bg);
+    color: var(--autocomplete-item-highlighted-color);
+  }
+}
+
+.autocomplete__content .autocomplete__item + .autocomplete__item {
+  border-top: var(--autocomplete-border-width) var(--autocomplete-border-style) var(--autocomplete-content-border-color);
+}
+
+.autocomplete__content[data-side='bottom'] .autocomplete__item:first-child {
+  border-top: var(--autocomplete-border-width) var(--autocomplete-border-style) var(--autocomplete-content-border-color);
+}
+
+.autocomplete__content[data-side='top'] .autocomplete__item:last-child {
+  border-bottom: var(--autocomplete-border-width) var(--autocomplete-border-style) var(--autocomplete-content-border-color);
+}
+
+/* ─── Sm variant ─────────────────────────────────────────────────────────── */
+.autocomplete.autocomplete--sm {
+  font-size: var(--autocomplete-sm-font-size);
+  --autocomplete-height: var(--autocomplete-sm-height);
+  padding-inline: var(--autocomplete-sm-padding-inline);
+}
+
+.autocomplete__content--sm .autocomplete__item {
+  font-size: var(--autocomplete-sm-font-size);
+  padding-block: var(--autocomplete-sm-item-padding-block);
+}
+
+/* ─── Lg variant ─────────────────────────────────────────────────────────── */
+.autocomplete.autocomplete--lg {
+  font-size: var(--autocomplete-lg-font-size);
+  --autocomplete-height: var(--autocomplete-lg-height);
+  padding-inline: var(--autocomplete-lg-padding-inline);
+}
+
+.autocomplete__content--lg .autocomplete__item {
+  font-size: var(--autocomplete-lg-font-size);
+  padding-block: var(--autocomplete-lg-item-padding-block);
+}
+
+/* El z-index va en el Positioner de Base UI (el popup hereda su stacking). */
+.autocomplete__positioner {
+  z-index: var(--autocomplete-content-z-index);
+}
+
+/* Doble clase para ganar sobre el selector base */
+.autocomplete.autocomplete--error {
+  border-color: var(--autocomplete-error-border-color);
+}

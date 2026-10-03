@@ -198,9 +198,10 @@ public struct BrandParagraph: View {
 // MARK: - Text (en línea)
 
 /// `Text` `as`: qué se pinta, que es lo mismo que decir qué significa. `span` no añade significado, `em` marca énfasis
-/// de lectura (cursiva) y `strong` marca importancia (el peso de énfasis del sistema).
+/// de lectura (cursiva), `strong` marca importancia (el peso de énfasis del sistema), `del` lo eliminado y `s` lo que ya
+/// no es relevante: los dos últimos van tachados (SwiftUI no tiene el elemento, solo el aspecto).
 public enum TextElement: String, CaseIterable, Sendable {
-    case span, em, strong
+    case span, em, strong, del, s
 }
 
 /// `Text` `tone`: la intención del fragmento. `destructive` dice que algo se pierde, `success` que salió bien y
@@ -216,19 +217,23 @@ extension Text {
     /// Text("Esta acción ") + Text("borra").brand(.strong, tone: .destructive) + Text(" el curso.")
     /// ```
     ///
+    /// - Parameter strikethrough: tacha el fragmento y lo atenúa (tinta secundaria); con un `tone` manda el del tono.
+    ///   `.del` y `.s` tachan por sí solos. Es solo aspecto: VoiceOver no anuncia un tachado.
     /// - Parameter size: el tamaño de letra del texto que lo rodea (por defecto el del cuerpo, 16 pt). Solo hace falta
     ///   en `.strong`, que cambia el peso del eje `wght` y para eso necesita saber el tamaño: SwiftUI no cambia el peso
     ///   de una fuente variable de CoreText con `fontWeight(_:)`. Crece con el tipo dinámico del sistema.
-    public func brand(_ element: TextElement = .span, tone: TextTone = .default, size: CGFloat = BrandTextTokens.fontSize) -> Text {
+    public func brand(_ element: TextElement = .span, tone: TextTone = .default, size: CGFloat = BrandTextTokens.fontSize, strikethrough: Bool = false) -> Text {
         var text = self
+        let struck = strikethrough || element == .del || element == .s
         switch element {
-        case .span: break
+        case .span, .del, .s: break
         case .em: text = text.italic()
         case .strong:
             text = text.font(Font(brandCTFont(family: BrandFontFamily.sans, size: scaledForDynamicType(size), weight: BrandTextInlineTokens.emphasisFontWeight)))
         }
+        if struck { text = text.strikethrough() }
         switch tone {
-        case .default: return text
+        case .default: return struck ? text.foregroundStyle(BrandTextInlineTokens.strikethroughColor) : text
         case .muted: return text.foregroundStyle(BrandTextInlineTokens.mutedColor)
         case .destructive: return text.foregroundStyle(BrandTextInlineTokens.destructiveColor)
         case .success: return text.foregroundStyle(BrandTextInlineTokens.successColor)
@@ -250,21 +255,24 @@ public struct BrandText: View {
     private let content: Text
     private let element: TextElement
     private let tone: TextTone
+    private let strikethrough: Bool
 
-    public init(_ text: LocalizedStringKey, as element: TextElement = .span, tone: TextTone = .default) {
+    public init(_ text: LocalizedStringKey, as element: TextElement = .span, tone: TextTone = .default, strikethrough: Bool = false) {
         content = Text(text)
         self.element = element
         self.tone = tone
+        self.strikethrough = strikethrough
     }
 
-    public init(verbatim text: String, as element: TextElement = .span, tone: TextTone = .default) {
+    public init(verbatim text: String, as element: TextElement = .span, tone: TextTone = .default, strikethrough: Bool = false) {
         content = Text(verbatim: text)
         self.element = element
         self.tone = tone
+        self.strikethrough = strikethrough
     }
 
     public var body: some View {
-        content.brand(element, tone: tone)
+        content.brand(element, tone: tone, strikethrough: strikethrough)
     }
 }
 

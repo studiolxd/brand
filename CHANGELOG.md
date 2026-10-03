@@ -7,6 +7,40 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [Sin publicar]
+
+> **Minor.** Dos piezas de la primera app web (Homenize): un autocompletado que admite texto libre y el tachado en
+> `Text` (React, SwiftUI y Compose). Todo opcional: sin las props nuevas, el HTML de `Text` es idéntico al anterior.
+
+### React — `Autocomplete` y `AutocompleteField` (minor)
+
+Campo de texto con sugerencias donde **el valor es el texto escrito**: se elige una sugerencia o se queda lo que no
+coincide con ninguna. Componente propio y no una prop de `AsyncSelect` porque el modelo de valor es otro
+(`AsyncSelect` guarda un identificador y pide `selectedOption`; aquí `value` es un `string`).
+
+- **API**: `value`/`defaultValue`/`onValueChange` (texto), `onSelect(option)` (solo al elegir: para saber cuál fue),
+  sugerencias síncronas con `options` (filtradas por el control, sin mayúsculas ni tildes) o síncronas/asíncronas con
+  `onSearch` (con `debounceMs`, descarte de respuestas fuera de orden y `minChars`). `name` y `required` nativos en el
+  propio `<input>`.
+- **Combobox ARIA con lista**: `aria-activedescendant`, `aria-expanded`, `aria-controls` solo con la lista abierta;
+  flechas, Enter (sin sugerencia marcada se queda con lo escrito y deja enviar el formulario), Escape (no sube al
+  `Modal`) y Tab.
+- **Sin texto propio**: sin sugerencias no hay lista ni «sin resultados». No toca el catálogo de mensajes.
+- Misma cara que `AsyncSelect`/`SelectField` por tokens nuevos `autocomplete.*` y `autocomplete-field.*` que apuntan a
+  los de `async-select*` (el par oscuro llega por `surface-dark-derived.css`). Sin `surface-dark-*` propios.
+- Registrados: `entry-points.mjs` (+ `clientComponents`), `package.json › exports` (`./autocomplete`,
+  `./autocomplete-field`) y `src/index.ts`. Historias, docs `.mdx` y pruebas con teclado.
+- Anotado en `native/README.md` como candidato a versión nativa si una app lo pide.
+
+### `Text` — tachado (minor)
+
+- **React**: prop `strikethrough` y `as="del"`/`as="s"` (que tachan por sí solos). Clase nueva `text--strikethrough`,
+  tinta atenuada (`text-inline.strikethrough-color`, la del texto secundario) y grosor del sistema
+  (`text-inline.strikethrough-thickness`); con un `tone` manda el del tono. Sin la prop, el HTML es idéntico
+  (prueba en `Text.test.tsx`).
+- **SwiftUI y Compose**: `strikethrough:` / `TextElement.del` y `.s` en `BrandText` / `Text.brand(…)` /
+  `brandSpanStyle`, con la ficha de paridad al día.
+
 ## [49.19.0] — 2026-10-04
 
 > **Minor.** Primera versión con **Brand nativo**: tokens, fuentes y componentes para SwiftUI (iOS 17 y macOS 14) y

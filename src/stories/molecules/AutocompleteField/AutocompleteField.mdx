@@ -1,0 +1,73 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as AutocompleteFieldStories from "./AutocompleteField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { autocompleteFieldBaseTokens, autocompleteFieldErrorTokens, autocompleteFieldHelperTokens } from "../../../tokens/molecules/autocomplete-field";
+
+<Meta of={AutocompleteFieldStories} />
+
+# AutocompleteField
+
+El `Autocomplete` como campo de formulario: etiqueta, sugerencias mientras se escribe, ayuda y error, con el mismo ritmo que el resto de campos. El valor es **el texto escrito**: se puede elegir una sugerencia o quedarse con lo que no coincide con ninguna. Si lo que hay que guardar es un elemento de la lista, el campo es `SelectField` o `AsyncSelectField`.
+
+La API de sugerencias, de valor y de teclado está en la doc de [`Autocomplete`](?path=/docs/atoms-autocomplete--docs); aquí solo va lo que el campo añade.
+
+<Canvas of={AutocompleteFieldStories.PorDefecto} />
+
+## Etiqueta
+
+Siempre hay etiqueta (`label`), enlazada por `id` al `<input>`, y **por defecto se ve**. Sin `id`, el campo genera uno con `useId`.
+
+<Canvas of={AutocompleteFieldStories.EtiquetaOculta} />
+
+## Ayuda y error
+
+`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados por `aria-describedby`, y el error también por `aria-invalid`.
+
+<Canvas of={AutocompleteFieldStories.ConAyuda} />
+<Canvas of={AutocompleteFieldStories.ConError} />
+
+## Valor
+
+<Canvas of={AutocompleteFieldStories.ConValor} />
+<Canvas of={AutocompleteFieldStories.Controlado} />
+
+## Sugerencias asíncronas
+
+<Canvas of={AutocompleteFieldStories.Asincrono} />
+
+## Tallas
+
+`size` viaja al control: mide 32, 40 o 48. Sin `size`, la del `Form` que lo envuelva.
+
+<Canvas of={AutocompleteFieldStories.Tallas} />
+
+## Estados
+
+<Canvas of={AutocompleteFieldStories.Deshabilitado} />
+
+## Accesibilidad
+
+- La etiqueta va enlazada por `htmlFor`/`id` al `<input>` (`role="combobox"`).
+- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
+- El campo no emite textos propios: etiqueta, ayuda, error y `placeholder` los pasa quien lo usa.
+
+## Tokens
+
+El campo solo aporta el ritmo (`gap`) y los textos de ayuda y error, que apuntan a los de `AsyncSelectField` (y de ahí a `form.*`); el control es el `Autocomplete`.
+
+### Base
+
+<TokenTable tokens={autocompleteFieldBaseTokens} />
+
+### Error
+
+<TokenTable tokens={autocompleteFieldErrorTokens} />
+
+### Texto de ayuda
+
+<TokenTable tokens={autocompleteFieldHelperTokens} />
+
+## Props
+
+<ArgTypes of={AutocompleteFieldStories} />

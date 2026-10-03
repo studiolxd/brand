@@ -18,6 +18,7 @@ export const entryPoints = {
   'accordion':           'src/stories/atoms/Accordion/Accordion.tsx',
   'async-multi-select':  'src/stories/atoms/AsyncMultiSelect/AsyncMultiSelect.tsx',
   'async-select':        'src/stories/atoms/AsyncSelect/AsyncSelect.tsx',
+  'autocomplete':        'src/stories/atoms/Autocomplete/Autocomplete.tsx',
   'arrow':               'src/stories/atoms/Arrow/Arrow.tsx',
   'description-list':    'src/stories/atoms/DescriptionList/DescriptionList.tsx',
   'copyable-value':      'src/stories/atoms/CopyableValue/CopyableValue.tsx',
@@ -85,6 +86,7 @@ export const entryPoints = {
   'banner':                  'src/stories/molecules/Banner/Banner.tsx',
   'async-multi-select-field': 'src/stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField.tsx',
   'async-select-field':  'src/stories/molecules/AsyncSelectField/AsyncSelectField.tsx',
+  'autocomplete-field':  'src/stories/molecules/AutocompleteField/AutocompleteField.tsx',
   'breadcrumb':          'src/stories/molecules/Breadcrumb/Breadcrumb.tsx',
   'pagination':          'src/stories/molecules/Pagination/Pagination.tsx',
   'prev-next-nav':       'src/stories/molecules/PrevNextNav/PrevNextNav.tsx',
@@ -196,7 +198,7 @@ export const entryPoints = {
 
 export const clientComponents = new Set([
   'messages',
-  'alert', 'banner', 'accordion', 'async-multi-select', 'async-multi-select-field', 'async-select', 'async-select-field', 'code-block',
+  'alert', 'banner', 'accordion', 'async-multi-select', 'async-multi-select-field', 'async-select', 'async-select-field', 'autocomplete', 'autocomplete-field', 'code-block',
   'button', 'checkbox', 'radio', 'radio-group', 'switcher', 'menu-button', 'close-button', 'input',
   'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'switcher-field', 'form', 'hero',
   'input-field', 'otp-input', 'otp-field', 'multi-select-field', 'select-field', 'input-phone-field', 'textarea-field', 'dots-button', 'context-menu', 'popover', 'pagination', 'table',

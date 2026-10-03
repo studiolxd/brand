@@ -51,6 +51,22 @@ class TextSnapshotTest {
     @get:Rule
     val paparazzi = brandPaparazzi(400, 400)
 
+    /** El tachado: atenuado, con tono, y `del`/`s` (la story `atoms-text--tachado`). */
+    @Test
+    fun strikethrough() = paparazzi.brandSnapshots {
+        Column(verticalArrangement = Arrangement.spacedBy(BrandSpacing.s4)) {
+            fun frase(antes: String, spans: androidx.compose.ui.text.SpanStyle, tachado: String, despues: String) = buildAnnotatedString {
+                append(antes)
+                withStyle(spans) { append(tachado) }
+                append(despues)
+            }
+            BrandParagraph(frase("En el carrito: ", brandSpanStyle(strikethrough = true), "Leche entera", "."))
+            BrandParagraph(frase("Con intención: ", brandSpanStyle(tone = TextTone.Destructive, strikethrough = true), "cancelado", "."))
+            BrandParagraph(frase("Precio: ", brandSpanStyle(TextElement.Del), "49 €", " 39 €."))
+            BrandParagraph(frase("Ya no aplica: ", brandSpanStyle(TextElement.S), "envío gratis", "."))
+        }
+    }
+
     @Test
     fun elementsAndTones() = paparazzi.brandSnapshots {
         Column(verticalArrangement = Arrangement.spacedBy(BrandSpacing.s2)) {
