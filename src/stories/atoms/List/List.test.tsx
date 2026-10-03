@@ -45,7 +45,7 @@ describe('List y ListItem — HTML sin las props nuevas (idéntico al anterior)'
   });
 
   it('props nuevas explícitamente vacías no cambian nada', () => {
-    expect(html(<List showSeparators={false}><ListItem secondary={null} trailing={undefined}>Uno</ListItem></List>))
+    expect(html(<List showSeparators={false}><ListItem leading={undefined} secondary={null} trailing={undefined}>Uno</ListItem></List>))
       .toBe('<ul class="list list--unordered"><li class="list__item">Uno</li></ul>');
   });
 
@@ -71,6 +71,27 @@ describe('List y ListItem — opciones de fila', () => {
         + '<div class="list__item-secondary">Menor</div></div>'
         + '<div class="list__item-trailing"><i>›</i></div></div></li>',
       );
+  });
+
+  it('leading monta la fila con el accesorio antes del texto', () => {
+    expect(html(<ListItem leading={<i>★</i>}>Principal</ListItem>))
+      .toBe(
+        '<li class="list__item"><div class="list__item-row">'
+        + '<div class="list__item-leading"><i>★</i></div>'
+        + '<div class="list__item-main">Principal</div></div></li>',
+      );
+    expect(html(<ListItem leading="L" secondary="S" trailing="T">P</ListItem>))
+      .toBe(
+        '<li class="list__item"><div class="list__item-row">'
+        + '<div class="list__item-leading">L</div>'
+        + '<div class="list__item-main">P<div class="list__item-secondary">S</div></div>'
+        + '<div class="list__item-trailing">T</div></div></li>',
+      );
+  });
+
+  it('leading vacío no cambia nada', () => {
+    expect(html(<ListItem leading={null}>Uno</ListItem>)).toBe('<li class="list__item">Uno</li>');
+    expect(html(<ListItem leading={false}>Uno</ListItem>)).toBe('<li class="list__item">Uno</li>');
   });
 
   it('solo secondary o solo trailing no pintan el hueco que falta', () => {

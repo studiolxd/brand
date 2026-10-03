@@ -12,6 +12,11 @@ export interface ListItemProps extends React.ComponentPropsWithoutRef<'li'> {
   as?: React.ElementType;
   children?: React.ReactNode;
   /**
+   * Accesorio al principio de la fila: un icono, un avatar. Pareja de
+   * `trailing`; no se encoge ni parte línea y se centra con el bloque de texto.
+   */
+  leading?: React.ReactNode;
+  /**
    * Línea menor bajo el contenido, atenuada y un peldaño por debajo del cuerpo
    * (`text.paragraph.small`): la descripción de una fila de datos o de ajustes.
    */
@@ -71,6 +76,7 @@ export const List = forwardRef<HTMLUListElement & HTMLOListElement, ListProps>(f
  */
 export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(function ListItem({
   as: Element = 'li',
+  leading,
   secondary,
   trailing,
   className,
@@ -79,11 +85,12 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(function ListIt
 }, ref) {
   const classes = ['list__item', className ?? ''].filter(Boolean).join(' ');
   const hasSecondary = secondary !== undefined && secondary !== null && secondary !== false;
+  const hasLeading = leading !== undefined && leading !== null && leading !== false;
   const hasTrailing = trailing !== undefined && trailing !== null && trailing !== false;
 
-  // Sin `secondary` ni `trailing` el ítem es exactamente el de siempre; la
-  // estructura de fila solo aparece cuando se usa.
-  if (!hasSecondary && !hasTrailing) {
+  // Sin `leading`, `secondary` ni `trailing` el ítem es exactamente el de siempre; la
+  // estructura de fila solo aparece cuando se usa (`leading`, `secondary` o `trailing`).
+  if (!hasSecondary && !hasTrailing && !hasLeading) {
     return (
       <Element ref={ref} className={classes} {...rest}>
         {children}
@@ -94,6 +101,7 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(function ListIt
   return (
     <Element ref={ref} className={classes} {...rest}>
       <div className="list__item-row">
+        {hasLeading && <div className="list__item-leading">{leading}</div>}
         <div className="list__item-main">
           {children}
           {hasSecondary && <div className="list__item-secondary">{secondary}</div>}

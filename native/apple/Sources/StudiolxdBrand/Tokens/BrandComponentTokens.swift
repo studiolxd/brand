@@ -1875,3 +1875,35 @@ public enum BrandMenuTokens {
     /// Token `menu.transition-easing` — Easing de transición
     public static let transitionEasing: BrandCubicBezier = BrandCubicBezier(0.25, 0.1, 0.25, 1)
 }
+
+/// Tokens del componente `password-field` (`tokens/**/password-field.json`). Un token con par `surface-dark-*` (o que lo hereda) es un `Color` dinámico.
+public enum BrandPasswordFieldTokens {
+    /// Token `password-field.gap` — Gap entre label, input y mensajes
+    public static let gap: CGFloat = 8
+    /// Token `password-field.toggle-size` — Lado del área clicable del botón toggle: la talla md, la misma que el campo
+    public static let toggleSize: CGFloat = 40
+    /// Token `password-field.toggle-icon-size` — Tamaño del icono del toggle — md (20px, acorde al campo de 40)
+    public static let toggleIconSize: CGFloat = 20
+    /// Token `password-field.sm-toggle-icon-size` — Tamaño del icono del toggle — sm (16px)
+    public static let smToggleIconSize: CGFloat = 16
+    /// Token `password-field.lg-toggle-icon-size` — Tamaño del icono del toggle — lg (24px)
+    public static let lgToggleIconSize: CGFloat = 24
+    /// Token `password-field.toggle-color` — Color del icono toggle: tinta, prusia sobre claro
+    public static let toggleColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+    /// Token `password-field.toggle-color-hover` — Color del icono toggle en hover (sin cambio: la tinta no se atenúa; el foco se marca con el anillo)
+    public static let toggleColorHover: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+    /// Token `password-field.toggle-focus-ring-width` — Grosor del anillo de foco del toggle
+    public static let toggleFocusRingWidth: CGFloat = 2
+    /// Token `password-field.toggle-focus-ring-offset` — Separación del anillo de foco del toggle (se dibuja hacia dentro de la caja: el toggle va a ras del borde del campo)
+    public static let toggleFocusRingOffset: CGFloat = 2
+    /// Token `password-field.toggle-focus-ring-color` — Color del anillo de foco del toggle: la tinta de la superficie
+    public static let toggleFocusRingColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+    /// Token `password-field.sm-toggle-size` — Lado del toggle — sm
+    public static let smToggleSize: CGFloat = 32
+    /// Token `password-field.lg-toggle-size` — Lado del toggle — lg
+    public static let lgToggleSize: CGFloat = 48
+    /// Token `password-field.action-margin-block-start` — Aire extra sobre la acción bajo el campo («¿Olvidaste tu contraseña?»), además del gap del campo
+    public static let actionMarginBlockStart: CGFloat = 8
+    /// Token `password-field.input-padding-inline-end` — Padding derecho del input — el texto termina donde empieza el toggle
+    public static let inputPaddingInlineEnd: CGFloat = 40
+}

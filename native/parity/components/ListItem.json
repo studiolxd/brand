@@ -20,6 +20,10 @@
       "reason": "En SwiftUI el contenido es el `@ViewBuilder content` del inicializador, no una prop."
     },
     {
+      "prop": "leading",
+      "reason": "Es un nodo de React; en SwiftUI es el cierre `@ViewBuilder leading` del inicializador y en Compose el parámetro `leading`."
+    },
+    {
       "prop": "secondary",
       "reason": "Es un nodo de React; en SwiftUI es el cierre `@ViewBuilder secondary` (o el `subtitle` de texto del inicializador de conveniencia)."
     },
@@ -29,7 +33,7 @@
     }
   ],
   "differences": [
-    "`secondary` y `trailing` existen en las tres plataformas. En React el envoltorio de fila (`list__item-row`) solo aparece cuando se usa alguno; en SwiftUI el ítem es siempre una pila.",
-    "Android: `BrandListItem` añade `leading` (accesorio al principio) y `onClick` (fila entera como botón de TalkBack), que piden las listas de ajustes de Android (la `ListRow` de Homenize); no están en React ni en SwiftUI."
+    "`leading`, `secondary` y `trailing` existen en las tres plataformas. En React el envoltorio de fila (`list__item-row`) solo aparece cuando se usa alguno; en SwiftUI y Compose el ítem es siempre una fila.",
+    "`onClick` (fila entera pulsable) es la forma nativa de una fila que se pulsa; en React es `as=\"button\"` (o un enlace dentro del ítem). Existe en SwiftUI (`BrandListItem(action:)`) y en Compose (`onClick`), con la misma semántica: la fila entera es el objetivo, con estado pulsado y rasgo de botón (VoiceOver) o rol de botón (TalkBack). No es una prop de React y por eso no está en `props` ni en `excluded`."
   ]
 }

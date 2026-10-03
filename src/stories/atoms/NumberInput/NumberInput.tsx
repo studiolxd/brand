@@ -16,8 +16,13 @@ export interface NumberInputMessages {
 
 export interface NumberInputProps
   extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue' | 'onChange'> {
-  value?: number;
-  defaultValue?: number;
+  /**
+   * Valor controlado. `null` es «sin valor»: el campo se muestra vacío (y el
+   * `placeholder` se ve). Sigue siendo controlado; `undefined` es no controlado.
+   */
+  value?: number | null;
+  /** Valor inicial no controlado (default `0`). `null` arranca vacío. */
+  defaultValue?: number | null;
   min?: number;
   max?: number;
   step?: number;
@@ -45,6 +50,13 @@ export interface NumberInputProps
    */
   incrementLabel?: string;
   onChange?: (value: number) => void;
+  /**
+   * Se llama cuando quien teclea deja el campo vacío. Sin ella el campo se
+   * comporta como siempre (vaciar no emite nada y al salir recupera el último
+   * número); con ella, vaciar **es** un valor: el campo pasa a «sin valor» y
+   * esta función avisa de ello.
+   */
+  onEmpty?: () => void;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
 }
@@ -74,18 +86,21 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
   incrementLabel,
   className,
   onChange,
+  onEmpty,
   onBlur,
   onFocus,
   ...rest
 }: NumberInputProps, ref) {
   const t = useBrandMessages('numberInput');
   const isControlled = value !== undefined;
-  const [internalValue, setInternalValue] = useState<number>(defaultValue);
+  const [internalValue, setInternalValue] = useState<number | null>(defaultValue);
   const [focused, setFocused] = useState(false);
   const [draft, setDraft] = useState<string | null>(null);
 
   const currentValue = isControlled ? value : internalValue;
-  const displayValue = draft !== null ? draft : String(currentValue);
+  const displayValue = draft !== null ? draft : currentValue === null ? '' : String(currentValue);
+  // Desde «sin valor», los botones cuentan como si el campo valiera 0.
+  const base = currentValue ?? 0;
 
   const clamp = useCallback((n: number) => {
     let result = n;
@@ -103,13 +118,13 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
   const handleDecrement = () => {
     if (disabled || readOnly) return;
     setDraft(null);
-    commit(currentValue - step);
+    commit(base - step);
   };
 
   const handleIncrement = () => {
     if (disabled || readOnly) return;
     setDraft(null);
-    commit(currentValue + step);
+    commit(base + step);
   };
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -118,6 +133,10 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
     const normalized = decimal ? raw.replace(',', '.') : raw;
     const parsed = parseFloat(normalized);
     if (!isNaN(parsed)) commit(parsed);
+    else if (onEmpty && raw.trim() === '') {
+      if (!isControlled) setInternalValue(null);
+      onEmpty();
+    }
   };
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
@@ -140,8 +159,8 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
     className ?? '',
   ].filter(Boolean).join(' ');
 
-  const isDecrementDisabled = disabled || readOnly || (min !== undefined && currentValue <= min);
-  const isIncrementDisabled = disabled || readOnly || (max !== undefined && currentValue >= max);
+  const isDecrementDisabled = disabled || readOnly || (currentValue !== null && min !== undefined && currentValue <= min);
+  const isIncrementDisabled = disabled || readOnly || (currentValue !== null && max !== undefined && currentValue >= max);
 
   return (
     <div className={wrapperClasses}>

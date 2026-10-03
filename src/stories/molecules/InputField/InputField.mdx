@@ -87,6 +87,10 @@ La convención completa está en **Foundations › Internacionalización**.
 <Canvas of={InputFieldStories.ConValor} />
 <Canvas of={InputFieldStories.Deshabilitado} />
 
+## Foco desde fuera
+
+El `ref` llega al `<input>` (también en la búsqueda, donde el `<input>` va dentro de su caja), así que `ref.current?.focus()` lleva el cursor al campo —un atajo de teclado que enfoca el campo de añadir—. Igual en `NumberInputField` y `PasswordField`; en `SelectField` el `ref` es el del botón.
+
 ## Accesibilidad
 
 - La etiqueta va enlazada por `htmlFor`/`id`: `id` es obligatorio.

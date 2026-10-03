@@ -3,10 +3,13 @@ package com.studiolxd.brand
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.studiolxd.brand.components.inputfield.BrandInputField
 import com.studiolxd.brand.components.numberinputfield.BrandNumberInputField
+import com.studiolxd.brand.components.passwordfield.BrandPasswordField
+import com.studiolxd.brand.components.passwordfield.LocalBrandPasswordRevealed
 import com.studiolxd.brand.components.selectfield.BrandSelectEntry
 import com.studiolxd.brand.components.selectfield.BrandSelectField
 import com.studiolxd.brand.components.switcherfield.BrandSwitcherField
@@ -39,6 +42,29 @@ class FieldsComparisonSnapshotTest {
     @Test
     fun numberMinMax() = paparazzi.brandComparison("number-min-max", 256, 130) {
         BrandNumberInputField("Cantidad", 1.0, {}, min = 0.0, max = 10.0, helperText = "Entre 0 y 10.", modifier = Modifier.width(224.dp))
+    }
+
+    @Test
+    fun numberEmpty() = paparazzi.brandComparison("number-vacio", 256, 130) {
+        BrandNumberInputField(
+            "Cantidad", null, {}, placeholder = "Sin indicar", helperText = "Déjalo vacío si no lo sabes.",
+            modifier = Modifier.width(224.dp),
+        )
+    }
+
+    @Test
+    fun passwordDefault() = paparazzi.brandComparison("password-default", 480, 72) {
+        BrandPasswordField("Contraseña", "secreto123", {})
+    }
+
+    @Test
+    fun passwordVisible() = paparazzi.brandComparison("password-visible", 480, 72) {
+        CompositionLocalProvider(LocalBrandPasswordRevealed provides true) { BrandPasswordField("Contraseña", "secreto123", {}) }
+    }
+
+    @Test
+    fun passwordError() = paparazzi.brandComparison("password-error", 480, 130) {
+        BrandPasswordField("Contraseña", "secreto123", {}, labelHidden = false, errorMessage = "La contraseña es incorrecta.")
     }
 
     @Test

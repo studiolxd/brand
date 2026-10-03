@@ -112,7 +112,7 @@ private fun BrandEmptyStateImpl(
                 text = title,
                 modifier = Modifier.semantics { heading() },
                 style = brandTextStyle(
-                    size = if (small) T.titleFontSizeSm.value.sp else T.titleFontSize,
+                    size = if (small) T.titleFontSizeSm else T.titleFontSize,
                     weight = T.titleFontWeight,
                     lineHeight = Text.lineHeight,
                     color = T.titleColor.current,
@@ -122,7 +122,7 @@ private fun BrandEmptyStateImpl(
                 BasicText(
                     text = description,
                     style = brandTextStyle(
-                        size = if (small) T.descriptionFontSizeSm.value.sp else T.descriptionFontSize,
+                        size = if (small) T.descriptionFontSizeSm else T.descriptionFontSize,
                         weight = Text.fontWeight,
                         lineHeight = Text.lineHeight,
                         color = T.descriptionColor.current,

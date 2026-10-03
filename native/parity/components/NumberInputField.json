@@ -12,7 +12,7 @@
   "excluded": [
     { "prop": "id", "reason": "El `id` enlaza la etiqueta con el control en HTML; en SwiftUI el enlace es el nombre accesible que pone el propio campo." },
     { "prop": "label", "reason": "No es una unión ni un booleano: es el primer argumento del inicializador (`BrandNumberInputField(\"Cantidad\", value: …)`)." },
-    { "prop": "value", "reason": "En SwiftUI el valor es el `Binding<Double>` `value`, siempre controlado." },
+    { "prop": "value", "reason": "En SwiftUI el valor es el `Binding<Double?>` `value`, siempre controlado; `nil` es «sin valor» (en React, `null`)." },
     { "prop": "defaultValue", "reason": "No existe campo no controlado en SwiftUI: el valor inicial es el del `Binding`." },
     { "prop": "min", "reason": "Es un número, no un caso: existe como `min: Double?`." },
     { "prop": "max", "reason": "Es un número, no un caso: existe como `max: Double?`." },
@@ -20,9 +20,12 @@
     { "prop": "errorMessage", "reason": "Es texto, no un caso: existe como `errorMessage: LocalizedStringKey?`." },
     { "prop": "helperText", "reason": "Es texto, no un caso: existe como `helperText: LocalizedStringKey?`." },
     { "prop": "onChange", "reason": "El cambio se observa en el `Binding` (`.onChange(of:)`), que ya recibe el valor normalizado." },
+    { "prop": "onEmpty", "reason": "Es un manejador de React para vaciar el campo; en nativo vaciar el texto pone el `Binding` a `nil` (Swift) o llama a `onValueChange(null)` (Compose), sin manejador aparte." },
     { "prop": "className", "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens." }
   ],
   "differences": [
+    "Sin valor: en React `value={null}`, en SwiftUI `Binding<Double?>` a `nil` y en Compose `value: Double?` a `null` dejan el campo vacío (y se ve el marcador). Vaciar el texto escribe `nil`/`null` (en React, solo con `onEmpty`; sin él el campo sigue recuperando el último número). Desde vacío, − y + cuentan como si el campo valiera 0 y se ajustan a `min`/`max`; en TalkBack y VoiceOver el campo vacío no anuncia valor y las acciones de sumar o restar parten de 0.",
+    "El foco se da desde fuera como en `InputField`: `ref` en React, `FocusState` (`.brandFocused`) en SwiftUI y `FocusRequester` en Compose.",
     "`readOnly` y `disabled` se expresan como en SwiftUI: `readOnly` es un parámetro y `disabled` el modificador `.disabled(_:)` (en la ficha de InputField se explica igual).",
     "Los botones − y + están dentro de la caja con los mismos separadores; en iOS su zona táctil llega a 44 pt y a cada pulsación hay un toque háptico ligero (`sensoryFeedback`, que macOS ignora).",
     "VoiceOver lo anuncia como valor ajustable: deslizar arriba o abajo suma o resta un paso, además de los dos botones con nombre accesible («Decrementar» e «Incrementar», castellano, sobrescribibles).",

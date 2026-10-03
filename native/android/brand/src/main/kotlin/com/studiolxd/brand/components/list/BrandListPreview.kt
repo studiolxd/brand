@@ -31,6 +31,7 @@ internal fun ListPreviewContent() {
                 ) { BrandText("Notificaciones") }
             }
             item { BrandListItem(trailing = { BrandText("Español", tone = TextTone.Muted) }) { BrandText("Idioma") } }
+            item { BrandListItem(leading = { BrandIcon(BrandIconName.Key) }) { BrandText("Seguridad") } }
             item("Cerrar sesión")
         }
     }

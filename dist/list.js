@@ -14,29 +14,36 @@ var r = e(function({ type: e = "unordered", showSeparators: n = !1, className: r
 		...a,
 		children: i
 	});
-}), i = e(function({ as: e = "li", secondary: r, trailing: i, className: a, children: o, ...s }, c) {
-	let l = ["list__item", a ?? ""].filter(Boolean).join(" "), u = r != null && r !== !1, d = i != null && i !== !1;
-	return !u && !d ? /* @__PURE__ */ t(e, {
-		ref: c,
-		className: l,
-		...s,
-		children: o
+}), i = e(function({ as: e = "li", leading: r, secondary: i, trailing: a, className: o, children: s, ...c }, l) {
+	let u = ["list__item", o ?? ""].filter(Boolean).join(" "), d = i != null && i !== !1, f = r != null && r !== !1, p = a != null && a !== !1;
+	return !d && !p && !f ? /* @__PURE__ */ t(e, {
+		ref: l,
+		className: u,
+		...c,
+		children: s
 	}) : /* @__PURE__ */ t(e, {
-		ref: c,
-		className: l,
-		...s,
+		ref: l,
+		className: u,
+		...c,
 		children: /* @__PURE__ */ n("div", {
 			className: "list__item-row",
-			children: [/* @__PURE__ */ n("div", {
-				className: "list__item-main",
-				children: [o, u && /* @__PURE__ */ t("div", {
-					className: "list__item-secondary",
+			children: [
+				f && /* @__PURE__ */ t("div", {
+					className: "list__item-leading",
 					children: r
-				})]
-			}), d && /* @__PURE__ */ t("div", {
-				className: "list__item-trailing",
-				children: i
-			})]
+				}),
+				/* @__PURE__ */ n("div", {
+					className: "list__item-main",
+					children: [s, d && /* @__PURE__ */ t("div", {
+						className: "list__item-secondary",
+						children: i
+					})]
+				}),
+				p && /* @__PURE__ */ t("div", {
+					className: "list__item-trailing",
+					children: a
+				})
+			]
 		})
 	});
 });

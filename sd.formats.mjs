@@ -182,7 +182,7 @@ export const NATIVE_COMPONENT_GROUPS = [
   'number-input', 'number-input-field', 'select', 'select-field', 'dropdown-field', 'checkbox',
   'switcher', 'switcher-field', 'toggle', 'toggle-group', 'theme-switcher', 'text', 'link',
   'tag', 'alert', 'text-inline', 'empty-state', 'skeleton', 'sheet', 'modal', 'confirm-dialog', 'toast', 'icon', 'spinner',
-  'separator', 'form', 'fieldset', 'card', 'popover', 'menu',
+  'separator', 'form', 'fieldset', 'card', 'popover', 'menu', 'password-field',
 ];
 
 // 1rem = 16: el sistema no toca el font-size del <html>.
@@ -712,7 +712,7 @@ function kotlinComponentSource(groups, header) {
           literal = `BrandSchemeValue(${kotlinColor(light.color)}, ${kotlinColor((dark ?? light).color)})`;
           break;
         case 'points': {
-          const isFont = /font-size$/.test(last);
+          const isFont = /(^|-)font-size(-|$)/.test(last);
           const unit = isFont ? 'sp' : 'dp';
           used.add(unit);
           if (light.unitless) {

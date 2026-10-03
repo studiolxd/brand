@@ -1,11 +1,11 @@
 package com.studiolxd.brand.components.inputfield
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -15,22 +15,17 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.semantics.clearAndSetSemantics
-import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.contentType
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -40,21 +35,17 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.studiolxd.brand.components.field.BrandFieldLayout
 import com.studiolxd.brand.components.field.FieldHelperStyle
 import com.studiolxd.brand.components.field.LocalBrandForcedFocus
 import com.studiolxd.brand.components.field.animatedFieldColor
 import com.studiolxd.brand.components.field.brandFieldBox
 import com.studiolxd.brand.components.field.brandFieldSemantics
-import com.studiolxd.brand.icon.BrandIcon
+import com.studiolxd.brand.components.field.BrandFieldGlyph
+import com.studiolxd.brand.components.field.BrandFieldIconButton
 import com.studiolxd.brand.icon.BrandIconName
-import com.studiolxd.brand.icon.BrandIconSize
 import com.studiolxd.brand.support.BrandControlSize
-import com.studiolxd.brand.support.LocalBrandIconTextSize
-import com.studiolxd.brand.support.brandFocusRing
 import com.studiolxd.brand.support.brandTextStyle
-import com.studiolxd.brand.support.collectBrandInteractionState
 import com.studiolxd.brand.support.rememberReduceMotion
 import com.studiolxd.brand.support.resolve
 import com.studiolxd.brand.support.scaledByFontScale
@@ -107,6 +98,9 @@ internal fun inputKeyboardOptions(type: InputFieldType, kind: InputFieldKind): K
  * BrandInputField("Buscar", query, { query = it }, labelHidden = true, kind = InputFieldKind.Search, clearable = true)
  * ```
  *
+ * `type = Password` pone el teclado de contraseña y oculta el texto, **sin ojo** de mostrar/ocultar: para eso, usa
+ * [com.studiolxd.brand.components.passwordfield.BrandPasswordField].
+ *
  * Estados: reposo, foco (anillo interior), error ([error] o un [errorMessage]), deshabilitado ([enabled]) y de solo
  * lectura ([readOnly], el texto se puede seleccionar). La altura y el tamaño de letra crecen con la escala de fuente
  * del sistema. Toda la caja enfoca el campo al tocarla.
@@ -118,11 +112,17 @@ internal fun inputKeyboardOptions(type: InputFieldType, kind: InputFieldKind): K
  *   etiqueta como marcador de sitio.
  * @param clearable solo con `kind = Search`: un aspa al final del campo cuando hay texto.
  * @param clearLabel nombre accesible del aspa. Castellano por defecto («Borrar»).
- * @param passwordToggle con `type = Password`: un ojo al final para mostrar u ocultar la contraseña.
- * @param showPasswordLabel nombre accesible del ojo cuando la contraseña está oculta. Castellano por defecto.
- * @param hidePasswordLabel nombre accesible del ojo cuando la contraseña se ve. Castellano por defecto.
  * @param invalidLabel lo que lee TalkBack cuando el campo está en [error] sin [errorMessage]. Castellano por defecto.
  * @param onSubmit la tecla de intro (buscar o hecho).
+ * @param focusRequester para dar el foco desde fuera (`focusRequester.requestFocus()` lleva el cursor al campo y sube el
+ *   teclado). Va sobre el propio campo de texto, no sobre la caja. Es el `ref` de React:
+ *   ```kotlin
+ *   val focus = remember { FocusRequester() }
+ *   BrandInputField("Correo", email, { email = it }, focusRequester = focus)
+ *   LaunchedEffect(Unit) { focus.requestFocus() }
+ *   ```
+ *   Sin él, el campo usa uno propio (los toques en la caja siguen enfocándolo). Para *observar* el foco ya está
+ *   [interactionSource] (`collectIsFocusedAsState()`).
  * @param size sin valor toma la del entorno ([com.studiolxd.brand.support.ProvideBrandControlSize]) y, si tampoco hay, `md`.
  */
 @Composable
@@ -144,19 +144,56 @@ fun BrandInputField(
     errorMessage: String? = null,
     helperText: String? = null,
     size: InputFieldSize? = null,
-    passwordToggle: Boolean = true,
-    showPasswordLabel: String = "Mostrar contraseña",
-    hidePasswordLabel: String = "Ocultar contraseña",
     invalidLabel: String = "Valor no válido",
     onSubmit: (() -> Unit)? = null,
     interactionSource: MutableInteractionSource? = null,
+    focusRequester: FocusRequester? = null,
+) = BrandTextFieldImpl(
+    label, value, onValueChange, modifier, labelHidden, type, kind, clearable, clearLabel, onClear, placeholder, readOnly,
+    enabled, error, errorMessage, helperText, size, invalidLabel, onSubmit, interactionSource, focusRequester,
+    obscured = true,
+)
+
+/** Lo que mide el hueco del final de un campo: lo recibe el botón que `PasswordField` pone ahí. */
+internal class FieldTrailingMetrics(val slot: Dp, val iconSize: Dp)
+
+/**
+ * El campo de texto de la marca de verdad. [BrandInputField] y `BrandPasswordField` son dos caras de esto: la caja, los
+ * tokens y la semántica no se duplican. [obscured] oculta el texto de un `type = Password`; [trailing] es el botón del
+ * final de la caja (el ojo de `PasswordField`), que mide [FieldTrailingMetrics].
+ */
+@Composable
+internal fun BrandTextFieldImpl(
+    label: String,
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier,
+    labelHidden: Boolean,
+    type: InputFieldType,
+    kind: InputFieldKind,
+    clearable: Boolean,
+    clearLabel: String,
+    onClear: (() -> Unit)?,
+    placeholder: String?,
+    readOnly: Boolean,
+    enabled: Boolean,
+    error: Boolean,
+    errorMessage: String?,
+    helperText: String?,
+    size: InputFieldSize?,
+    invalidLabel: String,
+    onSubmit: (() -> Unit)?,
+    interactionSource: MutableInteractionSource?,
+    focusRequester: FocusRequester?,
+    obscured: Boolean,
+    gap: Dp = F.gap,
+    trailing: (@Composable RowScope.(FieldTrailingMetrics) -> Unit)? = null,
 ) {
     val resolved = size.resolve()
     val source = interactionSource ?: remember { MutableInteractionSource() }
     val focused by source.collectIsFocusedAsState()
     val reduceMotion = rememberReduceMotion()
-    val focusRequester = remember { FocusRequester() }
-    var revealed by remember { mutableStateOf(false) }
+    val requester = focusRequester ?: remember { FocusRequester() }
 
     val isSearch = kind == InputFieldKind.Search
     val isPassword = type == InputFieldType.Password && !isSearch
@@ -213,8 +250,7 @@ fun BrandInputField(
     )
 
     val showsClear = isSearch && clearable && value.isNotEmpty() && enabled && !readOnly
-    val showsReveal = isPassword && passwordToggle
-    val hasTrailingSlot = (isSearch && clearable) || showsReveal
+    val hasTrailingSlot = (isSearch && clearable) || trailing != null
 
     val textStyle = brandTextStyle(fontSize, T.fontWeight, T.lineHeight, color = textColor)
     val keyboardOptions = inputKeyboardOptions(type, kind)
@@ -223,7 +259,7 @@ fun BrandInputField(
         label = label,
         labelHidden = labelHidden,
         size = resolved,
-        gap = F.gap,
+        gap = gap,
         errorMessage = errorMessage,
         helperText = helperText,
         helper = FieldHelperStyle(F.helperFontSize, F.helperFontWeight, F.helperLineHeight, F.helperColor.current),
@@ -243,13 +279,13 @@ fun BrandInputField(
                     ringColor = (if (hasError) T.errorFocusRingColor else T.focusRingColor).current,
                     focused = isFocused,
                 )
-                .pointerInput(enabled, readOnly) { detectTapGestures { if (enabled) focusRequester.requestFocus() } }
+                .pointerInput(enabled, readOnly) { detectTapGestures { if (enabled) requester.requestFocus() } }
                 .padding(start = if (isSearch) 0.dp else paddingInline, end = if (hasTrailingSlot) 0.dp else paddingInline),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             if (isSearch) {
                 Box(Modifier.size(slot).clearAndSetSemantics { }, contentAlignment = Alignment.Center) {
-                    FieldGlyph(BrandIconName.Search, iconSize, F.searchIconColor.current)
+                    BrandFieldGlyph(BrandIconName.Search, iconSize, F.searchIconColor.current)
                 }
             }
             BasicTextField(
@@ -257,15 +293,17 @@ fun BrandInputField(
                 onValueChange = onValueChange,
                 modifier = Modifier
                     .weight(1f)
-                    .focusRequester(focusRequester)
-                    .brandFieldSemantics(label, hasError, errorMessage, helperText, invalidLabel),
+                    .focusRequester(requester)
+                    .brandFieldSemantics(label, hasError, errorMessage, helperText, invalidLabel)
+                    // Un campo de contraseña pide el relleno automático de contraseñas del sistema.
+                    .then(if (isPassword) Modifier.semantics { contentType = ContentType.Password } else Modifier),
                 enabled = enabled,
                 readOnly = readOnly,
                 textStyle = textStyle,
                 keyboardOptions = keyboardOptions,
                 keyboardActions = KeyboardActions(onSearch = { onSubmit?.invoke() }, onDone = { onSubmit?.invoke() }),
                 singleLine = true,
-                visualTransformation = if (isPassword && !revealed) PasswordVisualTransformation() else VisualTransformation.None,
+                visualTransformation = if (isPassword && obscured) PasswordVisualTransformation() else VisualTransformation.None,
                 interactionSource = source,
                 cursorBrush = SolidColor(textColor),
                 decorationBox = { inner ->
@@ -279,81 +317,19 @@ fun BrandInputField(
                 },
             )
             if (isSearch && clearable) {
-                FieldIconButton(
+                BrandFieldIconButton(
                     icon = BrandIconName.Close,
                     label = clearLabel,
                     visible = showsClear,
                     slot = slot,
                     iconSize = iconSize,
-                    color = F.searchClearColor.current,
-                    ringColor = F.searchClearFocusRingColor.current,
-                    ringWidth = F.searchClearFocusRingWidth,
-                    ringOffset = F.searchClearFocusRingOffset,
                 ) {
                     onValueChange("")
-                    focusRequester.requestFocus()
+                    requester.requestFocus()
                     onClear?.invoke()
                 }
             }
-            if (showsReveal) {
-                FieldIconButton(
-                    icon = if (revealed) BrandIconName.EyeOff else BrandIconName.Eye,
-                    label = if (revealed) hidePasswordLabel else showPasswordLabel,
-                    visible = enabled,
-                    slot = slot,
-                    iconSize = iconSize,
-                    color = F.searchClearColor.current,
-                    ringColor = F.searchClearFocusRingColor.current,
-                    ringWidth = F.searchClearFocusRingWidth,
-                    ringOffset = F.searchClearFocusRingOffset,
-                ) { revealed = !revealed }
-            }
+            trailing?.invoke(this, FieldTrailingMetrics(slot, iconSize))
         }
     }
-}
-
-/** Un glifo de campo (lupa, aspa, ojo): un icono `size = Text` al tamaño del token, que crece con la escala de fuente. */
-@Composable
-private fun FieldGlyph(icon: BrandIconName, size: Dp, color: Color) {
-    CompositionLocalProvider(LocalBrandIconTextSize provides size.value.sp) {
-        BrandIcon(icon, size = BrandIconSize.Text, color = color)
-    }
-}
-
-/**
- * Un botón de icono al final del campo (borrar, mostrar contraseña). Conserva su hueco aunque no se vea
- * ([visible] = `false`: transparente, sin clic y fuera de TalkBack) para que el texto no salte al escribir.
- */
-@Composable
-private fun FieldIconButton(
-    icon: BrandIconName,
-    label: String,
-    visible: Boolean,
-    slot: Dp,
-    iconSize: Dp,
-    color: Color,
-    ringColor: Color,
-    ringWidth: Dp,
-    ringOffset: Dp,
-    onClick: () -> Unit,
-) {
-    val source = remember { MutableInteractionSource() }
-    val state = source.collectBrandInteractionState()
-    Box(
-        Modifier
-            .size(slot)
-            .alpha(if (visible) 1f else 0f)
-            .then(
-                if (visible) {
-                    // El anillo va hacia dentro de la caja: el aspa está a ras del borde del campo.
-                    Modifier
-                        .brandFocusRing(state.focusVisible, ringColor, ringWidth, -(ringOffset + ringWidth))
-                        .clickable(interactionSource = source, indication = null, role = Role.Button, onClick = onClick)
-                        .semantics { contentDescription = label }
-                } else {
-                    Modifier.clearAndSetSemantics { }
-                },
-            ),
-        contentAlignment = Alignment.Center,
-    ) { FieldGlyph(icon, iconSize, color) }
 }

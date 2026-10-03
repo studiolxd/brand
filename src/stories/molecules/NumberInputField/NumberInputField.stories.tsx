@@ -36,6 +36,15 @@ export const ConDecimales: Story = {
   args: { decimal: true, step: 0.5, defaultValue: 1.5, label: 'Horas' },
 };
 
+/**
+ * Sin valor: `value={null}` (o `defaultValue={null}`) deja el campo vacío.
+ * Con `onEmpty`, vaciar el texto es un valor más. Desde vacío, − y + cuentan
+ * como si el campo valiera 0 y se ajustan a `min`/`max`.
+ */
+export const SinValor: Story = {
+  args: { defaultValue: null, placeholder: 'Sin indicar', helperText: 'Déjalo vacío si no lo sabes.', onEmpty: () => {} },
+};
+
 export const Deshabilitado: Story = { args: { disabled: true } };
 
 export const EtiquetaOculta: Story = { args: { labelHidden: true } };

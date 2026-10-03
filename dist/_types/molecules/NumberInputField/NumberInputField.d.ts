@@ -11,8 +11,9 @@ export interface NumberInputFieldProps extends Omit<ComponentPropsWithoutRef<'in
      * es la primera de la lista, la etiqueta se oculta sola.
      */
     labelHidden?: boolean;
-    value?: number;
-    defaultValue?: number;
+    /** `null` es «sin valor»: el campo se muestra vacío. Ver `NumberInput`. */
+    value?: number | null;
+    defaultValue?: number | null;
     min?: number;
     max?: number;
     step?: number;
@@ -27,6 +28,8 @@ export interface NumberInputFieldProps extends Omit<ComponentPropsWithoutRef<'in
     size?: 'sm' | 'md' | 'lg';
     /** Recibe el valor ya normalizado, no el evento. */
     onChange?: (value: number) => void;
+    /** Quien teclea dejó el campo vacío; con ella, vaciar es un valor (`null`). Ver `NumberInput`. */
+    onEmpty?: () => void;
     /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
     className?: string;
 }

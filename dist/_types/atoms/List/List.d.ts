@@ -9,6 +9,11 @@ export interface ListItemProps extends React.ComponentPropsWithoutRef<'li'> {
     as?: React.ElementType;
     children?: React.ReactNode;
     /**
+     * Accesorio al principio de la fila: un icono, un avatar. Pareja de
+     * `trailing`; no se encoge ni parte línea y se centra con el bloque de texto.
+     */
+    leading?: React.ReactNode;
+    /**
      * Línea menor bajo el contenido, atenuada y un peldaño por debajo del cuerpo
      * (`text.paragraph.small`): la descripción de una fila de datos o de ajustes.
      */

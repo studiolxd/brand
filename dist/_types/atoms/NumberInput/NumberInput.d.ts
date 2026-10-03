@@ -11,8 +11,13 @@ export interface NumberInputMessages {
     increment: string;
 }
 export interface NumberInputProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue' | 'onChange'> {
-    value?: number;
-    defaultValue?: number;
+    /**
+     * Valor controlado. `null` es «sin valor»: el campo se muestra vacío (y el
+     * `placeholder` se ve). Sigue siendo controlado; `undefined` es no controlado.
+     */
+    value?: number | null;
+    /** Valor inicial no controlado (default `0`). `null` arranca vacío. */
+    defaultValue?: number | null;
     min?: number;
     max?: number;
     step?: number;
@@ -40,6 +45,13 @@ export interface NumberInputProps extends Omit<ComponentPropsWithoutRef<'input'>
      */
     incrementLabel?: string;
     onChange?: (value: number) => void;
+    /**
+     * Se llama cuando quien teclea deja el campo vacío. Sin ella el campo se
+     * comporta como siempre (vaciar no emite nada y al salir recupera el último
+     * número); con ella, vaciar **es** un valor: el campo pasa a «sin valor» y
+     * esta función avisa de ello.
+     */
+    onEmpty?: () => void;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
 }

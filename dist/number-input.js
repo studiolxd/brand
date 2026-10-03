@@ -5,47 +5,47 @@ import { Icon as t } from "./icon.js";
 import { forwardRef as n, useCallback as r, useState as i } from "react";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/atoms/NumberInput/NumberInput.tsx
-var s = n(function({ value: n, defaultValue: s = 0, min: c, max: l, step: u = 1, decimal: d = !1, disabled: f = !1, readOnly: p = !1, size: m = "md", error: h = !1, id: g, name: _, describedBy: v, ariaLabel: y, decrementLabel: b, incrementLabel: x, className: S, onChange: C, onBlur: w, onFocus: T, ...E }, D) {
-	let O = e("numberInput"), k = n !== void 0, [A, j] = i(s), [M, N] = i(!1), [P, F] = i(null), I = k ? n : A, L = P === null ? String(I) : P, R = r((e) => {
+var s = n(function({ value: n, defaultValue: s = 0, min: c, max: l, step: u = 1, decimal: d = !1, disabled: f = !1, readOnly: p = !1, size: m = "md", error: h = !1, id: g, name: _, describedBy: v, ariaLabel: y, decrementLabel: b, incrementLabel: x, className: S, onChange: C, onEmpty: w, onBlur: T, onFocus: E, ...D }, O) {
+	let k = e("numberInput"), A = n !== void 0, [j, M] = i(s), [N, P] = i(!1), [F, I] = i(null), L = A ? n : j, R = F === null ? L === null ? "" : String(L) : F, z = L ?? 0, B = r((e) => {
 		let t = e;
 		return c !== void 0 && (t = Math.max(c, t)), l !== void 0 && (t = Math.min(l, t)), t;
-	}, [c, l]), z = r((e) => {
-		let t = R(e);
-		k || j(t), C?.(t);
+	}, [c, l]), V = r((e) => {
+		let t = B(e);
+		A || M(t), C?.(t);
 	}, [
-		R,
-		k,
+		B,
+		A,
 		C
-	]), B = () => {
-		f || p || (F(null), z(I - u));
-	}, V = () => {
-		f || p || (F(null), z(I + u));
-	}, H = (e) => {
-		let t = e.target.value;
-		F(t);
-		let n = d ? t.replace(",", ".") : t, r = parseFloat(n);
-		isNaN(r) || z(r);
-	}, U = (e) => {
-		N(!0), T?.(e);
+	]), H = () => {
+		f || p || (I(null), V(z - u));
+	}, U = () => {
+		f || p || (I(null), V(z + u));
 	}, W = (e) => {
-		N(!1), F(null), w?.(e);
-	}, G = [
+		let t = e.target.value;
+		I(t);
+		let n = d ? t.replace(",", ".") : t, r = parseFloat(n);
+		isNaN(r) ? w && t.trim() === "" && (A || M(null), w()) : V(r);
+	}, G = (e) => {
+		P(!0), E?.(e);
+	}, K = (e) => {
+		P(!1), I(null), T?.(e);
+	}, q = [
 		"number-input",
 		m === "md" ? "" : `number-input--${m}`,
 		h ? "number-input--error" : "",
 		f ? "number-input--disabled" : "",
-		M ? "number-input--focused" : "",
+		N ? "number-input--focused" : "",
 		S ?? ""
-	].filter(Boolean).join(" "), K = f || p || c !== void 0 && I <= c, q = f || p || l !== void 0 && I >= l;
+	].filter(Boolean).join(" "), J = f || p || L !== null && c !== void 0 && L <= c, Y = f || p || L !== null && l !== void 0 && L >= l;
 	return /* @__PURE__ */ o("div", {
-		className: G,
+		className: q,
 		children: [
 			/* @__PURE__ */ a("button", {
 				className: "number-input__btn number-input__btn--decrement",
 				type: "button",
-				onClick: B,
-				disabled: K,
-				"aria-label": O("decrement", b),
+				onClick: H,
+				disabled: J,
+				"aria-label": k("decrement", b),
 				tabIndex: -1,
 				children: /* @__PURE__ */ a(t, {
 					name: "minus",
@@ -53,7 +53,7 @@ var s = n(function({ value: n, defaultValue: s = 0, min: c, max: l, step: u = 1,
 				})
 			}),
 			/* @__PURE__ */ a("input", {
-				ref: D,
+				ref: O,
 				className: "number-input__field",
 				type: "text",
 				inputMode: d ? "decimal" : "numeric",
@@ -61,22 +61,22 @@ var s = n(function({ value: n, defaultValue: s = 0, min: c, max: l, step: u = 1,
 				"aria-invalid": h || void 0,
 				"aria-describedby": v,
 				"aria-label": y,
-				...E,
+				...D,
 				id: g,
 				name: _,
-				value: L,
+				value: R,
 				disabled: f,
 				readOnly: p,
-				onChange: H,
-				onFocus: U,
-				onBlur: W
+				onChange: W,
+				onFocus: G,
+				onBlur: K
 			}),
 			/* @__PURE__ */ a("button", {
 				className: "number-input__btn number-input__btn--increment",
 				type: "button",
-				onClick: V,
-				disabled: q,
-				"aria-label": O("increment", x),
+				onClick: U,
+				disabled: Y,
+				"aria-label": k("increment", x),
 				tabIndex: -1,
 				children: /* @__PURE__ */ a(t, {
 					name: "plus",
