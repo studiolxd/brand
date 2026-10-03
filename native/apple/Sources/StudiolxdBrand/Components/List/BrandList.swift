@@ -33,9 +33,7 @@ public struct BrandList<Content: View>: View {
 
     public var body: some View {
         _VariadicView.Tree(BrandListLayout(type: type, showsSeparators: showsSeparators)) { content }
-            .brandFont(size: BrandTextTokens.listFontSize, weight: BrandTextTokens.listFontWeight, family: BrandTextTokens.listFontFamily)
             .foregroundStyle(BrandTextTokens.listColor)
-            .lineSpacing(BrandTextTokens.listFontSize * (BrandTextTokens.listLineHeight - 1))
             .tracking(BrandTextTokens.listLetterSpacing * BrandTextTokens.listFontSize)
             .accessibilityElement(children: .contain)
     }
@@ -64,15 +62,24 @@ private struct BrandListLayout: _VariadicView_UnaryViewRoot {
     @ViewBuilder
     private func row(index: Int, child: _VariadicView.Children.Element) -> some View {
         if type == .plain {
-            child.frame(maxWidth: .infinity, alignment: .leading)
+            child.lined.frame(maxWidth: .infinity, alignment: .leading)
         } else {
             HStack(alignment: .firstTextBaseline, spacing: 0) {
                 Text(verbatim: type == .ordered ? "\(index + 1). " : "• ")
+                    .lined
                     .frame(width: BrandTextTokens.listPaddingInlineStart, alignment: .trailing)
                     .accessibilityHidden(true)
-                child.frame(maxWidth: .infinity, alignment: .leading)
+                child.lined.frame(maxWidth: .infinity, alignment: .leading)
             }
         }
+    }
+}
+
+private extension View {
+    /// La tipografía de lista (`text.list.*`), con su interlineado de CSS.
+    var lined: some View {
+        brandLinedFont(size: BrandTextTokens.listFontSize, weight: BrandTextTokens.listFontWeight,
+                       family: BrandTextTokens.listFontFamily, lineHeight: BrandTextTokens.listLineHeight)
     }
 }
 
@@ -98,7 +105,8 @@ public struct BrandListItem<Content: View, Secondary: View, Trailing: View>: Vie
             VStack(alignment: .leading, spacing: 0) {
                 content
                 secondary
-                    .brandFont(size: BrandTextTokens.paragraphSmallFontSize, weight: BrandTextTokens.listFontWeight, family: BrandTextTokens.listFontFamily)
+                    .brandLinedFont(size: BrandTextTokens.paragraphSmallFontSize, weight: BrandTextTokens.listFontWeight,
+                                    family: BrandTextTokens.listFontFamily, lineHeight: BrandTextTokens.paragraphSmallLineHeight)
                     .foregroundStyle(BrandColorRoles.textMuted)
             }
             if Trailing.self != EmptyView.self {

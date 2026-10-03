@@ -1,21 +1,50 @@
 {
   "$schema": "../schema.json",
   "component": "EmptyState",
-  "react": { "path": "src/stories/molecules/EmptyState/EmptyState.tsx", "props": "EmptyStateProps" },
-  "native": { "swift": "BrandEmptyState", "kotlin": "BrandEmptyState" },
+  "react": {
+    "path": "src/stories/molecules/EmptyState/EmptyState.tsx",
+    "props": "EmptyStateProps"
+  },
+  "native": {
+    "swift": "BrandEmptyState",
+    "kotlin": "BrandEmptyState"
+  },
   "props": {
-    "size": { "type": "union", "values": ["sm", "md"], "default": "md" }
+    "size": {
+      "type": "union",
+      "values": [
+        "sm",
+        "md"
+      ],
+      "default": "md"
+    }
   },
   "excluded": [
-    { "prop": "title", "reason": "Es texto: va como argumento `title:` del inicializador (el componente no emite texto propio)." },
-    { "prop": "description", "reason": "Es texto: va como argumento `description:` del inicializador." },
-    { "prop": "icon", "reason": "Es un nodo de React; en nativo se pasa un `BrandIconName` o una vista en el `@ViewBuilder icon`." },
-    { "prop": "action", "reason": "Es un objeto `{ label, onClick, href }`; en nativo es `EmptyStateAction(label, perform:)` y `href` no existe (la navegación la resuelve la app)." },
-    { "prop": "className", "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens." }
+    {
+      "prop": "title",
+      "reason": "Es texto: va como argumento `title:` del inicializador (el componente no emite texto propio)."
+    },
+    {
+      "prop": "description",
+      "reason": "Es texto: va como argumento `description:` del inicializador."
+    },
+    {
+      "prop": "icon",
+      "reason": "Es un nodo de React; en nativo se pasa un `BrandIconName` o una vista en el `@ViewBuilder icon`."
+    },
+    {
+      "prop": "action",
+      "reason": "Es un objeto `{ label, onClick, href }`; en nativo es `EmptyStateAction(label, perform:)` y `href` no existe (la navegación la resuelve la app)."
+    },
+    {
+      "prop": "className",
+      "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
+    }
   ],
   "differences": [
     "El rótulo lleva el rasgo de encabezado para VoiceOver; en React es un `<p>` sin semántica.",
     "La acción es el `BrandButton` outline (`sm` en la talla sm, `md` en md), como en React.",
-    "Con tipo dinámico el rótulo, la descripción y el icono crecen (`@ScaledMetric`); en la web son fijos."
+    "Con tipo dinámico el rótulo, la descripción y el icono crecen (`@ScaledMetric`); en la web son fijos.",
+    "El rótulo se ve algo más ligero que en la web: el eje `opsz` de Google Sans Flex se queda en su valor por defecto en nativo y en la web `font-optical-sizing: auto` lo ajusta al tamaño."
   ]
 }

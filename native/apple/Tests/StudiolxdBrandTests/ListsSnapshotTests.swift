@@ -14,7 +14,7 @@ final class ListsSnapshotTests: XCTestCase {
                 BrandListItem("Segundo elemento de la lista")
                 BrandListItem("Tercer elemento de la lista")
             }
-            assertBrandSnapshots(view, width: 340, height: 130, named: type.rawValue)
+            assertBrandSnapshots(view, width: 340, height: 130, named: type.rawValue, padding: BrandSpacing.s4)
         }
     }
 
