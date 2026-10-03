@@ -14,6 +14,7 @@ import com.studiolxd.brand.components.inputfield.BrandInputField
 import com.studiolxd.brand.components.inputfield.InputFieldKind
 import com.studiolxd.brand.components.inputfield.InputFieldPreviewContent
 import com.studiolxd.brand.components.numberinputfield.BrandNumberInputField
+import com.studiolxd.brand.components.numberinputfield.NumberInputFieldCompactPreviewContent
 import com.studiolxd.brand.components.numberinputfield.NumberInputFieldPreviewContent
 import com.studiolxd.brand.components.passwordfield.BrandPasswordField
 import com.studiolxd.brand.components.passwordfield.LocalBrandPasswordRevealed
@@ -53,6 +54,10 @@ class NumberInputFieldSnapshotTest {
 
     @Test
     fun variants() = paparazzi.brandSnapshots { NumberInputFieldPreviewContent() }
+
+    /** El compacto en filas de lista, con y sin valor. */
+    @Test
+    fun compact() = paparazzi.brandSnapshots("compact") { NumberInputFieldCompactPreviewContent() }
 }
 
 class PasswordFieldSnapshotTest {

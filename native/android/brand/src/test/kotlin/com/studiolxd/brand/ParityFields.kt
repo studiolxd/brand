@@ -3,6 +3,7 @@ package com.studiolxd.brand
 import com.studiolxd.brand.components.inputfield.InputFieldKind
 import com.studiolxd.brand.components.inputfield.InputFieldSize
 import com.studiolxd.brand.components.inputfield.InputFieldType
+import com.studiolxd.brand.components.numberinputfield.NumberInputCommitMode
 import com.studiolxd.brand.components.numberinputfield.NumberInputFieldSize
 import com.studiolxd.brand.components.passwordfield.PasswordFieldSize
 import com.studiolxd.brand.components.selectfield.SelectFieldSize
@@ -22,6 +23,7 @@ internal val parityFields: Map<String, Map<String, List<String>>> = mapOf(
     ),
     "NumberInputField" to mapOf(
         "size" to NumberInputFieldSize.entries.map { it.value },
+        "commitMode" to NumberInputCommitMode.entries.map { it.value },
     ),
     "PasswordField" to mapOf(
         "size" to PasswordFieldSize.entries.map { it.value },
