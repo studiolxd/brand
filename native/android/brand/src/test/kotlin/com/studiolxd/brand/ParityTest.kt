@@ -26,7 +26,7 @@ import kotlin.test.assertTrue
 private val parityRegistry: Map<String, Map<String, List<String>>> =
     // AQUÍ SE SUMAN LOS GRUPOS: cada uno registra sus componentes en `Parity<Grupo>.kt` (`internal val parity<Grupo>`).
     // Al integrar, añadir `+ parityFields + parityOverlays + parityLists` (u otros) a esta línea.
-    parityCore
+    parityCore + parityFields + parityLists
 
 /** Una ficha de paridad (`native/parity/schema.json`), solo con lo que comprueban las pruebas. */
 private class ParityCard(json: JSONObject) {
