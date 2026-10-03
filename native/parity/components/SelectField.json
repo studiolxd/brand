@@ -29,6 +29,9 @@
     "El chevron del disparador no gira al abrir: SwiftUI no informa de si un `Menu` está abierto.",
     "Los grupos con cabecera usan `Section` del menú nativo (cabecera no elegible).",
     "`\"\"` como valor significa «nada elegido» y se enseña el marcador; no hace falta el centinela que usa la web porque el `Picker` admite cualquier etiqueta.",
-    "En iOS la zona táctil del disparador llega a 44 pt aunque el campo sm mida 32; en macOS el foco de teclado pinta el anillo interior."
+    "En iOS la zona táctil del disparador llega a 44 pt aunque el campo sm mida 32; en macOS el foco de teclado pinta el anillo interior.",
+    "En Android el desplegable no es un menú del sistema: es una lista propia (`Popup`) con los tokens de `select.content-*` de la web, que cuelga bajo el disparador (o sobre él si abajo no cabe), con la opción elegida en peso 500 —como la web— en lugar de la marca de verificación de iOS, y la opción bajo el teclado o el puntero invertida.",
+    "En Android el chevron gira al abrir (como la web), porque el campo sabe cuándo está abierto; con «quitar animaciones» gira de golpe. Los grupos llevan cabecera (etiqueta) y una línea de separación entre ellos.",
+    "En TalkBack el disparador es una lista desplegable (`Role.DropdownList`) con la etiqueta por nombre, el valor elegido (y la ayuda) como descripción de estado y `error()` en error."
   ]
 }

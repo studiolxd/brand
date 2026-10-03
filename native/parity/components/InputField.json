@@ -34,6 +34,10 @@
     "En iOS toda la caja enfoca el campo al tocarla y el aspa tiene zona táctil de 44 pt; la altura y la letra crecen con el tipo dinámico.",
     "El `type` fija el teclado y el rellenado automático de iOS (`emailAddress`, `phonePad`, `URL`, `password`…); en macOS no hay teclados y solo cambia `password` (campo seguro).",
     "El nombre accesible y la pista (error + ayuda) los pone el campo sobre el propio control; los textos de error y ayuda se ocultan a VoiceOver para no leerse dos veces.",
-    "El color de marcador (`placeholder`) depende de que el sistema respete el color del `prompt`; en iOS se respeta, en macOS el sistema puede atenuarlo."
+    "El color de marcador (`placeholder`) depende de que el sistema respete el color del `prompt`; en iOS se respeta, en macOS el sistema puede atenuarlo.",
+    "En Android el `type` fija el teclado (`KeyboardType` correo, contraseña, número, teléfono, URL), la autocapitalización y el corrector; la búsqueda pone la tecla de intro «buscar». `readOnly` mantiene el texto seleccionable en el propio campo (`BasicTextField`).",
+    "En Android `type: password` añade un ojo al final para mostrar u ocultar la contraseña (`passwordToggle`, desactivable; nombres accesibles castellanos `showPasswordLabel`/`hidePasswordLabel`): la web usa `PasswordField` para eso y SwiftUI no lo lleva.",
+    "En TalkBack el nombre del control es la etiqueta, el error se publica con `error()` y la ayuda como descripción de estado; los textos visibles de error y ayuda no son nodos de accesibilidad propios para no leerse dos veces. Sin mensaje, el texto de `error()` es `invalidLabel` («Valor no válido», castellano).",
+    "En Android toda la caja enfoca el campo al tocarla y la zona táctil del aspa y del ojo llega a 48 dp; la altura y la letra crecen con la escala de fuente del sistema. Con «quitar animaciones» el borde y el fondo cambian de golpe."
   ]
 }
