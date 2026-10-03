@@ -81,6 +81,19 @@ final class FormsSnapshotTests: XCTestCase {
         assertBrandSnapshots(view, width: 340, height: 330, named: "empty")
     }
 
+    func testNumberInputFieldCompact() {
+        let view = VStack(alignment: .leading, spacing: BrandSpacing.s4) {
+            BrandListItem(content: { Text("Leche entera") }, secondary: { Text("1 l") }, trailing: {
+                BrandNumberInputField("Cantidad de leche", value: .constant(2), labelHidden: true, min: 0, max: 99, compact: true, commitMode: .blur)
+            })
+            BrandListItem(content: { Text("Pan de molde integral con semillas") }, secondary: { EmptyView() }, trailing: {
+                BrandNumberInputField("Cantidad de pan", value: .constant(12), labelHidden: true, min: 0, max: 99, compact: true, commitMode: .blur)
+            })
+            BrandNumberInputField("Vacío", value: .constant(nil), labelHidden: true, placeholder: "–", compact: true)
+        }
+        assertBrandSnapshots(view, width: 340, height: 220, named: "compact")
+    }
+
     // MARK: PasswordField
 
     func testPasswordFieldStates() {
@@ -141,6 +154,22 @@ final class FormsSnapshotTests: XCTestCase {
         assertBrandSnapshots(view, width: 256, height: 130, named: "compare-number", padding: 16)
     }
 
+    /// Pareja de `Atoms/NumberInput` «En una fila de lista»: el compacto como `trailing` de `BrandListItem`.
+    func testComparisonNumberCompact() {
+        let view = BrandList(type: .plain, showSeparators: true) {
+            BrandListItem(content: { Text("Leche entera") }, secondary: { Text("1 l") }, trailing: {
+                BrandNumberInputField("Cantidad de leche", value: .constant(2), labelHidden: true, min: 0, max: 99, compact: true, commitMode: .blur)
+            })
+            BrandListItem(content: { Text("Huevos") }, secondary: { EmptyView() }, trailing: {
+                BrandNumberInputField("Cantidad de huevos", value: .constant(12), labelHidden: true, min: 0, max: 99, compact: true, commitMode: .blur)
+            })
+            BrandListItem(content: { Text("Pan de molde integral con semillas") }, secondary: { EmptyView() }, trailing: {
+                BrandNumberInputField("Cantidad de pan", value: .constant(1), labelHidden: true, min: 0, max: 99, compact: true, commitMode: .blur)
+            })
+        }
+        assertBrandSnapshots(view, width: 352, height: 200, named: "compare-number-compact", padding: 16)
+    }
+
     func testComparisonSelectValue() {
         let view = BrandSelectField("Tipo de contrato", selection: .constant("full-time"), options: [
             .option("", "Selecciona un tipo"), .option("full-time", "Jornada completa"),
@@ -187,6 +216,27 @@ final class FormsLogicTests: XCTestCase {
         XCTAssertEqual(InputFieldKind.allCases.map(\.rawValue), ["text", "search"])
         XCTAssertEqual(InputFieldSize.allCases.map(\.rawValue), ["sm", "md", "lg"])
         XCTAssertEqual(PasswordFieldSize.allCases.map(\.rawValue), ["sm", "md", "lg"])
+    }
+
+    func testCommitModeRawValuesMatchReact() {
+        XCTAssertEqual(NumberInputCommitMode.allCases.map(\.rawValue), ["change", "blur"])
+    }
+
+    func testNumberInputCommitResolve() {
+        let range = 0.0...9.0
+        typealias C = NumberInputCommit
+        XCTAssertEqual(C.resolve(raw: "5", decimal: false, range: range, current: 1), .set(5))
+        XCTAssertEqual(C.resolve(raw: "50", decimal: false, range: range, current: 1), .set(9), "se ajusta a max")
+        XCTAssertEqual(C.resolve(raw: "9", decimal: false, range: range, current: 9), .keep, "igual que el valor: no se escribe")
+        XCTAssertEqual(C.resolve(raw: "2,5", decimal: true, range: range, current: 1), .set(2.5))
+        XCTAssertEqual(C.resolve(raw: "", decimal: false, range: range, current: 3), .set(nil))
+        XCTAssertEqual(C.resolve(raw: " ", decimal: false, range: range, current: nil), .keep)
+        XCTAssertEqual(C.resolve(raw: "-", decimal: false, range: range, current: 3), .keep, "aún no es un número")
+    }
+
+    func testCompactTokens() {
+        XCTAssertEqual(BrandNumberInputTokens.compactHeight, BrandSize.componentSm)
+        XCTAssertLessThan(BrandNumberInputTokens.compactBtnWidth, BrandHitTarget.minimum, "la zona táctil se amplía, no el botón")
     }
 
     func testControlHeightsComeFromTokens() {
