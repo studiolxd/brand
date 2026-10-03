@@ -230,7 +230,7 @@ BrandThemeSwitcher(value: $theme, variant: .list)                        // solo
 BrandList(type: .ordered) { BrandListItem("Abre la app"); BrandListItem("Elige tu vivienda") }
 
 // La fila de ajustes (la `ListRow` de Homenize): principal, secundario, accesorio final y separadores de brand
-BrandList(type: .plain, showsSeparators: true) {
+BrandList(type: .plain, showSeparators: true) {
     BrandListItem(content: { Text("Notificaciones") }, secondary: { Text("Avisos de la comunidad") },
                   trailing: { BrandIcon(.chevron, size: .sm) })
 }

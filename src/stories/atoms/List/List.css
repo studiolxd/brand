@@ -37,3 +37,39 @@
   list-style-type: none;
   padding-inline-start: 0;
 }
+
+/* Con separadores: la línea va sobre cada ítem salvo el primero, con el mismo
+   aire arriba (margen) y abajo (relleno) y sin el `text.list.gap`, como la fila
+   de ajustes nativa. */
+.list.list--separated > li + li,
+.list.list--separated > .list__item + .list__item {
+  margin-block-start: var(--text-list-separator-spacing);
+  padding-block-start: var(--text-list-separator-spacing);
+  border-block-start: var(--text-list-separator-thickness) solid var(--text-list-separator-color);
+}
+
+/* Fila de datos (`secondary` / `trailing`). El flex vive en un envoltorio
+   interior, no en el `<li>`, para que las viñetas y los números de la lista
+   sigan siendo marcas de lista. */
+.list__item-row {
+  display: flex;
+  align-items: center;
+  column-gap: var(--text-list-item-gap);
+}
+
+.list__item-main {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+}
+
+.list__item-secondary {
+  font-size: var(--text-list-secondary-font-size);
+  line-height: var(--text-list-secondary-line-height);
+  color: var(--text-list-secondary-color);
+}
+
+.list__item-trailing {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}

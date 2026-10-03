@@ -11,11 +11,26 @@ export interface ListItemProps extends React.ComponentPropsWithoutRef<'li'> {
    */
   as?: React.ElementType;
   children?: React.ReactNode;
+  /**
+   * Línea menor bajo el contenido, atenuada y un peldaño por debajo del cuerpo
+   * (`text.paragraph.small`): la descripción de una fila de datos o de ajustes.
+   */
+  secondary?: React.ReactNode;
+  /**
+   * Accesorio al final de la fila, alineado a la derecha: un icono, un valor,
+   * un interruptor. No se encoge ni parte línea.
+   */
+  trailing?: React.ReactNode;
 }
 
 export interface ListProps extends React.ComponentPropsWithoutRef<'ul'> {
   /** Tipo de lista: con viñetas, numerada o sin decoración. */
   type?: ListType;
+  /**
+   * Dibuja una línea entre filas con los tokens `separator.*`, con su aire a
+   * cada lado en lugar del `text.list.gap`. Default `false`: sin línea.
+   */
+  showSeparators?: boolean;
   children: React.ReactNode;
 }
 
@@ -29,12 +44,13 @@ export interface ListProps extends React.ComponentPropsWithoutRef<'ul'> {
  */
 export const List = forwardRef<HTMLUListElement & HTMLOListElement, ListProps>(function List({
   type = 'unordered',
+  showSeparators = false,
   className,
   children,
   ...rest
 }, ref) {
   const Element = type === 'ordered' ? 'ol' : 'ul';
-  const classes = ['list', `list--${type}`, className ?? ''].filter(Boolean).join(' ');
+  const classes = ['list', `list--${type}`, showSeparators ? 'list--separated' : '', className ?? ''].filter(Boolean).join(' ');
 
   return (
     <Element ref={ref} className={classes} {...rest}>
@@ -55,15 +71,35 @@ export const List = forwardRef<HTMLUListElement & HTMLOListElement, ListProps>(f
  */
 export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(function ListItem({
   as: Element = 'li',
+  secondary,
+  trailing,
   className,
   children,
   ...rest
 }, ref) {
   const classes = ['list__item', className ?? ''].filter(Boolean).join(' ');
+  const hasSecondary = secondary !== undefined && secondary !== null && secondary !== false;
+  const hasTrailing = trailing !== undefined && trailing !== null && trailing !== false;
+
+  // Sin `secondary` ni `trailing` el ítem es exactamente el de siempre; la
+  // estructura de fila solo aparece cuando se usa.
+  if (!hasSecondary && !hasTrailing) {
+    return (
+      <Element ref={ref} className={classes} {...rest}>
+        {children}
+      </Element>
+    );
+  }
 
   return (
     <Element ref={ref} className={classes} {...rest}>
-      {children}
+      <div className="list__item-row">
+        <div className="list__item-main">
+          {children}
+          {hasSecondary && <div className="list__item-secondary">{secondary}</div>}
+        </div>
+        {hasTrailing && <div className="list__item-trailing">{trailing}</div>}
+      </div>
     </Element>
   );
 });
