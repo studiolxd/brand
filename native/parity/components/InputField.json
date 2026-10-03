@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema.json",
+  "component": "InputField",
+  "react": { "path": "src/stories/molecules/InputField/InputField.tsx", "props": "InputFieldProps" },
+  "native": { "swift": "BrandInputField", "kotlin": "BrandInputField" },
+  "props": {
+    "type": { "type": "union", "values": ["text", "email", "password", "number", "tel", "url"], "default": "text" },
+    "kind": { "type": "union", "values": ["text", "search"], "default": "text" },
+    "size": { "type": "union", "values": ["sm", "md", "lg"], "default": "md" },
+    "labelHidden": { "type": "boolean", "default": false },
+    "clearable": { "type": "boolean", "default": false },
+    "readOnly": { "type": "boolean", "default": false },
+    "error": { "type": "boolean", "default": false }
+  },
+  "excluded": [
+    { "prop": "id", "reason": "El `id` enlaza la etiqueta con el control en HTML; en SwiftUI el enlace es el nombre accesible que pone el propio campo." },
+    { "prop": "label", "reason": "No es una unión ni un booleano: es el primer argumento del inicializador (`BrandInputField(\"Correo\", text: …)`)." },
+    { "prop": "name", "reason": "El `name` del campo es de los formularios HTML; en SwiftUI el estado vive en el `Binding`." },
+    { "prop": "clearLabel", "reason": "Es texto, no un caso: existe como `clearLabel: LocalizedStringKey` con default «Borrar»." },
+    { "prop": "onClear", "reason": "Es un manejador: existe como el cierre opcional `onClear`." },
+    { "prop": "placeholder", "reason": "Es texto, no un caso: existe como `placeholder: LocalizedStringKey?`." },
+    { "prop": "value", "reason": "En SwiftUI el valor es el `Binding<String>` `text`, siempre controlado." },
+    { "prop": "defaultValue", "reason": "No existe campo no controlado en SwiftUI: el valor inicial es el del `Binding`." },
+    { "prop": "disabled", "reason": "Se expresa con el modificador `.disabled(_:)` de SwiftUI, que el campo lee del entorno." },
+    { "prop": "errorMessage", "reason": "Es texto, no un caso: existe como `errorMessage: LocalizedStringKey?`." },
+    { "prop": "helperText", "reason": "Es texto, no un caso: existe como `helperText: LocalizedStringKey?`." },
+    { "prop": "onChange", "reason": "El cambio se observa en el `Binding` (`.onChange(of:)`), no con un manejador de evento del DOM." },
+    { "prop": "onBlur", "reason": "El foco se observa con `@FocusState`/`.onChange(of: isFocused)` desde fuera; el campo no expone un manejador." },
+    { "prop": "onFocus", "reason": "El foco se observa con `@FocusState`/`.onChange(of: isFocused)` desde fuera; el campo no expone un manejador." }
+  ],
+  "differences": [
+    "El aspa de borrado y la lupa son los iconos del catálogo (`BrandIcon`), igual que en la web; el aspa conserva su hueco aunque no haya texto (invisible y fuera de VoiceOver) para que el texto no salte al escribir.",
+    "`readOnly` pinta el texto como `Text` seleccionable en la misma caja: `TextField` de SwiftUI no tiene modo de solo lectura.",
+    "En iOS toda la caja enfoca el campo al tocarla y el aspa tiene zona táctil de 44 pt; la altura y la letra crecen con el tipo dinámico.",
+    "El `type` fija el teclado y el rellenado automático de iOS (`emailAddress`, `phonePad`, `URL`, `password`…); en macOS no hay teclados y solo cambia `password` (campo seguro).",
+    "El nombre accesible y la pista (error + ayuda) los pone el campo sobre el propio control; los textos de error y ayuda se ocultan a VoiceOver para no leerse dos veces.",
+    "El color de marcador (`placeholder`) depende de que el sistema respete el color del `prompt`; en iOS se respeta, en macOS el sistema puede atenuarlo."
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema.json",
+  "component": "Toast",
+  "react": {
+    "path": "src/stories/molecules/Toast/toast.ts",
+    "props": "ToastOptions"
+  },
+  "native": {
+    "swift": "ToastCenter",
+    "kotlin": "ToastCenter"
+  },
+  "props": {},
+  "excluded": [
+    {
+      "prop": "id",
+      "reason": "Se porta como el argumento `id: String?` de `ToastCenter.show(…)` y compañía; la ficha solo tipa uniones y booleanos."
+    },
+    {
+      "prop": "description",
+      "reason": "Se porta como `description: String?`; en nativo es texto plano, no un nodo de React."
+    },
+    {
+      "prop": "duration",
+      "reason": "Se porta como `duration: TimeInterval?` en segundos (`.infinity` lo deja fijo), no en milisegundos."
+    },
+    {
+      "prop": "action",
+      "reason": "Se porta como `action: ToastAction?` (rótulo + cierre); la ficha solo tipa uniones y booleanos."
+    },
+    {
+      "prop": "onClose",
+      "reason": "Se porta como el cierre `onClose` de `ToastCenter.show(…)`; la ficha solo tipa uniones y booleanos."
+    }
+  ],
+  "differences": [
+    "`ToastIntent` (default, success, error, warning, info, loading) es un enum con los mismos casos y `rawValue` que el tipo de React; lo vigila `OverlaysLogicTests` porque la ficha no tipa uniones fuera de las props.",
+    "La API es la clase observable `ToastCenter` (`ToastCenter.shared.success(…)`), no el objeto `toast` de React; `toast.promise` es `ToastCenter.promise(loading:success:error:_:)` con una tarea `async`.",
+    "El título es `String`: quien llama lo localiza, igual que en React no hay textos propios por defecto.",
+    "A la misma escala el aviso coincide en caja, márgenes y color; el peso 500 de los títulos se ve algo más ligero que en la web porque aquí el eje `opsz` de Google Sans Flex queda en su valor por defecto (la web lo ajusta con `font-optical-sizing: auto`)."
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "$schema": "../schema.json",
+  "component": "ConfirmDialog",
+  "react": {
+    "path": "src/stories/molecules/ConfirmDialog/ConfirmDialog.tsx",
+    "props": "ConfirmDialogProps"
+  },
+  "native": {
+    "swift": "BrandConfirmDialog",
+    "kotlin": "BrandConfirmDialog"
+  },
+  "props": {
+    "destructive": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "excluded": [
+    {
+      "prop": "open",
+      "reason": "Se porta como el `Binding<Bool>` `isPresented` de `brandConfirmDialog(isPresented:…)`; la ficha solo tipa uniones y booleanos literales."
+    },
+    {
+      "prop": "title",
+      "reason": "Se porta como `title: LocalizedStringKey`, la pregunta (obligatoria, como en React)."
+    },
+    {
+      "prop": "description",
+      "reason": "Se porta como `description: LocalizedStringKey?`."
+    },
+    {
+      "prop": "children",
+      "reason": "Es el cierre `@ViewBuilder extra` (contenido bajo la descripción), no una prop."
+    },
+    {
+      "prop": "onConfirm",
+      "reason": "Se porta como el cierre `async throws`: mientras corre el diálogo está ocupado y al terminar se cierra; si lanza, sigue abierto."
+    },
+    {
+      "prop": "onCancel",
+      "reason": "Se porta como el cierre `onCancel`; también se dispara con el aspa, `Esc` y tocar fuera."
+    },
+    {
+      "prop": "onConfirmError",
+      "reason": "Se porta como `onConfirmError: (Error) -> Void`; en nativo el rechazo de la promesa es un error lanzado."
+    },
+    {
+      "prop": "secondaryActionLabel",
+      "reason": "Se porta como `secondaryActionLabel: LocalizedStringKey?` junto a `onSecondaryAction`; no es una unión ni un booleano."
+    },
+    {
+      "prop": "onSecondaryAction",
+      "reason": "Se porta como el cierre `onSecondaryAction`; la acción intermedia no cierra el diálogo, como en React."
+    },
+    {
+      "prop": "confirmLabel",
+      "reason": "Se porta como `confirmLabel: LocalizedStringKey`, obligatorio y sin default: nombra lo que va a pasar."
+    },
+    {
+      "prop": "cancelLabel",
+      "reason": "Se porta como `cancelLabel: LocalizedStringKey` con «Cancelar» por defecto (castellano)."
+    },
+    {
+      "prop": "pendingLabel",
+      "reason": "Se porta como `pendingLabel: LocalizedStringKey` con «Confirmando…» por defecto (castellano)."
+    },
+    {
+      "prop": "closeLabel",
+      "reason": "Se porta como `closeLabel: LocalizedStringKey` con «Cerrar» por defecto (castellano)."
+    },
+    {
+      "prop": "confirmPhrase",
+      "reason": "Se porta como `confirmPhrase: BrandConfirmDialog.Phrase?`, que agrupa la frase y sus dos textos (como la unión discriminada de React)."
+    },
+    {
+      "prop": "confirmPhraseLabel",
+      "reason": "Va dentro de `Phrase.label`: obligatorio con la frase, sin default."
+    },
+    {
+      "prop": "confirmPhraseMismatch",
+      "reason": "Va dentro de `Phrase.mismatch`: obligatorio con la frase, sin default."
+    },
+    {
+      "prop": "container",
+      "reason": "Es el nodo DOM del portal; la presentación nativa superpone el diálogo a la vista sin portal."
+    },
+    {
+      "prop": "className",
+      "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
+    }
+  ],
+  "differences": [
+    "El diálogo se superpone a la vista con el velo y la tarjeta de `Modal` (tokens `modal.*`), no con el `.alert` nativo: el `.alert` no admite el aspecto de marca, el campo de la frase ni la tercera acción. VoiceOver recibe el rasgo de modal y el fondo se oculta.",
+    "`onConfirm` siempre cierra el diálogo al terminar con éxito (en React lo cierra el consumidor cuando la acción no devuelve promesa): en SwiftUI toda acción puede ser `async`.",
+    "El foco inicial es el de VoiceOver (`AccessibilityFocusState`): «Cancelar», o el campo si hay frase. El foco de teclado de macOS entra por el orden normal.",
+    "El campo de la frase pinta con los tokens `input.*`, `label.*` e `input-field.*` de forma propia; cuando `InputField` esté portado puede sustituirlo sin cambiar la API.",
+    "El interlineado de los títulos de varias líneas es algo mayor que el de la web: SwiftUI suma `lineSpacing` al interlineado natural de la fuente (`modal.title-line-height` es 1,1 en CSS, que lo fija absoluto).",
+    "El alto máximo (`modal.max-height`) no se genera (función de CSS) y el contenido no se desplaza: los textos largos crecen con el tipo dinámico hasta el límite de la pantalla.",
+    "El texto de la pareja difiere (la story dice «¿Borrar la organización?»); en la web «Cancelar» lleva el anillo de foco porque recibe el foco inicial, y en nativo el foco de teclado solo se pinta con teclado."
+  ]
+}

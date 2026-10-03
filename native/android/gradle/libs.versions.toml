@@ -1,0 +1,29 @@
+[versions]
+agp = "9.4.1"
+kotlin = "2.4.20"
+composeBom = "2026.09.00"
+coreKtx = "1.19.0"
+junit = "4.13.2"
+json = "20250517"
+paparazzi = "2.0.0-alpha05.1"
+
+[libraries]
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+compose-ui = { module = "androidx.compose.ui:ui" }
+compose-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
+compose-ui-text = { module = "androidx.compose.ui:ui-text" }
+compose-ui-unit = { module = "androidx.compose.ui:ui-unit" }
+compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+compose-foundation = { module = "androidx.compose.foundation:foundation" }
+compose-animation-core = { module = "androidx.compose.animation:animation-core" }
+junit = { module = "junit:junit", version.ref = "junit" }
+# La variante -junit: en módulos AGP, `kotlin-test` a secas resuelve a la común y no trae la anotación @Test.
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+# Android no trae org.json en las pruebas de JVM (son stubs): las fichas de paridad se leen con esta.
+json = { module = "org.json:json", version.ref = "json" }
+
+[plugins]
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }

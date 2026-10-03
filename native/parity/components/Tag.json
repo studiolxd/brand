@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema.json",
+  "component": "Tag",
+  "react": {
+    "path": "src/stories/atoms/Tag/Tag.tsx",
+    "props": "TagProps"
+  },
+  "native": {
+    "swift": "BrandTag",
+    "kotlin": "BrandTag"
+  },
+  "props": {
+    "variant": {
+      "type": "union",
+      "values": [
+        "primary",
+        "accent-1",
+        "accent-2",
+        "support-1",
+        "support-2",
+        "neutral",
+        "info",
+        "warning",
+        "success",
+        "danger"
+      ],
+      "default": "neutral"
+    }
+  },
+  "excluded": [],
+  "differences": [
+    "Los casos con guion se llaman `accent1`, `support2`… en Swift (el `rawValue` sí es `accent-1`, `support-2`…).",
+    "El Tag nativo no es un control: VoiceOver lo lee como texto, igual que el `<span>` de React."
+  ]
+}

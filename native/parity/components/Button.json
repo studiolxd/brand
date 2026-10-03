@@ -1,0 +1,90 @@
+{
+  "$schema": "../schema.json",
+  "component": "Button",
+  "react": {
+    "path": "src/stories/atoms/Button/Button.tsx",
+    "props": "ButtonProps"
+  },
+  "native": {
+    "swift": "BrandButton",
+    "kotlin": "BrandButton"
+  },
+  "props": {
+    "variant": {
+      "type": "union",
+      "values": [
+        "primary",
+        "outline",
+        "ghost",
+        "text"
+      ],
+      "default": "primary"
+    },
+    "tone": {
+      "type": "union",
+      "values": [
+        "accent",
+        "ink"
+      ],
+      "default": "accent"
+    },
+    "size": {
+      "type": "union",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    },
+    "destructive": {
+      "type": "boolean",
+      "default": false
+    },
+    "iconOnly": {
+      "type": "boolean",
+      "default": false
+    },
+    "block": {
+      "type": "boolean",
+      "default": false,
+      "reactOnlyValues": [
+        "mobile"
+      ]
+    }
+  },
+  "excluded": [
+    {
+      "prop": "type",
+      "reason": "`type=\"submit\"|\"reset\"` es del formulario HTML; en SwiftUI el envío lo hace la acción del botón o el `.onSubmit` del formulario."
+    },
+    {
+      "prop": "onClick",
+      "reason": "En SwiftUI la acción es el cierre `action` del `Button`, no un manejador de evento del DOM."
+    },
+    {
+      "prop": "href",
+      "reason": "La navegación la resuelve la app (`NavigationLink`, `Link` nativo o `openURL`); el botón nativo no es un ancla."
+    },
+    {
+      "prop": "external",
+      "reason": "Solo acompaña a `href` (`target=\"_blank\"`): sin enlace no hay nada que abrir aparte."
+    },
+    {
+      "prop": "render",
+      "reason": "`render` sustituye el elemento HTML; en nativo el estilo (`.buttonStyle(.brand(…))`) se aplica a cualquier `Button`."
+    },
+    {
+      "prop": "className",
+      "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
+    }
+  ],
+  "differences": [
+    "El anillo de foco solo aparece con teclado (macOS con acceso total al teclado, iPad con teclado físico): en iOS táctil no hay foco visible, como en cualquier control nativo.",
+    "En iOS la zona táctil llega a 44 pt aunque el botón sm mida 32 (`brandHitTarget`, guías HIG); el aspecto y la maqueta no cambian.",
+    "La altura y el tamaño de letra crecen con el tipo dinámico (`@ScaledMetric`); en la web son fijos.",
+    "`block: 'mobile'` no existe en nativo: depende de un punto de ruptura de la web; en nativo `block` es solo `true`/`false`.",
+    "El hover es el del puntero (macOS, iPad con ratón); en iPhone solo hay reposo, pulsado y deshabilitado.",
+    "El texto de la web se ve algo más grueso que el de SwiftUI en las parejas de Comparisons: Chromium engorda las letras al suavizarlas en macOS y CoreText no; el peso del eje `wght` es el mismo (300)."
+  ]
+}

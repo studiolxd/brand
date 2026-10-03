@@ -1,0 +1,72 @@
+{
+  "$schema": "../schema.json",
+  "component": "ThemeSwitcher",
+  "react": {
+    "path": "src/stories/molecules/ThemeSwitcher/ThemeSwitcher.tsx",
+    "props": "ThemeSwitcherProps"
+  },
+  "native": {
+    "swift": "BrandThemeSwitcher",
+    "kotlin": "BrandThemeSwitcher"
+  },
+  "props": {
+    "value": {
+      "type": "union",
+      "values": [
+        "light",
+        "dark",
+        "system"
+      ]
+    },
+    "variant": {
+      "type": "union",
+      "values": [
+        "compact",
+        "list",
+        "icon"
+      ],
+      "default": "compact"
+    },
+    "layout": {
+      "type": "union",
+      "values": [
+        "inline",
+        "stacked"
+      ],
+      "default": "inline"
+    },
+    "size": {
+      "type": "union",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    }
+  },
+  "excluded": [
+    {
+      "prop": "onChange",
+      "reason": "El valor es un `Binding<BrandThemeChoice>`: SwiftUI notifica el cambio escribiendo en él; aplicar y guardar el tema es de la app."
+    },
+    {
+      "prop": "labels",
+      "reason": "Existe como `ThemeSwitcherLabels` (struct con `group`, `light`, `dark`, `system` y defaults castellanos); es un objeto, que esta ficha no compara."
+    },
+    {
+      "prop": "id",
+      "reason": "El enlace etiqueta↔control lo resuelve SwiftUI (accesibilidad), sin `id` de DOM."
+    },
+    {
+      "prop": "className",
+      "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
+    }
+  ],
+  "differences": [
+    "El desplegable de `compact` e `icon` es un `Menu` nativo: la lista flotante es la del sistema (sin el borde rectangular de brand) y sus filas usan SF Symbols (sol, luna, ordenador) en vez de los iconos de brand.",
+    "El chevron del control compacto no gira al abrirse: SwiftUI no informa de que el menú está abierto.",
+    "`list` envuelve las opciones a la línea siguiente cuando el tipo dinámico no las deja caber (`flex-wrap`).",
+    "El nombre accesible de `icon` incluye el tema actual («Tema: Claro»), igual que el `aria-label` de React."
+  ]
+}

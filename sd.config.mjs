@@ -1,10 +1,18 @@
 import StyleDictionary from 'style-dictionary';
 import { readdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import { registerDarkModeFormat, registerJsonVariablesFormat, isDarkToken, DARK_SELECTORS } from './sd.formats.mjs';
+import {
+  registerDarkModeFormat,
+  registerJsonVariablesFormat,
+  registerNativeFormats,
+  isDarkToken,
+  isNativeToken,
+  DARK_SELECTORS,
+} from './sd.formats.mjs';
 
 registerDarkModeFormat(StyleDictionary);
 registerJsonVariablesFormat(StyleDictionary);
+registerNativeFormats(StyleDictionary);
 
 const cssOptions = { selector: ':root', outputReferences: true };
 const scssOptions = { outputReferences: false };
@@ -564,6 +572,28 @@ const sd = new StyleDictionary({
       files: [
         { destination: 'tokens.json', format: 'json/css-variables', filter: (t) => !isDarkToken(t) },
       ],
+    },
+    /*
+     * Tokens nativos (SwiftUI y Jetpack Compose). Lo nativo NO se publica en
+     * npm, así que NUNCA sale a `src/tokens/` (que sí viaja en el paquete): todo
+     * vive bajo `native/`. Mismo `transformGroup` que css/js, de modo que los
+     * valores son literalmente los de `tokens.json`; las conversiones a
+     * puntos/dp y a segundos las hace el formato (`sd.formats.mjs`).
+     */
+    swift: {
+      transformGroup: 'css',
+      buildPath: 'native/apple/Sources/StudiolxdBrand/Tokens/',
+      files: [
+        { destination: 'BrandTokens.swift', format: 'swift/brand-tokens', filter: isNativeToken },
+        // Sin filtro: el formato necesita los `surface-dark-*` y todo el mapa de referencias para derivar el lado
+        // oscuro; elige él mismo qué grupos salen (`NATIVE_COMPONENT_GROUPS`).
+        { destination: 'BrandComponentTokens.swift', format: 'swift/brand-component-tokens' },
+      ],
+    },
+    kotlin: {
+      transformGroup: 'css',
+      buildPath: 'native/android/brand/src/main/kotlin/com/studiolxd/brand/tokens/',
+      files: [{ destination: 'BrandTokens.kt', format: 'kotlin/brand-tokens', filter: isNativeToken }],
     },
   },
 });

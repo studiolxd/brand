@@ -42,3 +42,12 @@ chromatic-build-*
 
 # Credencial temporal de `pnpm release:npm`, nunca versionada.
 .npmrc.publish
+
+# Nativo (native/): salidas de compilación y configuración local. Lo nativo no se publica en npm.
+.build/
+.swiftpm/
+native/android/local.properties
+native/android/.gradle/
+native/android/.kotlin/
+native/android/**/build/
+native/android/.idea/

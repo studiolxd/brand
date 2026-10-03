@@ -7,6 +7,60 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [Sin publicar]
+
+> Infraestructura nativa (iOS, macOS y Android). **No cambia nada del paquete npm**: lo
+> nativo vive en `native/`, `Package.swift` y `jitpack.yml`, fuera de `package.json#files`.
+
+### Nativo — nuevo (`native/`)
+
+- **Tokens nativos con Style Dictionary**: dos plataformas nuevas en `sd.config.mjs`
+  (`swift`, `kotlin`) con formatos propios en `sd.formats.mjs`. `pnpm build:tokens`
+  genera `native/apple/…/Tokens/BrandTokens.swift` y
+  `native/android/…/tokens/BrandTokens.kt`: colores y roles claro/oscuro (`Color` dinámico
+  en Swift; `BrandColorRoles.light|dark` + `CompositionLocal` en Compose), espaciado,
+  radios, anchos de borde, tallas, opacidad, tipografía, sombras y motion. Los tokens de
+  componente quedan para cuando se porte cada componente.
+- **Paquete SwiftPM** `StudiolxdBrand` (`Package.swift` en la raíz; iOS 17, macOS 14,
+  Swift 6): `registerFonts()`, `BrandTextStyle` y `Font.brand(_:)`.
+- **Módulo Gradle** `com.github.studiolxd:brand` (`native/android`, minSdk 26, publicable
+  por JitPack con `jitpack.yml`): `BrandTheme`, `BrandFontFamily`, `BrandTypography`.
+- **Fuentes**: `pnpm build:native-fonts` descomprime los woff2 variables (Google Sans Flex,
+  Google Sans Code, Libre Bodoni; cara `latin`) a TTF para ambas plataformas.
+- **Paridad con React**: fichas por componente (`native/parity/`), validador
+  (`pnpm native:parity`, con TypeScript y `ajv`) y pruebas de paridad en Swift y Kotlin.
+- **Capturas**: swift-snapshot-testing (Apple) y Paparazzi (Android), con una captura de
+  ejemplo de los roles de color en claro y oscuro.
+- **`release:check`** comprueba que `npm pack` no incluye nada nativo, que los tokens
+  nativos están al día y la paridad; con `--with-native` compila y prueba Swift (macOS e
+  iOS) y Gradle.
+- Documentación en `native/README.md` y en `CLAUDE.md` § «Nativo (iOS y Android)».
+
+### Nativo — componentes de SwiftUI (iOS 17 y macOS 14)
+
+> Los primeros componentes nativos, los que pide Homenize. Mismos nombres de props y casos que React, solo tokens,
+> claro y oscuro con colores dinámicos, tipo dinámico, VoiceOver, zona táctil de 44 pt, puntero y foco de teclado en
+> macOS y «reducir movimiento». Detalle y ejemplos en `native/README.md` § «Componentes de SwiftUI». Compose recibirá los
+> mismos componentes en la tarea siguiente.
+
+- **15 componentes** portados, cada uno con su ficha de paridad (`native/parity/components/`), capturas en claro y
+  oscuro (iOS y macOS), `#Preview` con todas las variantes y la pareja con su story de Storybook
+  (`native/apple/Comparisons/<Componente>/`): `Button` (como `ButtonStyle` + `BrandButton`), `Heading`/`Paragraph`/`Text`,
+  `Icon`, `InputField`, `NumberInputField`, `SelectField`, `SwitcherField`, `ToggleGroup`, `ThemeSwitcher`, `List` +
+  `ListItem`, `Tag`, `EmptyState`, `Skeleton`, `Sheet` (`.sheet` nativo), `ConfirmDialog` y `Toast`/`Toaster`
+  (`ToastCenter` + `toastHost`).
+- **Tokens de componente para Swift**: `pnpm build:tokens` genera también `BrandComponentTokens.swift` (un enum por
+  grupo de `NATIVE_COMPONENT_GROUPS`, con los `surface-dark-*` como `Color` dinámico, también los heredados por
+  referencia). Una medida con par oscuro sale como `BrandSchemeValue`. El CSS puro (`solid`, `vh`, `min()`…) se omite.
+- **`BrandIcon`**: los mismos trazos que el `Icon` de React (77 iconos, retícula de 24), generados desde `Icon.tsx` con
+  `pnpm build:native-icons` (incluido en `build:all`).
+- **Paridad**: las fichas admiten `differences` (lo que se queda a propósito) y `reactOnlyValues` (`block: boolean |
+  'mobile'`), y `native:parity` entiende uniones numéricas (`Heading level: 1 | … | 6`).
+- **Ayudantes**: `brandFont`/`brandLinedFont` (tipo dinámico e interlineado de CSS), `brandHitTarget` (44 pt),
+  `BrandControlSize` y `.brandControlSize(_:)`, `assertBrandSnapshots` (capturas de macOS en sRGB),
+  `native/apple/scripts/capture-story.mjs` y `pair-comparison.sh` (parejas React ↔ SwiftUI a la misma escala).
+- Los ejemplos del README compilan (`ReadmeExamples.swift`).
+
 ## [49.18.0] — 2026-10-03
 
 > **Minor.** `RecoveryCodes` deja pasar el aviso de portapapeles roto, y `react-hook-form`

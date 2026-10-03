@@ -1,0 +1,25 @@
+{
+  "$schema": "../schema.json",
+  "component": "Toaster",
+  "react": { "path": "src/stories/molecules/Toast/Toaster.tsx", "props": "ToasterProps" },
+  "native": { "swift": "ToastHost", "kotlin": "ToastHost" },
+  "props": {
+    "position": { "type": "union", "values": ["bottom-right", "bottom-left", "bottom-center", "top-right", "top-left", "top-center"], "default": "bottom-right" },
+    "closeButton": { "type": "boolean", "default": true },
+    "expand": { "type": "boolean", "default": false }
+  },
+  "excluded": [
+    { "prop": "containerAriaLabel", "reason": "Se porta como `containerLabel: LocalizedStringKey` («Notificaciones» por defecto); la ficha solo tipa uniones y booleanos." },
+    { "prop": "closeLabel", "reason": "Se porta como `closeLabel: LocalizedStringKey` («Cerrar» por defecto); la ficha solo tipa uniones y booleanos." },
+    { "prop": "duration", "reason": "Se porta como `duration: TimeInterval` en segundos (5); la ficha solo tipa uniones y booleanos." },
+    { "prop": "gap", "reason": "Se porta como `gap: CGFloat` (`toast.gap`, 8 pt); la ficha solo tipa uniones y booleanos." },
+    { "prop": "visibleToasts", "reason": "Se porta como `visibleToasts: Int` (3); la ficha solo tipa uniones y booleanos." }
+  ],
+  "differences": [
+    "El anuncio a VoiceOver usa `AccessibilityNotification.Announcement` con prioridad alta para `error` y `warning` y baja para el resto, en vez de `role=\"alertdialog\"`/`status`.",
+    "La pila se despliega con el puntero encima (macOS, iPad); en iPhone táctil queda recogida salvo `expand: true`.",
+    "El gesto de descarte (deslizar) usa los 40 pt de umbral por defecto de Base UI, que no es un token.",
+    "El reloj se detiene mientras el puntero o el dedo están sobre la pila, como el foco/puntero de la web.",
+    "Un aviso `loading` no pinta indicador de espera propio: igual que en React, la intención solo cambia el comportamiento (no se cierra solo)."
+  ]
+}

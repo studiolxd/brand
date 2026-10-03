@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema.json",
+  "component": "Skeleton",
+  "react": { "path": "src/stories/atoms/Skeleton/Skeleton.tsx", "props": "SkeletonProps" },
+  "native": { "swift": "BrandSkeleton", "kotlin": "BrandSkeleton" },
+  "props": {
+    "circle": { "type": "boolean", "default": false }
+  },
+  "excluded": [
+    { "prop": "width", "reason": "En CSS es una medida libre (`string`); en nativo es un `CGFloat?` en puntos, no una unión de casos." },
+    { "prop": "height", "reason": "En CSS es una medida libre (`string`); en nativo es un `CGFloat?` en puntos, no una unión de casos." },
+    { "prop": "className", "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens." }
+  ],
+  "differences": [
+    "El alto por defecto es `1lh` en React (una línea de texto); en nativo es cuerpo × interlineado de `text.*` (16 × 1,5 = 24 pt) escalado con el tipo dinámico, porque `lh` no existe.",
+    "El barrido es un degradado de 2× el ancho que recorre de −200 % a 200 %, como `background-position`; con «Reducir movimiento» queda el fondo plano (`prefers-reduced-motion` en CSS)."
+  ]
+}

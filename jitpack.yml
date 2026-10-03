@@ -1,0 +1,8 @@
+# JitPack construye y publica el módulo Android de Brand (`com.github.studiolxd:brand:<tag>`) desde native/android.
+# JitPack pasa el tag construido en la variable VERSION, que native/android/brand/build.gradle.kts usa como versión.
+# Las pruebas (y las capturas de Paparazzi) no se ejecutan aquí: son de `./gradlew build` en local y en la puerta de
+# calidad del release (`pnpm release:check -- --with-native`).
+jdk:
+  - openjdk21
+install:
+  - cd native/android && ./gradlew :brand:publishToMavenLocal -x test -x lint -x lintDebug -x lintRelease --no-daemon

@@ -1,0 +1,63 @@
+{
+  "$schema": "../schema.json",
+  "component": "ToggleGroup",
+  "react": {
+    "path": "src/stories/atoms/ToggleGroup/ToggleGroup.tsx",
+    "props": "ToggleGroupProps"
+  },
+  "native": {
+    "swift": "BrandToggleGroup",
+    "kotlin": "BrandToggleGroup"
+  },
+  "props": {
+    "size": {
+      "type": "union",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    },
+    "orientation": {
+      "type": "union",
+      "values": [
+        "horizontal",
+        "vertical"
+      ],
+      "default": "horizontal"
+    },
+    "multiple": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "excluded": [
+    {
+      "prop": "value",
+      "reason": "La selección es el `Binding` `selection` (`Set<Value>` o `Value?` en exclusivo), que cubre `value`, `defaultValue` y `onValueChange`."
+    },
+    {
+      "prop": "defaultValue",
+      "reason": "La selección es el `Binding` `selection`; el valor inicial es el del `@State` de quien lo usa."
+    },
+    {
+      "prop": "onValueChange",
+      "reason": "Lo cubre el `Binding` `selection`: SwiftUI notifica el cambio escribiendo en él."
+    },
+    {
+      "prop": "children",
+      "reason": "El contenido son los `BrandToggleGroupItem` del `@ViewBuilder`."
+    },
+    {
+      "prop": "className",
+      "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
+    }
+  ],
+  "differences": [
+    "Los elementos son `BrandToggleGroupItem(value:)`; el `Toggle` suelto es el `ToggleStyle` `.brandToggle`.",
+    "La selección es un `Set` (o un valor opcional en exclusivo), no una lista de textos: el valor puede ser cualquier `Hashable`.",
+    "El grupo no es una sola parada de tabulador con flechas: cada elemento es un botón enfocable.",
+    "El nombre accesible del grupo va con `.accessibilityLabel(_:)`, como el `aria-label`."
+  ]
+}
