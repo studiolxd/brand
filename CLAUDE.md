@@ -34,7 +34,7 @@ docker buildx build --platform linux/amd64 -t ghcr.io/studiolxd/studiolxd-brand:
 >
 > **IMPORTANTE:** `pnpm build:lib` borra y regenera `dist/` pero **no** regenera `dist/brand.css`, `dist/tokens.css` ni `dist/fonts.css`. Después de `build:lib` ejecutar siempre `pnpm build:css && pnpm build:tokens-css && pnpm build:fonts-css`, o usar `pnpm build:all` para el build completo.
 >
-> **IMPORTANTE:** No se taggea (`git tag vX.Y.Z`) sin `pnpm release:check` en verde. El script (`scripts/release-check.mjs`) encadena `lint` → `tsc -b` → `test` → `build:all` y termina comprobando que `dist/` quedó realmente regenerado y en sync: (1) que existe un artefacto en `dist/` para cada entrada de `package.json#exports`, y (2) que `git status --porcelain -- dist` queda limpio tras el build — si el build cambia algo en `dist/`, es que el `dist/` committeado no correspondía al `src/` actual, exactamente el fallo que dejó pasar v27.1.0 sin `dist`. `test:stories` es un paso opcional (`pnpm release:check -- --with-stories`) porque depende de Chromium/Playwright y no siempre está disponible (p. ej. en redes restringidas). NO se engancha a ningún hook de ciclo de vida (`prepack`/`prepare`/`postinstall`): pnpm los ejecuta al instalar el paquete por git en cada consumidor y rompería la instalación de la suite (pasó en v25.28.0). El guardián es correr `release:check` a mano antes del `git tag`. Ver también § «Flujo al publicar cambios».
+> **IMPORTANTE:** No se taggea (`git tag vX.Y.Z`) sin `pnpm release:check` en verde. El script (`scripts/release-check.mjs`) encadena `lint` → `tsc -b` → `test` → `build:all` y termina comprobando que `dist/` quedó realmente regenerado y en sync: (1) que existe un artefacto en `dist/` para cada entrada de `package.json#exports`, y (2) que `git status --porcelain -- dist` queda limpio tras el build — si el build cambia algo en `dist/`, es que el `dist/` committeado no correspondía al `src/` actual, exactamente el fallo que dejó pasar v27.1.0 sin `dist`. `test:stories` es un paso opcional (`pnpm release:check -- --with-stories`) porque depende de Chromium/Playwright y no siempre está disponible (p. ej. en redes restringidas). NO se engancha a ningún hook de ciclo de vida (`prepack`/`prepare`/`postinstall`): `postinstall` se ejecuta al instalar el paquete en cada consumidor —y `prepare`, en la época en que se instalaba por git— y rompería la instalación de la suite (pasó en v25.28.0). El guardián es correr `release:check` a mano antes del `git tag`. Ver también § «Flujo al publicar cambios».
 >
 > **IMPORTANTE — caja de ficheros en `dist/` (macOS):** macOS trae `git` con `core.ignorecase=true` por defecto. Bajo eso, un rename a otra caja (`Logo.js` → `logo.js`) dentro de `dist/` puede dejar el DISCO al día pero el ÍNDICE de git con el nombre viejo, y `git status --porcelain` no lo marca como sucio porque en un filesystem insensible a mayúsculas ambos nombres «son» el mismo fichero — así se publicó v37.5.2 con `dist/` en mayúscula y los imports en minúscula, rompiendo la resolución en Turbopack (sensible a mayúsculas incluso en macOS). `release-check.mjs` ya lo detecta (compara `git ls-files -z dist` contra el disco con `readdirSync`, sensible a mayúsculas, en `scripts/lib/case-guard.mjs`), pero además conviene `git config core.ignorecase false` en este repo (no se versiona — es de `.git/config`, cada clon/worktree lo necesita por su cuenta) para que `git status` deje de ocultar estos renames. Si el guardián falla: `git rm -r --cached dist && git -c core.ignorecase=false add -A dist`.
 
@@ -60,7 +60,7 @@ La **revisión y la aceptación** de los cambios visuales se hacen en chromatic.
 
 ## Architecture
 
-Librería de componentes React distribuida como paquete npm vía git (`@studiolxd/brand`). Dos salidas de build:
+Librería de componentes React publicada en el registro de npm (`@studiolxd/brand`). Dos salidas de build:
 
 - **`dist/index.js` + `dist/index.css`** — componentes React (ESM) + estilos. Para cualquier aplicación React.
 - **`src/tokens/scss/`** — tokens SCSS sin `var()`, con valores resueltos, distribuidos directamente desde el repo (no pasan por `dist/`). Para cualquier aplicación que no use React y necesite los tokens (PHP, servidor, herramientas de diseño…). Dos entrypoints auto-generados por `build:tokens`: `_index.scss` (`@forward`, Sass moderno — export `./scss`) y `_index.legacy.scss` (`@import`, para compiladores sin `@use`/`@forward` como el scssphp de Moodle — export `./scss/legacy`). También hay exports por fichero: `./scss/global/*`, `./scss/components/*`, `./scss/molecules/*`.
@@ -330,7 +330,12 @@ ESLint 9 flat config (`eslint.config.js`). TypeScript, React Hooks, React Refres
 
 ## Versionado
 
-El paquete sigue **semver** y se distribuye vía git tags. Los consumidores pinean a un tag específico (`github:studiolxd/brand#vX.Y.Z`): la web, 360, learn-app, rubik, keycloakify-starter y **las 10 apps de la suite slxd** (monorepo `/Users/suvi/Dev/slxd`, que desde v14 consume este paquete en lugar de su copia `@slxd/ui`, ya retirada). Un breaking aquí rompe a todos al hacer bump: majors con cuidado.
+El paquete sigue **semver** y se distribuye por el **registro de npm** (cada versión lleva además su tag de git `vX.Y.Z`). Los consumidores instalan una versión del registro: **las 10 apps de la suite slxd** (monorepo `/Users/suvi/Dev/slxd`, por el catálogo de pnpm; desde v14 consume este paquete en lugar de su copia `@slxd/ui`, ya retirada), learn-app, rubik y keycloakify-starter (las tres pasaron del tag de git al registro el 2026-10-03, con la v49.18.0), además de la web y 360. Un breaking aquí rompe a todos al hacer bump: majors con cuidado.
+
+Consumir por tag de git (`github:studiolxd/brand#vX.Y.Z`) ya no se usa: cada `pnpm install` bajaba de codeload un tarball de 6 MB con el repo entero y obligaba a mantener en `allowBuilds` una entrada por URL de tarball. Dos detalles del lado del consumidor, con pnpm 11:
+
+- **`minimumReleaseAgeExclude: ['@studiolxd/brand']`** en su `pnpm-workspace.yaml`. pnpm 11 bloquea por defecto las versiones recién publicadas, y la nuestra casi siempre lo es al subirla. Se excluye el paquete entero, no `@studiolxd/brand@X.Y.Z`: atado a la versión, haría falta una entrada nueva en cada bump.
+- **Un peer que pasa a opcional sigue en el lockfile** de quien ya lo tenía resuelto (pnpm reutiliza la resolución). Para que desaparezca: `pnpm remove @studiolxd/brand && pnpm add @studiolxd/brand@^X.Y.Z`.
 
 ### Reglas
 
@@ -389,11 +394,6 @@ justo lo que no se podía hacer publicando directo:
 > (gh.io/npm-gat-bypass2fa-deprecation), o sea que el camino del «Automation»
 > tiene fecha de caducidad. Corregido el 2026-09-15 al publicar la v38.17.0, que
 > es donde se vio que la respuesta buena era esta y no generar otro token.
-
-**Pendiente (2026-09-14)**: el catálogo de la suite sigue consumiendo el
-paquete por tag de git (`github:studiolxd/brand#vX`). En cuanto haya una
-versión publicada en el registro, esa línea pasa a ser la versión a secas y el
-`pnpm install` de las apps deja de bajar un tarball de 6 MB de codeload.
 
 ### Flujo al publicar cambios
 
