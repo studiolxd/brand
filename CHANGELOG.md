@@ -9,7 +9,8 @@ para breaking changes.
 
 ## [Siguiente]
 
-> **Minor.** Componente nuevo: `EmbedFrame`, el marco embebido del sistema.
+> **Minor.** Componente nuevo: `EmbedFrame`, el marco embebido del sistema, y las tres
+> props de alto que lo colocan sin CSS de consumidor.
 
 ### `EmbedFrame` — nuevo
 
@@ -20,7 +21,18 @@ para breaking changes.
   (para `contentWindow` y `postMessage`) y los atributos nativos (`allow`, `sandbox`,
   `loading`, `referrerPolicy`, `name`, `onLoad`, `srcDoc`…). No acepta `width`,
   `height` ni `frameBorder`.
+- `fill?: 'container' | 'viewport'` (por defecto `container`): con `viewport` mide el
+  alto de la ventana, para cuando no hay contenedor con alto.
 - Sin tokens propios. Import: `@studiolxd/brand/embed-frame` (también en el barril).
+
+### Props nuevas para ocupar el alto
+
+- **`Stack fill`**: la pila ocupa el alto de su contenedor (`block-size: 100%`), y lo que
+  crece dentro se queda con lo que dejan las demás piezas.
+- **`ScrollArea fill`**: el área ocupa el alto que dejan sus hermanos en una columna con
+  alto. Solo desde `md`; por debajo mide su contenido.
+- **`AppShell contentFlush`**: el contenido principal a sangre, sin relleno de sección
+  (respeta la zona segura del dispositivo). Story nueva «Contenido a sangre».
 
 ## [49.16.0] — 2026-10-02
 

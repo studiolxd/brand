@@ -14,3 +14,9 @@
   min-block-size: 0;
   border: 0;
 }
+
+/* Sin contenedor con alto —solo en la página, o en una celda de `Columns`—
+   el 100% no tiene contra qué medirse: el marco toma el alto de la ventana. */
+.embed-frame.embed-frame--viewport {
+  block-size: 100dvh;
+}

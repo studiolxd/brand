@@ -49,6 +49,16 @@ describe('EmbedFrame', () => {
     expect(screen.getByTitle('Reproductor del curso')).not.toHaveAttribute('style');
   });
 
+  it('por defecto llena el contenedor: sin clase de ventana', () => {
+    render(<EmbedFrame title="Reproductor del curso" />);
+    expect(screen.getByTitle('Reproductor del curso').className).toBe('embed-frame');
+  });
+
+  it('fill="viewport" lleva la clase embed-frame--viewport', () => {
+    render(<EmbedFrame title="Reproductor del curso" fill="viewport" />);
+    expect(screen.getByTitle('Reproductor del curso')).toHaveClass('embed-frame', 'embed-frame--viewport');
+  });
+
   it('className se añade a las clases propias', () => {
     render(<EmbedFrame title="Reproductor del curso" className="extra" />);
     expect(screen.getByTitle('Reproductor del curso')).toHaveClass('embed-frame', 'extra');

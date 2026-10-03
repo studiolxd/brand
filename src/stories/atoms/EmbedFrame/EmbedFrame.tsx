@@ -10,6 +10,12 @@ export interface EmbedFrameProps
   title: string;
   /** Dirección del documento que se pinta dentro. */
   src?: string;
+  /**
+   * Qué alto llena. `container` (por defecto): el de la caja que le dan.
+   * `viewport`: el de la ventana, para cuando el marco no tiene un contenedor
+   * con alto —solo en la página, o como celda de `Columns`—.
+   */
+  fill?: 'container' | 'viewport';
   /** Se añade DESPUÉS de las clases propias. */
   className?: string;
 }
@@ -21,7 +27,8 @@ export interface EmbedFrameProps
  *
  * **El alto lo pone el contenedor**: el marco llena la caja que le dan. Dentro
  * de `AppShell` esa caja es el contenido principal, que ya mide el resto de la
- * ventana bajo la cabecera y junto a la barra lateral.
+ * ventana bajo la cabecera y junto a la barra lateral. Sin contenedor con alto,
+ * `fill="viewport"` le da el de la ventana.
  *
  * `ref` apunta al `<iframe>` —de ahí sale `contentWindow` para `postMessage`—
  * y `{...rest}` (`allow`, `sandbox`, `loading`, `referrerPolicy`, `name`,
@@ -29,9 +36,10 @@ export interface EmbedFrameProps
  */
 export const EmbedFrame = forwardRef<HTMLIFrameElement, EmbedFrameProps>(function EmbedFrame({
   title,
+  fill = 'container',
   className,
   ...rest
 }, ref) {
-  const classes = ['embed-frame', className].filter(Boolean).join(' ');
+  const classes = ['embed-frame', fill === 'viewport' ? 'embed-frame--viewport' : '', className].filter(Boolean).join(' ');
   return <iframe ref={ref} className={classes} title={title} {...rest} />;
 });

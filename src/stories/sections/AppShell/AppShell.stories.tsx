@@ -7,6 +7,7 @@ import { Logo } from '../../atoms/Logo/Logo';
 import { Heading } from '../../atoms/Heading/Heading';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Container } from '../../atoms/Container/Container';
+import { EmbedFrame } from '../../atoms/EmbedFrame/EmbedFrame';
 import { SidebarNav } from '../../molecules/SidebarNav/SidebarNav';
 import { OrgSwitcher } from '../../molecules/OrgSwitcher/OrgSwitcher';
 import { UserMenu } from '../../molecules/UserMenu/UserMenu';
@@ -60,6 +61,18 @@ type Story = StoryObj<typeof AppShell>;
 
 /** Escritorio: barra arriba, sidebar desplegada a la izquierda. */
 export const PorDefecto: Story = {};
+
+/**
+ * `contentFlush`: el contenido a sangre, sin el relleno de sección. Aquí, el
+ * reproductor de un curso en un `EmbedFrame`, que trae sus propios márgenes.
+ */
+export const ContenidoASangre: Story = {
+  name: 'Contenido a sangre',
+  args: {
+    contentFlush: true,
+    children: <EmbedFrame title="Reproductor del curso" srcDoc={`<!doctype html><html lang="es"><body style="font-family:sans-serif;margin:0;padding:24px"><p>Pantalla del curso.</p></body></html>`} />,
+  },
+};
 
 /** Sidebar en rail: solo iconos; los grupos se abren como menú al pulsar o al pasar el ratón. */
 export const Rail: Story = { args: { defaultSidebar: 'rail' } };

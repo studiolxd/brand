@@ -42,6 +42,22 @@ ranura `banner` el valor es cero y todo arranca bajo la cabecera, como siempre.
 
 <Canvas of={AppShellStories.ConBarraDeSistemaEnMovil} />
 
+## Contenido a sangre
+
+El contenido principal lleva por defecto el relleno de sección: es lo que quiere
+una pantalla de la aplicación. `contentFlush` lo quita y el contenido llega al
+borde de la cabecera y de la sidebar. Es para lo que **trae sus propios
+márgenes**: el reproductor de un curso en un `EmbedFrame`, cuyos márgenes son
+una propiedad del tema del curso, no del armazón. La zona segura del
+dispositivo se respeta igual: el contenido no se mete bajo el bisel ni bajo la
+barra de inicio.
+
+<Canvas of={AppShellStories.ContenidoASangre} />
+
+Lo que vaya encima del marco y sí necesite aire (una fila con el enlace de
+vuelta y el título) lo lleva en un `Container`. El reparto del alto, en
+**Atoms › EmbedFrame**.
+
 ## Móvil
 
 La misma sidebar entra como cajón sobre un velo; el contenido queda `inert` y sin scroll. Se cierra con Escape, tocando el velo, con el botón de menú o **al navegar** (cualquier enlace dentro de ella). No hay rail ni redimensión: solo abierto o cerrado.

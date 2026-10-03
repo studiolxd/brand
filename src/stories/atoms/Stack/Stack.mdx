@@ -54,6 +54,24 @@ ancho del `Stack`.
 <Canvas of={StackStories.AlineacionPorDefecto} />
 <Canvas of={StackStories.AlineacionStretch} />
 
+## Alto del contenedor: `fill`
+
+Por defecto la pila mide lo que su contenido. Con `fill` ocupa **el alto de su
+contenedor** y pasa a ser una columna con alto: una pieza que crece —un
+`EmbedFrame`, un `ScrollArea fill`— se queda con lo que dejan las demás. Es
+para la raíz del contenido de `AppShell`, que sí tiene alto: una fila arriba y,
+debajo, un marco que llega al final de la pantalla sin desplazar la página.
+
+```tsx
+<Stack fill align="stretch">
+  <Inline>…</Inline>
+  <EmbedFrame title="Reproductor del curso" src={url} />
+</Stack>
+```
+
+Sin un contenedor con alto, `fill` no tiene contra qué medirse y la pila
+sigue midiendo su contenido. El caso completo, en **Atoms › EmbedFrame**.
+
 ## Atributos al `<div>`
 
 Lo que no sea prop propia (`role`, `aria-*`, `id`, `data-*`, `style`…) viaja al `<div>` de la

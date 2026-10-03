@@ -25,8 +25,57 @@ borde ni fondo propios, y el desplazamiento ocurre **dentro** del documento
 embebido, no en la página. El alto no lo decide el componente: lo pone el
 contenedor. En una columna flexible con alto toma el que dejan sus hermanos.
 
-Como contenido de `AppShell`, esa caja es el contenido principal, que ya mide
-el resto de la ventana bajo la cabecera y junto a la barra lateral:
+Hay tres maneras de darle esa caja, una por uso.
+
+### A ventana completa
+
+Solo en la página no hay ningún contenedor con alto contra el que medirse.
+`fill="viewport"` le da el alto de la ventana:
+
+```tsx
+<EmbedFrame fill="viewport" title="Reproductor del curso" src={url} />
+```
+
+<Canvas of={EmbedFrameStories.AVentanaCompleta} />
+
+### Junto a un panel
+
+Como celda de `Columns align="stretch"`, el marco va también con
+`fill="viewport"`: la fila mide la ventana, y el panel de al lado reparte ese
+alto con un `ScrollArea fill`, que es lo que se desplaza. En móvil `Columns`
+apila: el marco ocupa la pantalla y el panel va debajo, entero.
+
+```tsx
+<Columns ratio="2:1" align="stretch">
+  <EmbedFrame fill="viewport" title="Reproductor del curso" src={url} />
+  <Stack align="stretch">
+    <Heading level={2} size={5}>Comentarios</Heading>
+    <ScrollArea fill label="Comentarios">…</ScrollArea>
+    <Form actions={…}>…</Form>
+  </Stack>
+</Columns>
+```
+
+<Canvas of={EmbedFrameStories.JuntoAUnPanelLateral} />
+
+### En el armazón de la aplicación
+
+Dentro de `AppShell` el contenido principal ya mide el resto de la ventana
+bajo la cabecera y junto a la barra lateral. `contentFlush` lo deja a sangre
+—los márgenes del reproductor son del tema del curso, no del armazón— y
+`Stack fill` hace de la página una columna con ese alto: el marco se queda con
+lo que deja la fila de arriba.
+
+```tsx
+<AppShell contentFlush header={…} sidebar={…}>
+  <Stack fill gap="sm" align="stretch">
+    <Container width="full" space="sm">
+      <Inline>…volver y título…</Inline>
+    </Container>
+    <EmbedFrame title="Reproductor del curso" src={url} />
+  </Stack>
+</AppShell>
+```
 
 <Canvas of={EmbedFrameStories.EnElArmazon} />
 
