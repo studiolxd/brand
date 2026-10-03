@@ -169,6 +169,22 @@ export const NATIVE_GLOBAL_GROUPS = new Set([
   'motion',
 ]);
 
+/**
+ * Grupos de tokens de COMPONENTE que se generan para nativo (`path[0]` del token).
+ * Se amplía al portar un componente: la lista sale de los `var(--…)` que usa su CSS.
+ * Cada grupo sale como `enum Brand<Grupo>Tokens` (Swift) con una constante por token que
+ * se pueda expresar (dimensiones, colores, duraciones, curvas, números, sombras, familias);
+ * los demás valores (`solid`, `center`, `pointer`, `100%`, `85vh`…) son CSS puro y se omiten.
+ * Un `surface-dark-<nombre>` no sale suelto: es el lado oscuro de `<nombre>`.
+ */
+export const NATIVE_COMPONENT_GROUPS = [
+  'button', 'close-button', 'control', 'input', 'input-field', 'label', 'form-field', 'field-row',
+  'number-input', 'number-input-field', 'select', 'select-field', 'dropdown-field', 'checkbox',
+  'switcher', 'switcher-field', 'toggle', 'toggle-group', 'theme-switcher', 'text', 'link',
+  'tag', 'empty-state', 'skeleton', 'sheet', 'modal', 'confirm-dialog', 'toast', 'icon', 'spinner',
+  'separator', 'form', 'fieldset', 'card', 'popover', 'menu',
+];
+
 // 1rem = 16: el sistema no toca el font-size del <html>.
 const ROOT_FONT_SIZE = 16;
 
@@ -512,6 +528,155 @@ function kotlinSource(model, header) {
   return out.join('\n').replace(/\n+$/, '\n');
 }
 
+/* ---------------------------------------------------------------------------
+ * Tokens de componente nativos (solo Swift por ahora)
+ *
+ * Un `enum Brand<Grupo>Tokens` por grupo de `NATIVE_COMPONENT_GROUPS`. El lado
+ * oscuro de un token sale de dos sitios, igual que en CSS: su hermano
+ * `surface-dark-<nombre>` y la derivación por referencias (un token que apunta
+ * a otro con par oscuro hereda ese par: es el fichero `surface-dark-derived.css`).
+ * Con par oscuro el valor es un `Color` dinámico; sin él, uno fijo.
+ * ------------------------------------------------------------------------- */
+
+const REF = /\{([^{}]+)\}/g;
+
+/** `calc(2.5rem + 2 * 0.5rem)` → número de puntos, o `null` si no es aritmética pura de rem/px. */
+function evalCalc(value) {
+  if (!value.startsWith('calc(')) return null;
+  const expr = value
+    .replace(/calc\(/g, '(')
+    .replace(/(-?[\d.]+)rem/g, (_, n) => `(${n}*${ROOT_FONT_SIZE})`)
+    .replace(/(-?[\d.]+)px/g, '$1');
+  if (!/^[\d\s.+\-*/()]+$/.test(expr)) return null;
+  try {
+    const n = Function(`"use strict"; return (${expr});`)();
+    return Number.isFinite(n) ? n : null;
+  } catch {
+    return null;
+  }
+}
+
+/** El valor CSS de un token en modo `light` o `dark`, resuelto a partir de sus referencias. */
+function resolveToken(tokenMap, token, mode, depth = 0) {
+  if (depth > 20) throw new Error(`Referencias circulares en ${token.path.join('.')}`);
+  const own = String(token.$value ?? token.value);
+  if (mode === 'light') return own;
+  const path = token.path;
+  const last = path[path.length - 1];
+  const sibling = tokenMap.get(`{${[...path.slice(0, -1), `${DARK_TOKEN_PREFIX}${last}`].join('.')}}`);
+  const source = sibling ?? token;
+  const raw = source.original?.$value ?? source.original?.value;
+  if (typeof raw !== 'string' || !/\{[^{}]+\}/.test(raw)) {
+    return sibling ? String(sibling.$value ?? sibling.value) : own;
+  }
+  return raw.replace(REF, (_, ref) => {
+    const target = tokenMap.get(`{${ref}}`);
+    if (!target) throw new Error(`Referencia sin resolver {${ref}} en ${path.join('.')}`);
+    return resolveToken(tokenMap, target, 'dark', depth + 1);
+  });
+}
+
+/** Clasifica un valor CSS ya resuelto en un tipo nativo; `null` si es CSS puro (se omite). */
+function nativeValue(path, value) {
+  const last = path[path.length - 1];
+  if (/^(#|rgba?\()/.test(value)) return { kind: 'color', color: parseColor(value) };
+  if (/^-?[\d.]+m?s$/.test(value)) {
+    const n = parseFloat(value);
+    return { kind: 'duration', seconds: value.endsWith('ms') ? n / 1000 : n };
+  }
+  if (value in CSS_EASINGS) return { kind: 'easing', bezier: CSS_EASINGS[value] };
+  if (/^-?[\d.]+em$/.test(value)) return { kind: 'em', number: parseFloat(value) };
+  if (/^-?[\d.]+(rem|px)?$/.test(value)) {
+    return /font-weight$/.test(last) ? { kind: 'weight', number: +value } : { kind: 'points', points: toPoints(value) };
+  }
+  const calc = evalCalc(value);
+  if (calc !== null) return { kind: 'points', points: calc };
+  if (/(^|-)font-family$/.test(last)) return { kind: 'family', family: value.match(/^\s*"?([^",]+)"?/)[1] };
+  if (/shadow$/.test(last)) {
+    if (value.trim() === 'none') return { kind: 'shadow', shadow: null };
+    try {
+      return { kind: 'shadow', shadow: parseShadow(value) };
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
+
+/** Modelo de los tokens de componente: `[{ group, tokens: [{ name, token, doc, light, dark? }] }]`. */
+export function buildComponentModel(dictionary) {
+  const { allTokens, tokenMap } = dictionary;
+  const numbered = (name) => (/^\d/.test(name) ? `s${name}` : name);
+  return NATIVE_COMPONENT_GROUPS.map((group) => {
+    const tokens = [];
+    for (const t of allTokens) {
+      if (t.path[0] !== group || isDarkToken(t)) continue;
+      const light = nativeValue(t.path, resolveToken(tokenMap, t, 'light'));
+      if (!light) continue;
+      let dark = null;
+      if (light.kind === 'color') {
+        const d = nativeValue(t.path, resolveToken(tokenMap, t, 'dark'));
+        if (d?.kind === 'color' && JSON.stringify(d.color) !== JSON.stringify(light.color)) dark = d;
+      }
+      tokens.push({
+        name: numbered(camel(t.path.slice(1))),
+        token: t.path.join('.'),
+        doc: t.$description ?? t.comment ?? '',
+        light,
+        dark,
+      });
+    }
+    return { group, tokens };
+  }).filter((g) => g.tokens.length);
+}
+
+function swiftComponentSource(groups, header) {
+  const sw = (n) => (SWIFT_KEYWORDS.has(n) ? `\`${n}\`` : n);
+  const pascal = (g) => g.split('-').map(upperFirst).join('');
+  const lines = [`// ${header}`, '', 'import SwiftUI', ''];
+  for (const { group, tokens } of groups) {
+    assertUnique(`componente ${group}`, tokens.map((t) => t.name));
+    lines.push(
+      `/// Tokens del componente \`${group}\` (\`tokens/**/${group}.json\`). Un token con par \`surface-dark-*\` (o que lo hereda) es un \`Color\` dinámico.`,
+      `public enum Brand${pascal(group)}Tokens {`,
+    );
+    for (const t of tokens) {
+      const { light, dark } = t;
+      const doc = docLine(t);
+      let type;
+      let literal;
+      switch (light.kind) {
+        case 'color':
+          type = 'Color';
+          literal = dark
+            ? `Color(brandLight: ${swiftColor(light.color)}, dark: ${swiftColor(dark.color)})`
+            : swiftColor(light.color);
+          break;
+        case 'points': type = 'CGFloat'; literal = trimNum(light.points); break;
+        case 'em': type = 'CGFloat'; literal = trimNum(light.number); break;
+        case 'weight': type = 'Int'; literal = trimNum(light.number); break;
+        case 'duration': type = 'TimeInterval'; literal = trimNum(light.seconds); break;
+        case 'easing':
+          type = 'BrandCubicBezier';
+          literal = light.bezier ? `BrandCubicBezier(${light.bezier.map(trimNum).join(', ')})` : 'BrandCubicBezier.linear';
+          break;
+        case 'family': type = 'String'; literal = JSON.stringify(light.family); break;
+        case 'shadow':
+          type = 'BrandShadow';
+          literal = light.shadow
+            ? `BrandShadow(x: ${trimNum(light.shadow.x)}, y: ${trimNum(light.shadow.y)}, blur: ${trimNum(light.shadow.blur)}, color: ${swiftColor(light.shadow.color)})`
+            : 'BrandShadow.none';
+          break;
+        default: throw new Error(`Tipo nativo desconocido: ${light.kind}`);
+      }
+      const unitNote = light.kind === 'em' ? ' Fracción del tamaño de fuente del propio componente (em).' : '';
+      lines.push(`    /// ${doc}${unitNote}`, `    public static let ${sw(t.name)}: ${type} = ${literal}`);
+    }
+    lines.push('}', '');
+  }
+  return lines.join('\n').replace(/\n+$/, '\n');
+}
+
 /**
  * Registra los formatos `swift/brand-tokens` y `kotlin/brand-tokens`: un único
  * fichero por plataforma con todos los tokens globales (ver
@@ -527,4 +692,11 @@ export function registerNativeFormats(StyleDictionary) {
   };
   StyleDictionary.registerFormat({ name: 'swift/brand-tokens', format: render(swiftSource) });
   StyleDictionary.registerFormat({ name: 'kotlin/brand-tokens', format: render(kotlinSource) });
+  StyleDictionary.registerFormat({
+    name: 'swift/brand-component-tokens',
+    format: async ({ dictionary }) => {
+      const header = 'Do not edit directly, this file was auto-generated by Style Dictionary (sd.config.mjs). Run `pnpm build:tokens`.';
+      return swiftComponentSource(buildComponentModel(dictionary), header);
+    },
+  });
 }

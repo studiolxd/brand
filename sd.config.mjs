@@ -583,7 +583,12 @@ const sd = new StyleDictionary({
     swift: {
       transformGroup: 'css',
       buildPath: 'native/apple/Sources/StudiolxdBrand/Tokens/',
-      files: [{ destination: 'BrandTokens.swift', format: 'swift/brand-tokens', filter: isNativeToken }],
+      files: [
+        { destination: 'BrandTokens.swift', format: 'swift/brand-tokens', filter: isNativeToken },
+        // Sin filtro: el formato necesita los `surface-dark-*` y todo el mapa de referencias para derivar el lado
+        // oscuro; elige él mismo qué grupos salen (`NATIVE_COMPONENT_GROUPS`).
+        { destination: 'BrandComponentTokens.swift', format: 'swift/brand-component-tokens' },
+      ],
     },
     kotlin: {
       transformGroup: 'css',
