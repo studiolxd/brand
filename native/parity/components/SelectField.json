@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema.json",
+  "component": "SelectField",
+  "react": { "path": "src/stories/molecules/SelectField/SelectField.tsx", "props": "SelectFieldProps" },
+  "native": { "swift": "BrandSelectField", "kotlin": "BrandSelectField" },
+  "props": {
+    "size": { "type": "union", "values": ["sm", "md", "lg"], "default": "md" },
+    "labelHidden": { "type": "boolean", "default": false },
+    "error": { "type": "boolean", "default": false }
+  },
+  "excluded": [
+    { "prop": "id", "reason": "El `id` enlaza la etiqueta con el control en HTML; en SwiftUI el enlace es el nombre accesible que pone el propio campo." },
+    { "prop": "label", "reason": "No es una unión ni un booleano: es el primer argumento del inicializador (`BrandSelectField(\"Idioma\", selection: …)`)." },
+    { "prop": "options", "reason": "Es una lista, no un caso: existe como `options: [BrandSelectEntry]` (opción suelta o grupo con cabecera, como en React)." },
+    { "prop": "value", "reason": "En SwiftUI el valor es el `Binding<String>` `selection`, siempre controlado." },
+    { "prop": "defaultValue", "reason": "No existe campo no controlado en SwiftUI: el valor inicial es el del `Binding`." },
+    { "prop": "placeholder", "reason": "Es texto, no un caso: existe como `placeholder: LocalizedStringKey` con default «Seleccionar…»." },
+    { "prop": "name", "reason": "El `name` del campo es de los formularios HTML; en SwiftUI el estado vive en el `Binding`." },
+    { "prop": "disabled", "reason": "Se expresa con el modificador `.disabled(_:)` de SwiftUI, que el campo lee del entorno." },
+    { "prop": "required", "reason": "La obligatoriedad es validación del formulario HTML; en nativo la valida la app y la comunica con `errorMessage`." },
+    { "prop": "errorMessage", "reason": "Es texto, no un caso: existe como `errorMessage: LocalizedStringKey?`." },
+    { "prop": "helperText", "reason": "Es texto, no un caso: existe como `helperText: LocalizedStringKey?`." },
+    { "prop": "className", "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens." },
+    { "prop": "onValueChange", "reason": "El cambio se observa en el `Binding` (`.onChange(of:)`)." },
+    { "prop": "onBlur", "reason": "El foco del disparador lo gestiona el sistema; el campo no expone un manejador." }
+  ],
+  "differences": [
+    "El desplegable es un `Menu` nativo (con `Picker` en línea) y no la lista de Base UI: lleva el estilo del sistema (hoja de acciones/menú emergente), con marca de verificación en la opción elegida en lugar de peso 500; el disparador sí es el de Brand.",
+    "El chevron del disparador no gira al abrir: SwiftUI no informa de si un `Menu` está abierto.",
+    "Los grupos con cabecera usan `Section` del menú nativo (cabecera no elegible).",
+    "`\"\"` como valor significa «nada elegido» y se enseña el marcador; no hace falta el centinela que usa la web porque el `Picker` admite cualquier etiqueta.",
+    "En iOS la zona táctil del disparador llega a 44 pt aunque el campo sm mida 32; en macOS el foco de teclado pinta el anillo interior."
+  ]
+}
