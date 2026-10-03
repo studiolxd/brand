@@ -1,25 +1,44 @@
 import './list.css';
 import { forwardRef as e } from "react";
-import { jsx as t } from "react/jsx-runtime";
+import { jsx as t, jsxs as n } from "react/jsx-runtime";
 //#region src/stories/atoms/List/List.tsx
-var n = e(function({ type: e = "unordered", className: n, children: r, ...i }, a) {
+var r = e(function({ type: e = "unordered", showSeparators: n = !1, className: r, children: i, ...a }, o) {
 	return /* @__PURE__ */ t(e === "ordered" ? "ol" : "ul", {
-		ref: a,
+		ref: o,
 		className: [
 			"list",
 			`list--${e}`,
-			n ?? ""
+			n ? "list--separated" : "",
+			r ?? ""
 		].filter(Boolean).join(" "),
-		...i,
-		children: r
+		...a,
+		children: i
 	});
-}), r = e(function({ as: e = "li", className: n, children: r, ...i }, a) {
-	return /* @__PURE__ */ t(e, {
-		ref: a,
-		className: ["list__item", n ?? ""].filter(Boolean).join(" "),
-		...i,
-		children: r
+}), i = e(function({ as: e = "li", secondary: r, trailing: i, className: a, children: o, ...s }, c) {
+	let l = ["list__item", a ?? ""].filter(Boolean).join(" "), u = r != null && r !== !1, d = i != null && i !== !1;
+	return !u && !d ? /* @__PURE__ */ t(e, {
+		ref: c,
+		className: l,
+		...s,
+		children: o
+	}) : /* @__PURE__ */ t(e, {
+		ref: c,
+		className: l,
+		...s,
+		children: /* @__PURE__ */ n("div", {
+			className: "list__item-row",
+			children: [/* @__PURE__ */ n("div", {
+				className: "list__item-main",
+				children: [o, u && /* @__PURE__ */ t("div", {
+					className: "list__item-secondary",
+					children: r
+				})]
+			}), d && /* @__PURE__ */ t("div", {
+				className: "list__item-trailing",
+				children: i
+			})]
+		})
 	});
 });
 //#endregion
-export { n as List, r as ListItem };
+export { r as List, i as ListItem };

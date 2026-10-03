@@ -19,33 +19,36 @@ function h(e, t) {
 	return [
 		"alert",
 		m[e ?? ""] ?? "",
-		e === "warning" ? "" : "surface-dark",
+		e === "success" || e === "error" ? "surface-dark" : "",
 		t ? "alert--dismissible" : "",
 		"toast"
 	].filter(Boolean).join(" ");
 }
-function g({ position: a, containerAriaLabel: o, closeLabel: c, closeButton: p, gap: m, expand: g }) {
-	let _ = e("toaster"), { toasts: v } = f.useToastManager(), [y, b] = a.split("-"), x = v.map((e) => e.id).join(",");
+function g(e) {
+	return e === "success" || e === "error" ? "" : e === "warning" ? " surface-light" : " surface-invert";
+}
+function _({ position: a, containerAriaLabel: o, closeLabel: c, closeButton: p, gap: m, expand: _ }) {
+	let v = e("toaster"), { toasts: y } = f.useToastManager(), [b, x] = a.split("-"), S = y.map((e) => e.id).join(",");
 	l(() => {
-		s(x ? x.split(",") : []);
-	}, [x]);
-	let S = i({ "--toast-gap": `${m}px` }), C = t(void 0), w = [
+		s(S ? S.split(",") : []);
+	}, [S]);
+	let C = i({ "--toast-gap": `${m}px` }), w = t(void 0), T = [
 		"toaster",
-		y === "top" ? "toaster--top" : "",
-		b === "right" ? "" : `toaster--${b}`,
-		g ? "toaster--expanded" : ""
+		b === "top" ? "toaster--top" : "",
+		x === "right" ? "" : `toaster--${x}`,
+		_ ? "toaster--expanded" : ""
 	].filter(Boolean).join(" ");
 	return /* @__PURE__ */ u(f.Portal, {
-		container: C,
+		container: w,
 		children: /* @__PURE__ */ u(f.Viewport, {
-			ref: S,
-			className: w,
-			"aria-label": _("container", o),
-			children: v.map((e) => /* @__PURE__ */ d(f.Root, {
+			ref: C,
+			className: T,
+			"aria-label": v("container", o),
+			children: y.map((e) => /* @__PURE__ */ d(f.Root, {
 				toast: e,
 				className: h(e.type, p),
 				children: [/* @__PURE__ */ d("div", {
-					className: "alert__content",
+					className: `alert__content${g(e.type)}`,
 					children: [
 						/* @__PURE__ */ u(f.Title, { className: "alert__title" }),
 						/* @__PURE__ */ u(f.Description, { className: "alert__description" }),
@@ -58,20 +61,20 @@ function g({ position: a, containerAriaLabel: o, closeLabel: c, closeButton: p, 
 						})
 					]
 				}), p && /* @__PURE__ */ u(f.Close, {
-					className: "alert__close",
-					render: /* @__PURE__ */ u(r, { label: _("close", c) })
+					className: `alert__close${g(e.type)}`,
+					render: /* @__PURE__ */ u(r, { label: v("close", c) })
 				})]
 			}, e.id))
 		})
 	});
 }
-function _({ position: e = "bottom-right", containerAriaLabel: t, closeLabel: n, closeButton: r = !0, duration: i = a, gap: s = p, visibleToasts: d = 3, expand: m = !1 }) {
+function v({ position: e = "bottom-right", containerAriaLabel: t, closeLabel: n, closeButton: r = !0, duration: i = a, gap: s = p, visibleToasts: d = 3, expand: m = !1 }) {
 	let h = Number.isFinite(i) ? i : 0;
 	return l(() => o(h), [h]), /* @__PURE__ */ u(f.Provider, {
 		toastManager: c,
 		timeout: h,
 		limit: d,
-		children: /* @__PURE__ */ u(g, {
+		children: /* @__PURE__ */ u(_, {
 			position: e,
 			containerAriaLabel: t,
 			closeLabel: n,
@@ -82,4 +85,4 @@ function _({ position: e = "bottom-right", containerAriaLabel: t, closeLabel: n,
 	});
 }
 //#endregion
-export { _ as Toaster };
+export { v as Toaster };
