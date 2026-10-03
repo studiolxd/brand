@@ -129,6 +129,25 @@ export const FilasConSeparadores: Story = {
   ),
 };
 
+/**
+ * `leading`: un accesorio al principio de la fila (icono, avatar), pareja de
+ * `trailing`. Es la misma fila que la versión nativa (`BrandListItem` con
+ * `leading`).
+ */
+export const FilasConLeading: Story = {
+  name: 'Filas con accesorio inicial',
+  args: { type: 'plain', showSeparators: true, children: null },
+  render: (args) => (
+    <List {...args} aria-label="Cuenta">
+      <ListItem leading={<Icon name="bell" />} secondary="Avisos de la comunidad" trailing={<Icon name="chevron-right" size="sm" />}>
+        Notificaciones
+      </ListItem>
+      <ListItem leading={<Icon name="languages" />} trailing={<span>Español</span>}>Idioma</ListItem>
+      <ListItem leading={<Icon name="key" />}>Seguridad</ListItem>
+    </List>
+  ),
+};
+
 /** Con `secondary` y `trailing` en una lista con viñetas, las marcas se conservan. */
 export const FilasConVinetas: Story = {
   name: 'Filas con viñetas',

@@ -19,7 +19,7 @@ Borde en color primario, fondo blanco y texto por defecto. En hover el fondo pas
 
 Fondo en color accent-1 y texto oscuro. En hover el fondo pasa a accent-2. El texto es siempre oscuro para garantizar contraste suficiente.
 
-> **Nota:** La prop `destructive` no tiene efecto sobre la variante `accent`. El color de fondo del accent es parte de su identidad visual y no es compatible semánticamente con la intención destructiva. Usa `variant="primary" destructive` o `variant="ghost" destructive` para acciones de alto riesgo.
+> **Nota:** La prop `destructive` solo tiene estilo en las variantes `outline` y `text`. En `primary` y `ghost` no tiene efecto: el color de la marca es parte de su identidad y no es compatible con la intención destructiva. Para una acción de alto riesgo usa `variant="outline" destructive` o `variant="text" destructive`.
 
 <Canvas of={ButtonStories.Primary} />
 
@@ -41,7 +41,7 @@ Sin borde ni fondo. El texto toma el color por defecto de la superficie (oscuro 
 
 ## Text
 
-Un `<button>` con la cara de un enlace: sin caja ni altura fija, subrayado en reposo y sin subrayar en hover. Toma sus tokens del átomo `Link` (`button.text.*` → `link.*`), así que enlace y botón-enlace no divergen. Es para acciones que no navegan pero se leen como enlace (deshacer, abrir un panel). Con `destructiveIntent` usa el rojo de texto de error.
+Un `<button>` con la cara de un enlace: sin caja ni altura fija, subrayado en reposo y sin subrayar en hover. Toma sus tokens del átomo `Link` (`button.text.*` → `link.*`), así que enlace y botón-enlace no divergen. Es para acciones que no navegan pero se leen como enlace (deshacer, abrir un panel). Con `destructive` usa el rojo de texto de error.
 
 <Canvas of={ButtonStories.TextOnLight} />
 

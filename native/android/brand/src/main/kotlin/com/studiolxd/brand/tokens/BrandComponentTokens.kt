@@ -1416,9 +1416,9 @@ object BrandEmptyStateTokens {
     /** Token `empty-state.icon-size-sm` — Tamaño del icono — variante sm */
     val iconSizeSm: Dp = 32.dp
     /** Token `empty-state.title-font-size-sm` — Tamaño tipográfico del título — variante sm */
-    val titleFontSizeSm: Dp = 20.dp
+    val titleFontSizeSm: TextUnit = 20.sp
     /** Token `empty-state.description-font-size-sm` — Tamaño tipográfico de la descripción — variante sm */
-    val descriptionFontSizeSm: Dp = 14.dp
+    val descriptionFontSizeSm: TextUnit = 14.sp
     /** Token `empty-state.icon-color` — Color del icono */
     val iconColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF6B6B6B), Color(0xFFD0D0D0))
     /** Token `empty-state.title-font-family` — Familia tipográfica del título */

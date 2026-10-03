@@ -31,6 +31,12 @@ Siempre hay etiqueta (`label`), enlazada por `id`, y **por defecto se ve**. Sin 
 <Canvas of={NumberInputFieldStories.ConMinimoYMaximo} />
 <Canvas of={NumberInputFieldStories.ConDecimales} />
 
+## Sin valor
+
+`value={null}` (controlado) o `defaultValue={null}` (no controlado) dejan el campo vacío. Por defecto vaciar el texto no emite nada y, al salir, el campo recupera el último número; con `onEmpty`, **vaciar es un valor**: el campo se queda vacío y `onEmpty` avisa para que el estado pase a `null`. Desde vacío, los botones − y + cuentan como si el campo valiera 0 (y se ajustan a `min` y `max`). Quien pasa siempre un número no cambia nada.
+
+<Canvas of={NumberInputFieldStories.SinValor} />
+
 ## Tallas
 
 `size` viaja al control: mide 32, 40 o 48, las tallas del sistema. La etiqueta y los textos auxiliares no cambian de cuerpo.
@@ -56,6 +62,10 @@ El campo reenvía el `ref` y las props nativas al `<input>`, así que el `field`
 ```
 
 <Canvas of={NumberInputFieldStories.ConReactHookForm} />
+
+## Foco desde fuera
+
+El `ref` llega al `<input>` de texto: `ref.current?.focus()` lleva el cursor al campo (un atajo de teclado, un «añadir» que enfoca el siguiente campo).
 
 ## Accesibilidad
 

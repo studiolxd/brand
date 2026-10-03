@@ -53,11 +53,13 @@ cuelga de una lista real y hay que darle el rol a mano (`as="div"
 role="listitem"`). Solo entonces: dentro de una `List` el elemento correcto es
 `<li>`.
 
-## Filas de datos: `secondary`, `trailing` y `showSeparators`
+## Filas de datos: `leading`, `secondary`, `trailing` y `showSeparators`
 
-Para una fila de ajustes o de datos, `ListItem` admite dos props, ambas
+Para una fila de ajustes o de datos, `ListItem` admite tres props, todas
 `ReactNode` y opcionales:
 
+- `leading`: un accesorio al principio de la fila —un icono, un avatar—,
+  centrado con el bloque de texto y sin partir línea. Es la pareja de `trailing`.
 - `secondary`: una línea menor bajo el contenido, atenuada y un peldaño por
   debajo del cuerpo (`text.paragraph.small`).
 - `trailing`: un accesorio al final de la fila —un icono, un valor, un
@@ -69,14 +71,14 @@ filas, con el aire `separator.spacing-md` a cada lado en lugar del
 
 <Canvas of={ListStories.FilasConSeparadores} />
 
-Solo cuando se usa `secondary` o `trailing` el ítem lleva su estructura de fila
-(`list__item-row` > `list__item-main` + `list__item-trailing`); sin ellas el
+Solo cuando se usa `leading`, `secondary` o `trailing` el ítem lleva su estructura de fila
+(`list__item-row` > `list__item-leading` + `list__item-main` + `list__item-trailing`); sin ellas el
 HTML es el de siempre. Las viñetas y los números se conservan porque el flex vive
 en ese envoltorio interior y no en el `<li>`.
 
 <Canvas of={ListStories.FilasConVinetas} />
 
-Es la misma fila que ofrece la versión nativa (`BrandListItem` con `secondary` y
+Es la misma fila que ofrece la versión nativa (`BrandListItem` con `leading`, `secondary` y
 `trailing`, dentro de `BrandList` con `showSeparators`).
 
 ## Anidada

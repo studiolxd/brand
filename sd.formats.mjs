@@ -712,7 +712,7 @@ function kotlinComponentSource(groups, header) {
           literal = `BrandSchemeValue(${kotlinColor(light.color)}, ${kotlinColor((dark ?? light).color)})`;
           break;
         case 'points': {
-          const isFont = /font-size$/.test(last);
+          const isFont = /(^|-)font-size(-|$)/.test(last);
           const unit = isFont ? 'sp' : 'dp';
           used.add(unit);
           if (light.unitless) {
