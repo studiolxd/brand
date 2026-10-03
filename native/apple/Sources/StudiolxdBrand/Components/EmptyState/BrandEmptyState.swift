@@ -76,15 +76,16 @@ public struct BrandEmptyState<Icon: View>: View {
             }
             VStack(spacing: BrandEmptyStateTokens.bodyGap) {
                 Text(title)
-                    .brandFont(size: isSmall ? BrandEmptyStateTokens.titleFontSizeSm : BrandEmptyStateTokens.titleFontSize,
-                               weight: BrandEmptyStateTokens.titleFontWeight, family: BrandEmptyStateTokens.titleFontFamily,
-                               relativeTo: .title3)
+                    .brandLinedFont(size: isSmall ? BrandEmptyStateTokens.titleFontSizeSm : BrandEmptyStateTokens.titleFontSize,
+                                    weight: BrandEmptyStateTokens.titleFontWeight, family: BrandEmptyStateTokens.titleFontFamily,
+                                    lineHeight: BrandTextTokens.lineHeight, relativeTo: .title3)
                     .foregroundStyle(BrandEmptyStateTokens.titleColor)
                     .accessibilityAddTraits(.isHeader)
                 if let description {
                     Text(description)
-                        .brandFont(size: isSmall ? BrandEmptyStateTokens.descriptionFontSizeSm : BrandEmptyStateTokens.descriptionFontSize,
-                                   family: BrandEmptyStateTokens.descriptionFontFamily)
+                        .brandLinedFont(size: isSmall ? BrandEmptyStateTokens.descriptionFontSizeSm : BrandEmptyStateTokens.descriptionFontSize,
+                                        weight: BrandTextTokens.fontWeight, family: BrandEmptyStateTokens.descriptionFontFamily,
+                                        lineHeight: BrandTextTokens.lineHeight)
                         .foregroundStyle(BrandEmptyStateTokens.descriptionColor)
                 }
             }
