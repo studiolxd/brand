@@ -27,6 +27,8 @@
     }
   ],
   "differences": [
-    "El texto de la web se ve algo más grueso (suavizado de Chromium en macOS); el peso del eje `wght` es el mismo."
+    "El texto de la web se ve algo más grueso (suavizado de Chromium en macOS); el peso del eje `wght` es el mismo.",
+    "En Compose, un párrafo con fragmentos marcados recibe un `AnnotatedString` hecho con `brandSpanStyle` (en SwiftUI, un `Text` concatenado con `Text.brand`).",
+    "En Android el eje de tamaño óptico (`opsz`) de la fuente se fija al tamaño del token, como hace el navegador."
   ]
 }

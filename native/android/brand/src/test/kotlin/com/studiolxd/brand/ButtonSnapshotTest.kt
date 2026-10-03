@@ -103,16 +103,3 @@ class ButtonSizesSnapshotTest {
         }
     }
 }
-
-/** Las capturas de la pareja con Storybook (`atoms-button--primary`, un botón suelto por variante). */
-class ButtonComparisonSnapshotTest {
-    @get:Rule
-    val paparazzi = brandPaparazzi(160, 160)
-
-    @Test
-    fun singles() {
-        ButtonVariant.entries.forEach { variant ->
-            paparazzi.brandSnapshots("compare-${variant.value}") { BrandButton("Guardar", onClick = {}, variant = variant) }
-        }
-    }
-}

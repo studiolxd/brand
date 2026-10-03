@@ -14,6 +14,8 @@ import com.studiolxd.brand.typography.BrandFontFamily
  * (24 sp a 16 sp), centrando el texto en ella (sin recortar arriba ni abajo), como en la web. El tamaño y el
  * interlineado crecen juntos con la escala de fuente (`sp`).
  *
+ * La familia por defecto es la sans con el eje de tamaño óptico a [size] ([BrandFontFamily.sansAt]).
+ *
  * @param lineHeight múltiplo del tamaño (`line-height.*`).
  * @param letterSpacing fracción del tamaño (em, `letter-spacing.*`).
  */
@@ -22,7 +24,7 @@ fun brandTextStyle(
     weight: FontWeight,
     lineHeight: Float,
     letterSpacing: Float = 0f,
-    family: FontFamily = BrandFontFamily.sans,
+    family: FontFamily = BrandFontFamily.sansAt(size),
     color: Color = Color.Unspecified,
 ): TextStyle = TextStyle(
     color = color,

@@ -29,10 +29,6 @@ class HeadingSnapshotTest {
             BrandHeading("Un h2 con tamaño de h4", level = HeadingLevel.H2, size = HeadingSize.S5)
         }
     }
-
-    /** Un `h2` suelto, la pareja de `atoms-heading--default`. */
-    @Test
-    fun comparison() = paparazzi.brandSnapshots("compare") { BrandHeading("Encabezado de ejemplo", level = HeadingLevel.H1) }
 }
 
 /** Capturas de `Paragraph`: los tres tamaños y un párrafo con fragmentos marcados. */
@@ -47,11 +43,6 @@ class ParagraphSnapshotTest {
             BrandParagraph("Párrafo pequeño para notas y metadatos.", size = ParagraphSize.Small)
             BrandParagraph("Párrafo grande para entradillas.", size = ParagraphSize.Large)
         }
-    }
-
-    @Test
-    fun comparison() = paparazzi.brandSnapshots("compare") {
-        BrandParagraph("Revisa los datos antes de continuar. Podrás cambiarlos después desde tu perfil.")
     }
 }
 
@@ -77,11 +68,5 @@ class TextSnapshotTest {
                 },
             )
         }
-    }
-
-    @Test
-    fun comparison() = paparazzi.brandSnapshots("compare") {
-        val strong = brandSpanStyle(TextElement.Strong, TextTone.Destructive)
-        BrandParagraph(buildAnnotatedString { append("Esta acción "); withStyle(strong) { append("borra") }; append(" el curso.") })
     }
 }

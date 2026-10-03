@@ -46,6 +46,8 @@
   ],
   "differences": [
     "SwiftUI no encoge el interlineado por debajo del natural de la fuente: con `line-height` apretado (títulos grandes) el texto queda unos puntos más bajo dentro de su caja que en la web.",
-    "El texto de la web se ve algo más grueso (suavizado de Chromium en macOS); el peso del eje `wght` es el mismo."
+    "El texto de la web se ve algo más grueso (suavizado de Chromium en macOS); el peso del eje `wght` es el mismo.",
+    "En Android `heading()` marca el encabezado para TalkBack pero no distingue niveles: el nivel solo fija el tamaño y el esquema lo conserva el desarrollador.",
+    "En Android el eje de tamaño óptico (`opsz`) de la fuente se fija al tamaño del token, como hace el navegador; sin él los títulos salían más estrechos. El texto se ve algo más fino que en la web (Chromium engorda al suavizar)."
   ]
 }

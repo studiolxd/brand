@@ -85,6 +85,9 @@
     "La altura y el tamaño de letra crecen con el tipo dinámico (`@ScaledMetric`); en la web son fijos.",
     "`block: 'mobile'` no existe en nativo: depende de un punto de ruptura de la web; en nativo `block` es solo `true`/`false`.",
     "El hover es el del puntero (macOS, iPad con ratón); en iPhone solo hay reposo, pulsado y deshabilitado.",
-    "El texto de la web se ve algo más grueso que el de SwiftUI en las parejas de Comparisons: Chromium engorda las letras al suavizarlas en macOS y CoreText no; el peso del eje `wght` es el mismo (300)."
+    "El texto de la web se ve algo más grueso que el de SwiftUI en las parejas de Comparisons: Chromium engorda las letras al suavizarlas en macOS y CoreText no; el peso del eje `wght` es el mismo (300).",
+    "En Android la zona táctil llega a 48 dp (`BrandTheme` fija `ViewConfiguration.minimumTouchTargetSize`) sin cambiar el aspecto ni la maqueta; el anillo de foco solo se ve con teclado o DPAD, no con el dedo.",
+    "En Android la altura y el tamaño de letra crecen con la escala de fuente del sistema (`sp` y `scaledByFontScale`); con «quitar animaciones» (escala de animación 0) las transiciones de color pasan de golpe.",
+    "En Compose el botón de solo icono es `BrandButton(icon, contentDescription, onClick)` (el nombre accesible es obligatorio); `size` sin valor toma el del entorno (`ProvideBrandControlSize`) y la etiqueta es un `String` o un contenido (`BrandText`, `BrandIcon`)."
   ]
 }
