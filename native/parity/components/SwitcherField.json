@@ -86,6 +86,8 @@
     "Con `labelHidden` la etiqueta no se pinta pero sigue nombrando el control para VoiceOver, como `VisuallyHidden`.",
     "El mensaje de error se anuncia con `AccessibilityNotification.Announcement` al aparecer (equivale al `role=\"alert\"`).",
     "La pista mide em×16 pt escaladas con el tipo dinámico; en la web las `em` siguen el cuerpo del navegador.",
-    "El interruptor se anuncia como interruptor nativo (rasgo `isToggle`): «activado/desactivado» lo dice el sistema en su idioma."
+    "El interruptor se anuncia como interruptor nativo (rasgo `isToggle`): «activado/desactivado» lo dice el sistema en su idioma.",
+    "En Android el interruptor es `Role.Switch` con `toggleable`: «activado/desactivado» lo dice TalkBack en el idioma del sistema; con `labelHidden` la etiqueta es la `contentDescription`.",
+    "En Android el mensaje de error se anuncia al aparecer con una región viva asertiva (equivale al `role=\"alert\"`) y el interruptor lleva `error()`; la ayuda es un texto que se lee a continuación. La zona táctil llega a 48 dp y la pista (`em` de 16 sp) crece con la escala de fuente."
   ]
 }

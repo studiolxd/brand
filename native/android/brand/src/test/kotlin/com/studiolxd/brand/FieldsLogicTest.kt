@@ -1,0 +1,94 @@
+package com.studiolxd.brand
+
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
+import com.studiolxd.brand.components.inputfield.InputFieldKind
+import com.studiolxd.brand.components.inputfield.InputFieldType
+import com.studiolxd.brand.components.inputfield.inputKeyboardOptions
+import com.studiolxd.brand.components.numberinputfield.clampNumber
+import com.studiolxd.brand.components.numberinputfield.formatNumber
+import com.studiolxd.brand.components.numberinputfield.parseNumber
+import com.studiolxd.brand.components.selectfield.BrandSelectEntry
+import com.studiolxd.brand.components.selectfield.BrandSelectOption
+import com.studiolxd.brand.components.selectfield.flatOptions
+import com.studiolxd.brand.components.themeswitcher.BrandThemeChoice
+import com.studiolxd.brand.components.themeswitcher.ThemeSwitcherLabels
+import com.studiolxd.brand.components.togglegroup.nextToggleSelection
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
+
+/** La lógica pura de los campos: números, selección, teclados y textos por defecto. */
+class FieldsLogicTest {
+    @Test
+    fun numberIsClampedBetweenMinAndMax() {
+        assertEquals(0.0, clampNumber(-3.0, 0.0, 10.0))
+        assertEquals(10.0, clampNumber(11.0, 0.0, 10.0))
+        assertEquals(4.0, clampNumber(4.0, 0.0, 10.0))
+        assertEquals(-7.0, clampNumber(-7.0, null, null))
+    }
+
+    @Test
+    fun numberIsFormattedLikeJavaScriptString() {
+        assertEquals("3", formatNumber(3.0))
+        assertEquals("12.5", formatNumber(12.5))
+        assertEquals("-2", formatNumber(-2.0))
+        assertEquals("0", formatNumber(0.0))
+    }
+
+    @Test
+    fun draftsParseWithCommaOrDotOnlyWhenDecimal() {
+        assertEquals(12.5, parseNumber("12,5", decimal = true))
+        assertEquals(12.5, parseNumber("12.5", decimal = true))
+        assertEquals(12.0, parseNumber("12,", decimal = true))
+        assertNull(parseNumber("-", decimal = true))
+        assertNull(parseNumber("abc", decimal = true))
+        assertNull(parseNumber("", decimal = false))
+        assertNull(parseNumber("12,5", decimal = false))
+        assertEquals(7.0, parseNumber(" 7 ", decimal = false))
+    }
+
+    @Test
+    fun exclusiveGroupReplacesAndDeselects() {
+        assertEquals(setOf("b"), nextToggleSelection(setOf("a"), "b", multiple = false))
+        assertEquals(emptySet(), nextToggleSelection(setOf("a"), "a", multiple = false))
+        assertEquals(setOf("a"), nextToggleSelection(emptySet(), "a", multiple = false))
+    }
+
+    @Test
+    fun multipleGroupAddsAndRemoves() {
+        assertEquals(setOf("a", "b"), nextToggleSelection(setOf("a"), "b", multiple = true))
+        assertEquals(setOf("b"), nextToggleSelection(setOf("a", "b"), "a", multiple = true))
+    }
+
+    @Test
+    fun selectFlattensGroupsKeepingOrder() {
+        val entries = listOf(
+            BrandSelectEntry.option("es", "Español"),
+            BrandSelectEntry.group("Ciudades", listOf(BrandSelectOption("mad", "Madrid"), BrandSelectOption("bcn", "Barcelona"))),
+        )
+        assertEquals(listOf("es", "mad", "bcn"), entries.flatOptions().map { it.value })
+    }
+
+    @Test
+    fun keyboardFollowsTheFieldType() {
+        fun options(type: InputFieldType, kind: InputFieldKind = InputFieldKind.Text) = inputKeyboardOptions(type, kind)
+        assertEquals(KeyboardType.Email, options(InputFieldType.Email).keyboardType)
+        assertEquals(KeyboardType.Password, options(InputFieldType.Password).keyboardType)
+        assertEquals(KeyboardType.Number, options(InputFieldType.Number).keyboardType)
+        assertEquals(KeyboardType.Phone, options(InputFieldType.Tel).keyboardType)
+        assertEquals(KeyboardType.Uri, options(InputFieldType.Url).keyboardType)
+        assertEquals(KeyboardCapitalization.None, options(InputFieldType.Email).capitalization)
+        val search = options(InputFieldType.Text, InputFieldKind.Search)
+        assertEquals(ImeAction.Search, search.imeAction)
+        assertEquals(ImeAction.Done, options(InputFieldType.Text).imeAction)
+    }
+
+    @Test
+    fun themeLabelsDefaultToSpanish() {
+        val labels = ThemeSwitcherLabels()
+        assertEquals("Tema", labels.group)
+        assertEquals(listOf("Claro", "Oscuro", "Sistema"), BrandThemeChoice.entries.map { labels.text(it) })
+    }
+}
