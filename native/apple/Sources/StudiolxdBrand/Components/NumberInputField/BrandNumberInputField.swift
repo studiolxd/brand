@@ -3,6 +3,29 @@ import SwiftUI
 /// `NumberInputField` `size`: la talla de control compartida.
 public typealias NumberInputFieldSize = BrandControlSize
 
+/// `NumberInputField` `commitMode`: cuándo se avisa (se escribe en el `Binding`) de lo tecleado a mano.
+public enum NumberInputCommitMode: String, CaseIterable, Sendable {
+    /// Con cada tecla (lo de siempre).
+    case change
+    /// Una sola vez, al perder el foco o al confirmar con el teclado («intro»); Escape descarta lo escrito.
+    case blur
+}
+
+/// Lo que hay que escribir en el valor al confirmar un borrador. Lógica pura, sin vista, para poder probarla.
+enum NumberInputCommit {
+    enum Outcome: Equatable { case keep, set(Double?) }
+
+    /// - Returns: `.set(n)` si el borrador es un número que cambia el valor (ya ajustado a `range`), `.set(nil)` si
+    ///   está vacío y había valor, `.keep` si no hay nada que escribir (igual que el valor, o todavía no es un número).
+    static func resolve(raw: String, decimal: Bool, range: ClosedRange<Double>, current: Double?) -> Outcome {
+        let normalized = (decimal ? raw.replacingOccurrences(of: ",", with: ".") : raw).trimmingCharacters(in: .whitespaces)
+        if normalized.isEmpty { return current == nil ? .keep : .set(nil) }
+        guard let parsed = Double(normalized) else { return .keep }
+        let clamped = Swift.min(Swift.max(parsed, range.lowerBound), range.upperBound)
+        return clamped == current ? .keep : .set(clamped)
+    }
+}
+
 /// Un campo numérico con botones de restar y sumar, etiqueta, ayuda y error (`NumberInputField` de React).
 ///
 /// ```swift
@@ -23,6 +46,19 @@ public typealias NumberInputFieldSize = BrandControlSize
 /// El valor se fija entre `min` y `max` al teclear y al pulsar los botones; con `decimal` admite coma o punto. El
 /// borrador que se está tecleando (`12,`) no se pisa hasta que el campo pierde el foco. VoiceOver lo anuncia como un
 /// valor **ajustable**: deslizar arriba o abajo suma o resta un paso.
+///
+/// **Cuándo se avisa.** Por defecto (`commitMode: .change`) el `Binding` se escribe con cada tecla. Con `.blur` lo
+/// tecleado se escribe **una sola vez**, al perder el foco o con «intro» (y solo si cambia el valor); Escape descarta
+/// lo escrito y vuelve al último valor. Los botones − y + escriben al momento en los dos modos.
+///
+/// **Compacto.** `compact: true` es la variante para filas de lista (`trailing` de `BrandListItem`): botones de 24 y
+/// cifra de 40 de ancho, 32 de alto, sin estirarse. La zona táctil de cada botón sigue llegando a 44 pt.
+///
+/// ```swift
+/// BrandListItem(content: { Text("Leche") }, trailing: {
+///     BrandNumberInputField("Cantidad", value: $qty, labelHidden: true, min: 0, max: 99, compact: true, commitMode: .blur)
+/// })
+/// ```
 public struct BrandNumberInputField: View {
     private let label: LocalizedStringKey
     @Binding private var value: Double?
@@ -36,6 +72,8 @@ public struct BrandNumberInputField: View {
     private let errorMessage: LocalizedStringKey?
     private let helperText: LocalizedStringKey?
     private let size: NumberInputFieldSize?
+    private let compact: Bool
+    private let commitMode: NumberInputCommitMode
     private let decrementLabel: LocalizedStringKey
     private let incrementLabel: LocalizedStringKey
     private let emptyValueLabel: LocalizedStringKey
@@ -58,6 +96,9 @@ public struct BrandNumberInputField: View {
     ///   - max: valor máximo (sin tope si es `nil`).
     ///   - step: lo que suman y restan los botones.
     ///   - decimal: admite decimales (coma o punto).
+    ///   - compact: variante para filas de lista: botones y cifra justos, sin estirarse. Manda sobre `size`.
+    ///   - commitMode: cuándo se escribe lo tecleado a mano en el `Binding`: con cada tecla (`.change`) o al perder el
+    ///     foco / «intro» (`.blur`).
     ///   - decrementLabel: nombre accesible del botón de restar. Por defecto «Decrementar» (castellano).
     ///   - incrementLabel: nombre accesible del botón de sumar. Por defecto «Incrementar» (castellano).
     ///   - emptyValueLabel: lo que lee VoiceOver como valor con el campo vacío. Por defecto «Sin valor» (castellano).
@@ -75,6 +116,8 @@ public struct BrandNumberInputField: View {
         errorMessage: LocalizedStringKey? = nil,
         helperText: LocalizedStringKey? = nil,
         size: NumberInputFieldSize? = nil,
+        compact: Bool = false,
+        commitMode: NumberInputCommitMode = .change,
         decrementLabel: LocalizedStringKey = "Decrementar",
         incrementLabel: LocalizedStringKey = "Incrementar",
         emptyValueLabel: LocalizedStringKey = "Sin valor"
@@ -91,6 +134,8 @@ public struct BrandNumberInputField: View {
         self.errorMessage = errorMessage
         self.helperText = helperText
         self.size = size
+        self.compact = compact
+        self.commitMode = commitMode
         self.decrementLabel = decrementLabel
         self.incrementLabel = incrementLabel
         self.emptyValueLabel = emptyValueLabel
@@ -111,6 +156,8 @@ public struct BrandNumberInputField: View {
         errorMessage: LocalizedStringKey? = nil,
         helperText: LocalizedStringKey? = nil,
         size: NumberInputFieldSize? = nil,
+        compact: Bool = false,
+        commitMode: NumberInputCommitMode = .change,
         decrementLabel: LocalizedStringKey = "Decrementar",
         incrementLabel: LocalizedStringKey = "Incrementar",
         emptyValueLabel: LocalizedStringKey = "Sin valor"
@@ -120,15 +167,17 @@ public struct BrandNumberInputField: View {
             value: Binding<Double?>(get: { value.wrappedValue }, set: { if let next = $0 { value.wrappedValue = next } }),
             labelHidden: labelHidden, placeholder: placeholder, min: min, max: max, step: step, decimal: decimal,
             readOnly: readOnly, error: error, errorMessage: errorMessage, helperText: helperText, size: size,
-            decrementLabel: decrementLabel, incrementLabel: incrementLabel, emptyValueLabel: emptyValueLabel
+            compact: compact, commitMode: commitMode, decrementLabel: decrementLabel, incrementLabel: incrementLabel, emptyValueLabel: emptyValueLabel
         )
     }
 
     private var resolvedSize: NumberInputFieldSize { size ?? inheritedSize ?? .md }
+    private var buttonWidth: CGFloat { compact ? T.compactBtnWidth : T.btnWidth }
     private var hasError: Bool { error || errorMessage != nil }
 
     private var height: CGFloat {
-        switch resolvedSize {
+        if compact { return T.compactHeight }
+        return switch resolvedSize {
         case .sm: T.smHeight
         case .md: T.height
         case .lg: T.lgHeight
@@ -136,7 +185,8 @@ public struct BrandNumberInputField: View {
     }
 
     private var fontSize: CGFloat {
-        switch resolvedSize {
+        if compact { return T.compactFontSize }
+        return switch resolvedSize {
         case .sm: T.smFontSize
         case .md: T.fontSize
         case .lg: T.lgFontSize
@@ -144,7 +194,8 @@ public struct BrandNumberInputField: View {
     }
 
     private var paddingInline: CGFloat {
-        switch resolvedSize {
+        if compact { return T.compactPaddingInline }
+        return switch resolvedSize {
         case .sm: T.smPaddingInline
         case .md: T.paddingInline
         case .lg: T.lgPaddingInline
@@ -161,7 +212,9 @@ public struct BrandNumberInputField: View {
     }
 
     /// Suma `delta` partiendo del valor o, si no lo hay, de 0 (el campo vacío cuenta como 0).
+    /// Un borrador pendiente (modo `.blur`) se descarta: el paso parte del último valor, como en React.
     private func commit(adding delta: Double) {
+        draft = nil
         value = clamp((value ?? 0) + delta)
         feedback += 1
     }
@@ -175,11 +228,21 @@ public struct BrandNumberInputField: View {
             get: { draft ?? value.map(format) ?? "" },
             set: { raw in
                 draft = raw
+                guard commitMode == .change else { return }
                 let normalized = (decimal ? raw.replacingOccurrences(of: ",", with: ".") : raw).trimmingCharacters(in: .whitespaces)
                 if normalized.isEmpty { value = nil }
                 else if let parsed = Double(normalized) { value = clamp(parsed) }
             }
         )
+    }
+
+    /// Modo `.blur`: escribe en el `Binding` lo tecleado (una vez, y solo si cambia) y suelta el borrador.
+    private func commitDraft() {
+        guard commitMode == .blur, let raw = draft else { return }
+        draft = nil
+        if case .set(let next) = NumberInputCommit.resolve(raw: raw, decimal: decimal, range: range, current: value) {
+            value = next
+        }
     }
 
     // MARK: Vista
@@ -212,7 +275,8 @@ public struct BrandNumberInputField: View {
             stepButton(.plus, label: incrementLabel, enabled: canIncrement, height: scaledHeight) { commit(adding: step) }
         }
         .frame(minHeight: scaledHeight)
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: compact ? nil : .infinity)
+        .fixedSize(horizontal: compact, vertical: false)
         .clipped()
         .modifier(BrandFieldBox(
             radius: T.borderRadius,
@@ -242,13 +306,20 @@ public struct BrandNumberInputField: View {
         .multilineTextAlignment(.center)
         .focused($isFocused)
         .brandFocusApplied()
-        .onChange(of: isFocused) { _, focused in if !focused { draft = nil } }
+        .onChange(of: isFocused) { _, focused in if !focused { commitDraft(); draft = nil } }
+        .onSubmit { commitDraft() }
+        .onKeyPress(.escape) {
+            guard commitMode == .blur, draft != nil else { return .ignored }
+            draft = nil
+            return .handled
+        }
         .brandFont(size: fontSize, weight: T.fontWeight)
         .monospacedDigit()
         .foregroundStyle(color)
         .tint(color)
         .padding(.horizontal, paddingInline)
-        .frame(maxWidth: .infinity)
+        .frame(width: compact ? T.compactFieldWidth : nil)
+        .frame(maxWidth: compact ? nil : .infinity)
         .contentShape(Rectangle())
         #if os(iOS)
         .keyboardType(decimal ? .decimalPad : .numberPad)
@@ -269,13 +340,13 @@ public struct BrandNumberInputField: View {
         Button(action: action) {
             BrandIcon(icon, size: .sm)
                 .foregroundStyle(enabled ? T.btnColor : T.disabledBtnColor)
-                .frame(width: T.btnWidth)
+                .frame(width: buttonWidth)
                 .frame(maxHeight: .infinity)
         }
         .buttonStyle(NumberInputStepStyle(enabled: enabled))
         .disabled(!enabled)
         .accessibilityLabel(Text(label))
-        .brandHitTarget(width: T.btnWidth, height: height)
+        .brandHitTarget(width: buttonWidth, height: height)
     }
 }
 
@@ -321,6 +392,8 @@ private struct NumberInputFieldPreview: View {
                 BrandNumberInputField("Talla sm", value: $quantity, size: .sm)
                 BrandNumberInputField("Talla md", value: $quantity, size: .md)
                 BrandNumberInputField("Talla lg", value: $quantity, size: .lg)
+                BrandNumberInputField("Compacto", value: $quantity, labelHidden: true, min: 0, max: 99, compact: true)
+                BrandNumberInputField("Al salir", value: $quantity, min: 0, helperText: "Se escribe al salir o con «intro»", commitMode: .blur)
             }
             .padding()
         }

@@ -3,7 +3,7 @@ import './NumberInputField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
-import { NumberInput } from '../../atoms/NumberInput/NumberInput';
+import { NumberInput, type NumberInputCommitMode } from '../../atoms/NumberInput/NumberInput';
 import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface NumberInputFieldProps
@@ -33,6 +33,14 @@ export interface NumberInputFieldProps
   /** Texto de ayuda, enlazado por `aria-describedby`. */
   helperText?: string;
   size?: 'sm' | 'md' | 'lg';
+  /** Variante para filas de lista: botones y cifra justos. Ver `NumberInput`. */
+  compact?: boolean;
+  /** Cuándo se avisa de lo escrito a mano: con cada tecla (`'change'`) o al salir/Enter (`'blur'`). Ver `NumberInput`. */
+  commitMode?: NumberInputCommitMode;
+  /** aria-label del botón que resta. Sin default: sale de `numberInput.decrement` del `BrandMessagesProvider`. */
+  decrementLabel?: string;
+  /** aria-label del botón que suma. Sin default: sale de `numberInput.increment` del `BrandMessagesProvider`. */
+  incrementLabel?: string;
   /** Recibe el valor ya normalizado, no el evento. */
   onChange?: (value: number) => void;
   /** Quien teclea dejó el campo vacío; con ella, vaciar es un valor (`null`). Ver `NumberInput`. */
@@ -59,6 +67,8 @@ export const NumberInputField = forwardRef<HTMLInputElement, NumberInputFieldPro
   disabled,
   readOnly,
   size: sizeProp,
+  compact,
+  commitMode,
   error = false,
   errorMessage,
   helperText,
@@ -93,6 +103,8 @@ export const NumberInputField = forwardRef<HTMLInputElement, NumberInputFieldPro
         disabled={disabled}
         readOnly={readOnly}
         size={size}
+        compact={compact}
+        commitMode={commitMode}
         error={hasError}
         aria-describedby={describedBy}
         onChange={onChange}

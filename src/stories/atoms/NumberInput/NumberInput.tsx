@@ -14,6 +14,13 @@ export interface NumberInputMessages {
   increment: string;
 }
 
+/**
+ * Cuándo avisa `onChange` de lo escrito a mano: con cada tecla (`'change'`, lo de
+ * siempre) o una sola vez al confirmar (`'blur'`). Los botones − y + avisan al
+ * momento en los dos modos.
+ */
+export type NumberInputCommitMode = 'change' | 'blur';
+
 export interface NumberInputProps
   extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue' | 'onChange'> {
   /**
@@ -30,6 +37,19 @@ export interface NumberInputProps
   disabled?: boolean;
   readOnly?: boolean;
   size?: 'sm' | 'md' | 'lg';
+  /**
+   * Variante para filas de lista (`trailing` de `ListItem`): botones y cifra
+   * justos, del ancho de 2–3 dígitos, sin estirarse. Es una variante de la
+   * talla `sm`, no una talla más: manda sobre `size`.
+   */
+  compact?: boolean;
+  /**
+   * Cuándo se avisa de lo escrito a mano. `'change'` (por defecto): con cada
+   * tecla. `'blur'`: una sola vez al salir del campo o al pulsar Enter; Escape
+   * descarta lo escrito y vuelve al último valor. Con `onEmpty`, dejar el campo
+   * vacío se avisa igual, al confirmar. − y + avisan al momento en los dos modos.
+   */
+  commitMode?: NumberInputCommitMode;
   error?: boolean;
   id?: string;
   name?: string;
@@ -77,6 +97,8 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
   disabled = false,
   readOnly = false,
   size = 'md',
+  compact = false,
+  commitMode = 'change',
   error = false,
   id,
   name,
@@ -89,6 +111,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
   onEmpty,
   onBlur,
   onFocus,
+  onKeyDown,
   ...rest
 }: NumberInputProps, ref) {
   const t = useBrandMessages('numberInput');
@@ -127,15 +150,36 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
     commit(base + step);
   };
 
+  // Avisa de lo que hay escrito: un número se ajusta y se avisa; vacío, con `onEmpty`, es
+  // «sin valor». En modo `blur`, solo si cambia algo (una escritura de más es una escritura al servidor).
+  const commitRaw = (raw: string) => {
+    const normalized = decimal ? raw.replace(',', '.') : raw;
+    const parsed = parseFloat(normalized);
+    if (!isNaN(parsed)) {
+      if (commitMode === 'blur' && clamp(parsed) === currentValue) return;
+      commit(parsed);
+    } else if (onEmpty && raw.trim() === '') {
+      if (commitMode === 'blur' && currentValue === null) return;
+      if (!isControlled) setInternalValue(null);
+      onEmpty();
+    }
+  };
+
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const raw = e.target.value;
     setDraft(raw);
-    const normalized = decimal ? raw.replace(',', '.') : raw;
-    const parsed = parseFloat(normalized);
-    if (!isNaN(parsed)) commit(parsed);
-    else if (onEmpty && raw.trim() === '') {
-      if (!isControlled) setInternalValue(null);
-      onEmpty();
+    if (commitMode === 'change') commitRaw(raw);
+  };
+
+  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    onKeyDown?.(e);
+    if (e.defaultPrevented || commitMode !== 'blur' || draft === null) return;
+    if (e.key === 'Enter') {
+      commitRaw(draft);
+      setDraft(null);
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      setDraft(null);
     }
   };
 
@@ -146,13 +190,14 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
 
   const handleBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
     setFocused(false);
+    if (commitMode === 'blur' && draft !== null) commitRaw(draft);
     setDraft(null);
     onBlur?.(e);
   };
 
   const wrapperClasses = [
     'number-input',
-    size !== 'md' ? `number-input--${size}` : '',
+    compact ? 'number-input--compact' : size !== 'md' ? `number-input--${size}` : '',
     error ? 'number-input--error' : '',
     disabled ? 'number-input--disabled' : '',
     focused ? 'number-input--focused' : '',
@@ -190,6 +235,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
         disabled={disabled}
         readOnly={readOnly}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
         onFocus={handleFocus}
         onBlur={handleBlur}
       />

@@ -11,6 +11,9 @@ import com.studiolxd.brand.components.numberinputfield.clampNumber
 import com.studiolxd.brand.components.numberinputfield.steppedNumber
 import com.studiolxd.brand.components.numberinputfield.formatNumber
 import com.studiolxd.brand.components.numberinputfield.parseNumber
+import com.studiolxd.brand.components.numberinputfield.NumberCommit
+import com.studiolxd.brand.components.numberinputfield.NumberInputCommitMode
+import com.studiolxd.brand.components.numberinputfield.resolveNumberCommit
 import com.studiolxd.brand.components.selectfield.BrandSelectEntry
 import com.studiolxd.brand.components.selectfield.BrandSelectOption
 import com.studiolxd.brand.components.selectfield.flatOptions
@@ -49,6 +52,22 @@ class FieldsLogicTest {
         assertNull(parseNumber("", decimal = false))
         assertNull(parseNumber("12,5", decimal = false))
         assertEquals(7.0, parseNumber(" 7 ", decimal = false))
+    }
+
+    @Test
+    fun blurCommitResolvesTheDraft() {
+        assertEquals(NumberCommit.Set(5.0), resolveNumberCommit("5", false, 0.0, 9.0, 1.0))
+        assertEquals(NumberCommit.Set(9.0), resolveNumberCommit("50", false, 0.0, 9.0, 1.0))
+        assertEquals(NumberCommit.Keep, resolveNumberCommit("9", false, 0.0, 9.0, 9.0))
+        assertEquals(NumberCommit.Set(2.5), resolveNumberCommit("2,5", true, 0.0, 9.0, 1.0))
+        assertEquals(NumberCommit.Set(null), resolveNumberCommit("", false, 0.0, 9.0, 3.0))
+        assertEquals(NumberCommit.Keep, resolveNumberCommit(" ", false, 0.0, 9.0, null))
+        assertEquals(NumberCommit.Keep, resolveNumberCommit("-", false, 0.0, 9.0, 3.0))
+    }
+
+    @Test
+    fun commitModeValuesMatchReact() {
+        assertEquals(listOf("change", "blur"), NumberInputCommitMode.entries.map { it.value })
     }
 
     @Test

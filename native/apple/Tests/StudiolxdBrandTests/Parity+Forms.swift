@@ -9,6 +9,7 @@ let formsParity: [String: [String: [String]]] = [
     ],
     "NumberInputField": [
         "size": NumberInputFieldSize.allCases.map(\.rawValue),
+        "commitMode": NumberInputCommitMode.allCases.map(\.rawValue),
     ],
     "PasswordField": [
         "size": PasswordFieldSize.allCases.map(\.rawValue),

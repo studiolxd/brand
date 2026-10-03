@@ -10,6 +10,12 @@ export interface NumberInputMessages {
     /** Nombre accesible del botón que suma un paso. */
     increment: string;
 }
+/**
+ * Cuándo avisa `onChange` de lo escrito a mano: con cada tecla (`'change'`, lo de
+ * siempre) o una sola vez al confirmar (`'blur'`). Los botones − y + avisan al
+ * momento en los dos modos.
+ */
+export type NumberInputCommitMode = 'change' | 'blur';
 export interface NumberInputProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue' | 'onChange'> {
     /**
      * Valor controlado. `null` es «sin valor»: el campo se muestra vacío (y el
@@ -25,6 +31,19 @@ export interface NumberInputProps extends Omit<ComponentPropsWithoutRef<'input'>
     disabled?: boolean;
     readOnly?: boolean;
     size?: 'sm' | 'md' | 'lg';
+    /**
+     * Variante para filas de lista (`trailing` de `ListItem`): botones y cifra
+     * justos, del ancho de 2–3 dígitos, sin estirarse. Es una variante de la
+     * talla `sm`, no una talla más: manda sobre `size`.
+     */
+    compact?: boolean;
+    /**
+     * Cuándo se avisa de lo escrito a mano. `'change'` (por defecto): con cada
+     * tecla. `'blur'`: una sola vez al salir del campo o al pulsar Enter; Escape
+     * descarta lo escrito y vuelve al último valor. Con `onEmpty`, dejar el campo
+     * vacío se avisa igual, al confirmar. − y + avisan al momento en los dos modos.
+     */
+    commitMode?: NumberInputCommitMode;
     error?: boolean;
     id?: string;
     name?: string;

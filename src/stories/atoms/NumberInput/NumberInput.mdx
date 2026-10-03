@@ -36,6 +36,26 @@ se recortan al rango.
 
 <Canvas of={NumberInputStories.Sizes} />
 
+## Compacto, para filas de lista
+
+`compact` encoge el control a lo justo —botones de 24 px y una cifra del ancho de 2–3 dígitos— y
+no se estira. Es una variante de la talla `sm` (32 px de alto), no una talla más: manda sobre
+`size`. Pensado para el `trailing` de un `ListItem`; en nativo la zona táctil sigue llegando a
+44 pt / 48 dp.
+
+<Canvas of={NumberInputStories.Compacto} />
+<Canvas of={NumberInputStories.EnUnaFilaDeLista} />
+
+## Cuándo se avisa
+
+Por defecto `onChange` avisa con cada tecla (`commitMode="change"`). Con `commitMode="blur"`
+lo escrito a mano se avisa **una sola vez**, al salir del campo o al pulsar Enter, y solo si
+cambió; Escape descarta lo escrito y vuelve al último valor. Los botones − y + avisan al momento
+en los dos modos. Con `onEmpty`, vaciar el campo se avisa igual, al confirmar. Es lo que se quiere
+cuando cada aviso es una escritura en un servidor.
+
+<Canvas of={NumberInputStories.ConfirmarAlSalir} />
+
 ## Error
 
 <Canvas of={NumberInputStories.Error} />

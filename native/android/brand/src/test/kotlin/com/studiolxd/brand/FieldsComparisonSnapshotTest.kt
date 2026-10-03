@@ -7,7 +7,11 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.studiolxd.brand.components.inputfield.BrandInputField
+import com.studiolxd.brand.components.list.BrandList
+import com.studiolxd.brand.components.list.BrandListItem
+import com.studiolxd.brand.components.list.ListType
 import com.studiolxd.brand.components.numberinputfield.BrandNumberInputField
+import com.studiolxd.brand.components.numberinputfield.NumberInputCommitMode
 import com.studiolxd.brand.components.passwordfield.BrandPasswordField
 import com.studiolxd.brand.components.passwordfield.LocalBrandPasswordRevealed
 import com.studiolxd.brand.components.selectfield.BrandSelectEntry
@@ -50,6 +54,28 @@ class FieldsComparisonSnapshotTest {
             "Cantidad", null, {}, placeholder = "Sin indicar", helperText = "Déjalo vacío si no lo sabes.",
             modifier = Modifier.width(224.dp),
         )
+    }
+
+    /** Pareja de `Atoms/NumberInput` «En una fila de lista»: el compacto como `trailing` de `BrandListItem`. */
+    @Test
+    fun numberCompact() = paparazzi.brandComparison("number-compact", 352, 200) {
+        BrandList(type = ListType.Plain, showSeparators = true) {
+            item {
+                BrandListItem(text = "Leche entera", subtitle = "1 l", trailing = {
+                    BrandNumberInputField("Cantidad de leche", 2.0, {}, labelHidden = true, min = 0.0, max = 99.0, compact = true, commitMode = NumberInputCommitMode.Blur)
+                })
+            }
+            item {
+                BrandListItem(text = "Huevos", trailing = {
+                    BrandNumberInputField("Cantidad de huevos", 12.0, {}, labelHidden = true, min = 0.0, max = 99.0, compact = true, commitMode = NumberInputCommitMode.Blur)
+                })
+            }
+            item {
+                BrandListItem(text = "Pan de molde integral con semillas", trailing = {
+                    BrandNumberInputField("Cantidad de pan", 1.0, {}, labelHidden = true, min = 0.0, max = 99.0, compact = true, commitMode = NumberInputCommitMode.Blur)
+                })
+            }
+        }
     }
 
     @Test

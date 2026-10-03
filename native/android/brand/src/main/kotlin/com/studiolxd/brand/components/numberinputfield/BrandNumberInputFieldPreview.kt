@@ -10,6 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.tooling.preview.Preview
+import com.studiolxd.brand.components.list.BrandListItem
 import com.studiolxd.brand.support.BrandPreviewSurface
 import com.studiolxd.brand.tokens.BrandSpacing
 
@@ -29,6 +30,25 @@ internal fun NumberInputFieldPreviewContent() {
         NumberInputFieldSize.entries.forEach { size ->
             BrandNumberInputField("Talla ${size.value}", quantity, { quantity = it }, size = size)
         }
+    }
+}
+
+/** El compacto como `trailing` de `BrandListItem`, con el aviso al confirmar (`commitMode = Blur`). */
+@Composable
+internal fun NumberInputFieldCompactPreviewContent() {
+    var milk by remember { mutableStateOf<Double?>(2.0) }
+    var eggs by remember { mutableStateOf<Double?>(12.0) }
+    var bread by remember { mutableStateOf<Double?>(null) }
+    Column(verticalArrangement = Arrangement.spacedBy(BrandSpacing.s4)) {
+        BrandListItem(text = "Leche entera", subtitle = "1 l", trailing = {
+            BrandNumberInputField("Cantidad de leche", milk, { milk = it }, labelHidden = true, min = 0.0, max = 99.0, compact = true, commitMode = NumberInputCommitMode.Blur)
+        })
+        BrandListItem(text = "Huevos", trailing = {
+            BrandNumberInputField("Cantidad de huevos", eggs, { eggs = it }, labelHidden = true, min = 0.0, max = 99.0, compact = true, commitMode = NumberInputCommitMode.Blur)
+        })
+        BrandListItem(text = "Pan de molde integral con semillas", trailing = {
+            BrandNumberInputField("Cantidad de pan", bread, { bread = it }, labelHidden = true, placeholder = "–", compact = true)
+        })
     }
 }
 

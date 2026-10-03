@@ -614,6 +614,16 @@ public enum BrandNumberInputTokens {
     public static let lgHeight: CGFloat = 48
     /// Token `number-input.lg-padding-inline` — Padding horizontal — lg
     public static let lgPaddingInline: CGFloat = 24
+    /// Token `number-input.compact-height` — Altura — compacto (fila de lista): la talla mínima del sistema
+    public static let compactHeight: CGFloat = 32
+    /// Token `number-input.compact-font-size` — Font size — compacto
+    public static let compactFontSize: CGFloat = 14
+    /// Token `number-input.compact-btn-width` — Ancho de los botones +/− — compacto. En nativo la zona táctil se amplía a 44 pt / 48 dp sin cambiar este ancho
+    public static let compactBtnWidth: CGFloat = 24
+    /// Token `number-input.compact-field-width` — Ancho de la cifra — compacto: lo justo para 2–3 dígitos. El control no se estira
+    public static let compactFieldWidth: CGFloat = 40
+    /// Token `number-input.compact-padding-inline` — Padding horizontal de la cifra — compacto
+    public static let compactPaddingInline: CGFloat = 4
 }
 
 /// Tokens del componente `number-input-field` (`tokens/**/number-input-field.json`). Un token con par `surface-dark-*` (o que lo hereda) es un `Color` dinámico.

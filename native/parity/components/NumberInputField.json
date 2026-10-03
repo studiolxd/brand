@@ -7,7 +7,9 @@
     "size": { "type": "union", "values": ["sm", "md", "lg"], "default": "md" },
     "labelHidden": { "type": "boolean", "default": false },
     "decimal": { "type": "boolean", "default": false },
-    "error": { "type": "boolean", "default": false }
+    "error": { "type": "boolean", "default": false },
+    "compact": { "type": "boolean", "default": false },
+    "commitMode": { "type": "union", "values": ["change", "blur"], "default": "change" }
   },
   "excluded": [
     { "prop": "id", "reason": "El `id` enlaza la etiqueta con el control en HTML; en SwiftUI el enlace es el nombre accesible que pone el propio campo." },
@@ -21,6 +23,8 @@
     { "prop": "helperText", "reason": "Es texto, no un caso: existe como `helperText: LocalizedStringKey?`." },
     { "prop": "onChange", "reason": "El cambio se observa en el `Binding` (`.onChange(of:)`), que ya recibe el valor normalizado." },
     { "prop": "onEmpty", "reason": "Es un manejador de React para vaciar el campo; en nativo vaciar el texto pone el `Binding` a `nil` (Swift) o llama a `onValueChange(null)` (Compose), sin manejador aparte." },
+    { "prop": "decrementLabel", "reason": "Es texto, no un caso: existe como `decrementLabel: LocalizedStringKey` (Swift) y `decrementLabel: String` (Compose), «Decrementar» por defecto." },
+    { "prop": "incrementLabel", "reason": "Es texto, no un caso: existe como `incrementLabel: LocalizedStringKey` (Swift) y `incrementLabel: String` (Compose), «Incrementar» por defecto." },
     { "prop": "className", "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens." }
   ],
   "differences": [
@@ -34,6 +38,8 @@
     "El token `number-input.btn-bg` vale `transparent`, que el generador no emite como color: el botón no pinta fondo.",
     "En Android el valor es un `Double` elevado (`value`/`onValueChange`) y el teclado es `Number` o `Decimal`; el estado `disabled` es el parámetro `enabled`. No hay respuesta háptica al pulsar − y +.",
     "TalkBack no tiene valor «ajustable» como VoiceOver: además de los dos botones con nombre, el campo expone las acciones personalizadas «Decrementar» e «Incrementar» (castellano, sobrescribibles con `decrementLabel`/`incrementLabel`) que suman o restan un paso.",
-    "En Android los botones − y + tienen un anillo de foco interior para teclado o DPAD (con los tokens de foco del propio campo): la web usa el foco nativo del `<button>`."
+    "En Android los botones − y + tienen un anillo de foco interior para teclado o DPAD (con los tokens de foco del propio campo): la web usa el foco nativo del `<button>`.",
+    "`commitMode: 'blur'` avisa una sola vez de lo tecleado: en React al salir del campo o con Enter (Escape descarta); en SwiftUI al perder el foco o con «intro» (`onSubmit`; Escape con teclado físico descarta); en Compose al perder el foco o con la acción «Hecho» del teclado. Solo si el valor cambia. Los botones − y + escriben al momento en los dos modos y descartan un borrador pendiente. Con `onEmpty` (React) o `nil`/`null` (nativo), vaciar y confirmar es «sin valor».",
+    "`compact` es la variante para filas de lista (`trailing` de `ListItem`): 32 de alto, botones de 24 y cifra de 40 de ancho, sin estirarse; manda sobre `size`. En nativo la zona táctil de cada botón sigue llegando a 44 pt (iOS) / 48 dp (Android) aunque el botón se vea de 24: se amplía sin cambiar la maqueta, y se solapa con la cifra vecina."
   ]
 }

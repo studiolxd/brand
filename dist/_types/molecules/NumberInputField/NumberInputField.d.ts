@@ -1,5 +1,6 @@
 import { type ComponentPropsWithoutRef } from 'react';
 import './NumberInputField.css';
+import { type NumberInputCommitMode } from '../../atoms/NumberInput/NumberInput';
 export interface NumberInputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue' | 'onChange'> {
     /** `id` del control. Si no se pasa, se genera con `useId`. */
     id?: string;
@@ -26,6 +27,14 @@ export interface NumberInputFieldProps extends Omit<ComponentPropsWithoutRef<'in
     /** Texto de ayuda, enlazado por `aria-describedby`. */
     helperText?: string;
     size?: 'sm' | 'md' | 'lg';
+    /** Variante para filas de lista: botones y cifra justos. Ver `NumberInput`. */
+    compact?: boolean;
+    /** Cuándo se avisa de lo escrito a mano: con cada tecla (`'change'`) o al salir/Enter (`'blur'`). Ver `NumberInput`. */
+    commitMode?: NumberInputCommitMode;
+    /** aria-label del botón que resta. Sin default: sale de `numberInput.decrement` del `BrandMessagesProvider`. */
+    decrementLabel?: string;
+    /** aria-label del botón que suma. Sin default: sale de `numberInput.increment` del `BrandMessagesProvider`. */
+    incrementLabel?: string;
     /** Recibe el valor ya normalizado, no el evento. */
     onChange?: (value: number) => void;
     /** Quien teclea dejó el campo vacío; con ella, vaciar es un valor (`null`). Ver `NumberInput`. */

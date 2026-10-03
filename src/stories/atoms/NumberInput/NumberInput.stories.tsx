@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
+import { expect, fn, userEvent, within } from 'storybook/test';
 import { useState } from 'react';
 import { NumberInput } from './NumberInput';
+import { List, ListItem } from '../List/List';
 import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
 import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
@@ -19,6 +20,7 @@ const meta = {
   },
   argTypes: {
     size: { control: 'radio', options: ['sm', 'md', 'lg'] },
+    commitMode: { control: 'radio', options: ['change', 'blur'] },
   },
 } satisfies Meta<typeof NumberInput>;
 
@@ -74,6 +76,88 @@ export const Controlled: Story = {
         <span style={{ fontFamily: 'monospace', fontSize: '0.875rem' }}>valor: {val}</span>
       </div>
     );
+  },
+};
+
+/**
+ * `compact`: botones y cifra justos, del ancho de 2–3 dígitos y sin estirarse.
+ * Es la variante para filas de lista; en nativo la zona táctil sigue llegando a
+ * 44 pt / 48 dp aunque el control se vea pequeño.
+ */
+export const Compacto: Story = {
+  args: { compact: true, defaultValue: 12, 'aria-label': 'Cantidad' },
+};
+
+/**
+ * `commitMode="blur"`: lo escrito a mano se avisa una sola vez, al salir del
+ * campo o con Enter; Escape lo descarta. Los botones − y + avisan al momento.
+ * Pensado para cuando cada aviso es una escritura en un servidor.
+ */
+export const ConfirmarAlSalir: Story = {
+  name: 'Confirmar al salir',
+  render: (args) => {
+    const [avisos, setAvisos] = useState<number[]>([]);
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center' }}>
+        <NumberInput {...args} commitMode="blur" defaultValue={3} aria-label="Cantidad" onChange={(n) => setAvisos((a) => [...a, n])} />
+        <span style={{ fontFamily: 'monospace', fontSize: '0.875rem' }}>avisos: {avisos.length ? avisos.join(', ') : '—'}</span>
+      </div>
+    );
+  },
+};
+
+/**
+ * El compacto como `trailing` de `ListItem`: la cantidad cabe junto al nombre
+ * de la fila, que es para lo que existe.
+ */
+export const EnUnaFilaDeLista: Story = {
+  name: 'En una fila de lista',
+  parameters: { layout: 'padded' },
+  render: () => (
+    <List type="plain" showSeparators aria-label="Lista de la compra">
+      <ListItem secondary="1 l" trailing={<NumberInput compact commitMode="blur" defaultValue={2} min={0} max={99} aria-label="Cantidad de leche" />}>
+        Leche entera
+      </ListItem>
+      <ListItem trailing={<NumberInput compact commitMode="blur" defaultValue={12} min={0} max={99} aria-label="Cantidad de huevos" />}>
+        Huevos
+      </ListItem>
+      <ListItem trailing={<NumberInput compact commitMode="blur" defaultValue={1} min={0} max={99} aria-label="Cantidad de pan" />}>
+        Pan de molde integral con semillas
+      </ListItem>
+    </List>
+  ),
+};
+
+/** Test: en modo `blur`, teclear no avisa; salir sí, una vez. */
+export const ContratoConfirmarAlSalir: Story = {
+  name: 'Test — confirmar al salir',
+  tags: ['!dev'],
+  args: { onChange: fn() },
+  render: (args) => <NumberInput {...args} commitMode="blur" defaultValue={1} aria-label="n" />,
+  play: async ({ canvasElement, args }) => {
+    const campo = within(canvasElement).getByRole('textbox');
+    await userEvent.clear(campo);
+    await userEvent.type(campo, '25');
+    await expect(args.onChange).not.toHaveBeenCalled();
+    await userEvent.tab();
+    await expect(args.onChange).toHaveBeenCalledTimes(1);
+    await expect(args.onChange).toHaveBeenCalledWith(25);
+  },
+};
+
+/** Test: el compacto mide 32 de alto y no se estira. */
+export const ContratoCompacto: Story = {
+  name: 'Test — compacto',
+  tags: ['!dev'],
+  render: () => (
+    <div data-t="c" style={{ inlineSize: '30rem' }}>
+      <NumberInput compact defaultValue={0} aria-label="c" />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const caja = canvasElement.querySelector('[data-t="c"] .number-input')!.getBoundingClientRect();
+    await expect(Math.round(caja.height)).toBe(32);
+    await expect(caja.width).toBeLessThan(120);
   },
 };
 

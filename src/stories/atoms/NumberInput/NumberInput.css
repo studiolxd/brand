@@ -124,3 +124,16 @@
   --number-input-padding-inline: var(--number-input-lg-padding-inline);
   --number-input-font-size: var(--number-input-lg-font-size);
 }
+
+/* Compacto — para una fila de lista: botones y cifra justos, sin estirarse */
+.number-input.number-input--compact {
+  --number-input-height: var(--number-input-compact-height);
+  --number-input-padding-inline: var(--number-input-compact-padding-inline);
+  --number-input-font-size: var(--number-input-compact-font-size);
+  --number-input-btn-width: var(--number-input-compact-btn-width);
+}
+
+.number-input.number-input--compact .number-input__field {
+  flex: none;
+  width: var(--number-input-compact-field-width);
+}
