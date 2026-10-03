@@ -7,6 +7,35 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [Sin publicar]
+
+> Infraestructura nativa (iOS, macOS y Android). **No cambia nada del paquete npm**: lo
+> nativo vive en `native/`, `Package.swift` y `jitpack.yml`, fuera de `package.json#files`.
+
+### Nativo — nuevo (`native/`)
+
+- **Tokens nativos con Style Dictionary**: dos plataformas nuevas en `sd.config.mjs`
+  (`swift`, `kotlin`) con formatos propios en `sd.formats.mjs`. `pnpm build:tokens`
+  genera `native/apple/…/Tokens/BrandTokens.swift` y
+  `native/android/…/tokens/BrandTokens.kt`: colores y roles claro/oscuro (`Color` dinámico
+  en Swift; `BrandColorRoles.light|dark` + `CompositionLocal` en Compose), espaciado,
+  radios, anchos de borde, tallas, opacidad, tipografía, sombras y motion. Los tokens de
+  componente quedan para cuando se porte cada componente.
+- **Paquete SwiftPM** `StudiolxdBrand` (`Package.swift` en la raíz; iOS 17, macOS 14,
+  Swift 6): `registerFonts()`, `BrandTextStyle` y `Font.brand(_:)`.
+- **Módulo Gradle** `com.github.studiolxd:brand` (`native/android`, minSdk 26, publicable
+  por JitPack con `jitpack.yml`): `BrandTheme`, `BrandFontFamily`, `BrandTypography`.
+- **Fuentes**: `pnpm build:native-fonts` descomprime los woff2 variables (Google Sans Flex,
+  Google Sans Code, Libre Bodoni; cara `latin`) a TTF para ambas plataformas.
+- **Paridad con React**: fichas por componente (`native/parity/`), validador
+  (`pnpm native:parity`, con TypeScript y `ajv`) y pruebas de paridad en Swift y Kotlin.
+- **Capturas**: swift-snapshot-testing (Apple) y Paparazzi (Android), con una captura de
+  ejemplo de los roles de color en claro y oscuro.
+- **`release:check`** comprueba que `npm pack` no incluye nada nativo, que los tokens
+  nativos están al día y la paridad; con `--with-native` compila y prueba Swift (macOS e
+  iOS) y Gradle.
+- Documentación en `native/README.md` y en `CLAUDE.md` § «Nativo (iOS y Android)».
+
 ## [49.17.0] — 2026-10-03
 
 > **Minor.** Componente nuevo: `EmbedFrame`, el marco embebido del sistema, y las tres

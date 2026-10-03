@@ -6,6 +6,7 @@
 // Uso:
 //   pnpm release:check                 // sin test:stories (depende de Chromium)
 //   pnpm release:check -- --with-stories
+//   pnpm release:check -- --with-native    // compila y prueba las versiones nativas (Swift y Gradle)
 
 import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
@@ -13,10 +14,11 @@ import { dirname, join, relative } from 'node:path';
 import { findIndexDiskCaseMismatches } from './lib/case-guard.mjs';
 
 const withStories = process.argv.includes('--with-stories');
+const withNative = process.argv.includes('--with-native');
 
-function run(label, command, args) {
+function run(label, command, args, options = {}) {
   console.log(`\n▶ ${label}`);
-  const result = spawnSync(command, args, { stdio: 'inherit', shell: false });
+  const result = spawnSync(command, args, { stdio: 'inherit', shell: false, ...options });
   if (result.status !== 0) {
     console.error(`\n✗ release:check — falló «${label}» (${command} ${args.join(' ')})`);
     process.exit(result.status ?? 1);
@@ -26,6 +28,7 @@ function run(label, command, args) {
 run('lint', 'pnpm', ['lint']);
 run('tsc -b', 'pnpm', ['exec', 'tsc', '-b']);
 run('test', 'pnpm', ['test']);
+run('native:parity', 'pnpm', ['native:parity']);
 if (withStories) {
   run('test:stories', 'pnpm', ['test:stories']);
 } else {
@@ -308,4 +311,79 @@ if (dirty.length > 0) {
 }
 
 console.log('✔ dist/ en sync con package.json#exports y con src/ (git status limpio)');
+
+// --- Lo nativo no viaja en el paquete npm ---
+// `package.json#files` solo lista `dist`, `src/tokens` y `CHANGELOG.md`, pero eso
+// es una promesa, no un hecho: se pregunta a `npm pack` qué metería de verdad. La
+// versión nativa (SwiftPM, Gradle, fuentes TTF, fichas de paridad) se distribuye
+// por git —SwiftPM y JitPack— y por npm no debe salir nada de ella.
+console.log('\n▶ comprobando que `npm pack` no incluye nada nativo');
+
+const pack = spawnSync('npm', ['pack', '--dry-run', '--json', '--ignore-scripts'], { encoding: 'utf-8' });
+if (pack.status !== 0) {
+  console.error(pack.stderr);
+  console.error('\n✗ release:check — falló `npm pack --dry-run`');
+  process.exit(pack.status ?? 1);
+}
+const packed = JSON.parse(pack.stdout)[0].files.map((f) => f.path);
+const nativeInPack = packed.filter((path) => path.startsWith('native/') || path === 'Package.swift' || path === 'jitpack.yml');
+
+if (nativeInPack.length > 0) {
+  console.error('\n✗ release:check — el paquete npm incluiría ficheros nativos:');
+  for (const path of nativeInPack) console.error(`  - ${path}`);
+  console.error('\nLo nativo nunca va a npm: revisa `package.json#files` (CLAUDE.md § «Nativo (iOS y Android)»).');
+  process.exit(1);
+}
+
+console.log(`✔ \`npm pack\` (${packed.length} ficheros) no incluye nada de native/, Package.swift ni jitpack.yml`);
+
+// --- Tokens nativos al día ---
+// `build:all` ya ha regenerado `native/` (tokens Swift y Kotlin). Si eso cambia
+// algo respecto al commit, lo committeado no correspondía a los JSON de tokens:
+// mismo fallo que el de `dist/`, y mismo arreglo.
+console.log('\n▶ comprobando que los tokens nativos están al día');
+
+const nativeStatus = spawnSync('git', ['status', '--porcelain', '--', 'native'], { encoding: 'utf-8' }).stdout.trim();
+if (nativeStatus.length > 0) {
+  console.error('\n✗ release:check — native/ no está en sync con los tokens: el build acaba de cambiarlo.');
+  console.error('Commitea el native/ regenerado antes de taggear:\n');
+  console.error(nativeStatus);
+  process.exit(1);
+}
+
+console.log('✔ tokens nativos en sync con tokens/ (git status -- native limpio)');
+
+// --- Compilaciones nativas (opcionales: `--with-native`) ---
+// Dependen de Xcode/Swift y de un JDK + Android SDK, y no siempre están (CI en
+// Linux, redes restringidas). Como `test:stories`, se piden aparte.
+if (withNative) {
+  // Con el PATH de sistema: un `swift`/`clang` de Homebrew o de un gestor de
+  // versiones delante en el PATH rompe la compilación contra el SDK de Xcode.
+  const swiftEnv = { ...process.env, PATH: '/usr/bin:/bin:/usr/sbin:/sbin' };
+
+  if (process.platform === 'darwin') {
+    run('swift build', 'swift', ['build'], { env: swiftEnv });
+    run('swift test (macOS)', 'swift', ['test'], { env: swiftEnv });
+
+    const simulators = spawnSync('xcrun', ['simctl', 'list', 'devices', 'available', '--json'], { encoding: 'utf-8', env: swiftEnv });
+    const iphone = Object.entries(JSON.parse(simulators.stdout || '{"devices":{}}').devices)
+      .filter(([runtime]) => runtime.includes('iOS'))
+      .flatMap(([, devices]) => devices)
+      .find((device) => device.name.startsWith('iPhone'));
+    if (iphone) {
+      run(`swift test (iOS, simulador ${iphone.name})`, 'xcodebuild', ['test', '-scheme', 'StudiolxdBrand', '-destination', `platform=iOS Simulator,id=${iphone.udid}`, '-quiet'], { env: swiftEnv });
+    } else {
+      console.error('\n✗ release:check — no hay ningún simulador de iPhone disponible para probar iOS (`xcrun simctl list devices available`).');
+      process.exit(1);
+    }
+  } else {
+    console.log('\n○ swift build/test omitidos: solo se ejecutan en macOS');
+  }
+
+  // Gradle usa el JDK 21 de gradle/gradle-daemon-jvm.properties; el SDK sale de
+  // native/android/local.properties (no versionado) o de ANDROID_HOME.
+  run('./gradlew build (native/android)', './gradlew', ['build', '--console=plain'], { cwd: 'native/android' });
+} else {
+  console.log('\n○ compilaciones nativas omitidas (usa --with-native para swift build/test y ./gradlew build)');
+}
 console.log('\n✔ release:check — todo verde');

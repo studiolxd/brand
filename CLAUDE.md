@@ -11,6 +11,8 @@ pnpm storybook        # Launch Storybook on port 6006
 # Build
 pnpm build:tokens     # Regenerar tokens CSS+SCSS+JSON desde Style Dictionary (sd.config.mjs)
 pnpm build:email-assets # Regenerar public/email/ (logotipo PNG + fuente): lo que se publica en el host de assets del correo
+pnpm build:native-fonts # Regenerar los TTF de las librerías nativas (Swift y Android) desde los woff2 de src/assets/fonts/
+pnpm native:parity    # Valida las fichas de paridad de native/parity/ contra el tipo de props de React
 pnpm build:lib        # Build de librería React → dist/ (¡solo componentes JS/CSS!)
 pnpm build:css        # Bundle CSS standalone → dist/brand.css
 pnpm build:tokens-css # Bundle de tokens CSS → dist/tokens.css
@@ -22,7 +24,7 @@ pnpm build-storybook  # Build estático de Storybook
 pnpm lint             # Run ESLint (flat config format)
 pnpm test             # Vitest: proyectos unit (node) + components (jsdom + Testing Library)
 pnpm test:stories     # Vitest: stories en navegador (Playwright/Chromium) — pesado
-pnpm release:check    # Puerta de calidad: lint + tsc + test + build:all + sync de dist/ (añade --with-stories para incluir test:stories)
+pnpm release:check    # Puerta de calidad: lint + tsc + test + paridad + build:all + sync de dist/ y de native/ + npm pack sin nativo (--with-stories añade test:stories; --with-native añade swift build/test y ./gradlew build)
 
 # Docker — Storybook image → ghcr.io
 docker buildx build --platform linux/amd64 -t ghcr.io/studiolxd/studiolxd-brand:latest --push .
@@ -260,6 +262,17 @@ Los `surface-dark-*` se filtran, igual que en SCSS: se publican con el nombre de
 - **`react-email` es un peer opcional** y va en los externals de `vite.lib.config.ts`. Radix sigue prohibido; esta es la única otra dependencia de comportamiento del repo, y solo para el correo.
 
 Las **plantillas concretas** (verificar el correo, restablecer la contraseña…) son producto y viven en `@slxd/mailer`, no aquí.
+
+## Nativo (iOS y Android)
+
+Brand tiene también versiones nativas: **SwiftUI** (iOS 17 y macOS 14, paquete SwiftPM `StudiolxdBrand`) y **Jetpack Compose** (Android, `com.github.studiolxd:brand`, minSdk 26). Guía completa en `native/README.md`.
+
+- **Solo se porta lo que una app nativa pide.** Nunca el catálogo entero: un componente se porta cuando una app nativa lo necesita, y entra con su ficha de paridad, sus pruebas y sus capturas. La primera consumidora es Homenize.
+- **Dónde vive.** Todo en `native/` (`apple/` para Swift, `android/` para Gradle, `parity/` para las fichas), salvo lo que las herramientas exigen en la raíz: `Package.swift` (SwiftPM) y `jitpack.yml` (JitPack). Nada nativo se genera nunca en `src/tokens/`, que sí se publica.
+- **Lo nativo NUNCA va a npm.** Se distribuye por git (tag `vX.Y.Z` para SwiftPM y JitPack). `package.json#files` no se toca para incluirlo, y `pnpm release:check` lo vigila con `npm pack --dry-run`. Los tokens y las fuentes nativos se commitean regenerados, como `dist/`: `release:check` falla si `git status -- native` queda sucio tras el build.
+- **Tokens.** Salen de los mismos JSON de `tokens/` con Style Dictionary (plataformas `swift` y `kotlin` de `sd.config.mjs`, formatos en `sd.formats.mjs`); `pnpm build:tokens` regenera `native/apple/Sources/StudiolxdBrand/Tokens/BrandTokens.swift` y `native/android/brand/src/main/kotlin/com/studiolxd/brand/tokens/BrandTokens.kt`, **que no se editan a mano**. Hoy solo los tokens globales; los de componente (y sus `surface-dark-*`) se generan cuando se porte cada componente. La regla «token first» rige igual: un componente nativo no lleva un color, medida o duración escritos a mano.
+- **Tocar un componente que tiene versión nativa obliga a actualizar las TRES implementaciones** —React, SwiftUI y Compose—, **su ficha de paridad** (`native/parity/components/<Componente>.json`) **y sus capturas**, todo **en el mismo commit**. Las props que son unión de literales (`variant`, `size`, `tone`…) tienen en nativo enums con exactamente los mismos casos: `pnpm native:parity` y las pruebas de paridad de cada plataforma lo comprueban (`native/parity/README.md`).
+- **Comandos.** `swift build && swift test` (raíz, macOS), `xcodebuild test -scheme StudiolxdBrand -destination 'platform=iOS Simulator,name=…'` (iOS) y `./gradlew build` en `native/android` (compila, prueba y verifica las capturas de Paparazzi). `pnpm release:check -- --with-native` los encadena. Android pide JDK 21 (Gradle lo localiza solo: con el JDK 26 de esta máquina no compilan Gradle ni AGP) y el SDK en `native/android/local.properties` (no versionado).
 
 ## Storybook
 
