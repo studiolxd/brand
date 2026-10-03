@@ -9,6 +9,30 @@ para breaking changes.
 
 ## [Sin publicar]
 
+### React — huecos de la primera app nativa (minor)
+
+Todo opcional: sin las props nuevas el HTML es idéntico al anterior (pruebas con `toMatchInlineSnapshot` generadas
+contra el código de antes, en `InputField.test.tsx`, `NumberInputField.test.tsx`, `PasswordField.test.tsx` y
+`List.test.tsx`).
+
+- **`ListItem` `leading`** (`ReactNode`): accesorio al principio de la fila (icono, avatar), pareja de `trailing`.
+  Clase nueva `list__item-leading`; story «Filas con accesorio inicial».
+- **`NumberInput` / `NumberInputField` sin valor**: `value` y `defaultValue` admiten `null` (campo vacío), y la prop
+  nueva `onEmpty` hace que vaciar el texto sea un valor (sin ella, el campo se comporta como siempre y recupera el
+  último número al salir). Desde vacío, − y + cuentan como si el campo valiera 0 y se ajustan a `min`/`max`.
+  Story «Sin valor».
+- **Foco desde fuera**: el `ref` ya llegaba al `<input>` en `InputField` (también en búsqueda), `NumberInputField` y
+  `PasswordField` (y al botón en `SelectField`); ahora lo fija una prueba y lo documenta `InputField.mdx`.
+- **Documentación de `Button`**: la nota de `destructive` decía que valía para `primary` y `ghost` y mencionaba una
+  variante `accent` que ya no existe; en el código solo `outline` y `text` tienen estilo destructivo. Corregida la
+  nota (y `destructiveIntent` → `destructive`); el comportamiento no cambia.
+
+### Nativo — huecos de la primera app nativa (minor)
+
+- **Generador de Kotlin**: los tamaños de letra de componente cuyo nombre no termina en `font-size`
+  (`empty-state.title-font-size-sm`, `description-font-size-sm`) salían como `Dp`; ahora todo token con `font-size`
+  como segmento es `TextUnit` (`sp`). `BrandEmptyState` deja de convertir a mano.
+
 ### Nativo — Jetpack Compose con los mismos componentes que SwiftUI (minor)
 
 - **Tokens de componente en Kotlin**: `pnpm build:tokens` genera `BrandComponentTokens.kt` (mismos grupos y reglas que
