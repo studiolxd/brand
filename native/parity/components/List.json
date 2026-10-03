@@ -35,6 +35,7 @@
     "Las marcas (• y 1.) son texto en la sangría de `text.list.padding-inline-start`, alineado a la derecha como el marcador `outside` del navegador; el glifo del disco lo decide la fuente, no `list-style-type: disc`.",
     "La numeración se calcula con `_VariadicView` (SwiftUI público pero con guion bajo) porque `Group(subviews:)` exige iOS 18 y el paquete llega a iOS 17.",
     "Una lista anidada suma `text.list.padding-inline-start` por nivel, igual que en la web.",
-    "El hueco entre la marca y el texto es el del espacio de «1. » / «• »; el navegador añade además un margen del marcador `outside` (≈ 7 pt más ancho en la web)."
+    "El hueco entre la marca y el texto es el del espacio de «1. » / «• »; el navegador añade además un margen del marcador `outside` (≈ 7 pt más ancho en la web).",
+    "Android: los ítems se declaran con `item { … }` / `item(\"texto\")` / `items(n)` en el ámbito `BrandListScope` de `BrandList` (que las numera y separa) en lugar de hijos variádicos; TalkBack lee la lista como colección («elemento 2 de 3») y las marcas no se leen sueltas."
   ]
 }

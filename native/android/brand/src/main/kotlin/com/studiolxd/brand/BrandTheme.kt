@@ -4,7 +4,9 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.staticCompositionLocalOf
 import com.studiolxd.brand.tokens.BrandColorRoles
+import com.studiolxd.brand.support.ProvideBrandHitTarget
 import com.studiolxd.brand.tokens.LocalBrandColorRoles
 
 /**
@@ -20,9 +22,15 @@ fun BrandTheme(
 ) {
     CompositionLocalProvider(
         LocalBrandColorRoles provides if (darkTheme) BrandColorRoles.dark else BrandColorRoles.light,
-        content = content,
-    )
+        LocalBrandDarkTheme provides darkTheme,
+    ) {
+        // Zona táctil de 48 dp para todo lo clicable, sin cambiar la maqueta.
+        ProvideBrandHitTarget(content)
+    }
 }
+
+/** `true` si el esquema vigente es el oscuro. Lo provee [BrandTheme]; por defecto, claro. */
+internal val LocalBrandDarkTheme = staticCompositionLocalOf { false }
 
 /** Acceso a lo que provee [BrandTheme]. */
 object BrandTheme {
@@ -31,4 +39,10 @@ object BrandTheme {
         @Composable
         @ReadOnlyComposable
         get() = LocalBrandColorRoles.current
+
+    /** Si el esquema vigente es el oscuro (para resolver los tokens de componente con par oscuro). */
+    val isDark: Boolean
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalBrandDarkTheme.current
 }

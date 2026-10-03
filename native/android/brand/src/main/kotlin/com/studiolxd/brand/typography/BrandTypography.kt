@@ -22,7 +22,7 @@ object BrandTypography {
         weight: FontWeight,
         lineHeight: Float,
         tracking: TextUnit,
-        family: FontFamily = BrandFontFamily.sans,
+        family: FontFamily = BrandFontFamily.sansAt(size),
     ) = TextStyle(
         fontFamily = family,
         fontSize = size,

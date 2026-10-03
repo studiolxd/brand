@@ -36,6 +36,8 @@
     "`ToastIntent` (default, success, error, warning, info, loading) es un enum con los mismos casos y `rawValue` que el tipo de React; lo vigila `OverlaysLogicTests` porque la ficha no tipa uniones fuera de las props.",
     "La API es la clase observable `ToastCenter` (`ToastCenter.shared.success(…)`), no el objeto `toast` de React; `toast.promise` es `ToastCenter.promise(loading:success:error:_:)` con una tarea `async`.",
     "El título es `String`: quien llama lo localiza, igual que en React no hay textos propios por defecto.",
-    "A la misma escala el aviso coincide en caja, márgenes y color; el peso 500 de los títulos se ve algo más ligero que en la web porque aquí el eje `opsz` de Google Sans Flex queda en su valor por defecto (la web lo ajusta con `font-optical-sizing: auto`)."
+    "A la misma escala el aviso coincide en caja, márgenes y color; el peso 500 de los títulos se ve algo más ligero que en la web porque aquí el eje `opsz` de Google Sans Flex queda en su valor por defecto (la web lo ajusta con `font-optical-sizing: auto`).",
+    "Android: `duration` es `kotlin.time.Duration` (`Duration.INFINITE` lo deja fijo), no segundos; `ToastCenter.shared` es la cola global y `ToastCenter()` crea una propia para pasársela a `ToastHost(center = …)`. `update(id, …)` actualiza un aviso vivo sin crear otro, y `promise` es `suspend` y cierra el aviso si la corrutina se cancela.",
+    "Android: la cola es estado de Compose (`items`); los relojes de cierre los lleva `ToastHost`, así que sin host montado los avisos no caducan."
   ]
 }

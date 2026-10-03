@@ -30,6 +30,8 @@
   "excluded": [],
   "differences": [
     "Los casos con guion se llaman `accent1`, `support2`… en Swift (el `rawValue` sí es `accent-1`, `support-2`…).",
-    "El Tag nativo no es un control: VoiceOver lo lee como texto, igual que el `<span>` de React."
+    "El Tag nativo no es un control: VoiceOver lo lee como texto, igual que el `<span>` de React.",
+    "Android: la caja de línea se fija a `tag.line-height` (1 × el cuerpo, escalado con la fuente) y el texto se centra en ella, porque Compose no encoge una línea por debajo del alto natural de Google Sans Flex (≈1,45 em); sin eso la etiqueta salía 7 dp más alta que en la web.",
+    "Android: `TagVariant` usa `Accent1`, `Support2`… (PascalCase); el `value` es `accent-1`, `support-2`…"
   ]
 }

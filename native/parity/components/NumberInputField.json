@@ -28,6 +28,9 @@
     "VoiceOver lo anuncia como valor ajustable: deslizar arriba o abajo suma o resta un paso, además de los dos botones con nombre accesible («Decrementar» e «Incrementar», castellano, sobrescribibles).",
     "En iOS el teclado es `numberPad` o `decimalPad` (sin tecla de coma flotante ni «intro» en el numérico puro); en macOS es un campo de texto normal.",
     "El valor se enseña como `String(n)` de la web (`3`, no `3.0`) y con cifras de ancho fijo (`monospacedDigit`).",
-    "El token `number-input.btn-bg` vale `transparent`, que el generador no emite como color: el botón no pinta fondo."
+    "El token `number-input.btn-bg` vale `transparent`, que el generador no emite como color: el botón no pinta fondo.",
+    "En Android el valor es un `Double` elevado (`value`/`onValueChange`) y el teclado es `Number` o `Decimal`; el estado `disabled` es el parámetro `enabled`. No hay respuesta háptica al pulsar − y +.",
+    "TalkBack no tiene valor «ajustable» como VoiceOver: además de los dos botones con nombre, el campo expone las acciones personalizadas «Decrementar» e «Incrementar» (castellano, sobrescribibles con `decrementLabel`/`incrementLabel`) que suman o restan un paso.",
+    "En Android los botones − y + tienen un anillo de foco interior para teclado o DPAD (con los tokens de foco del propio campo): la web usa el foco nativo del `<button>`."
   ]
 }

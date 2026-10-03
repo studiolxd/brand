@@ -593,7 +593,11 @@ const sd = new StyleDictionary({
     kotlin: {
       transformGroup: 'css',
       buildPath: 'native/android/brand/src/main/kotlin/com/studiolxd/brand/tokens/',
-      files: [{ destination: 'BrandTokens.kt', format: 'kotlin/brand-tokens', filter: isNativeToken }],
+      files: [
+        { destination: 'BrandTokens.kt', format: 'kotlin/brand-tokens', filter: isNativeToken },
+        // Igual que en Swift: sin filtro, el formato deriva el lado oscuro y elige los grupos (`NATIVE_COMPONENT_GROUPS`).
+        { destination: 'BrandComponentTokens.kt', format: 'kotlin/brand-component-tokens' },
+      ],
     },
   },
 });

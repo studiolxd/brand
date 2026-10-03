@@ -1,0 +1,109 @@
+package com.studiolxd.brand
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.studiolxd.brand.components.inputfield.BrandInputField
+import com.studiolxd.brand.components.numberinputfield.BrandNumberInputField
+import com.studiolxd.brand.components.selectfield.BrandSelectEntry
+import com.studiolxd.brand.components.selectfield.BrandSelectField
+import com.studiolxd.brand.components.switcherfield.BrandSwitcherField
+import com.studiolxd.brand.components.themeswitcher.BrandThemeChoice
+import com.studiolxd.brand.components.themeswitcher.BrandThemeSwitcher
+import com.studiolxd.brand.components.themeswitcher.ThemeSwitcherLayout
+import com.studiolxd.brand.components.themeswitcher.ThemeSwitcherVariant
+import com.studiolxd.brand.components.togglegroup.BrandToggleGroup
+import com.studiolxd.brand.support.BrandControlSize
+import com.studiolxd.brand.tokens.BrandSpacing
+import org.junit.Rule
+import org.junit.Test
+
+/**
+ * Las capturas de las parejas con Storybook de los campos (`native/android/Comparisons/`): los mismos casos y los mismos
+ * lienzos que los de SwiftUI (`FormsSnapshotTests` y `TogglesComparisonSnapshotTests`), con 16 dp de margen.
+ */
+class FieldsComparisonSnapshotTest {
+    @get:Rule
+    val paparazzi = brandPaparazzi(160, 160)
+
+    @Test
+    fun inputError() = paparazzi.brandComparison("input-error", 352, 159) {
+        BrandInputField(
+            "Nombre completo", "", {},
+            errorMessage = "Este campo es obligatorio.", helperText = "Escríbelo tal como aparece en tu DNI.",
+        )
+    }
+
+    @Test
+    fun numberMinMax() = paparazzi.brandComparison("number-min-max", 256, 130) {
+        BrandNumberInputField("Cantidad", 1.0, {}, min = 0.0, max = 10.0, helperText = "Entre 0 y 10.", modifier = Modifier.width(224.dp))
+    }
+
+    @Test
+    fun selectValue() = paparazzi.brandComparison("select-value", 352, 101) {
+        BrandSelectField(
+            "Tipo de contrato", "full-time", {},
+            listOf(
+                BrandSelectEntry.option("", "Selecciona un tipo"), BrandSelectEntry.option("full-time", "Jornada completa"),
+                BrandSelectEntry.option("part-time", "Media jornada"), BrandSelectEntry.option("freelance", "Autónomo"),
+            ),
+        )
+    }
+
+    @Test
+    fun switcherSizes() = paparazzi.brandComparison("switcher-tallas", 480, 203) {
+        Column {
+            BrandSwitcherField("Pequeño", true, {}, size = BrandControlSize.Sm)
+            BrandSwitcherField("Mediano", true, {}, size = BrandControlSize.Md)
+            BrandSwitcherField("Grande", true, {}, size = BrandControlSize.Lg)
+        }
+    }
+
+    @Test
+    fun switcherError() = paparazzi.brandComparison("switcher-error", 480, 146) {
+        BrandSwitcherField(
+            "Activar notificaciones", false, {},
+            errorMessage = "Tienes que aceptar los avisos de seguridad.",
+            helperText = "Te avisamos solo de lo que afecte a tu cuenta.",
+        )
+    }
+
+    @Test
+    fun toggleGroupSizes() = paparazzi.brandComparison("group-tallas", 480, 200) {
+        Column(verticalArrangement = Arrangement.spacedBy(BrandSpacing.s5)) {
+            BrandControlSize.entries.forEach { size ->
+                BrandToggleGroup(value = "dia", onValueChange = {}, size = size) {
+                    Item("Día", "dia")
+                    Item("Semana", "semana")
+                    Item("Mes", "mes")
+                }
+            }
+        }
+    }
+
+    @Test
+    fun toggleGroupMultiple() = paparazzi.brandComparison("group-multiple", 441, 72) {
+        BrandToggleGroup(setOf("borradores"), {}, multiple = true) {
+            Item("Borradores", "borradores")
+            Item("Publicados", "publicados")
+            Item("Archivados", "archivados")
+        }
+    }
+
+    @Test
+    fun themeCompact() = paparazzi.brandComparison("theme-compact", 480, 72) {
+        BrandThemeSwitcher(BrandThemeChoice.System, {})
+    }
+
+    @Test
+    fun themeList() = paparazzi.brandComparison("theme-list", 480, 59) {
+        BrandThemeSwitcher(BrandThemeChoice.System, {}, variant = ThemeSwitcherVariant.List)
+    }
+
+    @Test
+    fun themeStacked() = paparazzi.brandComparison("theme-stacked", 480, 101) {
+        BrandThemeSwitcher(BrandThemeChoice.System, {}, layout = ThemeSwitcherLayout.Stacked)
+    }
+}

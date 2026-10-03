@@ -58,6 +58,8 @@
     "Los elementos son `BrandToggleGroupItem(value:)`; el `Toggle` suelto es el `ToggleStyle` `.brandToggle`.",
     "La selección es un `Set` (o un valor opcional en exclusivo), no una lista de textos: el valor puede ser cualquier `Hashable`.",
     "El grupo no es una sola parada de tabulador con flechas: cada elemento es un botón enfocable.",
-    "El nombre accesible del grupo va con `.accessibilityLabel(_:)`, como el `aria-label`."
+    "El nombre accesible del grupo va con `.accessibilityLabel(_:)`, como el `aria-label`.",
+    "En Android los elementos se declaran en el `content` del grupo (`Item(\"Mensual\", valor)`, `Item(icono, descripción, valor)`); hay dos formas: selección en conjunto (`selection`/`onSelectionChange`, con `multiple`) y selección exclusiva con un valor opcional (`value`/`onValueChange`). El `Toggle` suelto es `BrandToggle`.",
+    "En TalkBack cada elemento es un radio (`Role.RadioButton`, el grupo es `selectableGroup`) en exclusivo y una casilla (`Role.Checkbox`) en múltiple; el nombre accesible del grupo es `contentDescription`."
   ]
 }

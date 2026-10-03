@@ -588,7 +588,10 @@ function nativeValue(path, value) {
   if (value in CSS_EASINGS) return { kind: 'easing', bezier: CSS_EASINGS[value] };
   if (/^-?[\d.]+em$/.test(value)) return { kind: 'em', number: parseFloat(value) };
   if (/^-?[\d.]+(rem|px)?$/.test(value)) {
-    return /font-weight$/.test(last) ? { kind: 'weight', number: +value } : { kind: 'points', points: toPoints(value) };
+    if (/font-weight$/.test(last)) return { kind: 'weight', number: +value };
+    // `unitless`: un número sin `rem`/`px` (y distinto de 0) es un factor (`line-height: 1.5`), no una medida: Kotlin lo
+    // emite como `Float`; Swift no distingue y sigue con `CGFloat`.
+    return { kind: 'points', points: toPoints(value), unitless: !/(rem|px)$/.test(value) && +value !== 0 };
   }
   const calc = evalCalc(value);
   if (calc !== null) return { kind: 'points', points: calc };
@@ -683,6 +686,89 @@ function swiftComponentSource(groups, header) {
   return lines.join('\n').replace(/\n+$/, '\n');
 }
 
+
+function kotlinComponentSource(groups, header) {
+  const kt = (n) => (KOTLIN_KEYWORDS.has(n) ? `\`${n}\`` : n);
+  const pascal = (g) => g.split('-').map(upperFirst).join('');
+  const lines = [];
+  const body = [];
+  const used = new Set(['Color']);
+  for (const { group, tokens } of groups) {
+    assertUnique(`componente ${group}`, tokens.map((t) => t.name));
+    body.push(
+      `/** Tokens del componente \`${group}\` (\`tokens/**/${group}.json\`). Todo color es un [BrandSchemeValue]: se resuelve con \`.current\` (los que no tienen par oscuro valen lo mismo en los dos esquemas). */`,
+      `object Brand${pascal(group)}Tokens {`,
+    );
+    for (const t of tokens) {
+      const { light, dark } = t;
+      const last = t.token.split('.').pop();
+      const doc = docLine(t);
+      let type;
+      let literal;
+      switch (light.kind) {
+        case 'color':
+          used.add('Color');
+          type = 'BrandSchemeValue<Color>';
+          literal = `BrandSchemeValue(${kotlinColor(light.color)}, ${kotlinColor((dark ?? light).color)})`;
+          break;
+        case 'points': {
+          const isFont = /font-size$/.test(last);
+          const unit = isFont ? 'sp' : 'dp';
+          used.add(unit);
+          if (light.unitless) {
+            type = 'Float';
+            literal = `${trimNum(light.points)}f`;
+          } else if (dark) {
+            type = isFont ? 'BrandSchemeValue<TextUnit>' : 'BrandSchemeValue<Dp>';
+            if (isFont) used.add('TextUnit'); else used.add('Dp');
+            literal = `BrandSchemeValue(${trimNum(light.points)}.${unit}, ${trimNum(dark.points)}.${unit})`;
+          } else {
+            type = isFont ? 'TextUnit' : 'Dp';
+            used.add(isFont ? 'TextUnit' : 'Dp');
+            literal = `${trimNum(light.points)}.${unit}`;
+          }
+          break;
+        }
+        case 'em': type = 'Float'; literal = `${trimNum(light.number)}f`; break;
+        case 'weight': used.add('FontWeight'); type = 'FontWeight'; literal = `FontWeight(${trimNum(light.number)})`; break;
+        case 'duration': type = 'Int'; literal = trimNum(light.seconds * 1000); break;
+        case 'easing':
+          used.add('Easing');
+          type = 'Easing';
+          if (light.bezier) { used.add('CubicBezierEasing'); literal = `CubicBezierEasing(${light.bezier.map((n) => `${trimNum(n)}f`).join(', ')})`; } else { used.add('LinearEasing'); literal = 'LinearEasing'; }
+          break;
+        case 'family': type = 'String'; literal = JSON.stringify(light.family); break;
+        case 'shadow':
+          used.add('Dp');
+          type = 'BrandShadow';
+          used.add('dp');
+          literal = light.shadow
+            ? `BrandShadow(${trimNum(light.shadow.x)}.dp, ${trimNum(light.shadow.y)}.dp, ${trimNum(light.shadow.blur)}.dp, ${kotlinColor(light.shadow.color)})`
+            : 'BrandShadow.None';
+          break;
+        default: throw new Error(`Tipo nativo desconocido: ${light.kind}`);
+      }
+      const unitNote = light.kind === 'em' ? ' Fracción del tamaño de fuente del propio componente (em).' : light.kind === 'duration' ? ' En milisegundos.' : light.unitless ? ' Factor sin unidad.' : '';
+      body.push(`    /** ${doc}${unitNote} */`, `    val ${kt(t.name)}: ${type} = ${literal}`);
+    }
+    body.push('}', '');
+  }
+  const imports = {
+    Color: 'androidx.compose.ui.graphics.Color',
+    Dp: 'androidx.compose.ui.unit.Dp',
+    dp: 'androidx.compose.ui.unit.dp',
+    sp: 'androidx.compose.ui.unit.sp',
+    TextUnit: 'androidx.compose.ui.unit.TextUnit',
+    FontWeight: 'androidx.compose.ui.text.font.FontWeight',
+    Easing: 'androidx.compose.animation.core.Easing',
+    CubicBezierEasing: 'androidx.compose.animation.core.CubicBezierEasing',
+    LinearEasing: 'androidx.compose.animation.core.LinearEasing',
+  };
+  const used2 = [...used].map((k) => imports[k]).sort();
+  lines.push(`// ${header}`, '', 'package com.studiolxd.brand.tokens', '', ...used2.map((i) => `import ${i}`), '', ...body);
+  return lines.join('\n').replace(/\n+$/, '\n');
+}
+
 /**
  * Registra los formatos `swift/brand-tokens` y `kotlin/brand-tokens`: un único
  * fichero por plataforma con todos los tokens globales (ver
@@ -703,6 +789,13 @@ export function registerNativeFormats(StyleDictionary) {
     format: async ({ dictionary }) => {
       const header = 'Do not edit directly, this file was auto-generated by Style Dictionary (sd.config.mjs). Run `pnpm build:tokens`.';
       return swiftComponentSource(buildComponentModel(dictionary), header);
+    },
+  });
+  StyleDictionary.registerFormat({
+    name: 'kotlin/brand-component-tokens',
+    format: async ({ dictionary }) => {
+      const header = 'Do not edit directly, this file was auto-generated by Style Dictionary (sd.config.mjs). Run `pnpm build:tokens`.';
+      return kotlinComponentSource(buildComponentModel(dictionary), header);
     },
   });
 }
