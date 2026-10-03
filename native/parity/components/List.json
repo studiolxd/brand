@@ -18,6 +18,10 @@
         "plain"
       ],
       "default": "unordered"
+    },
+    "showSeparators": {
+      "type": "boolean",
+      "default": false
     }
   },
   "excluded": [
@@ -27,7 +31,7 @@
     }
   ],
   "differences": [
-    "Solo nativo: `showsSeparators` dibuja la línea de `separator.*` entre filas (la fila de ajustes que Homenize llama `ListRow`); en React la lista no lleva separadores.",
+    "`showSeparators` dibuja la línea de `separator.*` con el aire `separator.spacing-md` a cada lado en lugar del `text.list.gap`; en React es un `border-block-start` sobre cada ítem salvo el primero.",
     "Las marcas (• y 1.) son texto en la sangría de `text.list.padding-inline-start`, alineado a la derecha como el marcador `outside` del navegador; el glifo del disco lo decide la fuente, no `list-style-type: disc`.",
     "La numeración se calcula con `_VariadicView` (SwiftUI público pero con guion bajo) porque `Group(subviews:)` exige iOS 18 y el paquete llega a iOS 17.",
     "Una lista anidada suma `text.list.padding-inline-start` por nivel, igual que en la web.",

@@ -17,22 +17,22 @@ public enum ListType: String, CaseIterable, Sendable {
 /// ```
 ///
 /// Para la fila de una lista de ajustes o de datos (contenido principal, secundario y accesorio final, con
-/// separadores) usa `BrandList(type: .plain, showsSeparators: true)` con `BrandListItem(content:secondary:trailing:)`.
+/// separadores) usa `BrandList(type: .plain, showSeparators: true)` con `BrandListItem(content:secondary:trailing:)`.
 public struct BrandList<Content: View>: View {
     private let type: ListType
-    private let showsSeparators: Bool
+    private let showSeparators: Bool
     private let content: Content
 
-    /// - Parameter showsSeparators: solo nativo. Dibuja la línea de `separator.*` entre filas, con el aire
-    ///   `separator.spacing-md` a cada lado, en lugar del `text.list.gap` (ver la ficha: `differences`).
-    public init(type: ListType = .unordered, showsSeparators: Bool = false, @ViewBuilder content: () -> Content) {
+    /// - Parameter showSeparators: dibuja la línea de `separator.*` entre filas, con el aire
+    ///   `separator.spacing-md` a cada lado, en lugar del `text.list.gap`. Es la misma prop que en React.
+    public init(type: ListType = .unordered, showSeparators: Bool = false, @ViewBuilder content: () -> Content) {
         self.type = type
-        self.showsSeparators = showsSeparators
+        self.showSeparators = showSeparators
         self.content = content()
     }
 
     public var body: some View {
-        _VariadicView.Tree(BrandListLayout(type: type, showsSeparators: showsSeparators)) { content }
+        _VariadicView.Tree(BrandListLayout(type: type, showSeparators: showSeparators)) { content }
             .foregroundStyle(BrandTextTokens.listColor)
             .tracking(BrandTextTokens.listLetterSpacing * BrandTextTokens.listFontSize)
             .accessibilityElement(children: .contain)
@@ -41,18 +41,18 @@ public struct BrandList<Content: View>: View {
 
 private struct BrandListLayout: _VariadicView_UnaryViewRoot {
     let type: ListType
-    let showsSeparators: Bool
+    let showSeparators: Bool
 
     @ViewBuilder
     func body(children: _VariadicView.Children) -> some View {
-        VStack(alignment: .leading, spacing: showsSeparators ? 0 : BrandTextTokens.listGap) {
+        VStack(alignment: .leading, spacing: showSeparators ? 0 : BrandTextTokens.listGap) {
             ForEach(Array(children.enumerated()), id: \.element.id) { index, child in
                 row(index: index, child: child)
-                if showsSeparators, index < children.count - 1 {
+                if showSeparators, index < children.count - 1 {
                     Rectangle()
-                        .fill(BrandSeparatorTokens.color)
-                        .frame(height: BrandSeparatorTokens.thickness)
-                        .padding(.vertical, BrandSeparatorTokens.spacingMd)
+                        .fill(BrandTextTokens.listSeparatorColor)
+                        .frame(height: BrandTextTokens.listSeparatorThickness)
+                        .padding(.vertical, BrandTextTokens.listSeparatorSpacing)
                         .accessibilityHidden(true)
                 }
             }
@@ -101,13 +101,13 @@ public struct BrandListItem<Content: View, Secondary: View, Trailing: View>: Vie
     }
 
     public var body: some View {
-        HStack(alignment: .center, spacing: BrandSpacing.s3) {
+        HStack(alignment: .center, spacing: BrandTextTokens.listItemGap) {
             VStack(alignment: .leading, spacing: 0) {
                 content
                 secondary
-                    .brandLinedFont(size: BrandTextTokens.paragraphSmallFontSize, weight: BrandTextTokens.listFontWeight,
-                                    family: BrandTextTokens.listFontFamily, lineHeight: BrandTextTokens.paragraphSmallLineHeight)
-                    .foregroundStyle(BrandColorRoles.textMuted)
+                    .brandLinedFont(size: BrandTextTokens.listSecondaryFontSize, weight: BrandTextTokens.listFontWeight,
+                                    family: BrandTextTokens.listFontFamily, lineHeight: BrandTextTokens.listSecondaryLineHeight)
+                    .foregroundStyle(BrandTextTokens.listSecondaryColor)
             }
             if Trailing.self != EmptyView.self {
                 Spacer(minLength: BrandSpacing.s2)
@@ -141,7 +141,7 @@ extension BrandListItem where Content == Text, Secondary == Text?, Trailing == E
                     BrandListItem("Tercer elemento de la lista")
                 }
             }
-            BrandList(type: .plain, showsSeparators: true) {
+            BrandList(type: .plain, showSeparators: true) {
                 BrandListItem(content: { Text("Notificaciones") }, secondary: { Text("Avisos de la comunidad") }, trailing: { BrandIcon(.chevron, size: .sm) })
                 BrandListItem(content: { Text("Idioma") }, secondary: { EmptyView() }, trailing: { Text("Español").brand(tone: .muted) })
                 BrandListItem("Cerrar sesión")

@@ -61,7 +61,7 @@ private enum ReadmeExamples {
 
                 // Listas, estados vacíos y esqueletos
                 BrandList(type: .ordered) { BrandListItem("Abre la app"); BrandListItem("Elige tu vivienda") }
-                BrandList(type: .plain, showsSeparators: true) {
+                BrandList(type: .plain, showSeparators: true) {
                     BrandListItem(content: { Text("Notificaciones") }, secondary: { Text("Avisos de la comunidad") },
                                   trailing: { BrandIcon(.chevron, size: .sm) })
                 }

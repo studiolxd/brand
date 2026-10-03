@@ -1,14 +1,34 @@
 {
   "$schema": "../schema.json",
   "component": "ListItem",
-  "react": { "path": "src/stories/atoms/List/List.tsx", "props": "ListItemProps" },
-  "native": { "swift": "BrandListItem", "kotlin": "BrandListItem" },
+  "react": {
+    "path": "src/stories/atoms/List/List.tsx",
+    "props": "ListItemProps"
+  },
+  "native": {
+    "swift": "BrandListItem",
+    "kotlin": "BrandListItem"
+  },
   "props": {},
   "excluded": [
-    { "prop": "as", "reason": "Cambia el elemento HTML (`div role=listitem`); en SwiftUI no hay elementos: el rol lo da el contenedor `BrandList`." },
-    { "prop": "children", "reason": "En SwiftUI el contenido es el `@ViewBuilder content` del inicializador, no una prop." }
+    {
+      "prop": "as",
+      "reason": "Cambia el elemento HTML (`div role=listitem`); en SwiftUI no hay elementos: el rol lo da el contenedor `BrandList`."
+    },
+    {
+      "prop": "children",
+      "reason": "En SwiftUI el contenido es el `@ViewBuilder content` del inicializador, no una prop."
+    },
+    {
+      "prop": "secondary",
+      "reason": "Es un nodo de React; en SwiftUI es el cierre `@ViewBuilder secondary` (o el `subtitle` de texto del inicializador de conveniencia)."
+    },
+    {
+      "prop": "trailing",
+      "reason": "Es un nodo de React; en SwiftUI es el cierre `@ViewBuilder trailing` del inicializador."
+    }
   ],
   "differences": [
-    "Solo nativo: `secondary` (línea menor atenuada, `text.paragraph.small` + `textMuted`) y `trailing` (accesorio al final) para filas de datos; en React un ítem es solo contenido."
+    "`secondary` y `trailing` existen en las tres plataformas. En React el envoltorio de fila (`list__item-row`) solo aparece cuando se usa alguno; en SwiftUI el ítem es siempre una pila."
   ]
 }

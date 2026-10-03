@@ -34,6 +34,7 @@
   --text-paragraph-large-line-height: var(--line-height-snug); /** Large paragraph line height */
   --text-list-gap: var(--spacing-2); /** Spacing between list items (8px) */
   --text-list-padding-inline-start: var(--spacing-6); /** Left indent for list (32px) */
+  --text-list-item-gap: var(--spacing-3); /** Aire entre el contenido de una fila y su accesorio final (trailing) (12px) */
   --text-font-weight: var(--font-weight-default); /** Default font weight */
   --text-color: var(--color-text-on-light); /** Default text color */
   --text-background: var(--color-background-light); /** Fondo del lienzo de página (body) */
@@ -59,6 +60,10 @@
   --text-list-font-size: var(--text-font-size); /** List font size */
   --text-list-line-height: var(--text-line-height); /** List line height */
   --text-list-letter-spacing: var(--text-letter-spacing); /** List letter spacing */
+  --text-list-secondary-font-size: var(--text-paragraph-small-font-size); /** Línea secundaria de una fila: un peldaño por debajo del cuerpo */
+  --text-list-secondary-line-height: var(--text-paragraph-small-line-height); /** Interlineado de la línea secundaria de una fila */
+  --text-list-secondary-color: var(--color-text-muted-on-light); /** Color atenuado de la línea secundaria de una fila */
+  --text-list-separator-spacing: var(--separator-spacing-md); /** Aire a cada lado de la línea entre filas */
   --text-h1-font-weight: var(--text-heading-font-weight); /** H1 font weight */
   --text-h1-color: var(--text-heading-color); /** H1 color */
   --text-h2-font-weight: var(--text-heading-font-weight); /** H2 font weight */
@@ -73,6 +78,8 @@
   --text-h6-color: var(--text-heading-color); /** H6 color */
   --text-list-font-weight: var(--text-font-weight); /** List font weight */
   --text-list-color: var(--text-color); /** List text color */
+  --text-list-separator-color: var(--separator-color); /** Línea entre filas de una lista con separadores */
+  --text-list-separator-thickness: var(--separator-thickness); /** Grosor de la línea entre filas */
 }
 
 .surface-dark,
@@ -88,4 +95,6 @@ html.dark {
   --text-h5-color: var(--color-text-on-dark); /** H5 color — surface-dark */
   --text-h6-color: var(--color-text-on-dark); /** H6 color — surface-dark */
   --text-list-color: var(--color-text-on-dark); /** List color — surface-dark */
+  --text-list-secondary-color: var(--color-text-muted-on-dark); /** Línea secundaria de una fila — surface-dark */
+  --text-list-separator-color: var(--separator-color); /** Línea entre filas — surface-dark */
 }

@@ -4,7 +4,7 @@ import { Button } from '../../atoms/Button/Button';
 import { Link } from '../../atoms/Link/Link';
 import { Toaster } from './Toaster';
 import { toast } from './toast';
-import { SOLO_OSCURO } from '../../utils/chromaticModes';
+import { SOLO_CLARO, SOLO_OSCURO } from '../../utils/chromaticModes';
 import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
 import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
@@ -173,9 +173,9 @@ export const Espera: Story = {
 };
 
 /**
- * El relleno es autocontenido, como el del `Alert`: el aviso se ve igual sobre una
- * página clara y sobre una oscura, y el borde del neutro es lo que dibuja el
- * contorno cuando la página ya es prusia.
+ * El neutro invierte el lienzo, como el del `Alert`: prusia sobre página clara y
+ * blanco con tinta prusia sobre página oscura, con el aspa en la tinta que toque.
+ * `success`, `error` y `warning` son rellenos autocontenidos y se ven igual.
  */
 export const SuperficieOscura: Story = {
   name: 'En superficie oscura',
@@ -186,6 +186,59 @@ export const SuperficieOscura: Story = {
       <Button onClick={() => toast.warning('Tienes cambios sin guardar')}>Aviso</Button>
     </div>
   ),
+};
+
+/**
+ * Lanza un aviso de cada tipo y comprueba, con el navegador, que el aspa y el
+ * título leen sobre el relleno: misma tinta que el título y distinta del fondo.
+ * Es lo que fallaba con el neutro en oscuro —relleno blanco y aspa blanca—.
+ */
+async function comprobarTintas() {
+  const lanzadores: Array<[string, () => void]> = [
+    ['default', () => toast('Neutro')],
+    ['success', () => toast.success('Éxito')],
+    ['error', () => toast.error('Error')],
+    ['warning', () => toast.warning('Aviso')],
+    ['info', () => toast.info('Información')],
+    ['loading', () => toast.loading('Cargando')],
+  ];
+  for (const [tipo, lanzar] of lanzadores) {
+    toast.dismiss();
+    lanzar();
+    const aviso = await waitFor(() => {
+      const el = document.querySelector<HTMLElement>('.toast');
+      if (!el) throw new Error(`sin aviso ${tipo}`);
+      return el;
+    });
+    const aspa = await waitFor(() => {
+      const el = aviso.querySelector<HTMLElement>('.alert__close');
+      if (!el) throw new Error(`sin aspa ${tipo}`);
+      return el;
+    });
+    const fondo = getComputedStyle(aviso).backgroundColor;
+    const tintaTitulo = getComputedStyle(aviso.querySelector('.alert__title')!).color;
+    await expect(getComputedStyle(aspa).color, `aspa ${tipo}`).toBe(tintaTitulo);
+    await expect(tintaTitulo, `título ${tipo}`).not.toBe(fondo);
+  }
+  toast.dismiss();
+}
+
+/** Test: el aspa y el título leen sobre el relleno de cada tipo, en claro. */
+export const ContratoTintasClaro: Story = {
+  name: 'Test — tintas del aviso en claro',
+  tags: ['!dev'],
+  parameters: { chromatic: SOLO_CLARO },
+  render: () => <Button onClick={() => toast('Neutro')}>Lanzar</Button>,
+  play: comprobarTintas,
+};
+
+/** Test: lo mismo en superficie oscura, donde el relleno neutro invierte a blanco. */
+export const ContratoTintasOscuro: Story = {
+  name: 'Test — tintas del aviso en oscuro',
+  tags: ['!dev'],
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
+  render: () => <Button onClick={() => toast('Neutro')}>Lanzar</Button>,
+  play: comprobarTintas,
 };
 
 /** Test: la tarjeta del aviso es un `Alert` — mismas clases, mismos tokens. */

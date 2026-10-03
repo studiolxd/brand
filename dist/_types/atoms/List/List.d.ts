@@ -8,10 +8,25 @@ export interface ListItemProps extends React.ComponentPropsWithoutRef<'li'> {
      */
     as?: React.ElementType;
     children?: React.ReactNode;
+    /**
+     * Línea menor bajo el contenido, atenuada y un peldaño por debajo del cuerpo
+     * (`text.paragraph.small`): la descripción de una fila de datos o de ajustes.
+     */
+    secondary?: React.ReactNode;
+    /**
+     * Accesorio al final de la fila, alineado a la derecha: un icono, un valor,
+     * un interruptor. No se encoge ni parte línea.
+     */
+    trailing?: React.ReactNode;
 }
 export interface ListProps extends React.ComponentPropsWithoutRef<'ul'> {
     /** Tipo de lista: con viñetas, numerada o sin decoración. */
     type?: ListType;
+    /**
+     * Dibuja una línea entre filas con los tokens `separator.*`, con su aire a
+     * cada lado en lugar del `text.list.gap`. Default `false`: sin línea.
+     */
+    showSeparators?: boolean;
     children: React.ReactNode;
 }
 /**

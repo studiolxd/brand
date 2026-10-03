@@ -36,7 +36,7 @@ final class ListsSnapshotTests: XCTestCase {
     }
 
     func testListRowsWithSeparators() {
-        let view = BrandList(type: .plain, showsSeparators: true) {
+        let view = BrandList(type: .plain, showSeparators: true) {
             BrandListItem(content: { Text("Notificaciones") }, secondary: { Text("Avisos de la comunidad") },
                           trailing: { BrandIcon(.chevron, size: .sm) })
             BrandListItem(content: { Text("Idioma") }, secondary: { EmptyView() }, trailing: { Text("Español").brand(tone: .muted) })

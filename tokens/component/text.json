@@ -111,7 +111,16 @@
       "letter-spacing":       { "$value": "{text.letter-spacing}", "$type": "dimension", "$description": "List letter spacing" },
       "gap":                  { "$value": "{spacing.2}",                     "$type": "dimension", "$description": "Spacing between list items (8px)" },
       "padding-inline-start": { "$value": "{spacing.6}",                     "$type": "dimension", "$description": "Left indent for list (32px)" },
-      "surface-dark-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "List color — surface-dark" }
+      "item-gap":             { "$value": "{spacing.3}",                     "$type": "dimension", "$description": "Aire entre el contenido de una fila y su accesorio final (trailing) (12px)" },
+      "secondary-font-size":  { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Línea secundaria de una fila: un peldaño por debajo del cuerpo" },
+      "secondary-line-height":{ "$value": "{text.paragraph.small.line-height}", "$type": "number",  "$description": "Interlineado de la línea secundaria de una fila" },
+      "secondary-color":      { "$value": "{color.text.muted-on-light}",     "$type": "color",     "$description": "Color atenuado de la línea secundaria de una fila" },
+      "separator-color":      { "$value": "{separator.color}",               "$type": "color",     "$description": "Línea entre filas de una lista con separadores" },
+      "separator-thickness":  { "$value": "{separator.thickness}",           "$type": "dimension", "$description": "Grosor de la línea entre filas" },
+      "separator-spacing":    { "$value": "{separator.spacing-md}",          "$type": "dimension", "$description": "Aire a cada lado de la línea entre filas" },
+      "surface-dark-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "List color — surface-dark" },
+      "surface-dark-secondary-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Línea secundaria de una fila — surface-dark" },
+      "surface-dark-separator-color": { "$value": "{separator.surface-dark-color}", "$type": "color", "$description": "Línea entre filas — surface-dark" }
     }
   }
 }

@@ -110,7 +110,7 @@ En `toast.promise`, cada mensaje es un rótulo suelto o el juego completo de opc
 
 <Canvas of={ToastStories.SuperficieOscura} />
 
-El relleno es autocontenido, igual que en el `Alert`: no hay tokens `surface-dark-*` y el aviso se ve igual sobre una página clara y sobre una oscura. El borde blanco del neutro existe precisamente para eso —cuando la página ya es prusia, es lo que dibuja el contorno—, y es también lo que separa el aviso del contenido sobre el que flota, porque el sistema no proyecta sombra.
+El neutro invierte el lienzo, igual que el `Alert` `default`: relleno prusia sobre página clara y blanco con tinta prusia sobre página oscura, con el aspa y el botón de acción en la tinta que lee sobre ese relleno (`.surface-invert` en el contenido y en el aspa; ver Foundations → Colores § «La superficie contraria a la ambiente»). `success` y `error` son rellenos saturados que se ven igual en las dos superficies (la raíz lleva `.surface-dark`), y `warning` es siempre el amarillo con tinta prusia (`.surface-light`). El borde blanco del neutro es lo que dibuja el contorno cuando la página ya es prusia, y también lo que separa el aviso del contenido sobre el que flota, porque el sistema no proyecta sombra.
 
 ## Los enlaces van en tinta
 

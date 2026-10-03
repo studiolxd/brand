@@ -9,6 +9,26 @@ para breaking changes.
 
 ## [Sin publicar]
 
+### React — `List`/`ListItem` (minor) y `Toast` (patch)
+
+- **`List` `showSeparators`** (default `false`): línea entre filas con los tokens `separator.*`
+  (clase nueva `list--separated`). **`ListItem` `secondary` y `trailing`** (`ReactNode`): línea
+  menor atenuada y accesorio al final de la fila. Sin las props nuevas el HTML es exactamente el
+  de antes; la estructura de fila (`list__item-row`, `list__item-main`, `list__item-secondary`,
+  `list__item-trailing`) solo aparece al usarlas. Tokens nuevos en `text.list.*`
+  (`item-gap`, `secondary-*`, `separator-*`, con pares `surface-dark-*`). Prueba que fija el HTML
+  anterior en `List.test.tsx`.
+- **Fix `Toast` neutro en oscuro**: el neutro (y `info`/`loading`) llevaba `.surface-dark` en la
+  raíz, que volteaba su relleno a blanco incluso sobre página clara y dejaba el aspa en blanco
+  sobre blanco. Ahora, como el `Alert`, la raíz solo la lleva `success`/`error`, y el interior
+  (contenido y aspa) lleva `.surface-invert` (neutro) o `.surface-light` (`warning`).
+
+### Nativo
+
+- `BrandList(showsSeparators:)` pasa a **`showSeparators:`** (mismo nombre que en React; lo nativo
+  aún no se había publicado). `BrandListItem` `secondary`/`trailing` y los separadores leen ahora
+  los tokens `text.list.*`. Fichas `List.json`/`ListItem.json` actualizadas: ya no son «solo nativo».
+
 > Infraestructura nativa (iOS, macOS y Android). **No cambia nada del paquete npm**: lo
 > nativo vive en `native/`, `Package.swift` y `jitpack.yml`, fuera de `package.json#files`.
 

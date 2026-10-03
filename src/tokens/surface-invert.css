@@ -391,6 +391,8 @@ html.dark .surface-invert {
   --text-h5-color: var(--text-heading-color);
   --text-h6-color: var(--text-heading-color);
   --text-list-color: var(--text-color);
+  --text-list-secondary-color: var(--color-text-muted-on-light);
+  --text-list-separator-color: var(--separator-color);
   --textarea-bg: var(--color-white);
   --textarea-color: var(--color-text-on-light);
   --textarea-border-color: var(--color-primary);

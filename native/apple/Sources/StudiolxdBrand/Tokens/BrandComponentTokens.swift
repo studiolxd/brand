@@ -1202,6 +1202,20 @@ public enum BrandTextTokens {
     public static let listGap: CGFloat = 8
     /// Token `text.list.padding-inline-start` — Left indent for list (32px)
     public static let listPaddingInlineStart: CGFloat = 32
+    /// Token `text.list.item-gap` — Aire entre el contenido de una fila y su accesorio final (trailing) (12px)
+    public static let listItemGap: CGFloat = 12
+    /// Token `text.list.secondary-font-size` — Línea secundaria de una fila: un peldaño por debajo del cuerpo
+    public static let listSecondaryFontSize: CGFloat = 14
+    /// Token `text.list.secondary-line-height` — Interlineado de la línea secundaria de una fila
+    public static let listSecondaryLineHeight: CGFloat = 1.65
+    /// Token `text.list.secondary-color` — Color atenuado de la línea secundaria de una fila
+    public static let listSecondaryColor: Color = Color(brandLight: Color(brandHex: 0x4A4A4A), dark: Color(brandHex: 0xD0D0D0))
+    /// Token `text.list.separator-color` — Línea entre filas de una lista con separadores
+    public static let listSeparatorColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+    /// Token `text.list.separator-thickness` — Grosor de la línea entre filas
+    public static let listSeparatorThickness: CGFloat = 1
+    /// Token `text.list.separator-spacing` — Aire a cada lado de la línea entre filas
+    public static let listSeparatorSpacing: CGFloat = 8
 }
 
 /// Tokens del componente `link` (`tokens/**/link.json`). Un token con par `surface-dark-*` (o que lo hereda) es un `Color` dinámico.

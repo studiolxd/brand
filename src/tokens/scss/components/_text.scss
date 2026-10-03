@@ -71,3 +71,10 @@ $lxd-text-list-color: #111e30; // List text color
 $lxd-text-list-letter-spacing: 0em; // List letter spacing
 $lxd-text-list-gap: 0.5rem; // Spacing between list items (8px)
 $lxd-text-list-padding-inline-start: 2rem; // Left indent for list (32px)
+$lxd-text-list-item-gap: 0.75rem; // Aire entre el contenido de una fila y su accesorio final (trailing) (12px)
+$lxd-text-list-secondary-font-size: 0.875rem; // Línea secundaria de una fila: un peldaño por debajo del cuerpo
+$lxd-text-list-secondary-line-height: 1.65; // Interlineado de la línea secundaria de una fila
+$lxd-text-list-secondary-color: #4a4a4a; // Color atenuado de la línea secundaria de una fila
+$lxd-text-list-separator-color: #111e30; // Línea entre filas de una lista con separadores
+$lxd-text-list-separator-thickness: 1px; // Grosor de la línea entre filas
+$lxd-text-list-separator-spacing: 0.5rem; // Aire a cada lado de la línea entre filas

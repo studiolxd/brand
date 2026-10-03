@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { List, ListItem } from './List';
 import { Link } from '../Link/Link';
+import { Icon } from '../Icon/Icon';
 
 const meta: Meta<typeof List> = {
   title: 'Atoms/List',
@@ -15,9 +16,14 @@ const meta: Meta<typeof List> = {
       options: ['unordered', 'ordered', 'plain'],
       description: 'Tipo de lista: con viñetas, numerada o sin decoración.',
     },
+    showSeparators: {
+      control: 'boolean',
+      description: 'Dibuja una línea de `separator.*` entre filas, con su aire a cada lado.',
+    },
   },
   args: {
     type: 'unordered',
+    showSeparators: false,
     children: (
       <>
         <li>Primer elemento de la lista</li>
@@ -101,6 +107,70 @@ export const ConListItem: Story = {
       </List>
     </>
   ),
+};
+
+/**
+ * Fila de datos o de ajustes: `ListItem` con línea `secondary` atenuada y
+ * accesorio `trailing` al final, en una lista `plain` con `showSeparators`.
+ * Es la misma fila que la versión nativa (`BrandListItem` con `secondary` y
+ * `trailing`).
+ */
+export const FilasConSeparadores: Story = {
+  name: 'Filas con separadores',
+  args: { type: 'plain', showSeparators: true, children: null },
+  render: (args) => (
+    <List {...args} aria-label="Ajustes">
+      <ListItem secondary="Avisos de la comunidad" trailing={<Icon name="chevron-right" size="sm" />}>
+        Notificaciones
+      </ListItem>
+      <ListItem trailing={<span>Español</span>}>Idioma</ListItem>
+      <ListItem>Cerrar sesión</ListItem>
+    </List>
+  ),
+};
+
+/** Con `secondary` y `trailing` en una lista con viñetas, las marcas se conservan. */
+export const FilasConVinetas: Story = {
+  name: 'Filas con viñetas',
+  args: { children: null },
+  render: () => (
+    <List>
+      <ListItem secondary="Una línea menor">Primer elemento</ListItem>
+      <ListItem trailing="12 min">Segundo elemento</ListItem>
+    </List>
+  ),
+};
+
+/** Test: sin las props nuevas la estructura es la de siempre; con ellas aparece la fila. */
+export const ContratoFilas: Story = {
+  name: 'Test — filas y separadores',
+  tags: ['!dev'],
+  args: { children: null },
+  render: () => (
+    <>
+      <List aria-label="simple">
+        <ListItem>Uno</ListItem>
+      </List>
+      <List type="plain" showSeparators aria-label="filas">
+        <ListItem secondary="Menor" trailing="T">Uno</ListItem>
+        <ListItem>Dos</ListItem>
+      </List>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const simple = canvas.getByLabelText('simple');
+    await expect(simple.querySelector('.list__item-row')).toBeNull();
+    const filas = canvas.getByLabelText('filas');
+    await expect(filas).toHaveClass('list--separated');
+    const [primera, segunda] = Array.from(filas.querySelectorAll(':scope > li'));
+    await expect(getComputedStyle(primera).borderBlockStartWidth).toBe('0px');
+    await expect(getComputedStyle(segunda).borderBlockStartWidth).toBe('1px');
+    await expect(primera.querySelector('.list__item-secondary')).not.toBeNull();
+    await expect(primera.querySelector('.list__item-trailing')).not.toBeNull();
+    await expect(getComputedStyle(primera.querySelector('.list__item-secondary')!).color)
+      .not.toBe(getComputedStyle(primera).color);
+  },
 };
 
 /** Test: el elemento sigue al tipo, las clases se componen y las props se reenvían. */
