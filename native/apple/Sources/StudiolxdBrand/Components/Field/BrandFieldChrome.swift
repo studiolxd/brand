@@ -46,6 +46,7 @@ struct BrandFieldLayout<Control: View>: View {
                     .lineSpacing(labelSize * (BrandLabelTokens.lineHeight - 1))
                     .tracking(BrandLabelTokens.letterSpacing * labelSize)
                     .foregroundStyle(BrandLabelTokens.color)
+                    .frame(minHeight: labelSize * BrandLabelTokens.lineHeight, alignment: .leading)
                     .accessibilityHidden(true)
             }
             control
@@ -56,6 +57,7 @@ struct BrandFieldLayout<Control: View>: View {
                     .brandFont(size: BrandFormTokens.errorFontSize, weight: BrandFormTokens.errorFontWeight)
                     .lineSpacing(BrandFormTokens.errorFontSize * (BrandFormTokens.errorLineHeight - 1))
                     .foregroundStyle(BrandFormTokens.errorColor)
+                    .frame(minHeight: BrandFormTokens.errorFontSize * BrandFormTokens.errorLineHeight, alignment: .leading)
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityHidden(true)
             }
@@ -64,6 +66,7 @@ struct BrandFieldLayout<Control: View>: View {
                     .brandFont(size: helper.fontSize, weight: helper.fontWeight)
                     .lineSpacing(helper.fontSize * (helper.lineHeight - 1))
                     .foregroundStyle(helper.color)
+                    .frame(minHeight: helper.fontSize * helper.lineHeight, alignment: .leading)
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityHidden(true)
             }

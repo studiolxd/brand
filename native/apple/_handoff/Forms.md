@@ -56,4 +56,5 @@ modificador `.disabled(_:)` de SwiftUI. Los textos propios (`clearLabel`, `decre
 ## 6. Pruebas
 
 - `swift test` (macOS): `FormsSnapshotTests`, `FormsLogicTests` y paridad en verde.
-- iOS (iPhone 17 Pro): ver estado en el mensaje final.
+- iOS (iPhone 17 Pro, `xcodebuild test`): `FormsSnapshotTests` y `FormsLogicTests` en verde (grabadas y verificadas en una segunda pasada).
+- Parejas con React en `native/apple/Comparisons/{InputField,NumberInputField,SelectField}/` (claro y oscuro, mismo factor de reducción con `pair-comparison.sh`): coinciden en medidas, colores y espaciado; las únicas diferencias son las listadas arriba (el `NumberInputField` se compara a 224 pt, el ancho de la story).

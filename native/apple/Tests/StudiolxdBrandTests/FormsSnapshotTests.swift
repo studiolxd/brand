@@ -92,6 +92,30 @@ final class FormsSnapshotTests: XCTestCase {
         assertBrandSnapshots(view, width: 340, height: 280, named: "sizes")
     }
 
+    // MARK: Parejas con React (mismo ancho que la story, 16 pt de margen como el recorte de `capture-story.mjs`)
+
+    func testComparisonInputError() {
+        let view = BrandInputField(
+            "Nombre completo", text: .constant(""),
+            errorMessage: "Este campo es obligatorio.", helperText: "Escríbelo tal como aparece en tu DNI."
+        )
+        assertBrandSnapshots(view, width: 352, height: 159, named: "compare-input-error", padding: 16)
+    }
+
+    func testComparisonNumberMinMax() {
+        let view = BrandNumberInputField("Cantidad", value: .constant(1), min: 0, max: 10, helperText: "Entre 0 y 10.")
+            .frame(width: 224)
+        assertBrandSnapshots(view, width: 256, height: 130, named: "compare-number", padding: 16)
+    }
+
+    func testComparisonSelectValue() {
+        let view = BrandSelectField("Tipo de contrato", selection: .constant("full-time"), options: [
+            .option("", "Selecciona un tipo"), .option("full-time", "Jornada completa"),
+            .option("part-time", "Media jornada"), .option("freelance", "Autónomo"),
+        ])
+        assertBrandSnapshots(view, width: 352, height: 101, named: "compare-select", padding: 16)
+    }
+
     func testDynamicTypeAccessibility() {
         assertBrandSnapshots(
             BrandInputField("Nombre", text: .constant("Ada"), helperText: "Ayuda"),
