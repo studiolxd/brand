@@ -412,6 +412,8 @@ justo lo que no se podía hacer publicando directo:
    este es el último momento para mirarla (`npm stage view`/`download`) o
    retirarla (`npm stage reject`). Ver § «Dónde está la credencial de npm».
 
-> **IMPORTANTE:** Cada push a `main` debe ir acompañado de un tag si incluye cambios funcionales. Los commits puramente internos (docs, refactors sin impacto en consumidores) pueden agruparse bajo un solo tag.
+> **`main` puede ir por delante del último tag.** Un push a `main` sin tag no publica nada: las apps instalan del registro de npm, y Swift Package Manager y JitPack resuelven por tag. Lo que esté en `main` sin publicar va en el CHANGELOG bajo `## [Sin publicar]` hasta que se saque la versión (pasos 1–6). Lo que no se empuja nunca es un `main` con `release:check` en rojo. Esta regla sustituye a la de la época de los tags de git («cada push a `main` con cambios funcionales lleva tag»), cuando un consumidor podía leer `main` directamente.
+>
+> **Cada sesión trabaja en su rama o su worktree, no sobre `main`.** Sale del `main` empujado y se fusiona al terminar. Dos sesiones sobre el mismo `main` se pisan: el 2026-10-03 una edición del `CLAUDE.md` cayó en medio de un merge a medias de otra sesión, con un conflicto en `CHANGELOG.md` pendiente, y hubo que esperar a que lo cerrara para poder commitear.
 
 > **Propuesta pendiente (no instalada):** un hook `pre-push` que rechace el push de un tag `vX.Y.Z` si `git status --porcelain -- dist` no está limpio en ese commit, como red de seguridad adicional a correr `release:check` a mano. No se instala aquí — requiere decidir dónde vive (`.husky/`, `simple-git-hooks`, script propio) y si se quiere obligatorio para todo el equipo.
