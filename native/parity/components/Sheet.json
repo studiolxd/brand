@@ -1,30 +1,79 @@
 {
   "$schema": "../schema.json",
   "component": "Sheet",
-  "react": { "path": "src/stories/molecules/Sheet/Sheet.tsx", "props": "SheetProps" },
-  "native": { "swift": "BrandSheet", "kotlin": "BrandSheet" },
+  "react": {
+    "path": "src/stories/molecules/Sheet/Sheet.tsx",
+    "props": "SheetProps"
+  },
+  "native": {
+    "swift": "BrandSheet",
+    "kotlin": "BrandSheet"
+  },
   "props": {
-    "titleHidden": { "type": "boolean", "default": false },
-    "hideClose": { "type": "boolean", "default": false }
+    "titleHidden": {
+      "type": "boolean",
+      "default": false
+    },
+    "hideClose": {
+      "type": "boolean",
+      "default": false
+    }
   },
   "excluded": [
-    { "prop": "side", "reason": "`side` (top/right/bottom/left) solo tiene sentido `bottom` en iOS: el `.sheet` nativo sube siempre desde abajo (en macOS es una hoja de la ventana) y ofrece sus propios detents y gesto de arrastre. Un cajón lateral sería un patrón ajeno a la plataforma." },
-    { "prop": "open", "reason": "Se porta como el `Binding<Bool>` `isPresented` de `brandSheet(isPresented:…)`; la ficha solo tipa uniones y booleanos literales." },
-    { "prop": "onOpenChange", "reason": "En SwiftUI el cambio de estado es la escritura en el `Binding` `isPresented`, no un callback aparte." },
-    { "prop": "title", "reason": "Se porta como el argumento `title: LocalizedStringKey` (obligatorio, como en React); no es una unión ni un booleano." },
-    { "prop": "description", "reason": "Se porta como `description: LocalizedStringKey?`; no es una unión ni un booleano." },
-    { "prop": "footer", "reason": "Se porta como el cierre `@ViewBuilder footer`; en nativo el pie lo coloca `BrandDialogFooter` (fila a la derecha o columna con la principal arriba)." },
-    { "prop": "children", "reason": "Es el cierre `@ViewBuilder content` del modificador, no una prop." },
-    { "prop": "closeLabel", "reason": "Se porta como `closeLabel: LocalizedStringKey` con «Cerrar» por defecto (castellano); la ficha solo tipa uniones y booleanos." },
-    { "prop": "trigger", "reason": "En SwiftUI el disparador es cualquier vista que escriba en `isPresented`; no hay elemento disparador que el cajón posea." },
-    { "prop": "container", "reason": "Es el nodo DOM del portal; la presentación nativa no tiene portal que reubicar." },
-    { "prop": "onAnimationEndCapture", "reason": "Evento de animaciones CSS del DOM; `.sheet` anima y desmonta por su cuenta." },
-    { "prop": "className", "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens." }
+    {
+      "prop": "side",
+      "reason": "`side` (top/right/bottom/left) solo tiene sentido `bottom` en iOS: el `.sheet` nativo sube siempre desde abajo (en macOS es una hoja de la ventana) y ofrece sus propios detents y gesto de arrastre. Un cajón lateral sería un patrón ajeno a la plataforma."
+    },
+    {
+      "prop": "open",
+      "reason": "Se porta como el `Binding<Bool>` `isPresented` de `brandSheet(isPresented:…)`; la ficha solo tipa uniones y booleanos literales."
+    },
+    {
+      "prop": "onOpenChange",
+      "reason": "En SwiftUI el cambio de estado es la escritura en el `Binding` `isPresented`, no un callback aparte."
+    },
+    {
+      "prop": "title",
+      "reason": "Se porta como el argumento `title: LocalizedStringKey` (obligatorio, como en React); no es una unión ni un booleano."
+    },
+    {
+      "prop": "description",
+      "reason": "Se porta como `description: LocalizedStringKey?`; no es una unión ni un booleano."
+    },
+    {
+      "prop": "footer",
+      "reason": "Se porta como el cierre `@ViewBuilder footer`; en nativo el pie lo coloca `BrandDialogFooter` (fila a la derecha o columna con la principal arriba)."
+    },
+    {
+      "prop": "children",
+      "reason": "Es el cierre `@ViewBuilder content` del modificador, no una prop."
+    },
+    {
+      "prop": "closeLabel",
+      "reason": "Se porta como `closeLabel: LocalizedStringKey` con «Cerrar» por defecto (castellano); la ficha solo tipa uniones y booleanos."
+    },
+    {
+      "prop": "trigger",
+      "reason": "En SwiftUI el disparador es cualquier vista que escriba en `isPresented`; no hay elemento disparador que el cajón posea."
+    },
+    {
+      "prop": "container",
+      "reason": "Es el nodo DOM del portal; la presentación nativa no tiene portal que reubicar."
+    },
+    {
+      "prop": "onAnimationEndCapture",
+      "reason": "Evento de animaciones CSS del DOM; `.sheet` anima y desmonta por su cuenta."
+    },
+    {
+      "prop": "className",
+      "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
+    }
   ],
   "differences": [
     "La presentación es la hoja nativa (`.sheet`) con detents medio/completo y arrastre, en vez de un panel que entra por un borde con velo propio: el velo, la animación y el gesto son los de la plataforma.",
     "El cierre con `Esc` es la acción de escape de VoiceOver (`accessibilityAction(.escape)`) en iOS y el atajo de la hoja en macOS.",
     "El ancho mínimo en macOS es 320 pt, el primer término de `sheet.inline-size` (`min(20rem, 85vw)`), que no se genera porque es una función de CSS; el alto mínimo (240) no tiene token en la web.",
-    "El umbral para apilar el pie (480 pt de ancho útil) es la cifra de la consulta de contenedor de `dialogSurface.css`: en la web no es un token."
+    "El umbral para apilar el pie (480 pt de ancho útil) es la cifra de la consulta de contenedor de `dialogSurface.css`: en la web no es un token.",
+    "A la misma escala la hoja coincide en márgenes, pie y aspa; el interlineado del texto de cuerpo (`BrandParagraph`) es algo mayor porque SwiftUI suma `lineSpacing` al interlineado natural de la fuente."
   ]
 }

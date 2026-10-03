@@ -90,6 +90,25 @@ final class OverlaysSnapshotTests: XCTestCase {
         assertBrandSnapshots(dialog(state: (true, "", false)), width: 590, height: 330, named: "pending")
     }
 
+
+    // MARK: Parejas con React (mismo ancho que la story, sin relleno)
+
+    func testComparisonConfirmDestructive() {
+        assertBrandSnapshots(dialog(), width: 550, height: 250, named: "compare-confirm", padding: 0)
+    }
+
+    func testComparisonSheet() {
+        assertBrandSnapshots(sheet(width: 320), width: 320, height: 560, named: "compare-sheet", padding: 0)
+    }
+
+    func testComparisonToasts() {
+        let view = VStack(spacing: BrandSpacing.s2) {
+            BrandToastCard(item: ToastItem(id: "n", title: "Cambios guardados"), onClose: {})
+            BrandToastCard(item: ToastItem(id: "e", title: "No se pudo guardar el proyecto", intent: .error), onClose: {})
+        }
+        assertBrandSnapshots(view, width: 360, height: 190, named: "compare-toasts", padding: 0)
+    }
+
     // MARK: Toast
 
     private func item(_ intent: ToastIntent, action: Bool = false) -> ToastItem {
