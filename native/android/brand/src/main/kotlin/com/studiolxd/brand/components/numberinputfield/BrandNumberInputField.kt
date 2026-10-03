@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.semantics
@@ -56,6 +57,7 @@ import com.studiolxd.brand.support.collectBrandInteractionState
 import com.studiolxd.brand.support.rememberReduceMotion
 import com.studiolxd.brand.support.resolve
 import com.studiolxd.brand.support.scaledByFontScale
+import com.studiolxd.brand.tokens.BrandInputTokens
 import com.studiolxd.brand.tokens.BrandNumberInputFieldTokens as F
 import com.studiolxd.brand.tokens.BrandNumberInputTokens as T
 import kotlin.math.abs
@@ -67,6 +69,17 @@ typealias NumberInputFieldSize = BrandControlSize
 /** El valor fijado entre [min] y [max] (sin tope si es `null`). */
 internal fun clampNumber(value: Double, min: Double?, max: Double?): Double =
     value.coerceAtLeast(min ?: Double.NEGATIVE_INFINITY).coerceAtMost(max ?: Double.POSITIVE_INFINITY)
+
+/** El valor tras un paso de [delta]: sin valor (`null`) cuenta como 0, y el resultado se ajusta a [min] y [max]. */
+internal fun steppedNumber(value: Double?, delta: Double, min: Double?, max: Double?): Double =
+    clampNumber((value ?: 0.0) + delta, min, max)
+
+/** Si un botón de paso puede pulsarse: sin valor, siempre (los límites no lo deshabilitan; el paso se ajusta). */
+internal fun canStepNumber(value: Double?, limit: Double?, towardsMax: Boolean): Boolean = when {
+    value == null || limit == null -> true
+    towardsMax -> value < limit
+    else -> value > limit
+}
 
 /** Como `String(n)` de la web: «3» y no «3.0». */
 internal fun formatNumber(value: Double): String =
@@ -89,6 +102,20 @@ internal fun parseNumber(raw: String, decimal: Boolean): Double? {
  * El valor se fija entre [min] y [max] al teclear y al pulsar los botones; con [decimal] admite coma o punto. El
  * borrador que se está tecleando («12,») no se pisa hasta que el campo pierde el foco.
  *
+ * **Sin valor**: `value = null` deja el campo vacío (se ve [placeholder]) y vaciar el texto llama a
+ * `onValueChange(null)`. Desde vacío, − y + parten de 0 y se ajustan a [min] y [max]; los botones no se deshabilitan
+ * por los límites estando vacío. TalkBack anuncia el campo vacío como [emptyValueLabel] («Sin valor»). Quien siempre
+ * tiene un número ignora el `null` (`onValueChange = { it?.let { n -> quantity = n } }`): al salir del campo vuelve el
+ * último número.
+ *
+ * **Foco desde fuera** (el `ref` de React): pasa un [FocusRequester] y llámale `requestFocus()`; va sobre el propio
+ * campo de texto, así lleva el cursor y sube el teclado.
+ * ```kotlin
+ * val focus = remember { FocusRequester() }
+ * BrandNumberInputField("Cantidad", quantity, { quantity = it }, focusRequester = focus)
+ * LaunchedEffect(Unit) { focus.requestFocus() }
+ * ```
+ *
  * **TalkBack**: además de los dos botones con nombre accesible, el campo expone las acciones personalizadas
  * «Decrementar» e «Incrementar» (menú de acciones de TalkBack) que suman o restan un paso.
  *
@@ -98,13 +125,17 @@ internal fun parseNumber(raw: String, decimal: Boolean): Double? {
  * @param decimal admite decimales (coma o punto) y abre el teclado decimal.
  * @param decrementLabel nombre accesible del botón de restar. Castellano por defecto («Decrementar»).
  * @param incrementLabel nombre accesible del botón de sumar. Castellano por defecto («Incrementar»).
+ * @param placeholder lo que se ve con el campo vacío (`value = null`).
+ * @param emptyValueLabel lo que lee TalkBack como estado del campo vacío. Castellano por defecto («Sin valor»).
  * @param invalidLabel lo que lee TalkBack cuando el campo está en [error] sin [errorMessage]. Castellano por defecto.
+ * @param focusRequester para dar el foco desde fuera; sin él, el campo usa uno propio (los toques lo siguen enfocando).
+ *   Para *observar* el foco ya está [interactionSource].
  */
 @Composable
 fun BrandNumberInputField(
     label: String,
-    value: Double,
-    onValueChange: (Double) -> Unit,
+    value: Double?,
+    onValueChange: (Double?) -> Unit,
     modifier: Modifier = Modifier,
     labelHidden: Boolean = false,
     min: Double? = null,
@@ -117,24 +148,26 @@ fun BrandNumberInputField(
     errorMessage: String? = null,
     helperText: String? = null,
     size: NumberInputFieldSize? = null,
+    placeholder: String? = null,
     decrementLabel: String = "Decrementar",
     incrementLabel: String = "Incrementar",
+    emptyValueLabel: String = "Sin valor",
     invalidLabel: String = "Valor no válido",
     interactionSource: MutableInteractionSource? = null,
+    focusRequester: FocusRequester? = null,
 ) {
     val resolved = size.resolve()
     val source = interactionSource ?: remember { MutableInteractionSource() }
     val focused by source.collectIsFocusedAsState()
     val reduceMotion = rememberReduceMotion()
-    val focusRequester = remember { FocusRequester() }
+    val requester = focusRequester ?: remember { FocusRequester() }
     var draft by remember { mutableStateOf<String?>(null) }
 
     val hasError = error || errorMessage != null
     val isFocused = (focused || LocalBrandForcedFocus.current) && enabled
-    val lower = min ?: Double.NEGATIVE_INFINITY
-    val upper = max ?: Double.POSITIVE_INFINITY
-    val canDecrement = enabled && !readOnly && value > lower
-    val canIncrement = enabled && !readOnly && value < upper
+    // Vacío cuenta como 0 para los pasos y no se deshabilita por los límites: siempre hay un paso posible.
+    val canDecrement = enabled && !readOnly && canStepNumber(value, min, towardsMax = false)
+    val canIncrement = enabled && !readOnly && canStepNumber(value, max, towardsMax = true)
 
     val height = when (resolved) {
         BrandControlSize.Sm -> T.smHeight
@@ -175,14 +208,14 @@ fun BrandNumberInputField(
     )
     val separator = if (hasError || !enabled) border else T.btnSeparatorColor.current
 
-    fun commit(next: Double) {
+    fun commit(delta: Double) {
         draft = null
-        onValueChange(clampNumber(next, min, max))
+        onValueChange(steppedNumber(value, delta, min, max))
     }
 
     val textStyle = brandTextStyle(fontSize, T.fontWeight, T.lineHeight, color = textColor)
         .copy(textAlign = TextAlign.Center, fontFeatureSettings = "tnum")
-    val shown = draft ?: formatNumber(value)
+    val shown = draft ?: value?.let(::formatNumber).orEmpty()
 
     BrandFieldLayout(
         label = label,
@@ -212,7 +245,7 @@ fun BrandNumberInputField(
                 .clipToBounds(),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            StepButton(BrandIconName.Minus, decrementLabel, canDecrement) { commit(value - step) }
+            StepButton(BrandIconName.Minus, decrementLabel, canDecrement) { commit(-step) }
             Box(Modifier.width(T.borderWidth).fillMaxHeight().background(separator))
             Box(
                 Modifier.weight(1f).fillMaxHeight().padding(horizontal = paddingInline),
@@ -222,17 +255,23 @@ fun BrandNumberInputField(
                     value = shown,
                     onValueChange = { raw ->
                         draft = raw
-                        parseNumber(raw, decimal)?.let { onValueChange(clampNumber(it, min, max)) }
+                        if (raw.isBlank()) onValueChange(null)
+                        else parseNumber(raw, decimal)?.let { onValueChange(clampNumber(it, min, max)) }
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .focusRequester(focusRequester)
+                        .focusRequester(requester)
                         .onFocusChanged { if (!it.isFocused) draft = null }
-                        .brandFieldSemantics(label, hasError, errorMessage, helperText, invalidLabel)
+                        .brandFieldSemantics(
+                            label, hasError, errorMessage,
+                            // Vacío no anuncia valor: «Sin valor» como estado, antes de la ayuda.
+                            if (value == null) listOfNotNull(emptyValueLabel, helperText).joinToString(". ") else helperText,
+                            invalidLabel,
+                        )
                         .semantics {
                             customActions = buildList {
-                                if (canDecrement) add(CustomAccessibilityAction(decrementLabel) { commit(value - step); true })
-                                if (canIncrement) add(CustomAccessibilityAction(incrementLabel) { commit(value + step); true })
+                                if (canDecrement) add(CustomAccessibilityAction(decrementLabel) { commit(-step); true })
+                                if (canIncrement) add(CustomAccessibilityAction(incrementLabel) { commit(step); true })
                             }
                         },
                     enabled = enabled,
@@ -246,10 +285,21 @@ fun BrandNumberInputField(
                     singleLine = true,
                     interactionSource = source,
                     cursorBrush = SolidColor(textColor),
+                    decorationBox = { inner ->
+                        Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                            if (shown.isEmpty() && !placeholder.isNullOrEmpty()) {
+                                BasicText(
+                                    placeholder, modifier = Modifier.clearAndSetSemantics { },
+                                    style = textStyle.copy(color = BrandInputTokens.placeholderColor.current), maxLines = 1,
+                                )
+                            }
+                            inner()
+                        }
+                    },
                 )
             }
             Box(Modifier.width(T.borderWidth).fillMaxHeight().background(separator))
-            StepButton(BrandIconName.Plus, incrementLabel, canIncrement) { commit(value + step) }
+            StepButton(BrandIconName.Plus, incrementLabel, canIncrement) { commit(step) }
         }
     }
 }

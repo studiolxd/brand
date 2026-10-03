@@ -84,6 +84,24 @@ class ListsSnapshotTest {
     }
 
     @Test
+    fun listRowsWithLeading() = paparazzi.brandSnapshots {
+        BrandList(type = ListType.Plain, showSeparators = true) {
+            item {
+                BrandListItem(
+                    secondary = { BrandText("Avisos de la comunidad") },
+                    leading = { BrandIcon(BrandIconName.Bell) },
+                    trailing = { BrandIcon(BrandIconName.ChevronRight, size = BrandIconSize.Sm) },
+                    onClick = {},
+                ) { BrandText("Notificaciones") }
+            }
+            item {
+                BrandListItem(leading = { BrandIcon(BrandIconName.Languages) }, trailing = { BrandText("Español", tone = TextTone.Muted) }) { BrandText("Idioma") }
+            }
+            item { BrandListItem(leading = { BrandIcon(BrandIconName.Key) }) { BrandText("Seguridad") } }
+        }
+    }
+
+    @Test
     fun tagVariants() = paparazzi.brandSnapshots {
         Column(verticalArrangement = Arrangement.spacedBy(BrandSpacing.s2)) {
             TagVariant.entries.forEach { variant -> BrandTag(variant.value, variant = variant) }
@@ -140,6 +158,23 @@ class ListsComparisonSnapshotTest {
                     item("Tercer elemento de la lista")
                 }
             }
+        }
+    }
+
+    @Test
+    fun listLeading() = paparazzi.brandComparison("list-leading", 480, 161) {
+        BrandList(type = ListType.Plain, showSeparators = true) {
+            item {
+                BrandListItem(
+                    secondary = { BrandText("Avisos de la comunidad") },
+                    leading = { BrandIcon(BrandIconName.Bell) },
+                    trailing = { BrandIcon(BrandIconName.ChevronRight, size = BrandIconSize.Sm) },
+                ) { BrandText("Notificaciones") }
+            }
+            item {
+                BrandListItem(leading = { BrandIcon(BrandIconName.Languages) }, trailing = { BrandText("Español") }) { BrandText("Idioma") }
+            }
+            item { BrandListItem(leading = { BrandIcon(BrandIconName.Key) }) { BrandText("Seguridad") } }
         }
     }
 

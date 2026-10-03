@@ -1884,3 +1884,35 @@ object BrandMenuTokens {
     /** Token `menu.transition-easing` — Easing de transición */
     val transitionEasing: Easing = CubicBezierEasing(0.25f, 0.1f, 0.25f, 1f)
 }
+
+/** Tokens del componente `password-field` (`tokens/**/password-field.json`). Todo color es un [BrandSchemeValue]: se resuelve con `.current` (los que no tienen par oscuro valen lo mismo en los dos esquemas). */
+object BrandPasswordFieldTokens {
+    /** Token `password-field.gap` — Gap entre label, input y mensajes */
+    val gap: Dp = 8.dp
+    /** Token `password-field.toggle-size` — Lado del área clicable del botón toggle: la talla md, la misma que el campo */
+    val toggleSize: Dp = 40.dp
+    /** Token `password-field.toggle-icon-size` — Tamaño del icono del toggle — md (20px, acorde al campo de 40) */
+    val toggleIconSize: Dp = 20.dp
+    /** Token `password-field.sm-toggle-icon-size` — Tamaño del icono del toggle — sm (16px) */
+    val smToggleIconSize: Dp = 16.dp
+    /** Token `password-field.lg-toggle-icon-size` — Tamaño del icono del toggle — lg (24px) */
+    val lgToggleIconSize: Dp = 24.dp
+    /** Token `password-field.toggle-color` — Color del icono toggle: tinta, prusia sobre claro */
+    val toggleColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
+    /** Token `password-field.toggle-color-hover` — Color del icono toggle en hover (sin cambio: la tinta no se atenúa; el foco se marca con el anillo) */
+    val toggleColorHover: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
+    /** Token `password-field.toggle-focus-ring-width` — Grosor del anillo de foco del toggle */
+    val toggleFocusRingWidth: Dp = 2.dp
+    /** Token `password-field.toggle-focus-ring-offset` — Separación del anillo de foco del toggle (se dibuja hacia dentro de la caja: el toggle va a ras del borde del campo) */
+    val toggleFocusRingOffset: Dp = 2.dp
+    /** Token `password-field.toggle-focus-ring-color` — Color del anillo de foco del toggle: la tinta de la superficie */
+    val toggleFocusRingColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
+    /** Token `password-field.sm-toggle-size` — Lado del toggle — sm */
+    val smToggleSize: Dp = 32.dp
+    /** Token `password-field.lg-toggle-size` — Lado del toggle — lg */
+    val lgToggleSize: Dp = 48.dp
+    /** Token `password-field.action-margin-block-start` — Aire extra sobre la acción bajo el campo («¿Olvidaste tu contraseña?»), además del gap del campo */
+    val actionMarginBlockStart: Dp = 8.dp
+    /** Token `password-field.input-padding-inline-end` — Padding derecho del input — el texto termina donde empieza el toggle */
+    val inputPaddingInlineEnd: Dp = 40.dp
+}

@@ -6,7 +6,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import com.studiolxd.brand.components.inputfield.InputFieldKind
 import com.studiolxd.brand.components.inputfield.InputFieldType
 import com.studiolxd.brand.components.inputfield.inputKeyboardOptions
+import com.studiolxd.brand.components.numberinputfield.canStepNumber
 import com.studiolxd.brand.components.numberinputfield.clampNumber
+import com.studiolxd.brand.components.numberinputfield.steppedNumber
 import com.studiolxd.brand.components.numberinputfield.formatNumber
 import com.studiolxd.brand.components.numberinputfield.parseNumber
 import com.studiolxd.brand.components.selectfield.BrandSelectEntry
@@ -47,6 +49,28 @@ class FieldsLogicTest {
         assertNull(parseNumber("", decimal = false))
         assertNull(parseNumber("12,5", decimal = false))
         assertEquals(7.0, parseNumber(" 7 ", decimal = false))
+    }
+
+    @Test
+    fun emptyNumberStepsFromZeroAndClamps() {
+        assertEquals(1.0, steppedNumber(null, 1.0, null, null))
+        assertEquals(-1.0, steppedNumber(null, -1.0, null, null))
+        // Sin valor, − y + se ajustan a los límites: desde 0, un mínimo de 5 sube a 5 y un máximo de -2 baja a -2.
+        assertEquals(5.0, steppedNumber(null, 1.0, 5.0, 10.0))
+        assertEquals(5.0, steppedNumber(null, -1.0, 5.0, 10.0))
+        assertEquals(-2.0, steppedNumber(null, 1.0, -10.0, -2.0))
+        assertEquals(4.0, steppedNumber(3.0, 1.0, 0.0, 10.0))
+        assertEquals(0.0, steppedNumber(0.0, -1.0, 0.0, 10.0))
+    }
+
+    @Test
+    fun stepButtonsAreNotDisabledByLimitsWhenEmpty() {
+        assertEquals(true, canStepNumber(null, 0.0, towardsMax = false))
+        assertEquals(true, canStepNumber(null, 0.0, towardsMax = true))
+        assertEquals(true, canStepNumber(3.0, null, towardsMax = true))
+        assertEquals(false, canStepNumber(0.0, 0.0, towardsMax = false))
+        assertEquals(false, canStepNumber(10.0, 10.0, towardsMax = true))
+        assertEquals(true, canStepNumber(5.0, 10.0, towardsMax = true))
     }
 
     @Test

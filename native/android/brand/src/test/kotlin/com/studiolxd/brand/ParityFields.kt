@@ -4,6 +4,7 @@ import com.studiolxd.brand.components.inputfield.InputFieldKind
 import com.studiolxd.brand.components.inputfield.InputFieldSize
 import com.studiolxd.brand.components.inputfield.InputFieldType
 import com.studiolxd.brand.components.numberinputfield.NumberInputFieldSize
+import com.studiolxd.brand.components.passwordfield.PasswordFieldSize
 import com.studiolxd.brand.components.selectfield.SelectFieldSize
 import com.studiolxd.brand.components.themeswitcher.BrandThemeChoice
 import com.studiolxd.brand.components.themeswitcher.ThemeSwitcherLayout
@@ -12,7 +13,7 @@ import com.studiolxd.brand.components.togglegroup.ToggleGroupOrientation
 import com.studiolxd.brand.components.togglegroup.ToggleGroupSize
 import com.studiolxd.brand.support.BrandControlSize
 
-/** Paridad de los campos: InputField, NumberInputField, SelectField, SwitcherField, ToggleGroup y ThemeSwitcher. */
+/** Paridad de los campos: InputField, NumberInputField, PasswordField, SelectField, SwitcherField, ToggleGroup y ThemeSwitcher. */
 internal val parityFields: Map<String, Map<String, List<String>>> = mapOf(
     "InputField" to mapOf(
         "type" to InputFieldType.entries.map { it.value },
@@ -21,6 +22,9 @@ internal val parityFields: Map<String, Map<String, List<String>>> = mapOf(
     ),
     "NumberInputField" to mapOf(
         "size" to NumberInputFieldSize.entries.map { it.value },
+    ),
+    "PasswordField" to mapOf(
+        "size" to PasswordFieldSize.entries.map { it.value },
     ),
     "SelectField" to mapOf(
         "size" to SelectFieldSize.entries.map { it.value },
