@@ -1,12 +1,32 @@
 {
   "$schema": "../schema.json",
   "component": "Paragraph",
-  "react": { "path": "src/stories/atoms/Paragraph/Paragraph.tsx", "props": "ParagraphProps" },
-  "native": { "swift": "BrandParagraph", "kotlin": "BrandParagraph" },
+  "react": {
+    "path": "src/stories/atoms/Paragraph/Paragraph.tsx",
+    "props": "ParagraphProps"
+  },
+  "native": {
+    "swift": "BrandParagraph",
+    "kotlin": "BrandParagraph"
+  },
   "props": {
-    "size": { "type": "union", "values": ["small", "default", "large"], "default": "default" }
+    "size": {
+      "type": "union",
+      "values": [
+        "small",
+        "default",
+        "large"
+      ],
+      "default": "default"
+    }
   },
   "excluded": [
-    { "prop": "children", "reason": "En SwiftUI el contenido es el primer argumento del inicializador (`BrandParagraph(\"Texto\")`), no un hijo." }
+    {
+      "prop": "children",
+      "reason": "En SwiftUI el contenido es el primer argumento del inicializador (`BrandParagraph(\"Texto\")`), no un hijo."
+    }
+  ],
+  "differences": [
+    "El texto de la web se ve algo más grueso (suavizado de Chromium en macOS); el peso del eje `wght` es el mismo."
   ]
 }

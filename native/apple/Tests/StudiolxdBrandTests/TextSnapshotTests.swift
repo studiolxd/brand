@@ -37,7 +37,7 @@ final class TextSnapshotTests: XCTestCase {
 
     /// Pareja con la story `atoms-text--intencion-destructiva`.
     func testComparisonInlineTones() {
-        let view = VStack(alignment: .leading, spacing: BrandSpacing.s4) {
+        let view = VStack(alignment: .leading, spacing: BrandSpacing.s5) {
             BrandParagraph(Text("Al confirmar se ") + Text("borran").brand(.strong, tone: .destructive) + Text(" las 42 respuestas ya enviadas."))
             BrandParagraph(Text("La revisión terminó ") + Text("sin incidencias").brand(.strong, tone: .success) + Text("."))
             BrandParagraph(Text("Publicado el 12 de agosto ") + Text("(hace tres semanas)").brand(tone: .muted) + Text("."))

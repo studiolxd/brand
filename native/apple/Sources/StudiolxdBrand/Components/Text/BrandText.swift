@@ -1,5 +1,9 @@
 import SwiftUI
 
+#if canImport(UIKit)
+import UIKit
+#endif
+
 // MARK: - Heading
 
 /// `Heading` `level`: el nivel semántico (h1–h6). Fija también el tamaño, salvo que `size` lo desacople.
@@ -211,12 +215,17 @@ extension Text {
     /// ```swift
     /// Text("Esta acción ") + Text("borra").brand(.strong, tone: .destructive) + Text(" el curso.")
     /// ```
-    public func brand(_ element: TextElement = .span, tone: TextTone = .default) -> Text {
+    ///
+    /// - Parameter size: el tamaño de letra del texto que lo rodea (por defecto el del cuerpo, 16 pt). Solo hace falta
+    ///   en `.strong`, que cambia el peso del eje `wght` y para eso necesita saber el tamaño: SwiftUI no cambia el peso
+    ///   de una fuente variable de CoreText con `fontWeight(_:)`. Crece con el tipo dinámico del sistema.
+    public func brand(_ element: TextElement = .span, tone: TextTone = .default, size: CGFloat = BrandTextTokens.fontSize) -> Text {
         var text = self
         switch element {
         case .span: break
         case .em: text = text.italic()
-        case .strong: text = text.fontWeight(Font.Weight(brandWght: BrandTextInlineTokens.emphasisFontWeight))
+        case .strong:
+            text = text.font(Font(brandCTFont(family: BrandFontFamily.sans, size: scaledForDynamicType(size), weight: BrandTextInlineTokens.emphasisFontWeight)))
         }
         switch tone {
         case .default: return text
@@ -227,21 +236,13 @@ extension Text {
     }
 }
 
-extension Font.Weight {
-    /// El peso de SwiftUI más cercano al valor del eje `wght` (100–900) de un token.
-    init(brandWght value: Int) {
-        switch value {
-        case ..<150: self = .ultraLight
-        case ..<250: self = .thin
-        case ..<350: self = .light
-        case ..<450: self = .regular
-        case ..<550: self = .medium
-        case ..<650: self = .semibold
-        case ..<750: self = .bold
-        case ..<850: self = .heavy
-        default: self = .black
-        }
-    }
+/// El tamaño escalado con el tipo dinámico del sistema (en macOS no hay: el mismo tamaño).
+private func scaledForDynamicType(_ size: CGFloat) -> CGFloat {
+    #if canImport(UIKit)
+    UIFontMetrics(forTextStyle: .body).scaledValue(for: size)
+    #else
+    size
+    #endif
 }
 
 /// Un fragmento de texto en línea (la vista suelta de `Text.brand`). Hereda la fuente del texto que lo rodea.

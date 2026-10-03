@@ -4,8 +4,9 @@ Las versiones nativas de Brand para apps de **SwiftUI** (iOS 17 y macOS 14) y **
 Comparten con la web los mismos tokens —salen de los mismos JSON de `tokens/` con Style Dictionary— y se llevan al mismo
 paso que React: **solo se porta un componente cuando una app nativa lo necesita**, nunca el catálogo entero.
 
-> **Estado: infraestructura y tokens.** Todavía no hay ningún componente nativo; sí hay tokens, tipografía, fuentes y
-> las pruebas de paridad y de capturas, listas para el primero.
+> **Estado.** SwiftUI (iOS 17 y macOS 14) tiene ya sus componentes —ver [Componentes de SwiftUI](#componentes-de-swiftui)—;
+> Jetpack Compose tiene la infraestructura, los tokens, la tipografía y las pruebas, y recibirá los mismos componentes
+> en la tarea siguiente (cada ficha de `parity/components/` ya dice qué ha de cumplir Kotlin).
 
 **Lo nativo no se publica en npm.** Se distribuye por git: SwiftPM lee `Package.swift` de la raíz del repositorio y
 JitPack construye `native/android` (`jitpack.yml`). `package.json#files` solo lleva `dist`, `src/tokens` y el changelog,
@@ -16,11 +17,16 @@ native/
 ├─ apple/                         paquete Swift (Package.swift está en la RAÍZ del repo, SwiftPM lo exige)
 │  ├─ Sources/StudiolxdBrand/
 │  │  ├─ StudiolxdBrand.swift     registerFonts()
-│  │  ├─ Support/                 Color dinámico, BrandShadow, BrandCubicBezier
-│  │  ├─ Tokens/BrandTokens.swift GENERADO por `pnpm build:tokens`
+│  │  ├─ Components/<Componente>/ los componentes (uno por carpeta, con su `#Preview`)
+│  │  ├─ Icon/                    BrandIcon; `BrandIconData.swift` GENERADO por `pnpm build:native-icons`
+│  │  ├─ Support/                 Color dinámico, BrandShadow, BrandCubicBezier, brandFont, brandHitTarget…
+│  │  ├─ Tokens/BrandTokens.swift GENERADO por `pnpm build:tokens` (globales)
+│  │  ├─ Tokens/BrandComponentTokens.swift  GENERADO por `pnpm build:tokens` (tokens de componente)
 │  │  ├─ Typography/              BrandTextStyle y Font.brand(_:)
 │  │  └─ Resources/Fonts/         TTF + licencias, GENERADOS por `pnpm build:native-fonts`
-│  └─ Tests/StudiolxdBrandTests/  tokens, paridad y capturas (__Snapshots__/)
+│  ├─ Tests/StudiolxdBrandTests/  tokens, paridad, lógica y capturas (__Snapshots__/)
+│  ├─ Comparisons/<Componente>/   parejas React ↔ SwiftUI (ver Comparisons/README.md)
+│  └─ scripts/                    capture-story.mjs y pair-comparison.sh (las parejas)
 ├─ android/                       proyecto Gradle (Kotlin DSL), módulo `brand`
 │  └─ brand/src/…                tokens (GENERADO), tema, tipografía; res/font GENERADO; pruebas y capturas
 └─ parity/                        fichas de paridad con React (ver parity/README.md)
@@ -106,8 +112,165 @@ Un rol cuyo token solo define un lado (`color.surface.highlight` solo existe `on
 - **Pilas de fuentes de respaldo** (`system-ui, sans-serif`): solo sale el nombre de la primera familia; el respaldo lo
   decide cada sistema.
 - **Tokens con `var(`**: no hay ninguno entre los globales; si apareciera, se omitiría.
-- **Tokens de componente** (`tokens/component|molecule|organism/`) y sus `surface-dark-*`: se generarán cuando se porte
-  cada componente. `sd.formats.mjs` está preparado para ello (ver el comentario sobre `NATIVE_GLOBAL_GROUPS`).
+- **Tokens de componente en Kotlin**: los de Swift ya se generan (abajo); los de Compose llegan con los componentes de Android.
+
+### Tokens de componente (Swift)
+
+`pnpm build:tokens` genera además `BrandComponentTokens.swift`: un `enum Brand<Grupo>Tokens` por cada grupo de
+`NATIVE_COMPONENT_GROUPS` (`sd.formats.mjs`), p. ej. `BrandButtonTokens.primaryBg` ← `button.primary.bg`. La lista de
+grupos crece con cada componente que se porta (sale de los `var(--…)` de su CSS).
+
+- **Colores**: `Color` dinámico. El lado oscuro es el `surface-dark-<nombre>` hermano **o el heredado por referencia**
+  (un token que apunta a otro con par oscuro hereda ese par, la misma regla que `surface-dark-derived.css`).
+  `transparent` sale como color con alfa 0.
+- **Medidas** (`rem`/`px`, `calc()` de rem y px): `CGFloat` en puntos. Una medida con par oscuro (hoy, el grosor del
+  subrayado de `Link` y de `Button text`, que en oscuro desaparece en reposo) sale como `BrandSchemeValue<CGFloat>`:
+  `BrandButtonTokens.textUnderlineWidth.value(for: scheme)`.
+- **`em`**: fracción del tamaño de fuente del propio componente (`switcher.track-width` = 2.75 → 2.75 × tamaño).
+- Duraciones (segundos), curvas (`BrandCubicBezier`), sombras (`BrandShadow`), pesos (`Int`) y familias (`String`).
+- **Se omite el CSS puro**: `solid`, `center`, `pointer`, porcentajes, `vw`/`vh`, `min()`/`max()`/`clamp()`… (p. ej.
+  `sheet.inline-size`, `sheet.block-size`, `modal.max-height`): el componente los resuelve con lo que SwiftUI ofrece y
+  la ficha anota el valor copiado.
+
+## Componentes de SwiftUI
+
+Todo está en el producto `StudiolxdBrand`; basta `import StudiolxdBrand` y `StudiolxdBrand.registerFonts()` al arrancar.
+Cada componente sigue a su `React` en nombres de props y casos (enums `CaseIterable` con el `rawValue` de React), usa solo
+tokens, funciona en claro y oscuro con colores dinámicos y cumple, por construcción:
+
+- **Estados**: reposo, *hover* (puntero en macOS y iPad), pulsado, deshabilitado (`.disabled(_:)`), foco de teclado
+  (anillo de `focus-ring-*`) y error.
+- **Tipo dinámico**: alturas y tamaños de letra crecen con él (`brandFont`, `@ScaledMetric`).
+- **VoiceOver**: etiquetas, valores, rasgos y pistas; el error y la ayuda se enlazan al control.
+- **Zona táctil ≥ 44 pt en iOS** (`brandHitTarget`, mínimo de las guías de Apple) sin cambiar el aspecto ni la maqueta.
+- **Reducir movimiento** (`accessibilityReduceMotion`) y macOS (puntero y foco de teclado) sin romperse.
+- Los textos que un componente emite por su cuenta son parámetros con el castellano por defecto.
+
+| React | SwiftUI |
+| --- | --- |
+| `Button` | `.buttonStyle(.brand(…))` · `BrandButton` |
+| `Heading`, `Paragraph`, `Text` | `BrandHeading`, `BrandParagraph`, `BrandText` · `Text.brand(…)` |
+| `Icon` | `BrandIcon` |
+| `InputField` | `BrandInputField` |
+| `NumberInputField` | `BrandNumberInputField` |
+| `SelectField` | `BrandSelectField` |
+| `SwitcherField` | `BrandSwitcherField` · `.toggleStyle(.brandSwitch)` |
+| `ToggleGroup` | `BrandToggleGroup` + `BrandToggleGroupItem` · `.toggleStyle(.brandToggle)` |
+| `ThemeSwitcher` | `BrandThemeSwitcher` |
+| `List` + `ListItem` | `BrandList` + `BrandListItem` |
+| `Tag` | `BrandTag` |
+| `EmptyState` | `BrandEmptyState` |
+| `Skeleton` | `BrandSkeleton` |
+| `Sheet` | `.brandSheet(isPresented:…)` · `BrandSheetContent` |
+| `ConfirmDialog` | `.brandConfirmDialog(isPresented:…)` · `BrandConfirmDialog` |
+| `Toast` / `Toaster` | `ToastCenter` · `.toastHost(…)` |
+
+`#Preview` de cada componente enseña todas sus variantes: ábrelos en Xcode. Las diferencias que se quedan a propósito
+respecto a React están en el campo `differences` de cada ficha (`parity/components/<Componente>.json`).
+
+### Button, texto e iconos
+
+`Button` es un `ButtonStyle` aplicable a cualquier `Button` nativo, más la vista de conveniencia `BrandButton`.
+`variant` (`primary`/`outline`/`ghost`/`text`), `tone` (`accent`/`ink`, solo con `text`), `size` (`sm`/`md`/`lg`),
+`destructive` (solo `outline` y `text`), `block` e `iconOnly` (con nombre accesible obligatorio).
+
+```swift
+Button("Guardar") { save() }.buttonStyle(.brand(.primary))
+BrandButton("Eliminar", variant: .outline, destructive: true) { delete() }
+BrandButton(icon: .close, accessibilityLabel: "Cerrar", variant: .ghost) { dismiss() }   // iconOnly
+Form { … }.brandControlSize(.lg)          // la talla por defecto de los controles del árbol (`Form size` en React)
+```
+
+```swift
+BrandHeading("Tus viviendas")                          // h2; VoiceOver lo anuncia como encabezado de ese nivel
+BrandHeading("Resumen", level: .h2, size: .s5)         // un h2 con el tamaño de un h4
+BrandParagraph("Revisa los datos.", size: .small)
+BrandParagraph(Text("Esta acción ") + Text("borra").brand(.strong, tone: .destructive) + Text(" el curso."))
+BrandIcon(.search)                                     // xs 8 · sm 16 · md 24 · lg 48 · xl 64 · text = 1em
+```
+
+`BrandIcon` dibuja los mismos 77 iconos que el `Icon` de React (retícula de 24, trazo de 1 pt): `pnpm build:native-icons` los
+genera desde `Icon.tsx`, así que no hay SF Symbols ni dos catálogos que diverjan.
+
+### Campos de formulario
+
+Comparten etiqueta, ayuda, mensaje de error y talla (`size`, o la del entorno con `.brandControlSize(_:)`).
+
+```swift
+BrandInputField("Correo", text: $email, type: .email, helperText: "Te escribiremos aquí")
+BrandInputField("Buscar", text: $query, labelHidden: true, kind: .search, clearable: true)
+BrandNumberInputField("Cantidad", value: $qty, min: 0, max: 99)          // −/+; `decimal: true` admite coma o punto
+BrandSelectField("Idioma", selection: $lang, options: [.option("es", "Español"), .option("en", "Inglés")])
+```
+
+`BrandInputField` admite `text`/`email`/`password`/`number`/`tel`/`url` (teclado y relleno automático adecuados),
+búsqueda, solo lectura y error. `BrandSelectField` abre un `Menu` nativo y admite grupos
+(`.group(label:options:)`). `BrandNumberInputField` es ajustable con VoiceOver (deslizar suma o resta un paso).
+
+### Interruptores, grupos de botones, tema y etiquetas
+
+```swift
+BrandTag("Pagado", variant: .success)                                    // las diez variantes de React
+Toggle("Notificaciones", isOn: $on).toggleStyle(.brandSwitch(size: .sm))
+BrandSwitcherField("Acepto las condiciones", isOn: $accepted, errorMessage: "Debes aceptarlas.")
+
+BrandToggleGroup(selection: $plan) {                                     // exclusivo (valor opcional)…
+    BrandToggleGroupItem("Mensual", value: Plan.monthly)
+    BrandToggleGroupItem("Anual", value: Plan.yearly)
+}
+.accessibilityLabel("Plan")
+BrandToggleGroup(selection: $filters, multiple: true, size: .sm) { … }   // …o múltiple (conjunto)
+
+BrandThemeSwitcher(value: $theme, variant: .list)                        // solo la vista: el valor lo guarda la app
+```
+
+### Listas, estados vacíos y esqueletos
+
+```swift
+BrandList(type: .ordered) { BrandListItem("Abre la app"); BrandListItem("Elige tu vivienda") }
+
+// La fila de ajustes (la `ListRow` de Homenize): principal, secundario, accesorio final y separadores de brand
+BrandList(type: .plain, showsSeparators: true) {
+    BrandListItem(content: { Text("Notificaciones") }, secondary: { Text("Avisos de la comunidad") },
+                  trailing: { BrandIcon(.chevron, size: .sm) })
+}
+
+BrandEmptyState(title: "Sin viviendas", description: "Añade tu primera vivienda para empezar.",
+                icon: .folder, action: EmptyStateAction("Añadir vivienda") { add() })
+
+BrandSkeleton(width: 160)                         // `circle: true` para un avatar; con «Reducir movimiento», fondo plano
+```
+
+### Hojas, diálogos de confirmación y avisos
+
+```swift
+// Sheet: el `.sheet` nativo (detents, arrastre, VoiceOver) con cabecera, aspa y pie de marca. Solo `bottom`.
+Button("Filtros") { showFilters = true }
+    .brandSheet(isPresented: $showFilters, title: "Filtros", description: "Afina los resultados") {
+        FilterForm()
+    } footer: {
+        BrandDialogButton("Cancelar", variant: .outline) { showFilters = false }   // Cancelar primero (regla 10)
+        BrandDialogButton("Aplicar") { apply(); showFilters = false }
+    }
+
+// ConfirmDialog: `onConfirm` es async (ocupado mientras corre, se cierra al terminar, sigue abierto si lanza)
+.brandConfirmDialog(isPresented: $askDelete, title: "¿Eliminar la vivienda?",
+                    description: "Se borrarán sus documentos. No se puede deshacer.",
+                    confirmLabel: "Eliminar la vivienda", destructive: true) { try await repository.delete(home) }
+// confirmPhrase: .init("Casa del lago", label: "Escribe «Casa del lago»", mismatch: "No coincide")
+// secondaryActionLabel: "Archivar", onSecondaryAction: { … }   // la tercera acción
+
+// Toast: el host se monta una vez en la raíz; los avisos se lanzan desde cualquier sitio.
+WindowGroup { RootView().toastHost(position: .bottomRight) }
+ToastCenter.shared.success("Cambios guardados")
+let id = ToastCenter.shared.loading("Subiendo…")
+ToastCenter.shared.error("No se pudo subir", id: id, description: "Revisa la conexión.")   // actualiza en su sitio
+try await ToastCenter.shared.promise(loading: "Guardando", success: { _ in "Guardado" }, error: { _ in "Falló" }) { try await save() }
+```
+
+Intents de `Toast`: `default`, `success`, `error`, `warning`, `info` y `loading`. `BrandCloseButton` y el pie
+`BrandDialogFooter`/`BrandDialogButton` (que apila con la acción principal arriba por debajo de 480 pt) son comunes a los
+tres.
 
 ## Fuentes
 
@@ -153,7 +316,7 @@ o bien publicar en el repositorio Maven local y añadir `mavenLocal()` a los rep
 cd native/android && VERSION=0.0.0-local ./gradlew :brand:publishToMavenLocal
 ```
 
-Tras tocar un JSON de `tokens/`: `pnpm build:tokens`. Tras tocar las fuentes de `src/assets/fonts/`: `pnpm build:native-fonts`.
+Tras tocar un JSON de `tokens/`: `pnpm build:tokens`. Tras tocar las fuentes de `src/assets/fonts/`: `pnpm build:native-fonts`. Tras tocar `Icon.tsx`: `pnpm build:native-icons`.
 
 ### Comandos
 

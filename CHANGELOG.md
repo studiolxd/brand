@@ -36,6 +36,31 @@ para breaking changes.
   iOS) y Gradle.
 - Documentación en `native/README.md` y en `CLAUDE.md` § «Nativo (iOS y Android)».
 
+### Nativo — componentes de SwiftUI (iOS 17 y macOS 14)
+
+> Los primeros componentes nativos, los que pide Homenize. Mismos nombres de props y casos que React, solo tokens,
+> claro y oscuro con colores dinámicos, tipo dinámico, VoiceOver, zona táctil de 44 pt, puntero y foco de teclado en
+> macOS y «reducir movimiento». Detalle y ejemplos en `native/README.md` § «Componentes de SwiftUI». Compose recibirá los
+> mismos componentes en la tarea siguiente.
+
+- **15 componentes** portados, cada uno con su ficha de paridad (`native/parity/components/`), capturas en claro y
+  oscuro (iOS y macOS), `#Preview` con todas las variantes y la pareja con su story de Storybook
+  (`native/apple/Comparisons/<Componente>/`): `Button` (como `ButtonStyle` + `BrandButton`), `Heading`/`Paragraph`/`Text`,
+  `Icon`, `InputField`, `NumberInputField`, `SelectField`, `SwitcherField`, `ToggleGroup`, `ThemeSwitcher`, `List` +
+  `ListItem`, `Tag`, `EmptyState`, `Skeleton`, `Sheet` (`.sheet` nativo), `ConfirmDialog` y `Toast`/`Toaster`
+  (`ToastCenter` + `toastHost`).
+- **Tokens de componente para Swift**: `pnpm build:tokens` genera también `BrandComponentTokens.swift` (un enum por
+  grupo de `NATIVE_COMPONENT_GROUPS`, con los `surface-dark-*` como `Color` dinámico, también los heredados por
+  referencia). Una medida con par oscuro sale como `BrandSchemeValue`. El CSS puro (`solid`, `vh`, `min()`…) se omite.
+- **`BrandIcon`**: los mismos trazos que el `Icon` de React (77 iconos, retícula de 24), generados desde `Icon.tsx` con
+  `pnpm build:native-icons` (incluido en `build:all`).
+- **Paridad**: las fichas admiten `differences` (lo que se queda a propósito) y `reactOnlyValues` (`block: boolean |
+  'mobile'`), y `native:parity` entiende uniones numéricas (`Heading level: 1 | … | 6`).
+- **Ayudantes**: `brandFont`/`brandLinedFont` (tipo dinámico e interlineado de CSS), `brandHitTarget` (44 pt),
+  `BrandControlSize` y `.brandControlSize(_:)`, `assertBrandSnapshots` (capturas de macOS en sRGB),
+  `native/apple/scripts/capture-story.mjs` y `pair-comparison.sh` (parejas React ↔ SwiftUI a la misma escala).
+- Los ejemplos del README compilan (`ReadmeExamples.swift`).
+
 ## [49.17.0] — 2026-10-03
 
 > **Minor.** Componente nuevo: `EmbedFrame`, el marco embebido del sistema, y las tres

@@ -10,7 +10,6 @@ automáticas la hacen cumplir:
 | ficha ↔ **Swift** | `ParityTests` + `ParityRegistry.swift` | `swift test` |
 | ficha ↔ **Kotlin** | `ParityTest` (`ParityTest.kt`) | `./gradlew build` |
 
-Con cero fichas todas pasan: la infraestructura está lista antes del primer componente.
 
 ## La ficha
 
@@ -40,6 +39,16 @@ El esquema es [`schema.json`](schema.json) (JSON Schema draft-07). Ejemplo para 
 - **`props`** — las props que SÍ existen en nativo. Dos tipos: `union` (una unión de literales de texto, con `values`) y
   `boolean`. `default` es informativo.
 - **`excluded`** — props que NO se portan, con su `reason` (mínimo 10 caracteres: un porqué de verdad, no «n/a»).
+- **`differences`** *(opcional)* — frases con lo que se queda **a propósito** distinto de React (límites de SwiftUI/Compose,
+  convenciones de la plataforma). Lo que no se pueda igualar se aproxima y se explica ahí; las parejas de
+  `native/apple/Comparisons/` lo enseñan.
+
+Dos casos que el esquema cubre además de los de arriba:
+
+- **Uniones numéricas** (`level: 1 | 2 | … | 6`): los valores van como texto (`"1"`…`"6"`) y en nativo el enum lleva
+  `Int` de `rawValue` (el registro de Swift los compara como `String($0.rawValue)`).
+- **Un booleano con literales extra** (`block: boolean | 'mobile'`): `"type": "boolean"` y, en `reactOnlyValues`, los
+  literales que solo existen en la web (`["mobile"]`); `native:parity` exige que sean exactamente los de React.
 
 ### Qué comprueba `pnpm native:parity`
 
@@ -69,8 +78,8 @@ public enum ButtonVariant: String, CaseIterable, Sendable {
 ```
 
 ```swift
-// native/apple/Tests/StudiolxdBrandTests/ParityRegistry.swift
-let parityRegistry: [String: [String: [String]]] = [
+// native/apple/Tests/StudiolxdBrandTests/Parity+<Grupo>.swift  (ParityRegistry.swift los compone)
+let coreParity: [String: [String: [String]]] = [
     "Button": [
         "variant": ButtonVariant.allCases.map(\.rawValue),
         "size": ButtonSize.allCases.map(\.rawValue),

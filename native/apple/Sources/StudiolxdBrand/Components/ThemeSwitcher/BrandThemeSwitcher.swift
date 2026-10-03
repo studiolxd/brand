@@ -258,6 +258,7 @@ private struct ThemeListOption: View {
     let action: () -> Void
 
     @Environment(\.isFocused) private var isFocused
+    @Environment(\.colorScheme) private var scheme
     @State private var isHovering = false
 
     private typealias T = BrandThemeSwitcherTokens
@@ -273,7 +274,7 @@ private struct ThemeListOption: View {
             .padding(.bottom, isHovering && !isCurrent ? BrandLinkTokens.underlineOffset : 0)
             .overlay(alignment: .bottom) {
                 if isHovering && !isCurrent {
-                    Rectangle().fill(BrandColorRoles.text).frame(height: BrandLinkTokens.underlineWidth)
+                    Rectangle().fill(BrandColorRoles.text).frame(height: BrandLinkTokens.underlineWidth.value(for: scheme))
                 }
             }
             .overlay {

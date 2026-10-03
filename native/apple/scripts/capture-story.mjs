@@ -2,7 +2,7 @@
 // Captura una story de Storybook en claro u oscuro, para compararla con la captura de SwiftUI.
 //
 //   node native/apple/scripts/capture-story.mjs <storyId> <salida.png> [--dark] [--args "k:v;k2:v2"]
-//        [--width 480] [--selector "#storybook-root"] [--scale 2] [--url http://localhost:6006]
+//        [--width 480] [--selector "#storybook-root"] [--click "#storybook-root button"] [--pad 16] [--height 800] [--scale 2] [--url http://localhost:6006]
 //
 // Requiere el Storybook en marcha (`pnpm storybook`). `storyId` es el de la URL (`atoms-button--primary`).
 // Recorta al elemento de la story (con 16 px de margen) y fija el factor de escala, para que las parejas
@@ -24,9 +24,12 @@ const opt = (name, fallback) => {
 const dark = flag('dark');
 const base = opt('url', 'http://localhost:6006');
 const width = Number(opt('width', 480));
+const viewportHeight = Number(opt('height', 800));
 const scale = Number(opt('scale', 2));
 const selector = opt('selector', '#storybook-root');
 const args = opt('args', '');
+const click = opt('click', '');
+const pad = Number(opt('pad', 16));
 
 const params = new URLSearchParams({ id: storyId, viewMode: 'story' });
 if (args) params.set('args', args);
@@ -34,9 +37,11 @@ params.set('globals', `backgrounds.value:${dark ? 'dark' : 'light'}`);
 
 const browser = await chromium.launch();
 try {
-  const page = await browser.newPage({ viewport: { width, height: 800 }, deviceScaleFactor: scale, reducedMotion: 'reduce' });
+  const page = await browser.newPage({ viewport: { width, height: viewportHeight }, deviceScaleFactor: scale, reducedMotion: 'reduce' });
   await page.goto(`${base}/iframe.html?${params}`, { waitUntil: 'networkidle' });
   await page.waitForSelector('#storybook-root > *', { timeout: 20000 });
+  // Un portal (Sheet, Modal…) no existe hasta que algo lo abre: `--click` pulsa el disparador de la story.
+  if (click) await page.locator(click).first().click();
   await page.waitForSelector(selector, { timeout: 20000 });
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(400);
@@ -45,7 +50,6 @@ try {
     if (theme !== 'dark') console.error(`⚠ ${storyId}: el tema oscuro no se activó (data-theme=${theme})`);
   }
   const box = await page.locator(selector).first().boundingBox();
-  const pad = 16;
   mkdirSync(dirname(out), { recursive: true });
   await page.screenshot({
     path: out,

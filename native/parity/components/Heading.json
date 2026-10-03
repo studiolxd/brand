@@ -1,13 +1,51 @@
 {
   "$schema": "../schema.json",
   "component": "Heading",
-  "react": { "path": "src/stories/atoms/Heading/Heading.tsx", "props": "HeadingProps" },
-  "native": { "swift": "BrandHeading", "kotlin": "BrandHeading" },
+  "react": {
+    "path": "src/stories/atoms/Heading/Heading.tsx",
+    "props": "HeadingProps"
+  },
+  "native": {
+    "swift": "BrandHeading",
+    "kotlin": "BrandHeading"
+  },
   "props": {
-    "level": { "type": "union", "values": ["1", "2", "3", "4", "5", "6"], "default": "2" },
-    "size": { "type": "union", "values": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"] }
+    "level": {
+      "type": "union",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "default": "2"
+    },
+    "size": {
+      "type": "union",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
+      ]
+    }
   },
   "excluded": [
-    { "prop": "children", "reason": "En SwiftUI el contenido es el primer argumento del inicializador (`BrandHeading(\"Título\")`), no un hijo." }
+    {
+      "prop": "children",
+      "reason": "En SwiftUI el contenido es el primer argumento del inicializador (`BrandHeading(\"Título\")`), no un hijo."
+    }
+  ],
+  "differences": [
+    "SwiftUI no encoge el interlineado por debajo del natural de la fuente: con `line-height` apretado (títulos grandes) el texto queda unos puntos más bajo dentro de su caja que en la web.",
+    "El texto de la web se ve algo más grueso (suavizado de Chromium en macOS); el peso del eje `wght` es el mismo."
   ]
 }
