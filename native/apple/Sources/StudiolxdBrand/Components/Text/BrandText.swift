@@ -123,9 +123,8 @@ public struct BrandHeading: View {
     public var body: some View {
         let points = size?.points ?? level.size
         content
-            .brandFont(size: points, weight: level.weight, relativeTo: .title)
+            .brandLinedFont(size: points, weight: level.weight, lineHeight: level.lineHeight, relativeTo: .title)
             .foregroundStyle(level.color)
-            .lineSpacing(points * (level.lineHeight - 1))
             .tracking(level.letterSpacing * points)
             .fixedSize(horizontal: false, vertical: true)
             .accessibilityAddTraits(.isHeader)
@@ -185,9 +184,8 @@ public struct BrandParagraph: View {
             lineHeight = BrandTextTokens.paragraphLargeLineHeight
         }
         return content
-            .brandFont(size: points, weight: BrandTextTokens.fontWeight)
+            .brandLinedFont(size: points, weight: BrandTextTokens.fontWeight, lineHeight: lineHeight)
             .foregroundStyle(BrandTextTokens.color)
-            .lineSpacing(points * (lineHeight - 1))
             .tracking(BrandTextTokens.letterSpacing * points)
             .fixedSize(horizontal: false, vertical: true)
     }
