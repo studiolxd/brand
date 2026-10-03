@@ -20,6 +20,9 @@
     "La pila se despliega con el puntero encima (macOS, iPad); en iPhone táctil queda recogida salvo `expand: true`.",
     "El gesto de descarte (deslizar) usa los 40 pt de umbral por defecto de Base UI, que no es un token.",
     "El reloj se detiene mientras el puntero o el dedo están sobre la pila, como el foco/puntero de la web.",
-    "Un aviso `loading` no pinta indicador de espera propio: igual que en React, la intención solo cambia el comportamiento (no se cierra solo)."
+    "Un aviso `loading` no pinta indicador de espera propio: igual que en React, la intención solo cambia el comportamiento (no se cierra solo).",
+    "Android: el anuncio a TalkBack es una región viva (`liveRegion`) sobre el título y la descripción de cada aviso, asertiva para `error` y `warning` y cortés para el resto (también al actualizarlo por su `id`), en vez de `AccessibilityNotification.Announcement`. Descartar es además la acción `dismiss` de la semántica.",
+    "Android: la pila se despliega con el puntero (ratón, lápiz, ChromeOS) encima o con `expand: true`; el dedo solo detiene el reloj mientras toca. `duration` es `kotlin.time.Duration` y `gap` es `Dp`.",
+    "Android: entrada, salida y recolocación se saltan si el usuario quitó las animaciones del sistema (escala de animación 0)."
   ]
 }
