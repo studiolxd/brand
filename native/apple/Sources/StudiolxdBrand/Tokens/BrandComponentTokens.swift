@@ -568,6 +568,8 @@ public enum BrandNumberInputTokens {
     public static let btnWidth: CGFloat = 32
     /// Token `number-input.btn-color` — Color del icono de los botones
     public static let btnColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+    /// Token `number-input.btn-bg` — Fondo de los botones
+    public static let btnBg: Color = Color(brandHex: 0x000000, opacity: 0)
     /// Token `number-input.btn-hover-line-width` — Grosor de la línea de hover de los botones +/−. El hover no pinta relleno (regla de Colores): deja una línea de tinta bajo el botón
     public static let btnHoverLineWidth: CGFloat = 1
     /// Token `number-input.btn-hover-line-color` — Color de la línea de hover de los botones +/−
@@ -834,6 +836,8 @@ public enum BrandCheckboxTokens {
     public static let borderWidth: CGFloat = 1
     /// Token `checkbox.border-color` — Color del borde
     public static let borderColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+    /// Token `checkbox.bg` — Fondo sin marcar
+    public static let bg: Color = Color(brandHex: 0x000000, opacity: 0)
     /// Token `checkbox.bg-checked` — Fondo cuando está marcado
     public static let bgChecked: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
     /// Token `checkbox.check-color` — Color del checkmark

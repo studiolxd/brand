@@ -580,6 +580,7 @@ function resolveToken(tokenMap, token, mode, depth = 0) {
 function nativeValue(path, value) {
   const last = path[path.length - 1];
   if (/^(#|rgba?\()/.test(value)) return { kind: 'color', color: parseColor(value) };
+  if (value === 'transparent') return { kind: 'color', color: { r: 0, g: 0, b: 0, a: 0 } };
   if (/^-?[\d.]+m?s$/.test(value)) {
     const n = parseFloat(value);
     return { kind: 'duration', seconds: value.endsWith('ms') ? n / 1000 : n };
