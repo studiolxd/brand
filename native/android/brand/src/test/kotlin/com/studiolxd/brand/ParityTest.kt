@@ -21,9 +21,12 @@ import kotlin.test.assertTrue
  * ```
  *
  * El enum es `enum class ButtonVariant(val value: String) { Primary("primary"), IconOnly("icon-only") }`: el
- * identificador sigue la convención de Kotlin y `value` lleva exactamente el valor de React. Con cero fichas va vacío.
+ * identificador sigue la convención de Kotlin y `value` lleva exactamente el valor de React. Cada grupo vive en su fichero `Parity<Grupo>.kt`.
  */
-private val parityRegistry: Map<String, Map<String, List<String>>> = emptyMap()
+private val parityRegistry: Map<String, Map<String, List<String>>> =
+    // AQUÍ SE SUMAN LOS GRUPOS: cada uno registra sus componentes en `Parity<Grupo>.kt` (`internal val parity<Grupo>`).
+    // Al integrar, añadir `+ parityFields + parityOverlays + parityLists` (u otros) a esta línea.
+    parityCore
 
 /** Una ficha de paridad (`native/parity/schema.json`), solo con lo que comprueban las pruebas. */
 private class ParityCard(json: JSONObject) {

@@ -46,6 +46,8 @@ dependencies {
     api(libs.compose.ui.unit)
     api(libs.compose.animation.core)
     implementation(libs.androidx.core.ktx)
+    // Solo para las anotaciones `@Preview` de las vistas previas: no viaja a quien consume la librería.
+    compileOnly(libs.compose.ui.tooling.preview)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)

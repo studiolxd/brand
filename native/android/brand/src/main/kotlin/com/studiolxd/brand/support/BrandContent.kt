@@ -9,6 +9,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.TextUnit
 import com.studiolxd.brand.BrandTheme
 import com.studiolxd.brand.tokens.BrandFontSize
+import com.studiolxd.brand.typography.BrandTypography
 
 /**
  * El color de «primer plano» que heredan los iconos y el texto de dentro de un control (`currentColor` en la web,
@@ -18,9 +19,9 @@ val LocalBrandContentColor = compositionLocalOf { Color.Unspecified }
 
 /**
  * La tipografía que heredan los textos de la marca que van dentro de un control (`BrandText`, `BrandParagraph`…)
- * cuando no declaran la suya. `Unspecified` → sin herencia.
+ * cuando no declaran la suya. Por defecto, el cuerpo de texto ([BrandTypography.body]).
  */
-val LocalBrandTextStyle = compositionLocalOf { TextStyle.Default }
+val LocalBrandTextStyle = compositionLocalOf { BrandTypography.body }
 
 /** El tamaño de letra que mide un icono `size: Text` (`1em`). Los controles lo fijan a su tipografía. */
 val LocalBrandIconTextSize = compositionLocalOf<TextUnit> { BrandFontSize.s2 }
