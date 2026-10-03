@@ -36,7 +36,8 @@ const browser = await chromium.launch();
 try {
   const page = await browser.newPage({ viewport: { width, height: 800 }, deviceScaleFactor: scale, reducedMotion: 'reduce' });
   await page.goto(`${base}/iframe.html?${params}`, { waitUntil: 'networkidle' });
-  await page.waitForSelector(`${selector} > *`, { timeout: 20000 });
+  await page.waitForSelector('#storybook-root > *', { timeout: 20000 });
+  await page.waitForSelector(selector, { timeout: 20000 });
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(400);
   if (dark) {

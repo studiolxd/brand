@@ -1,0 +1,14 @@
+{
+  "$schema": "../schema.json",
+  "component": "ListItem",
+  "react": { "path": "src/stories/atoms/List/List.tsx", "props": "ListItemProps" },
+  "native": { "swift": "BrandListItem", "kotlin": "BrandListItem" },
+  "props": {},
+  "excluded": [
+    { "prop": "as", "reason": "Cambia el elemento HTML (`div role=listitem`); en SwiftUI no hay elementos: el rol lo da el contenedor `BrandList`." },
+    { "prop": "children", "reason": "En SwiftUI el contenido es el `@ViewBuilder content` del inicializador, no una prop." }
+  ],
+  "differences": [
+    "Solo nativo: `secondary` (línea menor atenuada, `text.paragraph.small` + `textMuted`) y `trailing` (accesorio al final) para filas de datos; en React un ítem es solo contenido."
+  ]
+}
