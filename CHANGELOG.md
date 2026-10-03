@@ -7,7 +7,7 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## [Siguiente]
+## [49.17.0] — 2026-10-03
 
 > **Minor.** Componente nuevo: `EmbedFrame`, el marco embebido del sistema, y las tres
 > props de alto que lo colocan sin CSS de consumidor.
