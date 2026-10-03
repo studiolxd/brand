@@ -45,6 +45,8 @@
     "El rótulo lleva el rasgo de encabezado para VoiceOver; en React es un `<p>` sin semántica.",
     "La acción es el `BrandButton` outline (`sm` en la talla sm, `md` en md), como en React.",
     "Con tipo dinámico el rótulo, la descripción y el icono crecen (`@ScaledMetric`); en la web son fijos.",
-    "El rótulo se ve algo más ligero que en la web: el eje `opsz` de Google Sans Flex se queda en su valor por defecto en nativo y en la web `font-optical-sizing: auto` lo ajusta al tamaño."
+    "El rótulo se ve algo más ligero que en la web: el eje `opsz` de Google Sans Flex se queda en su valor por defecto en nativo y en la web `font-optical-sizing: auto` lo ajusta al tamaño.",
+    "Android: `EmptyStateAction(label, perform)` y el icono como `BrandIconName?` o, con otra sobrecarga, un composable (`iconContent`); el rótulo es un encabezado de TalkBack y el icono se oculta.",
+    "Android: el rótulo, la descripción y la caja del icono crecen con la escala de fuente del sistema (sp), como con tipo dinámico en SwiftUI."
   ]
 }

@@ -29,6 +29,7 @@
     }
   ],
   "differences": [
-    "`secondary` y `trailing` existen en las tres plataformas. En React el envoltorio de fila (`list__item-row`) solo aparece cuando se usa alguno; en SwiftUI el ítem es siempre una pila."
+    "`secondary` y `trailing` existen en las tres plataformas. En React el envoltorio de fila (`list__item-row`) solo aparece cuando se usa alguno; en SwiftUI el ítem es siempre una pila.",
+    "Android: `BrandListItem` añade `leading` (accesorio al principio) y `onClick` (fila entera como botón de TalkBack), que piden las listas de ajustes de Android (la `ListRow` de Homenize); no están en React ni en SwiftUI."
   ]
 }
