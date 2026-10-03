@@ -32,12 +32,13 @@
     "El aspa de borrado y la lupa son los iconos del catálogo (`BrandIcon`), igual que en la web; el aspa conserva su hueco aunque no haya texto (invisible y fuera de VoiceOver) para que el texto no salte al escribir.",
     "`readOnly` pinta el texto como `Text` seleccionable en la misma caja: `TextField` de SwiftUI no tiene modo de solo lectura.",
     "En iOS toda la caja enfoca el campo al tocarla y el aspa tiene zona táctil de 44 pt; la altura y la letra crecen con el tipo dinámico.",
+    "El `type: password` oculta el texto y fija el teclado de contraseña, sin ojo en ninguna de las plataformas: el botón de mostrar u ocultar es de `PasswordField`.",
     "El foco se da desde fuera: en React con el `ref` (llega al `<input>`, también en la búsqueda); en SwiftUI con un `FocusState` de la app (`.brandFocused(_:)` / `.brandFocused(_:equals:)`, ver README nativo); en Compose con un `FocusRequester` (`focusRequester`).",
     "El `type` fija el teclado y el rellenado automático de iOS (`emailAddress`, `phonePad`, `URL`, `password`…); en macOS no hay teclados y solo cambia `password` (campo seguro).",
     "El nombre accesible y la pista (error + ayuda) los pone el campo sobre el propio control; los textos de error y ayuda se ocultan a VoiceOver para no leerse dos veces.",
     "El color de marcador (`placeholder`) depende de que el sistema respete el color del `prompt`; en iOS se respeta, en macOS el sistema puede atenuarlo.",
     "En Android el `type` fija el teclado (`KeyboardType` correo, contraseña, número, teléfono, URL), la autocapitalización y el corrector; la búsqueda pone la tecla de intro «buscar». `readOnly` mantiene el texto seleccionable en el propio campo (`BasicTextField`).",
     "En TalkBack el nombre del control es la etiqueta, el error se publica con `error()` y la ayuda como descripción de estado; los textos visibles de error y ayuda no son nodos de accesibilidad propios para no leerse dos veces. Sin mensaje, el texto de `error()` es `invalidLabel` («Valor no válido», castellano).",
-    "En Android toda la caja enfoca el campo al tocarla y la zona táctil del aspa y del ojo llega a 48 dp; la altura y la letra crecen con la escala de fuente del sistema. Con «quitar animaciones» el borde y el fondo cambian de golpe."
+    "En Android toda la caja enfoca el campo al tocarla y la zona táctil del aspa llega a 48 dp; la altura y la letra crecen con la escala de fuente del sistema. Con «quitar animaciones» el borde y el fondo cambian de golpe."
   ]
 }

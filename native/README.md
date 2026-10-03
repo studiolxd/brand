@@ -162,6 +162,7 @@ tokens, funciona en claro y oscuro con colores dinámicos y cumple, por construc
 | `Icon` | `BrandIcon` |
 | `InputField` | `BrandInputField` |
 | `NumberInputField` | `BrandNumberInputField` |
+| `PasswordField` | `BrandPasswordField` |
 | `SelectField` | `BrandSelectField` |
 | `SwitcherField` | `BrandSwitcherField` · `.toggleStyle(.brandSwitch)` |
 | `ToggleGroup` | `BrandToggleGroup` + `BrandToggleGroupItem` · `.toggleStyle(.brandToggle)` |
@@ -209,7 +210,17 @@ Comparten etiqueta, ayuda, mensaje de error y talla (`size`, o la del entorno co
 BrandInputField("Correo", text: $email, type: .email, helperText: "Te escribiremos aquí")
 BrandInputField("Buscar", text: $query, labelHidden: true, kind: .search, clearable: true)
 BrandNumberInputField("Cantidad", value: $qty, min: 0, max: 99)          // −/+; `decimal: true` admite coma o punto
+// `Binding<Double?>`: nil = sin valor (campo vacío, VoiceOver lee «Sin valor»); desde vacío − y + parten de 0
 BrandSelectField("Idioma", selection: $lang, options: [.option("es", "Español"), .option("en", "Inglés")])
+```
+
+```swift
+BrandPasswordField("Contraseña", text: $pwd)                              // con ojo de mostrar u ocultar; etiqueta oculta por defecto
+
+// Foco desde fuera (p. ej. ⌘N lleva el cursor al campo de añadir): el `@FocusState` de la app, con `.brandFocused`
+@FocusState private var addFocused: Bool
+BrandInputField("Nueva tarea", text: $t).brandFocused($addFocused)        // también BrandNumberInputField y BrandPasswordField
+// con varios campos: @FocusState var f: Campo?  →  .brandFocused($f, equals: .añadir)
 ```
 
 `BrandInputField` admite `text`/`email`/`password`/`number`/`tel`/`url` (teclado y relleno automático adecuados),
@@ -240,8 +251,9 @@ BrandList(type: .ordered) { BrandListItem("Abre la app"); BrandListItem("Elige t
 
 // La fila de ajustes (la `ListRow` de Homenize): principal, secundario, accesorio final y separadores de brand
 BrandList(type: .plain, showSeparators: true) {
-    BrandListItem(content: { Text("Notificaciones") }, secondary: { Text("Avisos de la comunidad") },
-                  trailing: { BrandIcon(.chevron, size: .sm) })
+    BrandListItem(action: { open() },                                  // `action`: la fila entera pulsable (rasgo de botón)
+                  leading: { BrandIcon(.bell) }, content: { Text("Notificaciones") },
+                  secondary: { Text("Avisos de la comunidad") }, trailing: { BrandIcon(.chevron, size: .sm) })
 }
 
 BrandEmptyState(title: "Sin viviendas", description: "Añade tu primera vivienda para empezar.",
@@ -301,7 +313,7 @@ de `BrandTheme { … }` (que además garantiza la zona táctil de 48 dp). Siguen
 | `Button` | `BrandButton` · `BrandCloseButton` |
 | `Heading`, `Paragraph`, `Text` | `BrandHeading`, `BrandParagraph`, `BrandText` (+ `brandSpanStyle`) |
 | `Icon` | `BrandIcon` |
-| `InputField`, `NumberInputField`, `SelectField` | `BrandInputField`, `BrandNumberInputField`, `BrandSelectField` |
+| `InputField`, `NumberInputField`, `PasswordField`, `SelectField` | `BrandInputField`, `BrandNumberInputField`, `BrandPasswordField`, `BrandSelectField` |
 | `SwitcherField` | `BrandSwitcherField` · `BrandSwitcher` |
 | `ToggleGroup` | `BrandToggleGroup` (+ `Item`) · `BrandToggle` |
 | `ThemeSwitcher` | `BrandThemeSwitcher` |
@@ -341,7 +353,10 @@ Estado elevado (`value` / `onValueChange`); etiqueta, ayuda, error y talla comun
 ```kotlin
 BrandInputField("Correo", email, { email = it }, type = InputFieldType.Email, helperText = "Te escribiremos aquí")
 BrandInputField("Buscar", q, { q = it }, labelHidden = true, kind = InputFieldKind.Search, clearable = true)
-BrandNumberInputField("Cantidad", qty, { qty = it }, min = 0.0, max = 99.0)       // −/+; `decimal = true`
+BrandNumberInputField("Cantidad", qty, { qty = it }, min = 0.0, max = 99.0)       // −/+; `decimal = true`; `value: Double?` (null = vacío; desde vacío − y + parten de 0)
+BrandPasswordField("Contraseña", pwd, { pwd = it })                               // con ojo; etiqueta oculta por defecto
+val foco = remember { FocusRequester() }                                           // foco desde fuera: `focusRequester`
+BrandInputField("Nueva tarea", t, { t = it }, focusRequester = foco); LaunchedEffect(Unit) { foco.requestFocus() }
 BrandSelectField("Idioma", lang, { lang = it },
     listOf(BrandSelectEntry.option("es", "Español"), BrandSelectEntry.option("en", "Inglés")))
 BrandSwitcherField("Avisarme por correo", notify, { notify = it }, errorMessage = null)
@@ -353,8 +368,8 @@ BrandThemeSwitcher(theme, { theme = it }, variant = ThemeSwitcherVariant.List)  
 ```
 
 `BrandSelectField` y `BrandThemeSwitcher` abren un desplegable propio (un `Popup` con los tokens `select.*`): Compose sin
-Material no trae `ExposedDropdownMenu` y la librería no añade dependencias. `InputFieldType.Password` lleva el ojo de
-mostrar/ocultar (`passwordToggle`).
+Material no trae `ExposedDropdownMenu` y la librería no añade dependencias. `InputFieldType.Password` oculta el texto pero
+no lleva ojo: para mostrar u ocultar la contraseña está `BrandPasswordField`.
 
 ### Listas, etiquetas, estados vacíos y esqueletos
 

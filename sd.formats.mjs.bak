@@ -182,7 +182,7 @@ export const NATIVE_COMPONENT_GROUPS = [
   'number-input', 'number-input-field', 'select', 'select-field', 'dropdown-field', 'checkbox',
   'switcher', 'switcher-field', 'toggle', 'toggle-group', 'theme-switcher', 'text', 'link',
   'tag', 'alert', 'text-inline', 'empty-state', 'skeleton', 'sheet', 'modal', 'confirm-dialog', 'toast', 'icon', 'spinner',
-  'separator', 'form', 'fieldset', 'card', 'popover', 'menu', 'password-field',
+  'separator', 'form', 'fieldset', 'card', 'popover', 'menu',
 ];
 
 // 1rem = 16: el sistema no toca el font-size del <html>.

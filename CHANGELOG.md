@@ -31,7 +31,19 @@ contra el código de antes, en `InputField.test.tsx`, `NumberInputField.test.tsx
 
 - **Generador de Kotlin**: los tamaños de letra de componente cuyo nombre no termina en `font-size`
   (`empty-state.title-font-size-sm`, `description-font-size-sm`) salían como `Dp`; ahora todo token con `font-size`
-  como segmento es `TextUnit` (`sp`). `BrandEmptyState` deja de convertir a mano.
+  como segmento es `TextUnit` (`sp`). `BrandEmptyState` deja de convertir a mano. Grupo `password-field` en
+  `NATIVE_COMPONENT_GROUPS`.
+- **`PasswordField` nativo** (`BrandPasswordField`, SwiftUI y Compose): campo con ojo de mostrar u ocultar, etiqueta
+  oculta por defecto como en React, textos accesibles como parámetros. Ficha, capturas y parejas. **Compose: `BrandInputField`
+  pierde el ojo** (`passwordToggle`, `showPasswordLabel`, `hidePasswordLabel`; breaking menor en Compose): quien lo quiera usa `BrandPasswordField`.
+- **Foco desde fuera** en `InputField`, `NumberInputField` y `PasswordField`: SwiftUI `.brandFocused($focus)` /
+  `.brandFocused($focus, equals:)` (un `FocusState` de la app aplicado al texto, no a los botones); Compose
+  `focusRequester: FocusRequester?`.
+- **`NumberInputField` sin valor**: `Binding<Double?>` (SwiftUI; `Binding<Double>` sigue compilando) y `value: Double?`
+  (Compose; **cambio de firma**: `onValueChange` recibe `Double?`). Vacío = `nil`/`null`, con `placeholder` y
+  «Sin valor» (`emptyValueLabel`) para lectores de pantalla; desde vacío − y + parten de 0 y respetan `min`/`max`.
+- **`BrandListItem`**: `leading` en SwiftUI (ya existía en Compose) y `action` (fila pulsable entera) en SwiftUI, pareja de
+  `onClick` de Compose, anotado en la ficha como diferencia deliberada.
 
 ### Nativo — Jetpack Compose con los mismos componentes que SwiftUI (minor)
 
