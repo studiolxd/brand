@@ -1,4 +1,5 @@
-import type { PopoverChangeDetails } from '../../atoms/Popover/Popover';
+import type { ReactElement } from 'react';
+import type { PopoverAnchor, PopoverChangeDetails } from '../../atoms/Popover/Popover';
 import './ColorPicker.css';
 /**
  * El cromo del selector de color. Ninguno trae el castellano puesto: salen
@@ -115,6 +116,24 @@ export interface ColorPickerProps {
     dialogLabel?: string;
     /** Texto de «Quitar color». **Sin default**: sin él, `colorPicker.clear`. */
     clearLabel?: string;
+    /**
+     * Disparador propio en lugar de la muestra: un `Toggle` con icono, un
+     * `Button`… Como el `trigger` de `Popover`, recibe las props del disparador
+     * por `render`, así que tiene que reenviarlas (y el `ref`) a su elemento.
+     * El selector le añade `id`, `disabled`, `aria-haspopup`, `aria-expanded`,
+     * `aria-invalid`, `aria-label` / `aria-labelledby` y la descripción con el
+     * valor actual; lo que el elemento ya traiga gana, salvo la descripción, que
+     * se suma, y `disabled`, que basta con que lo diga uno. Lo que pinte dentro
+     * (y su `pressed`, si es un `Toggle`) lo decide quien lo usa.
+     */
+    trigger?: ReactElement<Record<string, unknown>>;
+    /**
+     * Coloca el panel contra un elemento que no es el disparador —la celda de una
+     * tabla— (la prop `anchor` de `Popover`). Sin `trigger`, no se pinta ningún
+     * disparador: el panel se abre solo con `open`, y al cerrarse el foco vuelve
+     * a donde estaba antes de abrir.
+     */
+    anchor?: PopoverAnchor;
     /** Se añade DESPUÉS de las clases propias. */
     className?: string;
 }
@@ -125,6 +144,6 @@ export interface ColorPickerProps {
  *
  * Todo es Base UI salvo el área 2D: el `Popover` (foco, portal, cierre), las
  * bandas (`Slider`) y el campo (`Input`) son los de brand. El `ref` va al
- * disparador.
+ * disparador, sea la muestra o el `trigger` propio.
  */
 export declare const ColorPicker: import("react").ForwardRefExoticComponent<ColorPickerProps & import("react").RefAttributes<HTMLButtonElement>>;

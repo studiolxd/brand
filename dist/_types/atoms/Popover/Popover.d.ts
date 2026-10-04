@@ -8,9 +8,25 @@ import './Popover.css';
  * forma a mano.
  */
 export type PopoverChangeDetails = Parameters<NonNullable<React.ComponentProps<typeof BasePopover.Root>['onOpenChange']>>[1];
+/**
+ * Elemento contra el que se coloca el panel cuando no es el disparador. Es la
+ * prop `anchor` del Positioner de Base UI, tal cual: un elemento, un `ref`, un
+ * elemento virtual o una función que lo devuelva.
+ */
+export type PopoverAnchor = React.ComponentProps<typeof BasePopover.Positioner>['anchor'];
 export interface PopoverProps {
-    /** Elemento que abre el panel. Recibe las props del disparador vía `render`. */
-    trigger: ReactNode;
+    /**
+     * Elemento que abre el panel. Recibe las props del disparador vía `render`.
+     * Sin él no se pinta disparador: el panel se abre con `open` y se coloca
+     * contra `anchor`.
+     */
+    trigger?: ReactNode;
+    /**
+     * Coloca el panel contra otro elemento que no es el disparador —o, sin
+     * disparador, contra el único que hay—. Por defecto, el disparador. Sin
+     * disparador, al cerrarse el foco vuelve a donde estaba antes de abrir.
+     */
+    anchor?: PopoverAnchor;
     /** Contenido del panel. */
     children: ReactNode;
     /**
@@ -74,4 +90,4 @@ export interface PopoverProps {
  * mantener el panel abierto cuando el clic cae en algo que el motor no
  * reconoce como suyo.
  */
-export declare function Popover({ trigger, children, label, open, defaultOpen, onOpenChange, onPointerDownOutside, onFocusOutside, onEscapeKeyDown, side, align, sideOffset, initialFocus, container, className, }: PopoverProps): import("react/jsx-runtime").JSX.Element;
+export declare function Popover({ trigger, anchor, children, label, open, defaultOpen, onOpenChange, onPointerDownOutside, onFocusOutside, onEscapeKeyDown, side, align, sideOffset, initialFocus, container, className, }: PopoverProps): import("react/jsx-runtime").JSX.Element;

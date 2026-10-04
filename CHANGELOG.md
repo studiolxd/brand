@@ -7,7 +7,7 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## [Sin publicar]
+## [49.24.0] — 2026-10-04
 
 > **Minor.** Disparador propio y ancla sin disparador en `ColorPicker`, a petición de creator (la barra
 > de texto enriquecido y la celda de una tabla). Sin tocar nada, todo sigue igual.
