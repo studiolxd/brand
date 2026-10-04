@@ -7,6 +7,30 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.23.0] — 2026-10-04
+
+> **Minor.** Ranura `logo` en `AppHeader`, a petición de Homenize. Espacio nuevo `appHeader` en
+> `BrandMessages` (una clave, `logo`): el catálogo de cada app tiene que añadirla para compilar.
+
+### Logo en la cabecera de la aplicación
+
+- **`logo`**: la marca del producto entre el botón de menú y `start`. Toma el alto de contenido de la
+  barra (`--app-header-content-height`, 40px) y el ancho de su proporción: el `Logo` del sistema a
+  cualquier talla, un SVG con `viewBox` o un `<img>` de cualquier proporción, sin darle medidas. Sin
+  `logo`, la barra queda exactamente igual que antes.
+- **`logoHref`** (por defecto `/`) y **`renderLogoLink`** para el router del producto, con el mismo
+  contrato que `SiteHeader`: recibe `href`, `className`, `aria-label` y `children`. Tipo nuevo
+  exportado: `AppHeaderLogoLinkProps`.
+- **`logoLabel`**, o sin él **`appHeader.logo`** del `BrandMessagesProvider` («Homenize, ir al
+  inicio»), como `siteHeader.logo`. Solo se lee con `logo`. Tipo nuevo: `AppHeaderMessages`.
+- **Una marca a la vez con el `Sidebar`.** La cabecera está siempre a la vista, encima de la columna y
+  del cajón, así que el `logo` va en uno solo —mejor en la cabecera, que se ve también en rail y con la
+  sidebar cerrada—. Si llegan los dos, dentro de un `AppShell` manda el de la cabecera: el armazón
+  oculta `.sidebar__header` mientras el `AppHeader` lleve `logo` (`:has`, sin JS, sin parpadeo en SSR).
+- Stories: `AppHeader` «Con logo», «Con una marca de producto», «Con logo (móvil)»; `AppShell` «Con logo
+  en la cabecera». Tests de story (orden, enlace, 40px de alto con `Logo xxl`, imagen 4:1 a 160×40, sin
+  logo nada cambia, sidebar sin marca) y unitarios (`AppHeader.test.tsx`).
+
 ## [49.22.0] — 2026-10-04
 
 > **Minor.** Muestra y selector de color: `ColorSwatch`, `ColorPicker` y `ColorPickerField`, sin

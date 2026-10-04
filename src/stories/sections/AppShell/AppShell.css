@@ -63,3 +63,12 @@
   opacity: var(--sidebar-backdrop-opacity);
   z-index: var(--sidebar-backdrop-z-index);
 }
+
+/* Una marca a la vez. La cabecera está siempre a la vista —encima de la
+   columna en escritorio y del cajón en móvil—, así que con `logo` en el
+   `AppHeader` el del `Sidebar` sería el mismo logotipo dos veces, uno debajo
+   del otro: manda el de la cabecera y la cabecera de la sidebar se oculta,
+   como ya hace en rail. Sin logo en la cabecera, nada cambia. */
+.app-shell:has(.app-header__logo) .sidebar__header {
+  display: none;
+}

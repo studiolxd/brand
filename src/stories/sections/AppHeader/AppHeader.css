@@ -30,3 +30,37 @@
   display: flex;
   align-items: center;
 }
+
+/* ---- La marca del producto (`logo`), entre el botón de menú y `start` ---- */
+
+.app-header__logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  /* El logo es un enlace: sin la línea que brand pone a todo <a>. */
+  padding-block-end: 0;
+  box-shadow: none;
+  color: inherit;
+  /* Mide lo que la barra le da, sea el `Logo` del sistema a la talla que sea:
+     se remapean sus tokens de talla en vez de ganarle con un selector, porque
+     `Logo` estila sus tallas con doble clase (mismo criterio que
+     `.site-header__logo`). */
+  --logo-height-sm:  var(--app-header-content-height);
+  --logo-height-md:  var(--app-header-content-height);
+  --logo-height-lg:  var(--app-header-content-height);
+  --logo-height-xl:  var(--app-header-content-height);
+  --logo-height-xxl: var(--app-header-content-height);
+}
+/* También en hover: la regla de hover de la base (`a:where():hover`, 0-1-0)
+   empata con esta clase y ganaría por orden de carga. */
+.app-header__logo:hover {
+  box-shadow: none;
+  color: inherit;
+}
+
+/* Una marca que no sea el `Logo` (un SVG, una imagen de cualquier proporción):
+   el alto de contenido de la barra y el ancho que dé su proporción. */
+.app-header__logo > * {
+  block-size: var(--app-header-content-height);
+  inline-size: auto;
+}

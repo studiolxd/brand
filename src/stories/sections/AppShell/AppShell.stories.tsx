@@ -89,6 +89,38 @@ const barraDeSistema = (
 );
 
 /**
+ * Con `logo` en la cabecera, la marca va arriba, siempre a la vista: el `logo`
+ * del `Sidebar` sobraría y el armazón lo oculta. Lo recomendado es pasarlo
+ * solo a la cabecera.
+ */
+export const ConLogoEnLaCabecera: Story = {
+  name: 'Con logo en la cabecera',
+  args: {
+    header: (
+      <AppHeader
+        sidebarId="sidebar"
+        logo={<Logo />}
+        notifications={<NotificationButton count={3} />}
+        end={<UserMenu compact name="Ana García" email="ana.garcia@studiolxd.com" items={[{ type: 'button', label: 'Cerrar sesión', onClick: () => {}, destructive: true }]} />}
+      />
+    ),
+  },
+};
+
+export const ContratoUnaSolaMarca: Story = {
+  name: 'Test — con logo en la cabecera, el del Sidebar no se ve',
+  tags: ['!dev'],
+  args: ConLogoEnLaCabecera.args,
+  play: async ({ canvasElement }) => {
+    const cabeceraSidebar = canvasElement.querySelector('.sidebar__header') as HTMLElement;
+    await expect(cabeceraSidebar).not.toBeNull();
+    await expect(getComputedStyle(cabeceraSidebar).display).toBe('none');
+    const logo = canvasElement.querySelector('.app-header__logo') as HTMLElement;
+    await expect(getComputedStyle(logo).display).not.toBe('none');
+  },
+};
+
+/**
  * La ranura `banner` va **por encima de todo, incluida la cabecera**: es para el
  * estado de sesión que no se puede perder de vista. El cuerpo sigue ocupando el
  * resto de la pantalla y la sidebar sigue midiendo el cien por cien del cuerpo.

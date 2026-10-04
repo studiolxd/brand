@@ -1,6 +1,41 @@
 import { type ReactNode } from 'react';
 import './AppHeader.css';
+export type AppHeaderLogoLinkProps = {
+    href: string;
+    className: string;
+    'aria-label': string;
+    children: ReactNode;
+};
+/**
+ * El único texto propio de la barra, y solo cuando lleva `logo`: es **cromo**,
+ * qué hace el logotipo («ir al inicio»), no qué marca es — el mismo criterio
+ * que `siteHeader.logo`.
+ */
+export interface AppHeaderMessages {
+    /** Texto accesible del enlace del logotipo. */
+    logo: string;
+}
 export interface AppHeaderProps {
+    /**
+     * La marca del producto, entre el botón de menú y `start`: un `Logo`, un SVG
+     * o una imagen de cualquier proporción. Toma el alto de contenido de la barra
+     * (`--app-header-content-height`) y el ancho que le dé su proporción; no hay
+     * que darle medidas. Sin `logo`, la barra no cambia.
+     */
+    logo?: ReactNode;
+    /** Destino del logotipo. Solo se usa con `logo`. */
+    logoHref?: string;
+    /**
+     * Texto accesible del enlace del logotipo. **Sin default**: sin él, sale de
+     * `appHeader.logo` del `BrandMessagesProvider`. Solo se lee con `logo`.
+     */
+    logoLabel?: string;
+    /**
+     * Enlace del logotipo para el router del producto. Recibe `href`, `className`,
+     * `aria-label` y `children`, y debe reenviarlos todos. Mismo contrato que en
+     * `SiteHeader`.
+     */
+    renderLogoLink?: (props: AppHeaderLogoLinkProps) => ReactNode;
     /** Tras el botón de menú: breadcrumb, buscador, título de página… */
     start?: ReactNode;
     /** Antes del avatar: la campana con su contador. Sitio fijo. */
@@ -24,6 +59,6 @@ export interface AppHeaderProps {
  * La barra superior de la aplicación, en todos los anchos. A la izquierda el
  * botón de menú, que abre el cajón en móvil y pliega/despliega la sidebar en
  * escritorio; a la derecha, notificaciones y cuenta. Entre medias, lo que la
- * página necesite.
+ * página necesite. Con `logo`, la marca del producto va justo tras el botón.
  */
-export declare function AppHeader({ start, notifications, end, menuLabel, menuCloseLabel, sidebarId, }: AppHeaderProps): import("react/jsx-runtime").JSX.Element;
+export declare function AppHeader({ logo, logoHref, logoLabel, renderLogoLink, start, notifications, end, menuLabel, menuCloseLabel, sidebarId, }: AppHeaderProps): import("react/jsx-runtime").JSX.Element;

@@ -42,6 +42,7 @@ export type {
   MenuButtonMessages,
   AppRootMessages,
   AppShellMessages,
+  AppHeaderMessages,
   SidebarMessages,
   SidebarNavMessages,
   SiteNavMessages,

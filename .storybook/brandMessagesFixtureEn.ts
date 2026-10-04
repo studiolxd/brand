@@ -244,6 +244,9 @@ export const brandMessagesFixtureEn: BrandMessages = {
   appShell: {
     skipToContent: 'Skip to main content',
   },
+  appHeader: {
+    logo: 'Studio LXD — go to the home page',
+  },
   sidebar: {
     label: 'Sidebar',
     resizer: 'Sidebar width',
