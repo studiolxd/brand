@@ -5,94 +5,88 @@ import { SkipLink as t } from "./skip-link.js";
 import { t as n } from "./_shared/css-properties.js";
 import { TooltipProvider as r } from "./tooltip.js";
 import { n as i, t as a } from "./_shared/appshellcontext.js";
-import { useCallback as o, useEffect as s, useMemo as c, useState as l } from "react";
-import { jsx as u, jsxs as d } from "react/jsx-runtime";
+import { t as o } from "./_shared/media-query.js";
+import { useCallback as s, useEffect as c, useMemo as l, useState as u } from "react";
+import { jsx as d, jsxs as f } from "react/jsx-runtime";
 //#region src/stories/sections/AppShell/AppShell.tsx
-var f = "(min-width: 1024px)";
-function p() {
-	let [e, t] = l(() => typeof window > "u" || typeof window.matchMedia != "function" ? !0 : window.matchMedia(f).matches);
-	return s(() => {
-		if (typeof window.matchMedia != "function") return;
-		let e = window.matchMedia(f), n = () => t(e.matches);
-		return n(), e.addEventListener("change", n), () => e.removeEventListener("change", n);
-	}, []), e;
-}
-function m({ banner: i, header: f, sidebar: m, children: h, contentFlush: g = !1, defaultSidebar: _ = "open", sidebarState: v, onSidebarChange: y, defaultSidebarWidth: b, onSidebarWidthChange: x, skipLabel: S }) {
-	let C = e("appShell"), w = p(), [T, E] = l(_), [D, O] = l(!1), [k, A] = l(b), j = w ? v ?? T : D ? "open" : "closed", M = o((e) => {
-		w ? (E(e), y?.(e)) : O(e === "open");
-	}, [w, y]), N = o(() => M(j === "open" ? "closed" : "open"), [M, j]), P = o(() => M("closed"), [M]), F = o((e) => {
-		A(e), x?.(e);
-	}, [x]);
-	s(() => {
-		if (w || !D) return;
+var p = "(min-width: 1024px)";
+function m({ banner: i, header: m, sidebar: h, children: g, contentFlush: _ = !1, defaultSidebar: v = "open", sidebarState: y, onSidebarChange: b, defaultSidebarWidth: x, onSidebarWidthChange: S, skipLabel: C }) {
+	let w = e("appShell"), T = o(p), E = T ?? !0, [D, O] = u(v), [k, A] = u(!1), [j, M] = u(x), N = E ? y ?? D : k ? "open" : "closed", P = s((e) => {
+		E ? (O(e), b?.(e)) : A(e === "open");
+	}, [E, b]), F = s(() => P(N === "open" ? "closed" : "open"), [P, N]), I = s(() => P("closed"), [P]), L = s((e) => {
+		M(e), S?.(e);
+	}, [S]);
+	c(() => {
+		if (E || !k) return;
 		let e = (e) => {
-			e.key === "Escape" && O(!1);
+			e.key === "Escape" && A(!1);
 		};
 		document.addEventListener("keydown", e);
 		let t = document.body.style.overflow;
 		return document.body.style.overflow = "hidden", () => {
 			document.removeEventListener("keydown", e), document.body.style.overflow = t;
 		};
-	}, [w, D]);
-	let I = c(() => ({
-		sidebar: j,
-		setSidebar: M,
-		sidebarWidth: k ?? 0,
-		setSidebarWidth: F,
-		toggleSidebar: N,
-		closeSidebar: P,
-		isDesktop: w
+	}, [E, k]);
+	let R = l(() => ({
+		sidebar: N,
+		setSidebar: P,
+		sidebarWidth: j ?? 0,
+		setSidebarWidth: L,
+		toggleSidebar: F,
+		closeSidebar: I,
+		isDesktop: E
 	}), [
-		j,
-		M,
-		k,
-		F,
 		N,
 		P,
-		w
-	]), [L, R] = l(0), z = o((e) => {
+		j,
+		L,
+		F,
+		I,
+		E
+	]), [z, B] = u(0), V = s((e) => {
 		if (!e) return;
-		let t = () => R(e.getBoundingClientRect().height);
+		let t = () => B(e.getBoundingClientRect().height);
 		if (t(), typeof ResizeObserver > "u") return;
 		let n = new ResizeObserver(t);
 		return n.observe(e), () => {
-			n.disconnect(), R(0);
+			n.disconnect(), B(0);
 		};
-	}, []), B = n({
-		"--app-shell-sidebar-width": k ? `${k}px` : void 0,
-		"--app-shell-banner-height": i ? `${L}px` : void 0
-	}), V = !w && D;
-	return /* @__PURE__ */ u(a.Provider, {
-		value: I,
-		children: /* @__PURE__ */ d(r, { children: [/* @__PURE__ */ u(t, {
+	}, []), H = n({
+		"--app-shell-sidebar-width": j ? `${j}px` : void 0,
+		"--app-shell-banner-height": i ? `${z}px` : void 0
+	}), U = !E && k;
+	return /* @__PURE__ */ d(a.Provider, {
+		value: R,
+		children: /* @__PURE__ */ f(r, { children: [/* @__PURE__ */ d(t, {
 			href: "#main-content",
-			children: C("skipToContent", S)
-		}), /* @__PURE__ */ d("div", {
-			ref: B,
+			children: w("skipToContent", C)
+		}), /* @__PURE__ */ f("div", {
+			ref: H,
 			className: "app-shell",
-			"data-sidebar": j,
+			"data-sidebar": N,
+			"data-layout": T === null ? void 0 : E ? "column" : "drawer",
 			children: [
-				i && /* @__PURE__ */ u("div", {
-					ref: z,
+				i && /* @__PURE__ */ d("div", {
+					ref: V,
 					className: "app-shell__banner",
 					children: i
 				}),
-				f,
-				/* @__PURE__ */ d("div", {
+				m,
+				/* @__PURE__ */ f("div", {
 					className: "app-shell__body",
 					children: [
-						m,
-						V && /* @__PURE__ */ u("div", {
+						h,
+						U && /* @__PURE__ */ d("div", {
 							className: "app-shell__backdrop",
-							onClick: P,
+							onClick: I,
 							"aria-hidden": "true"
 						}),
-						/* @__PURE__ */ u("main", {
+						/* @__PURE__ */ d("main", {
 							id: "main-content",
 							tabIndex: -1,
-							className: g ? "app-shell__content app-shell__content--flush" : "app-shell__content",
-							inert: V || void 0,
-							children: h
+							className: _ ? "app-shell__content app-shell__content--flush" : "app-shell__content",
+							inert: U || void 0,
+							children: g
 						})
 					]
 				})

@@ -7,6 +7,35 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.24.1] — 2026-10-04
+
+> **Patch.** `AppShell` y `ChatShell` ya no rompen la hidratación por debajo del punto de ruptura de
+> escritorio (encargo de Homenize: Next.js 16 con SSR, a 1000px de ancho, React 19 daba «Hydration
+> failed because the server rendered HTML didn't match the client» en cada carga). Sin cambios de API.
+
+### El ancho se lee sin desajustar el HTML del servidor
+
+- El servidor no conoce el ancho y pinta la versión de escritorio; el primer render del cliente leía
+  `matchMedia` en el estado inicial y, por debajo de `breakpoint.lg`, pintaba el cajón: otro
+  `aria-label`/`aria-expanded` en el botón de menú, otra clase, `data-state`, `inert` y `tabIndex` en
+  el `aside` de la `Sidebar`, y el asa de redimensión de menos.
+- Nuevo hook interno `useMediaQuery` (`src/stories/constants/media-query.ts`) sobre
+  `useSyncExternalStore`, con una instantánea de servidor fija (`null`, «todavía no se sabe»): servidor
+  y render de hidratación pintan lo mismo, y React vuelve a pintar con el valor real nada más hidratar.
+  Un render solo de cliente lee el valor real desde el principio.
+- `AppShell` y `ChatShell` publican la forma que han tomado en **`data-layout`** (`column`/`drawer`);
+  sin el atributo, aún no la saben. Por debajo de lg, su hoja esconde la columna mientras falte el
+  atributo —y el `AppShell` deja el glifo de menú en «menú»—, así que el HTML del servidor ya se ve
+  como el cajón cerrado: ni parpadeo ni salto de maquetación al hidratar.
+- Una vez montado, todo igual: en escritorio la barra abierta y redimensionable; en móvil el cajón
+  cerrado, con `inert`, foco, `aria-expanded` y `aria-controls`.
+- Revisados sin cambios: `SiteHeader` (el panel lo resuelve el CSS), `OrgSwitcher`, `Carousel` y
+  `ConversationThread` (solo leen `prefers-reduced-motion` dentro de efectos) y `Chart` (mide con
+  `ResizeObserver` tras montar). Las versiones nativas no hidratan y no tienen `AppShell`.
+- Test nuevo (`AppShell.hydration.test.tsx`): `renderToString` + `hydrateRoot` del `AppShell` con
+  `AppHeader` y `Sidebar`, y del `ChatShell`, a 1000px y a 1280px, sin ningún `console.error` ni
+  error recuperable.
+
 ## [49.24.0] — 2026-10-04
 
 > **Minor.** Disparador propio y ancla sin disparador en `ColorPicker`, a petición de creator (la barra

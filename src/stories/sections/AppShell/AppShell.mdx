@@ -68,6 +68,12 @@ vuelta y el título) lo lleva en un `Container`. El reparto del alto, en
 
 La misma sidebar entra como cajón sobre un velo; el contenido queda `inert` y sin scroll. Se cierra con Escape, tocando el velo, con el botón de menú o **al navegar** (cualquier enlace dentro de ella). No hay rail ni redimensión: solo abierto o cerrado.
 
+## Con renderizado en servidor
+
+El servidor no conoce el ancho de la ventana, así que pinta la versión de escritorio: barra abierta, asa y botón de menú en «cerrar». El primer render del cliente pinta **exactamente lo mismo** —si leyera ya el ancho, React 19 tiraría la hidratación por desajuste— y, nada más hidratar, vuelve a pintar con el cajón. Entre medias, por debajo de `breakpoint.lg`, la hoja del armazón esconde la columna y deja el glifo de menú, así que en pantalla se ve el cajón cerrado desde el primer pintado: ni parpadeo ni salto de maquetación.
+
+El armazón publica qué forma ha tomado en `data-layout` (`column` o `drawer`); sin el atributo, todavía no lo sabe.
+
 ## Accesibilidad
 
 - El botón de menú dice qué controla (`aria-controls` con el `id` de la sidebar) y si está abierta (`aria-expanded`).

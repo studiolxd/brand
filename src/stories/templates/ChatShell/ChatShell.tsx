@@ -1,10 +1,11 @@
 'use client';
 
-import { forwardRef, useCallback, useEffect, useState, type ReactNode } from 'react';
+import { forwardRef, useCallback, useState, type ReactNode } from 'react';
 import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Sheet } from '../../molecules/Sheet/Sheet';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { useMediaQuery } from '../../constants/media-query';
 import './ChatShell.css';
 
 /**
@@ -98,9 +99,11 @@ export const ChatShell = forwardRef<HTMLDivElement, ChatShellProps>(function Cha
   ...rest
 }, ref) {
   const t = useBrandMessages('chatShell');
-  const [isDesktop, setIsDesktop] = useState(() =>
-    typeof window === 'undefined' ? true : window.matchMedia(DESKTOP_MQ).matches,
-  );
+  // `null` en el servidor y al hidratar: se pinta la columna, la misma en los
+  // dos lados, y `ChatShell.css` la esconde por debajo del punto de ruptura
+  // hasta que React vuelve a pintar con el cajón (`data-layout`).
+  const desktopMatch = useMediaQuery(DESKTOP_MQ);
+  const isDesktop = desktopMatch ?? true;
   const [selfOpen, setSelfOpen] = useState(false);
   /*
    * El nodo raíz, en estado y no en una ref: el `container` del cajón tiene
@@ -117,19 +120,14 @@ export const ChatShell = forwardRef<HTMLDivElement, ChatShellProps>(function Cha
     [ref],
   );
 
-  useEffect(() => {
-    const mq = window.matchMedia(DESKTOP_MQ);
-    const onChange = () => {
-      setIsDesktop(mq.matches);
-      // Al cruzar a escritorio la lista vuelve a ser columna: el cajón deja de
-      // existir y su bandera se limpia, para que al volver a estrechar no
-      // reaparezca abierto.
-      if (mq.matches) setSelfOpen(false);
-    };
-    onChange();
-    mq.addEventListener('change', onChange);
-    return () => mq.removeEventListener('change', onChange);
-  }, []);
+  // Al cruzar a escritorio la lista vuelve a ser columna: el cajón deja de
+  // existir y su bandera se limpia, para que al volver a estrechar no
+  // reaparezca abierto. Se ajusta durante el render, no en un efecto.
+  const [prevDesktop, setPrevDesktop] = useState(desktopMatch);
+  if (desktopMatch !== prevDesktop) {
+    setPrevDesktop(desktopMatch);
+    if (desktopMatch) setSelfOpen(false);
+  }
 
   const setDrawerOpen = useCallback(
     (next: boolean) => {
@@ -151,7 +149,12 @@ export const ChatShell = forwardRef<HTMLDivElement, ChatShellProps>(function Cha
   ].filter(Boolean).join(' ');
 
   return (
-    <div ref={setRefs} className={classes} {...rest}>
+    <div
+      ref={setRefs}
+      className={classes}
+      data-layout={desktopMatch === null ? undefined : isDesktop ? 'column' : 'drawer'}
+      {...rest}
+    >
       {asColumn && (
         <aside className="chat-shell__list" aria-label={t('list', listLabel)}>
           {list}
