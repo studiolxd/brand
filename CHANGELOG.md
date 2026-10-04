@@ -7,7 +7,10 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## [Sin publicar]
+## [49.21.0] — 2026-10-04
+
+> **Minor, solo nativo.** `Banner`, `Menu`/`ContextMenu`, `Tabs`, `DatePickerField` y `PageIntro` en SwiftUI (iOS y
+> macOS) y Compose, con la misma API que React. El paquete de npm no cambia.
 
 ### Brand nativo R6 — las piezas que la primera app tuvo que hacer por su cuenta
 
