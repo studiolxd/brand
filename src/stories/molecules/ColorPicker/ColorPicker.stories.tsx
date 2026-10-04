@@ -300,3 +300,39 @@ export const ContratoTalla: Story = {
     await expect(lado('[data-t="lg"] .color-picker__trigger')).toEqual([48, 48]);
   },
 };
+
+/**
+ * Test: con `open` controlado, quien lo usa cierra el panel al elegir —en
+ * `onValueCommitted`—, que es lo que hace la celda de una tabla.
+ */
+export const ContratoAperturaControlada: Story = {
+  name: 'Test — apertura controlada: se cierra al elegir',
+  tags: ['!dev'],
+  args: { 'aria-label': 'Color de acento', presets: PALETA, onOpenChange: fn() },
+  render: function AperturaControlada(args) {
+    const [abierto, setAbierto] = useState(false);
+    const [valor, setValor] = useState<string | null>('#000000');
+    return (
+      <Inline gap="sm" align="center">
+        <ColorPicker
+          {...args}
+          value={valor}
+          open={abierto}
+          onOpenChange={(next, details) => { setAbierto(next); args.onOpenChange?.(next, details); }}
+          onValueChange={setValor}
+          onValueCommitted={(hex) => { args.onValueCommitted?.(hex); setAbierto(false); }}
+        />
+        <code>{valor}</code>
+      </Inline>
+    );
+  },
+  play: async ({ canvasElement, args }) => {
+    const { canvas, body } = await abrir(canvasElement);
+    await expect(args.onOpenChange).toHaveBeenLastCalledWith(true, expect.anything());
+    await userEvent.click(within(body.getByRole('group', { name: 'Colores predefinidos' })).getByRole('button', { name: 'Cayena' }));
+    await expect(args.onValueCommitted).toHaveBeenLastCalledWith('#f05e1c');
+    await waitFor(() => expect(body.queryByRole('dialog')).toBeNull());
+    await expect(canvas.getByText('#f05e1c')).toBeInTheDocument();
+    await expect(canvas.getByRole('button', { name: 'Color de acento' })).toHaveAttribute('aria-expanded', 'false');
+  },
+};

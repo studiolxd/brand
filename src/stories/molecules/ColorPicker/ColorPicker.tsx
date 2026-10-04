@@ -6,6 +6,7 @@ import { Button } from '../../atoms/Button/Button';
 import { ColorSwatch } from '../../atoms/ColorSwatch/ColorSwatch';
 import { Input } from '../../atoms/Input/Input';
 import { Popover } from '../../atoms/Popover/Popover';
+import type { PopoverChangeDetails } from '../../atoms/Popover/Popover';
 import { Slider } from '../../atoms/Slider/Slider';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { useCssProperties } from '../../constants/css-properties';
@@ -89,10 +90,25 @@ export interface ColorPickerProps {
   /** Añade «Quitar color» al pie del panel. */
   clearable?: boolean;
   /**
-   * Se llama al quitar el color, y el panel se cierra. Sin controlar, el
-   * valor pasa a `null`.
+   * Se llama al quitar el color, y el panel se cierra (con `open` controlado,
+   * lo cierra quien lo controla, aquí mismo). Sin controlar, el valor pasa a
+   * `null`.
    */
   onClear?: () => void;
+  /**
+   * Panel abierto (controlado). Sin él, el panel se abre con el disparador y
+   * se cierra con Escape, con un clic fuera o al quitar el color; elegir un
+   * color **no** lo cierra. Controlado, quien lo usa puede cerrarlo en
+   * `onValueCommitted`.
+   */
+  open?: boolean;
+  /** Panel abierto al montar (no controlado). */
+  defaultOpen?: boolean;
+  /**
+   * Se llama al abrirse y al cerrarse por el disparador, Escape o un clic
+   * fuera. El segundo argumento es el detalle de Base UI, como en `Popover`.
+   */
+  onOpenChange?: (open: boolean, details: PopoverChangeDetails) => void;
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
   /** Pone el disparador en error (lo hace el campo cuando trae `errorMessage`). */
@@ -142,6 +158,9 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(funct
     presets,
     clearable = false,
     onClear,
+    open: openProp,
+    defaultOpen = false,
+    onOpenChange,
     size = 'md',
     disabled = false,
     error = false,
@@ -159,7 +178,8 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(funct
 ) {
   const t = useBrandMessages('colorPicker');
   const rtl = useDirection() === 'rtl';
-  const [open, setOpen] = useState(false);
+  const [openInner, setOpenInner] = useState(defaultOpen);
+  const open = openProp ?? openInner;
 
   const controlled = value !== undefined;
   const [inner, setInner] = useState<string | null>(defaultValue);
@@ -192,8 +212,14 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(funct
     [alpha, controlled, onValueChange, onValueCommitted],
   );
 
-  // El hex mientras se escribe; `null` es «enseña el valor».
+  // El hex mientras se escribe; `null` es «enseña el valor». Se descarta al
+  // cerrarse el panel, lo cierre el selector o quien lo controla.
   const [draft, setDraft] = useState<string | null>(null);
+  const [wasOpen, setWasOpen] = useState(open);
+  if (open !== wasOpen) {
+    setWasOpen(open);
+    if (!open) setDraft(null);
+  }
 
   const applyDraft = (text: string, commit: boolean) => {
     const normal = normalizeHex(text, alpha);
@@ -222,13 +248,13 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(funct
   const handleClear = () => {
     if (!controlled) setInner(null);
     onClear?.();
-    setOpen(false);
+    if (openProp === undefined) setOpenInner(false);
   };
 
-  const handleOpenChange = (next: boolean) => {
+  const handleOpenChange = (next: boolean, details: PopoverChangeDetails) => {
     if (next && disabled) return;
-    if (!next) setDraft(null);
-    setOpen(next);
+    if (openProp === undefined) setOpenInner(next);
+    onOpenChange?.(next, details);
   };
 
   const areaThumbRef = useRef<HTMLDivElement | null>(null);

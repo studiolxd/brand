@@ -58,6 +58,29 @@ valor pasa a `null`.
 
 <Canvas of={ColorPickerStories.ConQuitar} />
 
+## Apertura controlada
+
+Por defecto el panel se abre con el disparador y se cierra con `Escape`, con un clic fuera o al
+quitar el color; elegir un color **no** lo cierra, para poder ajustar. Para cerrarlo al elegir —la
+celda de una tabla—, `open` + `onOpenChange` (los mismos nombres y la misma forma que en `Popover`,
+con el detalle de Base UI como segundo argumento) y se cierra en `onValueCommitted`.
+`defaultOpen` lo abre al montar sin controlarlo. Controlado, «Quitar color» no lo cierra solo:
+se cierra en `onClear`.
+
+```tsx
+const [abierto, setAbierto] = useState(false);
+
+<ColorPicker
+  aria-label="Fondo de la celda"
+  value={celda.color}
+  open={abierto}
+  onOpenChange={setAbierto}
+  onValueCommitted={(hex) => { guardar(hex); setAbierto(false); }}
+  clearable
+  onClear={() => { guardar(null); setAbierto(false); }}
+/>
+```
+
 ## Tallas y estados
 
 El disparador es un control cuadrado a la talla de los campos —32, 40 y 48— con su mismo borde,

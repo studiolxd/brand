@@ -26,6 +26,9 @@ Ahora tiene sus piezas:
   de opacidad (`alpha`), el campo hex, los predefinidos (`presets`, con `title`) y «Quitar color»
   (`clearable` + `onClear`). Emite siempre hex en minúsculas, `#rrggbb` o `#rrggbbaa`;
   `onValueChange` en cada paso y `onValueCommitted` al terminar el gesto.
+- **Apertura controlada**: `open`, `defaultOpen` y `onOpenChange(open, details)`, con la forma del
+  `Popover`, en `ColorPicker` y `ColorPickerField`. Por defecto elegir no cierra el panel; quien
+  quiera cerrarlo al elegir —la celda de una tabla— lo hace en `onValueCommitted`.
 - **`ColorPickerField`** (molécula, `@studiolxd/brand/color-picker-field`): el selector con etiqueta,
   ayuda y error, como `DatePickerField`.
 
