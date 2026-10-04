@@ -101,6 +101,15 @@ class ListsSnapshotTest {
         }
     }
 
+    /** Filas fuera de `BrandList`: toman la tinta del esquema (en oscuro, blanca), no el negro de `BasicText`. */
+    @Test
+    fun listItemOutsideList() = paparazzi.brandSnapshots {
+        Column(verticalArrangement = Arrangement.spacedBy(BrandSpacing.s2)) {
+            BrandListItem(secondary = { BrandText("Avisos de la comunidad") }, trailing = { BrandText("Sí") }) { BrandText("Notificaciones") }
+            BrandListItem("Idioma", subtitle = "Español")
+        }
+    }
+
     @Test
     fun tagVariants() = paparazzi.brandSnapshots {
         Column(verticalArrangement = Arrangement.spacedBy(BrandSpacing.s2)) {

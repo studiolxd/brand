@@ -25,6 +25,10 @@ export default defineConfig({
         ],
         test: {
           name: 'storybook',
+          // Cada story es un test en un Chromium compartido por todos los ficheros en paralelo: con la máquina
+          // cargada hasta una story sin `play` (Menu «Trigger de icono») pasaba de los 20 s y daba un falso rojo.
+          testTimeout: 60000,
+          hookTimeout: 60000,
           browser: {
             enabled: true,
             headless: true,

@@ -149,23 +149,31 @@ fun BrandListItem(
     content: @Composable () -> Unit,
 ) {
     val clickable = if (onClick != null) Modifier.clickable(role = Role.Button, onClick = onClick) else Modifier
-    Row(
-        modifier = modifier.fillMaxWidth().then(clickable),
-        horizontalArrangement = Arrangement.spacedBy(T.listItemGap),
-        verticalAlignment = Alignment.CenterVertically,
+    // La fila fija su propia tinta y tipografía: fuera de un `BrandList` (una fila suelta en una pantalla) el
+    // contenido no hereda nada y el texto de `BrandListItem(text)` (un `BasicText` sin color) saldría negro en oscuro.
+    val color = T.listColor.current
+    ProvideBrandContent(
+        color = color,
+        textStyle = brandTextStyle(T.listFontSize, T.listFontWeight, T.listLineHeight, T.listLetterSpacing, color = color),
     ) {
-        if (leading != null) leading()
-        Column(Modifier.weight(1f)) {
-            content()
-            if (secondary != null) {
-                val color = T.listSecondaryColor.current
-                ProvideBrandContent(
-                    color = color,
-                    textStyle = brandTextStyle(T.listSecondaryFontSize, T.listFontWeight, T.listSecondaryLineHeight, T.listLetterSpacing, color = color),
-                ) { secondary() }
+        Row(
+            modifier = modifier.fillMaxWidth().then(clickable),
+            horizontalArrangement = Arrangement.spacedBy(T.listItemGap),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            if (leading != null) leading()
+            Column(Modifier.weight(1f)) {
+                content()
+                if (secondary != null) {
+                    val secondaryColor = T.listSecondaryColor.current
+                    ProvideBrandContent(
+                        color = secondaryColor,
+                        textStyle = brandTextStyle(T.listSecondaryFontSize, T.listFontWeight, T.listSecondaryLineHeight, T.listLetterSpacing, color = secondaryColor),
+                    ) { secondary() }
+                }
             }
+            if (trailing != null) trailing()
         }
-        if (trailing != null) trailing()
     }
 }
 
