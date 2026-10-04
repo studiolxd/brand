@@ -18,8 +18,9 @@ if [ "$wide" -gt 640 ]; then pct=$(( 64000 / wide )); fi
 target_w=$(( wide * pct / 100 ))
 mkdir -p "$dir"
 cp "$react" "$dir/$name.react.$scheme.png"
-screen=$(( w > h ? w : h ))
 img_w=$(magick identify -format %w "$android")
-cw=$(( w * img_w / screen )); ch=$(( h * img_w / screen ))
+# La imagen mide siempre `ancho-dp` × (px por dp) de ancho —también con un lienzo más alto que ancho, donde la pantalla
+# solo crece en alto—: el recorte es todo el ancho y `alto-dp` × (px por dp) de alto.
+cw=$img_w; ch=$(( h * img_w / w ))
 magick "$android" -crop "${cw}x${ch}+0+0" +repage -resize "${target_w}x" -strip -define png:compression-level=9 "$dir/$name.android.$scheme.png"
 echo "✔ $dir/$name.{react,android}.$scheme.png (${pct}%)"
