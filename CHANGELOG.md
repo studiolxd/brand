@@ -25,6 +25,8 @@ para breaking changes.
   llegara antes o después de la fotografía, salían el anillo de foco y el cursor. Las capturas ya no piden foco
   (`autofocus: false` en el `init` interno con estado); el componente público lo sigue haciendo.
   Las referencias de iOS de esa captura se regrabaron sin foco (antes llevaban el anillo).
+- **Compose · captura `NumberInputField` `compact`** desfasada (1 px de desplazamiento vertical respecto al render actual;
+  regrabada dos veces con bytes idénticos, así que es determinista): referencia actualizada.
 - **Compose · título de `BrandSheet`**: comparado con React y SwiftUI, los tres leen el mismo token
   (`sheet.title-font-size` → `modal.title-font-size`, 32 px, peso 500): no hay diferencia y no se cambia nada.
 
