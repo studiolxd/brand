@@ -12,8 +12,11 @@ export type AppHeaderLogoLinkProps = {
  * que `siteHeader.logo`.
  */
 export interface AppHeaderMessages {
-    /** Texto accesible del enlace del logotipo. */
-    logo: string;
+    /**
+     * Texto accesible del enlace del logotipo. Opcional, como el espacio entero:
+     * solo hace falta si algún `AppHeader` lleva `logo` sin `logoLabel`.
+     */
+    logo?: string;
 }
 export interface AppHeaderProps {
     /**

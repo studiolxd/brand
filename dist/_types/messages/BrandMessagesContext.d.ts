@@ -11,8 +11,14 @@ export declare const BrandMessagesContext: import("react").Context<BrandMessages
  * consumidor la pasa.
  */
 export interface BrandMessagesReader<K extends keyof BrandMessages> {
-    <N extends keyof BrandMessages[K]>(key: N, override?: BrandMessages[K][N]): BrandMessages[K][N];
+    <N extends keyof BrandMessagesNamespace<K>>(key: N, override?: BrandMessagesNamespace<K>[N]): NonNullable<BrandMessagesNamespace<K>[N]>;
 }
+/**
+ * El espacio de un componente, sin el `undefined` de los espacios opcionales
+ * (`appHeader`): el lector nunca devuelve `undefined`, porque si el texto
+ * falta lanza.
+ */
+export type BrandMessagesNamespace<K extends keyof BrandMessages> = NonNullable<BrandMessages[K]>;
 /**
  * El lector del espacio de un componente. Se llama **en el punto donde el
  * texto se pinta**, no al principio del render: así un componente que no

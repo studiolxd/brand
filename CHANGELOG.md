@@ -7,6 +7,26 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.23.1] — 2026-10-04
+
+> **Patch.** `appHeader` pasa a ser **opcional** en `BrandMessages`. En 49.23.0 entró obligatorio y un
+> catálogo tipado estricto —un literal pasado a `BrandMessagesProvider` sin conversión, como el de
+> `public-shell` en slxd— dejaba de compilar aunque no usara el logo: una minor no puede romper la
+> compilación de nadie. Si ya declaraste `appHeader`, no hay que tocar nada.
+
+- `BrandMessages.appHeader?` y `AppHeaderMessages.logo?`: solo hacen falta si algún `AppHeader` lleva
+  `logo` sin `logoLabel`.
+- **Si ese caso llega sin `appHeader.logo` en el catálogo, `AppHeader` lanza** («el catálogo montado no
+  trae «appHeader.logo»»), igual que cualquier otra clave ausente: no hay castellano de respaldo y un
+  enlace sin nombre accesible tiene que verse en desarrollo. Documentado en `AppHeader` §
+  «Internacionalización».
+- `BrandMessagesReader` lee los espacios opcionales sin `undefined` en el tipo devuelto (tipo nuevo
+  `BrandMessagesNamespace`); para los espacios obligatorios no cambia nada.
+- Test de tipos (`BrandMessages.types.test.ts`): compila con el compilador de TypeScript un catálogo
+  sin `appHeader` contra `BrandMessages`, con un caso de control que sí debe fallar.
+- Revisado el resto de 49.23.0: no añadió ningún otro campo obligatorio a tipos públicos (las props
+  nuevas de `AppHeader` ya eran opcionales).
+
 ## [49.23.0] — 2026-10-04
 
 > **Minor.** Ranura `logo` en `AppHeader`, a petición de Homenize. Espacio nuevo `appHeader` en

@@ -8,7 +8,9 @@ const marca = <svg viewBox="0 0 120 24" data-testid="marca" />;
 
 describe('AppHeader — ranura logo', () => {
   it('sin logo no pinta enlace ni exige appHeader.logo del catálogo', () => {
-    const catalogo = { ...ES, appHeader: undefined } as unknown as typeof ES;
+    // Sin conversión: desde v49.23.1 `appHeader` es opcional en el tipo.
+    const { appHeader: _sinAppHeader, ...catalogo } = ES;
+    void _sinAppHeader;
     render(
       <BrandMessagesProvider messages={catalogo}>
         <AppHeader />
@@ -24,7 +26,7 @@ describe('AppHeader — ranura logo', () => {
         <AppHeader logo={marca} logoHref="/inicio" start={<span>Inicio</span>} />
       </BrandMessagesProvider>,
     );
-    const enlace = screen.getByRole('link', { name: ES.appHeader.logo });
+    const enlace = screen.getByRole('link', { name: ES.appHeader?.logo });
     expect(enlace).toHaveAttribute('href', '/inicio');
     expect(enlace).toHaveClass('app-header__logo');
     expect(enlace).toContainElement(screen.getByTestId('marca'));
@@ -34,6 +36,35 @@ describe('AppHeader — ranura logo', () => {
     expect(hijos[0]).toBe(screen.getByRole('button'));
     expect(hijos[1]).toBe(enlace);
     expect(hijos[2]).toHaveClass('app-header__start');
+  });
+
+  it('con logo, sin logoLabel y sin appHeader.logo en el catálogo, lanza como cualquier clave ausente', () => {
+    const { appHeader: _sinAppHeader, ...catalogo } = ES;
+    void _sinAppHeader;
+    const consola = console.error;
+    console.error = () => {};
+    try {
+      expect(() =>
+        render(
+          <BrandMessagesProvider messages={catalogo}>
+            <AppHeader logo={marca} />
+          </BrandMessagesProvider>,
+        ),
+      ).toThrow('el catálogo montado no trae «appHeader.logo»');
+    } finally {
+      console.error = consola;
+    }
+  });
+
+  it('con logo y logoLabel, el catálogo no necesita appHeader', () => {
+    const { appHeader: _sinAppHeader, ...catalogo } = ES;
+    void _sinAppHeader;
+    render(
+      <BrandMessagesProvider messages={catalogo}>
+        <AppHeader logo={marca} logoLabel="Homenize, ir al inicio" />
+      </BrandMessagesProvider>,
+    );
+    expect(screen.getByRole('link', { name: 'Homenize, ir al inicio' })).toBeInTheDocument();
   });
 
   it('logoHref por defecto es la raíz y logoLabel gana al catálogo', () => {
@@ -60,7 +91,7 @@ describe('AppHeader — ranura logo', () => {
         />
       </BrandMessagesProvider>,
     );
-    expect(recibidas[0]).toMatchObject({ href: '/panel', className: 'app-header__logo', 'aria-label': ES.appHeader.logo });
+    expect(recibidas[0]).toMatchObject({ href: '/panel', className: 'app-header__logo', 'aria-label': ES.appHeader?.logo });
     expect(screen.getByRole('link')).toHaveAttribute('data-router', 'sí');
   });
 });
