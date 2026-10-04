@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -35,6 +36,20 @@ fun BrandCloseButton(
     contentDescription: String = "Cerrar",
     size: BrandControlSize = BrandControlSize.Md,
     interactionSource: MutableInteractionSource? = null,
+) = BrandCloseButtonInk(onClick, modifier, contentDescription, size, interactionSource, ink = null)
+
+/**
+ * El aspa con la tinta que ponga quien la usa ([ink], para el glifo y el anillo de foco): el `Banner` la fija a la del
+ * relleno (`--close-button-color` en React). Sin [ink], la del tema. Interno.
+ */
+@Composable
+internal fun BrandCloseButtonInk(
+    onClick: () -> Unit,
+    modifier: Modifier,
+    contentDescription: String,
+    size: BrandControlSize,
+    interactionSource: MutableInteractionSource?,
+    ink: Color?,
 ) {
     val source = interactionSource ?: remember { MutableInteractionSource() }
     val state = source.collectBrandInteractionState()
@@ -46,11 +61,11 @@ fun BrandCloseButton(
     Box(
         modifier = modifier
             .size(side)
-            .brandFocusRing(state.focusVisible, T.focusRingColor.current, T.focusRingWidth, T.focusRingOffset)
+            .brandFocusRing(state.focusVisible, ink ?: T.focusRingColor.current, T.focusRingWidth, T.focusRingOffset)
             .clickable(interactionSource = source, indication = null, role = Role.Button, onClick = onClick)
             .semantics { this.contentDescription = contentDescription },
         contentAlignment = Alignment.Center,
     ) {
-        BrandIcon(BrandIconName.Close, size = BrandIconSize.Md, color = T.color.current)
+        BrandIcon(BrandIconName.Close, size = BrandIconSize.Md, color = ink ?: T.color.current)
     }
 }
