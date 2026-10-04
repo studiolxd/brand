@@ -194,31 +194,34 @@ export const SuperficieOscura: Story = {
  * Es lo que fallaba con el neutro en oscuro —relleno blanco y aspa blanca—.
  */
 async function comprobarTintas() {
-  const lanzadores: Array<[string, () => void]> = [
-    ['default', () => toast('Neutro')],
-    ['success', () => toast.success('Éxito')],
-    ['error', () => toast.error('Error')],
-    ['warning', () => toast.warning('Aviso')],
-    ['info', () => toast.info('Información')],
-    ['loading', () => toast.loading('Cargando')],
+  const lanzadores: Array<[string, string, () => void]> = [
+    ['default', 'Neutro', () => toast('Neutro')],
+    ['success', 'Éxito', () => toast.success('Éxito')],
+    ['error', 'Error', () => toast.error('Error')],
+    ['warning', 'Aviso', () => toast.warning('Aviso')],
+    ['info', 'Información', () => toast.info('Información')],
+    ['loading', 'Cargando', () => toast.loading('Cargando')],
   ];
-  for (const [tipo, lanzar] of lanzadores) {
+  for (const [tipo, titulo, lanzar] of lanzadores) {
     toast.dismiss();
     lanzar();
-    const aviso = await waitFor(() => {
-      const el = document.querySelector<HTMLElement>('.toast');
-      if (!el) throw new Error(`sin aviso ${tipo}`);
-      return el;
+    // El aviso se busca por su título y se miden sus tintas de una vez: tras
+    // `dismiss()` el anterior sigue montado mientras sale, y un nodo que se
+    // desmonta entre la búsqueda y la lectura devuelve '' en `getComputedStyle`.
+    const tintas = await waitFor(() => {
+      const aviso = Array.from(document.querySelectorAll<HTMLElement>('.toast')).find(
+        (el) => el.querySelector('.alert__title')?.textContent === titulo,
+      );
+      const aspa = aviso?.querySelector<HTMLElement>('.alert__close');
+      if (!aviso || !aspa) throw new Error(`sin aviso ${tipo}`);
+      const fondo = getComputedStyle(aviso).backgroundColor;
+      const tintaTitulo = getComputedStyle(aviso.querySelector('.alert__title')!).color;
+      const tintaAspa = getComputedStyle(aspa).color;
+      if (!fondo || !tintaTitulo || !tintaAspa) throw new Error(`aviso ${tipo} sin estilos`);
+      return { fondo, tintaTitulo, tintaAspa };
     });
-    const aspa = await waitFor(() => {
-      const el = aviso.querySelector<HTMLElement>('.alert__close');
-      if (!el) throw new Error(`sin aspa ${tipo}`);
-      return el;
-    });
-    const fondo = getComputedStyle(aviso).backgroundColor;
-    const tintaTitulo = getComputedStyle(aviso.querySelector('.alert__title')!).color;
-    await expect(getComputedStyle(aspa).color, `aspa ${tipo}`).toBe(tintaTitulo);
-    await expect(tintaTitulo, `título ${tipo}`).not.toBe(fondo);
+    await expect(tintas.tintaAspa, `aspa ${tipo}`).toBe(tintas.tintaTitulo);
+    await expect(tintas.tintaTitulo, `título ${tipo}`).not.toBe(tintas.fondo);
   }
   toast.dismiss();
 }

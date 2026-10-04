@@ -23,6 +23,9 @@ public struct BrandConfirmDialog<Extra: View>: View {
     private let secondaryActionLabel: LocalizedStringKey?
     private let onSecondaryAction: (() -> Void)?
     private let phrase: Phrase?
+    /// `false` solo en las capturas: dar el foco al campo en `onAppear` es una carrera con la fotografía (con foco salen
+    /// el anillo y el cursor parpadeante), y una captura tiene que salir igual cada vez.
+    private let autofocus: Bool
     private let onConfirm: () async throws -> Void
     private let onCancel: () -> Void
     private let onConfirmError: ((Error) -> Void)?
@@ -75,7 +78,7 @@ public struct BrandConfirmDialog<Extra: View>: View {
             pendingLabel: pendingLabel, closeLabel: closeLabel, destructive: destructive,
             secondaryActionLabel: secondaryActionLabel, onSecondaryAction: onSecondaryAction,
             confirmPhrase: confirmPhrase, onConfirm: onConfirm, onCancel: onCancel, onConfirmError: onConfirmError,
-            onDismiss: onDismiss, extra: extra, state: (false, "", false)
+            onDismiss: onDismiss, extra: extra, state: (false, "", false), autofocus: true
         )
     }
 
@@ -96,8 +99,10 @@ public struct BrandConfirmDialog<Extra: View>: View {
         onConfirmError: ((Error) -> Void)?,
         onDismiss: @escaping () -> Void,
         @ViewBuilder extra: () -> Extra,
-        state: (pending: Bool, typed: String, attempted: Bool)
+        state: (pending: Bool, typed: String, attempted: Bool),
+        autofocus: Bool = false
     ) {
+        self.autofocus = autofocus
         self.title = title
         self.description = description
         self.confirmLabel = confirmLabel
@@ -152,6 +157,7 @@ public struct BrandConfirmDialog<Extra: View>: View {
         .accessibilityAddTraits(.isModal)
         .accessibilityAction(.escape, cancel)
         .onAppear {
+            guard autofocus else { return }
             if phrase == nil { cancelFocused = true } else { phraseFocused = true }
         }
     }

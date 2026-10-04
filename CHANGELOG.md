@@ -9,6 +9,22 @@ para breaking changes.
 
 ## [Sin publicar]
 
+### Arreglos previos a 49.20.0 (patch)
+
+- **Compose · `BrandListItem(text, subtitle)`** pintaba su texto con `BasicText(style = LocalBrandTextStyle.current)`, cuyo
+  color es `Unspecified` (negro de Compose): fuera de un `BrandList` salía oscuro sobre fondo oscuro. Ahora la fila fija
+  su propia tinta y tipografía (`text.list.*`, `ProvideBrandContent`), como `BrandList`, SwiftUI y React. `BrandSheet`,
+  `BrandEmptyState` y `BrandConfirmDialog` no tenían el fallo: pintan sus textos con tokens explícitos y `BrandText`
+  cae a la tinta del esquema. Captura nueva `listItemOutsideList` (claro y oscuro).
+- **Storybook · pruebas del Toast** («Test — tintas del aviso en claro/oscuro»): la prueba, no el componente, estaba mal.
+  Tras `toast.dismiss()` buscaba `.toast` y recogía el aviso anterior, aún montado mientras sale; al desmontarse
+  `getComputedStyle` devolvía `''` en fondo y tinta. Ahora localiza el aviso por su título y mide las tintas de una vez.
+- **Storybook · `test:stories`**: el proyecto `storybook` declara `testTimeout`/`hookTimeout` de 60 s. «Trigger de
+  icono» del `Menu` (una story solo de render) agotó los 20 s por carga de la máquina, sin fallo real.
+- **SwiftUI · captura `phrase-mismatch` en macOS** inestable: el `onAppear` daba el foco al campo de la frase y, según
+  llegara antes o después de la fotografía, salían el anillo de foco y el cursor. Las capturas ya no piden foco
+  (`autofocus: false` en el `init` interno con estado); el componente público lo sigue haciendo.
+
 ### NumberInput — confirmar al terminar, compacto y etiquetas tipadas (minor)
 
 Todo opcional y en las tres plataformas a la vez (React, SwiftUI y Compose): sin las props nuevas, el comportamiento y
