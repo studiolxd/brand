@@ -71,6 +71,8 @@
   "differences": [
     "`PageIntro` es el encabezado DENTRO del contenido de una pantalla (un `Heading` con su entradilla y sus acciones). No sustituye a la barra de navegación del sistema (`NavigationStack`/`toolbar` en Apple, `TopAppBar` en Android), que sigue siendo la del sistema.",
     "Con `actions`, el título y las acciones comparten fila a partir de 480 pt/dp de ancho y las acciones caen debajo por debajo de él (el salto a `md` de la web).",
-    "El título es un encabezado para VoiceOver y TalkBack del nivel `level` (por defecto 1)."
+    "El título es un encabezado para VoiceOver y TalkBack del nivel `level` (por defecto 1).",
+    "iOS: `level` por defecto `h1` (el de `BrandHeading` es `h2`); con las acciones apiladas, el hueco bajo el título pasa a `spacing.3`.",
+    "Android: con las acciones en fila se alinean a la línea base del título, salvo con `eyebrow`, donde van arriba; apiladas, a ancho completo."
   ]
 }

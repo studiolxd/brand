@@ -64,6 +64,7 @@
   ],
   "differences": [
     "El disparador es el botón de tres puntos de Brand (`Button` ghost de solo icono con el icono `dots`, las tallas de `triggerSize`), con zona táctil de 44 pt / 48 dp; es el mismo `Menu` que `BrandMenu`, con el mismo reparto por plataforma (panel del sistema en iOS y macOS, panel propio en Android).",
-    "`BrandContextMenu` NO es el menú contextual por pulsación larga del sistema (`.contextMenu`): es el menú de acciones de un botón «⋯», como en la web."
+    "`BrandContextMenu` NO es el menú contextual por pulsación larga del sistema (`.contextMenu`): es el menú de acciones de un botón «⋯», como en la web.",
+    "Android: el panel se alinea al final del disparador, de 48 dp de zona táctil."
   ]
 }

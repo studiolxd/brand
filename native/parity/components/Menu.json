@@ -89,6 +89,8 @@
     "En Android no hay `DropdownMenu` sin Material 3, y la librería no depende de él: `BrandMenu` es un `Popup` propio con los tokens `menu.*` (panel, ítems, ítem resaltado, destructivo, separador, rótulo), como `BrandSelectField` con `select.*`.",
     "Los ítems son `BrandMenuItem`: `button` (con `description`, icono, `disabled`, `destructive`, `closeOnSelect`), `separator`, `label` y `radio`. El ítem `link` de React no existe: la navegación la hace la app en la `action` de un ítem `button`.",
     "En iOS, un ítem destructivo usa `role: .destructive` (el sistema lo pinta en rojo) y la `description` va como segunda línea del título; `closeOnSelect: false` no se puede honrar en el menú del sistema (siempre se cierra).",
-    "En TalkBack el panel es un menú (cada ítem, `Role.Button`; los radio, `Role.RadioButton`), con el foco que se mueve a él al abrirse y vuelve al disparador al cerrarse."
+    "En TalkBack el panel es un menú (cada ítem, `Role.Button`; los radio, `Role.RadioButton`), con el foco que se mueve a él al abrirse y vuelve al disparador al cerrarse.",
+    "iOS/macOS: los `.label` y `.separator` pasan a `Section`, los `.radio` consecutivos forman un `Picker` en línea y la `description` va como segundo `Text`; el panel no se puede capturar abierto.",
+    "Android: separador, rótulo, deshabilitado y radio (sin glifo, la elegida en peso 500) como React; `description` y `closeOnSelect = false` se honran; elegir un radio siempre cierra; ancho mínimo del panel de 160 dp copiado de `min-width: 10rem` (no hay token); el foco va al primer ítem elegible y las flechas del DPAD recorren y resaltan."
   ]
 }

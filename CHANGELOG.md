@@ -7,6 +7,27 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [Sin publicar]
+
+### Brand nativo R6 — las piezas que la primera app tuvo que hacer por su cuenta
+
+Cinco componentes de React que Homenize reescribió a mano, ahora en SwiftUI (iOS 17 y macOS 14) y Compose, con
+ficha de paridad, pruebas, capturas claro/oscuro y parejas con Storybook. No cambia React ni la versión.
+
+- **`Banner`** → `BrandBanner` (`info`/`warning`/`error`, ranura `actions`, aspa con `onDismiss`, apila por debajo de 480).
+  Sustituye al `OfflineBanner` de Homenize (iOS y Android).
+- **`Menu` y `ContextMenu`** → `BrandMenu`, `BrandContextMenu`, `BrandMenuItem` (`button`, `separator`, `label`, `radio`).
+  iOS/macOS: el `Menu` del sistema por dentro con el disparador de brand; Android: `Popup` propio con los tokens `menu.*`.
+  Sustituyen a los `DropdownMenu` de Material y los `Menu { … }` de Homenize.
+- **`Tabs`** → `BrandTabs` + `BrandTab` (`underline`/`pill`, horizontal/vertical): solo la barra; el contenido lo pinta la app.
+  Sustituye al `PrimaryTabRow` de Homenize.
+- **`DatePickerField`** → `BrandDatePickerField`: campo de brand con el selector del sistema (`DatePicker` gráfico en
+  popover u hoja; `DatePickerDialog` en Android). Fechas de calendario sin hora (`Date` normalizada / `LocalDate`).
+- **`PageIntro`** → `BrandPageIntro` (eyebrow, título, entradilla, acciones). No sustituye al `ScreenHeader` de Homenize,
+  que es la barra de navegación de la app y sigue siendo la del sistema.
+- Tokens de componente nativos nuevos: `banner`, `tabs`, `page-intro`, `date-picker`, `date-picker-field`.
+- Compose: `BrandCloseButton` admite tinta propia (interno) y `pair-comparison.sh` de Android recorta bien los lienzos más altos que anchos.
+
 ## [49.20.0] — 2026-10-04
 
 > **Minor.** `Autocomplete` y `AutocompleteField` (sugerencias con texto libre), tachado en `Text`, y `NumberInput`

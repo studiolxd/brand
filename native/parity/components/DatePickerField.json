@@ -139,6 +139,9 @@
     "La fecha no se escribe: el campo muestra la fecha (formato corto del `locale`) y un botón de calendario; tocarlo abre el selector. En React la fecha se teclea con máscara.",
     "Las fechas son de CALENDARIO, sin hora: `Date` normalizada a las 00:00 del calendario del entorno en SwiftUI (`Binding<Date?>`) y `java.time.LocalDate` en Compose. Vaciar el campo (aspa) escribe `nil`/`null`.",
     "En macOS el selector gráfico va en un popover anclado al campo; en iPhone, en una hoja inferior con «Listo» y «Cancelar»; en Android, el diálogo del sistema.",
-    "Con `readOnly` el botón de calendario no abre nada y sale del recorrido; con `disabled` el campo entero se atenúa."
+    "Con `readOnly` el botón de calendario no abre nada y sale del recorrido; con `disabled` el campo entero se atenúa.",
+    "Hay un aspa «Borrar» (`clearLabel`) cuando hay fecha, que React no tiene; el texto sigue el formato corto del `locale` (`dd/MM/yyyy` en `es-ES`).",
+    "iOS: `doneLabel` («Listo») y `cancelLabel` («Cancelar») son parámetros porque la hoja del iPhone los emite; en iPad y macOS el popover confirma y cierra al elegir un día.",
+    "Android: `value: LocalDate?` con `onValueChange`, `minDate`/`maxDate`, `enabled`; tocar el campo también abre el diálogo; `noDateLabel` e `invalidLabel` son los textos de accesibilidad."
   ]
 }
