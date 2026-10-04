@@ -33,6 +33,9 @@ public enum HeadingSize: Int, CaseIterable, Sendable {
 }
 
 extension HeadingLevel {
+    /// El tamaño del nivel, en puntos (token `text.hN.font-size`).
+    var points: CGFloat { size }
+
     fileprivate var size: CGFloat {
         switch self {
         case .h1: BrandTextTokens.h1FontSize
@@ -120,6 +123,13 @@ public struct BrandHeading: View {
 
     public init(verbatim title: String, level: HeadingLevel = .h2, size: HeadingSize? = nil) {
         content = Text(verbatim: title)
+        self.level = level
+        self.size = size
+    }
+
+    /// Un título ya construido como `Text` (para los componentes que lo componen, como `BrandPageIntro`).
+    init(title: Text, level: HeadingLevel, size: HeadingSize?) {
+        content = title
         self.level = level
         self.size = size
     }

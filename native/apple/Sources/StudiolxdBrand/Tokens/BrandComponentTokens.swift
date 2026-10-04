@@ -1921,3 +1921,175 @@ public enum BrandPasswordFieldTokens {
     /// Token `password-field.input-padding-inline-end` — Padding derecho del input — el texto termina donde empieza el toggle
     public static let inputPaddingInlineEnd: CGFloat = 40
 }
+
+/// Tokens del componente `banner` (`tokens/**/banner.json`). Un token con par `surface-dark-*` (o que lo hereda) es un `Color` dinámico.
+public enum BrandBannerTokens {
+    /// Token `banner.padding-block` — Padding vertical de la barra (12px). Con una línea de texto y el aspa a 8px de la esquina, el aspa queda centrada sin más reglas
+    public static let paddingBlock: CGFloat = 12
+    /// Token `banner.padding-inline` — Padding horizontal de la barra (24px) — el mismo inset que el alert
+    public static let paddingInline: CGFloat = 24
+    /// Token `banner.gap` — Aire entre el mensaje y las acciones (16px). Es también el aire vertical cuando la fila apila por debajo de md
+    public static let gap: CGFloat = 16
+    /// Token `banner.border-width` — Grosor de los filetes superior e inferior. La barra va a ancho completo: en los cantos laterales no hay nada que separar, así que no lleva borde inline
+    public static let borderWidth: CGFloat = 1
+    /// Token `banner.font-size` — El mensaje lee al cuerpo de la superficie (16px en aplicación, 20px en la pública)
+    public static let fontSize: CGFloat = 16
+    /// Token `banner.line-height` — Interlineado del mensaje — el del cuerpo
+    public static let lineHeight: CGFloat = 1.5
+    /// Token `banner.close-size` — Lado del botón de cierre — talla sm (32px), la mínima del sistema
+    public static let closeSize: CGFloat = 32
+    /// Token `banner.close-inset` — Distancia del botón de cierre a la esquina superior derecha (8px)
+    public static let closeInset: CGFloat = 8
+    /// Token `banner.info-bg` — Información — relleno prusia. Es el mismo en las dos superficies: el relleno es autocontenido y su contenido lee siempre en oscuro (la raíz lleva `.surface-dark`)
+    public static let infoBg: Color = Color(brandHex: 0x111E30)
+    /// Token `banner.info-color` — Información — mensaje blanco sobre el relleno prusia
+    public static let infoColor: Color = Color(brandHex: 0xFFFFFF)
+    /// Token `banner.info-border-color` — Información — filete blanco. Dibuja el canto también cuando la página ya es oscura y el relleno prusia coincide con el fondo, igual que en el alert `default`
+    public static let infoBorderColor: Color = Color(brandHex: 0xFFFFFF)
+    /// Token `banner.warning-bg` — Aviso — el relleno del rol: el amarillo de marca, aquí como feedback. Universal, igual en las dos superficies
+    public static let warningBg: Color = Color(brandHex: 0xFFCD00)
+    /// Token `banner.warning-color` — Aviso — mensaje prusia sobre el relleno amarillo (11,17:1, AAA)
+    public static let warningColor: Color = Color(brandHex: 0x111E30)
+    /// Token `banner.warning-border-color` — Aviso — filete igual al relleno: el amarillo ya se separa de cualquier fondo del sistema
+    public static let warningBorderColor: Color = Color(brandHex: 0xFFCD00)
+    /// Token `banner.warning-close-color` — Aviso — aspa y su anillo de foco. Es el único relleno claro de la barra, así que el aspa no puede tomar la tinta ambiente: con `[data-theme="dark"]` en la raíz saldría blanca sobre amarillo (1,50:1). Va fijada a la tinta del rol, que es universal
+    public static let warningCloseColor: Color = Color(brandHex: 0x111E30)
+    /// Token `banner.error-bg` — Error — el relleno del rol: el rojo semántico. Universal, igual en las dos superficies, como el de `Alert error`
+    public static let errorBg: Color = Color(brandHex: 0xB30000)
+    /// Token `banner.error-color` — Error — mensaje blanco sobre el relleno rojo
+    public static let errorColor: Color = Color(brandHex: 0xFFFFFF)
+    /// Token `banner.error-border-color` — Error — filete igual al relleno: el rojo ya se separa de cualquier fondo del sistema
+    public static let errorBorderColor: Color = Color(brandHex: 0xB30000)
+}
+
+/// Tokens del componente `tabs` (`tokens/**/tabs.json`). Un token con par `surface-dark-*` (o que lo hereda) es un `Color` dinámico.
+public enum BrandTabsTokens {
+    /// Token `tabs.list-border-width` — Ancho del borde inferior de la lista de tabs
+    public static let listBorderWidth: CGFloat = 1
+    /// Token `tabs.list-border-color` — Color del borde inferior de la lista
+    public static let listBorderColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+    /// Token `tabs.list-gap` — Gap entre triggers
+    public static let listGap: CGFloat = 4
+    /// Token `tabs.trigger-padding-block` — Padding vertical del trigger
+    public static let triggerPaddingBlock: CGFloat = 12
+    /// Token `tabs.trigger-padding-inline` — Padding horizontal del trigger
+    public static let triggerPaddingInline: CGFloat = 16
+    /// Token `tabs.trigger-font-size` — Tamaño de fuente del trigger
+    public static let triggerFontSize: CGFloat = 16
+    /// Token `tabs.trigger-font-weight` — Peso de fuente por defecto
+    public static let triggerFontWeight: Int = 300
+    /// Token `tabs.trigger-active-weight` — Peso de fuente del tab activo
+    public static let triggerActiveWeight: CGFloat = 500
+    /// Token `tabs.trigger-color` — Color del trigger inactivo — es texto, nunca grey-dark
+    public static let triggerColor: Color = Color(brandLight: Color(brandHex: 0x4A4A4A), dark: Color(brandHex: 0xD0D0D0))
+    /// Token `tabs.trigger-hover-color` — Color del trigger en hover
+    public static let triggerHoverColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+    /// Token `tabs.trigger-active-color` — Color del trigger activo
+    public static let triggerActiveColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+    /// Token `tabs.trigger-indicator-width` — Grosor del indicador activo (underline)
+    public static let triggerIndicatorWidth: CGFloat = 1
+    /// Token `tabs.trigger-indicator-color` — Color del indicador activo
+    public static let triggerIndicatorColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+    /// Token `tabs.trigger-pill-bg-active` — Fondo del trigger activo en variante pill
+    public static let triggerPillBgActive: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xBAABFF))
+    /// Token `tabs.trigger-pill-color-active` — Texto del trigger activo en variante pill
+    public static let triggerPillColorActive: Color = Color(brandLight: Color(brandHex: 0xFFFFFF), dark: Color(brandHex: 0x111E30))
+    /// Token `tabs.trigger-border-radius` — Radio de borde del trigger (pill + focus ring)
+    public static let triggerBorderRadius: CGFloat = 0
+    /// Token `tabs.trigger-disabled-opacity` — Opacidad del trigger deshabilitado
+    public static let triggerDisabledOpacity: CGFloat = 0.4
+    /// Token `tabs.focus-ring-color` — Color del anillo de foco
+    public static let focusRingColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+    /// Token `tabs.focus-ring-width` — Grosor del anillo de foco
+    public static let focusRingWidth: CGFloat = 2
+    /// Token `tabs.focus-ring-offset` — Separación del anillo de foco
+    public static let focusRingOffset: CGFloat = 1
+    /// Token `tabs.content-padding-block` — Padding vertical del panel de contenido
+    public static let contentPaddingBlock: CGFloat = 16
+    /// Token `tabs.transition-duration` — Duración de la transición de color
+    public static let transitionDuration: TimeInterval = 0.15
+    /// Token `tabs.transition-easing` — Easing de la transición
+    public static let transitionEasing: BrandCubicBezier = BrandCubicBezier(0.42, 0, 0.58, 1)
+}
+
+/// Tokens del componente `page-intro` (`tokens/**/page-intro.json`). Un token con par `surface-dark-*` (o que lo hereda) es un `Color` dinámico.
+public enum BrandPageIntroTokens {
+    /// Token `page-intro.title-space-after` — Aire bajo el título cuando comparte fila con las acciones: el mismo em que deja un título suelto, para que una cabecera con acciones y una sin ellas separen igual el título de la entradilla Fracción del tamaño de fuente del propio componente (em).
+    public static let titleSpaceAfter: CGFloat = 0.5
+    /// Token `page-intro.row-column-gap` — Aire entre el título y las acciones cuando comparten fila (a partir de `md`)
+    public static let rowColumnGap: CGFloat = 24
+    /// Token `page-intro.row-gap` — Aire entre el título y las acciones cuando las acciones caen debajo (por debajo de `md`); también el aire entre el `eyebrow` y el título
+    public static let rowGap: CGFloat = 12
+    /// Token `page-intro.actions-gap` — Aire entre las acciones — el de los botones de un formulario: la fila de acciones del sistema es una sola
+    public static let actionsGap: CGFloat = 12
+}
+
+/// Tokens del componente `date-picker` (`tokens/**/date-picker.json`). Un token con par `surface-dark-*` (o que lo hereda) es un `Color` dinámico.
+public enum BrandDatePickerTokens {
+    /// Token `date-picker.border-width` — Grosor del borde del campo: el del sistema. Lo usa el anillo de foco del botón, que va justo por dentro de esa línea
+    public static let borderWidth: CGFloat = 1
+    /// Token `date-picker.transition-duration` — Duración de la transición de tinta del botón
+    public static let transitionDuration: TimeInterval = 0.15
+    /// Token `date-picker.transition-easing` — Curva de la transición
+    public static let transitionEasing: BrandCubicBezier = BrandCubicBezier(0.25, 0.1, 0.25, 1)
+    /// Token `date-picker.button.slot-size` — Lado del hueco que ocupa el botón del calendario dentro del campo: la talla md, la misma que el campo — así el adorno queda cuadrado sobre el control y su borde inferior coincide con el del campo
+    public static let buttonSlotSize: CGFloat = 40
+    /// Token `date-picker.button.sm-slot-size` — Lado del hueco — sm
+    public static let buttonSmSlotSize: CGFloat = 32
+    /// Token `date-picker.button.lg-slot-size` — Lado del hueco — lg
+    public static let buttonLgSlotSize: CGFloat = 48
+    /// Token `date-picker.button.icon-size` — Tamaño del glifo del calendario — md (20px, acorde al campo de 40). El mismo peldaño que la flecha de `SearchForm`
+    public static let buttonIconSize: CGFloat = 20
+    /// Token `date-picker.button.sm-icon-size` — Tamaño del glifo — sm (16px)
+    public static let buttonSmIconSize: CGFloat = 16
+    /// Token `date-picker.button.lg-icon-size` — Tamaño del glifo — lg (24px)
+    public static let buttonLgIconSize: CGFloat = 24
+    /// Token `date-picker.button.color` — Color del glifo: la tinta del campo, prusia sobre claro
+    public static let buttonColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+    /// Token `date-picker.button.hover-color` — Color del glifo bajo el puntero: la misma tinta. El adorno no pinta fondo ni línea al pasar el puntero
+    public static let buttonHoverColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+    /// Token `date-picker.button.disabled-color` — Color del glifo con el campo deshabilitado
+    public static let buttonDisabledColor: Color = Color(brandLight: Color(brandHex: 0x4A4A4A), dark: Color(brandHex: 0xD0D0D0))
+    /// Token `date-picker.button.focus-ring-width` — Grosor del anillo de foco del botón: el del sistema. Es lo único que marca el foco, porque el adorno no tiene fondo
+    public static let buttonFocusRingWidth: CGFloat = 2
+    /// Token `date-picker.button.focus-ring-color` — Color del anillo de foco del botón: el del borde del campo en foco
+    public static let buttonFocusRingColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+    /// Token `date-picker.message.gap` — Espacio entre el campo y el aviso de fecha incompleta: el mismo que separa las partes de un campo de formulario
+    public static let messageGap: CGFloat = 8
+    /// Token `date-picker.message.font-family` — Familia del aviso de fecha incompleta
+    public static let messageFontFamily: String = "Google Sans Flex"
+    /// Token `date-picker.message.font-size` — Cuerpo del aviso
+    public static let messageFontSize: CGFloat = 14
+    /// Token `date-picker.message.font-weight` — Peso del aviso
+    public static let messageFontWeight: Int = 300
+    /// Token `date-picker.message.line-height` — Interlineado del aviso
+    public static let messageLineHeight: CGFloat = 1.5
+    /// Token `date-picker.message.color` — Color del aviso: el del error de formulario — lo que se escribió no es una fecha
+    public static let messageColor: Color = Color(brandLight: Color(brandHex: 0xB30000), dark: Color(brandHex: 0xFF8585))
+}
+
+/// Tokens del componente `date-picker-field` (`tokens/**/date-picker-field.json`). Un token con par `surface-dark-*` (o que lo hereda) es un `Color` dinámico.
+public enum BrandDatePickerFieldTokens {
+    /// Token `date-picker-field.gap` — Espacio entre label, trigger, helper y error
+    public static let gap: CGFloat = 8
+    /// Token `date-picker-field.error.font-family` — Font family del mensaje de error
+    public static let errorFontFamily: String = "Google Sans Flex"
+    /// Token `date-picker-field.error.font-size` — Font size del mensaje de error
+    public static let errorFontSize: CGFloat = 14
+    /// Token `date-picker-field.error.font-weight` — Font weight del mensaje de error
+    public static let errorFontWeight: Int = 300
+    /// Token `date-picker-field.error.line-height` — Line height del mensaje de error
+    public static let errorLineHeight: CGFloat = 1.5
+    /// Token `date-picker-field.error.color` — Color del mensaje de error
+    public static let errorColor: Color = Color(brandLight: Color(brandHex: 0xB30000), dark: Color(brandHex: 0xFF8585))
+    /// Token `date-picker-field.helper.font-family` — Font family del texto de ayuda
+    public static let helperFontFamily: String = "Google Sans Flex"
+    /// Token `date-picker-field.helper.font-size` — Font size del texto de ayuda
+    public static let helperFontSize: CGFloat = 14
+    /// Token `date-picker-field.helper.font-weight` — Font weight del texto de ayuda
+    public static let helperFontWeight: Int = 300
+    /// Token `date-picker-field.helper.line-height` — Line height del texto de ayuda
+    public static let helperLineHeight: CGFloat = 1.5
+    /// Token `date-picker-field.helper.color` — Color del texto de ayuda
+    public static let helperColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+}

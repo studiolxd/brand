@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema.json",
+  "component": "Tabs",
+  "react": {
+    "path": "src/stories/atoms/Tabs/Tabs.tsx",
+    "props": "TabsProps"
+  },
+  "native": {
+    "swift": "BrandTabs",
+    "kotlin": "BrandTabs"
+  },
+  "props": {
+    "orientation": {
+      "type": "union",
+      "values": [
+        "horizontal",
+        "vertical"
+      ],
+      "default": "horizontal"
+    }
+  },
+  "excluded": [
+    {
+      "prop": "value",
+      "reason": "La pestaña activa es el `Binding` `selection` (SwiftUI) o `selection`/`onSelectionChange` (Compose), siempre controlado."
+    },
+    {
+      "prop": "defaultValue",
+      "reason": "No existe pestaña no controlada: el valor inicial es el del `@State` de quien la usa."
+    },
+    {
+      "prop": "onValueChange",
+      "reason": "Lo cubre el `Binding` `selection` (SwiftUI) o `onSelectionChange` (Compose)."
+    },
+    {
+      "prop": "children",
+      "reason": "Las pestañas son los `BrandTab` del `@ViewBuilder` (SwiftUI) o los `Tab` del `content` (Compose)."
+    },
+    {
+      "prop": "className",
+      "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
+    }
+  ],
+  "differences": [
+    "`BrandTabs` es la barra de pestañas (la `TabsList` con sus `TabsTrigger`): el CONTENIDO de cada pestaña (`TabsContent`) no es un componente, lo pinta la app con un `switch` sobre la selección. Así la barra sirve igual para una vista que cambia que para un filtro.",
+    "El valor de la selección puede ser cualquier `Hashable` (Swift) o cualquier tipo (Kotlin), no solo un texto.",
+    "No es la barra de pestañas del sistema (`TabView` en iOS, `NavigationBar` en Android): esas son navegación de la app entera y siguen siendo del sistema. `BrandTabs` es el control de sección dentro de una pantalla.",
+    "En VoiceOver y TalkBack cada pestaña es una pestaña (`isTab`/`Role.Tab`) con su estado seleccionado; las flechas del teclado (macOS, teclado físico) mueven la selección como en la web.",
+    "iOS: no existe el rasgo `isTab` en SwiftUI: cada pestaña es `.isButton` + `.isSelected` y la barra `.isTabBar`. Una barra horizontal que no cabe desplaza (`ViewThatFits` con `ScrollView`). Teclado: flechas según orientación, `Inicio`/`Fin`, vuelta en los extremos, salta las deshabilitadas.",
+    "Android: `Role.Tab` y `selectableGroup`; `enabled` en lugar de `disabled`; no hay composable `BrandTab` suelto, sino el DSL `tab(label, value)` o `BrandTabs(tabs = listOf(BrandTab(…)))`; el `line-height` del trigger es `line-height.tight` (React usa `normal`, que no es token)."
+  ]
+}

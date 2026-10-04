@@ -174,6 +174,11 @@ tokens, funciona en claro y oscuro con colores dinámicos y cumple, por construc
 | `Sheet` | `.brandSheet(isPresented:…)` · `BrandSheetContent` |
 | `ConfirmDialog` | `.brandConfirmDialog(isPresented:…)` · `BrandConfirmDialog` |
 | `Toast` / `Toaster` | `ToastCenter` · `.toastHost(…)` |
+| `Banner` | `BrandBanner` |
+| `Menu`, `ContextMenu` | `BrandMenu`, `BrandContextMenu`, `BrandMenuItem` |
+| `Tabs` | `BrandTabs` + `BrandTab` |
+| `DatePickerField` | `BrandDatePickerField` |
+| `PageIntro` | `BrandPageIntro` |
 
 `#Preview` de cada componente enseña todas sus variantes: ábrelos en Xcode. Las diferencias que se quedan a propósito
 respecto a React están en el campo `differences` de cada ficha (`parity/components/<Componente>.json`).
@@ -294,6 +299,24 @@ Intents de `Toast`: `default`, `success`, `error`, `warning`, `info` y `loading`
 `BrandDialogFooter`/`BrandDialogButton` (que apila con la acción principal arriba por debajo de 480 pt) son comunes a los
 tres.
 
+### Avisos, menús, pestañas, fechas y cabeceras de página
+
+```swift
+BrandBanner("Sin conexión · 3 pendientes", variant: .warning) {                    // franja a ancho completo; `onDismiss:` pinta el aspa
+    BrandButton("Reintentar", variant: .outline, size: .sm) { retry() }
+}
+BrandContextMenu([                                                               // el botón «⋯»; el panel es el `Menu` del sistema
+    .button("Editar") { edit() }, .separator, .button("Eliminar", destructive: true) { delete() },
+])
+BrandMenu([.radio("Mes", value: "month"), .radio("Semana", value: "week")], selection: $view) { Text("Vista") }
+BrandTabs(selection: $tab) { BrandTab("Resumen", value: Tab.summary); BrandTab("Gastos", value: Tab.expenses) }  // solo la barra; el contenido, un `switch`
+BrandDatePickerField("Caduca", date: $expiry, in: today...limit)                 // `Date?` a las 00:00; selector del sistema
+BrandPageIntro("Despensa", description: "Lo que hay en casa.", actions: { BrandButton("Añadir") { add() } })
+```
+
+`BrandMenu` usa el `Menu` del sistema (disparador de brand, panel del sistema). `BrandTabs` no sustituye al `TabView` de la app
+ni `BrandPageIntro` a la barra de navegación (`navigationTitle`/`toolbar`): son del sistema.
+
 ## Componentes de Compose
 
 Todo está en el módulo `brand`; los componentes cuelgan de `com.studiolxd.brand.components.<componente>` y se usan dentro
@@ -323,6 +346,11 @@ de `BrandTheme { … }` (que además garantiza la zona táctil de 48 dp). Siguen
 | `Sheet` | `BrandSheet` · `BrandSheetContent` |
 | `ConfirmDialog` | `BrandConfirmDialog` |
 | `Toast` / `Toaster` | `ToastCenter` · `ToastHost` |
+| `Banner` | `BrandBanner` |
+| `Menu`, `ContextMenu` | `BrandMenu`, `BrandContextMenu`, `BrandMenuItem` |
+| `Tabs` | `BrandTabs` (+ `tab(…)` / `BrandTab`) |
+| `DatePickerField` | `BrandDatePickerField` |
+| `PageIntro` | `BrandPageIntro` |
 
 Cada componente lleva `@Preview` con todas sus variantes (en claro y oscuro). Las diferencias que se quedan a propósito
 respecto a React y a SwiftUI están en el campo `differences` de cada ficha (líneas «Android: …»).
@@ -417,6 +445,18 @@ val saved = ToastCenter.shared.promise(loading = "Guardando…", success = { "Gu
 
 `BrandSheet` va sobre `Dialog` de compose-ui con arrastre propio (la librería no depende de Material 3), no sobre
 `ModalBottomSheet`. `BrandDialogFooter`/`BrandDialogButton` apilan con la acción principal arriba por debajo de 480 dp.
+
+### Avisos, menús, pestañas, fechas y cabeceras de página
+
+```kotlin
+BrandBanner("Sin conexión · 3 pendientes", variant = BannerVariant.Warning, actions = { BrandButton("Reintentar", onClick = { retry() }, variant = ButtonVariant.Outline) })
+BrandContextMenu(listOf(BrandMenuItem.Button("Editar", action = { edit() }), BrandMenuItem.Separator, BrandMenuItem.Button("Eliminar", action = { delete() }, destructive = true)))
+BrandTabs(selection = tab, onSelectionChange = { tab = it }) { tab("Resumen", Tab.Summary); tab("Gastos", Tab.Expenses) }   // solo la barra
+BrandDatePickerField("Caduca", value = expiry, onValueChange = { expiry = it }, minDate = today)                         // `LocalDate?`; `DatePickerDialog` del sistema
+BrandPageIntro("Despensa", description = "Lo que hay en casa.", actions = { BrandButton("Añadir", onClick = { add() }) })
+```
+
+`BrandMenu` es un `Popup` propio con los tokens `menu.*` (sin Material). Las fechas son `java.time.LocalDate`, sin hora.
 
 ## Fuentes
 

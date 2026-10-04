@@ -1,0 +1,96 @@
+{
+  "$schema": "../schema.json",
+  "component": "Menu",
+  "react": {
+    "path": "src/stories/molecules/Menu/Menu.tsx",
+    "props": "MenuProps"
+  },
+  "native": {
+    "swift": "BrandMenu",
+    "kotlin": "BrandMenu"
+  },
+  "props": {},
+  "excluded": [
+    {
+      "prop": "trigger",
+      "reason": "Se porta como el `@ViewBuilder label` (SwiftUI) o la lambda `trigger` (Compose): cualquier vista que reciba el toque."
+    },
+    {
+      "prop": "items",
+      "reason": "Se porta como `items: [BrandMenuItem]` (lista de ítems tipada: acción, separador, rótulo, radio)."
+    },
+    {
+      "prop": "value",
+      "reason": "La opción activa de los ítems radio es el `Binding<String?>` `selection` (SwiftUI) o `selection`/`onSelectionChange` (Compose)."
+    },
+    {
+      "prop": "onValueChange",
+      "reason": "La escritura en el `Binding` `selection` (SwiftUI) o `onSelectionChange` (Compose) cubre el cambio."
+    },
+    {
+      "prop": "renderLink",
+      "reason": "Los enlaces los resuelve la app: un ítem navega con su `action`; no hay `render` de enlace en nativo."
+    },
+    {
+      "prop": "open",
+      "reason": "El menú nativo gestiona su propia apertura; la app no la fuerza."
+    },
+    {
+      "prop": "defaultOpen",
+      "reason": "El menú nativo gestiona su propia apertura; no hay estado inicial abierto."
+    },
+    {
+      "prop": "onOpenChange",
+      "reason": "SwiftUI no notifica la apertura del `Menu` del sistema; en Compose existe `onOpenChange`."
+    },
+    {
+      "prop": "openOnHover",
+      "reason": "El hover que abre un flyout es de puntero; el menú nativo se abre al tocar o pulsar."
+    },
+    {
+      "prop": "hoverDelay",
+      "reason": "Solo tiene sentido con `openOnHover`, que no se porta."
+    },
+    {
+      "prop": "side",
+      "reason": "La colocación del panel la decide el sistema (iOS y macOS) o el ancla (Android); no es una prop."
+    },
+    {
+      "prop": "align",
+      "reason": "La colocación del panel la decide el sistema (iOS y macOS) o el ancla (Android); no es una prop."
+    },
+    {
+      "prop": "sideOffset",
+      "reason": "La separación del panel con el disparador la decide el sistema o el ancla."
+    },
+    {
+      "prop": "minWidth",
+      "reason": "El ancho del panel lo decide el sistema (iOS y macOS); en Android lo fijan los tokens `menu.*`."
+    },
+    {
+      "prop": "maxWidth",
+      "reason": "El ancho del panel lo decide el sistema (iOS y macOS); en Android lo fijan los tokens `menu.*`."
+    },
+    {
+      "prop": "size",
+      "reason": "La talla de los ítems es la del panel del sistema en iOS y macOS; la del disparador la elige quien lo pasa."
+    },
+    {
+      "prop": "container",
+      "reason": "Es el nodo DOM del portal; la presentación nativa no tiene portal que reubicar."
+    },
+    {
+      "prop": "className",
+      "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
+    }
+  ],
+  "differences": [
+    "**Decisión de plataforma.** En iOS y macOS `BrandMenu` es el `Menu` del sistema por dentro: conserva la accesibilidad, el comportamiento (también el de ratón y teclado en macOS y el de las acciones destructivas) y el aspecto que el usuario ya conoce; lo que lleva el aspecto de Brand es el DISPARADOR (que lo pone la app, p. ej. `BrandButton` o el de `BrandContextMenu`). El panel no se pinta con los tokens `menu.*`: SwiftUI no deja estilarlo.",
+    "En Android no hay `DropdownMenu` sin Material 3, y la librería no depende de él: `BrandMenu` es un `Popup` propio con los tokens `menu.*` (panel, ítems, ítem resaltado, destructivo, separador, rótulo), como `BrandSelectField` con `select.*`.",
+    "Los ítems son `BrandMenuItem`: `button` (con `description`, icono, `disabled`, `destructive`, `closeOnSelect`), `separator`, `label` y `radio`. El ítem `link` de React no existe: la navegación la hace la app en la `action` de un ítem `button`.",
+    "En iOS, un ítem destructivo usa `role: .destructive` (el sistema lo pinta en rojo) y la `description` va como segunda línea del título; `closeOnSelect: false` no se puede honrar en el menú del sistema (siempre se cierra).",
+    "En TalkBack el panel es un menú (cada ítem, `Role.Button`; los radio, `Role.RadioButton`), con el foco que se mueve a él al abrirse y vuelve al disparador al cerrarse.",
+    "iOS/macOS: los `.label` y `.separator` pasan a `Section`, los `.radio` consecutivos forman un `Picker` en línea y la `description` va como segundo `Text`; el panel no se puede capturar abierto.",
+    "Android: separador, rótulo, deshabilitado y radio (sin glifo, la elegida en peso 500) como React; `description` y `closeOnSelect = false` se honran; elegir un radio siempre cierra; ancho mínimo del panel de 160 dp copiado de `min-width: 10rem` (no hay token); el foco va al primer ítem elegible y las flechas del DPAD recorren y resaltan."
+  ]
+}

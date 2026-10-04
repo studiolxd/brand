@@ -110,6 +110,9 @@ private val HeadingLevel.color
         HeadingLevel.H6 -> T.h6Color
     }.current
 
+/** El tamaño de letra de un encabezado: el de su [size] o, sin él, el de su [level]. Interno: `BrandPageIntro` lo necesita. */
+internal fun headingFontSize(level: HeadingLevel, size: HeadingSize?): TextUnit = size?.size ?: level.fontSize
+
 /**
  * Un encabezado de la marca. El nivel dice qué es en el esquema del documento (TalkBack lo anuncia como
  * encabezado, con `heading()`; Android no distingue niveles); el tamaño, por defecto, sale del nivel. El peso

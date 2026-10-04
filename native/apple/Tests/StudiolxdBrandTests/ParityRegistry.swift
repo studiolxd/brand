@@ -15,5 +15,5 @@
 /// React (`case primary = "primary"`, `case iconOnly = "icon-only"`).
 /// Se compone con las entradas de cada grupo de componentes (`Parity+<Grupo>.swift`): así cada grupo toca solo su fichero.
 let parityRegistry: [String: [String: [String]]] = [
-    coreParity, formsParity, togglesParity, listsParity, overlaysParity,
+    coreParity, formsParity, togglesParity, listsParity, overlaysParity, navigationParity,
 ].reduce(into: [:]) { registry, entries in registry.merge(entries) { current, _ in current } }

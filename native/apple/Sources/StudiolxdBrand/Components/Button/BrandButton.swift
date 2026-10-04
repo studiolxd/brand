@@ -87,6 +87,7 @@ private struct BrandButtonBody: View {
     @Environment(\.isEnabled) private var isEnabled
     @Environment(\.isFocused) private var isFocused
     @Environment(\.brandControlSize) private var inheritedSize
+    @Environment(\.brandStretchButtons) private var stretchButtons
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.colorScheme) private var scheme
     @State private var isHovering = false
@@ -96,6 +97,8 @@ private struct BrandButtonBody: View {
 
     private var size: BrandControlSize { style.size ?? inheritedSize ?? .md }
     private var isText: Bool { style.variant == .text }
+    /// A ancho completo si lo pide `block` o si la ranura de acciones que lo contiene va apilada (`brandStretchButtons`).
+    private var block: Bool { style.block || (stretchButtons && !style.iconOnly) }
 
     // MARK: Medidas (tokens)
 
@@ -239,12 +242,12 @@ private struct BrandButtonBody: View {
         configuration.label
             .brandFont(size: fontSize, weight: fontWeight)
             .lineLimit(1)
-            .fixedSize(horizontal: !style.block && !style.iconOnly, vertical: false)
+            .fixedSize(horizontal: !block && !style.iconOnly, vertical: false)
             .foregroundStyle(colors.foreground)
             .padding(.horizontal, paddingInline)
             .frame(width: style.iconOnly ? scaledHeight : nil)
             .frame(minHeight: isText ? nil : scaledHeight)
-            .frame(maxWidth: style.block ? .infinity : nil)
+            .frame(maxWidth: block ? .infinity : nil)
             .padding(.bottom, isText ? T.textUnderlineOffset : 0)
             .background(colors.background, in: shape)
             .overlay(alignment: .bottom) {

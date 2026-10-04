@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema.json",
+  "component": "TabsTrigger",
+  "react": {
+    "path": "src/stories/atoms/Tabs/Tabs.tsx",
+    "props": "TabsTriggerProps"
+  },
+  "native": {
+    "swift": "BrandTab",
+    "kotlin": "BrandTab"
+  },
+  "props": {
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "excluded": [
+    {
+      "prop": "value",
+      "reason": "Se porta como el argumento `value:` del inicializador (`BrandTab(\"Resumen\", value: …)`)."
+    },
+    {
+      "prop": "children",
+      "reason": "El texto es el primer argumento del inicializador."
+    },
+    {
+      "prop": "className",
+      "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "$schema": "../schema.json",
+  "component": "DatePickerField",
+  "react": {
+    "path": "src/stories/molecules/DatePickerField/DatePickerField.tsx",
+    "props": "DatePickerFieldProps"
+  },
+  "native": {
+    "swift": "BrandDatePickerField",
+    "kotlin": "BrandDatePickerField"
+  },
+  "props": {
+    "size": {
+      "type": "union",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    },
+    "labelHidden": {
+      "type": "boolean",
+      "default": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "default": false
+    },
+    "error": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "excluded": [
+    {
+      "prop": "id",
+      "reason": "El `id` enlaza la etiqueta con el control en HTML; en nativo el enlace es el nombre accesible que pone el propio campo."
+    },
+    {
+      "prop": "label",
+      "reason": "Es el primer argumento del inicializador (`BrandDatePickerField(\"Vence\", date: …)`)."
+    },
+    {
+      "prop": "errorMessage",
+      "reason": "Es texto, no un caso: existe como `errorMessage` opcional."
+    },
+    {
+      "prop": "helperText",
+      "reason": "Es texto, no un caso: existe como `helperText` opcional."
+    },
+    {
+      "prop": "value",
+      "reason": "La fecha es el `Binding<Date?>` `date` (SwiftUI) o `LocalDate?` `value` con `onValueChange` (Compose): siempre controlado."
+    },
+    {
+      "prop": "onChange",
+      "reason": "El cambio se observa en el `Binding` `date` (SwiftUI) o en `onValueChange` (Compose)."
+    },
+    {
+      "prop": "disabled",
+      "reason": "Se expresa con `.disabled(_:)` en SwiftUI y con `enabled` en Compose."
+    },
+    {
+      "prop": "placeholder",
+      "reason": "Es texto, no un caso: existe como `placeholder` con «Elige una fecha» por defecto (castellano); no hay máscara que escribir."
+    },
+    {
+      "prop": "maskLetters",
+      "reason": "No hay máscara: la fecha no se escribe, se elige en el selector del sistema."
+    },
+    {
+      "prop": "invalidMessage",
+      "reason": "No se puede escribir una fecha a medias: el selector solo entrega fechas completas y válidas."
+    },
+    {
+      "prop": "openCalendarLabel",
+      "reason": "Es texto, no un caso: existe como `openCalendarLabel` con «Abrir calendario» por defecto (castellano)."
+    },
+    {
+      "prop": "minDate",
+      "reason": "Se porta como el rango `in: ClosedRange<Date>` (SwiftUI) o `minDate` (Compose)."
+    },
+    {
+      "prop": "maxDate",
+      "reason": "Se porta como el rango `in: ClosedRange<Date>` (SwiftUI) o `maxDate` (Compose)."
+    },
+    {
+      "prop": "disabledDates",
+      "reason": "Los selectores del sistema no deshabilitan días sueltos; solo admiten un rango."
+    },
+    {
+      "prop": "locale",
+      "reason": "Se porta como `locale: Locale` (SwiftUI) o `Locale` (Compose); por defecto, el del entorno."
+    },
+    {
+      "prop": "calendarLabel",
+      "reason": "Es el nombre del panel del calendario; el selector del sistema lo nombra él mismo."
+    },
+    {
+      "prop": "previousMonthLabel",
+      "reason": "Los textos del calendario son los del selector del sistema."
+    },
+    {
+      "prop": "nextMonthLabel",
+      "reason": "Los textos del calendario son los del selector del sistema."
+    },
+    {
+      "prop": "previousYearsLabel",
+      "reason": "Los textos del calendario son los del selector del sistema."
+    },
+    {
+      "prop": "nextYearsLabel",
+      "reason": "Los textos del calendario son los del selector del sistema."
+    },
+    {
+      "prop": "yearGridLabel",
+      "reason": "Los textos del calendario son los del selector del sistema."
+    },
+    {
+      "prop": "gridLabel",
+      "reason": "Los textos del calendario son los del selector del sistema."
+    },
+    {
+      "prop": "name",
+      "reason": "El `name` del campo es de los formularios HTML; en nativo el estado vive en el `Binding`."
+    },
+    {
+      "prop": "onBlur",
+      "reason": "El foco se observa con `@FocusState` desde fuera; el campo no expone un manejador."
+    },
+    {
+      "prop": "className",
+      "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
+    }
+  ],
+  "differences": [
+    "**Decisión de plataforma.** El campo es de Brand (la caja de `InputField`, sus tallas, estados y error) y el selector es el del sistema: el `DatePicker` gráfico de SwiftUI en un popover (iPad y macOS) o en una hoja (iPhone), y el `DatePickerDialog` de Android en un diálogo. No hay calendario propio: así se heredan el idioma, el primer día de la semana, VoiceOver y TalkBack.",
+    "La fecha no se escribe: el campo muestra la fecha (formato corto del `locale`) y un botón de calendario; tocarlo abre el selector. En React la fecha se teclea con máscara.",
+    "Las fechas son de CALENDARIO, sin hora: `Date` normalizada a las 00:00 del calendario del entorno en SwiftUI (`Binding<Date?>`) y `java.time.LocalDate` en Compose. Vaciar el campo (aspa) escribe `nil`/`null`.",
+    "En macOS el selector gráfico va en un popover anclado al campo; en iPhone, en una hoja inferior con «Listo» y «Cancelar»; en Android, el diálogo del sistema.",
+    "Con `readOnly` el botón de calendario no abre nada y sale del recorrido; con `disabled` el campo entero se atenúa.",
+    "Hay un aspa «Borrar» (`clearLabel`) cuando hay fecha, que React no tiene; el texto sigue el formato corto del `locale` (`dd/MM/yyyy` en `es-ES`).",
+    "iOS: `doneLabel` («Listo») y `cancelLabel` («Cancelar») son parámetros porque la hoja del iPhone los emite; en iPad y macOS el popover confirma y cierra al elegir un día.",
+    "Android: `value: LocalDate?` con `onValueChange`, `minDate`/`maxDate`, `enabled`; tocar el campo también abre el diálogo; `noDateLabel` e `invalidLabel` son los textos de accesibilidad."
+  ]
+}

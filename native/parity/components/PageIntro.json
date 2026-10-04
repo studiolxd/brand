@@ -1,0 +1,78 @@
+{
+  "$schema": "../schema.json",
+  "component": "PageIntro",
+  "react": {
+    "path": "src/stories/molecules/PageIntro/PageIntro.tsx",
+    "props": "PageIntroProps"
+  },
+  "native": {
+    "swift": "BrandPageIntro",
+    "kotlin": "BrandPageIntro"
+  },
+  "props": {
+    "level": {
+      "type": "union",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "default": "1"
+    },
+    "size": {
+      "type": "union",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
+      ]
+    }
+  },
+  "excluded": [
+    {
+      "prop": "eyebrow",
+      "reason": "Se porta como el `@ViewBuilder eyebrow` (SwiftUI) o la lambda `eyebrow` (Compose): una `BrandTag`, una categoría."
+    },
+    {
+      "prop": "title",
+      "reason": "Es el primer argumento del inicializador."
+    },
+    {
+      "prop": "description",
+      "reason": "Es texto, no un caso: existe como `description` opcional (una entradilla, `BrandParagraph` de tamaño `large`)."
+    },
+    {
+      "prop": "children",
+      "reason": "Se porta como el cierre `@ViewBuilder content` (SwiftUI) o `content` (Compose): más texto bajo la frase."
+    },
+    {
+      "prop": "actions",
+      "reason": "Se porta como el `@ViewBuilder actions` (SwiftUI) o la lambda `actions` (Compose): la acción principal, a la derecha del título."
+    },
+    {
+      "prop": "as",
+      "reason": "El elemento `header`/`div` es HTML; en nativo el título es un encabezado accesible del nivel de `level`."
+    },
+    {
+      "prop": "className",
+      "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
+    }
+  ],
+  "differences": [
+    "`PageIntro` es el encabezado DENTRO del contenido de una pantalla (un `Heading` con su entradilla y sus acciones). No sustituye a la barra de navegación del sistema (`NavigationStack`/`toolbar` en Apple, `TopAppBar` en Android), que sigue siendo la del sistema.",
+    "Con `actions`, el título y las acciones comparten fila a partir de 480 pt/dp de ancho y las acciones caen debajo por debajo de él (el salto a `md` de la web).",
+    "El título es un encabezado para VoiceOver y TalkBack del nivel `level` (por defecto 1).",
+    "iOS: `level` por defecto `h1` (el de `BrandHeading` es `h2`); con las acciones apiladas, el hueco bajo el título pasa a `spacing.3`.",
+    "Android: con las acciones en fila se alinean a la línea base del título, salvo con `eyebrow`, donde van arriba; apiladas, a ancho completo."
+  ]
+}

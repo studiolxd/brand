@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema.json",
+  "component": "Banner",
+  "react": {
+    "path": "src/stories/molecules/Banner/Banner.tsx",
+    "props": "BannerProps"
+  },
+  "native": {
+    "swift": "BrandBanner",
+    "kotlin": "BrandBanner"
+  },
+  "props": {
+    "variant": {
+      "type": "union",
+      "values": [
+        "info",
+        "warning",
+        "error"
+      ],
+      "default": "info"
+    }
+  },
+  "excluded": [
+    {
+      "prop": "children",
+      "reason": "El mensaje es el cierre `@ViewBuilder` (`content`) del componente en SwiftUI y el `content` composable en Compose, no una prop."
+    },
+    {
+      "prop": "actions",
+      "reason": "Se porta como la ranura `actions` (`@ViewBuilder` en SwiftUI, lambda composable en Compose): normalmente un `BrandButton`."
+    },
+    {
+      "prop": "onDismiss",
+      "reason": "Se porta como el cierre opcional `onDismiss`: si se pasa, la barra pinta el aspa; la barra no se oculta sola."
+    },
+    {
+      "prop": "dismissLabel",
+      "reason": "Es texto, no un caso: existe como `dismissLabel` con «Descartar» por defecto (castellano)."
+    },
+    {
+      "prop": "role",
+      "reason": "El rol ARIA no existe en nativo: VoiceOver y TalkBack reciben el equivalente (aviso anunciado) por la propia variante."
+    },
+    {
+      "prop": "className",
+      "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
+    }
+  ],
+  "differences": [
+    "El rol y la región viva salen de la variante, como en React: `error` y `warning` interrumpen (aviso asertivo) y `info` informa sin interrumpir (cortés).",
+    "No fija su posición: la app la coloca (arriba con `safeAreaInset`, o en la columna de la pantalla); y no se oculta sola, `onDismiss` avisa y la app decide.",
+    "El filete superior e inferior y los rellenos son los de `banner.*`; los tres rellenos son universales (iguales en claro y oscuro) y el contenido que se componga dentro (botones, enlaces) lee sobre ellos con la tinta del relleno, no con la del tema.",
+    "El mensaje y las acciones apilan por debajo de 480 pt/dp de ancho, el equivalente nativo del salto a `md` de la web.",
+    "iOS: no hay anuncio explícito de VoiceOver (`.updatesFrequently` en las tres variantes y mayor prioridad de lectura en `warning`/`error`). A 480 pt exactos va en fila; React apila a 480 px (su salto es `md` = 768): las parejas fuerzan el apilado equivalente.",
+    "Android: región viva asertiva en `warning`/`error` y cortés en `info`. El aspa de `warning` usa `warning-close-color`."
+  ]
+}
