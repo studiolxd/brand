@@ -1,0 +1,14 @@
+.color-picker-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--color-picker-field-gap);
+}
+
+.color-picker-field__helper {
+  font-family: var(--color-picker-field-helper-font-family);
+  font-size: var(--color-picker-field-helper-font-size);
+  font-weight: var(--color-picker-field-helper-font-weight);
+  line-height: var(--color-picker-field-helper-line-height);
+  color: var(--color-picker-field-helper-color);
+}

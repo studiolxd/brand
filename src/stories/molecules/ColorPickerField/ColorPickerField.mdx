@@ -1,0 +1,74 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ColorPickerFieldStories from "./ColorPickerField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { colorPickerFieldTokens } from "../../../tokens/molecules/color-picker-field";
+
+<Meta of={ColorPickerFieldStories} />
+
+# ColorPickerField
+
+El `ColorPicker` como campo de formulario: etiqueta, disparador, ayuda y error, con el mismo ritmo
+que el resto de campos. El valor, el panel y su accesibilidad están en `ColorPicker`.
+
+<Canvas of={ColorPickerFieldStories.PorDefecto} />
+
+## Etiqueta
+
+Siempre hay etiqueta (`label`), enlazada al disparador, y **por defecto se ve**. La etiqueta
+nombra el disparador y también el panel que abre. Sin `id`, el campo genera uno con `useId`.
+Como en cualquier botón etiquetado, pulsar la etiqueta abre el panel.
+
+<Canvas of={ColorPickerFieldStories.EtiquetaOculta} />
+
+## Ayuda y error
+
+`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el disparador en error por sí
+solo. Los dos quedan enlazados por `aria-describedby`, junto al valor actual.
+
+<Canvas of={ColorPickerFieldStories.ConAyuda} />
+<Canvas of={ColorPickerFieldStories.ConError} />
+
+## Transparencia y quitar
+
+<Canvas of={ColorPickerFieldStories.ConTransparencia} />
+<Canvas of={ColorPickerFieldStories.ConQuitar} />
+
+## Tallas
+
+`size` viaja al disparador: 32, 40 o 48, las tallas del sistema.
+
+<Canvas of={ColorPickerFieldStories.Tallas} />
+
+<Canvas of={ColorPickerFieldStories.Deshabilitado} />
+
+## Con react-hook-form
+
+El contrato es `value` / `onValueChange` + `name` + `ref` al disparador, no el spread del `field`.
+El `name` monta un input oculto con el hex para el envío nativo.
+
+```tsx
+<FormField
+  control={form.control}
+  name="acento"
+  render={({ field, fieldState }) => (
+    <ColorPickerField
+      ref={field.ref}
+      name={field.name}
+      label="Color de acento"
+      value={field.value}
+      onValueCommitted={field.onChange}
+      errorMessage={fieldState.error?.message}
+    />
+  )}
+/>
+```
+
+---
+
+## Tokens
+
+<TokenTable tokens={colorPickerFieldTokens} />
+
+## Props
+
+<ArgTypes of={ColorPickerFieldStories} />

@@ -1,0 +1,19 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --color-picker-field-gap: var(--spacing-2); /** Espacio entre etiqueta, disparador, ayuda y error */
+  --color-picker-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
+  --color-picker-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
+  --color-picker-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
+  --color-picker-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
+  --color-picker-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
+}
+
+.surface-dark,
+.surface-invert,
+[data-theme="dark"],
+html.dark {
+  --color-picker-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
+}

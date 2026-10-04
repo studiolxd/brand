@@ -1,0 +1,63 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --color-picker-trigger-cursor: pointer; /** Cursor: abre el panel */
+  --color-picker-area-cursor: crosshair; /** Cursor sobre el área: se apunta a un punto */
+  --color-picker-preset-cursor: pointer; /** Cursor sobre un predefinido */
+  --color-picker-trigger-padding: var(--spacing-1); /** Aire entre el borde del disparador y la muestra que lleva dentro */
+  --color-picker-trigger-border-style: var(--input-border-style); /** Estilo del borde */
+  --color-picker-trigger-disabled-cursor: var(--input-disabled-cursor); /** Cursor deshabilitado */
+  --color-picker-trigger-disabled-opacity: var(--opacity-disabled); /** Opacidad de la muestra con el disparador deshabilitado: el color sigue ahí, atenuado */
+  --color-picker-panel-gap: var(--spacing-3); /** Separación entre las partes del panel: área, bandas, campo hex, predefinidos */
+  --color-picker-area-saturation-start: var(--color-white); /** Origen del degradado de saturación: sin saturación, el tono se lava hacia el blanco. Es el modelo HSV, no una decisión de marca */
+  --color-picker-area-brightness-end: var(--color-black); /** Fin del degradado de brillo: sin brillo, cualquier tono es negro. Es el modelo HSV */
+  --color-picker-channel-track-size: var(--spacing-3); /** Grosor de las bandas de tono y de opacidad: más gruesas que un deslizador, porque la banda es el dato */
+  --color-picker-thumb-size: var(--icon-size-sm); /** Lado del pulgar del área y de las bandas */
+  --color-picker-thumb-border-color: var(--color-white); /** Aro claro del pulgar: junto al contorno oscuro, se ve sobre cualquier color, claro u oscuro. No cambia en oscuro */
+  --color-picker-preset-gap: var(--spacing-2); /** Hueco entre predefinidos */
+  --color-picker-trigger-size: var(--input-height); /** Lado del disparador: cuadrado a la altura de los controles, talla md */
+  --color-picker-trigger-sm-size: var(--input-sm-height); /** Lado del disparador — sm */
+  --color-picker-trigger-lg-size: var(--input-lg-height); /** Lado del disparador — lg (y de partida en la superficie pública) */
+  --color-picker-trigger-bg: var(--input-bg); /** Fondo del disparador: el de un campo */
+  --color-picker-area-border-width: var(--border-width-default); /** Borde del área y de las bandas */
+  --color-picker-area-border-color: var(--color-border-default-on-light); /** Color del borde del área y de las bandas: el separador neutro */
+  --color-picker-thumb-border-width: var(--border-width-focus); /** Aro claro del pulgar */
+  --color-picker-thumb-outline-width: var(--border-width-default); /** Contorno oscuro del pulgar, por fuera y por dentro del aro */
+  --color-picker-thumb-outline-color: var(--color-primary); /** Contorno oscuro del pulgar. No cambia en oscuro: lo que tiene detrás es el color, no la superficie */
+  --color-picker-thumb-border-radius: var(--border-radius-default); /** Radio del pulgar */
+  --color-picker-thumb-focus-ring-width: var(--border-width-focus); /** Anillo de foco del pulgar */
+  --color-picker-thumb-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco */
+  --color-picker-thumb-focus-ring-color: var(--color-primary); /** Color del anillo de foco del pulgar */
+  --color-picker-preset-size: var(--color-swatch-size-md); /** Lado de un predefinido: la muestra md */
+  --color-picker-preset-focus-ring-width: var(--border-width-focus); /** Anillo de foco de un predefinido */
+  --color-picker-preset-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco */
+  --color-picker-preset-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
+  --color-picker-preset-selected-ring-width: var(--border-width-focus); /** Marca del predefinido que coincide con el valor: un aro por fuera */
+  --color-picker-preset-selected-ring-offset: var(--border-width-default); /** Separación de la marca */
+  --color-picker-preset-selected-ring-color: var(--color-primary); /** Color de la marca del seleccionado */
+  --color-picker-trigger-border-width: var(--input-border-width); /** Grosor del borde: el de un campo */
+  --color-picker-trigger-border-color: var(--input-border-color); /** Color del borde: el de un campo */
+  --color-picker-trigger-border-radius: var(--input-border-radius); /** Radio del disparador */
+  --color-picker-trigger-focus-border-color: var(--input-focus-border-color); /** Borde en foco: el de un campo */
+  --color-picker-trigger-focus-ring-inset-offset: var(--input-focus-ring-inset-offset); /** Separación entre el borde y el anillo */
+  --color-picker-trigger-focus-ring-color: var(--input-focus-ring-color); /** Color del anillo de foco */
+  --color-picker-trigger-error-border-color: var(--input-error-border-color); /** Borde en error */
+  --color-picker-trigger-error-focus-ring-color: var(--input-error-focus-ring-color); /** Anillo de foco en error */
+  --color-picker-trigger-disabled-bg: var(--input-disabled-bg); /** Fondo deshabilitado */
+  --color-picker-trigger-disabled-border-color: var(--input-disabled-border-color); /** Borde deshabilitado */
+  --color-picker-panel-inline-size: calc(8 * var(--color-picker-preset-size) + 7 * var(--color-picker-preset-gap)); /** Ancho del panel: ocho predefinidos por fila y sus siete huecos. El área y las bandas lo ocupan entero */
+  --color-picker-area-block-size: calc(6 * var(--color-picker-preset-size) + 5 * var(--color-picker-preset-gap)); /** Alto del área de saturación y brillo: seis filas de la misma rejilla que mide el ancho */
+  --color-picker-trigger-focus-ring-width: var(--input-focus-ring-width); /** Grosor del anillo de foco, por dentro del borde como en un campo */
+}
+
+.surface-dark,
+.surface-invert,
+[data-theme="dark"],
+html.dark {
+  --color-picker-area-border-color: var(--color-text-on-dark); /** Borde del área y de las bandas — surface-dark */
+  --color-picker-thumb-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco del pulgar — surface-dark */
+  --color-picker-preset-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
+  --color-picker-preset-selected-ring-color: var(--color-text-on-dark); /** Marca del seleccionado — surface-dark */
+}

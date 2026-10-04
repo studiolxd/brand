@@ -16,6 +16,7 @@ import type { SiteSearchMessages } from '../organisms/SiteSearch/SiteSearch';
 import type { FilterBarMessages } from '../molecules/FilterBar/FilterBar';
 import type { CalendarMessages } from '../molecules/Calendar/Calendar';
 import type { DatePickerMessages } from '../molecules/DatePicker/DatePicker';
+import type { ColorPickerMessages } from '../molecules/ColorPicker/ColorPicker';
 import type { TimeSelectMessages } from '../atoms/TimeSelect/TimeSelect';
 import type { FileUploadMessages } from '../atoms/FileUpload/FileUpload';
 import type { ImageCropDialogMessages } from '../molecules/ImageCropDialog/ImageCropDialog';
@@ -122,6 +123,7 @@ export interface BrandMessages {
   filterBar: FilterBarMessages;
   calendar: CalendarMessages;
   datePicker: DatePickerMessages;
+  colorPicker: ColorPickerMessages;
   timeSelect: TimeSelectMessages;
   fileUpload: FileUploadMessages;
   imageCropDialog: ImageCropDialogMessages;
@@ -208,6 +210,7 @@ export type {
   FilterBarMessages,
   CalendarMessages,
   DatePickerMessages,
+  ColorPickerMessages,
   TimeSelectMessages,
   FileUploadMessages,
   ImageCropDialogMessages,

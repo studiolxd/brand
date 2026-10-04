@@ -77,6 +77,14 @@ html.dark {
   --calendar-year-selected-bg: var(--calendar-selected-bg);
   --calendar-year-selected-color: var(--calendar-selected-color);
   --calendar-year-disabled-color: var(--calendar-disabled-color);
+  --color-picker-trigger-bg: var(--input-bg);
+  --color-picker-trigger-border-color: var(--input-border-color);
+  --color-picker-trigger-focus-border-color: var(--input-focus-border-color);
+  --color-picker-trigger-focus-ring-color: var(--input-focus-ring-color);
+  --color-picker-trigger-error-border-color: var(--input-error-border-color);
+  --color-picker-trigger-error-focus-ring-color: var(--input-error-focus-ring-color);
+  --color-picker-trigger-disabled-bg: var(--input-disabled-bg);
+  --color-picker-trigger-disabled-border-color: var(--input-disabled-border-color);
   --command-palette-input-border-color: var(--floating-panel-border-color);
   --prose-color: var(--text-color);
   --prose-quote-border-color: var(--separator-color);

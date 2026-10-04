@@ -253,6 +253,21 @@
       "import": "./dist/date-picker-field.js",
       "default": "./dist/date-picker-field.js"
     },
+    "./color-swatch": {
+      "types": "./dist/_types/atoms/ColorSwatch/ColorSwatch.d.ts",
+      "import": "./dist/color-swatch.js",
+      "default": "./dist/color-swatch.js"
+    },
+    "./color-picker": {
+      "types": "./dist/_types/molecules/ColorPicker/ColorPicker.d.ts",
+      "import": "./dist/color-picker.js",
+      "default": "./dist/color-picker.js"
+    },
+    "./color-picker-field": {
+      "types": "./dist/_types/molecules/ColorPickerField/ColorPickerField.d.ts",
+      "import": "./dist/color-picker-field.js",
+      "default": "./dist/color-picker-field.js"
+    },
     "./date-time-field": {
       "types": "./dist/_types/molecules/DateTimeField/DateTimeField.d.ts",
       "import": "./dist/date-time-field.js",
