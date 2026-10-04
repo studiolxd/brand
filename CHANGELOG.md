@@ -7,7 +7,12 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## [Sin publicar]
+## [49.20.0] — 2026-10-04
+
+> **Minor.** `Autocomplete` y `AutocompleteField` (sugerencias con texto libre), tachado en `Text`, y `NumberInput`
+> con `commitMode` (avisar al terminar) y `compact` (para filas de lista), en React, SwiftUI y Compose donde hay
+> versión nativa. Arreglos: color del texto de las filas en Compose y pruebas estables. Todo opcional: sin las props
+> nuevas el HTML no cambia.
 
 ### Arreglos previos a 49.20.0 (patch)
 
