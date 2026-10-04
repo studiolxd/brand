@@ -64,6 +64,23 @@ El único texto propio de la barra es el del enlace del logotipo, y **solo cuand
 `logo`**: sin marca, la barra no exige la clave. El resto lo pinta el `MenuButton`, que
 tiene su propio espacio en el catálogo.
 
+**`appHeader` es un espacio opcional en `BrandMessages`** (desde v49.23.1; en v49.23.0
+entró obligatorio y rompía la compilación de los catálogos que no usan el logo). Un
+catálogo sin él compila. Qué pasa en cada caso:
+
+| `logo` | `logoLabel` | `appHeader.logo` en el catálogo | Resultado |
+| --- | --- | --- | --- |
+| no | — | da igual | La barra de siempre; no se lee ningún texto. |
+| sí | sí | da igual | El enlace lee `logoLabel`; el catálogo no hace falta. |
+| sí | no | sí | El enlace lee `appHeader.logo`. |
+| sí | no | **no** | **Lanza** al renderizar: «el catálogo montado no trae «appHeader.logo»». |
+
+Lanzar es lo que hace la librería con cualquier texto ausente (`useBrandMessages`): no hay
+castellano de respaldo desde que los defaults se retiraron, y un enlace sin nombre accesible
+es un fallo que tiene que verse en desarrollo, no un texto en otro idioma que pase
+desapercibido en producción. Si un producto pone `logo`, o declara `appHeader.logo` en su
+catálogo, o pasa `logoLabel`.
+
 | | Textos | De dónde salen | Por qué |
 | --- | --- | --- | --- |
 | **Cromo** | `logoLabel` | `appHeader.logo` del proveedor | Dice qué hace el logotipo —llevar al inicio—. Como `siteHeader.logo`, cada producto la escribe con su marca. |

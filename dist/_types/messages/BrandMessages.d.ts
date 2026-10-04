@@ -143,7 +143,13 @@ export interface BrandMessages {
     menuButton: MenuButtonMessages;
     appRoot: AppRootMessages;
     appShell: AppShellMessages;
-    appHeader: AppHeaderMessages;
+    /**
+     * **Opcional** (desde v49.23.1): solo lo lee el `AppHeader` cuando lleva
+     * `logo` y no recibe `logoLabel`. En v49.23.0 entró obligatorio y rompía la
+     * compilación de catálogos que no usan el logo. Si un `AppHeader` lo
+     * necesita y falta, lanza como cualquier otra clave ausente.
+     */
+    appHeader?: AppHeaderMessages;
     sidebar: SidebarMessages;
     sidebarNav: SidebarNavMessages;
     siteNav: SiteNavMessages;
