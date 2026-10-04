@@ -24,6 +24,9 @@ para breaking changes.
 - **SwiftUI · captura `phrase-mismatch` en macOS** inestable: el `onAppear` daba el foco al campo de la frase y, según
   llegara antes o después de la fotografía, salían el anillo de foco y el cursor. Las capturas ya no piden foco
   (`autofocus: false` en el `init` interno con estado); el componente público lo sigue haciendo.
+  Las referencias de iOS de esa captura se regrabaron sin foco (antes llevaban el anillo).
+- **Compose · título de `BrandSheet`**: comparado con React y SwiftUI, los tres leen el mismo token
+  (`sheet.title-font-size` → `modal.title-font-size`, 32 px, peso 500): no hay diferencia y no se cambia nada.
 
 ### NumberInput — confirmar al terminar, compacto y etiquetas tipadas (minor)
 
