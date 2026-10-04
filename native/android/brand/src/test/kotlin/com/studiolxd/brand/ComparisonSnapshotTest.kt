@@ -80,4 +80,18 @@ class ComparisonSnapshotTest {
             }
         }
     }
+
+    @Test
+    fun strikethrough() {
+        paparazzi.brandComparison("text-strikethrough", 480, 200) {
+            Column(Modifier.width(448.dp), verticalArrangement = Arrangement.spacedBy(BrandSpacing.s5)) {
+                fun frase(antes: String, estilo: androidx.compose.ui.text.SpanStyle, tachado: String, despues: String) =
+                    buildAnnotatedString { append(antes); withStyle(estilo) { append(tachado) }; append(despues) }
+                BrandParagraph(frase("En el carrito: ", brandSpanStyle(strikethrough = true), "Leche entera", "."))
+                BrandParagraph(frase("Con intención: ", brandSpanStyle(tone = TextTone.Destructive, strikethrough = true), "cancelado", "."))
+                BrandParagraph(frase("Precio: ", brandSpanStyle(TextElement.Del), "49 €", " 39 €."))
+                BrandParagraph(frase("Ya no aplica: ", brandSpanStyle(TextElement.S), "envío gratis", "."))
+            }
+        }
+    }
 }

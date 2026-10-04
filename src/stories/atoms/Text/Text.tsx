@@ -7,13 +7,21 @@ export interface TextProps extends React.ComponentPropsWithoutRef<'span'> {
    * `span` no añade significado, `em` marca énfasis de lectura (cambia cómo se
    * dice la frase) y `strong` marca importancia. No es una prop de estilo.
    */
-  as?: 'span' | 'em' | 'strong';
+  as?: 'span' | 'em' | 'strong' | 'del' | 's';
   /**
    * Intención del fragmento. `destructive` es la palabra que dice que algo se
    * pierde («esta acción **borra** el curso»); `success`, la que dice que salió
    * bien; `muted`, una aclaración secundaria.
    */
   tone?: 'default' | 'muted' | 'destructive' | 'success';
+  /**
+   * Tacha el fragmento con una línea y lo atenúa (tinta secundaria): lo que ya
+   * está hecho, como un producto que ya está en el carrito. Es **solo
+   * aspecto**: no dice nada al lector de pantalla. Si el tachado significa algo
+   * («este precio ya no vale»), usa `as="del"` o `as="s"`, que además lo tachan.
+   * Con un `tone` manda el color del tono.
+   */
+  strikethrough?: boolean;
   /**
    * Idioma de **este fragmento**, cuando no es el de la página: una cita, un
    * término sin traducir, un segmento de traducción. Marca el idioma para el
@@ -28,11 +36,13 @@ export interface TextProps extends React.ComponentPropsWithoutRef<'span'> {
 
 /**
  * Texto **en línea**: un trozo de una frase que hay que marcar sin salirse de
- * ella. Dos usos, y ningún otro:
+ * ella. Tres usos, y ningún otro:
  *
  * - **Otro idioma** (`lang`): el fragmento se anuncia con la voz correcta y se
  *   corta según sus reglas. Antes esto era un `<span lang>` a mano en cada
  *   producto.
+ * - **Tachado** (`strikethrough`, o `as="del"`/`as="s"`): lo hecho o lo que ya
+ *   no vale, en tinta atenuada.
  * - **Intención** (`tone`): énfasis con carga —destructiva o de logro— en tinta
  *   de feedback. Es color de texto sobre la superficie, **nunca un relleno**:
  *   una palabra resaltada dentro de un párrafo no lleva fondo.
@@ -43,12 +53,14 @@ export interface TextProps extends React.ComponentPropsWithoutRef<'span'> {
 export const Text = forwardRef<HTMLElement, TextProps>(function Text({
   as = 'span',
   tone = 'default',
+  strikethrough = false,
   className,
   children,
   ...rest
 }, ref) {
   const classes = [
     'text',
+    strikethrough || as === 'del' || as === 's' ? 'text--strikethrough' : '',
     tone !== 'default' ? `text--${tone}` : '',
     className ?? '',
   ].filter(Boolean).join(' ');

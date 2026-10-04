@@ -53,6 +53,16 @@ no es información para quien no lo distingue.
 | `span` | Nada. Solo agrupa para poder marcar idioma o intención. |
 | `em` | Énfasis de lectura: cambia cómo se dice la frase. |
 | `strong` | Importancia: esto es lo que no puede pasarse por alto. |
+| `del` | Lo eliminado: un texto corregido o un precio que ya no vale. Va tachado. |
+| `s` | Lo que ya no es relevante sin estar mal. Va tachado. |
+
+## Tachado
+
+`strikethrough` tacha el fragmento con una línea del grosor de los trazos del sistema (`border-width.default`) y lo pasa a tinta atenuada, la del texto secundario: lo que **ya está hecho**, como un producto que ya está en el carrito. Con un `tone`, el color lo pone el tono.
+
+<Canvas of={TextStories.Tachado} />
+
+La prop es **solo aspecto**: un lector de pantalla no anuncia un tachado hecho con CSS. Si el tachado dice algo —«este precio ya no vale»—, usa `as="del"` o `as="s"`, que además de tachar son el elemento con ese significado. Sin la prop, el HTML de `Text` es el de siempre.
 
 ## Salto de línea
 

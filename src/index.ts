@@ -12,6 +12,8 @@ export { AsyncMultiSelect } from './stories/atoms/AsyncMultiSelect/AsyncMultiSel
 export type { AsyncMultiSelectOption, AsyncMultiSelectProps } from './stories/atoms/AsyncMultiSelect/AsyncMultiSelect';
 export { AsyncSelect } from './stories/atoms/AsyncSelect/AsyncSelect';
 export type { AsyncSelectOption, AsyncSelectProps } from './stories/atoms/AsyncSelect/AsyncSelect';
+export { Autocomplete } from './stories/atoms/Autocomplete/Autocomplete';
+export type { AutocompleteOption, AutocompleteProps } from './stories/atoms/Autocomplete/Autocomplete';
 export { Arrow } from './stories/atoms/Arrow/Arrow';
 export type { ArrowProps } from './stories/atoms/Arrow/Arrow';
 export { DescriptionList, DescriptionTerm, DescriptionDetails } from './stories/atoms/DescriptionList/DescriptionList';
@@ -185,6 +187,8 @@ export { AsyncMultiSelectField } from './stories/molecules/AsyncMultiSelectField
 export type { AsyncMultiSelectFieldProps } from './stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField';
 export { AsyncSelectField } from './stories/molecules/AsyncSelectField/AsyncSelectField';
 export type { AsyncSelectFieldProps } from './stories/molecules/AsyncSelectField/AsyncSelectField';
+export { AutocompleteField } from './stories/molecules/AutocompleteField/AutocompleteField';
+export type { AutocompleteFieldProps } from './stories/molecules/AutocompleteField/AutocompleteField';
 export { Breadcrumb } from './stories/molecules/Breadcrumb/Breadcrumb';
 export type { BreadcrumbItem, BreadcrumbProps, BreadcrumbRenderLinkProps } from './stories/molecules/Breadcrumb/Breadcrumb';
 export { EmptyState } from './stories/molecules/EmptyState/EmptyState';

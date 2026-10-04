@@ -46,6 +46,18 @@ final class TextSnapshotTests: XCTestCase {
         assertBrandSnapshots(view, width: 480, height: 152, named: "compare-inline-tones", padding: 16)
     }
 
+    /// Pareja con la story `atoms-text--tachado`: el tachado atenuado, con tono, `del` y `s`.
+    func testComparisonStrikethrough() {
+        let view = VStack(alignment: .leading, spacing: BrandSpacing.s5) {
+            BrandParagraph(Text("En el carrito: ") + Text("Leche entera").brand(strikethrough: true) + Text("."))
+            BrandParagraph(Text("Con intención: ") + Text("cancelado").brand(tone: .destructive, strikethrough: true) + Text("."))
+            BrandParagraph(Text("Precio: ") + Text("49 €").brand(.del) + Text(" 39 €."))
+            BrandParagraph(Text("Ya no aplica: ") + Text("envío gratis").brand(.s) + Text("."))
+        }
+        .frame(width: 448, alignment: .leading)
+        assertBrandSnapshots(view, width: 480, height: 200, named: "compare-strikethrough", padding: 16)
+    }
+
     func testHeadingLevels() {
         let view = VStack(alignment: .leading, spacing: BrandSpacing.s2) {
             ForEach(HeadingLevel.allCases, id: \.self) { level in

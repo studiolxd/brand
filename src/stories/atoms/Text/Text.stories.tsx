@@ -72,6 +72,18 @@ export const Significado: Story = {
   ),
 };
 
+/** Tachado: lo que ya está hecho va atenuado y con línea; `del` y `s` tachan con significado. */
+export const Tachado: Story = {
+  render: () => (
+    <Stack>
+      <Paragraph>En el carrito: <Text strikethrough>Leche entera</Text>.</Paragraph>
+      <Paragraph>Con intención: <Text strikethrough tone="destructive">cancelado</Text>.</Paragraph>
+      <Paragraph>Precio: <Text as="del">49 €</Text> 39 €.</Paragraph>
+      <Paragraph>Ya no aplica: <Text as="s">envío gratis</Text>.</Paragraph>
+    </Stack>
+  ),
+};
+
 /** `LineBreak` corta la línea dentro de la frase, sin separar párrafos. */
 export const SaltoDeLinea: Story = {
   name: 'Salto de línea',
@@ -100,6 +112,19 @@ export const TestIdiomaYTono: Story = {
     const destructivo = canvas.getByText('borran');
     await expect(destructivo.tagName).toBe('STRONG');
     await expect(destructivo).toHaveClass('text--destructive');
+  },
+};
+
+export const TestTachado: Story = {
+  name: 'Test — Tachado',
+  tags: ['!dev'],
+  render: Tachado.render,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const hecho = canvas.getByText('Leche entera');
+    await expect(getComputedStyle(hecho).textDecorationLine).toBe('line-through');
+    await expect(canvas.getByText('49 €').tagName).toBe('DEL');
+    await expect(canvas.getByText('envío gratis').tagName).toBe('S');
   },
 };
 

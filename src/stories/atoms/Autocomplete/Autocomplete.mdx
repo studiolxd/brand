@@ -1,0 +1,86 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as AutocompleteStories from "./Autocomplete.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { autocompleteFaceTokens, autocompleteDarkTokens } from "../../../tokens/components/autocomplete";
+
+<Meta of={AutocompleteStories} />
+
+# Autocomplete
+
+Un campo de texto que **sugiere** mientras se escribe. El usuario puede elegir una sugerencia **o quedarse con lo que ha escrito**, aunque no coincida con ninguna: el valor es el texto, y una sugerencia es solo una forma de escribirlo más deprisa. Un producto de la compra, un ingrediente, una ciudad, una etiqueta.
+
+<Canvas of={AutocompleteStories.Default} />
+
+## Cuándo es este y cuándo `AsyncSelect`
+
+| Si el valor es… | Usa |
+| --- | --- |
+| **Lo que se escribió**, aunque no esté en la lista | `Autocomplete` |
+| **Un elemento de la lista** (un identificador): no se admite nada fuera de ella | `Select`, `AsyncSelect` |
+
+Es un modelo de valor distinto, y por eso es un componente aparte y no una prop de `AsyncSelect`: `AsyncSelect` guarda un **identificador** y necesita `selectedOption` para pintarlo; aquí el valor es un `string`, el propio texto del `<input>`. Mezclarlos habría obligado a que `value` fuera dos cosas según una prop.
+
+## Valor y elección
+
+- `value` / `onValueChange` llevan **el texto**. `onValueChange` se llama al escribir y también al elegir una sugerencia (con su `label`).
+- `onSelect` se llama **solo** al elegir, con la opción entera: es la forma de saber que el texto vino de una sugerencia (y cuál, por su `value`) y no se escribió a mano.
+- Elegir **rellena** el campo con el `label` de la sugerencia, cierra la lista y deja el foco donde estaba.
+
+<Canvas of={AutocompleteStories.TextoLibre} />
+
+Sin `value`, el campo guarda su propio texto (`defaultValue` para el inicial). El propio `<input>` lleva `name` y `required` nativos: lo que se envía con el formulario es lo que se ve.
+
+<Canvas of={AutocompleteStories.ConValorInicial} />
+
+## Sugerencias
+
+Dos formas, excluyentes:
+
+- **`options`** — una lista fija y síncrona. El control la filtra por lo escrito, sin distinguir mayúsculas ni tildes («cafe» encuentra «Café molido»).
+- **`onSearch`** — una función `(query) => opciones | Promise<opciones>`: la lista la decide el consumidor, sea del servidor o calculada. Las teclas se rebotan (`debounceMs`, 200 por defecto; a 0 se busca en cada tecla), la respuesta que llega fuera de orden se descarta y mientras tarda se ve un `Spinner` dentro del campo. Si lanza, simplemente no hay sugerencias: el texto escrito sigue valiendo.
+
+`minChars` (1 por defecto) es lo mínimo que hay que escribir para que se sugiera; la flecha abajo abre la lista igualmente.
+
+<Canvas of={AutocompleteStories.Asincrono} />
+
+**Sin sugerencias no hay lista.** No existe el aviso «sin resultados»: quedarse con lo escrito es una respuesta válida, no un fallo que explicar. Por eso este control tampoco emite ningún texto por su cuenta, y no tiene claves en el catálogo del `BrandMessagesProvider`: el `placeholder` y el `aria-label` los pasa quien lo usa.
+
+## Tallas
+
+Las tres del sistema: 32, 40 y 48. Sin `size`, la del `Form` que lo envuelva.
+
+<Canvas of={AutocompleteStories.Tallas} />
+
+## Estados
+
+<Canvas of={AutocompleteStories.Deshabilitado} />
+<Canvas of={AutocompleteStories.ConError} />
+
+## Accesibilidad
+
+Es el patrón ARIA de **combobox con lista** (`role="combobox"`, `aria-autocomplete="list"`): el foco no sale nunca del `<input>`; la opción marcada se anuncia con `aria-activedescendant`, y `aria-expanded` dice si la lista está abierta. `aria-controls` solo existe con la lista abierta, porque el listbox vive en un portal.
+
+| Tecla | Hace |
+| --- | --- |
+| Escribir | Abre la lista con las sugerencias |
+| <kbd>↓</kbd> | Abre la lista si estaba cerrada; si no, marca la siguiente sugerencia |
+| <kbd>↑</kbd> | Marca la anterior; desde la primera, vuelve al texto escrito |
+| <kbd>Enter</kbd> | Con una sugerencia marcada, la elige (y **no** envía el formulario). Sin ninguna, se queda con lo escrito, cierra la lista y deja que el formulario se envíe |
+| <kbd>Esc</kbd> | Cierra la lista y conserva el texto. Con la lista abierta no sube al diálogo que lo contenga |
+| <kbd>Tab</kbd> | Cierra la lista y sigue |
+
+<Canvas of={AutocompleteStories.TestTeclado} />
+
+El `ref` va al `<input>`. En un campo, la etiqueta lo nombra (`AutocompleteField`); suelto, hay que pasar `aria-label`, que además nombra la lista.
+
+## Superficie oscura
+
+El control tiene la **misma cara que `AsyncSelect` y `Select`**: cada token propio apunta al de `async-select`. El par oscuro lo hereda por esa referencia (no hace falta `surface-dark-*` propio). Personalizar uno mueve al otro; ponerle un valor propio a un token de `autocomplete.*` los separa, sin tocar CSS.
+
+## Tokens
+
+<TokenTable tokens={autocompleteFaceTokens} />
+
+## Props
+
+<ArgTypes of={AutocompleteStories.Default} />

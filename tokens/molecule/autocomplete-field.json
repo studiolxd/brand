@@ -1,0 +1,63 @@
+{
+  "autocomplete-field": {
+    "gap": {
+      "$value": "{async-select-field.gap}",
+      "$type": "dimension",
+      "$description": "Espacio entre label, control, helper y error"
+    },
+    "error": {
+      "font-family": {
+        "$value": "{async-select-field.error.font-family}",
+        "$type": "string",
+        "$description": "Font family del mensaje de error"
+      },
+      "font-size": {
+        "$value": "{async-select-field.error.font-size}",
+        "$type": "dimension",
+        "$description": "Font size del mensaje de error"
+      },
+      "font-weight": {
+        "$value": "{async-select-field.error.font-weight}",
+        "$type": "number",
+        "$description": "Font weight del mensaje de error"
+      },
+      "line-height": {
+        "$value": "{async-select-field.error.line-height}",
+        "$type": "number",
+        "$description": "Line height del mensaje de error"
+      },
+      "color": {
+        "$value": "{async-select-field.error.color}",
+        "$type": "color",
+        "$description": "Color del mensaje de error"
+      }
+    },
+    "helper": {
+      "font-family": {
+        "$value": "{async-select-field.helper.font-family}",
+        "$type": "string",
+        "$description": "Font family del texto de ayuda"
+      },
+      "font-size": {
+        "$value": "{async-select-field.helper.font-size}",
+        "$type": "dimension",
+        "$description": "Font size del texto de ayuda"
+      },
+      "font-weight": {
+        "$value": "{async-select-field.helper.font-weight}",
+        "$type": "number",
+        "$description": "Font weight del texto de ayuda"
+      },
+      "line-height": {
+        "$value": "{async-select-field.helper.line-height}",
+        "$type": "number",
+        "$description": "Line height del texto de ayuda"
+      },
+      "color": {
+        "$value": "{async-select-field.helper.color}",
+        "$type": "color",
+        "$description": "Color del texto de ayuda"
+      }
+    }
+  }
+}

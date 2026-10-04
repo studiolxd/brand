@@ -55,6 +55,16 @@ html.dark .surface-invert {
   --async-select-item-highlighted-color: var(--select-item-highlighted-color);
   --async-select-placeholder-color: var(--multi-select-placeholder-color);
   --async-select-empty-color: var(--color-text-muted-on-light);
+  --autocomplete-bg: var(--async-select-bg);
+  --autocomplete-border-color: var(--async-select-border-color);
+  --autocomplete-color: var(--async-select-color);
+  --autocomplete-content-bg: var(--async-select-content-bg);
+  --autocomplete-content-border-color: var(--async-select-content-border-color);
+  --autocomplete-error-border-color: var(--async-select-error-border-color);
+  --autocomplete-focus-ring-color: var(--async-select-focus-ring-color);
+  --autocomplete-item-highlighted-bg: var(--async-select-item-highlighted-bg);
+  --autocomplete-item-highlighted-color: var(--async-select-item-highlighted-color);
+  --autocomplete-placeholder-color: var(--async-select-placeholder-color);
   --avatar-initials-bg: var(--color-primary);
   --avatar-initials-color: var(--color-text-on-dark);
   --breadcrumb-separator-color: var(--color-text-on-light);
@@ -382,6 +392,7 @@ html.dark .surface-invert {
   --text-inline-muted-color: var(--color-text-muted-on-light);
   --text-inline-destructive-color: var(--color-destructive-text-on-light);
   --text-inline-success-color: var(--color-success-text-on-light);
+  --text-inline-strikethrough-color: var(--color-text-muted-on-light);
   --text-color: var(--color-text-on-light);
   --text-background: var(--color-background-light);
   --text-h1-color: var(--text-heading-color);
@@ -438,6 +449,8 @@ html.dark .surface-invert {
   --async-multi-select-field-helper-color: var(--form-helper-color);
   --async-select-field-error-color: var(--form-error-color);
   --async-select-field-helper-color: var(--form-helper-color);
+  --autocomplete-field-error-color: var(--async-select-field-error-color);
+  --autocomplete-field-helper-color: var(--async-select-field-helper-color);
   --avatar-upload-ring-color: var(--color-primary);
   --avatar-upload-hint-color: var(--form-helper-color);
   --avatar-upload-error-color: var(--form-error-color);

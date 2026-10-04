@@ -1,0 +1,13 @@
+.autocomplete-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--autocomplete-field-gap);
+}
+
+.autocomplete-field__helper {
+  font-family: var(--autocomplete-field-helper-font-family);
+  font-size: var(--autocomplete-field-helper-font-size);
+  font-weight: var(--autocomplete-field-helper-font-weight);
+  line-height: var(--autocomplete-field-helper-line-height);
+  color: var(--autocomplete-field-helper-color);
+}

@@ -1,0 +1,40 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --autocomplete-border-style: var(--async-select-border-style); /** Hereda de `async-select.border-style`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-disabled-cursor: var(--async-select-disabled-cursor); /** Hereda de `async-select.disabled-cursor`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-content-max-height: var(--async-select-content-max-height); /** Hereda de `async-select.content-max-height`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-bg: var(--async-select-bg); /** Hereda de `async-select.bg`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-content-bg: var(--async-select-content-bg); /** Hereda de `async-select.content-bg`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-content-gap: var(--async-select-content-gap); /** Hereda de `async-select.content-gap`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-content-z-index: var(--async-select-content-z-index); /** Hereda de `async-select.content-z-index`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-font-family: var(--async-select-font-family); /** Hereda de `async-select.font-family`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-font-size: var(--async-select-font-size); /** Hereda de `async-select.font-size`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-height: var(--async-select-height); /** Hereda de `async-select.height`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-item-padding-block: var(--async-select-item-padding-block); /** Hereda de `async-select.item-padding-block`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-lg-font-size: var(--async-select-lg-font-size); /** Hereda de `async-select.lg-font-size`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-lg-height: var(--async-select-lg-height); /** Hereda de `async-select.lg-height`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-lg-item-padding-block: var(--async-select-lg-item-padding-block); /** Hereda de `async-select.lg-item-padding-block`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-lg-padding-inline: var(--async-select-lg-padding-inline); /** Hereda de `async-select.lg-padding-inline`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-sm-font-size: var(--async-select-sm-font-size); /** Hereda de `async-select.sm-font-size`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-sm-height: var(--async-select-sm-height); /** Hereda de `async-select.sm-height`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-sm-item-padding-block: var(--async-select-sm-item-padding-block); /** Hereda de `async-select.sm-item-padding-block`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-sm-padding-inline: var(--async-select-sm-padding-inline); /** Hereda de `async-select.sm-padding-inline`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-item-selected-font-weight: var(--async-select-item-selected-font-weight); /** Peso de la sugerencia que coincide con el texto escrito */
+  --autocomplete-border-color: var(--async-select-border-color); /** Hereda de `async-select.border-color`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-border-radius: var(--async-select-border-radius); /** Hereda de `async-select.border-radius`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-border-width: var(--async-select-border-width); /** Hereda de `async-select.border-width`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-color: var(--async-select-color); /** Hereda de `async-select.color`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-content-border-color: var(--async-select-content-border-color); /** Hereda de `async-select.content-border-color`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-error-border-color: var(--async-select-error-border-color); /** Hereda de `async-select.error-border-color`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-focus-ring-color: var(--async-select-focus-ring-color); /** Hereda de `async-select.focus-ring-color`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-focus-ring-width: var(--async-select-focus-ring-width); /** Hereda de `async-select.focus-ring-width`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-font-weight: var(--async-select-font-weight); /** Hereda de `async-select.font-weight`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-item-highlighted-bg: var(--async-select-item-highlighted-bg); /** Hereda de `async-select.item-highlighted-bg`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-item-highlighted-color: var(--async-select-item-highlighted-color); /** Hereda de `async-select.item-highlighted-color`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-line-height: var(--async-select-line-height); /** Hereda de `async-select.line-height`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-padding-inline: var(--async-select-padding-inline); /** Hereda de `async-select.padding-inline`: el autocompletado tiene la misma cara que el buscador y el Select */
+  --autocomplete-placeholder-color: var(--async-select-placeholder-color); /** Hereda de `async-select.placeholder-color`: el autocompletado tiene la misma cara que el buscador y el Select */
+}

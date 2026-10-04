@@ -15,7 +15,9 @@
       "values": [
         "span",
         "em",
-        "strong"
+        "strong",
+        "del",
+        "s"
       ],
       "default": "span"
     },
@@ -28,6 +30,10 @@
         "success"
       ],
       "default": "default"
+    },
+    "strikethrough": {
+      "type": "boolean",
+      "default": false
     }
   },
   "excluded": [
@@ -48,6 +54,7 @@
     "`Text.brand(.strong)` necesita el tamaño del texto que lo rodea (`size:`, 16 pt por defecto) para cambiar el peso del eje `wght`: SwiftUI no lo cambia con `fontWeight(_:)` en una fuente variable de CoreText.",
     "El texto de la web se ve algo más grueso (suavizado de Chromium en macOS).",
     "En Kotlin la prop `as` se llama `element` (`as` es una palabra reservada) y el fragmento en línea se usa con `brandSpanStyle(element, tone)` dentro de un `AnnotatedString`; `BrandText` suelto hereda la tipografía del control o del párrafo en que va.",
-    "En Compose `strong` no necesita el tamaño del texto que lo rodea: solo fija el peso (`SpanStyle`) y la fuente variable lo resuelve."
+    "En Compose `strong` no necesita el tamaño del texto que lo rodea: solo fija el peso (`SpanStyle`) y la fuente variable lo resuelve.",
+    "El tachado nativo es la línea del sistema (`strikethrough()` / `LineThrough`): el grosor lo decide la plataforma, no el token `text-inline.strikethrough-thickness` de la web. `del` y `s` solo dan el aspecto (VoiceOver y TalkBack no anuncian el elemento)."
   ]
 }

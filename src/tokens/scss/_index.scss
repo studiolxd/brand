@@ -43,6 +43,7 @@
 @forward 'components/select';
 @forward 'components/multi-select';
 @forward 'components/async-select';
+@forward 'components/autocomplete';
 @forward 'components/async-multi-select';
 @forward 'components/avatar';
 @forward 'components/input-phone';
@@ -147,6 +148,7 @@
 @forward 'components/otp-input';
 @forward 'molecules/otp-field';
 @forward 'molecules/async-select-field';
+@forward 'molecules/autocomplete-field';
 @forward 'molecules/async-multi-select-field';
 @forward 'molecules/chart';
 @forward 'components/sparkline';

@@ -1,0 +1,17 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --autocomplete-field-gap: var(--async-select-field-gap); /** Espacio entre label, control, helper y error */
+  --autocomplete-field-error-font-family: var(--async-select-field-error-font-family); /** Font family del mensaje de error */
+  --autocomplete-field-error-line-height: var(--async-select-field-error-line-height); /** Line height del mensaje de error */
+  --autocomplete-field-helper-font-family: var(--async-select-field-helper-font-family); /** Font family del texto de ayuda */
+  --autocomplete-field-helper-line-height: var(--async-select-field-helper-line-height); /** Line height del texto de ayuda */
+  --autocomplete-field-error-font-size: var(--async-select-field-error-font-size); /** Font size del mensaje de error */
+  --autocomplete-field-error-font-weight: var(--async-select-field-error-font-weight); /** Font weight del mensaje de error */
+  --autocomplete-field-error-color: var(--async-select-field-error-color); /** Color del mensaje de error */
+  --autocomplete-field-helper-font-size: var(--async-select-field-helper-font-size); /** Font size del texto de ayuda */
+  --autocomplete-field-helper-font-weight: var(--async-select-field-helper-font-weight); /** Font weight del texto de ayuda */
+  --autocomplete-field-helper-color: var(--async-select-field-helper-color); /** Color del texto de ayuda */
+}

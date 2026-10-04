@@ -9,6 +9,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.studiolxd.brand.support.LocalBrandTextStyle
@@ -190,12 +191,15 @@ fun BrandParagraph(
 
 /**
  * `Text` `as`: qué se pinta, que es lo mismo que decir qué significa. `span` no añade significado, `em` marca
- * énfasis de lectura (cursiva) y `strong` marca importancia (el peso de énfasis del sistema).
+ * énfasis de lectura (cursiva), `strong` marca importancia (el peso de énfasis del sistema), `del` lo eliminado y `s`
+ * lo que ya no es relevante: los dos últimos van tachados (Compose no tiene el elemento, solo el aspecto).
  */
 enum class TextElement(val value: String) {
     Span("span"),
     Em("em"),
     Strong("strong"),
+    Del("del"),
+    S("s"),
 }
 
 /**
@@ -214,17 +218,23 @@ enum class TextTone(val value: String) {
  * fragmento hereda la fuente y el tamaño del texto que lo rodea (no los fija).
  */
 @Composable
-fun brandSpanStyle(element: TextElement = TextElement.Span, tone: TextTone = TextTone.Default): SpanStyle {
+fun brandSpanStyle(
+    element: TextElement = TextElement.Span,
+    tone: TextTone = TextTone.Default,
+    strikethrough: Boolean = false,
+): SpanStyle {
+    val struck = strikethrough || element == TextElement.Del || element == TextElement.S
     val color = when (tone) {
-        TextTone.Default -> Color.Unspecified
+        TextTone.Default -> if (struck) BrandTextInlineTokens.strikethroughColor.current else Color.Unspecified
         TextTone.Muted -> BrandTextInlineTokens.mutedColor.current
         TextTone.Destructive -> BrandTextInlineTokens.destructiveColor.current
         TextTone.Success -> BrandTextInlineTokens.successColor.current
     }
+    val decoration = if (struck) TextDecoration.LineThrough else null
     return when (element) {
-        TextElement.Span -> SpanStyle(color = color)
-        TextElement.Em -> SpanStyle(color = color, fontStyle = FontStyle.Italic)
-        TextElement.Strong -> SpanStyle(color = color, fontWeight = BrandTextInlineTokens.emphasisFontWeight)
+        TextElement.Span, TextElement.Del, TextElement.S -> SpanStyle(color = color, textDecoration = decoration)
+        TextElement.Em -> SpanStyle(color = color, fontStyle = FontStyle.Italic, textDecoration = decoration)
+        TextElement.Strong -> SpanStyle(color = color, fontWeight = BrandTextInlineTokens.emphasisFontWeight, textDecoration = decoration)
     }
 }
 
@@ -245,8 +255,9 @@ fun BrandText(
     modifier: Modifier = Modifier,
     element: TextElement = TextElement.Span,
     tone: TextTone = TextTone.Default,
+    strikethrough: Boolean = false,
 ) {
-    val span = brandSpanStyle(element, tone)
+    val span = brandSpanStyle(element, tone, strikethrough)
     val base = LocalBrandTextStyle.current
     val color = if (span.color != Color.Unspecified) span.color else if (base.color != Color.Unspecified) base.color else brandContentColor()
     BasicText(text, modifier, style = base.merge(span).copy(color = color))

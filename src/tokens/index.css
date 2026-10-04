@@ -58,6 +58,7 @@
 @import "./molecules/select-field.css";
 @import "./molecules/multi-select-field.css";
 @import "./molecules/async-select-field.css";
+@import "./molecules/autocomplete-field.css";
 @import "./molecules/async-multi-select-field.css";
 @import "./molecules/input-phone-field.css";
 @import "./components/otp-input.css";
@@ -67,6 +68,7 @@
 @import "./components/select.css";
 @import "./components/multi-select.css";
 @import "./components/async-select.css";
+@import "./components/autocomplete.css";
 @import "./components/async-multi-select.css";
 @import "./components/avatar.css";
 @import "./components/input-phone.css";

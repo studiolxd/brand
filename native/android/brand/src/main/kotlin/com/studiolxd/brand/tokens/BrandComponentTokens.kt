@@ -1409,6 +1409,10 @@ object BrandTextInlineTokens {
     val destructiveColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFB30000), Color(0xFFFF8585))
     /** Token `text-inline.success-color` — Énfasis en línea con intención de logro */
     val successColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF006616), Color(0xFF00CC2C))
+    /** Token `text-inline.strikethrough-color` — Texto tachado: lo que ya está hecho (un producto en el carrito) o ya no vale. Atenuado como el texto secundario; con un `tone` manda el tono */
+    val strikethroughColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF4A4A4A), Color(0xFFD0D0D0))
+    /** Token `text-inline.strikethrough-thickness` — Grosor de la línea del tachado: el de los demás trazos del sistema */
+    val strikethroughThickness: Dp = 1.dp
 }
 
 /** Tokens del componente `empty-state` (`tokens/**/empty-state.json`). Todo color es un [BrandSchemeValue]: se resuelve con `.current` (los que no tienen par oscuro valen lo mismo en los dos esquemas). */

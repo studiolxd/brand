@@ -16,6 +16,10 @@
   --async-select-height: var(--async-select-lg-height);
   --async-select-item-padding-block: var(--async-select-lg-item-padding-block);
   --async-select-padding-inline: var(--async-select-lg-padding-inline);
+  --autocomplete-font-size: var(--autocomplete-lg-font-size);
+  --autocomplete-height: var(--autocomplete-lg-height);
+  --autocomplete-item-padding-block: var(--autocomplete-lg-item-padding-block);
+  --autocomplete-padding-inline: var(--autocomplete-lg-padding-inline);
   --button-height: var(--button-lg-height);
   --button-padding-inline: var(--button-lg-padding-inline);
   --button-font-size: var(--button-lg-font-size);
@@ -184,6 +188,8 @@
   --async-multi-select-field-helper-font-size: var(--form-helper-font-size);
   --async-select-field-error-font-size: var(--form-error-font-size);
   --async-select-field-helper-font-size: var(--form-helper-font-size);
+  --autocomplete-field-error-font-size: var(--async-select-field-error-font-size);
+  --autocomplete-field-helper-font-size: var(--async-select-field-helper-font-size);
   --avatar-upload-hint-font-size: var(--form-helper-font-size);
   --avatar-upload-error-font-size: var(--form-error-font-size);
   --banner-font-size: var(--text-font-size);

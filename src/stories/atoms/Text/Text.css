@@ -11,6 +11,14 @@ strong.text {
   font-weight: var(--text-inline-emphasis-font-weight);
 }
 
+/* Tachado: la línea con el grosor del sistema y el texto atenuado. Va antes
+   que los tonos para que, con un `tone`, mande el color del tono. */
+.text.text--strikethrough {
+  color: var(--text-inline-strikethrough-color);
+  text-decoration-line: line-through;
+  text-decoration-thickness: var(--text-inline-strikethrough-thickness);
+}
+
 .text.text--muted {
   color: var(--text-inline-muted-color);
 }

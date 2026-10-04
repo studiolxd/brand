@@ -1400,6 +1400,10 @@ public enum BrandTextInlineTokens {
     public static let destructiveColor: Color = Color(brandLight: Color(brandHex: 0xB30000), dark: Color(brandHex: 0xFF8585))
     /// Token `text-inline.success-color` — Énfasis en línea con intención de logro
     public static let successColor: Color = Color(brandLight: Color(brandHex: 0x006616), dark: Color(brandHex: 0x00CC2C))
+    /// Token `text-inline.strikethrough-color` — Texto tachado: lo que ya está hecho (un producto en el carrito) o ya no vale. Atenuado como el texto secundario; con un `tone` manda el tono
+    public static let strikethroughColor: Color = Color(brandLight: Color(brandHex: 0x4A4A4A), dark: Color(brandHex: 0xD0D0D0))
+    /// Token `text-inline.strikethrough-thickness` — Grosor de la línea del tachado: el de los demás trazos del sistema
+    public static let strikethroughThickness: CGFloat = 1
 }
 
 /// Tokens del componente `empty-state` (`tokens/**/empty-state.json`). Un token con par `surface-dark-*` (o que lo hereda) es un `Color` dinámico.
