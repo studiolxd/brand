@@ -7,7 +7,7 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## [Sin publicar]
+## [49.22.0] — 2026-10-04
 
 > **Minor.** Muestra y selector de color: `ColorSwatch`, `ColorPicker` y `ColorPickerField`, sin
 > dependencias nuevas (Base UI y un área 2D propia). Espacio nuevo `colorPicker` en `BrandMessages`.
