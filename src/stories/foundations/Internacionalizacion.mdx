@@ -59,7 +59,7 @@ espacios de los átomos de formulario —`inputField`, `passwordField`, `select`
 de subida y diálogo —`fileUpload`, `imageCropDialog`, `avatarUpload`, `modal`, `sheet`,
 `confirmDialog`, `alert`, `banner` y `toaster`—, los de los envoltorios de diálogo —`consent`,
 `commandPalette`, `appLauncher`, `floatingDock`, `notificationButton` y `notificationPanel`—, los
-del cromo de aplicación y navegación —`menuButton`, `appRoot`, `appShell`, `sidebar`,
+del cromo de aplicación y navegación —`menuButton`, `appRoot`, `appShell`, `appHeader`, `sidebar`,
 `sidebarNav`, `siteNav`, `siteHeader`, `userMenu`, `orgSwitcher`, `breadcrumb`,
 `tableOfContents`, `prevNextNav`, `publicPageShell` y `onboardingShell`— y los de copiar, datos y
 estado —`copy`, `codeBlock`, `dotsButton`, `progressBar`, `spinner`, `slider`, `treeView`,
@@ -287,7 +287,7 @@ La misma regla, aplicada a la familia de subidas:
 | `AppShell` | **Migrado al proveedor** (`appShell.skipToContent`, sin default). `skipLabel` sigue como anulación puntual. Lo demás son reenvíos: el nombre de la barra lo lee el `Sidebar` y el del botón, el `MenuButton` |
 | `AppRoot` | **Migrado al proveedor** (`appRoot.skipToContent`, sin default). Es la misma frase que la del `AppShell` pero **espacio propio**: son dos piezas distintas —la raíz del documento y el armazón de la aplicación— y cada una declara lo suyo, aunque la app las alimente del mismo `t()`. `skipHref` no es texto |
 | `MenuButton` | **Migrado al proveedor** (`menuButton.open`, `.close`, sin defaults). **El nombre sigue al estado**: abierto dice «cerrar», cerrado dice «abrir» — antes se quedaba en el mismo nombre salvo que el consumidor pasara `closeLabel` a mano. `menuButton.close` solo se lee cuando el menú se abre |
-| `AppHeader` | **No tiene texto propio.** `menuLabel` y `menuCloseLabel` son **reenvíos puros** al `MenuButton` y ya no hacen falta para traducir |
+| `AppHeader` | **Migrado al proveedor** (`appHeader.logo`, sin default), y **solo se lee con `logo`**: sin marca, la barra no exige la clave. Como `siteHeader.logo`, cada producto la escribe con su marca («Homenize, ir al inicio»). `menuLabel` y `menuCloseLabel` son **reenvíos puros** al `MenuButton` y ya no hacen falta para traducir |
 | `SiteHeader` | **Migrado al proveedor** (`siteHeader.logo`, sin default). Ojo con el valor: el default retirado llevaba la marca dentro («Studio LXD — ir al inicio»), así que cada producto escribe la clave con la suya. `menuLabel`/`menuCloseLabel` son reenvíos puros al `MenuButton` |
 | `SiteNav` | **Migrado al proveedor** (`siteNav.label`, sin default). Los grupos y sus enlaces son el índice de ESE sitio, y el `badge` de cada ítem («Próximamente», «Beta») llega ya traducido con ellos |
 | `UserMenu` | **Migrado al proveedor** (`userMenu.trigger`, `.unread`, sin defaults). Las dos **interpolan un dato**, así que son funciones. `unread` ni siquiera era una prop antes: el contador traía el castellano cableado. `name`, `email` e `items` son contenido |

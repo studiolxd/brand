@@ -20,6 +20,12 @@ El botón de menú alterna entre desplegada y cerrada (desde rail, despliega). E
 <Canvas of={AppShellStories.Rail} />
 <Canvas of={AppShellStories.Plegada} />
 
+## La marca: en la cabecera o en la sidebar, no en las dos
+
+El logotipo del producto puede ir en el `logo` del `AppHeader` o en el del `Sidebar`. Va en **uno solo**, y mejor en la cabecera: está siempre a la vista, también con la sidebar en rail o cerrada. Si llegan los dos, el armazón deja el de la cabecera y oculta la cabecera de la sidebar. El detalle, en `AppHeader` § «Logo».
+
+<Canvas of={AppShellStories.ConLogoEnLaCabecera} />
+
 ## La barra de sistema
 
 La ranura `banner` es para el **estado de sesión que no se puede perder de vista**

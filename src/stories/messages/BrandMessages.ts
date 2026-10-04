@@ -36,6 +36,7 @@ import type { NotificationPanelMessages } from '../molecules/NotificationPanel/N
 import type { MenuButtonMessages } from '../atoms/MenuButton/MenuButton';
 import type { AppRootMessages } from '../sections/AppRoot/AppRoot';
 import type { AppShellMessages } from '../sections/AppShell/AppShell';
+import type { AppHeaderMessages } from '../sections/AppHeader/AppHeader';
 import type { SidebarMessages } from '../sections/Sidebar/Sidebar';
 import type { SidebarNavMessages } from '../molecules/SidebarNav/SidebarNav';
 import type { SiteNavMessages } from '../molecules/SiteNav/SiteNav';
@@ -143,6 +144,7 @@ export interface BrandMessages {
   menuButton: MenuButtonMessages;
   appRoot: AppRootMessages;
   appShell: AppShellMessages;
+  appHeader: AppHeaderMessages;
   sidebar: SidebarMessages;
   sidebarNav: SidebarNavMessages;
   siteNav: SiteNavMessages;
@@ -230,6 +232,7 @@ export type {
   MenuButtonMessages,
   AppRootMessages,
   AppShellMessages,
+  AppHeaderMessages,
   SidebarMessages,
   SidebarNavMessages,
   SiteNavMessages,

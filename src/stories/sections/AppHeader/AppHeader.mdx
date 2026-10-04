@@ -12,6 +12,38 @@ La barra superior de la aplicación, **en todos los anchos**: a la izquierda el 
 <Canvas of={AppHeaderStories.PorDefecto} />
 <Canvas of={AppHeaderStories.ConInicio} />
 
+## Logo
+
+`logo` pone la marca del producto **entre el botón de menú y `start`**. Sin `logo`, la barra queda exactamente como antes.
+
+<Canvas of={AppHeaderStories.ConLogo} />
+
+- **Tamaño.** La marca toma el alto de contenido de la barra (`--app-header-content-height`, 40px) y el ancho que le dé su proporción: vale el `Logo` del sistema —a cualquier talla, se impone el alto de la barra—, un SVG con `viewBox` o un `<img>` de cualquier proporción, sin darles medidas.
+- **Enlace.** Enlaza a `logoHref` (por defecto `/`). Para el router del producto, `renderLogoLink` recibe `href`, `className`, `aria-label` y `children` y debe reenviarlos todos: el mismo contrato que en `SiteHeader`.
+- **Texto accesible.** `logoLabel`, o sin él `appHeader.logo` del catálogo. Dice lo que hace el enlace, con la marca dentro («Homenize, ir al inicio»). La marca en sí es decorativa: el `Logo` ya va `aria-hidden`, y una imagen va con `alt=""`.
+
+<Canvas of={AppHeaderStories.ConMarcaDeProducto} />
+
+En un teléfono la marca no encoge: lo que cede es `start`, que se recorta antes.
+
+<Canvas of={AppHeaderStories.ConLogoEnMovil} />
+
+```tsx
+<AppHeader
+  logo={<HomenizeLogo />}
+  logoHref="/"
+  renderLogoLink={({ children, ...props }) => <NextLink {...props}>{children}</NextLink>}
+  start={<Breadcrumb … />}
+  end={<UserMenu compact … />}
+/>
+```
+
+### Con el `logo` del `Sidebar`: una marca a la vez
+
+La cabecera está siempre a la vista —encima de la columna en escritorio y del cajón en móvil—, así que el `logo` del `Sidebar` y el de la cabecera serían el mismo logotipo dos veces, uno debajo del otro. **Pasa la marca a uno solo**, y mejor a la cabecera: se sigue viendo con la sidebar en rail (donde la suya se oculta) o cerrada.
+
+Si llegan las dos, dentro de un `AppShell` **manda la de la cabecera**: el armazón oculta la cabecera de la sidebar mientras el `AppHeader` lleve `logo`. Sin logo en la cabecera, el del `Sidebar` se ve como siempre.
+
 ## Altura
 
 56px, compuesta: un control md (40) más `spacing.2` arriba y abajo. La misma que el `SiteHeader` de la web.
@@ -23,15 +55,18 @@ Dentro de `AppShell` el botón gobierna la sidebar del shell; suelto, lleva su p
 ## Accesibilidad
 
 - Es el `banner` de la aplicación.
+- Con `logo`, el enlace del logotipo lleva su `aria-label` (`logoLabel` o `appHeader.logo`) y va justo tras el botón de menú en el orden de tabulación.
 - El botón de menú dice qué controla (`sidebarId` → `aria-controls`) y si está abierto (`aria-expanded`).
 
 ## Internacionalización
 
-La barra **no emite ningún texto propio**: el único que sale de ella lo pinta el
-`MenuButton`, que tiene su propio espacio en el catálogo.
+El único texto propio de la barra es el del enlace del logotipo, y **solo cuando lleva
+`logo`**: sin marca, la barra no exige la clave. El resto lo pinta el `MenuButton`, que
+tiene su propio espacio en el catálogo.
 
 | | Textos | De dónde salen | Por qué |
 | --- | --- | --- | --- |
+| **Cromo** | `logoLabel` | `appHeader.logo` del proveedor | Dice qué hace el logotipo —llevar al inicio—. Como `siteHeader.logo`, cada producto la escribe con su marca. |
 | **Reenvío puro** | `menuLabel`, `menuCloseLabel` | `menuButton.*` | Los pinta el `MenuButton`. La barra no repite la clave: sin pasar nada, el botón lee el catálogo. |
 | **Contenido** | lo que haya en `start`, `notifications` y `end` | props | Son piezas del producto, con sus propios textos. |
 
