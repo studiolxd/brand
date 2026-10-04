@@ -1,0 +1,65 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ColorSwatchStories from "./ColorSwatch.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { colorSwatchTokens, colorSwatchDarkTokens } from "../../../tokens/components/color-swatch";
+
+<Meta of={ColorSwatchStories} />
+
+# ColorSwatch
+
+Una muestra de color: enseña un color que **viene de un documento** —el de un tema, una
+categoría, la celda de una tabla—, sin interacción. Para elegirlo, `ColorPicker` o
+`ColorPickerField`, que la usan como disparador.
+
+<Canvas of={ColorSwatchStories.Default} />
+
+## Cualquier color CSS
+
+`color` acepta lo que acepte CSS: `#111e30`, `#11223380`, `rgb(…)`, `transparent`, un nombre.
+No se valida, porque el color no lo decide el sistema sino el documento; lo que el navegador
+no entienda se ve vacío. Sin color (`null`) solo asoma el damero.
+
+## El damero
+
+Detrás del color va siempre un damero, que **solo se ve donde el color deja ver**: así
+`transparent` o un color a medias no se confunden con el blanco. Sus dos tintas son las de las
+herramientas de imagen (`color.white` y `color.grey-light`), no colores de superficie, y no
+cambian en oscuro.
+
+<Canvas of={ColorSwatchStories.Transparencia} />
+
+## Tallas
+
+`sm` (16px) junto a un texto de una línea, `md` (24px, por defecto) en listas y en la rejilla
+de predefinidos, `lg` (48px) cuando la muestra es el asunto.
+
+<Canvas of={ColorSwatchStories.Tallas} />
+
+## Sin atributo `style`
+
+La muestra es un SVG: el color llega en el `fill` de su rectángulo, que es un **atributo de
+presentación** y no un `style`. La CSP de las apps (`style-src 'self'`) no lo bloquea y ya está
+en el primer render del servidor, que es justo donde un `style` se perdería sin avisar.
+
+---
+
+## Tokens
+
+<TokenTable tokens={colorSwatchTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={colorSwatchDarkTokens} />
+
+## Accesibilidad
+
+- Con `label` es una imagen con nombre (`role="img"`): «Esmeralda», «Fondo: #ffffff».
+- Sin `label` es decorativa (`aria-hidden`), que es lo correcto cuando el color ya se dice en
+  el texto de al lado —el nombre de una categoría, el hex escrito—.
+- El color nunca es el único dato: quien la use pone al lado el nombre o el valor.
+
+<Canvas of={ColorSwatchStories.ConNombre} />
+
+## Props
+
+<ArgTypes of={ColorSwatchStories} />

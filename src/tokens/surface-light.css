@@ -141,6 +141,7 @@ html.dark .surface-light {
   --code-color: var(--code-block-color);
   --collapsible-trigger-color: var(--color-text-on-light);
   --collapsible-focus-ring-color: var(--color-primary);
+  --color-swatch-border-color: var(--color-border-default-on-light);
   --description-list-border-color: var(--color-primary);
   --description-list-term-color: var(--color-text-on-light);
   --description-list-value-color: var(--color-text-on-light);
@@ -516,6 +517,19 @@ html.dark .surface-light {
   --clock-widget-status-dot-closed-bg: var(--color-border-default-on-light);
   --clock-widget-elapsed-color: var(--color-text-on-light);
   --clock-widget-elapsed-label-color: var(--color-text-muted-on-light);
+  --color-picker-field-helper-color: var(--form-helper-color);
+  --color-picker-trigger-bg: var(--input-bg);
+  --color-picker-trigger-border-color: var(--input-border-color);
+  --color-picker-trigger-focus-border-color: var(--input-focus-border-color);
+  --color-picker-trigger-focus-ring-color: var(--input-focus-ring-color);
+  --color-picker-trigger-error-border-color: var(--input-error-border-color);
+  --color-picker-trigger-error-focus-ring-color: var(--input-error-focus-ring-color);
+  --color-picker-trigger-disabled-bg: var(--input-disabled-bg);
+  --color-picker-trigger-disabled-border-color: var(--input-disabled-border-color);
+  --color-picker-area-border-color: var(--color-border-default-on-light);
+  --color-picker-thumb-focus-ring-color: var(--color-primary);
+  --color-picker-preset-focus-ring-color: var(--color-primary);
+  --color-picker-preset-selected-ring-color: var(--color-primary);
   --command-palette-input-border-color: var(--floating-panel-border-color);
   --command-palette-input-placeholder-color: var(--color-text-placeholder-on-light);
   --command-palette-input-focus-ring-color: var(--color-primary);

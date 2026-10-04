@@ -110,6 +110,9 @@
 @import "./molecules/time-field.css";
 @import "./molecules/date-picker.css";
 @import "./molecules/date-picker-field.css";
+@import "./components/color-swatch.css";
+@import "./molecules/color-picker.css";
+@import "./molecules/color-picker-field.css";
 @import "./molecules/date-time-field.css";
 @import "./components/switcher.css";
 @import "./molecules/switcher-field.css";

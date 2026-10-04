@@ -1,0 +1,136 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ColorPickerStories from "./ColorPicker.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { colorPickerTokens, colorPickerDarkTokens } from "../../../tokens/molecules/color-picker";
+
+<Meta of={ColorPickerStories} />
+
+# ColorPicker
+
+Selector de color: una `ColorSwatch` como disparador, que abre un panel con el área de
+saturación y brillo, la banda de tono, la de opacidad (con `alpha`), el campo hexadecimal y los
+colores predefinidos. En un formulario, `ColorPickerField`, que le pone etiqueta, ayuda y error.
+
+<Canvas of={ColorPickerStories.Default} />
+
+Todo es Base UI menos el área: el panel es el `Popover` de brand (foco, portal y cierre), las
+bandas son su `Slider` y el campo es su `Input`. El área de dos dimensiones es propia, porque Base
+UI no tiene deslizador 2D (ver § «Accesibilidad»).
+
+## El valor es hexadecimal, en minúsculas
+
+Entra y sale hex. Lo que se emite es siempre `#rrggbb` o, con `alpha`, `#rrggbbaa` —con el par
+del alfa también cuando es opaco—. Lo que entra se lee en cualquier forma hex (`#FC0`, `fc0`,
+`#FFCC0080`); sin `alpha`, la transparencia de lo que entre se descarta. `null` es «sin color».
+
+Si llega algo que no es hex (`transparent`, un nombre CSS), la muestra lo pinta tal cual y el
+panel arranca en negro, que es el origen del modelo.
+
+## Mientras se elige y al soltar
+
+`onValueChange` avisa en cada paso —para la vista previa— y `onValueCommitted` al terminar el
+gesto: al soltar el área o una banda, con cada tecla, al elegir un predefinido o al escribir un hex
+completo. Es el mismo reparto que `Slider`, y el guardado va en el segundo.
+
+<Canvas of={ColorPickerStories.MientrasYAlSoltar} />
+
+## Predefinidos
+
+`presets` ofrece una lista de `{ color, title }` —la paleta de un tema—: cada uno se anuncia por su
+`title` y el que coincide con el valor queda marcado (`aria-pressed`). Elegir uno **no** cierra el
+panel. Lo que no sea hex no se ofrece.
+
+<Canvas of={ColorPickerStories.ConPredefinidos} />
+
+Elegir entre los colores de un tema **por su rol** («Texto», «Acento») y guardar la referencia en
+vez del hex es producto: el selector solo sabe de colores.
+
+## Transparencia
+
+`alpha` añade la banda de opacidad, sobre el damero de la muestra, y pasa a emitir ocho dígitos.
+
+<Canvas of={ColorPickerStories.ConTransparencia} />
+
+## Quitar el color
+
+`clearable` añade «Quitar color» al pie: llama a `onClear` y cierra el panel. Sin controlar, el
+valor pasa a `null`.
+
+<Canvas of={ColorPickerStories.ConQuitar} />
+
+## Tallas y estados
+
+El disparador es un control cuadrado a la talla de los campos —32, 40 y 48— con su mismo borde,
+foco, error y deshabilitado. En la superficie pública parte de `lg`.
+
+<Canvas of={ColorPickerStories.Tallas} />
+<Canvas of={ColorPickerStories.Deshabilitado} />
+
+## Sin atributo `style` en el HTML del servidor
+
+El disparador es la muestra, que pinta el color en un atributo de presentación de SVG. Lo que se
+calcula —la posición del pulgar del área, el tono de su fondo, el degradado de las bandas— solo
+existe dentro del panel, que se pinta en cliente, y se escribe por el CSSOM con
+`useCssProperties`: es el camino que la CSP `style-src 'self'` no bloquea. Los degradados de tono
+salen del propio modelo de color, no de una lista de colores escrita a mano.
+
+---
+
+## Tokens
+
+<TokenTable tokens={colorPickerTokens} />
+
+### Superficie oscura
+
+El borde del área y los anillos pasan a la tinta clara. El pulgar no cambia: lo que tiene detrás
+es el color elegido, no la superficie, así que lleva aro claro y contorno oscuro para verse sobre
+cualquiera.
+
+<TokenTable tokens={colorPickerDarkTokens} />
+
+## Accesibilidad
+
+- El disparador es un botón con `aria-haspopup="dialog"`. Suelto se nombra con `aria-label` (o
+  `colorPicker.trigger`); en el campo, con la etiqueta. El valor lo **describe**
+  (`colorPicker.value`, «Color actual: #baabff»), y sin color, `colorPicker.empty`.
+- Al abrir, el foco va al pulgar del área; `Escape` cierra y devuelve el foco al disparador.
+- **El área.** La APG de WAI-ARIA no define un deslizador de dos dimensiones, así que se sigue su
+  **patrón Slider** extendido a dos ejes: el pulgar es un único `role="slider"` enfocable, con
+  `aria-roledescription` (`colorPicker.areaDescription`, «deslizador bidimensional»),
+  `aria-valuenow` en el eje horizontal (saturación) y `aria-valuetext` con los dos valores
+  (`colorPicker.areaValue`), que es lo que se lee en cada cambio. No se anuncia un nombre de
+  color en lenguaje natural.
+- Teclado del área: `←`/`→` saturación ±1 y `↑`/`↓` brillo ±1; `Mayús`+flecha, ±10 en ese eje;
+  `RePág`/`AvPág`, brillo ±10 (con `Mayús`, saturación); `Inicio`/`Fin`, saturación al mínimo y
+  al máximo (con `Ctrl`, el brillo).
+- Puntero: ratón, lápiz y táctil, con captura —el arrastre sigue aunque salga del área y no
+  cuenta como clic fuera del panel—. Pulsar lleva el foco al pulgar.
+- **RTL**: la dirección es la de Base UI (`DirectionProvider`). En RTL la saturación crece hacia
+  la izquierda, `→` resta, y las bandas se invierten con ella.
+- Las bandas son el `Slider` de brand (`role="slider"` sobre un `input type="range"`), con el tono
+  en grados y la opacidad en porcentaje formateados por `Intl` con `locale`.
+
+<Canvas of={ColorPickerStories.ContratoAreaEnPopover} />
+
+## Internacionalización
+
+Los textos salen del `BrandMessagesProvider`, **sin valor por defecto**, del espacio
+**`colorPicker`**, y cada uno se lee donde se pinta.
+
+| Clave del catálogo | Cuándo se lee |
+| --- | --- |
+| `colorPicker.trigger` | disparador suelto, sin `aria-label` ni etiqueta |
+| `colorPicker.value(hex)` / `colorPicker.empty` | descripción del disparador, con y sin color |
+| `colorPicker.dialog` | nombre del panel, sin `dialogLabel` (en el campo lo pone la etiqueta) |
+| `colorPicker.area` / `.areaDescription` / `.areaValue(saturación, brillo)` | el área |
+| `colorPicker.hue` | la banda de tono |
+| `colorPicker.alpha` | la banda de opacidad, solo con `alpha` |
+| `colorPicker.hex` | el campo hexadecimal |
+| `colorPicker.presets` | el grupo de predefinidos, solo con `presets` |
+| `colorPicker.clear` | el botón de quitar, solo con `clearable` (anulable con `clearLabel`) |
+
+<Canvas of={ColorPickerStories.TextosDelProveedor} />
+
+## Props
+
+<ArgTypes of={ColorPickerStories} />

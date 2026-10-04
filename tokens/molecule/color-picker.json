@@ -1,0 +1,72 @@
+{
+  "color-picker": {
+    "trigger": {
+      "size":                    { "$value": "{input.height}",                  "$type": "dimension", "$description": "Lado del disparador: cuadrado a la altura de los controles, talla md" },
+      "sm-size":                 { "$value": "{input.sm-height}",               "$type": "dimension", "$description": "Lado del disparador — sm" },
+      "lg-size":                 { "$value": "{input.lg-height}",               "$type": "dimension", "$description": "Lado del disparador — lg (y de partida en la superficie pública)" },
+      "padding":                 { "$value": "{spacing.1}",                     "$type": "dimension", "$description": "Aire entre el borde del disparador y la muestra que lleva dentro" },
+      "bg":                      { "$value": "{input.bg}",                      "$type": "color",     "$description": "Fondo del disparador: el de un campo" },
+      "border-width":            { "$value": "{input.border-width}",            "$type": "dimension", "$description": "Grosor del borde: el de un campo" },
+      "border-style":            { "$value": "{input.border-style}",            "$type": "string",    "$description": "Estilo del borde" },
+      "border-color":            { "$value": "{input.border-color}",            "$type": "color",     "$description": "Color del borde: el de un campo" },
+      "border-radius":           { "$value": "{input.border-radius}",           "$type": "dimension", "$description": "Radio del disparador" },
+      "cursor":                  { "$value": "pointer",                         "$type": "string",    "$description": "Cursor: abre el panel" },
+      "focus-border-color":      { "$value": "{input.focus-border-color}",      "$type": "color",     "$description": "Borde en foco: el de un campo" },
+      "focus-ring-width":        { "$value": "{input.focus-ring-width}",        "$type": "dimension", "$description": "Grosor del anillo de foco, por dentro del borde como en un campo" },
+      "focus-ring-inset-offset": { "$value": "{input.focus-ring-inset-offset}", "$type": "dimension", "$description": "Separación entre el borde y el anillo" },
+      "focus-ring-color":        { "$value": "{input.focus-ring-color}",        "$type": "color",     "$description": "Color del anillo de foco" },
+      "error-border-color":      { "$value": "{input.error-border-color}",      "$type": "color",     "$description": "Borde en error" },
+      "error-focus-ring-color":  { "$value": "{input.error-focus-ring-color}",  "$type": "color",     "$description": "Anillo de foco en error" },
+      "disabled-bg":             { "$value": "{input.disabled-bg}",             "$type": "color",     "$description": "Fondo deshabilitado" },
+      "disabled-border-color":   { "$value": "{input.disabled-border-color}",   "$type": "color",     "$description": "Borde deshabilitado" },
+      "disabled-cursor":         { "$value": "{input.disabled-cursor}",         "$type": "string",    "$description": "Cursor deshabilitado" },
+      "disabled-opacity":        { "$value": "{opacity.disabled}",              "$type": "number",    "$description": "Opacidad de la muestra con el disparador deshabilitado: el color sigue ahí, atenuado" }
+    },
+
+    "panel": {
+      "gap":         { "$value": "{spacing.3}", "$type": "dimension", "$description": "Separación entre las partes del panel: área, bandas, campo hex, predefinidos" },
+      "inline-size": { "$value": "calc(8 * {color-picker.preset.size} + 7 * {color-picker.preset.gap})", "$type": "dimension", "$description": "Ancho del panel: ocho predefinidos por fila y sus siete huecos. El área y las bandas lo ocupan entero" }
+    },
+
+    "area": {
+      "block-size":          { "$value": "calc(6 * {color-picker.preset.size} + 5 * {color-picker.preset.gap})", "$type": "dimension", "$description": "Alto del área de saturación y brillo: seis filas de la misma rejilla que mide el ancho" },
+      "border-width":        { "$value": "{border-width.default}",          "$type": "dimension", "$description": "Borde del área y de las bandas" },
+      "border-color":        { "$value": "{color.border.default-on-light}", "$type": "color",     "$description": "Color del borde del área y de las bandas: el separador neutro" },
+      "saturation-start":    { "$value": "{color.white}",                   "$type": "color",     "$description": "Origen del degradado de saturación: sin saturación, el tono se lava hacia el blanco. Es el modelo HSV, no una decisión de marca" },
+      "brightness-end":      { "$value": "{color.black}",                   "$type": "color",     "$description": "Fin del degradado de brillo: sin brillo, cualquier tono es negro. Es el modelo HSV" },
+      "cursor":              { "$value": "crosshair",                       "$type": "string",    "$description": "Cursor sobre el área: se apunta a un punto" },
+      "surface-dark-border-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Borde del área y de las bandas — surface-dark" }
+    },
+
+    "channel": {
+      "track-size": { "$value": "{spacing.3}", "$type": "dimension", "$description": "Grosor de las bandas de tono y de opacidad: más gruesas que un deslizador, porque la banda es el dato" }
+    },
+
+    "thumb": {
+      "size":          { "$value": "{icon.size-sm}",         "$type": "dimension", "$description": "Lado del pulgar del área y de las bandas" },
+      "border-width":  { "$value": "{border-width.focus}",   "$type": "dimension", "$description": "Aro claro del pulgar" },
+      "border-color":  { "$value": "{color.white}",          "$type": "color",     "$description": "Aro claro del pulgar: junto al contorno oscuro, se ve sobre cualquier color, claro u oscuro. No cambia en oscuro" },
+      "outline-width": { "$value": "{border-width.default}", "$type": "dimension", "$description": "Contorno oscuro del pulgar, por fuera y por dentro del aro" },
+      "outline-color": { "$value": "{color.primary}",        "$type": "color",     "$description": "Contorno oscuro del pulgar. No cambia en oscuro: lo que tiene detrás es el color, no la superficie" },
+      "border-radius": { "$value": "{border-radius.default}","$type": "dimension", "$description": "Radio del pulgar" },
+      "focus-ring-width":  { "$value": "{border-width.focus}", "$type": "dimension", "$description": "Anillo de foco del pulgar" },
+      "focus-ring-offset": { "$value": "{border-width.focus}", "$type": "dimension", "$description": "Separación del anillo de foco" },
+      "focus-ring-color":  { "$value": "{color.primary}",      "$type": "color",     "$description": "Color del anillo de foco del pulgar" },
+      "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco del pulgar — surface-dark" }
+    },
+
+    "preset": {
+      "size":              { "$value": "{color-swatch.size.md}", "$type": "dimension", "$description": "Lado de un predefinido: la muestra md" },
+      "gap":               { "$value": "{spacing.2}",            "$type": "dimension", "$description": "Hueco entre predefinidos" },
+      "cursor":            { "$value": "pointer",                "$type": "string",    "$description": "Cursor sobre un predefinido" },
+      "focus-ring-width":  { "$value": "{border-width.focus}",   "$type": "dimension", "$description": "Anillo de foco de un predefinido" },
+      "focus-ring-offset": { "$value": "{border-width.focus}",   "$type": "dimension", "$description": "Separación del anillo de foco" },
+      "focus-ring-color":  { "$value": "{color.primary}",        "$type": "color",     "$description": "Color del anillo de foco" },
+      "selected-ring-width":  { "$value": "{border-width.focus}", "$type": "dimension", "$description": "Marca del predefinido que coincide con el valor: un aro por fuera" },
+      "selected-ring-offset": { "$value": "{border-width.default}", "$type": "dimension", "$description": "Separación de la marca" },
+      "selected-ring-color":  { "$value": "{color.primary}",      "$type": "color",     "$description": "Color de la marca del seleccionado" },
+      "surface-dark-focus-ring-color":    { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco — surface-dark" },
+      "surface-dark-selected-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Marca del seleccionado — surface-dark" }
+    }
+  }
+}

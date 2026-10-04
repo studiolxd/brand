@@ -126,6 +126,20 @@ export const brandMessagesFixtureEn: BrandMessages = {
     // `mm/dd/yyyy`, sin tocar el catálogo.
     maskLetters: { day: 'dd', month: 'mm', year: 'yyyy' },
   },
+  colorPicker: {
+    trigger: 'Choose colour',
+    value: (hex) => `Current colour: ${hex}`,
+    empty: 'No colour',
+    dialog: 'Colour picker',
+    area: 'Saturation and brightness',
+    areaDescription: '2D slider',
+    areaValue: (saturation, brightness) => `Saturation ${saturation}%, brightness ${brightness}%`,
+    hue: 'Hue',
+    alpha: 'Opacity',
+    hex: 'Hex',
+    presets: 'Preset colours',
+    clear: 'Clear colour',
+  },
   timeSelect: {
     hours: 'Hours',
     minutes: 'Minutes',

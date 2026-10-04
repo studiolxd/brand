@@ -22,6 +22,7 @@ export type {
   FilterBarMessages,
   CalendarMessages,
   DatePickerMessages,
+  ColorPickerMessages,
   TimeSelectMessages,
   FileUploadMessages,
   ImageCropDialogMessages,

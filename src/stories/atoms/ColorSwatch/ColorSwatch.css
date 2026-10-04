@@ -1,0 +1,34 @@
+/* La muestra es un SVG cuadrado: el color va en el `fill` de su rectángulo
+   (atributo de presentación, sin `style`) y el damero en el fondo del propio
+   SVG, que solo asoma donde el color es transparente. */
+.color-swatch {
+  --color-swatch-size: var(--color-swatch-size-md);
+  display: inline-block;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  inline-size: var(--color-swatch-size);
+  block-size: var(--color-swatch-size);
+  vertical-align: middle;
+  border-width: var(--color-swatch-border-width);
+  border-style: solid;
+  border-color: var(--color-swatch-border-color);
+  border-radius: var(--color-swatch-border-radius);
+  /* Damero de dos tintas: un cuarto de casilla oscura, un cuarto clara, y así
+     las cuatro esquinas de cada par. */
+  background-color: var(--color-swatch-checker-bg);
+  background-image: conic-gradient(
+    var(--color-swatch-checker-color) 25%,
+    transparent 0 50%,
+    var(--color-swatch-checker-color) 0 75%,
+    transparent 0
+  );
+  background-size: var(--color-swatch-checker-size) var(--color-swatch-checker-size);
+}
+
+.color-swatch.color-swatch--sm {
+  --color-swatch-size: var(--color-swatch-size-sm);
+}
+
+.color-swatch.color-swatch--lg {
+  --color-swatch-size: var(--color-swatch-size-lg);
+}

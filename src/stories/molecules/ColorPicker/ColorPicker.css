@@ -1,0 +1,211 @@
+.color-picker {
+  --color-picker-trigger-current-size: var(--color-picker-trigger-size);
+  display: inline-flex;
+}
+
+.color-picker.color-picker--sm {
+  --color-picker-trigger-current-size: var(--color-picker-trigger-sm-size);
+}
+
+.color-picker.color-picker--lg {
+  --color-picker-trigger-current-size: var(--color-picker-trigger-lg-size);
+}
+
+/* ─── Disparador — un control cuadrado a la talla de los campos, con la
+   muestra dentro. Borde, foco, error y deshabilitado son los de `Input`. ── */
+.color-picker__trigger {
+  display: inline-flex;
+  align-items: stretch;
+  justify-content: stretch;
+  box-sizing: border-box;
+  inline-size: var(--color-picker-trigger-current-size);
+  block-size: var(--color-picker-trigger-current-size);
+  padding-block: var(--color-picker-trigger-padding);
+  padding-inline: var(--color-picker-trigger-padding);
+  background-color: var(--color-picker-trigger-bg);
+  border-width: var(--color-picker-trigger-border-width);
+  border-style: var(--color-picker-trigger-border-style);
+  border-color: var(--color-picker-trigger-border-color);
+  border-radius: var(--color-picker-trigger-border-radius);
+  cursor: var(--color-picker-trigger-cursor);
+}
+
+.color-picker__trigger:focus-visible {
+  outline: none;
+  border-color: var(--color-picker-trigger-focus-border-color);
+  box-shadow:
+    inset 0 0 0 calc(var(--color-picker-trigger-focus-ring-width) + var(--color-picker-trigger-focus-ring-inset-offset)) var(--color-picker-trigger-focus-ring-color),
+    inset 0 0 0 var(--color-picker-trigger-focus-ring-inset-offset) var(--color-picker-trigger-bg);
+}
+
+.color-picker.color-picker--error .color-picker__trigger {
+  border-color: var(--color-picker-trigger-error-border-color);
+}
+
+.color-picker.color-picker--error .color-picker__trigger:focus-visible {
+  box-shadow:
+    inset 0 0 0 calc(var(--color-picker-trigger-focus-ring-width) + var(--color-picker-trigger-focus-ring-inset-offset)) var(--color-picker-trigger-error-focus-ring-color),
+    inset 0 0 0 var(--color-picker-trigger-focus-ring-inset-offset) var(--color-picker-trigger-bg);
+}
+
+.color-picker__trigger:disabled {
+  background-color: var(--color-picker-trigger-disabled-bg);
+  border-color: var(--color-picker-trigger-disabled-border-color);
+  cursor: var(--color-picker-trigger-disabled-cursor);
+}
+
+/* La muestra llena el hueco que deja el aire del disparador. */
+.color-picker__swatch {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.color-picker__trigger:disabled .color-picker__swatch {
+  opacity: var(--color-picker-trigger-disabled-opacity);
+}
+
+/* ─── Panel ─────────────────────────────────────────────────────────── */
+.color-picker__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--color-picker-panel-gap);
+  inline-size: var(--color-picker-panel-inline-size);
+}
+
+/* ─── Área de saturación × brillo ─────────────────────────────────────
+   Tres capas: el tono puro al fondo, el lavado hacia el blanco en el eje de
+   la saturación y la caída al negro en el del brillo. El tono y la posición
+   del pulgar llegan por el CSSOM (`--color-picker-area-*`). */
+.color-picker__area {
+  position: relative;
+  box-sizing: border-box;
+  inline-size: 100%;
+  block-size: var(--color-picker-area-block-size);
+  border-width: var(--color-picker-area-border-width);
+  border-style: solid;
+  border-color: var(--color-picker-area-border-color);
+  background-color: var(--color-picker-area-hue);
+  background-image:
+    linear-gradient(to top, var(--color-picker-area-brightness-end), transparent),
+    linear-gradient(to right, var(--color-picker-area-saturation-start), transparent);
+  cursor: var(--color-picker-area-cursor);
+  touch-action: none;
+  user-select: none;
+}
+
+.color-picker__area[data-direction="rtl"] {
+  background-image:
+    linear-gradient(to top, var(--color-picker-area-brightness-end), transparent),
+    linear-gradient(to left, var(--color-picker-area-saturation-start), transparent);
+}
+
+/* El pulgar: aro claro con contorno oscuro por fuera y por dentro, para que se
+   vea sobre cualquier color. `left` físico: la dirección ya la resolvió el
+   componente. */
+.color-picker__area-thumb {
+  position: absolute;
+  left: var(--color-picker-area-x);
+  top: var(--color-picker-area-y);
+  box-sizing: border-box;
+  inline-size: var(--color-picker-thumb-size);
+  block-size: var(--color-picker-thumb-size);
+  transform: translate(-50%, -50%);
+  border-width: var(--color-picker-thumb-border-width);
+  border-style: solid;
+  border-color: var(--color-picker-thumb-border-color);
+  border-radius: var(--color-picker-thumb-border-radius);
+  box-shadow:
+    0 0 0 var(--color-picker-thumb-outline-width) var(--color-picker-thumb-outline-color),
+    inset 0 0 0 var(--color-picker-thumb-outline-width) var(--color-picker-thumb-outline-color);
+}
+
+.color-picker__area-thumb:focus-visible {
+  outline: var(--color-picker-thumb-focus-ring-width) solid var(--color-picker-thumb-focus-ring-color);
+  outline-offset: var(--color-picker-thumb-focus-ring-offset);
+}
+
+/* ─── Bandas de tono y opacidad — el `Slider` de brand, revestido: la banda
+   es el dato, así que el carril pinta el degradado y el tramo recorrido no
+   se marca. Se reescriben sus tokens en el propio deslizador. ─────────── */
+.color-picker__channel {
+  --slider-track-size: var(--color-picker-channel-track-size);
+  --slider-track-bg: transparent;
+  --slider-indicator-bg: transparent;
+  --slider-thumb-size: var(--color-picker-thumb-size);
+  --slider-thumb-bg: transparent;
+  --slider-thumb-border-width: var(--color-picker-thumb-border-width);
+  --slider-thumb-border-color: var(--color-picker-thumb-border-color);
+  --slider-thumb-border-radius: var(--color-picker-thumb-border-radius);
+  --slider-focus-ring-width: var(--color-picker-thumb-focus-ring-width);
+  --slider-focus-ring-offset: var(--color-picker-thumb-focus-ring-offset);
+  --slider-focus-ring-color: var(--color-picker-thumb-focus-ring-color);
+}
+
+.color-picker__channel .slider__track {
+  box-sizing: border-box;
+  border-width: var(--color-picker-area-border-width);
+  border-style: solid;
+  border-color: var(--color-picker-area-border-color);
+}
+
+.color-picker__channel .slider__thumb {
+  box-sizing: border-box;
+  box-shadow:
+    0 0 0 var(--color-picker-thumb-outline-width) var(--color-picker-thumb-outline-color),
+    inset 0 0 0 var(--color-picker-thumb-outline-width) var(--color-picker-thumb-outline-color);
+}
+
+.color-picker__channel--hue .slider__track {
+  background-image: var(--color-picker-hue-gradient);
+}
+
+/* La opacidad, sobre el damero de la muestra: de transparente al color opaco. */
+.color-picker__channel--alpha .slider__track {
+  background-color: var(--color-swatch-checker-bg);
+  background-image:
+    var(--color-picker-alpha-gradient),
+    conic-gradient(
+      var(--color-swatch-checker-color) 25%,
+      transparent 0 50%,
+      var(--color-swatch-checker-color) 0 75%,
+      transparent 0
+    );
+  background-size: auto, var(--color-swatch-checker-size) var(--color-swatch-checker-size);
+}
+
+/* ─── Predefinidos ──────────────────────────────────────────────────── */
+.color-picker__presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--color-picker-preset-gap);
+}
+
+.color-picker__preset {
+  display: inline-flex;
+  inline-size: var(--color-picker-preset-size);
+  block-size: var(--color-picker-preset-size);
+  padding-block: 0;
+  padding-inline: 0;
+  border: none;
+  background: transparent;
+  cursor: var(--color-picker-preset-cursor);
+}
+
+.color-picker__preset-swatch {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.color-picker__preset[aria-pressed="true"] {
+  box-shadow: 0 0 0 var(--color-picker-preset-selected-ring-offset) var(--color-picker-trigger-bg),
+    0 0 0 calc(var(--color-picker-preset-selected-ring-offset) + var(--color-picker-preset-selected-ring-width)) var(--color-picker-preset-selected-ring-color);
+}
+
+.color-picker__preset:focus-visible {
+  outline: var(--color-picker-preset-focus-ring-width) solid var(--color-picker-preset-focus-ring-color);
+  outline-offset: calc(var(--color-picker-preset-focus-ring-offset) + var(--color-picker-preset-selected-ring-width));
+}
+
+.color-picker__clear {
+  align-self: flex-start;
+}

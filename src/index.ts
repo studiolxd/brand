@@ -28,6 +28,8 @@ export { Collapsible, CollapsibleTrigger, CollapsibleContent } from './stories/a
 export type { CollapsibleProps, CollapsibleTriggerProps, CollapsibleContentProps } from './stories/atoms/Collapsible/Collapsible';
 export { Code } from './stories/atoms/Code/Code';
 export type { CodeProps } from './stories/atoms/Code/Code';
+export { ColorSwatch } from './stories/atoms/ColorSwatch/ColorSwatch';
+export type { ColorSwatchProps } from './stories/atoms/ColorSwatch/ColorSwatch';
 export { Columns } from './stories/atoms/Columns/Columns';
 export type { ColumnsProps } from './stories/atoms/Columns/Columns';
 export { Container } from './stories/atoms/Container/Container';
@@ -207,6 +209,10 @@ export { CalendarPlanner } from './stories/molecules/CalendarPlanner/CalendarPla
 export type { CalendarPlannerProps, CalendarPlannerView, PlannerEvent } from './stories/molecules/CalendarPlanner/CalendarPlanner';
 export { CalendarRoster } from './stories/molecules/CalendarRoster/CalendarRoster';
 export type { CalendarRosterProps, RosterRow, RosterCell, RosterCellType, LegendItem } from './stories/molecules/CalendarRoster/CalendarRoster';
+export { ColorPicker } from './stories/molecules/ColorPicker/ColorPicker';
+export type { ColorPickerProps, ColorPickerMessages, ColorPickerPreset } from './stories/molecules/ColorPicker/ColorPicker';
+export { ColorPickerField } from './stories/molecules/ColorPickerField/ColorPickerField';
+export type { ColorPickerFieldProps } from './stories/molecules/ColorPickerField/ColorPickerField';
 export { ConfirmDialog } from './stories/molecules/ConfirmDialog/ConfirmDialog';
 export type { ConfirmDialogProps } from './stories/molecules/ConfirmDialog/ConfirmDialog';
 export { CopyButton } from './stories/molecules/CopyButton/CopyButton';

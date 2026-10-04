@@ -88,6 +88,7 @@
   --calendar-year-font-size: var(--calendar-lg-year-font-size);
   --checkbox-field-gap: var(--checkbox-field-lg-gap);
   --checkbox-field-padding-block: var(--checkbox-field-lg-padding-block);
+  --color-picker-trigger-size: var(--color-picker-trigger-lg-size);
   --date-picker-button-slot-size: var(--date-picker-button-lg-slot-size);
   --date-picker-button-icon-size: var(--date-picker-button-lg-icon-size);
   --dropdown-field-height: var(--dropdown-field-lg-height);
@@ -202,6 +203,7 @@
   --clock-widget-date-font-size: var(--text-paragraph-small-font-size);
   --clock-widget-status-font-size: var(--text-paragraph-small-font-size);
   --clock-widget-elapsed-label-font-size: var(--text-paragraph-small-font-size);
+  --color-picker-field-helper-font-size: var(--form-helper-font-size);
   --consent-banner-title-font-size: var(--text-size-3);
   --consent-banner-description-font-size: var(--text-font-size);
   --conversation-list-item-font-size: var(--text-font-size);

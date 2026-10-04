@@ -1,0 +1,18 @@
+{
+  "color-swatch": {
+    "size": {
+      "sm": { "$value": "{icon.size-sm}", "$type": "dimension", "$description": "16px — junto a un texto de una línea: una celda, una opción, el rótulo de una categoría" },
+      "md": { "$value": "{icon.size-md}", "$type": "dimension", "$description": "24px — por defecto: listas de colores, la rejilla de predefinidos del selector" },
+      "lg": { "$value": "{icon.size-lg}", "$type": "dimension", "$description": "48px — la muestra es el asunto: la cabecera de un color, una paleta que se revisa" }
+    },
+    "border-width":  { "$value": "{border-width.default}",          "$type": "dimension", "$description": "Grosor del borde: el del sistema. Es lo que separa una muestra blanca de una página blanca" },
+    "border-color":  { "$value": "{color.border.default-on-light}", "$type": "color",     "$description": "Color del borde: el separador neutro, para no competir con el color que enmarca" },
+    "border-radius": { "$value": "{border-radius.default}",         "$type": "dimension", "$description": "Radio: recto, como toda forma del sistema" },
+    "checker": {
+      "color":  { "$value": "{color.grey-light}", "$type": "color",     "$description": "Casillas oscuras del damero que asoma bajo un color con transparencia. Es la convención de las herramientas de imagen, no un color de superficie: no cambia en oscuro" },
+      "bg":     { "$value": "{color.white}",      "$type": "color",     "$description": "Casillas claras del damero" },
+      "size":   { "$value": "{spacing.2}",        "$type": "dimension", "$description": "Lado de un par de casillas del damero (8px: casillas de 4px)" }
+    },
+    "surface-dark-border-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del borde — surface-dark. Regla de derivación: borde → texto sobre oscuro" }
+  }
+}

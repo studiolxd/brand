@@ -7,6 +7,49 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [Sin publicar]
+
+> **Minor.** Muestra y selector de color: `ColorSwatch`, `ColorPicker` y `ColorPickerField`, sin
+> dependencias nuevas (Base UI y un área 2D propia). Espacio nuevo `colorPicker` en `BrandMessages`.
+
+### Muestra y selector de color
+
+Creator pintaba unas 17 muestras a mano y cuatro selectores con `react-color`, fuera del sistema.
+Ahora tiene sus piezas:
+
+- **`ColorSwatch`** (átomo, `@studiolxd/brand/color-swatch`): enseña un color CSS cualquiera que viene
+  de un documento, sobre un damero que solo asoma donde el color es transparente. Tallas `sm`/`md`/`lg`
+  (16/24/48), `label` → `role="img"`; sin él, decorativa. **Sin `style`**: el color va en el `fill`
+  de un SVG (atributo de presentación), así que llega en el HTML del servidor y la CSP no lo descarta.
+- **`ColorPicker`** (molécula, `@studiolxd/brand/color-picker`): la muestra como disparador, a la
+  talla de los campos, que abre un `Popover` con el área de saturación y brillo, la banda de tono, la
+  de opacidad (`alpha`), el campo hex, los predefinidos (`presets`, con `title`) y «Quitar color»
+  (`clearable` + `onClear`). Emite siempre hex en minúsculas, `#rrggbb` o `#rrggbbaa`;
+  `onValueChange` en cada paso y `onValueCommitted` al terminar el gesto.
+- **`ColorPickerField`** (molécula, `@studiolxd/brand/color-picker-field`): el selector con etiqueta,
+  ayuda y error, como `DatePickerField`.
+
+Todo es Base UI —el `Popover`, el `Slider` para las bandas, el `Input` para el hex— salvo el **área 2D**,
+que Base UI no tiene: un único `role="slider"` con `aria-roledescription` y `aria-valuetext`
+(saturación y brillo), con teclado en los dos ejes, puntero con captura, RTL por el
+`DirectionProvider` de Base UI y la posición escrita por el CSSOM (`useCssProperties`). La conversión
+hex ↔ HSV son funciones puras propias, con sus pruebas. Sin versión nativa: ninguna app nativa la
+ha pedido.
+
+### Tokens
+
+Tres conjuntos nuevos: `tokens/component/color-swatch.json`, `tokens/molecule/color-picker.json` y
+`color-picker-field.json`, con sus pares `surface-dark-*` por la regla de derivación. **Ningún color
+nuevo**: el damero es `color.white` + `color.grey-light`, los degradados del área son `color.white` y
+`color.black` (el modelo HSV) y el degradado de tono sale del propio modelo, no de una lista de hex.
+
+### Internacionalización
+
+Un espacio nuevo en `BrandMessages`: **`colorPicker`** (`trigger`, `value(hex)`, `empty`, `dialog`,
+`area`, `areaDescription`, `areaValue(saturación, brillo)`, `hue`, `alpha`, `hex`, `presets`,
+`clear`). **Una aplicación que no lo rellene no compila**, que es el contrato de siempre. La tabla de
+Foundations › Internacionalización queda actualizada.
+
 ## [49.21.0] — 2026-10-04
 
 > **Minor, solo nativo.** `Banner`, `Menu`/`ContextMenu`, `Tabs`, `DatePickerField` y `PageIntro` en SwiftUI (iOS y

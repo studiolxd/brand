@@ -1,0 +1,22 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --color-swatch-size-sm: var(--icon-size-sm); /** 16px — junto a un texto de una línea: una celda, una opción, el rótulo de una categoría */
+  --color-swatch-size-md: var(--icon-size-md); /** 24px — por defecto: listas de colores, la rejilla de predefinidos del selector */
+  --color-swatch-size-lg: var(--icon-size-lg); /** 48px — la muestra es el asunto: la cabecera de un color, una paleta que se revisa */
+  --color-swatch-checker-color: var(--color-grey-light); /** Casillas oscuras del damero que asoma bajo un color con transparencia. Es la convención de las herramientas de imagen, no un color de superficie: no cambia en oscuro */
+  --color-swatch-checker-bg: var(--color-white); /** Casillas claras del damero */
+  --color-swatch-checker-size: var(--spacing-2); /** Lado de un par de casillas del damero (8px: casillas de 4px) */
+  --color-swatch-border-width: var(--border-width-default); /** Grosor del borde: el del sistema. Es lo que separa una muestra blanca de una página blanca */
+  --color-swatch-border-color: var(--color-border-default-on-light); /** Color del borde: el separador neutro, para no competir con el color que enmarca */
+  --color-swatch-border-radius: var(--border-radius-default); /** Radio: recto, como toda forma del sistema */
+}
+
+.surface-dark,
+.surface-invert,
+[data-theme="dark"],
+html.dark {
+  --color-swatch-border-color: var(--color-text-on-dark); /** Color del borde — surface-dark. Regla de derivación: borde → texto sobre oscuro */
+}
