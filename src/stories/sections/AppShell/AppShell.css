@@ -72,3 +72,20 @@
 .app-shell:has(.app-header__logo) .sidebar__header {
   display: none;
 }
+
+/* Antes de hidratar, el ancho no se sabe. El servidor —y el primer render del
+   cliente, que tiene que coincidir con él— pintan la columna de escritorio, y
+   el armazón aún no lleva `data-layout`. Por debajo del punto de ruptura esa
+   columna no se enseña: la barra queda como el cajón cerrado y el botón de
+   menú, con su glifo de menú, hasta que React vuelve a pintar ya con el cajón
+   (`data-layout="drawer"`). Así el HTML del servidor no parpadea ni empuja el
+   contenido al hidratar (v49.24.1). */
+@media (max-width: 1023.98px) /* < --breakpoint-lg */ {
+  .app-shell:not([data-layout]) .sidebar {
+    display: none;
+  }
+  .app-shell:not([data-layout]) .app-header .menu-button .icon__line {
+    opacity: 1;
+    transform: none;
+  }
+}

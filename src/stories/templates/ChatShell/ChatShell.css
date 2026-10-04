@@ -177,3 +177,17 @@
 .chat-shell__composer {
   flex-shrink: 0;
 }
+
+/* Antes de hidratar, el ancho no se sabe: el servidor —y el primer render del
+   cliente, que tiene que coincidir con él— pintan la columna de escritorio y
+   el armazón aún no lleva `data-layout`. Por debajo del punto de ruptura esa
+   columna no se enseña, para que el hilo ocupe ya su ancho de móvil y no salte
+   al hidratar (v49.24.1). */
+@media (max-width: 1023.98px) /* < --breakpoint-lg */ {
+  .chat-shell:not([data-layout]) .chat-shell__list {
+    display: none;
+  }
+  .chat-shell.chat-shell--with-list:not([data-layout]) {
+    flex-direction: column;
+  }
+}

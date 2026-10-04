@@ -85,7 +85,7 @@ Antes esa lista se convertía en una **tira acotada sobre el hilo** (12rem de al
 
 Sigue siendo válido montar `ChatShell` **sin `list`** dentro de un `AppShell` y dejar la lista en el `Sidebar`: son dos usos distintos, y el que elige es el producto según dónde viva la navegación.
 
-El punto de ruptura se decide en **JavaScript** (`window.matchMedia`, mismo mecanismo que `AppShell`) y no en una media query, porque la lista **cambia de sitio en el árbol** —de `<aside>` a diálogo—, no solo de forma. Por eso `ChatShell` es un componente cliente.
+El punto de ruptura se decide en **JavaScript** (`window.matchMedia`, mismo mecanismo que `AppShell`) y no en una media query, porque la lista **cambia de sitio en el árbol** —de `<aside>` a diálogo—, no solo de forma. Por eso `ChatShell` es un componente cliente. El servidor no conoce el ancho: pinta la columna, el primer render del cliente pinta lo mismo para que la hidratación no falle, y por debajo del punto de ruptura una media query la esconde hasta que el armazón vuelve a pintar ya con el cajón (`data-layout`).
 
 ### El disparador no salta al desplegar
 

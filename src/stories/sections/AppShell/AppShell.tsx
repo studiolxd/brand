@@ -5,6 +5,7 @@ import { AppShellContext, type SidebarState } from './AppShellContext';
 import { TooltipProvider } from '../../atoms/Tooltip/Tooltip';
 import { SkipLink } from '../../atoms/SkipLink/SkipLink';
 import { useCssProperties } from '../../constants/css-properties';
+import { useMediaQuery } from '../../constants/media-query';
 import './AppShell.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
@@ -68,23 +69,6 @@ export interface AppShellMessages {
   skipToContent: string;
 }
 
-function useIsDesktop() {
-  const [isDesktop, setIsDesktop] = useState(() =>
-    typeof window === 'undefined' || typeof window.matchMedia !== 'function'
-      ? true
-      : window.matchMedia(DESKTOP_MQ).matches,
-  );
-  useEffect(() => {
-    if (typeof window.matchMedia !== 'function') return;
-    const mq = window.matchMedia(DESKTOP_MQ);
-    const onChange = () => setIsDesktop(mq.matches);
-    onChange();
-    mq.addEventListener('change', onChange);
-    return () => mq.removeEventListener('change', onChange);
-  }, []);
-  return isDesktop;
-}
-
 /**
  * El armazón de una aplicación: barra superior, barra lateral y contenido.
  * Lleva el estado de la sidebar (abierta, rail o cerrada; su ancho) y lo
@@ -106,7 +90,12 @@ export function AppShell({
   skipLabel,
 }: AppShellProps) {
   const t = useBrandMessages('appShell');
-  const isDesktop = useIsDesktop();
+  // `null` en el servidor y en el render de hidratación: el ancho no se sabe
+  // todavía y se pinta la columna de escritorio, la misma en los dos lados. Por
+  // debajo del punto de ruptura, `AppShell.css` la esconde hasta que React
+  // vuelve a pintar ya con el cajón (`data-layout`).
+  const desktopMatch = useMediaQuery(DESKTOP_MQ);
+  const isDesktop = desktopMatch ?? true;
   const [desktopState, setDesktopState] = useState<SidebarState>(defaultSidebar);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [width, setWidth] = useState<number | undefined>(defaultSidebarWidth);
@@ -205,6 +194,7 @@ export function AppShell({
           ref={shellRef}
           className="app-shell"
           data-sidebar={sidebarValue}
+          data-layout={desktopMatch === null ? undefined : isDesktop ? 'column' : 'drawer'}
         >
           {banner && (
             <div ref={bannerRef} className="app-shell__banner">
