@@ -1,0 +1,69 @@
+{
+  "$schema": "../schema.json",
+  "component": "ContextMenu",
+  "react": {
+    "path": "src/stories/molecules/ContextMenu/ContextMenu.tsx",
+    "props": "ContextMenuProps"
+  },
+  "native": {
+    "swift": "BrandContextMenu",
+    "kotlin": "BrandContextMenu"
+  },
+  "props": {
+    "triggerSize": {
+      "type": "union",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    },
+    "triggerOrientation": {
+      "type": "union",
+      "values": [
+        "horizontal",
+        "vertical"
+      ],
+      "default": "horizontal"
+    }
+  },
+  "excluded": [
+    {
+      "prop": "items",
+      "reason": "Se porta como `items: [BrandMenuItem]`, los mismos ítems que `BrandMenu`."
+    },
+    {
+      "prop": "renderLink",
+      "reason": "Los enlaces los resuelve la app: un ítem navega con su `action`."
+    },
+    {
+      "prop": "onOpenChange",
+      "reason": "SwiftUI no notifica la apertura del `Menu` del sistema; en Compose existe `onOpenChange`."
+    },
+    {
+      "prop": "side",
+      "reason": "La colocación del panel la decide el sistema (iOS y macOS) o el ancla (Android)."
+    },
+    {
+      "prop": "align",
+      "reason": "La colocación del panel la decide el sistema (iOS y macOS) o el ancla (Android)."
+    },
+    {
+      "prop": "minWidth",
+      "reason": "El ancho del panel lo decide el sistema (iOS y macOS); en Android lo fijan los tokens `menu.*`."
+    },
+    {
+      "prop": "maxWidth",
+      "reason": "El ancho del panel lo decide el sistema (iOS y macOS); en Android lo fijan los tokens `menu.*`."
+    },
+    {
+      "prop": "label",
+      "reason": "Es texto, no un caso: existe como `label` con «Más opciones» por defecto (castellano), el nombre accesible del botón."
+    }
+  ],
+  "differences": [
+    "El disparador es el botón de tres puntos de Brand (`Button` ghost de solo icono con el icono `dots`, las tallas de `triggerSize`), con zona táctil de 44 pt / 48 dp; es el mismo `Menu` que `BrandMenu`, con el mismo reparto por plataforma (panel del sistema en iOS y macOS, panel propio en Android).",
+    "`BrandContextMenu` NO es el menú contextual por pulsación larga del sistema (`.contextMenu`): es el menú de acciones de un botón «⋯», como en la web."
+  ]
+}

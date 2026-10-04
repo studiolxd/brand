@@ -1930,3 +1930,175 @@ object BrandPasswordFieldTokens {
     /** Token `password-field.input-padding-inline-end` — Padding derecho del input — el texto termina donde empieza el toggle */
     val inputPaddingInlineEnd: Dp = 40.dp
 }
+
+/** Tokens del componente `banner` (`tokens/**/banner.json`). Todo color es un [BrandSchemeValue]: se resuelve con `.current` (los que no tienen par oscuro valen lo mismo en los dos esquemas). */
+object BrandBannerTokens {
+    /** Token `banner.padding-block` — Padding vertical de la barra (12px). Con una línea de texto y el aspa a 8px de la esquina, el aspa queda centrada sin más reglas */
+    val paddingBlock: Dp = 12.dp
+    /** Token `banner.padding-inline` — Padding horizontal de la barra (24px) — el mismo inset que el alert */
+    val paddingInline: Dp = 24.dp
+    /** Token `banner.gap` — Aire entre el mensaje y las acciones (16px). Es también el aire vertical cuando la fila apila por debajo de md */
+    val gap: Dp = 16.dp
+    /** Token `banner.border-width` — Grosor de los filetes superior e inferior. La barra va a ancho completo: en los cantos laterales no hay nada que separar, así que no lleva borde inline */
+    val borderWidth: Dp = 1.dp
+    /** Token `banner.font-size` — El mensaje lee al cuerpo de la superficie (16px en aplicación, 20px en la pública) */
+    val fontSize: TextUnit = 16.sp
+    /** Token `banner.line-height` — Interlineado del mensaje — el del cuerpo Factor sin unidad. */
+    val lineHeight: Float = 1.5f
+    /** Token `banner.close-size` — Lado del botón de cierre — talla sm (32px), la mínima del sistema */
+    val closeSize: Dp = 32.dp
+    /** Token `banner.close-inset` — Distancia del botón de cierre a la esquina superior derecha (8px) */
+    val closeInset: Dp = 8.dp
+    /** Token `banner.info-bg` — Información — relleno prusia. Es el mismo en las dos superficies: el relleno es autocontenido y su contenido lee siempre en oscuro (la raíz lleva `.surface-dark`) */
+    val infoBg: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFF111E30))
+    /** Token `banner.info-color` — Información — mensaje blanco sobre el relleno prusia */
+    val infoColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFFFFF), Color(0xFFFFFFFF))
+    /** Token `banner.info-border-color` — Información — filete blanco. Dibuja el canto también cuando la página ya es oscura y el relleno prusia coincide con el fondo, igual que en el alert `default` */
+    val infoBorderColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFFFFF), Color(0xFFFFFFFF))
+    /** Token `banner.warning-bg` — Aviso — el relleno del rol: el amarillo de marca, aquí como feedback. Universal, igual en las dos superficies */
+    val warningBg: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFCD00), Color(0xFFFFCD00))
+    /** Token `banner.warning-color` — Aviso — mensaje prusia sobre el relleno amarillo (11,17:1, AAA) */
+    val warningColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFF111E30))
+    /** Token `banner.warning-border-color` — Aviso — filete igual al relleno: el amarillo ya se separa de cualquier fondo del sistema */
+    val warningBorderColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFCD00), Color(0xFFFFCD00))
+    /** Token `banner.warning-close-color` — Aviso — aspa y su anillo de foco. Es el único relleno claro de la barra, así que el aspa no puede tomar la tinta ambiente: con `[data-theme="dark"]` en la raíz saldría blanca sobre amarillo (1,50:1). Va fijada a la tinta del rol, que es universal */
+    val warningCloseColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFF111E30))
+    /** Token `banner.error-bg` — Error — el relleno del rol: el rojo semántico. Universal, igual en las dos superficies, como el de `Alert error` */
+    val errorBg: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFB30000), Color(0xFFB30000))
+    /** Token `banner.error-color` — Error — mensaje blanco sobre el relleno rojo */
+    val errorColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFFFFF), Color(0xFFFFFFFF))
+    /** Token `banner.error-border-color` — Error — filete igual al relleno: el rojo ya se separa de cualquier fondo del sistema */
+    val errorBorderColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFB30000), Color(0xFFB30000))
+}
+
+/** Tokens del componente `tabs` (`tokens/**/tabs.json`). Todo color es un [BrandSchemeValue]: se resuelve con `.current` (los que no tienen par oscuro valen lo mismo en los dos esquemas). */
+object BrandTabsTokens {
+    /** Token `tabs.list-border-width` — Ancho del borde inferior de la lista de tabs */
+    val listBorderWidth: Dp = 1.dp
+    /** Token `tabs.list-border-color` — Color del borde inferior de la lista */
+    val listBorderColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
+    /** Token `tabs.list-gap` — Gap entre triggers */
+    val listGap: Dp = 4.dp
+    /** Token `tabs.trigger-padding-block` — Padding vertical del trigger */
+    val triggerPaddingBlock: Dp = 12.dp
+    /** Token `tabs.trigger-padding-inline` — Padding horizontal del trigger */
+    val triggerPaddingInline: Dp = 16.dp
+    /** Token `tabs.trigger-font-size` — Tamaño de fuente del trigger */
+    val triggerFontSize: TextUnit = 16.sp
+    /** Token `tabs.trigger-font-weight` — Peso de fuente por defecto */
+    val triggerFontWeight: FontWeight = FontWeight(300)
+    /** Token `tabs.trigger-active-weight` — Peso de fuente del tab activo Factor sin unidad. */
+    val triggerActiveWeight: Float = 500f
+    /** Token `tabs.trigger-color` — Color del trigger inactivo — es texto, nunca grey-dark */
+    val triggerColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF4A4A4A), Color(0xFFD0D0D0))
+    /** Token `tabs.trigger-hover-color` — Color del trigger en hover */
+    val triggerHoverColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
+    /** Token `tabs.trigger-active-color` — Color del trigger activo */
+    val triggerActiveColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
+    /** Token `tabs.trigger-indicator-width` — Grosor del indicador activo (underline) */
+    val triggerIndicatorWidth: Dp = 1.dp
+    /** Token `tabs.trigger-indicator-color` — Color del indicador activo */
+    val triggerIndicatorColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
+    /** Token `tabs.trigger-pill-bg-active` — Fondo del trigger activo en variante pill */
+    val triggerPillBgActive: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFBAABFF))
+    /** Token `tabs.trigger-pill-color-active` — Texto del trigger activo en variante pill */
+    val triggerPillColorActive: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFFFFF), Color(0xFF111E30))
+    /** Token `tabs.trigger-border-radius` — Radio de borde del trigger (pill + focus ring) */
+    val triggerBorderRadius: Dp = 0.dp
+    /** Token `tabs.trigger-disabled-opacity` — Opacidad del trigger deshabilitado Factor sin unidad. */
+    val triggerDisabledOpacity: Float = 0.4f
+    /** Token `tabs.focus-ring-color` — Color del anillo de foco */
+    val focusRingColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
+    /** Token `tabs.focus-ring-width` — Grosor del anillo de foco */
+    val focusRingWidth: Dp = 2.dp
+    /** Token `tabs.focus-ring-offset` — Separación del anillo de foco */
+    val focusRingOffset: Dp = 1.dp
+    /** Token `tabs.content-padding-block` — Padding vertical del panel de contenido */
+    val contentPaddingBlock: Dp = 16.dp
+    /** Token `tabs.transition-duration` — Duración de la transición de color En milisegundos. */
+    val transitionDuration: Int = 150
+    /** Token `tabs.transition-easing` — Easing de la transición */
+    val transitionEasing: Easing = CubicBezierEasing(0.42f, 0f, 0.58f, 1f)
+}
+
+/** Tokens del componente `page-intro` (`tokens/**/page-intro.json`). Todo color es un [BrandSchemeValue]: se resuelve con `.current` (los que no tienen par oscuro valen lo mismo en los dos esquemas). */
+object BrandPageIntroTokens {
+    /** Token `page-intro.title-space-after` — Aire bajo el título cuando comparte fila con las acciones: el mismo em que deja un título suelto, para que una cabecera con acciones y una sin ellas separen igual el título de la entradilla Fracción del tamaño de fuente del propio componente (em). */
+    val titleSpaceAfter: Float = 0.5f
+    /** Token `page-intro.row-column-gap` — Aire entre el título y las acciones cuando comparten fila (a partir de `md`) */
+    val rowColumnGap: Dp = 24.dp
+    /** Token `page-intro.row-gap` — Aire entre el título y las acciones cuando las acciones caen debajo (por debajo de `md`); también el aire entre el `eyebrow` y el título */
+    val rowGap: Dp = 12.dp
+    /** Token `page-intro.actions-gap` — Aire entre las acciones — el de los botones de un formulario: la fila de acciones del sistema es una sola */
+    val actionsGap: Dp = 12.dp
+}
+
+/** Tokens del componente `date-picker` (`tokens/**/date-picker.json`). Todo color es un [BrandSchemeValue]: se resuelve con `.current` (los que no tienen par oscuro valen lo mismo en los dos esquemas). */
+object BrandDatePickerTokens {
+    /** Token `date-picker.border-width` — Grosor del borde del campo: el del sistema. Lo usa el anillo de foco del botón, que va justo por dentro de esa línea */
+    val borderWidth: Dp = 1.dp
+    /** Token `date-picker.transition-duration` — Duración de la transición de tinta del botón En milisegundos. */
+    val transitionDuration: Int = 150
+    /** Token `date-picker.transition-easing` — Curva de la transición */
+    val transitionEasing: Easing = CubicBezierEasing(0.25f, 0.1f, 0.25f, 1f)
+    /** Token `date-picker.button.slot-size` — Lado del hueco que ocupa el botón del calendario dentro del campo: la talla md, la misma que el campo — así el adorno queda cuadrado sobre el control y su borde inferior coincide con el del campo */
+    val buttonSlotSize: Dp = 40.dp
+    /** Token `date-picker.button.sm-slot-size` — Lado del hueco — sm */
+    val buttonSmSlotSize: Dp = 32.dp
+    /** Token `date-picker.button.lg-slot-size` — Lado del hueco — lg */
+    val buttonLgSlotSize: Dp = 48.dp
+    /** Token `date-picker.button.icon-size` — Tamaño del glifo del calendario — md (20px, acorde al campo de 40). El mismo peldaño que la flecha de `SearchForm` */
+    val buttonIconSize: Dp = 20.dp
+    /** Token `date-picker.button.sm-icon-size` — Tamaño del glifo — sm (16px) */
+    val buttonSmIconSize: Dp = 16.dp
+    /** Token `date-picker.button.lg-icon-size` — Tamaño del glifo — lg (24px) */
+    val buttonLgIconSize: Dp = 24.dp
+    /** Token `date-picker.button.color` — Color del glifo: la tinta del campo, prusia sobre claro */
+    val buttonColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
+    /** Token `date-picker.button.hover-color` — Color del glifo bajo el puntero: la misma tinta. El adorno no pinta fondo ni línea al pasar el puntero */
+    val buttonHoverColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
+    /** Token `date-picker.button.disabled-color` — Color del glifo con el campo deshabilitado */
+    val buttonDisabledColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF4A4A4A), Color(0xFFD0D0D0))
+    /** Token `date-picker.button.focus-ring-width` — Grosor del anillo de foco del botón: el del sistema. Es lo único que marca el foco, porque el adorno no tiene fondo */
+    val buttonFocusRingWidth: Dp = 2.dp
+    /** Token `date-picker.button.focus-ring-color` — Color del anillo de foco del botón: el del borde del campo en foco */
+    val buttonFocusRingColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
+    /** Token `date-picker.message.gap` — Espacio entre el campo y el aviso de fecha incompleta: el mismo que separa las partes de un campo de formulario */
+    val messageGap: Dp = 8.dp
+    /** Token `date-picker.message.font-family` — Familia del aviso de fecha incompleta */
+    val messageFontFamily: String = "Google Sans Flex"
+    /** Token `date-picker.message.font-size` — Cuerpo del aviso */
+    val messageFontSize: TextUnit = 14.sp
+    /** Token `date-picker.message.font-weight` — Peso del aviso */
+    val messageFontWeight: FontWeight = FontWeight(300)
+    /** Token `date-picker.message.line-height` — Interlineado del aviso Factor sin unidad. */
+    val messageLineHeight: Float = 1.5f
+    /** Token `date-picker.message.color` — Color del aviso: el del error de formulario — lo que se escribió no es una fecha */
+    val messageColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFB30000), Color(0xFFFF8585))
+}
+
+/** Tokens del componente `date-picker-field` (`tokens/**/date-picker-field.json`). Todo color es un [BrandSchemeValue]: se resuelve con `.current` (los que no tienen par oscuro valen lo mismo en los dos esquemas). */
+object BrandDatePickerFieldTokens {
+    /** Token `date-picker-field.gap` — Espacio entre label, trigger, helper y error */
+    val gap: Dp = 8.dp
+    /** Token `date-picker-field.error.font-family` — Font family del mensaje de error */
+    val errorFontFamily: String = "Google Sans Flex"
+    /** Token `date-picker-field.error.font-size` — Font size del mensaje de error */
+    val errorFontSize: TextUnit = 14.sp
+    /** Token `date-picker-field.error.font-weight` — Font weight del mensaje de error */
+    val errorFontWeight: FontWeight = FontWeight(300)
+    /** Token `date-picker-field.error.line-height` — Line height del mensaje de error Factor sin unidad. */
+    val errorLineHeight: Float = 1.5f
+    /** Token `date-picker-field.error.color` — Color del mensaje de error */
+    val errorColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFB30000), Color(0xFFFF8585))
+    /** Token `date-picker-field.helper.font-family` — Font family del texto de ayuda */
+    val helperFontFamily: String = "Google Sans Flex"
+    /** Token `date-picker-field.helper.font-size` — Font size del texto de ayuda */
+    val helperFontSize: TextUnit = 14.sp
+    /** Token `date-picker-field.helper.font-weight` — Font weight del texto de ayuda */
+    val helperFontWeight: FontWeight = FontWeight(300)
+    /** Token `date-picker-field.helper.line-height` — Line height del texto de ayuda Factor sin unidad. */
+    val helperLineHeight: Float = 1.5f
+    /** Token `date-picker-field.helper.color` — Color del texto de ayuda */
+    val helperColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
+}

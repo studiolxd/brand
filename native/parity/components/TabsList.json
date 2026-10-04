@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema.json",
+  "component": "TabsList",
+  "react": {
+    "path": "src/stories/atoms/Tabs/Tabs.tsx",
+    "props": "TabsListProps"
+  },
+  "native": {
+    "swift": "BrandTabs",
+    "kotlin": "BrandTabs"
+  },
+  "props": {
+    "variant": {
+      "type": "union",
+      "values": [
+        "underline",
+        "pill"
+      ],
+      "default": "underline"
+    }
+  },
+  "excluded": [
+    {
+      "prop": "children",
+      "reason": "Las pestañas son los `BrandTab` del `@ViewBuilder` (SwiftUI) o los `Tab` del `content` (Compose)."
+    },
+    {
+      "prop": "className",
+      "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
+    }
+  ],
+  "differences": [
+    "La `variant` es la de `BrandTabs(variant:)`: `underline` (línea bajo la activa) o `pill` (relleno en la activa).",
+    "El `aria-label` de la lista es `.accessibilityLabel(_:)` (SwiftUI) o `contentDescription` (Compose)."
+  ]
+}
