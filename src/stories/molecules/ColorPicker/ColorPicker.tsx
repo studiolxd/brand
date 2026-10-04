@@ -1,12 +1,14 @@
 'use client';
 
-import { forwardRef, useCallback, useId, useRef, useState } from 'react';
+import { cloneElement, forwardRef, useCallback, useId, useRef, useState } from 'react';
+import type { ReactElement } from 'react';
 import { useDirection } from '@base-ui/react/direction-provider';
+import { useRender } from '@base-ui/react/use-render';
 import { Button } from '../../atoms/Button/Button';
 import { ColorSwatch } from '../../atoms/ColorSwatch/ColorSwatch';
 import { Input } from '../../atoms/Input/Input';
 import { Popover } from '../../atoms/Popover/Popover';
-import type { PopoverChangeDetails } from '../../atoms/Popover/Popover';
+import type { PopoverAnchor, PopoverChangeDetails } from '../../atoms/Popover/Popover';
 import { Slider } from '../../atoms/Slider/Slider';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { useCssProperties } from '../../constants/css-properties';
@@ -132,6 +134,24 @@ export interface ColorPickerProps {
   dialogLabel?: string;
   /** Texto de «Quitar color». **Sin default**: sin él, `colorPicker.clear`. */
   clearLabel?: string;
+  /**
+   * Disparador propio en lugar de la muestra: un `Toggle` con icono, un
+   * `Button`… Como el `trigger` de `Popover`, recibe las props del disparador
+   * por `render`, así que tiene que reenviarlas (y el `ref`) a su elemento.
+   * El selector le añade `id`, `disabled`, `aria-haspopup`, `aria-expanded`,
+   * `aria-invalid`, `aria-label` / `aria-labelledby` y la descripción con el
+   * valor actual; lo que el elemento ya traiga gana, salvo la descripción, que
+   * se suma, y `disabled`, que basta con que lo diga uno. Lo que pinte dentro
+   * (y su `pressed`, si es un `Toggle`) lo decide quien lo usa.
+   */
+  trigger?: ReactElement<Record<string, unknown>>;
+  /**
+   * Coloca el panel contra un elemento que no es el disparador —la celda de una
+   * tabla— (la prop `anchor` de `Popover`). Sin `trigger`, no se pinta ningún
+   * disparador: el panel se abre solo con `open`, y al cerrarse el foco vuelve
+   * a donde estaba antes de abrir.
+   */
+  anchor?: PopoverAnchor;
   /** Se añade DESPUÉS de las clases propias. */
   className?: string;
 }
@@ -146,7 +166,7 @@ const ORIGIN: Hsva = { h: 0, s: 0, v: 0, a: 1 };
  *
  * Todo es Base UI salvo el área 2D: el `Popover` (foco, portal, cierre), las
  * bandas (`Slider`) y el campo (`Input`) son los de brand. El `ref` va al
- * disparador.
+ * disparador, sea la muestra o el `trigger` propio.
  */
 export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(function ColorPicker(
   {
@@ -172,6 +192,8 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(funct
     'aria-describedby': ariaDescribedBy,
     dialogLabel,
     clearLabel,
+    trigger: customTrigger,
+    anchor,
     className,
   },
   ref,
@@ -283,7 +305,7 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(funct
 
   const describedBy = [valueId, ariaDescribedBy].filter(Boolean).join(' ');
 
-  const trigger = (
+  const swatchTrigger = (
     <button
       ref={ref}
       id={id}
@@ -304,11 +326,48 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(funct
     </button>
   );
 
+  // El disparador propio recibe sus props como el `render` de `Button`: lo
+  // que el elemento ya traiga gana, y su `ref` se suma al del selector —el del
+  // campo es el que enfoca react-hook-form al fallar la validación—. La
+  // descripción se suma, y `disabled` basta con que lo diga uno.
+  const ownProps = customTrigger?.props ?? {};
+  const renderedTrigger = useRender({
+    render: customTrigger && cloneElement(customTrigger, {
+      disabled: disabled || ownProps.disabled || undefined,
+      'aria-describedby': [describedBy, ownProps['aria-describedby']].filter(Boolean).join(' '),
+    }),
+    ref,
+    enabled: customTrigger !== undefined,
+    props: {
+      id,
+      'aria-label': ariaLabel,
+      'aria-labelledby': ariaLabel ? undefined : ariaLabelledBy,
+      'aria-haspopup': 'dialog',
+      'aria-expanded': open,
+      'aria-invalid': error || undefined,
+    },
+  });
+
+  let trigger: ReactElement | undefined;
+  if (renderedTrigger) {
+    trigger = renderedTrigger;
+  } else if (anchor === undefined) {
+    trigger = swatchTrigger;
+  }
+
   return (
     <div className={rootClass}>
       {name && <input type="hidden" name={name} value={currentHex ?? ''} />}
+      {customTrigger && (
+        // La descripción del disparador propio: no puede ir dentro de un
+        // elemento que no es nuestro.
+        <VisuallyHidden id={valueId}>
+          {current ? t('value')(currentHex ?? current) : t('empty')}
+        </VisuallyHidden>
+      )}
       <Popover
         trigger={trigger}
+        anchor={anchor}
         label={t('dialog', dialogLabel)}
         open={open}
         onOpenChange={handleOpenChange}

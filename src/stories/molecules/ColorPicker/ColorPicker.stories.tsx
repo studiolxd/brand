@@ -4,7 +4,11 @@ import { fn, expect, userEvent, waitFor, within } from 'storybook/test';
 import { DirectionProvider } from '@base-ui/react/direction-provider';
 import { ColorPicker } from './ColorPicker';
 import type { ColorPickerPreset } from './ColorPicker';
+import { Button } from '../../atoms/Button/Button';
+import { ColorSwatch } from '../../atoms/ColorSwatch/ColorSwatch';
 import { Inline } from '../../atoms/Inline/Inline';
+import { Toggle } from '../../atoms/Toggle/Toggle';
+import { Table, TableBody, TableCell, TableRow } from '../Table/Table';
 import { Stack } from '../../atoms/Stack/Stack';
 import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
 import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
@@ -334,5 +338,176 @@ export const ContratoAperturaControlada: Story = {
     await waitFor(() => expect(body.queryByRole('dialog')).toBeNull());
     await expect(canvas.getByText('#f05e1c')).toBeInTheDocument();
     await expect(canvas.getByRole('button', { name: 'Color de acento' })).toHaveAttribute('aria-expanded', 'false');
+  },
+};
+
+/**
+ * Disparador propio: un `Toggle` de barra de herramientas con su glifo y, al
+ * lado, la muestra pequeña del color actual. El `pressed` lo decide quien lo
+ * usa —aquí, que haya color—; el selector le pone lo del disparador.
+ */
+function ConDisparadorPropio(args: React.ComponentProps<typeof ColorPicker>) {
+  const [valor, setValor] = useState<string | null>(args.value ?? '#f05e1c');
+  return (
+    <Inline gap="sm" align="center">
+      <ColorPicker
+        {...args}
+        value={valor}
+        onValueChange={(hex) => { setValor(hex); args.onValueChange?.(hex); }}
+        onClear={() => { setValor(null); args.onClear?.(); }}
+        trigger={(
+          <Toggle size="sm" pressed={valor !== null}>
+            A
+            <ColorSwatch size="sm" color={valor} />
+          </Toggle>
+        )}
+      />
+      <code>{valor ?? '—'}</code>
+    </Inline>
+  );
+}
+
+export const DisparadorPropio: Story = {
+  name: 'Con disparador propio',
+  args: { 'aria-label': 'Color del texto', presets: PALETA, clearable: true },
+  render: (args) => <ConDisparadorPropio {...args} />,
+};
+
+const CELDAS = ['A1', 'B1', 'A2', 'B2'];
+
+/**
+ * Anclado sin disparador: el panel lo abre otra cosa —aquí el botón de cada
+ * celda; en un editor, su menú contextual— y se coloca contra la celda. No se
+ * pinta ninguna muestra: `open` controlado y `anchor`.
+ */
+function CeldasConColor(args: React.ComponentProps<typeof ColorPicker>) {
+  const [colores, setColores] = useState<Record<string, string | null>>({ A1: '#baabff' });
+  const [abierta, setAbierta] = useState<{ celda: string; ancla: HTMLElement } | null>(null);
+  const elegir = (celda: string, hex: string | null) => setColores((prev) => ({ ...prev, [celda]: hex }));
+  const fila = (celdas: string[]) => (
+    <TableRow>
+      {celdas.map((celda) => (
+        <TableCell key={celda}>
+          <Inline gap="sm" align="center">
+            <ColorSwatch size="sm" color={colores[celda] ?? null} />
+            <Button
+              variant="text"
+              size="sm"
+              onClick={(event) => {
+                const ancla = event.currentTarget.closest('td');
+                if (ancla) setAbierta({ celda, ancla });
+              }}
+            >
+              {`Color de ${celda}`}
+            </Button>
+          </Inline>
+        </TableCell>
+      ))}
+    </TableRow>
+  );
+  return (
+    <>
+      <Table caption="Celdas con color de fondo">
+        <TableBody>
+          {fila(CELDAS.slice(0, 2))}
+          {fila(CELDAS.slice(2))}
+        </TableBody>
+      </Table>
+      {abierta && (
+        <ColorPicker
+          {...args}
+          dialogLabel={`Fondo de ${abierta.celda}`}
+          anchor={abierta.ancla}
+          value={colores[abierta.celda] ?? null}
+          open
+          onOpenChange={(next, details) => {
+            if (!next) setAbierta(null);
+            args.onOpenChange?.(next, details);
+          }}
+          onValueCommitted={(hex) => {
+            elegir(abierta.celda, hex);
+            setAbierta(null);
+            args.onValueCommitted?.(hex);
+          }}
+          onClear={() => {
+            elegir(abierta.celda, null);
+            setAbierta(null);
+          }}
+        />
+      )}
+    </>
+  );
+}
+
+export const AncladoSinDisparador: Story = {
+  name: 'Anclado sin disparador',
+  args: { presets: PALETA, clearable: true },
+  render: (args) => <CeldasConColor {...args} />,
+};
+
+/**
+ * Test: el disparador propio abre el panel con el ratón y con el teclado,
+ * lleva `aria-expanded` y la descripción del valor, y Escape devuelve el foco.
+ */
+export const ContratoDisparadorPropio: Story = {
+  name: 'Test — disparador propio: apertura, aria-expanded, Escape y foco',
+  tags: ['!dev'],
+  args: { 'aria-label': 'Color del texto', value: '#f05e1c' },
+  render: (args) => <ConDisparadorPropio {...args} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(canvasElement.ownerDocument.body);
+    const boton = canvas.getByRole('button', { name: 'Color del texto' });
+    await expect(canvasElement.querySelector('.color-picker__trigger')).toBeNull();
+    await expect(boton).toHaveClass('toggle');
+    await expect(boton).toHaveAttribute('aria-haspopup', 'dialog');
+    await expect(boton).toHaveAttribute('aria-pressed', 'true');
+    await expect(boton).toHaveAccessibleDescription('Color actual: #f05e1c');
+    await expect(boton).toHaveAttribute('aria-expanded', 'false');
+
+    await userEvent.click(boton);
+    await body.findByRole('dialog');
+    await expect(boton).toHaveAttribute('aria-expanded', 'true');
+    await waitFor(() => expect(body.getByRole('slider', { name: 'Saturación y brillo' })).toHaveFocus());
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() => expect(body.queryByRole('dialog')).toBeNull());
+    await expect(boton).toHaveAttribute('aria-expanded', 'false');
+    await waitFor(() => expect(boton).toHaveFocus());
+
+    // Con el teclado, igual.
+    await userEvent.keyboard('{Enter}');
+    await body.findByRole('dialog');
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() => expect(boton).toHaveFocus());
+  },
+};
+
+/**
+ * Test: sin disparador, el panel se abre con `open` contra la celda y, al
+ * cerrarse con Escape, el foco vuelve a donde estaba antes de abrir.
+ */
+export const ContratoAncla: Story = {
+  name: 'Test — anclado sin disparador: open controlado y foco de vuelta',
+  tags: ['!dev'],
+  args: { presets: PALETA },
+  render: (args) => <CeldasConColor {...args} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(canvasElement.ownerDocument.body);
+    await expect(canvasElement.querySelector('.color-picker__trigger')).toBeNull();
+    const abre = canvas.getByRole('button', { name: 'Color de B2' });
+    await userEvent.click(abre);
+    const panel = await body.findByRole('dialog', { name: 'Fondo de B2' });
+    // El panel cae bajo la celda, no en otro sitio.
+    const celda = abre.closest('td') as HTMLElement;
+    await waitFor(() => {
+      const a = celda.getBoundingClientRect();
+      const p = panel.getBoundingClientRect();
+      expect(Math.round(p.top)).toBeGreaterThanOrEqual(Math.round(a.bottom));
+      expect(Math.abs(p.left - a.left)).toBeLessThan(2);
+    });
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() => expect(body.queryByRole('dialog')).toBeNull());
+    await waitFor(() => expect(abre).toHaveFocus());
   },
 };

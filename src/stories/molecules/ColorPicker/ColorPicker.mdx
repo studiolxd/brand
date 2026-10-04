@@ -81,6 +81,66 @@ const [abierto, setAbierto] = useState(false);
 />
 ```
 
+## Disparador propio
+
+Por defecto el disparador es la muestra. `trigger` pone otro en su lugar —un `Toggle` de barra de
+herramientas con su glifo y la muestra pequeña al lado, un `Button`—, con el mismo patrón que el
+`trigger` de `Popover` y `Menu`: el elemento recibe las props del disparador por `render`, así que
+tiene que reenviarlas a su nodo (los átomos de brand lo hacen).
+
+<Canvas of={ColorPickerStories.DisparadorPropio} />
+
+Lo que el selector le pone y lo que conserva:
+
+- **Lo pone:** `id`, `aria-haspopup="dialog"`, `aria-expanded`, `aria-controls` (abierto), el
+  nombre que reciba el selector (`aria-label`, o `aria-labelledby` en el campo), `aria-invalid` con
+  `error`, `disabled` y la descripción con el valor actual (`colorPicker.value` /
+  `colorPicker.empty`).
+- **Lo que el elemento ya traiga gana**, con dos excepciones: la descripción **se suma** a su
+  `aria-describedby` y `disabled` basta con que lo diga uno de los dos. El `ref` del selector se
+  suma al del elemento.
+- Se conserva todo lo demás: el foco vuelve al disparador al cerrar, `Escape`, el teclado y la
+  apertura controlada funcionan igual.
+- Sin `aria-label` ni etiqueta, el disparador propio **no** toma `colorPicker.trigger`: se nombra
+  por sí mismo (su texto, o el `aria-label` que exige un `Toggle iconOnly`).
+- Lo que pinta dentro y su `pressed`, si es un `Toggle`, los decide quien lo usa.
+
+```tsx
+<ColorPicker
+  aria-label="Color del texto"
+  value={color}
+  onValueCommitted={aplicar}
+  trigger={(
+    <Toggle size="sm" pressed={color !== null}>
+      <MiIcono />
+      <ColorSwatch size="sm" color={color} />
+    </Toggle>
+  )}
+/>
+```
+
+## Anclado sin disparador
+
+Cuando el panel lo abre otra cosa —el menú contextual de la celda de una tabla—, `anchor` lo coloca
+contra ese elemento (la prop `anchor` de `Popover`: un elemento, un `ref`, un elemento virtual o
+una función que lo devuelva) y, **sin `trigger`, no se pinta ninguna muestra**: el panel se abre
+con `open` y se cierra en `onOpenChange`. Sin disparador al que volver, al cerrarse **el foco
+vuelve a donde estaba antes de abrir** —lo que hace el `Popover` de Base UI—. Con `trigger` y
+`anchor` a la vez, el panel lo abre el disparador y se coloca contra el ancla.
+
+<Canvas of={ColorPickerStories.AncladoSinDisparador} />
+
+```tsx
+<ColorPicker
+  dialogLabel="Fondo de la celda"
+  anchor={celda}             // el <td>, o un ref
+  value={color}
+  open
+  onOpenChange={(abierto) => { if (!abierto) cerrar(); }}
+  onValueCommitted={(hex) => { guardar(hex); cerrar(); }}
+/>
+```
+
 ## Tallas y estados
 
 El disparador es un control cuadrado a la talla de los campos —32, 40 y 48— con su mismo borde,
@@ -116,7 +176,10 @@ cualquiera.
 - El disparador es un botón con `aria-haspopup="dialog"`. Suelto se nombra con `aria-label` (o
   `colorPicker.trigger`); en el campo, con la etiqueta. El valor lo **describe**
   (`colorPicker.value`, «Color actual: #baabff»), y sin color, `colorPicker.empty`.
-- Al abrir, el foco va al pulgar del área; `Escape` cierra y devuelve el foco al disparador.
+- Con `trigger`, el elemento propio recibe lo mismo (ver § «Disparador propio»); con `anchor` y
+  sin `trigger` no hay disparador, y el panel se nombra con `dialogLabel`.
+- Al abrir, el foco va al pulgar del área; `Escape` cierra y devuelve el foco al disparador (sin
+  disparador, a donde estaba antes de abrir).
 - **El área.** La APG de WAI-ARIA no define un deslizador de dos dimensiones, así que se sigue su
   **patrón Slider** extendido a dos ejes: el pulgar es un único `role="slider"` enfocable, con
   `aria-roledescription` (`colorPicker.areaDescription`, «deslizador bidimensional»),
@@ -142,8 +205,8 @@ Los textos salen del `BrandMessagesProvider`, **sin valor por defecto**, del esp
 
 | Clave del catálogo | Cuándo se lee |
 | --- | --- |
-| `colorPicker.trigger` | disparador suelto, sin `aria-label` ni etiqueta |
-| `colorPicker.value(hex)` / `colorPicker.empty` | descripción del disparador, con y sin color |
+| `colorPicker.trigger` | la muestra suelta, sin `aria-label` ni etiqueta (un `trigger` propio no la lee) |
+| `colorPicker.value(hex)` / `colorPicker.empty` | descripción del disparador —la muestra o el `trigger`—, con y sin color |
 | `colorPicker.dialog` | nombre del panel, sin `dialogLabel` (en el campo lo pone la etiqueta) |
 | `colorPicker.area` / `.areaDescription` / `.areaValue(saturación, brillo)` | el área |
 | `colorPicker.hue` | la banda de tono |

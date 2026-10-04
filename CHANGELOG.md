@@ -7,6 +7,32 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [Sin publicar]
+
+> **Minor.** Disparador propio y ancla sin disparador en `ColorPicker`, a petición de creator (la barra
+> de texto enriquecido y la celda de una tabla). Sin tocar nada, todo sigue igual.
+
+### `ColorPicker`: `trigger` y `anchor`
+
+- **`trigger`**: un elemento propio como disparador en lugar de la muestra —un `Toggle` con glifo y
+  `ColorSwatch size="sm"`, un `Button`—, con el patrón del `trigger` de `Popover`/`Menu` y las props
+  por `render` (`useRender`, como `Button`). Recibe `id`, `aria-haspopup="dialog"`, `aria-expanded`,
+  `aria-controls`, `aria-label`/`aria-labelledby`, `aria-invalid`, `disabled` y la descripción con el
+  valor (`colorPicker.value`/`empty`); lo que el elemento ya traiga gana, salvo la descripción, que se
+  suma, y `disabled`. El `ref` del selector se suma al suyo. El foco vuelve a él al cerrar. No lee
+  `colorPicker.trigger`: se nombra por sí mismo o por `aria-label`/la etiqueta.
+- **`anchor`**: coloca el panel contra otro elemento (la prop `anchor` de `Popover`). Sin `trigger`
+  no se pinta ninguna muestra: el panel se abre con `open` controlado, y al cerrarse el foco vuelve a
+  donde estaba antes de abrir.
+- `ColorPickerField` reenvía las dos; con `trigger`, la etiqueta sigue nombrando el elemento.
+- Stories «Con disparador propio» y «Anclado sin disparador», y sus `Test — …`.
+
+### `Popover`: `anchor`, y `trigger` opcional
+
+- **`anchor`** (tipo `PopoverAnchor`): la prop `anchor` del Positioner de Base UI, tal cual.
+- **`trigger` pasa a opcional**: sin él no se pinta disparador y el panel se abre con `open` contra
+  `anchor`.
+
 ## [49.23.1] — 2026-10-04
 
 > **Patch.** `appHeader` pasa a ser **opcional** en `BrandMessages`. En 49.23.0 entró obligatorio y un
