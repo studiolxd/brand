@@ -306,7 +306,7 @@ BrandBanner("Sin conexión · 3 pendientes", variant: .warning) {               
     BrandButton("Reintentar", variant: .outline, size: .sm) { retry() }
 }
 BrandContextMenu([                                                               // el botón «⋯»; el panel es el `Menu` del sistema
-    .button("Editar", icon: .edit) { edit() }, .separator, .button("Eliminar", destructive: true) { delete() },
+    .button("Editar") { edit() }, .separator, .button("Eliminar", destructive: true) { delete() },
 ])
 BrandMenu([.radio("Mes", value: "month"), .radio("Semana", value: "week")], selection: $view) { Text("Vista") }
 BrandTabs(selection: $tab) { BrandTab("Resumen", value: Tab.summary); BrandTab("Gastos", value: Tab.expenses) }  // solo la barra; el contenido, un `switch`
