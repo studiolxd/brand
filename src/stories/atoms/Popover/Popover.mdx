@@ -46,6 +46,21 @@ cerrarse al elegir una fecha.
 
 <Canvas of={PopoverStories.Controlado} />
 
+## Anclado a otro elemento
+
+`anchor` coloca el panel contra un elemento que no es el disparador: es la prop
+`anchor` del Positioner de Base UI, tal cual (un elemento, un `ref`, un elemento
+virtual o una función que lo devuelva). Sin `trigger` no se pinta disparador: el
+panel se abre solo con `open` —lo abre otra cosa, como el menú contextual de una
+celda— y se coloca contra `anchor`. Sin disparador al que volver, al cerrarse el
+foco vuelve a donde estaba antes de abrir.
+
+```tsx
+<Popover anchor={celda} open={abierto} onOpenChange={setAbierto} label="Fondo de la celda">
+  …
+</Popover>
+```
+
 ## Escapes de cierre
 
 El panel se cierra solo por tres motivos, y cada uno tiene su handler. Todos reciben el **detalle**
@@ -176,7 +191,8 @@ botón de verdad —no en un envoltorio.
   el panel es `role="dialog"`.
 - Un diálogo necesita **nombre**: pásalo en `label`, salvo que el contenido
   empiece por un título visible que ya lo nombre.
-- Al abrirse, el foco entra en el panel; al cerrarse vuelve al disparador.
+- Al abrirse, el foco entra en el panel; al cerrarse vuelve al disparador (sin
+  disparador, a donde estaba antes de abrir).
   `Escape` cierra, y `Tab` recorre lo que hay dentro.
 - El panel se ve enfocado con el anillo del sistema (2px), en la tinta de la
   superficie.

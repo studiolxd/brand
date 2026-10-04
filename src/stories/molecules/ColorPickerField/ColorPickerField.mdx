@@ -41,6 +41,15 @@ solo. Los dos quedan enlazados por `aria-describedby`, junto al valor actual.
 
 <Canvas of={ColorPickerFieldStories.Deshabilitado} />
 
+## Disparador propio
+
+`trigger` y `anchor` llegan al `ColorPicker` tal cual (§ «Disparador propio» y «Anclado sin
+disparador» de `ColorPicker`). Con `trigger`, la etiqueta **sigue nombrando** el elemento propio
+(`aria-labelledby` gana a su propio `aria-label`), la ayuda y el error lo describen junto al valor,
+el error le pone `aria-invalid` y el `ref` del campo le llega. `size` no viaja a él: su talla es la
+que le dé quien lo pinta. `anchor` sin `trigger` deja el campo sin disparador, así que en un
+formulario no tiene sentido.
+
 ## Con react-hook-form
 
 El contrato es `value` / `onValueChange` + `name` + `ref` al disparador, no el spread del `field`.
