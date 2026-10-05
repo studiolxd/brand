@@ -7,6 +7,55 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [Sin publicar]
+
+> **Minor (49.25.0).** Las esperas pasan a ser piezas del sistema: las aplicaciones dejan de
+> componerlas a mano (`LoadingRegion`/`SkeletonLines`/`SkeletonTable` de lmsmcp, `LoadingState`/
+> `LoadingList`/`LoadingGrid` de creator, los botones con `Spinner` metido a mano). Criterio de la
+> suite: esqueleto cuando se conoce la forma de lo que llega, girador cuando no o cuando se espera
+> una acción, y la espera la anuncia el contenedor. Sin cambios incompatibles.
+
+### `LoadingState` — la espera de un bloque sin forma conocida (`@studiolxd/brand/loading-state`)
+
+- Un girador centrado en los dos ejes, en una caja que reserva alto: nunca un `Spinner` suelto.
+- **Solo se ve el girador.** El texto de la espera es el nombre accesible de la caja (`role="status"`,
+  `aria-busy`, `aria-labelledby` al texto oculto) y no se pinta. `label` lo cambia; sin él sale de
+  `spinner.label` del `BrandMessagesProvider` (sin espacio de textos nuevo). Fuera del proveedor hay
+  que pasar `label`: sin él ni catálogo, el error explícito de siempre.
+- Tallas `md` (página o zona) y `sm` (diálogo, hoja, popover); `action` opcional (p. ej. «Cancelar»),
+  con el mismo `EmptyStateAction` que `EmptyState`.
+- El alto: en una zona con alto definido la ocupa entera; en un flujo sin alto reserva el mínimo de
+  la talla; con **`fill`**, a página completa, toma el alto visible bajo la cabecera del `AppShell` y
+  centra sin provocar desplazamiento (para el `loading.tsx` de una ruta).
+
+### `LoadingRegion` y los esqueletos compuestos (`@studiolxd/brand/loading-region`)
+
+- `LoadingRegion` envuelve esqueletos y anuncia la espera (`role="status"`, `aria-busy`, texto oculto
+  de `label` o `spinner.label`). `announce={false}` la deja solo a la vista, con `aria-hidden`, cuando
+  ya anuncia otra región viva.
+- `SkeletonText` (`lines`, la última más corta), `SkeletonList` (`rows`), `SkeletonTable` (`rows`,
+  más la cabecera) y `SkeletonGrid` (`columns` 2|3|4, `rows`). Decorativos, sin atributo `style`: el
+  alto de cada barra sale de su token.
+
+### `Button loading`
+
+- El girador entra delante del texto, que se queda; mide `1em`, como el icono que acompaña al
+  texto. Con `iconOnly` sustituye al icono y el botón no cambia de ancho.
+- Inactivo y dicho: `aria-busy="true"` + `aria-disabled="true"`, **sin** `disabled` nativo (no
+  pierde el foco); el clic y el envío del formulario se cortan en el manejador. Con `href` quita el
+  `href`, como `disabled`. Con `render={<Link />}` corta el clic normal; el `href` del `Link` sigue
+  ahí (clic con modificador). No cambia dónde se puede usar `render` (solo desde cliente).
+- Nativo: `loading` entra en `excluded` de la ficha de paridad de `Button` hasta que una app nativa
+  lo pida.
+
+### Tokens nuevos
+
+- `loading-state.*`: `min-block-size`, `sm-min-block-size`, `gap`, `padding-block`, `padding-inline`,
+  `sm-padding-block`, `spinner-color` (en cascada desde `empty-state.*`).
+- `loading-region.*`: `gap`, `text-gap`, `text-last-line-width`, `list-gap`, `list-row-height`,
+  `table-gap`, `table-header-height`, `table-row-height`, `grid-gap`, `grid-item-height`.
+- `button.loading-gap`, `button.loading-spinner-size`.
+
 ## [49.24.1] — 2026-10-04
 
 > **Patch.** `AppShell` y `ChatShell` ya no rompen la hidratación por debajo del punto de ruptura de

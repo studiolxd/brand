@@ -1,0 +1,14 @@
+{
+  "loading-region": {
+    "gap":                   { "$value": "{spacing.5}",          "$type": "dimension", "$description": "Aire entre los bloques que envuelve la región (un título, un párrafo, una tabla)" },
+    "text-gap":              { "$value": "{spacing.2}",          "$type": "dimension", "$description": "SkeletonText: aire entre líneas" },
+    "text-last-line-width":  { "$value": "60%",                  "$type": "dimension", "$description": "SkeletonText: ancho de la última línea, más corta, para que se lea como párrafo y no como bloque" },
+    "list-gap":              { "$value": "{spacing.2}",          "$type": "dimension", "$description": "SkeletonList: aire entre filas" },
+    "list-row-height":       { "$value": "{size-component.md}",  "$type": "dimension", "$description": "SkeletonList: alto de una fila — el de un control de una línea" },
+    "table-gap":             { "$value": "{spacing.2}",          "$type": "dimension", "$description": "SkeletonTable: aire entre la cabecera y las filas" },
+    "table-header-height":   { "$value": "{size-component.md}",  "$type": "dimension", "$description": "SkeletonTable: alto de la cabecera" },
+    "table-row-height":      { "$value": "{size-component.sm}",  "$type": "dimension", "$description": "SkeletonTable: alto de una fila" },
+    "grid-gap":              { "$value": "{spacing.4}",          "$type": "dimension", "$description": "SkeletonGrid: aire entre celdas" },
+    "grid-item-height":      { "$value": "6rem",                 "$type": "dimension", "$description": "SkeletonGrid: alto de una celda (una miniatura, una tarjeta corta)" }
+  }
+}

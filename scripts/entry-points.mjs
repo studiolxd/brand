@@ -129,6 +129,8 @@ export const entryPoints = {
   'calendar-planner':    'src/stories/molecules/CalendarPlanner/CalendarPlanner.tsx',
   'calendar-roster':     'src/stories/molecules/CalendarRoster/CalendarRoster.tsx',
   'empty-state':         'src/stories/molecules/EmptyState/EmptyState.tsx',
+  'loading-state':       'src/stories/molecules/LoadingState/LoadingState.tsx',
+  'loading-region':      'src/stories/molecules/LoadingRegion/LoadingRegion.tsx',
   'password-field':      'src/stories/molecules/PasswordField/PasswordField.tsx',
   'toaster':             'src/stories/molecules/Toast/Toaster.tsx',
   'toast':               'src/stories/molecules/Toast/toast.ts',
@@ -285,5 +287,6 @@ export const clientComponents = new Set([
   'tree-view',
   'progress-bar',
   'spinner',
+  'loading-state', 'loading-region',
   'legal-footer',
 ]);

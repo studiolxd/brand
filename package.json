@@ -283,6 +283,16 @@
       "import": "./dist/empty-state.js",
       "default": "./dist/empty-state.js"
     },
+    "./loading-state": {
+      "types": "./dist/_types/molecules/LoadingState/LoadingState.d.ts",
+      "import": "./dist/loading-state.js",
+      "default": "./dist/loading-state.js"
+    },
+    "./loading-region": {
+      "types": "./dist/_types/molecules/LoadingRegion/LoadingRegion.d.ts",
+      "import": "./dist/loading-region.js",
+      "default": "./dist/loading-region.js"
+    },
     "./fieldset": {
       "types": "./dist/_types/atoms/Fieldset/Fieldset.d.ts",
       "import": "./dist/fieldset.js",

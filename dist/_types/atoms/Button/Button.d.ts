@@ -60,6 +60,20 @@ export interface ButtonBaseProps extends Omit<React.ComponentPropsWithoutRef<'bu
      */
     type?: 'button' | 'submit' | 'reset';
     onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
+    /**
+     * La acción está en marcha: el girador entra delante del texto (que se queda
+     * a la vista) y el botón queda inactivo y lo dice — `aria-busy="true"` y
+     * `aria-disabled="true"`. No usa `disabled` nativo a propósito: un botón que
+     * se deshabilita justo después del clic pierde el foco, y el lector de
+     * pantalla con él. El clic (y el envío del formulario, si es `submit`) se
+     * corta en el manejador.
+     *
+     * Con texto, el botón crece lo que ocupan el girador y su aire; con
+     * `iconOnly` el girador **sustituye** al icono y el botón no cambia de ancho.
+     * El resultado de la acción no lo anuncia el botón: lo anuncia quien lo
+     * enseña (el `Toast`, el error del campo).
+     */
+    loading?: boolean;
     /** Renders as <a> when provided */
     href?: string;
     /** Adds target="_blank" rel="noopener noreferrer" (solo con href) */

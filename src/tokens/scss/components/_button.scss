@@ -22,6 +22,8 @@ $lxd-button-disabled-border: #4a4a4a; // Border color when disabled — light su
 $lxd-button-height: 2.5rem; // Altura fija del botón (talla md): el contenido se centra, no se hace por padding
 $lxd-button-sm-height: 2rem; // Altura — sm
 $lxd-button-lg-height: 3rem; // Altura — lg
+$lxd-button-loading-gap: 0.5rem; // Con `loading`: aire entre el girador y el texto. El girador va delante del texto y el texto no se pierde
+$lxd-button-loading-spinner-size: 1em; // Con `loading`: lado del girador. `1em` es el cuerpo de cada talla (sm 14, md 16, lg 20), como el icono que acompaña al texto
 $lxd-button-padding-inline: 2rem; // Inline (horizontal) padding
 $lxd-button-focus-ring-width: 2px; // Focus ring width
 $lxd-button-focus-ring-style: solid; // Focus ring border style

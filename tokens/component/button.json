@@ -105,6 +105,16 @@
       "$type": "dimension",
       "$description": "Altura — lg"
     },
+    "loading-gap": {
+      "$value": "{spacing.2}",
+      "$type": "dimension",
+      "$description": "Con `loading`: aire entre el girador y el texto. El girador va delante del texto y el texto no se pierde"
+    },
+    "loading-spinner-size": {
+      "$value": "1em",
+      "$type": "dimension",
+      "$description": "Con `loading`: lado del girador. `1em` es el cuerpo de cada talla (sm 14, md 16, lg 20), como el icono que acompaña al texto"
+    },
     "padding-inline": {
       "$value": "{spacing.6}",
       "$type": "dimension",

@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import { useFormSize } from '../../constants/form-size';
 import { useRender } from '@base-ui/react/use-render';
+import { Spinner } from '../Spinner/Spinner';
 import './Button.css';
 
 /**
@@ -61,6 +62,20 @@ export interface ButtonBaseProps
    */
   type?: 'button' | 'submit' | 'reset';
   onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
+  /**
+   * La acción está en marcha: el girador entra delante del texto (que se queda
+   * a la vista) y el botón queda inactivo y lo dice — `aria-busy="true"` y
+   * `aria-disabled="true"`. No usa `disabled` nativo a propósito: un botón que
+   * se deshabilita justo después del clic pierde el foco, y el lector de
+   * pantalla con él. El clic (y el envío del formulario, si es `submit`) se
+   * corta en el manejador.
+   *
+   * Con texto, el botón crece lo que ocupan el girador y su aire; con
+   * `iconOnly` el girador **sustituye** al icono y el botón no cambia de ancho.
+   * El resultado de la acción no lo anuncia el botón: lo anuncia quien lo
+   * enseña (el `Toast`, el error del campo).
+   */
+  loading?: boolean;
   /** Renders as <a> when provided */
   href?: string;
   /** Adds target="_blank" rel="noopener noreferrer" (solo con href) */
@@ -87,6 +102,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
   children,
   type = 'button',
   disabled,
+  loading = false,
   onClick,
   href,
   external = false,
@@ -103,6 +119,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
     size !== 'md' ? `button--${size}` : '',
     block === 'mobile' ? 'button--block-mobile' : block ? 'button--block' : '',
     iconOnly ? 'button--icon-only' : '',
+    loading ? 'button--loading' : '',
     className ?? '',
   ].filter(Boolean).join(' ');
 
@@ -111,8 +128,9 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
    * ahí el estado se comunica con `aria-disabled` y se corta la interacción a
    * mano — el navegador seguiría el enlace y dispararía el `onClick` igual.
    */
+  const inactive = Boolean(disabled) || loading;
   const handleClick: React.MouseEventHandler<HTMLElement> = (event) => {
-    if (disabled) {
+    if (inactive) {
       event.preventDefault();
       event.stopPropagation();
       return;
@@ -120,16 +138,30 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
     (onClick as React.MouseEventHandler<HTMLElement> | undefined)?.(event);
   };
 
+  /**
+   * El girador es decorativo: el estado lo dice `aria-busy`, y el nombre del
+   * botón sigue siendo su texto (o su `aria-label` con `iconOnly`).
+   */
+  const content = loading ? (
+    <>
+      <span className="button__spinner">
+        <Spinner size="sm" aria-hidden />
+      </span>
+      {iconOnly ? null : children}
+    </>
+  ) : children;
+
   const rendered = useRender({
     render,
     ref,
     enabled: render !== undefined,
     props: {
       className: classes,
-      'aria-disabled': disabled ? true : undefined,
+      'aria-disabled': inactive ? true : undefined,
+      'aria-busy': loading ? true : undefined,
       onClick: handleClick,
       ...(rest as Record<string, unknown>),
-      children,
+      children: content,
     },
   });
   if (rendered) return rendered;
@@ -139,14 +171,15 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
       <a
         ref={ref as React.Ref<HTMLAnchorElement>}
         className={classes}
-        href={disabled ? undefined : href}
-        aria-disabled={disabled ? true : undefined}
-        role={disabled ? 'link' : undefined}
+        href={inactive ? undefined : href}
+        aria-disabled={inactive ? true : undefined}
+        aria-busy={loading ? true : undefined}
+        role={inactive ? 'link' : undefined}
         onClick={handleClick as React.MouseEventHandler<HTMLAnchorElement>}
         {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
       >
-        {children}
+        {content}
       </a>
     );
   }
@@ -157,10 +190,12 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
       className={classes}
       type={type}
       disabled={disabled}
-      onClick={onClick as React.MouseEventHandler<HTMLButtonElement>}
+      aria-disabled={loading ? true : undefined}
+      aria-busy={loading ? true : undefined}
+      onClick={handleClick as React.MouseEventHandler<HTMLButtonElement>}
       {...rest}
     >
-      {children}
+      {content}
     </button>
   );
 });

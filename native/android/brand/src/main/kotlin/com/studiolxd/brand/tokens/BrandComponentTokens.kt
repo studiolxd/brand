@@ -43,6 +43,10 @@ object BrandButtonTokens {
     val smHeight: Dp = 32.dp
     /** Token `button.lg-height` — Altura — lg */
     val lgHeight: Dp = 48.dp
+    /** Token `button.loading-gap` — Con `loading`: aire entre el girador y el texto. El girador va delante del texto y el texto no se pierde */
+    val loadingGap: Dp = 8.dp
+    /** Token `button.loading-spinner-size` — Con `loading`: lado del girador. `1em` es el cuerpo de cada talla (sm 14, md 16, lg 20), como el icono que acompaña al texto Fracción del tamaño de fuente del propio componente (em). */
+    val loadingSpinnerSize: Float = 1f
     /** Token `button.padding-inline` — Inline (horizontal) padding */
     val paddingInline: Dp = 32.dp
     /** Token `button.focus-ring-width` — Focus ring width */

@@ -210,6 +210,7 @@ html.dark .surface-light {
   --link-hover-underline-width: 0px;
   --link-focus-ring-color: var(--color-primary);
   --link-ink-color: var(--color-text-on-light);
+  --loading-state-spinner-color: var(--empty-state-icon-color);
   --logo-color: var(--color-text-on-light);
   --logomark-color: var(--color-text-on-light);
   --menu-button-color: var(--color-text-on-light);

@@ -75,6 +75,10 @@
       "reason": "`render` sustituye el elemento HTML; en nativo el estilo (`.buttonStyle(.brand(…))`) se aplica a cualquier `Button`."
     },
     {
+      "prop": "loading",
+      "reason": "Ninguna app nativa lo ha pedido todavía: se porta cuando lo pida (la primera consumidora es Homenize), con su girador nativo, sus pruebas y sus capturas."
+    },
+    {
       "prop": "className",
       "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
     }
