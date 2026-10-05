@@ -47,11 +47,11 @@ enfocable, así que quien estaba en el campo no pierde el foco; lleva
 zona va `aria-hidden`.
 
 - `uploadingLabel` es el texto de la espera («Subiendo 2 de 5…»). **Sin default
-  cableado**: sin él, sale de `spinner.label` del `BrandMessagesProvider`, como
-  `LoadingState`. Al cambiar, se anuncia el texto nuevo.
+  cableado**: sin él, sale de `fileUpload.uploading` del `BrandMessagesProvider`
+  («Subiendo…»). Al cambiar, se anuncia el texto nuevo.
 - `uploadingLabelVisible` lo pinta en la zona, bajo el girador: para subidas
-  largas con progreso por pasos; en una subida corta no se usa. **Sin
-  `uploadingLabel` propio no pinta nada** (el «Cargando…» genérico no se ve).
+  largas con progreso por pasos; en una subida corta no se usa. Sin
+  `uploadingLabel` propio pinta el texto del catálogo, «Subiendo…».
 - Es distinto de `progress`: este dibuja una barra con un porcentaje conocido.
   Pueden convivir. No lleva tokens propios: el girador toma el color del icono
   de la zona y el texto, el del texto de la zona.

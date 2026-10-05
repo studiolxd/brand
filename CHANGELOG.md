@@ -7,6 +7,18 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [Sin publicar]
+
+> **Minor (49.27.0).** «Subiendo…» pasa a ser texto del catálogo de brand. **Atención:** `fileUpload.uploading`
+> es una clave nueva y obligatoria de `BrandMessages`: cada aplicación debe añadirla a su catálogo (es, en, fr…).
+
+### `FileUpload` / `FileUploadField` — texto de la subida por defecto
+
+- Clave nueva **`fileUpload.uploading`** («Subiendo…» / «Uploading…»). `uploading` sin `uploadingLabel` anuncia
+  ese texto (antes salía de `spinner.label`, «Cargando…»).
+- `uploadingLabelVisible` sin `uploadingLabel` propio **pinta** el texto del catálogo (antes no pintaba nada).
+- Las fixtures de Storybook (es) y de tests (en) llevan la clave nueva.
+
 ## [49.26.0] — 2026-10-05
 
 > **Minor (49.26.0).** `LoadingState` puede pintar su texto en esperas largas con pasos. Sin cambios
