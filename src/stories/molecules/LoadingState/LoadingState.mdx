@@ -24,7 +24,7 @@ caso va **dentro del control** (`Button loading`).
 Un `Spinner` nunca se suelta en el flujo: es `inline-flex`, no reserva alto y
 queda arriba a la izquierda. `LoadingState` es la caja que lo centra.
 
-## Solo se ve el girador
+## Por defecto, solo se ve el girador
 
 El texto de la espera **no se pinta**: es el nombre accesible de la caja
 (`role="status"`, `aria-busy="true"`, `aria-labelledby` apuntando al texto
@@ -39,6 +39,36 @@ pasar `label`; sin él ni catálogo, el componente falla con el error explícito
 de siempre en lugar de quedarse sin nombre.
 
 <Canvas of={LoadingStateStories.ConTexto} />
+
+## Texto visible para esperas largas
+
+`labelVisible` pinta el `label` bajo el girador, centrado, con el texto atenuado
+de la descripción de `EmptyState` (sus mismos tokens: `loading-state.label-*`).
+Es para una espera **larga y con pasos**, donde el texto informa de por dónde
+va: «Procesando el documento: paso 2 de 5…», «Importando el curso: 14 de 38
+lecciones…». En una espera corta **no se usa**: un texto que aparece y
+desaparece en un segundo es ruido.
+
+- **Es el mismo nodo** que da el nombre accesible: no se anuncia dos veces. La
+  caja es `role="status"` con `aria-live="polite"` y `aria-atomic="false"`, así
+  que cuando `label` cambia (el paso siguiente) se anuncia solo el texto nuevo,
+  con cortesía, sin releer la acción; y si el texto no cambia entre renderizados,
+  el DOM no se toca y no se repite.
+- **Sin `label` propio no pinta nada.** El texto genérico del catálogo
+  («Cargando…») es justo el que se quitó de la vista; con `labelVisible` y sin
+  `label`, la espera sigue como siempre (solo girador, texto oculto) y no es un
+  error de desarrollo.
+
+<Canvas of={LoadingStateStories.TextoVisible} />
+<Canvas of={LoadingStateStories.TextoVisibleConAccion} />
+
+```tsx
+<LoadingState
+  label={`Procesando el documento: paso ${paso} de ${total}…`}
+  labelVisible
+  action={{ label: 'Cancelar', onClick: cancelar }}
+/>
+```
 
 ## Tallas
 

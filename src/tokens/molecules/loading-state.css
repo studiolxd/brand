@@ -9,5 +9,9 @@
   --loading-state-gap: var(--empty-state-gap); /** Aire entre el girador y la acción — el mismo que EmptyState, porque ocupa su sitio */
   --loading-state-padding-block: var(--empty-state-padding-block); /** Padding vertical — el de EmptyState */
   --loading-state-padding-inline: var(--empty-state-padding-inline); /** Padding horizontal — el de EmptyState */
+  --loading-state-label-font-family: var(--empty-state-description-font-family); /** Familia del texto visible de la espera (labelVisible) — la de la descripción de EmptyState */
+  --loading-state-sm-label-font-size: var(--empty-state-description-font-size-sm); /** Tamaño del texto visible en talla sm — el de la descripción de EmptyState sm */
   --loading-state-spinner-color: var(--empty-state-icon-color); /** Color del girador — el del icono de EmptyState (su par oscuro llega por el fichero derivado) */
+  --loading-state-label-font-size: var(--empty-state-description-font-size); /** Tamaño del texto visible de la espera — el de la descripción de EmptyState (cuerpo de la superficie) */
+  --loading-state-label-color: var(--empty-state-description-color); /** Color del texto visible de la espera — el de la descripción de EmptyState (texto atenuado, nunca grey-dark) */
 }

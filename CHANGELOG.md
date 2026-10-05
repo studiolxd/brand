@@ -7,6 +7,22 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [Sin publicar]
+
+> **Minor (49.26.0).** `LoadingState` puede pintar su texto en esperas largas con pasos. Sin cambios
+> incompatibles: por defecto sigue mostrándose solo el girador.
+
+### `LoadingState` — `labelVisible`
+
+- Prop nueva **`labelVisible`** (por defecto `false`): pinta el `label` bajo el girador, centrado, con el
+  estilo de la descripción de `EmptyState`. Para esperas largas con pasos («Procesando el documento:
+  paso 2 de 5…»); en esperas cortas no se usa.
+- Es el mismo nodo que da el nombre accesible (no se duplica el anuncio). La caja lleva
+  `aria-live="polite"` y `aria-atomic="false"`: al cambiar el `label` se anuncia solo el texto nuevo.
+- Sin `label` propio no pinta el texto genérico del catálogo: la espera sigue con el texto oculto (no es error).
+- Tokens nuevos: `loading-state.label-font-family`, `label-font-size`, `sm-label-font-size`, `label-color`
+  (apuntan a los de la descripción de `EmptyState`; el par oscuro llega por el fichero derivado).
+
 ## [49.25.0] — 2026-10-05
 
 > **Minor.** Las esperas pasan a ser piezas del sistema: las aplicaciones dejan de

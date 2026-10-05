@@ -8,3 +8,7 @@ $lxd-loading-state-padding-block: 3rem; // Padding vertical — el de EmptyState
 $lxd-loading-state-padding-inline: 1.5rem; // Padding horizontal — el de EmptyState
 $lxd-loading-state-sm-padding-block: 1.5rem; // Padding vertical en talla sm: dentro de un diálogo el aire ya lo pone el diálogo
 $lxd-loading-state-spinner-color: #6b6b6b; // Color del girador — el del icono de EmptyState (su par oscuro llega por el fichero derivado)
+$lxd-loading-state-label-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia del texto visible de la espera (labelVisible) — la de la descripción de EmptyState
+$lxd-loading-state-label-font-size: 1rem; // Tamaño del texto visible de la espera — el de la descripción de EmptyState (cuerpo de la superficie)
+$lxd-loading-state-sm-label-font-size: 0.875rem; // Tamaño del texto visible en talla sm — el de la descripción de EmptyState sm
+$lxd-loading-state-label-color: #4a4a4a; // Color del texto visible de la espera — el de la descripción de EmptyState (texto atenuado, nunca grey-dark)

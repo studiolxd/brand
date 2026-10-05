@@ -26,6 +26,18 @@
   color: var(--loading-state-spinner-color);
 }
 
+.loading-state__label {
+  margin-block: 0;
+  margin-inline: 0;
+  font-family: var(--loading-state-label-font-family);
+  font-size: var(--loading-state-label-font-size);
+  color: var(--loading-state-label-color);
+}
+
+.loading-state.loading-state--sm .loading-state__label {
+  font-size: var(--loading-state-sm-label-font-size);
+}
+
 .loading-state.loading-state--sm {
   min-block-size: var(--loading-state-sm-min-block-size);
   padding-block: var(--loading-state-sm-padding-block);

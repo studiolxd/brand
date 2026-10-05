@@ -48,6 +48,7 @@ html.dark {
   --floating-dock-close-color: var(--modal-close-color);
   --floating-dock-close-focus-ring-color: var(--modal-close-focus-ring-color);
   --loading-state-spinner-color: var(--empty-state-icon-color);
+  --loading-state-label-color: var(--empty-state-description-color);
   --menu-bg: var(--floating-panel-bg);
   --menu-border-color: var(--floating-panel-border-color);
   --number-input-border-color: var(--input-border-color);
