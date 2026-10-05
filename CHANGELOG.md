@@ -23,6 +23,16 @@ para breaking changes.
 - Tokens nuevos: `loading-state.label-font-family`, `label-font-size`, `sm-label-font-size`, `label-color`
   (apuntan a los de la descripción de `EmptyState`; el par oscuro llega por el fichero derivado).
 
+### `FileUpload` / `FileUploadField` — estado de subida (`uploading`)
+
+- Props nuevas: **`uploading`** (el girador va dentro de la zona; la zona no admite otro fichero —clic,
+  selector, soltar y quitar quedan inertes— pero conserva el foco: no es `disabled`; el control lleva
+  `aria-busy` y `aria-disabled`), **`uploadingLabel`** (texto de la espera; sin él, `spinner.label` del
+  catálogo, sin texto cableado nuevo) y **`uploadingLabelVisible`** (lo pinta en la zona, con el mismo criterio
+  que `LoadingState labelVisible`: sin `uploadingLabel` propio no pinta nada).
+- La espera se anuncia con cortesía (`role="status"`, `aria-live="polite"`, `aria-atomic="false"`).
+- Sin tokens nuevos. `FileUploadField` las hereda del átomo. Sin ficha de paridad nativa (el componente no la tiene).
+
 ## [49.25.0] — 2026-10-05
 
 > **Minor.** Las esperas pasan a ser piezas del sistema: las aplicaciones dejan de

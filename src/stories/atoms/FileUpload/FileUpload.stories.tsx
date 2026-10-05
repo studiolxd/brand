@@ -58,6 +58,37 @@ export const WithProgress: Story = {
   },
 };
 
+export const Subiendo: Story = {
+  args: { uploading: true, uploadingLabel: 'Subiendo el archivo…', ariaLabel: 'Subir archivo' },
+};
+
+export const SubiendoConTextoVisible: Story = {
+  name: 'Subiendo con texto visible',
+  args: {
+    uploading: true,
+    uploadingLabel: 'Subiendo 2 de 5…',
+    uploadingLabelVisible: true,
+    multiple: true,
+    ariaLabel: 'Subir archivos',
+  },
+};
+
+export const TestSubiendo: Story = {
+  name: 'Test — subiendo es inerte, anuncia y conserva el foco',
+  tags: ['!dev'],
+  args: { uploading: true, uploadingLabel: 'Subiendo 2 de 5…', uploadingLabelVisible: true, ariaLabel: 'Subir archivo' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvasElement.querySelector('input[type="file"]') as HTMLInputElement;
+    input.focus();
+    await expect(input).toHaveFocus();
+    await expect(input).toHaveAttribute('aria-busy', 'true');
+    await expect(input).not.toBeDisabled();
+    await expect(await canvas.findByRole('status')).toHaveTextContent('Subiendo 2 de 5…');
+    await expect(canvasElement.querySelector('.file-upload__dropzone .spinner')).not.toBeNull();
+  },
+};
+
 export const Error: Story = {
   args: {
     error: true,

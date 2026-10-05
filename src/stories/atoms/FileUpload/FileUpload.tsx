@@ -1,5 +1,6 @@
 import { forwardRef, useState, useCallback, useRef, useEffect, useId, type Ref } from 'react';
 import { Icon } from '../Icon/Icon';
+import { Spinner } from '../Spinner/Spinner';
 import { ProgressBar } from '../ProgressBar/ProgressBar';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import { useFormSize, type FormSize } from '../../constants/form-size';
@@ -52,6 +53,28 @@ export interface FileUploadProps {
   defaultValue?: File[];
   onChange?: (files: File[]) => void;
   progress?: number;
+  /**
+   * La subida está en curso. El girador sustituye al icono **dentro de la
+   * zona**, que deja de admitir ficheros (clic, selector y soltar quedan
+   * inertes, también el aspa de quitar) pero **conserva el foco**: no es
+   * `disabled`, así que quien estaba en el campo no lo pierde. El control
+   * lleva `aria-busy` y `aria-disabled`, y la espera se anuncia con cortesía
+   * (`role="status"`). Es distinto de `progress`, que dibuja una barra con un
+   * porcentaje conocido: pueden convivir.
+   */
+  uploading?: boolean;
+  /**
+   * Texto de la subida en curso («Subiendo 2 de 5…»). **No se ve** salvo con
+   * `uploadingLabelVisible`: es lo que anuncia el lector de pantalla. **Sin
+   * default**: sin él, sale de `spinner.label` del `BrandMessagesProvider`.
+   */
+  uploadingLabel?: string;
+  /**
+   * Pinta `uploadingLabel` en la zona, bajo el girador, para subidas largas con
+   * progreso por pasos. **Sin `uploadingLabel` propio no pinta nada**: el
+   * texto genérico del catálogo no se ve nunca. Default `false`.
+   */
+  uploadingLabelVisible?: boolean;
   disabled?: boolean;
   error?: boolean;
   id?: string;
@@ -181,6 +204,9 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
   defaultValue = [],
   onChange,
   progress,
+  uploading = false,
+  uploadingLabel,
+  uploadingLabelVisible = false,
   disabled = false,
   error = false,
   id,
@@ -206,6 +232,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
   size: sizeProp,
 }: FileUploadProps, ref) {
   const t = useBrandMessages('fileUpload');
+  const tSpinner = useBrandMessages('spinner');
   const size = useFormSize(sizeProp);
   // El icono del dropzone mide con la escala del propio `Icon`, que es de donde
   // salían los tokens de tamaño que tenía antes el componente.
@@ -236,7 +263,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
   }, []);
 
   const addFiles = useCallback((incoming: FileList | File[]) => {
-    if (disabled) return;
+    if (disabled || uploading) return;
     const arr = Array.from(incoming);
     const current = isControlled ? (value ?? []) : internalFiles;
     const errors = new Map<File, string>(fileErrors);
@@ -259,9 +286,10 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
     setFileErrors(errors);
     if (!isControlled) setInternalFiles(nextFiles);
     onChange?.(nextFiles.filter(f => !errors.has(f)));
-  }, [disabled, accept, maxSize, maxFiles, isControlled, value, internalFiles, fileErrors, onChange, t, tooLargeError, invalidTypeError, locale]);
+  }, [disabled, uploading, accept, maxSize, maxFiles, isControlled, value, internalFiles, fileErrors, onChange, t, tooLargeError, invalidTypeError, locale]);
 
   const removeFile = useCallback((file: File) => {
+    if (uploading) return;
     const current = isControlled ? (value ?? []) : internalFiles;
     const next = current.filter(f => f !== file);
     const errors = new Map(fileErrors);
@@ -271,7 +299,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
     if (!isControlled) setInternalFiles(next);
     onChange?.(next.filter(f => !errors.has(f)));
     if (inputRef.current) inputRef.current.value = '';
-  }, [isControlled, value, internalFiles, fileErrors, onChange]);
+  }, [uploading, isControlled, value, internalFiles, fileErrors, onChange]);
 
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.files) addFiles(e.target.files);
@@ -279,7 +307,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
 
   const handleDragOver: React.DragEventHandler = (e) => {
     e.preventDefault();
-    if (!disabled) setIsDragging(true);
+    if (!disabled && !uploading) setIsDragging(true);
   };
 
   const handleDragLeave: React.DragEventHandler = (e) => {
@@ -290,14 +318,14 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
   const handleDrop: React.DragEventHandler = (e) => {
     e.preventDefault();
     setIsDragging(false);
-    if (!disabled && e.dataTransfer.files) addFiles(e.dataTransfer.files);
+    if (!disabled && !uploading && e.dataTransfer.files) addFiles(e.dataTransfer.files);
   };
 
   // El input real es el control: la zona solo traduce el clic sobre ella al
   // clic del input. El teclado no necesita nada — el input está en el
   // tabulador y Enter/Espacio abren el selector de forma nativa.
   const handleDropzoneClick = () => {
-    if (!disabled) inputRef.current?.click();
+    if (!disabled && !uploading) inputRef.current?.click();
   };
 
   const wrapperClasses = [
@@ -306,6 +334,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
     isDragging ? 'file-upload--dragging' : '',
     error ? 'file-upload--error' : '',
     disabled ? 'file-upload--disabled' : '',
+    uploading ? 'file-upload--uploading' : '',
     files.length > 0 ? 'file-upload--has-files' : '',
     className ?? '',
   ].filter(Boolean).join(' ');
@@ -318,6 +347,11 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
 
   const dropzoneText = t('dropzone', dropzoneLabel);
   const dropzoneHintText = t('dropzoneHint', dropzoneHintLabel);
+
+  // Sin `uploadingLabel` propio, el nombre de la espera sale del catálogo y no se
+  // pinta: solo se ve un texto que alguien escribió para esta subida.
+  const uploadingText = uploading ? tSpinner('label', uploadingLabel) : '';
+  const showUploadingText = uploading && uploadingLabelVisible && Boolean(uploadingLabel);
 
   const subtextParts: string[] = [];
   if (accept) subtextParts.push(accept);
@@ -340,6 +374,9 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
           aria-label={ariaLabel ?? ariaLabelNative}
           aria-describedby={describedByIds}
           aria-invalid={error || undefined}
+          aria-busy={uploading || undefined}
+          aria-disabled={uploading || undefined}
+          onClick={uploading ? (e) => e.preventDefault() : undefined}
           onChange={handleInputChange}
           onBlur={onBlur}
         />
@@ -357,15 +394,26 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
         onDrop={handleDrop}
         aria-hidden="true"
       >
-        <Icon name="upload" size={iconSize} className="file-upload__icon" />
-        <span className="file-upload__text">
-          {isDragging ? t('dropzoneActive', dropzoneActiveLabel) : dropzoneText}
-        </span>
-        <span className="file-upload__text file-upload__text--secondary">
-          {dropzoneHintText}
-        </span>
-        {subtextParts.length > 0 && (
-          <span className="file-upload__subtext">{subtextParts.join(' · ')}</span>
+        {uploading ? (
+          <>
+            <span className="file-upload__icon">
+              <Spinner size={iconSize} aria-hidden />
+            </span>
+            {showUploadingText && <span className="file-upload__text">{uploadingText}</span>}
+          </>
+        ) : (
+          <>
+            <Icon name="upload" size={iconSize} className="file-upload__icon" />
+            <span className="file-upload__text">
+              {isDragging ? t('dropzoneActive', dropzoneActiveLabel) : dropzoneText}
+            </span>
+            <span className="file-upload__text file-upload__text--secondary">
+              {dropzoneHintText}
+            </span>
+            {subtextParts.length > 0 && (
+              <span className="file-upload__subtext">{subtextParts.join(' · ')}</span>
+            )}
+          </>
         )}
       </div>
       {/* La misma instrucción, ya sin duplicar en el árbol visible: la zona va
@@ -373,6 +421,12 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
       <VisuallyHidden id={hintId}>
         {[dropzoneText, dropzoneHintText, ...subtextParts].join('. ')}
       </VisuallyHidden>
+
+      {/* La zona va `aria-hidden`, así que la espera se anuncia desde aquí: la
+          copia visible (si la hay) queda oculta al lector y no se lee dos veces. */}
+      {uploading && (
+        <VisuallyHidden role="status" aria-live="polite" aria-atomic="false">{uploadingText}</VisuallyHidden>
+      )}
 
       {files.length > 0 && (
         <ul className="file-upload__list" aria-label={t('files', filesLabel)}>
@@ -398,6 +452,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
                   className="file-upload__item-remove"
                   type="button"
                   onClick={() => removeFile(file)}
+                  aria-disabled={uploading || undefined}
                   aria-label={t('removeFile', removeFileLabel)(file.name)}
                 >
                   <Icon name="close" size="sm" />
