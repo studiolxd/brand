@@ -34,6 +34,8 @@ export interface FileUploadMessages {
     tooLarge: (maxSize: string) => string;
     /** Error de tipo de archivo no admitido. */
     invalidType: string;
+    /** Texto de la subida en curso («Subiendo…»): lo anuncia el lector y, con `uploadingLabelVisible`, se pinta en la zona. */
+    uploading: string;
 }
 export interface FileUploadProps {
     multiple?: boolean;
@@ -57,13 +59,13 @@ export interface FileUploadProps {
     /**
      * Texto de la subida en curso («Subiendo 2 de 5…»). **No se ve** salvo con
      * `uploadingLabelVisible`: es lo que anuncia el lector de pantalla. **Sin
-     * default**: sin él, sale de `spinner.label` del `BrandMessagesProvider`.
+     * default**: sin él, sale de `fileUpload.uploading` del `BrandMessagesProvider`.
      */
     uploadingLabel?: string;
     /**
      * Pinta `uploadingLabel` en la zona, bajo el girador, para subidas largas con
-     * progreso por pasos. **Sin `uploadingLabel` propio no pinta nada**: el
-     * texto genérico del catálogo no se ve nunca. Default `false`.
+     * progreso por pasos. Sin `uploadingLabel` propio pinta el texto del catálogo
+     * (`fileUpload.uploading`, «Subiendo…»). Default `false`.
      */
     uploadingLabelVisible?: boolean;
     disabled?: boolean;
