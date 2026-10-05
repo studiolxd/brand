@@ -7,7 +7,7 @@ import { spinnerTokens } from "../../../tokens/components/spinner";
 
 # Spinner
 
-Indicador de espera indeterminada. No es un círculo que gira: es un **cuadrado de solo contorno que se dibuja**. El trazo arranca en la esquina superior izquierda, recorre los cuatro lados y cierra en esa misma esquina con el contorno completo; entonces vuelve a empezar. La metáfora es la de un marco que se completa —la geometría recta de la identidad— en lugar de una rueda.
+Indicador de espera indeterminada. No es un círculo que gira: es un **cuadrado de solo contorno que se dibuja**. El trazo arranca en la esquina superior izquierda, recorre los cuatro lados y cierra en esa misma esquina con el contorno completo; entonces se desdibuja siguiendo el mismo recorrido, también desde esa esquina, y cuando queda vacío vuelve a empezar, en bucle infinito y sin saltos. La metáfora es la de un marco que se completa —la geometría recta de la identidad— en lugar de una rueda.
 
 <Canvas of={SpinnerStories.Default} />
 
@@ -15,7 +15,7 @@ Hereda el color del texto (`currentColor`), así que funciona sobre cualquier su
 
 ## Cómo se dibuja
 
-Un `<svg>` con un `<rect>` sin radio (`rx`), `fill="none"` y `stroke="currentColor"`. El rect lleva `pathLength="100"`, y el CSS anima `stroke-dashoffset` de 100 a 0 con `stroke-dasharray: 100`: la longitud del contorno es siempre 100 unidades sea cual sea el tamaño, y el trazado de un rect empieza en su esquina superior izquierda, que es la esquina de arranque. Sin rotación. La curva es `--motion-easing-in-out`; un ciclo dura `--spinner-animation-duration`.
+Un `<svg>` con un `<rect>` sin radio (`rx`), `fill="none"` y `stroke="currentColor"`. El CSS anima `stroke-dashoffset` de `--spinner-perimeter` a 0 (se dibuja) y de 0 a su negativo (se desdibuja), con `stroke-dasharray` igual al perímetro; en los dos extremos el contorno está vacío, así que el reinicio del bucle no se ve. No usa `pathLength` porque el trazo lleva `vector-effect: non-scaling-stroke` (grosor en píxeles reales) y con él el guion se mide en píxeles de pantalla: el perímetro se calcula por talla (`10/3` del lado, porque el rect mide 80 en un viewBox de 24). El trazado de un rect empieza en su esquina superior izquierda, que es la esquina de arranque. Sin rotación. La curva es `--motion-easing-in-out` en cada mitad; un ciclo completo (dibujar + desdibujar) dura `--spinner-animation-duration`.
 
 ## Tamaños
 
@@ -25,7 +25,7 @@ Un `<svg>` con un `<rect>` sin radio (`rx`), `fill="none"` y `stroke="currentCol
 
 ## Sobre fondo oscuro
 
-<Canvas of={SpinnerStories.EnContextoOscuro} />
+Hereda `currentColor`, así que no necesita story propia: cambia el fondo en la barra de Storybook y el trazo toma la tinta de la superficie.
 
 ## Accesibilidad
 

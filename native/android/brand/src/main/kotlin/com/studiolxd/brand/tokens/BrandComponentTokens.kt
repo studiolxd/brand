@@ -1643,16 +1643,16 @@ object BrandSpinnerTokens {
     val sizeSm: Dp = 16.dp
     /** Token `spinner.size-md` — 24px — default spinner */
     val sizeMd: Dp = 24.dp
-    /** Token `spinner.size-lg` — 32px — large spinner */
-    val sizeLg: Dp = 32.dp
+    /** Token `spinner.size-lg` — 64px — large spinner */
+    val sizeLg: Dp = 64.dp
     /** Token `spinner.border-width-sm` — Grosor del trazo (stroke) para sm */
     val borderWidthSm: Dp = 2.dp
     /** Token `spinner.border-width-md` — Grosor del trazo (stroke) para md */
     val borderWidthMd: Dp = 2.dp
     /** Token `spinner.border-width-lg` — Grosor del trazo (stroke) para lg */
-    val borderWidthLg: Dp = 3.dp
-    /** Token `spinner.animation-duration` — Tiempo en dibujar el contorno completo (un ciclo del bucle) En milisegundos. */
-    val animationDuration: Int = 1000
+    val borderWidthLg: Dp = 2.dp
+    /** Token `spinner.animation-duration` — Un ciclo del bucle: dibujar el contorno (mitad) y desdibujarlo (mitad) En milisegundos. */
+    val animationDuration: Int = 2000
 }
 
 /** Tokens del componente `separator` (`tokens/**/separator.json`). Todo color es un [BrandSchemeValue]: se resuelve con `.current` (los que no tienen par oscuro valen lo mismo en los dos esquemas). */

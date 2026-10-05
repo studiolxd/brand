@@ -29,13 +29,13 @@ export interface SpinnerProps {
 
 /**
  * Cuadrado de contorno que se dibuja desde la esquina superior izquierda hasta
- * completarse y vuelve a empezar. El `<rect>` lleva `pathLength="100"` para que
- * el CSS anime `stroke-dashoffset` de 100 a 0 sin depender del tamaño.
+ * completarse, se desdibuja por el mismo recorrido y vuelve a empezar. El CSS
+ * anima `stroke-dashoffset` sobre el perímetro de cada talla (`--spinner-perimeter`).
  */
 function Square() {
   return (
     <svg className="spinner__square" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <rect className="spinner__stroke" x="2" y="2" width="20" height="20" pathLength="100" />
+      <rect className="spinner__stroke" x="2" y="2" width="20" height="20" />
     </svg>
   );
 }

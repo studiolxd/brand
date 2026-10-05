@@ -7,6 +7,20 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [49.28.0] — 2026-10-05
+
+> **Minor (49.28.0).** El `Spinner` se desdibuja tras dibujarse y `lg` crece. Sin cambios de API.
+
+### `Spinner` — recorrido en bucle y talla `lg`
+
+- El contorno se dibuja desde la esquina superior izquierda y, ya completo, se **desdibuja** por el mismo recorrido
+  y vuelve a empezar: antes saltaba del cuadrado completo al vacío al cerrar el ciclo.
+- `spinner.animation-duration` pasa de 1000ms a **2000ms**: un ciclo son ahora dibujar + desdibujar.
+- `spinner.size-lg` pasa de 32px a **64px** (`spacing.8`) y `spinner.border-width-lg` de 3px a **2px**.
+- Arreglo: con `vector-effect: non-scaling-stroke` el guion se mide en píxeles de pantalla y `pathLength` no vale; el
+  perímetro se calcula por talla (`--spinner-perimeter`) y el recorrido sale completo en `sm`, `md` y `lg`.
+- Docs: se quita de `Spinner.mdx` el `Canvas` de una story «en oscuro» que ya no existía (rompía la página).
+
 ## [49.27.0] — 2026-10-05
 
 > **Minor (49.27.0).** «Subiendo…» pasa a ser texto del catálogo de brand. **Atención:** `fileUpload.uploading`

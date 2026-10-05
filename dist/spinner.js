@@ -15,8 +15,7 @@ function i() {
 			x: "2",
 			y: "2",
 			width: "20",
-			height: "20",
-			pathLength: "100"
+			height: "20"
 		})
 	});
 }

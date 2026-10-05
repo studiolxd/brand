@@ -1634,16 +1634,16 @@ public enum BrandSpinnerTokens {
     public static let sizeSm: CGFloat = 16
     /// Token `spinner.size-md` — 24px — default spinner
     public static let sizeMd: CGFloat = 24
-    /// Token `spinner.size-lg` — 32px — large spinner
-    public static let sizeLg: CGFloat = 32
+    /// Token `spinner.size-lg` — 64px — large spinner
+    public static let sizeLg: CGFloat = 64
     /// Token `spinner.border-width-sm` — Grosor del trazo (stroke) para sm
     public static let borderWidthSm: CGFloat = 2
     /// Token `spinner.border-width-md` — Grosor del trazo (stroke) para md
     public static let borderWidthMd: CGFloat = 2
     /// Token `spinner.border-width-lg` — Grosor del trazo (stroke) para lg
-    public static let borderWidthLg: CGFloat = 3
-    /// Token `spinner.animation-duration` — Tiempo en dibujar el contorno completo (un ciclo del bucle)
-    public static let animationDuration: TimeInterval = 1
+    public static let borderWidthLg: CGFloat = 2
+    /// Token `spinner.animation-duration` — Un ciclo del bucle: dibujar el contorno (mitad) y desdibujarlo (mitad)
+    public static let animationDuration: TimeInterval = 2
 }
 
 /// Tokens del componente `separator` (`tokens/**/separator.json`). Un token con par `surface-dark-*` (o que lo hereda) es un `Color` dinámico.
