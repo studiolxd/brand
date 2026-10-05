@@ -202,6 +202,7 @@ describe.each([
       'Eliminar ',
       'Archivo demasiado grande',
       'Tipo de archivo no permitido',
+      'Subiendo…',
     ],
   ],
   [

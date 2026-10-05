@@ -159,6 +159,7 @@ export const brandMessagesFixtureEn: BrandMessages = {
     removeFile: (fileName) => `Remove ${fileName}`,
     tooLarge: (max) => `File too large (max. ${max})`,
     invalidType: 'File type not allowed',
+    uploading: 'Uploading…',
   },
   imageCropDialog: {
     loading: 'Loading image…',

@@ -53,7 +53,7 @@ describe('FileUpload — uploading', () => {
     expect(container.querySelector('.file-upload__dropzone .spinner')).toHaveAttribute('aria-hidden', 'true');
     expect(container.querySelector('.file-upload__dropzone svg.icon')).toBeNull();
     const estado = screen.getByRole('status');
-    expect(estado).toHaveTextContent('Cargando…');
+    expect(estado).toHaveTextContent('Subiendo…');
     expect(estado).toHaveClass('visually-hidden');
     expect(estado).toHaveAttribute('aria-live', 'polite');
   });
@@ -109,9 +109,15 @@ describe('FileUpload — uploading', () => {
     expect(screen.getByRole('status')).toHaveTextContent('Subiendo 2 de 5…');
   });
 
-  it('uploadingLabelVisible sin uploadingLabel propio no pinta el texto del catálogo', () => {
-    const { container } = render(<FileUpload uploading uploadingLabelVisible aria-label="Adjuntos" />);
+  it('sin uploadingLabel, el anuncio sale de fileUpload.uploading y no se ve', () => {
+    const { container } = render(<FileUpload uploading aria-label="Adjuntos" />);
     expect(container.querySelector('.file-upload__dropzone .file-upload__text')).toBeNull();
-    expect(screen.getByRole('status')).toHaveTextContent('Cargando…');
+    expect(screen.getByRole('status')).toHaveTextContent('Subiendo…');
+  });
+
+  it('uploadingLabelVisible sin uploadingLabel propio pinta el texto del catálogo', () => {
+    const { container } = render(<FileUpload uploading uploadingLabelVisible aria-label="Adjuntos" />);
+    expect(container.querySelector('.file-upload__dropzone .file-upload__text')).toHaveTextContent('Subiendo…');
+    expect(screen.getByRole('status')).toHaveTextContent('Subiendo…');
   });
 });
