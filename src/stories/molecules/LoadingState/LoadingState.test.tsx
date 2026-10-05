@@ -65,4 +65,42 @@ describe('LoadingState', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Cancelar' }));
     expect(onCancel).toHaveBeenCalledOnce();
   });
+
+  describe('labelVisible', () => {
+    it('pinta el label bajo el girador y es el mismo nodo que da el nombre accesible', () => {
+      render(<LoadingState label="Procesando el documento: paso 2 de 5…" labelVisible />);
+      const region = screen.getByRole('status', { name: 'Procesando el documento: paso 2 de 5…' });
+      const texto = screen.getByText('Procesando el documento: paso 2 de 5…');
+      expect(texto).toHaveClass('loading-state__label');
+      expect(texto).not.toHaveClass('visually-hidden');
+      expect(region.getAttribute('aria-labelledby')).toBe(texto.id);
+      // Un solo nodo con el texto: no hay copia oculta que lo duplique.
+      expect(screen.getAllByText('Procesando el documento: paso 2 de 5…')).toHaveLength(1);
+      expect(region).toHaveAttribute('aria-live', 'polite');
+      expect(region).toHaveAttribute('aria-atomic', 'false');
+    });
+
+    it('sin label propio no pinta el texto del catálogo: sigue oculto', () => {
+      render(<LoadingState labelVisible />);
+      const texto = screen.getByText('Cargando…');
+      expect(texto).toHaveClass('visually-hidden');
+      expect(texto).not.toHaveClass('loading-state__label');
+      expect(screen.getByRole('status', { name: 'Cargando…' })).toBeInTheDocument();
+    });
+
+    it('por defecto el texto no se ve, aunque haya label', () => {
+      render(<LoadingState label="Cargando revisión…" />);
+      expect(screen.getByText('Cargando revisión…')).toHaveClass('visually-hidden');
+    });
+
+    it('al cambiar el label (pasos) actualiza el mismo nodo; con el mismo texto no lo toca', () => {
+      const { rerender } = render(<LoadingState label="Paso 1 de 3…" labelVisible />);
+      const nodo = screen.getByText('Paso 1 de 3…');
+      rerender(<BrandMessagesProvider messages={brandMessagesFixture}><LoadingState label="Paso 1 de 3…" labelVisible /></BrandMessagesProvider>);
+      expect(screen.getByText('Paso 1 de 3…')).toBe(nodo);
+      rerender(<BrandMessagesProvider messages={brandMessagesFixture}><LoadingState label="Paso 2 de 3…" labelVisible /></BrandMessagesProvider>);
+      expect(screen.getByText('Paso 2 de 3…')).toBe(nodo);
+      expect(screen.getByRole('status', { name: 'Paso 2 de 3…' })).toBeInTheDocument();
+    });
+  });
 });

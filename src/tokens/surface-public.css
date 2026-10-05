@@ -168,6 +168,7 @@
   --form-helper-font-size: var(--text-paragraph-small-font-size);
   --form-success-font-size: var(--text-font-size);
   --input-phone-country-item-padding-block: var(--select-item-padding-block);
+  --loading-state-label-font-size: var(--empty-state-description-font-size);
   --message-bubble-font-size: var(--text-font-size);
   --modal-description-font-size: var(--text-font-size);
   --password-field-input-padding-inline-end: var(--password-field-toggle-size);

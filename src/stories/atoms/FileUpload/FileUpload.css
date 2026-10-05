@@ -95,6 +95,24 @@
   pointer-events: none;
 }
 
+/* ── Subiendo ─────────────────────────────────────────── */
+
+/* La zona no admite otro fichero: sin cursor de clic ni respuesta al ratón. No
+   es `disabled` (ni se atenúa): el foco sigue en el `<input>` y el girador es
+   lo que se mira. */
+.file-upload.file-upload--uploading .file-upload__dropzone {
+  cursor: progress;
+  pointer-events: none;
+}
+
+.file-upload.file-upload--uploading span.file-upload__icon {
+  display: flex;
+}
+
+.file-upload.file-upload--uploading .file-upload__item-remove {
+  pointer-events: none;
+}
+
 /* ── Contenido del dropzone ───────────────────────────── */
 
 /* El tamaño lo pone la talla del `Icon`; aquí solo el color y el aire. */

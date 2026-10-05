@@ -44,6 +44,28 @@ export interface FileUploadProps {
     defaultValue?: File[];
     onChange?: (files: File[]) => void;
     progress?: number;
+    /**
+     * La subida está en curso. El girador sustituye al icono **dentro de la
+     * zona**, que deja de admitir ficheros (clic, selector y soltar quedan
+     * inertes, también el aspa de quitar) pero **conserva el foco**: no es
+     * `disabled`, así que quien estaba en el campo no lo pierde. El control
+     * lleva `aria-busy` y `aria-disabled`, y la espera se anuncia con cortesía
+     * (`role="status"`). Es distinto de `progress`, que dibuja una barra con un
+     * porcentaje conocido: pueden convivir.
+     */
+    uploading?: boolean;
+    /**
+     * Texto de la subida en curso («Subiendo 2 de 5…»). **No se ve** salvo con
+     * `uploadingLabelVisible`: es lo que anuncia el lector de pantalla. **Sin
+     * default**: sin él, sale de `spinner.label` del `BrandMessagesProvider`.
+     */
+    uploadingLabel?: string;
+    /**
+     * Pinta `uploadingLabel` en la zona, bajo el girador, para subidas largas con
+     * progreso por pasos. **Sin `uploadingLabel` propio no pinta nada**: el
+     * texto genérico del catálogo no se ve nunca. Default `false`.
+     */
+    uploadingLabelVisible?: boolean;
     disabled?: boolean;
     error?: boolean;
     id?: string;

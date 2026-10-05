@@ -34,6 +34,26 @@
       "$value": "{empty-state.icon-color}",
       "$type": "color",
       "$description": "Color del girador — el del icono de EmptyState (su par oscuro llega por el fichero derivado)"
+    },
+    "label-font-family": {
+      "$value": "{empty-state.description-font-family}",
+      "$type": "string",
+      "$description": "Familia del texto visible de la espera (labelVisible) — la de la descripción de EmptyState"
+    },
+    "label-font-size": {
+      "$value": "{empty-state.description-font-size}",
+      "$type": "dimension",
+      "$description": "Tamaño del texto visible de la espera — el de la descripción de EmptyState (cuerpo de la superficie)"
+    },
+    "sm-label-font-size": {
+      "$value": "{empty-state.description-font-size-sm}",
+      "$type": "dimension",
+      "$description": "Tamaño del texto visible en talla sm — el de la descripción de EmptyState sm"
+    },
+    "label-color": {
+      "$value": "{empty-state.description-color}",
+      "$type": "color",
+      "$description": "Color del texto visible de la espera — el de la descripción de EmptyState (texto atenuado, nunca grey-dark)"
     }
   }
 }

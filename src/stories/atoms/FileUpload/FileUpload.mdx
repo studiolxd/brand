@@ -36,6 +36,38 @@ envejezcan por separado.
 <Canvas of={FileUploadStories.WithFiles} />
 <Canvas of={FileUploadStories.WithProgress} />
 
+## Subiendo
+
+`uploading` marca que la subida está en curso: el `Spinner` sustituye al icono
+**dentro de la zona**, que deja de admitir ficheros (clic, selector, soltar y el
+aspa de quitar quedan inertes). **No es `disabled`**: el `<input>` sigue
+enfocable, así que quien estaba en el campo no pierde el foco; lleva
+`aria-busy` y `aria-disabled`. La espera se anuncia con cortesía desde un
+`role="status"` oculto (`aria-live="polite"`, `aria-atomic="false"`), porque la
+zona va `aria-hidden`.
+
+- `uploadingLabel` es el texto de la espera («Subiendo 2 de 5…»). **Sin default
+  cableado**: sin él, sale de `spinner.label` del `BrandMessagesProvider`, como
+  `LoadingState`. Al cambiar, se anuncia el texto nuevo.
+- `uploadingLabelVisible` lo pinta en la zona, bajo el girador: para subidas
+  largas con progreso por pasos; en una subida corta no se usa. **Sin
+  `uploadingLabel` propio no pinta nada** (el «Cargando…» genérico no se ve).
+- Es distinto de `progress`: este dibuja una barra con un porcentaje conocido.
+  Pueden convivir. No lleva tokens propios: el girador toma el color del icono
+  de la zona y el texto, el del texto de la zona.
+
+```tsx
+<FileUploadField
+  label="Documentos"
+  uploading={subiendo}
+  uploadingLabel={`Subiendo ${hechos} de ${total}…`}
+  uploadingLabelVisible
+/>
+```
+
+<Canvas of={FileUploadStories.Subiendo} />
+<Canvas of={FileUploadStories.SubiendoConTextoVisible} />
+
 ## Estados
 
 <Canvas of={FileUploadStories.Error} />

@@ -19,6 +19,7 @@ const meta: Meta<typeof LoadingState> = {
   argTypes: {
     label: { control: { type: 'text' } },
     size: { control: { type: 'inline-radio' }, options: ['md', 'sm'] },
+    labelVisible: { control: { type: 'boolean' } },
     fill: { control: { type: 'boolean' } },
     action: { control: false },
   },
@@ -35,6 +36,22 @@ export const PorDefecto: Story = {};
 export const ConTexto: Story = {
   name: 'Con texto propio',
   args: { label: 'Cargando revisión…' },
+};
+
+/** Con `labelVisible`: el texto se pinta bajo el girador. Para esperas largas con pasos. */
+export const TextoVisible: Story = {
+  name: 'Con texto visible',
+  args: { label: 'Procesando el documento: paso 2 de 5…', labelVisible: true },
+};
+
+export const TextoVisibleConAccion: Story = {
+  name: 'Texto visible y acción (sm)',
+  args: {
+    size: 'sm',
+    label: 'Importando el curso: 14 de 38 lecciones…',
+    labelVisible: true,
+    action: { label: 'Cancelar', onClick: fn() },
+  },
 };
 
 /** Talla `sm`: el cuerpo de un diálogo, una hoja, un popover o una barra lateral. */
@@ -195,5 +212,23 @@ export const TestEnFlujo: Story = {
     await expect(Math.round(md)).toBe(Math.round(mide('--loading-state-min-block-size')));
     await expect(Math.round(sm)).toBe(Math.round(mide('--loading-state-sm-min-block-size')));
     sonda.remove();
+  },
+};
+
+export const TestTextoVisible: Story = {
+  name: 'Test — labelVisible pinta el texto; sin label propio no',
+  tags: ['!dev'],
+  render: () => (
+    <div>
+      <LoadingState label="Procesando: paso 1…" labelVisible data-testid="con" />
+      <LoadingState labelVisible data-testid="sin" label={undefined} />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const visible = await canvas.findByText('Procesando: paso 1…');
+    await expect(visible).not.toHaveClass('visually-hidden');
+    await expect(visible.getBoundingClientRect().height).toBeGreaterThan(0);
+    await expect(canvas.getByRole('status', { name: 'Procesando: paso 1…' })).toBeInTheDocument();
   },
 };
