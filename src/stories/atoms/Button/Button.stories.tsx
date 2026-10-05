@@ -53,6 +53,10 @@ const meta: Meta<typeof Button> = {
       control: { type: 'boolean' },
       description: 'Deshabilita el botón.',
     },
+    loading: {
+      control: { type: 'boolean' },
+      description: 'La acción está en marcha: girador delante del texto, aria-busy y aria-disabled.',
+    },
     children: {
       control: { type: 'text' },
       description: 'Texto del botón.',
@@ -335,6 +339,86 @@ export const ContratoIconoTexto: Story = {
 
 export const Disabled: Story = {
   args: { variant: 'primary', disabled: true },
+};
+
+/**
+ * `loading`: el girador entra delante del texto, que se queda. El botón queda
+ * inactivo (aspecto de deshabilitado) y lo dice: `aria-busy` y `aria-disabled`.
+ */
+export const Loading: Story = {
+  name: 'Cargando',
+  args: { loading: true, children: 'Guardando…' },
+};
+
+/** Las cuatro variantes cargando. */
+export const LoadingVariantes: Story = {
+  name: 'Cargando — variantes',
+  render: (args) => (
+    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+      <Button {...args} variant="primary">Guardando…</Button>
+      <Button {...args} variant="outline">Guardando…</Button>
+      <Button {...args} variant="ghost">Guardando…</Button>
+      <Button {...args} variant="text">Guardando…</Button>
+    </div>
+  ),
+  args: { loading: true },
+};
+
+/** Las tres tallas: el girador mide `1em`, como el icono que acompaña al texto. */
+export const LoadingTallas: Story = {
+  name: 'Cargando — tallas',
+  render: (args) => (
+    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+      <Button {...args} size="sm">Enviando…</Button>
+      <Button {...args} size="md">Enviando…</Button>
+      <Button {...args} size="lg">Enviando…</Button>
+    </div>
+  ),
+  args: { loading: true },
+};
+
+/** Con `iconOnly`, el girador sustituye al icono y el botón no cambia de ancho. */
+export const LoadingSoloIcono: Story = {
+  name: 'Cargando — solo icono',
+  render: () => (
+    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+      <Button iconOnly variant="outline" aria-label="Descargar"><Icon name="download" /></Button>
+      <Button iconOnly variant="outline" aria-label="Descargar" loading><Icon name="download" /></Button>
+    </div>
+  ),
+};
+
+export const ContratoLoading: Story = {
+  name: 'Test — cargando: inactivo, ocupado, con foco y sin perder el texto',
+  tags: ['!dev'],
+  args: { loading: true, children: 'Guardando…', onClick: fn() },
+  render: (args) => (
+    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+      <Button {...args} />
+      <Button iconOnly variant="outline" aria-label="Descargar" data-testid="reposo"><Icon name="download" /></Button>
+      <Button iconOnly variant="outline" aria-label="Descargar" data-testid="cargando" loading><Icon name="download" /></Button>
+    </div>
+  ),
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const boton = canvas.getByRole('button', { name: 'Guardando…' });
+    await expect(boton).toHaveAttribute('aria-busy', 'true');
+    await expect(boton).toHaveAttribute('aria-disabled', 'true');
+    await expect(boton).not.toBeDisabled();
+    boton.focus();
+    await expect(boton).toHaveFocus();
+    fireEvent.click(boton);
+    await expect(args.onClick).not.toHaveBeenCalled();
+
+    // El girador va delante del texto y mide lo que el icono que acompaña al texto (1em).
+    const girador = boton.querySelector('.button__spinner .spinner__square')!.getBoundingClientRect();
+    await expect(Math.round(girador.height)).toBe(Math.round(parseFloat(getComputedStyle(boton).fontSize)));
+
+    // Solo icono: mismo ancho cargando que en reposo.
+    const reposo = canvas.getByTestId('reposo').getBoundingClientRect().width;
+    const cargando = canvas.getByTestId('cargando').getBoundingClientRect().width;
+    await expect(cargando).toBe(reposo);
+  },
 };
 
 /** Renderiza como <a> cuando se pasa href */

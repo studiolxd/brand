@@ -311,3 +311,22 @@
   inline-size: var(--button-lg-height);
   padding-inline: 0;
 }
+
+/* Loading — el girador va delante del texto, del tamaño del icono que
+   acompaña al texto (`1em`, la letra de cada talla). Gana a las tallas del
+   `Spinner` por especificidad. Con `iconOnly` sustituye al icono: sin aire,
+   centrado en la caja cuadrada. El aspecto inactivo lo pone ya
+   `[aria-disabled="true"]` de cada variante. */
+.button__spinner {
+  display: inline-flex;
+  margin-inline-end: var(--button-loading-gap);
+}
+
+.button.button--icon-only .button__spinner {
+  margin-inline-end: 0;
+}
+
+.button .button__spinner .spinner__square {
+  width: var(--button-loading-spinner-size);
+  height: var(--button-loading-spinner-size);
+}

@@ -1,0 +1,84 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as LoadingRegionStories from "./LoadingRegion.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { loadingRegionTokens } from "../../../tokens/molecules/loading-region";
+
+<Meta of={LoadingRegionStories} />
+
+# LoadingRegion
+
+La espera de un contenido **cuya forma se conoce**: una tabla, una lista, una
+ficha, una rejilla de tarjetas. Se reserva su sitio con esqueletos y la página
+no salta al llegar el contenido. Cuando la forma no se conoce, la respuesta es
+`LoadingState`.
+
+<Canvas of={LoadingRegionStories.PorDefecto} />
+
+## Quién anuncia
+
+El `Skeleton` es decorativo (`aria-hidden`): quien anuncia la espera es la
+región, con `role="status"`, `aria-busy="true"` y el texto de la espera
+**oculto a la vista**, al que apunta su `aria-labelledby`. Una sola región por
+espera, y dentro tantos esqueletos como haga falta, apilados con
+`loading-region.gap` entre bloques.
+
+`label` cambia el texto («Cargando bancos…», con puntos suspensivos). Sin
+`label`, sale de `spinner.label` del `BrandMessagesProvider`. **No hay texto de
+respaldo cableado**: fuera del proveedor hay que pasar `label`.
+
+<Canvas of={LoadingRegionStories.ConTexto} />
+
+`announce={false}` es para cuando la espera ya la anuncia una región viva que
+existe antes y después de cargar (unos resultados con `aria-live`): la región
+queda solo a la vista, con `aria-hidden`, y no lee `spinner.label`.
+
+<Canvas of={LoadingRegionStories.SinAnuncio} />
+
+## Los esqueletos compuestos
+
+No calcan el diseño de lo que llega —no hace falta—: ocupan un sitio parecido.
+Son decorativos y no anuncian nada solos; van siempre dentro de una
+`LoadingRegion`. Se importan del mismo sitio:
+
+```tsx
+import {
+  LoadingRegion, SkeletonText, SkeletonList, SkeletonTable, SkeletonGrid,
+} from '@studiolxd/brand/loading-region';
+
+<LoadingRegion label="Cargando miembros…">
+  <SkeletonText lines={2} />
+  <SkeletonTable rows={8} />
+</LoadingRegion>
+```
+
+`SkeletonText` es un párrafo de `lines` líneas (3), con la última más corta.
+
+<Canvas of={LoadingRegionStories.Texto} />
+
+`SkeletonList` es una lista de `rows` filas (4), del alto de un control.
+
+<Canvas of={LoadingRegionStories.Lista} />
+
+`SkeletonTable` es una tabla con su cabecera y `rows` filas de cuerpo (4).
+
+<Canvas of={LoadingRegionStories.Tabla} />
+
+`SkeletonGrid` es una rejilla de `columns` columnas (2, 3 o 4; 3 por defecto)
+por `rows` filas (2), para tarjetas o miniaturas.
+
+<Canvas of={LoadingRegionStories.Rejilla} />
+
+Lo que no cubren —un título, una ficha con avatar— se compone con `Skeleton`
+suelto dentro de la misma región, como el título de la primera story.
+
+---
+
+## Tokens
+
+<TokenTable tokens={loadingRegionTokens} />
+
+Los esqueletos toman el color de `Skeleton` (y su par oscuro).
+
+## Props
+
+<ArgTypes of={LoadingRegionStories} />

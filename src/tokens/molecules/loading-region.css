@@ -1,0 +1,16 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --loading-region-text-last-line-width: 60%; /** SkeletonText: ancho de la última línea, más corta, para que se lea como párrafo y no como bloque */
+  --loading-region-grid-item-height: 6rem; /** SkeletonGrid: alto de una celda (una miniatura, una tarjeta corta) */
+  --loading-region-gap: var(--spacing-5); /** Aire entre los bloques que envuelve la región (un título, un párrafo, una tabla) */
+  --loading-region-text-gap: var(--spacing-2); /** SkeletonText: aire entre líneas */
+  --loading-region-list-gap: var(--spacing-2); /** SkeletonList: aire entre filas */
+  --loading-region-list-row-height: var(--size-component-md); /** SkeletonList: alto de una fila — el de un control de una línea */
+  --loading-region-table-gap: var(--spacing-2); /** SkeletonTable: aire entre la cabecera y las filas */
+  --loading-region-table-header-height: var(--size-component-md); /** SkeletonTable: alto de la cabecera */
+  --loading-region-table-row-height: var(--size-component-sm); /** SkeletonTable: alto de una fila */
+  --loading-region-grid-gap: var(--spacing-4); /** SkeletonGrid: aire entre celdas */
+}

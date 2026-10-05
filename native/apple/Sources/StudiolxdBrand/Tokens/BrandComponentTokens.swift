@@ -34,6 +34,10 @@ public enum BrandButtonTokens {
     public static let smHeight: CGFloat = 32
     /// Token `button.lg-height` — Altura — lg
     public static let lgHeight: CGFloat = 48
+    /// Token `button.loading-gap` — Con `loading`: aire entre el girador y el texto. El girador va delante del texto y el texto no se pierde
+    public static let loadingGap: CGFloat = 8
+    /// Token `button.loading-spinner-size` — Con `loading`: lado del girador. `1em` es el cuerpo de cada talla (sm 14, md 16, lg 20), como el icono que acompaña al texto Fracción del tamaño de fuente del propio componente (em).
+    public static let loadingSpinnerSize: CGFloat = 1
     /// Token `button.padding-inline` — Inline (horizontal) padding
     public static let paddingInline: CGFloat = 32
     /// Token `button.focus-ring-width` — Focus ring width

@@ -1,60 +1,72 @@
 'use client';
 import './button.css';
-import { n as e } from "./_shared/form-size.js";
-import { forwardRef as t } from "react";
-import { jsx as n } from "react/jsx-runtime";
-import { useRender as r } from "@base-ui/react/use-render";
+import { Spinner as e } from "./spinner.js";
+import { n as t } from "./_shared/form-size.js";
+import { forwardRef as n } from "react";
+import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
+import { useRender as o } from "@base-ui/react/use-render";
 //#region src/stories/atoms/Button/Button.tsx
-var i = t(function({ variant: t = "primary", tone: i = "accent", destructive: a = !1, size: o, block: s = !1, iconOnly: c = !1, children: l, type: u = "button", disabled: d, onClick: f, href: p, external: m = !1, render: h, className: g, ..._ }, v) {
-	let y = e(o), b = [
+var s = n(function({ variant: n = "primary", tone: s = "accent", destructive: c = !1, size: l, block: u = !1, iconOnly: d = !1, children: f, type: p = "button", disabled: m, loading: h = !1, onClick: g, href: _, external: v = !1, render: y, className: b, ...x }, S) {
+	let C = t(l), w = [
 		"button",
-		`button--${t}`,
-		t === "text" && i === "ink" ? "button--ink" : "",
-		a ? "button--destructive-intent" : "",
-		y === "md" ? "" : `button--${y}`,
-		s === "mobile" ? "button--block-mobile" : s ? "button--block" : "",
-		c ? "button--icon-only" : "",
-		g ?? ""
-	].filter(Boolean).join(" "), x = (e) => {
-		if (d) {
+		`button--${n}`,
+		n === "text" && s === "ink" ? "button--ink" : "",
+		c ? "button--destructive-intent" : "",
+		C === "md" ? "" : `button--${C}`,
+		u === "mobile" ? "button--block-mobile" : u ? "button--block" : "",
+		d ? "button--icon-only" : "",
+		h ? "button--loading" : "",
+		b ?? ""
+	].filter(Boolean).join(" "), T = !!m || h, E = (e) => {
+		if (T) {
 			e.preventDefault(), e.stopPropagation();
 			return;
 		}
-		f?.(e);
-	};
-	return r({
-		render: h,
-		ref: v,
-		enabled: h !== void 0,
+		g?.(e);
+	}, D = h ? /* @__PURE__ */ a(r, { children: [/* @__PURE__ */ i("span", {
+		className: "button__spinner",
+		children: /* @__PURE__ */ i(e, {
+			size: "sm",
+			"aria-hidden": !0
+		})
+	}), d ? null : f] }) : f;
+	return o({
+		render: y,
+		ref: S,
+		enabled: y !== void 0,
 		props: {
-			className: b,
-			"aria-disabled": d ? !0 : void 0,
-			onClick: x,
-			..._,
-			children: l
+			className: w,
+			"aria-disabled": T ? !0 : void 0,
+			"aria-busy": h ? !0 : void 0,
+			onClick: E,
+			...x,
+			children: D
 		}
-	}) || (p === void 0 ? /* @__PURE__ */ n("button", {
-		ref: v,
-		className: b,
-		type: u,
-		disabled: d,
-		onClick: f,
-		..._,
-		children: l
-	}) : /* @__PURE__ */ n("a", {
-		ref: v,
-		className: b,
-		href: d ? void 0 : p,
-		"aria-disabled": d ? !0 : void 0,
-		role: d ? "link" : void 0,
-		onClick: x,
-		...m ? {
+	}) || (_ === void 0 ? /* @__PURE__ */ i("button", {
+		ref: S,
+		className: w,
+		type: p,
+		disabled: m,
+		"aria-disabled": h ? !0 : void 0,
+		"aria-busy": h ? !0 : void 0,
+		onClick: E,
+		...x,
+		children: D
+	}) : /* @__PURE__ */ i("a", {
+		ref: S,
+		className: w,
+		href: T ? void 0 : _,
+		"aria-disabled": T ? !0 : void 0,
+		"aria-busy": h ? !0 : void 0,
+		role: T ? "link" : void 0,
+		onClick: E,
+		...v ? {
 			target: "_blank",
 			rel: "noopener noreferrer"
 		} : {},
-		..._,
-		children: l
+		...x,
+		children: D
 	}));
 });
 //#endregion
-export { i as Button };
+export { s as Button };

@@ -1,0 +1,104 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as LoadingStateStories from "./LoadingState.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { loadingStateTokens } from "../../../tokens/molecules/loading-state";
+
+<Meta of={LoadingStateStories} />
+
+# LoadingState
+
+La espera de un bloque **cuya forma no se conoce**: una página, una vista, el
+cuerpo de un diálogo, una hoja o un popover cuyo contenido aún no ha llegado.
+Un girador centrado en una caja que reserva alto y, si hace falta, una salida.
+
+<Canvas of={LoadingStateStories.PorDefecto} />
+
+## Esqueleto o girador
+
+Cuando **sí** se conoce la forma de lo que llega (una tabla, una lista, una
+ficha), no se usa esto: se reserva su sitio con esqueletos dentro de un
+`LoadingRegion`, y la página no salta al llegar el contenido. El girador queda
+para lo que no tiene forma conocida y para la espera de una acción, y en ese
+caso va **dentro del control** (`Button loading`).
+
+Un `Spinner` nunca se suelta en el flujo: es `inline-flex`, no reserva alto y
+queda arriba a la izquierda. `LoadingState` es la caja que lo centra.
+
+## Solo se ve el girador
+
+El texto de la espera **no se pinta**: es el nombre accesible de la caja
+(`role="status"`, `aria-busy="true"`, `aria-labelledby` apuntando al texto
+oculto) y es lo que anuncian los lectores de pantalla. El girador va
+decorativo, para no anunciar la espera dos veces.
+
+`label` cambia el texto («Cargando revisión…», con puntos suspensivos: ver
+Foundations → Redacción). Sin `label`, sale de `spinner.label` del
+`BrandMessagesProvider` — el mismo texto que el `Spinner`. **No hay texto de
+respaldo cableado**: fuera del proveedor (una página de error global) hay que
+pasar `label`; sin él ni catálogo, el componente falla con el error explícito
+de siempre en lugar de quedarse sin nombre.
+
+<Canvas of={LoadingStateStories.ConTexto} />
+
+## Tallas
+
+`md` (por defecto) para una página o una zona; `sm` para el cuerpo de un
+diálogo, una hoja, un popover o una barra lateral. Cambian el girador, el alto
+mínimo que se reserva y el relleno.
+
+<Canvas of={LoadingStateStories.Pequeno} />
+<Canvas of={LoadingStateStories.EnDialogo} />
+
+## Con acción
+
+Una salida mientras se espera: cancelar un proceso largo. La acción sí se ve,
+y es un `Button` `outline` de la talla de la espera. Recibe el mismo
+`EmptyStateAction` que `EmptyState`.
+
+<Canvas of={LoadingStateStories.ConAccion} />
+<Canvas of={LoadingStateStories.PequenoConAccion} />
+
+## Alto y centrado
+
+El girador sale centrado en los dos ejes. Para que el centrado vertical sea
+real, la caja ocupa el alto de la zona que sustituye. Hay tres casos:
+
+**En una zona con alto definido**, la caja la ocupa entera (`block-size: 100%`,
+y `flex: 1` si la zona es una columna flex) y centra en ella. Sin prop.
+
+<Canvas of={LoadingStateStories.EnZonaConAlto} />
+
+**En un flujo sin alto**, el porcentaje no resuelve: la caja reserva el mínimo
+de su talla (`loading-state.min-block-size`, `sm-min-block-size`) y centra en
+él.
+
+<Canvas of={LoadingStateStories.EnFlujo} />
+
+**A página completa**, `fill`: la caja toma el alto visible bajo la cabecera
+del `AppShell` (la ventana menos el cromo del armazón, que el shell publica en
+`--app-shell-chrome-block-start`, y menos el relleno de sección del contenido)
+y centra en él sin provocar desplazamiento, aunque llegue envuelta en otros
+elementos del layout. Es la espera del `loading.tsx` de una ruta cuya forma no
+se conoce. Fuera del `AppShell` la variable no existe y vale cero.
+
+<Canvas of={LoadingStateStories.PaginaCompleta} />
+
+```tsx
+// app/(app)/editor/[id]/loading.tsx
+export default function Loading() {
+  return <LoadingState fill />;
+}
+```
+
+---
+
+## Tokens
+
+<TokenTable tokens={loadingStateTokens} />
+
+El color del girador apunta al del icono de `EmptyState`, así que su par oscuro
+llega solo, por el fichero derivado.
+
+## Props
+
+<ArgTypes of={LoadingStateStories} />

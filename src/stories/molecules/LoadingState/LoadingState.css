@@ -1,0 +1,45 @@
+/* La caja reserva alto y centra en los dos ejes: el girador nunca queda suelto
+   arriba a la izquierda (el `Spinner` es `inline-flex` y no reserva nada).
+
+   Tres casos, sin prop que acordarse de pasar en los dos primeros:
+   - en una zona con alto definido, `block-size: 100%` la ocupa entera y centra
+     en ella (y `flex: 1` la estira si la zona es una columna flex);
+   - en un flujo sin alto, el porcentaje no resuelve y queda el mínimo de la
+     talla: reserva ese alto y centra en él;
+   - a página completa, `--fill` (abajo). */
+.loading-state {
+  display: flex;
+  flex: 1 1 auto;
+  block-size: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--loading-state-gap);
+  min-block-size: var(--loading-state-min-block-size);
+  padding-block: var(--loading-state-padding-block);
+  padding-inline: var(--loading-state-padding-inline);
+  text-align: center;
+}
+
+.loading-state__spinner {
+  display: flex;
+  color: var(--loading-state-spinner-color);
+}
+
+.loading-state.loading-state--sm {
+  min-block-size: var(--loading-state-sm-min-block-size);
+  padding-block: var(--loading-state-sm-padding-block);
+}
+
+
+/* A página completa, dentro del contenido del `AppShell`: el alto de la
+   ventana menos el cromo del armazón (cabecera, barra de sistema y zona
+   segura, que el shell publica en `--app-shell-chrome-block-start`) y menos
+   el relleno de sección del contenido. Queda justo en el hueco visible, así
+   que centra en él sin provocar desplazamiento. Fuera del shell la variable
+   no existe y vale cero: ocupa la ventana menos ese relleno. */
+.loading-state.loading-state--fill {
+  min-block-size: calc(
+    100dvh - var(--app-shell-chrome-block-start, 0px) - 2 * var(--section-padding-block-lg)
+  );
+}

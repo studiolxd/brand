@@ -121,6 +121,8 @@
 @import "./components/progress-bar.css";
 @import "./components/spinner.css";
 @import "./components/skeleton.css";
+@import "./molecules/loading-state.css";
+@import "./molecules/loading-region.css";
 @import "./molecules/alert.css";
 @import "./molecules/banner.css";
 @import "./molecules/toast.css";
