@@ -7,6 +7,7 @@
   },
   "native": {
     "swift": "BrandSheetContent",
+    "swiftModifier": "brandSheet",
     "kotlin": "BrandSheet"
   },
   "props": {
@@ -70,7 +71,7 @@
     }
   ],
   "differences": [
-    "SwiftUI: el cajón se presenta con el modificador `.brandSheet(isPresented:title:…)` sobre la vista que lo abre, que monta dentro `BrandSheetContent`; no existe un tipo `BrandSheet`. La ficha nombra `BrandSheetContent` porque el esquema solo admite nombres de tipo (mismo caso que `BrandConfirmDialog` y su `.brandConfirmDialog(…)`).",
+    "SwiftUI: el cajón se presenta con el modificador `.brandSheet(isPresented:title:…)` sobre la vista que lo abre, que monta dentro `BrandSheetContent`; no existe un tipo `BrandSheet`. La ficha nombra el modificador en `swiftModifier` y `BrandSheetContent` como vista (mismo caso que `BrandConfirmDialog` y su `.brandConfirmDialog(…)`).",
     "La presentación es la hoja nativa (`.sheet`) con detents medio/completo y arrastre, en vez de un panel que entra por un borde con velo propio: el velo, la animación y el gesto son los de la plataforma.",
     "El cierre con `Esc` es la acción de escape de VoiceOver (`accessibilityAction(.escape)`) en iOS y el atajo de la hoja en macOS.",
     "El ancho mínimo en macOS es 320 pt, el primer término de `sheet.inline-size` (`min(20rem, 85vw)`), que no se genera porque es una función de CSS; el alto mínimo (240) no tiene token en la web.",

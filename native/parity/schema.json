@@ -36,7 +36,8 @@
       "additionalProperties": false,
       "required": ["swift", "kotlin"],
       "properties": {
-        "swift": { "type": "string", "pattern": "^[A-Z][A-Za-z0-9]*$" },
+        "swift": { "description": "Tipo público de SwiftUI. Si el componente se presenta con un modificador (`swiftModifier`), es la vista que ese modificador pinta.", "type": "string", "pattern": "^[A-Z][A-Za-z0-9]*$" },
+        "swiftModifier": { "description": "Nombre del modificador de vista con el que se presenta en SwiftUI, sin el punto ni los argumentos: `brandSheet` para `.brandSheet(isPresented:…)`. Solo para lo que en SwiftUI se monta desde una vista ajena (hojas, diálogos, el host de toasts).", "type": "string", "pattern": "^[a-z][A-Za-z0-9]*$" },
         "kotlin": { "type": "string", "pattern": "^[A-Z][A-Za-z0-9]*$" }
       }
     },

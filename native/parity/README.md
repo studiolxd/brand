@@ -33,6 +33,15 @@ El esquema es [`schema.json`](schema.json) (JSON Schema draft-07). Ejemplo para 
 }
 ```
 
+Lo que en SwiftUI no es una vista que se coloca sino algo que se monta desde una
+vista ajena (una hoja, un diálogo, el host de toasts) se presenta con un
+modificador. La ficha lo nombra en `native.swiftModifier`, sin punto ni
+argumentos, y deja en `native.swift` la vista pública que ese modificador pinta:
+
+```json
+"native": { "swift": "BrandSheetContent", "swiftModifier": "brandSheet", "kotlin": "BrandSheet" }
+```
+
 - **`component`** — el nombre del componente de React; la ficha se llama igual (`Button.json`).
 - **`react`** — `path` del `.tsx` y `props`, el tipo o interfaz **exportado** que describe sus props.
 - **`native`** — cómo se llama el componente en cada plataforma.

@@ -2,7 +2,7 @@
   "$schema": "../schema.json",
   "component": "Toaster",
   "react": { "path": "src/stories/molecules/Toast/Toaster.tsx", "props": "ToasterProps" },
-  "native": { "swift": "ToastStack", "kotlin": "ToastHost" },
+  "native": { "swift": "BrandToastCard", "swiftModifier": "toastHost", "kotlin": "ToastHost" },
   "props": {
     "position": { "type": "union", "values": ["bottom-right", "bottom-left", "bottom-center", "top-right", "top-left", "top-center"], "default": "bottom-right" },
     "closeButton": { "type": "boolean", "default": true },
@@ -16,7 +16,7 @@
     { "prop": "visibleToasts", "reason": "Se porta como `visibleToasts: Int` (3); la ficha solo tipa uniones y booleanos." }
   ],
   "differences": [
-    "SwiftUI: la pila se monta con el modificador `.toastHost(…)` sobre la raíz (el `<Toaster />` de React), que pinta encima `ToastStack` —un tipo interno, no público— con un `BrandToastCard` por aviso; `ToastHost` solo existe en Compose. La ficha nombra `ToastStack` porque el esquema solo admite nombres de tipo.",
+    "SwiftUI: la pila se monta con el modificador `.toastHost(…)` sobre la raíz (el `<Toaster />` de React), que pinta encima `ToastStack` —un tipo interno, no público— con un `BrandToastCard` por aviso; `ToastHost` solo existe en Compose. La ficha nombra el modificador en `swiftModifier` y, como tipo, la tarjeta pública `BrandToastCard`.",
     "El anuncio a VoiceOver usa `AccessibilityNotification.Announcement` con prioridad alta para `error` y `warning` y baja para el resto, en vez de `role=\"alertdialog\"`/`status`.",
     "La pila se despliega con el puntero encima (macOS, iPad); en iPhone táctil queda recogida salvo `expand: true`.",
     "El gesto de descarte (deslizar) usa los 40 pt de umbral por defecto de Base UI, que no es un token.",
