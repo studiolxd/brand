@@ -19,6 +19,9 @@ para breaking changes.
   `image-crop-dialog` o `avatar-upload`, `react-image-crop` (^11.1). La hoja de `react-image-crop` se sigue
   empaquetando en nuestro CSS. Antes viajaban dentro de `dist/` y además se instalaban sin usarse; quien ya las tuviera
   cargaba dos copias.
+- **Peer `react` y `react-dom`: >=19** (antes >=18). Todas las apps consumidoras están ya en React 19; la última,
+  `keycloakify-starter`, se sube a la vez. A partir de aquí un componente puede recibir `ref` como prop, sin
+  `forwardRef`.
 - **`engines`: Node >=20.**
 
 ### Paquete y licencia

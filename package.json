@@ -991,8 +991,8 @@
   },
   "peerDependencies": {
     "@tanstack/react-table": "^8.21.3",
-    "react": ">=18",
-    "react-dom": ">=18",
+    "react": ">=19",
+    "react-dom": ">=19",
     "react-email": ">=6",
     "react-hook-form": ">=7",
     "react-image-crop": "^11.1.2"

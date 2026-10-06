@@ -11,7 +11,7 @@ y el catálogo de Storybook es su fuente de verdad.
 pnpm add @studiolxd/brand
 ```
 
-El paquete declara como peer dependencies `react` y `react-dom` (>=18). Hay
+El paquete declara como peer dependencies `react` y `react-dom` (>=19). Hay
 peers **opcionales**, que solo hacen falta si se consume el subpath que los
 importa:
 
