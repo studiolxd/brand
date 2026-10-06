@@ -1,0 +1,45 @@
+# Red de seguridad mínima en cada push y en cada pull request: lint, tipos,
+# tests (proyectos unit y components) y fichas de paridad nativa.
+#
+# NO sustituye a `pnpm release:check`, que sigue siendo la puerta antes de cada
+# tag: este workflow no regenera dist/, no corre las stories en Chromium ni
+# compila Swift ni Gradle.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  calidad:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      # La versión de pnpm sale de package.json#packageManager.
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Tipos
+        run: npx tsc -b
+
+      - name: Tests
+        run: pnpm test
+
+      - name: Paridad nativa
+        run: pnpm native:parity
