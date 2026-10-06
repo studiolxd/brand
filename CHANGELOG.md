@@ -7,6 +7,76 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [Sin publicar]
+
+> **Minor.** Arreglos de la auditoría del 2026-10-06 (`informe.md`): empaquetado, tokens, CSS, componentes y
+> documentación. Sin breaking changes de API. Ver las notas de comportamiento al final.
+
+### Empaquetado
+
+- `build:css` y `build:tokens-css` pasan `--no-map`: `dist/brand.css` y `dist/tokens.css` ya no llevan un sourcemap en
+  base64 incrustado (~1 MB cada uno). `dist/tokens.css` baja de 1,71 MB a ~640 KB.
+- `Figure` entra en `clientComponents`: usa `useRender` de Base UI, que llega a `useRef`, y fallaba importado desde un
+  React Server Component.
+- `files` excluye `src/tokens/**/*.test.ts`; `tsconfig.lib.json` deja de emitir tipos de `src/stories/pages` y
+  `src/stories/data`, que ningún export usa.
+- Dependencias: `react-phone-number-input` sale de `devDependencies` (ya estaba en `dependencies`); se retira
+  `vite-plugin-dts`, sin uso; fuera de `vite.lib.config.ts` los externals `@radix-ui`, `embla-carousel` y `sonner`,
+  que nada importa.
+
+### Componentes
+
+- `ref` que se perdía en React 18: `Skeleton`, `FormItem`, `FormLabel`, `FormDescription`, `FormMessage` y
+  `FormRootMessage` usan `forwardRef`.
+- `className` nuevo en `Spinner`, `TypingIndicator`, `SkeletonText`/`List`/`Table`/`Grid`, `InputPhone`, `PrevNextNav`,
+  `SidebarNav`, `AppShell`, `AppHeader`, `Sidebar`, `PublicPageShell`, `ErrorPage`, `NotFoundPage` y las cuatro
+  `Connector*Page`. En los que abren un portal (`Select`, `ContextMenu`, `OrgSwitcher`, `UserMenu`, `AppLauncher`) va
+  al disparador.
+- Ids por defecto únicos: `ThemeSwitcher`, `LanguageSwitcher`, `DocsSearch` (`id`) y `SiteHeader` (`panelId`) usan
+  `useId()` si no se pasa uno. Antes dos instancias repetían id.
+- Helpers compartidos en `src/stories/constants/` (`assignRef`, `cssLengthToPx`/`sideOffsetFromToken`,
+  `defaultRenderLink`) en lugar de ~23 copias. `MultiSelect` deja de suprimir `exhaustive-deps`.
+
+### Tokens y CSS
+
+- Tokens nuevos, todos con el mismo valor que el literal al que sustituyen: `async-select.disabled-opacity`,
+  `clear-opacity`, `clear-hover-opacity`; `async-multi-select.disabled-opacity`, `pill-remove-opacity`,
+  `pill-remove-hover-opacity`, `input-min-inline-size`; `autocomplete.disabled-opacity`;
+  `consent.banner.text-flex-basis`; `recurrence-field.end-flex-basis`; `modal.inline-size`;
+  `table.actions-inline-size`; `calendar-roster.th-day-line-height`.
+- `Radio` deshabilitado en superficie oscura: tokens `radio.surface-dark-disabled-border-color` y
+  `radio.surface-dark-disabled-dot-color`, el mismo par que `Checkbox`. Antes se pintaba con el gris de superficie clara.
+- Propiedades lógicas en el CSS de componentes: `border-block-*`, `inset-*`, `text-align: start` y unos 170
+  `width`/`height` pasados a `inline-size`/`block-size`. Los centrados con `left: 50%` + `translate`, los lados físicos
+  de Base UI y los atributos de SVG se quedan físicos a propósito.
+- `src/tokens/surface-invert.css` emite un solo bloque para `.surface-invert` y `.surface-light`, que tenían las mismas
+  declaraciones; `surface-light.css` queda vacío para no romper su ruta (~47 KB menos).
+- Test nuevo que compara el objeto `GEOMETRY` de `Chart` con `tokens.json`.
+
+### Documentación
+
+- `CLAUDE.md`: salida real del build (sin barril), `templates/`, `@base-ui/react`, ejemplo de `organisms/`.
+- Foundations › Internacionalización al día con el catálogo (85 espacios, 298 textos) y con los componentes que aún
+  traen castellano. Foundations › Colores con un ejemplo de tokens que existen. Foundations › TypeScale usaba
+  `--color-border-subtle`, inexistente: el filete de las filas ahora se ve.
+- Docs nuevas: `Fieldset`, `FormField` y `PasswordField`. Imports sin subruta corregidos en cinco documentos.
+- `storySort` incluye Marca, Tarjeta social, Gráficos de datos, Tokens desde JavaScript y Email.
+- Paridad nativa: ficha nueva de `CloseButton`; `Sheet` y `Toaster` con el nombre Swift que existe.
+- CHANGELOG con un solo formato de encabezado y entradas para 31.1.0, 31.1.1 y 34.1.1.
+
+### Limpieza
+
+- Fuera los restos de la plantilla de Vite (`index.html`, `src/main.tsx`, `src/App.*`, `public/icons.svg`,
+  `src/assets/hero.png`) y los scripts `dev`, `build` y `preview`; fuera `sd.formats.mjs.bak`.
+- `Spinner`: la story de test esperaba el `pathLength` que se retiró en 49.28.0.
+
+### Notas de comportamiento
+
+- Quien seleccionase por `#theme-switcher` u otro de los ids fijos de arriba debe pasar su propio `id`.
+- `Popover`, `NotificationPanel` y `UserMenu` convierten `em` a píxeles en su separación, como ya hacía `Tooltip`.
+- Quien importe `src/tokens/surface-light.css` suelto, sin `surface-invert.css`, pierde el bloque: `brand.css` y
+  `tokens.css` importan los dos.
+
 ## [49.28.0] — 2026-10-05
 
 > **Minor (49.28.0).** El `Spinner` se desdibuja tras dibujarse y `lg` crece. Sin cambios de API.
