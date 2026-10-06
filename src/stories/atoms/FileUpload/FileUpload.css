@@ -1,5 +1,5 @@
 .file-upload {
-  width: 100%;
+  inline-size: 100%;
 }
 
 /* ── Dropzone ─────────────────────────────────────────── */
@@ -39,7 +39,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--file-upload-gap);
-  width: 100%;
+  inline-size: 100%;
   padding-block: var(--file-upload-padding-block);
   padding-inline: var(--file-upload-padding-inline);
   /* Borde discontinuo con trazos largos via gradiente */
@@ -177,8 +177,8 @@
 
 .file-upload__item-thumb {
   flex-shrink: 0;
-  width: var(--file-upload-thumb-size);
-  height: var(--file-upload-thumb-size);
+  inline-size: var(--file-upload-thumb-size);
+  block-size: var(--file-upload-thumb-size);
   border-radius: var(--file-upload-thumb-border-radius);
   background-color: var(--file-upload-thumb-bg);
   display: flex;
@@ -189,8 +189,8 @@
 }
 
 .file-upload__item-thumb img {
-  width: 100%;
-  height: 100%;
+  inline-size: 100%;
+  block-size: 100%;
   object-fit: cover;
 }
 
@@ -198,7 +198,7 @@
 
 .file-upload__item-info {
   flex: 1;
-  min-width: 0;
+  min-inline-size: 0;
   display: flex;
   flex-direction: column;
   gap: var(--file-upload-item-info-gap);

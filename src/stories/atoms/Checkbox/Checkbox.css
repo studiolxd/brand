@@ -2,8 +2,8 @@
   all: unset;
   box-sizing: border-box;
   position: relative;
-  width: var(--checkbox-size);
-  height: var(--checkbox-size);
+  inline-size: var(--checkbox-size);
+  block-size: var(--checkbox-size);
   flex-shrink: 0;
   border-width: var(--checkbox-border-width);
   border-style: var(--checkbox-border-style);
@@ -32,8 +32,8 @@
 }
 
 .checkbox__indicator {
-  width: var(--checkbox-check-size);
-  height: var(--checkbox-check-size);
+  inline-size: var(--checkbox-check-size);
+  block-size: var(--checkbox-check-size);
   background-color: var(--checkbox-check-color);
   clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
   transform: scale(0) rotate(var(--checkbox-check-rotate));
@@ -43,8 +43,8 @@
 /* Indeterminate indicator — línea horizontal */
 .checkbox[data-indeterminate] .checkbox__indicator {
   clip-path: none;
-  width: 60%;
-  height: var(--checkbox-border-width);
+  inline-size: 60%;
+  block-size: var(--checkbox-border-width);
   background-color: var(--checkbox-check-color);
   transform: none;
 }

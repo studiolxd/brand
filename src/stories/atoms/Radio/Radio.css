@@ -3,8 +3,8 @@
   -webkit-appearance: none;
   box-sizing: border-box;
   position: relative;
-  width: var(--radio-size);
-  height: var(--radio-size);
+  inline-size: var(--radio-size);
+  block-size: var(--radio-size);
   flex-shrink: 0;
   border-width: var(--radio-border-width);
   border-style: var(--radio-border-style);
@@ -34,8 +34,8 @@
 /* Punto interior via ::before */
 .radio::before {
   content: '';
-  width: var(--radio-dot-size);
-  height: var(--radio-dot-size);
+  inline-size: var(--radio-dot-size);
+  block-size: var(--radio-dot-size);
   border-radius: 50%;
   background-color: var(--radio-dot-color);
   transform: scale(0);

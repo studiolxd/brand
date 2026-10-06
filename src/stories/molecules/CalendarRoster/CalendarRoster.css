@@ -27,7 +27,7 @@
 
 .calendar-roster__table {
   border-collapse: collapse;
-  width: 100%;
+  inline-size: 100%;
   font-family: var(--calendar-roster-font-family);
   white-space: nowrap;
 }
@@ -36,10 +36,10 @@
 
 .calendar-roster__th-name {
   position: sticky;
-  left: 0;
+  inset-inline-start: 0;
   z-index: 3;
-  min-width: var(--calendar-roster-th-name-width);
-  max-width: var(--calendar-roster-th-name-width);
+  min-inline-size: var(--calendar-roster-th-name-width);
+  max-inline-size: var(--calendar-roster-th-name-width);
   padding-block: var(--calendar-roster-th-name-padding-block);
   padding-inline: var(--calendar-roster-th-name-padding-inline);
   background-color: var(--calendar-roster-th-name-bg);
@@ -54,7 +54,7 @@
 /* ─── Day column headers ──────────────────────────────────────────────────── */
 
 .calendar-roster__th-day {
-  min-width: var(--calendar-roster-th-day-width);
+  min-inline-size: var(--calendar-roster-th-day-width);
   padding-block: var(--calendar-roster-th-day-padding-block);
   padding-inline: 0;
   text-align: center;
@@ -92,8 +92,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--calendar-roster-th-day-today-size);
-  height: var(--calendar-roster-th-day-today-size);
+  inline-size: var(--calendar-roster-th-day-today-size);
+  block-size: var(--calendar-roster-th-day-today-size);
   border-radius: var(--calendar-roster-th-day-today-radius);
   background-color: var(--calendar-roster-th-day-today-bg);
   color: var(--calendar-roster-th-day-today-color);
@@ -103,10 +103,10 @@
 
 .calendar-roster__th-name-row {
   position: sticky;
-  left: 0;
+  inset-inline-start: 0;
   z-index: 2;
-  min-width: var(--calendar-roster-th-name-width);
-  max-width: var(--calendar-roster-th-name-width);
+  min-inline-size: var(--calendar-roster-th-name-width);
+  max-inline-size: var(--calendar-roster-th-name-width);
   padding-block: var(--calendar-roster-td-name-padding-block);
   padding-inline: var(--calendar-roster-td-name-padding-inline);
   background-color: var(--calendar-roster-td-name-bg);
@@ -178,8 +178,8 @@
 
 .calendar-roster__legend-swatch {
   display: inline-block;
-  width: var(--calendar-roster-legend-swatch-size);
-  height: var(--calendar-roster-legend-swatch-size);
+  inline-size: var(--calendar-roster-legend-swatch-size);
+  block-size: var(--calendar-roster-legend-swatch-size);
   border-radius: var(--calendar-roster-legend-swatch-radius);
   flex-shrink: 0;
 }

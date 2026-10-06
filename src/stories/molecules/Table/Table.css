@@ -1,10 +1,10 @@
 .table__wrapper {
-  width: 100%;
+  inline-size: 100%;
   overflow-x: auto;
 }
 
 .table {
-  width: 100%;
+  inline-size: 100%;
   border-collapse: collapse;
   font-family: var(--table-font-family);
   font-size: var(--table-font-size);
@@ -20,10 +20,10 @@
   padding-block: var(--table-header-padding-block);
   padding-inline: var(--table-header-padding-inline);
   font-weight: var(--table-header-font-weight);
-  text-align: left;
-  border-bottom-width: var(--table-header-border-width);
-  border-bottom-style: solid;
-  border-bottom-color: var(--table-header-border-color);
+  text-align: start;
+  border-block-end-width: var(--table-header-border-width);
+  border-block-end-style: solid;
+  border-block-end-color: var(--table-header-border-color);
   white-space: nowrap;
 }
 
@@ -88,7 +88,7 @@
    trazo suelto bajo la primera columna. */
 .table tbody .table__row:last-child .table__cell,
 .table tbody .table__row:last-child .table__header {
-  border-bottom: none;
+  border-block-end: none;
 }
 
 /* La fila seleccionada se dice con tinta y peso, no con un fondo gris
@@ -118,9 +118,9 @@
 
 .table tfoot {
   background-color: var(--table-footer-bg);
-  border-top-width: var(--table-footer-border-width);
-  border-top-style: solid;
-  border-top-color: var(--table-footer-border-color);
+  border-block-start-width: var(--table-footer-border-width);
+  border-block-start-style: solid;
+  border-block-start-color: var(--table-footer-border-color);
 }
 
 .table tfoot .table__cell {
@@ -132,9 +132,9 @@
 .table__cell {
   padding-block: var(--table-cell-padding-block);
   padding-inline: var(--table-cell-padding-inline);
-  border-bottom-width: var(--table-border-width);
-  border-bottom-style: solid;
-  border-bottom-color: var(--table-row-border-color);
+  border-block-end-width: var(--table-border-width);
+  border-block-end-style: solid;
+  border-block-end-color: var(--table-row-border-color);
 }
 
 /* ── Actions column ──────────────────────────────────── */

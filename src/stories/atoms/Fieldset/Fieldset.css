@@ -13,7 +13,7 @@
   margin-inline: 0;
   padding-inline: 0;
   display: block;
-  width: 100%;
+  inline-size: 100%;
 }
 
 /* Niveles — mismos tokens que Heading */

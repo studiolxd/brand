@@ -6,8 +6,8 @@
 
 .typing-indicator__dot {
   display: block;
-  width: var(--typing-indicator-dot-size);
-  height: var(--typing-indicator-dot-size);
+  inline-size: var(--typing-indicator-dot-size);
+  block-size: var(--typing-indicator-dot-size);
   /* Cuadrados, no círculos: la geometría recta de la identidad. Sin border-radius. */
   background-color: var(--typing-indicator-dot-color);
   opacity: var(--typing-indicator-dot-opacity-inactive);

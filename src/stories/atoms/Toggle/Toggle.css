@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--toggle-gap);
-  height: var(--toggle-height);
+  block-size: var(--toggle-height);
   padding-block: 0;
   padding-inline: var(--toggle-padding-inline);
   border-width: var(--toggle-border-width);

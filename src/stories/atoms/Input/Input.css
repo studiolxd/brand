@@ -1,5 +1,5 @@
 .input {
-  width: var(--input-width);
+  inline-size: var(--input-width);
   block-size: var(--input-height);
   /* La talla manda la altura; el texto lo centra el propio <input> */
   padding-block: 0;

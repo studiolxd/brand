@@ -15,7 +15,7 @@
 .input-phone {
   display: flex;
   align-items: stretch;
-  width: var(--input-width);
+  inline-size: var(--input-width);
   block-size: var(--input-height);
   border-radius: var(--input-border-radius);
   border-width: var(--input-border-width);
@@ -40,7 +40,7 @@
   justify-content: space-between;
   gap: var(--input-phone-country-gap);
   flex-shrink: 0;
-  width: var(--input-phone-country-width);
+  inline-size: var(--input-phone-country-width);
   padding-block: 0;
   padding-inline: var(--input-padding-inline);
   font-family: var(--input-font-family);
@@ -82,8 +82,8 @@
   border-width: var(--input-border-width);
   border-style: var(--input-border-style);
   border-color: var(--input-border-color);
-  min-width: var(--anchor-width);
-  max-height: var(--input-phone-content-max-height);
+  min-inline-size: var(--anchor-width);
+  max-block-size: var(--input-phone-content-max-height);
   overflow-y: auto;
   overscroll-behavior: contain;
 }
@@ -116,7 +116,7 @@
 /* ── Campo numérico ─────────────────────────────────────────── */
 .input-phone .input-phone__number {
   flex: 1;
-  min-width: 0;
+  min-inline-size: 0;
   padding-block: 0;
   padding-inline: var(--input-padding-inline);
   font-family: var(--input-font-family);

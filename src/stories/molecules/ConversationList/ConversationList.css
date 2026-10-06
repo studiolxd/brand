@@ -43,7 +43,7 @@
 
 .conversation-list__label {
   flex: 1;
-  min-width: 0;
+  min-inline-size: 0;
   padding-block: var(--conversation-list-item-padding-block);
   padding-inline: var(--conversation-list-item-padding-inline);
   border: none;

@@ -240,7 +240,7 @@
 .chart__tooltip {
   position: absolute;
   transform: translate(-50%, calc(-100% - var(--chart-tooltip-offset)));
-  max-width: var(--chart-tooltip-max-width);
+  max-inline-size: var(--chart-tooltip-max-width);
   padding-block: var(--chart-tooltip-padding-block);
   padding-inline: var(--chart-tooltip-padding-inline);
   border-radius: var(--chart-tooltip-border-radius);

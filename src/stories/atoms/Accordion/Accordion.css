@@ -1,5 +1,5 @@
 .accordion {
-  width: 100%;
+  inline-size: 100%;
 }
 
 /* ─── Ítem ───────────────────────────────────────────────── */
@@ -21,7 +21,7 @@
 .accordion__trigger {
   all: unset;
   box-sizing: border-box;
-  width: 100%;
+  inline-size: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -43,7 +43,7 @@
 
 .accordion__trigger-text {
   flex: 1;
-  min-width: 0;
+  min-inline-size: 0;
 }
 
 /* ─── Numeración: la ranura de índice ─────────────────────
