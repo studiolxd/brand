@@ -1,0 +1,190 @@
+/* El ancla: la caja del elemento. Es posicionada para que la barra se mida
+   contra ella, y es la que recibe el hover y el foco que la hacen aparecer.
+   El ancho de un raíl no es un token: sale de los que lo componen (botón,
+   aire y borde del panel), así que cambiar cualquiera de ellos lo arrastra. */
+.floating-toolbar {
+  --floating-toolbar-rail-inline-size: calc(
+    var(--floating-toolbar-button-size)
+      + 2 * var(--floating-toolbar-padding-inline)
+      + 2 * var(--floating-toolbar-border-width)
+  );
+  position: relative;
+}
+
+/* ── La barra: encima del elemento (`top`, y `auto` por debajo de lg) ── */
+.floating-toolbar__bar {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: calc(100% + var(--floating-toolbar-offset));
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--floating-toolbar-gap);
+  padding-block: var(--floating-toolbar-padding-block);
+  padding-inline: var(--floating-toolbar-padding-inline);
+  background-color: var(--floating-toolbar-bg);
+  border-style: solid;
+  border-width: var(--floating-toolbar-border-width);
+  border-color: var(--floating-toolbar-border-color);
+  border-radius: var(--floating-toolbar-border-radius);
+  box-shadow: var(--floating-toolbar-shadow);
+  /* Oculta no recibe el puntero, pero SIGUE en el orden de tabulación: con
+     `visibility: hidden` o `display: none` el teclado no podría llegar a ella,
+     y es el foco el que la hace aparecer. */
+  opacity: 0;
+  pointer-events: none;
+  transition-property: opacity;
+  transition-duration: var(--floating-toolbar-transition-duration);
+  transition-timing-function: var(--floating-toolbar-transition-easing);
+}
+
+/* Puente sobre el hueco entre la barra y el elemento: sin él, el puntero que
+   sube del elemento a la barra sale de los dos un instante, la barra deja de
+   recibir el puntero y ya no se alcanza. */
+.floating-toolbar__bar::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 100%;
+  block-size: calc(var(--floating-toolbar-offset) + var(--floating-toolbar-border-width));
+}
+
+.floating-toolbar__group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--floating-toolbar-gap);
+}
+
+/* El final va siempre al final, también si no hay grupo del principio. */
+.floating-toolbar__group.floating-toolbar__group--end {
+  margin-inline-start: auto;
+}
+
+/* ── Visible: puntero dentro, foco dentro, fijada, o con un panel abierto ──
+   El panel (un `Popover` de «Convertir en…») sale por un portal, fuera del
+   elemento: sin `[data-popup-open]` la barra se iría mientras se usa. */
+.floating-toolbar:is(
+    :hover,
+    :focus-within,
+    .floating-toolbar--always-visible,
+    :has(> .floating-toolbar__bar [data-popup-open])
+  ) > .floating-toolbar__bar {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── A los lados (`sides`, y `auto` desde lg) ─────────────────────────────
+   Los dos bloques son el mismo: uno para la variante fija y otro para `auto`
+   dentro de la media query. Un cambio en uno va también en el otro. */
+.floating-toolbar.floating-toolbar--sides {
+  /* El elemento reserva el hueco de los raíles: no tapan su contenido ni se
+     salen de la columna. */
+  padding-inline: calc(var(--floating-toolbar-rail-inline-size) + var(--floating-toolbar-offset));
+}
+
+.floating-toolbar.floating-toolbar--sides > .floating-toolbar__bar {
+  inset-block: 0;
+  align-items: flex-start;
+  padding-block: 0;
+  padding-inline: 0;
+  background-color: transparent;
+  border-width: 0;
+  box-shadow: none;
+}
+
+.floating-toolbar.floating-toolbar--sides > .floating-toolbar__bar::before {
+  content: none;
+}
+
+/* La caja de la barra cubre el elemento entero: solo los raíles reciben el
+   puntero, el contenido de en medio sigue siendo clicable. */
+.floating-toolbar.floating-toolbar--sides:is(
+    :hover,
+    :focus-within,
+    .floating-toolbar--always-visible,
+    :has(> .floating-toolbar__bar [data-popup-open])
+  ) > .floating-toolbar__bar {
+  pointer-events: none;
+}
+
+.floating-toolbar.floating-toolbar--sides:is(
+    :hover,
+    :focus-within,
+    .floating-toolbar--always-visible,
+    :has(> .floating-toolbar__bar [data-popup-open])
+  ) > .floating-toolbar__bar > .floating-toolbar__group {
+  pointer-events: auto;
+}
+
+/* Cada raíl es un panel en columna, y se queda a la vista mientras se
+   desplaza un elemento más alto que la ventana. */
+.floating-toolbar.floating-toolbar--sides > .floating-toolbar__bar > .floating-toolbar__group {
+  position: sticky;
+  inset-block-start: 0;
+  box-sizing: border-box;
+  flex-direction: column;
+  inline-size: var(--floating-toolbar-rail-inline-size);
+  padding-block: var(--floating-toolbar-padding-block);
+  padding-inline: var(--floating-toolbar-padding-inline);
+  background-color: var(--floating-toolbar-bg);
+  border-style: solid;
+  border-width: var(--floating-toolbar-border-width);
+  border-color: var(--floating-toolbar-border-color);
+  border-radius: var(--floating-toolbar-border-radius);
+  box-shadow: var(--floating-toolbar-shadow);
+}
+
+@media (min-width: 1024px) /* --breakpoint-lg */ {
+  .floating-toolbar.floating-toolbar--auto {
+    padding-inline: calc(var(--floating-toolbar-rail-inline-size) + var(--floating-toolbar-offset));
+  }
+
+  .floating-toolbar.floating-toolbar--auto > .floating-toolbar__bar {
+    inset-block: 0;
+    align-items: flex-start;
+    padding-block: 0;
+    padding-inline: 0;
+    background-color: transparent;
+    border-width: 0;
+    box-shadow: none;
+  }
+
+  .floating-toolbar.floating-toolbar--auto > .floating-toolbar__bar::before {
+    content: none;
+  }
+
+  .floating-toolbar.floating-toolbar--auto:is(
+      :hover,
+      :focus-within,
+      .floating-toolbar--always-visible,
+      :has(> .floating-toolbar__bar [data-popup-open])
+    ) > .floating-toolbar__bar {
+    pointer-events: none;
+  }
+
+  .floating-toolbar.floating-toolbar--auto:is(
+      :hover,
+      :focus-within,
+      .floating-toolbar--always-visible,
+      :has(> .floating-toolbar__bar [data-popup-open])
+    ) > .floating-toolbar__bar > .floating-toolbar__group {
+    pointer-events: auto;
+  }
+
+  .floating-toolbar.floating-toolbar--auto > .floating-toolbar__bar > .floating-toolbar__group {
+    position: sticky;
+    inset-block-start: 0;
+    box-sizing: border-box;
+    flex-direction: column;
+    inline-size: var(--floating-toolbar-rail-inline-size);
+    padding-block: var(--floating-toolbar-padding-block);
+    padding-inline: var(--floating-toolbar-padding-inline);
+    background-color: var(--floating-toolbar-bg);
+    border-style: solid;
+    border-width: var(--floating-toolbar-border-width);
+    border-color: var(--floating-toolbar-border-color);
+    border-radius: var(--floating-toolbar-border-radius);
+    box-shadow: var(--floating-toolbar-shadow);
+  }
+}

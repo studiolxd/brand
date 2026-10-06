@@ -1,0 +1,94 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as FloatingToolbarStories from "./FloatingToolbar.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { floatingToolbarTokens } from "../../../tokens/molecules/floating-toolbar";
+
+<Meta of={FloatingToolbarStories} />
+
+# FloatingToolbar
+
+La barra de acciones **de un elemento**: mover, duplicar, borrar, convertir… cada bloque de un editor, cada fila de una lista ordenable. Aparece al pasar el puntero por el elemento o al entrar el foco en él, y no ocupa sitio en el flujo: flota sobre su borde.
+
+<Canvas of={FloatingToolbarStories.PorDefecto} />
+
+```tsx
+import { FloatingToolbar, FloatingToolbarButton } from '@studiolxd/brand/floating-toolbar';
+
+<FloatingToolbar
+  label="Acciones del bloque 3: Texto"
+  start={<FloatingToolbarButton label="Editar el bloque" icon={<Icon name="settings" />} onClick={onEdit} />}
+  end={
+    <>
+      <FloatingToolbarButton label="Subir" icon={<Icon name="chevron-up" />} onClick={onMoveUp} />
+      <FloatingToolbarButton label="Borrar" icon={<Icon name="trash" />} destructive onClick={onDelete} />
+    </>
+  }
+>
+  {bloque}
+</FloatingToolbar>
+```
+
+## Las acciones se declaran una vez
+
+Hay dos colocaciones y **una sola lista de acciones**. Con `layout="auto"` (por defecto) la barra va **encima** del elemento por debajo de `breakpoint.lg` y en **dos raíles a sus lados** desde `lg`, el mismo punto en el que el cromo de aplicación pasa de barra superior a lateral. Lo decide el CSS con su media query: no hay una barra para escritorio y otra para móvil, así que el producto no repite acciones ni las ve salir dos veces.
+
+`start` y `end` son los dos grupos: a la izquierda y a la derecha del elemento en los raíles, al principio y al final de la fila en la barra superior.
+
+`layout="top"` y `layout="sides"` fijan una de las dos a cualquier anchura.
+
+<Canvas of={FloatingToolbarStories.Arriba} />
+<Canvas of={FloatingToolbarStories.ALosLados} />
+
+En los raíles, **el elemento reserva su hueco** a cada lado (el ancho de un raíl más `offset`): los raíles no tapan el contenido ni se salen de la columna. Y cada raíl se queda a la vista mientras se desplaza un elemento más alto que la ventana. La barra superior, en cambio, no reserva nada: flota por encima del borde del elemento, sobre lo que haya antes, para no dejar una franja vacía en cada elemento de la lista.
+
+## Cuándo se ve
+
+- Con el **puntero** sobre el elemento (o sobre sus raíles).
+- Con el **foco** dentro del elemento o de la barra. La barra sigue en el orden de tabulación aunque no se vea —está transparente, no `display: none`—, así que con teclado siempre se llega a ella, y al llegar aparece.
+- Mientras un botón suyo tiene un **panel abierto** (un `Popover`, un `Menu`): el panel sale por un portal, fuera del elemento, y sin esto la barra se iría mientras se usa.
+- Siempre, con **`alwaysVisible`**: para el elemento seleccionado, sobre todo en pantallas táctiles, donde no hay puntero que pase. Qué elemento está seleccionado lo decide el producto.
+
+<Canvas of={FloatingToolbarStories.Seleccionado} />
+
+La aparición es un fundido de opacidad con `motion.duration.fast`; con `prefers-reduced-motion: reduce` esa duración vale 0ms y la barra aparece sin transición.
+
+## Los botones
+
+`FloatingToolbarButton` es un `Button` `ghost`, talla `sm`, de solo icono, con su `Tooltip`. `label` es a la vez su nombre accesible y el texto del bocadillo, que sale hacia fuera del elemento (arriba en la barra superior, hacia el lado de su raíl en los raíles). `destructive` lo pinta en rojo.
+
+Reenvía `ref` y el resto de props al `<button>`, así que sirve de `trigger` de un `Popover` o de un `Menu` —como «Convertir en…»— y de asa de arrastre: el `handleRef` de dnd-kit va en su `ref`.
+
+<Canvas of={FloatingToolbarStories.ConPanel} />
+
+Como todo `Tooltip`, necesita un `TooltipProvider` por encima, normalmente en el shell de la aplicación.
+
+## Superficie oscura
+
+El panel de la barra es el de cualquier panel flotante (`floating-panel.*`), que ya tiene su par oscuro, y los botones son los del `Button`: reacciona a `.surface-dark` y a `html.dark` / `[data-theme="dark"]` sin tokens propios.
+
+## Textos
+
+`label` es **obligatorio y sin default**: tiene que decir de qué son las acciones, porque en una lista hay una barra por elemento y un nombre fijo las haría indistinguibles para un lector de pantalla. Es un dato del producto, no un texto del sistema, y por eso no está en el proveedor de textos. Lo mismo el `label` de cada botón.
+
+## Props
+
+<ArgTypes of={FloatingToolbarStories} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={floatingToolbarTokens} />
+
+La caja de los botones, su foco y sus colores son los de `Button`; el panel hereda de `floating-panel`.
+
+## Accesibilidad
+
+Es el patrón **Toolbar** de WAI-ARIA, sobre el `Toolbar` de Base UI:
+
+- `role="toolbar"` con `aria-label`, y los dos grupos como `role="group"`.
+- **Una sola parada de tabulación**: Tab entra en la barra y la siguiente pulsación sale de ella; dentro se recorre con las flechas (*roving tabindex*), y de un extremo se vuelve al otro.
+- Las flechas siguen la colocación: **izquierda/derecha** en la barra superior y **arriba/abajo** en los raíles (`aria-orientation`), pasando del final del raíl izquierdo al principio del derecho.
+- Cada botón de solo icono lleva `aria-label`. El bocadillo no lo describe otra vez (`describe={false}`): repetiría el mismo nombre.
+
+El `ref` y el resto de props del `FloatingToolbar` van al **ancla** —el contenedor del elemento—, no a la barra: es el elemento lo que el producto mide, arrastra o marca.
