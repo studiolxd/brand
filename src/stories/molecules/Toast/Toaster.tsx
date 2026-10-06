@@ -169,6 +169,14 @@ function ToastList({ position, containerAriaLabel, closeLabel, closeButton, gap,
  * Punto de montaje de los avisos efímeros. Se monta **una vez** en la raíz de la
  * aplicación; los avisos se lanzan desde cualquier sitio con `toast(...)`.
  *
+ * **Solo puede haber un `Toaster` montado a la vez.** La cola (`toastManager`)
+ * es un único objeto de módulo y el `Toaster` no la aísla: dos montados pintan
+ * cada aviso dos veces, el último que monta impone su `duration` a todos
+ * (`setToastDefaultDuration` escribe una variable global, la que usa un aviso
+ * actualizado por `id`) y los dos sincronizan la misma lista de avisos vivos de
+ * `toast.dismiss()`. Para otra posición u otra duración se cambian las props de
+ * ese único `Toaster` o se pasa `duration` al aviso.
+ *
  * La cara del aviso es la del `Alert` —mismo relleno, mismo borde, misma
  * tipografía y las mismas cuatro intenciones, sobre el juego de tokens
  * `alert.*`—; lo propio del toast es la capa, la posición, el apilado y el
