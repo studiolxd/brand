@@ -4,14 +4,14 @@ import { n as e } from "./_shared/brandmessagescontext.js";
 import { SkipLink as t } from "./skip-link.js";
 import { t as n } from "./_shared/css-properties.js";
 import { TooltipProvider as r } from "./tooltip.js";
-import { n as i, t as a } from "./_shared/appshellcontext.js";
-import { t as o } from "./_shared/media-query.js";
+import { t as i } from "./_shared/media-query.js";
+import { n as a, t as o } from "./_shared/appshellcontext.js";
 import { useCallback as s, useEffect as c, useMemo as l, useState as u } from "react";
 import { jsx as d, jsxs as f } from "react/jsx-runtime";
 //#region src/stories/sections/AppShell/AppShell.tsx
 var p = "(min-width: 1024px)";
-function m({ banner: i, header: m, sidebar: h, children: g, contentFlush: _ = !1, defaultSidebar: v = "open", sidebarState: y, onSidebarChange: b, defaultSidebarWidth: x, onSidebarWidthChange: S, skipLabel: C, className: w }) {
-	let T = e("appShell"), E = o(p), D = E ?? !0, [O, k] = u(v), [A, j] = u(!1), [M, N] = u(x), P = D ? y ?? O : A ? "open" : "closed", F = s((e) => {
+function m({ banner: a, header: m, sidebar: h, children: g, contentFlush: _ = !1, defaultSidebar: v = "open", sidebarState: y, onSidebarChange: b, defaultSidebarWidth: x, onSidebarWidthChange: S, skipLabel: C, className: w }) {
+	let T = e("appShell"), E = i(p), D = E ?? !0, [O, k] = u(v), [A, j] = u(!1), [M, N] = u(x), P = D ? y ?? O : A ? "open" : "closed", F = s((e) => {
 		D ? (k(e), b?.(e)) : j(e === "open");
 	}, [D, b]), I = s(() => F(P === "open" ? "closed" : "open"), [F, P]), L = s(() => F("closed"), [F]), R = s((e) => {
 		N(e), S?.(e);
@@ -53,9 +53,9 @@ function m({ banner: i, header: m, sidebar: h, children: g, contentFlush: _ = !1
 		};
 	}, []), U = n({
 		"--app-shell-sidebar-width": M ? `${M}px` : void 0,
-		"--app-shell-banner-height": i ? `${B}px` : void 0
+		"--app-shell-banner-height": a ? `${B}px` : void 0
 	}), W = !D && A;
-	return /* @__PURE__ */ d(a.Provider, {
+	return /* @__PURE__ */ d(o.Provider, {
 		value: z,
 		children: /* @__PURE__ */ f(r, { children: [/* @__PURE__ */ d(t, {
 			href: "#main-content",
@@ -66,10 +66,10 @@ function m({ banner: i, header: m, sidebar: h, children: g, contentFlush: _ = !1
 			"data-sidebar": P,
 			"data-layout": E === null ? void 0 : D ? "column" : "drawer",
 			children: [
-				i && /* @__PURE__ */ d("div", {
+				a && /* @__PURE__ */ d("div", {
 					ref: H,
 					className: "app-shell__banner",
-					children: i
+					children: a
 				}),
 				m,
 				/* @__PURE__ */ f("div", {
@@ -95,4 +95,4 @@ function m({ banner: i, header: m, sidebar: h, children: g, contentFlush: _ = !1
 	});
 }
 //#endregion
-export { m as AppShell, i as useAppShell };
+export { m as AppShell, a as useAppShell };
