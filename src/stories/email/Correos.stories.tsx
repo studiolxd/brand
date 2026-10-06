@@ -66,7 +66,14 @@ const exportacion = (
     preview="Tu exportación de «Formación en prevención» está lista"
     appName="360"
     assetsBaseUrl="/email"
-    optOut={{ unsubscribeUrl: '#baja', preferencesUrl: '#preferencias' }}
+    optOut={{
+      unsubscribeUrl: '#baja',
+      preferencesUrl: '#preferencias',
+      unsubscribeLabel: 'Darse de baja',
+      manageBeforeLabel: ' o ',
+      managePreferencesLabel: 'gestiona tus preferencias',
+      manageAfterLabel: '.',
+    }}
   >
     <EmailHeading>Tu exportación está lista</EmailHeading>
     <EmailText>
@@ -98,7 +105,14 @@ const licitaciones = (
     preview="Tres licitaciones nuevas encajan con tus perfiles"
     appName="Tender"
     assetsBaseUrl="/email"
-    optOut={{ unsubscribeUrl: '#baja', preferencesUrl: '#preferencias' }}
+    optOut={{
+      unsubscribeUrl: '#baja',
+      preferencesUrl: '#preferencias',
+      unsubscribeLabel: 'Darse de baja',
+      manageBeforeLabel: ' o ',
+      managePreferencesLabel: 'gestiona tus preferencias',
+      manageAfterLabel: '.',
+    }}
   >
     <EmailHeading>Tres licitaciones nuevas</EmailHeading>
     <EmailText>

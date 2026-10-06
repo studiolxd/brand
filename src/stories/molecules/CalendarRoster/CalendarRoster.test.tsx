@@ -52,3 +52,14 @@ describe('CalendarRoster', () => {
     expect(screen.getAllByRole('rowheader')).toHaveLength(2);
   });
 });
+
+describe('CalendarRoster — today', () => {
+  it('marca como hoy el día que se le pasa, no el del reloj (SSR)', () => {
+    const { container } = render(
+      <CalendarRoster month={MES} rows={[{ id: '1', name: 'Ana García', cells: {} }]} today={new Date(2026, 0, 9)} />,
+    );
+    const cabeceras = container.querySelectorAll('.calendar-roster__th-day--today');
+    expect(cabeceras).toHaveLength(1);
+    expect(cabeceras[0].textContent).toContain('9');
+  });
+});

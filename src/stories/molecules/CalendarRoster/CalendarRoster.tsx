@@ -2,7 +2,7 @@ import type { ComponentType, MouseEvent, ReactNode } from 'react';
 import { Tag } from '../../atoms/Tag/Tag';
 import type { TagVariant } from '../../atoms/Tag/Tag';
 import { PrevNextNav } from '../PrevNextNav/PrevNextNav';
-import { isSameDay, shiftMonth } from '../_shared/calendarGrid';
+import { isSameDay, shiftMonth, useToday } from '../_shared/calendarGrid';
 import './CalendarRoster.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
@@ -127,6 +127,14 @@ export interface CalendarRosterProps {
   nextMonthLabel?: string;
   /** Locale para nombres de mes y día. Default: 'es-ES' */
   locale?: string;
+  /**
+   * El día que el cuadrante marca como «hoy». Default: la fecha actual,
+   * calculada una vez al montar. **En SSR conviene pasarla**: servidor y
+   * navegador calculan cada uno su «ahora», y cerca de la medianoche —o con
+   * husos distintos— no coinciden y la hidratación se desajusta. Basta con
+   * calcularla en el servidor y mandar la misma fecha a los dos lados.
+   */
+  today?: Date;
   className?: string;
 }
 
@@ -178,6 +186,7 @@ export function CalendarRoster({
   legendLabel,
   previousMonthLabel,
   nextMonthLabel,
+  today: todayProp,
   className,
 }: CalendarRosterProps) {
   const t = useBrandMessages('calendar');
@@ -185,7 +194,7 @@ export function CalendarRoster({
   // La leyenda se arma DONDE se pinta: sin `showLegend` no se exige ninguna
   // de las seis claves.
   const leyenda = legendItems ?? (showLegend ? LEGEND_TYPES.map(({ type, key }) => ({ type, label: tr(key) })) : []);
-  const today = new Date();
+  const today = useToday(todayProp);
   const days = getDaysInMonth(month);
 
   const prevMonth = shiftMonth(month, -1);

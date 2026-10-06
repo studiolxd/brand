@@ -228,10 +228,10 @@ Y sale así:
 
 Cuatro decisiones que la sostienen:
 
-- **`fallbackLabel` es obligatoria y no tiene default castellano**, la única
-  prop de texto del DS que no lo tiene. El correo vive en seis idiomas que
-  conoce `mailer` y no el DS; y siendo obligatoria, no hay forma de renderizar
-  un botón sin su respaldo.
+- **`fallbackLabel` es obligatoria y no tiene default castellano**, como todos
+  los textos del correo (los del pie de baja, más abajo, también). El correo
+  vive en seis idiomas que conoce `mailer` y no el DS; y siendo obligatoria, no
+  hay forma de renderizar un botón sin su respaldo.
 - **La dirección se enseña entera y como texto plano**, no dentro de un `<a>`
   ni acortada: lo que se le pide es leerla y copiarla, así que no puede depender
   de un enlace que un cliente pueda vaciar o quitar. Los clientes que autoenlazan
@@ -347,11 +347,37 @@ Tres superficies, tres tokens:
 
 ## El pie de baja
 
-`optOut` se omite en el correo **transaccional**, el que no pertenece a ninguna categoría de aviso (verificar el correo, restablecer la contraseña). Con `unsubscribeUrl` a secas sale el pie de un enlace; añadiendo `preferencesUrl`, el pie completo.
+`optOut` se omite en el correo **transaccional**, el que no pertenece a ninguna categoría de aviso (verificar el correo, restablecer la contraseña). Sin `preferencesUrl` sale el pie de un enlace; con ella, el pie completo.
 
 <Canvas of={EmailLayoutStories.ConPreferencias} />
 
 La frase va partida en varias props en vez de una sola con un hueco `{enlace}`: los idiomas no coinciden en si hay texto después del enlace, y una prop de texto solo puede devolver una cadena.
+
+**Sus textos son obligatorios y no tienen default castellano**, como `fallbackLabel`. El correo **no lee el `BrandMessagesProvider`**: se escribe en el idioma de quien lo *recibe*, que no tiene por qué ser el de quien navega la app (el catálogo montado en su raíz), y se renderiza fuera de su árbol —una cola, un manejador de ruta—, donde no hay proveedor. El tipo pide los que use cada forma del pie:
+
+| Forma | Textos obligatorios |
+| --- | --- |
+| Sin `preferencesUrl` (un enlace) | `manageLabel`, `unsubscribeLabel` |
+| Con `preferencesUrl` (dos enlaces) | `unsubscribeLabel`, `manageBeforeLabel`, `managePreferencesLabel`, `manageAfterLabel` |
+| Con una `preferencesUrl` que puede faltar (`string \| undefined`) | los cinco |
+
+Quien se los salte (desde JavaScript, o con un `as`) recibe un error que nombra el que falta, no un pie en castellano dentro de un correo en alemán.
+
+```tsx
+<EmailLayout
+  preview={t('digest.preview')}
+  appName="360"
+  locale={locale}
+  optOut={{
+    unsubscribeUrl,
+    preferencesUrl,
+    unsubscribeLabel: t('footer.unsubscribe'),
+    manageBeforeLabel: t('footer.manageBefore'),
+    managePreferencesLabel: t('footer.managePreferences'),
+    manageAfterLabel: t('footer.manageAfter'),
+  }}
+>
+```
 
 ### El pie de quien no tiene cuenta
 

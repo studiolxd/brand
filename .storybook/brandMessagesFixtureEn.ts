@@ -256,6 +256,7 @@ export const brandMessagesFixtureEn: BrandMessages = {
   sidebarNav: {
     label: 'Main',
     empty: 'no docs',
+    emptyEntry: (label, empty) => `${label} (${empty})`,
   },
   siteNav: {
     label: 'Site navigation',
@@ -297,6 +298,21 @@ export const brandMessagesFixtureEn: BrandMessages = {
   },
   dotsButton: {
     label: 'More options',
+  },
+  closeButton: {
+    label: 'Close',
+  },
+  themeSwitcher: {
+    group: 'Theme',
+    light: 'Light',
+    dark: 'Dark',
+    system: 'System',
+    trigger: (group, theme) => `${group}: ${theme}`,
+  },
+  statTile: {
+    up: 'Up',
+    down: 'Down',
+    flat: 'No change',
   },
   progressBar: {
     label: 'Progress',
@@ -436,6 +452,11 @@ export const brandMessagesFixtureEn: BrandMessages = {
   },
   calendarPlanner: {
     more: (count) => `+${count} more`,
+    previousWeek: 'Previous week',
+    nextWeek: 'Next week',
+    monthView: 'Month',
+    weekView: 'Week',
+    viewSwitcher: 'Calendar view',
   },
   notificationList: {
     label: 'Notifications',

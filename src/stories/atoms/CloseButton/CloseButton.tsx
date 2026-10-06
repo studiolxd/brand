@@ -1,12 +1,24 @@
 import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import { Icon } from '../Icon/Icon';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './CloseButton.css';
+
+/**
+ * El único texto del aspa suelta, y es **cromo**: «Cerrar». Los componentes
+ * que la montan (`Modal`, `Sheet`, `Alert`, `Banner`, `Toaster`,
+ * `FloatingDock`) le pasan siempre el suyo, de su propio espacio; esta clave
+ * solo se lee cuando alguien usa el aspa por su cuenta sin `label`.
+ */
+export interface CloseButtonMessages {
+  /** Nombre accesible del aspa. */
+  label: string;
+}
 
 export interface CloseButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'children'> {
   /**
-   * Nombre accesible del aspa. Default: «Cerrar» (castellano). Dice **qué**
-   * cierra o quita, no qué forma tiene: «Cerrar», «Descartar aviso»,
-   * «Quitar a Ana». Una app multiidioma debe pasarlo traducido.
+   * Nombre accesible del aspa. Dice **qué** cierra o quita, no qué forma
+   * tiene: «Cerrar», «Descartar aviso», «Quitar a Ana». **Sin default**: sin
+   * él, sale de `closeButton.label` del `BrandMessagesProvider`.
    */
   label?: string;
   /** Talla del botón: un cuadrado de 32, 40 o 48px. El glifo mide 24 en las tres. */
@@ -26,14 +38,15 @@ export interface CloseButtonProps extends Omit<ComponentPropsWithoutRef<'button'
  * que aquí sobra.
  */
 export const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(function CloseButton(
-  { label = 'Cerrar', size = 'md', className, ...rest },
+  { label, size = 'md', className, ...rest },
   ref,
 ) {
+  const t = useBrandMessages('closeButton');
   const classes = ['close-button', size !== 'md' ? `close-button--${size}` : '', className]
     .filter(Boolean)
     .join(' ');
   return (
-    <button ref={ref} type="button" className={classes} aria-label={label} {...rest}>
+    <button ref={ref} type="button" className={classes} aria-label={t('label', label)} {...rest}>
       <Icon name="close" />
     </button>
   );

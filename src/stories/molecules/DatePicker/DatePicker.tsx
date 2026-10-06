@@ -118,6 +118,12 @@ export interface DatePickerProps {
    * nombra el panel entero.
    */
   gridLabel?: CalendarProps['gridLabel'];
+  /**
+   * El «hoy» que marca el calendario del panel. Default: la fecha actual,
+   * calculada una vez al montar el calendario. **En SSR conviene pasarla**
+   * (ver `Calendar`): evita el desajuste de hidratación cerca de la medianoche.
+   */
+  today?: CalendarProps['today'];
   /** Nombre del campo en el formulario: se monta un input oculto con la fecha en ISO. */
   name?: string;
   /** Se llama al salir del campo (react-hook-form lo usa para validar). */
@@ -169,6 +175,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
   nextYearsLabel,
   yearGridLabel,
   gridLabel,
+  today,
   onBlur,
   className,
 }: DatePickerProps, ref) {
@@ -340,6 +347,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
             previousYearsLabel={previousYearsLabel}
             nextYearsLabel={nextYearsLabel}
             yearGridLabel={yearGridLabel}
+            today={today}
             minDate={minDate}
             maxDate={maxDate}
             disabledDates={disabledDates}

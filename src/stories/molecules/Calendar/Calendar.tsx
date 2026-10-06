@@ -9,6 +9,7 @@ import {
   renderCalendarWeekdayRow,
   shiftMonth,
   useCalendarGridNavigation,
+  useToday,
 } from '../_shared/calendarGrid';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './Calendar.css';
@@ -102,6 +103,15 @@ export interface CalendarProps {
    * `DatePicker`), conviene pasarlo aquí.
    */
   gridLabel?: string;
+  /**
+   * El día que el calendario marca como «hoy» (y desde el que arranca el mes
+   * visible y el foco cuando no hay otra fecha). Default: la fecha actual,
+   * calculada una vez al montar. **En SSR conviene pasarla**: servidor y
+   * navegador calculan cada uno su «ahora», y cerca de la medianoche —o con
+   * husos distintos— no coinciden y la hidratación se desajusta. Basta con
+   * calcularla en el servidor y mandar la misma fecha a los dos lados.
+   */
+  today?: Date;
   /** Tamaño del componente. Default: 'md' */
   size?: 'sm' | 'md' | 'lg';
   className?: string;
@@ -129,12 +139,14 @@ export function Calendar({
   nextYearsLabel,
   yearGridLabel,
   gridLabel,
+  today: todayProp,
   size = 'md',
   className,
 }: CalendarProps) {
   const t = useBrandMessages('calendar');
+  const today = useToday(todayProp);
   const [internalMonth, setInternalMonth] = useState<Date>(
-    () => monthProp ?? defaultMonth ?? (value instanceof Date ? value : new Date())
+    () => monthProp ?? defaultMonth ?? (value instanceof Date ? value : today)
   );
 
   const currentMonth = monthProp ?? internalMonth;
@@ -146,8 +158,6 @@ export function Calendar({
     },
     [onMonthChange]
   );
-
-  const today = new Date();
 
   const isDisabled = useCallback(
     (date: Date): boolean => {
@@ -168,6 +178,7 @@ export function Calendar({
     month: currentMonth,
     onMonthChange: handleMonthChange,
     selected: value ?? null,
+    today,
     minDate,
     maxDate,
   });

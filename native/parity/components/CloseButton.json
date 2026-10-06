@@ -7,7 +7,7 @@
     "size": { "type": "union", "values": ["sm", "md", "lg"], "default": "md" }
   },
   "excluded": [
-    { "prop": "label", "reason": "Es texto, no un caso: en SwiftUI es el primer argumento (`BrandCloseButton(\"Cerrar\", size:action:)`, `LocalizedStringKey`) y en Compose `contentDescription: String`, los dos con «Cerrar» por defecto (castellano), como en React." }
+    { "prop": "label", "reason": "Es texto, no un caso: en SwiftUI es el primer argumento (`BrandCloseButton(\"Cerrar\", size:action:)`, `LocalizedStringKey`) y en Compose `contentDescription: String`, los dos con «Cerrar» por defecto (castellano). En React no hay default: sin `label`, sale de `closeButton.label` del `BrandMessagesProvider`." }
   ],
   "differences": [
     "La talla es el `BrandControlSize` compartido (`sm`/`md`/`lg`), no un enum propio: el mismo cuadrado de 32, 40 o 48 que en la web, escalado con el tipo dinámico (`@ScaledMetric` en SwiftUI, `fontScale` en Compose); el glifo `close` mide `md` en las tres tallas, como en React.",

@@ -4,13 +4,16 @@
  * que no puede perderse en un refactor. Se comprueban sobre el HTML renderizado
  * y no sobre el árbol de React porque lo que llega a la bandeja es el HTML.
  */
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import type { ReactElement } from 'react';
 import { render } from 'react-email';
 import { describe, expect, it } from 'vitest';
 
 import { EMAIL_LOGO_FILENAME } from '../../assets/brand-assets';
 import { EmailButton, EmailHeading, EmailNote, EmailText } from './EmailPrimitives';
-import { EmailLayout } from './EmailLayout';
+import { EmailLayout, type EmailOptOut } from './EmailLayout';
 import { emailLogo, emailToken } from './emailTheme';
 import { emailTokens } from './emailTokens';
 
@@ -123,13 +126,55 @@ describe('EmailLayout', () => {
       <EmailLayout
         preview="p"
         appName="Bricks"
-        optOut={{ unsubscribeUrl: 'https://example.com/baja' }}
+        optOut={{
+          unsubscribeUrl: 'https://example.com/baja',
+          manageLabel: 'Para dejar de recibir estos avisos,',
+          unsubscribeLabel: 'date de baja',
+        }}
       >
         <EmailText>Hola</EmailText>
       </EmailLayout>,
     );
     expect(conBaja).toContain('https://example.com/baja');
+    expect(conBaja).toContain('Para dejar de recibir estos avisos,');
     expect(conBaja).toContain('date de baja');
+  });
+
+  it('el pie de baja no trae castellano puesto: sin su texto, avisa de cuál falta', async () => {
+    // El correo no lee el `BrandMessagesProvider` (se escribe en el idioma de
+    // quien lo recibe, fuera del árbol de la app), así que no hay catálogo de
+    // respaldo: el tipo exige los textos, y quien se los salte con un `as`
+    // recibe el error, no un «date de baja» dentro de un correo en alemán.
+    const sinTextos = { unsubscribeUrl: 'https://example.com/baja' } as unknown as EmailOptOut;
+    await expect(
+      html(
+        <EmailLayout preview="p" appName="Bricks" optOut={sinTextos}>
+          <EmailText>Hola</EmailText>
+        </EmailLayout>,
+      ),
+    ).rejects.toThrow(/optOut\.unsubscribeLabel/);
+
+    const sinPreferencias = {
+      unsubscribeUrl: 'https://example.com/baja',
+      preferencesUrl: 'https://example.com/preferencias',
+      unsubscribeLabel: 'Abmelden',
+    } as unknown as EmailOptOut;
+    await expect(
+      html(
+        <EmailLayout preview="p" appName="Bricks" optOut={sinPreferencias}>
+          <EmailText>Hola</EmailText>
+        </EmailLayout>,
+      ),
+    ).rejects.toThrow(/optOut\.manageBeforeLabel/);
+  });
+
+  it('el componente no trae ninguno de los textos del pie cableado', () => {
+    const fuente = readFileSync(join(dirname(fileURLToPath(import.meta.url)), 'EmailLayout.tsx'), 'utf8')
+      // Solo el código: los comentarios citan los textos para explicarlos.
+      .replace(/\/\*[\s\S]*?\*\//g, '');
+    for (const texto of ['Para dejar de recibir', 'Darse de baja', 'date de baja', 'gestiona tus preferencias']) {
+      expect(fuente).not.toContain(texto);
+    }
   });
 
   it('en el pie sin cuenta no ofrece preferencias, solo el motivo y la baja', async () => {

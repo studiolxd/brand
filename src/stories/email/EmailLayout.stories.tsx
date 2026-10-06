@@ -53,7 +53,11 @@ export const Transaccional: Story = {};
 export const ConBaja: Story = {
   name: 'Con baja',
   args: {
-    optOut: { unsubscribeUrl: '#baja' },
+    optOut: {
+      unsubscribeUrl: '#baja',
+      manageLabel: 'Para dejar de recibir estos avisos,',
+      unsubscribeLabel: 'date de baja',
+    },
   },
 };
 
@@ -61,7 +65,14 @@ export const ConBaja: Story = {
 export const ConPreferencias: Story = {
   name: 'Con preferencias',
   args: {
-    optOut: { unsubscribeUrl: '#baja', preferencesUrl: '#preferencias' },
+    optOut: {
+      unsubscribeUrl: '#baja',
+      preferencesUrl: '#preferencias',
+      unsubscribeLabel: 'Darse de baja',
+      manageBeforeLabel: ' o ',
+      managePreferencesLabel: 'gestiona tus preferencias',
+      manageAfterLabel: '.',
+    },
   },
 };
 

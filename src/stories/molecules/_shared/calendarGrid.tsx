@@ -283,6 +283,19 @@ function addMonths(date: Date, delta: number): Date {
   return new Date(target.getFullYear(), target.getMonth(), Math.min(date.getDate(), lastDay));
 }
 
+/**
+ * El «hoy» de un calendario: el que pasa el consumidor o, sin él, la fecha
+ * actual **calculada una vez por montaje** —no en cada render—. En SSR el
+ * servidor y el navegador calculan cada uno el suyo, y alrededor de la
+ * medianoche (o con husos distintos) no coinciden: React avisa de un
+ * desajuste de hidratación. Para evitarlo, la app pasa `today` desde el
+ * servidor a los dos lados.
+ */
+export function useToday(today?: Date): Date {
+  const [mountedAt] = useState(() => new Date());
+  return today ?? mountedAt;
+}
+
 function dayKey(date: Date): string {
   return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
 }
@@ -294,6 +307,8 @@ export interface UseCalendarGridNavigationOptions {
   onMonthChange: (month: Date) => void;
   /** Fecha seleccionada, si la hay: es la primera candidata a llevar el tabindex */
   selected?: Date | null;
+  /** El «hoy» del calendario (`useToday`): segundo candidato al tabindex. */
+  today: Date;
   /**
    * Activación de la celda enfocada con Enter/Espacio. Solo para rejillas cuya
    * celda no es un `<button>` (que ya lo resuelve el navegador).
@@ -326,11 +341,12 @@ export function useCalendarGridNavigation({
   month,
   onMonthChange,
   selected,
+  today,
   onActivate,
   minDate,
   maxDate,
 }: UseCalendarGridNavigationOptions): CalendarGridNavigation {
-  const [focusedDate, setFocusedDate] = useState<Date>(() => selected ?? new Date());
+  const [focusedDate, setFocusedDate] = useState<Date>(() => selected ?? today);
   const cells = useRef(new Map<string, HTMLElement>());
   const pendingFocus = useRef(false);
 
@@ -339,10 +355,9 @@ export function useCalendarGridNavigation({
   const activeDate = useMemo(() => {
     if (isSameMonth(focusedDate, month)) return focusedDate;
     if (selected && isSameMonth(selected, month)) return selected;
-    const today = new Date();
     if (isSameMonth(today, month)) return today;
     return new Date(month.getFullYear(), month.getMonth(), 1);
-  }, [focusedDate, month, selected]);
+  }, [focusedDate, month, selected, today]);
 
   useEffect(() => {
     if (!pendingFocus.current) return;
@@ -437,6 +452,8 @@ export interface UseCalendarWeekNavigationOptions {
   weekStart: Date;
   /** Se llama cuando el teclado saca el foco fuera de la semana visible */
   onWeekChange: (weekStart: Date) => void;
+  /** El «hoy» del calendario (`useToday`): candidato al tabindex de la semana. */
+  today: Date;
   /** Activación de la columna enfocada con Enter/Espacio */
   onActivate?: (date: Date) => void;
   minDate?: Date;
@@ -456,11 +473,12 @@ export interface UseCalendarWeekNavigationOptions {
 export function useCalendarWeekNavigation({
   weekStart,
   onWeekChange,
+  today,
   onActivate,
   minDate,
   maxDate,
 }: UseCalendarWeekNavigationOptions): CalendarGridNavigation {
-  const [focusedDate, setFocusedDate] = useState<Date>(() => new Date());
+  const [focusedDate, setFocusedDate] = useState<Date>(() => today);
   const cells = useRef(new Map<string, HTMLElement>());
   const pendingFocus = useRef(false);
 
@@ -470,10 +488,9 @@ export function useCalendarWeekNavigation({
   // se quedó en otra, cae en hoy si es de esta semana y, si no, en el lunes.
   const activeDate = useMemo(() => {
     if (isSameDay(startOfWeek(focusedDate), start)) return focusedDate;
-    const today = new Date();
     if (isSameDay(startOfWeek(today), start)) return today;
     return start;
-  }, [focusedDate, start]);
+  }, [focusedDate, start, today]);
 
   useEffect(() => {
     if (!pendingFocus.current) return;

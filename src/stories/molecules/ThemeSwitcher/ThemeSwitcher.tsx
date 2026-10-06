@@ -5,16 +5,49 @@ import { DropdownField } from '../DropdownField/DropdownField';
 import { Menu } from '../Menu/Menu';
 import { Button } from '../../atoms/Button/Button';
 import { Icon, type IconName } from '../../atoms/Icon/Icon';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './ThemeSwitcher.css';
 
 export type Theme = 'light' | 'dark' | 'system';
 
+/**
+ * El cromo del selector de tema: el nombre del control, los tres temas y la
+ * frase que nombra el botón de icono con el tema vigente. Todo es igual en
+ * cualquier pantalla de la suite, así que va al catálogo una sola vez.
+ */
+export interface ThemeSwitcherMessages {
+  /** Nombre del control: la etiqueta del compacto y el nombre del grupo en lista. */
+  group: string;
+  /** El tema claro. */
+  light: string;
+  /** El tema oscuro. */
+  dark: string;
+  /** El tema que sigue al sistema operativo. */
+  system: string;
+  /**
+   * Nombre accesible del botón de la variante `icon`, que solo enseña el
+   * icono del tema vigente: «Tema: Claro». Recibe el nombre del control y el
+   * del tema vigente, ya resueltos, y es función porque el orden y la
+   * puntuación de la frase son de cada idioma.
+   */
+  trigger: (group: string, theme: string) => string;
+}
+
+/**
+ * Anulaciones puntuales del catálogo, clave a clave. Las que no se pasen
+ * salen de `themeSwitcher.*` del `BrandMessagesProvider`.
+ */
 export interface ThemeSwitcherLabels {
-  /** Nombre accesible del control. */
+  /** Anulación puntual de `themeSwitcher.group`. */
   group?: string;
+  /** Anulación puntual de `themeSwitcher.light`. */
   light?: string;
+  /** Anulación puntual de `themeSwitcher.dark`. */
   dark?: string;
+  /** Anulación puntual de `themeSwitcher.system`. */
   system?: string;
+  /** Anulación puntual de `themeSwitcher.trigger`. */
+  trigger?: (group: string, theme: string) => string;
 }
 
 export interface ThemeSwitcherProps {
@@ -22,6 +55,10 @@ export interface ThemeSwitcherProps {
   value: Theme;
   /** Cambio de tema. Aplicarlo (clase en `html`) y persistirlo es del producto. */
   onChange?: (theme: Theme) => void;
+  /**
+   * Textos del control, clave a clave. **Sin defaults**: los que no se pasen
+   * salen de `themeSwitcher.*` del `BrandMessagesProvider`.
+   */
   labels?: ThemeSwitcherLabels;
   /** `id` del control en compacto (enlaza la etiqueta). Por defecto, uno único por instancia (`useId`). */
   id?: string;
@@ -61,13 +98,21 @@ export function ThemeSwitcher({ value, onChange, labels, id: idProp, variant = '
   // conmutadores en la misma página (la barra y el pie).
   const autoId = useId();
   const id = idProp ?? autoId;
-  const text = { group: 'Tema', light: 'Claro', dark: 'Oscuro', system: 'Sistema', ...labels };
+  // El lector se llama donde se pinta cada texto: la variante `icon` no
+  // enseña el nombre del grupo suelto, pero lo necesita para su frase.
+  const t = useBrandMessages('themeSwitcher');
+  const text = {
+    group: () => t('group', labels?.group),
+    light: () => t('light', labels?.light),
+    dark: () => t('dark', labels?.dark),
+    system: () => t('system', labels?.system),
+  };
   const current = OPTIONS.find((o) => o.value === value) ?? OPTIONS[2];
 
   if (variant === 'list') {
     const classes = ['theme-switcher', 'theme-switcher--list', className].filter(Boolean).join(' ');
     return (
-      <div className={classes} role="group" aria-label={text.group}>
+      <div className={classes} role="group" aria-label={text.group()}>
         <ul className="theme-switcher__list">
           {OPTIONS.map(({ value: option, icon }) => {
             const isCurrent = option === value;
@@ -84,7 +129,7 @@ export function ThemeSwitcher({ value, onChange, labels, id: idProp, variant = '
                   onClick={isCurrent ? undefined : () => onChange?.(option)}
                 >
                   <Icon name={icon} size="sm" />
-                  <span>{text[option]}</span>
+                  <span>{text[option]()}</span>
                 </button>
               </li>
             );
@@ -100,7 +145,7 @@ export function ThemeSwitcher({ value, onChange, labels, id: idProp, variant = '
     label: (
       <span className="theme-switcher__item">
         <Icon name={icon} size="sm" />
-        {text[option]}
+        {text[option]()}
       </span>
     ),
   }));
@@ -115,7 +160,7 @@ export function ThemeSwitcher({ value, onChange, labels, id: idProp, variant = '
         onValueChange={(next) => onChange?.(next as Theme)}
         items={items}
         trigger={
-          <Button variant="ghost" size={size} iconOnly aria-label={`${text.group}: ${text[current.value]}`}>
+          <Button variant="ghost" size={size} iconOnly aria-label={t('trigger', labels?.trigger)(text.group(), text[current.value]())}>
             <Icon name={current.icon} size="md" />
           </Button>
         }
@@ -127,7 +172,7 @@ export function ThemeSwitcher({ value, onChange, labels, id: idProp, variant = '
   return (
     <DropdownField
       id={id}
-      label={text.group}
+      label={text.group()}
       inline={layout === 'inline'}
       size={size}
       className={classes}
@@ -136,7 +181,7 @@ export function ThemeSwitcher({ value, onChange, labels, id: idProp, variant = '
       items={items}
     >
       <Icon name={current.icon} size="sm" />
-      {text[current.value]}
+      {text[current.value]()}
     </DropdownField>
   );
 }

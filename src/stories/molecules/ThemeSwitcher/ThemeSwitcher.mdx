@@ -33,8 +33,8 @@ El componente muestra y elige. **Aplicar el tema y recordarlo es del producto**:
 
 ## Accesibilidad
 
-- En compacto, la etiqueta (`labels.group`, "Tema") nombra el control por `id`, y este abre un menú de `menuitemradio` que se recorre con las flechas; en lista, un `group` con nombre y **un botón por tema**, con `aria-pressed` en el vigente — un grupo de conmutadores. La opción vigente sigue siendo enfocable: sacada del tabulador (como texto plano) no se podía descubrir con el teclado ni leer su estado.
-- Los textos entran por `labels`, con castellano por defecto: el producto multiidioma pasa los suyos.
+- En compacto, la etiqueta (`themeSwitcher.group`, «Tema») nombra el control por `id`, y este abre un menú de `menuitemradio` que se recorre con las flechas; en lista, un `group` con nombre y **un botón por tema**, con `aria-pressed` en el vigente — un grupo de conmutadores. La opción vigente sigue siendo enfocable: sacada del tabulador (como texto plano) no se podía descubrir con el teclado ni leer su estado.
+- Los textos salen de `themeSwitcher.*` del `BrandMessagesProvider`, sin default; `labels` los anula clave a clave en un uso concreto. El nombre del botón de `icon` lo compone `themeSwitcher.trigger`, una función que recibe el nombre del control y el del tema vigente, porque el orden y la puntuación («Tema: Sistema») son del idioma.
 - Los iconos son decorativos; el texto siempre está.
 
 ## Tokens

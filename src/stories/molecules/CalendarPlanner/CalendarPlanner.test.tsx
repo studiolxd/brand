@@ -201,4 +201,13 @@ describe('CalendarPlanner — vista de semana', () => {
       screen.getAllByRole('gridcell').filter((c) => c.getAttribute('aria-current') === 'date'),
     ).toHaveLength(1);
   });
+
+  it('con `today` marca ese día y abre su semana, sin mirar el reloj (SSR)', () => {
+    render(<CalendarPlanner view="week" today={new Date(2031, 4, 14)} />);
+    const hoy = screen
+      .getAllByRole('columnheader')
+      .filter((c) => c.getAttribute('aria-current') === 'date');
+    expect(hoy).toHaveLength(1);
+    expect(hoy[0].textContent).toContain('14');
+  });
 });

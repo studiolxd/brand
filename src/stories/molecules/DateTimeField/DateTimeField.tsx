@@ -66,6 +66,8 @@ export interface DateTimeFieldProps {
   yearGridLabel?: DatePickerProps['yearGridLabel'];
   /** aria-label de la rejilla de días. Sin él, el nombre del panel. */
   gridLabel?: DatePickerProps['gridLabel'];
+  /** El «hoy» del calendario. Default: la fecha actual. En SSR conviene pasarla (ver `Calendar`). */
+  today?: DatePickerProps['today'];
   /** aria-label del desplegable de horas. Sin él, `timeSelect.hours`. */
   hoursLabel?: string;
   /** aria-label del desplegable de minutos. Sin él, `timeSelect.minutes`. */
@@ -120,6 +122,7 @@ export const DateTimeField = forwardRef<HTMLInputElement, DateTimeFieldProps>(fu
   nextYearsLabel,
   yearGridLabel,
   gridLabel,
+  today,
   hoursLabel,
   minutesLabel,
   onChange,
@@ -193,6 +196,7 @@ export const DateTimeField = forwardRef<HTMLInputElement, DateTimeFieldProps>(fu
           nextYearsLabel={nextYearsLabel}
           yearGridLabel={yearGridLabel}
           gridLabel={gridLabel}
+          today={today}
         />
         <TimeSelect
           value={getTimeValue(value)}
