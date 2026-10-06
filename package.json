@@ -950,6 +950,7 @@
   "files": [
     "dist",
     "src/tokens",
+    "!src/tokens/**/*.test.ts",
     "CHANGELOG.md"
   ],
   "publishConfig": {

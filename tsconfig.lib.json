@@ -39,6 +39,8 @@
     "src/stories/**/*.stories.tsx",
     "src/stories/**/*.test.tsx",
     "src/stories/**/*.test.ts",
-    "src/stories/foundations/**"
+    "src/stories/foundations/**",
+    "src/stories/pages/**",
+    "src/stories/data/**"
   ]
 }
