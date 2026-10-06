@@ -8,16 +8,19 @@ Los componentes de la librería emiten textos por su cuenta: etiquetas accesible
 texto para lectores de pantalla) y, en algunos casos, texto visible en pantalla — un mensaje de
 "sin resultados", el sumario de una paginación, la zona de arrastre de un campo de archivos.
 
-Hay **dos formas** de que esos textos lleguen traducidos, y el sistema está migrando de la
+Hubo **dos formas** de que esos textos llegaran traducidos, y el sistema ya ha migrado de la
 primera a la segunda:
 
-1. **Props de texto con default castellano** — la convención histórica. Hoy solo la conservan
-   unos pocos componentes, y la tabla de más abajo los señala uno a uno (`CloseButton`,
-   `ThemeSwitcher`, la dirección de `StatTile`, la vista de semana de `CalendarPlanner` y el pie
-   de baja de `EmailLayout`).
-2. **El proveedor de textos** (`BrandMessagesProvider`) — el destino: el texto sale del catálogo
-   de la aplicación y **no hay default**, así que olvidarlo es un error, no un castellano mudo.
-   Hoy lo leen unos 88 componentes, repartidos en 85 espacios del catálogo.
+1. **Props de texto con default castellano** — la convención histórica. **Ya no la conserva
+   ningún componente**: los últimos (`CloseButton`, `ThemeSwitcher`, la dirección de `StatTile`,
+   la vista de semana de `CalendarPlanner` y la entrada vacía de `SidebarNav`) pasaron al
+   catálogo.
+2. **El proveedor de textos** (`BrandMessagesProvider`) — el texto sale del catálogo de la
+   aplicación y **no hay default**, así que olvidarlo es un error, no un castellano mudo. Hoy lo
+   leen unos 91 componentes, repartidos en 88 espacios del catálogo.
+
+El correo es la excepción declarada: no lee el proveedor, y sus textos son **props obligatorias
+sin default** (ver § «Las excepciones: el correo»).
 
 ## El proveedor de textos
 
@@ -60,12 +63,13 @@ espacios de los átomos de formulario —`inputField`, `passwordField`, `select`
 `siteSearch`, `docsSearch`, `filterBar` y `recurrenceField`—, los de fecha y hora —`calendar`,
 `datePicker`, `timeSelect` y `clockWidget`—, el del color —`colorPicker`—, los
 de subida y diálogo —`fileUpload`, `imageCropDialog`, `avatarUpload`, `modal`, `sheet`,
-`confirmDialog`, `alert`, `banner` y `toaster`—, los de los envoltorios de diálogo —`consent`,
+`confirmDialog`, `alert`, `banner`, `toaster` y `closeButton`—, los de los envoltorios de diálogo —`consent`,
 `commandPalette`, `appLauncher`, `floatingDock`, `notificationButton` y `notificationPanel`—, los
 del cromo de aplicación y navegación —`menuButton`, `appRoot`, `appShell`, `appHeader`, `sidebar`,
 `sidebarNav`, `siteNav`, `siteHeader`, `userMenu`, `orgSwitcher`, `breadcrumb`,
-`tableOfContents`, `prevNextNav`, `publicPageShell` y `onboardingShell`— y los de copiar, datos y
-estado —`copy`, `codeBlock`, `dotsButton`, `progressBar`, `spinner`, `slider`, `treeView`,
+`tableOfContents`, `prevNextNav`, `publicPageShell`, `onboardingShell` y `themeSwitcher`— y los
+de copiar, datos y estado —`copy`, `codeBlock`, `dotsButton`, `statTile`, `progressBar`, `spinner`,
+`slider`, `treeView`,
 `uptimeBars`, `chart`, `heatmap`, `timeline`, `orgChart`, `planningGrid`, `stepper`, `carousel`,
 `languageSwitcher`, `projectCard`, `legalFooter`, `calendarRoster`, `calendarPlanner`,
 `notificationList` y `untrustedText`—, los de la conversación —`messageComposer`,
@@ -86,7 +90,7 @@ A partir de ahí, un componente migrado se monta **sin una sola prop de texto**:
   satisface — nunca al revés. Si el tipo se generase desde el JSON de una suite, el DS dependería
   de un paquete de producto para declarar su propio contrato.
 - **Anidado por componente, no plano.** Un espacio por componente (`pagination`, `table`,
-  `dataTable`, y los que vengan), calcando los que el catálogo de la suite ya tiene. Son 298 textos en 85 espacios: una lista plana de
+  `dataTable`, y los que vengan), calcando los que el catálogo de la suite ya tiene. Son 311 textos en 88 espacios: una lista plana de
   claves sueltas no se puede escribir ni revisar.
 - **Todas las claves son obligatorias** dentro de su espacio, como en `RecoveryCodesLabels`. Una
   app que se deje una **no compila**: ese es el punto entero del mecanismo.
@@ -121,37 +125,32 @@ viaja dentro del `.js` compilado y se alcanza desde cualquier app que olvide un 
 
 ## La convención histórica (props con default)
 
-Mientras el componente no esté migrado al proveedor, cada texto que emite por su cuenta es una
-**prop opcional con el texto castellano como valor por defecto**. Una aplicación multiidioma que
-no las pase **pierde sus traducciones**: un usuario de lector de pantalla en inglés o en alemán
-oye "Cerrar" o "Tema: Claro" en medio de una interfaz traducida — el fallo silencioso que el
-proveedor viene a cerrar.
+Antes del proveedor, cada texto que un componente emitía por su cuenta era una **prop opcional
+con el texto castellano como valor por defecto**. Una aplicación multiidioma que no las pasara
+**perdía sus traducciones**: un usuario de lector de pantalla en inglés o en alemán oía "Cerrar"
+o "Tema: Claro" en medio de una interfaz traducida — el fallo silencioso que el proveedor cierra.
+**Ya no queda ningún componente así.**
 
 ```tsx
-// sin props → castellano
-<CloseButton onClick={close} />   {/* aria-label="Cerrar" */}
+// sin props → del catálogo (`closeButton.label`, `themeSwitcher.*`)
+<CloseButton onClick={close} />
 <ThemeSwitcher value={theme} onChange={setTheme} />
 
-// con props → los textos del consumidor
-<CloseButton onClick={close} label={t('common.close')} />
-<ThemeSwitcher
-  value={theme}
-  onChange={setTheme}
-  labels={{ group: t('theme.group'), light: t('theme.light'), dark: t('theme.dark'), system: t('theme.system') }}
-/>
+// con props → la anulación puntual de ESTE uso
+<CloseButton onClick={close} label={t('notice.dismiss')} />
+<ThemeSwitcher value={theme} onChange={setTheme} labels={{ group: t('settings.appearance') }} />
 ```
 
-Reglas de la convención:
+De la convención siguen en pie las reglas de forma, que valen para las props de anulación:
 
-- **El default es siempre el texto castellano actual**, así que añadir la prop nunca es un
-  breaking change ni cambia el marcado de quien no la pasa.
 - **Nombre `<cosa>Label`** para etiquetas accesibles y textos cortos; `<cosa>Message` para
   mensajes; `<cosa>Error` para textos de error; `<cosa>Hint`/`<cosa>Placeholder` para pistas.
 - **Función en vez de string** cuando el texto interpola un valor:
   `pageLabel?: (page: number) => string`, no un string con marcador.
 - **Listas de opciones se traducen pasando la lista entera**, no con una prop de texto por
   elemento: `pageSizeOptions` en `Pagination`, `legendItems` en `CalendarRoster`.
-- **El JSDoc de la prop dice cuál es el default y que es castellano**, para que se vea desde el
+- **El JSDoc de la prop dice de qué clave del catálogo sale el texto cuando falta** («**Sin
+  default**: sin él, sale de `x.y` del `BrandMessagesProvider`»), para que se vea desde el
   autocompletado del editor.
 
 ## Fechas y números
@@ -228,7 +227,7 @@ La misma regla, aplicada a la familia de subidas:
 | `TimeSelect`, `TimeField` | **Migrado al proveedor** (`timeSelect.hours`, `.minutes`, `.maskHours`, `.maskMinutes`, sin defaults). Las cuatro props (`hoursLabel`, `minutesLabel`, `hoursPlaceholder`, `minutesPlaceholder`) siguen como anulación puntual; `TimeField` reenvía las dos primeras. Las **máscaras** están en el catálogo porque `HH`/`MM` se traducen (`SS`/`MM` en alemán); el dibujo —dos cifras y los dos puntos— no. `label`, `helperText` y `errorMessage` de `TimeField` quedan fuera: son el contenido de ese campo |
 | `InputPhone`, `InputPhoneField` | **Migrado al proveedor** (`inputPhone.country`, sin default); `countryLabel` sigue como anulación puntual. `internationalLabel` **conserva su default** (`🌐`): un glifo no se traduce, y meterlo en el catálogo obligaría a repetirlo seis veces |
 | `Calendar` | **Migrado al proveedor** (`calendar.previousMonth`, `.nextMonth`, `.previousYears`, `.nextYears`, `.yearGrid`, sin defaults). Las cinco props siguen como anulación puntual. `gridLabel` queda **fuera** del proveedor: nombra a ESE calendario, y sin él la rejilla toma el título del mes. Meses, días, cifras del año y el nombre de cada celda salen de `locale` con `Intl`: no son texto |
-| `CalendarPlanner` | **Migrado al proveedor** (`calendarPlanner.more`, sin default) — el botón de desbordamiento, que interpola la cuenta y por eso es función. Las dos flechas siguen en `calendar.previousMonth` / `.nextMonth`, el mismo espacio que `Calendar`, porque es literalmente el mismo texto. `gridLabel` queda fuera: nombra a ESE planificador. Los cinco textos de la **vista de semana** (`previousWeekLabel`, `nextWeekLabel`, `monthViewLabel`, `weekViewLabel`, `viewSwitcherLabel`) van todavía en props con default castellano: sumarlos al catálogo como claves obligatorias dejaría sin compilar a quien ya lo tiene montado, y la semana llegó en un minor — pasan al catálogo en el próximo major |
+| `CalendarPlanner` | **Migrado al proveedor** (`calendarPlanner.more`, sin default) — el botón de desbordamiento, que interpola la cuenta y por eso es función. Las dos flechas siguen en `calendar.previousMonth` / `.nextMonth`, el mismo espacio que `Calendar`, porque es literalmente el mismo texto. `gridLabel` queda fuera: nombra a ESE planificador. Los cinco textos de la **vista de semana** también están en su espacio (`calendarPlanner.previousWeek`, `.nextWeek`, `.monthView`, `.weekView`, `.viewSwitcher`, sin defaults; las props `previousWeekLabel`, `nextWeekLabel`, `monthViewLabel`, `weekViewLabel` y `viewSwitcherLabel` siguen como anulación puntual): las flechas solo se leen en la vista de semana con `navigable`, y los tres del conmutador solo con `viewSwitcher`. Entraron como props con default castellano en un minor y pasaron al catálogo en el major siguiente |
 | `CalendarRoster` | **Migrado al proveedor** (`calendarRoster.name`, `.legend` y los seis tipos `.holiday`, `.vacation`, `.absence`, `.recovery`, `.birthday`, `.nonWorking`, sin defaults); las dos flechas siguen en `calendar.previousMonth` / `.nextMonth`. **Los seis tipos van clave a clave y no como lista**, contra la regla general: es un vocabulario **cerrado** del componente, y montar el array con sus `type` correctos solo para traducir seis palabras era peor. `legendItems` sigue sustituyendo la leyenda **entera** —otro orden, otros tipos— y gana. `birthdayPrefix` queda fuera: es un emoji, y un emoji no se traduce |
 | `Table` (`TableHeader`) | **Migrado al proveedor** (`table.*`, sin defaults). Las props `actionsLabel`, `sortedAscLabel`, `sortedDescLabel` y `sortableLabel` siguen existiendo como anulación puntual |
 | `Table` (`TableProps`) | `caption` — el nombre de ESTA tabla, sin default y **fuera del proveedor**: no lo puede saber un catálogo común |
@@ -238,7 +237,7 @@ La misma regla, aplicada a la familia de subidas:
 | `CopyableValue` | **Migrado al proveedor** (`copy.label`, `copy.copied`, sin defaults) — el **mismo espacio** que `CopyButton`: son literalmente las mismas dos palabras. `copyText` no es texto de interfaz, es el dato que se copia |
 | `Alert` | **Migrado al proveedor** (`alert.close`, sin default). `closeLabel` sigue como anulación puntual, y solo se lee cuando hay `dismissible`. `title`, `description`, `children` y lo que digan las `actions` quedan fuera: el aviso cuenta qué ha pasado en ESA pantalla |
 | `Banner` | **Migrado al proveedor** (`banner.dismiss`, sin default). `dismissLabel` sigue como anulación puntual, y solo se lee cuando hay `onDismiss`. Lo que la barra cuenta y lo que ofrezca su acción son contenido de la aplicación |
-| `CloseButton` | `label` — **conserva su default castellano** (`'Cerrar'`); no está en el catálogo |
+| `CloseButton` | **Migrado al proveedor** (`closeButton.label`, sin default); `label` sigue como anulación puntual. Los componentes que montan el aspa (`Modal`, `Sheet`, `Alert`, `Banner`, `Toaster`, `FloatingDock`) le pasan siempre el texto de su propio espacio, así que `closeButton.label` solo se lee con el aspa suelta |
 | `Toaster` | **Migrado al proveedor** (`toaster.container`, `toaster.close`, sin defaults). Las dos props siguen como anulación puntual; `toaster.close` solo se lee con `closeButton`. El título, la `description` y el `label` de la `action` de cada `toast(...)` los pone quien lanza el aviso — el `label` nunca tuvo default. **El `Toaster` se monta dentro del `BrandMessagesProvider`** |
 | `ConversationThread` | **Migrado al proveedor** (`conversationThread.label`, sin default); `ariaLabel` sigue como anulación puntual. El estado de escritura **no es suyo**: lo pinta el `TypingIndicator` (`typingIndicator.typing`) y el hilo solo lo reenvía. `streamingName` es **obligatoria y sin default** —el nombre del asistente es contenido—, y `streamingLabel` sustituye la frase entera. `locale` y `timestampFormat` son formato |
 | `ConversationList` | **Migrado al proveedor** (`conversationList.new`, `.nav`, `.delete`, `.empty`, `.error`, sin defaults). Las cinco props siguen como anulación puntual, y cada texto se lee **donde se pinta**: una lista que carga bien no exige el título del aviso de error. `delete` interpola el título, así que es función. El **mensaje** de `error`, los títulos de `conversations` y `emptyDescription` quedan fuera: son datos de la pantalla — `emptyDescription` nunca tuvo clave de catálogo |
@@ -276,14 +275,14 @@ La misma regla, aplicada a la familia de subidas:
 | `FilterBar` | **Migrado al proveedor** (`filterBar.label`, sin default) — el nombre del punto de referencia `search`. Los rótulos de los filtros no pasan por el catálogo: los escribe cada campo |
 | `SearchForm` | **Migrado al proveedor** (`searchForm.label`, `.placeholder`, `.submit`, sin defaults). Las tres props siguen como anulación puntual |
 | `DataTable` | **Migrado al proveedor** (`dataTable.*`, sin defaults): `searchPlaceholder` cae en `dataTable.search` y `emptyMessage` en `dataTable.empty`, y las dos props siguen como anulación puntual. `ariaLabel`/`ariaLabelledBy` (el nombre de la tabla) quedan fuera del proveedor: son de esta pantalla, igual que `emptyDescription` (segunda frase del estado vacío, sin clave de catálogo). `searchClearLabel` es un **reenvío puro** al `InputField`, que desde la ola de formularios lee `inputField.clear` por su cuenta: ya no hace falta pasarlo para traducir. `headerLabels` y `paginationLabels` ya no hacen falta para traducir: sus piezas leen del proveedor solas |
-| `StatTile` | `delta.label` para leer la dirección de la tendencia. Sin él, el texto oculto sale de un **default castellano** interno (`up` → «Sube», `down` → «Baja», `flat` → «Sin cambio»), que no está en el catálogo y solo se cambia dato a dato |
-| `ThemeSwitcher` | `labels` (`group`, `light`, `dark`, `system`) — **conserva su default castellano** (`Tema`, `Claro`, `Oscuro`, `Sistema`), clave a clave; no está en el catálogo. En la variante `icon` el nombre del botón compone `` `${group}: ${tema}` `` con el separador fijo |
+| `StatTile` | **Migrado al proveedor** (`statTile.up`, `.down`, `.flat`, sin defaults) — la dirección de la tendencia, que solo oye un lector de pantalla. `delta.label` sigue como anulación de ESA cifra. Una baldosa sin `delta` no exige ninguno de los tres |
+| `ThemeSwitcher` | **Migrado al proveedor** (`themeSwitcher.group`, `.light`, `.dark`, `.system`, `.trigger`, sin defaults); `labels` sigue como anulación puntual, clave a clave. **`trigger` es función**: compone el nombre del botón de la variante `icon` («Tema: Claro») con el nombre del control y el tema vigente ya resueltos, porque el orden y la puntuación de la frase son del idioma |
 | `CopyButton` | **Migrado al proveedor** (`copy.label`, `.copied`, `.error`, sin defaults). **`copy` es un espacio de conducta y no de componente**, la primera excepción a «un espacio por componente»: las mismas tres palabras las dicen `CopyableValue`, `DescriptionDetails copyable` y el acuse de `CodeBlock`, y el catálogo de la suite también las tiene una sola vez (`common.copy`, `common.copied`). `copy.label` solo se lee sin rótulo visible; `copy.error`, solo cuando el portapapeles falla |
 | `ConfirmDialog` | **Migrado al proveedor** (`confirmDialog.cancel`, `confirmDialog.pending`, sin defaults). **`confirmLabel` pasa a ser obligatoria y sin default, y NO va al catálogo**: es donde se toma la decisión y tiene que nombrar la consecuencia («Borrar la organización»); un `common.confirm` la dejaría diciendo «Confirmar» en todas partes sin que nada fallara. `cancelLabel` sí es cromo —«Cancelar» describe lo único que hace ese botón, no seguir— y `pendingLabel` también, porque es un **estado** sobre un botón ya deshabilitado y nadie decide nada leyéndolo. `closeLabel` es reenvío puro al `Modal`. `secondaryActionLabel`, `confirmPhraseLabel` y `confirmPhraseMismatch` siguen siendo texto del producto, sin default |
 | `StarRating` | `valueLabel`, `countLabel`, `emptyLabel`, `optionLabel`, `groupLabel` — **obligatorias y sin default**: el componente recibe su texto, no lo trae puesto. Cada una se exige cuando el componente puede emitirla (`valueLabel` en lectura; `countLabel` con `reviewCount`; `emptyLabel` si `value` puede ser `null`; `optionLabel` y `groupLabel` en entrada). No tiene `locale`: no escribe ningún número |
 | `Slider` | **Migrado al proveedor** (`slider.value`, `.min`, `.max`, `.valueAt`, sin defaults), y cada clave se lee donde se pinta: un deslizador de un pulgar no exige las del rango. `label` dice qué mide y gana sobre `slider.value`; `thumbLabel` sustituye el nombre de todos los pulgares. `format` y `locale` son formato |
 | `TreeView` | **Migrado al proveedor** (`treeView.label`, sin default) — el nombre **genérico**; el de ESE árbol sigue en la prop, que gana. Los rótulos de los nodos son datos |
-| `SidebarNav` | **Migrado al proveedor** (`sidebarNav.label`, `.empty`, sin defaults). Las dos props siguen como anulación puntual; `sidebarNav.empty` solo se lee cuando hay alguna entrada `empty`. Los rótulos de `entries` son datos |
+| `SidebarNav` | **Migrado al proveedor** (`sidebarNav.label`, `.empty`, `.emptyEntry`, sin defaults). Las tres props (`label`, `emptyLabel`, `emptyEntryLabel`) siguen como anulación puntual; `empty` solo se lee cuando hay alguna entrada `empty`. **`emptyEntry` es función**: nombra en una sola cadena una entrada vacía donde la marca no va aparte (el tooltip y el nombre accesible del modo rail, el rótulo del menú de un grupo), y recibe el rótulo y la marca ya resueltos — el orden y el separador son del idioma. Los rótulos de `entries` son datos |
 | `AnnotationThread` | **Migrado al proveedor** (`annotationThread.label`, `.open`, `.acknowledged`, `.resolved`, `.edited`, `.replies`, sin defaults). **Los tres estados van clave a clave y no como lista**, contra la regla general: es un vocabulario **cerrado** del componente —abierta, atendida, resuelta—, el mismo caso que los seis tipos de `CalendarRoster`. Las props siguen ganando, así que una revisión puede llamar «Verificada» a `acknowledged`. `replies` lleva el plural, así que es función. Cada texto se lee donde se pinta: un hilo abierto no exige los otros dos rótulos. `locale` y `dateFormat` son formato |
 | `ScrollArea` | `label` — el nombre accesible de la región desplazable |
 | `ProgressBar` | **Migrado al proveedor** (`progressBar.label`, sin default) — el nombre **genérico** («Progreso»); qué avanza de verdad en ESA pantalla («Subiendo el vídeo») sigue en la prop, que gana. La cifra es un número, no texto |
@@ -301,7 +300,7 @@ La misma regla, aplicada a la familia de subidas:
 | `Switcher` | **No emite ningún texto.** Lo nombra la etiqueta de su campo (`SwitcherField`) |
 | `FloatingDock` | **Migrado al proveedor, con espacio propio** (`floatingDock.close`, `floatingDock.badge`, sin defaults). **No hereda `modal.close`, a propósito**: su panel no es un `Modal` —es un diálogo no modal, sin velo, que no atrapa el foco, montado por portal dentro del propio ancla y anclado a una esquina—, así que hacerlo pasar por `Modal` habría sido cambiar el componente, no quitar una clave. `label` (el nombre del lanzador) sigue **obligatorio y fuera del catálogo**: nombra lo que el dock abre, y eso lo sabe el producto |
 | `AppLauncher` | **Migrado al proveedor** (`appLauncher.open`, `.new`, `.title`, sin defaults). `labels` **deja de ser obligatoria** y queda como anulación puntual, clave a clave. `labels.trigger` **no va al catálogo**: no es un texto de más, su presencia decide la cara del disparador (solo icono, o icono con rótulo), y un texto de catálogo está siempre presente — es una decisión de maqueta del sitio donde se monta. Los nombres de las apps viajan en `apps`, y con ellos el `badge` de cada una («Próximamente», «Beta»), ya traducido — `isNew` es la excepción y por eso su texto sí es cromo: no trae texto, solo enciende el del catálogo |
-| `EmailLayout` | `optOut.manageLabel`, `optOut.unsubscribeLabel`, `optOut.manageBeforeLabel`, `optOut.managePreferencesLabel`, `optOut.manageAfterLabel` — la frase de baja, partida porque los idiomas no coinciden en si hay texto tras el enlace |
+| `EmailLayout` | `optOut.manageLabel`, `optOut.unsubscribeLabel`, `optOut.manageBeforeLabel`, `optOut.managePreferencesLabel`, `optOut.manageAfterLabel` (**obligatorias, sin default**; el tipo pide las que use cada forma del pie) — la frase de baja, partida porque los idiomas no coinciden en si hay texto tras el enlace. No leen el proveedor: ver § «Las excepciones: el correo» |
 | `EmailLayout` (pie sin cuenta) | `optOut.reasonLabel` y `optOut.unsubscribeLabel` (**obligatorias, sin default**) — el motivo por el que le llega el correo a quien no tiene cuenta, y la frase de baja que lo cierra |
 | `EmailButton` | `fallbackLabel` (**obligatoria, sin default**) — la frase que presenta el enlace de respaldo |
 | `LanguageSwitcher` | **Migrado al proveedor** (`languageSwitcher.label`, sin default) — la etiqueta del control. **Los nombres de los idiomas no van al catálogo, y no es olvido**: cada uno va en su propio idioma, precisamente para que se reconozca sin entender la interfaz, y viajan en `languages` |
@@ -339,10 +338,10 @@ pinta. Sin default castellano.
 suite** —«Acciones», «Ordenado ascendente», el aviso de una tabla vacía—: es cromo del
 componente. Lo que es contenido de una pantalla concreta —el `caption` de ESA tabla, el vacío
 que explica algo del dominio, el nombre de una fila— **se queda como prop y sin default**: un
-catálogo común no puede saberlo, y meterlo ahí es peor error que dejarlo fuera. Mientras un componente siga sin migrar, su prop mantiene el
-default castellano y su JSDoc lo dice.
+catálogo común no puede saberlo, y meterlo ahí es peor error que dejarlo fuera. Ningún
+componente trae ya default castellano, y uno nuevo tampoco.
 
-### Las excepciones: `EmailButton.fallbackLabel` y el pie de correo sin cuenta
+### Las excepciones: el correo
 
 `fallbackLabel` es obligatoria y **sin default castellano**. Dos razones, y las dos apuntan al
 mismo sitio: el correo de la suite vive en seis idiomas que conoce `mailer` y no el DS, y un botón
@@ -354,3 +353,12 @@ cuenta** (`EmailOptOutGuest`), por la misma lógica: el motivo por el que a algu
 llega un correo lo sabe el producto que lo manda —no el DS—, y siendo el enlace una frase entera
 que cierra ese motivo, ningún default podría encajar. Obligatorias, para que ninguna plantilla
 mande una baja sin decir de qué.
+
+Y los cinco textos del **pie de correo con cuenta** (`EmailOptOutAccount`: `manageLabel`,
+`unsubscribeLabel`, `manageBeforeLabel`, `managePreferencesLabel`, `manageAfterLabel`), que
+tenían default castellano y lo perdieron con el resto. **No pasan al catálogo**, porque el correo
+no lee el `BrandMessagesProvider`: se escribe en el idioma de quien lo **recibe**, que no es el de
+quien navega la aplicación (el catálogo montado en su raíz), y se renderiza fuera de su árbol —una
+cola, un manejador de ruta—, donde no hay proveedor que leer. Son obligatorios según la forma del
+pie: sin `preferencesUrl`, `manageLabel` y `unsubscribeLabel`; con ella, los otros cuatro (ver la
+doc de `EmailLayout` § «El pie de baja»).

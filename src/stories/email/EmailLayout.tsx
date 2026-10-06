@@ -25,35 +25,80 @@ import {
 interface EmailOptOutBase {
   /** Baja directa, de un clic, de la categoría de aviso de este correo. */
   unsubscribeUrl: string;
-  /** Texto del enlace de baja. */
-  unsubscribeLabel?: string;
+}
+
+/*
+ * Los textos del pie de quien tiene cuenta son **obligatorios y sin default
+ * castellano**, como el `fallbackLabel` de `EmailButton`: el correo no lee el
+ * `BrandMessagesProvider`. Un correo se escribe en el idioma de quien lo
+ * RECIBE, que no es el de la petición que lo dispara (el catálogo montado en
+ * la raíz de la app es el de quien navega), y se renderiza fuera del árbol de
+ * la app —un trabajo en cola, un manejador de ruta—, donde no hay proveedor
+ * que leer. El idioma lo conoce quien manda el correo, y es quien pasa sus
+ * textos.
+ *
+ * Qué textos hacen falta depende de si hay `preferencesUrl`: el pie de un
+ * solo enlace usa `manageLabel` + `unsubscribeLabel`; el pie completo,
+ * `unsubscribeLabel` + `manageBeforeLabel` + `managePreferencesLabel` +
+ * `manageAfterLabel`. El tipo lo exige así: sin preferencias, los dos
+ * primeros; con preferencias, los cuatro segundos; y con una
+ * `preferencesUrl` que puede faltar (`string | undefined`), los cinco.
+ */
+
+interface EmailOptOutAccountLabels {
+  /**
+   * Texto del enlace de baja. Sin preferencias es la continuación de
+   * `manageLabel` («Para dejar de recibir estos avisos, **date de baja**»);
+   * con preferencias, el arranque de la frase («**Darse de baja** o …»).
+   */
+  unsubscribeLabel: string;
+  /** Frase que precede al enlace en el pie de un solo enlace. */
+  manageLabel: string;
+  /** Texto entre los dos enlaces del pie completo (« o »). */
+  manageBeforeLabel: string;
+  /** Texto del enlace a preferencias. */
+  managePreferencesLabel: string;
+  /** Texto tras el enlace a preferencias (el punto final, en castellano). */
+  manageAfterLabel: string;
+  reasonLabel?: never;
+}
+
+/** Sin pantalla de preferencias: el pie de un solo enlace. */
+interface EmailOptOutAccountSingle
+  extends EmailOptOutBase,
+    Pick<EmailOptOutAccountLabels, 'unsubscribeLabel' | 'manageLabel' | 'reasonLabel'>,
+    Partial<Pick<EmailOptOutAccountLabels, 'manageBeforeLabel' | 'managePreferencesLabel' | 'manageAfterLabel'>> {
+  preferencesUrl?: undefined;
+}
+
+/** Con pantalla de preferencias: el pie completo, de dos enlaces. */
+interface EmailOptOutAccountFull
+  extends EmailOptOutBase,
+    Omit<EmailOptOutAccountLabels, 'manageLabel'>,
+    Partial<Pick<EmailOptOutAccountLabels, 'manageLabel'>> {
+  /**
+   * Pantalla donde elegir categoría a categoría, para quien quiera conservar
+   * algunas.
+   */
+  preferencesUrl: string;
+}
+
+/** Con una `preferencesUrl` que puede o no llegar: los cinco textos. */
+interface EmailOptOutAccountEither extends EmailOptOutBase, EmailOptOutAccountLabels {
+  preferencesUrl?: string;
 }
 
 /**
  * El pie de quien **tiene cuenta** en la suite: puede darse de baja y, si el
- * producto tiene la pantalla, elegir categoría a categoría.
+ * producto tiene la pantalla, elegir categoría a categoría. Sus textos son
+ * obligatorios (ver arriba): los que pida la forma del pie.
+ *
+ * `preferencesUrl` es opcional a propósito: las apps que mandaban correo antes
+ * de que existiera el paquete solo construyen un enlace de baja, sin pantalla
+ * de preferencias detrás. Omitirla deja el pie de un solo enlace en vez de
+ * obligar a cada llamada a inventarse una URL que no tiene.
  */
-export interface EmailOptOutAccount extends EmailOptOutBase {
-  /**
-   * Pantalla donde elegir categoría a categoría, para quien quiera conservar
-   * algunas.
-   *
-   * Opcional a propósito: las apps que mandaban correo antes de que existiera
-   * el paquete solo construyen un enlace de baja, sin pantalla de preferencias
-   * detrás. Omitirlo deja el pie de un solo enlace en vez de obligar a cada
-   * llamada a inventarse una URL que no tiene.
-   */
-  preferencesUrl?: string;
-  /** Frase que precede al enlace en el pie de un solo enlace. Por defecto, en castellano. */
-  manageLabel?: string;
-  /** Texto entre los dos enlaces del pie completo. Por defecto, en castellano. */
-  manageBeforeLabel?: string;
-  /** Texto del enlace a preferencias. Por defecto, en castellano. */
-  managePreferencesLabel?: string;
-  /** Texto tras el enlace a preferencias. Por defecto, en castellano. */
-  manageAfterLabel?: string;
-  reasonLabel?: never;
-}
+export type EmailOptOutAccount = EmailOptOutAccountSingle | EmailOptOutAccountFull | EmailOptOutAccountEither;
 
 /**
  * El pie de quien **no tiene cuenta**: el invitado a una revisión, el que
@@ -111,26 +156,30 @@ function EmailOptOutBlock(optOut: EmailOptOut) {
     );
   }
 
-  const {
-    unsubscribeUrl,
-    preferencesUrl,
-    manageLabel = 'Para dejar de recibir estos avisos,',
-    unsubscribeLabel = preferencesUrl ? 'Darse de baja' : 'date de baja',
-    manageBeforeLabel = ' o ',
-    managePreferencesLabel = 'gestiona tus preferencias',
-    manageAfterLabel = '.',
-  } = optOut;
+  const { unsubscribeUrl, preferencesUrl, unsubscribeLabel } = optOut;
+  // El tipo ya exige los textos de cada forma del pie; esto es la red para
+  // quien llama desde JavaScript o con un `as`: sin texto no se manda un pie
+  // con un hueco, se avisa de cuál falta.
+  const texto = (nombre: keyof EmailOptOutAccountLabels, valor: string | undefined): string => {
+    if (valor === undefined) {
+      throw new Error(
+        `@studiolxd/brand/email: falta «optOut.${nombre}». El pie de baja no trae ` +
+          'textos puestos: los pasa quien manda el correo, en el idioma del destinatario.',
+      );
+    }
+    return valor;
+  };
 
   const link = (
     <Link href={unsubscribeUrl} style={emailStyles.link}>
-      {unsubscribeLabel}
+      {texto('unsubscribeLabel', unsubscribeLabel)}
     </Link>
   );
 
   if (!preferencesUrl) {
     return (
       <Text style={emailStyles.footnote}>
-        {manageLabel} {link}
+        {texto('manageLabel', optOut.manageLabel)} {link}
       </Text>
     );
   }
@@ -138,11 +187,11 @@ function EmailOptOutBlock(optOut: EmailOptOut) {
   return (
     <Text style={emailStyles.footnote}>
       {link}
-      {manageBeforeLabel}
+      {texto('manageBeforeLabel', optOut.manageBeforeLabel)}
       <Link href={preferencesUrl} style={emailStyles.link}>
-        {managePreferencesLabel}
+        {texto('managePreferencesLabel', optOut.managePreferencesLabel)}
       </Link>
-      {manageAfterLabel}
+      {texto('manageAfterLabel', optOut.manageAfterLabel)}
     </Text>
   );
 }

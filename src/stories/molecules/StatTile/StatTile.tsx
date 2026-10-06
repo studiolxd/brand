@@ -2,10 +2,25 @@ import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react
 import { Icon } from '../../atoms/Icon/Icon';
 import { Tag, type TagVariant } from '../../atoms/Tag/Tag';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './StatTile.css';
 
 export type StatTileDirection = 'up' | 'down' | 'flat';
 export type StatTileTone = 'positive' | 'negative' | 'neutral';
+
+/**
+ * Las tres direcciones del delta, que solo oye un lector de pantalla (la
+ * flecha es decorativa). Dicen hacia dónde se movió la cifra, no qué cifra
+ * es: valen igual en cualquier panel.
+ */
+export interface StatTileMessages {
+  /** La cifra ha subido. */
+  up: string;
+  /** La cifra ha bajado. */
+  down: string;
+  /** La cifra no se ha movido. */
+  flat: string;
+}
 
 export interface StatTileDelta {
   /** La variación, ya formateada: «+12 %», «−3», «igual». */
@@ -19,7 +34,8 @@ export interface StatTileDelta {
   tone?: StatTileTone;
   /**
    * Cómo se lee la dirección para un lector de pantalla, que no ve la flecha.
-   * Default castellano según `direction`.
+   * **Sin default**: sin él, sale de `statTile.up`, `statTile.down` o
+   * `statTile.flat` del `BrandMessagesProvider`, según `direction`.
    */
   label?: string;
 }
@@ -51,12 +67,6 @@ const TAG_VARIANT: Record<StatTileTone, TagVariant> = {
   neutral: 'neutral',
 };
 
-const DIRECTION_LABEL: Record<StatTileDirection, string> = {
-  up: 'Sube',
-  down: 'Baja',
-  flat: 'Sin cambio',
-};
-
 /**
  * La baldosa de una cifra: qué se mide, cuánto vale, cómo se ha movido y qué
  * matiza esa lectura. Es la pieza de los paneles de KPIs; la rejilla la pone
@@ -79,6 +89,7 @@ export const StatTile = forwardRef<HTMLDivElement, StatTileProps>(function StatT
   className,
   ...rest
 }, ref) {
+  const t = useBrandMessages('statTile');
   const classes = [
     'stat-tile',
     size !== 'md' ? `stat-tile--${size}` : '',
@@ -87,8 +98,6 @@ export const StatTile = forwardRef<HTMLDivElement, StatTileProps>(function StatT
 
   const direction = delta?.direction ?? 'flat';
   const tone = delta?.tone ?? TONE_BY_DIRECTION[direction];
-  const directionLabel = delta?.label ?? DIRECTION_LABEL[direction];
-
   return (
     <div ref={ref} className={classes} {...rest}>
       <p className="stat-tile__label">
@@ -107,7 +116,9 @@ export const StatTile = forwardRef<HTMLDivElement, StatTileProps>(function StatT
             size="sm"
             className={`stat-tile__delta-icon stat-tile__delta-icon--${direction}`}
           />
-          <VisuallyHidden>{directionLabel}</VisuallyHidden>
+          {/* Se lee aquí, donde se pinta: una baldosa sin delta no exige
+              ningún texto. */}
+          <VisuallyHidden>{t(direction, delta.label)}</VisuallyHidden>
           {delta.value}
         </Tag>
       )}

@@ -324,9 +324,43 @@ describe.each([
     ],
   ],
   [
+    // Las cinco de la semana entraron como props con default castellano en un
+    // minor; pasaron al catálogo en el major siguiente (D4).
     'CalendarPlanner',
     'src/stories/molecules/CalendarPlanner/CalendarPlanner.tsx',
-    ["'Mes anterior'", "'Mes siguiente'"],
+    [
+      "'Mes anterior'",
+      "'Mes siguiente'",
+      "'Semana anterior'",
+      "'Semana siguiente'",
+      "'Mes'",
+      "'Semana'",
+      "'Vista del calendario'",
+    ],
+  ],
+  [
+    // Los cuatro textos y la frase del botón de icono («Tema: Claro»), cuyo
+    // separador fijo tampoco puede volver: la compone `themeSwitcher.trigger`.
+    'ThemeSwitcher',
+    'src/stories/molecules/ThemeSwitcher/ThemeSwitcher.tsx',
+    ["'Tema'", "'Claro'", "'Oscuro'", "'Sistema'", '}: ${'],
+  ],
+  [
+    'StatTile',
+    'src/stories/molecules/StatTile/StatTile.tsx',
+    ["'Sube'", "'Baja'", "'Sin cambio'"],
+  ],
+  [
+    'CloseButton',
+    'src/stories/atoms/CloseButton/CloseButton.tsx',
+    ["'Cerrar'"],
+  ],
+  [
+    // La entrada vacía en una sola cadena: el orden y el separador los pone
+    // `sidebarNav.emptyEntry`, no una plantilla con « — » o « · » fijos.
+    'SidebarNav',
+    'src/stories/molecules/SidebarNav/SidebarNav.tsx',
+    ['} — ${', '} · ${'],
   ],
   [
     'CalendarRoster',

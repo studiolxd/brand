@@ -43,19 +43,25 @@ Nada se rellena (Foundations → Colores, «Estados: nada se rellena»): el hove
 
 ## Accesibilidad
 
-- Es un `nav` con nombre (`label`, «Navegación principal» por defecto).
+- Es un `nav` con nombre (`label`; sin él, `sidebarNav.label` del catálogo).
 - Los grupos son un acordeón: el chevron es un botón con `aria-expanded`; la cabecera-enlace navega y no pliega, para que una cosa no tape la otra.
 - `renderLink` para el router del producto, reenviando todas las props.
 
 ## Internacionalización
 
-La navegación emite **dos** textos por su cuenta y los dos son **cromo**: salen
+La navegación emite **tres** textos por su cuenta y los tres son **cromo**: salen
 de `sidebarNav.*` del `BrandMessagesProvider` y ya **no traen castellano
 puesto**.
 
 | | Textos | De dónde salen | Por qué |
 | --- | --- | --- | --- |
-| **Cromo** | `label`, `emptyLabel` | `sidebarNav.*` del proveedor | El nombre de la región es el mismo en toda la suite, y la marca de una entrada sin contenido dice «aquí todavía no hay nada», no de qué entrada se trata. |
+| **Cromo** | `label`, `emptyLabel`, `emptyEntryLabel` | `sidebarNav.label`, `.empty`, `.emptyEntry` del proveedor | El nombre de la región es el mismo en toda la suite, y la marca de una entrada sin contenido dice «aquí todavía no hay nada», no de qué entrada se trata. |
+
+Donde la marca de vacío no puede ir aparte —el tooltip y el nombre accesible de
+una entrada en modo rail, el rótulo de un ítem vacío en el menú de un grupo—, la
+entrada se nombra en una sola cadena con `sidebarNav.emptyEntry`, una **función**
+que recibe el rótulo y la marca ya resueltos: el orden y el separador
+(«Guías — sin docs», «Guides (no docs)») son del idioma, no del componente.
 | **Contenido** | los rótulos de las entradas y de los grupos | `entries` | Son los datos de la navegación de esta aplicación. |
 
 ```tsx

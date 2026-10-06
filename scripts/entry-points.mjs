@@ -289,6 +289,7 @@ export const clientComponents = new Set([
   'tree-view',
   'progress-bar',
   'spinner',
+  'stat-tile',
   'loading-state', 'loading-region',
   'legal-footer',
   'figure',

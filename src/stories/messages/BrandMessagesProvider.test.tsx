@@ -63,6 +63,9 @@ import { TableOfContents } from '../molecules/TableOfContents/TableOfContents';
 import { PrevNextNav } from '../molecules/PrevNextNav/PrevNextNav';
 import { PublicPageShell } from '../templates/PublicPageShell/PublicPageShell';
 import { OnboardingShell } from '../templates/OnboardingShell/OnboardingShell';
+import { ThemeSwitcher } from '../molecules/ThemeSwitcher/ThemeSwitcher';
+import { StatTile } from '../molecules/StatTile/StatTile';
+import { CloseButton } from '../atoms/CloseButton/CloseButton';
 
 /**
  * El orden de resolución de un texto: **prop → proveedor → error**. Sin cuarto
@@ -1522,5 +1525,131 @@ describe('copiar, datos y estado leen del proveedor', () => {
     expect(() =>
       render(<NotificationList items={[{ id: '1', title: 'A', time: 'ya', unread: false }]} />),
     ).toThrow(/notificationList\.label/);
+  });
+});
+
+/**
+ * **D4 — el castellano que quedaba cableado.** Seis piezas traían aún sus
+ * textos puestos (o una frase compuesta con un separador fijo); pasan al
+ * catálogo como el resto. El pie de baja del correo no: el correo no lee el
+ * proveedor y sus textos son props obligatorias (ver `EmailLayout.test.tsx`).
+ */
+describe('el castellano que quedaba cableado lee del proveedor', () => {
+  it('el selector de tema toma su nombre y sus tres temas del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <ThemeSwitcher value="light" variant="list" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('group', { name: 'Theme' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Light' })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByRole('button', { name: 'Dark' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'System' })).toBeInTheDocument();
+  });
+
+  it('el botón de icono compone su nombre con la función del catálogo, no con un separador fijo', () => {
+    const catálogo = {
+      ...EN,
+      themeSwitcher: { ...EN.themeSwitcher, trigger: (group: string, theme: string) => `${theme} (${group})` },
+    } satisfies BrandMessages;
+    render(
+      <BrandMessagesProvider messages={catálogo}>
+        <ThemeSwitcher value="dark" variant="icon" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Dark (Theme)' })).toBeInTheDocument();
+  });
+
+  it('las anulaciones de `labels` ganan clave a clave, y la frase las recibe ya resueltas', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <ThemeSwitcher value="dark" variant="icon" labels={{ group: 'Appearance' }} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Appearance: Dark' })).toBeInTheDocument();
+  });
+
+  it('sin proveedor y sin `labels`, el selector de tema revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<ThemeSwitcher value="light" variant="list" />)).toThrow(/themeSwitcher\.group/);
+  });
+
+  it('la dirección del delta sale del catálogo, y la de ESTA cifra gana', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <StatTile label="Revenue" value="€12k" delta={{ value: '+12 %', direction: 'up' }} />
+        <StatTile label="Errors" value="3" delta={{ value: '−2', direction: 'down', label: 'Fewer errors' }} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByText('Up')).toBeInTheDocument();
+    expect(screen.getByText('Fewer errors')).toBeInTheDocument();
+    expect(screen.queryByText('Down')).toBeNull();
+  });
+
+  it('una baldosa sin delta no exige ninguno de sus tres textos', () => {
+    expect(() => render(<StatTile label="Users" value="1.204" />)).not.toThrow();
+  });
+
+  it('el aspa suelta toma su nombre del catálogo, y el `label` de quien la monta gana', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <CloseButton />
+        <CloseButton label="Dismiss notice" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Close' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Dismiss notice' })).toBeInTheDocument();
+  });
+
+  it('sin proveedor, el aspa con `label` no exige nada; sin él, revienta nombrando la clave', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => render(<CloseButton label="Close" />)).not.toThrow();
+    expect(() => render(<CloseButton />)).toThrow(/closeButton\.label/);
+  });
+
+  it('las flechas de la semana y el conmutador de vista salen del espacio del planificador', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <CalendarPlanner view="week" week={new Date(2026, 0, 14)} viewSwitcher gridLabel="Planner" />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByLabelText('Previous week')).toBeInTheDocument();
+    expect(screen.getByLabelText('Next week')).toBeInTheDocument();
+    expect(screen.getByRole('group', { name: 'Calendar view' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Month' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Week' })).toBeInTheDocument();
+  });
+
+  it('un planificador de mes sin conmutador no exige ninguno de los textos de la semana', () => {
+    const sinSemana = {
+      ...EN,
+      calendarPlanner: { more: EN.calendarPlanner.more },
+    } as unknown as BrandMessages;
+
+    expect(() =>
+      render(
+        <BrandMessagesProvider messages={sinSemana}>
+          <CalendarPlanner month={new Date(2026, 0, 1)} gridLabel="Planner" />
+        </BrandMessagesProvider>,
+      ),
+    ).not.toThrow();
+  });
+
+  it('la entrada vacía del modo rail se nombra con la función del catálogo', () => {
+    render(
+      <BrandMessagesProvider messages={EN}>
+        <SidebarNav rail entries={[{ kind: 'link', id: 'lrs', label: 'LRS', href: '#lrs', empty: true }]} />
+      </BrandMessagesProvider>,
+    );
+
+    expect(screen.getByLabelText('LRS (no docs)')).toHaveAttribute('aria-disabled', 'true');
   });
 });

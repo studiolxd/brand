@@ -25,14 +25,25 @@ import './CalendarPlanner.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
 /**
- * El único texto propio del planificador: el botón que abre los eventos que no
- * caben en una celda. Las **flechas de mes no están aquí** —son el mismo texto
- * que el del `Calendar` y salen de `calendar.previousMonth` / `.nextMonth`—, y
+ * Los textos propios del planificador: el botón que abre los eventos que no
+ * caben en una celda, las flechas de la vista de semana y el conmutador de
+ * vista. Las **flechas de mes no están aquí** —son el mismo texto que el del
+ * `Calendar` y salen de `calendar.previousMonth` / `.nextMonth`—, y
  * `gridLabel` tampoco: nombra a ESE planificador.
  */
 export interface CalendarPlannerMessages {
   /** Rótulo del botón de desbordamiento: «+3 más». Interpola, así que es función. */
   more: (count: number) => string;
+  /** Nombre accesible de la flecha de retroceso en la vista de semana. */
+  previousWeek: string;
+  /** Nombre accesible de la flecha de avance en la vista de semana. */
+  nextWeek: string;
+  /** Rótulo del botón de vista de mes del conmutador. */
+  monthView: string;
+  /** Rótulo del botón de vista de semana del conmutador. */
+  weekView: string;
+  /** Nombre accesible del conmutador de vista. */
+  viewSwitcher: string;
 }
 
 export interface PlannerEvent {
@@ -139,20 +150,30 @@ export interface CalendarPlannerProps {
   /** Callback al cambiar de semana. Recibe el **lunes** de la nueva. */
   onWeekChange?: (weekStart: Date) => void;
   /**
-   * aria-label del botón de semana anterior. Default: `'Semana anterior'`
-   * (castellano). No sale del catálogo como las flechas de mes: añadirle una
-   * clave obligatoria a `CalendarPlannerMessages` rompería a todas las
-   * aplicaciones que ya lo tienen montado, así que estos cuatro textos entran
-   * como props y pasarán al catálogo en el próximo major.
+   * aria-label del botón de semana anterior. **Sin default**: sin él, sale de
+   * `calendarPlanner.previousWeek` del `BrandMessagesProvider`. Solo se lee
+   * en la vista de semana con `navigable`.
    */
   previousWeekLabel?: string;
-  /** aria-label del botón de semana siguiente. Default: `'Semana siguiente'`. */
+  /**
+   * aria-label del botón de semana siguiente. **Sin default**: sale de
+   * `calendarPlanner.nextWeek`.
+   */
   nextWeekLabel?: string;
-  /** Rótulo del botón de vista de mes del conmutador. Default: `'Mes'`. */
+  /**
+   * Rótulo del botón de vista de mes del conmutador. **Sin default**: sale de
+   * `calendarPlanner.monthView`. Solo se lee con `viewSwitcher`.
+   */
   monthViewLabel?: string;
-  /** Rótulo del botón de vista de semana del conmutador. Default: `'Semana'`. */
+  /**
+   * Rótulo del botón de vista de semana del conmutador. **Sin default**: sale
+   * de `calendarPlanner.weekView`. Solo se lee con `viewSwitcher`.
+   */
   weekViewLabel?: string;
-  /** Nombre accesible del conmutador de vista. Default: `'Vista del calendario'`. */
+  /**
+   * Nombre accesible del conmutador de vista. **Sin default**: sale de
+   * `calendarPlanner.viewSwitcher`. Solo se lee con `viewSwitcher`.
+   */
   viewSwitcherLabel?: string;
   /**
    * El día que el planificador marca como «hoy» (y desde el que arranca el
@@ -206,11 +227,11 @@ export function CalendarPlanner({
   locale = 'es-ES',
   previousMonthLabel,
   nextMonthLabel,
-  previousWeekLabel = 'Semana anterior',
-  nextWeekLabel = 'Semana siguiente',
-  monthViewLabel = 'Mes',
-  weekViewLabel = 'Semana',
-  viewSwitcherLabel = 'Vista del calendario',
+  previousWeekLabel,
+  nextWeekLabel,
+  monthViewLabel,
+  weekViewLabel,
+  viewSwitcherLabel,
   gridLabel,
   moreLabel,
   today: todayProp,
@@ -456,16 +477,17 @@ export function CalendarPlanner({
         navigable,
         // Los textos se leen **solo si hay flechas**: un planificador estático
         // (`navigable={false}`) no pinta ninguna y no los exige. Los del mes
-        // salen del catálogo, que es donde ya viven los del `Calendar`.
-        previousLabel: navigable ? (isWeek ? previousWeekLabel : t('previousMonth', previousMonthLabel)) : undefined,
-        nextLabel: navigable ? (isWeek ? nextWeekLabel : t('nextMonth', nextMonthLabel)) : undefined,
+        // salen del espacio `calendar`, que es donde ya viven los del
+        // `Calendar`; los de la semana, del espacio propio.
+        previousLabel: navigable ? (isWeek ? tp('previousWeek', previousWeekLabel) : t('previousMonth', previousMonthLabel)) : undefined,
+        nextLabel: navigable ? (isWeek ? tp('nextWeek', nextWeekLabel) : t('nextMonth', nextMonthLabel)) : undefined,
         onPrev: () => (isWeek ? handleWeekChange(shiftWeek(currentWeek, -1)) : handleMonthChange(prevMonth)),
         onNext: () => (isWeek ? handleWeekChange(shiftWeek(currentWeek, 1)) : handleMonthChange(nextMonth)),
         chevronSize,
         children: viewSwitcher ? (
           <ToggleGroup
             className="calendar-planner__views"
-            aria-label={viewSwitcherLabel}
+            aria-label={tp('viewSwitcher', viewSwitcherLabel)}
             size={size}
             value={[view]}
             onValueChange={(valores) => {
@@ -476,8 +498,8 @@ export function CalendarPlanner({
               if (siguiente) handleViewChange(siguiente);
             }}
           >
-            <Toggle value="month">{monthViewLabel}</Toggle>
-            <Toggle value="week">{weekViewLabel}</Toggle>
+            <Toggle value="month">{tp('monthView', monthViewLabel)}</Toggle>
+            <Toggle value="week">{tp('weekView', weekViewLabel)}</Toggle>
           </ToggleGroup>
         ) : undefined,
       })}
