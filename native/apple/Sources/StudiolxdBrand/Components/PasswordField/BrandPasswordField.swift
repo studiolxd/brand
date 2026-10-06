@@ -6,8 +6,8 @@ public typealias PasswordFieldSize = BrandControlSize
 /// Un campo de contraseña con el botón de mostrar u ocultar dentro de la caja (`PasswordField` de React).
 ///
 /// ```swift
-/// BrandPasswordField("Contraseña", text: $password)
-/// BrandPasswordField("Contraseña", text: $password, labelHidden: false, helperText: "Mínimo 8 caracteres")
+/// BrandPasswordField("Contraseña", text: $password, helperText: "Mínimo 8 caracteres")
+/// BrandPasswordField("Contraseña", text: $password, labelHidden: true)
 /// BrandPasswordField("Contraseña", text: $password, errorMessage: "Es demasiado corta")
 /// ```
 ///
@@ -16,8 +16,8 @@ public typealias PasswordFieldSize = BrandControlSize
 /// del borde, con zona táctil de 44 pt en iOS; su nombre accesible cambia con el estado (`showPasswordLabel` /
 /// `hidePasswordLabel`) y se anuncia como interruptor. Al salir de pantalla la contraseña vuelve a oculta.
 ///
-/// **Etiqueta.** Como en React, `labelHidden` es `true` por defecto: la etiqueta no se ve pero la lee VoiceOver, y sirve
-/// de marcador de sitio si no hay `placeholder`.
+/// **Etiqueta.** Como en React (y en `BrandInputField`), la etiqueta se ve por defecto. Con `labelHidden: true` no se ve
+/// pero la lee VoiceOver, y sirve de marcador de sitio si no hay `placeholder`.
 ///
 /// **Dar el foco desde fuera**: `.brandFocused($focus)` o `.brandFocused($focus, equals: .password)` (ver
 /// `BrandInputField`), que apunta siempre al texto y no al ojo:
@@ -52,7 +52,7 @@ public struct BrandPasswordField: View {
     private typealias P = BrandPasswordFieldTokens
 
     /// - Parameters:
-    ///   - labelHidden: oculta la etiqueta a la vista (la sigue leyendo VoiceOver). Por defecto `true`, como en React.
+    ///   - labelHidden: oculta la etiqueta a la vista (la sigue leyendo VoiceOver). Por defecto `false`, como en React.
     ///     Sin `placeholder`, el control usa el texto de la etiqueta como marcador de sitio.
     ///   - error: marca el control en error sin mensaje; un `errorMessage` ya lo implica.
     ///   - size: sin valor toma la del entorno (`brandControlSize(_:)`) y, si tampoco hay, `md`.
@@ -61,7 +61,7 @@ public struct BrandPasswordField: View {
     public init(
         _ label: LocalizedStringKey,
         text: Binding<String>,
-        labelHidden: Bool = true,
+        labelHidden: Bool = false,
         placeholder: LocalizedStringKey? = nil,
         error: Bool = false,
         errorMessage: LocalizedStringKey? = nil,
@@ -79,7 +79,7 @@ public struct BrandPasswordField: View {
     init(
         _ label: LocalizedStringKey,
         text: Binding<String>,
-        labelHidden: Bool = true,
+        labelHidden: Bool = false,
         placeholder: LocalizedStringKey? = nil,
         error: Bool = false,
         errorMessage: LocalizedStringKey? = nil,
@@ -268,15 +268,15 @@ private struct PasswordFieldPreview: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: BrandSpacing.s5) {
-                BrandPasswordField("Contraseña", text: $empty)
-                BrandPasswordField("Contraseña", text: $password, labelHidden: false, helperText: "Mínimo 8 caracteres")
-                BrandPasswordField("Contraseña", text: $password, labelHidden: false, errorMessage: "Es demasiado corta")
-                BrandPasswordField("Deshabilitada", text: $password, labelHidden: false).disabled(true)
+                BrandPasswordField("Contraseña", text: $empty, labelHidden: true)
+                BrandPasswordField("Contraseña", text: $password, helperText: "Mínimo 8 caracteres")
+                BrandPasswordField("Contraseña", text: $password, errorMessage: "Es demasiado corta")
+                BrandPasswordField("Deshabilitada", text: $password).disabled(true)
                 // Foco desde fuera: el botón (o un atajo) lleva el cursor al campo.
-                BrandPasswordField("Repite la contraseña", text: $empty, labelHidden: false).brandFocused($focused)
+                BrandPasswordField("Repite la contraseña", text: $empty).brandFocused($focused)
                 Button("Ir al campo") { focused = true }.keyboardShortcut("n")
                 ForEach(PasswordFieldSize.allCases, id: \.self) { size in
-                    BrandPasswordField("Talla \(size.rawValue)", text: $password, labelHidden: false, size: size)
+                    BrandPasswordField("Talla \(size.rawValue)", text: $password, size: size)
                 }
             }
             .padding()

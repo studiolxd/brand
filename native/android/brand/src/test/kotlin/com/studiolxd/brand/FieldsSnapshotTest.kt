@@ -168,7 +168,7 @@ class FocusRequesterSnapshotTest {
                     Column(verticalArrangement = Arrangement.spacedBy(BrandSpacing.s4)) {
                         BrandInputField("Correo", "", {}, interactionSource = sources[0], focusRequester = requesters[0])
                         BrandNumberInputField("Cantidad", null, {}, interactionSource = sources[1], focusRequester = requesters[1])
-                        BrandPasswordField("Contraseña", "", {}, interactionSource = sources[2], focusRequester = requesters[2])
+                        BrandPasswordField("Contraseña", "", {}, labelHidden = true, interactionSource = sources[2], focusRequester = requesters[2])
                     }
                 }
             }

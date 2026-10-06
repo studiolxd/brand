@@ -222,7 +222,7 @@ BrandSelectField("Idioma", selection: $lang, options: [.option("es", "Español")
 ```
 
 ```swift
-BrandPasswordField("Contraseña", text: $pwd)                              // con ojo de mostrar u ocultar; etiqueta oculta por defecto
+BrandPasswordField("Contraseña", text: $pwd)                              // con ojo de mostrar u ocultar; etiqueta visible (`labelHidden: true` la oculta)
 
 // Foco desde fuera (p. ej. ⌘N lleva el cursor al campo de añadir): el `@FocusState` de la app, con `.brandFocused`
 @FocusState private var addFocused: Bool
@@ -386,7 +386,7 @@ BrandInputField("Correo", email, { email = it }, type = InputFieldType.Email, he
 BrandInputField("Buscar", q, { q = it }, labelHidden = true, kind = InputFieldKind.Search, clearable = true)
 BrandNumberInputField("Cantidad", qty, { qty = it }, min = 0.0, max = 99.0)       // −/+; `decimal = true`; `value: Double?` (null = vacío; desde vacío − y + parten de 0)
 BrandNumberInputField("Cantidad", qty, { qty = it }, labelHidden = true, compact = true, commitMode = NumberInputCommitMode.Blur)  // para el `trailing` de una fila; `Blur` avisa al salir / «Hecho»
-BrandPasswordField("Contraseña", pwd, { pwd = it })                               // con ojo; etiqueta oculta por defecto
+BrandPasswordField("Contraseña", pwd, { pwd = it })                               // con ojo; etiqueta visible (`labelHidden = true` la oculta)
 val foco = remember { FocusRequester() }                                           // foco desde fuera: `focusRequester`
 BrandInputField("Nueva tarea", t, { t = it }, focusRequester = foco); LaunchedEffect(Unit) { foco.requestFocus() }
 BrandSelectField("Idioma", lang, { lang = it },

@@ -33,8 +33,8 @@ typealias PasswordFieldSize = InputFieldSize
  * Un campo de contraseña con el ojo de mostrar y ocultar dentro de la caja (`PasswordField` de React).
  *
  * ```kotlin
- * BrandPasswordField("Contraseña", password, { password = it })
- * BrandPasswordField("Contraseña", password, { password = it }, labelHidden = false, errorMessage = "Mínimo 8 caracteres")
+ * BrandPasswordField("Contraseña", password, { password = it }, errorMessage = "Mínimo 8 caracteres")
+ * BrandPasswordField("Contraseña", password, { password = it }, labelHidden = true)
  * ```
  *
  * Es un [com.studiolxd.brand.components.inputfield.BrandInputField] de tipo contraseña (mismas cajas, tallas, estados
@@ -44,8 +44,8 @@ typealias PasswordFieldSize = InputFieldSize
  * visibilidad no se guarda).
  *
  * **TalkBack**: el ojo es un botón de dos estados (`ToggleableState`) cuyo nombre depende del estado
- * ([showPasswordLabel] u [hidePasswordLabel]); su zona táctil llega a 48 dp. Como en React, la etiqueta se oculta a la
- * vista por defecto ([labelHidden] = `true`, TalkBack la sigue leyendo y sirve de marcador de sitio).
+ * ([showPasswordLabel] u [hidePasswordLabel]); su zona táctil llega a 48 dp. Como en React, la etiqueta se ve por
+ * defecto; con [labelHidden] = `true` se oculta a la vista, TalkBack la sigue leyendo y sirve de marcador de sitio.
  *
  * **Foco desde fuera** (el `ref` de React): pasa un [FocusRequester] y llámale `requestFocus()`; va sobre el propio
  * campo de texto, así lleva el cursor y sube el teclado.
@@ -55,7 +55,7 @@ typealias PasswordFieldSize = InputFieldSize
  * LaunchedEffect(Unit) { focus.requestFocus() }
  * ```
  *
- * @param labelHidden oculta la etiqueta a la vista. **Por defecto `true`**, como en React (a diferencia de `InputField`).
+ * @param labelHidden oculta la etiqueta a la vista. Por defecto `false`, como en React y en `InputField`.
  * @param showPasswordLabel nombre accesible del ojo cuando la contraseña está oculta. Castellano por defecto.
  * @param hidePasswordLabel nombre accesible del ojo cuando la contraseña se ve. Castellano por defecto.
  * @param invalidLabel lo que lee TalkBack cuando el campo está en [error] sin [errorMessage]. Castellano por defecto.
@@ -68,7 +68,7 @@ fun BrandPasswordField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
-    labelHidden: Boolean = true,
+    labelHidden: Boolean = false,
     placeholder: String? = null,
     enabled: Boolean = true,
     error: Boolean = false,

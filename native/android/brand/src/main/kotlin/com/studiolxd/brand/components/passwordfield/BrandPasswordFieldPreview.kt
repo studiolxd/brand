@@ -19,12 +19,12 @@ internal fun PasswordFieldPreviewContent() {
     var empty by remember { mutableStateOf("") }
     var secret by remember { mutableStateOf("secreto123") }
     Column(verticalArrangement = Arrangement.spacedBy(BrandSpacing.s5)) {
-        BrandPasswordField("Contraseña", empty, { empty = it })
-        BrandPasswordField("Contraseña", secret, { secret = it }, labelHidden = false, helperText = "Mínimo 8 caracteres")
-        BrandPasswordField("Con error", secret, { secret = it }, labelHidden = false, errorMessage = "La contraseña no es correcta")
-        BrandPasswordField("Deshabilitada", secret, { secret = it }, labelHidden = false, enabled = false)
+        BrandPasswordField("Contraseña", empty, { empty = it }, labelHidden = true)
+        BrandPasswordField("Contraseña", secret, { secret = it }, helperText = "Mínimo 8 caracteres")
+        BrandPasswordField("Con error", secret, { secret = it }, errorMessage = "La contraseña no es correcta")
+        BrandPasswordField("Deshabilitada", secret, { secret = it }, enabled = false)
         PasswordFieldSize.entries.forEach { size ->
-            BrandPasswordField("Talla ${size.value}", secret, { secret = it }, labelHidden = false, size = size)
+            BrandPasswordField("Talla ${size.value}", secret, { secret = it }, size = size)
         }
     }
 }
@@ -38,7 +38,7 @@ internal fun PasswordFieldFocusPreviewContent() {
     var password by remember { mutableStateOf("") }
     val focus = remember { FocusRequester() }
     LaunchedEffect(Unit) { focus.requestFocus() }
-    BrandPasswordField("Contraseña", password, { password = it }, labelHidden = false, focusRequester = focus)
+    BrandPasswordField("Contraseña", password, { password = it }, focusRequester = focus)
 }
 
 @Preview(name = "PasswordField — claro", showBackground = true, widthDp = 360, heightDp = 900)

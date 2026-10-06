@@ -98,7 +98,7 @@ final class FormsSnapshotTests: XCTestCase {
 
     func testPasswordFieldStates() {
         let view = VStack(alignment: .leading, spacing: BrandSpacing.s4) {
-            BrandPasswordField("Contraseña", text: .constant(""))
+            BrandPasswordField("Contraseña", text: .constant(""), labelHidden: true)
             BrandPasswordField("Contraseña oculta", text: .constant("secreto123"), labelHidden: false, helperText: "Mínimo 8 caracteres")
             BrandPasswordField("Contraseña visible", text: .constant("secreto123"), labelHidden: false, initiallyVisible: true)
             BrandPasswordField("Con error", text: .constant("1234"), labelHidden: false, errorMessage: "Es demasiado corta")
@@ -187,18 +187,18 @@ final class FormsSnapshotTests: XCTestCase {
 
     func testComparisonPasswordDefault() {
         assertBrandSnapshots(BrandPasswordField("Contraseña", text: .constant("")),
-                             width: 352, height: 72, named: "compare-password-default", padding: 16)
+                             width: 352, height: 101, named: "compare-password-default", padding: 16)
     }
 
     func testComparisonPasswordVisible() {
         assertBrandSnapshots(BrandPasswordField("Contraseña", text: .constant(""), initiallyVisible: true),
-                             width: 352, height: 72, named: "compare-password-visible", padding: 16)
+                             width: 352, height: 101, named: "compare-password-visible", padding: 16)
     }
 
     func testComparisonPasswordError() {
         assertBrandSnapshots(
             BrandPasswordField("Contraseña", text: .constant("1234"), errorMessage: "La contraseña es incorrecta."),
-            width: 352, height: 101, named: "compare-password-error", padding: 16)
+            width: 352, height: 130, named: "compare-password-error", padding: 16)
     }
 
     func testDynamicTypeAccessibility() {

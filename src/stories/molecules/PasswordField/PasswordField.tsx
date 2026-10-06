@@ -1,5 +1,6 @@
 import { forwardRef, useId, useState } from 'react';
 import { useFormSize } from '../../constants/form-size';
+import { useLabelHidden } from '../../constants/field-labels';
 import './PasswordField.css';
 import { Label } from '../../atoms/Label/Label';
 import { Input } from '../../atoms/Input/Input';
@@ -31,7 +32,14 @@ export interface PasswordFieldProps
    * dentro de una capa de formulario propia.
    */
   label?: string;
-  /** Oculta visualmente el label (solo aplica cuando hay `label`). Default: true. */
+  /**
+   * Oculta la etiqueta a la vista (sigue leyéndola el lector de pantalla).
+   * Solo aplica cuando hay `label`. Por defecto `false`: la etiqueta se ve,
+   * como en `InputField`. Con la etiqueta oculta y sin `placeholder`, el
+   * control usa el texto de la etiqueta como placeholder para no quedarse sin
+   * pista visible. Sin valor, lo decide quien lo envuelva: dentro de un
+   * `FieldRow` que no es la primera de la lista, la etiqueta se oculta sola.
+   */
   labelHidden?: boolean;
   /** Marca el estado de error (borde) y `aria-invalid` en el input. */
   error?: boolean;
@@ -71,7 +79,7 @@ export interface PasswordFieldProps
  */
 export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(function PasswordField({
   label,
-  labelHidden = true,
+  labelHidden: labelHiddenProp,
   error = false,
   errorMessage,
   helperText,
@@ -87,6 +95,7 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(fu
 }, ref) {
   const t = useBrandMessages('passwordField');
   const size = useFormSize(sizeProp);
+  const labelHidden = useLabelHidden(labelHiddenProp);
   const reactId = useId();
   const inputId = id ?? reactId;
   const [visible, setVisible] = useState(false);

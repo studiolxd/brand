@@ -79,12 +79,12 @@ class FieldsComparisonSnapshotTest {
     }
 
     @Test
-    fun passwordDefault() = paparazzi.brandComparison("password-default", 480, 72) {
+    fun passwordDefault() = paparazzi.brandComparison("password-default", 480, 101) {
         BrandPasswordField("Contraseña", "secreto123", {})
     }
 
     @Test
-    fun passwordVisible() = paparazzi.brandComparison("password-visible", 480, 72) {
+    fun passwordVisible() = paparazzi.brandComparison("password-visible", 480, 101) {
         CompositionLocalProvider(LocalBrandPasswordRevealed provides true) { BrandPasswordField("Contraseña", "secreto123", {}) }
     }
 
