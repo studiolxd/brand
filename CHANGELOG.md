@@ -23,6 +23,53 @@ para breaking changes.
   `keycloakify-starter`, se sube a la vez. A partir de aquí un componente puede recibir `ref` como prop, sin
   `forwardRef`.
 - **`engines`: Node >=20.**
+- **Claves nuevas obligatorias en `BrandMessages`** (cada app debe añadirlas a su catálogo o no compila):
+  `closeButton.label`; `themeSwitcher.group`, `.light`, `.dark`, `.system` y `.trigger: (group, theme) => string`;
+  `statTile.up`, `.down`, `.flat`; `calendarPlanner.previousWeek`, `.nextWeek`, `.monthView`, `.weekView`,
+  `.viewSwitcher`; `sidebarNav.emptyEntry: (label, empty) => string`. Referencia castellana en
+  `.storybook/brandMessagesFixture.ts`.
+- **Sin castellano por defecto** en `CloseButton`, `ThemeSwitcher`, `StatTile`, `CalendarPlanner` (vista de semana) y
+  `SidebarNav`: sin prop, el texto sale del catálogo, y sin catálogo el componente lanza un error. El rótulo del menú
+  de grupo vacío de `SidebarNav` pasa de « · » al formato de `sidebarNav.emptyEntry`.
+- **`EmailLayout`:** los textos del pie de quien tiene cuenta (`manageLabel`, `unsubscribeLabel`, `manageBeforeLabel`,
+  `managePreferencesLabel`, `manageAfterLabel`) pasan a obligatorios y sin default, según la forma del pie, como
+  `EmailButton.fallbackLabel`. El correo no lee el proveedor de textos.
+- **`PasswordField` muestra la etiqueta por defecto:** `labelHidden` pasa a `false` en React, SwiftUI y Compose, como
+  `InputField`. Una pantalla de acceso que la quiera oculta pasa `labelHidden`. La story `LabelVisible` pasa a
+  `LabelHidden`.
+- **Tokens retirados (129, con sus pares oscuros):** se van sus `--…`, sus `$lxd-…` y sus claves de `tokens.json`.
+  - Los grupos `error` de async-multi-select-field, async-select-field, autocomplete-field, avatar-upload,
+    checkbox-field, date-picker-field, date-time-field, dropdown-field, file-upload-field, input-phone-field,
+    multi-select-field, number-input-field, otp-field, radio-field, select-field, textarea-field y time-field, más
+    `input-field.error.font-family` y `switcher-field.error.font-family`. El error se viste con `form.error.*`.
+  - `button.border-color`, `button.disabled-bg` y los `button.destructive.*` que el botón no leía (siguen `color`,
+    `border`, `hover-*`, `active-*` y `focus-ring-color`).
+  - `control.cursor`, `.disabled-cursor`, `.transition-duration`, `.transition-easing`; `file-upload.border-style`,
+    `.border-radius`, `.drag-border-style`, `.error-border-style`; `sidebar-nav.item-active-color`,
+    `.rail-active-bar-width`, `.item-hover-line-width`, `.item-hover-line-color`; `site-search.block-gap`,
+    `.status-query-font-weight`; `site-header.settings-margin-block-start`; `chart.tile-label-color-muted`,
+    `chart.height`; `breadcrumb.link-text-decoration` y `-hover`.
+  - Ningún componente los leía: no cambia nada visual. Solo deja de compilar el SCSS que los cite. En nativo
+    desaparecen sus constantes de `BrandComponentTokens`.
+- **`src/tokens/surface-light.css` retirado** (estaba vacío). `.surface-light` funciona igual.
+- **Modificadores BEM internos retirados:** `__item--active` y `__item--selected` de async-select, async-multi-select y
+  multi-select. Los estados van por `[data-highlighted]` y `[data-selected]`.
+
+### Componentes (segunda tanda)
+
+- `AsyncSelect`, `AsyncMultiSelect`, `Autocomplete` y `MultiSelect` se reescriben sobre Base UI (`Combobox`,
+  `Combobox multiple`, `Autocomplete`, `Select multiple`) en lugar de un combobox ARIA hecho a mano. Misma API; ~270
+  líneas menos y la carga asíncrona compartida en `atoms/_shared/useAsyncOptions`. Cambia la conducta, a mejor: con la
+  lista abierta el resto de la página queda oculto al lector; flecha abajo marca ya la primera opción; los avisos de
+  carga y vacío son regiones vivas fuera del listbox; las píldoras se recorren con ← y →; `MultiSelect` pasa el foco a
+  la lista al abrir. Escape con la lista cerrada sigue sin vaciar la selección. Base UI añade un input oculto: un
+  formulario de un solo campo sin botón de envío deja de enviarse con Intro.
+- Prop `today?: Date` en `Calendar`, `CalendarPlanner` y `CalendarRoster` (y la reenvían `DatePicker`,
+  `DatePickerField`, `DateTimeField` y `RecurrenceField`). Sin ella, el «hoy» se calcula una vez al montar; en SSR
+  conviene pasarla para que servidor y navegador coincidan.
+- `Modal` acepta `className`, en el panel, como `Sheet`.
+- `LanguageSwitcher` y `SiteNav` usan el `defaultRenderLink` compartido: el enlace recibe todas las props.
+- `Toaster`: documentado que solo puede haber uno montado.
 
 ### Paquete y licencia
 
