@@ -258,24 +258,6 @@ cualquier otra.
 `container.max-width-*` — no de la escala de espaciado ni de tallas de
 componente: por eso van sueltas y no a un token de espaciado.
 
-### Atributos y handlers al popup
-
-Lo que no sea prop propia (`id`, `data-*`, `aria-*` y los **handlers de evento**) viaja al popup del
-diálogo. Los handlers son lo que resuelve la **barrera de eventos**: cuando el modal se abre desde
-dentro de una tarjeta clicable, el clic de dentro del diálogo llega a la tarjeta —React propaga los
-eventos por su árbol, aunque el portal esté en `document.body`—, y la barrera se pone en el propio
-`Modal`:
-
-```tsx
-<Modal open={open} onClose={cerrar} title="Detalle" onClick={(e) => e.stopPropagation()}>
-```
-
-<Canvas of={ModalStories.BarreraDeEventos} />
-
-`className` se concatena tras las clases propias del panel (`modal__content`), igual que en `Sheet`.
-Es un enganche para el producto —una prueba, una medida propia—, no la vía de cambiar la cara del
-diálogo: esa sigue personalizándose por tokens.
-
 ## Superficie oscura
 
 <TokenTable tokens={modalDarkTokens} />
