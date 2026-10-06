@@ -43,23 +43,24 @@ function a({ href: e, onClick: a, label: o, title: s, disabled: c, direction: l,
 		children: m
 	});
 }
-function o({ prevHref: t, nextHref: n, prevOnClick: o, nextOnClick: s, prevLabel: c, nextLabel: l, prevTitle: u, nextTitle: d, label: f, labelId: p, linkComponent: m, size: h = "md" }) {
-	let g = e("prevNextNav"), _ = h === "sm" ? "sm" : "md";
+function o({ prevHref: t, nextHref: n, prevOnClick: o, nextOnClick: s, prevLabel: c, nextLabel: l, prevTitle: u, nextTitle: d, label: f, labelId: p, linkComponent: m, size: h = "md", className: g }) {
+	let _ = e("prevNextNav"), v = h === "sm" ? "sm" : "md";
 	return /* @__PURE__ */ i("div", {
 		className: [
 			"prev-next-nav",
 			h === "sm" ? "prev-next-nav--sm" : "",
-			u !== void 0 || d !== void 0 ? "prev-next-nav--titled" : ""
+			u !== void 0 || d !== void 0 ? "prev-next-nav--titled" : "",
+			g
 		].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ r(a, {
 				href: t,
 				onClick: o,
-				label: g("previous", c),
+				label: _("previous", c),
 				disabled: !t && !o,
 				direction: "prev",
 				title: u,
-				chevronSize: _,
+				chevronSize: v,
 				linkComponent: m
 			}),
 			f !== void 0 && /* @__PURE__ */ r("strong", {
@@ -70,11 +71,11 @@ function o({ prevHref: t, nextHref: n, prevOnClick: o, nextOnClick: s, prevLabel
 			/* @__PURE__ */ r(a, {
 				href: n,
 				onClick: s,
-				label: g("next", l),
+				label: _("next", l),
 				disabled: !n && !s,
 				direction: "next",
 				title: d,
-				chevronSize: _,
+				chevronSize: v,
 				linkComponent: m
 			})
 		]

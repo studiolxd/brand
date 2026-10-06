@@ -1,26 +1,27 @@
 'use client';
 import './sortable.css';
-import { t as e } from "./_shared/css-properties.js";
-import { forwardRef as t, useCallback as n } from "react";
-import { jsx as r } from "react/jsx-runtime";
+import { t as e } from "./_shared/assign-ref.js";
+import { t } from "./_shared/css-properties.js";
+import { forwardRef as n, useCallback as r } from "react";
+import { jsx as i } from "react/jsx-runtime";
 //#region src/stories/atoms/Sortable/Sortable.tsx
-var i = t(function({ as: t = "div", transform: i, transition: a, dragging: o = !1, className: s, children: c, ...l }, u) {
-	let d = e({
-		"--sortable-x": i ? `${i.x}px` : void 0,
-		"--sortable-y": i ? `${i.y}px` : void 0,
-		"--sortable-scale-x": i?.scaleX === void 0 ? void 0 : String(i.scaleX),
-		"--sortable-scale-y": i?.scaleY === void 0 ? void 0 : String(i.scaleY),
-		"--sortable-transition": a ?? void 0
+var a = n(function({ as: n = "div", transform: a, transition: o, dragging: s = !1, className: c, children: l, ...u }, d) {
+	let f = t({
+		"--sortable-x": a ? `${a.x}px` : void 0,
+		"--sortable-y": a ? `${a.y}px` : void 0,
+		"--sortable-scale-x": a?.scaleX === void 0 ? void 0 : String(a.scaleX),
+		"--sortable-scale-y": a?.scaleY === void 0 ? void 0 : String(a.scaleY),
+		"--sortable-transition": o ?? void 0
 	});
-	return /* @__PURE__ */ r(t, {
-		ref: n((e) => {
-			d(e), typeof u == "function" ? u(e) : u && (u.current = e);
-		}, [d, u]),
-		className: ["sortable", s].filter(Boolean).join(" "),
-		"data-dragging": o ? "" : void 0,
-		...l,
-		children: c
+	return /* @__PURE__ */ i(n, {
+		ref: r((t) => {
+			f(t), e(d, t);
+		}, [f, d]),
+		className: ["sortable", c].filter(Boolean).join(" "),
+		"data-dragging": s ? "" : void 0,
+		...u,
+		children: l
 	});
 });
 //#endregion
-export { i as Sortable };
+export { a as Sortable };

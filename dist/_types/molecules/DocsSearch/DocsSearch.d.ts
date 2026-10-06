@@ -39,7 +39,7 @@ export interface DocsSearchMessages {
     loading: string;
 }
 export interface DocsSearchProps {
-    /** `id` del campo. Ata la etiqueta con el campo y el campo con la lista. */
+    /** `id` del campo. Ata la etiqueta con el campo y el campo con la lista. Por defecto, uno único por instancia (`useId`). */
     id?: string;
     /** Texto escrito. El componente es controlado: no guarda estado propio. */
     query: string;
@@ -111,4 +111,4 @@ export interface DocsSearchProps {
  * (`filter={null}`) y la lista en línea, sin popup: los resultados de una
  * búsqueda de documentación no son un menú flotante, son la página.
  */
-export declare function DocsSearch({ id, query, onQueryChange, results, loading, label, labelHidden, placeholder, clearable, clearLabel, resultsLabel, emptyLabel, loadingLabel, size, renderLink, onSelect, className, }: DocsSearchProps): import("react/jsx-runtime").JSX.Element;
+export declare function DocsSearch({ id: idProp, query, onQueryChange, results, loading, label, labelHidden, placeholder, clearable, clearLabel, resultsLabel, emptyLabel, loadingLabel, size, renderLink, onSelect, className, }: DocsSearchProps): import("react/jsx-runtime").JSX.Element;

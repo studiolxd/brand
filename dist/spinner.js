@@ -19,19 +19,23 @@ function i() {
 		})
 	});
 }
-function a({ size: a = "md", label: o, "aria-hidden": s }) {
-	let c = e("spinner");
+function a({ size: a = "md", label: o, "aria-hidden": s, className: c }) {
+	let l = e("spinner"), u = [
+		"spinner",
+		`spinner--${a}`,
+		c
+	].filter(Boolean).join(" ");
 	if (s) return /* @__PURE__ */ n("span", {
-		className: `spinner spinner--${a}`,
+		className: u,
 		"aria-hidden": "true",
 		children: /* @__PURE__ */ n(i, {})
 	});
-	let l = c("label", o);
+	let d = l("label", o);
 	return /* @__PURE__ */ r("span", {
-		className: `spinner spinner--${a}`,
+		className: u,
 		role: "status",
-		"aria-label": l,
-		children: [/* @__PURE__ */ n(i, {}), /* @__PURE__ */ n(t, { children: l })]
+		"aria-label": d,
+		children: [/* @__PURE__ */ n(i, {}), /* @__PURE__ */ n(t, { children: d })]
 	});
 }
 //#endregion

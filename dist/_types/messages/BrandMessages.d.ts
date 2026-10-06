@@ -92,7 +92,7 @@ import type { ConnectorRejectionMessages } from '../templates/ConnectorAuth/Conn
  * suite concreta, el DS pasaría a depender de un paquete de producto para
  * declarar su propio contrato y dejaría de sostenerse solo.
  *
- * Anidado por componente, no plano: son 310 textos en 111 componentes, y una
+ * Anidado por componente, no plano: son unos 300 textos en 85 espacios, y una
  * lista plana de claves sueltas (`paginationPrevious`, `modalClose`…) no se
  * puede escribir ni revisar. Los espacios calcan además los que el catálogo
  * de la suite ya tiene (`pagination`, `table`, `common`…), así que montar el

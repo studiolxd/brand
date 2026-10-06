@@ -80,6 +80,12 @@ export interface SelectProps {
      * cajón de un shell propio. Gana siempre.
      */
     container?: SelectPortalContainer;
+    /**
+     * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+     * Va al disparador: es el único nodo que la forma cerrada pinta en su sitio
+     * (la lista sale por un portal).
+     */
+    className?: string;
 }
 type BaseSelectRootProps = React.ComponentProps<typeof BaseSelect.Root<string>>;
 export interface SelectRootProps extends Omit<BaseSelectRootProps, 'onValueChange' | 'multiple'> {

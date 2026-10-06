@@ -68,8 +68,6 @@ export type MenuRenderLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> 
     children: ReactNode;
     className: string;
 };
-/** Reenvía TODO lo que inyecta Base UI: un renderLink que solo copie href/className rompe el menú. */
-export declare function defaultRenderLink({ children, ...props }: MenuRenderLinkProps): import("react/jsx-runtime").JSX.Element;
 interface RenderDropdownItemsOptions {
     items: MenuItem[];
     itemClass: (destructive?: boolean) => string;

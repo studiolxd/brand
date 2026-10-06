@@ -110,4 +110,4 @@ export interface ConnectorRejectionPageProps extends ConnectorAuthChromeProps {
  * hecho su trabajo —y en `access-denied`, ni siquiera eso: es lo que se ha
  * pedido—. La página lo cuenta como cuenta cualquier otra cosa.
  */
-export declare function ConnectorRejectionPage({ title, description, hint, code, codeLabel, retryHref, onRetry, retryLabel, retryAction, aside, header, footer, preferences, preferencesLabel, id, shell, }: ConnectorRejectionPageProps): import("react/jsx-runtime").JSX.Element;
+export declare function ConnectorRejectionPage({ title, description, hint, code, codeLabel, retryHref, onRetry, retryLabel, retryAction, aside, header, footer, preferences, preferencesLabel, id, shell, className, }: ConnectorRejectionPageProps): import("react/jsx-runtime").JSX.Element;

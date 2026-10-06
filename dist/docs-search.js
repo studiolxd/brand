@@ -2,60 +2,58 @@
 import './docs-search.css';
 import { n as e } from "./_shared/brandmessagescontext.js";
 import { Spinner as t } from "./spinner.js";
-import { InputField as n } from "./input-field.js";
-import "react";
-import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
-import { Autocomplete as o } from "@base-ui/react/autocomplete";
+import { t as n } from "./_shared/default-render-link.js";
+import { InputField as r } from "./input-field.js";
+import { useId as i } from "react";
+import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
+import { Autocomplete as c } from "@base-ui/react/autocomplete";
 //#region src/stories/molecules/DocsSearch/DocsSearch.tsx
-function s(e) {
-	return /* @__PURE__ */ i("a", { ...e });
-}
-function c({ id: c = "docs-search", query: l, onQueryChange: u, results: d, loading: f = !1, label: p, labelHidden: m, placeholder: h, clearable: g = !0, clearLabel: _, resultsLabel: v, emptyLabel: y, loadingLabel: b, size: x, renderLink: S = s, onSelect: C, className: w }) {
-	let T = e("docsSearch"), E = l.trim() !== "" && d.length === 0 ? f ? T("loading", b) : T("empty", y) : null;
-	return /* @__PURE__ */ i(o.Root, {
+function l({ id: l, query: u, onQueryChange: d, results: f, loading: p = !1, label: m, labelHidden: h, placeholder: g, clearable: _ = !0, clearLabel: v, resultsLabel: y, emptyLabel: b, loadingLabel: x, size: S, renderLink: C = n, onSelect: w, className: T }) {
+	let E = e("docsSearch"), D = i(), O = l ?? D, k = u.trim() !== "" && f.length === 0 ? p ? E("loading", x) : E("empty", b) : null;
+	return /* @__PURE__ */ o(c.Root, {
 		inline: !0,
 		open: !0,
-		items: d,
+		items: f,
 		filter: null,
-		value: l,
-		onValueChange: u,
-		children: /* @__PURE__ */ a("div", {
-			className: ["docs-search", w].filter(Boolean).join(" "),
+		value: u,
+		onValueChange: d,
+		children: /* @__PURE__ */ s("div", {
+			className: ["docs-search", T].filter(Boolean).join(" "),
 			children: [
-				/* @__PURE__ */ i(o.Input, {
-					id: c,
-					render: /* @__PURE__ */ i(n, {
-						id: c,
-						label: T("label", p),
-						labelHidden: m,
+				/* @__PURE__ */ o(c.Input, {
+					id: O,
+					render: /* @__PURE__ */ o(r, {
+						id: O,
+						label: E("label", m),
+						labelHidden: h,
 						kind: "search",
-						clearable: g,
-						..._ === void 0 ? {} : { clearLabel: _ },
-						placeholder: T("placeholder", h),
-						...x ? { size: x } : {}
+						clearable: _,
+						...v === void 0 ? {} : { clearLabel: v },
+						placeholder: E("placeholder", g),
+						...S ? { size: S } : {}
 					})
 				}),
-				/* @__PURE__ */ i(o.List, {
+				/* @__PURE__ */ o(c.List, {
 					className: "docs-search__results",
-					"aria-label": T("results", v),
-					children: (e) => /* @__PURE__ */ i(o.Item, {
+					"aria-label": E("results", y),
+					children: (e) => /* @__PURE__ */ o(c.Item, {
 						value: e,
 						className: "docs-search__result",
-						onClick: () => C?.(e),
-						render: (t) => S({
+						onClick: () => w?.(e),
+						render: (t) => C({
 							...t,
 							href: e.href,
 							className: t.className ?? "docs-search__result",
-							children: /* @__PURE__ */ a(r, { children: [
-								e.product && /* @__PURE__ */ i("span", {
+							children: /* @__PURE__ */ s(a, { children: [
+								e.product && /* @__PURE__ */ o("span", {
 									className: "docs-search__result-product",
 									children: e.product
 								}),
-								/* @__PURE__ */ i("span", {
+								/* @__PURE__ */ o("span", {
 									className: "docs-search__result-title",
 									children: e.title
 								}),
-								e.excerpt && /* @__PURE__ */ i("span", {
+								e.excerpt && /* @__PURE__ */ o("span", {
 									className: "docs-search__result-excerpt",
 									children: e.excerpt
 								})
@@ -63,17 +61,17 @@ function c({ id: c = "docs-search", query: l, onQueryChange: u, results: d, load
 						})
 					}, e.href)
 				}),
-				E && /* @__PURE__ */ a("p", {
+				k && /* @__PURE__ */ s("p", {
 					className: "docs-search__status",
 					role: "status",
-					children: [f && /* @__PURE__ */ i(t, {
+					children: [p && /* @__PURE__ */ o(t, {
 						size: "sm",
 						"aria-hidden": !0
-					}), E]
+					}), k]
 				})
 			]
 		})
 	});
 }
 //#endregion
-export { c as DocsSearch };
+export { l as DocsSearch };

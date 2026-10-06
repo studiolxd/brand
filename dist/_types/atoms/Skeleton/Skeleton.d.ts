@@ -19,4 +19,4 @@ export interface SkeletonProps extends Omit<React.SVGProps<SVGSVGElement>, 'widt
  * saldría a ancho completo y una línea de alto. No hay prop `style` por lo
  * mismo: el atributo no llegaría a pintarse.
  */
-export declare function Skeleton({ width, height, circle, className, ...rest }: SkeletonProps): import("react/jsx-runtime").JSX.Element;
+export declare const Skeleton: import("react").ForwardRefExoticComponent<Omit<SkeletonProps, "ref"> & import("react").RefAttributes<SVGSVGElement>>;

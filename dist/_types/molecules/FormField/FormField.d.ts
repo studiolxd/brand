@@ -1,6 +1,5 @@
 import { type ComponentProps } from 'react';
 import { FormProvider as RhfFormProvider, type ControllerProps, type FieldPath, type FieldValues } from 'react-hook-form';
-import { Label } from '../../atoms/Label/Label';
 import './FormField.css';
 type Translate = (message: string) => string;
 /**
@@ -42,9 +41,9 @@ export declare function useFormField(): {
     register: (part: "description" | "message", present: boolean) => void;
 };
 /** Contenedor de un campo: reserva los ids que enlazan sus partes. */
-export declare function FormItem({ className, ...props }: ComponentProps<'div'>): import("react/jsx-runtime").JSX.Element;
+export declare const FormItem: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
 /** Etiqueta del campo, ya apuntada a su control y marcada si hay error. */
-export declare function FormLabel({ ...props }: ComponentProps<typeof Label>): import("react/jsx-runtime").JSX.Element;
+export declare const FormLabel: import("react").ForwardRefExoticComponent<Omit<import("../../atoms/Label/Label").LabelProps & import("react").RefAttributes<HTMLLabelElement>, "ref"> & import("react").RefAttributes<HTMLLabelElement>>;
 /**
  * Envoltorio del control real (input, select, textarea…). No renderiza nodo
  * propio: fusiona en su hijo el `id`, el `aria-describedby` y el
@@ -54,17 +53,17 @@ export declare function FormControl({ children, ...props }: {
     children: React.ReactElement<Record<string, unknown>>;
 } & Record<string, unknown>): import("react").ReactElement<unknown, string | import("react").JSXElementConstructor<any>>;
 /** Texto de ayuda del campo, enlazado al control por `aria-describedby`. */
-export declare function FormDescription({ className, ...props }: ComponentProps<'p'>): import("react/jsx-runtime").JSX.Element;
+export declare const FormDescription: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, "ref"> & import("react").RefAttributes<HTMLParagraphElement>>;
 /**
  * Mensaje de error del campo. Renderiza el error de react-hook-form si lo
  * hay, o sus children si no; sin ninguno de los dos no renderiza nada.
  */
-export declare function FormMessage({ className, children, ...props }: ComponentProps<'p'>): import("react/jsx-runtime").JSX.Element | null;
+export declare const FormMessage: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, "ref"> & import("react").RefAttributes<HTMLParagraphElement>>;
 /**
  * Error del formulario entero (p. ej. "usuario o contraseña incorrectos"),
  * el que se pone con `form.setError("root", …)` y no cuelga de ningún campo.
  * Se coloca una vez al final del formulario: a diferencia de `FormMessage`
  * no tiene campo del que leer, así que va directo al `formState`.
  */
-export declare function FormRootMessage({ className, ...props }: ComponentProps<'p'>): import("react/jsx-runtime").JSX.Element | null;
+export declare const FormRootMessage: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, "ref"> & import("react").RefAttributes<HTMLParagraphElement>>;
 export {};

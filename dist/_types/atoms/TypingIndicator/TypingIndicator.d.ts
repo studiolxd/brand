@@ -29,6 +29,8 @@ export interface TypingIndicatorProps {
      * `BrandMessagesProvider`.
      */
     label?: string;
+    /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+    className?: string;
 }
 /** Tres puntos cuadrados que laten en secuencia: «alguien está escribiendo». */
-export declare function TypingIndicator({ name, label }: TypingIndicatorProps): import("react/jsx-runtime").JSX.Element;
+export declare function TypingIndicator({ name, label, className }: TypingIndicatorProps): import("react/jsx-runtime").JSX.Element;

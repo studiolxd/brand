@@ -92,5 +92,11 @@ export interface AppLauncherProps {
      * quien lo prefiera lo pide explícitamente.
      */
     presentation?: 'modal' | 'popover';
+    /**
+     * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+     * Va al disparador: es el único nodo que el componente pinta en su sitio (el
+     * panel sale por un portal, sea diálogo o popover).
+     */
+    className?: string;
 }
 export declare function AppLauncher({ presentation, labels, ...rest }: AppLauncherProps): import("react/jsx-runtime").JSX.Element;

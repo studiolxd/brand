@@ -10,10 +10,10 @@ import { ConnectorAuthShell as s } from "./connector-auth-shell.js";
 import { t as c } from "./_shared/untrustedtext.js";
 import { jsx as l, jsxs as u } from "react/jsx-runtime";
 //#region src/stories/templates/ConnectorAuth/ConnectorExternalSignInPage.tsx
-function d({ platformName: d, organization: f, organizationDefaultValue: p, organizationName: m = "org", action: h, onSubmit: g, hiddenFields: _, error: v, title: y, intro: b, signingInTo: x, valueQuotes: S, organizationLabel: C, submitLabel: w, extra: T, links: E, header: D, footer: O, preferences: k, preferencesLabel: A, id: j, shell: M }) {
-	let N = e("connectorExternalSignIn");
+function d({ platformName: d, organization: f, organizationDefaultValue: p, organizationName: m = "org", action: h, onSubmit: g, hiddenFields: _, error: v, title: y, intro: b, signingInTo: x, valueQuotes: S, organizationLabel: C, submitLabel: w, extra: T, links: E, header: D, footer: O, preferences: k, preferencesLabel: A, id: j, shell: M, className: N }) {
+	let P = e("connectorExternalSignIn");
 	return /* @__PURE__ */ l(s, {
-		title: y ?? N("title"),
+		title: y ?? P("title"),
 		description: b({ platform: d }),
 		header: D,
 		footer: O,
@@ -21,6 +21,7 @@ function d({ platformName: d, organization: f, organizationDefaultValue: p, orga
 		preferencesLabel: A,
 		id: j,
 		shell: M,
+		className: N,
 		children: /* @__PURE__ */ u(n, {
 			align: "stretch",
 			children: [
@@ -38,7 +39,7 @@ function d({ platformName: d, organization: f, organizationDefaultValue: p, orga
 					links: E,
 					actions: /* @__PURE__ */ l(t, {
 						type: "submit",
-						children: N("submit", w)(d)
+						children: P("submit", w)(d)
 					}),
 					children: [_ && Object.entries(_).map(([e, t]) => /* @__PURE__ */ l("input", {
 						type: "hidden",
@@ -47,7 +48,7 @@ function d({ platformName: d, organization: f, organizationDefaultValue: p, orga
 					}, e)), f === void 0 ? /* @__PURE__ */ l(o, {
 						id: m,
 						name: m,
-						label: N("organization", C),
+						label: P("organization", C),
 						defaultValue: p,
 						autoComplete: "off",
 						required: !0

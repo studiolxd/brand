@@ -38,6 +38,11 @@ export interface ConnectorAuthChromeProps {
      * aplican —ni el `ref`, porque no hay marco al que engancharlo.
      */
     shell?: boolean;
+    /**
+     * Se añade DESPUÉS de las clases propias. Va al contenido de la pantalla
+     * (las dos columnas), con marco y sin él.
+     */
+    className?: string;
 }
 export interface ConnectorAuthShellProps extends ConnectorAuthChromeProps {
     /** El título de la pantalla: `Heading` de nivel 1 vía `PageIntro`, columna izquierda. */
@@ -50,8 +55,6 @@ export interface ConnectorAuthShellProps extends ConnectorAuthChromeProps {
     aside?: ReactNode;
     /** La columna de la derecha: la decisión —el formulario, la ficha, los botones—. */
     children: ReactNode;
-    /** Se añade DESPUÉS de las clases propias. */
-    className?: string;
 }
 /**
  * El marco de las pantallas del conector: **el mismo que el de acceso**.

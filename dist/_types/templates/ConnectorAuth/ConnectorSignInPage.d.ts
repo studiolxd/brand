@@ -100,4 +100,4 @@ export interface ConnectorSignInPageProps extends ConnectorAuthChromeProps {
  * refresco de sesión del hub— y la que hace falta en cuanto la vuelta falla o
  * el usuario se planta en medio del camino.
  */
-export declare function ConnectorSignInPage({ clientName, productName, scope, redirectHost, signInHref, onSignIn, action, hiddenFields, title, intro, fallbackProductName, signInLabel, scopeReadLabel, scopeWriteLabel, expandLabel, collapseLabel, valueQuotes, summaryLabels, links, header, footer, preferences, preferencesLabel, id, shell, }: ConnectorSignInPageProps): import("react/jsx-runtime").JSX.Element;
+export declare function ConnectorSignInPage({ clientName, productName, scope, redirectHost, signInHref, onSignIn, action, hiddenFields, title, intro, fallbackProductName, signInLabel, scopeReadLabel, scopeWriteLabel, expandLabel, collapseLabel, valueQuotes, summaryLabels, links, header, footer, preferences, preferencesLabel, id, shell, className, }: ConnectorSignInPageProps): import("react/jsx-runtime").JSX.Element;

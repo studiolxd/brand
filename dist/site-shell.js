@@ -1,28 +1,29 @@
 'use client';
 import './site-shell.css';
 import { t as e } from "./_shared/portal-container.js";
-import { forwardRef as t, useCallback as n, useState as r } from "react";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { t } from "./_shared/assign-ref.js";
+import { forwardRef as n, useCallback as r, useState as i } from "react";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/sections/SiteShell/SiteShell.tsx
-var o = t(function({ header: t, footer: o, children: s, className: c }, l) {
-	let [u, d] = r(null);
-	return /* @__PURE__ */ i("div", {
-		ref: n((e) => {
-			d(e), typeof l == "function" ? l(e) : l && (l.current = e);
-		}, [l]),
-		className: ["site-shell", c].filter(Boolean).join(" "),
-		children: /* @__PURE__ */ a(e.Provider, {
-			value: u,
+var s = n(function({ header: n, footer: s, children: c, className: l }, u) {
+	let [d, f] = i(null);
+	return /* @__PURE__ */ a("div", {
+		ref: r((e) => {
+			f(e), t(u, e);
+		}, [u]),
+		className: ["site-shell", l].filter(Boolean).join(" "),
+		children: /* @__PURE__ */ o(e.Provider, {
+			value: d,
 			children: [
-				t,
-				/* @__PURE__ */ i("div", {
+				n,
+				/* @__PURE__ */ a("div", {
 					className: "site-shell__main",
-					children: s
+					children: c
 				}),
-				o
+				s
 			]
 		})
 	});
 });
 //#endregion
-export { o as SiteShell };
+export { s as SiteShell };

@@ -47,7 +47,7 @@ export interface SiteHeaderProps {
     children?: ReactNode;
     /** Ajustes del sitio al final del panel (el selector de tema). */
     settings?: ReactNode;
-    /** id del panel — `aria-controls` del botón de menú. */
+    /** id del panel — `aria-controls` del botón de menú. Por defecto, uno único por instancia (`useId`). */
     panelId?: string;
     /** Controles del producto en la barra (acceso, CTA…). */
     actions?: ReactNode;
@@ -74,4 +74,4 @@ export interface SiteHeaderMessages {
     /** Texto accesible del enlace del logotipo. */
     logo: string;
 }
-export declare function SiteHeader({ logoHref, logoLabel, menuLabel, menuCloseLabel, logoSize, logo, menuButtonSize, renderLogoLink, width, open, onOpenChange, children, settings, panelId, actions, language, }: SiteHeaderProps): import("react/jsx-runtime").JSX.Element;
+export declare function SiteHeader({ logoHref, logoLabel, menuLabel, menuCloseLabel, logoSize, logo, menuButtonSize, renderLogoLink, width, open, onOpenChange, children, settings, panelId: panelIdProp, actions, language, }: SiteHeaderProps): import("react/jsx-runtime").JSX.Element;

@@ -3,72 +3,74 @@ import './input-phone.css';
 import { n as e } from "./_shared/brandmessagescontext.js";
 import { Icon as t } from "./icon.js";
 import { n } from "./_shared/portal-container.js";
-import { forwardRef as r, useMemo as i } from "react";
-import { jsx as a, jsxs as o } from "react/jsx-runtime";
-import { Select as s } from "@base-ui/react/select";
-import c, { getCountryCallingCode as l } from "react-phone-number-input";
+import { t as r } from "./_shared/assign-ref.js";
+import { forwardRef as i, useMemo as a } from "react";
+import { jsx as o, jsxs as s } from "react/jsx-runtime";
+import { Select as c } from "@base-ui/react/select";
+import l, { getCountryCallingCode as u } from "react-phone-number-input";
 //#region src/stories/atoms/InputPhone/InputPhone.tsx
-function u({ value: r, onChange: i, options: c, disabled: u, size: d = "md", countryLabel: f, internationalLabel: p = "🌐", container: m }) {
+function d({ value: r, onChange: i, options: a, disabled: l, size: d = "md", countryLabel: f, internationalLabel: p = "🌐", container: m }) {
 	let h = e("inputPhone"), g = n(m), _ = "__intl__", v = (e) => e ?? _, y = (e) => e === _ ? void 0 : e, b = d === "lg" ? "md" : "sm", x = ["input-phone__country-content", d === "md" ? "" : `input-phone__country-content--${d}`].filter(Boolean).join(" ");
-	return /* @__PURE__ */ o(s.Root, {
+	return /* @__PURE__ */ s(c.Root, {
 		value: v(r),
 		onValueChange: (e) => i(y(e)),
-		disabled: u,
-		children: [/* @__PURE__ */ o(s.Trigger, {
+		disabled: l,
+		children: [/* @__PURE__ */ s(c.Trigger, {
 			className: "input-phone__country",
 			"aria-label": h("country", f),
-			children: [/* @__PURE__ */ a(s.Value, { children: r ? `+${l(r)}` : p }), /* @__PURE__ */ a(t, {
+			children: [/* @__PURE__ */ o(c.Value, { children: r ? `+${u(r)}` : p }), /* @__PURE__ */ o(t, {
 				name: "chevron",
 				className: "input-phone__country-icon",
 				size: b
 			})]
-		}), /* @__PURE__ */ a(s.Portal, {
+		}), /* @__PURE__ */ o(c.Portal, {
 			container: g,
-			children: /* @__PURE__ */ a(s.Positioner, {
+			children: /* @__PURE__ */ o(c.Positioner, {
 				className: "input-phone__country-positioner",
 				side: "bottom",
 				align: "start",
 				alignItemWithTrigger: !1,
-				children: /* @__PURE__ */ a(s.Popup, {
+				children: /* @__PURE__ */ o(c.Popup, {
 					className: x,
-					children: c.map(({ value: e, label: t }) => /* @__PURE__ */ a(s.Item, {
+					children: a.map(({ value: e, label: t }) => /* @__PURE__ */ o(c.Item, {
 						value: v(e),
 						className: "input-phone__country-item",
-						children: /* @__PURE__ */ a(s.ItemText, { children: t })
+						children: /* @__PURE__ */ o(c.ItemText, { children: t })
 					}, v(e)))
 				})
 			})
 		})]
 	});
 }
-var d = r(function({ value: e, defaultCountry: t = "ES", placeholder: n, disabled: o, error: s = !1, size: l = "md", id: d, name: p, describedBy: m, "aria-describedby": h, "aria-label": g, autoComplete: _, required: v, readOnly: y, onChange: b, onBlur: x, onFocus: S, countryLabel: C, internationalLabel: w, container: T }, E) {
-	return /* @__PURE__ */ a(c, {
+var f = i(function({ value: e, defaultCountry: t = "ES", placeholder: n, disabled: s, error: c = !1, size: u = "md", id: f, name: p, describedBy: m, "aria-describedby": h, "aria-label": g, autoComplete: _, required: v, readOnly: y, onChange: b, onBlur: x, onFocus: S, countryLabel: C, internationalLabel: w, container: T, className: E }, D) {
+	return /* @__PURE__ */ o(l, {
 		className: [
 			"input-phone",
-			s ? "input-phone--error" : "",
-			l === "md" ? "" : `input-phone--${l}`
+			c ? "input-phone--error" : "",
+			u === "md" ? "" : `input-phone--${u}`,
+			E ?? ""
 		].filter(Boolean).join(" "),
 		value: e,
 		defaultCountry: t,
 		placeholder: n,
-		disabled: o,
+		disabled: s,
 		readOnly: y,
 		required: v,
 		autoComplete: _,
-		id: d,
+		id: f,
 		name: p,
-		inputComponent: i(() => r(function(e, t) {
-			return /* @__PURE__ */ a("input", {
+		inputComponent: a(() => i(function(e, t) {
+			return /* @__PURE__ */ o("input", {
 				...e,
 				ref: (e) => {
-					f(t, e), f(E, e);
+					r(t, e), r(D, e);
 				},
 				className: "input-phone__number"
 			});
-		}), [E]),
-		countrySelectComponent: u,
+		}), [D]),
+		countrySelectComponent: d,
 		countrySelectProps: {
-			size: l,
+			size: u,
 			countryLabel: C,
 			internationalLabel: w,
 			container: T
@@ -79,12 +81,9 @@ var d = r(function({ value: e, defaultCountry: t = "ES", placeholder: n, disable
 		numberInputProps: {
 			"aria-describedby": h ?? m,
 			"aria-label": g,
-			"aria-invalid": s || void 0
+			"aria-invalid": c || void 0
 		}
 	});
 });
-function f(e, t) {
-	typeof e == "function" ? e(t) : e && (e.current = t);
-}
 //#endregion
-export { d as InputPhone };
+export { f as InputPhone };

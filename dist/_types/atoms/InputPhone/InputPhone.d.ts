@@ -57,6 +57,8 @@ export interface InputPhoneProps {
      * cajón de un shell propio. Gana siempre.
      */
     container?: React.ComponentPropsWithoutRef<typeof BaseSelect.Portal>['container'];
+    /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+    className?: string;
 }
 /**
  * Campo de teléfono con selector de país. El `ref` va al `<input>` real del

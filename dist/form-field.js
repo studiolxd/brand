@@ -1,27 +1,27 @@
 'use client';
 import './form-field.css';
 import { Label as e } from "./label.js";
-import { createContext as t, useCallback as n, useContext as r, useEffect as i, useId as a, useMemo as o, useState as s } from "react";
-import { jsx as c } from "react/jsx-runtime";
-import { useRender as l } from "@base-ui/react/use-render";
-import { Controller as u, FormProvider as d, useFormContext as f } from "react-hook-form";
+import { createContext as t, forwardRef as n, useCallback as r, useContext as i, useEffect as a, useId as o, useMemo as s, useState as c } from "react";
+import { jsx as l } from "react/jsx-runtime";
+import { useRender as u } from "@base-ui/react/use-render";
+import { Controller as d, FormProvider as f, useFormContext as p } from "react-hook-form";
 //#region src/stories/molecules/FormField/FormField.tsx
-var p = t(void 0);
-function m({ translate: e, children: t, ...n }) {
-	return /* @__PURE__ */ c(p.Provider, {
+var m = t(void 0);
+function h({ translate: e, children: t, ...n }) {
+	return /* @__PURE__ */ l(m.Provider, {
 		value: e,
-		children: /* @__PURE__ */ c(d, {
+		children: /* @__PURE__ */ l(f, {
 			...n,
 			children: t
 		})
 	});
 }
-var h = t({}), g = ({ ...e }) => /* @__PURE__ */ c(h.Provider, {
+var g = t({}), _ = ({ ...e }) => /* @__PURE__ */ l(g.Provider, {
 	value: { name: e.name },
-	children: /* @__PURE__ */ c(u, { ...e })
-}), _ = t({});
-function v() {
-	let e = r(h), t = r(_), { getFieldState: n, formState: i } = f(), a = n(e.name, i), { id: o, described: s, register: c } = t;
+	children: /* @__PURE__ */ l(d, { ...e })
+}), v = t({});
+function y() {
+	let e = i(g), t = i(v), { getFieldState: n, formState: r } = p(), a = n(e.name, r), { id: o, described: s, register: c } = t;
 	return {
 		id: o,
 		name: e.name,
@@ -33,43 +33,44 @@ function v() {
 		...a
 	};
 }
-function y({ className: e, ...t }) {
-	let r = a(), [i, l] = s({
+var b = n(function({ className: e, ...t }, n) {
+	let i = o(), [a, u] = c({
 		description: !1,
 		message: !1
-	}), u = n((e, t) => {
-		l((n) => n[e] === t ? n : {
+	}), d = r((e, t) => {
+		u((n) => n[e] === t ? n : {
 			...n,
 			[e]: t
 		});
-	}, []), d = o(() => ({
-		id: r,
-		described: i,
-		register: u
+	}, []), f = s(() => ({
+		id: i,
+		described: a,
+		register: d
 	}), [
-		r,
 		i,
-		u
+		a,
+		d
 	]);
-	return /* @__PURE__ */ c(_.Provider, {
-		value: d,
-		children: /* @__PURE__ */ c("div", {
+	return /* @__PURE__ */ l(v.Provider, {
+		value: f,
+		children: /* @__PURE__ */ l("div", {
+			ref: n,
 			className: ["form-field", e].filter(Boolean).join(" "),
 			...t
 		})
 	});
-}
-function b({ ...t }) {
-	let { error: n, formItemId: r } = v();
-	return /* @__PURE__ */ c(e, {
-		"data-error": !!n,
-		htmlFor: r,
+}), x = n(function({ ...t }, n) {
+	let { error: r, formItemId: i } = y();
+	return /* @__PURE__ */ l(e, {
+		ref: n,
+		"data-error": !!r,
+		htmlFor: i,
 		...t
 	});
-}
-function x({ children: e, ...t }) {
-	let { error: n, formItemId: r, formDescriptionId: i, formMessageId: a, described: o } = v(), s = [...[o.description ? i : null, o.message ? a : null], t["aria-describedby"]].filter((e) => typeof e == "string" && e.length > 0).join(" ");
-	return l({
+});
+function S({ children: e, ...t }) {
+	let { error: n, formItemId: r, formDescriptionId: i, formMessageId: a, described: o } = y(), s = [...[o.description ? i : null, o.message ? a : null], t["aria-describedby"]].filter((e) => typeof e == "string" && e.length > 0).join(" ");
+	return u({
 		render: e,
 		props: {
 			id: r,
@@ -79,32 +80,33 @@ function x({ children: e, ...t }) {
 		}
 	});
 }
-function S({ className: e, ...t }) {
-	let { formDescriptionId: n, register: r } = v();
-	return i(() => (r("description", !0), () => r("description", !1)), [r]), /* @__PURE__ */ c("p", {
-		id: n,
+var C = n(function({ className: e, ...t }, n) {
+	let { formDescriptionId: r, register: i } = y();
+	return a(() => (i("description", !0), () => i("description", !1)), [i]), /* @__PURE__ */ l("p", {
+		ref: n,
+		id: r,
 		className: ["form-field__description", e].filter(Boolean).join(" "),
 		...t
 	});
-}
-function C({ className: e, children: t, ...n }) {
-	let { error: a, formMessageId: o, register: s } = v(), l = r(p), u = a ? String(a?.message ?? "") : "", d = a ? l && u ? l(u) : u : t, f = !!d;
-	return i(() => (s("message", f), () => s("message", !1)), [s, f]), d ? /* @__PURE__ */ c("p", {
-		id: o,
+}), w = n(function({ className: e, children: t, ...n }, r) {
+	let { error: o, formMessageId: s, register: c } = y(), u = i(m), d = o ? String(o?.message ?? "") : "", f = o ? u && d ? u(d) : d : t, p = !!f;
+	return a(() => (c("message", p), () => c("message", !1)), [c, p]), f ? /* @__PURE__ */ l("p", {
+		ref: r,
+		id: s,
 		role: "alert",
 		className: ["form-field__message", e].filter(Boolean).join(" "),
 		...n,
-		children: d
+		children: f
 	}) : null;
-}
-function w({ className: e, ...t }) {
-	let { formState: n } = f(), i = r(p), a = n.errors.root?.message, o = a && i ? i(String(a)) : a;
-	return o ? /* @__PURE__ */ c("p", {
+}), T = n(function({ className: e, ...t }, n) {
+	let { formState: r } = p(), a = i(m), o = r.errors.root?.message, s = o && a ? a(String(o)) : o;
+	return s ? /* @__PURE__ */ l("p", {
+		ref: n,
 		role: "alert",
 		className: ["form-error", e].filter(Boolean).join(" "),
 		...t,
-		children: o
+		children: s
 	}) : null;
-}
+});
 //#endregion
-export { x as FormControl, S as FormDescription, g as FormField, y as FormItem, b as FormLabel, C as FormMessage, m as FormProvider, w as FormRootMessage, v as useFormField };
+export { S as FormControl, C as FormDescription, _ as FormField, b as FormItem, x as FormLabel, w as FormMessage, h as FormProvider, T as FormRootMessage, y as useFormField };

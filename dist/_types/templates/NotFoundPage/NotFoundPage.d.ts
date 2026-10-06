@@ -19,6 +19,12 @@ export interface NotFoundPageProps {
      * no aplican.
      */
     shell?: boolean;
+    /**
+     * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+     * Va al contenido propio de la plantilla (título, frase y enlace), con marco
+     * y sin él, como en `OnboardingShell` y `ConnectorAuthShell`.
+     */
+    className?: string;
 }
 /**
  * Plantilla de 404: el marco público (`PublicPageShell`) con cabecera y pie
@@ -27,4 +33,4 @@ export interface NotFoundPageProps {
  * roto no se lleva por delante el mensaje. Con `shell={false}` devuelve solo
  * el contenido, para una app que ya tiene su `main`.
  */
-export declare function NotFoundPage({ title, description, homeLink, header, footer, id, shell }: NotFoundPageProps): import("react/jsx-runtime").JSX.Element;
+export declare function NotFoundPage({ title, description, homeLink, header, footer, id, shell, className }: NotFoundPageProps): import("react/jsx-runtime").JSX.Element;

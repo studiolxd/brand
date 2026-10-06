@@ -1,22 +1,23 @@
 import '../datepicker.css';
 import { n as e } from "./brandmessagescontext.js";
 import { Icon as t } from "../icon.js";
-import { Input as n } from "../input.js";
-import { Popover as r } from "../popover.js";
-import { Calendar as i } from "../calendar.js";
-import { forwardRef as a, useCallback as o, useId as s, useMemo as c, useRef as l, useState as u } from "react";
-import { jsx as d, jsxs as f } from "react/jsx-runtime";
+import { t as n } from "./assign-ref.js";
+import { Input as r } from "../input.js";
+import { Popover as i } from "../popover.js";
+import { Calendar as a } from "../calendar.js";
+import { forwardRef as o, useCallback as s, useId as c, useMemo as l, useRef as u, useState as d } from "react";
+import { jsx as f, jsxs as p } from "react/jsx-runtime";
 //#region src/stories/molecules/DatePicker/dateMask.ts
-var p = /[‎‏؜]/g, m = new Date(2026, 8, 25);
-function h(e, t) {
+var m = /[‎‏؜]/g, h = new Date(2026, 8, 25);
+function g(e, t) {
 	return String(e).padStart(t, "0");
 }
-function g(e) {
+function _(e) {
 	let t = new Intl.DateTimeFormat(e, {
 		day: "2-digit",
 		month: "2-digit",
 		year: "numeric"
-	}).formatToParts(m), n = t.filter((e) => e.type === "day" || e.type === "month" || e.type === "year").map((e) => e.type), r = t.find((e) => e.type === "literal" && e.value.replace(p, "").trim() !== "")?.value.replace(p, "").trim() || "/", i = {
+	}).formatToParts(h), n = t.filter((e) => e.type === "day" || e.type === "month" || e.type === "year").map((e) => e.type), r = t.find((e) => e.type === "literal" && e.value.replace(m, "").trim() !== "")?.value.replace(m, "").trim() || "/", i = {
 		day: 2,
 		month: 2,
 		year: 4
@@ -27,13 +28,13 @@ function g(e) {
 			month: e.getMonth() + 1,
 			year: e.getFullYear()
 		};
-		return n.map((e) => h(t[e], i[e])).join(r);
+		return n.map((e) => g(t[e], i[e])).join(r);
 	}
 	function o(e) {
 		return n.map((t) => e[t]).join(r);
 	}
 	function s(e) {
-		let t = e.replace(p, "").trim();
+		let t = e.replace(m, "").trim();
 		if (/\p{L}/u.test(t)) return null;
 		let r = t.split(/\D+/).filter(Boolean);
 		if (r.length !== 3) return null;
@@ -54,100 +55,100 @@ function g(e) {
 }
 //#endregion
 //#region src/stories/molecules/DatePicker/DatePicker.tsx
-function _(e) {
+function v(e) {
 	return `${String(e.getFullYear()).padStart(4, "0")}-${String(e.getMonth() + 1).padStart(2, "0")}-${String(e.getDate()).padStart(2, "0")}`;
 }
-var v = a(function({ value: a, onChange: p, placeholder: m, maskLetters: h, invalidMessage: v, openCalendarLabel: y, minDate: b, maxDate: x, disabledDates: S, size: C = "md", disabled: w, readOnly: T, error: E = !1, locale: D = "es-ES", id: O, name: k, describedBy: ee, "aria-describedby": te, "aria-label": ne, calendarLabel: re, previousMonthLabel: ie, nextMonthLabel: ae, previousYearsLabel: A, nextYearsLabel: j, yearGridLabel: M, gridLabel: N, onBlur: P, className: F }, I) {
-	let L = e("datePicker"), [R, z] = u(!1), B = c(() => g(D), [D]), V = a instanceof Date ? B.format(a) : "", [H, U] = u(V), [W, G] = u(V);
-	V !== W && (G(V), U(V));
-	let K = l(null), q = o((e) => {
-		K.current = e, typeof I == "function" ? I(e) : I && (I.current = e);
-	}, [I]), J = H.trim(), Y = J ? B.parse(H) : null, X = J !== "" && !Y, oe = E || X, Z = `${s()}-date-picker-invalid`, se = [ee ?? te, X ? Z : void 0].filter(Boolean).join(" ") || void 0, ce = o((e) => {
-		(T || w) && e || z(e);
-	}, [w, T]), le = o((e) => {
+var y = o(function({ value: o, onChange: m, placeholder: h, maskLetters: g, invalidMessage: y, openCalendarLabel: ee, minDate: b, maxDate: x, disabledDates: S, size: C = "md", disabled: w, readOnly: T, error: E = !1, locale: D = "es-ES", id: O, name: k, describedBy: te, "aria-describedby": ne, "aria-label": re, calendarLabel: ie, previousMonthLabel: ae, nextMonthLabel: A, previousYearsLabel: j, nextYearsLabel: M, yearGridLabel: N, gridLabel: P, onBlur: F, className: I }, L) {
+	let R = e("datePicker"), [z, B] = d(!1), V = l(() => _(D), [D]), H = o instanceof Date ? V.format(o) : "", [U, W] = d(H), [G, K] = d(H);
+	H !== G && (K(H), W(H));
+	let q = u(null), oe = s((e) => {
+		q.current = e, n(L, e);
+	}, [L]), J = U.trim(), Y = J ? V.parse(U) : null, X = J !== "" && !Y, se = E || X, Z = `${c()}-date-picker-invalid`, ce = [te ?? ne, X ? Z : void 0].filter(Boolean).join(" ") || void 0, le = s((e) => {
+		(T || w) && e || B(e);
+	}, [w, T]), ue = s((e) => {
 		let t = e.target.value;
-		if (U(t), t.trim() === "") {
-			p?.(null);
+		if (W(t), t.trim() === "") {
+			m?.(null);
 			return;
 		}
-		let n = B.parse(t);
-		n && p?.(n);
-	}, [B, p]), ue = o((e) => {
+		let n = V.parse(t);
+		n && m?.(n);
+	}, [V, m]), Q = s((e) => {
 		if (e.key === "ArrowDown" && !T && !w) {
-			e.preventDefault(), z(!0);
+			e.preventDefault(), B(!0);
 			return;
 		}
-		e.key === "Escape" && R && (e.preventDefault(), z(!1));
+		e.key === "Escape" && z && (e.preventDefault(), B(!1));
 	}, [
 		w,
-		R,
+		z,
 		T
-	]), Q = o((e) => {
-		U(B.format(e)), p?.(e), z(!1), requestAnimationFrame(() => K.current?.focus());
-	}, [B, p]), de = /* @__PURE__ */ d("button", {
+	]), de = s((e) => {
+		W(V.format(e)), m?.(e), B(!1), requestAnimationFrame(() => q.current?.focus());
+	}, [V, m]), fe = /* @__PURE__ */ f("button", {
 		type: "button",
 		className: "date-picker__button",
-		"aria-label": L("openCalendar", y),
+		"aria-label": R("openCalendar", ee),
 		"aria-haspopup": "dialog",
-		"aria-expanded": R,
+		"aria-expanded": z,
 		disabled: w,
 		tabIndex: T ? -1 : void 0,
-		children: /* @__PURE__ */ d(t, {
+		children: /* @__PURE__ */ f(t, {
 			name: "calendar",
 			size: "sm",
 			className: "date-picker__glyph"
 		})
-	}), $ = L("calendar", re);
-	return /* @__PURE__ */ f("div", {
+	}), $ = R("calendar", ie);
+	return /* @__PURE__ */ p("div", {
 		className: [
 			"date-picker",
 			C === "md" ? "" : `date-picker--${C}`,
-			F ?? ""
+			I ?? ""
 		].filter(Boolean).join(" "),
 		children: [
-			k && /* @__PURE__ */ d("input", {
+			k && /* @__PURE__ */ f("input", {
 				type: "hidden",
 				name: k,
-				value: a instanceof Date ? _(a) : ""
+				value: o instanceof Date ? v(o) : ""
 			}),
-			/* @__PURE__ */ f("div", {
+			/* @__PURE__ */ p("div", {
 				className: "date-picker__control",
-				children: [/* @__PURE__ */ d(n, {
-					ref: q,
+				children: [/* @__PURE__ */ f(r, {
+					ref: oe,
 					id: O,
 					className: "date-picker__input",
 					type: "text",
 					inputMode: "numeric",
 					autoComplete: "off",
 					size: C,
-					error: oe,
-					value: H,
-					placeholder: m ?? B.mask(L("maskLetters", h)),
+					error: se,
+					value: U,
+					placeholder: h ?? V.mask(R("maskLetters", g)),
 					disabled: w,
 					readOnly: T,
-					"aria-label": ne,
-					"aria-describedby": se,
-					onChange: le,
-					onKeyDown: ue,
-					onBlur: P
-				}), /* @__PURE__ */ d(r, {
-					trigger: de,
+					"aria-label": re,
+					"aria-describedby": ce,
+					onChange: ue,
+					onKeyDown: Q,
+					onBlur: F
+				}), /* @__PURE__ */ f(i, {
+					trigger: fe,
 					label: $,
-					open: R,
-					onOpenChange: ce,
+					open: z,
+					onOpenChange: le,
 					side: "bottom",
 					align: "end",
 					sideOffset: -1,
 					className: "date-picker__popover",
-					children: /* @__PURE__ */ d(i, {
-						value: Y ?? a ?? null,
-						onChange: Q,
-						gridLabel: N ?? $,
-						previousMonthLabel: ie,
-						nextMonthLabel: ae,
-						previousYearsLabel: A,
-						nextYearsLabel: j,
-						yearGridLabel: M,
+					children: /* @__PURE__ */ f(a, {
+						value: Y ?? o ?? null,
+						onChange: de,
+						gridLabel: P ?? $,
+						previousMonthLabel: ae,
+						nextMonthLabel: A,
+						previousYearsLabel: j,
+						nextYearsLabel: M,
+						yearGridLabel: N,
 						minDate: b,
 						maxDate: x,
 						disabledDates: S,
@@ -156,14 +157,14 @@ var v = a(function({ value: a, onChange: p, placeholder: m, maskLetters: h, inva
 					})
 				})]
 			}),
-			X && /* @__PURE__ */ d("span", {
+			X && /* @__PURE__ */ f("span", {
 				id: Z,
 				className: "date-picker__message",
 				role: "alert",
-				children: L("invalid", v)
+				children: R("invalid", y)
 			})
 		]
 	});
 });
 //#endregion
-export { v as t };
+export { y as t };

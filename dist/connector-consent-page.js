@@ -8,35 +8,35 @@ import { t as a } from "./_shared/untrustedtext.js";
 import { ConnectorRequestSummary as o } from "./connector-request-summary.js";
 import { Fragment as s, jsx as c, jsxs as l } from "react/jsx-runtime";
 //#region src/stories/templates/ConnectorAuth/ConnectorConsentPage.tsx
-function u({ clientName: u, productName: d, accountEmail: f, scope: p = "read", redirectHost: m, action: h, hiddenFields: g, decisionName: _ = "decision", approveValue: v = "approve", denyValue: y = "deny", onApprove: b, onDeny: x, denyHref: S, initialFocus: C = "none", title: w, intro: T, redirectNotice: E, approveLabel: D, denyLabel: O, scopeReadLabel: k, scopeWriteLabel: A, expandLabel: j, collapseLabel: M, valueQuotes: N, summaryLabels: P, links: F, header: I, footer: L, preferences: R, preferencesLabel: z, id: B, shell: V }) {
-	let H = e("connectorConsent"), U = h !== void 0, W = p === "read" ? k : A, G = (e) => /* @__PURE__ */ c(a, {
+function u({ clientName: u, productName: d, accountEmail: f, scope: p = "read", redirectHost: m, action: h, hiddenFields: g, decisionName: _ = "decision", approveValue: v = "approve", denyValue: y = "deny", onApprove: b, onDeny: x, denyHref: S, initialFocus: C = "none", title: w, intro: T, redirectNotice: E, approveLabel: D, denyLabel: O, scopeReadLabel: k, scopeWriteLabel: A, expandLabel: j, collapseLabel: M, valueQuotes: N, summaryLabels: P, links: F, header: I, footer: L, preferences: R, preferencesLabel: z, id: B, shell: V, className: H }) {
+	let U = e("connectorConsent"), W = h !== void 0, G = p === "read" ? k : A, K = (e) => /* @__PURE__ */ c(a, {
 		value: e,
 		quotes: N
-	}), K = S === void 0 ? /* @__PURE__ */ c(t, {
+	}), q = S === void 0 ? /* @__PURE__ */ c(t, {
 		variant: "outline",
-		type: U ? "submit" : "button",
-		name: U ? _ : void 0,
-		value: U ? y : void 0,
+		type: W ? "submit" : "button",
+		name: W ? _ : void 0,
+		value: W ? y : void 0,
 		onClick: x,
 		autoFocus: C === "deny",
-		children: H("deny", O)
+		children: U("deny", O)
 	}) : /* @__PURE__ */ c(t, {
 		variant: "outline",
 		href: S,
-		children: H("deny", O)
-	}), q = /* @__PURE__ */ c(t, {
-		type: U ? "submit" : "button",
-		name: U ? _ : void 0,
-		value: U ? v : void 0,
+		children: U("deny", O)
+	}), J = /* @__PURE__ */ c(t, {
+		type: W ? "submit" : "button",
+		name: W ? _ : void 0,
+		value: W ? v : void 0,
 		onClick: b,
 		children: D
 	});
 	return /* @__PURE__ */ c(i, {
-		title: w ?? H("title"),
+		title: w ?? U("title"),
 		description: T({
-			client: /* @__PURE__ */ c("strong", { children: G(u) }),
-			what: W,
-			email: /* @__PURE__ */ c("strong", { children: G(f) })
+			client: /* @__PURE__ */ c("strong", { children: K(u) }),
+			what: G,
+			email: /* @__PURE__ */ c("strong", { children: K(f) })
 		}),
 		header: I,
 		footer: L,
@@ -44,13 +44,14 @@ function u({ clientName: u, productName: d, accountEmail: f, scope: p = "read", 
 		preferencesLabel: z,
 		id: B,
 		shell: V,
+		className: H,
 		children: /* @__PURE__ */ l(r, {
 			size: "lg",
 			blockActions: !0,
 			method: typeof h == "string" ? "post" : void 0,
 			action: h,
 			links: F,
-			actions: /* @__PURE__ */ l(s, { children: [K, q] }),
+			actions: /* @__PURE__ */ l(s, { children: [q, J] }),
 			children: [
 				g && Object.entries(g).map(([e, t]) => /* @__PURE__ */ c("input", {
 					type: "hidden",
@@ -70,7 +71,7 @@ function u({ clientName: u, productName: d, accountEmail: f, scope: p = "read", 
 					valueQuotes: N,
 					...P
 				}),
-				/* @__PURE__ */ c(n, { children: E({ host: /* @__PURE__ */ c("strong", { children: G(m) }) }) })
+				/* @__PURE__ */ c(n, { children: E({ host: /* @__PURE__ */ c("strong", { children: K(m) }) }) })
 			]
 		})
 	});

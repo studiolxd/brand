@@ -28,30 +28,30 @@ function o({ label: n, announce: o = !0, children: s, className: c, ...l }) {
 function s(e) {
 	return Array.from({ length: Math.max(0, Math.floor(e)) }, (e, t) => t);
 }
-function c({ lines: e = 3 }) {
+function c({ lines: e = 3, className: t }) {
 	return /* @__PURE__ */ i("div", {
-		className: "skeleton-text",
+		className: ["skeleton-text", t].filter(Boolean).join(" "),
 		"aria-hidden": "true",
 		children: s(e).map((t) => /* @__PURE__ */ i(n, { className: ["skeleton-text__line", t === e - 1 && e > 1 ? "skeleton-text__line--last" : ""].filter(Boolean).join(" ") }, t))
 	});
 }
-function l({ rows: e = 4 }) {
+function l({ rows: e = 4, className: t }) {
 	return /* @__PURE__ */ i("div", {
-		className: "skeleton-list",
+		className: ["skeleton-list", t].filter(Boolean).join(" "),
 		"aria-hidden": "true",
 		children: s(e).map((e) => /* @__PURE__ */ i(n, { className: "skeleton-list__row" }, e))
 	});
 }
-function u({ rows: e = 4 }) {
+function u({ rows: e = 4, className: t }) {
 	return /* @__PURE__ */ a("div", {
-		className: "skeleton-table",
+		className: ["skeleton-table", t].filter(Boolean).join(" "),
 		"aria-hidden": "true",
 		children: [/* @__PURE__ */ i(n, { className: "skeleton-table__header" }), s(e).map((e) => /* @__PURE__ */ i(n, { className: "skeleton-table__row" }, e))]
 	});
 }
-function d({ columns: e = 3, rows: t = 2 }) {
+function d({ columns: e = 3, rows: t = 2, className: r }) {
 	return /* @__PURE__ */ i("div", {
-		className: "skeleton-grid",
+		className: ["skeleton-grid", r].filter(Boolean).join(" "),
 		"data-columns": e,
 		"aria-hidden": "true",
 		children: s(e * t).map((e) => /* @__PURE__ */ i(n, { className: "skeleton-grid__item" }, e))

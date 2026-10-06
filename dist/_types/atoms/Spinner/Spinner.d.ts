@@ -20,5 +20,7 @@ export interface SpinnerProps {
     label?: string;
     /** Cuando true, el spinner es puramente decorativo (sin rol ni anuncio). */
     'aria-hidden'?: boolean;
+    /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+    className?: string;
 }
-export declare function Spinner({ size, label, 'aria-hidden': ariaHidden }: SpinnerProps): import("react/jsx-runtime").JSX.Element;
+export declare function Spinner({ size, label, 'aria-hidden': ariaHidden, className }: SpinnerProps): import("react/jsx-runtime").JSX.Element;

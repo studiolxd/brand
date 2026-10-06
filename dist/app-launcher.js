@@ -44,15 +44,22 @@ function d({ apps: e, currentAppId: t, newLabel: n }) {
 		}) }, e.id))
 	});
 }
-function f({ apps: r, labels: i, currentAppId: a, open: o, defaultOpen: u, onOpenChange: f }) {
-	let p = e("appLauncher"), m = n(void 0);
+function f(e, t) {
+	return [
+		"app-launcher__trigger",
+		e ? "app-launcher__trigger--label" : "",
+		t
+	].filter(Boolean).join(" ");
+}
+function p({ apps: r, labels: i, currentAppId: a, open: o, defaultOpen: u, onOpenChange: p, className: m }) {
+	let h = e("appLauncher"), g = n(void 0);
 	return /* @__PURE__ */ c(l.Root, {
 		open: o,
 		defaultOpen: u,
-		onOpenChange: (e) => f?.(e),
+		onOpenChange: (e) => p?.(e),
 		children: [/* @__PURE__ */ s(l.Trigger, { render: i.trigger ? /* @__PURE__ */ c("button", {
 			type: "button",
-			className: "app-launcher__trigger app-launcher__trigger--label",
+			className: f(!0, m),
 			children: [/* @__PURE__ */ s(t, {
 				name: "grid",
 				size: "md"
@@ -62,14 +69,14 @@ function f({ apps: r, labels: i, currentAppId: a, open: o, defaultOpen: u, onOpe
 			})]
 		}) : /* @__PURE__ */ s("button", {
 			type: "button",
-			className: "app-launcher__trigger",
-			"aria-label": p("open", i.open),
+			className: f(!1, m),
+			"aria-label": h("open", i.open),
 			children: /* @__PURE__ */ s(t, {
 				name: "grid",
 				size: "md"
 			})
 		}) }), /* @__PURE__ */ s(l.Portal, {
-			container: m,
+			container: g,
 			children: /* @__PURE__ */ s(l.Positioner, {
 				className: "app-launcher__positioner",
 				sideOffset: 4,
@@ -86,19 +93,19 @@ function f({ apps: r, labels: i, currentAppId: a, open: o, defaultOpen: u, onOpe
 		})]
 	});
 }
-function p(e, t, n) {
+function m(e, t, n) {
 	let [r, i] = a(t ?? !1);
 	return [e ?? r, (t) => {
 		e === void 0 && i(t), n?.(t);
 	}];
 }
-function m({ apps: n, labels: r, currentAppId: a, open: l, defaultOpen: u, onOpenChange: f }) {
-	let m = e("appLauncher"), [h, g] = p(l, u, f);
+function h({ apps: n, labels: r, currentAppId: a, open: l, defaultOpen: u, onOpenChange: p, className: h }) {
+	let g = e("appLauncher"), [_, v] = m(l, u, p);
 	return /* @__PURE__ */ c(o, { children: [r.trigger ? /* @__PURE__ */ c("button", {
 		type: "button",
-		className: "app-launcher__trigger app-launcher__trigger--label",
+		className: f(!0, h),
 		"aria-haspopup": "dialog",
-		onClick: () => g(!0),
+		onClick: () => v(!0),
 		children: [/* @__PURE__ */ s(t, {
 			name: "grid",
 			size: "md"
@@ -108,18 +115,18 @@ function m({ apps: n, labels: r, currentAppId: a, open: l, defaultOpen: u, onOpe
 		})]
 	}) : /* @__PURE__ */ s("button", {
 		type: "button",
-		className: "app-launcher__trigger",
-		"aria-label": m("open", r.open),
+		className: f(!1, h),
+		"aria-label": g("open", r.open),
 		"aria-haspopup": "dialog",
-		onClick: () => g(!0),
+		onClick: () => v(!0),
 		children: /* @__PURE__ */ s(t, {
 			name: "grid",
 			size: "md"
 		})
 	}), /* @__PURE__ */ s(i, {
-		open: h,
-		onClose: () => g(!1),
-		title: m("title", r.title),
+		open: _,
+		onClose: () => v(!1),
+		title: g("title", r.title),
 		children: /* @__PURE__ */ s(d, {
 			apps: n,
 			currentAppId: a,
@@ -127,11 +134,11 @@ function m({ apps: n, labels: r, currentAppId: a, open: l, defaultOpen: u, onOpe
 		})
 	})] });
 }
-function h({ presentation: e = "modal", labels: t = {}, ...n }) {
-	return s(e === "popover" ? f : m, {
+function g({ presentation: e = "modal", labels: t = {}, ...n }) {
+	return s(e === "popover" ? p : h, {
 		labels: t,
 		...n
 	});
 }
 //#endregion
-export { h as AppLauncher };
+export { g as AppLauncher };

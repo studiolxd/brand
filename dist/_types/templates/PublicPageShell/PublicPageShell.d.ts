@@ -66,6 +66,12 @@ export interface PublicPageShellProps {
      * aplican —y tampoco el `ref`, porque no hay marco al que engancharlo.
      */
     shell?: boolean;
+    /**
+     * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+     * Va al nodo raíz del marco (`.site-shell`). Con `shell={false}` no aplica:
+     * no hay nodo propio, solo los `children`.
+     */
+    className?: string;
 }
 /**
  * El marco de una página pública, en una sola pieza: `SiteShell` con cabecera

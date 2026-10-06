@@ -41,6 +41,8 @@ export interface SidebarProps {
     resizerValueText?: (width: number) => string;
     /** Fuerza el modo sin `AppShell` (Storybook, pruebas). Con shell, lo decide el shell. */
     mode?: 'open' | 'rail';
+    /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+    className?: string;
 }
 /**
  * La barra lateral de la aplicación. En escritorio es una columna con tres
@@ -49,7 +51,7 @@ export interface SidebarProps {
  * grupos de navegación se abren como menú) y cerrada. En móvil es un cajón
  * que entra por la izquierda y se cierra al navegar.
  */
-export declare function Sidebar({ logo, children, footer, id, label, resizerLabel, resizerValueText, mode, }: SidebarProps): import("react/jsx-runtime").JSX.Element;
+export declare function Sidebar({ logo, children, footer, id, label, resizerLabel, resizerValueText, mode, className, }: SidebarProps): import("react/jsx-runtime").JSX.Element;
 export interface SidebarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
     children: ReactNode;
 }

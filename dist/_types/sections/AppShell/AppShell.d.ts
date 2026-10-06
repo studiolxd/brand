@@ -41,6 +41,11 @@ export interface AppShellProps {
      * él, sale de `appShell.skipToContent` del `BrandMessagesProvider`.
      */
     skipLabel?: string;
+    /**
+     * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+     * Va al contenedor `.app-shell`, no al enlace de salto que lo precede.
+     */
+    className?: string;
 }
 /**
  * El único texto que el armazón dice por su cuenta, y es **cromo**: el enlace
@@ -59,4 +64,4 @@ export interface AppShellMessages {
  * modo y su asa) y `SidebarNav` (rail). Persistir el estado es del producto:
  * `onSidebarChange` / `onSidebarWidthChange` avisan de cada cambio.
  */
-export declare function AppShell({ banner, header, sidebar, children, contentFlush, defaultSidebar, sidebarState, onSidebarChange, defaultSidebarWidth, onSidebarWidthChange, skipLabel, }: AppShellProps): import("react/jsx-runtime").JSX.Element;
+export declare function AppShell({ banner, header, sidebar, children, contentFlush, defaultSidebar, sidebarState, onSidebarChange, defaultSidebarWidth, onSidebarWidthChange, skipLabel, className, }: AppShellProps): import("react/jsx-runtime").JSX.Element;

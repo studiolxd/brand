@@ -20,10 +20,17 @@ export interface ContextMenuProps {
      * traducir.
      */
     label?: string;
+    /**
+     * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+     * Va al botón de tres puntos —el único nodo que el componente pinta en su
+     * sitio—, no al panel, que sale por un portal: a diferencia de `Menu`, aquí
+     * el disparador es del componente y no del consumidor.
+     */
+    className?: string;
 }
 /**
  * El menú de acciones de una fila, una tarjeta, un elemento: un `Menu` cuyo
  * disparador es el botón de tres puntos (`DotsButton`). Todo lo demás —ítems,
  * enlaces del router, colocación, cara— es del `Menu`.
  */
-export declare function ContextMenu({ items, renderLink, onOpenChange, side, align, minWidth, maxWidth, triggerSize, triggerOrientation, label, }: ContextMenuProps): import("react/jsx-runtime").JSX.Element;
+export declare function ContextMenu({ items, renderLink, onOpenChange, side, align, minWidth, maxWidth, triggerSize, triggerOrientation, label, className, }: ContextMenuProps): import("react/jsx-runtime").JSX.Element;

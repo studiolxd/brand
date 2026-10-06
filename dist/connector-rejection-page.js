@@ -7,8 +7,8 @@ import { Paragraph as i } from "./paragraph.js";
 import { ConnectorAuthShell as a } from "./connector-auth-shell.js";
 import { jsx as o, jsxs as s } from "react/jsx-runtime";
 //#region src/stories/templates/ConnectorAuth/ConnectorRejectionPage.tsx
-function c({ title: c, description: l, hint: u, code: d, codeLabel: f, retryHref: p, onRetry: m, retryLabel: h, retryAction: g, aside: _, header: v, footer: y, preferences: b, preferencesLabel: x, id: S, shell: C }) {
-	let w = e("connectorRejection"), T = g ?? (p === void 0 ? m ? /* @__PURE__ */ o(t, {
+function c({ title: c, description: l, hint: u, code: d, codeLabel: f, retryHref: p, onRetry: m, retryLabel: h, retryAction: g, aside: _, header: v, footer: y, preferences: b, preferencesLabel: x, id: S, shell: C, className: w }) {
+	let T = e("connectorRejection"), E = g ?? (p === void 0 ? m ? /* @__PURE__ */ o(t, {
 		onClick: m,
 		children: h
 	}) : null : /* @__PURE__ */ o(t, {
@@ -21,7 +21,7 @@ function c({ title: c, description: l, hint: u, code: d, codeLabel: f, retryHref
 		intro: d === void 0 ? void 0 : /* @__PURE__ */ s(i, {
 			size: "small",
 			children: [
-				w("code", f),
+				T("code", f),
 				": ",
 				/* @__PURE__ */ o(r, { children: d })
 			]
@@ -33,12 +33,13 @@ function c({ title: c, description: l, hint: u, code: d, codeLabel: f, retryHref
 		preferencesLabel: x,
 		id: S,
 		shell: C,
+		className: w,
 		children: /* @__PURE__ */ s(n, {
 			align: "stretch",
 			children: [/* @__PURE__ */ o(i, {
 				size: "large",
 				children: u
-			}), T]
+			}), E]
 		})
 	});
 }

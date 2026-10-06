@@ -25,29 +25,37 @@ export declare function LoadingRegion({ label, announce, children, className, ..
 export interface SkeletonTextProps {
     /** Líneas del párrafo; la última sale más corta. */
     lines?: number;
+    /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+    className?: string;
 }
 /** Un bloque de texto —un párrafo, una lista de definiciones— que aún no llegó. Decorativo. */
-export declare function SkeletonText({ lines }: SkeletonTextProps): import("react/jsx-runtime").JSX.Element;
+export declare function SkeletonText({ lines, className }: SkeletonTextProps): import("react/jsx-runtime").JSX.Element;
 export interface SkeletonListProps {
     /** Filas de la lista. */
     rows?: number;
+    /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+    className?: string;
 }
 /** Una lista que aún no llegó: una barra por fila, del alto de un control. Decorativo. */
-export declare function SkeletonList({ rows }: SkeletonListProps): import("react/jsx-runtime").JSX.Element;
+export declare function SkeletonList({ rows, className }: SkeletonListProps): import("react/jsx-runtime").JSX.Element;
 export interface SkeletonTableProps {
     /** Filas de cuerpo, sin contar la cabecera. */
     rows?: number;
+    /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+    className?: string;
 }
 /**
  * Una tabla que aún no llegó: la cabecera y sus filas. No calca el diseño —no
  * hace falta—, solo ocupa un sitio parecido. Decorativo.
  */
-export declare function SkeletonTable({ rows }: SkeletonTableProps): import("react/jsx-runtime").JSX.Element;
+export declare function SkeletonTable({ rows, className }: SkeletonTableProps): import("react/jsx-runtime").JSX.Element;
 export interface SkeletonGridProps {
     /** Columnas de la rejilla. */
     columns?: 2 | 3 | 4;
     /** Filas de la rejilla: se pintan `columns × rows` celdas. */
     rows?: number;
+    /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+    className?: string;
 }
 /** Una rejilla de tarjetas o miniaturas que aún no llegó. Decorativo. */
-export declare function SkeletonGrid({ columns, rows }: SkeletonGridProps): import("react/jsx-runtime").JSX.Element;
+export declare function SkeletonGrid({ columns, rows, className }: SkeletonGridProps): import("react/jsx-runtime").JSX.Element;

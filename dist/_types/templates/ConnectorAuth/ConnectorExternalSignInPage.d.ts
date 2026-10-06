@@ -124,4 +124,4 @@ export interface ConnectorExternalSignInPageProps extends ConnectorAuthChromePro
  * `Card` dentro de una columna estrecha, sin cabecera pública ni pie: al
  * cablearla, ese molde propio se retira y lo pone la plantilla.
  */
-export declare function ConnectorExternalSignInPage({ platformName, organization, organizationDefaultValue, organizationName, action, onSubmit, hiddenFields, error, title, intro, signingInTo, valueQuotes, organizationLabel, submitLabel, extra, links, header, footer, preferences, preferencesLabel, id, shell, }: ConnectorExternalSignInPageProps): import("react/jsx-runtime").JSX.Element;
+export declare function ConnectorExternalSignInPage({ platformName, organization, organizationDefaultValue, organizationName, action, onSubmit, hiddenFields, error, title, intro, signingInTo, valueQuotes, organizationLabel, submitLabel, extra, links, header, footer, preferences, preferencesLabel, id, shell, className, }: ConnectorExternalSignInPageProps): import("react/jsx-runtime").JSX.Element;

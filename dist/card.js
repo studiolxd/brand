@@ -1,14 +1,15 @@
 'use client';
 import './card.css';
 import { VisuallyHidden as e } from "./visually-hidden.js";
-import { Arrow as t } from "./arrow.js";
-import { Heading as n } from "./heading.js";
-import { Paragraph as r } from "./paragraph.js";
-import { forwardRef as i, useCallback as a, useRef as o } from "react";
-import { Fragment as s, jsx as c, jsxs as l } from "react/jsx-runtime";
-import { useRender as u } from "@base-ui/react/use-render";
+import { t } from "./_shared/assign-ref.js";
+import { Arrow as n } from "./arrow.js";
+import { Heading as r } from "./heading.js";
+import { Paragraph as i } from "./paragraph.js";
+import { forwardRef as a, useCallback as o, useRef as s } from "react";
+import { Fragment as c, jsx as l, jsxs as u } from "react/jsx-runtime";
+import { useRender as d } from "@base-ui/react/use-render";
 //#region src/stories/molecules/Card/Card.tsx
-var d = i(function({ href: r, render: i, external: a = !1, title: o, description: d, ctaLabel: f, color: p = "outline", variant: m = "default", media: h, linkOverlay: g = !1, selectable: _ = !1, selected: v = !1, className: y, children: b, ...x }, S) {
+var f = a(function({ href: t, render: i, external: a = !1, title: o, description: s, ctaLabel: f, color: p = "outline", variant: m = "default", media: h, linkOverlay: g = !1, selectable: _ = !1, selected: v = !1, className: y, children: b, ...x }, S) {
 	let C = [
 		"card",
 		`card--${p}`,
@@ -17,26 +18,26 @@ var d = i(function({ href: r, render: i, external: a = !1, title: o, description
 		_ ? "card--selectable" : "",
 		_ && v ? "card--selected" : "",
 		y ?? ""
-	].filter(Boolean).join(" "), w = /* @__PURE__ */ l(s, { children: [
-		o !== void 0 && /* @__PURE__ */ c(n, {
+	].filter(Boolean).join(" "), w = /* @__PURE__ */ u(c, { children: [
+		o !== void 0 && /* @__PURE__ */ l(r, {
 			level: 2,
 			size: 8,
 			children: o
 		}),
-		d && (typeof d == "string" ? /* @__PURE__ */ c("p", { children: d }) : d),
+		s && (typeof s == "string" ? /* @__PURE__ */ l("p", { children: s }) : s),
 		b,
-		f !== void 0 && /* @__PURE__ */ l(s, { children: [/* @__PURE__ */ c(e, { children: f }), /* @__PURE__ */ c(t, { size: "lg" })] })
-	] }), T = h && /* @__PURE__ */ c("div", {
+		f !== void 0 && /* @__PURE__ */ u(c, { children: [/* @__PURE__ */ l(e, { children: f }), /* @__PURE__ */ l(n, { size: "lg" })] })
+	] }), T = h && /* @__PURE__ */ l("div", {
 		className: "card__media",
-		children: /* @__PURE__ */ c("img", {
+		children: /* @__PURE__ */ l("img", {
 			src: h.src,
 			alt: h.alt
 		})
-	}), E = m === "default" && !h ? w : /* @__PURE__ */ l(s, { children: [T, /* @__PURE__ */ c("div", {
+	}), E = m === "default" && !h ? w : /* @__PURE__ */ u(c, { children: [T, /* @__PURE__ */ l("div", {
 		className: "card__body",
 		children: w
 	})] });
-	return u({
+	return d({
 		render: i,
 		ref: S,
 		enabled: i !== void 0,
@@ -45,14 +46,14 @@ var d = i(function({ href: r, render: i, external: a = !1, title: o, description
 			...x,
 			children: E
 		}
-	}) || (r === void 0 ? /* @__PURE__ */ c("div", {
+	}) || (t === void 0 ? /* @__PURE__ */ l("div", {
 		ref: S,
 		className: C,
 		...x,
 		children: b
-	}) : /* @__PURE__ */ c("a", {
+	}) : /* @__PURE__ */ l("a", {
 		ref: S,
-		href: r,
+		href: t,
 		className: C,
 		...a ? {
 			target: "_blank",
@@ -62,30 +63,30 @@ var d = i(function({ href: r, render: i, external: a = !1, title: o, description
 		children: E
 	}));
 });
-function f(e, t, n) {
+function p(e, t, n) {
 	return [
 		e,
 		t ? "card__interactive" : "",
 		n
 	].filter(Boolean).join(" ");
 }
-var p = i(function({ interactive: e, className: t, ...n }, r) {
-	return /* @__PURE__ */ c("div", {
+var m = a(function({ interactive: e, className: t, ...n }, r) {
+	return /* @__PURE__ */ l("div", {
 		ref: r,
-		className: f("card__header", e, t),
+		className: p("card__header", e, t),
 		...n
 	});
-}), m = i(function({ level: e = 3, size: t = 4, className: r, children: i, ...a }, o) {
-	return /* @__PURE__ */ c(n, {
+}), h = a(function({ level: e = 3, size: t = 4, className: n, children: i, ...a }, o) {
+	return /* @__PURE__ */ l(r, {
 		ref: o,
 		level: e,
 		size: t,
-		className: ["card__title", r].filter(Boolean).join(" "),
+		className: ["card__title", n].filter(Boolean).join(" "),
 		...a,
 		children: i
 	});
-}), h = i(function({ size: e = "small", lines: t, className: n, children: i, ...a }, o) {
-	return /* @__PURE__ */ c(r, {
+}), g = a(function({ size: e = "small", lines: t, className: n, children: r, ...a }, o) {
+	return /* @__PURE__ */ l(i, {
 		ref: o,
 		size: e,
 		className: [
@@ -94,27 +95,27 @@ var p = i(function({ interactive: e, className: t, ...n }, r) {
 			n
 		].filter(Boolean).join(" "),
 		...a,
-		children: i
+		children: r
 	});
-}), g = i(function({ isolate: e = !0, className: t, onClick: n, ...r }, i) {
-	let s = o(null);
-	return /* @__PURE__ */ c("div", {
-		ref: a((e) => {
-			s.current = e, typeof i == "function" ? i(e) : i && (i.current = e);
-		}, [i]),
-		className: ["card__action", t].filter(Boolean).join(" "),
+}), _ = a(function({ isolate: e = !0, className: n, onClick: r, ...i }, a) {
+	let c = s(null);
+	return /* @__PURE__ */ l("div", {
+		ref: o((e) => {
+			c.current = e, t(a, e);
+		}, [a]),
+		className: ["card__action", n].filter(Boolean).join(" "),
 		onClick: (t) => {
 			if (e) {
 				t.stopPropagation();
-				let e = s.current;
+				let e = c.current;
 				(e?.contains(t.target) ?? !1) && e?.parentElement?.closest("a[href], [role=\"link\"]") && t.preventDefault();
 			}
-			n?.(t);
+			r?.(t);
 		},
-		...r
+		...i
 	});
-}), _ = i(function({ isolate: e = !0, className: t, onClick: n, ...r }, i) {
-	return /* @__PURE__ */ c("div", {
+}), v = a(function({ isolate: e = !0, className: t, onClick: n, ...r }, i) {
+	return /* @__PURE__ */ l("div", {
 		ref: i,
 		className: ["card__selection", t].filter(Boolean).join(" "),
 		onClick: (t) => {
@@ -122,18 +123,18 @@ var p = i(function({ interactive: e, className: t, ...n }, r) {
 		},
 		...r
 	});
-}), v = i(function({ interactive: e, className: t, ...n }, r) {
-	return /* @__PURE__ */ c("div", {
+}), y = a(function({ interactive: e, className: t, ...n }, r) {
+	return /* @__PURE__ */ l("div", {
 		ref: r,
-		className: f("card__content", e, t),
+		className: p("card__content", e, t),
 		...n
 	});
-}), y = i(function({ direction: e = "row", interactive: t, className: n, ...r }, i) {
-	return /* @__PURE__ */ c("div", {
+}), b = a(function({ direction: e = "row", interactive: t, className: n, ...r }, i) {
+	return /* @__PURE__ */ l("div", {
 		ref: i,
-		className: f("card__footer", t, [e === "column" ? "card__footer--column" : "", n].filter(Boolean).join(" ") || void 0),
+		className: p("card__footer", t, [e === "column" ? "card__footer--column" : "", n].filter(Boolean).join(" ") || void 0),
 		...r
 	});
 });
 //#endregion
-export { d as Card, g as CardAction, v as CardContent, h as CardDescription, y as CardFooter, p as CardHeader, _ as CardSelection, m as CardTitle };
+export { f as Card, _ as CardAction, y as CardContent, g as CardDescription, b as CardFooter, m as CardHeader, v as CardSelection, h as CardTitle };

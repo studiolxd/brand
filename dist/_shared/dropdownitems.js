@@ -1,13 +1,7 @@
 import { Fragment as e, jsx as t, jsxs as n } from "react/jsx-runtime";
 import { Menu as r } from "@base-ui/react/menu";
 //#region src/stories/molecules/_shared/dropdownItems.tsx
-function i({ children: e, ...n }) {
-	return /* @__PURE__ */ t("a", {
-		...n,
-		children: e
-	});
-}
-function a(r, i, a, o) {
+function i(r, i, a, o) {
 	let s = a && o ? /* @__PURE__ */ n("span", {
 		className: `${o}__item-text`,
 		children: [/* @__PURE__ */ t("span", {
@@ -24,7 +18,7 @@ function a(r, i, a, o) {
 		children: i
 	}), s] }) : /* @__PURE__ */ t(e, { children: s });
 }
-function o(e) {
+function a(e) {
 	return e.reduce((e, t) => {
 		let n = t.type === "radio", r = e[e.length - 1];
 		return r && r.radio === n ? r.items.push(t) : e.push({
@@ -33,26 +27,26 @@ function o(e) {
 		}), e;
 	}, []);
 }
-function s({ items: e, itemClass: n, separatorClass: i, renderLink: s, labelClass: c, blockClass: l, radioValue: u, onRadioValueChange: d }) {
-	let f = (e, o) => {
-		if (e.type === "separator") return /* @__PURE__ */ t(r.Separator, { className: i }, o);
+function o({ items: e, itemClass: n, separatorClass: o, renderLink: s, labelClass: c, blockClass: l, radioValue: u, onRadioValueChange: d }) {
+	let f = (e, a) => {
+		if (e.type === "separator") return /* @__PURE__ */ t(r.Separator, { className: o }, a);
 		if (e.type === "label") return c ? /* @__PURE__ */ t(r.Group, { children: /* @__PURE__ */ t(r.GroupLabel, {
 			className: c,
 			children: e.label
-		}) }, o) : null;
+		}) }, a) : null;
 		if (e.type === "radio") return /* @__PURE__ */ t(r.RadioItem, {
 			className: n(),
 			value: e.value,
 			disabled: e.disabled,
 			closeOnClick: e.closeOnSelect !== !1,
-			children: a(e.label, e.icon, void 0, l)
-		}, o);
-		let u = a(e.label, e.icon, e.description, l);
+			children: i(e.label, e.icon, void 0, l)
+		}, a);
+		let u = i(e.label, e.icon, e.description, l);
 		return e.type === "link" ? e.disabled ? /* @__PURE__ */ t(r.Item, {
 			className: n(e.destructive),
 			disabled: !0,
 			children: u
-		}, o) : /* @__PURE__ */ t(r.Item, {
+		}, a) : /* @__PURE__ */ t(r.Item, {
 			className: n(e.destructive),
 			render: (t) => s({
 				...t,
@@ -60,7 +54,7 @@ function s({ items: e, itemClass: n, separatorClass: i, renderLink: s, labelClas
 				className: t.className ?? n(e.destructive),
 				children: u
 			})
-		}, o) : /* @__PURE__ */ t(r.Item, {
+		}, a) : /* @__PURE__ */ t(r.Item, {
 			className: n(e.destructive),
 			disabled: e.disabled,
 			closeOnClick: e.closeOnSelect !== !1,
@@ -72,11 +66,11 @@ function s({ items: e, itemClass: n, separatorClass: i, renderLink: s, labelClas
 				setTimeout(() => e.onClick(), 0);
 			},
 			children: u
-		}, o);
+		}, a);
 	}, p = e;
 	if (!p.some((e) => e.type === "radio")) return p.map(f);
 	let m = 0;
-	return o(p).map((e, n) => {
+	return a(p).map((e, n) => {
 		let i = m;
 		m += e.items.length;
 		let a = e.items.map((e, t) => f(e, i + t));
@@ -88,4 +82,4 @@ function s({ items: e, itemClass: n, separatorClass: i, renderLink: s, labelClas
 	});
 }
 //#endregion
-export { s as n, i as t };
+export { o as t };

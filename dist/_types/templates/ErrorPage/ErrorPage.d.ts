@@ -22,6 +22,12 @@ export interface ErrorPageProps {
      * Por defecto `true`. Sin marco, `header`, `footer` e `id` no aplican.
      */
     shell?: boolean;
+    /**
+     * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+     * Va al contenido propio de la plantilla —las dos columnas—, con marco y
+     * sin él, como en `OnboardingShell` y `ConnectorAuthShell`.
+     */
+    className?: string;
 }
 /**
  * Plantilla de «algo ha salido mal»: dos columnas, mismo molde que `AuthPage`
@@ -32,4 +38,4 @@ export interface ErrorPageProps {
  * del layout que pudo fallar. Con `shell={false}` devuelve solo el contenido,
  * para una app que ya tiene su `main`.
  */
-export declare function ErrorPage({ title, description, homeAction, retryDescription, retryAction, header, footer, id, shell }: ErrorPageProps): import("react/jsx-runtime").JSX.Element;
+export declare function ErrorPage({ title, description, homeAction, retryDescription, retryAction, header, footer, id, shell, className }: ErrorPageProps): import("react/jsx-runtime").JSX.Element;

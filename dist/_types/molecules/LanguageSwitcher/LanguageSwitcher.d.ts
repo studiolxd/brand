@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import './LanguageSwitcher.css';
 /**
  * El único texto del selector, y es **cromo**: cómo se llama el control. Los
@@ -33,7 +33,7 @@ export interface LanguageSwitcherProps {
      * él, sale de `languageSwitcher.label` del `BrandMessagesProvider`.
      */
     label?: string;
-    /** `id` del control en compacto (enlaza la etiqueta). */
+    /** `id` del control en compacto (enlaza la etiqueta). Por defecto, uno único por instancia (`useId`). */
     id?: string;
     /** Oculta la etiqueta (visible por defecto: en el panel va con su nombre, como el de tema). */
     labelHidden?: boolean;
@@ -67,4 +67,4 @@ export interface LanguageSwitcherProps {
  * componente del sistema porque aparece en el menú y en el pie de todos los
  * sitios; el enrutado y la persistencia se quedan en el producto.
  */
-export declare function LanguageSwitcher({ languages, value, onChange, label, id, labelHidden, variant, layout, size, hrefFor, renderLink, className, }: LanguageSwitcherProps): import("react/jsx-runtime").JSX.Element;
+export declare function LanguageSwitcher({ languages, value, onChange, label, id: idProp, labelHidden, variant, layout, size, hrefFor, renderLink, className, }: LanguageSwitcherProps): import("react/jsx-runtime").JSX.Element;

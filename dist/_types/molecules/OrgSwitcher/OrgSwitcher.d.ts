@@ -33,5 +33,11 @@ export interface OrgSwitcherProps {
     defaultOpen?: boolean;
     items?: MenuItem[];
     renderLink?: (props: MenuRenderLinkProps) => ReactNode;
+    /**
+     * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+     * Va al disparador: es el único nodo que el componente pinta en su sitio (el
+     * panel sale por un portal).
+     */
+    className?: string;
 }
-export declare function OrgSwitcher({ label, block, compact, current, organizations, onOrgChange, defaultOpen, items, renderLink }: OrgSwitcherProps): import("react/jsx-runtime").JSX.Element;
+export declare function OrgSwitcher({ label, block, compact, current, organizations, onOrgChange, defaultOpen, items, renderLink, className }: OrgSwitcherProps): import("react/jsx-runtime").JSX.Element;

@@ -2,78 +2,79 @@
 import './language-switcher.css';
 import { n as e } from "./_shared/brandmessagescontext.js";
 import { DropdownField as t } from "./dropdown-field.js";
-import { jsx as n } from "react/jsx-runtime";
+import { useId as n } from "react";
+import { jsx as r } from "react/jsx-runtime";
 //#region src/stories/molecules/LanguageSwitcher/LanguageSwitcher.tsx
-function r({ href: e, lang: t, children: r, className: i, "aria-current": a }) {
-	return /* @__PURE__ */ n("a", {
+function i({ href: e, lang: t, children: n, className: i, "aria-current": a }) {
+	return /* @__PURE__ */ r("a", {
 		href: e,
 		lang: t,
 		className: i,
 		"aria-current": a,
-		children: r
+		children: n
 	});
 }
-function i({ languages: i, value: a, onChange: o, label: s, id: c = "language-switcher", labelHidden: l, variant: u = "compact", layout: d = "inline", size: f = "md", hrefFor: p, renderLink: m = r, className: h }) {
-	let g = e("languageSwitcher")("label", s);
-	if (u === "list") return /* @__PURE__ */ n("nav", {
+function a({ languages: a, value: o, onChange: s, label: c, id: l, labelHidden: u, variant: d = "compact", layout: f = "inline", size: p = "md", hrefFor: m, renderLink: h = i, className: g }) {
+	let _ = n(), v = l ?? _, y = e("languageSwitcher")("label", c);
+	if (d === "list") return /* @__PURE__ */ r("nav", {
 		className: [
 			"language-switcher",
 			"language-switcher--list",
-			h
+			g
 		].filter(Boolean).join(" "),
-		"aria-label": g,
-		children: /* @__PURE__ */ n("ul", {
+		"aria-label": y,
+		children: /* @__PURE__ */ r("ul", {
 			className: "language-switcher__list",
-			children: i.map(({ code: e, label: t }) => {
-				let r = e === a, i = ["language-switcher__option", r ? "language-switcher__option--current" : ""].filter(Boolean).join(" ");
-				return /* @__PURE__ */ n("li", { children: r ? /* @__PURE__ */ n("span", {
+			children: a.map(({ code: e, label: t }) => {
+				let n = e === o, i = ["language-switcher__option", n ? "language-switcher__option--current" : ""].filter(Boolean).join(" ");
+				return /* @__PURE__ */ r("li", { children: n ? /* @__PURE__ */ r("span", {
 					lang: e,
 					className: i,
 					"aria-current": "true",
 					children: t
-				}) : p ? m({
-					href: p(e),
+				}) : m ? h({
+					href: m(e),
 					lang: e,
 					className: i,
 					children: t
-				}) : /* @__PURE__ */ n("button", {
+				}) : /* @__PURE__ */ r("button", {
 					type: "button",
 					lang: e,
 					className: i,
-					onClick: () => o?.(e),
+					onClick: () => s?.(e),
 					children: t
 				}) }, e);
 			})
 		})
 	});
-	let _ = [
+	let b = [
 		"language-switcher",
 		"language-switcher--compact",
-		h
+		g
 	].filter(Boolean).join(" ");
-	return /* @__PURE__ */ n(t, {
-		id: c,
-		label: g,
-		labelHidden: l,
-		inline: d === "inline",
-		size: f,
+	return /* @__PURE__ */ r(t, {
+		id: v,
+		label: y,
+		labelHidden: u,
+		inline: f === "inline",
+		size: p,
 		align: "end",
-		className: _,
-		value: a,
-		onValueChange: (e) => o?.(e),
-		items: i.map(({ code: e, label: t }) => ({
+		className: b,
+		value: o,
+		onValueChange: (e) => s?.(e),
+		items: a.map(({ code: e, label: t }) => ({
 			type: "radio",
 			value: e,
-			label: /* @__PURE__ */ n("span", {
+			label: /* @__PURE__ */ r("span", {
 				lang: e,
 				children: t
 			})
 		})),
-		children: /* @__PURE__ */ n("span", {
-			lang: a,
-			children: i.find((e) => e.code === a)?.label ?? a
+		children: /* @__PURE__ */ r("span", {
+			lang: o,
+			children: a.find((e) => e.code === o)?.label ?? o
 		})
 	});
 }
 //#endregion
-export { i as LanguageSwitcher };
+export { a as LanguageSwitcher };

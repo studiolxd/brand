@@ -50,6 +50,8 @@ export interface PrevNextNavProps {
     linkComponent?: ComponentType<any>;
     /** Variante de densidad. Default: "md" */
     size?: 'sm' | 'md';
+    /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+    className?: string;
 }
 /**
  * Los dos textos del par, y los dos son **cromo**: «anterior» y «siguiente»
@@ -62,4 +64,4 @@ export interface PrevNextNavMessages {
     /** Rótulo del control siguiente. */
     next: string;
 }
-export declare function PrevNextNav({ prevHref, nextHref, prevOnClick, nextOnClick, prevLabel, nextLabel, prevTitle, nextTitle, label, labelId, linkComponent, size, }: PrevNextNavProps): import("react/jsx-runtime").JSX.Element;
+export declare function PrevNextNav({ prevHref, nextHref, prevOnClick, nextOnClick, prevLabel, nextLabel, prevTitle, nextTitle, label, labelId, linkComponent, size, className, }: PrevNextNavProps): import("react/jsx-runtime").JSX.Element;

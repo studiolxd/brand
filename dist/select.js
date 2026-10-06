@@ -122,7 +122,7 @@ function w({ value: e, label: t, "aria-label": n }) {
 function T({ override: t }) {
 	return /* @__PURE__ */ u(l, { children: e("select")("placeholder", t) });
 }
-var E = a(function({ options: e, value: t, defaultValue: n, placeholder: r, disabled: i, readOnly: a, size: o = "md", onValueChange: s, id: c, name: l, required: f, onBlur: m, "aria-label": h, "aria-describedby": x, "aria-invalid": C, container: E }, D) {
+var E = a(function({ options: e, value: t, defaultValue: n, placeholder: r, disabled: i, readOnly: a, size: o = "md", onValueChange: s, id: c, name: l, required: f, onBlur: m, "aria-label": h, "aria-describedby": x, "aria-invalid": C, container: E, className: D }, O) {
 	return /* @__PURE__ */ d(g, {
 		value: t,
 		defaultValue: n,
@@ -132,8 +132,9 @@ var E = a(function({ options: e, value: t, defaultValue: n, placeholder: r, disa
 		required: f,
 		onValueChange: s,
 		children: [/* @__PURE__ */ u(y, {
-			ref: D,
+			ref: O,
 			size: o,
+			className: D,
 			id: c,
 			onBlur: m,
 			"aria-label": h,

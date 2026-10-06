@@ -57,6 +57,8 @@ export interface AppHeaderProps {
     menuCloseLabel?: string;
     /** id de la sidebar que gobierna el botón (`aria-controls`). */
     sidebarId?: string;
+    /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+    className?: string;
 }
 /**
  * La barra superior de la aplicación, en todos los anchos. A la izquierda el
@@ -64,4 +66,4 @@ export interface AppHeaderProps {
  * escritorio; a la derecha, notificaciones y cuenta. Entre medias, lo que la
  * página necesite. Con `logo`, la marca del producto va justo tras el botón.
  */
-export declare function AppHeader({ logo, logoHref, logoLabel, renderLogoLink, start, notifications, end, menuLabel, menuCloseLabel, sidebarId, }: AppHeaderProps): import("react/jsx-runtime").JSX.Element;
+export declare function AppHeader({ logo, logoHref, logoLabel, renderLogoLink, start, notifications, end, menuLabel, menuCloseLabel, sidebarId, className, }: AppHeaderProps): import("react/jsx-runtime").JSX.Element;

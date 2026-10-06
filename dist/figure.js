@@ -1,3 +1,4 @@
+'use client';
 import './figure.css';
 import { forwardRef as e } from "react";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";

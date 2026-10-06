@@ -10,64 +10,64 @@ import { useCallback as s, useEffect as c, useMemo as l, useState as u } from "r
 import { jsx as d, jsxs as f } from "react/jsx-runtime";
 //#region src/stories/sections/AppShell/AppShell.tsx
 var p = "(min-width: 1024px)";
-function m({ banner: i, header: m, sidebar: h, children: g, contentFlush: _ = !1, defaultSidebar: v = "open", sidebarState: y, onSidebarChange: b, defaultSidebarWidth: x, onSidebarWidthChange: S, skipLabel: C }) {
-	let w = e("appShell"), T = o(p), E = T ?? !0, [D, O] = u(v), [k, A] = u(!1), [j, M] = u(x), N = E ? y ?? D : k ? "open" : "closed", P = s((e) => {
-		E ? (O(e), b?.(e)) : A(e === "open");
-	}, [E, b]), F = s(() => P(N === "open" ? "closed" : "open"), [P, N]), I = s(() => P("closed"), [P]), L = s((e) => {
-		M(e), S?.(e);
+function m({ banner: i, header: m, sidebar: h, children: g, contentFlush: _ = !1, defaultSidebar: v = "open", sidebarState: y, onSidebarChange: b, defaultSidebarWidth: x, onSidebarWidthChange: S, skipLabel: C, className: w }) {
+	let T = e("appShell"), E = o(p), D = E ?? !0, [O, k] = u(v), [A, j] = u(!1), [M, N] = u(x), P = D ? y ?? O : A ? "open" : "closed", F = s((e) => {
+		D ? (k(e), b?.(e)) : j(e === "open");
+	}, [D, b]), I = s(() => F(P === "open" ? "closed" : "open"), [F, P]), L = s(() => F("closed"), [F]), R = s((e) => {
+		N(e), S?.(e);
 	}, [S]);
 	c(() => {
-		if (E || !k) return;
+		if (D || !A) return;
 		let e = (e) => {
-			e.key === "Escape" && A(!1);
+			e.key === "Escape" && j(!1);
 		};
 		document.addEventListener("keydown", e);
 		let t = document.body.style.overflow;
 		return document.body.style.overflow = "hidden", () => {
 			document.removeEventListener("keydown", e), document.body.style.overflow = t;
 		};
-	}, [E, k]);
-	let R = l(() => ({
-		sidebar: N,
-		setSidebar: P,
-		sidebarWidth: j ?? 0,
-		setSidebarWidth: L,
-		toggleSidebar: F,
-		closeSidebar: I,
-		isDesktop: E
+	}, [D, A]);
+	let z = l(() => ({
+		sidebar: P,
+		setSidebar: F,
+		sidebarWidth: M ?? 0,
+		setSidebarWidth: R,
+		toggleSidebar: I,
+		closeSidebar: L,
+		isDesktop: D
 	}), [
-		N,
 		P,
-		j,
-		L,
 		F,
+		M,
+		R,
 		I,
-		E
-	]), [z, B] = u(0), V = s((e) => {
+		L,
+		D
+	]), [B, V] = u(0), H = s((e) => {
 		if (!e) return;
-		let t = () => B(e.getBoundingClientRect().height);
+		let t = () => V(e.getBoundingClientRect().height);
 		if (t(), typeof ResizeObserver > "u") return;
 		let n = new ResizeObserver(t);
 		return n.observe(e), () => {
-			n.disconnect(), B(0);
+			n.disconnect(), V(0);
 		};
-	}, []), H = n({
-		"--app-shell-sidebar-width": j ? `${j}px` : void 0,
-		"--app-shell-banner-height": i ? `${z}px` : void 0
-	}), U = !E && k;
+	}, []), U = n({
+		"--app-shell-sidebar-width": M ? `${M}px` : void 0,
+		"--app-shell-banner-height": i ? `${B}px` : void 0
+	}), W = !D && A;
 	return /* @__PURE__ */ d(a.Provider, {
-		value: R,
+		value: z,
 		children: /* @__PURE__ */ f(r, { children: [/* @__PURE__ */ d(t, {
 			href: "#main-content",
-			children: w("skipToContent", C)
+			children: T("skipToContent", C)
 		}), /* @__PURE__ */ f("div", {
-			ref: H,
-			className: "app-shell",
-			"data-sidebar": N,
-			"data-layout": T === null ? void 0 : E ? "column" : "drawer",
+			ref: U,
+			className: ["app-shell", w].filter(Boolean).join(" "),
+			"data-sidebar": P,
+			"data-layout": E === null ? void 0 : D ? "column" : "drawer",
 			children: [
 				i && /* @__PURE__ */ d("div", {
-					ref: V,
+					ref: H,
 					className: "app-shell__banner",
 					children: i
 				}),
@@ -76,16 +76,16 @@ function m({ banner: i, header: m, sidebar: h, children: g, contentFlush: _ = !1
 					className: "app-shell__body",
 					children: [
 						h,
-						U && /* @__PURE__ */ d("div", {
+						W && /* @__PURE__ */ d("div", {
 							className: "app-shell__backdrop",
-							onClick: I,
+							onClick: L,
 							"aria-hidden": "true"
 						}),
 						/* @__PURE__ */ d("main", {
 							id: "main-content",
 							tabIndex: -1,
 							className: _ ? "app-shell__content app-shell__content--flush" : "app-shell__content",
-							inert: U || void 0,
+							inert: W || void 0,
 							children: g
 						})
 					]

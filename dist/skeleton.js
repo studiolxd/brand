@@ -1,18 +1,20 @@
 import './skeleton.css';
-import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as e } from "react";
+import { jsx as t } from "react/jsx-runtime";
 //#region src/stories/atoms/Skeleton/Skeleton.tsx
-function t({ width: t, height: n, circle: r = !1, className: i, ...a }) {
-	return /* @__PURE__ */ e("svg", {
+var n = e(function({ width: e, height: n, circle: r = !1, className: i, ...a }, o) {
+	return /* @__PURE__ */ t("svg", {
+		ref: o,
 		"aria-hidden": "true",
 		className: [
 			"skeleton",
 			r ? "skeleton--circle" : "",
 			i
 		].filter(Boolean).join(" "),
-		width: t,
+		width: e,
 		height: n,
 		...a
 	});
-}
+});
 //#endregion
-export { t as Skeleton };
+export { n as Skeleton };

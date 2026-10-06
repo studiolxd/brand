@@ -58,6 +58,8 @@ export interface SidebarNavProps {
     value?: string[];
     onValueChange?: (value: string[]) => void;
     renderLink?: (props: SidebarNavRenderLinkProps) => ReactNode;
+    /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+    className?: string;
 }
 /**
  * Los dos textos de la navegación, los dos **cromo**: el nombre de la región
@@ -71,4 +73,4 @@ export interface SidebarNavMessages {
     /** Marca de las entradas sin contenido. */
     empty: string;
 }
-export declare function SidebarNav({ label, emptyLabel, rail, entries, defaultValue, value, onValueChange, renderLink, }: SidebarNavProps): import("react/jsx-runtime").JSX.Element;
+export declare function SidebarNav({ label, emptyLabel, rail, entries, defaultValue, value, onValueChange, renderLink, className, }: SidebarNavProps): import("react/jsx-runtime").JSX.Element;

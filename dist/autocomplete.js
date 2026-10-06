@@ -2,18 +2,16 @@
 import './autocomplete.css';
 import { Spinner as e } from "./spinner.js";
 import { n as t } from "./_shared/portal-container.js";
-import { forwardRef as n, useCallback as r, useEffect as i, useId as a, useRef as o, useState as s } from "react";
+import { t as n } from "./_shared/assign-ref.js";
+import { forwardRef as r, useCallback as ee, useEffect as i, useId as a, useRef as o, useState as s } from "react";
 import { jsx as c, jsxs as l } from "react/jsx-runtime";
 import { Popover as u } from "@base-ui/react/popover";
 //#region src/stories/atoms/Autocomplete/Autocomplete.tsx
-function ee(e, t) {
-	typeof e == "function" ? e(t) : e && (e.current = t);
-}
 function d(e) {
 	return e.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
-var f = n(function({ value: n, defaultValue: f = "", onValueChange: p, onSelect: m, options: h, onSearch: g, debounceMs: _ = 200, minChars: v = 1, placeholder: y, disabled: b, readOnly: x, size: S = "md", id: C, name: w, error: T = !1, required: E, maxLength: D, onBlur: O, className: k, "aria-label": A, "aria-describedby": j, container: M }, N) {
-	let te = t(M), [ne, re] = s(f), [ie, P] = s(!1), [ae, F] = s(!1), [I, L] = s([]), [R, z] = s(-1), B = o(null), V = o(0), H = o(null), U = o(null), W = a(), G = a(), K = n === void 0 ? ne : n, q = ie && I.length > 0, J = (e) => `${G}-opt-${e}`, Y = r((e) => {
+var f = r(function({ value: r, defaultValue: f = "", onValueChange: p, onSelect: m, options: h, onSearch: g, debounceMs: _ = 200, minChars: v = 1, placeholder: y, disabled: b, readOnly: x, size: S = "md", id: C, name: w, error: T = !1, required: E, maxLength: D, onBlur: O, className: k, "aria-label": A, "aria-describedby": j, container: M }, N) {
+	let te = t(M), [ne, re] = s(f), [ie, P] = s(!1), [ae, F] = s(!1), [I, L] = s([]), [R, z] = s(-1), B = o(null), V = o(0), H = o(null), U = o(null), W = a(), G = a(), K = r === void 0 ? ne : r, q = ie && I.length > 0, J = (e) => `${G}-opt-${e}`, Y = ee((e) => {
 		let t = ++V.current;
 		if (g) {
 			F(!0), Promise.resolve().then(() => g(e)).then((e) => e, () => []).then((e) => {
@@ -34,7 +32,7 @@ var f = n(function({ value: n, defaultValue: f = "", onValueChange: p, onSelect:
 		B.current && clearTimeout(B.current), V.current += 1, F(!1), P(!1), z(-1);
 	}
 	function Q(e) {
-		n === void 0 && re(e), p?.(e);
+		r === void 0 && re(e), p?.(e);
 	}
 	function oe(e) {
 		let t = e.target.value;
@@ -75,7 +73,7 @@ var f = n(function({ value: n, defaultValue: f = "", onValueChange: p, onSelect:
 			"data-popup-open": q || void 0,
 			children: [/* @__PURE__ */ c("input", {
 				ref: (e) => {
-					H.current = e, ee(N, e);
+					H.current = e, n(N, e);
 				},
 				id: C,
 				name: w,

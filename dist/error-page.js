@@ -6,14 +6,14 @@ import { PageIntro as r } from "./page-intro.js";
 import { PublicPageShell as i } from "./public-page-shell.js";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/templates/ErrorPage/ErrorPage.tsx
-function s({ title: s, description: c, homeAction: l, retryDescription: u, retryAction: d, header: f, footer: p, id: m = "main-content", shell: h = !0 }) {
+function s({ title: s, description: c, homeAction: l, retryDescription: u, retryAction: d, header: f, footer: p, id: m = "main-content", shell: h = !0, className: g }) {
 	return /* @__PURE__ */ a(i, {
 		header: f,
 		footer: p,
 		id: m,
 		shell: h,
 		children: /* @__PURE__ */ o(e, {
-			className: "error-page__content",
+			className: ["error-page__content", g].filter(Boolean).join(" "),
 			children: [/* @__PURE__ */ o(t, { children: [/* @__PURE__ */ a(r, {
 				title: s,
 				description: c

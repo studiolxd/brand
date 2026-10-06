@@ -4,16 +4,19 @@ import { PageIntro as t } from "./page-intro.js";
 import { PublicPageShell as n } from "./public-page-shell.js";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/templates/NotFoundPage/NotFoundPage.tsx
-function a({ title: a, description: o, homeLink: s, header: c, footer: l, id: u = "main-content", shell: d = !0 }) {
+function a({ title: a, description: o, homeLink: s, header: c, footer: l, id: u = "main-content", shell: d = !0, className: f }) {
 	return /* @__PURE__ */ r(n, {
 		header: c,
 		footer: l,
 		id: u,
 		shell: d,
-		children: /* @__PURE__ */ i(e, { children: [/* @__PURE__ */ r(t, {
-			title: a,
-			description: o
-		}), s] })
+		children: /* @__PURE__ */ i(e, {
+			className: f,
+			children: [/* @__PURE__ */ r(t, {
+				title: a,
+				description: o
+			}), s]
+		})
 	});
 }
 //#endregion

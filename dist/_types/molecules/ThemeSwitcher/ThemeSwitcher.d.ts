@@ -13,7 +13,7 @@ export interface ThemeSwitcherProps {
     /** Cambio de tema. Aplicarlo (clase en `html`) y persistirlo es del producto. */
     onChange?: (theme: Theme) => void;
     labels?: ThemeSwitcherLabels;
-    /** `id` del control en compacto (enlaza la etiqueta). */
+    /** `id` del control en compacto (enlaza la etiqueta). Por defecto, uno único por instancia (`useId`). */
     id?: string;
     /**
      * `compact`: un `DropdownField` (etiqueta + control rectangular) con el icono y el nombre del tema actual — el del panel.
@@ -39,4 +39,4 @@ export interface ThemeSwitcherProps {
  * opciones exclusivas; en lista, las opciones desplegadas para el pie. Aplicar el tema y
  * recordarlo es del producto; el componente solo muestra y elige.
  */
-export declare function ThemeSwitcher({ value, onChange, labels, id, variant, layout, size, className }: ThemeSwitcherProps): import("react/jsx-runtime").JSX.Element;
+export declare function ThemeSwitcher({ value, onChange, labels, id: idProp, variant, layout, size, className }: ThemeSwitcherProps): import("react/jsx-runtime").JSX.Element;

@@ -30,5 +30,11 @@ export interface UserMenuProps {
     renderLink?: (props: MenuRenderLinkProps) => ReactNode;
     onOpenChange?: (open: boolean) => void;
     defaultOpen?: boolean;
+    /**
+     * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+     * Va al disparador: es el único nodo que el componente pinta en su sitio (el
+     * panel sale por un portal).
+     */
+    className?: string;
 }
-export declare function UserMenu({ name, email, avatarUrl, notificationCount, items, label, compact, renderLink, onOpenChange, defaultOpen, }: UserMenuProps): import("react/jsx-runtime").JSX.Element;
+export declare function UserMenu({ name, email, avatarUrl, notificationCount, items, label, compact, renderLink, onOpenChange, defaultOpen, className, }: UserMenuProps): import("react/jsx-runtime").JSX.Element;
