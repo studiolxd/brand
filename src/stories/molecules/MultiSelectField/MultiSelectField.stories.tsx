@@ -47,7 +47,14 @@ export const ConError: Story = {
   },
 };
 
-export const Deshabilitado: Story = { args: { disabled: true, defaultValue: ['design'] } };
+export const Deshabilitado: Story = {
+  args: { disabled: true, defaultValue: ['design'] },
+  // a11y falso positivo (D16): `color-contrast` en las fichas de un control
+  // deshabilitado (#ffffff sobre #a0a5ac, 2,47:1). WCAG 1.4.3 exime el texto de un
+  // componente de interfaz inactivo; axe solo lo sabe si el nodo es un control
+  // `disabled`, y la ficha es un `<span>` dentro de él.
+  parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } },
+};
 
 export const SoloLectura: Story = { args: { readOnly: true, defaultValue: ['design', 'motion'] } };
 

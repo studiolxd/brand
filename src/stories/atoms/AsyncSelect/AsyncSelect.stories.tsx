@@ -100,6 +100,11 @@ const emptySearch = (): Promise<AsyncSelectOption[]> => Promise.resolve([]);
 export const MensajeVacio: Story = {
   name: 'Test — mensaje de sin resultados',
   tags: ['!dev'],
+  // a11y falso positivo (D16): con la lista abierta, Base UI marca `aria-hidden` el resto
+  // de la página (el lector queda dentro del combobox, como en un popup modal) y axe
+  // da por `aria-hidden-focus` los controles enfocables que quedan fuera, aquí el
+  // otro buscador de la story. Tabular fuera cierra la lista y retira el `aria-hidden`.
+  parameters: { a11y: { config: { rules: [{ id: 'aria-hidden-focus', enabled: false }] } } },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12rem' }}>
       <div data-testid="default">

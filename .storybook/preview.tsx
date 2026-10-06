@@ -180,10 +180,15 @@ const preview: Preview = {
     },
 
     a11y: {
-      // 'todo' - show a11y violations in the test UI only
-      // 'error' - fail CI on a11y violations
-      // 'off' - skip a11y checks entirely
-      test: 'todo'
+      // El addon de accesibilidad hace fallar `pnpm test:stories` (D16): axe
+      // corre al acabar cada story —tras su `play`— y una violación es un test
+      // rojo. Una regla solo se desactiva en la story concreta, nunca aquí ni
+      // la a11y entera, con `parameters: { a11y: { config: { rules: [{ id,
+      // enabled: false }] } } }` y un comentario encima que diga si es una
+      // decisión pendiente del operador (contraste: no se inventan colores) o
+      // un falso positivo, y por qué. El runner solo pasa en claro: el oscuro
+      // de cada story (modo `oscuro` de Chromatic) no lo audita.
+      test: 'error',
     }
   },
 };
