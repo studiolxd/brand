@@ -77,6 +77,16 @@ para breaking changes.
 - Quien importe `src/tokens/surface-light.css` suelto, sin `surface-invert.css`, pierde el bloque: `brand.css` y
   `tokens.css` importan los dos.
 
+### Añadido
+
+- **`FloatingToolbar`** (molécula nueva, export `./floating-toolbar`, con `FloatingToolbarButton`): la barra de botones
+  de icono anclada a un elemento —las acciones de un bloque en un editor—. `role="toolbar"` sobre el `Toolbar` de
+  Base UI: una parada de tabulación y flechas dentro. Aparece al pasar el puntero, al entrar el foco, con un panel suyo
+  abierto o fijada con `alwaysVisible`. `layout="auto"` la pinta encima del elemento por debajo de `breakpoint.lg` y
+  en dos raíles a sus lados desde `lg`, con las acciones declaradas una sola vez (`start`/`end`); `top` y `sides` fijan
+  una colocación. Tokens nuevos `floating-toolbar.*` (el panel hereda de `floating-panel`). Sale del hallazgo C-14 de
+  la revisión de bricks de creator, que pintaba la barra superior y las laterales a la vez en pantallas estrechas.
+
 ## [49.28.0] — 2026-10-05
 
 > **Minor (49.28.0).** El `Spinner` se desdibuja tras dibujarse y `lg` crece. Sin cambios de API.

@@ -584,6 +584,8 @@ html.dark .surface-light {
   --field-row-empty-color: var(--color-text-muted-on-light);
   --file-upload-field-error-color: var(--form-error-color);
   --file-upload-field-helper-color: var(--form-helper-color);
+  --floating-toolbar-bg: var(--floating-panel-bg);
+  --floating-toolbar-border-color: var(--floating-panel-border-color);
   --heatmap-border-color: var(--color-primary);
   --heatmap-row-header-color: var(--color-text-on-light);
   --heatmap-row-header-bg: var(--color-background-light);

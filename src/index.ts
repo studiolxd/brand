@@ -227,6 +227,8 @@ export { FileUploadField } from './stories/molecules/FileUploadField/FileUploadF
 export type { FileUploadFieldProps } from './stories/molecules/FileUploadField/FileUploadField';
 export { FilterBar } from './stories/molecules/FilterBar/FilterBar';
 export type { FilterBarProps } from './stories/molecules/FilterBar/FilterBar';
+export { FloatingToolbar, FloatingToolbarButton } from './stories/molecules/FloatingToolbar/FloatingToolbar';
+export type { FloatingToolbarProps, FloatingToolbarButtonProps } from './stories/molecules/FloatingToolbar/FloatingToolbar';
 export { Form } from './stories/molecules/Form/Form';
 export {
   FormProvider,

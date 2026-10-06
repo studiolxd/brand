@@ -88,6 +88,8 @@ html.dark {
   --color-picker-trigger-disabled-bg: var(--input-disabled-bg);
   --color-picker-trigger-disabled-border-color: var(--input-disabled-border-color);
   --command-palette-input-border-color: var(--floating-panel-border-color);
+  --floating-toolbar-bg: var(--floating-panel-bg);
+  --floating-toolbar-border-color: var(--floating-panel-border-color);
   --prose-color: var(--text-color);
   --prose-quote-border-color: var(--separator-color);
   --prose-code-bg: var(--code-bg);

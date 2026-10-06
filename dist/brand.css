@@ -5978,6 +5978,23 @@ html.dark {
  * Do not edit directly, this file was auto-generated.
  */
 :root {
+  --floating-toolbar-gap: var(--spacing-1); /** Separación entre los botones de un grupo y entre los dos grupos de la barra superior */
+  --floating-toolbar-offset: var(--spacing-2); /** Distancia entre la barra y el borde del elemento: por encima de él en la barra superior, a su lado en los raíles */
+  --floating-toolbar-padding-block: var(--spacing-1); /** Aire vertical del panel de la barra (o de cada raíl) */
+  --floating-toolbar-padding-inline: var(--spacing-1); /** Aire horizontal del panel de la barra (o de cada raíl) */
+  --floating-toolbar-transition-duration: var(--motion-duration-fast); /** Duración de la aparición y la desaparición. Con `prefers-reduced-motion: reduce` vale 0ms */
+  --floating-toolbar-transition-easing: var(--motion-easing-default); /** Curva de la aparición y la desaparición */
+  --floating-toolbar-button-size: var(--button-sm-height); /** Caja de cada botón de icono: la talla `sm` del botón. Es también lo que mide el raíl de ancho, y por eso el hueco que el elemento reserva a cada lado */
+  --floating-toolbar-bg: var(--floating-panel-bg); /** Fondo del panel: el de cualquier panel flotante, para que la barra se lea encima del contenido vecino */
+  --floating-toolbar-border-width: var(--floating-panel-border-width); /** Grosor del borde del panel */
+  --floating-toolbar-border-color: var(--floating-panel-border-color); /** Color del borde del panel */
+  --floating-toolbar-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
+  --floating-toolbar-shadow: var(--floating-panel-shadow); /** Sombra del panel */
+}
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+:root {
   --confirm-dialog-actions-space-before: var(--spacing-5); /** Aire entre el cuerpo del diálogo y su fila de acciones: separa la pregunta de la respuesta. El aire ENTRE los dos botones es el de `Inline` en su paso compacto */
   --confirm-dialog-phrase-space-before: var(--spacing-4); /** Aire entre el cuerpo del diálogo y el campo de la frase de confirmación: menos que el del pie, porque el campo todavía es parte de la pregunta */
 }
@@ -6139,6 +6156,8 @@ html.dark {
   --color-picker-trigger-disabled-bg: var(--input-disabled-bg);
   --color-picker-trigger-disabled-border-color: var(--input-disabled-border-color);
   --command-palette-input-border-color: var(--floating-panel-border-color);
+  --floating-toolbar-bg: var(--floating-panel-bg);
+  --floating-toolbar-border-color: var(--floating-panel-border-color);
   --prose-color: var(--text-color);
   --prose-quote-border-color: var(--separator-color);
   --prose-code-bg: var(--code-bg);
@@ -6747,6 +6766,8 @@ html.dark .surface-light {
   --field-row-empty-color: var(--color-text-muted-on-light);
   --file-upload-field-error-color: var(--form-error-color);
   --file-upload-field-helper-color: var(--form-helper-color);
+  --floating-toolbar-bg: var(--floating-panel-bg);
+  --floating-toolbar-border-color: var(--floating-panel-border-color);
   --heatmap-border-color: var(--color-primary);
   --heatmap-row-header-color: var(--color-text-on-light);
   --heatmap-row-header-bg: var(--color-background-light);

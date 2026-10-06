@@ -207,6 +207,11 @@
       "import": "./dist/copy-button.js",
       "default": "./dist/copy-button.js"
     },
+    "./floating-toolbar": {
+      "types": "./dist/_types/molecules/FloatingToolbar/FloatingToolbar.d.ts",
+      "import": "./dist/floating-toolbar.js",
+      "default": "./dist/floating-toolbar.js"
+    },
     "./recovery-codes": {
       "types": "./dist/_types/molecules/RecoveryCodes/RecoveryCodes.d.ts",
       "import": "./dist/recovery-codes.js",
