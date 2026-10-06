@@ -181,15 +181,11 @@
 @import "./surface-dark-derived.css";
 
 /* Superficie invertida dentro de una oscura: devuelve a claro los tokens que el
-   modo oscuro voltea. Va después del bloque de arriba, aunque gane por
-   especificidad, para que se lea en el orden en que actúa. */
+   modo oscuro voltea. En el mismo bloque va la superficie siempre clara
+   (`.surface-light`, el interior del amarillo del aviso), que necesita los
+   mismos tokens con los mismos valores. Va después del bloque de arriba, aunque
+   gane por especificidad, para que se lea en el orden en que actúa. */
 @import "./surface-invert.css";
-
-/* Superficie siempre clara: el contrapunto de `.surface-dark`, para el interior
-   de un relleno claro universal (el amarillo del aviso). Su bloque va fundido
-   con el de `.surface-invert` en el fichero de arriba (mismos tokens, mismos
-   valores); este queda vacío y se importa solo para conservar la ruta. */
-@import "./surface-light.css";
 
 /* Remapeo de la superficie pública (`.site-shell`) — va al final: los tokens
    que redefine tienen la misma especificidad que los `:root` de arriba. */
