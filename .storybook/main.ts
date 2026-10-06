@@ -12,8 +12,9 @@ const config: StorybookConfig = {
     "@storybook/addon-a11y",
     {
       // Sin remark-gfm, MDX no parsea las tablas con pipes: se renderizan como
-      // un párrafo corrido. La documentación del DS las usa a mano en 14
-      // ficheros (anchos, escalas, matrices de props), aparte de las que pintan
+      // un párrafo corrido. La documentación del DS las usa a mano en más de la
+      // mitad de sus MDX (117 de 196 en octubre de 2026: anchos, escalas,
+      // matrices de props, textos del catálogo), aparte de las que pintan
       // TokenTable y ArgTypes como componentes.
       name: "@storybook/addon-docs",
       options: {
