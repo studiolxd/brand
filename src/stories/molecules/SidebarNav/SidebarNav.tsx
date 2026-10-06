@@ -6,6 +6,7 @@ import { Tooltip } from '../../atoms/Tooltip/Tooltip';
 import { useSidebar } from '../../sections/Sidebar/SidebarContext';
 import './SidebarNav.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { defaultRenderLink } from '../../constants/default-render-link';
 
 export interface SidebarNavItem {
   id: string;
@@ -70,11 +71,8 @@ export interface SidebarNavProps {
   value?: string[];
   onValueChange?: (value: string[]) => void;
   renderLink?: (props: SidebarNavRenderLinkProps) => ReactNode;
-}
-
-// Reenvía todo: en rail el enlace vive dentro de un Menu y recibe rol, tabIndex y teclado.
-function defaultRenderLink({ children, ...props }: SidebarNavRenderLinkProps) {
-  return <a {...props}>{children}</a>;
+  /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+  className?: string;
 }
 
 /**
@@ -99,6 +97,7 @@ export function SidebarNav({
   value,
   onValueChange,
   renderLink = defaultRenderLink,
+  className,
 }: SidebarNavProps) {
   const t = useBrandMessages('sidebarNav');
   const accordionProps = value !== undefined
@@ -114,7 +113,7 @@ export function SidebarNav({
 
   if (isRail) {
     return (
-      <nav className="sidebar-nav sidebar-nav--rail" aria-label={t('label', label)}>
+      <nav className={['sidebar-nav', 'sidebar-nav--rail', className].filter(Boolean).join(' ')} aria-label={t('label', label)}>
         <ul className="sidebar-nav__rail" role="list">
           {entries.map((entry) => {
             const glyph = (
@@ -194,7 +193,7 @@ export function SidebarNav({
   }
 
   return (
-    <nav className="sidebar-nav" aria-label={t('label', label)}>
+    <nav className={['sidebar-nav', className].filter(Boolean).join(' ')} aria-label={t('label', label)}>
       <BaseAccordion.Root className="sidebar-nav__accordion" multiple {...accordionProps}>
         {entries.map((entry) => {
           if (entry.kind === 'link') {

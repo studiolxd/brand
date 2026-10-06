@@ -5,6 +5,7 @@ import { Arrow } from '../../atoms/Arrow/Arrow';
 import { Heading, type HeadingLevel, type HeadingSize } from '../../atoms/Heading/Heading';
 import { Paragraph, type ParagraphProps } from '../../atoms/Paragraph/Paragraph';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
+import { assignRef } from '../../constants/assign-ref';
 
 export type CardColor = 'primary' | 'outline' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
 
@@ -371,8 +372,7 @@ export const CardAction = forwardRef<HTMLDivElement, CardActionProps>(function C
   const setRefs = useCallback(
     (node: HTMLDivElement | null) => {
       nodeRef.current = node;
-      if (typeof ref === 'function') ref(node);
-      else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      assignRef(ref, node);
     },
     [ref],
   );

@@ -1,5 +1,6 @@
 'use client';
 
+import { useId } from 'react';
 import { DropdownField } from '../DropdownField/DropdownField';
 import { Menu } from '../Menu/Menu';
 import { Button } from '../../atoms/Button/Button';
@@ -22,7 +23,7 @@ export interface ThemeSwitcherProps {
   /** Cambio de tema. Aplicarlo (clase en `html`) y persistirlo es del producto. */
   onChange?: (theme: Theme) => void;
   labels?: ThemeSwitcherLabels;
-  /** `id` del control en compacto (enlaza la etiqueta). */
+  /** `id` del control en compacto (enlaza la etiqueta). Por defecto, uno único por instancia (`useId`). */
   id?: string;
   /**
    * `compact`: un `DropdownField` (etiqueta + control rectangular) con el icono y el nombre del tema actual — el del panel.
@@ -55,7 +56,11 @@ const OPTIONS: Array<{ value: Theme; icon: IconName }> = [
  * opciones exclusivas; en lista, las opciones desplegadas para el pie. Aplicar el tema y
  * recordarlo es del producto; el componente solo muestra y elige.
  */
-export function ThemeSwitcher({ value, onChange, labels, id = 'theme-switcher', variant = 'compact', layout = 'inline', size = 'md', className }: ThemeSwitcherProps) {
+export function ThemeSwitcher({ value, onChange, labels, id: idProp, variant = 'compact', layout = 'inline', size = 'md', className }: ThemeSwitcherProps) {
+  // Sin `id` del consumidor, uno único por instancia: un fijo chocaba con dos
+  // conmutadores en la misma página (la barra y el pie).
+  const autoId = useId();
+  const id = idProp ?? autoId;
   const text = { group: 'Tema', light: 'Claro', dark: 'Oscuro', system: 'Sistema', ...labels };
   const current = OPTIONS.find((o) => o.value === value) ?? OPTIONS[2];
 

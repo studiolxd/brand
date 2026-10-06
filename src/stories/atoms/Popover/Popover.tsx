@@ -4,27 +4,14 @@ import type { ReactNode } from 'react';
 import { Popover as BasePopover } from '@base-ui/react/popover';
 import './Popover.css';
 import { usePortalContainer } from '../../constants/portal-container';
-
-/**
- * Convierte una longitud CSS (`8px`, `0.5rem`) a píxeles. Sin unidad
- * reconocible devuelve 0: el token viaja siempre con el CSS del componente.
- */
-function cssLengthToPx(raw: string): number {
-  const value = parseFloat(raw);
-  if (Number.isNaN(value)) return 0;
-  if (raw.endsWith('rem')) return value * parseFloat(getComputedStyle(document.documentElement).fontSize);
-  return value;
-}
+import { sideOffsetFromToken } from '../../constants/side-offset';
 
 /**
  * `sideOffset` por defecto: el Positioner de Base UI necesita un número, así que
  * el token `--popover-offset` se lee en runtime sobre `<html>` en cada cálculo
  * de posición. Un consumidor lo cambia sobrescribiendo el token en la raíz.
  */
-function tokenSideOffset(): number {
-  const root = document.documentElement;
-  return cssLengthToPx(getComputedStyle(root).getPropertyValue('--popover-offset').trim());
-}
+const tokenSideOffset = sideOffsetFromToken('--popover-offset');
 
 /**
  * Detalle del evento con el que Base UI cuenta por qué se abre o se cierra el

@@ -7,6 +7,7 @@ import { Sheet } from '../../molecules/Sheet/Sheet';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { useMediaQuery } from '../../constants/media-query';
 import './ChatShell.css';
+import { assignRef } from '../../constants/assign-ref';
 
 /**
  * El cromo del armazón: cómo se llama la columna de conversaciones y cómo se
@@ -114,8 +115,7 @@ export const ChatShell = forwardRef<HTMLDivElement, ChatShellProps>(function Cha
   const setRefs = useCallback(
     (node: HTMLDivElement | null) => {
       setRoot(node);
-      if (typeof ref === 'function') ref(node);
-      else if (ref) ref.current = node;
+      assignRef(ref, node);
     },
     [ref],
   );

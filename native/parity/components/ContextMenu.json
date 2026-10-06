@@ -60,6 +60,10 @@
     {
       "prop": "label",
       "reason": "Es texto, no un caso: existe como `label` con «Más opciones» por defecto (castellano), el nombre accesible del botón."
+    },
+    {
+      "prop": "className",
+      "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
     }
   ],
   "differences": [

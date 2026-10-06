@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import { Tooltip as BaseTooltip } from '@base-ui/react/tooltip';
 import './Tooltip.css';
 import { usePortalContainer } from '../../constants/portal-container';
+import { sideOffsetFromToken } from '../../constants/side-offset';
 
 export interface TooltipProviderProps {
   children: ReactNode;
@@ -34,27 +35,12 @@ export function TooltipProvider({
 }
 
 /**
- * Convierte una longitud CSS (`4px`, `0.25rem`, `0.5em`) a píxeles. Sin unidad
- * reconocible devuelve 0: el token está siempre cargado con el CSS del componente.
- */
-function cssLengthToPx(raw: string, el: Element): number {
-  const value = parseFloat(raw);
-  if (Number.isNaN(value)) return 0;
-  if (raw.endsWith('rem')) return value * parseFloat(getComputedStyle(document.documentElement).fontSize);
-  if (raw.endsWith('em')) return value * parseFloat(getComputedStyle(el).fontSize);
-  return value;
-}
-
-/**
  * `sideOffset` por defecto: el Positioner de Base UI necesita un número (su
  * función de offset solo recibe medidas, no el elemento), así que el token
  * `--tooltip-offset` se lee en runtime sobre `<html>` en cada cálculo de
  * posición. Un consumidor lo cambia sobrescribiendo el token a nivel de raíz.
  */
-function tokenSideOffset(): number {
-  const root = document.documentElement;
-  return cssLengthToPx(getComputedStyle(root).getPropertyValue('--tooltip-offset').trim(), root);
-}
+const tokenSideOffset = sideOffsetFromToken('--tooltip-offset');
 
 export interface TooltipProps
   extends Omit<React.HTMLAttributes<HTMLElement>, 'children' | 'className'> {

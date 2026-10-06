@@ -55,12 +55,14 @@ function times(n: number) {
 export interface SkeletonTextProps {
   /** Líneas del párrafo; la última sale más corta. */
   lines?: number;
+  /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+  className?: string;
 }
 
 /** Un bloque de texto —un párrafo, una lista de definiciones— que aún no llegó. Decorativo. */
-export function SkeletonText({ lines = 3 }: SkeletonTextProps) {
+export function SkeletonText({ lines = 3, className }: SkeletonTextProps) {
   return (
-    <div className="skeleton-text" aria-hidden="true">
+    <div className={['skeleton-text', className].filter(Boolean).join(' ')} aria-hidden="true">
       {times(lines).map((i) => (
         <Skeleton
           key={i}
@@ -76,12 +78,14 @@ export function SkeletonText({ lines = 3 }: SkeletonTextProps) {
 export interface SkeletonListProps {
   /** Filas de la lista. */
   rows?: number;
+  /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+  className?: string;
 }
 
 /** Una lista que aún no llegó: una barra por fila, del alto de un control. Decorativo. */
-export function SkeletonList({ rows = 4 }: SkeletonListProps) {
+export function SkeletonList({ rows = 4, className }: SkeletonListProps) {
   return (
-    <div className="skeleton-list" aria-hidden="true">
+    <div className={['skeleton-list', className].filter(Boolean).join(' ')} aria-hidden="true">
       {times(rows).map((i) => (
         <Skeleton key={i} className="skeleton-list__row" />
       ))}
@@ -92,15 +96,17 @@ export function SkeletonList({ rows = 4 }: SkeletonListProps) {
 export interface SkeletonTableProps {
   /** Filas de cuerpo, sin contar la cabecera. */
   rows?: number;
+  /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+  className?: string;
 }
 
 /**
  * Una tabla que aún no llegó: la cabecera y sus filas. No calca el diseño —no
  * hace falta—, solo ocupa un sitio parecido. Decorativo.
  */
-export function SkeletonTable({ rows = 4 }: SkeletonTableProps) {
+export function SkeletonTable({ rows = 4, className }: SkeletonTableProps) {
   return (
-    <div className="skeleton-table" aria-hidden="true">
+    <div className={['skeleton-table', className].filter(Boolean).join(' ')} aria-hidden="true">
       <Skeleton className="skeleton-table__header" />
       {times(rows).map((i) => (
         <Skeleton key={i} className="skeleton-table__row" />
@@ -114,12 +120,14 @@ export interface SkeletonGridProps {
   columns?: 2 | 3 | 4;
   /** Filas de la rejilla: se pintan `columns × rows` celdas. */
   rows?: number;
+  /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+  className?: string;
 }
 
 /** Una rejilla de tarjetas o miniaturas que aún no llegó. Decorativo. */
-export function SkeletonGrid({ columns = 3, rows = 2 }: SkeletonGridProps) {
+export function SkeletonGrid({ columns = 3, rows = 2, className }: SkeletonGridProps) {
   return (
-    <div className="skeleton-grid" data-columns={columns} aria-hidden="true">
+    <div className={['skeleton-grid', className].filter(Boolean).join(' ')} data-columns={columns} aria-hidden="true">
       {times(columns * rows).map((i) => (
         <Skeleton key={i} className="skeleton-grid__item" />
       ))}

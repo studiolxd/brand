@@ -9,6 +9,7 @@ import type { CalendarProps } from '../Calendar/Calendar';
 import { getDateMask, type DateMaskLetters } from './dateMask';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './DatePicker.css';
+import { assignRef } from '../../constants/assign-ref';
 
 /**
  * El cromo del selector de fecha: el botón que abre el calendario, el aviso de
@@ -193,8 +194,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
   const setInputRef = useCallback(
     (el: HTMLInputElement | null) => {
       inputRef.current = el;
-      if (typeof ref === 'function') ref(el);
-      else if (ref) ref.current = el;
+      assignRef(ref, el);
     },
     [ref]
   );

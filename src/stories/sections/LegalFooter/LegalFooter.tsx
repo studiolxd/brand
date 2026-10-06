@@ -3,6 +3,7 @@ import { Container, type ContainerWidth } from '../../atoms/Container/Container'
 import { Heading } from '../../atoms/Heading/Heading';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './LegalFooter.css';
+import { defaultRenderLink } from '../../constants/default-render-link';
 
 /**
  * El único texto del pie, y es **cromo**: cómo se llama esa navegación. Los
@@ -42,10 +43,6 @@ export interface LegalFooterProps {
   /** Pie sobre superficie oscura. */
   surface?: 'dark';
   className?: string;
-}
-
-function defaultRenderLink({ children, ...props }: LegalFooterRenderLinkProps) {
-  return <a {...props}>{children}</a>;
 }
 
 /**

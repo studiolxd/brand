@@ -3,10 +3,10 @@ import { Menu as BaseMenu } from '@base-ui/react/menu';
 import { useCssProperties } from '../../constants/css-properties';
 import {
   renderDropdownItems,
-  defaultRenderLink,
   type MenuItem,
   type MenuRenderLinkProps,
 } from '../_shared/dropdownItems';
+import { defaultRenderLink } from '../../constants/default-render-link';
 import './Menu.css';
 import { usePortalContainer } from '../../constants/portal-container';
 

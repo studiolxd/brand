@@ -210,7 +210,7 @@ export const Comportamiento: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const boton = canvas.getByRole('button', { name: 'Menú de navegación' });
-    const panel = canvasElement.querySelector('#site-header-panel')!;
+    const panel = canvasElement.ownerDocument.getElementById(boton.getAttribute('aria-controls')!)!;
 
     await expect(boton).toHaveAttribute('aria-expanded', 'false');
     await expect(panel).toHaveAttribute('inert');

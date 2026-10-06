@@ -1,4 +1,4 @@
-import { forwardRef, useState, useCallback, useRef, useEffect, useId, type Ref } from 'react';
+import { forwardRef, useState, useCallback, useRef, useEffect, useId } from 'react';
 import { Icon } from '../Icon/Icon';
 import { Spinner } from '../Spinner/Spinner';
 import { ProgressBar } from '../ProgressBar/ProgressBar';
@@ -7,6 +7,7 @@ import { useFormSize, type FormSize } from '../../constants/form-size';
 import { DEFAULT_LOCALE, formatFileSize, validateFile } from './validate';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './FileUpload.css';
+import { assignRef } from '../../constants/assign-ref';
 
 /**
  * El cromo de la zona de subida: lo que dice la zona, lo que dice de los
@@ -185,11 +186,6 @@ function revokeThumbUrl(file: File): void {
     URL.revokeObjectURL(url);
     thumbUrlCache.delete(file);
   }
-}
-
-function assignRef<T>(target: Ref<T> | undefined, node: T | null): void {
-  if (typeof target === 'function') target(node);
-  else if (target) (target as React.RefObject<T | null>).current = node;
 }
 
 /**

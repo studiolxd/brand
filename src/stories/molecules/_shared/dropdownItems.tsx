@@ -83,11 +83,6 @@ export type MenuRenderLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> 
   className: string;
 };
 
-/** Reenvía TODO lo que inyecta Base UI: un renderLink que solo copie href/className rompe el menú. */
-export function defaultRenderLink({ children, ...props }: MenuRenderLinkProps) {
-  return <a {...props}>{children}</a>;
-}
-
 interface RenderDropdownItemsOptions {
   items: MenuItem[];
   itemClass: (destructive?: boolean) => string;
@@ -218,6 +213,11 @@ export function renderDropdownItems({
                 }
                 // Diferido: si la acción abre un diálogo, que el menú termine
                 // de cerrarse y devolver el foco antes de que el diálogo lo tome.
+                // No se cancela a propósito: el ítem se desmonta justo al
+                // cerrarse el menú, que es lo que este diferido espera; atarlo
+                // al ciclo de vida del ítem (o del menú) descartaría la acción
+                // que el usuario acaba de elegir. Es un solo tic, sin estado
+                // de React que tocar después.
                 setTimeout(() => item.onClick(), 0);
               }
         }

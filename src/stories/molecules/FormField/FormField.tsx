@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useCallback, useContext, useEffect, useId, useMemo, useState, type ComponentProps } from 'react';
+import { createContext, forwardRef, useCallback, useContext, useEffect, useId, useMemo, useState, type ComponentProps } from 'react';
 import { useRender } from '@base-ui/react/use-render';
 import {
   Controller,
@@ -106,7 +106,7 @@ export function useFormField() {
 }
 
 /** Contenedor de un campo: reserva los ids que enlazan sus partes. */
-export function FormItem({ className, ...props }: ComponentProps<'div'>) {
+export const FormItem = forwardRef<HTMLDivElement, ComponentProps<'div'>>(function FormItem({ className, ...props }, ref) {
   const id = useId();
   // `aria-describedby` solo puede nombrar elementos que existen: la ayuda y el
   // mensaje se dan de alta al montarse y de baja al desmontarse.
@@ -118,17 +118,17 @@ export function FormItem({ className, ...props }: ComponentProps<'div'>) {
 
   return (
     <FormItemContext.Provider value={value}>
-      <div className={['form-field', className].filter(Boolean).join(' ')} {...props} />
+      <div ref={ref} className={['form-field', className].filter(Boolean).join(' ')} {...props} />
     </FormItemContext.Provider>
   );
-}
+});
 
 /** Etiqueta del campo, ya apuntada a su control y marcada si hay error. */
-export function FormLabel({ ...props }: ComponentProps<typeof Label>) {
+export const FormLabel = forwardRef<HTMLLabelElement, ComponentProps<typeof Label>>(function FormLabel({ ...props }, ref) {
   const { error, formItemId } = useFormField();
 
-  return <Label data-error={Boolean(error)} htmlFor={formItemId} {...props} />;
-}
+  return <Label ref={ref} data-error={Boolean(error)} htmlFor={formItemId} {...props} />;
+});
 
 /**
  * Envoltorio del control real (input, select, textarea…). No renderiza nodo
@@ -161,7 +161,7 @@ export function FormControl({ children, ...props }: { children: React.ReactEleme
 }
 
 /** Texto de ayuda del campo, enlazado al control por `aria-describedby`. */
-export function FormDescription({ className, ...props }: ComponentProps<'p'>) {
+export const FormDescription = forwardRef<HTMLParagraphElement, ComponentProps<'p'>>(function FormDescription({ className, ...props }, ref) {
   const { formDescriptionId, register } = useFormField();
 
   useEffect(() => {
@@ -171,18 +171,19 @@ export function FormDescription({ className, ...props }: ComponentProps<'p'>) {
 
   return (
     <p
+      ref={ref}
       id={formDescriptionId}
       className={['form-field__description', className].filter(Boolean).join(' ')}
       {...props}
     />
   );
-}
+});
 
 /**
  * Mensaje de error del campo. Renderiza el error de react-hook-form si lo
  * hay, o sus children si no; sin ninguno de los dos no renderiza nada.
  */
-export function FormMessage({ className, children, ...props }: ComponentProps<'p'>) {
+export const FormMessage = forwardRef<HTMLParagraphElement, ComponentProps<'p'>>(function FormMessage({ className, children, ...props }, ref) {
   const { error, formMessageId, register } = useFormField();
   const translate = useContext(FormTranslateContext);
   const message = error ? String(error?.message ?? '') : '';
@@ -198,6 +199,7 @@ export function FormMessage({ className, children, ...props }: ComponentProps<'p
 
   return (
     <p
+      ref={ref}
       id={formMessageId}
       role="alert"
       className={['form-field__message', className].filter(Boolean).join(' ')}
@@ -206,7 +208,7 @@ export function FormMessage({ className, children, ...props }: ComponentProps<'p
       {body}
     </p>
   );
-}
+});
 
 /**
  * Error del formulario entero (p. ej. "usuario o contraseña incorrectos"),
@@ -214,7 +216,7 @@ export function FormMessage({ className, children, ...props }: ComponentProps<'p
  * Se coloca una vez al final del formulario: a diferencia de `FormMessage`
  * no tiene campo del que leer, así que va directo al `formState`.
  */
-export function FormRootMessage({ className, ...props }: ComponentProps<'p'>) {
+export const FormRootMessage = forwardRef<HTMLParagraphElement, ComponentProps<'p'>>(function FormRootMessage({ className, ...props }, ref) {
   const { formState } = useFormContext();
   const translate = useContext(FormTranslateContext);
   const raw = formState.errors.root?.message;
@@ -224,6 +226,7 @@ export function FormRootMessage({ className, ...props }: ComponentProps<'p'>) {
 
   return (
     <p
+      ref={ref}
       role="alert"
       className={['form-error', className].filter(Boolean).join(' ')}
       {...props}
@@ -231,4 +234,4 @@ export function FormRootMessage({ className, ...props }: ComponentProps<'p'>) {
       {body}
     </p>
   );
-}
+});

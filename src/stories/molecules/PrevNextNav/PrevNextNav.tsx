@@ -54,6 +54,8 @@ export interface PrevNextNavProps {
   linkComponent?: ComponentType<any>;
   /** Variante de densidad. Default: "md" */
   size?: 'sm' | 'md';
+  /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+  className?: string;
 }
 
 interface NavControlProps {
@@ -153,6 +155,7 @@ export function PrevNextNav({
   labelId,
   linkComponent,
   size = 'md',
+  className,
 }: PrevNextNavProps) {
   const t = useBrandMessages('prevNextNav');
   const chevronSize = size === 'sm' ? 'sm' : 'md';
@@ -161,6 +164,7 @@ export function PrevNextNav({
     'prev-next-nav',
     size === 'sm' ? 'prev-next-nav--sm' : '',
     titled ? 'prev-next-nav--titled' : '',
+    className,
   ]
     .filter(Boolean)
     .join(' ');

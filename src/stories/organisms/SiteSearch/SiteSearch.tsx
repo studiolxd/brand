@@ -10,6 +10,7 @@ import { EmptyState } from '../../molecules/EmptyState/EmptyState';
 import { SearchForm } from '../../molecules/SearchForm/SearchForm';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './SiteSearch.css';
+import { defaultRenderLink } from '../../constants/default-render-link';
 
 /**
  * En qué punto está la búsqueda. **Lo decide quien busca**, no el componente:
@@ -165,11 +166,6 @@ export interface SiteSearchProps extends Omit<ComponentPropsWithoutRef<'div'>, '
   submitLabel?: string;
   /** Nombre accesible de la lista. Sin él, sale de `siteSearch.resultsLabel`. */
   resultsLabel?: string;
-}
-
-/** Reenvía TODO lo que recibe: un renderLink que solo copie href rompe el teclado. */
-function defaultRenderLink(props: SiteSearchRenderLinkProps) {
-  return <a {...props} />;
 }
 
 /**

@@ -25,6 +25,12 @@ export interface NotFoundPageProps {
    * no aplican.
    */
   shell?: boolean;
+  /**
+   * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+   * Va al contenido propio de la plantilla (título, frase y enlace), con marco
+   * y sin él, como en `OnboardingShell` y `ConnectorAuthShell`.
+   */
+  className?: string;
 }
 
 /**
@@ -34,10 +40,10 @@ export interface NotFoundPageProps {
  * roto no se lleva por delante el mensaje. Con `shell={false}` devuelve solo
  * el contenido, para una app que ya tiene su `main`.
  */
-export function NotFoundPage({ title, description, homeLink, header, footer, id = 'main-content', shell = true }: NotFoundPageProps) {
+export function NotFoundPage({ title, description, homeLink, header, footer, id = 'main-content', shell = true, className }: NotFoundPageProps) {
   return (
     <PublicPageShell header={header} footer={footer} id={id} shell={shell}>
-      <Stack>
+      <Stack className={className}>
         <PageIntro title={title} description={description} />
         {homeLink}
       </Stack>

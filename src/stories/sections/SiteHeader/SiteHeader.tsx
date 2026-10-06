@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { Container, type ContainerWidth } from '../../atoms/Container/Container';
 import { Logo, type LogoSize } from '../../atoms/Logo/Logo';
 import { MenuButton } from '../../atoms/MenuButton/MenuButton';
 import './SiteHeader.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { defaultRenderLink } from '../../constants/default-render-link';
 
 export type SiteHeaderLogoLinkProps = {
   href: string;
@@ -13,10 +14,6 @@ export type SiteHeaderLogoLinkProps = {
   'aria-label': string;
   children: ReactNode;
 };
-
-function defaultRenderLogoLink({ children, ...props }: SiteHeaderLogoLinkProps) {
-  return <a {...props}>{children}</a>;
-}
 
 export interface SiteHeaderProps {
   /** Destino del logotipo. */
@@ -57,7 +54,7 @@ export interface SiteHeaderProps {
   children?: ReactNode;
   /** Ajustes del sitio al final del panel (el selector de tema). */
   settings?: ReactNode;
-  /** id del panel — `aria-controls` del botón de menú. */
+  /** id del panel — `aria-controls` del botón de menú. Por defecto, uno único por instancia (`useId`). */
   panelId?: string;
   /** Controles del producto en la barra (acceso, CTA…). */
   actions?: ReactNode;
@@ -94,17 +91,21 @@ export function SiteHeader({
   logoSize = 'xxl',
   logo = <Logo size={logoSize} />,
   menuButtonSize = 'lg',
-  renderLogoLink = defaultRenderLogoLink,
+  renderLogoLink = defaultRenderLink,
   width = 'xl',
   open,
   onOpenChange,
   children,
   settings,
-  panelId = 'site-header-panel',
+  panelId: panelIdProp,
   actions,
   language,
 }: SiteHeaderProps) {
   const t = useBrandMessages('siteHeader');
+  // Sin `panelId` del consumidor, uno único por instancia: un fijo chocaba con
+  // dos cabeceras en la misma página.
+  const autoPanelId = useId();
+  const panelId = panelIdProp ?? autoPanelId;
   const [internalOpen, setInternalOpen] = useState(false);
   const isControlled = open !== undefined;
   const isOpen = isControlled ? open : internalOpen;

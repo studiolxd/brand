@@ -200,6 +200,7 @@ export function ConnectorConsentPage({
   preferencesLabel,
   id,
   shell,
+  className,
 }: ConnectorConsentPageProps) {
   const t = useBrandMessages('connectorConsent');
   const nativo = action !== undefined;
@@ -254,6 +255,7 @@ export function ConnectorConsentPage({
       preferencesLabel={preferencesLabel}
       id={id}
       shell={shell}
+      className={className}
     >
       <Form
         size="lg"

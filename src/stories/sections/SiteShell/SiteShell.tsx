@@ -3,6 +3,7 @@
 import { forwardRef, useCallback, useState, type ReactNode } from 'react';
 import { PortalContainerContext } from '../../constants/portal-container';
 import './SiteShell.css';
+import { assignRef } from '../../constants/assign-ref';
 
 export interface SiteShellProps {
   /** La cabecera del sitio (`SiteHeader` o la del producto). */
@@ -48,8 +49,7 @@ export const SiteShell = forwardRef<HTMLDivElement, SiteShellProps>(function Sit
   const setRefs = useCallback(
     (node: HTMLDivElement | null) => {
       setRoot(node);
-      if (typeof ref === 'function') ref(node);
-      else if (ref) ref.current = node;
+      assignRef(ref, node);
     },
     [ref],
   );

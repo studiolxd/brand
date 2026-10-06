@@ -1,6 +1,7 @@
 import type { AnchorHTMLAttributes, ReactNode } from 'react';
 import './Breadcrumb.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { defaultRenderLink } from '../../constants/default-render-link';
 
 export type BreadcrumbItem = {
   label: string;
@@ -23,12 +24,6 @@ export interface BreadcrumbProps {
    */
   ariaLabel?: string;
   className?: string;
-}
-
-// Reenvía todo lo que reciba: un renderLink del consumidor (router propio) puede
-// añadir atributos de enlace sin que Breadcrumb tenga que conocerlos.
-function defaultRenderLink({ children, ...props }: BreadcrumbRenderLinkProps) {
-  return <a {...props}>{children}</a>;
 }
 
 /**

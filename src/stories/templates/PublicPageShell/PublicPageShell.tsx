@@ -72,6 +72,12 @@ export interface PublicPageShellProps {
    * aplican —y tampoco el `ref`, porque no hay marco al que engancharlo.
    */
   shell?: boolean;
+  /**
+   * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+   * Va al nodo raíz del marco (`.site-shell`). Con `shell={false}` no aplica:
+   * no hay nodo propio, solo los `children`.
+   */
+  className?: string;
 }
 
 /**
@@ -127,6 +133,7 @@ export const PublicPageShell = forwardRef<HTMLDivElement, PublicPageShellProps>(
     mainFlush = false,
     id = 'main-content',
     shell = true,
+    className,
   },
   ref,
 ) {
@@ -147,6 +154,7 @@ export const PublicPageShell = forwardRef<HTMLDivElement, PublicPageShellProps>(
   return (
     <SiteShell
       ref={ref}
+      className={className}
       header={header && <ErrorBoundary>{header}</ErrorBoundary>}
       footer={
         (banda || footer) && (

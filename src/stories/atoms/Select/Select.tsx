@@ -107,6 +107,12 @@ export interface SelectProps {
    * cajón de un shell propio. Gana siempre.
    */
   container?: SelectPortalContainer;
+  /**
+   * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+   * Va al disparador: es el único nodo que la forma cerrada pinta en su sitio
+   * (la lista sale por un portal).
+   */
+  className?: string;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -339,6 +345,7 @@ const SelectClosed = forwardRef<HTMLButtonElement, SelectProps>(function SelectC
   'aria-describedby': ariaDescribedBy,
   'aria-invalid': ariaInvalid,
   container,
+  className,
 }: SelectProps, ref) {
   return (
     <SelectRoot
@@ -350,7 +357,7 @@ const SelectClosed = forwardRef<HTMLButtonElement, SelectProps>(function SelectC
       required={required}
       onValueChange={onValueChange}
     >
-      <SelectTrigger ref={ref} size={size} id={id} onBlur={onBlur} aria-label={ariaLabel} aria-describedby={ariaDescribedBy} aria-invalid={ariaInvalid || undefined}>
+      <SelectTrigger ref={ref} size={size} className={className} id={id} onBlur={onBlur} aria-label={ariaLabel} aria-describedby={ariaDescribedBy} aria-invalid={ariaInvalid || undefined}>
         <SelectValue placeholder={<SelectPlaceholder override={placeholder} />} />
       </SelectTrigger>
       <SelectContent size={size} container={container}>

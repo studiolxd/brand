@@ -103,6 +103,12 @@ export interface AppLauncherProps {
    * quien lo prefiera lo pide explícitamente.
    */
   presentation?: 'modal' | 'popover';
+  /**
+   * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+   * Va al disparador: es el único nodo que el componente pinta en su sitio (el
+   * panel sale por un portal, sea diálogo o popover).
+   */
+  className?: string;
 }
 
 function LauncherTile({ app, isCurrent, newLabel }: { app: LauncherApp; isCurrent: boolean; newLabel?: string }) {
@@ -182,6 +188,14 @@ interface AppLauncherPresentationProps {
   open?: boolean;
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
+  className?: string;
+}
+
+/** Clases del disparador: con rótulo o solo icono, más las del consumidor. */
+function triggerClass(withLabel: boolean, className?: string) {
+  return ['app-launcher__trigger', withLabel ? 'app-launcher__trigger--label' : '', className]
+    .filter(Boolean)
+    .join(' ');
 }
 
 function AppLauncherPopover({
@@ -191,6 +205,7 @@ function AppLauncherPopover({
   open,
   defaultOpen,
   onOpenChange,
+  className,
 }: AppLauncherPresentationProps) {
   const t = useBrandMessages('appLauncher');
   const portalContainer = usePortalContainer(undefined);
@@ -203,12 +218,12 @@ function AppLauncherPopover({
       <BasePopover.Trigger
         render={
           labels.trigger ? (
-            <button type="button" className="app-launcher__trigger app-launcher__trigger--label">
+            <button type="button" className={triggerClass(true, className)}>
               <Icon name="grid" size="md" />
               <span className="app-launcher__trigger-label">{labels.trigger}</span>
             </button>
           ) : (
-            <button type="button" className="app-launcher__trigger" aria-label={t('open', labels.open)}>
+            <button type="button" className={triggerClass(false, className)} aria-label={t('open', labels.open)}>
               <Icon name="grid" size="md" />
             </button>
           )
@@ -248,6 +263,7 @@ function AppLauncherModal({
   open,
   defaultOpen,
   onOpenChange,
+  className,
 }: AppLauncherPresentationProps) {
   const t = useBrandMessages('appLauncher');
   const [isOpen, setOpen] = useAppLauncherOpenState(open, defaultOpen, onOpenChange);
@@ -257,7 +273,7 @@ function AppLauncherModal({
       {labels.trigger ? (
         <button
           type="button"
-          className="app-launcher__trigger app-launcher__trigger--label"
+          className={triggerClass(true, className)}
           aria-haspopup="dialog"
           onClick={() => setOpen(true)}
         >
@@ -267,7 +283,7 @@ function AppLauncherModal({
       ) : (
         <button
           type="button"
-          className="app-launcher__trigger"
+          className={triggerClass(false, className)}
           aria-label={t('open', labels.open)}
           aria-haspopup="dialog"
           onClick={() => setOpen(true)}

@@ -5,6 +5,7 @@ import { List } from '../../atoms/List/List';
 import { Logo } from '../../atoms/Logo/Logo';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import './SiteFooter.css';
+import { defaultRenderLink } from '../../constants/default-render-link';
 
 export interface SiteFooterLink {
   /** Clave de React. Sin ella se usa el `href`. */
@@ -56,10 +57,6 @@ export interface SiteFooterProps {
   width?: ContainerWidth;
   className?: string;
   id?: string;
-}
-
-function defaultRenderLink({ children, ...props }: SiteFooterRenderLinkProps) {
-  return <a {...props}>{children}</a>;
 }
 
 /**

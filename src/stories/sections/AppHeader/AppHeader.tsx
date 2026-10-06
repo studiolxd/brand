@@ -5,6 +5,7 @@ import { AppShellContext } from '../AppShell/AppShellContext';
 import { MenuButton } from '../../atoms/MenuButton/MenuButton';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './AppHeader.css';
+import { defaultRenderLink } from '../../constants/default-render-link';
 
 export type AppHeaderLogoLinkProps = {
   href: string;
@@ -12,10 +13,6 @@ export type AppHeaderLogoLinkProps = {
   'aria-label': string;
   children: ReactNode;
 };
-
-function defaultRenderLogoLink({ children, ...props }: AppHeaderLogoLinkProps) {
-  return <a {...props}>{children}</a>;
-}
 
 /**
  * El único texto propio de la barra, y solo cuando lleva `logo`: es **cromo**,
@@ -69,6 +66,8 @@ export interface AppHeaderProps {
   menuCloseLabel?: string;
   /** id de la sidebar que gobierna el botón (`aria-controls`). */
   sidebarId?: string;
+  /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+  className?: string;
 }
 
 /**
@@ -81,13 +80,14 @@ export function AppHeader({
   logo,
   logoHref = '/',
   logoLabel,
-  renderLogoLink = defaultRenderLogoLink,
+  renderLogoLink = defaultRenderLink,
   start,
   notifications,
   end,
   menuLabel,
   menuCloseLabel,
   sidebarId,
+  className,
 }: AppHeaderProps) {
   // Dentro de AppShell gobierna la sidebar; suelto (Storybook), estado local.
   const shell = useContext(AppShellContext);
@@ -97,7 +97,7 @@ export function AppHeader({
   const t = useBrandMessages('appHeader');
 
   return (
-    <header className="app-header">
+    <header className={['app-header', className].filter(Boolean).join(' ')}>
       <MenuButton isOpen={open} onClick={toggle} label={menuLabel} closeLabel={menuCloseLabel} aria-controls={sidebarId} aria-expanded={open} />
       {/* El texto del enlace se lee solo aquí: sin logo, la barra no exige su clave */}
       {logo && renderLogoLink({ href: logoHref, className: 'app-header__logo', 'aria-label': t('logo', logoLabel), children: logo })}
