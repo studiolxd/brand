@@ -122,6 +122,10 @@
       "reason": "Los textos del calendario son los del selector del sistema."
     },
     {
+      "prop": "today",
+      "reason": "Existe para la hidratación SSR de React (servidor y navegador calculan su propio «ahora»). En nativo no hay hidratación, y el «hoy» que marca el calendario es el del selector del sistema."
+    },
+    {
       "prop": "name",
       "reason": "El `name` del campo es de los formularios HTML; en nativo el estado vive en el `Binding`."
     },

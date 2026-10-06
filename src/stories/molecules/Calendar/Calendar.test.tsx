@@ -261,3 +261,19 @@ describe('Calendar — elegir año desde el título', () => {
     expect(screen.getByLabelText('Años siguientes')).toBeDisabled();
   });
 });
+
+describe('Calendar — today', () => {
+  it('marca como hoy el día que se le pasa, no el del reloj (SSR)', () => {
+    renderCalendar({ today: new Date(2025, 0, 20) });
+    const hoy = screen
+      .getAllByRole('gridcell')
+      .filter((cell) => cell.getAttribute('aria-current') === 'date' || cell.querySelector('[aria-current="date"]'));
+    expect(hoy).toHaveLength(1);
+    expect(hoy[0].textContent).toContain('20');
+  });
+
+  it('sin mes ni valor, abre el mes de `today`', () => {
+    render(conCatalogo(<Calendar today={new Date(2031, 4, 10)} />));
+    expect(screen.getByRole('grid', { name: /mayo de 2031/i })).toBeInTheDocument();
+  });
+});

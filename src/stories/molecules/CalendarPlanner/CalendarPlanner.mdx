@@ -23,6 +23,9 @@ el color del número heredan de los de `Calendar`, y aquí solo viven los que so
 de verdad suyos: los bordes de la parrilla, la altura de celda, el badge del
 número y el enlace «+N más».
 
+También es la misma la prop `today`, el día que se marca como hoy: en SSR
+conviene pasarla. El porqué, en `Calendar` § «El día de hoy y el SSR».
+
 ## Eventos y truncado
 
 `events` es una lista plana de `{ id, date, label, variant }`. Cada celda

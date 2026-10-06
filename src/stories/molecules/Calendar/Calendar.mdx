@@ -37,6 +37,29 @@ consuma el componente.
 
 <Canvas of={CalendarStories.Controlado} />
 
+## El día de hoy y el SSR
+
+El día marcado como hoy (`aria-current="date"`) sale de `today`. Sin ella, el
+calendario toma la fecha actual **una vez, al montar**, no en cada render; esa
+misma fecha es la que abre el mes visible cuando no hay `value`, `month` ni
+`defaultMonth`, y el año vigente de la rejilla de años.
+
+En una aplicación con renderizado en servidor **conviene pasarla**. Servidor y
+navegador calculan cada uno su «ahora»: cerca de la medianoche, o con husos
+horarios distintos, no coinciden, el día marcado cambia al hidratar y React
+avisa del desajuste. La fecha se calcula en el servidor y se manda la misma a
+los dos lados:
+
+```tsx
+// Server Component
+const today = new Date();
+<Calendar today={today} … />
+```
+
+La misma prop, con el mismo comportamiento, la tienen `CalendarPlanner`,
+`CalendarRoster` y los campos que llevan dentro un calendario (`DatePicker`,
+`DatePickerField`, `DateTimeField` y `RecurrenceField`, que la reenvían).
+
 ## Elegir año
 
 El nombre del mes es un botón: al pulsarlo, la rejilla de días deja sitio a una

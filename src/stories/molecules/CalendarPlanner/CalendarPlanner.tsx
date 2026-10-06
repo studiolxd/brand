@@ -19,6 +19,7 @@ import {
   startOfWeek,
   useCalendarGridNavigation,
   useCalendarWeekNavigation,
+  useToday,
 } from '../_shared/calendarGrid';
 import './CalendarPlanner.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
@@ -153,6 +154,15 @@ export interface CalendarPlannerProps {
   weekViewLabel?: string;
   /** Nombre accesible del conmutador de vista. Default: `'Vista del calendario'`. */
   viewSwitcherLabel?: string;
+  /**
+   * El día que el planificador marca como «hoy» (y desde el que arranca el
+   * mes o la semana visible cuando no se pasa otra fecha). Default: la fecha
+   * actual, calculada una vez al montar. **En SSR conviene pasarla**: servidor
+   * y navegador calculan cada uno su «ahora», y cerca de la medianoche —o con
+   * husos distintos— no coinciden y la hidratación se desajusta. Basta con
+   * calcularla en el servidor y mandar la misma fecha a los dos lados.
+   */
+  today?: Date;
   /** Tamaño del componente. Default: 'md' */
   size?: 'sm' | 'md' | 'lg';
   className?: string;
@@ -203,14 +213,16 @@ export function CalendarPlanner({
   viewSwitcherLabel = 'Vista del calendario',
   gridLabel,
   moreLabel,
+  today: todayProp,
   size = 'md',
   className,
 }: CalendarPlannerProps) {
+  const today = useToday(todayProp);
   const [internalMonth, setInternalMonth] = useState<Date>(
-    () => monthProp ?? defaultMonth ?? new Date()
+    () => monthProp ?? defaultMonth ?? today
   );
   const [internalWeek, setInternalWeek] = useState<Date>(
-    () => startOfWeek(weekProp ?? defaultWeek ?? monthProp ?? defaultMonth ?? new Date())
+    () => startOfWeek(weekProp ?? defaultWeek ?? monthProp ?? defaultMonth ?? today)
   );
   const [internalView, setInternalView] = useState<CalendarPlannerView>(
     () => viewProp ?? defaultView ?? 'month'
@@ -268,7 +280,6 @@ export function CalendarPlanner({
 
   const t = useBrandMessages('calendar');
   const tp = useBrandMessages('calendarPlanner');
-  const today = new Date();
   const chevronSize = size === 'lg' ? 'md' : 'sm';
 
   const titleFormatter = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' });
@@ -316,11 +327,13 @@ export function CalendarPlanner({
   const monthGrid = useCalendarGridNavigation({
     month: currentMonth,
     onMonthChange: handleMonthChange,
+    today,
     onActivate: onDayClick ? (date) => onDayClick(date, getEventsForDay(date)) : undefined,
   });
   const weekGrid = useCalendarWeekNavigation({
     weekStart: currentWeek,
     onWeekChange: handleWeekChange,
+    today,
     onActivate: onDayClick ? (date) => onDayClick(date, getEventsForDay(date)) : undefined,
   });
   const grid = isWeek ? weekGrid : monthGrid;

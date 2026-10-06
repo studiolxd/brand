@@ -88,6 +88,11 @@ export interface RecurrenceFieldProps {
   locale?: string;
   /** Por dónde empieza la semana en los días. Default `'monday'`. */
   weekStartsOn?: 'monday' | 'sunday';
+  /**
+   * El «hoy» del calendario de la fecha de final. Default: la fecha actual.
+   * En SSR conviene pasarla (ver `Calendar`).
+   */
+  today?: Date;
   /** Tope inferior de la fecha de final. */
   minDate?: Date;
   /** Tope superior de la fecha de final. */
@@ -130,6 +135,7 @@ export function RecurrenceField({
   weekStartsOn = 'monday',
   minDate,
   maxDate,
+  today,
   className,
   frequencyLabel,
   weekdaysLabel,
@@ -247,6 +253,7 @@ export function RecurrenceField({
                 locale={locale}
                 minDate={minDate}
                 maxDate={maxDate}
+                today={today}
                 disabled={disabled}
                 size={size}
                 onChange={(fecha) => cambia({ end: { type: 'until', date: fecha } })}
