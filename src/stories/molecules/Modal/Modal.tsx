@@ -26,7 +26,7 @@ export interface ModalMessages {
 }
 
 export interface ModalProps
-  extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title' | 'className'> {
+  extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
   open: boolean;
   onClose: () => void;
   title?: string;
@@ -83,6 +83,12 @@ export interface ModalProps
   footer?: React.ReactNode;
   /** Se añade DESPUÉS de las clases propias del pie. */
   footerClassName?: string;
+  /**
+   * Se añade DESPUÉS de las clases propias del panel (`modal__content`), igual
+   * que en `Sheet`. Es un enganche para el producto (una prueba, una medida
+   * propia), no la vía de personalizar la cara del diálogo: eso va por tokens.
+   */
+  className?: string;
 }
 
 /**
@@ -95,8 +101,8 @@ export interface ModalProps
  * `onClick`/`onPointerDown` con `stopPropagation` en el propio popup— sin
  * envolverlo en `div`s de producto.
  *
- * `className` **no** se reenvía a propósito: la cara del diálogo la pone el
- * sistema, y se personaliza por tokens.
+ * `className` se concatena tras las clases propias del popup, como en `Sheet`.
+ * La cara del diálogo sigue personalizándose por tokens.
  */
 
 export function Modal({
@@ -112,6 +118,7 @@ export function Modal({
   initialFocus,
   footer,
   footerClassName,
+  className,
   ...rest
 }: ModalProps) {
   const t = useBrandMessages('modal');
@@ -130,7 +137,9 @@ export function Modal({
     <Dialog.Root open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose(); }}>
       <Dialog.Portal container={portalContainer}>
         <DialogOverlay className="modal__overlay" />
-        <Dialog.Popup className="modal__content" {...describedByProps} {...initialFocusProps} {...rest}>
+        <Dialog.Popup
+          className={['modal__content', className].filter(Boolean).join(' ')}
+          {...describedByProps} {...initialFocusProps} {...rest}>
           {title ? (
             <DialogHeader layout="inline" className="modal__header">
               <Dialog.Title className="modal__title">{title}</Dialog.Title>
