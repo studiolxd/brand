@@ -4,11 +4,19 @@
  * Superficie invertida dentro de una oscura: `.surface-invert` vuelve a poner
  * en claro todo token que el modo oscuro haya volteado. Sobre página clara no
  * hace falta bloque: `.surface-invert` ya es uno de los selectores oscuros.
+ *
+ * Superficie siempre clara: `.surface-light` devuelve a su valor claro los
+ * mismos tokens, con los mismos valores, cuando cae dentro de una superficie
+ * oscura. Por eso comparte bloque. Sobre página clara no hace falta nada.
  */
 
 .surface-dark .surface-invert,
 [data-theme="dark"] .surface-invert,
-html.dark .surface-invert {
+html.dark .surface-invert,
+.surface-dark .surface-light,
+.surface-invert .surface-light,
+[data-theme="dark"] .surface-light,
+html.dark .surface-light {
   --accordion-border-color: var(--color-primary);
   --accordion-index-color: var(--color-text-muted-on-light);
   --accordion-focus-ring-color: var(--color-primary);
@@ -307,6 +315,8 @@ html.dark .surface-invert {
   --radio-error-border-color: var(--color-error-text-on-light);
   --radio-dot-color: var(--color-primary);
   --radio-focus-ring-color: var(--color-primary);
+  --radio-disabled-border-color: var(--color-disabled-border-on-light);
+  --radio-disabled-dot-color: var(--color-disabled-border-on-light);
   --scroll-area-thumb-bg: var(--color-border-default-on-light);
   --scroll-area-thumb-hover-bg: var(--color-icon-secondary-on-light);
   --scroll-area-focus-ring-color: var(--color-primary);

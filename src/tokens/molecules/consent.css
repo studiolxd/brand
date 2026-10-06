@@ -3,6 +3,7 @@
  */
 
 :root {
+  --consent-banner-text-flex-basis: 20rem; /** Base flexible del texto: encoge antes que la fila de botones, que nunca se parte */
   --consent-banner-padding-block: var(--spacing-4); /** Aire vertical de la banda */
   --consent-banner-padding-inline: var(--spacing-4); /** Aire horizontal de la banda */
   --consent-banner-gap: var(--spacing-3); /** Separación entre el texto y la fila de botones */

@@ -98,8 +98,8 @@
    recupera la talla y el centrado del disparador sin texto. */
 .sidebar--rail .app-launcher__trigger-label { display: none; }
 .sidebar--rail .app-launcher__trigger--label {
-  width: var(--app-launcher-trigger-size);
-  height: var(--app-launcher-trigger-size);
+  inline-size: var(--app-launcher-trigger-size);
+  block-size: var(--app-launcher-trigger-size);
   padding: 0;
   justify-content: center;
 }

@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   gap: var(--user-menu-trigger-gap);
-  width: 100%;
+  inline-size: 100%;
   padding-block: var(--user-menu-trigger-padding-block);
   padding-inline: var(--user-menu-trigger-padding-inline);
   border-radius: var(--user-menu-trigger-border-radius);
@@ -14,7 +14,7 @@
 
 /* Compacto: solo el avatar, ocupa lo que mide */
 .user-menu__trigger.user-menu__trigger--compact {
-  width: auto;
+  inline-size: auto;
   padding-inline: var(--user-menu-trigger-compact-padding-inline);
 }
 
@@ -40,7 +40,7 @@
 /* ─── Nombre en trigger ──────────────────────────────────── */
 .user-menu__name {
   flex: 1;
-  min-width: 0;
+  min-inline-size: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -82,10 +82,10 @@
   box-shadow: var(--user-menu-content-shadow);
   padding-block: var(--user-menu-content-padding-block);
   padding-inline: var(--user-menu-content-padding-inline);
-  min-width: var(--user-menu-content-min-width);
+  min-inline-size: var(--user-menu-content-min-width);
   outline: none;
   transform-origin: var(--transform-origin);
-  max-height: var(--user-menu-content-max-height, var(--available-height));
+  max-block-size: var(--user-menu-content-max-height, var(--available-height));
   overflow-y: auto;
   overscroll-behavior: contain;
 }
@@ -114,7 +114,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--user-menu-header-gap);
-  min-width: 0;
+  min-inline-size: 0;
 }
 
 .user-menu__header-name {
@@ -180,7 +180,7 @@
 
 /* ─── Separador ──────────────────────────────────────────── */
 .user-menu__separator {
-  height: var(--user-menu-separator-height);
+  block-size: var(--user-menu-separator-height);
   background-color: var(--user-menu-separator-color);
   margin-block: var(--user-menu-separator-margin-block);
   border: none;
@@ -202,7 +202,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  min-width: 0;
+  min-inline-size: 0;
 }
 
 .user-menu__item-label,

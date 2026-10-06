@@ -5,6 +5,7 @@
 :root {
   --calendar-roster-th-name-width: 10rem; /** Ancho de la columna de nombre */
   --calendar-roster-th-day-width: 2.5rem; /** Ancho mínimo de cada columna de día */
+  --calendar-roster-th-day-line-height: 1.2; /** Interlineado del número de día. 1.2 no está en la escala `line-height` (entre `tight` 1.1 y `snug` 1.3): se conserva el valor de siempre */
   --calendar-roster-font-family: var(--font-family-sans); /** Familia tipográfica base */
   --calendar-roster-th-name-font-size: var(--font-size-1); /** Tamaño del encabezado de nombre */
   --calendar-roster-th-name-padding-block: var(--spacing-2); /** Padding vertical del encabezado de nombre */

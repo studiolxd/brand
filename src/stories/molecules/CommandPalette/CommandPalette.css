@@ -1,11 +1,11 @@
 .command-palette {
   display: flex;
   flex-direction: column;
-  max-height: var(--command-palette-max-height);
+  max-block-size: var(--command-palette-max-height);
 }
 
 .command-palette__input {
-  width: 100%;
+  inline-size: 100%;
   box-sizing: border-box;
   padding-block: var(--command-palette-input-padding-block);
   padding-inline: var(--command-palette-input-padding-inline);

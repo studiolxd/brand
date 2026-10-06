@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: var(--calendar-planner-gap);
   font-family: var(--calendar-planner-font-family);
-  width: 100%;
+  inline-size: 100%;
 }
 
 /* ─── Header ─────────────────────────────────────────────────────────────── */
@@ -96,8 +96,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--calendar-planner-items-gap);
-  min-height: var(--calendar-planner-cell-min-height);
-  min-width: 0;
+  min-block-size: var(--calendar-planner-cell-min-height);
+  min-inline-size: 0;
   overflow: hidden;
   padding-block: var(--calendar-planner-cell-padding-block);
   padding-inline: var(--calendar-planner-cell-padding-inline);
@@ -130,8 +130,8 @@
   align-items: center;
   justify-content: center;
   align-self: flex-start;
-  width: var(--calendar-planner-day-number-size);
-  height: var(--calendar-planner-day-number-size);
+  inline-size: var(--calendar-planner-day-number-size);
+  block-size: var(--calendar-planner-day-number-size);
   border-radius: var(--calendar-planner-day-number-radius);
   font-size: var(--calendar-planner-day-number-font-size);
   font-weight: var(--calendar-planner-day-number-font-weight);
@@ -155,13 +155,13 @@
   display: flex;
   flex-direction: column;
   gap: var(--calendar-planner-items-gap);
-  min-width: 0;
+  min-inline-size: 0;
   overflow: hidden;
 }
 
 .calendar-planner__cell-body .tag {
   display: block;
-  max-width: 100%;
+  max-inline-size: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -196,13 +196,13 @@
 /* ─── Sm variant ─────────────────────────────────────────────────────────── */
 
 .calendar-planner.calendar-planner--sm .calendar-planner__cell {
-  min-height: var(--calendar-planner-sm-cell-min-height);
+  min-block-size: var(--calendar-planner-sm-cell-min-height);
 }
 
 /* ─── Lg variant ─────────────────────────────────────────────────────────── */
 
 .calendar-planner.calendar-planner--lg .calendar-planner__cell {
-  min-height: var(--calendar-planner-lg-cell-min-height);
+  min-block-size: var(--calendar-planner-lg-cell-min-height);
 }
 
 /* ─── Modal events list ───────────────────────────────────────────────────── */
@@ -227,15 +227,15 @@
 }
 
 .calendar-planner__cell.calendar-planner__cell--week {
-  min-height: var(--calendar-planner-week-cell-min-height);
+  min-block-size: var(--calendar-planner-week-cell-min-height);
 }
 
 .calendar-planner.calendar-planner--sm .calendar-planner__cell.calendar-planner__cell--week {
-  min-height: var(--calendar-planner-sm-week-cell-min-height);
+  min-block-size: var(--calendar-planner-sm-week-cell-min-height);
 }
 
 .calendar-planner.calendar-planner--lg .calendar-planner__cell.calendar-planner__cell--week {
-  min-height: var(--calendar-planner-lg-week-cell-min-height);
+  min-block-size: var(--calendar-planner-lg-week-cell-min-height);
 }
 
 /* El renglón del evento: la hora delante y el tag detrás, en la misma línea.
@@ -244,7 +244,7 @@
   display: flex;
   align-items: baseline;
   gap: var(--calendar-planner-items-gap);
-  min-width: 0;
+  min-inline-size: 0;
 }
 
 .calendar-planner__event-time {
@@ -255,7 +255,7 @@
 }
 
 .calendar-planner__event .tag {
-  min-width: 0;
+  min-inline-size: 0;
   overflow: hidden;
   text-overflow: ellipsis;
 }

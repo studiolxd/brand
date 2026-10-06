@@ -2,8 +2,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: var(--number-badge-min-size);
-  height: var(--number-badge-min-size);
+  min-inline-size: var(--number-badge-min-size);
+  block-size: var(--number-badge-min-size);
   padding-inline: var(--number-badge-padding-inline);
   border-radius: var(--number-badge-border-radius);
 

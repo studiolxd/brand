@@ -1,6 +1,6 @@
 .tooltip {
   box-sizing: border-box;
-  max-width: var(--tooltip-max-width);
+  max-inline-size: var(--tooltip-max-width);
   padding-block: var(--tooltip-padding-block);
   padding-inline: var(--tooltip-padding-inline);
   border-radius: var(--tooltip-border-radius);
@@ -37,11 +37,11 @@
 }
 
 .tooltip__arrow[data-side='top'] {
-  top: 100%;
+  inset-block-start: 100%;
 }
 
 .tooltip__arrow[data-side='bottom'] {
-  bottom: 100%;
+  inset-block-end: 100%;
   rotate: 180deg;
 }
 

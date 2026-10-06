@@ -14,6 +14,7 @@ $lxd-calendar-roster-th-name-padding-block: 0.5rem; // Padding vertical del enca
 $lxd-calendar-roster-th-name-padding-inline: 0.75rem; // Padding horizontal del encabezado de nombre
 $lxd-calendar-roster-th-day-width: 2.5rem; // Ancho mínimo de cada columna de día
 $lxd-calendar-roster-th-day-font-size: 0.875rem; // Tamaño del número de día
+$lxd-calendar-roster-th-day-line-height: 1.2; // Interlineado del número de día. 1.2 no está en la escala `line-height` (entre `tight` 1.1 y `snug` 1.3): se conserva el valor de siempre
 $lxd-calendar-roster-th-day-sub-font-size: 0.75rem; // Tamaño de la letra del día de semana
 $lxd-calendar-roster-th-day-color: #111e30; // Color del encabezado de día
 $lxd-calendar-roster-th-day-padding-block: 0.5rem; // Padding vertical del encabezado de día

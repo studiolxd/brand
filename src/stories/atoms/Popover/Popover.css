@@ -9,7 +9,7 @@
   padding-inline: var(--popover-padding-inline);
   outline: none;
   transform-origin: var(--transform-origin);
-  max-height: var(--popover-max-height, var(--available-height));
+  max-block-size: var(--popover-max-height, var(--available-height));
   overflow-y: auto;
   overscroll-behavior: contain;
   /* Duraciones y curvas por token: con prefers-reduced-motion valen 0ms y el

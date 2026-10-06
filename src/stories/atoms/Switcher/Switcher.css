@@ -4,8 +4,8 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  width: var(--switcher-track-width);
-  height: var(--switcher-track-height);
+  inline-size: var(--switcher-track-width);
+  block-size: var(--switcher-track-height);
   padding-inline: var(--switcher-track-padding);
   border-radius: var(--switcher-track-border-radius);
   background-color: var(--switcher-track-bg);
@@ -33,8 +33,8 @@
 
 .switcher__thumb {
   display: block;
-  width: var(--switcher-thumb-size);
-  height: var(--switcher-thumb-size);
+  inline-size: var(--switcher-thumb-size);
+  block-size: var(--switcher-thumb-size);
   border-radius: var(--switcher-thumb-border-radius);
   background-color: var(--switcher-thumb-bg);
   transition: transform var(--switcher-transition-duration) var(--switcher-transition-easing);

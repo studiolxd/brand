@@ -5,8 +5,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--app-launcher-trigger-size);
-  height: var(--app-launcher-trigger-size);
+  inline-size: var(--app-launcher-trigger-size);
+  block-size: var(--app-launcher-trigger-size);
   border-radius: var(--app-launcher-trigger-border-radius);
   color: var(--app-launcher-trigger-color);
   cursor: pointer;
@@ -33,8 +33,8 @@
    sidebar (tipografía, alto, radio, aire) por referencia — nada copiado.
    Ancho y alto pasan a automáticos: ya no es el cuadrado de icono. */
 .app-launcher__trigger--label {
-  width: auto;
-  height: auto;
+  inline-size: auto;
+  block-size: auto;
   gap: var(--app-launcher-trigger-label-gap);
   padding-block: var(--app-launcher-trigger-label-padding-block);
   padding-inline: var(--app-launcher-trigger-label-padding-inline);
@@ -70,7 +70,7 @@
   box-shadow: var(--app-launcher-content-shadow);
   padding-block: var(--app-launcher-content-padding-block);
   padding-inline: var(--app-launcher-content-padding-inline);
-  min-width: var(--app-launcher-content-min-width);
+  min-inline-size: var(--app-launcher-content-min-width);
   outline: none;
   transform-origin: var(--transform-origin);
   animation-duration: var(--app-launcher-transition-duration);
@@ -82,7 +82,7 @@
      da, el panel se recorta ahí y hace scroll. De modo que no se añade aquí
      ninguna medida fija: sería un tope artificial que recortaría la rejilla
      teniendo pantalla de sobra. */
-  max-height: var(--app-launcher-content-max-height, var(--available-height));
+  max-block-size: var(--app-launcher-content-max-height, var(--available-height));
   overflow-y: auto;
   overscroll-behavior: contain;
 }

@@ -26,7 +26,7 @@
 /* Campo numérico interno */
 .number-input__field {
   flex: 1;
-  min-width: 0;
+  min-inline-size: 0;
   padding-block: 0;
   padding-inline: var(--number-input-padding-inline);
   border: none;
@@ -50,7 +50,7 @@
 /* Botones +/− — el signo es un icono del catálogo (`minus`/`plus`), no texto */
 .number-input__btn {
   flex-shrink: 0;
-  width: var(--number-input-btn-width);
+  inline-size: var(--number-input-btn-width);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -135,5 +135,5 @@
 
 .number-input.number-input--compact .number-input__field {
   flex: none;
-  width: var(--number-input-compact-field-width);
+  inline-size: var(--number-input-compact-field-width);
 }

@@ -24,13 +24,13 @@
   /* Contenedor de consulta de la superficie de diálogo: el pie se coloca por
      el ancho del diálogo, no por el de la ventana (ver `dialogSurface.css`). */
   container: dialog / inline-size;
-  top: 50%;
+  inset-block-start: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: var(--modal-z-index);
-  width: 90vw;
-  max-width: var(--modal-width-max);
-  max-height: var(--modal-max-height);
+  inline-size: var(--modal-inline-size);
+  max-inline-size: var(--modal-width-max);
+  max-block-size: var(--modal-max-height);
   display: flex;
   flex-direction: column;
   background-color: var(--modal-bg);
@@ -96,7 +96,7 @@
 .modal__body {
   overflow-y: auto;
   flex: 1;
-  min-height: 0;
+  min-block-size: 0;
 }
 
 /* ── Pie de acciones ────────────────────────────────────────── */

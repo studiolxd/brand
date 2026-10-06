@@ -3,7 +3,11 @@
  */
 
 :root {
+  --async-multi-select-input-min-inline-size: 4rem; /** Ancho mínimo del texto de búsqueda junto a las píldoras: lo justo para escribir sin que salte de línea a cada letra */
   --async-multi-select-disabled-cursor: var(--input-disabled-cursor); /** Cursor cuando está deshabilitado: el de los campos */
+  --async-multi-select-disabled-opacity: var(--async-select-disabled-opacity); /** Opacidad del control deshabilitado: la del buscador de selección única */
+  --async-multi-select-pill-remove-opacity: var(--opacity-muted); /** Opacidad del aspa de la píldora en reposo: presente pero en segundo plano */
+  --async-multi-select-pill-remove-hover-opacity: var(--opacity-full); /** Opacidad del aspa de la píldora bajo el puntero */
   --async-multi-select-content-max-height: var(--multi-select-content-max-height); /** Hereda de `multi-select.content-max-height`: el buscador múltiple tiene la misma cara que el control síncrono */
   --async-multi-select-border-style: var(--multi-select-border-style); /** Hereda de `multi-select.border-style`: el buscador múltiple tiene la misma cara que el control síncrono */
   --async-multi-select-content-gap: var(--multi-select-content-gap); /** Hereda de `multi-select.content-gap`: el buscador múltiple tiene la misma cara que el control síncrono */

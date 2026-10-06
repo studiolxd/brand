@@ -268,14 +268,14 @@
 
 /* Block modifier */
 .button--block {
-  width: var(--button-block-width);
+  inline-size: var(--button-block-width);
 }
 
 /* Solo en móvil: un botón suelto dentro de una página ocupa la línea entera
    por debajo de `md`, y conserva su ancho natural a partir de ahí. */
 @media (max-width: 767.98px) /* < --breakpoint-md */ {
   .button--block-mobile {
-    width: var(--button-block-width);
+    inline-size: var(--button-block-width);
   }
 }
 

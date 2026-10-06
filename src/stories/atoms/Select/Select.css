@@ -23,7 +23,7 @@
   box-sizing: border-box;
 
   cursor: pointer;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .select:focus,
@@ -71,17 +71,17 @@
   border-width: var(--select-border-width);
   border-style: var(--select-border-style);
   border-color: var(--select-content-border-color);
-  min-width: var(--anchor-width);
-  max-height: var(--select-content-max-height, var(--available-height));
+  min-inline-size: var(--anchor-width);
+  max-block-size: var(--select-content-max-height, var(--available-height));
   overflow-y: auto;
   overscroll-behavior: contain;
 
   &[data-side='bottom'] {
-    border-top: none;
+    border-block-start: none;
   }
 
   &[data-side='top'] {
-    border-bottom: none;
+    border-block-end: none;
   }
 }
 
@@ -89,7 +89,7 @@
 .select__item {
   display: flex;
   align-items: center;
-  width: 100%;
+  inline-size: 100%;
   padding-block: var(--select-item-padding-block);
   padding-inline: var(--select-padding-inline);
   font-size: var(--select-font-size);
@@ -110,15 +110,15 @@
 }
 
 .select__content .select__item + .select__item {
-  border-top: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
+  border-block-start: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
 }
 
 .select__content[data-side='bottom'] .select__item:first-child {
-  border-top: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
+  border-block-start: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
 }
 
 .select__content[data-side='top'] .select__item:last-child {
-  border-bottom: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
+  border-block-end: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
 }
 
 /* ─── Sm variant ─────────────────────────────────────────────────────────── */
@@ -156,11 +156,11 @@
 .select__content .select__group:not(:first-child) > .select__label,
 .select__content[data-side='bottom'] .select__group:first-child > .select__label,
 .select__content .select__group + .select__item {
-  border-top: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
+  border-block-start: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
 }
 
 .select__content[data-side='top'] .select__group:last-child > .select__item:last-child {
-  border-bottom: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
+  border-block-end: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
 }
 
 .select__label {
@@ -175,7 +175,7 @@
 }
 
 .select__separator {
-  height: var(--select-separator-height);
+  block-size: var(--select-separator-height);
   background-color: var(--select-separator-color);
   margin-block: var(--select-item-padding-block);
 }

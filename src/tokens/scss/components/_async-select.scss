@@ -7,6 +7,9 @@ $lxd-async-select-border-radius: 0px; // Hereda de `select.border-radius`: el bu
 $lxd-async-select-border-style: solid; // Hereda de `select.border-style`: el buscador tiene la misma cara que el control síncrono
 $lxd-async-select-border-width: 1px; // Hereda de `select.border-width`: el buscador tiene la misma cara que el control síncrono
 $lxd-async-select-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado: el de los campos
+$lxd-async-select-disabled-opacity: 0.5; // Opacidad del control deshabilitado. 0.5 no está en la escala `opacity` (la más cercana, `opacity.disabled`, es 0.4): se conserva el valor de siempre
+$lxd-async-select-clear-opacity: 0.7; // Opacidad del botón de limpiar en reposo: presente pero en segundo plano
+$lxd-async-select-clear-hover-opacity: 1; // Opacidad del botón de limpiar bajo el puntero
 $lxd-async-select-color: #111e30; // Hereda de `select.color`: el buscador tiene la misma cara que el control síncrono
 $lxd-async-select-content-bg: #ffffff; // Hereda de `select.content-bg`: el buscador tiene la misma cara que el control síncrono
 $lxd-async-select-content-border-color: #111e30; // Hereda de `select.content-border-color`: el buscador tiene la misma cara que el control síncrono

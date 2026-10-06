@@ -21,7 +21,7 @@
   border-radius: var(--async-select-border-radius);
   box-sizing: border-box;
 
-  width: 100%;
+  inline-size: 100%;
 
   &:focus-within {
     outline: var(--async-select-focus-ring-width) solid var(--async-select-focus-ring-color);
@@ -30,7 +30,7 @@
 }
 
 .async-select.async-select--disabled {
-  opacity: 0.5;
+  opacity: var(--async-select-disabled-opacity);
   cursor: var(--async-select-disabled-cursor);
   pointer-events: none;
 }
@@ -39,7 +39,7 @@
 .async-select__input {
   all: unset;
   flex: 1;
-  min-width: 0;
+  min-inline-size: 0;
   cursor: text;
   font-family: inherit;
   font-size: inherit;
@@ -66,10 +66,10 @@
   cursor: pointer;
   line-height: 1;
   font-size: var(--async-select-font-size);
-  opacity: 0.7;
+  opacity: var(--async-select-clear-opacity);
 
   &:hover {
-    opacity: 1;
+    opacity: var(--async-select-clear-hover-opacity);
   }
 }
 
@@ -79,17 +79,17 @@
   border-width: var(--async-select-border-width);
   border-style: var(--async-select-border-style);
   border-color: var(--async-select-content-border-color);
-  min-width: var(--anchor-width);
-  max-height: var(--async-select-content-max-height, var(--available-height));
+  min-inline-size: var(--anchor-width);
+  max-block-size: var(--async-select-content-max-height, var(--available-height));
   overflow-y: auto;
   overscroll-behavior: contain;
 
   &[data-side='bottom'] {
-    border-top: none;
+    border-block-start: none;
   }
 
   &[data-side='top'] {
-    border-bottom: none;
+    border-block-end: none;
   }
 }
 
@@ -116,7 +116,7 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  width: 100%;
+  inline-size: 100%;
   padding-block: var(--async-select-item-padding-block);
   padding-inline: var(--async-select-padding-inline);
   font-size: var(--async-select-font-size);
@@ -145,15 +145,15 @@
 }
 
 .async-select__content .async-select__item + .async-select__item {
-  border-top: var(--async-select-border-width) var(--async-select-border-style) var(--async-select-content-border-color);
+  border-block-start: var(--async-select-border-width) var(--async-select-border-style) var(--async-select-content-border-color);
 }
 
 .async-select__content[data-side='bottom'] .async-select__item:first-child {
-  border-top: var(--async-select-border-width) var(--async-select-border-style) var(--async-select-content-border-color);
+  border-block-start: var(--async-select-border-width) var(--async-select-border-style) var(--async-select-content-border-color);
 }
 
 .async-select__content[data-side='top'] .async-select__item:last-child {
-  border-bottom: var(--async-select-border-width) var(--async-select-border-style) var(--async-select-content-border-color);
+  border-block-end: var(--async-select-border-width) var(--async-select-border-style) var(--async-select-content-border-color);
 }
 
 /* ─── Sm variant ─────────────────────────────────────────────────────────── */

@@ -35,7 +35,7 @@
 
 .message-composer__input {
   flex: 1;
-  min-width: 0;
+  min-inline-size: 0;
 }
 
 .message-composer__actions {

@@ -21,7 +21,7 @@
   border-radius: var(--autocomplete-border-radius);
   box-sizing: border-box;
 
-  width: 100%;
+  inline-size: 100%;
 
   &:focus-within {
     outline: var(--autocomplete-focus-ring-width) solid var(--autocomplete-focus-ring-color);
@@ -30,7 +30,7 @@
 }
 
 .autocomplete.autocomplete--disabled {
-  opacity: 0.5;
+  opacity: var(--autocomplete-disabled-opacity);
   cursor: var(--autocomplete-disabled-cursor);
   pointer-events: none;
 }
@@ -39,7 +39,7 @@
 .autocomplete__input {
   all: unset;
   flex: 1;
-  min-width: 0;
+  min-inline-size: 0;
   cursor: text;
   font-family: inherit;
   font-size: inherit;
@@ -62,17 +62,17 @@
   border-width: var(--autocomplete-border-width);
   border-style: var(--autocomplete-border-style);
   border-color: var(--autocomplete-content-border-color);
-  min-width: var(--anchor-width);
-  max-height: var(--autocomplete-content-max-height, var(--available-height));
+  min-inline-size: var(--anchor-width);
+  max-block-size: var(--autocomplete-content-max-height, var(--available-height));
   overflow-y: auto;
   overscroll-behavior: contain;
 
   &[data-side='bottom'] {
-    border-top: none;
+    border-block-start: none;
   }
 
   &[data-side='top'] {
-    border-bottom: none;
+    border-block-end: none;
   }
 }
 
@@ -82,7 +82,7 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  width: 100%;
+  inline-size: 100%;
   padding-block: var(--autocomplete-item-padding-block);
   padding-inline: var(--autocomplete-padding-inline);
   font-size: var(--autocomplete-font-size);
@@ -111,15 +111,15 @@
 }
 
 .autocomplete__content .autocomplete__item + .autocomplete__item {
-  border-top: var(--autocomplete-border-width) var(--autocomplete-border-style) var(--autocomplete-content-border-color);
+  border-block-start: var(--autocomplete-border-width) var(--autocomplete-border-style) var(--autocomplete-content-border-color);
 }
 
 .autocomplete__content[data-side='bottom'] .autocomplete__item:first-child {
-  border-top: var(--autocomplete-border-width) var(--autocomplete-border-style) var(--autocomplete-content-border-color);
+  border-block-start: var(--autocomplete-border-width) var(--autocomplete-border-style) var(--autocomplete-content-border-color);
 }
 
 .autocomplete__content[data-side='top'] .autocomplete__item:last-child {
-  border-bottom: var(--autocomplete-border-width) var(--autocomplete-border-style) var(--autocomplete-content-border-color);
+  border-block-end: var(--autocomplete-border-width) var(--autocomplete-border-style) var(--autocomplete-content-border-color);
 }
 
 /* ─── Sm variant ─────────────────────────────────────────────────────────── */

@@ -26,6 +26,8 @@
     "lg-dot-size":              { "$value": "0.65rem",                  "$type": "dimension", "$description": "Tamaño del punto interior — variante lg" },
     "surface-dark-border-color":                 { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Borde de la marca — surface-dark: la tinta de la superficie" },
     "surface-dark-dot-color":                    { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Punto de la marca — surface-dark" },
-    "surface-dark-focus-ring-color":             { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco — surface-dark" }
+    "surface-dark-focus-ring-color":             { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco — surface-dark" },
+    "surface-dark-disabled-border-color":        { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Borde deshabilitado — surface-dark (mismo par que checkbox)" },
+    "surface-dark-disabled-dot-color":           { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Punto deshabilitado y seleccionado — surface-dark (mismo par que checkbox)" }
   }
 }

@@ -4,6 +4,7 @@
 
 :root {
   --recurrence-field-interval-width: 8rem; /** Ancho del campo de intervalo — cabe un número de dos cifras y sus flechas, no la fila entera */
+  --recurrence-field-end-flex-basis: 12rem; /** Base flexible del bloque de fin de la repetición: por debajo de ella pasa a otra línea */
   --recurrence-field-gap: var(--spacing-4); /** Separación entre los campos del editor de recurrencia */
   --recurrence-field-row-gap: var(--spacing-3); /** Separación entre los campos que comparten fila */
   --recurrence-field-weekdays-gap: var(--spacing-1); /** Separación entre los días de la semana */

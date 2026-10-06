@@ -20,6 +20,7 @@ $lxd-modal-title-font-weight: 500; // Peso del título
 $lxd-modal-title-line-height: 1.1; // Interlineado del título — el de un título grande. Con el cuerpo del título da la altura de su primera línea, que es sobre la que se centra el aspa de cerrar
 $lxd-modal-title-color: #111e30; // Color del título
 $lxd-modal-width-max: 560px; // Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente
+$lxd-modal-inline-size: 90vw; // Ancho del panel antes del tope de `width-max`: deja aire a los lados en pantallas estrechas. Medida de layout, igual que width-max
 $lxd-modal-max-height: 90dvh; // Altura máxima del panel modal (dvh para móviles con barra de navegador variable). Medida de layout, igual que width-max
 $lxd-modal-transition-duration: 250ms; // Duración de la animación entrada/salida
 $lxd-modal-transition-easing: ease-in-out; // Easing de la animación

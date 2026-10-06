@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   gap: var(--org-switcher-trigger-gap);
-  width: auto;
+  inline-size: auto;
   max-inline-size: 100%;
   padding-block: var(--org-switcher-trigger-padding-block);
   padding-inline: var(--org-switcher-trigger-padding-inline);
@@ -15,7 +15,7 @@
 }
 
 .org-switcher__trigger.org-switcher__trigger--block {
-  width: 100%;
+  inline-size: 100%;
 }
 
 /* Compacto (rail): solo el logo, cuadrado */
@@ -33,7 +33,7 @@
 /* ─── Nombre ─────────────────────────────────────────────── */
 .org-switcher__name {
   flex: 1;
-  min-width: 0;
+  min-inline-size: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -75,10 +75,10 @@
   box-shadow: var(--org-switcher-content-shadow);
   padding-block: var(--org-switcher-content-padding-block);
   padding-inline: var(--org-switcher-content-padding-inline);
-  min-width: var(--org-switcher-content-min-width);
+  min-inline-size: var(--org-switcher-content-min-width);
   outline: none;
   transform-origin: var(--transform-origin);
-  max-height: var(--org-switcher-content-max-height, var(--available-height));
+  max-block-size: var(--org-switcher-content-max-height, var(--available-height));
   overflow-y: auto;
   overscroll-behavior: contain;
 }
@@ -130,7 +130,7 @@
 
 /* ─── Separador ──────────────────────────────────────────── */
 .org-switcher__separator {
-  height: var(--org-switcher-separator-height);
+  block-size: var(--org-switcher-separator-height);
   background-color: var(--org-switcher-separator-color);
   margin-block: var(--org-switcher-separator-margin-block);
   border: none;

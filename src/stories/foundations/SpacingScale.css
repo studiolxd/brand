@@ -1,5 +1,5 @@
 .spacing-scale {
-  margin-top: var(--spacing-4);
+  margin-block-start: var(--spacing-4);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-3);

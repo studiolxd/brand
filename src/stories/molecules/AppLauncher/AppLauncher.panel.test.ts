@@ -31,14 +31,14 @@ function declaraciones(propiedad: string): string[] {
 
 describe('el panel del lanzador crece con su contenido', () => {
   it('no declara ninguna altura máxima que no sea la de la ventana', () => {
-    const topes = declaraciones('max-height');
+    const topes = declaraciones('max-(?:height|block-size)');
     expect(topes.length, 'si desaparece el tope no queda nada que vigilar').toBeGreaterThan(0);
     for (const tope of topes) {
       expect(
         tope,
         'El panel no puede llevar un tope propio: recortaría la rejilla teniendo ' +
           'pantalla de sobra. El único límite es `--app-launcher-content-max-height`, ' +
-          'que vale el hueco disponible de la ventana.\n  max-height: ' + tope,
+          'que vale el hueco disponible de la ventana.\n  max-block-size: ' + tope,
       ).toContain('--app-launcher-content-max-height');
     }
   });

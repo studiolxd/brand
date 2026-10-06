@@ -111,8 +111,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--calendar-day-size);
-  height: var(--calendar-day-size);
+  inline-size: var(--calendar-day-size);
+  block-size: var(--calendar-day-size);
   font-size: var(--calendar-weekday-font-size);
   color: var(--calendar-weekday-color);
   font-family: var(--calendar-font-family);
@@ -125,8 +125,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--calendar-day-size);
-  height: var(--calendar-day-size);
+  inline-size: var(--calendar-day-size);
+  block-size: var(--calendar-day-size);
   border: none;
   border-radius: var(--calendar-day-radius);
   background-color: var(--calendar-day-bg);
@@ -166,11 +166,11 @@
 .calendar__day.calendar__day--today::after {
   content: '';
   position: absolute;
-  bottom: var(--calendar-today-marker-offset);
+  inset-block-end: var(--calendar-today-marker-offset);
   left: 50%;
   transform: translateX(-50%);
-  width: var(--calendar-today-marker-size);
-  height: var(--calendar-today-marker-size);
+  inline-size: var(--calendar-today-marker-size);
+  block-size: var(--calendar-today-marker-size);
   border-radius: var(--calendar-today-marker-radius);
   background-color: var(--calendar-today-marker-color);
 }
@@ -260,8 +260,8 @@
 
 .calendar.calendar--sm .calendar__day,
 .calendar.calendar--sm .calendar__weekday {
-  width: var(--calendar-sm-day-size);
-  height: var(--calendar-sm-day-size);
+  inline-size: var(--calendar-sm-day-size);
+  block-size: var(--calendar-sm-day-size);
 }
 
 /* ─── Lg variant ─────────────────────────────────────────────────────────── */
@@ -272,8 +272,8 @@
 
 .calendar.calendar--lg .calendar__day,
 .calendar.calendar--lg .calendar__weekday {
-  width: var(--calendar-lg-day-size);
-  height: var(--calendar-lg-day-size);
+  inline-size: var(--calendar-lg-day-size);
+  block-size: var(--calendar-lg-day-size);
 }
 
 .calendar.calendar--lg .calendar__day {
