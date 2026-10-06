@@ -83,6 +83,7 @@ function p({ apps: r, labels: i, currentAppId: a, open: o, defaultOpen: u, onOpe
 				align: "end",
 				children: /* @__PURE__ */ s(l.Popup, {
 					className: "app-launcher__content",
+					"aria-label": h("title", i.title),
 					children: /* @__PURE__ */ s(d, {
 						apps: r,
 						currentAppId: a,

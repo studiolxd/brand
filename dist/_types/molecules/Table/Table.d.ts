@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import './Table.css';
 /**
  * Los textos que la tabla emite por su cuenta: el cromo de la cabecera —el

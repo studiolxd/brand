@@ -3797,6 +3797,9 @@ html.dark {
   --calendar-roster-cell-holiday-bg: var(--color-surface-secondary-on-light); /** Fondo de celdas festivas — misma superficie secundaria; el festivo se nombra con su chip */
   --calendar-roster-cell-non-working-bg: var(--color-surface-secondary-on-light); /** Fondo de celdas no laborables (laborable sin turno asignado) */
   --calendar-roster-cell-today-outline-width: var(--border-width-focus); /** Grosor del recuadro de la columna de hoy */
+  --calendar-roster-focus-ring-color: var(--color-primary); /** Anillo de foco del cuadrante cuando desborda y entra en el tabulador */
+  --calendar-roster-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
+  --calendar-roster-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco */
   --calendar-roster-schedule-color: var(--color-text-on-light); /** Color del texto de horario */
   --calendar-roster-legend-color: var(--color-text-muted-on-light); /** Color del texto de la leyenda */
   --calendar-roster-legend-swatch-radius: var(--border-radius-default); /** Radio del cuadradito de color */
@@ -3820,6 +3823,7 @@ html.dark {
   --calendar-roster-cell-non-working-bg: var(--color-surface-secondary-on-dark); /** Fondo no laborable — surface-dark */
   --calendar-roster-schedule-color: var(--color-text-muted-on-dark); /** Color del texto de horario — surface-dark */
   --calendar-roster-legend-color: var(--color-text-muted-on-dark); /** Color de la leyenda — surface-dark */
+  --calendar-roster-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
 }
 /**
  * Do not edit directly, this file was auto-generated.
@@ -4702,6 +4706,15 @@ html.dark {
  */
 :root {
   --conversation-thread-gap: var(--spacing-4); /** Separación vertical entre mensajes. Es la única medida de espaciado del hilo: el relleno se retiró —quien compone, espacia—, así que el aire alrededor de los globos lo pone quien monta el hilo */
+  --conversation-thread-focus-ring-color: var(--color-primary); /** Anillo de foco del hilo, que entra en el tabulador para poder desplazarlo con el teclado */
+  --conversation-thread-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
+  --conversation-thread-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco */
+}
+.surface-dark,
+.surface-invert,
+[data-theme="dark"],
+html.dark {
+  --conversation-thread-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
 }
 /**
  * Do not edit directly, this file was auto-generated.
@@ -6525,6 +6538,7 @@ html.dark .surface-light {
   --calendar-roster-cell-weekend-bg: var(--color-surface-secondary-on-light);
   --calendar-roster-cell-holiday-bg: var(--color-surface-secondary-on-light);
   --calendar-roster-cell-non-working-bg: var(--color-surface-secondary-on-light);
+  --calendar-roster-focus-ring-color: var(--color-primary);
   --calendar-roster-schedule-color: var(--color-text-on-light);
   --calendar-roster-legend-color: var(--color-text-muted-on-light);
   --calendar-nav-color: var(--color-text-on-light);
@@ -6587,6 +6601,7 @@ html.dark .surface-light {
   --conversation-list-delete-color: var(--color-icon-secondary-on-light);
   --conversation-list-delete-hover-color: var(--color-destructive-text-on-light);
   --conversation-list-focus-ring-color: var(--color-primary);
+  --conversation-thread-focus-ring-color: var(--color-primary);
   --date-picker-field-helper-color: var(--form-helper-color);
   --date-picker-button-color: var(--color-primary);
   --date-picker-button-hover-color: var(--color-primary);

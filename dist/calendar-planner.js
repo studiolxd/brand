@@ -167,26 +167,29 @@ function _({ events: _ = [], renderDay: v, maxItemsPerDay: y = 3, onMoreClick: b
 				children: [B ? /* @__PURE__ */ m("div", {
 					role: "row",
 					className: "calendar-planner__row calendar-planner__row--header",
-					children: q.map(({ date: e }, t) => {
-						let n = o(e, P);
+					children: q.map(({ date: e }, n) => {
+						let r = o(e, P);
 						return /* @__PURE__ */ h("div", {
 							role: "columnheader",
 							className: [
 								"calendar-planner__weekday",
 								"calendar-planner__weekday--dated",
-								n && "calendar-planner__weekday--today"
+								r && "calendar-planner__weekday--today"
 							].filter(Boolean).join(" "),
-							"aria-label": G.format(e),
-							"aria-current": n ? "date" : void 0,
-							children: [/* @__PURE__ */ m("abbr", {
-								"aria-hidden": "true",
-								title: K[t].long,
-								children: K[t].short
-							}), /* @__PURE__ */ m("span", {
-								"aria-hidden": "true",
-								className: ["calendar-planner__day-number", n && "calendar-planner__day-number--today"].filter(Boolean).join(" "),
-								children: e.getDate()
-							})]
+							"aria-current": r ? "date" : void 0,
+							children: [
+								/* @__PURE__ */ m(t, { children: G.format(e) }),
+								/* @__PURE__ */ m("abbr", {
+									"aria-hidden": "true",
+									title: K[n].long,
+									children: K[n].short
+								}),
+								/* @__PURE__ */ m("span", {
+									"aria-hidden": "true",
+									className: ["calendar-planner__day-number", r && "calendar-planner__day-number--today"].filter(Boolean).join(" "),
+									children: e.getDate()
+								})
+							]
 						}, e.toISOString());
 					})
 				}) : s({

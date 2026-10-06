@@ -7,7 +7,7 @@ function r({ className: r }) {
 	return /* @__PURE__ */ e(t.Backdrop, { className: n("dialog-overlay", r) });
 }
 function i({ layout: t, noTitle: r = !1, className: i, children: a }) {
-	return /* @__PURE__ */ e("header", {
+	return /* @__PURE__ */ e("div", {
 		className: n("dialog-header", `dialog-header--${t}`, r && "dialog-header--no-title", i),
 		children: a
 	});

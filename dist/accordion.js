@@ -52,20 +52,21 @@ function f({ className: e, children: t, ...n }) {
 		children: t
 	});
 }
-function p({ className: t, chevronSize: n = "sm", children: r }) {
-	let s = c();
+function p({ className: t, chevronSize: n = "sm", headingLevel: r = 3, children: s }) {
+	let l = c(), u = `h${r}`;
 	return /* @__PURE__ */ i(o.Header, {
 		className: "accordion__header",
+		render: /* @__PURE__ */ i(u, {}),
 		children: /* @__PURE__ */ a(o.Trigger, {
 			className: ["accordion__trigger", t].filter(Boolean).join(" "),
 			children: [
-				s && /* @__PURE__ */ i("span", {
+				l && /* @__PURE__ */ i("span", {
 					className: "accordion__index",
-					children: s.formatIndex(s.index)
+					children: l.formatIndex(l.index)
 				}),
 				/* @__PURE__ */ i("span", {
 					className: "accordion__trigger-text",
-					children: r
+					children: s
 				}),
 				/* @__PURE__ */ i(e, {
 					name: "chevron",

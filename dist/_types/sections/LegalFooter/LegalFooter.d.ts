@@ -35,6 +35,12 @@ export interface LegalFooterProps {
     width?: ContainerWidth;
     /** Pie sobre superficie oscura. */
     surface?: 'dark';
+    /**
+     * Elemento raíz (default `'footer'`, el `contentinfo` de la página). `'div'`
+     * cuando va dentro de otro pie: un `<footer>` no puede contener otro, y la
+     * página tendría dos `contentinfo`. `SiteFooter` lo pone solo en su `legal`.
+     */
+    as?: 'footer' | 'div';
     className?: string;
 }
 /**
@@ -44,4 +50,4 @@ export interface LegalFooterProps {
  * interior. Es el pie de las aplicaciones de la suite; la web tiene su pie
  * propio con más cosas.
  */
-export declare function LegalFooter({ label, title, links, renderLink, width, surface, className, }: LegalFooterProps): import("react/jsx-runtime").JSX.Element;
+export declare function LegalFooter({ label, title, links, renderLink, width, surface, as: Root, className, }: LegalFooterProps): import("react/jsx-runtime").JSX.Element;

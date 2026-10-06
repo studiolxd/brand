@@ -19,7 +19,12 @@ export interface DialogHeaderProps {
     className: string;
     children: ReactNode;
 }
-/** Cabecera del diálogo, en una de sus dos colocaciones. */
+/**
+ * Cabecera del diálogo, en una de sus dos colocaciones. Es un `<div>`, no un
+ * `<header>`: el diálogo sale por un portal al `<body>`, fuera de cualquier
+ * `<main>`/`<section>`, y ahí un `<header>` es un `banner` — el segundo de la
+ * página, junto al de la aplicación. El diálogo ya se nombra por su título.
+ */
 export declare function DialogHeader({ layout, noTitle, className, children }: DialogHeaderProps): import("react/jsx-runtime").JSX.Element;
 /**
  * Pie de acciones. Fila a la derecha; por debajo del punto de ruptura, botones

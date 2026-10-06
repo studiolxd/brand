@@ -6,13 +6,13 @@ import { Heading as n } from "./heading.js";
 import { t as r } from "./_shared/default-render-link.js";
 import { jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/sections/LegalFooter/LegalFooter.tsx
-function o({ label: o, title: s, links: c, renderLink: l = r, width: u = "xl", surface: d, className: f }) {
-	let p = e("legalFooter");
-	return /* @__PURE__ */ i("footer", {
+function o({ label: o, title: s, links: c, renderLink: l = r, width: u = "xl", surface: d, as: f = "footer", className: p }) {
+	let m = e("legalFooter");
+	return /* @__PURE__ */ i(f, {
 		className: [
 			"legal-footer",
 			d === "dark" && "surface-dark",
-			f
+			p
 		].filter(Boolean).join(" "),
 		children: /* @__PURE__ */ a(t, {
 			width: u,
@@ -23,7 +23,7 @@ function o({ label: o, title: s, links: c, renderLink: l = r, width: u = "xl", s
 				className: "legal-footer__title",
 				children: s
 			}), /* @__PURE__ */ i("nav", {
-				"aria-label": p("label", o),
+				"aria-label": m("label", o),
 				children: /* @__PURE__ */ i("ul", {
 					className: "legal-footer__links",
 					children: c.map((e) => /* @__PURE__ */ i("li", { children: l({

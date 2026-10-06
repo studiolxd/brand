@@ -1,4 +1,4 @@
-import type { ComponentType, ReactNode } from 'react';
+import { type ComponentType, type ReactNode } from 'react';
 import './CalendarRoster.css';
 /**
  * El cromo del cuadrante: el encabezado de la columna de nombres y la leyenda

@@ -16,7 +16,7 @@ export interface AppLauncherMessages {
     open: string;
     /** Texto del distintivo de app nueva. */
     new: string;
-    /** Título del diálogo con `presentation="modal"`. */
+    /** Título del diálogo con `presentation="modal"`; con `"popover"`, nombre accesible del popup. */
     title: string;
 }
 export interface LauncherApp {
@@ -65,8 +65,8 @@ export interface AppLauncherLabels {
     trigger?: string;
     /**
      * Título del diálogo cuando `presentation="modal"`. **Sin default**: sin él,
-     * sale de `appLauncher.title` del proveedor. Sin uso en
-     * `presentation="popover"`, que no lleva título.
+     * sale de `appLauncher.title` del proveedor. En `presentation="popover"`,
+     * que no pinta título, es el nombre accesible (`aria-label`) del popup.
      */
     title?: string;
 }

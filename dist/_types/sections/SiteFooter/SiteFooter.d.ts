@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { type ContainerWidth } from '../../atoms/Container/Container';
 import { type HeadingLevel } from '../../atoms/Heading/Heading';
 import './SiteFooter.css';
@@ -39,7 +39,11 @@ export interface SiteFooterProps {
      * componentes del sistema; el pie solo le reserva el sitio.
      */
     aside?: ReactNode;
-    /** Bloque legal bajo el pie, separado por una línea. Se espera un `LegalFooter`. */
+    /**
+     * Bloque legal bajo el pie, separado por una línea. Se espera un
+     * `LegalFooter`, que aquí se monta como `<div>` (`as="div"`): dentro de este
+     * `<footer>` no puede ir otro, ni la página tener dos `contentinfo`.
+     */
     legal?: ReactNode;
     /** Nivel semántico del título de cada columna. Por defecto `2`. */
     columnTitleLevel?: HeadingLevel;

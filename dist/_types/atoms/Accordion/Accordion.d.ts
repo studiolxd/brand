@@ -45,9 +45,15 @@ export interface AccordionTriggerProps {
     className?: string;
     /** Tamaño del chevron indicador. */
     chevronSize?: 'sm' | 'md' | 'lg';
+    /**
+     * Nivel del encabezado que envuelve el botón (default `3`). Bájalo o súbelo
+     * para que el acordeón encaje en el esquema de la página: tras un `<h1>` sin
+     * `<h2>` de por medio, un `<h3>` se salta un nivel.
+     */
+    headingLevel?: 2 | 3 | 4 | 5 | 6;
     children: ReactNode;
 }
-export declare function AccordionTrigger({ className, chevronSize, children }: AccordionTriggerProps): import("react/jsx-runtime").JSX.Element;
+export declare function AccordionTrigger({ className, chevronSize, headingLevel, children }: AccordionTriggerProps): import("react/jsx-runtime").JSX.Element;
 export interface AccordionContentProps {
     className?: string;
     children: ReactNode;

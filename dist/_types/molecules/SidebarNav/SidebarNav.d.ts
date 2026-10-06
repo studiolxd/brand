@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import './SidebarNav.css';
 export interface SidebarNavItem {
     id: string;

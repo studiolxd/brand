@@ -5,42 +5,44 @@ import { List as n } from "./list.js";
 import { t as r } from "./_shared/logo.js";
 import { Paragraph as i } from "./paragraph.js";
 import { t as a } from "./_shared/default-render-link.js";
-import { jsx as o, jsxs as s } from "react/jsx-runtime";
+import { LegalFooter as o } from "./legal-footer.js";
+import { cloneElement as s, isValidElement as c } from "react";
+import { jsx as l, jsxs as u } from "react/jsx-runtime";
 //#region src/stories/sections/SiteFooter/SiteFooter.tsx
-function c({ logo: c = /* @__PURE__ */ o(r, { size: "lg" }), tagline: l, columns: u, renderLink: d = a, aside: f, legal: p, columnTitleLevel: m = 2, surface: h = "dark", width: g = "xl", className: _, id: v }) {
-	return /* @__PURE__ */ o("footer", {
-		id: v,
+function d({ logo: o = /* @__PURE__ */ l(r, { size: "lg" }), tagline: s, columns: c, renderLink: d = a, aside: p, legal: m, columnTitleLevel: h = 2, surface: g = "dark", width: _ = "xl", className: v, id: y }) {
+	return /* @__PURE__ */ l("footer", {
+		id: y,
 		className: [
 			"site-footer",
-			h === "dark" && "surface-dark",
-			_
+			g === "dark" && "surface-dark",
+			v
 		].filter(Boolean).join(" "),
-		children: /* @__PURE__ */ s(e, {
-			width: g,
+		children: /* @__PURE__ */ u(e, {
+			width: _,
 			innerClassName: "site-footer__inner",
 			children: [
-				/* @__PURE__ */ s("div", {
+				/* @__PURE__ */ u("div", {
 					className: "site-footer__brand",
-					children: [c, l && /* @__PURE__ */ o(i, {
+					children: [o, s && /* @__PURE__ */ l(i, {
 						size: "large",
 						className: "site-footer__tagline",
-						children: l
+						children: s
 					})]
 				}),
-				(u?.length || f) && /* @__PURE__ */ s("div", {
+				(c?.length || p) && /* @__PURE__ */ u("div", {
 					className: "site-footer__body",
-					children: [u?.map((e) => /* @__PURE__ */ s("nav", {
+					children: [c?.map((e) => /* @__PURE__ */ u("nav", {
 						className: "site-footer__column",
 						"aria-label": e.title,
-						children: [/* @__PURE__ */ o(t, {
-							level: m,
+						children: [/* @__PURE__ */ l(t, {
+							level: h,
 							size: 3,
 							className: "site-footer__column-title",
 							children: e.title
-						}), /* @__PURE__ */ o(n, {
+						}), /* @__PURE__ */ l(n, {
 							type: "plain",
 							className: "site-footer__links",
-							children: e.links.map((e) => /* @__PURE__ */ o("li", { children: d({
+							children: e.links.map((e) => /* @__PURE__ */ l("li", { children: d({
 								href: e.href,
 								className: "site-footer__link link--ink",
 								children: e.label,
@@ -50,18 +52,21 @@ function c({ logo: c = /* @__PURE__ */ o(r, { size: "lg" }), tagline: l, columns
 								} : {}
 							}) }, e.id ?? e.href))
 						})]
-					}, e.id ?? e.title)), f && /* @__PURE__ */ o("div", {
+					}, e.id ?? e.title)), p && /* @__PURE__ */ l("div", {
 						className: "site-footer__aside",
-						children: f
+						children: p
 					})]
 				}),
-				p && /* @__PURE__ */ o("div", {
+				m && /* @__PURE__ */ l("div", {
 					className: "site-footer__legal",
-					children: p
+					children: f(m)
 				})
 			]
 		})
 	});
 }
+function f(e) {
+	return c(e) && e.type === o ? s(e, { as: "div" }) : e;
+}
 //#endregion
-export { c as SiteFooter };
+export { d as SiteFooter };
