@@ -173,6 +173,7 @@ const preview: Preview = {
           'Sections',
           'Templates',
           'Pages',
+          'Email',
           'Por revisar',
         ],
       },

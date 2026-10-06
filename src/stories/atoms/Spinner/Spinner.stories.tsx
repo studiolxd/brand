@@ -30,7 +30,7 @@ export const Sizes: Story = {
   ),
 };
 
-/** Test: rol y anuncio accesible; el contorno es un `<rect>` sin radio con `pathLength="100"`. */
+/** Test: rol y anuncio accesible; el contorno es un `<rect>` sin radio y sin `pathLength` (el perímetro va por talla en CSS, ver la doc). */
 export const Accesibilidad: Story = {
   name: 'Test — rol, label y contorno cuadrado',
   tags: ['!dev'],
@@ -40,7 +40,7 @@ export const Accesibilidad: Story = {
     await expect(status).toHaveAttribute('aria-label', 'Guardando…');
     const rect = status.querySelector('rect.spinner__stroke');
     await expect(rect).not.toBeNull();
-    await expect(rect).toHaveAttribute('pathLength', '100');
+    await expect(rect).not.toHaveAttribute('pathLength');
     await expect(rect).not.toHaveAttribute('rx');
   },
 };

@@ -35,7 +35,7 @@ export interface PasswordFieldProps
   labelHidden?: boolean;
   /** Marca el estado de error (borde) y `aria-invalid` en el input. */
   error?: boolean;
-  /** Mensaje de error propio del componente (solo se renderiza si hay `label`-mode completo). */
+  /** Mensaje de error propio del componente. Se pinta bajo el campo y se enlaza con `aria-describedby`, haya o no `label`. */
   errorMessage?: string;
   /** Texto de ayuda propio del componente. */
   helperText?: string;
