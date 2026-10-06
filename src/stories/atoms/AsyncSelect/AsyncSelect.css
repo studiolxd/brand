@@ -30,7 +30,7 @@
 }
 
 .async-select.async-select--disabled {
-  opacity: 0.5;
+  opacity: var(--async-select-disabled-opacity);
   cursor: var(--async-select-disabled-cursor);
   pointer-events: none;
 }
@@ -66,10 +66,10 @@
   cursor: pointer;
   line-height: 1;
   font-size: var(--async-select-font-size);
-  opacity: 0.7;
+  opacity: var(--async-select-clear-opacity);
 
   &:hover {
-    opacity: 1;
+    opacity: var(--async-select-clear-hover-opacity);
   }
 }
 

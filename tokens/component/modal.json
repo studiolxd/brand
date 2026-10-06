@@ -19,6 +19,7 @@
     "title-line-height":    { "$value": "{line-height.tight}",        "$type": "number",    "$description": "Interlineado del título — el de un título grande. Con el cuerpo del título da la altura de su primera línea, que es sobre la que se centra el aspa de cerrar" },
     "title-color":          { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color del título" },
     "width-max":            { "$value": "560px",                      "$type": "dimension", "$description": "Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente" },
+    "inline-size":          { "$value": "90vw", "$type": "dimension", "$description": "Ancho del panel antes del tope de `width-max`: deja aire a los lados en pantallas estrechas. Medida de layout, igual que width-max" },
     "max-height":           { "$value": "90dvh",                      "$type": "dimension", "$description": "Altura máxima del panel modal (dvh para móviles con barra de navegador variable). Medida de layout, igual que width-max" },
     "transition-duration":  { "$value": "{motion.duration.base}",     "$type": "number",    "$description": "Duración de la animación entrada/salida" },
     "transition-easing":    { "$value": "{motion.easing.in-out}",     "$type": "string",    "$description": "Easing de la animación" },

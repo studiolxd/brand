@@ -30,7 +30,7 @@
 }
 
 .autocomplete.autocomplete--disabled {
-  opacity: 0.5;
+  opacity: var(--autocomplete-disabled-opacity);
   cursor: var(--autocomplete-disabled-cursor);
   pointer-events: none;
 }

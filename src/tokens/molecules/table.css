@@ -4,6 +4,7 @@
 
 :root {
   --table-bg: rgba(0, 0, 0, 0); /** Fondo de la tabla */
+  --table-actions-inline-size: 1px; /** Ancho de la cabecera de la columna de acciones. No fija un ancho: con `table-layout: auto` el sobrante se reparte entre las demás columnas y esta se encoge a su contenido */
   --table-font-family: var(--font-family-sans); /** Font family */
   --table-header-padding-block: var(--spacing-3); /** Padding block del encabezado */
   --table-header-padding-inline: var(--spacing-3); /** Padding inline del encabezado */

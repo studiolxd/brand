@@ -6,6 +6,7 @@
     "border-style": {"$value":"{async-select.border-style}","$type":"string","$description":"Hereda de `async-select.border-style`: el autocompletado tiene la misma cara que el buscador y el Select"},
     "border-width": {"$value":"{async-select.border-width}","$type":"dimension","$description":"Hereda de `async-select.border-width`: el autocompletado tiene la misma cara que el buscador y el Select"},
     "disabled-cursor": {"$value":"{async-select.disabled-cursor}","$type":"string","$description":"Hereda de `async-select.disabled-cursor`: el autocompletado tiene la misma cara que el buscador y el Select"},
+    "disabled-opacity": {"$value":"{async-select.disabled-opacity}","$type":"number","$description":"Hereda de `async-select.disabled-opacity`: el autocompletado tiene la misma cara que el buscador y el Select"},
     "color": {"$value":"{async-select.color}","$type":"color","$description":"Hereda de `async-select.color`: el autocompletado tiene la misma cara que el buscador y el Select"},
     "content-bg": {"$value":"{async-select.content-bg}","$type":"color","$description":"Hereda de `async-select.content-bg`: el autocompletado tiene la misma cara que el buscador y el Select"},
     "content-border-color": {"$value":"{async-select.content-border-color}","$type":"color","$description":"Hereda de `async-select.content-border-color`: el autocompletado tiene la misma cara que el buscador y el Select"},

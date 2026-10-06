@@ -21,7 +21,7 @@
 }
 
 .recurrence-field__end {
-  flex: 1 1 12rem;
+  flex: 1 1 var(--recurrence-field-end-flex-basis);
   min-inline-size: 0;
 }
 

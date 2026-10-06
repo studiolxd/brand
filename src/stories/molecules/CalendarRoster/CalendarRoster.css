@@ -73,7 +73,7 @@
 .calendar-roster__th-day-number {
   font-size: var(--calendar-roster-th-day-font-size);
   font-weight: var(--calendar-roster-th-name-font-weight);
-  line-height: 1.2;
+  line-height: var(--calendar-roster-th-day-line-height);
 }
 
 .calendar-roster__th-day-sub {

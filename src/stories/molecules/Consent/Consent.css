@@ -31,7 +31,7 @@
   flex-direction: column;
   gap: var(--consent-banner-text-gap);
   /* Encoge antes que la fila de botones: los tres botones nunca se parten. */
-  flex: 1 1 20rem;
+  flex: 1 1 var(--consent-banner-text-flex-basis);
   min-inline-size: 0;
 }
 

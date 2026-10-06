@@ -3,6 +3,7 @@
     "gap":                 { "$value": "{spacing.4}",               "$type": "dimension", "$description": "Separación entre los campos del editor de recurrencia" },
     "row-gap":             { "$value": "{spacing.3}",               "$type": "dimension", "$description": "Separación entre los campos que comparten fila" },
     "interval-width":      { "$value": "8rem",                      "$type": "dimension", "$description": "Ancho del campo de intervalo — cabe un número de dos cifras y sus flechas, no la fila entera" },
+    "end-flex-basis":      { "$value": "12rem", "$type": "dimension", "$description": "Base flexible del bloque de fin de la repetición: por debajo de ella pasa a otra línea" },
     "weekdays-gap":        { "$value": "{spacing.1}",               "$type": "dimension", "$description": "Separación entre los días de la semana" },
     "legend-font-size":    { "$value": "{label.font-size}", "$type": "dimension", "$description": "Tamaño de la etiqueta del grupo de días — el de una etiqueta de campo" },
     "legend-color":        { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color de la etiqueta del grupo de días" },

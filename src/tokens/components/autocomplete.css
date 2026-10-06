@@ -3,6 +3,7 @@
  */
 
 :root {
+  --autocomplete-disabled-opacity: var(--async-select-disabled-opacity); /** Hereda de `async-select.disabled-opacity`: el autocompletado tiene la misma cara que el buscador y el Select */
   --autocomplete-border-style: var(--async-select-border-style); /** Hereda de `async-select.border-style`: el autocompletado tiene la misma cara que el buscador y el Select */
   --autocomplete-disabled-cursor: var(--async-select-disabled-cursor); /** Hereda de `async-select.disabled-cursor`: el autocompletado tiene la misma cara que el buscador y el Select */
   --autocomplete-content-max-height: var(--async-select-content-max-height); /** Hereda de `async-select.content-max-height`: el autocompletado tiene la misma cara que el buscador y el Select */

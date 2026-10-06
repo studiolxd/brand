@@ -36,4 +36,6 @@ html.dark {
   --radio-border-color: var(--color-text-on-dark); /** Borde de la marca — surface-dark: la tinta de la superficie */
   --radio-dot-color: var(--color-text-on-dark); /** Punto de la marca — surface-dark */
   --radio-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
+  --radio-disabled-border-color: var(--color-text-muted-on-dark); /** Borde deshabilitado — surface-dark (mismo par que checkbox) */
+  --radio-disabled-dot-color: var(--color-text-muted-on-dark); /** Punto deshabilitado y seleccionado — surface-dark (mismo par que checkbox) */
 }

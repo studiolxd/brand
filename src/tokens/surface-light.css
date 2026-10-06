@@ -308,6 +308,8 @@ html.dark .surface-light {
   --radio-error-border-color: var(--color-error-text-on-light);
   --radio-dot-color: var(--color-primary);
   --radio-focus-ring-color: var(--color-primary);
+  --radio-disabled-border-color: var(--color-disabled-border-on-light);
+  --radio-disabled-dot-color: var(--color-disabled-border-on-light);
   --scroll-area-thumb-bg: var(--color-border-default-on-light);
   --scroll-area-thumb-hover-bg: var(--color-icon-secondary-on-light);
   --scroll-area-focus-ring-color: var(--color-primary);

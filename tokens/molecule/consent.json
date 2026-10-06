@@ -10,6 +10,7 @@
       "padding-inline":   { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire horizontal de la banda" },
       "gap":              { "$value": "{spacing.3}", "$type": "dimension", "$description": "Separación entre el texto y la fila de botones" },
       "text-gap":         { "$value": "{spacing.1}", "$type": "dimension", "$description": "Separación entre el título y el texto" },
+      "text-flex-basis":  { "$value": "20rem", "$type": "dimension", "$description": "Base flexible del texto: encoge antes que la fila de botones, que nunca se parte" },
       "actions-gap":      { "$value": "{spacing.2}", "$type": "dimension", "$description": "Separación entre botones" },
       "max-inline-size":  { "$value": "{container.max-width-xl}", "$type": "dimension", "$description": "Ancho máximo del contenido dentro de la banda: el mismo del contenido de una página pública" },
       "z-index":          { "$value": "{z-index.bar}", "$type": "number", "$description": "Capa: la de las barras fijas de la aplicación. Por debajo del velo de un modal — el banner no bloquea nada" },
