@@ -35,6 +35,16 @@ toast.success('Proyecto guardado', { description: 'Los cambios se han guardado.'
 
 La cola vive **fuera de React** —es un `Toast.createToastManager()` de Base UI—, así que `toast(...)` se puede llamar desde un `catch`, desde un módulo sin componente o desde un manejador cualquiera. Lo que necesita React es el punto de montaje: sin `<Toaster />` no hay dónde pintar el aviso.
 
+### Un solo `Toaster` por aplicación
+
+No es una recomendación: **solo puede haber uno montado a la vez**. La cola es un único objeto de módulo, compartido por toda la aplicación, y el `Toaster` no tiene estado propio que lo separe de otro:
+
+- **Cada `Toaster` pinta la cola entera.** Dos montados a la vez enseñan cada aviso dos veces, uno en cada región.
+- **El último que se monta manda en la vida por defecto.** El `Toaster` publica su `duration` en la cola (para que un aviso actualizado por `id` dure lo mismo que uno nuevo), y ese valor es global: el `duration` de un segundo `Toaster` pisa el del primero para todos los avisos.
+- **La lista de avisos vivos también es global.** Es la que usa `toast.dismiss()` sin argumento, y dos `Toaster` la sincronizarían cada uno con lo suyo.
+
+Por eso se monta en el layout raíz, y una pantalla que quiera otra posición u otra duración no monta otro: cambia las props de ese, o pasa `duration` al aviso concreto.
+
 ## Anatomía
 
 La tarjeta **es un `Alert`**: rectángulo de relleno sólido, borde de 1px y esquina recta, con título, descripción opcional, acción opcional y aspa. Lo que el toast añade es su marco:

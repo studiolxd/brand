@@ -3,6 +3,7 @@
 import { useId, type ReactNode } from 'react';
 import { DropdownField } from '../DropdownField/DropdownField';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { defaultRenderLink } from '../../constants/default-render-link';
 import './LanguageSwitcher.css';
 
 /**
@@ -55,6 +56,10 @@ export interface LanguageSwitcherProps {
    * Sin él, la lista es de botones y usa `onChange`.
    */
   hrefFor?: (code: string) => string;
+  /**
+   * Enlace del router del producto; por defecto, un `<a>`. Recibe solo
+   * atributos de `<a>` y tiene que reenviarlos **todos** (`<Link {...props} />`).
+   */
   renderLink?: (props: LanguageSwitcherRenderLinkProps) => ReactNode;
   /**
    * Disposición de la etiqueta. `inline` (por defecto) la pone delante del
@@ -67,14 +72,6 @@ export interface LanguageSwitcherProps {
   /** Talla del control compacto (32/40/48): `lg` en superficies públicas, `md` en las aplicaciones. */
   size?: 'sm' | 'md' | 'lg';
   className?: string;
-}
-
-function defaultRenderLink({ href, lang, children, className, 'aria-current': current }: LanguageSwitcherRenderLinkProps) {
-  return (
-    <a href={href} lang={lang} className={className} aria-current={current}>
-      {children}
-    </a>
-  );
 }
 
 /**

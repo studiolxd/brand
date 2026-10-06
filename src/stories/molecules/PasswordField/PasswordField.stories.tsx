@@ -38,7 +38,6 @@ const meta: Meta<typeof PasswordField> = {
   args: {
     id: 'password',
     label: 'Contraseña',
-    labelHidden: true,
     disabled: false,
     error: false,
   },
@@ -49,8 +48,13 @@ type Story = StoryObj<typeof PasswordField>;
 
 export const Default: Story = {};
 
-export const LabelVisible: Story = {
-  args: { labelHidden: false },
+/**
+ * La etiqueta oculta a la vista: el caso de una pantalla de acceso donde el
+ * contexto ya dice qué es el campo. Sin `placeholder` propio, el texto de la
+ * etiqueta hace de placeholder.
+ */
+export const LabelHidden: Story = {
+  args: { labelHidden: true },
 };
 
 export const WithHelper: Story = {
@@ -68,7 +72,7 @@ export const WithError: Story = {
 
 /** Con una acción bajo el campo: el enlace de recuperación, como enlace normal y con su aire. */
 export const ConAccion: Story = {
-  args: { label: 'Contraseña', labelHidden: false, action: <a href="#recuperar">¿Olvidaste tu contraseña?</a> },
+  args: { label: 'Contraseña', action: <a href="#recuperar">¿Olvidaste tu contraseña?</a> },
 };
 
 export const Disabled: Story = {
@@ -202,7 +206,7 @@ export const ContratoTalla: Story = {
 export const ContratoError: Story = {
   name: 'Test — errorMessage marca el control en error',
   tags: ['!dev'],
-  args: { label: 'Contraseña', labelHidden: false, errorMessage: 'Incluye al menos un número.' },
+  args: { label: 'Contraseña', errorMessage: 'Incluye al menos un número.' },
   play: async ({ canvasElement }) => {
     const input = canvasElement.querySelector('input')!;
     await expect(input).toHaveClass('input--error');
@@ -250,7 +254,7 @@ export const TextosDelProveedor: Story = {
   name: 'Textos desde el proveedor (otro idioma)',
   render: () => (
     <BrandMessagesProvider messages={EN}>
-      <PasswordField label="Password" labelHidden={false} />
+      <PasswordField label="Password" />
     </BrandMessagesProvider>
   ),
 };

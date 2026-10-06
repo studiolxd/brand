@@ -3,6 +3,7 @@ import { Heading } from '../../atoms/Heading/Heading';
 import { Tag } from '../../atoms/Tag/Tag';
 import './SiteNav.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { defaultRenderLink } from '../../constants/default-render-link';
 
 export interface SiteNavItem {
   id: string;
@@ -62,24 +63,12 @@ export interface SiteNavProps {
   groups: SiteNavGroup[];
   /** Nombre accesible del `nav`. */
   label?: string;
-  /** Enlace del router del producto; por defecto, un `<a>`. */
+  /**
+   * Enlace del router del producto; por defecto, un `<a>`. Recibe solo
+   * atributos de `<a>` y tiene que reenviarlos **todos** (`<Link {...props} />`).
+   */
   renderLink?: (props: SiteNavRenderLinkProps) => ReactNode;
   className?: string;
-}
-
-function defaultRenderLink({
-  href,
-  children,
-  className,
-  'aria-current': ariaCurrent,
-  target,
-  rel,
-}: SiteNavRenderLinkProps) {
-  return (
-    <a href={href} className={className} aria-current={ariaCurrent} target={target} rel={rel}>
-      {children}
-    </a>
-  );
 }
 
 /** `target="_blank"` sin `rel` explícito arrastra siempre `noopener noreferrer`. */
