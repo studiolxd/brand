@@ -189,6 +189,19 @@ export const SuperficieOscura: Story = {
 };
 
 /**
+ * Cierra los avisos y espera a que se desmonten. Base UI deja la tarjeta con
+ * `aria-hidden` mientras no tiene el foco —el texto lo anuncia su región
+ * viva, no la tarjeta— y con el aspa enfocable, y axe lo da por
+ * `aria-hidden-focus` (falso positivo: es el patrón de Base UI). La pasada de
+ * axe corre al acabar el `play`, así que cada test termina sin avisos en
+ * pantalla, ni siquiera saliendo.
+ */
+async function despedirAvisos() {
+  toast.dismiss();
+  await waitFor(() => expect(document.querySelector('.toast')).toBeNull());
+}
+
+/**
  * Lanza un aviso de cada tipo y comprueba, con el navegador, que el aspa y el
  * título leen sobre el relleno: misma tinta que el título y distinta del fondo.
  * Es lo que fallaba con el neutro en oscuro —relleno blanco y aspa blanca—.
@@ -223,7 +236,7 @@ async function comprobarTintas() {
     await expect(tintas.tintaAspa, `aspa ${tipo}`).toBe(tintas.tintaTitulo);
     await expect(tintas.tintaTitulo, `título ${tipo}`).not.toBe(tintas.fondo);
   }
-  toast.dismiss();
+  await despedirAvisos();
 }
 
 /** Test: el aspa y el título leen sobre el relleno de cada tipo, en claro. */
@@ -261,7 +274,7 @@ export const ContratoCara: Story = {
     await expect(aviso.classList.contains('alert--error')).toBe(true);
     await expect(aviso.classList.contains('alert--dismissible')).toBe(true);
     await expect(aviso.querySelector('.alert__title')).not.toBeNull();
-    toast.dismiss();
+    await despedirAvisos();
   },
 };
 
@@ -290,7 +303,7 @@ export const ContratoRol: Story = {
     await waitFor(async () => {
       await expect(document.querySelector('.toast')?.getAttribute('role')).toBe('alertdialog');
     });
-    toast.dismiss();
+    await despedirAvisos();
   },
 };
 
@@ -313,7 +326,7 @@ export const ContratoCierre: Story = {
     // mide aquí es la caja del botón, no el fotograma de la animación.
     await expect(aspa.offsetWidth).toBe(32);
     await expect(aspa.offsetHeight).toBe(32);
-    toast.dismiss();
+    await despedirAvisos();
   },
 };
 
@@ -386,7 +399,7 @@ export const ContratoEnlacesEnTinta: Story = {
           }
         }
       });
-      toast.dismiss();
+      await despedirAvisos();
     };
 
     await comprobar('Neutro', false);
@@ -445,6 +458,6 @@ export const ContratoProveedor: Story = {
       return el;
     });
     await expect(aspa.getAttribute('aria-label')).toBe('Close');
-    toast.dismiss();
+    await despedirAvisos();
   },
 };

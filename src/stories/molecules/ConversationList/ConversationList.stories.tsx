@@ -361,7 +361,8 @@ export const ContratoProveedor: Story = {
         />
       </div>
       <div data-testid="vacia">
-        <ConversationList conversations={[]} onNew={() => {}} onSelect={() => {}} onDelete={() => {}} />
+        {/* Dos `<nav>` en la misma página necesitan nombres distintos. */}
+        <ConversationList conversations={[]} navLabel="Empty conversations" onNew={() => {}} onSelect={() => {}} onDelete={() => {}} />
       </div>
     </BrandMessagesProvider>
   ),

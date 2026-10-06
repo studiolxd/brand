@@ -201,9 +201,10 @@ const MATERIAS = [
 ];
 
 /** Los cinco controles de la barra, tal cual los escribe una página: sin `size`. */
-function FiltrosDelCatalogo({ prefijo }: { prefijo: string }) {
+function FiltrosDelCatalogo({ prefijo, ariaLabel }: { prefijo: string; ariaLabel?: string }) {
   return (
     <FilterBar
+      ariaLabel={ariaLabel}
       search={
         <InputField
           id={`${prefijo}-buscar`}
@@ -292,10 +293,12 @@ export const ContratoControlesLg: Story = {
   render: (args) => (
     <>
       <div data-testid="fuera-md">
-        <FiltrosDelCatalogo prefijo="fuera-md" />
+        {/* Tres barras `role="search"` en la misma página: las de fuera, con nombre propio. */}
+        <FiltrosDelCatalogo prefijo="fuera-md" ariaLabel="Filtros fuera del shell (md)" />
       </div>
       <div data-testid="fuera-lg">
         <FilterBar
+          ariaLabel="Filtros fuera del shell (lg)"
           search={<InputField id="fuera-lg-buscar" size="lg" kind="search" label="Buscar" labelHidden />}
           actions={<Button size="lg" variant="outline">Limpiar filtros</Button>}
         >
