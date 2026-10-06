@@ -11,6 +11,8 @@ import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { NotificationButton } from '../NotificationButton/NotificationButton';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './NotificationPanel.css';
+import { defaultRenderLink } from '../../constants/default-render-link';
+import { sideOffsetFromToken } from '../../constants/side-offset';
 
 /**
  * El cromo del panel, y **solo el cromo**: cómo se llama el panel, la marca de
@@ -38,26 +40,12 @@ export interface NotificationPanelMessages {
 }
 
 /**
- * Convierte una longitud CSS (`4px`, `0.25rem`) a píxeles. Sin unidad
- * reconocible devuelve 0: el token viaja siempre con el CSS del componente.
- */
-function cssLengthToPx(raw: string): number {
-  const value = parseFloat(raw);
-  if (Number.isNaN(value)) return 0;
-  if (raw.endsWith('rem')) return value * parseFloat(getComputedStyle(document.documentElement).fontSize);
-  return value;
-}
-
-/**
  * `sideOffset` del `Popover`: el token `--notification-panel-offset` (el
  * desplazamiento compartido de los flotantes de la cabecera, no el
  * `--popover-offset` genérico) se lee en runtime sobre `<html>` en cada
  * cálculo de posición.
  */
-function tokenSideOffset(): number {
-  const root = document.documentElement;
-  return cssLengthToPx(getComputedStyle(root).getPropertyValue('--notification-panel-offset').trim());
-}
+const tokenSideOffset = sideOffsetFromToken('--notification-panel-offset');
 
 /** Una notificación tal y como la enseña el panel: ya resuelta, sin datos crudos. */
 export interface NotificationPanelItem {
@@ -165,13 +153,6 @@ export interface NotificationPanelProps {
   onOpenChange?: (open: boolean, details: PopoverChangeDetails) => void;
   /** Se añade DESPUÉS de las clases propias del panel (el consumidor añade, no sustituye). */
   className?: string;
-}
-
-// Reenvía TODO lo que recibe: el panel pone clase y, cuando toca, `onClick`.
-// Un renderLink que solo copie `href` se deja por el camino la cara del
-// enlace del pie.
-function defaultRenderLink({ children, ...props }: NotificationPanelLinkProps) {
-  return <a {...props}>{children}</a>;
 }
 
 /** Lo primero que se puede enfocar dentro del panel: la primera fila, o el pie si no hay filas. */

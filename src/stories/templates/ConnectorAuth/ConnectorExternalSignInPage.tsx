@@ -156,6 +156,7 @@ export function ConnectorExternalSignInPage({
   preferencesLabel,
   id,
   shell,
+  className,
 }: ConnectorExternalSignInPageProps) {
   const t = useBrandMessages('connectorExternalSignIn');
 
@@ -169,6 +170,7 @@ export function ConnectorExternalSignInPage({
       preferencesLabel={preferencesLabel}
       id={id}
       shell={shell}
+      className={className}
     >
       {/* La columna de la decisión: el aviso de fallo, el formulario y el
           andamio del producto, separados por el aire del sistema. `Stack` con

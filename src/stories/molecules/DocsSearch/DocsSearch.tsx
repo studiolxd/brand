@@ -1,11 +1,12 @@
 'use client';
 
-import { type ReactElement, type ReactNode } from 'react';
+import { useId, type ReactElement, type ReactNode } from 'react';
 import { Autocomplete } from '@base-ui/react/autocomplete';
 import { InputField } from '../InputField/InputField';
 import { Spinner } from '../../atoms/Spinner/Spinner';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './DocsSearch.css';
+import { defaultRenderLink } from '../../constants/default-render-link';
 
 export interface DocsSearchResult {
   /** URL del documento. Es también la clave del resultado. */
@@ -49,7 +50,7 @@ export interface DocsSearchMessages {
 }
 
 export interface DocsSearchProps {
-  /** `id` del campo. Ata la etiqueta con el campo y el campo con la lista. */
+  /** `id` del campo. Ata la etiqueta con el campo y el campo con la lista. Por defecto, uno único por instancia (`useId`). */
   id?: string;
   /** Texto escrito. El componente es controlado: no guarda estado propio. */
   query: string;
@@ -109,11 +110,6 @@ export interface DocsSearchProps {
   className?: string;
 }
 
-/** Reenvía TODO lo que inyecta Base UI: un renderLink que solo copie href rompe el teclado. */
-function defaultRenderLink(props: DocsSearchRenderLinkProps) {
-  return <a {...props} />;
-}
-
 /**
  * Buscador de documentación: un campo y sus resultados, con navegación por
  * teclado y avisos de estado.
@@ -128,7 +124,7 @@ function defaultRenderLink(props: DocsSearchRenderLinkProps) {
  * búsqueda de documentación no son un menú flotante, son la página.
  */
 export function DocsSearch({
-  id = 'docs-search',
+  id: idProp,
   query,
   onQueryChange,
   results,
@@ -147,6 +143,10 @@ export function DocsSearch({
   className,
 }: DocsSearchProps) {
   const t = useBrandMessages('docsSearch');
+  // Sin `id` del consumidor, uno único por instancia: un fijo chocaba con dos
+  // buscadores en la misma página.
+  const autoId = useId();
+  const id = idProp ?? autoId;
   const searching = query.trim() !== '';
   // El aviso solo aparece cuando hay algo que decir: sin consulta no se avisa
   // de nada, y con resultados a la vista el «buscando» sería ruido.

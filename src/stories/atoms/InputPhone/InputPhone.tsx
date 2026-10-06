@@ -1,6 +1,7 @@
-import { forwardRef, useMemo, type Ref } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { Select as BaseSelect } from '@base-ui/react/select';
+import { assignRef } from '../../constants/assign-ref';
 // `getCountryCallingCode` se toma de `react-phone-number-input`, que lo
 // reexporta ya atado a sus metadatos: una sola librería en el componente y
 // ninguna posibilidad de cargar dos tablas de países distintas.
@@ -130,6 +131,8 @@ export interface InputPhoneProps {
    * cajón de un shell propio. Gana siempre.
    */
   container?: React.ComponentPropsWithoutRef<typeof BaseSelect.Portal>['container'];
+  /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+  className?: string;
 }
 
 /**
@@ -157,11 +160,13 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(function
   countryLabel,
   internationalLabel,
   container,
+  className,
 }: InputPhoneProps, ref) {
   const classes = [
     'input-phone',
     error ? 'input-phone--error' : '',
     size !== 'md' ? `input-phone--${size}` : '',
+    className ?? '',
   ].filter(Boolean).join(' ');
 
   // `react-phone-number-input` da su `ref` al componente entero, no al input
@@ -209,8 +214,3 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(function
     />
   );
 });
-
-function assignRef<T>(target: Ref<T> | undefined, node: T | null): void {
-  if (typeof target === 'function') target(node);
-  else if (target) (target as React.RefObject<T | null>).current = node;
-}

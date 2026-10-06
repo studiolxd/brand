@@ -25,6 +25,8 @@ export interface SpinnerProps {
   label?: string;
   /** Cuando true, el spinner es puramente decorativo (sin rol ni anuncio). */
   'aria-hidden'?: boolean;
+  /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+  className?: string;
 }
 
 /**
@@ -40,20 +42,21 @@ function Square() {
   );
 }
 
-export function Spinner({ size = 'md', label, 'aria-hidden': ariaHidden }: SpinnerProps) {
+export function Spinner({ size = 'md', label, 'aria-hidden': ariaHidden, className }: SpinnerProps) {
   const t = useBrandMessages('spinner');
+  const classes = ['spinner', `spinner--${size}`, className].filter(Boolean).join(' ');
   // El texto se lee DONDE se pinta: el spinner decorativo sale antes de
   // llamar a `t`, así que no exige `spinner.label`.
   if (ariaHidden) {
     return (
-      <span className={`spinner spinner--${size}`} aria-hidden="true">
+      <span className={classes} aria-hidden="true">
         <Square />
       </span>
     );
   }
   const texto = t('label', label);
   return (
-    <span className={`spinner spinner--${size}`} role="status" aria-label={texto}>
+    <span className={classes} role="status" aria-label={texto}>
       <Square />
       <VisuallyHidden>{texto}</VisuallyHidden>
     </span>

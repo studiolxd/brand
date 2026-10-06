@@ -50,6 +50,8 @@ export interface SidebarProps {
   resizerValueText?: (width: number) => string;
   /** Fuerza el modo sin `AppShell` (Storybook, pruebas). Con shell, lo decide el shell. */
   mode?: 'open' | 'rail';
+  /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+  className?: string;
 }
 
 function readPx(el: HTMLElement, prop: string): number {
@@ -78,6 +80,7 @@ export function Sidebar({
   resizerLabel,
   resizerValueText,
   mode,
+  className,
 }: SidebarProps) {
   const t = useBrandMessages('sidebar');
   const shell = useContext(AppShellContext);
@@ -206,7 +209,7 @@ export function Sidebar({
       : (shell?.sidebarWidth || bounds?.base) ?? 0,
   );
 
-  const classes = ['sidebar', drawer ? 'sidebar--drawer' : `sidebar--${state}`].join(' ');
+  const classes = ['sidebar', drawer ? 'sidebar--drawer' : `sidebar--${state}`, className].filter(Boolean).join(' ');
   return (
     <SidebarContext.Provider value={{ rail }}>
       <aside

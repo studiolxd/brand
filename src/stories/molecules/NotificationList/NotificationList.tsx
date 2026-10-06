@@ -7,6 +7,7 @@ import { Text } from '../../atoms/Text/Text';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './NotificationList.css';
+import { defaultRenderLink } from '../../constants/default-render-link';
 
 /**
  * El cromo de la bandeja: cómo se llama la lista, cómo se marca una fila sin
@@ -110,11 +111,6 @@ export interface NotificationListProps {
   markReadLabel?: string;
   /** Se añade DESPUÉS de las clases propias de la lista (el consumidor añade, no sustituye). */
   className?: string;
-}
-
-// Reenvía TODO lo que recibe: la lista pone clase y, cuando toca, `onClick`.
-function defaultRenderLink({ children, ...props }: NotificationListLinkProps) {
-  return <a {...props}>{children}</a>;
 }
 
 /**

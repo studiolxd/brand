@@ -8,27 +8,15 @@ import { renderDropdownItems } from '../_shared/dropdownItems';
 import './UserMenu.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { usePortalContainer } from '../../constants/portal-container';
-
-/**
- * Convierte una longitud CSS (`4px`, `0.25rem`) a píxeles. Sin unidad
- * reconocible devuelve 0: el token viaja siempre con el CSS del componente.
- */
-function cssLengthToPx(raw: string): number {
-  const value = parseFloat(raw);
-  if (Number.isNaN(value)) return 0;
-  if (raw.endsWith('rem')) return value * parseFloat(getComputedStyle(document.documentElement).fontSize);
-  return value;
-}
+import { defaultRenderLink } from '../../constants/default-render-link';
+import { sideOffsetFromToken } from '../../constants/side-offset';
 
 /**
  * `sideOffset` por defecto: el Positioner de Base UI necesita un número, así que
  * el token `--user-menu-offset` (el desplazamiento compartido de los flotantes
  * de la cabecera) se lee en runtime sobre `<html>` en cada cálculo de posición.
  */
-function tokenSideOffset(): number {
-  const root = document.documentElement;
-  return cssLengthToPx(getComputedStyle(root).getPropertyValue('--user-menu-offset').trim());
-}
+const tokenSideOffset = sideOffsetFromToken('--user-menu-offset');
 
 /**
  * Lo que el menú de cuenta dice por su cuenta, y es **cromo**: cómo se nombra
@@ -60,13 +48,12 @@ export interface UserMenuProps {
   renderLink?: (props: MenuRenderLinkProps) => ReactNode;
   onOpenChange?: (open: boolean) => void;
   defaultOpen?: boolean;
-}
-
-// Reenvía TODO lo que inyecta Base UI (role, tabIndex, data-highlighted, handlers…):
-// un renderLink que solo copie href/className rompe el menú. Los consumidores
-// con router deben hacer lo mismo (`<Link {...props} />`).
-function defaultRenderLink({ children, ...props }: MenuRenderLinkProps) {
-  return <a {...props}>{children}</a>;
+  /**
+   * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+   * Va al disparador: es el único nodo que el componente pinta en su sitio (el
+   * panel sale por un portal).
+   */
+  className?: string;
 }
 
 function itemClass(destructive?: boolean) {
@@ -86,12 +73,13 @@ export function UserMenu({
   renderLink = defaultRenderLink,
   onOpenChange,
   defaultOpen,
+  className,
 }: UserMenuProps) {
   const t = useBrandMessages('userMenu');
   const portalContainer = usePortalContainer(undefined);
   return (
     <BaseMenu.Root onOpenChange={(open) => onOpenChange?.(open)} defaultOpen={defaultOpen}>
-      <BaseMenu.Trigger className={['user-menu__trigger', compact ? 'user-menu__trigger--compact' : ''].filter(Boolean).join(' ')} aria-label={label ?? t('trigger')(name)}>
+      <BaseMenu.Trigger className={['user-menu__trigger', compact ? 'user-menu__trigger--compact' : '', className].filter(Boolean).join(' ')} aria-label={label ?? t('trigger')(name)}>
           <span className="user-menu__avatar-wrap">
             <Avatar src={avatarUrl} name={name} alt="" size="sm" />
             {!!notificationCount && notificationCount > 0 && (

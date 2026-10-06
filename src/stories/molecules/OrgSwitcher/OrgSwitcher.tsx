@@ -3,7 +3,8 @@ import type { ReactNode } from 'react';
 import { Avatar } from '../../atoms/Avatar/Avatar';
 import { Icon } from '../../atoms/Icon/Icon';
 import type { MenuItem, MenuRenderLinkProps } from '../Menu/Menu';
-import { renderDropdownItems, defaultRenderLink } from '../_shared/dropdownItems';
+import { renderDropdownItems } from '../_shared/dropdownItems';
+import { defaultRenderLink } from '../../constants/default-render-link';
 import { useSidebar } from '../../sections/Sidebar/SidebarContext';
 import './OrgSwitcher.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
@@ -44,9 +45,15 @@ export interface OrgSwitcherProps {
   defaultOpen?: boolean;
   items?: MenuItem[];
   renderLink?: (props: MenuRenderLinkProps) => ReactNode;
+  /**
+   * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+   * Va al disparador: es el único nodo que el componente pinta en su sitio (el
+   * panel sale por un portal).
+   */
+  className?: string;
 }
 
-export function OrgSwitcher({ label, block = false, compact, current, organizations, onOrgChange, defaultOpen, items, renderLink = defaultRenderLink }: OrgSwitcherProps) {
+export function OrgSwitcher({ label, block = false, compact, current, organizations, onOrgChange, defaultOpen, items, renderLink = defaultRenderLink, className }: OrgSwitcherProps) {
   const t = useBrandMessages('orgSwitcher');
   const portalContainer = usePortalContainer(undefined);
   const others = organizations.filter((o) => o.id !== current.id);
@@ -55,7 +62,7 @@ export function OrgSwitcher({ label, block = false, compact, current, organizati
 
   return (
     <BaseMenu.Root defaultOpen={defaultOpen}>
-      <BaseMenu.Trigger className={['org-switcher__trigger', block && !isCompact ? 'org-switcher__trigger--block' : '', isCompact ? 'org-switcher__trigger--compact' : ''].filter(Boolean).join(' ')} aria-label={label ?? t('trigger')(current.name)}>
+      <BaseMenu.Trigger className={['org-switcher__trigger', block && !isCompact ? 'org-switcher__trigger--block' : '', isCompact ? 'org-switcher__trigger--compact' : '', className].filter(Boolean).join(' ')} aria-label={label ?? t('trigger')(current.name)}>
           <Avatar src={current.logoUrl} name={current.name} alt="" size="sm" shape="square" />
           {!isCompact && <span className="org-switcher__name">{current.name}</span>}
           {!isCompact && <Icon name="chevron" size="sm" className="org-switcher__chevron" />}

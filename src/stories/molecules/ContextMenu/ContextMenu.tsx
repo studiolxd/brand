@@ -23,6 +23,13 @@ export interface ContextMenuProps {
    * traducir.
    */
   label?: string;
+  /**
+   * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+   * Va al botón de tres puntos —el único nodo que el componente pinta en su
+   * sitio—, no al panel, que sale por un portal: a diferencia de `Menu`, aquí
+   * el disparador es del componente y no del consumidor.
+   */
+  className?: string;
 }
 
 /**
@@ -41,6 +48,7 @@ export function ContextMenu({
   triggerSize = 'md',
   triggerOrientation = 'horizontal',
   label,
+  className,
 }: ContextMenuProps) {
   return (
     <Menu
@@ -51,7 +59,7 @@ export function ContextMenu({
       align={align}
       minWidth={minWidth}
       maxWidth={maxWidth}
-      trigger={<DotsButton size={triggerSize} orientation={triggerOrientation} aria-label={label} />}
+      trigger={<DotsButton size={triggerSize} orientation={triggerOrientation} aria-label={label} className={className} />}
     />
   );
 }

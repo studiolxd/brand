@@ -1,6 +1,7 @@
 import { forwardRef, useCallback } from 'react';
 import { useCssProperties } from '../../constants/css-properties';
 import './Sortable.css';
+import { assignRef } from '../../constants/assign-ref';
 
 /** Elementos con los que puede montarse el envoltorio ordenable. */
 export type SortableElement = 'div' | 'li';
@@ -89,8 +90,7 @@ export const Sortable = forwardRef<HTMLElement, SortableProps>(function Sortable
   const setRefs = useCallback(
     (node: HTMLElement | null) => {
       setCssProperties(node);
-      if (typeof ref === 'function') ref(node);
-      else if (ref) (ref as React.MutableRefObject<HTMLElement | null>).current = node;
+      assignRef(ref, node);
     },
     [setCssProperties, ref],
   );

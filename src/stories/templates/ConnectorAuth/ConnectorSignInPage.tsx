@@ -135,6 +135,7 @@ export function ConnectorSignInPage({
   preferencesLabel,
   id,
   shell,
+  className,
 }: ConnectorSignInPageProps) {
   const t = useBrandMessages('connectorSignIn');
   const nativo = action !== undefined;
@@ -164,6 +165,7 @@ export function ConnectorSignInPage({
       preferencesLabel={preferencesLabel}
       id={id}
       shell={shell}
+      className={className}
     >
       <Form
         size="lg"

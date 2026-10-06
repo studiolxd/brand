@@ -1,10 +1,11 @@
 'use client';
 
-import { forwardRef, useState, useRef, useId, useEffect, useCallback, type Ref } from 'react';
+import { forwardRef, useState, useRef, useId, useEffect, useCallback } from 'react';
 import { Popover as BasePopover } from '@base-ui/react/popover';
 import { Spinner } from '../Spinner/Spinner';
 import './Autocomplete.css';
 import { usePortalContainer } from '../../constants/portal-container';
+import { assignRef } from '../../constants/assign-ref';
 
 export interface AutocompleteOption {
   /** Identifica la sugerencia: es lo que recibe `onSelect` para saber cuál se eligió. */
@@ -80,11 +81,6 @@ export interface AutocompleteProps {
    * de la superficie que llegue por contexto, o `document.body`.
    */
   container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
-}
-
-function assignRef<T>(target: Ref<T> | undefined, node: T | null): void {
-  if (typeof target === 'function') target(node);
-  else if (target) (target as React.RefObject<T | null>).current = node;
 }
 
 /** Minúsculas y sin tildes: «cafe» encuentra «Café». */

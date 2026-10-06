@@ -56,6 +56,11 @@ export interface AppShellProps {
    * él, sale de `appShell.skipToContent` del `BrandMessagesProvider`.
    */
   skipLabel?: string;
+  /**
+   * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+   * Va al contenedor `.app-shell`, no al enlace de salto que lo precede.
+   */
+  className?: string;
 }
 
 /**
@@ -88,6 +93,7 @@ export function AppShell({
   defaultSidebarWidth,
   onSidebarWidthChange,
   skipLabel,
+  className,
 }: AppShellProps) {
   const t = useBrandMessages('appShell');
   // `null` en el servidor y en el render de hidratación: el ancho no se sabe
@@ -192,7 +198,7 @@ export function AppShell({
         <SkipLink href="#main-content">{t('skipToContent', skipLabel)}</SkipLink>
         <div
           ref={shellRef}
-          className="app-shell"
+          className={['app-shell', className].filter(Boolean).join(' ')}
           data-sidebar={sidebarValue}
           data-layout={desktopMatch === null ? undefined : isDesktop ? 'column' : 'drawer'}
         >

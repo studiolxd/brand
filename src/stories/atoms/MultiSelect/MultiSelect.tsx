@@ -1,11 +1,12 @@
 'use client';
 
-import { forwardRef, useState, useRef, useEffect, useId, type Ref } from 'react';
+import { forwardRef, useState, useRef, useEffect, useId, useCallback } from 'react';
 import { Popover as BasePopover } from '@base-ui/react/popover';
 import { Icon } from '../Icon/Icon';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './MultiSelect.css';
 import { usePortalContainer } from '../../constants/portal-container';
+import { assignRef } from '../../constants/assign-ref';
 
 /**
  * Los dos textos que el control emite por su cuenta: el marcador de sitio sin
@@ -75,11 +76,6 @@ export interface MultiSelectProps {
   container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
 }
 
-function assignRef<T>(target: Ref<T> | undefined, node: T | null): void {
-  if (typeof target === 'function') target(node);
-  else if (target) (target as React.RefObject<T | null>).current = node;
-}
-
 /** Milisegundos que se acumulan las teclas del salto por letra antes de reiniciar. */
 const TYPEAHEAD_RESET_MS = 500;
 
@@ -128,7 +124,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
 
   const currentValues = value !== undefined ? value : internalValues;
 
-  const itemId = (i: number) => `${itemIdPrefix}-opt-${i}`;
+  const itemId = useCallback((i: number) => `${itemIdPrefix}-opt-${i}`, [itemIdPrefix]);
 
   function toggleValue(v: string) {
     const next = currentValues.includes(v)
@@ -239,9 +235,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
   useEffect(() => {
     if (!open || activeIndex < 0) return;
     document.getElementById(itemId(activeIndex))?.scrollIntoView({ block: 'nearest' });
-    // `itemId` se deriva de `itemIdPrefix`, estable durante toda la vida del componente.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, activeIndex, itemIdPrefix]);
+  }, [open, activeIndex, itemId]);
 
   const triggerClass = [
     'multi-select',

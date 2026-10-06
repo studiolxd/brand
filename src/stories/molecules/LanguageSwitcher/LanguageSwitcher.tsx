@@ -1,6 +1,6 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import { useId, type ReactNode } from 'react';
 import { DropdownField } from '../DropdownField/DropdownField';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './LanguageSwitcher.css';
@@ -41,7 +41,7 @@ export interface LanguageSwitcherProps {
    * él, sale de `languageSwitcher.label` del `BrandMessagesProvider`.
    */
   label?: string;
-  /** `id` del control en compacto (enlaza la etiqueta). */
+  /** `id` del control en compacto (enlaza la etiqueta). Por defecto, uno único por instancia (`useId`). */
   id?: string;
   /** Oculta la etiqueta (visible por defecto: en el panel va con su nombre, como el de tema). */
   labelHidden?: boolean;
@@ -89,7 +89,7 @@ export function LanguageSwitcher({
   value,
   onChange,
   label,
-  id = 'language-switcher',
+  id: idProp,
   labelHidden,
   variant = 'compact',
   layout = 'inline',
@@ -98,6 +98,10 @@ export function LanguageSwitcher({
   renderLink = defaultRenderLink,
   className,
 }: LanguageSwitcherProps) {
+  // Sin `id` del consumidor, uno único por instancia: un fijo chocaba con dos
+  // selectores en la misma página (la barra y el pie).
+  const autoId = useId();
+  const id = idProp ?? autoId;
   const t = useBrandMessages('languageSwitcher');
   const rotulo = t('label', label);
   if (variant === 'list') {

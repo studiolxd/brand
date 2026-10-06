@@ -30,6 +30,12 @@ export interface ErrorPageProps {
    * Por defecto `true`. Sin marco, `header`, `footer` e `id` no aplican.
    */
   shell?: boolean;
+  /**
+   * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+   * Va al contenido propio de la plantilla —las dos columnas—, con marco y
+   * sin él, como en `OnboardingShell` y `ConnectorAuthShell`.
+   */
+  className?: string;
 }
 
 /**
@@ -41,10 +47,10 @@ export interface ErrorPageProps {
  * del layout que pudo fallar. Con `shell={false}` devuelve solo el contenido,
  * para una app que ya tiene su `main`.
  */
-export function ErrorPage({ title, description, homeAction, retryDescription, retryAction, header, footer, id = 'main-content', shell = true }: ErrorPageProps) {
+export function ErrorPage({ title, description, homeAction, retryDescription, retryAction, header, footer, id = 'main-content', shell = true, className }: ErrorPageProps) {
   return (
     <PublicPageShell header={header} footer={footer} id={id} shell={shell}>
-      <Columns className="error-page__content">
+      <Columns className={['error-page__content', className].filter(Boolean).join(' ')}>
         <Stack>
           <PageIntro title={title} description={description} />
           {homeAction}

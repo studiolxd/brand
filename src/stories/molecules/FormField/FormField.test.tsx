@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { createRef, useMemo } from 'react';
 import { describe, it, expect } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -155,5 +155,48 @@ describe('FormField', () => {
     await user.type(screen.getByLabelText('Correo'), 'ada@studiolxd.com');
     await user.click(screen.getByRole('button', { name: 'Enviar' }));
     expect(submitted).toEqual({ email: 'ada@studiolxd.com' });
+  });
+});
+
+describe('FormField — ref', () => {
+  it('reenvía la ref de cada parte a su nodo DOM', () => {
+    const itemRef = createRef<HTMLDivElement>();
+    const labelRef = createRef<HTMLLabelElement>();
+    const descriptionRef = createRef<HTMLParagraphElement>();
+    const messageRef = createRef<HTMLParagraphElement>();
+    const rootRef = createRef<HTMLParagraphElement>();
+    function RefHarness() {
+      const errors = useMemo(
+        () => ({ root: { type: 'manual', message: 'Fallo general' } }) as FieldErrors<Values>,
+        [],
+      );
+      const form = useForm<Values>({ defaultValues: { email: '' }, errors });
+      return (
+        <FormProvider {...form}>
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem ref={itemRef}>
+                <FormLabel ref={labelRef}>Correo</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormDescription ref={descriptionRef}>Ayuda</FormDescription>
+                <FormMessage ref={messageRef}>Mensaje</FormMessage>
+              </FormItem>
+            )}
+          />
+          <FormRootMessage ref={rootRef} />
+        </FormProvider>
+      );
+    }
+    render(<RefHarness />);
+    expect(itemRef.current).toHaveClass('form-field');
+    expect(labelRef.current?.tagName).toBe('LABEL');
+    expect(descriptionRef.current).toHaveTextContent('Ayuda');
+    expect(messageRef.current).toHaveTextContent('Mensaje');
+    expect(rootRef.current).toHaveTextContent('Fallo general');
+    cleanup();
   });
 });

@@ -143,6 +143,7 @@ export function ConnectorRejectionPage({
   preferencesLabel,
   id,
   shell,
+  className,
 }: ConnectorRejectionPageProps) {
   const t = useBrandMessages('connectorRejection');
 
@@ -172,6 +173,7 @@ export function ConnectorRejectionPage({
       preferencesLabel={preferencesLabel}
       id={id}
       shell={shell}
+      className={className}
     >
       <Stack align="stretch">
         <Paragraph size="large">{hint}</Paragraph>

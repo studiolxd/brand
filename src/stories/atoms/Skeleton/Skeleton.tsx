@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import './Skeleton.css';
 
 export interface SkeletonProps extends Omit<React.SVGProps<SVGSVGElement>, 'width' | 'height' | 'style'> {
@@ -21,9 +22,13 @@ export interface SkeletonProps extends Omit<React.SVGProps<SVGSVGElement>, 'widt
  * saldría a ancho completo y una línea de alto. No hay prop `style` por lo
  * mismo: el atributo no llegaría a pintarse.
  */
-export function Skeleton({ width, height, circle = false, className, ...rest }: SkeletonProps) {
+export const Skeleton = forwardRef<SVGSVGElement, SkeletonProps>(function Skeleton(
+  { width, height, circle = false, className, ...rest },
+  ref,
+) {
   return (
     <svg
+      ref={ref}
       aria-hidden="true"
       className={['skeleton', circle ? 'skeleton--circle' : '', className].filter(Boolean).join(' ')}
       width={width}
@@ -31,4 +36,4 @@ export function Skeleton({ width, height, circle = false, className, ...rest }: 
       {...rest}
     />
   );
-}
+});

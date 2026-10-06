@@ -35,14 +35,16 @@ export interface TypingIndicatorProps {
    * `BrandMessagesProvider`.
    */
   label?: string;
+  /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+  className?: string;
 }
 
 /** Tres puntos cuadrados que laten en secuencia: «alguien está escribiendo». */
-export function TypingIndicator({ name, label }: TypingIndicatorProps) {
+export function TypingIndicator({ name, label, className }: TypingIndicatorProps) {
   const t = useBrandMessages('typingIndicator');
 
   return (
-    <span className="typing-indicator" role="status">
+    <span className={['typing-indicator', className].filter(Boolean).join(' ')} role="status">
       <span className="typing-indicator__dot" aria-hidden="true" />
       <span className="typing-indicator__dot" aria-hidden="true" />
       <span className="typing-indicator__dot" aria-hidden="true" />
