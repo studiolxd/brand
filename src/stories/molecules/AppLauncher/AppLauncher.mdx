@@ -37,8 +37,9 @@ al actualizar — para conservar el popover, añadir `presentation="popover"` ex
 ## Título del modal
 
 Con `presentation="modal"`, `labels.title` es el título del diálogo (`Dialog.Title` de
-`Modal`). Sin él, sale de `appLauncher.title` del proveedor. Sin uso en
-`presentation="popover"`, que no tiene título.
+`Modal`). Sin él, sale de `appLauncher.title` del proveedor. En
+`presentation="popover"`, que no pinta título, el mismo texto es el nombre accesible del
+popup (`aria-label`): un `role="dialog"` sin nombre no le dice al lector qué se ha abierto.
 
 <Canvas of={AppLauncherStories.ConTitulo} />
 
@@ -146,8 +147,8 @@ import { BrandMessagesProvider } from "@studiolxd/brand/messages";
 <Canvas of={AppLauncherStories.TextosDelProveedor} />
 
 El orden es **prop → proveedor → error**, y el texto se lee **donde se pinta**: una rejilla
-sin novedades no exige `appLauncher.new`, y un lanzador en `presentation="popover"` no exige
-`appLauncher.title`.
+sin novedades no exige `appLauncher.new`. `appLauncher.title` se lee en las dos
+presentaciones: título en el modal, nombre accesible del popup en el popover.
 
 ## Superficie oscura
 

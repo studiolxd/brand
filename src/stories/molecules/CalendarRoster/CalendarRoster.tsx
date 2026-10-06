@@ -1,10 +1,11 @@
-import type { ComponentType, MouseEvent, ReactNode } from 'react';
+import { useId, useRef, type ComponentType, type MouseEvent, type ReactNode } from 'react';
 import { Tag } from '../../atoms/Tag/Tag';
 import type { TagVariant } from '../../atoms/Tag/Tag';
 import { PrevNextNav } from '../PrevNextNav/PrevNextNav';
 import { isSameDay, shiftMonth, useToday } from '../_shared/calendarGrid';
 import './CalendarRoster.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { useOverflowFocusable } from '../../constants/overflow-focusable';
 
 /**
  * El cromo del cuadrante: el encabezado de la columna de nombres y la leyenda
@@ -215,7 +216,14 @@ export function CalendarRoster({
       }
     : undefined;
 
-  const titleId = `roster-title-${month.getFullYear()}-${month.getMonth()}`;
+  // Por instancia, no por mes: dos cuadrantes del mismo mes en una página
+  // repetían el id y la tabla del segundo se nombraba con el título del primero.
+  const titleId = useId();
+  // El cuadrante desborda en horizontal casi siempre: mientras lo hace, su
+  // envoltorio entra en el tabulador (con el nombre del mes) para que el
+  // teclado pueda desplazarlo.
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const scrollable = useOverflowFocusable(wrapRef);
 
   return (
     <div className={['calendar-roster', className].filter(Boolean).join(' ')}>
@@ -235,7 +243,11 @@ export function CalendarRoster({
       </div>
 
       {/* Tabla con scroll horizontal */}
-      <div className="calendar-roster__wrap">
+      <div
+        ref={wrapRef}
+        className="calendar-roster__wrap"
+        {...(scrollable && { tabIndex: 0, role: 'region', 'aria-labelledby': titleId })}
+      >
         <table className="calendar-roster__table" aria-labelledby={titleId}>
           <thead>
             <tr>

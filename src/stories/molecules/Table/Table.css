@@ -44,6 +44,11 @@
   user-select: none;
 }
 
+.table__wrapper:focus-visible {
+  outline: var(--table-focus-ring-width) solid var(--table-focus-ring-color);
+  outline-offset: var(--table-focus-ring-offset);
+}
+
 .table__header-content:focus-visible {
   outline: var(--table-focus-ring-width) solid var(--table-focus-ring-color);
   outline-offset: var(--table-focus-ring-offset);

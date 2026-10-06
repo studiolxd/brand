@@ -122,13 +122,20 @@ export interface AccordionTriggerProps {
   className?: string;
   /** Tamaño del chevron indicador. */
   chevronSize?: 'sm' | 'md' | 'lg';
+  /**
+   * Nivel del encabezado que envuelve el botón (default `3`). Bájalo o súbelo
+   * para que el acordeón encaje en el esquema de la página: tras un `<h1>` sin
+   * `<h2>` de por medio, un `<h3>` se salta un nivel.
+   */
+  headingLevel?: 2 | 3 | 4 | 5 | 6;
   children: ReactNode;
 }
 
-export function AccordionTrigger({ className, chevronSize = 'sm', children }: AccordionTriggerProps) {
+export function AccordionTrigger({ className, chevronSize = 'sm', headingLevel = 3, children }: AccordionTriggerProps) {
   const numbering = useAccordionNumbering();
+  const HeadingTag = `h${headingLevel}` as const;
   return (
-    <BaseAccordion.Header className="accordion__header">
+    <BaseAccordion.Header className="accordion__header" render={<HeadingTag />}>
       <BaseAccordion.Trigger
         className={['accordion__trigger', className].filter(Boolean).join(' ')}
       >

@@ -13,7 +13,7 @@ El pie de una página pública: la marca con su frase, las columnas de enlaces, 
 
 ## Es el hermano mayor de `LegalFooter`
 
-`LegalFooter` es el pie de las **aplicaciones** de la suite: los enlaces legales y nada más. `SiteFooter` es el pie de la **web**, y lo lleva dentro: se le pasa por `legal`, y queda debajo del cuerpo separado por la línea del sistema. Al ir anidado deja de ser un segundo `contentinfo` —un `footer` dentro de otro `footer` no es un punto de referencia—, que es exactamente lo que se quiere: un solo pie de página.
+`LegalFooter` es el pie de las **aplicaciones** de la suite: los enlaces legales y nada más. `SiteFooter` es el pie de la **web**, y lo lleva dentro: se le pasa por `legal`, y queda debajo del cuerpo separado por la línea del sistema. Al ir anidado, `SiteFooter` lo monta como `<div>` (`as="div"`) en vez de `<footer>`: el HTML no admite un `footer` dentro de otro, y la página tendría dos `contentinfo`. Queda un solo pie de página, que es lo que se quiere.
 
 Pásale `width="full"` al `LegalFooter` anidado para que sus enlaces se alineen con las columnas de arriba en vez de acotarse otra vez.
 

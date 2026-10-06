@@ -29,6 +29,8 @@ El pie **no fija tamaño de texto**: no tiene token de cuerpo y hereda el de la 
 
 `nav` con nombre (`label`, «Legal» por defecto; el producto lo traduce) dentro del `contentinfo`.
 
+Dentro de otro pie (el `legal` de `SiteFooter`) va como `<div>` con `as="div"` —`SiteFooter` lo hace solo—: un `footer` no puede contener otro, y la página tendría dos `contentinfo`.
+
 ## Tokens
 
 <TokenTable tokens={legalFooterTokens} />

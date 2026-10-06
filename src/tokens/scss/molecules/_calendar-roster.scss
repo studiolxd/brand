@@ -36,6 +36,9 @@ $lxd-calendar-roster-cell-weekend-bg: #f2f2f2; // Fondo de celdas de fin de sema
 $lxd-calendar-roster-cell-holiday-bg: #f2f2f2; // Fondo de celdas festivas — misma superficie secundaria; el festivo se nombra con su chip
 $lxd-calendar-roster-cell-non-working-bg: #f2f2f2; // Fondo de celdas no laborables (laborable sin turno asignado)
 $lxd-calendar-roster-cell-today-outline-width: 2px; // Grosor del recuadro de la columna de hoy
+$lxd-calendar-roster-focus-ring-color: #111e30; // Anillo de foco del cuadrante cuando desborda y entra en el tabulador
+$lxd-calendar-roster-focus-ring-width: 2px; // Grosor del anillo de foco
+$lxd-calendar-roster-focus-ring-offset: 1px; // Separación del anillo de foco
 $lxd-calendar-roster-schedule-font-size: 0.75rem; // Tamaño del texto de horario
 $lxd-calendar-roster-schedule-color: #111e30; // Color del texto de horario
 $lxd-calendar-roster-legend-item-gap: 0.25rem; // Gap entre el chip y su texto dentro de una entrada de la leyenda

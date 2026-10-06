@@ -43,6 +43,9 @@
   --calendar-roster-cell-holiday-bg: var(--color-surface-secondary-on-light); /** Fondo de celdas festivas — misma superficie secundaria; el festivo se nombra con su chip */
   --calendar-roster-cell-non-working-bg: var(--color-surface-secondary-on-light); /** Fondo de celdas no laborables (laborable sin turno asignado) */
   --calendar-roster-cell-today-outline-width: var(--border-width-focus); /** Grosor del recuadro de la columna de hoy */
+  --calendar-roster-focus-ring-color: var(--color-primary); /** Anillo de foco del cuadrante cuando desborda y entra en el tabulador */
+  --calendar-roster-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
+  --calendar-roster-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco */
   --calendar-roster-schedule-color: var(--color-text-on-light); /** Color del texto de horario */
   --calendar-roster-legend-color: var(--color-text-muted-on-light); /** Color del texto de la leyenda */
   --calendar-roster-legend-swatch-radius: var(--border-radius-default); /** Radio del cuadradito de color */
@@ -67,4 +70,5 @@ html.dark {
   --calendar-roster-cell-non-working-bg: var(--color-surface-secondary-on-dark); /** Fondo no laborable — surface-dark */
   --calendar-roster-schedule-color: var(--color-text-muted-on-dark); /** Color del texto de horario — surface-dark */
   --calendar-roster-legend-color: var(--color-text-muted-on-dark); /** Color de la leyenda — surface-dark */
+  --calendar-roster-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
 }
