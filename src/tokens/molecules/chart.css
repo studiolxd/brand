@@ -8,7 +8,6 @@
   --chart-area-fill-opacity: 0.1; /** El área es un velo del tono de la serie, nunca un bloque saturado */
   --chart-donut-thickness: 0.55; /** Fracción del radio que ocupa el anillo del donut */
   --chart-radar-fill-opacity: 0.15; /** El polígono del radar es un velo del tono de la serie, como el área */
-  --chart-height: 16rem; /** 256px — alto por defecto del área de dibujo. La banda del eje X va aparte: el contenedor crece con ella y nunca aparece un scroll anidado */
   --chart-hover-opacity: 0.75; /** Atenuación de las marcas que no son la activa mientras el puntero está encima */
   --chart-series-1: var(--color-chart-series-1); /** Ranura categórica 1. El orden de las ranuras es el mecanismo de seguridad para daltonismo: se asignan en orden, nunca se ciclan */
   --chart-series-2: var(--color-chart-series-2); /** Ranura categórica 2 */
@@ -72,7 +71,6 @@
   --chart-tile-label-color: var(--color-text-on-dark); /** Rótulo sobre una baldosa del treemap cuando el relleno lo elige el producto (`color`/`colors`): va encima del relleno de la serie, no de la superficie, y con un color desconocido el sistema no puede elegir la tinta */
   --chart-tile-label-color-5: var(--color-text-on-dark); /** Rótulo sobre la baldosa de la ranura 5 — el magenta es lo bastante oscuro para llevar tinta clara */
   --chart-tile-label-color-7: var(--color-text-on-dark); /** Rótulo sobre la baldosa de la ranura 7 — la lavanda de gráfico es la más oscura de las ocho */
-  --chart-tile-label-color-muted: var(--color-text-on-dark); /** Rótulo sobre la baldosa gris de «Otros» (pasada la octava ranura) */
   --chart-tooltip-padding-block: var(--tooltip-padding-block); /** Padding vertical del bocadillo */
   --chart-tooltip-padding-inline: var(--tooltip-padding-inline); /** Padding horizontal del bocadillo */
   --chart-tooltip-font-size: var(--tooltip-font-size); /** Tamaño de texto del bocadillo */
@@ -88,7 +86,6 @@
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --chart-tile-label-color-muted: var(--color-black); /** Rótulo de «Otros» — surface-dark: el gris de atenuación en oscuro es claro */
   --chart-tile-label-color-5: var(--color-black); /** Rótulo de la ranura 5 — surface-dark: el paso de serie para superficie oscura es más claro y ya no aguanta tinta blanca */
   --chart-tile-label-color-7: var(--color-black); /** Rótulo de la ranura 7 — surface-dark */
   --chart-series-1: var(--color-chart-series-1-on-dark); /** Ranura 1 — surface-dark */

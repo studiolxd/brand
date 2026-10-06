@@ -15,13 +15,11 @@
     "item-font-weight":          { "$value": "{font-weight.default}",     "$type": "number",    "$description": "Peso de ítems" },
     "item-line-height":          { "$value": "{line-height.snug}",        "$type": "number",    "$description": "Interlineado de ítems" },
     "item-color":                { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color de ítems" },
-    "item-active-color":         { "$value": "{color.primary}",           "$type": "color",     "$description": "Color de ítem activo" },
     "item-active-font-weight":   { "$value": "{font-weight.emphasis}",      "$type": "number",    "$description": "Peso de ítem activo" },
     "focus-ring-color":          { "$value": "{color.primary}",           "$type": "color",     "$description": "Color del focus ring" },
     "focus-ring-width":          { "$value": "{border-width.focus}",      "$type": "dimension", "$description": "Grosor del anillo de foco" },
     "item-gap":                  { "$value": "{spacing.1}",               "$type": "dimension", "$description": "Gap entre ítems dentro de un grupo" },
     "rail-item-size":            { "$value": "{size-component.md}",     "$type": "dimension", "$description": "En rail cada entrada es un cuadrado a talla md, como un botón de icono" },
-    "rail-active-bar-width":     { "$value": "{border-width.focus}",    "$type": "dimension", "$description": "Barra al borde que marca la sección activa en rail" },
     "item-icon-size":            { "$value": "{size-component.sm}",                      "$type": "dimension", "$description": "Icono de ítem: talla sm del sistema" },
     "item-icon-gap":             { "$value": "{spacing.2}",               "$type": "dimension", "$description": "Gap entre icono y texto del ítem" },
     "transition-duration":            { "$value": "{motion.duration.fast}",    "$type": "string",    "$description": "Duración de transición de ítems" },
@@ -30,16 +28,12 @@
     "group-transition-easing":        { "$value": "{motion.easing.in-out}",    "$type": "string",    "$description": "Easing de la animación de apertura/cierre de grupo" },
     "surface-dark-group-label-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color de la etiqueta de grupo — surface-dark. `group-label-color` (prussian) sería invisible sobre fondo oscuro." },
     "surface-dark-item-color":        { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de ítems — surface-dark" },
-    "surface-dark-item-active-color": { "$value": "{color.accent-1}",           "$type": "color", "$description": "Color de ítem activo — surface-dark. `item-active-color` (prussian) sería invisible; se usa accent-1 como acento de estado activo, igual que Switcher." },
     "surface-dark-focus-ring-color":  { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring color — surface-dark. Deliberadamente blanco, no accent-1: el ring debe seguir el patrón estándar del sistema aunque el ítem activo use lavanda como acento." },
     "item-empty-color":       { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Tinta de una entrada vacía: sigue leyéndose, pero no invita a pulsarla" },
     "item-empty-cursor":      { "$value": "not-allowed",                "$type": "string",    "$description": "Cursor de una entrada vacía" },
     "item-empty-mark-font-size": { "$value": "{font-size.1}",           "$type": "dimension", "$description": "Tamaño de la marca «sin docs»" },
     "item-empty-mark-color":  { "$value": "{color.text.muted-on-light}", "$type": "color",    "$description": "Tinta de la marca «sin docs»" },
     "surface-dark-item-empty-color":      { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Tinta de una entrada vacía — surface-dark" },
-    "surface-dark-item-empty-mark-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Tinta de la marca «sin docs» — surface-dark" },
-    "item-hover-line-width":  { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor de la línea que marca el ítem bajo el puntero. El hover no pinta relleno (regla de Colores): deja una línea de tinta bajo el ítem, el mismo grafismo del subrayado de `Link`" },
-    "item-hover-line-color":  { "$value": "{color.primary}",        "$type": "color",     "$description": "Color de la línea de hover — tinta de la superficie" },
-    "surface-dark-item-hover-line-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la línea de hover — surface-dark" }
+    "surface-dark-item-empty-mark-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Tinta de la marca «sin docs» — surface-dark" }
   }
 }

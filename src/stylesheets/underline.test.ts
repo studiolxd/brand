@@ -16,7 +16,7 @@ import { fileURLToPath } from 'node:url';
  *
  * Este test barre las dos vías por las que el subrayado entraba: el CSS de
  * `src/` y los JSON de `tokens/`. La segunda no es teórica —el
- * `--breadcrumb-link-text-decoration-hover` valía `underline` y no aparecía
+ * `--breadcrumb-link-text-decoration-hover` (ya retirado) valía `underline` y no aparecía
  * buscando en el CSS, porque el valor vivía en el JSON del token.
  *
  * La regla completa, con el porqué, en Foundations → Bordes.

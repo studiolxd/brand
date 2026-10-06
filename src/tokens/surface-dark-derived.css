@@ -72,7 +72,6 @@ html.dark {
   --popover-border-color: var(--floating-panel-border-color);
   --user-menu-content-bg: var(--floating-panel-bg);
   --user-menu-content-border-color: var(--floating-panel-border-color);
-  --autocomplete-field-error-color: var(--async-select-field-error-color);
   --autocomplete-field-helper-color: var(--async-select-field-helper-color);
   --calendar-year-color: var(--calendar-day-color);
   --calendar-year-current-color: var(--calendar-today-color);

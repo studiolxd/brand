@@ -4,7 +4,6 @@
 
 :root {
   --button-border-style: solid; /** Border style */
-  --button-border-color: rgba(0, 0, 0, 0); /** Default border color — overridden by variants */
   --button-justify-content: center; /** Justify content */
   --button-cursor: pointer; /** Cursor */
   --button-white-space: nowrap; /** White space */
@@ -50,14 +49,6 @@
   --button-primary-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
   --button-primary-disabled-color: var(--color-white); /** Text color when disabled — white on grey background */
   --button-primary-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
-  --button-destructive-border-style: var(--button-border-style); /** Border style */
-  --button-destructive-justify-content: var(--button-justify-content); /** Justify content */
-  --button-destructive-cursor: var(--button-cursor); /** Cursor */
-  --button-destructive-white-space: var(--button-white-space); /** White space */
-  --button-destructive-text-decoration: var(--button-text-decoration); /** Text decoration */
-  --button-destructive-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
-  --button-destructive-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
-  --button-destructive-bg: var(--color-white); /** Background */
   --button-outline-border-style: var(--button-border-style); /** Border style */
   --button-outline-justify-content: var(--button-justify-content); /** Justify content */
   --button-outline-cursor: var(--button-cursor); /** Cursor */
@@ -83,7 +74,6 @@
   --button-border-radius: var(--border-radius-default); /** Rectangular: el radio del sistema (0), como los campos */
   --button-border-width: var(--border-width-default); /** Border width */
   --button-font-weight: var(--font-weight-default); /** Font weight */
-  --button-disabled-bg: var(--color-disabled-bg-on-light); /** Background when disabled — only form button changes bg */
   --button-disabled-color: var(--color-disabled-text-on-light); /** Text color when disabled — light surface */
   --button-disabled-border: var(--color-disabled-text-on-light); /** Border color when disabled — light surface, matches text for contrast */
   --button-focus-ring-width: var(--border-width-focus); /** Focus ring width */
@@ -104,13 +94,6 @@
   --button-primary-active-bg: var(--color-accent-2); /** Active background */
   --button-primary-active-color: var(--color-primary); /** Active text color */
   --button-primary-active-border: var(--color-accent-2); /** Active border color */
-  --button-destructive-font-family: var(--button-font-family); /** Font family */
-  --button-destructive-font-size: var(--button-font-size); /** Font size */
-  --button-destructive-line-height: var(--button-line-height); /** Line height */
-  --button-destructive-transition-duration: var(--button-transition-duration); /** Transition duration */
-  --button-destructive-transition-easing: var(--button-transition-easing); /** Transition easing */
-  --button-destructive-padding-inline: var(--button-padding-inline); /** Inline (horizontal) padding */
-  --button-destructive-focus-ring-offset: var(--button-focus-ring-offset); /** Focus ring offset */
   --button-destructive-focus-ring-color: var(--color-destructive-text-on-light); /** Focus ring color */
   --button-destructive-color: var(--color-destructive-text-on-light); /** Text color */
   --button-destructive-border: var(--color-destructive-text-on-light); /** Border color */
@@ -163,12 +146,6 @@
   --button-primary-disabled-bg: var(--button-disabled-border); /** Background when disabled — filled with the disabled border color */
   --button-primary-disabled-border: var(--button-disabled-border); /** Border color when disabled */
   --button-primary-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
-  --button-destructive-border-radius: var(--button-border-radius); /** Border radius */
-  --button-destructive-border-width: var(--button-border-width); /** Border width */
-  --button-destructive-font-weight: var(--button-font-weight); /** Font weight */
-  --button-destructive-disabled-color: var(--button-disabled-color); /** Text color when disabled */
-  --button-destructive-disabled-border: var(--button-disabled-border); /** Border color when disabled */
-  --button-destructive-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
   --button-outline-border-radius: var(--button-border-radius); /** Border radius */
   --button-outline-border-width: var(--button-border-width); /** Border width */
   --button-outline-font-weight: var(--button-font-weight); /** Font weight */

@@ -57,11 +57,9 @@ $lxd-chart-tile-label-color-5: #ffffff; // Rótulo sobre la baldosa de la ranura
 $lxd-chart-tile-label-color-6: #000000; // Rótulo sobre la baldosa de la ranura 6
 $lxd-chart-tile-label-color-7: #ffffff; // Rótulo sobre la baldosa de la ranura 7 — la lavanda de gráfico es la más oscura de las ocho
 $lxd-chart-tile-label-color-8: #000000; // Rótulo sobre la baldosa de la ranura 8
-$lxd-chart-tile-label-color-muted: #ffffff; // Rótulo sobre la baldosa gris de «Otros» (pasada la octava ranura)
 $lxd-chart-padding-block: 0.5rem; // Aire vertical del área de dibujo
 $lxd-chart-padding-inline: 0.5rem; // Aire horizontal del área de dibujo
 $lxd-chart-axis-gap: 0.5rem; // Separación entre el eje y sus rótulos
-$lxd-chart-height: 16rem; // 256px — alto por defecto del área de dibujo. La banda del eje X va aparte: el contenedor crece con ella y nunca aparece un scroll anidado
 $lxd-chart-block-gap: 0.75rem; // Separación entre título, lienzo y leyenda
 $lxd-chart-legend-gap: 0.5rem; // Aire entre las piezas de la leyenda
 $lxd-chart-legend-swatch-size: 0.5rem; // 8px — lado de la muestra de color de la leyenda
