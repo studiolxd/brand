@@ -3,9 +3,6 @@
  */
 
 :root {
-  --file-upload-border-style: dashed; /** Estilo de borde del dropzone */
-  --file-upload-drag-border-style: solid; /** Estilo de borde en drag activo */
-  --file-upload-error-border-style: solid; /** Estilo de borde en error */
   --file-upload-disabled-opacity: 0.5; /** Opacidad cuando está deshabilitado */
   --file-upload-padding-inline: var(--spacing-5); /** Padding horizontal del dropzone */
   --file-upload-gap: var(--spacing-1); /** Espacio entre elementos dentro del dropzone */
@@ -40,7 +37,6 @@
   --file-upload-border-dash-gap: var(--spacing-2); /** Hueco entre trazos del borde discontinuo (antes 10px, fuera de la escala) */
   --file-upload-border-color: var(--color-primary); /** Borde del dropzone por defecto */
   --file-upload-border-width: var(--border-width-default); /** Grosor del borde */
-  --file-upload-border-radius: var(--border-radius-default); /** Radio de esquinas del dropzone */
   --file-upload-bg: var(--color-surface-secondary-on-light); /** Fondo del dropzone */
   --file-upload-text-color: var(--color-text-on-light); /** Color del texto principal */
   --file-upload-subtext-color: var(--color-text-muted-on-light); /** Color del texto secundario y restricciones */

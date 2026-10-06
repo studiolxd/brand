@@ -22,7 +22,6 @@
     },
 
     "error": {
-      "font-family":  { "$value": "{form.error.font-family}",  "$type": "string",    "$description": "Font family del mensaje de error" },
       "font-size":    { "$value": "{form.error.font-size}",    "$type": "dimension", "$description": "Font size del mensaje de error" },
       "font-weight":  { "$value": "{form.error.font-weight}",  "$type": "number",    "$description": "Font weight del mensaje de error" },
       "line-height":  { "$value": "{form.error.line-height}",  "$type": "number",    "$description": "Line height del mensaje de error" },

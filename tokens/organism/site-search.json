@@ -2,13 +2,11 @@
   "site-search": {
     "inline-size":         { "$value": "{input.width}", "$type": "string", "$description": "Anchura del buscador: la de su contenedor. Es la página de resultados entera, así que ocupa todo el hueco donde se monte — declarada y no heredada del flujo, para que tampoco se encoja dentro de una fila flex o una celda de retícula" },
     "gap":                 { "$value": "{spacing.5}", "$type": "dimension", "$description": "Aire entre los bloques del buscador: el formulario, el aviso de estado, los resultados y el pie" },
-    "block-gap":           { "$value": "{spacing.3}", "$type": "dimension", "$description": "Aire entre las líneas de un bloque de estado (reposo, escribiendo, carga)" },
 
     "status-font-size":    { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Cuerpo del aviso de estado: cuántos resultados hay, que se está buscando o que no hay nada" },
     "status-line-height":  { "$value": "{line-height.normal}",             "$type": "number",    "$description": "Interlineado del aviso de estado" },
     "status-color":        { "$value": "{color.text.muted-on-light}",      "$type": "color",     "$description": "Color del aviso de estado — atenuado: acompaña a los resultados, no compite con ellos" },
     "status-gap":          { "$value": "{spacing.2}",                      "$type": "dimension", "$description": "Aire entre el indicador de carga y su texto" },
-    "status-query-font-weight": { "$value": "{font-weight.emphasis}",      "$type": "number",    "$description": "Peso de la consulta dentro del aviso: lo único que cambia de una búsqueda a otra" },
 
     "results-gap":         { "$value": "{spacing.6}", "$type": "dimension", "$description": "Aire entre dos resultados (32px). Sin filete que los separe, es el aire el que dice dónde acaba uno y empieza el siguiente: tiene que ser claramente mayor que el que hay entre las líneas de un mismo resultado" },
 

@@ -4,7 +4,6 @@
 $lxd-button-border-radius: 0px; // Rectangular: el radio del sistema (0), como los campos
 $lxd-button-border-width: 1px; // Border width
 $lxd-button-border-style: solid; // Border style
-$lxd-button-border-color: rgba(0, 0, 0, 0); // Default border color — overridden by variants
 $lxd-button-justify-content: center; // Justify content
 $lxd-button-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
 $lxd-button-font-size: 1rem; // Font size
@@ -16,7 +15,6 @@ $lxd-button-text-decoration: none; // Text decoration
 $lxd-button-transition-duration: 150ms; // Transition duration
 $lxd-button-transition-easing: ease; // Transition easing
 $lxd-button-disabled-cursor: not-allowed; // Cursor when disabled
-$lxd-button-disabled-bg: #f2f2f2; // Background when disabled — only form button changes bg
 $lxd-button-disabled-color: #4a4a4a; // Text color when disabled — light surface
 $lxd-button-disabled-border: #4a4a4a; // Border color when disabled — light surface, matches text for contrast
 $lxd-button-height: 2.5rem; // Altura fija del botón (talla md): el contenido se centra, no se hace por padding
@@ -64,28 +62,7 @@ $lxd-button-primary-hover-border: #ffcd00; // Hover border color
 $lxd-button-primary-active-bg: #ffcd00; // Active background
 $lxd-button-primary-active-color: #111e30; // Active text color
 $lxd-button-primary-active-border: #ffcd00; // Active border color
-$lxd-button-destructive-border-radius: 0px; // Border radius
-$lxd-button-destructive-border-width: 1px; // Border width
-$lxd-button-destructive-border-style: solid; // Border style
-$lxd-button-destructive-justify-content: center; // Justify content
-$lxd-button-destructive-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$lxd-button-destructive-font-size: 1rem; // Font size
-$lxd-button-destructive-font-weight: 300; // Font weight
-$lxd-button-destructive-line-height: 1; // Line height
-$lxd-button-destructive-cursor: pointer; // Cursor
-$lxd-button-destructive-white-space: nowrap; // White space
-$lxd-button-destructive-text-decoration: none; // Text decoration
-$lxd-button-destructive-transition-duration: 150ms; // Transition duration
-$lxd-button-destructive-transition-easing: ease; // Transition easing
-$lxd-button-destructive-disabled-cursor: not-allowed; // Cursor when disabled
-$lxd-button-destructive-disabled-color: #4a4a4a; // Text color when disabled
-$lxd-button-destructive-disabled-border: #4a4a4a; // Border color when disabled
-$lxd-button-destructive-padding-inline: 2rem; // Inline (horizontal) padding
-$lxd-button-destructive-focus-ring-width: 2px; // Focus ring width
-$lxd-button-destructive-focus-ring-style: solid; // Focus ring border style
-$lxd-button-destructive-focus-ring-offset: 0.25rem; // Focus ring offset
 $lxd-button-destructive-focus-ring-color: #b30000; // Focus ring color
-$lxd-button-destructive-bg: #ffffff; // Background
 $lxd-button-destructive-color: #b30000; // Text color
 $lxd-button-destructive-border: #b30000; // Border color
 $lxd-button-destructive-hover-bg: #b30000; // Hover background

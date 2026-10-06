@@ -1,9 +1,7 @@
 {
   "file-upload": {
     "border-color":                { "$value": "{color.primary}",          "$type": "color",     "$description": "Borde del dropzone por defecto" },
-    "border-style":                { "$value": "dashed",                      "$type": "string",    "$description": "Estilo de borde del dropzone" },
     "border-width":                { "$value": "{border-width.default}",           "$type": "dimension", "$description": "Grosor del borde" },
-    "border-radius":               { "$value": "{border-radius.default}",          "$type": "dimension", "$description": "Radio de esquinas del dropzone" },
     "bg":                          { "$value": "{color.surface.secondary-on-light}", "$type": "color",     "$description": "Fondo del dropzone" },
     "padding-inline":              { "$value": "{spacing.5}",                 "$type": "dimension", "$description": "Padding horizontal del dropzone" },
     "gap":                         { "$value": "{spacing.1}",                 "$type": "dimension", "$description": "Espacio entre elementos dentro del dropzone" },
@@ -14,11 +12,9 @@
     "transition-easing":           { "$value": "{motion.easing.default}",     "$type": "string",    "$description": "Easing de transiciones" },
 
     "drag-border-color":           { "$value": "{color.primary}",             "$type": "color",     "$description": "Borde cuando hay drag activo" },
-    "drag-border-style":           { "$value": "solid",                       "$type": "string",    "$description": "Estilo de borde en drag activo" },
     "drag-bg":                     { "$value": "{color.white}",               "$type": "color",     "$description": "Fondo en drag activo" },
 
     "error-border-color":          { "$value": "{color.error-text-on-light}",      "$type": "color",     "$description": "Borde en estado de error" },
-    "error-border-style":          { "$value": "solid",                       "$type": "string",    "$description": "Estilo de borde en error" },
     "error-bg":                    { "$value": "{color.surface.secondary-on-light}", "$type": "color",     "$description": "Fondo en estado de error" },
 
     "disabled-opacity":            { "$value": "0.5",                         "$type": "number",    "$description": "Opacidad cuando está deshabilitado" },

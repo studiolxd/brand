@@ -18,7 +18,6 @@
   --switcher-field-label-font-size: var(--text-font-size); /** Es texto corriente: el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
   --switcher-field-label-line-height: var(--text-line-height); /** Interlineado */
   --switcher-field-label-letter-spacing: var(--text-letter-spacing); /** Interletraje */
-  --switcher-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
   --switcher-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --switcher-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --switcher-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */

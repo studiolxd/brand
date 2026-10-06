@@ -17,8 +17,6 @@ object BrandButtonTokens {
     val borderRadius: Dp = 0.dp
     /** Token `button.border-width` — Border width */
     val borderWidth: Dp = 1.dp
-    /** Token `button.border-color` — Default border color — overridden by variants */
-    val borderColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0x00000000), Color(0x00000000))
     /** Token `button.font-family` — Font family */
     val fontFamily: String = "Google Sans Flex"
     /** Token `button.font-size` — Font size */
@@ -31,8 +29,6 @@ object BrandButtonTokens {
     val transitionDuration: Int = 150
     /** Token `button.transition-easing` — Transition easing */
     val transitionEasing: Easing = CubicBezierEasing(0.25f, 0.1f, 0.25f, 1f)
-    /** Token `button.disabled-bg` — Background when disabled — only form button changes bg */
-    val disabledBg: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFF2F2F2), Color(0xFFF2F2F2))
     /** Token `button.disabled-color` — Text color when disabled — light surface */
     val disabledColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF4A4A4A), Color(0xFF4A4A4A))
     /** Token `button.disabled-border` — Border color when disabled — light surface, matches text for contrast */
@@ -109,36 +105,8 @@ object BrandButtonTokens {
     val primaryActiveColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFF111E30))
     /** Token `button.primary.active-border` — Active border color */
     val primaryActiveBorder: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFCD00), Color(0xFFFFCD00))
-    /** Token `button.destructive.border-radius` — Border radius */
-    val destructiveBorderRadius: Dp = 0.dp
-    /** Token `button.destructive.border-width` — Border width */
-    val destructiveBorderWidth: Dp = 1.dp
-    /** Token `button.destructive.font-family` — Font family */
-    val destructiveFontFamily: String = "Google Sans Flex"
-    /** Token `button.destructive.font-size` — Font size */
-    val destructiveFontSize: TextUnit = 16.sp
-    /** Token `button.destructive.font-weight` — Font weight */
-    val destructiveFontWeight: FontWeight = FontWeight(300)
-    /** Token `button.destructive.line-height` — Line height Factor sin unidad. */
-    val destructiveLineHeight: Float = 1f
-    /** Token `button.destructive.transition-duration` — Transition duration En milisegundos. */
-    val destructiveTransitionDuration: Int = 150
-    /** Token `button.destructive.transition-easing` — Transition easing */
-    val destructiveTransitionEasing: Easing = CubicBezierEasing(0.25f, 0.1f, 0.25f, 1f)
-    /** Token `button.destructive.disabled-color` — Text color when disabled */
-    val destructiveDisabledColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF4A4A4A), Color(0xFF4A4A4A))
-    /** Token `button.destructive.disabled-border` — Border color when disabled */
-    val destructiveDisabledBorder: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF4A4A4A), Color(0xFF4A4A4A))
-    /** Token `button.destructive.padding-inline` — Inline (horizontal) padding */
-    val destructivePaddingInline: Dp = 32.dp
-    /** Token `button.destructive.focus-ring-width` — Focus ring width */
-    val destructiveFocusRingWidth: Dp = 2.dp
-    /** Token `button.destructive.focus-ring-offset` — Focus ring offset */
-    val destructiveFocusRingOffset: Dp = 4.dp
     /** Token `button.destructive.focus-ring-color` — Focus ring color */
     val destructiveFocusRingColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFB30000), Color(0xFFFF8585))
-    /** Token `button.destructive.bg` — Background */
-    val destructiveBg: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFFFFF), Color(0xFFFFFFFF))
     /** Token `button.destructive.color` — Text color */
     val destructiveColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFB30000), Color(0xFFFF8585))
     /** Token `button.destructive.border` — Border color */
@@ -339,10 +307,6 @@ object BrandControlTokens {
     val fontWeight: FontWeight = FontWeight(300)
     /** Token `control.line-height` — Interlineado Factor sin unidad. */
     val lineHeight: Float = 1f
-    /** Token `control.transition-duration` — Duración de la transición En milisegundos. */
-    val transitionDuration: Int = 150
-    /** Token `control.transition-easing` — Curva de animación */
-    val transitionEasing: Easing = CubicBezierEasing(0.25f, 0.1f, 0.25f, 1f)
     /** Token `control.focus-ring-width` — Grosor del anillo de foco */
     val focusRingWidth: Dp = 2.dp
     /** Token `control.focus-ring-inset-offset` — Separación entre borde y anillo de foco */
@@ -461,8 +425,6 @@ object BrandInputFieldTokens {
     val searchInputPaddingInlineStart: Dp = 40.dp
     /** Token `input-field.search.input-padding-inline-end` — Padding derecho del campo cuando ofrece borrado — el texto termina donde empieza el aspa */
     val searchInputPaddingInlineEnd: Dp = 40.dp
-    /** Token `input-field.error.font-family` — Font family del mensaje de error */
-    val errorFontFamily: String = "Google Sans Flex"
     /** Token `input-field.error.font-size` — Font size del mensaje de error */
     val errorFontSize: TextUnit = 14.sp
     /** Token `input-field.error.font-weight` — Font weight del mensaje de error */
@@ -643,16 +605,6 @@ object BrandNumberInputTokens {
 object BrandNumberInputFieldTokens {
     /** Token `number-input-field.gap` — Espacio entre label, input, helper y error */
     val gap: Dp = 8.dp
-    /** Token `number-input-field.error.font-family` — Font family del mensaje de error */
-    val errorFontFamily: String = "Google Sans Flex"
-    /** Token `number-input-field.error.font-size` — Font size del mensaje de error */
-    val errorFontSize: TextUnit = 14.sp
-    /** Token `number-input-field.error.font-weight` — Font weight del mensaje de error */
-    val errorFontWeight: FontWeight = FontWeight(300)
-    /** Token `number-input-field.error.line-height` — Line height del mensaje de error Factor sin unidad. */
-    val errorLineHeight: Float = 1.5f
-    /** Token `number-input-field.error.color` — Color del mensaje de error */
-    val errorColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFB30000), Color(0xFFFF8585))
     /** Token `number-input-field.helper.font-family` — Font family del texto de ayuda */
     val helperFontFamily: String = "Google Sans Flex"
     /** Token `number-input-field.helper.font-size` — Font size del texto de ayuda */
@@ -745,16 +697,6 @@ object BrandSelectTokens {
 object BrandSelectFieldTokens {
     /** Token `select-field.gap` — Espacio entre label, select, helper y error */
     val gap: Dp = 8.dp
-    /** Token `select-field.error.font-family` — Font family del mensaje de error */
-    val errorFontFamily: String = "Google Sans Flex"
-    /** Token `select-field.error.font-size` — Font size del mensaje de error */
-    val errorFontSize: TextUnit = 14.sp
-    /** Token `select-field.error.font-weight` — Font weight del mensaje de error */
-    val errorFontWeight: FontWeight = FontWeight(300)
-    /** Token `select-field.error.line-height` — Line height del mensaje de error Factor sin unidad. */
-    val errorLineHeight: Float = 1.5f
-    /** Token `select-field.error.color` — Color del mensaje de error */
-    val errorColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFB30000), Color(0xFFFF8585))
     /** Token `select-field.helper.font-family` — Font family del texto de ayuda */
     val helperFontFamily: String = "Google Sans Flex"
     /** Token `select-field.helper.font-size` — Font size del texto de ayuda */
@@ -823,16 +765,6 @@ object BrandDropdownFieldTokens {
     val focusRingColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
     /** Token `dropdown-field.error-border-color` — Borde en error: el mismo que el del Select */
     val errorBorderColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFB30000), Color(0xFFFF8585))
-    /** Token `dropdown-field.error.font-family` — Font family del mensaje de error */
-    val errorFontFamily: String = "Google Sans Flex"
-    /** Token `dropdown-field.error.font-size` — Font size del mensaje de error */
-    val errorFontSize: TextUnit = 14.sp
-    /** Token `dropdown-field.error.font-weight` — Font weight del mensaje de error */
-    val errorFontWeight: FontWeight = FontWeight(300)
-    /** Token `dropdown-field.error.line-height` — Line height del mensaje de error Factor sin unidad. */
-    val errorLineHeight: Float = 1.5f
-    /** Token `dropdown-field.error.color` — Color del mensaje de error */
-    val errorColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFB30000), Color(0xFFFF8585))
     /** Token `dropdown-field.helper.font-family` — Font family del texto de ayuda */
     val helperFontFamily: String = "Google Sans Flex"
     /** Token `dropdown-field.helper.font-size` — Font size del texto de ayuda */
@@ -977,8 +909,6 @@ object BrandSwitcherFieldTokens {
     val labelColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
     /** Token `switcher-field.label.letter-spacing` — Interletraje Fracción del tamaño de fuente del propio componente (em). */
     val labelLetterSpacing: Float = 0f
-    /** Token `switcher-field.error.font-family` — Font family del mensaje de error */
-    val errorFontFamily: String = "Google Sans Flex"
     /** Token `switcher-field.error.font-size` — Font size del mensaje de error */
     val errorFontSize: TextUnit = 14.sp
     /** Token `switcher-field.error.font-weight` — Font weight del mensaje de error */
@@ -2085,16 +2015,6 @@ object BrandDatePickerTokens {
 object BrandDatePickerFieldTokens {
     /** Token `date-picker-field.gap` — Espacio entre label, trigger, helper y error */
     val gap: Dp = 8.dp
-    /** Token `date-picker-field.error.font-family` — Font family del mensaje de error */
-    val errorFontFamily: String = "Google Sans Flex"
-    /** Token `date-picker-field.error.font-size` — Font size del mensaje de error */
-    val errorFontSize: TextUnit = 14.sp
-    /** Token `date-picker-field.error.font-weight` — Font weight del mensaje de error */
-    val errorFontWeight: FontWeight = FontWeight(300)
-    /** Token `date-picker-field.error.line-height` — Line height del mensaje de error Factor sin unidad. */
-    val errorLineHeight: Float = 1.5f
-    /** Token `date-picker-field.error.color` — Color del mensaje de error */
-    val errorColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFB30000), Color(0xFFFF8585))
     /** Token `date-picker-field.helper.font-family` — Font family del texto de ayuda */
     val helperFontFamily: String = "Google Sans Flex"
     /** Token `date-picker-field.helper.font-size` — Font size del texto de ayuda */

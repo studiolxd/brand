@@ -8,8 +8,6 @@ public enum BrandButtonTokens {
     public static let borderRadius: CGFloat = 0
     /// Token `button.border-width` — Border width
     public static let borderWidth: CGFloat = 1
-    /// Token `button.border-color` — Default border color — overridden by variants
-    public static let borderColor: Color = Color(brandHex: 0x000000, opacity: 0)
     /// Token `button.font-family` — Font family
     public static let fontFamily: String = "Google Sans Flex"
     /// Token `button.font-size` — Font size
@@ -22,8 +20,6 @@ public enum BrandButtonTokens {
     public static let transitionDuration: TimeInterval = 0.15
     /// Token `button.transition-easing` — Transition easing
     public static let transitionEasing: BrandCubicBezier = BrandCubicBezier(0.25, 0.1, 0.25, 1)
-    /// Token `button.disabled-bg` — Background when disabled — only form button changes bg
-    public static let disabledBg: Color = Color(brandHex: 0xF2F2F2)
     /// Token `button.disabled-color` — Text color when disabled — light surface
     public static let disabledColor: Color = Color(brandHex: 0x4A4A4A)
     /// Token `button.disabled-border` — Border color when disabled — light surface, matches text for contrast
@@ -100,36 +96,8 @@ public enum BrandButtonTokens {
     public static let primaryActiveColor: Color = Color(brandHex: 0x111E30)
     /// Token `button.primary.active-border` — Active border color
     public static let primaryActiveBorder: Color = Color(brandHex: 0xFFCD00)
-    /// Token `button.destructive.border-radius` — Border radius
-    public static let destructiveBorderRadius: CGFloat = 0
-    /// Token `button.destructive.border-width` — Border width
-    public static let destructiveBorderWidth: CGFloat = 1
-    /// Token `button.destructive.font-family` — Font family
-    public static let destructiveFontFamily: String = "Google Sans Flex"
-    /// Token `button.destructive.font-size` — Font size
-    public static let destructiveFontSize: CGFloat = 16
-    /// Token `button.destructive.font-weight` — Font weight
-    public static let destructiveFontWeight: Int = 300
-    /// Token `button.destructive.line-height` — Line height
-    public static let destructiveLineHeight: CGFloat = 1
-    /// Token `button.destructive.transition-duration` — Transition duration
-    public static let destructiveTransitionDuration: TimeInterval = 0.15
-    /// Token `button.destructive.transition-easing` — Transition easing
-    public static let destructiveTransitionEasing: BrandCubicBezier = BrandCubicBezier(0.25, 0.1, 0.25, 1)
-    /// Token `button.destructive.disabled-color` — Text color when disabled
-    public static let destructiveDisabledColor: Color = Color(brandHex: 0x4A4A4A)
-    /// Token `button.destructive.disabled-border` — Border color when disabled
-    public static let destructiveDisabledBorder: Color = Color(brandHex: 0x4A4A4A)
-    /// Token `button.destructive.padding-inline` — Inline (horizontal) padding
-    public static let destructivePaddingInline: CGFloat = 32
-    /// Token `button.destructive.focus-ring-width` — Focus ring width
-    public static let destructiveFocusRingWidth: CGFloat = 2
-    /// Token `button.destructive.focus-ring-offset` — Focus ring offset
-    public static let destructiveFocusRingOffset: CGFloat = 4
     /// Token `button.destructive.focus-ring-color` — Focus ring color
     public static let destructiveFocusRingColor: Color = Color(brandLight: Color(brandHex: 0xB30000), dark: Color(brandHex: 0xFF8585))
-    /// Token `button.destructive.bg` — Background
-    public static let destructiveBg: Color = Color(brandHex: 0xFFFFFF)
     /// Token `button.destructive.color` — Text color
     public static let destructiveColor: Color = Color(brandLight: Color(brandHex: 0xB30000), dark: Color(brandHex: 0xFF8585))
     /// Token `button.destructive.border` — Border color
@@ -330,10 +298,6 @@ public enum BrandControlTokens {
     public static let fontWeight: Int = 300
     /// Token `control.line-height` — Interlineado
     public static let lineHeight: CGFloat = 1
-    /// Token `control.transition-duration` — Duración de la transición
-    public static let transitionDuration: TimeInterval = 0.15
-    /// Token `control.transition-easing` — Curva de animación
-    public static let transitionEasing: BrandCubicBezier = BrandCubicBezier(0.25, 0.1, 0.25, 1)
     /// Token `control.focus-ring-width` — Grosor del anillo de foco
     public static let focusRingWidth: CGFloat = 2
     /// Token `control.focus-ring-inset-offset` — Separación entre borde y anillo de foco
@@ -452,8 +416,6 @@ public enum BrandInputFieldTokens {
     public static let searchInputPaddingInlineStart: CGFloat = 40
     /// Token `input-field.search.input-padding-inline-end` — Padding derecho del campo cuando ofrece borrado — el texto termina donde empieza el aspa
     public static let searchInputPaddingInlineEnd: CGFloat = 40
-    /// Token `input-field.error.font-family` — Font family del mensaje de error
-    public static let errorFontFamily: String = "Google Sans Flex"
     /// Token `input-field.error.font-size` — Font size del mensaje de error
     public static let errorFontSize: CGFloat = 14
     /// Token `input-field.error.font-weight` — Font weight del mensaje de error
@@ -634,16 +596,6 @@ public enum BrandNumberInputTokens {
 public enum BrandNumberInputFieldTokens {
     /// Token `number-input-field.gap` — Espacio entre label, input, helper y error
     public static let gap: CGFloat = 8
-    /// Token `number-input-field.error.font-family` — Font family del mensaje de error
-    public static let errorFontFamily: String = "Google Sans Flex"
-    /// Token `number-input-field.error.font-size` — Font size del mensaje de error
-    public static let errorFontSize: CGFloat = 14
-    /// Token `number-input-field.error.font-weight` — Font weight del mensaje de error
-    public static let errorFontWeight: Int = 300
-    /// Token `number-input-field.error.line-height` — Line height del mensaje de error
-    public static let errorLineHeight: CGFloat = 1.5
-    /// Token `number-input-field.error.color` — Color del mensaje de error
-    public static let errorColor: Color = Color(brandLight: Color(brandHex: 0xB30000), dark: Color(brandHex: 0xFF8585))
     /// Token `number-input-field.helper.font-family` — Font family del texto de ayuda
     public static let helperFontFamily: String = "Google Sans Flex"
     /// Token `number-input-field.helper.font-size` — Font size del texto de ayuda
@@ -736,16 +688,6 @@ public enum BrandSelectTokens {
 public enum BrandSelectFieldTokens {
     /// Token `select-field.gap` — Espacio entre label, select, helper y error
     public static let gap: CGFloat = 8
-    /// Token `select-field.error.font-family` — Font family del mensaje de error
-    public static let errorFontFamily: String = "Google Sans Flex"
-    /// Token `select-field.error.font-size` — Font size del mensaje de error
-    public static let errorFontSize: CGFloat = 14
-    /// Token `select-field.error.font-weight` — Font weight del mensaje de error
-    public static let errorFontWeight: Int = 300
-    /// Token `select-field.error.line-height` — Line height del mensaje de error
-    public static let errorLineHeight: CGFloat = 1.5
-    /// Token `select-field.error.color` — Color del mensaje de error
-    public static let errorColor: Color = Color(brandLight: Color(brandHex: 0xB30000), dark: Color(brandHex: 0xFF8585))
     /// Token `select-field.helper.font-family` — Font family del texto de ayuda
     public static let helperFontFamily: String = "Google Sans Flex"
     /// Token `select-field.helper.font-size` — Font size del texto de ayuda
@@ -814,16 +756,6 @@ public enum BrandDropdownFieldTokens {
     public static let focusRingColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
     /// Token `dropdown-field.error-border-color` — Borde en error: el mismo que el del Select
     public static let errorBorderColor: Color = Color(brandLight: Color(brandHex: 0xB30000), dark: Color(brandHex: 0xFF8585))
-    /// Token `dropdown-field.error.font-family` — Font family del mensaje de error
-    public static let errorFontFamily: String = "Google Sans Flex"
-    /// Token `dropdown-field.error.font-size` — Font size del mensaje de error
-    public static let errorFontSize: CGFloat = 14
-    /// Token `dropdown-field.error.font-weight` — Font weight del mensaje de error
-    public static let errorFontWeight: Int = 300
-    /// Token `dropdown-field.error.line-height` — Line height del mensaje de error
-    public static let errorLineHeight: CGFloat = 1.5
-    /// Token `dropdown-field.error.color` — Color del mensaje de error
-    public static let errorColor: Color = Color(brandLight: Color(brandHex: 0xB30000), dark: Color(brandHex: 0xFF8585))
     /// Token `dropdown-field.helper.font-family` — Font family del texto de ayuda
     public static let helperFontFamily: String = "Google Sans Flex"
     /// Token `dropdown-field.helper.font-size` — Font size del texto de ayuda
@@ -968,8 +900,6 @@ public enum BrandSwitcherFieldTokens {
     public static let labelColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
     /// Token `switcher-field.label.letter-spacing` — Interletraje Fracción del tamaño de fuente del propio componente (em).
     public static let labelLetterSpacing: CGFloat = 0
-    /// Token `switcher-field.error.font-family` — Font family del mensaje de error
-    public static let errorFontFamily: String = "Google Sans Flex"
     /// Token `switcher-field.error.font-size` — Font size del mensaje de error
     public static let errorFontSize: CGFloat = 14
     /// Token `switcher-field.error.font-weight` — Font weight del mensaje de error
@@ -2076,16 +2006,6 @@ public enum BrandDatePickerTokens {
 public enum BrandDatePickerFieldTokens {
     /// Token `date-picker-field.gap` — Espacio entre label, trigger, helper y error
     public static let gap: CGFloat = 8
-    /// Token `date-picker-field.error.font-family` — Font family del mensaje de error
-    public static let errorFontFamily: String = "Google Sans Flex"
-    /// Token `date-picker-field.error.font-size` — Font size del mensaje de error
-    public static let errorFontSize: CGFloat = 14
-    /// Token `date-picker-field.error.font-weight` — Font weight del mensaje de error
-    public static let errorFontWeight: Int = 300
-    /// Token `date-picker-field.error.line-height` — Line height del mensaje de error
-    public static let errorLineHeight: CGFloat = 1.5
-    /// Token `date-picker-field.error.color` — Color del mensaje de error
-    public static let errorColor: Color = Color(brandLight: Color(brandHex: 0xB30000), dark: Color(brandHex: 0xFF8585))
     /// Token `date-picker-field.helper.font-family` — Font family del texto de ayuda
     public static let helperFontFamily: String = "Google Sans Flex"
     /// Token `date-picker-field.helper.font-size` — Font size del texto de ayuda

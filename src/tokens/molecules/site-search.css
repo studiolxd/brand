@@ -8,7 +8,6 @@
   --site-search-ghost-url-inline-size: 45%; /** Ancho de la barra fantasma de la dirección */
   --site-search-inline-size: var(--input-width); /** Anchura del buscador: la de su contenedor. Es la página de resultados entera, así que ocupa todo el hueco donde se monte — declarada y no heredada del flujo, para que tampoco se encoja dentro de una fila flex o una celda de retícula */
   --site-search-gap: var(--spacing-5); /** Aire entre los bloques del buscador: el formulario, el aviso de estado, los resultados y el pie */
-  --site-search-block-gap: var(--spacing-3); /** Aire entre las líneas de un bloque de estado (reposo, escribiendo, carga) */
   --site-search-status-line-height: var(--line-height-normal); /** Interlineado del aviso de estado */
   --site-search-status-gap: var(--spacing-2); /** Aire entre el indicador de carga y su texto */
   --site-search-results-gap: var(--spacing-6); /** Aire entre dos resultados (32px). Sin filete que los separe, es el aire el que dice dónde acaba uno y empieza el siguiente: tiene que ser claramente mayor que el que hay entre las líneas de un mismo resultado */
@@ -20,7 +19,6 @@
   --site-search-skeleton-gap: var(--spacing-2); /** Aire entre las barras de un resultado fantasma */
   --site-search-status-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del aviso de estado: cuántos resultados hay, que se está buscando o que no hay nada */
   --site-search-status-color: var(--color-text-muted-on-light); /** Color del aviso de estado — atenuado: acompaña a los resultados, no compite con ellos */
-  --site-search-status-query-font-weight: var(--font-weight-emphasis); /** Peso de la consulta dentro del aviso: lo único que cambia de una búsqueda a otra */
   --site-search-result-title-font-size: var(--text-paragraph-large-font-size); /** Cuerpo del título del resultado: un peldaño por encima del cuerpo de la superficie, para que siga mandando ahora que el extracto y la dirección leen al cuerpo entero */
   --site-search-result-title-font-weight: var(--font-weight-emphasis); /** Peso del título del resultado */
   --site-search-result-title-color: var(--color-text-on-light); /** Color del título del resultado */

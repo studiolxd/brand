@@ -818,8 +818,8 @@ console.log('✔︎ src/tokens/surface-dark-derived.css');
    * importados uno detrás del otro. Fundirlos no cambia la cascada —cada
    * selector de una lista conserva su propia especificidad, y entre las dos
    * posiciones no había ninguna otra regla—, y ahorra repetir ~770
-   * declaraciones. `surface-light.css` se sigue generando, vacío, para que la
-   * ruta publicada no desaparezca.
+   * declaraciones. El antiguo `surface-light.css`, que se quedó vacío al
+   * fundirse los bloques, se retiró en el major siguiente.
    * ---------------------------------------------------------------------- */
   const lightSelectors = DARK_SELECTORS.map((selector) => `${selector} .surface-light`);
 
@@ -843,19 +843,6 @@ console.log('✔︎ src/tokens/surface-dark-derived.css');
   ];
   writeFileSync('src/tokens/surface-invert.css', invertLines.join('\n'));
   console.log('✔︎ src/tokens/surface-invert.css');
-
-  const lightLines = [
-    '/**',
-    ' * Do not edit directly, this file was auto-generated.',
-    ' *',
-    ' * Vacío a propósito: el bloque de `.surface-light` va fundido con el de',
-    ' * `.surface-invert` en `surface-invert.css` (mismos tokens, mismos valores).',
-    ' * El fichero se conserva para que la ruta publicada no desaparezca.',
-    ' */',
-    '',
-  ];
-  writeFileSync('src/tokens/surface-light.css', lightLines.join('\n'));
-  console.log('✔︎ src/tokens/surface-light.css');
 }
 
 /* En la superficie pública la talla de partida de un control es `lg`.
