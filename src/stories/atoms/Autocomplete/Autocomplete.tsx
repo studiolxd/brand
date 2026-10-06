@@ -1,11 +1,11 @@
 'use client';
 
-import { forwardRef, useState, useRef, useId, useEffect, useCallback } from 'react';
-import { Popover as BasePopover } from '@base-ui/react/popover';
+import { forwardRef, useState } from 'react';
+import { Autocomplete as BaseAutocomplete } from '@base-ui/react/autocomplete';
 import { Spinner } from '../Spinner/Spinner';
+import { useAsyncOptions } from '../_shared/useAsyncOptions';
 import './Autocomplete.css';
 import { usePortalContainer } from '../../constants/portal-container';
-import { assignRef } from '../../constants/assign-ref';
 
 export interface AutocompleteOption {
   /** Identifica la sugerencia: es lo que recibe `onSelect` para saber cuál se eligió. */
@@ -80,7 +80,7 @@ export interface AutocompleteProps {
    * `Portal.container`). Mismo contrato que `AsyncSelect`: por defecto, el nodo
    * de la superficie que llegue por contexto, o `document.body`.
    */
-  container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
+  container?: React.ComponentPropsWithoutRef<typeof BaseAutocomplete.Portal>['container'];
 }
 
 /** Minúsculas y sin tildes: «cafe» encuentra «Café». */
@@ -88,11 +88,17 @@ function normalize(text: string): string {
   return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }
 
+const noSearch = (): AutocompleteOption[] => [];
+
 /**
- * Campo de texto con sugerencias. A diferencia de `AsyncSelect`, **no obliga a
- * elegir**: el valor es el texto escrito y una sugerencia es solo una forma de
- * escribirlo más deprisa. Patrón ARIA de combobox con lista (`aria-activedescendant`):
- * el foco no sale nunca del `<input>`. El `ref` va a ese `<input>`.
+ * Campo de texto con sugerencias, sobre el `Autocomplete` de Base UI. A
+ * diferencia de `AsyncSelect`, **no obliga a elegir**: el valor es el texto
+ * escrito y una sugerencia es solo una forma de escribirlo más deprisa. El
+ * teclado, el foco virtual (`aria-activedescendant`: el foco no sale nunca del
+ * `<input>`), los anuncios y el cierre son de Base UI; el componente decide qué
+ * sugerencias hay —filtrando `options` o pidiéndolas a `onSearch` con rebote
+ * (`useAsyncOptions`)— y cuándo merece la pena abrir la lista. El `ref` va al
+ * `<input>`.
  */
 export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(function Autocomplete({
   value,
@@ -119,70 +125,30 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(func
   container,
 }: AutocompleteProps, ref) {
   const portalContainer = usePortalContainer(container);
+  const remote = useAsyncOptions(onSearch ?? noSearch, debounceMs);
   const [internalValue, setInternalValue] = useState(defaultValue);
   const [wantsOpen, setWantsOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState<AutocompleteOption[]>([]);
-  const [activeIndex, setActiveIndex] = useState(-1);
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  // Cada búsqueda lleva número: solo la última manda.
-  const requestRef = useRef(0);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const anchorRef = useRef<HTMLDivElement>(null);
-  const listboxId = useId();
-  const itemIdPrefix = useId();
+  // Lo último que se pidió sugerir: con `options`, el filtro se calcula de ahí.
+  const [query, setQuery] = useState('');
 
   const text = value !== undefined ? value : internalValue;
+  const results: AutocompleteOption[] = onSearch
+    ? remote.results
+    : (options ?? []).filter(o => normalize(o.label).includes(normalize(query)));
   // Sin sugerencias no hay lista: no hay «sin resultados» que decir, porque
   // quedarse con lo escrito es una respuesta válida.
   const open = wantsOpen && results.length > 0;
-  const itemId = (i: number) => `${itemIdPrefix}-opt-${i}`;
 
-  const suggest = useCallback((query: string) => {
-    const requestId = ++requestRef.current;
-    if (onSearch) {
-      setLoading(true);
-      Promise.resolve()
-        .then(() => onSearch(query))
-        .then(
-          (opts) => opts,
-          () => [] as AutocompleteOption[],
-        )
-        .then((opts) => {
-          if (requestId !== requestRef.current) return;
-          setResults(opts);
-          setActiveIndex(-1);
-          setLoading(false);
-        });
-      return;
-    }
-    const needle = normalize(query);
-    setResults((options ?? []).filter(o => normalize(o.label).includes(needle)));
-    setActiveIndex(-1);
-  }, [onSearch, options]);
-
-  // Al desmontar: se cancela el rebote pendiente y se invalida la búsqueda en vuelo.
-  useEffect(() => () => {
-    requestRef.current += 1;
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-  }, []);
-
-  function schedule(query: string) {
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    if (onSearch && debounceMs > 0) {
-      debounceRef.current = setTimeout(() => suggest(query), debounceMs);
-    } else {
-      suggest(query);
-    }
+  function suggest(next: string) {
+    setWantsOpen(true);
+    setQuery(next);
+    if (onSearch) remote.schedule(next);
   }
 
   function close() {
-    if (debounceRef.current) clearTimeout(debounceRef.current);
     // Lo que venga de una búsqueda en vuelo ya no interesa.
-    requestRef.current += 1;
-    setLoading(false);
+    remote.cancel();
     setWantsOpen(false);
-    setActiveIndex(-1);
   }
 
   function setText(next: string) {
@@ -190,69 +156,41 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(func
     onValueChange?.(next);
   }
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const next = e.target.value;
-    setText(next);
-    if (next.length < minChars) {
-      close();
-      return;
-    }
-    setWantsOpen(true);
-    schedule(next);
-  }
-
   function pick(option: AutocompleteOption) {
-    setText(option.label);
     onSelect?.(option);
     close();
-    setResults([]);
+    remote.clear();
   }
 
-  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (disabled || readOnly) return;
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      if (!open) {
-        setWantsOpen(true);
-        schedule(text);
-      } else {
-        setActiveIndex(i => Math.min(i + 1, results.length - 1));
-      }
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      if (open) setActiveIndex(i => Math.max(i - 1, -1));
-    } else if (e.key === 'Enter') {
-      if (open && activeIndex >= 0 && results[activeIndex]) {
-        e.preventDefault();
-        pick(results[activeIndex]);
-      } else if (open) {
-        // Sin sugerencia marcada, Enter se queda con lo escrito: cierra la
-        // lista y deja que el formulario, si lo hay, se envíe.
-        close();
-      }
-    } else if (e.key === 'Escape') {
-      if (open) {
-        // Cierra la lista y no un diálogo que la contenga.
-        e.preventDefault();
-        e.stopPropagation();
-        close();
-      }
-    } else if (e.key === 'Tab') {
-      close();
+  function handleValueChange(next: string, details: BaseAutocomplete.Root.ChangeEventDetails) {
+    if (details.reason === 'item-press') {
+      // Elegir rellena el texto; cuál se eligió lo avisa el `onClick` del ítem.
+      setText(next);
+      return;
     }
+    if (details.reason !== 'input-change') return;
+    setText(next);
+    if (next.length < minChars) close();
+    else suggest(next);
   }
 
   /**
-   * Base UI notifica los cierres (Escape, click fuera). El click que nace en el
-   * propio campo no cuenta como «fuera»: sin `Trigger`, el input lo sería.
+   * Base UI pide abrir (flecha abajo, aunque no se llegue a `minChars`) y
+   * cerrar (Escape, Tab, clic fuera, Intro sin sugerencia marcada). Abrir
+   * pide sugerencias para lo escrito; la lista solo aparece si las hay.
    */
-  function handleOpenChange(next: boolean, details: BasePopover.Root.ChangeEventDetails) {
-    if (next) return;
-    if (details.reason === 'outside-press') {
-      const target = details.event?.target;
-      if (target instanceof Node && anchorRef.current?.contains(target)) return;
+  function handleOpenChange(next: boolean, details: BaseAutocomplete.Root.ChangeEventDetails) {
+    if (!next) {
+      close();
+      return;
     }
-    close();
+    if (details.reason !== 'input-change') suggest(text);
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement> & { preventBaseUIHandler?: () => void }) {
+    // Sin lista, Escape no borra lo escrito (lo que haría Base UI): sube tal
+    // cual, para que cierre el diálogo que contenga al campo.
+    if (e.key === 'Escape' && !open) e.preventBaseUIHandler?.();
   }
 
   const rootClass = [
@@ -269,74 +207,60 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(func
   ].filter(Boolean).join(' ');
 
   return (
-    <BasePopover.Root open={open} onOpenChange={handleOpenChange}>
-      <div ref={anchorRef} className={rootClass} data-popup-open={open || undefined}>
-        <input
-          ref={(node) => { inputRef.current = node; assignRef(ref, node); }}
+    <BaseAutocomplete.Root
+      items={results}
+      // Las sugerencias ya llegan filtradas (por `options` o por `onSearch`).
+      filter={null}
+      value={text}
+      onValueChange={handleValueChange}
+      open={open}
+      onOpenChange={handleOpenChange}
+      disabled={disabled}
+      readOnly={readOnly}
+    >
+      <BaseAutocomplete.InputGroup className={rootClass}>
+        <BaseAutocomplete.Input
+          ref={ref}
           id={id}
           name={name}
-          type="text"
           className="autocomplete__input"
-          value={text}
-          onChange={handleChange}
-          onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          disabled={disabled}
-          readOnly={readOnly}
           required={required}
           maxLength={maxLength}
           aria-label={ariaLabel}
           aria-describedby={ariaDescribedby}
           aria-invalid={error || undefined}
-          aria-expanded={open}
-          aria-haspopup="listbox"
-          // El listbox vive en un portal que solo existe abierto: cerrado, un
-          // `aria-controls` a un id inexistente es una referencia rota.
-          aria-controls={open ? listboxId : undefined}
-          aria-activedescendant={open && activeIndex >= 0 ? itemId(activeIndex) : undefined}
-          autoComplete="off"
-          role="combobox"
-          aria-autocomplete="list"
+          onKeyDown={handleKeyDown}
           onBlur={onBlur}
         />
-        {loading && <Spinner size="sm" aria-hidden />}
-      </div>
+        {remote.loading && <Spinner size="sm" aria-hidden />}
+      </BaseAutocomplete.InputGroup>
 
-      <BasePopover.Portal container={portalContainer}>
-        <BasePopover.Positioner
-          className="autocomplete__positioner"
-          anchor={anchorRef}
-          align="start"
-          sideOffset={-1}
-        >
-          <BasePopover.Popup className={contentClass} initialFocus={false} finalFocus={false}>
-            <div role="listbox" aria-label={ariaLabel ?? placeholder} id={listboxId}>
-              {results.map((option, index) => {
-                const isSelected = option.label === text;
-                const isActive = activeIndex === index;
-                return (
-                  <div
-                    key={option.value}
-                    id={itemId(index)}
-                    role="option"
-                    aria-selected={isActive}
-                    className={[
-                      'autocomplete__item',
-                      isSelected ? 'autocomplete__item--selected' : '',
-                      isActive ? 'autocomplete__item--active' : '',
-                    ].filter(Boolean).join(' ')}
-                    // El foco se queda en el campo: el puntero no se lo quita.
-                    onPointerDown={e => e.preventDefault()}
-                    onClick={() => pick(option)}
-                  >
-                    {option.label}
-                  </div>
-                );
-              })}
-            </div>
-          </BasePopover.Popup>
-        </BasePopover.Positioner>
-      </BasePopover.Portal>
-    </BasePopover.Root>
+      <BaseAutocomplete.Portal container={portalContainer}>
+        <BaseAutocomplete.Positioner className="autocomplete__positioner" align="start" sideOffset={-1}>
+          <BaseAutocomplete.Popup className={contentClass}>
+            <BaseAutocomplete.List aria-label={ariaLabel ?? placeholder}>
+              {(option: AutocompleteOption) => (
+                <BaseAutocomplete.Item
+                  key={option.value}
+                  value={option}
+                  className={[
+                    'autocomplete__item',
+                    option.label === text ? 'autocomplete__item--selected' : '',
+                  ].filter(Boolean).join(' ')}
+                  onClick={() => pick(option)}
+                  // Base UI no marca la sugerencia activa con `aria-selected` en
+                  // un autocompletado (no hay selección que guardar); el patrón
+                  // de lista con `aria-activedescendant` de la APG sí lo pide.
+                  render={(props, state) => <div {...props} aria-selected={state.highlighted} />}
+                >
+                  {option.label}
+                </BaseAutocomplete.Item>
+              )}
+            </BaseAutocomplete.List>
+          </BaseAutocomplete.Popup>
+        </BaseAutocomplete.Positioner>
+      </BaseAutocomplete.Portal>
+    </BaseAutocomplete.Root>
   );
 });

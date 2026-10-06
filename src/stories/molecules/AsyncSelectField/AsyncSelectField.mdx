@@ -75,7 +75,7 @@ El contrato es `value` / `onValueChange` + `name` + `ref` al input de búsqueda.
 - La etiqueta va enlazada por `htmlFor`/`id` al input de búsqueda (`role="combobox"`).
 - Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
 - El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
-- La opción activa se sigue con `aria-activedescendant`: el foco no se mueve de la caja de texto.
+- El control es el `Combobox` de Base UI: la opción activa se sigue con `aria-activedescendant` y el foco no se mueve de la caja de texto (ver la doc de `AsyncSelect`).
 - Los textos del control son props traducibles (`emptyMessage`, `loadingLabel`, `clearLabel`).
 
 ## Tokens

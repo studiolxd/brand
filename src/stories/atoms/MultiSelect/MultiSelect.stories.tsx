@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { MultiSelect } from './MultiSelect';
 import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
 import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
@@ -101,7 +101,11 @@ export const ContratoTalla: Story = {
   },
 };
 
-/** Test: el teclado completo del patrón combobox, sin mover el foco del DOM. */
+/**
+ * Test: el teclado del `Select` múltiple de Base UI. Al abrir, el foco pasa a
+ * la lista (no hay foco virtual): la opción activa es la enfocada, y Base UI
+ * la marca con `data-highlighted`. Escape cierra y devuelve el foco a la caja.
+ */
 export const ContratoTeclado: Story = {
   name: 'Test — teclado del combobox',
   tags: ['!dev'],
@@ -111,40 +115,41 @@ export const ContratoTeclado: Story = {
     const combobox = canvas.getByRole('combobox', { name: 'Servicios' });
     // El panel se monta en un portal de Base UI, fuera del canvas de la story
     const body = within(canvasElement.ownerDocument.body);
+    const activa = () => canvasElement.ownerDocument.activeElement;
 
     combobox.focus();
     await expect(combobox).toHaveAttribute('aria-expanded', 'false');
 
     // La flecha abajo abre y activa la primera opción
     await userEvent.keyboard('{ArrowDown}');
-    await expect(combobox).toHaveAttribute('aria-expanded', 'true');
-    const opciones = body.getAllByRole('option');
+    await waitFor(() => expect(combobox).toHaveAttribute('aria-expanded', 'true'));
+    const opciones = await body.findAllByRole('option');
     await expect(opciones).toHaveLength(options.length);
-    // El foco no se mueve del combobox: la opción activa va por activedescendant
-    await expect(combobox).toHaveFocus();
-    await expect(combobox).toHaveAttribute('aria-activedescendant', opciones[0].id);
+    await waitFor(() => expect(activa()).toBe(opciones[0]));
+    await expect(opciones[0]).toHaveAttribute('data-highlighted');
 
     // Fin e Inicio saltan a los extremos
     await userEvent.keyboard('{End}');
-    await expect(combobox).toHaveAttribute('aria-activedescendant', opciones.at(-1)!.id);
+    await waitFor(() => expect(activa()).toBe(opciones.at(-1)));
     await userEvent.keyboard('{Home}');
-    await expect(combobox).toHaveAttribute('aria-activedescendant', opciones[0].id);
+    await waitFor(() => expect(activa()).toBe(opciones[0]));
 
     // Escribir una letra salta a la opción que empieza por ella
     await userEvent.keyboard('b');
-    await expect(combobox).toHaveAttribute(
-      'aria-activedescendant',
-      opciones[options.findIndex((o) => o.label === 'Branding')].id,
+    await waitFor(() =>
+      expect(activa()).toBe(opciones[options.findIndex((o) => o.label === 'Branding')]),
     );
 
-    // Intro marca la activa
+    // Intro marca la activa, y la lista sigue abierta (selección múltiple)
     await userEvent.keyboard('{Enter}');
-    await expect(canvas.getByText('Branding')).toBeInTheDocument();
+    await waitFor(() => expect(canvas.getByText('Branding')).toBeInTheDocument());
+    await expect(opciones[options.findIndex((o) => o.label === 'Branding')]).toHaveAttribute('aria-selected', 'true');
+    await expect(combobox).toHaveAttribute('aria-expanded', 'true');
 
-    // Escape cierra sin perder el foco
+    // Escape cierra y devuelve el foco a la caja
     await userEvent.keyboard('{Escape}');
-    await expect(combobox).toHaveAttribute('aria-expanded', 'false');
-    await expect(combobox).toHaveFocus();
+    await waitFor(() => expect(combobox).toHaveAttribute('aria-expanded', 'false'));
+    await waitFor(() => expect(combobox).toHaveFocus());
   },
 };
 

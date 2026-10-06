@@ -86,16 +86,23 @@ La convención completa está en **Foundations › Internacionalización**.
 
 ## Teclado
 
-Patrón **combobox** de WAI-ARIA, el mismo que `AsyncSelect`. El foco del DOM no sale nunca de
-la caja: la opción activa se señala con `aria-activedescendant`.
+El motor es el `Select` múltiple de **Base UI** (no su `Combobox`: sin campo de texto, la guía de
+Base UI manda al `Select`), y el teclado es suyo. La caja lleva `role="combobox"`; al abrir, **el
+foco pasa a la lista** —la opción activa es la enfocada, y Base UI la marca con
+`data-highlighted`— y al cerrar vuelve a la caja. La lista es `aria-multiselectable` y cada
+opción marcada lleva `aria-selected`.
 
 | Tecla | Qué hace |
 | --- | --- |
-| `↓` / `↑` | Abre la lista y recorre las opciones |
-| `Inicio` / `Fin` | Salta a la primera y a la última |
-| `Intro` / `Espacio` | Marca y desmarca la opción activa |
-| `Esc` | Cierra sin cambiar nada |
+| `↓` / `↑` / `Intro` / `Espacio` | Con la lista cerrada, la abren |
+| `↓` / `↑` | Recorren las opciones |
+| `Inicio` / `Fin` | Saltan a la primera y a la última |
+| `Intro` / `Espacio` | Marcan y desmarcan la opción activa; la lista sigue abierta |
+| `Esc` | Cierra sin cambiar nada y devuelve el foco a la caja |
 | Una letra | Salta a la opción que empieza por ella |
+
+Que el foco entre en la lista no cuenta como salir del control: `onBlur` (con el que valida
+react-hook-form) solo se avisa cuando el foco deja a la vez la caja y la lista.
 
 Las aspas de las píldoras viven **fuera** del `role="combobox"` y con `tabIndex={-1}`: un
 combobox no admite controles dentro, y un botón anidado ahí no lo anunciaría ningún lector.

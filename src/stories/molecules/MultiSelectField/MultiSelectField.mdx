@@ -76,7 +76,7 @@ El control es de Base UI, así que el contrato **no** es el spread del `field`: 
 - Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
 - El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
 - El texto del botón que quita una píldora es traducible con `removeLabel`. Ese botón vive **fuera** del elemento con `role="combobox"`: un combobox no admite controles dentro.
-- Teclado del patrón combobox: ↓/↑ abren y recorren, Inicio/Fin saltan a los extremos, Intro y Espacio marcan y desmarcan, Escape cierra y escribir una letra salta a la opción que empieza por ella. El foco del DOM no se mueve de la caja — la opción activa se señala con `aria-activedescendant`.
+- El teclado es el del `Select` múltiple de Base UI y está en la doc de [`MultiSelect`](?path=/docs/atoms-multiselect--docs): al abrir, el foco pasa a la lista y al cerrar vuelve a la caja; `onBlur` solo se avisa cuando el foco deja las dos.
 
 ## Tokens
 

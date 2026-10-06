@@ -204,7 +204,10 @@ export const AperturaYCierre: Story = {
     // un click fuera cierra
     await userEvent.click(input);
     await body.findByRole('option', { name: 'Ana García' });
-    await userEvent.click(canvas.getByRole('button', { name: 'Fuera' }));
+    // abierto, el combobox de Base UI aparta el resto de la página del árbol
+    // de accesibilidad (`aria-hidden`), y con él el nombre del botón: se busca
+    // por su texto
+    await userEvent.click(canvas.getByText('Fuera'));
     await waitFor(() => expect(body.queryByRole('option', { name: 'Ana García' })).toBeNull());
   },
 };

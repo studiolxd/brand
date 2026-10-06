@@ -124,23 +124,18 @@
   color: var(--async-select-color);
   cursor: pointer;
 
-  /* La opción bajo el puntero o el teclado se rellena con la inversión de
-     marca: excepción declarada de las listas de opciones desplegables
+  /* La opción resaltada —bajo el puntero o la que recorre el teclado con el
+     foco virtual de Base UI (`data-highlighted`)— se rellena con la inversión
+     de marca: excepción declarada de las listas de opciones desplegables
      (Foundations → Colores). El texto invierte con el relleno. */
-  &:focus-visible,
+  &[data-highlighted],
   &:hover {
     background-color: var(--async-select-item-highlighted-bg);
     color: var(--async-select-item-highlighted-color);
   }
 
-  &.async-select__item--selected {
+  &[data-selected] {
     font-weight: var(--async-select-item-selected-font-weight);
-  }
-
-  /* La opción que recorre el teclado (foco virtual): el mismo relleno. */
-  &.async-select__item--active {
-    background-color: var(--async-select-item-highlighted-bg);
-    color: var(--async-select-item-highlighted-color);
   }
 }
 

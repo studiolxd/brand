@@ -1,7 +1,7 @@
 'use client';
 
-import { forwardRef, useState, useRef, useEffect, useId, useCallback } from 'react';
-import { Popover as BasePopover } from '@base-ui/react/popover';
+import { forwardRef, useState, useRef } from 'react';
+import { Select as BaseSelect } from '@base-ui/react/select';
 import { Icon } from '../Icon/Icon';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './MultiSelect.css';
@@ -73,21 +73,20 @@ export interface MultiSelectProps {
    * solo para llevar la capa a otro sitio: un `.surface-dark` **anidado**, el
    * cajón de un shell propio. Gana siempre.
    */
-  container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
+  container?: React.ComponentPropsWithoutRef<typeof BaseSelect.Portal>['container'];
 }
 
-/** Milisegundos que se acumulan las teclas del salto por letra antes de reiniciar. */
-const TYPEAHEAD_RESET_MS = 500;
 
 /**
- * Selección múltiple. El `ref` va al elemento con `role="combobox"`, que es lo
- * enfocable, para que react-hook-form pueda enfocarlo al fallar la validación.
- *
- * Teclado del patrón combobox (el mismo que `AsyncSelect`): flechas abren y
- * recorren, Inicio/Fin saltan a los extremos, Intro/Espacio marcan y desmarcan,
- * Escape cierra y escribir una letra salta a la opción que empieza por ella. El
- * foco del DOM no se mueve nunca de la caja: la opción activa se señala con
- * `aria-activedescendant`.
+ * Selección múltiple sin campo de texto, sobre el `Select` múltiple de Base UI
+ * (no sobre su `Combobox`: sin `<input>`, la guía de Base UI manda al
+ * `Select`). El teclado es suyo: flechas, Intro y Espacio abren; dentro de la
+ * lista las flechas y Inicio/Fin recorren, Intro y Espacio marcan y desmarcan,
+ * escribir salta a la opción que empieza por lo tecleado y Escape cierra y
+ * devuelve el foco a la caja. La lista **sí recibe el foco** (es una lista de
+ * Base UI, no un foco virtual). El `ref` va al elemento con `role="combobox"`,
+ * que es lo enfocable, para que react-hook-form pueda enfocarlo al fallar la
+ * validación.
  */
 export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function MultiSelect({
   options,
@@ -113,129 +112,50 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
   const portalContainer = usePortalContainer(container);
   const [open, setOpen] = useState(false);
   const [internalValues, setInternalValues] = useState<string[]>(defaultValue);
-  const [activeIndex, setActiveIndex] = useState(-1);
   const anchorRef = useRef<HTMLDivElement>(null);
   const comboboxRef = useRef<HTMLDivElement>(null);
-  const listboxId = useId();
-  const itemIdPrefix = useId();
-  // Salto por letra: lo que se lleva escrito y cuándo se escribió la última.
-  const typedRef = useRef('');
-  const typedAtRef = useRef(0);
+  const popupRef = useRef<HTMLDivElement>(null);
 
   const currentValues = value !== undefined ? value : internalValues;
 
-  const itemId = useCallback((i: number) => `${itemIdPrefix}-opt-${i}`, [itemIdPrefix]);
-
-  function toggleValue(v: string) {
-    const next = currentValues.includes(v)
-      ? currentValues.filter(x => x !== v)
-      : [...currentValues, v];
+  function commit(next: string[]) {
     if (value === undefined) setInternalValues(next);
     onValueChange?.(next);
   }
 
-  function openAt(index: number) {
-    if (disabled || readOnly) return;
-    setOpen(true);
-    setActiveIndex(options.length === 0 ? -1 : index);
-  }
-
-  function close() {
-    setOpen(false);
-    setActiveIndex(-1);
-    typedRef.current = '';
+  function removeValue(v: string) {
+    commit(currentValues.filter(x => x !== v));
   }
 
   /**
-   * Base UI notifica los cierres (Escape, clic fuera). Se ignora el clic fuera
-   * nacido dentro del propio control: sin `Trigger`, la caja cuenta como
-   * "fuera" para el gestor de dismissal.
-   */
-  function handleOpenChange(next: boolean, details: BasePopover.Root.ChangeEventDetails) {
-    if (next) return;
-    if (details.reason === 'outside-press') {
-      const target = details.event?.target;
-      if (target instanceof Node && anchorRef.current?.contains(target)) return;
-    }
-    close();
-  }
-
-  /** Salta a la primera opción que empieza por lo tecleado, dando la vuelta. */
-  function typeahead(char: string) {
-    if (options.length === 0) return;
-    const now = Date.now();
-    const typed = now - typedAtRef.current > TYPEAHEAD_RESET_MS ? char : typedRef.current + char;
-    typedRef.current = typed;
-    typedAtRef.current = now;
-    // Con una sola letra se recorren las coincidencias una a una; con varias se
-    // busca desde la activa, que puede seguir valiendo para el prefijo largo.
-    const from = typed.length === 1 ? activeIndex + 1 : Math.max(activeIndex, 0);
-    const needle = typed.toLowerCase();
-    for (let step = 0; step < options.length; step++) {
-      const index = (from + step) % options.length;
-      if (options[index].label.toLowerCase().startsWith(needle)) {
-        setActiveIndex(index);
-        if (!open) setOpen(true);
-        return;
-      }
-    }
-  }
-
-  function handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
-    if (disabled || readOnly) return;
-    const last = options.length - 1;
-
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      if (!open) openAt(0);
-      else setActiveIndex(i => Math.min(i + 1, last));
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      if (!open) openAt(last);
-      else setActiveIndex(i => Math.max(i - 1, 0));
-    } else if (e.key === 'Home') {
-      e.preventDefault();
-      if (!open) openAt(0);
-      else setActiveIndex(options.length === 0 ? -1 : 0);
-    } else if (e.key === 'End') {
-      e.preventDefault();
-      if (!open) openAt(last);
-      else setActiveIndex(last);
-    } else if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      if (!open) openAt(0);
-      else if (activeIndex >= 0 && activeIndex < options.length) toggleValue(options[activeIndex].value);
-    } else if (e.key === 'Escape') {
-      if (!open) return;
-      e.preventDefault();
-      close();
-    } else if (e.key === 'Tab') {
-      if (open) close();
-    } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
-      e.preventDefault();
-      typeahead(e.key);
-    }
-  }
-
-  /**
-   * El clic en cualquier punto de la caja abre y cierra; el aspa de una píldora
-   * es un control propio y se deja pasar. Se enfoca siempre la caja: el foco no
-   * viaja al panel, que la opción activa la marca `aria-activedescendant`.
+   * El clic en el aire de la caja (fuera de la parte con `role="combobox"`,
+   * que ya abre Base UI) también abre y cierra; el aspa de una píldora es un
+   * control propio y se deja pasar.
    */
   function handlePointerDown(e: React.PointerEvent<HTMLDivElement>) {
     if (disabled || readOnly) return;
-    if (e.target instanceof Element && e.target.closest('.multi-select__pill-remove')) return;
+    if (!(e.target instanceof Element)) return;
+    if (e.target.closest('.multi-select__pill-remove')) return;
+    if (comboboxRef.current?.contains(e.target)) return;
     e.preventDefault();
     comboboxRef.current?.focus();
-    if (open) close();
-    else openAt(0);
+    setOpen(!open);
   }
 
-  // La opción activa no tiene el foco del DOM: hay que traerla a la vista a mano.
-  useEffect(() => {
-    if (!open || activeIndex < 0) return;
-    document.getElementById(itemId(activeIndex))?.scrollIntoView({ block: 'nearest' });
-  }, [open, activeIndex, itemId]);
+  /**
+   * Abrir lleva el foco a la lista, que es parte del control: el aviso de
+   * salida (`onBlur`, con el que valida react-hook-form) solo se da cuando el
+   * foco deja la caja y la lista a la vez.
+   */
+  function isInside(node: EventTarget | null) {
+    return node instanceof Node
+      && (!!comboboxRef.current?.contains(node) || !!popupRef.current?.contains(node));
+  }
+
+  function handleBlur(e: React.FocusEvent<HTMLElement>) {
+    if (isInside(e.relatedTarget)) return;
+    onBlur?.(e as React.FocusEvent<HTMLDivElement>);
+  }
 
   const triggerClass = [
     'multi-select',
@@ -251,7 +171,19 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
   ].filter(Boolean).join(' ');
 
   return (
-    <BasePopover.Root open={open} onOpenChange={handleOpenChange}>
+    <BaseSelect.Root<string, true>
+      multiple
+      value={currentValues}
+      onValueChange={commit}
+      open={open}
+      onOpenChange={setOpen}
+      name={name}
+      disabled={disabled}
+      readOnly={readOnly}
+      // Como el resto de desplegables de la familia: la página sigue viva con
+      // la lista abierta.
+      modal={false}
+    >
       <div
         ref={anchorRef}
         className={triggerClass}
@@ -274,7 +206,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
                     className="multi-select__pill-remove"
                     aria-label={t('remove', removeLabel)(option.label)}
                     tabIndex={-1}
-                    onClick={e => { e.stopPropagation(); toggleValue(v); comboboxRef.current?.focus(); }}
+                    onClick={e => { e.stopPropagation(); removeValue(v); comboboxRef.current?.focus(); }}
                   >
                     <Icon name="close" size="xs" />
                   </button>
@@ -282,85 +214,66 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
               </span>
             );
           })}
-          <div
-            ref={(node) => { comboboxRef.current = node; assignRef(ref, node); }}
+          <BaseSelect.Trigger
+            // Base UI tipa la parte como `<button>`; aquí se pinta un `div`.
+            ref={(node: HTMLElement | null) => {
+              comboboxRef.current = node as HTMLDivElement | null;
+              assignRef(ref, node as HTMLDivElement | null);
+            }}
+            // Un `div` y no un `<button>`: la caja se pinta con las clases del
+            // componente, sin los estilos propios de un botón.
+            render={<div />}
+            nativeButton={false}
             className="multi-select__combobox"
-            tabIndex={disabled ? -1 : 0}
-            role="combobox"
-            aria-expanded={open}
-            aria-haspopup="listbox"
-            // El listbox vive en un portal que solo existe abierto: cerrado, un
-            // `aria-controls` a un id inexistente es una referencia rota.
-            aria-controls={open ? listboxId : undefined}
-            aria-activedescendant={open && activeIndex >= 0 ? itemId(activeIndex) : undefined}
+            id={id}
             aria-label={ariaLabelledBy ? undefined : (ariaLabel ?? t('placeholder', placeholder))}
             aria-labelledby={ariaLabelledBy}
             aria-describedby={ariaDescribedBy}
             aria-invalid={error || undefined}
-            aria-disabled={disabled || undefined}
             aria-readonly={readOnly || undefined}
-            id={id}
-            onKeyDown={handleKeyDown}
-            onBlur={onBlur}
+            onBlur={handleBlur}
           >
             {currentValues.length === 0 && (
               <span className="multi-select__placeholder">{t('placeholder', placeholder)}</span>
             )}
-          </div>
+          </BaseSelect.Trigger>
         </div>
         <Icon
           name="chevron"
           className="multi-select__icon"
         />
-        {/* Lo que se envía con el formulario: un input oculto por valor. */}
-        {name && currentValues.map((v) => (
-          <input key={v} type="hidden" name={name} value={v} />
-        ))}
       </div>
 
-      <BasePopover.Portal container={portalContainer}>
-        <BasePopover.Positioner
+      <BaseSelect.Portal container={portalContainer}>
+        <BaseSelect.Positioner
           className="multi-select__positioner"
           anchor={anchorRef}
           align="start"
           sideOffset={-1}
+          alignItemWithTrigger={false}
         >
-          <BasePopover.Popup className={contentClass} initialFocus={false} finalFocus={false}>
-            <div
-              role="listbox"
-              aria-multiselectable="true"
-              aria-label={ariaLabel ?? placeholder}
-              id={listboxId}
-            >
-              {options.map((option, index) => {
-                const isSelected = currentValues.includes(option.value);
-                const isActive = activeIndex === index;
-                return (
-                  <div
-                    key={option.value}
-                    id={itemId(index)}
-                    role="option"
-                    aria-selected={isSelected}
-                    aria-label={option['aria-label'] ?? option.label}
-                    className={[
-                      'multi-select__item',
-                      isSelected ? 'multi-select__item--selected' : '',
-                      isActive ? 'multi-select__item--active' : '',
-                    ].filter(Boolean).join(' ')}
-                    onPointerDown={e => { e.preventDefault(); e.stopPropagation(); }}
-                    onClick={() => { toggleValue(option.value); setActiveIndex(index); comboboxRef.current?.focus(); }}
-                  >
-                    <span className="multi-select__item-check" aria-hidden="true">
-                      <span className="multi-select__item-check-mark" />
-                    </span>
-                    <span>{option.label}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </BasePopover.Popup>
-        </BasePopover.Positioner>
-      </BasePopover.Portal>
-    </BasePopover.Root>
+          <BaseSelect.Popup
+            ref={popupRef}
+            className={contentClass}
+            aria-label={ariaLabel ?? placeholder}
+            onBlur={handleBlur}
+          >
+            {options.map(option => (
+              <BaseSelect.Item
+                key={option.value}
+                value={option.value}
+                aria-label={option['aria-label'] ?? option.label}
+                className="multi-select__item"
+              >
+                <span className="multi-select__item-check" aria-hidden="true">
+                  <span className="multi-select__item-check-mark" />
+                </span>
+                <BaseSelect.ItemText>{option.label}</BaseSelect.ItemText>
+              </BaseSelect.Item>
+            ))}
+          </BaseSelect.Popup>
+        </BaseSelect.Positioner>
+      </BaseSelect.Portal>
+    </BaseSelect.Root>
   );
 });

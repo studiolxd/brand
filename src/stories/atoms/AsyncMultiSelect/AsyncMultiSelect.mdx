@@ -62,6 +62,10 @@ La convención completa está en **Foundations › Internacionalización**.
 
 ## Accesibilidad
 
+El motor es el `Combobox` múltiple de **Base UI**: el patrón ARIA de combobox con lista (foco virtual con `aria-activedescendant`, `aria-multiselectable` en la lista), el teclado y el cierre son suyos. <kbd>↓</kbd> abre y marca la primera opción, <kbd>Intro</kbd> marca y desmarca sin cerrar, <kbd>Esc</kbd> o <kbd>Tab</kbd> cierran. Las píldoras son las fichas de Base UI (`Combobox.Chip`): con el campo vacío, <kbd>←</kbd> y <kbd>→</kbd> las recorren (la recorrida recibe el foco y lo enseña con el anillo del control). La fila de carga y el aviso de vacío son regiones vivas (`role="status"`). Con la lista abierta, Base UI aparta del árbol de accesibilidad el resto de la página (`aria-hidden`).
+
+Lo que el componente añade encima: al abrir se busca con la consulta vacía, y <kbd>Esc</kbd> con la lista cerrada **no** vacía las fichas —sube tal cual, para que cierre el diálogo que contenga al campo—. La carga con rebote es de un módulo compartido con `AsyncSelect` y `Autocomplete`.
+
 El aspa de cada píldora es un atajo de **ratón**: está fuera del tabulador, como en el `MultiSelect`, pero conserva su nombre accesible porque un lector de pantalla sí llega a ella. La salida con teclado es <kbd>Retroceso</kbd> con el campo de búsqueda vacío, que quita el último valor elegido.
 
 `required` pone `aria-required` en el combobox. No se traduce a un `required` nativo: lo que viaja en el formulario son inputs ocultos, y un control no enfocable con `required` bloquea el envío sin poder enseñar el mensaje.

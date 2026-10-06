@@ -111,7 +111,11 @@ describe('Autocomplete — teclado', () => {
     expect(primera).toHaveAttribute('aria-selected', 'true');
     await user.keyboard('{ArrowDown}');
     expect(input).toHaveAttribute('aria-activedescendant', segunda.id);
-    await user.keyboard('{ArrowDown}'); // no pasa del final
+    // pasado el final vuelve al texto escrito (el campo está en el bucle,
+    // como pide la APG) y desde ahí la flecha arriba va a la última
+    await user.keyboard('{ArrowDown}');
+    expect(input).not.toHaveAttribute('aria-activedescendant');
+    await user.keyboard('{ArrowUp}');
     expect(input).toHaveAttribute('aria-activedescendant', segunda.id);
     await user.keyboard('{ArrowUp}{ArrowUp}'); // de vuelta al texto escrito
     expect(input).not.toHaveAttribute('aria-activedescendant');
@@ -133,9 +137,12 @@ describe('Autocomplete — teclado', () => {
   it('Enter sin sugerencia marcada se queda con lo escrito, cierra y deja enviar el formulario', async () => {
     const user = userEvent.setup();
     const onSubmit = vi.fn((e: React.FormEvent) => e.preventDefault());
+    // Con botón de envío: Base UI monta un input oculto junto al campo, y sin
+    // botón un formulario con dos campos no se envía implícitamente con Intro.
     render(
       <form onSubmit={onSubmit}>
         <Autocomplete options={PRODUCTOS} aria-label="Producto" />
+        <button type="submit">Enviar</button>
       </form>,
     );
     const input = screen.getByRole('combobox');
@@ -183,7 +190,8 @@ describe('Autocomplete — teclado', () => {
 
   it('Tab cierra la lista', async () => {
     const user = userEvent.setup();
-    render(<Autocomplete options={PRODUCTOS} aria-label="Producto" />);
+    // Un destino para el tabulador: el foco sale del campo hacia él.
+    render(<><Autocomplete options={PRODUCTOS} aria-label="Producto" /><button type="button">Siguiente</button></>);
     await user.type(screen.getByRole('combobox'), 'le');
     await screen.findByRole('listbox');
     await user.tab();

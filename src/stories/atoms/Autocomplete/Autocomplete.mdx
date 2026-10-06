@@ -58,15 +58,15 @@ Las tres del sistema: 32, 40 y 48. Sin `size`, la del `Form` que lo envuelva.
 
 ## Accesibilidad
 
-Es el patrón ARIA de **combobox con lista** (`role="combobox"`, `aria-autocomplete="list"`): el foco no sale nunca del `<input>`; la opción marcada se anuncia con `aria-activedescendant`, y `aria-expanded` dice si la lista está abierta. `aria-controls` solo existe con la lista abierta, porque el listbox vive en un portal.
+El motor es el `Autocomplete` de **Base UI**: el patrón ARIA de **combobox con lista** (`role="combobox"`, `aria-autocomplete="list"`), el teclado y el cierre son suyos. El foco no sale nunca del `<input>`; la opción marcada se anuncia con `aria-activedescendant` (y lleva `aria-selected`, que el componente añade porque Base UI no lo pone en un autocompletado), y `aria-expanded` dice si la lista está abierta. `aria-controls` solo existe con la lista abierta, porque el listbox vive en un portal. Con la lista abierta, Base UI aparta del árbol de accesibilidad el resto de la página (`aria-hidden`).
 
 | Tecla | Hace |
 | --- | --- |
 | Escribir | Abre la lista con las sugerencias |
-| <kbd>↓</kbd> | Abre la lista si estaba cerrada; si no, marca la siguiente sugerencia |
-| <kbd>↑</kbd> | Marca la anterior; desde la primera, vuelve al texto escrito |
+| <kbd>↓</kbd> | Abre la lista si estaba cerrada; si no, marca la siguiente sugerencia. Pasada la última, vuelve al texto escrito |
+| <kbd>↑</kbd> | Marca la anterior; desde la primera, vuelve al texto escrito, y desde el texto, a la última |
 | <kbd>Enter</kbd> | Con una sugerencia marcada, la elige (y **no** envía el formulario). Sin ninguna, se queda con lo escrito, cierra la lista y deja que el formulario se envíe |
-| <kbd>Esc</kbd> | Cierra la lista y conserva el texto. Con la lista abierta no sube al diálogo que lo contenga |
+| <kbd>Esc</kbd> | Cierra la lista y conserva el texto. Con la lista abierta no sube al diálogo que lo contenga; cerrada, sube tal cual (y no borra lo escrito) |
 | <kbd>Tab</kbd> | Cierra la lista y sigue |
 
 <Canvas of={AutocompleteStories.TestTeclado} />

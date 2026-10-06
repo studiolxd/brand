@@ -90,23 +90,20 @@
   color: var(--autocomplete-color);
   cursor: pointer;
 
-  /* La opción bajo el puntero o el teclado se rellena con la inversión de
-     marca: excepción declarada de las listas de opciones desplegables
-     (Foundations → Colores). El texto invierte con el relleno. */
-  &:focus-visible,
+  /* La sugerencia resaltada —bajo el puntero o la que recorre el teclado con
+     el foco virtual de Base UI (`data-highlighted`)— se rellena con la
+     inversión de marca: excepción declarada de las listas de opciones
+     desplegables (Foundations → Colores). El texto invierte con el relleno. */
+  &[data-highlighted],
   &:hover {
     background-color: var(--autocomplete-item-highlighted-bg);
     color: var(--autocomplete-item-highlighted-color);
   }
 
+  /* La sugerencia que coincide con lo escrito. No es un estado de Base UI (un
+     autocompletado no guarda selección): lo calcula el componente. */
   &.autocomplete__item--selected {
     font-weight: var(--autocomplete-item-selected-font-weight);
-  }
-
-  /* La opción que recorre el teclado (foco virtual): el mismo relleno. */
-  &.autocomplete__item--active {
-    background-color: var(--autocomplete-item-highlighted-bg);
-    color: var(--autocomplete-item-highlighted-color);
   }
 }
 
