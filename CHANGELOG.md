@@ -71,6 +71,22 @@ para breaking changes.
 - `LanguageSwitcher` y `SiteNav` usan el `defaultRenderLink` compartido: el enlace recibe todas las props.
 - `Toaster`: documentado que solo puede haber uno montado.
 
+### Accesibilidad (el addon de Storybook ya hace fallar los tests)
+
+- `test:stories` falla con cualquier violación de axe (`a11y.test: 'error'`). Una regla solo se desactiva por story,
+  con un comentario que dice si es una decisión pendiente o un falso positivo.
+- `SidebarNav`: el botón de grupo y su panel se nombran con la etiqueta del grupo.
+- `AppLauncher`: con `presentation="popover"` el diálogo se nombra con `appLauncher.title`.
+- `AccordionTrigger`: prop nueva `headingLevel` (2–6, por defecto 3).
+- `LegalFooter`: prop nueva `as` (`'footer' | 'div'`); `SiteFooter` lo monta como `<div>` para no anidar dos `<footer>`.
+- `Modal` y `Sheet`: la cabecera pasa de `<header>` a `<div>`; salía por un portal como un segundo `banner`.
+- `Table` y `CalendarRoster`: si desbordan, el contenedor con scroll entra en el tabulador con nombre y anillo de foco
+  (tokens nuevos `calendar-roster.focus-ring-*`). `CalendarRoster` usa un id de título por instancia.
+- `ConversationThread`: el registro de mensajes es enfocable para desplazarlo con teclado.
+- `CalendarPlanner`: la fecha larga de la cabecera de semana va en texto oculto, no en `aria-label`.
+- `Card`: los rellenos `accent-*` y `support-*` fijan la tinta de los títulos, como `primary`. En superficie oscura el
+  título salía blanco sobre lavanda (2,02:1). En claro no cambia nada.
+
 ### Paquete y licencia
 
 - Licencia **MIT** (`LICENSE`, `package.json#license`). El nombre «Studio LXD», el logotipo, el isotipo, los iconos de

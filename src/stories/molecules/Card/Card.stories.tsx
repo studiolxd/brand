@@ -584,10 +584,7 @@ export const ComoEnlaceDelRouter: Story = {
 
 export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',
-  // a11y pendiente de decisión (D16): `color-contrast` del título de una tarjeta sobre
-  // relleno lavanda en oscuro: #ffffff sobre #baabff, 2,02:1 a 40px (pide 3:1). El
-  // relleno es autocontenido, pero el título toma la tinta clara de la superficie.
-  parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } }, surface: 'dark', chromatic: SOLO_OSCURO },
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '24rem' }}>
       <Card href="#" color="primary" title="Diseño instruccional" description="Fondo lavanda autocontenido, como Button primary." ctaLabel="Ver más" />
