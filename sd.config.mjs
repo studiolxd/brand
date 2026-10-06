@@ -794,23 +794,6 @@ console.log('✔︎ src/tokens/surface-dark-derived.css');
     .filter((selector) => selector !== '.surface-invert')
     .map((selector) => `${selector} .surface-invert`);
 
-  const invertLines = [
-    '/**',
-    ' * Do not edit directly, this file was auto-generated.',
-    ' *',
-    ' * Superficie invertida dentro de una oscura: `.surface-invert` vuelve a poner',
-    ' * en claro todo token que el modo oscuro haya volteado. Sobre página clara no',
-    ' * hace falta bloque: `.surface-invert` ya es uno de los selectores oscuros.',
-    ' */',
-    '',
-    `${invertSelectors.join(',\n')} {`,
-    ...invertidos.map(([name, value]) => `  ${name}: ${value};`),
-    '}',
-    '',
-  ];
-  writeFileSync('src/tokens/surface-invert.css', invertLines.join('\n'));
-  console.log('✔︎ src/tokens/surface-invert.css');
-
   /* -------------------------------------------------------------------------
    * Superficie SIEMPRE clara: `.surface-light`
    *
@@ -824,22 +807,48 @@ console.log('✔︎ src/tokens/surface-dark-derived.css');
    *
    * No está en `DARK_SELECTORS`, así que sobre página clara no hace nada —los
    * tokens ya están en claro—. Lo único que hace falta es el camino de vuelta
-   * dentro de una superficie oscura, que es este bloque: los mismos nombres y
-   * los mismos valores claros que `.surface-invert`, con su propio selector.
+   * dentro de una superficie oscura: los mismos nombres y los mismos valores
+   * claros que `.surface-invert`.
+   *
+   * Por eso las dos van en UN solo bloque con los dos juegos de selectores, en
+   * `surface-invert.css`: antes eran dos bloques idénticos en dos ficheros
+   * importados uno detrás del otro. Fundirlos no cambia la cascada —cada
+   * selector de una lista conserva su propia especificidad, y entre las dos
+   * posiciones no había ninguna otra regla—, y ahorra repetir ~770
+   * declaraciones. `surface-light.css` se sigue generando, vacío, para que la
+   * ruta publicada no desaparezca.
    * ---------------------------------------------------------------------- */
   const lightSelectors = DARK_SELECTORS.map((selector) => `${selector} .surface-light`);
+
+  const invertLines = [
+    '/**',
+    ' * Do not edit directly, this file was auto-generated.',
+    ' *',
+    ' * Superficie invertida dentro de una oscura: `.surface-invert` vuelve a poner',
+    ' * en claro todo token que el modo oscuro haya volteado. Sobre página clara no',
+    ' * hace falta bloque: `.surface-invert` ya es uno de los selectores oscuros.',
+    ' *',
+    ' * Superficie siempre clara: `.surface-light` devuelve a su valor claro los',
+    ' * mismos tokens, con los mismos valores, cuando cae dentro de una superficie',
+    ' * oscura. Por eso comparte bloque. Sobre página clara no hace falta nada.',
+    ' */',
+    '',
+    `${[...invertSelectors, ...lightSelectors].join(',\n')} {`,
+    ...invertidos.map(([name, value]) => `  ${name}: ${value};`),
+    '}',
+    '',
+  ];
+  writeFileSync('src/tokens/surface-invert.css', invertLines.join('\n'));
+  console.log('✔︎ src/tokens/surface-invert.css');
+
   const lightLines = [
     '/**',
     ' * Do not edit directly, this file was auto-generated.',
     ' *',
-    ' * Superficie siempre clara: `.surface-light` devuelve a su valor claro todo',
-    ' * token que el modo oscuro haya volteado. Sobre página clara no hace falta',
-    ' * bloque: los tokens ya están en claro.',
+    ' * Vacío a propósito: el bloque de `.surface-light` va fundido con el de',
+    ' * `.surface-invert` en `surface-invert.css` (mismos tokens, mismos valores).',
+    ' * El fichero se conserva para que la ruta publicada no desaparezca.',
     ' */',
-    '',
-    `${lightSelectors.join(',\n')} {`,
-    ...invertidos.map(([name, value]) => `  ${name}: ${value};`),
-    '}',
     '',
   ];
   writeFileSync('src/tokens/surface-light.css', lightLines.join('\n'));

@@ -4,11 +4,19 @@
  * Superficie invertida dentro de una oscura: `.surface-invert` vuelve a poner
  * en claro todo token que el modo oscuro haya volteado. Sobre página clara no
  * hace falta bloque: `.surface-invert` ya es uno de los selectores oscuros.
+ *
+ * Superficie siempre clara: `.surface-light` devuelve a su valor claro los
+ * mismos tokens, con los mismos valores, cuando cae dentro de una superficie
+ * oscura. Por eso comparte bloque. Sobre página clara no hace falta nada.
  */
 
 .surface-dark .surface-invert,
 [data-theme="dark"] .surface-invert,
-html.dark .surface-invert {
+html.dark .surface-invert,
+.surface-dark .surface-light,
+.surface-invert .surface-light,
+[data-theme="dark"] .surface-light,
+html.dark .surface-light {
   --accordion-border-color: var(--color-primary);
   --accordion-index-color: var(--color-text-muted-on-light);
   --accordion-focus-ring-color: var(--color-primary);

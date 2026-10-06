@@ -247,7 +247,7 @@ Dos reglas de uso:
 
 Hay un relleno que no invierte nada y que tampoco es oscuro: **el amarillo del aviso**, que es universal —el mismo color en las dos superficies, por la regla de los `*-fill`—. Su cara es la clara, y lo es siempre. Ni `.surface-dark` (justo al revés) ni `.surface-invert` (que sobre página clara da la cara oscura) sirven ahí.
 
-Esa región es **`.surface-light`**, el contrapunto de `.surface-dark`. No está en la lista de selectores oscuros, así que sobre página clara no hace nada: los tokens ya están en claro. Lo único que hace falta es el camino de vuelta, y ese lo pone `src/tokens/surface-light.css` —generado, con los mismos nombres y los mismos valores claros que `surface-invert.css`—, que devuelve cada token volteado a su valor claro cuando la clase cae dentro de una superficie oscura.
+Esa región es **`.surface-light`**, el contrapunto de `.surface-dark`. No está en la lista de selectores oscuros, así que sobre página clara no hace nada: los tokens ya están en claro. Lo único que hace falta es el camino de vuelta, y ese lo pone `src/tokens/surface-invert.css` —generado, en el mismo bloque que `.surface-invert`, porque son los mismos nombres y los mismos valores claros—, que devuelve cada token volteado a su valor claro cuando la clase cae dentro de una superficie oscura.
 
 Se usa con las mismas dos reglas que `.surface-invert` —no pinta el lienzo, y no va en el elemento que consume los tokens volteados—. La abren el `Alert` y el `Banner` en su variante `warning`, sobre el contenido, las acciones y el aspa: sin ella, con la página en oscuro un `Button variant="outline"` dentro del aviso heredaría el blanco ambiente y saldría blanco sobre amarillo (1,50:1).
 
