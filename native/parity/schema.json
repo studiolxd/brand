@@ -9,7 +9,7 @@
   "properties": {
     "$schema": { "type": "string" },
     "component": {
-      "description": "Nombre del componente en React (el export de `src/index.ts`). Es también el nombre de la ficha: `components/<component>.json`.",
+      "description": "Nombre del componente en React (el export de su subruta del paquete). Es también el nombre de la ficha: `components/<component>.json`.",
       "type": "string",
       "pattern": "^[A-Z][A-Za-z0-9]*$"
     },

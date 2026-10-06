@@ -1,0 +1,61 @@
+MIT License
+
+Copyright (c) 2026 Studio LXD
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-------------------------------------------------------------------------------
+
+BRAND ASSETS ARE NOT INCLUDED
+
+This license covers the source code, styles, design tokens and documentation.
+It does NOT grant any right to use the name "Studio LXD", its logo, logomark,
+favicons, app icons or any other brand asset. These remain the exclusive
+property of Studio LXD, all rights reserved. They include, among others, the
+files under dist/assets/ (logo.svg, logomark.svg, logomark-safe.svg, icons/,
+email/logo-*.png), the Logo and Logomark components and their drawings, and
+the files under public/brand/, public/logo.svg and public/favicon.svg.
+
+You may not use the brand assets to identify your own products or services,
+or in a way that suggests endorsement by Studio LXD, without prior written
+permission.
+
+THIRD-PARTY COMPONENTS
+
+Some files keep their own license:
+
+- Fonts under dist/assets/fonts/ and src/assets/fonts/ (Google Sans Flex,
+  Google Sans Code, Libre Bodoni): SIL Open Font License 1.1. Each family
+  ships its LICENSE.txt next to the font files.
+- src/vendor/normalize.css: MIT License, Copyright (c) Nicolas Gallagher and
+  Jonathan Neal.
+
+-------------------------------------------------------------------------------
+
+LOS ACTIVOS DE MARCA NO ESTÁN INCLUIDOS
+
+Esta licencia cubre el código, los estilos, los tokens de diseño y la
+documentación. NO concede ningún derecho de uso sobre el nombre «Studio LXD»,
+su logotipo, su isotipo, los favicons, los iconos de aplicación ni ningún otro
+activo de marca, que son propiedad exclusiva de Studio LXD, con todos los
+derechos reservados. Quedan excluidos, entre otros, los ficheros de
+dist/assets/ citados arriba, los componentes Logo y Logomark y sus dibujos, y
+los ficheros de public/brand/, public/logo.svg y public/favicon.svg.
+
+Las fuentes y normalize.css conservan su propia licencia, indicada arriba.

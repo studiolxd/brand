@@ -25,6 +25,14 @@ export default defineConfig({
         // Peers con contexto/estado compartido: SIEMPRE externos — bundlearlos
         // duplica la librería y el contexto no cruza al consumidor.
         'react-hook-form',
+        // Peers opcionales de un solo componente: `@tanstack/react-table` lo usa
+        // `data-table` y `react-image-crop` lo usan `image-crop-dialog` y
+        // `avatar-upload`. Externos para no duplicarlos en la app que ya los
+        // tenga. De `react-image-crop` solo sale el JS: su hoja
+        // (`react-image-crop/dist/ReactCrop.css`) se sigue empaquetando en el CSS
+        // de la entrada, así que el consumidor no importa CSS de node_modules.
+        '@tanstack/react-table',
+        'react-image-crop',
         // El motor del correo: peer OPCIONAL, así que jamás bundleado. Solo lo
         // resuelve quien importe `@studiolxd/brand/email`.
         'react-email',

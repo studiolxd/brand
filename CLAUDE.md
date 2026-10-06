@@ -84,15 +84,14 @@ Cada componente tiene tres archivos co-localizados:
 
 ### Checklist para añadir un nuevo componente
 
-Cada componente nuevo debe registrarse en **tres sitios** o no estará disponible para los consumidores del paquete:
+Cada componente nuevo debe registrarse en **dos sitios** o no estará disponible para los consumidores del paquete:
 
 1. **`scripts/entry-points.mjs`** — añadir entrada en `entryPoints` con la ruta al `.tsx`. Si el componente tiene estado interno, eventos o usa hooks del browser, añadirlo también a `clientComponents` (genera el `'use client'` en el `.js` compilado).
 2. **`package.json` › `exports`** — añadir entrada `"./nombre"` con `types` apuntando a `dist/_types/.../Component.d.ts` e `import` apuntando a `dist/nombre.js`.
-3. **`src/index.ts`** — añadir `export { Componente }` y `export type { ComponenteProps }` en la sección correspondiente (Atoms / Molecules / …), en orden alfabético.
 
 > **IMPORTANTE:** Olvidar `entry-points.mjs` o `package.json › exports` deja el componente con tipos pero sin `.js` compilado — el consumidor puede importar el tipo pero falla en runtime.
 >
-> **Excepción — `src/stories/email/`:** los componentes de correo NO van en `src/index.ts`. Se construyen sobre `react-email`, que es un peer **opcional**: si colgaran del barril, cualquier app que importe un `Button` tendría que instalarlo para resolver el import. Se publican solo por su subpath, `@studiolxd/brand/email`.
+> **No hay barril, y no se crea.** `src/index.ts` se retiró el 2026-10-06: no se publicaba (no hay export `"."`), se mantenía a mano y se desincronizaba. Cada componente se importa por su subruta. Un barril además arrastraría los peers opcionales: cualquier app que importase un `Button` tendría que instalar `react-email`, `react-hook-form`, `@tanstack/react-table` y `react-image-crop` para resolver el import.
 
 ## CSS y tokens
 
@@ -251,7 +250,7 @@ Los `surface-dark-*` se filtran, igual que en SCSS: se publican con el nombre de
 
 ## El correo
 
-`src/stories/email/` es el único rincón del repo cuyo medio no es un navegador, y de ahí salen todas sus rarezas. Las reglas propias, además de las dos ya citadas (fuera de `src/index.ts`; propiedades físicas):
+`src/stories/email/` es el único rincón del repo cuyo medio no es un navegador, y de ahí salen todas sus rarezas. Las reglas propias, además de la ya citada (propiedades físicas):
 
 - **Todo estilo va inline y resuelto.** No hay hoja de estilos ni custom properties: Outlook no resuelve `var()`. De ahí que los estilos sean objetos JS (`emailTheme.ts`) y no un `.css`.
 - **El correo lee a la talla PÚBLICA, no a la de aplicación.** Un correo es parte pública de la suite, como la web y las páginas de acceso: cuerpo, título, letra menor y botón (talla `lg`) salen de la superficie de `SiteShell`. Como ese remapeo se genera en CSS y el correo no consume CSS, los tokens apuntan a los **tokens fuente** (`{site-shell.*}`, `{button.lg-*}`), nunca a los `--site-shell-*` ya remapeados. El ancho no sube con la talla: los 600px son del medio, no de la retícula.
@@ -260,6 +259,7 @@ Los `surface-dark-*` se filtran, igual que en SCSS: se publican con el nombre de
 - **`tokens/component/email.json` no sale a CSS ni a SCSS** —no hay CSS de correo que los consuma—; sale a `src/stories/email/emailTokens.ts`, generado por `pnpm build:tokens`, con los valores en píxeles absolutos. No editarlo a mano.
 - **El correo es solo claro: no gestiona modo oscuro.** Se retiró el mecanismo entero (paleta oscura, `prefers-color-scheme`, las `meta` de esquema y las clases `email-*` que solo servían para engancharlo). Esto NO impide que Outlook Windows o Gmail Android inviertan los colores por su cuenta — lo que se deja de hacer es gestionarlo; con fondo blanco, tinta oscura y el blanco horneado del logotipo, el resultado invertido aguanta. Hay un test que vigila que no vuelva (`EmailLayout.test.tsx`).
 - **La única hoja de estilos del correo es `a:hover`**, lo único que no cabe en un atributo `style`. Todo lo demás va inline.
+- **El correo lleva su propia copia de la fuente, con nombre versionado** (`dist/assets/email/google-sans-flex-normal-latin-v1.woff2`, generada por `pnpm build:email-assets`), aunque sea idéntica byte a byte a la de la web. No se deduplica: Gmail cachea de forma inmutable lo que descarga, así que un cambio de la fuente solo llega a los correos ya enviados con un nombre nuevo (`-v2`), y ese ciclo es del host de assets del correo, no del de la web. Lo mismo vale para `logo-vN.png`.
 - **`react-email` es un peer opcional** y va en los externals de `vite.lib.config.ts`. Radix sigue prohibido; esta es la única otra dependencia de comportamiento del repo, y solo para el correo.
 
 Las **plantillas concretas** (verificar el correo, restablecer la contraseña…) son producto y viven en `@slxd/mailer`, no aquí.

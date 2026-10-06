@@ -12,9 +12,17 @@ pnpm add @studiolxd/brand
 ```
 
 El paquete declara como peer dependencies `react` y `react-dom` (>=18). Hay
-dos peers **opcionales**, que solo hacen falta si se consume el subpath que
-los importa: `react-hook-form` (>=7) para `@studiolxd/brand/form-field`, y
-`react-email` (>=6) para `@studiolxd/brand/email`.
+peers **opcionales**, que solo hacen falta si se consume el subpath que los
+importa:
+
+| Peer | Lo pide |
+| --- | --- |
+| `react-hook-form` (>=7) | `@studiolxd/brand/form-field` |
+| `react-email` (>=6) | `@studiolxd/brand/email` |
+| `@tanstack/react-table` (^8.21) | `@studiolxd/brand/data-table` |
+| `react-image-crop` (^11.1) | `@studiolxd/brand/image-crop-dialog` y `@studiolxd/brand/avatar-upload` |
+
+Pide Node 20 o superior.
 
 ## Uso
 
@@ -138,3 +146,17 @@ paleta, la escala tipográfica, las variantes de cada componente y las reglas
 que las gobiernan responden a la marca de Studio LXD y se deciden aquí
 dentro. Si el sistema le sirve tal cual a alguien más, encantados; si hace
 falta que sea otra cosa, un fork es mejor camino que una petición.
+
+## Cambios
+
+El historial de versiones está en
+[`CHANGELOG.md`](https://github.com/studiolxd/brand/blob/main/CHANGELOG.md), en el
+repositorio. No viaja en el paquete de npm.
+
+## Licencia
+
+El código, los estilos, los tokens y la documentación se publican con licencia
+[MIT](./LICENSE). El nombre «Studio LXD», el logotipo, el isotipo y el resto de
+activos de marca **no** están incluidos: son propiedad de Studio LXD y no se
+pueden usar sin permiso. Las fuentes conservan su licencia SIL Open Font License
+1.1, que viaja junto a cada familia. El detalle, en [`LICENSE`](./LICENSE).

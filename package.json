@@ -7,6 +7,10 @@
     "url": "git+https://github.com/studiolxd/brand.git"
   },
   "homepage": "https://github.com/studiolxd/brand#readme",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
   "type": "module",
   "exports": {
     "./accordion": {
@@ -955,8 +959,7 @@
   "files": [
     "dist",
     "src/tokens",
-    "!src/tokens/**/*.test.ts",
-    "CHANGELOG.md"
+    "!src/tokens/**/*.test.ts"
   ],
   "publishConfig": {
     "access": "public"
@@ -984,21 +987,27 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
-    "@tanstack/react-table": "^8.21.3",
-    "react-image-crop": "^11.1.2",
     "react-phone-number-input": "^3.4.16"
   },
   "peerDependencies": {
+    "@tanstack/react-table": "^8.21.3",
     "react": ">=18",
     "react-dom": ">=18",
     "react-email": ">=6",
-    "react-hook-form": ">=7"
+    "react-hook-form": ">=7",
+    "react-image-crop": "^11.1.2"
   },
   "peerDependenciesMeta": {
+    "@tanstack/react-table": {
+      "optional": true
+    },
     "react-email": {
       "optional": true
     },
     "react-hook-form": {
+      "optional": true
+    },
+    "react-image-crop": {
       "optional": true
     }
   },
@@ -1010,6 +1019,7 @@
     "@storybook/addon-mcp": "^10.6.0",
     "@storybook/addon-vitest": "^10.6.0",
     "@storybook/react-vite": "^10.6.0",
+    "@tanstack/react-table": "^8.21.3",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.5",
@@ -1036,6 +1046,7 @@
     "react-dom": "^19.2.4",
     "react-email": "^6.9.3",
     "react-hook-form": "^7.85.0",
+    "react-image-crop": "^11.1.2",
     "remark-gfm": "^4.0.1",
     "sharp": "^0.35.4",
     "storybook": "^10.6.0",

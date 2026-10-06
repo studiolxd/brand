@@ -313,7 +313,7 @@ if (dirty.length > 0) {
 console.log('✔ dist/ en sync con package.json#exports y con src/ (git status limpio)');
 
 // --- Lo nativo no viaja en el paquete npm ---
-// `package.json#files` solo lista `dist`, `src/tokens` y `CHANGELOG.md`, pero eso
+// `package.json#files` solo lista `dist` y `src/tokens`, pero eso
 // es una promesa, no un hecho: se pregunta a `npm pack` qué metería de verdad. La
 // versión nativa (SwiftPM, Gradle, fuentes TTF, fichas de paridad) se distribuye
 // por git —SwiftPM y JitPack— y por npm no debe salir nada de ella.
