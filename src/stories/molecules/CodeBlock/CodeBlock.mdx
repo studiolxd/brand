@@ -59,7 +59,7 @@ El **resaltador es del producto** —shiki, prism, el que sea—: no entra en el
 `CodeToken` es la pieza: un `<span class="code-block__token code-block__token--<tipo>">` cuyo `type` está tipado por la unión `CodeTokenType`.
 
 ```tsx
-import { CodeBlock, CodeToken } from '@studiolxd/brand';
+import { CodeBlock, CodeToken } from '@studiolxd/brand/code-block';
 
 <CodeBlock language="ts" copyable>
   {tokens.map((token, i) => (
@@ -92,7 +92,7 @@ Los nombres que pone quien escribe el código —variables y propiedades— van 
 shiki no devuelve tipos: devuelve **ámbitos TextMate** (`keyword.control.flow.ts`, `string.quoted.single.ts`) junto al color del tema. Se descarta el color y se traduce el ámbito, quedándose con el prefijo:
 
 ```ts
-import type { CodeTokenType } from '@studiolxd/brand';
+import type { CodeTokenType } from '@studiolxd/brand/code-block';
 
 const AMBITOS: [string, CodeTokenType][] = [
   ['comment',                 'comment'],

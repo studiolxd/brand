@@ -58,7 +58,7 @@ export const CodigoMultilinea: Story = {
     language: 'tsx',
     copyable: true,
     children:
-      `import { Button } from '@studiolxd/brand';\n\n` +
+      `import { Button } from '@studiolxd/brand/button';\n\n` +
       `export function Example() {\n` +
       `  return (\n` +
       `    <Button variant="primary" onClick={() => console.log('click')}>\n` +

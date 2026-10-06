@@ -289,4 +289,5 @@ export const clientComponents = new Set([
   'spinner',
   'loading-state', 'loading-region',
   'legal-footer',
+  'figure',
 ]);

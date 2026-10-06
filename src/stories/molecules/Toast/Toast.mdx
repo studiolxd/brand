@@ -23,10 +23,8 @@ Un aviso **efímero y flotante**: aparece como respuesta a una acción, se lee d
 `Toaster` se monta **una vez**, en la raíz de la aplicación. Los avisos se lanzan desde cualquier sitio con `toast(...)`:
 
 ```tsx
-import { Toaster, toast } from '@studiolxd/brand';
-// o, por punto de entrada:
-// import { Toaster } from '@studiolxd/brand/toaster';
-// import { toast } from '@studiolxd/brand/toast';
+import { Toaster } from '@studiolxd/brand/toaster';
+import { toast } from '@studiolxd/brand/toast';
 
 // En el layout raíz
 <Toaster />
@@ -185,7 +183,7 @@ Hasta la v24 la cola era **sonner**, y las aplicaciones importaban `toast` del p
 | --- | --- |
 | `import { toast } from 'sonner'` | `import { toast } from '@studiolxd/brand/toast'` |
 | `import { Toaster } from 'sonner'` | `import { Toaster } from '@studiolxd/brand/toaster'` |
-| `import { toast } from '@studiolxd/brand'` | igual (el paquete ya no reexporta sonner) |
+| `import { toast } from '@studiolxd/brand'` | `import { toast } from '@studiolxd/brand/toast'` |
 
 Las firmas que usa la suite se mantienen: `toast(msg)`, `toast.success|error|warning|info|loading(msg, options)`, el patrón `const id = toast.loading(…)` → `toast.success(…, { id })`, `toast.dismiss(id?)` y `toast.promise(...)`. Lo que **no** se ha portado, por ser de sonner y no del sistema:
 

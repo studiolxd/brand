@@ -62,8 +62,8 @@ if (existsSync(sharedDir)) {
 
 // Activos de marca: los SVG del logotipo y el isotipo viajan tal cual a
 // dist/assets, para servirlos o copiarlos (favicon, iconos PWA) sin pasar por
-// el bundler. Solo logo*/logomark*: en src/assets también viven activos de
-// desarrollo (hero.png, react.svg, vite.svg…) que no se publican.
+// el bundler. Solo logo*/logomark*: en src/assets también viven ficheros de
+// desarrollo (los tests, el módulo de metadatos…) que no se copian aquí.
 const assetsSrc = 'src/assets';
 const assetsOut = `${dist}/assets`;
 mkdirSync(assetsOut, { recursive: true });

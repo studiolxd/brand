@@ -1,7 +1,7 @@
+import type { HeadingSize } from '../Heading/Heading';
 import './Fieldset.css';
 
 type HeadingWeight = 'thin' | 'extralight' | 'light' | 'regular' | 'medium' | 'semibold' | 'bold' | 'extrabold' | 'black';
-type HeadingSize = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 export interface FieldsetProps {
   /** Texto del legend (título del grupo de campos). */

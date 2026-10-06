@@ -18,8 +18,6 @@ export default defineConfig({
         'react',
         'react-dom',
         'react/jsx-runtime',
-        /^@radix-ui\//,
-        /^embla-carousel/,
         'react-phone-number-input',
         /^react-phone-number-input\//,
         'libphonenumber-js',
@@ -27,7 +25,6 @@ export default defineConfig({
         // Peers con contexto/estado compartido: SIEMPRE externos — bundlearlos
         // duplica la librería y el contexto no cruza al consumidor.
         'react-hook-form',
-        'sonner',
         // El motor del correo: peer OPCIONAL, así que jamás bundleado. Solo lo
         // resuelve quien importe `@studiolxd/brand/email`.
         'react-email',

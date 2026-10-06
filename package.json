@@ -950,21 +950,19 @@
   "files": [
     "dist",
     "src/tokens",
+    "!src/tokens/**/*.test.ts",
     "CHANGELOG.md"
   ],
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
     "build:lib": "rm -rf dist && vite build --config vite.lib.config.ts && tsc -b --force tsconfig.lib.json && node scripts/post-build.mjs",
-    "build:css": "postcss src/index.css --use postcss-import -o dist/brand.css",
-    "build:tokens-css": "postcss src/tokens/index.css --use postcss-import -o dist/tokens.css",
+    "build:css": "postcss src/index.css --use postcss-import --no-map -o dist/brand.css",
+    "build:tokens-css": "postcss src/tokens/index.css --use postcss-import --no-map -o dist/tokens.css",
     "build:fonts-css": "node scripts/build-fonts-css.mjs",
     "build:icons": "node scripts/build-icons.mjs",
     "lint": "eslint .",
-    "preview": "vite preview",
     "build:tokens": "node sd.config.mjs",
     "build:email-assets": "node scripts/build-email-assets.mjs",
     "build:native-fonts": "python3 scripts/build-native-fonts.py",
@@ -1033,7 +1031,6 @@
     "react-dom": "^19.2.4",
     "react-email": "^6.9.3",
     "react-hook-form": "^7.85.0",
-    "react-phone-number-input": "^3.4.16",
     "remark-gfm": "^4.0.1",
     "sharp": "^0.35.4",
     "storybook": "^10.6.0",
@@ -1042,7 +1039,6 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.57.0",
     "vite": "^8.0.1",
-    "vite-plugin-dts": "^4.5.4",
     "vitest": "^4.1.2"
   },
   "sideEffects": [

@@ -1,4 +1,4 @@
-import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { beforeAll, describe, expect, it } from 'vitest';
@@ -49,7 +49,17 @@ describe('build-icons.mjs', () => {
   });
 
   it('rechaza una fuente sin viewBox cuadrado', () => {
-    expect(() => composeIconSvg('src/assets/hero.png')).toThrow();
+    const tmp = mkdtempSync(join(tmpdir(), 'brand-icons-src-'));
+    try {
+      const sinViewBox = join(tmp, 'sin-viewbox.svg');
+      const apaisada = join(tmp, 'apaisada.svg');
+      writeFileSync(sinViewBox, '<svg xmlns="http://www.w3.org/2000/svg"><path d="M0 0h1v1z"/></svg>');
+      writeFileSync(apaisada, '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 10"><path d="M0 0h1v1z"/></svg>');
+      expect(() => composeIconSvg(sinViewBox)).toThrow(/viewBox/);
+      expect(() => composeIconSvg(apaisada)).toThrow(/cuadrado/);
+    } finally {
+      rmSync(tmp, { recursive: true, force: true });
+    }
   });
 
   it('packIco produce un ICO válido con un directorio de N entradas', () => {
