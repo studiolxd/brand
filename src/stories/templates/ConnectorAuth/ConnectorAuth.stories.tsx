@@ -309,7 +309,7 @@ export const ConectorDeMoodleSinOrganizacion: Story = {
       extra={
         <Accordion type="single" collapsible>
           <AccordionItem value="mcp-key">
-            <AccordionTrigger>Desarrollo: pegar una clave MCP</AccordionTrigger>
+            <AccordionTrigger headingLevel={2}>Desarrollo: pegar una clave MCP</AccordionTrigger>
             <AccordionContent>
               <Paragraph>
                 El andamio del producto entra por la ranura `extra`: el sistema de diseño no lo conoce ni lo estila.

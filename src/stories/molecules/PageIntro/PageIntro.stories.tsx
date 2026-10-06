@@ -38,21 +38,26 @@ export const ConMasTexto: Story = {
  */
 export const ConEyebrow: Story = {
   name: 'Con eyebrow',
+  // Dos cabeceras sueltas en el `<body>` serían dos `banner`. En una app cada
+  // una vive dentro de su `<main>`, donde el `<header>` deja de ser un punto de
+  // referencia: aquí las dos comparten el mismo.
   render: () => (
-    <Stack gap="lg">
-      <PageIntro
-        eyebrow={<Tag variant="info">Beta</Tag>}
-        title="Automatizaciones"
-        description="Reglas que se disparan solas cuando algo cambia en la organización."
-      >
-        <Paragraph>Disponible solo para el plan Studio.</Paragraph>
-      </PageIntro>
-      <PageIntro
-        eyebrow={<Tag variant="info">Beta</Tag>}
-        title="Webhooks"
-        actions={<Button>Crear webhook</Button>}
-      />
-    </Stack>
+    <main>
+      <Stack gap="lg">
+        <PageIntro
+          eyebrow={<Tag variant="info">Beta</Tag>}
+          title="Automatizaciones"
+          description="Reglas que se disparan solas cuando algo cambia en la organización."
+        >
+          <Paragraph>Disponible solo para el plan Studio.</Paragraph>
+        </PageIntro>
+        <PageIntro
+          eyebrow={<Tag variant="info">Beta</Tag>}
+          title="Webhooks"
+          actions={<Button>Crear webhook</Button>}
+        />
+      </Stack>
+    </main>
   ),
 };
 

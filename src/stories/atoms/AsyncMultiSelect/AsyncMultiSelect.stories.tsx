@@ -31,6 +31,9 @@ const meta: Meta<typeof AsyncMultiSelect> = {
   args: {
     onSearch: mockSearch,
     placeholder: 'Buscar empleados…',
+    // Suelto, sin campo que lo nombre: el placeholder desaparece en cuanto hay
+    // fichas, así que el nombre accesible va por `aria-label`.
+    'aria-label': 'Empleados',
   },
 };
 
@@ -99,6 +102,7 @@ export const Controlled: Story = {
           value={values}
           selectedOptions={selectedOptions}
           placeholder="Buscar empleados…"
+          aria-label="Empleados"
           onValueChange={handleValueChange}
         />
         <p style={{ margin: 0, fontSize: '0.875rem' }}>
@@ -118,6 +122,11 @@ const emptySearchMulti = (): Promise<AsyncMultiSelectOption[]> => Promise.resolv
 export const MensajeVacio: Story = {
   name: 'Test — mensaje de sin resultados',
   tags: ['!dev'],
+  // a11y falso positivo (D16): con la lista abierta, Base UI marca `aria-hidden` el resto
+  // de la página (el lector queda dentro del combobox, como en un popup modal) y axe
+  // da por `aria-hidden-focus` los controles enfocables que quedan fuera, aquí el
+  // otro buscador de la story. Tabular fuera cierra la lista y retira el `aria-hidden`.
+  parameters: { a11y: { config: { rules: [{ id: 'aria-hidden-focus', enabled: false }] } } },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12rem' }}>
       <div data-testid="default">
@@ -164,6 +173,7 @@ export const AperturaYCierre: Story = {
           value={values}
           selectedOptions={EMPLOYEES.filter(e => values.includes(e.value))}
           placeholder="Buscar empleados…"
+          aria-label="Empleados"
           onValueChange={setValues}
         />
         <button type="button">Fuera</button>

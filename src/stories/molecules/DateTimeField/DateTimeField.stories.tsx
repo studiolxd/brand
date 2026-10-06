@@ -75,6 +75,11 @@ export const Tallas: Story = {
 
 /** La hora solo se aplica si ya hay fecha: primero el día, después la hora. */
 export const ElegirFechaYHora: Story = {
+  // a11y falso positivo (D16): `aria-hidden-focus` salta en los `span[data-base-ui-focus-guard]`
+  // que Base UI pone alrededor del popup abierto. Son centinelas `aria-hidden` con
+  // `tabindex="0"` que devuelven el foco al popup o al disparador al tabular: que el
+  // lector no los vea es justo lo correcto.
+  parameters: { a11y: { config: { rules: [{ id: 'aria-hidden-focus', enabled: false }] } } },
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
     const body = within(canvasElement.ownerDocument.body);

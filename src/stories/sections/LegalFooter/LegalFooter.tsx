@@ -42,6 +42,12 @@ export interface LegalFooterProps {
   width?: ContainerWidth;
   /** Pie sobre superficie oscura. */
   surface?: 'dark';
+  /**
+   * Elemento raíz (default `'footer'`, el `contentinfo` de la página). `'div'`
+   * cuando va dentro de otro pie: un `<footer>` no puede contener otro, y la
+   * página tendría dos `contentinfo`. `SiteFooter` lo pone solo en su `legal`.
+   */
+  as?: 'footer' | 'div';
   className?: string;
 }
 
@@ -59,11 +65,12 @@ export function LegalFooter({
   renderLink = defaultRenderLink,
   width = 'xl',
   surface,
+  as: Root = 'footer',
   className,
 }: LegalFooterProps) {
   const t = useBrandMessages('legalFooter');
   return (
-    <footer className={['legal-footer', surface === 'dark' && 'surface-dark', className].filter(Boolean).join(' ')}>
+    <Root className={['legal-footer', surface === 'dark' && 'surface-dark', className].filter(Boolean).join(' ')}>
       <Container width={width} innerClassName="legal-footer__inner">
         {title && <Heading level={2} size={6} className="legal-footer__title">{title}</Heading>}
         <nav aria-label={t('label', label)}>
@@ -76,6 +83,6 @@ export function LegalFooter({
           </ul>
         </nav>
       </Container>
-    </footer>
+    </Root>
   );
 }

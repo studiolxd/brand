@@ -207,6 +207,7 @@ export const Etiquetas: Story = {
             rows={makeRows(month)}
             month={month}
             onMonthChange={() => {}}
+            locale="en-US"
             legendLabel="Legend"
             previousMonthLabel="Previous month"
             nextMonthLabel="Next month"

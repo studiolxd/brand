@@ -43,6 +43,10 @@
     "cell-non-working-bg":       { "$value": "{color.surface.secondary-on-light}", "$type": "color", "$description": "Fondo de celdas no laborables (laborable sin turno asignado)" },
     "cell-today-outline-width":  { "$value": "{border-width.focus}",         "$type": "dimension", "$description": "Grosor del recuadro de la columna de hoy" },
 
+    "focus-ring-color":          { "$value": "{color.primary}",              "$type": "color",     "$description": "Anillo de foco del cuadrante cuando desborda y entra en el tabulador" },
+    "focus-ring-width":          { "$value": "{border-width.focus}",         "$type": "dimension", "$description": "Grosor del anillo de foco" },
+    "focus-ring-offset":         { "$value": "{border-width.default}",       "$type": "dimension", "$description": "Separación del anillo de foco" },
+
     "schedule-font-size":        { "$value": "{font-size.0}",                "$type": "dimension", "$description": "Tamaño del texto de horario" },
     "schedule-color":            { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Color del texto de horario" },
 
@@ -67,6 +71,7 @@
     "surface-dark-cell-holiday-bg":      { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo festivo — surface-dark" },
     "surface-dark-cell-non-working-bg":  { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo no laborable — surface-dark" },
     "surface-dark-schedule-color":       { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del texto de horario — surface-dark" },
-    "surface-dark-legend-color":         { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color de la leyenda — surface-dark" }
+    "surface-dark-legend-color":         { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color de la leyenda — surface-dark" },
+    "surface-dark-focus-ring-color":     { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Anillo de foco — surface-dark" }
   }
 }

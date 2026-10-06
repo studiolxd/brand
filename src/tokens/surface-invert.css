@@ -490,6 +490,7 @@ html.dark .surface-light {
   --calendar-roster-cell-weekend-bg: var(--color-surface-secondary-on-light);
   --calendar-roster-cell-holiday-bg: var(--color-surface-secondary-on-light);
   --calendar-roster-cell-non-working-bg: var(--color-surface-secondary-on-light);
+  --calendar-roster-focus-ring-color: var(--color-primary);
   --calendar-roster-schedule-color: var(--color-text-on-light);
   --calendar-roster-legend-color: var(--color-text-muted-on-light);
   --calendar-nav-color: var(--color-text-on-light);
@@ -552,6 +553,7 @@ html.dark .surface-light {
   --conversation-list-delete-color: var(--color-icon-secondary-on-light);
   --conversation-list-delete-hover-color: var(--color-destructive-text-on-light);
   --conversation-list-focus-ring-color: var(--color-primary);
+  --conversation-thread-focus-ring-color: var(--color-primary);
   --date-picker-field-helper-color: var(--form-helper-color);
   --date-picker-button-color: var(--color-primary);
   --date-picker-button-hover-color: var(--color-primary);

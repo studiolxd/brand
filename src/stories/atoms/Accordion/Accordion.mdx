@@ -26,7 +26,7 @@ Cuatro piezas que se usan juntas:
 |---|---|
 | `Accordion` | Raíz. Fija el modo (`single` o `multiple`) y guarda el estado. |
 | `AccordionItem` | Una sección. Necesita un `value` único. |
-| `AccordionTrigger` | El botón que abre y cierra, con su chevron. Va dentro de un `<h3>`. |
+| `AccordionTrigger` | El botón que abre y cierra, con su chevron. Va dentro de un `<h3>`; `headingLevel` (2–6) cambia el nivel para que encaje en el esquema de la página. |
 | `AccordionContent` | El contenido que se pliega. |
 
 ## Modos
@@ -83,7 +83,7 @@ CSS propio: basta con que un ancestro lleve `.surface-dark` (o la raíz
 
 ## Accesibilidad
 
-- Cada disparador es un `<button>` dentro de un `<h3>`, con `aria-expanded` y
+- Cada disparador es un `<button>` dentro de un `<h3>` (o del nivel que diga `headingLevel`), con `aria-expanded` y
   `aria-controls` apuntando al panel, que es `role="region"`. Es el patrón
   WAI-ARIA de acordeón.
 - Teclado: `Tab` entra y sale del acordeón, las flechas arriba/abajo recorren

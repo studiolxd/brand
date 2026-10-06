@@ -53,10 +53,10 @@ export const Etiquetas: Story = {
   render: () => (
     <>
       <div data-testid="default">
-        <InputPhone />
+        <InputPhone aria-label="Teléfono" />
       </div>
       <div data-testid="traducido">
-        <InputPhone countryLabel="Country" />
+        <InputPhone countryLabel="Country" aria-label="Phone number" />
       </div>
     </>
   ),
@@ -76,9 +76,9 @@ export const ContratoTalla: Story = {
   tags: ['!dev'],
   render: () => (
     <div>
-      <div data-t="sm"><InputPhone size="sm" defaultCountry="ES" /></div>
-      <div data-t="md"><InputPhone size="md" defaultCountry="ES" /></div>
-      <div data-t="lg"><InputPhone size="lg" defaultCountry="ES" /></div>
+      <div data-t="sm"><InputPhone size="sm" defaultCountry="ES" aria-label="Teléfono sm" /></div>
+      <div data-t="md"><InputPhone size="md" defaultCountry="ES" aria-label="Teléfono md" /></div>
+      <div data-t="lg"><InputPhone size="lg" defaultCountry="ES" aria-label="Teléfono lg" /></div>
     </div>
   ),
   play: async ({ canvasElement }) => {

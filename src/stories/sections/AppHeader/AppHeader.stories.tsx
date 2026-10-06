@@ -114,6 +114,14 @@ export const Contrato: Story = {
   name: 'Test — el botón de menú anuncia su estado y lo alterna',
   tags: ['!dev'],
   args: { sidebarId: 'sidebar' },
+  // `aria-controls` tiene que apuntar a algo que exista: en el shell es el
+  // `Sidebar`; aquí, sin shell, un hueco con ese id hace de panel gobernado.
+  decorators: [(Story) => (
+    <>
+      <Story />
+      <div id="sidebar" />
+    </>
+  )],
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const boton = canvas.getByRole('button', { name: 'Menú de navegación' });

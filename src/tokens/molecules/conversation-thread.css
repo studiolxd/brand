@@ -4,4 +4,14 @@
 
 :root {
   --conversation-thread-gap: var(--spacing-4); /** Separación vertical entre mensajes. Es la única medida de espaciado del hilo: el relleno se retiró —quien compone, espacia—, así que el aire alrededor de los globos lo pone quien monta el hilo */
+  --conversation-thread-focus-ring-color: var(--color-primary); /** Anillo de foco del hilo, que entra en el tabulador para poder desplazarlo con el teclado */
+  --conversation-thread-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
+  --conversation-thread-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco */
+}
+
+.surface-dark,
+.surface-invert,
+[data-theme="dark"],
+html.dark {
+  --conversation-thread-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
 }

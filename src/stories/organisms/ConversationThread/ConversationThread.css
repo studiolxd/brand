@@ -38,6 +38,11 @@
   );
 }
 
+.conversation-thread:focus-visible {
+  outline: var(--conversation-thread-focus-ring-width) solid var(--conversation-thread-focus-ring-color);
+  outline-offset: calc(var(--conversation-thread-focus-ring-offset) * -1);
+}
+
 /* Lo que el producto mete SOLO en el hilo se centra en el alto disponible: es
    el caso de la conversación sin mensajes, donde la pantalla pone un bloque
    —hoy un `EmptyState`, mañana lo que decida— en lugar de los globos. La regla

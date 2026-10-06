@@ -263,7 +263,8 @@ export const ContratoUnaLinea: Story = {
         <CodeBlock copyable language="bash">https://ejemplo.com/x</CodeBlock>
       </div>
       <div data-testid="multilinea">
-        <CodeBlock copyable language="bash">{'línea uno\nlínea dos'}</CodeBlock>
+        {/* Dos regiones con el mismo nombre en una página no se distinguen: la segunda lleva el suyo. */}
+        <CodeBlock copyable language="bash" codeLabel={() => 'Bloque de código bash de dos líneas'}>{'línea uno\nlínea dos'}</CodeBlock>
       </div>
       <div data-testid="forzada-multilinea">
         <CodeBlock copyable singleLine={false}>https://ejemplo.com/x</CodeBlock>

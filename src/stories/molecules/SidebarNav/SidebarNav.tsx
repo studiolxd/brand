@@ -1,5 +1,5 @@
 import { Accordion as BaseAccordion } from '@base-ui/react/accordion';
-import type { ReactNode } from 'react';
+import { useId, type ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Menu } from '../Menu/Menu';
 import { Tooltip } from '../../atoms/Tooltip/Tooltip';
@@ -115,6 +115,10 @@ export function SidebarNav({
   className,
 }: SidebarNavProps) {
   const t = useBrandMessages('sidebarNav');
+  // El disparador del grupo es un botón con solo el chevrón: toma su nombre
+  // accesible de la etiqueta del grupo (`aria-labelledby`), que ya está
+  // pintada; el panel que despliega, también.
+  const groupLabelPrefix = useId();
   const vacía = (entryLabel: string) => t('emptyEntry', emptyEntryLabel)(entryLabel, t('empty', emptyLabel));
   const accordionProps = value !== undefined
     ? {
@@ -254,6 +258,7 @@ export function SidebarNav({
             );
           }
 
+          const groupLabelId = `${groupLabelPrefix}-${entry.id}`;
           return (
             <BaseAccordion.Item key={entry.id} value={entry.id} className="sidebar-nav__group">
               <BaseAccordion.Header className="sidebar-nav__group-header">
@@ -265,22 +270,24 @@ export function SidebarNav({
                       children: (
                         <>
                           {entry.icon && <span className="sidebar-nav__item-icon" aria-hidden="true">{entry.icon}</span>}
-                          <span className="sidebar-nav__item-label">{entry.label}</span>
+                          <span className="sidebar-nav__item-label" id={groupLabelId}>{entry.label}</span>
                         </>
                       ),
                     })
                   : (
                     <span className="sidebar-nav__group-label" title={entry.label}>
                       {entry.icon && <span className="sidebar-nav__item-icon" aria-hidden="true">{entry.icon}</span>}
-                      <span className="sidebar-nav__item-label">{entry.label}</span>
+                      <span className="sidebar-nav__item-label" id={groupLabelId}>{entry.label}</span>
                     </span>
                   )
                 }
-                <BaseAccordion.Trigger className="sidebar-nav__group-chevron">
+                <BaseAccordion.Trigger className="sidebar-nav__group-chevron" aria-labelledby={groupLabelId}>
                   <Icon name="chevron" className="sidebar-nav__group-chevron-icon" size="sm" />
                 </BaseAccordion.Trigger>
               </BaseAccordion.Header>
-              <BaseAccordion.Panel className="sidebar-nav__group-content">
+              {/* El panel también se nombra por la etiqueta: Base UI lo apunta al
+                  disparador, y un `aria-labelledby` no se sigue en cadena. */}
+              <BaseAccordion.Panel className="sidebar-nav__group-content" aria-labelledby={groupLabelId}>
                 <div className="sidebar-nav__group-content-inner">
                   <ul className="sidebar-nav__items" role="list">
                     {entry.items.map((item) => {

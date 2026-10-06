@@ -1,7 +1,8 @@
-import type { ReactNode } from 'react';
+import { useId, useRef, type ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { useOverflowFocusable } from '../../constants/overflow-focusable';
 import './Table.css';
 
 /**
@@ -286,14 +287,30 @@ export function TableCell({
 
 export function Table({ caption, children, size = 'md', className, ...rest }: TableProps) {
   const classes = ['table', size === 'sm' ? 'table--sm' : '', className ?? ''].filter(Boolean).join(' ');
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const captionId = useId();
+  // Si la tabla desborda, el envoltorio con scroll entra en el tabulador para
+  // que el teclado pueda desplazarlo; y si la tabla tiene nombre, es una región
+  // con ese nombre, para que la parada diga qué se recorre.
+  const scrollable = useOverflowFocusable(wrapperRef);
+  const regionName = caption
+    ? { 'aria-labelledby': captionId }
+    : rest['aria-labelledby']
+      ? { 'aria-labelledby': rest['aria-labelledby'] }
+      : rest['aria-label']
+        ? { 'aria-label': rest['aria-label'] }
+        : undefined;
+  const wrapperFocus = scrollable
+    ? { tabIndex: 0, ...(regionName && { role: 'region', ...regionName }) }
+    : undefined;
 
   return (
-    <div className="table__wrapper">
+    <div ref={wrapperRef} className="table__wrapper" {...wrapperFocus}>
       <table className={classes} {...rest}>
         {/* `visually-hidden` a pelo: el modelo de contenido de <table> no
             admite el span de `<VisuallyHidden>` en el sitio del <caption>.
             Excepción declarada en CLAUDE.md § «Accesibilidad — VisuallyHidden». */}
-        {caption && <caption className="visually-hidden">{caption}</caption>}
+        {caption && <caption id={captionId} className="visually-hidden">{caption}</caption>}
         {children}
       </table>
     </div>

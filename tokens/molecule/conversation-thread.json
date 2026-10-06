@@ -1,5 +1,9 @@
 {
   "conversation-thread": {
-    "gap":            { "$value": "{spacing.4}",  "$type": "dimension", "$description": "Separación vertical entre mensajes. Es la única medida de espaciado del hilo: el relleno se retiró —quien compone, espacia—, así que el aire alrededor de los globos lo pone quien monta el hilo" }
+    "gap":            { "$value": "{spacing.4}",  "$type": "dimension", "$description": "Separación vertical entre mensajes. Es la única medida de espaciado del hilo: el relleno se retiró —quien compone, espacia—, así que el aire alrededor de los globos lo pone quien monta el hilo" },
+    "focus-ring-color":   { "$value": "{color.primary}",         "$type": "color",     "$description": "Anillo de foco del hilo, que entra en el tabulador para poder desplazarlo con el teclado" },
+    "focus-ring-width":   { "$value": "{border-width.focus}",    "$type": "dimension", "$description": "Grosor del anillo de foco" },
+    "focus-ring-offset":  { "$value": "{border-width.default}",  "$type": "dimension", "$description": "Separación del anillo de foco" },
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco — surface-dark" }
   }
 }

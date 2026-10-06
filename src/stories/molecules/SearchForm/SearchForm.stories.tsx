@@ -38,12 +38,13 @@ export const Deshabilitado: Story = {
 
 export const Tallas: Story = {
   args: { onSubmit: fn() },
+  // Cuatro `role="search"` en la misma página: cada uno con su nombre.
   render: (args) => (
     <Stack gap="md">
-      <SearchForm {...args} id="search-sm" size="sm" />
-      <SearchForm {...args} id="search-md" size="md" />
-      <SearchForm {...args} id="search-lg" size="lg" />
-      <SearchForm {...args} id="search-xl" size="xl" />
+      <SearchForm {...args} id="search-sm" size="sm" label="Buscar (sm)" />
+      <SearchForm {...args} id="search-md" size="md" label="Buscar (md)" />
+      <SearchForm {...args} id="search-lg" size="lg" label="Buscar (lg)" />
+      <SearchForm {...args} id="search-xl" size="xl" label="Buscar (xl)" />
     </Stack>
   ),
 };

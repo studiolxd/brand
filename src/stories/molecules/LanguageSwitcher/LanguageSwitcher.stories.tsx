@@ -86,6 +86,11 @@ export const Lista: Story = {
 export const Contrato: Story = {
   name: 'Test — nombre del idioma visible, opciones en su idioma, cambio anunciado',
   tags: ['!dev'],
+  // a11y falso positivo (D16): `aria-hidden-focus` salta en los `span[data-base-ui-focus-guard]`
+  // que Base UI pone alrededor del popup abierto. Son centinelas `aria-hidden` con
+  // `tabindex="0"` que devuelven el foco al popup o al disparador al tabular: que el
+  // lector no los vea es justo lo correcto.
+  parameters: { a11y: { config: { rules: [{ id: 'aria-hidden-focus', enabled: false }] } } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const boton = canvas.getByRole('button', { name: 'Idioma' });
@@ -106,6 +111,11 @@ export const Contrato: Story = {
  */
 export const MuchasOpciones: Story = {
   name: 'Muchas opciones',
+  // a11y falso positivo (D16): `scrollable-region-focusable` sobre el `role="menu"` con
+  // scroll. Sus `menuitem` llevan `tabindex="-1"` porque el foco va por flechas
+  // (foco itinerante de Base UI), no por tabulador: recorrerlos con el teclado ya
+  // desplaza la lista, aunque axe solo cuente descendientes con `tabindex="0"`.
+  parameters: { a11y: { config: { rules: [{ id: 'scrollable-region-focusable', enabled: false }] } } },
   args: { languages: muchosIdiomas },
   globals: { viewport: { value: 'mobile1' } },
   play: async ({ canvasElement }) => {

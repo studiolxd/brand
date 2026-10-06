@@ -196,10 +196,11 @@ export const Etiquetas: Story = {
   render: () => (
     <>
       <div data-testid="default">
-        <FileUpload />
+        <FileUpload aria-label="Adjuntos" />
       </div>
       <div data-testid="traducido">
         <FileUpload
+          aria-label="Attachments"
           dropzoneLabel="Drag files here"
           dropzoneHintLabel="or click to select"
         />

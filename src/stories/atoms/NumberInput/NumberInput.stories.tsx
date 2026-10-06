@@ -17,6 +17,9 @@ const meta = {
     readOnly: false,
     error: false,
     size: 'md',
+    // Un campo suelto necesita nombre accesible: en uso real lo pone el `<label>`
+    // de `NumberInputField`; aquí, sin campo alrededor, va por `aria-label`.
+    'aria-label': 'Cantidad',
   },
   argTypes: {
     size: { control: 'radio', options: ['sm', 'md', 'lg'] },
@@ -171,10 +174,10 @@ export const Etiquetas: Story = {
   render: () => (
     <>
       <div data-testid="default">
-        <NumberInput defaultValue={1} />
+        <NumberInput defaultValue={1} aria-label="Cantidad" />
       </div>
       <div data-testid="traducido">
-        <NumberInput defaultValue={1} decrementLabel="Decrease" incrementLabel="Increase" />
+        <NumberInput defaultValue={1} decrementLabel="Decrease" incrementLabel="Increase" aria-label="Quantity" />
       </div>
     </>
   ),

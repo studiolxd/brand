@@ -106,6 +106,9 @@ export const ConversationThread = forwardRef<HTMLDivElement, ConversationThreadP
       className={`conversation-thread${className ? ` ${className}` : ''}`}
       role="log"
       aria-label={t('label', ariaLabel)}
+      // El hilo es el contenedor con scroll y sus globos no tienen nada
+      // enfocable: sin parada propia, el teclado no podría desplazarlo.
+      tabIndex={0}
       // Qué está pintando el hilo: sus propios globos o el bloque que le pasa
       // el producto. Lo lee el CSS para centrar lo que va solo —la
       // conversación sin mensajes— sin centrar el primer mensaje de una

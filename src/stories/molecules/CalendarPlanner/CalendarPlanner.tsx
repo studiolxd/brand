@@ -531,9 +531,13 @@ export function CalendarPlanner({
                   ]
                     .filter(Boolean)
                     .join(' ')}
-                  aria-label={dayFormatter.format(date)}
                   aria-current={isToday ? 'date' : undefined}
                 >
+                  {/* La fecha larga va como texto oculto y no como `aria-label`:
+                      una cabecera de columna necesita texto propio (si no, los
+                      lectores que leen el contenido la dan por vacía), y es el
+                      mismo reparto que en la celda del mes. */}
+                  <VisuallyHidden>{dayFormatter.format(date)}</VisuallyHidden>
                   <abbr aria-hidden="true" title={weekdays[i].long}>
                     {weekdays[i].short}
                   </abbr>

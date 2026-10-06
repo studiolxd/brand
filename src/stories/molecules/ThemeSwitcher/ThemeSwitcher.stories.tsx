@@ -38,6 +38,11 @@ export const Lista: Story = {
 export const Contrato: Story = {
   name: 'Test — menú de opciones exclusivas, cambio anunciado',
   tags: ['!dev'],
+  // a11y falso positivo (D16): `aria-hidden-focus` salta en los `span[data-base-ui-focus-guard]`
+  // que Base UI pone alrededor del popup abierto. Son centinelas `aria-hidden` con
+  // `tabindex="0"` que devuelven el foco al popup o al disparador al tabular: que el
+  // lector no los vea es justo lo correcto.
+  parameters: { a11y: { config: { rules: [{ id: 'aria-hidden-focus', enabled: false }] } } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const boton = canvas.getByRole('button', { name: 'Tema' });

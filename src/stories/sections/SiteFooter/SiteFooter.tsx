@@ -1,9 +1,10 @@
-import type { ReactNode } from 'react';
+import { cloneElement, isValidElement, type ReactNode } from 'react';
 import { Container, type ContainerWidth } from '../../atoms/Container/Container';
 import { Heading, type HeadingLevel } from '../../atoms/Heading/Heading';
 import { List } from '../../atoms/List/List';
 import { Logo } from '../../atoms/Logo/Logo';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
+import { LegalFooter, type LegalFooterProps } from '../LegalFooter/LegalFooter';
 import './SiteFooter.css';
 import { defaultRenderLink } from '../../constants/default-render-link';
 
@@ -47,7 +48,11 @@ export interface SiteFooterProps {
    * componentes del sistema; el pie solo le reserva el sitio.
    */
   aside?: ReactNode;
-  /** Bloque legal bajo el pie, separado por una línea. Se espera un `LegalFooter`. */
+  /**
+   * Bloque legal bajo el pie, separado por una línea. Se espera un
+   * `LegalFooter`, que aquí se monta como `<div>` (`as="div"`): dentro de este
+   * `<footer>` no puede ir otro, ni la página tener dos `contentinfo`.
+   */
   legal?: ReactNode;
   /** Nivel semántico del título de cada columna. Por defecto `2`. */
   columnTitleLevel?: HeadingLevel;
@@ -123,8 +128,16 @@ export function SiteFooter({
           </div>
         )}
 
-        {legal && <div className="site-footer__legal">{legal}</div>}
+        {legal && <div className="site-footer__legal">{asNestedLegal(legal)}</div>}
       </Container>
     </footer>
   );
+}
+
+/** Un `LegalFooter` dentro del pie deja de ser `<footer>`: ver `legal`. */
+function asNestedLegal(legal: ReactNode): ReactNode {
+  if (isValidElement<LegalFooterProps>(legal) && legal.type === LegalFooter) {
+    return cloneElement(legal, { as: 'div' });
+  }
+  return legal;
 }

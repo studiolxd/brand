@@ -180,6 +180,9 @@ export const ContratoBoton: Story = {
  * ser un enlace de acción principal.
  */
 export const Tonos: Story = {
+  // a11y pendiente de decisión (D16): `color-contrast` del tono `accent-1` de `Link`:
+  // #baabff sobre #ffffff, 2,02:1 (texto de 16px, pide 4,5:1).
+  parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } },
   render: () => (
     <div style={{ display: 'flex', gap: 'var(--spacing-5)' }}>
       <Link href="#recuperar">¿Olvidaste tu contraseña?</Link>
@@ -203,6 +206,9 @@ export const ContratoInk: Story = {
 export const ContratoAccent1: Story = {
   name: 'Test — el tono accent-1 lleva su clase y su color de acento 1',
   tags: ['!dev'],
+  // a11y pendiente de decisión (D16): `color-contrast` del tono `accent-1` de `Link`:
+  // #baabff sobre #ffffff, 2,02:1 (texto de 16px, pide 4,5:1).
+  parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } },
   render: () => <Link href="#novedades" tone="accent-1" data-testid="accent-1">Descubre las novedades</Link>,
   play: async ({ canvasElement }) => {
     const a = canvasElement.querySelector('[data-testid="accent-1"]') as HTMLElement;

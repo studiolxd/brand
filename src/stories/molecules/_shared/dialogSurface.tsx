@@ -36,10 +36,15 @@ export interface DialogHeaderProps {
   children: ReactNode;
 }
 
-/** Cabecera del diálogo, en una de sus dos colocaciones. */
+/**
+ * Cabecera del diálogo, en una de sus dos colocaciones. Es un `<div>`, no un
+ * `<header>`: el diálogo sale por un portal al `<body>`, fuera de cualquier
+ * `<main>`/`<section>`, y ahí un `<header>` es un `banner` — el segundo de la
+ * página, junto al de la aplicación. El diálogo ya se nombra por su título.
+ */
 export function DialogHeader({ layout, noTitle = false, className, children }: DialogHeaderProps) {
   return (
-    <header
+    <div
       className={cx(
         'dialog-header',
         `dialog-header--${layout}`,
@@ -48,7 +53,7 @@ export function DialogHeader({ layout, noTitle = false, className, children }: D
       )}
     >
       {children}
-    </header>
+    </div>
   );
 }
 
