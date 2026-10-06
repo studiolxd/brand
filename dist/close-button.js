@@ -1,22 +1,24 @@
 'use client';
 import './close-button.css';
-import { Icon as e } from "./icon.js";
-import { forwardRef as t } from "react";
-import { jsx as n } from "react/jsx-runtime";
+import { n as e } from "./_shared/brandmessagescontext.js";
+import { Icon as t } from "./icon.js";
+import { forwardRef as n } from "react";
+import { jsx as r } from "react/jsx-runtime";
 //#region src/stories/atoms/CloseButton/CloseButton.tsx
-var r = t(function({ label: t = "Cerrar", size: r = "md", className: i, ...a }, o) {
-	return /* @__PURE__ */ n("button", {
-		ref: o,
+var i = n(function({ label: n, size: i = "md", className: a, ...o }, s) {
+	let c = e("closeButton");
+	return /* @__PURE__ */ r("button", {
+		ref: s,
 		type: "button",
 		className: [
 			"close-button",
-			r === "md" ? "" : `close-button--${r}`,
-			i
+			i === "md" ? "" : `close-button--${i}`,
+			a
 		].filter(Boolean).join(" "),
-		"aria-label": t,
-		...a,
-		children: /* @__PURE__ */ n(e, { name: "close" })
+		"aria-label": c("label", n),
+		...o,
+		children: /* @__PURE__ */ r(t, { name: "close" })
 	});
 });
 //#endregion
-export { r as CloseButton };
+export { i as CloseButton };

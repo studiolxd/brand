@@ -1,23 +1,23 @@
 import '../datepicker.css';
 import { n as e } from "./brandmessagescontext.js";
 import { Icon as t } from "../icon.js";
-import { t as n } from "./assign-ref.js";
-import { Input as r } from "../input.js";
+import { Input as n } from "../input.js";
+import { t as r } from "./assign-ref.js";
 import { Popover as i } from "../popover.js";
 import { Calendar as a } from "../calendar.js";
-import { forwardRef as o, useCallback as s, useId as c, useMemo as l, useRef as u, useState as d } from "react";
-import { jsx as f, jsxs as p } from "react/jsx-runtime";
+import { forwardRef as o, useCallback as s, useId as c, useMemo as l, useRef as ee, useState as u } from "react";
+import { jsx as d, jsxs as f } from "react/jsx-runtime";
 //#region src/stories/molecules/DatePicker/dateMask.ts
-var m = /[‎‏؜]/g, h = new Date(2026, 8, 25);
-function g(e, t) {
+var p = /[‎‏؜]/g, m = new Date(2026, 8, 25);
+function h(e, t) {
 	return String(e).padStart(t, "0");
 }
-function _(e) {
+function g(e) {
 	let t = new Intl.DateTimeFormat(e, {
 		day: "2-digit",
 		month: "2-digit",
 		year: "numeric"
-	}).formatToParts(h), n = t.filter((e) => e.type === "day" || e.type === "month" || e.type === "year").map((e) => e.type), r = t.find((e) => e.type === "literal" && e.value.replace(m, "").trim() !== "")?.value.replace(m, "").trim() || "/", i = {
+	}).formatToParts(m), n = t.filter((e) => e.type === "day" || e.type === "month" || e.type === "year").map((e) => e.type), r = t.find((e) => e.type === "literal" && e.value.replace(p, "").trim() !== "")?.value.replace(p, "").trim() || "/", i = {
 		day: 2,
 		month: 2,
 		year: 4
@@ -28,13 +28,13 @@ function _(e) {
 			month: e.getMonth() + 1,
 			year: e.getFullYear()
 		};
-		return n.map((e) => g(t[e], i[e])).join(r);
+		return n.map((e) => h(t[e], i[e])).join(r);
 	}
 	function o(e) {
 		return n.map((t) => e[t]).join(r);
 	}
 	function s(e) {
-		let t = e.replace(m, "").trim();
+		let t = e.replace(p, "").trim();
 		if (/\p{L}/u.test(t)) return null;
 		let r = t.split(/\D+/).filter(Boolean);
 		if (r.length !== 3) return null;
@@ -55,116 +55,117 @@ function _(e) {
 }
 //#endregion
 //#region src/stories/molecules/DatePicker/DatePicker.tsx
-function v(e) {
+function _(e) {
 	return `${String(e.getFullYear()).padStart(4, "0")}-${String(e.getMonth() + 1).padStart(2, "0")}-${String(e.getDate()).padStart(2, "0")}`;
 }
-var y = o(function({ value: o, onChange: m, placeholder: h, maskLetters: g, invalidMessage: y, openCalendarLabel: ee, minDate: b, maxDate: x, disabledDates: S, size: C = "md", disabled: w, readOnly: T, error: E = !1, locale: D = "es-ES", id: O, name: k, describedBy: te, "aria-describedby": ne, "aria-label": re, calendarLabel: ie, previousMonthLabel: ae, nextMonthLabel: A, previousYearsLabel: j, nextYearsLabel: M, yearGridLabel: N, gridLabel: P, onBlur: F, className: I }, L) {
-	let R = e("datePicker"), [z, B] = d(!1), V = l(() => _(D), [D]), H = o instanceof Date ? V.format(o) : "", [U, W] = d(H), [G, K] = d(H);
-	H !== G && (K(H), W(H));
-	let q = u(null), oe = s((e) => {
-		q.current = e, n(L, e);
-	}, [L]), J = U.trim(), Y = J ? V.parse(U) : null, X = J !== "" && !Y, se = E || X, Z = `${c()}-date-picker-invalid`, ce = [te ?? ne, X ? Z : void 0].filter(Boolean).join(" ") || void 0, le = s((e) => {
-		(T || w) && e || B(e);
-	}, [w, T]), ue = s((e) => {
+var v = o(function({ value: o, onChange: p, placeholder: m, maskLetters: h, invalidMessage: v, openCalendarLabel: y, minDate: b, maxDate: x, disabledDates: te, size: S = "md", disabled: C, readOnly: w, error: T = !1, locale: E = "es-ES", id: D, name: O, describedBy: k, "aria-describedby": ne, "aria-label": re, calendarLabel: ie, previousMonthLabel: ae, nextMonthLabel: A, previousYearsLabel: j, nextYearsLabel: M, yearGridLabel: N, gridLabel: P, today: F, onBlur: I, className: L }, R) {
+	let z = e("datePicker"), [B, V] = u(!1), H = l(() => g(E), [E]), U = o instanceof Date ? H.format(o) : "", [W, G] = u(U), [K, q] = u(U);
+	U !== K && (q(U), G(U));
+	let J = ee(null), oe = s((e) => {
+		J.current = e, r(R, e);
+	}, [R]), Y = W.trim(), X = Y ? H.parse(W) : null, Z = Y !== "" && !X, se = T || Z, Q = `${c()}-date-picker-invalid`, ce = [k ?? ne, Z ? Q : void 0].filter(Boolean).join(" ") || void 0, le = s((e) => {
+		(w || C) && e || V(e);
+	}, [C, w]), ue = s((e) => {
 		let t = e.target.value;
-		if (W(t), t.trim() === "") {
-			m?.(null);
+		if (G(t), t.trim() === "") {
+			p?.(null);
 			return;
 		}
-		let n = V.parse(t);
-		n && m?.(n);
-	}, [V, m]), Q = s((e) => {
-		if (e.key === "ArrowDown" && !T && !w) {
-			e.preventDefault(), B(!0);
+		let n = H.parse(t);
+		n && p?.(n);
+	}, [H, p]), de = s((e) => {
+		if (e.key === "ArrowDown" && !w && !C) {
+			e.preventDefault(), V(!0);
 			return;
 		}
-		e.key === "Escape" && z && (e.preventDefault(), B(!1));
+		e.key === "Escape" && B && (e.preventDefault(), V(!1));
 	}, [
-		w,
-		z,
-		T
-	]), de = s((e) => {
-		W(V.format(e)), m?.(e), B(!1), requestAnimationFrame(() => q.current?.focus());
-	}, [V, m]), fe = /* @__PURE__ */ f("button", {
+		C,
+		B,
+		w
+	]), fe = s((e) => {
+		G(H.format(e)), p?.(e), V(!1), requestAnimationFrame(() => J.current?.focus());
+	}, [H, p]), pe = /* @__PURE__ */ d("button", {
 		type: "button",
 		className: "date-picker__button",
-		"aria-label": R("openCalendar", ee),
+		"aria-label": z("openCalendar", y),
 		"aria-haspopup": "dialog",
-		"aria-expanded": z,
-		disabled: w,
-		tabIndex: T ? -1 : void 0,
-		children: /* @__PURE__ */ f(t, {
+		"aria-expanded": B,
+		disabled: C,
+		tabIndex: w ? -1 : void 0,
+		children: /* @__PURE__ */ d(t, {
 			name: "calendar",
 			size: "sm",
 			className: "date-picker__glyph"
 		})
-	}), $ = R("calendar", ie);
-	return /* @__PURE__ */ p("div", {
+	}), $ = z("calendar", ie);
+	return /* @__PURE__ */ f("div", {
 		className: [
 			"date-picker",
-			C === "md" ? "" : `date-picker--${C}`,
-			I ?? ""
+			S === "md" ? "" : `date-picker--${S}`,
+			L ?? ""
 		].filter(Boolean).join(" "),
 		children: [
-			k && /* @__PURE__ */ f("input", {
+			O && /* @__PURE__ */ d("input", {
 				type: "hidden",
-				name: k,
-				value: o instanceof Date ? v(o) : ""
+				name: O,
+				value: o instanceof Date ? _(o) : ""
 			}),
-			/* @__PURE__ */ p("div", {
+			/* @__PURE__ */ f("div", {
 				className: "date-picker__control",
-				children: [/* @__PURE__ */ f(r, {
+				children: [/* @__PURE__ */ d(n, {
 					ref: oe,
-					id: O,
+					id: D,
 					className: "date-picker__input",
 					type: "text",
 					inputMode: "numeric",
 					autoComplete: "off",
-					size: C,
+					size: S,
 					error: se,
-					value: U,
-					placeholder: h ?? V.mask(R("maskLetters", g)),
-					disabled: w,
-					readOnly: T,
+					value: W,
+					placeholder: m ?? H.mask(z("maskLetters", h)),
+					disabled: C,
+					readOnly: w,
 					"aria-label": re,
 					"aria-describedby": ce,
 					onChange: ue,
-					onKeyDown: Q,
-					onBlur: F
-				}), /* @__PURE__ */ f(i, {
-					trigger: fe,
+					onKeyDown: de,
+					onBlur: I
+				}), /* @__PURE__ */ d(i, {
+					trigger: pe,
 					label: $,
-					open: z,
+					open: B,
 					onOpenChange: le,
 					side: "bottom",
 					align: "end",
 					sideOffset: -1,
 					className: "date-picker__popover",
-					children: /* @__PURE__ */ f(a, {
-						value: Y ?? o ?? null,
-						onChange: de,
+					children: /* @__PURE__ */ d(a, {
+						value: X ?? o ?? null,
+						onChange: fe,
 						gridLabel: P ?? $,
 						previousMonthLabel: ae,
 						nextMonthLabel: A,
 						previousYearsLabel: j,
 						nextYearsLabel: M,
 						yearGridLabel: N,
+						today: F,
 						minDate: b,
 						maxDate: x,
-						disabledDates: S,
-						locale: D,
-						size: C
+						disabledDates: te,
+						locale: E,
+						size: S
 					})
 				})]
 			}),
-			X && /* @__PURE__ */ f("span", {
-				id: Z,
+			Z && /* @__PURE__ */ d("span", {
+				id: Q,
 				className: "date-picker__message",
 				role: "alert",
-				children: R("invalid", y)
+				children: z("invalid", v)
 			})
 		]
 	});
 });
 //#endregion
-export { y as t };
+export { v as t };

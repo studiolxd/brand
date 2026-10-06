@@ -1,4 +1,4 @@
-import { Popover as BasePopover } from '@base-ui/react/popover';
+import { Select as BaseSelect } from '@base-ui/react/select';
 import './MultiSelect.css';
 /**
  * Los dos textos que el control emite por su cuenta: el marcador de sitio sin
@@ -63,16 +63,17 @@ export interface MultiSelectProps {
      * solo para llevar la capa a otro sitio: un `.surface-dark` **anidado**, el
      * cajón de un shell propio. Gana siempre.
      */
-    container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
+    container?: React.ComponentPropsWithoutRef<typeof BaseSelect.Portal>['container'];
 }
 /**
- * Selección múltiple. El `ref` va al elemento con `role="combobox"`, que es lo
- * enfocable, para que react-hook-form pueda enfocarlo al fallar la validación.
- *
- * Teclado del patrón combobox (el mismo que `AsyncSelect`): flechas abren y
- * recorren, Inicio/Fin saltan a los extremos, Intro/Espacio marcan y desmarcan,
- * Escape cierra y escribir una letra salta a la opción que empieza por ella. El
- * foco del DOM no se mueve nunca de la caja: la opción activa se señala con
- * `aria-activedescendant`.
+ * Selección múltiple sin campo de texto, sobre el `Select` múltiple de Base UI
+ * (no sobre su `Combobox`: sin `<input>`, la guía de Base UI manda al
+ * `Select`). El teclado es suyo: flechas, Intro y Espacio abren; dentro de la
+ * lista las flechas y Inicio/Fin recorren, Intro y Espacio marcan y desmarcan,
+ * escribir salta a la opción que empieza por lo tecleado y Escape cierra y
+ * devuelve el foco a la caja. La lista **sí recibe el foco** (es una lista de
+ * Base UI, no un foco virtual). El `ref` va al elemento con `role="combobox"`,
+ * que es lo enfocable, para que react-hook-form pueda enfocarlo al fallar la
+ * validación.
  */
 export declare const MultiSelect: import("react").ForwardRefExoticComponent<MultiSelectProps & import("react").RefAttributes<HTMLDivElement>>;

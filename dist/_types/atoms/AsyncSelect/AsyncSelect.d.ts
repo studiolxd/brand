@@ -1,4 +1,4 @@
-import { Popover as BasePopover } from '@base-ui/react/popover';
+import { Combobox } from '@base-ui/react/combobox';
 import './AsyncSelect.css';
 export interface AsyncSelectOption {
     value: string;
@@ -87,10 +87,14 @@ export interface AsyncSelectProps {
      * solo para llevar la capa a otro sitio: un `.surface-dark` **anidado**, el
      * cajón de un shell propio. Gana siempre.
      */
-    container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
+    container?: React.ComponentPropsWithoutRef<typeof Combobox.Portal>['container'];
 }
 /**
- * Búsqueda con resultados asíncronos y un solo valor. El `ref` va al `<input>`
- * de búsqueda, que es lo que se enfoca.
+ * Búsqueda con resultados asíncronos y un solo valor, sobre el `Combobox` de
+ * Base UI: el teclado, el foco virtual (`aria-activedescendant`), los anuncios
+ * y el cierre son suyos. El componente decide qué opciones hay (carga con
+ * rebote, `useAsyncOptions`) y qué texto enseña el campo: abierto, lo que se
+ * escribe; cerrado, la etiqueta de lo elegido. El `ref` va al `<input>` de
+ * búsqueda, que es lo que se enfoca.
  */
 export declare const AsyncSelect: import("react").ForwardRefExoticComponent<AsyncSelectProps & import("react").RefAttributes<HTMLInputElement>>;

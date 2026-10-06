@@ -1,4 +1,4 @@
-import { Popover as BasePopover } from '@base-ui/react/popover';
+import { Combobox } from '@base-ui/react/combobox';
 import './AsyncMultiSelect.css';
 export interface AsyncMultiSelectOption {
     value: string;
@@ -98,10 +98,14 @@ export interface AsyncMultiSelectProps {
      * solo para llevar la capa a otro sitio: un `.surface-dark` **anidado**, el
      * cajón de un shell propio. Gana siempre.
      */
-    container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
+    container?: React.ComponentPropsWithoutRef<typeof Combobox.Portal>['container'];
 }
 /**
- * Búsqueda con resultados asíncronos y varios valores. El `ref` va al
- * `<input>` de búsqueda, que es lo que se enfoca.
+ * Búsqueda con resultados asíncronos y varios valores, sobre el `Combobox`
+ * múltiple de Base UI: el teclado (flechas, Intro para marcar y desmarcar,
+ * Retroceso para quitar la última ficha, flechas laterales para recorrerlas),
+ * el foco virtual, los anuncios y el cierre son suyos. El componente decide qué
+ * opciones hay (carga con rebote, `useAsyncOptions`) y qué etiqueta lleva cada
+ * ficha. El `ref` va al `<input>` de búsqueda, que es lo que se enfoca.
  */
 export declare const AsyncMultiSelect: import("react").ForwardRefExoticComponent<AsyncMultiSelectProps & import("react").RefAttributes<HTMLInputElement>>;

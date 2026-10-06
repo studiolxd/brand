@@ -1,138 +1,101 @@
 'use client';
 import './autocomplete.css';
 import { Spinner as e } from "./spinner.js";
-import { n as t } from "./_shared/portal-container.js";
-import { t as n } from "./_shared/assign-ref.js";
-import { forwardRef as r, useCallback as ee, useEffect as i, useId as a, useRef as o, useState as s } from "react";
-import { jsx as c, jsxs as l } from "react/jsx-runtime";
-import { Popover as u } from "@base-ui/react/popover";
+import { t } from "./_shared/useasyncoptions.js";
+import { n } from "./_shared/portal-container.js";
+import { forwardRef as r, useState as i } from "react";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { Autocomplete as s } from "@base-ui/react/autocomplete";
 //#region src/stories/atoms/Autocomplete/Autocomplete.tsx
-function d(e) {
+function c(e) {
 	return e.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
-var f = r(function({ value: r, defaultValue: f = "", onValueChange: p, onSelect: m, options: h, onSearch: g, debounceMs: _ = 200, minChars: v = 1, placeholder: y, disabled: b, readOnly: x, size: S = "md", id: C, name: w, error: T = !1, required: E, maxLength: D, onBlur: O, className: k, "aria-label": A, "aria-describedby": j, container: M }, N) {
-	let te = t(M), [ne, re] = s(f), [ie, P] = s(!1), [ae, F] = s(!1), [I, L] = s([]), [R, z] = s(-1), B = o(null), V = o(0), H = o(null), U = o(null), W = a(), G = a(), K = r === void 0 ? ne : r, q = ie && I.length > 0, J = (e) => `${G}-opt-${e}`, Y = ee((e) => {
-		let t = ++V.current;
-		if (g) {
-			F(!0), Promise.resolve().then(() => g(e)).then((e) => e, () => []).then((e) => {
-				t === V.current && (L(e), z(-1), F(!1));
-			});
+var l = () => [], u = r(function({ value: r, defaultValue: u = "", onValueChange: d, onSelect: f, options: p, onSearch: m, debounceMs: h = 200, minChars: g = 1, placeholder: _, disabled: v, readOnly: y, size: b = "md", id: x, name: S, error: C = !1, required: w, maxLength: T, onBlur: E, className: D, "aria-label": O, "aria-describedby": k, container: A }, j) {
+	let M = n(A), N = t(m ?? l, h), [P, F] = i(u), [I, L] = i(!1), [R, z] = i(""), B = r === void 0 ? P : r, V = m ? N.results : (p ?? []).filter((e) => c(e.label).includes(c(R))), H = I && V.length > 0;
+	function U(e) {
+		L(!0), z(e), m && N.schedule(e);
+	}
+	function W() {
+		N.cancel(), L(!1);
+	}
+	function G(e) {
+		r === void 0 && F(e), d?.(e);
+	}
+	function K(e) {
+		f?.(e), W(), N.clear();
+	}
+	function q(e, t) {
+		if (t.reason === "item-press") {
+			G(e);
 			return;
 		}
-		let n = d(e);
-		L((h ?? []).filter((e) => d(e.label).includes(n))), z(-1);
-	}, [g, h]);
-	i(() => () => {
-		V.current += 1, B.current && clearTimeout(B.current);
-	}, []);
-	function X(e) {
-		B.current && clearTimeout(B.current), g && _ > 0 ? B.current = setTimeout(() => Y(e), _) : Y(e);
+		t.reason === "input-change" && (G(e), e.length < g ? W() : U(e));
 	}
-	function Z() {
-		B.current && clearTimeout(B.current), V.current += 1, F(!1), P(!1), z(-1);
-	}
-	function Q(e) {
-		r === void 0 && re(e), p?.(e);
-	}
-	function oe(e) {
-		let t = e.target.value;
-		if (Q(t), t.length < v) {
-			Z();
-			return;
-		}
-		P(!0), X(t);
-	}
-	function $(e) {
-		Q(e.label), m?.(e), Z(), L([]);
-	}
-	function se(e) {
-		b || x || (e.key === "ArrowDown" ? (e.preventDefault(), q ? z((e) => Math.min(e + 1, I.length - 1)) : (P(!0), X(K))) : e.key === "ArrowUp" ? (e.preventDefault(), q && z((e) => Math.max(e - 1, -1))) : e.key === "Enter" ? q && R >= 0 && I[R] ? (e.preventDefault(), $(I[R])) : q && Z() : e.key === "Escape" ? q && (e.preventDefault(), e.stopPropagation(), Z()) : e.key === "Tab" && Z());
-	}
-	function ce(e, t) {
+	function J(e, t) {
 		if (!e) {
-			if (t.reason === "outside-press") {
-				let e = t.event?.target;
-				if (e instanceof Node && U.current?.contains(e)) return;
-			}
-			Z();
+			W();
+			return;
 		}
+		t.reason !== "input-change" && U(B);
 	}
-	let le = [
+	function Y(e) {
+		e.key === "Escape" && !H && e.preventBaseUIHandler?.();
+	}
+	let X = [
 		"autocomplete",
-		S === "md" ? "" : `autocomplete--${S}`,
-		b ? "autocomplete--disabled" : "",
-		T ? "autocomplete--error" : "",
-		k ?? ""
-	].filter(Boolean).join(" "), ue = ["autocomplete__content", S === "md" ? "" : `autocomplete__content--${S}`].filter(Boolean).join(" ");
-	return /* @__PURE__ */ l(u.Root, {
-		open: q,
-		onOpenChange: ce,
-		children: [/* @__PURE__ */ l("div", {
-			ref: U,
-			className: le,
-			"data-popup-open": q || void 0,
-			children: [/* @__PURE__ */ c("input", {
-				ref: (e) => {
-					H.current = e, n(N, e);
-				},
-				id: C,
-				name: w,
-				type: "text",
+		b === "md" ? "" : `autocomplete--${b}`,
+		v ? "autocomplete--disabled" : "",
+		C ? "autocomplete--error" : "",
+		D ?? ""
+	].filter(Boolean).join(" "), Z = ["autocomplete__content", b === "md" ? "" : `autocomplete__content--${b}`].filter(Boolean).join(" ");
+	return /* @__PURE__ */ o(s.Root, {
+		items: V,
+		filter: null,
+		value: B,
+		onValueChange: q,
+		open: H,
+		onOpenChange: J,
+		disabled: v,
+		readOnly: y,
+		children: [/* @__PURE__ */ o(s.InputGroup, {
+			className: X,
+			children: [/* @__PURE__ */ a(s.Input, {
+				ref: j,
+				id: x,
+				name: S,
 				className: "autocomplete__input",
-				value: K,
-				onChange: oe,
-				onKeyDown: se,
-				placeholder: y,
-				disabled: b,
-				readOnly: x,
-				required: E,
-				maxLength: D,
-				"aria-label": A,
-				"aria-describedby": j,
-				"aria-invalid": T || void 0,
-				"aria-expanded": q,
-				"aria-haspopup": "listbox",
-				"aria-controls": q ? W : void 0,
-				"aria-activedescendant": q && R >= 0 ? J(R) : void 0,
-				autoComplete: "off",
-				role: "combobox",
-				"aria-autocomplete": "list",
-				onBlur: O
-			}), ae && /* @__PURE__ */ c(e, {
+				placeholder: _,
+				required: w,
+				maxLength: T,
+				"aria-label": O,
+				"aria-describedby": k,
+				"aria-invalid": C || void 0,
+				onKeyDown: Y,
+				onBlur: E
+			}), N.loading && /* @__PURE__ */ a(e, {
 				size: "sm",
 				"aria-hidden": !0
 			})]
-		}), /* @__PURE__ */ c(u.Portal, {
-			container: te,
-			children: /* @__PURE__ */ c(u.Positioner, {
+		}), /* @__PURE__ */ a(s.Portal, {
+			container: M,
+			children: /* @__PURE__ */ a(s.Positioner, {
 				className: "autocomplete__positioner",
-				anchor: U,
 				align: "start",
 				sideOffset: -1,
-				children: /* @__PURE__ */ c(u.Popup, {
-					className: ue,
-					initialFocus: !1,
-					finalFocus: !1,
-					children: /* @__PURE__ */ c("div", {
-						role: "listbox",
-						"aria-label": A ?? y,
-						id: W,
-						children: I.map((e, t) => {
-							let n = e.label === K, r = R === t;
-							return /* @__PURE__ */ c("div", {
-								id: J(t),
-								role: "option",
-								"aria-selected": r,
-								className: [
-									"autocomplete__item",
-									n ? "autocomplete__item--selected" : "",
-									r ? "autocomplete__item--active" : ""
-								].filter(Boolean).join(" "),
-								onPointerDown: (e) => e.preventDefault(),
-								onClick: () => $(e),
-								children: e.label
-							}, e.value);
-						})
+				children: /* @__PURE__ */ a(s.Popup, {
+					className: Z,
+					children: /* @__PURE__ */ a(s.List, {
+						"aria-label": O ?? _,
+						children: (e) => /* @__PURE__ */ a(s.Item, {
+							value: e,
+							className: ["autocomplete__item", e.label === B ? "autocomplete__item--selected" : ""].filter(Boolean).join(" "),
+							onClick: () => K(e),
+							render: (e, t) => /* @__PURE__ */ a("div", {
+								...e,
+								"aria-selected": t.highlighted
+							}),
+							children: e.label
+						}, e.value)
 					})
 				})
 			})
@@ -140,4 +103,4 @@ var f = r(function({ value: r, defaultValue: f = "", onValueChange: p, onSelect:
 	});
 });
 //#endregion
-export { f as Autocomplete };
+export { u as Autocomplete };

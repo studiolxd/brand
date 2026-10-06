@@ -51,6 +51,14 @@ export interface SidebarNavProps {
      * `sidebarNav.empty`. Solo se lee cuando hay alguna entrada vacía.
      */
     emptyLabel?: string;
+    /**
+     * Nombre de una entrada vacía donde no cabe la marca aparte —el tooltip y
+     * el nombre accesible del modo rail, el rótulo del menú de un grupo—.
+     * Recibe el rótulo de la entrada y la marca de vacío ya resuelta. **Sin
+     * default**: sale de `sidebarNav.emptyEntry`. Solo se lee cuando hay alguna
+     * entrada vacía en esas formas.
+     */
+    emptyEntryLabel?: (label: string, empty: string) => string;
     /** Solo iconos: los enlaces con tooltip, los grupos como menú. Sin él, lo decide la `Sidebar` (rail). */
     rail?: boolean;
     entries: SidebarNavEntry[];
@@ -72,5 +80,11 @@ export interface SidebarNavMessages {
     label: string;
     /** Marca de las entradas sin contenido. */
     empty: string;
+    /**
+     * Una entrada vacía nombrada en una sola cadena: «Guías — sin docs». Recibe
+     * el rótulo de la entrada y la marca de vacío; es función porque el orden y
+     * el separador son de cada idioma.
+     */
+    emptyEntry: (label: string, empty: string) => string;
 }
-export declare function SidebarNav({ label, emptyLabel, rail, entries, defaultValue, value, onValueChange, renderLink, className, }: SidebarNavProps): import("react/jsx-runtime").JSX.Element;
+export declare function SidebarNav({ label, emptyLabel, emptyEntryLabel, rail, entries, defaultValue, value, onValueChange, renderLink, className, }: SidebarNavProps): import("react/jsx-runtime").JSX.Element;

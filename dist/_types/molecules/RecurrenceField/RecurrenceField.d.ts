@@ -65,6 +65,11 @@ export interface RecurrenceFieldProps {
     locale?: string;
     /** Por dónde empieza la semana en los días. Default `'monday'`. */
     weekStartsOn?: 'monday' | 'sunday';
+    /**
+     * El «hoy» del calendario de la fecha de final. Default: la fecha actual.
+     * En SSR conviene pasarla (ver `Calendar`).
+     */
+    today?: Date;
     /** Tope inferior de la fecha de final. */
     minDate?: Date;
     /** Tope superior de la fecha de final. */
@@ -90,4 +95,4 @@ export interface RecurrenceFieldProps {
  * Es **controlado**, como el resto de campos del sistema: recibe `value` y
  * llama a `onValueChange` con el valor entero. `null` es «no se repite».
  */
-export declare function RecurrenceField({ value, onValueChange, id: idProp, legend, disabled, size, locale, weekStartsOn, minDate, maxDate, className, frequencyLabel, weekdaysLabel, endLabel, }: RecurrenceFieldProps): import("react/jsx-runtime").JSX.Element;
+export declare function RecurrenceField({ value, onValueChange, id: idProp, legend, disabled, size, locale, weekStartsOn, minDate, maxDate, today, className, frequencyLabel, weekdaysLabel, endLabel, }: RecurrenceFieldProps): import("react/jsx-runtime").JSX.Element;

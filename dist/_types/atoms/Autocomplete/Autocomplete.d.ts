@@ -1,4 +1,4 @@
-import { Popover as BasePopover } from '@base-ui/react/popover';
+import { Autocomplete as BaseAutocomplete } from '@base-ui/react/autocomplete';
 import './Autocomplete.css';
 export interface AutocompleteOption {
     /** Identifica la sugerencia: es lo que recibe `onSelect` para saber cuál se eligió. */
@@ -72,12 +72,16 @@ export interface AutocompleteProps {
      * `Portal.container`). Mismo contrato que `AsyncSelect`: por defecto, el nodo
      * de la superficie que llegue por contexto, o `document.body`.
      */
-    container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
+    container?: React.ComponentPropsWithoutRef<typeof BaseAutocomplete.Portal>['container'];
 }
 /**
- * Campo de texto con sugerencias. A diferencia de `AsyncSelect`, **no obliga a
- * elegir**: el valor es el texto escrito y una sugerencia es solo una forma de
- * escribirlo más deprisa. Patrón ARIA de combobox con lista (`aria-activedescendant`):
- * el foco no sale nunca del `<input>`. El `ref` va a ese `<input>`.
+ * Campo de texto con sugerencias, sobre el `Autocomplete` de Base UI. A
+ * diferencia de `AsyncSelect`, **no obliga a elegir**: el valor es el texto
+ * escrito y una sugerencia es solo una forma de escribirlo más deprisa. El
+ * teclado, el foco virtual (`aria-activedescendant`: el foco no sale nunca del
+ * `<input>`), los anuncios y el cierre son de Base UI; el componente decide qué
+ * sugerencias hay —filtrando `options` o pidiéndolas a `onSearch` con rebote
+ * (`useAsyncOptions`)— y cuándo merece la pena abrir la lista. El `ref` va al
+ * `<input>`.
  */
 export declare const Autocomplete: import("react").ForwardRefExoticComponent<AutocompleteProps & import("react").RefAttributes<HTMLInputElement>>;

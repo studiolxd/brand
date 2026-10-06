@@ -139,32 +139,32 @@ function x(e, t) {
 	return new Date(n.getFullYear(), n.getMonth(), Math.min(e.getDate(), r));
 }
 function S(e) {
+	let [t] = a(() => /* @__PURE__ */ new Date());
+	return e ?? t;
+}
+function C(e) {
 	return `${e.getFullYear()}-${e.getMonth()}-${e.getDate()}`;
 }
-function C({ month: e, onMonthChange: o, selected: s, onActivate: u, minDate: d, maxDate: f }) {
-	let [p, m] = a(() => s ?? /* @__PURE__ */ new Date()), h = i(/* @__PURE__ */ new Map()), g = i(!1), _ = r(() => {
-		if (l(p, e)) return p;
-		if (s && l(s, e)) return s;
-		let t = /* @__PURE__ */ new Date();
-		return l(t, e) ? t : new Date(e.getFullYear(), e.getMonth(), 1);
-	}, [
-		p,
+function w({ month: e, onMonthChange: o, selected: s, today: u, onActivate: d, minDate: f, maxDate: p }) {
+	let [m, h] = a(() => s ?? u), g = i(/* @__PURE__ */ new Map()), _ = i(!1), v = r(() => l(m, e) ? m : s && l(s, e) ? s : l(u, e) ? u : new Date(e.getFullYear(), e.getMonth(), 1), [
+		m,
 		e,
-		s
+		s,
+		u
 	]);
 	n(() => {
-		g.current && (g.current = !1, h.current.get(S(_))?.focus());
-	}, [_]);
-	let v = t((t) => {
-		let n = y(t, d, f);
-		g.current = !0, m(n), l(n, e) || o(new Date(n.getFullYear(), n.getMonth(), 1));
+		_.current && (_.current = !1, g.current.get(C(v))?.focus());
+	}, [v]);
+	let S = t((t) => {
+		let n = y(t, f, p);
+		_.current = !0, h(n), l(n, e) || o(new Date(n.getFullYear(), n.getMonth(), 1));
 	}, [
+		p,
 		f,
-		d,
 		e,
 		o
-	]), C = t((e) => {
-		let t = _, n = null;
+	]), w = t((e) => {
+		let t = v, n = null;
 		switch (e.key) {
 			case "ArrowLeft":
 				n = b(t, -1);
@@ -192,46 +192,46 @@ function C({ month: e, onMonthChange: o, selected: s, onActivate: u, minDate: d,
 				break;
 			case "Enter":
 			case " ":
-				u && (e.preventDefault(), u(t));
+				d && (e.preventDefault(), d(t));
 				return;
 			default: return;
 		}
-		e.preventDefault(), v(n);
+		e.preventDefault(), S(n);
 	}, [
-		_,
 		v,
-		u
-	]), w = t((e) => (t) => {
-		let n = S(e);
-		t ? h.current.set(n, t) : h.current.delete(n);
+		S,
+		d
+	]), T = t((e) => (t) => {
+		let n = C(e);
+		t ? g.current.set(n, t) : g.current.delete(n);
 	}, []);
 	return {
-		activeDate: _,
-		isTabbable: t((e) => c(e, _), [_]),
-		cellRef: w,
-		onKeyDown: C,
-		onCellFocus: t((e) => m(e), [])
+		activeDate: v,
+		isTabbable: t((e) => c(e, v), [v]),
+		cellRef: T,
+		onKeyDown: w,
+		onCellFocus: t((e) => h(e), [])
 	};
 }
-function w({ weekStart: e, onWeekChange: o, onActivate: s, minDate: l, maxDate: u }) {
-	let [d, p] = a(() => /* @__PURE__ */ new Date()), m = i(/* @__PURE__ */ new Map()), h = i(!1), g = r(() => f(e), [e]), _ = r(() => {
-		if (c(f(d), g)) return d;
-		let e = /* @__PURE__ */ new Date();
-		return c(f(e), g) ? e : g;
-	}, [d, g]);
+function T({ weekStart: e, onWeekChange: o, today: s, onActivate: l, minDate: u, maxDate: d }) {
+	let [p, m] = a(() => s), h = i(/* @__PURE__ */ new Map()), g = i(!1), _ = r(() => f(e), [e]), v = r(() => c(f(p), _) ? p : c(f(s), _) ? s : _, [
+		p,
+		_,
+		s
+	]);
 	n(() => {
-		h.current && (h.current = !1, m.current.get(S(_))?.focus());
-	}, [_]);
-	let v = t((e) => {
-		let t = y(e, l, u);
-		h.current = !0, p(t), c(f(t), g) || o(f(t));
+		g.current && (g.current = !1, h.current.get(C(v))?.focus());
+	}, [v]);
+	let x = t((e) => {
+		let t = y(e, u, d);
+		g.current = !0, m(t), c(f(t), _) || o(f(t));
 	}, [
+		d,
 		u,
-		l,
 		o,
-		g
-	]), x = t((e) => {
-		let t = _, n = null;
+		_
+	]), S = t((e) => {
+		let t = v, n = null;
 		switch (e.key) {
 			case "ArrowLeft":
 			case "ArrowUp":
@@ -255,26 +255,26 @@ function w({ weekStart: e, onWeekChange: o, onActivate: s, minDate: l, maxDate: 
 				break;
 			case "Enter":
 			case " ":
-				s && (e.preventDefault(), s(t));
+				l && (e.preventDefault(), l(t));
 				return;
 			default: return;
 		}
-		e.preventDefault(), v(n);
+		e.preventDefault(), x(n);
 	}, [
-		_,
 		v,
-		s
-	]), C = t((e) => (t) => {
-		let n = S(e);
-		t ? m.current.set(n, t) : m.current.delete(n);
+		x,
+		l
+	]), w = t((e) => (t) => {
+		let n = C(e);
+		t ? h.current.set(n, t) : h.current.delete(n);
 	}, []);
 	return {
-		activeDate: _,
-		isTabbable: t((e) => c(e, _), [_]),
-		cellRef: C,
-		onKeyDown: x,
-		onCellFocus: t((e) => p(e), [])
+		activeDate: v,
+		isTabbable: t((e) => c(e, v), [v]),
+		cellRef: w,
+		onKeyDown: S,
+		onCellFocus: t((e) => m(e), [])
 	};
 }
 //#endregion
-export { c as a, _ as c, f as d, C as f, g as i, u as l, d as n, l as o, w as p, m as r, v as s, h as t, p as u };
+export { c as a, _ as c, f as d, w as f, g as i, u as l, S as m, d as n, l as o, T as p, m as r, v as s, h as t, p as u };

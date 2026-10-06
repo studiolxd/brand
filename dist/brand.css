@@ -698,8 +698,6 @@ html.dark {
  */
 :root {
   --breadcrumb-padding-inline: 0; /** Sin padding lateral */
-  --breadcrumb-link-text-decoration: none; /** OBSOLETO — no viste nada. El subrayado de las migas es la línea del sistema, la misma de cualquier enlace, y no `text-decoration`. Se conserva en `none` para no romper a quien lo tenga referenciado; a retirar en el próximo major */
-  --breadcrumb-link-text-decoration-hover: none; /** OBSOLETO — no viste nada. Valía `underline` y era la vía por la que el subrayado de `text-decoration` seguía entrando en el DS. A retirar en el próximo major */
   --breadcrumb-font-family: var(--font-family-sans); /** Font family */
   --breadcrumb-line-height: var(--line-height-none); /** Single-line */
   --breadcrumb-gap: var(--spacing-2); /** Gap entre items y separadores */
@@ -995,7 +993,6 @@ html.dark {
   --site-header-z-index: var(--app-header-z-index); /** Capa z — sobre el contenido, bajo los paneles flotantes */
   --site-header-panel-bg: var(--color-background-light); /** Fondo del panel de navegación */
   --site-header-panel-padding-block: var(--section-padding-block-xl); /** Aire superior del panel, entre la barra y el índice */
-  --site-header-settings-margin-block-start: var(--site-header-panel-gap); /** Aire mínimo entre el índice y los ajustes del sitio (idioma, tema), que van pegados al borde inferior del panel: el ritmo del panel. Se mantiene por compatibilidad; quien quiera cambiarlo toca `panel-gap` */
   --site-header-content-height: var(--logo-height-xxl); /** Lo más alto que lleva la barra: el logotipo a talla xxl (85px) */
   --site-header-height-narrow: calc(var(--site-header-content-height-narrow) + 2 * var(--app-header-padding-block)); /** Alto de la barra en teléfono (56px, la misma que la barra de aplicación) */
   --site-header-height-compact: calc(var(--site-header-content-height-compact) + 2 * var(--app-header-padding-block)); /** Alto de la barra en móvil (64px) */
@@ -1094,14 +1091,10 @@ html.dark {
  */
 :root {
   --control-border-style: solid; /** Estilo del borde */
-  --control-cursor: text; /** Cursor por defecto */
-  --control-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
   --control-height: var(--size-component-md); /** Altura del control de una línea: la talla md del sistema. Es la talla de PARTIDA, y la superficie pública la apunta a `lg-height` */
   --control-font-family: var(--font-family-sans); /** Familia tipográfica */
   --control-font-size: var(--font-size-2); /** Tamaño de fuente */
   --control-line-height: var(--line-height-none); /** Interlineado */
-  --control-transition-duration: var(--motion-duration-fast); /** Duración de la transición */
-  --control-transition-easing: var(--motion-easing-default); /** Curva de animación */
   --control-padding-inline: var(--spacing-4); /** Padding inline — compartido por controles y elementos de formulario */
   --control-padding-block: var(--spacing-4); /** Padding block — solo para lo multilínea (Textarea) y para el aire de las filas de formulario. Los controles de una línea fijan su altura a la talla (`height`) con padding vertical 0 */
   --control-lg-height: var(--size-component-lg); /** Altura del control en talla lg: la talla lg del sistema. Es lo que la superficie pública pone como talla de partida (`.site-shell`) */
@@ -1256,7 +1249,6 @@ html.dark {
  */
 :root {
   --button-border-style: solid; /** Border style */
-  --button-border-color: rgba(0, 0, 0, 0); /** Default border color — overridden by variants */
   --button-justify-content: center; /** Justify content */
   --button-cursor: pointer; /** Cursor */
   --button-white-space: nowrap; /** White space */
@@ -1302,14 +1294,6 @@ html.dark {
   --button-primary-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
   --button-primary-disabled-color: var(--color-white); /** Text color when disabled — white on grey background */
   --button-primary-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
-  --button-destructive-border-style: var(--button-border-style); /** Border style */
-  --button-destructive-justify-content: var(--button-justify-content); /** Justify content */
-  --button-destructive-cursor: var(--button-cursor); /** Cursor */
-  --button-destructive-white-space: var(--button-white-space); /** White space */
-  --button-destructive-text-decoration: var(--button-text-decoration); /** Text decoration */
-  --button-destructive-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
-  --button-destructive-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
-  --button-destructive-bg: var(--color-white); /** Background */
   --button-outline-border-style: var(--button-border-style); /** Border style */
   --button-outline-justify-content: var(--button-justify-content); /** Justify content */
   --button-outline-cursor: var(--button-cursor); /** Cursor */
@@ -1335,7 +1319,6 @@ html.dark {
   --button-border-radius: var(--border-radius-default); /** Rectangular: el radio del sistema (0), como los campos */
   --button-border-width: var(--border-width-default); /** Border width */
   --button-font-weight: var(--font-weight-default); /** Font weight */
-  --button-disabled-bg: var(--color-disabled-bg-on-light); /** Background when disabled — only form button changes bg */
   --button-disabled-color: var(--color-disabled-text-on-light); /** Text color when disabled — light surface */
   --button-disabled-border: var(--color-disabled-text-on-light); /** Border color when disabled — light surface, matches text for contrast */
   --button-focus-ring-width: var(--border-width-focus); /** Focus ring width */
@@ -1356,13 +1339,6 @@ html.dark {
   --button-primary-active-bg: var(--color-accent-2); /** Active background */
   --button-primary-active-color: var(--color-primary); /** Active text color */
   --button-primary-active-border: var(--color-accent-2); /** Active border color */
-  --button-destructive-font-family: var(--button-font-family); /** Font family */
-  --button-destructive-font-size: var(--button-font-size); /** Font size */
-  --button-destructive-line-height: var(--button-line-height); /** Line height */
-  --button-destructive-transition-duration: var(--button-transition-duration); /** Transition duration */
-  --button-destructive-transition-easing: var(--button-transition-easing); /** Transition easing */
-  --button-destructive-padding-inline: var(--button-padding-inline); /** Inline (horizontal) padding */
-  --button-destructive-focus-ring-offset: var(--button-focus-ring-offset); /** Focus ring offset */
   --button-destructive-focus-ring-color: var(--color-destructive-text-on-light); /** Focus ring color */
   --button-destructive-color: var(--color-destructive-text-on-light); /** Text color */
   --button-destructive-border: var(--color-destructive-text-on-light); /** Border color */
@@ -1415,12 +1391,6 @@ html.dark {
   --button-primary-disabled-bg: var(--button-disabled-border); /** Background when disabled — filled with the disabled border color */
   --button-primary-disabled-border: var(--button-disabled-border); /** Border color when disabled */
   --button-primary-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
-  --button-destructive-border-radius: var(--button-border-radius); /** Border radius */
-  --button-destructive-border-width: var(--button-border-width); /** Border width */
-  --button-destructive-font-weight: var(--button-font-weight); /** Font weight */
-  --button-destructive-disabled-color: var(--button-disabled-color); /** Text color when disabled */
-  --button-destructive-disabled-border: var(--button-disabled-border); /** Border color when disabled */
-  --button-destructive-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
   --button-outline-border-radius: var(--button-border-radius); /** Border radius */
   --button-outline-border-width: var(--button-border-width); /** Border width */
   --button-outline-font-weight: var(--button-font-weight); /** Font weight */
@@ -1678,7 +1648,6 @@ html.dark {
   --input-field-search-clear-focus-ring-color: var(--color-primary); /** Color del anillo de foco del aspa: la tinta de la superficie */
   --input-field-search-input-padding-inline-start: var(--input-field-search-slot-size); /** Padding izquierdo del campo — el texto empieza donde acaba la lupa */
   --input-field-search-input-padding-inline-end: var(--input-field-search-slot-size); /** Padding derecho del campo cuando ofrece borrado — el texto termina donde empieza el aspa */
-  --input-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
   --input-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --input-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --input-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
@@ -1846,8 +1815,6 @@ html.dark {
   --dropdown-field-font-size: var(--select-font-size); /** Cuerpo: el del Select */
   --dropdown-field-bg: var(--select-bg); /** Fondo del control */
   --dropdown-field-icon-transition: var(--select-icon-transition); /** Giro del chevron al abrir */
-  --dropdown-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
-  --dropdown-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --dropdown-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --dropdown-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
   --dropdown-field-padding-inline: var(--select-padding-inline); /** Padding inline del control: el del Select */
@@ -1859,9 +1826,6 @@ html.dark {
   --dropdown-field-focus-ring-width: var(--select-focus-ring-width); /** Anillo de foco */
   --dropdown-field-focus-ring-color: var(--select-focus-ring-color); /** Anillo de foco */
   --dropdown-field-error-border-color: var(--select-error-border-color); /** Borde en error: el mismo que el del Select */
-  --dropdown-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
-  --dropdown-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
-  --dropdown-field-error-color: var(--form-error-color); /** Color del mensaje de error */
   --dropdown-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
   --dropdown-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --dropdown-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
@@ -1875,7 +1839,6 @@ html.dark {
   --dropdown-field-bg: var(--color-background-dark); /** Fondo — surface-dark */
   --dropdown-field-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
   --dropdown-field-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
-  --dropdown-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --dropdown-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }
 /**
@@ -2013,13 +1976,8 @@ html.dark {
  */
 :root {
   --textarea-field-gap: var(--spacing-2); /** Espacio entre label, textarea, helper y error */
-  --textarea-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
-  --textarea-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --textarea-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --textarea-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
-  --textarea-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
-  --textarea-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
-  --textarea-field-error-color: var(--form-error-color); /** Color del mensaje de error */
   --textarea-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
   --textarea-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --textarea-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
@@ -2028,7 +1986,6 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --textarea-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --textarea-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }
 /**
@@ -2036,13 +1993,8 @@ html.dark {
  */
 :root {
   --select-field-gap: var(--spacing-2); /** Espacio entre label, select, helper y error */
-  --select-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
-  --select-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --select-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --select-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
-  --select-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
-  --select-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
-  --select-field-error-color: var(--form-error-color); /** Color del mensaje de error */
   --select-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
   --select-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --select-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
@@ -2051,7 +2003,6 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --select-field-error-color: var(--color-error-text-on-dark); /** Mensaje de error — surface-dark */
   --select-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }
 /**
@@ -2059,13 +2010,8 @@ html.dark {
  */
 :root {
   --multi-select-field-gap: var(--spacing-2); /** Espacio entre label, multi-select, helper y error */
-  --multi-select-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
-  --multi-select-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --multi-select-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --multi-select-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
-  --multi-select-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
-  --multi-select-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
-  --multi-select-field-error-color: var(--form-error-color); /** Color del mensaje de error */
   --multi-select-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
   --multi-select-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --multi-select-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
@@ -2074,7 +2020,6 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --multi-select-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --multi-select-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }
 /**
@@ -2082,13 +2027,8 @@ html.dark {
  */
 :root {
   --async-select-field-gap: var(--spacing-2); /** Espacio entre label, control, helper y error */
-  --async-select-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
-  --async-select-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --async-select-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --async-select-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
-  --async-select-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
-  --async-select-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
-  --async-select-field-error-color: var(--form-error-color); /** Color del mensaje de error */
   --async-select-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
   --async-select-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --async-select-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
@@ -2097,7 +2037,6 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --async-select-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --async-select-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }
 /**
@@ -2105,13 +2044,8 @@ html.dark {
  */
 :root {
   --autocomplete-field-gap: var(--async-select-field-gap); /** Espacio entre label, control, helper y error */
-  --autocomplete-field-error-font-family: var(--async-select-field-error-font-family); /** Font family del mensaje de error */
-  --autocomplete-field-error-line-height: var(--async-select-field-error-line-height); /** Line height del mensaje de error */
   --autocomplete-field-helper-font-family: var(--async-select-field-helper-font-family); /** Font family del texto de ayuda */
   --autocomplete-field-helper-line-height: var(--async-select-field-helper-line-height); /** Line height del texto de ayuda */
-  --autocomplete-field-error-font-size: var(--async-select-field-error-font-size); /** Font size del mensaje de error */
-  --autocomplete-field-error-font-weight: var(--async-select-field-error-font-weight); /** Font weight del mensaje de error */
-  --autocomplete-field-error-color: var(--async-select-field-error-color); /** Color del mensaje de error */
   --autocomplete-field-helper-font-size: var(--async-select-field-helper-font-size); /** Font size del texto de ayuda */
   --autocomplete-field-helper-font-weight: var(--async-select-field-helper-font-weight); /** Font weight del texto de ayuda */
   --autocomplete-field-helper-color: var(--async-select-field-helper-color); /** Color del texto de ayuda */
@@ -2121,13 +2055,8 @@ html.dark {
  */
 :root {
   --async-multi-select-field-gap: var(--spacing-2); /** Espacio entre label, control, helper y error */
-  --async-multi-select-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
-  --async-multi-select-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --async-multi-select-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --async-multi-select-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
-  --async-multi-select-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
-  --async-multi-select-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
-  --async-multi-select-field-error-color: var(--form-error-color); /** Color del mensaje de error */
   --async-multi-select-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
   --async-multi-select-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --async-multi-select-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
@@ -2136,7 +2065,6 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --async-multi-select-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --async-multi-select-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }
 /**
@@ -2144,13 +2072,8 @@ html.dark {
  */
 :root {
   --input-phone-field-gap: var(--spacing-2); /** Espacio entre label, control, helper y error */
-  --input-phone-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
-  --input-phone-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --input-phone-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --input-phone-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
-  --input-phone-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
-  --input-phone-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
-  --input-phone-field-error-color: var(--form-error-color); /** Color del mensaje de error */
   --input-phone-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
   --input-phone-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --input-phone-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
@@ -2159,7 +2082,6 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --input-phone-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --input-phone-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }
 /**
@@ -2174,13 +2096,8 @@ html.dark {
  */
 :root {
   --otp-field-gap: var(--spacing-2); /** Espacio entre label, celdas, helper y error */
-  --otp-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
-  --otp-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --otp-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --otp-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
-  --otp-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
-  --otp-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
-  --otp-field-error-color: var(--form-error-color); /** Color del mensaje de error */
   --otp-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
   --otp-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --otp-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
@@ -2189,7 +2106,6 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --otp-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --otp-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }
 /**
@@ -2212,15 +2128,10 @@ html.dark {
   --checkbox-field-label-font-size: var(--text-font-size); /** Es texto corriente: el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
   --checkbox-field-label-line-height: var(--text-line-height); /** Interlineado */
   --checkbox-field-label-letter-spacing: var(--text-letter-spacing); /** Interletraje */
-  --checkbox-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
-  --checkbox-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --checkbox-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --checkbox-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
   --checkbox-field-label-font-weight: var(--text-font-weight); /** Peso tipográfico */
   --checkbox-field-label-color: var(--text-color); /** Color del texto */
-  --checkbox-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
-  --checkbox-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
-  --checkbox-field-error-color: var(--form-error-color); /** Color del mensaje de error */
   --checkbox-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
   --checkbox-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --checkbox-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
@@ -2230,7 +2141,6 @@ html.dark {
 [data-theme="dark"],
 html.dark {
   --checkbox-field-label-color: var(--color-text-on-dark); /** Color del texto — surface-dark */
-  --checkbox-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --checkbox-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }
 /**
@@ -2252,15 +2162,10 @@ html.dark {
   --radio-field-label-font-size: var(--text-font-size); /** Es texto corriente: el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
   --radio-field-label-line-height: var(--text-line-height); /** Interlineado */
   --radio-field-label-letter-spacing: var(--text-letter-spacing); /** Interletraje */
-  --radio-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
-  --radio-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --radio-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --radio-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
   --radio-field-label-font-weight: var(--text-font-weight); /** Peso tipográfico */
   --radio-field-label-color: var(--text-color); /** Color del texto */
-  --radio-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
-  --radio-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
-  --radio-field-error-color: var(--form-error-color); /** Color del mensaje de error */
   --radio-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
   --radio-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --radio-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
@@ -2270,7 +2175,6 @@ html.dark {
 [data-theme="dark"],
 html.dark {
   --radio-field-label-color: var(--color-text-on-dark); /** Color del texto — surface-dark */
-  --radio-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --radio-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }
 /**
@@ -3548,15 +3452,11 @@ html.dark {
   --sidebar-nav-item-border-radius: var(--border-radius-default); /** Radio de cada ítem */
   --sidebar-nav-item-font-weight: var(--font-weight-default); /** Peso de ítems */
   --sidebar-nav-item-color: var(--color-text-on-light); /** Color de ítems */
-  --sidebar-nav-item-active-color: var(--color-primary); /** Color de ítem activo */
   --sidebar-nav-item-active-font-weight: var(--font-weight-emphasis); /** Peso de ítem activo */
   --sidebar-nav-focus-ring-color: var(--color-primary); /** Color del focus ring */
   --sidebar-nav-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
-  --sidebar-nav-rail-active-bar-width: var(--border-width-focus); /** Barra al borde que marca la sección activa en rail */
   --sidebar-nav-item-empty-color: var(--color-text-muted-on-light); /** Tinta de una entrada vacía: sigue leyéndose, pero no invita a pulsarla */
   --sidebar-nav-item-empty-mark-color: var(--color-text-muted-on-light); /** Tinta de la marca «sin docs» */
-  --sidebar-nav-item-hover-line-width: var(--border-width-default); /** Grosor de la línea que marca el ítem bajo el puntero. El hover no pinta relleno (regla de Colores): deja una línea de tinta bajo el ítem, el mismo grafismo del subrayado de `Link` */
-  --sidebar-nav-item-hover-line-color: var(--color-primary); /** Color de la línea de hover — tinta de la superficie */
 }
 .surface-dark,
 .surface-invert,
@@ -3564,11 +3464,9 @@ html.dark {
 html.dark {
   --sidebar-nav-group-label-color: var(--color-text-muted-on-dark); /** Color de la etiqueta de grupo — surface-dark. `group-label-color` (prussian) sería invisible sobre fondo oscuro. */
   --sidebar-nav-item-color: var(--color-text-on-dark); /** Color de ítems — surface-dark */
-  --sidebar-nav-item-active-color: var(--color-accent-1); /** Color de ítem activo — surface-dark. `item-active-color` (prussian) sería invisible; se usa accent-1 como acento de estado activo, igual que Switcher. */
   --sidebar-nav-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark. Deliberadamente blanco, no accent-1: el ring debe seguir el patrón estándar del sistema aunque el ítem activo use lavanda como acento. */
   --sidebar-nav-item-empty-color: var(--color-text-muted-on-dark); /** Tinta de una entrada vacía — surface-dark */
   --sidebar-nav-item-empty-mark-color: var(--color-text-muted-on-dark); /** Tinta de la marca «sin docs» — surface-dark */
-  --sidebar-nav-item-hover-line-color: var(--color-text-on-dark); /** Color de la línea de hover — surface-dark */
 }
 /**
  * Do not edit directly, this file was auto-generated.
@@ -3943,13 +3841,8 @@ html.dark {
  */
 :root {
   --time-field-gap: var(--spacing-2); /** Espacio entre label, control, helper y error */
-  --time-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
-  --time-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --time-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --time-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
-  --time-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
-  --time-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
-  --time-field-error-color: var(--form-error-color); /** Color del mensaje de error */
   --time-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
   --time-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --time-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
@@ -3958,7 +3851,6 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --time-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --time-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }
 /**
@@ -4004,13 +3896,8 @@ html.dark {
  */
 :root {
   --date-picker-field-gap: var(--spacing-2); /** Espacio entre label, trigger, helper y error */
-  --date-picker-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
-  --date-picker-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --date-picker-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --date-picker-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
-  --date-picker-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
-  --date-picker-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
-  --date-picker-field-error-color: var(--form-error-color); /** Color del mensaje de error */
   --date-picker-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
   --date-picker-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --date-picker-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
@@ -4019,7 +3906,6 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --date-picker-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --date-picker-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }
 /**
@@ -4126,13 +4012,8 @@ html.dark {
 :root {
   --date-time-field-gap: var(--spacing-2); /** Espacio entre label, controles, helper y error */
   --date-time-field-controls-gap: var(--spacing-2); /** Espacio entre DatePickerField y TimeField */
-  --date-time-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
-  --date-time-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --date-time-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --date-time-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
-  --date-time-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
-  --date-time-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
-  --date-time-field-error-color: var(--form-error-color); /** Color del mensaje de error */
   --date-time-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
   --date-time-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --date-time-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
@@ -4141,7 +4022,6 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --date-time-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --date-time-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }
 /**
@@ -4205,7 +4085,6 @@ html.dark {
   --switcher-field-label-font-size: var(--text-font-size); /** Es texto corriente: el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
   --switcher-field-label-line-height: var(--text-line-height); /** Interlineado */
   --switcher-field-label-letter-spacing: var(--text-letter-spacing); /** Interletraje */
-  --switcher-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
   --switcher-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --switcher-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --switcher-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
@@ -4535,13 +4414,8 @@ html.dark {
  */
 :root {
   --number-input-field-gap: var(--spacing-2); /** Espacio entre label, input, helper y error */
-  --number-input-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
-  --number-input-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --number-input-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --number-input-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
-  --number-input-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
-  --number-input-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
-  --number-input-field-error-color: var(--form-error-color); /** Color del mensaje de error */
   --number-input-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
   --number-input-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --number-input-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
@@ -4550,16 +4424,12 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --number-input-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --number-input-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }
 /**
  * Do not edit directly, this file was auto-generated.
  */
 :root {
-  --file-upload-border-style: dashed; /** Estilo de borde del dropzone */
-  --file-upload-drag-border-style: solid; /** Estilo de borde en drag activo */
-  --file-upload-error-border-style: solid; /** Estilo de borde en error */
   --file-upload-disabled-opacity: 0.5; /** Opacidad cuando está deshabilitado */
   --file-upload-padding-inline: var(--spacing-5); /** Padding horizontal del dropzone */
   --file-upload-gap: var(--spacing-1); /** Espacio entre elementos dentro del dropzone */
@@ -4594,7 +4464,6 @@ html.dark {
   --file-upload-border-dash-gap: var(--spacing-2); /** Hueco entre trazos del borde discontinuo (antes 10px, fuera de la escala) */
   --file-upload-border-color: var(--color-primary); /** Borde del dropzone por defecto */
   --file-upload-border-width: var(--border-width-default); /** Grosor del borde */
-  --file-upload-border-radius: var(--border-radius-default); /** Radio de esquinas del dropzone */
   --file-upload-bg: var(--color-surface-secondary-on-light); /** Fondo del dropzone */
   --file-upload-text-color: var(--color-text-on-light); /** Color del texto principal */
   --file-upload-subtext-color: var(--color-text-muted-on-light); /** Color del texto secundario y restricciones */
@@ -4657,13 +4526,8 @@ html.dark {
  */
 :root {
   --file-upload-field-gap: var(--spacing-2); /** Espacio entre label, control, helper y error */
-  --file-upload-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
-  --file-upload-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --file-upload-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --file-upload-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
-  --file-upload-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
-  --file-upload-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
-  --file-upload-field-error-color: var(--form-error-color); /** Color del mensaje de error */
   --file-upload-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
   --file-upload-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --file-upload-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
@@ -4672,7 +4536,6 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --file-upload-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --file-upload-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }
 /**
@@ -4972,7 +4835,6 @@ html.dark {
   --chart-area-fill-opacity: 0.1; /** El área es un velo del tono de la serie, nunca un bloque saturado */
   --chart-donut-thickness: 0.55; /** Fracción del radio que ocupa el anillo del donut */
   --chart-radar-fill-opacity: 0.15; /** El polígono del radar es un velo del tono de la serie, como el área */
-  --chart-height: 16rem; /** 256px — alto por defecto del área de dibujo. La banda del eje X va aparte: el contenedor crece con ella y nunca aparece un scroll anidado */
   --chart-hover-opacity: 0.75; /** Atenuación de las marcas que no son la activa mientras el puntero está encima */
   --chart-series-1: var(--color-chart-series-1); /** Ranura categórica 1. El orden de las ranuras es el mecanismo de seguridad para daltonismo: se asignan en orden, nunca se ciclan */
   --chart-series-2: var(--color-chart-series-2); /** Ranura categórica 2 */
@@ -5036,7 +4898,6 @@ html.dark {
   --chart-tile-label-color: var(--color-text-on-dark); /** Rótulo sobre una baldosa del treemap cuando el relleno lo elige el producto (`color`/`colors`): va encima del relleno de la serie, no de la superficie, y con un color desconocido el sistema no puede elegir la tinta */
   --chart-tile-label-color-5: var(--color-text-on-dark); /** Rótulo sobre la baldosa de la ranura 5 — el magenta es lo bastante oscuro para llevar tinta clara */
   --chart-tile-label-color-7: var(--color-text-on-dark); /** Rótulo sobre la baldosa de la ranura 7 — la lavanda de gráfico es la más oscura de las ocho */
-  --chart-tile-label-color-muted: var(--color-text-on-dark); /** Rótulo sobre la baldosa gris de «Otros» (pasada la octava ranura) */
   --chart-tooltip-padding-block: var(--tooltip-padding-block); /** Padding vertical del bocadillo */
   --chart-tooltip-padding-inline: var(--tooltip-padding-inline); /** Padding horizontal del bocadillo */
   --chart-tooltip-font-size: var(--tooltip-font-size); /** Tamaño de texto del bocadillo */
@@ -5051,7 +4912,6 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --chart-tile-label-color-muted: var(--color-black); /** Rótulo de «Otros» — surface-dark: el gris de atenuación en oscuro es claro */
   --chart-tile-label-color-5: var(--color-black); /** Rótulo de la ranura 5 — surface-dark: el paso de serie para superficie oscura es más claro y ya no aguanta tinta blanca */
   --chart-tile-label-color-7: var(--color-black); /** Rótulo de la ranura 7 — surface-dark */
   --chart-series-1: var(--color-chart-series-1-on-dark); /** Ranura 1 — surface-dark */
@@ -5922,7 +5782,6 @@ html.dark {
   --site-search-ghost-url-inline-size: 45%; /** Ancho de la barra fantasma de la dirección */
   --site-search-inline-size: var(--input-width); /** Anchura del buscador: la de su contenedor. Es la página de resultados entera, así que ocupa todo el hueco donde se monte — declarada y no heredada del flujo, para que tampoco se encoja dentro de una fila flex o una celda de retícula */
   --site-search-gap: var(--spacing-5); /** Aire entre los bloques del buscador: el formulario, el aviso de estado, los resultados y el pie */
-  --site-search-block-gap: var(--spacing-3); /** Aire entre las líneas de un bloque de estado (reposo, escribiendo, carga) */
   --site-search-status-line-height: var(--line-height-normal); /** Interlineado del aviso de estado */
   --site-search-status-gap: var(--spacing-2); /** Aire entre el indicador de carga y su texto */
   --site-search-results-gap: var(--spacing-6); /** Aire entre dos resultados (32px). Sin filete que los separe, es el aire el que dice dónde acaba uno y empieza el siguiente: tiene que ser claramente mayor que el que hay entre las líneas de un mismo resultado */
@@ -5934,7 +5793,6 @@ html.dark {
   --site-search-skeleton-gap: var(--spacing-2); /** Aire entre las barras de un resultado fantasma */
   --site-search-status-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del aviso de estado: cuántos resultados hay, que se está buscando o que no hay nada */
   --site-search-status-color: var(--color-text-muted-on-light); /** Color del aviso de estado — atenuado: acompaña a los resultados, no compite con ellos */
-  --site-search-status-query-font-weight: var(--font-weight-emphasis); /** Peso de la consulta dentro del aviso: lo único que cambia de una búsqueda a otra */
   --site-search-result-title-font-size: var(--text-paragraph-large-font-size); /** Cuerpo del título del resultado: un peldaño por encima del cuerpo de la superficie, para que siga mandando ahora que el extracto y la dirección leen al cuerpo entero */
   --site-search-result-title-font-weight: var(--font-weight-emphasis); /** Peso del título del resultado */
   --site-search-result-title-color: var(--color-text-on-light); /** Color del título del resultado */
@@ -6014,21 +5872,15 @@ html.dark {
   --avatar-upload-overlay-icon-color: var(--color-text-on-dark); /** Icono de subida sobre el velo — tinta sobre oscuro */
   --avatar-upload-hint-font-family: var(--form-helper-font-family); /** Tipografía de la pista de arrastre — la del texto de ayuda de los campos */
   --avatar-upload-hint-line-height: var(--form-helper-line-height); /** Interlineado de la pista de arrastre — el del texto de ayuda de los campos */
-  --avatar-upload-error-font-family: var(--form-error-font-family); /** Tipografía del mensaje de error — la de los campos */
-  --avatar-upload-error-line-height: var(--form-error-line-height); /** Interlineado del mensaje de error — el de los campos */
   --avatar-upload-hint-font-size: var(--form-helper-font-size); /** Cuerpo de la pista de arrastre — el del texto de ayuda de los campos */
   --avatar-upload-hint-font-weight: var(--form-helper-font-weight); /** Peso de la pista de arrastre — el del texto de ayuda de los campos */
   --avatar-upload-hint-color: var(--form-helper-color); /** Color de la pista de arrastre — el del texto de ayuda de los campos */
-  --avatar-upload-error-font-size: var(--form-error-font-size); /** Cuerpo del mensaje de error — el de los campos */
-  --avatar-upload-error-font-weight: var(--form-error-font-weight); /** Peso del mensaje de error — el de los campos */
-  --avatar-upload-error-color: var(--form-error-color); /** Color del mensaje de error — el de los campos */
 }
 .surface-dark,
 .surface-invert,
 [data-theme="dark"],
 html.dark {
   --avatar-upload-hint-color: var(--color-text-on-dark); /** Color de la pista de arrastre — surface-dark */
-  --avatar-upload-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --avatar-upload-ring-color: var(--color-text-on-dark); /** Anillo de la diana — surface-dark: la tinta de la superficie, como el borde del FileUpload */
 }
 /**
@@ -6140,7 +5992,6 @@ html.dark {
   --popover-border-color: var(--floating-panel-border-color);
   --user-menu-content-bg: var(--floating-panel-bg);
   --user-menu-content-border-color: var(--floating-panel-border-color);
-  --autocomplete-field-error-color: var(--async-select-field-error-color);
   --autocomplete-field-helper-color: var(--async-select-field-helper-color);
   --calendar-year-color: var(--calendar-day-color);
   --calendar-year-current-color: var(--calendar-today-color);
@@ -6179,8 +6030,10 @@ html.dark {
   --connector-auth-untrusted-focus-ring-color: var(--link-focus-ring-color);
 }
 /* Superficie invertida dentro de una oscura: devuelve a claro los tokens que el
-   modo oscuro voltea. Va después del bloque de arriba, aunque gane por
-   especificidad, para que se lea en el orden en que actúa. */
+   modo oscuro voltea. En el mismo bloque va la superficie siempre clara
+   (`.surface-light`, el interior del amarillo del aviso), que necesita los
+   mismos tokens con los mismos valores. Va después del bloque de arriba, aunque
+   gane por especificidad, para que se lea en el orden en que actúa. */
 /**
  * Do not edit directly, this file was auto-generated.
  *
@@ -6515,11 +6368,9 @@ html.dark .surface-light {
   --separator-color: var(--color-primary);
   --sidebar-nav-group-label-color: var(--color-primary);
   --sidebar-nav-item-color: var(--color-text-on-light);
-  --sidebar-nav-item-active-color: var(--color-primary);
   --sidebar-nav-focus-ring-color: var(--color-primary);
   --sidebar-nav-item-empty-color: var(--color-text-muted-on-light);
   --sidebar-nav-item-empty-mark-color: var(--color-text-muted-on-light);
-  --sidebar-nav-item-hover-line-color: var(--color-primary);
   --sidebar-bg: var(--color-background-light);
   --sidebar-border-color: var(--color-primary);
   --sidebar-resizer-hover-color: var(--color-primary);
@@ -6640,15 +6491,11 @@ html.dark .surface-light {
   --user-menu-separator-color: var(--separator-color);
   --assistant-message-model-color: var(--color-text-on-light);
   --assistant-message-timestamp-color: var(--color-text-muted-on-light);
-  --async-multi-select-field-error-color: var(--form-error-color);
   --async-multi-select-field-helper-color: var(--form-helper-color);
-  --async-select-field-error-color: var(--form-error-color);
   --async-select-field-helper-color: var(--form-helper-color);
-  --autocomplete-field-error-color: var(--async-select-field-error-color);
   --autocomplete-field-helper-color: var(--async-select-field-helper-color);
   --avatar-upload-ring-color: var(--color-primary);
   --avatar-upload-hint-color: var(--form-helper-color);
-  --avatar-upload-error-color: var(--form-error-color);
   --calendar-planner-nav-color: var(--calendar-nav-color);
   --calendar-planner-nav-focus-ring-color: var(--calendar-nav-focus-ring-color);
   --calendar-planner-title-color: var(--calendar-title-color);
@@ -6703,7 +6550,6 @@ html.dark .surface-light {
   --carousel-indicator-current-color: var(--color-text-on-light);
   --carousel-focus-ring-color: var(--color-primary);
   --checkbox-field-label-color: var(--text-color);
-  --checkbox-field-error-color: var(--form-error-color);
   --checkbox-field-helper-color: var(--form-helper-color);
   --clock-widget-date-color: var(--color-text-muted-on-light);
   --clock-widget-status-color: var(--color-text-muted-on-light);
@@ -6741,14 +6587,12 @@ html.dark .surface-light {
   --conversation-list-delete-color: var(--color-icon-secondary-on-light);
   --conversation-list-delete-hover-color: var(--color-destructive-text-on-light);
   --conversation-list-focus-ring-color: var(--color-primary);
-  --date-picker-field-error-color: var(--form-error-color);
   --date-picker-field-helper-color: var(--form-helper-color);
   --date-picker-button-color: var(--color-primary);
   --date-picker-button-hover-color: var(--color-primary);
   --date-picker-button-disabled-color: var(--input-disabled-color);
   --date-picker-button-focus-ring-color: var(--input-focus-border-color);
   --date-picker-message-color: var(--form-error-color);
-  --date-time-field-error-color: var(--form-error-color);
   --date-time-field-helper-color: var(--form-helper-color);
   --docs-search-result-color: var(--color-text-on-light);
   --docs-search-result-excerpt-color: var(--color-text-muted-on-light);
@@ -6761,10 +6605,8 @@ html.dark .surface-light {
   --dropdown-field-border-color: var(--select-border-color);
   --dropdown-field-focus-ring-color: var(--select-focus-ring-color);
   --dropdown-field-error-border-color: var(--select-error-border-color);
-  --dropdown-field-error-color: var(--form-error-color);
   --dropdown-field-helper-color: var(--form-helper-color);
   --field-row-empty-color: var(--color-text-muted-on-light);
-  --file-upload-field-error-color: var(--form-error-color);
   --file-upload-field-helper-color: var(--form-helper-color);
   --floating-toolbar-bg: var(--floating-panel-bg);
   --floating-toolbar-border-color: var(--floating-panel-border-color);
@@ -6796,7 +6638,6 @@ html.dark .surface-light {
   --input-field-search-clear-focus-ring-color: var(--color-primary);
   --input-field-error-color: var(--form-error-color);
   --input-field-helper-color: var(--form-helper-color);
-  --input-phone-field-error-color: var(--form-error-color);
   --input-phone-field-helper-color: var(--form-helper-color);
   --language-switcher-focus-ring-color: var(--color-primary);
   --message-composer-border-color: var(--textarea-border-color);
@@ -6806,13 +6647,10 @@ html.dark .surface-light {
   --message-composer-disabled-bg: var(--textarea-disabled-bg);
   --message-composer-disabled-border-color: var(--textarea-disabled-border-color);
   --message-composer-helper-color: var(--color-text-muted-on-light);
-  --multi-select-field-error-color: var(--form-error-color);
   --multi-select-field-helper-color: var(--form-helper-color);
   --notification-list-time-color: var(--color-text-muted-on-light);
   --notification-panel-focus-ring-color: var(--color-primary);
-  --number-input-field-error-color: var(--form-error-color);
   --number-input-field-helper-color: var(--form-helper-color);
-  --otp-field-error-color: var(--form-error-color);
   --otp-field-helper-color: var(--form-helper-color);
   --prev-next-nav-eyebrow-color: var(--color-text-muted-on-light);
   --prev-next-nav-title-color: var(--color-text-on-light);
@@ -6836,7 +6674,6 @@ html.dark .surface-light {
   --prose-rule-color: var(--separator-color);
   --prose-caption-color: var(--color-text-muted-on-light);
   --radio-field-label-color: var(--text-color);
-  --radio-field-error-color: var(--form-error-color);
   --radio-field-helper-color: var(--form-helper-color);
   --recovery-codes-color: var(--color-text-on-light);
   --recovery-codes-index-color: var(--color-text-muted-on-light);
@@ -6845,7 +6682,6 @@ html.dark .surface-light {
   --search-form-submit-hover-color: var(--color-primary);
   --search-form-submit-disabled-color: var(--input-disabled-color);
   --search-form-submit-focus-ring-color: var(--input-focus-border-color);
-  --select-field-error-color: var(--form-error-color);
   --select-field-helper-color: var(--form-helper-color);
   --sheet-bg: var(--modal-bg);
   --sheet-title-color: var(--modal-title-color);
@@ -6877,10 +6713,8 @@ html.dark .surface-light {
   --table-of-contents-item-active-color: var(--color-primary);
   --table-of-contents-item-active-marker-color: var(--color-primary);
   --table-of-contents-focus-ring-color: var(--color-primary);
-  --textarea-field-error-color: var(--form-error-color);
   --textarea-field-helper-color: var(--form-helper-color);
   --theme-switcher-focus-ring-color: var(--color-primary);
-  --time-field-error-color: var(--form-error-color);
   --time-field-helper-color: var(--form-helper-color);
   --timeline-rail-color: var(--color-border-default-on-light);
   --timeline-title-color: var(--color-text-on-light);
@@ -6935,7 +6769,6 @@ html.dark .surface-light {
   --chart-radial-track-color: var(--color-icon-secondary-on-light);
   --chart-tile-label-color-5: var(--color-text-on-dark);
   --chart-tile-label-color-7: var(--color-text-on-dark);
-  --chart-tile-label-color-muted: var(--color-text-on-dark);
   --chart-tooltip-bg: var(--tooltip-bg);
   --chart-tooltip-color: var(--tooltip-color);
   --chart-crosshair-color: var(--color-icon-secondary-on-light);
@@ -6973,17 +6806,6 @@ html.dark .surface-light {
   --site-search-result-focus-ring-color: var(--color-primary);
   --site-search-suggestions-label-color: var(--color-text-muted-on-light);
 }
-/* Superficie siempre clara: el contrapunto de `.surface-dark`, para el interior
-   de un relleno claro universal (el amarillo del aviso). Su bloque va fundido
-   con el de `.surface-invert` en el fichero de arriba (mismos tokens, mismos
-   valores); este queda vacío y se importa solo para conservar la ruta. */
-/**
- * Do not edit directly, this file was auto-generated.
- *
- * Vacío a propósito: el bloque de `.surface-light` va fundido con el de
- * `.surface-invert` en `surface-invert.css` (mismos tokens, mismos valores).
- * El fichero se conserva para que la ruta publicada no desaparezca.
- */
 /* Remapeo de la superficie pública (`.site-shell`) — va al final: los tokens
    que redefine tienen la misma especificidad que los `:root` de arriba. */
 /**
@@ -7128,8 +6950,6 @@ html.dark .surface-light {
   --breadcrumb-font-size: var(--text-paragraph-small-font-size);
   --button-primary-font-size: var(--button-font-size);
   --button-primary-padding-inline: var(--button-padding-inline);
-  --button-destructive-font-size: var(--button-font-size);
-  --button-destructive-padding-inline: var(--button-padding-inline);
   --button-outline-font-size: var(--button-font-size);
   --button-outline-padding-inline: var(--button-padding-inline);
   --button-text-font-size: var(--button-font-size);
@@ -7173,20 +6993,15 @@ html.dark .surface-light {
   --text-list-secondary-font-size: var(--text-paragraph-small-font-size);
   --assistant-message-model-font-size: var(--text-paragraph-small-font-size);
   --assistant-message-timestamp-font-size: var(--text-paragraph-small-font-size);
-  --async-multi-select-field-error-font-size: var(--form-error-font-size);
   --async-multi-select-field-helper-font-size: var(--form-helper-font-size);
-  --async-select-field-error-font-size: var(--form-error-font-size);
   --async-select-field-helper-font-size: var(--form-helper-font-size);
-  --autocomplete-field-error-font-size: var(--async-select-field-error-font-size);
   --autocomplete-field-helper-font-size: var(--async-select-field-helper-font-size);
   --avatar-upload-hint-font-size: var(--form-helper-font-size);
-  --avatar-upload-error-font-size: var(--form-error-font-size);
   --banner-font-size: var(--text-font-size);
   --banner-line-height: var(--text-line-height);
   --calendar-planner-title-font-size: var(--calendar-title-font-size);
   --checkbox-field-label-font-size: var(--text-font-size);
   --checkbox-field-label-line-height: var(--text-line-height);
-  --checkbox-field-error-font-size: var(--form-error-font-size);
   --checkbox-field-helper-font-size: var(--form-helper-font-size);
   --clock-widget-date-font-size: var(--text-paragraph-small-font-size);
   --clock-widget-status-font-size: var(--text-paragraph-small-font-size);
@@ -7195,18 +7010,14 @@ html.dark .surface-light {
   --consent-banner-title-font-size: var(--text-size-3);
   --consent-banner-description-font-size: var(--text-font-size);
   --conversation-list-item-font-size: var(--text-font-size);
-  --date-picker-field-error-font-size: var(--form-error-font-size);
   --date-picker-field-helper-font-size: var(--form-helper-font-size);
   --date-picker-message-font-size: var(--form-error-font-size);
-  --date-time-field-error-font-size: var(--form-error-font-size);
   --date-time-field-helper-font-size: var(--form-helper-font-size);
   --docs-search-result-title-font-size: var(--text-font-size);
   --docs-search-result-excerpt-font-size: var(--text-paragraph-small-font-size);
   --docs-search-status-font-size: var(--text-paragraph-small-font-size);
-  --dropdown-field-error-font-size: var(--form-error-font-size);
   --dropdown-field-helper-font-size: var(--form-helper-font-size);
   --field-row-empty-font-size: var(--text-paragraph-small-font-size);
-  --file-upload-field-error-font-size: var(--form-error-font-size);
   --file-upload-field-helper-font-size: var(--form-helper-font-size);
   --filter-bar-label-offset: calc(var(--label-font-size) * var(--label-line-height) + var(--input-field-gap));
   --filter-bar-control-block-size: var(--control-height);
@@ -7214,10 +7025,8 @@ html.dark .surface-light {
   --input-field-search-input-padding-inline-end: var(--input-field-search-slot-size);
   --input-field-error-font-size: var(--form-error-font-size);
   --input-field-helper-font-size: var(--form-helper-font-size);
-  --input-phone-field-error-font-size: var(--form-error-font-size);
   --input-phone-field-helper-font-size: var(--form-helper-font-size);
   --message-composer-helper-font-size: var(--text-paragraph-small-font-size);
-  --multi-select-field-error-font-size: var(--form-error-font-size);
   --multi-select-field-helper-font-size: var(--form-helper-font-size);
   --notification-list-title-font-size: var(--text-font-size);
   --notification-list-body-font-size: var(--text-font-size);
@@ -7226,9 +7035,7 @@ html.dark .surface-light {
   --notification-panel-item-body-font-size: var(--text-paragraph-small-font-size);
   --notification-panel-item-time-font-size: var(--text-paragraph-small-font-size);
   --notification-panel-footer-font-size: var(--text-paragraph-small-font-size);
-  --number-input-field-error-font-size: var(--form-error-font-size);
   --number-input-field-helper-font-size: var(--form-helper-font-size);
-  --otp-field-error-font-size: var(--form-error-font-size);
   --otp-field-helper-font-size: var(--form-helper-font-size);
   --prev-next-nav-font-size: var(--text-font-size);
   --prev-next-nav-eyebrow-font-size: var(--text-paragraph-small-font-size);
@@ -7240,12 +7047,10 @@ html.dark .surface-light {
   --prose-caption-font-size: var(--text-paragraph-small-font-size);
   --radio-field-label-font-size: var(--text-font-size);
   --radio-field-label-line-height: var(--text-line-height);
-  --radio-field-error-font-size: var(--form-error-font-size);
   --radio-field-helper-font-size: var(--form-helper-font-size);
   --recovery-codes-font-size: var(--text-paragraph-small-font-size);
   --recurrence-field-legend-font-size: var(--label-font-size);
   --search-form-submit-input-padding-inline-end: var(--search-form-submit-slot-size);
-  --select-field-error-font-size: var(--form-error-font-size);
   --select-field-helper-font-size: var(--form-helper-font-size);
   --sheet-description-font-size: var(--modal-description-font-size);
   --sheet-close-size: var(--modal-close-size);
@@ -7259,9 +7064,7 @@ html.dark .surface-light {
   --switcher-field-error-font-size: var(--form-error-font-size);
   --switcher-field-helper-font-size: var(--form-helper-font-size);
   --table-of-contents-item-font-size: var(--text-paragraph-small-font-size);
-  --textarea-field-error-font-size: var(--form-error-font-size);
   --textarea-field-helper-font-size: var(--form-helper-font-size);
-  --time-field-error-font-size: var(--form-error-font-size);
   --time-field-helper-font-size: var(--form-helper-font-size);
   --timeline-title-font-size: var(--text-font-size);
   --timeline-meta-font-size: var(--text-paragraph-small-font-size);

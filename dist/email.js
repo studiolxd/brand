@@ -223,29 +223,32 @@ function I(e) {
 			})
 		]
 	});
-	let { unsubscribeUrl: t, preferencesUrl: n, manageLabel: r = "Para dejar de recibir estos avisos,", unsubscribeLabel: o = n ? "Darse de baja" : "date de baja", manageBeforeLabel: s = " o ", managePreferencesLabel: c = "gestiona tus preferencias", manageAfterLabel: l = "." } = e, u = /* @__PURE__ */ i(h, {
+	let { unsubscribeUrl: t, preferencesUrl: n, unsubscribeLabel: r } = e, o = (e, t) => {
+		if (t === void 0) throw Error(`@studiolxd/brand/email: falta «optOut.${e}». El pie de baja no trae textos puestos: los pasa quien manda el correo, en el idioma del destinatario.`);
+		return t;
+	}, s = /* @__PURE__ */ i(h, {
 		href: t,
 		style: M.link,
-		children: o
+		children: o("unsubscribeLabel", r)
 	});
 	return n ? /* @__PURE__ */ a(v, {
 		style: M.footnote,
 		children: [
-			u,
 			s,
+			o("manageBeforeLabel", e.manageBeforeLabel),
 			/* @__PURE__ */ i(h, {
 				href: n,
 				style: M.link,
-				children: c
+				children: o("managePreferencesLabel", e.managePreferencesLabel)
 			}),
-			l
+			o("manageAfterLabel", e.manageAfterLabel)
 		]
 	}) : /* @__PURE__ */ a(v, {
 		style: M.footnote,
 		children: [
-			r,
+			o("manageLabel", e.manageLabel),
 			" ",
-			u
+			s
 		]
 	});
 }

@@ -82,8 +82,17 @@ export interface CalendarProps {
      * `DatePicker`), conviene pasarlo aquí.
      */
     gridLabel?: string;
+    /**
+     * El día que el calendario marca como «hoy» (y desde el que arranca el mes
+     * visible y el foco cuando no hay otra fecha). Default: la fecha actual,
+     * calculada una vez al montar. **En SSR conviene pasarla**: servidor y
+     * navegador calculan cada uno su «ahora», y cerca de la medianoche —o con
+     * husos distintos— no coinciden y la hidratación se desajusta. Basta con
+     * calcularla en el servidor y mandar la misma fecha a los dos lados.
+     */
+    today?: Date;
     /** Tamaño del componente. Default: 'md' */
     size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
-export declare function Calendar({ value, onChange, defaultMonth, month: monthProp, onMonthChange, navigable, disabledDates, minDate, maxDate, locale, previousMonthLabel, nextMonthLabel, previousYearsLabel, nextYearsLabel, yearGridLabel, gridLabel, size, className, }: CalendarProps): import("react/jsx-runtime").JSX.Element;
+export declare function Calendar({ value, onChange, defaultMonth, month: monthProp, onMonthChange, navigable, disabledDates, minDate, maxDate, locale, previousMonthLabel, nextMonthLabel, previousYearsLabel, nextYearsLabel, yearGridLabel, gridLabel, today: todayProp, size, className, }: CalendarProps): import("react/jsx-runtime").JSX.Element;

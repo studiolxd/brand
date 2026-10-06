@@ -7,7 +7,7 @@ import type { AnchorHTMLAttributes } from 'react';
  * `href`/`className` lo rompe. El enlace del router del producto tiene que
  * hacer lo mismo (`<Link {...props} />`).
  *
- * Los que reenvían solo una lista cerrada de atributos (`LanguageSwitcher`,
- * `SiteNav`) conservan su versión local: no son la misma función.
+ * Quien lo use pasa al `renderLink` **solo atributos de `<a>`**: una prop
+ * interna se quita antes de llamarlo, no se filtra aquí dentro.
  */
 export declare function defaultRenderLink(props: AnchorHTMLAttributes<HTMLAnchorElement>): import("react/jsx-runtime").JSX.Element;

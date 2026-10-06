@@ -93,6 +93,15 @@ export interface CalendarMonthNavOptions {
  * sin mover el foco.
  */
 export declare function renderCalendarMonthNav({ block, title, titleId, navigable, previousLabel, nextLabel, prevDisabled, nextDisabled, onPrev, onNext, chevronSize, onTitleClick, titleExpanded, titleRef, children, }: CalendarMonthNavOptions): import("react/jsx-runtime").JSX.Element;
+/**
+ * El «hoy» de un calendario: el que pasa el consumidor o, sin él, la fecha
+ * actual **calculada una vez por montaje** —no en cada render—. En SSR el
+ * servidor y el navegador calculan cada uno el suyo, y alrededor de la
+ * medianoche (o con husos distintos) no coinciden: React avisa de un
+ * desajuste de hidratación. Para evitarlo, la app pasa `today` desde el
+ * servidor a los dos lados.
+ */
+export declare function useToday(today?: Date): Date;
 export interface UseCalendarGridNavigationOptions {
     /** Mes visible */
     month: Date;
@@ -100,6 +109,8 @@ export interface UseCalendarGridNavigationOptions {
     onMonthChange: (month: Date) => void;
     /** Fecha seleccionada, si la hay: es la primera candidata a llevar el tabindex */
     selected?: Date | null;
+    /** El «hoy» del calendario (`useToday`): segundo candidato al tabindex. */
+    today: Date;
     /**
      * Activación de la celda enfocada con Enter/Espacio. Solo para rejillas cuya
      * celda no es un `<button>` (que ya lo resuelve el navegador).
@@ -126,12 +137,14 @@ export interface CalendarGridNavigation {
  * moverse de día, Inicio/Fin dentro de la semana, RePág/AvPág de mes y con
  * Mayús de año.
  */
-export declare function useCalendarGridNavigation({ month, onMonthChange, selected, onActivate, minDate, maxDate, }: UseCalendarGridNavigationOptions): CalendarGridNavigation;
+export declare function useCalendarGridNavigation({ month, onMonthChange, selected, today, onActivate, minDate, maxDate, }: UseCalendarGridNavigationOptions): CalendarGridNavigation;
 export interface UseCalendarWeekNavigationOptions {
     /** Lunes de la semana visible */
     weekStart: Date;
     /** Se llama cuando el teclado saca el foco fuera de la semana visible */
     onWeekChange: (weekStart: Date) => void;
+    /** El «hoy» del calendario (`useToday`): candidato al tabindex de la semana. */
+    today: Date;
     /** Activación de la columna enfocada con Enter/Espacio */
     onActivate?: (date: Date) => void;
     minDate?: Date;
@@ -147,4 +160,4 @@ export interface UseCalendarWeekNavigationOptions {
  * fila de celdas, así que arriba y abajo no llevan a ninguna otra parte y se
  * quedan recorriendo los días, como ↑/↓ en una lista.
  */
-export declare function useCalendarWeekNavigation({ weekStart, onWeekChange, onActivate, minDate, maxDate, }: UseCalendarWeekNavigationOptions): CalendarGridNavigation;
+export declare function useCalendarWeekNavigation({ weekStart, onWeekChange, today, onActivate, minDate, maxDate, }: UseCalendarWeekNavigationOptions): CalendarGridNavigation;

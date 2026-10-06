@@ -1,17 +1,52 @@
 import './ThemeSwitcher.css';
 export type Theme = 'light' | 'dark' | 'system';
+/**
+ * El cromo del selector de tema: el nombre del control, los tres temas y la
+ * frase que nombra el botón de icono con el tema vigente. Todo es igual en
+ * cualquier pantalla de la suite, así que va al catálogo una sola vez.
+ */
+export interface ThemeSwitcherMessages {
+    /** Nombre del control: la etiqueta del compacto y el nombre del grupo en lista. */
+    group: string;
+    /** El tema claro. */
+    light: string;
+    /** El tema oscuro. */
+    dark: string;
+    /** El tema que sigue al sistema operativo. */
+    system: string;
+    /**
+     * Nombre accesible del botón de la variante `icon`, que solo enseña el
+     * icono del tema vigente: «Tema: Claro». Recibe el nombre del control y el
+     * del tema vigente, ya resueltos, y es función porque el orden y la
+     * puntuación de la frase son de cada idioma.
+     */
+    trigger: (group: string, theme: string) => string;
+}
+/**
+ * Anulaciones puntuales del catálogo, clave a clave. Las que no se pasen
+ * salen de `themeSwitcher.*` del `BrandMessagesProvider`.
+ */
 export interface ThemeSwitcherLabels {
-    /** Nombre accesible del control. */
+    /** Anulación puntual de `themeSwitcher.group`. */
     group?: string;
+    /** Anulación puntual de `themeSwitcher.light`. */
     light?: string;
+    /** Anulación puntual de `themeSwitcher.dark`. */
     dark?: string;
+    /** Anulación puntual de `themeSwitcher.system`. */
     system?: string;
+    /** Anulación puntual de `themeSwitcher.trigger`. */
+    trigger?: (group: string, theme: string) => string;
 }
 export interface ThemeSwitcherProps {
     /** Tema elegido. `system` sigue la preferencia del sistema operativo. */
     value: Theme;
     /** Cambio de tema. Aplicarlo (clase en `html`) y persistirlo es del producto. */
     onChange?: (theme: Theme) => void;
+    /**
+     * Textos del control, clave a clave. **Sin defaults**: los que no se pasen
+     * salen de `themeSwitcher.*` del `BrandMessagesProvider`.
+     */
     labels?: ThemeSwitcherLabels;
     /** `id` del control en compacto (enlaza la etiqueta). Por defecto, uno único por instancia (`useId`). */
     id?: string;

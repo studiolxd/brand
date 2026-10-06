@@ -55,7 +55,10 @@ export interface SiteNavProps {
     groups: SiteNavGroup[];
     /** Nombre accesible del `nav`. */
     label?: string;
-    /** Enlace del router del producto; por defecto, un `<a>`. */
+    /**
+     * Enlace del router del producto; por defecto, un `<a>`. Recibe solo
+     * atributos de `<a>` y tiene que reenviarlos **todos** (`<Link {...props} />`).
+     */
     renderLink?: (props: SiteNavRenderLinkProps) => ReactNode;
     className?: string;
 }

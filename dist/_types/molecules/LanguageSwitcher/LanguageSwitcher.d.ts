@@ -47,6 +47,10 @@ export interface LanguageSwitcherProps {
      * Sin él, la lista es de botones y usa `onChange`.
      */
     hrefFor?: (code: string) => string;
+    /**
+     * Enlace del router del producto; por defecto, un `<a>`. Recibe solo
+     * atributos de `<a>` y tiene que reenviarlos **todos** (`<Link {...props} />`).
+     */
     renderLink?: (props: LanguageSwitcherRenderLinkProps) => ReactNode;
     /**
      * Disposición de la etiqueta. `inline` (por defecto) la pone delante del

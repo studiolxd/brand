@@ -4,8 +4,8 @@ import { n as e } from "./_shared/brandmessagescontext.js";
 import { Icon as t } from "./icon.js";
 import { VisuallyHidden as n } from "./visually-hidden.js";
 import { Spinner as r } from "./spinner.js";
-import { t as i } from "./_shared/assign-ref.js";
-import { n as ee } from "./_shared/form-size.js";
+import { n as i } from "./_shared/form-size.js";
+import { t as ee } from "./_shared/assign-ref.js";
 import { t as te } from "./_shared/progressbar.js";
 import { i as ne, n as a, t as o } from "./_shared/validate.js";
 import { forwardRef as s, useCallback as c, useEffect as l, useId as re, useRef as u, useState as d } from "react";
@@ -22,7 +22,7 @@ function g(e) {
 	t && (URL.revokeObjectURL(t), h.delete(e));
 }
 var _ = s(function({ multiple: s = !1, accept: h, maxSize: _, maxFiles: v, value: y, defaultValue: b = [], onChange: x, progress: S, uploading: C = !1, uploadingLabel: ae, uploadingLabelVisible: oe = !1, disabled: w = !1, error: T = !1, id: se, name: ce, describedBy: le, ariaLabel: ue, "aria-describedby": de, "aria-label": fe, required: pe, onBlur: me, className: he, locale: E = o, dropzoneLabel: ge, dropzoneActiveLabel: _e, dropzoneHintLabel: ve, maxSizeHint: ye, maxFilesHint: be, filesLabel: xe, progressLabel: D, removeFileLabel: O, tooLargeError: k, invalidTypeError: A, size: j }, M) {
-	let N = e("fileUpload"), P = ee(j), F = P === "sm" ? "sm" : P === "lg" ? "lg" : "md", I = y !== void 0, [L, R] = d(b), [z, B] = d(/* @__PURE__ */ new Map()), [V, H] = d(!1), U = u(/* @__PURE__ */ new Set()), W = u(null), Se = re(), G = se ?? `file-upload-${Se}`, K = I ? y : L;
+	let N = e("fileUpload"), P = i(j), F = P === "sm" ? "sm" : P === "lg" ? "lg" : "md", I = y !== void 0, [L, R] = d(b), [z, B] = d(/* @__PURE__ */ new Map()), [V, H] = d(!1), U = u(/* @__PURE__ */ new Set()), W = u(null), Se = re(), G = se ?? `file-upload-${Se}`, K = I ? y : L;
 	l(() => {
 		K.forEach((e) => U.current.add(e));
 	}, [K]), l(() => {
@@ -91,7 +91,7 @@ var _ = s(function({ multiple: s = !1, accept: h, maxSize: _, maxFiles: v, value
 		children: [
 			/* @__PURE__ */ p(n, { children: /* @__PURE__ */ p("input", {
 				ref: (e) => {
-					W.current = e, i(M, e);
+					W.current = e, ee(M, e);
 				},
 				type: "file",
 				id: G,

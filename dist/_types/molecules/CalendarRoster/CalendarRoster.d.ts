@@ -107,6 +107,14 @@ export interface CalendarRosterProps {
     nextMonthLabel?: string;
     /** Locale para nombres de mes y día. Default: 'es-ES' */
     locale?: string;
+    /**
+     * El día que el cuadrante marca como «hoy». Default: la fecha actual,
+     * calculada una vez al montar. **En SSR conviene pasarla**: servidor y
+     * navegador calculan cada uno su «ahora», y cerca de la medianoche —o con
+     * husos distintos— no coinciden y la hidratación se desajusta. Basta con
+     * calcularla en el servidor y mandar la misma fecha a los dos lados.
+     */
+    today?: Date;
     className?: string;
 }
-export declare function CalendarRoster({ rows, month, onMonthChange, hrefBuilder, linkComponent, renderCell, nameLabel, birthdayPrefix, showLegend, locale, legendItems, legendLabel, previousMonthLabel, nextMonthLabel, className, }: CalendarRosterProps): import("react/jsx-runtime").JSX.Element;
+export declare function CalendarRoster({ rows, month, onMonthChange, hrefBuilder, linkComponent, renderCell, nameLabel, birthdayPrefix, showLegend, locale, legendItems, legendLabel, previousMonthLabel, nextMonthLabel, today: todayProp, className, }: CalendarRosterProps): import("react/jsx-runtime").JSX.Element;

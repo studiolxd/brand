@@ -19,8 +19,8 @@ function f(e) {
 		m: e.getMinutes()
 	} : null;
 }
-var p = o(function({ id: o, label: p, labelHidden: m, value: h, placeholder: g, timeStep: _, minDate: v, maxDate: y, disabledDates: b, name: x, size: S, disabled: C, readOnly: w, error: T = !1, errorMessage: E, helperText: D, locale: O = "es-ES", className: k, calendarLabel: A, openCalendarLabel: j, invalidMessage: M, maskLetters: N, previousMonthLabel: P, nextMonthLabel: F, previousYearsLabel: I, nextYearsLabel: L, yearGridLabel: R, gridLabel: z, hoursLabel: B, minutesLabel: V, onChange: H, onBlur: U }, W) {
-	let G = i(m), K = e(S), q = c(), J = o ?? q, Y = `${J}-date`, X = E ? `${J}-error` : void 0, Z = D ? `${J}-helper` : void 0, Q = [X, Z].filter(Boolean).join(" ") || void 0, $ = T || !!E, ee = s((e) => {
+var p = o(function({ id: o, label: p, labelHidden: m, value: h, placeholder: g, timeStep: _, minDate: v, maxDate: y, disabledDates: b, name: x, size: S, disabled: C, readOnly: w, error: T = !1, errorMessage: E, helperText: D, locale: O = "es-ES", className: k, calendarLabel: A, openCalendarLabel: j, invalidMessage: M, maskLetters: N, previousMonthLabel: P, nextMonthLabel: F, previousYearsLabel: I, nextYearsLabel: L, yearGridLabel: R, gridLabel: z, today: ee, hoursLabel: B, minutesLabel: V, onChange: H, onBlur: U }, W) {
+	let G = i(m), K = e(S), q = c(), J = o ?? q, Y = `${J}-date`, X = E ? `${J}-error` : void 0, Z = D ? `${J}-helper` : void 0, Q = [X, Z].filter(Boolean).join(" ") || void 0, $ = T || !!E, te = s((e) => {
 		if (!e) {
 			H?.(null);
 			return;
@@ -30,7 +30,7 @@ var p = o(function({ id: o, label: p, labelHidden: m, value: h, placeholder: g, 
 			m: 0
 		};
 		H?.(d(e, t));
-	}, [h, H]), te = s((e) => {
+	}, [h, H]), ne = s((e) => {
 		h && H?.(d(h, e));
 	}, [h, H]);
 	return /* @__PURE__ */ u("div", {
@@ -54,7 +54,7 @@ var p = o(function({ id: o, label: p, labelHidden: m, value: h, placeholder: g, 
 					id: Y,
 					name: x,
 					value: h ?? null,
-					onChange: ee,
+					onChange: te,
 					onBlur: U,
 					placeholder: g,
 					minDate: v,
@@ -74,10 +74,11 @@ var p = o(function({ id: o, label: p, labelHidden: m, value: h, placeholder: g, 
 					previousYearsLabel: I,
 					nextYearsLabel: L,
 					yearGridLabel: R,
-					gridLabel: z
+					gridLabel: z,
+					today: ee
 				}), /* @__PURE__ */ l(r, {
 					value: f(h),
-					onChange: te,
+					onChange: ne,
 					onBlur: U,
 					step: _,
 					size: K,

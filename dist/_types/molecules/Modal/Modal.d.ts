@@ -16,7 +16,7 @@ export interface ModalMessages {
     /** Nombre accesible del diálogo cuando no hay `title`. */
     fallbackTitle: string;
 }
-export interface ModalProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title' | 'className'> {
+export interface ModalProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
     open: boolean;
     onClose: () => void;
     title?: string;
@@ -73,6 +73,12 @@ export interface ModalProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
     footer?: React.ReactNode;
     /** Se añade DESPUÉS de las clases propias del pie. */
     footerClassName?: string;
+    /**
+     * Se añade DESPUÉS de las clases propias del panel (`modal__content`), igual
+     * que en `Sheet`. Es un enganche para el producto (una prueba, una medida
+     * propia), no la vía de personalizar la cara del diálogo: eso va por tokens.
+     */
+    className?: string;
 }
 /**
  * Diálogo centrado sobre un velo. El motor (portal, velo, trampa de foco,
@@ -84,7 +90,7 @@ export interface ModalProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
  * `onClick`/`onPointerDown` con `stopPropagation` en el propio popup— sin
  * envolverlo en `div`s de producto.
  *
- * `className` **no** se reenvía a propósito: la cara del diálogo la pone el
- * sistema, y se personaliza por tokens.
+ * `className` se concatena tras las clases propias del popup, como en `Sheet`.
+ * La cara del diálogo sigue personalizándose por tokens.
  */
-export declare function Modal({ open, onClose, title, children, closeLabel, fallbackTitle, container, description, 'aria-describedby': ariaDescribedBy, initialFocus, footer, footerClassName, ...rest }: ModalProps): import("react/jsx-runtime").JSX.Element;
+export declare function Modal({ open, onClose, title, children, closeLabel, fallbackTitle, container, description, 'aria-describedby': ariaDescribedBy, initialFocus, footer, footerClassName, className, ...rest }: ModalProps): import("react/jsx-runtime").JSX.Element;

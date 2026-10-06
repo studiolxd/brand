@@ -20,7 +20,14 @@ export interface PasswordFieldProps extends Omit<React.ComponentPropsWithoutRef<
      * dentro de una capa de formulario propia.
      */
     label?: string;
-    /** Oculta visualmente el label (solo aplica cuando hay `label`). Default: true. */
+    /**
+     * Oculta la etiqueta a la vista (sigue leyéndola el lector de pantalla).
+     * Solo aplica cuando hay `label`. Por defecto `false`: la etiqueta se ve,
+     * como en `InputField`. Con la etiqueta oculta y sin `placeholder`, el
+     * control usa el texto de la etiqueta como placeholder para no quedarse sin
+     * pista visible. Sin valor, lo decide quien lo envuelva: dentro de un
+     * `FieldRow` que no es la primera de la lista, la etiqueta se oculta sola.
+     */
     labelHidden?: boolean;
     /** Marca el estado de error (borde) y `aria-invalid` en el input. */
     error?: boolean;

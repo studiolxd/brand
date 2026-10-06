@@ -9,22 +9,22 @@ import { n as a } from "./_shared/sidebarcontext.js";
 import { Fragment as o, jsx as s, jsxs as c } from "react/jsx-runtime";
 import { Accordion as l } from "@base-ui/react/accordion";
 //#region src/stories/molecules/SidebarNav/SidebarNav.tsx
-function u({ label: u, emptyLabel: d, rail: f, entries: p, defaultValue: m, value: h, onValueChange: g, renderLink: _ = r, className: v }) {
-	let y = e("sidebarNav"), b = h === void 0 ? { defaultValue: m } : {
-		value: h,
-		onValueChange: (e) => g?.(e ?? [])
-	}, x = a();
-	return f ?? x.rail ? /* @__PURE__ */ s("nav", {
+function u({ label: u, emptyLabel: d, emptyEntryLabel: f, rail: p, entries: m, defaultValue: h, value: g, onValueChange: _, renderLink: v = r, className: y }) {
+	let b = e("sidebarNav"), x = (e) => b("emptyEntry", f)(e, b("empty", d)), S = g === void 0 ? { defaultValue: h } : {
+		value: g,
+		onValueChange: (e) => _?.(e ?? [])
+	}, C = a();
+	return p ?? C.rail ? /* @__PURE__ */ s("nav", {
 		className: [
 			"sidebar-nav",
 			"sidebar-nav--rail",
-			v
+			y
 		].filter(Boolean).join(" "),
-		"aria-label": y("label", u),
+		"aria-label": b("label", u),
 		children: /* @__PURE__ */ s("ul", {
 			className: "sidebar-nav__rail",
 			role: "list",
-			children: p.map((e) => {
+			children: m.map((e) => {
 				let t = /* @__PURE__ */ s("span", {
 					className: "sidebar-nav__rail-icon",
 					"aria-hidden": "true",
@@ -34,18 +34,18 @@ function u({ label: u, emptyLabel: d, rail: f, entries: p, defaultValue: m, valu
 					})
 				});
 				if (e.kind === "link") return e.empty ? /* @__PURE__ */ s("li", { children: /* @__PURE__ */ s(n, {
-					label: `${e.label} — ${y("empty", d)}`,
+					label: x(e.label),
 					side: "right",
 					children: /* @__PURE__ */ s("span", {
 						className: "sidebar-nav__rail-item sidebar-nav__rail-item--empty",
 						"aria-disabled": "true",
-						"aria-label": `${e.label} — ${y("empty", d)}`,
+						"aria-label": x(e.label),
 						children: t
 					})
 				}) }, e.id) : /* @__PURE__ */ s("li", { children: /* @__PURE__ */ s(n, {
 					label: e.label,
 					side: "right",
-					children: _({
+					children: v({
 						href: e.href,
 						className: ["sidebar-nav__rail-item", e.active ? "sidebar-nav__rail-item--active" : ""].filter(Boolean).join(" "),
 						"aria-current": e.active ? "page" : void 0,
@@ -67,7 +67,7 @@ function u({ label: u, emptyLabel: d, rail: f, entries: p, defaultValue: m, valu
 						...e.href ? [{ type: "separator" }] : [],
 						...e.items.map((e) => e.empty ? {
 							type: "label",
-							label: `${e.label} · ${y("empty", d)}`
+							label: x(e.label)
 						} : {
 							type: "link",
 							label: e.label,
@@ -77,7 +77,7 @@ function u({ label: u, emptyLabel: d, rail: f, entries: p, defaultValue: m, valu
 					side: "right",
 					align: "start",
 					openOnHover: !0,
-					renderLink: (e) => _({
+					renderLink: (e) => v({
 						...e,
 						href: e.href,
 						className: e.className,
@@ -93,13 +93,13 @@ function u({ label: u, emptyLabel: d, rail: f, entries: p, defaultValue: m, valu
 			})
 		})
 	}) : /* @__PURE__ */ s("nav", {
-		className: ["sidebar-nav", v].filter(Boolean).join(" "),
-		"aria-label": y("label", u),
+		className: ["sidebar-nav", y].filter(Boolean).join(" "),
+		"aria-label": b("label", u),
 		children: /* @__PURE__ */ s(l.Root, {
 			className: "sidebar-nav__accordion",
 			multiple: !0,
-			...b,
-			children: p.map((e) => {
+			...S,
+			children: m.map((e) => {
 				if (e.kind === "link") {
 					let t = ["sidebar-nav__top-link", e.active ? "sidebar-nav__top-link--active" : ""].filter(Boolean).join(" ");
 					return e.empty ? /* @__PURE__ */ s("div", { children: /* @__PURE__ */ c("span", {
@@ -118,10 +118,10 @@ function u({ label: u, emptyLabel: d, rail: f, entries: p, defaultValue: m, valu
 							}),
 							/* @__PURE__ */ s("span", {
 								className: "sidebar-nav__empty-mark",
-								children: y("empty", d)
+								children: b("empty", d)
 							})
 						]
-					}) }, e.id) : /* @__PURE__ */ s("div", { children: _({
+					}) }, e.id) : /* @__PURE__ */ s("div", { children: v({
 						href: e.href,
 						className: t,
 						title: e.label,
@@ -141,7 +141,7 @@ function u({ label: u, emptyLabel: d, rail: f, entries: p, defaultValue: m, valu
 					className: "sidebar-nav__group",
 					children: [/* @__PURE__ */ c(l.Header, {
 						className: "sidebar-nav__group-header",
-						children: [e.href ? _({
+						children: [e.href ? v({
 							href: e.href,
 							className: "sidebar-nav__group-label",
 							title: e.label,
@@ -196,10 +196,10 @@ function u({ label: u, emptyLabel: d, rail: f, entries: p, defaultValue: m, valu
 											}),
 											/* @__PURE__ */ s("span", {
 												className: "sidebar-nav__empty-mark",
-												children: y("empty", d)
+												children: b("empty", d)
 											})
 										]
-									}) }, e.id) : /* @__PURE__ */ s("li", { children: _({
+									}) }, e.id) : /* @__PURE__ */ s("li", { children: v({
 										href: e.href,
 										className: t,
 										"aria-current": e.active ? "page" : void 0,

@@ -53,6 +53,8 @@ export interface DateTimeFieldProps {
     yearGridLabel?: DatePickerProps['yearGridLabel'];
     /** aria-label de la rejilla de días. Sin él, el nombre del panel. */
     gridLabel?: DatePickerProps['gridLabel'];
+    /** El «hoy» del calendario. Default: la fecha actual. En SSR conviene pasarla (ver `Calendar`). */
+    today?: DatePickerProps['today'];
     /** aria-label del desplegable de horas. Sin él, `timeSelect.hours`. */
     hoursLabel?: string;
     /** aria-label del desplegable de minutos. Sin él, `timeSelect.minutes`. */

@@ -51,6 +51,9 @@ import type { OnboardingShellMessages } from '../templates/OnboardingShell/Onboa
 import type { CopyMessages } from '../constants/copy-to-clipboard';
 import type { CodeBlockMessages } from '../molecules/CodeBlock/CodeBlock';
 import type { DotsButtonMessages } from '../atoms/DotsButton/DotsButton';
+import type { CloseButtonMessages } from '../atoms/CloseButton/CloseButton';
+import type { ThemeSwitcherMessages } from '../molecules/ThemeSwitcher/ThemeSwitcher';
+import type { StatTileMessages } from '../molecules/StatTile/StatTile';
 import type { ProgressBarMessages } from '../atoms/ProgressBar/ProgressBar';
 import type { SpinnerMessages } from '../atoms/Spinner/Spinner';
 import type { SliderMessages } from '../atoms/Slider/Slider';
@@ -92,7 +95,7 @@ import type { ConnectorRejectionMessages } from '../templates/ConnectorAuth/Conn
  * suite concreta, el DS pasaría a depender de un paquete de producto para
  * declarar su propio contrato y dejaría de sostenerse solo.
  *
- * Anidado por componente, no plano: son unos 300 textos en 85 espacios, y una
+ * Anidado por componente, no plano: son unos 310 textos en 88 espacios, y una
  * lista plana de claves sueltas (`paginationPrevious`, `modalClose`…) no se
  * puede escribir ni revisar. Los espacios calcan además los que el catálogo
  * de la suite ya tiene (`pagination`, `table`, `common`…), así que montar el
@@ -164,6 +167,9 @@ export interface BrandMessages {
     copy: CopyMessages;
     codeBlock: CodeBlockMessages;
     dotsButton: DotsButtonMessages;
+    closeButton: CloseButtonMessages;
+    themeSwitcher: ThemeSwitcherMessages;
+    statTile: StatTileMessages;
     progressBar: ProgressBarMessages;
     spinner: SpinnerMessages;
     slider: SliderMessages;
@@ -197,4 +203,4 @@ export interface BrandMessages {
     connectorExternalSignIn: ConnectorExternalSignInMessages;
     connectorRejection: ConnectorRejectionMessages;
 }
-export type { PaginationMessages, TableMessages, DataTableMessages, InputFieldMessages, PasswordFieldMessages, SelectMessages, MultiSelectMessages, NumberInputMessages, OtpInputMessages, InputPhoneMessages, AsyncSelectMessages, AsyncMultiSelectMessages, DocsSearchMessages, SearchFormMessages, SiteSearchMessages, FilterBarMessages, CalendarMessages, DatePickerMessages, ColorPickerMessages, TimeSelectMessages, FileUploadMessages, ImageCropDialogMessages, AvatarUploadMessages, ModalMessages, SheetMessages, ConfirmDialogMessages, AlertMessages, BannerMessages, ToasterMessages, ConsentMessages, CommandPaletteMessages, AppLauncherMessages, FloatingDockMessages, NotificationButtonMessages, NotificationPanelMessages, MenuButtonMessages, AppRootMessages, AppShellMessages, AppHeaderMessages, SidebarMessages, SidebarNavMessages, SiteNavMessages, SiteHeaderMessages, UserMenuMessages, OrgSwitcherMessages, BreadcrumbMessages, TableOfContentsMessages, PrevNextNavMessages, PublicPageShellMessages, OnboardingShellMessages, CopyMessages, CodeBlockMessages, DotsButtonMessages, ProgressBarMessages, SpinnerMessages, SliderMessages, TreeViewMessages, ClockWidgetMessages, HeatmapMessages, OrgChartMessages, PlanningGridMessages, RecurrenceFieldMessages, TimelineMessages, UptimeBarsMessages, ChartMessages, StepperMessages, CarouselMessages, LanguageSwitcherMessages, ProjectCardMessages, LegalFooterMessages, CalendarRosterMessages, CalendarPlannerMessages, NotificationListMessages, MessageComposerMessages, ConversationListMessages, ConversationThreadMessages, TypingIndicatorMessages, AnnotationThreadMessages, ChatShellMessages, UntrustedTextMessages, ConnectorRequestSummaryMessages, ConnectorConsentMessages, ConnectorSignInMessages, ConnectorExternalSignInMessages, ConnectorRejectionMessages, };
+export type { PaginationMessages, TableMessages, DataTableMessages, InputFieldMessages, PasswordFieldMessages, SelectMessages, MultiSelectMessages, NumberInputMessages, OtpInputMessages, InputPhoneMessages, AsyncSelectMessages, AsyncMultiSelectMessages, DocsSearchMessages, SearchFormMessages, SiteSearchMessages, FilterBarMessages, CalendarMessages, DatePickerMessages, ColorPickerMessages, TimeSelectMessages, FileUploadMessages, ImageCropDialogMessages, AvatarUploadMessages, ModalMessages, SheetMessages, ConfirmDialogMessages, AlertMessages, BannerMessages, ToasterMessages, ConsentMessages, CommandPaletteMessages, AppLauncherMessages, FloatingDockMessages, NotificationButtonMessages, NotificationPanelMessages, MenuButtonMessages, AppRootMessages, AppShellMessages, AppHeaderMessages, SidebarMessages, SidebarNavMessages, SiteNavMessages, SiteHeaderMessages, UserMenuMessages, OrgSwitcherMessages, BreadcrumbMessages, TableOfContentsMessages, PrevNextNavMessages, PublicPageShellMessages, OnboardingShellMessages, CopyMessages, CodeBlockMessages, DotsButtonMessages, CloseButtonMessages, ThemeSwitcherMessages, StatTileMessages, ProgressBarMessages, SpinnerMessages, SliderMessages, TreeViewMessages, ClockWidgetMessages, HeatmapMessages, OrgChartMessages, PlanningGridMessages, RecurrenceFieldMessages, TimelineMessages, UptimeBarsMessages, ChartMessages, StepperMessages, CarouselMessages, LanguageSwitcherMessages, ProjectCardMessages, LegalFooterMessages, CalendarRosterMessages, CalendarPlannerMessages, NotificationListMessages, MessageComposerMessages, ConversationListMessages, ConversationThreadMessages, TypingIndicatorMessages, AnnotationThreadMessages, ChatShellMessages, UntrustedTextMessages, ConnectorRequestSummaryMessages, ConnectorConsentMessages, ConnectorSignInMessages, ConnectorExternalSignInMessages, ConnectorRejectionMessages, };

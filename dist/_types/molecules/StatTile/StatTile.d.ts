@@ -2,6 +2,19 @@ import { type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import './StatTile.css';
 export type StatTileDirection = 'up' | 'down' | 'flat';
 export type StatTileTone = 'positive' | 'negative' | 'neutral';
+/**
+ * Las tres direcciones del delta, que solo oye un lector de pantalla (la
+ * flecha es decorativa). Dicen hacia dónde se movió la cifra, no qué cifra
+ * es: valen igual en cualquier panel.
+ */
+export interface StatTileMessages {
+    /** La cifra ha subido. */
+    up: string;
+    /** La cifra ha bajado. */
+    down: string;
+    /** La cifra no se ha movido. */
+    flat: string;
+}
 export interface StatTileDelta {
     /** La variación, ya formateada: «+12 %», «−3», «igual». */
     value: ReactNode;
@@ -14,7 +27,8 @@ export interface StatTileDelta {
     tone?: StatTileTone;
     /**
      * Cómo se lee la dirección para un lector de pantalla, que no ve la flecha.
-     * Default castellano según `direction`.
+     * **Sin default**: sin él, sale de `statTile.up`, `statTile.down` o
+     * `statTile.flat` del `BrandMessagesProvider`, según `direction`.
      */
     label?: string;
 }

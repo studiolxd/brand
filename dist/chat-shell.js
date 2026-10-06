@@ -2,8 +2,8 @@
 import './chat-shell.css';
 import { n as e } from "./_shared/brandmessagescontext.js";
 import { Icon as t } from "./icon.js";
-import { t as n } from "./_shared/assign-ref.js";
-import { Button as r } from "./button.js";
+import { Button as n } from "./button.js";
+import { t as r } from "./_shared/assign-ref.js";
 import { Sheet as i } from "./sheet.js";
 import { t as a } from "./_shared/media-query.js";
 import { forwardRef as o, useCallback as s, useState as c } from "react";
@@ -11,7 +11,7 @@ import { jsx as l, jsxs as u } from "react/jsx-runtime";
 //#region src/stories/templates/ChatShell/ChatShell.tsx
 var d = "(min-width: 1024px)", f = o(function({ list: o, header: f, children: p, composer: m, listLabel: h, listTriggerLabel: g, listOpen: _, onListOpenChange: v, className: y, ...b }, x) {
 	let S = e("chatShell"), C = a(d), w = C ?? !0, [T, E] = c(!1), [D, O] = c(null), k = s((e) => {
-		O(e), n(x, e);
+		O(e), r(x, e);
 	}, [x]), [A, j] = c(C);
 	C !== A && (j(C), C && E(!1));
 	let M = s((e) => {
@@ -37,7 +37,7 @@ var d = "(min-width: 1024px)", f = o(function({ list: o, header: f, children: p,
 				children: [
 					(f || F) && /* @__PURE__ */ u("header", {
 						className: "chat-shell__header",
-						children: [F && /* @__PURE__ */ l(r, {
+						children: [F && /* @__PURE__ */ l(n, {
 							variant: "ghost",
 							size: "sm",
 							iconOnly: !0,
@@ -76,7 +76,7 @@ var d = "(min-width: 1024px)", f = o(function({ list: o, header: f, children: p,
 				className: "chat-shell__drawer",
 				children: [/* @__PURE__ */ l("header", {
 					className: "chat-shell__header",
-					children: /* @__PURE__ */ l(r, {
+					children: /* @__PURE__ */ l(n, {
 						variant: "ghost",
 						size: "sm",
 						iconOnly: !0,
