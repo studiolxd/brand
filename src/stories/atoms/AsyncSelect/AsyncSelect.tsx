@@ -1,13 +1,14 @@
 'use client';
 
-import { forwardRef, useState, useRef, useId, useEffect, useCallback } from 'react';
-import { Popover as BasePopover } from '@base-ui/react/popover';
+import { forwardRef, useState } from 'react';
+import { Combobox } from '@base-ui/react/combobox';
 import { Icon } from '../Icon/Icon';
 import { Spinner } from '../Spinner/Spinner';
+import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { useAsyncOptions } from '../_shared/useAsyncOptions';
 import './AsyncSelect.css';
 import { usePortalContainer } from '../../constants/portal-container';
-import { assignRef } from '../../constants/assign-ref';
 
 export interface AsyncSelectOption {
   value: string;
@@ -98,12 +99,19 @@ export interface AsyncSelectProps {
    * solo para llevar la capa a otro sitio: un `.surface-dark` **anidado**, el
    * cajón de un shell propio. Gana siempre.
    */
-  container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
+  container?: React.ComponentPropsWithoutRef<typeof Combobox.Portal>['container'];
 }
 
+const NO_OPTIONS: AsyncSelectOption[] = [];
+const sameOption = (a: AsyncSelectOption, b: AsyncSelectOption) => a.value === b.value;
+
 /**
- * Búsqueda con resultados asíncronos y un solo valor. El `ref` va al `<input>`
- * de búsqueda, que es lo que se enfoca.
+ * Búsqueda con resultados asíncronos y un solo valor, sobre el `Combobox` de
+ * Base UI: el teclado, el foco virtual (`aria-activedescendant`), los anuncios
+ * y el cierre son suyos. El componente decide qué opciones hay (carga con
+ * rebote, `useAsyncOptions`) y qué texto enseña el campo: abierto, lo que se
+ * escribe; cerrado, la etiqueta de lo elegido. El `ref` va al `<input>` de
+ * búsqueda, que es lo que se enfoca.
  */
 export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(function AsyncSelect({
   onSearch,
@@ -130,160 +138,72 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
 }: AsyncSelectProps, ref) {
   const t = useBrandMessages('asyncSelect');
   const portalContainer = usePortalContainer(container);
+  const { results, loading, hasSearched, search, schedule, clear } = useAsyncOptions(onSearch, debounceMs);
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState<AsyncSelectOption[]>([]);
-  const [hasSearched, setHasSearched] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(-1);
   const [internalValue, setInternalValue] = useState<string | null>(null);
   const [internalSelectedOption, setInternalSelectedOption] = useState<AsyncSelectOption | null>(null);
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  // Cada búsqueda lleva número: solo la última manda. Sin esto, dos búsquedas
-  // seguidas pueden resolverse fuera de orden y pintar los resultados viejos.
-  const requestRef = useRef(0);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const anchorRef = useRef<HTMLDivElement>(null);
-  const listboxId = useId();
-  const itemIdPrefix = useId();
 
   const currentValue = value !== undefined ? value : internalValue;
   const currentSelectedOption = selectedOption !== undefined ? selectedOption : internalSelectedOption;
+  const selectedLabel = currentSelectedOption?.label ?? '';
+  // Lo que Base UI tiene por elegido: con él marca la opción (`aria-selected`)
+  // y rellena el input oculto del formulario con su `value`.
+  const selected: AsyncSelectOption | null = currentValue
+    ? { value: currentValue, label: selectedLabel }
+    : null;
 
-  const itemId = (i: number) => `${itemIdPrefix}-opt-${i}`;
-
-  const runSearch = useCallback(async (q: string) => {
-    const requestId = ++requestRef.current;
-    setLoading(true);
-    setHasSearched(false);
-    try {
-      const opts = await onSearch(q);
-      if (requestId !== requestRef.current) return;
-      setResults(opts);
-      setActiveIndex(-1); // reset active index when results change
-    } catch {
-      if (requestId !== requestRef.current) return;
-      setResults([]);
-      setActiveIndex(-1);
-    } finally {
-      if (requestId === requestRef.current) {
-        setLoading(false);
-        setHasSearched(true);
-      }
-    }
-  }, [onSearch]);
-
-  // Al desmontar: se cancela el rebote pendiente y se invalida la búsqueda en
-  // vuelo, para que su respuesta no intente pintar nada.
-  useEffect(() => () => {
-    requestRef.current += 1;
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-  }, []);
-
-  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const q = e.target.value;
-    setQuery(q);
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => void runSearch(q), debounceMs);
-  }
-
-  function handleInputPointerDown(e: React.PointerEvent<HTMLInputElement>) {
-    if (disabled || readOnly) return;
-    if (open) return;
-    e.preventDefault();
-    inputRef.current?.focus();
-    setActiveIndex(-1);
-    setQuery('');
-    setResults([]);
-    setHasSearched(false);
-    setOpen(true);
-    void runSearch('');
-  }
-
-  function handleSelect(option: AsyncSelectOption) {
+  function commit(option: AsyncSelectOption | null) {
     if (value === undefined) {
-      setInternalValue(option.value);
+      setInternalValue(option?.value ?? null);
       setInternalSelectedOption(option);
     }
-    onValueChange?.(option.value, option);
-    setOpen(false);
-    setActiveIndex(-1);
-    setQuery('');
+    onValueChange?.(option?.value ?? null, option);
   }
 
   function clearSelection() {
-    if (value === undefined) {
-      setInternalValue(null);
-      setInternalSelectedOption(null);
-    }
-    onValueChange?.(null, null);
+    commit(null);
     setQuery('');
-    setResults([]);
-    setHasSearched(false);
-    inputRef.current?.focus();
+    clear();
   }
 
-  function handleClear(e: React.MouseEvent) {
-    e.stopPropagation();
-    clearSelection();
+  /**
+   * Abrir arranca una búsqueda limpia con la consulta vacía (el campo pasa a
+   * enseñar lo que se escribe, no la etiqueta elegida). Si lo que abre es
+   * escribir, la búsqueda ya la lanza el cambio de texto.
+   */
+  function handleOpenChange(next: boolean, details: Combobox.Root.ChangeEventDetails) {
+    if (next === open) return;
+    setOpen(next);
+    if (next && details.reason === 'input-change') return;
+    setQuery('');
+    if (next) search('');
   }
 
-  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      if (!open) {
-        setOpen(true);
-        void runSearch(query);
-      } else {
-        setActiveIndex(i => Math.min(i + 1, results.length - 1));
-      }
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      setActiveIndex(i => Math.max(i - 1, -1));
-    } else if (e.key === 'Enter' && activeIndex >= 0 && results[activeIndex]) {
-      e.preventDefault();
-      handleSelect(results[activeIndex]);
-    } else if (e.key === 'Escape') {
-      setOpen(false);
-      setQuery('');
-      setActiveIndex(-1);
-    } else if (e.key === 'Tab') {
-      setOpen(false);
-      setActiveIndex(-1);
-    } else if ((e.key === 'Backspace' || e.key === 'Delete') && query === '' && currentValue && !disabled && !readOnly) {
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement> & { preventBaseUIHandler?: () => void }) {
+    if (disabled || readOnly) return;
+    if (e.key === 'Escape' && !open) {
+      // Cerrado, Escape no vacía la selección (lo que haría Base UI): sube tal
+      // cual, para que cierre el diálogo que contenga al campo.
+      e.preventBaseUIHandler?.();
+    } else if ((e.key === 'Backspace' || e.key === 'Delete') && query === '' && currentValue) {
       // El aspa es un atajo de ratón (fuera del tabulador, como en el resto de
       // la familia): la salida con teclado es Retroceso sobre el hueco vacío,
       // el mismo gesto que quita la última píldora en AsyncMultiSelect.
       e.preventDefault();
+      e.preventBaseUIHandler?.();
       clearSelection();
     } else if (!open && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      // Cerrado, el campo enseña la etiqueta elegida: la primera tecla empieza
+      // una búsqueda nueva en vez de escribirse detrás de esa etiqueta.
       e.preventDefault();
-      setQuery(e.key);
+      e.preventBaseUIHandler?.();
       setOpen(true);
-      setResults([]);
-      setHasSearched(false);
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-      debounceRef.current = setTimeout(() => void runSearch(e.key), debounceMs);
+      setQuery(e.key);
+      clear();
+      schedule(e.key);
     }
   }
-
-  /**
-   * Base UI notifica los cierres (Escape, click fuera). Se ignora el click
-   * fuera cuando nace dentro del propio control: sin `Trigger`, el input
-   * cuenta como "fuera" para el gestor de dismissal.
-   */
-  function handleOpenChange(next: boolean, details: BasePopover.Root.ChangeEventDetails) {
-    if (next) return;
-    if (details.reason === 'outside-press') {
-      const target = details.event?.target;
-      if (target instanceof Node && anchorRef.current?.contains(target)) return;
-    }
-    setOpen(false);
-    setQuery('');
-    setActiveIndex(-1);
-  }
-
-  const displayValue = open ? query : (currentSelectedOption?.label ?? '');
 
   const triggerClass = [
     'async-select',
@@ -299,97 +219,75 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
   ].filter(Boolean).join(' ');
 
   return (
-    <BasePopover.Root open={open} onOpenChange={handleOpenChange}>
-      <div ref={anchorRef} className={triggerClass} data-popup-open={open || undefined}>
-        <input
-          ref={(node) => { inputRef.current = node; assignRef(ref, node); }}
+    <Combobox.Root<AsyncSelectOption>
+      items={loading ? NO_OPTIONS : results}
+      // Las opciones ya vienen filtradas por `onSearch`.
+      filter={null}
+      value={selected}
+      onValueChange={(next) => {
+        commit(next);
+        setQuery('');
+      }}
+      isItemEqualToValue={sameOption}
+      inputValue={open ? query : selectedLabel}
+      onInputValueChange={(next, details) => {
+        if (details.reason !== 'input-change') return;
+        setQuery(next);
+        schedule(next);
+      }}
+      open={open}
+      onOpenChange={handleOpenChange}
+      name={name}
+      disabled={disabled}
+      readOnly={readOnly}
+    >
+      <Combobox.InputGroup className={triggerClass}>
+        <Combobox.Input
+          ref={ref}
           id={id}
-          type="text"
           className="async-select__input"
-          value={displayValue}
-          onChange={handleInputChange}
-          onPointerDown={handleInputPointerDown}
           onKeyDown={handleKeyDown}
           placeholder={t('placeholder', placeholder)}
-          disabled={disabled}
-          readOnly={readOnly}
           aria-label={ariaLabel}
           aria-describedby={ariaDescribedby}
           aria-invalid={error || undefined}
           aria-required={required || undefined}
-          aria-expanded={open}
-          aria-haspopup="listbox"
-          // El listbox vive en un portal que solo existe abierto: cerrado, un
-          // `aria-controls` a un id inexistente es una referencia rota.
-          aria-controls={open ? listboxId : undefined}
-          aria-activedescendant={activeIndex >= 0 ? itemId(activeIndex) : undefined}
-          autoComplete="off"
-          role="combobox"
-          aria-autocomplete="list"
           onBlur={onBlur}
         />
-        {/* Lo que se envía con el formulario. */}
-        {name && <input type="hidden" name={name} value={currentValue ?? ''} />}
         {loading && <Spinner size="sm" aria-hidden />}
-        {!loading && currentValue && !disabled && !readOnly && (
-          <button
-            type="button"
-            className="async-select__clear"
-            aria-label={t('clear', clearLabel)}
-            tabIndex={-1}
-            onMouseDown={handleClear}
-          >
+        {!loading && !disabled && !readOnly && (
+          <Combobox.Clear className="async-select__clear" aria-label={t('clear', clearLabel)}>
             <Icon name="close" size="xs" />
-          </button>
+          </Combobox.Clear>
         )}
-      </div>
+      </Combobox.InputGroup>
 
-      <BasePopover.Portal container={portalContainer}>
-        <BasePopover.Positioner
-          className="async-select__positioner"
-          anchor={anchorRef}
-          align="start"
-          sideOffset={-1}
-        >
-          <BasePopover.Popup className={contentClass} initialFocus={false} finalFocus={false}>
-            <div
-              role="listbox"
-              aria-label={ariaLabel ?? t('placeholder', placeholder)}
-              id={listboxId}
-            >
+      <Combobox.Portal container={portalContainer}>
+        <Combobox.Positioner className="async-select__positioner" align="start" sideOffset={-1}>
+          <Combobox.Popup className={contentClass} aria-busy={loading || undefined}>
+            <Combobox.Status>
               {loading && (
                 <div className="async-select__loading">
-                  <Spinner size="sm" label={t('loading', loadingLabel)} />
+                  <Spinner size="sm" aria-hidden />
+                  <VisuallyHidden>{t('loading', loadingLabel)}</VisuallyHidden>
                 </div>
               )}
-              {!loading && hasSearched && results.length === 0 && (
+            </Combobox.Status>
+            <Combobox.Empty>
+              {!loading && hasSearched && (
                 <div className="async-select__empty">{t('empty', emptyMessage)}</div>
               )}
-              {!loading && results.map((option, index) => {
-                const isSelected = option.value === currentValue;
-                const isActive = activeIndex === index;
-                return (
-                  <div
-                    key={option.value}
-                    id={itemId(index)}
-                    role="option"
-                    aria-selected={isSelected}
-                    className={[
-                      'async-select__item',
-                      isSelected ? 'async-select__item--selected' : '',
-                      isActive ? 'async-select__item--active' : '',
-                    ].filter(Boolean).join(' ')}
-                    onPointerDown={e => e.preventDefault()}
-                    onClick={() => handleSelect(option)}
-                  >
-                    {option.label}
-                  </div>
-                );
-              })}
-            </div>
-          </BasePopover.Popup>
-        </BasePopover.Positioner>
-      </BasePopover.Portal>
-    </BasePopover.Root>
+            </Combobox.Empty>
+            <Combobox.List aria-label={ariaLabel ?? t('placeholder', placeholder)}>
+              {(option: AsyncSelectOption) => (
+                <Combobox.Item key={option.value} value={option} className="async-select__item">
+                  {option.label}
+                </Combobox.Item>
+              )}
+            </Combobox.List>
+          </Combobox.Popup>
+        </Combobox.Positioner>
+      </Combobox.Portal>
+    </Combobox.Root>
   );
 });

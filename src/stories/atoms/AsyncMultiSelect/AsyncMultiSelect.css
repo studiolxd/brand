@@ -60,6 +60,13 @@
   white-space: nowrap;
 }
 
+/* Base UI deja recorrer las fichas con las flechas laterales desde el campo
+   vacío: la ficha recorrida recibe el foco y lo enseña con el anillo del
+   control. */
+.async-multi-select__pill:focus-visible {
+  outline: var(--async-multi-select-focus-ring-width) solid var(--async-multi-select-focus-ring-color);
+}
+
 .async-multi-select__pill-label {
   line-height: 1;
 }
@@ -152,23 +159,18 @@
   color: var(--async-multi-select-color);
   cursor: pointer;
 
-  /* La opción bajo el puntero o el teclado se rellena con la inversión de
-     marca: excepción declarada de las listas de opciones desplegables
+  /* La opción resaltada —bajo el puntero o la que recorre el teclado con el
+     foco virtual de Base UI (`data-highlighted`)— se rellena con la inversión
+     de marca: excepción declarada de las listas de opciones desplegables
      (Foundations → Colores). El texto invierte con el relleno. */
-  &:focus-visible,
+  &[data-highlighted],
   &:hover {
     background-color: var(--async-multi-select-item-highlighted-bg);
     color: var(--async-multi-select-item-highlighted-color);
   }
 
-  &.async-multi-select__item--selected {
+  &[data-selected] {
     font-weight: var(--async-multi-select-item-selected-font-weight);
-  }
-
-  /* La opción que recorre el teclado (foco virtual): el mismo relleno. */
-  &.async-multi-select__item--active {
-    background-color: var(--async-multi-select-item-highlighted-bg);
-    color: var(--async-multi-select-item-highlighted-color);
   }
 }
 
@@ -197,7 +199,7 @@
   place-content: center;
   transition: background-color var(--checkbox-transition-duration) var(--checkbox-transition-easing);
 
-  .async-multi-select__item--selected & {
+  .async-multi-select__item[data-selected] & {
     background-color: currentColor;
   }
 
@@ -213,13 +215,12 @@
   transform: scale(0);
   transition: transform var(--checkbox-transition-duration) var(--checkbox-transition-easing);
 
-  .async-multi-select__item--selected & {
+  .async-multi-select__item[data-selected] & {
     transform: scale(1);
   }
 
-  .async-multi-select__item:focus-visible &,
   .async-multi-select__item:hover &,
-  .async-multi-select__item--active & {
+  .async-multi-select__item[data-highlighted] & {
     background-color: var(--async-multi-select-item-highlighted-bg);
   }
 }

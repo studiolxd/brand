@@ -159,13 +159,13 @@
      marca: excepción declarada de las listas de opciones desplegables
      (Foundations → Colores). El texto invierte con el relleno, y la casilla
      lo sigue por `currentColor`. */
-  &.multi-select__item--active,
+  &[data-highlighted],
   &:hover {
     background-color: var(--multi-select-item-highlighted-bg);
     color: var(--multi-select-item-highlighted-color);
   }
 
-  &.multi-select__item--selected {
+  &[data-selected] {
     font-weight: var(--multi-select-item-selected-font-weight);
   }
 }
@@ -195,7 +195,7 @@
   place-content: center;
   transition: background-color var(--checkbox-transition-duration) var(--checkbox-transition-easing);
 
-  .multi-select__item--selected & {
+  .multi-select__item[data-selected] & {
     background-color: currentColor;
   }
 
@@ -211,11 +211,11 @@
   transform: scale(0);
   transition: transform var(--checkbox-transition-duration) var(--checkbox-transition-easing);
 
-  .multi-select__item--selected & {
+  .multi-select__item[data-selected] & {
     transform: scale(1);
   }
 
-  .multi-select__item--active &,
+  .multi-select__item[data-highlighted] &,
   .multi-select__item:hover & {
     background-color: var(--multi-select-item-highlighted-bg);
   }
