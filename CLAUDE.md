@@ -62,15 +62,16 @@ La **revisión y la aceptación** de los cambios visuales se hacen en chromatic.
 
 Librería de componentes React publicada en el registro de npm (`@studiolxd/brand`). Dos salidas de build:
 
-- **`dist/index.js` + `dist/index.css`** — componentes React (ESM) + estilos. Para cualquier aplicación React.
+- **`dist/`** — componentes React (ESM) + estilos, para cualquier aplicación React. **No hay barril** (no existen `dist/index.js` ni `dist/index.css`, ni export `"."`): cada entrada de `scripts/entry-points.mjs` sale como `dist/<nombre>.js` con su propio `dist/<nombre>.css`, que `scripts/post-build.mjs` le enlaza con un `import './<nombre>.css'` en la primera línea (detrás del `'use client'` si lo lleva), y se importa por su subruta (`@studiolxd/brand/button`). Lo que comparten varias entradas sale a `dist/_shared/` y los tipos a `dist/_types/`. Junto a eso, tres hojas sueltas: `dist/brand.css` (`build:css`, todo el CSS), `dist/tokens.css` (`build:tokens-css`, solo los tokens) y `dist/fonts.css` (`build:fonts-css`, los `@font-face`).
 - **`src/tokens/scss/`** — tokens SCSS sin `var()`, con valores resueltos, distribuidos directamente desde el repo (no pasan por `dist/`). Para cualquier aplicación que no use React y necesite los tokens (PHP, servidor, herramientas de diseño…). Dos entrypoints auto-generados por `build:tokens`: `_index.scss` (`@forward`, Sass moderno — export `./scss`) y `_index.legacy.scss` (`@import`, para compiladores sin `@use`/`@forward` como el scssphp de Moodle — export `./scss/legacy`). También hay exports por fichero: `./scss/global/*`, `./scss/components/*`, `./scss/molecules/*`.
 
 **Atomic Design** en `src/stories/`:
 - `atoms/` — elementos básicos (Button, Input, Link…)
 - `molecules/` — combinaciones de átomos (InputField, Form…)
-- `organisms/` — secciones complejas (ContactForm…)
+- `organisms/` — secciones complejas (DataTable, Chart, ConversationThread…)
 - `sections/` — bloques de página completos (AppHeader, SiteHeader, SiteShell…)
-- `pages/` — plantillas de página completas
+- `templates/` — layouts reutilizables con contenido variable (ChatShell, ErrorPage, PublicPageShell…)
+- `pages/` — instancias de página completas (Auth, Onboarding, Status…)
 - `foundations/` — documentación de tokens (colores, tipografía, espaciado…)
 - `email/` — el correo: layout y primitivas sobre `react-email`. Categoría aparte porque el medio no es la web (ver § «El correo»)
 
@@ -165,9 +166,9 @@ El sistema lee a dos tamaños emparejados con las tallas de control: **aplicaci�
 
 - `render` recibe un elemento de React: solo desde componentes **cliente**. Desde un Server Component el elemento no cruza al cliente (falla con «Element type is invalid»); ahí, `Button href`.
 
-Todo comportamiento accesible complejo (menús, popovers, diálogos, tooltips, select, tabs, acordeón, switch, checkbox, radio) se construye sobre **`@base-ui-components/react`**. **Radix queda prohibido** (`@radix-ui/*` no puede aparecer en `src/`): Base UI es su sucesor, de los mismos autores, y el DS no mezcla motores. Reglas:
+Todo comportamiento accesible complejo (menús, popovers, diálogos, tooltips, select, tabs, acordeón, switch, checkbox, radio) se construye sobre **`@base-ui/react`** (hasta v25.24.0, `@base-ui-components/react`: el rc que sus autores renombraron). **Radix queda prohibido** (`@radix-ui/*` no puede aparecer en `src/`): Base UI es su sucesor, de los mismos autores, y el DS no mezcla motores. Reglas:
 
-- **`render`, nunca `asChild`.** Para poner las clases y handlers de un componente sobre otro elemento (un `Link` del router, un botón propio) se usa la prop `render` de Base UI o el hook `useRender` (`@base-ui-components/react/use-render`). `Button` lo expone como `render`.
+- **`render`, nunca `asChild`.** Para poner las clases y handlers de un componente sobre otro elemento (un `Link` del router, un botón propio) se usa la prop `render` de Base UI o el hook `useRender` (`@base-ui/react/use-render`). `Button` lo expone como `render`.
 - **Estados por atributos de Base UI** en el CSS: `[data-open]` / `[data-closed]` en popups, `[data-popup-open]` en triggers, `[data-highlighted]`, `[data-checked]`, `[data-disabled]`. Nada de `[data-state="…"]`.
 - **Posicionamiento**: `Portal` → `Positioner` (side, align, sideOffset) → `Popup`. La variable `--transform-origin` la pone el Positioner.
 - Los `renderLink` que recibe un menú deben propagar **todas** las props que les llegan: el motor inyecta rol, tabIndex y handlers de teclado en el enlace.

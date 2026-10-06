@@ -1,0 +1,50 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as FieldsetStories from "./Fieldset.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { fieldsetTokens } from "../../../tokens/components/fieldset";
+
+<Meta of={FieldsetStories} />
+
+# Fieldset
+
+Agrupa varios campos bajo un mismo título: el `<fieldset>` nativo con su `<legend>`, sin borde, sin relleno y sin margen —el grupo se nota por el título y el aire, no por una caja—. Es la pieza para un bloque de un formulario largo («Información personal», «Preferencias de contacto») y para un conjunto de casillas o radios que responden a una sola pregunta.
+
+<Canvas of={FieldsetStories.Default} />
+
+## El título del grupo
+
+`legend` es obligatorio: un grupo sin nombre no es un grupo para quien navega con lector de pantalla. Se pinta con la cara de un título del sistema y deja debajo el mismo aire que un `Heading` (`fieldset.legend-space-after` apunta a `text.heading.space-after`).
+
+- `level` (1–6, por defecto `2`) elige **qué cara de título** lleva el legend: familia, cuerpo, peso, interlineado, color y tracking de `text.h<N>`. Es solo aspecto: el `<legend>` sigue siendo un `<legend>`, no un `<h2>`, y no entra en el índice de títulos de la página.
+- `size` (1–10) cambia solo el cuerpo, con un peldaño de la escala de títulos (`text.size.N`), y `weight` solo el peso. Son las mismas props que en `Heading`, y por eso también siguen a la superficie pública dentro de `SiteShell` (ver Foundations → Tipografía § «Dos superficies de lectura»).
+
+<Canvas of={FieldsetStories.AllLevels} />
+
+## Casillas y radios
+
+Un grupo de `CheckboxField` o de `RadioField` que responde a una sola pregunta va dentro de un `Fieldset`: el legend es la pregunta y cada campo, una respuesta. Así el lector de pantalla anuncia la pregunta al entrar en el grupo, que es lo que una etiqueta suelta por casilla no da.
+
+<Canvas of={FieldsetStories.WithCheckboxes} />
+<Canvas of={FieldsetStories.WithRadios} />
+
+## Deshabilitado
+
+`disabled` es el atributo nativo del `<fieldset>`: deshabilita **todos** los controles que contiene en un solo punto, sin pasarlo campo a campo. Cada campo pinta su propio estado deshabilitado; el `Fieldset` no añade nada visual.
+
+<Canvas of={FieldsetStories.Disabled} />
+
+## Accesibilidad
+
+- El `<legend>` es el nombre accesible del grupo: el lector lo anuncia al entrar en el primer control.
+- `level` no crea un título en el esquema del documento. Si el bloque necesita aparecer en la navegación por títulos, el título va fuera, con un `Heading`, y el `Fieldset` se queda con un legend corto.
+- `disabled` se propaga por el HTML, no por JavaScript: un control deshabilitado así no entra en el orden de tabulación ni se envía con el formulario.
+
+## Tokens
+
+El único token propio es el aire bajo el legend; la tipografía es la de los títulos del sistema (`text.h1`…`text.h6`, `text.size.*`), documentada en Foundations → Tipografía.
+
+<TokenTable tokens={fieldsetTokens} />
+
+## Props
+
+<ArgTypes of={FieldsetStories} />

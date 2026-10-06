@@ -3696,6 +3696,13 @@ Nada que tocar en las apps: `EmailLayout` sigue con la misma API. Al bumpear el 
     de `STORY_TODAY` explícitamente, para que se lean sin depender
     implícitamente del mock global.
 
+## [34.1.1] — 2026-09-11
+
+> Sin cambios: la etiqueta `v34.1.1` se cortó por error sobre el mismo commit que
+> `v34.1.0` (`272692a6`), así que su contenido es idéntico al de 34.1.0. El cambio
+> que debía llevar —la fecha fija del catálogo— salió como 34.1.2. Entrada añadida
+> para que cada etiqueta tenga la suya.
+
 ## [34.1.0] — 2026-09-11
 
 > **Minor.** Cuatro primitivas de correo nuevas, dos props nuevas en las que ya
@@ -4462,15 +4469,18 @@ detrás no se ha añadido.
   pasa de `ghost` a `outline` en las stories del pie, en línea con `ConfirmDialog`.
   Solo documentación y stories: ningún componente cambia.
 
-## [31.0.1] — 2026-09-05
+## [31.1.1] — 2026-09-05
 
-- **`ImageCropDialog` se cierra al confirmar.** Tras `await onConfirm(blob)` el
-  diálogo se quedaba abierto —el consumidor veía su toast de «actualizado» con
-  el recorte todavía en pantalla— porque nadie llamaba a `onClose`. Ahora, si
-  `onConfirm` resuelve, el diálogo se cierra y limpia la selección; si lanza,
-  se queda abierto con la selección intacta. Afecta a `AvatarUpload`.
+- **`ConfirmDialog`: `Cancelar` pasa de `ghost` a `outline`**, el criterio del pie
+  de los diálogos que 31.2.0 dejó escrito (norma 10 de `CLAUDE.md`): `Cancelar` es
+  `variant="outline"` y va primero en el DOM del pie. Una línea en
+  `ConfirmDialog.tsx` y su `dist/confirm-dialog.js`; sin cambios de API ni de tokens.
 
-## [31.0.0] — 2026-09-05
+## [31.1.0] — 2026-09-05
+
+> Entrada reconstruida a partir del historial entre `v31.0.1` y `v31.1.0`: el texto
+> de estos dos puntos estaba archivado por error bajo 31.0.0, pero `NotificationPanel`
+> y `Popover initialFocus` no existen en la etiqueta `v31.0.0` y sí en `v31.1.0`.
 
 - **`NotificationPanel`: la campana abre un panel flotante** (molécula nueva,
   export `@studiolxd/brand/notification-panel`). El `NotificationButton` de
@@ -4495,6 +4505,17 @@ detrás no se ha añadido.
   el foco sigue yendo al propio panel, que es lo correcto para un panel de
   lectura; un panel cuyo contenido es una lista de controles pasa aquí el
   primero de ellos. Es lo que necesita `NotificationPanel`.
+
+## [31.0.1] — 2026-09-05
+
+- **`ImageCropDialog` se cierra al confirmar.** Tras `await onConfirm(blob)` el
+  diálogo se quedaba abierto —el consumidor veía su toast de «actualizado» con
+  el recorte todavía en pantalla— porque nadie llamaba a `onClose`. Ahora, si
+  `onConfirm` resuelve, el diálogo se cierra y limpia la selección; si lanza,
+  se queda abierto con la selección intacta. Afecta a `AvatarUpload`.
+
+## [31.0.0] — 2026-09-05
+
 - **La página de estado, en el catálogo** (`Pages/Estado del servicio`).
   `status.slxd.app` montado con piezas del DS y datos falsos: `AppRoot` +
   `PublicPageShell` con la cabecera de la marca **sin índice** —un panel que
@@ -4632,7 +4653,7 @@ detrás no se ha añadido.
   logotipo del alta. La fila de `AvatarUpload` envuelve cuando el retrato ya no
   cabe con el botón al lado (a 375px, en `lg`).
 
-## v30.10.0
+## [30.10.0] — 2026-09-05
 
 - **`UptimeBars`** (nuevo, `./uptime-bars`): la tira de disponibilidad, una
   barrita por punto con su porcentaje, su etiqueta y su detalle, la media del
@@ -4657,7 +4678,7 @@ detrás no se ha añadido.
   ~2,3:1 sobre el prusia). Arreglarlo pediría un relleno por superficie, que no
   se ha inventado.
 
-## v30.9.0
+## [30.9.0] — 2026-09-05
 
 - **Una sola superficie de diálogo: `Modal` y `Sheet` dejan de ser dos árboles
   paralelos.** El velo, la cabecera y el pie viven ahora una sola vez en
@@ -4681,7 +4702,7 @@ detrás no se ha añadido.
   reposo. Antes solo la tenía mientras corría la animación de entrada, así que
   con las animaciones desactivadas el diálogo se velaba a opacidad 1.
 
-## v30.8.0
+## [30.8.0] — 2026-09-05
 
 - **`CloseButton` — una sola aspa para todo el sistema.** Hasta ahora había dos
   maneras de pintar lo mismo: `Modal`, `Sheet` y `FloatingDock` montaban un
@@ -4731,7 +4752,7 @@ detrás no se ha añadido.
   móvil de 375 apretaba los botones. Mismo criterio y mismo punto de ruptura
   (`md`) que el diálogo y que las acciones de `Form`.
 
-## v30.7.0
+## [30.7.0] — 2026-09-05
 
 - **`AvatarUpload` — el avatar de una entidad con su subida.** Una sola pieza
   para persona (redondo) y organización (cuadrado): avatar, subida por clic y
@@ -4770,7 +4791,7 @@ detrás no se ha añadido.
   engancha ahora ese CSS. **`ProgressBar` ya venía así desde v30.6.0**
   (`dist/ProgressBar.css` huérfano): quien lo usara lo recibía sin estilos.
 
-## v30.6.0
+## [30.6.0] — 2026-09-05
 
 - **`FieldRow` / `FieldRows` — la fila de formulario repetible.** La pieza que
   le faltaba al DS para cualquier **lista editable** (invitar personas,
@@ -4802,7 +4823,7 @@ detrás no se ha añadido.
   en el CSS— y falla si aparece `text-decoration: underline` fuera de las dos
   excepciones, que están escritas en el propio test con su motivo.
 
-## v30.5.0
+## [30.5.0] — 2026-09-05
 
 - **Norma nueva del DS: el subrayado es una línea, no `text-decoration`.** Se
   subraya con `box-shadow` y su `padding-block-end`, como ya hacían `Link` y
@@ -4826,7 +4847,7 @@ detrás no se ha añadido.
   (lavanda → amarillo) en la hoja embebida, con el aviso escrito de dónde no
   funciona: Outlook de escritorio lo ignora, y en móvil no hay hover.
 
-## v30.4.1
+## [30.4.1] — 2026-09-05
 
 Los tres contratos que `test:stories` daba en rojo. La puerta llevaba tiempo sin
 poder correrse —el Chromium de Playwright no bajaba en esta red—, así que
@@ -4844,7 +4865,7 @@ nadie los había mirado.
   `countLabel`. Puesto al día, y con dos aserciones más que cazan el fallo de
   arriba.
 
-## v30.4.0
+## [30.4.0] — 2026-09-05
 
 Cuatro cosas del alta, todas vistas en el hub.
 
@@ -4870,7 +4891,7 @@ Cuatro cosas del alta, todas vistas en el hub.
   call-site la recordara: en la misma pantalla convivían un pie en talla base y
   un formulario en `lg`.
 
-## v30.3.2
+## [30.3.2] — 2026-09-04
 
 `OnboardingShell`, el pie de acciones:
 
@@ -4889,7 +4910,7 @@ Cuatro cosas del alta, todas vistas en el hub.
   el tramo del progreso al cuerpo, y las descripciones de ambos tokens dicen qué
   gobierna cada uno. El render no cambia.
 
-## v30.3.1
+## [30.3.1] — 2026-09-04
 
 `OnboardingShell`: el pie con los conmutadores de idioma y tema **cae al fondo
 de la ventana** cuando el paso no llega a llenarla, y lo empuja el contenido
@@ -4900,7 +4921,7 @@ dentro (un `100dvh` anidado da alto de más y una barra de scroll de regalo). El
 reparto horizontal no cambia: chrome a ancho de página, columna del paso acotada
 y centrada.
 
-## v30.3.0
+## [30.3.0] — 2026-09-04
 
 Dos aperturas de API que desbloquean las dos últimas páginas públicas de la
 suite fuera del modelo (`(auth)` del hub y las nueve `unsubscribe`).
@@ -4921,7 +4942,7 @@ suite fuera del modelo (`(auth)` del hub y las nueve `unsubscribe`).
   el tipo** en ese caso: el fallo sería silencioso, así que la red es que no
   compile. Sin copy en el DS, como el resto del correo.
 
-## v30.2.0
+## [30.2.0] — 2026-09-04
 
 Dos frentes: **el alta de la suite** y **los correos**, más dos correcciones
 que afectan a componentes ya en uso (ver «Lo que cambia fuera de lo nuevo»).
@@ -4978,7 +4999,7 @@ que afectan a componentes ya en uso (ver «Lo que cambia fuera de lo nuevo»).
   invisible en las dos superficies. Queda anotado en `chart.grid-color`, que
   arrastra el mismo defecto de procedencia con el valor correcto.
 
-## v30.1.2
+## [30.1.2] — 2026-09-04
 
 `Pagination`: `.pagination__meta` (resumen + selector de tamaño) usaba
 `--pagination-controls-gap` (`{spacing.1}`, 4px) — un token pensado para
@@ -4986,7 +5007,7 @@ el gap entre botones de página contiguos, no entre secciones distintas.
 Pasa a `--pagination-gap` (`{spacing.3}`, 12px), el mismo que usa
 `.pagination` entre sus grupos principales.
 
-## v30.1.1
+## [30.1.1] — 2026-09-04
 
 `Table`: el icono de ordenación en reposo pierde la opacidad reducida
 (`--table-sort-icon-inactive-opacity`, `0.35`) — ahora tinta plana con el
@@ -4997,7 +5018,7 @@ navy en oscuro) y confundía visualmente. El token
 `sort-icon-inactive-opacity` se retira de `tokens/component/table.json` por
 quedar sin uso.
 
-## v30.1.0
+## [30.1.0] — 2026-09-03
 
 `Stack`: nueva prop `align` (`'start'` | `'stretch'`, opt-in, por defecto
 `'start'` — no cambia el aspecto de ningún uso existente). Con
@@ -5008,7 +5029,7 @@ donde `align-items: flex-start` encogía el contenido ancho (una tabla con
 `width: 100%` en su `<table>` interno) al tamaño de su propio contenido en
 vez de ocupar el ancho del `Stack`.
 
-## v30.0.6
+## [30.0.6] — 2026-09-03
 
 `UserMenu` y `OrgSwitcher`: el chevron del trigger giraba a saltos al
 abrir/cerrar — le faltaba `transition` en la regla base (solo tenía
@@ -5018,7 +5039,7 @@ Ahora reutiliza la transición general de cada componente
 `--org-switcher-transition-duration`/`--org-switcher-transition-easing`),
 el mismo patrón que ya usan `Accordion`, `Collapsible` y `SidebarNav`.
 
-## v30.0.5
+## [30.0.5] — 2026-09-03
 
 `AppShell`: `.app-shell__content` (el `<main>` donde cada app pinta sus
 páginas) gana el aire que le faltaba — 16px lateral y 32px arriba/abajo,
@@ -5027,7 +5048,7 @@ reutilizando `--section-padding-inline` y `--section-padding-block-lg`
 el contenido arrancaba pegado al borde superior-izquierdo en las 8 apps de
 la suite. El safe-area en los lados "end" se conserva con `max()`.
 
-## v30.0.4
+## [30.0.4] — 2026-09-03
 
 `Sidebar`: el rail pasa a padding-inline simétrico (16px a ambos lados,
 antes 16px/8px) — visualmente descompensado en una columna tan estrecha.
@@ -5043,7 +5064,7 @@ no coincidían exactamente en el mismo subpíxel. Ahora
 tiñe directamente el color del borde único — una sola línea, sin
 depender de que dos capas independientes redondeen igual.
 
-## v30.0.3
+## [30.0.3] — 2026-09-03
 
 `Sidebar`: el asa de redimensión ya no engorda al pasar el ratón, enfocar
 con teclado o arrastrar — antes pintaba el doble de grosor
@@ -5057,7 +5078,7 @@ caja de icono de 40px + 8px de aire a la derecha) con un padding-inline
 asimétrico propio del rail (`sidebar.rail-padding-inline-start`), que no
 toca el de desplegada (ya alineada por composición de otros tokens).
 
-## v30.0.2
+## [30.0.2] — 2026-09-03
 
 `SidebarNav`: guard de hover contra la fuga del átomo `Link` de vuelta en
 `.sidebar-nav__rail-item` (se había perdido al quitar su línea de hover
@@ -5080,7 +5101,7 @@ rail no desplegaba (el estado se quedaba en `'rail'`, que gana por
 especificidad CSS al ancho arrastrado). De paso, la zona de agarre del asa
 ya no pierde su mitad exterior por el `overflow: hidden` del contenedor.
 
-## v30.0.1
+## [30.0.1] — 2026-09-03
 
 `SidebarNav`: los enlaces de nivel principal (`kind: 'link'`) ya no heredan
 el peso de una cabecera de grupo (bold en todos, activos o no) — el activo se
@@ -5096,7 +5117,7 @@ Storybook: el toggle de fondo oscuro ya tiñe los canvases embebidos en la
 página Docs (antes solo funcionaba en la vista de story aislada — el
 contenedor propio del addon de docs pintaba blanco por encima).
 
-## v30.0.0
+## [30.0.0] — 2026-09-03
 
 Rediseño de `ErrorPage` a dos columnas (mismo molde que `AuthPage`): izquierda
 título, frase y el enlace de vuelta; derecha la frase de reintento y el
@@ -5112,7 +5133,7 @@ error/404/auth (frases que terminan en punto, incluso con un enlace dentro;
   derecha). El `main` pasa de `Inline` a `Columns` — cualquier consumidor que
   pasara `actions` tiene que migrar a las tres props nuevas.
 
-## v29.0.0
+## [29.0.0] — 2026-09-02
 
 Revisión de calidad de los 35 componentes sin consumidor directo en la suite
 (los usa la app interna de 360 — no se retira ninguno). Informes con fichas
@@ -5153,7 +5174,7 @@ estructurales en `notes/REVISION-huerfanas-lote-{a,b}.md`.
   `opacity.full`/`opacity.muted` e iconos `minus`/`upload` nuevos en el
   sistema. Cobertura jsdom del lote: de 4 a 9+ componentes (287 tests).
 
-## v28.0.0
+## [28.0.0] — 2026-09-01
 
 Saneamiento de la **familia chat** (`MessageBubble`, `UserMessage`,
 `AssistantMessage`, `ConversationThread`, `MessageComposer`,
@@ -5241,7 +5262,7 @@ cruda sueltos, sin `ms` a mano en transiciones, `FileUpload` ya tiene
 `sm`/`md`/`lg` con story «Tallas»); sin cambio de código en esos cinco. Solo el
 umbral de `ProgressBar` (arriba) seguía pendiente.
 
-## v27.2.0
+## [27.2.0] — 2026-08-31
 
 ### Añadido
 
@@ -5253,7 +5274,7 @@ umbral de `ProgressBar` (arriba) seguía pendiente.
   cinco selectores de bricks que perdieron sus cabeceras al migrar a `*Field`
   (tipografías «Theme / System / Custom Fonts» y la voz del TTS).
 
-## v27.1.1
+## [27.1.1] — 2026-08-31
 
 ### Arreglado
 
@@ -5261,7 +5282,7 @@ umbral de `ProgressBar` (arriba) seguía pendiente.
   existía en `package.json` pero no su fichero compilado. Solo cambia el
   `dist` (y este aviso).
 
-## v27.1.0
+## [27.1.0] — 2026-08-31
 
 ### Añadido
 
@@ -5276,7 +5297,7 @@ umbral de `ProgressBar` (arriba) seguía pendiente.
   asistente de IA de tender, que hasta ahora usaba un `div` con `style` en
   línea (hueco del DS anotado en el encargo C de la suite, 2026-08-31).
 
-## v27.0.0
+## [27.0.0] — 2026-08-31
 
 Cierra los 22 hallazgos de accesibilidad del DS de la auditoría de suite
 2026-08-30/31 (B5-B26). Major: cuatro componentes cambian de DOM/rol de forma
@@ -5339,7 +5360,7 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
   mantiene en castellano a propósito, es la convención ya establecida del
   repo (B26).
 
-## v26.2.0
+## [26.2.0] — 2026-08-30
 
 ### Arreglado
 
@@ -5387,7 +5408,7 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
   `ProgressBar.stories.tsx` (la cifra de dentro no es del color del relleno en
   superficie oscura).
 
-## v26.1.2
+## [26.1.2] — 2026-08-30
 
 ### Arreglado
 
@@ -5400,7 +5421,7 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
   que ya sabe enseñar el placeholder para ese caso. Test de contrato nuevo
   en `SelectField.stories.tsx`.
 
-## v26.1.1
+## [26.1.1] — 2026-08-29
 
 ### Arreglado
 
@@ -5413,7 +5434,7 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
   atributo. Cambiado a `Math.round(shell.sidebarWidth ?? 0)`. Test de
   contrato nuevo en `Sidebar.stories.tsx` que fuerza `sidebarWidth: 0`.
 
-## v26.1.0
+## [26.1.0] — 2026-08-29
 
 ### Cambiado
 
@@ -5422,7 +5443,7 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
   Dentro de `SiteShell` el aspa de `Modal`/`Sheet` queda, pues, en 48px de caja y 48px de glifo;
   fuera sigue en `md` (40 / 24px).
 
-## v26.0.0
+## [26.0.0] — 2026-08-29
 
 ### Breaking
 
@@ -5448,14 +5469,14 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
   `icon.size-sm` a `icon.size-md` (16 → 24px), la talla por defecto de icono-botón. En la
   superficie pública (`SiteShell`) el remapeo a `site-shell-close-*` manda, como hasta ahora.
 
-## v25.32.1
+## [25.32.1] — 2026-08-29
 
 ### Corregido
 
 - **`CHANGELOG.md` viaja en el paquete** (`files`): los consumidores por tag git pueden leer el
   contrato de cada release desde `node_modules/@studiolxd/brand/CHANGELOG.md`.
 
-## v25.32.0
+## [25.32.0] — 2026-08-29
 
 ### Corregido
 
@@ -5493,7 +5514,7 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
   su columna flex). `ConsentPreferences` lo usa para separar la lista de
   categorías del pie cuando se abre sobre `Modal` — antes quedaba pegado.
 
-## v25.31.0
+## [25.31.0] — 2026-08-29
 
 ### Añadido
 
@@ -5515,7 +5536,7 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
   «NecesariasSiempre activa» pegado (detectado en producción por public-shell). Pasa a una coma
   explícita, que no se colapsa nunca.
 
-## v25.30.0
+## [25.30.0] — 2026-08-29
 
 ### Cambiado
 
@@ -5544,7 +5565,7 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
   (hasta `site-nav.columns-max`, 5) en vez de un `repeat(4, 1fr)` fijo — un quinto grupo ya no cae
   solo a una segunda fila. `md` (2) y `lg` (3) siguen fijos.
 
-## v25.29.1
+## [25.29.1] — 2026-08-29
 
 ### Cambiado
 
@@ -5553,7 +5574,7 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
   `surface="sheet"` para otros usos. Consumidores que ya pasaban `surface="modal"` pueden
   retirar la prop.
 
-## v25.29.0
+## [25.29.0] — 2026-08-29
 
 ### Añadido
 
@@ -5578,7 +5599,7 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
   «Invalid Date»), pero ahora avisa por `console.warn` en desarrollo (`NODE_ENV !== 'production'`)
   con el valor recibido; en producción sigue mudo.
 
-## v25.28.1
+## [25.28.1] — 2026-08-29
 
 ### Corregido
 
@@ -5587,7 +5608,7 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
   fallaba la instalación de toda la suite. `release:check` sigue existiendo como puerta **manual**
   antes de taggear (documentada en CLAUDE.md); ningún hook de ciclo de vida de npm/pnpm lo invoca.
 
-## v25.28.0
+## [25.28.0] — 2026-08-29
 
 ### Cambiado
 
@@ -5605,7 +5626,7 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
 - **Puerta de calidad**: nuevo script `pnpm release:check` (lint + tsc + test + test:stories +
   build:all) y hook `prepack`. No se taggea sin él en verde (documentado en `CLAUDE.md`).
 
-## v25.27.1
+## [25.27.1] — 2026-08-28
 
 ### Corregido
 
@@ -5614,7 +5635,7 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
   `import "@studiolxd/brand/fonts"` de efecto secundario y obligaba a una declaración de módulo
   por app. Consumidores: importar `@studiolxd/brand/fonts.css`.
 
-## v25.27.0
+## [25.27.0] — 2026-08-28
 
 ### Cambiado
 
@@ -5623,7 +5644,7 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
   `Paragraph` interno deja de ir a `size="small"`. Decisión del usuario (2026-08-28). La marca
   «siempre activa» del panel de preferencias sigue en pequeño.
 
-## v25.26.0
+## [25.26.0] — 2026-08-28
 
 ### Añadido
 
@@ -5656,7 +5677,7 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
   - Storybook sigue el mismo cambio: ya no enlaza a Google Fonts, importa `fonts.css` como
     cualquier consumidor.
 
-## v25.25.0
+## [25.25.0] — 2026-08-28
 
 ### Cambiado
 
@@ -5671,7 +5692,7 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
   `Form`): sin este marcado, un Server Component que lo monta (p. ej. la portada de una app Next)
   rompe en runtime (`createContext is not a function` en el bundle RSC).
 
-## v25.24.0
+## [25.24.0] — 2026-08-28
 
 ### Cambiado
 
@@ -5694,7 +5715,7 @@ que un consumidor que consulte por rol (tests incluidos) puede notarlo.
 - Los dos errores preexistentes de `tsc --noEmit` (`Menu.stories.tsx` sin `args` en una story,
   cast incorrecto en `src/tokens/typography.ts`): el build de tipos pasa limpio por primera vez.
 
-## v25.23.0
+## [25.23.0] — 2026-08-28
 
 Las secciones de página poseen su propio ritmo vertical: se montan **a sangre**, con su aire
 arriba y abajo por tokens propios y un `Container` interior para el aire lateral. La misma
@@ -5754,7 +5775,7 @@ sección se ve igual en cualquier web, sin depender del envoltorio en el que se 
 - **`LegalFooter`** pasa su `--legal-footer-padding-block` del interior a la raíz de la sección:
   mismo aire, ahora a sangre. El token no cambia de nombre.
 
-## v25.22.0
+## [25.22.0] — 2026-08-28
 
 El resaltado de las listas de opciones desplegables vuelve a la inversión de marca que tenía
 antes de v25.8.0: el gris de superficie secundaria que estrenó v25.17.0 no era la señal
@@ -5784,7 +5805,7 @@ correcta.
   atribuir ese papel a `surface.secondary-*`, que vuelve a ser solo una superficie y no marca
   ningún estado.
 
-## v25.21.0
+## [25.21.0] — 2026-08-28
 
 La marca manda más en la cabecera pública: el logotipo estrena una talla mayor y la
 cabecera del sitio la usa por defecto.
@@ -5805,7 +5826,7 @@ cabecera del sitio la usa por defecto.
   a 64px (marca a 48) y por debajo de `sm` a 56px (marca a 40), así que la marca sigue
   cabiendo junto al botón de menú. Quien quiera la cabecera de antes pasa `logoSize="xl"`.
 
-## v25.20.0
+## [25.20.0] — 2026-08-28
 
 Ocho huecos del bloque B, cerrados: siete componentes nuevos y tres ampliaciones.
 
@@ -5873,7 +5894,7 @@ Ocho huecos del bloque B, cerrados: siete componentes nuevos y tres ampliaciones
   opción en `Select`, zona de subida en línea del canvas) siguen sin decidirse como DS o
   producto. No entran aquí.
 
-## v25.18.0
+## [25.18.0] — 2026-08-28
 
 El isotipo de la marca sale del logotipo y se publica como activo: las apps ya pueden
 generar su favicon, sus iconos y sus imágenes OG sin redibujar nada.
@@ -5903,7 +5924,7 @@ generar su favicon, sus iconos y sus imágenes OG sin redibujar nada.
   no se leería. El MDX de `Logomark` documenta el uso fuera de React (favicon, PWA,
   `next/og`) con ejemplo.
 
-## v25.19.0
+## [25.19.0] — 2026-08-28
 
 El buscador del menú del sitio tiene su propia talla, `xl`.
 
@@ -5933,7 +5954,7 @@ El buscador del menú del sitio tiene su propia talla, `xl`.
   (`--input-height`, `--input-padding-inline`, `--input-font-size`). Borde, foco, estado
   deshabilitado y autorrelleno siguen siendo los del campo del sistema.
 
-## v25.17.0
+## [25.17.0] — 2026-08-28
 
 Las listas de opciones desplegables recuperan el fondo en el resaltado.
 
@@ -5969,7 +5990,7 @@ Las listas de opciones desplegables recuperan el fondo en el resaltado.
 - **Foundations › Colores** documenta la excepción como la tercera del sistema, con su
   porqué, su ámbito exacto y lo que se queda fuera.
 
-## v25.15.0
+## [25.15.0] — 2026-08-28
 
 El panel del menú de `SiteHeader` respira por los lados, y el buscador del sitio
 deja de ser un campo con un botón pegado.
@@ -6017,7 +6038,7 @@ deja de ser un campo con un botón pegado.
   motivo por el que esta versión podría considerarse mayor: quien sobreescribiera esos
   tokens deja de tener efecto, sin que nada más se rompa.
 
-## v25.14.0
+## [25.14.0] — 2026-08-28
 
 Los quince bloqueantes de producto que destaparon las fases 2–4 de la suite y de
 `studiolxd/web` (`notes/HUECOS-brand-2026-08-28.md`, bloque A).
@@ -6102,7 +6123,7 @@ Los quince bloqueantes de producto que destaparon las fases 2–4 de la suite y 
 - **`Radio` y `RadioField` leen el `RadioGroup` que los envuelva.** Fuera de un grupo se
   comportan exactamente igual que antes.
 
-## v25.13.0
+## [25.13.0] — 2026-08-28
 
 ### Añadido
 
@@ -6146,7 +6167,7 @@ Los quince bloqueantes de producto que destaparon las fases 2–4 de la suite y 
   cambia es el icono de acción — aquí la flecha de envío al final, no la lupa,
   y sin borrado. Un solo icono de acción por campo.
 
-## v25.12.0
+## [25.12.0] — 2026-08-28
 
 ### Añadido
 
@@ -6174,7 +6195,7 @@ Los quince bloqueantes de producto que destaparon las fases 2–4 de la suite y 
   - Story-tests del envío: consulta recortada, campo vacío que no envía y
     `Enter` desde el campo.
 
-## v25.11.2
+## [25.11.2] — 2026-08-28
 
 ### Corregido
 
@@ -6186,7 +6207,7 @@ Los quince bloqueantes de producto que destaparon las fases 2–4 de la suite y 
   construía y sus `dist/_types` existían. Añadidas las seis subrutas; el
   `exports` vuelve a cubrir todos los puntos de entrada.
 
-## v25.11.1
+## [25.11.1] — 2026-08-28
 
 ### Corregido
 
@@ -6221,7 +6242,7 @@ Los quince bloqueantes de producto que destaparon las fases 2–4 de la suite y 
   que el alto ni se estira más de 1,5× — el contrato real, no uno que el
   propio CSS nunca pudo cumplir.
 
-## v25.11.0
+## [25.11.0] — 2026-08-28
 
 Fase 0.3: las piezas de documentación y datos que faltaban para desmontar los
 componentes caseros de `apps/web` y de `aipricing`, más tres huecos pequeños que
@@ -6281,7 +6302,7 @@ Nuevos grupos `prose.*`, `table-of-contents.*`, `docs-search.*`, `stat-tile.*`,
 `copy-button.*` y `confirm-dialog.*`, con sus pares `surface-dark-*` donde el
 color no llega ya por derivación.
 
-## v25.10.0
+## [25.10.0] — 2026-08-28
 
 Fase 0.5: el sistema aprende a dibujar datos. Un organismo `Chart`, un átomo
 `Sparkline` y la paleta de datos completa —categórica, secuencial y
@@ -6331,7 +6352,7 @@ divergente—, derivada de los tonos de marca y validada, no elegida a ojo.
   cabe dentro de un `span` —la tabla equivalente de `Chart`—. El default sigue
   siendo `span`: no hay cambio para quien ya lo usa.
 
-## v25.9.0
+## [25.9.0] — 2026-08-28
 
 Fase 0.4: las piezas de marketing que le faltaban al sistema para levantar
 studiolxd.com y la web de la suite sin CSS de proyecto. Todas reconstruidas
@@ -6379,7 +6400,7 @@ restaurada tal cual estaba en `v22.5.1`.
   `Highlight` y `ProjectCard` lo dejan en manos de la superficie, así que
   cambiar `surface` los voltea enteros.
 
-## v25.8.0
+## [25.8.0] — 2026-08-28
 
 Fase 0 de la revisión: las dos reglas transversales que faltaban —cómo se dicen
 los estados y cómo se deriva el modo oscuro— escritas en Foundations y
@@ -6465,7 +6486,7 @@ aplicadas a todo el sistema.
   `gap` de 2px entre nombre y peso, el `2.5rem` de la miniatura y el
   `outline-offset`/`border-radius` de 2px del aspa.
 
-## v25.7.0
+## [25.7.0] — 2026-08-28
 
 ### Añadido
 
@@ -6533,7 +6554,7 @@ aplicadas a todo el sistema.
   propiedad original, no crea una `--*-surface-dark-*`). Ahora apuntan al rol
   directo `color.text.on-dark`.
 
-## v25.6.0
+## [25.6.0] — 2026-08-28
 
 Lote de deudas mecánicas del DS sin decisión de diseño (ver `notes/REVISION-pendientes.md`).
 
@@ -6573,7 +6594,7 @@ Lote de deudas mecánicas del DS sin decisión de diseño (ver `notes/REVISION-p
   `CardSplit` (el único caso pendiente anotado) ya no existe, fusionado en
   `Card`.
 
-## v25.5.0
+## [25.5.0] — 2026-08-27
 
 ### Cambiado
 
@@ -6640,7 +6661,7 @@ Lote de deudas mecánicas del DS sin decisión de diseño (ver `notes/REVISION-p
   `Molecules/CalendarPlanner`, `Molecules/CalendarRoster` y
   `Molecules/PrevNextNav`.
 
-## v25.4.0
+## [25.4.0] — 2026-08-27
 
 ### Cambiado
 
@@ -6674,7 +6695,7 @@ Lote de deudas mecánicas del DS sin decisión de diseño (ver `notes/REVISION-p
 - Los tres salen de `Por revisar/`: `Molecules/Modal`, `Molecules/Sheet`,
   `Molecules/ImageCropDialog`.
 
-## v25.3.0
+## [25.3.0] — 2026-08-27
 
 ### Cambiado
 
@@ -6706,7 +6727,7 @@ Lote de deudas mecánicas del DS sin decisión de diseño (ver `notes/REVISION-p
   página de **docs**. Antes teñía el `<html>` entero y dejaba ilegibles todas
   las demás stories de esa página. En el canvas de la story sigue usando el
   `<html>`, que es donde hace falta alcanzar a los portales.
-## v25.2.0
+## [25.2.0] — 2026-08-27
 
 ### Cambiado
 
@@ -6740,7 +6761,7 @@ Lote de deudas mecánicas del DS sin decisión de diseño (ver `notes/REVISION-p
   `surface.secondary-on-dark` y `grey-dark`. Doc MDX nueva, story de
   superficie oscura y test de contrato.
 
-## v25.1.0
+## [25.1.0] — 2026-08-27
 
 Revisión de la familia de chat entera: los seis componentes salen de
 `Por revisar/` y la plantilla `Chat` se convierte en un componente de verdad.
@@ -6834,7 +6855,7 @@ Revisión de la familia de chat entera: los seis componentes salen de
   contrato `!dev`. `MessageComposer.test.tsx` y `ConversationList.test.tsx`
   nuevos.
 
-## v25.0.0
+## [25.0.0] — 2026-08-27
 
 ### Eliminado (breaking)
 
@@ -6894,7 +6915,7 @@ Revisión de la familia de chat entera: los seis componentes salen de
   componente cubre auto-cierre con timers falsos, cierre manual, acción,
   actualización por `id`, `dismiss` y rol por intención.
 
-## v24.11.0
+## [24.11.0] — 2026-08-27
 
 ### Cambiado
 
@@ -6931,7 +6952,7 @@ Revisión de la familia de chat entera: los seis componentes salen de
   (filtrado con y sin acentos, keywords, grupos vacíos, región viva, ↑↓,
   Home/End, Enter, ratón, deshabilitados, Escape y el atajo ⌘K).
 
-## v24.10.0
+## [24.10.0] — 2026-08-27
 
 ### Cambiado
 
@@ -6964,7 +6985,7 @@ Revisión de la familia de chat entera: los seis componentes salen de
   colisionaba con el fondo de `.surface-dark`, ambos prusia). Doc MDX y
   stories de contrato/superficie oscura nuevas.
 
-## v24.9.0
+## [24.9.0] — 2026-08-27
 
 ### Cambiado
 
@@ -6992,7 +7013,7 @@ Revisión de la familia de chat entera: los seis componentes salen de
   rol en vez de al primitivo — mismos valores resueltos, sin cambio visual.
   Documentados en Foundations/Colores.
 
-## v24.8.0
+## [24.8.0] — 2026-08-27
 
 ### Cambiado
 
@@ -7048,7 +7069,7 @@ Revisión de la familia de chat entera: los seis componentes salen de
   para las cuatro esquinas) y el aire entre avisos apilados pasa a ser la prop
   `gap` del `Toaster`, porque el apilado lo calcula el motor de la cola en JS.
 
-## v24.7.0
+## [24.7.0] — 2026-08-27
 
 ### Cambiado
 
@@ -7090,7 +7111,7 @@ Revisión de la familia de chat entera: los seis componentes salen de
   `Atoms/Tag`, `Atoms/Kbd`, `Atoms/List`, `Atoms/Popover`,
   `Atoms/DescriptionList` y `Atoms/ProgressBar`.
 
-## v24.6.0
+## [24.6.0] — 2026-08-27
 
 ### Cambiado
 
@@ -7123,7 +7144,7 @@ Revisión de la familia de chat entera: los seis componentes salen de
   `Molecules/CodeBlock`. Su story «En superficie oscura» usa el
   `parameters: { surface: 'dark' }` que llegó en v24.5.0.
 
-## v24.5.0
+## [24.5.0] — 2026-08-27
 
 ### Añadido
 
@@ -7158,7 +7179,7 @@ Revisión de la familia de chat entera: los seis componentes salen de
   no cambia. Nacieron en v24.2.0/v24.3.0 y no tienen consumidor; por eso va
   como minor y no como major.
 
-## v24.4.0
+## [24.4.0] — 2026-08-27
 
 ### Cambiado
 
@@ -7189,7 +7210,7 @@ Revisión de la familia de chat entera: los seis componentes salen de
   el disparador). Un `translate` de ±25% la devuelve al borde. Test de
   geometría para los cuatro lados.
 
-## v24.3.0
+## [24.3.0] — 2026-08-27
 
 ### Añadido
 
@@ -7208,7 +7229,7 @@ Revisión de la familia de chat entera: los seis componentes salen de
   `error-page.actions-gap`.
 - Exports `./error-boundary`, `./not-found-page` y `./error-page`.
 
-## v24.2.0
+## [24.2.0] — 2026-08-27
 
 ### Añadido
 
@@ -7220,7 +7241,7 @@ Revisión de la familia de chat entera: los seis componentes salen de
   lo pone la superficie. Tokens nuevos `hero.actions-gap` y
   `hero.actions-space-before`.
 
-## v24.1.0
+## [24.1.0] — 2026-08-27
 
 ### Añadido
 
@@ -7230,7 +7251,7 @@ Revisión de la familia de chat entera: los seis componentes salen de
   enlace del router del producto debe reenviarlos. Caso de uso: una entrada del
   menú que vive en otro dominio (estado del servicio) y abre en pestaña nueva.
 
-## v24.0.0
+## [24.0.0] — 2026-08-27
 
 ### Eliminado (breaking)
 
@@ -7263,7 +7284,7 @@ deja de arrastrarlo.
 - **Dependencias**: `embla-carousel`, `embla-carousel-react` y
   `embla-carousel-auto-scroll` (solo las usaban los carruseles).
 
-## v23.0.0
+## [23.0.0] — 2026-08-27
 
 ### Eliminado (breaking)
 
@@ -7275,14 +7296,14 @@ deja de arrastrarlo.
   `content-template.css`, `legal-template.css`. Las secciones que usaban
   (`ClientsSection`, `Footer`…) siguen.
 
-## v22.6.1
+## [22.6.1] — 2026-08-27
 
 ### Corregido
 
 - `SiteHeader`, `Header` y `Sidebar`: el logo enlazado tampoco lleva línea en hover (la
   regla de hover de la base empataba en especificidad y ganaba por orden).
 
-## v22.6.0
+## [22.6.0] — 2026-08-27
 
 ### Cambiado
 
@@ -7302,14 +7323,14 @@ deja de arrastrarlo.
 
 - Token `--page-intro-gap` (y su export `tokens/molecules/page-intro`).
 
-## v22.5.1
+## [22.5.1] — 2026-08-27
 
 ### Corregido
 
 - `Stack`: las piezas miden lo suyo (`align-items: flex-start`); un enlace de
   vuelta no se estiraba a todo el ancho de la columna.
 
-## v22.5.0
+## [22.5.0] — 2026-08-27
 
 ### Añadido
 
@@ -7323,7 +7344,7 @@ deja de arrastrarlo.
 - `PageIntro` ya no pone aire por debajo (`margin-block-end` retirado): lo pone el
   `Stack` que lo agrupa con lo que le sigue.
 
-## v22.4.3
+## [22.4.3] — 2026-08-27
 
 ### Corregido
 
@@ -7331,21 +7352,21 @@ deja de arrastrarlo.
   solo de acciones); en `blockActions` la acción principal (última del JSX)
   queda arriba.
 
-## v22.4.2
+## [22.4.2] — 2026-08-27
 
 ### Corregido
 
 - `PageIntro` pone el aire por debajo cuando algo le sigue en la columna
   (`margin-block-end`), en vez de ponerlo el elemento que sigue.
 
-## v22.4.1
+## [22.4.1] — 2026-08-27
 
 ### Corregido
 
 - Texto de ayuda de los campos en oscuro: blanco (16 fields lo tenían aún en
   `text.muted-on-dark`). Fuera `columns.cell-gap`.
 
-## v22.4.0
+## [22.4.0] — 2026-08-27
 
 ### Cambiado
 
@@ -7353,21 +7374,21 @@ deja de arrastrarlo.
   Fragment entre otras hijas es una celda (agrupa varias piezas, apiladas con
   `cell-gap`). Antes cada hija del Fragment anidado pasaba a ser una columna.
 
-## v22.3.0
+## [22.3.0] — 2026-08-27
 
 ### Cambiado
 
 - `PageIntro`: la frase bajo el título es una entradilla (`Paragraph size="large"`,
   un peldaño por encima del cuerpo); `children` sigue en cuerpo normal.
 
-## v22.2.1
+## [22.2.1] — 2026-08-27
 
 ### Corregido
 
 - `Link` `tone="ink"`: faltaba la regla CSS (solo estaban los tokens), así que
   en oscuro salía amarillo como los `accent`.
 
-## v22.2.0
+## [22.2.0] — 2026-08-27
 
 ### Añadido
 
@@ -7376,7 +7397,7 @@ deja de arrastrarlo.
   hover, igual en claro y oscuro). Tokens `link.ink-*`. `LegalFooter` usa `ink`
   (fuera sus tokens de enlace propios de v22.1.0).
 
-## v22.1.0
+## [22.1.0] — 2026-08-27
 
 ### Cambiado
 
@@ -7389,21 +7410,21 @@ deja de arrastrarlo.
 - `SiteNav`: hover en oscuro a `accent-2`; más aire entre la cabecera del grupo
   y sus enlaces (`label-margin-block-end` = `spacing.4`).
 
-## v22.0.2
+## [22.0.2] — 2026-08-27
 
 ### Corregido
 
 - `OtpInput` admite `aria-labelledby` (el grupo se nombra por la etiqueta
   visible del `OtpField`); v22.0.1 lo pasaba sin que el átomo lo aplicara.
 
-## v22.0.1
+## [22.0.1] — 2026-08-27
 
 ### Corregido
 
 - `OtpField`: el grupo se nombra por `aria-labelledby` con la etiqueta visible,
   no con un `aria-label` duplicado (los tests por etiqueta encontraban dos).
 
-## v22.0.0
+## [22.0.0] — 2026-08-27
 
 ### Rompe
 
@@ -7434,14 +7455,14 @@ deja de arrastrarlo.
   TimeField y DateTimeField nombran un `role="group"`; FileUpload lleva ayuda y
   error a la zona de arrastre; TimeSelect ya no salta de no controlado a controlado.
 
-## v21.1.1
+## [21.1.1] — 2026-08-27
 
 ### Corregido
 
 - `SiteNav`: la línea de hover ya no desplaza el contenido (el sitio se reserva
   siempre) y va más pegada al texto (`item-underline-offset` = 2px).
 
-## v21.1.0
+## [21.1.0] — 2026-08-27
 
 ### Añadido
 
@@ -7449,7 +7470,7 @@ deja de arrastrarlo.
   texto anunciado (`role="status"`, tokens `form.success`), sin caja; mantiene
   `links`. Las páginas de contacto y verificación lo usan en vez de un `Alert`.
 
-## v21.0.0
+## [21.0.0] — 2026-08-27
 
 ### Rompe
 
@@ -7462,7 +7483,7 @@ deja de arrastrarlo.
   como el `body`. Sin esto, el texto que solo hereda (párrafos, enlaces) seguía
   en el color del body dentro de una superficie oscura anidada.
 
-## v20.2.1
+## [20.2.1] — 2026-08-27
 
 ### Corregido
 
@@ -7470,14 +7491,14 @@ deja de arrastrarlo.
   anterior (`.surface-dark .form__fields > … { --input-border-color: fondo }`):
   en superficie oscura los campos de un formulario salían sin borde. Fuera.
 
-## v20.2.0
+## [20.2.0] — 2026-08-27
 
 ### Añadido
 
 - `TextareaField` reenvía `ref` y las props nativas al `<textarea>` (react-hook-form), como `InputField`.
 - Storybook: `Pages/Contacto`; la sección pasa a llamarse «Páginas públicas».
 
-## v20.1.2
+## [20.1.2] — 2026-08-27
 
 ### Corregido
 
@@ -7486,7 +7507,7 @@ deja de arrastrarlo.
   OrgSwitcher, SidebarNav, AppLauncher, CalendarRoster, PricingCard, Header):
   el SkipLink salía sin aire abajo. Retirada donde el componente ya fija su padding.
 
-## v20.1.1
+## [20.1.1] — 2026-08-27
 
 ### Corregido
 
@@ -7494,7 +7515,7 @@ deja de arrastrarlo.
   en claro, prusia en oscuro), invisible sobre la página. Ahora es la tinta de
   la superficie, a 4px, como en los botones.
 
-## v20.1.0
+## [20.1.0] — 2026-08-27
 
 ### Cambiado
 
@@ -7503,7 +7524,7 @@ deja de arrastrarlo.
   `primary` deja de usar el lavanda (invisible sobre sí mismo). El hueco es el
   fondo, y así se lee como foco y no como un borde más.
 
-## v20.0.1
+## [20.0.1] — 2026-08-27
 
 ### Corregido
 
@@ -7516,7 +7537,7 @@ deja de arrastrarlo.
   `AsyncSelect`, `AsyncMultiSelect` y `TimeSelect` ganan borde de error
   (`error-border-color` + variante oscura).
 
-## v20.0.0
+## [20.0.0] — 2026-08-27
 
 ### Rompe
 
@@ -7541,7 +7562,7 @@ deja de arrastrarlo.
 
 - Foundations → Tipografía: el bloque «Estilos de texto» estaba roto.
 
-## v19.12.0
+## [19.12.0] — 2026-08-27
 
 ### Añadido
 
@@ -7557,7 +7578,7 @@ deja de arrastrarlo.
 - Placeholders en tinta: prusia sobre claro, blanco sobre oscuro (`input`,
   `textarea`), también en error. Foundations → Colores actualizado.
 
-## v19.11.1
+## [19.11.1] — 2026-08-27
 
 ### Corregido
 
@@ -7565,7 +7586,7 @@ deja de arrastrarlo.
   color: es texto corriente y hereda los de la superficie (fuera los tokens
   `alternatives-label-*`).
 
-## v19.11.0
+## [19.11.0] — 2026-08-27
 
 ### Añadido
 
@@ -7573,7 +7594,7 @@ deja de arrastrarlo.
   (`site-shell.text-font-size` = `font-size.3`, la talla de los controles `lg`)
   y su interlineado. `AppShell` sigue a la base de 16px.
 
-## v19.10.0
+## [19.10.0] — 2026-08-27
 
 ### Cambiado
 
@@ -7587,21 +7608,21 @@ deja de arrastrarlo.
 - `Form`: el rótulo de las alternativas («O continúa con») en cuerpo normal y
   color de texto, no como pista.
 
-## v19.9.1
+## [19.9.1] — 2026-08-27
 
 ### Corregido
 
 - `Link` con icono: el subrayado cubre icono y texto (línea bajo el enlace,
   `icon-underline-width`/`-offset`); en hover desaparece, como en el resto.
 
-## v19.9.0
+## [19.9.0] — 2026-08-27
 
 ### Cambiado
 
 - Iconos `arrow` y `arrow-left`: la punta es un tercio del largo y abre a 45°
   (la proporción de la flecha de la marca), en trazo.
 
-## v19.8.1
+## [19.8.1] — 2026-08-27
 
 ### Corregido
 
@@ -7609,7 +7630,7 @@ deja de arrastrarlo.
   blanco (también en superficie oscura): sombra interior del color del campo y
   color de texto forzado; el anillo de foco en error se conserva.
 
-## v19.8.0
+## [19.8.0] — 2026-08-27
 
 ### Añadido
 
@@ -7627,7 +7648,7 @@ deja de arrastrarlo.
   contrato (la barra de fondos y de viewport ya lo hacen); las que afirman algo
   quedan como test `!dev`.
 
-## v19.7.0
+## [19.7.0] — 2026-08-27
 
 ### Cambiado
 
@@ -7635,14 +7656,14 @@ deja de arrastrarlo.
   retirados). El panel vuelve a llevar su aire vertical directamente
   (`panel-padding-block`, `panel-padding-block-end`).
 
-## v19.6.0
+## [19.6.0] — 2026-08-27
 
 ### Añadido
 
 - `Form` sin campos (`children` opcional): solo acciones y enlaces.
 - `PageIntro` admite `children`: más texto bajo la frase, con el mismo aire.
 
-## v19.5.0
+## [19.5.0] — 2026-08-27
 
 ### Añadido
 
@@ -7650,7 +7671,7 @@ deja de arrastrarlo.
   opcional con su aire (`gap`). Un `header`; va como celda de `Columns` o en el
   `Container`. Export `./page-intro`.
 
-## v19.4.0
+## [19.4.0] — 2026-08-27
 
 ### Añadido
 
@@ -7659,21 +7680,21 @@ deja de arrastrarlo.
   `gap`, `stackOrder`. Sin semántica ni fondo: la jerarquía la pone el contenido.
   Export `./columns`.
 
-## v19.3.1
+## [19.3.1] — 2026-08-27
 
 ### Corregido
 
 - `PasswordField.action` no es ayuda: enlace en cuerpo normal, a la izquierda,
   con aire propio (`action-margin-block-start`); fuera `action-font-size`.
 
-## v19.3.0
+## [19.3.0] — 2026-08-27
 
 ### Añadido
 
 - `PasswordField` admite `action`: una acción bajo el campo, a la derecha
   («¿Olvidaste tu contraseña?»), en cuerpo de ayuda (`action-font-size`).
 
-## v19.2.0
+## [19.2.0] — 2026-08-27
 
 ### Añadido
 
@@ -7681,14 +7702,14 @@ deja de arrastrarlo.
   ahí los mensajes de error (claves de traducción de una política compartida con
   el servidor, por ejemplo) antes de pintarlos.
 
-## v19.1.0
+## [19.1.0] — 2026-08-27
 
 ### Añadido
 
 - `Form`: ranura `captcha` (entre los campos y las acciones, `captcha-margin-block-start`)
   y enlaces secundarios con texto delante (`<Paragraph>¿No tienes cuenta? <Link>Regístrate</Link></Paragraph>`).
 
-## v19.0.0
+## [19.0.0] — 2026-08-27
 
 ### Rompe
 
@@ -7729,7 +7750,7 @@ deja de arrastrarlo.
 - El disparador del `Menu` recibe `aria-expanded`/`data-popup-open` (el chevron
   de los desplegables gira).
 
-## v18.1.0
+## [18.1.0] — 2026-08-26
 
 ### Cambiado
 
@@ -7737,7 +7758,7 @@ deja de arrastrarlo.
   como la del selector de tema — ahora van juntos en los ajustes del panel.
   `labelHidden` sigue disponible.
 
-## v18.0.0
+## [18.0.0] — 2026-08-26
 
 ### Rompe
 
@@ -7762,7 +7783,7 @@ deja de arrastrarlo.
 
 - El panel del `SiteHeader` solo desliza (cortina con `clip-path`), sin fundido.
 
-## v17.1.0
+## [17.1.0] — 2026-08-26
 
 ### Añadido
 
@@ -7770,7 +7791,7 @@ deja de arrastrarlo.
 - Foundations → Tallas: dónde va cada talla — superficies públicas a `lg`,
   interior de las aplicaciones a `md`.
 
-## v17.0.1
+## [17.0.1] — 2026-08-26
 
 ### Corregido
 
@@ -7778,7 +7799,7 @@ deja de arrastrarlo.
   oscura: borde blanco (`text.on-dark`), como el control que los abre; era un
   gris translúcido.
 
-## v17.0.0
+## [17.0.0] — 2026-08-26
 
 ### BREAKING
 
@@ -7797,7 +7818,7 @@ deja de arrastrarlo.
   para dejarlo abierto); Base UI los dejaba abiertos.
 - `SiteHeader`: elegir en un menú del panel (tema, idioma) ya no cierra el panel.
 
-## v16.4.0
+## [16.4.0] — 2026-08-26
 
 ### Añadido
 
@@ -7807,14 +7828,14 @@ deja de arrastrarlo.
   `lg`). La barra mide ahora el logotipo más el aire del sistema: **80px**
   (`site-header.content-height` → `logo.height-xl`); la de aplicación sigue en 56.
 
-## v16.3.0
+## [16.3.0] — 2026-08-26
 
 ### Cambiado
 
 - `LanguageSwitcher` compacto es un `DropdownField` (el mismo control que el
   selector de tema), con la etiqueta oculta por defecto (`labelHidden`, `id`).
 
-## v16.2.0
+## [16.2.0] — 2026-08-26
 
 ### Cambiado
 
@@ -7828,13 +7849,13 @@ deja de arrastrarlo.
 - `Input`, `InputField`, `Textarea` y `TextareaField` revisados y definitivos
   (tests de altura, `aria-describedby`/`aria-invalid` desde el campo, docs).
 
-## v16.1.1
+## [16.1.1] — 2026-08-26
 
 ### Corregido
 
 - `AppRoot`: `children` opcional (puede ir como hermano antes del contenido).
 
-## v16.1.0
+## [16.1.0] — 2026-08-26
 
 ### Añadido
 
@@ -7859,7 +7880,7 @@ deja de arrastrarlo.
 
 - `SiteHeader` ya no acepta `skipLabel`/`skipHref` (ver `AppRoot`).
 
-## v16.0.5
+## [16.0.5] — 2026-08-26
 
 ### Corregido
 
@@ -7867,27 +7888,27 @@ deja de arrastrarlo.
   sonner): empaquetado arrastraba un shim CJS de `require` que Turbopack rechaza
   en desarrollo (`dynamic usage of require is not supported`).
 
-## v16.0.4
+## [16.0.4] — 2026-08-26
 
 ### Corregido
 
 - Exports `./container`, `./site-nav` y `./site-header` que faltaban en `package.json`.
 
-## v16.0.3
+## [16.0.3] — 2026-08-26
 
 ### Corregido
 
 - `Switcher` y `Checkbox`: el `id` va en el botón (Base UI lo daba al input
   oculto), así que `<label htmlFor>` nombra el control. Tests jsdom del contrato.
 
-## v16.0.2
+## [16.0.2] — 2026-08-26
 
 ### Corregido
 
 - `Switcher` y `Checkbox` renderizan un `<button>` nativo (Base UI ponía un
   `<span>`): un `<label htmlFor>` vuelve a nombrarlos y `disabled` es nativo.
 
-## v16.0.1
+## [16.0.1] — 2026-08-26
 
 ### Corregido
 
@@ -7896,7 +7917,7 @@ deja de arrastrarlo.
 - `Select`: el trigger resuelve la etiqueta de la opción elegida aunque los
   `Select.Item` vengan envueltos por un wrapper del producto.
 
-## v16.0.0
+## [16.0.0] — 2026-08-26
 
 Rediseño del sistema: Base UI como motor, doctrina de tokens cerrada (nada
 inventado: todo referencia la escala), tallas de componente 32/40/48 en todos
@@ -7943,7 +7964,7 @@ Foundations explica el sistema; cada componente definitivo documenta su API.
   sombras, opacidad, movimiento, puntos de ruptura, capas, iconografía);
   `z-index.*`, `size-component.*`, `font-size.0` (cifras de marcas).
 
-## v15.0.0
+## [15.0.0] — 2026-08-24
 
 ### BREAKING
 
@@ -7965,7 +7986,7 @@ Foundations explica el sistema; cada componente definitivo documenta su API.
   `--card-header-gap`, `--card-title-font-weight`, `--card-footer-gap`. Eran divs
   sin estilar y cinco apps de la suite repetían su maquetación.
 
-## v14.0.4
+## [14.0.4] — 2026-08-24
 
 ### Corregido
 
@@ -7977,11 +7998,11 @@ Foundations explica el sistema; cada componente definitivo documenta su API.
   repone él mismo en la línea 1, de modo que un entry con `'use client'` en el fuente ya no
   depende de estar apuntado a mano en `clientComponents` — `avatar` se apunta igualmente.
 
-## v14.0.3
+## [14.0.3] — 2026-08-24
 
 Solo documentación: este fichero estrena las entradas de la serie `v14`.
 
-## v14.0.2
+## [14.0.2] — 2026-08-24
 
 ### Cambiado
 
@@ -7994,7 +8015,7 @@ Solo documentación: este fichero estrena las entradas de la serie `v14`.
   En local lo sustituye `pnpm build:all` (`build:tokens` → `build:lib` → `build:css` →
   `build:tokens-css`).
 
-## v14.0.1
+## [14.0.1] — 2026-08-24
 
 ### Corregido
 
@@ -8004,7 +8025,7 @@ Solo documentación: este fichero estrena las entradas de la serie `v14`.
   fuera no llegaban al `Toaster`. Ya estaban declarados en `peerDependencies`; ahora el bundle los
   respeta.
 
-## v14.0.0
+## [14.0.0] — 2026-08-24
 
 Mayor: `@studiolxd/brand` absorbe `@slxd/ui` y se convierte en el design system canónico de la
 suite slxd y de la web. El breaking está en los tokens de feedback y en `Tag`; **no hay alias de
@@ -8086,7 +8107,7 @@ Proyecto `components` nuevo de vitest sobre jsdom con los tests de componente qu
 `@slxd/ui`. `pnpm test` corre `unit` + `components`; `pnpm test:stories` sigue corriendo el
 proyecto `storybook`.
 
-## v13.6.0
+## [13.6.0] — 2026-08-14
 
 ### Añadido
 
@@ -8125,7 +8146,7 @@ proyecto `storybook`.
 Una story de test por componente tocado, verificando en cada uno que los textos por defecto se
 siguen emitiendo y que las props pasadas los sustituyen.
 
-## v13.5.0
+## [13.5.0] — 2026-08-14
 
 ### Añadido
 

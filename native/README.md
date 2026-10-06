@@ -158,6 +158,7 @@ tokens, funciona en claro y oscuro con colores dinámicos y cumple, por construc
 | React | SwiftUI |
 | --- | --- |
 | `Button` | `.buttonStyle(.brand(…))` · `BrandButton` |
+| `CloseButton` | `BrandCloseButton` |
 | `Heading`, `Paragraph`, `Text` | `BrandHeading`, `BrandParagraph`, `BrandText` · `Text.brand(…)` |
 | `Icon` | `BrandIcon` |
 | `InputField` | `BrandInputField` |
@@ -334,7 +335,8 @@ de `BrandTheme { … }` (que además garantiza la zona táctil de 48 dp). Siguen
 
 | React | Compose |
 | --- | --- |
-| `Button` | `BrandButton` · `BrandCloseButton` |
+| `Button` | `BrandButton` |
+| `CloseButton` | `BrandCloseButton` |
 | `Heading`, `Paragraph`, `Text` | `BrandHeading`, `BrandParagraph`, `BrandText` (+ `brandSpanStyle`) |
 | `Icon` | `BrandIcon` |
 | `InputField`, `NumberInputField`, `PasswordField`, `SelectField` | `BrandInputField`, `BrandNumberInputField`, `BrandPasswordField`, `BrandSelectField` |

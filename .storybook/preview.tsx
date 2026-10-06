@@ -140,12 +140,16 @@ const preview: Preview = {
         // Lo revisado arriba; 'Por revisar' al final, como cola de trabajo que
         // debe menguar: cada componente rehecho sale de ahí y sube a su sitio.
         order: [
-          // Fundamentos de lo más visible a lo más estructural: primero lo que
-          // define el aspecto (color, letra, aire), luego forma y profundidad,
-          // después comportamiento, y al final las reglas de composición y
-          // contenido. Los que faltan por crear van en su hueco cuando existan.
+          // Fundamentos de lo más visible a lo más estructural: primero la marca
+          // y sus piezas (el logotipo, la tarjeta social), luego lo que define el
+          // aspecto (color, letra, aire), forma y profundidad, después
+          // comportamiento, las reglas de composición y contenido, y al final
+          // cómo se consumen los tokens fuera del CSS. Los que faltan por crear
+          // van en su hueco cuando existan.
           'Foundations',
           [
+            'Marca',
+            'Tarjeta social',
             'Colores',
             'Tipografía',
             'Espaciado',
@@ -158,8 +162,10 @@ const preview: Preview = {
             'Puntos de ruptura',
             'Capas',
             'Iconografía',
+            'Gráficos de datos',
             'Internacionalización',
             'Redacción',
+            'Tokens desde JavaScript',
           ],
           'Atoms',
           'Molecules',

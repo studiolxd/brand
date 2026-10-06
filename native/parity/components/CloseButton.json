@@ -1,0 +1,19 @@
+{
+  "$schema": "../schema.json",
+  "component": "CloseButton",
+  "react": { "path": "src/stories/atoms/CloseButton/CloseButton.tsx", "props": "CloseButtonProps" },
+  "native": { "swift": "BrandCloseButton", "kotlin": "BrandCloseButton" },
+  "props": {
+    "size": { "type": "union", "values": ["sm", "md", "lg"], "default": "md" }
+  },
+  "excluded": [
+    { "prop": "label", "reason": "Es texto, no un caso: en SwiftUI es el primer argumento (`BrandCloseButton(\"Cerrar\", size:action:)`, `LocalizedStringKey`) y en Compose `contentDescription: String`, los dos con «Cerrar» por defecto (castellano), como en React." }
+  ],
+  "differences": [
+    "La talla es el `BrandControlSize` compartido (`sm`/`md`/`lg`), no un enum propio: el mismo cuadrado de 32, 40 o 48 que en la web, escalado con el tipo dinámico (`@ScaledMetric` en SwiftUI, `fontScale` en Compose); el glifo `close` mide `md` en las tres tallas, como en React.",
+    "El clic es el cierre `action` en SwiftUI y `onClick` en Compose; el resto de atributos del `<button>` (`disabled`, `type`, `aria-*`…) no se portan.",
+    "Sin estado de hover, como en la web: el único estado que se marca es el foco de teclado, con el anillo de `close-button.focus-ring-*` (en SwiftUI se apaga el efecto de foco del sistema con `focusEffectDisabled()`).",
+    "En SwiftUI la zona táctil crece hasta el mínimo de la plataforma (`brandHitTarget`) aunque el cuadrado visible sea de 32.",
+    "Compose tiene además una variante interna con la tinta fijada por quien la usa (`BrandCloseButtonInk`), que el `Banner` emplea para el aspa sobre su relleno: el equivalente de `--close-button-color` en React."
+  ]
+}

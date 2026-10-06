@@ -1,0 +1,101 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import * as FormFieldStories from "./FormField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { flattenTokens } from "../../../tokens/utils";
+import formFieldJson from "../../../../tokens/molecule/form-field.json";
+
+<Meta of={FormFieldStories} />
+
+# FormField
+
+La familia de piezas para montar un campo **sobre react-hook-form**: el estado y la validación son del formulario de la aplicación, y estas piezas solo enlazan la etiqueta, el control, la ayuda y el error del campo con los ids y los atributos ARIA que les tocan. No pintan controles: el control lo pone el consumidor (`Input`, `Textarea`, `Select`…).
+
+Se importan de `@studiolxd/brand/form-field`. `react-hook-form` es un peer **opcional** del paquete: solo lo necesita quien importe esta subruta.
+
+<Canvas of={FormFieldStories.Default} />
+
+## Las piezas
+
+| Pieza | Qué hace |
+| --- | --- |
+| `FormProvider` | El `FormProvider` de react-hook-form, reexportado para no importar de dos sitios, más una prop opcional `translate` (ver «Mensajes que son claves»). Recibe lo que devuelve `useForm()` |
+| `FormField` | El `Controller` de react-hook-form (mismas props: `control`, `name`, `render`, `rules`…). Publica el `name` para que el resto de piezas sepa a qué error mirar |
+| `FormItem` | El contenedor del campo (`<div class="form-field">`). Reserva el id del que salen los de sus partes y apila etiqueta, control, ayuda y error con `form-field.gap` |
+| `FormLabel` | Un `Label` ya apuntado al control (`htmlFor`) y con `data-error` cuando el campo tiene error |
+| `FormControl` | No pinta nodo propio: funde en su único hijo el `id`, el `aria-invalid` y el `aria-describedby` del campo |
+| `FormDescription` | La ayuda del campo (`<p>`), enlazada al control |
+| `FormMessage` | El error del campo (`<p role="alert">`): el mensaje de react-hook-form si lo hay, o sus `children` si no. Sin ninguno de los dos no pinta nada |
+| `FormRootMessage` | El error del formulario entero, el de `form.setError('root', …)`. Va una vez, al final del formulario |
+| `useFormField()` | El estado del campo en el que se está (`error`, `invalid`, `isDirty`…) y sus ids, para piezas propias |
+
+```tsx
+import { useForm } from 'react-hook-form';
+import {
+  FormProvider, FormField, FormItem, FormLabel, FormControl,
+  FormDescription, FormMessage, FormRootMessage,
+} from '@studiolxd/brand/form-field';
+import { Input } from '@studiolxd/brand/input';
+
+const form = useForm<{ email: string }>({ defaultValues: { email: '' } });
+
+<FormProvider {...form}>
+  <form onSubmit={form.handleSubmit(onSubmit)}>
+    <FormField
+      control={form.control}
+      name="email"
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>Correo</FormLabel>
+          <FormControl>
+            <Input type="email" {...field} />
+          </FormControl>
+          <FormDescription>Solo lo usamos para avisos de la cuenta.</FormDescription>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+    <FormRootMessage />
+  </form>
+</FormProvider>
+```
+
+## Error de campo y error de formulario
+
+`FormMessage` lee el error **de su campo**; `FormRootMessage`, el que no cuelga de ninguno (el servidor que rechaza las credenciales). Los dos se anuncian (`role="alert"`) y comparten cara con el error de los `*Field` y con el átomo `ErrorText`: los tokens `form.error.*`, documentados en `Form`.
+
+<Canvas of={FormFieldStories.ConError} />
+<Canvas of={FormFieldStories.ConErrorDeFormulario} />
+
+## Mensajes que son claves
+
+Si el esquema de validación devuelve **claves de traducción** en vez de frases (una política compartida con el servidor, por ejemplo), `FormProvider` acepta `translate: (message: string) => string`, y `FormMessage` y `FormRootMessage` pasan el mensaje por ella antes de pintarlo. Sin `translate`, el mensaje se pinta tal cual llega. Los `children` de `FormMessage` no se traducen: ya son texto del consumidor.
+
+```tsx
+<FormProvider {...form} translate={(key) => t(key)}>
+```
+
+Estas piezas **no emiten texto propio**: etiqueta, ayuda y errores son contenido del formulario, y no hay nada suyo en el catálogo de textos (Foundations → Internacionalización).
+
+## El contrato del control
+
+`FormControl` funciona con cualquier hijo que reenvíe al elemento real las props que recibe: `id`, `aria-invalid` y `aria-describedby`. Los controles del sistema lo hacen —`Input`, `Textarea`, el `<input>` interno de `PasswordField` en modo solo campo (sin `label`)—, y por eso se pueden poner dentro sin perder el enlace.
+
+- **`aria-describedby` solo nombra lo que está montado.** La ayuda y el error se dan de alta al montarse y de baja al desmontarse: un id que apunta a un nodo que no existe deja mudo el `aria-describedby` entero en algunos lectores.
+- **Los ids propios se suman, no se pisan.** Si el consumidor pasa su propio `aria-describedby` a `FormControl`, se añade detrás de los del campo.
+- **`aria-invalid`** refleja el error de react-hook-form; una prop explícita en `FormControl` lo anula.
+
+## Cuándo no
+
+Fuera de react-hook-form, los campos del sistema ya traen todo esto puesto: `InputField`, `SelectField`, `TextareaField`, `PasswordField`… con `label`, `helperText` y `errorMessage`. `FormField` es para cuando el estado del formulario lo lleva react-hook-form y se quiere que el error salga de ahí. La estructura del formulario (aire entre campos, acciones, errores del servidor) es del `Form`, y se combinan: los `FormItem` van como `children` de un `Form`.
+
+## Accesibilidad
+
+- La etiqueta apunta al control por `htmlFor`/`id`; los ids salen de `useId` (`<id>-form-item`, `<id>-form-item-description`, `<id>-form-item-message`), así que no hace falta pasar ninguno.
+- Los errores se anuncian (`role="alert"`) y marcan el control con `aria-invalid`.
+- `FormRootMessage` no está enlazado a ningún control —no tiene de cuál—: se anuncia por sí solo al aparecer.
+
+## Tokens
+
+El campo solo aporta el aire entre sus partes. La ayuda usa la cara de la ayuda de `InputField` y los errores los tokens `form.error.*` (en `Form`).
+
+<TokenTable tokens={flattenTokens(formFieldJson)} />
