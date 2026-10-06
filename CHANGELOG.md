@@ -9,8 +9,33 @@ para breaking changes.
 
 ## [Sin publicar]
 
-> **Minor.** Arreglos de la auditoría del 2026-10-06 (`informe.md`): empaquetado, tokens, CSS, componentes y
-> documentación. Sin breaking changes de API. Ver las notas de comportamiento al final.
+> **Major.** Arreglos de la auditoría del 2026-10-06 (`informe.md`) y las primeras decisiones que salieron de ella.
+> Rompe solo en dependencias: ver «Breaking» justo debajo. La API de los componentes no cambia.
+
+### Breaking
+
+- **`@tanstack/react-table` y `react-image-crop` pasan de `dependencies` a peers opcionales**, y salen del bundle.
+  Quien use `@studiolxd/brand/data-table` tiene que instalar `@tanstack/react-table` (^8.21); quien use
+  `image-crop-dialog` o `avatar-upload`, `react-image-crop` (^11.1). La hoja de `react-image-crop` se sigue
+  empaquetando en nuestro CSS. Antes viajaban dentro de `dist/` y además se instalaban sin usarse; quien ya las tuviera
+  cargaba dos copias.
+- **`engines`: Node >=20.**
+
+### Paquete y licencia
+
+- Licencia **MIT** (`LICENSE`, `package.json#license`). El nombre «Studio LXD», el logotipo, el isotipo, los iconos de
+  aplicación y el resto de activos de marca quedan **excluidos** y son propiedad de Studio LXD. Las fuentes conservan su
+  licencia SIL OFL 1.1 y `normalize.css` la suya, MIT.
+- `CHANGELOG.md` deja de viajar en el paquete de npm (pesaba ~480 KB); el README enlaza al del repositorio.
+- Se retira `src/index.ts`: era un barril que no se publicaba (no hay export `"."`) y se desincronizaba. Para quien
+  consume no cambia nada, porque cada componente se importa por su subruta. El checklist de `CLAUDE.md` queda en dos
+  sitios.
+- CI mínima en GitHub Actions (`.github/workflows/ci.yml`): lint, tipos, tests y paridad nativa en cada push a `main` y
+  en cada pull request. No sustituye a `release:check`.
+- Paridad nativa: el esquema admite `native.swiftModifier`, el modificador con el que se presenta en SwiftUI
+  (`brandSheet`, `brandConfirmDialog`, `toastHost`). `Toaster` deja de nombrar el tipo interno `ToastStack`.
+- Fuera del repo `notes/`, `public/videos/` y `public/clients/logos.af`, sin uso.
+- `CLAUDE.md` explica por qué el correo lleva su propia copia versionada de la fuente y no se deduplica.
 
 ### Empaquetado
 

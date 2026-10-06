@@ -417,4 +417,6 @@ justo lo que no se podía hacer publicando directo:
 >
 > **Cada sesión trabaja en su rama o su worktree, no sobre `main`.** Sale del `main` empujado y se fusiona al terminar. Dos sesiones sobre el mismo `main` se pisan: el 2026-10-03 una edición del `CLAUDE.md` cayó en medio de un merge a medias de otra sesión, con un conflicto en `CHANGELOG.md` pendiente, y hubo que esperar a que lo cerrara para poder commitear.
 
+> **CI:** `.github/workflows/ci.yml` corre lint, `tsc -b`, `pnpm test` y `native:parity` en cada push a `main` y en cada pull request. Es una red, no la puerta: no regenera `dist/`, no corre stories ni compila nativo, así que `release:check` sigue siendo obligatorio antes del tag.
+>
 > **Propuesta pendiente (no instalada):** un hook `pre-push` que rechace el push de un tag `vX.Y.Z` si `git status --porcelain -- dist` no está limpio en ese commit, como red de seguridad adicional a correr `release:check` a mano. No se instala aquí — requiere decidir dónde vive (`.husky/`, `simple-git-hooks`, script propio) y si se quiere obligatorio para todo el equipo.
