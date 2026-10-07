@@ -131,7 +131,12 @@ export interface InputPhoneProps {
    * cajón de un shell propio. Gana siempre.
    */
   container?: React.ComponentPropsWithoutRef<typeof BaseSelect.Portal>['container'];
-  /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+  /**
+   * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+   * **Va al disparador, que pinta el componente** (el campo: el selector de país y el número): el panel sale por un
+   * portal y se personaliza con tokens (regla de `className` en componentes
+   * con portal, CLAUDE.md § Base UI).
+   */
   className?: string;
 }
 

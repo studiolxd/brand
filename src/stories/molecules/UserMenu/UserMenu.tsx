@@ -50,8 +50,9 @@ export interface UserMenuProps {
   defaultOpen?: boolean;
   /**
    * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
-   * Va al disparador: es el único nodo que el componente pinta en su sitio (el
-   * panel sale por un portal).
+   * **Va al disparador, que pinta el componente**: el panel sale por un
+   * portal y se personaliza con tokens (regla de `className` en componentes
+   * con portal, CLAUDE.md § Base UI).
    */
   className?: string;
 }
