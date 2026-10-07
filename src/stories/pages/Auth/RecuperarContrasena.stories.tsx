@@ -25,8 +25,8 @@ function Recuperar({ step, surface }: Args) {
           onSubmit={(e) => e.preventDefault()}
           actions={<Button variant="primary" type="submit">Restablecer contraseña</Button>}
         >
-          <PasswordField id="reset-password" label="Nueva contraseña" labelHidden={false} autoComplete="new-password" helperText={HINT} />
-          <PasswordField id="reset-password-confirm" label="Confirmar contraseña" labelHidden={false} autoComplete="new-password" />
+          <PasswordField id="reset-password" label="Nueva contraseña" autoComplete="new-password" helperText={HINT} />
+          <PasswordField id="reset-password-confirm" label="Confirmar contraseña" autoComplete="new-password" />
         </Form>
       </AuthPage>
     );
