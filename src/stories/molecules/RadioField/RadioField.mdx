@@ -75,7 +75,9 @@ marcado los toma el `Radio` de dentro. Es la forma normal de montar un grupo de 
 ## Accesibilidad
 
 - El texto está enlazado por `htmlFor`/`id`; sin `id`, el campo genera uno con `useId`.
-- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- Los `id` de error y ayuda se derivan del del campo (`<id>-error`, `<id>-helper`) y llegan al control por `aria-describedby` en ese orden, el mismo en que se pintan.
+- Si el consumidor trae su propio `aria-describedby`, se suma detrás de los del campo; no se pisa.
+- `labelHidden` esconde el texto de la opción a la vista y lo deja para el lector de pantalla, como en `CheckboxField`; sin valor, lo decide el `FieldRow` que lo envuelva.
 - El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
 
 ## Tokens

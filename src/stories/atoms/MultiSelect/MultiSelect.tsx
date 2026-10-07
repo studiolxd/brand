@@ -38,6 +38,11 @@ export interface MultiSelectProps {
   placeholder?: string;
   disabled?: boolean;
   readOnly?: boolean;
+  /**
+   * Obligatorio: Base UI pone `aria-required` en el `combobox` y `required` en
+   * el input oculto con que valida el formulario nativo.
+   */
+  required?: boolean;
   size?: 'sm' | 'md' | 'lg';
   onValueChange?: (value: string[]) => void;
   id?: string;
@@ -95,6 +100,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
   placeholder,
   disabled,
   readOnly,
+  required,
   size = 'md',
   onValueChange,
   id,
@@ -180,6 +186,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
       name={name}
       disabled={disabled}
       readOnly={readOnly}
+      required={required}
       // Como el resto de desplegables de la familia: la página sigue viva con
       // la lista abierta.
       modal={false}

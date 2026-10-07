@@ -99,6 +99,7 @@ html.dark {
   --prose-table-border-color: var(--table-row-border-color);
   --prose-table-header-border-color: var(--table-header-border-color);
   --prose-rule-color: var(--separator-color);
+  --recurrence-field-helper-color: var(--form-helper-color);
   --sheet-bg: var(--modal-bg);
   --sheet-title-color: var(--modal-title-color);
   --sheet-description-color: var(--modal-description-color);

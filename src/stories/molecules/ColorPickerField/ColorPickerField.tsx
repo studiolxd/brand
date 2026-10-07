@@ -1,10 +1,9 @@
 'use client';
 
-import { forwardRef, useId } from 'react';
+import { forwardRef } from 'react';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { Label } from '../../atoms/Label/Label';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import { ColorPicker } from '../ColorPicker/ColorPicker';
 import type { ColorPickerProps } from '../ColorPicker/ColorPicker';
 import './ColorPickerField.css';
@@ -47,34 +46,21 @@ export const ColorPickerField = forwardRef<HTMLButtonElement, ColorPickerFieldPr
 }: ColorPickerFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
-  const generatedId = useId();
-  const id = idProp ?? generatedId;
-  const labelId = `${id}-label`;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error, como en el resto de campos
-  const hasError = error || !!errorMessage;
+  const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
+  const { id, labelId } = field;
 
   return (
-    <div className={['color-picker-field', className].filter(Boolean).join(' ')}>
-      <Label id={labelId} htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
+    <FieldShell field={field} block="color-picker-field" className={className} label={label} labelHidden={labelHidden} size={size} labelIdentified>
       <ColorPicker
         dialogLabel={label}
         {...pickerProps}
         ref={ref}
         id={id}
         size={size}
-        error={hasError}
+        error={field.hasError}
         aria-labelledby={labelId}
-        aria-describedby={describedBy}
+        aria-describedby={field.describedBy}
       />
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="color-picker-field__helper">{helperText}</span>
-      )}
-    </div>
+    </FieldShell>
   );
 });

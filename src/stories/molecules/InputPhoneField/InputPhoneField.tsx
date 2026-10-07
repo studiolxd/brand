@@ -1,11 +1,10 @@
-import { forwardRef, useId } from 'react';
+import { forwardRef } from 'react';
 import { InputPhone } from '../../atoms/InputPhone/InputPhone';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { Label } from '../../atoms/Label/Label';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import type { Country } from 'react-phone-number-input';
 import './InputPhoneField.css';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface InputPhoneFieldProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
@@ -75,17 +74,11 @@ export const InputPhoneField = forwardRef<HTMLInputElement, InputPhoneFieldProps
 }: InputPhoneFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
-  const generatedId = useId();
-  const id = idProp ?? generatedId;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error, como en el resto de campos
-  const hasError = error || !!errorMessage;
+  const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
+  const { id } = field;
 
   return (
-    <div className={['input-phone-field', className].filter(Boolean).join(' ')}>
-      <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
+    <FieldShell field={field} block="input-phone-field" className={className} label={label} labelHidden={labelHidden} size={size}>
       <InputPhone
         ref={ref}
         id={id}
@@ -99,19 +92,13 @@ export const InputPhoneField = forwardRef<HTMLInputElement, InputPhoneFieldProps
         autoComplete={autoComplete}
         countryLabel={countryLabel}
         internationalLabel={internationalLabel}
-        error={hasError}
+        error={field.hasError}
         size={size}
-        aria-describedby={describedBy}
+        aria-describedby={field.describedBy}
         onChange={onChange}
         onBlur={onBlur}
         onFocus={onFocus}
       />
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="input-phone-field__helper">{helperText}</span>
-      )}
-    </div>
+    </FieldShell>
   );
 });

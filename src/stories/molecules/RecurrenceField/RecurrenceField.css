@@ -38,3 +38,12 @@
   flex-wrap: wrap;
   gap: var(--recurrence-field-weekdays-gap);
 }
+
+/* La ayuda del editor entero: la misma letra que la de cualquier campo. */
+.recurrence-field__helper {
+  font-family: var(--recurrence-field-helper-font-family);
+  font-size: var(--recurrence-field-helper-font-size);
+  font-weight: var(--recurrence-field-helper-font-weight);
+  line-height: var(--recurrence-field-helper-line-height);
+  color: var(--recurrence-field-helper-color);
+}

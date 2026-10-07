@@ -1,11 +1,10 @@
-import { forwardRef, useId } from 'react';
+import { forwardRef } from 'react';
 import './MultiSelectField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { Label } from '../../atoms/Label/Label';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import { MultiSelect } from '../../atoms/MultiSelect/MultiSelect';
 import type { MultiSelectOption } from '../../atoms/MultiSelect/MultiSelect';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export type { MultiSelectOption };
 
@@ -33,6 +32,8 @@ export interface MultiSelectFieldProps {
   name?: string;
   disabled?: boolean;
   readOnly?: boolean;
+  /** Obligatorio: `aria-required` en el `combobox` y `required` en el input oculto (ver `MultiSelect`). */
+  required?: boolean;
   /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */
   error?: boolean;
   /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */
@@ -67,6 +68,7 @@ export const MultiSelectField = forwardRef<HTMLDivElement, MultiSelectFieldProps
   name,
   disabled,
   readOnly,
+  required,
   size: sizeProp,
   error = false,
   errorMessage,
@@ -78,25 +80,17 @@ export const MultiSelectField = forwardRef<HTMLDivElement, MultiSelectFieldProps
 }: MultiSelectFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
-  const generatedId = useId();
-  const id = idProp ?? generatedId;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error
-  const hasError = error || !!errorMessage;
-
-  const containerClass = ['multi-select-field', className].filter(Boolean).join(' ');
+  const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
+  const { id } = field;
 
   return (
-    <div className={containerClass}>
+    <FieldShell field={field} block="multi-select-field" className={className} label={label} labelHidden={labelHidden} size={size} labelIdentified>
       {/* El disparador es un `div` con `role="combobox"`: `htmlFor` no lo
           nombraría, así que la etiqueta lo nombra por `aria-labelledby`. */}
-      <Label id={`${id}-label`} htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
       <MultiSelect
         ref={ref}
         id={id}
-        aria-labelledby={`${id}-label`}
+        aria-labelledby={field.labelId}
         name={name}
         options={options}
         value={value}
@@ -104,19 +98,14 @@ export const MultiSelectField = forwardRef<HTMLDivElement, MultiSelectFieldProps
         placeholder={placeholder}
         disabled={disabled}
         readOnly={readOnly}
+        required={required}
         size={size}
-        error={hasError}
+        error={field.hasError}
         removeLabel={removeLabel}
-        aria-describedby={describedBy}
+        aria-describedby={field.describedBy}
         onValueChange={onValueChange}
         onBlur={onBlur}
       />
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="multi-select-field__helper">{helperText}</span>
-      )}
-    </div>
+    </FieldShell>
   );
 });

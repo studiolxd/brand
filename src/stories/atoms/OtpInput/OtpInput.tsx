@@ -26,6 +26,8 @@ export interface OtpInputProps {
   onComplete?: (value: string) => void;
   disabled?: boolean;
   readOnly?: boolean;
+  /** Obligatorio: `required` nativo en cada celda — un código a medias no vale. */
+  required?: boolean;
   error?: boolean;
   size?: 'sm' | 'md' | 'lg';
   /** @deprecated Usa el atributo nativo `aria-describedby`. */
@@ -73,6 +75,7 @@ export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>(function Otp
   onComplete,
   disabled,
   readOnly,
+  required,
   error = false,
   size = 'md',
   describedBy,
@@ -203,6 +206,7 @@ export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>(function Otp
           error={error}
           disabled={disabled}
           readOnly={readOnly}
+          required={required}
           aria-describedby={i === 0 ? (describedBy ?? ariaDescribedBy) : undefined}
           inputMode="numeric"
           pattern="\d*"

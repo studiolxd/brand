@@ -18,6 +18,8 @@ export interface FieldsetProps {
   id?: string;
   /** Deshabilita todos los controles descendientes en un solo punto. */
   disabled?: boolean;
+  /** Ids de ayuda/error que describen el grupo entero (lo pone el campo compuesto que lo use). */
+  'aria-describedby'?: string;
   children: React.ReactNode;
 }
 
@@ -29,6 +31,7 @@ export function Fieldset({
   className,
   id,
   disabled,
+  'aria-describedby': ariaDescribedBy,
   children,
 }: FieldsetProps) {
   const legendClasses = [
@@ -43,6 +46,7 @@ export function Fieldset({
       className={['fieldset', className].filter(Boolean).join(' ')}
       id={id}
       disabled={disabled}
+      aria-describedby={ariaDescribedBy}
     >
       <legend className={legendClasses}>{legend}</legend>
       {children}

@@ -71,7 +71,8 @@ Siempre hay etiqueta (`label`) y **por defecto se ve**. Va enlazada a la **prime
 
 - La etiqueta apunta a la primera celda y nombra el grupo (`role="group"`).
 - Cada celda tiene su propia etiqueta accesible («Dígito 3 de 6»), traducible con `digitLabel`.
-- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- Los `id` de error y ayuda se derivan del del campo (`<id>-error`, `<id>-helper`) y llegan al control por `aria-describedby` en ese orden, el mismo en que se pintan.
+- `required` pone el `required` nativo en cada celda: un código a medias no vale.
 - La primera celda lleva `autoComplete="one-time-code"`: el sistema operativo ofrece el código recibido.
 - Pegar el código completo en cualquier celda lo reparte por las siguientes.
 

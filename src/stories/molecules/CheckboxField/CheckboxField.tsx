@@ -1,10 +1,9 @@
-import { forwardRef, useId, type ReactNode } from 'react';
+import { forwardRef, type ReactNode } from 'react';
 import './CheckboxField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
 import { Checkbox } from '../../atoms/Checkbox/Checkbox';
-import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 
 export interface CheckboxFieldProps {
   /** Texto de la opción, a la derecha de la marca. Acepta JSX (un enlace, por ejemplo). */
@@ -22,6 +21,12 @@ export interface CheckboxFieldProps {
   checked?: boolean;
   defaultChecked?: boolean;
   disabled?: boolean;
+  /**
+   * Casilla obligatoria (aceptar las condiciones): Base UI pone `aria-required`
+   * en la casilla y `required` en su input oculto, que es el que valida el
+   * formulario nativo.
+   */
+  required?: boolean;
   /** Talla del sistema. Sin ella, la del `Form` que lo envuelva; sin `Form`, `md`. */
   size?: 'sm' | 'md' | 'lg';
   /** `id` del control. Si no se pasa, se genera con `useId`. */
@@ -51,6 +56,7 @@ export const CheckboxField = forwardRef<HTMLElement, CheckboxFieldProps>(functio
   checked,
   defaultChecked,
   disabled,
+  required,
   size: sizeProp,
   id: idProp,
   name,
@@ -64,48 +70,34 @@ export const CheckboxField = forwardRef<HTMLElement, CheckboxFieldProps>(functio
 }: CheckboxFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
-  const generatedId = useId();
-  const id = idProp ?? generatedId;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error, como en el resto de campos
-  const hasError = error || !!errorMessage;
+  const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
+  const { id } = field;
 
   return (
-    <div
-      className={[
-        'checkbox-field',
-        size !== 'md' ? `checkbox-field--${size}` : '',
-        disabled ? 'checkbox-field--disabled' : '',
-        className,
-      ].filter(Boolean).join(' ')}
+    <FieldShell
+      field={field}
+      block="checkbox-field"
+      modifiers={[size !== 'md' && `checkbox-field--${size}`, disabled && 'checkbox-field--disabled']}
+      className={className}
+      layout="inline"
+      label={label}
+      labelHidden={labelHidden}
     >
-      <label className="checkbox-field__control" htmlFor={id}>
-        <Checkbox
-          ref={ref}
-          id={id}
-          checked={checked}
-          defaultChecked={defaultChecked}
-          disabled={disabled}
-          size={size}
-          name={name}
-          value={value}
-          error={hasError}
-          aria-describedby={describedBy}
-          onCheckedChange={onCheckedChange}
-          onBlur={onBlur}
-        />
-        {labelHidden
-          ? <VisuallyHidden className="checkbox-field__label">{label}</VisuallyHidden>
-          : <span className="checkbox-field__label">{label}</span>}
-      </label>
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="checkbox-field__helper">{helperText}</span>
-      )}
-    </div>
+      <Checkbox
+        ref={ref}
+        id={id}
+        checked={checked}
+        defaultChecked={defaultChecked}
+        disabled={disabled}
+        required={required}
+        size={size}
+        name={name}
+        value={value}
+        error={field.hasError}
+        aria-describedby={field.describedBy}
+        onCheckedChange={onCheckedChange}
+        onBlur={onBlur}
+      />
+    </FieldShell>
   );
 });

@@ -1,11 +1,10 @@
-import { forwardRef, useId } from 'react';
+import { forwardRef } from 'react';
 import './FileUploadField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { Label } from '../../atoms/Label/Label';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import { FileUpload } from '../../atoms/FileUpload/FileUpload';
 import type { FileUploadProps } from '../../atoms/FileUpload/FileUpload';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface FileUploadFieldProps
   extends Omit<FileUploadProps, 'describedBy' | 'ariaLabel' | 'aria-describedby' | 'id'> {
@@ -49,31 +48,19 @@ export const FileUploadField = forwardRef<HTMLInputElement, FileUploadFieldProps
 }: FileUploadFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
-  const generatedId = useId();
-  const id = idProp ?? generatedId;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error, como en el resto de campos
-  const hasError = error || !!errorMessage;
+  const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
+  const { id } = field;
 
   return (
-    <div className={['file-upload-field', className].filter(Boolean).join(' ')}>
-      <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
+    <FieldShell field={field} block="file-upload-field" className={className} label={label} labelHidden={labelHidden} size={size}>
       <FileUpload
         ref={ref}
         {...rest}
         id={id}
         size={size}
-        error={hasError}
-        aria-describedby={describedBy}
+        error={field.hasError}
+        aria-describedby={field.describedBy}
       />
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="file-upload-field__helper">{helperText}</span>
-      )}
-    </div>
+    </FieldShell>
   );
 });

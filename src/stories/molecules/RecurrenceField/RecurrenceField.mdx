@@ -63,6 +63,7 @@ Los campos son los del sistema (`SelectField`, `NumberInputField`, `DatePickerFi
 - **El grupo de días no es un `<label>`**: no es un control único, sino un `role="group"` nombrado con `aria-labelledby` sobre el propio grupo. Dentro se recorre con las flechas —una sola parada de tabulador— porque es un `ToggleGroup`.
 - **Cada día se anuncia con su nombre largo** («miércoles»), aunque el botón enseñe el corto.
 - Los campos que aparecen y desaparecen lo hacen **en el orden del documento**, detrás del control que los provocó: el foco no salta.
+- `helperText` y `errorMessage` son del editor entero: se pintan debajo de los campos (el error con `role="alert"`) y **describen el grupo** por `aria-describedby` —el `fieldset` si hay `legend`; si no, el propio contenedor, que pasa a `role="group"` solo cuando hay algo que describir—.
 
 ## Textos
 

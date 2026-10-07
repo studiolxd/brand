@@ -48,7 +48,7 @@ Siempre hay etiqueta (`label`), enlazada por `id` al `<input>`, y **por defecto 
 ## Accesibilidad
 
 - La etiqueta va enlazada por `htmlFor`/`id` al `<input>` (`role="combobox"`).
-- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- Los `id` de error y ayuda se derivan del del campo (`<id>-error`, `<id>-helper`) y llegan al control por `aria-describedby` en ese orden, el mismo en que se pintan.
 - El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
 - El campo no emite textos propios: etiqueta, ayuda, error y `placeholder` los pasa quien lo usa.
 

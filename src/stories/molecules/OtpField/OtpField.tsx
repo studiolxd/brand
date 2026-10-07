@@ -1,10 +1,9 @@
-import { forwardRef, useId } from 'react';
+import { forwardRef } from 'react';
 import './OtpField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { Label } from '../../atoms/Label/Label';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import { OtpInput } from '../../atoms/OtpInput/OtpInput';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface OtpFieldProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
@@ -24,6 +23,8 @@ export interface OtpFieldProps {
   name?: string;
   disabled?: boolean;
   readOnly?: boolean;
+  /** Obligatorio: `required` nativo en cada celda (ver `OtpInput`). */
+  required?: boolean;
   /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */
   error?: boolean;
   /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */
@@ -56,6 +57,7 @@ export const OtpField = forwardRef<HTMLInputElement, OtpFieldProps>(function Otp
   name,
   disabled,
   readOnly,
+  required,
   error = false,
   errorMessage,
   helperText,
@@ -68,19 +70,13 @@ export const OtpField = forwardRef<HTMLInputElement, OtpFieldProps>(function Otp
 }: OtpFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
-  const generatedId = useId();
-  const id = idProp ?? generatedId;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error, como en el resto de campos
-  const hasError = error || !!errorMessage;
+  const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
+  const { id } = field;
 
   return (
-    <div className={['otp-field', className].filter(Boolean).join(' ')}>
+    <FieldShell field={field} block="otp-field" className={className} label={label} labelHidden={labelHidden} size={size} labelIdentified labelFor={`${id}-0`}>
       {/* La etiqueta nombra la primera celda (donde entra el foco) y, por
           aria-labelledby, el grupo: un solo nombre, no dos. */}
-      <Label id={`${id}-label`} htmlFor={`${id}-0`} hidden={labelHidden} size={size}>{label}</Label>
       <OtpInput
         ref={ref}
         id={id}
@@ -90,21 +86,16 @@ export const OtpField = forwardRef<HTMLInputElement, OtpFieldProps>(function Otp
         defaultValue={defaultValue}
         disabled={disabled}
         readOnly={readOnly}
-        error={hasError}
+        required={required}
+        error={field.hasError}
         size={size}
         digitLabel={digitLabel}
-        aria-labelledby={`${id}-label`}
-        aria-describedby={describedBy}
+        aria-labelledby={field.labelId}
+        aria-describedby={field.describedBy}
         onChange={onChange}
         onComplete={onComplete}
         onBlur={onBlur}
       />
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="otp-field__helper">{helperText}</span>
-      )}
-    </div>
+    </FieldShell>
   );
 });

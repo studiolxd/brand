@@ -645,6 +645,7 @@ html.dark .surface-light {
   --recovery-codes-color: var(--color-text-on-light);
   --recovery-codes-index-color: var(--color-text-muted-on-light);
   --recurrence-field-legend-color: var(--color-text-on-light);
+  --recurrence-field-helper-color: var(--form-helper-color);
   --search-form-submit-color: var(--color-primary);
   --search-form-submit-hover-color: var(--color-primary);
   --search-form-submit-disabled-color: var(--input-disabled-color);

@@ -1,12 +1,11 @@
-import { forwardRef, useId, useState } from 'react';
+import { forwardRef, useState } from 'react';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
 import './PasswordField.css';
-import { Label } from '../../atoms/Label/Label';
 import { Input } from '../../atoms/Input/Input';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { Icon } from '../../atoms/Icon/Icon';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
 /**
@@ -28,8 +27,8 @@ export interface PasswordFieldProps
   extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size' | 'type'> {
   /**
    * Etiqueta del campo. **Opcional**: si se omite, el componente renderiza solo
-   * el campo + toggle (sin `<label>`, sin error ni ayuda), para componerlo
-   * dentro de una capa de formulario propia.
+   * el campo + toggle, sin `<label>`, para componerlo dentro de una capa de
+   * formulario propia (el error y la ayuda se pintan igual si se pasan).
    */
   label?: string;
   /**
@@ -91,29 +90,36 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(fu
   id,
   disabled,
   placeholder,
+  'aria-describedby': ariaDescribedBy,
   ...rest
 }, ref) {
   const t = useBrandMessages('passwordField');
   const size = useFormSize(sizeProp);
   const labelHidden = useLabelHidden(labelHiddenProp);
-  const reactId = useId();
-  const inputId = id ?? reactId;
+  // El `aria-describedby` del consumidor (o el que inyecta un `FormControl`)
+  // se suma al propio, como en `InputField`; antes lo pisaba entero.
+  const field = useFieldShell({ id, error, errorMessage, helperText, describedBy: ariaDescribedBy });
+  const inputId = field.id;
   const [visible, setVisible] = useState(false);
-  const errorId = errorMessage ? `${inputId}-error` : undefined;
-  const helperId = helperText ? `${inputId}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
 
   return (
-    <div className={['password-field', className ?? ''].filter(Boolean).join(' ')}>
-      {label && <Label htmlFor={inputId} hidden={labelHidden} size={size}>{label}</Label>}
+    <FieldShell
+      field={field}
+      block="password-field"
+      className={className}
+      label={label}
+      labelHidden={labelHidden}
+      size={size}
+      footer={action && <div className="password-field__action">{action}</div>}
+    >
       <div className={['password-field__wrapper', size !== 'md' ? `password-field__wrapper--${size}` : ''].filter(Boolean).join(' ')}>
         <Input
           ref={ref}
           id={inputId}
           size={size}
-          error={error || !!errorMessage}
+          error={field.hasError}
           placeholder={placeholder ?? (label && labelHidden ? label : undefined)}
-          aria-describedby={describedBy}
+          aria-describedby={field.describedBy}
           {...rest}
           type={visible ? 'text' : 'password'}
           disabled={disabled}
@@ -132,13 +138,6 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(fu
           <Icon name={visible ? 'eye-off' : 'eye'} className="password-field__icon" />
         </button>
       </div>
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="password-field__helper">{helperText}</span>
-      )}
-      {action && <div className="password-field__action">{action}</div>}
-    </div>
+    </FieldShell>
   );
 });
