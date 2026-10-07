@@ -59,7 +59,7 @@ import com.studiolxd.brand.icon.BrandIconName
 import com.studiolxd.brand.icon.BrandIconSize
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.brandFocusRing
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.support.collectBrandInteractionState
 import com.studiolxd.brand.support.rememberReduceMotion
 import com.studiolxd.brand.support.resolve
@@ -283,7 +283,7 @@ fun BrandNumberInputField(
         onValueChange(steppedNumber(value, delta, min, max))
     }
 
-    val textStyle = brandTextStyle(fontSize, T.fontWeight, T.lineHeight, color = textColor)
+    val textStyle = brandBaseTextStyle(fontSize, T.fontWeight, T.lineHeight, color = textColor)
         .copy(textAlign = TextAlign.Center, fontFeatureSettings = "tnum")
     val shown = draft ?: value?.let(::formatNumber).orEmpty()
 

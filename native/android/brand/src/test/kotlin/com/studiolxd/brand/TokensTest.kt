@@ -12,6 +12,8 @@ import com.studiolxd.brand.tokens.BrandFontWeight
 import com.studiolxd.brand.tokens.BrandRadius
 import com.studiolxd.brand.tokens.BrandSize
 import com.studiolxd.brand.tokens.BrandSpacing
+import com.studiolxd.brand.support.brandBaseTextStyle
+import com.studiolxd.brand.support.brandTextStyle
 import com.studiolxd.brand.typography.BrandTypography
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -45,5 +47,13 @@ class TokensTest {
         assertEquals(16.sp, BrandTypography.body.fontSize)
         assertEquals(24.sp, BrandTypography.body.lineHeight)
         assertEquals(BrandFontWeight.emphasis, BrandTypography.heading1.fontWeight)
+    }
+
+    /** `brandTextStyle` queda obsoleto (D60) pero sin cambiar lo que devuelve: las pantallas que lo usan no se mueven. */
+    @Test
+    @Suppress("DEPRECATION")
+    fun deprecatedTextStyleKeepsItsOutput() {
+        val old = brandTextStyle(BrandFontSize.s6, BrandFontWeight.emphasis, 1.1f, -0.02f, color = Color.Red)
+        assertEquals(brandBaseTextStyle(BrandFontSize.s6, BrandFontWeight.emphasis, 1.1f, -0.02f, color = Color.Red), old)
     }
 }

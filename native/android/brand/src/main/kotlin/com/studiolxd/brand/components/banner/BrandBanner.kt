@@ -26,7 +26,7 @@ import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.BrandStackBreakpoint
 import com.studiolxd.brand.support.BrandStretchColumn
 import com.studiolxd.brand.support.ProvideBrandContent
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.tokens.BrandBannerTokens as T
 import com.studiolxd.brand.tokens.BrandTextTokens
 
@@ -119,7 +119,7 @@ internal fun BrandBannerImpl(
             val endPadding = if (onDismiss != null) T.closeInset * 2 + T.closeSize else T.paddingInline
             ProvideBrandContent(
                 colors.ink,
-                brandTextStyle(T.fontSize, BrandTextTokens.fontWeight, T.lineHeight, BrandTextTokens.letterSpacing, color = colors.ink),
+                brandBaseTextStyle(T.fontSize, BrandTextTokens.fontWeight, T.lineHeight, BrandTextTokens.letterSpacing, color = colors.ink),
             ) {
                 // La caja de borde de CSS (`box-sizing: border-box`): `drawBehind` pinta los filetes sin ocupar sitio, así
                 // que el relleno lleva además su grosor arriba y abajo (una línea: 1 + 12 + 24 + 12 + 1 = 50, como la web),

@@ -112,12 +112,31 @@ private struct BrandLineBox: Layout {
 
 extension View {
     /// Fuente de la marca (token de tamaño y peso) con la caja de línea de CSS (`line-height` como múltiplo del
-    /// tamaño): una línea mide `tamaño × lineHeight` y el interlineado se reparte mitad arriba y mitad abajo
-    /// (ver `BrandLinedFont`). Es lo que lleva todo texto cuyo `line-height` fija React.
-    func brandLinedFont(size: CGFloat, weight: Int = BrandFontWeight.default, family: String = BrandFontFamily.sans,
+    /// tamaño): una línea mide `tamaño × lineHeight` y el interlineado se reparte mitad arriba y mitad abajo, así que
+    /// un texto de `n` líneas mide `n × lineHeight` como en la web (ver `BrandLinedFont`). El tamaño crece con el tipo
+    /// dinámico. Es lo que lleva todo texto de la marca cuyo `line-height` fija React; para un estilo completo de
+    /// `BrandTextStyle` (con su tracking), `brandLinedFont(_:)`.
+    ///
+    /// ```swift
+    /// Text("Revisa los datos.").brandLinedFont(size: BrandFontSize.s2, lineHeight: BrandLineHeight.normal)
+    /// ```
+    public func brandLinedFont(size: CGFloat, weight: Int = BrandFontWeight.default, family: String = BrandFontFamily.sans,
                         lineHeight: CGFloat, relativeTo textStyle: Font.TextStyle = .body) -> some View {
         modifier(BrandLinedFont(size: size, weight: weight, family: family, multiple: lineHeight, mode: .text,
                                 relativeTo: textStyle))
+    }
+
+    /// Un estilo de texto de la marca entero —fuente, caja de línea de CSS y tracking—, escalado con el tipo dinámico:
+    /// sustituye a `brandTextStyle(_:)`, que pone el interlineado solo entre líneas (una línea mide el alto natural de la
+    /// fuente y no el `line-height` de la web).
+    ///
+    /// ```swift
+    /// Text("Tus viviendas").brandLinedFont(.heading2)
+    /// ```
+    public func brandLinedFont(_ style: BrandTextStyle, relativeTo textStyle: Font.TextStyle = .body) -> some View {
+        tracking(style.tracking * style.size)
+            .brandLinedFont(size: style.size, weight: style.weight, family: style.family, lineHeight: style.lineHeight,
+                            relativeTo: textStyle)
     }
 
     /// La misma fuente e interlineado para un **contenedor** de texto e iconos (la fila de una lista): alto mínimo de

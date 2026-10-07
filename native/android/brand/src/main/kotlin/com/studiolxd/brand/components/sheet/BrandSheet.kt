@@ -46,7 +46,7 @@ import com.studiolxd.brand.components.dialog.BrandDialogFooter
 import com.studiolxd.brand.components.dialog.BrandDialogWindow
 import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.support.brandTransition
 import com.studiolxd.brand.support.rememberReduceMotion
 import com.studiolxd.brand.tokens.BrandSheetTokens as T
@@ -116,13 +116,13 @@ fun BrandSheetContent(
                         BrandBasicText(
                             title,
                             Modifier.semantics { heading() },
-                            style = brandTextStyle(T.titleFontSize, T.titleFontWeight, BrandTextTokens.h2LineHeight, color = T.titleColor.current),
+                            style = brandBaseTextStyle(T.titleFontSize, T.titleFontWeight, BrandTextTokens.h2LineHeight, color = T.titleColor.current),
                         )
                     }
                     if (description != null) {
                         BrandBasicText(
                             description,
-                            style = brandTextStyle(T.descriptionFontSize, BrandTextTokens.fontWeight, BrandTextTokens.lineHeight, color = T.descriptionColor.current),
+                            style = brandBaseTextStyle(T.descriptionFontSize, BrandTextTokens.fontWeight, BrandTextTokens.lineHeight, color = T.descriptionColor.current),
                         )
                     }
                 }

@@ -57,7 +57,7 @@ import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.brandFocusRing
 import com.studiolxd.brand.support.brandShadow
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.support.scaledByFontScale
 import com.studiolxd.brand.support.toScaledDp
 import com.studiolxd.brand.tokens.BrandConfirmDialogTokens
@@ -286,7 +286,7 @@ internal fun BrandConfirmDialogCard(
             BrandBasicText(
                 title,
                 Modifier.weight(1f).semantics { heading() },
-                style = brandTextStyle(M.titleFontSize, M.titleFontWeight, M.titleLineHeight, color = M.titleColor.current),
+                style = brandBaseTextStyle(M.titleFontSize, M.titleFontWeight, M.titleLineHeight, color = M.titleColor.current),
             )
             // El aspa se centra sobre la PRIMERA línea del título, como `.modal__close` en la web: se desplaza la mitad de lo
             // que va de la caja de esa línea (cuerpo × interlineado del título) a la del aspa, y ocupa lo que ocupa con ese
@@ -307,7 +307,7 @@ internal fun BrandConfirmDialogCard(
             BrandBasicText(
                 description,
                 Modifier.padding(bottom = M.descriptionMarginBlockEnd),
-                style = brandTextStyle(M.descriptionFontSize, com.studiolxd.brand.tokens.BrandTextTokens.fontWeight, com.studiolxd.brand.tokens.BrandTextTokens.lineHeight, color = M.descriptionColor.current),
+                style = brandBaseTextStyle(M.descriptionFontSize, com.studiolxd.brand.tokens.BrandTextTokens.fontWeight, com.studiolxd.brand.tokens.BrandTextTokens.lineHeight, color = M.descriptionColor.current),
             )
         }
         extra?.invoke(this)
@@ -365,7 +365,7 @@ private fun ConfirmPhraseField(phrase: BrandConfirmPhrase, state: ConfirmDialogS
     Column(modifier, verticalArrangement = Arrangement.spacedBy(BrandFormFieldTokens.gap)) {
         BrandBasicText(
             phrase.label,
-            style = brandTextStyle(BrandLabelTokens.fontSize, BrandLabelTokens.fontWeight, BrandLabelTokens.lineHeight, BrandLabelTokens.letterSpacing, color = BrandLabelTokens.color.current),
+            style = brandBaseTextStyle(BrandLabelTokens.fontSize, BrandLabelTokens.fontWeight, BrandLabelTokens.lineHeight, BrandLabelTokens.letterSpacing, color = BrandLabelTokens.color.current),
         )
         BasicTextField(
             value = state.typed,
@@ -384,7 +384,7 @@ private fun ConfirmPhraseField(phrase: BrandConfirmPhrase, state: ConfirmDialogS
                 },
             enabled = !disabled,
             singleLine = true,
-            textStyle = brandTextStyle(BrandInputTokens.fontSize, BrandInputTokens.fontWeight, BrandInputTokens.lineHeight, color = ink),
+            textStyle = brandBaseTextStyle(BrandInputTokens.fontSize, BrandInputTokens.fontWeight, BrandInputTokens.lineHeight, color = ink),
             cursorBrush = SolidColor(ink),
             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false, imeAction = ImeAction.Done),
             keyboardActions = KeyboardActions(onDone = { if (state.submitField()) onSubmit() }),
@@ -417,7 +417,7 @@ private fun ConfirmPhraseField(phrase: BrandConfirmPhrase, state: ConfirmDialogS
             BrandBasicText(
                 phrase.mismatch,
                 Modifier.semantics { contentDescription = "" },
-                style = brandTextStyle(BrandInputFieldTokens.errorFontSize, BrandInputFieldTokens.errorFontWeight, BrandInputFieldTokens.errorLineHeight, color = BrandInputFieldTokens.errorColor.current),
+                style = brandBaseTextStyle(BrandInputFieldTokens.errorFontSize, BrandInputFieldTokens.errorFontWeight, BrandInputFieldTokens.errorLineHeight, color = BrandInputFieldTokens.errorColor.current),
             )
         }
     }

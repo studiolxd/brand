@@ -47,7 +47,7 @@ import com.studiolxd.brand.support.LocalBrandTextStyle
 import com.studiolxd.brand.support.BrandInteractionState
 import com.studiolxd.brand.support.ProvideBrandContent
 import com.studiolxd.brand.support.brandFocusRing
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.support.brandTransition
 import com.studiolxd.brand.support.collectBrandInteractionState
 import com.studiolxd.brand.support.rememberReduceMotion
@@ -287,7 +287,7 @@ internal fun BrandButtonImpl(
 
     val shape: Shape = if (cornerRadius > 0.dp) RoundedCornerShape(cornerRadius) else RectangleShape
     val underlineOffset = T.textUnderlineOffset
-    val textStyle = brandTextStyle(fontSize, fontWeight, T.lineHeight, color = foreground)
+    val textStyle = brandBaseTextStyle(fontSize, fontWeight, T.lineHeight, color = foreground)
 
     Box(
         modifier = modifier

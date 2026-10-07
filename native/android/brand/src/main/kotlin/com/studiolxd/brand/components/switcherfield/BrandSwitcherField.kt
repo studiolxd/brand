@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.TextUnit
 import com.studiolxd.brand.components.field.brandAlert
 import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.support.resolve
 import com.studiolxd.brand.tokens.BrandSwitcherFieldTokens as F
 
@@ -68,7 +68,7 @@ fun BrandSwitcherField(
             label = if (labelHidden) null else ({
                 BrandBasicText(
                     label,
-                    style = brandTextStyle(labelFontSize, F.labelFontWeight, F.labelLineHeight, F.labelLetterSpacing, color = F.labelColor.current),
+                    style = brandBaseTextStyle(labelFontSize, F.labelFontWeight, F.labelLineHeight, F.labelLetterSpacing, color = F.labelColor.current),
                 )
             }),
         )
@@ -76,13 +76,13 @@ fun BrandSwitcherField(
             BrandBasicText(
                 errorMessage,
                 modifier = Modifier.brandAlert(),
-                style = brandTextStyle(F.errorFontSize, F.errorFontWeight, F.errorLineHeight, color = F.errorColor.current),
+                style = brandBaseTextStyle(F.errorFontSize, F.errorFontWeight, F.errorLineHeight, color = F.errorColor.current),
             )
         }
         if (helperText != null) {
             BrandBasicText(
                 helperText,
-                style = brandTextStyle(F.helperFontSize, F.helperFontWeight, F.helperLineHeight, color = F.helperColor.current),
+                style = brandBaseTextStyle(F.helperFontSize, F.helperFontWeight, F.helperLineHeight, color = F.helperColor.current),
             )
         }
     }

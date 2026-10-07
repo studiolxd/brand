@@ -48,7 +48,7 @@ import com.studiolxd.brand.icon.BrandIconSize
 import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.LocalBrandIconTextSize
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.support.brandTransition
 import com.studiolxd.brand.support.collectBrandInteractionState
 import com.studiolxd.brand.support.rememberReduceMotion
@@ -171,7 +171,7 @@ fun BrandSelectField(
         label = "select-chevron",
     )
     val shownText = selectedLabel ?: placeholder
-    val textStyle = brandTextStyle(fontSize, T.fontWeight, T.lineHeight, color = textColor)
+    val textStyle = brandBaseTextStyle(fontSize, T.fontWeight, T.lineHeight, color = textColor)
     val density = LocalDensity.current
 
     BrandFieldLayout(
@@ -274,7 +274,7 @@ private fun SelectMenuGroupLabel(text: String, size: BrandControlSize) {
     BrandBasicText(
         text,
         modifier = Modifier.fillMaxWidth().padding(horizontal = paddingInline, vertical = itemPadding),
-        style = brandTextStyle(labelSize, BrandLabelTokens.fontWeight, BrandLabelTokens.lineHeight, BrandLabelTokens.letterSpacing, color = BrandLabelTokens.color.current),
+        style = brandBaseTextStyle(labelSize, BrandLabelTokens.fontWeight, BrandLabelTokens.lineHeight, BrandLabelTokens.letterSpacing, color = BrandLabelTokens.color.current),
     )
 }
 
@@ -310,7 +310,7 @@ private fun SelectMenuItem(option: BrandSelectOption, selection: String, size: B
             .semantics { selected = isSelected }
             .padding(horizontal = paddingInline, vertical = paddingBlock),
         // `.select__item` no declara `line-height`: hereda el del cuerpo (`text.line-height`), no el del disparador.
-        style = brandTextStyle(fontSize, weight, BrandTextTokens.lineHeight, color = color),
+        style = brandBaseTextStyle(fontSize, weight, BrandTextTokens.lineHeight, color = color),
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
     )

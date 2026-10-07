@@ -48,7 +48,7 @@ import com.studiolxd.brand.components.field.LocalBrandForcedFocus
 import com.studiolxd.brand.components.field.animatedFieldColor
 import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.brandFocusRing
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.support.collectBrandInteractionState
 import com.studiolxd.brand.support.rememberReduceMotion
 import com.studiolxd.brand.tokens.BrandTabsTokens as T
@@ -279,7 +279,7 @@ internal fun <V> BrandTabSurface(
         // La caja de línea de CSS la pone `BrandBasicText`, con el interlineado del disparador de la web ([TriggerLineHeight]).
         BrandBasicText(
             tab.label,
-            style = brandTextStyle(T.triggerFontSize, weight, TriggerLineHeight, color = ink)
+            style = brandBaseTextStyle(T.triggerFontSize, weight, TriggerLineHeight, color = ink)
                 .copy(textAlign = if (vertical) TextAlign.Center else TextAlign.Unspecified),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,

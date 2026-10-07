@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.LocalBrandTextStyle
 import com.studiolxd.brand.support.ProvideBrandContent
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.tokens.BrandTextTokens as T
 
 /** `List` `type`: con viñetas, numerada o sin decoración. Mismos casos y mismos valores que React. */
@@ -87,7 +87,7 @@ fun BrandList(
 ) {
     val rows = BrandListScope().apply(content).rows
     val color = T.listColor.current
-    val style = brandTextStyle(T.listFontSize, T.listFontWeight, T.listLineHeight, T.listLetterSpacing, color = color)
+    val style = brandBaseTextStyle(T.listFontSize, T.listFontWeight, T.listLineHeight, T.listLetterSpacing, color = color)
     ProvideBrandContent(color = color, textStyle = style) {
         Column(
             modifier = modifier
@@ -155,7 +155,7 @@ fun BrandListItem(
     val color = T.listColor.current
     ProvideBrandContent(
         color = color,
-        textStyle = brandTextStyle(T.listFontSize, T.listFontWeight, T.listLineHeight, T.listLetterSpacing, color = color),
+        textStyle = brandBaseTextStyle(T.listFontSize, T.listFontWeight, T.listLineHeight, T.listLetterSpacing, color = color),
     ) {
         Row(
             modifier = modifier.fillMaxWidth().then(clickable),
@@ -169,7 +169,7 @@ fun BrandListItem(
                     val secondaryColor = T.listSecondaryColor.current
                     ProvideBrandContent(
                         color = secondaryColor,
-                        textStyle = brandTextStyle(T.listSecondaryFontSize, T.listFontWeight, T.listSecondaryLineHeight, T.listLetterSpacing, color = secondaryColor),
+                        textStyle = brandBaseTextStyle(T.listSecondaryFontSize, T.listFontWeight, T.listSecondaryLineHeight, T.listLetterSpacing, color = secondaryColor),
                     ) { secondary() }
                 }
             }

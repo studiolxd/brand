@@ -26,7 +26,7 @@ import kotlin.math.ceil
  * sobra o falta respecto a la fuente se reparte mitad arriba y mitad abajo, así que `n` líneas miden `n × line-height`.
  *
  * Compose solo lo hace cuando el interlineado **cubre** el alto natural de la fuente (23,7 dp a 16 sp con Google Sans
- * Flex, el 1,48 del cuerpo): es lo que da [brandTextStyle] (`LineHeightStyle` `Fixed` sin recorte). Con uno más apretado
+ * Flex, el 1,48 del cuerpo): es lo que da [brandBaseTextStyle] (`LineHeightStyle` `Fixed` sin recorte). Con uno más apretado
  * (`1`, `1.1`, `1.3`: controles y títulos) mantiene la PRIMERA línea y la ÚLTIMA en el alto natural y el texto sale más
  * alto que en la web. Para ese caso existe `LineHeightStyle.Mode.Tight` con `Trim.Both`, que sí deja cada línea en
  * `line-height` con los glifos centrados y desbordando su caja, como la web; pero con un interlineado holgado recorta el
@@ -39,9 +39,16 @@ import kotlin.math.ceil
  *
  * La usan [BrandBasicText] y [ProvideBrandContent], que son por donde pasa el texto de los componentes; un texto que no
  * pase por ellos (un `BasicTextField`, cuyo cursor mide la línea) se queda con el comportamiento de Compose.
+ *
+ * Es pública para las apps: un estilo propio o uno de [com.studiolxd.brand.typography.BrandTypography] pintado con un
+ * `BasicText` o un `Text` de Material mide lo que en la web si se le aplica antes.
+ *
+ * ```kotlin
+ * Text("Tus viviendas", style = BrandTypography.heading2.brandCssLineBox())
+ * ```
  */
 @Composable
-internal fun TextStyle.brandCssLineBox(): TextStyle {
+fun TextStyle.brandCssLineBox(): TextStyle {
     if (!lineHeight.isSp || !fontSize.isSp) return this
     val density = LocalDensity.current
     val resolver = LocalFontFamilyResolver.current
@@ -58,7 +65,7 @@ internal fun TextStyle.brandCssLineBox(): TextStyle {
     return if (lineHeightStyle == wanted) this else copy(lineHeightStyle = wanted)
 }
 
-/** Holgado: la caja es `line-height` y el texto va centrado en ella (el de [brandTextStyle]). */
+/** Holgado: la caja es `line-height` y el texto va centrado en ella (el de [brandBaseTextStyle]). */
 private val FixedLineBox = LineHeightStyle(LineHeightStyle.Alignment.Center, LineHeightStyle.Trim.None)
 
 /** Apretado: cada línea, también la primera y la última, mide `line-height`; los glifos desbordan centrados. */
@@ -77,10 +84,15 @@ private val NaturalHeights = ConcurrentHashMap<NaturalKey, Int>()
 
 /**
  * `BasicText` con la caja de línea de CSS ([brandCssLineBox]): el texto de todos los componentes de la marca pasa por
- * aquí, así que un `line-height` de la web mide lo mismo en Compose con una línea o con varias. Interno.
+ * aquí, así que un `line-height` de la web mide lo mismo en Compose con una línea o con varias. Las apps lo usan igual
+ * que un `BasicText`, con un estilo de [com.studiolxd.brand.typography.BrandTypography] o propio.
+ *
+ * ```kotlin
+ * BrandBasicText("Tus viviendas", style = BrandTypography.heading2.copy(color = BrandTheme.colors.text))
+ * ```
  */
 @Composable
-internal fun BrandBasicText(
+fun BrandBasicText(
     text: String,
     modifier: Modifier = Modifier,
     style: TextStyle = TextStyle.Default,
@@ -98,7 +110,7 @@ internal fun BrandBasicText(
 
 /** [BrandBasicText] para un texto con estilos por tramos (`AnnotatedString`). */
 @Composable
-internal fun BrandBasicText(
+fun BrandBasicText(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
     style: TextStyle = TextStyle.Default,

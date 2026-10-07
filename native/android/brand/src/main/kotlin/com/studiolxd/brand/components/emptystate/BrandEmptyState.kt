@@ -24,7 +24,7 @@ import com.studiolxd.brand.icon.BrandIconSize
 import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.LocalBrandIconTextSize
 import com.studiolxd.brand.support.ProvideBrandContent
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.support.scaledByFontScale
 import com.studiolxd.brand.tokens.BrandEmptyStateTokens as T
 import com.studiolxd.brand.tokens.BrandTextTokens as Text
@@ -101,7 +101,7 @@ private fun BrandEmptyStateImpl(
                 // El icono llena la caja del token (`icon-size` / `icon-size-sm`), como el `<svg>` al 100 % de React.
                 ProvideBrandContent(
                     color = T.iconColor.current,
-                    textStyle = brandTextStyle(box.value.sp, Text.fontWeight, Text.lineHeight),
+                    textStyle = brandBaseTextStyle(box.value.sp, Text.fontWeight, Text.lineHeight),
                 ) {
                     CompositionLocalProvider(LocalBrandIconTextSize provides box.value.sp) { icon() }
                 }
@@ -111,7 +111,7 @@ private fun BrandEmptyStateImpl(
             BrandBasicText(
                 text = title,
                 modifier = Modifier.semantics { heading() },
-                style = brandTextStyle(
+                style = brandBaseTextStyle(
                     size = if (small) T.titleFontSizeSm else T.titleFontSize,
                     weight = T.titleFontWeight,
                     lineHeight = Text.lineHeight,
@@ -121,7 +121,7 @@ private fun BrandEmptyStateImpl(
             if (description != null) {
                 BrandBasicText(
                     text = description,
-                    style = brandTextStyle(
+                    style = brandBaseTextStyle(
                         size = if (small) T.descriptionFontSizeSm else T.descriptionFontSize,
                         weight = Text.fontWeight,
                         lineHeight = Text.lineHeight,

@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.support.brandTransition
 import com.studiolxd.brand.tokens.BrandFormTokens
 import com.studiolxd.brand.tokens.BrandLabelTokens
@@ -85,7 +85,7 @@ internal fun BrandFieldLayout(
             BrandBasicText(
                 label,
                 modifier = Modifier.clearAndSetSemantics { },
-                style = brandTextStyle(
+                style = brandBaseTextStyle(
                     fieldLabelSize(size), BrandLabelTokens.fontWeight, BrandLabelTokens.lineHeight, BrandLabelTokens.letterSpacing,
                     color = BrandLabelTokens.color.current,
                 ),
@@ -96,7 +96,7 @@ internal fun BrandFieldLayout(
             BrandBasicText(
                 errorMessage,
                 modifier = Modifier.clearAndSetSemantics { },
-                style = brandTextStyle(
+                style = brandBaseTextStyle(
                     BrandFormTokens.errorFontSize, BrandFormTokens.errorFontWeight, BrandFormTokens.errorLineHeight,
                     color = BrandFormTokens.errorColor.current,
                 ),
@@ -106,7 +106,7 @@ internal fun BrandFieldLayout(
             BrandBasicText(
                 helperText,
                 modifier = Modifier.clearAndSetSemantics { },
-                style = brandTextStyle(helper.fontSize, helper.fontWeight, helper.lineHeight, color = helper.color),
+                style = brandBaseTextStyle(helper.fontSize, helper.fontWeight, helper.lineHeight, color = helper.color),
             )
         }
     }

@@ -61,4 +61,19 @@ final class TokensTests: XCTestCase {
             _ = Font.brand(style)
         }
     }
+
+    /// La API pública de texto (D60): `brandLinedFont(_:)` da la caja de línea de CSS, una línea de `tamaño ×
+    /// line-height` (body 16 × 1,5 = 24; heading2 a su `line-height` apretado), y no el alto natural de la fuente.
+    @MainActor
+    func testPublicLinedFontMeasuresTheCssLineBox() {
+        #if os(macOS)
+        StudiolxdBrand.registerFonts()
+        for style in [BrandTextStyle.body, .heading2, .bodySmall] {
+            let host = NSHostingView(rootView: Text(verbatim: "Hg").brandLinedFont(style).fixedSize())
+            // `fittingSize` redondea al punto entero: la tolerancia de 1 sigue separando la caja de CSS del alto
+            // natural de la fuente (1,25 em: 20 frente a 24 en el cuerpo).
+            XCTAssertEqual(host.fittingSize.height, style.size * style.lineHeight, accuracy: 1, "\(style)")
+        }
+        #endif
+    }
 }

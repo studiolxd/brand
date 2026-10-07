@@ -45,7 +45,7 @@ import com.studiolxd.brand.components.field.BrandFieldGlyph
 import com.studiolxd.brand.components.field.BrandFieldIconButton
 import com.studiolxd.brand.icon.BrandIconName
 import com.studiolxd.brand.support.BrandControlSize
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.support.rememberReduceMotion
 import com.studiolxd.brand.support.resolve
 import com.studiolxd.brand.support.scaledByFontScale
@@ -252,7 +252,7 @@ internal fun BrandTextFieldImpl(
     val showsClear = isSearch && clearable && value.isNotEmpty() && enabled && !readOnly
     val hasTrailingSlot = (isSearch && clearable) || trailing != null
 
-    val textStyle = brandTextStyle(fontSize, T.fontWeight, T.lineHeight, color = textColor)
+    val textStyle = brandBaseTextStyle(fontSize, T.fontWeight, T.lineHeight, color = textColor)
     val keyboardOptions = inputKeyboardOptions(type, kind)
 
     BrandFieldLayout(
