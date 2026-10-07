@@ -31,6 +31,8 @@ Un gráfico lo **lee una persona** y lo **ejecuta una máquina**. Por eso aquí 
 
 ## La paleta categórica
 
+Toda la paleta de esta página —ranuras categóricas, rampa secuencial y par divergente— vive en `tokens/color/chart.json` y es la **única excepción declarada** a la regla de no inventar colores: son hex propios, pero no inventados, porque salen de los tonos de marca en OKLCH con el método que cada `$description` deja escrito. Quedó aprobada el 2026-10-07, y no se amplía sin decisión del operador: una serie novena, un tono para un rol o un paso más de rampa se piden, no se añaden.
+
 Las ocho ranuras salen de los tonos de marca. Cinco son los de la paleta (`prussian`, `cayenne`, `yellow`, `emerald`, `lavender`), llevados al **paso de claridad** que un gráfico necesita: los valores de marca están fuera de la banda legible (el amarillo `#FFCD00` tiene 1.3:1 sobre blanco). Las otras tres son **tonos derivados**, interpolando el ángulo de tono en OKLCH entre pares de marca contiguos: aqua entre esmeralda y prusia, magenta entre lavanda y cayena, lima entre amarillo y esmeralda.
 
 <ColorPalette>

@@ -21,6 +21,8 @@ El color se organiza en **tres capas**, y cada una solo puede apuntar a la anter
 
 La regla que lo sostiene: **un componente nunca nombra un color, nombra un rol**. Si mañana el rojo de error cambia, cambia en un sitio. Toda esta página se genera a partir de los ficheros de `tokens/color/`: no hay un solo valor escrito a mano.
 
+Y **no se inventan colores**: un token nuevo solo apunta a primitivos que ya existen, y añadir un hex a la paleta es una decisión del operador, nunca el efecto lateral de un encargo. La única excepción declarada es `tokens/color/chart.json`, la paleta de visualización de datos: sus valores salen de los tonos de marca en OKLCH con el método escrito en cada `$description`, y quedó aprobada el 2026-10-07. Tampoco esa se amplía sin decisión del operador; el porqué de cada paso, en Foundations → Gráficos de datos.
+
 ---
 
 ## Primitivos
