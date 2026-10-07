@@ -16,6 +16,7 @@
     "font-family":     { "$value": "{select.font-family}",   "$type": "string",    "$description": "Familia tipográfica: la del Select" },
     "font-size":       { "$value": "{select.font-size}",     "$type": "dimension", "$description": "Cuerpo: el del Select" },
     "font-weight":     { "$value": "{select.font-weight}",   "$type": "number",    "$description": "Peso: el del Select" },
+    "line-height":     { "$value": "{select.line-height}",   "$type": "number",    "$description": "Interlineado del control: el del Select. Sin él, el botón heredaba el 1,15 de normalize.css" },
     "color":           { "$value": "{select.color}",         "$type": "color",     "$description": "Texto del control" },
     "bg":              { "$value": "{select.bg}",            "$type": "color",     "$description": "Fondo del control" },
     "border-width":    { "$value": "{select.border-width}",  "$type": "dimension", "$description": "Borde rectangular, como el Select" },

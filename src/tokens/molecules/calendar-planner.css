@@ -17,6 +17,7 @@
   --calendar-planner-day-number-size: var(--spacing-5); /** Tamaño (ancho y alto) del badge con el número */
   --calendar-planner-items-gap: var(--spacing-1); /** Gap entre elementos/tags dentro de la celda */
   --calendar-planner-more-font-size: var(--font-size-1); /** Tamaño del texto '+N más' */
+  --calendar-planner-more-line-height: var(--line-height-none); /** Interlineado del texto '+N más': una línea justa. No es un control con talla (no tiene alto propio: es un rótulo pulsable dentro de la casilla), así que no bebe de control.line-height. Sin él, el botón heredaba el 1,15 de normalize.css */
   --calendar-planner-weekday-gap: var(--spacing-1); /** Aire entre el nombre del día y su número en la cabecera de la vista de semana */
   --calendar-planner-event-time-font-size: var(--font-size-1); /** Tamaño de la hora del evento en la vista de semana */
   --calendar-planner-gap: var(--calendar-gap); /** Gap entre cabecera y cuadrícula — hereda de Calendar */

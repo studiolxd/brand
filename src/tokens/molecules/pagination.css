@@ -25,6 +25,7 @@
   --pagination-summary-color: var(--color-text-on-light); /** Color del texto de total de resultados */
   --pagination-btn-height: var(--button-height); /** Altura del botón de página — la del `Button md` (40px). También su lado mínimo: la caja es cuadrada */
   --pagination-btn-font-size: var(--button-font-size); /** Tipografía del botón de página — la del `Button md` */
+  --pagination-btn-line-height: var(--button-line-height); /** Interlineado del botón de página — el del `Button`. Sin él, heredaba el 1,15 de normalize.css */
   --pagination-btn-color: var(--color-primary); /** Tinta del botón en reposo */
   --pagination-btn-border-color: var(--color-primary); /** Borde del botón en reposo */
   --pagination-btn-hover-bg: var(--color-primary); /** Relleno en hover — el outline se invierte, sin subrayado */

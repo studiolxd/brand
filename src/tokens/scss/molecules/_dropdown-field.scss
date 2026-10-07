@@ -17,6 +17,7 @@ $lxd-dropdown-field-content-gap: 0.5rem; // Entre el contenido del control y el 
 $lxd-dropdown-field-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica: la del Select
 $lxd-dropdown-field-font-size: 1rem; // Cuerpo: el del Select
 $lxd-dropdown-field-font-weight: 300; // Peso: el del Select
+$lxd-dropdown-field-line-height: 1; // Interlineado del control: el del Select. Sin él, el botón heredaba el 1,15 de normalize.css
 $lxd-dropdown-field-color: #111e30; // Texto del control
 $lxd-dropdown-field-bg: #ffffff; // Fondo del control
 $lxd-dropdown-field-border-width: 1px; // Borde rectangular, como el Select

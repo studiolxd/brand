@@ -44,6 +44,7 @@
     "items-gap":               { "$value": "{spacing.1}",                 "$type": "dimension", "$description": "Gap entre elementos/tags dentro de la celda" },
 
     "more-font-size":          { "$value": "{font-size.1}",               "$type": "dimension", "$description": "Tamaño del texto '+N más'" },
+    "more-line-height":        { "$value": "{line-height.none}",          "$type": "number",    "$description": "Interlineado del texto '+N más': una línea justa. No es un control con talla (no tiene alto propio: es un rótulo pulsable dentro de la casilla), así que no bebe de control.line-height. Sin él, el botón heredaba el 1,15 de normalize.css" },
     "more-color":              { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Color del texto '+N más'" },
     "more-hover-color":        { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Color hover del texto '+N más'" },
     "more-focus-ring-color":   { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del focus ring del botón '+N más'" },

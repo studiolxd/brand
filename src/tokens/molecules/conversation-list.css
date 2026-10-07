@@ -10,6 +10,7 @@
   --conversation-list-item-padding-block: var(--spacing-2); /** Aire vertical de cada conversación */
   --conversation-list-item-padding-inline: var(--spacing-3); /** Aire horizontal de cada conversación */
   --conversation-list-item-font-family: var(--font-family-sans); /** Familia tipográfica del título de la conversación */
+  --conversation-list-item-line-height: var(--line-height-none); /** Interlineado del título: una línea justa (el título no parte, va con elipsis), para que el alto de la fila lo marque su padding y no un interlineado heredado. Sin él, el botón heredaba el 1,15 de normalize.css */
   --conversation-list-transition-duration: var(--motion-duration-fast); /** Duración de la transición de color */
   --conversation-list-transition-easing: var(--motion-easing-default); /** Curva de la transición de color */
   --conversation-list-item-border-radius: var(--border-radius-default); /** Radio de cada conversación: recto, como todo el sistema */

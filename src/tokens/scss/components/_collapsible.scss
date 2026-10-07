@@ -6,6 +6,7 @@ $lxd-collapsible-trigger-padding-block: 0.5rem; // Aire vertical del disparador
 $lxd-collapsible-trigger-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica del disparador
 $lxd-collapsible-trigger-font-size: 1rem; // Tamaño de fuente del disparador
 $lxd-collapsible-trigger-font-weight: 300; // Peso tipográfico del disparador
+$lxd-collapsible-trigger-line-height: 1.5; // Interlineado del disparador: el del texto corriente. Con `all: unset` el botón lo heredaba de su padre; ahora es fijo y no depende de dónde se monte
 $lxd-collapsible-trigger-color: #111e30; // Tinta del disparador
 $lxd-collapsible-trigger-cursor: pointer; // Cursor del disparador
 $lxd-collapsible-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado

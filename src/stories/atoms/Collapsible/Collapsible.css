@@ -15,6 +15,7 @@
   font-family: var(--collapsible-trigger-font-family);
   font-size: var(--collapsible-trigger-font-size);
   font-weight: var(--collapsible-trigger-font-weight);
+  line-height: var(--collapsible-trigger-line-height);
   color: var(--collapsible-trigger-color);
   cursor: var(--collapsible-trigger-cursor);
   text-align: start;

@@ -134,6 +134,7 @@
   font-family: var(--calendar-font-family);
   font-size: var(--calendar-day-font-size);
   font-weight: var(--calendar-day-font-weight);
+  line-height: var(--calendar-day-line-height);
   cursor: pointer;
   transition-property: box-shadow, background-color, color;
   transition-duration: var(--calendar-transition-duration);
@@ -219,6 +220,7 @@
   font-family: var(--calendar-font-family);
   font-size: var(--calendar-year-font-size);
   font-weight: var(--calendar-day-font-weight);
+  line-height: var(--calendar-day-line-height);
   cursor: pointer;
   transition-property: box-shadow, background-color, color;
   transition-duration: var(--calendar-transition-duration);

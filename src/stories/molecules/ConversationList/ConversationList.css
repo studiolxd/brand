@@ -51,6 +51,7 @@
   color: inherit;
   font-family: var(--conversation-list-item-font-family);
   font-size: var(--conversation-list-item-font-size);
+  line-height: var(--conversation-list-item-line-height);
   text-align: start;
   cursor: pointer;
   white-space: nowrap;

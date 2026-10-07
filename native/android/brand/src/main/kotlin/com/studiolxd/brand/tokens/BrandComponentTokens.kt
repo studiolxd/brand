@@ -745,6 +745,8 @@ object BrandDropdownFieldTokens {
     val fontSize: TextUnit = 16.sp
     /** Token `dropdown-field.font-weight` — Peso: el del Select */
     val fontWeight: FontWeight = FontWeight(300)
+    /** Token `dropdown-field.line-height` — Interlineado del control: el del Select. Sin él, el botón heredaba el 1,15 de normalize.css Factor sin unidad. */
+    val lineHeight: Float = 1f
     /** Token `dropdown-field.color` — Texto del control */
     val color: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
     /** Token `dropdown-field.bg` — Fondo del control */

@@ -20,6 +20,7 @@ $lxd-calendar-weekday-color: #4a4a4a; // Color de las cabeceras de día de seman
 $lxd-calendar-day-size: 2rem; // Tamaño (ancho y alto) de los botones de día — md
 $lxd-calendar-day-font-size: 0.875rem; // Tamaño de fuente de los días
 $lxd-calendar-day-font-weight: 300; // Peso de fuente de los días
+$lxd-calendar-day-line-height: 1; // Interlineado de los días y de los años: el de los controles. Sin él, el botón heredaba el 1,15 de normalize.css
 $lxd-calendar-day-radius: 0px; // Radio de borde de los botones de día
 $lxd-calendar-day-color: #111e30; // Color de texto de los días
 $lxd-calendar-day-bg: rgba(0, 0, 0, 0); // Fondo base de los días

@@ -35,6 +35,7 @@ $lxd-calendar-planner-day-number-radius: 0px; // Radio del badge del número
 $lxd-calendar-planner-day-number-outside-color: #4a4a4a; // Color del número en días fuera del mes — hereda de Calendar
 $lxd-calendar-planner-items-gap: 0.25rem; // Gap entre elementos/tags dentro de la celda
 $lxd-calendar-planner-more-font-size: 0.875rem; // Tamaño del texto '+N más'
+$lxd-calendar-planner-more-line-height: 1; // Interlineado del texto '+N más': una línea justa. No es un control con talla (no tiene alto propio: es un rótulo pulsable dentro de la casilla), así que no bebe de control.line-height. Sin él, el botón heredaba el 1,15 de normalize.css
 $lxd-calendar-planner-more-color: #4a4a4a; // Color del texto '+N más'
 $lxd-calendar-planner-more-hover-color: #111e30; // Color hover del texto '+N más'
 $lxd-calendar-planner-more-focus-ring-color: #111e30; // Color del focus ring del botón '+N más'

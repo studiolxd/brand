@@ -9,6 +9,7 @@
     "item-border-radius":    { "$value": "{border-radius.default}",     "$type": "dimension", "$description": "Radio de cada conversación: recto, como todo el sistema" },
     "item-font-family":      { "$value": "{font-family.sans}",          "$type": "string",    "$description": "Familia tipográfica del título de la conversación" },
     "item-font-size":        { "$value": "{text.font-size}",            "$type": "dimension", "$description": "El título es texto corriente: hereda el cuerpo de la superficie" },
+    "item-line-height":      { "$value": "{line-height.none}",          "$type": "number",    "$description": "Interlineado del título: una línea justa (el título no parte, va con elipsis), para que el alto de la fila lo marque su padding y no un interlineado heredado. Sin él, el botón heredaba el 1,15 de normalize.css" },
     "item-color":            { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Tinta de una conversación en reposo: el gris de texto secundario del sistema, no `grey-dark` (que no es un color de texto)" },
     "item-hover-color":      { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Tinta de la conversación bajo el puntero: el hover no pinta relleno (regla de Colores), sube del gris de texto secundario a tinta plena" },
     "item-active-color":     { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Tinta de la conversación abierta: tinta plena. La conversación abierta se dice con tinta y peso, no con un fondo" },

@@ -13,6 +13,7 @@
   --collapsible-transition-easing: var(--motion-easing-default); /** Easing de abrir y cerrar */
   --collapsible-trigger-font-family: var(--control-font-family); /** Familia tipográfica del disparador */
   --collapsible-trigger-font-size: var(--control-font-size); /** Tamaño de fuente del disparador */
+  --collapsible-trigger-line-height: var(--text-line-height); /** Interlineado del disparador: el del texto corriente. Con `all: unset` el botón lo heredaba de su padre; ahora es fijo y no depende de dónde se monte */
   --collapsible-trigger-color: var(--color-text-on-light); /** Tinta del disparador */
   --collapsible-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
   --collapsible-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco */

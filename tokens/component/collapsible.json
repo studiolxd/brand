@@ -5,6 +5,7 @@
     "trigger-font-family":    { "$value": "{control.font-family}",    "$type": "string",    "$description": "Familia tipográfica del disparador" },
     "trigger-font-size":      { "$value": "{control.font-size}",      "$type": "dimension", "$description": "Tamaño de fuente del disparador" },
     "trigger-font-weight":    { "$value": "{control.font-weight}",    "$type": "number",    "$description": "Peso tipográfico del disparador" },
+    "trigger-line-height":    { "$value": "{text.line-height}",       "$type": "number",    "$description": "Interlineado del disparador: el del texto corriente. Con `all: unset` el botón lo heredaba de su padre; ahora es fijo y no depende de dónde se monte" },
     "trigger-color":          { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Tinta del disparador" },
     "trigger-cursor":         { "$value": "pointer",                  "$type": "string",    "$description": "Cursor del disparador" },
     "disabled-cursor":        { "$value": "not-allowed",              "$type": "string",    "$description": "Cursor cuando está deshabilitado" },

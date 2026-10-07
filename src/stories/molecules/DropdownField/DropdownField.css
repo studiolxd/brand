@@ -36,6 +36,7 @@
   font-family: var(--dropdown-field-font-family);
   font-size: var(--dropdown-field-font-size);
   font-weight: var(--dropdown-field-font-weight);
+  line-height: var(--dropdown-field-line-height);
   color: var(--dropdown-field-color);
   background-color: var(--dropdown-field-bg);
   border: var(--dropdown-field-border-width) solid var(--dropdown-field-border-color);

@@ -46,6 +46,7 @@
   font-family: var(--input-font-family);
   font-size: var(--input-font-size);
   font-weight: var(--input-font-weight);
+  line-height: var(--input-line-height);
   color: var(--input-color);
   background: none;
   border: none;
@@ -122,6 +123,7 @@
   font-family: var(--input-font-family);
   font-size: var(--input-font-size);
   font-weight: var(--input-font-weight);
+  line-height: var(--input-line-height);
   color: var(--input-color);
   background: none;
   border: none;

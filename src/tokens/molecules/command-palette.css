@@ -20,6 +20,7 @@
   --command-palette-item-gap: var(--spacing-2); /** Gap entre icono y texto del ítem */
   --command-palette-item-font-size: var(--font-size-2); /** Tamaño de texto de los ítems */
   --command-palette-item-icon-size: var(--font-size-4); /** Talla del icono de los ítems */
+  --command-palette-input-line-height: var(--input-line-height); /** Interlineado del buscador: el del Input. Sin él, heredaba el 1,15 de normalize.css */
   --command-palette-input-border-width: var(--border-width-default); /** Grosor de la línea bajo el buscador */
   --command-palette-input-placeholder-color: var(--color-text-placeholder-on-light); /** Color del placeholder del buscador */
   --command-palette-input-focus-ring-color: var(--color-primary); /** Color del anillo de foco del buscador */

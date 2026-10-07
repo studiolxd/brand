@@ -26,6 +26,7 @@
   --dropdown-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
   --dropdown-field-padding-inline: var(--select-padding-inline); /** Padding inline del control: el del Select */
   --dropdown-field-font-weight: var(--select-font-weight); /** Peso: el del Select */
+  --dropdown-field-line-height: var(--select-line-height); /** Interlineado del control: el del Select. Sin él, el botón heredaba el 1,15 de normalize.css */
   --dropdown-field-color: var(--select-color); /** Texto del control */
   --dropdown-field-border-width: var(--select-border-width); /** Borde rectangular, como el Select */
   --dropdown-field-border-color: var(--select-border-color); /** Color del borde */

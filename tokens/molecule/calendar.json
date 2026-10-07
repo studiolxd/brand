@@ -23,6 +23,7 @@
     "day-size":                  { "$value": "{spacing.6}",                "$type": "dimension", "$description": "Tamaño (ancho y alto) de los botones de día — md" },
     "day-font-size":             { "$value": "{font-size.1}",              "$type": "dimension", "$description": "Tamaño de fuente de los días" },
     "day-font-weight":           { "$value": "{font-weight.default}",      "$type": "number",    "$description": "Peso de fuente de los días" },
+    "day-line-height":           { "$value": "{control.line-height}",      "$type": "number",    "$description": "Interlineado de los días y de los años: el de los controles. Sin él, el botón heredaba el 1,15 de normalize.css" },
     "day-radius":                { "$value": "{border-radius.default}",         "$type": "dimension", "$description": "Radio de borde de los botones de día" },
     "day-color":                 { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color de texto de los días" },
     "day-bg":                    { "$value": "transparent",                "$type": "color",     "$description": "Fondo base de los días" },
