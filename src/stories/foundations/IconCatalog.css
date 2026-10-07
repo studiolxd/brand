@@ -15,14 +15,14 @@
   padding-block: var(--spacing-4);
   padding-inline: var(--spacing-2);
   border: 1px solid #efefef;
-  color: var(--color-text-on-light);
+  color: var(--text-color);
 }
 .icon-catalog__item code,
 .icon-sizes__item code,
 .icon-safe-area__item code {
   font-family: ui-monospace, monospace;
   font-size: 12px;
-  color: #555;
+  color: var(--text-inline-muted-color);
 }
 .icon-sizes {
   list-style: none;
@@ -38,7 +38,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-2);
-  color: var(--color-text-on-light);
+  color: var(--text-color);
 }
 
 /* Retícula del área útil: el lienzo de 24 es la caja del icono (64px a talla
@@ -60,7 +60,7 @@
   gap: var(--spacing-2);
   padding-block: var(--spacing-4);
   padding-inline: var(--spacing-2);
-  color: var(--color-text-on-light);
+  color: var(--text-color);
 }
 .icon-safe-area__canvas {
   position: relative;

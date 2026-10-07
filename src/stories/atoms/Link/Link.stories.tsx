@@ -4,7 +4,8 @@ import { Link } from './Link';
 import { Paragraph } from '../Paragraph/Paragraph';
 import { Stack } from '../Stack/Stack';
 import { PageIntro } from '../../molecules/PageIntro/PageIntro';
-import { SOLO_OSCURO } from '../../utils/chromaticModes';
+import { SOLO_CLARO, SOLO_OSCURO } from '../../utils/chromaticModes';
+import { SIN_LINK_IN_TEXT_BLOCK } from '../../utils/a11y';
 
 const meta: Meta<typeof Link> = {
   title: 'Atoms/Link',
@@ -25,6 +26,10 @@ export const PorDefecto: Story = {};
  * amarillo no se distingue lo bastante de la tinta blanca que lo rodea.
  */
 export const EnTexto: Story = {
+  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
+  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
+  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
+  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   render: () => (
     <Paragraph>
       Los proyectos se organizan por cliente; consulta <Link href="#">la guía de organización</Link> antes de crear uno.
@@ -247,7 +252,10 @@ export const ContratoInk: Story = {
 
 export const ContratoAccent1: Story = {
   name: 'Test — el tono accent-1 lleva su clase y, en claro, el color del tono por defecto',
-  tags: ['!dev'],
+  tags: ['!dev', 'solo-claro'],
+  // Comprueba el valor en claro; el oscuro lo cubre su pareja `SOLO_OSCURO`.
+  // Fuera del modo oscuro de Chromatic y del proyecto `storybook-dark` (D43).
+  parameters: { chromatic: SOLO_CLARO },
   render: () => (
     <>
       <Link href="#novedades" tone="accent-1" data-testid="accent-1">Descubre las novedades</Link>{' '}

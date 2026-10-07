@@ -6,6 +6,7 @@ import { PasswordField } from '../../molecules/PasswordField/PasswordField';
 import { CheckboxField } from '../../molecules/CheckboxField/CheckboxField';
 import { Button } from '../../atoms/Button/Button';
 import { Link } from '../../atoms/Link/Link';
+import { SIN_LINK_IN_TEXT_BLOCK } from '../../utils/a11y';
 
 const HINT = 'Al menos 8 caracteres, con una letra minúscula, una letra mayúscula, un número y un símbolo: ! @ # $ % ^ & * ( ) - _ = + [ ] { } ; : , . ?';
 
@@ -55,6 +56,15 @@ export default meta;
 type Story = StoryObj<typeof Registro>;
 
 /** Correo y contraseña con la política completa en la ayuda. Es `/sign-up` de hub. */
-export const PorDefecto: Story = {};
-export const Completa: Story = { args: { socialProviders: ['google', 'github'], captcha: true, terms: true } };
-export const ConErrorDePolitica: Story = { args: { passwordError: true } };
+// a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
+// dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
+// línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
+export const PorDefecto: Story = { parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK } };
+// a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
+// dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
+// línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
+export const Completa: Story = { args: { socialProviders: ['google', 'github'], captcha: true, terms: true }, parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK } };
+// a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
+// dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
+// línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
+export const ConErrorDePolitica: Story = { args: { passwordError: true }, parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK } };

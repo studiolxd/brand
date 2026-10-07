@@ -9,6 +9,8 @@ const meta: Meta<typeof EmailLayout> = {
   title: 'Email/EmailLayout',
   component: EmailLayout,
   // El correo no gestiona modo oscuro (ver § «El correo» en CLAUDE.md).
+  // Sin superficie oscura: fuera del proyecto de stories en oscuro (D43).
+  tags: ['solo-claro'],
   parameters: { layout: 'fullscreen', chromatic: SOLO_CLARO },
   args: {
     preview: 'Confirma tu dirección para terminar de crear tu cuenta',

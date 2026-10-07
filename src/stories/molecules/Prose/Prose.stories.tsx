@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { Prose } from './Prose';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
+import { SIN_LINK_IN_TEXT_BLOCK } from '../../utils/a11y';
 
 const meta = {
   title: 'Molecules/Prose',
@@ -73,6 +74,10 @@ const documento = (
 
 export const PorDefecto: Story = {
   name: 'Por defecto',
+  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
+  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
+  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
+  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   args: { as: 'article', children: documento },
 };
 
@@ -82,6 +87,10 @@ export const PorDefecto: Story = {
  */
 export const TallaPequena: Story = {
   name: 'Talla sm',
+  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
+  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
+  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
+  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   args: { as: 'article', size: 'sm', children: documento },
 };
 
@@ -91,6 +100,10 @@ export const TallaPequena: Story = {
  */
 export const SinMedida: Story = {
   name: 'Sin medida de lectura',
+  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
+  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
+  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
+  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   args: { as: 'article', measure: false, children: documento },
 };
 
@@ -101,6 +114,10 @@ export const SinMedida: Story = {
 export const TestSemantica: Story = {
   name: 'Test — semántica y variantes',
   tags: ['!dev'],
+  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
+  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
+  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
+  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   args: { as: 'article', size: 'sm', measure: false, children: documento },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

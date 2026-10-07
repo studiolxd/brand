@@ -178,7 +178,7 @@ export const Controlled: Story = {
           progress={progress}
           ariaLabel="Subir archivos"
         />
-        <p style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: '#767676' }}>
+        <p style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: 'var(--text-inline-muted-color)' }}>
           {files.length} archivo(s) válido(s) seleccionado(s)
         </p>
       </div>

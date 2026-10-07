@@ -185,8 +185,9 @@ const preview: Preview = {
       // la a11y entera, con `parameters: { a11y: { config: { rules: [{ id,
       // enabled: false }] } } }` y un comentario encima que diga si es una
       // decisión pendiente del operador (contraste: no se inventan colores) o
-      // un falso positivo, y por qué. El runner solo pasa en claro: el oscuro
-      // de cada story (modo `oscuro` de Chromatic) no lo audita.
+      // un falso positivo, y por qué. Corre en las dos superficies (D43): el
+      // proyecto `storybook` en claro y `storybook-dark` con el global
+      // `backgrounds` en oscuro (`vite.config.ts`), salvo lo `SOLO_CLARO`.
       test: 'error',
       // La ÚNICA exclusión global (D42), y es de un nodo de terceros, no de
       // una regla: los centinelas de foco de Base UI

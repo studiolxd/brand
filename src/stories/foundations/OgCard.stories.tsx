@@ -9,7 +9,9 @@ import { SOLO_CLARO } from '../utils/chromaticModes';
 const meta: Meta<typeof OgPreview> = {
   title: 'Foundations/Tarjeta social',
   component: OgPreview,
-  // La tarjeta social es una imagen de colores fijos: no tiene superficie oscura.
+  // La tarjeta social es una imagen de colores fijos: no tiene superficie oscura
+  // (y por eso queda fuera del proyecto de stories en oscuro, D43).
+  tags: ['solo-claro'],
   parameters: {
     layout: 'padded',
     chromatic: SOLO_CLARO,

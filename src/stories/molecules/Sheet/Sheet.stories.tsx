@@ -5,7 +5,7 @@ import { Button } from '../../atoms/Button/Button';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Sheet } from './Sheet';
 import { SiteShell } from '../../sections/SiteShell/SiteShell';
-import { SOLO_OSCURO } from '../../utils/chromaticModes';
+import { SOLO_CLARO, SOLO_OSCURO } from '../../utils/chromaticModes';
 import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
 import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
 
@@ -260,7 +260,10 @@ export const ContratoSinHoverEnCerrar: Story = {
 /** Test: el panel del Sheet es completamente opaco en reposo, en claro y en oscuro. */
 export const ContratoPanelOpaco: Story = {
   name: 'Test — panel opaco en reposo',
-  tags: ['!dev'],
+  tags: ['!dev', 'solo-claro'],
+  // Comprueba el valor en claro; el oscuro lo cubre su pareja `SOLO_OSCURO`.
+  // Fuera del modo oscuro de Chromatic y del proyecto `storybook-dark` (D43).
+  parameters: { chromatic: SOLO_CLARO },
   args: { open: true, onOpenChange: () => {}, title: 'Detalle', children: null },
   render: () => (
     <Sheet open onOpenChange={fn()} title="Detalle">

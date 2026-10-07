@@ -242,7 +242,7 @@ async function comprobarTintas() {
 /** Test: el aspa y el título leen sobre el relleno de cada tipo, en claro. */
 export const ContratoTintasClaro: Story = {
   name: 'Test — tintas del aviso en claro',
-  tags: ['!dev'],
+  tags: ['!dev', 'solo-claro'],
   parameters: { chromatic: SOLO_CLARO },
   render: () => <Button onClick={() => toast('Neutro')}>Lanzar</Button>,
   play: comprobarTintas,
