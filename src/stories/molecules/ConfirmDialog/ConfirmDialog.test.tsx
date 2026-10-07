@@ -338,3 +338,12 @@ describe('el cromo sale del catálogo y `confirmLabel` no', () => {
     );
   });
 });
+
+describe('ConfirmDialog — className', () => {
+  it('va al panel del diálogo, como en Modal, y no al pie (D65)', () => {
+    renderDialog({ className: 'mi-confirmacion' });
+    const dialog = screen.getByRole('dialog');
+    expect(dialog).toHaveClass('modal__content', 'mi-confirmacion');
+    expect(document.querySelector('.confirm-dialog__actions')).not.toHaveClass('mi-confirmacion');
+  });
+});

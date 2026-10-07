@@ -98,7 +98,12 @@ export interface ConfirmDialogBaseProps {
   closeLabel?: string;
   /** Nodo donde montar el portal, como en `Modal`. */
   container?: ModalProps['container'];
-  /** Se añade DESPUÉS de las clases propias del pie del diálogo. */
+  /**
+   * Va al **panel** del diálogo (`modal__content`), como en `Modal`: el
+   * diálogo es controlado y no pinta disparador propio (D65; hasta la v50 iba
+   * al pie). Se añade DESPUÉS de las clases propias. Es un enganche para el
+   * producto, no la vía de personalizar la cara del diálogo: eso va por tokens.
+   */
   className?: string;
 }
 
@@ -255,7 +260,8 @@ export function ConfirmDialog({
       {...(description != null ? { description } : {})}
       // El pie lo reparte `Modal`: fila a la derecha, y apilado a todo el
       // ancho con la acción principal arriba por debajo del punto de ruptura.
-      footerClassName={['confirm-dialog__actions', className].filter(Boolean).join(' ')}
+      footerClassName="confirm-dialog__actions"
+      className={className}
       footer={
         <>
           <Button ref={cancelRef} variant="outline" onClick={handleCancel} disabled={pending}>

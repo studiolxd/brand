@@ -191,6 +191,44 @@ describe('ColorPicker anclado sin disparador', () => {
   });
 });
 
+describe('ColorPicker — className (D65)', () => {
+  it('con la muestra propia, va a la muestra y no al panel', async () => {
+    render(<ColorPicker value="#baabff" className="mi-color" defaultOpen />);
+    const boton = screen.getByRole('button', { name: 'Elegir color' });
+    expect(boton).toHaveClass('color-picker__trigger', 'mi-color');
+    const panel = await screen.findByRole('dialog');
+    expect(panel).not.toHaveClass('mi-color');
+  });
+
+  it('con disparador del consumidor, va al panel', async () => {
+    render(
+      <ColorPicker
+        aria-label="Color del texto"
+        value="#baabff"
+        className="mi-color"
+        defaultOpen
+        trigger={<Toggle iconOnly aria-label="Color del texto">A</Toggle>}
+      />,
+    );
+    expect(screen.getByRole('button', { name: 'Color del texto' })).not.toHaveClass('mi-color');
+    expect(await screen.findByRole('dialog')).toHaveClass('color-picker__popover', 'mi-color');
+  });
+
+  it('anclado sin disparador, va al panel', async () => {
+    function Anclado() {
+      const celda = useRef<HTMLDivElement>(null);
+      return (
+        <>
+          <div ref={celda}>A1</div>
+          <ColorPicker dialogLabel="Fondo" anchor={celda} open className="mi-color" />
+        </>
+      );
+    }
+    render(<Anclado />);
+    expect(await screen.findByRole('dialog', { name: 'Fondo' })).toHaveClass('mi-color');
+  });
+});
+
 describe('ColorPickerField', () => {
   it('la etiqueta nombra el disparador y la ayuda lo describe', () => {
     render(<ColorPickerField label="Color de fondo" helperText="El de la portada" value="#ffffff" />);

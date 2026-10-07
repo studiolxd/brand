@@ -152,7 +152,13 @@ export interface ColorPickerProps {
    * a donde estaba antes de abrir.
    */
   anchor?: PopoverAnchor;
-  /** Se añade DESPUÉS de las clases propias. */
+  /**
+   * Va al **disparador** cuando lo pinta el selector (la muestra) y al
+   * **panel** cuando el disparador lo trae el consumidor (`trigger`) o no hay
+   * ninguno (`anchor`): un disparador propio ya lleva sus clases (D65; hasta
+   * la v50 iba al contenedor). Se añade DESPUÉS de las clases propias. El
+   * panel se personaliza con tokens.
+   */
   className?: string;
 }
 
@@ -300,8 +306,11 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(funct
     'color-picker',
     size !== 'md' ? `color-picker--${size}` : '',
     error ? 'color-picker--error' : '',
-    className ?? '',
   ].filter(Boolean).join(' ');
+
+  // El selector pinta su disparador solo sin `trigger` y sin `anchor`: entonces
+  // `className` va a la muestra; si no, al panel.
+  const paintsTrigger = customTrigger === undefined && anchor === undefined;
 
   const describedBy = [valueId, ariaDescribedBy].filter(Boolean).join(' ');
 
@@ -310,7 +319,7 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(funct
       ref={ref}
       id={id}
       type="button"
-      className="color-picker__trigger"
+      className={['color-picker__trigger', paintsTrigger ? className : undefined].filter(Boolean).join(' ')}
       disabled={disabled}
       aria-label={ariaLabel ?? (ariaLabelledBy ? undefined : t('trigger'))}
       aria-labelledby={ariaLabel ? undefined : ariaLabelledBy}
@@ -374,7 +383,7 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(funct
         side="bottom"
         align="start"
         initialFocus={areaThumbRef}
-        className="color-picker__popover"
+        className={['color-picker__popover', paintsTrigger ? undefined : className].filter(Boolean).join(' ')}
       >
         <div ref={writePanelProperties} className="color-picker__panel">
           <ColorArea
