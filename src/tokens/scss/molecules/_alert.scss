@@ -14,7 +14,7 @@ $lxd-alert-border-color: #ffffff; // Borde por defecto — blanco. Sobre página
 $lxd-alert-title-font-size: 1rem; // El título hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
 $lxd-alert-title-font-weight: 500; // Peso del título
 $lxd-alert-title-line-height: 1.3; // Interlineado del título — el de un rótulo corto
-$lxd-alert-title-letter-spacing: 0em; // Tracking del título — el del cuerpo (0em). El título del `Alert` es un `<p>`, no un encabezado, así que no lleva el tracking de los títulos; el token lo fija para que no dependa del elemento. El `Toast`, cuyo título sí es un `<h2>`, lo cambia por el suyo (`toast.title-letter-spacing`)
+$lxd-alert-title-letter-spacing: -0.02em; // Tracking del título (−0,02em): el de los títulos (`text.h2.letter-spacing`), aunque el título del `Alert` sea un `<p>`. Es el mismo que el del `Toast` (`toast.title-letter-spacing` hereda de aquí), para que los dos avisos pinten el título igual; el token lo fija para que no dependa del elemento
 $lxd-alert-title-color: #ffffff; // Texto blanco sobre el relleno prusia
 $lxd-alert-description-font-size: 1rem; // La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
 $lxd-alert-description-line-height: 1.5; // Interlineado de la descripción — el del cuerpo

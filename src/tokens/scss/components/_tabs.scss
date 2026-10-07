@@ -7,6 +7,7 @@ $lxd-tabs-list-gap: 0.25rem; // Gap entre triggers
 $lxd-tabs-trigger-padding-block: 0.75rem; // Padding vertical del trigger
 $lxd-tabs-trigger-padding-inline: 1rem; // Padding horizontal del trigger
 $lxd-tabs-trigger-font-size: 1rem; // Tamaño de fuente del trigger
+$lxd-tabs-trigger-line-height: 1.15; // Interlineado del trigger (1,15). Es el que el `<button>` heredaba de `normalize.css` sin declararlo; el token lo fija para que no dependa de la hoja de terceros. No hay primitivo de 1,15 en `line-height.*`: es medida propia del componente
 $lxd-tabs-trigger-font-weight: 300; // Peso de fuente por defecto
 $lxd-tabs-trigger-active-weight: 500; // Peso de fuente del tab activo
 $lxd-tabs-trigger-color: #4a4a4a; // Color del trigger inactivo — es texto, nunca grey-dark

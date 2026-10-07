@@ -83,7 +83,7 @@ function Invitacion({ state, socialProviders, surface }: Args) {
       >
         {/* El correo lo fija la invitación: se ve, pero no se toca. */}
         <InputField id="invitation-email" label="Correo electrónico" type="email" value="invitada@studiolxd.com" readOnly disabled />
-        <PasswordField id="invitation-password" label="Contraseña" labelHidden={false} autoComplete="new-password" helperText={HINT} />
+        <PasswordField id="invitation-password" label="Contraseña" autoComplete="new-password" helperText={HINT} />
       </Form>
     </AuthPage>
   );

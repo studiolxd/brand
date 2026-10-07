@@ -24,7 +24,7 @@ function Registro({ socialProviders, captcha, terms, passwordError, surface }: A
         alternatives={socialProviders.length ? <SocialButtons providers={socialProviders} /> : undefined}
       >
         <InputField id="sign-up-email" label="Correo electrónico" type="email" autoComplete="email" placeholder="Escribe tu correo electrónico" />
-        <PasswordField id="sign-up-password" label="Contraseña" labelHidden={false} autoComplete="new-password" helperText={HINT} errorMessage={passwordError ? 'Incluye al menos un símbolo: ! @ # $ % ^ & * ( ) - _ = + [ ] { } ; : , . ?' : undefined} />
+        <PasswordField id="sign-up-password" label="Contraseña" autoComplete="new-password" helperText={HINT} errorMessage={passwordError ? 'Incluye al menos un símbolo: ! @ # $ % ^ & * ( ) - _ = + [ ] { } ; : , . ?' : undefined} />
         {terms && (
           <CheckboxField
             id="sign-up-terms"

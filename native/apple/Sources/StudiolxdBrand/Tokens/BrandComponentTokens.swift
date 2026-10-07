@@ -192,6 +192,8 @@ public enum BrandButtonTokens {
     public static let textDisabledColor: Color = Color(brandLight: Color(brandHex: 0x4A4A4A), dark: Color(brandHex: 0xD0D0D0))
     /// Token `button.text.padding-inline` — Inline (horizontal) padding — 0 para uso inline en texto
     public static let textPaddingInline: CGFloat = 0
+    /// Token `button.text.padding-block-start` — Padding superior — 0. Anula el `padding-block` de 1px que el agente de usuario pone a `<button>`: sin él, la variante como botón medía 21px y como enlace (`href`) 20px. La caja es el alto de línea más la separación de la línea (`underline-offset`)
+    public static let textPaddingBlockStart: CGFloat = 0
     /// Token `button.text.focus-ring-width` — Focus ring width
     public static let textFocusRingWidth: CGFloat = 2
     /// Token `button.text.focus-ring-offset` — Focus ring offset
@@ -1284,8 +1286,8 @@ public enum BrandAlertTokens {
     public static let titleFontWeight: Int = 500
     /// Token `alert.title-line-height` — Interlineado del título — el de un rótulo corto
     public static let titleLineHeight: CGFloat = 1.3
-    /// Token `alert.title-letter-spacing` — Tracking del título — el del cuerpo (0em). El título del `Alert` es un `<p>`, no un encabezado, así que no lleva el tracking de los títulos; el token lo fija para que no dependa del elemento. El `Toast`, cuyo título sí es un `<h2>`, lo cambia por el suyo (`toast.title-letter-spacing`) Fracción del tamaño de fuente del propio componente (em).
-    public static let titleLetterSpacing: CGFloat = 0
+    /// Token `alert.title-letter-spacing` — Tracking del título (−0,02em): el de los títulos (`text.h2.letter-spacing`), aunque el título del `Alert` sea un `<p>`. Es el mismo que el del `Toast` (`toast.title-letter-spacing` hereda de aquí), para que los dos avisos pinten el título igual; el token lo fija para que no dependa del elemento Fracción del tamaño de fuente del propio componente (em).
+    public static let titleLetterSpacing: CGFloat = -0.02
     /// Token `alert.title-color` — Texto blanco sobre el relleno prusia
     public static let titleColor: Color = Color(brandLight: Color(brandHex: 0xFFFFFF), dark: Color(brandHex: 0x111E30))
     /// Token `alert.description-font-size` — La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
@@ -1530,7 +1532,7 @@ public enum BrandToastTokens {
     public static let insetBlock: CGFloat = 24
     /// Token `toast.inset-inline` — Distancia de la pila al borde izquierdo o derecho de la ventana (24px)
     public static let insetInline: CGFloat = 24
-    /// Token `toast.title-letter-spacing` — Tracking del título del aviso (−0,02em): el de un `<h2>`, que es el elemento que da el motor al título (`Toast.Title`). El token lo fija en la tarjeta para que no dependa de la herencia de `base.css` ni del nivel de encabezado; sustituye al `alert.title-letter-spacing` del `Alert`, cuyo título es un `<p>` Fracción del tamaño de fuente del propio componente (em).
+    /// Token `toast.title-letter-spacing` — Tracking del título del aviso (−0,02em): hereda el del `Alert` (`alert.title-letter-spacing`, el de un `<h2>`), así que los dos avisos pintan el título igual. El token lo fija en la tarjeta para que no dependa de la herencia de `base.css` ni del nivel de encabezado del `Toast.Title` Fracción del tamaño de fuente del propio componente (em).
     public static let titleLetterSpacing: CGFloat = -0.02
     /// Token `toast.gap` — Aire entre avisos cuando la pila está desplegada (8px). El `Toaster` lo puede sobreescribir con su prop `gap`
     public static let gap: CGFloat = 8
@@ -1916,6 +1918,8 @@ public enum BrandTabsTokens {
     public static let triggerPaddingInline: CGFloat = 16
     /// Token `tabs.trigger-font-size` — Tamaño de fuente del trigger
     public static let triggerFontSize: CGFloat = 16
+    /// Token `tabs.trigger-line-height` — Interlineado del trigger (1,15). Es el que el `<button>` heredaba de `normalize.css` sin declararlo; el token lo fija para que no dependa de la hoja de terceros. No hay primitivo de 1,15 en `line-height.*`: es medida propia del componente
+    public static let triggerLineHeight: CGFloat = 1.15
     /// Token `tabs.trigger-font-weight` — Peso de fuente por defecto
     public static let triggerFontWeight: Int = 300
     /// Token `tabs.trigger-active-weight` — Peso de fuente del tab activo

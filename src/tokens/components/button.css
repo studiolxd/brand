@@ -15,6 +15,7 @@
   --button-outline-bg: rgba(0, 0, 0, 0); /** Background */
   --button-text-border-width: 0; /** Border width — 0 para uso inline en texto */
   --button-text-padding-inline: 0; /** Inline (horizontal) padding — 0 para uso inline en texto */
+  --button-text-padding-block-start: 0; /** Padding superior — 0. Anula el `padding-block` de 1px que el agente de usuario pone a `<button>`: sin él, la variante como botón medía 21px y como enlace (`href`) 20px. La caja es el alto de línea más la separación de la línea (`underline-offset`) */
   --button-text-bg: rgba(0, 0, 0, 0); /** Background — always transparent */
   --button-text-border: rgba(0, 0, 0, 0); /** Border color — transparent */
   --button-text-hover-bg: rgba(0, 0, 0, 0); /** Hover background — stays transparent */

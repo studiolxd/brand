@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import { describe, it, expect, vi, afterEach } from 'vitest';
-import { render as renderRaw, screen, waitFor, type RenderOptions } from '@testing-library/react';
+import { render as renderRaw, screen, type RenderOptions } from '@testing-library/react';
 import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
 import { brandMessagesFixture } from '../../../../.storybook/brandMessagesFixture';
 
@@ -80,19 +80,31 @@ describe('AsyncSelect — búsqueda', () => {
   });
 
   it('rebota las teclas: una sola llamada a onSearch por ráfaga', async () => {
-    const user = userEvent.setup();
-    const onSearch = vi.fn(async (): Promise<AsyncSelectOption[]> => []);
+    // Reloj falso: con el real y un rebote de 40ms, una máquina cargada separa
+    // dos teclas más que el rebote y salen tres llamadas en vez de dos. El
+    // reloj avanza también solo (`shouldAdvanceTime`), porque Testing Library
+    // espera con `setTimeout` entre acciones; por eso el rebote es largo (1s):
+    // ninguna ráfaga llega a él en tiempo real, y el test lo cruza a mano.
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    try {
+      const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+      const onSearch = vi.fn(async (): Promise<AsyncSelectOption[]> => []);
 
-    render(<AsyncSelect onSearch={onSearch} debounceMs={40} placeholder="Buscar…" aria-label="Buscar" />);
+      render(<AsyncSelect onSearch={onSearch} debounceMs={1000} placeholder="Buscar…" aria-label="Buscar" />);
 
-    await user.click(screen.getByRole('combobox'));
-    // la apertura ya busca con la consulta vacía
-    await waitFor(() => expect(onSearch).toHaveBeenCalledTimes(1));
+      await user.click(screen.getByRole('combobox'));
+      // la apertura ya busca con la consulta vacía, sin rebote
+      await vi.advanceTimersByTimeAsync(0);
+      expect(onSearch).toHaveBeenCalledTimes(1);
 
-    await user.keyboard('abc');
-    await espera(120);
-    expect(onSearch).toHaveBeenCalledTimes(2);
-    expect(onSearch).toHaveBeenLastCalledWith('abc');
+      await user.keyboard('abc');
+      expect(onSearch).toHaveBeenCalledTimes(1);
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(onSearch).toHaveBeenCalledTimes(2);
+      expect(onSearch).toHaveBeenLastCalledWith('abc');
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it('no pinta nada tras desmontar con una búsqueda en vuelo', async () => {

@@ -11,7 +11,7 @@ import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 const campos = (
   <>
     <InputField id="form-email" label="Correo electrónico" type="email" autoComplete="email" />
-    <PasswordField id="form-password" label="Contraseña" labelHidden={false} autoComplete="current-password" helperText="Entre 8 y 128 caracteres" />
+    <PasswordField id="form-password" label="Contraseña" autoComplete="current-password" helperText="Entre 8 y 128 caracteres" />
   </>
 );
 

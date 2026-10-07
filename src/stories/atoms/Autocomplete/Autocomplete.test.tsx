@@ -201,14 +201,25 @@ describe('Autocomplete — teclado', () => {
 
 describe('Autocomplete — sugerencias asíncronas', () => {
   it('rebota las teclas: una sola llamada a onSearch por ráfaga', async () => {
-    const user = userEvent.setup();
-    const onSearch = vi.fn(async () => PRODUCTOS);
-    render(<Autocomplete onSearch={onSearch} debounceMs={40} aria-label="Producto" />);
-    await user.type(screen.getByRole('combobox'), 'lec');
-    await espera(120);
-    expect(onSearch).toHaveBeenCalledTimes(1);
-    expect(onSearch).toHaveBeenCalledWith('lec');
-    expect(await screen.findAllByRole('option')).toHaveLength(3);
+    // Reloj falso: con el real y un rebote de 40ms, una máquina cargada separa
+    // dos teclas más que el rebote y salen varias llamadas. El reloj avanza
+    // también solo (`shouldAdvanceTime`), porque Testing Library espera con
+    // `setTimeout` entre acciones; por eso el rebote es largo (1s): ninguna
+    // ráfaga llega a él en tiempo real, y el test lo cruza a mano.
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    try {
+      const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+      const onSearch = vi.fn(async () => PRODUCTOS);
+      render(<Autocomplete onSearch={onSearch} debounceMs={1000} aria-label="Producto" />);
+      await user.type(screen.getByRole('combobox'), 'lec');
+      expect(onSearch).not.toHaveBeenCalled();
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(onSearch).toHaveBeenCalledTimes(1);
+      expect(onSearch).toHaveBeenCalledWith('lec');
+      expect(await screen.findAllByRole('option')).toHaveLength(3);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it('descarta la respuesta que llega fuera de orden', async () => {

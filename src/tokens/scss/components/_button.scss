@@ -122,6 +122,7 @@ $lxd-button-text-transition-easing: ease; // Transition easing
 $lxd-button-text-disabled-cursor: not-allowed; // Cursor when disabled
 $lxd-button-text-disabled-color: #4a4a4a; // Text color when disabled — light surface
 $lxd-button-text-padding-inline: 0; // Inline (horizontal) padding — 0 para uso inline en texto
+$lxd-button-text-padding-block-start: 0; // Padding superior — 0. Anula el `padding-block` de 1px que el agente de usuario pone a `<button>`: sin él, la variante como botón medía 21px y como enlace (`href`) 20px. La caja es el alto de línea más la separación de la línea (`underline-offset`)
 $lxd-button-text-focus-ring-width: 2px; // Focus ring width
 $lxd-button-text-focus-ring-style: solid; // Focus ring border style
 $lxd-button-text-focus-ring-offset: 1px; // Focus ring offset

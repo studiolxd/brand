@@ -1059,6 +1059,7 @@ html.dark {
   --button-outline-bg: rgba(0, 0, 0, 0); /** Background */
   --button-text-border-width: 0; /** Border width — 0 para uso inline en texto */
   --button-text-padding-inline: 0; /** Inline (horizontal) padding — 0 para uso inline en texto */
+  --button-text-padding-block-start: 0; /** Padding superior — 0. Anula el `padding-block` de 1px que el agente de usuario pone a `<button>`: sin él, la variante como botón medía 21px y como enlace (`href`) 20px. La caja es el alto de línea más la separación de la línea (`underline-offset`) */
   --button-text-bg: rgba(0, 0, 0, 0); /** Background — always transparent */
   --button-text-border: rgba(0, 0, 0, 0); /** Border color — transparent */
   --button-text-hover-bg: rgba(0, 0, 0, 0); /** Hover background — stays transparent */
@@ -3551,6 +3552,7 @@ html.dark {
  */
 
 :root {
+  --tabs-trigger-line-height: 1.15; /** Interlineado del trigger (1,15). Es el que el `<button>` heredaba de `normalize.css` sin declararlo; el token lo fija para que no dependa de la hoja de terceros. No hay primitivo de 1,15 en `line-height.*`: es medida propia del componente */
   --tabs-list-gap: var(--spacing-1); /** Gap entre triggers */
   --tabs-trigger-padding-block: var(--spacing-3); /** Padding vertical del trigger */
   --tabs-trigger-padding-inline: var(--spacing-4); /** Padding horizontal del trigger */
@@ -4348,7 +4350,6 @@ html.dark {
   --alert-border-color: var(--color-text-on-dark); /** Borde por defecto — blanco. Sobre página clara dibuja el contorno del relleno prusia */
   --alert-title-font-size: var(--text-font-size); /** El título hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
   --alert-title-font-weight: var(--font-weight-emphasis); /** Peso del título */
-  --alert-title-letter-spacing: var(--text-letter-spacing); /** Tracking del título — el del cuerpo (0em). El título del `Alert` es un `<p>`, no un encabezado, así que no lleva el tracking de los títulos; el token lo fija para que no dependa del elemento. El `Toast`, cuyo título sí es un `<h2>`, lo cambia por el suyo (`toast.title-letter-spacing`) */
   --alert-title-color: var(--color-text-on-dark); /** Texto blanco sobre el relleno prusia */
   --alert-description-font-size: var(--text-font-size); /** La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
   --alert-description-line-height: var(--text-line-height); /** Interlineado de la descripción — el del cuerpo */
@@ -4363,6 +4364,7 @@ html.dark {
   --alert-error-description-color: var(--color-error-fill-text); /** Descripción blanca sobre fondo error */
   --alert-warning-bg: var(--color-warning-fill); /** Fondo warning — el relleno del rol de aviso. Es el amarillo de siempre, pero la procedencia es el rol de feedback, no la marca */
   --alert-warning-border-color: var(--color-warning-fill); /** Borde igual al fondo warning */
+  --alert-title-letter-spacing: var(--text-h2-letter-spacing); /** Tracking del título (−0,02em): el de los títulos (`text.h2.letter-spacing`), aunque el título del `Alert` sea un `<p>`. Es el mismo que el del `Toast` (`toast.title-letter-spacing` hereda de aquí), para que los dos avisos pinten el título igual; el token lo fija para que no dependa del elemento */
   --alert-warning-title-color: var(--color-warning-fill-text); /** Título prusia sobre fondo warning (11,17:1, AAA) */
   --alert-warning-description-color: var(--color-warning-fill-text); /** Descripción prusia sobre fondo warning */
   --alert-warning-close-color: var(--color-warning-fill-text); /** Aspa y su anillo de foco sobre el relleno de aviso. Es el único relleno claro del componente, así que el aspa no puede tomar la tinta ambiente: con `[data-theme="dark"]` en la raíz saldría blanca sobre amarillo (1,50:1). Va fijada a la tinta del rol, que es universal */
@@ -4419,7 +4421,7 @@ html.dark {
   --toast-duration-in: var(--motion-duration-base); /** Duración de la entrada. Con `prefers-reduced-motion: reduce` vale 0ms y el aviso aparece sin animación */
   --toast-duration-out: var(--motion-duration-base); /** Duración de la salida. Con `prefers-reduced-motion: reduce` vale 0ms */
   --toast-easing: var(--motion-easing-out); /** Curva de entrada y salida — lo que aparece y desaparece frena al final */
-  --toast-title-letter-spacing: var(--text-h2-letter-spacing); /** Tracking del título del aviso (−0,02em): el de un `<h2>`, que es el elemento que da el motor al título (`Toast.Title`). El token lo fija en la tarjeta para que no dependa de la herencia de `base.css` ni del nivel de encabezado; sustituye al `alert.title-letter-spacing` del `Alert`, cuyo título es un `<p>` */
+  --toast-title-letter-spacing: var(--alert-title-letter-spacing); /** Tracking del título del aviso (−0,02em): hereda el del `Alert` (`alert.title-letter-spacing`, el de un `<h2>`), así que los dos avisos pintan el título igual. El token lo fija en la tarjeta para que no dependa de la herencia de `base.css` ni del nivel de encabezado del `Toast.Title` */
 }
 
 /**
@@ -4964,6 +4966,7 @@ html.dark {
   --chart-bar-radius: 0.25rem; /** 4px — extremo de dato redondeado; el extremo de la línea base queda recto */
   --chart-area-fill-opacity: 0.1; /** El área es un velo del tono de la serie, nunca un bloque saturado */
   --chart-donut-thickness: 0.55; /** Fracción del radio que ocupa el anillo del donut */
+  --chart-dot-size: 10px; /** 10px de diámetro — medida propia del componente (no hay peldaño de 10 en `spacing.*`). Punto de la nube de dispersión, mayor que el marcador de línea porque aquí el punto es la marca, no un remate */
   --chart-radar-fill-opacity: 0.15; /** El polígono del radar es un velo del tono de la serie, como el área */
   --chart-hover-opacity: 0.75; /** Atenuación de las marcas que no son la activa mientras el puntero está encima */
   --chart-series-1: var(--color-chart-series-1); /** Ranura categórica 1. El orden de las ranuras es el mecanismo de seguridad para daltonismo: se asignan en orden, nunca se ciclan */
@@ -4993,7 +4996,6 @@ html.dark {
   --chart-marker-size: var(--spacing-2); /** 8px de diámetro — punto de serie y marcador de extremo */
   --chart-funnel-gap: var(--spacing-1); /** 4px — hueco de superficie entre tramos del embudo */
   --chart-radial-bar-gap: var(--spacing-1); /** 4px — hueco entre anillos de la barra radial */
-  --chart-dot-size: var(--spacing-3); /** 10px de diámetro nominal — punto de la nube de dispersión, mayor que el marcador de línea porque aquí el punto es la marca, no un remate */
   --chart-tile-label-color-1: var(--color-black); /** Rótulo sobre la baldosa de la ranura 1. La tinta se elige por ranura: ninguna de las dos (blanco o negro) llega a 4.5:1 sobre las ocho series, así que cada una lleva la que cumple. Negro, no prusia: el prusia es un casi-negro entintado y se queda corto sobre el azul de la ranura 1 */
   --chart-tile-label-color-2: var(--color-black); /** Rótulo sobre la baldosa de la ranura 2 */
   --chart-tile-label-color-3: var(--color-black); /** Rótulo sobre la baldosa de la ranura 3 */

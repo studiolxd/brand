@@ -340,14 +340,16 @@ export const ContratoCuerpo: Story = {
 };
 
 export const ContratoTrackingTitulo: Story = {
-  name: 'Test — el título del alert lleva el tracking del cuerpo',
+  name: 'Test — el título del alert lleva el tracking de los títulos',
   tags: ['!dev'],
   args: { title: 'Un aviso' },
   play: async ({ canvasElement }) => {
-    // El título es un `<p>`: su tracking es el del cuerpo (0), no el de los
-    // encabezados. Lo fija `alert.title-letter-spacing`.
+    // Aunque el título sea un `<p>`, lleva el tracking de los títulos
+    // (−0,02em, el de `h2`), el mismo que el del `Toast`. Lo fija
+    // `alert.title-letter-spacing`.
     const titulo = within(canvasElement).getByText('Un aviso');
-    await expect(parseFloat(getComputedStyle(titulo).letterSpacing) || 0).toBe(0);
+    const estilo = getComputedStyle(titulo);
+    await expect(parseFloat(estilo.letterSpacing)).toBeCloseTo(-0.02 * parseFloat(estilo.fontSize), 3);
   },
 };
 

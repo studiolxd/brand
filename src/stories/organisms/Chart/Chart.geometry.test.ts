@@ -33,17 +33,13 @@ function numero(token: string): number {
 }
 
 /**
- * Desajustes ya existentes cuando se escribió el test. Se fijan aquí con su
- * valor actual para que el test pase sin cambiar el dibujo, y para que, el día
- * que se corrijan, el test obligue a borrar la excepción.
- *
- * - `dotSize`: el token `chart.dot-size` apunta a `{spacing.3}` (0.75rem =
- *   12px) pero su propia descripción dice «10px de diámetro nominal», y el
- *   componente dibuja 10. Pendiente de decidir cuál de los dos manda.
+ * Desajustes conocidos entre `GEOMETRY` y su token: `nombre → { geometria, token }`.
+ * Se fija aquí el valor actual de los dos para que el test pase sin cambiar el
+ * dibujo, y para que, el día que se corrija, el test obligue a borrar la
+ * excepción. Hoy no queda ninguno: el último, `dotSize` (el token valía 12 y el
+ * dibujo 10), se resolvió a favor del dibujo (D24).
  */
-const DESAJUSTES_CONOCIDOS: Record<string, { geometria: number; token: number }> = {
-  dotSize: { geometria: 10, token: 12 },
-};
+const DESAJUSTES_CONOCIDOS: Record<string, { geometria: number; token: number }> = {};
 
 describe('Chart: GEOMETRY sigue a los tokens --chart-*', () => {
   const entradas = geometria();

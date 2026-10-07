@@ -34,7 +34,6 @@ function Acceso({ socialProviders, magicLink, captcha, signupOpen, serverError, 
           <PasswordField
             id="sign-in-password"
             label="Contraseña"
-            labelHidden={false}
             autoComplete="current-password"
             action={<Link href="#recuperar" tone="ink">¿Olvidaste tu contraseña?</Link>}
           />

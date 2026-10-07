@@ -111,6 +111,7 @@
 .button--text {
   justify-content: var(--button-text-justify-content);
   padding-inline: var(--button-text-padding-inline);
+  padding-block-start: var(--button-text-padding-block-start);
   border-radius: var(--button-text-border-radius);
   border-width: var(--button-text-border-width);
   border-style: var(--button-text-border-style);

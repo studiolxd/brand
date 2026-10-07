@@ -215,7 +215,7 @@ Para texto que debe ser leído por lectores de pantalla pero invisible visualmen
 ```
 
 Excepciones — **cuando la receta tiene que ir sobre un elemento que ya existe**, porque el
-`<span>` envolvente de `VisuallyHidden` rompería algo. Son estas tres, y no se amplían sin
+`<span>` envolvente de `VisuallyHidden` rompería algo. Son estas cuatro, y no se amplían sin
 apuntarlas aquí:
 
 - `Label` aplica `visually-hidden` sobre el propio `<label>` cuando `hidden={true}`: lo que se
@@ -224,6 +224,12 @@ apuntarlas aquí:
   la relación `<label>`↔`<input>` de la que vive el control.
 - `Table` la aplica sobre el `<caption>`: el modelo de contenido de `<table>` no admite un
   `<span>` ahí.
+- `CommandPalette` copia la receta en `.command-palette__empty:empty`, sobre el nodo de
+  «sin resultados» que Base UI (`Autocomplete.Empty`) monta siempre como región viva
+  (`role="status"`) y solo rellena cuando la lista queda vacía. Se oculta **solo mientras está
+  vacío**, para que no ocupe sitio; `VisuallyHidden` lo ocultaría siempre, también cuando
+  enseña el mensaje, y `display: none` lo sacaría del árbol de accesibilidad y el anuncio no
+  llegaría.
 
 El patrón común: si el nodo que hay que ocultar ya está fijado por el HTML (es el elemento del
 componente, o su sitio en la tabla no admite otro), la clase va sobre él; en cualquier otro
