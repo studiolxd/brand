@@ -41,7 +41,8 @@ export interface HeatmapMessages {
    * Rótulo del centro en la leyenda de la escala divergente, con el valor ya
    * formateado («Centro: 0»). **Opcional** en el tipo para que un catálogo
    * anterior siga compilando; solo se lee con `scale="diverging"` y leyenda,
-   * y sin él ni `midpointLabel` la matriz lanza como cualquier clave ausente.
+   * y sin él ni `midpointLabel` sale el respaldo castellano, como cualquier
+   * clave ausente.
    */
   midpoint?: (value: string) => string;
 }

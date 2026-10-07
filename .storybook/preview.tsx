@@ -85,16 +85,15 @@ const withSurface: Decorator = (Story, context) => {
 };
 
 /**
- * El catálogo de textos, para todas las stories. Los componentes ya no traen
- * el castellano puesto: lo leen del `BrandMessagesProvider`, así que el
- * Storybook —que es la aplicación que los monta— tiene que montarlo igual que
- * lo hará cada app de la suite.
+ * El catálogo de textos, para todas las stories. El Storybook lo monta igual
+ * que lo hará cada app de la suite, con el `BrandMessagesProvider`.
  *
- * El fixture es castellano por comodidad, pero no reintroduce el default que
- * se quitó: vive en `.storybook/`, fuera del paquete publicado, y ningún
- * código de un consumidor lo alcanza (ver `brandMessagesFixture.ts` y el test
- * `src/stories/messages/BrandMessages.test.ts`). Una story que quiera enseñar otro
- * idioma envuelve su propio proveedor por encima de este.
+ * El fixture reexporta el catálogo castellano del paquete
+ * (`src/stories/messages/brandMessagesEs.ts`), que es también el respaldo de
+ * cada componente cuando a un catálogo le falta una clave, y solo cambia los
+ * rótulos del logotipo para nombrar la marca. Montarlo evita los avisos de
+ * respaldo en desarrollo. Una story que quiera enseñar otro idioma envuelve su
+ * propio proveedor por encima de este.
  */
 const withBrandMessages: Decorator = (Story) => (
   <BrandMessagesProvider messages={brandMessagesFixture}>
