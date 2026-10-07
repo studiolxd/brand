@@ -101,12 +101,23 @@ final class OverlaysSnapshotTests: XCTestCase {
         assertBrandSnapshots(sheet(width: 320), width: 320, height: 560, named: "compare-sheet", padding: 0)
     }
 
+    /// Las stories «Por defecto», «Variantes» (el error), «Con descripción» y «Con acción» de `Molecules/Toast`: un aviso
+    /// suelto, del ancho de la pila (`toast.max-width`), con los 16 pt de margen y el alto de su captura
+    /// (`capture-story.mjs --selector .toast`).
     func testComparisonToasts() {
-        let view = VStack(spacing: BrandSpacing.s2) {
-            BrandToastCard(item: ToastItem(id: "n", title: "Cambios guardados"), onClose: {})
-            BrandToastCard(item: ToastItem(id: "e", title: "No se pudo guardar el proyecto", intent: .error), onClose: {})
+        let cases: [(String, ToastItem, CGFloat)] = [
+            ("neutro", ToastItem(id: "n", title: "Cambios guardados"), 86),
+            ("error", ToastItem(id: "e", title: "No se pudo guardar el proyecto", intent: .error), 86),
+            ("descripcion", ToastItem(id: "d", title: "Proyecto guardado", intent: .success,
+                                      description: "Los cambios se han guardado correctamente."), 142),
+            ("accion", ToastItem(id: "a", title: "Proyecto archivado", action: ToastAction(label: "Deshacer", onClick: {})), 126),
+        ]
+        for (name, item, height) in cases {
+            let card = BrandToastCard(item: item, onClose: {})
+                .frame(width: BrandToastTokens.maxWidth)
+                .fixedSize(horizontal: false, vertical: true)   // el alto lo da el contenido, no el lienzo
+            assertBrandSnapshots(card, width: BrandToastTokens.maxWidth + 32, height: height, named: "compare-toast-\(name)", padding: 16)
         }
-        assertBrandSnapshots(view, width: 360, height: 190, named: "compare-toasts", padding: 0)
     }
 
     /// La story «Apilado» del Toaster (`Molecules/Toast`): tres avisos —neutro, éxito y error, el más nuevo delante—

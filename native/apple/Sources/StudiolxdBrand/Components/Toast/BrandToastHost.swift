@@ -44,34 +44,32 @@ public struct BrandToastCard: View {
 
     public var body: some View {
         let fill = fill
-        HStack(alignment: .top, spacing: A.gap) {
-            VStack(alignment: .leading, spacing: A.contentGap) {
-                Text(item.title)
-                    .brandFont(size: A.titleFontSize, weight: A.titleFontWeight)
-                    .lineSpacing(A.titleFontSize * (A.titleLineHeight - 1))
-                    .foregroundStyle(fill.title)
-                    .accessibilityAddTraits(.isHeader)
-                if let description = item.description {
-                    Text(description)
-                        .brandFont(size: A.descriptionFontSize)
-                        .lineSpacing(A.descriptionFontSize * (A.descriptionLineHeight - 1))
-                        .foregroundStyle(fill.description)
-                }
-                if let action = item.action {
-                    BrandButton(variant: .ghost, size: .sm, action: { action.onClick() }) { Text(action.label) }
-                        .environment(\.colorScheme, innerScheme)
-                        .padding(.leading, -BrandButtonTokens.smPaddingInline)
-                        .padding(.top, A.contentGap)
-                }
+        VStack(alignment: .leading, spacing: A.contentGap) {
+            // El interlineado de CSS (`line-height` del título y de la descripción) como caja de línea entera: el título
+            // mide 16 × 1,3 = 20,8 y cada línea de la descripción 16 × 1,5 = 24, como en la web. El título es un `<h2>`
+            // en React y hereda de él el tracking de los títulos (`text.h2-letter-spacing`, −0,02 em).
+            Text(item.title)
+                .brandLinedFont(size: A.titleFontSize, weight: A.titleFontWeight, lineHeight: A.titleLineHeight, halfLeading: true)
+                .tracking(BrandTextTokens.h2LetterSpacing * A.titleFontSize * scale)
+                .foregroundStyle(fill.title)
+                .accessibilityAddTraits(.isHeader)
+            if let description = item.description {
+                Text(description)
+                    .brandLinedFont(size: A.descriptionFontSize, weight: BrandTextTokens.fontWeight,
+                                    lineHeight: A.descriptionLineHeight, halfLeading: true)
+                    .foregroundStyle(fill.description)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            if let action = item.action {
+                // `.toast__action`: su `margin-block-start` (`alert.content-gap`) es ya el `spacing` del `VStack`; nada más.
+                BrandButton(variant: .ghost, size: .sm, action: { action.onClick() }) { Text(action.label) }
+                    .environment(\.colorScheme, innerScheme)
+                    .padding(.leading, -BrandButtonTokens.smPaddingInline)
+            }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.vertical, A.paddingBlock)
         .padding(.leading, A.paddingInline)
         .padding(.trailing, closeButton ? A.closeInset * 2 + A.closeSize : A.paddingInline)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(fill.bg)
-        .overlay(Rectangle().strokeBorder(fill.border, lineWidth: A.borderWidth))
         .overlay(alignment: .topTrailing) {
             if closeButton {
                 BrandCloseButton(closeLabel, size: .sm, action: onClose)
@@ -79,6 +77,11 @@ public struct BrandToastCard: View {
                     .padding(A.closeInset)
             }
         }
+        // La caja de borde de CSS (`box-sizing: border-box`): el borde ocupa sitio por fuera del relleno y el aspa se
+        // coloca desde el borde interior, no desde el canto.
+        .padding(A.borderWidth)
+        .background(fill.bg)
+        .overlay(Rectangle().strokeBorder(fill.border, lineWidth: A.borderWidth))
         .accessibilityElement(children: .contain)
     }
 }

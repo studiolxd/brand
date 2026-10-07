@@ -59,11 +59,13 @@ import com.studiolxd.brand.components.button.BrandButton
 import com.studiolxd.brand.components.button.ButtonVariant
 import com.studiolxd.brand.components.closebutton.BrandCloseButton
 import com.studiolxd.brand.support.BrandControlSize
+import com.studiolxd.brand.support.brandCssLineHeight
 import com.studiolxd.brand.support.brandTextStyle
 import com.studiolxd.brand.support.brandTransition
 import com.studiolxd.brand.support.rememberReduceMotion
 import com.studiolxd.brand.tokens.BrandAlertTokens as A
 import com.studiolxd.brand.tokens.BrandButtonTokens
+import com.studiolxd.brand.tokens.BrandTextTokens
 import com.studiolxd.brand.tokens.BrandToastTokens as T
 import kotlin.math.abs
 import kotlin.math.max
@@ -114,7 +116,10 @@ fun BrandToastCard(
         modifier
             .fillMaxWidth()
             .background(bg)
-            .border(A.borderWidth, border),
+            .border(A.borderWidth, border)
+            // La caja de borde de CSS (`box-sizing: border-box`): `border` de Compose pinta por dentro sin ocupar sitio;
+            // en la web el borde va por fuera del relleno, y el aspa se coloca desde el borde interior, no desde el canto.
+            .padding(A.borderWidth),
     ) {
         Column(
             Modifier.fillMaxWidth().padding(
@@ -128,9 +133,12 @@ fun BrandToastCard(
                 Modifier.semantics(mergeDescendants = true) { liveRegion = if (assertive) LiveRegionMode.Assertive else LiveRegionMode.Polite },
                 verticalArrangement = Arrangement.spacedBy(A.contentGap),
             ) {
-                BasicText(item.title, style = brandTextStyle(A.titleFontSize, A.titleFontWeight, A.titleLineHeight, color = titleColor))
+                // El título es un `<h2>` en React y hereda de él el tracking de los títulos (`text.h2-letter-spacing`). Su
+                // `line-height` (1,3) es más apretado que la fuente: la caja se ajusta a la de CSS (20,8 a 16 sp).
+                val titleStyle = brandTextStyle(A.titleFontSize, A.titleFontWeight, A.titleLineHeight, BrandTextTokens.h2LetterSpacing, color = titleColor)
+                BasicText(item.title, Modifier.brandCssLineHeight(titleStyle), style = titleStyle)
                 if (item.description != null) {
-                    BasicText(item.description, style = brandTextStyle(A.descriptionFontSize, com.studiolxd.brand.tokens.BrandTextTokens.fontWeight, A.descriptionLineHeight, color = descriptionColor))
+                    BasicText(item.description, style = brandTextStyle(A.descriptionFontSize, BrandTextTokens.fontWeight, A.descriptionLineHeight, color = descriptionColor))
                 }
             }
             if (item.action != null) {
