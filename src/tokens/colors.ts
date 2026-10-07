@@ -161,7 +161,7 @@ const tagPair = (variant: string, label: string) => ({
 });
 export const tagPairs = [
   tagPair('info', 'Info'), tagPair('warning', 'Aviso'), tagPair('success', 'Éxito'),
-  tagPair('danger', 'Peligro'), tagPair('neutral', 'Neutral'),
+  tagPair('error', 'Error'), tagPair('neutral', 'Neutral'),
   tagPair('support-1', 'Soporte 1'), tagPair('support-2', 'Soporte 2'),
 ];
 
