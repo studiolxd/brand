@@ -23,7 +23,7 @@
     "lg-padding-inline": { "$value": "{spacing.4}",    "$type": "dimension", "$description": "Aire horizontal lg (16px)" },
     "lg-min-size":       { "$value": "calc({kbd.lg-font-size} * {kbd.line-height} + 2 * {kbd.lg-padding-block} + 2 * {kbd.border-width})", "$type": "dimension", "$description": "Ancho mínimo lg: la misma fórmula con el cuerpo y el aire de la talla (38px)" },
 
-    "surface-dark-bg":           { "$value": "rgba(255, 255, 255, 0.08)", "$type": "color", "$description": "Fondo del keycap — surface-dark: el gris claro no existe en superficie oscura, y el velo translúcido es el mismo recurso que usan Skeleton y Table" },
+    "surface-dark-bg":           { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo del keycap — surface-dark: la superficie secundaria en su par oscuro, el mismo rol (y el mismo token) que usa Skeleton. Antes era un velo blanco al 8 % escrito a mano" },
     "surface-dark-color":        { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Símbolo — surface-dark" },
     "surface-dark-border-color": { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Borde — surface-dark" }
   }
