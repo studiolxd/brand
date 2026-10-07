@@ -1293,8 +1293,8 @@ object BrandAlertTokens {
     val titleFontWeight: FontWeight = FontWeight(500)
     /** Token `alert.title-line-height` — Interlineado del título — el de un rótulo corto Factor sin unidad. */
     val titleLineHeight: Float = 1.3f
-    /** Token `alert.title-letter-spacing` — Tracking del título — el del cuerpo (0em). El título del `Alert` es un `<p>`, no un encabezado, así que no lleva el tracking de los títulos; el token lo fija para que no dependa del elemento. El `Toast`, cuyo título sí es un `<h2>`, lo cambia por el suyo (`toast.title-letter-spacing`) Fracción del tamaño de fuente del propio componente (em). */
-    val titleLetterSpacing: Float = 0f
+    /** Token `alert.title-letter-spacing` — Tracking del título (−0,02em): el de los títulos (`text.h2.letter-spacing`), aunque el título del `Alert` sea un `<p>`. Es el mismo que el del `Toast` (`toast.title-letter-spacing` hereda de aquí), para que los dos avisos pinten el título igual; el token lo fija para que no dependa del elemento Fracción del tamaño de fuente del propio componente (em). */
+    val titleLetterSpacing: Float = -0.02f
     /** Token `alert.title-color` — Texto blanco sobre el relleno prusia */
     val titleColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFFFFF), Color(0xFF111E30))
     /** Token `alert.description-font-size` — La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
@@ -1539,7 +1539,7 @@ object BrandToastTokens {
     val insetBlock: Dp = 24.dp
     /** Token `toast.inset-inline` — Distancia de la pila al borde izquierdo o derecho de la ventana (24px) */
     val insetInline: Dp = 24.dp
-    /** Token `toast.title-letter-spacing` — Tracking del título del aviso (−0,02em): el de un `<h2>`, que es el elemento que da el motor al título (`Toast.Title`). El token lo fija en la tarjeta para que no dependa de la herencia de `base.css` ni del nivel de encabezado; sustituye al `alert.title-letter-spacing` del `Alert`, cuyo título es un `<p>` Fracción del tamaño de fuente del propio componente (em). */
+    /** Token `toast.title-letter-spacing` — Tracking del título del aviso (−0,02em): hereda el del `Alert` (`alert.title-letter-spacing`, el de un `<h2>`), así que los dos avisos pintan el título igual. El token lo fija en la tarjeta para que no dependa de la herencia de `base.css` ni del nivel de encabezado del `Toast.Title` Fracción del tamaño de fuente del propio componente (em). */
     val titleLetterSpacing: Float = -0.02f
     /** Token `toast.gap` — Aire entre avisos cuando la pila está desplegada (8px). El `Toaster` lo puede sobreescribir con su prop `gap` */
     val gap: Dp = 8.dp
