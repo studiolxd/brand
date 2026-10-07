@@ -30,6 +30,7 @@ import com.studiolxd.brand.components.toast.ToastIntent
 import com.studiolxd.brand.components.toast.ToastItem
 import com.studiolxd.brand.components.toast.ToastPosition
 import com.studiolxd.brand.tokens.BrandSpacing
+import com.studiolxd.brand.tokens.BrandToastTokens
 import kotlin.time.Duration
 import org.junit.Rule
 import org.junit.Test
@@ -187,28 +188,32 @@ class OverlaysComparisonSnapshotTest {
         Box(Modifier.bleed()) { ConfirmDialogPreviewCard(Modifier.width(550.dp), destructive = true) }
     }
 
-    @Test
-    fun toastNeutral() = paparazzi.brandComparison("toast-neutro", 360, 53) {
-        Box(Modifier.bleed()) { BrandToastCard(ToastItem("n", "Cambios guardados"), onClose = {}) }
+    /**
+     * Las stories «Por defecto», «Variantes» (el error), «Con descripción» y «Con acción» de `Molecules/Toast`: un aviso
+     * suelto, del ancho de la pila (`toast.max-width`), con los 16 dp de margen y el alto de su captura (los mismos
+     * lienzos que `OverlaysSnapshotTests.testComparisonToasts` de SwiftUI).
+     */
+    @Composable
+    private fun ToastPair(item: ToastItem) {
+        BrandToastCard(item, onClose = {}, modifier = Modifier.width(BrandToastTokens.maxWidth))
     }
 
     @Test
-    fun toastError() = paparazzi.brandComparison("toast-error", 360, 53) {
-        Box(Modifier.bleed()) { BrandToastCard(ToastItem("e", "No se pudo guardar el proyecto", ToastIntent.Error), onClose = {}) }
+    fun toastNeutral() = paparazzi.brandComparison("toast-neutro", 392, 86) { ToastPair(ToastItem("n", "Cambios guardados")) }
+
+    @Test
+    fun toastError() = paparazzi.brandComparison("toast-error", 392, 86) {
+        ToastPair(ToastItem("e", "No se pudo guardar el proyecto", ToastIntent.Error))
     }
 
     @Test
-    fun toastIntents() = paparazzi.brandComparison("toast-intents", 360, 640) {
-        Box(Modifier.bleed()) {
-            Column(Modifier.width(360.dp), verticalArrangement = Arrangement.spacedBy(BrandSpacing.s2)) {
-                ToastIntent.entries.forEach {
-                    BrandToastCard(
-                        ToastItem(it.value, "Aviso ${it.value}", it, "Segunda línea del aviso."),
-                        onClose = {},
-                    )
-                }
-            }
-        }
+    fun toastDescription() = paparazzi.brandComparison("toast-descripcion", 392, 142) {
+        ToastPair(ToastItem("d", "Proyecto guardado", ToastIntent.Success, "Los cambios se han guardado correctamente."))
+    }
+
+    @Test
+    fun toastAction() = paparazzi.brandComparison("toast-accion", 392, 126) {
+        ToastPair(ToastItem("a", "Proyecto archivado", action = ToastAction("Deshacer") {}))
     }
 
     /**

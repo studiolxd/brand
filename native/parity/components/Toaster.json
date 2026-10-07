@@ -19,6 +19,7 @@
     "SwiftUI: la pila se monta con el modificador `.toastHost(…)` sobre la raíz (el `<Toaster />` de React), que pinta encima `ToastStack` —un tipo interno, no público— con un `BrandToastCard` por aviso; `ToastHost` solo existe en Compose. La ficha nombra el modificador en `swiftModifier` y, como tipo, la tarjeta pública `BrandToastCard`.",
     "El anuncio a VoiceOver usa `AccessibilityNotification.Announcement` con prioridad alta para `error` y `warning` y baja para el resto, en vez de `role=\"alertdialog\"`/`status`.",
     "La pila se despliega con el puntero encima (macOS, iPad); en iPhone táctil queda recogida salvo `expand: true`.",
+    "Cada aviso de la pila es la tarjeta de `Toast` (`BrandToastCard`): misma caja, mismo alto y las mismas diferencias de suavizado y redondeo, anotadas en `Toast.json`.",
     "El gesto de descarte (deslizar) usa los 40 pt de umbral por defecto de Base UI, que no es un token.",
     "El reloj se detiene mientras el puntero o el dedo están sobre la pila, como el foco/puntero de la web.",
     "Un aviso `loading` no pinta indicador de espera propio: igual que en React, la intención solo cambia el comportamiento (no se cierra solo).",
