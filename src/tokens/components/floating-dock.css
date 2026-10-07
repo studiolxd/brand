@@ -3,8 +3,8 @@
  */
 
 :root {
-  --floating-dock-panel-inline-size: 22rem; /** Ancho del panel (352px). Medida de layout, como `modal.width-max`: no sale de la escala de espaciado */
-  --floating-dock-panel-block-size: 32rem; /** Alto del panel (512px). Se recorta contra la ventana: nunca sobrepasa el alto disponible */
+  --floating-dock-panel-width: 22rem; /** Ancho del panel (352px). Medida de layout, como `modal.max-width`: no sale de la escala de espaciado */
+  --floating-dock-panel-height: 32rem; /** Alto del panel (512px). Se recorta contra la ventana: nunca sobrepasa el alto disponible */
   --floating-dock-z-index: var(--z-index-bar); /** Capa del ancla: la del chrome de aplicación (100). Por debajo del velo y del modal, para que un diálogo del producto siga tapando al dock */
   --floating-dock-offset-inline: var(--spacing-5); /** Distancia al borde lateral de la ventana (24px). Se suma al `safe-area-inset` del dispositivo, nunca lo sustituye */
   --floating-dock-offset-block: var(--spacing-5); /** Distancia al borde superior o inferior de la ventana (24px). Se suma al `safe-area-inset` */

@@ -19,7 +19,7 @@
    pueda recorrer con el teclado. */
 .org-chart__viewport {
   overflow: auto;
-  max-block-size: var(--org-chart-viewport-block-size);
+  max-block-size: var(--org-chart-viewport-height);
   padding-block: var(--org-chart-viewport-padding);
   padding-inline: var(--org-chart-viewport-padding);
   background-color: var(--org-chart-viewport-bg);
@@ -126,7 +126,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--org-chart-card-gap);
-  inline-size: var(--org-chart-card-inline-size);
+  inline-size: var(--org-chart-card-width);
   padding-block: var(--org-chart-card-padding-block);
   padding-inline: var(--org-chart-card-padding-inline);
   background-color: var(--org-chart-card-bg);

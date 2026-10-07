@@ -190,7 +190,7 @@ No hay dos paletas: hay **una**, y cada token que necesita cambiar en oscuro lle
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --text-background: var(--color-background-dark);
+  --text-bg: var(--color-background-dark);
   --text-color: var(--color-text-on-dark);
   /* …y cada token de componente con par oscuro */
 }
@@ -205,7 +205,7 @@ Los cuatro activan lo mismo, a distinta escala:
 
 Las custom properties se heredan por cascada, así que basta con que el selector alcance a un ancestro. Los componentes no saben en qué tema están: leen su token y ya.
 
-**El lienzo va emparejado.** `body` fija a la vez `background-color` y `color` con `--text-background` y `--text-color`, ambos con par oscuro. Fijar un fondo sin su color —o al revés— es el error clásico: los componentes de superficie oscura se vuelven ilegibles sobre un fondo que no volteó con ellos.
+**El lienzo va emparejado.** `body` fija a la vez `background-color` y `color` con `--text-bg` y `--text-color`, ambos con par oscuro. Fijar un fondo sin su color —o al revés— es el error clásico: los componentes de superficie oscura se vuelven ilegibles sobre un fondo que no volteó con ellos.
 
 **El chrome nativo va con el lienzo.** Hay una parte de la página que no pinta el CSS sino el navegador: los scrollbars, los *pickers* nativos de fecha y hora, el desplegable de un `<select>` y el fondo del autorrelleno. Eso lo decide `color-scheme`, y por eso viaja con los mismos selectores: `base.css` declara `color-scheme: light` en `html` y `color-scheme: dark` bajo `.surface-dark`, `.surface-invert`, `[data-theme="dark"]` y `html.dark` (y `color-scheme: light` de vuelta en un `.surface-invert` que ya esté dentro de una superficie oscura). Como la propiedad se hereda, una banda oscura anidada también oscurece los controles nativos que contiene.
 

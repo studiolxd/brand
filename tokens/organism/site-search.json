@@ -1,6 +1,6 @@
 {
   "site-search": {
-    "inline-size":         { "$value": "{input.width}", "$type": "string", "$description": "Anchura del buscador: la de su contenedor. Es la página de resultados entera, así que ocupa todo el hueco donde se monte — declarada y no heredada del flujo, para que tampoco se encoja dentro de una fila flex o una celda de retícula" },
+    "width":               { "$value": "{input.width}", "$type": "string", "$description": "Anchura del buscador: la de su contenedor. Es la página de resultados entera, así que ocupa todo el hueco donde se monte — declarada y no heredada del flujo, para que tampoco se encoja dentro de una fila flex o una celda de retícula", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["site-search.inline-size"] } } },
     "gap":                 { "$value": "{spacing.5}", "$type": "dimension", "$description": "Aire entre los bloques del buscador: el formulario, el aviso de estado, los resultados y el pie" },
 
     "status-font-size":    { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Cuerpo del aviso de estado: cuántos resultados hay, que se está buscando o que no hay nada" },
@@ -43,9 +43,9 @@
     "suggestions-label-font-size": { "$value": "{font-size.0}",               "$type": "dimension", "$description": "Cuerpo del rótulo de las sugerencias" },
     "suggestions-label-color":     { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Color del rótulo de las sugerencias — atenuado" },
 
-    "ghost-section-inline-size": { "$value": "30%",    "$type": "dimension", "$description": "Ancho de la barra fantasma del rastro de sección" },
-    "ghost-title-inline-size":   { "$value": "70%",    "$type": "dimension", "$description": "Ancho de la barra fantasma del título" },
-    "ghost-url-inline-size":     { "$value": "45%",    "$type": "dimension", "$description": "Ancho de la barra fantasma de la dirección" },
+    "ghost-section-width":       { "$value": "30%",    "$type": "dimension", "$description": "Ancho de la barra fantasma del rastro de sección", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["site-search.ghost-section-inline-size"] } } },
+    "ghost-title-width":         { "$value": "70%",    "$type": "dimension", "$description": "Ancho de la barra fantasma del título", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["site-search.ghost-title-inline-size"] } } },
+    "ghost-url-width":           { "$value": "45%",    "$type": "dimension", "$description": "Ancho de la barra fantasma de la dirección", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["site-search.ghost-url-inline-size"] } } },
     "skeleton-gap":        { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire entre las barras de un resultado fantasma" },
 
     "surface-dark-result-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco del enlace del resultado — surface-dark" },

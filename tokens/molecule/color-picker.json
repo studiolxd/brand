@@ -25,11 +25,11 @@
 
     "panel": {
       "gap":         { "$value": "{spacing.3}", "$type": "dimension", "$description": "Separación entre las partes del panel: área, bandas, campo hex, predefinidos" },
-      "inline-size": { "$value": "calc(8 * {color-picker.preset.size} + 7 * {color-picker.preset.gap})", "$type": "dimension", "$description": "Ancho del panel: ocho predefinidos por fila y sus siete huecos. El área y las bandas lo ocupan entero" }
+      "width":       { "$value": "calc(8 * {color-picker.preset.size} + 7 * {color-picker.preset.gap})", "$type": "dimension", "$description": "Ancho del panel: ocho predefinidos por fila y sus siete huecos. El área y las bandas lo ocupan entero", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["color-picker.panel.inline-size"] } } }
     },
 
     "area": {
-      "block-size":          { "$value": "calc(6 * {color-picker.preset.size} + 5 * {color-picker.preset.gap})", "$type": "dimension", "$description": "Alto del área de saturación y brillo: seis filas de la misma rejilla que mide el ancho" },
+      "height":              { "$value": "calc(6 * {color-picker.preset.size} + 5 * {color-picker.preset.gap})", "$type": "dimension", "$description": "Alto del área de saturación y brillo: seis filas de la misma rejilla que mide el ancho", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["color-picker.area.block-size"] } } },
       "border-width":        { "$value": "{border-width.default}",          "$type": "dimension", "$description": "Borde del área y de las bandas" },
       "border-color":        { "$value": "{color.border.default-on-light}", "$type": "color",     "$description": "Color del borde del área y de las bandas: el separador neutro" },
       "saturation-start":    { "$value": "{color.white}",                   "$type": "color",     "$description": "Origen del degradado de saturación: sin saturación, el tono se lava hacia el blanco. Es el modelo HSV, no una decisión de marca" },

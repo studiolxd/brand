@@ -32,7 +32,7 @@ html {
    Ambos tokens tienen par surface-dark, así que el modo oscuro llega solo
    con .surface-dark / [data-theme="dark"] / html.dark. */
 body {
-  background-color: var(--text-background);
+  background-color: var(--text-bg);
   font-family: var(--text-font-family);
   font-weight: var(--text-font-weight);
   font-size: var(--text-font-size);
@@ -44,7 +44,7 @@ body {
    completo: fondo y color emparejados, como el body. Sin esto, los hijos que
    solo heredan (párrafos, enlaces) seguirían con el color del body. */
 .surface-dark {
-  background-color: var(--text-background);
+  background-color: var(--text-bg);
   color: var(--text-color);
 }
 

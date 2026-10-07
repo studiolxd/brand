@@ -14,8 +14,8 @@
     "trigger-active-color":      { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Color del trigger activo" },
     "trigger-indicator-width":   { "$value": "{border-width.default}",        "$type": "dimension", "$description": "Grosor del indicador activo (underline)" },
     "trigger-indicator-color":   { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del indicador activo" },
-    "trigger-pill-bg-active":    { "$value": "{color.primary}",          "$type": "color",     "$description": "Fondo del trigger activo en variante pill" },
-    "trigger-pill-color-active": { "$value": "{color.white}",            "$type": "color",     "$description": "Texto del trigger activo en variante pill" },
+    "trigger-pill-active-bg":    { "$value": "{color.primary}",          "$type": "color",     "$description": "Fondo del trigger activo en variante pill", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["tabs.trigger-pill-bg-active"] } } },
+    "trigger-pill-active-color": { "$value": "{color.white}",            "$type": "color",     "$description": "Texto del trigger activo en variante pill", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["tabs.trigger-pill-color-active"] } } },
     "trigger-border-radius":     { "$value": "{border-radius.default}",       "$type": "dimension", "$description": "Radio de borde del trigger (pill + focus ring)" },
     "trigger-disabled-opacity":  { "$value": "{opacity.disabled}",       "$type": "number",    "$description": "Opacidad del trigger deshabilitado" },
     "focus-ring-color":          { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del anillo de foco" },
@@ -28,8 +28,8 @@
     "surface-dark-trigger-color":        { "$value": "{color.text.muted-on-dark}","$type": "color", "$description": "Color del trigger inactivo — surface-dark" },
     "surface-dark-trigger-hover-color":  { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color hover del trigger — surface-dark" },
     "surface-dark-trigger-active-color": { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color del trigger activo — surface-dark" },
-    "surface-dark-trigger-pill-bg-active":  { "$value": "{color.accent-1}",    "$type": "color", "$description": "Fondo del trigger activo, variante pill — surface-dark. `color.primary` coincide con el lienzo oscuro; toma el par de `Button primary` (lavanda con tinta prusia), la regla de derivación del sistema. Antes se invertía a blanco, que es el par de los componentes en los que `accent-1` ya es otra variante — no es el caso de Tabs" },
-    "surface-dark-trigger-pill-color-active":{ "$value": "{color.primary}",     "$type": "color", "$description": "Texto del trigger activo, variante pill — surface-dark" },
+    "surface-dark-trigger-pill-active-bg":  { "$value": "{color.accent-1}",    "$type": "color", "$description": "Fondo del trigger activo, variante pill — surface-dark. `color.primary` coincide con el lienzo oscuro; toma el par de `Button primary` (lavanda con tinta prusia), la regla de derivación del sistema. Antes se invertía a blanco, que es el par de los componentes en los que `accent-1` ya es otra variante — no es el caso de Tabs" },
+    "surface-dark-trigger-pill-active-color":{ "$value": "{color.primary}",     "$type": "color", "$description": "Texto del trigger activo, variante pill — surface-dark" },
     "surface-dark-trigger-indicator-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Indicador de pestaña activa (underline) — surface-dark: color.primary colisiona con el fondo" },
     "surface-dark-focus-ring-color":     { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Focus ring color — surface-dark" }
   }

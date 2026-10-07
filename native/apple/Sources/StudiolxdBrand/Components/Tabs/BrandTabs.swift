@@ -249,7 +249,7 @@ private struct BrandTabFace: View {
     private var weight: Int { selected ? Int(T.triggerActiveWeight) : T.triggerFontWeight }
 
     private var ink: Color {
-        if variant == .pill && selected { return T.triggerPillColorActive }
+        if variant == .pill && selected { return T.triggerPillActiveColor }
         if selected { return T.triggerActiveColor }
         return isHovering && !disabled ? T.triggerHoverColor : T.triggerColor
     }
@@ -265,7 +265,7 @@ private struct BrandTabFace: View {
             .padding(.horizontal, T.triggerPaddingInline)
             .frame(maxWidth: orientation == .vertical ? .infinity : nil)
             .background {
-                if variant == .pill && selected { shape.fill(T.triggerPillBgActive) }
+                if variant == .pill && selected { shape.fill(T.triggerPillActiveBg) }
             }
             .overlay(alignment: orientation == .vertical ? .trailing : .bottom) {
                 if variant == .underline && selected {

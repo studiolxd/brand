@@ -12,7 +12,7 @@ $lxd-table-header-padding-block: 0.75rem; // Padding block del encabezado
 $lxd-table-header-padding-inline: 0.75rem; // Padding inline del encabezado
 $lxd-table-header-font-weight: 500; // Peso tipográfico del encabezado
 $lxd-table-header-border-width: 1px; // Borde inferior del thead — 1px, como todo borde del sistema; la cabecera se lee por peso, no por grosor
-$lxd-table-actions-inline-size: 1px; // Ancho de la cabecera de la columna de acciones. No fija un ancho: con `table-layout: auto` el sobrante se reparte entre las demás columnas y esta se encoge a su contenido
+$lxd-table-actions-width: 1px; // Ancho de la cabecera de la columna de acciones. No fija un ancho: con `table-layout: auto` el sobrante se reparte entre las demás columnas y esta se encoge a su contenido
 $lxd-table-header-content-gap: 0.5rem; // Separación entre el rótulo de la columna y el icono de ordenación
 $lxd-table-header-border-color: #111e30; // Color del borde inferior del thead
 $lxd-table-sort-icon-color: #4a4a4a; // Icono de ordenación en reposo, tinta plana; el hover lo lleva al color activo
@@ -39,3 +39,6 @@ $lxd-table-sm-header-padding-block: 0.5rem; // Padding block del encabezado — 
 $lxd-table-sm-header-padding-inline: 0.5rem; // Padding inline del encabezado — variante sm
 $lxd-table-sm-cell-padding-block: 0.5rem; // Padding block de celda — variante sm
 $lxd-table-sm-cell-padding-inline: 0.5rem; // Padding inline de celda — variante sm
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-table-actions-inline-size: $lxd-table-actions-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-table-actions-width

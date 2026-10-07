@@ -8,7 +8,7 @@
     "border-style":          { "$value": "solid",                       "$type": "string",    "$description": "Border style" },
     "border-color":          { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del borde" },
     "bg":                    { "$value": "transparent",                  "$type": "string",    "$description": "Fondo sin marcar" },
-    "bg-checked":            { "$value": "{color.primary}",             "$type": "color",     "$description": "Fondo cuando está marcado" },
+    "checked-bg":            { "$value": "{color.primary}",             "$type": "color",     "$description": "Fondo cuando está marcado", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["checkbox.bg-checked"] } } },
     "check-color":           { "$value": "{color.white}",               "$type": "color",     "$description": "Color del checkmark" },
     "cursor":                { "$value": "pointer",                      "$type": "string",    "$description": "Cursor" },
     "transition-duration":   { "$value": "{motion.duration.fast}",      "$type": "number",    "$description": "Duración de transiciones" },
@@ -20,17 +20,17 @@
     "surface-dark-error-border-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Borde en error — surface-dark" },
     "disabled-cursor":          { "$value": "not-allowed",              "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
     "disabled-border-color":    { "$value": "{color.disabled.border-on-light}", "$type": "color",     "$description": "Color del borde cuando está deshabilitado" },
-    "disabled-bg-checked":      { "$value": "{color.disabled.border-on-light}", "$type": "color",     "$description": "Fondo marcado/indeterminado cuando está deshabilitado" },
+    "checked-disabled-bg":      { "$value": "{color.disabled.border-on-light}", "$type": "color",     "$description": "Fondo marcado/indeterminado cuando está deshabilitado", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["checkbox.disabled-bg-checked"] } } },
     "check-rotate":           { "$value": "15deg",                        "$type": "string",    "$description": "Rotación del checkmark en animación de entrada/salida" },
     "sm-size":                { "$value": "1rem",                         "$type": "dimension", "$description": "Tamaño del checkbox — variante sm (16px)" },
     "sm-check-size":          { "$value": "0.55rem",                      "$type": "dimension", "$description": "Tamaño del checkmark interior — variante sm" },
     "lg-size":                { "$value": "1.5rem",                       "$type": "dimension", "$description": "Tamaño del checkbox — variante lg (24px)" },
     "lg-check-size":          { "$value": "0.85rem",                      "$type": "dimension", "$description": "Tamaño del checkmark interior — variante lg" },
     "surface-dark-border-color":     { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Border color — surface-dark" },
-    "surface-dark-bg-checked":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Background when checked — surface-dark" },
+    "surface-dark-checked-bg":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Background when checked — surface-dark" },
     "surface-dark-check-color":      { "$value": "{color.background.dark}",    "$type": "color", "$description": "Checkmark color — surface-dark" },
     "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring color — surface-dark" },
     "surface-dark-disabled-border-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Borde deshabilitado — surface-dark" },
-    "surface-dark-disabled-bg-checked": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Fondo marcado deshabilitado — surface-dark" }
+    "surface-dark-checked-disabled-bg": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Fondo marcado deshabilitado — surface-dark" }
   }
 }

@@ -1,8 +1,8 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-loading-state-min-block-size: 16rem; // Alto que reserva la espera de una página o una zona: la caja no colapsa a la altura del girador mientras el contenido no llega
-$lxd-loading-state-sm-min-block-size: 8rem; // Alto que reserva la espera en talla sm — el cuerpo de un diálogo, una hoja o un popover
+$lxd-loading-state-min-height: 16rem; // Alto que reserva la espera de una página o una zona: la caja no colapsa a la altura del girador mientras el contenido no llega
+$lxd-loading-state-sm-min-height: 8rem; // Alto que reserva la espera en talla sm — el cuerpo de un diálogo, una hoja o un popover
 $lxd-loading-state-gap: 1rem; // Aire entre el girador y la acción — el mismo que EmptyState, porque ocupa su sitio
 $lxd-loading-state-padding-block: 3rem; // Padding vertical — el de EmptyState
 $lxd-loading-state-padding-inline: 1.5rem; // Padding horizontal — el de EmptyState
@@ -12,3 +12,7 @@ $lxd-loading-state-label-font-family: "Google Sans Flex", system-ui, sans-serif;
 $lxd-loading-state-label-font-size: 1rem; // Tamaño del texto visible de la espera — el de la descripción de EmptyState (cuerpo de la superficie)
 $lxd-loading-state-sm-label-font-size: 0.875rem; // Tamaño del texto visible en talla sm — el de la descripción de EmptyState sm
 $lxd-loading-state-label-color: #4a4a4a; // Color del texto visible de la espera — el de la descripción de EmptyState (texto atenuado, nunca grey-dark)
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-loading-state-min-block-size: $lxd-loading-state-min-height; // OBSOLETO (v51, se retira en la v52): usar $lxd-loading-state-min-height
+$lxd-loading-state-sm-min-block-size: $lxd-loading-state-sm-min-height; // OBSOLETO (v51, se retira en la v52): usar $lxd-loading-state-sm-min-height

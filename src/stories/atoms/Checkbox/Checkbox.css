@@ -50,7 +50,7 @@
 }
 
 .checkbox[data-checked] {
-  background-color: var(--checkbox-bg-checked);
+  background-color: var(--checkbox-checked-bg);
 }
 
 .checkbox[data-checked] .checkbox__indicator,
@@ -79,7 +79,7 @@
 
 .checkbox[data-disabled][data-checked],
 .checkbox[data-disabled][data-indeterminate] {
-  background-color: var(--checkbox-disabled-bg-checked);
+  background-color: var(--checkbox-checked-disabled-bg);
   border-color: var(--checkbox-disabled-border-color);
 }
 

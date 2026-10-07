@@ -3,7 +3,7 @@
     "font-family":            { "$value": "{font-family.sans}",               "$type": "string",    "$description": "Familia tipográfica del organigrama" },
     "gap":                    { "$value": "{spacing.3}",                      "$type": "dimension", "$description": "Separación entre el lienzo y sus controles" },
 
-    "viewport-block-size":    { "$value": "32rem",                            "$type": "dimension", "$description": "Alto del lienzo con desplazamiento" },
+    "viewport-height":        { "$value": "32rem",                            "$type": "dimension", "$description": "Alto del lienzo con desplazamiento", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["org-chart.viewport-block-size"] } } },
     "viewport-padding":       { "$value": "{spacing.5}",                      "$type": "dimension", "$description": "Aire alrededor del árbol dentro del lienzo" },
     "viewport-bg":            { "$value": "{color.surface.secondary-on-light}", "$type": "color",   "$description": "Fondo del lienzo — superficie secundaria: lo que separa el organigrama de la página" },
     "viewport-radius":        { "$value": "{border-radius.default}",          "$type": "dimension", "$description": "Radio del lienzo" },
@@ -19,7 +19,7 @@
     "connector-color":        { "$value": "{color.border.default-on-light}",  "$type": "color",     "$description": "Color de las líneas que unen los nodos" },
     "connector-width":        { "$value": "{border-width.default}",           "$type": "dimension", "$description": "Grosor de las líneas que unen los nodos" },
 
-    "card-inline-size":       { "$value": "14rem",                            "$type": "dimension", "$description": "Ancho de la tarjeta de un departamento" },
+    "card-width":             { "$value": "14rem",                            "$type": "dimension", "$description": "Ancho de la tarjeta de un departamento", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["org-chart.card-inline-size"] } } },
     "card-bg":                { "$value": "{color.background.light}",         "$type": "color",     "$description": "Fondo de la tarjeta" },
     "card-border-color":      { "$value": "{color.primary}",                  "$type": "color",     "$description": "Borde de la tarjeta" },
     "card-border-width":      { "$value": "{border-width.default}",           "$type": "dimension", "$description": "Grosor del borde de la tarjeta" },

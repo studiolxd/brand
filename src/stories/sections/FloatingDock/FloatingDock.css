@@ -61,11 +61,11 @@
   display: flex;
   flex-direction: column;
   gap: var(--floating-dock-panel-gap);
-  inline-size: var(--floating-dock-panel-inline-size);
+  inline-size: var(--floating-dock-panel-width);
   /* Nunca más ancho que la ventana menos su propio aire: en un teléfono el
      panel llega de un margen al otro y no provoca desbordamiento lateral. */
   max-inline-size: calc(100vw - 2 * var(--floating-dock-offset-inline));
-  block-size: var(--floating-dock-panel-block-size);
+  block-size: var(--floating-dock-panel-height);
   /* Y nunca más alto que lo que queda libre descontando el lanzador: con el
      teclado del móvil levantado, `dvh` encoge y el panel encoge con él, así
      que el campo enfocado sigue a la vista. */

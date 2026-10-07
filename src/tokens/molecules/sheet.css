@@ -3,8 +3,8 @@
  */
 
 :root {
-  --sheet-inline-size: min(20rem, 85vw); /** Ancho cuando entra por un lateral */
-  --sheet-block-size: 85vh; /** Alto máximo cuando entra por arriba o abajo */
+  --sheet-width: min(20rem, 85vw); /** Ancho cuando entra por un lateral */
+  --sheet-height: 85vh; /** Alto máximo cuando entra por arriba o abajo */
   --sheet-gap: var(--spacing-4); /** Separación entre bloques del panel */
   --sheet-footer-gap: var(--spacing-2); /** Separación entre acciones del pie */
   --sheet-close-inset: var(--spacing-3); /** Distancia del botón de cierre a la esquina */

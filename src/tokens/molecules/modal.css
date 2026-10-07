@@ -4,9 +4,9 @@
 
 :root {
   --modal-border-color: rgba(0, 0, 0, 0); /** Sin borde en superficie clara: el velo y el fondo blanco ya separan el panel */
-  --modal-width-max: 560px; /** Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente */
-  --modal-inline-size: 90vw; /** Ancho del panel antes del tope de `width-max`: deja aire a los lados en pantallas estrechas. Medida de layout, igual que width-max */
-  --modal-max-height: 90dvh; /** Altura máxima del panel modal (dvh para móviles con barra de navegador variable). Medida de layout, igual que width-max */
+  --modal-max-width: 560px; /** Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente */
+  --modal-width: 90vw; /** Ancho del panel antes del tope de `max-width`: deja aire a los lados en pantallas estrechas. Medida de layout, igual que `max-width` */
+  --modal-max-height: 90dvh; /** Altura máxima del panel modal (dvh para móviles con barra de navegador variable). Medida de layout, igual que `max-width` */
   --modal-z-index: var(--z-index-modal); /** z-index del panel modal */
   --modal-backdrop-z-index: var(--z-index-backdrop); /** z-index del backdrop */
   --modal-backdrop-bg: var(--color-black); /** Color del backdrop/scrim */

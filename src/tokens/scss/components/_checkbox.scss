@@ -9,7 +9,7 @@ $lxd-checkbox-border-width: 1px; // Border width
 $lxd-checkbox-border-style: solid; // Border style
 $lxd-checkbox-border-color: #111e30; // Color del borde
 $lxd-checkbox-bg: transparent; // Fondo sin marcar
-$lxd-checkbox-bg-checked: #111e30; // Fondo cuando está marcado
+$lxd-checkbox-checked-bg: #111e30; // Fondo cuando está marcado
 $lxd-checkbox-check-color: #ffffff; // Color del checkmark
 $lxd-checkbox-cursor: pointer; // Cursor
 $lxd-checkbox-transition-duration: 150ms; // Duración de transiciones
@@ -20,9 +20,13 @@ $lxd-checkbox-focus-ring-color: #111e30; // Color del anillo de foco
 $lxd-checkbox-error-border-color: #b30000; // Borde en error: el color de error (texto/borde, nunca fondo)
 $lxd-checkbox-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado
 $lxd-checkbox-disabled-border-color: #d0d0d0; // Color del borde cuando está deshabilitado
-$lxd-checkbox-disabled-bg-checked: #d0d0d0; // Fondo marcado/indeterminado cuando está deshabilitado
+$lxd-checkbox-checked-disabled-bg: #d0d0d0; // Fondo marcado/indeterminado cuando está deshabilitado
 $lxd-checkbox-check-rotate: 15deg; // Rotación del checkmark en animación de entrada/salida
 $lxd-checkbox-sm-size: 1rem; // Tamaño del checkbox — variante sm (16px)
 $lxd-checkbox-sm-check-size: 0.55rem; // Tamaño del checkmark interior — variante sm
 $lxd-checkbox-lg-size: 1.5rem; // Tamaño del checkbox — variante lg (24px)
 $lxd-checkbox-lg-check-size: 0.85rem; // Tamaño del checkmark interior — variante lg
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-checkbox-bg-checked: $lxd-checkbox-checked-bg; // OBSOLETO (v51, se retira en la v52): usar $lxd-checkbox-checked-bg
+$lxd-checkbox-disabled-bg-checked: $lxd-checkbox-checked-disabled-bg; // OBSOLETO (v51, se retira en la v52): usar $lxd-checkbox-checked-disabled-bg

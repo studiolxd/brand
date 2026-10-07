@@ -790,8 +790,8 @@ public enum BrandCheckboxTokens {
     public static let borderColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
     /// Token `checkbox.bg` — Fondo sin marcar
     public static let bg: Color = Color(brandHex: 0x000000, opacity: 0)
-    /// Token `checkbox.bg-checked` — Fondo cuando está marcado
-    public static let bgChecked: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+    /// Token `checkbox.checked-bg` — Fondo cuando está marcado
+    public static let checkedBg: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
     /// Token `checkbox.check-color` — Color del checkmark
     public static let checkColor: Color = Color(brandLight: Color(brandHex: 0xFFFFFF), dark: Color(brandHex: 0x111E30))
     /// Token `checkbox.transition-duration` — Duración de transiciones
@@ -808,8 +808,8 @@ public enum BrandCheckboxTokens {
     public static let errorBorderColor: Color = Color(brandLight: Color(brandHex: 0xB30000), dark: Color(brandHex: 0xFF8585))
     /// Token `checkbox.disabled-border-color` — Color del borde cuando está deshabilitado
     public static let disabledBorderColor: Color = Color(brandHex: 0xD0D0D0)
-    /// Token `checkbox.disabled-bg-checked` — Fondo marcado/indeterminado cuando está deshabilitado
-    public static let disabledBgChecked: Color = Color(brandHex: 0xD0D0D0)
+    /// Token `checkbox.checked-disabled-bg` — Fondo marcado/indeterminado cuando está deshabilitado
+    public static let checkedDisabledBg: Color = Color(brandHex: 0xD0D0D0)
     /// Token `checkbox.sm-size` — Tamaño del checkbox — variante sm (16px)
     public static let smSize: CGFloat = 16
     /// Token `checkbox.sm-check-size` — Tamaño del checkmark interior — variante sm
@@ -830,8 +830,8 @@ public enum BrandSwitcherTokens {
     public static let trackHeight: CGFloat = 1.5
     /// Token `switcher.track-bg` — Fondo del track — estado off
     public static let trackBg: Color = Color(brandLight: Color(brandHex: 0xD0D0D0), dark: Color(brandHex: 0xFFFFFF))
-    /// Token `switcher.track-bg-checked` — Fondo del track — estado on
-    public static let trackBgChecked: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xBAABFF))
+    /// Token `switcher.track-checked-bg` — Fondo del track — estado on
+    public static let trackCheckedBg: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xBAABFF))
     /// Token `switcher.track-border-radius` — Radio del track (pill)
     public static let trackBorderRadius: CGFloat = 9999
     /// Token `switcher.track-padding` — Padding interior del track — separa el thumb de los bordes Fracción del tamaño de fuente del propio componente (em).
@@ -1022,8 +1022,8 @@ public enum BrandTextTokens {
     public static let lineHeight: CGFloat = 1.5
     /// Token `text.color` — Default text color
     public static let color: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
-    /// Token `text.background` — Fondo del lienzo de página (body)
-    public static let background: Color = Color(brandLight: Color(brandHex: 0xFFFFFF), dark: Color(brandHex: 0x111E30))
+    /// Token `text.bg` — Fondo del lienzo de página (body)
+    public static let bg: Color = Color(brandLight: Color(brandHex: 0xFFFFFF), dark: Color(brandHex: 0x111E30))
     /// Token `text.letter-spacing` — Default letter spacing Fracción del tamaño de fuente del propio componente (em).
     public static let letterSpacing: CGFloat = 0
     /// Token `text.size.1` — Paso 1 de la escala de títulos (14px)
@@ -1494,8 +1494,8 @@ public enum BrandModalTokens {
     public static let titleLineHeight: CGFloat = 1.1
     /// Token `modal.title-color` — Color del título
     public static let titleColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
-    /// Token `modal.width-max` — Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente
-    public static let widthMax: CGFloat = 560
+    /// Token `modal.max-width` — Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente
+    public static let maxWidth: CGFloat = 560
     /// Token `modal.transition-duration` — Duración de la animación entrada/salida
     public static let transitionDuration: TimeInterval = 0.25
     /// Token `modal.transition-easing` — Easing de la animación
@@ -1854,8 +1854,8 @@ public enum BrandPasswordFieldTokens {
     public static let lgToggleIconSize: CGFloat = 24
     /// Token `password-field.toggle-color` — Color del icono toggle: tinta, prusia sobre claro
     public static let toggleColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
-    /// Token `password-field.toggle-color-hover` — Color del icono toggle en hover (sin cambio: la tinta no se atenúa; el foco se marca con el anillo)
-    public static let toggleColorHover: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
+    /// Token `password-field.toggle-hover-color` — Color del icono toggle en hover (sin cambio: la tinta no se atenúa; el foco se marca con el anillo)
+    public static let toggleHoverColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
     /// Token `password-field.toggle-focus-ring-width` — Grosor del anillo de foco del toggle
     public static let toggleFocusRingWidth: CGFloat = 2
     /// Token `password-field.toggle-focus-ring-offset` — Separación del anillo de foco del toggle (se dibuja hacia dentro de la caja: el toggle va a ras del borde del campo)
@@ -1942,10 +1942,10 @@ public enum BrandTabsTokens {
     public static let triggerIndicatorWidth: CGFloat = 1
     /// Token `tabs.trigger-indicator-color` — Color del indicador activo
     public static let triggerIndicatorColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
-    /// Token `tabs.trigger-pill-bg-active` — Fondo del trigger activo en variante pill
-    public static let triggerPillBgActive: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xBAABFF))
-    /// Token `tabs.trigger-pill-color-active` — Texto del trigger activo en variante pill
-    public static let triggerPillColorActive: Color = Color(brandLight: Color(brandHex: 0xFFFFFF), dark: Color(brandHex: 0x111E30))
+    /// Token `tabs.trigger-pill-active-bg` — Fondo del trigger activo en variante pill
+    public static let triggerPillActiveBg: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xBAABFF))
+    /// Token `tabs.trigger-pill-active-color` — Texto del trigger activo en variante pill
+    public static let triggerPillActiveColor: Color = Color(brandLight: Color(brandHex: 0xFFFFFF), dark: Color(brandHex: 0x111E30))
     /// Token `tabs.trigger-border-radius` — Radio de borde del trigger (pill + focus ring)
     public static let triggerBorderRadius: CGFloat = 0
     /// Token `tabs.trigger-disabled-opacity` — Opacidad del trigger deshabilitado

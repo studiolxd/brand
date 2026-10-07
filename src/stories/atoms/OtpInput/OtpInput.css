@@ -6,7 +6,7 @@
 }
 
 .otp-input__cell {
-  inline-size: var(--otp-input-cell-inline-size);
+  inline-size: var(--otp-input-cell-width);
   padding-inline: 0;
   text-align: center;
 }

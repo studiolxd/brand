@@ -2,7 +2,7 @@
   "docs-search": {
     "gap":                 { "$value": "{spacing.3}", "$type": "dimension", "$description": "Aire entre el campo de búsqueda y la lista de resultados" },
     "results-gap":         { "$value": "{spacing.1}", "$type": "dimension", "$description": "Aire entre dos resultados" },
-    "results-max-block-size": { "$value": "min(28rem, 60vh)", "$type": "dimension", "$description": "Alto máximo de la lista: a partir de ahí scrollea dentro en vez de empujar la página" },
+    "results-max-height":     { "$value": "min(28rem, 60vh)", "$type": "dimension", "$description": "Alto máximo de la lista: a partir de ahí scrollea dentro en vez de empujar la página", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["docs-search.results-max-block-size"] } } },
 
     "result-padding-block":  { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding vertical de un resultado" },
     "result-padding-inline": { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding horizontal de un resultado" },

@@ -9,7 +9,7 @@
     "disabled-opacity":            { "$value": "{async-select.disabled-opacity}", "$type": "number", "$description": "Opacidad del control deshabilitado: la del buscador de selección única" },
     "pill-remove-opacity":         { "$value": "{opacity.muted}", "$type": "number", "$description": "Opacidad del aspa de la píldora en reposo: presente pero en segundo plano" },
     "pill-remove-hover-opacity":   { "$value": "{opacity.full}", "$type": "number", "$description": "Opacidad del aspa de la píldora bajo el puntero" },
-    "input-min-inline-size":       { "$value": "4rem", "$type": "dimension", "$description": "Ancho mínimo del texto de búsqueda junto a las píldoras: lo justo para escribir sin que salte de línea a cada letra" },
+    "input-min-width":             { "$value": "4rem", "$type": "dimension", "$description": "Ancho mínimo del texto de búsqueda junto a las píldoras: lo justo para escribir sin que salte de línea a cada letra", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["async-multi-select.input-min-inline-size"] } } },
     "color":                       { "$value": "{multi-select.color}", "$type": "color", "$description": "Hereda de `multi-select.color`: el buscador múltiple tiene la misma cara que el control síncrono" },
     "content-bg":                  { "$value": "{multi-select.content-bg}", "$type": "color", "$description": "Hereda de `multi-select.content-bg`: el buscador múltiple tiene la misma cara que el control síncrono" },
     "content-border-color":        { "$value": "{multi-select.content-border-color}", "$type": "color", "$description": "Hereda de `multi-select.content-border-color`: el buscador múltiple tiene la misma cara que el control síncrono" },

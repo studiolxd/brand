@@ -1,6 +1,6 @@
 {
   "date-picker": {
-    "inline-size":               { "$value": "{input.width}",                    "$type": "string",    "$description": "Anchura del control: la del campo, que siempre ocupa su contenedor" },
+    "width":                     { "$value": "{input.width}",                    "$type": "string",    "$description": "Anchura del control: la del campo, que siempre ocupa su contenedor", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["date-picker.inline-size"] } } },
     "border-width":              { "$value": "{input.border-width}",             "$type": "dimension", "$description": "Grosor del borde del campo: el del sistema. Lo usa el anillo de foco del botón, que va justo por dentro de esa línea" },
     "disabled-cursor":           { "$value": "{input.disabled-cursor}",          "$type": "string",    "$description": "Cursor con el control deshabilitado" },
     "transition-duration":       { "$value": "{input.transition-duration}",      "$type": "number",    "$description": "Duración de la transición de tinta del botón" },

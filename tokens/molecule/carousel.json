@@ -5,9 +5,9 @@
     "controls-gap":   { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire entre los botones de la barra de control" },
     "controls-space-before": { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire entre la pista y la barra de control" },
 
-    "indicator-inline-size": { "$value": "{spacing.6}", "$type": "dimension", "$description": "Largo de la barra indicadora (32px)" },
-    "indicator-block-size":  { "$value": "{border-width.focus}", "$type": "dimension", "$description": "Grosor de la barra indicadora — el mismo peso que la barra de activo del sistema" },
-    "indicator-hit-block-size": { "$value": "{spacing.4}", "$type": "dimension", "$description": "Alto del área pulsable del indicador: la barra es fina, el objetivo táctil no" },
+    "indicator-width":       { "$value": "{spacing.6}", "$type": "dimension", "$description": "Largo de la barra indicadora (32px)", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["carousel.indicator-inline-size"] } } },
+    "indicator-height":      { "$value": "{border-width.focus}", "$type": "dimension", "$description": "Grosor de la barra indicadora — el mismo peso que la barra de activo del sistema", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["carousel.indicator-block-size"] } } },
+    "indicator-hit-height":     { "$value": "{spacing.4}", "$type": "dimension", "$description": "Alto del área pulsable del indicador: la barra es fina, el objetivo táctil no", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["carousel.indicator-hit-block-size"] } } },
     "indicator-color":         { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Barra de una diapositiva que no está a la vista" },
     "indicator-current-color": { "$value": "{color.text.on-light}",       "$type": "color", "$description": "Barra de la diapositiva a la vista. Es una barra de tinta, no un relleno: la posición no es un estado que se pinte de marca" },
 

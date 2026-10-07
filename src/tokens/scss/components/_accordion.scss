@@ -10,7 +10,7 @@ $lxd-accordion-trigger-cursor: pointer; // Cursor del disparador
 $lxd-accordion-index-font-family: "Google Sans Code", ui-monospace, monospace; // Monoespaciada: los números del acordeón numerado se alinean en columna
 $lxd-accordion-index-font-size: 0.875rem; // Un peldaño por debajo del rótulo del apartado
 $lxd-accordion-index-color: #4a4a4a; // Color del número: texto secundario, para que no compita con el rótulo
-$lxd-accordion-index-min-inline-size: 1.5rem; // Ancho mínimo de la ranura del número (24px): mantiene la columna aunque pase de una a dos cifras
+$lxd-accordion-index-min-width: 1.5rem; // Ancho mínimo de la ranura del número (24px): mantiene la columna aunque pase de una a dos cifras
 $lxd-accordion-content-padding-block: 2rem; // Aire inferior del contenido
 $lxd-accordion-content-padding-inline: 2rem; // Aire horizontal del contenido
 $lxd-accordion-transition-duration: 400ms; // Duración de abrir/cerrar (cambio de contexto: el panel entra)
@@ -18,3 +18,6 @@ $lxd-accordion-transition-easing: ease-in-out; // Curva de abrir/cerrar
 $lxd-accordion-focus-ring-width: 2px; // Grosor del anillo de foco
 $lxd-accordion-focus-ring-offset: 2px; // Separación del anillo de foco (el rol focus gobierna ancho y separación)
 $lxd-accordion-focus-ring-color: #111e30; // Color del anillo de foco: la tinta de la superficie
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-accordion-index-min-inline-size: $lxd-accordion-index-min-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-accordion-index-min-width

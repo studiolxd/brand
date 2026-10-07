@@ -164,6 +164,7 @@ const preview: Preview = {
             'Gráficos de datos',
             'Internacionalización',
             'Redacción',
+            'Nombres de tokens',
             'Tokens desde JavaScript',
           ],
           'Atoms',

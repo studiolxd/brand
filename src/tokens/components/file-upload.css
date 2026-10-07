@@ -57,7 +57,7 @@
   --file-upload-thumb-bg: var(--color-surface-secondary-on-light); /** Fondo del thumb para iconos (no imagen) */
   --file-upload-thumb-icon-color: var(--color-icon-secondary-on-light); /** Color del icono de archivo genérico */
   --file-upload-remove-color: var(--color-text-muted-on-light); /** Color del botón eliminar */
-  --file-upload-remove-color-hover: var(--color-error-text-on-light); /** Color del botón eliminar al hacer hover */
+  --file-upload-remove-hover-color: var(--color-error-text-on-light); /** Color del botón eliminar al hacer hover */
   --file-upload-text-font-size: var(--text-font-size); /** El texto del dropzone es texto corriente: hereda el cuerpo de la superficie — talla md */
   --file-upload-sm-text-font-size: var(--text-paragraph-small-font-size); /** Texto del dropzone — talla sm: un peldaño por debajo del cuerpo */
   --file-upload-lg-text-font-size: var(--text-paragraph-large-font-size); /** Texto del dropzone — talla lg: un peldaño por encima */
@@ -93,5 +93,5 @@ html.dark {
   --file-upload-thumb-bg: var(--color-surface-secondary-on-dark); /** Fondo de la miniatura — surface-dark */
   --file-upload-thumb-icon-color: var(--color-text-muted-on-dark); /** Icono de archivo genérico — surface-dark: `grey-dark` no llega a 3:1 sobre prusia */
   --file-upload-remove-color: var(--color-text-muted-on-dark); /** Aspa de quitar — surface-dark */
-  --file-upload-remove-color-hover: var(--color-error-text-on-dark); /** Aspa de quitar, bajo el puntero — surface-dark */
+  --file-upload-remove-hover-color: var(--color-error-text-on-dark); /** Aspa de quitar, bajo el puntero — surface-dark */
 }

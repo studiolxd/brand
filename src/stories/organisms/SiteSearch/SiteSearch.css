@@ -10,7 +10,7 @@
      resultados entera, así que ocupa el ancho del hueco donde se monte —
      también cuando ese hueco es una fila flex o una celda de retícula, donde
      un bloque se encogería a su contenido. */
-  inline-size: var(--site-search-inline-size);
+  inline-size: var(--site-search-width);
 }
 
 /* ─── El aviso vivo ───────────────────────────────────────────────────────── */
@@ -75,15 +75,15 @@
    un atributo de presentación no resuelve `var()`, y una barra fantasma mide
    lo que mide la línea que sustituye, que es una decisión de diseño. */
 .site-search__ghost-section {
-  inline-size: var(--site-search-ghost-section-inline-size);
+  inline-size: var(--site-search-ghost-section-width);
 }
 
 .site-search__ghost-title {
-  inline-size: var(--site-search-ghost-title-inline-size);
+  inline-size: var(--site-search-ghost-title-width);
 }
 
 .site-search__ghost-url {
-  inline-size: var(--site-search-ghost-url-inline-size);
+  inline-size: var(--site-search-ghost-url-width);
 }
 
 /* ─── Los resultados ──────────────────────────────────────────────────────── */

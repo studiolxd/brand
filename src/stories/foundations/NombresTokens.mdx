@@ -1,0 +1,99 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundations/Nombres de tokens" />
+
+# Nombres de tokens
+
+Un token se llama siempre igual: de lo general a lo particular, con la propiedad CSS al final y, detrás de ella, solo la talla.
+
+```
+<componente>-<parte>-<estado>-<propiedad>-<talla>
+```
+
+| Token | Componente | Parte | Estado | Propiedad |
+| --- | --- | --- | --- | --- |
+| `--button-outline-hover-bg` | `button` | `outline` | `hover` | `bg` |
+| `--menu-item-hover-color` | `menu` | `item` | `hover` | `color` |
+| `--tabs-trigger-pill-active-bg` | `tabs` | `trigger-pill` | `active` | `bg` |
+| `--modal-max-width` | `modal` | | | `max-width` |
+
+Solo el componente y la propiedad son obligatorios. La talla de los controles es la excepción de orden que ya existía y se mantiene: va como prefijo (`--input-lg-height`, hermano de `--input-height`), porque de ese par sale la superficie pública, que apunta cada token de partida a su hermano `lg-*` (ver Tipografía § «Dos superficies de lectura»).
+
+## Las reglas
+
+**El estado va antes de la propiedad.** `link-hover-color`, nunca `link-color-hover`. Así los tokens de un mismo estado se leen juntos y la propiedad queda siempre al final, donde se busca. Con dos estados, primero el del control y después el que lo modifica: `checkbox-checked-disabled-bg`.
+
+**`bg`, nunca `background`.** Es la abreviatura que ya usaba todo el sistema; `background` era la excepción.
+
+**`max-width` y `min-width`, nunca `width-max` ni `width-min`.** El nombre de la propiedad CSS tal cual: `modal-max-width`, `docs-search-results-max-height`.
+
+**Las medidas se llaman `width` y `height`.** Un token que guarda un ancho o un alto se nombra con `width`/`height`, no con `inline-size`/`block-size`: es el nombre que espera quien lo busca. La regla de ejes lógicos (`inline`/`block`) sigue intacta para el aire —`padding-inline`, `padding-block`, `gap`—, y el CSS puede seguir escribiendo la propiedad lógica (`inline-size: var(--sheet-width)`): lo que cambia es el nombre del token, no la propiedad que lo consume.
+
+**La tinta es `color`.** El color del texto o del icono de un componente es su `color`, nunca `ink-color`. No hay que confundirlo con el **tono** `ink` de `Link` y de `Button` `text` (`tone="ink"`): ahí `ink` es la variante y `color` la propiedad, así que `link-ink-color` es «el color del tono ink» y cumple la convención.
+
+**`color-picker` y `color-swatch` son componentes, no colores.** Sus grupos se quedan con su nombre. A cambio, el espacio global de color (`color.*`) no usará nunca `picker` ni `swatch` como tramo: así `--color-picker-*` y `--color-swatch-*` solo pueden ser de esos componentes.
+
+Lo vigila un test (`scripts/token-naming.test.ts`) que recorre todos los tokens y falla si alguno incumple una regla. Sus excepciones son explícitas y van comentadas: el rol global del lienzo (`color.background.light|dark`, un rol del espacio `color.*` y no una propiedad de componente) y el tono `ink`.
+
+## Los nombres anteriores (v51)
+
+La convención entró en la v51 y renombró los tokens de la tabla de abajo. **Los nombres viejos siguen existiendo hasta la v52** como alias obsoletos, en las tres salidas web:
+
+- **CSS** (`tokens.css`, `brand.css`): `--modal-width-max: var(--modal-max-width)`, declarado en `:root` y en cada superficie (oscura, invertida, siempre clara y pública), así que el alias **lee** el valor de la superficie en la que está.
+- **SCSS**: `$lxd-modal-width-max: $lxd-modal-max-width;`, al final del mismo fichero del token.
+- **`tokens.json` y `@studiolxd/brand/tokens`**: la clave vieja, con el mismo valor resuelto.
+
+Lo que un alias **no** hace es el camino contrario: el componente lee el nombre nuevo, así que **sobrescribir el viejo no lo cambia**. Una app que personalizaba `--modal-width-max` tiene que pasar a `--modal-max-width`; una que solo lo leía sigue funcionando hasta la v52. En nativo (SwiftUI y Compose) no hay alias: las constantes se renombraron sin más (`BrandModalTokens.maxWidth`, `BrandTabsTokens.triggerPillActiveBg`…).
+
+Los pares oscuros (`surface-dark-*`) siguen a su token: `checkbox.surface-dark-bg-checked` es ahora `checkbox.surface-dark-checked-bg`, y como se publica con el nombre claro, la custom property es la misma de la tabla.
+
+| Antes (obsoleto) | Ahora |
+| --- | --- |
+| `--breadcrumb-link-color-hover` | `--breadcrumb-link-hover-color` |
+| `--checkbox-bg-checked` | `--checkbox-checked-bg` |
+| `--checkbox-disabled-bg-checked` | `--checkbox-checked-disabled-bg` |
+| `--file-upload-remove-color-hover` | `--file-upload-remove-hover-color` |
+| `--password-field-toggle-color-hover` | `--password-field-toggle-hover-color` |
+| `--switcher-track-bg-checked` | `--switcher-track-checked-bg` |
+| `--tabs-trigger-pill-bg-active` | `--tabs-trigger-pill-active-bg` |
+| `--tabs-trigger-pill-color-active` | `--tabs-trigger-pill-active-color` |
+| `--typing-indicator-dot-opacity-active` | `--typing-indicator-dot-active-opacity` |
+| `--text-background` | `--text-bg` |
+| `--modal-width-max` | `--modal-max-width` |
+| `--accordion-index-min-inline-size` | `--accordion-index-min-width` |
+| `--app-launcher-tile-badge-block-size` | `--app-launcher-tile-badge-height` |
+| `--async-multi-select-input-min-inline-size` | `--async-multi-select-input-min-width` |
+| `--embed-frame-device-mobile-inline-size` | `--embed-frame-device-mobile-width` |
+| `--embed-frame-device-tablet-inline-size` | `--embed-frame-device-tablet-width` |
+| `--floating-dock-panel-inline-size` | `--floating-dock-panel-width` |
+| `--floating-dock-panel-block-size` | `--floating-dock-panel-height` |
+| `--loading-state-min-block-size` | `--loading-state-min-height` |
+| `--loading-state-sm-min-block-size` | `--loading-state-sm-min-height` |
+| `--modal-inline-size` | `--modal-width` |
+| `--otp-input-cell-inline-size` | `--otp-input-cell-width` |
+| `--slider-control-block-size` | `--slider-control-height` |
+| `--table-actions-inline-size` | `--table-actions-width` |
+| `--calendar-year-grid-min-inline-size` | `--calendar-year-grid-min-width` |
+| `--calendar-sm-year-grid-min-inline-size` | `--calendar-sm-year-grid-min-width` |
+| `--calendar-lg-year-grid-min-inline-size` | `--calendar-lg-year-grid-min-width` |
+| `--carousel-indicator-inline-size` | `--carousel-indicator-width` |
+| `--carousel-indicator-block-size` | `--carousel-indicator-height` |
+| `--carousel-indicator-hit-block-size` | `--carousel-indicator-hit-height` |
+| `--color-picker-panel-inline-size` | `--color-picker-panel-width` |
+| `--color-picker-area-block-size` | `--color-picker-area-height` |
+| `--consent-banner-max-inline-size` | `--consent-banner-max-width` |
+| `--date-picker-inline-size` | `--date-picker-width` |
+| `--docs-search-results-max-block-size` | `--docs-search-results-max-height` |
+| `--filter-bar-control-block-size` | `--filter-bar-control-height` |
+| `--notification-panel-inline-size` | `--notification-panel-width` |
+| `--notification-panel-list-max-block-size` | `--notification-panel-list-max-height` |
+| `--search-form-inline-size` | `--search-form-width` |
+| `--sheet-inline-size` | `--sheet-width` |
+| `--sheet-block-size` | `--sheet-height` |
+| `--table-of-contents-sticky-max-block-size` | `--table-of-contents-sticky-max-height` |
+| `--org-chart-viewport-block-size` | `--org-chart-viewport-height` |
+| `--org-chart-card-inline-size` | `--org-chart-card-width` |
+| `--site-search-inline-size` | `--site-search-width` |
+| `--site-search-ghost-section-inline-size` | `--site-search-ghost-section-width` |
+| `--site-search-ghost-title-inline-size` | `--site-search-ghost-title-width` |
+| `--site-search-ghost-url-inline-size` | `--site-search-ghost-url-width` |

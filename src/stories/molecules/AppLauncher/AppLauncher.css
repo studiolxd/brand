@@ -200,7 +200,7 @@
 .app-launcher__tile-badge-row {
   display: flex;
   align-items: center;
-  min-block-size: var(--app-launcher-tile-badge-block-size);
+  min-block-size: var(--app-launcher-tile-badge-height);
 }
 
 /* ─── Nombre ─────────────────────────────────────────────── */

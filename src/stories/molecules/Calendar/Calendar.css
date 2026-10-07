@@ -203,7 +203,7 @@
   grid-template-columns: repeat(var(--calendar-year-columns), 1fr);
   gap: var(--calendar-grid-gap);
   /* El ancho es el de la semana: cambiar de vista no encoge el panel. */
-  min-inline-size: var(--calendar-year-grid-min-inline-size);
+  min-inline-size: var(--calendar-year-grid-min-width);
 }
 
 .calendar__year {
@@ -283,7 +283,7 @@
 }
 
 .calendar.calendar--sm .calendar__years {
-  min-inline-size: var(--calendar-sm-year-grid-min-inline-size);
+  min-inline-size: var(--calendar-sm-year-grid-min-width);
 }
 
 .calendar.calendar--sm .calendar__year {
@@ -291,7 +291,7 @@
 }
 
 .calendar.calendar--lg .calendar__years {
-  min-inline-size: var(--calendar-lg-year-grid-min-inline-size);
+  min-inline-size: var(--calendar-lg-year-grid-min-width);
 }
 
 .calendar.calendar--lg .calendar__year {

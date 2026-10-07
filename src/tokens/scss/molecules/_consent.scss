@@ -11,9 +11,12 @@ $lxd-consent-banner-gap: 0.75rem; // Separación entre el texto y la fila de bot
 $lxd-consent-banner-text-gap: 0.25rem; // Separación entre el título y el texto
 $lxd-consent-banner-text-flex-basis: 20rem; // Base flexible del texto: encoge antes que la fila de botones, que nunca se parte
 $lxd-consent-banner-actions-gap: 0.5rem; // Separación entre botones
-$lxd-consent-banner-max-inline-size: 1280px; // Ancho máximo del contenido dentro de la banda: el mismo del contenido de una página pública
+$lxd-consent-banner-max-width: 1280px; // Ancho máximo del contenido dentro de la banda: el mismo del contenido de una página pública
 $lxd-consent-banner-z-index: 100; // Capa: la de las barras fijas de la aplicación. Por debajo del velo de un modal — el banner no bloquea nada
 $lxd-consent-banner-title-font-size: 1rem; // Cuerpo del título de la banda
 $lxd-consent-banner-description-font-size: 1rem; // Cuerpo del texto de la banda: el cuerpo de texto de la superficie, sin reducir (decisión del 2026-08-28)
 $lxd-consent-preferences-gap: 1rem; // Separación entre los bloques del panel
 $lxd-consent-preferences-category-gap: 0.75rem; // Separación entre categorías de la lista
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-consent-banner-max-inline-size: $lxd-consent-banner-max-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-consent-banner-max-width

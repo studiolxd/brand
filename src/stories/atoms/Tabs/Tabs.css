@@ -109,8 +109,8 @@
 }
 
 .tabs__list--pill .tabs__trigger[data-active] {
-  background-color: var(--tabs-trigger-pill-bg-active);
-  color: var(--tabs-trigger-pill-color-active);
+  background-color: var(--tabs-trigger-pill-active-bg);
+  color: var(--tabs-trigger-pill-active-color);
   font-weight: var(--tabs-trigger-active-weight);
 }
 

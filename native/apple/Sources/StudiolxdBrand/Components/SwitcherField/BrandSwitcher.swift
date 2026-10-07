@@ -123,7 +123,7 @@ private struct BrandSwitchBody: View {
 
         return ZStack(alignment: .leading) {
             Capsule()
-                .fill(configuration.isOn ? T.trackBgChecked : T.trackBg)
+                .fill(configuration.isOn ? T.trackCheckedBg : T.trackBg)
             Circle()
                 .fill(T.thumbBg)
                 .frame(width: thumb, height: thumb)

@@ -3,7 +3,7 @@
  */
 
 :root {
-  --search-form-inline-size: var(--input-width); /** Anchura del formulario: la del campo, que siempre ocupa su contenedor. El buscador vive dentro del panel del menú y se estira con él */
+  --search-form-width: var(--input-width); /** Anchura del formulario: la del campo, que siempre ocupa su contenedor. El buscador vive dentro del panel del menú y se estira con él */
   --search-form-xl-height: var(--spacing-8); /** Altura del campo — xl (64px, el peldaño de espaciado que sigue a los 48 de lg). No es una talla de control del sistema: solo existe aquí, para el buscador del menú del sitio */
   --search-form-xl-padding-inline: var(--spacing-6); /** Aire horizontal del campo — xl: el peldaño de espaciado siguiente al de lg */
   --search-form-xl-font-size: var(--font-size-5); /** Cuerpo de letra del campo — xl (28px): la escala de títulos pequeños, no la del cuerpo de texto. A esta talla el buscador se lee como un titular */

@@ -359,7 +359,7 @@ private struct ConfirmDialogPresenter<Extra: View>: ViewModifier {
                             .onTapGesture { if closeOnScrimTap { isPresented = false } }
                             .accessibilityHidden(true)
                         dialog { isPresented = false }
-                            .containerRelativeFrame(.horizontal) { width, _ in min(width * 0.9, BrandModalTokens.widthMax) }
+                            .containerRelativeFrame(.horizontal) { width, _ in min(width * 0.9, BrandModalTokens.maxWidth) }
                             .transition(reduceMotion ? .opacity : .opacity.combined(with: .offset(y: -BrandModalTokens.contentEnterOffset)))
                     }
                     .transition(.opacity)

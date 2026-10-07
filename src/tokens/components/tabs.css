@@ -8,7 +8,7 @@
   --tabs-trigger-padding-block: var(--spacing-3); /** Padding vertical del trigger */
   --tabs-trigger-padding-inline: var(--spacing-4); /** Padding horizontal del trigger */
   --tabs-trigger-font-size: var(--font-size-2); /** Tamaño de fuente del trigger */
-  --tabs-trigger-pill-color-active: var(--color-white); /** Texto del trigger activo en variante pill */
+  --tabs-trigger-pill-active-color: var(--color-white); /** Texto del trigger activo en variante pill */
   --tabs-trigger-disabled-opacity: var(--opacity-disabled); /** Opacidad del trigger deshabilitado */
   --tabs-content-padding-block: var(--spacing-4); /** Padding vertical del panel de contenido */
   --tabs-transition-duration: var(--motion-duration-fast); /** Duración de la transición de color */
@@ -22,7 +22,7 @@
   --tabs-trigger-active-color: var(--color-text-on-light); /** Color del trigger activo */
   --tabs-trigger-indicator-width: var(--border-width-default); /** Grosor del indicador activo (underline) */
   --tabs-trigger-indicator-color: var(--color-primary); /** Color del indicador activo */
-  --tabs-trigger-pill-bg-active: var(--color-primary); /** Fondo del trigger activo en variante pill */
+  --tabs-trigger-pill-active-bg: var(--color-primary); /** Fondo del trigger activo en variante pill */
   --tabs-trigger-border-radius: var(--border-radius-default); /** Radio de borde del trigger (pill + focus ring) */
   --tabs-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
   --tabs-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
@@ -37,8 +37,8 @@ html.dark {
   --tabs-trigger-color: var(--color-text-muted-on-dark); /** Color del trigger inactivo — surface-dark */
   --tabs-trigger-hover-color: var(--color-text-on-dark); /** Color hover del trigger — surface-dark */
   --tabs-trigger-active-color: var(--color-text-on-dark); /** Color del trigger activo — surface-dark */
-  --tabs-trigger-pill-bg-active: var(--color-accent-1); /** Fondo del trigger activo, variante pill — surface-dark. `color.primary` coincide con el lienzo oscuro; toma el par de `Button primary` (lavanda con tinta prusia), la regla de derivación del sistema. Antes se invertía a blanco, que es el par de los componentes en los que `accent-1` ya es otra variante — no es el caso de Tabs */
-  --tabs-trigger-pill-color-active: var(--color-primary); /** Texto del trigger activo, variante pill — surface-dark */
+  --tabs-trigger-pill-active-bg: var(--color-accent-1); /** Fondo del trigger activo, variante pill — surface-dark. `color.primary` coincide con el lienzo oscuro; toma el par de `Button primary` (lavanda con tinta prusia), la regla de derivación del sistema. Antes se invertía a blanco, que es el par de los componentes en los que `accent-1` ya es otra variante — no es el caso de Tabs */
+  --tabs-trigger-pill-active-color: var(--color-primary); /** Texto del trigger activo, variante pill — surface-dark */
   --tabs-trigger-indicator-color: var(--color-text-on-dark); /** Indicador de pestaña activa (underline) — surface-dark: color.primary colisiona con el fondo */
   --tabs-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
 }

@@ -1,7 +1,7 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-date-picker-inline-size: 100%; // Anchura del control: la del campo, que siempre ocupa su contenedor
+$lxd-date-picker-width: 100%; // Anchura del control: la del campo, que siempre ocupa su contenedor
 $lxd-date-picker-border-width: 1px; // Grosor del borde del campo: el del sistema. Lo usa el anillo de foco del botón, que va justo por dentro de esa línea
 $lxd-date-picker-disabled-cursor: not-allowed; // Cursor con el control deshabilitado
 $lxd-date-picker-transition-duration: 150ms; // Duración de la transición de tinta del botón
@@ -24,3 +24,6 @@ $lxd-date-picker-message-font-size: 0.875rem; // Cuerpo del aviso
 $lxd-date-picker-message-font-weight: 300; // Peso del aviso
 $lxd-date-picker-message-line-height: 1.5; // Interlineado del aviso
 $lxd-date-picker-message-color: #b30000; // Color del aviso: el del error de formulario — lo que se escribió no es una fecha
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-date-picker-inline-size: $lxd-date-picker-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-date-picker-width

@@ -103,7 +103,7 @@ fun BrandSwitcher(
     }
 
     val trackColor = animatedFieldColor(
-        (if (checked) T.trackBgChecked else T.trackBg).current, T.transitionDuration, T.transitionEasing, reduceMotion, "switcher-track",
+        (if (checked) T.trackCheckedBg else T.trackBg).current, T.transitionDuration, T.transitionEasing, reduceMotion, "switcher-track",
     )
     val thumbX by animateDpAsState(
         if (checked) trackWidth - padding * 2 - thumb else 0.dp,

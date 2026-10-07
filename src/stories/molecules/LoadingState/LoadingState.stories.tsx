@@ -209,8 +209,8 @@ export const TestEnFlujo: Story = {
     };
     const md = canvasElement.querySelector('[data-testid="md"]')!.getBoundingClientRect().height;
     const sm = canvasElement.querySelector('[data-testid="sm"]')!.getBoundingClientRect().height;
-    await expect(Math.round(md)).toBe(Math.round(mide('--loading-state-min-block-size')));
-    await expect(Math.round(sm)).toBe(Math.round(mide('--loading-state-sm-min-block-size')));
+    await expect(Math.round(md)).toBe(Math.round(mide('--loading-state-min-height')));
+    await expect(Math.round(sm)).toBe(Math.round(mide('--loading-state-sm-min-height')));
     sonda.remove();
   },
 };

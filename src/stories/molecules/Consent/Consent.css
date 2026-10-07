@@ -22,7 +22,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--consent-banner-gap);
-  max-inline-size: var(--consent-banner-max-inline-size);
+  max-inline-size: var(--consent-banner-max-width);
   margin-inline: auto;
 }
 

@@ -241,7 +241,7 @@ internal fun <V> BrandTabSurface(
     val vertical = orientation == TabsOrientation.Vertical
 
     val inkTarget = when {
-        selected && pill -> T.triggerPillColorActive
+        selected && pill -> T.triggerPillActiveColor
         selected -> T.triggerActiveColor
         state.hovered && enabled -> T.triggerHoverColor
         else -> T.triggerColor
@@ -251,7 +251,7 @@ internal fun <V> BrandTabSurface(
     val shape: Shape = if (T.triggerBorderRadius > 0.dp) RoundedCornerShape(T.triggerBorderRadius) else RectangleShape
     val indicator = T.triggerIndicatorColor.current
     val thickness = T.triggerIndicatorWidth
-    val pillBg = T.triggerPillBgActive.current
+    val pillBg = T.triggerPillActiveBg.current
 
     Box(
         Modifier

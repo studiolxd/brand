@@ -6,6 +6,7 @@ import {
   registerJsonVariablesFormat,
   registerNativeFormats,
   registerShadowAlphaTransform,
+  registerDeprecatedAliasFormats,
   outputReferencesUnlessAlpha,
   isDarkToken,
   isNativeToken,
@@ -16,6 +17,7 @@ registerDarkModeFormat(StyleDictionary);
 registerJsonVariablesFormat(StyleDictionary);
 registerNativeFormats(StyleDictionary);
 registerShadowAlphaTransform(StyleDictionary);
+registerDeprecatedAliasFormats(StyleDictionary);
 
 // Todo sale con `var()` salvo las sombras con opacidad propia (ver `registerShadowAlphaTransform`).
 const cssOptions = { selector: ':root', outputReferences: outputReferencesUnlessAlpha };
@@ -210,7 +212,7 @@ function scssFile(destination, filterKey) {
   // Los tokens `surface-dark-*` no se exponen a SCSS: no hay modo runtime
   // para consumidores no-React, así que solo reciben el valor claro.
   const filter = (t) => baseFilter(t) && !isDarkToken(t);
-  return { destination, format: 'scss/variables', filter, options: scssOptions };
+  return { destination, format: 'scss/variables-with-deprecated-aliases', filter, options: scssOptions };
 }
 
 const sd = new StyleDictionary({
@@ -694,7 +696,7 @@ const allTokens = [];
   const walk = (node, path) => {
     for (const [key, value] of Object.entries(node)) {
       if (!value || typeof value !== 'object') continue;
-      if ('$value' in value) allTokens.push({ path: [...path, key], value: value.$value });
+      if ('$value' in value) allTokens.push({ path: [...path, key], value: value.$value, extensions: value.$extensions });
       else walk(value, [...path, key]);
     }
   };
@@ -918,6 +920,45 @@ const surfaceLines = [
 ];
 writeFileSync('src/tokens/surface-public.css', surfaceLines.join('\n'));
 console.log('✔︎ src/tokens/surface-public.css');
+
+/* ---------------------------------------------------------------------------
+ * Alias obsoletos de la v51 (D9): `src/tokens/deprecated-aliases.css`
+ *
+ * Cada token renombrado por la convención de nombres lleva sus nombres viejos
+ * en `$extensions["com.studiolxd"].deprecatedAliases`. Aquí salen como
+ * `--viejo: var(--nuevo)`, y no solo en `:root`: un `var()` dentro de una custom
+ * property se resuelve en el elemento que la declara, así que un alias que
+ * viviera solo en `:root` daría el valor claro y de aplicación en todas partes.
+ * Se vuelve a declarar en cada selector que genera este build (superficie
+ * oscura, invertida, siempre clara y pública), y así el alias LEE el valor de la
+ * superficie en la que está.
+ *
+ * Lo que un alias NO hace es el camino inverso: los componentes leen el nombre
+ * nuevo, así que sobrescribir el viejo no les llega. Se retiran en la v52.
+ * ------------------------------------------------------------------------- */
+{
+  const aliases = allTokens.flatMap(({ path, extensions }) =>
+    (extensions?.['com.studiolxd']?.deprecatedAliases ?? []).map((alias) => [cssName(alias.split('.')), cssName(path)]),
+  );
+  const aliasSelectors = [':root', ...DARK_SELECTORS, '.surface-light', '.site-shell'];
+  const aliasLines = [
+    '/**',
+    ' * Do not edit directly, this file was auto-generated.',
+    ' *',
+    ' * OBSOLETOS (v51): los nombres de token anteriores a la convención D9',
+    ' * (`<componente>-<parte>-<estado>-<propiedad>-<talla>`). Cada uno lee el valor',
+    ' * de su nombre nuevo; sobrescribirlo NO cambia el componente, que lee el nuevo.',
+    ' * Se retiran en la v52.',
+    ' */',
+    '',
+    `${aliasSelectors.join(',\n')} {`,
+    ...aliases.map(([old, current]) => `  ${old}: var(${current}); /* obsoleto: usar ${current} */`),
+    '}',
+    '',
+  ];
+  writeFileSync('src/tokens/deprecated-aliases.css', aliasLines.join('\n'));
+  console.log('✔︎ src/tokens/deprecated-aliases.css');
+}
 
 /* ---------------------------------------------------------------------------
  * Los tokens del correo, junto a sus componentes

@@ -7,7 +7,7 @@
 .table-of-contents.table-of-contents--sticky {
   position: sticky;
   inset-block-start: var(--table-of-contents-sticky-offset);
-  max-block-size: var(--table-of-contents-sticky-max-block-size);
+  max-block-size: var(--table-of-contents-sticky-max-height);
   overflow-y: auto;
 }
 

@@ -10,7 +10,7 @@
 .date-picker__control {
   display: flex;
   align-items: center;
-  inline-size: var(--date-picker-inline-size);
+  inline-size: var(--date-picker-width);
 }
 
 /* El campo se queda con el espacio libre. `min-inline-size: 0` es lo que

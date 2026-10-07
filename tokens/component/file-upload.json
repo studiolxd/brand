@@ -48,7 +48,7 @@
     "thumb-icon-color":            { "$value": "{color.icon.secondary-on-light}",   "$type": "color",     "$description": "Color del icono de archivo genérico" },
 
     "remove-color":                { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Color del botón eliminar" },
-    "remove-color-hover":          { "$value": "{color.error-text-on-light}",      "$type": "color",     "$description": "Color del botón eliminar al hacer hover" },
+    "remove-hover-color":          { "$value": "{color.error-text-on-light}",      "$type": "color",     "$description": "Color del botón eliminar al hacer hover", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["file-upload.remove-color-hover"] } } },
 
     "progress-margin-block-start": { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Margen superior de la barra de progreso" },
     "surface-dark-border-color":                 { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Borde del dropzone — surface-dark: la tinta de la superficie" },
@@ -70,7 +70,7 @@
     "surface-dark-thumb-bg":                     { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo de la miniatura — surface-dark" },
     "surface-dark-thumb-icon-color":             { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Icono de archivo genérico — surface-dark: `grey-dark` no llega a 3:1 sobre prusia" },
     "surface-dark-remove-color":                 { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Aspa de quitar — surface-dark" },
-    "surface-dark-remove-color-hover":           { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Aspa de quitar, bajo el puntero — surface-dark" },
+    "surface-dark-remove-hover-color":           { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Aspa de quitar, bajo el puntero — surface-dark" },
     "padding-block":              { "$value": "{spacing.7}", "$type": "dimension", "$description": "Aire vertical del dropzone — talla md" },
     "sm-padding-block":           { "$value": "{spacing.6}", "$type": "dimension", "$description": "Aire vertical del dropzone — talla sm" },
     "lg-padding-block":           { "$value": "{spacing.8}", "$type": "dimension", "$description": "Aire vertical del dropzone — talla lg" },

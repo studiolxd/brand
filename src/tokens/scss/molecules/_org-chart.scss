@@ -3,7 +3,7 @@
 
 $lxd-org-chart-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica del organigrama
 $lxd-org-chart-gap: 0.75rem; // Separación entre el lienzo y sus controles
-$lxd-org-chart-viewport-block-size: 32rem; // Alto del lienzo con desplazamiento
+$lxd-org-chart-viewport-height: 32rem; // Alto del lienzo con desplazamiento
 $lxd-org-chart-viewport-padding: 1.5rem; // Aire alrededor del árbol dentro del lienzo
 $lxd-org-chart-viewport-bg: #f2f2f2; // Fondo del lienzo — superficie secundaria: lo que separa el organigrama de la página
 $lxd-org-chart-viewport-radius: 0px; // Radio del lienzo
@@ -16,7 +16,7 @@ $lxd-org-chart-sibling-gap: 1rem; // Separación horizontal entre dos nodos herm
 $lxd-org-chart-connector-length: 2rem; // Alto del tramo de líneas entre un nodo y sus hijos
 $lxd-org-chart-connector-color: #d0d0d0; // Color de las líneas que unen los nodos
 $lxd-org-chart-connector-width: 1px; // Grosor de las líneas que unen los nodos
-$lxd-org-chart-card-inline-size: 14rem; // Ancho de la tarjeta de un departamento
+$lxd-org-chart-card-width: 14rem; // Ancho de la tarjeta de un departamento
 $lxd-org-chart-card-bg: #ffffff; // Fondo de la tarjeta
 $lxd-org-chart-card-border-color: #111e30; // Borde de la tarjeta
 $lxd-org-chart-card-border-width: 1px; // Grosor del borde de la tarjeta
@@ -37,3 +37,7 @@ $lxd-org-chart-person-role-font-size: 0.75rem; // Tamaño del puesto de una pers
 $lxd-org-chart-person-role-color: #4a4a4a; // Color del puesto de una persona
 $lxd-org-chart-person-gap: 0.25rem; // Separación entre personas
 $lxd-org-chart-empty-color: #4a4a4a; // Color del «sin responsable» / «sin equipo»
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-org-chart-viewport-block-size: $lxd-org-chart-viewport-height; // OBSOLETO (v51, se retira en la v52): usar $lxd-org-chart-viewport-height
+$lxd-org-chart-card-inline-size: $lxd-org-chart-card-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-org-chart-card-width

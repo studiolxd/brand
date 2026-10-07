@@ -34,7 +34,7 @@
 .sheet[data-side='right'] {
   inset-block-start: 0;
   inset-block-end: 0;
-  inline-size: var(--sheet-inline-size);
+  inline-size: var(--sheet-width);
 }
 
 .sheet[data-side='left']  { left: 0; }
@@ -43,7 +43,7 @@
 .sheet[data-side='top'],
 .sheet[data-side='bottom'] {
   inset-inline: 0;
-  max-block-size: var(--sheet-block-size);
+  max-block-size: var(--sheet-height);
 }
 
 .sheet[data-side='top']    { inset-block-start: 0; }

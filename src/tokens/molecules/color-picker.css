@@ -47,8 +47,8 @@
   --color-picker-trigger-error-focus-ring-color: var(--input-error-focus-ring-color); /** Anillo de foco en error */
   --color-picker-trigger-disabled-bg: var(--input-disabled-bg); /** Fondo deshabilitado */
   --color-picker-trigger-disabled-border-color: var(--input-disabled-border-color); /** Borde deshabilitado */
-  --color-picker-panel-inline-size: calc(8 * var(--color-picker-preset-size) + 7 * var(--color-picker-preset-gap)); /** Ancho del panel: ocho predefinidos por fila y sus siete huecos. El área y las bandas lo ocupan entero */
-  --color-picker-area-block-size: calc(6 * var(--color-picker-preset-size) + 5 * var(--color-picker-preset-gap)); /** Alto del área de saturación y brillo: seis filas de la misma rejilla que mide el ancho */
+  --color-picker-panel-width: calc(8 * var(--color-picker-preset-size) + 7 * var(--color-picker-preset-gap)); /** Ancho del panel: ocho predefinidos por fila y sus siete huecos. El área y las bandas lo ocupan entero */
+  --color-picker-area-height: calc(6 * var(--color-picker-preset-size) + 5 * var(--color-picker-preset-gap)); /** Alto del área de saturación y brillo: seis filas de la misma rejilla que mide el ancho */
   --color-picker-trigger-focus-ring-width: var(--input-focus-ring-width); /** Grosor del anillo de foco, por dentro del borde como en un campo */
 }
 

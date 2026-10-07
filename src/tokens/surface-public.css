@@ -83,7 +83,7 @@
   --calendar-day-size: var(--calendar-lg-day-size);
   --calendar-title-font-size: var(--calendar-lg-title-font-size);
   --calendar-day-font-size: var(--calendar-lg-day-font-size);
-  --calendar-year-grid-min-inline-size: var(--calendar-lg-year-grid-min-inline-size);
+  --calendar-year-grid-min-width: var(--calendar-lg-year-grid-min-width);
   --calendar-year-height: var(--calendar-lg-year-height);
   --calendar-year-font-size: var(--calendar-lg-year-font-size);
   --checkbox-field-gap: var(--checkbox-field-lg-gap);
@@ -212,7 +212,7 @@
   --field-row-empty-font-size: var(--text-paragraph-small-font-size);
   --file-upload-field-helper-font-size: var(--form-helper-font-size);
   --filter-bar-label-offset: calc(var(--label-font-size) * var(--label-line-height) + var(--input-field-gap));
-  --filter-bar-control-block-size: var(--control-height);
+  --filter-bar-control-height: var(--control-height);
   --input-field-search-input-padding-inline-start: var(--input-field-search-slot-size);
   --input-field-search-input-padding-inline-end: var(--input-field-search-slot-size);
   --input-field-error-font-size: var(--form-error-font-size);

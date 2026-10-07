@@ -1,6 +1,6 @@
 {
   "slider": {
-    "control-block-size":   { "$value": "{spacing.5}",              "$type": "dimension", "$description": "Alto de la zona sensible: la banda es fina, pero el objetivo de pulsación no" },
+    "control-height":       { "$value": "{spacing.5}",              "$type": "dimension", "$description": "Alto de la zona sensible: la banda es fina, pero el objetivo de pulsación no", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["slider.control-block-size"] } } },
     "track-size":           { "$value": "{spacing.1}",              "$type": "dimension", "$description": "Grosor del carril" },
     "track-bg":             { "$value": "{color.border.default-on-light}", "$type": "color",     "$description": "Carril sin recorrer" },
     "track-border-radius":  { "$value": "{border-radius.default}",  "$type": "dimension", "$description": "Radio del carril (recto, como el resto del sistema)" },

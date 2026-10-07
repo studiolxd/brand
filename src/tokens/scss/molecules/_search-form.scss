@@ -1,7 +1,7 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-search-form-inline-size: 100%; // Anchura del formulario: la del campo, que siempre ocupa su contenedor. El buscador vive dentro del panel del menú y se estira con él
+$lxd-search-form-width: 100%; // Anchura del formulario: la del campo, que siempre ocupa su contenedor. El buscador vive dentro del panel del menú y se estira con él
 $lxd-search-form-xl-height: 4rem; // Altura del campo — xl (64px, el peldaño de espaciado que sigue a los 48 de lg). No es una talla de control del sistema: solo existe aquí, para el buscador del menú del sitio
 $lxd-search-form-xl-padding-inline: 2rem; // Aire horizontal del campo — xl: el peldaño de espaciado siguiente al de lg
 $lxd-search-form-xl-font-size: 1.75rem; // Cuerpo de letra del campo — xl (28px): la escala de títulos pequeños, no la del cuerpo de texto. A esta talla el buscador se lee como un titular
@@ -19,3 +19,6 @@ $lxd-search-form-submit-disabled-color: #4a4a4a; // Color de la flecha con el ca
 $lxd-search-form-submit-focus-ring-width: 2px; // Grosor del anillo de foco de la flecha: el del sistema. Es lo único que marca el foco, porque el adorno no tiene fondo
 $lxd-search-form-submit-focus-ring-color: #111e30; // Color del anillo de foco de la flecha: el del borde del campo en foco
 $lxd-search-form-submit-input-padding-inline-end: 2.5rem; // Padding derecho del campo — el texto termina donde empieza la flecha, que va dentro del borde
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-search-form-inline-size: $lxd-search-form-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-search-form-width

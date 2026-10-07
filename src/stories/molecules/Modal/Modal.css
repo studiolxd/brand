@@ -28,8 +28,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: var(--modal-z-index);
-  inline-size: var(--modal-inline-size);
-  max-inline-size: var(--modal-width-max);
+  inline-size: var(--modal-width);
+  max-inline-size: var(--modal-max-width);
   max-block-size: var(--modal-max-height);
   display: flex;
   flex-direction: column;
