@@ -4,7 +4,7 @@
 $lxd-spinner-size-sm: 1rem; // 16px — compact spinner
 $lxd-spinner-size-md: 1.5rem; // 24px — default spinner
 $lxd-spinner-size-lg: 4rem; // 64px — large spinner
-$lxd-spinner-border-width-sm: 2px; // Grosor del trazo (stroke) para sm
-$lxd-spinner-border-width-md: 2px; // Grosor del trazo (stroke) para md
-$lxd-spinner-border-width-lg: 2px; // Grosor del trazo (stroke) para lg
+$lxd-spinner-border-width-sm: 1px; // Grosor del trazo (stroke) para sm: el rol de todo borde del sistema (1px)
+$lxd-spinner-border-width-md: 1px; // Grosor del trazo (stroke) para md: el rol de todo borde del sistema (1px)
+$lxd-spinner-border-width-lg: 1px; // Grosor del trazo (stroke) para lg: el rol de todo borde del sistema (1px)
 $lxd-spinner-animation-duration: 2000ms; // Un ciclo del bucle: dibujar el contorno (mitad) y desdibujarlo (mitad)

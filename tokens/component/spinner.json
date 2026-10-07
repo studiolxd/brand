@@ -3,9 +3,9 @@
     "size-sm":          { "$value": "{spacing.4}", "$type": "dimension", "$description": "16px — compact spinner" },
     "size-md":          { "$value": "{spacing.5}", "$type": "dimension", "$description": "24px — default spinner" },
     "size-lg":          { "$value": "{spacing.8}", "$type": "dimension", "$description": "64px — large spinner" },
-    "border-width-sm":  { "$value": "2px",         "$type": "dimension", "$description": "Grosor del trazo (stroke) para sm" },
-    "border-width-md":  { "$value": "2px",         "$type": "dimension", "$description": "Grosor del trazo (stroke) para md" },
-    "border-width-lg":  { "$value": "2px",         "$type": "dimension", "$description": "Grosor del trazo (stroke) para lg" },
+    "border-width-sm":  { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor del trazo (stroke) para sm: el rol de todo borde del sistema (1px)" },
+    "border-width-md":  { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor del trazo (stroke) para md: el rol de todo borde del sistema (1px)" },
+    "border-width-lg":  { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor del trazo (stroke) para lg: el rol de todo borde del sistema (1px)" },
     "animation-duration": { "$value": "2000ms",    "$type": "number",    "$description": "Un ciclo del bucle: dibujar el contorno (mitad) y desdibujarlo (mitad)" }
   }
 }

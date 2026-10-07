@@ -16,6 +16,9 @@ para breaking changes.
   frase durante la animación de salida; tests nuevos de cerrar y reabrir.
 - Tokens: `switcher.lg-track-width` apunta a `{size-component.lg}` en lugar de `3rem`. Valor idéntico en todas las
   salidas. Era el único literal de los tokens de componente con un primitivo del mismo valor, unidad y rol.
+- `Spinner`: el trazo pasa de 2px a 1px en las tres tallas. `spinner.border-width-*` apuntan al rol
+  `{border-width.default}` en lugar de un `2px` literal: el mismo grosor que todo borde del sistema y que el trazo de
+  los iconos. Cambio visual.
 - Nativo: parejas React ↔ SwiftUI y React ↔ Compose de `Menu`: disparadores a medida y de icono en las dos
   plataformas, y paneles abiertos en Android. Las capturas de panel de menú en Android apagan el foco automático, que
   hacía inestable la de `ContextMenu` abierto.

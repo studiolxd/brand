@@ -1566,12 +1566,12 @@ public enum BrandSpinnerTokens {
     public static let sizeMd: CGFloat = 24
     /// Token `spinner.size-lg` — 64px — large spinner
     public static let sizeLg: CGFloat = 64
-    /// Token `spinner.border-width-sm` — Grosor del trazo (stroke) para sm
-    public static let borderWidthSm: CGFloat = 2
-    /// Token `spinner.border-width-md` — Grosor del trazo (stroke) para md
-    public static let borderWidthMd: CGFloat = 2
-    /// Token `spinner.border-width-lg` — Grosor del trazo (stroke) para lg
-    public static let borderWidthLg: CGFloat = 2
+    /// Token `spinner.border-width-sm` — Grosor del trazo (stroke) para sm: el rol de todo borde del sistema (1px)
+    public static let borderWidthSm: CGFloat = 1
+    /// Token `spinner.border-width-md` — Grosor del trazo (stroke) para md: el rol de todo borde del sistema (1px)
+    public static let borderWidthMd: CGFloat = 1
+    /// Token `spinner.border-width-lg` — Grosor del trazo (stroke) para lg: el rol de todo borde del sistema (1px)
+    public static let borderWidthLg: CGFloat = 1
     /// Token `spinner.animation-duration` — Un ciclo del bucle: dibujar el contorno (mitad) y desdibujarlo (mitad)
     public static let animationDuration: TimeInterval = 2
 }

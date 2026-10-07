@@ -1575,12 +1575,12 @@ object BrandSpinnerTokens {
     val sizeMd: Dp = 24.dp
     /** Token `spinner.size-lg` — 64px — large spinner */
     val sizeLg: Dp = 64.dp
-    /** Token `spinner.border-width-sm` — Grosor del trazo (stroke) para sm */
-    val borderWidthSm: Dp = 2.dp
-    /** Token `spinner.border-width-md` — Grosor del trazo (stroke) para md */
-    val borderWidthMd: Dp = 2.dp
-    /** Token `spinner.border-width-lg` — Grosor del trazo (stroke) para lg */
-    val borderWidthLg: Dp = 2.dp
+    /** Token `spinner.border-width-sm` — Grosor del trazo (stroke) para sm: el rol de todo borde del sistema (1px) */
+    val borderWidthSm: Dp = 1.dp
+    /** Token `spinner.border-width-md` — Grosor del trazo (stroke) para md: el rol de todo borde del sistema (1px) */
+    val borderWidthMd: Dp = 1.dp
+    /** Token `spinner.border-width-lg` — Grosor del trazo (stroke) para lg: el rol de todo borde del sistema (1px) */
+    val borderWidthLg: Dp = 1.dp
     /** Token `spinner.animation-duration` — Un ciclo del bucle: dibujar el contorno (mitad) y desdibujarlo (mitad) En milisegundos. */
     val animationDuration: Int = 2000
 }
