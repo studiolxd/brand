@@ -2615,7 +2615,6 @@ html.dark {
   --menu-item-font-size: var(--font-size-2); /** Tamaño de texto de ítems */
   --menu-item-line-height: var(--line-height-snug); /** Interlineado de ítems */
   --menu-label-padding-block: var(--spacing-2); /** Padding vertical del rótulo de sección */
-  --menu-label-padding-inline: var(--spacing-4); /** Padding horizontal del rótulo de sección */
   --menu-label-font-size: var(--font-size-1); /** Tamaño de texto del rótulo de sección */
   --menu-disabled-opacity: var(--opacity-disabled); /** Opacidad de ítems deshabilitados */
   --menu-z-index: var(--floating-panel-z-index); /** Capa z del panel flotante */
@@ -2632,6 +2631,8 @@ html.dark {
   --menu-item-destructive-color: var(--color-destructive-text-on-light); /** Color de texto de ítem destructivo */
   --menu-item-destructive-highlighted-bg: var(--color-destructive-fill); /** Relleno del ítem destructivo resaltado: el rojo sólido, universal en las dos superficies */
   --menu-item-destructive-highlighted-color: var(--color-destructive-fill-text); /** Texto del ítem destructivo resaltado */
+  --menu-label-margin-inline: var(--menu-padding-inline); /** Margen lateral del rótulo de sección: el mismo `margin-inline` que el ítem (`menu.padding-inline`), para que su texto quede alineado con el del ítem por construcción */
+  --menu-label-padding-inline: var(--menu-item-padding-inline); /** Padding horizontal del rótulo de sección: el mismo que el del ítem (`menu.item-padding-inline`). Con `label-margin-inline`, el texto del rótulo arranca donde arranca el contenido del ítem (su texto o, si lo lleva, su icono) */
   --menu-label-font-weight: var(--font-weight-emphasis); /** Peso del rótulo de sección */
   --menu-label-color: var(--color-text-muted-on-light); /** Color del rótulo de sección */
   --menu-separator-margin-block: var(--separator-spacing-md); /** Margen vertical del separador — el aire md de la línea del sistema */

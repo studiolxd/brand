@@ -1155,6 +1155,7 @@ var e = {
 	"--menu-item-destructive-highlighted-bg": "#b30000",
 	"--menu-item-destructive-highlighted-color": "#ffffff",
 	"--menu-label-padding-block": "0.5rem",
+	"--menu-label-margin-inline": "0.5rem",
 	"--menu-label-padding-inline": "1rem",
 	"--menu-label-font-size": "0.875rem",
 	"--menu-label-font-weight": "500",
