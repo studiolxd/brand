@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -56,13 +55,14 @@ import com.studiolxd.brand.components.button.ButtonVariant
 import com.studiolxd.brand.icon.BrandIcon
 import com.studiolxd.brand.icon.BrandIconName
 import com.studiolxd.brand.icon.BrandIconSize
-import com.studiolxd.brand.support.BrandLineBox
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.LocalBrandIconTextSize
 import com.studiolxd.brand.support.LocalBrandTextStyle
 import com.studiolxd.brand.support.brandTextStyle
 import com.studiolxd.brand.support.collectBrandInteractionState
 import com.studiolxd.brand.tokens.BrandMenuTokens as T
 import com.studiolxd.brand.tokens.BrandSpacing
+import com.studiolxd.brand.tokens.BrandTextTokens
 
 /**
  * Un ítem de [BrandMenu] y [BrandContextMenu]: los casos de `MenuItem` de React menos `link`. La navegación la hace la
@@ -178,7 +178,7 @@ fun BrandMenu(
 ) {
     BrandMenu(items, modifier, selection, onSelectionChange, onOpenChange) { _, toggle ->
         BrandButton(onClick = toggle, variant = ButtonVariant.Outline) {
-            BasicText(label, style = LocalBrandTextStyle.current, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            BrandBasicText(label, style = LocalBrandTextStyle.current, maxLines = 1, overflow = TextOverflow.Ellipsis)
             BrandIcon(BrandIconName.Chevron, modifier = Modifier.padding(start = BrandSpacing.s2), size = BrandIconSize.Text)
         }
     }
@@ -319,13 +319,14 @@ internal fun BrandMenuPanel(
                         .background(T.separatorColor.current)
                         .clearAndSetSemantics { },
                 )
-                is BrandMenuItem.Label -> BasicText(
+                is BrandMenuItem.Label -> BrandBasicText(
                     item.text,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = T.labelMarginInline)
                         .padding(horizontal = T.labelPaddingInline, vertical = T.labelPaddingBlock),
-                    style = brandTextStyle(T.labelFontSize, T.labelFontWeight, T.itemLineHeight, color = T.labelColor.current),
+                    // `.menu__label` no declara `line-height`: hereda el del cuerpo (`text.line-height`), no el del ítem.
+                    style = brandTextStyle(T.labelFontSize, T.labelFontWeight, BrandTextTokens.lineHeight, color = T.labelColor.current),
                 )
                 is BrandMenuItem.Button -> MenuRow(
                     label = item.label, description = item.description, icon = item.icon, destructive = item.destructive,
@@ -388,13 +389,10 @@ private fun MenuRow(
                 }
             }
             Column(Modifier.weight(1f, fill = false)) {
-                BrandLineBox(T.itemFontSize, T.itemLineHeight) {
-                    BasicText(label, style = brandTextStyle(T.itemFontSize, weight, T.itemLineHeight, color = ink), maxLines = 1, overflow = TextOverflow.Ellipsis)
-                }
+                BrandBasicText(label, style = brandTextStyle(T.itemFontSize, weight, T.itemLineHeight, color = ink), maxLines = 1, overflow = TextOverflow.Ellipsis)
                 if (description != null) {
-                    BrandLineBox(T.labelFontSize, T.itemLineHeight) {
-                        BasicText(description, style = brandTextStyle(T.labelFontSize, T.itemFontWeight, T.itemLineHeight, color = ink), maxLines = 1, overflow = TextOverflow.Ellipsis)
-                    }
+                    // `line-height` heredado del ítem (un número: se aplica a la letra del rótulo).
+                    BrandBasicText(description, style = brandTextStyle(T.labelFontSize, T.itemFontWeight, T.itemLineHeight, color = ink), maxLines = 1, overflow = TextOverflow.Ellipsis)
                 }
             }
         }

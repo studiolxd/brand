@@ -21,6 +21,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import com.studiolxd.brand.BrandTheme
 import com.studiolxd.brand.components.closebutton.BrandCloseButtonInk
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.BrandStackBreakpoint
 import com.studiolxd.brand.support.BrandStretchColumn
@@ -163,6 +164,6 @@ fun BrandBanner(
     dismissLabel: String = "Descartar",
 ) {
     BrandBanner(modifier, variant, actions, onDismiss, dismissLabel) {
-        BasicText(text, style = com.studiolxd.brand.support.LocalBrandTextStyle.current)
+        BrandBasicText(text, style = com.studiolxd.brand.support.LocalBrandTextStyle.current)
     }
 }

@@ -7,7 +7,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.compositionLocalOf
@@ -31,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.brandTextStyle
 import com.studiolxd.brand.support.brandTransition
@@ -82,7 +82,7 @@ internal fun BrandFieldLayout(
 ) {
     Column(modifier, verticalArrangement = Arrangement.spacedBy(gap)) {
         if (!labelHidden) {
-            BasicText(
+            BrandBasicText(
                 label,
                 modifier = Modifier.clearAndSetSemantics { },
                 style = brandTextStyle(
@@ -93,7 +93,7 @@ internal fun BrandFieldLayout(
         }
         control()
         if (errorMessage != null) {
-            BasicText(
+            BrandBasicText(
                 errorMessage,
                 modifier = Modifier.clearAndSetSemantics { },
                 style = brandTextStyle(
@@ -103,7 +103,7 @@ internal fun BrandFieldLayout(
             )
         }
         if (helperText != null) {
-            BasicText(
+            BrandBasicText(
                 helperText,
                 modifier = Modifier.clearAndSetSemantics { },
                 style = brandTextStyle(helper.fontSize, helper.fontWeight, helper.lineHeight, color = helper.color),

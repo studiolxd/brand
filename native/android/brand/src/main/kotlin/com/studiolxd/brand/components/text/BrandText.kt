@@ -1,6 +1,5 @@
 package com.studiolxd.brand.components.text
 
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -12,6 +11,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.LocalBrandTextStyle
 import com.studiolxd.brand.support.brandContentColor
 import com.studiolxd.brand.support.brandTextStyle
@@ -131,7 +131,7 @@ fun BrandHeading(
     size: HeadingSize? = null,
 ) {
     val points = size?.size ?: level.fontSize
-    BasicText(
+    BrandBasicText(
         text = text,
         modifier = modifier.semantics { heading() },
         style = brandTextStyle(points, level.fontWeight, level.lineHeight, level.letterSpacing, color = level.color),
@@ -168,7 +168,7 @@ fun BrandParagraph(
     modifier: Modifier = Modifier,
     size: ParagraphSize = ParagraphSize.Default,
 ) {
-    BasicText(text, modifier, style = paragraphStyle(size))
+    BrandBasicText(text, modifier, style = paragraphStyle(size))
 }
 
 /**
@@ -187,7 +187,7 @@ fun BrandParagraph(
     modifier: Modifier = Modifier,
     size: ParagraphSize = ParagraphSize.Default,
 ) {
-    BasicText(text, modifier, style = paragraphStyle(size))
+    BrandBasicText(text, modifier, style = paragraphStyle(size))
 }
 
 // MARK: Text (en línea)
@@ -263,5 +263,5 @@ fun BrandText(
     val span = brandSpanStyle(element, tone, strikethrough)
     val base = LocalBrandTextStyle.current
     val color = if (span.color != Color.Unspecified) span.color else if (base.color != Color.Unspecified) base.color else brandContentColor()
-    BasicText(text, modifier, style = base.merge(span).copy(color = color))
+    BrandBasicText(text, modifier, style = base.merge(span).copy(color = color))
 }

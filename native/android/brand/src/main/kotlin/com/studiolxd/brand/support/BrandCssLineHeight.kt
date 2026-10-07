@@ -18,7 +18,11 @@ import kotlin.math.ceil
  * Lo que la primera línea trae de más se mide una vez con [style] (una línea de muestra contra `ceil(lineHeight)`) y se
  * descuenta del alto, repartido mitad arriba y mitad abajo, como el medio interlineado de CSS: los glifos se quedan
  * centrados en su caja y lo que sobresale se pinta fuera, como en la web. Con un interlineado que ya cubre la fuente
- * (`1.5`) no hace nada. Para un texto de una sola línea dentro de una fila, [BrandLineBox].
+ * (`1.5`) no hace nada.
+ *
+ * Lo sustituye [brandCssLineBox], que pone la caja en el propio estilo (exacta al píxel, sin medir cada texto) y por el
+ * que ya pasan todos los textos de los componentes ([BrandBasicText], [ProvideBrandContent]). Queda solo para el título
+ * del aviso de `BrandToastHost`, pendiente de pasarse a [BrandBasicText]; después, este fichero sobra.
  */
 @Composable
 internal fun Modifier.brandCssLineHeight(style: TextStyle): Modifier {

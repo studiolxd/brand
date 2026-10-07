@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -45,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import com.studiolxd.brand.components.closebutton.BrandCloseButton
 import com.studiolxd.brand.components.dialog.BrandDialogFooter
 import com.studiolxd.brand.components.dialog.BrandDialogWindow
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.brandTextStyle
 import com.studiolxd.brand.support.brandTransition
@@ -111,14 +111,16 @@ fun BrandSheetContent(
                     verticalArrangement = Arrangement.spacedBy(T.headerGap),
                 ) {
                     if (!titleHidden) {
-                        BasicText(
+                        // El título es un `<h2>` en React (`Dialog.Title`) y `.sheet__title` no declara `line-height`: hereda el
+                        // de los títulos `h2` (`text.h2-line-height`), no el del cuerpo.
+                        BrandBasicText(
                             title,
                             Modifier.semantics { heading() },
-                            style = brandTextStyle(T.titleFontSize, T.titleFontWeight, BrandTextTokens.lineHeight, color = T.titleColor.current),
+                            style = brandTextStyle(T.titleFontSize, T.titleFontWeight, BrandTextTokens.h2LineHeight, color = T.titleColor.current),
                         )
                     }
                     if (description != null) {
-                        BasicText(
+                        BrandBasicText(
                             description,
                             style = brandTextStyle(T.descriptionFontSize, BrandTextTokens.fontWeight, BrandTextTokens.lineHeight, color = T.descriptionColor.current),
                         )

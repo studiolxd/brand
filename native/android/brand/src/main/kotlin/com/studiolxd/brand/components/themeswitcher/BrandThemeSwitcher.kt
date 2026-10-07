@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -50,6 +49,7 @@ import com.studiolxd.brand.components.field.LocalBrandForcedFocus
 import com.studiolxd.brand.icon.BrandIcon
 import com.studiolxd.brand.icon.BrandIconName
 import com.studiolxd.brand.icon.BrandIconSize
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.brandFocusRing
 import com.studiolxd.brand.support.brandTextStyle
@@ -197,7 +197,7 @@ private fun ThemeCompactVariant(
         BrandControlSize.Lg -> BrandLabelTokens.lgFontSize
     }
     val label: @Composable () -> Unit = {
-        BasicText(
+        BrandBasicText(
             labels.group,
             modifier = Modifier.clearAndSetSemantics { },
             style = brandTextStyle(labelSize, BrandLabelTokens.fontWeight, BrandLabelTokens.lineHeight, BrandLabelTokens.letterSpacing, color = BrandLabelTokens.color.current),
@@ -300,7 +300,7 @@ private fun ThemeDropdownControl(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             BrandIcon(choice.icon, size = iconSize, color = D.color.current)
-            BasicText(text, style = brandTextStyle(fontSize, D.fontWeight, 1f, color = D.color.current), maxLines = 1)
+            BrandBasicText(text, style = brandTextStyle(fontSize, D.fontWeight, 1f, color = D.color.current), maxLines = 1)
         }
         BrandIcon(BrandIconName.Chevron, modifier = Modifier.rotate(chevron), size = BrandIconSize.Sm, color = D.color.current)
     }
@@ -346,9 +346,10 @@ private fun ThemeMenuItem(choice: BrandThemeChoice, text: String, isCurrent: Boo
         verticalAlignment = Alignment.CenterVertically,
     ) {
         BrandIcon(choice.icon, size = BrandIconSize.Sm, color = color)
-        BasicText(
+        // `.select__item` no declara `line-height`: hereda el del cuerpo (`text.line-height`), no el del disparador.
+        BrandBasicText(
             text,
-            style = brandTextStyle(S.fontSize, if (isCurrent) S.itemSelectedFontWeight else S.fontWeight, S.lineHeight, color = color),
+            style = brandTextStyle(S.fontSize, if (isCurrent) S.itemSelectedFontWeight else S.fontWeight, BrandTextTokens.lineHeight, color = color),
             maxLines = 1,
         )
     }
@@ -413,6 +414,6 @@ private fun ThemeListOption(choice: BrandThemeChoice, text: String, isCurrent: B
         verticalAlignment = Alignment.CenterVertically,
     ) {
         BrandIcon(choice.icon, size = BrandIconSize.Sm, color = ink)
-        BasicText(text, style = brandTextStyle(T.listFontSize, weight, BrandTextTokens.lineHeight, color = ink), maxLines = 1)
+        BrandBasicText(text, style = brandTextStyle(T.listFontSize, weight, BrandTextTokens.lineHeight, color = ink), maxLines = 1)
     }
 }

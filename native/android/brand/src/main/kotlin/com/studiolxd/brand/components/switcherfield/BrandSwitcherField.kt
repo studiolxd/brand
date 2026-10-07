@@ -3,13 +3,13 @@ package com.studiolxd.brand.components.switcherfield
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.TextUnit
 import com.studiolxd.brand.components.field.brandAlert
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.brandTextStyle
 import com.studiolxd.brand.support.resolve
@@ -66,21 +66,21 @@ fun BrandSwitcherField(
             enabled = enabled,
             contentDescription = if (labelHidden) label else null,
             label = if (labelHidden) null else ({
-                BasicText(
+                BrandBasicText(
                     label,
                     style = brandTextStyle(labelFontSize, F.labelFontWeight, F.labelLineHeight, F.labelLetterSpacing, color = F.labelColor.current),
                 )
             }),
         )
         if (errorMessage != null) {
-            BasicText(
+            BrandBasicText(
                 errorMessage,
                 modifier = Modifier.brandAlert(),
                 style = brandTextStyle(F.errorFontSize, F.errorFontWeight, F.errorLineHeight, color = F.errorColor.current),
             )
         }
         if (helperText != null) {
-            BasicText(
+            BrandBasicText(
                 helperText,
                 style = brandTextStyle(F.helperFontSize, F.helperFontWeight, F.helperLineHeight, color = F.helperColor.current),
             )

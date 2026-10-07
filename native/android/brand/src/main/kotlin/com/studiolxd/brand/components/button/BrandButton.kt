@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
@@ -42,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import com.studiolxd.brand.icon.BrandIcon
 import com.studiolxd.brand.icon.BrandIconName
 import com.studiolxd.brand.icon.BrandIconSize
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.LocalBrandTextStyle
 import com.studiolxd.brand.support.BrandInteractionState
@@ -362,7 +362,7 @@ fun BrandButton(
             BrandIcon(icon, size = BrandIconSize.Text)
             Spacer(Modifier.width(BrandSpacing.s2))
         }
-        BasicText(text, style = LocalBrandTextStyle.current, maxLines = 1, overflow = TextOverflow.Ellipsis)
+        BrandBasicText(text, style = LocalBrandTextStyle.current, maxLines = 1, overflow = TextOverflow.Ellipsis)
     }
 }
 

@@ -10,15 +10,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.remember
@@ -49,11 +46,11 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.studiolxd.brand.components.field.LocalBrandForcedFocus
 import com.studiolxd.brand.components.field.animatedFieldColor
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.brandFocusRing
 import com.studiolxd.brand.support.brandTextStyle
 import com.studiolxd.brand.support.collectBrandInteractionState
 import com.studiolxd.brand.support.rememberReduceMotion
-import com.studiolxd.brand.support.toScaledDp
 import com.studiolxd.brand.tokens.BrandTabsTokens as T
 import com.studiolxd.brand.tokens.BrandLineHeight
 
@@ -280,19 +277,15 @@ internal fun <V> BrandTabSurface(
             .padding(horizontal = T.triggerPaddingInline, vertical = T.triggerPaddingBlock),
         contentAlignment = Alignment.Center,
     ) {
-        // El `<button>` de la web no hereda el interlineado del cuerpo: usa `line-height: normal` (≈ 1,1 con esta fuente), que
-        // no es un token; el peldaño más cercano es `line-height.tight`. La fuente trae más alto natural y Compose no encoge
-        // una línea por debajo de él, así que la caja se fija al token y el texto se centra en ella (como en `BrandTag`).
-        Box(Modifier.height((T.triggerFontSize * BrandLineHeight.tight).toScaledDp()), contentAlignment = Alignment.Center) {
-            Box(Modifier.wrapContentHeight(Alignment.CenterVertically, unbounded = true)) {
-                BasicText(
-                    tab.label,
-                    style = brandTextStyle(T.triggerFontSize, weight, BrandLineHeight.tight, color = ink)
-                        .copy(textAlign = if (vertical) TextAlign.Center else TextAlign.Unspecified),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
-            }
-        }
+        // El `<button>` de la web no hereda el interlineado del cuerpo: toma el `line-height: 1.15` de `normalize.css`, que no
+        // es un token; el peldaño más cercano es `line-height.tight` (1,1: 0,8 dp menos por pestaña a 16 sp). La caja de
+        // línea de CSS la pone `BrandBasicText`.
+        BrandBasicText(
+            tab.label,
+            style = brandTextStyle(T.triggerFontSize, weight, BrandLineHeight.tight, color = ink)
+                .copy(textAlign = if (vertical) TextAlign.Center else TextAlign.Unspecified),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
     }
 }

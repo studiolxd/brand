@@ -23,6 +23,7 @@ import androidx.compose.ui.semantics.collectionItemInfo
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.LocalBrandTextStyle
 import com.studiolxd.brand.support.ProvideBrandContent
 import com.studiolxd.brand.support.brandTextStyle
@@ -101,7 +102,7 @@ fun BrandList(
                     },
                 ) {
                     if (type != ListType.Plain) {
-                        BasicText(
+                        BrandBasicText(
                             text = if (type == ListType.Ordered) "${index + 1}. " else "• ",
                             modifier = Modifier.width(T.listPaddingInlineStart).clearAndSetSemantics { },
                             style = style.copy(textAlign = TextAlign.End),
@@ -189,9 +190,9 @@ fun BrandListItem(
 ) {
     BrandListItem(
         modifier = modifier,
-        secondary = subtitle?.let { { BasicText(it, style = LocalBrandTextStyle.current) } },
+        secondary = subtitle?.let { { BrandBasicText(it, style = LocalBrandTextStyle.current) } },
         leading = leading,
         trailing = trailing,
         onClick = onClick,
-    ) { BasicText(text, style = LocalBrandTextStyle.current) }
+    ) { BrandBasicText(text, style = LocalBrandTextStyle.current) }
 }
