@@ -11,6 +11,7 @@ import { FilterBar } from '../molecules/FilterBar/FilterBar';
 import { TableOfContents } from '../molecules/TableOfContents/TableOfContents';
 import { PrevNextNav } from '../molecules/PrevNextNav/PrevNextNav';
 import { CalendarRoster } from '../molecules/CalendarRoster/CalendarRoster';
+import { Fieldset } from '../atoms/Fieldset/Fieldset';
 
 /**
  * Los alias obsoletos de la v51. Cada uno
@@ -123,4 +124,21 @@ describe('alias obsoleto linkComponent → renderLink (v51)', () => {
       );
     });
   }
+});
+
+/** D26: `Fieldset weight` queda obsoleta y sin efecto. */
+describe('Fieldset weight obsoleta (v51)', () => {
+  it('no pinta clase de peso y avisa en desarrollo', () => {
+    resetWarnings();
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const { container } = render(
+      <Fieldset legend="Datos" weight="bold">
+        <input aria-label="x" />
+      </Fieldset>,
+    );
+    const legend = container.querySelector('legend');
+    expect(legend?.className).not.toContain('bold');
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('`<Fieldset weight>` está obsoleta'));
+    warn.mockRestore();
+  });
 });

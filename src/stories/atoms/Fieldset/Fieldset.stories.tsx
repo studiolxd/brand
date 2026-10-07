@@ -17,11 +17,7 @@ const meta: Meta<typeof Fieldset> = {
       options: [1, 2, 3, 4, 5, 6],
       description: 'Nivel de heading visual para el legend.',
     },
-    weight: {
-      control: { type: 'select' },
-      options: [undefined, 'thin', 'extralight', 'light', 'regular', 'medium', 'semibold', 'bold', 'extrabold', 'black'],
-      description: 'Peso tipográfico del legend.',
-    },
+    weight: { table: { disable: true } },
     size: {
       control: { type: 'select' },
       options: [undefined, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
