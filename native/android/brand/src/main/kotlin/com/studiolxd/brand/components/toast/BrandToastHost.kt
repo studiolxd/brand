@@ -19,7 +19,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -58,8 +57,8 @@ import com.studiolxd.brand.BrandTheme
 import com.studiolxd.brand.components.button.BrandButton
 import com.studiolxd.brand.components.button.ButtonVariant
 import com.studiolxd.brand.components.closebutton.BrandCloseButton
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
-import com.studiolxd.brand.support.brandCssLineHeight
 import com.studiolxd.brand.support.brandTextStyle
 import com.studiolxd.brand.support.brandTransition
 import com.studiolxd.brand.support.rememberReduceMotion
@@ -134,12 +133,11 @@ fun BrandToastCard(
                 verticalArrangement = Arrangement.spacedBy(A.contentGap),
             ) {
                 // El tracking del título es el del aviso (`toast.title-letter-spacing`, −0,02 em: el de un `<h2>`, que es lo
-                // que es el título en React). Su
-                // `line-height` (1,3) es más apretado que la fuente: la caja se ajusta a la de CSS (20,8 a 16 sp).
-                val titleStyle = brandTextStyle(A.titleFontSize, A.titleFontWeight, A.titleLineHeight, T.titleLetterSpacing, color = titleColor)
-                BasicText(item.title, Modifier.brandCssLineHeight(titleStyle), style = titleStyle)
+                // que es el título en React). Título y descripción llevan la caja de línea de CSS (`BrandBasicText`): el
+                // título mide 16 × 1,3 = 20,8 y cada línea de la descripción 16 × 1,5 = 24, como en la web.
+                BrandBasicText(item.title, style = brandTextStyle(A.titleFontSize, A.titleFontWeight, A.titleLineHeight, T.titleLetterSpacing, color = titleColor))
                 if (item.description != null) {
-                    BasicText(item.description, style = brandTextStyle(A.descriptionFontSize, BrandTextTokens.fontWeight, A.descriptionLineHeight, color = descriptionColor))
+                    BrandBasicText(item.description, style = brandTextStyle(A.descriptionFontSize, BrandTextTokens.fontWeight, A.descriptionLineHeight, color = descriptionColor))
                 }
             }
             if (item.action != null) {

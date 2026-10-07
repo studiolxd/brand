@@ -49,14 +49,14 @@ public struct BrandToastCard: View {
             // mide 16 × 1,3 = 20,8 y cada línea de la descripción 16 × 1,5 = 24, como en la web. El tracking del título es
             // el del aviso (`toast.title-letter-spacing`, −0,02 em: el de un `<h2>`, que es lo que es el título en React).
             Text(item.title)
-                .brandLinedFont(size: A.titleFontSize, weight: A.titleFontWeight, lineHeight: A.titleLineHeight, halfLeading: true)
+                .brandLinedFont(size: A.titleFontSize, weight: A.titleFontWeight, lineHeight: A.titleLineHeight)
                 .tracking(BrandToastTokens.titleLetterSpacing * A.titleFontSize * scale)
                 .foregroundStyle(fill.title)
                 .accessibilityAddTraits(.isHeader)
             if let description = item.description {
                 Text(description)
                     .brandLinedFont(size: A.descriptionFontSize, weight: BrandTextTokens.fontWeight,
-                                    lineHeight: A.descriptionLineHeight, halfLeading: true)
+                                    lineHeight: A.descriptionLineHeight)
                     .foregroundStyle(fill.description)
             }
             if let action = item.action {

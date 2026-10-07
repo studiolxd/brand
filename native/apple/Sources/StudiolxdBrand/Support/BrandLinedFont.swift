@@ -32,10 +32,6 @@ private struct BrandLinedFont: ViewModifier {
         case text
         /// Fuente e interlineado para un contenedor, con una línea de alto mínimo.
         case container
-        /// Transitorio: el medio interlineado como `padding` (lo que estrenó D50 con `halfLeading`). Mide lo mismo que
-        /// `text` salvo el redondeo del `Text` al píxel, que aquí se suma. Solo lo usa `BrandToastHost` hasta que deje de
-        /// pasar `halfLeading` (D52).
-        case paddedText
     }
 
     init(size: CGFloat, weight: Int, family: String, multiple: CGFloat, mode: Mode, relativeTo: Font.TextStyle) {
@@ -58,7 +54,6 @@ private struct BrandLinedFont: ViewModifier {
         // El `VStack` hace de la vista una sola (un `@ViewBuilder` puede traer varias) para que la caja la mida entera.
         case .text: BrandLineBox(lineHeight: size * multiple, natural: natural) { VStack(alignment: .leading, spacing: 0) { styled } }
         case .container: styled.frame(minHeight: size * multiple, alignment: .leading)
-        case .paddedText: styled.padding(.vertical, leading / 2)
         }
     }
 }
@@ -130,14 +125,6 @@ extension View {
     func brandLinedContainerFont(size: CGFloat, weight: Int = BrandFontWeight.default, family: String = BrandFontFamily.sans,
                                  lineHeight: CGFloat, relativeTo textStyle: Font.TextStyle = .body) -> some View {
         modifier(BrandLinedFont(size: size, weight: weight, family: family, multiple: lineHeight, mode: .container,
-                                relativeTo: textStyle))
-    }
-
-    /// Transitorio (D52): la caja de línea de CSS es ya lo que da `brandLinedFont` sin más. `halfLeading` conserva el
-    /// reparto con `padding` de D50 para que `BrandToastHost` no cambie hasta que deje de pasarlo; entonces se borra.
-    func brandLinedFont(size: CGFloat, weight: Int = BrandFontWeight.default, family: String = BrandFontFamily.sans,
-                        lineHeight: CGFloat, halfLeading _: Bool, relativeTo textStyle: Font.TextStyle = .body) -> some View {
-        modifier(BrandLinedFont(size: size, weight: weight, family: family, multiple: lineHeight, mode: .paddedText,
                                 relativeTo: textStyle))
     }
 }
