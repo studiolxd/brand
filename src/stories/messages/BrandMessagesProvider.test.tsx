@@ -779,7 +779,7 @@ describe('las subidas leen del proveedor', () => {
           confirmLabel="Use this image"
           outputMimeType="image/jpeg"
           onConfirm={() => {}}
-          onClose={() => {}}
+          onOpenChange={() => {}}
         />
       </BrandMessagesProvider>,
     );
@@ -801,7 +801,7 @@ describe('las subidas leen del proveedor', () => {
           confirmLabel="Save"
           outputMimeType="image/jpeg"
           onConfirm={() => {}}
-          onClose={() => {}}
+          onOpenChange={() => {}}
         />,
       ), /imageCropDialog\.loading/);
   });

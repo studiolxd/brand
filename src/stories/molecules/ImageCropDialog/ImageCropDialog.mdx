@@ -81,8 +81,8 @@ no se pinta. Guardar sigue deshabilitado, porque no hay nada que recortar.
 <Canvas of={ImageCropDialogStories.Ocupado} />
 
 Con `busy`, las dos acciones quedan deshabilitadas y `Modal` no se cierra
-con Escape ni con clic en el velo (el consumidor decide `onClose` solo
-cuando `!busy`).
+con Escape ni con clic en el velo (el diálogo ignora `onOpenChange(false)` mientras dure
+`busy`).
 
 ## Superficie oscura
 

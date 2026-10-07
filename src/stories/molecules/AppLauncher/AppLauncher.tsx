@@ -293,7 +293,7 @@ function AppLauncherModal({
         </button>
       )}
 
-      <Modal open={isOpen} onClose={() => setOpen(false)} title={t('title', labels.title)}>
+      <Modal open={isOpen} onOpenChange={setOpen} title={t('title', labels.title)}>
         <AppLauncherGrid apps={apps} currentAppId={currentAppId} newLabel={labels.new} />
       </Modal>
     </>

@@ -525,7 +525,7 @@ export function AvatarUpload({
         {...(cropLoadingLabel !== undefined ? { loadingLabel: cropLoadingLabel } : {})}
         {...(cropErrorMessage !== undefined ? { errorMessage: cropErrorMessage } : {})}
         onConfirm={handleConfirm}
-        onClose={closeDialog}
+        onOpenChange={(isOpen) => { if (!isOpen) closeDialog(); }}
       />
     </div>
   );
