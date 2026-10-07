@@ -137,7 +137,8 @@ public struct BrandConfirmDialog<Extra: View>: View {
                 header
                 if let description {
                     Text(description)
-                        .brandFont(size: M.descriptionFontSize)
+                        // `.modal__description` no fija `line-height`: hereda el del cuerpo (`text.line-height`).
+                        .brandLinedFont(size: M.descriptionFontSize, lineHeight: BrandTextTokens.lineHeight)
                         .foregroundStyle(M.descriptionColor)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.bottom, M.descriptionMarginBlockEnd)
@@ -167,14 +168,16 @@ public struct BrandConfirmDialog<Extra: View>: View {
     private var header: some View {
         HStack(alignment: .top, spacing: M.headerGap) {
             Text(title)
-                .brandFont(size: M.titleFontSize, weight: M.titleFontWeight, relativeTo: .title)
+                .brandLinedFont(size: M.titleFontSize, weight: M.titleFontWeight, lineHeight: M.titleLineHeight, relativeTo: .title)
                 .foregroundStyle(M.titleColor)
-                .lineSpacing(M.titleFontSize * (M.titleLineHeight - 1))
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .accessibilityAddTraits(.isHeader)
             BrandCloseButton(closeLabel, size: .md, action: cancel)
                 .disabled(pending)
+                // El aspa se centra sobre la primera línea del título, como en la web: la mitad de lo que va de la
+                // caja de esa línea (`title-font-size × title-line-height`) al aspa (`close-size`).
+                .padding(.top, (M.titleFontSize * M.titleLineHeight - M.closeSize) / 2)
         }
         .padding(.bottom, M.headerGap)
     }
@@ -286,7 +289,8 @@ private struct PhraseField: View {
     var body: some View {
         VStack(alignment: .leading, spacing: BrandFormFieldTokens.gap) {
             Text(label)
-                .brandFont(size: BrandLabelTokens.fontSize, weight: BrandLabelTokens.fontWeight, relativeTo: .subheadline)
+                .brandLinedFont(size: BrandLabelTokens.fontSize, weight: BrandLabelTokens.fontWeight,
+                                lineHeight: BrandLabelTokens.lineHeight, relativeTo: .subheadline)
                 .foregroundStyle(BrandLabelTokens.color)
             TextField("", text: $text)
                 .textFieldStyle(.plain)
@@ -317,7 +321,8 @@ private struct PhraseField: View {
                 .accessibilityValue(showError ? Text(mismatch) : Text(""))
             if showError {
                 Text(mismatch)
-                    .brandFont(size: BrandInputFieldTokens.errorFontSize, weight: BrandInputFieldTokens.errorFontWeight)
+                    .brandLinedFont(size: BrandInputFieldTokens.errorFontSize, weight: BrandInputFieldTokens.errorFontWeight,
+                                    lineHeight: BrandInputFieldTokens.errorLineHeight)
                     .foregroundStyle(BrandInputFieldTokens.errorColor)
                     .accessibilityHidden(true)
             }

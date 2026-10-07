@@ -66,7 +66,7 @@ private struct BrandListLayout: _VariadicView_UnaryViewRoot {
         } else {
             HStack(alignment: .firstTextBaseline, spacing: 0) {
                 Text(verbatim: type == .ordered ? "\(index + 1). " : "• ")
-                    .lined
+                    .listText
                     .frame(width: BrandTextTokens.listPaddingInlineStart, alignment: .trailing)
                     .accessibilityHidden(true)
                 child.lined.frame(maxWidth: .infinity, alignment: .leading)
@@ -76,8 +76,16 @@ private struct BrandListLayout: _VariadicView_UnaryViewRoot {
 }
 
 private extension View {
-    /// La tipografía de lista (`text.list.*`), con su interlineado de CSS.
+    /// La tipografía de lista (`text.list.*`) para una fila: fuente e interlineado, y una línea de alto mínimo. La fila
+    /// no es una línea de texto (lleva iconos y accesorios), así que no se rodea del medio interlineado: lo lleva cada
+    /// texto (`listText`), como en la web, donde la caja de línea es la del texto y la fila mide lo que su hijo más alto.
     var lined: some View {
+        brandLinedContainerFont(size: BrandTextTokens.listFontSize, weight: BrandTextTokens.listFontWeight,
+                                family: BrandTextTokens.listFontFamily, lineHeight: BrandTextTokens.listLineHeight)
+    }
+
+    /// Un texto de la lista con la caja de línea de CSS (`text.list.line-height`).
+    var listText: some View {
         brandLinedFont(size: BrandTextTokens.listFontSize, weight: BrandTextTokens.listFontWeight,
                        family: BrandTextTokens.listFontFamily, lineHeight: BrandTextTokens.listLineHeight)
     }
@@ -127,7 +135,7 @@ public struct BrandListItem<Leading: View, Content: View, Secondary: View, Trail
                 leading
             }
             VStack(alignment: .leading, spacing: 0) {
-                content
+                content.listText
                 secondary
                     .brandLinedFont(size: BrandTextTokens.listSecondaryFontSize, weight: BrandTextTokens.listFontWeight,
                                     family: BrandTextTokens.listFontFamily, lineHeight: BrandTextTokens.listSecondaryLineHeight)

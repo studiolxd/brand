@@ -47,7 +47,8 @@ public struct BrandTag<Content: View>: View {
     public var body: some View {
         let colors = variant.colors
         content
-            .brandFont(size: BrandTagTokens.fontSize, weight: BrandTagTokens.fontWeight, relativeTo: .footnote)
+            .brandLinedFont(size: BrandTagTokens.fontSize, weight: BrandTagTokens.fontWeight, lineHeight: BrandTagTokens.lineHeight,
+                            relativeTo: .footnote)
             .foregroundStyle(colors.foreground)
             .lineLimit(1)
             .fixedSize()

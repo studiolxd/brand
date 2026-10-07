@@ -241,6 +241,11 @@ private struct BrandTabFace: View {
 
     private typealias T = BrandTabsTokens
 
+    /// El `line-height` del disparador en la web: es un `<button>` y `.tabs__trigger` no lo fija, así que manda el
+    /// `line-height: 1.15` que `normalize.css` pone a los controles de formulario. No hay token (`tabs.trigger-line-height`
+    /// no existe): se copia el valor y se anota en la ficha.
+    private static let triggerLineHeight: CGFloat = 1.15
+
     private var weight: Int { selected ? Int(T.triggerActiveWeight) : T.triggerFontWeight }
 
     private var ink: Color {
@@ -252,7 +257,7 @@ private struct BrandTabFace: View {
     var body: some View {
         let shape = RoundedRectangle(cornerRadius: T.triggerBorderRadius)
         label
-            .brandFont(size: T.triggerFontSize, weight: weight)
+            .brandLinedFont(size: T.triggerFontSize, weight: weight, lineHeight: Self.triggerLineHeight)
             .lineLimit(1)
             .fixedSize(horizontal: true, vertical: false)
             .foregroundStyle(ink)
@@ -282,7 +287,7 @@ private struct BrandTabFace: View {
             }
             .opacity(disabled ? T.triggerDisabledOpacity : 1)
             .contentShape(Rectangle())
-            .brandHitTarget(height: T.triggerFontSize * scale * 1.2 + T.triggerPaddingBlock * 2)
+            .brandHitTarget(height: T.triggerFontSize * scale * Self.triggerLineHeight + T.triggerPaddingBlock * 2)
             .onHover { isHovering = $0 }
             .animation(reduceMotion ? nil : T.transitionEasing.animation(duration: T.transitionDuration), value: selected)
             .animation(reduceMotion ? nil : T.transitionEasing.animation(duration: T.transitionDuration), value: isHovering)

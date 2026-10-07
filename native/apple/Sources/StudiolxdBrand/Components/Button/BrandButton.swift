@@ -137,6 +137,18 @@ private struct BrandButtonBody: View {
         }
     }
 
+    /// `line-height` de la variante (1: la caja de línea mide el tamaño de letra). En las variantes con caja el texto va
+    /// centrado en la altura del control y no la cambia; en `text`, que no tiene caja, la altura es esta línea más la
+    /// separación del subrayado.
+    private var lineHeight: CGFloat {
+        switch style.variant {
+        case .primary: T.primaryLineHeight
+        case .outline: T.outlineLineHeight
+        case .ghost: T.ghostLineHeight
+        case .text: T.textLineHeight
+        }
+    }
+
     private var borderWidth: CGFloat {
         switch style.variant {
         case .primary: T.primaryBorderWidth
@@ -240,7 +252,7 @@ private struct BrandButtonBody: View {
         let shape = RoundedRectangle(cornerRadius: cornerRadius)
 
         configuration.label
-            .brandFont(size: fontSize, weight: fontWeight)
+            .brandLinedFont(size: fontSize, weight: fontWeight, lineHeight: lineHeight)
             .lineLimit(1)
             .fixedSize(horizontal: !block && !style.iconOnly, vertical: false)
             .foregroundStyle(colors.foreground)

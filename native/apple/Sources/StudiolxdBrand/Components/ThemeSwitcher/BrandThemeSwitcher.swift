@@ -161,7 +161,7 @@ private struct ThemeFieldLabel: View {
         case .lg: BrandLabelTokens.lgFontSize
         }
         Text(verbatim: text)
-            .brandFont(size: points, weight: BrandLabelTokens.fontWeight)
+            .brandLinedFont(size: points, weight: BrandLabelTokens.fontWeight, lineHeight: BrandLabelTokens.lineHeight)
             .foregroundStyle(BrandLabelTokens.color)
             .accessibilityHidden(true)
     }
@@ -269,7 +269,9 @@ private struct ThemeListOption: View {
                 BrandIcon(choice.icon, size: .sm)
                 Text(verbatim: text)
             }
-            .brandFont(size: T.listFontSize, weight: isCurrent ? T.listCurrentFontWeight : BrandFontWeight.default)
+            // `.theme-switcher__option` lleva `font: inherit`: el `line-height` es el del cuerpo (`text.line-height`).
+            .brandLinedFont(size: T.listFontSize, weight: isCurrent ? T.listCurrentFontWeight : BrandFontWeight.default,
+                            lineHeight: BrandTextTokens.lineHeight)
             .foregroundStyle(BrandColorRoles.text)
             .padding(.bottom, isHovering && !isCurrent ? BrandLinkTokens.underlineOffset : 0)
             .overlay(alignment: .bottom) {
