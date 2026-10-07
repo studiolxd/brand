@@ -22,6 +22,10 @@ para breaking changes.
 - Nativo: parejas React ↔ SwiftUI y React ↔ Compose de `Menu`: disparadores a medida y de icono en las dos
   plataformas, y paneles abiertos en Android. Las capturas de panel de menú en Android apagan el foco automático, que
   hacía inestable la de `ContextMenu` abierto.
+- Nativo (Android): el rótulo de sección del menú queda a 16 dp del borde, como en React. Antes sumaba además el
+  margen de los ítems y quedaba a 24 dp. Capturas de Paparazzi y parejas de `Menu` regrabadas. iOS no tenía la deriva.
+- Nativo: parejas React ↔ SwiftUI y React ↔ Compose de `CloseButton` (tres tallas) y `Toaster` (pila desplegada y
+  recogida). `capture-story.mjs` gana `--hide <selector>` y aparta el puntero tras `--click`.
 - `release:npm` lee el stage-id en el formato de npm 11 («staged with id …»); con la v50.0.0 lo subió pero no supo
   imprimirlo. Solo afecta al script de publicación, no al paquete.
 
