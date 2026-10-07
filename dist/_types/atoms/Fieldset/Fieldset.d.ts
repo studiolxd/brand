@@ -1,6 +1,5 @@
 import type { HeadingSize } from '../Heading/Heading';
 import './Fieldset.css';
-type HeadingWeight = 'thin' | 'extralight' | 'light' | 'regular' | 'medium' | 'semibold' | 'bold' | 'extrabold' | 'black';
 export interface FieldsetProps {
     /** Texto del legend (título del grupo de campos). */
     legend: React.ReactNode;
@@ -14,12 +13,6 @@ export interface FieldsetProps {
     legendHidden?: boolean;
     /** Nivel de heading visual para el legend (1–6). */
     level?: 1 | 2 | 3 | 4 | 5 | 6;
-    /**
-     * @deprecated No tiene efecto: el peso del legend lo da su `level`, como en
-     * `Heading` («un título no elige su peso»). Avisa en desarrollo y sale del
-     * tipo en la v52.
-     */
-    weight?: HeadingWeight;
     /** Tamaño tipográfico del legend. */
     size?: HeadingSize;
     /** Clases adicionales para el fieldset. */
@@ -32,5 +25,4 @@ export interface FieldsetProps {
     'aria-describedby'?: string;
     children: React.ReactNode;
 }
-export declare function Fieldset({ legend, legendHidden, level, weight, size, className, id, disabled, 'aria-describedby': ariaDescribedBy, children, }: FieldsetProps): import("react/jsx-runtime").JSX.Element;
-export {};
+export declare function Fieldset({ legend, legendHidden, level, size, className, id, disabled, 'aria-describedby': ariaDescribedBy, children, }: FieldsetProps): import("react/jsx-runtime").JSX.Element;
