@@ -1,12 +1,13 @@
 'use client';
 import './planning-grid.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
-import { VisuallyHidden as t } from "./visually-hidden.js";
-import { Input as n } from "./input.js";
-import { forwardRef as r, useId as i, useMemo as a, useState as o } from "react";
-import { Fragment as s, jsx as c, jsxs as l } from "react/jsx-runtime";
+import { n as e, t } from "./_shared/brandmessagescontext.js";
+import { VisuallyHidden as n } from "./visually-hidden.js";
+import { Spinner as r } from "./spinner.js";
+import { Input as i } from "./input.js";
+import { forwardRef as a, useContext as o, useId as s, useMemo as c, useState as l } from "react";
+import { Fragment as u, jsx as d, jsxs as f } from "react/jsx-runtime";
 //#region src/stories/organisms/PlanningGrid/planningHours.ts
-function u(e) {
+function p(e) {
 	let t = e.trim().replace(",", ".");
 	if (t === "") return 0;
 	if (!/^\d*\.?\d*$/.test(t)) return null;
@@ -15,118 +16,122 @@ function u(e) {
 }
 //#endregion
 //#region src/stories/organisms/PlanningGrid/PlanningGrid.tsx
-var d = (e, t) => `${e}\u0000${t}`, f = r(function({ rows: n, columns: r, cells: i, onCellChange: o, readOnly: s = !1, rowHeader: u, showRowTotals: f = !0, showColumnTotals: m = !0, showCapacity: h = !1, showRemaining: g = !0, max: _ = 999, locale: v = "es-ES", formatHours: y, size: b = "sm", label: x, cellLabel: S, className: C, ...w }, T) {
-	let E = e("planningGrid"), D = a(() => {
+var m = (e, t) => `${e}\u0000${t}`, h = a(function({ rows: i, columns: a, cells: s, onCellChange: l, readOnly: u = !1, rowHeader: p, showRowTotals: h = !0, showColumnTotals: _ = !0, showCapacity: v = !1, showRemaining: y = !0, max: b = 999, locale: x = "es-ES", formatHours: S, size: C = "sm", label: w, cellLabel: T, savingLabel: E, className: D, ...O }, k) {
+	let A = e("planningGrid"), j = o(t), M = () => E ?? j?.planningGrid?.saving ?? "Guardando…", N = c(() => {
 		let e = /* @__PURE__ */ new Map();
-		for (let t of i) e.set(d(t.rowId, t.columnKey), t);
+		for (let t of s) e.set(m(t.rowId, t.columnKey), t);
 		return e;
-	}, [i]), O = a(() => new Intl.NumberFormat(v, { maximumFractionDigits: 2 }), [v]), k = y ?? ((e) => `${O.format(e)} h`), A = (e, t) => D.get(d(e, t))?.value ?? 0, j = (e) => r.reduce((t, n) => t + A(e, n.key), 0), M = (e) => n.reduce((t, n) => t + A(n.id, e), 0), N = r.some((e) => e.capacity !== void 0), P = !s && o !== void 0, F = S ?? E("cellLabel");
-	return /* @__PURE__ */ c("div", {
-		ref: T,
-		className: ["planning-grid", C].filter(Boolean).join(" "),
-		...w,
-		children: /* @__PURE__ */ c("div", {
+	}, [s]), P = c(() => new Intl.NumberFormat(x, { maximumFractionDigits: 2 }), [x]), F = S ?? ((e) => `${P.format(e)} h`), I = (e, t) => N.get(m(e, t))?.value ?? 0, L = (e) => a.reduce((t, n) => t + I(e, n.key), 0), R = (e) => i.reduce((t, n) => t + I(n.id, e), 0), z = a.some((e) => e.capacity !== void 0), B = !u && l !== void 0, V = T ?? A("cellLabel");
+	return /* @__PURE__ */ d("div", {
+		ref: k,
+		className: ["planning-grid", D].filter(Boolean).join(" "),
+		...O,
+		children: /* @__PURE__ */ d("div", {
 			className: "planning-grid__wrap",
-			children: /* @__PURE__ */ l("table", {
+			children: /* @__PURE__ */ f("table", {
 				className: "planning-grid__table",
 				children: [
-					/* @__PURE__ */ c("caption", {
+					/* @__PURE__ */ d("caption", {
 						className: "visually-hidden",
-						children: E("label", x)
+						children: A("label", w)
 					}),
-					/* @__PURE__ */ c("thead", { children: /* @__PURE__ */ l("tr", { children: [
-						/* @__PURE__ */ c("th", {
+					/* @__PURE__ */ d("thead", { children: /* @__PURE__ */ f("tr", { children: [
+						/* @__PURE__ */ d("th", {
 							className: "planning-grid__corner",
 							scope: "col",
-							children: u
+							children: p
 						}),
-						r.map((e) => /* @__PURE__ */ l("th", {
+						a.map((e) => /* @__PURE__ */ f("th", {
 							scope: "col",
 							className: ["planning-grid__column-header", e.current ? "planning-grid__column-header--current" : ""].filter(Boolean).join(" "),
-							children: [e.label ?? e.name, e.sublabel ? /* @__PURE__ */ c("span", {
+							children: [e.label ?? e.name, e.sublabel ? /* @__PURE__ */ d("span", {
 								className: "planning-grid__column-sub",
 								children: e.sublabel
 							}) : null]
 						}, e.key)),
-						f ? /* @__PURE__ */ c("th", {
+						h ? /* @__PURE__ */ d("th", {
 							className: "planning-grid__column-header",
 							scope: "col",
-							children: E("rowTotal")
+							children: A("rowTotal")
 						}) : null
 					] }) }),
-					/* @__PURE__ */ c("tbody", { children: n.map((e) => /* @__PURE__ */ l("tr", { children: [
-						/* @__PURE__ */ c("th", {
+					/* @__PURE__ */ d("tbody", { children: i.map((e) => /* @__PURE__ */ f("tr", { children: [
+						/* @__PURE__ */ d("th", {
 							className: "planning-grid__row-header",
 							scope: "row",
 							children: e.label ?? e.name
 						}),
-						r.map((t) => {
-							let n = D.get(d(e.id, t.key)), r = s || e.readOnly || t.readOnly || n?.readOnly || !P, i = n?.value ?? null;
-							return /* @__PURE__ */ c("td", {
+						a.map((t) => {
+							let n = N.get(m(e.id, t.key)), i = u || e.readOnly || t.readOnly || n?.readOnly || !B, a = n?.value ?? null;
+							return /* @__PURE__ */ f("td", {
 								className: [
 									"planning-grid__cell",
-									r ? "planning-grid__cell--readonly" : "",
+									i ? "planning-grid__cell--readonly" : "",
 									n?.pending ? "planning-grid__cell--pending" : ""
 								].filter(Boolean).join(" "),
-								children: r ? i ? k(i) : null : /* @__PURE__ */ c(p, {
-									value: i,
-									max: _,
-									size: b,
-									locale: v,
+								children: [i ? a ? F(a) : null : /* @__PURE__ */ d(g, {
+									value: a,
+									max: b,
+									size: C,
+									locale: x,
 									error: n?.error,
-									label: F(e.name, t.name),
-									onCommit: (n) => o?.(e.id, t.key, n)
-								}, `${e.id}-${t.key}-${i ?? ""}`)
+									label: V(e.name, t.name),
+									onCommit: (n) => l?.(e.id, t.key, n)
+								}, `${e.id}-${t.key}-${a ?? ""}`), n?.pending ? /* @__PURE__ */ d(r, {
+									size: "sm",
+									label: M(),
+									className: "planning-grid__saving"
+								}) : null]
 							}, t.key);
 						}),
-						f ? /* @__PURE__ */ c("td", {
+						h ? /* @__PURE__ */ d("td", {
 							className: "planning-grid__footer-cell",
-							children: k(j(e.id))
+							children: F(L(e.id))
 						}) : null
 					] }, e.id)) }),
-					m || (g || h) && N ? /* @__PURE__ */ l("tfoot", { children: [
-						m ? /* @__PURE__ */ l("tr", { children: [
-							/* @__PURE__ */ c("th", {
+					_ || (y || v) && z ? /* @__PURE__ */ f("tfoot", { children: [
+						_ ? /* @__PURE__ */ f("tr", { children: [
+							/* @__PURE__ */ d("th", {
 								className: "planning-grid__footer-header",
 								scope: "row",
-								children: E("columnTotal")
+								children: A("columnTotal")
 							}),
-							r.map((e) => /* @__PURE__ */ c("td", {
+							a.map((e) => /* @__PURE__ */ d("td", {
 								className: "planning-grid__footer-cell",
-								children: k(M(e.key))
+								children: F(R(e.key))
 							}, e.key)),
-							f ? /* @__PURE__ */ c("td", {
+							h ? /* @__PURE__ */ d("td", {
 								className: "planning-grid__footer-cell",
-								children: k(n.reduce((e, t) => e + j(t.id), 0))
+								children: F(i.reduce((e, t) => e + L(t.id), 0))
 							}) : null
 						] }) : null,
-						h && N ? /* @__PURE__ */ l("tr", { children: [
-							/* @__PURE__ */ c("th", {
+						v && z ? /* @__PURE__ */ f("tr", { children: [
+							/* @__PURE__ */ d("th", {
 								className: "planning-grid__footer-header",
 								scope: "row",
-								children: E("capacity")
+								children: A("capacity")
 							}),
-							r.map((e) => /* @__PURE__ */ c("td", {
+							a.map((e) => /* @__PURE__ */ d("td", {
 								className: "planning-grid__footer-cell",
-								children: e.capacity === void 0 ? null : k(e.capacity)
+								children: e.capacity === void 0 ? null : F(e.capacity)
 							}, e.key)),
-							f ? /* @__PURE__ */ c("td", { className: "planning-grid__footer-cell" }) : null
+							h ? /* @__PURE__ */ d("td", { className: "planning-grid__footer-cell" }) : null
 						] }) : null,
-						g && N ? /* @__PURE__ */ l("tr", { children: [
-							/* @__PURE__ */ c("th", {
+						y && z ? /* @__PURE__ */ f("tr", { children: [
+							/* @__PURE__ */ d("th", {
 								className: "planning-grid__footer-header",
 								scope: "row",
-								children: E("remaining")
+								children: A("remaining")
 							}),
-							r.map((e) => {
-								if (e.capacity === void 0) return /* @__PURE__ */ c("td", { className: "planning-grid__footer-cell" }, e.key);
-								let n = e.capacity - M(e.key), r = n < 0;
-								return /* @__PURE__ */ l("td", {
+							a.map((e) => {
+								if (e.capacity === void 0) return /* @__PURE__ */ d("td", { className: "planning-grid__footer-cell" }, e.key);
+								let t = e.capacity - R(e.key), r = t < 0;
+								return /* @__PURE__ */ f("td", {
 									className: ["planning-grid__footer-cell", r ? "planning-grid__footer-cell--over" : ""].filter(Boolean).join(" "),
-									children: [k(n), r ? /* @__PURE__ */ c(t, { children: ` (${E("over")})` }) : null]
+									children: [F(t), r ? /* @__PURE__ */ d(n, { children: ` (${A("over")})` }) : null]
 								}, e.key);
 							}),
-							f ? /* @__PURE__ */ c("td", { className: "planning-grid__footer-cell" }) : null
+							h ? /* @__PURE__ */ d("td", { className: "planning-grid__footer-cell" }) : null
 						] }) : null
 					] }) : null
 				]
@@ -134,34 +139,34 @@ var d = (e, t) => `${e}\u0000${t}`, f = r(function({ rows: n, columns: r, cells:
 		})
 	});
 });
-function p({ value: e, max: r, size: a, locale: d, error: f, label: p, onCommit: m }) {
-	let h = e === null ? "" : new Intl.NumberFormat(d, { maximumFractionDigits: 2 }).format(e), [g, _] = o(h), v = i(), y = () => {
-		let t = u(g);
-		if (t === null) {
+function g({ value: e, max: t, size: r, locale: a, error: o, label: c, onCommit: m }) {
+	let h = e === null ? "" : new Intl.NumberFormat(a, { maximumFractionDigits: 2 }).format(e), [g, _] = l(h), v = s(), y = () => {
+		let n = p(g);
+		if (n === null) {
 			_(h);
 			return;
 		}
-		let n = Math.min(r, t);
-		n !== (e ?? 0) && m(n);
+		let r = Math.min(t, n);
+		r !== (e ?? 0) && m(r);
 	};
-	return /* @__PURE__ */ l(s, { children: [/* @__PURE__ */ c(n, {
+	return /* @__PURE__ */ f(u, { children: [/* @__PURE__ */ d(i, {
 		className: "planning-grid__input",
-		size: a,
+		size: r,
 		inputMode: "decimal",
-		"aria-label": p,
-		"aria-describedby": f ? v : void 0,
-		error: !!f,
+		"aria-label": c,
+		"aria-describedby": o ? v : void 0,
+		error: !!o,
 		value: g,
 		onChange: (e) => _(e.target.value),
 		onBlur: y,
 		onKeyDown: (e) => {
 			e.key === "Enter" && (e.preventDefault(), e.currentTarget.blur());
 		}
-	}), f ? /* @__PURE__ */ c(t, {
+	}), o ? /* @__PURE__ */ d(n, {
 		id: v,
 		role: "alert",
-		children: f
+		children: o
 	}) : null] });
 }
 //#endregion
-export { f as PlanningGrid };
+export { h as PlanningGrid };

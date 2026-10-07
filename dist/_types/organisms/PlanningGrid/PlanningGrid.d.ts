@@ -21,6 +21,11 @@ export interface PlanningGridMessages {
     remaining: string;
     /** Lo que se lee tras un resto negativo: hay más horas asignadas que disponibles. */
     over: string;
+    /**
+     * Lo que anuncia la marca de guardado de un cruce en vuelo («Guardando…»).
+     * **Opcional**: un catálogo sin ella compila, y la rejilla cae al castellano.
+     */
+    saving?: string;
 }
 /** Una fila: un proyecto, una persona. Lo que se planifica. */
 export interface PlanningGridRow {
@@ -56,7 +61,7 @@ export interface PlanningGridCell {
     value: number | null;
     /** Este cruce en concreto no se edita. */
     readOnly?: boolean;
-    /** El cambio está en vuelo: la celda se atenúa. */
+    /** El cambio está en vuelo: la cifra sigue a contraste pleno y la celda lleva una marca de guardado (un `Spinner` pequeño). */
     pending?: boolean;
     /** Lo que falló al guardar este cruce. Pone el campo en error y se anuncia. */
     error?: string;
@@ -103,6 +108,12 @@ export interface PlanningGridProps extends Omit<ComponentPropsWithoutRef<'div'>,
     label?: string;
     /** Nombre accesible del campo de un cruce. Sin él, sale de `planningGrid.cellLabel`. */
     cellLabel?: (row: string, column: string) => string;
+    /**
+     * Lo que anuncia la marca de guardado de un cruce en vuelo. Sin ella, sale
+     * de `planningGrid.saving` del catálogo y, si el catálogo no la trae, del
+     * default castellano «Guardando…». Solo se lee cuando hay un cruce en vuelo.
+     */
+    savingLabel?: string;
 }
 /**
  * La rejilla editable de horas: fila × columna —persona por semana, proyecto

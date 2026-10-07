@@ -54,6 +54,11 @@ export interface ImageCropDialogProps {
     errorMessage?: string;
     onConfirm: (blob: Blob) => void | Promise<void>;
     onClose: () => void;
+    /**
+     * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+     * **Va al panel (su contenido, dentro del diálogo); el disparador, si lo hay, es tuyo y ya lleva tus clases**
+     * (regla de `className` en componentes con portal, CLAUDE.md § Base UI).
+     */
     className?: string;
 }
 /**

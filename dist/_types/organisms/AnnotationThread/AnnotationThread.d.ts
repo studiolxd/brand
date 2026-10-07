@@ -68,8 +68,9 @@ export interface AnnotationThreadProps extends React.ComponentPropsWithoutRef<'a
     replies?: AnnotationEntry[];
     /**
      * Estado del hilo, en orden de flujo. `open` pide atención; `acknowledged`
-     * es el hilo que alguien ya ha mirado y da un paso atrás sin cerrarse;
-     * `resolved` se retira visualmente sin desaparecer.
+     * es el hilo que alguien ya ha mirado, sin cerrarse; `resolved` está
+     * cerrado. Lo dice la etiqueta de estado que abre el hilo: el hilo se lee
+     * a contraste pleno en los tres.
      */
     status?: AnnotationThreadStatus;
     /**

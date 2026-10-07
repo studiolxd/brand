@@ -22,9 +22,9 @@ export interface ContextMenuProps {
     label?: string;
     /**
      * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
-     * Va al botón de tres puntos —el único nodo que el componente pinta en su
-     * sitio—, no al panel, que sale por un portal: a diferencia de `Menu`, aquí
-     * el disparador es del componente y no del consumidor.
+     * **Va al disparador, que pinta el componente** (el botón de tres puntos): el panel sale por un
+     * portal y se personaliza con tokens (regla de `className` en componentes
+     * con portal, CLAUDE.md § Base UI).
      */
     className?: string;
 }
