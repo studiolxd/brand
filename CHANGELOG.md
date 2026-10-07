@@ -7,10 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## [Sin publicar]
+## [50.0.0] — 2026-10-07
 
-> **Major.** Arreglos de la auditoría del 2026-10-06 (`informe.md`) y las primeras decisiones que salieron de ella.
-> Rompe solo en dependencias: ver «Breaking» justo debajo. La API de los componentes no cambia.
+> **Major (50.0.0).** La auditoría del sistema de diseño (2026-10-06) y las decisiones que salieron de ella. Antes de
+> subir, cada app debe: (1) estar en React 19; (2) instalar `@tanstack/react-table` si usa `data-table`, y
+> `react-image-crop` si usa `image-crop-dialog` o `avatar-upload`; (3) añadir a su catálogo de `BrandMessages` las 15
+> claves nuevas; (4) pasar `labelHidden` a `PasswordField` donde quiera la etiqueta oculta; (5) dejar de citar los tokens
+> retirados en su SCSS o CSS. El detalle, en «Breaking».
 
 ### Breaking
 
