@@ -24,6 +24,8 @@ public struct BrandDatePickerField: View {
     @Binding private var date: Date?
     private let range: ClosedRange<Date>?
     private let labelHidden: Bool
+    private let optional: Bool
+    private let optionalLabel: LocalizedStringKey
     private let placeholder: LocalizedStringKey
     private let readOnly: Bool
     private let required: Bool
@@ -56,6 +58,9 @@ public struct BrandDatePickerField: View {
     private typealias F = BrandDatePickerFieldTokens
 
     /// - Parameters:
+    ///   - optional: marca el campo como opcional (D70): « (opcional)» tras la etiqueta, en la tinta apagada, y parte
+    ///     del nombre que lee VoiceOver. Explícita: un campo sin `required` no la lleva sola. No se combina con `required`.
+    ///   - optionalLabel: el texto de esa marca. Por defecto «(opcional)» (castellano).
     ///   - date: la fecha elegida (`nil` = ninguna), normalizada a las 00:00 del calendario del entorno.
     ///   - range: el rango elegible; sin él, cualquier fecha.
     ///   - placeholder: lo que enseña el campo sin fecha. Por defecto «Elige una fecha» (castellano).
@@ -73,6 +78,8 @@ public struct BrandDatePickerField: View {
         date: Binding<Date?>,
         in range: ClosedRange<Date>? = nil,
         labelHidden: Bool = false,
+        optional: Bool = false,
+        optionalLabel: LocalizedStringKey = "(opcional)",
         placeholder: LocalizedStringKey = "Elige una fecha",
         readOnly: Bool = false,
         required: Bool = false,
@@ -91,6 +98,8 @@ public struct BrandDatePickerField: View {
         _date = date
         self.range = range
         self.labelHidden = labelHidden
+        self.optional = optional
+        self.optionalLabel = optionalLabel
         self.placeholder = placeholder
         self.readOnly = readOnly
         self.required = required
@@ -196,7 +205,8 @@ public struct BrandDatePickerField: View {
             errorMessage: errorMessage,
             helperText: helperText,
             helper: .init(fontSize: F.helperFontSize, fontWeight: F.helperFontWeight, lineHeight: F.helperLineHeight, color: F.helperColor),
-            requiredLabel: required ? requiredLabel : nil
+            requiredLabel: required ? requiredLabel : nil,
+            optionalLabel: optional ? optionalLabel : nil
         ) {
             box
         }

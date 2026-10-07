@@ -26,6 +26,9 @@ import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
@@ -60,8 +63,8 @@ internal fun fieldLabelSize(size: BrandControlSize): TextUnit = when (size) {
 }
 
 /**
- * Lo que comparten los campos de formulario (`InputField`, `NumberInputField`, `SelectField`): la etiqueta, el
- * control, el mensaje de error y la ayuda, apilados con el `gap` del campo. Interno: cada campo lo usa con los
+ * Lo que comparten los campos de formulario (`InputField`, `NumberInputField`, `SelectField`…): la etiqueta (con la
+ * marca de opcional, [optionalLabel]), el control, el mensaje de error y la ayuda, apilados con el `gap` del campo. Interno: cada campo lo usa con los
  * tokens de su propio grupo (equivale a `BrandFieldLayout` de SwiftUI).
  *
  * La etiqueta y los dos mensajes **no son nodos de accesibilidad propios**: cuelgan del control
@@ -78,12 +81,21 @@ internal fun BrandFieldLayout(
     helperText: String?,
     helper: FieldHelperStyle,
     modifier: Modifier = Modifier,
+    optionalLabel: String? = null,
     control: @Composable () -> Unit,
 ) {
     Column(modifier, verticalArrangement = Arrangement.spacedBy(gap)) {
         if (!labelHidden) {
+            val optionalColor = BrandLabelTokens.optionalColor.current
             BrandBasicText(
-                label,
+                // La marca de opcional (D70) va DENTRO de la etiqueta, en la tinta apagada y del mismo tamaño.
+                buildAnnotatedString {
+                    append(label)
+                    if (optionalLabel != null) {
+                        append(" ")
+                        withStyle(SpanStyle(color = optionalColor)) { append(optionalLabel) }
+                    }
+                },
                 modifier = Modifier.clearAndSetSemantics { },
                 style = brandBaseTextStyle(
                     fieldLabelSize(size), BrandLabelTokens.fontWeight, BrandLabelTokens.lineHeight, BrandLabelTokens.letterSpacing,
@@ -111,6 +123,13 @@ internal fun BrandFieldLayout(
         }
     }
 }
+
+/**
+ * El nombre accesible de un campo: la etiqueta y, si el campo es opcional (D70), su marca detrás («Teléfono (opcional)»),
+ * que en React forma parte del nombre porque va dentro del `<label>`.
+ */
+internal fun fieldAccessibleName(label: String, optionalLabel: String?): String =
+    if (optionalLabel != null) "$label $optionalLabel" else label
 
 /**
  * La semántica del control de un campo para TalkBack: el nombre (la etiqueta), el estado de error con su mensaje

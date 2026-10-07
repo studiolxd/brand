@@ -252,6 +252,11 @@ private struct BrandButtonBody: View {
         let shape = RoundedRectangle(cornerRadius: cornerRadius)
 
         configuration.label
+            // El subrayado de `text` es el de la web (D64): `text-decoration`, bajo el texto y no bajo el icono, a la
+            // distancia del token bajo los descendentes (`BrandTextUnderline`). El padding de abajo reserva su hueco.
+            .modifier(BrandUnderlineHost(underline: isText && colors.underline > 0
+                ? BrandTextUnderline(width: colors.underline, offset: T.textUnderlineOffset, color: colors.foreground)
+                : nil))
             .brandLinedFont(size: fontSize, weight: fontWeight, lineHeight: lineHeight)
             .lineLimit(1)
             .fixedSize(horizontal: !block && !style.iconOnly, vertical: false)
@@ -262,11 +267,6 @@ private struct BrandButtonBody: View {
             .frame(maxWidth: block ? .infinity : nil)
             .padding(.bottom, isText ? T.textUnderlineOffset : 0)
             .background(colors.background, in: shape)
-            .overlay(alignment: .bottom) {
-                if isText, colors.underline > 0 {
-                    Rectangle().fill(colors.foreground).frame(height: colors.underline)
-                }
-            }
             .overlay {
                 if borderWidth > 0 { shape.strokeBorder(colors.border, lineWidth: borderWidth) }
             }

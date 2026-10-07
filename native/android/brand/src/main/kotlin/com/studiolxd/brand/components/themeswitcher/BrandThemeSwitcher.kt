@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,6 +51,8 @@ import com.studiolxd.brand.icon.BrandIcon
 import com.studiolxd.brand.icon.BrandIconName
 import com.studiolxd.brand.icon.BrandIconSize
 import com.studiolxd.brand.support.BrandBasicText
+import com.studiolxd.brand.support.BrandTextUnderline
+import com.studiolxd.brand.support.ProvideBrandTextUnderline
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.brandFocusRing
 import com.studiolxd.brand.support.brandBaseTextStyle
@@ -369,6 +372,9 @@ private fun ThemeMenuItem(choice: BrandThemeChoice, text: String, isCurrent: Boo
 
 // ───────────────────────────── list
 
+/** Solo para las capturas: pinta esa opción de `List` como bajo el puntero, que Paparazzi no puede simular. */
+internal val LocalThemeSwitcherForcedHover = compositionLocalOf<BrandThemeChoice?> { null }
+
 /**
  * `variant = List`: las tres opciones en línea (y, si no caben con la escala de fuente grande, en la línea siguiente,
  * como `flex-wrap`). La vigente va en énfasis y sin subrayado; el resto se subraya al pasar el puntero o pulsar
@@ -402,30 +408,22 @@ private fun ThemeListOption(choice: BrandThemeChoice, text: String, isCurrent: B
     val ink = BrandTheme.colors.text
     val underline = BrandLinkTokens.underlineWidth.current
     val offset = BrandLinkTokens.underlineOffset
-    val showsLine = (state.hovered || state.pressed) && !isCurrent
+    val showsLine = (state.hovered || state.pressed || LocalThemeSwitcherForcedHover.current == choice) && !isCurrent
     val weight: FontWeight = if (isCurrent) T.listCurrentFontWeight else BrandFontWeight.default
     Row(
         Modifier
             .brandFocusRing(state.focusVisible, T.focusRingColor.current, T.focusRingWidth, T.focusRingOffset)
             .selectable(selected = isCurrent, interactionSource = source, indication = null, role = Role.RadioButton, onClick = onClick)
-            .then(
-                if (showsLine) {
-                    // El subrayado es una línea, no `text-decoration`: pinta `underline` en el borde inferior, bajo el
-                    // hueco de `link.underline-offset` que reserva el padding de abajo.
-                    Modifier
-                        .drawBehind {
-                            val line = underline.toPx()
-                            drawRect(ink, topLeft = Offset(0f, size.height - line), size = Size(size.width, line))
-                        }
-                        .padding(bottom = offset)
-                } else {
-                    Modifier
-                },
-            ),
+            // El hueco de la línea, como el `padding-block-end` de la web al pasar el puntero.
+            .then(if (showsLine) Modifier.padding(bottom = offset) else Modifier),
         horizontalArrangement = Arrangement.spacedBy(T.iconGap),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         BrandIcon(choice.icon, size = BrandIconSize.Sm, color = ink)
-        BrandBasicText(text, style = brandBaseTextStyle(T.listFontSize, weight, BrandTextTokens.lineHeight, color = ink), maxLines = 1)
+        // El subrayado de `Link` (D64): `text-decoration`, bajo el texto y no bajo el icono, a la distancia del token
+        // bajo los descendentes (`BrandTextUnderline`).
+        ProvideBrandTextUnderline(if (showsLine) BrandTextUnderline(underline, offset, ink) else null) {
+            BrandBasicText(text, style = brandBaseTextStyle(T.listFontSize, weight, BrandTextTokens.lineHeight, color = ink), maxLines = 1)
+        }
     }
 }

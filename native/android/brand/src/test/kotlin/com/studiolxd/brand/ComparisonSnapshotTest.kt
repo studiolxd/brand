@@ -18,7 +18,12 @@ import com.studiolxd.brand.components.text.ParagraphSize
 import com.studiolxd.brand.components.text.TextElement
 import com.studiolxd.brand.components.text.TextTone
 import com.studiolxd.brand.components.text.brandSpanStyle
+import com.studiolxd.brand.icon.BrandIcon
+import com.studiolxd.brand.icon.BrandIconName
+import com.studiolxd.brand.icon.BrandIconSize
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
+import com.studiolxd.brand.support.LocalBrandTextStyle
 import com.studiolxd.brand.tokens.BrandSpacing
 import org.junit.Rule
 import org.junit.Test
@@ -41,6 +46,18 @@ class ComparisonSnapshotTest {
             paparazzi.brandComparison("button-${variant.value}", 160, if (variant == ButtonVariant.Text) 56 else 72) {
                 BrandButton("Guardar", onClick = {}, variant = variant)
             }
+        }
+    }
+
+    /**
+     * `Text — con icono` (`atoms-button--text-con-icono`): el subrayado va bajo el texto y no bajo el icono (D64), a la
+     * distancia del token bajo los descendentes.
+     */
+    @Test
+    fun buttonTextIcon() = paparazzi.brandComparison("button-text-icon", 212, 52) {
+        BrandButton(onClick = {}, variant = ButtonVariant.Text) {
+            BrandIcon(BrandIconName.ArrowLeft, size = BrandIconSize.Sm)
+            BrandBasicText("Volver al paso anterior", style = LocalBrandTextStyle.current, maxLines = 1)
         }
     }
 

@@ -7,6 +7,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.studiolxd.brand.components.inputfield.BrandInputField
+import com.studiolxd.brand.components.inputfield.InputFieldType
 import com.studiolxd.brand.components.list.BrandList
 import com.studiolxd.brand.components.list.BrandListItem
 import com.studiolxd.brand.components.list.ListType
@@ -19,6 +20,7 @@ import com.studiolxd.brand.components.selectfield.BrandSelectField
 import com.studiolxd.brand.components.switcherfield.BrandSwitcherField
 import com.studiolxd.brand.components.themeswitcher.BrandThemeChoice
 import com.studiolxd.brand.components.themeswitcher.BrandThemeSwitcher
+import com.studiolxd.brand.components.themeswitcher.LocalThemeSwitcherForcedHover
 import com.studiolxd.brand.components.themeswitcher.ThemeSwitcherLayout
 import com.studiolxd.brand.components.themeswitcher.ThemeSwitcherVariant
 import com.studiolxd.brand.components.togglegroup.BrandToggleGroup
@@ -41,6 +43,12 @@ class FieldsComparisonSnapshotTest {
             "Nombre completo", "", {},
             errorMessage = "Este campo es obligatorio.", helperText = "Escríbelo tal como aparece en tu DNI.",
         )
+    }
+
+    /** La story `Opcional` (`molecules-inputfield--opcional`): el campo de 320 en el lienzo de 480. */
+    @Test
+    fun inputOptional() = paparazzi.brandComparison("input-optional", 480, 101) {
+        BrandInputField("Teléfono", "", {}, optional = true, type = InputFieldType.Tel, modifier = Modifier.width(320.dp))
     }
 
     @Test
@@ -152,6 +160,14 @@ class FieldsComparisonSnapshotTest {
     @Test
     fun themeList() = paparazzi.brandComparison("theme-list", 480, 59) {
         BrandThemeSwitcher(BrandThemeChoice.System, {}, variant = ThemeSwitcherVariant.List)
+    }
+
+    /** `Lista` con el puntero sobre «Claro»: el subrayado de `Link`, bajo el texto y no bajo el icono (D64). */
+    @Test
+    fun themeListHover() = paparazzi.brandComparison("theme-list-hover", 480, 60) {
+        CompositionLocalProvider(LocalThemeSwitcherForcedHover provides BrandThemeChoice.Light) {
+            BrandThemeSwitcher(BrandThemeChoice.System, {}, variant = ThemeSwitcherVariant.List)
+        }
     }
 
     @Test

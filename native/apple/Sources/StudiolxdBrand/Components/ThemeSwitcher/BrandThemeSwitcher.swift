@@ -274,25 +274,31 @@ private struct ThemeListOption: View {
     @Environment(\.isFocused) private var isFocused
     @Environment(\.colorScheme) private var scheme
     @State private var isHovering = false
+    @Environment(\.themeSwitcherForcedHover) private var forcedHover
 
     private typealias T = BrandThemeSwitcherTokens
+
+    /// La opción se subraya bajo el puntero, salvo la vigente.
+    private var showsLine: Bool { (isHovering || forcedHover == choice) && !isCurrent }
 
     var body: some View {
         Button(action: action) {
             HStack(spacing: T.iconGap) {
                 BrandIcon(choice.icon, size: .sm)
-                Text(verbatim: text)
+                // El subrayado de `Link` (D64): `text-decoration`, bajo el texto y no bajo el icono, a la distancia del
+                // token bajo los descendentes (`BrandTextUnderline`).
+                Text(verbatim: text).brandUnderlinedText()
             }
+            .environment(\.brandTextUnderline, showsLine
+                ? BrandTextUnderline(width: BrandLinkTokens.underlineWidth.value(for: scheme), offset: BrandLinkTokens.underlineOffset,
+                                     color: BrandColorRoles.text)
+                : nil)
             // `.theme-switcher__option` lleva `font: inherit`: el `line-height` es el del cuerpo (`text.line-height`).
             .brandLinedFont(size: T.listFontSize, weight: isCurrent ? T.listCurrentFontWeight : BrandFontWeight.default,
                             lineHeight: BrandTextTokens.lineHeight)
             .foregroundStyle(BrandColorRoles.text)
-            .padding(.bottom, isHovering && !isCurrent ? BrandLinkTokens.underlineOffset : 0)
-            .overlay(alignment: .bottom) {
-                if isHovering && !isCurrent {
-                    Rectangle().fill(BrandColorRoles.text).frame(height: BrandLinkTokens.underlineWidth.value(for: scheme))
-                }
-            }
+            // El hueco de la línea, como el `padding-block-end` de la web al pasar el puntero.
+            .padding(.bottom, showsLine ? BrandLinkTokens.underlineOffset : 0)
             .overlay {
                 if isFocused {
                     Rectangle().stroke(T.focusRingColor, lineWidth: T.focusRingWidth)
@@ -361,4 +367,16 @@ private struct ThemeFlowLayout: Layout {
         }
     }
     return Demo()
+}
+
+private struct ThemeSwitcherForcedHoverKey: EnvironmentKey {
+    static let defaultValue: BrandThemeChoice? = nil
+}
+
+extension EnvironmentValues {
+    /// Solo para las capturas: pinta esa opción de `list` como bajo el puntero, que una prueba no puede simular.
+    var themeSwitcherForcedHover: BrandThemeChoice? {
+        get { self[ThemeSwitcherForcedHoverKey.self] }
+        set { self[ThemeSwitcherForcedHoverKey.self] = newValue }
+    }
 }

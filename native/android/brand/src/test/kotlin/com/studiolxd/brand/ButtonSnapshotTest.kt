@@ -3,7 +3,6 @@ package com.studiolxd.brand
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,6 +13,7 @@ import com.studiolxd.brand.components.button.ButtonTone
 import com.studiolxd.brand.components.button.ButtonVariant
 import com.studiolxd.brand.components.closebutton.BrandCloseButton
 import com.studiolxd.brand.icon.BrandIconName
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandInteractionState
 import com.studiolxd.brand.support.LocalBrandTextStyle
 import com.studiolxd.brand.tokens.BrandSpacing
@@ -26,7 +26,7 @@ private fun StatefulButton(label: String, variant: ButtonVariant, state: BrandIn
     BrandButtonImpl(
         onClick = {}, modifier = Modifier, variant = variant, tone = ButtonTone.Accent, size = null, destructive = destructive,
         block = false, iconOnly = false, enabled = true, contentDescription = null, interactionSource = null, stateOverride = state,
-    ) { BasicText(label, style = LocalBrandTextStyle.current) }
+    ) { BrandBasicText(label, style = LocalBrandTextStyle.current) }
 }
 
 /**

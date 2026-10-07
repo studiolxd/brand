@@ -54,6 +54,7 @@ import com.studiolxd.brand.components.field.LocalBrandForcedFocus
 import com.studiolxd.brand.components.field.animatedFieldColor
 import com.studiolxd.brand.components.field.brandFieldBox
 import com.studiolxd.brand.components.field.brandFieldSemantics
+import com.studiolxd.brand.components.field.fieldAccessibleName
 import com.studiolxd.brand.icon.BrandIcon
 import com.studiolxd.brand.icon.BrandIconName
 import com.studiolxd.brand.icon.BrandIconSize
@@ -178,6 +179,9 @@ internal fun parseNumber(raw: String, decimal: Boolean): Double? {
  * @param invalidLabel lo que lee TalkBack cuando el campo está en [error] sin [errorMessage]. Castellano por defecto.
  * @param focusRequester para dar el foco desde fuera; sin él, el campo usa uno propio (los toques lo siguen enfocando).
  *   Para *observar* el foco ya está [interactionSource].
+ * @param optional marca el campo como opcional (D70): « (opcional)» tras la etiqueta, en la tinta apagada
+ *   (`label.optional-color`), y parte del nombre que lee TalkBack. Explícita: un campo sin `required` no la lleva sola.
+ * @param optionalLabel el texto de esa marca. Castellano por defecto («(opcional)»).
  */
 @Composable
 fun BrandNumberInputField(
@@ -186,6 +190,8 @@ fun BrandNumberInputField(
     onValueChange: (Double?) -> Unit,
     modifier: Modifier = Modifier,
     labelHidden: Boolean = false,
+    optional: Boolean = false,
+    optionalLabel: String = "(opcional)",
     min: Double? = null,
     max: Double? = null,
     step: Double = 1.0,
@@ -296,6 +302,7 @@ fun BrandNumberInputField(
         helperText = helperText,
         helper = FieldHelperStyle(F.helperFontSize, F.helperFontWeight, F.helperLineHeight, F.helperColor.current),
         modifier = modifier,
+        optionalLabel = if (optional) optionalLabel else null,
     ) {
         Row(
             Modifier
@@ -342,7 +349,7 @@ fun BrandNumberInputField(
                             } else false
                         }
                         .brandFieldSemantics(
-                            label, hasError, errorMessage,
+                            fieldAccessibleName(label, if (optional) optionalLabel else null), hasError, errorMessage,
                             // Vacío no anuncia valor: «Sin valor» como estado, antes de la ayuda.
                             if (value == null) listOfNotNull(emptyValueLabel, helperText).joinToString(". ") else helperText,
                             invalidLabel,

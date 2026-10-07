@@ -23,6 +23,10 @@
       "type": "boolean",
       "default": false
     },
+    "optional": {
+      "type": "boolean",
+      "default": false
+    },
     "readOnly": {
       "type": "boolean",
       "default": false
@@ -38,12 +42,8 @@
   },
   "excluded": [
     {
-      "prop": "optional",
-      "reason": "Pendiente de portar (D70): la marca « (opcional)» tras la etiqueta es solo de React por ahora; en nativo no se pinta."
-    },
-    {
       "prop": "optionalLabel",
-      "reason": "Pendiente de portar (D70): el texto de la marca de opcional va con `optional`, que aún no está en nativo."
+      "reason": "No es una unión ni un booleano: es el texto de la marca, un parámetro `optionalLabel` con el castellano «(opcional)» por defecto (como `requiredLabel`), que solo se pinta con `optional`."
     },
     {
       "prop": "id",

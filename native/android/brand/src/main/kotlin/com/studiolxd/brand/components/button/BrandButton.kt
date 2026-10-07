@@ -24,9 +24,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
@@ -45,6 +42,8 @@ import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.LocalBrandTextStyle
 import com.studiolxd.brand.support.BrandInteractionState
+import com.studiolxd.brand.support.BrandTextUnderline
+import com.studiolxd.brand.support.ProvideBrandTextUnderline
 import com.studiolxd.brand.support.ProvideBrandContent
 import com.studiolxd.brand.support.brandFocusRing
 import com.studiolxd.brand.support.brandBaseTextStyle
@@ -150,7 +149,9 @@ private fun buttonColors(variant: ButtonVariant, tone: ButtonTone, destructive: 
 /**
  * Un botón de la marca, con las mismas props que el de React: `variant`, `tone`, `size`, `destructive`, `block` e
  * `iconOnly`. [content] es la etiqueta; dentro, [com.studiolxd.brand.components.text.BrandText] y
- * [com.studiolxd.brand.icon.BrandIcon] (`size = Text`) heredan su tipografía y su color.
+ * [com.studiolxd.brand.icon.BrandIcon] (`size = Text`) heredan su tipografía y su color. En `variant = Text` los textos
+ * que pasan por [com.studiolxd.brand.support.BrandBasicText] (`BrandText` incluido) heredan además el subrayado; el
+ * icono no se subraya, como en la web.
  *
  * Cubre los estados que tiene React: reposo, *hover* (puntero), pulsado (`active-*`), deshabilitado ([enabled]) y
  * foco de teclado o DPAD (el anillo de `focus-ring-*`). La altura y el tamaño de letra crecen con la escala de
@@ -304,27 +305,21 @@ internal fun BrandButtonImpl(
                 onClick = onClick,
             )
             .then(if (contentDescription != null) Modifier.semantics { this.contentDescription = contentDescription } else Modifier)
-            .then(
-                if (isText && target.underline > 0.dp) {
-                    // El subrayado es una línea, no `text-decoration`: pinta `underline` en el borde inferior, bajo
-                    // el hueco de `text-underline-offset` que reserva el padding de abajo.
-                    Modifier.drawBehind {
-                        val line = target.underline.toPx()
-                        drawRect(foreground, topLeft = Offset(0f, this.size.height - line), size = Size(this.size.width, line))
-                    }
-                } else {
-                    Modifier
-                },
-            )
             .padding(start = paddingInline, end = paddingInline, bottom = if (isText) underlineOffset else 0.dp),
         contentAlignment = Alignment.Center,
     ) {
+        // El subrayado de `text` es el de la web (D64): `text-decoration`, que se pinta bajo el texto y no bajo el
+        // icono. Lo dibuja cada `BrandBasicText` de la etiqueta, a la distancia del token bajo los descendentes
+        // (`BrandTextUnderline`); el padding de abajo reserva su hueco.
+        val underline = if (isText && target.underline > 0.dp) BrandTextUnderline(target.underline, underlineOffset, foreground) else null
         ProvideBrandContent(foreground, textStyle) {
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.wrapContentSize(),
-            ) { content() }
+            ProvideBrandTextUnderline(underline) {
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.wrapContentSize(),
+                ) { content() }
+            }
         }
     }
 }

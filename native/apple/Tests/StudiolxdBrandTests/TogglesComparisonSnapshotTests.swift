@@ -71,6 +71,9 @@ final class TogglesComparisonSnapshotTests: XCTestCase {
                              width: 480, height: 72, named: "theme-compact", padding: margin)
         assertBrandSnapshots(BrandThemeSwitcher(value: .constant(.system), variant: .list),
                              width: 480, height: 59, named: "theme-list", padding: margin)
+        // `Lista` con el puntero sobre «Claro»: el subrayado de `Link`, bajo el texto y no bajo el icono (D64).
+        assertBrandSnapshots(BrandThemeSwitcher(value: .constant(.system), variant: .list).environment(\.themeSwitcherForcedHover, .light),
+                             width: 480, height: 60, named: "theme-list-hover", padding: margin)
         assertBrandSnapshots(BrandThemeSwitcher(value: .constant(.system), layout: .stacked),
                              width: 480, height: 101, named: "theme-stacked", padding: margin)
     }

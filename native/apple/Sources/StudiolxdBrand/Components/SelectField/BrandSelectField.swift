@@ -43,6 +43,8 @@ public struct BrandSelectField: View {
     @Binding private var selection: String
     private let options: [BrandSelectEntry]
     private let labelHidden: Bool
+    private let optional: Bool
+    private let optionalLabel: LocalizedStringKey
     private let placeholder: LocalizedStringKey
     private let error: Bool
     private let errorMessage: LocalizedStringKey?
@@ -58,6 +60,9 @@ public struct BrandSelectField: View {
     private typealias F = BrandSelectFieldTokens
 
     /// - Parameters:
+    ///   - optional: marca el campo como opcional (D70): « (opcional)» tras la etiqueta, en la tinta apagada, y parte
+    ///     del nombre que lee VoiceOver. Explícita: un campo sin `required` no la lleva sola. No se combina con `required`.
+    ///   - optionalLabel: el texto de esa marca. Por defecto «(opcional)» (castellano).
     ///   - placeholder: marcador de sitio del disparador sin valor elegido. Por defecto «Seleccionar…» (castellano).
     ///   - error: marca el control en error sin mensaje; un `errorMessage` ya lo implica.
     public init(
@@ -65,6 +70,8 @@ public struct BrandSelectField: View {
         selection: Binding<String>,
         options: [BrandSelectEntry],
         labelHidden: Bool = false,
+        optional: Bool = false,
+        optionalLabel: LocalizedStringKey = "(opcional)",
         placeholder: LocalizedStringKey = "Seleccionar…",
         error: Bool = false,
         errorMessage: LocalizedStringKey? = nil,
@@ -75,6 +82,8 @@ public struct BrandSelectField: View {
         _selection = selection
         self.options = options
         self.labelHidden = labelHidden
+        self.optional = optional
+        self.optionalLabel = optionalLabel
         self.placeholder = placeholder
         self.error = error
         self.errorMessage = errorMessage
@@ -136,7 +145,8 @@ public struct BrandSelectField: View {
             gap: F.gap,
             errorMessage: errorMessage,
             helperText: helperText,
-            helper: .init(fontSize: F.helperFontSize, fontWeight: F.helperFontWeight, lineHeight: F.helperLineHeight, color: F.helperColor)
+            helper: .init(fontSize: F.helperFontSize, fontWeight: F.helperFontWeight, lineHeight: F.helperLineHeight, color: F.helperColor),
+            optionalLabel: optional ? optionalLabel : nil
         ) {
             menu
         }

@@ -41,6 +41,7 @@ import com.studiolxd.brand.components.field.LocalBrandForcedFocus
 import com.studiolxd.brand.components.field.animatedFieldColor
 import com.studiolxd.brand.components.field.brandFieldBox
 import com.studiolxd.brand.components.field.brandFieldSemantics
+import com.studiolxd.brand.components.field.fieldAccessibleName
 import com.studiolxd.brand.components.field.BrandFieldGlyph
 import com.studiolxd.brand.components.field.BrandFieldIconButton
 import com.studiolxd.brand.icon.BrandIconName
@@ -124,6 +125,9 @@ internal fun inputKeyboardOptions(type: InputFieldType, kind: InputFieldKind): K
  *   Sin él, el campo usa uno propio (los toques en la caja siguen enfocándolo). Para *observar* el foco ya está
  *   [interactionSource] (`collectIsFocusedAsState()`).
  * @param size sin valor toma la del entorno ([com.studiolxd.brand.support.ProvideBrandControlSize]) y, si tampoco hay, `md`.
+ * @param optional marca el campo como opcional (D70): « (opcional)» tras la etiqueta, en la tinta apagada
+ *   (`label.optional-color`), y parte del nombre que lee TalkBack. Explícita: un campo sin `required` no la lleva sola.
+ * @param optionalLabel el texto de esa marca. Castellano por defecto («(opcional)»).
  */
 @Composable
 fun BrandInputField(
@@ -132,6 +136,8 @@ fun BrandInputField(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     labelHidden: Boolean = false,
+    optional: Boolean = false,
+    optionalLabel: String = "(opcional)",
     type: InputFieldType = InputFieldType.Text,
     kind: InputFieldKind = InputFieldKind.Text,
     clearable: Boolean = false,
@@ -152,6 +158,7 @@ fun BrandInputField(
     label, value, onValueChange, modifier, labelHidden, type, kind, clearable, clearLabel, onClear, placeholder, readOnly,
     enabled, error, errorMessage, helperText, size, invalidLabel, onSubmit, interactionSource, focusRequester,
     obscured = true,
+    optionalLabel = if (optional) optionalLabel else null,
 )
 
 /** Lo que mide el hueco del final de un campo: lo recibe el botón que `PasswordField` pone ahí. */
@@ -187,6 +194,7 @@ internal fun BrandTextFieldImpl(
     focusRequester: FocusRequester?,
     obscured: Boolean,
     gap: Dp = F.gap,
+    optionalLabel: String? = null,
     trailing: (@Composable RowScope.(FieldTrailingMetrics) -> Unit)? = null,
 ) {
     val resolved = size.resolve()
@@ -264,6 +272,7 @@ internal fun BrandTextFieldImpl(
         helperText = helperText,
         helper = FieldHelperStyle(F.helperFontSize, F.helperFontWeight, F.helperLineHeight, F.helperColor.current),
         modifier = modifier,
+        optionalLabel = optionalLabel,
     ) {
         Row(
             Modifier
@@ -294,7 +303,7 @@ internal fun BrandTextFieldImpl(
                 modifier = Modifier
                     .weight(1f)
                     .focusRequester(requester)
-                    .brandFieldSemantics(label, hasError, errorMessage, helperText, invalidLabel)
+                    .brandFieldSemantics(fieldAccessibleName(label, optionalLabel), hasError, errorMessage, helperText, invalidLabel)
                     // Un campo de contraseña pide el relleno automático de contraseñas del sistema.
                     .then(if (isPassword) Modifier.semantics { contentType = ContentType.Password } else Modifier),
                 enabled = enabled,

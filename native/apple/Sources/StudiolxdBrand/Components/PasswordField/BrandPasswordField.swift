@@ -32,6 +32,8 @@ public struct BrandPasswordField: View {
     private let label: LocalizedStringKey
     @Binding private var text: String
     private let labelHidden: Bool
+    private let optional: Bool
+    private let optionalLabel: LocalizedStringKey
     private let placeholder: LocalizedStringKey?
     private let error: Bool
     private let errorMessage: LocalizedStringKey?
@@ -52,6 +54,9 @@ public struct BrandPasswordField: View {
     private typealias P = BrandPasswordFieldTokens
 
     /// - Parameters:
+    ///   - optional: marca el campo como opcional (D70): « (opcional)» tras la etiqueta, en la tinta apagada, y parte
+    ///     del nombre que lee VoiceOver. Explícita: un campo sin `required` no la lleva sola. No se combina con `required`.
+    ///   - optionalLabel: el texto de esa marca. Por defecto «(opcional)» (castellano).
     ///   - labelHidden: oculta la etiqueta a la vista (la sigue leyendo VoiceOver). Por defecto `false`, como en React.
     ///     Sin `placeholder`, el control usa el texto de la etiqueta como marcador de sitio.
     ///   - error: marca el control en error sin mensaje; un `errorMessage` ya lo implica.
@@ -62,6 +67,8 @@ public struct BrandPasswordField: View {
         _ label: LocalizedStringKey,
         text: Binding<String>,
         labelHidden: Bool = false,
+        optional: Bool = false,
+        optionalLabel: LocalizedStringKey = "(opcional)",
         placeholder: LocalizedStringKey? = nil,
         error: Bool = false,
         errorMessage: LocalizedStringKey? = nil,
@@ -70,7 +77,7 @@ public struct BrandPasswordField: View {
         showPasswordLabel: LocalizedStringKey = "Mostrar contraseña",
         hidePasswordLabel: LocalizedStringKey = "Ocultar contraseña"
     ) {
-        self.init(label, text: text, labelHidden: labelHidden, placeholder: placeholder, error: error,
+        self.init(label, text: text, labelHidden: labelHidden, optional: optional, optionalLabel: optionalLabel, placeholder: placeholder, error: error,
                   errorMessage: errorMessage, helperText: helperText, size: size, showPasswordLabel: showPasswordLabel,
                   hidePasswordLabel: hidePasswordLabel, initiallyVisible: false)
     }
@@ -80,6 +87,8 @@ public struct BrandPasswordField: View {
         _ label: LocalizedStringKey,
         text: Binding<String>,
         labelHidden: Bool = false,
+        optional: Bool = false,
+        optionalLabel: LocalizedStringKey = "(opcional)",
         placeholder: LocalizedStringKey? = nil,
         error: Bool = false,
         errorMessage: LocalizedStringKey? = nil,
@@ -92,6 +101,8 @@ public struct BrandPasswordField: View {
         self.label = label
         _text = text
         self.labelHidden = labelHidden
+        self.optional = optional
+        self.optionalLabel = optionalLabel
         self.placeholder = placeholder
         self.error = error
         self.errorMessage = errorMessage
@@ -160,7 +171,8 @@ public struct BrandPasswordField: View {
             gap: P.gap,
             errorMessage: errorMessage,
             helperText: helperText,
-            helper: .init(fontSize: F.helperFontSize, fontWeight: F.helperFontWeight, lineHeight: F.helperLineHeight, color: F.helperColor)
+            helper: .init(fontSize: F.helperFontSize, fontWeight: F.helperFontWeight, lineHeight: F.helperLineHeight, color: F.helperColor),
+            optionalLabel: optional ? optionalLabel : nil
         ) {
             box
         }

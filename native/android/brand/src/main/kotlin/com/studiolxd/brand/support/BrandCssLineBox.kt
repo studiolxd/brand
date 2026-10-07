@@ -84,7 +84,8 @@ private val NaturalHeights = ConcurrentHashMap<NaturalKey, Int>()
 
 /**
  * `BasicText` con la caja de línea de CSS ([brandCssLineBox]): el texto de todos los componentes de la marca pasa por
- * aquí, así que un `line-height` de la web mide lo mismo en Compose con una línea o con varias. Las apps lo usan igual
+ * aquí, así que un `line-height` de la web mide lo mismo en Compose con una línea o con varias. Dentro de quien subraya
+ * ([ProvideBrandTextUnderline]: un botón `text`) pinta además la línea bajo el texto ([BrandTextUnderline]). Las apps lo usan igual
  * que un `BasicText`, con un estilo de [com.studiolxd.brand.typography.BrandTypography] o propio.
  *
  * ```kotlin
@@ -102,8 +103,10 @@ fun BrandBasicText(
     maxLines: Int = Int.MAX_VALUE,
     minLines: Int = 1,
 ) {
+    val underline = rememberBrandTextUnderline(style)
     BasicText(
-        text = text, modifier = modifier, style = style.brandCssLineBox(), onTextLayout = onTextLayout,
+        text = text, modifier = if (underline == null) modifier else modifier.then(underline.modifier),
+        style = style.brandCssLineBox(), onTextLayout = underline?.chain(onTextLayout) ?: onTextLayout,
         overflow = overflow, softWrap = softWrap, maxLines = maxLines, minLines = minLines,
     )
 }
@@ -121,8 +124,10 @@ fun BrandBasicText(
     minLines: Int = 1,
     inlineContent: Map<String, InlineTextContent> = mapOf(),
 ) {
+    val underline = rememberBrandTextUnderline(style)
     BasicText(
-        text = text, modifier = modifier, style = style.brandCssLineBox(), onTextLayout = onTextLayout,
+        text = text, modifier = if (underline == null) modifier else modifier.then(underline.modifier),
+        style = style.brandCssLineBox(), onTextLayout = underline?.chain(onTextLayout) ?: onTextLayout,
         overflow = overflow, softWrap = softWrap, maxLines = maxLines, minLines = minLines, inlineContent = inlineContent,
     )
 }

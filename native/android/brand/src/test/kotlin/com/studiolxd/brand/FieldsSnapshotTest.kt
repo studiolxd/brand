@@ -8,7 +8,9 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.focus.FocusRequester
+import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.BrandPreviewSurface
+import com.studiolxd.brand.components.datepickerfield.BrandDatePickerField
 import com.studiolxd.brand.components.field.LocalBrandForcedFocus
 import com.studiolxd.brand.components.inputfield.BrandInputField
 import com.studiolxd.brand.components.inputfield.InputFieldKind
@@ -112,6 +114,27 @@ class ThemeSwitcherSnapshotTest {
 
     @Test
     fun variants() = paparazzi.brandSnapshots { ThemeSwitcherPreviewContent() }
+}
+
+/**
+ * `optional` (D70) en los cinco campos: « (opcional)» tras la etiqueta, en la tinta apagada (`label.optional-color`) y del
+ * tamaño de la etiqueta; el último, con `optionalLabel` traducido.
+ */
+class FieldsOptionalSnapshotTest {
+    @get:Rule
+    val paparazzi = brandPaparazzi(360, 560)
+
+    @Test
+    fun optional() = paparazzi.brandSnapshots {
+        Column(verticalArrangement = Arrangement.spacedBy(BrandSpacing.s4)) {
+            BrandInputField("Teléfono", "", {}, optional = true)
+            BrandNumberInputField("Cantidad", 2.0, {}, optional = true)
+            BrandPasswordField("Contraseña", "", {}, optional = true)
+            BrandSelectField("Idioma", "es", {}, previewLanguages, optional = true)
+            BrandDatePickerField("Fecha de fin", null, {}, optional = true)
+            BrandInputField("Phone", "", {}, optional = true, optionalLabel = "(optional)", size = BrandControlSize.Sm)
+        }
+    }
 }
 
 /**

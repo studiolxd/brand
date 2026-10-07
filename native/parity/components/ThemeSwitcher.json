@@ -69,6 +69,6 @@
     "`list` envuelve las opciones a la línea siguiente cuando el tipo dinámico no las deja caber (`flex-wrap`).",
     "El nombre accesible de `icon` incluye el tema actual («Tema: Claro»), igual que el `aria-label` de React, y sale como allí de una función del grupo y el tema (`ThemeSwitcherLabels.trigger`, el equivalente de `themeSwitcher.trigger`): el orden y la puntuación se traducen pasando otra. En nativo el default castellano va en `ThemeSwitcherLabels`; no hay catálogo (`BrandMessagesProvider`).",
     "En Android el desplegable de `compact` e `icon` es una lista propia (`Popup`) con los iconos de brand en las filas (no SF Symbols), el tema actual en peso 500 y el chevron que gira al abrir; `icon` es un botón `ghost` solo de icono cuyo nombre accesible incluye el tema («Tema: Claro»).",
-    "En Android `list` se coloca con `FlowRow` (envuelve a la línea siguiente con la escala de fuente grande); el subrayado de la opción bajo el puntero o al pulsar es la línea de `Link`. En TalkBack es un grupo de radios y `compact` una lista desplegable con el tema actual como estado."
+    "En Android `list` se coloca con `FlowRow` (envuelve a la línea siguiente con la escala de fuente grande); el subrayado de la opción bajo el puntero o al pulsar es el de `Link` (D64): una línea bajo el texto, no bajo el icono, a la distancia del token bajo los descendentes (en SwiftUI, igual, bajo el puntero). En TalkBack es un grupo de radios y `compact` una lista desplegable con el tema actual como estado."
   ]
 }
