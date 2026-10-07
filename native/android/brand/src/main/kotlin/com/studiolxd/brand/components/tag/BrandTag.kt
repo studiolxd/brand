@@ -13,7 +13,7 @@ import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandLineBox
 import com.studiolxd.brand.support.LocalBrandTextStyle
 import com.studiolxd.brand.support.ProvideBrandContent
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.tokens.BrandTagTokens as T
 
 /** `Tag` `variant`: la variante de color. Mismos casos y mismos valores que React. */
@@ -89,7 +89,7 @@ fun BrandTag(
     val foreground = variant.foreground()
     ProvideBrandContent(
         color = foreground,
-        textStyle = brandTextStyle(T.fontSize, T.fontWeight, T.lineHeight, color = foreground),
+        textStyle = brandBaseTextStyle(T.fontSize, T.fontWeight, T.lineHeight, color = foreground),
     ) {
         Box(
             modifier = modifier

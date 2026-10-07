@@ -87,9 +87,8 @@ public struct BrandBanner<Content: View, Actions: View>: View {
         .padding(.leading, T.paddingInline)
         .padding(.trailing, trailingInset)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(fill.bg)
-        .overlay(alignment: .top) { Rectangle().fill(fill.border).frame(height: T.borderWidth) }
-        .overlay(alignment: .bottom) { Rectangle().fill(fill.border).frame(height: T.borderWidth) }
+        // El aspa se coloca desde el borde INTERIOR (el `position: absolute` de la web cuenta desde la caja de relleno):
+        // por eso va antes del filete, a `close-inset` de la esquina del relleno (9 del canto, como en la web).
         .overlay(alignment: .topTrailing) {
             if let onDismiss {
                 BrandCloseButton(dismissLabel, size: .sm, action: onDismiss)
@@ -97,6 +96,12 @@ public struct BrandBanner<Content: View, Actions: View>: View {
                     .padding(T.closeInset)
             }
         }
+        // La caja de borde de CSS (`box-sizing: border-box`): los filetes de arriba y abajo ocupan sitio por fuera del
+        // relleno, así que una barra de una línea mide 1 + 12 + 24 + 12 + 1 = 50, como en la web.
+        .padding(.vertical, T.borderWidth)
+        .background(fill.bg)
+        .overlay(alignment: .top) { Rectangle().fill(fill.border).frame(height: T.borderWidth) }
+        .overlay(alignment: .bottom) { Rectangle().fill(fill.border).frame(height: T.borderWidth) }
         .background {
             GeometryReader { proxy in
                 Color.clear.onAppear { width = proxy.size.width }

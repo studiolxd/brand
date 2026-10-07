@@ -59,7 +59,7 @@ import com.studiolxd.brand.components.button.ButtonVariant
 import com.studiolxd.brand.components.closebutton.BrandCloseButton
 import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.support.brandTransition
 import com.studiolxd.brand.support.rememberReduceMotion
 import com.studiolxd.brand.tokens.BrandAlertTokens as A
@@ -135,9 +135,9 @@ fun BrandToastCard(
                 // El tracking del título es el del aviso (`toast.title-letter-spacing`, −0,02 em: el de un `<h2>`, que es lo
                 // que es el título en React). Título y descripción llevan la caja de línea de CSS (`BrandBasicText`): el
                 // título mide 16 × 1,3 = 20,8 y cada línea de la descripción 16 × 1,5 = 24, como en la web.
-                BrandBasicText(item.title, style = brandTextStyle(A.titleFontSize, A.titleFontWeight, A.titleLineHeight, T.titleLetterSpacing, color = titleColor))
+                BrandBasicText(item.title, style = brandBaseTextStyle(A.titleFontSize, A.titleFontWeight, A.titleLineHeight, T.titleLetterSpacing, color = titleColor))
                 if (item.description != null) {
-                    BrandBasicText(item.description, style = brandTextStyle(A.descriptionFontSize, BrandTextTokens.fontWeight, A.descriptionLineHeight, color = descriptionColor))
+                    BrandBasicText(item.description, style = brandBaseTextStyle(A.descriptionFontSize, BrandTextTokens.fontWeight, A.descriptionLineHeight, color = descriptionColor))
                 }
             }
             if (item.action != null) {

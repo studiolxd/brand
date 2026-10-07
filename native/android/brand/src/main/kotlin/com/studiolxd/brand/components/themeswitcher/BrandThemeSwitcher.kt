@@ -52,7 +52,7 @@ import com.studiolxd.brand.icon.BrandIconSize
 import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.brandFocusRing
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.support.brandTransition
 import com.studiolxd.brand.support.collectBrandInteractionState
 import com.studiolxd.brand.support.rememberReduceMotion
@@ -104,6 +104,9 @@ enum class ThemeSwitcherLayout(val value: String) {
     Stacked("stacked"),
 }
 
+/** El nombre accesible por defecto del disparador de `Icon`: «Tema: Claro» (el `themeSwitcher.trigger` castellano de React). */
+private val DefaultThemeTrigger: (group: String, theme: String) -> String = { group, theme -> "$group: $theme" }
+
 /** Los textos del selector de tema (`labels` en React). Cada uno tiene su default castellano. */
 data class ThemeSwitcherLabels(
     /** Nombre accesible del control y etiqueta del campo compacto. Default: «Tema». */
@@ -111,12 +114,21 @@ data class ThemeSwitcherLabels(
     val light: String = "Claro",
     val dark: String = "Oscuro",
     val system: String = "Sistema",
+    /**
+     * Nombre accesible del botón de la variante `Icon`, que solo enseña el icono del tema vigente: recibe el nombre del
+     * control y el del tema, ya resueltos (`themeSwitcher.trigger` del catálogo de React). Es función porque el orden y la
+     * puntuación de la frase son de cada idioma. Default castellano: «Tema: Claro» (`"$group: $theme"`).
+     */
+    val trigger: (group: String, theme: String) -> String = DefaultThemeTrigger,
 ) {
     internal fun text(choice: BrandThemeChoice): String = when (choice) {
         BrandThemeChoice.Light -> light
         BrandThemeChoice.Dark -> dark
         BrandThemeChoice.System -> system
     }
+
+    /** El nombre accesible del disparador de `Icon` con el tema vigente. */
+    internal fun triggerLabel(choice: BrandThemeChoice): String = trigger(group, text(choice))
 }
 
 /**
@@ -167,7 +179,7 @@ private fun ThemeIconVariant(
         BrandButtonImpl(
             onClick = { expanded = true }, modifier = Modifier, variant = ButtonVariant.Ghost, tone = ButtonTone.Accent, size = size,
             destructive = false, block = false, iconOnly = true, enabled = true,
-            contentDescription = "${labels.group}: ${labels.text(value)}", interactionSource = null, stateOverride = null,
+            contentDescription = labels.triggerLabel(value), interactionSource = null, stateOverride = null,
         ) { BrandIcon(value.icon, size = BrandIconSize.Md) }
         ThemeMenu(expanded, { expanded = false }, with(density) { anchorWidthPx.toDp() }, value, labels) {
             onValueChange(it)
@@ -200,7 +212,7 @@ private fun ThemeCompactVariant(
         BrandBasicText(
             labels.group,
             modifier = Modifier.clearAndSetSemantics { },
-            style = brandTextStyle(labelSize, BrandLabelTokens.fontWeight, BrandLabelTokens.lineHeight, BrandLabelTokens.letterSpacing, color = BrandLabelTokens.color.current),
+            style = brandBaseTextStyle(labelSize, BrandLabelTokens.fontWeight, BrandLabelTokens.lineHeight, BrandLabelTokens.letterSpacing, color = BrandLabelTokens.color.current),
         )
     }
     val control: @Composable (Modifier) -> Unit = { controlModifier ->
@@ -300,7 +312,7 @@ private fun ThemeDropdownControl(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             BrandIcon(choice.icon, size = iconSize, color = D.color.current)
-            BrandBasicText(text, style = brandTextStyle(fontSize, D.fontWeight, 1f, color = D.color.current), maxLines = 1)
+            BrandBasicText(text, style = brandBaseTextStyle(fontSize, D.fontWeight, 1f, color = D.color.current), maxLines = 1)
         }
         BrandIcon(BrandIconName.Chevron, modifier = Modifier.rotate(chevron), size = BrandIconSize.Sm, color = D.color.current)
     }
@@ -349,7 +361,7 @@ private fun ThemeMenuItem(choice: BrandThemeChoice, text: String, isCurrent: Boo
         // `.select__item` no declara `line-height`: hereda el del cuerpo (`text.line-height`), no el del disparador.
         BrandBasicText(
             text,
-            style = brandTextStyle(S.fontSize, if (isCurrent) S.itemSelectedFontWeight else S.fontWeight, BrandTextTokens.lineHeight, color = color),
+            style = brandBaseTextStyle(S.fontSize, if (isCurrent) S.itemSelectedFontWeight else S.fontWeight, BrandTextTokens.lineHeight, color = color),
             maxLines = 1,
         )
     }
@@ -414,6 +426,6 @@ private fun ThemeListOption(choice: BrandThemeChoice, text: String, isCurrent: B
         verticalAlignment = Alignment.CenterVertically,
     ) {
         BrandIcon(choice.icon, size = BrandIconSize.Sm, color = ink)
-        BrandBasicText(text, style = brandTextStyle(T.listFontSize, weight, BrandTextTokens.lineHeight, color = ink), maxLines = 1)
+        BrandBasicText(text, style = brandBaseTextStyle(T.listFontSize, weight, BrandTextTokens.lineHeight, color = ink), maxLines = 1)
     }
 }

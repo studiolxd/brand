@@ -29,6 +29,10 @@ private enum ReadmeExamples {
 
         var body: some View {
             VStack {
+                // Instalar y texto con la caja de línea de CSS
+                Text("Hola").brandLinedFont(.body).foregroundStyle(BrandColorRoles.text)
+                Text("Tus viviendas").brandLinedFont(.heading2)
+                Text("Resumen").brandLinedFont(size: BrandFontSize.s3, weight: BrandFontWeight.emphasis, lineHeight: BrandLineHeight.snug)
                 // Button, texto e iconos
                 Button("Guardar") { save() }.buttonStyle(.brand(.primary))
                 BrandButton("Eliminar", variant: .outline, destructive: true) { delete() }

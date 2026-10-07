@@ -15,6 +15,12 @@ import com.studiolxd.brand.tokens.BrandLineHeight
  * [heading1]…[heading6] = `text.h1…h6`. Los tamaños siguen la superficie de aplicación (cuerpo de 16).
  *
  * El color no va en el estilo: lo pone quien lo usa, con un rol de `BrandTheme.colors`.
+ *
+ * **Interlineado**: son datos (tamaño, peso, `line-height`, tracking), no la caja de línea ya resuelta, que depende de la
+ * fuente medida en la densidad y la escala de fuente vigentes y por eso no cabe en una constante. Para que midan lo que
+ * en la web, píntalos con [com.studiolxd.brand.support.BrandBasicText] o aplícales
+ * [com.studiolxd.brand.support.brandCssLineBox] antes de dárselos a un `BasicText` o a un `Text` de Material. Sin eso,
+ * los de interlineado apretado (los títulos a `1.1` y `1.3`) salen más altos que en la web.
  */
 object BrandTypography {
     private fun style(

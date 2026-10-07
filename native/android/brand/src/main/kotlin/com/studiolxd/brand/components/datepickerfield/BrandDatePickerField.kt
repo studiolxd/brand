@@ -35,7 +35,7 @@ import com.studiolxd.brand.components.field.brandFieldBox
 import com.studiolxd.brand.icon.BrandIconName
 import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.support.rememberReduceMotion
 import com.studiolxd.brand.support.resolve
 import com.studiolxd.brand.support.scaledByFontScale
@@ -236,7 +236,7 @@ internal fun BrandDatePickerFieldContent(
         else -> T.color.current
     }
     val shown = value?.let { formatPickedDate(it, locale) } ?: placeholder
-    val textStyle = brandTextStyle(fontSize, T.fontWeight, T.lineHeight, color = textColor)
+    val textStyle = brandBaseTextStyle(fontSize, T.fontWeight, T.lineHeight, color = textColor)
     val showsClear = value != null && enabled && !readOnly
 
     BrandFieldLayout(

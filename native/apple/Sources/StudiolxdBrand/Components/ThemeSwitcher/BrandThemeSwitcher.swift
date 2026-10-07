@@ -44,12 +44,23 @@ public struct ThemeSwitcherLabels: Sendable {
     public var light: String
     public var dark: String
     public var system: String
+    /// Nombre accesible del botón de la variante `icon`, que solo enseña el icono del tema vigente: recibe el nombre del
+    /// control y el del tema, ya resueltos (`themeSwitcher.trigger` del catálogo de React). Es función porque el orden y
+    /// la puntuación de la frase son de cada idioma. Default castellano: «Tema: Claro» (`"\(group): \(theme)"`).
+    public var trigger: @Sendable (_ group: String, _ theme: String) -> String
 
-    public init(group: String = "Tema", light: String = "Claro", dark: String = "Oscuro", system: String = "Sistema") {
+    public init(
+        group: String = "Tema",
+        light: String = "Claro",
+        dark: String = "Oscuro",
+        system: String = "Sistema",
+        trigger: @escaping @Sendable (_ group: String, _ theme: String) -> String = { group, theme in "\(group): \(theme)" }
+    ) {
         self.group = group
         self.light = light
         self.dark = dark
         self.system = system
+        self.trigger = trigger
     }
 
     func text(_ choice: BrandThemeChoice) -> String {
@@ -59,6 +70,9 @@ public struct ThemeSwitcherLabels: Sendable {
         case .system: system
         }
     }
+
+    /// El nombre accesible del disparador de `icon` con el tema vigente.
+    func triggerLabel(_ choice: BrandThemeChoice) -> String { trigger(group, text(choice)) }
 }
 
 /// Selector de tema: claro, oscuro o el del sistema. Solo la vista: **el valor lo guarda la app** (un `Binding`);
@@ -113,7 +127,7 @@ public struct BrandThemeSwitcher: View {
         .menuStyle(.button)
         .menuIndicator(.hidden)
         .buttonStyle(BrandButtonStyle(.ghost, size: size, iconOnly: true))
-        .accessibilityLabel(Text(verbatim: "\(labels.group): \(labels.text(value.wrappedValue))"))
+        .accessibilityLabel(Text(verbatim: labels.triggerLabel(value.wrappedValue)))
     }
 
     // MARK: compact

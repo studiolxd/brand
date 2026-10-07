@@ -29,6 +29,12 @@ extension View {
     }
 
     /// El estilo de texto completo (fuente, interlineado y tracking) escalado con el tipo dinámico.
+    ///
+    /// **Obsoleto**: pone el interlineado solo *entre* líneas (`lineSpacing`), así que una línea mide el alto natural de
+    /// la fuente y no el `line-height` de la web. `brandLinedFont(_:)` da la caja de línea de CSS. Se conserva sin
+    /// cambios para no mover las pantallas que ya lo usan.
+    @available(*, deprecated, renamed: "brandLinedFont(_:relativeTo:)",
+               message: "Usa brandLinedFont(_:), que aplica la caja de línea de CSS (una línea mide tamaño × line-height, como en la web).")
     public func brandTextStyle(_ style: BrandTextStyle, relativeTo textStyle: Font.TextStyle = .body) -> some View {
         modifier(BrandScaledFont(size: style.size, weight: style.weight, family: style.family, relativeTo: textStyle))
             .lineSpacing(style.lineSpacing)

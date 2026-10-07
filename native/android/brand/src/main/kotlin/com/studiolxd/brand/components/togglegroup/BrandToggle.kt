@@ -31,7 +31,7 @@ import com.studiolxd.brand.components.field.animatedFieldColor
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.ProvideBrandContent
 import com.studiolxd.brand.support.brandFocusRing
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.support.collectBrandInteractionState
 import com.studiolxd.brand.support.rememberReduceMotion
 import com.studiolxd.brand.support.resolve
@@ -159,7 +159,7 @@ internal fun BrandToggleSurface(
             .padding(horizontal = if (iconOnly) 0.dp else paddingInline),
         contentAlignment = Alignment.Center,
     ) {
-        ProvideBrandContent(foreground, brandTextStyle(fontSize, T.fontWeight, T.lineHeight, color = foreground)) {
+        ProvideBrandContent(foreground, brandBaseTextStyle(fontSize, T.fontWeight, T.lineHeight, color = foreground)) {
             Row(horizontalArrangement = Arrangement.spacedBy(T.gap, Alignment.CenterHorizontally), verticalAlignment = Alignment.CenterVertically) {
                 content()
             }

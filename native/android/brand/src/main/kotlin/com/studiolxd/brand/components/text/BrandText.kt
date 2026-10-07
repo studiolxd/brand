@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.sp
 import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.LocalBrandTextStyle
 import com.studiolxd.brand.support.brandContentColor
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.tokens.BrandTextInlineTokens
 import com.studiolxd.brand.tokens.BrandTextTokens as T
 
@@ -134,7 +134,7 @@ fun BrandHeading(
     BrandBasicText(
         text = text,
         modifier = modifier.semantics { heading() },
-        style = brandTextStyle(points, level.fontWeight, level.lineHeight, level.letterSpacing, color = level.color),
+        style = brandBaseTextStyle(points, level.fontWeight, level.lineHeight, level.letterSpacing, color = level.color),
     )
 }
 
@@ -149,9 +149,9 @@ enum class ParagraphSize(val value: String) {
 
 @Composable
 private fun paragraphStyle(size: ParagraphSize) = when (size) {
-    ParagraphSize.Small -> brandTextStyle(T.paragraphSmallFontSize, T.fontWeight, T.paragraphSmallLineHeight, T.letterSpacing, color = T.color.current)
-    ParagraphSize.Default -> brandTextStyle(T.fontSize, T.fontWeight, T.lineHeight, T.letterSpacing, color = T.color.current)
-    ParagraphSize.Large -> brandTextStyle(T.paragraphLargeFontSize, T.fontWeight, T.paragraphLargeLineHeight, T.letterSpacing, color = T.color.current)
+    ParagraphSize.Small -> brandBaseTextStyle(T.paragraphSmallFontSize, T.fontWeight, T.paragraphSmallLineHeight, T.letterSpacing, color = T.color.current)
+    ParagraphSize.Default -> brandBaseTextStyle(T.fontSize, T.fontWeight, T.lineHeight, T.letterSpacing, color = T.color.current)
+    ParagraphSize.Large -> brandBaseTextStyle(T.paragraphLargeFontSize, T.fontWeight, T.paragraphLargeLineHeight, T.letterSpacing, color = T.color.current)
 }
 
 /**

@@ -52,7 +52,7 @@
     },
     {
       "prop": "labels",
-      "reason": "Existe como `ThemeSwitcherLabels` (struct con `group`, `light`, `dark`, `system` y defaults castellanos en nativo; en React los textos salen de `themeSwitcher.*` del catálogo y `labels` solo los anula); es un objeto, que esta ficha no compara."
+      "reason": "Existe como `ThemeSwitcherLabels` (struct en SwiftUI, data class en Compose) con `group`, `light`, `dark`, `system` y `trigger` —esta última una función `(group, theme) -> String`, como `themeSwitcher.trigger` del catálogo de React—, todas con su default castellano en nativo («Tema», «Claro», «Oscuro», «Sistema» y «Tema: Claro»); en React los textos salen de `themeSwitcher.*` del catálogo y `labels` solo los anula. Es un objeto, que esta ficha no compara."
     },
     {
       "prop": "id",
@@ -67,7 +67,7 @@
     "El desplegable de `compact` e `icon` es un `Menu` nativo: la lista flotante es la del sistema (sin el borde rectangular de brand) y sus filas usan SF Symbols (sol, luna, ordenador) en vez de los iconos de brand.",
     "El chevron del control compacto no gira al abrirse: SwiftUI no informa de que el menú está abierto.",
     "`list` envuelve las opciones a la línea siguiente cuando el tipo dinámico no las deja caber (`flex-wrap`).",
-    "El nombre accesible de `icon` incluye el tema actual («Tema: Claro»), igual que el `aria-label` de React; en React la frase la compone `themeSwitcher.trigger` del catálogo, en nativo va fija con el formato «grupo: tema».",
+    "El nombre accesible de `icon` incluye el tema actual («Tema: Claro»), igual que el `aria-label` de React, y sale como allí de una función del grupo y el tema (`ThemeSwitcherLabels.trigger`, el equivalente de `themeSwitcher.trigger`): el orden y la puntuación se traducen pasando otra. En nativo el default castellano va en `ThemeSwitcherLabels`; no hay catálogo (`BrandMessagesProvider`).",
     "En Android el desplegable de `compact` e `icon` es una lista propia (`Popup`) con los iconos de brand en las filas (no SF Symbols), el tema actual en peso 500 y el chevron que gira al abrir; `icon` es un botón `ghost` solo de icono cuyo nombre accesible incluye el tema («Tema: Claro»).",
     "En Android `list` se coloca con `FlowRow` (envuelve a la línea siguiente con la escala de fuente grande); el subrayado de la opción bajo el puntero o al pulsar es la línea de `Link`. En TalkBack es un grupo de radios y `compact` una lista desplegable con el tema actual como estado."
   ]

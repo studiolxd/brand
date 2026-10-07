@@ -58,7 +58,7 @@ import com.studiolxd.brand.icon.BrandIconSize
 import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.LocalBrandIconTextSize
 import com.studiolxd.brand.support.LocalBrandTextStyle
-import com.studiolxd.brand.support.brandTextStyle
+import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.support.collectBrandInteractionState
 import com.studiolxd.brand.tokens.BrandMenuTokens as T
 import com.studiolxd.brand.tokens.BrandSpacing
@@ -326,7 +326,7 @@ internal fun BrandMenuPanel(
                         .padding(horizontal = T.labelMarginInline)
                         .padding(horizontal = T.labelPaddingInline, vertical = T.labelPaddingBlock),
                     // `.menu__label` no declara `line-height`: hereda el del cuerpo (`text.line-height`), no el del ítem.
-                    style = brandTextStyle(T.labelFontSize, T.labelFontWeight, BrandTextTokens.lineHeight, color = T.labelColor.current),
+                    style = brandBaseTextStyle(T.labelFontSize, T.labelFontWeight, BrandTextTokens.lineHeight, color = T.labelColor.current),
                 )
                 is BrandMenuItem.Button -> MenuRow(
                     label = item.label, description = item.description, icon = item.icon, destructive = item.destructive,
@@ -389,10 +389,10 @@ private fun MenuRow(
                 }
             }
             Column(Modifier.weight(1f, fill = false)) {
-                BrandBasicText(label, style = brandTextStyle(T.itemFontSize, weight, T.itemLineHeight, color = ink), maxLines = 1, overflow = TextOverflow.Ellipsis)
+                BrandBasicText(label, style = brandBaseTextStyle(T.itemFontSize, weight, T.itemLineHeight, color = ink), maxLines = 1, overflow = TextOverflow.Ellipsis)
                 if (description != null) {
                     // `line-height` heredado del ítem (un número: se aplica a la letra del rótulo).
-                    BrandBasicText(description, style = brandTextStyle(T.labelFontSize, T.itemFontWeight, T.itemLineHeight, color = ink), maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    BrandBasicText(description, style = brandBaseTextStyle(T.labelFontSize, T.itemFontWeight, T.itemLineHeight, color = ink), maxLines = 1, overflow = TextOverflow.Ellipsis)
                 }
             }
         }
