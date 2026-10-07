@@ -34,7 +34,7 @@ export interface DateTimeFieldProps extends FieldOptionalProps {
   readOnly?: boolean;
   /**
    * Campo obligatorio: `required` nativo en el campo de la fecha y, en la
-   * hora, el de sus desplegables (con `aria-required` en su grupo), como
+   * hora, el de sus desplegables (con `aria-required` en cada uno), como
    * `TimeField`.
    */
   required?: boolean;

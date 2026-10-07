@@ -52,6 +52,9 @@ Los dos desplegables viven en un `role="group"`: la etiqueta del campo nombra al
 ver § «Internacionalización»—. Así el lector anuncia una sola vez de qué hora se trata y luego
 qué parte se está eligiendo. Los dos puntos son decoración: van `aria-hidden`.
 
+Con `required`, cada desplegable lleva `required` (lo que valida el `<form>`) y `aria-required`,
+que un `combobox` sí admite. El grupo no: ARIA 1.2 no admite `aria-required` en `role="group"`.
+
 ## Internacionalización
 
 Los cuatro textos que el control emite por su cuenta —los dos nombres accesibles y las dos

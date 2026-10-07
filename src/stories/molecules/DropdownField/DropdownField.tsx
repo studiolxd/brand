@@ -3,13 +3,21 @@
 import { forwardRef, useRef, type ReactNode } from 'react';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
+import {
+  FieldRequiredText,
+  FieldShell,
+  joinIds,
+  requiredTextId,
+  useFieldShell,
+  type FieldOptionalProps,
+  type FieldRequiredProps,
+} from '../_shared/FieldShell';
 import { RequiredInput } from '../_shared/requiredInput';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Menu, type MenuItem } from '../Menu/Menu';
 import './DropdownField.css';
 
-export interface DropdownFieldProps extends FieldOptionalProps {
+export interface DropdownFieldProps extends FieldOptionalProps, FieldRequiredProps {
   /** `id` del control; enlaza la etiqueta. Si no se pasa, se genera con `useId`. */
   id?: string;
   /** Etiqueta visible. Si no hay, es obligatorio `aria-label`. */
@@ -37,10 +45,11 @@ export interface DropdownFieldProps extends FieldOptionalProps {
   name?: string;
   /**
    * Campo obligatorio. El disparador es un botón, que no admite
-   * `aria-required`: lo obligatorio lo lleva el **grupo** que envuelve el
-   * campo (`role="group"`, nombrado por la etiqueta o por `aria-label`, con
-   * `aria-required`), y el `<form>` no se envía sin valor (`required` en el
-   * campo que sincroniza el valor, que devuelve el foco al disparador).
+   * `aria-required` (D73): lo obligatorio va en su **descripción**, un texto
+   * oculto «obligatorio» (`requiredLabel`, o `field.required` del catálogo)
+   * enlazado por `aria-describedby` detrás de la ayuda y el error. El `<form>`
+   * no se envía sin valor (`required` en el campo que sincroniza el valor,
+   * que devuelve el foco al disparador).
    */
   required?: boolean;
   /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */
@@ -78,6 +87,7 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
   disabled = false,
   name,
   required = false,
+  requiredLabel,
   error = false,
   errorMessage,
   helperText,
@@ -87,21 +97,14 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
-  const { id, labelId } = field;
+  const { id } = field;
+  const requiredId = required ? requiredTextId(id) : undefined;
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const setTriggerRef = (node: HTMLButtonElement | null) => {
     triggerRef.current = node;
     if (typeof ref === 'function') ref(node);
     else if (ref) ref.current = node;
   };
-  const group = required
-    ? {
-        role: 'group',
-        'aria-labelledby': label ? labelId : undefined,
-        'aria-label': label ? undefined : ariaLabel,
-        'aria-required': true,
-      } as const
-    : undefined;
   return (
     <FieldShell
       field={field}
@@ -113,8 +116,6 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
       optionalLabel={optionalLabel}
       labelHidden={labelHidden}
       size={size}
-      labelIdentified={required}
-      rootProps={group}
     >
       <Menu
         align={align}
@@ -129,7 +130,7 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
             id={id}
             className="dropdown-field__control"
             aria-label={label ? undefined : ariaLabel}
-            aria-describedby={field.describedBy}
+            aria-describedby={joinIds(field.describedBy, requiredId)}
             aria-invalid={field.hasError || undefined}
             disabled={disabled}
             onBlur={onBlur}
@@ -139,6 +140,7 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
           </button>
         }
       />
+      {requiredId && <FieldRequiredText id={requiredId} label={requiredLabel} />}
       {/* Lo que se envía con el formulario (y, si es obligatorio, lo que lo valida). */}
       <RequiredInput name={name} value={value ?? ''} required={required} focusTarget={() => triggerRef.current} />
     </FieldShell>

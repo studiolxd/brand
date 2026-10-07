@@ -45,7 +45,12 @@ export interface TimeSelectProps {
   id?: string;
   /** Nombre del campo en el formulario: se monta un input oculto con `HH:MM`. */
   name?: string;
-  /** Campo obligatorio: se marca el grupo y los dos desplegables. */
+  /**
+   * Campo obligatorio: `required` en los dos desplegables, que es lo que
+   * valida el `<form>` y lo que les pone `aria-required` (un `combobox` sí lo
+   * admite). El grupo no lo lleva: ARIA 1.2 no admite `aria-required` en
+   * `role="group"` (D73).
+   */
   required?: boolean;
   /** Id de la etiqueta que nombra el grupo (lo pone el campo). */
   'aria-labelledby'?: string;
@@ -146,7 +151,6 @@ export const TimeSelect = forwardRef<HTMLButtonElement, TimeSelectProps>(functio
       aria-labelledby={ariaLabelledBy}
       aria-describedby={ariaDescribedBy}
       aria-invalid={error || undefined}
-      aria-required={required || undefined}
     >
       <Select
         ref={ref}

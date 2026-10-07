@@ -59,8 +59,12 @@ interface Case {
   described?: Query;
   /** El que lleva `aria-invalid`; `null` si no aplica. Default: `named`. */
   invalid?: Query | null;
-  /** Cómo se anuncia `required`, y dónde; `null` si el campo no lo admite. */
-  required: { how: 'native' | 'aria'; on?: Query } | null;
+  /**
+   * Cómo se anuncia `required`, y dónde; `null` si el campo no lo admite.
+   * `description`: el disparador es un botón, que no admite `aria-required`
+   * (D73), y lo obligatorio va en su descripción («obligatorio»).
+   */
+  required: { how: 'native' | 'aria' | 'description'; on?: Query } | null;
   /** Si el campo admite `labelHidden`. */
   labelHidden?: boolean;
   /** Si el campo admite la marca `optional` (D70). */
@@ -103,12 +107,12 @@ const CASES: Case[] = [
   },
   {
     // El disparador es un botón que abre un diálogo: `aria-required` no está
-    // permitido en `role="button"`. Lo lleva el grupo que envuelve el campo,
-    // nombrado por la etiqueta.
+    // permitido en `role="button"` (ni en `role="group"`). Lo obligatorio va
+    // en su descripción (D73).
     name: 'ColorPickerField',
     render: (p) => <ColorPickerField id={ID} label={LABEL} {...p} />,
     named: byId(ID),
-    required: { how: 'aria', on: () => byId(ID)().closest<HTMLElement>('.color-picker-field')! },
+    required: { how: 'description' },
   },
   {
     name: 'DatePickerField',
@@ -133,7 +137,7 @@ const CASES: Case[] = [
       <DropdownField id={ID} label={LABEL} items={[]} {...p}>Valor</DropdownField>
     ),
     named: byId(ID),
-    required: { how: 'aria', on: () => byId(ID)().closest<HTMLElement>('.dropdown-field')! },
+    required: { how: 'description' },
   },
   {
     name: 'FileUploadField',
@@ -224,11 +228,13 @@ const CASES: Case[] = [
     required: { how: 'native' },
   },
   {
-    // Compuesto: dos desplegables; la etiqueta nombra el grupo.
+    // Compuesto: dos desplegables; la etiqueta nombra el grupo. El grupo no
+    // admite `aria-required` (D73): lo llevan los desplegables, que son
+    // `combobox` y sí lo admiten; aquí se mira el de horas.
     name: 'TimeField',
     render: (p) => <TimeField id={ID} label={LABEL} {...p} />,
     named: () => screen.getByRole('group', { name: LABEL_START }),
-    required: { how: 'aria' },
+    required: { how: 'aria', on: byId(ID) },
   },
 ];
 
@@ -279,14 +285,22 @@ describe('FieldShell — contrato común de los *Field', () => {
 
     if (c.required) {
       const { how, on } = c.required;
-      it(`\`required\` se anuncia (${how === 'native' ? 'atributo nativo' : 'aria-required'})`, () => {
+      const nombre = { native: 'atributo nativo', aria: 'aria-required', description: 'descripción «obligatorio»' }[how];
+      it(`\`required\` se anuncia (${nombre})`, () => {
         const target = () => (on ?? c.named)();
         const { unmount } = mount(c);
-        expect(target()).not.toHaveAttribute(how === 'native' ? 'required' : 'aria-required');
+        if (how === 'description') expect(target()).not.toHaveAccessibleDescription(/obligatorio/);
+        else expect(target()).not.toHaveAttribute(how === 'native' ? 'required' : 'aria-required');
         unmount();
         mount(c, { required: true });
         if (how === 'native') expect(target()).toBeRequired();
-        else expect(target()).toHaveAttribute('aria-required', 'true');
+        else if (how === 'aria') expect(target()).toHaveAttribute('aria-required', 'true');
+        else {
+          expect(target()).not.toHaveAttribute('aria-required');
+          expect(target()).toHaveAccessibleDescription(/obligatorio$/);
+          // Ningún ancestro lleva `aria-required` (ARIA 1.2 no lo admite en `group`).
+          expect(target().closest('[aria-required]')).toBeNull();
+        }
       });
     }
 
@@ -312,7 +326,7 @@ describe('FieldShell — contrato común de los *Field', () => {
   });
 });
 
-describe('FieldShell — el obligatorio de un disparador que es un botón va en su grupo', () => {
+describe('FieldShell — el obligatorio de un disparador que es un botón va en su descripción (D73)', () => {
   const GROUPED: Array<[string, (required: boolean) => ReactElement]> = [
     ['ColorPickerField', (required) => <ColorPickerField id={ID} label={LABEL} name="color" required={required} />],
     ['DropdownField', (required) => (
@@ -320,22 +334,29 @@ describe('FieldShell — el obligatorio de un disparador que es un botón va en 
     )],
   ];
 
-  it.each(GROUPED)('%s: grupo nombrado por la etiqueta y el `<form>` lo valida', (_name, ui) => {
+  it.each(GROUPED)('%s: «obligatorio» describe el disparador y el `<form>` lo valida', (_name, ui) => {
     const { unmount } = render(<BrandMessagesProvider messages={ES}>{ui(false)}</BrandMessagesProvider>);
-    expect(screen.queryByRole('group', { name: LABEL })).toBeNull();
+    expect(document.getElementById(`${ID}-required`)).toBeNull();
     // Sin `required`, el campo que va con el formulario sigue siendo el oculto de siempre.
     expect(document.querySelector('input[type="hidden"]')).not.toBeNull();
     unmount();
 
-    render(<BrandMessagesProvider messages={ES}>{ui(true)}</BrandMessagesProvider>);
-    const group = screen.getByRole('group', { name: LABEL });
-    expect(group).toHaveAttribute('aria-required', 'true');
-    expect(group).toContainElement(document.getElementById(ID));
-    // El disparador se sigue nombrando por la etiqueta, y no lleva `aria-required`.
-    expect(document.getElementById(ID)).toHaveAccessibleName(LABEL);
-    expect(document.getElementById(ID)).not.toHaveAttribute('aria-required');
+    const { container } = render(
+      <BrandMessagesProvider messages={ES}>{ui(true)}</BrandMessagesProvider>,
+    );
+    // Sin grupo ni `aria-required` en ninguna parte (ARIA 1.2 no lo admite ni
+    // en `button` ni en `group`).
+    expect(screen.queryByRole('group')).toBeNull();
+    expect(container.querySelector('[aria-required]')).toBeNull();
+    // El disparador se sigue nombrando por la etiqueta, y lo obligatorio va
+    // en su descripción: un texto oculto del catálogo (`field.required`).
+    const trigger = document.getElementById(ID)!;
+    expect(trigger).toHaveAccessibleName(LABEL);
+    // (El de ColorPicker lleva antes el valor elegido.)
+    expect(trigger).toHaveAccessibleDescription(/obligatorio$/);
+    expect(document.getElementById(`${ID}-required`)!.closest('.visually-hidden')).not.toBeNull();
     // Un campo oculto no se valida: el obligatorio va en uno de texto, fuera de la vista.
-    const input = group.querySelector('input')!;
+    const input = container.querySelector('input')!;
     expect(input).toHaveAttribute('type', 'text');
     expect(input).toBeRequired();
     expect(input).toHaveAttribute('tabindex', '-1');
@@ -359,5 +380,29 @@ describe('FieldShell — el `aria-describedby` del consumidor se suma, no se pis
   it.each(CONSUMER)('%s', (_name, ui) => {
     render(<BrandMessagesProvider messages={ES}>{ui('pista-propia')}</BrandMessagesProvider>);
     expect(document.getElementById(ID)).toHaveAttribute('aria-describedby', `${ID}-helper pista-propia`);
+  });
+});
+
+describe('FieldShell — «obligatorio» se suma a la ayuda y al error (D73)', () => {
+  const SUMMED: Array<[string, Query, (p: Shared & { requiredLabel?: string }) => ReactElement]> = [
+    ['ColorPickerField', byId(ID), (p) => <ColorPickerField id={ID} label={LABEL} {...p} />],
+    ['DropdownField', byId(ID), (p) => <DropdownField id={ID} label={LABEL} items={[]} {...p}>Valor</DropdownField>],
+  ];
+
+  it.each(SUMMED)('%s: error, ayuda y obligatorio, en ese orden', (_name, target, ui) => {
+    render(
+      <BrandMessagesProvider messages={ES}>
+        {ui({ required: true, helperText: HELP, errorMessage: ERROR })}
+      </BrandMessagesProvider>,
+    );
+    // (El de ColorPicker antepone el id de su valor elegido.)
+    expect(target().getAttribute('aria-describedby')).toMatch(
+      new RegExp(`(^| )${ID}-error ${ID}-helper ${ID}-required$`),
+    );
+  });
+
+  it.each(SUMMED)('%s: `requiredLabel` anula el catálogo', (_name, target, ui) => {
+    render(<BrandMessagesProvider messages={ES}>{ui({ required: true, requiredLabel: 'necesario' })}</BrandMessagesProvider>);
+    expect(target()).toHaveAccessibleDescription(/necesario$/);
   });
 });

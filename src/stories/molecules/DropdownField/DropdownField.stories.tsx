@@ -75,16 +75,9 @@ export const Tallas: Story = {
   ),
 };
 
-/** Obligatorio: lo anuncia el grupo del campo (el disparador es un botón) y el `<form>` no se envía sin valor. */
+/** Obligatorio: el disparador (un botón, sin `aria-required`) se describe «obligatorio» y el `<form>` no se envía sin valor. */
 export const Obligatorio: Story = {
   args: { required: true, name: 'orden' },
-  // a11y pendiente de decisión (D68): `aria-allowed-attr` — ARIA 1.2 no admite
-  // `aria-required` en `role="group"` (axe lo marca), y es justo donde D68 lo
-  // pone porque el disparador es un `role="button"`, que tampoco lo admite. El
-  // mismo patrón que ya usa `TimeSelect`. Alternativa válida propuesta: el
-  // «obligatorio» como descripción del disparador (texto oculto del catálogo
-  // en su `aria-describedby`).
-  parameters: { a11y: { config: { rules: [{ id: 'aria-allowed-attr', enabled: false }] } } },
 };
 
 export const Deshabilitado: Story = { args: { disabled: true } };

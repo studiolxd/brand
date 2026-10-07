@@ -380,6 +380,7 @@ export const brandMessagesFixtureEn: CompleteBrandMessages = {
   },
   field: {
     optional: '(optional)',
+    required: 'required',
   },
   recurrenceField: {
     legend: 'Repeat',

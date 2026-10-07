@@ -38,7 +38,7 @@ Encima por defecto, como el resto de campos. `inline` la pone delante, para barr
 
 ## Obligatorio
 
-El disparador es un botón, y un botón no admite `aria-required`. Con `required`, lo obligatorio lo lleva el **grupo** que envuelve el campo: `role="group"`, nombrado por la etiqueta (o por `aria-label` si no la hay) y con `aria-required="true"`. El `<form>` no se envía sin valor: el campo que sincroniza el valor pasa a llevar `required` y, cuando el navegador lo enfoca para avisar, devuelve el foco al disparador.
+El disparador es un botón, y ARIA 1.2 no admite `aria-required` ni en un botón ni en un `role="group"` que lo envuelva. Con `required`, lo obligatorio va en la **descripción** del disparador: un texto oculto «obligatorio» (`field.required` del catálogo, o la prop `requiredLabel`) enlazado por su `aria-describedby`, detrás del error y la ayuda. El `<form>` no se envía sin valor: el campo que sincroniza el valor pasa a llevar `required` y, cuando el navegador lo enfoca para avisar, devuelve el foco al disparador.
 
 <Canvas of={DropdownFieldStories.Obligatorio} />
 
