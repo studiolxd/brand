@@ -183,16 +183,16 @@ const CASES: Case[] = [
   {
     // Editor compuesto: la «etiqueta» es el `legend` del `fieldset`; la ayuda
     // y el error describen el grupo. Sin `aria-invalid` (no hay un control
-    // único que marcar), sin `required` (`null` es un valor válido: «no se
-    // repite») y sin `labelHidden` (el `legend` del `Fieldset` no se oculta).
+    // único que marcar) y sin `required` (`null` es un valor válido: «no se
+    // repite»). `labelHidden` oculta el propio `legend` (`Fieldset
+    // legendHidden`).
     name: 'RecurrenceField',
     render: (p) => (
-      <RecurrenceField id={ID} legend={LABEL} value={null} onValueChange={() => {}} {...drop(p, 'required', 'labelHidden')} />
+      <RecurrenceField id={ID} legend={LABEL} value={null} onValueChange={() => {}} {...drop(p, 'required')} />
     ),
     named: () => screen.getByRole('group', { name: LABEL }),
     invalid: null,
     required: null,
-    labelHidden: false,
   },
   {
     name: 'SelectField',

@@ -216,7 +216,7 @@ Para texto que debe ser leído por lectores de pantalla pero invisible visualmen
 ```
 
 Excepciones — **cuando la receta tiene que ir sobre un elemento que ya existe**, porque el
-`<span>` envolvente de `VisuallyHidden` rompería algo. Son estas cuatro, y no se amplían sin
+`<span>` envolvente de `VisuallyHidden` rompería algo. Son estas cinco, y no se amplían sin
 apuntarlas aquí:
 
 - `Label` aplica `visually-hidden` sobre el propio `<label>` cuando `hidden={true}`: lo que se
@@ -231,6 +231,9 @@ apuntarlas aquí:
   vacío**, para que no ocupe sitio; `VisuallyHidden` lo ocultaría siempre, también cuando
   enseña el mensaje, y `display: none` lo sacaría del árbol de accesibilidad y el anuncio no
   llegaría.
+- `Fieldset` la aplica sobre el propio `<legend>` con `legendHidden` (D69; `RecurrenceField` la
+  usa con `labelHidden`): el `<legend>` tiene que ser el primer hijo del `fieldset` para nombrar
+  el grupo, y un `<span>` envolvente rompería esa asociación.
 
 El patrón común: si el nodo que hay que ocultar ya está fijado por el HTML (es el elemento del
 componente, o su sitio en la tabla no admite otro), la clase va sobre él; en cualquier otro
