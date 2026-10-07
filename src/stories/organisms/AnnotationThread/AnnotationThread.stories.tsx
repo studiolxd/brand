@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import {
   AnnotationThread,
   type AnnotationEntry,
@@ -13,6 +13,7 @@ import { Link } from '../../atoms/Link/Link';
 import { Stack } from '../../atoms/Stack/Stack';
 import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
 import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const meta: Meta<typeof AnnotationThread> = {
   title: 'Organisms/AnnotationThread',
@@ -70,10 +71,6 @@ export const SinRespuestas: Story = {
 
 /** Atendido: alguien ya lo ha mirado, pero el asunto no está cerrado. */
 export const Atendido: Story = {
-  // a11y pendiente de decisión (D16): `color-contrast` de la letra menor del hilo
-  // (fecha, «editado», rótulo de respuestas): #808080 sobre #ffffff, 3,94:1 a 14px
-  // (pide 4,5:1).
-  parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } },
   args: {
     annotation: raiz,
     replies: respuestas,
@@ -87,13 +84,8 @@ export const Atendido: Story = {
   },
 };
 
-/** Resuelto: sigue ahí, pero deja de pedir atención. */
+/** Resuelto: sigue ahí, a contraste pleno; lo dice la etiqueta «Resuelta». */
 export const Resuelto: Story = {
-  // a11y pendiente de decisión (D16): `color-contrast` del hilo resuelto, atenuado
-  // por opacidad: autor, cuerpo y botón outline #a0a5ac sobre #ffffff (2,47:1),
-  // fecha/«editado»/respuestas #b7b7b7 (2,00:1), etiqueta success #ffffff sobre
-  // #99c2a2 (1,98:1); y en los demás, la letra menor #808080 (3,94:1). Pide 4,5:1.
-  parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } },
   args: {
     annotation: raiz,
     replies: respuestas,
@@ -120,11 +112,6 @@ export const ConAccionesPorAnotacion: Story = {
 
 /** Varios hilos, como se ven en un panel de revisión. */
 export const PanelDeRevision: Story = {
-  // a11y pendiente de decisión (D16): `color-contrast` del hilo resuelto, atenuado
-  // por opacidad: autor, cuerpo y botón outline #a0a5ac sobre #ffffff (2,47:1),
-  // fecha/«editado»/respuestas #b7b7b7 (2,00:1), etiqueta success #ffffff sobre
-  // #99c2a2 (1,98:1); y en los demás, la letra menor #808080 (3,94:1). Pide 4,5:1.
-  parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } },
   render: () => (
     <Stack>
       <AnnotationThread annotation={raiz} replies={respuestas} actions={accionesDeHilo} />
@@ -192,14 +179,9 @@ export const Transiciones: Story = {
   render: () => <HiloConTransiciones />,
 };
 
-/** Los tres, uno al lado del otro: la presencia baja según avanza el estado. */
+/** Los tres, uno al lado del otro: el estado lo dice la etiqueta, no la opacidad. */
 export const LosTresEstados: Story = {
   name: 'Los tres estados',
-  // a11y pendiente de decisión (D16): `color-contrast` del hilo resuelto, atenuado
-  // por opacidad: autor, cuerpo y botón outline #a0a5ac sobre #ffffff (2,47:1),
-  // fecha/«editado»/respuestas #b7b7b7 (2,00:1), etiqueta success #ffffff sobre
-  // #99c2a2 (1,98:1); y en los demás, la letra menor #808080 (3,94:1). Pide 4,5:1.
-  parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } },
   render: () => (
     <Stack>
       {ESTADOS.map((status) => (
@@ -207,6 +189,44 @@ export const LosTresEstados: Story = {
       ))}
     </Stack>
   ),
+};
+
+const conRespuestas = (status: AnnotationThreadStatus) => (
+  <AnnotationThread
+    key={status}
+    annotation={{ ...raiz, edited: true }}
+    replies={respuestas}
+    status={status}
+    data-testid={status}
+    actions={<Button size="sm" variant="outline">Reabrir</Button>}
+  />
+);
+
+export const ContratoContraste: Story = {
+  name: 'Test — atendido y resuelto se leen a contraste pleno, y la etiqueta dice el estado',
+  tags: ['!dev'],
+  render: () => <Stack>{ESTADOS.map(conRespuestas)}</Stack>,
+  play: async ({ canvasElement }) => {
+    for (const status of ESTADOS) {
+      const hilo = canvasElement.querySelector(`[data-testid="${status}"]`) as HTMLElement;
+      await expect(getComputedStyle(hilo).opacity).toBe('1');
+    }
+    const resuelto = canvasElement.querySelector('[data-testid="resolved"]') as HTMLElement;
+    await expect(within(resuelto).getByText('Resuelta')).toHaveClass('tag--success');
+  },
+};
+
+/* Lo mismo en oscuro: axe mide aquí la letra menor y la etiqueta sobre prusia. */
+export const ContratoContrasteOscuro: Story = {
+  name: 'Test — los tres estados, en oscuro, pasan el contraste',
+  tags: ['!dev'],
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
+  render: () => <Stack>{ESTADOS.map(conRespuestas)}</Stack>,
+  play: async ({ canvasElement }) => {
+    await waitFor(() => expect(document.documentElement.dataset.theme).toBe('dark'));
+    const resuelto = canvasElement.querySelector('[data-testid="resolved"]') as HTMLElement;
+    await expect(getComputedStyle(resuelto).opacity).toBe('1');
+  },
 };
 
 /**
@@ -217,10 +237,6 @@ export const LosTresEstados: Story = {
  */
 export const ConCapturaYEnlace: Story = {
   name: 'Con captura y enlace a la lección',
-  // a11y pendiente de decisión (D16): `color-contrast` de la letra menor del hilo
-  // (fecha, «editado», rótulo de respuestas): #808080 sobre #ffffff, 3,94:1 a 14px
-  // (pide 4,5:1).
-  parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } },
   args: {
     status: 'acknowledged',
     annotation: {
@@ -297,11 +313,6 @@ export const CoordenadaLarga: Story = {
 export const TestTransiciones: Story = {
   name: 'Test — el pie ofrece los otros dos estados y el rótulo cambia',
   tags: ['!dev'],
-  // a11y pendiente de decisión (D16): `color-contrast` del hilo resuelto, atenuado
-  // por opacidad: autor, cuerpo y botón outline #a0a5ac sobre #ffffff (2,47:1),
-  // fecha/«editado»/respuestas #b7b7b7 (2,00:1), etiqueta success #ffffff sobre
-  // #99c2a2 (1,98:1); y en los demás, la letra menor #808080 (3,94:1). Pide 4,5:1.
-  parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } },
   render: () => <HiloConTransiciones />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -420,10 +431,6 @@ export const TestCoordenadaEstrecha: Story = {
  */
 export const TextosDelProveedor: Story = {
   name: 'Textos desde el proveedor (otro idioma)',
-  // a11y pendiente de decisión (D16): `color-contrast` de la letra menor del hilo
-  // (fecha, «editado», rótulo de respuestas): #808080 sobre #ffffff, 3,94:1 a 14px
-  // (pide 4,5:1).
-  parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } },
   render: () => (
     <BrandMessagesProvider messages={EN}>
       <AnnotationThread
@@ -449,11 +456,6 @@ export const TextosDelProveedor: Story = {
 export const ContratoProveedor: Story = {
   name: 'Test — el hilo lee sus textos del proveedor',
   tags: ['!dev'],
-  // a11y pendiente de decisión (D16): `color-contrast` del hilo resuelto, atenuado
-  // por opacidad: autor, cuerpo y botón outline #a0a5ac sobre #ffffff (2,47:1),
-  // fecha/«editado»/respuestas #b7b7b7 (2,00:1), etiqueta success #ffffff sobre
-  // #99c2a2 (1,98:1); y en los demás, la letra menor #808080 (3,94:1). Pide 4,5:1.
-  parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } },
   render: () => (
     <BrandMessagesProvider messages={EN}>
       <AnnotationThread
