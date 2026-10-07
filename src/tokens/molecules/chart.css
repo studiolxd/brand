@@ -7,6 +7,7 @@
   --chart-bar-radius: 0.25rem; /** 4px — extremo de dato redondeado; el extremo de la línea base queda recto */
   --chart-area-fill-opacity: 0.1; /** El área es un velo del tono de la serie, nunca un bloque saturado */
   --chart-donut-thickness: 0.55; /** Fracción del radio que ocupa el anillo del donut */
+  --chart-dot-size: 10px; /** 10px de diámetro — medida propia del componente (no hay peldaño de 10 en `spacing.*`). Punto de la nube de dispersión, mayor que el marcador de línea porque aquí el punto es la marca, no un remate */
   --chart-radar-fill-opacity: 0.15; /** El polígono del radar es un velo del tono de la serie, como el área */
   --chart-hover-opacity: 0.75; /** Atenuación de las marcas que no son la activa mientras el puntero está encima */
   --chart-series-1: var(--color-chart-series-1); /** Ranura categórica 1. El orden de las ranuras es el mecanismo de seguridad para daltonismo: se asignan en orden, nunca se ciclan */
@@ -36,7 +37,6 @@
   --chart-marker-size: var(--spacing-2); /** 8px de diámetro — punto de serie y marcador de extremo */
   --chart-funnel-gap: var(--spacing-1); /** 4px — hueco de superficie entre tramos del embudo */
   --chart-radial-bar-gap: var(--spacing-1); /** 4px — hueco entre anillos de la barra radial */
-  --chart-dot-size: var(--spacing-3); /** 10px de diámetro nominal — punto de la nube de dispersión, mayor que el marcador de línea porque aquí el punto es la marca, no un remate */
   --chart-tile-label-color-1: var(--color-black); /** Rótulo sobre la baldosa de la ranura 1. La tinta se elige por ranura: ninguna de las dos (blanco o negro) llega a 4.5:1 sobre las ocho series, así que cada una lleva la que cumple. Negro, no prusia: el prusia es un casi-negro entintado y se queda corto sobre el azul de la ranura 1 */
   --chart-tile-label-color-2: var(--color-black); /** Rótulo sobre la baldosa de la ranura 2 */
   --chart-tile-label-color-3: var(--color-black); /** Rótulo sobre la baldosa de la ranura 3 */
