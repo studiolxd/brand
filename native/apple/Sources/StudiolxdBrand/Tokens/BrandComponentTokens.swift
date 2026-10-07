@@ -860,7 +860,7 @@ public enum BrandSwitcherTokens {
     public static let smTrackHeight: CGFloat = 1.25
     /// Token `switcher.sm-thumb-size` — Tamaño del thumb — variante sm Fracción del tamaño de fuente del propio componente (em).
     public static let smThumbSize: CGFloat = 0.875
-    /// Token `switcher.lg-track-width` — Ancho del track — variante lg (48px, alineado con la talla lg del sistema, size-component.lg). En rem, no en em: como el resto de campos en lg, no se escala además con la fuente del párrafo large del campo
+    /// Token `switcher.lg-track-width` — Ancho del track — variante lg: la talla lg del sistema (48px). En rem, no en em: como el resto de campos en lg, no se escala además con la fuente del párrafo large del campo
     public static let lgTrackWidth: CGFloat = 48
     /// Token `switcher.lg-track-height` — Alto del track — variante lg. En rem, ver lg-track-width
     public static let lgTrackHeight: CGFloat = 26
