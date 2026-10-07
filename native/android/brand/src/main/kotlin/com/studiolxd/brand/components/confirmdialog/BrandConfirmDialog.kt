@@ -27,6 +27,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -52,11 +53,13 @@ import com.studiolxd.brand.components.closebutton.BrandCloseButton
 import com.studiolxd.brand.components.dialog.BrandDialogButton
 import com.studiolxd.brand.components.dialog.BrandDialogFooter
 import com.studiolxd.brand.components.dialog.BrandDialogWindow
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.brandFocusRing
 import com.studiolxd.brand.support.brandShadow
 import com.studiolxd.brand.support.brandTextStyle
 import com.studiolxd.brand.support.scaledByFontScale
+import com.studiolxd.brand.support.toScaledDp
 import com.studiolxd.brand.tokens.BrandConfirmDialogTokens
 import com.studiolxd.brand.tokens.BrandFormFieldTokens
 import com.studiolxd.brand.tokens.BrandInputFieldTokens
@@ -280,15 +283,28 @@ internal fun BrandConfirmDialogCard(
             horizontalArrangement = Arrangement.spacedBy(M.headerGap),
             verticalAlignment = Alignment.Top,
         ) {
-            BasicText(
+            BrandBasicText(
                 title,
                 Modifier.weight(1f).semantics { heading() },
                 style = brandTextStyle(M.titleFontSize, M.titleFontWeight, M.titleLineHeight, color = M.titleColor.current),
             )
-            BrandCloseButton(onClick = { if (!state.pending) onCancel() }, contentDescription = closeLabel, size = BrandControlSize.Md)
+            // El aspa se centra sobre la PRIMERA línea del título, como `.modal__close` en la web: se desplaza la mitad de lo
+            // que va de la caja de esa línea (cuerpo × interlineado del título) a la del aspa, y ocupa lo que ocupa con ese
+            // margen (negativo si el aspa es más alta que la línea).
+            val closeShift = ((M.titleFontSize * M.titleLineHeight).toScaledDp() - M.closeSize.scaledByFontScale()) / 2
+            BrandCloseButton(
+                onClick = { if (!state.pending) onCancel() },
+                modifier = Modifier.layout { measurable, constraints ->
+                    val placeable = measurable.measure(constraints)
+                    val dy = closeShift.roundToPx()
+                    layout(placeable.width, (placeable.height + dy).coerceAtLeast(0)) { placeable.place(0, dy) }
+                },
+                contentDescription = closeLabel,
+                size = BrandControlSize.Md,
+            )
         }
         if (description != null) {
-            BasicText(
+            BrandBasicText(
                 description,
                 Modifier.padding(bottom = M.descriptionMarginBlockEnd),
                 style = brandTextStyle(M.descriptionFontSize, com.studiolxd.brand.tokens.BrandTextTokens.fontWeight, com.studiolxd.brand.tokens.BrandTextTokens.lineHeight, color = M.descriptionColor.current),
@@ -347,7 +363,7 @@ private fun ConfirmPhraseField(phrase: BrandConfirmPhrase, state: ConfirmDialogS
     val ringInset = BrandInputTokens.focusRingInsetOffset
 
     Column(modifier, verticalArrangement = Arrangement.spacedBy(BrandFormFieldTokens.gap)) {
-        BasicText(
+        BrandBasicText(
             phrase.label,
             style = brandTextStyle(BrandLabelTokens.fontSize, BrandLabelTokens.fontWeight, BrandLabelTokens.lineHeight, BrandLabelTokens.letterSpacing, color = BrandLabelTokens.color.current),
         )
@@ -398,7 +414,7 @@ private fun ConfirmPhraseField(phrase: BrandConfirmPhrase, state: ConfirmDialogS
         )
         if (showError) {
             // El mensaje ya viaja en la semántica del campo (`error`): TalkBack no lo lee dos veces.
-            BasicText(
+            BrandBasicText(
                 phrase.mismatch,
                 Modifier.semantics { contentDescription = "" },
                 style = brandTextStyle(BrandInputFieldTokens.errorFontSize, BrandInputFieldTokens.errorFontWeight, BrandInputFieldTokens.errorLineHeight, color = BrandInputFieldTokens.errorColor.current),

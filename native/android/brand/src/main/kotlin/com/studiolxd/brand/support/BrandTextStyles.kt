@@ -14,6 +14,10 @@ import com.studiolxd.brand.typography.BrandFontFamily
  * (24 sp a 16 sp), centrando el texto en ella (sin recortar arriba ni abajo), como en la web. El tamaño y el
  * interlineado crecen juntos con la escala de fuente (`sp`).
  *
+ * Con un interlineado más apretado que la fuente (`1`, `1.1`, `1.3`), Compose deja la primera y la última línea en el
+ * alto natural de la fuente: los textos de los componentes lo corrigen al pintarse ([brandCssLineBox]); un `BasicText`
+ * propio con este estilo, no.
+ *
  * La familia por defecto es la sans con el eje de tamaño óptico a [size] ([BrandFontFamily.sansAt]).
  *
  * @param lineHeight múltiplo del tamaño (`line-height.*`).

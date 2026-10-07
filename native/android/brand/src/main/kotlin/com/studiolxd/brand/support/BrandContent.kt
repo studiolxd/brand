@@ -31,7 +31,11 @@ val LocalBrandIconTextSize = compositionLocalOf<TextUnit> { BrandFontSize.s2 }
 @ReadOnlyComposable
 fun brandContentColor(): Color = LocalBrandContentColor.current.takeIf { it != Color.Unspecified } ?: BrandTheme.colors.text
 
-/** Fija color, tipografía y tamaño de icono por defecto del contenido: lo que hace un botón con su etiqueta. */
+/**
+ * Fija color, tipografía y tamaño de icono por defecto del contenido: lo que hace un botón con su etiqueta. La tipografía
+ * se entrega ya con la caja de línea de CSS ([brandCssLineBox]), así que un `BasicText(style = LocalBrandTextStyle.current)`
+ * del contenido mide lo que en la web aunque no pase por los textos de la marca.
+ */
 @Composable
 fun ProvideBrandContent(
     color: Color,
@@ -40,7 +44,7 @@ fun ProvideBrandContent(
 ) {
     CompositionLocalProvider(
         LocalBrandContentColor provides color,
-        LocalBrandTextStyle provides textStyle,
+        LocalBrandTextStyle provides textStyle.brandCssLineBox(),
         LocalBrandIconTextSize provides textStyle.fontSize,
         content = content,
     )

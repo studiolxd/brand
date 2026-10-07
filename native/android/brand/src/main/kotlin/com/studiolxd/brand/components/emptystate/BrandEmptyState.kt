@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -22,6 +21,7 @@ import com.studiolxd.brand.components.button.ButtonVariant
 import com.studiolxd.brand.icon.BrandIcon
 import com.studiolxd.brand.icon.BrandIconName
 import com.studiolxd.brand.icon.BrandIconSize
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.LocalBrandIconTextSize
 import com.studiolxd.brand.support.ProvideBrandContent
 import com.studiolxd.brand.support.brandTextStyle
@@ -108,7 +108,7 @@ private fun BrandEmptyStateImpl(
             }
         }
         Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(T.bodyGap)) {
-            BasicText(
+            BrandBasicText(
                 text = title,
                 modifier = Modifier.semantics { heading() },
                 style = brandTextStyle(
@@ -119,7 +119,7 @@ private fun BrandEmptyStateImpl(
                 ).copy(textAlign = TextAlign.Center),
             )
             if (description != null) {
-                BasicText(
+                BrandBasicText(
                     text = description,
                     style = brandTextStyle(
                         size = if (small) T.descriptionFontSizeSm else T.descriptionFontSize,

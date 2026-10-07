@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -34,6 +33,7 @@ import com.studiolxd.brand.components.field.LocalBrandForcedFocus
 import com.studiolxd.brand.components.field.animatedFieldColor
 import com.studiolxd.brand.components.field.brandFieldBox
 import com.studiolxd.brand.icon.BrandIconName
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.brandTextStyle
 import com.studiolxd.brand.support.rememberReduceMotion
@@ -278,7 +278,7 @@ internal fun BrandDatePickerFieldContent(
                     .padding(horizontal = paddingInline),
                 contentAlignment = Alignment.CenterStart,
             ) {
-                BasicText(shown, modifier = Modifier.clearAndSetSemantics { }, style = textStyle, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                BrandBasicText(shown, modifier = Modifier.clearAndSetSemantics { }, style = textStyle, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
             if (showsClear) {
                 BrandFieldIconButton(icon = BrandIconName.Close, label = clearLabel, slot = slot, iconSize = iconSize) { onValueChange(null) }

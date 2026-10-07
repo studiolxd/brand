@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -46,6 +45,7 @@ import com.studiolxd.brand.components.field.brandFieldBox
 import com.studiolxd.brand.icon.BrandIcon
 import com.studiolxd.brand.icon.BrandIconName
 import com.studiolxd.brand.icon.BrandIconSize
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.LocalBrandIconTextSize
 import com.studiolxd.brand.support.brandTextStyle
@@ -59,6 +59,7 @@ import com.studiolxd.brand.tokens.BrandInputTokens
 import com.studiolxd.brand.tokens.BrandLabelTokens
 import com.studiolxd.brand.tokens.BrandSelectFieldTokens as F
 import com.studiolxd.brand.tokens.BrandSelectTokens as T
+import com.studiolxd.brand.tokens.BrandTextTokens
 
 /** `SelectField` `size`: la talla de control compartida. */
 typealias SelectFieldSize = BrandControlSize
@@ -208,7 +209,7 @@ fun BrandSelectField(
                 horizontalArrangement = Arrangement.spacedBy(T.iconGap),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                BasicText(
+                BrandBasicText(
                     shownText,
                     modifier = Modifier.weight(1f).clearAndSetSemantics { },
                     style = textStyle,
@@ -270,7 +271,7 @@ private fun SelectMenuGroupLabel(text: String, size: BrandControlSize) {
         BrandControlSize.Md -> BrandLabelTokens.fontSize
         BrandControlSize.Lg -> BrandLabelTokens.lgFontSize
     }
-    BasicText(
+    BrandBasicText(
         text,
         modifier = Modifier.fillMaxWidth().padding(horizontal = paddingInline, vertical = itemPadding),
         style = brandTextStyle(labelSize, BrandLabelTokens.fontWeight, BrandLabelTokens.lineHeight, BrandLabelTokens.letterSpacing, color = BrandLabelTokens.color.current),
@@ -300,7 +301,7 @@ private fun SelectMenuItem(option: BrandSelectOption, selection: String, size: B
     }
     val weight: FontWeight = if (isSelected) T.itemSelectedFontWeight else T.fontWeight
     val color = (if (highlighted) T.itemHighlightedColor else T.color).current
-    BasicText(
+    BrandBasicText(
         option.label,
         modifier = Modifier
             .fillMaxWidth()
@@ -308,7 +309,8 @@ private fun SelectMenuItem(option: BrandSelectOption, selection: String, size: B
             .clickable(interactionSource = source, indication = null) { onSelect(option.value) }
             .semantics { selected = isSelected }
             .padding(horizontal = paddingInline, vertical = paddingBlock),
-        style = brandTextStyle(fontSize, weight, T.lineHeight, color = color),
+        // `.select__item` no declara `line-height`: hereda el del cuerpo (`text.line-height`), no el del disparador.
+        style = brandTextStyle(fontSize, weight, BrandTextTokens.lineHeight, color = color),
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
     )

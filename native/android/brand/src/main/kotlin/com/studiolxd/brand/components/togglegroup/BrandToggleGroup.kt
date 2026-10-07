@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
@@ -15,6 +14,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import com.studiolxd.brand.icon.BrandIcon
 import com.studiolxd.brand.icon.BrandIconName
 import com.studiolxd.brand.icon.BrandIconSize
+import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.LocalBrandTextStyle
 import com.studiolxd.brand.tokens.BrandToggleGroupTokens as T
@@ -96,7 +96,7 @@ private class ToggleGroupScopeImpl<T>(
     @Composable
     override fun Item(text: String, value: T, modifier: Modifier, enabled: Boolean) {
         Item(value, modifier, enabled = enabled) {
-            BasicText(text, style = LocalBrandTextStyle.current, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            BrandBasicText(text, style = LocalBrandTextStyle.current, maxLines = 1, overflow = TextOverflow.Ellipsis)
         }
     }
 

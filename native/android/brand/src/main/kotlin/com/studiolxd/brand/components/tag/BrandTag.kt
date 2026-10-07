@@ -2,21 +2,18 @@ package com.studiolxd.brand.components.tag
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
+import com.studiolxd.brand.support.BrandBasicText
+import com.studiolxd.brand.support.BrandLineBox
 import com.studiolxd.brand.support.LocalBrandTextStyle
 import com.studiolxd.brand.support.ProvideBrandContent
 import com.studiolxd.brand.support.brandTextStyle
-import com.studiolxd.brand.support.toScaledDp
 import com.studiolxd.brand.tokens.BrandTagTokens as T
 
 /** `Tag` `variant`: la variante de color. Mismos casos y mismos valores que React. */
@@ -79,7 +76,7 @@ fun BrandTag(
     modifier: Modifier = Modifier,
     variant: TagVariant = TagVariant.Neutral,
 ) {
-    BrandTag(modifier, variant) { BasicText(text, style = LocalBrandTextStyle.current, maxLines = 1, softWrap = false, overflow = TextOverflow.Clip) }
+    BrandTag(modifier, variant) { BrandBasicText(text, style = LocalBrandTextStyle.current, maxLines = 1, softWrap = false, overflow = TextOverflow.Clip) }
 }
 
 /** Un [BrandTag] con contenido propio (un texto con icono, por ejemplo). Hereda color y tipografía de la etiqueta. */
@@ -100,11 +97,9 @@ fun BrandTag(
                 .padding(vertical = T.paddingBlock, horizontal = T.paddingInline)
                 .semantics(mergeDescendants = true) { },
         ) {
-            // `line-height: 1` (`tag.line-height`) es una caja de una sola «em»: la fuente trae más alto natural y Compose no
-            // encoge una línea por debajo de él, así que la caja se fija al token y el texto se centra en ella.
-            Box(Modifier.height((T.fontSize * T.lineHeight).toScaledDp()), contentAlignment = Alignment.Center) {
-                Box(Modifier.wrapContentHeight(Alignment.CenterVertically, unbounded = true)) { content() }
-            }
+            // `line-height: 1` (`tag.line-height`) es una caja de una sola «em». El texto ya la trae (la tipografía del contenido
+            // lleva la caja de línea de CSS); la caja fija es para lo que no es texto, como un icono de `1em` junto a él.
+            BrandLineBox(T.fontSize, T.lineHeight) { content() }
         }
     }
 }

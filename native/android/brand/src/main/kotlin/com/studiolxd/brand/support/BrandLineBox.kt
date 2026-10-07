@@ -9,9 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.TextUnit
 
 /**
- * Una caja de **una línea** con el alto exacto de `line-height` de CSS (`fontSize × lineHeight`). La fuente trae más alto
- * natural que algunos interlineados de la marca y Compose no encoge una línea por debajo de él, así que la caja se fija al
- * token y el texto se centra en ella (la técnica de `BrandTag`). Crece con la escala de fuente. Interno.
+ * Una caja de **una línea** con el alto exacto de `line-height` de CSS (`fontSize × lineHeight`), con el contenido centrado
+ * en ella y desbordándola si es más alto. Para un **texto** no hace falta —[BrandBasicText] ya le da su caja de línea de
+ * CSS—: es para una fila que no es solo texto y tiene que medir una línea, como el contenido de `BrandTag` (un icono de
+ * `1em` junto al texto). Crece con la escala de fuente. Interno.
  */
 @Composable
 internal fun BrandLineBox(fontSize: TextUnit, lineHeight: Float, modifier: Modifier = Modifier, content: @Composable () -> Unit) {
