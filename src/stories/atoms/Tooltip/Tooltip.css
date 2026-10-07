@@ -84,7 +84,12 @@
   z-index: var(--tooltip-z-index);
 }
 
-/* ─── Disparador deshabilitado (`disabledTrigger`) ───────────────────────────
+/* ─── Envoltorio del alias obsoleto `disabledTrigger` ────────────────────────
+   Desde la v51 un disparador deshabilitado del DS no necesita envoltorio: el
+   Tooltip le pide `focusableWhenDisabled` y el control recibe foco y puntero
+   él solo. Esto queda para el alias con un disparador que no lo entiende, y
+   se retira con él en la v52.
+
    Un `button[disabled]` no recibe eventos de puntero ni foco, así que no puede
    disparar nada: el envoltorio focusable es el que hace de disparador. Dos
    detalles que lo hacen funcionar de verdad:

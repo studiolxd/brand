@@ -1,11 +1,13 @@
 'use client';
 
-import { forwardRef, useId, useState } from 'react';
+import { cloneElement, forwardRef, isValidElement, useId, useState } from 'react';
 import type { ReactNode } from 'react';
 import { Tooltip as BaseTooltip } from '@base-ui/react/tooltip';
 import './Tooltip.css';
 import { usePortalContainer } from '../../constants/portal-container';
 import { sideOffsetFromToken } from '../../constants/side-offset';
+import { supportsFocusableWhenDisabled } from '../../constants/focusable-when-disabled';
+import { warnDeprecated } from '../../constants/env';
 
 export interface TooltipProviderProps {
   children: ReactNode;
@@ -73,20 +75,12 @@ export interface TooltipProps
    */
   describe?: boolean;
   /**
-   * El disparador está **deshabilitado** y el bocadillo es justo lo que
-   * explica por qué. Un `button[disabled]` no sirve de disparador: el
-   * navegador no le manda eventos de puntero ni lo deja recibir foco, así que
-   * el bocadillo no se abre ni con el ratón ni con el teclado — y quien no
-   * puede pulsar es precisamente quien necesita leer el motivo.
-   *
-   * Con `disabledTrigger` el bocadillo se dispara desde un envoltorio
-   * focusable (`span.tooltip__trigger`, `tabIndex={0}`) que pone el propio
-   * componente: es él quien recibe hover, foco y el `aria-describedby`,
-   * mientras el control de dentro sigue deshabilitado de verdad. Como recibe
-   * el foco, se presenta como `role="group"` con `aria-disabled="true"` y el
-   * nombre del control que envuelve (`aria-labelledby` a sí mismo). El CSS
-   * apaga los eventos de puntero del hijo deshabilitado para que el hover
-   * sobre el botón llegue al envoltorio en vez de perderse.
+   * @deprecated Ya no hace falta: con un disparador deshabilitado (`Button`,
+   * `CloseButton`, `DotsButton`, `CopyButton`, `Toggle` o un `<button>`
+   * nativo con `disabled`) el `Tooltip` le pide `focusableWhenDisabled` y el
+   * control, sin `disabled` nativo, recibe foco y puntero y se anuncia con
+   * `aria-disabled`. Sigue funcionando (para cualquier otro disparador cae en
+   * el envoltorio de siempre), avisa en desarrollo y se retira en la v52.
    *
    * @default false
    */
@@ -144,6 +138,31 @@ export const Tooltip = forwardRef<HTMLElement, TooltipProps>(function Tooltip({
   const triggerId = rest.id ?? generatedTriggerId;
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen ?? false);
   const isOpen = open ?? uncontrolledOpen;
+  if (disabledTrigger) warnDeprecated('Tooltip', 'disabledTrigger', 'nada: el disparador deshabilitado ya recibe foco solo');
+
+  // Un control deshabilitado no recibe foco ni eventos de puntero, y quien no
+  // puede pulsar es justo quien necesita leer el porqué. Si el disparador lo
+  // está, se le pide que siga enfocable (`focusableWhenDisabled`, D46): sin
+  // envoltorio, el foco, el `aria-describedby` y el estado van en el propio
+  // control.
+  const child = isValidElement<Record<string, unknown>>(children) ? children : null;
+  const childDisabled = Boolean(child?.props.disabled) || disabledTrigger;
+  let trigger: React.ReactElement<Record<string, unknown>> | null = null;
+  if (child && childDisabled && supportsFocusableWhenDisabled(child.type)) {
+    trigger = cloneElement(child, { focusableWhenDisabled: true });
+  } else if (child && child.props.disabled && typeof child.type === 'string') {
+    // Un `<button disabled>` nativo: la misma receta, a mano.
+    trigger = cloneElement(child, {
+      disabled: undefined,
+      'aria-disabled': true,
+      onClick: (event: React.MouseEvent) => {
+        event.preventDefault();
+        event.stopPropagation();
+      },
+    });
+  } else if (!disabledTrigger) {
+    trigger = children as React.ReactElement<Record<string, unknown>>;
+  }
 
   return (
     <BaseTooltip.Root
@@ -157,8 +176,10 @@ export const Tooltip = forwardRef<HTMLElement, TooltipProps>(function Tooltip({
       <BaseTooltip.Trigger
         ref={ref as React.Ref<HTMLButtonElement>}
         render={
-          disabledTrigger ? (
-            /* El envoltorio recibe el foco, así que tiene que decir qué es:
+          trigger ?? (
+            /* Solo el alias obsoleto `disabledTrigger` con un disparador que
+               no entiende `focusableWhenDisabled` llega aquí (se retira en la
+               v52). El envoltorio recibe el foco, así que tiene que decir qué es:
                `role="group"` (vale para cualquier control apagado, no solo un
                botón), el nombre del control que envuelve —`aria-labelledby`
                a sí mismo calcula el nombre desde su contenido, y con él el
@@ -177,8 +198,6 @@ export const Tooltip = forwardRef<HTMLElement, TooltipProps>(function Tooltip({
             >
               {children}
             </span>
-          ) : (
-            (children as React.ReactElement<Record<string, unknown>>)
           )
         }
         aria-describedby={isOpen && describe ? popupId : undefined}

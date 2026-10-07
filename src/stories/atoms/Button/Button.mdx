@@ -95,6 +95,14 @@ Un icono dentro de un botón **no lleva talla**: mide `1em`, o sea el cuerpo de 
 
 <Canvas of={ButtonStories.Disabled} />
 
+`disabled` es el nativo: el botón no se pulsa, no recibe foco y queda fuera del orden de
+tabulación. Con **`focusableWhenDisabled`** (la misma prop que trae Base UI) se queda en el orden de
+tabulación: deja el `disabled` nativo, se anuncia con `aria-disabled="true"`, conserva el puntero y
+no ejecuta nada —ni el `onClick` ni el envío del formulario—. Es lo que hace falta para explicar con
+un `Tooltip` por qué no se puede pulsar, y el `Tooltip` la activa él solo en su disparador
+deshabilitado (ver **Átomos › Tooltip** § «Disparador deshabilitado»). `CloseButton`, `DotsButton`,
+`CopyButton` y `Toggle` tienen la misma prop.
+
 ## Cargando
 
 `loading` dice que la acción está en marcha. El girador entra **delante del texto**, que se queda a la vista, y mide `1em` como el icono que acompaña al texto. El botón queda inactivo, con el aspecto de deshabilitado, y lo dice a los lectores de pantalla con `aria-busy="true"` y `aria-disabled="true"`.

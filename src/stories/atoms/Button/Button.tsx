@@ -2,6 +2,7 @@ import { forwardRef } from 'react';
 import { useFormSize } from '../../constants/form-size';
 import { useRender } from '@base-ui/react/use-render';
 import { Spinner } from '../Spinner/Spinner';
+import { markFocusableWhenDisabled } from '../../constants/focusable-when-disabled';
 import './Button.css';
 
 /**
@@ -76,6 +77,19 @@ export interface ButtonBaseProps
    * enseña (el `Toast`, el error del campo).
    */
   loading?: boolean;
+  /**
+   * Con `disabled`, el botón **sigue en el orden de tabulación**: deja el
+   * `disabled` nativo, se anuncia deshabilitado con `aria-disabled="true"` y
+   * no ejecuta nada (ni el `onClick` ni el envío del formulario). Es lo que
+   * hace falta cuando un `Tooltip` explica por qué no se puede pulsar: un
+   * `button[disabled]` no recibe foco ni eventos de puntero, así que el
+   * bocadillo no se abriría. `Tooltip` lo activa solo en su disparador
+   * deshabilitado; fuera de él, pásalo a mano solo si el control apagado tiene
+   * algo que decir al recibir el foco. Mismo nombre y contrato que en Base UI.
+   *
+   * @default false
+   */
+  focusableWhenDisabled?: boolean;
   /** Renders as <a> when provided */
   href?: string;
   /** Adds target="_blank" rel="noopener noreferrer" (solo con href) */
@@ -103,6 +117,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
   type = 'button',
   disabled,
   loading = false,
+  focusableWhenDisabled = false,
   onClick,
   href,
   external = false,
@@ -129,6 +144,8 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
    * mano — el navegador seguiría el enlace y dispararía el `onClick` igual.
    */
   const inactive = Boolean(disabled) || loading;
+  // Deshabilitado pero enfocable: sin `disabled` nativo, con `aria-disabled`.
+  const focusableDisabled = Boolean(disabled) && focusableWhenDisabled;
   const handleClick: React.MouseEventHandler<HTMLElement> = (event) => {
     if (inactive) {
       event.preventDefault();
@@ -175,6 +192,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
         aria-disabled={inactive ? true : undefined}
         aria-busy={loading ? true : undefined}
         role={inactive ? 'link' : undefined}
+        tabIndex={focusableDisabled ? 0 : undefined}
         onClick={handleClick as React.MouseEventHandler<HTMLAnchorElement>}
         {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
@@ -189,8 +207,8 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
       ref={ref as React.Ref<HTMLButtonElement>}
       className={classes}
       type={type}
-      disabled={disabled}
-      aria-disabled={loading ? true : undefined}
+      disabled={focusableDisabled ? undefined : disabled}
+      aria-disabled={loading || focusableDisabled ? true : undefined}
       aria-busy={loading ? true : undefined}
       onClick={handleClick as React.MouseEventHandler<HTMLButtonElement>}
       {...rest}
@@ -199,3 +217,5 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
     </button>
   );
 });
+
+markFocusableWhenDisabled(Button);

@@ -30,13 +30,13 @@
   transition: background-color var(--button-primary-transition-duration) var(--button-primary-transition-easing), color var(--button-primary-transition-duration) var(--button-primary-transition-easing), border-color var(--button-primary-transition-duration) var(--button-primary-transition-easing);
 }
 
-.button--primary:hover {
+.button--primary:not(:disabled):not([aria-disabled="true"]):hover {
   background-color: var(--button-primary-hover-bg);
   color: var(--button-primary-hover-color);
   border-color: var(--button-primary-hover-border);
 }
 
-.button--primary:active {
+.button--primary:not(:disabled):not([aria-disabled="true"]):active {
   background-color: var(--button-primary-active-bg);
   color: var(--button-primary-active-color);
   border-color: var(--button-primary-active-border);
@@ -53,6 +53,13 @@
   color: var(--button-primary-disabled-color);
   border-color: var(--button-primary-disabled-border);
   cursor: var(--button-primary-disabled-cursor);
+}
+
+/* Solo el `disabled` nativo se queda sin puntero. Con `aria-disabled` (cargando,
+   o `focusableWhenDisabled` bajo un `Tooltip`) el botón tiene que recibir el
+   hover que abre el bocadillo; el clic lo corta el manejador y el hover y el
+   activo no cambian su cara (sus reglas excluyen `aria-disabled`). */
+.button--primary:disabled {
   pointer-events: none;
 }
 
@@ -76,13 +83,13 @@
   transition: background-color var(--button-outline-transition-duration) var(--button-outline-transition-easing), color var(--button-outline-transition-duration) var(--button-outline-transition-easing), border-color var(--button-outline-transition-duration) var(--button-outline-transition-easing);
 }
 
-.button--outline:hover {
+.button--outline:not(:disabled):not([aria-disabled="true"]):hover {
   background-color: var(--button-outline-hover-bg);
   color: var(--button-outline-hover-color);
   border-color: var(--button-outline-hover-border);
 }
 
-.button--outline:active {
+.button--outline:not(:disabled):not([aria-disabled="true"]):active {
   background-color: var(--button-outline-active-bg);
   color: var(--button-outline-active-color);
   border-color: var(--button-outline-active-border);
@@ -98,6 +105,13 @@
   color: var(--button-outline-disabled-color);
   border-color: var(--button-outline-disabled-border);
   cursor: var(--button-outline-disabled-cursor);
+}
+
+/* Solo el `disabled` nativo se queda sin puntero. Con `aria-disabled` (cargando,
+   o `focusableWhenDisabled` bajo un `Tooltip`) el botón tiene que recibir el
+   hover que abre el bocadillo; el clic lo corta el manejador y el hover y el
+   activo no cambian su cara (sus reglas excluyen `aria-disabled`). */
+.button--outline:disabled {
   pointer-events: none;
 }
 
@@ -133,7 +147,7 @@
   transition: color var(--button-text-transition-duration) var(--button-text-transition-easing);
 }
 
-.button--text:hover {
+.button--text:not(:disabled):not([aria-disabled="true"]):hover {
   background-color: var(--button-text-hover-bg);
   color: var(--button-text-hover-color);
   border-color: var(--button-text-hover-border);
@@ -142,7 +156,7 @@
   text-underline-offset: calc(var(--button-text-underline-offset) - var(--button-text-hover-underline-width));
 }
 
-.button--text:active {
+.button--text:not(:disabled):not([aria-disabled="true"]):active {
   background-color: var(--button-text-active-bg);
   color: var(--button-text-active-color);
   border-color: var(--button-text-active-border);
@@ -158,8 +172,8 @@
   text-decoration-thickness: var(--button-text-ink-underline-width);
   text-underline-offset: calc(var(--button-text-underline-offset) - var(--button-text-ink-underline-width));
 }
-.button--text.button--ink:hover,
-.button--text.button--ink:active {
+.button--text.button--ink:not(:disabled):not([aria-disabled="true"]):hover,
+.button--text.button--ink:not(:disabled):not([aria-disabled="true"]):active {
   color: var(--button-text-ink-color);
   text-decoration-line: var(--button-text-ink-hover-decoration-line);
   text-decoration-thickness: var(--button-text-ink-hover-underline-width);
@@ -175,6 +189,13 @@
 .button--text[aria-disabled="true"] {
   color: var(--button-text-disabled-color);
   cursor: var(--button-text-disabled-cursor);
+}
+
+/* Solo el `disabled` nativo se queda sin puntero. Con `aria-disabled` (cargando,
+   o `focusableWhenDisabled` bajo un `Tooltip`) el botón tiene que recibir el
+   hover que abre el bocadillo; el clic lo corta el manejador y el hover y el
+   activo no cambian su cara (sus reglas excluyen `aria-disabled`). */
+.button--text:disabled {
   pointer-events: none;
 }
 
@@ -198,12 +219,12 @@
   transition: background-color var(--button-ghost-transition-duration) var(--button-ghost-transition-easing), color var(--button-ghost-transition-duration) var(--button-ghost-transition-easing);
 }
 
-.button--ghost:hover {
+.button--ghost:not(:disabled):not([aria-disabled="true"]):hover {
   background-color: var(--button-ghost-hover-bg);
   color: var(--button-ghost-hover-color);
 }
 
-.button--ghost:active {
+.button--ghost:not(:disabled):not([aria-disabled="true"]):active {
   background-color: var(--button-ghost-active-bg);
   color: var(--button-ghost-active-color);
 }
@@ -217,6 +238,13 @@
 .button--ghost[aria-disabled="true"] {
   color: var(--button-ghost-disabled-color);
   cursor: var(--button-ghost-disabled-cursor);
+}
+
+/* Solo el `disabled` nativo se queda sin puntero. Con `aria-disabled` (cargando,
+   o `focusableWhenDisabled` bajo un `Tooltip`) el botón tiene que recibir el
+   hover que abre el bocadillo; el clic lo corta el manejador y el hover y el
+   activo no cambian su cara (sus reglas excluyen `aria-disabled`). */
+.button--ghost:disabled {
   pointer-events: none;
 }
 

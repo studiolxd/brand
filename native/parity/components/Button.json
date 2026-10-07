@@ -81,6 +81,10 @@
     {
       "prop": "className",
       "reason": "Las clases CSS no existen en nativo; la personalización va por los tokens."
+    },
+    {
+      "prop": "focusableWhenDisabled",
+      "reason": "No tiene sentido de plataforma: existe para que un `Tooltip` web explique un control apagado, y un `button[disabled]` del navegador no recibe foco ni puntero. En SwiftUI y Compose un botón deshabilitado ya lo alcanzan VoiceOver y TalkBack, que lo anuncian como atenuado/desactivado, y el `Tooltip` no está portado."
     }
   ],
   "differences": [

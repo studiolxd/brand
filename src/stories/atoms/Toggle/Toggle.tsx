@@ -4,6 +4,7 @@ import { forwardRef } from 'react';
 import { Toggle as BaseToggle } from '@base-ui/react/toggle';
 import { useToggleGroup } from '../ToggleGroup/ToggleGroupContext';
 import './Toggle.css';
+import { markFocusableWhenDisabled } from '../../constants/focusable-when-disabled';
 
 type BaseToggleProps = Omit<React.ComponentPropsWithoutRef<typeof BaseToggle>, 'className'>;
 
@@ -24,6 +25,15 @@ export interface ToggleBaseProps extends Omit<BaseToggleProps, 'onPressedChange'
    * `aria-label` o `aria-labelledby`: no hay texto que nombre el control.
    */
   iconOnly?: boolean;
+  /**
+   * Con `disabled`, el botón sigue en el orden de tabulación: deja el
+   * `disabled` nativo, se anuncia con `aria-disabled="true"`, conserva la cara
+   * de apagado (`data-disabled`) y no conmuta. Mismo contrato que en `Button`;
+   * `Tooltip` lo activa solo en su disparador deshabilitado.
+   *
+   * @default false
+   */
+  focusableWhenDisabled?: boolean;
   /** Se añade DESPUÉS de las clases propias. */
   className?: string;
 }
@@ -47,8 +57,12 @@ export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(function Toggle
   iconOnly = false,
   className,
   onPressedChange,
+  disabled,
+  focusableWhenDisabled = false,
+  onClick,
   ...rest
 }, ref) {
+  const focusableDisabled = Boolean(disabled) && focusableWhenDisabled;
   const group = useToggleGroup();
   const size = sizeProp ?? group?.size ?? 'md';
 
@@ -65,8 +79,27 @@ export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(function Toggle
       className={classes}
       // Contrato del DS: solo el estado. Base UI añade un segundo argumento
       // (detalles del evento) que aquí no forma parte de la API.
-      onPressedChange={onPressedChange ? (pressed) => onPressedChange(pressed) : undefined}
+      onPressedChange={(pressed, details) => {
+        // Enfocable pero apagado: el clic llega, y aquí se veta el cambio
+        // (también el del grupo, que comparte `details`).
+        if (focusableDisabled) {
+          details.cancel();
+          return;
+        }
+        onPressedChange?.(pressed);
+      }}
+      onClick={(event) => {
+        if (focusableDisabled) {
+          event.preventDefault();
+          return;
+        }
+        onClick?.(event);
+      }}
+      disabled={focusableDisabled ? false : disabled}
+      {...(focusableDisabled ? { 'aria-disabled': true, 'data-disabled': '' } : {})}
       {...rest}
     />
   );
 });
+
+markFocusableWhenDisabled(Toggle);
