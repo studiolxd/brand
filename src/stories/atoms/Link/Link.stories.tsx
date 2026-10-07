@@ -5,7 +5,6 @@ import { Paragraph } from '../Paragraph/Paragraph';
 import { Stack } from '../Stack/Stack';
 import { PageIntro } from '../../molecules/PageIntro/PageIntro';
 import { SOLO_CLARO, SOLO_OSCURO } from '../../utils/chromaticModes';
-import { SIN_LINK_IN_TEXT_BLOCK } from '../../utils/a11y';
 
 const meta: Meta<typeof Link> = {
   title: 'Atoms/Link',
@@ -26,10 +25,6 @@ export const PorDefecto: Story = {};
  * amarillo no se distingue lo bastante de la tinta blanca que lo rodea.
  */
 export const EnTexto: Story = {
-  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
-  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
-  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
-  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   render: () => (
     <Paragraph>
       Los proyectos se organizan por cliente; consulta <Link href="#">la guía de organización</Link> antes de crear uno.
@@ -78,7 +73,10 @@ export const Externo: Story = {
 
 export const Contrato: Story = {
   name: 'Test — externo seguro, atributos reenviados, misma cara que un <a> crudo',
-  tags: ['!dev'],
+  // Solo en claro: afirma la línea en reposo del enlace suelto, que en oscuro
+  // no la lleva (la tinta amarilla ya lo distingue; ver `surface-dark-*`).
+  tags: ['!dev', 'solo-claro'],
+  parameters: { chromatic: SOLO_CLARO },
   render: () => (
     <>
       <Link href="https://studiolxd.com" external data-testid="externo">Externo</Link>

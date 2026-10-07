@@ -8,7 +8,6 @@ import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { SiteShell } from '../../sections/SiteShell/SiteShell';
 import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
 import { brandMessagesFixtureEn as EN } from '../../../../.storybook/brandMessagesFixtureEn';
-import { SIN_LINK_IN_TEXT_BLOCK } from '../../utils/a11y';
 
 const categorias: ConsentCategory[] = [
   {
@@ -72,10 +71,6 @@ function Pagina() {
 /** Estado 1: primera visita. La banda pide la decisión y ofrece las tres salidas. */
 export const Banner: Story = {
   name: 'Banda',
-  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
-  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
-  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
-  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   render: (args) => (
     <>
       <Pagina />
@@ -87,10 +82,6 @@ export const Banner: Story = {
 /** Sin `onOpenPreferences` la banda solo ofrece aceptar y rechazar. */
 export const BannerSinPreferencias: Story = {
   name: 'Banda sin preferencias',
-  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
-  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
-  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
-  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   render: (args) => (
     <>
       <Pagina />
@@ -190,10 +181,6 @@ export const PreferenciasEnSiteShell: Story = {
  */
 export const FlujoCompleto: Story = {
   name: 'Flujo completo',
-  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
-  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
-  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
-  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   render: () => {
     function Demo() {
       const [decision, setDecision] = useState(decisionInicial);
@@ -247,10 +234,6 @@ export const FlujoCompleto: Story = {
 export const ContratoBanner: Story = {
   name: 'Test — región, no diálogo',
   tags: ['!dev'],
-  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
-  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
-  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
-  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   render: () => (
     <>
       <Pagina />
@@ -552,10 +535,6 @@ export const ContratoAccionesAnchoCompletoEnMovil: Story = {
  */
 export const TextosDelProveedor: Story = {
   name: 'Textos desde el proveedor (otro idioma)',
-  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
-  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
-  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
-  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   render: () => (
     <BrandMessagesProvider messages={EN}>
       <Pagina />
@@ -579,10 +558,6 @@ export const TextosDelProveedor: Story = {
 export const ContratoProveedor: Story = {
   name: 'Test — el cromo del consentimiento lee del proveedor',
   tags: ['!dev'],
-  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
-  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
-  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
-  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   render: () => (
     <BrandMessagesProvider messages={EN}>
       <ConsentBanner

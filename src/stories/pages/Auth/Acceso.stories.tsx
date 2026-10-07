@@ -6,7 +6,6 @@ import { InputField } from '../../molecules/InputField/InputField';
 import { PasswordField } from '../../molecules/PasswordField/PasswordField';
 import { Button } from '../../atoms/Button/Button';
 import { Link } from '../../atoms/Link/Link';
-import { SIN_LINK_IN_TEXT_BLOCK } from '../../utils/a11y';
 
 interface Args {
   socialProviders: string[];
@@ -62,27 +61,14 @@ export default meta;
 type Story = StoryObj<typeof Acceso>;
 
 /** Correo y contraseña, registro abierto. Es `/sign-in` de hub con piezas del DS. */
-// a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
-// dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
-// línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
-export const PorDefecto: Story = { parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK } };
+export const PorDefecto: Story = {};
 /** Con Google y GitHub, captcha y error del servidor: todo lo que puede aparecer. */
-// a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
-// dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
-// línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
-export const Completa: Story = { args: { socialProviders: ['google', 'github'], captcha: true, serverError: true }, parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK } };
-// a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
-// dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
-// línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
-export const EnlaceMagico: Story = { args: { magicLink: true }, parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK } };
+export const Completa: Story = { args: { socialProviders: ['google', 'github'], captcha: true, serverError: true } };
+export const EnlaceMagico: Story = { args: { magicLink: true } };
 
 export const Contrato: Story = {
   name: 'Test — un h1, main-content, bloques del formulario',
   tags: ['!dev'],
-  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
-  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
-  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
-  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   args: Completa.args,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

@@ -8,7 +8,6 @@ import { TextareaField } from '../TextareaField/TextareaField';
 import { Button } from '../../atoms/Button/Button';
 import { Link } from '../../atoms/Link/Link';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
-import { SIN_LINK_IN_TEXT_BLOCK } from '../../utils/a11y';
 
 const campos = (
   <>
@@ -42,10 +41,6 @@ export const PorDefecto: Story = {};
 
 /** Con errores del formulario (los que no cuelgan de un campo), enlaces secundarios y alternativas. */
 export const Completo: Story = {
-  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
-  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
-  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
-  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   args: {
     errors: ['No hemos podido iniciar sesión. Comprueba el correo y la contraseña.'],
     links: (
@@ -67,10 +62,6 @@ export const Completo: Story = {
 
 /** `size="lg"`: la talla llega sola a campos y botones — es la de las superficies públicas. */
 export const TallaGrande: Story = {
-  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
-  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
-  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
-  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   args: { ...Completo.args, size: 'lg' },
 };
 
@@ -113,10 +104,6 @@ export const ConCamposOpcionales: Story = {
 
 /** `blockActions`: botones y alternativas a todo el ancho, también en escritorio — el formulario de acceso. */
 export const AccionesEnBloque: Story = {
-  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
-  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
-  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
-  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   args: { ...Completo.args, size: 'lg', blockActions: true },
 };
 
@@ -138,10 +125,6 @@ export const SoloAcciones: Story = {
 export const Contrato: Story = {
   name: 'Test — talla heredada, errores anunciados, bloques en orden',
   tags: ['!dev'],
-  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
-  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
-  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
-  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   args: { ...Completo.args, size: 'lg', blockActions: true },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
