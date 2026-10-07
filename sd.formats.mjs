@@ -106,6 +106,56 @@ export function registerDarkModeFormat(StyleDictionary) {
   });
 }
 
+/* ---------------------------------------------------------------------------
+ * Sombras con el color de un primitivo y su propia opacidad.
+ *
+ * Una sombra de la escala (`shadow.sm…xl`) no lleva el hex del prusia
+ * escrito: lo toma de `{color.prussian}` dentro del propio `$value`
+ * (`"0 1px 2px {color.prussian}"`), y la opacidad va en
+ * `$extensions["com.studiolxd"].alpha`. Style Dictionary resuelve la
+ * referencia a `#111e30` y este transform la convierte en
+ * `rgba(17,30,48,0.08)` — exactamente la cadena que antes iba a mano, así que
+ * CSS, SCSS, `tokens.json` y nativo (que parsea esa misma cadena) no cambian.
+ *
+ * Por qué no un `shadow` compuesto DTCG: su transform (`shadow/css/shorthand`)
+ * no sabe aplicar una opacidad a un color referenciado y además reescribe la
+ * cadena (`0px 1px 2px 0px #111e30`). Y por qué no `color-mix()`: el SCSS
+ * tiene que salir con el valor resuelto y nativo no lo parsea.
+ *
+ * En CSS, un token así no puede salir con `var()` (se perdería la
+ * opacidad): `outputReferencesUnlessAlpha` lo saca resuelto.
+ * ------------------------------------------------------------------------- */
+
+const shadowAlpha = (token) => token.$extensions?.['com.studiolxd']?.alpha;
+
+/** `outputReferences` de la plataforma css: todo con `var()`, salvo las sombras con opacidad propia. */
+export const outputReferencesUnlessAlpha = (token) => shadowAlpha(token) === undefined;
+
+export function registerShadowAlphaTransform(StyleDictionary) {
+  StyleDictionary.registerTransform({
+    name: 'shadow/brand-alpha',
+    type: 'value',
+    transitive: true,
+    filter: (token) => (token.$type ?? token.type) === 'shadow' && typeof shadowAlpha(token) === 'number',
+    transform: (token) => {
+      const value = String(token.$value ?? token.value);
+      const alpha = shadowAlpha(token);
+      const out = value.replace(/#([0-9a-f]{6})\b/i, (_, hex) => {
+        const [r, g, b] = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16));
+        return `rgba(${r},${g},${b},${alpha.toFixed(2)})`;
+      });
+      if (out === value) throw new Error(`Sombra sin color hex que opacar: ${token.name} = ${value}`);
+      return out;
+    },
+  });
+  for (const group of ['css', 'scss']) {
+    StyleDictionary.registerTransformGroup({
+      name: `brand/${group}`,
+      transforms: [...StyleDictionary.hooks.transformGroups[group], 'shadow/brand-alpha'],
+    });
+  }
+}
+
 /**
  * Registra el formato `json/css-variables`: el mismo diccionario que sale a
  * CSS, pero como un objeto JSON plano `{ "--nombre": "valor" }` con los
