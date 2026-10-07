@@ -196,6 +196,9 @@ export const TestDisparadorDeshabilitado: Story = {
     const envoltorio = boton.parentElement as HTMLElement;
     await expect(envoltorio).toHaveClass('tooltip__trigger');
     await expect(envoltorio).toHaveAttribute('tabindex', '0');
+    // Recibe el foco, así que dice qué es: grupo apagado con el nombre del botón.
+    await expect(canvas.getByRole('group', { name: 'Generar contenidos' })).toBe(envoltorio);
+    await expect(envoltorio).toHaveAttribute('aria-disabled', 'true');
     // El hijo apagado no se come el puntero: por eso el hover sobre el botón
     // llega al envoltorio y abre el bocadillo.
     await expect(getComputedStyle(boton).pointerEvents).toBe('none');
