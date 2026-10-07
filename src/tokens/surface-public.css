@@ -149,6 +149,7 @@
   --code-block-font-size: var(--text-paragraph-small-font-size);
   --code-font-size: var(--code-block-font-size);
   --collapsible-trigger-font-size: var(--control-font-size);
+  --collapsible-trigger-line-height: var(--text-line-height);
   --description-list-term-font-size: var(--text-paragraph-small-font-size);
   --description-list-value-font-size: var(--text-font-size);
   --description-list-value-line-height: var(--text-line-height);

@@ -304,11 +304,6 @@ export const CuatroNiveles: Story = {
 export const TestAcciones: Story = {
   name: 'Test — el menú de acciones no elige la fila ni le roba el foco',
   tags: ['!dev'],
-  // a11y falso positivo (D16): `aria-hidden-focus` salta en los `span[data-base-ui-focus-guard]`
-  // que Base UI pone alrededor del popup abierto. Son centinelas `aria-hidden` con
-  // `tabindex="0"` que devuelven el foco al popup o al disparador al tabular: que el
-  // lector no los vea es justo lo correcto.
-  parameters: { a11y: { config: { rules: [{ id: 'aria-hidden-focus', enabled: false }] } } },
   render: () => (
     <EnLaBarra>
       <TreeView label="Carpetas" items={carpetas} defaultExpanded={['raiz']} defaultSelected="raiz" />

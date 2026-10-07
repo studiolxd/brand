@@ -736,6 +736,8 @@ public enum BrandDropdownFieldTokens {
     public static let fontSize: CGFloat = 16
     /// Token `dropdown-field.font-weight` — Peso: el del Select
     public static let fontWeight: Int = 300
+    /// Token `dropdown-field.line-height` — Interlineado del control: el del Select. Sin él, el botón heredaba el 1,15 de normalize.css
+    public static let lineHeight: CGFloat = 1
     /// Token `dropdown-field.color` — Texto del control
     public static let color: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
     /// Token `dropdown-field.bg` — Fondo del control

@@ -132,8 +132,15 @@
 
 .heatmap__ramp {
   display: flex;
-  gap: var(--heatmap-legend-swatch-gap);
 }
+
+/* Los peldaños van pegados, sin hueco: la leyenda es UNA tira, de claro a
+   oscuro en la secuencial y de un brazo al otro en la divergente. Así se lee
+   como un solo objeto gráfico, y lo que la hace identificable sobre el lienzo
+   (WCAG 1.4.11) es su extremo oscuro —8,60:1 el paso 6, 6,37:1 y 6,10:1 los
+   extremos de la divergente sobre blanco—, no el peldaño más claro, que suelto
+   apenas se separaba del lienzo (1,12:1 el neutro, 1,23:1 el paso 1). Sin
+   filete: la tira no se rodea. */
 
 .heatmap__swatch {
   inline-size: var(--heatmap-legend-swatch-size);

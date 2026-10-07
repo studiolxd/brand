@@ -36,8 +36,7 @@
     "legend-gap":               { "$value": "{spacing.2}",                     "$type": "dimension", "$description": "Separación entre los elementos de la leyenda" },
     "legend-font-size":         { "$value": "{font-size.1}",                   "$type": "dimension", "$description": "Tamaño del texto de la leyenda" },
     "legend-color":             { "$value": "{color.text.muted-on-light}",     "$type": "color",     "$description": "Color del texto de la leyenda" },
-    "legend-swatch-size":       { "$value": "{spacing.3}",                     "$type": "dimension", "$description": "Lado del cuadradito de la leyenda" },
-    "legend-swatch-gap":        { "$value": "{spacing.1}",                     "$type": "dimension", "$description": "Separación entre cuadraditos de la leyenda" },
+    "legend-swatch-size":       { "$value": "{spacing.3}",                     "$type": "dimension", "$description": "Alto de la tira de la leyenda y ancho de cada uno de sus peldaños, que van pegados" },
 
     "margin-block-start":       { "$value": "{spacing.3}",                     "$type": "dimension", "$description": "Aire entre la matriz y su leyenda" },
     "step-1-bg":                         { "$value": "{color.chart.sequential-100}", "$type": "color", "$description": "Paso 1 de la rampa de la matriz — sequential-100 de la rampa secuencial del sistema" },

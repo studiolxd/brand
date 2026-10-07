@@ -15,6 +15,7 @@
   color: inherit;
   font-family: inherit;
   font-size: var(--command-palette-input-font-size);
+  line-height: var(--command-palette-input-line-height);
   outline: none;
 }
 

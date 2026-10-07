@@ -452,12 +452,6 @@ export const AncladoSinDisparador: Story = {
 export const ContratoDisparadorPropio: Story = {
   name: 'Test — disparador propio: apertura, aria-expanded, Escape y foco',
   tags: ['!dev'],
-  // a11y falso positivo (D16): `aria-hidden-focus` salta en los `span[data-base-ui-focus-guard]`
-  // que Base UI pone alrededor del popup, que siguen montados mientras el panel
-  // acaba de cerrarse tras el Escape. Son centinelas `aria-hidden` con
-  // `tabindex="0"` que devuelven el foco al popup o al disparador: que el lector
-  // no los vea es justo lo correcto.
-  parameters: { a11y: { config: { rules: [{ id: 'aria-hidden-focus', enabled: false }] } } },
   args: { 'aria-label': 'Color del texto', value: '#f05e1c' },
   render: (args) => <ConDisparadorPropio {...args} />,
   play: async ({ canvasElement }) => {

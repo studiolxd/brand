@@ -12,6 +12,7 @@ $lxd-pagination-padding-inline: 0; // Sin padding lateral
 $lxd-pagination-summary-color: #111e30; // Color del texto de total de resultados
 $lxd-pagination-btn-height: 2.5rem; // Altura del botón de página — la del `Button md` (40px). También su lado mínimo: la caja es cuadrada
 $lxd-pagination-btn-font-size: 1rem; // Tipografía del botón de página — la del `Button md`
+$lxd-pagination-btn-line-height: 1; // Interlineado del botón de página — el del `Button`. Sin él, heredaba el 1,15 de normalize.css
 $lxd-pagination-btn-padding-inline: 0.5rem; // Padding horizontal del botón: el inset interior del control, no el del rótulo de un `Button` (aquí el rótulo es una cifra y la caja ya es cuadrada por `btn-height`); solo entra en juego cuando el número tiene tres o más dígitos
 $lxd-pagination-btn-radius: 0px; // Radio de borde del botón — el del `Button`
 $lxd-pagination-btn-border-width: 1px; // Grosor del borde del botón (1px) — el del `Button`

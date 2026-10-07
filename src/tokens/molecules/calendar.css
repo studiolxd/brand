@@ -37,6 +37,7 @@
   --calendar-title-color: var(--color-text-on-light); /** Color del título del mes */
   --calendar-weekday-color: var(--color-text-muted-on-light); /** Color de las cabeceras de día de semana */
   --calendar-day-font-weight: var(--font-weight-default); /** Peso de fuente de los días */
+  --calendar-day-line-height: var(--control-line-height); /** Interlineado de los días y de los años: el de los controles. Sin él, el botón heredaba el 1,15 de normalize.css */
   --calendar-day-radius: var(--border-radius-default); /** Radio de borde de los botones de día */
   --calendar-day-color: var(--color-text-on-light); /** Color de texto de los días */
   --calendar-day-focus-ring-color: var(--color-primary); /** Color del focus ring de los días */

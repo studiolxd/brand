@@ -4,6 +4,7 @@
     "input-padding-block": { "$value": "{spacing.3}",                       "$type": "dimension", "$description": "Padding vertical del buscador" },
     "input-padding-inline":{ "$value": "{spacing.2}",                       "$type": "dimension", "$description": "Padding horizontal del buscador" },
     "input-font-size":     { "$value": "{font-size.3}",                     "$type": "dimension", "$description": "Tamaño de texto del buscador" },
+    "input-line-height":   { "$value": "{input.line-height}",               "$type": "number",    "$description": "Interlineado del buscador: el del Input. Sin él, heredaba el 1,15 de normalize.css" },
     "input-border-width":  { "$value": "{border-width.default}",                 "$type": "dimension", "$description": "Grosor de la línea bajo el buscador" },
     "input-border-color":  { "$value": "{floating-panel.border-color}",     "$type": "color",     "$description": "Color de la línea bajo el buscador" },
     "input-placeholder-color": { "$value": "{color.text.placeholder-on-light}",      "$type": "color",     "$description": "Color del placeholder del buscador" },

@@ -101,7 +101,7 @@ describe('Heatmap', () => {
     expect(tabla.getByText('4').closest('td')).toHaveClass('heatmap__cell--step-6');
   });
 
-  it('la leyenda se nombra y lleva un cuadradito por paso', () => {
+  it('la leyenda se nombra y lleva un peldaño de la tira por paso', () => {
     const { container } = render(<Heatmap {...base} label="Competencias" steps={4} />);
     expect(screen.getByRole('img', { name: ES.heatmap.scale })).toBeInTheDocument();
     expect(container.querySelectorAll('.heatmap__swatch')).toHaveLength(4);

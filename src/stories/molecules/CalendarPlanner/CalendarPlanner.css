@@ -176,6 +176,7 @@
   background: none;
   font-family: var(--calendar-planner-font-family);
   font-size: var(--calendar-planner-more-font-size);
+  line-height: var(--calendar-planner-more-line-height);
   color: var(--calendar-planner-more-color);
   cursor: pointer;
   text-align: start;

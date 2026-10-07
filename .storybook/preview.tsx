@@ -189,6 +189,19 @@ const preview: Preview = {
       // un falso positivo, y por qué. El runner solo pasa en claro: el oscuro
       // de cada story (modo `oscuro` de Chromatic) no lo audita.
       test: 'error',
+      // La ÚNICA exclusión global (D42), y es de un nodo de terceros, no de
+      // una regla: los centinelas de foco de Base UI
+      // (`span[data-base-ui-focus-guard]`), que rodean todo popup abierto
+      // —Popover, Menu, Select, los calendarios…—. Son `aria-hidden` con
+      // `tabindex="0"` a propósito: al tabular devuelven el foco al popup o al
+      // disparador, y que el lector no los vea es justo lo correcto. axe los da
+      // por `aria-hidden-focus`, y según el momento en que corría la pasada
+      // saltaba en unas stories u otras: se llegó a desactivar la regla en 16.
+      // Excluir el nodo —no la regla— deja `aria-hidden-focus` vigilando todo
+      // lo que escribe brand. `exclude` se SUMA al que trae el addon (su
+      // propio chrome); una story que declare su `context.exclude` lo
+      // sustituye (la lista se reemplaza) y tiene que repetir el selector.
+      context: { exclude: ['[data-base-ui-focus-guard]'] },
     }
   },
 };
