@@ -174,6 +174,28 @@ export const ContratoSubrayadoText: Story = {
   },
 };
 
+export const ContratoAltoText: Story = {
+  name: 'Test — text mide lo mismo como botón y como enlace',
+  tags: ['!dev'],
+  render: () => (
+    <div>
+      <Button variant="text">Como botón</Button>{' '}
+      <Button variant="text" href="#destino">Como enlace</Button>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const boton = canvas.getByRole('button', { name: 'Como botón' });
+    const enlace = canvas.getByRole('link', { name: 'Como enlace' });
+    // El `<button>` trae del agente de usuario 1px de padding arriba; el
+    // token `button.text-padding-block-start` lo anula. La caja es el alto
+    // de línea (16) más la separación de la línea (`underline-offset`, 4).
+    await expect(parseFloat(getComputedStyle(boton).paddingTop)).toBe(0);
+    await expect(boton.getBoundingClientRect().height).toBe(20);
+    await expect(enlace.getBoundingClientRect().height).toBe(20);
+  },
+};
+
 export const TextOnDark: Story = {
   name: 'Text — dark surface',
   args: { variant: 'text' },

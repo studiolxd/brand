@@ -201,6 +201,8 @@ object BrandButtonTokens {
     val textDisabledColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF4A4A4A), Color(0xFFD0D0D0))
     /** Token `button.text.padding-inline` — Inline (horizontal) padding — 0 para uso inline en texto */
     val textPaddingInline: Dp = 0.dp
+    /** Token `button.text.padding-block-start` — Padding superior — 0. Anula el `padding-block` de 1px que el agente de usuario pone a `<button>`: sin él, la variante como botón medía 21px y como enlace (`href`) 20px. La caja es el alto de línea más la separación de la línea (`underline-offset`) */
+    val textPaddingBlockStart: Dp = 0.dp
     /** Token `button.text.focus-ring-width` — Focus ring width */
     val textFocusRingWidth: Dp = 2.dp
     /** Token `button.text.focus-ring-offset` — Focus ring offset */

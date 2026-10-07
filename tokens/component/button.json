@@ -707,6 +707,11 @@
         "$type": "dimension",
         "$description": "Inline (horizontal) padding — 0 para uso inline en texto"
       },
+      "padding-block-start": {
+        "$value": "0",
+        "$type": "dimension",
+        "$description": "Padding superior — 0. Anula el `padding-block` de 1px que el agente de usuario pone a `<button>`: sin él, la variante como botón medía 21px y como enlace (`href`) 20px. La caja es el alto de línea más la separación de la línea (`underline-offset`)"
+      },
       "focus-ring-width": {
         "$value": "{button.focus-ring-width}",
         "$type": "dimension",

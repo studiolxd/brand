@@ -192,6 +192,8 @@ public enum BrandButtonTokens {
     public static let textDisabledColor: Color = Color(brandLight: Color(brandHex: 0x4A4A4A), dark: Color(brandHex: 0xD0D0D0))
     /// Token `button.text.padding-inline` — Inline (horizontal) padding — 0 para uso inline en texto
     public static let textPaddingInline: CGFloat = 0
+    /// Token `button.text.padding-block-start` — Padding superior — 0. Anula el `padding-block` de 1px que el agente de usuario pone a `<button>`: sin él, la variante como botón medía 21px y como enlace (`href`) 20px. La caja es el alto de línea más la separación de la línea (`underline-offset`)
+    public static let textPaddingBlockStart: CGFloat = 0
     /// Token `button.text.focus-ring-width` — Focus ring width
     public static let textFocusRingWidth: CGFloat = 2
     /// Token `button.text.focus-ring-offset` — Focus ring offset
