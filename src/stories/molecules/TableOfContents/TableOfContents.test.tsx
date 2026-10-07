@@ -79,7 +79,7 @@ describe('TableOfContents', () => {
   });
 
   it('acepta un rótulo visible y una etiqueta accesible propias', () => {
-    render(<TableOfContents items={items} title="Contenido" ariaLabel="On this page" />);
+    render(<TableOfContents items={items} title="Contenido" aria-label="On this page" />);
     expect(screen.getByRole('navigation', { name: 'On this page' })).toBeInTheDocument();
     expect(screen.getByText('Contenido')).toBeInTheDocument();
   });

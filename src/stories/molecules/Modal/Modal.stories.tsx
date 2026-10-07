@@ -38,7 +38,7 @@ export const WithForm: Story = {
         <Button onClick={() => setOpen(true)}>Abrir modal</Button>
         <Modal
           open={open}
-          onClose={() => setOpen(false)}
+          onOpenChange={setOpen}
           title="Solicitar ausencia"
           footer={
             <>
@@ -75,7 +75,7 @@ export const Informativo: Story = {
         <Button variant="outline" onClick={() => setOpen(true)}>Ver novedades</Button>
         <Modal
           open={open}
-          onClose={() => setOpen(false)}
+          onOpenChange={setOpen}
           title="Novedades de la versión"
           footer={<Button variant="outline" onClick={() => setOpen(false)}>Cerrar</Button>}
         >
@@ -105,7 +105,7 @@ export const Selector: Story = {
         <Button variant="outline" onClick={() => setOpen(true)}>
           {centro ? `Centro: ${centro}` : 'Elegir centro'}
         </Button>
-        <Modal open={open} onClose={() => setOpen(false)} title="Elegir centro">
+        <Modal open={open} onOpenChange={setOpen} title="Elegir centro">
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'start', gap: '0.5rem' }}>
             {CENTROS.map((nombre) => (
               <Button
@@ -132,7 +132,7 @@ export const Confirm: Story = {
         <Button variant="outline" onClick={() => setOpen(true)}>Cancelar ausencia</Button>
         <Modal
           open={open}
-          onClose={() => setOpen(false)}
+          onOpenChange={setOpen}
           title="Cancelar ausencia"
           footer={
             <>
@@ -169,7 +169,7 @@ export const SuperficiePublica: Story = {
         </div>
         <Modal
           open={open}
-          onClose={() => setOpen(false)}
+          onOpenChange={setOpen}
           title="Preferencias de cookies"
           container={shellNode}
         >
@@ -191,7 +191,7 @@ export const ContratoTallaPorSuperficie: Story = {
     return (
       <SiteShell ref={setShellNode}>
         {shellNode && (
-          <Modal open onClose={fn()} title="En SiteShell" container={shellNode}>
+          <Modal open onOpenChange={fn()} title="En SiteShell" container={shellNode}>
             <p>Contenido</p>
           </Modal>
         )}
@@ -212,7 +212,7 @@ export const ContratoTallaAplicacion: Story = {
   name: 'Test — talla del aspa fuera de SiteShell',
   tags: ['!dev'],
   render: () => (
-    <Modal open onClose={fn()} title="Fuera de SiteShell">
+    <Modal open onOpenChange={fn()} title="Fuera de SiteShell">
       <p>Contenido</p>
     </Modal>
   ),
@@ -229,7 +229,7 @@ export const ContratoSinHoverEnCerrar: Story = {
   name: 'Test — sin fondo en hover del aspa',
   tags: ['!dev'],
   render: () => (
-    <Modal open onClose={fn()} title="Detalle">
+    <Modal open onOpenChange={fn()} title="Detalle">
       <p>Contenido</p>
     </Modal>
   ),
@@ -257,7 +257,7 @@ export const ContratoPanelOpaco: Story = {
   // Fuera del modo oscuro de Chromatic y del proyecto `storybook-dark` (D43).
   parameters: { chromatic: SOLO_CLARO },
   render: () => (
-    <Modal open onClose={fn()} title="Detalle">
+    <Modal open onOpenChange={fn()} title="Detalle">
       <p>Contenido</p>
     </Modal>
   ),
@@ -280,7 +280,7 @@ export const ContratoPanelOpacoOscuro: Story = {
   tags: ['!dev'],
   parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   render: () => (
-    <Modal open onClose={fn()} title="Detalle">
+    <Modal open onOpenChange={fn()} title="Detalle">
       <p>Contenido</p>
     </Modal>
   ),
@@ -326,7 +326,7 @@ export const WithAsyncSelect: Story = {
     return (
       <>
         <Button onClick={() => setOpen(true)}>Abrir modal con AsyncSelect</Button>
-        <Modal open={open} onClose={() => setOpen(false)} title="Asignar empleados">
+        <Modal open={open} onOpenChange={setOpen} title="Asignar empleados">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <AsyncSelectField
               id="modal-employee"
@@ -369,7 +369,7 @@ export const WithLongContent: Story = {
     return (
       <>
         <Button onClick={() => setOpen(true)}>Abrir modal con contenido largo</Button>
-        <Modal open={open} onClose={() => setOpen(false)} title="Listado de empleados">
+        <Modal open={open} onOpenChange={setOpen} title="Listado de empleados">
           <ul style={{ margin: '0 0 1.5rem', padding: '0 0 0 1.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             {Array.from({ length: 30 }, (_, i) => (
               <li key={i} style={{ color: 'var(--color-text-on-light)' }}>
@@ -391,7 +391,7 @@ export const NoTitle: Story = {
     return (
       <>
         <Button variant="outline" onClick={() => setOpen(true)}>Abrir modal sin título</Button>
-        <Modal open={open} onClose={() => setOpen(false)}>
+        <Modal open={open} onOpenChange={setOpen}>
           <p style={{ margin: 0, color: 'var(--color-text-on-light)' }}>
             Este modal no tiene título. Solo se muestra el botón de cierre.
             El nombre accesible lo provee un elemento visualmente oculto.
@@ -409,7 +409,7 @@ export const WithDescription: Story = {
     return (
       <Modal
         open={open}
-        onClose={() => setOpen(false)}
+        onOpenChange={setOpen}
         title="Cancelar ausencia"
         description="Se notificará a tu responsable y la ausencia dejará de contar en el calendario del equipo."
       >
@@ -434,7 +434,7 @@ export const WithExternalDescription: Story = {
     return (
       <Modal
         open={open}
-        onClose={() => setOpen(false)}
+        onOpenChange={setOpen}
         title="Eliminar proyecto"
         aria-describedby="modal-external-description"
       >
@@ -467,7 +467,7 @@ export const CustomLabels: Story = {
     return (
       <Modal
         open={open}
-        onClose={() => setOpen(false)}
+        onOpenChange={setOpen}
         closeLabel="Close"
         fallbackTitle="Dialog"
       >
@@ -504,7 +504,7 @@ export const BarreraDeEventos: Story = {
         <Button onClick={() => setOpen(true)}>Abrir</Button>
         <Modal
           open={open}
-          onClose={() => setOpen(false)}
+          onOpenChange={setOpen}
           title="Detalle"
           onClick={(event) => event.stopPropagation()}
         >
@@ -526,7 +526,7 @@ export const ContratoPassthrough: Story = {
         <p data-testid="clics">{clics}</p>
         <Modal
           open
-          onClose={fn()}
+          onOpenChange={fn()}
           title="Detalle"
           id="dialogo"
           data-zona="tarjeta"
@@ -563,7 +563,7 @@ export const ContratoFocoAlAbrir: Story = {
     return (
       <>
         <Button onClick={() => setOpen(true)}>Abrir modal</Button>
-        <Modal open={open} onClose={() => setOpen(false)} title="Detalle">
+        <Modal open={open} onOpenChange={setOpen} title="Detalle">
           <p>Contenido</p>
         </Modal>
       </>
@@ -594,7 +594,7 @@ export const ContratoFocoInicialPropio: Story = {
   render: () => {
     const destino = useRef<HTMLInputElement>(null);
     return (
-      <Modal open onClose={fn()} title="Solicitar ausencia" initialFocus={destino}>
+      <Modal open onOpenChange={fn()} title="Solicitar ausencia" initialFocus={destino}>
         <InputField id="motivo" label="Motivo" ref={destino} />
       </Modal>
     );
@@ -622,7 +622,7 @@ export const ConPie: Story = {
         <Button onClick={() => setOpen(true)}>Abrir modal</Button>
         <Modal
           open={open}
-          onClose={() => setOpen(false)}
+          onOpenChange={setOpen}
           title="Guardar cambios"
           footer={
             <>
@@ -644,7 +644,7 @@ export const ContratoPieDelDialogo: Story = {
   render: () => (
     <Modal
       open
-      onClose={fn()}
+      onOpenChange={fn()}
       title="Guardar cambios"
       footer={
         <>
@@ -685,7 +685,7 @@ export const TituloLargo: Story = {
         <Button onClick={() => setOpen(true)}>Abrir modal</Button>
         <Modal
           open={open}
-          onClose={() => setOpen(false)}
+          onOpenChange={setOpen}
           title="Confirmar la baja de la organización y de todos sus proyectos"
           footer={
             <>
@@ -708,7 +708,7 @@ export const ContratoAspaEnLaPrimeraLinea: Story = {
   render: () => (
     <Modal
       open
-      onClose={fn()}
+      onOpenChange={fn()}
       title="Confirmar la baja de la organización y de todos sus proyectos"
     >
       <p>Contenido</p>
@@ -750,7 +750,7 @@ export const ContratoPieEnFilaEnElDialogo: Story = {
   render: () => (
     <Modal
       open
-      onClose={fn()}
+      onOpenChange={fn()}
       title="Guardar cambios"
       footer={
         <>
@@ -797,7 +797,7 @@ export const TextosDelProveedor: Story = {
     <BrandMessagesProvider messages={EN}>
       <Modal
         open
-        onClose={() => {}}
+        onOpenChange={() => {}}
         title="Request time off"
         footer={<Button>Save</Button>}
       >
@@ -813,7 +813,7 @@ export const ContratoProveedor: Story = {
   tags: ['!dev'],
   render: () => (
     <BrandMessagesProvider messages={EN}>
-      <Modal open onClose={() => {}} title="Request time off">
+      <Modal open onOpenChange={() => {}} title="Request time off">
         <p>Body</p>
       </Modal>
     </BrandMessagesProvider>
@@ -836,7 +836,7 @@ export const ContratoProveedorSinTitulo: Story = {
   tags: ['!dev'],
   render: () => (
     <BrandMessagesProvider messages={EN}>
-      <Modal open onClose={() => {}}>
+      <Modal open onOpenChange={() => {}}>
         <p>Body</p>
       </Modal>
     </BrandMessagesProvider>

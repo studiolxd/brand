@@ -37,7 +37,7 @@ export interface BrandMessagesProviderProps {
  *
  * El orden de resolución de cada texto es **prop → proveedor → castellano de
  * respaldo** (D5). La prop suelta sigue existiendo como anulación puntual —el
- * `ariaLabel` de un paginador concreto no es el de todos—; cuando no se pasa,
+ * `aria-label` de un paginador concreto no es el de todos—; cuando no se pasa,
  * el texto sale del proveedor, y si el proveedor no lo trae (o no hay
  * proveedor), del castellano del paquete, avisando en desarrollo de qué
  * clave faltaba.

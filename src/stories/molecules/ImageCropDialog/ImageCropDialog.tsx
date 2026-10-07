@@ -9,6 +9,7 @@ import { Modal } from '../Modal/Modal';
 import { cropImageToBlob, initialCrop } from './crop';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { imageCropDialogEs } from '../../messages/es/imageCropDialog';
+import { warnDeprecated } from '../../constants/env';
 // El recortador es inservible sin su propia hoja (marco de selección y
 // tiradores). El DS la carga aquí para que ningún consumidor tenga que
 // acordarse — misma regla que el CSS BEM de cualquier otro componente.
@@ -68,7 +69,18 @@ export interface ImageCropDialogProps {
    */
   errorMessage?: string;
   onConfirm: (blob: Blob) => void | Promise<void>;
-  onClose: () => void;
+  /**
+   * Se llama cuando el diálogo pide cerrarse —`Cancelar`, el aspa, `Escape`,
+   * el velo, o tras confirmar— con `false`, como `onOpenChange` del resto de
+   * superposiciones del DS. El diálogo está abierto mientras `sourceUrl` no
+   * sea `null`: cerrarlo es devolverlo a `null`.
+   */
+  onOpenChange?: (open: boolean) => void;
+  /**
+   * @deprecated Usa `onOpenChange`. Sigue funcionando y avisa en desarrollo;
+   * se retira en la v52.
+   */
+  onClose?: () => void;
   /**
    * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
    * **Va al panel (su contenido, dentro del diálogo); el disparador, si lo hay, es tuyo y ya lleva tus clases**
@@ -99,9 +111,11 @@ export function ImageCropDialog({
   loadingLabel,
   errorMessage,
   onConfirm,
+  onOpenChange,
   onClose,
   className,
 }: ImageCropDialogProps) {
+  if (onClose !== undefined) warnDeprecated('ImageCropDialog', 'onClose', '`onOpenChange`');
   const t = useBrandMessages('imageCropDialog', imageCropDialogEs);
   const imgRef = useRef<HTMLImageElement>(null);
   const [crop, setCrop] = useState<Crop>();
@@ -123,7 +137,8 @@ export function ImageCropDialog({
   const close = () => {
     setCrop(undefined);
     setCompletedCrop(undefined);
-    onClose();
+    onOpenChange?.(false);
+    onClose?.();
   };
 
   const handleConfirm = async () => {
@@ -143,8 +158,8 @@ export function ImageCropDialog({
   return (
     <Modal
       open={sourceUrl !== null}
-      onClose={() => {
-        if (!busy) close();
+      onOpenChange={(isOpen) => {
+        if (!isOpen && !busy) close();
       }}
       title={title}
       {...(closeLabel ? { closeLabel } : {})}

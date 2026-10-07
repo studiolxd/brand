@@ -197,7 +197,7 @@ export function CommandPalette({
   return (
     <Modal
       open={open}
-      onClose={() => onOpenChange(false)}
+      onOpenChange={onOpenChange}
       title={t('title', title)}
       {...(closeLabel ? { closeLabel } : {})}
     >

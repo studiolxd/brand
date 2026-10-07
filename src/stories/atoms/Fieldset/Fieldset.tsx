@@ -1,5 +1,6 @@
 import type { HeadingSize } from '../Heading/Heading';
 import './Fieldset.css';
+import { warnDeprecated } from '../../constants/env';
 
 type HeadingWeight = 'thin' | 'extralight' | 'light' | 'regular' | 'medium' | 'semibold' | 'bold' | 'extrabold' | 'black';
 
@@ -16,7 +17,11 @@ export interface FieldsetProps {
   legendHidden?: boolean;
   /** Nivel de heading visual para el legend (1–6). */
   level?: 1 | 2 | 3 | 4 | 5 | 6;
-  /** Peso tipográfico del legend. */
+  /**
+   * @deprecated No tiene efecto: el peso del legend lo da su `level`, como en
+   * `Heading` («un título no elige su peso»). Avisa en desarrollo y sale del
+   * tipo en la v52.
+   */
   weight?: HeadingWeight;
   /** Tamaño tipográfico del legend. */
   size?: HeadingSize;
@@ -43,11 +48,11 @@ export function Fieldset({
   'aria-describedby': ariaDescribedBy,
   children,
 }: FieldsetProps) {
+  if (weight !== undefined) warnDeprecated('Fieldset', 'weight', 'el peso que trae `level` (no tiene efecto)');
   // Oculta, la leyenda no lleva la cara de título: solo la receta de ocultar.
   const legendClasses = legendHidden ? 'visually-hidden' : [
     'fieldset__legend',
     `fieldset__legend--${level}`,
-    weight && `fieldset__legend--${weight}`,
     size && `fieldset__legend--size-${size}`,
   ].filter(Boolean).join(' ');
 

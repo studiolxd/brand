@@ -34,7 +34,9 @@ function d({ open: d, title: f, description: p, children: m, onConfirm: h, onCan
 	};
 	return /* @__PURE__ */ l(n, {
 		open: d,
-		onClose: W,
+		onOpenChange: (e) => {
+			e || W();
+		},
 		title: f,
 		...w === void 0 ? {} : { closeLabel: w },
 		container: O,

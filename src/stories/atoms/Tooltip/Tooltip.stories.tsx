@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, waitFor, within } from 'storybook/test';
+import { expect, fn, waitFor, within } from 'storybook/test';
 import { Button } from '../Button/Button';
 import { Tooltip, TooltipProvider } from './Tooltip';
 import { SOLO_OSCURO } from '../../utils/chromaticModes';
@@ -160,51 +160,48 @@ export const SuperficieOscura: Story = {
 
 /**
  * El caso real: una acción que hoy no se puede ejecutar («Generar contenidos»
- * mientras la matriz está bloqueada). El botón queda deshabilitado de verdad y
- * el bocadillo dice por qué; `disabledTrigger` pone el envoltorio focusable
- * que hace de disparador, porque un `button[disabled]` no recibe ni puntero ni
- * foco y el bocadillo no se abriría para nadie.
+ * mientras la matriz está bloqueada). El bocadillo dice por qué. Un
+ * `button[disabled]` no recibe ni puntero ni foco, así que el `Tooltip` le pide
+ * `focusableWhenDisabled`: el botón se queda sin `disabled` nativo, se anuncia
+ * con `aria-disabled`, sigue en el orden de tabulación y no ejecuta nada.
  */
 export const DisparadorDeshabilitado: Story = {
   name: 'Disparador deshabilitado',
   args: {
     label: 'La matriz está bloqueada: publícala para poder generar los contenidos',
-    disabledTrigger: true,
     children: <Button disabled>Generar contenidos</Button>,
   },
 };
 
 /**
- * Test: con `disabledTrigger` el disparador es el envoltorio —focusable, y con
- * el `aria-describedby` al bocadillo—, el control de dentro sigue
- * deshabilitado, y el puntero sobre el propio botón abre el bocadillo (el CSS
- * le apaga los eventos de puntero para que lleguen al envoltorio).
+ * Test: el disparador deshabilitado es el propio botón —sin envoltorio—, recibe
+ * el foco, lleva el `aria-describedby` al bocadillo, conserva el puntero (para
+ * que el hover abra el bocadillo) y no ejecuta su `onClick`.
  */
+const generarApagado = fn();
+
 export const TestDisparadorDeshabilitado: Story = {
   name: 'Test — bocadillo sobre un control deshabilitado',
   tags: ['!dev'],
   args: {
     label: 'La matriz está bloqueada: publícala para poder generar los contenidos',
-    disabledTrigger: true,
-    children: <Button disabled>Generar contenidos</Button>,
+    children: (
+      <Button disabled onClick={generarApagado}>
+        Generar contenidos
+      </Button>
+    ),
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const boton = canvas.getByRole('button', { name: 'Generar contenidos' });
-    await expect(boton).toBeDisabled();
+    await expect(boton).not.toHaveAttribute('disabled');
+    await expect(boton).toHaveAttribute('aria-disabled', 'true');
+    await expect(boton.closest('.tooltip__trigger')).toBeNull();
+    // Conserva el puntero: el hover sobre el botón es el que abre el bocadillo.
+    await expect(getComputedStyle(boton).pointerEvents).not.toBe('none');
 
-    const envoltorio = boton.parentElement as HTMLElement;
-    await expect(envoltorio).toHaveClass('tooltip__trigger');
-    await expect(envoltorio).toHaveAttribute('tabindex', '0');
-    // Recibe el foco, así que dice qué es: grupo apagado con el nombre del botón.
-    await expect(canvas.getByRole('group', { name: 'Generar contenidos' })).toBe(envoltorio);
-    await expect(envoltorio).toHaveAttribute('aria-disabled', 'true');
-    // El hijo apagado no se come el puntero: por eso el hover sobre el botón
-    // llega al envoltorio y abre el bocadillo.
-    await expect(getComputedStyle(boton).pointerEvents).toBe('none');
-
-    envoltorio.focus();
-    await expect(document.activeElement).toBe(envoltorio);
+    boton.focus();
+    await expect(document.activeElement).toBe(boton);
 
     const popup = await waitFor(() => {
       const el = document.querySelector<HTMLElement>('.tooltip');
@@ -212,6 +209,8 @@ export const TestDisparadorDeshabilitado: Story = {
       return el;
     });
     await waitFor(() => expect(getComputedStyle(popup).opacity).toBe('1'));
-    await expect(envoltorio).toHaveAttribute('aria-describedby', popup.id);
+    await expect(boton).toHaveAttribute('aria-describedby', popup.id);
+    boton.click();
+    await expect(generarApagado).not.toHaveBeenCalled();
   },
 };

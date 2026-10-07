@@ -39,7 +39,7 @@ function l({ open: l, onOpenChange: u, groups: d, title: f, placeholder: p, empt
 	]);
 	return /* @__PURE__ */ a(t, {
 		open: l,
-		onClose: () => u(!1),
+		onOpenChange: u,
 		title: C("title", f),
 		...g ? { closeLabel: g } : {},
 		children: /* @__PURE__ */ a(s.Root, {

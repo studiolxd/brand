@@ -16,7 +16,7 @@ Agrupa varios campos bajo un mismo título: el `<fieldset>` nativo con su `<lege
 `legend` es obligatorio: un grupo sin nombre no es un grupo para quien navega con lector de pantalla. Se pinta con la cara de un título del sistema y deja debajo el mismo aire que un `Heading` (`fieldset.legend-space-after` apunta a `text.heading.space-after`).
 
 - `level` (1–6, por defecto `2`) elige **qué cara de título** lleva el legend: familia, cuerpo, peso, interlineado, color y tracking de `text.h<N>`. Es solo aspecto: el `<legend>` sigue siendo un `<legend>`, no un `<h2>`, y no entra en el índice de títulos de la página.
-- `size` (1–10) cambia solo el cuerpo, con un peldaño de la escala de títulos (`text.size.N`), y `weight` solo el peso. Son las mismas props que en `Heading`, y por eso también siguen a la superficie pública dentro de `SiteShell` (ver Foundations → Tipografía § «Dos superficies de lectura»).
+- `size` (1–10) cambia solo el cuerpo, con un peldaño de la escala de títulos (`text.size.N`). El peso no se elige: lo trae el `level`, como en `Heading` (`weight` está obsoleta desde la v51, no tiene efecto y sale en la v52). `level` y `size` son las mismas props que en `Heading`, y por eso también siguen a la superficie pública dentro de `SiteShell` (ver Foundations → Tipografía § «Dos superficies de lectura»).
 
 <Canvas of={FieldsetStories.AllLevels} />
 

@@ -42,20 +42,12 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLElement>, 'c
      */
     describe?: boolean;
     /**
-     * El disparador está **deshabilitado** y el bocadillo es justo lo que
-     * explica por qué. Un `button[disabled]` no sirve de disparador: el
-     * navegador no le manda eventos de puntero ni lo deja recibir foco, así que
-     * el bocadillo no se abre ni con el ratón ni con el teclado — y quien no
-     * puede pulsar es precisamente quien necesita leer el motivo.
-     *
-     * Con `disabledTrigger` el bocadillo se dispara desde un envoltorio
-     * focusable (`span.tooltip__trigger`, `tabIndex={0}`) que pone el propio
-     * componente: es él quien recibe hover, foco y el `aria-describedby`,
-     * mientras el control de dentro sigue deshabilitado de verdad. Como recibe
-     * el foco, se presenta como `role="group"` con `aria-disabled="true"` y el
-     * nombre del control que envuelve (`aria-labelledby` a sí mismo). El CSS
-     * apaga los eventos de puntero del hijo deshabilitado para que el hover
-     * sobre el botón llegue al envoltorio en vez de perderse.
+     * @deprecated Ya no hace falta: con un disparador deshabilitado (`Button`,
+     * `CloseButton`, `DotsButton`, `CopyButton`, `Toggle` o un `<button>`
+     * nativo con `disabled`) el `Tooltip` le pide `focusableWhenDisabled` y el
+     * control, sin `disabled` nativo, recibe foco y puntero y se anuncia con
+     * `aria-disabled`. Sigue funcionando (para cualquier otro disparador cae en
+     * el envoltorio de siempre), avisa en desarrollo y se retira en la v52.
      *
      * @default false
      */

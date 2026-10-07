@@ -1,4 +1,4 @@
-import type { AnchorHTMLAttributes } from 'react';
+import type { AnchorHTMLAttributes, ComponentType, ReactNode } from 'react';
 
 /**
  * El enlace por defecto de los componentes con `renderLink`: un `<a>` que
@@ -13,4 +13,18 @@ import type { AnchorHTMLAttributes } from 'react';
  */
 export function defaultRenderLink(props: AnchorHTMLAttributes<HTMLAnchorElement>) {
   return <a {...props} />;
+}
+
+/**
+ * Puente del alias obsoleto `linkComponent` (v51, se retira en la v52) a
+ * `renderLink`: el componente `Link` del router recibe, tal cual, las props
+ * que recibiría el `renderLink`. Lo usan `Pagination`, `PrevNextNav` y
+ * `CalendarRoster` mientras conviven las dos formas.
+ */
+export function renderLinkFromComponent<P extends AnchorHTMLAttributes<HTMLAnchorElement>>(
+  LinkComponent: ComponentType<P>,
+): (props: P) => ReactNode {
+  return function RenderLinkFromComponent(props: P) {
+    return <LinkComponent {...props} />;
+  };
 }

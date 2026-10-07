@@ -22,6 +22,15 @@ export interface ToggleBaseProps extends Omit<BaseToggleProps, 'onPressedChange'
      * `aria-label` o `aria-labelledby`: no hay texto que nombre el control.
      */
     iconOnly?: boolean;
+    /**
+     * Con `disabled`, el botón sigue en el orden de tabulación: deja el
+     * `disabled` nativo, se anuncia con `aria-disabled="true"`, conserva la cara
+     * de apagado (`data-disabled`) y no conmuta. Mismo contrato que en `Button`;
+     * `Tooltip` lo activa solo en su disparador deshabilitado.
+     *
+     * @default false
+     */
+    focusableWhenDisabled?: boolean;
     /** Se añade DESPUÉS de las clases propias. */
     className?: string;
 }

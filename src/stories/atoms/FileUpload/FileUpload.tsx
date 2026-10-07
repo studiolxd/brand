@@ -9,6 +9,7 @@ import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { fileUploadEs } from '../../messages/es/fileUpload';
 import './FileUpload.css';
 import { assignRef } from '../../constants/assign-ref';
+import { warnDeprecated } from '../../constants/env';
 
 /**
  * El cromo de la zona de subida: lo que dice la zona, lo que dice de los
@@ -93,11 +94,16 @@ export interface FileUploadProps {
   size?: FormSize;
   /** @deprecated Usa el atributo nativo `aria-describedby`. */
   describedBy?: string;
-  /** @deprecated Usa el atributo nativo `aria-label`. */
+  /** @deprecated Usa el atributo nativo `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
   ariaLabel?: string;
   /** Ids de ayuda/error que describen el control (lo pone el campo). */
   'aria-describedby'?: string;
-  /** Nombre accesible cuando el control va suelto. */
+  /**
+   * Nombre accesible cuando el control va suelto (sin `FileUploadField` que le
+   * ponga `<label>`). Es la única prop de nombre: la zona de arrastre es la
+   * cara visible del control y el `<input type="file">` real, que es lo que
+   * se anuncia, lo toma de aquí.
+   */
   'aria-label'?: string;
   required?: boolean;
   /** Se llama al salir del `<input type="file">` (react-hook-form lo usa para validar). */
@@ -230,6 +236,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
   invalidTypeError,
   size: sizeProp,
 }: FileUploadProps, ref) {
+  if (ariaLabel !== undefined) warnDeprecated('FileUpload', 'ariaLabel', '`aria-label`');
   const t = useBrandMessages('fileUpload', fileUploadEs);
   const size = useFormSize(sizeProp);
   // El icono del dropzone mide con la escala del propio `Icon`, que es de donde
@@ -367,7 +374,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
           accept={accept}
           disabled={disabled}
           required={required}
-          aria-label={ariaLabel ?? ariaLabelNative}
+          aria-label={ariaLabelNative ?? ariaLabel}
           aria-describedby={describedByIds}
           aria-invalid={error || undefined}
           aria-busy={uploading || undefined}

@@ -218,7 +218,9 @@ function _({ events: _ = [], renderDay: v, maxItemsPerDay: pe = 3, onMoreClick: 
 			}),
 			/* @__PURE__ */ m(a, {
 				open: F !== null,
-				onClose: Ne,
+				onOpenChange: (e) => {
+					e || Ne();
+				},
 				title: F ? K.format(F.date) : void 0,
 				children: /* @__PURE__ */ m("div", {
 					className: "calendar-planner__modal-events",

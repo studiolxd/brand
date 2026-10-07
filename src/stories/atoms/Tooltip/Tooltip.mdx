@@ -51,17 +51,19 @@ que abre el panel) se perdían.
 
 Un control apagado es justo el que más necesita explicarse: quien no puede pulsarlo quiere saber por qué. Pero un `button[disabled]` **no sirve de disparador** — el navegador no le manda eventos de puntero y no lo deja recibir foco, así que el bocadillo no se abre ni con el ratón ni con el teclado.
 
-`disabledTrigger` resuelve las dos mitades: el bocadillo se dispara desde un envoltorio focusable (`span.tooltip__trigger`, `tabIndex={0}`) que pone el propio componente, y el CSS apaga los eventos de puntero del hijo deshabilitado para que el hover **sobre el botón** llegue al envoltorio en vez de perderse. Lo segundo es lo que suele faltar cuando esto se monta a mano: el `<span tabIndex={0}>` casero abre el bocadillo con el teclado pero no con el ratón, porque el puntero cae sobre un elemento que no emite nada.
+El `Tooltip` lo resuelve solo: si su disparador está deshabilitado, le pide `focusableWhenDisabled` (la misma prop que trae Base UI). El control deja el `disabled` nativo, se anuncia con `aria-disabled="true"`, **sigue en el orden de tabulación** y recibe el puntero, pero **no ejecuta nada**: ni el `onClick` ni el envío del formulario. No hay envoltorio: el disparador es el propio control.
 
 ```tsx
-<Tooltip label="La matriz está bloqueada: publícala para poder generar los contenidos" disabledTrigger>
+<Tooltip label="La matriz está bloqueada: publícala para poder generar los contenidos">
   <Button disabled>Generar contenidos</Button>
 </Tooltip>
 ```
 
 <Canvas of={TooltipStories.DisparadorDeshabilitado} />
 
-El control de dentro sigue **deshabilitado de verdad** (`disabled` nativo): no se envía, no se pulsa y el formulario no lo cuenta. Lo que cambia es quién dispara el bocadillo.
+Lo entienden `Button`, `CloseButton`, `DotsButton`, `CopyButton` y `Toggle`, y un `<button disabled>` nativo (al que se le aplica la misma receta). Fuera de un `Tooltip` el control deshabilitado sigue siendo `disabled` de verdad y queda fuera del orden de tabulación; `focusableWhenDisabled` se puede pasar a mano, pero solo tiene sentido cuando el control apagado tiene algo que decir al recibir el foco.
+
+Hasta la v51 esto pedía `disabledTrigger`, que ponía un envoltorio focusable (`span.tooltip__trigger`) alrededor del control. Queda como **alias obsoleto**: ya no hace falta, avisa en desarrollo y se retira en la v52. Con un disparador que no entienda `focusableWhenDisabled` sigue cayendo en el envoltorio de siempre.
 
 La alternativa —que `Button` ganara un `disabledReason` y montara él el bocadillo— se descartó: ataría el átomo más usado del sistema a `Tooltip` y a su proveedor, y lo obligaría a ser componente de cliente en apps que hoy lo pintan desde el servidor. Y el problema no es de `Button`: le pasa igual a un `Select`, a un `Switcher` o a cualquier control apagado.
 
@@ -71,9 +73,7 @@ El bocadillo es `role="tooltip"` y, mientras está abierto, el disparador lo ref
 
 ### Un control deshabilitado con su motivo
 
-Con `disabledTrigger` el disparador es el envoltorio, así que es él quien recibe el foco y quien lleva el `aria-describedby` al bocadillo: con el teclado se llega al control apagado, se lee su texto y, a continuación, el motivo. Sin el envoltorio no se llegaría siquiera.
-
-Un elemento que recibe el foco tiene que decir qué es, así que el envoltorio no es un `<span>` mudo: lleva `role="group"` —vale para cualquier control apagado, no solo un botón—, `aria-disabled="true"` y, como nombre, el del control que envuelve (`aria-labelledby` a sí mismo, que calcula el nombre desde su contenido e incluye el `aria-label` de un botón de solo icono). El lector anuncia algo como «Generar contenidos, grupo, no disponible» y después el motivo. Si el consumidor pasa su propio `aria-label` o `aria-labelledby`, gana el suyo.
+El disparador deshabilitado es el propio control, así que es él quien recibe el foco y quien lleva el `aria-describedby` al bocadillo: con el teclado se llega al control apagado, se oye su nombre, que está deshabilitado (`aria-disabled="true"`) y, a continuación, el motivo. Algo como «Generar contenidos, botón, no disponible» y después el motivo.
 
 Dos cosas que decidir al escribirlo:
 

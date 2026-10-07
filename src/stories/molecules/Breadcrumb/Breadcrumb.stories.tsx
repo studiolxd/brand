@@ -14,7 +14,7 @@ const meta: Meta<typeof Breadcrumb> = {
     separator: {
       control: { type: 'text' },
     },
-    ariaLabel: {
+    'aria-label': {
       control: { type: 'text' },
     },
   },
@@ -25,7 +25,7 @@ const meta: Meta<typeof Breadcrumb> = {
       { label: 'Diseño instruccional' },
     ],
     separator: '/',
-    ariaLabel: 'Migas de pan',
+    'aria-label': 'Migas de pan',
   },
 };
 

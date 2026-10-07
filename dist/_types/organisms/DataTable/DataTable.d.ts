@@ -55,7 +55,7 @@ export interface DataTableServerPagination {
 /** Etiquetas accesibles que la tabla reenvía a sus cabeceras ordenables. */
 export type DataTableHeaderLabels = Pick<TableHeaderProps, 'actionsLabel' | 'sortedAscLabel' | 'sortedDescLabel' | 'sortableLabel'>;
 /** Etiquetas accesibles que la tabla reenvía a su paginación. */
-export type DataTablePaginationLabels = Pick<PaginationProps, 'ariaLabel' | 'pageLabel' | 'previousLabel' | 'nextLabel' | 'pagesGroupLabel' | 'pageSizeLabel' | 'totalLabel' | 'pageSizeOptions'>;
+export type DataTablePaginationLabels = Pick<PaginationProps, 'aria-label' | 'ariaLabel' | 'pageLabel' | 'previousLabel' | 'nextLabel' | 'pagesGroupLabel' | 'pageSizeLabel' | 'totalLabel' | 'pageSizeOptions'>;
 export interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];

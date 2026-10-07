@@ -8,6 +8,7 @@ import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { modalEs } from '../../messages/es/modal';
 import './Modal.css';
 import { usePortalContainer } from '../../constants/portal-container';
+import { warnDeprecated } from '../../constants/env';
 
 /**
  * El cromo del diálogo, y solo el cromo: las dos cosas que el `Modal` dice por
@@ -29,7 +30,19 @@ export interface ModalMessages {
 export interface ModalProps
   extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
   open: boolean;
-  onClose: () => void;
+  /**
+   * Se llama cuando el diálogo pide abrirse o cerrarse (aspa, `Escape`, clic en
+   * el velo), con el estado al que quiere pasar — la misma firma que `Sheet`,
+   * `Popover` y el resto de superposiciones del DS. Un `Modal` controlado solo
+   * pide cerrarse, así que en la práctica llega siempre `false`.
+   */
+  onOpenChange?: (open: boolean) => void;
+  /**
+   * @deprecated Usa `onOpenChange` (`onOpenChange={(open) => { if (!open) cerrar(); }}`,
+   * o directamente `onOpenChange={setOpen}`). Sigue funcionando y avisa en
+   * desarrollo; se retira en la v52.
+   */
+  onClose?: () => void;
   title?: string;
   children: React.ReactNode;
   /**
@@ -108,6 +121,7 @@ export interface ModalProps
 
 export function Modal({
   open,
+  onOpenChange,
   onClose,
   title,
   children,
@@ -134,8 +148,15 @@ export function Modal({
   // cuenta la apertura táctil), así que no se pasa cuando no la hay.
   const initialFocusProps = initialFocus !== undefined ? { initialFocus } : {};
 
+  if (onClose !== undefined) warnDeprecated('Modal', 'onClose', '`onOpenChange`');
+
+  const handleOpenChange = (isOpen: boolean) => {
+    onOpenChange?.(isOpen);
+    if (!isOpen) onClose?.();
+  };
+
   return (
-    <Dialog.Root open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose(); }}>
+    <Dialog.Root open={open} onOpenChange={handleOpenChange}>
       <Dialog.Portal container={portalContainer}>
         <DialogOverlay className="modal__overlay" />
         <Dialog.Popup

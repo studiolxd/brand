@@ -75,7 +75,7 @@ eventos por su árbol, aunque el portal esté en `document.body`—, y la barrer
 `Modal`:
 
 ```tsx
-<Modal open={open} onClose={cerrar} title="Detalle" onClick={(e) => e.stopPropagation()}>
+<Modal open={open} onOpenChange={setOpen} title="Detalle" onClick={(e) => e.stopPropagation()}>
 ```
 
 <Canvas of={ModalStories.BarreraDeEventos} />
@@ -110,7 +110,7 @@ nodo de `SiteShell`:
 const [shellNode, setShellNode] = useState<HTMLDivElement | null>(null);
 
 <SiteShell ref={setShellNode}>
-  <Modal open={open} onClose={cerrar} title="Preferencias" container={shellNode}>
+  <Modal open={open} onOpenChange={setOpen} title="Preferencias" container={shellNode}>
     …
   </Modal>
 </SiteShell>

@@ -49,7 +49,7 @@ export interface NumberInputProps extends Omit<ComponentPropsWithoutRef<'input'>
     name?: string;
     /** @deprecated Usa el atributo nativo `aria-describedby`. */
     describedBy?: string;
-    /** @deprecated Usa el atributo nativo `aria-label`. */
+    /** @deprecated Usa el atributo nativo `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
     ariaLabel?: string;
     /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
     className?: string;

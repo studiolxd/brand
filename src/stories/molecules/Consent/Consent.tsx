@@ -368,7 +368,7 @@ export function ConsentPreferences({
     return (
       <Modal
         open={open}
-        onClose={() => onOpenChange(false)}
+        onOpenChange={onOpenChange}
         title={typeof resolvedTitle === 'string' ? resolvedTitle : undefined}
         {...(closeLabel !== undefined ? { closeLabel } : {})}
         container={container}

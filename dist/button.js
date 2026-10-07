@@ -2,71 +2,74 @@
 import './button.css';
 import { Spinner as e } from "./spinner.js";
 import { n as t } from "./_shared/form-size.js";
-import { forwardRef as n } from "react";
-import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
-import { useRender as o } from "@base-ui/react/use-render";
+import { t as n } from "./_shared/focusable-when-disabled.js";
+import { forwardRef as r } from "react";
+import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
+import { useRender as s } from "@base-ui/react/use-render";
 //#region src/stories/atoms/Button/Button.tsx
-var s = n(function({ variant: n = "primary", tone: s = "accent", destructive: c = !1, size: l, block: u = !1, iconOnly: d = !1, children: f, type: p = "button", disabled: m, loading: h = !1, onClick: g, href: _, external: v = !1, render: y, className: b, ...x }, S) {
-	let C = t(l), w = [
+var c = r(function({ variant: n = "primary", tone: r = "accent", destructive: c = !1, size: l, block: u = !1, iconOnly: d = !1, children: f, type: p = "button", disabled: m, loading: h = !1, focusableWhenDisabled: g = !1, onClick: _, href: v, external: y = !1, render: b, className: x, ...S }, C) {
+	let w = t(l), T = [
 		"button",
 		`button--${n}`,
-		n === "text" && s === "ink" ? "button--ink" : "",
+		n === "text" && r === "ink" ? "button--ink" : "",
 		c ? "button--destructive-intent" : "",
-		C === "md" ? "" : `button--${C}`,
+		w === "md" ? "" : `button--${w}`,
 		u === "mobile" ? "button--block-mobile" : u ? "button--block" : "",
 		d ? "button--icon-only" : "",
 		h ? "button--loading" : "",
-		b ?? ""
-	].filter(Boolean).join(" "), T = !!m || h, E = (e) => {
-		if (T) {
+		x ?? ""
+	].filter(Boolean).join(" "), E = !!m || h, D = !!m && g, O = (e) => {
+		if (E) {
 			e.preventDefault(), e.stopPropagation();
 			return;
 		}
-		g?.(e);
-	}, D = h ? /* @__PURE__ */ a(r, { children: [/* @__PURE__ */ i("span", {
+		_?.(e);
+	}, k = h ? /* @__PURE__ */ o(i, { children: [/* @__PURE__ */ a("span", {
 		className: "button__spinner",
-		children: /* @__PURE__ */ i(e, {
+		children: /* @__PURE__ */ a(e, {
 			size: "sm",
 			"aria-hidden": !0
 		})
 	}), d ? null : f] }) : f;
-	return o({
-		render: y,
-		ref: S,
-		enabled: y !== void 0,
+	return s({
+		render: b,
+		ref: C,
+		enabled: b !== void 0,
 		props: {
-			className: w,
-			"aria-disabled": T ? !0 : void 0,
+			className: T,
+			"aria-disabled": E ? !0 : void 0,
 			"aria-busy": h ? !0 : void 0,
-			onClick: E,
-			...x,
-			children: D
+			onClick: O,
+			...S,
+			children: k
 		}
-	}) || (_ === void 0 ? /* @__PURE__ */ i("button", {
-		ref: S,
-		className: w,
+	}) || (v === void 0 ? /* @__PURE__ */ a("button", {
+		ref: C,
+		className: T,
 		type: p,
-		disabled: m,
-		"aria-disabled": h ? !0 : void 0,
+		disabled: D ? void 0 : m,
+		"aria-disabled": h || D ? !0 : void 0,
 		"aria-busy": h ? !0 : void 0,
-		onClick: E,
-		...x,
-		children: D
-	}) : /* @__PURE__ */ i("a", {
-		ref: S,
-		className: w,
-		href: T ? void 0 : _,
-		"aria-disabled": T ? !0 : void 0,
+		onClick: O,
+		...S,
+		children: k
+	}) : /* @__PURE__ */ a("a", {
+		ref: C,
+		className: T,
+		href: E ? void 0 : v,
+		"aria-disabled": E ? !0 : void 0,
 		"aria-busy": h ? !0 : void 0,
-		role: T ? "link" : void 0,
-		onClick: E,
-		...v ? {
+		role: E ? "link" : void 0,
+		tabIndex: D ? 0 : void 0,
+		onClick: O,
+		...y ? {
 			target: "_blank",
 			rel: "noopener noreferrer"
 		} : {},
-		...x,
-		children: D
+		...S,
+		children: k
 	}));
 });
+n(c);
 //#endregion
-export { s as Button };
+export { c as Button };

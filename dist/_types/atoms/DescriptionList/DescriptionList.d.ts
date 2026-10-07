@@ -4,18 +4,18 @@ export interface DescriptionTermProps extends React.ComponentPropsWithoutRef<'dt
      * Elemento a renderizar. Default `'dt'`, que es lo correcto dentro de una
      * `DescriptionList`. Solo se cambia cuando el término no cuelga de una lista
      * de descripción real y hay que darle el rol a mano (`as="div"
-     * role="term"`).
+     * role="term"`). Solo cambia la etiqueta.
      */
-    as?: React.ElementType;
+    as?: 'dt' | 'div';
     children?: React.ReactNode;
 }
 export interface DescriptionDetailsProps extends React.ComponentPropsWithoutRef<'dd'> {
     /**
      * Elemento a renderizar. Default `'dd'`. Mismo criterio que en
      * `DescriptionTerm`: solo se cambia fuera de un `<dl>` real (`as="div"
-     * role="definition"`).
+     * role="definition"`). Solo cambia la etiqueta.
      */
-    as?: React.ElementType;
+    as?: 'dd' | 'div';
     children?: React.ReactNode;
     /**
      * Añade un botón de copiar en línea, pegado al final del valor (nunca al

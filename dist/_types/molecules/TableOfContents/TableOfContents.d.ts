@@ -20,6 +20,8 @@ export interface TableOfContentsProps extends Omit<React.ComponentPropsWithoutRe
      * Nombre accesible del `nav`. **Sin default**: sin él, sale de
      * `tableOfContents.label` del `BrandMessagesProvider`.
      */
+    'aria-label'?: string;
+    /** @deprecated Usa `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
     ariaLabel?: string;
     /** Rótulo visible sobre la lista. Sin él, no se pinta ninguno. */
     title?: string;
@@ -44,7 +46,7 @@ export interface TableOfContentsProps extends Omit<React.ComponentPropsWithoutRe
  * sigue al hash y para uno estático.
  *
  * `{...rest}` (`id`, `data-*`, `role`…) se reenvía al `<nav>`. El nombre
- * accesible sigue siendo `ariaLabel`.
+ * accesible es `aria-label`.
  */
 /**
  * El único texto que el índice dice por su cuenta, y es **cromo**: «En esta

@@ -35,7 +35,7 @@ const base = {
   confirmLabel: 'Guardar',
   closeLabel: 'Cerrar',
   onConfirm: () => {},
-  onClose: () => {},
+  onOpenChange: () => {},
 };
 
 export const Default: Story = {
@@ -97,7 +97,7 @@ export const DesdeUnBoton: Story = {
         <ImageCropDialog
           {...args}
           sourceUrl={url}
-          onClose={() => setUrl(null)}
+          onOpenChange={(open) => { if (!open) setUrl(null); }}
           onConfirm={() => setUrl(null)}
         />
       </>

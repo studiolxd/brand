@@ -18,7 +18,7 @@ const meta: Meta<typeof Pagination> = {
     pageSize:        { control: { type: 'number' } },
     showTotal:       { control: { type: 'boolean' } },
     size:            { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg'] },
-    ariaLabel:       { control: { type: 'text' } },
+    'aria-label':       { control: { type: 'text' } },
     onPageChange:    { control: false },
     onPageSizeChange:{ control: false },
     hrefBuilder:     { control: false },
@@ -82,7 +82,7 @@ export const EtiquetasTraducidas: Story = {
       onPageChange={() => {}}
       onPageSizeChange={() => {}}
       showTotal
-      ariaLabel="Pagination"
+      aria-label="Pagination"
       pageLabel={(p) => `Page ${p}`}
       previousLabel="Previous page"
       nextLabel="Next page"
@@ -279,7 +279,7 @@ export const Tallas: Story = {
           total={200}
           page={1}
           pageSize={10}
-          ariaLabel={`Paginación ${talla}`}
+          aria-label={`Paginación ${talla}`}
         />
       ))}
     </div>
@@ -326,8 +326,8 @@ export const ContratoCursorYHrefs: Story = {
   tags: ['!dev'],
   render: () => (
     <>
-      <Pagination mode="cursor" nextHref="?cursor=abc" ariaLabel="Cursor" />
-      <Pagination pageCount={3} page={2} hrefs={{ 1: '?p=1', 2: '?p=2', 3: '?p=3' }} ariaLabel="Páginas" />
+      <Pagination mode="cursor" nextHref="?cursor=abc" aria-label="Cursor" />
+      <Pagination pageCount={3} page={2} hrefs={{ 1: '?p=1', 2: '?p=2', 3: '?p=3' }} aria-label="Páginas" />
     </>
   ),
   play: async ({ canvasElement }) => {
@@ -351,8 +351,8 @@ export const ContratoTypeButton: Story = {
   tags: ['!dev'],
   render: () => (
     <form onSubmit={(e) => e.preventDefault()}>
-      <Pagination total={100} page={2} pageSize={10} ariaLabel="Páginas" />
-      <Pagination mode="cursor" onNext={() => {}} ariaLabel="Cursor" />
+      <Pagination total={100} page={2} pageSize={10} aria-label="Páginas" />
+      <Pagination mode="cursor" onNext={() => {}} aria-label="Cursor" />
     </form>
   ),
   play: async ({ canvasElement }) => {
@@ -431,23 +431,23 @@ export const ContratoSinRegistrosNoSePinta: Story = {
   render: () => (
     <>
       <div data-testid="solo-total">
-        <Pagination total={0} ariaLabel="Solo total" />
+        <Pagination total={0} aria-label="Solo total" />
       </div>
       <div data-testid="con-total">
-        <Pagination total={0} showTotal ariaLabel="Con total" />
+        <Pagination total={0} showTotal aria-label="Con total" />
       </div>
       <div data-testid="con-selector">
-        <Pagination total={0} onPageSizeChange={() => {}} ariaLabel="Con selector" />
+        <Pagination total={0} onPageSizeChange={() => {}} aria-label="Con selector" />
       </div>
       <div data-testid="con-ranura">
         <Pagination
           total={0}
           afterPageSize={<button type="button">Exportar</button>}
-          ariaLabel="Con ranura"
+          aria-label="Con ranura"
         />
       </div>
       <div data-testid="con-page-count">
-        <Pagination total={0} pageCount={5} ariaLabel="Con pageCount" />
+        <Pagination total={0} pageCount={5} aria-label="Con pageCount" />
       </div>
     </>
   ),
@@ -464,7 +464,7 @@ export const ContratoPageCountCero: Story = {
   name: 'Test — pageCount 0 tampoco se pinta',
   tags: ['!dev'],
   render: () => (
-    <Pagination pageCount={0} afterPageSize={<button type="button">Exportar</button>} ariaLabel="Sin páginas" />
+    <Pagination pageCount={0} afterPageSize={<button type="button">Exportar</button>} aria-label="Sin páginas" />
   ),
   play: async ({ canvasElement }) => {
     await expect(canvasElement.querySelector('nav')).toBeNull();
@@ -477,9 +477,9 @@ export const ContratoTallas: Story = {
   tags: ['!dev'],
   render: () => (
     <>
-      <Pagination total={100} page={2} pageSize={10} ariaLabel="Por defecto" />
-      <Pagination total={100} page={2} pageSize={10} size="sm" ariaLabel="Compacta" />
-      <Pagination total={100} page={2} pageSize={10} size="lg" ariaLabel="Pública" />
+      <Pagination total={100} page={2} pageSize={10} aria-label="Por defecto" />
+      <Pagination total={100} page={2} pageSize={10} size="sm" aria-label="Compacta" />
+      <Pagination total={100} page={2} pageSize={10} size="lg" aria-label="Pública" />
     </>
   ),
   play: async ({ canvasElement }) => {
@@ -500,9 +500,9 @@ export const ContratoCajaCuadrada: Story = {
   tags: ['!dev'],
   render: () => (
     <>
-      <Pagination total={100} page={2} pageSize={10} size="sm" ariaLabel="Compacta" />
-      <Pagination total={100} page={2} pageSize={10} ariaLabel="Media" />
-      <Pagination total={100} page={2} pageSize={10} size="lg" ariaLabel="Pública" />
+      <Pagination total={100} page={2} pageSize={10} size="sm" aria-label="Compacta" />
+      <Pagination total={100} page={2} pageSize={10} aria-label="Media" />
+      <Pagination total={100} page={2} pageSize={10} size="lg" aria-label="Pública" />
     </>
   ),
   play: async ({ canvasElement }) => {
@@ -528,7 +528,7 @@ export const ContratoCajaCuadrada: Story = {
 export const ContratoEstados: Story = {
   name: 'Test — activo y deshabilitado',
   tags: ['!dev'],
-  render: () => <Pagination total={100} page={1} pageSize={10} ariaLabel="Páginas" />,
+  render: () => <Pagination total={100} page={1} pageSize={10} aria-label="Páginas" />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const nav = canvas.getByRole('navigation', { name: 'Páginas' });

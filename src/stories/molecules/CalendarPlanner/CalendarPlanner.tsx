@@ -581,7 +581,7 @@ export function CalendarPlanner({
 
       <Modal
         open={modalDay !== null}
-        onClose={closeModal}
+        onOpenChange={(isOpen) => { if (!isOpen) closeModal(); }}
         title={modalDay ? modalTitleFormatter.format(modalDay.date) : undefined}
       >
         <div className="calendar-planner__modal-events">

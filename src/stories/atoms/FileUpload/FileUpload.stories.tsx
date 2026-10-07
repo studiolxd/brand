@@ -26,7 +26,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    ariaLabel: 'Subir archivo',
+    'aria-label': 'Subir archivo',
   },
 };
 
@@ -35,7 +35,7 @@ export const Multiple: Story = {
     multiple: true,
     maxFiles: 3,
     accept: 'image/*,.pdf',
-    ariaLabel: 'Subir archivos',
+    'aria-label': 'Subir archivos',
   },
 };
 
@@ -46,7 +46,7 @@ export const WithAcceptAndSize: Story = {
     accept: '.pdf,.docx',
     maxSize: 5 * 1024 * 1024,
     maxFiles: 5,
-    ariaLabel: 'Subir documentos',
+    'aria-label': 'Subir documentos',
   },
 };
 
@@ -54,12 +54,12 @@ export const WithProgress: Story = {
   name: 'Con progreso',
   args: {
     progress: 65,
-    ariaLabel: 'Subir archivo',
+    'aria-label': 'Subir archivo',
   },
 };
 
 export const Subiendo: Story = {
-  args: { uploading: true, uploadingLabel: 'Subiendo el archivo…', ariaLabel: 'Subir archivo' },
+  args: { uploading: true, uploadingLabel: 'Subiendo el archivo…', 'aria-label': 'Subir archivo' },
 };
 
 export const SubiendoConTextoVisible: Story = {
@@ -69,14 +69,14 @@ export const SubiendoConTextoVisible: Story = {
     uploadingLabel: 'Subiendo 2 de 5…',
     uploadingLabelVisible: true,
     multiple: true,
-    ariaLabel: 'Subir archivos',
+    'aria-label': 'Subir archivos',
   },
 };
 
 export const TestSubiendo: Story = {
   name: 'Test — subiendo es inerte, anuncia y conserva el foco',
   tags: ['!dev'],
-  args: { uploading: true, uploadingLabel: 'Subiendo 2 de 5…', uploadingLabelVisible: true, ariaLabel: 'Subir archivo' },
+  args: { uploading: true, uploadingLabel: 'Subiendo 2 de 5…', uploadingLabelVisible: true, 'aria-label': 'Subir archivo' },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const input = canvasElement.querySelector('input[type="file"]') as HTMLInputElement;
@@ -92,14 +92,14 @@ export const TestSubiendo: Story = {
 export const Error: Story = {
   args: {
     error: true,
-    ariaLabel: 'Subir archivo',
+    'aria-label': 'Subir archivo',
   },
 };
 
 export const Disabled: Story = {
   args: {
     disabled: true,
-    ariaLabel: 'Subir archivo',
+    'aria-label': 'Subir archivo',
   },
 };
 
@@ -115,7 +115,7 @@ export const WithFiles: Story = {
         multiple
         maxSize={10 * 1024 * 1024}
         defaultValue={[pdf, word, big]}
-        ariaLabel="Subir archivos"
+        aria-label="Subir archivos"
       />
     );
   },
@@ -138,7 +138,7 @@ export const WithImageFiles: Story = {
         accept="image/*"
         maxFiles={5}
         defaultValue={[img1, img2, img3]}
-        ariaLabel="Subir imágenes"
+        aria-label="Subir imágenes"
       />
     );
   },
@@ -176,7 +176,7 @@ export const Controlled: Story = {
           value={files}
           onChange={handleChange}
           progress={progress}
-          ariaLabel="Subir archivos"
+          aria-label="Subir archivos"
         />
         <p style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: 'var(--text-inline-muted-color)' }}>
           {files.length} archivo(s) válido(s) seleccionado(s)

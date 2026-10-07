@@ -4,6 +4,7 @@ import { Link } from '../../atoms/Link/Link';
 import './TableOfContents.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { tableOfContentsEs } from '../../messages/es/tableOfContents';
+import { warnDeprecated } from '../../constants/env';
 
 export interface TableOfContentsItem {
   /** `id` del encabezado al que apunta la entrada. El enlace será `#id`. */
@@ -26,6 +27,8 @@ export interface TableOfContentsProps extends Omit<React.ComponentPropsWithoutRe
    * Nombre accesible del `nav`. **Sin default**: sin él, sale de
    * `tableOfContents.label` del `BrandMessagesProvider`.
    */
+  'aria-label'?: string;
+  /** @deprecated Usa `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
   ariaLabel?: string;
   /** Rótulo visible sobre la lista. Sin él, no se pinta ninguno. */
   title?: string;
@@ -56,7 +59,7 @@ function depthOf(level: number, minLevel: number): number {
  * sigue al hash y para uno estático.
  *
  * `{...rest}` (`id`, `data-*`, `role`…) se reenvía al `<nav>`. El nombre
- * accesible sigue siendo `ariaLabel`.
+ * accesible es `aria-label`.
  */
 /**
  * El único texto que el índice dice por su cuenta, y es **cromo**: «En esta
@@ -71,13 +74,16 @@ export interface TableOfContentsMessages {
 export const TableOfContents = forwardRef<HTMLElement, TableOfContentsProps>(function TableOfContents({
   items,
   activeId,
-  ariaLabel,
+  'aria-label': ariaLabelProp,
+  ariaLabel: ariaLabelDeprecated,
   title,
   sticky = false,
   onItemClick,
   className,
   ...rest
 }, ref): ReactNode {
+  if (ariaLabelDeprecated !== undefined) warnDeprecated('TableOfContents', 'ariaLabel', '`aria-label`');
+  const ariaLabel = ariaLabelProp ?? ariaLabelDeprecated;
   const t = useBrandMessages('tableOfContents', tableOfContentsEs);
   if (items.length === 0) return null;
 

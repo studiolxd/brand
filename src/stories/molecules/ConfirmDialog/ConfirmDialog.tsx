@@ -245,7 +245,7 @@ export function ConfirmDialog({
   return (
     <Modal
       open={open}
-      onClose={handleCancel}
+      onOpenChange={(isOpen) => { if (!isOpen) handleCancel(); }}
       title={title}
       {...(closeLabel !== undefined ? { closeLabel } : {})}
       container={container}

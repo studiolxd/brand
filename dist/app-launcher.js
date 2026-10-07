@@ -133,7 +133,7 @@ function g({ apps: n, labels: r, currentAppId: a, open: l, defaultOpen: d, onOpe
 		})
 	}), /* @__PURE__ */ s(i, {
 		open: v,
-		onClose: () => y(!1),
+		onOpenChange: y,
 		title: _("title", r.title),
 		children: /* @__PURE__ */ s(f, {
 			apps: n,

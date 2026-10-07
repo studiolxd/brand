@@ -105,7 +105,7 @@ function EsperaEnDialogo() {
   return (
     <>
       <Button variant="outline" onClick={() => setOpen(true)}>Abrir diálogo</Button>
-      <Modal open={open} onClose={() => setOpen(false)} title="Elegir imagen">
+      <Modal open={open} onOpenChange={setOpen} title="Elegir imagen">
         <LoadingState size="sm" label="Cargando imágenes…" />
       </Modal>
     </>

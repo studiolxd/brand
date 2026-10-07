@@ -82,11 +82,16 @@ export interface FileUploadProps {
     size?: FormSize;
     /** @deprecated Usa el atributo nativo `aria-describedby`. */
     describedBy?: string;
-    /** @deprecated Usa el atributo nativo `aria-label`. */
+    /** @deprecated Usa el atributo nativo `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
     ariaLabel?: string;
     /** Ids de ayuda/error que describen el control (lo pone el campo). */
     'aria-describedby'?: string;
-    /** Nombre accesible cuando el control va suelto. */
+    /**
+     * Nombre accesible cuando el control va suelto (sin `FileUploadField` que le
+     * ponga `<label>`). Es la única prop de nombre: la zona de arrastre es la
+     * cara visible del control y el `<input type="file">` real, que es lo que
+     * se anuncia, lo toma de aquí.
+     */
     'aria-label'?: string;
     required?: boolean;
     /** Se llama al salir del `<input type="file">` (react-hook-form lo usa para validar). */

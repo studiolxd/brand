@@ -103,7 +103,7 @@ function _({ open: n, onOpenChange: r, categories: i, value: a, onChange: h, onS
 	}), N = b === void 0 ? T("preferencesTitle") : b;
 	return v === "modal" ? /* @__PURE__ */ f(c, {
 		open: n,
-		onClose: () => r(!1),
+		onOpenChange: r,
 		title: typeof N == "string" ? N : void 0,
 		...x === void 0 ? {} : { closeLabel: x },
 		container: C,

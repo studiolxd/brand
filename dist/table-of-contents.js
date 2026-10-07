@@ -1,45 +1,47 @@
 'use client';
 import './table-of-contents.css';
-import { r as e } from "./_shared/brandmessagescontext.js";
-import { Link as t } from "./link.js";
-import { List as n } from "./list.js";
-import { forwardRef as r } from "react";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { n as e } from "./_shared/env.js";
+import { r as t } from "./_shared/brandmessagescontext.js";
+import { Link as n } from "./link.js";
+import { List as r } from "./list.js";
+import { forwardRef as i } from "react";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/messages/es/tableOfContents.ts
-var o = { label: "En esta página" };
+var s = { label: "En esta página" };
 //#endregion
 //#region src/stories/molecules/TableOfContents/TableOfContents.tsx
-function s(e, t) {
+function c(e, t) {
 	return Math.min(Math.max(e - t, 0), 5);
 }
-var c = r(function({ items: r, activeId: c, ariaLabel: l, title: u, sticky: d = !1, onItemClick: f, className: p, ...m }, h) {
-	let g = e("tableOfContents", o);
-	if (r.length === 0) return null;
-	let _ = Math.min(...r.map((e) => e.level));
-	return /* @__PURE__ */ a("nav", {
-		ref: h,
+var l = i(function({ items: i, activeId: l, "aria-label": u, ariaLabel: d, title: f, sticky: p = !1, onItemClick: m, className: h, ...g }, _) {
+	d !== void 0 && e("TableOfContents", "ariaLabel", "`aria-label`");
+	let v = u ?? d, y = t("tableOfContents", s);
+	if (i.length === 0) return null;
+	let b = Math.min(...i.map((e) => e.level));
+	return /* @__PURE__ */ o("nav", {
+		ref: _,
 		className: [
 			"table-of-contents",
-			d ? "table-of-contents--sticky" : "",
-			p ?? ""
+			p ? "table-of-contents--sticky" : "",
+			h ?? ""
 		].filter(Boolean).join(" "),
-		"aria-label": g("label", l),
-		...m,
-		children: [u && /* @__PURE__ */ i("p", {
+		"aria-label": y("label", v),
+		...g,
+		children: [f && /* @__PURE__ */ a("p", {
 			className: "table-of-contents__title",
-			children: u
-		}), /* @__PURE__ */ i(n, {
+			children: f
+		}), /* @__PURE__ */ a(r, {
 			type: "plain",
 			className: "table-of-contents__list",
-			children: r.map((e) => {
-				let n = e.id === c;
-				return /* @__PURE__ */ i("li", {
-					className: `table-of-contents__item table-of-contents__item--level-${s(e.level, _)}`,
-					children: /* @__PURE__ */ i(t, {
+			children: i.map((e) => {
+				let t = e.id === l;
+				return /* @__PURE__ */ a("li", {
+					className: `table-of-contents__item table-of-contents__item--level-${c(e.level, b)}`,
+					children: /* @__PURE__ */ a(n, {
 						href: `#${e.id}`,
-						className: ["table-of-contents__link", n ? "table-of-contents__link--active" : ""].filter(Boolean).join(" "),
-						"aria-current": n ? "location" : void 0,
-						onClick: f ? (t) => f(e, t) : void 0,
+						className: ["table-of-contents__link", t ? "table-of-contents__link--active" : ""].filter(Boolean).join(" "),
+						"aria-current": t ? "location" : void 0,
+						onClick: m ? (t) => m(e, t) : void 0,
 						children: e.label
 					})
 				}, e.id);
@@ -48,4 +50,4 @@ var c = r(function({ items: r, activeId: c, ariaLabel: l, title: u, sticky: d = 
 	});
 });
 //#endregion
-export { c as TableOfContents };
+export { l as TableOfContents };

@@ -38,6 +38,14 @@ export interface CopyButtonProps extends Omit<ComponentPropsWithoutRef<'button'>
     onCopy?: (text: string) => void;
     /** Se llama cuando el portapapeles falla. */
     onCopyError?: (error: unknown) => void;
+    /**
+     * Con `disabled`, el botón sigue en el orden de tabulación y se anuncia con
+     * `aria-disabled` sin copiar nada. Reenvío a `Button`; `Tooltip` lo activa
+     * solo en su disparador deshabilitado.
+     *
+     * @default false
+     */
+    focusableWhenDisabled?: boolean;
     /** Se añade DESPUÉS de las clases propias. */
     className?: string;
 }

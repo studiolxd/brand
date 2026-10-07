@@ -53,7 +53,18 @@ export interface ImageCropDialogProps {
      */
     errorMessage?: string;
     onConfirm: (blob: Blob) => void | Promise<void>;
-    onClose: () => void;
+    /**
+     * Se llama cuando el diálogo pide cerrarse —`Cancelar`, el aspa, `Escape`,
+     * el velo, o tras confirmar— con `false`, como `onOpenChange` del resto de
+     * superposiciones del DS. El diálogo está abierto mientras `sourceUrl` no
+     * sea `null`: cerrarlo es devolverlo a `null`.
+     */
+    onOpenChange?: (open: boolean) => void;
+    /**
+     * @deprecated Usa `onOpenChange`. Sigue funcionando y avisa en desarrollo;
+     * se retira en la v52.
+     */
+    onClose?: () => void;
     /**
      * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
      * **Va al panel (su contenido, dentro del diálogo); el disparador, si lo hay, es tuyo y ya lleva tus clases**
@@ -68,4 +79,4 @@ export interface ImageCropDialogProps {
  * `react-image-crop` aporta el gesto de selección; el DS pone el diálogo, las
  * acciones y el volcado a lienzo (`cropImageToBlob`).
  */
-export declare function ImageCropDialog({ sourceUrl, title, description, circularCrop, aspect, outputSize, outputMimeType, busy, cancelLabel, confirmLabel, closeLabel, loadingLabel, errorMessage, onConfirm, onClose, className, }: ImageCropDialogProps): import("react/jsx-runtime").JSX.Element;
+export declare function ImageCropDialog({ sourceUrl, title, description, circularCrop, aspect, outputSize, outputMimeType, busy, cancelLabel, confirmLabel, closeLabel, loadingLabel, errorMessage, onConfirm, onOpenChange, onClose, className, }: ImageCropDialogProps): import("react/jsx-runtime").JSX.Element;

@@ -4,6 +4,7 @@ import { Icon } from '../Icon/Icon';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { dotsButtonEs } from '../../messages/es/dotsButton';
 import './DotsButton.css';
+import { markFocusableWhenDisabled } from '../../constants/focusable-when-disabled';
 
 /**
  * El único texto del botón de tres puntos, y es **cromo**: dice que hay más
@@ -46,3 +47,5 @@ export const DotsButton = forwardRef<HTMLButtonElement, DotsButtonProps>(functio
     </Button>
   );
 });
+
+markFocusableWhenDisabled(DotsButton);

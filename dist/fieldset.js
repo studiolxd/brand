@@ -1,23 +1,24 @@
 import './fieldset.css';
-import { jsx as e, jsxs as t } from "react/jsx-runtime";
+import { n as e } from "./_shared/env.js";
+import { jsx as t, jsxs as n } from "react/jsx-runtime";
 //#region src/stories/atoms/Fieldset/Fieldset.tsx
-function n({ legend: n, legendHidden: r = !1, level: i = 2, weight: a, size: o, className: s, id: c, disabled: l, "aria-describedby": u, children: d }) {
-	let f = r ? "visually-hidden" : [
+function r({ legend: r, legendHidden: i = !1, level: a = 2, weight: o, size: s, className: c, id: l, disabled: u, "aria-describedby": d, children: f }) {
+	o !== void 0 && e("Fieldset", "weight", "el peso que trae `level` (no tiene efecto)");
+	let p = i ? "visually-hidden" : [
 		"fieldset__legend",
-		`fieldset__legend--${i}`,
-		a && `fieldset__legend--${a}`,
-		o && `fieldset__legend--size-${o}`
+		`fieldset__legend--${a}`,
+		s && `fieldset__legend--size-${s}`
 	].filter(Boolean).join(" ");
-	return /* @__PURE__ */ t("fieldset", {
-		className: ["fieldset", s].filter(Boolean).join(" "),
-		id: c,
-		disabled: l,
-		"aria-describedby": u,
-		children: [/* @__PURE__ */ e("legend", {
-			className: f,
-			children: n
-		}), d]
+	return /* @__PURE__ */ n("fieldset", {
+		className: ["fieldset", c].filter(Boolean).join(" "),
+		id: l,
+		disabled: u,
+		"aria-describedby": d,
+		children: [/* @__PURE__ */ t("legend", {
+			className: p,
+			children: r
+		}), f]
 	});
 }
 //#endregion
-export { n as Fieldset };
+export { r as Fieldset };

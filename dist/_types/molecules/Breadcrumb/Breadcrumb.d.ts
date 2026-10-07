@@ -17,6 +17,8 @@ export interface BreadcrumbProps {
      * `aria-label` del `<nav>`. **Sin default**: sin él, sale de
      * `breadcrumb.label` del `BrandMessagesProvider`.
      */
+    'aria-label'?: string;
+    /** @deprecated Usa `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
     ariaLabel?: string;
     className?: string;
 }
@@ -28,4 +30,4 @@ export interface BreadcrumbMessages {
     /** Nombre accesible del `nav`. */
     label: string;
 }
-export declare function Breadcrumb({ items, renderLink, separator, ariaLabel, className, }: BreadcrumbProps): import("react/jsx-runtime").JSX.Element;
+export declare function Breadcrumb({ items, renderLink, separator, 'aria-label': ariaLabelProp, ariaLabel: ariaLabelDeprecated, className, }: BreadcrumbProps): import("react/jsx-runtime").JSX.Element;

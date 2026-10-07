@@ -181,7 +181,9 @@ function f({ src: o, name: f, alt: p, shape: m = "circle", size: fe, accept: h =
 				...k === void 0 ? {} : { loadingLabel: k },
 				...A === void 0 ? {} : { errorMessage: A },
 				onConfirm: Q,
-				onClose: Oe
+				onOpenChange: (e) => {
+					e || Oe();
+				}
 			})
 		]
 	});

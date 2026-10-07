@@ -295,7 +295,7 @@ describe('DataTable', () => {
         columns={columns}
         data={data}
         pageSize={5}
-        paginationLabels={{ ariaLabel: 'Paging' }}
+        paginationLabels={{ 'aria-label': 'Paging' }}
       />,
     );
     expect(screen.getByRole('navigation', { name: 'Paging' })).toBeInTheDocument();

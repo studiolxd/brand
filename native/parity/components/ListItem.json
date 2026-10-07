@@ -34,6 +34,6 @@
   ],
   "differences": [
     "`leading`, `secondary` y `trailing` existen en las tres plataformas. En React el envoltorio de fila (`list__item-row`) solo aparece cuando se usa alguno; en SwiftUI y Compose el ítem es siempre una fila.",
-    "`onClick` (fila entera pulsable) es la forma nativa de una fila que se pulsa; en React es `as=\"button\"` (o un enlace dentro del ítem). Existe en SwiftUI (`BrandListItem(action:)`) y en Compose (`onClick`), con la misma semántica: la fila entera es el objetivo, con estado pulsado y rasgo de botón (VoiceOver) o rol de botón (TalkBack). No es una prop de React y por eso no está en `props` ni en `excluded`."
+    "`onClick` (fila entera pulsable) es la forma nativa de una fila que se pulsa; en React es un botón o un enlace dentro del ítem (`as` solo cambia la etiqueta, `li` o `div`). Existe en SwiftUI (`BrandListItem(action:)`) y en Compose (`onClick`), con la misma semántica: la fila entera es el objetivo, con estado pulsado y rasgo de botón (VoiceOver) o rol de botón (TalkBack). No es una prop de React y por eso no está en `props` ni en `excluded`."
   ]
 }
