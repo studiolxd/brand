@@ -73,7 +73,6 @@
 .sidebar__header a:hover {
   text-decoration: none;
   padding-block-end: 0;
-  box-shadow: none;
   color: inherit;
 }
 .sidebar__footer { padding-block-end: var(--sidebar-padding-block); }

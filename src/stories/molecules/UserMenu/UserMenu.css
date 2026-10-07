@@ -148,7 +148,6 @@
   color: var(--user-menu-item-color);
   cursor: pointer;
   text-decoration: none;
-  box-shadow: none;
   outline: none;
   transition:
     background-color var(--user-menu-transition-duration) var(--user-menu-transition-easing),

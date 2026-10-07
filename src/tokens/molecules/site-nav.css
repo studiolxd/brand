@@ -9,6 +9,7 @@
   --site-nav-item-gap: var(--spacing-3); /** Separación entre enlaces de un grupo */
   --site-nav-item-font-size: var(--font-size-4); /** Enlaces: un punto por debajo de la cabecera del grupo (Heading talla 6 = font-size.5) */
   --site-nav-item-line-height: var(--line-height-snug); /** Enlaces */
+  --site-nav-item-hover-decoration-line: var(--link-decoration-line); /** Enlaces en hover: subrayados en claro (`text-decoration-line`), como los enlaces de texto en reposo */
   --site-nav-item-badge-gap: var(--spacing-2); /** Aire entre el rótulo del ítem y su distintivo */
   --site-nav-item-font-weight: var(--font-weight-default); /** Enlaces */
   --site-nav-item-color: var(--color-text-on-light); /** Enlaces */
@@ -20,7 +21,7 @@
   --site-nav-focus-ring-width: var(--border-width-focus); /** Anillo de foco */
   --site-nav-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco */
   --site-nav-focus-ring-color: var(--color-primary); /** Anillo de foco */
-  --site-nav-item-hover-line-width: var(--link-underline-width); /** Enlaces en hover: la línea bajo el enlace (como los enlaces de texto), en claro */
+  --site-nav-item-hover-line-width: var(--link-underline-width); /** Enlaces en hover: grosor del subrayado (`text-decoration-thickness`), el de los enlaces de texto */
 }
 
 .surface-dark,
@@ -28,6 +29,7 @@
 [data-theme="dark"],
 html.dark {
   --site-nav-item-hover-line-width: 0px; /** Enlaces en hover — surface-dark: sin línea, cambia el color */
+  --site-nav-item-hover-decoration-line: none; /** Enlaces en hover — surface-dark: sin subrayado, cambia el color (un grosor 0 no basta: el navegador pinta como mínimo un píxel) */
   --site-nav-item-color: var(--color-text-on-dark); /** Enlaces — surface-dark */
   --site-nav-item-disabled-color: var(--color-disabled-text-on-dark); /** Ítem apagado — surface-dark */
   --site-nav-item-hover-color: var(--color-accent-2); /** Enlaces en hover — surface-dark: amarillo (accent-2) en vez de línea */

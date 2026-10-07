@@ -181,7 +181,7 @@ object BrandButtonTokens {
     val textFontWeight: FontWeight = FontWeight(300)
     /** Token `button.text.line-height` — Line height Factor sin unidad. */
     val textLineHeight: Float = 1f
-    /** Token `button.text.underline-width` — Grosor de la línea en reposo. La variante `text` se subraya con la misma técnica que `Link` —sombra interior, no `text-decoration`— porque `text-decoration` no cubre un SVG y un botón con icono quedaba con la línea cortada. Apunta al token de `Link` para que las dos piezas no puedan separarse */
+    /** Token `button.text.underline-width` — Grosor del subrayado en reposo (`text-decoration-thickness`). La variante `text` se subraya igual que `Link` —`text-decoration` con grosor y distancia de token (D64)—, y apunta a sus tokens para que las dos piezas no puedan separarse. El icono del botón no se subraya */
     val textUnderlineWidth: BrandSchemeValue<Dp> = BrandSchemeValue(1.dp, 0.dp)
     /** Token `button.text.hover-underline-width` — Grosor de la línea en hover y en activo — el de `Link` */
     val textHoverUnderlineWidth: BrandSchemeValue<Dp> = BrandSchemeValue(0.dp, 1.dp)
@@ -191,7 +191,7 @@ object BrandButtonTokens {
     val textInkUnderlineWidth: Dp = 1.dp
     /** Token `button.text.ink-hover-underline-width` — tone=ink: grosor del subrayado en hover */
     val textInkHoverUnderlineWidth: Dp = 0.dp
-    /** Token `button.text.underline-offset` — Separación entre el texto y su línea — la de `Link`. Va como `padding-block-end`, así que la línea cae por debajo del icono igual que del texto */
+    /** Token `button.text.underline-offset` — Separación entre el texto y su línea — la de `Link`. Se reserva como `padding-block-end` (la caja mide alto de línea más esta separación) y la línea cae en el borde inferior de ese hueco (`text-underline-offset: calc(<separación> - <grosor>)`) */
     val textUnderlineOffset: Dp = 4.dp
     /** Token `button.text.transition-duration` — Transition duration En milisegundos. */
     val textTransitionDuration: Int = 150
@@ -1179,11 +1179,11 @@ object BrandLinkTokens {
     val color: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFCD00))
     /** Token `link.hover-color` — Color en hover */
     val hoverColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFCD00))
-    /** Token `link.underline-width` — El subrayado es una línea bajo el enlace (borde, no text-decoration): cubre texto e icono y se separa del texto. Su grosor */
+    /** Token `link.underline-width` — Grosor del subrayado (`text-decoration-thickness`). El subrayado es `text-decoration` con grosor y distancia de token (D64): se mantiene en alto contraste, se imprime y lo reconocen las herramientas de accesibilidad. Si se pinta o no lo dice `link.decoration-line`: un grosor 0 no oculta la línea (el navegador pinta como mínimo un píxel de dispositivo) */
     val underlineWidth: BrandSchemeValue<Dp> = BrandSchemeValue(1.dp, 0.dp)
-    /** Token `link.hover-underline-width` — Grosor de la línea en hover (en claro desaparece) */
+    /** Token `link.hover-underline-width` — Grosor del subrayado en hover (en claro no hay línea: la quita `link.hover-decoration-line`) */
     val hoverUnderlineWidth: BrandSchemeValue<Dp> = BrandSchemeValue(0.dp, 1.dp)
-    /** Token `link.underline-offset` — Separación entre el texto y la línea */
+    /** Token `link.underline-offset` — Separación entre el texto y la línea. Se reserva como `padding-block-end` (el hueco de la línea: nada se mueve al aparecer) y la línea se coloca con `text-underline-position: under` y `text-underline-offset: calc(<separación> - <grosor>)`, de modo que cae en el borde inferior de ese hueco */
     val underlineOffset: Dp = 4.dp
     /** Token `link.in-text-underline-width` — Enlace dentro de texto corrido (párrafo, etiqueta, Prose): línea en reposo, en las DOS superficies. Entre texto, el color no basta para distinguirlo (en oscuro, amarillo sobre blanco da 1,5:1; WCAG 1.4.1 pide 3:1 u otra marca), así que la marca es la línea (D41). Sin par oscuro a propósito */
     val inTextUnderlineWidth: Dp = 1.dp

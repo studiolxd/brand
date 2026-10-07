@@ -3,16 +3,24 @@
  */
 
 :root {
-  --link-hover-underline-width: 0px; /** Grosor de la línea en hover (en claro desaparece) */
+  --link-hover-underline-width: 0px; /** Grosor del subrayado en hover (en claro no hay línea: la quita `link.hover-decoration-line`) */
+  --link-decoration-line: underline; /** Si el enlace se subraya en reposo (`text-decoration-line`): `underline` o `none`. En claro, sí */
+  --link-hover-decoration-line: none; /** Si el enlace se subraya en hover (`text-decoration-line`): en claro la línea desaparece */
   --link-in-text-hover-underline-width: 0px; /** Enlace dentro de texto corrido: sin línea en hover, en las dos superficies (D41) */
+  --link-in-text-decoration-line: underline; /** Enlace dentro de texto corrido: subrayado en reposo, en las DOS superficies (D41). Sin par oscuro a propósito */
+  --link-in-text-hover-decoration-line: none; /** Enlace dentro de texto corrido: sin subrayado en hover, en las dos superficies (D41) */
   --link-cursor: pointer; /** Cursor */
   --link-ink-hover-underline-width: 0px; /** Tono ink: sin línea en hover */
+  --link-ink-decoration-line: underline; /** Tono ink: subrayado en reposo, en las dos superficies */
+  --link-ink-hover-decoration-line: none; /** Tono ink: sin subrayado en hover */
   --link-accent-1-hover-underline-width: 0px; /** Tono accent-1: sin línea en hover, como accent */
-  --link-underline-offset: var(--spacing-1); /** Separación entre el texto y la línea */
+  --link-accent-1-decoration-line: underline; /** Tono accent-1: subrayado en reposo, en las dos superficies */
+  --link-accent-1-hover-decoration-line: none; /** Tono accent-1: sin subrayado en hover */
+  --link-underline-offset: var(--spacing-1); /** Separación entre el texto y la línea. Se reserva como `padding-block-end` (el hueco de la línea: nada se mueve al aparecer) y la línea se coloca con `text-underline-position: under` y `text-underline-offset: calc(<separación> - <grosor>)`, de modo que cae en el borde inferior de ese hueco */
   --link-icon-gap: var(--spacing-2); /** Aire entre el icono y el texto del enlace */
   --link-color: var(--color-text-on-light); /** El enlace no tiene color propio: es texto, y lo distingue el subrayado */
   --link-hover-color: var(--color-text-on-light); /** Color en hover */
-  --link-underline-width: var(--border-width-default); /** El subrayado es una línea bajo el enlace (borde, no text-decoration): cubre texto e icono y se separa del texto. Su grosor */
+  --link-underline-width: var(--border-width-default); /** Grosor del subrayado (`text-decoration-thickness`). El subrayado es `text-decoration` con grosor y distancia de token (D64): se mantiene en alto contraste, se imprime y lo reconocen las herramientas de accesibilidad. Si se pinta o no lo dice `link.decoration-line`: un grosor 0 no oculta la línea (el navegador pinta como mínimo un píxel de dispositivo) */
   --link-in-text-underline-width: var(--border-width-default); /** Enlace dentro de texto corrido (párrafo, etiqueta, Prose): línea en reposo, en las DOS superficies. Entre texto, el color no basta para distinguirlo (en oscuro, amarillo sobre blanco da 1,5:1; WCAG 1.4.1 pide 3:1 u otra marca), así que la marca es la línea (D41). Sin par oscuro a propósito */
   --link-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
   --link-focus-ring-offset: var(--border-width-default); /** Separación entre el enlace y el anillo */
@@ -29,6 +37,8 @@
 [data-theme="dark"],
 html.dark {
   --link-underline-width: 0px; /** Sin línea en reposo — surface-dark */
+  --link-decoration-line: none; /** Sin subrayado en reposo — surface-dark: el amarillo ya lo distingue fuera del texto corrido */
+  --link-hover-decoration-line: underline; /** Subrayado en hover — surface-dark */
   --link-color: var(--color-accent-2); /** Color — surface-dark: amarillo (accent-2), y sin línea en reposo */
   --link-hover-color: var(--color-accent-2); /** Hover — surface-dark: amarillo, con línea */
   --link-hover-underline-width: var(--border-width-default); /** Línea en hover — surface-dark */

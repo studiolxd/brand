@@ -48,7 +48,6 @@
   color: var(--menu-item-color);
   cursor: var(--menu-item-cursor);
   text-decoration: none;
-  box-shadow: none;
   outline: none;
   transition:
     background-color var(--menu-transition-duration) var(--menu-transition-easing),
@@ -82,7 +81,7 @@
 .menu__item:is(a):hover:not([data-highlighted]),
 .menu__item:is(a):focus-visible:not([data-highlighted]) {
   color: var(--menu-item-color);
-  box-shadow: none;
+  text-decoration-line: none;
 }
 
 .menu__item.menu__item--destructive:is(a):hover:not([data-highlighted]),

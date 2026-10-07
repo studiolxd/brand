@@ -27,14 +27,17 @@
 }
 .theme-switcher__option:hover {
   padding-block-end: var(--link-underline-offset);
-  box-shadow: inset 0 calc(-1 * var(--link-underline-width)) 0 0 currentColor;
+  text-decoration-line: var(--link-decoration-line);
+  text-decoration-thickness: var(--link-underline-width);
+  text-decoration-skip-ink: auto;
+  text-underline-position: under;
+  text-underline-offset: calc(var(--link-underline-offset) - var(--link-underline-width));
 }
 /* La actual: en énfasis, sin subrayado y sin cursor de acción */
 .theme-switcher__option.theme-switcher__option--current {
   font-weight: var(--theme-switcher-list-current-font-weight);
   text-decoration: none;
   padding-block-end: 0;
-  box-shadow: none;
   cursor: default;
 }
 .theme-switcher__option:focus-visible {

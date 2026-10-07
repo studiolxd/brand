@@ -45,7 +45,7 @@ Un `<button>` con la cara de un enlace: sin caja ni altura fija, subrayado en re
 
 <Canvas of={ButtonStories.TextOnLight} />
 
-El subrayado es **una línea bajo el botón entero** —sombra interior más `padding-block-end`, con el grosor y la separación de `Link` (`button.text.underline-*` → `link.underline-*`)—, no `text-decoration`. El motivo es el mismo que en `Link`: `text-decoration` no cubre un SVG, así que un botón con icono quedaba con la línea cortada bajo el texto y ausente bajo el icono. Con la línea, cruza por debajo de los dos.
+El subrayado es el de `Link`: **`text-decoration`** con el grosor, la separación y el encendido de sus tokens (`button.text.underline-*` y `button.text.*decoration-line` → `link.*`). La caja reserva el hueco de la línea con `padding-block-end` —mide el alto de línea más la separación— y la línea cae en el borde inferior de ese hueco. Con icono, se subraya el texto y no el icono. La regla, con el porqué, en Fundamentos › Bordes § «El subrayado es `text-decoration`».
 
 <Canvas of={ButtonStories.TextConIcono} />
 

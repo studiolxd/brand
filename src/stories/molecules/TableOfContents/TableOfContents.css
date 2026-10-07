@@ -50,6 +50,7 @@
 .table-of-contents__link {
   display: block;
   padding-block: var(--table-of-contents-item-padding-block);
+  text-decoration-line: none;
   box-shadow: none;
   font-size: var(--table-of-contents-item-font-size);
   line-height: var(--table-of-contents-item-line-height);

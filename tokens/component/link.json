@@ -13,17 +13,27 @@
     "underline-width": {
       "$value": "{border-width.default}",
       "$type": "dimension",
-      "$description": "El subrayado es una línea bajo el enlace (borde, no text-decoration): cubre texto e icono y se separa del texto. Su grosor"
+      "$description": "Grosor del subrayado (`text-decoration-thickness`). El subrayado es `text-decoration` con grosor y distancia de token (D64): se mantiene en alto contraste, se imprime y lo reconocen las herramientas de accesibilidad. Si se pinta o no lo dice `link.decoration-line`: un grosor 0 no oculta la línea (el navegador pinta como mínimo un píxel de dispositivo)"
     },
     "hover-underline-width": {
       "$value": "0px",
       "$type": "dimension",
-      "$description": "Grosor de la línea en hover (en claro desaparece)"
+      "$description": "Grosor del subrayado en hover (en claro no hay línea: la quita `link.hover-decoration-line`)"
+    },
+    "decoration-line": {
+      "$value": "underline",
+      "$type": "string",
+      "$description": "Si el enlace se subraya en reposo (`text-decoration-line`): `underline` o `none`. En claro, sí"
+    },
+    "hover-decoration-line": {
+      "$value": "none",
+      "$type": "string",
+      "$description": "Si el enlace se subraya en hover (`text-decoration-line`): en claro la línea desaparece"
     },
     "underline-offset": {
       "$value": "{spacing.1}",
       "$type": "dimension",
-      "$description": "Separación entre el texto y la línea"
+      "$description": "Separación entre el texto y la línea. Se reserva como `padding-block-end` (el hueco de la línea: nada se mueve al aparecer) y la línea se coloca con `text-underline-position: under` y `text-underline-offset: calc(<separación> - <grosor>)`, de modo que cae en el borde inferior de ese hueco"
     },
     "in-text-underline-width": {
       "$value": "{border-width.default}",
@@ -34,6 +44,16 @@
       "$value": "0px",
       "$type": "dimension",
       "$description": "Enlace dentro de texto corrido: sin línea en hover, en las dos superficies (D41)"
+    },
+    "in-text-decoration-line": {
+      "$value": "underline",
+      "$type": "string",
+      "$description": "Enlace dentro de texto corrido: subrayado en reposo, en las DOS superficies (D41). Sin par oscuro a propósito"
+    },
+    "in-text-hover-decoration-line": {
+      "$value": "none",
+      "$type": "string",
+      "$description": "Enlace dentro de texto corrido: sin subrayado en hover, en las dos superficies (D41)"
     },
     "icon-gap": {
       "$value": "{spacing.2}",
@@ -80,6 +100,16 @@
       "$type": "dimension",
       "$description": "Línea en hover — surface-dark"
     },
+    "surface-dark-decoration-line": {
+      "$value": "none",
+      "$type": "string",
+      "$description": "Sin subrayado en reposo — surface-dark: el amarillo ya lo distingue fuera del texto corrido"
+    },
+    "surface-dark-hover-decoration-line": {
+      "$value": "underline",
+      "$type": "string",
+      "$description": "Subrayado en hover — surface-dark"
+    },
     "surface-dark-focus-ring-color": {
       "$value": "{color.text.on-dark}",
       "$type": "color",
@@ -99,6 +129,16 @@
       "$value": "0px",
       "$type": "dimension",
       "$description": "Tono ink: sin línea en hover"
+    },
+    "ink-decoration-line": {
+      "$value": "underline",
+      "$type": "string",
+      "$description": "Tono ink: subrayado en reposo, en las dos superficies"
+    },
+    "ink-hover-decoration-line": {
+      "$value": "none",
+      "$type": "string",
+      "$description": "Tono ink: sin subrayado en hover"
     },
     "surface-dark-ink-color": {
       "$value": "{color.text.on-dark}",
@@ -124,6 +164,16 @@
       "$value": "0px",
       "$type": "dimension",
       "$description": "Tono accent-1: sin línea en hover, como accent"
+    },
+    "accent-1-decoration-line": {
+      "$value": "underline",
+      "$type": "string",
+      "$description": "Tono accent-1: subrayado en reposo, en las dos superficies"
+    },
+    "accent-1-hover-decoration-line": {
+      "$value": "none",
+      "$type": "string",
+      "$description": "Tono accent-1: sin subrayado en hover"
     },
     "surface-dark-accent-1-color": {
       "$value": "{color.accent-1}",

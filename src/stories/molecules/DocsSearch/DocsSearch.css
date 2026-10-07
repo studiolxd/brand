@@ -30,7 +30,7 @@
   padding-inline: var(--docs-search-result-padding-inline);
   border-radius: var(--docs-search-result-border-radius);
   color: var(--docs-search-result-color);
-  box-shadow: none;
+  text-decoration-line: none;
   cursor: pointer;
 }
 
