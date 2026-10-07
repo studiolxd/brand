@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react';
-import type { TagVariant } from '../../atoms/Tag/Tag';
+import type { TagTone, TagVariant } from '../../atoms/Tag/Tag';
 import './CalendarPlanner.css';
 /**
  * Los textos propios del planificador: el botón que abre los eventos que no
@@ -26,6 +26,12 @@ export interface PlannerEvent {
     id: string;
     date: Date;
     label: string;
+    /** Color de la etiqueta del evento (el `tone` de `Tag`). Default `'neutral'`. */
+    tone?: TagTone;
+    /**
+     * @deprecated Usa `tone`. `variant: 'danger'` es `tone: 'error'`. Sigue
+     * funcionando, con un aviso en desarrollo, hasta la v52.
+     */
     variant?: TagVariant;
     /**
      * El evento dura todo el día: la vista de semana lo pinta **sin hora**, el

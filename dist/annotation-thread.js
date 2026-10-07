@@ -78,7 +78,7 @@ function c({ annotation: c, replies: l = [], status: u = "open", actions: d, rep
 			/* @__PURE__ */ n("div", {
 				className: "annotation-thread__status",
 				children: /* @__PURE__ */ n(t, {
-					variant: a[u],
+					tone: a[u],
 					children: {
 						open: () => C("open", h),
 						acknowledged: () => C("acknowledged", g),

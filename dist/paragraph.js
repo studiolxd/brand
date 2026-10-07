@@ -1,18 +1,24 @@
 import './paragraph.css';
-import { forwardRef as e } from "react";
-import { jsx as t } from "react/jsx-runtime";
+import { n as e } from "./_shared/env.js";
+import { forwardRef as t } from "react";
+import { jsx as n } from "react/jsx-runtime";
 //#region src/stories/atoms/Paragraph/Paragraph.tsx
-var n = e(function({ size: e = "default", className: n, children: r, ...i }, a) {
-	return /* @__PURE__ */ t("p", {
-		ref: a,
+var r = {
+	small: "sm",
+	default: "md",
+	large: "lg"
+}, i = t(function({ size: t = "md", className: i, children: a, ...o }, s) {
+	let c = t;
+	return t in r && (c = r[t], e("Paragraph", `size="${t}"`, `\`size="${c}"\``)), /* @__PURE__ */ n("p", {
+		ref: s,
 		className: [
 			"paragraph",
-			e === "default" ? "" : `paragraph--${e}`,
-			n
+			c === "md" ? "" : `paragraph--${c}`,
+			i
 		].filter(Boolean).join(" "),
-		...i,
-		children: r
+		...o,
+		children: a
 	});
 });
 //#endregion
-export { n as Paragraph };
+export { i as Paragraph };

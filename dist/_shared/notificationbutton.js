@@ -25,7 +25,7 @@ var s = {
 		}), i > 0 && /* @__PURE__ */ a(r, {
 			count: i,
 			max: c,
-			variant: "danger",
+			tone: "error",
 			"aria-hidden": "true",
 			className: "notification-button__badge"
 		})]

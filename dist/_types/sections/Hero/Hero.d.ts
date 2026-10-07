@@ -5,7 +5,7 @@ export interface HeroProps {
     /** El título de la portada: un `Heading` de nivel 1 a talla 10 (display). */
     title: ReactNode;
     /**
-     * La frase bajo el título, opcional: `Paragraph size="large"`. Termina en
+     * La frase bajo el título, opcional: `Paragraph size="lg"`. Termina en
      * punto (ver Foundations → Redacción).
      */
     description?: ReactNode;

@@ -17,7 +17,7 @@ function c({ title: c, description: l, actions: u, media: d, mediaPosition: f = 
 				children: c
 			}),
 			l && /* @__PURE__ */ o(i, {
-				size: "large",
+				size: "lg",
 				className: "highlight__description",
 				children: l
 			}),

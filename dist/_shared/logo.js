@@ -1,19 +1,20 @@
 import '../logo.css';
-import { r as e, t } from "./logoassets.js";
-import { jsx as n } from "react/jsx-runtime";
+import { n as e } from "./env.js";
+import { r as t, t as n } from "./logoassets.js";
+import { jsx as r } from "react/jsx-runtime";
 //#region src/stories/atoms/Logo/Logo.tsx
-function r({ size: r = "md", className: i }) {
-	return /* @__PURE__ */ n("svg", {
+function i({ size: i = "md", className: a }) {
+	return i === "xxl" && e("Logo", "size=\"xxl\"", "`size=\"2xl\"`"), /* @__PURE__ */ r("svg", {
 		xmlns: "http://www.w3.org/2000/svg",
-		viewBox: e,
+		viewBox: t,
 		className: [
 			"logo",
-			`logo--${r}`,
-			i
+			`logo--${i === "xxl" ? "2xl" : i}`,
+			a
 		].filter(Boolean).join(" "),
 		"aria-hidden": "true",
-		children: t.map((e) => /* @__PURE__ */ n("path", { d: e }, e))
+		children: n.map((e) => /* @__PURE__ */ r("path", { d: e }, e))
 	});
 }
 //#endregion
-export { r as t };
+export { i as t };

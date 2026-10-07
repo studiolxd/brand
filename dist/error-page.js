@@ -18,7 +18,7 @@ function s({ title: s, description: c, homeAction: l, retryDescription: u, retry
 				title: s,
 				description: c
 			}), l] }), /* @__PURE__ */ o(t, { children: [u && /* @__PURE__ */ a(n, {
-				size: "large",
+				size: "lg",
 				children: u
 			}), d] })]
 		})

@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 import { type ContainerWidth } from '../../atoms/Container/Container';
-import { type LogoSize } from '../../atoms/Logo/Logo';
+import { type LogoSize, type LogoSizeDeprecated } from '../../atoms/Logo/Logo';
 import './SiteHeader.css';
 export type SiteHeaderLogoLinkProps = {
     href: string;
@@ -28,8 +28,8 @@ export interface SiteHeaderProps {
     menuCloseLabel?: string;
     /** La marca. Por defecto el `Logo` de Studio LXD a `logoSize`; un producto de la suite pone la suya. */
     logo?: ReactNode;
-    /** Talla del logotipo por defecto. `xxl` (85px): la cabecera es el sitio de la marca. */
-    logoSize?: LogoSize;
+    /** Talla del logotipo por defecto. `2xl` (85px): la cabecera es el sitio de la marca. `xxl` es el alias obsoleto de `2xl` (se retira en la v52). */
+    logoSize?: LogoSize | LogoSizeDeprecated;
     /** Talla del botón de menú. `lg` (48px) acompaña al logotipo grande. */
     menuButtonSize?: 'sm' | 'md' | 'lg';
     /**

@@ -1,16 +1,17 @@
 'use client';
 import './calendar-planner.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
-import { VisuallyHidden as t } from "./visually-hidden.js";
-import { Tag as n } from "./tag.js";
-import { Toggle as r } from "./toggle.js";
-import { ToggleGroup as i } from "./toggle-group.js";
-import { t as a } from "./_shared/modal.js";
-import { a as o, c as ee, d as s, f as c, h as te, i as l, l as ne, m as re, n as ie, o as u, p as ae, r as oe, s as se, t as ce, u as d } from "./_shared/calendar.js";
-import { useCallback as f, useId as le, useState as p } from "react";
-import { Fragment as ue, jsx as m, jsxs as h } from "react/jsx-runtime";
+import { n as e } from "./_shared/env.js";
+import { n as t } from "./_shared/brandmessagescontext.js";
+import { VisuallyHidden as n } from "./visually-hidden.js";
+import { Tag as r } from "./tag.js";
+import { Toggle as i } from "./toggle.js";
+import { ToggleGroup as a } from "./toggle-group.js";
+import { t as o } from "./_shared/modal.js";
+import { a as ee, c as te, d as s, f as c, h as ne, i as l, l as re, m as ie, n as ae, o as u, p as oe, r as se, s as ce, t as le, u as d } from "./_shared/calendar.js";
+import { useCallback as f, useId as ue, useState as p } from "react";
+import { Fragment as de, jsx as m, jsxs as h } from "react/jsx-runtime";
 //#region src/stories/messages/es/calendarPlanner.ts
-var de = {
+var fe = {
 	more: (e) => `+${e} más`,
 	previousWeek: "Semana anterior",
 	nextWeek: "Semana siguiente",
@@ -20,151 +21,156 @@ var de = {
 };
 //#endregion
 //#region src/stories/molecules/CalendarPlanner/CalendarPlanner.tsx
-function g(e) {
+function g(t) {
+	t.variant !== void 0 && e("CalendarPlanner", "events[].variant", "`events[].tone`");
+	let n = t.tone ?? t.variant ?? "neutral";
+	return n === "danger" ? "error" : n;
+}
+function _(e) {
 	return e.allDay === void 0 ? e.date.getHours() !== 0 || e.date.getMinutes() !== 0 : !e.allDay;
 }
-function fe(e) {
+function pe(e) {
 	return [...e].sort((e, t) => {
-		let n = Number(g(e)) - Number(g(t));
+		let n = Number(_(e)) - Number(_(t));
 		return n === 0 ? e.date.getTime() - t.date.getTime() : n;
 	});
 }
-function _({ events: _ = [], renderDay: v, maxItemsPerDay: pe = 3, onMoreClick: y, showMoreDialog: me, onDayClick: b, month: x, defaultMonth: S, onMonthChange: C, view: w, defaultView: he, onViewChange: T, viewSwitcher: ge = !1, week: E, defaultWeek: _e, onWeekChange: D, navigable: O = !0, locale: k = "es-ES", previousMonthLabel: ve, nextMonthLabel: ye, previousWeekLabel: be, nextWeekLabel: xe, monthViewLabel: Se, weekViewLabel: A, viewSwitcherLabel: j, gridLabel: M, moreLabel: Ce, today: we, size: N = "md", className: Te }) {
-	let P = te(we), [Ee, De] = p(() => x ?? S ?? P), [Oe, ke] = p(() => c(E ?? _e ?? x ?? S ?? P)), [Ae, je] = p(() => w ?? he ?? "month"), [F, I] = p(null), Me = me ?? !y, Ne = f(() => I(null), []), L = x ?? Ee, R = c(E ?? Oe), z = w ?? Ae, B = z === "week", V = f((e) => {
-		De(e), C?.(e);
+function v({ events: e = [], renderDay: v, maxItemsPerDay: me = 3, onMoreClick: y, showMoreDialog: he, onDayClick: b, month: x, defaultMonth: S, onMonthChange: C, view: w, defaultView: ge, onViewChange: T, viewSwitcher: _e = !1, week: E, defaultWeek: ve, onWeekChange: D, navigable: O = !0, locale: k = "es-ES", previousMonthLabel: ye, nextMonthLabel: be, previousWeekLabel: xe, nextWeekLabel: Se, monthViewLabel: A, weekViewLabel: j, viewSwitcherLabel: Ce, gridLabel: M, moreLabel: we, today: Te, size: N = "md", className: Ee }) {
+	let P = ne(Te), [De, Oe] = p(() => x ?? S ?? P), [ke, Ae] = p(() => c(E ?? ve ?? x ?? S ?? P)), [je, Me] = p(() => w ?? ge ?? "month"), [F, I] = p(null), Ne = he ?? !y, Pe = f(() => I(null), []), L = x ?? De, R = c(E ?? ke), z = w ?? je, B = z === "week", V = f((e) => {
+		Oe(e), C?.(e);
 	}, [C]), H = f((e) => {
 		let t = c(e);
-		ke(t), D?.(t);
-	}, [D]), Pe = f((e) => {
-		let t = l(R).some(({ date: e }) => se(e, L));
-		!t && e === "week" && H(new Date(L.getFullYear(), L.getMonth(), 1)), !t && e === "month" && V(new Date(R.getFullYear(), R.getMonth(), 1)), je(e), T?.(e);
+		Ae(t), D?.(t);
+	}, [D]), Fe = f((e) => {
+		let t = l(R).some(({ date: e }) => ce(e, L));
+		!t && e === "week" && H(new Date(L.getFullYear(), L.getMonth(), 1)), !t && e === "month" && V(new Date(R.getFullYear(), R.getMonth(), 1)), Me(e), T?.(e);
 	}, [
 		L,
 		R,
 		V,
 		H,
 		T
-	]), U = e("calendar", ce), W = e("calendarPlanner", de), Fe = N === "lg" ? "md" : "sm", Ie = new Intl.DateTimeFormat(k, {
+	]), U = t("calendar", le), W = t("calendarPlanner", fe), Ie = N === "lg" ? "md" : "sm", Le = new Intl.DateTimeFormat(k, {
 		month: "long",
 		year: "numeric"
-	}), Le = new Intl.DateTimeFormat(k, {
+	}), Re = new Intl.DateTimeFormat(k, {
 		day: "numeric",
 		month: "long",
 		year: "numeric"
-	}), Re = new Date(R.getFullYear(), R.getMonth(), R.getDate() + 6), ze = Le.formatRange(R, Re), Be = B ? ze : Ie.format(L), G = new Intl.DateTimeFormat(k, {
+	}), ze = new Date(R.getFullYear(), R.getMonth(), R.getDate() + 6), Be = Re.formatRange(R, ze), Ve = B ? Be : Le.format(L), G = new Intl.DateTimeFormat(k, {
 		weekday: "long",
 		day: "numeric",
 		month: "long",
 		year: "numeric"
-	}), Ve = new Intl.DateTimeFormat(k, {
+	}), He = new Intl.DateTimeFormat(k, {
 		hour: "2-digit",
 		minute: "2-digit"
-	}), K = new Intl.DateTimeFormat(k, {
+	}), Ue = new Intl.DateTimeFormat(k, {
 		weekday: "long",
 		day: "numeric",
 		month: "long",
 		year: "numeric"
-	}), q = o(k, "short"), He = ie(oe(L)), J = l(R), Ue = d(L, -1), We = d(L, 1), Y = (e) => _.filter((t) => u(t.date, e)), Ge = ae({
+	}), K = ee(k, "short"), We = ae(se(L)), q = l(R), Ge = d(L, -1), Ke = d(L, 1), J = (t) => e.filter((e) => u(e.date, t)), qe = oe({
 		month: L,
 		onMonthChange: V,
 		today: P,
-		onActivate: b ? (e) => b(e, Y(e)) : void 0
-	}), Ke = re({
+		onActivate: b ? (e) => b(e, J(e)) : void 0
+	}), Je = ie({
 		weekStart: R,
 		onWeekChange: H,
 		today: P,
-		onActivate: b ? (e) => b(e, Y(e)) : void 0
-	}), X = B ? Ke : Ge, Z = le(), Q = B ? `${Z}-planner-title-week-${R.getFullYear()}-${R.getMonth()}-${R.getDate()}` : `${Z}-planner-title-${L.getFullYear()}-${L.getMonth()}`, qe = [
+		onActivate: b ? (e) => b(e, J(e)) : void 0
+	}), Y = B ? Je : qe, X = ue(), Z = B ? `${X}-planner-title-week-${R.getFullYear()}-${R.getMonth()}-${R.getDate()}` : `${X}-planner-title-${L.getFullYear()}-${L.getMonth()}`, Ye = [
 		"calendar-planner",
 		`calendar-planner--${N}`,
 		B ? "calendar-planner--week" : "",
-		Te
-	].filter(Boolean).join(" "), Je = (e, t) => {
+		Ee
+	].filter(Boolean).join(" "), Q = (e, t) => {
 		if (v) return v(e, t);
-		let r = B ? fe(t) : t, i = B ? r : r.slice(0, pe), a = r.length - i.length;
-		return /* @__PURE__ */ h(ue, { children: [i.map((e) => B ? /* @__PURE__ */ h("div", {
+		let n = B ? pe(t) : t, i = B ? n : n.slice(0, me), a = n.length - i.length;
+		return /* @__PURE__ */ h(de, { children: [i.map((e) => B ? /* @__PURE__ */ h("div", {
 			className: "calendar-planner__event",
-			children: [g(e) && /* @__PURE__ */ m("span", {
+			children: [_(e) && /* @__PURE__ */ m("span", {
 				className: "calendar-planner__event-time",
-				children: Ve.format(e.date)
-			}), /* @__PURE__ */ m(n, {
-				variant: e.variant ?? "neutral",
+				children: He.format(e.date)
+			}), /* @__PURE__ */ m(r, {
+				tone: g(e),
 				children: e.label
 			})]
-		}, e.id) : /* @__PURE__ */ m(n, {
-			variant: e.variant ?? "neutral",
+		}, e.id) : /* @__PURE__ */ m(r, {
+			tone: g(e),
 			children: e.label
 		}, e.id)), a > 0 && /* @__PURE__ */ m("button", {
 			type: "button",
 			className: "calendar-planner__more",
 			onClick: (n) => {
-				n.stopPropagation(), Me && I({
+				n.stopPropagation(), Ne && I({
 					date: e,
 					events: t
 				}), y?.(e, t);
 			},
-			children: W("more", Ce)(a)
+			children: W("more", we)(a)
 		})] });
-	}, $ = ({ date: e, outside: n }) => {
-		let r = u(e, P), i = Y(e), a = [
+	}, $ = ({ date: e, outside: t }) => {
+		let r = u(e, P), i = J(e), a = [
 			"calendar-planner__cell",
 			B ? "calendar-planner__cell--week" : "",
-			n && "calendar-planner__cell--outside",
+			t && "calendar-planner__cell--outside",
 			r && "calendar-planner__cell--today",
 			b ? "calendar-planner__cell--clickable" : ""
 		].filter(Boolean).join(" "), o = [
 			"calendar-planner__day-number",
 			r && "calendar-planner__day-number--today",
-			n && "calendar-planner__day-number--outside"
+			t && "calendar-planner__day-number--outside"
 		].filter(Boolean).join(" ");
 		return /* @__PURE__ */ h("div", {
-			ref: b ? X.cellRef(e) : void 0,
+			ref: b ? Y.cellRef(e) : void 0,
 			role: "gridcell",
 			className: a,
 			"aria-current": r ? "date" : void 0,
-			tabIndex: b ? X.isTabbable(e) ? 0 : -1 : void 0,
-			onFocus: b ? () => X.onCellFocus(e) : void 0,
+			tabIndex: b ? Y.isTabbable(e) ? 0 : -1 : void 0,
+			onFocus: b ? () => Y.onCellFocus(e) : void 0,
 			onClick: b ? () => b(e, i) : void 0,
 			children: [!B && /* @__PURE__ */ h("span", {
 				className: o,
-				children: [/* @__PURE__ */ m(t, { children: G.format(e) }), /* @__PURE__ */ m("span", {
+				children: [/* @__PURE__ */ m(n, { children: G.format(e) }), /* @__PURE__ */ m("span", {
 					"aria-hidden": "true",
 					children: e.getDate()
 				})]
 			}), /* @__PURE__ */ m("div", {
 				className: "calendar-planner__cell-body",
-				children: Je(e, i)
+				children: Q(e, i)
 			})]
 		}, e.toISOString());
 	};
 	return /* @__PURE__ */ h("div", {
-		className: qe,
+		className: Ye,
 		children: [
-			ee({
+			te({
 				block: "calendar-planner",
-				title: Be,
-				titleId: Q,
+				title: Ve,
+				titleId: Z,
 				navigable: O,
-				previousLabel: O ? B ? W("previousWeek", be) : U("previousMonth", ve) : void 0,
-				nextLabel: O ? B ? W("nextWeek", xe) : U("nextMonth", ye) : void 0,
-				onPrev: () => B ? H(s(R, -1)) : V(Ue),
-				onNext: () => B ? H(s(R, 1)) : V(We),
-				chevronSize: Fe,
-				children: ge ? /* @__PURE__ */ h(i, {
+				previousLabel: O ? B ? W("previousWeek", xe) : U("previousMonth", ye) : void 0,
+				nextLabel: O ? B ? W("nextWeek", Se) : U("nextMonth", be) : void 0,
+				onPrev: () => B ? H(s(R, -1)) : V(Ge),
+				onNext: () => B ? H(s(R, 1)) : V(Ke),
+				chevronSize: Ie,
+				children: _e ? /* @__PURE__ */ h(a, {
 					className: "calendar-planner__views",
-					"aria-label": W("viewSwitcher", j),
+					"aria-label": W("viewSwitcher", Ce),
 					size: N,
 					value: [z],
 					onValueChange: (e) => {
 						let t = e[0];
-						t && Pe(t);
+						t && Fe(t);
 					},
-					children: [/* @__PURE__ */ m(r, {
+					children: [/* @__PURE__ */ m(i, {
 						value: "month",
-						children: W("monthView", Se)
-					}), /* @__PURE__ */ m(r, {
+						children: W("monthView", A)
+					}), /* @__PURE__ */ m(i, {
 						value: "week",
-						children: W("weekView", A)
+						children: W("weekView", j)
 					})]
 				}) : void 0
 			}),
@@ -172,12 +178,12 @@ function _({ events: _ = [], renderDay: v, maxItemsPerDay: pe = 3, onMoreClick: 
 				className: ["calendar-planner__grid", B ? "calendar-planner__grid--week" : ""].filter(Boolean).join(" "),
 				role: "grid",
 				"aria-label": M,
-				"aria-labelledby": M ? void 0 : Q,
-				onKeyDown: b ? X.onKeyDown : void 0,
+				"aria-labelledby": M ? void 0 : Z,
+				onKeyDown: b ? Y.onKeyDown : void 0,
 				children: [B ? /* @__PURE__ */ m("div", {
 					role: "row",
 					className: "calendar-planner__row calendar-planner__row--header",
-					children: J.map(({ date: e }, n) => {
+					children: q.map(({ date: e }, t) => {
 						let r = u(e, P);
 						return /* @__PURE__ */ h("div", {
 							role: "columnheader",
@@ -188,11 +194,11 @@ function _({ events: _ = [], renderDay: v, maxItemsPerDay: pe = 3, onMoreClick: 
 							].filter(Boolean).join(" "),
 							"aria-current": r ? "date" : void 0,
 							children: [
-								/* @__PURE__ */ m(t, { children: G.format(e) }),
+								/* @__PURE__ */ m(n, { children: G.format(e) }),
 								/* @__PURE__ */ m("abbr", {
 									"aria-hidden": "true",
-									title: q[n].long,
-									children: q[n].short
+									title: K[t].long,
+									children: K[t].short
 								}),
 								/* @__PURE__ */ m("span", {
 									"aria-hidden": "true",
@@ -202,28 +208,28 @@ function _({ events: _ = [], renderDay: v, maxItemsPerDay: pe = 3, onMoreClick: 
 							]
 						}, e.toISOString());
 					})
-				}) : ne({
+				}) : re({
 					block: "calendar-planner",
 					rowModifier: "header",
-					weekdays: q
+					weekdays: K
 				}), B ? /* @__PURE__ */ m("div", {
 					role: "row",
 					className: "calendar-planner__row",
-					children: J.map((e) => $(e))
-				}) : He.map((e, t) => /* @__PURE__ */ m("div", {
+					children: q.map((e) => $(e))
+				}) : We.map((e, t) => /* @__PURE__ */ m("div", {
 					role: "row",
 					className: "calendar-planner__row",
 					children: e.map((e) => $(e))
 				}, t))]
 			}),
-			/* @__PURE__ */ m(a, {
+			/* @__PURE__ */ m(o, {
 				open: F !== null,
-				onClose: Ne,
-				title: F ? K.format(F.date) : void 0,
+				onClose: Pe,
+				title: F ? Ue.format(F.date) : void 0,
 				children: /* @__PURE__ */ m("div", {
 					className: "calendar-planner__modal-events",
-					children: F?.events.map((e) => /* @__PURE__ */ m(n, {
-						variant: e.variant ?? "neutral",
+					children: F?.events.map((e) => /* @__PURE__ */ m(r, {
+						tone: g(e),
 						children: e.label
 					}, e.id))
 				})
@@ -232,4 +238,4 @@ function _({ events: _ = [], renderDay: v, maxItemsPerDay: pe = 3, onMoreClick: 
 	});
 }
 //#endregion
-export { _ as CalendarPlanner };
+export { v as CalendarPlanner };

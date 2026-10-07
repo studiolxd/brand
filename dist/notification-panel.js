@@ -62,7 +62,7 @@ function S({ items: o = [], count: S = 0, max: C, onRead: w, onMarkAllRead: T, a
 				o.length === 0 ? /* @__PURE__ */ g("div", {
 					className: "notification-panel__empty",
 					children: /* @__PURE__ */ g(a, {
-						size: "small",
+						size: "sm",
 						children: V("empty", N)
 					})
 				}) : /* @__PURE__ */ g("ul", {

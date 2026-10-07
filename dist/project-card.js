@@ -1,59 +1,65 @@
 'use client';
 import './project-card.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
-import { Heading as t } from "./heading.js";
-import { Paragraph as n } from "./paragraph.js";
-import { Tag as r } from "./tag.js";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
-import { useRender as o } from "@base-ui/react/use-render";
+import { n as e } from "./_shared/env.js";
+import { n as t } from "./_shared/brandmessagescontext.js";
+import { Heading as n } from "./heading.js";
+import { Paragraph as r } from "./paragraph.js";
+import { Tag as i } from "./tag.js";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { useRender as s } from "@base-ui/react/use-render";
 //#region src/stories/messages/es/projectCard.ts
-var s = { tags: "Categorías" };
+var c = { tags: "Categorías" };
 //#endregion
 //#region src/stories/molecules/ProjectCard/ProjectCard.tsx
-function c({ title: c, description: l, media: u, tags: d, href: f, render: p, headingLevel: m = 3, headingSize: h = 5, tagsLabel: g, className: _, id: v }) {
-	let y = e("projectCard", s), b = o({
-		render: p,
-		enabled: p !== void 0,
+function l(t) {
+	t.variant !== void 0 && e("ProjectCard", "tags[].variant", "`tags[].tone`");
+	let n = t.tone ?? t.variant ?? "neutral";
+	return n === "danger" ? "error" : n;
+}
+function u({ title: e, description: u, media: d, tags: f, href: p, render: m, headingLevel: h = 3, headingSize: g = 5, tagsLabel: _, className: v, id: y }) {
+	let b = t("projectCard", c), x = s({
+		render: m,
+		enabled: m !== void 0,
 		props: {
 			className: "project-card__link",
-			children: c
+			children: e
 		}
-	}) ?? (f === void 0 ? c : /* @__PURE__ */ i("a", {
-		href: f,
+	}) ?? (p === void 0 ? e : /* @__PURE__ */ a("a", {
+		href: p,
 		className: "project-card__link",
-		children: c
+		children: e
 	}));
-	return /* @__PURE__ */ a("article", {
-		id: v,
-		className: ["project-card", _].filter(Boolean).join(" "),
+	return /* @__PURE__ */ o("article", {
+		id: y,
+		className: ["project-card", v].filter(Boolean).join(" "),
 		children: [
-			u && /* @__PURE__ */ i("div", {
+			d && /* @__PURE__ */ a("div", {
 				className: "project-card__media",
-				children: /* @__PURE__ */ i("img", {
-					src: u.src,
-					alt: u.alt
+				children: /* @__PURE__ */ a("img", {
+					src: d.src,
+					alt: d.alt
 				})
 			}),
-			d && d.length > 0 && /* @__PURE__ */ i("ul", {
+			f && f.length > 0 && /* @__PURE__ */ a("ul", {
 				className: "project-card__tags",
-				"aria-label": y("tags", g),
-				children: d.map((e) => /* @__PURE__ */ i("li", { children: /* @__PURE__ */ i(r, {
-					variant: e.variant ?? "neutral",
+				"aria-label": b("tags", _),
+				children: f.map((e) => /* @__PURE__ */ a("li", { children: /* @__PURE__ */ a(i, {
+					tone: l(e),
 					children: e.label
 				}) }, e.id ?? e.label))
 			}),
-			/* @__PURE__ */ i(t, {
-				level: m,
-				size: h,
+			/* @__PURE__ */ a(n, {
+				level: h,
+				size: g,
 				className: "project-card__title",
-				children: b
+				children: x
 			}),
-			l && /* @__PURE__ */ i(n, {
+			u && /* @__PURE__ */ a(r, {
 				className: "project-card__description",
-				children: l
+				children: u
 			})
 		]
 	});
 }
 //#endregion
-export { c as ProjectCard };
+export { u as ProjectCard };

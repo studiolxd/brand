@@ -26,7 +26,7 @@ function a({ eyebrow: a, title: o, description: s, actions: c, level: l = 1, siz
 				})]
 			}) : m,
 			s && /* @__PURE__ */ r(t, {
-				size: "large",
+				size: "lg",
 				children: s
 			}),
 			p

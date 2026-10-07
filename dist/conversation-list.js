@@ -42,7 +42,7 @@ var p = s(function({ conversations: s, activeId: p, onNew: m, onSelect: h, onDel
 			"aria-busy": b || void 0,
 			children: [
 				M === "error" && /* @__PURE__ */ l(a, {
-					variant: "error",
+					tone: "error",
 					title: j("error", T),
 					description: S,
 					className: "conversation-list__state"

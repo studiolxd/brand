@@ -1,44 +1,47 @@
 'use client';
 import './banner.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
-import { t } from "./_shared/closebutton.js";
-import { forwardRef as n } from "react";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { n as e } from "./_shared/env.js";
+import { n as t } from "./_shared/brandmessagescontext.js";
+import { t as n } from "./_shared/closebutton.js";
+import { forwardRef as r } from "react";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/messages/es/banner.ts
-var a = { dismiss: "Descartar aviso" }, o = {
+var o = { dismiss: "Descartar aviso" }, s = {
 	info: "status",
 	warning: "alert",
 	error: "alert"
-}, s = n(function({ variant: n = "info", children: s, actions: c, onDismiss: l, dismissLabel: u, className: d, role: f, "aria-live": p, ...m }, h) {
-	let g = e("banner", a), _ = f ?? o[n], v = [
+}, c = r(function({ tone: r, variant: c, children: l, actions: u, onDismiss: d, dismissLabel: f, className: p, role: m, "aria-live": h, ...g }, _) {
+	let v = t("banner", o);
+	c !== void 0 && e("Banner", "variant", "`tone`");
+	let y = r ?? c ?? "info", b = m ?? s[y], x = [
 		"banner",
-		`banner--${n}`,
-		n === "info" || n === "error" ? "surface-dark" : "",
-		l ? "banner--dismissible" : "",
-		d ?? ""
-	].filter(Boolean).join(" "), y = n === "warning" ? " surface-light" : "";
-	return /* @__PURE__ */ i("div", {
-		ref: h,
-		role: _,
-		"aria-live": p ?? (_ === "alert" ? "assertive" : "polite"),
-		className: v,
-		...m,
+		`banner--${y}`,
+		y === "info" || y === "error" ? "surface-dark" : "",
+		d ? "banner--dismissible" : "",
+		p ?? ""
+	].filter(Boolean).join(" "), S = y === "warning" ? " surface-light" : "";
+	return /* @__PURE__ */ a("div", {
+		ref: _,
+		role: b,
+		"aria-live": h ?? (b === "alert" ? "assertive" : "polite"),
+		className: x,
+		...g,
 		children: [
-			/* @__PURE__ */ r("div", {
-				className: `banner__content${y}`,
-				children: s
+			/* @__PURE__ */ i("div", {
+				className: `banner__content${S}`,
+				children: l
 			}),
-			c && /* @__PURE__ */ r("div", {
-				className: `banner__actions${y}`,
-				children: c
+			u && /* @__PURE__ */ i("div", {
+				className: `banner__actions${S}`,
+				children: u
 			}),
-			l && /* @__PURE__ */ r(t, {
-				className: `banner__close${y}`,
-				label: g("dismiss", u),
-				onClick: l
+			d && /* @__PURE__ */ i(n, {
+				className: `banner__close${S}`,
+				label: v("dismiss", f),
+				onClick: d
 			})
 		]
 	});
 });
 //#endregion
-export { s as Banner };
+export { c as Banner };

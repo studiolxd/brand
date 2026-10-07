@@ -17,7 +17,7 @@ var s = {
 	flat: "neutral"
 }, l = {
 	positive: "success",
-	negative: "danger",
+	negative: "error",
 	neutral: "neutral"
 }, u = i(function({ label: i, value: u, delta: d, description: f, icon: p, size: m = "md", className: h, ...g }, _) {
 	let v = e("statTile", s), y = [
@@ -43,7 +43,7 @@ var s = {
 				children: u
 			}),
 			d && /* @__PURE__ */ o(r, {
-				variant: l[x],
+				tone: l[x],
 				className: "stat-tile__delta",
 				children: [
 					/* @__PURE__ */ a(t, {

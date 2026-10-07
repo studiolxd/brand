@@ -1,4 +1,6 @@
 import './Text.css';
+/** Intención de un fragmento de texto en línea. */
+export type TextTone = 'default' | 'muted' | 'error' | 'destructive' | 'success';
 export interface TextProps extends React.ComponentPropsWithoutRef<'span'> {
     /**
      * Qué elemento se pinta, que es lo mismo que decir **qué significa**:
@@ -7,11 +9,15 @@ export interface TextProps extends React.ComponentPropsWithoutRef<'span'> {
      */
     as?: 'span' | 'em' | 'strong' | 'del' | 's';
     /**
-     * Intención del fragmento. `destructive` es la palabra que dice que algo se
-     * pierde («esta acción **borra** el curso»); `success`, la que dice que salió
-     * bien; `muted`, una aclaración secundaria.
+     * Intención del fragmento. Mismo vocabulario que el resto del sistema:
+     * `error` para un **estado** que ha fallado («el cupón no es válido»),
+     * `destructive` para el aviso de una **acción** que hace perder algo («esta
+     * acción **borra** el curso», en la descripción de un `ConfirmDialog`
+     * destructivo); `success`, la que dice que salió bien; `muted`, una
+     * aclaración secundaria. `error` y `destructive` se pintan con la misma
+     * tinta: lo que cambia es lo que dicen.
      */
-    tone?: 'default' | 'muted' | 'destructive' | 'success';
+    tone?: TextTone;
     /**
      * Tacha el fragmento con una línea y lo atenúa (tinta secundaria): lo que ya
      * está hecho, como un producto que ya está en el carrito. Es **solo
@@ -40,7 +46,7 @@ export interface TextProps extends React.ComponentPropsWithoutRef<'span'> {
  *   producto.
  * - **Tachado** (`strikethrough`, o `as="del"`/`as="s"`): lo hecho o lo que ya
  *   no vale, en tinta atenuada.
- * - **Intención** (`tone`): énfasis con carga —destructiva o de logro— en tinta
+ * - **Intención** (`tone`): énfasis con carga —de error, destructiva o de logro— en tinta
  *   de feedback. Es color de texto sobre la superficie, **nunca un relleno**:
  *   una palabra resaltada dentro de un párrafo no lleva fondo.
  *

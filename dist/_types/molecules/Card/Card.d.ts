@@ -1,7 +1,10 @@
 import './Card.css';
 import { type HeadingLevel, type HeadingSize } from '../../atoms/Heading/Heading';
 import { type ParagraphProps } from '../../atoms/Paragraph/Paragraph';
-export type CardColor = 'primary' | 'outline' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
+/** Color de fondo de la tarjeta. */
+export type CardTone = 'primary' | 'outline' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
+/** @deprecated Usa `CardTone`: la prop de color se llama `tone` desde la v51. Se retira en la v52. */
+export type CardColor = CardTone;
 /**
  * Maqueta de la tarjeta. `default` es la de siempre: una columna de texto.
  * `square` y `split` son las dos tarjetas de marketing —la cuadrada con la
@@ -64,7 +67,12 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
      */
     ctaLabel?: string;
     /** Color de fondo. Default: `'outline'`. */
-    color?: CardColor;
+    tone?: CardTone;
+    /**
+     * @deprecated Usa `tone`. Sigue funcionando, con un aviso en desarrollo,
+     * hasta la v52.
+     */
+    color?: CardTone;
     /** Maqueta de la tarjeta. Default: `'default'`. */
     variant?: CardVariant;
     /**

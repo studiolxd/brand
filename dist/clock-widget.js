@@ -74,7 +74,7 @@ var b = {
 				]
 			}),
 			D ? /* @__PURE__ */ h(r, {
-				variant: "error",
+				tone: "error",
 				children: D
 			}) : null,
 			Q ? /* @__PURE__ */ g(m, { children: [
