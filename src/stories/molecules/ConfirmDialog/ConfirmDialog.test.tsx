@@ -254,6 +254,47 @@ describe('ConfirmDialog', () => {
     renderDialog({ open: false });
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
+
+  describe('al cerrar y volver a abrir', () => {
+    const base = {
+      title: '¿Borrar la organización?',
+      confirmLabel: 'Borrar',
+      confirmPhrase: 'acme',
+      confirmPhraseLabel: 'Escribe acme para confirmar',
+      confirmPhraseMismatch: 'El nombre no coincide.',
+      onCancel: () => {},
+    };
+
+    it('la barrera se rearma: campo vacío, sin error y el botón apagado', async () => {
+      const { rerender } = render(<ConfirmDialog open onConfirm={() => {}} {...base} />);
+      const campo = screen.getByLabelText('Escribe acme para confirmar');
+      await userEvent.type(campo, 'acne{Enter}');
+      expect(await screen.findByText('El nombre no coincide.')).toBeInTheDocument();
+
+      rerender(<ConfirmDialog open={false} onConfirm={() => {}} {...base} />);
+      await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+      rerender(<ConfirmDialog open onConfirm={() => {}} {...base} />);
+
+      expect(await screen.findByLabelText('Escribe acme para confirmar')).toHaveValue('');
+      expect(screen.queryByText('El nombre no coincide.')).not.toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Borrar' })).toBeDisabled();
+    });
+
+    it('una confirmación que se quedó colgada no deja el diálogo ocupado', async () => {
+      const onConfirm = () => new Promise<void>(() => {});
+      const props = { ...base, confirmPhrase: undefined, pendingLabel: 'Borrando…' };
+      const { rerender } = render(<ConfirmDialog open onConfirm={onConfirm} {...props} />);
+      await userEvent.click(screen.getByRole('button', { name: 'Borrar' }));
+      expect(await screen.findByRole('button', { name: 'Borrando…' })).toBeDisabled();
+
+      rerender(<ConfirmDialog open={false} onConfirm={onConfirm} {...props} />);
+      await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+      rerender(<ConfirmDialog open onConfirm={onConfirm} {...props} />);
+
+      expect(await screen.findByRole('button', { name: 'Borrar' })).toBeEnabled();
+      expect(screen.getByRole('button', { name: 'Cancelar' })).toBeEnabled();
+    });
+  });
 });
 
 describe('el cromo sale del catálogo y `confirmLabel` no', () => {
