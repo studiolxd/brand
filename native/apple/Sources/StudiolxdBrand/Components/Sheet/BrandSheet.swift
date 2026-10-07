@@ -78,15 +78,18 @@ public struct BrandSheetContent<Content: View, Footer: View>: View {
                     .frame(width: 0, height: 0).clipped().opacity(0)
                     .accessibilityAddTraits(.isHeader)
             } else {
+                // El título es un `<h2>` y `.sheet__title` no fija `line-height`: hereda el de `h2` (`text.h2-line-height`).
                 Text(title)
-                    .brandFont(size: T.titleFontSize, weight: T.titleFontWeight, relativeTo: .title)
+                    .brandLinedFont(size: T.titleFontSize, weight: T.titleFontWeight, lineHeight: BrandTextTokens.h2LineHeight,
+                                    relativeTo: .title)
                     .foregroundStyle(T.titleColor)
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityAddTraits(.isHeader)
             }
             if let description {
+                // `.sheet__description` hereda el `line-height` del cuerpo (`text.line-height`).
                 Text(description)
-                    .brandFont(size: T.descriptionFontSize)
+                    .brandLinedFont(size: T.descriptionFontSize, lineHeight: BrandTextTokens.lineHeight)
                     .foregroundStyle(T.descriptionColor)
                     .fixedSize(horizontal: false, vertical: true)
             }

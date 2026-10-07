@@ -42,11 +42,10 @@ struct BrandFieldLayout<Control: View>: View {
         VStack(alignment: .leading, spacing: gap) {
             if !labelHidden {
                 Text(label)
-                    .brandFont(size: labelSize, weight: BrandLabelTokens.fontWeight)
-                    .lineSpacing(labelSize * (BrandLabelTokens.lineHeight - 1))
+                    .brandLinedFont(size: labelSize, weight: BrandLabelTokens.fontWeight, lineHeight: BrandLabelTokens.lineHeight)
                     .tracking(BrandLabelTokens.letterSpacing * labelSize)
                     .foregroundStyle(BrandLabelTokens.color)
-                    .frame(minHeight: labelSize * BrandLabelTokens.lineHeight, alignment: .leading)
+                    .fixedSize(horizontal: false, vertical: true)
                     .accessibilityHidden(true)
             }
             control
@@ -54,19 +53,16 @@ struct BrandFieldLayout<Control: View>: View {
                 .accessibilityHint(hint)
             if let errorMessage {
                 Text(errorMessage)
-                    .brandFont(size: BrandFormTokens.errorFontSize, weight: BrandFormTokens.errorFontWeight)
-                    .lineSpacing(BrandFormTokens.errorFontSize * (BrandFormTokens.errorLineHeight - 1))
+                    .brandLinedFont(size: BrandFormTokens.errorFontSize, weight: BrandFormTokens.errorFontWeight,
+                                    lineHeight: BrandFormTokens.errorLineHeight)
                     .foregroundStyle(BrandFormTokens.errorColor)
-                    .frame(minHeight: BrandFormTokens.errorFontSize * BrandFormTokens.errorLineHeight, alignment: .leading)
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityHidden(true)
             }
             if let helperText {
                 Text(helperText)
-                    .brandFont(size: helper.fontSize, weight: helper.fontWeight)
-                    .lineSpacing(helper.fontSize * (helper.lineHeight - 1))
+                    .brandLinedFont(size: helper.fontSize, weight: helper.fontWeight, lineHeight: helper.lineHeight)
                     .foregroundStyle(helper.color)
-                    .frame(minHeight: helper.fontSize * helper.lineHeight, alignment: .leading)
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityHidden(true)
             }

@@ -81,9 +81,8 @@ public struct BrandSwitcherField: View {
             Toggle(isOn: isOn) {
                 if !labelHidden {
                     label
-                        .brandFont(size: labelFontSize, weight: F.labelFontWeight)
+                        .brandLinedFont(size: labelFontSize, weight: F.labelFontWeight, lineHeight: F.labelLineHeight)
                         .foregroundStyle(F.labelColor)
-                        .lineSpacing(labelFontSize * (F.labelLineHeight - 1))
                         .multilineTextAlignment(.leading)
                         .fixedSize(horizontal: false, vertical: true)
                 }
@@ -94,9 +93,8 @@ public struct BrandSwitcherField: View {
 
             if let errorMessage {
                 Text(verbatim: errorMessage)
-                    .brandFont(size: F.errorFontSize, weight: F.errorFontWeight)
+                    .brandLinedFont(size: F.errorFontSize, weight: F.errorFontWeight, lineHeight: F.errorLineHeight)
                     .foregroundStyle(F.errorColor)
-                    .lineSpacing(F.errorFontSize * (F.errorLineHeight - 1))
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityHidden(true)
                     .onAppear { announce(errorMessage) }
@@ -104,9 +102,8 @@ public struct BrandSwitcherField: View {
             }
             if let helperText {
                 Text(verbatim: helperText)
-                    .brandFont(size: F.helperFontSize, weight: F.helperFontWeight)
+                    .brandLinedFont(size: F.helperFontSize, weight: F.helperFontWeight, lineHeight: F.helperLineHeight)
                     .foregroundStyle(F.helperColor)
-                    .lineSpacing(F.helperFontSize * (F.helperLineHeight - 1))
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityHidden(true)
             }
