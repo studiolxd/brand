@@ -4291,6 +4291,7 @@ html.dark {
   --alert-border-color: var(--color-text-on-dark); /** Borde por defecto — blanco. Sobre página clara dibuja el contorno del relleno prusia */
   --alert-title-font-size: var(--text-font-size); /** El título hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
   --alert-title-font-weight: var(--font-weight-emphasis); /** Peso del título */
+  --alert-title-letter-spacing: var(--text-letter-spacing); /** Tracking del título — el del cuerpo (0em). El título del `Alert` es un `<p>`, no un encabezado, así que no lleva el tracking de los títulos; el token lo fija para que no dependa del elemento. El `Toast`, cuyo título sí es un `<h2>`, lo cambia por el suyo (`toast.title-letter-spacing`) */
   --alert-title-color: var(--color-text-on-dark); /** Texto blanco sobre el relleno prusia */
   --alert-description-font-size: var(--text-font-size); /** La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
   --alert-description-line-height: var(--text-line-height); /** Interlineado de la descripción — el del cuerpo */
@@ -4356,6 +4357,7 @@ html.dark {
   --toast-duration-in: var(--motion-duration-base); /** Duración de la entrada. Con `prefers-reduced-motion: reduce` vale 0ms y el aviso aparece sin animación */
   --toast-duration-out: var(--motion-duration-base); /** Duración de la salida. Con `prefers-reduced-motion: reduce` vale 0ms */
   --toast-easing: var(--motion-easing-out); /** Curva de entrada y salida — lo que aparece y desaparece frena al final */
+  --toast-title-letter-spacing: var(--text-h2-letter-spacing); /** Tracking del título del aviso (−0,02em): el de un `<h2>`, que es el elemento que da el motor al título (`Toast.Title`). El token lo fija en la tarjeta para que no dependa de la herencia de `base.css` ni del nivel de encabezado; sustituye al `alert.title-letter-spacing` del `Alert`, cuyo título es un `<p>` */
 }
 /**
  * Do not edit directly, this file was auto-generated.
