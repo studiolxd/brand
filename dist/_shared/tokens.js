@@ -2482,7 +2482,7 @@ var e = {
 	"--command-palette-input-padding-block": "0.75rem",
 	"--command-palette-input-padding-inline": "0.5rem",
 	"--command-palette-input-font-size": "1.25rem",
-	"--command-palette-input-line-height": "1",
+	"--command-palette-input-line-height": "1.15",
 	"--command-palette-input-border-width": "1px",
 	"--command-palette-input-border-color": "#111e30",
 	"--command-palette-input-placeholder-color": "#4a4a4a",
