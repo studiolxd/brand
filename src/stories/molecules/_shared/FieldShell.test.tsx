@@ -105,23 +105,20 @@ const CASES: Case[] = [
     required: null,
   },
   {
-    // Darle `required` cambia la API de un campo con versión nativa (ficha de
-    // paridad): se deja para decisión.
     name: 'DatePickerField',
-    render: (p) => <DatePickerField id={ID} label={LABEL} {...drop(p, 'required')} />,
+    render: (p) => <DatePickerField id={ID} label={LABEL} {...p} />,
     named: byId(ID),
-    required: null,
+    required: { how: 'native' },
   },
   {
     // Compuesto: la etiqueta nombra el campo de fecha y el grupo; la ayuda y
-    // el error describen el grupo. `required` dependería de `DatePicker` (ver
-    // arriba).
+    // el error describen el grupo. `required` va en el campo de la fecha.
     name: 'DateTimeField',
-    render: (p) => <DateTimeField id={ID} label={LABEL} {...drop(p, 'required')} />,
+    render: (p) => <DateTimeField id={ID} label={LABEL} {...p} />,
     named: byId(`${ID}-date`),
     described: () => screen.getByRole('group', { name: LABEL }),
     invalid: byId(`${ID}-date`),
-    required: null,
+    required: { how: 'native', on: byId(`${ID}-date`) },
   },
   {
     // El disparador es un botón que abre un menú: como en ColorPickerField.

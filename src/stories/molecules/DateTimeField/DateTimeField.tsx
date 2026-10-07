@@ -32,6 +32,12 @@ export interface DateTimeFieldProps {
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
   readOnly?: boolean;
+  /**
+   * Campo obligatorio: `required` nativo en el campo de la fecha y, en la
+   * hora, el de sus desplegables (con `aria-required` en su grupo), como
+   * `TimeField`.
+   */
+  required?: boolean;
   /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */
   error?: boolean;
   /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */
@@ -106,6 +112,7 @@ export const DateTimeField = forwardRef<HTMLInputElement, DateTimeFieldProps>(fu
   size: sizeProp,
   disabled,
   readOnly,
+  required,
   error = false,
   errorMessage,
   helperText,
@@ -177,6 +184,7 @@ export const DateTimeField = forwardRef<HTMLInputElement, DateTimeFieldProps>(fu
           size={size}
           disabled={disabled}
           readOnly={readOnly}
+          required={required}
           error={field.hasError}
           locale={locale}
           calendarLabel={calendarLabel ?? label}
@@ -199,6 +207,7 @@ export const DateTimeField = forwardRef<HTMLInputElement, DateTimeFieldProps>(fu
           size={size}
           disabled={disabled}
           readOnly={readOnly}
+          required={required}
           error={field.hasError}
           hoursLabel={hoursLabel}
           minutesLabel={minutesLabel}
