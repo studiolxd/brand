@@ -1664,6 +1664,7 @@ html.dark {
   --dropdown-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
   --dropdown-field-padding-inline: var(--select-padding-inline); /** Padding inline del control: el del Select */
   --dropdown-field-font-weight: var(--select-font-weight); /** Peso: el del Select */
+  --dropdown-field-line-height: var(--select-line-height); /** Interlineado del control: el del Select. Sin él, el botón heredaba el 1,15 de normalize.css */
   --dropdown-field-color: var(--select-color); /** Texto del control */
   --dropdown-field-border-width: var(--select-border-width); /** Borde rectangular, como el Select */
   --dropdown-field-border-color: var(--select-border-color); /** Color del borde */
@@ -2684,6 +2685,7 @@ html.dark {
   --command-palette-item-gap: var(--spacing-2); /** Gap entre icono y texto del ítem */
   --command-palette-item-font-size: var(--font-size-2); /** Tamaño de texto de los ítems */
   --command-palette-item-icon-size: var(--font-size-4); /** Talla del icono de los ítems */
+  --command-palette-input-line-height: var(--input-line-height); /** Interlineado del buscador: el del Input. Sin él, heredaba el 1,15 de normalize.css */
   --command-palette-input-border-width: var(--border-width-default); /** Grosor de la línea bajo el buscador */
   --command-palette-input-placeholder-color: var(--color-text-placeholder-on-light); /** Color del placeholder del buscador */
   --command-palette-input-focus-ring-color: var(--color-primary); /** Color del anillo de foco del buscador */
@@ -2816,6 +2818,7 @@ html.dark {
   --pagination-summary-color: var(--color-text-on-light); /** Color del texto de total de resultados */
   --pagination-btn-height: var(--button-height); /** Altura del botón de página — la del `Button md` (40px). También su lado mínimo: la caja es cuadrada */
   --pagination-btn-font-size: var(--button-font-size); /** Tipografía del botón de página — la del `Button md` */
+  --pagination-btn-line-height: var(--button-line-height); /** Interlineado del botón de página — el del `Button`. Sin él, heredaba el 1,15 de normalize.css */
   --pagination-btn-color: var(--color-primary); /** Tinta del botón en reposo */
   --pagination-btn-border-color: var(--color-primary); /** Borde del botón en reposo */
   --pagination-btn-hover-bg: var(--color-primary); /** Relleno en hover — el outline se invierte, sin subrayado */
@@ -3631,6 +3634,7 @@ html.dark {
   --calendar-title-color: var(--color-text-on-light); /** Color del título del mes */
   --calendar-weekday-color: var(--color-text-muted-on-light); /** Color de las cabeceras de día de semana */
   --calendar-day-font-weight: var(--font-weight-default); /** Peso de fuente de los días */
+  --calendar-day-line-height: var(--control-line-height); /** Interlineado de los días y de los años: el de los controles. Sin él, el botón heredaba el 1,15 de normalize.css */
   --calendar-day-radius: var(--border-radius-default); /** Radio de borde de los botones de día */
   --calendar-day-color: var(--color-text-on-light); /** Color de texto de los días */
   --calendar-day-focus-ring-color: var(--color-primary); /** Color del focus ring de los días */
@@ -3702,6 +3706,7 @@ html.dark {
   --calendar-planner-day-number-size: var(--spacing-5); /** Tamaño (ancho y alto) del badge con el número */
   --calendar-planner-items-gap: var(--spacing-1); /** Gap entre elementos/tags dentro de la celda */
   --calendar-planner-more-font-size: var(--font-size-1); /** Tamaño del texto '+N más' */
+  --calendar-planner-more-line-height: var(--line-height-none); /** Interlineado del texto '+N más': una línea justa. No es un control con talla (no tiene alto propio: es un rótulo pulsable dentro de la casilla), así que no bebe de control.line-height. Sin él, el botón heredaba el 1,15 de normalize.css */
   --calendar-planner-weekday-gap: var(--spacing-1); /** Aire entre el nombre del día y su número en la cabecera de la vista de semana */
   --calendar-planner-event-time-font-size: var(--font-size-1); /** Tamaño de la hora del evento en la vista de semana */
   --calendar-planner-gap: var(--calendar-gap); /** Gap entre cabecera y cuadrícula — hereda de Calendar */
@@ -4830,6 +4835,7 @@ html.dark {
   --conversation-list-item-padding-block: var(--spacing-2); /** Aire vertical de cada conversación */
   --conversation-list-item-padding-inline: var(--spacing-3); /** Aire horizontal de cada conversación */
   --conversation-list-item-font-family: var(--font-family-sans); /** Familia tipográfica del título de la conversación */
+  --conversation-list-item-line-height: var(--line-height-none); /** Interlineado del título: una línea justa (el título no parte, va con elipsis), para que el alto de la fila lo marque su padding y no un interlineado heredado. Sin él, el botón heredaba el 1,15 de normalize.css */
   --conversation-list-transition-duration: var(--motion-duration-fast); /** Duración de la transición de color */
   --conversation-list-transition-easing: var(--motion-easing-default); /** Curva de la transición de color */
   --conversation-list-item-border-radius: var(--border-radius-default); /** Radio de cada conversación: recto, como todo el sistema */
@@ -5211,6 +5217,7 @@ html.dark {
   --collapsible-transition-easing: var(--motion-easing-default); /** Easing de abrir y cerrar */
   --collapsible-trigger-font-family: var(--control-font-family); /** Familia tipográfica del disparador */
   --collapsible-trigger-font-size: var(--control-font-size); /** Tamaño de fuente del disparador */
+  --collapsible-trigger-line-height: var(--text-line-height); /** Interlineado del disparador: el del texto corriente. Con `all: unset` el botón lo heredaba de su padre; ahora es fijo y no depende de dónde se monte */
   --collapsible-trigger-color: var(--color-text-on-light); /** Tinta del disparador */
   --collapsible-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
   --collapsible-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco */
@@ -5772,8 +5779,7 @@ html.dark {
   --heatmap-empty-pattern-width: var(--spacing-1); /** Ancho de la trama de la celda sin dato */
   --heatmap-legend-gap: var(--spacing-2); /** Separación entre los elementos de la leyenda */
   --heatmap-legend-font-size: var(--font-size-1); /** Tamaño del texto de la leyenda */
-  --heatmap-legend-swatch-size: var(--spacing-3); /** Lado del cuadradito de la leyenda */
-  --heatmap-legend-swatch-gap: var(--spacing-1); /** Separación entre cuadraditos de la leyenda */
+  --heatmap-legend-swatch-size: var(--spacing-3); /** Alto de la tira de la leyenda y ancho de cada uno de sus peldaños, que van pegados */
   --heatmap-margin-block-start: var(--spacing-3); /** Aire entre la matriz y su leyenda */
   --heatmap-step-1-bg: var(--color-chart-sequential-100); /** Paso 1 de la rampa de la matriz — sequential-100 de la rampa secuencial del sistema */
   --heatmap-step-2-bg: var(--color-chart-sequential-200); /** Paso 2 de la rampa de la matriz — sequential-200 de la rampa secuencial del sistema */
@@ -7226,6 +7232,7 @@ html.dark .surface-light {
   --code-block-font-size: var(--text-paragraph-small-font-size);
   --code-font-size: var(--code-block-font-size);
   --collapsible-trigger-font-size: var(--control-font-size);
+  --collapsible-trigger-line-height: var(--text-line-height);
   --description-list-term-font-size: var(--text-paragraph-small-font-size);
   --description-list-value-font-size: var(--text-font-size);
   --description-list-value-line-height: var(--text-line-height);
