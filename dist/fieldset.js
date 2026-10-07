@@ -1,8 +1,8 @@
 import './fieldset.css';
 import { jsx as e, jsxs as t } from "react/jsx-runtime";
 //#region src/stories/atoms/Fieldset/Fieldset.tsx
-function n({ legend: n, level: r = 2, weight: i, size: a, className: o, id: s, disabled: c, children: l }) {
-	let u = [
+function n({ legend: n, level: r = 2, weight: i, size: a, className: o, id: s, disabled: c, "aria-describedby": l, children: u }) {
+	let d = [
 		"fieldset__legend",
 		`fieldset__legend--${r}`,
 		i && `fieldset__legend--${i}`,
@@ -12,10 +12,11 @@ function n({ legend: n, level: r = 2, weight: i, size: a, className: o, id: s, d
 		className: ["fieldset", o].filter(Boolean).join(" "),
 		id: s,
 		disabled: c,
+		"aria-describedby": l,
 		children: [/* @__PURE__ */ e("legend", {
-			className: u,
+			className: d,
 			children: n
-		}), l]
+		}), u]
 	});
 }
 //#endregion

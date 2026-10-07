@@ -25,6 +25,8 @@ export interface MultiSelectFieldProps {
     name?: string;
     disabled?: boolean;
     readOnly?: boolean;
+    /** Obligatorio: `aria-required` en el `combobox` y `required` en el input oculto (ver `MultiSelect`). */
+    required?: boolean;
     /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */
     error?: boolean;
     /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */

@@ -64,7 +64,7 @@ function d({ sortable: r = !1, sorted: i = !1, onSort: a, actions: c = !1, actio
 	});
 }
 function f({ onClick: e, interactive: t = !1, selected: n = !1, label: r, children: i, className: a, ...s }) {
-	let c = t || !!e, l = c ? n : n || void 0, u = [
+	let c = t || !!e, l = [
 		"table__row",
 		c ? "table__row--interactive" : "",
 		n ? "table__row--selected" : "",
@@ -72,9 +72,8 @@ function f({ onClick: e, interactive: t = !1, selected: n = !1, label: r, childr
 	].filter(Boolean).join(" ");
 	return c ? /* @__PURE__ */ o("tr", {
 		...s,
-		className: u,
+		className: l,
 		"aria-label": r,
-		"aria-selected": l,
 		onClick: e,
 		onKeyDown: (t) => {
 			(t.key === "Enter" || t.key === " ") && (t.preventDefault(), e?.());
@@ -83,9 +82,8 @@ function f({ onClick: e, interactive: t = !1, selected: n = !1, label: r, childr
 		children: i
 	}) : /* @__PURE__ */ o("tr", {
 		...s,
-		className: u,
+		className: l,
 		"aria-label": r,
-		"aria-selected": l,
 		children: i
 	});
 }

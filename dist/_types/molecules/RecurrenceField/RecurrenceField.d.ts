@@ -59,6 +59,16 @@ export interface RecurrenceFieldProps {
     legend?: ReactNode;
     /** Deshabilita el editor entero. */
     disabled?: boolean;
+    /**
+     * Texto de ayuda del editor entero, bajo los campos. Describe el grupo
+     * (`aria-describedby` en el `fieldset`, o en el `role="group"` sin `legend`).
+     */
+    helperText?: string;
+    /**
+     * Mensaje de error del editor entero (una regla que no cuadra con el
+     * evento). Se anuncia (`role="alert"`) y describe el grupo, como la ayuda.
+     */
+    errorMessage?: string;
     /** Talla de los campos. Sin ella, la del contexto de formulario. */
     size?: 'sm' | 'md' | 'lg';
     /** Locale de los nombres de los días y del campo de fecha. Default `'es-ES'`. */
@@ -95,4 +105,4 @@ export interface RecurrenceFieldProps {
  * Es **controlado**, como el resto de campos del sistema: recibe `value` y
  * llama a `onValueChange` con el valor entero. `null` es «no se repite».
  */
-export declare function RecurrenceField({ value, onValueChange, id: idProp, legend, disabled, size, locale, weekStartsOn, minDate, maxDate, today, className, frequencyLabel, weekdaysLabel, endLabel, }: RecurrenceFieldProps): import("react/jsx-runtime").JSX.Element;
+export declare function RecurrenceField({ value, onValueChange, id: idProp, legend, disabled, helperText, errorMessage, size, locale, weekStartsOn, minDate, maxDate, today, className, frequencyLabel, weekdaysLabel, endLabel, }: RecurrenceFieldProps): import("react/jsx-runtime").JSX.Element;

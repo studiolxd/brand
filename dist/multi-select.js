@@ -8,48 +8,49 @@ import { forwardRef as i, useRef as a, useState as o } from "react";
 import { jsx as s, jsxs as c } from "react/jsx-runtime";
 import { Select as l } from "@base-ui/react/select";
 //#region src/stories/atoms/MultiSelect/MultiSelect.tsx
-var u = i(function({ options: i, value: u, defaultValue: d = [], placeholder: f, disabled: p, readOnly: m, size: h = "md", onValueChange: g, id: _, name: v, error: y = !1, onBlur: b, className: x, "aria-label": S, "aria-labelledby": C, "aria-describedby": w, removeLabel: T, container: E }, D) {
-	let O = e("multiSelect"), k = n(E), [A, j] = o(!1), [M, N] = o(d), P = a(null), F = a(null), I = a(null), L = u === void 0 ? M : u;
-	function R(e) {
-		u === void 0 && N(e), g?.(e);
-	}
+var u = i(function({ options: i, value: u, defaultValue: d = [], placeholder: f, disabled: p, readOnly: m, required: h, size: g = "md", onValueChange: _, id: v, name: y, error: b = !1, onBlur: x, className: S, "aria-label": C, "aria-labelledby": w, "aria-describedby": T, removeLabel: E, container: D }, O) {
+	let k = e("multiSelect"), A = n(D), [j, M] = o(!1), [N, P] = o(d), F = a(null), I = a(null), L = a(null), R = u === void 0 ? N : u;
 	function z(e) {
-		R(L.filter((t) => t !== e));
+		u === void 0 && P(e), _?.(e);
 	}
 	function B(e) {
-		p || m || e.target instanceof Element && (e.target.closest(".multi-select__pill-remove") || F.current?.contains(e.target) || (e.preventDefault(), F.current?.focus(), j(!A)));
+		z(R.filter((t) => t !== e));
 	}
 	function V(e) {
-		return e instanceof Node && (!!F.current?.contains(e) || !!I.current?.contains(e));
+		p || m || e.target instanceof Element && (e.target.closest(".multi-select__pill-remove") || I.current?.contains(e.target) || (e.preventDefault(), I.current?.focus(), M(!j)));
 	}
 	function H(e) {
-		V(e.relatedTarget) || b?.(e);
+		return e instanceof Node && (!!I.current?.contains(e) || !!L.current?.contains(e));
 	}
-	let U = [
+	function U(e) {
+		H(e.relatedTarget) || x?.(e);
+	}
+	let W = [
 		"multi-select",
-		h === "md" ? "" : `multi-select--${h}`,
+		g === "md" ? "" : `multi-select--${g}`,
 		p ? "multi-select--disabled" : "",
-		y ? "multi-select--error" : "",
-		x ?? ""
-	].filter(Boolean).join(" "), W = ["multi-select__content", h === "md" ? "" : `multi-select__content--${h}`].filter(Boolean).join(" ");
+		b ? "multi-select--error" : "",
+		S ?? ""
+	].filter(Boolean).join(" "), G = ["multi-select__content", g === "md" ? "" : `multi-select__content--${g}`].filter(Boolean).join(" ");
 	return /* @__PURE__ */ c(l.Root, {
 		multiple: !0,
-		value: L,
-		onValueChange: R,
-		open: A,
-		onOpenChange: j,
-		name: v,
+		value: R,
+		onValueChange: z,
+		open: j,
+		onOpenChange: M,
+		name: y,
 		disabled: p,
 		readOnly: m,
+		required: h,
 		modal: !1,
 		children: [/* @__PURE__ */ c("div", {
-			ref: P,
-			className: U,
-			"data-popup-open": A || void 0,
-			onPointerDown: B,
+			ref: F,
+			className: W,
+			"data-popup-open": j || void 0,
+			onPointerDown: V,
 			children: [/* @__PURE__ */ c("div", {
 				className: "multi-select__values",
-				children: [L.map((e) => {
+				children: [R.map((e) => {
 					let n = i.find((t) => t.value === e);
 					return n ? /* @__PURE__ */ c("span", {
 						className: "multi-select__pill",
@@ -59,10 +60,10 @@ var u = i(function({ options: i, value: u, defaultValue: d = [], placeholder: f,
 						}), !p && !m && /* @__PURE__ */ s("button", {
 							type: "button",
 							className: "multi-select__pill-remove",
-							"aria-label": O("remove", T)(n.label),
+							"aria-label": k("remove", E)(n.label),
 							tabIndex: -1,
 							onClick: (t) => {
-								t.stopPropagation(), z(e), F.current?.focus();
+								t.stopPropagation(), B(e), I.current?.focus();
 							},
 							children: /* @__PURE__ */ s(t, {
 								name: "close",
@@ -72,21 +73,21 @@ var u = i(function({ options: i, value: u, defaultValue: d = [], placeholder: f,
 					}, e) : null;
 				}), /* @__PURE__ */ s(l.Trigger, {
 					ref: (e) => {
-						F.current = e, r(D, e);
+						I.current = e, r(O, e);
 					},
 					render: /* @__PURE__ */ s("div", {}),
 					nativeButton: !1,
 					className: "multi-select__combobox",
-					id: _,
-					"aria-label": C ? void 0 : S ?? O("placeholder", f),
-					"aria-labelledby": C,
-					"aria-describedby": w,
-					"aria-invalid": y || void 0,
+					id: v,
+					"aria-label": w ? void 0 : C ?? k("placeholder", f),
+					"aria-labelledby": w,
+					"aria-describedby": T,
+					"aria-invalid": b || void 0,
 					"aria-readonly": m || void 0,
-					onBlur: H,
-					children: L.length === 0 && /* @__PURE__ */ s("span", {
+					onBlur: U,
+					children: R.length === 0 && /* @__PURE__ */ s("span", {
 						className: "multi-select__placeholder",
-						children: O("placeholder", f)
+						children: k("placeholder", f)
 					})
 				})]
 			}), /* @__PURE__ */ s(t, {
@@ -94,18 +95,18 @@ var u = i(function({ options: i, value: u, defaultValue: d = [], placeholder: f,
 				className: "multi-select__icon"
 			})]
 		}), /* @__PURE__ */ s(l.Portal, {
-			container: k,
+			container: A,
 			children: /* @__PURE__ */ s(l.Positioner, {
 				className: "multi-select__positioner",
-				anchor: P,
+				anchor: F,
 				align: "start",
 				sideOffset: -1,
 				alignItemWithTrigger: !1,
 				children: /* @__PURE__ */ s(l.Popup, {
-					ref: I,
-					className: W,
-					"aria-label": S ?? f,
-					onBlur: H,
+					ref: L,
+					className: G,
+					"aria-label": C ?? f,
+					onBlur: U,
 					children: i.map((e) => /* @__PURE__ */ c(l.Item, {
 						value: e.value,
 						"aria-label": e["aria-label"] ?? e.label,

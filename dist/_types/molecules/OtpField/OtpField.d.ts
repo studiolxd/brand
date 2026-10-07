@@ -17,6 +17,8 @@ export interface OtpFieldProps {
     name?: string;
     disabled?: boolean;
     readOnly?: boolean;
+    /** Obligatorio: `required` nativo en cada celda (ver `OtpInput`). */
+    required?: boolean;
     /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */
     error?: boolean;
     /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */

@@ -16,8 +16,8 @@ export interface PasswordFieldMessages {
 export interface PasswordFieldProps extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size' | 'type'> {
     /**
      * Etiqueta del campo. **Opcional**: si se omite, el componente renderiza solo
-     * el campo + toggle (sin `<label>`, sin error ni ayuda), para componerlo
-     * dentro de una capa de formulario propia.
+     * el campo + toggle, sin `<label>`, para componerlo dentro de una capa de
+     * formulario propia (el error y la ayuda se pintan igual si se pasan).
      */
     label?: string;
     /**

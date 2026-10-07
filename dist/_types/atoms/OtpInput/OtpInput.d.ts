@@ -21,6 +21,8 @@ export interface OtpInputProps {
     onComplete?: (value: string) => void;
     disabled?: boolean;
     readOnly?: boolean;
+    /** Obligatorio: `required` nativo en cada celda — un código a medias no vale. */
+    required?: boolean;
     error?: boolean;
     size?: 'sm' | 'md' | 'lg';
     /** @deprecated Usa el atributo nativo `aria-describedby`. */

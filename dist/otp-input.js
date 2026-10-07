@@ -5,110 +5,111 @@ import { Input as t } from "./input.js";
 import { forwardRef as n, useCallback as r, useEffect as i, useRef as a, useState as o } from "react";
 import { jsx as s, jsxs as c } from "react/jsx-runtime";
 //#region src/stories/atoms/OtpInput/OtpInput.tsx
-var l = n(function({ length: n, value: l, defaultValue: u, onChange: d, onComplete: f, disabled: p, readOnly: m, error: h = !1, size: g = "md", describedBy: _, "aria-describedby": v, "aria-label": y, "aria-labelledby": b, groupLabel: x, id: S, name: C, onBlur: w, className: T, digitLabel: E }, D) {
-	let O = e("otpInput"), k = l !== void 0, [A, j] = o(() => {
+var l = n(function({ length: n, value: l, defaultValue: u, onChange: d, onComplete: f, disabled: p, readOnly: m, required: h, error: g = !1, size: _ = "md", describedBy: v, "aria-describedby": y, "aria-label": b, "aria-labelledby": x, groupLabel: S, id: C, name: w, onBlur: T, className: E, digitLabel: D }, O) {
+	let k = e("otpInput"), A = l !== void 0, [j, M] = o(() => {
 		let e = u ?? "";
 		return Array.from({ length: n }, (t, n) => e[n] ?? "");
-	}), M = a(null), N = k ? Array.from({ length: n }, (e, t) => l[t] ?? "") : A;
+	}), N = a(null), P = A ? Array.from({ length: n }, (e, t) => l[t] ?? "") : j;
 	i(() => {
-		if (k) return;
-		let e = M.current?.closest("form");
+		if (A) return;
+		let e = N.current?.closest("form");
 		if (!e) return;
 		let t = () => {
 			let e = u ?? "";
-			j(Array.from({ length: n }, (t, n) => e[n] ?? ""));
+			M(Array.from({ length: n }, (t, n) => e[n] ?? ""));
 		};
 		return e.addEventListener("reset", t), () => e.removeEventListener("reset", t);
 	}, [
-		k,
+		A,
 		u,
 		n
 	]);
-	let P = r((e) => {
-		let t = M.current?.querySelectorAll("input");
+	let F = r((e) => {
+		let t = N.current?.querySelectorAll("input");
 		t?.[e] && t[e].focus();
-	}, []), F = r((e) => {
-		k || j(e);
+	}, []), I = r((e) => {
+		A || M(e);
 		let t = e.join("");
 		d?.(t), e.length === n && e.every((e) => e !== "") && f?.(t);
 	}, [
-		k,
+		A,
 		n,
 		d,
 		f
-	]), I = r((e) => (t) => {
+	]), L = r((e) => (t) => {
 		let r = t.target.value.replace(/\D/g, "").slice(-1);
 		if (!r) return;
-		let i = [...N];
-		i[e] = r, F(i), e < n - 1 && P(e + 1);
+		let i = [...P];
+		i[e] = r, I(i), e < n - 1 && F(e + 1);
 	}, [
-		N,
-		n,
 		P,
-		F
-	]), L = r((e) => (t) => {
+		n,
+		F,
+		I
+	]), R = r((e) => (t) => {
 		if (t.key === "Backspace") {
 			t.preventDefault();
-			let n = [...N];
-			n[e] === "" ? e > 0 && (n[e - 1] = "", F(n), P(e - 1)) : (n[e] = "", F(n));
-		} else t.key === "ArrowLeft" ? (t.preventDefault(), e > 0 && P(e - 1)) : t.key === "ArrowRight" && (t.preventDefault(), e < n - 1 && P(e + 1));
+			let n = [...P];
+			n[e] === "" ? e > 0 && (n[e - 1] = "", I(n), F(e - 1)) : (n[e] = "", I(n));
+		} else t.key === "ArrowLeft" ? (t.preventDefault(), e > 0 && F(e - 1)) : t.key === "ArrowRight" && (t.preventDefault(), e < n - 1 && F(e + 1));
 	}, [
-		N,
-		n,
 		P,
-		F
-	]), R = r((e) => (t) => {
+		n,
+		F,
+		I
+	]), z = r((e) => (t) => {
 		t.preventDefault();
 		let r = t.clipboardData.getData("text").replace(/\D/g, "");
 		if (!r) return;
-		let i = [...N], a = e;
+		let i = [...P], a = e;
 		for (let t = 0; t < r.length && e + t < n; t++) i[e + t] = r[t], a = e + t;
-		F(i), P(Math.min(a + 1, n - 1));
+		I(i), F(Math.min(a + 1, n - 1));
 	}, [
-		N,
-		n,
 		P,
-		F
+		n,
+		F,
+		I
 	]);
 	return /* @__PURE__ */ c("div", {
-		ref: M,
+		ref: N,
 		role: "group",
-		"aria-label": b ? void 0 : y ?? O("group", x),
-		"aria-labelledby": b,
-		"aria-describedby": _ ?? v,
-		"aria-invalid": h || void 0,
+		"aria-label": x ? void 0 : b ?? k("group", S),
+		"aria-labelledby": x,
+		"aria-describedby": v ?? y,
+		"aria-invalid": g || void 0,
 		className: [
 			"otp-input",
-			g === "md" ? "" : `otp-input--${g}`,
-			h ? "otp-input--error" : "",
+			_ === "md" ? "" : `otp-input--${_}`,
+			g ? "otp-input--error" : "",
 			p ? "otp-input--disabled" : "",
-			T ?? ""
+			E ?? ""
 		].filter(Boolean).join(" "),
 		children: [Array.from({ length: n }, (e, r) => /* @__PURE__ */ s(t, {
 			className: "otp-input__cell",
-			ref: r === 0 ? D : void 0,
-			id: S ? `${S}-${r}` : void 0,
-			name: C ? `${C}-${r}` : void 0,
+			ref: r === 0 ? O : void 0,
+			id: C ? `${C}-${r}` : void 0,
+			name: w ? `${w}-${r}` : void 0,
 			type: "text",
-			size: g,
-			error: h,
+			size: _,
+			error: g,
 			disabled: p,
 			readOnly: m,
-			"aria-describedby": r === 0 ? _ ?? v : void 0,
+			required: h,
+			"aria-describedby": r === 0 ? v ?? y : void 0,
 			inputMode: "numeric",
 			pattern: "\\d*",
 			maxLength: 1,
 			autoComplete: r === 0 ? "one-time-code" : "off",
-			"aria-label": O("digit", E)(r + 1, n),
-			value: N[r],
-			onChange: I(r),
-			onKeyDown: L(r),
-			onPaste: R(r),
-			onBlur: w
-		}, r)), C && /* @__PURE__ */ s("input", {
+			"aria-label": k("digit", D)(r + 1, n),
+			value: P[r],
+			onChange: L(r),
+			onKeyDown: R(r),
+			onPaste: z(r),
+			onBlur: T
+		}, r)), w && /* @__PURE__ */ s("input", {
 			type: "hidden",
-			name: C,
-			value: N.join("")
+			name: w,
+			value: P.join("")
 		})]
 	});
 });

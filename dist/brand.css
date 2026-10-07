@@ -5668,7 +5668,12 @@ html.dark {
   --recurrence-field-legend-margin-block-end: var(--spacing-1); /** Aire entre la etiqueta del grupo de días y los días */
   --recurrence-field-legend-font-size: var(--label-font-size); /** Tamaño de la etiqueta del grupo de días — el de una etiqueta de campo */
   --recurrence-field-legend-color: var(--color-text-on-light); /** Color de la etiqueta del grupo de días */
+  --recurrence-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda del editor */
+  --recurrence-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda del editor */
   --recurrence-field-legend-font-weight: var(--label-font-weight); /** Peso de la etiqueta del grupo de días — el de una etiqueta de campo */
+  --recurrence-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda del editor */
+  --recurrence-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda del editor */
+  --recurrence-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda del editor */
 }
 .surface-dark,
 .surface-invert,
@@ -6035,6 +6040,7 @@ html.dark {
   --prose-table-border-color: var(--table-row-border-color);
   --prose-table-header-border-color: var(--table-header-border-color);
   --prose-rule-color: var(--separator-color);
+  --recurrence-field-helper-color: var(--form-helper-color);
   --sheet-bg: var(--modal-bg);
   --sheet-title-color: var(--modal-title-color);
   --sheet-description-color: var(--modal-description-color);
@@ -6696,6 +6702,7 @@ html.dark .surface-light {
   --recovery-codes-color: var(--color-text-on-light);
   --recovery-codes-index-color: var(--color-text-muted-on-light);
   --recurrence-field-legend-color: var(--color-text-on-light);
+  --recurrence-field-helper-color: var(--form-helper-color);
   --search-form-submit-color: var(--color-primary);
   --search-form-submit-hover-color: var(--color-primary);
   --search-form-submit-disabled-color: var(--input-disabled-color);
@@ -7068,6 +7075,7 @@ html.dark .surface-light {
   --radio-field-helper-font-size: var(--form-helper-font-size);
   --recovery-codes-font-size: var(--text-paragraph-small-font-size);
   --recurrence-field-legend-font-size: var(--label-font-size);
+  --recurrence-field-helper-font-size: var(--form-helper-font-size);
   --search-form-submit-input-padding-inline-end: var(--search-form-submit-slot-size);
   --select-field-helper-font-size: var(--form-helper-font-size);
   --sheet-description-font-size: var(--modal-description-font-size);
