@@ -8,9 +8,9 @@
       "muted-on-light": { "$value": "{color.grey-darkest}", "$type": "color", "$description": "Texto secundario: ayudas, etiquetas, metadatos" },
       "muted-on-dark":  { "$value": "{color.grey-light}",  "$type": "color", "$description": "Muted text on dark backgrounds" }
     },
-    "background": {
-      "light": { "$value": "{color.white}",    "$type": "color", "$description": "Light surface background" },
-      "dark":  { "$value": "{color.prussian}", "$type": "color", "$description": "Dark surface background" }
+    "bg": {
+      "light": { "$value": "{color.white}",    "$type": "color", "$description": "Light surface background", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["color.background.light"] } } },
+      "dark":  { "$value": "{color.prussian}", "$type": "color", "$description": "Dark surface background", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["color.background.dark"] } } }
     },
     "surface": {
       "secondary-on-light": { "$value": "{color.grey-lightest}", "$type": "color", "$description": "Superficie clara secundaria sobre fondo claro: bloque de código, kbd, carril de progreso, pie de tabla" },

@@ -12,7 +12,7 @@ $lxd-card-header-gap: 0.75rem; // Separación entre el bloque de texto y la acci
 $lxd-card-header-row-gap: 0.25rem; // Separación entre el título y la descripción en la cabecera
 $lxd-card-title-font-weight: 500; // Peso del título de la tarjeta
 $lxd-card-footer-gap: 0.5rem; // Separación entre acciones del pie
-$lxd-card-primary-bg: #baabff; // Variante primary — fondo lavanda. No es `color.primary` (prussian): coincidiría con `color.background.dark` y desaparecería sobre `.surface-dark`. Mismo patrón autocontenido que `button.primary` — un par que no depende de la superficie ambiente, igual en claro y oscuro
+$lxd-card-primary-bg: #baabff; // Variante primary — fondo lavanda. No es `color.primary` (prussian): coincidiría con `color.bg.dark` y desaparecería sobre `.surface-dark`. Mismo patrón autocontenido que `button.primary` — un par que no depende de la superficie ambiente, igual en claro y oscuro
 $lxd-card-primary-color: #111e30; // Variante primary — texto prussian sobre el fondo lavanda
 $lxd-card-accent-1-bg: #baabff; // Variante accent-1 — fondo lavanda
 $lxd-card-accent-1-color: #111e30; // Variante accent-1 — texto. Color saturado que ya contrasta en cualquier superficie: sin par surface-dark, como las variantes semánticas de Alert/Tag

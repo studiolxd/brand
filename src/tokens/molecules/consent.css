@@ -12,7 +12,7 @@
   --consent-banner-z-index: var(--z-index-bar); /** Capa: la de las barras fijas de la aplicación. Por debajo del velo de un modal — el banner no bloquea nada */
   --consent-preferences-gap: var(--spacing-4); /** Separación entre los bloques del panel */
   --consent-preferences-category-gap: var(--spacing-3); /** Separación entre categorías de la lista */
-  --consent-banner-bg: var(--color-background-light); /** Fondo de la banda */
+  --consent-banner-bg: var(--color-bg-light); /** Fondo de la banda */
   --consent-banner-color: var(--color-text-on-light); /** Texto de la banda */
   --consent-banner-border-color: var(--color-primary); /** Línea superior que separa la banda de la página */
   --consent-banner-border-width: var(--border-width-default); /** Grosor de la línea superior */
@@ -25,7 +25,7 @@
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --consent-banner-bg: var(--color-background-dark); /** Fondo de la banda — surface-dark */
+  --consent-banner-bg: var(--color-bg-dark); /** Fondo de la banda — surface-dark */
   --consent-banner-color: var(--color-text-on-dark); /** Texto de la banda — surface-dark */
   --consent-banner-border-color: var(--color-text-on-dark); /** Línea superior — surface-dark */
 }

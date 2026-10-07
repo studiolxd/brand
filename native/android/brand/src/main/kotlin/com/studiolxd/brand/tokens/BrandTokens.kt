@@ -92,8 +92,8 @@ class BrandColorRoles(
     val textPlaceholder: Color,
     /** Rol claro/oscuro. Tokens `color.text.muted-on-light` / `color.text.muted-on-dark`. */
     val textMuted: Color,
-    /** Rol claro/oscuro. Tokens `color.background.light` / `color.background.dark`. */
-    val background: Color,
+    /** Rol claro/oscuro. Tokens `color.bg.light` / `color.bg.dark`. */
+    val bg: Color,
     /** Rol claro/oscuro. Tokens `color.surface.secondary-on-light` / `color.surface.secondary-on-dark`. */
     val surfaceSecondary: Color,
     /** Rol claro/oscuro. Tokens `color.surface.inverse-on-light` / `color.surface.inverse-on-dark`. */
@@ -155,6 +155,10 @@ class BrandColorRoles(
     /** Rol claro/oscuro. Tokens `color.chart.diverging-cool-3` / `color.chart.diverging-cool-3-on-dark`. */
     val chartDivergingCool3: Color,
 ) {
+    /** Obsoleto: usar [bg]. Renombrado en la v51 (D9); el nombre viejo se retira en la v52. */
+    @Deprecated("Usar bg. Renombrado en la v51 (D9); el nombre viejo se retira en la v52.", ReplaceWith("bg"))
+    val background: Color get() = bg
+
     companion object {
         /** Valores para superficie clara (`-on-light`). */
         val light = BrandColorRoles(
@@ -164,7 +168,7 @@ class BrandColorRoles(
             text = Color(0xFF111E30),
             textPlaceholder = Color(0xFF4A4A4A),
             textMuted = Color(0xFF4A4A4A),
-            background = Color(0xFFFFFFFF),
+            bg = Color(0xFFFFFFFF),
             surfaceSecondary = Color(0xFFF2F2F2),
             surfaceInverse = Color(0xFF4A4A4A),
             surfaceHighlight = Color(0xFF6B6B6B),
@@ -205,7 +209,7 @@ class BrandColorRoles(
             text = Color(0xFFFFFFFF),
             textPlaceholder = Color(0xFFD0D0D0),
             textMuted = Color(0xFFD0D0D0),
-            background = Color(0xFF111E30),
+            bg = Color(0xFF111E30),
             surfaceSecondary = Color(0xFF4A4A4A),
             surfaceInverse = Color(0xFFF2F2F2),
             surfaceHighlight = Color(0xFF6B6B6B),

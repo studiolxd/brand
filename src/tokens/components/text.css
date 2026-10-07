@@ -37,7 +37,7 @@
   --text-list-item-gap: var(--spacing-3); /** Aire entre el contenido de una fila y su accesorio final (trailing) (12px) */
   --text-font-weight: var(--font-weight-default); /** Default font weight */
   --text-color: var(--color-text-on-light); /** Default text color */
-  --text-bg: var(--color-background-light); /** Fondo del lienzo de página (body) */
+  --text-bg: var(--color-bg-light); /** Fondo del lienzo de página (body) */
   --text-heading-font-weight: var(--font-weight-emphasis); /** Heading font weight */
   --text-heading-color: var(--color-text-on-light); /** Heading color */
   --text-h1-font-family: var(--text-heading-font-family); /** H1 font family */
@@ -87,7 +87,7 @@
 [data-theme="dark"],
 html.dark {
   --text-color: var(--color-text-on-dark); /** Color de texto por defecto — surface-dark */
-  --text-bg: var(--color-background-dark); /** Fondo del lienzo de página — surface-dark */
+  --text-bg: var(--color-bg-dark); /** Fondo del lienzo de página — surface-dark */
   --text-h1-color: var(--color-text-on-dark); /** H1 color — surface-dark */
   --text-h2-color: var(--color-text-on-dark); /** H2 color — surface-dark */
   --text-h3-color: var(--color-text-on-dark); /** H3 color — surface-dark */

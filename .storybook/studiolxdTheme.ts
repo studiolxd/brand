@@ -24,10 +24,10 @@ export default create({
   colorPrimary: resolveRef(brand.color.primary.$value, refMap),
   colorSecondary: resolveRef(brand.color['accent-1'].$value, refMap),
 
-  appBg: resolveRef(semantic.color.background.light.$value, refMap),
-  appContentBg: resolveRef(semantic.color.background.light.$value, refMap),
+  appBg: resolveRef(semantic.color.bg.light.$value, refMap),
+  appContentBg: resolveRef(semantic.color.bg.light.$value, refMap),
   appHoverBg: resolveRef(brand.color['accent-1'].$value, refMap),
-  appPreviewBg: resolveRef(semantic.color.background.light.$value, refMap),
+  appPreviewBg: resolveRef(semantic.color.bg.light.$value, refMap),
 
   appBorderColor: resolveRef(brand.color.primary.$value, refMap),
   appBorderRadius: 0,
@@ -42,7 +42,7 @@ export default create({
   barTextColor: resolveRef(semantic.color.text['on-light'].$value, refMap),
   barHoverColor: resolveRef(brand.color['accent-1'].$value, refMap),
   barSelectedColor: resolveRef(brand.color['accent-1'].$value, refMap),
-  barBg: resolveRef(semantic.color.background.light.$value, refMap),
+  barBg: resolveRef(semantic.color.bg.light.$value, refMap),
 
   buttonBg: resolveRef(brand.color.primary.$value, refMap),
   buttonBorder: resolveRef(button.button.primary.border.$value, refMap),

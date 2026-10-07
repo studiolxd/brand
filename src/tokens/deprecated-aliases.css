@@ -14,6 +14,8 @@
 html.dark,
 .surface-light,
 .site-shell {
+  --color-background-light: var(--color-bg-light); /* obsoleto: usar --color-bg-light */
+  --color-background-dark: var(--color-bg-dark); /* obsoleto: usar --color-bg-dark */
   --accordion-index-min-inline-size: var(--accordion-index-min-width); /* obsoleto: usar --accordion-index-min-width */
   --app-launcher-tile-badge-block-size: var(--app-launcher-tile-badge-height); /* obsoleto: usar --app-launcher-tile-badge-height */
   --async-multi-select-input-min-inline-size: var(--async-multi-select-input-min-width); /* obsoleto: usar --async-multi-select-input-min-width */

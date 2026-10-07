@@ -76,8 +76,8 @@ public enum BrandColorRoles {
     public static let textPlaceholder = Color(brandLight: Color(brandHex: 0x4A4A4A), dark: Color(brandHex: 0xD0D0D0))
     /// Rol claro/oscuro. Tokens `color.text.muted-on-light` / `color.text.muted-on-dark`.
     public static let textMuted = Color(brandLight: Color(brandHex: 0x4A4A4A), dark: Color(brandHex: 0xD0D0D0))
-    /// Rol claro/oscuro. Tokens `color.background.light` / `color.background.dark`.
-    public static let background = Color(brandLight: Color(brandHex: 0xFFFFFF), dark: Color(brandHex: 0x111E30))
+    /// Rol claro/oscuro. Tokens `color.bg.light` / `color.bg.dark`.
+    public static let bg = Color(brandLight: Color(brandHex: 0xFFFFFF), dark: Color(brandHex: 0x111E30))
     /// Rol claro/oscuro. Tokens `color.surface.secondary-on-light` / `color.surface.secondary-on-dark`.
     public static let surfaceSecondary = Color(brandLight: Color(brandHex: 0xF2F2F2), dark: Color(brandHex: 0x4A4A4A))
     /// Rol claro/oscuro. Tokens `color.surface.inverse-on-light` / `color.surface.inverse-on-dark`.
@@ -138,6 +138,9 @@ public enum BrandColorRoles {
     public static let chartDivergingCool2 = Color(brandLight: Color(brandHex: 0x3484EE), dark: Color(brandHex: 0x488FEF))
     /// Rol claro/oscuro. Tokens `color.chart.diverging-cool-3` / `color.chart.diverging-cool-3-on-dark`.
     public static let chartDivergingCool3 = Color(brandLight: Color(brandHex: 0x1F61B6), dark: Color(brandHex: 0x80B0F3))
+    /// Obsoleto: usar `bg`. Renombrado en la v51 (D9); el nombre viejo se retira en la v52.
+    @available(*, deprecated, renamed: "bg")
+    public static var background: Color { bg }
     /// Todos los roles por nombre, por ejemplo para pintar una paleta de muestra.
     public static let all: [(name: String, color: Color)] = [
         ("errorText", errorText),
@@ -146,7 +149,7 @@ public enum BrandColorRoles {
         ("text", text),
         ("textPlaceholder", textPlaceholder),
         ("textMuted", textMuted),
-        ("background", background),
+        ("bg", bg),
         ("surfaceSecondary", surfaceSecondary),
         ("surfaceInverse", surfaceInverse),
         ("surfaceHighlight", surfaceHighlight),

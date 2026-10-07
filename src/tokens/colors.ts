@@ -26,7 +26,7 @@ const refMap: Record<string, string> = {
   ...entries(feedback.color as Group, 'color'),
   ...entries(brand.color as Group, 'color'),
   ...entries(semantic.color.text as Group, 'color.text'),
-  ...entries(semantic.color.background as Group, 'color.background'),
+  ...entries(semantic.color.bg as Group, 'color.bg'),
   ...entries(semantic.color.surface as Group, 'color.surface'),
 };
 
@@ -53,7 +53,7 @@ const b = brand.color as Group;
 const sys = system.color as Group;
 const fb = feedback.color as Group;
 const txt = semantic.color.text as Group;
-const bg = semantic.color.background as Group;
+const bg = semantic.color.bg as Group;
 const surf = semantic.color.surface as Group;
 
 const swatch = (title: string, subtitle: string, tokens: string[], group: Group, prefix = '--color-'): Swatch => ({
@@ -111,7 +111,7 @@ export const semanticSwatches: Swatch[] = [
   swatch('Texto', 'on-light · on-dark', ['on-light', 'on-dark'], txt, '--color-text-'),
   swatch('Texto atenuado', 'muted-on-light · muted-on-dark', ['muted-on-light', 'muted-on-dark'], txt, '--color-text-'),
   swatch('Placeholder', 'placeholder-on-light · placeholder-on-dark', ['placeholder-on-light', 'placeholder-on-dark'], txt, '--color-text-'),
-  swatch('Fondo', 'light · dark', ['light', 'dark'], bg, '--color-background-'),
+  swatch('Fondo', 'light · dark', ['light', 'dark'], bg, '--color-bg-'),
   swatch('Superficie secundaria', 'secondary-on-light · secondary-on-dark', ['secondary-on-light', 'secondary-on-dark'], surf, '--color-surface-'),
   swatch('Superficie invertida', 'inverse-on-light · inverse-on-dark', ['inverse-on-light', 'inverse-on-dark'], surf, '--color-surface-'),
 ];
@@ -120,8 +120,8 @@ export const semanticSwatches: Swatch[] = [
 export interface NamedColor { name: string; token: string; hex: string }
 
 export const surfaces: NamedColor[] = [
-  { name: 'Blanco', token: '--color-background-light', hex: hex(bg.light.$value) },
-  { name: 'Prusia', token: '--color-background-dark', hex: hex(bg.dark.$value) },
+  { name: 'Blanco', token: '--color-bg-light', hex: hex(bg.light.$value) },
+  { name: 'Prusia', token: '--color-bg-dark', hex: hex(bg.dark.$value) },
 ];
 
 /** Todo color que pueda acabar como tinta (texto, icono, borde) sobre una superficie. */

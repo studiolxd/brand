@@ -1688,7 +1688,7 @@ public enum BrandCardTokens {
     public static let titleFontWeight: Int = 500
     /// Token `card.footer-gap` — Separación entre acciones del pie
     public static let footerGap: CGFloat = 8
-    /// Token `card.primary-bg` — Variante primary — fondo lavanda. No es `color.primary` (prussian): coincidiría con `color.background.dark` y desaparecería sobre `.surface-dark`. Mismo patrón autocontenido que `button.primary` — un par que no depende de la superficie ambiente, igual en claro y oscuro
+    /// Token `card.primary-bg` — Variante primary — fondo lavanda. No es `color.primary` (prussian): coincidiría con `color.bg.dark` y desaparecería sobre `.surface-dark`. Mismo patrón autocontenido que `button.primary` — un par que no depende de la superficie ambiente, igual en claro y oscuro
     public static let primaryBg: Color = Color(brandHex: 0xBAABFF)
     /// Token `card.primary-color` — Variante primary — texto prussian sobre el fondo lavanda
     public static let primaryColor: Color = Color(brandHex: 0x111E30)

@@ -45,7 +45,7 @@
 html.dark {
   --dropdown-field-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
   --dropdown-field-color: var(--color-text-on-dark); /** Texto — surface-dark */
-  --dropdown-field-bg: var(--color-background-dark); /** Fondo — surface-dark */
+  --dropdown-field-bg: var(--color-bg-dark); /** Fondo — surface-dark */
   --dropdown-field-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
   --dropdown-field-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
   --dropdown-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */

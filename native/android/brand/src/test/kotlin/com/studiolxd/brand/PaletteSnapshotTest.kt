@@ -24,7 +24,7 @@ private fun PaletteSample() {
     val rows = listOf(
         light.text to dark.text,
         light.textMuted to dark.textMuted,
-        light.background to dark.background,
+        light.bg to dark.bg,
         light.surfaceSecondary to dark.surfaceSecondary,
         light.errorText to dark.errorText,
         light.successText to dark.successText,

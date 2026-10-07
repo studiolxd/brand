@@ -1,7 +1,7 @@
 {
   "consent": {
     "banner": {
-      "bg":           { "$value": "{color.background.light}", "$type": "color",     "$description": "Fondo de la banda" },
+      "bg":           { "$value": "{color.bg.light}", "$type": "color",     "$description": "Fondo de la banda" },
       "color":        { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Texto de la banda" },
       "border-color": { "$value": "{color.primary}",          "$type": "color",     "$description": "Línea superior que separa la banda de la página" },
       "border-width": { "$value": "{border-width.default}",   "$type": "dimension", "$description": "Grosor de la línea superior" },
@@ -18,7 +18,7 @@
       "title-font-size":       { "$value": "{text.size.3}",                       "$type": "dimension", "$description": "Cuerpo del título de la banda" },
       "description-font-size": { "$value": "{text.font-size}",                    "$type": "dimension", "$description": "Cuerpo del texto de la banda: el cuerpo de texto de la superficie, sin reducir (decisión del 2026-08-28)" },
 
-      "surface-dark-bg":           { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo de la banda — surface-dark" },
+      "surface-dark-bg":           { "$value": "{color.bg.dark}", "$type": "color", "$description": "Fondo de la banda — surface-dark" },
       "surface-dark-color":        { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Texto de la banda — surface-dark" },
       "surface-dark-border-color": { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Línea superior — surface-dark" }
     },

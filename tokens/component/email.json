@@ -311,12 +311,12 @@
       "$description": "Aire blanco horneado alrededor del logotipo dentro del PNG, por los cuatro costados. El blanco va en la imagen, no en un `background-color`: Outlook Windows y Gmail Android invierten colores por su cuenta y un fondo CSS no sobrevive, una imagen sí"
     },
     "canvas-bg": {
-      "$value": "{color.background.light}",
+      "$value": "{color.bg.light}",
       "$type": "color",
       "$description": "Fondo general del correo, fuera de la caja. Blanco"
     },
     "bg": {
-      "$value": "{color.background.light}",
+      "$value": "{color.bg.light}",
       "$type": "color",
       "$description": "Fondo de la caja del mensaje. Blanco"
     },

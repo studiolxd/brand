@@ -71,7 +71,7 @@
     "surface-dark-cell-outside-bg":            { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo de celdas fuera de mes — surface-dark" },
     "surface-dark-cell-focus-ring-color":      { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring de la celda — surface-dark" },
     "surface-dark-cell-today-number-bg":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Fondo del número de hoy — surface-dark" },
-    "surface-dark-cell-today-number-color":    { "$value": "{color.background.dark}",    "$type": "color", "$description": "Texto del número de hoy — surface-dark" },
+    "surface-dark-cell-today-number-color":    { "$value": "{color.bg.dark}",    "$type": "color", "$description": "Texto del número de hoy — surface-dark" },
     "surface-dark-day-number-color":           { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del número de día — surface-dark" },
     "surface-dark-day-number-outside-color":   { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Número fuera de mes — surface-dark" },
     "surface-dark-more-color":                 { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Texto '+N más' — surface-dark" },

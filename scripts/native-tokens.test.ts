@@ -31,8 +31,8 @@ describe('tokens nativos: el modelo', () => {
     t('color.text.on-dark', '#ffffff'),
     t('color.error-text-on-light', '#b30000'),
     t('color.error-text-on-dark', '#ff8585'),
-    t('color.background.light', '#ffffff'),
-    t('color.background.dark', '#111e30'),
+    t('color.bg.light', '#ffffff'),
+    t('color.bg.dark', '#111e30'),
     t('color.chart.series-1', '#1e7ff6'),
     t('color.chart.series-1-on-dark', '#1d7cf0'),
     t('color.border-recessive-on-dark', '#4a4a4a'),
@@ -54,8 +54,16 @@ describe('tokens nativos: el modelo', () => {
     const roles = Object.fromEntries(model.colors.roles.map((r: { name: string }) => [r.name, r]));
     expect(roles.text).toMatchObject({ light: '#111e30', dark: '#ffffff', oneSided: null });
     expect(roles.errorText).toMatchObject({ light: '#b30000', dark: '#ff8585' });
-    expect(roles.background).toMatchObject({ light: '#ffffff', dark: '#111e30' });
+    expect(roles.bg).toMatchObject({ light: '#ffffff', dark: '#111e30' });
     expect(roles.chartSeries1).toMatchObject({ light: '#1e7ff6', dark: '#1d7cf0' });
+  });
+
+  it('un color global renombrado lleva su nombre viejo como alias nativo (v51)', () => {
+    const aliased = buildNativeModel([
+      { path: ['color', 'bg', 'light'], $value: '#ffffff', $extensions: { 'com.studiolxd': { deprecatedAliases: ['color.background.light'] } } },
+      { path: ['color', 'bg', 'dark'], $value: '#111e30', $extensions: { 'com.studiolxd': { deprecatedAliases: ['color.background.dark'] } } },
+    ]);
+    expect(aliased.colors.roles).toEqual([expect.objectContaining({ name: 'bg', aliases: ['background'] })]);
   });
 
   it('un rol con un solo lado cae al mismo valor en el otro', () => {

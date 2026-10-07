@@ -55,7 +55,7 @@
   --chart-transition-duration: var(--motion-duration-fast); /** Respuesta de la marca al puntero. Con `prefers-reduced-motion` no hay transición */
   --chart-transition-easing: var(--motion-easing-out); /** Curva de la respuesta al puntero */
   --chart-diverging-neutral: var(--color-surface-secondary-on-light); /** Punto medio divergente: gris neutro. Nunca un tono — el medio tiene que leerse como «nada». Es el único dato que se viste con un rol de SUPERFICIE, y a propósito: el cero es el punto de MENOR saliencia de la rampa, así que su trabajo es retirarse hacia el lienzo, no contrastar con él. Sobre blanco queda en 1,12:1, por debajo de los seis pasos de los dos brazos (2,49:1 el más flojo) */
-  --chart-surface: var(--color-background-light); /** Color del hueco de 2px entre marcas contiguas y del anillo de 2px de los puntos. Es la superficie, no un borde: separar con trazo añadiría tinta que no es dato */
+  --chart-surface: var(--color-bg-light); /** Color del hueco de 2px entre marcas contiguas y del anillo de 2px de los puntos. Es la superficie, no un borde: separar con trazo añadiría tinta que no es dato */
   --chart-grid-color: var(--color-border-default-on-light); /** Rejilla: filete de 1px a un paso de la superficie. Cromo recesivo */
   --chart-grid-width: var(--border-width-default); /** Grosor de la rejilla. Sólida siempre: una rejilla discontinua se lee como umbral */
   --chart-axis-color: var(--color-icon-secondary-on-light); /** Línea base y eje: un paso más firme que la rejilla, porque es el ancla del cero */
@@ -110,7 +110,7 @@ html.dark {
   --chart-diverging-cool-2: var(--color-chart-diverging-cool-2-on-dark); /** Divergente frío 2 — surface-dark */
   --chart-diverging-cool-3: var(--color-chart-diverging-cool-3-on-dark); /** Divergente frío 3 — surface-dark */
   --chart-radial-track-color: var(--color-disabled-border-on-dark); /** Carril del anillo — surface-dark. La misma tinta que el eje en oscuro, por el mismo motivo */
-  --chart-surface: var(--color-background-dark); /** Hueco y anillo — surface-dark */
+  --chart-surface: var(--color-bg-dark); /** Hueco y anillo — surface-dark */
   --chart-grid-color: var(--color-border-recessive-on-dark); /** Rejilla — surface-dark. Excepción declarada a la regla de derivación (borde → `text.on-dark`): la rejilla es cromo recesivo, no un borde con peso de dato; en blanco sobre prusia se leería como tinta. Procedencia corregida: apuntaba a `color.surface.secondary-on-dark`, un token de SUPERFICIE (el mismo defecto de origen que hizo invisible el carril del Stepper) — ahora apunta a `color.border.recessive-on-dark`, un token de LÍNEA, con el mismo `grey-darkest` y por tanto el mismo valor visual */
   --chart-axis-color: var(--color-disabled-border-on-dark); /** Eje — surface-dark: un paso por encima de la rejilla, igual que en claro. Excepción declarada como `grid-color`: mismo `grey-dark` que en claro, no el `text.muted-on-dark` de `axis-color` */
   --chart-label-color: var(--color-text-muted-on-dark); /** Rótulos — surface-dark */

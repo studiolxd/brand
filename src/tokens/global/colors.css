@@ -84,8 +84,8 @@
   --color-text-placeholder-on-dark: var(--color-grey-light); /** Placeholder sobre superficie oscura. Mismo gris que el texto secundario */
   --color-text-muted-on-light: var(--color-grey-darkest); /** Texto secundario: ayudas, etiquetas, metadatos */
   --color-text-muted-on-dark: var(--color-grey-light); /** Muted text on dark backgrounds */
-  --color-background-light: var(--color-white); /** Light surface background */
-  --color-background-dark: var(--color-prussian); /** Dark surface background */
+  --color-bg-light: var(--color-white); /** Light surface background */
+  --color-bg-dark: var(--color-prussian); /** Dark surface background */
   --color-surface-secondary-on-light: var(--color-grey-lightest); /** Superficie clara secundaria sobre fondo claro: bloque de código, kbd, carril de progreso, pie de tabla */
   --color-surface-secondary-on-dark: var(--color-grey-darkest); /** Superficie clara secundaria — variante para superficie oscura */
   --color-surface-inverse-on-light: var(--color-grey-darkest); /** Superficie invertida sobre fondo claro: relleno neutral oscuro (Tag) */

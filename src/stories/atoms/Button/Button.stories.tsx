@@ -88,7 +88,7 @@ export const Primary: Story = {
 export const AllDestructiveIntent: Story = {
   name: 'Destructive intent — outline + text, dark surface',
   render: () => (
-    <div className="surface-dark" style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', padding: '2rem', backgroundColor: 'var(--color-background-dark)' }}>
+    <div className="surface-dark" style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', padding: '2rem', backgroundColor: 'var(--color-bg-dark)' }}>
       <Button variant="outline" destructive>Outline</Button>
       <Button variant="text" destructive>Text</Button>
     </div>
@@ -105,7 +105,7 @@ export const GhostOnDark: Story = {
   args: { variant: 'ghost' },
   decorators: [
     (Story) => (
-      <div className="surface-dark" style={{ padding: '2rem', backgroundColor: 'var(--color-background-dark)' }}>
+      <div className="surface-dark" style={{ padding: '2rem', backgroundColor: 'var(--color-bg-dark)' }}>
         <Story />
       </div>
     ),
@@ -148,7 +148,7 @@ export const TextDestructiveOnDark: Story = {
   args: { variant: 'text', destructive: true, children: 'Eliminar' },
   decorators: [
     (Story) => (
-      <div className="surface-dark" style={{ padding: '2rem', backgroundColor: 'var(--color-background-dark)' }}>
+      <div className="surface-dark" style={{ padding: '2rem', backgroundColor: 'var(--color-bg-dark)' }}>
         <Story />
       </div>
     ),
@@ -206,7 +206,7 @@ export const TextOnDark: Story = {
   args: { variant: 'text' },
   decorators: [
     (Story) => (
-      <div className="surface-dark" style={{ padding: '2rem', backgroundColor: 'var(--color-background-dark)' }}>
+      <div className="surface-dark" style={{ padding: '2rem', backgroundColor: 'var(--color-bg-dark)' }}>
         <Story />
       </div>
     ),

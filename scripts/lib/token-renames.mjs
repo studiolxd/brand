@@ -12,6 +12,9 @@
  * Los pares oscuros siguen solos: `surface-dark-<viejo>` pasa a
  * `surface-dark-<nuevo>` y no necesita alias propio, porque se publica con el
  * nombre de su par claro.
+ *
+ * En nativo solo llevan alias los colores GLOBALES (`color.*`), que una app
+ * nativa puede usar por su nombre; los de componente se renombran sin más.
  */
 export const TOKEN_RENAMES_V51 = {
   // El estado va ANTES de la propiedad.
@@ -25,8 +28,12 @@ export const TOKEN_RENAMES_V51 = {
   'tabs.trigger-pill-color-active': 'tabs.trigger-pill-active-color',
   'typing-indicator.dot-opacity-active': 'typing-indicator.dot-active-opacity',
 
-  // `bg`, nunca `background`.
+  // `bg`, nunca `background`. También el rol global del lienzo, que fue la
+  // excepción de la primera tanda: un color global, y por eso el único de la
+  // tabla con alias también en nativo (`BrandColorRoles.background` → `.bg`).
   'text.background': 'text.bg',
+  'color.background.light': 'color.bg.light',
+  'color.background.dark': 'color.bg.dark',
 
   // `max-width`/`min-width`, nunca `width-max`/`width-min`.
   'modal.width-max': 'modal.max-width',

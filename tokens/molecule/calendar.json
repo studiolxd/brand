@@ -88,7 +88,7 @@
     "surface-dark-today-color":             { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del día de hoy — surface-dark" },
     "surface-dark-today-marker-color":      { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Marcador del día de hoy — surface-dark" },
     "surface-dark-selected-bg":             { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Fondo del día seleccionado — surface-dark" },
-    "surface-dark-selected-color":          { "$value": "{color.background.dark}",    "$type": "color", "$description": "Texto del día seleccionado — surface-dark" },
+    "surface-dark-selected-color":          { "$value": "{color.bg.dark}",    "$type": "color", "$description": "Texto del día seleccionado — surface-dark" },
     "surface-dark-outside-color":           { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Días fuera de mes — surface-dark" },
     "surface-dark-disabled-color":          { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Días deshabilitados — surface-dark" },
     "hover-line-width":              { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor de la línea de hover del día, del año y del título. Nada se rellena bajo el puntero (regla de Colores): lo que se puede pulsar y es texto deja una línea de tinta debajo. Las flechas no la llevan: son un glifo, y la línea del sistema subraya texto" },

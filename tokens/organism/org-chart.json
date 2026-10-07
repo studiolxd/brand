@@ -20,7 +20,7 @@
     "connector-width":        { "$value": "{border-width.default}",           "$type": "dimension", "$description": "Grosor de las líneas que unen los nodos" },
 
     "card-width":             { "$value": "14rem",                            "$type": "dimension", "$description": "Ancho de la tarjeta de un departamento", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["org-chart.card-inline-size"] } } },
-    "card-bg":                { "$value": "{color.background.light}",         "$type": "color",     "$description": "Fondo de la tarjeta" },
+    "card-bg":                { "$value": "{color.bg.light}",         "$type": "color",     "$description": "Fondo de la tarjeta" },
     "card-border-color":      { "$value": "{color.primary}",                  "$type": "color",     "$description": "Borde de la tarjeta" },
     "card-border-width":      { "$value": "{border-width.default}",           "$type": "dimension", "$description": "Grosor del borde de la tarjeta" },
     "card-radius":            { "$value": "{border-radius.default}",          "$type": "dimension", "$description": "Radio de la tarjeta" },
@@ -48,7 +48,7 @@
     "surface-dark-viewport-border-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Borde del lienzo — surface-dark" },
     "surface-dark-focus-ring-color":      { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Anillo de foco — surface-dark" },
     "surface-dark-connector-color":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de las líneas — surface-dark" },
-    "surface-dark-card-bg":               { "$value": "{color.background.dark}",    "$type": "color", "$description": "Fondo de la tarjeta — surface-dark" },
+    "surface-dark-card-bg":               { "$value": "{color.bg.dark}",    "$type": "color", "$description": "Fondo de la tarjeta — surface-dark" },
     "surface-dark-card-border-color":     { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Borde de la tarjeta — surface-dark" },
     "surface-dark-name-color":            { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del nombre del departamento — surface-dark" },
     "surface-dark-group-color":           { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del rótulo de grupo — surface-dark" },

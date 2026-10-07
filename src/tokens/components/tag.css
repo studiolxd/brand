@@ -37,7 +37,7 @@
 [data-theme="dark"],
 html.dark {
   --tag-primary-bg: var(--color-text-on-dark); /** Marca primaria, relleno — surface-dark (invertido: el prusia es el fondo de la superficie y el tag desaparecería) */
-  --tag-primary-color: var(--color-background-dark); /** Marca primaria, texto — surface-dark (invertido) */
+  --tag-primary-color: var(--color-bg-dark); /** Marca primaria, texto — surface-dark (invertido) */
   --tag-info-bg: var(--color-text-on-dark); /** Información, relleno — surface-dark (invertido, misma razón que primary) */
-  --tag-info-color: var(--color-background-dark); /** Información, texto — surface-dark (invertido) */
+  --tag-info-color: var(--color-bg-dark); /** Información, texto — surface-dark (invertido) */
 }

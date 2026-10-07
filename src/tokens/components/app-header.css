@@ -10,7 +10,7 @@
   --app-header-flyout-offset: var(--spacing-1); /** Separación compartida entre el borde inferior de la cabecera y el flotante que anclan sus disparadores (menú de usuario, panel de notificaciones): la que ya tenía el menú de usuario */
   --app-header-z-index: var(--z-index-bar); /** Capa de barra fija */
   --app-header-height: calc(var(--app-header-content-height) + 2 * var(--app-header-padding-block)); /** Altura de la barra: compuesta, 56px */
-  --app-header-bg: var(--color-background-light); /** Fondo */
+  --app-header-bg: var(--color-bg-light); /** Fondo */
   --app-header-border-width: var(--border-width-default); /** Borde inferior que la separa del contenido */
   --app-header-border-color: var(--color-primary); /** Color del borde */
 }
@@ -19,6 +19,6 @@
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --app-header-bg: var(--color-background-dark); /** Fondo — surface-dark */
+  --app-header-bg: var(--color-bg-dark); /** Fondo — surface-dark */
   --app-header-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
 }

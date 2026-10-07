@@ -60,7 +60,7 @@
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --textarea-bg: var(--color-background-dark); /** Background — surface-dark */
+  --textarea-bg: var(--color-bg-dark); /** Background — surface-dark */
   --textarea-color: var(--color-text-on-dark); /** Text color — surface-dark */
   --textarea-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
   --textarea-placeholder-color: var(--color-text-placeholder-on-dark); /** Placeholder — surface-dark: blanco */
@@ -71,7 +71,7 @@ html.dark {
   --textarea-disabled-bg: var(--color-disabled-bg-on-dark); /** Fondo deshabilitado — surface-dark */
   --textarea-disabled-color: var(--color-disabled-text-on-dark); /** Texto deshabilitado — surface-dark */
   --textarea-disabled-border-color: var(--color-disabled-border-on-dark); /** Borde deshabilitado — surface-dark */
-  --textarea-error-bg: var(--color-background-dark); /** Fondo en error — surface-dark (el del lienzo, no blanco) */
+  --textarea-error-bg: var(--color-bg-dark); /** Fondo en error — surface-dark (el del lienzo, no blanco) */
   --textarea-error-color: var(--color-text-on-dark); /** Texto en error — surface-dark */
   --textarea-error-placeholder-color: var(--color-text-placeholder-on-dark); /** Placeholder en error — surface-dark */
   --textarea-error-focus-border-color: var(--color-error-text-on-dark); /** Borde en foco+error — surface-dark */

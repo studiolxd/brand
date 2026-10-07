@@ -121,7 +121,7 @@ export const SuperficieEmparejada: Story = {
   play: async ({ canvasElement }) => {
     const banda = canvasElement.querySelector('[data-testid="oscura"]')!;
     const cs = getComputedStyle(banda);
-    await expect(cs.backgroundColor).toBe(colorDeToken('--color-background-dark', banda));
+    await expect(cs.backgroundColor).toBe(colorDeToken('--color-bg-dark', banda));
     await expect(cs.color).toBe(colorDeToken('--color-text-on-dark', banda));
   },
 };

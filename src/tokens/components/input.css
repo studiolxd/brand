@@ -46,7 +46,7 @@
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --input-bg: var(--color-background-dark); /** Background — surface-dark */
+  --input-bg: var(--color-bg-dark); /** Background — surface-dark */
   --input-color: var(--color-text-on-dark); /** Text color — surface-dark */
   --input-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
   --input-placeholder-color: var(--color-text-placeholder-on-dark); /** Placeholder — surface-dark: blanco */
@@ -57,7 +57,7 @@ html.dark {
   --input-disabled-bg: var(--color-disabled-bg-on-dark); /** Fondo deshabilitado — surface-dark */
   --input-disabled-color: var(--color-disabled-text-on-dark); /** Texto deshabilitado — surface-dark */
   --input-disabled-border-color: var(--color-disabled-border-on-dark); /** Borde deshabilitado — surface-dark */
-  --input-error-bg: var(--color-background-dark); /** Fondo en error — surface-dark (el del lienzo, no blanco) */
+  --input-error-bg: var(--color-bg-dark); /** Fondo en error — surface-dark (el del lienzo, no blanco) */
   --input-error-color: var(--color-text-on-dark); /** Texto en error — surface-dark */
   --input-error-placeholder-color: var(--color-text-placeholder-on-dark); /** Placeholder en error — surface-dark */
   --input-error-focus-border-color: var(--color-error-text-on-dark); /** Borde en foco+error — surface-dark */

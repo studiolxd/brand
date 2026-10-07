@@ -31,7 +31,7 @@
     "error-border-color":            { "$value": "{select.error-border-color}", "$type": "color", "$description": "Borde en error: el mismo que el del Select" },
     "surface-dark-error-border-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Borde en error — surface-dark" },
     "surface-dark-color":            { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Texto — surface-dark" },
-    "surface-dark-bg":               { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo — surface-dark" },
+    "surface-dark-bg":               { "$value": "{color.bg.dark}", "$type": "color", "$description": "Fondo — surface-dark" },
     "surface-dark-border-color":     { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Borde — surface-dark" },
     "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Anillo de foco — surface-dark" },
 

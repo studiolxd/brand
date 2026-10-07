@@ -10,7 +10,7 @@
   --tooltip-font-size: var(--font-size-1); /** Tamaño de texto del bocadillo */
   --tooltip-line-height: var(--line-height-snug); /** Interlineado del bocadillo */
   --tooltip-offset: var(--spacing-1); /** Separación entre disparador y bocadillo (4px). Fuente del sideOffset por defecto */
-  --tooltip-bg: var(--color-background-dark); /** Fondo del bocadillo — superficie invertida para máximo contraste */
+  --tooltip-bg: var(--color-bg-dark); /** Fondo del bocadillo — superficie invertida para máximo contraste */
   --tooltip-color: var(--color-text-on-dark); /** Color del texto del bocadillo */
   --tooltip-border-radius: var(--border-radius-default); /** Radio de esquinas del bocadillo */
   --tooltip-z-index: var(--floating-panel-z-index); /** Capa z — la misma que el resto de paneles flotantes */
@@ -22,6 +22,6 @@
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --tooltip-bg: var(--color-background-light); /** Fondo del bocadillo — surface-dark. Mismo patrón de superficie invertida que en claro (ahí: fondo `background.dark`), pero simétrico para lienzo oscuro: fondo claro, texto oscuro. Sin acento de marca */
+  --tooltip-bg: var(--color-bg-light); /** Fondo del bocadillo — surface-dark. Mismo patrón de superficie invertida que en claro (ahí: fondo `background.dark`), pero simétrico para lienzo oscuro: fondo claro, texto oscuro. Sin acento de marca */
   --tooltip-color: var(--color-text-on-light); /** Texto del bocadillo — surface-dark, el par del fondo claro */
 }

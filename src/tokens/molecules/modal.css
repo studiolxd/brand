@@ -22,7 +22,7 @@
   --modal-description-margin-block-end: var(--spacing-4); /** Separación entre la descripción y el cuerpo del modal */
   --modal-close-size: var(--size-component-md); /** Caja del botón de cerrar (40px). En la superficie pública (SiteShell) remapea a size-component.lg */
   --modal-close-icon-size: var(--icon-size-md); /** Glifo del botón de cerrar (24px), la talla por defecto de icono-botón. En la superficie pública remapea igualmente a icon.size-md */
-  --modal-bg: var(--color-background-light); /** Fondo del panel modal */
+  --modal-bg: var(--color-bg-light); /** Fondo del panel modal */
   --modal-border-width: var(--border-width-default); /** Grosor del borde del panel */
   --modal-border-radius: var(--border-radius-default); /** Radio del panel */
   --modal-shadow: var(--shadow-default); /** Sombra de elevación */
@@ -42,7 +42,7 @@
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --modal-bg: var(--color-background-dark); /** Fondo del panel — surface-dark */
+  --modal-bg: var(--color-bg-dark); /** Fondo del panel — surface-dark */
   --modal-title-color: var(--color-text-on-dark); /** Color del título — surface-dark */
   --modal-border-color: var(--color-text-on-dark); /** Borde 1px — surface-dark: separa el panel del velo, que también es oscuro */
   --modal-description-color: var(--color-text-muted-on-dark); /** Color de la descripción — surface-dark */

@@ -99,11 +99,6 @@ function stateAfterProperty(name: string): boolean {
  * normal es que el nombre esté mal.
  */
 const EXCEPTIONS: Record<string, string> = {
-  // `color.*` es el espacio GLOBAL de roles, no un componente: `background` es
-  // ahí el nombre del rol del lienzo (`color.background.light|dark`), del que
-  // cuelgan decenas de referencias. La convención de componente no lo alcanza.
-  'color.background.light': 'rol global del lienzo',
-  'color.background.dark': 'rol global del lienzo',
   // Tono `ink` de Link y de Button text (`tone="ink"`): `ink` es la variante, y
   // `color` la propiedad. No es la propiedad `ink-color` que prohíbe la regla 5.
   'link.ink-color': 'tono ink',
