@@ -1578,6 +1578,13 @@ html.dark {
  * Do not edit directly, this file was auto-generated.
  */
 :root {
+  --embed-frame-device-mobile-inline-size: 375px; /** Ancho del marco con `device="mobile"`: el de un teléfono en vertical, el ancho de referencia contra el que el sistema comprueba que una maqueta cabe. No es un punto de corte —el primero, `breakpoint.sm`, es el teléfono apaisado—: es la pantalla que se simula */
+  --embed-frame-device-tablet-inline-size: var(--breakpoint-md); /** Ancho del marco con `device="tablet"` (768px): la tableta. Apunta al breakpoint porque es justo lo que se simula —el ancho en el que el documento de dentro pasa de una columna a varias— */
+}
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+:root {
   --logo-height-sm: var(--size-component-sm); /** Alto del logotipo en barras compactas (Sidebar). El ancho sale de la proporción del trazado */
   --logo-height-md: var(--size-component-md); /** Alto por defecto: cabeceras y formularios de acceso */
   --logo-height-lg: var(--size-component-lg); /** Alto destacado: pie de página */
