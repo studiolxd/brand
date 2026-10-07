@@ -7,7 +7,7 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## [51.0.0] — 2026-10-07
+## [51.0.0] — 2026-10-08
 
 > **Major (51.0.0).** Segunda vuelta de la auditoría: unificación de la API, convención de nombres de tokens,
 > subrayado con `text-decoration`, catálogo con respaldo castellano y paridad nativa de interlineado. **Casi todo lo que
@@ -64,11 +64,15 @@ deprecated, renamed:)` / `@Deprecated(ReplaceWith)`; y `brandTextStyle` obsoleto
 
 Convención nueva, `<componente>-<talla>-<parte>-<estado>-<propiedad>` (regla 13 de `CLAUDE.md` y Foundations →
 Nombres de tokens): estado antes de la propiedad, `bg` y no `background`, `max-width` y no `width-max`,
-`width`/`height` y no `inline-size`/`block-size`. 48 renombrados; la tabla completa, en Foundations → Nombres de
+`width`/`height` y no `inline-size`/`block-size`. 57 renombrados; la tabla completa, en Foundations → Nombres de
 tokens. Los más tocados por las apps: `--modal-width-max` → `--modal-max-width`, `--modal-inline-size` →
 `--modal-width`, `--sheet-inline-size` → `--sheet-width`, `--checkbox-bg-checked` → `--checkbox-checked-bg`,
 `--text-background` → `--text-bg`.
-<!-- COLOR-BG -->
+El rol global de fondo también cambia: `--color-background-light|dark` → `--color-bg-light|dark` (en SwiftUI y Compose,
+`BrandColorRoles.background` → `bg`, con alias obsoleto). Y los tokens con el vocabulario viejo: `--tag-danger-*` →
+`--tag-error-*`, `--number-badge-danger-*` → `--number-badge-error-*`, `--step-tone-danger-*` →
+`--step-tone-error-*`, `--logo-height-xxl` → `--logo-height-2xl`. Las clases BEM internas (`tag--danger`,
+`number-badge--danger`, `step-marker--tone-danger`) pasan a `--error` sin alias: no son API.
 
 ### Nuevo
 
