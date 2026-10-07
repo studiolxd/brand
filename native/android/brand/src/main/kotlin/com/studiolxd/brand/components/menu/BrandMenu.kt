@@ -280,7 +280,9 @@ private fun BrandMenuPopup(expanded: Boolean, onDismissRequest: () -> Unit, alig
 
 /**
  * El panel del menú: fondo y borde de `menu.*`, con el aire `menu.padding-block` arriba y abajo y los ítems inseteados
- * `menu.padding-inline`; los separadores van de borde a borde. Interno: también lo pintan las capturas.
+ * `menu.padding-inline`; los separadores van de borde a borde y el rótulo de sección solo lleva su `menu.label-padding-inline`
+ * desde el borde del panel (en React `.menu__label` no tiene el `margin-inline` de los ítems). Interno: también lo pintan
+ * las capturas.
  */
 @Composable
 internal fun BrandMenuPanel(
@@ -319,7 +321,7 @@ internal fun BrandMenuPanel(
                 )
                 is BrandMenuItem.Label -> BasicText(
                     item.text,
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = T.paddingInline + T.labelPaddingInline, vertical = T.labelPaddingBlock),
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = T.labelPaddingInline, vertical = T.labelPaddingBlock),
                     style = brandTextStyle(T.labelFontSize, T.labelFontWeight, T.itemLineHeight, color = T.labelColor.current),
                 )
                 is BrandMenuItem.Button -> MenuRow(
