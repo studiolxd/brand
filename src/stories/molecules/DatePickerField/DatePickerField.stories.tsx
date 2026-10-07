@@ -75,11 +75,6 @@ export const Tallas: Story = {
 
 /** Al elegir un día, el calendario se cierra y el valor sube al consumidor. */
 export const ElegirFecha: Story = {
-  // a11y falso positivo (D16): `aria-hidden-focus` salta en los `span[data-base-ui-focus-guard]`
-  // que Base UI pone alrededor del popup abierto. Son centinelas `aria-hidden` con
-  // `tabindex="0"` que devuelven el foco al popup o al disparador al tabular: que el
-  // lector no los vea es justo lo correcto.
-  parameters: { a11y: { config: { rules: [{ id: 'aria-hidden-focus', enabled: false }] } } },
   args: { value: new Date(2026, 4, 1) },
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);

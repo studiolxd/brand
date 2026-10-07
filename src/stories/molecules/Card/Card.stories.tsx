@@ -1026,11 +1026,6 @@ export const EnlaceConSeleccion: Story = {
 export const TestSeleccionYMenuSobreLaCapa: Story = {
   name: 'Test — la casilla y el menú se pulsan sin navegar',
   tags: ['!dev'],
-  // a11y falso positivo (D16, D42): `aria-hidden-focus` salta en los `span[data-base-ui-focus-guard]`
-  // que Base UI pone alrededor del popup abierto, según el momento en que corre axe. Son
-  // centinelas `aria-hidden` con `tabindex="0"` que devuelven el foco al popup o al
-  // disparador al tabular: que el lector no los vea es justo lo correcto.
-  parameters: { a11y: { config: { rules: [{ id: 'aria-hidden-focus', enabled: false }] } } },
   render: function TestSeleccionYMenuRender() {
     const [marcada, setMarcada] = useState(false);
     return (
