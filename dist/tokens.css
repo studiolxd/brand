@@ -481,16 +481,24 @@ html.dark {
  */
 
 :root {
-  --link-hover-underline-width: 0px; /** Grosor de la línea en hover (en claro desaparece) */
+  --link-hover-underline-width: 0px; /** Grosor del subrayado en hover (en claro no hay línea: la quita `link.hover-decoration-line`) */
+  --link-decoration-line: underline; /** Si el enlace se subraya en reposo (`text-decoration-line`): `underline` o `none`. En claro, sí */
+  --link-hover-decoration-line: none; /** Si el enlace se subraya en hover (`text-decoration-line`): en claro la línea desaparece */
   --link-in-text-hover-underline-width: 0px; /** Enlace dentro de texto corrido: sin línea en hover, en las dos superficies (D41) */
+  --link-in-text-decoration-line: underline; /** Enlace dentro de texto corrido: subrayado en reposo, en las DOS superficies (D41). Sin par oscuro a propósito */
+  --link-in-text-hover-decoration-line: none; /** Enlace dentro de texto corrido: sin subrayado en hover, en las dos superficies (D41) */
   --link-cursor: pointer; /** Cursor */
   --link-ink-hover-underline-width: 0px; /** Tono ink: sin línea en hover */
+  --link-ink-decoration-line: underline; /** Tono ink: subrayado en reposo, en las dos superficies */
+  --link-ink-hover-decoration-line: none; /** Tono ink: sin subrayado en hover */
   --link-accent-1-hover-underline-width: 0px; /** Tono accent-1: sin línea en hover, como accent */
-  --link-underline-offset: var(--spacing-1); /** Separación entre el texto y la línea */
+  --link-accent-1-decoration-line: underline; /** Tono accent-1: subrayado en reposo, en las dos superficies */
+  --link-accent-1-hover-decoration-line: none; /** Tono accent-1: sin subrayado en hover */
+  --link-underline-offset: var(--spacing-1); /** Separación entre el texto y la línea. Se reserva como `padding-block-end` (el hueco de la línea: nada se mueve al aparecer) y la línea se coloca con `text-underline-position: under` y `text-underline-offset: calc(<separación> - <grosor>)`, de modo que cae en el borde inferior de ese hueco */
   --link-icon-gap: var(--spacing-2); /** Aire entre el icono y el texto del enlace */
   --link-color: var(--color-text-on-light); /** El enlace no tiene color propio: es texto, y lo distingue el subrayado */
   --link-hover-color: var(--color-text-on-light); /** Color en hover */
-  --link-underline-width: var(--border-width-default); /** El subrayado es una línea bajo el enlace (borde, no text-decoration): cubre texto e icono y se separa del texto. Su grosor */
+  --link-underline-width: var(--border-width-default); /** Grosor del subrayado (`text-decoration-thickness`). El subrayado es `text-decoration` con grosor y distancia de token (D64): se mantiene en alto contraste, se imprime y lo reconocen las herramientas de accesibilidad. Si se pinta o no lo dice `link.decoration-line`: un grosor 0 no oculta la línea (el navegador pinta como mínimo un píxel de dispositivo) */
   --link-in-text-underline-width: var(--border-width-default); /** Enlace dentro de texto corrido (párrafo, etiqueta, Prose): línea en reposo, en las DOS superficies. Entre texto, el color no basta para distinguirlo (en oscuro, amarillo sobre blanco da 1,5:1; WCAG 1.4.1 pide 3:1 u otra marca), así que la marca es la línea (D41). Sin par oscuro a propósito */
   --link-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
   --link-focus-ring-offset: var(--border-width-default); /** Separación entre el enlace y el anillo */
@@ -507,6 +515,8 @@ html.dark {
 [data-theme="dark"],
 html.dark {
   --link-underline-width: 0px; /** Sin línea en reposo — surface-dark */
+  --link-decoration-line: none; /** Sin subrayado en reposo — surface-dark: el amarillo ya lo distingue fuera del texto corrido */
+  --link-hover-decoration-line: underline; /** Subrayado en hover — surface-dark */
   --link-color: var(--color-accent-2); /** Color — surface-dark: amarillo (accent-2), y sin línea en reposo */
   --link-hover-color: var(--color-accent-2); /** Hover — surface-dark: amarillo, con línea */
   --link-hover-underline-width: var(--border-width-default); /** Línea en hover — surface-dark */
@@ -1110,7 +1120,11 @@ html.dark {
   --button-text-cursor: var(--link-cursor); /** Cursor */
   --button-text-white-space: var(--button-white-space); /** White space */
   --button-text-hover-underline-width: var(--link-hover-underline-width); /** Grosor de la línea en hover y en activo — el de `Link` */
+  --button-text-decoration-line: var(--link-decoration-line); /** Si se subraya en reposo — el de `Link` */
+  --button-text-hover-decoration-line: var(--link-hover-decoration-line); /** Si se subraya en hover y en activo — el de `Link` */
   --button-text-ink-hover-underline-width: var(--link-ink-hover-underline-width); /** tone=ink: grosor del subrayado en hover */
+  --button-text-ink-decoration-line: var(--link-ink-decoration-line); /** tone=ink: si se subraya en reposo */
+  --button-text-ink-hover-decoration-line: var(--link-ink-hover-decoration-line); /** tone=ink: si se subraya en hover */
   --button-text-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
   --button-text-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
   --button-ghost-border-style: var(--button-border-style); /** Border style */
@@ -1173,7 +1187,7 @@ html.dark {
   --button-text-font-family: var(--button-font-family); /** Font family */
   --button-text-font-size: var(--button-font-size); /** Font size */
   --button-text-line-height: var(--button-line-height); /** Line height */
-  --button-text-underline-offset: var(--link-underline-offset); /** Separación entre el texto y su línea — la de `Link`. Va como `padding-block-end`, así que la línea cae por debajo del icono igual que del texto */
+  --button-text-underline-offset: var(--link-underline-offset); /** Separación entre el texto y su línea — la de `Link`. Se reserva como `padding-block-end` (la caja mide alto de línea más esta separación) y la línea cae en el borde inferior de ese hueco (`text-underline-offset: calc(<separación> - <grosor>)`) */
   --button-text-transition-duration: var(--button-transition-duration); /** Transition duration */
   --button-text-transition-easing: var(--button-transition-easing); /** Transition easing */
   --button-ghost-font-family: var(--button-font-family); /** Font family */
@@ -1201,7 +1215,7 @@ html.dark {
   --button-outline-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
   --button-text-border-radius: var(--button-border-radius); /** Border radius */
   --button-text-font-weight: var(--button-font-weight); /** Font weight */
-  --button-text-underline-width: var(--link-underline-width); /** Grosor de la línea en reposo. La variante `text` se subraya con la misma técnica que `Link` —sombra interior, no `text-decoration`— porque `text-decoration` no cubre un SVG y un botón con icono quedaba con la línea cortada. Apunta al token de `Link` para que las dos piezas no puedan separarse */
+  --button-text-underline-width: var(--link-underline-width); /** Grosor del subrayado en reposo (`text-decoration-thickness`). La variante `text` se subraya igual que `Link` —`text-decoration` con grosor y distancia de token (D64)—, y apunta a sus tokens para que las dos piezas no puedan separarse. El icono del botón no se subraya */
   --button-text-ink-color: var(--link-ink-color); /** tone=ink: la tinta de la superficie, como en Link */
   --button-text-ink-underline-width: var(--link-ink-underline-width); /** tone=ink: grosor del subrayado en reposo */
   --button-text-disabled-color: var(--button-disabled-color); /** Text color when disabled — light surface */
@@ -1227,6 +1241,8 @@ html.dark {
   --button-outline-active-border: var(--color-white); /** Active border color — surface-dark */
   --button-outline-focus-ring-color: var(--color-white); /** Focus ring color — surface-dark */
   --button-text-underline-width: var(--link-underline-width); /** Grosor de la línea en reposo — surface-dark: el de `Link`, que sobre fondo oscuro no lleva línea en reposo */
+  --button-text-decoration-line: var(--link-decoration-line); /** Si se subraya en reposo — surface-dark: el de `Link`, sin línea */
+  --button-text-hover-decoration-line: var(--link-hover-decoration-line); /** Si se subraya en hover y activo — surface-dark: el de `Link`, con línea */
   --button-primary-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark (blanco) */
   --button-destructive-color: var(--color-destructive-text-on-dark); /** Text color — surface-dark */
   --button-destructive-border: var(--color-destructive-text-on-dark); /** Border color — surface-dark */
@@ -1583,6 +1599,7 @@ html.dark {
   --site-nav-item-gap: var(--spacing-3); /** Separación entre enlaces de un grupo */
   --site-nav-item-font-size: var(--font-size-4); /** Enlaces: un punto por debajo de la cabecera del grupo (Heading talla 6 = font-size.5) */
   --site-nav-item-line-height: var(--line-height-snug); /** Enlaces */
+  --site-nav-item-hover-decoration-line: var(--link-decoration-line); /** Enlaces en hover: subrayados en claro (`text-decoration-line`), como los enlaces de texto en reposo */
   --site-nav-item-badge-gap: var(--spacing-2); /** Aire entre el rótulo del ítem y su distintivo */
   --site-nav-item-font-weight: var(--font-weight-default); /** Enlaces */
   --site-nav-item-color: var(--color-text-on-light); /** Enlaces */
@@ -1594,7 +1611,7 @@ html.dark {
   --site-nav-focus-ring-width: var(--border-width-focus); /** Anillo de foco */
   --site-nav-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco */
   --site-nav-focus-ring-color: var(--color-primary); /** Anillo de foco */
-  --site-nav-item-hover-line-width: var(--link-underline-width); /** Enlaces en hover: la línea bajo el enlace (como los enlaces de texto), en claro */
+  --site-nav-item-hover-line-width: var(--link-underline-width); /** Enlaces en hover: grosor del subrayado (`text-decoration-thickness`), el de los enlaces de texto */
 }
 
 .surface-dark,
@@ -1602,6 +1619,7 @@ html.dark {
 [data-theme="dark"],
 html.dark {
   --site-nav-item-hover-line-width: 0px; /** Enlaces en hover — surface-dark: sin línea, cambia el color */
+  --site-nav-item-hover-decoration-line: none; /** Enlaces en hover — surface-dark: sin subrayado, cambia el color (un grosor 0 no basta: el navegador pinta como mínimo un píxel) */
   --site-nav-item-color: var(--color-text-on-dark); /** Enlaces — surface-dark */
   --site-nav-item-disabled-color: var(--color-disabled-text-on-dark); /** Ítem apagado — surface-dark */
   --site-nav-item-hover-color: var(--color-accent-2); /** Enlaces en hover — surface-dark: amarillo (accent-2) en vez de línea */
@@ -6402,6 +6420,8 @@ html.dark .surface-light {
   --button-outline-active-border: var(--color-text-on-light);
   --button-text-underline-width: var(--link-underline-width);
   --button-text-hover-underline-width: var(--link-hover-underline-width);
+  --button-text-decoration-line: var(--link-decoration-line);
+  --button-text-hover-decoration-line: var(--link-hover-decoration-line);
   --button-text-ink-color: var(--link-ink-color);
   --button-text-disabled-color: var(--button-disabled-color);
   --button-text-focus-ring-color: var(--link-focus-ring-color);
@@ -6516,6 +6536,8 @@ html.dark .surface-light {
   --link-hover-color: var(--color-text-on-light);
   --link-underline-width: var(--border-width-default);
   --link-hover-underline-width: 0px;
+  --link-decoration-line: underline;
+  --link-hover-decoration-line: none;
   --link-focus-ring-color: var(--color-primary);
   --link-ink-color: var(--color-text-on-light);
   --link-accent-1-color: var(--link-color);
@@ -6976,6 +6998,7 @@ html.dark .surface-light {
   --site-nav-item-color: var(--color-text-on-light);
   --site-nav-item-hover-color: var(--color-text-on-light);
   --site-nav-item-hover-line-width: var(--link-underline-width);
+  --site-nav-item-hover-decoration-line: var(--link-decoration-line);
   --site-nav-item-disabled-color: var(--color-disabled-text-on-light);
   --site-nav-focus-ring-color: var(--color-primary);
   --stat-tile-border-color: var(--card-outline-border-color);
