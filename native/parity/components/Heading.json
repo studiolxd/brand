@@ -45,7 +45,7 @@
     }
   ],
   "differences": [
-    "SwiftUI no encoge el interlineado por debajo del natural de la fuente: con `line-height` apretado (títulos grandes) el texto queda unos puntos más bajo dentro de su caja que en la web.",
+    "Una línea mide exactamente su caja de CSS (`tamaño × line-height`, con la tinta centrada como el medio interlineado de la web), en las dos plataformas. Con `line-height` por debajo del alto natural de la fuente (h1–h3 a 1,1; Google Sans Flex mide 1,25 em) SwiftUI no aprieta el paso entre líneas: un título de varias líneas mide (n − 1) × (alto natural − line-height) más que en la web (+6,1 pt por línea en un h1 de 40). Compose sí lo aprieta (`LineHeightStyle` Tight/Both).",
     "El texto de la web se ve algo más grueso (suavizado de Chromium en macOS); el peso del eje `wght` es el mismo.",
     "En Android `heading()` marca el encabezado para TalkBack pero no distingue niveles: el nivel solo fija el tamaño y el esquema lo conserva el desarrollador.",
     "En Android el eje de tamaño óptico (`opsz`) de la fuente se fija al tamaño del token, como hace el navegador; sin él los títulos salían más estrechos. El texto se ve algo más fino que en la web (Chromium engorda al suavizar)."
