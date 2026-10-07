@@ -86,7 +86,9 @@ export const ContratoEtiquetaOculta: Story = {
     // ...y sigue en el DOM, solo que oculta visualmente
     const etiqueta = canvasElement.querySelector('#menciones-label');
     await expect(etiqueta).toHaveClass('visually-hidden');
-    await expect(canvasElement.querySelector('.switcher-field__label')).toBeNull();
+    // La etiqueta oculta lleva la misma clase `__label` que la visible (como en
+    // CheckboxField): no queda ninguna a la vista.
+    await expect(canvasElement.querySelector('.switcher-field__label:not(.visually-hidden)')).toBeNull();
   },
 };
 
