@@ -76,7 +76,7 @@ de copiar, datos y estado —`copy`, `codeBlock`, `dotsButton`, `statTile`, `pro
 `conversationList`, `conversationThread`, `typingIndicator`, `annotationThread` y `chatShell`— y
 los de las páginas de conector —`connectorRequestSummary`, `connectorConsent`, `connectorSignIn`,
 `connectorExternalSignIn` y `connectorRejection`—. No hace falta memorizarlos: el tipo `BrandMessages` los lleva todos y
-**una app que se deje uno no compila** —salvo `appHeader`, opcional porque solo lo pide el logo del `AppHeader`, y la clave `heatmap.midpoint`, opcional porque solo la pide la escala divergente de `Heatmap`—. La tabla de más abajo dice qué prop cae en qué clave.
+**una app que se deje uno no compila** —salvo `appHeader`, opcional porque solo lo pide el logo del `AppHeader`, `field`, opcional porque solo lo pide la marca de opcional de los campos (y cae al castellano), y la clave `heatmap.midpoint`, opcional porque solo la pide la escala divergente de `Heatmap`—. La tabla de más abajo dice qué prop cae en qué clave.
 
 A partir de ahí, un componente migrado se monta **sin una sola prop de texto**:
 
@@ -270,6 +270,7 @@ La misma regla, aplicada a la familia de subidas:
 | `ConsentPreferences` | **Migrado al proveedor** (`consent.preferencesTitle`, `consent.alwaysOn`, sin defaults) — el mismo espacio que la banda, porque es la misma pieza. `closeLabel` es un reenvío puro al `Modal`/`Sheet` (`modal.close` / `sheet.close`). Los nombres y las explicaciones de cada categoría son contenido y se traducen pasando `categories` entera |
 | `TableOfContents` | **Migrado al proveedor** (`tableOfContents.label`, sin default). `ariaLabel` sigue como anulación puntual. `title` queda **fuera**: es el rótulo visible de ESE índice, y hay páginas que no lo ponen |
 | `PrevNextNav` | **Migrado al proveedor** (`prevNextNav.previous`, `.next`, sin defaults) — dicen la **dirección**, no el destino. Las dos props siguen como anulación puntual, y ahí está el caso de un par que navega semanas y quiere decir «Semana anterior». `prevTitle`, `nextTitle` y `label` quedan fuera: son de esta pantalla |
+| Todos los `*Field` (marca de opcional) | `optionalLabel`: el texto de la marca tras la etiqueta de un campo `optional`. Clave **opcional** `field.optional`; sin prop ni clave cae al castellano «(opcional)». Solo se lee si el campo lleva `optional` |
 | `InputField` | **Migrado al proveedor** (`inputField.clear`, sin default) — el aspa de la variante `kind="search"` con `clearable`; `clearLabel` sigue como anulación puntual. `label` (obligatoria), `placeholder`, `helperText` y `errorMessage` quedan **fuera** del proveedor: son el contenido de ESE campo |
 | `DocsSearch` | **Migrado al proveedor** (`docsSearch.label`, `.placeholder`, `.results`, `.empty`, `.loading`, sin defaults). `clearLabel` **no tiene clave propia**: el aspa es la del `InputField` de debajo y sale de `inputField.clear`; la prop sigue como reenvío puro |
 | `FilterBar` | **Migrado al proveedor** (`filterBar.label`, sin default) — el nombre del punto de referencia `search`. Los rótulos de los filtros no pasan por el catálogo: los escribe cada campo |

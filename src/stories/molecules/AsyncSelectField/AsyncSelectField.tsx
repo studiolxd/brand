@@ -2,13 +2,13 @@ import { forwardRef } from 'react';
 import './AsyncSelectField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { AsyncSelect } from '../../atoms/AsyncSelect/AsyncSelect';
 import type { AsyncSelectOption } from '../../atoms/AsyncSelect/AsyncSelect';
 
 export type { AsyncSelectOption };
 
-export interface AsyncSelectFieldProps {
+export interface AsyncSelectFieldProps extends FieldOptionalProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
   id?: string;
   label: string;
@@ -60,6 +60,8 @@ export interface AsyncSelectFieldProps {
 export const AsyncSelectField = forwardRef<HTMLInputElement, AsyncSelectFieldProps>(function AsyncSelectField({
   id: idProp,
   label,
+  optional,
+  optionalLabel,
   labelHidden: labelHiddenProp,
   onSearch,
   value,
@@ -88,7 +90,7 @@ export const AsyncSelectField = forwardRef<HTMLInputElement, AsyncSelectFieldPro
   const { id } = field;
 
   return (
-    <FieldShell field={field} block="async-select-field" className={className} label={label} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="async-select-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       <AsyncSelect
         ref={ref}
         id={id}

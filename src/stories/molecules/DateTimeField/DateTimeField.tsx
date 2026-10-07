@@ -1,7 +1,7 @@
 import { forwardRef, useCallback } from 'react';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { DatePicker } from '../DatePicker/DatePicker';
 import type { DatePickerProps } from '../DatePicker/DatePicker';
 import { TimeSelect } from '../../atoms/TimeSelect/TimeSelect';
@@ -9,7 +9,7 @@ import type { TimeValue } from '../../atoms/TimeSelect/TimeSelect';
 import type { CalendarProps } from '../Calendar/Calendar';
 import './DateTimeField.css';
 
-export interface DateTimeFieldProps {
+export interface DateTimeFieldProps extends FieldOptionalProps {
   /** `id` del campo. Si no se pasa, se genera con `useId`. */
   id?: string;
   label: string;
@@ -101,6 +101,8 @@ function getTimeValue(date: Date | null | undefined): TimeValue | null {
 export const DateTimeField = forwardRef<HTMLInputElement, DateTimeFieldProps>(function DateTimeField({
   id: idProp,
   label,
+  optional,
+  optionalLabel,
   labelHidden: labelHiddenProp,
   value,
   placeholder,
@@ -162,7 +164,7 @@ export const DateTimeField = forwardRef<HTMLInputElement, DateTimeFieldProps>(fu
   );
 
   return (
-    <FieldShell field={field} block="date-time-field" className={className} label={label} labelHidden={labelHidden} size={size} labelIdentified labelFor={dateId}>
+    <FieldShell field={field} block="date-time-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size} labelIdentified labelFor={dateId}>
       <div
         className="date-time-field__controls"
         role="group"

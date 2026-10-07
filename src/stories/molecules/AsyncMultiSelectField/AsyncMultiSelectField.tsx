@@ -2,13 +2,13 @@ import { forwardRef } from 'react';
 import './AsyncMultiSelectField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { AsyncMultiSelect } from '../../atoms/AsyncMultiSelect/AsyncMultiSelect';
 import type { AsyncMultiSelectOption } from '../../atoms/AsyncMultiSelect/AsyncMultiSelect';
 
 export type { AsyncMultiSelectOption };
 
-export interface AsyncMultiSelectFieldProps {
+export interface AsyncMultiSelectFieldProps extends FieldOptionalProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
   id?: string;
   label: string;
@@ -61,6 +61,8 @@ export interface AsyncMultiSelectFieldProps {
 export const AsyncMultiSelectField = forwardRef<HTMLInputElement, AsyncMultiSelectFieldProps>(function AsyncMultiSelectField({
   id: idProp,
   label,
+  optional,
+  optionalLabel,
   labelHidden: labelHiddenProp,
   onSearch,
   value,
@@ -90,7 +92,7 @@ export const AsyncMultiSelectField = forwardRef<HTMLInputElement, AsyncMultiSele
   const { id } = field;
 
   return (
-    <FieldShell field={field} block="async-multi-select-field" className={className} label={label} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="async-multi-select-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       <AsyncMultiSelect
         ref={ref}
         id={id}

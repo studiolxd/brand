@@ -465,6 +465,8 @@ object BrandLabelTokens {
     val color: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
     /** Token `label.letter-spacing` — Letter spacing Fracción del tamaño de fuente del propio componente (em). */
     val letterSpacing: Float = 0f
+    /** Token `label.optional-color` — Tinta de la marca « (opcional)» tras la etiqueta de un campo `optional` (D70): la apagada, mismo tamaño que la etiqueta */
+    val optionalColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF4A4A4A), Color(0xFFD0D0D0))
 }
 
 /** Tokens del componente `form-field` (`tokens/**/form-field.json`). Todo color es un [BrandSchemeValue]: se resuelve con `.current` (los que no tienen par oscuro valen lo mismo en los dos esquemas). */

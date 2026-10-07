@@ -211,6 +211,7 @@ html.dark .surface-light {
   --kbd-bg: var(--color-surface-secondary-on-light);
   --kbd-color: var(--color-text-on-light);
   --label-color: var(--color-text-on-light);
+  --label-optional-color: var(--color-text-muted-on-light);
   --link-color: var(--color-text-on-light);
   --link-hover-color: var(--color-text-on-light);
   --link-underline-width: var(--border-width-default);

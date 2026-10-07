@@ -2,13 +2,13 @@ import { forwardRef } from 'react';
 import './AutocompleteField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { Autocomplete } from '../../atoms/Autocomplete/Autocomplete';
 import type { AutocompleteOption } from '../../atoms/Autocomplete/Autocomplete';
 
 export type { AutocompleteOption };
 
-export interface AutocompleteFieldProps {
+export interface AutocompleteFieldProps extends FieldOptionalProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
   id?: string;
   label: string;
@@ -64,6 +64,8 @@ export interface AutocompleteFieldProps {
 export const AutocompleteField = forwardRef<HTMLInputElement, AutocompleteFieldProps>(function AutocompleteField({
   id: idProp,
   label,
+  optional,
+  optionalLabel,
   labelHidden: labelHiddenProp,
   value,
   defaultValue,
@@ -93,7 +95,7 @@ export const AutocompleteField = forwardRef<HTMLInputElement, AutocompleteFieldP
   const { id } = field;
 
   return (
-    <FieldShell field={field} block="autocomplete-field" className={className} label={label} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="autocomplete-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       <Autocomplete
         ref={ref}
         id={id}

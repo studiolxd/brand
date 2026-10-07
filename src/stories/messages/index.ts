@@ -69,6 +69,7 @@ export type {
   OrgChartMessages,
   PlanningGridMessages,
   RecurrenceFieldMessages,
+  FieldMessages,
   TimelineMessages,
   UptimeBarsMessages,
   ChartMessages,

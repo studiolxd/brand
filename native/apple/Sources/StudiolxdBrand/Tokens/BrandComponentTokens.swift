@@ -456,6 +456,8 @@ public enum BrandLabelTokens {
     public static let color: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xFFFFFF))
     /// Token `label.letter-spacing` — Letter spacing Fracción del tamaño de fuente del propio componente (em).
     public static let letterSpacing: CGFloat = 0
+    /// Token `label.optional-color` — Tinta de la marca « (opcional)» tras la etiqueta de un campo `optional` (D70): la apagada, mismo tamaño que la etiqueta
+    public static let optionalColor: Color = Color(brandLight: Color(brandHex: 0x4A4A4A), dark: Color(brandHex: 0xD0D0D0))
 }
 
 /// Tokens del componente `form-field` (`tokens/**/form-field.json`). Un token con par `surface-dark-*` (o que lo hereda) es un `Color` dinámico.

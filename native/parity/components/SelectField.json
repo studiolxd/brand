@@ -9,6 +9,8 @@
     "error": { "type": "boolean", "default": false }
   },
   "excluded": [
+    { "prop": "optional", "reason": "Pendiente de portar (D70): la marca « (opcional)» tras la etiqueta es solo de React por ahora; en nativo no se pinta." },
+    { "prop": "optionalLabel", "reason": "Pendiente de portar (D70): el texto de la marca de opcional va con `optional`, que aún no está en nativo." },
     { "prop": "id", "reason": "El `id` enlaza la etiqueta con el control en HTML; en SwiftUI el enlace es el nombre accesible que pone el propio campo." },
     { "prop": "label", "reason": "No es una unión ni un booleano: es el primer argumento del inicializador (`BrandSelectField(\"Idioma\", selection: …)`)." },
     { "prop": "options", "reason": "Es una lista, no un caso: existe como `options: [BrandSelectEntry]` (opción suelta o grupo con cabecera, como en React)." },

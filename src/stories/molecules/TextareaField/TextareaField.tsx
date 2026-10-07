@@ -3,9 +3,9 @@ import './TextareaField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
 import { Textarea } from '../../atoms/Textarea/Textarea';
-import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 
-export interface TextareaFieldProps extends Omit<ComponentPropsWithoutRef<'textarea'>, 'value' | 'defaultValue' | 'rows'> {
+export interface TextareaFieldProps extends Omit<ComponentPropsWithoutRef<'textarea'>, 'value' | 'defaultValue' | 'rows'>, FieldOptionalProps {
   id: string;
   label: string;
   /**
@@ -41,6 +41,8 @@ export interface TextareaFieldProps extends Omit<ComponentPropsWithoutRef<'texta
 export const TextareaField = forwardRef<HTMLTextAreaElement, TextareaFieldProps>(function TextareaField({
   id,
   label,
+  optional,
+  optionalLabel,
   labelHidden: labelHiddenProp,
   name,
   placeholder,
@@ -67,7 +69,7 @@ export const TextareaField = forwardRef<HTMLTextAreaElement, TextareaFieldProps>
   const field = useFieldShell({ id, error, errorMessage, helperText, describedBy: ariaDescribedBy });
 
   return (
-    <FieldShell field={field} block="textarea-field" className={className} label={label} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="textarea-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       <Textarea
         ref={ref}
         {...rest}

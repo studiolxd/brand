@@ -11,6 +11,7 @@
   --label-letter-spacing: var(--letter-spacing-normal); /** Letter spacing */
   --label-font-weight: var(--font-weight-emphasis); /** Font weight */
   --label-color: var(--color-text-on-light); /** Text color */
+  --label-optional-color: var(--color-text-muted-on-light); /** Tinta de la marca « (opcional)» tras la etiqueta de un campo `optional` (D70): la apagada, mismo tamaño que la etiqueta */
 }
 
 .surface-dark,
@@ -18,4 +19,5 @@
 [data-theme="dark"],
 html.dark {
   --label-color: var(--color-text-on-dark); /** Color — surface-dark */
+  --label-optional-color: var(--color-text-muted-on-dark); /** Tinta de la marca de opcional — surface-dark */
 }

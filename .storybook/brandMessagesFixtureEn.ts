@@ -375,6 +375,9 @@ export const brandMessagesFixtureEn: BrandMessages = {
     over: 'over capacity',
     saving: 'Saving…',
   },
+  field: {
+    optional: '(optional)',
+  },
   recurrenceField: {
     legend: 'Repeat',
     frequency: 'Frequency',

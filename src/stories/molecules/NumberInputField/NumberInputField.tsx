@@ -2,11 +2,11 @@ import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import './NumberInputField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { NumberInput, type NumberInputCommitMode } from '../../atoms/NumberInput/NumberInput';
 
 export interface NumberInputFieldProps
-  extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue' | 'onChange'> {
+  extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue' | 'onChange'>, FieldOptionalProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
   id?: string;
   label: string;
@@ -56,6 +56,8 @@ export interface NumberInputFieldProps
 export const NumberInputField = forwardRef<HTMLInputElement, NumberInputFieldProps>(function NumberInputField({
   id: idProp,
   label,
+  optional,
+  optionalLabel,
   labelHidden: labelHiddenProp,
   value,
   defaultValue,
@@ -83,7 +85,7 @@ export const NumberInputField = forwardRef<HTMLInputElement, NumberInputFieldPro
   const { id } = field;
 
   return (
-    <FieldShell field={field} block="number-input-field" className={className} label={label} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="number-input-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       <NumberInput
         ref={ref}
         {...rest}

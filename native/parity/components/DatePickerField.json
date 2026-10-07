@@ -38,6 +38,14 @@
   },
   "excluded": [
     {
+      "prop": "optional",
+      "reason": "Pendiente de portar (D70): la marca « (opcional)» tras la etiqueta es solo de React por ahora; en nativo no se pinta."
+    },
+    {
+      "prop": "optionalLabel",
+      "reason": "Pendiente de portar (D70): el texto de la marca de opcional va con `optional`, que aún no está en nativo."
+    },
+    {
       "prop": "id",
       "reason": "El `id` enlaza la etiqueta con el control en HTML; en nativo el enlace es el nombre accesible que pone el propio campo."
     },

@@ -3,13 +3,13 @@
 import { forwardRef } from 'react';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { ColorPicker } from '../ColorPicker/ColorPicker';
 import type { ColorPickerProps } from '../ColorPicker/ColorPicker';
 import './ColorPickerField.css';
 
 export interface ColorPickerFieldProps
-  extends Omit<ColorPickerProps, 'id' | 'aria-describedby' | 'aria-label' | 'aria-labelledby'> {
+  extends Omit<ColorPickerProps, 'id' | 'aria-describedby' | 'aria-label' | 'aria-labelledby'>, FieldOptionalProps {
   /** `id` del disparador. Si no se pasa, se genera con `useId`. */
   id?: string;
   label: string;
@@ -44,6 +44,8 @@ export interface ColorPickerFieldProps
 export const ColorPickerField = forwardRef<HTMLButtonElement, ColorPickerFieldProps>(function ColorPickerField({
   id: idProp,
   label,
+  optional,
+  optionalLabel,
   labelHidden: labelHiddenProp,
   errorMessage,
   helperText,
@@ -64,6 +66,8 @@ export const ColorPickerField = forwardRef<HTMLButtonElement, ColorPickerFieldPr
       block="color-picker-field"
       className={className}
       label={label}
+      optional={optional}
+      optionalLabel={optionalLabel}
       labelHidden={labelHidden}
       size={size}
       labelIdentified

@@ -2,11 +2,11 @@ import { forwardRef } from 'react';
 import { InputPhone } from '../../atoms/InputPhone/InputPhone';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import type { Country } from 'react-phone-number-input';
 import './InputPhoneField.css';
 
-export interface InputPhoneFieldProps {
+export interface InputPhoneFieldProps extends FieldOptionalProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
   id?: string;
   label: string;
@@ -52,6 +52,8 @@ export interface InputPhoneFieldProps {
 export const InputPhoneField = forwardRef<HTMLInputElement, InputPhoneFieldProps>(function InputPhoneField({
   id: idProp,
   label,
+  optional,
+  optionalLabel,
   labelHidden: labelHiddenProp,
   value,
   defaultCountry,
@@ -78,7 +80,7 @@ export const InputPhoneField = forwardRef<HTMLInputElement, InputPhoneFieldProps
   const { id } = field;
 
   return (
-    <FieldShell field={field} block="input-phone-field" className={className} label={label} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="input-phone-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       <InputPhone
         ref={ref}
         id={id}

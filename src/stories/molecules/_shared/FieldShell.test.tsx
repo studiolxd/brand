@@ -36,12 +36,15 @@ const ID = 'campo';
 const LABEL = 'Etiqueta';
 const HELP = 'Texto de ayuda';
 const ERROR = 'Texto de error';
+/** La etiqueta, con o sin la marca de opcional detrás: para buscar el grupo por su nombre. */
+const LABEL_START = new RegExp(`^${LABEL}`);
 
 interface Shared {
   labelHidden?: boolean;
   helperText?: string;
   errorMessage?: string;
   required?: boolean;
+  optional?: boolean;
 }
 
 type Query = () => HTMLElement;
@@ -60,6 +63,8 @@ interface Case {
   required: { how: 'native' | 'aria'; on?: Query } | null;
   /** Si el campo admite `labelHidden`. */
   labelHidden?: boolean;
+  /** Si el campo admite la marca `optional` (D70). */
+  optional?: boolean;
 }
 
 const noSearch = async () => [];
@@ -165,7 +170,7 @@ const CASES: Case[] = [
     // su «Dígito N de M»); `required` va en cada celda.
     name: 'OtpField',
     render: (p) => <OtpField id={ID} label={LABEL} length={4} {...p} />,
-    named: () => screen.getByRole('group', { name: LABEL }),
+    named: () => screen.getByRole('group', { name: LABEL_START }),
     required: { how: 'native', on: byId(`${ID}-0`) },
   },
   {
@@ -176,9 +181,11 @@ const CASES: Case[] = [
   },
   {
     name: 'RadioField',
-    render: (p) => <RadioField id={ID} label={LABEL} name="r" value="a" {...p} />,
+    // Una opción suelta no es un campo que se pueda dejar vacío: sin `optional`.
+    render: (p) => <RadioField id={ID} label={LABEL} name="r" value="a" {...drop(p, 'optional')} />,
     named: byId(ID),
     required: { how: 'native' },
+    optional: false,
   },
   {
     // Editor compuesto: la «etiqueta» es el `legend` del `fieldset`; la ayuda
@@ -188,11 +195,13 @@ const CASES: Case[] = [
     // legendHidden`).
     name: 'RecurrenceField',
     render: (p) => (
-      <RecurrenceField id={ID} legend={LABEL} value={null} onValueChange={() => {}} {...drop(p, 'required')} />
+      <RecurrenceField id={ID} legend={LABEL} value={null} onValueChange={() => {}} {...drop(p, 'required', 'optional')} />
     ),
     named: () => screen.getByRole('group', { name: LABEL }),
     invalid: null,
     required: null,
+    // La leyenda no pasa por la etiqueta del armazón: sin `optional` por ahora.
+    optional: false,
   },
   {
     name: 'SelectField',
@@ -202,9 +211,11 @@ const CASES: Case[] = [
   },
   {
     name: 'SwitcherField',
-    render: (p) => <SwitcherField id={ID} label={LABEL} {...p} />,
+    // Un interruptor siempre tiene valor: sin `optional`.
+    render: (p) => <SwitcherField id={ID} label={LABEL} {...drop(p, 'optional')} />,
     named: byId(ID),
     required: { how: 'aria' },
+    optional: false,
   },
   {
     name: 'TextareaField',
@@ -216,7 +227,7 @@ const CASES: Case[] = [
     // Compuesto: dos desplegables; la etiqueta nombra el grupo.
     name: 'TimeField',
     render: (p) => <TimeField id={ID} label={LABEL} {...p} />,
-    named: () => screen.getByRole('group', { name: LABEL }),
+    named: () => screen.getByRole('group', { name: LABEL_START }),
     required: { how: 'aria' },
   },
 ];
@@ -276,6 +287,17 @@ describe('FieldShell — contrato común de los *Field', () => {
         mount(c, { required: true });
         if (how === 'native') expect(target()).toBeRequired();
         else expect(target()).toHaveAttribute('aria-required', 'true');
+      });
+    }
+
+    if (c.optional !== false) {
+      it('`optional` pinta «(opcional)» tras la etiqueta, dentro del nombre accesible', () => {
+        const { unmount } = mount(c);
+        expect(document.querySelector('.label__optional')).toBeNull();
+        unmount();
+        mount(c, { optional: true });
+        expect(document.querySelector('.label__optional')).toHaveTextContent('(opcional)');
+        expect(c.named()).toHaveAccessibleName(`${LABEL} (opcional)`);
       });
     }
 

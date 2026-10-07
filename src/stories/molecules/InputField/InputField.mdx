@@ -19,6 +19,19 @@ Con la etiqueta oculta y sin `placeholder` propio, el campo usa el texto de la e
 
 <Canvas of={InputFieldStories.EtiquetaOculta} />
 
+## Opcional
+
+Se marca lo **opcional**, no lo obligatorio. En un formulario donde casi todo es obligatorio —el caso normal: se pide lo que hace falta—, lo que hay que señalar es la excepción, y llenar de asteriscos el resto solo añade ruido. Por eso la marca va con `optional`, que pinta « (opcional)» tras la etiqueta en la tinta apagada de la etiqueta (`label.optional-color`), al mismo tamaño.
+
+- **Es explícita.** Un campo sin `required` no la lleva solo: un buscador, un filtro o el correo del pie no son «opcionales» de ningún formulario, y marcarlos sería mentir. Se pone a mano en los campos que se pueden dejar vacíos de un formulario donde la mayoría no.
+- **Va dentro de la etiqueta**, así que el lector de pantalla la lee como parte del nombre: «Teléfono (opcional)».
+- **No se combina con `required`.** Un campo es una cosa o la otra; lo obligatorio lo anuncia el `required` del control.
+- El texto sale de `field.optional` del catálogo (clave opcional; sin ella, «(opcional)»), y `optionalLabel` lo anula en un uso concreto.
+
+La llevan todos los `*Field` que pasan su etiqueta por el armazón común, salvo `RadioField` (una opción suelta no se deja vacía: lo opcional es el grupo), `SwitcherField` (un interruptor siempre tiene valor) y `RecurrenceField` (su título es una leyenda). En nativo aún no existe.
+
+<Canvas of={InputFieldStories.Opcional} />
+
 ## Ayuda y error
 
 `helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados al control por `aria-describedby`, y el error también por `aria-invalid`. El borde en error usa el color de texto de error (`error-text-on-light`), nunca un fondo.

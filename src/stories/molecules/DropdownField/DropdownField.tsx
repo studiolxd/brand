@@ -3,13 +3,13 @@
 import { forwardRef, useRef, type ReactNode } from 'react';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { RequiredInput } from '../_shared/requiredInput';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Menu, type MenuItem } from '../Menu/Menu';
 import './DropdownField.css';
 
-export interface DropdownFieldProps {
+export interface DropdownFieldProps extends FieldOptionalProps {
   /** `id` del control; enlaza la etiqueta. Si no se pasa, se genera con `useId`. */
   id?: string;
   /** Etiqueta visible. Si no hay, es obligatorio `aria-label`. */
@@ -64,6 +64,8 @@ export interface DropdownFieldProps {
 export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(function DropdownField({
   id: idProp,
   label,
+  optional,
+  optionalLabel,
   labelHidden: labelHiddenProp,
   'aria-label': ariaLabel,
   items,
@@ -107,6 +109,8 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
       modifiers={[inline && 'dropdown-field--inline', size !== 'md' && `dropdown-field--${size}`]}
       className={className}
       label={label}
+      optional={optional}
+      optionalLabel={optionalLabel}
       labelHidden={labelHidden}
       size={size}
       labelIdentified={required}
