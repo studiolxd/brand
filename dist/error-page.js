@@ -3,7 +3,7 @@ import { Columns as e } from "./columns.js";
 import { Stack as t } from "./stack.js";
 import { Paragraph as n } from "./paragraph.js";
 import { PageIntro as r } from "./page-intro.js";
-import { PublicPageShell as i } from "./public-page-shell.js";
+import { t as i } from "./_shared/publicpageshell.js";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/templates/ErrorPage/ErrorPage.tsx
 function s({ title: s, description: c, homeAction: l, retryDescription: u, retryAction: d, header: f, footer: p, id: m = "main-content", shell: h = !0, className: g }) {

@@ -9,39 +9,42 @@ import { t as a } from "./_shared/dropdownitems.js";
 import { n as o } from "./_shared/sidebarcontext.js";
 import { Fragment as s, jsx as c, jsxs as l } from "react/jsx-runtime";
 import { Menu as u } from "@base-ui/react/menu";
+//#region src/stories/messages/es/orgSwitcher.ts
+var d = { trigger: (e) => `Organización: ${e}` };
+//#endregion
 //#region src/stories/molecules/OrgSwitcher/OrgSwitcher.tsx
-function d({ label: d, block: f = !1, compact: p, current: m, organizations: h, onOrgChange: g, defaultOpen: _, items: v, renderLink: y = i, className: b }) {
-	let x = e("orgSwitcher"), S = n(void 0), C = h.filter((e) => e.id !== m.id), w = o(), T = p ?? w.rail;
+function f({ label: f, block: p = !1, compact: m, current: h, organizations: g, onOrgChange: _, defaultOpen: v, items: y, renderLink: b = i, className: x }) {
+	let S = e("orgSwitcher", d), C = n(void 0), w = g.filter((e) => e.id !== h.id), T = o(), E = m ?? T.rail;
 	return /* @__PURE__ */ l(u.Root, {
-		defaultOpen: _,
+		defaultOpen: v,
 		children: [/* @__PURE__ */ l(u.Trigger, {
 			className: [
 				"org-switcher__trigger",
-				f && !T ? "org-switcher__trigger--block" : "",
-				T ? "org-switcher__trigger--compact" : "",
-				b
+				p && !E ? "org-switcher__trigger--block" : "",
+				E ? "org-switcher__trigger--compact" : "",
+				x
 			].filter(Boolean).join(" "),
-			"aria-label": d ?? x("trigger")(m.name),
+			"aria-label": f ?? S("trigger")(h.name),
 			children: [
 				/* @__PURE__ */ c(r, {
-					src: m.logoUrl,
-					name: m.name,
+					src: h.logoUrl,
+					name: h.name,
 					alt: "",
 					size: "sm",
 					shape: "square"
 				}),
-				!T && /* @__PURE__ */ c("span", {
+				!E && /* @__PURE__ */ c("span", {
 					className: "org-switcher__name",
-					children: m.name
+					children: h.name
 				}),
-				!T && /* @__PURE__ */ c(t, {
+				!E && /* @__PURE__ */ c(t, {
 					name: "chevron",
 					size: "sm",
 					className: "org-switcher__chevron"
 				})
 			]
 		}), /* @__PURE__ */ c(u.Portal, {
-			container: S,
+			container: C,
 			children: /* @__PURE__ */ c(u.Positioner, {
 				className: "org-switcher__positioner",
 				sideOffset: 4,
@@ -54,16 +57,16 @@ function d({ label: d, block: f = !1, compact: p, current: m, organizations: h, 
 							checked: !0,
 							onCheckedChange: () => void 0,
 							children: [/* @__PURE__ */ c(r, {
-								src: m.logoUrl,
-								name: m.name,
+								src: h.logoUrl,
+								name: h.name,
 								alt: "",
 								size: "sm",
 								shape: "square"
-							}), /* @__PURE__ */ c("span", { children: m.name })]
+							}), /* @__PURE__ */ c("span", { children: h.name })]
 						}),
-						C.map((e) => /* @__PURE__ */ l(u.Item, {
+						w.map((e) => /* @__PURE__ */ l(u.Item, {
 							className: "org-switcher__item",
-							onClick: () => g(e.id),
+							onClick: () => _(e.id),
 							children: [/* @__PURE__ */ c(r, {
 								src: e.logoUrl,
 								name: e.name,
@@ -72,11 +75,11 @@ function d({ label: d, block: f = !1, compact: p, current: m, organizations: h, 
 								shape: "square"
 							}), /* @__PURE__ */ c("span", { children: e.name })]
 						}, e.id)),
-						v && v.length > 0 && /* @__PURE__ */ l(s, { children: [/* @__PURE__ */ c(u.Separator, { className: "org-switcher__separator" }), a({
-							items: v,
+						y && y.length > 0 && /* @__PURE__ */ l(s, { children: [/* @__PURE__ */ c(u.Separator, { className: "org-switcher__separator" }), a({
+							items: y,
 							itemClass: (e) => ["org-switcher__item", e ? "org-switcher__item--destructive" : ""].filter(Boolean).join(" "),
 							separatorClass: "org-switcher__separator",
-							renderLink: y
+							renderLink: b
 						})] })
 					]
 				})
@@ -85,4 +88,4 @@ function d({ label: d, block: f = !1, compact: p, current: m, organizations: h, 
 	});
 }
 //#endregion
-export { d as OrgSwitcher };
+export { f as OrgSwitcher };

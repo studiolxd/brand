@@ -1,9 +1,8 @@
 import '../progressbar.css';
 import { n as e } from "./brandmessagescontext.js";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
-//#endregion
-//#region src/stories/atoms/ProgressBar/ProgressBar.tsx
-var r = Number({ "progress-bar": {
+//#region tokens/component/progress-bar.json
+var r = { "progress-bar": {
 	"height-sm": {
 		$value: "{spacing.2}",
 		$type: "dimension",
@@ -179,39 +178,39 @@ var r = Number({ "progress-bar": {
 		$type: "color",
 		$description: "Cifra sobre el relleno primary — surface-dark. El relleno se invierte a blanco, así que la cifra pasa a la tinta clara: si no, quedaría blanco sobre blanco"
 	}
-} }["progress-bar"]["inside-label-threshold"].$value);
-function i({ value: i, variant: a = "primary", size: o = "md", label: s, className: c }) {
-	let l = e("progressBar"), u = Math.min(100, Math.max(0, Math.round(i))), d = o !== "sm", f = d && u >= r, p = d && !f;
+} }, i = { label: "Progreso" }, a = Number(r["progress-bar"]["inside-label-threshold"].$value);
+function o({ value: r, variant: o = "primary", size: s = "md", label: c, className: l }) {
+	let u = e("progressBar", i), d = Math.min(100, Math.max(0, Math.round(r))), f = s !== "sm", p = f && d >= a, m = f && !p;
 	return /* @__PURE__ */ t("div", {
 		className: [
 			"progress-bar",
-			`progress-bar--${a}`,
 			`progress-bar--${o}`,
-			c
+			`progress-bar--${s}`,
+			l
 		].filter(Boolean).join(" "),
 		children: /* @__PURE__ */ n("div", {
 			className: "progress-bar__track",
 			role: "progressbar",
-			"aria-valuenow": u,
+			"aria-valuenow": d,
 			"aria-valuemin": 0,
 			"aria-valuemax": 100,
-			"aria-valuetext": `${u}%`,
-			"aria-label": l("label", s),
-			"data-value": u,
+			"aria-valuetext": `${d}%`,
+			"aria-label": u("label", c),
+			"data-value": d,
 			children: [/* @__PURE__ */ t("div", {
 				className: "progress-bar__fill",
-				children: f && /* @__PURE__ */ n("span", {
+				children: p && /* @__PURE__ */ n("span", {
 					className: "progress-bar__label progress-bar__label--inside",
 					"aria-hidden": "true",
-					children: [u, "%"]
+					children: [d, "%"]
 				})
-			}), p && /* @__PURE__ */ n("span", {
+			}), m && /* @__PURE__ */ n("span", {
 				className: "progress-bar__label progress-bar__label--outside",
 				"aria-hidden": "true",
-				children: [u, "%"]
+				children: [d, "%"]
 			})]
 		})
 	});
 }
 //#endregion
-export { i as t };
+export { o as t };

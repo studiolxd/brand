@@ -4,98 +4,98 @@ import { n as e } from "./_shared/brandmessagescontext.js";
 import { Icon as t } from "./icon.js";
 import { VisuallyHidden as n } from "./visually-hidden.js";
 import { Button as r } from "./button.js";
-import { n as i } from "./_shared/copy-to-clipboard.js";
-import { forwardRef as a, isValidElement as o } from "react";
-import { Fragment as s, jsx as c, jsxs as l } from "react/jsx-runtime";
+import { r as i, t as a } from "./_shared/copy.js";
+import { forwardRef as o, isValidElement as s } from "react";
+import { Fragment as c, jsx as l, jsxs as u } from "react/jsx-runtime";
 //#region src/stories/atoms/CopyableValue/CopyableValue.tsx
-var u = 6, d = 12, f = new Set([
+var d = 6, f = 12, p = new Set([
 	"/",
 	"-",
 	"_",
 	"."
 ]);
-function p(e) {
-	if (e.length <= u) return {
+function m(e) {
+	if (e.length <= d) return {
 		head: "",
 		tail: e
 	};
-	let t = Math.max(0, e.length - d);
-	for (let n = e.length - 2; n >= t; n--) if (f.has(e[n])) return {
+	let t = Math.max(0, e.length - f);
+	for (let n = e.length - 2; n >= t; n--) if (p.has(e[n])) return {
 		head: e.slice(0, n),
 		tail: e.slice(n)
 	};
 	return {
-		head: e.slice(0, e.length - u),
-		tail: e.slice(e.length - u)
+		head: e.slice(0, e.length - d),
+		tail: e.slice(e.length - d)
 	};
 }
-function m(e) {
+function h(e) {
 	if (e == null || typeof e == "boolean") return "";
 	if (typeof e == "string") return e;
 	if (typeof e == "number") return String(e);
 	if (Array.isArray(e)) {
 		let t = "";
 		for (let n of e) {
-			let e = m(n);
+			let e = h(n);
 			if (e === null) return null;
 			t += e;
 		}
 		return t;
 	}
-	return o(e) ? m(e.props.children) : null;
+	return s(e) ? h(e.props.children) : null;
 }
-var h = 24, g = a(function({ children: a, copyText: o, copyLabel: u, copiedLabel: d, className: f }, g) {
-	let _ = e("copy"), { status: v, copy: y } = i(), b = v === "copied", x = ["copyable-value", f].filter(Boolean).join(" "), S = typeof a == "string", C = S ? p(a) : null, w = S ? null : m(a), T = S ? a : w ?? "", E = !S && w !== null && !/\s/.test(w) && w.length <= h, D = /* @__PURE__ */ c(r, {
+var g = 24, _ = o(function({ children: o, copyText: s, copyLabel: d, copiedLabel: f, className: p }, _) {
+	let v = e("copy", a), { status: y, copy: b } = i(), x = y === "copied", S = ["copyable-value", p].filter(Boolean).join(" "), C = typeof o == "string", w = C ? m(o) : null, T = C ? null : h(o), E = C ? o : T ?? "", D = !C && T !== null && !/\s/.test(T) && T.length <= g, O = /* @__PURE__ */ l(r, {
 		iconOnly: !0,
 		variant: "ghost",
 		size: "sm",
-		"aria-label": _("label", u),
-		onClick: () => y(() => o ?? T),
+		"aria-label": v("label", d),
+		onClick: () => b(() => s ?? E),
 		className: "copyable-value__copy",
-		children: /* @__PURE__ */ c(t, {
-			name: b ? "check" : "copy",
+		children: /* @__PURE__ */ l(t, {
+			name: x ? "check" : "copy",
 			size: "sm"
 		})
-	}), O;
-	if (S) {
-		let { head: e, tail: t } = C;
-		O = /* @__PURE__ */ l("span", {
+	}), k;
+	if (C) {
+		let { head: e, tail: t } = w;
+		k = /* @__PURE__ */ u("span", {
 			className: "copyable-value__value",
-			children: [e, /* @__PURE__ */ l("span", {
+			children: [e, /* @__PURE__ */ u("span", {
 				className: "copyable-value__tail",
 				children: [
 					t,
 					"⁠",
-					D
+					O
 				]
 			})]
 		});
-	} else O = E ? /* @__PURE__ */ l("span", {
+	} else k = D ? /* @__PURE__ */ u("span", {
 		className: "copyable-value__tail",
 		children: [
-			/* @__PURE__ */ c("span", {
+			/* @__PURE__ */ l("span", {
 				className: "copyable-value__value",
-				children: a
+				children: o
 			}),
 			"⁠",
-			D
+			O
 		]
-	}) : /* @__PURE__ */ l(s, { children: [
-		/* @__PURE__ */ c("span", {
+	}) : /* @__PURE__ */ u(c, { children: [
+		/* @__PURE__ */ l("span", {
 			className: "copyable-value__value",
-			children: a
+			children: o
 		}),
 		"⁠",
-		D
+		O
 	] });
-	return /* @__PURE__ */ l("span", {
-		ref: g,
-		className: x,
-		children: [O, /* @__PURE__ */ c(n, {
+	return /* @__PURE__ */ u("span", {
+		ref: _,
+		className: S,
+		children: [k, /* @__PURE__ */ l(n, {
 			role: "status",
-			children: b ? _("copied", d) : ""
+			children: x ? v("copied", f) : ""
 		})]
 	});
 });
 //#endregion
-export { g as CopyableValue };
+export { _ as CopyableValue };

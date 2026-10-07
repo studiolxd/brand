@@ -5,76 +5,82 @@ import { Paragraph as n } from "./paragraph.js";
 import { Form as r } from "./form.js";
 import { ConnectorAuthShell as i } from "./connector-auth-shell.js";
 import { t as a } from "./_shared/untrustedtext.js";
-import { ConnectorRequestSummary as o } from "./connector-request-summary.js";
+import { t as o } from "./_shared/connectorrequestsummary.js";
 import { Fragment as s, jsx as c, jsxs as l } from "react/jsx-runtime";
+//#region src/stories/messages/es/connectorConsent.ts
+var u = {
+	title: "Conectar una herramienta",
+	deny: "Denegar"
+};
+//#endregion
 //#region src/stories/templates/ConnectorAuth/ConnectorConsentPage.tsx
-function u({ clientName: u, productName: d, accountEmail: f, scope: p = "read", redirectHost: m, action: h, hiddenFields: g, decisionName: _ = "decision", approveValue: v = "approve", denyValue: y = "deny", onApprove: b, onDeny: x, denyHref: S, initialFocus: C = "none", title: w, intro: T, redirectNotice: E, approveLabel: D, denyLabel: O, scopeReadLabel: k, scopeWriteLabel: A, expandLabel: j, collapseLabel: M, valueQuotes: N, summaryLabels: P, links: F, header: I, footer: L, preferences: R, preferencesLabel: z, id: B, shell: V, className: H }) {
-	let U = e("connectorConsent"), W = h !== void 0, G = p === "read" ? k : A, K = (e) => /* @__PURE__ */ c(a, {
+function d({ clientName: d, productName: f, accountEmail: p, scope: m = "read", redirectHost: h, action: g, hiddenFields: _, decisionName: v = "decision", approveValue: y = "approve", denyValue: b = "deny", onApprove: x, onDeny: S, denyHref: C, initialFocus: w = "none", title: T, intro: E, redirectNotice: D, approveLabel: O, denyLabel: k, scopeReadLabel: A, scopeWriteLabel: j, expandLabel: M, collapseLabel: N, valueQuotes: P, summaryLabels: F, links: I, header: L, footer: R, preferences: z, preferencesLabel: B, id: V, shell: H, className: U }) {
+	let W = e("connectorConsent", u), G = g !== void 0, K = m === "read" ? A : j, q = (e) => /* @__PURE__ */ c(a, {
 		value: e,
-		quotes: N
-	}), q = S === void 0 ? /* @__PURE__ */ c(t, {
+		quotes: P
+	}), J = C === void 0 ? /* @__PURE__ */ c(t, {
 		variant: "outline",
-		type: W ? "submit" : "button",
-		name: W ? _ : void 0,
-		value: W ? y : void 0,
-		onClick: x,
-		autoFocus: C === "deny",
-		children: U("deny", O)
+		type: G ? "submit" : "button",
+		name: G ? v : void 0,
+		value: G ? b : void 0,
+		onClick: S,
+		autoFocus: w === "deny",
+		children: W("deny", k)
 	}) : /* @__PURE__ */ c(t, {
 		variant: "outline",
-		href: S,
-		children: U("deny", O)
-	}), J = /* @__PURE__ */ c(t, {
-		type: W ? "submit" : "button",
-		name: W ? _ : void 0,
-		value: W ? v : void 0,
-		onClick: b,
-		children: D
+		href: C,
+		children: W("deny", k)
+	}), Y = /* @__PURE__ */ c(t, {
+		type: G ? "submit" : "button",
+		name: G ? v : void 0,
+		value: G ? y : void 0,
+		onClick: x,
+		children: O
 	});
 	return /* @__PURE__ */ c(i, {
-		title: w ?? U("title"),
-		description: T({
-			client: /* @__PURE__ */ c("strong", { children: K(u) }),
-			what: G,
-			email: /* @__PURE__ */ c("strong", { children: K(f) })
+		title: T ?? W("title"),
+		description: E({
+			client: /* @__PURE__ */ c("strong", { children: q(d) }),
+			what: K,
+			email: /* @__PURE__ */ c("strong", { children: q(p) })
 		}),
-		header: I,
-		footer: L,
-		preferences: R,
-		preferencesLabel: z,
-		id: B,
-		shell: V,
-		className: H,
+		header: L,
+		footer: R,
+		preferences: z,
+		preferencesLabel: B,
+		id: V,
+		shell: H,
+		className: U,
 		children: /* @__PURE__ */ l(r, {
 			size: "lg",
 			blockActions: !0,
-			method: typeof h == "string" ? "post" : void 0,
-			action: h,
-			links: F,
-			actions: /* @__PURE__ */ l(s, { children: [q, J] }),
+			method: typeof g == "string" ? "post" : void 0,
+			action: g,
+			links: I,
+			actions: /* @__PURE__ */ l(s, { children: [J, Y] }),
 			children: [
-				g && Object.entries(g).map(([e, t]) => /* @__PURE__ */ c("input", {
+				_ && Object.entries(_).map(([e, t]) => /* @__PURE__ */ c("input", {
 					type: "hidden",
 					name: e,
 					value: t
 				}, e)),
 				/* @__PURE__ */ c(o, {
-					clientName: u,
-					productName: d,
-					accountEmail: f,
-					scope: p,
-					redirectHost: m,
-					scopeReadLabel: k,
-					scopeWriteLabel: A,
-					expandLabel: j,
-					collapseLabel: M,
-					valueQuotes: N,
-					...P
+					clientName: d,
+					productName: f,
+					accountEmail: p,
+					scope: m,
+					redirectHost: h,
+					scopeReadLabel: A,
+					scopeWriteLabel: j,
+					expandLabel: M,
+					collapseLabel: N,
+					valueQuotes: P,
+					...F
 				}),
-				/* @__PURE__ */ c(n, { children: E({ host: /* @__PURE__ */ c("strong", { children: K(m) }) }) })
+				/* @__PURE__ */ c(n, { children: D({ host: /* @__PURE__ */ c("strong", { children: q(h) }) }) })
 			]
 		})
 	});
 }
 //#endregion
-export { u as ConnectorConsentPage };
+export { d as ConnectorConsentPage };

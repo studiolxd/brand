@@ -1,5 +1,5 @@
 'use client';
-import { DotsButton as e } from "./dots-button.js";
+import { t as e } from "./_shared/dotsbutton.js";
 import { Menu as t } from "./menu.js";
 import { jsx as n } from "react/jsx-runtime";
 //#region src/stories/molecules/ContextMenu/ContextMenu.tsx

@@ -2,8 +2,8 @@ import '../imagecropdialog.css';
 import { n as e } from "./brandmessagescontext.js";
 import { Spinner as t } from "../spinner.js";
 import { Button as n } from "../button.js";
-import { Alert as r } from "../alert.js";
-import { Modal as i } from "../modal.js";
+import { t as r } from "./alert.js";
+import { t as i } from "./modal.js";
 import { useRef as a, useState as o } from "react";
 import { Fragment as s, jsx as c, jsxs as l } from "react/jsx-runtime";
 import u, { centerCrop as d, makeAspectCrop as f } from "react-image-crop";
@@ -28,69 +28,75 @@ function m(e, t, n) {
 	}, e, t, n), t, n);
 }
 //#endregion
+//#region src/stories/messages/es/imageCropDialog.ts
+var h = {
+	loading: "Cargando imagen…",
+	error: "No hemos podido cargar la imagen. Prueba con otro archivo."
+};
+//#endregion
 //#region src/stories/molecules/ImageCropDialog/ImageCropDialog.tsx
-function h({ sourceUrl: d, title: f, description: h, circularCrop: g = !1, aspect: _ = 1, outputSize: v = 512, outputMimeType: y, busy: b = !1, cancelLabel: x, confirmLabel: S, closeLabel: C, loadingLabel: w, errorMessage: T, onConfirm: E, onClose: D, className: O }) {
-	let k = e("imageCropDialog"), A = a(null), [j, M] = o(), [N, P] = o(), [F, I] = o("loading"), [L, R] = o(d);
-	d !== L && (R(d), I("loading"), M(void 0), P(void 0));
-	let z = () => {
-		M(void 0), P(void 0), D();
-	}, B = async () => {
-		let e = A.current;
-		!e || !N || N.width === 0 || (await E(await p(e, N, {
-			mimeType: y,
-			outputSize: v
-		})), z());
+function g({ sourceUrl: d, title: f, description: g, circularCrop: _ = !1, aspect: v = 1, outputSize: y = 512, outputMimeType: b, busy: x = !1, cancelLabel: S, confirmLabel: C, closeLabel: w, loadingLabel: T, errorMessage: E, onConfirm: D, onClose: O, className: k }) {
+	let A = e("imageCropDialog", h), j = a(null), [M, N] = o(), [P, F] = o(), [I, L] = o("loading"), [R, z] = o(d);
+	d !== R && (z(d), L("loading"), N(void 0), F(void 0));
+	let B = () => {
+		N(void 0), F(void 0), O();
+	}, V = async () => {
+		let e = j.current;
+		!e || !P || P.width === 0 || (await D(await p(e, P, {
+			mimeType: b,
+			outputSize: y
+		})), B());
 	};
 	return /* @__PURE__ */ c(i, {
 		open: d !== null,
 		onClose: () => {
-			b || z();
+			x || B();
 		},
 		title: f,
-		...C ? { closeLabel: C } : {},
-		...h == null ? {} : { description: h },
+		...w ? { closeLabel: w } : {},
+		...g == null ? {} : { description: g },
 		footerClassName: "image-crop-dialog__actions",
 		footer: /* @__PURE__ */ l(s, { children: [/* @__PURE__ */ c(n, {
 			variant: "outline",
-			disabled: b,
-			onClick: z,
-			children: x
-		}), /* @__PURE__ */ c(n, {
-			disabled: b || !N?.width,
+			disabled: x,
 			onClick: B,
 			children: S
+		}), /* @__PURE__ */ c(n, {
+			disabled: x || !P?.width,
+			onClick: V,
+			children: C
 		})] }),
 		children: /* @__PURE__ */ c("div", {
-			className: ["image-crop-dialog", O].filter(Boolean).join(" "),
+			className: ["image-crop-dialog", k].filter(Boolean).join(" "),
 			children: /* @__PURE__ */ l("div", {
 				className: "image-crop-dialog__area",
 				children: [
-					F === "loading" && /* @__PURE__ */ c(t, {
+					I === "loading" && /* @__PURE__ */ c(t, {
 						size: "lg",
-						label: k("loading", w)
+						label: A("loading", T)
 					}),
-					F === "error" && /* @__PURE__ */ c(r, {
+					I === "error" && /* @__PURE__ */ c(r, {
 						variant: "error",
-						description: k("error", T),
+						description: A("error", E),
 						className: "image-crop-dialog__error"
 					}),
-					d && F !== "error" && /* @__PURE__ */ c(u, {
-						crop: j,
-						onChange: (e, t) => M(t),
-						onComplete: (e) => P(e),
-						aspect: _,
-						circularCrop: g,
+					d && I !== "error" && /* @__PURE__ */ c(u, {
+						crop: M,
+						onChange: (e, t) => N(t),
+						onComplete: (e) => F(e),
+						aspect: v,
+						circularCrop: _,
 						minWidth: 64,
 						keepSelection: !0,
 						children: /* @__PURE__ */ c("img", {
-							ref: A,
+							ref: j,
 							src: d,
 							alt: "",
 							onLoad: (e) => {
 								let { width: t, height: n } = e.currentTarget;
-								I("ready"), M(m(_, t, n));
+								L("ready"), N(m(v, t, n));
 							},
-							onError: () => I("error")
+							onError: () => L("error")
 						})
 					})
 				]
@@ -99,4 +105,4 @@ function h({ sourceUrl: d, title: f, description: h, circularCrop: g = !1, aspec
 	});
 }
 //#endregion
-export { h as t };
+export { g as t };

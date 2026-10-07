@@ -10,72 +10,79 @@ import { t as o } from "./_shared/side-offset.js";
 import { Popover as s } from "./popover.js";
 import { Text as c } from "./text.js";
 import { t as l } from "./_shared/default-render-link.js";
-import { NotificationButton as u } from "./notification-button.js";
+import { t as u } from "./_shared/notificationbutton.js";
 import { useCallback as d, useId as f, useRef as p, useState as m } from "react";
 import { Fragment as h, jsx as g, jsxs as _ } from "react/jsx-runtime";
-//#region src/stories/molecules/NotificationPanel/NotificationPanel.tsx
-var v = o("--notification-panel-offset"), y = "button, a[href]", b = "notification-panel__footer-link";
-function x({ items: o = [], count: x = 0, max: S, onRead: C, onMarkAllRead: w, allHref: T, preferencesHref: E, renderLink: D = l, label: O, countLabel: k, panelLabel: A, unreadLabel: j, emptyLabel: M, allLabel: N, preferencesLabel: P, markAllReadLabel: F, open: I, defaultOpen: L, onOpenChange: R, className: z }) {
-	let B = e("notificationPanel"), V = f(), H = p(null), [U, W] = m([]), G = (e) => e.unread && !U.includes(e.id), K = o.some(G), q = (e) => {
-		G(e) && (W((t) => [...t, e.id]), C(e.id));
-	}, J = () => {
-		W(o.map((e) => e.id)), w?.();
-	}, Y = d(() => {
-		let e = H.current;
-		return e ? e.querySelector(".notification-panel__item-action") ?? e.querySelector(y) : null;
-	}, []), X = (e, t) => {
-		e || W([]), R?.(e, t);
-	}, Z = `${V}-title`, Q = B("panel", A);
+//#region src/stories/messages/es/notificationPanel.ts
+var v = {
+	panel: "Notificaciones",
+	unread: "Sin leer",
+	empty: "Estás al día",
+	all: "Ver todas las notificaciones",
+	preferences: "Preferencias de notificaciones",
+	markAllRead: "Marcar todas como leídas"
+}, y = o("--notification-panel-offset"), b = "button, a[href]", x = "notification-panel__footer-link";
+function S({ items: o = [], count: S = 0, max: C, onRead: w, onMarkAllRead: T, allHref: E, preferencesHref: D, renderLink: O = l, label: k, countLabel: A, panelLabel: j, unreadLabel: M, emptyLabel: N, allLabel: P, preferencesLabel: F, markAllReadLabel: I, open: L, defaultOpen: R, onOpenChange: z, className: B }) {
+	let V = e("notificationPanel", v), H = f(), U = p(null), [W, G] = m([]), K = (e) => e.unread && !W.includes(e.id), q = o.some(K), J = (e) => {
+		K(e) && (G((t) => [...t, e.id]), w(e.id));
+	}, Y = () => {
+		G(o.map((e) => e.id)), T?.();
+	}, X = d(() => {
+		let e = U.current;
+		return e ? e.querySelector(".notification-panel__item-action") ?? e.querySelector(b) : null;
+	}, []), Z = (e, t) => {
+		e || G([]), z?.(e, t);
+	}, Q = `${H}-title`, $ = V("panel", j);
 	return /* @__PURE__ */ g(s, {
 		trigger: /* @__PURE__ */ g(u, {
-			count: x,
-			max: S,
-			label: O,
-			countLabel: k
+			count: S,
+			max: C,
+			label: k,
+			countLabel: A
 		}),
-		label: Q,
+		label: $,
 		align: "end",
-		sideOffset: v,
-		open: I,
-		defaultOpen: L,
-		onOpenChange: X,
-		initialFocus: Y,
-		className: ["notification-panel", z].filter(Boolean).join(" "),
+		sideOffset: y,
+		open: L,
+		defaultOpen: R,
+		onOpenChange: Z,
+		initialFocus: X,
+		className: ["notification-panel", B].filter(Boolean).join(" "),
 		children: /* @__PURE__ */ _("div", {
 			className: "notification-panel__body",
-			ref: H,
+			ref: U,
 			children: [
 				/* @__PURE__ */ g(n, { children: /* @__PURE__ */ g(i, {
 					level: 2,
 					size: 3,
-					id: Z,
-					children: Q
+					id: Q,
+					children: $
 				}) }),
 				o.length === 0 ? /* @__PURE__ */ g("div", {
 					className: "notification-panel__empty",
 					children: /* @__PURE__ */ g(a, {
 						size: "small",
-						children: B("empty", M)
+						children: V("empty", N)
 					})
 				}) : /* @__PURE__ */ g("ul", {
 					className: "notification-panel__list",
-					"aria-labelledby": Z,
+					"aria-labelledby": Q,
 					children: o.map((e, r) => {
-						let i = G(e), a = `${V}-t-${r}`;
+						let i = K(e), a = `${H}-t-${r}`;
 						return /* @__PURE__ */ g("li", {
 							className: "notification-panel__item",
 							children: /* @__PURE__ */ _("button", {
 								type: "button",
 								className: "notification-panel__item-action",
 								"aria-disabled": i ? void 0 : !0,
-								onClick: () => q(e),
+								onClick: () => J(e),
 								children: [/* @__PURE__ */ g("span", {
 									className: "notification-panel__indicator",
 									children: i && /* @__PURE__ */ _(h, { children: [/* @__PURE__ */ g(t, {
 										name: "dot",
 										size: "sm",
 										className: "notification-panel__dot"
-									}), /* @__PURE__ */ g(n, { children: B("unread", j) })] })
+									}), /* @__PURE__ */ g(n, { children: V("unread", M) })] })
 								}), /* @__PURE__ */ _("span", {
 									className: "notification-panel__item-text",
 									children: [
@@ -101,28 +108,28 @@ function x({ items: o = [], count: x = 0, max: S, onRead: C, onMarkAllRead: w, a
 						}, e.id);
 					})
 				}),
-				w && K && /* @__PURE__ */ g("div", {
+				T && q && /* @__PURE__ */ g("div", {
 					className: "notification-panel__mark-all",
 					children: /* @__PURE__ */ g(r, {
 						variant: "outline",
 						size: "sm",
 						block: !0,
-						onClick: J,
-						children: B("markAllRead", F)
+						onClick: Y,
+						children: V("markAllRead", I)
 					})
 				}),
 				/* @__PURE__ */ g("div", {
 					className: "notification-panel__footer",
 					children: /* @__PURE__ */ _("div", {
 						className: "notification-panel__footer-links",
-						children: [D({
-							href: T,
-							className: b,
-							children: B("all", N)
-						}), D({
+						children: [O({
 							href: E,
-							className: b,
-							children: B("preferences", P)
+							className: x,
+							children: V("all", P)
+						}), O({
+							href: D,
+							className: x,
+							children: V("preferences", F)
 						})]
 					})
 				})
@@ -131,4 +138,4 @@ function x({ items: o = [], count: x = 0, max: S, onRead: C, onMarkAllRead: w, a
 	});
 }
 //#endregion
-export { x as NotificationPanel };
+export { S as NotificationPanel };

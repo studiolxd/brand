@@ -8,85 +8,85 @@ import { t as i } from "./_shared/media-query.js";
 import { n as a, t as o } from "./_shared/appshellcontext.js";
 import { useCallback as s, useEffect as c, useMemo as l, useState as u } from "react";
 import { jsx as d, jsxs as f } from "react/jsx-runtime";
-//#region src/stories/sections/AppShell/AppShell.tsx
-var p = "(min-width: 1024px)";
-function m({ banner: a, header: m, sidebar: h, children: g, contentFlush: _ = !1, defaultSidebar: v = "open", sidebarState: y, onSidebarChange: b, defaultSidebarWidth: x, onSidebarWidthChange: S, skipLabel: C, className: w }) {
-	let T = e("appShell"), E = i(p), D = E ?? !0, [O, k] = u(v), [A, j] = u(!1), [M, N] = u(x), P = D ? y ?? O : A ? "open" : "closed", F = s((e) => {
-		D ? (k(e), b?.(e)) : j(e === "open");
-	}, [D, b]), I = s(() => F(P === "open" ? "closed" : "open"), [F, P]), L = s(() => F("closed"), [F]), R = s((e) => {
-		N(e), S?.(e);
-	}, [S]);
+//#region src/stories/messages/es/appShell.ts
+var p = { skipToContent: "Saltar al contenido principal" }, m = "(min-width: 1024px)";
+function h({ banner: a, header: h, sidebar: g, children: _, contentFlush: v = !1, defaultSidebar: y = "open", sidebarState: b, onSidebarChange: x, defaultSidebarWidth: S, onSidebarWidthChange: C, skipLabel: w, className: T }) {
+	let E = e("appShell", p), D = i(m), O = D ?? !0, [k, A] = u(y), [j, M] = u(!1), [N, P] = u(S), F = O ? b ?? k : j ? "open" : "closed", I = s((e) => {
+		O ? (A(e), x?.(e)) : M(e === "open");
+	}, [O, x]), L = s(() => I(F === "open" ? "closed" : "open"), [I, F]), R = s(() => I("closed"), [I]), z = s((e) => {
+		P(e), C?.(e);
+	}, [C]);
 	c(() => {
-		if (D || !A) return;
+		if (O || !j) return;
 		let e = (e) => {
-			e.key === "Escape" && j(!1);
+			e.key === "Escape" && M(!1);
 		};
 		document.addEventListener("keydown", e);
 		let t = document.body.style.overflow;
 		return document.body.style.overflow = "hidden", () => {
 			document.removeEventListener("keydown", e), document.body.style.overflow = t;
 		};
-	}, [D, A]);
-	let z = l(() => ({
-		sidebar: P,
-		setSidebar: F,
-		sidebarWidth: M ?? 0,
-		setSidebarWidth: R,
-		toggleSidebar: I,
-		closeSidebar: L,
-		isDesktop: D
+	}, [O, j]);
+	let B = l(() => ({
+		sidebar: F,
+		setSidebar: I,
+		sidebarWidth: N ?? 0,
+		setSidebarWidth: z,
+		toggleSidebar: L,
+		closeSidebar: R,
+		isDesktop: O
 	}), [
-		P,
 		F,
-		M,
-		R,
 		I,
+		N,
+		z,
 		L,
-		D
-	]), [B, V] = u(0), H = s((e) => {
+		R,
+		O
+	]), [V, H] = u(0), U = s((e) => {
 		if (!e) return;
-		let t = () => V(e.getBoundingClientRect().height);
+		let t = () => H(e.getBoundingClientRect().height);
 		if (t(), typeof ResizeObserver > "u") return;
 		let n = new ResizeObserver(t);
 		return n.observe(e), () => {
-			n.disconnect(), V(0);
+			n.disconnect(), H(0);
 		};
-	}, []), U = n({
-		"--app-shell-sidebar-width": M ? `${M}px` : void 0,
-		"--app-shell-banner-height": a ? `${B}px` : void 0
-	}), W = !D && A;
+	}, []), W = n({
+		"--app-shell-sidebar-width": N ? `${N}px` : void 0,
+		"--app-shell-banner-height": a ? `${V}px` : void 0
+	}), G = !O && j;
 	return /* @__PURE__ */ d(o.Provider, {
-		value: z,
+		value: B,
 		children: /* @__PURE__ */ f(r, { children: [/* @__PURE__ */ d(t, {
 			href: "#main-content",
-			children: T("skipToContent", C)
+			children: E("skipToContent", w)
 		}), /* @__PURE__ */ f("div", {
-			ref: U,
-			className: ["app-shell", w].filter(Boolean).join(" "),
-			"data-sidebar": P,
-			"data-layout": E === null ? void 0 : D ? "column" : "drawer",
+			ref: W,
+			className: ["app-shell", T].filter(Boolean).join(" "),
+			"data-sidebar": F,
+			"data-layout": D === null ? void 0 : O ? "column" : "drawer",
 			children: [
 				a && /* @__PURE__ */ d("div", {
-					ref: H,
+					ref: U,
 					className: "app-shell__banner",
 					children: a
 				}),
-				m,
+				h,
 				/* @__PURE__ */ f("div", {
 					className: "app-shell__body",
 					children: [
-						h,
-						W && /* @__PURE__ */ d("div", {
+						g,
+						G && /* @__PURE__ */ d("div", {
 							className: "app-shell__backdrop",
-							onClick: L,
+							onClick: R,
 							"aria-hidden": "true"
 						}),
 						/* @__PURE__ */ d("main", {
 							id: "main-content",
 							tabIndex: -1,
-							className: _ ? "app-shell__content app-shell__content--flush" : "app-shell__content",
-							inert: W || void 0,
-							children: g
+							className: v ? "app-shell__content app-shell__content--flush" : "app-shell__content",
+							inert: G || void 0,
+							children: _
 						})
 					]
 				})
@@ -95,4 +95,4 @@ function m({ banner: a, header: m, sidebar: h, children: g, contentFlush: _ = !1
 	});
 }
 //#endregion
-export { m as AppShell, a as useAppShell };
+export { h as AppShell, a as useAppShell };

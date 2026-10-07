@@ -2,60 +2,61 @@
 import './loading-region.css';
 import { n as e } from "./_shared/brandmessagescontext.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
-import { Skeleton as n } from "./skeleton.js";
-import { useId as r } from "react";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { t as n } from "./_shared/spinner.js";
+import { Skeleton as r } from "./skeleton.js";
+import { useId as i } from "react";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/molecules/LoadingRegion/LoadingRegion.tsx
-function o({ label: n, announce: o = !0, children: s, className: c, ...l }) {
-	let u = e("spinner"), d = r(), f = ["loading-region", c].filter(Boolean).join(" ");
-	return o ? /* @__PURE__ */ a("div", {
-		className: f,
+function s({ label: r, announce: s = !0, children: c, className: l, ...u }) {
+	let d = e("spinner", n), f = i(), p = ["loading-region", l].filter(Boolean).join(" ");
+	return s ? /* @__PURE__ */ o("div", {
+		className: p,
 		role: "status",
 		"aria-busy": "true",
-		"aria-labelledby": d,
-		...l,
-		children: [/* @__PURE__ */ i(t, {
-			id: d,
-			children: u("label", n)
-		}), s]
-	}) : /* @__PURE__ */ i("div", {
-		className: f,
+		"aria-labelledby": f,
+		...u,
+		children: [/* @__PURE__ */ a(t, {
+			id: f,
+			children: d("label", r)
+		}), c]
+	}) : /* @__PURE__ */ a("div", {
+		className: p,
 		"aria-hidden": "true",
-		...l,
-		children: s
+		...u,
+		children: c
 	});
 }
-function s(e) {
+function c(e) {
 	return Array.from({ length: Math.max(0, Math.floor(e)) }, (e, t) => t);
 }
-function c({ lines: e = 3, className: t }) {
-	return /* @__PURE__ */ i("div", {
+function l({ lines: e = 3, className: t }) {
+	return /* @__PURE__ */ a("div", {
 		className: ["skeleton-text", t].filter(Boolean).join(" "),
 		"aria-hidden": "true",
-		children: s(e).map((t) => /* @__PURE__ */ i(n, { className: ["skeleton-text__line", t === e - 1 && e > 1 ? "skeleton-text__line--last" : ""].filter(Boolean).join(" ") }, t))
-	});
-}
-function l({ rows: e = 4, className: t }) {
-	return /* @__PURE__ */ i("div", {
-		className: ["skeleton-list", t].filter(Boolean).join(" "),
-		"aria-hidden": "true",
-		children: s(e).map((e) => /* @__PURE__ */ i(n, { className: "skeleton-list__row" }, e))
+		children: c(e).map((t) => /* @__PURE__ */ a(r, { className: ["skeleton-text__line", t === e - 1 && e > 1 ? "skeleton-text__line--last" : ""].filter(Boolean).join(" ") }, t))
 	});
 }
 function u({ rows: e = 4, className: t }) {
 	return /* @__PURE__ */ a("div", {
-		className: ["skeleton-table", t].filter(Boolean).join(" "),
+		className: ["skeleton-list", t].filter(Boolean).join(" "),
 		"aria-hidden": "true",
-		children: [/* @__PURE__ */ i(n, { className: "skeleton-table__header" }), s(e).map((e) => /* @__PURE__ */ i(n, { className: "skeleton-table__row" }, e))]
+		children: c(e).map((e) => /* @__PURE__ */ a(r, { className: "skeleton-list__row" }, e))
 	});
 }
-function d({ columns: e = 3, rows: t = 2, className: r }) {
-	return /* @__PURE__ */ i("div", {
-		className: ["skeleton-grid", r].filter(Boolean).join(" "),
+function d({ rows: e = 4, className: t }) {
+	return /* @__PURE__ */ o("div", {
+		className: ["skeleton-table", t].filter(Boolean).join(" "),
+		"aria-hidden": "true",
+		children: [/* @__PURE__ */ a(r, { className: "skeleton-table__header" }), c(e).map((e) => /* @__PURE__ */ a(r, { className: "skeleton-table__row" }, e))]
+	});
+}
+function f({ columns: e = 3, rows: t = 2, className: n }) {
+	return /* @__PURE__ */ a("div", {
+		className: ["skeleton-grid", n].filter(Boolean).join(" "),
 		"data-columns": e,
 		"aria-hidden": "true",
-		children: s(e * t).map((e) => /* @__PURE__ */ i(n, { className: "skeleton-grid__item" }, e))
+		children: c(e * t).map((e) => /* @__PURE__ */ a(r, { className: "skeleton-grid__item" }, e))
 	});
 }
 //#endregion
-export { o as LoadingRegion, d as SkeletonGrid, l as SkeletonList, u as SkeletonTable, c as SkeletonText };
+export { s as LoadingRegion, f as SkeletonGrid, u as SkeletonList, d as SkeletonTable, l as SkeletonText };

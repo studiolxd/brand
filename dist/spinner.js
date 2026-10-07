@@ -2,15 +2,16 @@
 import './spinner.css';
 import { n as e } from "./_shared/brandmessagescontext.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { t as n } from "./_shared/spinner.js";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/atoms/Spinner/Spinner.tsx
-function i() {
-	return /* @__PURE__ */ n("svg", {
+function a() {
+	return /* @__PURE__ */ r("svg", {
 		className: "spinner__square",
 		viewBox: "0 0 24 24",
 		"aria-hidden": "true",
 		focusable: "false",
-		children: /* @__PURE__ */ n("rect", {
+		children: /* @__PURE__ */ r("rect", {
 			className: "spinner__stroke",
 			x: "2",
 			y: "2",
@@ -19,24 +20,24 @@ function i() {
 		})
 	});
 }
-function a({ size: a = "md", label: o, "aria-hidden": s, className: c }) {
-	let l = e("spinner"), u = [
+function o({ size: o = "md", label: s, "aria-hidden": c, className: l }) {
+	let u = e("spinner", n), d = [
 		"spinner",
-		`spinner--${a}`,
-		c
+		`spinner--${o}`,
+		l
 	].filter(Boolean).join(" ");
-	if (s) return /* @__PURE__ */ n("span", {
-		className: u,
+	if (c) return /* @__PURE__ */ r("span", {
+		className: d,
 		"aria-hidden": "true",
-		children: /* @__PURE__ */ n(i, {})
+		children: /* @__PURE__ */ r(a, {})
 	});
-	let d = l("label", o);
-	return /* @__PURE__ */ r("span", {
-		className: u,
+	let f = u("label", s);
+	return /* @__PURE__ */ i("span", {
+		className: d,
 		role: "status",
-		"aria-label": d,
-		children: [/* @__PURE__ */ n(i, {}), /* @__PURE__ */ n(t, { children: d })]
+		"aria-label": f,
+		children: [/* @__PURE__ */ r(a, {}), /* @__PURE__ */ r(t, { children: f })]
 	});
 }
 //#endregion
-export { a as Spinner };
+export { o as Spinner };

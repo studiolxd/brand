@@ -6,42 +6,45 @@ import { Code as r } from "./code.js";
 import { Paragraph as i } from "./paragraph.js";
 import { ConnectorAuthShell as a } from "./connector-auth-shell.js";
 import { jsx as o, jsxs as s } from "react/jsx-runtime";
+//#region src/stories/messages/es/connectorRejection.ts
+var c = { code: "Código" };
+//#endregion
 //#region src/stories/templates/ConnectorAuth/ConnectorRejectionPage.tsx
-function c({ title: c, description: l, hint: u, code: d, codeLabel: f, retryHref: p, onRetry: m, retryLabel: h, retryAction: g, aside: _, header: v, footer: y, preferences: b, preferencesLabel: x, id: S, shell: C, className: w }) {
-	let T = e("connectorRejection"), E = g ?? (p === void 0 ? m ? /* @__PURE__ */ o(t, {
-		onClick: m,
-		children: h
+function l({ title: l, description: u, hint: d, code: f, codeLabel: p, retryHref: m, onRetry: h, retryLabel: g, retryAction: _, aside: v, header: y, footer: b, preferences: x, preferencesLabel: S, id: C, shell: w, className: T }) {
+	let E = e("connectorRejection", c), D = _ ?? (m === void 0 ? h ? /* @__PURE__ */ o(t, {
+		onClick: h,
+		children: g
 	}) : null : /* @__PURE__ */ o(t, {
-		href: p,
-		children: h
+		href: m,
+		children: g
 	}));
 	return /* @__PURE__ */ o(a, {
-		title: c,
-		description: l,
-		intro: d === void 0 ? void 0 : /* @__PURE__ */ s(i, {
+		title: l,
+		description: u,
+		intro: f === void 0 ? void 0 : /* @__PURE__ */ s(i, {
 			size: "small",
 			children: [
-				T("code", f),
+				E("code", p),
 				": ",
-				/* @__PURE__ */ o(r, { children: d })
+				/* @__PURE__ */ o(r, { children: f })
 			]
 		}),
-		aside: _,
-		header: v,
-		footer: y,
-		preferences: b,
-		preferencesLabel: x,
-		id: S,
-		shell: C,
-		className: w,
+		aside: v,
+		header: y,
+		footer: b,
+		preferences: x,
+		preferencesLabel: S,
+		id: C,
+		shell: w,
+		className: T,
 		children: /* @__PURE__ */ s(n, {
 			align: "stretch",
 			children: [/* @__PURE__ */ o(i, {
 				size: "large",
-				children: u
-			}), E]
+				children: d
+			}), D]
 		})
 	});
 }
 //#endregion
-export { c as ConnectorRejectionPage };
+export { l as ConnectorRejectionPage };

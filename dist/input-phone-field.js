@@ -1,7 +1,7 @@
 'use client';
 import './input-phone-field.css';
 import { n as e } from "./_shared/form-size.js";
-import { InputPhone as t } from "./input-phone.js";
+import { t } from "./_shared/inputphone.js";
 import { n } from "./_shared/field-labels.js";
 import { n as r, t as i } from "./_shared/fieldshell.js";
 import { forwardRef as a } from "react";

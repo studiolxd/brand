@@ -1,45 +1,48 @@
 'use client';
 import './app-header.css';
 import { n as e } from "./_shared/brandmessagescontext.js";
-import { MenuButton as t } from "./menu-button.js";
+import { t } from "./_shared/menubutton.js";
 import { t as n } from "./_shared/default-render-link.js";
 import { t as r } from "./_shared/appshellcontext.js";
 import { useContext as i, useState as a } from "react";
 import { jsx as o, jsxs as s } from "react/jsx-runtime";
+//#region src/stories/messages/es/appHeader.ts
+var c = { logo: "Ir al inicio" };
+//#endregion
 //#region src/stories/sections/AppHeader/AppHeader.tsx
-function c({ logo: c, logoHref: l = "/", logoLabel: u, renderLogoLink: d = n, start: f, notifications: p, end: m, menuLabel: h, menuCloseLabel: g, sidebarId: _, className: v }) {
-	let y = i(r), [b, x] = a(!1), S = y ? y.sidebar === "open" : b, C = y ? y.toggleSidebar : () => x((e) => !e), w = e("appHeader");
+function l({ logo: l, logoHref: u = "/", logoLabel: d, renderLogoLink: f = n, start: p, notifications: m, end: h, menuLabel: g, menuCloseLabel: _, sidebarId: v, className: y }) {
+	let b = i(r), [x, S] = a(!1), C = b ? b.sidebar === "open" : x, w = b ? b.toggleSidebar : () => S((e) => !e), T = e("appHeader", c);
 	return /* @__PURE__ */ s("header", {
-		className: ["app-header", v].filter(Boolean).join(" "),
+		className: ["app-header", y].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ o(t, {
-				isOpen: S,
-				onClick: C,
-				label: h,
-				closeLabel: g,
-				"aria-controls": _,
-				"aria-expanded": S
+				isOpen: C,
+				onClick: w,
+				label: g,
+				closeLabel: _,
+				"aria-controls": v,
+				"aria-expanded": C
 			}),
-			c && d({
-				href: l,
+			l && f({
+				href: u,
 				className: "app-header__logo",
-				"aria-label": w("logo", u),
-				children: c
+				"aria-label": T("logo", d),
+				children: l
 			}),
 			/* @__PURE__ */ o("div", {
 				className: "app-header__start",
-				children: f
-			}),
-			p && /* @__PURE__ */ o("div", {
-				className: "app-header__notifications",
 				children: p
 			}),
 			m && /* @__PURE__ */ o("div", {
-				className: "app-header__end",
+				className: "app-header__notifications",
 				children: m
+			}),
+			h && /* @__PURE__ */ o("div", {
+				className: "app-header__end",
+				children: h
 			})
 		]
 	});
 }
 //#endregion
-export { c as AppHeader };
+export { l as AppHeader };

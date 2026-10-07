@@ -87,8 +87,7 @@ import type { ConnectorSignInMessages } from '../templates/ConnectorAuth/Connect
 import type { ConnectorExternalSignInMessages } from '../templates/ConnectorAuth/ConnectorExternalSignInPage';
 import type { ConnectorRejectionMessages } from '../templates/ConnectorAuth/ConnectorRejectionPage';
 /**
- * El contrato de textos de la librería: un espacio por componente, y dentro
- * de cada espacio **todas las claves obligatorias**.
+ * La forma de los textos de la librería: un espacio por componente.
  *
  * El tipo nace aquí, en el DS, y es el catálogo de la aplicación el que lo
  * satisface — nunca al revés. Si el tipo se generase desde el JSON de una
@@ -103,11 +102,17 @@ import type { ConnectorRejectionMessages } from '../templates/ConnectorAuth/Conn
  *
  * Cada interfaz de espacio vive **junto a su componente** (como
  * `RecoveryCodesLabels`), no aquí: aquí solo se ensamblan. Un componente que
- * gana textos declara su interfaz al lado de sus props y añade una línea a
- * este tipo; a partir de ese momento, una aplicación que no la rellene no
- * compila.
+ * gana textos declara su interfaz al lado de sus props, añade una línea a
+ * esta forma y su castellano en `es/<espacio>.ts`.
+ *
+ * De esta forma salen los dos tipos que se publican (D5):
+ * - `BrandMessages`, **todo opcional** (espacios y claves): lo que acepta el
+ *   proveedor. Lo que falte sale en castellano, con un aviso en desarrollo.
+ * - `CompleteBrandMessages`, **todo obligatorio**: el modo estricto, para la
+ *   app que quiere que olvidar un texto sea un error de compilación
+ *   (`satisfies CompleteBrandMessages`).
  */
-export interface BrandMessages {
+interface BrandMessagesShape {
     pagination: PaginationMessages;
     table: TableMessages;
     dataTable: DataTableMessages;
@@ -146,13 +151,7 @@ export interface BrandMessages {
     menuButton: MenuButtonMessages;
     appRoot: AppRootMessages;
     appShell: AppShellMessages;
-    /**
-     * **Opcional** (desde v49.23.1): solo lo lee el `AppHeader` cuando lleva
-     * `logo` y no recibe `logoLabel`. En v49.23.0 entró obligatorio y rompía la
-     * compilación de catálogos que no usan el logo. Si un `AppHeader` lo
-     * necesita y falta, lanza como cualquier otra clave ausente.
-     */
-    appHeader?: AppHeaderMessages;
+    appHeader: AppHeaderMessages;
     sidebar: SidebarMessages;
     sidebarNav: SidebarNavMessages;
     siteNav: SiteNavMessages;
@@ -203,4 +202,41 @@ export interface BrandMessages {
     connectorExternalSignIn: ConnectorExternalSignInMessages;
     connectorRejection: ConnectorRejectionMessages;
 }
+/**
+ * Lo que no se abre al volver opcional o obligatorio un texto: una plantilla
+ * (función) y una tupla (`untrustedText.quotes`) son un valor entero.
+ */
+type MessageLeaf = ((...args: never[]) => unknown) | readonly unknown[];
+/** Todas las claves opcionales, a cualquier profundidad. */
+export type DeepPartialMessages<T> = T extends MessageLeaf ? T : T extends object ? {
+    [K in keyof T]?: DeepPartialMessages<T[K]>;
+} : T;
+/** Todas las claves obligatorias, a cualquier profundidad. */
+export type DeepRequiredMessages<T> = T extends MessageLeaf ? T : T extends object ? {
+    [K in keyof T]-?: DeepRequiredMessages<NonNullable<T[K]>>;
+} : T;
+/**
+ * El catálogo que acepta `BrandMessagesProvider`: **todo opcional**, espacios
+ * y claves (D5). Un catálogo a medias es válido; cada texto que no traiga sale
+ * en el castellano que lleva el paquete, y en desarrollo avisa una vez por
+ * clave en la consola.
+ *
+ * Una clave nueva entra siempre así, opcional: añadir un texto a la librería
+ * no rompe la compilación de ninguna app.
+ */
+export type BrandMessages = DeepPartialMessages<BrandMessagesShape>;
+/**
+ * El catálogo **entero**: todos los espacios y todas las claves obligatorias.
+ * Es el modo estricto, para la app que quiere enterarse al compilar —y no en
+ * la consola— de que le falta un texto:
+ *
+ * ```ts
+ * export const messages = { pagination: { … }, … } satisfies CompleteBrandMessages;
+ * ```
+ *
+ * Al subir de versión, una clave nueva del DS hace fallar ese `satisfies`
+ * hasta que el catálogo la traduce. Es también el tipo del castellano de
+ * respaldo que lleva el paquete.
+ */
+export type CompleteBrandMessages = DeepRequiredMessages<BrandMessagesShape>;
 export type { PaginationMessages, TableMessages, DataTableMessages, InputFieldMessages, PasswordFieldMessages, SelectMessages, MultiSelectMessages, NumberInputMessages, OtpInputMessages, InputPhoneMessages, AsyncSelectMessages, AsyncMultiSelectMessages, DocsSearchMessages, SearchFormMessages, SiteSearchMessages, FilterBarMessages, CalendarMessages, DatePickerMessages, ColorPickerMessages, TimeSelectMessages, FileUploadMessages, ImageCropDialogMessages, AvatarUploadMessages, ModalMessages, SheetMessages, ConfirmDialogMessages, AlertMessages, BannerMessages, ToasterMessages, ConsentMessages, CommandPaletteMessages, AppLauncherMessages, FloatingDockMessages, NotificationButtonMessages, NotificationPanelMessages, MenuButtonMessages, AppRootMessages, AppShellMessages, AppHeaderMessages, SidebarMessages, SidebarNavMessages, SiteNavMessages, SiteHeaderMessages, UserMenuMessages, OrgSwitcherMessages, BreadcrumbMessages, TableOfContentsMessages, PrevNextNavMessages, PublicPageShellMessages, OnboardingShellMessages, CopyMessages, CodeBlockMessages, DotsButtonMessages, CloseButtonMessages, ThemeSwitcherMessages, StatTileMessages, ProgressBarMessages, SpinnerMessages, SliderMessages, TreeViewMessages, ClockWidgetMessages, HeatmapMessages, OrgChartMessages, PlanningGridMessages, RecurrenceFieldMessages, TimelineMessages, UptimeBarsMessages, ChartMessages, StepperMessages, CarouselMessages, LanguageSwitcherMessages, ProjectCardMessages, LegalFooterMessages, CalendarRosterMessages, CalendarPlannerMessages, NotificationListMessages, MessageComposerMessages, ConversationListMessages, ConversationThreadMessages, TypingIndicatorMessages, AnnotationThreadMessages, ChatShellMessages, UntrustedTextMessages, ConnectorRequestSummaryMessages, ConnectorConsentMessages, ConnectorSignInMessages, ConnectorExternalSignInMessages, ConnectorRejectionMessages, };

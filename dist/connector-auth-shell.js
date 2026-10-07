@@ -3,7 +3,7 @@ import { t as e } from "./_shared/form-size.js";
 import { Columns as t } from "./columns.js";
 import { Stack as n } from "./stack.js";
 import { PageIntro as r } from "./page-intro.js";
-import { PublicPageShell as i } from "./public-page-shell.js";
+import { t as i } from "./_shared/publicpageshell.js";
 import { forwardRef as a } from "react";
 import { jsx as o, jsxs as s } from "react/jsx-runtime";
 //#region src/stories/templates/ConnectorAuth/ConnectorAuthShell.tsx

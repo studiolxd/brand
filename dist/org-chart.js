@@ -6,15 +6,26 @@ import { Button as n } from "./button.js";
 import { t as r } from "./_shared/css-properties.js";
 import { forwardRef as i, useState as a } from "react";
 import { Fragment as o, jsx as s, jsxs as c } from "react/jsx-runtime";
-//#region src/stories/organisms/OrgChart/OrgChart.tsx
-var l = (e, t, n) => Math.min(n, Math.max(t, e)), u = i(function({ nodes: i, collapsed: u, defaultCollapsed: d, onCollapsedChange: f, zoom: p, defaultZoom: m = 1, onZoomChange: h, minZoom: g = .5, maxZoom: _ = 1.5, zoomStep: v = .1, showZoom: y = !0, toolbar: b, showPeople: x = !0, label: S, managersLabel: C, membersLabel: w, className: T, ...E }, D) {
-	let O = e("orgChart"), [k, A] = a(d ?? []), j = u ?? k, [M, N] = a(m), P = l(p ?? M, g, _), F = r({ "--org-chart-zoom": String(P) }), I = (e) => {
-		let t = j.includes(e) ? j.filter((t) => t !== e) : [...j, e];
-		u === void 0 && A(t), f?.(t);
-	}, L = (e) => {
-		let t = l(Number(e.toFixed(4)), g, _);
-		p === void 0 && N(t), h?.(t);
-	}, R = (e, t, n) => /* @__PURE__ */ c("div", {
+//#region src/stories/messages/es/orgChart.ts
+var l = {
+	label: "Organigrama",
+	managers: "Responsables",
+	members: "Equipo",
+	noManagers: "Sin responsable",
+	noMembers: "Sin equipo",
+	collapse: (e) => `Plegar ${e}`,
+	expand: (e) => `Desplegar ${e}`,
+	zoomIn: "Acercar",
+	zoomOut: "Alejar",
+	zoomReset: "Tamaño natural"
+}, u = (e, t, n) => Math.min(n, Math.max(t, e)), d = i(function({ nodes: i, collapsed: d, defaultCollapsed: f, onCollapsedChange: p, zoom: m, defaultZoom: h = 1, onZoomChange: g, minZoom: _ = .5, maxZoom: v = 1.5, zoomStep: y = .1, showZoom: b = !0, toolbar: x, showPeople: S = !0, label: C, managersLabel: w, membersLabel: T, className: E, ...D }, O) {
+	let k = e("orgChart", l), [A, j] = a(f ?? []), M = d ?? A, [N, P] = a(h), F = u(m ?? N, _, v), I = r({ "--org-chart-zoom": String(F) }), L = (e) => {
+		let t = M.includes(e) ? M.filter((t) => t !== e) : [...M, e];
+		d === void 0 && j(t), p?.(t);
+	}, R = (e) => {
+		let t = u(Number(e.toFixed(4)), _, v);
+		m === void 0 && P(t), g?.(t);
+	}, z = (e, t, n) => /* @__PURE__ */ c("div", {
 		className: "org-chart__group",
 		children: [/* @__PURE__ */ s("span", {
 			className: "org-chart__group-label",
@@ -32,10 +43,10 @@ var l = (e, t, n) => Math.min(n, Math.max(t, e)), u = i(function({ nodes: i, col
 			className: "org-chart__empty",
 			children: n
 		})]
-	}), z = (e, r) => /* @__PURE__ */ s("ul", {
+	}), B = (e, r) => /* @__PURE__ */ s("ul", {
 		className: ["org-chart__level", r ? "org-chart__level--root" : "org-chart__level--children"].join(" "),
 		children: e.map((e) => {
-			let r = e.children ?? [], i = j.includes(e.id), a = r.length > 0 && !i;
+			let r = e.children ?? [], i = M.includes(e.id), a = r.length > 0 && !i;
 			return /* @__PURE__ */ c("li", {
 				className: "org-chart__node",
 				children: [/* @__PURE__ */ c("div", {
@@ -50,34 +61,34 @@ var l = (e, t, n) => Math.min(n, Math.max(t, e)), u = i(function({ nodes: i, col
 							variant: "ghost",
 							size: "sm",
 							iconOnly: !0,
-							"aria-label": i ? O("expand")(e.name) : O("collapse")(e.name),
+							"aria-label": i ? k("expand")(e.name) : k("collapse")(e.name),
 							"aria-expanded": !i,
-							onClick: () => I(e.id),
+							onClick: () => L(e.id),
 							children: /* @__PURE__ */ s(t, {
 								name: i ? "chevron-right" : "chevron-down",
 								size: "sm"
 							})
 						}) : null]
-					}), x ? /* @__PURE__ */ c("div", { children: [R(e.managers, O("managers", C), O("noManagers")), R(e.members, O("members", w), O("noMembers"))] }) : null]
-				}), a ? z(r, !1) : null]
+					}), S ? /* @__PURE__ */ c("div", { children: [z(e.managers, k("managers", w), k("noManagers")), z(e.members, k("members", T), k("noMembers"))] }) : null]
+				}), a ? B(r, !1) : null]
 			}, e.id);
 		})
 	});
 	return /* @__PURE__ */ c("div", {
-		ref: D,
-		className: ["org-chart", T].filter(Boolean).join(" "),
-		...E,
-		children: [y || b ? /* @__PURE__ */ c("div", {
+		ref: O,
+		className: ["org-chart", E].filter(Boolean).join(" "),
+		...D,
+		children: [b || x ? /* @__PURE__ */ c("div", {
 			className: "org-chart__toolbar",
-			children: [y ? /* @__PURE__ */ c(o, { children: [
+			children: [b ? /* @__PURE__ */ c(o, { children: [
 				/* @__PURE__ */ s(n, {
 					type: "button",
 					variant: "outline",
 					size: "sm",
 					iconOnly: !0,
-					"aria-label": O("zoomOut"),
-					disabled: P <= g,
-					onClick: () => L(P - v),
+					"aria-label": k("zoomOut"),
+					disabled: F <= _,
+					onClick: () => R(F - y),
 					children: /* @__PURE__ */ s(t, {
 						name: "zoom-out",
 						size: "sm"
@@ -88,9 +99,9 @@ var l = (e, t, n) => Math.min(n, Math.max(t, e)), u = i(function({ nodes: i, col
 					variant: "outline",
 					size: "sm",
 					iconOnly: !0,
-					"aria-label": O("zoomIn"),
-					disabled: P >= _,
-					onClick: () => L(P + v),
+					"aria-label": k("zoomIn"),
+					disabled: F >= v,
+					onClick: () => R(F + y),
 					children: /* @__PURE__ */ s(t, {
 						name: "zoom-in",
 						size: "sm"
@@ -100,23 +111,23 @@ var l = (e, t, n) => Math.min(n, Math.max(t, e)), u = i(function({ nodes: i, col
 					type: "button",
 					variant: "text",
 					size: "sm",
-					disabled: P === 1,
-					onClick: () => L(1),
-					children: O("zoomReset")
+					disabled: F === 1,
+					onClick: () => R(1),
+					children: k("zoomReset")
 				})
-			] }) : null, b]
+			] }) : null, x]
 		}) : null, /* @__PURE__ */ s("div", {
 			className: "org-chart__viewport",
 			tabIndex: 0,
 			role: "group",
-			"aria-label": O("label", S),
+			"aria-label": k("label", C),
 			children: /* @__PURE__ */ s("div", {
 				className: "org-chart__canvas",
-				ref: F,
-				children: z(i, !0)
+				ref: I,
+				children: B(i, !0)
 			})
 		})]
 	});
 });
 //#endregion
-export { u as OrgChart };
+export { d as OrgChart };

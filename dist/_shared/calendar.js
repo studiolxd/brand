@@ -1,3 +1,4 @@
+import '../calendar.css';
 import { Icon as e } from "../icon.js";
 import { useCallback as t, useEffect as n, useMemo as r, useRef as i, useState as a } from "react";
 import { jsx as o, jsxs as s } from "react/jsx-runtime";
@@ -277,4 +278,13 @@ function T({ weekStart: e, onWeekChange: o, today: s, onActivate: l, minDate: u,
 	};
 }
 //#endregion
-export { c as a, _ as c, f as d, w as f, g as i, u as l, S as m, d as n, l as o, T as p, m as r, v as s, h as t, p as u };
+//#region src/stories/messages/es/calendar.ts
+var E = {
+	previousMonth: "Mes anterior",
+	nextMonth: "Mes siguiente",
+	previousYears: "Años anteriores",
+	nextYears: "Años siguientes",
+	yearGrid: "Elegir año"
+};
+//#endregion
+export { g as a, v as c, p as d, f, S as h, m as i, _ as l, T as m, h as n, c as o, w as p, d as r, l as s, E as t, u };

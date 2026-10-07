@@ -4,18 +4,25 @@ import { n as e } from "./_shared/brandmessagescontext.js";
 import { Tag as t } from "./tag.js";
 import "react";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
-//#region src/stories/organisms/AnnotationThread/AnnotationThread.tsx
+//#region src/stories/messages/es/annotationThread.ts
 var i = {
+	label: "Hilo de anotaciones",
+	open: "Abierta",
+	acknowledged: "Atendida",
+	resolved: "Resuelta",
+	edited: "editada",
+	replies: (e) => e === 1 ? "1 respuesta" : `${e} respuestas`
+}, a = {
 	open: "warning",
 	acknowledged: "info",
 	resolved: "success"
-}, a = {
+}, o = {
 	day: "numeric",
 	month: "short",
 	hour: "2-digit",
 	minute: "2-digit"
 };
-function o({ entry: e, locale: t, dateFormat: i, editedLabel: a }) {
+function s({ entry: e, locale: t, dateFormat: i, editedLabel: a }) {
 	let o = e.date instanceof Date ? e.date : new Date(e.date), s = new Intl.DateTimeFormat(t, i).format(o);
 	return /* @__PURE__ */ r("article", {
 		className: "annotation-thread__item",
@@ -57,56 +64,56 @@ function o({ entry: e, locale: t, dateFormat: i, editedLabel: a }) {
 		]
 	});
 }
-function s({ annotation: s, replies: c = [], status: l = "open", actions: u, reply: d, locale: f = "es-ES", dateFormat: p = a, openLabel: m, acknowledgedLabel: h, resolvedLabel: g, editedLabel: _, repliesLabel: v, label: y, className: b, ...x }) {
-	let S = e("annotationThread");
+function c({ annotation: c, replies: l = [], status: u = "open", actions: d, reply: f, locale: p = "es-ES", dateFormat: m = o, openLabel: h, acknowledgedLabel: g, resolvedLabel: _, editedLabel: v, repliesLabel: y, label: b, className: x, ...S }) {
+	let C = e("annotationThread", i);
 	return /* @__PURE__ */ r("article", {
 		className: [
 			"annotation-thread",
-			l === "open" ? "" : `annotation-thread--${l}`,
-			b ?? ""
+			u === "open" ? "" : `annotation-thread--${u}`,
+			x ?? ""
 		].filter(Boolean).join(" "),
-		"aria-label": S("label", y),
-		...x,
+		"aria-label": C("label", b),
+		...S,
 		children: [
 			/* @__PURE__ */ n("div", {
 				className: "annotation-thread__status",
 				children: /* @__PURE__ */ n(t, {
-					variant: i[l],
+					variant: a[u],
 					children: {
-						open: () => S("open", m),
-						acknowledged: () => S("acknowledged", h),
-						resolved: () => S("resolved", g)
-					}[l]()
+						open: () => C("open", h),
+						acknowledged: () => C("acknowledged", g),
+						resolved: () => C("resolved", _)
+					}[u]()
 				})
 			}),
-			/* @__PURE__ */ n(o, {
-				entry: s,
-				locale: f,
-				dateFormat: p,
-				editedLabel: () => S("edited", _)
+			/* @__PURE__ */ n(s, {
+				entry: c,
+				locale: p,
+				dateFormat: m,
+				editedLabel: () => C("edited", v)
 			}),
-			c.length > 0 && /* @__PURE__ */ r("div", {
+			l.length > 0 && /* @__PURE__ */ r("div", {
 				className: "annotation-thread__replies",
 				children: [/* @__PURE__ */ n("p", {
 					className: "annotation-thread__replies-label",
-					children: S("replies", v)(c.length)
-				}), c.map((e) => /* @__PURE__ */ n(o, {
+					children: C("replies", y)(l.length)
+				}), l.map((e) => /* @__PURE__ */ n(s, {
 					entry: e,
-					locale: f,
-					dateFormat: p,
-					editedLabel: () => S("edited", _)
+					locale: p,
+					dateFormat: m,
+					editedLabel: () => C("edited", v)
 				}, e.id))]
 			}),
-			d && /* @__PURE__ */ n("div", {
+			f && /* @__PURE__ */ n("div", {
 				className: "annotation-thread__reply",
-				children: d
+				children: f
 			}),
-			u && /* @__PURE__ */ n("footer", {
+			d && /* @__PURE__ */ n("footer", {
 				className: "annotation-thread__actions",
-				children: u
+				children: d
 			})
 		]
 	});
 }
 //#endregion
-export { s as AnnotationThread };
+export { c as AnnotationThread };

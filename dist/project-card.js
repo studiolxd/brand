@@ -6,51 +6,54 @@ import { Paragraph as n } from "./paragraph.js";
 import { Tag as r } from "./tag.js";
 import { jsx as i, jsxs as a } from "react/jsx-runtime";
 import { useRender as o } from "@base-ui/react/use-render";
+//#region src/stories/messages/es/projectCard.ts
+var s = { tags: "Categorías" };
+//#endregion
 //#region src/stories/molecules/ProjectCard/ProjectCard.tsx
-function s({ title: s, description: c, media: l, tags: u, href: d, render: f, headingLevel: p = 3, headingSize: m = 5, tagsLabel: h, className: g, id: _ }) {
-	let v = e("projectCard"), y = o({
-		render: f,
-		enabled: f !== void 0,
+function c({ title: c, description: l, media: u, tags: d, href: f, render: p, headingLevel: m = 3, headingSize: h = 5, tagsLabel: g, className: _, id: v }) {
+	let y = e("projectCard", s), b = o({
+		render: p,
+		enabled: p !== void 0,
 		props: {
 			className: "project-card__link",
-			children: s
+			children: c
 		}
-	}) ?? (d === void 0 ? s : /* @__PURE__ */ i("a", {
-		href: d,
+	}) ?? (f === void 0 ? c : /* @__PURE__ */ i("a", {
+		href: f,
 		className: "project-card__link",
-		children: s
+		children: c
 	}));
 	return /* @__PURE__ */ a("article", {
-		id: _,
-		className: ["project-card", g].filter(Boolean).join(" "),
+		id: v,
+		className: ["project-card", _].filter(Boolean).join(" "),
 		children: [
-			l && /* @__PURE__ */ i("div", {
+			u && /* @__PURE__ */ i("div", {
 				className: "project-card__media",
 				children: /* @__PURE__ */ i("img", {
-					src: l.src,
-					alt: l.alt
+					src: u.src,
+					alt: u.alt
 				})
 			}),
-			u && u.length > 0 && /* @__PURE__ */ i("ul", {
+			d && d.length > 0 && /* @__PURE__ */ i("ul", {
 				className: "project-card__tags",
-				"aria-label": v("tags", h),
-				children: u.map((e) => /* @__PURE__ */ i("li", { children: /* @__PURE__ */ i(r, {
+				"aria-label": y("tags", g),
+				children: d.map((e) => /* @__PURE__ */ i("li", { children: /* @__PURE__ */ i(r, {
 					variant: e.variant ?? "neutral",
 					children: e.label
 				}) }, e.id ?? e.label))
 			}),
 			/* @__PURE__ */ i(t, {
-				level: p,
-				size: m,
+				level: m,
+				size: h,
 				className: "project-card__title",
-				children: y
+				children: b
 			}),
-			c && /* @__PURE__ */ i(n, {
+			l && /* @__PURE__ */ i(n, {
 				className: "project-card__description",
-				children: c
+				children: l
 			})
 		]
 	});
 }
 //#endregion
-export { s as ProjectCard };
+export { c as ProjectCard };

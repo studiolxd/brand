@@ -4,59 +4,66 @@ import { Button as t } from "./button.js";
 import { Form as n } from "./form.js";
 import { ConnectorAuthShell as r } from "./connector-auth-shell.js";
 import { t as i } from "./_shared/untrustedtext.js";
-import { ConnectorRequestSummary as a } from "./connector-request-summary.js";
+import { t as a } from "./_shared/connectorrequestsummary.js";
 import { jsx as o, jsxs as s } from "react/jsx-runtime";
+//#region src/stories/messages/es/connectorSignIn.ts
+var c = {
+	title: "Inicia sesión para continuar",
+	signIn: "Iniciar sesión",
+	fallbackProduct: "este producto"
+};
+//#endregion
 //#region src/stories/templates/ConnectorAuth/ConnectorSignInPage.tsx
-function c({ clientName: c, productName: l, scope: u, redirectHost: d, signInHref: f, onSignIn: p, action: m, hiddenFields: h, title: g, intro: _, fallbackProductName: v, signInLabel: y, scopeReadLabel: b, scopeWriteLabel: x, expandLabel: S, collapseLabel: C, valueQuotes: w, summaryLabels: T, links: E, header: D, footer: O, preferences: k, preferencesLabel: A, id: j, shell: M, className: N }) {
-	let P = e("connectorSignIn"), F = m !== void 0, I = f === void 0 ? /* @__PURE__ */ o(t, {
-		type: F ? "submit" : "button",
-		onClick: p,
-		children: P("signIn", y)
+function l({ clientName: l, productName: u, scope: d, redirectHost: f, signInHref: p, onSignIn: m, action: h, hiddenFields: g, title: _, intro: v, fallbackProductName: y, signInLabel: b, scopeReadLabel: x, scopeWriteLabel: S, expandLabel: C, collapseLabel: w, valueQuotes: T, summaryLabels: E, links: D, header: O, footer: k, preferences: A, preferencesLabel: j, id: M, shell: N, className: P }) {
+	let F = e("connectorSignIn", c), I = h !== void 0, L = p === void 0 ? /* @__PURE__ */ o(t, {
+		type: I ? "submit" : "button",
+		onClick: m,
+		children: F("signIn", b)
 	}) : /* @__PURE__ */ o(t, {
-		href: f,
-		children: P("signIn", y)
+		href: p,
+		children: F("signIn", b)
 	});
 	return /* @__PURE__ */ o(r, {
-		title: g ?? P("title"),
-		description: _({
+		title: _ ?? F("title"),
+		description: v({
 			client: /* @__PURE__ */ o("strong", { children: /* @__PURE__ */ o(i, {
-				value: c,
-				quotes: w
+				value: l,
+				quotes: T
 			}) }),
-			product: l ?? v ?? P("fallbackProduct")
+			product: u ?? y ?? F("fallbackProduct")
 		}),
-		header: D,
-		footer: O,
-		preferences: k,
-		preferencesLabel: A,
-		id: j,
-		shell: M,
-		className: N,
+		header: O,
+		footer: k,
+		preferences: A,
+		preferencesLabel: j,
+		id: M,
+		shell: N,
+		className: P,
 		children: /* @__PURE__ */ s(n, {
 			size: "lg",
 			blockActions: !0,
-			method: F ? "post" : void 0,
-			action: m,
-			links: E,
-			actions: I,
-			children: [h && Object.entries(h).map(([e, t]) => /* @__PURE__ */ o("input", {
+			method: I ? "post" : void 0,
+			action: h,
+			links: D,
+			actions: L,
+			children: [g && Object.entries(g).map(([e, t]) => /* @__PURE__ */ o("input", {
 				type: "hidden",
 				name: e,
 				value: t
 			}, e)), /* @__PURE__ */ o(a, {
-				clientName: c,
-				productName: l,
-				scope: u,
-				redirectHost: d,
-				scopeReadLabel: b,
-				scopeWriteLabel: x,
-				expandLabel: S,
-				collapseLabel: C,
-				valueQuotes: w,
-				...T
+				clientName: l,
+				productName: u,
+				scope: d,
+				redirectHost: f,
+				scopeReadLabel: x,
+				scopeWriteLabel: S,
+				expandLabel: C,
+				collapseLabel: w,
+				valueQuotes: T,
+				...E
 			})]
 		})
 	});
 }
 //#endregion
-export { c as ConnectorSignInPage };
+export { l as ConnectorSignInPage };

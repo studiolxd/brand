@@ -2,69 +2,72 @@
 import './site-header.css';
 import { n as e } from "./_shared/brandmessagescontext.js";
 import { Container as t } from "./container.js";
-import { MenuButton as n } from "./menu-button.js";
+import { t as n } from "./_shared/menubutton.js";
 import { t as r } from "./_shared/logo.js";
 import { t as i } from "./_shared/default-render-link.js";
 import { useEffect as a, useId as o, useRef as s, useState as c } from "react";
 import { jsx as l, jsxs as u } from "react/jsx-runtime";
+//#region src/stories/messages/es/siteHeader.ts
+var d = { logo: "Ir al inicio" };
+//#endregion
 //#region src/stories/sections/SiteHeader/SiteHeader.tsx
-function d({ logoHref: d = "/", logoLabel: f, menuLabel: p, menuCloseLabel: m, logoSize: h = "xxl", logo: g = /* @__PURE__ */ l(r, { size: h }), menuButtonSize: _ = "lg", renderLogoLink: v = i, width: y = "xl", open: b, onOpenChange: x, children: S, settings: C, panelId: w, actions: T, language: E }) {
-	let D = e("siteHeader"), O = o(), k = w ?? O, [A, j] = c(!1), M = b !== void 0, N = M ? b : A, P = !!(S || C || E), F = s(null), I = s(null), L = (e) => {
-		M || j(e), x?.(e);
+function f({ logoHref: f = "/", logoLabel: p, menuLabel: m, menuCloseLabel: h, logoSize: g = "xxl", logo: _ = /* @__PURE__ */ l(r, { size: g }), menuButtonSize: v = "lg", renderLogoLink: y = i, width: b = "xl", open: x, onOpenChange: S, children: C, settings: w, panelId: T, actions: E, language: D }) {
+	let O = e("siteHeader", d), k = o(), A = T ?? k, [j, M] = c(!1), N = x !== void 0, P = N ? x : j, F = !!(C || w || D), I = s(null), L = s(null), R = (e) => {
+		N || M(e), S?.(e);
 	};
 	return a(() => {
-		if (!N) return;
+		if (!P) return;
 		let e = (e) => {
-			e.key === "Escape" && (L(!1), I.current?.focus());
+			e.key === "Escape" && (R(!1), L.current?.focus());
 		}, t = (e) => {
 			let t = e.target;
-			F.current?.contains(t) || t?.closest("[role=\"menu\"], [role=\"listbox\"], [role=\"dialog\"]") || L(!1);
+			I.current?.contains(t) || t?.closest("[role=\"menu\"], [role=\"listbox\"], [role=\"dialog\"]") || R(!1);
 		};
 		document.addEventListener("keydown", e), document.addEventListener("pointerdown", t);
 		let n = document.body.style.overflow;
 		return document.body.style.overflow = "hidden", () => {
 			document.removeEventListener("keydown", e), document.removeEventListener("pointerdown", t), document.body.style.overflow = n;
 		};
-	}, [N]), /* @__PURE__ */ l("header", {
-		ref: F,
+	}, [P]), /* @__PURE__ */ l("header", {
+		ref: I,
 		className: "site-header",
 		children: /* @__PURE__ */ u(t, {
-			width: y,
+			width: b,
 			innerClassName: "site-header__bar",
 			children: [
-				v({
-					href: d,
+				y({
+					href: f,
 					className: "site-header__logo",
-					"aria-label": D("logo", f),
-					children: g
+					"aria-label": O("logo", p),
+					children: _
 				}),
 				/* @__PURE__ */ u("div", {
 					className: "site-header__controls",
-					children: [T && /* @__PURE__ */ l("div", {
+					children: [E && /* @__PURE__ */ l("div", {
 						className: "site-header__actions",
-						children: T
-					}), P && /* @__PURE__ */ l(n, {
-						ref: I,
-						isOpen: N,
-						onClick: () => L(!N),
-						label: p,
-						closeLabel: m,
-						size: _,
-						"aria-controls": k
+						children: E
+					}), F && /* @__PURE__ */ l(n, {
+						ref: L,
+						isOpen: P,
+						onClick: () => R(!P),
+						label: m,
+						closeLabel: h,
+						size: v,
+						"aria-controls": A
 					})]
 				}),
-				P && /* @__PURE__ */ l("div", {
-					className: ["site-header__panel", N ? "site-header__panel--open" : ""].filter(Boolean).join(" "),
-					id: k,
-					inert: !N,
-					"aria-hidden": !N,
+				F && /* @__PURE__ */ l("div", {
+					className: ["site-header__panel", P ? "site-header__panel--open" : ""].filter(Boolean).join(" "),
+					id: A,
+					inert: !P,
+					"aria-hidden": !P,
 					children: /* @__PURE__ */ u(t, {
-						width: y,
+						width: b,
 						space: "none",
 						innerClassName: "site-header__panel-inner",
-						children: [S, (E || C) && /* @__PURE__ */ u("div", {
+						children: [C, (D || w) && /* @__PURE__ */ u("div", {
 							className: "site-header__settings",
-							children: [E, C]
+							children: [D, w]
 						})]
 					})
 				})
@@ -73,4 +76,4 @@ function d({ logoHref: d = "/", logoLabel: f, menuLabel: p, menuCloseLabel: m, l
 	});
 }
 //#endregion
-export { d as SiteHeader };
+export { f as SiteHeader };
