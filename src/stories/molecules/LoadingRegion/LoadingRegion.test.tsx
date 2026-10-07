@@ -1,8 +1,9 @@
 import type { ReactElement } from 'react';
-import { describe, it, expect, vi } from 'vitest';
-import { render as renderRaw, screen } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
+import { cleanup, render as renderRaw, screen } from '@testing-library/react';
 import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
 import { brandMessagesFixture } from '../../../../.storybook/brandMessagesFixture';
+import { expectRespaldo } from '../../../../test/respaldo';
 import { LoadingRegion, SkeletonGrid, SkeletonList, SkeletonTable, SkeletonText } from './LoadingRegion';
 
 function render(ui: ReactElement) {
@@ -27,10 +28,10 @@ describe('LoadingRegion', () => {
     expect(screen.getByRole('status', { name: 'Cargando…' })).toBeInTheDocument();
   });
 
-  it('sin label ni catálogo falla con el error explícito; mudo, no lo exige', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-    expect(() => renderRaw(<LoadingRegion><SkeletonText /></LoadingRegion>)).toThrow(/spinner\.label/);
-    vi.restoreAllMocks();
+  it('sin label ni catálogo sale el castellano de respaldo y avisa; mudo, ni lo pide', () => {
+    expectRespaldo(() => renderRaw(<LoadingRegion><SkeletonText /></LoadingRegion>), /spinner\.label/);
+    expect(screen.getByRole('status', { name: 'Cargando…' })).toBeInTheDocument();
+    cleanup();
 
     const { container } = renderRaw(<LoadingRegion announce={false}><SkeletonList rows={2} /></LoadingRegion>);
     expect(screen.queryByRole('status')).toBeNull();

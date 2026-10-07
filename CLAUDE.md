@@ -175,29 +175,52 @@ Todo comportamiento accesible complejo (menús, popovers, diálogos, tooltips, s
 - Los `renderLink` que recibe un menú deben propagar **todas** las props que les llegan: el motor inyecta rol, tabIndex y handlers de teclado en el enlace.
 - **`className` en un componente con portal** (D29): va al **disparador** cuando lo pinta el componente (`ContextMenu`, `Select`, `OrgSwitcher`, `UserMenu`, `AppLauncher`, `DatePicker`, `MultiSelect`, `Autocomplete`…: el nodo que se queda en su sitio), y al **panel** cuando el disparador lo trae el consumidor (`Menu`, `Popover`, `Tooltip`, `Modal`, `Sheet`…: el disparador ya lleva sus clases). No se añade `popupClassName`: el panel se personaliza con tokens. El JSDoc de cada `className` lo dice.
 
-### Textos de componente — siempre prop, nunca cableados
+### Textos de componente — siempre del catálogo, nunca cableados
 
-Todo texto que un componente emita **por su cuenta** (no vía `children` ni vía sus datos) va en una
-prop opcional cuyo **default es el texto castellano**. Aplica igual a `aria-label`, a texto para
-lectores de pantalla y a texto visible.
+Todo texto que un componente emita **por su cuenta** (no vía `children` ni vía sus datos) sale del
+**catálogo de textos** (`BrandMessagesProvider`, `@studiolxd/brand/messages`) y admite una prop
+opcional que lo anula en ese uso. Aplica igual a `aria-label`, a texto para lectores de pantalla y
+a texto visible. El orden de resolución es **prop → catálogo → castellano de respaldo** (D5):
 
 ```tsx
 // ✗ Incorrecto — el consumidor multiidioma no puede traducirlo
 <button aria-label="Página siguiente">
 
+// ✗ Incorrecto — el castellano escrito en el componente se salta el catálogo y el aviso
+function Pagination({ nextLabel = 'Página siguiente' }: PaginationProps) { … }
+
 // ✓ Correcto
-function Pagination({ nextLabel = 'Página siguiente' }: PaginationProps) {
-  return <button aria-label={nextLabel}>;
+import { paginationEs } from '../../messages/es/pagination';
+
+function Pagination({ nextLabel }: PaginationProps) {
+  const t = useBrandMessages('pagination', paginationEs);
+  return <button aria-label={t('next', nextLabel)}>;
 }
 ```
 
-- Nombres: `<cosa>Label` para etiquetas y textos cortos, `<cosa>Message` para mensajes,
-  `<cosa>Error` para errores, `<cosa>Hint`/`<cosa>Placeholder` para pistas.
-- Si el texto interpola un valor, la prop es una **función**: `pageLabel?: (page: number) => string`.
+- **Cuando falta un texto, no lanza**: sale el castellano que lleva el paquete y, en desarrollo
+  (`process.env.NODE_ENV !== 'production'`), un `console.warn` **una vez por clave**:
+  «@studiolxd/brand: falta «ns.key» en el catálogo; sale en castellano.». En producción, nada.
+- **El castellano vive en `src/stories/messages/es/<espacio>.ts`**, un fichero por espacio, y cada
+  componente importa **solo el suyo** y lo pasa como segundo argumento de `useBrandMessages`. Así
+  el respaldo de un componente que una app no importa no viaja en su bundle. El catálogo ensamblado
+  (`messages/brandMessagesEs.ts`) **no lo importa ningún código del paquete** —si lo hiciera, el
+  build compartiría los 88 espacios entre todas las entradas—; lo usan el Storybook (el fixture lo
+  reexporta) y los tests. Lo vigila `BrandMessages.test.ts`.
+- **`BrandMessages` es todo opcional** (espacios y claves, a cualquier profundidad); el modo
+  estricto es **`CompleteBrandMessages`** (todo obligatorio), que la app usa con `satisfies`. Una
+  **clave nueva entra siempre opcional** para las apps: se declara en la interfaz del espacio, junto
+  al componente, se añade su castellano en `es/` y su inglés en `.storybook/brandMessagesFixtureEn.ts`
+  (los dos son `CompleteBrandMessages`, así que si falta uno no compila).
+- **El correo sigue sin leer el proveedor**: sus textos son props obligatorias y sin default
+  castellano (§ «El correo»).
+- Nombres de las props de anulación: `<cosa>Label` para etiquetas y textos cortos, `<cosa>Message`
+  para mensajes, `<cosa>Error` para errores, `<cosa>Hint`/`<cosa>Placeholder` para pistas.
+- Si el texto interpola un valor, la clave y la prop son una **función**: `pageLabel?: (page: number) => string`.
 - Las **listas** de opciones se traducen pasando la lista entera (`pageSizeOptions`,
   `legendItems`), no con una prop de texto por elemento.
-- El JSDoc de la prop indica el default y que es castellano.
-- Meses, días y formatos de fecha **no** son props de texto: van por `locale` (default `'es-ES'`)
+- El JSDoc de la prop dice de qué clave del catálogo sale el texto cuando falta.
+- Meses, días y formatos de fecha **no** son textos del catálogo: van por `locale` (default `'es-ES'`)
   delegando en `Intl`.
 
 Documentado para los consumidores en `src/stories/foundations/Internacionalizacion.mdx`, que lleva

@@ -6,6 +6,7 @@ import { Menu } from '../Menu/Menu';
 import { Button } from '../../atoms/Button/Button';
 import { Icon, type IconName } from '../../atoms/Icon/Icon';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { themeSwitcherEs } from '../../messages/es/themeSwitcher';
 import './ThemeSwitcher.css';
 
 export type Theme = 'light' | 'dark' | 'system';
@@ -100,7 +101,7 @@ export function ThemeSwitcher({ value, onChange, labels, id: idProp, variant = '
   const id = idProp ?? autoId;
   // El lector se llama donde se pinta cada texto: la variante `icon` no
   // enseña el nombre del grupo suelto, pero lo necesita para su frase.
-  const t = useBrandMessages('themeSwitcher');
+  const t = useBrandMessages('themeSwitcher', themeSwitcherEs);
   const text = {
     group: () => t('group', labels?.group),
     light: () => t('light', labels?.light),

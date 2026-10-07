@@ -16,8 +16,10 @@ primera a la segunda:
    la vista de semana de `CalendarPlanner` y la entrada vacía de `SidebarNav`) pasaron al
    catálogo.
 2. **El proveedor de textos** (`BrandMessagesProvider`) — el texto sale del catálogo de la
-   aplicación y **no hay default**, así que olvidarlo es un error, no un castellano mudo. Hoy lo
-   leen unos 91 componentes, repartidos en 88 espacios del catálogo.
+   aplicación. Lo que el catálogo no traiga sale en **el castellano que lleva el paquete**, con un
+   aviso en la consola en desarrollo; y quien quiera que olvidar un texto no compile tiene el
+   modo estricto, `CompleteBrandMessages` (ver § «El orden: prop → catálogo → castellano»). Hoy
+   lo leen unos 91 componentes, repartidos en 88 espacios del catálogo.
 
 El correo es la excepción declarada: no lee el proveedor, y sus textos son **props obligatorias
 sin default** (ver § «Las excepciones: el correo»).
@@ -75,8 +77,9 @@ de copiar, datos y estado —`copy`, `codeBlock`, `dotsButton`, `statTile`, `pro
 `notificationList` y `untrustedText`—, los de la conversación —`messageComposer`,
 `conversationList`, `conversationThread`, `typingIndicator`, `annotationThread` y `chatShell`— y
 los de las páginas de conector —`connectorRequestSummary`, `connectorConsent`, `connectorSignIn`,
-`connectorExternalSignIn` y `connectorRejection`—. No hace falta memorizarlos: el tipo `BrandMessages` los lleva todos y
-**una app que se deje uno no compila** —salvo `appHeader`, opcional porque solo lo pide el logo del `AppHeader`, y la clave `heatmap.midpoint`, opcional porque solo la pide la escala divergente de `Heatmap`—. La tabla de más abajo dice qué prop cae en qué clave.
+`connectorExternalSignIn` y `connectorRejection`—. No hace falta memorizarlos: el tipo `BrandMessages` los lleva todos, **todos opcionales**
+—espacios y claves—, y `CompleteBrandMessages` los mismos, **todos obligatorios**. La tabla de
+más abajo dice qué prop cae en qué clave.
 
 A partir de ahí, un componente migrado se monta **sin una sola prop de texto**:
 
@@ -92,36 +95,84 @@ A partir de ahí, un componente migrado se monta **sin una sola prop de texto**:
 - **Anidado por componente, no plano.** Un espacio por componente (`pagination`, `table`,
   `dataTable`, y los que vengan), calcando los que el catálogo de la suite ya tiene. Son 311 textos en 88 espacios: una lista plana de
   claves sueltas no se puede escribir ni revisar.
-- **Todas las claves son obligatorias** dentro de su espacio, como en `RecoveryCodesLabels`. Una
-  app que se deje una **no compila**: ese es el punto entero del mecanismo.
+- **Dos tipos de la misma forma.** `BrandMessages` —lo que acepta el proveedor— es **todo
+  opcional**, a cualquier profundidad: un catálogo a medias es válido y lo que falte sale en
+  castellano. `CompleteBrandMessages` es **todo obligatorio**: el modo estricto (ver más abajo).
+  Las dos salen de `@studiolxd/brand/messages`.
+- **Una clave nueva entra siempre opcional en `BrandMessages`**: añadir un texto a la librería no
+  rompe la compilación de ninguna app. Quien escribe su catálogo con `satisfies
+  CompleteBrandMessages` sí se entera al subir de versión, que es justo lo que ha pedido.
+- **El castellano de respaldo viaja troceado.** Vive en `src/stories/messages/es/`, un fichero por
+  espacio, y cada componente importa **solo el suyo**
+  (`useBrandMessages('pagination', paginationEs)`). Así el bundle de una app que importa el
+  paginador lleva el castellano del paginador y nada más: cada entrada suma entre 0,3 y 0,65 KB
+  gzip, frente a los ~5,9 KB gzip del catálogo entero si se compartiera.
 - **La interfaz de cada espacio vive junto a su componente** (`PaginationMessages` se exporta
   desde `Pagination`), y `BrandMessages` solo las ensambla.
 
-### El orden: prop → proveedor → error
+### El orden: prop → catálogo → castellano
 
 | Escalón | Cuándo |
 | --- | --- |
 | **La prop** | Cuando se pasa. Es la anulación puntual, para el uso que de verdad no dice lo mismo que todos los demás |
-| **El proveedor** | Cuando la prop falta |
-| **Un error** | Cuando faltan las dos, con el nombre del texto que falta |
+| **El catálogo** | Cuando la prop falta y el `BrandMessagesProvider` trae la clave |
+| **El castellano del paquete** | Cuando faltan las dos —sin proveedor, o con un catálogo que no trae esa clave—. En desarrollo avisa |
 
-**No hay cuarto escalón.** Un default castellano viaja dentro del paquete y se alcanza en
-ejecución: pinta "Página 3" dentro de una interfaz en francés sin que falle nada, sin que lo vea
-ningún test, y se ve bien estando mal. El error se lanza **donde el texto se pinta**, así que un
-componente no exige el texto de una pieza que no enseña.
+El texto se lee **donde se pinta**, así que un componente no pide —ni avisa de— el texto de una
+pieza que no enseña. Un texto compuesto (las letras de la máscara de `datePicker.maskLetters`)
+que llegue a medias se completa clave a clave.
 
-### Y el Storybook, ¿no es un default por la puerta de atrás?
+### El aviso en desarrollo
 
-No, y la diferencia es de sitio, no de matiz. El Storybook es **la aplicación que monta los
-componentes**, así que monta el proveedor como lo hará cada app: un decorador global
-(`.storybook/preview.tsx`) lo envuelve todo con un fixture castellano
-(`.storybook/brandMessagesFixture.ts`).
+Cuando un texto cae al castellano, la consola lo dice, **una vez por clave** y no en cada render:
 
-Ese fixture **no puede llegar a un consumidor**: vive fuera de `src/`, no es punto de entrada de
-la librería, ningún componente lo importa y `package.json#files` solo publica `dist/`,
-`src/tokens/` y el `CHANGELOG`. Las cuatro cosas las vigila un test
-(`src/stories/messages/BrandMessages.test.ts`), no un comentario que lo prometa. Un default, en cambio,
-viaja dentro del `.js` compilado y se alcanza desde cualquier app que olvide un texto.
+```
+@studiolxd/brand: falta «pagination.next» en el catálogo; sale en castellano.
+```
+
+Solo en desarrollo: el aviso mira `process.env.NODE_ENV`, que Next, Vite y Turbopack sustituyen por
+su literal al compilar, así que en el build de producción desaparece. Donde no hay ni bundler ni
+`process` —un navegador a pelo— no avisa: el aviso es una ayuda, nunca un requisito, y no rompe el
+render en el servidor.
+
+El castellano mudo era el fallo que el proveedor vino a cerrar: «Página 3» dentro de una interfaz
+en francés sin que nada falle. El respaldo no lo reabre del todo —sigue saliendo castellano—, pero
+**ya no es mudo**: el aviso nombra la clave, y una app puede impedirlo del todo con el modo
+estricto.
+
+### El modo estricto: `CompleteBrandMessages`
+
+La app que quiere enterarse **al compilar** —y no en la consola— de que le falta un texto escribe
+su catálogo con `satisfies CompleteBrandMessages`:
+
+```ts
+import type { CompleteBrandMessages } from '@studiolxd/brand/messages';
+
+export const messages = {
+  pagination: {
+    label: t('pagination.label'),
+    // … el resto de pagination
+  },
+  // … los 88 espacios
+} satisfies CompleteBrandMessages;
+
+<BrandMessagesProvider messages={messages}>{children}</BrandMessagesProvider>
+```
+
+`satisfies` y no una anotación (`const messages: CompleteBrandMessages`) para que TypeScript
+compruebe el catálogo entero sin ensanchar su tipo. Al subir de versión, una clave nueva del DS
+hace fallar ese `satisfies` hasta que el catálogo la traduce: es la forma de recuperar, si se
+quiere, el «una app que se deja un texto no compila» de antes de D5.
+
+### Y el Storybook
+
+El Storybook es **la aplicación que monta los componentes**, así que monta el proveedor como lo
+hará cada app: un decorador global (`.storybook/preview.tsx`) lo envuelve todo con
+`.storybook/brandMessagesFixture.ts`, que **reexporta el castellano del paquete** en vez de
+copiarlo —solo cambia el nombre accesible del logotipo, que en el Storybook es de Studio LXD—.
+El inglés (`.storybook/brandMessagesFixtureEn.ts`) sí es propio del Storybook, no viaja en el
+paquete, y está tipado `CompleteBrandMessages`: es la red para que el propio DS no se deje claves.
+Lo vigilan `src/stories/messages/BrandMessages.test.ts` y `BrandMessages.types.test.ts`.
 
 ## La convención histórica (props con default)
 
@@ -213,6 +264,10 @@ La misma regla, aplicada a la familia de subidas:
 
 ## Componentes con props de texto
 
+En esta tabla, **«sin default»** quiere decir que la prop no trae un valor puesto en el
+componente: cuando falta, el texto sale del catálogo y, si el catálogo no lo trae, del castellano
+de respaldo del paquete (§ «El orden: prop → catálogo → castellano»).
+
 | Componente | Props |
 | --- | --- |
 | `Pagination` | **Migrado al proveedor** (`pagination.*`, sin defaults). Las props `ariaLabel`, `pageLabel`, `previousLabel`, `nextLabel`, `pagesGroupLabel`, `pageSizeLabel` y `totalLabel` siguen existiendo como anulación puntual; `pageSizeOptions` sustituye la lista entera del selector |
@@ -258,7 +313,7 @@ La misma regla, aplicada a la familia de subidas:
 | `DatePicker`, `DatePickerField`, `DateTimeField` | **Migrado al proveedor** (`datePicker.openCalendar`, `.invalid`, `.calendar`, `.maskLetters`, sin defaults). Las props siguen como anulación puntual, y `placeholder` sustituye la máscara entera cuando el marcador dice algo de ESE campo. `maskLetters` guarda solo las **letras**: el orden y el separador salen de `locale` (ver § «Una máscara tiene dos mitades»). Los cinco del calendario se siguen reexponiendo con los nombres de `Calendar`, pero **ya no hay que pasarlos para traducir**: el `Calendar` de dentro lee `calendar.*` por contexto; `gridLabel` cae al nombre del panel, y ese cae a la etiqueta del campo. `DateTimeField` añade `hoursLabel` y `minutesLabel`, también reenvíos puros a `timeSelect.*`. `label`, `helperText` y `errorMessage` de los campos quedan fuera: son su contenido |
 | `ColorPicker`, `ColorPickerField` | **En el proveedor desde que nacen** (`colorPicker.trigger`, `.value(hex)`, `.empty`, `.dialog`, `.area`, `.areaDescription`, `.areaValue(saturación, brillo)`, `.hue`, `.alpha`, `.hex`, `.presets`, `.clear`, sin defaults). Cada clave se lee donde se pinta: `alpha` solo con `alpha`, `presets` solo con predefinidos, `clear` solo con `clearable`. `aria-label`, `dialogLabel` y `clearLabel` son anulación puntual; en el campo, la etiqueta nombra el disparador y el panel. El tono y la opacidad los formatea `Intl` con `locale`; saturación y brillo llegan a `areaValue` como números. No hay nombre del color en lenguaje natural. El `title` de cada predefinido es contenido. `ColorSwatch` no tiene texto propio: su `label` es contenido |
 | `Spinner` | **Migrado al proveedor** (`spinner.label`, sin default). **No se lee con `aria-hidden`**: un spinner decorativo no anuncia nada. El texto **conserva los puntos suspensivos** (ver [Redacción](?path=/docs/foundations-redaccion--docs) § «Los estados de carga llevan puntos suspensivos») |
-| `LoadingState`, `LoadingRegion` | **Del mismo espacio que `Spinner`** (`spinner.label`, sin default): son la misma espera dicha en voz alta. `label` sigue como anulación puntual. El texto **no se ve por defecto** (es el nombre accesible de la espera); con `labelVisible` y un `label` propio se pinta, nunca el del catálogo. `LoadingRegion` con `announce={false}` no lo lee. **Fuera del proveedor** (una página de error global) hay que pasar `label`: sin él ni catálogo, el componente falla con el error explícito de siempre |
+| `LoadingState`, `LoadingRegion` | **Del mismo espacio que `Spinner`** (`spinner.label`, sin default): son la misma espera dicha en voz alta. `label` sigue como anulación puntual. El texto **no se ve por defecto** (es el nombre accesible de la espera); con `labelVisible` y un `label` propio se pinta, nunca el del catálogo. `LoadingRegion` con `announce={false}` no lo lee. **Fuera del proveedor** (una página de error global) conviene pasar `label`: sin él ni catálogo, sale el castellano de respaldo («Cargando…») y avisa en desarrollo |
 | `TypingIndicator` | **Migrado al proveedor** (`typingIndicator.typing(name)`, sin default) — y es el caso que enseña la **partición de una frase**: que alguien esté escribiendo es cromo (el verbo y el orden son del idioma), pero **quién** escribe es contenido, así que `name` es **obligatoria y sin default**. La clave es función porque interpola el nombre; `label` sustituye la frase entera y sigue siendo anulación puntual |
 | `NotificationButton` | **Migrado al proveedor** (`notificationButton.label`, `.countLabel`, sin defaults). Las dos props siguen como anulación puntual, y cada una se lee **donde se pinta**: sin contador no se exige `countLabel`, con contador no se exige `label`. La frase con número es una función, para que la cifra vaya donde el idioma la coloque |
 | `NotificationPanel` | **Migrado al proveedor** (`notificationPanel.panel`, `.unread`, `.empty`, `.all`, `.preferences`, `.markAllRead`, sin defaults). Las seis props siguen como anulación puntual; `markAllRead` solo se lee cuando el botón se pinta. `label` y `countLabel` son **reenvíos puros** al `NotificationButton`, que lee `notificationButton.*` por su cuenta: el panel no repite la clave. La fecha de cada notificación **no** es prop de texto: llega ya formateada en `items[].time` |
@@ -291,7 +346,7 @@ La misma regla, aplicada a la familia de subidas:
 | `AppShell` | **Migrado al proveedor** (`appShell.skipToContent`, sin default). `skipLabel` sigue como anulación puntual. Lo demás son reenvíos: el nombre de la barra lo lee el `Sidebar` y el del botón, el `MenuButton` |
 | `AppRoot` | **Migrado al proveedor** (`appRoot.skipToContent`, sin default). Es la misma frase que la del `AppShell` pero **espacio propio**: son dos piezas distintas —la raíz del documento y el armazón de la aplicación— y cada una declara lo suyo, aunque la app las alimente del mismo `t()`. `skipHref` no es texto |
 | `MenuButton` | **Migrado al proveedor** (`menuButton.open`, `.close`, sin defaults). **El nombre sigue al estado**: abierto dice «cerrar», cerrado dice «abrir» — antes se quedaba en el mismo nombre salvo que el consumidor pasara `closeLabel` a mano. `menuButton.close` solo se lee cuando el menú se abre |
-| `AppHeader` | **Migrado al proveedor** (`appHeader.logo`, sin default), y **solo se lee con `logo`**: sin marca, la barra no exige la clave. Es el único **espacio opcional** de `BrandMessages` (v49.23.1): un catálogo sin `appHeader` compila, y si un `AppHeader` con `logo` y sin `logoLabel` lo necesita, lanza como cualquier clave ausente. Como `siteHeader.logo`, cada producto la escribe con su marca («Homenize, ir al inicio»). `menuLabel` y `menuCloseLabel` son **reenvíos puros** al `MenuButton` y ya no hacen falta para traducir |
+| `AppHeader` | **Migrado al proveedor** (`appHeader.logo`, sin default), y **solo se lee con `logo`**: sin marca, la barra no exige la clave. Un catálogo sin `appHeader` compila (como cualquier espacio desde D5), y si un `AppHeader` con `logo` y sin `logoLabel` lo necesita, sale el respaldo genérico «Ir al inicio» y avisa. Como `siteHeader.logo`, cada producto la escribe con su marca («Homenize, ir al inicio»): el respaldo no puede saber cuál es. `menuLabel` y `menuCloseLabel` son **reenvíos puros** al `MenuButton` y ya no hacen falta para traducir |
 | `SiteHeader` | **Migrado al proveedor** (`siteHeader.logo`, sin default). Ojo con el valor: el default retirado llevaba la marca dentro («Studio LXD — ir al inicio»), así que cada producto escribe la clave con la suya. `menuLabel`/`menuCloseLabel` son reenvíos puros al `MenuButton` |
 | `SiteNav` | **Migrado al proveedor** (`siteNav.label`, sin default). Los grupos y sus enlaces son el índice de ESE sitio, y el `badge` de cada ítem («Próximamente», «Beta») llega ya traducido con ellos |
 | `UserMenu` | **Migrado al proveedor** (`userMenu.trigger`, `.unread`, sin defaults). Las dos **interpolan un dato**, así que son funciones. `unread` ni siquiera era una prop antes: el contador traía el castellano cableado. `name`, `email` e `items` son contenido |
@@ -309,9 +364,9 @@ La misma regla, aplicada a la familia de subidas:
 | `UptimeBars` | **Migrado al proveedor** (`uptimeBars.label`, `uptimeBars.noData`, sin defaults). Las fechas y la media llegan **ya escritas** en `points[].label` y `summary` —la tira no sabe de tiempo— y el porcentaje lo formatea `Intl`. `pointLabel` sigue siendo prop: el orden de sus piezas es de quien lo monta |
 | `Timeline` | **En el proveedor** (`timeline.label`, `timeline.current`, sin defaults). Las fechas y los nombres llegan **ya escritos** en los hitos: el historial no formatea fechas. `timeline.current` solo se lee cuando hay un hito `current` |
 | `ClockWidget` | **En el proveedor** los quince textos (`clockWidget.*`, sin defaults). **`durationValue` es una función** de horas y minutos: «2 h 14 min» no se escribe igual en todos los idiomas, y `formatDuration` la anula para un uso concreto. Las horas de cada tramo las formatea `Intl` con `locale`/`timeZone`, y el día llega ya escrito en `date` |
-| `Heatmap` | **En el proveedor** (`heatmap.label`, `.empty`, `.scale`, sin defaults). **`heatmap.midpoint` es una función** del centro ya formateado («Centro: 0») y es **la única clave opcional del espacio**: entró con `scale="diverging"` y solo se lee con esa escala y la leyenda a la vista, así que un catálogo anterior sigue compilando y una matriz secuencial no la pide; si una divergente la necesita y no está (ni `midpointLabel`), lanza como cualquier clave ausente. Los nombres de filas y columnas son datos; `minLabel`/`maxLabel` son el contenido de ESA leyenda y no van al catálogo; `midpointLabel` sustituye entero el rótulo del centro cuando tiene nombre («Lo exigido») |
+| `Heatmap` | **En el proveedor** (`heatmap.label`, `.empty`, `.scale`, sin defaults). **`heatmap.midpoint` es una función** del centro ya formateado («Centro: 0»): entró con `scale="diverging"` y solo se lee con esa escala y la leyenda a la vista, así que una matriz secuencial no la pide; si una divergente la necesita y no está (ni `midpointLabel`), sale el castellano de respaldo y avisa, como cualquier clave ausente. Los nombres de filas y columnas son datos; `minLabel`/`maxLabel` son el contenido de ESA leyenda y no van al catálogo; `midpointLabel` sustituye entero el rótulo del centro cuando tiene nombre («Lo exigido») |
 | `RecurrenceField` | **En el proveedor** los quince textos (`recurrenceField.*`, sin defaults). **`interval` es una función** de la frecuencia («Cada cuántas semanas»). **Los días de la semana NO están en el catálogo**: salen de `locale` con `Intl`, como manda la regla de meses, días y formatos de fecha; `weekStartsOn` decide por dónde empieza la semana |
-| `PlanningGrid` | **En el proveedor** (`planningGrid.label`, `.cellLabel`, `.rowTotal`, `.columnTotal`, `.capacity`, `.remaining`, `.over`, sin defaults). `planningGrid.saving` (prop `savingLabel`) es **opcional**: lo que anuncia la marca de guardado de un cruce en vuelo; sin prop ni clave cae al castellano «Guardando…», y solo se lee si hay un cruce en vuelo. **`cellLabel` es una función** de los dos ejes. Los nombres de filas y columnas viajan en `name` (texto plano, con el que se nombra cada campo) y las horas las formatea `Intl` |
+| `PlanningGrid` | **En el proveedor** (`planningGrid.label`, `.cellLabel`, `.rowTotal`, `.columnTotal`, `.capacity`, `.remaining`, `.over`, sin defaults). `planningGrid.saving` (prop `savingLabel`) es lo que anuncia la marca de guardado de un cruce en vuelo; sin prop ni clave sale el castellano de respaldo «Guardando…», y solo se lee si hay un cruce en vuelo. **`cellLabel` es una función** de los dos ejes. Los nombres de filas y columnas viajan en `name` (texto plano, con el que se nombra cada campo) y las horas las formatea `Intl` |
 | `OrgChart` | **En el proveedor** (`orgChart.label`, `.managers`, `.members`, `.noManagers`, `.noMembers`, `.collapse`, `.expand`, `.zoomIn`, `.zoomOut`, `.zoomReset`, sin defaults). **`collapse` y `expand` son funciones** del nombre del departamento: un «Plegar» suelto se repetiría quince veces en la misma página. Los nombres de departamentos y personas son datos |
 | `SiteSearch` | **En el proveedor** los quince textos (`siteSearch.label`, `.placeholder`, `.submit`, `.idle`, `.minLength`, `.pending`, `.loading`, `.results`, `.resultsLabel`, `.emptyTitle`, `.emptyDescription`, `.suggestionsLabel`, `.errorTitle`, `.errorDescription`, `.retry`, sin defaults). **`minLength` y `results` son funciones**: el mínimo de caracteres y el par recuento/consulta, que en castellano cambia de forma en el singular. `emptyTitle` NO lleva la consulta: ya la dice el recuento, y repetirla debajo es la misma frase dos veces. El aspa del campo NO tiene clave propia: es la del `InputField` (`inputField.clear`). Los resultados son datos |
 | `RecoveryCodes` | `labels.list`, `labels.copy`, `labels.copied` (**las tres obligatorias, sin default**) — nombre accesible de la lista numerada, rótulo del botón de copiar todos y su acuse. **No caen en `copy.*`**: «Copiar todos» no es «Copiar», y el botón lleva rótulo visible, así que `copy.label` ni se lee. `labels.error` (opcional) — aviso de portapapeles roto; sin él sale de `copy.error` del catálogo |
@@ -331,15 +386,18 @@ y que tenga que reimplementar el componente entero para hacerlo.
 
 Lo que cambia con el proveedor es **de dónde sale el valor cuando la prop falta**: en un
 componente nuevo, declara su interfaz de textos junto a sus props (como `PaginationMessages`),
-añádela a `BrandMessages` y lee con `useBrandMessages('<espacio>')` en el punto donde el texto se
-pinta. Sin default castellano.
+añádela a la forma de `BrandMessages`, escribe su castellano en
+`src/stories/messages/es/<espacio>.ts` y lee con `useBrandMessages('<espacio>', <espacio>Es)` en
+el punto donde el texto se pinta. La clave entra **opcional** para las apps (es `BrandMessages`),
+y el castellano y el inglés del Storybook la exigen (son `CompleteBrandMessages`). Sin default en
+la prop: el castellano entra por el lector, no escrito en el componente.
 
 **Al proveedor va solo lo que el componente emite por su cuenta y dice lo mismo en toda la
 suite** —«Acciones», «Ordenado ascendente», el aviso de una tabla vacía—: es cromo del
 componente. Lo que es contenido de una pantalla concreta —el `caption` de ESA tabla, el vacío
 que explica algo del dominio, el nombre de una fila— **se queda como prop y sin default**: un
 catálogo común no puede saberlo, y meterlo ahí es peor error que dejarlo fuera. Ningún
-componente trae ya default castellano, y uno nuevo tampoco.
+componente escribe su castellano en su propio cuerpo, y uno nuevo tampoco: va en `es/`.
 
 ### Las excepciones: el correo
 

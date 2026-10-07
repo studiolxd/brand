@@ -3,6 +3,7 @@
 import { useCallback, useId, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { treeViewEs } from '../../messages/es/treeView';
 import './TreeView.css';
 
 /**
@@ -148,7 +149,7 @@ export function TreeView({
   className,
   ...rest
 }: TreeViewProps) {
-  const t = useBrandMessages('treeView');
+  const t = useBrandMessages('treeView', treeViewEs);
   const baseId = useId();
   const contenedor = useRef<HTMLUListElement>(null);
 

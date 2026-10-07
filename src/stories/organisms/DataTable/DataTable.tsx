@@ -20,6 +20,7 @@ import { Skeleton } from '../../atoms/Skeleton/Skeleton';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { Pagination, type PaginationProps } from '../../molecules/Pagination/Pagination';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { dataTableEs } from '../../messages/es/dataTable';
 import {
   Table,
   TableBody,
@@ -218,7 +219,7 @@ export function DataTable<TData, TValue>({
   'use no memo';
   // Cada texto se lee donde se pinta: una tabla sin buscador no exige el
   // rótulo del buscador, y una con filas no exige el aviso de vacío.
-  const t = useBrandMessages('dataTable');
+  const t = useBrandMessages('dataTable', dataTableEs);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 

@@ -1,5 +1,6 @@
 import { forwardRef, useMemo } from 'react';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { inputPhoneEs } from '../../messages/es/inputPhone';
 import { Select as BaseSelect } from '@base-ui/react/select';
 import { assignRef } from '../../constants/assign-ref';
 // `getCountryCallingCode` se toma de `react-phone-number-input`, que lo
@@ -26,7 +27,7 @@ interface CountrySelectProps {
 }
 
 function CountrySelect({ value, onChange, options, disabled, size = 'md', countryLabel, internationalLabel = '🌐', container }: CountrySelectProps) {
-  const t = useBrandMessages('inputPhone');
+  const t = useBrandMessages('inputPhone', inputPhoneEs);
   const portalContainer = usePortalContainer(container);
   const INTL = '__intl__';
   const toVal = (c: Country | undefined) => c ?? INTL;

@@ -3,6 +3,7 @@
 import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import { Icon } from '../Icon/Icon';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { menuButtonEs } from '../../messages/es/menuButton';
 import './MenuButton.css';
 
 /**
@@ -46,7 +47,7 @@ export const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(functio
   { isOpen = false, label, closeLabel, size = 'md', className, ...rest },
   ref,
 ) {
-  const t = useBrandMessages('menuButton');
+  const t = useBrandMessages('menuButton', menuButtonEs);
   const classes = ['menu-button', `menu-button--${size}`, className].filter(Boolean).join(' ');
   return (
     <button ref={ref} type="button" className={classes} aria-label={isOpen ? t('close', closeLabel) : t('open', label)} aria-expanded={isOpen} {...rest}>

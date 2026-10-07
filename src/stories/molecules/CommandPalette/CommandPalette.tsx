@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, type ReactNode } from 'react';
 import { Autocomplete } from '@base-ui/react/autocomplete';
 import { Modal } from '../Modal/Modal';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { commandPaletteEs } from '../../messages/es/commandPalette';
 import './CommandPalette.css';
 
 /**
@@ -151,7 +152,7 @@ export function CommandPalette({
   onQueryChange,
   className,
 }: CommandPaletteProps) {
-  const t = useBrandMessages('commandPalette');
+  const t = useBrandMessages('commandPalette', commandPaletteEs);
 
   // Se limpia al cerrar: el `Autocomplete` vive dentro del `Modal` y se
   // desmonta con él, pero eso no dispara `onValueChange` — quien escucha la

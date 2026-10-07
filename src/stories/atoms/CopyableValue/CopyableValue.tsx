@@ -6,6 +6,7 @@ import { Icon } from '../Icon/Icon';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import { useCopyToClipboard } from '../../constants/copy-to-clipboard';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { copyEs } from '../../messages/es/copy';
 import './CopyableValue.css';
 
 export interface CopyableValueProps {
@@ -109,7 +110,7 @@ export const CopyableValue = forwardRef<HTMLSpanElement, CopyableValueProps>(
     copiedLabel,
     className,
   }, ref) {
-    const t = useBrandMessages('copy');
+    const t = useBrandMessages('copy', copyEs);
     const { status, copy } = useCopyToClipboard();
     const copied = status === 'copied';
 

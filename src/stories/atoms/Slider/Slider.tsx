@@ -2,6 +2,7 @@
 
 import { Slider as BaseSlider } from '@base-ui/react/slider';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { sliderEs } from '../../messages/es/slider';
 import './Slider.css';
 
 /**
@@ -74,7 +75,7 @@ export function Slider({
   className,
   ...rest
 }: SliderProps) {
-  const t = useBrandMessages('slider');
+  const t = useBrandMessages('slider', sliderEs);
   const actual = value ?? defaultValue ?? 0;
   const pulgares = Array.isArray(actual) ? actual.length : 1;
 

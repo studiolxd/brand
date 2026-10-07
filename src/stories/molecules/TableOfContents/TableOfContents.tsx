@@ -3,6 +3,7 @@ import { List } from '../../atoms/List/List';
 import { Link } from '../../atoms/Link/Link';
 import './TableOfContents.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { tableOfContentsEs } from '../../messages/es/tableOfContents';
 
 export interface TableOfContentsItem {
   /** `id` del encabezado al que apunta la entrada. El enlace será `#id`. */
@@ -77,7 +78,7 @@ export const TableOfContents = forwardRef<HTMLElement, TableOfContentsProps>(fun
   className,
   ...rest
 }, ref): ReactNode {
-  const t = useBrandMessages('tableOfContents');
+  const t = useBrandMessages('tableOfContents', tableOfContentsEs);
   if (items.length === 0) return null;
 
   const minLevel = Math.min(...items.map((item) => item.level));

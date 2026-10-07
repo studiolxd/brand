@@ -3,6 +3,7 @@
 import { type ReactNode } from 'react';
 import { Tag } from '../../atoms/Tag/Tag';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { annotationThreadEs } from '../../messages/es/annotationThread';
 import './AnnotationThread.css';
 
 /**
@@ -204,7 +205,7 @@ export function AnnotationThread({
   className,
   ...rest
 }: AnnotationThreadProps) {
-  const t = useBrandMessages('annotationThread');
+  const t = useBrandMessages('annotationThread', annotationThreadEs);
   const classes = [
     'annotation-thread',
     status === 'open' ? '' : `annotation-thread--${status}`,

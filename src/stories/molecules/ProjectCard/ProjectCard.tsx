@@ -5,6 +5,7 @@ import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Tag, type TagVariant } from '../../atoms/Tag/Tag';
 import type { CardMedia } from '../Card/Card';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { projectCardEs } from '../../messages/es/projectCard';
 import './ProjectCard.css';
 
 /**
@@ -79,7 +80,7 @@ export function ProjectCard({
   className,
   id,
 }: ProjectCardProps) {
-  const t = useBrandMessages('projectCard');
+  const t = useBrandMessages('projectCard', projectCardEs);
   const rendered = useRender({
     render,
     enabled: render !== undefined,

@@ -15,6 +15,7 @@ import {
   type RecurrenceWeekday,
 } from './recurrenceRule';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { recurrenceFieldEs } from '../../messages/es/recurrenceField';
 import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import './RecurrenceField.css';
 
@@ -154,7 +155,7 @@ export function RecurrenceField({
   weekdaysLabel,
   endLabel,
 }: RecurrenceFieldProps) {
-  const t = useBrandMessages('recurrenceField');
+  const t = useBrandMessages('recurrenceField', recurrenceFieldEs);
   const field = useFieldShell({ id: idProp, errorMessage, helperText });
   const { id } = field;
 

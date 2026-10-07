@@ -3,6 +3,7 @@
 import type { ReactNode } from 'react';
 import { StepMarker } from '../../atoms/StepMarker/StepMarker';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { stepperEs } from '../../messages/es/stepper';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import './Stepper.css';
 
@@ -131,7 +132,7 @@ export function Stepper({
   className,
   id,
 }: StepperProps) {
-  const t = useBrandMessages('stepper');
+  const t = useBrandMessages('stepper', stepperEs);
   // Un solo paso (o ninguno) no es un progreso: no hay nada que anunciar.
   if (steps.length < 2) return null;
 

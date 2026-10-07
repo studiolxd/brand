@@ -6,6 +6,7 @@ import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import { useFormSize, type FormSize } from '../../constants/form-size';
 import { DEFAULT_LOCALE, formatFileSize, validateFile } from './validate';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { fileUploadEs } from '../../messages/es/fileUpload';
 import './FileUpload.css';
 import { assignRef } from '../../constants/assign-ref';
 
@@ -229,7 +230,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
   invalidTypeError,
   size: sizeProp,
 }: FileUploadProps, ref) {
-  const t = useBrandMessages('fileUpload');
+  const t = useBrandMessages('fileUpload', fileUploadEs);
   const size = useFormSize(sizeProp);
   // El icono del dropzone mide con la escala del propio `Icon`, que es de donde
   // salían los tokens de tamaño que tenía antes el componente.

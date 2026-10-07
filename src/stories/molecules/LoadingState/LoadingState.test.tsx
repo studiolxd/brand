@@ -4,6 +4,7 @@ import { render as renderRaw, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
 import { brandMessagesFixture } from '../../../../.storybook/brandMessagesFixture';
+import { expectRespaldo } from '../../../../test/respaldo';
 import { LoadingState } from './LoadingState';
 
 function render(ui: ReactElement) {
@@ -28,10 +29,9 @@ describe('LoadingState', () => {
     expect(screen.getByRole('status', { name: 'Cargando…' })).toBeInTheDocument();
   });
 
-  it('sin label ni catálogo, falla con el error explícito de siempre (nunca un nombre vacío)', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-    expect(() => renderRaw(<LoadingState />)).toThrow(/spinner\.label/);
-    vi.restoreAllMocks();
+  it('sin label ni catálogo, sale el castellano de respaldo y avisa (nunca un nombre vacío)', () => {
+    expectRespaldo(() => renderRaw(<LoadingState />), /spinner\.label/);
+    expect(screen.getByRole('status', { name: 'Cargando…' })).toBeInTheDocument();
   });
 
   it('con label y sin catálogo, se basta solo', () => {

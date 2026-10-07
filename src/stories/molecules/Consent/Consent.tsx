@@ -9,6 +9,7 @@ import { SwitcherField } from '../SwitcherField/SwitcherField';
 import { Sheet } from '../Sheet/Sheet';
 import { Modal } from '../Modal/Modal';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { consentEs } from '../../messages/es/consent';
 
 /**
  * El cromo del consentimiento, y **solo el cromo**: lo que la banda y el
@@ -164,7 +165,7 @@ export function ConsentBanner({
   className,
   ...rest
 }: ConsentBannerProps) {
-  const t = useBrandMessages('consent');
+  const t = useBrandMessages('consent', consentEs);
   if (!open) return null;
 
   return (
@@ -303,7 +304,7 @@ export function ConsentPreferences({
   container,
   className,
 }: ConsentPreferencesProps) {
-  const t = useBrandMessages('consent');
+  const t = useBrandMessages('consent', consentEs);
   const controlled = onChange !== undefined;
   const [draft, setDraft] = useState<ConsentValue>(() => withRequired(value, categories));
 

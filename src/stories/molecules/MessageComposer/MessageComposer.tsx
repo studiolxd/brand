@@ -4,6 +4,7 @@ import { forwardRef, useId, type ComponentProps, type KeyboardEvent, type ReactN
 import { Button } from '../../atoms/Button/Button';
 import { Textarea } from '../../atoms/Textarea/Textarea';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { messageComposerEs } from '../../messages/es/messageComposer';
 import './MessageComposer.css';
 
 /**
@@ -89,7 +90,7 @@ export const MessageComposer = forwardRef<HTMLDivElement, MessageComposerProps>(
   className,
   ...rest
 }, ref) {
-  const t = useBrandMessages('messageComposer');
+  const t = useBrandMessages('messageComposer', messageComposerEs);
   const helperId = `${useId()}-helper`;
 
   function handleSend() {

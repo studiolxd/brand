@@ -12,6 +12,7 @@ import {
   useToday,
 } from '../_shared/calendarGrid';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { calendarEs } from '../../messages/es/calendar';
 import './Calendar.css';
 
 /**
@@ -143,7 +144,7 @@ export function Calendar({
   size = 'md',
   className,
 }: CalendarProps) {
-  const t = useBrandMessages('calendar');
+  const t = useBrandMessages('calendar', calendarEs);
   const today = useToday(todayProp);
   const [internalMonth, setInternalMonth] = useState<Date>(
     () => monthProp ?? defaultMonth ?? (value instanceof Date ? value : today)

@@ -6,6 +6,7 @@ import { Container, type ContainerSpace, type ContainerWidth } from '../../atoms
 import { ErrorBoundary } from '../../atoms/ErrorBoundary/ErrorBoundary';
 import './PublicPageShell.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { publicPageShellEs } from '../../messages/es/publicPageShell';
 
 export interface PublicPageShellProps {
   /** El contenido de la página: lo que va dentro del `main`. */
@@ -137,7 +138,7 @@ export const PublicPageShell = forwardRef<HTMLDivElement, PublicPageShellProps>(
   },
   ref,
 ) {
-  const t = useBrandMessages('publicPageShell');
+  const t = useBrandMessages('publicPageShell', publicPageShellEs);
   if (!shell) return <>{children}</>;
 
   const banda = preferences && (

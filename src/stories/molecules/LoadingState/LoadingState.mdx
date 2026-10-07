@@ -33,10 +33,10 @@ decorativo, para no anunciar la espera dos veces.
 
 `label` cambia el texto («Cargando revisión…», con puntos suspensivos: ver
 Foundations → Redacción). Sin `label`, sale de `spinner.label` del
-`BrandMessagesProvider` — el mismo texto que el `Spinner`. **No hay texto de
-respaldo cableado**: fuera del proveedor (una página de error global) hay que
-pasar `label`; sin él ni catálogo, el componente falla con el error explícito
-de siempre en lugar de quedarse sin nombre.
+`BrandMessagesProvider` — el mismo texto que el `Spinner`. Fuera del proveedor (una
+página de error global) conviene pasar `label`; sin él ni catálogo, sale el
+castellano de respaldo del paquete («Cargando…») y avisa en desarrollo: nunca
+se queda sin nombre.
 
 <Canvas of={LoadingStateStories.ConTexto} />
 

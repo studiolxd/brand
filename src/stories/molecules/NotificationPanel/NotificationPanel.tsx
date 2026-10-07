@@ -10,6 +10,7 @@ import { Text } from '../../atoms/Text/Text';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { NotificationButton } from '../NotificationButton/NotificationButton';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { notificationPanelEs } from '../../messages/es/notificationPanel';
 import './NotificationPanel.css';
 import { defaultRenderLink } from '../../constants/default-render-link';
 import { sideOffsetFromToken } from '../../constants/side-offset';
@@ -193,7 +194,7 @@ export function NotificationPanel({
   onOpenChange,
   className,
 }: NotificationPanelProps) {
-  const t = useBrandMessages('notificationPanel');
+  const t = useBrandMessages('notificationPanel', notificationPanelEs);
   const baseId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
   /**

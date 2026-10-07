@@ -4,6 +4,7 @@ import { forwardRef, useRef, useState, type ComponentPropsWithoutRef, type Keybo
 import { Tooltip } from '../../atoms/Tooltip/Tooltip';
 import { UPTIME_BARS_DEFAULT_THRESHOLDS, uptimeStatus, type UptimeBarsThresholds } from './uptimeStatus';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { uptimeBarsEs } from '../../messages/es/uptimeBars';
 import './UptimeBars.css';
 
 /**
@@ -105,7 +106,7 @@ export const UptimeBars = forwardRef<HTMLDivElement, UptimeBarsProps>(function U
   className,
   ...rest
 }, ref) {
-  const t = useBrandMessages('uptimeBars');
+  const t = useBrandMessages('uptimeBars', uptimeBarsEs);
   const cuts = { ...UPTIME_BARS_DEFAULT_THRESHOLDS, ...thresholds };
   const bars = useRef<(HTMLElement | null)[]>([]);
   // Tabulación itinerante: la tira entera es **una** parada de tabulador y las

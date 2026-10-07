@@ -7,6 +7,7 @@ import { UntrustedText } from './UntrustedText';
 import { Button } from '../../atoms/Button/Button';
 import { Form } from '../../molecules/Form/Form';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { connectorSignInEs } from '../../messages/es/connectorSignIn';
 
 /**
  * El cromo de la pantalla de identificarse dentro del flujo del conector.
@@ -137,7 +138,7 @@ export function ConnectorSignInPage({
   shell,
   className,
 }: ConnectorSignInPageProps) {
-  const t = useBrandMessages('connectorSignIn');
+  const t = useBrandMessages('connectorSignIn', connectorSignInEs);
   const nativo = action !== undefined;
 
   const acceder = signInHref !== undefined ? (

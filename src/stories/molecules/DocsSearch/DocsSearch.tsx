@@ -5,6 +5,7 @@ import { Autocomplete } from '@base-ui/react/autocomplete';
 import { InputField } from '../InputField/InputField';
 import { Spinner } from '../../atoms/Spinner/Spinner';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { docsSearchEs } from '../../messages/es/docsSearch';
 import './DocsSearch.css';
 import { defaultRenderLink } from '../../constants/default-render-link';
 
@@ -142,7 +143,7 @@ export function DocsSearch({
   onSelect,
   className,
 }: DocsSearchProps) {
-  const t = useBrandMessages('docsSearch');
+  const t = useBrandMessages('docsSearch', docsSearchEs);
   // Sin `id` del consumidor, uno único por instancia: un fijo chocaba con dos
   // buscadores en la misma página.
   const autoId = useId();

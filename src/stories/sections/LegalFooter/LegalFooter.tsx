@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { Container, type ContainerWidth } from '../../atoms/Container/Container';
 import { Heading } from '../../atoms/Heading/Heading';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { legalFooterEs } from '../../messages/es/legalFooter';
 import './LegalFooter.css';
 import { defaultRenderLink } from '../../constants/default-render-link';
 
@@ -68,7 +69,7 @@ export function LegalFooter({
   as: Root = 'footer',
   className,
 }: LegalFooterProps) {
-  const t = useBrandMessages('legalFooter');
+  const t = useBrandMessages('legalFooter', legalFooterEs);
   return (
     <Root className={['legal-footer', surface === 'dark' && 'surface-dark', className].filter(Boolean).join(' ')}>
       <Container width={width} innerClassName="legal-footer__inner">

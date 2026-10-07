@@ -6,6 +6,7 @@ import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { COPY_FEEDBACK_MS, useCopyToClipboard } from '../../constants/copy-to-clipboard';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { copyEs } from '../../messages/es/copy';
 import './CopyButton.css';
 
 export interface CopyButtonProps
@@ -77,7 +78,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(functio
   className,
   ...rest
 }: CopyButtonProps, ref) {
-  const t = useBrandMessages('copy');
+  const t = useBrandMessages('copy', copyEs);
   const { status, copy } = useCopyToClipboard(feedbackDuration);
 
   const handleClick = async () => {

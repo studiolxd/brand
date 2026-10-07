@@ -10,6 +10,7 @@ import { Stack } from '../../atoms/Stack/Stack';
 import { Form } from '../../molecules/Form/Form';
 import { InputField } from '../../molecules/InputField/InputField';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { connectorExternalSignInEs } from '../../messages/es/connectorExternalSignIn';
 
 /**
  * El cromo de la pantalla del conector ajeno: el título, el rótulo del único
@@ -158,7 +159,7 @@ export function ConnectorExternalSignInPage({
   shell,
   className,
 }: ConnectorExternalSignInPageProps) {
-  const t = useBrandMessages('connectorExternalSignIn');
+  const t = useBrandMessages('connectorExternalSignIn', connectorExternalSignInEs);
 
   return (
     <ConnectorAuthShell

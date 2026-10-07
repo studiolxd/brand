@@ -7,6 +7,7 @@ import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, Table
 import { Alert } from '../Alert/Alert';
 import { clockEntryMinutes, clockedMinutes, isClockRunning, type ClockEntry } from './clockDuration';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { clockWidgetEs } from '../../messages/es/clockWidget';
 import './ClockWidget.css';
 
 export type { ClockEntry } from './clockDuration';
@@ -150,7 +151,7 @@ export const ClockWidget = forwardRef<HTMLElement, ClockWidgetProps>(function Cl
   className,
   ...rest
 }, ref) {
-  const t = useBrandMessages('clockWidget');
+  const t = useBrandMessages('clockWidget', clockWidgetEs);
   const running = isClockRunning(entries);
 
   // Un tic por segundo, y solo mientras el turno esté abierto y nadie haya

@@ -3,6 +3,7 @@
 import { forwardRef } from 'react';
 import { CloseButton } from '../../atoms/CloseButton/CloseButton';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { bannerEs } from '../../messages/es/banner';
 import './Banner.css';
 
 /**
@@ -83,7 +84,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner({
   'aria-live': ariaLive,
   ...rest
 }, ref) {
-  const t = useBrandMessages('banner');
+  const t = useBrandMessages('banner', bannerEs);
   const rol = role ?? ROLE_BY_VARIANT[variant];
   const classes = [
     'banner',

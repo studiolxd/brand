@@ -8,6 +8,7 @@ import { Button } from '../../atoms/Button/Button';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Form } from '../../molecules/Form/Form';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { connectorConsentEs } from '../../messages/es/connectorConsent';
 
 /**
  * El cromo de la pantalla de consentimiento, y **solo el cromo**: cómo se
@@ -202,7 +203,7 @@ export function ConnectorConsentPage({
   shell,
   className,
 }: ConnectorConsentPageProps) {
-  const t = useBrandMessages('connectorConsent');
+  const t = useBrandMessages('connectorConsent', connectorConsentEs);
   const nativo = action !== undefined;
   const alcance = scope === 'read' ? scopeReadLabel : scopeWriteLabel;
 

@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { BrandMessagesProvider } from './BrandMessagesProvider';
 import type { BrandMessages } from './BrandMessages';
 import { brandMessagesFixtureEn as EN } from '../../../.storybook/brandMessagesFixtureEn';
+import { expectRespaldo, expectSinAviso } from '../../../test/respaldo';
 import { Pagination } from '../molecules/Pagination/Pagination';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../molecules/Table/Table';
 import { DataTable } from '../organisms/DataTable/DataTable';
@@ -68,8 +69,9 @@ import { StatTile } from '../molecules/StatTile/StatTile';
 import { CloseButton } from '../atoms/CloseButton/CloseButton';
 
 /**
- * El orden de resolución de un texto: **prop → proveedor → error**. Sin cuarto
- * escalón — ningún componente trae el castellano puesto.
+ * El orden de resolución de un texto: **prop → proveedor → castellano de
+ * respaldo** (D5). Lo que falta ya no revienta: sale en castellano y avisa en
+ * desarrollo, una vez por clave, de qué faltaba.
  */
 
 afterEach(() => {
@@ -105,12 +107,8 @@ describe('BrandMessagesProvider', () => {
     expect(screen.getByLabelText('Page 3')).toBeInTheDocument();
   });
 
-  it('sin proveedor y sin prop, revienta diciendo qué texto falta', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() => render(<Pagination total={100} page={3} pageSize={10} />)).toThrow(
-      /pagination\.label/,
-    );
+  it('sin proveedor y sin prop, sale en castellano y avisa de qué texto falta', () => {
+    expectRespaldo(() => render(<Pagination total={100} page={3} pageSize={10} />), /pagination\.label/);
   });
 
   it('sin proveedor, las props sueltas bastan: no hay castellano de respaldo que se cuele', () => {
@@ -201,16 +199,13 @@ describe('Table lee del proveedor', () => {
     expect(screen.queryByText('Activate sorting')).toBeNull();
   });
 
-  it('sin proveedor y sin prop, revienta diciendo qué texto falta', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() => render(<TablaDePrueba />)).toThrow(/table\.sortable/);
+  it('sin proveedor y sin prop, sale en castellano y avisa de qué texto falta', () => {
+    expectRespaldo(() => render(<TablaDePrueba />), /table\.sortable/);
   });
 
   it('una tabla sin cabecera ordenable ni acciones no exige ningún texto', () => {
-    expect(() =>
-      render(<TablaDePrueba sortable={false} actions={false} />),
-    ).not.toThrow();
+    expectSinAviso(() =>
+      render(<TablaDePrueba sortable={false} actions={false} />));
   });
 
   it('el `caption` y el `label` de fila no salen del catálogo: son de esta pantalla', () => {
@@ -251,24 +246,19 @@ describe('DataTable lee del proveedor', () => {
     expect(screen.queryByText('No results')).toBeNull();
   });
 
-  it('sin proveedor y sin prop, revienta diciendo qué texto falta', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() => render(<DataTable columns={columns} data={[]} />)).toThrow(
-      /dataTable\.empty/,
-    );
+  it('sin proveedor y sin prop, sale en castellano y avisa de qué texto falta', () => {
+    expectRespaldo(() => render(<DataTable columns={columns} data={[]} />), /dataTable\.empty/);
   });
 
   it('una tabla con filas y sin buscador no exige ninguno de sus dos textos', () => {
     const sinLosSuyos = { ...EN, dataTable: {} } as unknown as BrandMessages;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinLosSuyos}>
           <DataTable columns={columns} data={[{ name: 'Uno' }]} />
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
   });
 });
 
@@ -286,21 +276,17 @@ describe('los átomos de formulario leen del proveedor', () => {
   it('un campo sin aspa no exige el texto del aspa', () => {
     const sinLosSuyos = { ...EN, inputField: {} } as unknown as BrandMessages;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinLosSuyos}>
           <InputField id="q" label="Query" />
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
   });
 
-  it('sin proveedor y sin prop, el aspa revienta diciendo qué texto falta', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() =>
-      render(<InputField id="q" label="Query" kind="search" clearable defaultValue="algo" />),
-    ).toThrow(/inputField\.clear/);
+  it('sin proveedor y sin prop, el aspa sale en castellano y avisa de qué texto falta', () => {
+    expectRespaldo(() =>
+      render(<InputField id="q" label="Query" kind="search" clearable defaultValue="algo" />), /inputField\.clear/);
   });
 
   it('el `label` del campo NO sale del catálogo: es el contenido de esta pantalla', () => {
@@ -334,10 +320,8 @@ describe('los átomos de formulario leen del proveedor', () => {
     expect(screen.queryByRole('button', { name: 'Show password' })).toBeNull();
   });
 
-  it('sin proveedor y sin props, el interruptor revienta nombrando la clave', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() => render(<PasswordField label="Password" />)).toThrow(/passwordField\.show/);
+  it('sin proveedor y sin props, el interruptor sale en castellano y avisa nombrando la clave', () => {
+    expectRespaldo(() => render(<PasswordField label="Password" />), /passwordField\.show/);
   });
 });
 
@@ -368,21 +352,16 @@ describe('los desplegables leen del proveedor', () => {
   it('un desplegable con valor elegido no exige el marcador de sitio', () => {
     const sinLosSuyos = { ...EN, select: {} } as unknown as BrandMessages;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinLosSuyos}>
           <SelectField id="s" label="Role" options={OPCIONES} defaultValue="a" />
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
   });
 
-  it('sin proveedor y sin prop, revienta nombrando la clave', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() => render(<SelectField id="s" label="Role" options={OPCIONES} />)).toThrow(
-      /select\.placeholder/,
-    );
+  it('sin proveedor y sin prop, sale en castellano y avisa nombrando la clave', () => {
+    expectRespaldo(() => render(<SelectField id="s" label="Role" options={OPCIONES} />), /select\.placeholder/);
   });
 
   it('el aspa de una ficha toma su nombre del catálogo, con la etiqueta interpolada', () => {
@@ -439,10 +418,8 @@ describe('los controles con cromo propio leen del proveedor', () => {
     expect(screen.getByRole('combobox', { name: 'Country' })).toBeInTheDocument();
   });
 
-  it('sin proveedor y sin prop, el contador revienta nombrando la clave', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() => render(<NumberInput aria-label="Seats" />)).toThrow(/numberInput\./);
+  it('sin proveedor y sin prop, el contador sale en castellano y avisa nombrando la clave', () => {
+    expectRespaldo(() => render(<NumberInput aria-label="Seats" />), /numberInput\./);
   });
 });
 
@@ -474,12 +451,8 @@ describe('los buscadores asíncronos leen del proveedor', () => {
     expect(screen.getByRole('button', { name: 'Remove Ada Lovelace' })).toBeInTheDocument();
   });
 
-  it('sin proveedor y sin prop, revienta nombrando la clave', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() => render(<AsyncSelect onSearch={buscar} aria-label="Owner" />)).toThrow(
-      /asyncSelect\.placeholder/,
-    );
+  it('sin proveedor y sin prop, sale en castellano y avisa nombrando la clave', () => {
+    expectRespaldo(() => render(<AsyncSelect onSearch={buscar} aria-label="Owner" />), /asyncSelect\.placeholder/);
   });
 });
 
@@ -518,10 +491,8 @@ describe('los buscadores y la barra de filtros leen del proveedor', () => {
     expect(screen.getByRole('search', { name: 'Filters' })).toBeInTheDocument();
   });
 
-  it('sin proveedor y sin prop, la barra revienta nombrando la clave', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() => render(<FilterBar search={<span />} />)).toThrow(/filterBar\.label/);
+  it('sin proveedor y sin prop, la barra sale en castellano y avisa nombrando la clave', () => {
+    expectRespaldo(() => render(<FilterBar search={<span />} />), /filterBar\.label/);
   });
 });
 
@@ -545,19 +516,16 @@ describe('la fecha y la hora leen del proveedor', () => {
   it('un calendario estático no exige los textos de unas flechas que no pinta', () => {
     const sinLosSuyos = { ...EN, calendar: {} } as unknown as BrandMessages;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinLosSuyos}>
           <Calendar navigable={false} />
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
   });
 
-  it('sin proveedor y sin prop, el calendario revienta nombrando la clave', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() => render(<Calendar />)).toThrow(/calendar\.previousMonth/);
+  it('sin proveedor y sin prop, el calendario sale en castellano y avisa nombrando la clave', () => {
+    expectRespaldo(() => render(<Calendar />), /calendar\.previousMonth/);
   });
 
   it('el `gridLabel` NO sale del catálogo: nombra a ESTE calendario', () => {
@@ -591,13 +559,12 @@ describe('la fecha y la hora leen del proveedor', () => {
     const sinAviso = { ...EN, datePicker: { ...EN.datePicker } } as BrandMessages;
     delete (sinAviso.datePicker as Partial<BrandMessages['datePicker']>).invalid;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinAviso}>
           <DatePicker aria-label="Start date" value={new Date(2026, 8, 25)} />
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
   });
 
   /**
@@ -676,19 +643,16 @@ describe('la fecha y la hora leen del proveedor', () => {
     delete (sinMascaras.timeSelect as Partial<BrandMessages['timeSelect']>).maskHours;
     delete (sinMascaras.timeSelect as Partial<BrandMessages['timeSelect']>).maskMinutes;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinMascaras}>
           <TimeField label="Starts at" value={{ h: 9, m: 30 }} />
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
   });
 
-  it('sin proveedor y sin prop, la hora revienta nombrando la clave', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() => render(<TimeField label="Starts at" />)).toThrow(/timeSelect\./);
+  it('sin proveedor y sin prop, la hora sale en castellano y avisa nombrando la clave', () => {
+    expectRespaldo(() => render(<TimeField label="Starts at" />), /timeSelect\./);
   });
 
   it('fecha y hora en un campo: cada texto sale del espacio de quien lo pinta', async () => {
@@ -747,10 +711,8 @@ describe('las subidas leen del proveedor', () => {
     expect(screen.queryByText('Drag files here')).toBeNull();
   });
 
-  it('sin proveedor y sin prop, la zona revienta nombrando la clave', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() => render(<FileUpload aria-label="Attachments" />)).toThrow(/fileUpload\.dropzone/);
+  it('sin proveedor y sin prop, la zona sale en castellano y avisa nombrando la clave', () => {
+    expectRespaldo(() => render(<FileUpload aria-label="Attachments" />), /fileUpload\.dropzone/);
   });
 
   it('una zona sin límites ni progreso no exige los textos que no pinta', () => {
@@ -762,13 +724,12 @@ describe('las subidas leen del proveedor', () => {
       },
     } as unknown as BrandMessages;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinLosSuyos}>
           <FileUpload aria-label="Attachments" />
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
   });
 
   it('el campo reenvía: el `label` es suyo y el cromo de dentro sale del catálogo', () => {
@@ -830,10 +791,8 @@ describe('las subidas leen del proveedor', () => {
     expect(screen.getByText('Loading image…')).toBeInTheDocument();
   });
 
-  it('sin proveedor y sin prop, el recortador revienta nombrando la clave', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() =>
+  it('sin proveedor y sin prop, el recortador sale en castellano y avisa nombrando la clave', () => {
+    expectRespaldo(() =>
       render(
         <ImageCropDialog
           sourceUrl="blob:fake"
@@ -844,8 +803,7 @@ describe('las subidas leen del proveedor', () => {
           onConfirm={() => {}}
           onClose={() => {}}
         />,
-      ),
-    ).toThrow(/imageCropDialog\.loading/);
+      ), /imageCropDialog\.loading/);
   });
 
   /**
@@ -924,12 +882,9 @@ describe('las subidas leen del proveedor', () => {
     expect(screen.getByText(/JPEG, PNG o WEBP/)).toBeInTheDocument();
   });
 
-  it('sin proveedor y sin prop, el avatar revienta nombrando la clave', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() =>
-      render(<AvatarUpload name="Ada" cropTitle="Crop" onChange={() => {}} />),
-    ).toThrow(/avatarUpload\./);
+  it('sin proveedor y sin prop, el avatar sale en castellano y avisa nombrando la clave', () => {
+    expectRespaldo(() =>
+      render(<AvatarUpload name="Ada" cropTitle="Crop" onChange={() => {}} />), /avatarUpload\./);
   });
 
   it('el planificador y el cuadrante leen las dos flechas del espacio `calendar`', () => {
@@ -950,21 +905,17 @@ describe('las subidas leen del proveedor', () => {
   it('un planificador sin flechas no exige los textos de las flechas', () => {
     const sinLosSuyos = { ...EN, calendar: {} } as unknown as BrandMessages;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinLosSuyos}>
           <CalendarPlanner month={new Date(2026, 0, 1)} navigable={false} gridLabel="Planner" />
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
   });
 
-  it('sin proveedor y sin prop, el cuadrante revienta nombrando la clave', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() =>
-      render(<CalendarRoster month={new Date(2026, 0, 1)} rows={[]} showLegend={false} />),
-    ).toThrow(/calendar\.previousMonth/);
+  it('sin proveedor y sin prop, el cuadrante sale en castellano y avisa nombrando la clave', () => {
+    expectRespaldo(() =>
+      render(<CalendarRoster month={new Date(2026, 0, 1)} rows={[]} showLegend={false} />), /calendar\.previousMonth/);
   });
 });
 
@@ -996,13 +947,12 @@ describe('el cromo de navegación lee del proveedor', () => {
   it('un botón que nunca se abre no exige el texto de cerrar', () => {
     const sinCerrar = { ...EN, menuButton: { open: 'Navigation menu' } } as unknown as BrandMessages;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinCerrar}>
           <MenuButton />
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
   });
 
   it('la cabecera de aplicación NO repite la clave: su `menuLabel` es un reenvío puro', () => {
@@ -1062,13 +1012,12 @@ describe('el cromo de navegación lee del proveedor', () => {
   it('una barra suelta, sin armazón, no tiene asa y no exige sus dos textos', () => {
     const soloNombre = { ...EN, sidebar: { label: 'Sidebar' } } as unknown as BrandMessages;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={soloNombre}>
           <Sidebar>panel</Sidebar>
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
   });
 
   it('la navegación de la barra nombra su región y marca lo vacío desde el catálogo', () => {
@@ -1092,13 +1041,12 @@ describe('el cromo de navegación lee del proveedor', () => {
   it('una navegación sin entradas vacías no exige la marca de vacío', () => {
     const sinVacio = { ...EN, sidebarNav: { label: 'Main' } } as unknown as BrandMessages;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinVacio}>
           <SidebarNav entries={[{ kind: 'link', id: 'docs', label: 'Docs', href: '#docs' }]} />
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
   });
 
   it('el índice del sitio y la cabecera pública leen sus nombres del catálogo', () => {
@@ -1145,13 +1093,12 @@ describe('el cromo de navegación lee del proveedor', () => {
       userMenu: { trigger: (name: string) => `${name}'s account` },
     } as unknown as BrandMessages;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinContador}>
           <UserMenu name="Ada" email="ada@example.com" />
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
   });
 
   it('las migas, el índice de página y el par anterior/siguiente leen del catálogo', () => {
@@ -1200,13 +1147,12 @@ describe('el cromo de navegación lee del proveedor', () => {
   it('un marco público sin banda no exige el texto de la banda', () => {
     const sinBanda = { ...EN, publicPageShell: {} } as unknown as BrandMessages;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinBanda}>
           <PublicPageShell>contenido</PublicPageShell>
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
   });
 
   it('el alta nombra su pie de acciones desde el catálogo, y los botones siguen siendo suyos', () => {
@@ -1225,13 +1171,12 @@ describe('el cromo de navegación lee del proveedor', () => {
   it('un paso sin acciones no exige el nombre del pie de acciones', () => {
     const sinAcciones = { ...EN, onboardingShell: {} } as unknown as BrandMessages;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinAcciones}>
           <OnboardingShell>paso</OnboardingShell>
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
   });
 
   it('la prop suelta gana al proveedor también en la navegación', () => {
@@ -1244,19 +1189,14 @@ describe('el cromo de navegación lee del proveedor', () => {
     expect(screen.getByRole('navigation', { name: 'Ruta de esta sección' })).toBeInTheDocument();
   });
 
-  it('sin proveedor y sin prop, cada pieza revienta nombrando su clave', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() => render(<Breadcrumb items={[{ label: 'Inicio' }]} />)).toThrow(/breadcrumb\.label/);
-    expect(() => render(<TableOfContents items={[{ id: 'a', label: 'Uso', level: 2 }]} />)).toThrow(
-      /tableOfContents\.label/,
-    );
-    expect(() => render(<PrevNextNav prevHref="#a" />)).toThrow(/prevNextNav\.previous/);
-    expect(() => render(<MenuButton />)).toThrow(/menuButton\.open/);
-    expect(() => render(<AppRoot />)).toThrow(/appRoot\.skipToContent/);
-    expect(() =>
-      render(<SiteNav groups={[{ id: 'p', label: 'P', items: [] }]} />),
-    ).toThrow(/siteNav\.label/);
+  it('sin proveedor y sin prop, cada pieza sale en castellano y avisa nombrando su clave', () => {
+    expectRespaldo(() => render(<Breadcrumb items={[{ label: 'Inicio' }]} />), /breadcrumb\.label/);
+    expectRespaldo(() => render(<TableOfContents items={[{ id: 'a', label: 'Uso', level: 2 }]} />), /tableOfContents\.label/);
+    expectRespaldo(() => render(<PrevNextNav prevHref="#a" />), /prevNextNav\.previous/);
+    expectRespaldo(() => render(<MenuButton />), /menuButton\.open/);
+    expectRespaldo(() => render(<AppRoot />), /appRoot\.skipToContent/);
+    expectRespaldo(() =>
+      render(<SiteNav groups={[{ id: 'p', label: 'P', items: [] }]} />), /siteNav\.label/);
   });
 });
 
@@ -1342,13 +1282,12 @@ describe('copiar, datos y estado leen del proveedor', () => {
     );
     expect(screen.getByRole('status', { name: 'Loading…' })).toBeInTheDocument();
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinSpinner}>
           <Spinner aria-hidden />
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
   });
 
   it('un deslizador de un pulgar no exige los nombres del rango', () => {
@@ -1357,13 +1296,12 @@ describe('copiar, datos y estado leen del proveedor', () => {
       slider: { value: 'Value' },
     } as unknown as BrandMessages;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinRango}>
           <Slider defaultValue={40} />
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
 
     render(
       <BrandMessagesProvider messages={EN}>
@@ -1412,13 +1350,12 @@ describe('copiar, datos y estado leen del proveedor', () => {
       stepper: { ...EN.stepper, completed: undefined },
     } as unknown as BrandMessages;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinCompletado}>
           <Stepper current={0} steps={[{ label: 'One' }, { label: 'Two' }]} />
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
 
     expect(screen.getByText('Step 1 of 2')).toBeInTheDocument();
     expect(screen.getByRole('list', { name: 'Progress' })).toBeInTheDocument();
@@ -1487,13 +1424,12 @@ describe('copiar, datos y estado leen del proveedor', () => {
       calendarRoster: { name: 'Employee' },
     } as unknown as BrandMessages;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinTipos}>
           <CalendarRoster month={new Date(2026, 0, 1)} rows={[]} showLegend={false} />
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
   });
 
   it('la bandeja tiene espacio propio, distinto del panel de la cabecera', () => {
@@ -1511,20 +1447,17 @@ describe('copiar, datos y estado leen del proveedor', () => {
     expect(screen.getByText('Unread')).toBeInTheDocument();
   });
 
-  it('sin proveedor y sin prop, cada pieza de la ola revienta nombrando su clave', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() => render(<CopyButton value="x" />)).toThrow(/copy\.label/);
-    expect(() => render(<CopyableValue>x</CopyableValue>)).toThrow(/copy\.label/);
-    expect(() => render(<CodeBlock>npm i</CodeBlock>)).toThrow(/codeBlock\.region/);
-    expect(() => render(<DotsButton />)).toThrow(/dotsButton\.label/);
-    expect(() => render(<ProgressBar value={10} />)).toThrow(/progressBar\.label/);
-    expect(() => render(<Spinner />)).toThrow(/spinner\.label/);
-    expect(() => render(<TreeView items={[{ id: 'a', label: 'A' }]} />)).toThrow(/treeView\.label/);
-    expect(() => render(<LegalFooter links={[]} />)).toThrow(/legalFooter\.label/);
-    expect(() =>
-      render(<NotificationList items={[{ id: '1', title: 'A', time: 'ya', unread: false }]} />),
-    ).toThrow(/notificationList\.label/);
+  it('sin proveedor y sin prop, cada pieza de la ola sale en castellano y avisa nombrando su clave', () => {
+    expectRespaldo(() => render(<CopyButton value="x" />), /copy\.label/);
+    expectRespaldo(() => render(<CopyableValue>x</CopyableValue>), /copy\.label/);
+    expectRespaldo(() => render(<CodeBlock>npm i</CodeBlock>), /codeBlock\.region/);
+    expectRespaldo(() => render(<DotsButton />), /dotsButton\.label/);
+    expectRespaldo(() => render(<ProgressBar value={10} />), /progressBar\.label/);
+    expectRespaldo(() => render(<Spinner />), /spinner\.label/);
+    expectRespaldo(() => render(<TreeView items={[{ id: 'a', label: 'A' }]} />), /treeView\.label/);
+    expectRespaldo(() => render(<LegalFooter links={[]} />), /legalFooter\.label/);
+    expectRespaldo(() =>
+      render(<NotificationList items={[{ id: '1', title: 'A', time: 'ya', unread: false }]} />), /notificationList\.label/);
   });
 });
 
@@ -1572,10 +1505,8 @@ describe('el castellano que quedaba cableado lee del proveedor', () => {
     expect(screen.getByRole('button', { name: 'Appearance: Dark' })).toBeInTheDocument();
   });
 
-  it('sin proveedor y sin `labels`, el selector de tema revienta nombrando la clave', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() => render(<ThemeSwitcher value="light" variant="list" />)).toThrow(/themeSwitcher\.group/);
+  it('sin proveedor y sin `labels`, el selector de tema sale en castellano y avisa nombrando la clave', () => {
+    expectRespaldo(() => render(<ThemeSwitcher value="light" variant="list" />), /themeSwitcher\.group/);
   });
 
   it('la dirección del delta sale del catálogo, y la de ESTA cifra gana', () => {
@@ -1592,7 +1523,7 @@ describe('el castellano que quedaba cableado lee del proveedor', () => {
   });
 
   it('una baldosa sin delta no exige ninguno de sus tres textos', () => {
-    expect(() => render(<StatTile label="Users" value="1.204" />)).not.toThrow();
+    expectSinAviso(() => render(<StatTile label="Users" value="1.204" />));
   });
 
   it('el aspa suelta toma su nombre del catálogo, y el `label` de quien la monta gana', () => {
@@ -1607,11 +1538,11 @@ describe('el castellano que quedaba cableado lee del proveedor', () => {
     expect(screen.getByRole('button', { name: 'Dismiss notice' })).toBeInTheDocument();
   });
 
-  it('sin proveedor, el aspa con `label` no exige nada; sin él, revienta nombrando la clave', () => {
+  it('sin proveedor, el aspa con `label` no exige nada; sin él, sale en castellano y avisa nombrando la clave', () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
 
-    expect(() => render(<CloseButton label="Close" />)).not.toThrow();
-    expect(() => render(<CloseButton />)).toThrow(/closeButton\.label/);
+    expectSinAviso(() => render(<CloseButton label="Close" />));
+    expectRespaldo(() => render(<CloseButton />), /closeButton\.label/);
   });
 
   it('las flechas de la semana y el conmutador de vista salen del espacio del planificador', () => {
@@ -1634,13 +1565,12 @@ describe('el castellano que quedaba cableado lee del proveedor', () => {
       calendarPlanner: { more: EN.calendarPlanner.more },
     } as unknown as BrandMessages;
 
-    expect(() =>
+    expectSinAviso(() =>
       render(
         <BrandMessagesProvider messages={sinSemana}>
           <CalendarPlanner month={new Date(2026, 0, 1)} gridLabel="Planner" />
         </BrandMessagesProvider>,
-      ),
-    ).not.toThrow();
+      ));
   });
 
   it('la entrada vacía del modo rail se nombra con la función del catálogo', () => {

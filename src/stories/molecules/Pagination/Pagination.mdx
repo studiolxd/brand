@@ -174,18 +174,18 @@ A partir de ahí el paginador se monta sin una sola prop de texto:
 
 <Canvas of={PaginationStories.TextosDelProveedor} />
 
-### El orden: prop → proveedor → error
+### El orden: prop → proveedor → castellano
 
 | Escalón | Cuándo |
 | --- | --- |
 | **La prop** | Cuando se pasa. Es la **anulación puntual**: el `ariaLabel` de un paginador concreto («Resultados de la búsqueda») no es el de todos los de la app |
 | **El proveedor** | Cuando la prop falta. El texto sale del catálogo del idioma vigente |
-| **Un error** | Cuando faltan las dos. El componente revienta diciendo qué texto falta — no hay castellano de respaldo |
+| **El castellano del paquete** | Cuando faltan las dos. Sale el castellano de respaldo y, en desarrollo, la consola avisa una vez de qué clave faltaba |
 
-No hay cuarto escalón, y es deliberado: un default castellano dentro del paquete es un camino de
-ejecución que pinta «Página 3» en una página en francés sin que falle nada ni lo vea ningún test.
-El error se lanza **donde el texto se pinta**, así que un paginador sin selector de registros no
-exige el texto del selector.
+El castellano de respaldo no está escrito en el componente: entra por el lector, que avisa
+cuando cae en él, y una app que quiera que olvidar un texto no compile escribe su catálogo con
+`satisfies CompleteBrandMessages` (ver **Foundations › Internacionalización**). El texto se lee
+**donde se pinta**, así que un paginador sin selector de registros no pide el texto del selector.
 
 | Prop | Clave del catálogo | Dónde aparece |
 | --- | --- | --- |

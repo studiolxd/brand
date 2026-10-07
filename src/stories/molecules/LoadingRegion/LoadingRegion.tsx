@@ -2,6 +2,7 @@ import { useId } from 'react';
 import { Skeleton } from '../../atoms/Skeleton/Skeleton';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { spinnerEs } from '../../messages/es/spinner';
 import './LoadingRegion.css';
 
 export interface LoadingRegionProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'role'> {
@@ -28,7 +29,7 @@ export interface LoadingRegionProps extends Omit<React.HTMLAttributes<HTMLDivEle
  * espera oculto a la vista. Apila sus hijos con aire entre bloques.
  */
 export function LoadingRegion({ label, announce = true, children, className, ...rest }: LoadingRegionProps) {
-  const t = useBrandMessages('spinner');
+  const t = useBrandMessages('spinner', spinnerEs);
   const labelId = useId();
   const classes = ['loading-region', className].filter(Boolean).join(' ');
 

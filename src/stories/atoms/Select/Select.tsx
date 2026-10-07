@@ -16,6 +16,7 @@ import { Select as BaseSelect } from '@base-ui/react/select';
 import type { SeparatorProps as BaseSeparatorProps } from '@base-ui/react/separator';
 import { Icon } from '../Icon/Icon';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { selectEs } from '../../messages/es/select';
 import './Select.css';
 import { usePortalContainer } from '../../constants/portal-container';
 
@@ -324,7 +325,7 @@ function renderOption({ value, label, 'aria-label': optionAriaLabel }: SelectOpt
  * valor no exige el texto — la misma regla que en el resto de la campaña.
  */
 function SelectPlaceholder({ override }: { override?: string }) {
-  const t = useBrandMessages('select');
+  const t = useBrandMessages('select', selectEs);
   return <>{t('placeholder', override)}</>;
 }
 

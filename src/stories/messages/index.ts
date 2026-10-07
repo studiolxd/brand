@@ -4,6 +4,7 @@ export { useBrandMessages } from './BrandMessagesContext';
 export type { BrandMessagesReader, BrandMessagesNamespace } from './BrandMessagesContext';
 export type {
   BrandMessages,
+  CompleteBrandMessages,
   PaginationMessages,
   TableMessages,
   DataTableMessages,

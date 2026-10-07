@@ -71,9 +71,10 @@ import { BrandMessagesProvider } from '@studiolxd/brand/messages';
 | --- | --- | --- |
 | `clearLabel` | `inputField.clear` | `aria-label` del aspa de `clearable` |
 
-El orden es **prop → proveedor → error**, sin cuarto escalón: un campo de búsqueda con `clearable`
-montado sin proveedor y sin `clearLabel` revienta diciendo qué texto falta. El error se lanza
-**donde el texto se pinta**, así que un campo normal —o uno de búsqueda sin `clearable`— no lo exige.
+El orden es **prop → proveedor → castellano de respaldo**: un campo de búsqueda con `clearable`
+montado sin proveedor y sin `clearLabel` pinta el castellano del paquete y avisa en desarrollo de
+qué clave faltaba. El texto se lee **donde se pinta**, así que un campo normal —o uno de búsqueda
+sin `clearable`— no lo pide.
 
 Lo que **no** sale del catálogo son `label`, `placeholder`, `helperText` y `errorMessage`: son el
 contenido de ESTE campo, y ningún catálogo común puede saber qué dicen. `label` sigue siendo

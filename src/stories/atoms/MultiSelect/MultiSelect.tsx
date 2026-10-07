@@ -4,6 +4,7 @@ import { forwardRef, useState, useRef } from 'react';
 import { Select as BaseSelect } from '@base-ui/react/select';
 import { Icon } from '../Icon/Icon';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { multiSelectEs } from '../../messages/es/multiSelect';
 import './MultiSelect.css';
 import { usePortalContainer } from '../../constants/portal-container';
 import { assignRef } from '../../constants/assign-ref';
@@ -119,7 +120,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
   removeLabel,
   container,
 }: MultiSelectProps, ref) {
-  const t = useBrandMessages('multiSelect');
+  const t = useBrandMessages('multiSelect', multiSelectEs);
   const portalContainer = usePortalContainer(container);
   const [open, setOpen] = useState(false);
   const [internalValues, setInternalValues] = useState<string[]>(defaultValue);

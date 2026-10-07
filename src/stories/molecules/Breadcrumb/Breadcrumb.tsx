@@ -1,6 +1,7 @@
 import type { AnchorHTMLAttributes, ReactNode } from 'react';
 import './Breadcrumb.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { breadcrumbEs } from '../../messages/es/breadcrumb';
 import { defaultRenderLink } from '../../constants/default-render-link';
 
 export type BreadcrumbItem = {
@@ -42,7 +43,7 @@ export function Breadcrumb({
   ariaLabel,
   className,
 }: BreadcrumbProps) {
-  const t = useBrandMessages('breadcrumb');
+  const t = useBrandMessages('breadcrumb', breadcrumbEs);
   return (
     <nav
       aria-label={t('label', ariaLabel)}

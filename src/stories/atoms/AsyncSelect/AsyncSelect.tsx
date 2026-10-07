@@ -6,6 +6,7 @@ import { Icon } from '../Icon/Icon';
 import { Spinner } from '../Spinner/Spinner';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { asyncSelectEs } from '../../messages/es/asyncSelect';
 import { useAsyncOptions } from '../_shared/useAsyncOptions';
 import './AsyncSelect.css';
 import { usePortalContainer } from '../../constants/portal-container';
@@ -141,7 +142,7 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
   clearLabel,
   container,
 }: AsyncSelectProps, ref) {
-  const t = useBrandMessages('asyncSelect');
+  const t = useBrandMessages('asyncSelect', asyncSelectEs);
   const portalContainer = usePortalContainer(container);
   const { results, loading, hasSearched, search, schedule, clear } = useAsyncOptions(onSearch, debounceMs);
   const [open, setOpen] = useState(false);

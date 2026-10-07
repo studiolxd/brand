@@ -3,6 +3,7 @@
 import type { ReactNode } from 'react';
 import { SkipLink } from '../../atoms/SkipLink/SkipLink';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { appRootEs } from '../../messages/es/appRoot';
 
 /**
  * El único texto de la raíz, y es **cromo**: el enlace de salto al contenido
@@ -32,7 +33,7 @@ export interface AppRootProps {
  * envolviendo a todo.
  */
 export function AppRoot({ skipLabel, skipHref = '#main-content', children }: AppRootProps) {
-  const t = useBrandMessages('appRoot');
+  const t = useBrandMessages('appRoot', appRootEs);
   return (
     <>
       <SkipLink href={skipHref}>{t('skipToContent', skipLabel)}</SkipLink>

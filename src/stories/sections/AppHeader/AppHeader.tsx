@@ -4,6 +4,7 @@ import { useContext, useState, type ReactNode } from 'react';
 import { AppShellContext } from '../AppShell/AppShellContext';
 import { MenuButton } from '../../atoms/MenuButton/MenuButton';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { appHeaderEs } from '../../messages/es/appHeader';
 import './AppHeader.css';
 import { defaultRenderLink } from '../../constants/default-render-link';
 
@@ -94,7 +95,7 @@ export function AppHeader({
   const [localOpen, setLocalOpen] = useState(false);
   const open = shell ? shell.sidebar === 'open' : localOpen;
   const toggle = shell ? shell.toggleSidebar : () => setLocalOpen((v) => !v);
-  const t = useBrandMessages('appHeader');
+  const t = useBrandMessages('appHeader', appHeaderEs);
 
   return (
     <header className={['app-header', className].filter(Boolean).join(' ')}>

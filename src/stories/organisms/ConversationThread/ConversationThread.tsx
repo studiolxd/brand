@@ -5,6 +5,7 @@ import { AssistantMessage } from '../../molecules/AssistantMessage/AssistantMess
 import { UserMessage } from '../../molecules/UserMessage/UserMessage';
 import type { MessageTimestamp } from '../../molecules/_shared/messageTimestamp';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { conversationThreadEs } from '../../messages/es/conversationThread';
 import './ConversationThread.css';
 
 /**
@@ -94,7 +95,7 @@ export const ConversationThread = forwardRef<HTMLDivElement, ConversationThreadP
   // scroll, así no hace falta calcular la altura del contenedor ni la del
   // último mensaje (que además cambia mientras se genera la respuesta).
   const bottomRef = useRef<HTMLDivElement>(null);
-  const t = useBrandMessages('conversationThread');
+  const t = useBrandMessages('conversationThread', conversationThreadEs);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: scrollBehavior() });

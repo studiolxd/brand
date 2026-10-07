@@ -7,6 +7,7 @@ import type { MenuItem, MenuRenderLinkProps } from '../Menu/Menu';
 import { renderDropdownItems } from '../_shared/dropdownItems';
 import './UserMenu.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { userMenuEs } from '../../messages/es/userMenu';
 import { usePortalContainer } from '../../constants/portal-container';
 import { defaultRenderLink } from '../../constants/default-render-link';
 import { sideOffsetFromToken } from '../../constants/side-offset';
@@ -76,7 +77,7 @@ export function UserMenu({
   defaultOpen,
   className,
 }: UserMenuProps) {
-  const t = useBrandMessages('userMenu');
+  const t = useBrandMessages('userMenu', userMenuEs);
   const portalContainer = usePortalContainer(undefined);
   return (
     <BaseMenu.Root onOpenChange={(open) => onOpenChange?.(open)} defaultOpen={defaultOpen}>

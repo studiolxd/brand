@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { DescriptionList, DescriptionTerm, DescriptionDetails } from '../../atoms/DescriptionList/DescriptionList';
 import { UntrustedText } from './UntrustedText';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { connectorRequestSummaryEs } from '../../messages/es/connectorRequestSummary';
 import './ConnectorRequestSummary.css';
 
 /**
@@ -129,7 +130,7 @@ export function ConnectorRequestSummary({
   valueQuotes,
   className,
 }: ConnectorRequestSummaryProps) {
-  const t = useBrandMessages('connectorRequestSummary');
+  const t = useBrandMessages('connectorRequestSummary', connectorRequestSummaryEs);
 
   // Los tres valores de fuera se pintan igual, y aquí —la ficha, que es donde
   // el dato se compara con lo que uno esperaba— el recorte trae desplegador.

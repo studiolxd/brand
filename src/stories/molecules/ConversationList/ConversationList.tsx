@@ -8,6 +8,7 @@ import { Icon } from '../../atoms/Icon/Icon';
 import { Skeleton } from '../../atoms/Skeleton/Skeleton';
 import { Tooltip } from '../../atoms/Tooltip/Tooltip';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { conversationListEs } from '../../messages/es/conversationList';
 import './ConversationList.css';
 
 /**
@@ -143,7 +144,7 @@ export const ConversationList = forwardRef<HTMLDivElement, ConversationListProps
   // Qué fila tiene el bocadillo abierto. Uno solo a la vez y por `id`: no hace
   // falta medir ni guardar nada de las demás.
   const [bocadillo, setBocadillo] = useState<string | null>(null);
-  const t = useBrandMessages('conversationList');
+  const t = useBrandMessages('conversationList', conversationListEs);
 
   // Prioridad: el error tapa todo, la carga tapa la lista, y la lista vacía
   // solo se anuncia cuando ya se sabe que está vacía.

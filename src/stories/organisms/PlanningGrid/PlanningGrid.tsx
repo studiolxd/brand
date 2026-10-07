@@ -1,11 +1,12 @@
 'use client';
 
-import { forwardRef, useContext, useId, useMemo, useState, type ComponentPropsWithoutRef, type ReactNode } from 'react';
+import { forwardRef, useId, useMemo, useState, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import { Input } from '../../atoms/Input/Input';
 import { Spinner } from '../../atoms/Spinner/Spinner';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { parsePlanningHours } from './planningHours';
-import { BrandMessagesContext, useBrandMessages } from '../../messages/BrandMessagesContext';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { planningGridEs } from '../../messages/es/planningGrid';
 import './PlanningGrid.css';
 
 /**
@@ -164,11 +165,7 @@ export const PlanningGrid = forwardRef<HTMLDivElement, PlanningGridProps>(functi
   className,
   ...rest
 }, ref) {
-  const t = useBrandMessages('planningGrid');
-  // `saving` es una clave opcional: se lee a mano, sin el lector, que lanza
-  // cuando falta. Y solo se lee si algún cruce está en vuelo.
-  const catálogo = useContext(BrandMessagesContext);
-  const guardando = () => savingLabel ?? catálogo?.planningGrid?.saving ?? 'Guardando…';
+  const t = useBrandMessages('planningGrid', planningGridEs);
 
   const índice = useMemo(() => {
     const mapa = new Map<string, PlanningGridCell>();
@@ -253,7 +250,7 @@ export const PlanningGrid = forwardRef<HTMLDivElement, PlanningGridProps>(functi
                           contraste pleno, que es lo que se está comprobando— y
                           el «en vuelo» lo dice el spinner, que además lo anuncia. */}
                       {cell?.pending ? (
-                        <Spinner size="sm" label={guardando()} className="planning-grid__saving" />
+                        <Spinner size="sm" label={t('saving', savingLabel)} className="planning-grid__saving" />
                       ) : null}
                     </td>
                   );

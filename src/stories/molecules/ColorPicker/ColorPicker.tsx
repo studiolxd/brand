@@ -13,6 +13,7 @@ import { Slider } from '../../atoms/Slider/Slider';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { useCssProperties } from '../../constants/css-properties';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { colorPickerEs } from '../../messages/es/colorPicker';
 import { ColorArea, type AreaValue } from './ColorArea';
 import { hexToHsva, hsvaToHex, hueStops, normalizeHex, type Hsva } from './colorModel';
 import './ColorPicker.css';
@@ -198,7 +199,7 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(funct
   },
   ref,
 ) {
-  const t = useBrandMessages('colorPicker');
+  const t = useBrandMessages('colorPicker', colorPickerEs);
   const rtl = useDirection() === 'rtl';
   const [openInner, setOpenInner] = useState(defaultOpen);
   const open = openProp ?? openInner;

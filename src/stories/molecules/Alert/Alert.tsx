@@ -8,6 +8,7 @@
 import { forwardRef, useState } from 'react';
 import { CloseButton } from '../../atoms/CloseButton/CloseButton';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { alertEs } from '../../messages/es/alert';
 import './Alert.css';
 
 /**
@@ -138,7 +139,7 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
   role,
   ...rest
 }, ref) {
-  const t = useBrandMessages('alert');
+  const t = useBrandMessages('alert', alertEs);
   const [dismissed, setDismissed] = useState(false);
 
   if (dismissed) return null;

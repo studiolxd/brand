@@ -1,5 +1,6 @@
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { spinnerEs } from '../../messages/es/spinner';
 import './Spinner.css';
 
 /**
@@ -43,7 +44,7 @@ function Square() {
 }
 
 export function Spinner({ size = 'md', label, 'aria-hidden': ariaHidden, className }: SpinnerProps) {
-  const t = useBrandMessages('spinner');
+  const t = useBrandMessages('spinner', spinnerEs);
   const classes = ['spinner', `spinner--${size}`, className].filter(Boolean).join(' ');
   // El texto se lee DONDE se pinta: el spinner decorativo sale antes de
   // llamar a `t`, así que no exige `spinner.label`.
