@@ -31,6 +31,7 @@ const meta: Meta<typeof EmbedFrame> = {
   args: { title: 'Reproductor del curso', srcDoc: DOC },
   argTypes: {
     fill: { control: { type: 'inline-radio' }, options: ['container', 'viewport'] },
+    device: { control: { type: 'inline-radio' }, options: ['mobile', 'tablet', 'desktop'] },
     className: { table: { disable: true } },
   },
 };
@@ -124,6 +125,36 @@ export const EnElArmazon: Story = {
   name: 'En el armazón de la aplicación',
   parameters: { layout: 'fullscreen' },
   render: (args) => <EnArmazon {...args} />,
+};
+
+const DISPOSITIVOS = [
+  { device: 'mobile', nombre: 'Móvil' },
+  { device: 'tablet', nombre: 'Tableta' },
+  { device: 'desktop', nombre: 'Escritorio' },
+] as const;
+
+/**
+ * `device`: la vista previa en otro dispositivo. Móvil (375px) y tableta
+ * (768px) dan al marco su ancho, centrado; escritorio llena el contenedor. El
+ * documento de dentro ve ese ancho como su ventana, así que sus media queries
+ * responden como en el dispositivo real.
+ */
+export const PorDispositivo: Story = {
+  name: 'Por dispositivo',
+  parameters: { layout: 'fullscreen' },
+  globals: { viewport: { value: 'desktop' } },
+  render: (args) => (
+    <Stack gap="lg">
+      {DISPOSITIVOS.map(({ device, nombre }) => (
+        <Stack key={device} gap="sm" align="stretch">
+          <Heading level={2} size={5}>{nombre}</Heading>
+          <div style={{ blockSize: '16rem' }}>
+            <EmbedFrame {...args} title={`Reproductor del curso en ${nombre.toLowerCase()}`} device={device} />
+          </div>
+        </Stack>
+      ))}
+    </Stack>
+  ),
 };
 
 export const TestContrato: Story = {
@@ -231,6 +262,45 @@ export const TestUsoPreview: Story = {
       // El contenido no se desplaza: el marco ocupa lo que deja la fila.
       expect(main.scrollHeight).toBeLessThanOrEqual(main.clientHeight);
       sinDesplazamientoDePagina();
+    });
+  },
+};
+
+export const TestDispositivo: Story = {
+  name: 'Test — device da el ancho, centrado y sin pasar del hueco',
+  tags: ['!dev'],
+  parameters: { layout: 'fullscreen' },
+  globals: { viewport: { value: 'desktop' } },
+  render: (args) => (
+    <Stack gap="sm" align="stretch">
+      <div data-testid="ancha" style={{ blockSize: '8rem', inlineSize: '1000px' }}>
+        <EmbedFrame {...args} title="Móvil" device="mobile" />
+      </div>
+      <div style={{ blockSize: '8rem', inlineSize: '1000px' }}>
+        <EmbedFrame {...args} title="Tableta" device="tablet" />
+      </div>
+      <div style={{ blockSize: '8rem', inlineSize: '1000px' }}>
+        <EmbedFrame {...args} title="Escritorio" device="desktop" />
+      </div>
+      <div data-testid="estrecha" style={{ blockSize: '8rem', inlineSize: '300px' }}>
+        <EmbedFrame {...args} title="Móvil en un hueco estrecho" device="mobile" />
+      </div>
+    </Stack>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const caja = canvas.getByTestId('ancha').getBoundingClientRect();
+    const ancho = (title: string) => canvas.getByTitle(title).getBoundingClientRect();
+    await waitFor(() => {
+      const movil = ancho('Móvil');
+      expect(movil.width).toBeCloseTo(375, 0);
+      // Centrado: el mismo hueco a cada lado.
+      expect(movil.left - caja.left).toBeCloseTo(caja.right - movil.right, 0);
+      // El alto sigue siendo el del contenedor.
+      expect(movil.height).toBeCloseTo(caja.height, 0);
+      expect(ancho('Tableta').width).toBeCloseTo(768, 0);
+      expect(ancho('Escritorio').width).toBeCloseTo(1000, 0);
+      expect(ancho('Móvil en un hueco estrecho').width).toBeCloseTo(300, 0);
     });
   },
 };

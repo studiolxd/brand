@@ -63,4 +63,22 @@ describe('EmbedFrame', () => {
     render(<EmbedFrame title="Reproductor del curso" className="extra" />);
     expect(screen.getByTitle('Reproductor del curso')).toHaveClass('embed-frame', 'extra');
   });
+
+  it.each(['mobile', 'tablet'] as const)('device="%s" lleva la clase embed-frame--%s', (device) => {
+    render(<EmbedFrame title="Reproductor del curso" device={device} />);
+    const frame = screen.getByTitle('Reproductor del curso');
+    expect(frame).toHaveClass('embed-frame', `embed-frame--${device}`);
+    expect(frame).not.toHaveAttribute('style');
+  });
+
+  it('device="desktop" es el de por defecto: sin clase de dispositivo', () => {
+    render(<EmbedFrame title="Reproductor del curso" device="desktop" />);
+    expect(screen.getByTitle('Reproductor del curso').className).toBe('embed-frame');
+  });
+
+  it('device y fill se combinan', () => {
+    render(<EmbedFrame title="Reproductor del curso" device="mobile" fill="viewport" />);
+    expect(screen.getByTitle('Reproductor del curso')).toHaveClass('embed-frame--viewport', 'embed-frame--mobile');
+  });
 });
+

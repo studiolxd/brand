@@ -20,3 +20,20 @@
 .embed-frame.embed-frame--viewport {
   block-size: 100dvh;
 }
+
+/* El dispositivo que se simula: el ancho del marco es el de su pantalla,
+   centrado en el hueco y sin pasar del disponible —en un hueco más estrecho
+   el marco encoge con él—. Sin hueco de sobra, `margin-inline: auto` vale 0. */
+.embed-frame.embed-frame--mobile,
+.embed-frame.embed-frame--tablet {
+  max-inline-size: 100%;
+  margin-inline: auto;
+}
+
+.embed-frame.embed-frame--mobile {
+  inline-size: var(--embed-frame-device-mobile-inline-size);
+}
+
+.embed-frame.embed-frame--tablet {
+  inline-size: var(--embed-frame-device-tablet-inline-size);
+}

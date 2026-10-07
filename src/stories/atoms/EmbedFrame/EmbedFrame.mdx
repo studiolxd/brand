@@ -79,6 +79,25 @@ lo que deja la fila de arriba.
 
 <Canvas of={EmbedFrameStories.EnElArmazon} />
 
+## El ancho de un dispositivo
+
+`device` simula otra pantalla —la vista previa de un curso en móvil o en
+tableta—: `mobile` da al marco 375px y `tablet` 768px, centrado en el hueco y
+sin pasar nunca del disponible (en un hueco más estrecho, encoge con él).
+`desktop`, el de por defecto, llena el ancho del contenedor. El documento de
+dentro ve ese ancho como su ventana, así que sus media queries y sus
+consultas de contenedor responden como en el dispositivo real. El alto no
+cambia: lo sigue poniendo `fill`.
+
+```tsx
+<EmbedFrame device={dispositivo} title="Reproductor del curso" src={url} />
+```
+
+El selector (móvil, tableta, escritorio) es del producto: el marco solo
+recibe la elección.
+
+<Canvas of={EmbedFrameStories.PorDispositivo} />
+
 ## Nombre accesible
 
 `title` es **obligatorio**: es lo que anuncia el lector de pantalla al entrar
@@ -119,5 +138,10 @@ documento de dentro, que decide su propio tema.
 
 ## Tokens
 
-`EmbedFrame` no tiene tokens propios: no lleva color, borde ni medida que
-decidir.
+`EmbedFrame` no lleva color ni borde. Sus únicos tokens son los anchos de
+`device`:
+
+| Token | Valor | Para qué |
+| --- | --- | --- |
+| `--embed-frame-device-mobile-inline-size` | `375px` | Ancho con `device="mobile"`: un teléfono en vertical |
+| `--embed-frame-device-tablet-inline-size` | `var(--breakpoint-md)` (768px) | Ancho con `device="tablet"` |

@@ -1,0 +1,6 @@
+{
+  "embed-frame": {
+    "device-mobile-inline-size": { "$value": "375px",           "$type": "dimension", "$description": "Ancho del marco con `device=\"mobile\"`: el de un teléfono en vertical, el ancho de referencia contra el que el sistema comprueba que una maqueta cabe. No es un punto de corte —el primero, `breakpoint.sm`, es el teléfono apaisado—: es la pantalla que se simula" },
+    "device-tablet-inline-size": { "$value": "{breakpoint.md}", "$type": "dimension", "$description": "Ancho del marco con `device=\"tablet\"` (768px): la tableta. Apunta al breakpoint porque es justo lo que se simula —el ancho en el que el documento de dentro pasa de una columna a varias—" }
+  }
+}
