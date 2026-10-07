@@ -133,5 +133,14 @@ class FieldsLogicTest {
         val labels = ThemeSwitcherLabels()
         assertEquals("Tema", labels.group)
         assertEquals(listOf("Claro", "Oscuro", "Sistema"), BrandThemeChoice.entries.map { labels.text(it) })
+        assertEquals("Tema: Claro", labels.triggerLabel(BrandThemeChoice.Light))
+        assertEquals(ThemeSwitcherLabels(), ThemeSwitcherLabels())
+    }
+
+    /** El nombre del disparador de `Icon` sale de una función, como `themeSwitcher.trigger` en React (D38). */
+    @Test
+    fun themeTriggerIsAFunctionOfGroupAndTheme() {
+        val labels = ThemeSwitcherLabels(group = "Theme", dark = "Dark", trigger = { group, theme -> "$theme ($group)" })
+        assertEquals("Dark (Theme)", labels.triggerLabel(BrandThemeChoice.Dark))
     }
 }

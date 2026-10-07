@@ -102,5 +102,12 @@ final class TogglesLogicTests: XCTestCase {
         XCTAssertEqual(labels.text(.light), "Claro")
         XCTAssertEqual(labels.text(.system), "Sistema")
         XCTAssertEqual(labels.group, "Tema")
+        XCTAssertEqual(labels.triggerLabel(.light), "Tema: Claro")
+    }
+
+    /// El nombre del disparador de `icon` sale de una función, como `themeSwitcher.trigger` en React (D38).
+    func testThemeTriggerIsAFunctionOfGroupAndTheme() {
+        let labels = ThemeSwitcherLabels(group: "Theme", dark: "Dark", trigger: { group, theme in "\(theme) (\(group))" })
+        XCTAssertEqual(labels.triggerLabel(.dark), "Dark (Theme)")
     }
 }
