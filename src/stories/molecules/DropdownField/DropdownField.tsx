@@ -1,9 +1,10 @@
 'use client';
 
-import { forwardRef, type ReactNode } from 'react';
+import { forwardRef, useRef, type ReactNode } from 'react';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
 import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { RequiredInput } from '../_shared/requiredInput';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Menu, type MenuItem } from '../Menu/Menu';
 import './DropdownField.css';
@@ -34,6 +35,14 @@ export interface DropdownFieldProps {
   disabled?: boolean;
   /** Nombre del campo en el formulario: se monta un input oculto con el valor. */
   name?: string;
+  /**
+   * Campo obligatorio. El disparador es un botón, que no admite
+   * `aria-required`: lo obligatorio lo lleva el **grupo** que envuelve el
+   * campo (`role="group"`, nombrado por la etiqueta o por `aria-label`, con
+   * `aria-required`), y el `<form>` no se envía sin valor (`required` en el
+   * campo que sincroniza el valor, que devuelve el foco al disparador).
+   */
+  required?: boolean;
   /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */
   error?: boolean;
   /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */
@@ -66,6 +75,7 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
   align = 'start',
   disabled = false,
   name,
+  required = false,
   error = false,
   errorMessage,
   helperText,
@@ -75,7 +85,21 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
-  const { id } = field;
+  const { id, labelId } = field;
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const setTriggerRef = (node: HTMLButtonElement | null) => {
+    triggerRef.current = node;
+    if (typeof ref === 'function') ref(node);
+    else if (ref) ref.current = node;
+  };
+  const group = required
+    ? {
+        role: 'group',
+        'aria-labelledby': label ? labelId : undefined,
+        'aria-label': label ? undefined : ariaLabel,
+        'aria-required': true,
+      } as const
+    : undefined;
   return (
     <FieldShell
       field={field}
@@ -85,6 +109,8 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
       label={label}
       labelHidden={labelHidden}
       size={size}
+      labelIdentified={required}
+      rootProps={group}
     >
       <Menu
         align={align}
@@ -94,7 +120,7 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
         items={items}
         trigger={
           <button
-            ref={ref}
+            ref={setTriggerRef}
             type="button"
             id={id}
             className="dropdown-field__control"
@@ -109,8 +135,8 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
           </button>
         }
       />
-      {/* Lo que se envía con el formulario. */}
-      {name && <input type="hidden" name={name} value={value ?? ''} />}
+      {/* Lo que se envía con el formulario (y, si es obligatorio, lo que lo valida). */}
+      <RequiredInput name={name} value={value ?? ''} required={required} focusTarget={() => triggerRef.current} />
     </FieldShell>
   );
 });

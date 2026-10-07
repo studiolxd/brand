@@ -58,6 +58,10 @@ valor pasa a `null`.
 
 <Canvas of={ColorPickerStories.ConQuitar} />
 
+## Obligatorio
+
+Con `required` el `<form>` no se envía sin color: el campo que sincroniza el hex lleva `required` y, si el navegador lo enfoca para avisar, el foco vuelve al disparador. Anunciarlo es cosa del campo: el disparador es un botón y no admite `aria-required`, así que `ColorPickerField` lo pone en su grupo.
+
 ## Apertura controlada
 
 Por defecto el panel se abre con el disparador y se cierra con `Escape`, con un clic fuera o al

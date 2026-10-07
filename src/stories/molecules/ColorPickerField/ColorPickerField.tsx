@@ -23,6 +23,14 @@ export interface ColorPickerFieldProps
   errorMessage?: string;
   /** Texto de ayuda, enlazado por `aria-describedby`. */
   helperText?: string;
+  /**
+   * Campo obligatorio. El disparador es un botón, que no admite
+   * `aria-required`: lo obligatorio lo lleva el **grupo** que envuelve el
+   * campo (`role="group"`, nombrado por la etiqueta, con `aria-required`), y
+   * el `<form>` no se envía sin color (`required` en el campo que sincroniza
+   * el hex).
+   */
+  required?: boolean;
   /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
   className?: string;
 }
@@ -41,6 +49,7 @@ export const ColorPickerField = forwardRef<HTMLButtonElement, ColorPickerFieldPr
   helperText,
   error = false,
   size: sizeProp,
+  required = false,
   className,
   ...pickerProps
 }: ColorPickerFieldProps, ref) {
@@ -50,13 +59,23 @@ export const ColorPickerField = forwardRef<HTMLButtonElement, ColorPickerFieldPr
   const { id, labelId } = field;
 
   return (
-    <FieldShell field={field} block="color-picker-field" className={className} label={label} labelHidden={labelHidden} size={size} labelIdentified>
+    <FieldShell
+      field={field}
+      block="color-picker-field"
+      className={className}
+      label={label}
+      labelHidden={labelHidden}
+      size={size}
+      labelIdentified
+      rootProps={required ? { role: 'group', 'aria-labelledby': labelId, 'aria-required': true } : undefined}
+    >
       <ColorPicker
         dialogLabel={label}
         {...pickerProps}
         ref={ref}
         id={id}
         size={size}
+        required={required}
         error={field.hasError}
         aria-labelledby={labelId}
         aria-describedby={field.describedBy}

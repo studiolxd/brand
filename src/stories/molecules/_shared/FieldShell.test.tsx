@@ -98,11 +98,12 @@ const CASES: Case[] = [
   },
   {
     // El disparador es un botón que abre un diálogo: `aria-required` no está
-    // permitido en `role="button"`. Decisión de diseño pendiente.
+    // permitido en `role="button"`. Lo lleva el grupo que envuelve el campo,
+    // nombrado por la etiqueta.
     name: 'ColorPickerField',
-    render: (p) => <ColorPickerField id={ID} label={LABEL} {...drop(p, 'required')} />,
+    render: (p) => <ColorPickerField id={ID} label={LABEL} {...p} />,
     named: byId(ID),
-    required: null,
+    required: { how: 'aria', on: () => byId(ID)().closest<HTMLElement>('.color-picker-field')! },
   },
   {
     name: 'DatePickerField',
@@ -124,10 +125,10 @@ const CASES: Case[] = [
     // El disparador es un botón que abre un menú: como en ColorPickerField.
     name: 'DropdownField',
     render: (p) => (
-      <DropdownField id={ID} label={LABEL} items={[]} {...drop(p, 'required')}>Valor</DropdownField>
+      <DropdownField id={ID} label={LABEL} items={[]} {...p}>Valor</DropdownField>
     ),
     named: byId(ID),
-    required: null,
+    required: { how: 'aria', on: () => byId(ID)().closest<HTMLElement>('.dropdown-field')! },
   },
   {
     name: 'FileUploadField',
@@ -286,6 +287,41 @@ describe('FieldShell — contrato común de los *Field', () => {
         expect(c.named()).toHaveAccessibleName(LABEL);
       });
     }
+  });
+});
+
+describe('FieldShell — el obligatorio de un disparador que es un botón va en su grupo', () => {
+  const GROUPED: Array<[string, (required: boolean) => ReactElement]> = [
+    ['ColorPickerField', (required) => <ColorPickerField id={ID} label={LABEL} name="color" required={required} />],
+    ['DropdownField', (required) => (
+      <DropdownField id={ID} label={LABEL} items={[]} name="valor" required={required}>Valor</DropdownField>
+    )],
+  ];
+
+  it.each(GROUPED)('%s: grupo nombrado por la etiqueta y el `<form>` lo valida', (_name, ui) => {
+    const { unmount } = render(<BrandMessagesProvider messages={ES}>{ui(false)}</BrandMessagesProvider>);
+    expect(screen.queryByRole('group', { name: LABEL })).toBeNull();
+    // Sin `required`, el campo que va con el formulario sigue siendo el oculto de siempre.
+    expect(document.querySelector('input[type="hidden"]')).not.toBeNull();
+    unmount();
+
+    render(<BrandMessagesProvider messages={ES}>{ui(true)}</BrandMessagesProvider>);
+    const group = screen.getByRole('group', { name: LABEL });
+    expect(group).toHaveAttribute('aria-required', 'true');
+    expect(group).toContainElement(document.getElementById(ID));
+    // El disparador se sigue nombrando por la etiqueta, y no lleva `aria-required`.
+    expect(document.getElementById(ID)).toHaveAccessibleName(LABEL);
+    expect(document.getElementById(ID)).not.toHaveAttribute('aria-required');
+    // Un campo oculto no se valida: el obligatorio va en uno de texto, fuera de la vista.
+    const input = group.querySelector('input')!;
+    expect(input).toHaveAttribute('type', 'text');
+    expect(input).toBeRequired();
+    expect(input).toHaveAttribute('tabindex', '-1');
+    expect(input).toHaveAttribute('aria-hidden', 'true');
+    expect((input as HTMLInputElement).validity.valueMissing).toBe(true);
+    // El navegador lo enfoca para avisar: el foco vuelve al disparador.
+    input.focus();
+    expect(document.getElementById(ID)).toHaveFocus();
   });
 });
 

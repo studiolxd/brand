@@ -1,6 +1,7 @@
 'use client';
 
 import { cloneElement, forwardRef, useCallback, useId, useRef, useState } from 'react';
+import type { ForwardedRef } from 'react';
 import type { ReactElement } from 'react';
 import { useDirection } from '@base-ui/react/direction-provider';
 import { useRender } from '@base-ui/react/use-render';
@@ -13,6 +14,7 @@ import { Slider } from '../../atoms/Slider/Slider';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { useCssProperties } from '../../constants/css-properties';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { RequiredInput } from '../_shared/requiredInput';
 import { ColorArea, type AreaValue } from './ColorArea';
 import { hexToHsva, hsvaToHex, hueStops, normalizeHex, type Hsva } from './colorModel';
 import './ColorPicker.css';
@@ -121,6 +123,13 @@ export interface ColorPickerProps {
   id?: string;
   /** Nombre en el formulario: se monta un input oculto con el hex. */
   name?: string;
+  /**
+   * El `<form>` no se envía sin color: el campo que sincroniza el hex lleva
+   * `required` (y, si se enfoca para avisar, devuelve el foco al disparador).
+   * El disparador es un botón y no admite `aria-required`: quien lo anuncia es
+   * el grupo de `ColorPickerField`. Suelto, el obligatorio se dice en el texto.
+   */
+  required?: boolean;
   /** Nombre accesible del disparador cuando va suelto. */
   'aria-label'?: string;
   /** Lo pone el campo: la etiqueta nombra el disparador. */
@@ -162,6 +171,12 @@ export interface ColorPickerProps {
   className?: string;
 }
 
+/** Escribe `node` en un `ref` reenviado, sea función u objeto. */
+function assignRef<T>(ref: ForwardedRef<T>, node: T | null) {
+  if (typeof ref === 'function') ref(node);
+  else if (ref) ref.current = node;
+}
+
 /** El origen del modelo cuando no hay color que leer: negro opaco. */
 const ORIGIN: Hsva = { h: 0, s: 0, v: 0, a: 1 };
 
@@ -193,6 +208,7 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(funct
     locale = 'es-ES',
     id,
     name,
+    required = false,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     'aria-describedby': ariaDescribedBy,
@@ -314,9 +330,20 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(funct
 
   const describedBy = [valueId, ariaDescribedBy].filter(Boolean).join(' ');
 
+  // El disparador, sea la muestra o el propio: a él vuelve el foco cuando el
+  // navegador enfoca el campo obligatorio para avisar.
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const setTriggerRef = useCallback(
+    (node: HTMLButtonElement | null) => {
+      triggerRef.current = node;
+      assignRef(ref, node);
+    },
+    [ref],
+  );
+
   const swatchTrigger = (
     <button
-      ref={ref}
+      ref={setTriggerRef}
       id={id}
       type="button"
       className={['color-picker__trigger', paintsTrigger ? className : undefined].filter(Boolean).join(' ')}
@@ -345,7 +372,7 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(funct
       disabled: disabled || ownProps.disabled || undefined,
       'aria-describedby': [describedBy, ownProps['aria-describedby']].filter(Boolean).join(' '),
     }),
-    ref,
+    ref: setTriggerRef,
     enabled: customTrigger !== undefined,
     props: {
       id,
@@ -366,7 +393,7 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(funct
 
   return (
     <div className={rootClass}>
-      {name && <input type="hidden" name={name} value={currentHex ?? ''} />}
+      <RequiredInput name={name} value={currentHex ?? ''} required={required} focusTarget={() => triggerRef.current} />
       {customTrigger && (
         // La descripción del disparador propio: no puede ir dentro de un
         // elemento que no es nuestro.
