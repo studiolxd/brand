@@ -1927,6 +1927,8 @@ object BrandTabsTokens {
     val triggerPaddingInline: Dp = 16.dp
     /** Token `tabs.trigger-font-size` — Tamaño de fuente del trigger */
     val triggerFontSize: TextUnit = 16.sp
+    /** Token `tabs.trigger-line-height` — Interlineado del trigger (1,15). Es el que el `<button>` heredaba de `normalize.css` sin declararlo; el token lo fija para que no dependa de la hoja de terceros. No hay primitivo de 1,15 en `line-height.*`: es medida propia del componente Factor sin unidad. */
+    val triggerLineHeight: Float = 1.15f
     /** Token `tabs.trigger-font-weight` — Peso de fuente por defecto */
     val triggerFontWeight: FontWeight = FontWeight(300)
     /** Token `tabs.trigger-active-weight` — Peso de fuente del tab activo Factor sin unidad. */

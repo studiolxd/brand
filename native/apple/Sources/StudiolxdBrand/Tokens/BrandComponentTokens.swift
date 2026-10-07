@@ -1918,6 +1918,8 @@ public enum BrandTabsTokens {
     public static let triggerPaddingInline: CGFloat = 16
     /// Token `tabs.trigger-font-size` — Tamaño de fuente del trigger
     public static let triggerFontSize: CGFloat = 16
+    /// Token `tabs.trigger-line-height` — Interlineado del trigger (1,15). Es el que el `<button>` heredaba de `normalize.css` sin declararlo; el token lo fija para que no dependa de la hoja de terceros. No hay primitivo de 1,15 en `line-height.*`: es medida propia del componente
+    public static let triggerLineHeight: CGFloat = 1.15
     /// Token `tabs.trigger-font-weight` — Peso de fuente por defecto
     public static let triggerFontWeight: Int = 300
     /// Token `tabs.trigger-active-weight` — Peso de fuente del tab activo

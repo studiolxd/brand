@@ -41,6 +41,7 @@
   padding-inline: var(--tabs-trigger-padding-inline);
   font-size: var(--tabs-trigger-font-size);
   font-weight: var(--tabs-trigger-font-weight);
+  line-height: var(--tabs-trigger-line-height);
   color: var(--tabs-trigger-color);
   background: none;
   border: none;
