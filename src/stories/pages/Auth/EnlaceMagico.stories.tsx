@@ -4,6 +4,7 @@ import { AuthPage } from './AuthPage';
 import { Form } from '../../molecules/Form/Form';
 import { Link } from '../../atoms/Link/Link';
 import { SOLO_OSCURO } from '../../utils/chromaticModes';
+import { SIN_LINK_IN_TEXT_BLOCK } from '../../utils/a11y';
 
 const AVISO = 'Revisa tu correo para encontrar el enlace de acceso.';
 
@@ -49,7 +50,10 @@ export default meta;
 type Story = StoryObj<typeof EnlaceMagico>;
 
 /** El aviso en el sitio del formulario. */
-export const PorDefecto: Story = {};
+// a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
+// dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
+// línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
+export const PorDefecto: Story = { parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK } };
 
 /** Con el registro cerrado no hay nada que ofrecer bajo el título. */
 export const RegistroCerrado: Story = { name: 'Registro cerrado', args: { signupOpen: false } };
@@ -70,6 +74,10 @@ export const EnSuperficieOscura: Story = {
 export const Contrato: Story = {
   name: 'Test — un h1, el aviso anunciado y ningún campo',
   tags: ['!dev'],
+  // a11y falso positivo (D43): `link-in-text-block` en oscuro. El enlace va
+  // dentro de texto corrido y lleva su línea en reposo, pero axe no ve una
+  // línea pintada con `box-shadow` (regla 7). Ver `SIN_LINK_IN_TEXT_BLOCK`.
+  parameters: { a11y: SIN_LINK_IN_TEXT_BLOCK },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getAllByRole('heading', { level: 1 })).toHaveLength(1);
