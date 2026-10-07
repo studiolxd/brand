@@ -48,8 +48,11 @@ export const Default: Story = {
  */
 export const EnArrastre: Story = {
   name: 'Durante el arrastre',
-  // a11y pendiente de decisión (D16): `color-contrast` de lo atenuado durante el arrastre
-  // (origen o destino prohibido, por opacidad): #a0a5ac sobre #ffffff, 2,47:1 (pide 4,5:1).
+  // a11y excepción declarada (D41): `color-contrast` de lo atenuado durante el arrastre
+  // (origen o destino prohibido, por opacidad): #a0a5ac sobre #ffffff, 2,47:1. Es el
+  // estado transitorio de un componente inactivo mientras dura el arrastre, y WCAG 1.4.3
+  // exime el texto de un componente inactivo. No es un falso positivo ni una decisión
+  // pendiente: se queda así.
   parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } },
   args: { children: null },
   render: () => (
@@ -82,8 +85,11 @@ export const EnArrastre: Story = {
 export const TestTransformYArrastre: Story = {
   name: 'Test — desplazamiento por CSSOM y arrastre por atributo',
   tags: ['!dev'],
-  // a11y pendiente de decisión (D16): `color-contrast` de lo atenuado durante el arrastre
-  // (origen o destino prohibido, por opacidad): #a0a5ac sobre #ffffff, 2,47:1 (pide 4,5:1).
+  // a11y excepción declarada (D41): `color-contrast` de lo atenuado durante el arrastre
+  // (origen o destino prohibido, por opacidad): #a0a5ac sobre #ffffff, 2,47:1. Es el
+  // estado transitorio de un componente inactivo mientras dura el arrastre, y WCAG 1.4.3
+  // exime el texto de un componente inactivo. No es un falso positivo ni una decisión
+  // pendiente: se queda así.
   parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } },
   args: { children: null },
   render: () => (
