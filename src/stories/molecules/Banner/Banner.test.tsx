@@ -35,7 +35,7 @@ describe('Banner', () => {
     const { rerender } = render(<Banner>Info</Banner>);
     expect(screen.getByRole('status')).toHaveClass('banner', 'banner--info', 'surface-dark');
 
-    rerender(<Banner variant="warning" actions={<button type="button">Ver</button>}>Aviso</Banner>);
+    rerender(<Banner tone="warning" actions={<button type="button">Ver</button>}>Aviso</Banner>);
     // El aviso interrumpe, como en `Alert`.
     const aviso = screen.getByRole('alert');
     expect(aviso).toHaveClass('banner', 'banner--warning');
@@ -46,7 +46,7 @@ describe('Banner', () => {
     expect(aviso.querySelector('.banner__content')).toHaveClass('surface-light');
     expect(aviso.querySelector('.banner__actions')).toHaveClass('surface-light');
 
-    rerender(<Banner variant="error" actions={<button type="button">Ver</button>}>Error</Banner>);
+    rerender(<Banner tone="error" actions={<button type="button">Ver</button>}>Error</Banner>);
     const error = screen.getByRole('alert');
     expect(error).toHaveClass('banner', 'banner--error', 'surface-dark');
     expect(error).toHaveAttribute('aria-live', 'assertive');

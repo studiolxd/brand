@@ -40,7 +40,7 @@ function h({ name: i, email: h, avatarUrl: g, notificationCount: _, items: v = [
 						size: "sm"
 					}), !!_ && _ > 0 && /* @__PURE__ */ l(a, {
 						count: _,
-						variant: "danger",
+						tone: "error",
 						"aria-label": T("unread")(_),
 						className: "user-menu__notification-badge"
 					})]

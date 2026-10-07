@@ -140,33 +140,48 @@ fun BrandHeading(
 
 // MARK: Paragraph
 
-/** `Paragraph` `size`: `small` para notas y metadatos, `large` para entradillas. */
+/** `Paragraph` `size`: `sm` para notas y metadatos, `md` (el cuerpo) para leer, `lg` para entradillas. */
 enum class ParagraphSize(val value: String) {
-    Small("small"),
-    Default("default"),
-    Large("large"),
+    Sm("sm"),
+    Md("md"),
+    Lg("lg"),
+    ;
+
+    companion object {
+        /** `small` es `sm` desde la v51 (las tallas se escriben `xs`…`4xl`). Se retira en la v52. */
+        @Deprecated("`small` es `sm` desde la v51. Se retira en la v52.", ReplaceWith("ParagraphSize.Sm"))
+        val Small: ParagraphSize get() = Sm
+
+        /** `default` es `md` desde la v51. Se retira en la v52. */
+        @Deprecated("`default` es `md` desde la v51. Se retira en la v52.", ReplaceWith("ParagraphSize.Md"))
+        val Default: ParagraphSize get() = Md
+
+        /** `large` es `lg` desde la v51. Se retira en la v52. */
+        @Deprecated("`large` es `lg` desde la v51. Se retira en la v52.", ReplaceWith("ParagraphSize.Lg"))
+        val Large: ParagraphSize get() = Lg
+    }
 }
 
 @Composable
 private fun paragraphStyle(size: ParagraphSize) = when (size) {
-    ParagraphSize.Small -> brandBaseTextStyle(T.paragraphSmallFontSize, T.fontWeight, T.paragraphSmallLineHeight, T.letterSpacing, color = T.color.current)
-    ParagraphSize.Default -> brandBaseTextStyle(T.fontSize, T.fontWeight, T.lineHeight, T.letterSpacing, color = T.color.current)
-    ParagraphSize.Large -> brandBaseTextStyle(T.paragraphLargeFontSize, T.fontWeight, T.paragraphLargeLineHeight, T.letterSpacing, color = T.color.current)
+    ParagraphSize.Sm -> brandBaseTextStyle(T.paragraphSmallFontSize, T.fontWeight, T.paragraphSmallLineHeight, T.letterSpacing, color = T.color.current)
+    ParagraphSize.Md -> brandBaseTextStyle(T.fontSize, T.fontWeight, T.lineHeight, T.letterSpacing, color = T.color.current)
+    ParagraphSize.Lg -> brandBaseTextStyle(T.paragraphLargeFontSize, T.fontWeight, T.paragraphLargeLineHeight, T.letterSpacing, color = T.color.current)
 }
 
 /**
- * Un párrafo de la marca: el cuerpo del sistema (16 sp) y, en `Small` y `Large`, un peldaño por debajo y por encima.
+ * Un párrafo de la marca: el cuerpo del sistema (16 sp) y, en `Sm` y `Lg`, un peldaño por debajo y por encima.
  *
  * ```kotlin
  * BrandParagraph("Revisa los datos antes de continuar.")
- * BrandParagraph("Última actualización: hoy", size = ParagraphSize.Small)
+ * BrandParagraph("Última actualización: hoy", size = ParagraphSize.Sm)
  * ```
  */
 @Composable
 fun BrandParagraph(
     text: String,
     modifier: Modifier = Modifier,
-    size: ParagraphSize = ParagraphSize.Default,
+    size: ParagraphSize = ParagraphSize.Md,
 ) {
     BrandBasicText(text, modifier, style = paragraphStyle(size))
 }
@@ -185,7 +200,7 @@ fun BrandParagraph(
 fun BrandParagraph(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
-    size: ParagraphSize = ParagraphSize.Default,
+    size: ParagraphSize = ParagraphSize.Md,
 ) {
     BrandBasicText(text, modifier, style = paragraphStyle(size))
 }
@@ -206,12 +221,14 @@ enum class TextElement(val value: String) {
 }
 
 /**
- * `Text` `tone`: la intención del fragmento. `destructive` dice que algo se pierde, `success` que salió bien y
- * `muted` marca una aclaración secundaria. Es color de texto, nunca un relleno.
+ * `Text` `tone`: la intención del fragmento. `error` es un estado que ha fallado, `destructive` avisa de una acción
+ * que hace perder algo, `success` dice que salió bien y `muted` marca una aclaración secundaria. `error` y
+ * `destructive` comparten tinta; cambia lo que dicen. Es color de texto, nunca un relleno.
  */
 enum class TextTone(val value: String) {
     Default("default"),
     Muted("muted"),
+    Error("error"),
     Destructive("destructive"),
     Success("success"),
 }
@@ -230,6 +247,7 @@ fun brandSpanStyle(
     val color = when (tone) {
         TextTone.Default -> if (struck) BrandTextInlineTokens.strikethroughColor.current else Color.Unspecified
         TextTone.Muted -> BrandTextInlineTokens.mutedColor.current
+        TextTone.Error -> BrandTextInlineTokens.errorColor.current
         TextTone.Destructive -> BrandTextInlineTokens.destructiveColor.current
         TextTone.Success -> BrandTextInlineTokens.successColor.current
     }

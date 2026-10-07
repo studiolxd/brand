@@ -35,7 +35,7 @@ const meta: Meta<typeof Card> = {
     layout: 'padded',
   },
   argTypes: {
-    color: {
+    tone: {
       control: { type: 'select' },
       options: ['primary', 'outline', 'accent-1', 'accent-2', 'support-1', 'support-2'],
       description: 'Color de fondo.',
@@ -57,7 +57,7 @@ type Story = StoryObj<typeof Card>;
 
 export const Primary: Story = {
   args: {
-    color: 'primary',
+    tone: 'primary',
     title: 'Diseño instruccional',
     description: 'Creamos experiencias de aprendizaje efectivas y atractivas centradas en el usuario.',
     ctaLabel: 'Ver más sobre diseño instruccional',
@@ -66,7 +66,7 @@ export const Primary: Story = {
 
 export const Outline: Story = {
   args: {
-    color: 'outline',
+    tone: 'outline',
     title: 'Plataformas LMS',
     description: 'Desarrollamos plataformas de aprendizaje adaptadas a tu identidad visual.',
     ctaLabel: 'Ver más sobre plataformas LMS',
@@ -75,7 +75,7 @@ export const Outline: Story = {
 
 export const Accent1: Story = {
   args: {
-    color: 'accent-1',
+    tone: 'accent-1',
     title: 'Contenidos elearning',
     description: 'Diseñamos contenidos multimedia interactivos para formación online, utilizando estándares como SCORM y xAPI.',
     ctaLabel: 'Ver más sobre contenidos elearning',
@@ -84,7 +84,7 @@ export const Accent1: Story = {
 
 export const Accent2: Story = {
   args: {
-    color: 'accent-2',
+    tone: 'accent-2',
     title: 'Plataformas elearning',
     description: 'Desarrollamos plataformas elearning adaptadas a tu identidad visual y centradas en las personas usuarias para lograr una experiencia de aprendizaje gratificante.',
     ctaLabel: 'Ver más sobre plataformas elearning',
@@ -93,7 +93,7 @@ export const Accent2: Story = {
 
 export const Support1: Story = {
   args: {
-    color: 'support-1',
+    tone: 'support-1',
     title: 'Título de ejemplo',
     description: 'Descripción de ejemplo para la variante support-1 (emerald).',
     ctaLabel: 'Ver más',
@@ -102,7 +102,7 @@ export const Support1: Story = {
 
 export const Support2: Story = {
   args: {
-    color: 'support-2',
+    tone: 'support-2',
     title: 'Título de ejemplo',
     description: 'Descripción de ejemplo para la variante support-2 (cayenne).',
     ctaLabel: 'Ver más',
@@ -117,7 +117,7 @@ export const Support2: Story = {
 export const Cuadrada: Story = {
   args: {
     variant: 'square',
-    color: 'accent-1',
+    tone: 'accent-1',
     media: foto,
     title: 'Formación presencial',
     description: 'Talleres y sesiones en aula, con materiales propios.',
@@ -129,7 +129,7 @@ export const Cuadrada: Story = {
 export const Partida: Story = {
   args: {
     variant: 'split',
-    color: 'support-1',
+    tone: 'support-1',
     media: foto,
     title: 'Consultoría de aprendizaje',
     description: 'Acompañamos el diseño del plan de formación de punta a punta.',
@@ -141,7 +141,7 @@ export const Partida: Story = {
 export const ConImagen: Story = {
   name: 'Con imagen',
   args: {
-    color: 'outline',
+    tone: 'outline',
     media: foto,
     title: 'Contenidos a medida',
     description: 'Producción de contenidos multimedia accesibles.',
@@ -201,12 +201,12 @@ export const DescripcionRica: Story = {
   name: 'Descripción con marcado',
   args: {
     href: '#',
-    color: 'outline',
+    tone: 'outline',
     title: 'Contenidos elearning',
     description: (
       <>
-        <Paragraph size="small">SCORM, xAPI y cmi5, con el player que haga falta.</Paragraph>
-        <Paragraph size="small">Auditoría de accesibilidad incluida.</Paragraph>
+        <Paragraph size="sm">SCORM, xAPI y cmi5, con el player que haga falta.</Paragraph>
+        <Paragraph size="sm">Auditoría de accesibilidad incluida.</Paragraph>
       </>
     ),
     ctaLabel: 'Ver más sobre contenidos elearning',
@@ -221,10 +221,10 @@ export const DescripcionRica: Story = {
 export const EnlaceConHijos: Story = {
   name: 'Enlace con hijos',
   render: () => (
-    <Card href="#" color="accent-1" title="Curso de Moodle" ctaLabel="Ver el curso de Moodle">
+    <Card href="#" tone="accent-1" title="Curso de Moodle" ctaLabel="Ver el curso de Moodle">
       <Inline gap="sm">
-        <Tag variant="neutral">12 h</Tag>
-        <Tag variant="neutral">Nivel medio</Tag>
+        <Tag tone="neutral">12 h</Tag>
+        <Tag tone="neutral">Nivel medio</Tag>
       </Inline>
     </Card>
   ),
@@ -241,10 +241,10 @@ export const ContratoHijosEnEnlace: Story = {
     <Card
       href="#"
       title="Curso de Moodle"
-      description={<Paragraph size="small">Dos párrafos y una etiqueta.</Paragraph>}
+      description={<Paragraph size="sm">Dos párrafos y una etiqueta.</Paragraph>}
       ctaLabel="Ver el curso"
     >
-      <Tag variant="neutral">12 h</Tag>
+      <Tag tone="neutral">12 h</Tag>
     </Card>
   ),
   play: async ({ canvasElement }) => {
@@ -275,14 +275,14 @@ export const RejillaSinFlecha: Story = {
   name: 'Rejilla de catálogo (sin ctaLabel)',
   render: () => (
     <Columns columns={3} align="stretch">
-      <Card href="#" color="outline" title="Certificados" description="Emisión y verificación de certificados de un curso." />
+      <Card href="#" tone="outline" title="Certificados" description="Emisión y verificación de certificados de un curso." />
       <Card
         href="#"
-        color="outline"
+        tone="outline"
         title="Pasarela de pagos"
         description="Cobra matrículas con Stripe desde el propio catálogo, con facturación y reembolsos."
       />
-      <Card href="#" color="outline" title="Informes" description="Cuadro de mando de progreso." />
+      <Card href="#" tone="outline" title="Informes" description="Cuadro de mando de progreso." />
     </Columns>
   ),
 };
@@ -324,7 +324,7 @@ export const Externa: Story = {
   args: {
     href: 'https://studiolxd.com',
     external: true,
-    color: 'outline',
+    tone: 'outline',
     title: 'Studio LXD',
     description: 'Se abre en una pestaña nueva.',
     ctaLabel: 'Ir a studiolxd.com (se abre en una pestaña nueva)',
@@ -355,7 +355,7 @@ export const ContratoExterna: Story = {
 export const LinkModeUnchanged: Story = {
   name: 'Test — link mode intacto',
   tags: ['!dev'],
-  args: { href: '#', color: 'primary', title: 'Servicio', ctaLabel: 'Ver más' },
+  args: { href: '#', tone: 'primary', title: 'Servicio', ctaLabel: 'Ver más' },
   play: async ({ canvasElement }) => {
     const link = canvasElement.querySelector('a.card')!;
     await expect(link).not.toBeNull();
@@ -432,7 +432,7 @@ export const PieApiladoSiempre: Story = {
         <CardDescription>15 €/asiento/mes</CardDescription>
       </CardHeader>
       <CardFooter direction="column">
-        <Paragraph size="small">Catorce días de prueba, sin tarjeta.</Paragraph>
+        <Paragraph size="sm">Catorce días de prueba, sin tarjeta.</Paragraph>
         <Button>Empezar la prueba</Button>
       </CardFooter>
     </Card>
@@ -574,7 +574,7 @@ export const ComoEnlaceDelRouter: Story = {
   render: () => (
     <Card
       render={<a data-router-link="" href="/servicios/lms" />}
-      color="outline"
+      tone="outline"
       title="Plataformas LMS"
       description="La navegación la lleva el router de la aplicación."
       ctaLabel="Ver más sobre plataformas LMS"
@@ -587,10 +587,10 @@ export const EnSuperficieOscura: Story = {
   parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '24rem' }}>
-      <Card href="#" color="primary" title="Diseño instruccional" description="Fondo lavanda autocontenido, como Button primary." ctaLabel="Ver más" />
-      <Card href="#" color="outline" title="Plataformas LMS" description="Borde y fondo con par oscuro propio." ctaLabel="Ver más" />
-      <Card href="#" color="accent-1" title="Contenidos elearning" description="Color saturado: mismo aspecto en ambos temas." ctaLabel="Ver más" />
-      <Card href="#" color="support-2" title="Título de ejemplo" description="Variante support-2 (cayenne)." ctaLabel="Ver más" />
+      <Card href="#" tone="primary" title="Diseño instruccional" description="Fondo lavanda autocontenido, como Button primary." ctaLabel="Ver más" />
+      <Card href="#" tone="outline" title="Plataformas LMS" description="Borde y fondo con par oscuro propio." ctaLabel="Ver más" />
+      <Card href="#" tone="accent-1" title="Contenidos elearning" description="Color saturado: mismo aspecto en ambos temas." ctaLabel="Ver más" />
+      <Card href="#" tone="support-2" title="Título de ejemplo" description="Variante support-2 (cayenne)." ctaLabel="Ver más" />
     </div>
   ),
 };
@@ -647,7 +647,7 @@ export const ContratoRender: Story = {
     <Card
       render={<a data-router-link="" href="/destino" />}
       href="/ignorado"
-      color="primary"
+      tone="primary"
       title="Servicio"
       ctaLabel="Ver más"
       data-card=""
@@ -698,12 +698,12 @@ function OpcionesDemo() {
     <RadioGroup value={value} onValueChange={setValue} name="plan" aria-label="Planes">
       <Inline gap="md">
         {planes.map((p) => (
-          <Card key={p.id} color="outline" selectable selected={value === p.id}>
+          <Card key={p.id} tone="outline" selectable selected={value === p.id}>
             <CardHeader>
               <CardTitle size={5}>{p.name}</CardTitle>
             </CardHeader>
             <CardContent>
-              <Paragraph size="large">{p.price}</Paragraph>
+              <Paragraph size="lg">{p.price}</Paragraph>
             </CardContent>
             <CardFooter>
               <RadioField value={p.id} label={p.name} />
@@ -744,12 +744,12 @@ function OpcionesSinEstadoDemo() {
     <RadioGroup defaultValue="free" name="plan-sin-estado" aria-label="Planes">
       <Inline gap="md">
         {planes.map((p) => (
-          <Card key={p.id} color="outline" selectable>
+          <Card key={p.id} tone="outline" selectable>
             <CardHeader>
               <CardTitle size={5}>{p.name}</CardTitle>
             </CardHeader>
             <CardContent>
-              <Paragraph size="large">{p.price}</Paragraph>
+              <Paragraph size="lg">{p.price}</Paragraph>
             </CardContent>
             <CardFooter>
               <RadioField value={p.id} label={p.name} />
@@ -816,14 +816,14 @@ function TarjetaAccionDemo() {
       <Inline gap="md">
         <Card
           render={<button type="submit" name="authenticationExecution" value="otp" />}
-          color="outline"
+          tone="outline"
           title="Aplicación de autenticación"
           description="Genera un código de un solo uso en tu móvil."
           ctaLabel="Continuar con la aplicación de autenticación"
         />
         <Card
           render={<button type="submit" name="authenticationExecution" value="webauthn" />}
-          color="outline"
+          tone="outline"
           title="Llave de seguridad"
           description="Usa una llave física o el sensor del dispositivo."
           ctaLabel="Continuar con la llave de seguridad"
@@ -880,11 +880,11 @@ export const ContratoAnchoEnRejilla: Story = {
   tags: ['!dev'],
   render: () => (
     <Columns columns={3} align="stretch">
-      <Card href="#" color="outline" title="LMS" description="Corto." />
-      <Card href="#" color="outline" title="Pasarela de pagos" description="Cobra matrículas con Stripe." />
+      <Card href="#" tone="outline" title="LMS" description="Corto." />
+      <Card href="#" tone="outline" title="Pasarela de pagos" description="Cobra matrículas con Stripe." />
       <Card
         href="#"
-        color="outline"
+        tone="outline"
         title="Informes y cuadro de mando"
         description="Progreso, finalización y actividad de cada curso, en un único panel."
       />
@@ -937,12 +937,12 @@ export const EnlaceConAcciones: Story = {
       </CardHeader>
       <CardContent>
         <Inline gap="sm" align="center">
-          <Paragraph size="small">Estado</Paragraph>
-          <Tag variant="info">En edición</Tag>
+          <Paragraph size="sm">Estado</Paragraph>
+          <Tag tone="info">En edición</Tag>
         </Inline>
       </CardContent>
       <CardFooter>
-        <Paragraph size="small">Marta Ruiz · 17 de septiembre de 2026</Paragraph>
+        <Paragraph size="sm">Marta Ruiz · 17 de septiembre de 2026</Paragraph>
       </CardFooter>
     </Card>
   ),
@@ -1002,12 +1002,12 @@ export const EnlaceConSeleccion: Story = {
             </CardHeader>
             <CardContent>
               <Inline gap="sm" align="center">
-                <Paragraph size="small">Estado</Paragraph>
-                <Tag variant="info">En edición</Tag>
+                <Paragraph size="sm">Estado</Paragraph>
+                <Tag tone="info">En edición</Tag>
               </Inline>
             </CardContent>
             <CardFooter>
-              <Paragraph size="small">{ficha.autor} · 17 de septiembre de 2026</Paragraph>
+              <Paragraph size="sm">{ficha.autor} · 17 de septiembre de 2026</Paragraph>
             </CardFooter>
           </Card>
         ))}

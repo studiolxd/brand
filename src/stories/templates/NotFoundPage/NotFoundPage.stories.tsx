@@ -60,7 +60,7 @@ export const Contrato: Story = {
     await expect(main).toHaveAttribute('id', 'main-content');
     await expect(main).toHaveAttribute('tabindex', '-1');
     await expect(within(main).getByRole('heading', { level: 1 })).toHaveTextContent('Error 404');
-    await expect(within(main).getByText('¡Ups! No hemos podido encontrar la página que buscas.')).toHaveClass('paragraph--large');
+    await expect(within(main).getByText('¡Ups! No hemos podido encontrar la página que buscas.')).toHaveClass('paragraph--lg');
     await expect(within(main).getByRole('link', { name: 'Volver al inicio' })).toHaveAttribute('href', '#inicio');
     await expect(canvasElement.querySelector('.site-header')).toBeInTheDocument();
     await expect(canvas.getByRole('contentinfo')).toBeInTheDocument();

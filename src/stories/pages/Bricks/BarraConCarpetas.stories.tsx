@@ -185,7 +185,7 @@ function GrupoArbol({
   return (
     <SidebarGroup>
       <SidebarGroupContent>
-        <Paragraph size="small">{titulo}</Paragraph>
+        <Paragraph size="sm">{titulo}</Paragraph>
         <TreeView
           label={titulo}
           items={items}

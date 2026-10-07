@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
 import { type HeadingLevel, type HeadingSize } from '../../atoms/Heading/Heading';
 import { type IconName } from '../../atoms/Icon/Icon';
-import { type StepMarkerTone } from '../../atoms/StepMarker/StepMarker';
+import { type StepMarkerTone, type StepMarkerToneDeprecated } from '../../atoms/StepMarker/StepMarker';
 import './Steps.css';
 export interface StepItem {
     /** Clave de React. Sin ella se usa la posición. */
@@ -23,9 +23,9 @@ export interface StepsProps {
     /** Uno debajo de otro (por defecto) o en fila. */
     orientation?: 'vertical' | 'horizontal';
     /** Color de la marca. Por defecto `primary`. */
-    tone?: StepMarkerTone;
+    tone?: StepMarkerTone | StepMarkerToneDeprecated;
     /** @deprecated Usar `tone`. Se mantiene como alias por compatibilidad. */
-    badgeVariant?: StepMarkerTone;
+    badgeVariant?: StepMarkerTone | StepMarkerToneDeprecated;
     /** Nivel semántico del título de cada paso. Por defecto `3`. */
     titleLevel?: HeadingLevel;
     /** Talla del título de cada paso. Por defecto `1` (14px, la de la etiqueta de `Stepper`). */

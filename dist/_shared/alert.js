@@ -1,53 +1,56 @@
 import '../alert.css';
-import { r as e } from "./brandmessagescontext.js";
-import { t } from "./closebutton.js";
-import { forwardRef as n, useState as r } from "react";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { n as e } from "./env.js";
+import { r as t } from "./brandmessagescontext.js";
+import { t as n } from "./closebutton.js";
+import { forwardRef as r, useState as i } from "react";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/messages/es/alert.ts
-var o = { close: "Cerrar" }, s = {
+var s = { close: "Cerrar" }, c = {
 	default: "status",
 	success: "status",
 	error: "alert",
 	warning: "alert"
-}, c = {
+}, l = {
 	default: " surface-invert",
 	warning: " surface-light",
 	success: "",
 	error: ""
-}, l = n(function({ className: e, children: t, ...n }, r) {
-	return /* @__PURE__ */ i("p", {
+}, u = r(function({ className: e, children: t, ...n }, r) {
+	return /* @__PURE__ */ a("p", {
 		ref: r,
 		className: ["alert__title", e ?? ""].filter(Boolean).join(" "),
 		...n,
 		children: t
 	});
-}), u = n(function({ className: e, children: t, ...n }, r) {
-	return /* @__PURE__ */ i("div", {
+}), d = r(function({ className: e, children: t, ...n }, r) {
+	return /* @__PURE__ */ a("div", {
 		ref: r,
 		className: ["alert__description", e ?? ""].filter(Boolean).join(" "),
 		...n,
 		children: t
 	});
-}), d = n(function({ className: e, children: t, ...n }, r) {
-	return /* @__PURE__ */ i("div", {
+}), f = r(function({ className: e, children: t, ...n }, r) {
+	return /* @__PURE__ */ a("div", {
 		ref: r,
 		className: ["alert__actions", e ?? ""].filter(Boolean).join(" "),
 		...n,
 		children: t
 	});
-}), f = n(function({ variant: n = "default", title: l, description: u, actions: d, dismissible: f = !1, onDismiss: p, finalFocus: m, closeLabel: h, className: g, children: _, role: v, ...y }, b) {
-	let x = e("alert", o), [S, C] = r(!1);
-	if (S) return null;
-	let w = [
+}), p = r(function({ tone: r, variant: u, title: d, description: f, actions: p, dismissible: m = !1, onDismiss: h, finalFocus: g, closeLabel: _, className: v, children: y, role: b, ...x }, S) {
+	let C = t("alert", s);
+	u !== void 0 && e("Alert", "variant", "`tone`");
+	let w = r ?? u ?? "default", [T, E] = i(!1);
+	if (T) return null;
+	let D = [
 		"alert",
-		n === "default" ? "" : `alert--${n}`,
-		n === "success" || n === "error" ? "surface-dark" : "",
-		f ? "alert--dismissible" : "",
-		g ?? ""
-	].filter(Boolean).join(" "), T = c[n];
-	function E() {
+		w === "default" ? "" : `alert--${w}`,
+		w === "success" || w === "error" ? "surface-dark" : "",
+		m ? "alert--dismissible" : "",
+		v ?? ""
+	].filter(Boolean).join(" "), O = l[w];
+	function k() {
 		if (typeof document > "u") return;
-		let e = m?.current;
+		let e = g?.current;
 		if (e) {
 			e.focus();
 			return;
@@ -55,41 +58,41 @@ var o = { close: "Cerrar" }, s = {
 		let t = document.body, n = t.hasAttribute("tabindex");
 		n || t.setAttribute("tabindex", "-1"), t.focus(), n || t.removeAttribute("tabindex");
 	}
-	function D() {
-		E(), p ? p() : C(!0);
+	function A() {
+		k(), h ? h() : E(!0);
 	}
-	return /* @__PURE__ */ a("div", {
-		ref: b,
-		role: v ?? s[n],
-		className: w,
-		...y,
-		children: [/* @__PURE__ */ a("div", {
-			className: `alert__content${T}`,
+	return /* @__PURE__ */ o("div", {
+		ref: S,
+		role: b ?? c[w],
+		className: D,
+		...x,
+		children: [/* @__PURE__ */ o("div", {
+			className: `alert__content${O}`,
 			children: [
-				l && /* @__PURE__ */ i("p", {
+				d && /* @__PURE__ */ a("p", {
 					className: "alert__title",
-					children: l
-				}),
-				u && /* @__PURE__ */ i("div", {
-					className: "alert__description",
-					children: u
-				}),
-				_,
-				d && /* @__PURE__ */ i("div", {
-					className: "alert__actions",
 					children: d
+				}),
+				f && /* @__PURE__ */ a("div", {
+					className: "alert__description",
+					children: f
+				}),
+				y,
+				p && /* @__PURE__ */ a("div", {
+					className: "alert__actions",
+					children: p
 				})
 			]
-		}), f && /* @__PURE__ */ i(t, {
-			className: `alert__close${T}`,
-			label: x("close", h),
-			onClick: D
+		}), m && /* @__PURE__ */ a(n, {
+			className: `alert__close${O}`,
+			label: C("close", _),
+			onClick: A
 		})]
 	});
-}), p = Object.assign(f, {
-	Title: l,
-	Description: u,
-	Actions: d
+}), m = Object.assign(p, {
+	Title: u,
+	Description: d,
+	Actions: f
 });
 //#endregion
-export { l as i, d as n, u as r, p as t };
+export { u as i, f as n, d as r, m as t };

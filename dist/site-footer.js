@@ -24,7 +24,7 @@ function d({ logo: o = /* @__PURE__ */ l(r, { size: "lg" }), tagline: s, columns
 				/* @__PURE__ */ u("div", {
 					className: "site-footer__brand",
 					children: [o, s && /* @__PURE__ */ l(i, {
-						size: "large",
+						size: "lg",
 						className: "site-footer__tagline",
 						children: s
 					})]

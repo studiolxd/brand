@@ -4,7 +4,7 @@ import StudiolxdBrand
 /// `rawValue` de los casos del enum.
 let togglesParity: [String: [String: [String]]] = [
     "Tag": [
-        "variant": TagVariant.allCases.map(\.rawValue),
+        "tone": TagTone.allCases.map(\.rawValue),
     ],
     "SwitcherField": [
         "size": BrandControlSize.allCases.map(\.rawValue),

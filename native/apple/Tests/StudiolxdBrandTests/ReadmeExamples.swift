@@ -39,7 +39,7 @@ private enum ReadmeExamples {
                 BrandButton(icon: .close, accessibilityLabel: "Cerrar", variant: .ghost) { dismiss() }
                 BrandHeading("Tus viviendas")
                 BrandHeading("Resumen", level: .h2, size: .s5)
-                BrandParagraph("Revisa los datos.", size: .small)
+                BrandParagraph("Revisa los datos.", size: .sm)
                 BrandParagraph(Text("Esta acción ") + Text("borra").brand(.strong, tone: .destructive) + Text(" el curso."))
                 BrandIcon(.search)
 
@@ -50,7 +50,7 @@ private enum ReadmeExamples {
                 BrandSelectField("Idioma", selection: $lang, options: [.option("es", "Español"), .option("en", "Inglés")])
 
                 // Interruptores, grupos de botones, tema y etiquetas
-                BrandTag("Pagado", variant: .success)
+                BrandTag("Pagado", tone: .success)
                 Toggle("Notificaciones", isOn: $on).toggleStyle(.brandSwitch(size: .sm))
                 BrandSwitcherField("Acepto las condiciones", isOn: $accepted, errorMessage: "Debes aceptarlas.")
                 BrandToggleGroup(selection: $plan) {

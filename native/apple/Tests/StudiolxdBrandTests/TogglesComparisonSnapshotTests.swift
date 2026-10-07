@@ -12,7 +12,7 @@ final class TogglesComparisonSnapshotTests: XCTestCase {
     private let margin: CGFloat = 16
 
     func testTagVariantsLikeStory() {
-        func tag(_ text: String, _ variant: TagVariant) -> some View { BrandTag(verbatim: text, variant: variant) }
+        func tag(_ text: String, _ tone: TagTone) -> some View { BrandTag(verbatim: text, tone: tone) }
         let view = VStack(alignment: .leading, spacing: BrandSpacing.s2) {
             HStack(spacing: BrandSpacing.s2) {
                 tag("Diseño instruccional", .primary); tag("Formación presencial", .accent1); tag("Plataformas LMS", .accent2)
@@ -21,7 +21,7 @@ final class TogglesComparisonSnapshotTests: XCTestCase {
                 tag("Consultoría", .support1); tag("E-learning", .support2); tag("Por hacer", .neutral)
                 tag("En progreso", .info); tag("En pausa", .warning)
             }
-            HStack(spacing: BrandSpacing.s2) { tag("Completado", .success); tag("Cancelado", .danger) }
+            HStack(spacing: BrandSpacing.s2) { tag("Completado", .success); tag("Cancelado", .error) }
         }
         assertBrandSnapshots(view, width: 560, height: 114, named: "tag-variants", padding: margin)
     }

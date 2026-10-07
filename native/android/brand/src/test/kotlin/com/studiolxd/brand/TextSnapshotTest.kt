@@ -40,8 +40,8 @@ class ParagraphSnapshotTest {
     fun sizes() = paparazzi.brandSnapshots {
         Column(verticalArrangement = Arrangement.spacedBy(BrandSpacing.s3)) {
             BrandParagraph("Párrafo de tamaño normal con texto de ejemplo que ocupa más de una línea del lienzo.")
-            BrandParagraph("Párrafo pequeño para notas y metadatos.", size = ParagraphSize.Small)
-            BrandParagraph("Párrafo grande para entradillas.", size = ParagraphSize.Large)
+            BrandParagraph("Párrafo pequeño para notas y metadatos.", size = ParagraphSize.Sm)
+            BrandParagraph("Párrafo grande para entradillas.", size = ParagraphSize.Lg)
         }
     }
 }

@@ -1351,7 +1351,9 @@ object BrandTextInlineTokens {
     val emphasisFontWeight: FontWeight = FontWeight(500)
     /** Token `text-inline.muted-color` — Texto secundario en línea: una aclaración, un metadato */
     val mutedColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF4A4A4A), Color(0xFFD0D0D0))
-    /** Token `text-inline.destructive-color` — Énfasis en línea con intención destructiva: la palabra que dice que algo se pierde. Es tinta sobre la superficie, nunca un relleno */
+    /** Token `text-inline.error-color` — Énfasis en línea de error: un estado que ha fallado («cupón rechazado»). Es tinta sobre la superficie, nunca un relleno */
+    val errorColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFB30000), Color(0xFFFF8585))
+    /** Token `text-inline.destructive-color` — Énfasis en línea con intención destructiva: la palabra que avisa de que una acción hace perder algo («esta acción **borra** el curso»). Es tinta sobre la superficie, nunca un relleno */
     val destructiveColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFB30000), Color(0xFFFF8585))
     /** Token `text-inline.success-color` — Énfasis en línea con intención de logro */
     val successColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF006616), Color(0xFF00CC2C))

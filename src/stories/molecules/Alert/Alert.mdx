@@ -28,6 +28,10 @@ Los dos modos se combinan: `title`/`description` para el caso simple, `children`
 
 ## Intenciones
 
+La intención va en `tone`.
+
+Hasta la v50 esta prop se llamaba `variant`: sigue funcionando como alias obsoleto, con un aviso en desarrollo, y se retira en la v52.
+
 <Canvas of={AlertStories.Variantes} />
 
 `default` es prusia con borde blanco sobre página clara, y **blanco con tinta prusia** sobre página oscura: el relleno neutro es el lienzo al revés (§ «Superficie oscura»). `success`, `error` y `warning` toman el relleno sólido de feedback (`*-fill`) con su texto (`*-fill-text`), el mismo en las dos superficies.

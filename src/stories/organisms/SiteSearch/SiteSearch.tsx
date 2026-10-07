@@ -352,7 +352,7 @@ export const SiteSearch = forwardRef<HTMLInputElement, SiteSearchProps>(function
       {status === 'error' ? (
         <Alert
           className="site-search__error"
-          variant="error"
+          tone="error"
           title={t('errorTitle')}
           description={t('errorDescription')}
           actions={

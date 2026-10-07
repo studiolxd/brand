@@ -24,9 +24,9 @@ internal fun BannerPreviewContent() {
         BrandBanner(PreviewBannerMessage)
         BrandBanner(PreviewBannerMessage, actions = { PreviewBannerAction("Dejar de suplantar") })
         BrandBanner(PreviewBannerMessage, actions = { PreviewBannerAction("Dejar de suplantar") }, onDismiss = {})
-        BrandBanner(PreviewBannerNotice, variant = BannerVariant.Warning)
-        BrandBanner(PreviewBannerNotice, variant = BannerVariant.Warning, actions = { PreviewBannerAction("Ver detalles") }, onDismiss = {})
-        BrandBanner(PreviewBannerMessage, variant = BannerVariant.Error, actions = { PreviewBannerAction("Dejar de suplantar") })
+        BrandBanner(PreviewBannerNotice, tone = BannerTone.Warning)
+        BrandBanner(PreviewBannerNotice, tone = BannerTone.Warning, actions = { PreviewBannerAction("Ver detalles") }, onDismiss = {})
+        BrandBanner(PreviewBannerMessage, tone = BannerTone.Error, actions = { PreviewBannerAction("Dejar de suplantar") })
     }
 }
 

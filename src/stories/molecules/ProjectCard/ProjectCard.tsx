@@ -2,7 +2,8 @@ import type { ReactNode } from 'react';
 import { useRender } from '@base-ui/react/use-render';
 import { Heading, type HeadingLevel, type HeadingSize } from '../../atoms/Heading/Heading';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
-import { Tag, type TagVariant } from '../../atoms/Tag/Tag';
+import { Tag, type TagTone, type TagVariant } from '../../atoms/Tag/Tag';
+import { warnDeprecated } from '../../constants/env';
 import type { CardMedia } from '../Card/Card';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { projectCardEs } from '../../messages/es/projectCard';
@@ -18,13 +19,26 @@ export interface ProjectCardMessages {
   tags: string;
 }
 
-export type { TagVariant };
+export type { TagTone, TagVariant };
 
 export interface ProjectCardTag {
   /** Clave de React. Sin ella se usa la etiqueta. */
   id?: string;
   label: string;
+  /** Color de la etiqueta (el `tone` de `Tag`). Default `'neutral'`. */
+  tone?: TagTone;
+  /**
+   * @deprecated Usa `tone`. `variant: 'danger'` es `tone: 'error'`. Sigue
+   * funcionando, con un aviso en desarrollo, hasta la v52.
+   */
   variant?: TagVariant;
+}
+
+/** El color de una etiqueta, desde `tone` o desde el alias obsoleto `variant`. */
+function tagTone(tag: ProjectCardTag): TagTone {
+  if (tag.variant !== undefined) warnDeprecated('ProjectCard', 'tags[].variant', '`tags[].tone`');
+  const tone = tag.tone ?? tag.variant ?? 'neutral';
+  return tone === 'danger' ? 'error' : tone;
 }
 
 export interface ProjectCardProps {
@@ -101,7 +115,7 @@ export function ProjectCard({
         <ul className="project-card__tags" aria-label={t('tags', tagsLabel)}>
           {tags.map((tag) => (
             <li key={tag.id ?? tag.label}>
-              <Tag variant={tag.variant ?? 'neutral'}>{tag.label}</Tag>
+              <Tag tone={tagTone(tag)}>{tag.label}</Tag>
             </li>
           ))}
         </ul>

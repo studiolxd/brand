@@ -26,10 +26,10 @@ describe('Alert', () => {
     const { rerender } = render(<Alert title="Aviso" />);
     expect(screen.getByRole('status')).toHaveTextContent('Aviso');
 
-    rerender(<Alert variant="error" title="Error" />);
+    rerender(<Alert tone="error" title="Error" />);
     expect(screen.getByRole('alert')).toHaveTextContent('Error');
 
-    rerender(<Alert variant="error" role="status" title="Error" />);
+    rerender(<Alert tone="error" role="status" title="Error" />);
     expect(screen.getByRole('status')).toHaveTextContent('Error');
   });
 

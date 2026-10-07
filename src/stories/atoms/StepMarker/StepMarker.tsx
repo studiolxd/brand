@@ -1,19 +1,26 @@
 import { Icon, type IconName } from '../Icon/Icon';
+import { warnDeprecated } from '../../constants/env';
 import './StepMarker.css';
 
 /** Estado del paso: decide si la marca va rellena o hueca y qué contenido lleva por defecto. */
 export type StepMarkerState = 'done' | 'current' | 'pending' | 'neutral';
 
-/** Color del relleno. Las mismas variantes que `NumberBadgeVariant`, mapeadas 1:1. */
+/** Color del relleno. Los mismos tonos que `NumberBadgeTone`, mapeados 1:1. */
 export type StepMarkerTone =
   | 'primary'
   | 'accent-1'
   | 'accent-2'
   | 'support-1'
   | 'support-2'
-  | 'danger'
+  | 'error'
   | 'success'
   | 'neutral';
+
+/**
+ * @deprecated `danger` es `error` desde la v51 (el vocabulario de estado del
+ * sistema). Sigue funcionando, con un aviso en desarrollo, hasta la v52.
+ */
+export type StepMarkerToneDeprecated = 'danger';
 
 export type StepMarkerSize = 'sm' | 'md';
 
@@ -26,7 +33,7 @@ export interface StepMarkerProps {
    */
   state?: StepMarkerState;
   /** Color del relleno en los estados rellenos (`done`, `current`, `neutral`). Sin efecto en `pending`. Default `primary`. */
-  tone?: StepMarkerTone;
+  tone?: StepMarkerTone | StepMarkerToneDeprecated;
   /** Talla de la marca. Default `md` (32px, la de `Stepper`). */
   size?: StepMarkerSize;
   /** La cifra del paso. Se ignora si hay `icon` o si `state` es `done`. */
@@ -45,14 +52,20 @@ export interface StepMarkerProps {
  * Es puramente decorativa: `aria-hidden` siempre, porque la numeración
  * semántica la da el `<ol>` que la contiene, no la cifra pintada dentro.
  */
-export function StepMarker({ state = 'neutral', tone = 'primary', size = 'md', count, icon, className }: StepMarkerProps) {
+export function StepMarker({ state = 'neutral', tone: toneProp = 'primary', size = 'md', count, icon, className }: StepMarkerProps) {
+  let tone = toneProp;
+  if (tone === 'danger') {
+    warnDeprecated('StepMarker', 'tone="danger"', '`tone="error"`');
+    tone = 'error';
+  }
   const done = state === 'done';
   const pending = state === 'pending';
   const classes = [
     'step-marker',
     `step-marker--${size}`,
     `step-marker--state-${state}`,
-    !pending && `step-marker--tone-${tone}`,
+    // La clase BEM del rojo sigue siendo `--tone-danger` (interna).
+    !pending && `step-marker--tone-${tone === 'error' ? 'danger' : tone}`,
     className,
   ]
     .filter(Boolean)

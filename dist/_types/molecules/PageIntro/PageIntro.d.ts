@@ -14,7 +14,7 @@ export interface PageIntroProps {
     title: ReactNode;
     /**
      * La frase bajo el título, opcional: va como entradilla (`Paragraph
-     * size="large"`, un peldaño por encima del cuerpo). Termina en punto (ver
+     * size="lg"`, un peldaño por encima del cuerpo). Termina en punto (ver
      * Foundations → Redacción). Lo que no llegue a frase, o cabe en el título,
      * o va en `children`.
      */

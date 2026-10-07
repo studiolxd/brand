@@ -59,6 +59,21 @@ Dos casos que el esquema cubre además de los de arriba:
 - **Un booleano con literales extra** (`block: boolean | 'mobile'`): `"type": "boolean"` y, en `reactOnlyValues`, los
   literales que solo existen en la web (`["mobile"]`); `native:parity` exige que sean exactamente los de React.
 
+### Alias obsoletos
+
+Un renombrado de la API (v51: `Tag variant` → `tone`, `Paragraph size="small"` → `sm`) deja el nombre viejo como
+alias obsoleto durante un major. La ficha lo declara para que la paridad siga siendo exacta:
+
+- **Una prop obsoleta** va en `deprecated`, con la prop que la sustituye: `{ "prop": "variant", "replacement": "tone" }`.
+  En React tiene que llevar `@deprecated` en su JSDoc, y `replacement` tiene que estar en `props`. No se registra en las
+  pruebas nativas: en Swift es un inicializador o parámetro `@available(*, deprecated, renamed: "…")` y en Kotlin una
+  sobrecarga `@Deprecated(…, ReplaceWith("…"))`.
+- **Un literal obsoleto** de una unión va en `deprecatedValues` de esa prop (`"values": ["sm", "md", "lg"],
+  "deprecatedValues": ["small", "default", "large"]`). `values` + `deprecatedValues` son exactamente los literales de
+  React. En nativo **no son casos del enum** —el enum tiene exactamente `values`—, sino miembros estáticos obsoletos
+  que devuelven el caso nuevo: `@available(*, deprecated, renamed: "sm") public static let small = Self.sm` en Swift,
+  y en el `companion object` del enum de Kotlin `@Deprecated(…, ReplaceWith("ParagraphSize.Sm")) val Small = Sm`.
+
 ### Qué comprueba `pnpm native:parity`
 
 Lee el `.tsx` con el compilador de TypeScript (el mismo `tsconfig.app.json`) y comprueba que:
@@ -69,7 +84,10 @@ Lee el `.tsx` con el compilador de TypeScript (el mismo `tsconfig.app.json`) y c
    uno de más ni uno de menos); un `boolean` es booleano en React;
 4. cada `excluded.prop` existe en React y no está también en `props`;
 5. **toda prop propia** del componente (declarada en el repositorio, no heredada de `ComponentPropsWithoutRef<'button'>`
-   y compañía) está en `props` o en `excluded`. Portar un componente es decidir cada prop; no se puede olvidar una.
+   y compañía) está en `props`, en `excluded` o en `deprecated`. Portar un componente es decidir cada prop; no se puede
+   olvidar una;
+6. cada `deprecated.prop` existe en React con `@deprecated` y su `replacement` está en `props`, y ningún literal está a
+   la vez en `values` y en `deprecatedValues`.
 
 ## Las pruebas nativas
 

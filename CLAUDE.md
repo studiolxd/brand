@@ -233,6 +233,13 @@ function Pagination({ nextLabel }: PaginationProps) {
 Documentado para los consumidores en `src/stories/foundations/Internacionalizacion.mdx`, que lleva
 la tabla de componentes con props de texto — actualizarla al añadir props nuevas.
 
+### Nombres de props — forma, color, estado y talla (v51)
+
+- **`variant` es la forma; `tone` es el color.** `variant` decide la maqueta o el dibujo (`Button primary|outline|ghost|text`, `Card default|square|split`); el color o la intención va SIEMPRE en `tone` (`Tag`, `Alert`, `Banner`, `NumberBadge`, `ProgressBar`, `Card`, `StepMarker`, `Text`…). Nunca `color` ni `variant` para un color. Los tipos se llaman igual: `<Componente>Tone`, `<Componente>Variant`.
+- **`error` es un estado; `destructive`, una acción.** Un tono que pinta algo que ha fallado se llama `error` (nunca `danger`). `destructive` queda para lo que **hace** perder algo: `Button destructive`, el ítem de menú, `ConfirmDialog`, y el `Text tone="destructive"` que en la descripción de una confirmación avisa de lo que se borra.
+- **Las tallas se escriben con la escala `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`**, nunca con palabras (`small`, `default`, `large`, `xxl`). La talla por defecto es `md`. Los **títulos** no usan esa escala: van con los números de la escala de texto (`Heading size={1…10}`, `--text-size-N`).
+- **Un renombrado conserva el nombre viejo como alias obsoleto durante un major**: el tipo viejo y la prop vieja llevan `@deprecated` en el JSDoc, siguen funcionando y avisan una vez en desarrollo con `warnDeprecated(componente, viejo, nuevo)` (`src/stories/constants/env.ts`); se retiran en el major siguiente. En nativo, `@available(*, deprecated, renamed:)` en Swift y `@Deprecated(ReplaceWith(…))` en Kotlin, y la ficha de paridad los declara en `deprecated` (prop) o `deprecatedValues` (literal), ver `native/parity/README.md`.
+
 ### Accesibilidad — VisuallyHidden
 
 Para texto que debe ser leído por lectores de pantalla pero invisible visualmente, usar el átomo `<VisuallyHidden>` en lugar de `className="visually-hidden"` directamente:

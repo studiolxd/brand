@@ -24,7 +24,11 @@ strong.text {
 }
 
 /* Tinta sobre la superficie, nunca un relleno: una palabra dentro de un párrafo
-   no lleva fondo. */
+   no lleva fondo. `error` es un estado; `destructive`, el aviso de una acción. */
+.text.text--error {
+  color: var(--text-inline-error-color);
+}
+
 .text.text--destructive {
   color: var(--text-inline-destructive-color);
 }

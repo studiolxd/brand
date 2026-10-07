@@ -621,7 +621,7 @@ var C = a(function({ type: a = "line", data: o, series: l, xKey: v, colors: C, o
 						index: t,
 						color: e.color
 					}))).map((e) => /* @__PURE__ */ p(r, {
-						variant: "neutral",
+						tone: "neutral",
 						className: `chart__legend-item${Z(e.key) ? " chart__legend-item--muted" : ""}`,
 						children: [/* @__PURE__ */ f(te, {
 							className: `chart__legend-swatch${a === "line" ? " chart__legend-swatch--line" : ""}`,

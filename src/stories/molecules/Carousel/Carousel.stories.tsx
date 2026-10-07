@@ -36,8 +36,8 @@ export const PorDefecto: Story = {
     indicators: true,
     children: resenas.map((resena) => (
       <CarouselSlide key={resena.id}>
-        <Paragraph size="large">«{resena.quote}»</Paragraph>
-        <Paragraph size="small">{resena.author} — {resena.role}</Paragraph>
+        <Paragraph size="lg">«{resena.quote}»</Paragraph>
+        <Paragraph size="sm">{resena.author} — {resena.role}</Paragraph>
       </CarouselSlide>
     )),
   },

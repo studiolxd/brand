@@ -71,14 +71,14 @@ export const ConLogoEnMovil: Story = {
 export const ContratoLogo: Story = {
   name: 'Test — el logo va tras el menú, enlaza y mide el alto de contenido',
   tags: ['!dev'],
-  args: { logo: <Logo size="xxl" />, logoHref: '/inicio', start: <span>Inicio</span> },
+  args: { logo: <Logo size="2xl" />, logoHref: '/inicio', start: <span>Inicio</span> },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const enlace = canvas.getByRole('link', { name: 'Studio LXD — ir al inicio' });
     await expect(enlace).toHaveAttribute('href', '/inicio');
     const boton = canvas.getByRole('button', { name: 'Menú de navegación' });
     await expect(boton.compareDocumentPosition(enlace) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    // Aunque le pidan `xxl`, el `Logo` mide lo que la barra le da: 40px.
+    // Aunque le pidan `2xl`, el `Logo` mide lo que la barra le da: 40px.
     const marca = enlace.querySelector('svg') as SVGElement;
     await expect(Math.round(marca.getBoundingClientRect().height)).toBe(40);
     // Y la barra no crece por llevar logo.

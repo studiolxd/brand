@@ -199,7 +199,7 @@ export const ClockWidget = forwardRef<HTMLElement, ClockWidgetProps>(function Cl
         ) : null}
       </div>
 
-      {error ? <Alert variant="error">{error}</Alert> : null}
+      {error ? <Alert tone="error">{error}</Alert> : null}
 
       {working ? (
         <>

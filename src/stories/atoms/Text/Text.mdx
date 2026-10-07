@@ -29,8 +29,15 @@ Con un idioma de derecha a izquierda dentro de texto LTR hay que pasar también
 
 ## Intención
 
-`tone` da carga al fragmento: `destructive` es la palabra que dice que algo se
-pierde, `success` la que dice que salió bien, `muted` una aclaración secundaria.
+`tone` da carga al fragmento, con el mismo vocabulario que el resto del sistema:
+`error` es un **estado** que ha fallado («el cupón **no es válido**»);
+`destructive`, el aviso de una **acción** que hace perder algo («al confirmar se
+**borran** las respuestas», en la descripción de un `ConfirmDialog` destructivo);
+`success`, la que dice que salió bien; `muted`, una aclaración secundaria.
+`error` y `destructive` se pintan con la misma tinta roja: lo que cambia es lo
+que dicen, y con ello qué palabra se elige.
+
+<Canvas of={TextStories.ErrorFrenteADestructivo} />
 
 <Canvas of={TextStories.IntencionDestructiva} />
 

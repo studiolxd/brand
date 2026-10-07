@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { type HeadingLevel, type HeadingSize } from '../../atoms/Heading/Heading';
-import { type TagVariant } from '../../atoms/Tag/Tag';
+import { type TagTone, type TagVariant } from '../../atoms/Tag/Tag';
 import type { CardMedia } from '../Card/Card';
 import './ProjectCard.css';
 /**
@@ -12,11 +12,17 @@ export interface ProjectCardMessages {
     /** Nombre accesible de la lista de etiquetas de categoría. */
     tags: string;
 }
-export type { TagVariant };
+export type { TagTone, TagVariant };
 export interface ProjectCardTag {
     /** Clave de React. Sin ella se usa la etiqueta. */
     id?: string;
     label: string;
+    /** Color de la etiqueta (el `tone` de `Tag`). Default `'neutral'`. */
+    tone?: TagTone;
+    /**
+     * @deprecated Usa `tone`. `variant: 'danger'` es `tone: 'error'`. Sigue
+     * funcionando, con un aviso en desarrollo, hasta la v52.
+     */
     variant?: TagVariant;
 }
 export interface ProjectCardProps {

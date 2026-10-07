@@ -1921,6 +1921,7 @@ var e = {
 	"--tag-danger-color": "#ffffff",
 	"--text-inline-emphasis-font-weight": "500",
 	"--text-inline-muted-color": "#4a4a4a",
+	"--text-inline-error-color": "#b30000",
 	"--text-inline-destructive-color": "#b30000",
 	"--text-inline-success-color": "#006616",
 	"--text-inline-strikethrough-color": "#4a4a4a",

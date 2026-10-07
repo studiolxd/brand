@@ -10,7 +10,7 @@
     "kotlin": "BrandBanner"
   },
   "props": {
-    "variant": {
+    "tone": {
       "type": "union",
       "values": [
         "info",
@@ -20,6 +20,9 @@
       "default": "info"
     }
   },
+  "deprecated": [
+    { "prop": "variant", "replacement": "tone" }
+  ],
   "excluded": [
     {
       "prop": "children",
@@ -52,6 +55,7 @@
     "El filete superior e inferior y los rellenos son los de `banner.*`; los tres rellenos son universales (iguales en claro y oscuro) y el contenido que se componga dentro (botones, enlaces) lee sobre ellos con la tinta del relleno, no con la del tema.",
     "El mensaje y las acciones apilan por debajo de 480 pt/dp de ancho, el equivalente nativo del salto a `md` de la web.",
     "iOS: no hay anuncio explícito de VoiceOver (`.updatesFrequently` en las tres variantes y mayor prioridad de lectura en `warning`/`error`). A 480 pt exactos va en fila; React apila a 480 px (su salto es `md` = 768): las parejas fuerzan el apilado equivalente.",
-    "Android: región viva asertiva en `warning`/`error` y cortés en `info`. El aspa de `warning` usa `warning-close-color`."
+    "Android: región viva asertiva en `warning`/`error` y cortés en `info`. El aspa de `warning` usa `warning-close-color`.",
+    "Alias obsoleto de la v51 (se retira en la v52), como en React: `variant` existe como inicializadores `BrandBanner(…, variant:)` en Swift (`@available(*, deprecated, renamed:)`) y sobrecargas `BrandBanner(variant = …)` en Kotlin (`@Deprecated`); `BannerVariant` es un `typealias` obsoleto de `BannerTone`."
   ]
 }

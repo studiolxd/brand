@@ -30,20 +30,24 @@ import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.tokens.BrandBannerTokens as T
 import com.studiolxd.brand.tokens.BrandTextTokens
 
-/** `Banner` `variant`: la intención de la barra. `info` (relleno prusia), `warning` (el amarillo de aviso) o `error`. */
-enum class BannerVariant(val value: String) {
+/** `Banner` `tone`: la intención de la barra. `info` (relleno prusia), `warning` (el amarillo de aviso) o `error`. */
+enum class BannerTone(val value: String) {
     Info("info"),
     Warning("warning"),
     Error("error"),
 }
 
+/** El nombre de [BannerTone] hasta la v50. Se retira en la v52. */
+@Deprecated("La prop de intención se llama `tone` desde la v51. Se retira en la v52.", ReplaceWith("BannerTone"))
+typealias BannerVariant = BannerTone
+
 private class BannerColors(val background: Color, val ink: Color, val border: Color, val close: Color)
 
 @Composable
-private fun BannerVariant.colors(): BannerColors = when (this) {
-    BannerVariant.Info -> BannerColors(T.infoBg.current, T.infoColor.current, T.infoBorderColor.current, T.infoColor.current)
-    BannerVariant.Warning -> BannerColors(T.warningBg.current, T.warningColor.current, T.warningBorderColor.current, T.warningCloseColor.current)
-    BannerVariant.Error -> BannerColors(T.errorBg.current, T.errorColor.current, T.errorBorderColor.current, T.errorColor.current)
+private fun BannerTone.colors(): BannerColors = when (this) {
+    BannerTone.Info -> BannerColors(T.infoBg.current, T.infoColor.current, T.infoBorderColor.current, T.infoColor.current)
+    BannerTone.Warning -> BannerColors(T.warningBg.current, T.warningColor.current, T.warningBorderColor.current, T.warningCloseColor.current)
+    BannerTone.Error -> BannerColors(T.errorBg.current, T.errorColor.current, T.errorBorderColor.current, T.errorColor.current)
 }
 
 /**
@@ -52,7 +56,7 @@ private fun BannerVariant.colors(): BannerColors = when (this) {
  * rojo sin configurarlo—; el aviso, amarillo, lee SIEMPRE en la clara (la `.surface-light` de React), también con la
  * página oscura. Interno y comprobable.
  */
-internal fun BannerVariant.interiorIsDark(): Boolean = this != BannerVariant.Warning
+internal fun BannerTone.interiorIsDark(): Boolean = this != BannerTone.Warning
 
 /**
  * Una barra de aviso de franja completa (`Banner` de React): un mensaje persistente que acompaña a toda la sesión —el
@@ -62,7 +66,7 @@ internal fun BannerVariant.interiorIsDark(): Boolean = this != BannerVariant.War
  *
  * ```kotlin
  * BrandBanner(
- *     variant = BannerVariant.Error,
+ *     tone = BannerTone.Error,
  *     actions = { BrandButton("Dejar de suplantar", onClick = { stop() }, variant = ButtonVariant.Outline, size = BrandControlSize.Sm) },
  *     onDismiss = { hidden = true },
  * ) { BasicText("Estás viendo la aplicación como ana.perez@studiolxd.com.", style = LocalBrandTextStyle.current) }
@@ -83,27 +87,27 @@ internal fun BannerVariant.interiorIsDark(): Boolean = this != BannerVariant.War
 @Composable
 fun BrandBanner(
     modifier: Modifier = Modifier,
-    variant: BannerVariant = BannerVariant.Info,
+    tone: BannerTone = BannerTone.Info,
     actions: (@Composable () -> Unit)? = null,
     onDismiss: (() -> Unit)? = null,
     dismissLabel: String = "Descartar",
     content: @Composable () -> Unit,
-) = BrandBannerImpl(modifier, variant, actions, onDismiss, dismissLabel, BrandStackBreakpoint, content)
+) = BrandBannerImpl(modifier, tone, actions, onDismiss, dismissLabel, BrandStackBreakpoint, content)
 
 /** La barra en sí. [stackBelow] es el ancho por debajo del cual apila: lo fijan las capturas de las parejas (480 dp). Interno. */
 @Composable
 internal fun BrandBannerImpl(
     modifier: Modifier,
-    variant: BannerVariant,
+    tone: BannerTone,
     actions: (@Composable () -> Unit)?,
     onDismiss: (() -> Unit)?,
     dismissLabel: String,
     stackBelow: Dp,
     content: @Composable () -> Unit,
 ) {
-    val colors = variant.colors()
-    val live = if (variant == BannerVariant.Info) LiveRegionMode.Polite else LiveRegionMode.Assertive
-    BrandTheme(darkTheme = variant.interiorIsDark()) {
+    val colors = tone.colors()
+    val live = if (tone == BannerTone.Info) LiveRegionMode.Polite else LiveRegionMode.Assertive
+    BrandTheme(darkTheme = tone.interiorIsDark()) {
         BoxWithConstraints(
             modifier
                 .fillMaxWidth()
@@ -161,12 +165,42 @@ internal fun BrandBannerImpl(
 fun BrandBanner(
     text: String,
     modifier: Modifier = Modifier,
-    variant: BannerVariant = BannerVariant.Info,
+    tone: BannerTone = BannerTone.Info,
     actions: (@Composable () -> Unit)? = null,
     onDismiss: (() -> Unit)? = null,
     dismissLabel: String = "Descartar",
 ) {
-    BrandBanner(modifier, variant, actions, onDismiss, dismissLabel) {
+    BrandBanner(modifier, tone, actions, onDismiss, dismissLabel) {
         BrandBasicText(text, style = com.studiolxd.brand.support.LocalBrandTextStyle.current)
     }
 }
+
+/** `variant` es `tone` desde la v51. Se retira en la v52. */
+@Deprecated(
+    "`variant` es `tone` desde la v51. Se retira en la v52.",
+    ReplaceWith("BrandBanner(modifier, tone = variant, actions = actions, onDismiss = onDismiss, dismissLabel = dismissLabel, content = content)"),
+)
+@Composable
+fun BrandBanner(
+    variant: BannerTone,
+    modifier: Modifier = Modifier,
+    actions: (@Composable () -> Unit)? = null,
+    onDismiss: (() -> Unit)? = null,
+    dismissLabel: String = "Descartar",
+    content: @Composable () -> Unit,
+) = BrandBanner(modifier, variant, actions, onDismiss, dismissLabel, content)
+
+/** `variant` es `tone` desde la v51. Se retira en la v52. */
+@Deprecated(
+    "`variant` es `tone` desde la v51. Se retira en la v52.",
+    ReplaceWith("BrandBanner(text, modifier, tone = variant, actions = actions, onDismiss = onDismiss, dismissLabel = dismissLabel)"),
+)
+@Composable
+fun BrandBanner(
+    text: String,
+    variant: BannerTone,
+    modifier: Modifier = Modifier,
+    actions: (@Composable () -> Unit)? = null,
+    onDismiss: (() -> Unit)? = null,
+    dismissLabel: String = "Descartar",
+) = BrandBanner(text, modifier, variant, actions, onDismiss, dismissLabel)

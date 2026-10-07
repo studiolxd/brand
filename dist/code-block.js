@@ -21,7 +21,7 @@ function f({ children: f, language: p, copyable: m = !1, singleLine: h, copyLabe
 		k ? "code-block--single-line" : "",
 		y ?? ""
 	].filter(Boolean).join(" "), M = p && /* @__PURE__ */ l(o, {
-		variant: "neutral",
+		tone: "neutral",
 		className: "code-block__language",
 		children: p
 	}), N = m && /* @__PURE__ */ u(c, { children: [/* @__PURE__ */ l(r, {

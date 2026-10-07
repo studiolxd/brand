@@ -29,12 +29,12 @@ final class NavigationComparisonSnapshotTests: XCTestCase {
     }
 
     func testBannerWarningLikeStory() {
-        assertBrandSnapshots(bannerCanvas(BrandBanner(verbatim: maintenance, variant: .warning)),
+        assertBrandSnapshots(bannerCanvas(BrandBanner(verbatim: maintenance, tone: .warning)),
                              width: 480, height: 106, named: "banner-aviso", padding: 0)
     }
 
     func testBannerErrorLikeStory() {
-        let banner = BrandBanner(verbatim: impersonating, variant: .error) {
+        let banner = BrandBanner(verbatim: impersonating, tone: .error) {
             BrandButton("Dejar de suplantar", variant: .outline, size: .sm) {}
         }
         assertBrandSnapshots(bannerCanvas(banner), width: 480, height: 130, named: "banner-error", padding: 0)
@@ -154,9 +154,9 @@ final class NavigationComparisonSnapshotTests: XCTestCase {
     func testPageIntroEyebrowLikeStory() {
         let view = VStack(alignment: .leading, spacing: BrandSpacing.s7) {
             BrandPageIntro("Automatizaciones", description: "Reglas que se disparan solas cuando algo cambia en la organización.",
-                           eyebrow: { BrandTag("Beta", variant: .info) },
+                           eyebrow: { BrandTag("Beta", tone: .info) },
                            content: { BrandParagraph("Disponible solo para el plan Studio.") })
-            BrandPageIntro("Webhooks", eyebrow: { BrandTag("Beta", variant: .info) }, actions: { BrandButton("Crear webhook") {} })
+            BrandPageIntro("Webhooks", eyebrow: { BrandTag("Beta", tone: .info) }, actions: { BrandButton("Crear webhook") {} })
         }
         assertBrandSnapshots(view, width: 480, height: 412, named: "pageintro-eyebrow", padding: margin)
     }

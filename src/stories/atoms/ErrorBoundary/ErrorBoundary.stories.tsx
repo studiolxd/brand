@@ -32,7 +32,7 @@ export const SinFallback: Story = {
 /** Con `fallback`: lo que se pinta en lugar del hijo que ha fallado. */
 export const ConFallback: Story = {
   render: () => (
-    <ErrorBoundary fallback={<Alert variant="error" title="Esta parte no se ha podido cargar" />}>
+    <ErrorBoundary fallback={<Alert tone="error" title="Esta parte no se ha podido cargar" />}>
       <Explota />
     </ErrorBoundary>
   ),

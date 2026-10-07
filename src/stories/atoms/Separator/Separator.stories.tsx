@@ -51,13 +51,13 @@ export const PorDefecto: Story = {
 export const Aire: Story = {
   render: () => (
     <div>
-      <Paragraph size="small">sm</Paragraph>
+      <Paragraph size="sm">sm</Paragraph>
       <Separator spacing="sm" />
-      <Paragraph size="small">md</Paragraph>
+      <Paragraph size="sm">md</Paragraph>
       <Separator spacing="md" />
-      <Paragraph size="small">lg</Paragraph>
+      <Paragraph size="sm">lg</Paragraph>
       <Separator spacing="lg" />
-      <Paragraph size="small">fin</Paragraph>
+      <Paragraph size="sm">fin</Paragraph>
     </div>
   ),
 };

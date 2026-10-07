@@ -9,7 +9,7 @@ describe('Card — tarjeta-acción (render sobre <button>)', () => {
     render(
       <Card
         render={<button type="submit" name="paso" value="otp" />}
-        color="outline"
+        tone="outline"
         title="Aplicación de autenticación"
         description="Genera un código de un solo uso."
         ctaLabel="Continuar con la aplicación de autenticación"
@@ -33,13 +33,13 @@ describe('Card — tarjeta-acción (render sobre <button>)', () => {
       <form onSubmit={onSubmit} aria-label="Verificación en dos pasos" data-testid="form">
         <Card
           render={<button type="submit" name="authenticationExecution" value="webauthn" />}
-          color="outline"
+          tone="outline"
           title="Llave de seguridad"
           ctaLabel="Continuar con la llave de seguridad"
         />
         <Card
           render={<button type="submit" name="authenticationExecution" value="otp" />}
-          color="outline"
+          tone="outline"
           title="Aplicación de autenticación"
           ctaLabel="Continuar con la aplicación de autenticación"
         />

@@ -51,21 +51,21 @@ function makeEvents(): PlannerEvent[] {
   const m = STORY_TODAY.getMonth();
 
   return [
-    { id: '1',  date: new Date(y, m, 2),  label: 'Reunión equipo',      variant: 'primary' },
-    { id: '2',  date: new Date(y, m, 2),  label: 'Revisión diseño',     variant: 'accent-1' },
-    { id: '3',  date: new Date(y, m, 5),  label: 'Entrega cliente',     variant: 'danger' },
-    { id: '4',  date: new Date(y, m, 7),  label: 'Demo interna',        variant: 'info' },
-    { id: '5',  date: new Date(y, m, 7),  label: 'Sprint planning',     variant: 'primary' },
-    { id: '6',  date: new Date(y, m, 7),  label: 'Onboarding',          variant: 'success' },
-    { id: '7',  date: new Date(y, m, 7),  label: 'Retrospectiva',       variant: 'warning' },
-    { id: '8',  date: new Date(y, m, 10), label: 'Vacaciones',          variant: 'accent-2' },
-    { id: '9',  date: new Date(y, m, 10), label: 'Fuera de oficina',    variant: 'neutral' },
-    { id: '10', date: new Date(y, m, 14), label: 'Publicación web',     variant: 'success' },
-    { id: '11', date: new Date(y, m, 17), label: 'Call cliente',        variant: 'primary' },
-    { id: '12', date: new Date(y, m, 21), label: 'Revisión contrato',   variant: 'danger' },
-    { id: '13', date: new Date(y, m, 21), label: 'Firma propuesta',     variant: 'accent-1' },
-    { id: '14', date: new Date(y, m, 25), label: 'Deploy producción',   variant: 'warning' },
-    { id: '15', date: new Date(y, m, 28), label: 'Cierre de sprint',    variant: 'info' },
+    { id: '1',  date: new Date(y, m, 2),  label: 'Reunión equipo',      tone: 'primary' },
+    { id: '2',  date: new Date(y, m, 2),  label: 'Revisión diseño',     tone: 'accent-1' },
+    { id: '3',  date: new Date(y, m, 5),  label: 'Entrega cliente',     tone: 'error' },
+    { id: '4',  date: new Date(y, m, 7),  label: 'Demo interna',        tone: 'info' },
+    { id: '5',  date: new Date(y, m, 7),  label: 'Sprint planning',     tone: 'primary' },
+    { id: '6',  date: new Date(y, m, 7),  label: 'Onboarding',          tone: 'success' },
+    { id: '7',  date: new Date(y, m, 7),  label: 'Retrospectiva',       tone: 'warning' },
+    { id: '8',  date: new Date(y, m, 10), label: 'Vacaciones',          tone: 'accent-2' },
+    { id: '9',  date: new Date(y, m, 10), label: 'Fuera de oficina',    tone: 'neutral' },
+    { id: '10', date: new Date(y, m, 14), label: 'Publicación web',     tone: 'success' },
+    { id: '11', date: new Date(y, m, 17), label: 'Call cliente',        tone: 'primary' },
+    { id: '12', date: new Date(y, m, 21), label: 'Revisión contrato',   tone: 'error' },
+    { id: '13', date: new Date(y, m, 21), label: 'Firma propuesta',     tone: 'accent-1' },
+    { id: '14', date: new Date(y, m, 25), label: 'Deploy producción',   tone: 'warning' },
+    { id: '15', date: new Date(y, m, 28), label: 'Cierre de sprint',    tone: 'info' },
   ];
 }
 
@@ -118,7 +118,7 @@ export const ConRenderDay: Story = {
               </Tag>
             ))}
             {dayEvents.length === 0 && date.getDay() === 0 && (
-              <Tag variant="neutral">Domingo</Tag>
+              <Tag tone="neutral">Domingo</Tag>
             )}
           </div>
         )}
@@ -193,16 +193,16 @@ function makeWeekEvents(): PlannerEvent[] {
   const dia = (offset: number, hora = 0, minuto = 0) => new Date(y, m, lunes + offset, hora, minuto);
 
   return [
-    { id: 'w1', date: dia(0, 9, 0),   label: 'Daily',            variant: 'primary' },
-    { id: 'w2', date: dia(0, 12, 30), label: 'Comida con Marta', variant: 'neutral' },
-    { id: 'w3', date: dia(1),         label: 'Festivo local',    variant: 'accent-2', allDay: true },
-    { id: 'w4', date: dia(1, 16, 0),  label: 'Revisión diseño',  variant: 'accent-1' },
-    { id: 'w5', date: dia(2, 9, 0),   label: 'Daily',            variant: 'primary' },
-    { id: 'w6', date: dia(2, 11, 0),  label: 'Entrevista',       variant: 'info' },
-    { id: 'w7', date: dia(3, 9, 0),   label: 'Daily',            variant: 'primary' },
-    { id: 'w8', date: dia(3, 17, 30), label: 'Retrospectiva',    variant: 'warning' },
-    { id: 'w9', date: dia(4, 10, 0),  label: 'Deploy',           variant: 'success' },
-    { id: 'w10', date: dia(6),        label: 'Guardia',          variant: 'danger', allDay: true },
+    { id: 'w1', date: dia(0, 9, 0),   label: 'Daily',            tone: 'primary' },
+    { id: 'w2', date: dia(0, 12, 30), label: 'Comida con Marta', tone: 'neutral' },
+    { id: 'w3', date: dia(1),         label: 'Festivo local',    tone: 'accent-2', allDay: true },
+    { id: 'w4', date: dia(1, 16, 0),  label: 'Revisión diseño',  tone: 'accent-1' },
+    { id: 'w5', date: dia(2, 9, 0),   label: 'Daily',            tone: 'primary' },
+    { id: 'w6', date: dia(2, 11, 0),  label: 'Entrevista',       tone: 'info' },
+    { id: 'w7', date: dia(3, 9, 0),   label: 'Daily',            tone: 'primary' },
+    { id: 'w8', date: dia(3, 17, 30), label: 'Retrospectiva',    tone: 'warning' },
+    { id: 'w9', date: dia(4, 10, 0),  label: 'Deploy',           tone: 'success' },
+    { id: 'w10', date: dia(6),        label: 'Guardia',          tone: 'error', allDay: true },
   ];
 }
 

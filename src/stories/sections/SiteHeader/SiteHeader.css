@@ -38,9 +38,9 @@
    panel salen del mismo token.
 
    Se impone remapeando los tokens de talla del `Logo`, no con un selector que
-   le gane: `Logo` estila sus tallas con doble clase (`.logo.logo--xxl`), así
+   le gane: `Logo` estila sus tallas con doble clase (`.logo.logo--2xl`), así
    que cualquier selector de aquí empataría o perdería según el orden de carga
-   —y perdía: en móvil la marca seguía saliendo a `xxl`—. Reescribiendo los
+   —y perdía: en móvil la marca seguía saliendo a `2xl`—. Reescribiendo los
    tokens, la regla del `Logo` sigue mandando pero lee el alto de la barra, sea
    cual sea la talla que le pasen. El `block-size` de debajo cubre una marca de
    producto que no sea el `Logo` del sistema. */

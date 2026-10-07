@@ -3,7 +3,8 @@ import { Tag } from '../../atoms/Tag/Tag';
 import { Toggle } from '../../atoms/Toggle/Toggle';
 import { ToggleGroup } from '../../atoms/ToggleGroup/ToggleGroup';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
-import type { TagVariant } from '../../atoms/Tag/Tag';
+import type { TagTone, TagVariant } from '../../atoms/Tag/Tag';
+import { warnDeprecated } from '../../constants/env';
 import { Modal } from '../Modal/Modal';
 import {
   chunkWeeks,
@@ -52,6 +53,12 @@ export interface PlannerEvent {
   id: string;
   date: Date;
   label: string;
+  /** Color de la etiqueta del evento (el `tone` de `Tag`). Default `'neutral'`. */
+  tone?: TagTone;
+  /**
+   * @deprecated Usa `tone`. `variant: 'danger'` es `tone: 'error'`. Sigue
+   * funcionando, con un aviso en desarrollo, hasta la v52.
+   */
   variant?: TagVariant;
   /**
    * El evento dura todo el día: la vista de semana lo pinta **sin hora**, el
@@ -60,6 +67,13 @@ export interface PlannerEvent {
    * que permite que la misma lista de eventos sirva para las dos vistas.
    */
   allDay?: boolean;
+}
+
+/** El color de un evento, desde `tone` o desde el alias obsoleto `variant`. */
+function eventTone(event: PlannerEvent): TagTone {
+  if (event.variant !== undefined) warnDeprecated('CalendarPlanner', 'events[].variant', '`events[].tone`');
+  const tone = event.tone ?? event.variant ?? 'neutral';
+  return tone === 'danger' ? 'error' : tone;
 }
 
 /**
@@ -395,10 +409,10 @@ export function CalendarPlanner({
               {eventHasTime(event) && (
                 <span className="calendar-planner__event-time">{timeFormatter.format(event.date)}</span>
               )}
-              <Tag variant={event.variant ?? 'neutral'}>{event.label}</Tag>
+              <Tag tone={eventTone(event)}>{event.label}</Tag>
             </div>
           ) : (
-            <Tag key={event.id} variant={event.variant ?? 'neutral'}>
+            <Tag key={event.id} tone={eventTone(event)}>
               {event.label}
             </Tag>
           )
@@ -586,7 +600,7 @@ export function CalendarPlanner({
       >
         <div className="calendar-planner__modal-events">
           {modalDay?.events.map((event) => (
-            <Tag key={event.id} variant={event.variant ?? 'neutral'}>
+            <Tag key={event.id} tone={eventTone(event)}>
               {event.label}
             </Tag>
           ))}

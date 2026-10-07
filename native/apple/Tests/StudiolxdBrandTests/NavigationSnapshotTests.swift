@@ -13,8 +13,8 @@ final class NavigationSnapshotTests: XCTestCase {
     func testBannerVariantsStacked() {
         let view = VStack(spacing: BrandSpacing.s3) {
             BrandBanner(verbatim: "Estás viendo la aplicación como ana.perez@studiolxd.com.")
-            BrandBanner("El mantenimiento empieza hoy a las 22:00 y durará una hora.", variant: .warning)
-            BrandBanner("No hemos podido guardar los cambios.", variant: .error)
+            BrandBanner("El mantenimiento empieza hoy a las 22:00 y durará una hora.", tone: .warning)
+            BrandBanner("No hemos podido guardar los cambios.", tone: .error)
         }
         assertBrandSnapshots(view, width: 375, height: 280, named: "variantes", padding: 0)
     }
@@ -27,10 +27,10 @@ final class NavigationSnapshotTests: XCTestCase {
             BrandBanner(verbatim: "Estás viendo la aplicación como ana.perez@studiolxd.com.", onDismiss: {}) {
                 BrandButton("Dejar de suplantar", variant: .outline, size: .sm) {}
             }
-            BrandBanner("El mantenimiento empieza a las 22:00.", variant: .warning, onDismiss: {}) {
+            BrandBanner("El mantenimiento empieza a las 22:00.", tone: .warning, onDismiss: {}) {
                 BrandButton("Ver detalles", variant: .outline, size: .sm) {}
             }
-            BrandBanner("No hemos podido guardar.", variant: .error, onDismiss: {}) {
+            BrandBanner("No hemos podido guardar.", tone: .error, onDismiss: {}) {
                 BrandButton("Reintentar", variant: .outline, size: .sm) {}
             }
         }
@@ -42,10 +42,10 @@ final class NavigationSnapshotTests: XCTestCase {
             BrandBanner(verbatim: "Estás viendo la aplicación como ana.perez@studiolxd.com.", onDismiss: {}) {
                 BrandButton("Dejar de suplantar", variant: .outline, size: .sm) {}
             }
-            BrandBanner("El mantenimiento empieza a las 22:00.", variant: .warning, onDismiss: {}) {
+            BrandBanner("El mantenimiento empieza a las 22:00.", tone: .warning, onDismiss: {}) {
                 BrandButton("Ver detalles", variant: .outline, size: .sm) {}
             }
-            BrandBanner("Un mensaje sin acciones.", variant: .error)
+            BrandBanner("Un mensaje sin acciones.", tone: .error)
         }
         assertBrandSnapshots(view, width: 720, height: 220, named: "fila", padding: 0)
     }
@@ -152,7 +152,7 @@ final class NavigationSnapshotTests: XCTestCase {
             })
             BrandPageIntro("Automatizaciones", description: "Reglas que se disparan solas.",
                            eyebrow: { BrandTag("Beta") },
-                           content: { BrandParagraph("Disponible solo para el plan Studio.", size: .small) })
+                           content: { BrandParagraph("Disponible solo para el plan Studio.", size: .sm) })
         }
         assertBrandSnapshots(view, width: 375, height: 640, named: "apilado")
     }

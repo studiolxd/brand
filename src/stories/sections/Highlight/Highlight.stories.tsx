@@ -67,7 +67,7 @@ export const Contrato: Story = {
     await expect(banda).toHaveClass('surface-dark');
 
     await expect(canvas.getByRole('heading', { level: 2 })).toHaveTextContent('La formación que no se abandona');
-    await expect(canvas.getByText(/Diseñamos itinerarios/)).toHaveClass('paragraph--large');
+    await expect(canvas.getByText(/Diseñamos itinerarios/)).toHaveClass('paragraph--lg');
     await expect(canvas.getByRole('link', { name: 'Hablemos' }).closest('.highlight__actions')).toHaveClass('inline');
 
     // La banda trae su propio aire vertical y su Container interior: se monta a sangre.

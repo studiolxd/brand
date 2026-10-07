@@ -42,7 +42,7 @@ function d({ label: d, title: f, titleHidden: p = !1, description: m, children: 
 					}), S > 0 && /* @__PURE__ */ s(a, {
 						count: S,
 						max: C,
-						variant: "danger",
+						tone: "error",
 						"aria-hidden": "true",
 						className: "floating-dock__badge"
 					})]

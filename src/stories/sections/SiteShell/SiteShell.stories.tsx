@@ -89,8 +89,8 @@ export const ContratoTipografia: Story = {
         <Heading level={5}>Un título de nivel 5</Heading>
         <Heading level={2} size={4}>Un título con el tamaño desacoplado</Heading>
         <Paragraph>El cuerpo de la superficie pública.</Paragraph>
-        <Paragraph size="large">Una entradilla.</Paragraph>
-        <Paragraph size="small">Una nota al pie.</Paragraph>
+        <Paragraph size="lg">Una entradilla.</Paragraph>
+        <Paragraph size="sm">Una nota al pie.</Paragraph>
         <Alert title="Un aviso" description="Con su descripción." />
       </Container>
     ),

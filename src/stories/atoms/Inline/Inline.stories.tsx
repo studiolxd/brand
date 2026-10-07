@@ -128,7 +128,7 @@ export const ContratoTitulo: Story = {
   render: () => (
     <Inline gap="sm" align="center">
       <Heading level={2}>Nombre (url)</Heading>
-      <Tag variant="success">Operativo</Tag>
+      <Tag tone="success">Operativo</Tag>
     </Inline>
   ),
   play: async ({ canvasElement }) => {

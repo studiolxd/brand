@@ -185,7 +185,7 @@ export function ImageCropDialog({
           {status === 'loading' && <Spinner size="lg" label={t('loading', loadingLabel)} />}
           {status === 'error' && (
             <Alert
-              variant="error"
+              tone="error"
               description={t('error', errorMessage)}
               className="image-crop-dialog__error"
             />

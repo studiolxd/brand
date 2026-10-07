@@ -10,7 +10,7 @@ const meta: Meta<typeof Logo> = {
   argTypes: {
     size: {
       control: { type: 'select' },
-      options: ['sm', 'md', 'lg', 'xl', 'xxl'],
+      options: ['sm', 'md', 'lg', 'xl', '2xl'],
       description: 'Alto del logotipo: una talla de componente.',
     },
     className: { table: { disable: true } },
@@ -46,7 +46,7 @@ export const Tallas: Story = {
       <Logo size="md" />
       <Logo size="lg" />
       <Logo size="xl" />
-      <Logo size="xxl" />
+      <Logo size="2xl" />
     </div>
   ),
 };

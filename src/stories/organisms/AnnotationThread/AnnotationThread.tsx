@@ -219,7 +219,7 @@ export function AnnotationThread({
       <div className="annotation-thread__status">
         {/* Solo el estado vigente se lee del catálogo: un hilo abierto no
             exige los textos de «atendida» ni de «resuelta». */}
-        <Tag variant={STATUS_VARIANT[status]}>
+        <Tag tone={STATUS_VARIANT[status]}>
           {{
             open: () => t('open', openLabel),
             acknowledged: () => t('acknowledged', acknowledgedLabel),

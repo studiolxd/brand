@@ -10,7 +10,7 @@ export interface HeroProps {
   /** El título de la portada: un `Heading` de nivel 1 a talla 10 (display). */
   title: ReactNode;
   /**
-   * La frase bajo el título, opcional: `Paragraph size="large"`. Termina en
+   * La frase bajo el título, opcional: `Paragraph size="lg"`. Termina en
    * punto (ver Foundations → Redacción).
    */
   description?: ReactNode;
@@ -39,7 +39,7 @@ export function Hero({ title, description, actions, width = 'xl', className, id 
     <section id={id} className={['hero', className].filter(Boolean).join(' ')}>
       <Container width={width} innerClassName="hero__inner">
         <Heading level={1} size={10} className="hero__title">{title}</Heading>
-        {description && <Paragraph size="large" className="hero__description">{description}</Paragraph>}
+        {description && <Paragraph size="lg" className="hero__description">{description}</Paragraph>}
         {actions && (
           <Inline className="hero__actions">
             <FormSizeContext.Provider value="lg">{actions}</FormSizeContext.Provider>

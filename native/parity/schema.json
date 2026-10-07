@@ -60,7 +60,14 @@
                 "uniqueItems": true,
                 "items": { "type": "string", "minLength": 1 }
               },
-              "default": { "description": "Valor por defecto, si lo hay. Informativo.", "type": "string" }
+              "default": { "description": "Valor por defecto, si lo hay. Informativo.", "type": "string" },
+              "deprecatedValues": {
+                "description": "Literales que React admite todavía SOLO como alias obsoleto de otro (`Paragraph size=\"small\"` → `sm`). Con `values` suman EXACTAMENTE los literales de React. En nativo no son casos del enum: son alias obsoletos (`@available(*, deprecated, renamed:)` en Swift, `@Deprecated(ReplaceWith(…))` en Kotlin), así que las pruebas nativas solo comparan `values`.",
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": { "type": "string", "minLength": 1 }
+              }
             }
           },
           {
@@ -86,6 +93,20 @@
       "description": "Diferencias que se quedan A PROPÓSITO respecto a la versión de React (límites de SwiftUI/Compose, convenciones de la plataforma), una frase cada una. Lo que no se pueda igualar se aproxima y se explica aquí.",
       "type": "array",
       "items": { "type": "string", "minLength": 10 }
+    },
+    "deprecated": {
+      "description": "Props de React que solo son el alias obsoleto de otra (`Tag variant` → `tone`): llevan `@deprecated` en su JSDoc y se retiran en el major siguiente. No se registran en las pruebas nativas; en nativo existen como parámetro o inicializador obsoleto que remite a `replacement`.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["prop", "replacement"],
+        "properties": {
+          "prop": { "type": "string", "pattern": "^[a-zA-Z][A-Za-z0-9]*$" },
+          "replacement": { "description": "La prop de `props` que la sustituye.", "type": "string", "pattern": "^[a-zA-Z][A-Za-z0-9]*$" }
+        }
+      }
     },
     "excluded": {
       "description": "Props propias del componente de React que NO se portan, cada una con su porqué.",

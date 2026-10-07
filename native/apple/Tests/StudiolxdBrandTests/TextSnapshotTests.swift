@@ -27,7 +27,7 @@ final class TextSnapshotTests: XCTestCase {
     /// Parejas con Storybook (`atoms-paragraph--por-defecto` con `size` y `children`).
     func testComparisonParagraph() {
         for size in ParagraphSize.allCases {
-            let height: CGFloat = size == .small ? 147 : size == .large ? 214 : 176
+            let height: CGFloat = size == .sm ? 147 : size == .lg ? 214 : 176
             assertBrandSnapshots(
                 BrandParagraph(verbatim: Self.lorem, size: size).frame(width: 288, alignment: .leading),
                 width: 320, height: height, named: "compare-\(size.rawValue)", padding: 16
@@ -78,9 +78,9 @@ final class TextSnapshotTests: XCTestCase {
 
     func testParagraphs() {
         let view = VStack(alignment: .leading, spacing: BrandSpacing.s3) {
-            BrandParagraph(verbatim: "Pequeño: notas y metadatos de una pantalla.", size: .small)
+            BrandParagraph(verbatim: "Pequeño: notas y metadatos de una pantalla.", size: .sm)
             BrandParagraph(verbatim: "Normal: el cuerpo de texto de la aplicación, a dieciséis puntos.")
-            BrandParagraph(verbatim: "Grande: entradillas.", size: .large)
+            BrandParagraph(verbatim: "Grande: entradillas.", size: .lg)
         }
         assertBrandSnapshots(view, width: 320, height: 230, named: "sizes")
     }
@@ -93,6 +93,6 @@ final class TextSnapshotTests: XCTestCase {
             }
             (Text("Y otra con ") + Text("énfasis").brand(.em)).font(.brand(.body)).foregroundStyle(BrandColorRoles.text)
         }
-        assertBrandSnapshots(view, width: 340, height: 150, named: "inline")
+        assertBrandSnapshots(view, width: 340, height: 180, named: "inline")
     }
 }

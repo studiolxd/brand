@@ -100,7 +100,7 @@ export function SiteFooter({
       <Container width={width} innerClassName="site-footer__inner">
         <div className="site-footer__brand">
           {logo}
-          {tagline && <Paragraph size="large" className="site-footer__tagline">{tagline}</Paragraph>}
+          {tagline && <Paragraph size="lg" className="site-footer__tagline">{tagline}</Paragraph>}
         </div>
 
         {(columns?.length || aside) && (

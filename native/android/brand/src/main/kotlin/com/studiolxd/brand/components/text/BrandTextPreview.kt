@@ -15,8 +15,8 @@ internal fun TextPreviewContent() {
         HeadingLevel.entries.forEach { BrandHeading("Encabezado ${it.value}", level = it) }
         BrandHeading("Un h2 con tamaño de h5", level = HeadingLevel.H2, size = HeadingSize.S4)
         BrandParagraph("Párrafo de tamaño normal con texto de ejemplo.")
-        BrandParagraph("Párrafo pequeño para notas.", size = ParagraphSize.Small)
-        BrandParagraph("Párrafo grande para entradillas.", size = ParagraphSize.Large)
+        BrandParagraph("Párrafo pequeño para notas.", size = ParagraphSize.Sm)
+        BrandParagraph("Párrafo grande para entradillas.", size = ParagraphSize.Lg)
         val destructive = brandSpanStyle(TextElement.Strong, TextTone.Destructive)
         val muted = brandSpanStyle(TextElement.Em, TextTone.Muted)
         val success = brandSpanStyle(TextElement.Span, TextTone.Success)

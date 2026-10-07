@@ -28,7 +28,7 @@ const columns: ColumnDef<Member, unknown>[] = [
     accessorKey: 'role',
     header: 'Rol',
     cell: ({ row }) => (
-      <Tag variant={ROLE_VARIANT[row.original.role]}>{row.original.role}</Tag>
+      <Tag tone={ROLE_VARIANT[row.original.role]}>{row.original.role}</Tag>
     ),
   },
 ];
@@ -135,7 +135,7 @@ const alignedColumns: ColumnDef<Invoice, unknown>[] = [
     accessorKey: 'status',
     header: 'Estado',
     cell: ({ row }) => (
-      <Tag variant={row.original.status === 'paid' ? 'success' : 'neutral'}>
+      <Tag tone={row.original.status === 'paid' ? 'success' : 'neutral'}>
         {row.original.status === 'paid' ? 'Pagada' : 'Pendiente'}
       </Tag>
     ),

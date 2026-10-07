@@ -1,26 +1,29 @@
 import './step-marker.css';
-import { Icon as e } from "./icon.js";
-import { jsx as t } from "react/jsx-runtime";
+import { n as e } from "./_shared/env.js";
+import { Icon as t } from "./icon.js";
+import { jsx as n } from "react/jsx-runtime";
 //#region src/stories/atoms/StepMarker/StepMarker.tsx
-function n({ state: n = "neutral", tone: r = "primary", size: i = "md", count: a, icon: o, className: s }) {
-	let c = n === "done", l = n === "pending", u = [
+function r({ state: r = "neutral", tone: i = "primary", size: a = "md", count: o, icon: s, className: c }) {
+	let l = i;
+	l === "danger" && (e("StepMarker", "tone=\"danger\"", "`tone=\"error\"`"), l = "error");
+	let u = r === "done", d = r === "pending", f = [
 		"step-marker",
-		`step-marker--${i}`,
-		`step-marker--state-${n}`,
-		!l && `step-marker--tone-${r}`,
-		s
-	].filter(Boolean).join(" "), d = a;
-	return c ? d = /* @__PURE__ */ t(e, {
+		`step-marker--${a}`,
+		`step-marker--state-${r}`,
+		!d && `step-marker--tone-${l === "error" ? "danger" : l}`,
+		c
+	].filter(Boolean).join(" "), p = o;
+	return u ? p = /* @__PURE__ */ n(t, {
 		name: "check",
 		className: "step-marker__icon"
-	}) : o && (d = /* @__PURE__ */ t(e, {
-		name: o,
+	}) : s && (p = /* @__PURE__ */ n(t, {
+		name: s,
 		className: "step-marker__icon"
-	})), /* @__PURE__ */ t("span", {
-		className: u,
+	})), /* @__PURE__ */ n("span", {
+		className: f,
 		"aria-hidden": "true",
-		children: d
+		children: p
 	});
 }
 //#endregion
-export { n as StepMarker };
+export { r as StepMarker };

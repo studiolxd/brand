@@ -281,14 +281,14 @@ export const Sangrado: Story = {
 
 
 /**
- * Test: la marca por defecto es el logotipo a `xxl`, y la barra mide lo que
+ * Test: la marca por defecto es el logotipo a `2xl`, y la barra mide lo que
  * mide la marca —el alto sale del token del logotipo, no de una cifra propia—
  * más el aire del sistema arriba y abajo. Las dos medidas se comparan contra
  * el sistema, no contra cifras: un logotipo `xl` de referencia y una sonda con
  * el aire de la barra.
  */
 export const AltoDeLaMarca: Story = {
-  name: 'Test — la marca va a xxl y la barra crece con ella',
+  name: 'Test — la marca va a 2xl y la barra crece con ella',
   tags: ['!dev'],
   render: () => (
     <>
@@ -299,7 +299,7 @@ export const AltoDeLaMarca: Story = {
   ),
   play: async ({ canvasElement }) => {
     const logo = canvasElement.querySelector('.site-header .logo')!;
-    await expect(logo).toHaveClass('logo--xxl');
+    await expect(logo).toHaveClass('logo--2xl');
 
     // La marca es la talla xl con el salto de la escala (4/3)
     const referencia = canvasElement.querySelector('[data-testid="referencia"] .logo')!;

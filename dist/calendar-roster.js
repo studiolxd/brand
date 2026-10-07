@@ -33,7 +33,7 @@ function _(e) {
 var v = {
 	holiday: "neutral",
 	vacation: "info",
-	absence: "danger",
+	absence: "error",
 	recovery: "success",
 	birthday: "info"
 }, y = [
@@ -144,7 +144,7 @@ function b({ rows: b, month: x, onMonthChange: S, hrefBuilder: C, renderLink: w,
 								className: "calendar-roster__schedule",
 								children: i.label
 							}), i && i.type !== "schedule" && i.type !== "non-working" && /* @__PURE__ */ p(n, {
-								variant: v[i.type],
+								tone: v[i.type],
 								children: i.type === "birthday" ? `${O}${i.label}` : i.label
 							})] })
 						}, r);
@@ -158,7 +158,7 @@ function b({ rows: b, month: x, onMonthChange: S, hrefBuilder: C, renderLink: w,
 				children: z.map(({ type: e, label: t }) => /* @__PURE__ */ p("span", {
 					className: "calendar-roster__legend-item",
 					children: e === "non-working" ? /* @__PURE__ */ m(f, { children: [/* @__PURE__ */ p("span", { className: "calendar-roster__legend-swatch calendar-roster__legend-swatch--non-working" }), t] }) : /* @__PURE__ */ p(n, {
-						variant: v[e],
+						tone: v[e],
 						children: t
 					})
 				}, e))

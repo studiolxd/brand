@@ -5,7 +5,7 @@ import * as PageIntroStories from "./PageIntro.stories";
 
 # PageIntro
 
-La cabecera de una página: el **título** (`Heading` de nivel 1) y, si hace falta, una **entradilla** debajo —un `Paragraph size="large"`, un peldaño por encima del cuerpo—. El aire entre los dos lo pone el título (`--text-heading-space-after`, en em: crece con el tamaño del título), no la cabecera. Lo que va en `children` (más texto) ya es cuerpo normal. Si algo sigue a la cabecera en la misma columna (un enlace de vuelta), van juntos en un `Stack`, que pone el aire y decide el orden en móvil. Es un `header`. Abre acceso, registro, recuperación de contraseña… y cualquier página que empiece por su nombre; va como celda de `Columns` (título a la izquierda, contenido a la derecha) o directamente en el `Container`.
+La cabecera de una página: el **título** (`Heading` de nivel 1) y, si hace falta, una **entradilla** debajo —un `Paragraph size="lg"`, un peldaño por encima del cuerpo—. El aire entre los dos lo pone el título (`--text-heading-space-after`, en em: crece con el tamaño del título), no la cabecera. Lo que va en `children` (más texto) ya es cuerpo normal. Si algo sigue a la cabecera en la misma columna (un enlace de vuelta), van juntos en un `Stack`, que pone el aire y decide el orden en móvil. Es un `header`. Abre acceso, registro, recuperación de contraseña… y cualquier página que empiece por su nombre; va como celda de `Columns` (título a la izquierda, contenido a la derecha) o directamente en el `Container`.
 
 <Canvas of={PageIntroStories.ConFrase} />
 <Canvas of={PageIntroStories.SoloTitulo} />
@@ -23,7 +23,7 @@ La cabecera de una página: el **título** (`Heading` de nivel 1) y, si hace fal
 <PageIntro title="Miembros" description="Quién entra en la organización y con qué permisos" />
 ```
 
-La razón es de dibujo, no de gramática: la entradilla se pinta como cuerpo (`Paragraph size="large"`), a un peldaño del título y con su mismo ancho de lectura. Sin el punto, ese párrafo parece un `Heading` menor y la jerarquía de la cabecera —un título, un texto— se deshace. Si lo que hay que decir no llega a frase, no es una entradilla: o cabe en el título, o va en `children`.
+La razón es de dibujo, no de gramática: la entradilla se pinta como cuerpo (`Paragraph size="lg"`), a un peldaño del título y con su mismo ancho de lectura. Sin el punto, ese párrafo parece un `Heading` menor y la jerarquía de la cabecera —un título, un texto— se deshace. Si lo que hay que decir no llega a frase, no es una entradilla: o cabe en el título, o va en `children`.
 
 Vale para las dos caras de la pieza, la cabecera de página y la de sección. Lo que va en `children` es cuerpo normal y sigue las reglas del cuerpo.
 

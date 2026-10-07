@@ -3,7 +3,8 @@
 
 $lxd-text-inline-emphasis-font-weight: 500; // Peso del énfasis fuerte en línea
 $lxd-text-inline-muted-color: #4a4a4a; // Texto secundario en línea: una aclaración, un metadato
-$lxd-text-inline-destructive-color: #b30000; // Énfasis en línea con intención destructiva: la palabra que dice que algo se pierde. Es tinta sobre la superficie, nunca un relleno
+$lxd-text-inline-error-color: #b30000; // Énfasis en línea de error: un estado que ha fallado («cupón rechazado»). Es tinta sobre la superficie, nunca un relleno
+$lxd-text-inline-destructive-color: #b30000; // Énfasis en línea con intención destructiva: la palabra que avisa de que una acción hace perder algo («esta acción **borra** el curso»). Es tinta sobre la superficie, nunca un relleno
 $lxd-text-inline-success-color: #006616; // Énfasis en línea con intención de logro
 $lxd-text-inline-strikethrough-color: #4a4a4a; // Texto tachado: lo que ya está hecho (un producto en el carrito) o ya no vale. Atenuado como el texto secundario; con un `tone` manda el tono
 $lxd-text-inline-strikethrough-thickness: 1px; // Grosor de la línea del tachado: el de los demás trazos del sistema

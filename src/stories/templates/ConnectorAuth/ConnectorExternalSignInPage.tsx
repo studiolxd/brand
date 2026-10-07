@@ -178,7 +178,7 @@ export function ConnectorExternalSignInPage({
           `align="stretch"` y no una caja propia — no hace falta CSS nuevo para
           apilar tres bloques. */}
       <Stack align="stretch">
-        {error !== undefined && <Alert role="alert" variant="error" description={error} />}
+        {error !== undefined && <Alert role="alert" tone="error" description={error} />}
 
         <Form
           size="lg"

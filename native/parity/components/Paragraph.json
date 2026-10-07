@@ -13,11 +13,16 @@
     "size": {
       "type": "union",
       "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "deprecatedValues": [
         "small",
         "default",
         "large"
       ],
-      "default": "default"
+      "default": "md"
     }
   },
   "excluded": [
@@ -29,6 +34,7 @@
   "differences": [
     "El texto de la web se ve algo más grueso (suavizado de Chromium en macOS); el peso del eje `wght` es el mismo.",
     "En Compose, un párrafo con fragmentos marcados recibe un `AnnotatedString` hecho con `brandSpanStyle` (en SwiftUI, un `Text` concatenado con `Text.brand`).",
-    "En Android el eje de tamaño óptico (`opsz`) de la fuente se fija al tamaño del token, como hace el navegador."
+    "En Android el eje de tamaño óptico (`opsz`) de la fuente se fija al tamaño del token, como hace el navegador.",
+    "`small`, `default` y `large` (alias obsoletos de la v51, se retiran en la v52) no son casos de `ParagraphSize`: son miembros estáticos obsoletos que devuelven `sm`, `md` y `lg` (`@available(*, deprecated, renamed:)` en Swift, `@Deprecated(ReplaceWith)` en el `companion object` de Kotlin)."
   ]
 }

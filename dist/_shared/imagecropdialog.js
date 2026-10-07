@@ -78,7 +78,7 @@ function _({ sourceUrl: f, title: p, description: _, circularCrop: v = !1, aspec
 						label: M("loading", E)
 					}),
 					R === "error" && /* @__PURE__ */ l(i, {
-						variant: "error",
+						tone: "error",
 						description: M("error", D),
 						className: "image-crop-dialog__error"
 					}),

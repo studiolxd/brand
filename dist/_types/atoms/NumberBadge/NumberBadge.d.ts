@@ -1,7 +1,19 @@
 import './NumberBadge.css';
-export type NumberBadgeVariant = 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2' | 'danger' | 'success' | 'neutral';
+/** Color del contador: los de marca, los de feedback y `neutral`. */
+export type NumberBadgeTone = 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2' | 'error' | 'success' | 'neutral';
+/**
+ * @deprecated Usa `NumberBadgeTone`. La prop de color se llama `tone` desde la
+ * v51 y `danger` es `error`. Se retira en la v52.
+ */
+export type NumberBadgeVariant = NumberBadgeTone | 'danger';
 export interface NumberBadgeProps {
     count: number;
+    /** Color del contador. Default `'primary'`. */
+    tone?: NumberBadgeTone;
+    /**
+     * @deprecated Usa `tone`. `variant="danger"` es `tone="error"`. Sigue
+     * funcionando, con un aviso en desarrollo, hasta la v52.
+     */
     variant?: NumberBadgeVariant;
     /** Límite a partir del cual se muestra «99+». Por defecto 99. */
     max?: number;
@@ -16,4 +28,4 @@ export interface NumberBadgeProps {
     'aria-hidden'?: boolean | 'true' | 'false';
     className?: string;
 }
-export declare function NumberBadge({ count, variant, max, 'aria-label': ariaLabel, 'aria-hidden': ariaHidden, className, }: NumberBadgeProps): import("react/jsx-runtime").JSX.Element;
+export declare function NumberBadge({ count, tone: toneProp, variant, max, 'aria-label': ariaLabel, 'aria-hidden': ariaHidden, className, }: NumberBadgeProps): import("react/jsx-runtime").JSX.Element;

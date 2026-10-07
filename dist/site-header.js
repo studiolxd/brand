@@ -11,7 +11,7 @@ import { jsx as l, jsxs as u } from "react/jsx-runtime";
 var d = { logo: "Ir al inicio" };
 //#endregion
 //#region src/stories/sections/SiteHeader/SiteHeader.tsx
-function f({ logoHref: f = "/", logoLabel: p, menuLabel: m, menuCloseLabel: h, logoSize: g = "xxl", logo: _ = /* @__PURE__ */ l(r, { size: g }), menuButtonSize: v = "lg", renderLogoLink: y = i, width: b = "xl", open: x, onOpenChange: S, children: C, settings: w, panelId: T, actions: E, language: D }) {
+function f({ logoHref: f = "/", logoLabel: p, menuLabel: m, menuCloseLabel: h, logoSize: g = "2xl", logo: _ = /* @__PURE__ */ l(r, { size: g }), menuButtonSize: v = "lg", renderLogoLink: y = i, width: b = "xl", open: x, onOpenChange: S, children: C, settings: w, panelId: T, actions: E, language: D }) {
 	let O = e("siteHeader", d), k = o(), A = T ?? k, [j, M] = c(!1), N = x !== void 0, P = N ? x : j, F = !!(C || w || D), I = s(null), L = s(null), R = (e) => {
 		N || M(e), S?.(e);
 	};

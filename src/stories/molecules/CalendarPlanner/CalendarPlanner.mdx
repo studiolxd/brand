@@ -28,7 +28,7 @@ conviene pasarla. El porqué, en `Calendar` § «El día de hoy y el SSR».
 
 ## Eventos y truncado
 
-`events` es una lista plana de `{ id, date, label, variant }`. Cada celda
+`events` es una lista plana de `{ id, date, label, tone }`, donde `tone` es el color de su `Tag` (`variant`, el nombre de antes, sigue como alias obsoleto hasta la v52). Cada celda
 enseña hasta `maxItemsPerDay` (3 por defecto) y resuelve el resto con un
 «+N más» que abre un `Modal` con el día completo.
 

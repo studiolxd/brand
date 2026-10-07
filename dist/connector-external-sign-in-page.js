@@ -34,7 +34,7 @@ function f({ platformName: f, organization: p, organizationDefaultValue: m, orga
 			children: [
 				y !== void 0 && /* @__PURE__ */ l(i, {
 					role: "alert",
-					variant: "error",
+					tone: "error",
 					description: y
 				}),
 				/* @__PURE__ */ u(a, {

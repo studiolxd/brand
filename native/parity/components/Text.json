@@ -26,6 +26,7 @@
       "values": [
         "default",
         "muted",
+        "error",
         "destructive",
         "success"
       ],

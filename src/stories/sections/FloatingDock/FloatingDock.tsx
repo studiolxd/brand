@@ -169,7 +169,7 @@ export function FloatingDock({
                   <NumberBadge
                     count={badge}
                     max={badgeMax}
-                    variant="danger"
+                    tone="error"
                     aria-hidden="true"
                     className="floating-dock__badge"
                   />

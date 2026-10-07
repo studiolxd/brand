@@ -27,17 +27,20 @@ El texto es el que se le pasa por `children`; el componente reenvía el resto de
 props del `<span>` (`data-*`, `aria-*`, `id`…) y concatena `className` al final,
 de modo que un consumidor pueda posicionarlo sin pelearse con la especificidad.
 
-## Variantes
+## Tonos
 
-Diez, en dos familias. Las de **marca** clasifican (a qué pertenece algo); las
+El color va en `tone`. Diez, en dos familias. Las de **marca** clasifican (a qué pertenece algo); las
 **semánticas** informan de un estado (en qué punto está).
 
 <Canvas of={TagStories.Marca} />
 
 <Canvas of={TagStories.Semanticas} />
 
-Sin `variant`, el tag es `neutral`. No hay una variante «default» aparte:
-`neutral` es el tag sin color de significado.
+Sin `tone`, el tag es `neutral`. No hay un tono «default» aparte:
+`neutral` es el tag sin color de significado. El rojo es `error`, la palabra
+de estado del sistema (`destructive` queda para las acciones).
+
+Hasta la v50 esta prop se llamaba `variant`: sigue funcionando como alias obsoleto, con un aviso en desarrollo, y se retira en la v52. `variant="danger"` es `tone="error"`.
 
 <Canvas of={TagStories.EnUso} />
 

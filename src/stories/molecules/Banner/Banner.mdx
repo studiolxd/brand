@@ -43,7 +43,11 @@ que la provocó sigue vigente.
 Los filetes van solo arriba y abajo. La barra ocupa el ancho completo: en los
 cantos laterales no hay nada de lo que separarla.
 
-## Variantes
+## Tonos
+
+La intención va en `tone`.
+
+Hasta la v50 esta prop se llamaba `variant`: sigue funcionando como alias obsoleto, con un aviso en desarrollo, y se retira en la v52.
 
 `info` (por defecto) es el relleno prusia, para el estado que no es un problema,
 solo un hecho que conviene tener delante. `warning` es el relleno de aviso del
@@ -101,7 +105,7 @@ ver § «Acciones».
 
 ## Accesibilidad
 
-- El rol sale de la variante, con el mismo criterio que en `Alert`: `warning` y
+- El rol sale del tono, con el mismo criterio que en `Alert`: `warning` y
   `error` interrumpen (`role="alert"`, `aria-live="assertive"`) e `info` informa
   sin interrumpir (`role="status"`, `aria-live="polite"`). Ambos se pueden
   sobrescribir con las props `role` y `aria-live`.

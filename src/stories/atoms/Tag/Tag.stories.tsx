@@ -12,10 +12,10 @@ const meta: Meta<typeof Tag> = {
     layout: 'padded',
   },
   argTypes: {
-    variant: {
+    tone: {
       control: { type: 'select' },
-      options: ['primary', 'accent-1', 'accent-2', 'support-1', 'support-2', 'neutral', 'info', 'warning', 'success', 'danger'],
-      description: 'Variante de color del tag.',
+      options: ['primary', 'accent-1', 'accent-2', 'support-1', 'support-2', 'neutral', 'info', 'warning', 'success', 'error'],
+      description: 'Color del tag.',
     },
     children: {
       control: { type: 'text' },
@@ -24,7 +24,7 @@ const meta: Meta<typeof Tag> = {
   },
   args: {
     children: 'E-learning',
-    variant: 'neutral',
+    tone: 'neutral',
   },
 };
 
@@ -44,11 +44,11 @@ export const PorDefecto: Story = {};
 export const Marca: Story = {
   render: () => (
     <div style={fila}>
-      <Tag variant="primary">Diseño instruccional</Tag>
-      <Tag variant="accent-1">Formación presencial</Tag>
-      <Tag variant="accent-2">Plataformas LMS</Tag>
-      <Tag variant="support-1">Consultoría</Tag>
-      <Tag variant="support-2">E-learning</Tag>
+      <Tag tone="primary">Diseño instruccional</Tag>
+      <Tag tone="accent-1">Formación presencial</Tag>
+      <Tag tone="accent-2">Plataformas LMS</Tag>
+      <Tag tone="support-1">Consultoría</Tag>
+      <Tag tone="support-2">E-learning</Tag>
     </div>
   ),
 };
@@ -58,11 +58,11 @@ export const Semanticas: Story = {
   name: 'Semánticas',
   render: () => (
     <div style={fila}>
-      <Tag variant="neutral">Por hacer</Tag>
-      <Tag variant="info">En progreso</Tag>
-      <Tag variant="warning">En pausa</Tag>
-      <Tag variant="success">Completado</Tag>
-      <Tag variant="danger">Cancelado</Tag>
+      <Tag tone="neutral">Por hacer</Tag>
+      <Tag tone="info">En progreso</Tag>
+      <Tag tone="warning">En pausa</Tag>
+      <Tag tone="success">Completado</Tag>
+      <Tag tone="error">Cancelado</Tag>
     </div>
   ),
 };
@@ -72,16 +72,16 @@ export const TodasLasVariantes: Story = {
   name: 'Todas las variantes',
   render: () => (
     <div style={fila}>
-      <Tag variant="primary">Diseño instruccional</Tag>
-      <Tag variant="accent-1">Formación presencial</Tag>
-      <Tag variant="accent-2">Plataformas LMS</Tag>
-      <Tag variant="support-1">Consultoría</Tag>
-      <Tag variant="support-2">E-learning</Tag>
-      <Tag variant="neutral">Por hacer</Tag>
-      <Tag variant="info">En progreso</Tag>
-      <Tag variant="warning">En pausa</Tag>
-      <Tag variant="success">Completado</Tag>
-      <Tag variant="danger">Cancelado</Tag>
+      <Tag tone="primary">Diseño instruccional</Tag>
+      <Tag tone="accent-1">Formación presencial</Tag>
+      <Tag tone="accent-2">Plataformas LMS</Tag>
+      <Tag tone="support-1">Consultoría</Tag>
+      <Tag tone="support-2">E-learning</Tag>
+      <Tag tone="neutral">Por hacer</Tag>
+      <Tag tone="info">En progreso</Tag>
+      <Tag tone="warning">En pausa</Tag>
+      <Tag tone="success">Completado</Tag>
+      <Tag tone="error">Cancelado</Tag>
     </div>
   ),
 };
@@ -92,22 +92,22 @@ export const EnUso: Story = {
   render: () => (
     <Stack gap="lg">
       <Stack>
-        <Paragraph size="small">Estados de proyecto</Paragraph>
+        <Paragraph size="sm">Estados de proyecto</Paragraph>
         <div style={fila}>
-          <Tag variant="neutral">Planificación</Tag>
-          <Tag variant="info">Activo</Tag>
-          <Tag variant="warning">En pausa</Tag>
-          <Tag variant="success">Completado</Tag>
-          <Tag variant="danger">Cancelado</Tag>
+          <Tag tone="neutral">Planificación</Tag>
+          <Tag tone="info">Activo</Tag>
+          <Tag tone="warning">En pausa</Tag>
+          <Tag tone="success">Completado</Tag>
+          <Tag tone="error">Cancelado</Tag>
         </div>
       </Stack>
       <Stack>
-        <Paragraph size="small">Prioridades de tarea</Paragraph>
+        <Paragraph size="sm">Prioridades de tarea</Paragraph>
         <div style={fila}>
-          <Tag variant="neutral">Baja</Tag>
-          <Tag variant="info">Media</Tag>
-          <Tag variant="warning">Alta</Tag>
-          <Tag variant="danger">Urgente</Tag>
+          <Tag tone="neutral">Baja</Tag>
+          <Tag tone="info">Media</Tag>
+          <Tag tone="warning">Alta</Tag>
+          <Tag tone="error">Urgente</Tag>
         </div>
       </Stack>
     </Stack>
@@ -124,16 +124,16 @@ export const SuperficieOscura: Story = {
   parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   render: () => (
     <div style={fila}>
-      <Tag variant="primary">Primaria</Tag>
-      <Tag variant="accent-1">Acento 1</Tag>
-      <Tag variant="accent-2">Acento 2</Tag>
-      <Tag variant="support-1">Soporte 1</Tag>
-      <Tag variant="support-2">Soporte 2</Tag>
-      <Tag variant="neutral">Neutral</Tag>
-      <Tag variant="info">Información</Tag>
-      <Tag variant="warning">Aviso</Tag>
-      <Tag variant="success">Éxito</Tag>
-      <Tag variant="danger">Peligro</Tag>
+      <Tag tone="primary">Primaria</Tag>
+      <Tag tone="accent-1">Acento 1</Tag>
+      <Tag tone="accent-2">Acento 2</Tag>
+      <Tag tone="support-1">Soporte 1</Tag>
+      <Tag tone="support-2">Soporte 2</Tag>
+      <Tag tone="neutral">Neutral</Tag>
+      <Tag tone="info">Información</Tag>
+      <Tag tone="warning">Aviso</Tag>
+      <Tag tone="success">Éxito</Tag>
+      <Tag tone="error">Peligro</Tag>
     </div>
   ),
 };
@@ -143,7 +143,7 @@ export const Contrato: Story = {
   name: 'Test — className + paso de props',
   tags: ['!dev'],
   render: () => (
-    <Tag variant="primary" className="extra" data-tono="marca" aria-label="estado">
+    <Tag tone="primary" className="extra" data-tono="marca" aria-label="estado">
       Activo
     </Tag>
   ),

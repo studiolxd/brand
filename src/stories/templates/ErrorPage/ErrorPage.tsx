@@ -56,7 +56,7 @@ export function ErrorPage({ title, description, homeAction, retryDescription, re
           {homeAction}
         </Stack>
         <Stack>
-          {retryDescription && <Paragraph size="large">{retryDescription}</Paragraph>}
+          {retryDescription && <Paragraph size="lg">{retryDescription}</Paragraph>}
           {retryAction}
         </Stack>
       </Columns>

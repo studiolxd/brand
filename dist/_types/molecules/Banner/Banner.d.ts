@@ -8,14 +8,22 @@ export interface BannerMessages {
     /** Nombre accesible del aspa que descarta la barra. */
     dismiss: string;
 }
-export type BannerVariant = 'info' | 'warning' | 'error';
+/** Intención de la barra: decide el relleno y el rol ARIA. */
+export type BannerTone = 'info' | 'warning' | 'error';
+/** @deprecated Usa `BannerTone`: la prop de color se llama `tone` desde la v51. Se retira en la v52. */
+export type BannerVariant = BannerTone;
 export interface BannerProps extends React.ComponentPropsWithoutRef<'div'> {
     /**
      * Intención de la barra. Default `'info'` (relleno prusia); `'warning'` es el
      * relleno de aviso y `'error'` el de error, para el estado que hay que ver
      * antes que nada.
      */
-    variant?: BannerVariant;
+    tone?: BannerTone;
+    /**
+     * @deprecated Usa `tone`. Sigue funcionando, con un aviso en desarrollo,
+     * hasta la v52.
+     */
+    variant?: BannerTone;
     /** El mensaje. Texto corriente: una frase, no un bloque. */
     children?: React.ReactNode;
     /** Ranura para las acciones — normalmente un `Button` del sistema. */
@@ -46,7 +54,7 @@ export interface BannerProps extends React.ComponentPropsWithoutRef<'div'> {
  * No fija su posición: `sticky` lo decide la aplicación con el layout del
  * sistema. Tampoco se oculta sola — `onDismiss` avisa y la app decide.
  *
- * El rol sale de la variante, como en `Alert`: `error` y `warning` interrumpen
+ * El rol sale del tono, como en `Alert`: `error` y `warning` interrumpen
  * (`alert`, live `assertive`) y `info` informa sin interrumpir (`status`, live
  * `polite`). Ambos se pueden sobrescribir.
  *

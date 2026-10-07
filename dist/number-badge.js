@@ -1,19 +1,23 @@
 import './number-badge.css';
-import { jsx as e } from "react/jsx-runtime";
+import { n as e } from "./_shared/env.js";
+import { jsx as t } from "react/jsx-runtime";
 //#region src/stories/atoms/NumberBadge/NumberBadge.tsx
-function t({ count: t, variant: n = "primary", max: r = 99, "aria-label": i, "aria-hidden": a, className: o }) {
-	let s = t > r ? `${r}+` : String(t), c = a === !0 || a === "true";
-	return /* @__PURE__ */ e("span", {
+function n({ count: n, tone: r, variant: i, max: a = 99, "aria-label": o, "aria-hidden": s, className: c }) {
+	i !== void 0 && e("NumberBadge", "variant", "`tone`");
+	let l = r ?? i ?? "primary";
+	l === "danger" && (e("NumberBadge", "variant=\"danger\"", "`tone=\"error\"`"), l = "error");
+	let u = l === "error" ? "danger" : l, d = n > a ? `${a}+` : String(n), f = s === !0 || s === "true";
+	return /* @__PURE__ */ t("span", {
 		className: [
 			"number-badge",
-			`number-badge--${n}`,
-			o
+			`number-badge--${u}`,
+			c
 		].filter(Boolean).join(" "),
-		"aria-hidden": c || void 0,
-		"aria-label": c ? void 0 : i ?? s,
-		"aria-atomic": c ? void 0 : !0,
-		children: s
+		"aria-hidden": f || void 0,
+		"aria-label": f ? void 0 : o ?? d,
+		"aria-atomic": f ? void 0 : !0,
+		children: d
 	});
 }
 //#endregion
-export { t as NumberBadge };
+export { n as NumberBadge };

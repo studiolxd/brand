@@ -12,7 +12,7 @@ const meta = {
   component: Alert,
   parameters: { layout: 'padded' },
   argTypes: {
-    variant: {
+    tone: {
       control: 'select',
       options: ['default', 'success', 'error', 'warning'],
       description: 'Intención del aviso. Decide el relleno y el rol ARIA.',
@@ -22,7 +22,7 @@ const meta = {
   },
   args: {
     title: 'Título del alert',
-    variant: 'default',
+    tone: 'default',
     dismissible: false,
   },
 } satisfies Meta<typeof Alert>;
@@ -37,9 +37,9 @@ export const Variantes: Story = {
   render: () => (
     <div style={{ display: 'grid', gap: '1rem' }}>
       <Alert title="Aviso" description="Información neutra sobre el estado de la página." />
-      <Alert variant="success" title="Operación completada" description="Los cambios se han guardado." />
-      <Alert variant="error" title="Ha ocurrido un error" description="No se ha podido guardar. Inténtalo de nuevo." />
-      <Alert variant="warning" title="Atención requerida" description="Algunos campos necesitan revisión." />
+      <Alert tone="success" title="Operación completada" description="Los cambios se han guardado." />
+      <Alert tone="error" title="Ha ocurrido un error" description="No se ha podido guardar. Inténtalo de nuevo." />
+      <Alert tone="warning" title="Atención requerida" description="Algunos campos necesitan revisión." />
     </div>
   ),
 };
@@ -64,9 +64,9 @@ export const Cerrable: Story = {
   render: () => (
     <div style={{ display: 'grid', gap: '1rem' }}>
       <Alert dismissible title="Este alert se puede cerrar" description="Pulsa el aspa para ocultarlo." />
-      <Alert dismissible variant="success" title="Guardado correctamente" description="Los cambios se han guardado." />
-      <Alert dismissible variant="error" title="No se ha podido guardar" description="Revisa la conexión." />
-      <Alert dismissible variant="warning" title="Revisa los datos" description="Algunos campos requieren tu atención." />
+      <Alert dismissible tone="success" title="Guardado correctamente" description="Los cambios se han guardado." />
+      <Alert dismissible tone="error" title="No se ha podido guardar" description="Revisa la conexión." />
+      <Alert dismissible tone="warning" title="Revisa los datos" description="Algunos campos requieren tu atención." />
     </div>
   ),
 };
@@ -74,7 +74,7 @@ export const Cerrable: Story = {
 /** Composición: subpartes y contenido arbitrario (enlaces, acciones) dentro del alert. */
 export const Composicion: Story = {
   render: () => (
-    <Alert variant="warning" dismissible>
+    <Alert tone="warning" dismissible>
       <Alert.Title>Tu sesión caduca en 5 minutos</Alert.Title>
       <Alert.Description>
         Guarda los cambios antes de que se cierre. Puedes <Link href="#renovar">renovar la sesión</Link>.
@@ -103,10 +103,10 @@ export const SuperficieOscura: Story = {
           <Link href="#detalle">Ver el detalle</Link>
         </Alert.Description>
       </Alert>
-      <Alert variant="success" title="Operación completada" />
-      <Alert variant="error" title="Ha ocurrido un error" />
+      <Alert tone="success" title="Operación completada" />
+      <Alert tone="error" title="Ha ocurrido un error" />
       <Alert
-        variant="warning"
+        tone="warning"
         title="Atención requerida"
         actions={<Button variant="outline" size="sm">Revisar</Button>}
       />
@@ -189,13 +189,13 @@ export const ContratoEnlacesEnTinta: Story = {
           <Link href="#b">sin tone</Link>.
         </Alert.Description>
       </Alert>
-      <Alert data-testid="warning" variant="warning" title="Atención">
+      <Alert data-testid="warning" tone="warning" title="Atención">
         <Alert.Description>
           Con enlaces: <Link href="#a" tone="accent">acento explícito</Link> y{' '}
           <Link href="#b">sin tone</Link>.
         </Alert.Description>
       </Alert>
-      <Alert data-testid="error" variant="error" title="Error">
+      <Alert data-testid="error" tone="error" title="Error">
         <Alert.Description>
           Con enlaces: <Link href="#a" tone="accent">acento explícito</Link> y{' '}
           <Link href="#b">sin tone</Link>.
@@ -233,7 +233,7 @@ export const NamedExports: Story = {
   name: 'Test — named exports (RSC-safe)',
   tags: ['!dev'],
   render: () => (
-    <Alert variant="success">
+    <Alert tone="success">
       <AlertTitle>Título</AlertTitle>
       <AlertDescription>Descripción</AlertDescription>
     </Alert>
@@ -254,7 +254,7 @@ export const Composition: Story = {
   name: 'Test — composición + rest-spread',
   tags: ['!dev'],
   render: () => (
-    <Alert variant="success" role="alert" id="aviso" className="extra">
+    <Alert tone="success" role="alert" id="aviso" className="extra">
       <Alert.Title>Guardado</Alert.Title>
       <Alert.Description>
         Los cambios se guardaron <strong>correctamente</strong>.
@@ -281,9 +281,9 @@ export const RolPorVariante: Story = {
   render: () => (
     <>
       <Alert data-testid="default" title="Aviso" />
-      <Alert data-testid="success" variant="success" title="Hecho" />
-      <Alert data-testid="error" variant="error" title="Error" />
-      <Alert data-testid="warning" variant="warning" title="Atención" />
+      <Alert data-testid="success" tone="success" title="Hecho" />
+      <Alert data-testid="error" tone="error" title="Error" />
+      <Alert data-testid="warning" tone="warning" title="Atención" />
     </>
   ),
   play: async ({ canvasElement }) => {
@@ -361,7 +361,7 @@ export const ContratoTrackingTitulo: Story = {
 export const ConAcciones: Story = {
   name: 'Con acciones',
   args: {
-    variant: 'warning',
+    tone: 'warning',
     title: 'Marcado para revisión',
     description: 'Alguien pidió revisar este envío antes de publicarlo.',
     actions: <Button variant="outline">Quitar marca de revisión</Button>,
@@ -378,7 +378,7 @@ export const AccionesEnMovil: Story = {
   name: 'Acciones en móvil',
   globals: { viewport: { value: 'mobile1' } },
   args: {
-    variant: 'default',
+    tone: 'default',
     title: 'Queda una cosa por hacer',
     description: 'Confirma tu dirección de correo para recibir los avisos.',
     actions: (
@@ -471,7 +471,7 @@ export const TextosDelProveedor: Story = {
     dismissible: true,
     title: 'Your changes were not saved',
     description: 'The connection dropped halfway through. Try again.',
-    variant: 'error',
+    tone: 'error',
   },
   render: (args) => (
     <BrandMessagesProvider messages={EN}>

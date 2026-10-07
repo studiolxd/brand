@@ -15,7 +15,7 @@ import { Link } from '../../atoms/Link/Link';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Skeleton } from '../../atoms/Skeleton/Skeleton';
 import { Stack } from '../../atoms/Stack/Stack';
-import { Tag, type TagVariant } from '../../atoms/Tag/Tag';
+import { Tag, type TagTone } from '../../atoms/Tag/Tag';
 import { TooltipProvider } from '../../atoms/Tooltip/Tooltip';
 import {
   CORTES,
@@ -97,34 +97,34 @@ export function StatusPage({ children, theme = 'light' }: StatusPageProps) {
 // ---------------------------------------------------------------------------
 
 /** El resumen de arriba, uno por salud del conjunto. */
-const RESUMEN: Record<SaludConjunto, { variant: 'success' | 'warning' | 'error' | 'default'; title: string; description: string }> = {
+const RESUMEN: Record<SaludConjunto, { tone: 'success' | 'warning' | 'error' | 'default'; title: string; description: string }> = {
   operational: {
-    variant: 'success',
+    tone: 'success',
     title: 'Servicio operativo',
     description: 'Todas las aplicaciones responden con normalidad.',
   },
   degraded: {
-    variant: 'warning',
+    tone: 'warning',
     title: 'Servicio parcialmente disponible',
     description: 'Algunas aplicaciones no están respondiendo; el resto funciona con normalidad.',
   },
   down: {
-    variant: 'error',
+    tone: 'error',
     title: 'Servicio caído',
     description: 'Ninguna aplicación está respondiendo a nuestras comprobaciones.',
   },
   unknown: {
-    variant: 'default',
+    tone: 'default',
     title: 'Servicio sin comprobar',
     description: 'Todavía no hemos podido comprobar si las aplicaciones funcionan.',
   },
 };
 
 /** El `Tag` de cada aplicación. */
-const SALUD: Record<SaludAplicacion, { variant: TagVariant; label: string }> = {
-  operational: { variant: 'success', label: 'Operativo' },
-  failing: { variant: 'danger', label: 'No responde' },
-  unknown: { variant: 'neutral', label: 'Sin datos' },
+const SALUD: Record<SaludAplicacion, { tone: TagTone; label: string }> = {
+  operational: { tone: 'success', label: 'Operativo' },
+  failing: { tone: 'error', label: 'No responde' },
+  unknown: { tone: 'neutral', label: 'Sin datos' },
 };
 
 /** Minutos que tiene una hora: la unidad en la que se cuenta lo caído. */
@@ -192,7 +192,7 @@ export function StatusBoard({ estado, salud = 'operational', aplicaciones = [] }
     return (
       <Container width="full" space="none" aria-live="polite">
         <Alert
-          variant="error"
+          tone="error"
           title="No podemos comprobar el servicio ahora mismo"
           description="No podemos decirte si las aplicaciones funcionan; posiblemente, todas funcionen con normalidad: prueba a entrar directamente o vuelve a cargar esta página dentro de unos minutos."
         />
@@ -208,9 +208,9 @@ export function StatusBoard({ estado, salud = 'operational', aplicaciones = [] }
           barrita abriría con su propio retardo. */}
       <TooltipProvider>
         <Stack gap="lg" align="stretch">
-          <Alert variant={resumen.variant} title={resumen.title} description={resumen.description} />
+          <Alert tone={resumen.tone} title={resumen.title} description={resumen.description} />
 
-          <Paragraph size="small">Última comprobación: {MOMENTO.format(HOY)}</Paragraph>
+          <Paragraph size="sm">Última comprobación: {MOMENTO.format(HOY)}</Paragraph>
 
           {aplicaciones.map((aplicacion) => (
             <AplicacionEnEstado key={aplicacion.id} aplicacion={aplicacion} />
@@ -249,7 +249,7 @@ function AplicacionEnEstado({ aplicacion }: { aplicacion: AplicacionEstado }) {
             </>
           )}
         </Heading>
-        <Tag variant={SALUD[salud].variant}>{SALUD[salud].label}</Tag>
+        <Tag tone={SALUD[salud].tone}>{SALUD[salud].label}</Tag>
       </Inline>
 
       <UptimeBars

@@ -160,7 +160,7 @@ export const ConversationList = forwardRef<HTMLDivElement, ConversationListProps
 
       <nav aria-label={t('nav', navLabel)} className="conversation-list__nav" aria-busy={isLoading || undefined}>
         {estado === 'error' && (
-          <Alert variant="error" title={t('error', errorTitle)} description={error} className="conversation-list__state" />
+          <Alert tone="error" title={t('error', errorTitle)} description={error} className="conversation-list__state" />
         )}
 
         {estado === 'loading' && (

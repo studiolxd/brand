@@ -17,7 +17,7 @@ const meta: Meta<typeof ProjectCard> = {
     title: 'Escuela de Grupo Mayo',
     description: 'Campus propio con certificaciones y ruta de carrera para 900 profesionales.',
     media: foto,
-    tags: [{ id: 'lms', label: 'Plataforma', variant: 'accent-1' }, { id: 'contenido', label: 'Contenidos' }],
+    tags: [{ id: 'lms', label: 'Plataforma', tone: 'accent-1' }, { id: 'contenido', label: 'Contenidos' }],
     href: '#proyecto',
   },
   argTypes: { className: { table: { disable: true } }, id: { table: { disable: true } } },

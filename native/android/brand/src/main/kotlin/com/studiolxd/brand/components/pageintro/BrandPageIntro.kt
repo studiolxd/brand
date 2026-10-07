@@ -33,7 +33,7 @@ import com.studiolxd.brand.tokens.BrandTextTokens
  * ```kotlin
  * BrandPageIntro(
  *     "Webhooks",
- *     eyebrow = { BrandTag("Beta", variant = TagVariant.Info) },
+ *     eyebrow = { BrandTag("Beta", tone = TagTone.Info) },
  *     description = "Reglas que se disparan solas cuando algo cambia.",
  *     actions = { BrandButton("Crear webhook", onClick = { create() }) },
  * )
@@ -112,7 +112,7 @@ internal fun BrandPageIntroImpl(
                     ) { actions() }
                 }
             }
-            if (description != null) BrandParagraph(description, size = ParagraphSize.Large)
+            if (description != null) BrandParagraph(description, size = ParagraphSize.Lg)
             if (content != null) {
                 if (description != null) Spacer(Modifier.height(BrandSpacing.s3))
                 content()

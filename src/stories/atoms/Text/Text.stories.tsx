@@ -10,7 +10,7 @@ const meta: Meta<typeof Text> = {
   parameters: { layout: 'padded' },
   argTypes: {
     as: { control: { type: 'inline-radio' }, options: ['span', 'em', 'strong'] },
-    tone: { control: { type: 'inline-radio' }, options: ['default', 'muted', 'destructive', 'success'] },
+    tone: { control: { type: 'inline-radio' }, options: ['default', 'muted', 'error', 'destructive', 'success'] },
   },
 };
 
@@ -39,6 +39,24 @@ export const OtroIdioma: Story = {
       <Paragraph>
         Un idioma de derecha a izquierda dentro de la frase necesita también su dirección:{' '}
         <Text lang="ar" dir="rtl">التعلم عن بعد</Text>.
+      </Paragraph>
+    </Stack>
+  ),
+};
+
+/**
+ * `error` frente a `destructive`: la misma tinta, dos cosas distintas. Un
+ * estado que ha fallado y el aviso de una acción que borra.
+ */
+export const ErrorFrenteADestructivo: Story = {
+  name: 'Error frente a destructivo',
+  render: () => (
+    <Stack>
+      <Paragraph>
+        El cupón <Text as="strong" tone="error">no es válido</Text>: caducó el 30 de junio.
+      </Paragraph>
+      <Paragraph>
+        Al confirmar se <Text as="strong" tone="destructive">borran</Text> las 42 respuestas ya enviadas.
       </Paragraph>
     </Stack>
   ),

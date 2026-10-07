@@ -129,7 +129,7 @@ function LauncherTile({ app, isCurrent, newLabel }: { app: LauncherApp; isCurren
           // Apagada, el distintivo va en neutro: una píldora de información
           // sobre una baldosa que no lleva a ningún sitio se leería como una
           // novedad disponible.
-          <Tag variant={app.disabled ? 'neutral' : 'info'} className="app-launcher__tile-badge">
+          <Tag tone={app.disabled ? 'neutral' : 'info'} className="app-launcher__tile-badge">
             {badge}
           </Tag>
         )}

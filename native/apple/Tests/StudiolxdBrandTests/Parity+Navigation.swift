@@ -4,7 +4,7 @@ import StudiolxdBrand
 /// nombre de la ficha → prop `union` → `rawValue` de los casos del enum.
 let navigationParity: [String: [String: [String]]] = [
     "Banner": [
-        "variant": BannerVariant.allCases.map(\.rawValue),
+        "tone": BannerTone.allCases.map(\.rawValue),
     ],
     // `Menu` y `TabsTrigger` solo tienen props de otro tipo (`excluded` y booleanos): no enumeran casos.
     "Menu": [:],

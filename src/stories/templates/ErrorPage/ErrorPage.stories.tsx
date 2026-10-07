@@ -82,7 +82,7 @@ export const Contrato: Story = {
     await expect(main).toHaveAttribute('id', 'main-content');
     await expect(main).toHaveAttribute('tabindex', '-1');
     await expect(within(main).getByRole('heading', { level: 1 })).toHaveTextContent('Error');
-    await expect(within(main).getByText('¡Ups! Algo ha salido mal.')).toHaveClass('paragraph--large');
+    await expect(within(main).getByText('¡Ups! Algo ha salido mal.')).toHaveClass('paragraph--lg');
     const contenido = main.querySelector('.error-page__content')!;
     await expect(contenido).toHaveClass('columns');
     await expect(within(contenido as HTMLElement).getByRole('link', { name: 'Volver al inicio' })).toBeInTheDocument();

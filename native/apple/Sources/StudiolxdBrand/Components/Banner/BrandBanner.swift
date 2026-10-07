@@ -1,10 +1,14 @@
 import SwiftUI
 
-/// `Banner` `variant`: la intención de la barra. `info` es el relleno prusia; `warning` y `error` son los rellenos de
+/// `Banner` `tone`: la intención de la barra. `info` es el relleno prusia; `warning` y `error` son los rellenos de
 /// aviso y de error, para el estado que hay que ver antes que nada.
-public enum BannerVariant: String, CaseIterable, Sendable {
+public enum BannerTone: String, CaseIterable, Sendable {
     case info, warning, error
 }
+
+/// El nombre de `BannerTone` hasta la v50. Se retira en la v52.
+@available(*, deprecated, renamed: "BannerTone")
+public typealias BannerVariant = BannerTone
 
 /// Una barra de sistema (`Banner` de React): un aviso persistente, a ancho completo, que acompaña a toda la sesión y
 /// vive **fuera** del contenido —el caso de referencia es «estás viendo la aplicación como alguien» con el botón de
@@ -14,7 +18,7 @@ public enum BannerVariant: String, CaseIterable, Sendable {
 /// BrandBanner(verbatim: "Estás viendo la aplicación como ana.perez@studiolxd.com.", onDismiss: { hide() }) {
 ///     BrandButton("Dejar de suplantar", variant: .outline) { stop() }
 /// }
-/// BrandBanner("El mantenimiento empieza hoy a las 22:00.", variant: .warning)
+/// BrandBanner("El mantenimiento empieza hoy a las 22:00.", tone: .warning)
 /// ```
 ///
 /// - **No fija su posición**: la app la coloca (arriba con `safeAreaInset`, o en la columna de la pantalla).
@@ -27,7 +31,7 @@ public enum BannerVariant: String, CaseIterable, Sendable {
 /// - VoiceOver: `error` y `warning` se anuncian como aviso (leídos antes que el resto, `updatesFrequently`) y `info`
 ///   informa sin interrumpir.
 public struct BrandBanner<Content: View, Actions: View>: View {
-    private let variant: BannerVariant
+    private let tone: BannerTone
     private let onDismiss: (() -> Void)?
     private let dismissLabel: LocalizedStringKey
     private let content: Content
@@ -44,13 +48,13 @@ public struct BrandBanner<Content: View, Actions: View>: View {
     ///   - content: el mensaje: texto corriente, una frase y no un bloque.
     ///   - actions: ranura de acciones, normalmente un `BrandButton`.
     public init(
-        variant: BannerVariant = .info,
+        tone: BannerTone = .info,
         onDismiss: (() -> Void)? = nil,
         dismissLabel: LocalizedStringKey = "Descartar",
         @ViewBuilder content: () -> Content,
         @ViewBuilder actions: () -> Actions
     ) {
-        self.variant = variant
+        self.tone = tone
         self.onDismiss = onDismiss
         self.dismissLabel = dismissLabel
         self.content = content()
@@ -59,7 +63,7 @@ public struct BrandBanner<Content: View, Actions: View>: View {
     }
 
     private var fill: (bg: Color, ink: Color, border: Color) {
-        switch variant {
+        switch tone {
         case .info: (T.infoBg, T.infoColor, T.infoBorderColor)
         case .warning: (T.warningBg, T.warningColor, T.warningBorderColor)
         case .error: (T.errorBg, T.errorColor, T.errorBorderColor)
@@ -68,7 +72,7 @@ public struct BrandBanner<Content: View, Actions: View>: View {
 
     /// La superficie de lo que se compone DENTRO del relleno (`.surface-dark` en `info` y `error`, `.surface-light` en
     /// `warning`): el relleno es el mismo en las dos superficies, así que su contenido no sigue a la de la página.
-    private var innerScheme: ColorScheme { variant == .warning ? .light : .dark }
+    private var innerScheme: ColorScheme { tone == .warning ? .light : .dark }
 
     /// El relleno del lado del aspa: con aspa, `close-inset × 2 + close-size` (`padding-inline-end` de
     /// `.banner--dismissible`, que sustituye al relleno lateral); sin ella, el relleno lateral de siempre.
@@ -110,7 +114,7 @@ public struct BrandBanner<Content: View, Actions: View>: View {
         }
         .accessibilityElement(children: .contain)
         .accessibilityAddTraits(.updatesFrequently)
-        .accessibilitySortPriority(variant == .info ? 0 : 1)
+        .accessibilitySortPriority(tone == .info ? 0 : 1)
     }
 
     private func message(ink: Color) -> some View {
@@ -140,12 +144,12 @@ public struct BrandBanner<Content: View, Actions: View>: View {
 extension BrandBanner where Actions == EmptyView {
     /// Una barra sin acciones.
     public init(
-        variant: BannerVariant = .info,
+        tone: BannerTone = .info,
         onDismiss: (() -> Void)? = nil,
         dismissLabel: LocalizedStringKey = "Descartar",
         @ViewBuilder content: () -> Content
     ) {
-        self.variant = variant
+        self.tone = tone
         self.onDismiss = onDismiss
         self.dismissLabel = dismissLabel
         self.content = content()
@@ -158,23 +162,23 @@ extension BrandBanner where Content == Text {
     /// Una barra con un mensaje de texto y, si hace falta, acciones.
     public init(
         _ message: LocalizedStringKey,
-        variant: BannerVariant = .info,
+        tone: BannerTone = .info,
         onDismiss: (() -> Void)? = nil,
         dismissLabel: LocalizedStringKey = "Descartar",
         @ViewBuilder actions: () -> Actions
     ) {
-        self.init(variant: variant, onDismiss: onDismiss, dismissLabel: dismissLabel, content: { Text(message) }, actions: actions)
+        self.init(tone: tone, onDismiss: onDismiss, dismissLabel: dismissLabel, content: { Text(message) }, actions: actions)
     }
 
     /// Para mensajes que salen de los datos (un correo, un nombre).
     public init(
         verbatim message: String,
-        variant: BannerVariant = .info,
+        tone: BannerTone = .info,
         onDismiss: (() -> Void)? = nil,
         dismissLabel: LocalizedStringKey = "Descartar",
         @ViewBuilder actions: () -> Actions
     ) {
-        self.init(variant: variant, onDismiss: onDismiss, dismissLabel: dismissLabel, content: { Text(verbatim: message) }, actions: actions)
+        self.init(tone: tone, onDismiss: onDismiss, dismissLabel: dismissLabel, content: { Text(verbatim: message) }, actions: actions)
     }
 }
 
@@ -182,20 +186,93 @@ extension BrandBanner where Content == Text, Actions == EmptyView {
     /// Una barra con un mensaje de texto y sin acciones.
     public init(
         _ message: LocalizedStringKey,
-        variant: BannerVariant = .info,
+        tone: BannerTone = .info,
         onDismiss: (() -> Void)? = nil,
         dismissLabel: LocalizedStringKey = "Descartar"
     ) {
-        self.init(variant: variant, onDismiss: onDismiss, dismissLabel: dismissLabel, content: { Text(message) })
+        self.init(tone: tone, onDismiss: onDismiss, dismissLabel: dismissLabel, content: { Text(message) })
     }
 
     public init(
         verbatim message: String,
-        variant: BannerVariant = .info,
+        tone: BannerTone = .info,
         onDismiss: (() -> Void)? = nil,
         dismissLabel: LocalizedStringKey = "Descartar"
     ) {
-        self.init(variant: variant, onDismiss: onDismiss, dismissLabel: dismissLabel, content: { Text(verbatim: message) })
+        self.init(tone: tone, onDismiss: onDismiss, dismissLabel: dismissLabel, content: { Text(verbatim: message) })
+    }
+}
+
+// MARK: - Alias obsoletos (v51): `variant` es `tone`. Se retiran en la v52.
+
+extension BrandBanner {
+    @available(*, deprecated, renamed: "init(tone:onDismiss:dismissLabel:content:actions:)")
+    public init(
+        variant: BannerTone,
+        onDismiss: (() -> Void)? = nil,
+        dismissLabel: LocalizedStringKey = "Descartar",
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder actions: () -> Actions
+    ) {
+        self.init(tone: variant, onDismiss: onDismiss, dismissLabel: dismissLabel, content: content, actions: actions)
+    }
+}
+
+extension BrandBanner where Actions == EmptyView {
+    @available(*, deprecated, renamed: "init(tone:onDismiss:dismissLabel:content:)")
+    public init(
+        variant: BannerTone,
+        onDismiss: (() -> Void)? = nil,
+        dismissLabel: LocalizedStringKey = "Descartar",
+        @ViewBuilder content: () -> Content
+    ) {
+        self.init(tone: variant, onDismiss: onDismiss, dismissLabel: dismissLabel, content: content)
+    }
+}
+
+extension BrandBanner where Content == Text {
+    @available(*, deprecated, renamed: "init(_:tone:onDismiss:dismissLabel:actions:)")
+    public init(
+        _ message: LocalizedStringKey,
+        variant: BannerTone,
+        onDismiss: (() -> Void)? = nil,
+        dismissLabel: LocalizedStringKey = "Descartar",
+        @ViewBuilder actions: () -> Actions
+    ) {
+        self.init(message, tone: variant, onDismiss: onDismiss, dismissLabel: dismissLabel, actions: actions)
+    }
+
+    @available(*, deprecated, renamed: "init(verbatim:tone:onDismiss:dismissLabel:actions:)")
+    public init(
+        verbatim message: String,
+        variant: BannerTone,
+        onDismiss: (() -> Void)? = nil,
+        dismissLabel: LocalizedStringKey = "Descartar",
+        @ViewBuilder actions: () -> Actions
+    ) {
+        self.init(verbatim: message, tone: variant, onDismiss: onDismiss, dismissLabel: dismissLabel, actions: actions)
+    }
+}
+
+extension BrandBanner where Content == Text, Actions == EmptyView {
+    @available(*, deprecated, renamed: "init(_:tone:onDismiss:dismissLabel:)")
+    public init(
+        _ message: LocalizedStringKey,
+        variant: BannerTone,
+        onDismiss: (() -> Void)? = nil,
+        dismissLabel: LocalizedStringKey = "Descartar"
+    ) {
+        self.init(message, tone: variant, onDismiss: onDismiss, dismissLabel: dismissLabel)
+    }
+
+    @available(*, deprecated, renamed: "init(verbatim:tone:onDismiss:dismissLabel:)")
+    public init(
+        verbatim message: String,
+        variant: BannerTone,
+        onDismiss: (() -> Void)? = nil,
+        dismissLabel: LocalizedStringKey = "Descartar"
+    ) {
+        self.init(verbatim: message, tone: variant, onDismiss: onDismiss, dismissLabel: dismissLabel)
     }
 }
 
@@ -203,15 +280,15 @@ extension BrandBanner where Content == Text, Actions == EmptyView {
     ScrollView {
         VStack(spacing: BrandSpacing.s5) {
             BrandBanner(verbatim: "Estás viendo la aplicación como ana.perez@studiolxd.com.")
-            BrandBanner("El mantenimiento previsto empieza hoy a las 22:00 y durará una hora.", variant: .warning)
-            BrandBanner("No hemos podido guardar los cambios. Revisa la conexión.", variant: .error)
+            BrandBanner("El mantenimiento previsto empieza hoy a las 22:00 y durará una hora.", tone: .warning)
+            BrandBanner("No hemos podido guardar los cambios. Revisa la conexión.", tone: .error)
             BrandBanner(verbatim: "Estás viendo la aplicación como ana.perez@studiolxd.com.") {
                 BrandButton("Dejar de suplantar", variant: .outline) {}
             }
             BrandBanner(verbatim: "Estás viendo la aplicación como ana.perez@studiolxd.com.", onDismiss: {}) {
                 BrandButton("Dejar de suplantar", variant: .outline) {}
             }
-            BrandBanner("El mantenimiento empieza a las 22:00.", variant: .warning, onDismiss: {}) {
+            BrandBanner("El mantenimiento empieza a las 22:00.", tone: .warning, onDismiss: {}) {
                 BrandButton("Más información", variant: .outline) {}
             }
         }

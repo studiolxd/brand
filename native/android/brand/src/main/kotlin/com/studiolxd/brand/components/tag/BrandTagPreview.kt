@@ -10,7 +10,7 @@ import com.studiolxd.brand.tokens.BrandSpacing
 @Composable
 internal fun TagPreviewContent() {
     Column(verticalArrangement = Arrangement.spacedBy(BrandSpacing.s2)) {
-        TagVariant.entries.forEach { variant -> BrandTag(variant.value, variant = variant) }
+        TagTone.entries.forEach { tone -> BrandTag(tone.value, tone = tone) }
     }
 }
 

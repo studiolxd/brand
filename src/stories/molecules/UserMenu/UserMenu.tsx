@@ -87,7 +87,7 @@ export function UserMenu({
             {!!notificationCount && notificationCount > 0 && (
               <NumberBadge
                 count={notificationCount}
-                variant="danger"
+                tone="error"
                 aria-label={t('unread')(notificationCount)}
                 className="user-menu__notification-badge"
               />

@@ -92,7 +92,7 @@ public struct BrandPageIntro<Eyebrow: View, Content: View, Actions: View>: View 
             // entradilla sino de un botón y la separación la pone el espaciado entre bloques.
             let gapBelowHeading = actions != nil && stacked ? BrandSpacing.s3 : spaceAfterTitle
             if let description {
-                BrandParagraph(description, size: .large)
+                BrandParagraph(description, size: .lg)
                     .padding(.top, gapBelowHeading)
             }
             if let content {
@@ -187,7 +187,7 @@ extension BrandPageIntro {
             })
             BrandPageIntro("Automatizaciones", description: "Reglas que se disparan solas cuando algo cambia en la organización.",
                            eyebrow: { BrandTag("Beta") },
-                           content: { BrandParagraph("Disponible solo para el plan Studio.", size: .small) })
+                           content: { BrandParagraph("Disponible solo para el plan Studio.", size: .sm) })
             BrandPageIntro("Ajustes", level: .h2, size: .s5, description: "Un h2 con el tamaño de un h4.")
         }
         .padding()

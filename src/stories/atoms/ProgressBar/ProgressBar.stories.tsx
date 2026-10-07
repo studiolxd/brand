@@ -17,10 +17,10 @@ const meta: Meta<typeof ProgressBar> = {
       control: { type: 'range', min: 0, max: 100, step: 1 },
       description: 'Porcentaje completado (0–100).',
     },
-    variant: {
+    tone: {
       control: { type: 'select' },
       options: ['primary', 'accent-1', 'accent-2', 'support-1', 'support-2'],
-      description: 'Variante de color del relleno.',
+      description: 'Color del relleno.',
     },
     size: {
       control: { type: 'inline-radio' },
@@ -34,7 +34,7 @@ const meta: Meta<typeof ProgressBar> = {
   },
   args: {
     value: 65,
-    variant: 'primary',
+    tone: 'primary',
     size: 'md',
     label: 'Progreso del proyecto',
   },
@@ -55,11 +55,11 @@ export const PorDefecto: Story = {};
 export const Variantes: Story = {
   render: () => (
     <div style={columna}>
-      <ProgressBar value={65} variant="primary" label="Primaria" />
-      <ProgressBar value={65} variant="accent-1" label="Acento 1" />
-      <ProgressBar value={65} variant="accent-2" label="Acento 2" />
-      <ProgressBar value={65} variant="support-1" label="Soporte 1" />
-      <ProgressBar value={65} variant="support-2" label="Soporte 2" />
+      <ProgressBar value={65} tone="primary" label="Primaria" />
+      <ProgressBar value={65} tone="accent-1" label="Acento 1" />
+      <ProgressBar value={65} tone="accent-2" label="Acento 2" />
+      <ProgressBar value={65} tone="support-1" label="Soporte 1" />
+      <ProgressBar value={65} tone="support-2" label="Soporte 2" />
     </div>
   ),
 };
@@ -107,10 +107,10 @@ export const SuperficieOscura: Story = {
   parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   render: () => (
     <div style={columna}>
-      <ProgressBar value={65} variant="primary" label="Primaria" />
-      <ProgressBar value={65} variant="accent-1" label="Acento 1" />
-      <ProgressBar value={65} variant="accent-2" label="Acento 2" />
-      <ProgressBar value={8} variant="primary" label="Valor bajo" />
+      <ProgressBar value={65} tone="primary" label="Primaria" />
+      <ProgressBar value={65} tone="accent-1" label="Acento 1" />
+      <ProgressBar value={65} tone="accent-2" label="Acento 2" />
+      <ProgressBar value={8} tone="primary" label="Valor bajo" />
     </div>
   ),
 };
@@ -160,7 +160,7 @@ export const ContratoCifraDentroEnOscuro: Story = {
   name: 'Test — la cifra de dentro contrasta en oscuro',
   tags: ['!dev'],
   parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
-  args: { value: 65, variant: 'primary', label: 'Progreso' },
+  args: { value: 65, tone: 'primary', label: 'Progreso' },
   play: async ({ canvasElement }) => {
     const relleno = canvasElement.querySelector('.progress-bar__fill') as HTMLElement;
     const cifra = canvasElement.querySelector('.progress-bar__label--inside') as HTMLElement;

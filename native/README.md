@@ -249,7 +249,7 @@ Form { … }.brandControlSize(.lg)          // la talla por defecto de los contr
 ```swift
 BrandHeading("Tus viviendas")                          // h2; VoiceOver lo anuncia como encabezado de ese nivel
 BrandHeading("Resumen", level: .h2, size: .s5)         // un h2 con el tamaño de un h4
-BrandParagraph("Revisa los datos.", size: .small)
+BrandParagraph("Revisa los datos.", size: .sm)
 BrandParagraph(Text("Esta acción ") + Text("borra").brand(.strong, tone: .destructive) + Text(" el curso."))
 BrandIcon(.search)                                     // xs 8 · sm 16 · md 24 · lg 48 · xl 64 · text = 1em
 ```
@@ -287,7 +287,7 @@ búsqueda, solo lectura y error. `BrandSelectField` abre un `Menu` nativo y admi
 ### Interruptores, grupos de botones, tema y etiquetas
 
 ```swift
-BrandTag("Pagado", variant: .success)                                    // las diez variantes de React
+BrandTag("Pagado", tone: .success)                                       // los diez tonos de React
 Toggle("Notificaciones", isOn: $on).toggleStyle(.brandSwitch(size: .sm))
 BrandSwitcherField("Acepto las condiciones", isOn: $accepted, errorMessage: "Debes aceptarlas.")
 
@@ -353,7 +353,7 @@ tres.
 ### Avisos, menús, pestañas, fechas y cabeceras de página
 
 ```swift
-BrandBanner("Sin conexión · 3 pendientes", variant: .warning) {                    // franja a ancho completo; `onDismiss:` pinta el aspa
+BrandBanner("Sin conexión · 3 pendientes", tone: .warning) {                       // franja a ancho completo; `onDismiss:` pinta el aspa
     BrandButton("Reintentar", variant: .outline, size: .sm) { retry() }
 }
 BrandContextMenu([                                                               // el botón «⋯»; el panel es el `Menu` del sistema
@@ -417,7 +417,7 @@ ProvideBrandControlSize(BrandControlSize.Lg) { /* la talla por defecto de los co
 
 BrandHeading("Tus viviendas")                                    // h2; TalkBack lo anuncia como encabezado
 BrandHeading("Resumen", level = HeadingLevel.H2, size = HeadingSize.S5)
-BrandParagraph("Revisa los datos.", size = ParagraphSize.Small)
+BrandParagraph("Revisa los datos.", size = ParagraphSize.Sm)
 BrandParagraph(buildAnnotatedString {
     append("Esta acción "); withStyle(brandSpanStyle(TextElement.Strong, TextTone.Destructive)) { append("borra") }; append(" el curso.")
 })
@@ -466,7 +466,7 @@ BrandList(type = ListType.Plain, showSeparators = true) {
             trailing = { BrandIcon(BrandIconName.Chevron, size = BrandIconSize.Sm) }, onClick = { open() }) { BrandText("Notificaciones") }
     }
 }
-BrandTag("Pagado", variant = TagVariant.Success)                                // las diez variantes de React
+BrandTag("Pagado", tone = TagTone.Success)                                      // los diez tonos de React
 BrandEmptyState(title = "Sin viviendas", description = "Añade tu primera vivienda para empezar.",
     icon = BrandIconName.Folder, action = EmptyStateAction("Añadir vivienda") { add() })
 BrandSkeleton(width = 160.dp)                       // `circle = true` para un avatar; con «quitar animaciones», fondo plano
@@ -502,7 +502,7 @@ val saved = ToastCenter.shared.promise(loading = "Guardando…", success = { "Gu
 ### Avisos, menús, pestañas, fechas y cabeceras de página
 
 ```kotlin
-BrandBanner("Sin conexión · 3 pendientes", variant = BannerVariant.Warning, actions = { BrandButton("Reintentar", onClick = { retry() }, variant = ButtonVariant.Outline) })
+BrandBanner("Sin conexión · 3 pendientes", tone = BannerTone.Warning, actions = { BrandButton("Reintentar", onClick = { retry() }, variant = ButtonVariant.Outline) })
 BrandContextMenu(listOf(BrandMenuItem.Button("Editar", action = { edit() }), BrandMenuItem.Separator, BrandMenuItem.Button("Eliminar", action = { delete() }, destructive = true)))
 BrandTabs(selection = tab, onSelectionChange = { tab = it }) { tab("Resumen", Tab.Summary); tab("Gastos", Tab.Expenses) }   // solo la barra
 BrandDatePickerField("Caduca", value = expiry, onValueChange = { expiry = it }, minDate = today)                         // `LocalDate?`; `DatePickerDialog` del sistema

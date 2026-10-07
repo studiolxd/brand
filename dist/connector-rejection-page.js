@@ -22,7 +22,7 @@ function l({ title: l, description: u, hint: d, code: f, codeLabel: p, retryHref
 		title: l,
 		description: u,
 		intro: f === void 0 ? void 0 : /* @__PURE__ */ s(i, {
-			size: "small",
+			size: "sm",
 			children: [
 				E("code", p),
 				": ",
@@ -40,7 +40,7 @@ function l({ title: l, description: u, hint: d, code: f, codeLabel: p, retryHref
 		children: /* @__PURE__ */ s(n, {
 			align: "stretch",
 			children: [/* @__PURE__ */ o(i, {
-				size: "large",
+				size: "lg",
 				children: d
 			}), D]
 		})

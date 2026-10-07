@@ -11,8 +11,8 @@ const meta: Meta<typeof Paragraph> = {
   argTypes: {
     size: {
       control: { type: 'select' },
-      options: ['small', 'default', 'large'],
-      description: 'Tamaño del texto del párrafo.',
+      options: ['sm', 'md', 'lg'],
+      description: 'Talla del párrafo.',
     },
     children: {
       control: { type: 'text' },
@@ -21,7 +21,7 @@ const meta: Meta<typeof Paragraph> = {
   },
   args: {
     children: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
-    size: 'default',
+    size: 'md',
   },
 };
 
@@ -31,19 +31,19 @@ type Story = StoryObj<typeof Paragraph>;
 export const PorDefecto: Story = {};
 
 export const Pequeno: Story = {
-  args: { size: 'small' },
+  args: { size: 'sm' },
 };
 
 export const Grande: Story = {
-  args: { size: 'large' },
+  args: { size: 'lg' },
 };
 
 export const Tamanos: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <Paragraph size="small">Small — Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Paragraph>
-      <Paragraph size="default">Default — Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Paragraph>
-      <Paragraph size="large">Large — Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Paragraph>
+      <Paragraph size="sm">Small — Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Paragraph>
+      <Paragraph size="md">Default — Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Paragraph>
+      <Paragraph size="lg">Large — Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Paragraph>
     </div>
   ),
 };
@@ -54,8 +54,8 @@ export const ContratoTamanos: Story = {
   render: () => (
     <div>
       <Paragraph>Cuerpo</Paragraph>
-      <Paragraph size="small">Pequeño</Paragraph>
-      <Paragraph size="large">Grande</Paragraph>
+      <Paragraph size="sm">Pequeño</Paragraph>
+      <Paragraph size="lg">Grande</Paragraph>
     </div>
   ),
   play: async ({ canvasElement }) => {

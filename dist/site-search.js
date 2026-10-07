@@ -135,7 +135,7 @@ var f = {
 			}) : null,
 			_ === "error" ? /* @__PURE__ */ u(i, {
 				className: "site-search__error",
-				variant: "error",
+				tone: "error",
 				title: B("errorTitle"),
 				description: B("errorDescription"),
 				actions: C ? /* @__PURE__ */ u(n, {

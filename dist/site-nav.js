@@ -48,7 +48,7 @@ function l({ groups: l, label: u, renderLink: d = r, className: f }) {
 						rel: s(e.target, e.rel),
 						children: e.label
 					}), e.badge && /* @__PURE__ */ i(n, {
-						variant: e.disabled ? "neutral" : "info",
+						tone: e.disabled ? "neutral" : "info",
 						className: "site-nav__badge",
 						children: e.badge
 					})]

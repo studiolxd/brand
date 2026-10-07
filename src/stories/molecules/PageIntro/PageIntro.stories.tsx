@@ -45,14 +45,14 @@ export const ConEyebrow: Story = {
     <main>
       <Stack gap="lg">
         <PageIntro
-          eyebrow={<Tag variant="info">Beta</Tag>}
+          eyebrow={<Tag tone="info">Beta</Tag>}
           title="Automatizaciones"
           description="Reglas que se disparan solas cuando algo cambia en la organización."
         >
           <Paragraph>Disponible solo para el plan Studio.</Paragraph>
         </PageIntro>
         <PageIntro
-          eyebrow={<Tag variant="info">Beta</Tag>}
+          eyebrow={<Tag tone="info">Beta</Tag>}
           title="Webhooks"
           actions={<Button>Crear webhook</Button>}
         />
@@ -178,7 +178,7 @@ type Member = { id: string; name: string; email: string; role: string };
 const columns: ColumnDef<Member, unknown>[] = [
   { accessorKey: 'name', header: 'Nombre' },
   { accessorKey: 'email', header: 'Correo' },
-  { accessorKey: 'role', header: 'Rol', cell: ({ row }) => <Tag variant="neutral">{row.original.role}</Tag> },
+  { accessorKey: 'role', header: 'Rol', cell: ({ row }) => <Tag tone="neutral">{row.original.role}</Tag> },
 ];
 
 const members: Member[] = [
@@ -231,7 +231,7 @@ export const Contrato: Story = {
     await expect(header).toBeInTheDocument();
     await expect(canvas.getByRole('heading', { level: 1 })).toHaveTextContent('¿Olvidaste tu contraseña?');
     const lead = canvas.getByText(/Ingresa tu correo/);
-    await expect(lead).toHaveClass('paragraph--large');
+    await expect(lead).toHaveClass('paragraph--lg');
   },
 };
 

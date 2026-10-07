@@ -8,13 +8,21 @@ export interface ProgressBarMessages {
     /** Nombre accesible de la barra cuando la pantalla no dice qué avanza. */
     label: string;
 }
-export type ProgressBarVariant = 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
+/** Color del relleno. */
+export type ProgressBarTone = 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
+/** @deprecated Usa `ProgressBarTone`: la prop de color se llama `tone` desde la v51. Se retira en la v52. */
+export type ProgressBarVariant = ProgressBarTone;
 export type ProgressBarSize = 'sm' | 'md' | 'lg';
 export interface ProgressBarProps {
     /** Porcentaje completado (0–100). Se acota al rango y se redondea al entero más cercano. */
     value: number;
-    /** Variante de color del relleno. */
-    variant?: ProgressBarVariant;
+    /** Color del relleno. Default `'primary'`. */
+    tone?: ProgressBarTone;
+    /**
+     * @deprecated Usa `tone`. Sigue funcionando, con un aviso en desarrollo,
+     * hasta la v52.
+     */
+    variant?: ProgressBarTone;
     /** Talla de la barra. En `sm` no se muestra la cifra. */
     size?: ProgressBarSize;
     /**
@@ -26,4 +34,4 @@ export interface ProgressBarProps {
     /** Clases adicionales para el contenedor. */
     className?: string;
 }
-export declare function ProgressBar({ value, variant, size, label, className, }: ProgressBarProps): import("react/jsx-runtime").JSX.Element;
+export declare function ProgressBar({ value, tone: toneProp, variant, size, label, className, }: ProgressBarProps): import("react/jsx-runtime").JSX.Element;

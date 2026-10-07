@@ -2,12 +2,14 @@
   "text-inline": {
     "emphasis-font-weight":  { "$value": "{font-weight.emphasis}",       "$type": "number", "$description": "Peso del énfasis fuerte en línea" },
     "muted-color":           { "$value": "{color.text.muted-on-light}",  "$type": "color",  "$description": "Texto secundario en línea: una aclaración, un metadato" },
-    "destructive-color":     { "$value": "{color.destructive-text-on-light}", "$type": "color", "$description": "Énfasis en línea con intención destructiva: la palabra que dice que algo se pierde. Es tinta sobre la superficie, nunca un relleno" },
+    "error-color":           { "$value": "{color.error-text-on-light}", "$type": "color", "$description": "Énfasis en línea de error: un estado que ha fallado («cupón rechazado»). Es tinta sobre la superficie, nunca un relleno" },
+    "destructive-color":     { "$value": "{color.destructive-text-on-light}", "$type": "color", "$description": "Énfasis en línea con intención destructiva: la palabra que avisa de que una acción hace perder algo («esta acción **borra** el curso»). Es tinta sobre la superficie, nunca un relleno" },
     "success-color":         { "$value": "{color.success-text-on-light}", "$type": "color",  "$description": "Énfasis en línea con intención de logro" },
     "strikethrough-color":   { "$value": "{color.text.muted-on-light}",  "$type": "color",  "$description": "Texto tachado: lo que ya está hecho (un producto en el carrito) o ya no vale. Atenuado como el texto secundario; con un `tone` manda el tono" },
     "strikethrough-thickness": { "$value": "{border-width.default}",     "$type": "dimension", "$description": "Grosor de la línea del tachado: el de los demás trazos del sistema" },
     "surface-dark-strikethrough-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Texto tachado — surface-dark" },
     "surface-dark-muted-color":       { "$value": "{color.text.muted-on-dark}",       "$type": "color", "$description": "Texto secundario en línea — surface-dark" },
+    "surface-dark-error-color":       { "$value": "{color.error-text-on-dark}",       "$type": "color", "$description": "Énfasis de error — surface-dark" },
     "surface-dark-destructive-color": { "$value": "{color.destructive-text-on-dark}", "$type": "color", "$description": "Énfasis destructivo — surface-dark" },
     "surface-dark-success-color":     { "$value": "{color.success-text-on-dark}",     "$type": "color", "$description": "Énfasis de logro — surface-dark" }
   }

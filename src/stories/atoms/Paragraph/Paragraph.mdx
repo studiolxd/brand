@@ -7,17 +7,19 @@ import { paragraphSizeTokens } from "../../../tokens/components/text";
 
 # Paragraph
 
-Texto de cuerpo. Tres tamaños: `small` para notas y metadatos, el de defecto para leer, y `large` para entradillas y textos de portada. Sin márgenes: el espacio entre párrafos lo pone la maqueta.
+Texto de cuerpo. Tres tallas: `sm` para notas y metadatos, `md` (la de defecto) para leer, y `lg` para entradillas y textos de portada. Sin márgenes: el espacio entre párrafos lo pone la maqueta.
 
-Un `<p>` crudo se ve exactamente igual que un `<Paragraph>` por defecto: el cuerpo lo pone la base (`body`, tokens `--text-*`), y llega al HTML que no pasa por componentes (contenido de CMS, markdown). El componente solo añade las variantes de tamaño.
+Un `<p>` crudo se ve exactamente igual que un `<Paragraph>` por defecto: el cuerpo lo pone la base (`body`, tokens `--text-*`), y llega al HTML que no pasa por componentes (contenido de CMS, markdown). El componente solo añade las tallas `sm` y `lg`.
 
 <Canvas of={ParagraphStories.PorDefecto} />
 
 ## Tamaños
 
-Los tres son **peldaños relativos al cuerpo de la superficie**, no tamaños fijos: `small` es un paso por debajo y `large` uno por encima, con su interlineado —relajado el pequeño, ceñido el grande—. En la superficie de aplicación son 14 y 20px; dentro de un `SiteShell`, donde el cuerpo lee a 20px, son 16 y 24px. La regla de las dos escalas está en Foundations → Tipografía; los valores base, en la tabla de tokens.
+Los tres son **peldaños relativos al cuerpo de la superficie**, no tamaños fijos: `sm` es un paso por debajo y `lg` uno por encima, con su interlineado —relajado el pequeño, ceñido el grande—. En la superficie de aplicación son 14 y 20px; dentro de un `SiteShell`, donde el cuerpo lee a 20px, son 16 y 24px. La regla de las dos escalas está en Foundations → Tipografía; los valores base, en la tabla de tokens.
 
 <Canvas of={ParagraphStories.Tamanos} />
+
+Hasta la v50 las tallas se llamaban `small`, `default` y `large`: siguen funcionando como alias obsoletos de `sm`, `md` y `lg`, con un aviso en desarrollo, y se retiran en la v52. Las tallas del sistema se escriben siempre con la escala `xs`…`4xl`, nunca con palabras.
 
 ## Medida
 

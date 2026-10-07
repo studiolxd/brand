@@ -31,7 +31,7 @@ export const Estados: Story = {
 };
 
 const TONES: StepMarkerTone[] = [
-  'primary', 'accent-1', 'accent-2', 'support-1', 'support-2', 'danger', 'success', 'neutral',
+  'primary', 'accent-1', 'accent-2', 'support-1', 'support-2', 'error', 'success', 'neutral',
 ];
 
 /** El tono solo pinta los estados rellenos: `pending` es siempre hueco, sin tono. */

@@ -1,13 +1,17 @@
 import SwiftUI
 
-/// `Tag` `variant`: la variante de color. Mismos casos y mismos valores que React.
-public enum TagVariant: String, CaseIterable, Sendable {
+/// `Tag` `tone`: el color del tag. Mismos casos y mismos valores que React.
+public enum TagTone: String, CaseIterable, Sendable {
     case primary
     case accent1 = "accent-1"
     case accent2 = "accent-2"
     case support1 = "support-1"
     case support2 = "support-2"
-    case neutral, info, warning, success, danger
+    case neutral, info, warning, success, error
+
+    /// `danger` es `error` desde la v51 (el vocabulario de estado del sistema). Se retira en la v52.
+    @available(*, deprecated, renamed: "error")
+    public static let danger = TagTone.error
 
     fileprivate var colors: (background: Color, foreground: Color) {
         typealias T = BrandTagTokens
@@ -21,31 +25,41 @@ public enum TagVariant: String, CaseIterable, Sendable {
         case .info: (T.infoBg, T.infoColor)
         case .warning: (T.warningBg, T.warningColor)
         case .success: (T.successBg, T.successColor)
-        case .danger: (T.dangerBg, T.dangerColor)
+        case .error: (T.dangerBg, T.dangerColor)
         }
     }
 }
+
+/// El nombre de `TagTone` hasta la v50. Se retira en la v52.
+@available(*, deprecated, renamed: "TagTone")
+public typealias TagVariant = TagTone
 
 /// Una etiqueta de la marca (el `Tag` de React): texto corto sobre un relleno de color, de esquinas totalmente
 /// redondeadas. Los pares fondo/texto salen de `tag.*`; los de `primary` e `info` se invierten en oscuro.
 ///
 /// ```swift
-/// BrandTag("Administrador", variant: .primary)
-/// BrandTag("Pagado", variant: .success)
+/// BrandTag("Administrador", tone: .primary)
+/// BrandTag("Pagado", tone: .success)
 /// ```
 ///
 /// Es solo texto: para VoiceOver se lee como una frase más (no es un control).
 public struct BrandTag<Content: View>: View {
-    private let variant: TagVariant
+    private let tone: TagTone
     private let content: Content
 
-    public init(variant: TagVariant = .neutral, @ViewBuilder content: () -> Content) {
-        self.variant = variant
+    public init(tone: TagTone = .neutral, @ViewBuilder content: () -> Content) {
+        self.tone = tone
         self.content = content()
     }
 
+    /// `variant` es `tone` desde la v51. Se retira en la v52.
+    @available(*, deprecated, renamed: "init(tone:content:)")
+    public init(variant: TagTone, @ViewBuilder content: () -> Content) {
+        self.init(tone: variant, content: content)
+    }
+
     public var body: some View {
-        let colors = variant.colors
+        let colors = tone.colors
         content
             .brandLinedFont(size: BrandTagTokens.fontSize, weight: BrandTagTokens.fontWeight, lineHeight: BrandTagTokens.lineHeight,
                             relativeTo: .footnote)
@@ -60,20 +74,32 @@ public struct BrandTag<Content: View>: View {
 }
 
 extension BrandTag where Content == Text {
-    public init(_ title: LocalizedStringKey, variant: TagVariant = .neutral) {
-        self.init(variant: variant) { Text(title) }
+    public init(_ title: LocalizedStringKey, tone: TagTone = .neutral) {
+        self.init(tone: tone) { Text(title) }
     }
 
     /// Para nombres que salen de los datos (una tienda, un miembro).
-    public init(verbatim title: String, variant: TagVariant = .neutral) {
-        self.init(variant: variant) { Text(verbatim: title) }
+    public init(verbatim title: String, tone: TagTone = .neutral) {
+        self.init(tone: tone) { Text(verbatim: title) }
+    }
+
+    /// `variant` es `tone` desde la v51. Se retira en la v52.
+    @available(*, deprecated, renamed: "init(_:tone:)")
+    public init(_ title: LocalizedStringKey, variant: TagTone) {
+        self.init(title, tone: variant)
+    }
+
+    /// `variant` es `tone` desde la v51. Se retira en la v52.
+    @available(*, deprecated, renamed: "init(verbatim:tone:)")
+    public init(verbatim title: String, variant: TagTone) {
+        self.init(verbatim: title, tone: variant)
     }
 }
 
 #Preview("Tag") {
     VStack(alignment: .leading, spacing: BrandSpacing.s2) {
-        ForEach(TagVariant.allCases, id: \.self) { variant in
-            BrandTag(verbatim: variant.rawValue, variant: variant)
+        ForEach(TagTone.allCases, id: \.self) { tone in
+            BrandTag(verbatim: tone.rawValue, tone: tone)
         }
     }
     .padding()

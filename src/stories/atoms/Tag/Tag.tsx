@@ -1,13 +1,40 @@
 import { forwardRef } from 'react';
+import { warnDeprecated } from '../../constants/env';
 import './Tag.css';
 
-export type TagVariant =
+/** Color del tag: los de marca, `neutral` y los de feedback. */
+export type TagTone =
   | 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2'
-  | 'neutral' | 'info' | 'warning' | 'success' | 'danger';
+  | 'neutral' | 'info' | 'warning' | 'success' | 'error';
+
+/**
+ * @deprecated Usa `TagTone`. La prop de color se llama `tone` desde la v51 y
+ * `danger` es `error` (el vocabulario de estado del sistema). Se retira en la v52.
+ */
+export type TagVariant = TagTone | 'danger';
 
 export interface TagProps extends React.ComponentPropsWithoutRef<'span'> {
-  /** Variante de color del tag. */
+  /** Color del tag. Default `'neutral'`. */
+  tone?: TagTone;
+  /**
+   * @deprecated Usa `tone`. `variant="danger"` es `tone="error"`. Sigue
+   * funcionando, con un aviso en desarrollo, hasta la v52.
+   */
   variant?: TagVariant;
+}
+
+/**
+ * El color de un tag a partir de `tone` y del alias obsoleto `variant`, con
+ * el aviso de desarrollo por los nombres viejos. `danger` se lee como `error`.
+ */
+function resolveTagTone(component: string, tone: TagTone | undefined, variant: TagVariant | undefined): TagTone {
+  if (variant !== undefined) warnDeprecated(component, 'variant', '`tone`');
+  const resolved = tone ?? variant ?? 'neutral';
+  if (resolved === 'danger') {
+    warnDeprecated(component, 'variant="danger"', '`tone="error"`');
+    return 'error';
+  }
+  return resolved;
 }
 
 /**
@@ -16,12 +43,17 @@ export interface TagProps extends React.ComponentPropsWithoutRef<'span'> {
  * clases propias.
  */
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(function Tag({
-  variant = 'neutral',
+  tone: toneProp,
+  variant,
   className,
   children,
   ...rest
 }, ref) {
-  const classes = ['tag', `tag--${variant}`, className ?? ''].filter(Boolean).join(' ');
+  const tone = resolveTagTone('Tag', toneProp, variant);
+  // La clase BEM del rojo sigue siendo `tag--danger` (y sus tokens,
+  // `tag.danger-*`): es interna; el nombre público es `error`.
+  const modifier = tone === 'error' ? 'danger' : tone;
+  const classes = ['tag', `tag--${modifier}`, className ?? ''].filter(Boolean).join(' ');
   return (
     <span ref={ref} className={classes} {...rest}>
       {children}

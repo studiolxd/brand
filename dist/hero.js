@@ -22,7 +22,7 @@ function s({ title: s, description: c, actions: l, width: u = "xl", className: d
 					children: s
 				}),
 				c && /* @__PURE__ */ a(i, {
-					size: "large",
+					size: "lg",
 					className: "hero__description",
 					children: c
 				}),

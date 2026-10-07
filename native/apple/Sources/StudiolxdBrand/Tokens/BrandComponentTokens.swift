@@ -1342,7 +1342,9 @@ public enum BrandTextInlineTokens {
     public static let emphasisFontWeight: Int = 500
     /// Token `text-inline.muted-color` — Texto secundario en línea: una aclaración, un metadato
     public static let mutedColor: Color = Color(brandLight: Color(brandHex: 0x4A4A4A), dark: Color(brandHex: 0xD0D0D0))
-    /// Token `text-inline.destructive-color` — Énfasis en línea con intención destructiva: la palabra que dice que algo se pierde. Es tinta sobre la superficie, nunca un relleno
+    /// Token `text-inline.error-color` — Énfasis en línea de error: un estado que ha fallado («cupón rechazado»). Es tinta sobre la superficie, nunca un relleno
+    public static let errorColor: Color = Color(brandLight: Color(brandHex: 0xB30000), dark: Color(brandHex: 0xFF8585))
+    /// Token `text-inline.destructive-color` — Énfasis en línea con intención destructiva: la palabra que avisa de que una acción hace perder algo («esta acción **borra** el curso»). Es tinta sobre la superficie, nunca un relleno
     public static let destructiveColor: Color = Color(brandLight: Color(brandHex: 0xB30000), dark: Color(brandHex: 0xFF8585))
     /// Token `text-inline.success-color` — Énfasis en línea con intención de logro
     public static let successColor: Color = Color(brandLight: Color(brandHex: 0x006616), dark: Color(brandHex: 0x00CC2C))

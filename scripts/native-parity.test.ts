@@ -17,6 +17,15 @@ writeFileSync(
   disabled?: boolean;
   label?: string;
 }
+
+export interface OldProps {
+  tone?: 'info' | 'error';
+  /** @deprecated Usa \`tone\`. */
+  variant?: 'info' | 'error' | 'danger';
+  /** Sin marca de obsoleta. */
+  color?: 'info';
+  size?: 'sm' | 'md' | 'small';
+}
 `,
 );
 
@@ -65,6 +74,40 @@ describe('native:parity', () => {
     const { problems } = checkCards(cardsDir('types', card), tmp);
     expect(problems.join('\n')).toContain('props.ghost: no existe');
     expect(problems.join('\n')).toContain('props.size: la ficha dice boolean');
+  });
+
+  const old = {
+    component: 'Demo',
+    react: { path: 'src/Demo.tsx', props: 'OldProps' },
+    native: { swift: 'BrandDemo', kotlin: 'BrandDemo' },
+    props: {
+      tone: { type: 'union', values: ['info', 'error'] },
+      size: { type: 'union', values: ['sm', 'md'], deprecatedValues: ['small'] },
+    },
+    deprecated: [{ prop: 'variant', replacement: 'tone' }],
+    excluded: [{ prop: 'color', reason: 'Solo para la prueba del alias.' }],
+  };
+
+  it('acepta un alias obsoleto (prop y literal) bien declarado', () => {
+    expect(checkCards(cardsDir('deprecated-ok', old), tmp)).toEqual({ checked: 1, problems: [] });
+  });
+
+  it('exige declarar los literales obsoletos y que no se repitan en values', () => {
+    const sinObsoletos = { ...old, props: { ...old.props, size: { type: 'union', values: ['sm', 'md'] } } };
+    expect(checkCards(cardsDir('deprecated-missing', sinObsoletos), tmp).problems.join('\n')).toContain('faltan valores de React: small');
+    const repetido = { ...old, props: { ...old.props, size: { type: 'union', values: ['sm', 'md', 'small'], deprecatedValues: ['small'] } } };
+    expect(checkCards(cardsDir('deprecated-both', repetido), tmp).problems.join('\n')).toContain('a la vez');
+  });
+
+  it('una prop obsoleta necesita @deprecated en React y su sustituta en props', () => {
+    const card = {
+      ...old,
+      deprecated: [{ prop: 'color', replacement: 'nada' }, { prop: 'variant', replacement: 'tone' }],
+      excluded: [],
+    };
+    const problems = checkCards(cardsDir('deprecated-bad', card), tmp).problems.join('\n');
+    expect(problems).toContain('deprecated.color: en React no lleva `@deprecated`');
+    expect(problems).toContain('deprecated.color: su sustituta «nada» no está en `props`');
   });
 
   it('rechaza una ficha que no cumple el esquema', () => {
