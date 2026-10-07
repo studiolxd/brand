@@ -19,6 +19,15 @@ export interface CloseButtonProps extends Omit<ComponentPropsWithoutRef<'button'
     label?: string;
     /** Talla del botón: un cuadrado de 32, 40 o 48px. El glifo mide 24 en las tres. */
     size?: 'sm' | 'md' | 'lg';
+    /**
+     * Con `disabled`, el aspa sigue en el orden de tabulación: deja el
+     * `disabled` nativo, se anuncia con `aria-disabled="true"` y no ejecuta el
+     * `onClick`. Mismo contrato que en `Button`; `Tooltip` lo activa solo en su
+     * disparador deshabilitado.
+     *
+     * @default false
+     */
+    focusableWhenDisabled?: boolean;
 }
 /**
  * El aspa del sistema: el botón que cierra lo que lo contiene —un diálogo, un

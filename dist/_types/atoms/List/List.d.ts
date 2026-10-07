@@ -4,9 +4,11 @@ export interface ListItemProps extends React.ComponentPropsWithoutRef<'li'> {
     /**
      * Elemento a renderizar. Default `'li'`, que es lo correcto dentro de una
      * `List`. Solo se cambia cuando el ítem no cuelga de una lista real y hay
-     * que darle el rol a mano (`as="div" role="listitem"`).
+     * que darle el rol a mano (`as="div" role="listitem"`). Solo cambia la
+     * etiqueta: para sustituir el elemento entero por otro componente no hay
+     * prop, y una fila pulsable lleva el botón o el enlace **dentro** del ítem.
      */
-    as?: React.ElementType;
+    as?: 'li' | 'div';
     children?: React.ReactNode;
     /**
      * Accesorio al principio de la fila: un icono, un avatar. Pareja de

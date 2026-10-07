@@ -1,23 +1,34 @@
 import '../closebutton.css';
 import { n as e } from "./brandmessagescontext.js";
 import { Icon as t } from "../icon.js";
-import { forwardRef as n } from "react";
-import { jsx as r } from "react/jsx-runtime";
+import { t as n } from "./focusable-when-disabled.js";
+import { forwardRef as r } from "react";
+import { jsx as i } from "react/jsx-runtime";
 //#region src/stories/messages/es/closeButton.ts
-var i = { label: "Cerrar" }, a = n(function({ label: n, size: a = "md", className: o, ...s }, c) {
-	let l = e("closeButton", i);
-	return /* @__PURE__ */ r("button", {
-		ref: c,
+var a = { label: "Cerrar" }, o = r(function({ label: n, size: r = "md", className: o, disabled: s, focusableWhenDisabled: c = !1, onClick: l, ...u }, d) {
+	let f = e("closeButton", a), p = [
+		"close-button",
+		r === "md" ? "" : `close-button--${r}`,
+		o
+	].filter(Boolean).join(" "), m = !!s && c;
+	return /* @__PURE__ */ i("button", {
+		ref: d,
 		type: "button",
-		className: [
-			"close-button",
-			a === "md" ? "" : `close-button--${a}`,
-			o
-		].filter(Boolean).join(" "),
-		"aria-label": l("label", n),
-		...s,
-		children: /* @__PURE__ */ r(t, { name: "close" })
+		className: p,
+		"aria-label": f("label", n),
+		disabled: m ? void 0 : s,
+		"aria-disabled": m ? !0 : void 0,
+		onClick: (e) => {
+			if (m) {
+				e.preventDefault(), e.stopPropagation();
+				return;
+			}
+			l?.(e);
+		},
+		...u,
+		children: /* @__PURE__ */ i(t, { name: "close" })
 	});
 });
+n(o);
 //#endregion
-export { a as t };
+export { o as t };

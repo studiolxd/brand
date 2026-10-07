@@ -1,96 +1,98 @@
 import '../numberinput.css';
-import { n as e } from "./brandmessagescontext.js";
-import { Icon as t } from "../icon.js";
-import { forwardRef as n, useCallback as r, useState as i } from "react";
-import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { n as e } from "./env.js";
+import { n as t } from "./brandmessagescontext.js";
+import { Icon as n } from "../icon.js";
+import { forwardRef as r, useCallback as i, useState as a } from "react";
+import { jsx as o, jsxs as s } from "react/jsx-runtime";
 //#region src/stories/messages/es/numberInput.ts
-var s = {
+var c = {
 	decrement: "Decrementar",
 	increment: "Incrementar"
-}, c = n(function({ value: n, defaultValue: c = 0, min: l, max: u, step: d = 1, decimal: f = !1, disabled: p = !1, readOnly: m = !1, size: h = "md", compact: g = !1, commitMode: _ = "change", error: v = !1, id: y, name: b, describedBy: x, ariaLabel: S, decrementLabel: C, incrementLabel: w, className: T, onChange: E, onEmpty: D, onBlur: O, onFocus: k, onKeyDown: A, ...j }, M) {
-	let N = e("numberInput", s), P = n !== void 0, [F, I] = i(c), [L, R] = i(!1), [z, B] = i(null), V = P ? n : F, H = z === null ? V === null ? "" : String(V) : z, U = V ?? 0, W = r((e) => {
+}, l = r(function({ value: r, defaultValue: l = 0, min: u, max: d, step: f = 1, decimal: p = !1, disabled: m = !1, readOnly: h = !1, size: g = "md", compact: _ = !1, commitMode: v = "change", error: y = !1, id: b, name: x, describedBy: S, ariaLabel: C, decrementLabel: w, incrementLabel: T, className: E, onChange: D, onEmpty: O, onBlur: k, onFocus: A, onKeyDown: j, ...M }, N) {
+	C !== void 0 && e("NumberInput", "ariaLabel", "`aria-label`");
+	let P = t("numberInput", c), F = r !== void 0, [I, L] = a(l), [R, z] = a(!1), [B, V] = a(null), H = F ? r : I, U = B === null ? H === null ? "" : String(H) : B, W = H ?? 0, G = i((e) => {
 		let t = e;
-		return l !== void 0 && (t = Math.max(l, t)), u !== void 0 && (t = Math.min(u, t)), t;
-	}, [l, u]), G = r((e) => {
-		let t = W(e);
-		P || I(t), E?.(t);
+		return u !== void 0 && (t = Math.max(u, t)), d !== void 0 && (t = Math.min(d, t)), t;
+	}, [u, d]), K = i((e) => {
+		let t = G(e);
+		F || L(t), D?.(t);
 	}, [
-		W,
-		P,
-		E
-	]), K = () => {
-		p || m || (B(null), G(U - d));
-	}, q = () => {
-		p || m || (B(null), G(U + d));
-	}, J = (e) => {
-		let t = f ? e.replace(",", ".") : e, n = parseFloat(t);
-		if (!isNaN(n)) {
-			if (_ === "blur" && W(n) === V) return;
-			G(n);
-		} else if (D && e.trim() === "") {
-			if (_ === "blur" && V === null) return;
-			P || I(null), D();
-		}
+		G,
+		F,
+		D
+	]), q = () => {
+		m || h || (V(null), K(W - f));
+	}, J = () => {
+		m || h || (V(null), K(W + f));
 	}, Y = (e) => {
-		let t = e.target.value;
-		B(t), _ === "change" && J(t);
+		let t = p ? e.replace(",", ".") : e, n = parseFloat(t);
+		if (!isNaN(n)) {
+			if (v === "blur" && G(n) === H) return;
+			K(n);
+		} else if (O && e.trim() === "") {
+			if (v === "blur" && H === null) return;
+			F || L(null), O();
+		}
 	}, X = (e) => {
-		A?.(e), !(e.defaultPrevented || _ !== "blur" || z === null) && (e.key === "Enter" ? (J(z), B(null)) : e.key === "Escape" && (e.preventDefault(), B(null)));
+		let t = e.target.value;
+		V(t), v === "change" && Y(t);
 	}, Z = (e) => {
-		R(!0), k?.(e);
+		j?.(e), !(e.defaultPrevented || v !== "blur" || B === null) && (e.key === "Enter" ? (Y(B), V(null)) : e.key === "Escape" && (e.preventDefault(), V(null)));
 	}, Q = (e) => {
-		R(!1), _ === "blur" && z !== null && J(z), B(null), O?.(e);
-	}, $ = [
+		z(!0), A?.(e);
+	}, $ = (e) => {
+		z(!1), v === "blur" && B !== null && Y(B), V(null), k?.(e);
+	}, ee = [
 		"number-input",
-		g ? "number-input--compact" : h === "md" ? "" : `number-input--${h}`,
-		v ? "number-input--error" : "",
-		p ? "number-input--disabled" : "",
-		L ? "number-input--focused" : "",
-		T ?? ""
-	].filter(Boolean).join(" "), ee = p || m || V !== null && l !== void 0 && V <= l, te = p || m || V !== null && u !== void 0 && V >= u;
-	return /* @__PURE__ */ o("div", {
-		className: $,
+		_ ? "number-input--compact" : g === "md" ? "" : `number-input--${g}`,
+		y ? "number-input--error" : "",
+		m ? "number-input--disabled" : "",
+		R ? "number-input--focused" : "",
+		E ?? ""
+	].filter(Boolean).join(" "), te = m || h || H !== null && u !== void 0 && H <= u, ne = m || h || H !== null && d !== void 0 && H >= d;
+	return /* @__PURE__ */ s("div", {
+		className: ee,
 		children: [
-			/* @__PURE__ */ a("button", {
+			/* @__PURE__ */ o("button", {
 				className: "number-input__btn number-input__btn--decrement",
 				type: "button",
-				onClick: K,
-				disabled: ee,
-				"aria-label": N("decrement", C),
+				onClick: q,
+				disabled: te,
+				"aria-label": P("decrement", w),
 				tabIndex: -1,
-				children: /* @__PURE__ */ a(t, {
+				children: /* @__PURE__ */ o(n, {
 					name: "minus",
 					size: "sm"
 				})
 			}),
-			/* @__PURE__ */ a("input", {
-				ref: M,
+			/* @__PURE__ */ o("input", {
+				ref: N,
 				className: "number-input__field",
 				type: "text",
-				inputMode: f ? "decimal" : "numeric",
-				pattern: f ? "[0-9]*[.,]?[0-9]*" : "[0-9]*",
-				"aria-invalid": v || void 0,
-				"aria-describedby": x,
-				"aria-label": S,
-				...j,
-				id: y,
-				name: b,
-				value: H,
-				disabled: p,
-				readOnly: m,
-				onChange: Y,
-				onKeyDown: X,
-				onFocus: Z,
-				onBlur: Q
+				inputMode: p ? "decimal" : "numeric",
+				pattern: p ? "[0-9]*[.,]?[0-9]*" : "[0-9]*",
+				"aria-invalid": y || void 0,
+				"aria-describedby": S,
+				"aria-label": C,
+				...M,
+				id: b,
+				name: x,
+				value: U,
+				disabled: m,
+				readOnly: h,
+				onChange: X,
+				onKeyDown: Z,
+				onFocus: Q,
+				onBlur: $
 			}),
-			/* @__PURE__ */ a("button", {
+			/* @__PURE__ */ o("button", {
 				className: "number-input__btn number-input__btn--increment",
 				type: "button",
-				onClick: q,
-				disabled: te,
-				"aria-label": N("increment", w),
+				onClick: J,
+				disabled: ne,
+				"aria-label": P("increment", T),
 				tabIndex: -1,
-				children: /* @__PURE__ */ a(t, {
+				children: /* @__PURE__ */ o(n, {
 					name: "plus",
 					size: "sm"
 				})
@@ -99,4 +101,4 @@ var s = {
 	});
 });
 //#endregion
-export { c as t };
+export { l as t };

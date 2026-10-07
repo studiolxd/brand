@@ -1,14 +1,14 @@
 'use client';
 import './avatar-upload.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
-import { Icon as t } from "./icon.js";
-import { VisuallyHidden as n } from "./visually-hidden.js";
-import { n as r } from "./_shared/form-size.js";
-import { Button as i } from "./button.js";
-import { Avatar as ee } from "./avatar.js";
-import { ErrorText as te } from "./error-text.js";
-import { i as a, n as ne, r as o, t as re } from "./_shared/validate.js";
-import { t as ie } from "./_shared/env.js";
+import { t as e } from "./_shared/env.js";
+import { n as t } from "./_shared/brandmessagescontext.js";
+import { Icon as n } from "./icon.js";
+import { VisuallyHidden as r } from "./visually-hidden.js";
+import { n as i } from "./_shared/form-size.js";
+import { Button as ee } from "./button.js";
+import { Avatar as te } from "./avatar.js";
+import { ErrorText as ne } from "./error-text.js";
+import { i as a, n as re, r as o, t as ie } from "./_shared/validate.js";
 import { t as ae } from "./_shared/imagecropdialog.js";
 import { useCallback as oe, useEffect as s, useId as se, useRef as c, useState as l } from "react";
 import { jsx as u, jsxs as d } from "react/jsx-runtime";
@@ -36,9 +36,9 @@ var ce = {
 function de(e, t) {
 	return o(e.split(",").map((e) => e.trim()).filter(Boolean).map((e) => e.startsWith(".") ? e.slice(1) : e.split("/")[1] ?? e).map((e) => e.toUpperCase()), t);
 }
-function f({ src: o, name: f, alt: p, shape: m = "circle", size: fe, accept: h = "image/jpeg,image/png,image/webp", maxSize: g, outputMimeType: _ = "image/jpeg", outputSize: v, disabled: pe = !1, busy: y = !1, errorMessage: me, onChange: he, onSelect: b, onError: x, subject: ge, buttonLabel: _e, buttonAccessibleLabel: ve, hintLabel: ye, formatsLabel: be, locale: S = re, maxSizeHint: xe, invalidTypeError: C, tooLargeError: w, dropActiveMessage: Se, dropHintLabel: Ce, cropTitle: we, cropDescription: T, cropCancelLabel: E, cropConfirmLabel: D, cropCloseLabel: O, cropLoadingLabel: k, cropErrorMessage: A, className: Te }) {
-	let j = e("avatarUpload", ce), M = r(fe), N = c(null), P = c(null), [F, I] = l(null), [L, R] = l(!1), [Ee, z] = l(!1), [De, B] = l(null), V = se(), H = `${V}-hint`, U = `${V}-error`, W = j("subject", ge), G = be ?? de(h, S), K = ye ?? [G, g === void 0 ? null : j("maxSize", xe)(ne(g, S))].filter(Boolean).join(" · "), q = De ?? me, J = pe || y, Y = j("button", _e), X = ve ?? j("buttonFor")(W);
-	ie() && !X.toLowerCase().includes(Y.toLowerCase()) && console.warn(`[AvatarUpload] El nombre accesible del botón ("${X}") no contiene su texto visible ("${Y}"). WCAG 2.5.3 (Label in Name) lo exige: quien navega por voz dice lo que ve, y con estos textos no encontraría el control.`), s(() => {
+function f({ src: o, name: f, alt: p, shape: m = "circle", size: fe, accept: h = "image/jpeg,image/png,image/webp", maxSize: g, outputMimeType: _ = "image/jpeg", outputSize: v, disabled: pe = !1, busy: y = !1, errorMessage: me, onChange: he, onSelect: b, onError: x, subject: ge, buttonLabel: _e, buttonAccessibleLabel: ve, hintLabel: ye, formatsLabel: be, locale: S = ie, maxSizeHint: xe, invalidTypeError: C, tooLargeError: w, dropActiveMessage: Se, dropHintLabel: Ce, cropTitle: we, cropDescription: T, cropCancelLabel: E, cropConfirmLabel: D, cropCloseLabel: O, cropLoadingLabel: k, cropErrorMessage: A, className: Te }) {
+	let j = t("avatarUpload", ce), M = i(fe), N = c(null), P = c(null), [F, I] = l(null), [L, R] = l(!1), [Ee, z] = l(!1), [De, B] = l(null), V = se(), H = `${V}-hint`, U = `${V}-error`, W = j("subject", ge), G = be ?? de(h, S), K = ye ?? [G, g === void 0 ? null : j("maxSize", xe)(re(g, S))].filter(Boolean).join(" · "), q = De ?? me, J = pe || y, Y = j("button", _e), X = ve ?? j("buttonFor")(W);
+	e() && !X.toLowerCase().includes(Y.toLowerCase()) && console.warn(`[AvatarUpload] El nombre accesible del botón ("${X}") no contiene su texto visible ("${Y}"). WCAG 2.5.3 (Label in Name) lo exige: quien navega por voz dice lo que ve, y con estos textos no encontraría el control.`), s(() => {
 		P.current = F;
 	}, [F]), s(() => () => {
 		P.current && URL.revokeObjectURL(P.current.url);
@@ -75,9 +75,9 @@ function f({ src: o, name: f, alt: p, shape: m = "circle", size: fe, accept: h =
 		S,
 		x,
 		b
-	]), Q = () => {
+	]), Oe = () => {
 		F && URL.revokeObjectURL(F.url), I(null);
-	}, Oe = async (e) => {
+	}, Q = async (e) => {
 		F && await he(e, F.file);
 	}, $ = Ce ?? j("dropHint")(W);
 	return /* @__PURE__ */ d("div", {
@@ -109,7 +109,7 @@ function f({ src: o, name: f, alt: p, shape: m = "circle", size: fe, accept: h =
 					let t = e.dataTransfer.files?.[0];
 					t && Z(t);
 				},
-				children: [/* @__PURE__ */ u(ee, {
+				children: [/* @__PURE__ */ u(te, {
 					src: o ?? void 0,
 					name: f,
 					...p === void 0 ? {} : { alt: p },
@@ -118,7 +118,7 @@ function f({ src: o, name: f, alt: p, shape: m = "circle", size: fe, accept: h =
 				}), /* @__PURE__ */ u("span", {
 					className: "avatar-upload__overlay",
 					"aria-hidden": "true",
-					children: /* @__PURE__ */ u(t, {
+					children: /* @__PURE__ */ u(n, {
 						name: "upload",
 						size: ue[M]
 					})
@@ -140,7 +140,7 @@ function f({ src: o, name: f, alt: p, shape: m = "circle", size: fe, accept: h =
 							t && Z(t), e.target.value = "";
 						}
 					}),
-					/* @__PURE__ */ u(i, {
+					/* @__PURE__ */ u(ee, {
 						variant: "outline",
 						size: M,
 						disabled: J,
@@ -149,7 +149,7 @@ function f({ src: o, name: f, alt: p, shape: m = "circle", size: fe, accept: h =
 						"aria-describedby": [K ? H : null, q ? U : null].filter(Boolean).join(" ") || void 0,
 						children: Y
 					}),
-					K && /* @__PURE__ */ u(n, {
+					K && /* @__PURE__ */ u(r, {
 						id: H,
 						children: K
 					}),
@@ -157,13 +157,13 @@ function f({ src: o, name: f, alt: p, shape: m = "circle", size: fe, accept: h =
 						className: "avatar-upload__hint",
 						children: $
 					}),
-					q && /* @__PURE__ */ u(te, {
+					q && /* @__PURE__ */ u(ne, {
 						id: U,
 						children: q
 					})
 				]
 			}),
-			/* @__PURE__ */ u(n, {
+			/* @__PURE__ */ u(r, {
 				role: "status",
 				children: L ? Se ?? j("dropActive")(W) : ""
 			}),
@@ -180,8 +180,10 @@ function f({ src: o, name: f, alt: p, shape: m = "circle", size: fe, accept: h =
 				...O === void 0 ? {} : { closeLabel: O },
 				...k === void 0 ? {} : { loadingLabel: k },
 				...A === void 0 ? {} : { errorMessage: A },
-				onConfirm: Oe,
-				onClose: Q
+				onConfirm: Q,
+				onOpenChange: (e) => {
+					e || Oe();
+				}
 			})
 		]
 	});

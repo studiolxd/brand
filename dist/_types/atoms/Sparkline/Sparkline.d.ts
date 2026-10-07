@@ -25,6 +25,8 @@ export interface SparklineProps extends Omit<React.ComponentPropsWithoutRef<'svg
      * decorativa —lo correcto dentro de un `StatTile`, donde la cifra y su
      * variación ya dicen lo que la chispa enseña—.
      */
+    'aria-label'?: string;
+    /** @deprecated Usa `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
     ariaLabel?: string;
     /** Se añade DESPUÉS de las clases propias. */
     className?: string;

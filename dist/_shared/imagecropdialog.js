@@ -1,14 +1,15 @@
 import '../imagecropdialog.css';
-import { n as e } from "./brandmessagescontext.js";
-import { Spinner as t } from "../spinner.js";
-import { Button as n } from "../button.js";
-import { t as r } from "./alert.js";
-import { t as i } from "./modal.js";
-import { useRef as a, useState as o } from "react";
-import { Fragment as s, jsx as c, jsxs as l } from "react/jsx-runtime";
-import u, { centerCrop as d, makeAspectCrop as f } from "react-image-crop";
+import { n as e } from "./env.js";
+import { n as t } from "./brandmessagescontext.js";
+import { Spinner as n } from "../spinner.js";
+import { Button as r } from "../button.js";
+import { t as i } from "./alert.js";
+import { t as a } from "./modal.js";
+import { useRef as o, useState as s } from "react";
+import { Fragment as c, jsx as l, jsxs as u } from "react/jsx-runtime";
+import d, { centerCrop as f, makeAspectCrop as p } from "react-image-crop";
 //#region src/stories/molecules/ImageCropDialog/crop.ts
-async function p(e, t, n = {}) {
+async function m(e, t, n = {}) {
 	let r = n.outputSize ?? 512, i = n.mimeType ?? "image/jpeg", a = n.quality ?? .9, o = document.createElement("canvas");
 	o.width = r, o.height = r;
 	let s = o.getContext("2d");
@@ -18,8 +19,8 @@ async function p(e, t, n = {}) {
 		o.toBlob((n) => n ? e(n) : t(/* @__PURE__ */ Error("Canvas toBlob returned null")), i, a);
 	});
 }
-function m(e, t, n) {
-	return d(f(t / n >= e ? {
+function h(e, t, n) {
+	return f(p(t / n >= e ? {
 		unit: "%",
 		height: 100
 	} : {
@@ -29,74 +30,75 @@ function m(e, t, n) {
 }
 //#endregion
 //#region src/stories/messages/es/imageCropDialog.ts
-var h = {
+var g = {
 	loading: "Cargando imagen…",
 	error: "No hemos podido cargar la imagen. Prueba con otro archivo."
 };
 //#endregion
 //#region src/stories/molecules/ImageCropDialog/ImageCropDialog.tsx
-function g({ sourceUrl: d, title: f, description: g, circularCrop: _ = !1, aspect: v = 1, outputSize: y = 512, outputMimeType: b, busy: x = !1, cancelLabel: S, confirmLabel: C, closeLabel: w, loadingLabel: T, errorMessage: E, onConfirm: D, onClose: O, className: k }) {
-	let A = e("imageCropDialog", h), j = a(null), [M, N] = o(), [P, F] = o(), [I, L] = o("loading"), [R, z] = o(d);
-	d !== R && (z(d), L("loading"), N(void 0), F(void 0));
-	let B = () => {
-		N(void 0), F(void 0), O();
-	}, V = async () => {
-		let e = j.current;
-		!e || !P || P.width === 0 || (await D(await p(e, P, {
-			mimeType: b,
-			outputSize: y
-		})), B());
+function _({ sourceUrl: f, title: p, description: _, circularCrop: v = !1, aspect: y = 1, outputSize: b = 512, outputMimeType: x, busy: S = !1, cancelLabel: C, confirmLabel: w, closeLabel: T, loadingLabel: E, errorMessage: D, onConfirm: O, onOpenChange: k, onClose: A, className: j }) {
+	A !== void 0 && e("ImageCropDialog", "onClose", "`onOpenChange`");
+	let M = t("imageCropDialog", g), N = o(null), [P, F] = s(), [I, L] = s(), [R, z] = s("loading"), [B, V] = s(f);
+	f !== B && (V(f), z("loading"), F(void 0), L(void 0));
+	let H = () => {
+		F(void 0), L(void 0), k?.(!1), A?.();
+	}, U = async () => {
+		let e = N.current;
+		!e || !I || I.width === 0 || (await O(await m(e, I, {
+			mimeType: x,
+			outputSize: b
+		})), H());
 	};
-	return /* @__PURE__ */ c(i, {
-		open: d !== null,
-		onClose: () => {
-			x || B();
+	return /* @__PURE__ */ l(a, {
+		open: f !== null,
+		onOpenChange: (e) => {
+			!e && !S && H();
 		},
-		title: f,
-		...w ? { closeLabel: w } : {},
-		...g == null ? {} : { description: g },
+		title: p,
+		...T ? { closeLabel: T } : {},
+		..._ == null ? {} : { description: _ },
 		footerClassName: "image-crop-dialog__actions",
-		footer: /* @__PURE__ */ l(s, { children: [/* @__PURE__ */ c(n, {
+		footer: /* @__PURE__ */ u(c, { children: [/* @__PURE__ */ l(r, {
 			variant: "outline",
-			disabled: x,
-			onClick: B,
-			children: S
-		}), /* @__PURE__ */ c(n, {
-			disabled: x || !P?.width,
-			onClick: V,
+			disabled: S,
+			onClick: H,
 			children: C
+		}), /* @__PURE__ */ l(r, {
+			disabled: S || !I?.width,
+			onClick: U,
+			children: w
 		})] }),
-		children: /* @__PURE__ */ c("div", {
-			className: ["image-crop-dialog", k].filter(Boolean).join(" "),
-			children: /* @__PURE__ */ l("div", {
+		children: /* @__PURE__ */ l("div", {
+			className: ["image-crop-dialog", j].filter(Boolean).join(" "),
+			children: /* @__PURE__ */ u("div", {
 				className: "image-crop-dialog__area",
 				children: [
-					I === "loading" && /* @__PURE__ */ c(t, {
+					R === "loading" && /* @__PURE__ */ l(n, {
 						size: "lg",
-						label: A("loading", T)
+						label: M("loading", E)
 					}),
-					I === "error" && /* @__PURE__ */ c(r, {
+					R === "error" && /* @__PURE__ */ l(i, {
 						variant: "error",
-						description: A("error", E),
+						description: M("error", D),
 						className: "image-crop-dialog__error"
 					}),
-					d && I !== "error" && /* @__PURE__ */ c(u, {
-						crop: M,
-						onChange: (e, t) => N(t),
-						onComplete: (e) => F(e),
-						aspect: v,
-						circularCrop: _,
+					f && R !== "error" && /* @__PURE__ */ l(d, {
+						crop: P,
+						onChange: (e, t) => F(t),
+						onComplete: (e) => L(e),
+						aspect: y,
+						circularCrop: v,
 						minWidth: 64,
 						keepSelection: !0,
-						children: /* @__PURE__ */ c("img", {
-							ref: j,
-							src: d,
+						children: /* @__PURE__ */ l("img", {
+							ref: N,
+							src: f,
 							alt: "",
 							onLoad: (e) => {
 								let { width: t, height: n } = e.currentTarget;
-								L("ready"), N(m(v, t, n));
+								z("ready"), F(h(y, t, n));
 							},
-							onError: () => L("error")
+							onError: () => z("error")
 						})
 					})
 				]
@@ -105,4 +107,4 @@ function g({ sourceUrl: d, title: f, description: g, circularCrop: _ = !1, aspec
 	});
 }
 //#endregion
-export { g as t };
+export { _ as t };

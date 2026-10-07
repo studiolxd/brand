@@ -1,6 +1,15 @@
-import type { ComponentType, ReactNode } from 'react';
+import { type AnchorHTMLAttributes, type ComponentType, type ReactNode } from 'react';
 import type { SelectOption } from '../../atoms/Select/Select';
 import './Pagination.css';
+/**
+ * Lo que recibe `renderLink`: los atributos del `<a>` que pintaría el
+ * paginador. Hay que reenviarlos **todos** al enlace del router.
+ */
+export type PaginationRenderLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+    href: string;
+    className: string;
+    children: ReactNode;
+};
 /**
  * Los textos que el paginador emite por su cuenta. Los nombres calcan el
  * espacio `pagination` del catálogo de la suite, así que montarlo es mapear
@@ -91,9 +100,19 @@ export interface PaginationProps {
     /** Mostrar "X resultados" antes de los controles. Default: false */
     showTotal?: boolean;
     /**
-     * Componente Link del router. Default: "a" (recarga completa).
-     * Acepta next/link, react-router Link, etc. — cualquier componente
-     * que acepte las props estándar de <a> (href, className, …).
+     * Pinta cada enlace del paginador con el `Link` del router:
+     * `renderLink={(props) => <Link {...props} />}`. Recibe todos los atributos
+     * del `<a>` (`href`, `className`, `aria-label`, `onClick`, `children`) y
+     * tiene que reenviarlos todos. Sin él, un `<a>` (recarga completa).
+     *
+     * Es una función: desde un Server Component no cruza al cliente. Ahí, o se
+     * monta el paginador en un fichero de cliente propio, o se navega con
+     * `<a>` (sin `renderLink`).
+     */
+    renderLink?: (props: PaginationRenderLinkProps) => ReactNode;
+    /**
+     * @deprecated Usa `renderLink` (`renderLink={(props) => <Link {...props} />}`).
+     * Sigue funcionando y avisa en desarrollo; se retira en la v52.
      */
     linkComponent?: ComponentType<any>;
     /** Tamaño del componente. Default: "md" */
@@ -102,6 +121,8 @@ export interface PaginationProps {
      * `aria-label` del `<nav>`. Sin default: cuando no se pasa, sale de
      * `pagination.label` del `BrandMessagesProvider`.
      */
+    'aria-label'?: string;
+    /** @deprecated Usa `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
     ariaLabel?: string;
     /** `aria-label` de cada botón/enlace de página. Sin default: `pagination.goToPage`. */
     pageLabel?: (page: number) => string;
@@ -120,4 +141,4 @@ export interface PaginationProps {
     totalLabel?: (total: number) => string;
     className?: string;
 }
-export declare function Pagination({ mode, total, pageCount, page, pageSize, hrefs, previousHref, nextHref, onPrevious, onNext, onPageChange, hrefBuilder: hrefBuilderProp, linkComponent, onPageSizeChange, pageSizeOptions, afterPageSize, showTotal, size, ariaLabel, pageLabel, previousLabel, nextLabel, pagesGroupLabel, pageSizeLabel, totalLabel, className, }: PaginationProps): import("react/jsx-runtime").JSX.Element | null;
+export declare function Pagination({ mode, total, pageCount, page, pageSize, hrefs, previousHref, nextHref, onPrevious, onNext, onPageChange, hrefBuilder: hrefBuilderProp, renderLink: renderLinkProp, linkComponent, onPageSizeChange, pageSizeOptions, afterPageSize, showTotal, size, 'aria-label': ariaLabelProp, ariaLabel: ariaLabelDeprecated, pageLabel, previousLabel, nextLabel, pagesGroupLabel, pageSizeLabel, totalLabel, className, }: PaginationProps): import("react/jsx-runtime").JSX.Element | null;

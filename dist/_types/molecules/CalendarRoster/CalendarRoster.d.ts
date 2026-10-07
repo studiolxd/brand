@@ -1,4 +1,7 @@
 import { type ComponentType, type ReactNode } from 'react';
+import { type PrevNextNavRenderLinkProps } from '../PrevNextNav/PrevNextNav';
+/** Lo que recibe `renderLink`: el mismo contrato que el de `PrevNextNav`. */
+export type CalendarRosterRenderLinkProps = PrevNextNavRenderLinkProps;
 import './CalendarRoster.css';
 /**
  * El cromo del cuadrante: el encabezado de la columna de nombres y la leyenda
@@ -61,7 +64,16 @@ export interface CalendarRosterProps {
      * Compatible con SSR y Next.js. Toma precedencia sobre onMonthChange.
      */
     hrefBuilder?: (month: Date) => string;
-    /** Componente Link del router. Default: "a" */
+    /**
+     * Pinta los enlaces de mes (con `hrefBuilder`) con el `Link` del router:
+     * `renderLink={(props) => <Link {...props} />}`. Recibe todos los atributos
+     * del `<a>` y tiene que reenviarlos todos. Sin él, un `<a>`.
+     */
+    renderLink?: (props: CalendarRosterRenderLinkProps) => ReactNode;
+    /**
+     * @deprecated Usa `renderLink` (`renderLink={(props) => <Link {...props} />}`).
+     * Sigue funcionando y avisa en desarrollo; se retira en la v52.
+     */
     linkComponent?: ComponentType<any>;
     /**
      * Render prop para personalizar el contenido interno de cada celda.
@@ -117,4 +129,4 @@ export interface CalendarRosterProps {
     today?: Date;
     className?: string;
 }
-export declare function CalendarRoster({ rows, month, onMonthChange, hrefBuilder, linkComponent, renderCell, nameLabel, birthdayPrefix, showLegend, locale, legendItems, legendLabel, previousMonthLabel, nextMonthLabel, today: todayProp, className, }: CalendarRosterProps): import("react/jsx-runtime").JSX.Element;
+export declare function CalendarRoster({ rows, month, onMonthChange, hrefBuilder, renderLink, linkComponent, renderCell, nameLabel, birthdayPrefix, showLegend, locale, legendItems, legendLabel, previousMonthLabel, nextMonthLabel, today: todayProp, className, }: CalendarRosterProps): import("react/jsx-runtime").JSX.Element;

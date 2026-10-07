@@ -1,10 +1,13 @@
 import '../pagination.css';
-import { n as e } from "./brandmessagescontext.js";
-import { Icon as t } from "../icon.js";
-import { t as n } from "./select.js";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { n as e } from "./env.js";
+import { n as t } from "./brandmessagescontext.js";
+import { Icon as n } from "../icon.js";
+import { t as r } from "./select.js";
+import { n as i, t as a } from "./default-render-link.js";
+import { Fragment as o } from "react";
+import { jsx as s, jsxs as c } from "react/jsx-runtime";
 //#region src/stories/messages/es/pagination.ts
-var a = {
+var l = {
 	label: "Paginación",
 	pagesGroup: "Páginas",
 	previous: "Página anterior",
@@ -16,7 +19,7 @@ var a = {
 };
 //#endregion
 //#region src/stories/molecules/Pagination/Pagination.tsx
-function o(e) {
+function u(e) {
 	return [
 		{
 			label: "10",
@@ -40,7 +43,7 @@ function o(e) {
 		}
 	];
 }
-function s(e, t) {
+function d(e, t) {
 	return t <= 3 ? Array.from({ length: t }, (e, t) => t + 1) : e <= 3 ? [
 		1,
 		2,
@@ -59,134 +62,137 @@ function s(e, t) {
 		"..."
 	];
 }
-function c({ mode: c = "pages", total: l, pageCount: u, page: d = 1, pageSize: f = 10, hrefs: p, previousHref: m, nextHref: h, onPrevious: g, onNext: _, onPageChange: v, hrefBuilder: y, linkComponent: b, onPageSizeChange: x, pageSizeOptions: S, afterPageSize: C, showTotal: w = !1, size: T = "md", ariaLabel: E, pageLabel: D, previousLabel: O, nextLabel: k, pagesGroupLabel: A, pageSizeLabel: j, totalLabel: M, className: N }) {
-	let P = e("pagination", a), F = y ?? (p ? (e) => p[e] : void 0), I = b ?? "a";
-	if (c === "cursor") {
-		let e = T === "lg" ? "md" : "sm", n = (n) => {
-			let i = n === "prev" ? m : h, a = n === "prev" ? g : _, o = !i && !a, s = n === "prev" ? P("previous", O) : P("next", k), c = /* @__PURE__ */ r(t, {
+function f({ mode: f = "pages", total: p, pageCount: m, page: h = 1, pageSize: g = 10, hrefs: _, previousHref: v, nextHref: y, onPrevious: b, onNext: x, onPageChange: S, hrefBuilder: C, renderLink: w, linkComponent: T, onPageSizeChange: E, pageSizeOptions: D, afterPageSize: O, showTotal: k = !1, size: A = "md", "aria-label": j, ariaLabel: M, pageLabel: N, previousLabel: P, nextLabel: F, pagesGroupLabel: I, pageSizeLabel: L, totalLabel: R, className: z }) {
+	M !== void 0 && e("Pagination", "ariaLabel", "`aria-label`");
+	let B = j ?? M, V = t("pagination", l), H = C ?? (_ ? (e) => _[e] : void 0);
+	T !== void 0 && e("Pagination", "linkComponent", "`renderLink`");
+	let U = w ?? (T ? i(T) : a);
+	if (f === "cursor") {
+		let e = A === "lg" ? "md" : "sm", t = (t) => {
+			let r = t === "prev" ? v : y, i = t === "prev" ? b : x, a = !r && !i, o = t === "prev" ? V("previous", P) : V("next", F), c = /* @__PURE__ */ s(n, {
 				name: "chevron",
 				size: e,
-				className: n === "prev" ? "pagination__chevron--prev" : void 0
+				className: t === "prev" ? "pagination__chevron--prev" : void 0
 			});
-			return i ? /* @__PURE__ */ r(I, {
-				href: i,
+			return r ? U({
+				href: r,
 				className: "pagination__btn pagination__btn--nav",
-				"aria-label": s,
+				"aria-label": o,
 				children: c
-			}) : /* @__PURE__ */ r("button", {
+			}) : /* @__PURE__ */ s("button", {
 				type: "button",
 				className: "pagination__btn pagination__btn--nav",
-				disabled: o,
-				"aria-label": s,
-				onClick: a,
+				disabled: a,
+				"aria-label": o,
+				onClick: i,
 				children: c
 			});
 		};
-		return /* @__PURE__ */ r("nav", {
+		return /* @__PURE__ */ s("nav", {
 			className: [
 				"pagination",
-				`pagination--${T}`,
-				N
+				`pagination--${A}`,
+				z
 			].filter(Boolean).join(" "),
-			"aria-label": P("label", E),
-			children: /* @__PURE__ */ i("div", {
+			"aria-label": V("label", B),
+			children: /* @__PURE__ */ c("div", {
 				className: "pagination__controls",
 				role: "group",
-				"aria-label": P("pagesGroup", A),
-				children: [n("prev"), n("next")]
+				"aria-label": V("pagesGroup", I),
+				children: [t("prev"), t("next")]
 			})
 		});
 	}
-	if (l === 0 || u === 0 || l === void 0 && (u ?? 1) <= 1 && !C) return null;
-	let L = l ?? 0, R = u ?? (f === "all" ? 1 : Math.ceil(L / f)), z = R > 1 ? s(d, R) : [];
-	function B(e, t) {
-		if (e === "...") return /* @__PURE__ */ r("span", {
+	if (p === 0 || m === 0 || p === void 0 && (m ?? 1) <= 1 && !O) return null;
+	let W = p ?? 0, G = m ?? (g === "all" ? 1 : Math.ceil(W / g)), K = G > 1 ? d(h, G) : [];
+	function q(e, t) {
+		if (e === "...") return /* @__PURE__ */ s("span", {
 			className: "pagination__ellipsis",
 			"aria-hidden": "true",
 			children: "…"
 		}, `ellipsis-${t}`);
-		let n = e === d, i = ["pagination__btn", n ? "pagination__btn--current" : ""].filter(Boolean).join(" ");
-		return F && !n ? /* @__PURE__ */ r(I, {
-			href: F(e),
-			className: i,
-			"aria-label": P("goToPage", D)(e),
-			onClick: v ? (t) => {
-				t.preventDefault(), v(e);
+		let n = e === h, r = ["pagination__btn", n ? "pagination__btn--current" : ""].filter(Boolean).join(" ");
+		return H && !n ? /* @__PURE__ */ s(o, { children: U({
+			href: H(e),
+			className: r,
+			"aria-label": V("goToPage", N)(e),
+			onClick: S ? (t) => {
+				t.preventDefault(), S(e);
 			} : void 0,
 			children: e
-		}, e) : /* @__PURE__ */ r("button", {
+		}) }, e) : /* @__PURE__ */ s("button", {
 			type: "button",
-			className: i,
+			className: r,
 			"aria-current": n ? "page" : void 0,
-			"aria-label": P("goToPage", D)(e),
-			onClick: n ? void 0 : () => v?.(e),
+			"aria-label": V("goToPage", N)(e),
+			onClick: n ? void 0 : () => S?.(e),
 			children: e
 		}, e);
 	}
-	function V(e, n, i) {
-		let a = n === "prev" ? P("previous", O) : P("next", k), o = /* @__PURE__ */ r(t, {
+	function J(e, t, r) {
+		let i = t === "prev" ? V("previous", P) : V("next", F), a = /* @__PURE__ */ s(n, {
 			name: "chevron",
-			size: T === "lg" ? "md" : "sm",
-			className: n === "prev" ? "pagination__chevron--prev" : void 0
+			size: A === "lg" ? "md" : "sm",
+			className: t === "prev" ? "pagination__chevron--prev" : void 0
 		});
-		return F && !i ? /* @__PURE__ */ r(I, {
-			href: F(e),
+		return H && !r ? U({
+			href: H(e),
 			className: "pagination__btn pagination__btn--nav",
-			"aria-label": a,
-			onClick: v ? (t) => {
-				t.preventDefault(), v(e);
+			"aria-label": i,
+			onClick: S ? (t) => {
+				t.preventDefault(), S(e);
 			} : void 0,
-			children: o
-		}) : /* @__PURE__ */ r("button", {
+			children: a
+		}) : /* @__PURE__ */ s("button", {
 			type: "button",
 			className: "pagination__btn pagination__btn--nav",
-			disabled: i,
-			"aria-label": a,
-			onClick: () => v?.(e),
-			children: o
+			disabled: r,
+			"aria-label": i,
+			onClick: () => S?.(e),
+			children: a
 		});
 	}
-	let H = w || !!x || !!C;
-	return /* @__PURE__ */ i("nav", {
+	let Y = k || !!E || !!O;
+	return /* @__PURE__ */ c("nav", {
 		className: [
 			"pagination",
-			`pagination--${T}`,
-			N
+			`pagination--${A}`,
+			z
 		].filter(Boolean).join(" "),
-		"aria-label": P("label", E),
-		children: [H && /* @__PURE__ */ i("div", {
+		"aria-label": V("label", B),
+		children: [Y && /* @__PURE__ */ c("div", {
 			className: "pagination__meta",
 			children: [
-				w && /* @__PURE__ */ r("span", {
+				k && /* @__PURE__ */ s("span", {
 					className: "pagination__summary",
-					children: P("total", M)(L)
+					children: V("total", R)(W)
 				}),
-				x && /* @__PURE__ */ r("div", {
+				E && /* @__PURE__ */ s("div", {
 					className: "pagination__size-selector",
-					children: /* @__PURE__ */ r(n, {
-						options: S ?? o(P("allOption")),
-						value: f === "all" ? "all" : String(f),
-						onValueChange: x,
-						"aria-label": P("perPage", j),
-						size: T
+					children: /* @__PURE__ */ s(r, {
+						options: D ?? u(V("allOption")),
+						value: g === "all" ? "all" : String(g),
+						onValueChange: E,
+						"aria-label": V("perPage", L),
+						size: A
 					})
 				}),
-				C && /* @__PURE__ */ r("div", {
+				O && /* @__PURE__ */ s("div", {
 					className: "pagination__after-page-size",
-					children: C
+					children: O
 				})
 			]
-		}), R > 1 && /* @__PURE__ */ i("div", {
+		}), G > 1 && /* @__PURE__ */ c("div", {
 			className: "pagination__controls",
 			role: "group",
-			"aria-label": P("pagesGroup", A),
+			"aria-label": V("pagesGroup", I),
 			children: [
-				V(d - 1, "prev", d <= 1),
-				z.map((e, t) => B(e, t)),
-				V(d + 1, "next", d >= R)
+				J(h - 1, "prev", h <= 1),
+				K.map((e, t) => q(e, t)),
+				J(h + 1, "next", h >= G)
 			]
 		})]
 	});
 }
 //#endregion
-export { c as t };
+export { f as t };

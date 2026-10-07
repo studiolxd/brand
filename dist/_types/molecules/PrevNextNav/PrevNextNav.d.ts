@@ -1,5 +1,14 @@
-import type { ComponentType, MouseEvent, ReactNode } from 'react';
+import type { AnchorHTMLAttributes, ComponentType, MouseEvent, ReactNode } from 'react';
 import './PrevNextNav.css';
+/**
+ * Lo que recibe `renderLink`: los atributos del `<a>` que pintaría el
+ * control. Hay que reenviarlos **todos** al enlace del router.
+ */
+export type PrevNextNavRenderLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+    href: string;
+    className: string;
+    children: ReactNode;
+};
 export interface PrevNextNavProps {
     /** href del enlace anterior. Mutuamente exclusivo con prevOnClick */
     prevHref?: string;
@@ -44,8 +53,15 @@ export interface PrevNextNavProps {
      */
     labelId?: string;
     /**
-     * Componente `Link` del router para los controles con `href`. Default: `"a"`.
-     * Recibe `href` y el resto de props tal cual.
+     * Pinta los controles con `href` con el `Link` del router:
+     * `renderLink={(props) => <Link {...props} />}`. Recibe todos los atributos
+     * del `<a>` (`href`, `className`, `aria-label`, `onClick`, `children`) y
+     * tiene que reenviarlos todos. Sin él, un `<a>`.
+     */
+    renderLink?: (props: PrevNextNavRenderLinkProps) => ReactNode;
+    /**
+     * @deprecated Usa `renderLink` (`renderLink={(props) => <Link {...props} />}`).
+     * Sigue funcionando y avisa en desarrollo; se retira en la v52.
      */
     linkComponent?: ComponentType<any>;
     /** Variante de densidad. Default: "md" */
@@ -64,4 +80,4 @@ export interface PrevNextNavMessages {
     /** Rótulo del control siguiente. */
     next: string;
 }
-export declare function PrevNextNav({ prevHref, nextHref, prevOnClick, nextOnClick, prevLabel, nextLabel, prevTitle, nextTitle, label, labelId, linkComponent, size, className, }: PrevNextNavProps): import("react/jsx-runtime").JSX.Element;
+export declare function PrevNextNav({ prevHref, nextHref, prevOnClick, nextOnClick, prevLabel, nextLabel, prevTitle, nextTitle, label, labelId, renderLink: renderLinkProp, linkComponent, size, className, }: PrevNextNavProps): import("react/jsx-runtime").JSX.Element;

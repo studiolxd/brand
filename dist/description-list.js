@@ -19,14 +19,14 @@ var r = t(function({ className: e, children: t, ...r }, i) {
 		children: r
 	});
 }), a = t(function({ as: t = "dd", className: r, children: i, copyable: a = !1, copyText: o, copyLabel: s, copiedLabel: c, ...l }, u) {
-	let d = [
+	let d = t, f = [
 		"description-list__details",
 		a ? "description-list__details--copyable" : "",
 		r
 	].filter(Boolean).join(" ");
-	return a ? /* @__PURE__ */ n(t, {
+	return a ? /* @__PURE__ */ n(d, {
 		ref: u,
-		className: d,
+		className: f,
 		...l,
 		children: /* @__PURE__ */ n(e, {
 			copyText: o,
@@ -34,9 +34,9 @@ var r = t(function({ className: e, children: t, ...r }, i) {
 			copiedLabel: c,
 			children: i
 		})
-	}) : /* @__PURE__ */ n(t, {
+	}) : /* @__PURE__ */ n(d, {
 		ref: u,
-		className: d,
+		className: f,
 		...l,
 		children: i
 	});

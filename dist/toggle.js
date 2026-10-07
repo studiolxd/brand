@@ -1,23 +1,43 @@
 'use client';
 import './toggle.css';
-import { n as e } from "./_shared/togglegroupcontext.js";
-import { forwardRef as t } from "react";
-import { jsx as n } from "react/jsx-runtime";
-import { Toggle as r } from "@base-ui/react/toggle";
+import { t as e } from "./_shared/focusable-when-disabled.js";
+import { n as t } from "./_shared/togglegroupcontext.js";
+import { forwardRef as n } from "react";
+import { jsx as r } from "react/jsx-runtime";
+import { Toggle as i } from "@base-ui/react/toggle";
 //#region src/stories/atoms/Toggle/Toggle.tsx
-var i = t(function({ size: t, iconOnly: i = !1, className: a, onPressedChange: o, ...s }, c) {
-	let l = e(), u = t ?? l?.size ?? "md";
-	return /* @__PURE__ */ n(r, {
-		ref: c,
+var a = n(function({ size: e, iconOnly: n = !1, className: a, onPressedChange: o, disabled: s, focusableWhenDisabled: c = !1, onClick: l, ...u }, d) {
+	let f = !!s && c, p = t(), m = e ?? p?.size ?? "md";
+	return /* @__PURE__ */ r(i, {
+		ref: d,
 		className: [
 			"toggle",
-			u === "md" ? "" : `toggle--${u}`,
-			i ? "toggle--icon-only" : "",
+			m === "md" ? "" : `toggle--${m}`,
+			n ? "toggle--icon-only" : "",
 			a ?? ""
 		].filter(Boolean).join(" "),
-		onPressedChange: o ? (e) => o(e) : void 0,
-		...s
+		onPressedChange: (e, t) => {
+			if (f) {
+				t.cancel();
+				return;
+			}
+			o?.(e);
+		},
+		onClick: (e) => {
+			if (f) {
+				e.preventDefault();
+				return;
+			}
+			l?.(e);
+		},
+		disabled: f ? !1 : s,
+		...f ? {
+			"aria-disabled": !0,
+			"data-disabled": ""
+		} : {},
+		...u
 	});
 });
+e(a);
 //#endregion
-export { i as Toggle };
+export { a as Toggle };

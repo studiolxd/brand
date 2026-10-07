@@ -1,22 +1,23 @@
 'use client';
 import './input.css';
-import { forwardRef as e } from "react";
-import { jsx as t } from "react/jsx-runtime";
+import { n as e } from "./_shared/env.js";
+import { forwardRef as t } from "react";
+import { jsx as n } from "react/jsx-runtime";
 //#region src/stories/atoms/Input/Input.tsx
-var n = e(function({ size: e = "md", error: n = !1, className: r, describedBy: i, ariaLabel: a, ...o }, s) {
-	return /* @__PURE__ */ t("input", {
-		ref: s,
+var r = t(function({ size: t = "md", error: r = !1, className: i, describedBy: a, ariaLabel: o, ...s }, c) {
+	return o !== void 0 && e("Input", "ariaLabel", "`aria-label`"), /* @__PURE__ */ n("input", {
+		ref: c,
 		className: [
 			"input",
-			e === "md" ? "" : `input--${e}`,
-			n ? "input--error" : "",
-			r ?? ""
+			t === "md" ? "" : `input--${t}`,
+			r ? "input--error" : "",
+			i ?? ""
 		].filter(Boolean).join(" "),
-		"aria-invalid": n || void 0,
-		"aria-describedby": i,
-		"aria-label": a,
-		...o
+		"aria-invalid": r || void 0,
+		"aria-describedby": a,
+		"aria-label": o,
+		...s
 	});
 });
 //#endregion
-export { n as Input };
+export { r as Input };

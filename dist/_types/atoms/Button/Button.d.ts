@@ -74,6 +74,19 @@ export interface ButtonBaseProps extends Omit<React.ComponentPropsWithoutRef<'bu
      * enseña (el `Toast`, el error del campo).
      */
     loading?: boolean;
+    /**
+     * Con `disabled`, el botón **sigue en el orden de tabulación**: deja el
+     * `disabled` nativo, se anuncia deshabilitado con `aria-disabled="true"` y
+     * no ejecuta nada (ni el `onClick` ni el envío del formulario). Es lo que
+     * hace falta cuando un `Tooltip` explica por qué no se puede pulsar: un
+     * `button[disabled]` no recibe foco ni eventos de puntero, así que el
+     * bocadillo no se abriría. `Tooltip` lo activa solo en su disparador
+     * deshabilitado; fuera de él, pásalo a mano solo si el control apagado tiene
+     * algo que decir al recibir el foco. Mismo nombre y contrato que en Base UI.
+     *
+     * @default false
+     */
+    focusableWhenDisabled?: boolean;
     /** Renders as <a> when provided */
     href?: string;
     /** Adds target="_blank" rel="noopener noreferrer" (solo con href) */
