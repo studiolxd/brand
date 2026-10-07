@@ -157,7 +157,7 @@ describe('PlanningGrid', () => {
     expect(campo).toHaveAttribute('aria-describedby', alerta.id);
   });
 
-  it('un cruce en vuelo se atenúa sin esconder la cifra', () => {
+  it('un cruce en vuelo lleva la cifra a la vista y una marca de guardado que se anuncia', () => {
     const { container } = render(
       <PlanningGrid
         {...base}
@@ -165,10 +165,34 @@ describe('PlanningGrid', () => {
         onCellChange={vi.fn()}
       />,
     );
-    expect(container.querySelectorAll('.planning-grid__cell--pending')).toHaveLength(1);
+    const celda = container.querySelector('.planning-grid__cell--pending') as HTMLElement;
+    expect(celda).not.toBeNull();
     expect(
-      screen.getByRole('textbox', { name: ES.planningGrid.cellLabel('Portal de facturación', 'Semana 12') }),
+      within(celda).getByRole('textbox', { name: ES.planningGrid.cellLabel('Portal de facturación', 'Semana 12') }),
     ).toHaveValue('20');
+    expect(within(celda).getByRole('status')).toHaveAccessibleName(ES.planningGrid.saving!);
+    expect(within(celda).getByRole('status')).toHaveClass('spinner--sm');
+  });
+
+  it('la marca de guardado: la prop gana al catálogo, y sin ninguno cae al castellano', () => {
+    const celdas: PlanningGridCell[] = [{ rowId: 'pr1', columnKey: 's12', value: 20, pending: true }];
+    const { unmount } = render(
+      <PlanningGrid {...base} cells={celdas} onCellChange={vi.fn()} savingLabel="Enviando…" />,
+    );
+    expect(screen.getByRole('status')).toHaveAccessibleName('Enviando…');
+    unmount();
+    const sinClave = { ...ES, planningGrid: { ...ES.planningGrid, saving: undefined } };
+    renderRTL(
+      <BrandMessagesProvider messages={sinClave}>
+        <PlanningGrid {...base} cells={celdas} onCellChange={vi.fn()} />
+      </BrandMessagesProvider>,
+    );
+    expect(screen.getByRole('status')).toHaveAccessibleName('Guardando…');
+  });
+
+  it('sin cruces en vuelo no hay marca de guardado', () => {
+    render(<PlanningGrid {...base} onCellChange={vi.fn()} />);
+    expect(screen.queryByRole('status')).toBeNull();
   });
 
   it('recorta un valor por encima del tope', async () => {

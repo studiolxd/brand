@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { PlanningGrid, type PlanningGridCell, type PlanningGridColumn, type PlanningGridRow } from './PlanningGrid';
 import { Link } from '../../atoms/Link/Link';
 import { SOLO_OSCURO } from '../../utils/chromaticModes';
@@ -101,9 +101,6 @@ export const SoloLectura: Story = {
 
 export const ConCambioEnVueloYError: Story = {
   name: 'Con un cambio en vuelo y un error',
-  // a11y pendiente de decisión (D16): `color-contrast` de la celda con un cambio en
-  // vuelo, atenuada: #a0a5ac sobre #ffffff, 2,47:1 a 14px (pide 4,5:1).
-  parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } },
   args: { rows: PROYECTOS, columns: SEMANAS, cells: HORAS },
   render: () => (
     <PlanningGrid
@@ -119,6 +116,32 @@ export const ConCambioEnVueloYError: Story = {
       })}
     />
   ),
+};
+
+export const TestEnVueloOscuro: Story = {
+  name: 'Test — el cruce en vuelo, a contraste pleno y con su marca de guardado, también en oscuro',
+  tags: ['!dev'],
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
+  args: { rows: PROYECTOS, columns: SEMANAS, cells: HORAS },
+  // Sin la fila de resto: su total negativo en oscuro es el caso pendiente de
+  // `SuperficieOscura`, y aquí axe tiene que medir solo el cruce en vuelo.
+  render: () => (
+    <PlanningGrid
+      rows={PROYECTOS}
+      columns={SEMANAS}
+      rowHeader="Proyecto"
+      label="Planificación de Nuria Oliva"
+      showRemaining={false}
+      onCellChange={() => {}}
+      cells={HORAS.map((c) => (c.rowId === 'pr2' && c.columnKey === 's12' ? { ...c, pending: true } : c))}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    await waitFor(() => expect(document.documentElement.dataset.theme).toBe('dark'));
+    const celda = canvasElement.querySelector('.planning-grid__cell--pending') as HTMLElement;
+    await expect(getComputedStyle(celda).opacity).toBe('1');
+    await expect(within(celda).getByRole('status')).toHaveAccessibleName('Guardando…');
+  },
 };
 
 /* ── Persona × día ──────────────────────────────────────────────────────────
@@ -167,8 +190,11 @@ export const SuperficieOscura: Story = {
   name: 'En superficie oscura',
   args: { rows: PROYECTOS, columns: SEMANAS, cells: HORAS },
   render: () => <Rejilla showCapacity />,
-  // a11y pendiente de decisión (D16): `color-contrast` del total que se pasa en el pie,
-  // en oscuro: #ff8585 sobre #4a4a4a, 3,77:1 a 14px (pide 4,5:1).
+  // a11y pendiente de decisión (D16, D41): `color-contrast` del total que se pasa en el
+  // pie, en oscuro: #ff8585 sobre #4a4a4a, 3,77:1 a 14px (pide 4,5:1). El gris del pie
+  // es su banda (en claro, #f2f2f2): pasarlo al lienzo prusia lo confundiría con el
+  // cuerpo. Alternativa propuesta: el resto negativo como relleno `error-fill` con
+  // tinta `error-fill-text` (#ffffff sobre #b30000) en las dos superficies.
   parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } }, surface: 'dark', chromatic: SOLO_OSCURO },
 };
 
