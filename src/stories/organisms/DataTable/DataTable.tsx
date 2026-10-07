@@ -114,6 +114,7 @@ export type DataTableHeaderLabels = Pick<
 /** Etiquetas accesibles que la tabla reenvía a su paginación. */
 export type DataTablePaginationLabels = Pick<
   PaginationProps,
+  | 'aria-label'
   | 'ariaLabel'
   | 'pageLabel'
   | 'previousLabel'

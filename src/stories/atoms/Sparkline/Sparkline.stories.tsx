@@ -31,7 +31,7 @@ export const CruzandoElCero: Story = {
 };
 
 export const Descriptiva: Story = {
-  args: { ariaLabel: 'Usuarios activos: sube de 12 a 31 en doce meses' },
+  args: { 'aria-label': 'Usuarios activos: sube de 12 a 31 en doce meses' },
 };
 
 export const TestDecorativaPorDefecto: Story = {
@@ -47,7 +47,7 @@ export const TestDecorativaPorDefecto: Story = {
 export const TestConNombre: Story = {
   name: 'Test — con ariaLabel es una imagen con nombre',
   tags: ['!dev'],
-  args: { ariaLabel: 'Tendencia de usuarios activos' },
+  args: { 'aria-label': 'Tendencia de usuarios activos' },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     expect(canvas.getByRole('img', { name: 'Tendencia de usuarios activos' })).toBeInTheDocument();

@@ -503,7 +503,7 @@ export const ContratoAccionesLlenanLaRejilla: Story = {
     <>
       {/* Dos `role="search"` en la misma página: cada uno con su nombre. */}
       <div data-testid="sin-acciones">
-        <FilterBar ariaLabel="Filtros sin acciones">
+        <FilterBar aria-label="Filtros sin acciones">
           <SelectField id="ci-estado" label="Estado" options={ESTADOS} defaultValue="todos" />
           <SelectField id="ci-papel" label="Papel" options={PAPELES} defaultValue="todos" />
           <DatePickerField id="ci-desde" label="Desde" />

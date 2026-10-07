@@ -2,6 +2,7 @@ import { Children, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { filterBarEs } from '../../messages/es/filterBar';
 import './FilterBar.css';
+import { warnDeprecated } from '../../constants/env';
 
 /**
  * El único texto que la barra emite por su cuenta: su nombre accesible como
@@ -37,6 +38,8 @@ export interface FilterBarProps extends Omit<ComponentPropsWithoutRef<'div'>, 'c
    * Nombre accesible del punto de referencia `search` que es la barra.
    * **Sin default**: sale de `filterBar.label` del `BrandMessagesProvider`.
    */
+  'aria-label'?: string;
+  /** @deprecated Usa `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
   ariaLabel?: string;
   /** Se añade DESPUÉS de las clases propias. */
   className?: string;
@@ -60,10 +63,13 @@ export function FilterBar({
   search,
   children,
   actions,
-  ariaLabel,
+  'aria-label': ariaLabelProp,
+  ariaLabel: ariaLabelDeprecated,
   className,
   ...rest
 }: FilterBarProps) {
+  if (ariaLabelDeprecated !== undefined) warnDeprecated('FilterBar', 'ariaLabel', '`aria-label`');
+  const ariaLabel = ariaLabelProp ?? ariaLabelDeprecated;
   const t = useBrandMessages('filterBar', filterBarEs);
   const filters = Children.toArray(children);
 

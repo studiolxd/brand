@@ -146,7 +146,7 @@ export const ContratoPassthrough: Story = {
     await expect(nav).toHaveAttribute('id', 'indice');
     await expect(nav).toHaveAttribute('data-zona', 'lateral');
     await expect(nav).toHaveAttribute('aria-describedby', 'pista');
-    // el nombre accesible sigue saliendo de `ariaLabel`
+    // el nombre accesible sale de `aria-label` (o del catálogo), no del resto
     await expect(nav).toHaveAttribute('aria-label', 'En esta página');
   },
 };

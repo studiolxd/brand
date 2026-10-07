@@ -44,7 +44,7 @@ El campo hereda los tokens de `.surface-dark` por cascada; no hay prop de tema.
 ## Accesibilidad
 
 - El campo necesita nombre: en un formulario lo pone la etiqueta del `InputField`; suelto, `aria-label`.
-- `aria-describedby` y `aria-invalid` se pasan como atributos nativos y llegan al `<input>` (los pone el campo con su ayuda y su error). Las props `describedBy` y `ariaLabel` quedan obsoletas.
+- `aria-describedby` y `aria-invalid` se pasan como atributos nativos y llegan al `<input>` (los pone el campo con su ayuda y su error). Las props `describedBy` y `ariaLabel` quedan obsoletas (avisan en desarrollo; `ariaLabel` se retira en la v52): el nombre suelto va en `aria-label`.
 - El anillo de foco se dibuja hacia dentro, pegado al borde, para no desplazar el layout.
 
 ## Tokens

@@ -26,7 +26,7 @@ Sin `activeId`, el índice es una lista de anclas y ya.
 
 ## Anatomía
 
-- Un `nav` con nombre accesible (`ariaLabel`, «En esta página» por defecto).
+- Un `nav` con nombre accesible (`aria-label`, «En esta página» por defecto).
 - Un rótulo visible opcional (`title`). Sin él no se pinta ninguno, pero el `nav` conserva su nombre.
 - Una `List` de tipo `plain` con un `Link` por entrada, apuntando a `#id`.
 
@@ -63,8 +63,8 @@ La entrada actual pasa a lavanda (`color.accent-1`), tinta y barra emparejadas: 
 ## Atributos al `<nav>`
 
 Lo que no sea prop propia (`id`, `data-*`, `role`, `style`…) viaja al `<nav>`. El **nombre
-accesible sigue siendo `ariaLabel`**, no `aria-label` suelto: es la prop de texto del componente y
-la que se traduce.
+accesible es `aria-label`**, el atributo nativo: cuando no se pasa, sale del catálogo
+(`tableOfContents.label`). `ariaLabel` queda como alias obsoleto hasta la v52.
 
 ## Internacionalización
 
@@ -74,7 +74,7 @@ puesto**.
 
 | | Textos | De dónde salen | Por qué |
 | --- | --- | --- | --- |
-| **Cromo** | `ariaLabel` | `tableOfContents.label` del proveedor | «En esta página» nombra la región, no la página. |
+| **Cromo** | `aria-label` | `tableOfContents.label` del proveedor | «En esta página» nombra la región, no la página. |
 | **Contenido** | `title` y los rótulos de las entradas | props | El rótulo visible y los encabezados son del documento. |
 
 ```tsx

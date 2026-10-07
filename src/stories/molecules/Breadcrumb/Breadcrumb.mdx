@@ -14,7 +14,7 @@ jerarquía profunda. No sustituye a la navegación principal, la complementa.
 
 ## Anatomía
 
-Un `<nav>` con nombre accesible (`ariaLabel`, «Migas de pan» por defecto) que
+Un `<nav>` con nombre accesible (`aria-label`, «Migas de pan» por defecto) que
 envuelve una lista (`<ol>`). Cada item es un enlace salvo el último, que es la
 página actual: texto sin enlace, `aria-current="page"` y peso de énfasis. Un
 separador decorativo (`aria-hidden`) entre cada par de items.
@@ -48,7 +48,7 @@ puesto**.
 
 | | Textos | De dónde salen | Por qué |
 | --- | --- | --- | --- |
-| **Cromo** | `ariaLabel` | `breadcrumb.label` del proveedor | Nombra la región: dice «esto es un rastro», no cuál. |
+| **Cromo** | `aria-label` | `breadcrumb.label` del proveedor | Nombra la región: dice «esto es un rastro», no cuál. |
 | **Contenido** | los rótulos del rastro | `items` | Son las páginas de ESTA jerarquía. |
 
 ```tsx
@@ -73,7 +73,7 @@ El `separator` tampoco pasa por el catálogo: es un glifo, no un texto.
 
 ## Accesibilidad
 
-- El `<nav>` lleva nombre accesible propio (`ariaLabel`) para distinguirlo de
+- El `<nav>` lleva nombre accesible propio (`aria-label`) para distinguirlo de
   la navegación principal cuando un lector de pantalla lista los puntos de
   referencia de la página.
 - El item actual es `aria-current="page"`, no un enlace: no tiene sentido

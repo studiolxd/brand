@@ -178,7 +178,7 @@ A partir de ahí el paginador se monta sin una sola prop de texto:
 
 | Escalón | Cuándo |
 | --- | --- |
-| **La prop** | Cuando se pasa. Es la **anulación puntual**: el `ariaLabel` de un paginador concreto («Resultados de la búsqueda») no es el de todos los de la app |
+| **La prop** | Cuando se pasa. Es la **anulación puntual**: el `aria-label` de un paginador concreto («Resultados de la búsqueda») no es el de todos los de la app |
 | **El proveedor** | Cuando la prop falta. El texto sale del catálogo del idioma vigente |
 | **El castellano del paquete** | Cuando faltan las dos. Sale el castellano de respaldo y, en desarrollo, la consola avisa una vez de qué clave faltaba |
 
@@ -189,7 +189,7 @@ cuando cae en él, y una app que quiera que olvidar un texto no compile escribe 
 
 | Prop | Clave del catálogo | Dónde aparece |
 | --- | --- | --- |
-| `ariaLabel` | `pagination.label` | `aria-label` del `<nav>` |
+| `aria-label` | `pagination.label` | `aria-label` del `<nav>` |
 | `pageLabel` | `pagination.goToPage` | `aria-label` de cada botón/enlace de página |
 | `previousLabel` | `pagination.previous` | `aria-label` del control anterior |
 | `nextLabel` | `pagination.next` | `aria-label` del control siguiente |

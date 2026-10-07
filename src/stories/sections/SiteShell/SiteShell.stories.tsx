@@ -204,7 +204,7 @@ const MATERIAS = [
 function FiltrosDelCatalogo({ prefijo, ariaLabel }: { prefijo: string; ariaLabel?: string }) {
   return (
     <FilterBar
-      ariaLabel={ariaLabel}
+      aria-label={ariaLabel}
       search={
         <InputField
           id={`${prefijo}-buscar`}
@@ -280,7 +280,7 @@ export const ContratoControlesLg: Story = {
             la rejilla caiga cada filtro. */}
         <div data-testid="alineacion">
           <FilterBar
-            ariaLabel="Alineación"
+            aria-label="Alineación"
             actions={<Button variant="outline">Limpiar filtros</Button>}
           >
             <DatePickerField id="alineacion-desde" label="Desde" />

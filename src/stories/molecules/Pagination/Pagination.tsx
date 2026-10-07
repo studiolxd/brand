@@ -5,6 +5,7 @@ import type { SelectOption } from '../../atoms/Select/Select';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { paginationEs } from '../../messages/es/pagination';
 import './Pagination.css';
+import { warnDeprecated } from '../../constants/env';
 
 /**
  * Los textos que el paginador emite por su cuenta. Los nombres calcan el
@@ -109,6 +110,8 @@ export interface PaginationProps {
    * `aria-label` del `<nav>`. Sin default: cuando no se pasa, sale de
    * `pagination.label` del `BrandMessagesProvider`.
    */
+  'aria-label'?: string;
+  /** @deprecated Usa `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
   ariaLabel?: string;
   /** `aria-label` de cada botón/enlace de página. Sin default: `pagination.goToPage`. */
   pageLabel?: (page: number) => string;
@@ -174,7 +177,8 @@ export function Pagination({
   afterPageSize,
   showTotal = false,
   size = 'md',
-  ariaLabel,
+  'aria-label': ariaLabelProp,
+  ariaLabel: ariaLabelDeprecated,
   pageLabel,
   previousLabel,
   nextLabel,
@@ -183,6 +187,8 @@ export function Pagination({
   totalLabel,
   className,
 }: PaginationProps) {
+  if (ariaLabelDeprecated !== undefined) warnDeprecated('Pagination', 'ariaLabel', '`aria-label`');
+  const ariaLabel = ariaLabelProp ?? ariaLabelDeprecated;
   // Cada texto se lee donde se pinta, nunca antes: un paginador sin selector
   // de tamaño no exige el texto del selector.
   const t = useBrandMessages('pagination', paginationEs);

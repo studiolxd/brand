@@ -36,7 +36,7 @@ describe('FilterBar', () => {
   });
 
   it('el nombre accesible se traduce por prop', () => {
-    render(<FilterBar ariaLabel="Filters" search={<Buscador />} />);
+    render(<FilterBar aria-label="Filters" search={<Buscador />} />);
     expect(screen.getByRole('search', { name: 'Filters' })).toBeInTheDocument();
   });
 

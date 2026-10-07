@@ -98,7 +98,7 @@ describe('BrandMessagesProvider', () => {
   it('la prop suelta gana al proveedor: es la anulación puntual', () => {
     render(
       <BrandMessagesProvider messages={EN}>
-        <Pagination total={100} page={3} pageSize={10} ariaLabel="Search results" />
+        <Pagination total={100} page={3} pageSize={10} aria-label="Search results" />
       </BrandMessagesProvider>,
     );
 
@@ -117,7 +117,7 @@ describe('BrandMessagesProvider', () => {
         total={100}
         page={3}
         pageSize={10}
-        ariaLabel="Pagination"
+        aria-label="Pagination"
         pagesGroupLabel="Pages"
         previousLabel="Previous page"
         nextLabel="Next page"
@@ -1182,7 +1182,7 @@ describe('el cromo de navegación lee del proveedor', () => {
   it('la prop suelta gana al proveedor también en la navegación', () => {
     render(
       <BrandMessagesProvider messages={EN}>
-        <Breadcrumb ariaLabel="Ruta de esta sección" items={[{ label: 'Inicio' }]} />
+        <Breadcrumb aria-label="Ruta de esta sección" items={[{ label: 'Inicio' }]} />
       </BrandMessagesProvider>,
     );
 
