@@ -10,46 +10,48 @@ import { n as o, t as s } from "./_shared/fieldshell.js";
 import { forwardRef as c, useState as l } from "react";
 import { jsx as u, jsxs as d } from "react/jsx-runtime";
 //#region src/stories/molecules/PasswordField/PasswordField.tsx
-var f = c(function({ label: c, labelHidden: f, error: p = !1, errorMessage: m, helperText: h, action: g, size: _, showPasswordLabel: v, hidePasswordLabel: y, className: b, id: x, disabled: S, placeholder: C, "aria-describedby": w, ...T }, E) {
-	let D = e("passwordField"), O = r(_), k = a(f), A = o({
-		id: x,
-		error: p,
-		errorMessage: m,
-		helperText: h,
-		describedBy: w
-	}), j = A.id, [M, N] = l(!1);
+var f = c(function({ label: c, optional: f, optionalLabel: p, labelHidden: m, error: h = !1, errorMessage: g, helperText: _, action: v, size: y, showPasswordLabel: b, hidePasswordLabel: x, className: S, id: C, disabled: w, placeholder: T, "aria-describedby": E, ...D }, O) {
+	let k = e("passwordField"), A = r(y), j = a(m), M = o({
+		id: C,
+		error: h,
+		errorMessage: g,
+		helperText: _,
+		describedBy: E
+	}), N = M.id, [P, F] = l(!1);
 	return /* @__PURE__ */ u(s, {
-		field: A,
+		field: M,
 		block: "password-field",
-		className: b,
+		className: S,
 		label: c,
-		labelHidden: k,
-		size: O,
-		footer: g && /* @__PURE__ */ u("div", {
+		optional: f,
+		optionalLabel: p,
+		labelHidden: j,
+		size: A,
+		footer: v && /* @__PURE__ */ u("div", {
 			className: "password-field__action",
-			children: g
+			children: v
 		}),
 		children: /* @__PURE__ */ d("div", {
-			className: ["password-field__wrapper", O === "md" ? "" : `password-field__wrapper--${O}`].filter(Boolean).join(" "),
+			className: ["password-field__wrapper", A === "md" ? "" : `password-field__wrapper--${A}`].filter(Boolean).join(" "),
 			children: [/* @__PURE__ */ u(i, {
-				ref: E,
-				id: j,
-				size: O,
-				error: A.hasError,
-				placeholder: C ?? (c && k ? c : void 0),
-				"aria-describedby": A.describedBy,
-				...T,
-				type: M ? "text" : "password",
-				disabled: S
+				ref: O,
+				id: N,
+				size: A,
+				error: M.hasError,
+				placeholder: T ?? (c && j ? c : void 0),
+				"aria-describedby": M.describedBy,
+				...D,
+				type: P ? "text" : "password",
+				disabled: w
 			}), /* @__PURE__ */ d("button", {
 				type: "button",
 				className: "password-field__toggle",
-				onClick: () => N((e) => !e),
-				disabled: S,
-				"aria-controls": j,
-				"aria-pressed": M,
-				children: [/* @__PURE__ */ u(n, { children: M ? D("hide", y) : D("show", v) }), /* @__PURE__ */ u(t, {
-					name: M ? "eye-off" : "eye",
+				onClick: () => F((e) => !e),
+				disabled: w,
+				"aria-controls": N,
+				"aria-pressed": P,
+				children: [/* @__PURE__ */ u(n, { children: P ? k("hide", x) : k("show", b) }), /* @__PURE__ */ u(t, {
+					name: P ? "eye-off" : "eye",
 					className: "password-field__icon"
 				})]
 			})]

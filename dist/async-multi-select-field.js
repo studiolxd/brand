@@ -7,42 +7,44 @@ import { n as r, t as i } from "./_shared/fieldshell.js";
 import { forwardRef as a } from "react";
 import { jsx as o } from "react/jsx-runtime";
 //#region src/stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField.tsx
-var s = a(function({ id: a, label: s, labelHidden: c, onSearch: l, value: u, defaultValue: d, onValueChange: f, selectedOptions: p, placeholder: m, name: h, disabled: g, readOnly: _, size: v, debounceMs: y, required: b, error: x = !1, errorMessage: S, helperText: C, className: w, emptyMessage: T, removeLabel: E, loadingLabel: D, container: O, onBlur: k }, A) {
-	let j = n(c), M = t(v), N = r({
+var s = a(function({ id: a, label: s, optional: c, optionalLabel: l, labelHidden: u, onSearch: d, value: f, defaultValue: p, onValueChange: m, selectedOptions: h, placeholder: g, name: _, disabled: v, readOnly: y, size: b, debounceMs: x, required: S, error: C = !1, errorMessage: w, helperText: T, className: E, emptyMessage: D, removeLabel: O, loadingLabel: k, container: A, onBlur: j }, M) {
+	let N = n(u), P = t(b), F = r({
 		id: a,
-		error: x,
-		errorMessage: S,
-		helperText: C
-	}), { id: P } = N;
+		error: C,
+		errorMessage: w,
+		helperText: T
+	}), { id: I } = F;
 	return /* @__PURE__ */ o(i, {
-		field: N,
+		field: F,
 		block: "async-multi-select-field",
-		className: w,
+		className: E,
 		label: s,
-		labelHidden: j,
-		size: M,
+		optional: c,
+		optionalLabel: l,
+		labelHidden: N,
+		size: P,
 		children: /* @__PURE__ */ o(e, {
-			ref: A,
-			id: P,
-			name: h,
-			onSearch: l,
-			value: u,
-			defaultValue: d,
-			onValueChange: f,
-			selectedOptions: p,
-			placeholder: m,
-			disabled: g,
-			readOnly: _,
-			size: M,
-			debounceMs: y,
-			required: b,
-			error: N.hasError,
-			emptyMessage: T,
-			removeLabel: E,
-			loadingLabel: D,
-			container: O,
-			"aria-describedby": N.describedBy,
-			onBlur: k
+			ref: M,
+			id: I,
+			name: _,
+			onSearch: d,
+			value: f,
+			defaultValue: p,
+			onValueChange: m,
+			selectedOptions: h,
+			placeholder: g,
+			disabled: v,
+			readOnly: y,
+			size: P,
+			debounceMs: x,
+			required: S,
+			error: F.hasError,
+			emptyMessage: D,
+			removeLabel: O,
+			loadingLabel: k,
+			container: A,
+			"aria-describedby": F.describedBy,
+			onBlur: j
 		})
 	});
 });

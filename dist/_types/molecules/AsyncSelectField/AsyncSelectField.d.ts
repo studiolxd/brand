@@ -1,8 +1,9 @@
 import './AsyncSelectField.css';
+import { type FieldOptionalProps } from '../_shared/FieldShell';
 import { AsyncSelect } from '../../atoms/AsyncSelect/AsyncSelect';
 import type { AsyncSelectOption } from '../../atoms/AsyncSelect/AsyncSelect';
 export type { AsyncSelectOption };
-export interface AsyncSelectFieldProps {
+export interface AsyncSelectFieldProps extends FieldOptionalProps {
     /** `id` del control. Si no se pasa, se genera con `useId`. */
     id?: string;
     label: string;

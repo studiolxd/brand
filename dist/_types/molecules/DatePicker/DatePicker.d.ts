@@ -70,6 +70,12 @@ export interface DatePickerProps {
     size?: 'sm' | 'md' | 'lg';
     disabled?: boolean;
     readOnly?: boolean;
+    /**
+     * Campo obligatorio: `required` nativo en el campo de texto, que es el que
+     * guarda lo escrito. El lector de pantalla lo anuncia y el `<form>` no se
+     * envía vacío.
+     */
+    required?: boolean;
     error?: boolean;
     locale?: string;
     /** id aplicado al campo de texto */

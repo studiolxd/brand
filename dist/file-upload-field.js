@@ -7,27 +7,29 @@ import { n as r, t as i } from "./_shared/fieldshell.js";
 import { forwardRef as a } from "react";
 import { jsx as o } from "react/jsx-runtime";
 //#region src/stories/molecules/FileUploadField/FileUploadField.tsx
-var s = a(function({ id: a, label: s, labelHidden: c, errorMessage: l, helperText: u, error: d = !1, size: f, className: p, ...m }, h) {
-	let g = n(c), _ = e(f), v = r({
+var s = a(function({ id: a, label: s, optional: c, optionalLabel: l, labelHidden: u, errorMessage: d, helperText: f, error: p = !1, size: m, className: h, ...g }, _) {
+	let v = n(u), y = e(m), b = r({
 		id: a,
-		error: d,
-		errorMessage: l,
-		helperText: u
-	}), { id: y } = v;
+		error: p,
+		errorMessage: d,
+		helperText: f
+	}), { id: x } = b;
 	return /* @__PURE__ */ o(i, {
-		field: v,
+		field: b,
 		block: "file-upload-field",
-		className: p,
+		className: h,
 		label: s,
-		labelHidden: g,
-		size: _,
+		optional: c,
+		optionalLabel: l,
+		labelHidden: v,
+		size: y,
 		children: /* @__PURE__ */ o(t, {
-			ref: h,
-			...m,
-			id: y,
-			size: _,
-			error: v.hasError,
-			"aria-describedby": v.describedBy
+			ref: _,
+			...g,
+			id: x,
+			size: y,
+			error: b.hasError,
+			"aria-describedby": b.describedBy
 		})
 	});
 });

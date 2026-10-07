@@ -7,62 +7,63 @@ import { Popover as i } from "../popover.js";
 import { Slider as a } from "../slider.js";
 import { t as o } from "./css-properties.js";
 import { ColorSwatch as s } from "../color-swatch.js";
-import { cloneElement as c, forwardRef as l, useCallback as u, useId as d, useRef as f, useState as p } from "react";
-import { jsx as m, jsxs as h } from "react/jsx-runtime";
-import { useRender as g } from "@base-ui/react/use-render";
-import { useDirection as _ } from "@base-ui/react/direction-provider";
+import { t as c } from "./requiredinput.js";
+import { cloneElement as l, forwardRef as u, useCallback as d, useId as f, useRef as p, useState as m } from "react";
+import { jsx as h, jsxs as g } from "react/jsx-runtime";
+import { useRender as _ } from "@base-ui/react/use-render";
+import { useDirection as ee } from "@base-ui/react/direction-provider";
 //#region src/stories/molecules/ColorPicker/ColorArea.tsx
-var v = 1, y = 10, b = (e) => Math.min(100, Math.max(0, e)), x = l(function({ hueColor: e, saturation: t, brightness: n, onChange: r, onCommit: i, label: a, roleDescription: s, valueText: c, disabled: l = !1 }, d) {
-	let p = _() === "rtl", h = f(null), g = f(null), x = f({
+var te = 1, v = 10, y = (e) => Math.min(100, Math.max(0, e)), b = u(function({ hueColor: e, saturation: t, brightness: n, onChange: r, onCommit: i, label: a, roleDescription: s, valueText: c, disabled: l = !1 }, u) {
+	let f = ee() === "rtl", m = p(null), g = p(null), _ = p({
 		s: 0,
 		v: 0
-	}), S = o({
-		"--color-picker-area-x": `${p ? 100 - t : t}%`,
+	}), b = o({
+		"--color-picker-area-x": `${f ? 100 - t : t}%`,
 		"--color-picker-area-y": `${100 - n}%`,
 		"--color-picker-area-hue": e
-	}), C = u((e) => {
-		h.current = e, S(e);
-	}, [S]), w = (e) => {
+	}), x = d((e) => {
+		m.current = e, b(e);
+	}, [b]), S = (e) => {
 		let t = e.currentTarget.getBoundingClientRect(), n = t.width ? (e.clientX - t.left) / t.width : 0, r = t.height ? (e.clientY - t.top) / t.height : 0;
 		return {
-			s: b((p ? 1 - n : n) * 100),
-			v: b((1 - r) * 100)
+			s: y((f ? 1 - n : n) * 100),
+			v: y((1 - r) * 100)
 		};
-	}, T = () => {
-		((typeof d == "function" ? null : d?.current) ?? h.current?.querySelector("[role=\"slider\"]"))?.focus({ preventScroll: !0 });
-	}, E = (e) => {
+	}, C = () => {
+		((typeof u == "function" ? null : u?.current) ?? m.current?.querySelector("[role=\"slider\"]"))?.focus({ preventScroll: !0 });
+	}, w = (e) => {
 		if (l || e.button !== 0) return;
 		e.preventDefault();
 		try {
 			e.currentTarget.setPointerCapture?.(e.pointerId);
 		} catch {}
-		g.current = e.pointerId, T();
-		let t = w(e);
-		x.current = t, r(t);
-	}, D = (e) => {
+		g.current = e.pointerId, C();
+		let t = S(e);
+		_.current = t, r(t);
+	}, T = (e) => {
 		if (g.current !== e.pointerId) return;
-		let t = w(e);
-		x.current = t, r(t);
-	}, O = (e) => {
+		let t = S(e);
+		_.current = t, r(t);
+	}, E = (e) => {
 		if (g.current === e.pointerId) {
 			g.current = null;
 			try {
 				e.currentTarget.releasePointerCapture?.(e.pointerId);
 			} catch {}
-			i(x.current);
+			i(_.current);
 		}
-	}, k = (e) => {
+	}, D = (e) => {
 		if (l) return;
-		let a = e.shiftKey ? y : v, { s: o, v: s } = {
+		let a = e.shiftKey ? v : te, { s: o, v: s } = {
 			s: t,
 			v: n
 		};
 		switch (e.key) {
 			case "ArrowRight":
-				o += p ? -a : a;
+				o += f ? -a : a;
 				break;
 			case "ArrowLeft":
-				o += p ? a : -a;
+				o += f ? a : -a;
 				break;
 			case "ArrowUp":
 				s += a;
@@ -71,10 +72,10 @@ var v = 1, y = 10, b = (e) => Math.min(100, Math.max(0, e)), x = l(function({ hu
 				s -= a;
 				break;
 			case "PageUp":
-				e.shiftKey ? o += y : s += y;
+				e.shiftKey ? o += v : s += v;
 				break;
 			case "PageDown":
-				e.shiftKey ? o -= y : s -= y;
+				e.shiftKey ? o -= v : s -= v;
 				break;
 			case "Home":
 				e.ctrlKey || e.metaKey ? s = 0 : o = 0;
@@ -86,22 +87,22 @@ var v = 1, y = 10, b = (e) => Math.min(100, Math.max(0, e)), x = l(function({ hu
 		}
 		e.preventDefault();
 		let c = {
-			s: b(o),
-			v: b(s)
+			s: y(o),
+			v: y(s)
 		};
 		r(c), i(c);
 	};
-	return /* @__PURE__ */ m("div", {
-		ref: C,
+	return /* @__PURE__ */ h("div", {
+		ref: x,
 		className: "color-picker__area",
-		"data-direction": p ? "rtl" : "ltr",
+		"data-direction": f ? "rtl" : "ltr",
 		"data-disabled": l ? "" : void 0,
-		onPointerDown: E,
-		onPointerMove: D,
-		onPointerUp: O,
-		onPointerCancel: O,
-		children: /* @__PURE__ */ m("div", {
-			ref: d,
+		onPointerDown: w,
+		onPointerMove: T,
+		onPointerUp: E,
+		onPointerCancel: E,
+		children: /* @__PURE__ */ h("div", {
+			ref: u,
 			className: "color-picker__area-thumb",
 			role: "slider",
 			tabIndex: l ? -1 : 0,
@@ -112,11 +113,11 @@ var v = 1, y = 10, b = (e) => Math.min(100, Math.max(0, e)), x = l(function({ hu
 			"aria-valuenow": Math.round(t),
 			"aria-valuetext": c,
 			"aria-disabled": l || void 0,
-			onKeyDown: k
+			onKeyDown: D
 		})
 	});
-}), S = (e, t, n) => Math.min(n, Math.max(t, e));
-function C(e) {
+}), x = (e, t, n) => Math.min(n, Math.max(t, e));
+function S(e) {
 	let t = e.trim().replace(/^#/, "");
 	if (!/^[0-9a-f]+$/i.test(t)) return null;
 	let n;
@@ -131,12 +132,12 @@ function C(e) {
 		a: n.length === 8 ? r(3) / 255 : 1
 	};
 }
-var w = (e) => S(Math.round(e), 0, 255).toString(16).padStart(2, "0");
-function T({ r: e, g: t, b: n, a: r }, i) {
-	let a = `#${w(e)}${w(t)}${w(n)}`;
-	return i ? `${a}${w(S(r, 0, 1) * 255)}` : a;
+var C = (e) => x(Math.round(e), 0, 255).toString(16).padStart(2, "0");
+function w({ r: e, g: t, b: n, a: r }, i) {
+	let a = `#${C(e)}${C(t)}${C(n)}`;
+	return i ? `${a}${C(x(r, 0, 1) * 255)}` : a;
 }
-function E({ r: e, g: t, b: n, a: r }) {
+function T({ r: e, g: t, b: n, a: r }) {
 	let i = e / 255, a = t / 255, o = n / 255, s = Math.max(i, a, o), c = s - Math.min(i, a, o), l = 0;
 	return c !== 0 && (l = s === i ? (a - o) / c % 6 : s === a ? (o - i) / c + 2 : (i - a) / c + 4, l *= 60, l < 0 && (l += 360)), {
 		h: l,
@@ -145,8 +146,8 @@ function E({ r: e, g: t, b: n, a: r }) {
 		a: r
 	};
 }
-function D({ h: e, s: t, v: n, a: r }) {
-	let i = (e % 360 + 360) % 360, a = S(t, 0, 100) / 100, o = S(n, 0, 100) / 100, s = o * a, c = s * (1 - Math.abs(i / 60 % 2 - 1)), l = o - s, u;
+function E({ h: e, s: t, v: n, a: r }) {
+	let i = (e % 360 + 360) % 360, a = x(t, 0, 100) / 100, o = x(n, 0, 100) / 100, s = o * a, c = s * (1 - Math.abs(i / 60 % 2 - 1)), l = o - s, u;
 	return u = i < 60 ? [
 		s,
 		c,
@@ -175,21 +176,21 @@ function D({ h: e, s: t, v: n, a: r }) {
 		r: (u[0] + l) * 255,
 		g: (u[1] + l) * 255,
 		b: (u[2] + l) * 255,
-		a: S(r, 0, 1)
+		a: x(r, 0, 1)
 	};
 }
-function O(e) {
-	let t = C(e);
-	return t ? E(t) : null;
+function D(e) {
+	let t = S(e);
+	return t ? T(t) : null;
+}
+function O(e, t) {
+	return w(E(e), t);
 }
 function k(e, t) {
-	return T(D(e), t);
+	let n = S(e);
+	return n ? w(n, t) : null;
 }
-function A(e, t) {
-	let n = C(e);
-	return n ? T(n, t) : null;
-}
-function ee() {
+function ne() {
 	return [
 		0,
 		60,
@@ -198,7 +199,7 @@ function ee() {
 		240,
 		300,
 		360
-	].map((e) => k({
+	].map((e) => O({
 		h: e,
 		s: 100,
 		v: 100,
@@ -207,222 +208,227 @@ function ee() {
 }
 //#endregion
 //#region src/stories/molecules/ColorPicker/ColorPicker.tsx
-var j = {
+function re(e, t) {
+	typeof e == "function" ? e(t) : e && (e.current = t);
+}
+var A = {
 	h: 0,
 	s: 0,
 	v: 0,
 	a: 1
-}, te = l(function({ value: l, defaultValue: v = null, onValueChange: y, onValueCommitted: b, alpha: S = !1, presets: C, clearable: w = !1, onClear: T, open: E, defaultOpen: D = !1, onOpenChange: te, size: M = "md", disabled: N = !1, error: P = !1, locale: ne = "es-ES", id: re, name: F, "aria-label": I, "aria-labelledby": L, "aria-describedby": ie, dialogLabel: ae, clearLabel: oe, trigger: R, anchor: z, className: se }, B) {
-	let V = e("colorPicker"), H = _() === "rtl", [ce, U] = p(D), W = E ?? ce, G = l !== void 0, [le, ue] = p(v), K = G ? l : le, q = K ? A(K, S) : null, [J, de] = p(() => q && O(q) || j), [fe, pe] = p(q);
-	q !== fe && (pe(q), q && k(J, S) !== q && de(O(q) ?? j));
-	let me = k(J, S), he = k({
-		...J,
+}, ie = u(function({ value: u, defaultValue: te = null, onValueChange: v, onValueCommitted: y, alpha: x = !1, presets: S, clearable: C = !1, onClear: w, open: T, defaultOpen: E = !1, onOpenChange: ie, size: j = "md", disabled: M = !1, error: N = !1, locale: ae = "es-ES", id: oe, name: se, required: ce = !1, "aria-label": P, "aria-labelledby": F, "aria-describedby": le, dialogLabel: ue, clearLabel: de, trigger: I, anchor: L, className: fe }, R) {
+	let z = e("colorPicker"), B = ee() === "rtl", [pe, V] = m(E), H = T ?? pe, U = u !== void 0, [me, W] = m(te), G = U ? u : me, K = G ? k(G, x) : null, [q, he] = m(() => K && D(K) || A), [ge, _e] = m(K);
+	K !== ge && (_e(K), K && O(q, x) !== K && he(D(K) ?? A));
+	let ve = O(q, x), ye = O({
+		...q,
 		a: 1
-	}, !1), Y = u((e, t) => {
-		let n = S ? e : {
+	}, !1), J = d((e, t) => {
+		let n = x ? e : {
 			...e,
 			a: 1
 		};
-		de(n);
-		let r = k(n, S);
-		G || ue(r), y?.(r), t && b?.(r);
+		he(n);
+		let r = O(n, x);
+		U || W(r), v?.(r), t && y?.(r);
 	}, [
-		S,
-		G,
-		y,
-		b
-	]), [X, Z] = p(null), [ge, _e] = p(W);
-	W !== ge && (_e(W), W || Z(null));
-	let ve = (e, t) => {
-		let n = A(e, S), r = n ? O(n) : null;
-		return r ? (Y(r, t), !0) : !1;
-	}, ye = (e) => {
+		x,
+		U,
+		v,
+		y
+	]), [Y, X] = m(null), [be, xe] = m(H);
+	H !== be && (xe(H), H || X(null));
+	let Se = (e, t) => {
+		let n = k(e, x), r = n ? D(n) : null;
+		return r ? (J(r, t), !0) : !1;
+	}, Ce = (e) => {
 		let t = e.target.value;
-		Z(t);
+		X(t);
 		let n = t.trim().replace(/^#/, "").length;
-		(n === 6 || S && n === 8) && ve(t, !0);
-	}, be = () => {
-		X !== null && ve(X, !0), Z(null);
-	}, xe = () => {
-		G || ue(null), T?.(), E === void 0 && U(!1);
-	}, Se = (e, t) => {
-		e && N || (E === void 0 && U(e), te?.(e, t));
-	}, Ce = f(null), Q = d(), we = o({
-		"--color-picker-hue-gradient": `linear-gradient(to ${H ? "left" : "right"}, ${ee().join(", ")})`,
-		"--color-picker-alpha-gradient": `linear-gradient(to ${H ? "left" : "right"}, transparent, ${he})`
-	}), Te = (e) => Y({
-		...J,
+		(n === 6 || x && n === 8) && Se(t, !0);
+	}, we = () => {
+		Y !== null && Se(Y, !0), X(null);
+	}, Te = () => {
+		U || W(null), w?.(), T === void 0 && V(!1);
+	}, Ee = (e, t) => {
+		e && M || (T === void 0 && V(e), ie?.(e, t));
+	}, De = p(null), Z = f(), Oe = o({
+		"--color-picker-hue-gradient": `linear-gradient(to ${B ? "left" : "right"}, ${ne().join(", ")})`,
+		"--color-picker-alpha-gradient": `linear-gradient(to ${B ? "left" : "right"}, transparent, ${ye})`
+	}), ke = (e) => J({
+		...q,
 		s: e.s,
 		v: e.v
-	}, !1), Ee = (e) => Y({
-		...J,
+	}, !1), Ae = (e) => J({
+		...q,
 		s: e.s,
 		v: e.v
-	}, !0), De = (C ?? []).map((e) => ({
+	}, !0), je = (S ?? []).map((e) => ({
 		...e,
-		hex: A(e.color, S)
-	})).filter((e) => e.hex !== null), Oe = [
+		hex: k(e.color, x)
+	})).filter((e) => e.hex !== null), Me = [
 		"color-picker",
-		M === "md" ? "" : `color-picker--${M}`,
-		P ? "color-picker--error" : "",
-		se ?? ""
-	].filter(Boolean).join(" "), ke = [Q, ie].filter(Boolean).join(" "), Ae = /* @__PURE__ */ h("button", {
-		ref: B,
-		id: re,
+		j === "md" ? "" : `color-picker--${j}`,
+		N ? "color-picker--error" : ""
+	].filter(Boolean).join(" "), Ne = I === void 0 && L === void 0, Q = [Z, le].filter(Boolean).join(" "), Pe = p(null), Fe = d((e) => {
+		Pe.current = e, re(R, e);
+	}, [R]), Ie = /* @__PURE__ */ g("button", {
+		ref: Fe,
+		id: oe,
 		type: "button",
-		className: "color-picker__trigger",
-		disabled: N,
-		"aria-label": I ?? (L ? void 0 : V("trigger")),
-		"aria-labelledby": I ? void 0 : L,
-		"aria-describedby": ke,
+		className: ["color-picker__trigger", Ne ? fe : void 0].filter(Boolean).join(" "),
+		disabled: M,
+		"aria-label": P ?? (F ? void 0 : z("trigger")),
+		"aria-labelledby": P ? void 0 : F,
+		"aria-describedby": Q,
 		"aria-haspopup": "dialog",
-		"aria-expanded": W,
-		"aria-invalid": P || void 0,
-		children: [/* @__PURE__ */ m(s, {
-			color: K,
+		"aria-expanded": H,
+		"aria-invalid": N || void 0,
+		children: [/* @__PURE__ */ h(s, {
+			color: G,
 			className: "color-picker__swatch"
-		}), /* @__PURE__ */ m(t, {
-			id: Q,
-			children: K ? V("value")(q ?? K) : V("empty")
+		}), /* @__PURE__ */ h(t, {
+			id: Z,
+			children: G ? z("value")(K ?? G) : z("empty")
 		})]
-	}), je = R?.props ?? {}, Me = g({
-		render: R && c(R, {
-			disabled: N || je.disabled || void 0,
-			"aria-describedby": [ke, je["aria-describedby"]].filter(Boolean).join(" ")
+	}), Le = I?.props ?? {}, Re = _({
+		render: I && l(I, {
+			disabled: M || Le.disabled || void 0,
+			"aria-describedby": [Q, Le["aria-describedby"]].filter(Boolean).join(" ")
 		}),
-		ref: B,
-		enabled: R !== void 0,
+		ref: Fe,
+		enabled: I !== void 0,
 		props: {
-			id: re,
-			"aria-label": I,
-			"aria-labelledby": I ? void 0 : L,
+			id: oe,
+			"aria-label": P,
+			"aria-labelledby": P ? void 0 : F,
 			"aria-haspopup": "dialog",
-			"aria-expanded": W,
-			"aria-invalid": P || void 0
+			"aria-expanded": H,
+			"aria-invalid": N || void 0
 		}
 	}), $;
-	return Me ? $ = Me : z === void 0 && ($ = Ae), /* @__PURE__ */ h("div", {
-		className: Oe,
+	return Re ? $ = Re : L === void 0 && ($ = Ie), /* @__PURE__ */ g("div", {
+		className: Me,
 		children: [
-			F && /* @__PURE__ */ m("input", {
-				type: "hidden",
-				name: F,
-				value: q ?? ""
+			/* @__PURE__ */ h(c, {
+				name: se,
+				value: K ?? "",
+				required: ce,
+				focusTarget: () => Pe.current
 			}),
-			R && /* @__PURE__ */ m(t, {
-				id: Q,
-				children: K ? V("value")(q ?? K) : V("empty")
+			I && /* @__PURE__ */ h(t, {
+				id: Z,
+				children: G ? z("value")(K ?? G) : z("empty")
 			}),
-			/* @__PURE__ */ m(i, {
+			/* @__PURE__ */ h(i, {
 				trigger: $,
-				anchor: z,
-				label: V("dialog", ae),
-				open: W,
-				onOpenChange: Se,
+				anchor: L,
+				label: z("dialog", ue),
+				open: H,
+				onOpenChange: Ee,
 				side: "bottom",
 				align: "start",
-				initialFocus: Ce,
-				className: "color-picker__popover",
-				children: /* @__PURE__ */ h("div", {
-					ref: we,
+				initialFocus: De,
+				className: ["color-picker__popover", Ne ? void 0 : fe].filter(Boolean).join(" "),
+				children: /* @__PURE__ */ g("div", {
+					ref: Oe,
 					className: "color-picker__panel",
 					children: [
-						/* @__PURE__ */ m(x, {
-							ref: Ce,
-							hueColor: k({
-								h: J.h,
+						/* @__PURE__ */ h(b, {
+							ref: De,
+							hueColor: O({
+								h: q.h,
 								s: 100,
 								v: 100,
 								a: 1
 							}, !1),
-							saturation: J.s,
-							brightness: J.v,
-							onChange: Te,
-							onCommit: Ee,
-							label: V("area"),
-							roleDescription: V("areaDescription"),
-							valueText: V("areaValue")(Math.round(J.s), Math.round(J.v))
+							saturation: q.s,
+							brightness: q.v,
+							onChange: ke,
+							onCommit: Ae,
+							label: z("area"),
+							roleDescription: z("areaDescription"),
+							valueText: z("areaValue")(Math.round(q.s), Math.round(q.v))
 						}),
-						/* @__PURE__ */ m(a, {
+						/* @__PURE__ */ h(a, {
 							className: "color-picker__channel color-picker__channel--hue",
-							label: V("hue"),
+							label: z("hue"),
 							min: 0,
 							max: 360,
 							step: 1,
-							value: Math.round(J.h),
+							value: Math.round(q.h),
 							format: {
 								style: "unit",
 								unit: "degree"
 							},
-							locale: ne,
-							onValueChange: (e) => Y({
-								...J,
+							locale: ae,
+							onValueChange: (e) => J({
+								...q,
 								h: e
 							}, !1),
-							onValueCommitted: (e) => Y({
-								...J,
+							onValueCommitted: (e) => J({
+								...q,
 								h: e
 							}, !0)
 						}),
-						S && /* @__PURE__ */ m(a, {
+						x && /* @__PURE__ */ h(a, {
 							className: "color-picker__channel color-picker__channel--alpha",
-							label: V("alpha"),
+							label: z("alpha"),
 							min: 0,
 							max: 100,
 							step: 1,
-							value: Math.round(J.a * 100),
+							value: Math.round(q.a * 100),
 							format: {
 								style: "unit",
 								unit: "percent"
 							},
-							locale: ne,
-							onValueChange: (e) => Y({
-								...J,
+							locale: ae,
+							onValueChange: (e) => J({
+								...q,
 								a: e / 100
 							}, !1),
-							onValueCommitted: (e) => Y({
-								...J,
+							onValueCommitted: (e) => J({
+								...q,
 								a: e / 100
 							}, !0)
 						}),
-						/* @__PURE__ */ m(r, {
+						/* @__PURE__ */ h(r, {
 							className: "color-picker__hex",
 							type: "text",
-							size: M,
-							"aria-label": V("hex"),
+							size: j,
+							"aria-label": z("hex"),
 							autoComplete: "off",
 							spellCheck: !1,
-							maxLength: S ? 9 : 7,
-							value: X ?? me,
-							onChange: ye,
-							onBlur: be,
+							maxLength: x ? 9 : 7,
+							value: Y ?? ve,
+							onChange: Ce,
+							onBlur: we,
 							onKeyDown: (e) => {
-								e.key === "Enter" && (e.preventDefault(), be());
+								e.key === "Enter" && (e.preventDefault(), we());
 							}
 						}),
-						De.length > 0 && /* @__PURE__ */ m("div", {
+						je.length > 0 && /* @__PURE__ */ h("div", {
 							className: "color-picker__presets",
 							role: "group",
-							"aria-label": V("presets"),
-							children: De.map((e) => /* @__PURE__ */ m("button", {
+							"aria-label": z("presets"),
+							children: je.map((e) => /* @__PURE__ */ h("button", {
 								type: "button",
 								className: "color-picker__preset",
 								title: e.title,
 								"aria-label": e.title,
-								"aria-pressed": e.hex === me,
-								onClick: () => Y(O(e.hex) ?? j, !0),
-								children: /* @__PURE__ */ m(s, {
+								"aria-pressed": e.hex === ve,
+								onClick: () => J(D(e.hex) ?? A, !0),
+								children: /* @__PURE__ */ h(s, {
 									color: e.hex,
 									className: "color-picker__preset-swatch"
 								})
 							}, `${e.hex}-${e.title}`))
 						}),
-						w && /* @__PURE__ */ m(n, {
+						C && /* @__PURE__ */ h(n, {
 							variant: "ghost",
 							size: "sm",
 							className: "color-picker__clear",
-							onClick: xe,
-							children: V("clear", oe)
+							onClick: Te,
+							children: z("clear", de)
 						})
 					]
 				})
@@ -431,4 +437,4 @@ var j = {
 	});
 });
 //#endregion
-export { te as t };
+export { ie as t };

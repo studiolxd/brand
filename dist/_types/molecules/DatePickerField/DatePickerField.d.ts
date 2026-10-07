@@ -1,6 +1,7 @@
+import { type FieldOptionalProps } from '../_shared/FieldShell';
 import type { DatePickerProps } from '../DatePicker/DatePicker';
 import './DatePickerField.css';
-export interface DatePickerFieldProps extends Omit<DatePickerProps, 'id' | 'describedBy' | 'aria-describedby' | 'aria-label'> {
+export interface DatePickerFieldProps extends Omit<DatePickerProps, 'id' | 'describedBy' | 'aria-describedby' | 'aria-label'>, FieldOptionalProps {
     /** `id` del control. Si no se pasa, se genera con `useId`. */
     id?: string;
     label: string;

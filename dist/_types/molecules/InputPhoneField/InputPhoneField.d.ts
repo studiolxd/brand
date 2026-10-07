@@ -1,6 +1,7 @@
+import { type FieldOptionalProps } from '../_shared/FieldShell';
 import type { Country } from 'react-phone-number-input';
 import './InputPhoneField.css';
-export interface InputPhoneFieldProps {
+export interface InputPhoneFieldProps extends FieldOptionalProps {
     /** `id` del control. Si no se pasa, se genera con `useId`. */
     id?: string;
     label: string;

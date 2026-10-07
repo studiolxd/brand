@@ -63,6 +63,7 @@ import type { HeatmapMessages } from '../molecules/Heatmap/Heatmap';
 import type { OrgChartMessages } from '../organisms/OrgChart/OrgChart';
 import type { PlanningGridMessages } from '../organisms/PlanningGrid/PlanningGrid';
 import type { RecurrenceFieldMessages } from '../molecules/RecurrenceField/RecurrenceField';
+import type { FieldMessages } from '../molecules/_shared/FieldShell';
 import type { TimelineMessages } from '../molecules/Timeline/Timeline';
 import type { UptimeBarsMessages } from '../molecules/UptimeBars/UptimeBars';
 import type { ChartMessages } from '../organisms/Chart/Chart';
@@ -179,6 +180,12 @@ export interface BrandMessages {
     orgChart: OrgChartMessages;
     planningGrid: PlanningGridMessages;
     recurrenceField: RecurrenceFieldMessages;
+    /**
+     * **Opcional**, y su clave también: lo lee el armazón común de los `*Field`
+     * solo cuando un campo lleva `optional` sin `optionalLabel`. Un catálogo sin
+     * él compila, y la marca cae al castellano «(opcional)».
+     */
+    field?: FieldMessages;
     timeline: TimelineMessages;
     uptimeBars: UptimeBarsMessages;
     chart: ChartMessages;
@@ -203,4 +210,4 @@ export interface BrandMessages {
     connectorExternalSignIn: ConnectorExternalSignInMessages;
     connectorRejection: ConnectorRejectionMessages;
 }
-export type { PaginationMessages, TableMessages, DataTableMessages, InputFieldMessages, PasswordFieldMessages, SelectMessages, MultiSelectMessages, NumberInputMessages, OtpInputMessages, InputPhoneMessages, AsyncSelectMessages, AsyncMultiSelectMessages, DocsSearchMessages, SearchFormMessages, SiteSearchMessages, FilterBarMessages, CalendarMessages, DatePickerMessages, ColorPickerMessages, TimeSelectMessages, FileUploadMessages, ImageCropDialogMessages, AvatarUploadMessages, ModalMessages, SheetMessages, ConfirmDialogMessages, AlertMessages, BannerMessages, ToasterMessages, ConsentMessages, CommandPaletteMessages, AppLauncherMessages, FloatingDockMessages, NotificationButtonMessages, NotificationPanelMessages, MenuButtonMessages, AppRootMessages, AppShellMessages, AppHeaderMessages, SidebarMessages, SidebarNavMessages, SiteNavMessages, SiteHeaderMessages, UserMenuMessages, OrgSwitcherMessages, BreadcrumbMessages, TableOfContentsMessages, PrevNextNavMessages, PublicPageShellMessages, OnboardingShellMessages, CopyMessages, CodeBlockMessages, DotsButtonMessages, CloseButtonMessages, ThemeSwitcherMessages, StatTileMessages, ProgressBarMessages, SpinnerMessages, SliderMessages, TreeViewMessages, ClockWidgetMessages, HeatmapMessages, OrgChartMessages, PlanningGridMessages, RecurrenceFieldMessages, TimelineMessages, UptimeBarsMessages, ChartMessages, StepperMessages, CarouselMessages, LanguageSwitcherMessages, ProjectCardMessages, LegalFooterMessages, CalendarRosterMessages, CalendarPlannerMessages, NotificationListMessages, MessageComposerMessages, ConversationListMessages, ConversationThreadMessages, TypingIndicatorMessages, AnnotationThreadMessages, ChatShellMessages, UntrustedTextMessages, ConnectorRequestSummaryMessages, ConnectorConsentMessages, ConnectorSignInMessages, ConnectorExternalSignInMessages, ConnectorRejectionMessages, };
+export type { PaginationMessages, TableMessages, DataTableMessages, InputFieldMessages, PasswordFieldMessages, SelectMessages, MultiSelectMessages, NumberInputMessages, OtpInputMessages, InputPhoneMessages, AsyncSelectMessages, AsyncMultiSelectMessages, DocsSearchMessages, SearchFormMessages, SiteSearchMessages, FilterBarMessages, CalendarMessages, DatePickerMessages, ColorPickerMessages, TimeSelectMessages, FileUploadMessages, ImageCropDialogMessages, AvatarUploadMessages, ModalMessages, SheetMessages, ConfirmDialogMessages, AlertMessages, BannerMessages, ToasterMessages, ConsentMessages, CommandPaletteMessages, AppLauncherMessages, FloatingDockMessages, NotificationButtonMessages, NotificationPanelMessages, MenuButtonMessages, AppRootMessages, AppShellMessages, AppHeaderMessages, SidebarMessages, SidebarNavMessages, SiteNavMessages, SiteHeaderMessages, UserMenuMessages, OrgSwitcherMessages, BreadcrumbMessages, TableOfContentsMessages, PrevNextNavMessages, PublicPageShellMessages, OnboardingShellMessages, CopyMessages, CodeBlockMessages, DotsButtonMessages, CloseButtonMessages, ThemeSwitcherMessages, StatTileMessages, ProgressBarMessages, SpinnerMessages, SliderMessages, TreeViewMessages, ClockWidgetMessages, HeatmapMessages, OrgChartMessages, PlanningGridMessages, RecurrenceFieldMessages, FieldMessages, TimelineMessages, UptimeBarsMessages, ChartMessages, StepperMessages, CarouselMessages, LanguageSwitcherMessages, ProjectCardMessages, LegalFooterMessages, CalendarRosterMessages, CalendarPlannerMessages, NotificationListMessages, MessageComposerMessages, ConversationListMessages, ConversationThreadMessages, TypingIndicatorMessages, AnnotationThreadMessages, ChatShellMessages, UntrustedTextMessages, ConnectorRequestSummaryMessages, ConnectorConsentMessages, ConnectorSignInMessages, ConnectorExternalSignInMessages, ConnectorRejectionMessages, };

@@ -1,6 +1,7 @@
 import { type ReactNode } from 'react';
 import './CheckboxField.css';
-export interface CheckboxFieldProps {
+import { type FieldOptionalProps } from '../_shared/FieldShell';
+export interface CheckboxFieldProps extends FieldOptionalProps {
     /** Texto de la opción, a la derecha de la marca. Acepta JSX (un enlace, por ejemplo). */
     label: ReactNode;
     /**

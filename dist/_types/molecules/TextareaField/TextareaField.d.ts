@@ -1,6 +1,7 @@
 import { type ComponentPropsWithoutRef } from 'react';
 import './TextareaField.css';
-export interface TextareaFieldProps extends Omit<ComponentPropsWithoutRef<'textarea'>, 'value' | 'defaultValue' | 'rows'> {
+import { type FieldOptionalProps } from '../_shared/FieldShell';
+export interface TextareaFieldProps extends Omit<ComponentPropsWithoutRef<'textarea'>, 'value' | 'defaultValue' | 'rows'>, FieldOptionalProps {
     id: string;
     label: string;
     /**

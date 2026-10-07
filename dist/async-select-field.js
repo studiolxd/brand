@@ -7,41 +7,43 @@ import { n as r, t as i } from "./_shared/fieldshell.js";
 import { forwardRef as a } from "react";
 import { jsx as o } from "react/jsx-runtime";
 //#region src/stories/molecules/AsyncSelectField/AsyncSelectField.tsx
-var s = a(function({ id: a, label: s, labelHidden: c, onSearch: l, value: u, onValueChange: d, selectedOption: f, placeholder: p, name: m, disabled: h, readOnly: g, size: _, debounceMs: v, required: y, error: b = !1, errorMessage: x, helperText: S, className: C, emptyMessage: w, loadingLabel: T, clearLabel: E, container: D, onBlur: O }, k) {
-	let A = n(c), j = t(_), M = r({
+var s = a(function({ id: a, label: s, optional: c, optionalLabel: l, labelHidden: u, onSearch: d, value: f, onValueChange: p, selectedOption: m, placeholder: h, name: g, disabled: _, readOnly: v, size: y, debounceMs: b, required: x, error: S = !1, errorMessage: C, helperText: w, className: T, emptyMessage: E, loadingLabel: D, clearLabel: O, container: k, onBlur: A }, j) {
+	let M = n(u), N = t(y), P = r({
 		id: a,
-		error: b,
-		errorMessage: x,
-		helperText: S
-	}), { id: N } = M;
+		error: S,
+		errorMessage: C,
+		helperText: w
+	}), { id: F } = P;
 	return /* @__PURE__ */ o(i, {
-		field: M,
+		field: P,
 		block: "async-select-field",
-		className: C,
+		className: T,
 		label: s,
-		labelHidden: A,
-		size: j,
+		optional: c,
+		optionalLabel: l,
+		labelHidden: M,
+		size: N,
 		children: /* @__PURE__ */ o(e, {
-			ref: k,
-			id: N,
-			name: m,
-			onSearch: l,
-			value: u,
-			onValueChange: d,
-			selectedOption: f,
-			placeholder: p,
-			disabled: h,
-			readOnly: g,
-			size: j,
-			debounceMs: v,
-			required: y,
-			error: M.hasError,
-			emptyMessage: w,
-			loadingLabel: T,
-			clearLabel: E,
-			container: D,
-			"aria-describedby": M.describedBy,
-			onBlur: O
+			ref: j,
+			id: F,
+			name: g,
+			onSearch: d,
+			value: f,
+			onValueChange: p,
+			selectedOption: m,
+			placeholder: h,
+			disabled: _,
+			readOnly: v,
+			size: N,
+			debounceMs: b,
+			required: x,
+			error: P.hasError,
+			emptyMessage: E,
+			loadingLabel: D,
+			clearLabel: O,
+			container: k,
+			"aria-describedby": P.describedBy,
+			onBlur: A
 		})
 	});
 });

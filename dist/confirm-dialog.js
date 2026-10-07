@@ -34,7 +34,8 @@ function u({ open: u, title: d, description: f, children: p, onConfirm: m, onCan
 		container: D,
 		initialFocus: w === void 0 ? A : j,
 		...f == null ? {} : { description: f },
-		footerClassName: ["confirm-dialog__actions", O].filter(Boolean).join(" "),
+		footerClassName: "confirm-dialog__actions",
+		className: O,
 		footer: /* @__PURE__ */ l(s, { children: [
 			/* @__PURE__ */ c(t, {
 				ref: A,

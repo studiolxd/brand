@@ -7,30 +7,38 @@ import { t as i } from "./_shared/colorpicker.js";
 import { forwardRef as a } from "react";
 import { jsx as o } from "react/jsx-runtime";
 //#region src/stories/molecules/ColorPickerField/ColorPickerField.tsx
-var s = a(function({ id: a, label: s, labelHidden: c, errorMessage: l, helperText: u, error: d = !1, size: f, className: p, ...m }, h) {
-	let g = t(c), _ = e(f), v = n({
+var s = a(function({ id: a, label: s, optional: c, optionalLabel: l, labelHidden: u, errorMessage: d, helperText: f, error: p = !1, size: m, required: h = !1, className: g, ..._ }, v) {
+	let y = t(u), b = e(m), x = n({
 		id: a,
-		error: d,
-		errorMessage: l,
-		helperText: u
-	}), { id: y, labelId: b } = v;
+		error: p,
+		errorMessage: d,
+		helperText: f
+	}), { id: S, labelId: C } = x;
 	return /* @__PURE__ */ o(r, {
-		field: v,
+		field: x,
 		block: "color-picker-field",
-		className: p,
+		className: g,
 		label: s,
-		labelHidden: g,
-		size: _,
+		optional: c,
+		optionalLabel: l,
+		labelHidden: y,
+		size: b,
 		labelIdentified: !0,
+		rootProps: h ? {
+			role: "group",
+			"aria-labelledby": C,
+			"aria-required": !0
+		} : void 0,
 		children: /* @__PURE__ */ o(i, {
 			dialogLabel: s,
-			...m,
-			ref: h,
-			id: y,
-			size: _,
-			error: v.hasError,
-			"aria-labelledby": b,
-			"aria-describedby": v.describedBy
+			..._,
+			ref: v,
+			id: S,
+			size: b,
+			required: h,
+			error: x.hasError,
+			"aria-labelledby": C,
+			"aria-describedby": x.describedBy
 		})
 	});
 });

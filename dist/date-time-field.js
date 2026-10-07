@@ -18,78 +18,82 @@ function d(e) {
 		m: e.getMinutes()
 	} : null;
 }
-var f = o(function({ id: o, label: f, labelHidden: p, value: m, placeholder: h, timeStep: g, minDate: _, maxDate: v, disabledDates: y, name: b, size: x, disabled: S, readOnly: C, error: w = !1, errorMessage: T, helperText: E, locale: D = "es-ES", className: O, calendarLabel: k, openCalendarLabel: A, invalidMessage: j, maskLetters: M, previousMonthLabel: N, nextMonthLabel: P, previousYearsLabel: F, nextYearsLabel: I, yearGridLabel: L, gridLabel: R, today: z, hoursLabel: B, minutesLabel: V, onChange: H, onBlur: U }, W) {
-	let G = n(p), K = e(x), q = r({
+var f = o(function({ id: o, label: f, optional: p, optionalLabel: m, labelHidden: h, value: g, placeholder: _, timeStep: v, minDate: y, maxDate: b, disabledDates: x, name: S, size: C, disabled: w, readOnly: T, required: E, error: D = !1, errorMessage: O, helperText: k, locale: A = "es-ES", className: j, calendarLabel: M, openCalendarLabel: N, invalidMessage: P, maskLetters: ee, previousMonthLabel: F, nextMonthLabel: I, previousYearsLabel: L, nextYearsLabel: R, yearGridLabel: z, gridLabel: B, today: V, hoursLabel: H, minutesLabel: U, onChange: W, onBlur: G }, K) {
+	let q = n(h), J = e(C), Y = r({
 		id: o,
-		error: w,
-		errorMessage: T,
-		helperText: E
-	}), { id: J } = q, Y = `${J}-date`, X = s((e) => {
+		error: D,
+		errorMessage: O,
+		helperText: k
+	}), { id: X } = Y, Z = `${X}-date`, Q = s((e) => {
 		if (!e) {
-			H?.(null);
+			W?.(null);
 			return;
 		}
-		let t = d(m) ?? {
+		let t = d(g) ?? {
 			h: 0,
 			m: 0
 		};
-		H?.(u(e, t));
-	}, [m, H]), Z = s((e) => {
-		m && H?.(u(m, e));
-	}, [m, H]);
+		W?.(u(e, t));
+	}, [g, W]), $ = s((e) => {
+		g && W?.(u(g, e));
+	}, [g, W]);
 	return /* @__PURE__ */ c(i, {
-		field: q,
+		field: Y,
 		block: "date-time-field",
-		className: O,
+		className: j,
 		label: f,
-		labelHidden: G,
-		size: K,
+		optional: p,
+		optionalLabel: m,
+		labelHidden: q,
+		size: J,
 		labelIdentified: !0,
-		labelFor: Y,
+		labelFor: Z,
 		children: /* @__PURE__ */ l("div", {
 			className: "date-time-field__controls",
 			role: "group",
-			"aria-labelledby": q.labelId,
-			"aria-describedby": q.describedBy,
+			"aria-labelledby": Y.labelId,
+			"aria-describedby": Y.describedBy,
 			children: [/* @__PURE__ */ c(a, {
-				ref: W,
+				ref: K,
 				className: "date-time-field__date",
-				id: Y,
-				name: b,
-				value: m ?? null,
-				onChange: X,
-				onBlur: U,
-				placeholder: h,
-				minDate: _,
-				maxDate: v,
-				disabledDates: y,
-				size: K,
-				disabled: S,
-				readOnly: C,
-				error: q.hasError,
-				locale: D,
-				calendarLabel: k ?? f,
-				openCalendarLabel: A,
-				invalidMessage: j,
-				maskLetters: M,
-				previousMonthLabel: N,
-				nextMonthLabel: P,
-				previousYearsLabel: F,
-				nextYearsLabel: I,
-				yearGridLabel: L,
-				gridLabel: R,
-				today: z
+				id: Z,
+				name: S,
+				value: g ?? null,
+				onChange: Q,
+				onBlur: G,
+				placeholder: _,
+				minDate: y,
+				maxDate: b,
+				disabledDates: x,
+				size: J,
+				disabled: w,
+				readOnly: T,
+				required: E,
+				error: Y.hasError,
+				locale: A,
+				calendarLabel: M ?? f,
+				openCalendarLabel: N,
+				invalidMessage: P,
+				maskLetters: ee,
+				previousMonthLabel: F,
+				nextMonthLabel: I,
+				previousYearsLabel: L,
+				nextYearsLabel: R,
+				yearGridLabel: z,
+				gridLabel: B,
+				today: V
 			}), /* @__PURE__ */ c(t, {
-				value: d(m),
-				onChange: Z,
-				onBlur: U,
-				step: g,
-				size: K,
-				disabled: S,
-				readOnly: C,
-				error: q.hasError,
-				hoursLabel: B,
-				minutesLabel: V
+				value: d(g),
+				onChange: $,
+				onBlur: G,
+				step: v,
+				size: J,
+				disabled: w,
+				readOnly: T,
+				required: E,
+				error: Y.hasError,
+				hoursLabel: H,
+				minutesLabel: U
 			})]
 		})
 	});

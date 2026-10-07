@@ -31,7 +31,8 @@ function x({ items: o = [], count: x = 0, max: S, onRead: C, onMarkAllRead: w, a
 			count: x,
 			max: S,
 			label: O,
-			countLabel: k
+			countLabel: k,
+			className: z
 		}),
 		label: Q,
 		align: "end",
@@ -40,7 +41,7 @@ function x({ items: o = [], count: x = 0, max: S, onRead: C, onMarkAllRead: w, a
 		defaultOpen: L,
 		onOpenChange: X,
 		initialFocus: Y,
-		className: ["notification-panel", z].filter(Boolean).join(" "),
+		className: "notification-panel",
 		children: /* @__PURE__ */ _("div", {
 			className: "notification-panel__body",
 			ref: H,

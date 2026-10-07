@@ -1,8 +1,9 @@
 import './AsyncMultiSelectField.css';
+import { type FieldOptionalProps } from '../_shared/FieldShell';
 import { AsyncMultiSelect } from '../../atoms/AsyncMultiSelect/AsyncMultiSelect';
 import type { AsyncMultiSelectOption } from '../../atoms/AsyncMultiSelect/AsyncMultiSelect';
 export type { AsyncMultiSelectOption };
-export interface AsyncMultiSelectFieldProps {
+export interface AsyncMultiSelectFieldProps extends FieldOptionalProps {
     /** `id` del control. Si no se pasa, se genera con `useId`. */
     id?: string;
     label: string;

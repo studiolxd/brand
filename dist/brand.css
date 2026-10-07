@@ -1083,12 +1083,14 @@ html.dark {
   --label-letter-spacing: var(--letter-spacing-normal); /** Letter spacing */
   --label-font-weight: var(--font-weight-emphasis); /** Font weight */
   --label-color: var(--color-text-on-light); /** Text color */
+  --label-optional-color: var(--color-text-muted-on-light); /** Tinta de la marca « (opcional)» tras la etiqueta de un campo `optional` (D70): la apagada, mismo tamaño que la etiqueta */
 }
 .surface-dark,
 .surface-invert,
 [data-theme="dark"],
 html.dark {
   --label-color: var(--color-text-on-dark); /** Color — surface-dark */
+  --label-optional-color: var(--color-text-muted-on-dark); /** Tinta de la marca de opcional — surface-dark */
 }
 /**
  * Do not edit directly, this file was auto-generated.
@@ -5756,7 +5758,8 @@ html.dark {
   --planning-grid-footer-bg: var(--color-surface-secondary-on-light); /** Fondo de las filas de totales */
   --planning-grid-footer-font-weight: var(--font-weight-emphasis); /** Peso de las filas de totales */
   --planning-grid-footer-color: var(--color-text-on-light); /** Color de las filas de totales */
-  --planning-grid-over-color: var(--color-error-text-on-light); /** Color de un resto negativo: hay más horas asignadas que disponibles */
+  --planning-grid-over-bg: var(--color-error-fill); /** Relleno de un resto negativo: hay más horas asignadas que disponibles. Relleno universal, igual en las dos superficies (sin par oscuro) */
+  --planning-grid-over-color: var(--color-error-fill-text); /** Tinta de un resto negativo, sobre su relleno de error */
 }
 .surface-dark,
 .surface-invert,
@@ -5774,7 +5777,6 @@ html.dark {
   --planning-grid-cell-readonly-bg: var(--color-surface-secondary-on-dark); /** Fondo de una celda que no se edita — surface-dark */
   --planning-grid-footer-bg: var(--color-surface-secondary-on-dark); /** Fondo de las filas de totales — surface-dark */
   --planning-grid-footer-color: var(--color-text-on-dark); /** Color de las filas de totales — surface-dark */
-  --planning-grid-over-color: var(--color-error-text-on-dark); /** Color de un resto negativo — surface-dark */
 }
 /**
  * Do not edit directly, this file was auto-generated.
@@ -6307,6 +6309,7 @@ html.dark .surface-light {
   --kbd-bg: var(--color-surface-secondary-on-light);
   --kbd-color: var(--color-text-on-light);
   --label-color: var(--color-text-on-light);
+  --label-optional-color: var(--color-text-muted-on-light);
   --link-color: var(--color-text-on-light);
   --link-hover-color: var(--color-text-on-light);
   --link-underline-width: var(--border-width-default);
@@ -6877,7 +6880,6 @@ html.dark .surface-light {
   --planning-grid-cell-readonly-bg: var(--color-surface-secondary-on-light);
   --planning-grid-footer-bg: var(--color-surface-secondary-on-light);
   --planning-grid-footer-color: var(--color-text-on-light);
-  --planning-grid-over-color: var(--color-error-text-on-light);
   --site-search-status-color: var(--color-text-muted-on-light);
   --site-search-result-title-color: var(--color-text-on-light);
   --site-search-result-section-color: var(--color-text-muted-on-light);

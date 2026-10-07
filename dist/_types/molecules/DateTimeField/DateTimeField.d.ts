@@ -1,7 +1,8 @@
+import { type FieldOptionalProps } from '../_shared/FieldShell';
 import type { DatePickerProps } from '../DatePicker/DatePicker';
 import type { CalendarProps } from '../Calendar/Calendar';
 import './DateTimeField.css';
-export interface DateTimeFieldProps {
+export interface DateTimeFieldProps extends FieldOptionalProps {
     /** `id` del campo. Si no se pasa, se genera con `useId`. */
     id?: string;
     label: string;
@@ -24,6 +25,12 @@ export interface DateTimeFieldProps {
     size?: 'sm' | 'md' | 'lg';
     disabled?: boolean;
     readOnly?: boolean;
+    /**
+     * Campo obligatorio: `required` nativo en el campo de la fecha y, en la
+     * hora, el de sus desplegables (con `aria-required` en su grupo), como
+     * `TimeField`.
+     */
+    required?: boolean;
     /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */
     error?: boolean;
     /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */
