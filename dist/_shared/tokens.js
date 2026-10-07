@@ -800,6 +800,8 @@ var e = {
 	"--email-color": "#111e30",
 	"--email-muted-color": "#4a4a4a",
 	"--email-border-color": "#111e30",
+	"--embed-frame-device-mobile-inline-size": "375px",
+	"--embed-frame-device-tablet-inline-size": "768px",
 	"--empty-state-gap": "1rem",
 	"--empty-state-body-gap": "0.5rem",
 	"--empty-state-padding-block": "3rem",

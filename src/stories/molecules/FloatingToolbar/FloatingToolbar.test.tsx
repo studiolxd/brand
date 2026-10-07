@@ -135,4 +135,27 @@ describe('FloatingToolbar', () => {
     expect(ref.current).toHaveAttribute('id', 'bloque-1');
     expect(ref.current).toHaveClass('floating-toolbar');
   });
+
+  it.each(['top', 'sides'] as const)('toolbarProps llega a la barra, no al ancla (%s)', (layout) => {
+    const { container } = render(barra({
+      layout,
+      toolbarProps: { 'data-editor-ui': '', id: 'barra-1', title: 'Barra' },
+    }));
+    const toolbar = screen.getByRole('toolbar', { name: 'Acciones del bloque 1' });
+    expect(toolbar).toHaveAttribute('data-editor-ui', '');
+    expect(toolbar).toHaveAttribute('id', 'barra-1');
+    expect(toolbar).toHaveAttribute('title', 'Barra');
+    expect(container.querySelector('.floating-toolbar')).not.toHaveAttribute('data-editor-ui');
+  });
+
+  it('toolbarProps no pisa la clase, el nombre ni la orientación de la barra', () => {
+    render(barra({
+      layout: 'sides',
+      toolbarProps: { className: 'ajena', 'aria-label': 'Otro', 'aria-orientation': 'horizontal', role: 'menu' } as never,
+    }));
+    const toolbar = screen.getByRole('toolbar', { name: 'Acciones del bloque 1' });
+    expect(toolbar).toHaveClass('floating-toolbar__bar');
+    expect(toolbar).not.toHaveClass('ajena');
+    expect(toolbar).toHaveAttribute('aria-orientation', 'vertical');
+  });
 });

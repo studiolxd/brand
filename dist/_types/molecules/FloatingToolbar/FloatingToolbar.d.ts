@@ -1,5 +1,14 @@
 import { type ReactNode } from 'react';
 import './FloatingToolbar.css';
+/**
+ * Los atributos que se pueden poner en la barra (`role="toolbar"`). Sin
+ * `className`, `role`, `aria-label`, `aria-orientation` ni `children`: esos
+ * los gobierna el componente. Los `data-*` se admiten tipados para poder
+ * pasarlos en un objeto (`{ 'data-editor-ui': '' }`).
+ */
+export type FloatingToolbarBarProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'className' | 'role' | 'aria-label' | 'aria-orientation' | 'children'> & {
+    [attribute: `data-${string}`]: string | undefined;
+};
 export interface FloatingToolbarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'className' | 'children'> {
     /**
      * Las acciones del **principio**: a la izquierda del elemento en
@@ -41,6 +50,14 @@ export interface FloatingToolbarProps extends Omit<React.HTMLAttributes<HTMLDivE
      * proveedor de textos.
      */
     label: string;
+    /**
+     * Atributos para la **barra** (el `role="toolbar"`), no para el ancla: la
+     * misma barra en `top` y en los raíles de `sides`. Para marcarla —un
+     * `data-*` que la saque del alcance de otra hoja, un `id`— o escuchar en
+     * ella. Lo que el componente gobierna (clase, rol, nombre, orientación) no
+     * se acepta.
+     */
+    toolbarProps?: FloatingToolbarBarProps;
     /** El elemento al que se ancla la barra. */
     children: ReactNode;
     /** Se añade DESPUÉS de las clases propias. */
@@ -57,7 +74,8 @@ export interface FloatingToolbarProps extends Omit<React.HTMLAttributes<HTMLDivE
  * en el orden de tabulación aunque no se vea, así que con teclado siempre se
  * alcanza; al recibir el foco aparece.
  *
- * Reenvía `ref` y `{...rest}` al elemento ancla (el contenedor), no a la barra.
+ * Reenvía `ref` y `{...rest}` al elemento ancla (el contenedor), no a la barra;
+ * los atributos de la barra van en `toolbarProps`.
  */
 export declare const FloatingToolbar: import("react").ForwardRefExoticComponent<FloatingToolbarProps & import("react").RefAttributes<HTMLDivElement>>;
 export interface FloatingToolbarButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'className' | 'children' | 'aria-label'> {

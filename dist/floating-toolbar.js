@@ -7,29 +7,36 @@ import { createContext as r, forwardRef as i, useContext as a } from "react";
 import { jsx as o, jsxs as s } from "react/jsx-runtime";
 import { Toolbar as c } from "@base-ui/react/toolbar";
 //#region src/stories/molecules/FloatingToolbar/FloatingToolbar.tsx
-var l = "(min-width: 1024px)", u = r("top"), d = i(function({ start: e, end: t, layout: r = "auto", alwaysVisible: i = !1, label: a, children: d, className: f, ...p }, m) {
-	let h = n(l), g = r === "sides" || r === "auto" && h === !0;
+var l = "(min-width: 1024px)", u = new Set([
+	"className",
+	"role",
+	"aria-label",
+	"aria-orientation",
+	"children"
+]), d = r("top"), f = i(function({ start: e, end: t, layout: r = "auto", alwaysVisible: i = !1, label: a, toolbarProps: f, children: p, className: m, ...h }, g) {
+	let _ = n(l), v = r === "sides" || r === "auto" && _ === !0, y = f ? Object.fromEntries(Object.entries(f).filter(([e]) => !u.has(e))) : void 0;
 	return /* @__PURE__ */ s("div", {
-		ref: m,
+		ref: g,
 		className: [
 			"floating-toolbar",
 			`floating-toolbar--${r}`,
 			i ? "floating-toolbar--always-visible" : "",
-			f ?? ""
+			m ?? ""
 		].filter(Boolean).join(" "),
-		...p,
+		...h,
 		children: [/* @__PURE__ */ s(c.Root, {
+			...y,
 			className: "floating-toolbar__bar",
 			"aria-label": a,
-			orientation: g ? "vertical" : "horizontal",
-			children: [e != null && /* @__PURE__ */ o(u.Provider, {
-				value: g ? "left" : "top",
+			orientation: v ? "vertical" : "horizontal",
+			children: [e != null && /* @__PURE__ */ o(d.Provider, {
+				value: v ? "left" : "top",
 				children: /* @__PURE__ */ o(c.Group, {
 					className: "floating-toolbar__group floating-toolbar__group--start",
 					children: e
 				})
-			}), t != null && /* @__PURE__ */ o(u.Provider, {
-				value: g ? "right" : "top",
+			}), t != null && /* @__PURE__ */ o(d.Provider, {
+				value: v ? "right" : "top",
 				children: /* @__PURE__ */ o(c.Group, {
 					className: "floating-toolbar__group floating-toolbar__group--end",
 					children: t
@@ -37,15 +44,15 @@ var l = "(min-width: 1024px)", u = r("top"), d = i(function({ start: e, end: t, 
 			})]
 		}), /* @__PURE__ */ o("div", {
 			className: "floating-toolbar__content",
-			children: d
+			children: p
 		})]
 	});
-}), f = i(function({ label: n, icon: r, destructive: i = !1, className: s, ...l }, d) {
+}), p = i(function({ label: n, icon: r, destructive: i = !1, className: s, ...l }, u) {
 	return /* @__PURE__ */ o(t, {
 		label: n,
-		side: a(u),
+		side: a(d),
 		describe: !1,
-		ref: d,
+		ref: u,
 		...l,
 		children: /* @__PURE__ */ o(c.Button, {
 			render: /* @__PURE__ */ o(e, {
@@ -61,4 +68,4 @@ var l = "(min-width: 1024px)", u = r("top"), d = i(function({ start: e, end: t, 
 	});
 });
 //#endregion
-export { d as FloatingToolbar, f as FloatingToolbarButton };
+export { f as FloatingToolbar, p as FloatingToolbarButton };

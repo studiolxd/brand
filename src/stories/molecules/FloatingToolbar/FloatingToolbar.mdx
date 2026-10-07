@@ -91,4 +91,4 @@ Es el patrón **Toolbar** de WAI-ARIA, sobre el `Toolbar` de Base UI:
 - Las flechas siguen la colocación: **izquierda/derecha** en la barra superior y **arriba/abajo** en los raíles (`aria-orientation`), pasando del final del raíl izquierdo al principio del derecho.
 - Cada botón de solo icono lleva `aria-label`. El bocadillo no lo describe otra vez (`describe={false}`): repetiría el mismo nombre.
 
-El `ref` y el resto de props del `FloatingToolbar` van al **ancla** —el contenedor del elemento—, no a la barra: es el elemento lo que el producto mide, arrastra o marca.
+El `ref` y el resto de props del `FloatingToolbar` van al **ancla** —el contenedor del elemento—, no a la barra: es el elemento lo que el producto mide, arrastra o marca. Lo que tenga que ir en la **barra** —un `data-*` que la marque como interfaz del editor, un `id`— va en `toolbarProps`, que se reparte al `role="toolbar"` en las dos colocaciones; la clase, el rol, el nombre y la orientación los pone el componente y no se aceptan.

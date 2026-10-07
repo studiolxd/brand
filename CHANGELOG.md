@@ -34,6 +34,13 @@ para breaking changes.
   recogida). `capture-story.mjs` gana `--hide <selector>` y aparta el puntero tras `--click`.
 - `release:npm` lee el stage-id en el formato de npm 11 («staged with id …»); con la v50.0.0 lo subió pero no supo
   imprimirlo. Solo afecta al script de publicación, no al paquete.
+- `FloatingToolbar`: prop nueva `toolbarProps` (minor), los atributos de la **barra** (`role="toolbar"`) en las dos
+  colocaciones, arriba y raíles. `ref` y el resto de props siguen yendo al ancla. Admite `data-*` tipados; la clase,
+  el rol, el nombre y la orientación los gobierna el componente y se descartan aunque lleguen sin tipos.
+- `EmbedFrame`: prop nueva `device` (`'mobile' | 'tablet' | 'desktop'`, por defecto `'desktop'`; minor), el ancho
+  del dispositivo que simula: 375 px y 768 px, centrado y sin pasar del hueco; escritorio llena el contenedor. Sin
+  atributo `style`: modificadores `embed-frame--mobile|tablet`. Tokens nuevos `embed-frame.device-mobile-inline-size`
+  (`375px`) y `embed-frame.device-tablet-inline-size` (→ `{breakpoint.md}`).
 
 ## [50.0.0] — 2026-10-07
 

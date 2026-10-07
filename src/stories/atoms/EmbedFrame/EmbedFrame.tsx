@@ -16,6 +16,17 @@ export interface EmbedFrameProps
    * con alto —solo en la página, o como celda de `Columns`—.
    */
   fill?: 'container' | 'viewport';
+  /**
+   * El dispositivo que simula: el ancho del marco. `mobile` (375px) y
+   * `tablet` (768px, `breakpoint.md`) le dan ese ancho, centrado en el hueco
+   * y sin pasar nunca del disponible; `desktop` (por defecto) llena el ancho
+   * del contenedor. El documento de dentro responde a su propia ventana, así
+   * que sus media queries ven el ancho del dispositivo. El alto no cambia:
+   * lo sigue poniendo `fill`.
+   *
+   * @default 'desktop'
+   */
+  device?: 'mobile' | 'tablet' | 'desktop';
   /** Se añade DESPUÉS de las clases propias. */
   className?: string;
 }
@@ -28,7 +39,8 @@ export interface EmbedFrameProps
  * **El alto lo pone el contenedor**: el marco llena la caja que le dan. Dentro
  * de `AppShell` esa caja es el contenido principal, que ya mide el resto de la
  * ventana bajo la cabecera y junto a la barra lateral. Sin contenedor con alto,
- * `fill="viewport"` le da el de la ventana.
+ * `fill="viewport"` le da el de la ventana. **El ancho** es el del contenedor,
+ * o el de un dispositivo con `device` (vista previa en móvil o tableta).
  *
  * `ref` apunta al `<iframe>` —de ahí sale `contentWindow` para `postMessage`—
  * y `{...rest}` (`allow`, `sandbox`, `loading`, `referrerPolicy`, `name`,
@@ -37,9 +49,15 @@ export interface EmbedFrameProps
 export const EmbedFrame = forwardRef<HTMLIFrameElement, EmbedFrameProps>(function EmbedFrame({
   title,
   fill = 'container',
+  device = 'desktop',
   className,
   ...rest
 }, ref) {
-  const classes = ['embed-frame', fill === 'viewport' ? 'embed-frame--viewport' : '', className].filter(Boolean).join(' ');
+  const classes = [
+    'embed-frame',
+    fill === 'viewport' ? 'embed-frame--viewport' : '',
+    device !== 'desktop' ? `embed-frame--${device}` : '',
+    className,
+  ].filter(Boolean).join(' ');
   return <iframe ref={ref} className={classes} title={title} {...rest} />;
 });
