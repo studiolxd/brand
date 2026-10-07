@@ -32,6 +32,7 @@ import com.studiolxd.brand.components.field.FieldHelperStyle
 import com.studiolxd.brand.components.field.LocalBrandForcedFocus
 import com.studiolxd.brand.components.field.animatedFieldColor
 import com.studiolxd.brand.components.field.brandFieldBox
+import com.studiolxd.brand.components.field.fieldAccessibleName
 import com.studiolxd.brand.icon.BrandIconName
 import com.studiolxd.brand.support.BrandBasicText
 import com.studiolxd.brand.support.BrandControlSize
@@ -114,6 +115,9 @@ internal fun initialPickerDate(value: LocalDate?, minDate: LocalDate?, maxDate: 
  * @param requiredLabel lo que se lee tras la etiqueta con [required]. Castellano por defecto («obligatorio»).
  * @param locale idioma del formato y del selector. Por defecto, el del dispositivo.
  * @param size sin valor toma la del entorno ([com.studiolxd.brand.support.ProvideBrandControlSize]) y, si tampoco hay, `md`.
+ * @param optional marca el campo como opcional (D70): « (opcional)» tras la etiqueta, en la tinta apagada
+ *   (`label.optional-color`), y parte del nombre que lee TalkBack. Explícita: un campo sin `required` no la lleva sola.
+ * @param optionalLabel el texto de esa marca. Castellano por defecto («(opcional)»).
  */
 @Composable
 fun BrandDatePickerField(
@@ -122,6 +126,8 @@ fun BrandDatePickerField(
     onValueChange: (LocalDate?) -> Unit,
     modifier: Modifier = Modifier,
     labelHidden: Boolean = false,
+    optional: Boolean = false,
+    optionalLabel: String = "(opcional)",
     minDate: LocalDate? = null,
     maxDate: LocalDate? = null,
     placeholder: String = "Elige una fecha",
@@ -160,6 +166,7 @@ fun BrandDatePickerField(
         label, value, onValueChange, modifier, labelHidden, placeholder, readOnly, enabled, error, errorMessage, helperText, size,
         openCalendarLabel, clearLabel, noDateLabel, invalidLabel, locale, interactionSource, open,
         requiredLabel = if (required) requiredLabel else null,
+        optionalLabel = if (optional) optionalLabel else null,
     )
 }
 
@@ -186,6 +193,7 @@ internal fun BrandDatePickerFieldContent(
     interactionSource: MutableInteractionSource?,
     open: () -> Unit,
     requiredLabel: String? = null,
+    optionalLabel: String? = null,
 ) {
     val resolved = size.resolve()
     val source = interactionSource ?: remember { MutableInteractionSource() }
@@ -255,6 +263,7 @@ internal fun BrandDatePickerFieldContent(
         helperText = helperText,
         helper = FieldHelperStyle(F.helperFontSize, F.helperFontWeight, F.helperLineHeight, F.helperColor.current),
         modifier = modifier,
+        optionalLabel = optionalLabel,
     ) {
         Row(
             Modifier
@@ -278,7 +287,9 @@ internal fun BrandDatePickerFieldContent(
                     .heightIn(min = height)
                     .clickable(interactionSource = source, indication = null, enabled = enabled && !readOnly, role = Role.Button) { open() }
                     .semantics {
-                        contentDescription = if (requiredLabel != null) "$label, $requiredLabel" else label
+                        contentDescription = fieldAccessibleName(label, optionalLabel).let { name ->
+                            if (requiredLabel != null) "$name, $requiredLabel" else name
+                        }
                         stateDescription = listOfNotNull(if (value == null) noDateLabel else shown, helperText).joinToString(". ")
                         if (hasError) error(errorMessage ?: invalidLabel)
                     }

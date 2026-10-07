@@ -8,13 +8,13 @@
     "kind": { "type": "union", "values": ["text", "search"], "default": "text" },
     "size": { "type": "union", "values": ["sm", "md", "lg"], "default": "md" },
     "labelHidden": { "type": "boolean", "default": false },
+    "optional": { "type": "boolean", "default": false },
     "clearable": { "type": "boolean", "default": false },
     "readOnly": { "type": "boolean", "default": false },
     "error": { "type": "boolean", "default": false }
   },
   "excluded": [
-    { "prop": "optional", "reason": "Pendiente de portar (D70): la marca « (opcional)» tras la etiqueta es solo de React por ahora; en nativo no se pinta." },
-    { "prop": "optionalLabel", "reason": "Pendiente de portar (D70): el texto de la marca de opcional va con `optional`, que aún no está en nativo." },
+    { "prop": "optionalLabel", "reason": "No es una unión ni un booleano: es el texto de la marca, un parámetro `optionalLabel` con el castellano «(opcional)» por defecto (como `requiredLabel`), que solo se pinta con `optional`." },
     { "prop": "id", "reason": "El `id` enlaza la etiqueta con el control en HTML; en SwiftUI el enlace es el nombre accesible que pone el propio campo." },
     { "prop": "label", "reason": "No es una unión ni un booleano: es el primer argumento del inicializador (`BrandInputField(\"Correo\", text: …)`)." },
     { "prop": "name", "reason": "El `name` del campo es de los formularios HTML; en SwiftUI el estado vive en el `Binding`." },

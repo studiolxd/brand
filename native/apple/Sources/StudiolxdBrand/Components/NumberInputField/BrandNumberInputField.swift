@@ -63,6 +63,8 @@ public struct BrandNumberInputField: View {
     private let label: LocalizedStringKey
     @Binding private var value: Double?
     private let labelHidden: Bool
+    private let optional: Bool
+    private let optionalLabel: LocalizedStringKey
     private let placeholder: LocalizedStringKey?
     private let range: ClosedRange<Double>
     private let step: Double
@@ -90,6 +92,9 @@ public struct BrandNumberInputField: View {
     private typealias F = BrandNumberInputFieldTokens
 
     /// - Parameters:
+    ///   - optional: marca el campo como opcional (D70): « (opcional)» tras la etiqueta, en la tinta apagada, y parte
+    ///     del nombre que lee VoiceOver. Explícita: un campo sin `required` no la lleva sola. No se combina con `required`.
+    ///   - optionalLabel: el texto de esa marca. Por defecto «(opcional)» (castellano).
     ///   - value: el valor; `nil` es «sin valor» (campo vacío).
     ///   - placeholder: el marcador que se ve con el campo vacío.
     ///   - min: valor mínimo (sin tope si es `nil`).
@@ -106,6 +111,8 @@ public struct BrandNumberInputField: View {
         _ label: LocalizedStringKey,
         value: Binding<Double?>,
         labelHidden: Bool = false,
+        optional: Bool = false,
+        optionalLabel: LocalizedStringKey = "(opcional)",
         placeholder: LocalizedStringKey? = nil,
         min: Double? = nil,
         max: Double? = nil,
@@ -125,6 +132,8 @@ public struct BrandNumberInputField: View {
         self.label = label
         _value = value
         self.labelHidden = labelHidden
+        self.optional = optional
+        self.optionalLabel = optionalLabel
         self.placeholder = placeholder
         range = (min ?? -.infinity)...(max ?? .infinity)
         self.step = step
@@ -146,6 +155,8 @@ public struct BrandNumberInputField: View {
         _ label: LocalizedStringKey,
         value: Binding<Double>,
         labelHidden: Bool = false,
+        optional: Bool = false,
+        optionalLabel: LocalizedStringKey = "(opcional)",
         placeholder: LocalizedStringKey? = nil,
         min: Double? = nil,
         max: Double? = nil,
@@ -165,7 +176,7 @@ public struct BrandNumberInputField: View {
         self.init(
             label,
             value: Binding<Double?>(get: { value.wrappedValue }, set: { if let next = $0 { value.wrappedValue = next } }),
-            labelHidden: labelHidden, placeholder: placeholder, min: min, max: max, step: step, decimal: decimal,
+            labelHidden: labelHidden, optional: optional, optionalLabel: optionalLabel, placeholder: placeholder, min: min, max: max, step: step, decimal: decimal,
             readOnly: readOnly, error: error, errorMessage: errorMessage, helperText: helperText, size: size,
             compact: compact, commitMode: commitMode, decrementLabel: decrementLabel, incrementLabel: incrementLabel, emptyValueLabel: emptyValueLabel
         )
@@ -255,7 +266,8 @@ public struct BrandNumberInputField: View {
             gap: F.gap,
             errorMessage: errorMessage,
             helperText: helperText,
-            helper: .init(fontSize: F.helperFontSize, fontWeight: F.helperFontWeight, lineHeight: F.helperLineHeight, color: F.helperColor)
+            helper: .init(fontSize: F.helperFontSize, fontWeight: F.helperFontWeight, lineHeight: F.helperLineHeight, color: F.helperColor),
+            optionalLabel: optional ? optionalLabel : nil
         ) {
             box
         }

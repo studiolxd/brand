@@ -138,6 +138,22 @@ final class FormsSnapshotTests: XCTestCase {
         assertBrandSnapshots(view, width: 340, height: 280, named: "sizes")
     }
 
+    // MARK: optional (D70)
+
+    /// `optional` en los cinco campos: « (opcional)» tras la etiqueta, en la tinta apagada (`label.optional-color`) y
+    /// del tamaño de la etiqueta; el último, con `optionalLabel` traducido.
+    func testOptionalFields() {
+        let view = VStack(alignment: .leading, spacing: BrandSpacing.s4) {
+            BrandInputField("Teléfono", text: .constant(""), optional: true, type: .tel)
+            BrandNumberInputField("Cantidad", value: .constant(2), optional: true)
+            BrandPasswordField("Contraseña", text: .constant(""), optional: true)
+            BrandSelectField("Idioma", selection: .constant("es"), options: languages, optional: true)
+            BrandDatePickerField("Fecha de fin", date: .constant(nil), optional: true)
+            BrandInputField("Phone", text: .constant(""), optional: true, optionalLabel: "(optional)", size: .sm)
+        }
+        assertBrandSnapshots(view, width: 340, height: 520, named: "optional")
+    }
+
     // MARK: Parejas con React (mismo ancho que la story, 16 pt de margen como el recorte de `capture-story.mjs`)
 
     func testComparisonInputError() {
@@ -146,6 +162,12 @@ final class FormsSnapshotTests: XCTestCase {
             errorMessage: "Este campo es obligatorio.", helperText: "Escríbelo tal como aparece en tu DNI."
         )
         assertBrandSnapshots(view, width: 352, height: 159, named: "compare-input-error", padding: 16)
+    }
+
+    /// La story `Opcional` (`molecules-inputfield--opcional`): el campo de 320 en el lienzo de 480.
+    func testComparisonInputOptional() {
+        let view = BrandInputField("Teléfono", text: .constant(""), optional: true, type: .tel).frame(width: 320)
+        assertBrandSnapshots(view, width: 480, height: 101, named: "compare-input-optional", padding: 16)
     }
 
     func testComparisonNumberMinMax() {

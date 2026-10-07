@@ -41,6 +41,8 @@ public struct BrandInputField: View {
     private let label: LocalizedStringKey
     @Binding private var text: String
     private let labelHidden: Bool
+    private let optional: Bool
+    private let optionalLabel: LocalizedStringKey
     private let type: InputFieldType
     private let kind: InputFieldKind
     private let clearable: Bool
@@ -63,6 +65,9 @@ public struct BrandInputField: View {
     private typealias F = BrandInputFieldTokens
 
     /// - Parameters:
+    ///   - optional: marca el campo como opcional (D70): « (opcional)» tras la etiqueta, en la tinta apagada, y parte
+    ///     del nombre que lee VoiceOver. Explícita: un campo sin `required` no la lleva sola. No se combina con `required`.
+    ///   - optionalLabel: el texto de esa marca. Por defecto «(opcional)» (castellano).
     ///   - labelHidden: oculta la etiqueta a la vista (la sigue leyendo VoiceOver). Sin `placeholder`, el control usa
     ///     el texto de la etiqueta como marcador de sitio.
     ///   - clearable: solo con `kind: .search`: un aspa al final del campo cuando hay texto.
@@ -74,6 +79,8 @@ public struct BrandInputField: View {
         _ label: LocalizedStringKey,
         text: Binding<String>,
         labelHidden: Bool = false,
+        optional: Bool = false,
+        optionalLabel: LocalizedStringKey = "(opcional)",
         type: InputFieldType = .text,
         kind: InputFieldKind = .text,
         clearable: Bool = false,
@@ -89,6 +96,8 @@ public struct BrandInputField: View {
         self.label = label
         _text = text
         self.labelHidden = labelHidden
+        self.optional = optional
+        self.optionalLabel = optionalLabel
         self.type = type
         self.kind = kind
         self.clearable = clearable
@@ -161,7 +170,8 @@ public struct BrandInputField: View {
             gap: F.gap,
             errorMessage: errorMessage,
             helperText: helperText,
-            helper: .init(fontSize: F.helperFontSize, fontWeight: F.helperFontWeight, lineHeight: F.helperLineHeight, color: F.helperColor)
+            helper: .init(fontSize: F.helperFontSize, fontWeight: F.helperFontWeight, lineHeight: F.helperLineHeight, color: F.helperColor),
+            optionalLabel: optional ? optionalLabel : nil
         ) {
             box
         }

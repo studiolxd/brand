@@ -3,6 +3,7 @@ package com.studiolxd.brand
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import com.studiolxd.brand.components.field.fieldAccessibleName
 import com.studiolxd.brand.components.inputfield.InputFieldKind
 import com.studiolxd.brand.components.inputfield.InputFieldType
 import com.studiolxd.brand.components.inputfield.inputKeyboardOptions
@@ -26,6 +27,13 @@ import kotlin.test.assertNull
 
 /** La lógica pura de los campos: números, selección, teclados y textos por defecto. */
 class FieldsLogicTest {
+    @Test
+    fun optionalMarkIsPartOfTheAccessibleName() {
+        // D70: la marca va dentro de la etiqueta, así que forma parte del nombre («Teléfono (opcional)»), como en React.
+        assertEquals("Teléfono (opcional)", fieldAccessibleName("Teléfono", "(opcional)"))
+        assertEquals("Teléfono", fieldAccessibleName("Teléfono", null))
+    }
+
     @Test
     fun numberIsClampedBetweenMinAndMax() {
         assertEquals(0.0, clampNumber(-3.0, 0.0, 10.0))

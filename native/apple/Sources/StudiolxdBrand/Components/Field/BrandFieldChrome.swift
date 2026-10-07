@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Lo que comparten los campos de formulario (`InputField`, `NumberInputField`, `SelectField`): la etiqueta, el
+/// Lo que comparten los campos de formulario (`InputField`, `NumberInputField`, `SelectField`…): la etiqueta, el
 /// control, el mensaje de error y la ayuda, apilados con el `gap` del campo. Interno: cada campo lo usa con los
 /// tokens de su propio grupo.
 struct BrandFieldLayout<Control: View>: View {
@@ -21,6 +21,9 @@ struct BrandFieldLayout<Control: View>: View {
     /// Si el campo es obligatorio, lo que se lee tras la etiqueta («obligatorio»): SwiftUI no tiene un rasgo de
     /// accesibilidad para lo obligatorio (el `required` de HTML), así que va en el nombre. `nil`: no se lee nada.
     var requiredLabel: LocalizedStringKey? = nil
+    /// Si el campo es opcional (`optional` de React, D70), la marca que va tras la etiqueta («(opcional)»): en la tinta
+    /// apagada (`label.optional-color`), del tamaño de la etiqueta, y parte del nombre accesible. `nil`: sin marca.
+    var optionalLabel: LocalizedStringKey? = nil
     @ViewBuilder let control: Control
 
     private var labelSize: CGFloat {
@@ -41,16 +44,24 @@ struct BrandFieldLayout<Control: View>: View {
         }
     }
 
-    /// El nombre del control: la etiqueta y, si es obligatorio, «obligatorio» detrás.
+    /// La etiqueta con su marca de opcional, si la lleva: «Teléfono (opcional)».
+    private var labelText: Text {
+        guard let optionalLabel else { return Text(label) }
+        return Text(label) + Text(verbatim: " ") + Text(optionalLabel).foregroundStyle(BrandLabelTokens.optionalColor)
+    }
+
+    /// El nombre del control: la etiqueta (con la marca de opcional, que forma parte del nombre como en React) y, si es
+    /// obligatorio, «obligatorio» detrás.
     private var accessibleName: Text {
-        guard let requiredLabel else { return Text(label) }
-        return Text(label) + Text(", ") + Text(requiredLabel)
+        let name = optionalLabel.map { Text(label) + Text(verbatim: " ") + Text($0) } ?? Text(label)
+        guard let requiredLabel else { return name }
+        return name + Text(", ") + Text(requiredLabel)
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: gap) {
             if !labelHidden {
-                Text(label)
+                labelText
                     .brandLinedFont(size: labelSize, weight: BrandLabelTokens.fontWeight, lineHeight: BrandLabelTokens.lineHeight)
                     .tracking(BrandLabelTokens.letterSpacing * labelSize)
                     .foregroundStyle(BrandLabelTokens.color)

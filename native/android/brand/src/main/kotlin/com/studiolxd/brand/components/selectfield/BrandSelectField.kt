@@ -42,6 +42,7 @@ import com.studiolxd.brand.components.field.FieldHelperStyle
 import com.studiolxd.brand.components.field.LocalBrandForcedFocus
 import com.studiolxd.brand.components.field.animatedFieldColor
 import com.studiolxd.brand.components.field.brandFieldBox
+import com.studiolxd.brand.components.field.fieldAccessibleName
 import com.studiolxd.brand.icon.BrandIcon
 import com.studiolxd.brand.icon.BrandIconName
 import com.studiolxd.brand.icon.BrandIconSize
@@ -111,6 +112,9 @@ internal fun List<BrandSelectEntry>.flatOptions(): List<BrandSelectOption> = fla
  *
  * @param placeholder marcador de sitio del disparador sin valor elegido. Castellano por defecto («Seleccionar…»).
  * @param invalidLabel lo que lee TalkBack cuando el campo está en [error] sin [errorMessage]. Castellano por defecto.
+ * @param optional marca el campo como opcional (D70): « (opcional)» tras la etiqueta, en la tinta apagada
+ *   (`label.optional-color`), y parte del nombre que lee TalkBack. Explícita: un campo sin `required` no la lleva sola.
+ * @param optionalLabel el texto de esa marca. Castellano por defecto («(opcional)»).
  */
 @Composable
 fun BrandSelectField(
@@ -120,6 +124,8 @@ fun BrandSelectField(
     options: List<BrandSelectEntry>,
     modifier: Modifier = Modifier,
     labelHidden: Boolean = false,
+    optional: Boolean = false,
+    optionalLabel: String = "(opcional)",
     placeholder: String = "Seleccionar…",
     enabled: Boolean = true,
     error: Boolean = false,
@@ -183,6 +189,7 @@ fun BrandSelectField(
         helperText = helperText,
         helper = FieldHelperStyle(F.helperFontSize, F.helperFontWeight, F.helperLineHeight, F.helperColor.current),
         modifier = modifier,
+        optionalLabel = if (optional) optionalLabel else null,
     ) {
         Box(Modifier.onSizeChanged { anchorWidthPx = it.width }) {
             Row(
@@ -201,7 +208,7 @@ fun BrandSelectField(
                     )
                     .clickable(interactionSource = source, indication = null, enabled = enabled, role = Role.DropdownList) { expanded = true }
                     .semantics {
-                        contentDescription = label
+                        contentDescription = fieldAccessibleName(label, if (optional) optionalLabel else null)
                         stateDescription = listOfNotNull(shownText, helperText).joinToString(". ")
                         if (hasError) error(errorMessage ?: invalidLabel)
                     }

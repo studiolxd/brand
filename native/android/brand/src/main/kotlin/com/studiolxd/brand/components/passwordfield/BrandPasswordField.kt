@@ -61,6 +61,9 @@ typealias PasswordFieldSize = InputFieldSize
  * @param invalidLabel lo que lee TalkBack cuando el campo está en [error] sin [errorMessage]. Castellano por defecto.
  * @param size sin valor toma la del entorno ([com.studiolxd.brand.support.ProvideBrandControlSize]) y, si tampoco hay, `md`.
  * @param interactionSource para observar el foco del campo de texto desde fuera; sin él, el campo usa uno propio.
+ * @param optional marca el campo como opcional (D70): « (opcional)» tras la etiqueta, en la tinta apagada
+ *   (`label.optional-color`), y parte del nombre que lee TalkBack. Explícita: un campo sin `required` no la lleva sola.
+ * @param optionalLabel el texto de esa marca. Castellano por defecto («(opcional)»).
  */
 @Composable
 fun BrandPasswordField(
@@ -69,6 +72,8 @@ fun BrandPasswordField(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     labelHidden: Boolean = false,
+    optional: Boolean = false,
+    optionalLabel: String = "(opcional)",
     placeholder: String? = null,
     enabled: Boolean = true,
     error: Boolean = false,
@@ -112,6 +117,7 @@ fun BrandPasswordField(
         focusRequester = requester,
         obscured = !revealed,
         gap = T.gap,
+        optionalLabel = if (optional) optionalLabel else null,
     ) {
         BrandFieldIconButton(
             icon = if (revealed) BrandIconName.EyeOff else BrandIconName.Eye,

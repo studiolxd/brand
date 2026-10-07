@@ -264,6 +264,7 @@ Comparten etiqueta, ayuda, mensaje de error y talla (`size`, o la del entorno co
 ```swift
 BrandInputField("Correo", text: $email, type: .email, helperText: "Te escribiremos aquí")
 BrandInputField("Buscar", text: $query, labelHidden: true, kind: .search, clearable: true)
+BrandInputField("Teléfono", text: $tel, optional: true, type: .tel)   // « (opcional)» tras la etiqueta; `optionalLabel:` lo traduce (los cinco campos)
 BrandNumberInputField("Cantidad", value: $qty, min: 0, max: 99)          // −/+; `decimal: true` admite coma o punto
 // `Binding<Double?>`: nil = sin valor (campo vacío, VoiceOver lee «Sin valor»); desde vacío − y + parten de 0
 BrandNumberInputField("Cantidad", value: $qty, labelHidden: true, compact: true, commitMode: .blur)  // para el `trailing` de una fila; `.blur` escribe al salir / «intro»
@@ -433,6 +434,7 @@ Estado elevado (`value` / `onValueChange`); etiqueta, ayuda, error y talla comun
 ```kotlin
 BrandInputField("Correo", email, { email = it }, type = InputFieldType.Email, helperText = "Te escribiremos aquí")
 BrandInputField("Buscar", q, { q = it }, labelHidden = true, kind = InputFieldKind.Search, clearable = true)
+BrandInputField("Teléfono", tel, { tel = it }, optional = true, type = InputFieldType.Tel)  // « (opcional)»; `optionalLabel` lo traduce (los cinco campos)
 BrandNumberInputField("Cantidad", qty, { qty = it }, min = 0.0, max = 99.0)       // −/+; `decimal = true`; `value: Double?` (null = vacío; desde vacío − y + parten de 0)
 BrandNumberInputField("Cantidad", qty, { qty = it }, labelHidden = true, compact = true, commitMode = NumberInputCommitMode.Blur)  // para el `trailing` de una fila; `Blur` avisa al salir / «Hecho»
 BrandPasswordField("Contraseña", pwd, { pwd = it })                               // con ojo; etiqueta visible (`labelHidden = true` la oculta)
