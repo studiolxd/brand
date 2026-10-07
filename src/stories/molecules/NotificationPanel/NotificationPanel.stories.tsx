@@ -352,7 +352,7 @@ export const ContratoPie: Story = {
           const estilo = getComputedStyle(enlace);
           await expect(enlace).not.toHaveClass('link--ink');
           await expect(estilo.color).toBe(referencia.color);
-          await expect(estilo.boxShadow).toBe(referencia.boxShadow);
+          await expect(estilo.textDecorationLine).toBe(referencia.textDecorationLine);
         }
       }
     } finally {

@@ -39,7 +39,7 @@
   align-items: center;
   /* El logo es un enlace: sin la línea que brand pone a todo <a>. */
   padding-block-end: 0;
-  box-shadow: none;
+  text-decoration-line: none;
   color: inherit;
   /* Mide lo que la barra le da, sea el `Logo` del sistema a la talla que sea:
      se remapean sus tokens de talla en vez de ganarle con un selector, porque
@@ -54,7 +54,7 @@
 /* También en hover: la regla de hover de la base (`a:where():hover`, 0-1-0)
    empata con esta clase y ganaría por orden de carga. */
 .app-header__logo:hover {
-  box-shadow: none;
+  text-decoration-line: none;
   color: inherit;
 }
 

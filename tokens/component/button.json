@@ -655,12 +655,22 @@
       "underline-width": {
         "$value": "{link.underline-width}",
         "$type": "dimension",
-        "$description": "Grosor de la línea en reposo. La variante `text` se subraya con la misma técnica que `Link` —sombra interior, no `text-decoration`— porque `text-decoration` no cubre un SVG y un botón con icono quedaba con la línea cortada. Apunta al token de `Link` para que las dos piezas no puedan separarse"
+        "$description": "Grosor del subrayado en reposo (`text-decoration-thickness`). La variante `text` se subraya igual que `Link` —`text-decoration` con grosor y distancia de token (D64)—, y apunta a sus tokens para que las dos piezas no puedan separarse. El icono del botón no se subraya"
       },
       "hover-underline-width": {
         "$value": "{link.hover-underline-width}",
         "$type": "dimension",
         "$description": "Grosor de la línea en hover y en activo — el de `Link`"
+      },
+      "decoration-line": {
+        "$value": "{link.decoration-line}",
+        "$type": "string",
+        "$description": "Si se subraya en reposo — el de `Link`"
+      },
+      "hover-decoration-line": {
+        "$value": "{link.hover-decoration-line}",
+        "$type": "string",
+        "$description": "Si se subraya en hover y en activo — el de `Link`"
       },
       "ink-color": {
         "$value": "{link.ink-color}",
@@ -677,10 +687,20 @@
         "$type": "dimension",
         "$description": "tone=ink: grosor del subrayado en hover"
       },
+      "ink-decoration-line": {
+        "$value": "{link.ink-decoration-line}",
+        "$type": "string",
+        "$description": "tone=ink: si se subraya en reposo"
+      },
+      "ink-hover-decoration-line": {
+        "$value": "{link.ink-hover-decoration-line}",
+        "$type": "string",
+        "$description": "tone=ink: si se subraya en hover"
+      },
       "underline-offset": {
         "$value": "{link.underline-offset}",
         "$type": "dimension",
-        "$description": "Separación entre el texto y su línea — la de `Link`. Va como `padding-block-end`, así que la línea cae por debajo del icono igual que del texto"
+        "$description": "Separación entre el texto y su línea — la de `Link`. Se reserva como `padding-block-end` (la caja mide alto de línea más esta separación) y la línea cae en el borde inferior de ese hueco (`text-underline-offset: calc(<separación> - <grosor>)`)"
       },
       "transition-duration": {
         "$value": "{button.transition-duration}",
@@ -786,6 +806,16 @@
         "$value": "{link.surface-dark-hover-underline-width}",
         "$type": "dimension",
         "$description": "Grosor de la línea en hover y activo — surface-dark: el de `Link`, que sobre fondo oscuro pone la línea en el hover"
+      },
+      "surface-dark-decoration-line": {
+        "$value": "{link.surface-dark-decoration-line}",
+        "$type": "string",
+        "$description": "Si se subraya en reposo — surface-dark: el de `Link`, sin línea"
+      },
+      "surface-dark-hover-decoration-line": {
+        "$value": "{link.surface-dark-hover-decoration-line}",
+        "$type": "string",
+        "$description": "Si se subraya en hover y activo — surface-dark: el de `Link`, con línea"
       },
       "surface-dark-color": {
         "$value": "{link.surface-dark-color}",

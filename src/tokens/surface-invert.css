@@ -101,6 +101,8 @@ html.dark .surface-light {
   --button-outline-active-border: var(--color-text-on-light);
   --button-text-underline-width: var(--link-underline-width);
   --button-text-hover-underline-width: var(--link-hover-underline-width);
+  --button-text-decoration-line: var(--link-decoration-line);
+  --button-text-hover-decoration-line: var(--link-hover-decoration-line);
   --button-text-ink-color: var(--link-ink-color);
   --button-text-disabled-color: var(--button-disabled-color);
   --button-text-focus-ring-color: var(--link-focus-ring-color);
@@ -216,6 +218,8 @@ html.dark .surface-light {
   --link-hover-color: var(--color-text-on-light);
   --link-underline-width: var(--border-width-default);
   --link-hover-underline-width: 0px;
+  --link-decoration-line: underline;
+  --link-hover-decoration-line: none;
   --link-focus-ring-color: var(--color-primary);
   --link-ink-color: var(--color-text-on-light);
   --link-accent-1-color: var(--link-color);
@@ -676,6 +680,7 @@ html.dark .surface-light {
   --site-nav-item-color: var(--color-text-on-light);
   --site-nav-item-hover-color: var(--color-text-on-light);
   --site-nav-item-hover-line-width: var(--link-underline-width);
+  --site-nav-item-hover-decoration-line: var(--link-decoration-line);
   --site-nav-item-disabled-color: var(--color-disabled-text-on-light);
   --site-nav-focus-ring-color: var(--color-primary);
   --stat-tile-border-color: var(--card-outline-border-color);

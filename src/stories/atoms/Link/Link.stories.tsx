@@ -38,13 +38,6 @@ export const ContratoEnTextoOscuro: Story = {
   parameters: {
     surface: 'dark',
     chromatic: SOLO_OSCURO,
-    // a11y falso positivo (D41): `link-in-text-block`. El enlace del párrafo SÍ
-    // lleva su marca —la línea en reposo, que es lo que comprueba este test—,
-    // pero axe solo reconoce como marca `text-decoration`, un borde, `outline`,
-    // `background-image` o un cambio de fuente, y la línea del sistema es una
-    // sombra interior (regla 7). Sin marca reconocible, mide el color: amarillo
-    // sobre blanco, 1,5:1.
-    a11y: { config: { rules: [{ id: 'link-in-text-block', enabled: false }] } },
   },
   render: () => (
     <>
@@ -60,13 +53,16 @@ export const ContratoEnTextoOscuro: Story = {
     // El oscuro lo pone un efecto (`withSurface`): se espera, no se da por hecho.
     await waitFor(() => expect(document.documentElement.dataset.theme).toBe('dark'));
     const grosor = (el: HTMLElement, prop: string) => getComputedStyle(el).getPropertyValue(prop).trim();
-    // En texto: línea de 1px en reposo (la sombra interior la pinta) y 0 en hover.
-    await waitFor(() => expect(getComputedStyle(enTexto).boxShadow).toContain('0px -1px 0px 0px inset'));
-    await expect(grosor(enTexto, '--link-hover-underline-width')).toBe('0px');
+    // En texto: subrayado de 1px en reposo (`text-decoration`, que axe sí
+    // reconoce como marca: `link-in-text-block` pasa sin desactivarla) y
+    // ninguno en hover.
+    await waitFor(() => expect(getComputedStyle(enTexto).textDecorationLine).toBe('underline'));
+    await expect(getComputedStyle(enTexto).textDecorationThickness).toBe('1px');
+    await expect(grosor(enTexto, '--link-hover-decoration-line')).toBe('none');
     // Suelto: en oscuro, sin línea en reposo y con línea en hover, como siempre.
-    await expect(grosor(suelto, '--link-underline-width')).toBe('0px');
+    await expect(getComputedStyle(suelto).textDecorationLine).toBe('none');
+    await expect(grosor(suelto, '--link-hover-decoration-line')).toBe('underline');
     await expect(grosor(suelto, '--link-hover-underline-width')).toBe('1px');
-    await expect(getComputedStyle(suelto).boxShadow).not.toContain('-1px');
   },
 };
 
@@ -95,9 +91,13 @@ export const Contrato: Story = {
     await expect(int).toHaveAttribute('aria-current', 'page');
     const a = getComputedStyle(int); const b = getComputedStyle(canvas.getByTestId('crudo'));
     await expect(a.color).toBe(b.color);
-    // la línea del enlace es una sombra interior (no text-decoration): igual en <Link> y en <a> crudo
-    await expect(a.textDecorationLine).toBe('none');
-    await expect(b.boxShadow).not.toBe('none');
+    // el subrayado es `text-decoration` con grosor y distancia de token (D64): igual en <Link> y en <a> crudo
+    await expect(b.textDecorationLine).toBe('underline');
+    await expect(a.textDecorationLine).toBe(b.textDecorationLine);
+    await expect(a.textDecorationThickness).toBe(b.textDecorationThickness);
+    await expect(a.textUnderlineOffset).toBe(b.textUnderlineOffset);
+    await expect(a.textUnderlinePosition).toBe('under');
+    await expect(a.boxShadow).toBe('none');
     await expect(a.paddingBottom).toBe(b.paddingBottom);
   },
 };
@@ -207,7 +207,8 @@ export const ContratoBoton: Story = {
     await expect(boton).toHaveClass('link');
     const a = getComputedStyle(boton); const b = getComputedStyle(canvas.getByTestId('crudo'));
     await expect(a.color).toBe(b.color);
-    await expect(a.boxShadow).toBe(b.boxShadow);
+    await expect(a.textDecorationLine).toBe(b.textDecorationLine);
+    await expect(a.textDecorationThickness).toBe(b.textDecorationThickness);
     await expect(a.paddingBottom).toBe(b.paddingBottom);
     await expect(a.fontSize).toBe(b.fontSize);
     await expect(a.fontFamily).toBe(b.fontFamily);
@@ -240,7 +241,7 @@ export const ContratoInk: Story = {
   play: async ({ canvasElement }) => {
     const a = canvasElement.querySelector('[data-testid="ink"]') as HTMLElement;
     await expect(a).toHaveClass('link--ink');
-    await expect(getComputedStyle(a).boxShadow).not.toBe('none');
+    await expect(getComputedStyle(a).textDecorationLine).toBe('underline');
   },
 };
 
@@ -257,7 +258,7 @@ export const ContratoAccent1: Story = {
     const a = canvasElement.querySelector('[data-testid="accent-1"]') as HTMLElement;
     const porDefecto = canvasElement.querySelector('[data-testid="accent"]') as HTMLElement;
     await expect(a).toHaveClass('link--accent-1');
-    await expect(getComputedStyle(a).boxShadow).not.toBe('none');
+    await expect(getComputedStyle(a).textDecorationLine).toBe('underline');
     // La lavanda sobre blanco da 2,02:1: en claro el tono cae al de por defecto.
     await expect(getComputedStyle(a).color).toBe(getComputedStyle(porDefecto).color);
   },

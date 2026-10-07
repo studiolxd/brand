@@ -36,13 +36,12 @@
   color: var(--sidebar-nav-group-label-color);
   text-decoration: none;
   padding-block-end: 0;
-  box-shadow: none;
 }
 
 /* Misma fuga que en `.sidebar-nav__top-link`: sin esto, el hover de `Link`
    (0,1,1) gana el de aquí (0,1,0) y cuela su amarillo de oscuro. */
 a.sidebar-nav__group-label:hover {
-  box-shadow: none;
+  text-decoration-line: none;
   color: var(--sidebar-nav-group-label-color);
 }
 
@@ -129,7 +128,6 @@ a.sidebar-nav__group-label:focus-visible {
   line-height: var(--sidebar-nav-item-line-height);
   color: var(--sidebar-nav-item-color);
   text-decoration: none;
-  box-shadow: none;
   transition:
     box-shadow var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing),
     color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing);
@@ -171,7 +169,6 @@ a.sidebar-nav__group-label:focus-visible {
      atenuado y el enlace se leía como inactivo. */
   color: var(--sidebar-nav-item-color);
   text-decoration: none;
-  box-shadow: none;
   transition: color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing);
 }
 
@@ -181,7 +178,7 @@ a.sidebar-nav__group-label:focus-visible {
    tiene su propio grafismo de hover (el de `.sidebar-nav__item`) — aquí,
    ninguno. */
 .sidebar-nav__top-link:hover {
-  box-shadow: none;
+  text-decoration-line: none;
   color: var(--sidebar-nav-item-color);
 }
 
@@ -245,7 +242,7 @@ a.sidebar-nav__group-label:focus-visible {
    sin querer verse) — solo anula la fuga. */
 .sidebar-nav__rail-item:hover,
 .sidebar-nav__rail-item[data-popup-open] {
-  box-shadow: none;
+  text-decoration-line: none;
   color: var(--sidebar-nav-item-color);
 }
 /* La sección activa en rail no lleva marca visual permanente (ni color de
@@ -273,7 +270,7 @@ a.sidebar-nav__group-label:focus-visible {
 
 .sidebar-nav__item.sidebar-nav__item--empty:hover,
 .sidebar-nav__top-link.sidebar-nav__top-link--empty:hover {
-  box-shadow: none;
+  text-decoration-line: none;
 }
 
 .sidebar-nav__rail-item.sidebar-nav__rail-item--empty {
@@ -282,7 +279,7 @@ a.sidebar-nav__group-label:focus-visible {
 }
 
 .sidebar-nav__rail-item.sidebar-nav__rail-item--empty:hover {
-  box-shadow: none;
+  text-decoration-line: none;
 }
 
 .sidebar-nav__empty-mark {

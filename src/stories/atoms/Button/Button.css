@@ -102,12 +102,12 @@
 }
 
 
-/* Text: la variante que se lee como un enlace. El subrayado es una línea bajo
-   el botón entero —sombra interior más `padding-block-end`—, no
-   `text-decoration`, por el mismo motivo que en `Link`: `text-decoration` no
-   cubre un SVG, así que un botón con icono quedaba con la línea cortada bajo
-   el texto y ausente bajo el icono. Grosor y separación salen de los tokens de
-   `Link`, de modo que las dos piezas no puedan separarse. */
+/* Text: la variante que se lee como un enlace, subrayada igual que `Link`:
+   `text-decoration` con grosor y distancia de token (D64), la línea bajo los
+   descendentes y bajada hasta el borde inferior del hueco que reserva el
+   `padding-block-end` (la caja mide alto de línea más la separación). El icono
+   no se subraya. Línea, grosor y separación salen de los tokens de `Link`, de
+   modo que las dos piezas no puedan separarse. */
 .button--text {
   justify-content: var(--button-text-justify-content);
   padding-inline: var(--button-text-padding-inline);
@@ -122,9 +122,12 @@
   line-height: var(--button-text-line-height);
   cursor: var(--button-text-cursor);
   white-space: var(--button-text-white-space);
-  text-decoration: none;
   padding-block-end: var(--button-text-underline-offset);
-  box-shadow: inset 0 calc(-1 * var(--button-text-underline-width)) 0 0 currentColor;
+  text-decoration-line: var(--button-text-decoration-line);
+  text-decoration-thickness: var(--button-text-underline-width);
+  text-decoration-skip-ink: auto;
+  text-underline-position: under;
+  text-underline-offset: calc(var(--button-text-underline-offset) - var(--button-text-underline-width));
   background-color: var(--button-text-bg);
   color: var(--button-text-color);
   transition: color var(--button-text-transition-duration) var(--button-text-transition-easing);
@@ -134,25 +137,33 @@
   background-color: var(--button-text-hover-bg);
   color: var(--button-text-hover-color);
   border-color: var(--button-text-hover-border);
-  box-shadow: inset 0 calc(-1 * var(--button-text-hover-underline-width)) 0 0 currentColor;
+  text-decoration-line: var(--button-text-hover-decoration-line);
+  text-decoration-thickness: var(--button-text-hover-underline-width);
+  text-underline-offset: calc(var(--button-text-underline-offset) - var(--button-text-hover-underline-width));
 }
 
 .button--text:active {
   background-color: var(--button-text-active-bg);
   color: var(--button-text-active-color);
   border-color: var(--button-text-active-border);
-  box-shadow: inset 0 calc(-1 * var(--button-text-hover-underline-width)) 0 0 currentColor;
+  text-decoration-line: var(--button-text-hover-decoration-line);
+  text-decoration-thickness: var(--button-text-hover-underline-width);
+  text-underline-offset: calc(var(--button-text-underline-offset) - var(--button-text-hover-underline-width));
 }
 
 /* tone=ink: la tinta de la superficie y el subrayado de `Link tone="ink"`. */
 .button--text.button--ink {
   color: var(--button-text-ink-color);
-  box-shadow: inset 0 calc(-1 * var(--button-text-ink-underline-width)) 0 0 currentColor;
+  text-decoration-line: var(--button-text-ink-decoration-line);
+  text-decoration-thickness: var(--button-text-ink-underline-width);
+  text-underline-offset: calc(var(--button-text-underline-offset) - var(--button-text-ink-underline-width));
 }
 .button--text.button--ink:hover,
 .button--text.button--ink:active {
   color: var(--button-text-ink-color);
-  box-shadow: inset 0 calc(-1 * var(--button-text-ink-hover-underline-width)) 0 0 currentColor;
+  text-decoration-line: var(--button-text-ink-hover-decoration-line);
+  text-decoration-thickness: var(--button-text-ink-hover-underline-width);
+  text-underline-offset: calc(var(--button-text-underline-offset) - var(--button-text-ink-hover-underline-width));
 }
 
 .button--text:focus-visible {

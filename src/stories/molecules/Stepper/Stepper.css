@@ -137,9 +137,10 @@
   inline-size: 100%;
 }
 
-/* El subrayado del paso navegable es la línea del sistema —sombra interior más
-   `padding-block-end`, con el grosor y la separación de `Link`—, no
-   `text-decoration`: en el DS todos los subrayados son la misma línea.
+/* El subrayado del paso navegable es el del sistema —`text-decoration` con el
+   grosor y la separación de `Link`, bajado hasta el borde inferior del hueco
+   que reserva el `padding-block-end`—: en el DS todos los subrayados son la
+   misma línea.
    El hueco de la línea está reservado siempre (la etiqueta lleva su
    `padding-block-end` la pinte o no), para que al pasar el puntero no salte la
    línea de detalle de debajo. Y la etiqueta se ciñe a su texto
@@ -151,7 +152,11 @@
 }
 
 .stepper__item--action:hover .stepper__label {
-  box-shadow: inset 0 calc(-1 * var(--stepper-label-hover-line-width)) 0 0 currentColor;
+  text-decoration-line: underline;
+  text-decoration-thickness: var(--stepper-label-hover-line-width);
+  text-decoration-skip-ink: auto;
+  text-underline-position: under;
+  text-underline-offset: calc(var(--stepper-label-hover-line-offset) - var(--stepper-label-hover-line-width));
 }
 
 .stepper__item--action:focus-visible {

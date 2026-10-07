@@ -145,7 +145,6 @@
   padding-inline: var(--app-launcher-tile-padding-inline);
   border-radius: var(--app-launcher-tile-border-radius);
   text-decoration: none;
-  box-shadow: none;
   text-align: start;
   cursor: pointer;
   outline: none;

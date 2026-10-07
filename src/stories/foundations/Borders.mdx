@@ -19,30 +19,40 @@ El 2px existe por accesibilidad, no por estilo. WCAG 2.4.13 pide que el indicado
 
 El color del anillo lo pone cada componente según su superficie (primario en claro, blanco en oscuro); el grosor es el mismo en todas partes.
 
-## El subrayado es una línea, no `text-decoration`
+## El subrayado es `text-decoration`, con grosor y distancia de token
 
-**En el DS no se usa `text-decoration: underline`.** Subrayar —un enlace, la variante `text` de `Button`, el título de una `ProjectCard`, el paso navegable de un `Stepper`— es pintar una línea bajo el elemento con una sombra interior y reservarle su hueco:
+Subrayar —un enlace, la variante `text` de `Button`, el título de una `ProjectCard`, el paso navegable de un `Stepper`— es **`text-decoration`** con el grosor y la distancia que pone el sistema, no la fuente, y con su hueco reservado (D64):
 
 ```css
-padding-block-end: var(--link-underline-offset);
-box-shadow: inset 0 calc(-1 * var(--link-underline-width)) 0 0 currentColor;
+padding-block-end: var(--link-underline-offset);   /* el hueco: nada se mueve al aparecer la línea */
+text-decoration-line: underline;                   /* o el token que lo decide: var(--link-decoration-line) */
+text-decoration-thickness: var(--link-underline-width);
+text-decoration-skip-ink: auto;
+text-underline-position: under;
+text-underline-offset: calc(var(--link-underline-offset) - var(--link-underline-width));
 ```
 
-Dos motivos, y ninguno es de gusto:
+`text-underline-position: under` coloca la línea bajo los descendentes, y el desplazamiento la baja hasta el borde inferior del hueco: cae donde caía la antigua sombra interior (a un píxel, según la fuente), y la caja mide lo mismo que antes. Nunca `box-shadow` ni `background-image`. Los motivos:
 
-- **`text-decoration` no cubre un SVG.** En un enlace o un botón con icono la línea se corta bajo el texto y desaparece bajo el icono. La línea cruza por debajo de los dos.
-- **Un solo grosor y una sola separación.** El grosor es el borde del sistema (1px, `--border-width-default`) y la separación es `--link-underline-offset`; los componentes apuntan a esos tokens. `text-decoration` trae su propio grosor y su propia posición, que dependen de la fuente y del navegador, así que dos subrayados hechos con las dos técnicas nunca coinciden — se nota al ponerlos juntos.
+- **Se mantiene en alto contraste.** Con `forced-colors` (el modo de alto contraste de Windows) el navegador quita las sombras y los fondos; el subrayado de `text-decoration` lo conserva y lo pinta con el color del sistema.
+- **Se imprime.** La impresión descarta sombras y fondos por defecto; el subrayado sale en el papel.
+- **Lo reconocen las herramientas de accesibilidad.** axe, por ejemplo, acepta `text-decoration` como la marca que distingue un enlace dentro de un texto (`link-in-text-block`); una sombra no la ve y mide solo el color.
+- **Respeta las hojas de usuario.** Quien fuerce o quite los subrayados desde su navegador lo consigue.
+- **El grosor y la distancia siguen siendo del sistema.** `text-decoration-thickness` y `text-underline-offset` los fijan los tokens (`--border-width-default`, 1px, y `--link-underline-offset`), así que todos los subrayados del DS siguen saliendo iguales.
 
-La línea es siempre `currentColor`: subrayado y texto no pueden ir de distinto color.
+La línea es siempre `currentColor`: subrayado y texto no pueden ir de distinto color. **Los iconos (SVG) de un enlace no se subrayan**: `text-decoration` decora texto, y la línea queda bajo el rótulo.
 
-Un componente que **viste sus propios enlaces** anula la línea de la base con `box-shadow: none; padding-block-end: 0` antes de poner la suya —no basta con `text-decoration: none`, que ahí ya no decora nada.
+**Si hay línea lo dice un token de `text-decoration-line`, no un grosor 0.** `text-decoration-thickness: 0` no oculta la línea —el navegador pinta como mínimo un píxel de dispositivo—, así que cada estado declara `underline` o `none` en su token (`link.decoration-line`, `link.hover-decoration-line`, sus pares `surface-dark-*`, `link.in-text-*`…) y el grosor solo dice cuánto mide.
 
-Hay **dos excepciones**, y no se amplían:
+Un componente que **viste sus propios enlaces** anula la línea de la base con `text-decoration-line: none; padding-block-end: 0` (o la shorthand `text-decoration: none`) en su clase. Basta con hacerlo en reposo: el hover de la base no escribe `text-decoration-*`, solo le pasa el estado a la regla de reposo por dos alias locales, así que una anulación en la clase vale también bajo el puntero.
 
-- **`src/vendor/normalize.css`**, que es código de terceros y no se toca: su `abbr[title] { text-decoration: underline dotted }` es la normalización del navegador, no un subrayado del sistema. Si algún día molesta, se anula en el componente, no en el vendor.
-- **El correo (`src/stories/email/`)**, cuyo medio no es un navegador. Outlook de escritorio renderiza con el motor de Word, que no pinta `box-shadow`, y un correo no tiene hoja de estilos donde colgar la línea: todo va inline. Allí el enlace se subraya con `text-decoration: underline` y se desubraya en hover —el mismo dibujo que en la web, con la única técnica que el medio entiende.
+Una **línea de estado que marca una caja y no un texto** —la de hover de una celda de `Calendar`, del botón de `NumberInput` o de la entrada de `TableOfContents`— no es un subrayado: sigue siendo una sombra interior con su propio token de color (Fundamentos › Colores § «Estados: nada se rellena»).
 
-La regla no depende de que alguien se acuerde: un test unitario (`src/stylesheets/underline.test.ts`) barre los `.css` de `src/` y los valores de los tokens de `tokens/` —por ahí entraba el subrayado sin aparecer en el CSS— y falla si vuelve a colarse un `text-decoration: underline`. Las dos excepciones, con su motivo, están escritas en el propio test: ampliarlas obliga a justificarlas ahí.
+Hay **una excepción**, y no se amplía: **`src/vendor/normalize.css`**, que es código de terceros y no se toca. Su `abbr[title] { text-decoration: underline dotted }` es la normalización del navegador, no un subrayado del sistema; si algún día molesta, se anula en el componente, no en el vendor.
+
+**El correo (`src/stories/email/`)** ya subrayaba con `text-decoration: underline` —Outlook de escritorio renderiza con el motor de Word, que no pinta `box-shadow`— y se desubraya en hover: es la misma técnica que la web. Lo único que le falta es lo que el medio no admite: el grosor y la distancia de token (`text-decoration-thickness` y `text-underline-offset` no los entiende el motor de Word), así que ahí la línea la pone la fuente.
+
+La regla no depende de que alguien se acuerde: un test unitario (`src/stylesheets/underline.test.ts`) barre los `.css` de `src/` y falla si una sombra o un fondo vuelven a pintar un subrayado, si alguien usa la shorthand `text-decoration: underline` (que deja grosor y posición a la fuente) o si una regla enciende la línea sin fijar su grosor y su distancia con tokens. La excepción, con su motivo, está escrita en el propio test: ampliarla obliga a justificarla ahí.
 
 ---
 

@@ -117,10 +117,8 @@ export const TextOnLight: Story = {
 };
 
 /**
- * Con icono. El subrayado es una línea bajo el botón entero —la misma técnica
- * que en `Link`: sombra interior y `padding-block-end`, no `text-decoration`—,
- * así que cruza por debajo del icono igual que del texto. Con
- * `text-decoration` la línea se cortaba en el SVG.
+ * Con icono. El subrayado es el de `Link` —`text-decoration` con grosor y
+ * distancia de token (D64)—: subraya el texto y no el icono.
  */
 /** `tone="ink"`: tinta de la superficie, como `Link tone="ink"`. */
 export const TextInk: Story = {
@@ -157,19 +155,22 @@ export const TextDestructiveOnDark: Story = {
 };
 
 export const ContratoSubrayadoText: Story = {
-  name: 'Test — el subrayado de text es una línea, no text-decoration',
+  name: 'Test — el subrayado de text es text-decoration con grosor y distancia de token',
   tags: ['!dev'],
   args: { variant: 'text' },
   render: TextConIcono.render,
   play: async ({ canvasElement }) => {
     const boton = within(canvasElement).getByRole('button');
     const estilo = getComputedStyle(boton);
-    // La línea la pone la sombra interior, separada del texto por el padding:
-    // así cubre también el SVG del icono.
-    await expect(estilo.boxShadow).not.toBe('none');
-    await expect(estilo.textDecorationLine).toBe('none');
-    await expect(parseFloat(estilo.paddingBottom)).toBeGreaterThan(0);
-    // El anillo de foco sigue siendo el outline, ajeno a la sombra.
+    // D64: `text-decoration` de 1px bajo los descendentes, bajado hasta el
+    // borde del hueco que reserva el padding (separación − grosor = 3px). El
+    // icono no se subraya.
+    await expect(estilo.textDecorationLine).toBe('underline');
+    await expect(estilo.textDecorationThickness).toBe('1px');
+    await expect(estilo.textUnderlinePosition).toBe('under');
+    await expect(estilo.textUnderlineOffset).toBe('3px');
+    await expect(estilo.boxShadow).toBe('none');
+    await expect(parseFloat(estilo.paddingBottom)).toBe(4);
     await expect(boton).toHaveClass('button--text');
   },
 };

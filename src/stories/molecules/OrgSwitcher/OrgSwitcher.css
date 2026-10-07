@@ -103,7 +103,6 @@
   font-weight: var(--org-switcher-item-font-weight);
   color: var(--org-switcher-item-color);
   text-decoration: none;
-  box-shadow: none;
   cursor: pointer;
   outline: none;
   transition:

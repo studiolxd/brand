@@ -66,7 +66,7 @@
    puede ganar el empate y colar su amarillo en oscuro. */
 .tree-view__item:not(.tree-view__item--disabled) > .tree-view__row:hover {
   color: var(--tree-view-color);
-  box-shadow: none;
+  text-decoration-line: none;
 }
 
 /* La fila elegida se marca SOLO con el peso: en la barra lateral el color de
