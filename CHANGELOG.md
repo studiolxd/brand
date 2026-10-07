@@ -22,8 +22,14 @@ para breaking changes.
 - Nativo: parejas React ↔ SwiftUI y React ↔ Compose de `Menu`: disparadores a medida y de icono en las dos
   plataformas, y paneles abiertos en Android. Las capturas de panel de menú en Android apagan el foco automático, que
   hacía inestable la de `ContextMenu` abierto.
-- Nativo (Android): el rótulo de sección del menú queda a 16 dp del borde, como en React. Antes sumaba además el
-  margen de los ítems y quedaba a 24 dp. Capturas de Paparazzi y parejas de `Menu` regrabadas. iOS no tenía la deriva.
+- `Menu`: el texto del rótulo de sección se alinea con el de los ítems (24 px del borde; antes 16). Token nuevo
+  `menu.label-margin-inline` → `{menu.padding-inline}`, y `menu.label-padding-inline` pasa a
+  `{menu.item-padding-inline}` (mismo valor). Android lo sigue con los mismos tokens; iOS usa el menú del sistema.
+  Afecta también a `ContextMenu`, `UserMenu` y `OrgSwitcher`. Cambio visual.
+- Nativo: `Toast`/`Toaster` en SwiftUI y Compose con la caja y el título de React. El borde ocupa espacio como en CSS,
+  el título y la descripción miden la caja de línea de CSS, el título lleva el tracking de `h2` y la acción queda a 8
+  del texto en iOS. Aviso de una línea: 52,5 pt → 55 en iOS y 55,7 dp → 55 en Android (React 54,8 px). El título más
+  grueso en la web es el suavizado de Chromium en macOS, no el peso: declarado en la ficha.
 - Nativo: parejas React ↔ SwiftUI y React ↔ Compose de `CloseButton` (tres tallas) y `Toaster` (pila desplegada y
   recogida). `capture-story.mjs` gana `--hide <selector>` y aparta el puntero tras `--click`.
 - `release:npm` lee el stage-id en el formato de npm 11 («staged with id …»); con la v50.0.0 lo subió pero no supo
