@@ -43,7 +43,7 @@ function l(e) {
 		return /* @__PURE__ */ a("div", {
 			className: M,
 			role: "img",
-			"aria-label": v?.(e, f, p) ?? "",
+			"aria-label": v?.(e, f, p) || void 0,
 			...w,
 			children: [/* @__PURE__ */ i("span", {
 				className: "star-rating__stars",
@@ -61,7 +61,7 @@ function l(e) {
 	return /* @__PURE__ */ i("div", {
 		className: M,
 		role: "radiogroup",
-		"aria-label": b ?? "",
+		"aria-label": b || void 0,
 		onPointerLeave: () => k(void 0),
 		...w,
 		children: N.map((e) => {

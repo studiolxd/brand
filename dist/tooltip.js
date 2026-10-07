@@ -14,21 +14,25 @@ function c({ children: e, delayDuration: t = 0, skipDelayDuration: n }) {
 	});
 }
 var l = t("--tooltip-offset"), u = n(function({ label: t, children: n, side: c = "top", align: u = "center", sideOffset: d, open: f, defaultOpen: p, onOpenChange: m, delayDuration: h, describe: g = !0, disabledTrigger: _ = !1, container: v, className: y, ...b }, x) {
-	let S = e(v), C = r(), [w, T] = i(p ?? !1), E = f ?? w;
+	let S = e(v), C = r(), w = r(), T = b.id ?? w, [E, D] = i(p ?? !1), O = f ?? E;
 	return /* @__PURE__ */ o(s.Root, {
 		open: f,
 		defaultOpen: p,
 		onOpenChange: (e) => {
-			f === void 0 && T(e), m?.(e);
+			f === void 0 && D(e), m?.(e);
 		},
 		children: [/* @__PURE__ */ a(s.Trigger, {
 			ref: x,
 			render: _ ? /* @__PURE__ */ a("span", {
+				id: T,
 				className: "tooltip__trigger",
 				tabIndex: 0,
+				role: "group",
+				"aria-disabled": !0,
+				...b["aria-label"] === void 0 && b["aria-labelledby"] === void 0 ? { "aria-labelledby": T } : {},
 				children: n
 			}) : n,
-			"aria-describedby": E && g ? C : void 0,
+			"aria-describedby": O && g ? C : void 0,
 			...h === void 0 ? {} : { delay: h },
 			...b
 		}), /* @__PURE__ */ a(s.Portal, {

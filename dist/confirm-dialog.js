@@ -4,85 +4,83 @@ import { n as e } from "./_shared/brandmessagescontext.js";
 import { Button as t } from "./button.js";
 import { Modal as n } from "./modal.js";
 import { InputField as r } from "./input-field.js";
-import { useEffect as i, useId as a, useRef as o, useState as s } from "react";
-import { Fragment as c, jsx as l, jsxs as u } from "react/jsx-runtime";
+import { useId as i, useRef as a, useState as o } from "react";
+import { Fragment as s, jsx as c, jsxs as l } from "react/jsx-runtime";
 //#region src/stories/molecules/ConfirmDialog/ConfirmDialog.tsx
-function d({ open: d, title: f, description: p, children: m, onConfirm: h, onCancel: g, onConfirmError: _, secondaryActionLabel: v, onSecondaryAction: y, destructive: b = !1, confirmLabel: x, cancelLabel: S, pendingLabel: C, closeLabel: w, confirmPhrase: T, confirmPhraseLabel: E, confirmPhraseMismatch: D, container: O, className: k }) {
-	let A = e("confirmDialog"), j = o(null), M = o(null), N = a(), [P, F] = s(!1), [I, L] = s(""), [R, z] = s(!1), B = T === void 0 || I.trim() === T, V = R && !B;
-	i(() => {
-		d || (F(!1), L(""), z(!1));
-	}, [d]);
-	let H = () => {
-		P || g();
-	}, U = async () => {
-		if (P || !B) return;
-		let e = h();
+function u({ open: u, title: d, description: f, children: p, onConfirm: m, onCancel: h, onConfirmError: g, secondaryActionLabel: _, onSecondaryAction: v, destructive: y = !1, confirmLabel: b, cancelLabel: x, pendingLabel: S, closeLabel: C, confirmPhrase: w, confirmPhraseLabel: T, confirmPhraseMismatch: E, container: D, className: O }) {
+	let k = e("confirmDialog"), A = a(null), j = a(null), M = i(), [N, P] = o(!1), [F, I] = o(""), [L, R] = o(!1), z = w === void 0 || F.trim() === w, B = L && !z, [V, H] = o(u);
+	u !== V && (H(u), u && (P(!1), I(""), R(!1)));
+	let U = () => {
+		N || h();
+	}, W = async () => {
+		if (N || !z) return;
+		let e = m();
 		if (e instanceof Promise) {
-			F(!0);
+			P(!0);
 			try {
 				await e;
 			} catch (e) {
-				_?.(e);
+				g?.(e);
 			} finally {
-				F(!1);
+				P(!1);
 			}
 		}
 	};
-	return /* @__PURE__ */ u(n, {
-		open: d,
-		onClose: H,
-		title: f,
-		...w === void 0 ? {} : { closeLabel: w },
-		container: O,
-		initialFocus: T === void 0 ? j : M,
-		...p == null ? {} : { description: p },
-		footerClassName: ["confirm-dialog__actions", k].filter(Boolean).join(" "),
-		footer: /* @__PURE__ */ u(c, { children: [
-			/* @__PURE__ */ l(t, {
-				ref: j,
+	return /* @__PURE__ */ l(n, {
+		open: u,
+		onClose: U,
+		title: d,
+		...C === void 0 ? {} : { closeLabel: C },
+		container: D,
+		initialFocus: w === void 0 ? A : j,
+		...f == null ? {} : { description: f },
+		footerClassName: ["confirm-dialog__actions", O].filter(Boolean).join(" "),
+		footer: /* @__PURE__ */ l(s, { children: [
+			/* @__PURE__ */ c(t, {
+				ref: A,
 				variant: "outline",
-				onClick: H,
-				disabled: P,
-				children: A("cancel", S)
-			}),
-			v && y && /* @__PURE__ */ l(t, {
-				variant: "outline",
-				onClick: y,
-				disabled: P,
-				children: v
-			}),
-			/* @__PURE__ */ l(t, {
-				variant: b ? "outline" : "primary",
-				destructive: b,
 				onClick: U,
-				disabled: P || !B,
-				children: P ? A("pending", C) : x
+				disabled: N,
+				children: k("cancel", x)
+			}),
+			_ && v && /* @__PURE__ */ c(t, {
+				variant: "outline",
+				onClick: v,
+				disabled: N,
+				children: _
+			}),
+			/* @__PURE__ */ c(t, {
+				variant: y ? "outline" : "primary",
+				destructive: y,
+				onClick: W,
+				disabled: N || !z,
+				children: N ? k("pending", S) : b
 			})
 		] }),
-		children: [m, T !== void 0 && /* @__PURE__ */ l(r, {
-			ref: M,
-			id: `${N}-confirm-phrase`,
+		children: [p, w !== void 0 && /* @__PURE__ */ c(r, {
+			ref: j,
+			id: `${M}-confirm-phrase`,
 			className: "confirm-dialog__phrase",
-			label: E ?? "",
-			value: I,
-			disabled: P,
+			label: T ?? "",
+			value: F,
+			disabled: N,
 			autoComplete: "off",
 			autoCorrect: "off",
 			autoCapitalize: "none",
 			spellCheck: !1,
-			error: V,
-			...V ? { errorMessage: D } : {},
+			error: B,
+			...B ? { errorMessage: E } : {},
 			onChange: (e) => {
-				L(e.target.value), z(!1);
+				I(e.target.value), R(!1);
 			},
 			onBlur: () => {
-				I !== "" && z(!0);
+				F !== "" && R(!0);
 			},
 			onKeyDown: (e) => {
-				e.key === "Enter" && (e.preventDefault(), B ? U() : I !== "" && z(!0));
+				e.key === "Enter" && (e.preventDefault(), z ? W() : F !== "" && R(!0));
 			}
 		})]
 	});
 }
 //#endregion
-export { d as ConfirmDialog };
+export { u as ConfirmDialog };

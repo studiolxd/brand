@@ -51,7 +51,9 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLElement>, 'c
      * Con `disabledTrigger` el bocadillo se dispara desde un envoltorio
      * focusable (`span.tooltip__trigger`, `tabIndex={0}`) que pone el propio
      * componente: es él quien recibe hover, foco y el `aria-describedby`,
-     * mientras el control de dentro sigue deshabilitado de verdad. El CSS
+     * mientras el control de dentro sigue deshabilitado de verdad. Como recibe
+     * el foco, se presenta como `role="group"` con `aria-disabled="true"` y el
+     * nombre del control que envuelve (`aria-labelledby` a sí mismo). El CSS
      * apaga los eventos de puntero del hijo deshabilitado para que el hover
      * sobre el botón llegue al envoltorio en vez de perderse.
      *
