@@ -1,22 +1,22 @@
 import './fieldset.css';
 import { jsx as e, jsxs as t } from "react/jsx-runtime";
 //#region src/stories/atoms/Fieldset/Fieldset.tsx
-function n({ legend: n, level: r = 2, weight: i, size: a, className: o, id: s, disabled: c, "aria-describedby": l, children: u }) {
-	let d = [
+function n({ legend: n, legendHidden: r = !1, level: i = 2, weight: a, size: o, className: s, id: c, disabled: l, "aria-describedby": u, children: d }) {
+	let f = r ? "visually-hidden" : [
 		"fieldset__legend",
-		`fieldset__legend--${r}`,
-		i && `fieldset__legend--${i}`,
-		a && `fieldset__legend--size-${a}`
+		`fieldset__legend--${i}`,
+		a && `fieldset__legend--${a}`,
+		o && `fieldset__legend--size-${o}`
 	].filter(Boolean).join(" ");
 	return /* @__PURE__ */ t("fieldset", {
-		className: ["fieldset", o].filter(Boolean).join(" "),
-		id: s,
-		disabled: c,
-		"aria-describedby": l,
+		className: ["fieldset", s].filter(Boolean).join(" "),
+		id: c,
+		disabled: l,
+		"aria-describedby": u,
 		children: [/* @__PURE__ */ e("legend", {
-			className: d,
+			className: f,
 			children: n
-		}), u]
+		}), d]
 	});
 }
 //#endregion

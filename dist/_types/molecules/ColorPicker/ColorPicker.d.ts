@@ -103,6 +103,13 @@ export interface ColorPickerProps {
     id?: string;
     /** Nombre en el formulario: se monta un input oculto con el hex. */
     name?: string;
+    /**
+     * El `<form>` no se envía sin color: el campo que sincroniza el hex lleva
+     * `required` (y, si se enfoca para avisar, devuelve el foco al disparador).
+     * El disparador es un botón y no admite `aria-required`: quien lo anuncia es
+     * el grupo de `ColorPickerField`. Suelto, el obligatorio se dice en el texto.
+     */
+    required?: boolean;
     /** Nombre accesible del disparador cuando va suelto. */
     'aria-label'?: string;
     /** Lo pone el campo: la etiqueta nombra el disparador. */
@@ -134,7 +141,13 @@ export interface ColorPickerProps {
      * a donde estaba antes de abrir.
      */
     anchor?: PopoverAnchor;
-    /** Se añade DESPUÉS de las clases propias. */
+    /**
+     * Va al **disparador** cuando lo pinta el selector (la muestra) y al
+     * **panel** cuando el disparador lo trae el consumidor (`trigger`) o no hay
+     * ninguno (`anchor`): un disparador propio ya lleva sus clases (D65; hasta
+     * la v50 iba al contenedor). Se añade DESPUÉS de las clases propias. El
+     * panel se personaliza con tokens.
+     */
     className?: string;
 }
 /**

@@ -124,7 +124,12 @@ export interface NotificationPanelProps {
     open?: boolean;
     defaultOpen?: boolean;
     onOpenChange?: (open: boolean, details: PopoverChangeDetails) => void;
-    /** Se añade DESPUÉS de las clases propias del panel (el consumidor añade, no sustituye). */
+    /**
+     * Va al **disparador** —la campana, el `NotificationButton` que pinta el
+     * propio componente y que se queda en su sitio—, no al panel (D65). Se añade
+     * DESPUÉS de las clases propias (el consumidor añade, no sustituye). El
+     * panel se personaliza con tokens.
+     */
     className?: string;
 }
 /**

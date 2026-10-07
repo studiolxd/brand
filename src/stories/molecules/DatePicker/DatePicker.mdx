@@ -88,6 +88,7 @@ El campo es el `Input` del sistema y el calendario voltea con los tokens de `Cal
 - Cuando lo escrito no es una fecha, el campo lleva `aria-invalid` y el aviso va en un `role="alert"` enlazado por `aria-describedby`.
 - Suelto, el nombre del control va en `aria-label`; dentro de un campo lo pone la etiqueta por `htmlFor`/`id`, y ahí **no** se pasa `aria-label`.
 - Los `id` de ayuda y error llegan por `aria-describedby`, que el campo compone.
+- `required` va como atributo nativo en el campo de texto, que es el que guarda lo escrito.
 - La rejilla del calendario es una sola parada de tabulador y se recorre con las flechas, Inicio/Fin e RePág/AvPág: el detalle está en la doc de `Calendar`.
 
 ## Internacionalización

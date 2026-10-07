@@ -3,9 +3,9 @@ import './CheckboxField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
 import { Checkbox } from '../../atoms/Checkbox/Checkbox';
-import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 
-export interface CheckboxFieldProps {
+export interface CheckboxFieldProps extends FieldOptionalProps {
   /** Texto de la opción, a la derecha de la marca. Acepta JSX (un enlace, por ejemplo). */
   label: ReactNode;
   /**
@@ -52,6 +52,8 @@ export interface CheckboxFieldProps {
  */
 export const CheckboxField = forwardRef<HTMLElement, CheckboxFieldProps>(function CheckboxField({
   label,
+  optional,
+  optionalLabel,
   labelHidden: labelHiddenProp,
   checked,
   defaultChecked,
@@ -81,6 +83,8 @@ export const CheckboxField = forwardRef<HTMLElement, CheckboxFieldProps>(functio
       className={className}
       layout="inline"
       label={label}
+      optional={optional}
+      optionalLabel={optionalLabel}
       labelHidden={labelHidden}
     >
       <Checkbox

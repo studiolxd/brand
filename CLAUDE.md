@@ -175,7 +175,7 @@ Todo comportamiento accesible complejo (menús, popovers, diálogos, tooltips, s
 - **Estados por atributos de Base UI** en el CSS: `[data-open]` / `[data-closed]` en popups, `[data-popup-open]` en triggers, `[data-highlighted]`, `[data-checked]`, `[data-disabled]`. Nada de `[data-state="…"]`.
 - **Posicionamiento**: `Portal` → `Positioner` (side, align, sideOffset) → `Popup`. La variable `--transform-origin` la pone el Positioner.
 - Los `renderLink` que recibe un menú deben propagar **todas** las props que les llegan: el motor inyecta rol, tabIndex y handlers de teclado en el enlace.
-- **`className` en un componente con portal** (D29): va al **disparador** cuando lo pinta el componente (`ContextMenu`, `Select`, `OrgSwitcher`, `UserMenu`, `AppLauncher`, `DatePicker`, `MultiSelect`, `Autocomplete`…: el nodo que se queda en su sitio), y al **panel** cuando el disparador lo trae el consumidor (`Menu`, `Popover`, `Tooltip`, `Modal`, `Sheet`…: el disparador ya lleva sus clases). No se añade `popupClassName`: el panel se personaliza con tokens. El JSDoc de cada `className` lo dice.
+- **`className` en un componente con portal** (D29): va al **disparador** cuando lo pinta el componente (`ContextMenu`, `Select`, `OrgSwitcher`, `UserMenu`, `AppLauncher`, `DatePicker`, `MultiSelect`, `Autocomplete`, `NotificationPanel`, `ColorPicker` con su muestra…: el nodo que se queda en su sitio), y al **panel** cuando el disparador lo trae el consumidor (`Menu`, `Popover`, `Tooltip`, `Modal`, `Sheet`, `ColorPicker` con `trigger` o `anchor`…: el disparador ya lleva sus clases), o cuando no hay disparador (`ConfirmDialog`, controlado como `Modal`). No se añade `popupClassName`: el panel se personaliza con tokens. El JSDoc de cada `className` lo dice.
 
 ### Textos de componente — siempre del catálogo, nunca cableados
 
@@ -241,7 +241,7 @@ Para texto que debe ser leído por lectores de pantalla pero invisible visualmen
 ```
 
 Excepciones — **cuando la receta tiene que ir sobre un elemento que ya existe**, porque el
-`<span>` envolvente de `VisuallyHidden` rompería algo. Son estas cuatro, y no se amplían sin
+`<span>` envolvente de `VisuallyHidden` rompería algo. Son estas cinco, y no se amplían sin
 apuntarlas aquí:
 
 - `Label` aplica `visually-hidden` sobre el propio `<label>` cuando `hidden={true}`: lo que se
@@ -256,6 +256,9 @@ apuntarlas aquí:
   vacío**, para que no ocupe sitio; `VisuallyHidden` lo ocultaría siempre, también cuando
   enseña el mensaje, y `display: none` lo sacaría del árbol de accesibilidad y el anuncio no
   llegaría.
+- `Fieldset` la aplica sobre el propio `<legend>` con `legendHidden` (D69; `RecurrenceField` la
+  usa con `labelHidden`): el `<legend>` tiene que ser el primer hijo del `fieldset` para nombrar
+  el grupo, y un `<span>` envolvente rompería esa asociación.
 
 El patrón común: si el nodo que hay que ocultar ya está fijado por el HTML (es el elemento del
 componente, o su sitio en la tabla no admite otro), la clase va sobre él; en cualquier otro

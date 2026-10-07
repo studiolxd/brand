@@ -6,7 +6,7 @@ import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
 import { Input } from '../../atoms/Input/Input';
 import { Icon } from '../../atoms/Icon/Icon';
-import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { inputFieldEs } from '../../messages/es/inputField';
 
@@ -24,7 +24,7 @@ export interface InputFieldMessages {
   clear: string;
 }
 
-export interface InputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue'> {
+export interface InputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue'>, FieldOptionalProps {
   id: string;
   label: string;
   /**
@@ -86,6 +86,8 @@ export interface InputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>,
 export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function InputField({
   id,
   label,
+  optional,
+  optionalLabel,
   labelHidden: labelHiddenProp,
   name,
   type,
@@ -170,7 +172,7 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function
   );
 
   return (
-    <FieldShell field={field} block="input-field" className={className} label={label} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="input-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       {isSearch ? (
         <div
           className={[

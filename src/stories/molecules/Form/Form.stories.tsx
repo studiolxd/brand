@@ -4,6 +4,7 @@ import { Form } from './Form';
 import { InputField } from '../InputField/InputField';
 import { PasswordField } from '../PasswordField/PasswordField';
 import { CheckboxField } from '../CheckboxField/CheckboxField';
+import { TextareaField } from '../TextareaField/TextareaField';
 import { Button } from '../../atoms/Button/Button';
 import { Link } from '../../atoms/Link/Link';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
@@ -79,6 +80,25 @@ export const ConCasillaYDosAcciones: Story = {
         <Button variant="primary" type="submit">Crear cuenta</Button>
       </>
     ),
+  },
+};
+
+/**
+ * Casi todo obligatorio, y lo que no, marcado: `optional` en los campos que se
+ * pueden dejar vacíos. Se marca la excepción, no la regla.
+ */
+export const ConCamposOpcionales: Story = {
+  args: {
+    children: (
+      <>
+        <InputField id="form-op-nombre" label="Nombre" autoComplete="name" required />
+        <InputField id="form-op-email" label="Correo electrónico" type="email" autoComplete="email" required />
+        <InputField id="form-op-telefono" label="Teléfono" type="tel" autoComplete="tel" optional />
+        <TextareaField id="form-op-mensaje" label="Mensaje" required />
+        <InputField id="form-op-empresa" label="Empresa" autoComplete="organization" optional />
+      </>
+    ),
+    actions: <Button variant="primary" type="submit">Enviar</Button>,
   },
 };
 

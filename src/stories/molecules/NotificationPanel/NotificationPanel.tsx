@@ -152,7 +152,12 @@ export interface NotificationPanelProps {
   open?: boolean;
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean, details: PopoverChangeDetails) => void;
-  /** Se añade DESPUÉS de las clases propias del panel (el consumidor añade, no sustituye). */
+  /**
+   * Va al **disparador** —la campana, el `NotificationButton` que pinta el
+   * propio componente y que se queda en su sitio—, no al panel (D65). Se añade
+   * DESPUÉS de las clases propias (el consumidor añade, no sustituye). El
+   * panel se personaliza con tokens.
+   */
   className?: string;
 }
 
@@ -245,7 +250,9 @@ export function NotificationPanel({
 
   return (
     <Popover
-      trigger={<NotificationButton count={count} max={max} label={label} countLabel={countLabel} />}
+      trigger={
+        <NotificationButton count={count} max={max} label={label} countLabel={countLabel} className={className} />
+      }
       label={panel}
       align="end"
       sideOffset={tokenSideOffset}
@@ -253,7 +260,7 @@ export function NotificationPanel({
       defaultOpen={defaultOpen}
       onOpenChange={handleOpenChange}
       initialFocus={initialFocus}
-      className={['notification-panel', className].filter(Boolean).join(' ')}
+      className="notification-panel"
     >
       <div className="notification-panel__body" ref={panelRef}>
         {/* El panel no lleva cabecera visible: el título se queda solo para

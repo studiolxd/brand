@@ -2,12 +2,12 @@ import { forwardRef } from 'react';
 import './FileUploadField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { FileUpload } from '../../atoms/FileUpload/FileUpload';
 import type { FileUploadProps } from '../../atoms/FileUpload/FileUpload';
 
 export interface FileUploadFieldProps
-  extends Omit<FileUploadProps, 'describedBy' | 'ariaLabel' | 'aria-describedby' | 'id'> {
+  extends Omit<FileUploadProps, 'describedBy' | 'ariaLabel' | 'aria-describedby' | 'id'>, FieldOptionalProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
   id?: string;
   label: string;
@@ -38,6 +38,8 @@ export interface FileUploadFieldProps
 export const FileUploadField = forwardRef<HTMLInputElement, FileUploadFieldProps>(function FileUploadField({
   id: idProp,
   label,
+  optional,
+  optionalLabel,
   labelHidden: labelHiddenProp,
   errorMessage,
   helperText,
@@ -52,7 +54,7 @@ export const FileUploadField = forwardRef<HTMLInputElement, FileUploadFieldProps
   const { id } = field;
 
   return (
-    <FieldShell field={field} block="file-upload-field" className={className} label={label} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="file-upload-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       <FileUpload
         ref={ref}
         {...rest}

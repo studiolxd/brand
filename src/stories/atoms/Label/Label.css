@@ -18,3 +18,10 @@
   font-size: var(--label-lg-font-size);
 }
 
+/* La marca « (opcional)» de un campo `optional` (D70). Va dentro de la
+   etiqueta —es parte de su nombre accesible— en la tinta apagada; el tamaño
+   es el de la etiqueta. La pinta el armazón de los campos, también tras la
+   etiqueta en línea de una casilla. */
+.label__optional {
+  color: var(--label-optional-color);
+}

@@ -77,6 +77,7 @@ El contrato es `value` / `onChange` + `name` + `ref` al campo de la fecha. `onCh
   en el grupo —es un atributo de los widgets de entrada, donde no está definido
   no aporta nada—: lo llevan los dos controles de dentro, que reciben `error`.
 - El mensaje de error se anuncia (`role="alert"`).
+- `required` pone el `required` nativo en el campo de la fecha y, en la hora, el de sus desplegables con `aria-required` en su grupo, como `TimeField`.
 - Meses y días del calendario salen de `Intl` con el `locale`: no son props de texto.
 
 ## Internacionalización

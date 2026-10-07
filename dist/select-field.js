@@ -20,38 +20,40 @@ function d(e) {
 		value: c
 	} : e;
 }
-var f = o(function({ id: o, label: c, labelHidden: f, options: p, value: m, defaultValue: h, placeholder: g, name: _, disabled: v, required: y, size: b, error: x = !1, errorMessage: S, helperText: C, className: w, onValueChange: T, onBlur: E }, D) {
-	let O = r(f), k = e(b), A = i({
+var f = o(function({ id: o, label: c, optional: f, optionalLabel: p, labelHidden: m, options: h, value: g, defaultValue: _, placeholder: v, name: y, disabled: b, required: x, size: S, error: C = !1, errorMessage: w, helperText: T, className: E, onValueChange: D, onBlur: O }, k) {
+	let A = r(m), j = e(S), M = i({
 		id: o,
-		error: x,
-		errorMessage: S,
-		helperText: C
-	}), { id: j } = A, M = p.some((e) => n(e) ? e.options.some((e) => e.value === "") : e.value === "");
+		error: C,
+		errorMessage: w,
+		helperText: T
+	}), { id: N } = M, P = h.some((e) => n(e) ? e.options.some((e) => e.value === "") : e.value === "");
 	return /* @__PURE__ */ s(a, {
-		field: A,
+		field: M,
 		block: "select-field",
-		className: w,
+		className: E,
 		label: c,
-		labelHidden: O,
-		size: k,
+		optional: f,
+		optionalLabel: p,
+		labelHidden: A,
+		size: j,
 		children: /* @__PURE__ */ s(t, {
-			ref: D,
-			id: j,
-			name: _,
-			required: y,
-			options: M ? p.map((e) => n(e) ? {
+			ref: k,
+			id: N,
+			name: y,
+			required: x,
+			options: P ? h.map((e) => n(e) ? {
 				...e,
 				options: e.options.map(d)
-			} : d(e)) : p,
-			value: l(m, M),
-			defaultValue: l(h, M),
-			placeholder: g,
-			disabled: v,
-			size: k,
-			"aria-describedby": A.describedBy,
-			"aria-invalid": A.hasError,
-			onValueChange: T ? (e) => T(u(e)) : void 0,
-			onBlur: E
+			} : d(e)) : h,
+			value: l(g, P),
+			defaultValue: l(_, P),
+			placeholder: v,
+			disabled: b,
+			size: j,
+			"aria-describedby": M.describedBy,
+			"aria-invalid": M.hasError,
+			onValueChange: D ? (e) => D(u(e)) : void 0,
+			onBlur: O
 		})
 	});
 });

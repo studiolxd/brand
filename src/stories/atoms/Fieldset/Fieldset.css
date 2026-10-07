@@ -1,3 +1,6 @@
+/* `.visually-hidden` — fuente única en el átomo VisuallyHidden (la leyenda oculta). */
+@import "../VisuallyHidden/VisuallyHidden.css";
+
 .fieldset {
   border: none;
   padding-block: 0;

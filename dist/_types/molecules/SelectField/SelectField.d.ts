@@ -1,6 +1,7 @@
 import './SelectField.css';
+import { type FieldOptionalProps } from '../_shared/FieldShell';
 import type { SelectOptionOrGroup } from '../../atoms/Select/Select';
-export interface SelectFieldProps {
+export interface SelectFieldProps extends FieldOptionalProps {
     /** `id` del control. Si no se pasa, se genera con `useId`. */
     id?: string;
     label: string;

@@ -7,42 +7,44 @@ import { n as r, t as i } from "./_shared/fieldshell.js";
 import { forwardRef as a } from "react";
 import { jsx as o } from "react/jsx-runtime";
 //#region src/stories/molecules/AutocompleteField/AutocompleteField.tsx
-var s = a(function({ id: a, label: s, labelHidden: c, value: l, defaultValue: u, onValueChange: d, onSelect: f, options: p, onSearch: m, debounceMs: h, minChars: g, placeholder: _, name: v, disabled: y, readOnly: b, size: x, required: S, maxLength: C, error: w = !1, errorMessage: T, helperText: E, className: D, container: O, onBlur: k }, A) {
-	let j = n(c), M = t(x), N = r({
+var s = a(function({ id: a, label: s, optional: c, optionalLabel: l, labelHidden: u, value: d, defaultValue: f, onValueChange: p, onSelect: m, options: h, onSearch: g, debounceMs: _, minChars: v, placeholder: y, name: b, disabled: x, readOnly: S, size: C, required: w, maxLength: T, error: E = !1, errorMessage: D, helperText: O, className: k, container: A, onBlur: j }, M) {
+	let N = n(u), P = t(C), F = r({
 		id: a,
-		error: w,
-		errorMessage: T,
-		helperText: E
-	}), { id: P } = N;
+		error: E,
+		errorMessage: D,
+		helperText: O
+	}), { id: I } = F;
 	return /* @__PURE__ */ o(i, {
-		field: N,
+		field: F,
 		block: "autocomplete-field",
-		className: D,
+		className: k,
 		label: s,
-		labelHidden: j,
-		size: M,
+		optional: c,
+		optionalLabel: l,
+		labelHidden: N,
+		size: P,
 		children: /* @__PURE__ */ o(e, {
-			ref: A,
-			id: P,
-			name: v,
-			value: l,
-			defaultValue: u,
-			onValueChange: d,
-			onSelect: f,
-			options: p,
-			onSearch: m,
-			debounceMs: h,
-			minChars: g,
-			placeholder: _,
-			disabled: y,
-			readOnly: b,
-			size: M,
-			required: S,
-			maxLength: C,
-			error: N.hasError,
-			container: O,
-			"aria-describedby": N.describedBy,
-			onBlur: k
+			ref: M,
+			id: I,
+			name: b,
+			value: d,
+			defaultValue: f,
+			onValueChange: p,
+			onSelect: m,
+			options: h,
+			onSearch: g,
+			debounceMs: _,
+			minChars: v,
+			placeholder: y,
+			disabled: x,
+			readOnly: S,
+			size: P,
+			required: w,
+			maxLength: T,
+			error: F.hasError,
+			container: A,
+			"aria-describedby": F.describedBy,
+			onBlur: j
 		})
 	});
 });

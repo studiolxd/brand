@@ -1,7 +1,8 @@
 import './MultiSelectField.css';
+import { type FieldOptionalProps } from '../_shared/FieldShell';
 import type { MultiSelectOption } from '../../atoms/MultiSelect/MultiSelect';
 export type { MultiSelectOption };
-export interface MultiSelectFieldProps {
+export interface MultiSelectFieldProps extends FieldOptionalProps {
     /** `id` del control. Si no se pasa, se genera con `useId`. */
     id?: string;
     label: string;

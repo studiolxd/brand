@@ -7,35 +7,37 @@ import { n as r, t as i } from "./_shared/fieldshell.js";
 import { forwardRef as a } from "react";
 import { jsx as o } from "react/jsx-runtime";
 //#region src/stories/molecules/CheckboxField/CheckboxField.tsx
-var s = a(function({ label: a, labelHidden: s, checked: c, defaultChecked: l, disabled: u, required: d, size: f, id: p, name: m, value: h, error: g = !1, errorMessage: _, helperText: v, className: y, onCheckedChange: b, onBlur: x }, S) {
-	let C = n(s), w = e(f), T = r({
-		id: p,
-		error: g,
-		errorMessage: _,
-		helperText: v
-	}), { id: E } = T;
+var s = a(function({ label: a, optional: s, optionalLabel: c, labelHidden: l, checked: u, defaultChecked: d, disabled: f, required: p, size: m, id: h, name: g, value: _, error: v = !1, errorMessage: y, helperText: b, className: x, onCheckedChange: S, onBlur: C }, w) {
+	let T = n(l), E = e(m), D = r({
+		id: h,
+		error: v,
+		errorMessage: y,
+		helperText: b
+	}), { id: O } = D;
 	return /* @__PURE__ */ o(i, {
-		field: T,
+		field: D,
 		block: "checkbox-field",
-		modifiers: [w !== "md" && `checkbox-field--${w}`, u && "checkbox-field--disabled"],
-		className: y,
+		modifiers: [E !== "md" && `checkbox-field--${E}`, f && "checkbox-field--disabled"],
+		className: x,
 		layout: "inline",
 		label: a,
-		labelHidden: C,
+		optional: s,
+		optionalLabel: c,
+		labelHidden: T,
 		children: /* @__PURE__ */ o(t, {
-			ref: S,
-			id: E,
-			checked: c,
-			defaultChecked: l,
-			disabled: u,
-			required: d,
-			size: w,
-			name: m,
-			value: h,
-			error: T.hasError,
-			"aria-describedby": T.describedBy,
-			onCheckedChange: b,
-			onBlur: x
+			ref: w,
+			id: O,
+			checked: u,
+			defaultChecked: d,
+			disabled: f,
+			required: p,
+			size: E,
+			name: g,
+			value: _,
+			error: D.hasError,
+			"aria-describedby": D.describedBy,
+			onCheckedChange: S,
+			onBlur: C
 		})
 	});
 });

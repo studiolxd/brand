@@ -28,6 +28,12 @@ solo. Los dos quedan enlazados por `aria-describedby`, junto al valor actual.
 <Canvas of={ColorPickerFieldStories.ConAyuda} />
 <Canvas of={ColorPickerFieldStories.ConError} />
 
+## Obligatorio
+
+El disparador es un botón, y un botón no admite `aria-required`. Con `required`, lo obligatorio lo lleva el **grupo** que envuelve el campo: `role="group"`, nombrado por la etiqueta y con `aria-required="true"`. El `<form>` no se envía sin color: el campo que sincroniza el hex pasa a llevar `required` y, cuando el navegador lo enfoca para avisar, devuelve el foco al disparador.
+
+<Canvas of={ColorPickerFieldStories.Obligatorio} />
+
 ## Transparencia y quitar
 
 <Canvas of={ColorPickerFieldStories.ConTransparencia} />

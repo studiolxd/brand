@@ -1083,12 +1083,14 @@ html.dark {
   --label-letter-spacing: var(--letter-spacing-normal); /** Letter spacing */
   --label-font-weight: var(--font-weight-emphasis); /** Font weight */
   --label-color: var(--color-text-on-light); /** Text color */
+  --label-optional-color: var(--color-text-muted-on-light); /** Tinta de la marca « (opcional)» tras la etiqueta de un campo `optional` (D70): la apagada, mismo tamaño que la etiqueta */
 }
 .surface-dark,
 .surface-invert,
 [data-theme="dark"],
 html.dark {
   --label-color: var(--color-text-on-dark); /** Color — surface-dark */
+  --label-optional-color: var(--color-text-muted-on-dark); /** Tinta de la marca de opcional — surface-dark */
 }
 /**
  * Do not edit directly, this file was auto-generated.
@@ -2743,6 +2745,7 @@ html.dark {
  */
 :root {
   --command-palette-max-height: min(24rem, 60vh); /** Alto máximo de la paleta — la lista scrollea dentro */
+  --command-palette-input-line-height: 1.15; /** Interlineado del buscador: el 1,15 que heredaba de normalize.css, ahora declarado. No es `1` (1): Chromium no deja que un `<input>` baje de su interlineado `normal`, y a 20px el buscador crecía de 48 a 50px */
   --command-palette-input-padding-block: var(--spacing-3); /** Padding vertical del buscador */
   --command-palette-input-padding-inline: var(--spacing-2); /** Padding horizontal del buscador */
   --command-palette-input-font-size: var(--font-size-3); /** Tamaño de texto del buscador */
@@ -2759,7 +2762,6 @@ html.dark {
   --command-palette-item-gap: var(--spacing-2); /** Gap entre icono y texto del ítem */
   --command-palette-item-font-size: var(--font-size-2); /** Tamaño de texto de los ítems */
   --command-palette-item-icon-size: var(--font-size-4); /** Talla del icono de los ítems */
-  --command-palette-input-line-height: var(--input-line-height); /** Interlineado del buscador: el del Input. Sin él, heredaba el 1,15 de normalize.css */
   --command-palette-input-border-width: var(--border-width-default); /** Grosor de la línea bajo el buscador */
   --command-palette-input-placeholder-color: var(--color-text-placeholder-on-light); /** Color del placeholder del buscador */
   --command-palette-input-focus-ring-color: var(--color-primary); /** Color del anillo de foco del buscador */
@@ -5762,7 +5764,8 @@ html.dark {
   --planning-grid-footer-bg: var(--color-surface-secondary-on-light); /** Fondo de las filas de totales */
   --planning-grid-footer-font-weight: var(--font-weight-emphasis); /** Peso de las filas de totales */
   --planning-grid-footer-color: var(--color-text-on-light); /** Color de las filas de totales */
-  --planning-grid-over-color: var(--color-error-text-on-light); /** Color de un resto negativo: hay más horas asignadas que disponibles */
+  --planning-grid-over-bg: var(--color-error-fill); /** Relleno de un resto negativo: hay más horas asignadas que disponibles. Relleno universal, igual en las dos superficies (sin par oscuro) */
+  --planning-grid-over-color: var(--color-error-fill-text); /** Tinta de un resto negativo, sobre su relleno de error */
 }
 .surface-dark,
 .surface-invert,
@@ -5780,7 +5783,6 @@ html.dark {
   --planning-grid-cell-readonly-bg: var(--color-surface-secondary-on-dark); /** Fondo de una celda que no se edita — surface-dark */
   --planning-grid-footer-bg: var(--color-surface-secondary-on-dark); /** Fondo de las filas de totales — surface-dark */
   --planning-grid-footer-color: var(--color-text-on-dark); /** Color de las filas de totales — surface-dark */
-  --planning-grid-over-color: var(--color-error-text-on-dark); /** Color de un resto negativo — surface-dark */
 }
 /**
  * Do not edit directly, this file was auto-generated.
@@ -6313,6 +6315,7 @@ html.dark .surface-light {
   --kbd-bg: var(--color-surface-secondary-on-light);
   --kbd-color: var(--color-text-on-light);
   --label-color: var(--color-text-on-light);
+  --label-optional-color: var(--color-text-muted-on-light);
   --link-color: var(--color-text-on-light);
   --link-hover-color: var(--color-text-on-light);
   --link-underline-width: var(--border-width-default);
@@ -6883,7 +6886,6 @@ html.dark .surface-light {
   --planning-grid-cell-readonly-bg: var(--color-surface-secondary-on-light);
   --planning-grid-footer-bg: var(--color-surface-secondary-on-light);
   --planning-grid-footer-color: var(--color-text-on-light);
-  --planning-grid-over-color: var(--color-error-text-on-light);
   --site-search-status-color: var(--color-text-muted-on-light);
   --site-search-result-title-color: var(--color-text-on-light);
   --site-search-result-section-color: var(--color-text-muted-on-light);

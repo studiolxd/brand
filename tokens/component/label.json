@@ -8,6 +8,8 @@
     "line-height":    { "$value": "{line-height.normal}",    "$type": "number",    "$description": "Line height" },
     "color":          { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Text color" },
     "letter-spacing": { "$value": "{letter-spacing.normal}", "$type": "dimension", "$description": "Letter spacing" },
-    "surface-dark-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color — surface-dark" }
+    "optional-color": { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Tinta de la marca « (opcional)» tras la etiqueta de un campo `optional` (D70): la apagada, mismo tamaño que la etiqueta" },
+    "surface-dark-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color — surface-dark" },
+    "surface-dark-optional-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Tinta de la marca de opcional — surface-dark" }
   }
 }

@@ -33,9 +33,15 @@ Un grupo de `CheckboxField` o de `RadioField` que responde a una sola pregunta v
 
 <Canvas of={FieldsetStories.Disabled} />
 
+## Leyenda oculta
+
+`legendHidden` oculta la leyenda a la vista y la deja para el lector de pantalla, que la sigue anunciando como nombre del grupo. Para cuando el título ya se ve en otro sitio (el encabezado de la tarjeta que lo contiene, la columna de un `FieldRow`). La clase `visually-hidden` va sobre el propio `<legend>`, no en un `<span>` de `VisuallyHidden`: el `<legend>` tiene que ser el primer hijo del `fieldset` para nombrarlo.
+
+<Canvas of={FieldsetStories.LegendHidden} />
+
 ## Accesibilidad
 
-- El `<legend>` es el nombre accesible del grupo: el lector lo anuncia al entrar en el primer control.
+- El `<legend>` es el nombre accesible del grupo: el lector lo anuncia al entrar en el primer control. Oculto con `legendHidden`, lo sigue siendo.
 - `level` no crea un título en el esquema del documento. Si el bloque necesita aparecer en la navegación por títulos, el título va fuera, con un `Heading`, y el `Fieldset` se queda con un legend corto.
 - `disabled` se propaga por el HTML, no por JavaScript: un control deshabilitado así no entra en el orden de tabulación ni se envía con el formulario.
 

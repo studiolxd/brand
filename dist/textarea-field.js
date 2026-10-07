@@ -7,38 +7,40 @@ import { n as r, t as i } from "./_shared/fieldshell.js";
 import { forwardRef as a } from "react";
 import { jsx as o } from "react/jsx-runtime";
 //#region src/stories/molecules/TextareaField/TextareaField.tsx
-var s = a(function({ id: a, label: s, labelHidden: c, name: l, placeholder: u, value: d, defaultValue: f, rows: p, disabled: m, readOnly: h, size: g, error: _ = !1, errorMessage: v, helperText: y, onChange: b, onBlur: x, onFocus: S, className: C, "aria-describedby": w, ...T }, E) {
-	let D = n(c), O = e(g), k = r({
+var s = a(function({ id: a, label: s, optional: c, optionalLabel: l, labelHidden: u, name: d, placeholder: f, value: p, defaultValue: m, rows: h, disabled: g, readOnly: _, size: v, error: y = !1, errorMessage: b, helperText: x, onChange: S, onBlur: C, onFocus: w, className: T, "aria-describedby": E, ...D }, O) {
+	let k = n(u), A = e(v), j = r({
 		id: a,
-		error: _,
-		errorMessage: v,
-		helperText: y,
-		describedBy: w
+		error: y,
+		errorMessage: b,
+		helperText: x,
+		describedBy: E
 	});
 	return /* @__PURE__ */ o(i, {
-		field: k,
+		field: j,
 		block: "textarea-field",
-		className: C,
+		className: T,
 		label: s,
-		labelHidden: D,
-		size: O,
+		optional: c,
+		optionalLabel: l,
+		labelHidden: k,
+		size: A,
 		children: /* @__PURE__ */ o(t, {
-			ref: E,
-			...T,
+			ref: O,
+			...D,
 			id: a,
-			name: l,
-			placeholder: u ?? (D ? s : void 0),
-			value: d,
-			defaultValue: f,
-			rows: p,
-			disabled: m,
-			readOnly: h,
-			size: O,
-			error: k.hasError,
-			"aria-describedby": k.describedBy,
-			onChange: b,
-			onBlur: x,
-			onFocus: S
+			name: d,
+			placeholder: f ?? (k ? s : void 0),
+			value: p,
+			defaultValue: m,
+			rows: h,
+			disabled: g,
+			readOnly: _,
+			size: A,
+			error: j.hasError,
+			"aria-describedby": j.describedBy,
+			onChange: S,
+			onBlur: C,
+			onFocus: w
 		})
 	});
 });

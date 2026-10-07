@@ -35,7 +35,8 @@
   --planning-grid-footer-bg: var(--color-surface-secondary-on-light); /** Fondo de las filas de totales */
   --planning-grid-footer-font-weight: var(--font-weight-emphasis); /** Peso de las filas de totales */
   --planning-grid-footer-color: var(--color-text-on-light); /** Color de las filas de totales */
-  --planning-grid-over-color: var(--color-error-text-on-light); /** Color de un resto negativo: hay más horas asignadas que disponibles */
+  --planning-grid-over-bg: var(--color-error-fill); /** Relleno de un resto negativo: hay más horas asignadas que disponibles. Relleno universal, igual en las dos superficies (sin par oscuro) */
+  --planning-grid-over-color: var(--color-error-fill-text); /** Tinta de un resto negativo, sobre su relleno de error */
 }
 
 .surface-dark,
@@ -54,5 +55,4 @@ html.dark {
   --planning-grid-cell-readonly-bg: var(--color-surface-secondary-on-dark); /** Fondo de una celda que no se edita — surface-dark */
   --planning-grid-footer-bg: var(--color-surface-secondary-on-dark); /** Fondo de las filas de totales — surface-dark */
   --planning-grid-footer-color: var(--color-text-on-dark); /** Color de las filas de totales — surface-dark */
-  --planning-grid-over-color: var(--color-error-text-on-dark); /** Color de un resto negativo — surface-dark */
 }

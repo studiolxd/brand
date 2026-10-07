@@ -2,11 +2,11 @@ import { forwardRef } from 'react';
 import './SelectField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { Select, isSelectOptionGroup } from '../../atoms/Select/Select';
 import type { SelectOption, SelectOptionOrGroup } from '../../atoms/Select/Select';
 
-export interface SelectFieldProps {
+export interface SelectFieldProps extends FieldOptionalProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
   id?: string;
   label: string;
@@ -82,6 +82,8 @@ function encodeOption(option: SelectOption): SelectOption {
 export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>(function SelectField({
   id: idProp,
   label,
+  optional,
+  optionalLabel,
   labelHidden: labelHiddenProp,
   options,
   value,
@@ -117,7 +119,7 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>(funct
     : options;
 
   return (
-    <FieldShell field={field} block="select-field" className={className} label={label} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="select-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       <Select
         ref={ref}
         id={id}

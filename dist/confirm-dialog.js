@@ -40,7 +40,8 @@ function d({ open: d, title: f, description: p, children: m, onConfirm: h, onCan
 		container: O,
 		initialFocus: T === void 0 ? j : M,
 		...p == null ? {} : { description: p },
-		footerClassName: ["confirm-dialog__actions", k].filter(Boolean).join(" "),
+		footerClassName: "confirm-dialog__actions",
+		className: k,
 		footer: /* @__PURE__ */ l(s, { children: [
 			/* @__PURE__ */ c(t, {
 				ref: j,

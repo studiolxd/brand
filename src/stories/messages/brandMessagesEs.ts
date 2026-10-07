@@ -57,6 +57,7 @@ import { themeSwitcherEs } from './es/themeSwitcher';
 import { statTileEs } from './es/statTile';
 import { progressBarEs } from './es/progressBar';
 import { spinnerEs } from './es/spinner';
+import { fieldEs } from './es/field';
 import { sliderEs } from './es/slider';
 import { treeViewEs } from './es/treeView';
 import { clockWidgetEs } from './es/clockWidget';
@@ -193,4 +194,5 @@ export const brandMessagesEs: CompleteBrandMessages = {
   connectorSignIn: connectorSignInEs,
   connectorExternalSignIn: connectorExternalSignInEs,
   connectorRejection: connectorRejectionEs,
+  field: fieldEs,
 };

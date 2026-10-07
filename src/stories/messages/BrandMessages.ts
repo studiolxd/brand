@@ -63,6 +63,7 @@ import type { HeatmapMessages } from '../molecules/Heatmap/Heatmap';
 import type { OrgChartMessages } from '../organisms/OrgChart/OrgChart';
 import type { PlanningGridMessages } from '../organisms/PlanningGrid/PlanningGrid';
 import type { RecurrenceFieldMessages } from '../molecules/RecurrenceField/RecurrenceField';
+import type { FieldMessages } from '../molecules/_shared/FieldShell';
 import type { TimelineMessages } from '../molecules/Timeline/Timeline';
 import type { UptimeBarsMessages } from '../molecules/UptimeBars/UptimeBars';
 import type { ChartMessages } from '../organisms/Chart/Chart';
@@ -179,6 +180,8 @@ interface BrandMessagesShape {
   orgChart: OrgChartMessages;
   planningGrid: PlanningGridMessages;
   recurrenceField: RecurrenceFieldMessages;
+  /** La marca de los campos `optional` (el armazón común de los `*Field`). */
+  field: FieldMessages;
   timeline: TimelineMessages;
   uptimeBars: UptimeBarsMessages;
   chart: ChartMessages;
@@ -316,6 +319,7 @@ export type {
   OrgChartMessages,
   PlanningGridMessages,
   RecurrenceFieldMessages,
+  FieldMessages,
   TimelineMessages,
   UptimeBarsMessages,
   ChartMessages,

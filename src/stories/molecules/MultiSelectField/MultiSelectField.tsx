@@ -2,13 +2,13 @@ import { forwardRef } from 'react';
 import './MultiSelectField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { MultiSelect } from '../../atoms/MultiSelect/MultiSelect';
 import type { MultiSelectOption } from '../../atoms/MultiSelect/MultiSelect';
 
 export type { MultiSelectOption };
 
-export interface MultiSelectFieldProps {
+export interface MultiSelectFieldProps extends FieldOptionalProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
   id?: string;
   label: string;
@@ -60,6 +60,8 @@ export interface MultiSelectFieldProps {
 export const MultiSelectField = forwardRef<HTMLDivElement, MultiSelectFieldProps>(function MultiSelectField({
   id: idProp,
   label,
+  optional,
+  optionalLabel,
   labelHidden: labelHiddenProp,
   options,
   value,
@@ -84,7 +86,7 @@ export const MultiSelectField = forwardRef<HTMLDivElement, MultiSelectFieldProps
   const { id } = field;
 
   return (
-    <FieldShell field={field} block="multi-select-field" className={className} label={label} labelHidden={labelHidden} size={size} labelIdentified>
+    <FieldShell field={field} block="multi-select-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size} labelIdentified>
       {/* El disparador es un `div` con `role="combobox"`: `htmlFor` no lo
           nombraría, así que la etiqueta lo nombra por `aria-labelledby`. */}
       <MultiSelect

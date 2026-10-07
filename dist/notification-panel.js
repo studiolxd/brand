@@ -38,7 +38,8 @@ function S({ items: o = [], count: S = 0, max: C, onRead: w, onMarkAllRead: T, a
 			count: S,
 			max: C,
 			label: k,
-			countLabel: A
+			countLabel: A,
+			className: B
 		}),
 		label: $,
 		align: "end",
@@ -47,7 +48,7 @@ function S({ items: o = [], count: S = 0, max: C, onRead: w, onMarkAllRead: T, a
 		defaultOpen: R,
 		onOpenChange: Z,
 		initialFocus: X,
-		className: ["notification-panel", B].filter(Boolean).join(" "),
+		className: "notification-panel",
 		children: /* @__PURE__ */ _("div", {
 			className: "notification-panel__body",
 			ref: U,

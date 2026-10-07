@@ -7,40 +7,42 @@ import { n as r, t as i } from "./_shared/fieldshell.js";
 import { forwardRef as a } from "react";
 import { jsx as o } from "react/jsx-runtime";
 //#region src/stories/molecules/OtpField/OtpField.tsx
-var s = a(function({ id: a, label: s, labelHidden: c, length: l, value: u, defaultValue: d, name: f, disabled: p, readOnly: m, required: h, error: g = !1, errorMessage: _, helperText: v, size: y, className: b, digitLabel: x, onChange: S, onComplete: C, onBlur: w }, T) {
-	let E = n(c), D = e(y), O = r({
+var s = a(function({ id: a, label: s, optional: c, optionalLabel: l, labelHidden: u, length: d, value: f, defaultValue: p, name: m, disabled: h, readOnly: g, required: _, error: v = !1, errorMessage: y, helperText: b, size: x, className: S, digitLabel: C, onChange: w, onComplete: T, onBlur: E }, D) {
+	let O = n(u), k = e(x), A = r({
 		id: a,
-		error: g,
-		errorMessage: _,
-		helperText: v
-	}), { id: k } = O;
+		error: v,
+		errorMessage: y,
+		helperText: b
+	}), { id: j } = A;
 	return /* @__PURE__ */ o(i, {
-		field: O,
+		field: A,
 		block: "otp-field",
-		className: b,
+		className: S,
 		label: s,
-		labelHidden: E,
-		size: D,
+		optional: c,
+		optionalLabel: l,
+		labelHidden: O,
+		size: k,
 		labelIdentified: !0,
-		labelFor: `${k}-0`,
+		labelFor: `${j}-0`,
 		children: /* @__PURE__ */ o(t, {
-			ref: T,
-			id: k,
-			name: f,
-			length: l,
-			value: u,
-			defaultValue: d,
-			disabled: p,
-			readOnly: m,
-			required: h,
-			error: O.hasError,
-			size: D,
-			digitLabel: x,
-			"aria-labelledby": O.labelId,
-			"aria-describedby": O.describedBy,
-			onChange: S,
-			onComplete: C,
-			onBlur: w
+			ref: D,
+			id: j,
+			name: m,
+			length: d,
+			value: f,
+			defaultValue: p,
+			disabled: h,
+			readOnly: g,
+			required: _,
+			error: A.hasError,
+			size: k,
+			digitLabel: C,
+			"aria-labelledby": A.labelId,
+			"aria-describedby": A.describedBy,
+			onChange: w,
+			onComplete: T,
+			onBlur: E
 		})
 	});
 });

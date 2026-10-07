@@ -8,57 +8,59 @@ import { n as a, t as o } from "./fieldshell.js";
 import { forwardRef as s, useImperativeHandle as c, useRef as l, useState as u } from "react";
 import { jsx as d, jsxs as f } from "react/jsx-runtime";
 //#region src/stories/messages/es/inputField.ts
-var p = { clear: "Borrar" }, m = s(function({ id: s, label: m, labelHidden: h, name: g, type: _, kind: v = "text", clearable: y = !1, clearLabel: b, onClear: x, placeholder: S, value: C, defaultValue: w, disabled: T, readOnly: E, size: D, error: O = !1, errorMessage: k, helperText: A, onChange: j, onBlur: M, onFocus: N, className: P, ...F }, I) {
-	let L = e("inputField", p), R = i(h), z = n(D), B = a({
+var p = { clear: "Borrar" }, m = s(function({ id: s, label: m, optional: h, optionalLabel: g, labelHidden: _, name: v, type: y, kind: b = "text", clearable: x = !1, clearLabel: S, onClear: C, placeholder: w, value: T, defaultValue: E, disabled: D, readOnly: O, size: k, error: A = !1, errorMessage: j, helperText: M, onChange: N, onBlur: P, onFocus: F, className: I, ...L }, R) {
+	let z = e("inputField", p), B = i(_), V = n(k), H = a({
 		id: s,
-		error: O,
-		errorMessage: k,
-		helperText: A,
-		describedBy: F["aria-describedby"]
-	}), V = v === "search", H = l(null);
-	c(I, () => H.current);
-	let [U, W] = u(() => (w ?? "") !== ""), G = V && y && (C === void 0 ? U : C !== "") && !T && !E;
-	function K(e) {
-		C === void 0 && W(e.target.value !== ""), j?.(e);
+		error: A,
+		errorMessage: j,
+		helperText: M,
+		describedBy: L["aria-describedby"]
+	}), U = b === "search", W = l(null);
+	c(R, () => W.current);
+	let [G, K] = u(() => (E ?? "") !== ""), q = U && x && (T === void 0 ? G : T !== "") && !D && !O;
+	function J(e) {
+		T === void 0 && K(e.target.value !== ""), N?.(e);
 	}
-	function q() {
-		let e = H.current;
-		e && ((Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value")?.set)?.call(e, ""), e.dispatchEvent(new Event("input", { bubbles: !0 })), W(!1), e.focus(), x?.());
+	function Y() {
+		let e = W.current;
+		e && ((Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value")?.set)?.call(e, ""), e.dispatchEvent(new Event("input", { bubbles: !0 })), K(!1), e.focus(), C?.());
 	}
-	let J = /* @__PURE__ */ d(r, {
-		ref: H,
-		...V ? {
+	let X = /* @__PURE__ */ d(r, {
+		ref: W,
+		...U ? {
 			type: "text",
 			autoComplete: "off",
 			enterKeyHint: "search"
-		} : { type: _ },
-		...F,
+		} : { type: y },
+		...L,
 		id: s,
-		name: g,
-		placeholder: S ?? (R ? m : void 0),
-		value: C,
-		defaultValue: w,
-		disabled: T,
-		readOnly: E,
-		size: z,
-		error: B.hasError,
-		"aria-describedby": B.describedBy,
-		onChange: K,
-		onBlur: M,
-		onFocus: N
+		name: v,
+		placeholder: w ?? (B ? m : void 0),
+		value: T,
+		defaultValue: E,
+		disabled: D,
+		readOnly: O,
+		size: V,
+		error: H.hasError,
+		"aria-describedby": H.describedBy,
+		onChange: J,
+		onBlur: P,
+		onFocus: F
 	});
 	return /* @__PURE__ */ d(o, {
-		field: B,
+		field: H,
 		block: "input-field",
-		className: P,
+		className: I,
 		label: m,
-		labelHidden: R,
-		size: z,
-		children: V ? /* @__PURE__ */ f("div", {
+		optional: h,
+		optionalLabel: g,
+		labelHidden: B,
+		size: V,
+		children: U ? /* @__PURE__ */ f("div", {
 			className: [
 				"input-field__search",
-				z === "md" ? "" : `input-field__search--${z}`,
-				y ? "input-field__search--clearable" : ""
+				V === "md" ? "" : `input-field__search--${V}`,
+				x ? "input-field__search--clearable" : ""
 			].filter(Boolean).join(" "),
 			children: [
 				/* @__PURE__ */ d("span", {
@@ -69,20 +71,20 @@ var p = { clear: "Borrar" }, m = s(function({ id: s, label: m, labelHidden: h, n
 						className: "input-field__search-glyph"
 					})
 				}),
-				J,
-				G && /* @__PURE__ */ d("button", {
+				X,
+				q && /* @__PURE__ */ d("button", {
 					type: "button",
 					className: "input-field__clear",
-					"aria-label": L("clear", b),
+					"aria-label": z("clear", S),
 					"aria-controls": s,
-					onClick: q,
+					onClick: Y,
 					children: /* @__PURE__ */ d(t, {
 						name: "close",
 						className: "input-field__search-glyph"
 					})
 				})
 			]
-		}) : J
+		}) : X
 	});
 });
 //#endregion

@@ -26,6 +26,7 @@ public struct BrandDatePickerField: View {
     private let labelHidden: Bool
     private let placeholder: LocalizedStringKey
     private let readOnly: Bool
+    private let required: Bool
     private let error: Bool
     private let errorMessage: LocalizedStringKey?
     private let helperText: LocalizedStringKey?
@@ -34,6 +35,7 @@ public struct BrandDatePickerField: View {
     private let clearLabel: LocalizedStringKey
     private let doneLabel: LocalizedStringKey
     private let cancelLabel: LocalizedStringKey
+    private let requiredLabel: LocalizedStringKey
     private let locale: Locale?
 
     @Environment(\.isEnabled) private var isEnabled
@@ -61,6 +63,9 @@ public struct BrandDatePickerField: View {
     ///   - clearLabel: nombre accesible del aspa. Por defecto «Borrar» (castellano).
     ///   - doneLabel: botón que confirma en la hoja del iPhone. Por defecto «Listo» (castellano).
     ///   - cancelLabel: botón que descarta en la hoja del iPhone. Por defecto «Cancelar» (castellano).
+    ///   - required: campo obligatorio (`required` de React). SwiftUI no tiene rasgo de accesibilidad para lo
+    ///     obligatorio: VoiceOver lee `requiredLabel` tras la etiqueta. La validación sigue siendo de la app.
+    ///   - requiredLabel: lo que se lee tras la etiqueta con `required`. Por defecto «obligatorio» (castellano).
     ///   - locale: el de la fecha mostrada y el del selector; sin valor, el del entorno.
     ///   - error: marca el campo en error sin mensaje; un `errorMessage` ya lo implica.
     public init(
@@ -70,6 +75,7 @@ public struct BrandDatePickerField: View {
         labelHidden: Bool = false,
         placeholder: LocalizedStringKey = "Elige una fecha",
         readOnly: Bool = false,
+        required: Bool = false,
         error: Bool = false,
         errorMessage: LocalizedStringKey? = nil,
         helperText: LocalizedStringKey? = nil,
@@ -78,6 +84,7 @@ public struct BrandDatePickerField: View {
         clearLabel: LocalizedStringKey = "Borrar",
         doneLabel: LocalizedStringKey = "Listo",
         cancelLabel: LocalizedStringKey = "Cancelar",
+        requiredLabel: LocalizedStringKey = "obligatorio",
         locale: Locale? = nil
     ) {
         self.label = label
@@ -86,6 +93,7 @@ public struct BrandDatePickerField: View {
         self.labelHidden = labelHidden
         self.placeholder = placeholder
         self.readOnly = readOnly
+        self.required = required
         self.error = error
         self.errorMessage = errorMessage
         self.helperText = helperText
@@ -94,6 +102,7 @@ public struct BrandDatePickerField: View {
         self.clearLabel = clearLabel
         self.doneLabel = doneLabel
         self.cancelLabel = cancelLabel
+        self.requiredLabel = requiredLabel
         self.locale = locale
     }
 
@@ -186,7 +195,8 @@ public struct BrandDatePickerField: View {
             gap: F.gap,
             errorMessage: errorMessage,
             helperText: helperText,
-            helper: .init(fontSize: F.helperFontSize, fontWeight: F.helperFontWeight, lineHeight: F.helperLineHeight, color: F.helperColor)
+            helper: .init(fontSize: F.helperFontSize, fontWeight: F.helperFontWeight, lineHeight: F.helperLineHeight, color: F.helperColor),
+            requiredLabel: required ? requiredLabel : nil
         ) {
             box
         }
@@ -363,6 +373,7 @@ private struct PickerPresentation: ViewModifier {
     return ScrollView {
         VStack(alignment: .leading, spacing: BrandSpacing.s5) {
             BrandDatePickerField("Fecha de inicio", date: $empty)
+            BrandDatePickerField("Obligatorio", date: $empty, required: true)
             BrandDatePickerField("Con valor", date: $filled, helperText: "La fecha en la que empieza el contrato.")
             BrandDatePickerField("Con error", date: $empty, errorMessage: "Elige una fecha.")
             BrandDatePickerField("Solo lectura", date: $filled, readOnly: true)

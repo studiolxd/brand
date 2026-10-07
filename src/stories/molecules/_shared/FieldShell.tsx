@@ -3,6 +3,8 @@ import { Label } from '../../atoms/Label/Label';
 import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import type { FormSize } from '../../constants/form-size';
+import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { fieldEs } from '../../messages/es/field';
 
 /* ─────────────────────────────────────────────────────────────────────────────
  * El armazón común de los `*Field`: contenedor, etiqueta, ayuda, error, ids y
@@ -21,6 +23,38 @@ import type { FormSize } from '../../constants/form-size';
  * El `aria-describedby` nombra en ese mismo orden el error y la ayuda, y suma
  * —no pisa— el que traiga el consumidor.
  * ───────────────────────────────────────────────────────────────────────────── */
+
+/**
+ * El espacio `field` del catálogo: los textos que pinta el armazón común de
+ * los campos. Como todo el catálogo, opcional en `BrandMessages`: sin él
+ * la marca cae al castellano «(opcional)».
+ */
+export interface FieldMessages {
+  /** La marca tras la etiqueta de un campo `optional`. Castellano: «(opcional)». */
+  optional: string;
+}
+
+/**
+ * La marca de campo opcional (D70), común a todos los `*Field`. Se marca lo
+ * **opcional**, no lo obligatorio: en un formulario donde casi todo es
+ * obligatorio, lo que hay que señalar es la excepción. Es explícita —un campo
+ * sin `required` no la lleva sola—, porque un campo suelto (un buscador, un
+ * filtro) no es «opcional» de ningún formulario.
+ */
+export interface FieldOptionalProps {
+  /**
+   * Pinta « (opcional)» tras la etiqueta, en la tinta apagada de la etiqueta.
+   * Va dentro del `<label>`, así que el lector de pantalla la lee como parte
+   * del nombre del campo. No se combina con `required`. Por defecto `false`.
+   */
+  optional?: boolean;
+  /**
+   * Texto de la marca de opcional. **Sin default en la prop**: sin ella, sale
+   * de `field.optional` del `BrandMessagesProvider` y, si el catálogo no la
+   * trae, del castellano «(opcional)».
+   */
+  optionalLabel?: string;
+}
 
 /** Une ids para un `aria-*` de referencias; sin ninguno, `undefined` (no un atributo vacío). */
 // eslint-disable-next-line react-refresh/only-export-components -- utilidad del armazón, viaja con él
@@ -85,6 +119,10 @@ export interface FieldShellProps {
   size?: FormSize;
   /** Texto de la etiqueta. Sin él no se pinta etiqueta (el control se nombra por otra vía). */
   label?: ReactNode;
+  /** Marca de campo opcional tras la etiqueta (ver `FieldOptionalProps`). */
+  optional?: boolean;
+  /** Texto de la marca; sin él, `field.optional` del catálogo o «(opcional)». */
+  optionalLabel?: string;
   /** Etiqueta oculta a la vista, presente para el lector de pantalla. */
   labelHidden?: boolean;
   /**
@@ -112,6 +150,8 @@ export function FieldShell({
   className,
   size = 'md',
   label,
+  optional = false,
+  optionalLabel,
   labelHidden = false,
   layout = 'stack',
   labelFor,
@@ -122,6 +162,18 @@ export function FieldShell({
 }: FieldShellProps) {
   const htmlFor = labelFor ?? field.id;
   const labelId = labelIdentified ? field.labelId : undefined;
+  const t = useBrandMessages('field', fieldEs);
+
+  // La marca va DENTRO de la etiqueta: forma parte del nombre accesible
+  // («Teléfono (opcional)»). Se lee solo si el campo es opcional.
+  const text = optional && label
+    ? (
+        <>
+          {label}{' '}
+          <span className="label__optional">{t('optional', optionalLabel)}</span>
+        </>
+      )
+    : label;
 
   return (
     <div {...rootProps} className={[block, ...modifiers, className].filter(Boolean).join(' ')}>
@@ -129,12 +181,12 @@ export function FieldShell({
         <label className={`${block}__control`} htmlFor={htmlFor}>
           {children}
           {labelHidden
-            ? <VisuallyHidden id={labelId} className={`${block}__label`}>{label}</VisuallyHidden>
-            : <span id={labelId} className={`${block}__label`}>{label}</span>}
+            ? <VisuallyHidden id={labelId} className={`${block}__label`}>{text}</VisuallyHidden>
+            : <span id={labelId} className={`${block}__label`}>{text}</span>}
         </label>
       ) : (
         <>
-          {label ? <Label id={labelId} htmlFor={htmlFor} hidden={labelHidden} size={size}>{label}</Label> : null}
+          {label ? <Label id={labelId} htmlFor={htmlFor} hidden={labelHidden} size={size}>{text}</Label> : null}
           {children}
         </>
       )}

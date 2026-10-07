@@ -1,6 +1,7 @@
+import { type FieldOptionalProps } from '../_shared/FieldShell';
 import type { TimeValue } from '../../atoms/TimeSelect/TimeSelect';
 import './TimeField.css';
-export interface TimeFieldProps {
+export interface TimeFieldProps extends FieldOptionalProps {
     /** `id` del control. Si no se pasa, se genera con `useId`. */
     id?: string;
     label: string;

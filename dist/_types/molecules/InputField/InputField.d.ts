@@ -1,5 +1,6 @@
 import { type ComponentPropsWithoutRef } from 'react';
 import './InputField.css';
+import { type FieldOptionalProps } from '../_shared/FieldShell';
 /**
  * El único texto que el campo emite por su cuenta: el nombre accesible del
  * aspa de borrado. Es cromo —dice la misma cosa en toda la suite—, así que
@@ -13,7 +14,7 @@ export interface InputFieldMessages {
     /** Nombre accesible del botón que vacía un campo de búsqueda. */
     clear: string;
 }
-export interface InputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue'> {
+export interface InputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue'>, FieldOptionalProps {
     id: string;
     label: string;
     /**

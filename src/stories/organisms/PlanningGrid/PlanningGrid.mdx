@@ -45,7 +45,7 @@ Hasta tres filas, y las tres opcionales:
 - **Disponible** (`showCapacity`, por defecto no) — el tope de cada columna. Repetirlo en cada columna solo hace falta cuando cambia de una a otra.
 - **Sin asignar** (`showRemaining`, por defecto sí) — el resto. **Solo sale si alguna columna declara `capacity`**: sin tope no hay resto que calcular.
 
-Pasarse del tope pinta el resto en el color de error **y lo dice**: la celda lleva además el texto de `planningGrid.over`, oculto a la vista. El color no es la única señal.
+Pasarse del tope pinta la celda del resto como **relleno de error** (`color.error-fill` con su tinta `color.error-fill-text`, el mismo en las dos superficies) **y lo dice**: la celda lleva además el texto de `planningGrid.over`, oculto a la vista. El color no es la única señal.
 
 <Canvas of={PlanningGridStories.ConDisponibilidad} />
 
@@ -57,7 +57,7 @@ Lo que no son horas vuelve al valor que había al salir: nada se guarda a medias
 
 ## Superficie oscura
 
-La rejilla, los encabezados, el pie y las celdas bloqueadas cambian de cara por la regla de derivación; el recuadro de la columna en curso pasa a la tinta clara, y el resto negativo a `error-text-on-dark`. Todo por tokens.
+La rejilla, los encabezados, el pie y las celdas bloqueadas cambian de cara por la regla de derivación; el recuadro de la columna en curso pasa a la tinta clara, y el resto negativo no cambia: es un relleno de error universal, el mismo en las dos superficies. Todo por tokens.
 
 <Canvas of={PlanningGridStories.SuperficieOscura} />
 

@@ -5,7 +5,7 @@ import './PasswordField.css';
 import { Input } from '../../atoms/Input/Input';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { Icon } from '../../atoms/Icon/Icon';
-import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { passwordFieldEs } from '../../messages/es/passwordField';
 
@@ -25,7 +25,7 @@ export interface PasswordFieldMessages {
 }
 
 export interface PasswordFieldProps
-  extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size' | 'type'> {
+  extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size' | 'type'>, FieldOptionalProps {
   /**
    * Etiqueta del campo. **Opcional**: si se omite, el componente renderiza solo
    * el campo + toggle, sin `<label>`, para componerlo dentro de una capa de
@@ -79,6 +79,8 @@ export interface PasswordFieldProps
  */
 export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(function PasswordField({
   label,
+  optional,
+  optionalLabel,
   labelHidden: labelHiddenProp,
   error = false,
   errorMessage,
@@ -109,6 +111,8 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(fu
       block="password-field"
       className={className}
       label={label}
+      optional={optional}
+      optionalLabel={optionalLabel}
       labelHidden={labelHidden}
       size={size}
       footer={action && <div className="password-field__action">{action}</div>}

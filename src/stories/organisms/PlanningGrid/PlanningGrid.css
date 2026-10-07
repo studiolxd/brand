@@ -132,8 +132,11 @@
   border-inline-end: var(--planning-grid-border-width) solid var(--planning-grid-border-color);
 }
 
-/* Más horas asignadas que disponibles. El color no es la única señal: la
+/* Más horas asignadas que disponibles: relleno de error con su tinta, el
+   mismo en las dos superficies (D63). Como tinta suelta sobre la banda gris
+   del pie no llegaba al 4,5:1 en oscuro. El color no es la única señal: la
    celda lleva además un texto que lo dice. */
 .planning-grid__footer-cell.planning-grid__footer-cell--over {
+  background-color: var(--planning-grid-over-bg);
   color: var(--planning-grid-over-color);
 }

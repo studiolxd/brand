@@ -1,8 +1,9 @@
 import './AutocompleteField.css';
+import { type FieldOptionalProps } from '../_shared/FieldShell';
 import { Autocomplete } from '../../atoms/Autocomplete/Autocomplete';
 import type { AutocompleteOption } from '../../atoms/Autocomplete/Autocomplete';
 export type { AutocompleteOption };
-export interface AutocompleteFieldProps {
+export interface AutocompleteFieldProps extends FieldOptionalProps {
     /** `id` del control. Si no se pasa, se genera con `useId`. */
     id?: string;
     label: string;

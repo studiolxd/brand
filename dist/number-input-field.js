@@ -7,40 +7,42 @@ import { n as r, t as i } from "./_shared/fieldshell.js";
 import { forwardRef as a } from "react";
 import { jsx as o } from "react/jsx-runtime";
 //#region src/stories/molecules/NumberInputField/NumberInputField.tsx
-var s = a(function({ id: a, label: s, labelHidden: c, value: l, defaultValue: u, min: d, max: f, step: p = 1, decimal: m, disabled: h, readOnly: g, size: _, compact: v, commitMode: y, error: b = !1, errorMessage: x, helperText: S, className: C, onChange: w, onEmpty: T, "aria-describedby": E, ...D }, O) {
-	let k = n(c), A = e(_), j = r({
+var s = a(function({ id: a, label: s, optional: c, optionalLabel: l, labelHidden: u, value: d, defaultValue: f, min: p, max: m, step: h = 1, decimal: g, disabled: _, readOnly: v, size: y, compact: b, commitMode: x, error: S = !1, errorMessage: C, helperText: w, className: T, onChange: E, onEmpty: D, "aria-describedby": O, ...k }, A) {
+	let j = n(u), M = e(y), N = r({
 		id: a,
-		error: b,
-		errorMessage: x,
-		helperText: S,
-		describedBy: E
-	}), { id: M } = j;
+		error: S,
+		errorMessage: C,
+		helperText: w,
+		describedBy: O
+	}), { id: P } = N;
 	return /* @__PURE__ */ o(i, {
-		field: j,
+		field: N,
 		block: "number-input-field",
-		className: C,
+		className: T,
 		label: s,
-		labelHidden: k,
-		size: A,
+		optional: c,
+		optionalLabel: l,
+		labelHidden: j,
+		size: M,
 		children: /* @__PURE__ */ o(t, {
-			ref: O,
-			...D,
-			id: M,
-			value: l,
-			defaultValue: u,
-			min: d,
-			max: f,
-			step: p,
-			decimal: m,
-			disabled: h,
-			readOnly: g,
-			size: A,
-			compact: v,
-			commitMode: y,
-			error: j.hasError,
-			"aria-describedby": j.describedBy,
-			onChange: w,
-			onEmpty: T
+			ref: A,
+			...k,
+			id: P,
+			value: d,
+			defaultValue: f,
+			min: p,
+			max: m,
+			step: h,
+			decimal: g,
+			disabled: _,
+			readOnly: v,
+			size: M,
+			compact: b,
+			commitMode: x,
+			error: N.hasError,
+			"aria-describedby": N.describedBy,
+			onChange: E,
+			onEmpty: D
 		})
 	});
 });

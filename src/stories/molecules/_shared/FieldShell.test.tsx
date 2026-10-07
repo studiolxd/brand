@@ -36,12 +36,15 @@ const ID = 'campo';
 const LABEL = 'Etiqueta';
 const HELP = 'Texto de ayuda';
 const ERROR = 'Texto de error';
+/** La etiqueta, con o sin la marca de opcional detrás: para buscar el grupo por su nombre. */
+const LABEL_START = new RegExp(`^${LABEL}`);
 
 interface Shared {
   labelHidden?: boolean;
   helperText?: string;
   errorMessage?: string;
   required?: boolean;
+  optional?: boolean;
 }
 
 type Query = () => HTMLElement;
@@ -60,6 +63,8 @@ interface Case {
   required: { how: 'native' | 'aria'; on?: Query } | null;
   /** Si el campo admite `labelHidden`. */
   labelHidden?: boolean;
+  /** Si el campo admite la marca `optional` (D70). */
+  optional?: boolean;
 }
 
 const noSearch = async () => [];
@@ -98,39 +103,37 @@ const CASES: Case[] = [
   },
   {
     // El disparador es un botón que abre un diálogo: `aria-required` no está
-    // permitido en `role="button"`. Decisión de diseño pendiente.
+    // permitido en `role="button"`. Lo lleva el grupo que envuelve el campo,
+    // nombrado por la etiqueta.
     name: 'ColorPickerField',
-    render: (p) => <ColorPickerField id={ID} label={LABEL} {...drop(p, 'required')} />,
+    render: (p) => <ColorPickerField id={ID} label={LABEL} {...p} />,
     named: byId(ID),
-    required: null,
+    required: { how: 'aria', on: () => byId(ID)().closest<HTMLElement>('.color-picker-field')! },
   },
   {
-    // Darle `required` cambia la API de un campo con versión nativa (ficha de
-    // paridad): se deja para decisión.
     name: 'DatePickerField',
-    render: (p) => <DatePickerField id={ID} label={LABEL} {...drop(p, 'required')} />,
+    render: (p) => <DatePickerField id={ID} label={LABEL} {...p} />,
     named: byId(ID),
-    required: null,
+    required: { how: 'native' },
   },
   {
     // Compuesto: la etiqueta nombra el campo de fecha y el grupo; la ayuda y
-    // el error describen el grupo. `required` dependería de `DatePicker` (ver
-    // arriba).
+    // el error describen el grupo. `required` va en el campo de la fecha.
     name: 'DateTimeField',
-    render: (p) => <DateTimeField id={ID} label={LABEL} {...drop(p, 'required')} />,
+    render: (p) => <DateTimeField id={ID} label={LABEL} {...p} />,
     named: byId(`${ID}-date`),
     described: () => screen.getByRole('group', { name: LABEL }),
     invalid: byId(`${ID}-date`),
-    required: null,
+    required: { how: 'native', on: byId(`${ID}-date`) },
   },
   {
     // El disparador es un botón que abre un menú: como en ColorPickerField.
     name: 'DropdownField',
     render: (p) => (
-      <DropdownField id={ID} label={LABEL} items={[]} {...drop(p, 'required')}>Valor</DropdownField>
+      <DropdownField id={ID} label={LABEL} items={[]} {...p}>Valor</DropdownField>
     ),
     named: byId(ID),
-    required: null,
+    required: { how: 'aria', on: () => byId(ID)().closest<HTMLElement>('.dropdown-field')! },
   },
   {
     name: 'FileUploadField',
@@ -167,7 +170,7 @@ const CASES: Case[] = [
     // su «Dígito N de M»); `required` va en cada celda.
     name: 'OtpField',
     render: (p) => <OtpField id={ID} label={LABEL} length={4} {...p} />,
-    named: () => screen.getByRole('group', { name: LABEL }),
+    named: () => screen.getByRole('group', { name: LABEL_START }),
     required: { how: 'native', on: byId(`${ID}-0`) },
   },
   {
@@ -178,23 +181,27 @@ const CASES: Case[] = [
   },
   {
     name: 'RadioField',
-    render: (p) => <RadioField id={ID} label={LABEL} name="r" value="a" {...p} />,
+    // Una opción suelta no es un campo que se pueda dejar vacío: sin `optional`.
+    render: (p) => <RadioField id={ID} label={LABEL} name="r" value="a" {...drop(p, 'optional')} />,
     named: byId(ID),
     required: { how: 'native' },
+    optional: false,
   },
   {
     // Editor compuesto: la «etiqueta» es el `legend` del `fieldset`; la ayuda
     // y el error describen el grupo. Sin `aria-invalid` (no hay un control
-    // único que marcar), sin `required` (`null` es un valor válido: «no se
-    // repite») y sin `labelHidden` (el `legend` del `Fieldset` no se oculta).
+    // único que marcar) y sin `required` (`null` es un valor válido: «no se
+    // repite»). `labelHidden` oculta el propio `legend` (`Fieldset
+    // legendHidden`).
     name: 'RecurrenceField',
     render: (p) => (
-      <RecurrenceField id={ID} legend={LABEL} value={null} onValueChange={() => {}} {...drop(p, 'required', 'labelHidden')} />
+      <RecurrenceField id={ID} legend={LABEL} value={null} onValueChange={() => {}} {...drop(p, 'required', 'optional')} />
     ),
     named: () => screen.getByRole('group', { name: LABEL }),
     invalid: null,
     required: null,
-    labelHidden: false,
+    // La leyenda no pasa por la etiqueta del armazón: sin `optional` por ahora.
+    optional: false,
   },
   {
     name: 'SelectField',
@@ -204,9 +211,11 @@ const CASES: Case[] = [
   },
   {
     name: 'SwitcherField',
-    render: (p) => <SwitcherField id={ID} label={LABEL} {...p} />,
+    // Un interruptor siempre tiene valor: sin `optional`.
+    render: (p) => <SwitcherField id={ID} label={LABEL} {...drop(p, 'optional')} />,
     named: byId(ID),
     required: { how: 'aria' },
+    optional: false,
   },
   {
     name: 'TextareaField',
@@ -218,7 +227,7 @@ const CASES: Case[] = [
     // Compuesto: dos desplegables; la etiqueta nombra el grupo.
     name: 'TimeField',
     render: (p) => <TimeField id={ID} label={LABEL} {...p} />,
-    named: () => screen.getByRole('group', { name: LABEL }),
+    named: () => screen.getByRole('group', { name: LABEL_START }),
     required: { how: 'aria' },
   },
 ];
@@ -281,6 +290,17 @@ describe('FieldShell — contrato común de los *Field', () => {
       });
     }
 
+    if (c.optional !== false) {
+      it('`optional` pinta «(opcional)» tras la etiqueta, dentro del nombre accesible', () => {
+        const { unmount } = mount(c);
+        expect(document.querySelector('.label__optional')).toBeNull();
+        unmount();
+        mount(c, { optional: true });
+        expect(document.querySelector('.label__optional')).toHaveTextContent('(opcional)');
+        expect(c.named()).toHaveAccessibleName(`${LABEL} (opcional)`);
+      });
+    }
+
     if (c.labelHidden !== false) {
       it('`labelHidden` oculta la etiqueta a la vista y conserva el nombre', () => {
         mount(c, { labelHidden: true });
@@ -289,6 +309,41 @@ describe('FieldShell — contrato común de los *Field', () => {
         expect(c.named()).toHaveAccessibleName(LABEL);
       });
     }
+  });
+});
+
+describe('FieldShell — el obligatorio de un disparador que es un botón va en su grupo', () => {
+  const GROUPED: Array<[string, (required: boolean) => ReactElement]> = [
+    ['ColorPickerField', (required) => <ColorPickerField id={ID} label={LABEL} name="color" required={required} />],
+    ['DropdownField', (required) => (
+      <DropdownField id={ID} label={LABEL} items={[]} name="valor" required={required}>Valor</DropdownField>
+    )],
+  ];
+
+  it.each(GROUPED)('%s: grupo nombrado por la etiqueta y el `<form>` lo valida', (_name, ui) => {
+    const { unmount } = render(<BrandMessagesProvider messages={ES}>{ui(false)}</BrandMessagesProvider>);
+    expect(screen.queryByRole('group', { name: LABEL })).toBeNull();
+    // Sin `required`, el campo que va con el formulario sigue siendo el oculto de siempre.
+    expect(document.querySelector('input[type="hidden"]')).not.toBeNull();
+    unmount();
+
+    render(<BrandMessagesProvider messages={ES}>{ui(true)}</BrandMessagesProvider>);
+    const group = screen.getByRole('group', { name: LABEL });
+    expect(group).toHaveAttribute('aria-required', 'true');
+    expect(group).toContainElement(document.getElementById(ID));
+    // El disparador se sigue nombrando por la etiqueta, y no lleva `aria-required`.
+    expect(document.getElementById(ID)).toHaveAccessibleName(LABEL);
+    expect(document.getElementById(ID)).not.toHaveAttribute('aria-required');
+    // Un campo oculto no se valida: el obligatorio va en uno de texto, fuera de la vista.
+    const input = group.querySelector('input')!;
+    expect(input).toHaveAttribute('type', 'text');
+    expect(input).toBeRequired();
+    expect(input).toHaveAttribute('tabindex', '-1');
+    expect(input).toHaveAttribute('aria-hidden', 'true');
+    expect((input as HTMLInputElement).validity.valueMissing).toBe(true);
+    // El navegador lo enfoca para avisar: el foco vuelve al disparador.
+    input.focus();
+    expect(document.getElementById(ID)).toHaveFocus();
   });
 });
 

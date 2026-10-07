@@ -1,5 +1,6 @@
 import './OtpField.css';
-export interface OtpFieldProps {
+import { type FieldOptionalProps } from '../_shared/FieldShell';
+export interface OtpFieldProps extends FieldOptionalProps {
     /** `id` del control. Si no se pasa, se genera con `useId`. */
     id?: string;
     label: string;

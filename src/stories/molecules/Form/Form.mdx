@@ -38,6 +38,10 @@ El `Form` no pinta nada: sobre `surface-dark` cada pieza voltea con sus propios 
 <Canvas of={FormStories.Enviado} />
 <Canvas of={FormStories.ConCasillaYDosAcciones} />
 
+En un formulario donde casi todo es obligatorio, se marcan los pocos campos que no lo son con `optional` («(opcional)» tras la etiqueta), y no al revés. El criterio está en la doc de `InputField` § «Opcional».
+
+<Canvas of={FormStories.ConCamposOpcionales} />
+
 ## Lo que ya no es
 
 Antes el `Form` dibujaba un perímetro y separadores entre campos, y cada campo tapaba el fondo para que el hueco hiciera de línea. Era el formulario del DS anterior; se retiró el 2026-08-27. Los campos llevan su propio borde y el `Form` solo los separa con aire.

@@ -1,62 +1,73 @@
-import { VisuallyHidden as e } from "../visually-hidden.js";
-import { ErrorText as t } from "../error-text.js";
-import { Label as n } from "../label.js";
-import { useId as r } from "react";
-import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
+import { n as e } from "./brandmessagescontext.js";
+import { VisuallyHidden as t } from "../visually-hidden.js";
+import { ErrorText as n } from "../error-text.js";
+import { Label as r } from "../label.js";
+import { useId as i } from "react";
+import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
+//#region src/stories/messages/es/field.ts
+var c = { optional: "(opcional)" };
+//#endregion
 //#region src/stories/molecules/_shared/FieldShell.tsx
-function s(...e) {
+function l(...e) {
 	return e.filter(Boolean).join(" ") || void 0;
 }
-function c({ id: e, error: t = !1, errorMessage: n, helperText: i, describedBy: a }) {
-	let o = r(), c = e ?? o, l = n ? `${c}-error` : void 0, u = i ? `${c}-helper` : void 0;
+function u({ id: e, error: t = !1, errorMessage: n, helperText: r, describedBy: a }) {
+	let o = i(), s = e ?? o, c = n ? `${s}-error` : void 0, u = r ? `${s}-helper` : void 0;
 	return {
-		id: c,
-		labelId: `${c}-label`,
-		errorId: l,
+		id: s,
+		labelId: `${s}-label`,
+		errorId: c,
 		helperId: u,
-		describedBy: s(l, u, a),
+		describedBy: l(c, u, a),
 		hasError: t || !!n,
 		errorMessage: n,
-		helperText: i
+		helperText: r
 	};
 }
-function l({ field: r, block: s, modifiers: c = [], className: l, size: u = "md", label: d, labelHidden: f = !1, layout: p = "stack", labelFor: m, labelIdentified: h = !1, rootProps: g, children: _, footer: v }) {
-	let y = m ?? r.id, b = h ? r.labelId : void 0;
-	return /* @__PURE__ */ o("div", {
-		...g,
+function d({ field: i, block: l, modifiers: u = [], className: d, size: f = "md", label: p, optional: m = !1, optionalLabel: h, labelHidden: g = !1, layout: _ = "stack", labelFor: v, labelIdentified: y = !1, rootProps: b, children: x, footer: S }) {
+	let C = v ?? i.id, w = y ? i.labelId : void 0, T = e("field", c), E = m && p ? /* @__PURE__ */ s(a, { children: [
+		p,
+		" ",
+		/* @__PURE__ */ o("span", {
+			className: "label__optional",
+			children: T("optional", h)
+		})
+	] }) : p;
+	return /* @__PURE__ */ s("div", {
+		...b,
 		className: [
-			s,
-			...c,
-			l
+			l,
+			...u,
+			d
 		].filter(Boolean).join(" "),
 		children: [
-			p === "inline" ? /* @__PURE__ */ o("label", {
-				className: `${s}__control`,
-				htmlFor: y,
-				children: [_, a(f ? e : "span", {
-					id: b,
-					className: `${s}__label`,
-					children: d
+			_ === "inline" ? /* @__PURE__ */ s("label", {
+				className: `${l}__control`,
+				htmlFor: C,
+				children: [x, o(g ? t : "span", {
+					id: w,
+					className: `${l}__label`,
+					children: E
 				})]
-			}) : /* @__PURE__ */ o(i, { children: [d ? /* @__PURE__ */ a(n, {
-				id: b,
-				htmlFor: y,
-				hidden: f,
-				size: u,
-				children: d
-			}) : null, _] }),
-			r.errorMessage && /* @__PURE__ */ a(t, {
-				id: r.errorId,
-				children: r.errorMessage
+			}) : /* @__PURE__ */ s(a, { children: [p ? /* @__PURE__ */ o(r, {
+				id: w,
+				htmlFor: C,
+				hidden: g,
+				size: f,
+				children: E
+			}) : null, x] }),
+			i.errorMessage && /* @__PURE__ */ o(n, {
+				id: i.errorId,
+				children: i.errorMessage
 			}),
-			r.helperText && /* @__PURE__ */ a("span", {
-				id: r.helperId,
-				className: `${s}__helper`,
-				children: r.helperText
+			i.helperText && /* @__PURE__ */ o("span", {
+				id: i.helperId,
+				className: `${l}__helper`,
+				children: i.helperText
 			}),
-			v
+			S
 		]
 	});
 }
 //#endregion
-export { c as n, l as t };
+export { u as n, d as t };

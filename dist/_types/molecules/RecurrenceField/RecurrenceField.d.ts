@@ -57,6 +57,14 @@ export interface RecurrenceFieldProps {
      * texto del catálogo, pásale `recurrenceField.legend`.
      */
     legend?: ReactNode;
+    /**
+     * Oculta la leyenda a la vista (sigue nombrando el grupo para el lector de
+     * pantalla): la `legendHidden` del `Fieldset`. Por defecto `false`. Sin
+     * valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no es la
+     * primera de la lista, se oculta sola, como la etiqueta de los demás campos.
+     * Sin `legend` no hace nada.
+     */
+    labelHidden?: boolean;
     /** Deshabilita el editor entero. */
     disabled?: boolean;
     /**
@@ -105,4 +113,4 @@ export interface RecurrenceFieldProps {
  * Es **controlado**, como el resto de campos del sistema: recibe `value` y
  * llama a `onValueChange` con el valor entero. `null` es «no se repite».
  */
-export declare function RecurrenceField({ value, onValueChange, id: idProp, legend, disabled, helperText, errorMessage, size, locale, weekStartsOn, minDate, maxDate, today, className, frequencyLabel, weekdaysLabel, endLabel, }: RecurrenceFieldProps): import("react/jsx-runtime").JSX.Element;
+export declare function RecurrenceField({ value, onValueChange, id: idProp, legend, labelHidden: labelHiddenProp, disabled, helperText, errorMessage, size, locale, weekStartsOn, minDate, maxDate, today, className, frequencyLabel, weekdaysLabel, endLabel, }: RecurrenceFieldProps): import("react/jsx-runtime").JSX.Element;

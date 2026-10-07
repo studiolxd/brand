@@ -2,6 +2,7 @@
 
 import { useMemo, type ReactNode } from 'react';
 import { Fieldset } from '../../atoms/Fieldset/Fieldset';
+import { useLabelHidden } from '../../constants/field-labels';
 import { Toggle } from '../../atoms/Toggle/Toggle';
 import { ToggleGroup } from '../../atoms/ToggleGroup/ToggleGroup';
 import { SelectField } from '../SelectField/SelectField';
@@ -82,6 +83,14 @@ export interface RecurrenceFieldProps {
    * texto del catálogo, pásale `recurrenceField.legend`.
    */
   legend?: ReactNode;
+  /**
+   * Oculta la leyenda a la vista (sigue nombrando el grupo para el lector de
+   * pantalla): la `legendHidden` del `Fieldset`. Por defecto `false`. Sin
+   * valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no es la
+   * primera de la lista, se oculta sola, como la etiqueta de los demás campos.
+   * Sin `legend` no hace nada.
+   */
+  labelHidden?: boolean;
   /** Deshabilita el editor entero. */
   disabled?: boolean;
   /**
@@ -141,6 +150,7 @@ export function RecurrenceField({
   onValueChange,
   id: idProp,
   legend,
+  labelHidden: labelHiddenProp,
   disabled,
   helperText,
   errorMessage,
@@ -156,6 +166,7 @@ export function RecurrenceField({
   endLabel,
 }: RecurrenceFieldProps) {
   const t = useBrandMessages('recurrenceField', recurrenceFieldEs);
+  const labelHidden = useLabelHidden(labelHiddenProp);
   const field = useFieldShell({ id: idProp, errorMessage, helperText });
   const { id } = field;
 
@@ -305,6 +316,6 @@ export function RecurrenceField({
   );
 
   return legend
-    ? <Fieldset legend={legend} disabled={disabled} aria-describedby={field.describedBy}>{cuerpo}</Fieldset>
+    ? <Fieldset legend={legend} legendHidden={labelHidden} disabled={disabled} aria-describedby={field.describedBy}>{cuerpo}</Fieldset>
     : cuerpo;
 }

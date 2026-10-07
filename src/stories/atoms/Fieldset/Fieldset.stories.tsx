@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { Fieldset } from './Fieldset';
 import { CheckboxField } from '../../molecules/CheckboxField/CheckboxField';
 import { RadioField } from '../../molecules/RadioField/RadioField';
@@ -72,6 +73,27 @@ export const WithRadios: Story = {
       <RadioField label="Branding" name="tipo" value="branding" />
     </Fieldset>
   ),
+};
+
+/** La leyenda no se ve, pero sigue nombrando el grupo: cuando el título ya está a la vista en otro sitio. */
+export const LegendHidden: Story = {
+  name: 'Leyenda oculta',
+  args: {
+    legend: 'Dirección de facturación',
+    legendHidden: true,
+  },
+  render: (args) => (
+    <Fieldset {...args}>
+      <InputField id="calle-oculta" label="Calle" name="calle" />
+      <InputField id="ciudad-oculta" label="Ciudad" name="ciudad" />
+    </Fieldset>
+  ),
+  play: async ({ canvasElement }) => {
+    const group = within(canvasElement).getByRole('group', { name: 'Dirección de facturación' });
+    const legend = group.querySelector('legend')!;
+    await expect(group.firstElementChild).toBe(legend);
+    await expect(legend).toHaveClass('visually-hidden');
+  },
 };
 
 export const Disabled: Story = {

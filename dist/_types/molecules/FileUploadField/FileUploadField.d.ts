@@ -1,6 +1,7 @@
 import './FileUploadField.css';
+import { type FieldOptionalProps } from '../_shared/FieldShell';
 import type { FileUploadProps } from '../../atoms/FileUpload/FileUpload';
-export interface FileUploadFieldProps extends Omit<FileUploadProps, 'describedBy' | 'ariaLabel' | 'aria-describedby' | 'id'> {
+export interface FileUploadFieldProps extends Omit<FileUploadProps, 'describedBy' | 'ariaLabel' | 'aria-describedby' | 'id'>, FieldOptionalProps {
     /** `id` del control. Si no se pasa, se genera con `useId`. */
     id?: string;
     label: string;

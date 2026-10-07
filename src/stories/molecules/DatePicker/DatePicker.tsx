@@ -82,6 +82,12 @@ export interface DatePickerProps {
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
   readOnly?: boolean;
+  /**
+   * Campo obligatorio: `required` nativo en el campo de texto, que es el que
+   * guarda lo escrito. El lector de pantalla lo anuncia y el `<form>` no se
+   * envía vacío.
+   */
+  required?: boolean;
   error?: boolean;
   locale?: string;
   /** id aplicado al campo de texto */
@@ -167,6 +173,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
   size = 'md',
   disabled,
   readOnly,
+  required,
   error = false,
   locale = 'es-ES',
   id,
@@ -328,6 +335,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
           placeholder={placeholder ?? mask.mask(t('maskLetters', maskLetters))}
           disabled={disabled}
           readOnly={readOnly}
+          required={required}
           aria-label={ariaLabel}
           aria-describedby={describedByValue}
           onChange={handleInput}

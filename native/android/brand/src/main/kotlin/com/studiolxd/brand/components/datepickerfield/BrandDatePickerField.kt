@@ -109,6 +109,9 @@ internal fun initialPickerDate(value: LocalDate?, minDate: LocalDate?, maxDate: 
  * @param clearLabel nombre accesible del aspa. Castellano por defecto («Borrar»).
  * @param noDateLabel lo que lee TalkBack como estado sin fecha. Castellano por defecto («Sin fecha»).
  * @param invalidLabel lo que lee TalkBack cuando el campo está en [error] sin [errorMessage]. Castellano por defecto.
+ * @param required campo obligatorio (`required` de React). Compose no tiene semántica de obligatorio (no expone el
+ *   `setFieldRequired` de Android 16): TalkBack lee [requiredLabel] tras la etiqueta. La validación sigue siendo de la app.
+ * @param requiredLabel lo que se lee tras la etiqueta con [required]. Castellano por defecto («obligatorio»).
  * @param locale idioma del formato y del selector. Por defecto, el del dispositivo.
  * @param size sin valor toma la del entorno ([com.studiolxd.brand.support.ProvideBrandControlSize]) y, si tampoco hay, `md`.
  */
@@ -123,6 +126,7 @@ fun BrandDatePickerField(
     maxDate: LocalDate? = null,
     placeholder: String = "Elige una fecha",
     readOnly: Boolean = false,
+    required: Boolean = false,
     enabled: Boolean = true,
     error: Boolean = false,
     errorMessage: String? = null,
@@ -132,6 +136,7 @@ fun BrandDatePickerField(
     clearLabel: String = "Borrar",
     noDateLabel: String = "Sin fecha",
     invalidLabel: String = "Valor no válido",
+    requiredLabel: String = "obligatorio",
     locale: Locale = Locale.getDefault(),
     interactionSource: MutableInteractionSource? = null,
 ) {
@@ -154,6 +159,7 @@ fun BrandDatePickerField(
     BrandDatePickerFieldContent(
         label, value, onValueChange, modifier, labelHidden, placeholder, readOnly, enabled, error, errorMessage, helperText, size,
         openCalendarLabel, clearLabel, noDateLabel, invalidLabel, locale, interactionSource, open,
+        requiredLabel = if (required) requiredLabel else null,
     )
 }
 
@@ -179,6 +185,7 @@ internal fun BrandDatePickerFieldContent(
     locale: Locale,
     interactionSource: MutableInteractionSource?,
     open: () -> Unit,
+    requiredLabel: String? = null,
 ) {
     val resolved = size.resolve()
     val source = interactionSource ?: remember { MutableInteractionSource() }
@@ -271,7 +278,7 @@ internal fun BrandDatePickerFieldContent(
                     .heightIn(min = height)
                     .clickable(interactionSource = source, indication = null, enabled = enabled && !readOnly, role = Role.Button) { open() }
                     .semantics {
-                        contentDescription = label
+                        contentDescription = if (requiredLabel != null) "$label, $requiredLabel" else label
                         stateDescription = listOfNotNull(if (value == null) noDateLabel else shown, helperText).joinToString(". ")
                         if (hasError) error(errorMessage ?: invalidLabel)
                     }

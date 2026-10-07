@@ -373,6 +373,9 @@ export declare const BrandMessagesContext: import("react").Context<{
         until?: string | undefined;
         count?: string | undefined;
     } | undefined;
+    field?: {
+        optional?: string | undefined;
+    } | undefined;
     timeline?: {
         label?: string | undefined;
         current?: string | undefined;

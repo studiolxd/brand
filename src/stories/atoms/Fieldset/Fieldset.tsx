@@ -6,6 +6,14 @@ type HeadingWeight = 'thin' | 'extralight' | 'light' | 'regular' | 'medium' | 's
 export interface FieldsetProps {
   /** Texto del legend (título del grupo de campos). */
   legend: React.ReactNode;
+  /**
+   * Oculta la leyenda a la vista y la deja para el lector de pantalla: sigue
+   * nombrando el grupo. La clase `visually-hidden` va sobre el propio
+   * `<legend>`, que tiene que ser el primer hijo del `fieldset` —envolverlo en
+   * el `<span>` de `VisuallyHidden` rompería esa asociación—. Por defecto
+   * `false`.
+   */
+  legendHidden?: boolean;
   /** Nivel de heading visual para el legend (1–6). */
   level?: 1 | 2 | 3 | 4 | 5 | 6;
   /** Peso tipográfico del legend. */
@@ -25,6 +33,7 @@ export interface FieldsetProps {
 
 export function Fieldset({
   legend,
+  legendHidden = false,
   level = 2,
   weight,
   size,
@@ -34,7 +43,8 @@ export function Fieldset({
   'aria-describedby': ariaDescribedBy,
   children,
 }: FieldsetProps) {
-  const legendClasses = [
+  // Oculta, la leyenda no lleva la cara de título: solo la receta de ocultar.
+  const legendClasses = legendHidden ? 'visually-hidden' : [
     'fieldset__legend',
     `fieldset__legend--${level}`,
     weight && `fieldset__legend--${weight}`,

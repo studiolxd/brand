@@ -345,3 +345,17 @@ describe('el cromo sale del catálogo', () => {
     expect(within(panel).getByText("You're all caught up")).toBeInTheDocument();
   });
 });
+
+describe('NotificationPanel — className', () => {
+  it('va a la campana, que es el nodo que se queda en su sitio, no al panel (D65)', async () => {
+    const user = userEvent.setup();
+    setup({ className: 'mi-campana' });
+    const bell = screen.getByRole('button', { name: 'Notificaciones: 2 sin leer' });
+    expect(bell).toHaveClass('notification-button', 'mi-campana');
+
+    await user.click(bell);
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+    expect(panel).not.toHaveClass('mi-campana');
+    expect(document.querySelector('.mi-campana')).toBe(bell);
+  });
+});

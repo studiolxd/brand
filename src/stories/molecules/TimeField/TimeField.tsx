@@ -1,12 +1,12 @@
 import { forwardRef } from 'react';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { TimeSelect } from '../../atoms/TimeSelect/TimeSelect';
 import type { TimeValue } from '../../atoms/TimeSelect/TimeSelect';
 import './TimeField.css';
 
-export interface TimeFieldProps {
+export interface TimeFieldProps extends FieldOptionalProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
   id?: string;
   label: string;
@@ -58,6 +58,8 @@ export interface TimeFieldProps {
 export const TimeField = forwardRef<HTMLButtonElement, TimeFieldProps>(function TimeField({
   id: idProp,
   label,
+  optional,
+  optionalLabel,
   labelHidden: labelHiddenProp,
   value,
   step,
@@ -81,7 +83,7 @@ export const TimeField = forwardRef<HTMLButtonElement, TimeFieldProps>(function 
   const { id } = field;
 
   return (
-    <FieldShell field={field} block="time-field" className={className} label={label} labelHidden={labelHidden} size={size} labelIdentified>
+    <FieldShell field={field} block="time-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size} labelIdentified>
       {/* El control son dos desplegables: la etiqueta nombra al grupo, y cada
           desplegable conserva el suyo (Horas / Minutos). */}
       <TimeSelect

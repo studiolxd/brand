@@ -1,13 +1,13 @@
 import { forwardRef } from 'react';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { FieldShell, useFieldShell } from '../_shared/FieldShell';
+import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { DatePicker } from '../DatePicker/DatePicker';
 import type { DatePickerProps } from '../DatePicker/DatePicker';
 import './DatePickerField.css';
 
 export interface DatePickerFieldProps
-  extends Omit<DatePickerProps, 'id' | 'describedBy' | 'aria-describedby' | 'aria-label'> {
+  extends Omit<DatePickerProps, 'id' | 'describedBy' | 'aria-describedby' | 'aria-label'>, FieldOptionalProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
   id?: string;
   label: string;
@@ -34,6 +34,8 @@ export interface DatePickerFieldProps
 export const DatePickerField = forwardRef<HTMLInputElement, DatePickerFieldProps>(function DatePickerField({
   id: idProp,
   label,
+  optional,
+  optionalLabel,
   labelHidden: labelHiddenProp,
   errorMessage,
   helperText,
@@ -48,7 +50,7 @@ export const DatePickerField = forwardRef<HTMLInputElement, DatePickerFieldProps
   const { id } = field;
 
   return (
-    <FieldShell field={field} block="date-picker-field" className={className} label={label} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="date-picker-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       <DatePicker
         calendarLabel={label}
         {...pickerProps}

@@ -18,6 +18,9 @@ struct BrandFieldLayout<Control: View>: View {
     let errorMessage: LocalizedStringKey?
     let helperText: LocalizedStringKey?
     let helper: Helper
+    /// Si el campo es obligatorio, lo que se lee tras la etiqueta («obligatorio»): SwiftUI no tiene un rasgo de
+    /// accesibilidad para lo obligatorio (el `required` de HTML), así que va en el nombre. `nil`: no se lee nada.
+    var requiredLabel: LocalizedStringKey? = nil
     @ViewBuilder let control: Control
 
     private var labelSize: CGFloat {
@@ -38,6 +41,12 @@ struct BrandFieldLayout<Control: View>: View {
         }
     }
 
+    /// El nombre del control: la etiqueta y, si es obligatorio, «obligatorio» detrás.
+    private var accessibleName: Text {
+        guard let requiredLabel else { return Text(label) }
+        return Text(label) + Text(", ") + Text(requiredLabel)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: gap) {
             if !labelHidden {
@@ -49,7 +58,7 @@ struct BrandFieldLayout<Control: View>: View {
                     .accessibilityHidden(true)
             }
             control
-                .accessibilityLabel(Text(label))
+                .accessibilityLabel(accessibleName)
                 .accessibilityHint(hint)
             if let errorMessage {
                 Text(errorMessage)

@@ -33,6 +33,9 @@ export const Deshabilitado: Story = { args: { disabled: true, defaultValue: 'Ada
 /** Etiqueta oculta a la vista, presente para el lector de pantalla. Al ocultarla, el placeholder toma su texto. */
 export const EtiquetaOculta: Story = { args: { labelHidden: true } };
 
+/** `optional`: « (opcional)» tras la etiqueta, en la tinta apagada y dentro del nombre accesible. */
+export const Opcional: Story = { args: { label: 'Teléfono', optional: true, type: 'tel' } };
+
 /** Las tres tallas del sistema: el control mide 32, 40 y 48. */
 export const Tallas: Story = {
   render: (args) => (

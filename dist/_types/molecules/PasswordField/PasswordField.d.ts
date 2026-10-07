@@ -1,4 +1,5 @@
 import './PasswordField.css';
+import { type FieldOptionalProps } from '../_shared/FieldShell';
 /**
  * Los dos textos que el campo emite por su cuenta: las dos caras del
  * interruptor de mostrar/ocultar. Son cromo —dicen lo mismo en toda la
@@ -13,7 +14,7 @@ export interface PasswordFieldMessages {
     /** Nombre accesible del interruptor con la contraseña a la vista. */
     hide: string;
 }
-export interface PasswordFieldProps extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size' | 'type'> {
+export interface PasswordFieldProps extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size' | 'type'>, FieldOptionalProps {
     /**
      * Etiqueta del campo. **Opcional**: si se omite, el componente renderiza solo
      * el campo + toggle, sin `<label>`, para componerlo dentro de una capa de

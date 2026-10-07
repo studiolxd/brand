@@ -1,7 +1,8 @@
 import { type ComponentPropsWithoutRef } from 'react';
 import './NumberInputField.css';
+import { type FieldOptionalProps } from '../_shared/FieldShell';
 import { type NumberInputCommitMode } from '../../atoms/NumberInput/NumberInput';
-export interface NumberInputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue' | 'onChange'> {
+export interface NumberInputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue' | 'onChange'>, FieldOptionalProps {
     /** `id` del control. Si no se pasa, se genera con `useId`. */
     id?: string;
     label: string;

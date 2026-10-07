@@ -32,5 +32,6 @@ $lxd-planning-grid-cell-input-width: 4.5rem; // Ancho del campo de horas dentro 
 $lxd-planning-grid-footer-bg: #f2f2f2; // Fondo de las filas de totales
 $lxd-planning-grid-footer-font-weight: 500; // Peso de las filas de totales
 $lxd-planning-grid-footer-color: #111e30; // Color de las filas de totales
-$lxd-planning-grid-over-color: #b30000; // Color de un resto negativo: hay más horas asignadas que disponibles
+$lxd-planning-grid-over-bg: #b30000; // Relleno de un resto negativo: hay más horas asignadas que disponibles. Relleno universal, igual en las dos superficies (sin par oscuro)
+$lxd-planning-grid-over-color: #ffffff; // Tinta de un resto negativo, sobre su relleno de error
 $lxd-planning-grid-saving-gap: 0.25rem; // Aire entre el campo de un cruce en vuelo y su marca de guardado (el Spinner sm)

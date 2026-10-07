@@ -7,39 +7,41 @@ import { n as r, t as i } from "./_shared/fieldshell.js";
 import { forwardRef as a } from "react";
 import { jsx as o } from "react/jsx-runtime";
 //#region src/stories/molecules/InputPhoneField/InputPhoneField.tsx
-var s = a(function({ id: a, label: s, labelHidden: c, value: l, defaultCountry: u, placeholder: d, disabled: f, readOnly: p, required: m, name: h, autoComplete: g, error: _ = !1, errorMessage: v, helperText: y, size: b, className: x, countryLabel: S, internationalLabel: C, onChange: w, onBlur: T, onFocus: E }, D) {
-	let O = n(c), k = e(b), A = r({
+var s = a(function({ id: a, label: s, optional: c, optionalLabel: l, labelHidden: u, value: d, defaultCountry: f, placeholder: p, disabled: m, readOnly: h, required: g, name: _, autoComplete: v, error: y = !1, errorMessage: b, helperText: x, size: S, className: C, countryLabel: w, internationalLabel: T, onChange: E, onBlur: D, onFocus: O }, k) {
+	let A = n(u), j = e(S), M = r({
 		id: a,
-		error: _,
-		errorMessage: v,
-		helperText: y
-	}), { id: j } = A;
+		error: y,
+		errorMessage: b,
+		helperText: x
+	}), { id: N } = M;
 	return /* @__PURE__ */ o(i, {
-		field: A,
+		field: M,
 		block: "input-phone-field",
-		className: x,
+		className: C,
 		label: s,
-		labelHidden: O,
-		size: k,
+		optional: c,
+		optionalLabel: l,
+		labelHidden: A,
+		size: j,
 		children: /* @__PURE__ */ o(t, {
-			ref: D,
-			id: j,
-			name: h,
-			value: l,
-			defaultCountry: u,
-			placeholder: d,
-			disabled: f,
-			readOnly: p,
-			required: m,
-			autoComplete: g,
-			countryLabel: S,
-			internationalLabel: C,
-			error: A.hasError,
-			size: k,
-			"aria-describedby": A.describedBy,
-			onChange: w,
-			onBlur: T,
-			onFocus: E
+			ref: k,
+			id: N,
+			name: _,
+			value: d,
+			defaultCountry: f,
+			placeholder: p,
+			disabled: m,
+			readOnly: h,
+			required: g,
+			autoComplete: v,
+			countryLabel: w,
+			internationalLabel: T,
+			error: M.hasError,
+			size: j,
+			"aria-describedby": M.describedBy,
+			onChange: E,
+			onBlur: D,
+			onFocus: O
 		})
 	});
 });

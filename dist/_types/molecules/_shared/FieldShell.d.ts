@@ -1,5 +1,35 @@
 import { type HTMLAttributes, type ReactNode } from 'react';
 import type { FormSize } from '../../constants/form-size';
+/**
+ * El espacio `field` del catálogo: los textos que pinta el armazón común de
+ * los campos. Como todo el catálogo, opcional en `BrandMessages`: sin él
+ * la marca cae al castellano «(opcional)».
+ */
+export interface FieldMessages {
+    /** La marca tras la etiqueta de un campo `optional`. Castellano: «(opcional)». */
+    optional: string;
+}
+/**
+ * La marca de campo opcional (D70), común a todos los `*Field`. Se marca lo
+ * **opcional**, no lo obligatorio: en un formulario donde casi todo es
+ * obligatorio, lo que hay que señalar es la excepción. Es explícita —un campo
+ * sin `required` no la lleva sola—, porque un campo suelto (un buscador, un
+ * filtro) no es «opcional» de ningún formulario.
+ */
+export interface FieldOptionalProps {
+    /**
+     * Pinta « (opcional)» tras la etiqueta, en la tinta apagada de la etiqueta.
+     * Va dentro del `<label>`, así que el lector de pantalla la lee como parte
+     * del nombre del campo. No se combina con `required`. Por defecto `false`.
+     */
+    optional?: boolean;
+    /**
+     * Texto de la marca de opcional. **Sin default en la prop**: sin ella, sale
+     * de `field.optional` del `BrandMessagesProvider` y, si el catálogo no la
+     * trae, del castellano «(opcional)».
+     */
+    optionalLabel?: string;
+}
 /** Une ids para un `aria-*` de referencias; sin ninguno, `undefined` (no un atributo vacío). */
 export declare function joinIds(...ids: Array<string | false | null | undefined>): string | undefined;
 export interface FieldShellOptions {
@@ -40,6 +70,10 @@ export interface FieldShellProps {
     size?: FormSize;
     /** Texto de la etiqueta. Sin él no se pinta etiqueta (el control se nombra por otra vía). */
     label?: ReactNode;
+    /** Marca de campo opcional tras la etiqueta (ver `FieldOptionalProps`). */
+    optional?: boolean;
+    /** Texto de la marca; sin él, `field.optional` del catálogo o «(opcional)». */
+    optionalLabel?: string;
     /** Etiqueta oculta a la vista, presente para el lector de pantalla. */
     labelHidden?: boolean;
     /**
@@ -59,4 +93,4 @@ export interface FieldShellProps {
     /** Lo que va tras la ayuda: la acción de `PasswordField`. */
     footer?: ReactNode;
 }
-export declare function FieldShell({ field, block, modifiers, className, size, label, labelHidden, layout, labelFor, labelIdentified, rootProps, children, footer, }: FieldShellProps): import("react/jsx-runtime").JSX.Element;
+export declare function FieldShell({ field, block, modifiers, className, size, label, optional, optionalLabel, labelHidden, layout, labelFor, labelIdentified, rootProps, children, footer, }: FieldShellProps): import("react/jsx-runtime").JSX.Element;
