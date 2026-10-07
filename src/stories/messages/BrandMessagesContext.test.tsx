@@ -109,3 +109,70 @@ describe('useBrandMessages — el castellano de respaldo', () => {
     expect(() => result.current('label')).toThrow(/pagination\.label/);
   });
 });
+
+describe('BrandMessagesProvider fallback="es" — el castellano intencionado (D71)', () => {
+  function silenciado(messages?: BrandMessages) {
+    return ({ children }: { children: ReactNode }) => (
+      <BrandMessagesProvider fallback="es" messages={messages}>
+        {children}
+      </BrandMessagesProvider>
+    );
+  }
+
+  it('sin catálogo, pinta el castellano sin avisar', () => {
+    const Envoltorio = silenciado();
+    render(
+      <Envoltorio>
+        <Pagination total={100} page={3} pageSize={10} />
+      </Envoltorio>,
+    );
+
+    expect(screen.getByRole('navigation', { name: 'Paginación' })).toBeInTheDocument();
+    expect(screen.getByLabelText('Página anterior')).toBeInTheDocument();
+    expect(avisos()).toEqual([]);
+  });
+
+  it('con un catálogo a medias, lo que trae gana y lo que falta sale en castellano sin aviso', () => {
+    const { result } = renderHook(() => useBrandMessages('pagination', paginationEs), {
+      wrapper: silenciado({ pagination: { label: 'Resultados' } }),
+    });
+
+    expect(result.current('label')).toBe('Resultados');
+    expect(result.current('next')).toBe('Página siguiente');
+    expect(avisos()).toEqual([]);
+  });
+
+  it('tampoco avisa de los huecos de un texto compuesto', () => {
+    const { result } = renderHook(() => useBrandMessages('datePicker', datePickerEs), {
+      wrapper: silenciado({ datePicker: { maskLetters: { day: 'dd' } } }),
+    });
+
+    expect(result.current('maskLetters')).toEqual({ day: 'dd', month: 'mm', year: 'aaaa' });
+    expect(avisos()).toEqual([]);
+  });
+
+  it('sin la prop, el mismo catálogo a medias sigue avisando', () => {
+    const { result } = renderHook(() => useBrandMessages('pagination', paginationEs), {
+      wrapper: con({ pagination: { label: 'Resultados' } }),
+    });
+
+    result.current('next');
+    expect(avisos()).toEqual([
+      '@studiolxd/brand: falta «pagination.next» en el catálogo; sale en castellano.',
+    ]);
+  });
+
+  it('silenciar no gasta el aviso: un lector fuera de ese proveedor sigue avisando', () => {
+    const dentro = renderHook(() => useBrandMessages('pagination', paginationEs), {
+      wrapper: silenciado(),
+    });
+    dentro.result.current('label');
+    expect(avisos()).toEqual([]);
+
+    const fuera = renderHook(() => useBrandMessages('pagination', paginationEs));
+    fuera.result.current('label');
+    expect(avisos()).toEqual([
+      '@studiolxd/brand: falta «pagination.label» en el catálogo; sale en castellano.',
+    ]);
+  });
+});

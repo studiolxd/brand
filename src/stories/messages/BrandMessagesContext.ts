@@ -12,6 +12,13 @@ import type { BrandMessages, CompleteBrandMessages } from './BrandMessages';
 export const BrandMessagesContext = createContext<BrandMessages | null>(null);
 
 /**
+ * `true` cuando la aplicación declaró con `<BrandMessagesProvider
+ * fallback="es">` que el castellano de respaldo es intencionado (D71): el
+ * lector sigue cayendo al castellano, pero sin avisar de cada clave que falta.
+ */
+export const BrandMessagesFallbackContext = createContext<boolean>(false);
+
+/**
  * El espacio **entero** de un componente: el lector siempre devuelve un
  * texto, porque lo que no trae el catálogo sale del castellano de respaldo.
  */
@@ -32,8 +39,8 @@ export interface BrandMessagesReader<K extends keyof CompleteBrandMessages> {
 /** Las claves ya avisadas: el aviso sale **una vez por clave**, no por render. */
 const avisadas = new Set<string>();
 
-function avisar(clave: string): void {
-  if (avisadas.has(clave) || !isDevelopment()) return;
+function avisar(clave: string, silencio: boolean): void {
+  if (silencio || avisadas.has(clave) || !isDevelopment()) return;
   avisadas.add(clave);
   console.warn(`@studiolxd/brand: falta «${clave}» en el catálogo; sale en castellano.`);
 }
@@ -55,13 +62,13 @@ function esObjetoPlano(valor: unknown): valor is Record<string, unknown> {
  * Un texto compuesto (`datePicker.maskLetters`) puede llegar a medias: lo que
  * trae el catálogo gana, y cada hueco se rellena con el respaldo y se avisa.
  */
-function completar(valor: unknown, respaldo: unknown, ruta: string): unknown {
+function completar(valor: unknown, respaldo: unknown, ruta: string, silencio: boolean): unknown {
   if (!esObjetoPlano(valor) || !esObjetoPlano(respaldo)) return valor;
   const salida: Record<string, unknown> = { ...respaldo };
   for (const clave of Object.keys(respaldo)) {
     const propio = valor[clave];
-    if (propio === undefined || propio === null) avisar(`${ruta}.${clave}`);
-    else salida[clave] = completar(propio, respaldo[clave], `${ruta}.${clave}`);
+    if (propio === undefined || propio === null) avisar(`${ruta}.${clave}`, silencio);
+    else salida[clave] = completar(propio, respaldo[clave], `${ruta}.${clave}`, silencio);
   }
   return salida;
 }
@@ -78,7 +85,8 @@ function completar(valor: unknown, respaldo: unknown, ruta: string): unknown {
  * 3. el castellano de respaldo del espacio, que cada componente pasa como
  *    `fallback` (`useBrandMessages('pagination', paginationEs)`). Cada uno
  *    trae solo el suyo, así que el respaldo de un componente que la app no
- *    importa no viaja en su bundle. En desarrollo avisa una vez por clave.
+ *    importa no viaja en su bundle. En desarrollo avisa una vez por clave,
+ *    salvo que la app haya montado el proveedor con `fallback="es"` (D71).
  *
  * Sin `fallback` —un uso del lector fuera de la librería— un texto que falte
  * lanza, porque no hay castellano al que caer.
@@ -88,6 +96,7 @@ export function useBrandMessages<K extends keyof CompleteBrandMessages>(
   fallback?: BrandMessagesNamespace<K>,
 ): BrandMessagesReader<K> {
   const messages = useContext(BrandMessagesContext);
+  const silencio = useContext(BrandMessagesFallbackContext);
 
   return function read<N extends keyof BrandMessagesNamespace<K>>(
     key: N,
@@ -101,11 +110,11 @@ export function useBrandMessages<K extends keyof CompleteBrandMessages>(
     const respaldo = fallback?.[key];
 
     if (valor !== undefined && valor !== null) {
-      return completar(valor, respaldo, ruta) as BrandMessagesNamespace<K>[N];
+      return completar(valor, respaldo, ruta, silencio) as BrandMessagesNamespace<K>[N];
     }
 
     if (respaldo !== undefined) {
-      avisar(ruta);
+      avisar(ruta, silencio);
       return respaldo;
     }
 

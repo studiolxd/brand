@@ -140,6 +140,25 @@ en francés sin que nada falle. El respaldo no lo reabre del todo —sigue salie
 **ya no es mudo**: el aviso nombra la clave, y una app puede impedirlo del todo con el modo
 estricto.
 
+### Una app solo en castellano: `fallback="es"`
+
+El aviso existe para la app multiidioma, a la que le dice qué le falta a su catálogo. Para una app
+que **solo existe en castellano** el respaldo no es un olvido, es lo que quiere, y esos avisos son
+ruido. Lo declara en el proveedor:
+
+```tsx
+<BrandMessagesProvider fallback="es">{children}</BrandMessagesProvider>
+```
+
+Con `fallback="es"` todo sale igual que sin la prop —lo que el catálogo no trae, en castellano—,
+pero la consola calla. `messages` pasa a ser opcional: se puede montar sin catálogo, o con uno
+parcial para cambiar algún texto concreto («Resultados» en vez de «Paginación»), y lo que traiga
+sigue ganando al respaldo. Sin la prop, nada cambia.
+
+No la pone una app que se publique en más de un idioma, aunque arranque solo en castellano: el día
+que llegue el segundo idioma, los avisos son los que le enseñan qué falta. Y no sustituye al modo
+estricto: el silencio vale para la consola, no para el compilador.
+
 ### El modo estricto: `CompleteBrandMessages`
 
 La app que quiere enterarse **al compilar** —y no en la consola— de que le falta un texto escribe

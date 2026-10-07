@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { BrandMessagesContext } from './BrandMessagesContext';
+import { BrandMessagesContext, BrandMessagesFallbackContext } from './BrandMessagesContext';
 import type { BrandMessages } from './BrandMessages';
 
 export interface BrandMessagesProviderProps {
@@ -13,8 +13,20 @@ export interface BrandMessagesProviderProps {
    * Para que olvidar un texto sea un error de compilación y no un «Cancelar»
    * castellano dentro de una página en francés, escribe el catálogo con
    * `satisfies CompleteBrandMessages`.
+   *
+   * Opcional solo para la app que va **entera en castellano** y monta el
+   * proveedor con `fallback="es"` sin catálogo propio.
    */
-  messages: BrandMessages;
+  messages?: BrandMessages;
+  /**
+   * Declara que el castellano de respaldo es **intencionado** (D71): lo que el
+   * catálogo no traiga sale en castellano igual que sin la prop, pero sin el
+   * aviso de desarrollo «falta X en el catálogo; sale en castellano». Para la
+   * app que solo existe en castellano, con o sin `messages` (o con uno
+   * parcial para cambiar algún texto). Una app multiidioma no la pone: esos
+   * avisos son los que le dicen qué le falta a su catálogo.
+   */
+  fallback?: 'es';
   children: ReactNode;
 }
 
@@ -51,9 +63,19 @@ export interface BrandMessagesProviderProps {
  *   {children}
  * </BrandMessagesProvider>
  * ```
+ *
+ * Una app solo en castellano lo declara y se ahorra los avisos:
+ *
+ * ```tsx
+ * <BrandMessagesProvider fallback="es">{children}</BrandMessagesProvider>
+ * ```
  */
-export function BrandMessagesProvider({ messages, children }: BrandMessagesProviderProps) {
+export function BrandMessagesProvider({ messages, fallback, children }: BrandMessagesProviderProps) {
   return (
-    <BrandMessagesContext.Provider value={messages}>{children}</BrandMessagesContext.Provider>
+    <BrandMessagesContext.Provider value={messages ?? null}>
+      <BrandMessagesFallbackContext.Provider value={fallback === 'es'}>
+        {children}
+      </BrandMessagesFallbackContext.Provider>
+    </BrandMessagesContext.Provider>
   );
 }
