@@ -62,7 +62,7 @@ export const Contrato: Story = {
     const section = canvasElement.querySelector('section.hero')!;
     await expect(section).toBeInTheDocument();
     await expect(canvas.getByRole('heading', { level: 1 })).toHaveTextContent('Aprender es lo primero');
-    await expect(canvas.getByText(/La suite de Studio LXD/)).toHaveClass('paragraph--large');
+    await expect(canvas.getByText(/La suite de Studio LXD/)).toHaveClass('paragraph--lg');
     await expect(canvas.getByRole('link', { name: 'Empezar' }).closest('.hero__actions')).toHaveClass('inline');
   },
 };

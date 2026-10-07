@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.studiolxd.brand.components.banner.BannerPreviewContent
-import com.studiolxd.brand.components.banner.BannerVariant
+import com.studiolxd.brand.components.banner.BannerTone
 import com.studiolxd.brand.components.banner.BrandBanner
 import com.studiolxd.brand.components.banner.PreviewBannerAction
 import com.studiolxd.brand.components.banner.PreviewBannerMessage
@@ -56,8 +56,8 @@ class BannerSnapshotTest {
     fun wide() = paparazzi.brandComparison("wide", 700, 320) {
         Column(verticalArrangement = Arrangement.spacedBy(BrandSpacing.s4)) {
             BrandBanner(PreviewBannerMessage, actions = { PreviewBannerAction("Dejar de suplantar") }, onDismiss = {})
-            BrandBanner(PreviewBannerMessage, variant = BannerVariant.Warning, actions = { PreviewBannerAction("Ver detalles") }, onDismiss = {})
-            BrandBanner(PreviewBannerMessage, variant = BannerVariant.Error, actions = { PreviewBannerAction("Dejar de suplantar") })
+            BrandBanner(PreviewBannerMessage, tone = BannerTone.Warning, actions = { PreviewBannerAction("Ver detalles") }, onDismiss = {})
+            BrandBanner(PreviewBannerMessage, tone = BannerTone.Error, actions = { PreviewBannerAction("Dejar de suplantar") })
         }
     }
 }

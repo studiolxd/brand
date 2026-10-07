@@ -44,7 +44,7 @@ export const ConDetalle: Story = {
     destructive: true,
     confirmLabel: 'Borrar',
     children: (
-      <Alert variant="warning">
+      <Alert tone="warning">
         <AlertDescription>
           Se borrarán 42 proyectos y 17 miembros perderán el acceso.
         </AlertDescription>

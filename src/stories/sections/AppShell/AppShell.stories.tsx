@@ -34,7 +34,7 @@ const sidebar = (
 function Estado() {
   const { sidebar, sidebarWidth, isDesktop } = useAppShell();
   return (
-    <Paragraph size="small">
+    <Paragraph size="sm">
       Sidebar: <strong data-testid="estado">{sidebar}</strong>
       {isDesktop && sidebarWidth ? ` · ${sidebarWidth}px` : ''} · {isDesktop ? 'escritorio' : 'móvil'}
     </Paragraph>
@@ -81,7 +81,7 @@ export const Plegada: Story = { args: { defaultSidebar: 'closed' } };
 
 const barraDeSistema = (
   <Banner
-    variant="error"
+    tone="error"
     actions={<Button variant="outline" size="sm">Dejar de suplantar</Button>}
   >
     Estás viendo la aplicación como ana.perez@studiolxd.com.

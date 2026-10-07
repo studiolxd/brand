@@ -1,6 +1,6 @@
 package com.studiolxd.brand
 
-import com.studiolxd.brand.components.banner.BannerVariant
+import com.studiolxd.brand.components.banner.BannerTone
 import com.studiolxd.brand.components.datepickerfield.DatePickerFieldSize
 import com.studiolxd.brand.components.menu.ContextMenuTriggerOrientation
 import com.studiolxd.brand.components.menu.ContextMenuTriggerSize
@@ -15,7 +15,7 @@ import com.studiolxd.brand.components.text.HeadingSize
  */
 internal val parityR6: Map<String, Map<String, List<String>>> = mapOf(
     "Banner" to mapOf(
-        "variant" to BannerVariant.entries.map { it.value },
+        "tone" to BannerTone.entries.map { it.value },
     ),
     "Menu" to emptyMap(),
     "ContextMenu" to mapOf(

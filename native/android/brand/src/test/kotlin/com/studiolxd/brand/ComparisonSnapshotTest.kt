@@ -63,9 +63,9 @@ class ComparisonSnapshotTest {
     fun paragraph() {
         ParagraphSize.entries.forEach { size ->
             val height = when (size) {
-                ParagraphSize.Small -> 147
-                ParagraphSize.Large -> 214
-                ParagraphSize.Default -> 176
+                ParagraphSize.Sm -> 147
+                ParagraphSize.Lg -> 214
+                ParagraphSize.Md -> 176
             }
             paparazzi.brandComparison("paragraph-${size.value}", 320, height) { BrandParagraph(LOREM, Modifier.width(288.dp), size = size) }
         }

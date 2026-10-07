@@ -106,7 +106,7 @@ No hay un ámbar funcional supliendo el hueco. Se probó —entró en v30.10.0 y
 Los roles que consumen los componentes para lo básico: qué color tiene el texto y el lienzo en cada superficie. Incluye también los dos roles de **superficie** que dan nombre a `grey-lightest` y `grey-darkest` cuando se usan como fondo (no como estado):
 
 - **Superficie secundaria** (`surface.secondary-on-light|dark`) — una superficie clara secundaria dentro de la página: bloque de código, keycap, carril de progreso, pie de tabla. En superficie oscura pasa al gris oscuro (`grey-darkest`). No marca estados: el resaltado de las listas de opciones desplegables —la única excepción de estado que se rellena fuera de `Button` (más abajo)— se pinta con la inversión de marca, no con este gris.
-- **Superficie invertida** (`surface.inverse-on-light|dark`) — un relleno que invierte la tinta ambiente: el neutral oscuro de `Tag` variante `neutral`.
+- **Superficie invertida** (`surface.inverse-on-light|dark`) — un relleno que invierte la tinta ambiente: el neutral oscuro de `Tag` con `tone="neutral"`.
 
 <ColorPalette>
   {semanticSwatches.map((s) => <ColorItem key={s.title} {...s} />)}
@@ -251,7 +251,7 @@ Hay un relleno que no invierte nada y que tampoco es oscuro: **el amarillo del a
 
 Esa región es **`.surface-light`**, el contrapunto de `.surface-dark`. No está en la lista de selectores oscuros, así que sobre página clara no hace nada: los tokens ya están en claro. Lo único que hace falta es el camino de vuelta, y ese lo pone `src/tokens/surface-invert.css` —generado, en el mismo bloque que `.surface-invert`, porque son los mismos nombres y los mismos valores claros—, que devuelve cada token volteado a su valor claro cuando la clase cae dentro de una superficie oscura.
 
-Se usa con las mismas dos reglas que `.surface-invert` —no pinta el lienzo, y no va en el elemento que consume los tokens volteados—. La abren el `Alert` y el `Banner` en su variante `warning`, sobre el contenido, las acciones y el aspa: sin ella, con la página en oscuro un `Button variant="outline"` dentro del aviso heredaría el blanco ambiente y saldría blanco sobre amarillo (1,50:1).
+Se usa con las mismas dos reglas que `.surface-invert` —no pinta el lienzo, y no va en el elemento que consume los tokens volteados—. La abren el `Alert` y el `Banner` con `tone="warning"`, sobre el contenido, las acciones y el aspa: sin ella, con la página en oscuro un `Button variant="outline"` dentro del aviso heredaría el blanco ambiente y saldría blanco sobre amarillo (1,50:1).
 
 ### Un enlace dentro de un aviso lee en tinta, no en acento
 

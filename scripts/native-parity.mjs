@@ -14,8 +14,12 @@
 //      declara EXACTAMENTE los literales de React; una `boolean`, es booleana.
 //   4. Cada `excluded.prop` existe en React y no está también en `props`.
 //   5. Toda prop PROPIA del componente (declarada en el repo, no heredada de
-//      `ComponentPropsWithoutRef<'button'>` y compañía) está en `props` o en
-//      `excluded`: portar un componente es decidir cada prop, no olvidarse una.
+//      `ComponentPropsWithoutRef<'button'>` y compañía) está en `props`, en
+//      `excluded` o en `deprecated`: portar un componente es decidir cada prop,
+//      no olvidarse una.
+//   6. Cada `deprecated.prop` existe en React con `@deprecated` en su JSDoc y su
+//      `replacement` está en `props`; los `deprecatedValues` de una unión son
+//      literales de React que no están también en `values`.
 // La otra mitad —que el componente nativo expone esos mismos casos— la comprueban
 // las pruebas de cada plataforma (ver native/parity/README.md).
 
@@ -47,13 +51,14 @@ export function readProps(checker, type, node) {
       const name = symbol.getName();
       const declarations = symbol.declarations ?? [];
       const own = declarations.length > 0 && declarations.every((d) => !d.getSourceFile().fileName.includes('node_modules'));
+      const deprecated = declarations.some((d) => ts.getJSDocTags(d).some((t) => t.tagName.text === 'deprecated'));
       const propType = checker.getNonNullableType(checker.getTypeOfSymbolAtLocation(symbol, node));
       const shape = describe(propType);
       const previous = props.get(name);
       // La misma prop en varios miembros de una unión: se juntan sus literales.
       if (previous?.kind === 'union' && shape.kind === 'union') {
         previous.values = [...new Set([...previous.values, ...shape.values])];
-      } else if (!previous) props.set(name, { ...shape, own });
+      } else if (!previous) props.set(name, { ...shape, own, deprecated });
     }
   }
   return props;
@@ -99,6 +104,7 @@ export function loadReactProps(card, root = ROOT) {
 export function compareWithReact(card, reactProps) {
   const problems = [];
   const excluded = new Map((card.excluded ?? []).map((e) => [e.prop, e]));
+  const deprecated = new Map((card.deprecated ?? []).map((d) => [d.prop, d]));
 
   for (const [name, declared] of Object.entries(card.props)) {
     const actual = reactProps.get(name);
@@ -106,6 +112,8 @@ export function compareWithReact(card, reactProps) {
       problems.push(`props.${name}: no existe en ${card.react.props}`);
     } else if (excluded.has(name)) {
       problems.push(`props.${name}: está en \`props\` y en \`excluded\` a la vez`);
+    } else if (deprecated.has(name)) {
+      problems.push(`props.${name}: está en \`props\` y en \`deprecated\` a la vez`);
     } else if (declared.type === 'boolean') {
       const reactOnly = declared.reactOnlyValues ?? [];
       if (actual.kind === 'booleanPlus') {
@@ -124,12 +132,23 @@ export function compareWithReact(card, reactProps) {
       problems.push(`props.${name}: la ficha dice union pero en React es ${describeKind(actual)}`);
     } else {
       const want = new Set(actual.values);
-      const have = new Set(declared.values);
+      const old = declared.deprecatedValues ?? [];
+      const have = new Set([...declared.values, ...old]);
       const missing = [...want].filter((v) => !have.has(v));
       const extra = [...have].filter((v) => !want.has(v));
+      const both = old.filter((v) => declared.values.includes(v));
       if (missing.length) problems.push(`props.${name}: faltan valores de React: ${missing.join(', ')}`);
       if (extra.length) problems.push(`props.${name}: valores que React no tiene: ${extra.join(', ')}`);
+      if (both.length) problems.push(`props.${name}: ${both.join(', ')} está en \`values\` y en \`deprecatedValues\` a la vez`);
     }
+  }
+
+  for (const [name, entry] of deprecated) {
+    const actual = reactProps.get(name);
+    if (!actual) problems.push(`deprecated.${name}: no existe en ${card.react.props}`);
+    else if (!actual.deprecated) problems.push(`deprecated.${name}: en React no lleva \`@deprecated\` en su JSDoc`);
+    if (excluded.has(name)) problems.push(`deprecated.${name}: está en \`deprecated\` y en \`excluded\` a la vez`);
+    if (!(entry.replacement in card.props)) problems.push(`deprecated.${name}: su sustituta «${entry.replacement}» no está en \`props\``);
   }
 
   for (const name of excluded.keys()) {
@@ -137,8 +156,8 @@ export function compareWithReact(card, reactProps) {
   }
 
   for (const [name, shape] of reactProps) {
-    if (shape.own && !(name in card.props) && !excluded.has(name)) {
-      problems.push(`${name}: prop propia de ${card.react.props} que la ficha ni porta (\`props\`) ni excluye (\`excluded\`)`);
+    if (shape.own && !(name in card.props) && !excluded.has(name) && !deprecated.has(name)) {
+      problems.push(`${name}: prop propia de ${card.react.props} que la ficha ni porta (\`props\`) ni excluye (\`excluded\`) ni declara obsoleta (\`deprecated\`)`);
     }
   }
   return problems;

@@ -273,7 +273,7 @@ export function NotificationPanel({
 
         {items.length === 0 ? (
           <div className="notification-panel__empty">
-            <Paragraph size="small">{t('empty', emptyLabel)}</Paragraph>
+            <Paragraph size="sm">{t('empty', emptyLabel)}</Paragraph>
           </div>
         ) : (
           <ul className="notification-panel__list" aria-labelledby={headingId}>

@@ -76,12 +76,12 @@ export const ConSecciones: Story = {
         <SidebarSeparator />
         <SidebarGroup>
           <SidebarGroupContent>
-            <Paragraph size="small">Carpetas del producto</Paragraph>
+            <Paragraph size="sm">Carpetas del producto</Paragraph>
           </SidebarGroupContent>
         </SidebarGroup>
       </>
     ),
-    footer: <Paragraph size="small">v1.0</Paragraph>,
+    footer: <Paragraph size="sm">v1.0</Paragraph>,
   },
 };
 

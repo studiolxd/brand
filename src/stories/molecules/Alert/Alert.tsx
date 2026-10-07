@@ -7,6 +7,7 @@
    de librería. */
 import { forwardRef, useState } from 'react';
 import { CloseButton } from '../../atoms/CloseButton/CloseButton';
+import { warnDeprecated } from '../../constants/env';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { alertEs } from '../../messages/es/alert';
 import './Alert.css';
@@ -22,10 +23,19 @@ export interface AlertMessages {
   close: string;
 }
 
-export type AlertVariant = 'default' | 'success' | 'error' | 'warning';
+/** Intención del aviso: decide el relleno y el rol ARIA. */
+export type AlertTone = 'default' | 'success' | 'error' | 'warning';
+/** @deprecated Usa `AlertTone`: la prop de color se llama `tone` desde la v51. Se retira en la v52. */
+export type AlertVariant = AlertTone;
 
 export interface AlertProps extends React.ComponentPropsWithoutRef<'div'> {
-  variant?: AlertVariant;
+  /** Intención del aviso. Default `'default'` (relleno prusia). */
+  tone?: AlertTone;
+  /**
+   * @deprecated Usa `tone`. Sigue funcionando, con un aviso en desarrollo,
+   * hasta la v52.
+   */
+  variant?: AlertTone;
   /** Título del alert. **Opcional**: en modo composición usa `children` (p. ej. `<Alert.Title>`). */
   title?: string;
   description?: React.ReactNode;
@@ -60,11 +70,11 @@ export type AlertDescriptionProps = React.ComponentPropsWithoutRef<'div'>;
 export type AlertActionsProps = React.ComponentPropsWithoutRef<'div'>;
 
 /**
- * Rol ARIA por variante. `error` y `warning` interrumpen (`alert`, live
+ * Rol ARIA por tono. `error` y `warning` interrumpen (`alert`, live
  * assertive); `default` y `success` informan sin interrumpir (`status`, live
  * polite). El consumidor puede forzarlo con la prop `role`.
  */
-const ROLE_BY_VARIANT: Record<AlertVariant, 'alert' | 'status'> = {
+const ROLE_BY_TONE: Record<AlertTone, 'alert' | 'status'> = {
   default: 'status',
   success: 'status',
   error: 'alert',
@@ -72,10 +82,10 @@ const ROLE_BY_VARIANT: Record<AlertVariant, 'alert' | 'status'> = {
 };
 
 /**
- * Superficie interior por variante — la cara del relleno, que no tiene por qué
+ * Superficie interior por tono — la cara del relleno, que no tiene por qué
  * ser la de la página. Ver el comentario de `interiorSurface` más abajo.
  */
-const INTERIOR_SURFACE: Record<AlertVariant, string> = {
+const INTERIOR_SURFACE: Record<AlertTone, string> = {
   default: ' surface-invert',
   warning: ' surface-light',
   success: '',
@@ -122,11 +132,12 @@ export const AlertActions = forwardRef<HTMLDivElement, AlertActionsProps>(functi
  *   arbitrarios) cuando el consumidor gestiona el contenido.
  *
  * Extiende los atributos nativos de `<div>` y reenvía `{...rest}` al raíz. El
- * `role` sale de la variante (`alert` en error/warning, `status` en el resto) y
+ * `role` sale del tono (`alert` en error/warning, `status` en el resto) y
  * se puede forzar con la prop `role`.
  */
 const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
-  variant = 'default',
+  tone: toneProp,
+  variant,
   title,
   description,
   actions,
@@ -140,13 +151,15 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
   ...rest
 }, ref) {
   const t = useBrandMessages('alert', alertEs);
+  if (variant !== undefined) warnDeprecated('Alert', 'variant', '`tone`');
+  const tone = toneProp ?? variant ?? 'default';
   const [dismissed, setDismissed] = useState(false);
 
   if (dismissed) return null;
 
   const classes = [
     'alert',
-    variant !== 'default' ? `alert--${variant}` : '',
+    tone !== 'default' ? `alert--${tone}` : '',
     // `success` y `error` son rellenos saturados: su cara es oscura en las dos
     // superficies, y la raíz puede declararla porque ninguno de sus tokens
     // voltea con el tema. El `default` NO puede —sus tokens sí voltean, y un
@@ -154,7 +167,7 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
     // así que su superficie interior va en el contenido y en el aspa
     // (`interiorSurface`). `warning` tampoco: su cara es clara, y va por el
     // mismo camino.
-    variant === 'success' || variant === 'error' ? 'surface-dark' : '',
+    tone === 'success' || tone === 'error' ? 'surface-dark' : '',
     dismissible ? 'alert--dismissible' : '',
     className ?? '',
   ]
@@ -169,7 +182,7 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
   // dos superficies: la suya es siempre la clara (`.surface-light`), o el botón
   // de las acciones saldría blanco sobre amarillo con la página en oscuro.
   // `success` y `error` no la necesitan: su cara la declara ya la raíz.
-  const interiorSurface = INTERIOR_SURFACE[variant];
+  const interiorSurface = INTERIOR_SURFACE[tone];
 
   /**
    * Saca el foco del botón de cierre antes de que desaparezca. Con
@@ -202,7 +215,7 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
   }
 
   return (
-    <div ref={ref} role={role ?? ROLE_BY_VARIANT[variant]} className={classes} {...rest}>
+    <div ref={ref} role={role ?? ROLE_BY_TONE[tone]} className={classes} {...rest}>
       <div className={`alert__content${interiorSurface}`}>
         {title && <p className="alert__title">{title}</p>}
         {description && <div className="alert__description">{description}</div>}

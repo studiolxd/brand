@@ -88,7 +88,7 @@ decisión detrás de ella es una cicatriz de un cliente concreto:
 | Celda sin padding, logotipo con `marginLeft` negativo | La celda de la banda de marca ya no lleva `padding`: el aire de seguridad lo da el margen del lienzo (`canvas-padding-*`) y el PNG trae su propio padding horneado, así que un padding aquí solo desplazaba el logotipo hacia dentro respecto al recuadro del mensaje, que comparte el mismo `maxWidth` y por tanto el mismo borde izquierdo. El `<Img>` sale con `marginLeft: -{--email-brand-padding-inline}` para alinearse con ese borde en vez de con el de su propia celda, y con `marginBottom: {--email-brand-padding-block}` para conservar el aire que antes daba el padding inferior de la banda — 2026-09-14 |
 
 El PNG lo genera `pnpm build:email-assets` a partir de `src/assets/logo.svg`. El
-alto lo dice el token `--email-logo-height` (85,33px, la talla xxl de la escala
+alto lo dice el token `--email-logo-height` (85,33px, la talla 2xl de la escala
 del logotipo — la misma que usa `SiteHeader` por defecto para la cabecera del
 sitio; antes iba a `height-sm`, 32px, y se veía diminuto) y el aire horneado
 `--email-logo-padding`; el **ancho no es un token**:

@@ -71,7 +71,7 @@ const CANDIDATURA: TimelineItem[] = [
     note: 'Buen encaje con el equipo de plataforma. Pendiente de referencias.',
     tone: 'support-1',
   },
-  { id: 'descartada', title: 'Descartada', date: '29 de enero', author: 'Alicia Benítez', note: 'La persona aceptó otra oferta.', tone: 'danger', current: true },
+  { id: 'descartada', title: 'Descartada', date: '29 de enero', author: 'Alicia Benítez', note: 'La persona aceptó otra oferta.', tone: 'error', current: true },
 ];
 
 export const PorDefecto: Story = {

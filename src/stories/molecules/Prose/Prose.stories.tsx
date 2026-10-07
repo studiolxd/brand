@@ -148,7 +148,7 @@ export const HtmlJuntoAReact: Story = {
   render: () => (
     <div>
       <Prose size="sm" measure={false} html={'<p>&ldquo;El ladrillo perforado no es un ladrillo hueco.&rdquo;</p>'} />
-      <Paragraph size="small">— Manual de construcción, cap. 4</Paragraph>
+      <Paragraph size="sm">— Manual de construcción, cap. 4</Paragraph>
     </div>
   ),
 };

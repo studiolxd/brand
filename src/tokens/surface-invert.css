@@ -408,6 +408,7 @@ html.dark .surface-light {
   --tag-info-bg: var(--color-primary);
   --tag-info-color: var(--color-text-on-dark);
   --text-inline-muted-color: var(--color-text-muted-on-light);
+  --text-inline-error-color: var(--color-error-text-on-light);
   --text-inline-destructive-color: var(--color-destructive-text-on-light);
   --text-inline-success-color: var(--color-success-text-on-light);
   --text-inline-strikethrough-color: var(--color-text-muted-on-light);

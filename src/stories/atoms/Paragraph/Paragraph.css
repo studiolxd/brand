@@ -1,11 +1,11 @@
 /* El párrafo hereda del lienzo (`body` en stylesheets/base.css): un <p> crudo
    y un <Paragraph> se ven igual. Aquí solo las variantes de tamaño. */
-.paragraph.paragraph--small {
+.paragraph.paragraph--sm {
   font-size: var(--text-paragraph-small-font-size);
   line-height: var(--text-paragraph-small-line-height);
 }
 
-.paragraph.paragraph--large {
+.paragraph.paragraph--lg {
   font-size: var(--text-paragraph-large-font-size);
   line-height: var(--text-paragraph-large-line-height);
 }

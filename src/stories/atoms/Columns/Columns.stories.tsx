@@ -118,25 +118,25 @@ export const TarjetasDelMismoAlto: Story = {
     align: 'stretch',
     children: (
       <>
-        <Card color="outline">
+        <Card tone="outline">
           <CardTitle>Básico</CardTitle>
-          <CardContent><Paragraph size="small">Un plan corto.</Paragraph></CardContent>
+          <CardContent><Paragraph size="sm">Un plan corto.</Paragraph></CardContent>
           <CardFooter><Button variant="outline">Elegir</Button></CardFooter>
         </Card>
-        <Card color="outline">
+        <Card tone="outline">
           <CardTitle>Pro</CardTitle>
           <CardContent>
-            <Paragraph size="small">
+            <Paragraph size="sm">
               Un plan con una descripción bastante más larga, que ocupa varias
               líneas de texto y empuja el pie hacia abajo en su propia celda.
             </Paragraph>
           </CardContent>
           <CardFooter><Button variant="outline">Elegir</Button></CardFooter>
         </Card>
-        <Card color="outline">
+        <Card tone="outline">
           <CardTitle>Equipo</CardTitle>
           <CardContent>
-            <Paragraph size="small">
+            <Paragraph size="sm">
               Descripción de longitud intermedia, ni tan corta como la primera
               ni tan larga como la segunda.
             </Paragraph>

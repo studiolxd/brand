@@ -129,7 +129,7 @@ final class NavigationLogicTests: XCTestCase {
     // MARK: Banner
 
     func testBannerVariantsAndDefaultLabel() {
-        XCTAssertEqual(BannerVariant.allCases.map(\.rawValue), ["info", "warning", "error"])
+        XCTAssertEqual(BannerTone.allCases.map(\.rawValue), ["info", "warning", "error"])
     }
 
     // MARK: PageIntro

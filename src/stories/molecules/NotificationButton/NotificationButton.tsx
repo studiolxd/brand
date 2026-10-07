@@ -72,7 +72,7 @@ export const NotificationButton = forwardRef<HTMLButtonElement, NotificationButt
     >
       <Icon name="bell" size="md" />
       {count > 0 && (
-        <NumberBadge count={count} max={max} variant="danger" aria-hidden="true" className="notification-button__badge" />
+        <NumberBadge count={count} max={max} tone="error" aria-hidden="true" className="notification-button__badge" />
       )}
     </Button>
   );

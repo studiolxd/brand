@@ -1,7 +1,7 @@
 'use client';
 
 import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react';
-import { StepMarker, type StepMarkerTone } from '../../atoms/StepMarker/StepMarker';
+import { StepMarker, type StepMarkerTone, type StepMarkerToneDeprecated } from '../../atoms/StepMarker/StepMarker';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import type { IconName } from '../../atoms/Icon/Icon';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
@@ -21,8 +21,11 @@ export interface TimelineMessages {
   current: string;
 }
 
-/** El tono de la marca: los mismos ocho que `StepMarker`, sin traducción. */
-export type TimelineTone = StepMarkerTone;
+/**
+ * El tono de la marca: los mismos ocho que `StepMarker`, sin traducción. Admite
+ * todavía el obsoleto `danger` (hoy `error`), que la marca traduce y avisa.
+ */
+export type TimelineTone = StepMarkerTone | StepMarkerToneDeprecated;
 
 /** Un hito del historial: un cambio de estado, con su fecha y quien lo firmó. */
 export interface TimelineItem {

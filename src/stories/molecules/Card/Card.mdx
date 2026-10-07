@@ -13,8 +13,10 @@ con `children` arbitrarios (formularios, botones), para superficies de aplicaci�
 
 ## Modo link — colores
 
-Seis variantes de fondo: `primary`, `outline` y cuatro colores de identidad
-(`accent-1`, `accent-2`, `support-1`, `support-2`).
+Seis colores de fondo, en `tone`: `primary`, `outline` (por defecto) y cuatro colores de identidad
+(`accent-1`, `accent-2`, `support-1`, `support-2`). `variant` es la maqueta (abajo): forma, no color.
+
+Hasta la v50 esta prop se llamaba `color`: sigue funcionando como alias obsoleto, con un aviso en desarrollo, y se retira en la v52.
 
 <Canvas of={CardStories.Primary} />
 <Canvas of={CardStories.Outline} />
@@ -268,7 +270,7 @@ para conseguir un tamaño rompe el esquema; para eso está `size`.
 
 <Canvas of={CardStories.NivelDelTitulo} />
 
-`CardDescription` renderiza `Paragraph` en talla `small`, así que su cuerpo sale del peldaño de
+`CardDescription` renderiza `Paragraph` en talla `sm`, así que su cuerpo sale del peldaño de
 párrafo de la superficie de lectura (Foundations → Tipografía): dentro de un `SiteShell` sube solo.
 
 ## Superficie oscura
@@ -297,7 +299,7 @@ párrafo de la superficie de lectura (Foundations → Tipografía): dentro de un
 - `ctaLabel` da al enlace un nombre accesible completo («Ver más sobre plataformas LMS») cuando la
   llamada visible es solo una flecha. Omitirlo retira las dos cosas: sin flecha, el nombre
   accesible del enlace es su propio texto (título y descripción), que ya se lee.
-- `outline` es la única variante con par `surface-dark-*` propio (fondo y borde cambian sobre
+- `outline` es el único tono con par `surface-dark-*` propio (fondo y borde cambian sobre
   `.surface-dark`/`html.dark`).
 - `primary` usa el mismo patrón que `button.primary`: fondo lavanda (`color.accent-1`) con texto
   prussian (`color.primary`). No es `background: color.primary`, que coincidiría con

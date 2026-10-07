@@ -165,7 +165,7 @@ export function SiteNav({
                      Apagado va en neutro: la píldora de información sobre un
                      ítem que no lleva a ningún sitio se leería como una novedad
                      disponible. */
-                  <Tag variant={item.disabled ? 'neutral' : 'info'} className="site-nav__badge">
+                  <Tag tone={item.disabled ? 'neutral' : 'info'} className="site-nav__badge">
                     {item.badge}
                   </Tag>
                 )}

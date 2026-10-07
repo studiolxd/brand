@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { NumberBadge } from './NumberBadge';
-import type { NumberBadgeVariant } from './NumberBadge';
+import type { NumberBadgeTone } from './NumberBadge';
 import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const meta = {
   title: 'Atoms/NumberBadge',
   component: NumberBadge,
   parameters: { layout: 'padded' },
-  args: { count: 5, variant: 'primary' },
+  args: { count: 5, tone: 'primary' },
   argTypes: { className: { table: { disable: true } } },
 } satisfies Meta<typeof NumberBadge>;
 
@@ -17,15 +17,15 @@ type Story = StoryObj<typeof meta>;
 
 export const PorDefecto: Story = {};
 
-const VARIANTS: NumberBadgeVariant[] = [
-  'primary', 'accent-1', 'accent-2', 'support-1', 'support-2', 'danger', 'success', 'neutral',
+const VARIANTS: NumberBadgeTone[] = [
+  'primary', 'accent-1', 'accent-2', 'support-1', 'support-2', 'error', 'success', 'neutral',
 ];
 
 /** Las variantes son los colores de marca y los de feedback; el texto contrasta en todas. */
 export const Variantes: Story = {
   render: (args) => (
     <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-      {VARIANTS.map((v) => <NumberBadge key={v} {...args} variant={v} />)}
+      {VARIANTS.map((v) => <NumberBadge key={v} {...args} tone={v} />)}
     </div>
   ),
 };
@@ -71,7 +71,7 @@ export const SuperficieOscura: Story = {
   parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   render: (args) => (
     <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-      {VARIANTS.map((v) => <NumberBadge key={v} {...args} variant={v} />)}
+      {VARIANTS.map((v) => <NumberBadge key={v} {...args} tone={v} />)}
     </div>
   ),
 };

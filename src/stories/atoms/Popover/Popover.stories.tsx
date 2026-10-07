@@ -32,7 +32,7 @@ export const PorDefecto: Story = {
   args: {
     label: 'Detalles',
     trigger: <Button>Abrir popover</Button>,
-    children: <Paragraph size="small">Contenido libre dentro del panel flotante.</Paragraph>,
+    children: <Paragraph size="sm">Contenido libre dentro del panel flotante.</Paragraph>,
   },
 };
 
@@ -42,7 +42,7 @@ export const ConDotsButton: Story = {
   args: {
     label: 'Más opciones',
     trigger: <DotsButton aria-label="Más opciones" />,
-    children: <Paragraph size="small">Panel lanzado desde un DotsButton.</Paragraph>,
+    children: <Paragraph size="sm">Panel lanzado desde un DotsButton.</Paragraph>,
   },
 };
 
@@ -51,13 +51,13 @@ export const Posiciones: Story = {
   args: {
     label: 'Panel',
     trigger: <Button>bottom</Button>,
-    children: <Paragraph size="small">Panel</Paragraph>,
+    children: <Paragraph size="sm">Panel</Paragraph>,
   },
   render: () => (
     <div style={{ display: 'flex', gap: 'var(--spacing-4)', flexWrap: 'wrap', justifyContent: 'center' }}>
       {(['top', 'right', 'bottom', 'left'] as const).map((side) => (
         <Popover key={side} side={side} label={`Panel ${side}`} trigger={<Button>{side}</Button>}>
-          <Paragraph size="small">side=«{side}»</Paragraph>
+          <Paragraph size="sm">side=«{side}»</Paragraph>
         </Popover>
       ))}
     </div>
@@ -69,7 +69,7 @@ export const Controlado: Story = {
   args: {
     label: 'Panel',
     trigger: <Button>Disparador</Button>,
-    children: <Paragraph size="small">Panel</Paragraph>,
+    children: <Paragraph size="sm">Panel</Paragraph>,
   },
   render: () => {
     const [open, setOpen] = useState(false);
@@ -79,7 +79,7 @@ export const Controlado: Story = {
           {open ? 'Cerrar' : 'Abrir'} desde fuera
         </Button>
         <Popover open={open} onOpenChange={setOpen} label="Panel" trigger={<Button>Disparador</Button>}>
-          <Paragraph size="small">Modo controlado — open={String(open)}</Paragraph>
+          <Paragraph size="sm">Modo controlado — open={String(open)}</Paragraph>
         </Popover>
       </div>
     );
@@ -93,7 +93,7 @@ export const Contrato: Story = {
   args: {
     label: 'Detalles del proyecto',
     trigger: <Button>Abrir</Button>,
-    children: <Paragraph size="small">Contenido</Paragraph>,
+    children: <Paragraph size="sm">Contenido</Paragraph>,
   },
   play: async ({ canvasElement }) => {
     const trigger = within(canvasElement).getByRole('button', { name: 'Abrir' });

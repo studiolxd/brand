@@ -6,8 +6,12 @@ import { Heading, type HeadingLevel, type HeadingSize } from '../../atoms/Headin
 import { Paragraph, type ParagraphProps } from '../../atoms/Paragraph/Paragraph';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { assignRef } from '../../constants/assign-ref';
+import { warnDeprecated } from '../../constants/env';
 
-export type CardColor = 'primary' | 'outline' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
+/** Color de fondo de la tarjeta. */
+export type CardTone = 'primary' | 'outline' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
+/** @deprecated Usa `CardTone`: la prop de color se llama `tone` desde la v51. Se retira en la v52. */
+export type CardColor = CardTone;
 
 /**
  * Maqueta de la tarjeta. `default` es la de siempre: una columna de texto.
@@ -73,7 +77,12 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
    */
   ctaLabel?: string;
   /** Color de fondo. Default: `'outline'`. */
-  color?: CardColor;
+  tone?: CardTone;
+  /**
+   * @deprecated Usa `tone`. Sigue funcionando, con un aviso en desarrollo,
+   * hasta la v52.
+   */
+  color?: CardTone;
   /** Maqueta de la tarjeta. Default: `'default'`. */
   variant?: CardVariant;
   /**
@@ -131,7 +140,8 @@ export const Card = forwardRef<HTMLElement, CardProps>(function Card({
   title,
   description,
   ctaLabel,
-  color = 'outline',
+  tone: toneProp,
+  color,
   variant = 'default',
   media,
   linkOverlay = false,
@@ -141,9 +151,11 @@ export const Card = forwardRef<HTMLElement, CardProps>(function Card({
   children,
   ...rest
 }, ref) {
+  if (color !== undefined) warnDeprecated('Card', 'color', '`tone`');
+  const tone = toneProp ?? color ?? 'outline';
   const classes = [
     'card',
-    `card--${color}`,
+    `card--${tone}`,
     variant !== 'default' ? `card--${variant}` : '',
     linkOverlay ? 'card--link-overlay' : '',
     selectable ? 'card--selectable' : '',
@@ -311,7 +323,7 @@ export interface CardDescriptionProps extends Omit<ParagraphProps, 'children'> {
  * hereda el cuerpo de la superficie en la que viva la tarjeta.
  */
 export const CardDescription = forwardRef<HTMLParagraphElement, CardDescriptionProps>(
-  function CardDescription({ size = 'small', lines, className, children, ...rest }, ref) {
+  function CardDescription({ size = 'sm', lines, className, children, ...rest }, ref) {
     return (
       <Paragraph
         ref={ref}

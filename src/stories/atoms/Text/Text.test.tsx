@@ -35,6 +35,11 @@ describe('Text', () => {
     expect(screen.getByText('borra')).toHaveClass('text', 'text--destructive');
   });
 
+  it('`error` (un estado) tiene su propia clase, distinta de `destructive` (una acción)', () => {
+    render(<Text tone="error">no es válido</Text>);
+    expect(screen.getByText('no es válido')).toHaveClass('text', 'text--error');
+  });
+
   it('el tono por defecto no añade clase', () => {
     render(<Text>normal</Text>);
     expect(screen.getByText('normal').className).toBe('text');

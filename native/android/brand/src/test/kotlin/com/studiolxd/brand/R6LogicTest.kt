@@ -1,7 +1,7 @@
 package com.studiolxd.brand
 
 import androidx.compose.ui.input.key.Key
-import com.studiolxd.brand.components.banner.BannerVariant
+import com.studiolxd.brand.components.banner.BannerTone
 import com.studiolxd.brand.components.banner.interiorIsDark
 import com.studiolxd.brand.components.datepickerfield.dateOfMillis
 import com.studiolxd.brand.components.datepickerfield.formatPickedDate
@@ -135,8 +135,8 @@ class R6LogicTest {
 
     @Test
     fun onlyTheWarningBannerReadsOnTheLightFace() {
-        assertTrue(BannerVariant.Info.interiorIsDark())
-        assertTrue(BannerVariant.Error.interiorIsDark())
-        assertFalse(BannerVariant.Warning.interiorIsDark())
+        assertTrue(BannerTone.Info.interiorIsDark())
+        assertTrue(BannerTone.Error.interiorIsDark())
+        assertFalse(BannerTone.Warning.interiorIsDark())
     }
 }

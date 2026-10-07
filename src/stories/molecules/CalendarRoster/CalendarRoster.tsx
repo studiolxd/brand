@@ -1,6 +1,6 @@
 import { useId, useRef, type ComponentType, type MouseEvent, type ReactNode } from 'react';
 import { Tag } from '../../atoms/Tag/Tag';
-import type { TagVariant } from '../../atoms/Tag/Tag';
+import type { TagTone } from '../../atoms/Tag/Tag';
 import { PrevNextNav } from '../PrevNextNav/PrevNextNav';
 import { isSameDay, shiftMonth, useToday } from '../_shared/calendarGrid';
 import './CalendarRoster.css';
@@ -153,10 +153,10 @@ function getDaysInMonth(month: Date): Date[] {
   return Array.from({ length: total }, (_, i) => new Date(year, m, i + 1));
 }
 
-const CELL_TYPE_VARIANT: Record<Exclude<RosterCellType, 'schedule' | 'non-working'>, TagVariant> = {
+const CELL_TYPE_TONE: Record<Exclude<RosterCellType, 'schedule' | 'non-working'>, TagTone> = {
   holiday:  'neutral',
   vacation: 'info',
-  absence:  'danger',
+  absence:  'error',
   recovery: 'success',
   birthday: 'info',
 };
@@ -318,7 +318,7 @@ export function CalendarRoster({
                             <span className="calendar-roster__schedule">{cell.label}</span>
                           )}
                           {cell && cell.type !== 'schedule' && cell.type !== 'non-working' && (
-                            <Tag variant={CELL_TYPE_VARIANT[cell.type]}>
+                            <Tag tone={CELL_TYPE_TONE[cell.type]}>
                               {cell.type === 'birthday' ? `${birthdayPrefix}${cell.label}` : cell.label}
                             </Tag>
                           )}
@@ -344,7 +344,7 @@ export function CalendarRoster({
                   {label}
                 </>
               ) : (
-                <Tag variant={CELL_TYPE_VARIANT[type]}>{label}</Tag>
+                <Tag tone={CELL_TYPE_TONE[type]}>{label}</Tag>
               )}
             </span>
           ))}

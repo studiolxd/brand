@@ -1,6 +1,6 @@
 import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
-import { Tag, type TagVariant } from '../../atoms/Tag/Tag';
+import { Tag, type TagTone } from '../../atoms/Tag/Tag';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { statTileEs } from '../../messages/es/statTile';
@@ -62,9 +62,9 @@ const TONE_BY_DIRECTION: Record<StatTileDirection, StatTileTone> = {
   flat: 'neutral',
 };
 
-const TAG_VARIANT: Record<StatTileTone, TagVariant> = {
+const TAG_TONE: Record<StatTileTone, TagTone> = {
   positive: 'success',
-  negative: 'danger',
+  negative: 'error',
   neutral: 'neutral',
 };
 
@@ -109,7 +109,7 @@ export const StatTile = forwardRef<HTMLDivElement, StatTileProps>(function StatT
       <p className="stat-tile__value">{value}</p>
 
       {delta && (
-        <Tag variant={TAG_VARIANT[tone]} className="stat-tile__delta">
+        <Tag tone={TAG_TONE[tone]} className="stat-tile__delta">
           {/* La flecha es la misma del sistema, girada: arriba, abajo o en
               reposo. Decorativa — la dirección la dice el texto oculto. */}
           <Icon

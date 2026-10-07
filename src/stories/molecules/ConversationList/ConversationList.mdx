@@ -36,7 +36,7 @@ ella, con las piezas del sistema, y el botón de conversación nueva sigue estan
 | Estado | Prop | Qué pinta |
 |---|---|---|
 | Cargando | `isLoading` (y `loadingCount`, por defecto 4) | `Skeleton` en el hueco de las filas, y `aria-busy` en el `<nav>` |
-| Error | `error` (el mensaje) y `errorTitle` | `Alert variant="error"` |
+| Error | `error` (el mensaje) y `errorTitle` | `Alert tone="error"` |
 | Vacía | automático, con `emptyMessage` y `emptyDescription` | `EmptyState size="sm"` |
 
 La prioridad es **error → carga → vacía → lista**: un error tapa todo lo demás, aunque ya hubiera

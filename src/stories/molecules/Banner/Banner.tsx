@@ -2,6 +2,7 @@
 
 import { forwardRef } from 'react';
 import { CloseButton } from '../../atoms/CloseButton/CloseButton';
+import { warnDeprecated } from '../../constants/env';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { bannerEs } from '../../messages/es/banner';
 import './Banner.css';
@@ -16,7 +17,10 @@ export interface BannerMessages {
   dismiss: string;
 }
 
-export type BannerVariant = 'info' | 'warning' | 'error';
+/** Intención de la barra: decide el relleno y el rol ARIA. */
+export type BannerTone = 'info' | 'warning' | 'error';
+/** @deprecated Usa `BannerTone`: la prop de color se llama `tone` desde la v51. Se retira en la v52. */
+export type BannerVariant = BannerTone;
 
 export interface BannerProps extends React.ComponentPropsWithoutRef<'div'> {
   /**
@@ -24,7 +28,12 @@ export interface BannerProps extends React.ComponentPropsWithoutRef<'div'> {
    * relleno de aviso y `'error'` el de error, para el estado que hay que ver
    * antes que nada.
    */
-  variant?: BannerVariant;
+  tone?: BannerTone;
+  /**
+   * @deprecated Usa `tone`. Sigue funcionando, con un aviso en desarrollo,
+   * hasta la v52.
+   */
+  variant?: BannerTone;
   /** El mensaje. Texto corriente: una frase, no un bloque. */
   children?: React.ReactNode;
   /** Ranura para las acciones — normalmente un `Button` del sistema. */
@@ -44,11 +53,11 @@ export interface BannerProps extends React.ComponentPropsWithoutRef<'div'> {
 }
 
 /**
- * Rol ARIA por variante, el mismo criterio que en `Alert`: `error` y `warning`
+ * Rol ARIA por tono, el mismo criterio que en `Alert`: `error` y `warning`
  * interrumpen (`alert`, live assertive); `info` informa sin interrumpir
  * (`status`, live polite). El consumidor puede forzarlo con la prop `role`.
  */
-const ROLE_BY_VARIANT: Record<BannerVariant, 'alert' | 'status'> = {
+const ROLE_BY_TONE: Record<BannerTone, 'alert' | 'status'> = {
   info: 'status',
   warning: 'alert',
   error: 'alert',
@@ -67,14 +76,15 @@ const ROLE_BY_VARIANT: Record<BannerVariant, 'alert' | 'status'> = {
  * No fija su posición: `sticky` lo decide la aplicación con el layout del
  * sistema. Tampoco se oculta sola — `onDismiss` avisa y la app decide.
  *
- * El rol sale de la variante, como en `Alert`: `error` y `warning` interrumpen
+ * El rol sale del tono, como en `Alert`: `error` y `warning` interrumpen
  * (`alert`, live `assertive`) y `info` informa sin interrumpir (`status`, live
  * `polite`). Ambos se pueden sobrescribir.
  *
  * Extiende los atributos nativos de `<div>` y reenvía `{...rest}` al raíz.
  */
 export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner({
-  variant = 'info',
+  tone: toneProp,
+  variant,
   children,
   actions,
   onDismiss,
@@ -85,16 +95,18 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner({
   ...rest
 }, ref) {
   const t = useBrandMessages('banner', bannerEs);
-  const rol = role ?? ROLE_BY_VARIANT[variant];
+  if (variant !== undefined) warnDeprecated('Banner', 'variant', '`tone`');
+  const tone = toneProp ?? variant ?? 'info';
+  const rol = role ?? ROLE_BY_TONE[tone];
   const classes = [
     'banner',
-    `banner--${variant}`,
+    `banner--${tone}`,
     // Los rellenos oscuros y universales —el prusia de `info`, el rojo de
     // `error`— declaran su cara en la raíz: ninguno de sus tokens voltea con el
     // tema, así que lo que se componga dentro (el botón de las acciones, un
     // enlace, el aspa) toma la cara clara sin configurarlo. El aviso queda
     // fuera: su relleno es amarillo y su cara es la clara (`interiorSurface`).
-    variant === 'info' || variant === 'error' ? 'surface-dark' : '',
+    tone === 'info' || tone === 'error' ? 'surface-dark' : '',
     onDismiss ? 'banner--dismissible' : '',
     className ?? '',
   ]
@@ -105,7 +117,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner({
   // que cae dentro tiene que leer en oscuro también cuando la página es oscura
   // y la tinta ambiente es blanca — que es lo que declara `.surface-light`. No
   // va en la raíz: ahí es la superficie ambiente la que decide el relleno.
-  const interiorSurface = variant === 'warning' ? ' surface-light' : '';
+  const interiorSurface = tone === 'warning' ? ' surface-light' : '';
 
   return (
     <div

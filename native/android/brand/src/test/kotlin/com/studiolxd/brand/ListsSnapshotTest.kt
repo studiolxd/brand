@@ -14,7 +14,7 @@ import com.studiolxd.brand.components.list.BrandListItem
 import com.studiolxd.brand.components.list.ListType
 import com.studiolxd.brand.components.skeleton.FrozenSkeleton
 import com.studiolxd.brand.components.tag.BrandTag
-import com.studiolxd.brand.components.tag.TagVariant
+import com.studiolxd.brand.components.tag.TagTone
 import com.studiolxd.brand.components.text.BrandText
 import com.studiolxd.brand.components.text.TextTone
 import com.studiolxd.brand.icon.BrandIcon
@@ -76,7 +76,7 @@ class ListsSnapshotTest {
                 BrandListItem(
                     "Gastos del mes", subtitle = "Actualizado hoy",
                     leading = { BrandIcon(BrandIconName.Folder) },
-                    trailing = { BrandTag("Pagado", variant = TagVariant.Success) },
+                    trailing = { BrandTag("Pagado", tone = TagTone.Success) },
                 )
             }
             item("Cerrar sesión")
@@ -113,7 +113,7 @@ class ListsSnapshotTest {
     @Test
     fun tagVariants() = paparazzi.brandSnapshots {
         Column(verticalArrangement = Arrangement.spacedBy(BrandSpacing.s2)) {
-            TagVariant.entries.forEach { variant -> BrandTag(variant.value, variant = variant) }
+            TagTone.entries.forEach { tone -> BrandTag(tone.value, tone = tone) }
         }
     }
 
@@ -191,17 +191,17 @@ class ListsComparisonSnapshotTest {
     fun tag() {
         paparazzi.brandComparison("variants", 560, 114) {
             @Composable
-            fun tag(text: String, variant: TagVariant) = BrandTag(text, variant = variant)
+            fun tag(text: String, tone: TagTone) = BrandTag(text, tone = tone)
             Column(verticalArrangement = Arrangement.spacedBy(BrandSpacing.s2)) {
                 Row(horizontalArrangement = Arrangement.spacedBy(BrandSpacing.s2)) {
-                    tag("Diseño instruccional", TagVariant.Primary); tag("Formación presencial", TagVariant.Accent1); tag("Plataformas LMS", TagVariant.Accent2)
+                    tag("Diseño instruccional", TagTone.Primary); tag("Formación presencial", TagTone.Accent1); tag("Plataformas LMS", TagTone.Accent2)
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(BrandSpacing.s2)) {
-                    tag("Consultoría", TagVariant.Support1); tag("E-learning", TagVariant.Support2); tag("Por hacer", TagVariant.Neutral)
-                    tag("En progreso", TagVariant.Info); tag("En pausa", TagVariant.Warning)
+                    tag("Consultoría", TagTone.Support1); tag("E-learning", TagTone.Support2); tag("Por hacer", TagTone.Neutral)
+                    tag("En progreso", TagTone.Info); tag("En pausa", TagTone.Warning)
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(BrandSpacing.s2)) {
-                    tag("Completado", TagVariant.Success); tag("Cancelado", TagVariant.Danger)
+                    tag("Completado", TagTone.Success); tag("Cancelado", TagTone.Error)
                 }
             }
         }
@@ -245,8 +245,8 @@ class ListsLogicTest {
         assertEquals(listOf("unordered", "ordered", "plain"), ListType.entries.map { it.value })
         assertEquals(listOf("sm", "md"), EmptyStateSize.entries.map { it.value })
         assertEquals(
-            listOf("primary", "accent-1", "accent-2", "support-1", "support-2", "neutral", "info", "warning", "success", "danger"),
-            TagVariant.entries.map { it.value },
+            listOf("primary", "accent-1", "accent-2", "support-1", "support-2", "neutral", "info", "warning", "success", "error"),
+            TagTone.entries.map { it.value },
         )
     }
 }

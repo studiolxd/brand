@@ -11,9 +11,11 @@ Un contador: notificaciones sin leer, elementos en una lista, resultados. Redond
 
 <Canvas of={NumberBadgeStories.PorDefecto} />
 
-## Variantes
+## Tonos
 
-Los colores de marca (`primary`, `accent-1`, `accent-2`, `support-1`, `support-2`) y los de feedback (`danger`, `success`) más `neutral`. El texto lleva siempre el color que contrasta con el fondo; no hay que elegirlo.
+El color va en `tone`: los de marca (`primary`, `accent-1`, `accent-2`, `support-1`, `support-2`) y los de feedback (`error`, `success`) más `neutral`. El texto lleva siempre el color que contrasta con el fondo; no hay que elegirlo.
+
+Hasta la v50 esta prop se llamaba `variant`: sigue funcionando como alias obsoleto, con un aviso en desarrollo, y se retira en la v52. `variant="danger"` es `tone="error"`.
 
 <Canvas of={NumberBadgeStories.Variantes} />
 

@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
-import com.studiolxd.brand.components.banner.BannerVariant
+import com.studiolxd.brand.components.banner.BannerTone
 import com.studiolxd.brand.components.banner.BrandBannerImpl
 import com.studiolxd.brand.components.banner.PreviewBannerAction
 import com.studiolxd.brand.components.banner.PreviewBannerMessage
@@ -36,7 +36,7 @@ import com.studiolxd.brand.components.tabs.BrandTabs
 import com.studiolxd.brand.components.tabs.TabsOrientation
 import com.studiolxd.brand.components.tabs.TabsVariant
 import com.studiolxd.brand.components.tag.BrandTag
-import com.studiolxd.brand.components.tag.TagVariant
+import com.studiolxd.brand.components.tag.TagTone
 import com.studiolxd.brand.components.text.BrandParagraph
 import com.studiolxd.brand.components.text.HeadingLevel
 import com.studiolxd.brand.icon.BrandIconName
@@ -71,29 +71,29 @@ class R6ComparisonSnapshotTest {
     // ── Banner: a ancho completo, sin margen ─────────────────────────────────────────────────────────────────────────
 
     @Composable
-    private fun BannerPair(variant: BannerVariant, text: String, action: String?, dismiss: Boolean) {
+    private fun BannerPair(tone: BannerTone, text: String, action: String?, dismiss: Boolean) {
         Box(Modifier.bleed()) {
             BrandBannerImpl(
-                Modifier, variant, if (action != null) ({ PreviewBannerAction(action) }) else null,
+                Modifier, tone, if (action != null) ({ PreviewBannerAction(action) }) else null,
                 if (dismiss) ({}) else null, "Descartar", ReactMd,
             ) { androidx.compose.foundation.text.BasicText(text, style = com.studiolxd.brand.support.LocalBrandTextStyle.current) }
         }
     }
 
     @Test
-    fun bannerInfo() = paparazzi.brandComparison("banner-info", 480, 82) { BannerPair(BannerVariant.Info, PreviewBannerMessage, null, false) }
+    fun bannerInfo() = paparazzi.brandComparison("banner-info", 480, 82) { BannerPair(BannerTone.Info, PreviewBannerMessage, null, false) }
 
     @Test
-    fun bannerWarning() = paparazzi.brandComparison("banner-aviso", 480, 106) { BannerPair(BannerVariant.Warning, PreviewBannerNotice, null, false) }
+    fun bannerWarning() = paparazzi.brandComparison("banner-aviso", 480, 106) { BannerPair(BannerTone.Warning, PreviewBannerNotice, null, false) }
 
     @Test
-    fun bannerError() = paparazzi.brandComparison("banner-error", 480, 130) { BannerPair(BannerVariant.Error, PreviewBannerMessage, "Dejar de suplantar", false) }
+    fun bannerError() = paparazzi.brandComparison("banner-error", 480, 130) { BannerPair(BannerTone.Error, PreviewBannerMessage, "Dejar de suplantar", false) }
 
     @Test
-    fun bannerAction() = paparazzi.brandComparison("banner-accion", 480, 130) { BannerPair(BannerVariant.Info, PreviewBannerMessage, "Dejar de suplantar", false) }
+    fun bannerAction() = paparazzi.brandComparison("banner-accion", 480, 130) { BannerPair(BannerTone.Info, PreviewBannerMessage, "Dejar de suplantar", false) }
 
     @Test
-    fun bannerDismiss() = paparazzi.brandComparison("banner-cierre", 480, 154) { BannerPair(BannerVariant.Info, PreviewBannerMessage, "Dejar de suplantar", true) }
+    fun bannerDismiss() = paparazzi.brandComparison("banner-cierre", 480, 154) { BannerPair(BannerTone.Info, PreviewBannerMessage, "Dejar de suplantar", true) }
 
     // ── Tabs ─────────────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -194,12 +194,12 @@ class R6ComparisonSnapshotTest {
             IntroPair(
                 "Automatizaciones",
                 "Reglas que se disparan solas cuando algo cambia en la organización.",
-                eyebrow = { BrandTag("Beta", variant = TagVariant.Info) },
+                eyebrow = { BrandTag("Beta", tone = TagTone.Info) },
                 content = { BrandParagraph("Disponible solo para el plan Studio.") },
             )
             IntroPair(
                 "Webhooks",
-                eyebrow = { BrandTag("Beta", variant = TagVariant.Info) },
+                eyebrow = { BrandTag("Beta", tone = TagTone.Info) },
                 actions = { BrandButton("Crear webhook", onClick = {}) },
             )
         }

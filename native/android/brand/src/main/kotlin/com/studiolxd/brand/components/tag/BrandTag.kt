@@ -16,8 +16,8 @@ import com.studiolxd.brand.support.ProvideBrandContent
 import com.studiolxd.brand.support.brandBaseTextStyle
 import com.studiolxd.brand.tokens.BrandTagTokens as T
 
-/** `Tag` `variant`: la variante de color. Mismos casos y mismos valores que React. */
-enum class TagVariant(val value: String) {
+/** `Tag` `tone`: el color del tag. Mismos casos y mismos valores que React. */
+enum class TagTone(val value: String) {
     Primary("primary"),
     Accent1("accent-1"),
     Accent2("accent-2"),
@@ -27,35 +27,46 @@ enum class TagVariant(val value: String) {
     Info("info"),
     Warning("warning"),
     Success("success"),
-    Danger("danger"),
+    Error("error"),
+    ;
+
+    companion object {
+        /** `danger` es `error` desde la v51 (el vocabulario de estado del sistema). Se retira en la v52. */
+        @Deprecated("`danger` es `error` desde la v51. Se retira en la v52.", ReplaceWith("TagTone.Error"))
+        val Danger: TagTone get() = Error
+    }
 }
 
+/** El nombre de [TagTone] hasta la v50. Se retira en la v52. */
+@Deprecated("La prop de color se llama `tone` desde la v51. Se retira en la v52.", ReplaceWith("TagTone"))
+typealias TagVariant = TagTone
+
 @Composable
-private fun TagVariant.background(): Color = when (this) {
-    TagVariant.Primary -> T.primaryBg
-    TagVariant.Accent1 -> T.accent1Bg
-    TagVariant.Accent2 -> T.accent2Bg
-    TagVariant.Support1 -> T.support1Bg
-    TagVariant.Support2 -> T.support2Bg
-    TagVariant.Neutral -> T.neutralBg
-    TagVariant.Info -> T.infoBg
-    TagVariant.Warning -> T.warningBg
-    TagVariant.Success -> T.successBg
-    TagVariant.Danger -> T.dangerBg
+private fun TagTone.background(): Color = when (this) {
+    TagTone.Primary -> T.primaryBg
+    TagTone.Accent1 -> T.accent1Bg
+    TagTone.Accent2 -> T.accent2Bg
+    TagTone.Support1 -> T.support1Bg
+    TagTone.Support2 -> T.support2Bg
+    TagTone.Neutral -> T.neutralBg
+    TagTone.Info -> T.infoBg
+    TagTone.Warning -> T.warningBg
+    TagTone.Success -> T.successBg
+    TagTone.Error -> T.dangerBg
 }.current
 
 @Composable
-private fun TagVariant.foreground(): Color = when (this) {
-    TagVariant.Primary -> T.primaryColor
-    TagVariant.Accent1 -> T.accent1Color
-    TagVariant.Accent2 -> T.accent2Color
-    TagVariant.Support1 -> T.support1Color
-    TagVariant.Support2 -> T.support2Color
-    TagVariant.Neutral -> T.neutralColor
-    TagVariant.Info -> T.infoColor
-    TagVariant.Warning -> T.warningColor
-    TagVariant.Success -> T.successColor
-    TagVariant.Danger -> T.dangerColor
+private fun TagTone.foreground(): Color = when (this) {
+    TagTone.Primary -> T.primaryColor
+    TagTone.Accent1 -> T.accent1Color
+    TagTone.Accent2 -> T.accent2Color
+    TagTone.Support1 -> T.support1Color
+    TagTone.Support2 -> T.support2Color
+    TagTone.Neutral -> T.neutralColor
+    TagTone.Info -> T.infoColor
+    TagTone.Warning -> T.warningColor
+    TagTone.Success -> T.successColor
+    TagTone.Error -> T.dangerColor
 }.current
 
 /**
@@ -66,34 +77,34 @@ private fun TagVariant.foreground(): Color = when (this) {
  * Es solo texto: TalkBack lo lee como una frase más (no es un control), igual que el `<span>` de React.
  *
  * ```kotlin
- * BrandTag("Administrador", variant = TagVariant.Primary)
- * BrandTag("Pagado", variant = TagVariant.Success)
+ * BrandTag("Administrador", tone = TagTone.Primary)
+ * BrandTag("Pagado", tone = TagTone.Success)
  * ```
  */
 @Composable
 fun BrandTag(
     text: String,
     modifier: Modifier = Modifier,
-    variant: TagVariant = TagVariant.Neutral,
+    tone: TagTone = TagTone.Neutral,
 ) {
-    BrandTag(modifier, variant) { BrandBasicText(text, style = LocalBrandTextStyle.current, maxLines = 1, softWrap = false, overflow = TextOverflow.Clip) }
+    BrandTag(modifier, tone) { BrandBasicText(text, style = LocalBrandTextStyle.current, maxLines = 1, softWrap = false, overflow = TextOverflow.Clip) }
 }
 
 /** Un [BrandTag] con contenido propio (un texto con icono, por ejemplo). Hereda color y tipografía de la etiqueta. */
 @Composable
 fun BrandTag(
     modifier: Modifier = Modifier,
-    variant: TagVariant = TagVariant.Neutral,
+    tone: TagTone = TagTone.Neutral,
     content: @Composable () -> Unit,
 ) {
-    val foreground = variant.foreground()
+    val foreground = tone.foreground()
     ProvideBrandContent(
         color = foreground,
         textStyle = brandBaseTextStyle(T.fontSize, T.fontWeight, T.lineHeight, color = foreground),
     ) {
         Box(
             modifier = modifier
-                .background(variant.background(), RoundedCornerShape(T.borderRadius))
+                .background(tone.background(), RoundedCornerShape(T.borderRadius))
                 .padding(vertical = T.paddingBlock, horizontal = T.paddingInline)
                 .semantics(mergeDescendants = true) { },
         ) {
@@ -103,3 +114,13 @@ fun BrandTag(
         }
     }
 }
+
+/** `variant` es `tone` desde la v51. Se retira en la v52. */
+@Deprecated("`variant` es `tone` desde la v51. Se retira en la v52.", ReplaceWith("BrandTag(text, modifier, tone = variant)"))
+@Composable
+fun BrandTag(text: String, variant: TagTone, modifier: Modifier = Modifier) = BrandTag(text, modifier, variant)
+
+/** `variant` es `tone` desde la v51. Se retira en la v52. */
+@Deprecated("`variant` es `tone` desde la v51. Se retira en la v52.", ReplaceWith("BrandTag(modifier, tone = variant, content = content)"))
+@Composable
+fun BrandTag(variant: TagTone, modifier: Modifier = Modifier, content: @Composable () -> Unit) = BrandTag(modifier, variant, content)

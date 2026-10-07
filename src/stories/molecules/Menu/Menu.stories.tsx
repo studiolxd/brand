@@ -220,7 +220,7 @@ export const ItemDeCuentaConNodo: Story = {
         label: 'Ana García',
         description: (
           <>
-            ana.garcia@studiolxd.com <Tag variant="primary">Principal</Tag>
+            ana.garcia@studiolxd.com <Tag tone="primary">Principal</Tag>
           </>
         ),
         icon: <Avatar name="Ana García" alt="" size="sm" />,

@@ -148,27 +148,37 @@ public struct BrandHeading: View {
 
 // MARK: - Paragraph
 
-/// `Paragraph` `size`: `small` para notas y metadatos, `large` para entradillas.
+/// `Paragraph` `size`: `sm` para notas y metadatos, `md` (el cuerpo) para leer, `lg` para entradillas.
 public enum ParagraphSize: String, CaseIterable, Sendable {
-    case small, `default`, large
+    case sm, md, lg
+
+    /// `small` es `sm` desde la v51 (las tallas se escriben `xs`…`4xl`). Se retira en la v52.
+    @available(*, deprecated, renamed: "sm")
+    public static let small = ParagraphSize.sm
+    /// `default` es `md` desde la v51. Se retira en la v52.
+    @available(*, deprecated, renamed: "md")
+    public static let `default` = ParagraphSize.md
+    /// `large` es `lg` desde la v51. Se retira en la v52.
+    @available(*, deprecated, renamed: "lg")
+    public static let large = ParagraphSize.lg
 }
 
-/// Un párrafo de la marca: el cuerpo del sistema (16 pt) y, en `small` y `large`, un peldaño por debajo y por encima.
+/// Un párrafo de la marca: el cuerpo del sistema (16 pt) y, en `sm` y `lg`, un peldaño por debajo y por encima.
 ///
 /// ```swift
 /// BrandParagraph("Revisa los datos antes de continuar.")
-/// BrandParagraph("Última actualización: hoy", size: .small)
+/// BrandParagraph("Última actualización: hoy", size: .sm)
 /// ```
 public struct BrandParagraph: View {
     private let content: Text
     private let size: ParagraphSize
 
-    public init(_ text: LocalizedStringKey, size: ParagraphSize = .default) {
+    public init(_ text: LocalizedStringKey, size: ParagraphSize = .md) {
         content = Text(text)
         self.size = size
     }
 
-    public init(verbatim text: String, size: ParagraphSize = .default) {
+    public init(verbatim text: String, size: ParagraphSize = .md) {
         content = Text(verbatim: text)
         self.size = size
     }
@@ -178,7 +188,7 @@ public struct BrandParagraph: View {
     /// ```swift
     /// BrandParagraph(Text("Al confirmar se ") + Text("borran").brand(.strong, tone: .destructive) + Text(" las respuestas."))
     /// ```
-    public init(_ content: Text, size: ParagraphSize = .default) {
+    public init(_ content: Text, size: ParagraphSize = .md) {
         self.content = content
         self.size = size
     }
@@ -187,13 +197,13 @@ public struct BrandParagraph: View {
         let points: CGFloat
         let lineHeight: CGFloat
         switch size {
-        case .small:
+        case .sm:
             points = BrandTextTokens.paragraphSmallFontSize
             lineHeight = BrandTextTokens.paragraphSmallLineHeight
-        case .default:
+        case .md:
             points = BrandTextTokens.fontSize
             lineHeight = BrandTextTokens.lineHeight
-        case .large:
+        case .lg:
             points = BrandTextTokens.paragraphLargeFontSize
             lineHeight = BrandTextTokens.paragraphLargeLineHeight
         }
@@ -214,10 +224,11 @@ public enum TextElement: String, CaseIterable, Sendable {
     case span, em, strong, del, s
 }
 
-/// `Text` `tone`: la intención del fragmento. `destructive` dice que algo se pierde, `success` que salió bien y
-/// `muted` marca una aclaración secundaria. Es color de texto, nunca un relleno.
+/// `Text` `tone`: la intención del fragmento. `error` es un estado que ha fallado, `destructive` avisa de una acción
+/// que hace perder algo, `success` dice que salió bien y `muted` marca una aclaración secundaria. `error` y
+/// `destructive` comparten tinta; cambia lo que dicen. Es color de texto, nunca un relleno.
 public enum TextTone: String, CaseIterable, Sendable {
-    case `default`, muted, destructive, success
+    case `default`, muted, error, destructive, success
 }
 
 extension Text {
@@ -245,6 +256,7 @@ extension Text {
         switch tone {
         case .default: return struck ? text.foregroundStyle(BrandTextInlineTokens.strikethroughColor) : text
         case .muted: return text.foregroundStyle(BrandTextInlineTokens.mutedColor)
+        case .error: return text.foregroundStyle(BrandTextInlineTokens.errorColor)
         case .destructive: return text.foregroundStyle(BrandTextInlineTokens.destructiveColor)
         case .success: return text.foregroundStyle(BrandTextInlineTokens.successColor)
         }
@@ -293,8 +305,8 @@ public struct BrandText: View {
         }
         BrandHeading("Un h2 con tamaño de h5", level: .h2, size: .s4)
         BrandParagraph("Párrafo de tamaño normal con texto de ejemplo.")
-        BrandParagraph("Párrafo pequeño para notas.", size: .small)
-        BrandParagraph("Párrafo grande para entradillas.", size: .large)
+        BrandParagraph("Párrafo pequeño para notas.", size: .sm)
+        BrandParagraph("Párrafo grande para entradillas.", size: .lg)
         (Text("Esta acción ") + Text("borra").brand(.strong, tone: .destructive) + Text(" el curso. ")
             + Text("Aclaración").brand(.em, tone: .muted))
             .font(.brand(.body))

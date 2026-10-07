@@ -13,7 +13,7 @@ const meta: Meta<typeof Banner> = {
     layout: 'fullscreen',
   },
   argTypes: {
-    variant: {
+    tone: {
       control: { type: 'inline-radio' },
       options: ['info', 'warning', 'error'],
       description: 'Intención de la barra.',
@@ -22,7 +22,7 @@ const meta: Meta<typeof Banner> = {
     onDismiss: { control: false },
   },
   args: {
-    variant: 'info',
+    tone: 'info',
     children: 'Estás viendo la aplicación como ana.perez@studiolxd.com.',
   },
 };
@@ -43,7 +43,7 @@ export const PorDefecto: Story = {};
  */
 export const Aviso: Story = {
   args: {
-    variant: 'warning',
+    tone: 'warning',
     children: 'El mantenimiento previsto empieza hoy a las 22:00 y durará una hora.',
   },
 };
@@ -57,7 +57,7 @@ export const Aviso: Story = {
 export const VarianteError: Story = {
   name: 'Error',
   args: {
-    variant: 'error',
+    tone: 'error',
     children: 'Estás viendo la aplicación como ana.perez@studiolxd.com.',
     actions: <Button variant="outline" size="sm">Dejar de suplantar</Button>,
   },
@@ -91,7 +91,7 @@ export const ConCierre: Story = {
 export const AvisoConCierre: Story = {
   name: 'Aviso con cierre',
   args: {
-    variant: 'warning',
+    tone: 'warning',
     children: 'El mantenimiento previsto empieza hoy a las 22:00 y durará una hora.',
     actions: <Button variant="outline" size="sm">Ver detalles</Button>,
     onDismiss: fn(),
@@ -125,10 +125,10 @@ export const ContratoTintaDeLasAcciones: Story = {
   parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   render: () => (
     <>
-      <Banner variant="warning" actions={<Button variant="outline" size="sm">Ver detalles</Button>}>
+      <Banner tone="warning" actions={<Button variant="outline" size="sm">Ver detalles</Button>}>
         El mantenimiento previsto empieza hoy a las 22:00.
       </Banner>
-      <Banner variant="error" actions={<Button variant="outline" size="sm">Dejar de suplantar</Button>}>
+      <Banner tone="error" actions={<Button variant="outline" size="sm">Dejar de suplantar</Button>}>
         Estás viendo la aplicación como ana.perez@studiolxd.com.
       </Banner>
       <span data-sonda="prusia" style={{ color: 'var(--color-primary)' }} />
@@ -163,8 +163,8 @@ export const Contrato: Story = {
   render: () => (
     <>
       <Banner data-uso="prueba" className="extra">Por defecto</Banner>
-      <Banner variant="warning">Aviso</Banner>
-      <Banner variant="error">Error</Banner>
+      <Banner tone="warning">Aviso</Banner>
+      <Banner tone="error">Error</Banner>
     </>
   ),
   play: async ({ canvasElement }) => {

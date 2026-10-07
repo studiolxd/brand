@@ -99,7 +99,7 @@ export function CodeBlock({
   ].filter(Boolean).join(' ');
 
   const languageTag = language && (
-    <Tag variant="neutral" className="code-block__language">{language}</Tag>
+    <Tag tone="neutral" className="code-block__language">{language}</Tag>
   );
 
   const copyButton = copyable && (

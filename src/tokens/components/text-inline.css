@@ -5,7 +5,8 @@
 :root {
   --text-inline-emphasis-font-weight: var(--font-weight-emphasis); /** Peso del énfasis fuerte en línea */
   --text-inline-muted-color: var(--color-text-muted-on-light); /** Texto secundario en línea: una aclaración, un metadato */
-  --text-inline-destructive-color: var(--color-destructive-text-on-light); /** Énfasis en línea con intención destructiva: la palabra que dice que algo se pierde. Es tinta sobre la superficie, nunca un relleno */
+  --text-inline-error-color: var(--color-error-text-on-light); /** Énfasis en línea de error: un estado que ha fallado («cupón rechazado»). Es tinta sobre la superficie, nunca un relleno */
+  --text-inline-destructive-color: var(--color-destructive-text-on-light); /** Énfasis en línea con intención destructiva: la palabra que avisa de que una acción hace perder algo («esta acción **borra** el curso»). Es tinta sobre la superficie, nunca un relleno */
   --text-inline-success-color: var(--color-success-text-on-light); /** Énfasis en línea con intención de logro */
   --text-inline-strikethrough-color: var(--color-text-muted-on-light); /** Texto tachado: lo que ya está hecho (un producto en el carrito) o ya no vale. Atenuado como el texto secundario; con un `tone` manda el tono */
   --text-inline-strikethrough-thickness: var(--border-width-default); /** Grosor de la línea del tachado: el de los demás trazos del sistema */
@@ -17,6 +18,7 @@
 html.dark {
   --text-inline-strikethrough-color: var(--color-text-muted-on-dark); /** Texto tachado — surface-dark */
   --text-inline-muted-color: var(--color-text-muted-on-dark); /** Texto secundario en línea — surface-dark */
+  --text-inline-error-color: var(--color-error-text-on-dark); /** Énfasis de error — surface-dark */
   --text-inline-destructive-color: var(--color-destructive-text-on-dark); /** Énfasis destructivo — surface-dark */
   --text-inline-success-color: var(--color-success-text-on-dark); /** Énfasis de logro — surface-dark */
 }

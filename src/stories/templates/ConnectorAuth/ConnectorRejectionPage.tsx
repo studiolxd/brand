@@ -162,7 +162,7 @@ export function ConnectorRejectionPage({
       description={description}
       intro={
         code !== undefined ? (
-          <Paragraph size="small">
+          <Paragraph size="sm">
             {t('code', codeLabel)}: <Code>{code}</Code>
           </Paragraph>
         ) : undefined
@@ -177,7 +177,7 @@ export function ConnectorRejectionPage({
       className={className}
     >
       <Stack align="stretch">
-        <Paragraph size="large">{hint}</Paragraph>
+        <Paragraph size="lg">{hint}</Paragraph>
         {salida}
       </Stack>
     </ConnectorAuthShell>

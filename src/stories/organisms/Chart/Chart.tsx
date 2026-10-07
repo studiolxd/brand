@@ -981,7 +981,7 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
             {(isSlice ? rows.map((row, i) => ({ key: String(xValue(row, xKey)), label: fmtX(xValue(row, xKey)), index: i, color: undefined as string | undefined }))
               : series.map((s, i) => ({ key: s.key, label: s.label, index: i, color: s.color }))
             ).map((item) => (
-              <Tag key={item.key} variant="neutral" className={`chart__legend-item${isMuted(item.key) ? ' chart__legend-item--muted' : ''}`}>
+              <Tag key={item.key} tone="neutral" className={`chart__legend-item${isMuted(item.key) ? ' chart__legend-item--muted' : ''}`}>
                 <ChartSwatch
                   className={`chart__legend-swatch${type === 'line' ? ' chart__legend-swatch--line' : ''}`}
                   index={item.index}
