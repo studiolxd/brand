@@ -109,6 +109,34 @@ final class OverlaysSnapshotTests: XCTestCase {
         assertBrandSnapshots(view, width: 360, height: 190, named: "compare-toasts", padding: 0)
     }
 
+    /// La story «Apilado» del Toaster (`Molecules/Toast`): tres avisos —neutro, éxito y error, el más nuevo delante—
+    /// en la esquina de abajo a la derecha de un lienzo del ancho del viewport de la captura de React (480) y de su
+    /// alto, sin margen: la pila se coloca sola con sus `toast.inset-*`, como la región fija de la web.
+    private func toasterLikeStory(expand: Bool) -> some View {
+        let center = ToastCenter()
+        center.show("Primer aviso", duration: .infinity)
+        center.show("Segundo aviso", intent: .success, duration: .infinity)
+        center.show("Tercer aviso", intent: .error, duration: .infinity)
+        return ToastStack(
+            center: center, position: .bottomRight, closeButton: true, closeLabel: "Cerrar", containerLabel: "Notificaciones",
+            gap: BrandToastTokens.gap, visibleToasts: 3, expand: expand
+        )
+    }
+
+    func testComparisonToaster() {
+        assertBrandSnapshots(toasterLikeStory(expand: true), width: 480, height: 240, named: "compare-toaster-desplegado", padding: 0)
+        assertBrandSnapshots(toasterLikeStory(expand: false), width: 480, height: 140, named: "compare-toaster-recogido", padding: 0)
+    }
+
+    /// Las stories «Por defecto», «Compacto» y «Grande» de `Atoms/CloseButton`: el aspa en la esquina, con los 16 pt de
+    /// margen de la story (`layout: 'padded'`) y el alto de su captura.
+    func testComparisonCloseButton() {
+        let cases: [(BrandControlSize, String, CGFloat)] = [(.md, "por-defecto", 72), (.sm, "compacto", 67), (.lg, "grande", 80)]
+        for (size, name, height) in cases {
+            assertBrandSnapshots(BrandCloseButton(size: size) {}, width: 480, height: height, named: "compare-closebutton-\(name)", padding: 16)
+        }
+    }
+
     // MARK: Toast
 
     private func item(_ intent: ToastIntent, action: Bool = false) -> ToastItem {

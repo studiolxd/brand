@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
@@ -209,4 +210,29 @@ class OverlaysComparisonSnapshotTest {
             }
         }
     }
+
+    /**
+     * La story «Apilado» del Toaster (`Molecules/Toast`): tres avisos —neutro, éxito y error, el más nuevo delante— en
+     * la esquina de abajo a la derecha de un lienzo del ancho del viewport de la captura de React (480) y de su alto.
+     * Sin el margen del lienzo: la pila se coloca sola con sus `toast.inset-*`, como la región fija de la web.
+     */
+    @Composable
+    private fun ToasterPair(expand: Boolean, heightDp: Int) {
+        val center = remember {
+            ToastCenter().apply {
+                message("Primer aviso", duration = Duration.INFINITE)
+                success("Segundo aviso", duration = Duration.INFINITE)
+                error("Tercer aviso", duration = Duration.INFINITE)
+            }
+        }
+        androidx.compose.runtime.CompositionLocalProvider(LocalToastEntrance provides false) {
+            Box(Modifier.fillMaxWidth().height((heightDp - 32).dp).bleed()) { ToastHost(center = center, expand = expand) }
+        }
+    }
+
+    @Test
+    fun toasterExpanded() = paparazzi.brandComparison("toaster-desplegado", 480, 240) { ToasterPair(expand = true, heightDp = 240) }
+
+    @Test
+    fun toasterCollapsed() = paparazzi.brandComparison("toaster-recogido", 480, 140) { ToasterPair(expand = false, heightDp = 140) }
 }

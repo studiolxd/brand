@@ -2,7 +2,7 @@
 // Captura una story de Storybook en claro u oscuro, para compararla con la captura de SwiftUI.
 //
 //   node native/apple/scripts/capture-story.mjs <storyId> <salida.png> [--dark] [--args "k:v;k2:v2"]
-//        [--width 480] [--selector "#storybook-root"] [--click "#storybook-root button"] [--pad 16] [--height 800] [--scale 2] [--url http://localhost:6006]
+//        [--width 480] [--selector "#storybook-root"] [--click "#storybook-root button"] [--hide "#storybook-root"] [--pad 16] [--height 800] [--scale 2] [--url http://localhost:6006]
 //
 // Requiere el Storybook en marcha (`pnpm storybook`). `storyId` es el de la URL (`atoms-button--primary`).
 // Recorta al elemento de la story (con 16 px de margen) y fija el factor de escala, para que las parejas
@@ -29,6 +29,7 @@ const scale = Number(opt('scale', 2));
 const selector = opt('selector', '#storybook-root');
 const args = opt('args', '');
 const click = opt('click', '');
+const hide = opt('hide', '');
 const pad = Number(opt('pad', 16));
 
 const params = new URLSearchParams({ id: storyId, viewMode: 'story' });
@@ -41,7 +42,14 @@ try {
   await page.goto(`${base}/iframe.html?${params}`, { waitUntil: 'networkidle' });
   await page.waitForSelector('#storybook-root > *', { timeout: 20000 });
   // Un portal (Sheet, Modal…) no existe hasta que algo lo abre: `--click` pulsa el disparador de la story.
-  if (click) await page.locator(click).first().click();
+  if (click) {
+    await page.locator(click).first().click();
+    // El puntero sale del lienzo: si se queda sobre el portal lo «hoverea» (la pila del Toaster se desplegaría).
+    await page.mouse.move(0, 0);
+  }
+  // `--hide` quita de la foto lo que la story pinta para abrir el portal (el botón que lanza los avisos del Toaster)
+  // sin sacarlo de la maqueta: `visibility: hidden`, por CSSOM.
+  if (hide) await page.evaluate((sel) => document.querySelectorAll(sel).forEach((el) => el.style.setProperty('visibility', 'hidden')), hide);
   await page.waitForSelector(selector, { timeout: 20000 });
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(400);
