@@ -25,7 +25,7 @@ public enum TagTone: String, CaseIterable, Sendable {
         case .info: (T.infoBg, T.infoColor)
         case .warning: (T.warningBg, T.warningColor)
         case .success: (T.successBg, T.successColor)
-        case .error: (T.dangerBg, T.dangerColor)
+        case .error: (T.errorBg, T.errorColor)
         }
     }
 }

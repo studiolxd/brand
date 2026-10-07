@@ -16,7 +16,7 @@
   --message-bubble-font-weight: var(--font-weight-default); /** Peso tipográfico */
   --message-bubble-color: var(--color-text-on-light); /** Tinta del mensaje. La misma para los dos emisores: el globo no tiene relleno, así que el texto va sobre la superficie */
   --message-bubble-border-color: var(--color-text-on-light); /** Contorno del globo. Único separador del mensaje: no hay relleno ni sombra */
-  --message-bubble-tail-fill: var(--color-background-light); /** Color con el que se vacía la cola: el de la superficie que hay detrás del globo. Es lo que interrumpe el borde donde nace la cola y deja el triángulo en puro contorno. Si el hilo vive sobre otra superficie, se repunta aquí */
+  --message-bubble-tail-fill: var(--color-bg-light); /** Color con el que se vacía la cola: el de la superficie que hay detrás del globo. Es lo que interrumpe el borde donde nace la cola y deja el triángulo en puro contorno. Si el hilo vive sobre otra superficie, se repunta aquí */
 }
 
 .surface-dark,
@@ -25,5 +25,5 @@
 html.dark {
   --message-bubble-color: var(--color-text-on-dark); /** Tinta del mensaje — superficie oscura */
   --message-bubble-border-color: var(--color-text-on-dark); /** Contorno del globo — superficie oscura */
-  --message-bubble-tail-fill: var(--color-background-dark); /** Vaciado de la cola — superficie oscura */
+  --message-bubble-tail-fill: var(--color-bg-dark); /** Vaciado de la cola — superficie oscura */
 }

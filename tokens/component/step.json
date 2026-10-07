@@ -11,7 +11,7 @@
     "font-size-md":  { "$value": "{font-size.1}",         "$type": "dimension", "$description": "14px — cifra en marca `md`" },
     "font-weight":   { "$value": "{font-weight.default}", "$type": "number",    "$description": "Peso de la cifra: dentro de una marca rellena de otro color el peso no señala nada — el estado ya lo dicen el relleno y el filete" },
 
-    "pending-bg":            { "$value": "{color.background.light}",         "$type": "color", "$description": "Fondo de una marca hueca (`pending`): el lienzo de la página. Tiene que tapar el carril igual que una marca rellena — transparente, la línea lo cruzaría por la mitad" },
+    "pending-bg":            { "$value": "{color.bg.light}",         "$type": "color", "$description": "Fondo de una marca hueca (`pending`): el lienzo de la página. Tiene que tapar el carril igual que una marca rellena — transparente, la línea lo cruzaría por la mitad" },
     "pending-border-color":  { "$value": "{color.border.default-on-light}",  "$type": "color", "$description": "Filete de una marca hueca: el borde general del sistema" },
     "pending-color":         { "$value": "{color.text.muted-on-light}",      "$type": "color", "$description": "Cifra de una marca hueca: texto secundario" },
 
@@ -25,8 +25,8 @@
     "tone-support-1-color":{ "$value": "{color.text.on-light}",                "$type": "color", "$description": "Tinta sobre support-1" },
     "tone-support-2-bg":   { "$value": "{color.support-2}",                    "$type": "color", "$description": "Relleno tono support-2 (cayenne)" },
     "tone-support-2-color":{ "$value": "{color.text.on-light}",                "$type": "color", "$description": "Tinta sobre support-2" },
-    "tone-danger-bg":      { "$value": "{color.error-fill}",                   "$type": "color", "$description": "Relleno tono danger" },
-    "tone-danger-color":   { "$value": "{color.error-fill-text}",              "$type": "color", "$description": "Tinta sobre danger" },
+    "tone-error-bg":      { "$value": "{color.error-fill}",                   "$type": "color", "$description": "Relleno tono error", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["step.tone-danger-bg"] } } },
+    "tone-error-color":   { "$value": "{color.error-fill-text}",              "$type": "color", "$description": "Tinta sobre error", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["step.tone-danger-color"] } } },
     "tone-success-bg":     { "$value": "{color.success-fill}",                 "$type": "color", "$description": "Relleno tono success" },
     "tone-success-color":  { "$value": "{color.success-fill-text}",            "$type": "color", "$description": "Tinta sobre success" },
     "tone-neutral-bg":     { "$value": "{color.surface.inverse-on-light}",     "$type": "color", "$description": "Relleno tono neutral (gris oscuro)" },
@@ -41,7 +41,7 @@
     "transition-duration": { "$value": "{motion.duration.fast}", "$type": "number", "$description": "Duración del cambio de fondo de la marca (un paso que pasa a completado, o vuelve a pendiente)" },
     "transition-easing":   { "$value": "{motion.easing.default}","$type": "string", "$description": "Curva del cambio de fondo" },
 
-    "surface-dark-pending-bg":           { "$value": "{color.background.dark}",    "$type": "color", "$description": "Fondo de la marca hueca — surface-dark" },
+    "surface-dark-pending-bg":           { "$value": "{color.bg.dark}",    "$type": "color", "$description": "Fondo de la marca hueca — surface-dark" },
     "surface-dark-pending-border-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Filete de la marca hueca — surface-dark" },
     "surface-dark-pending-color":        { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Cifra de la marca hueca — surface-dark" },
 

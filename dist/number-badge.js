@@ -6,17 +6,17 @@ function n({ count: n, tone: r, variant: i, max: a = 99, "aria-label": o, "aria-
 	i !== void 0 && e("NumberBadge", "variant", "`tone`");
 	let l = r ?? i ?? "primary";
 	l === "danger" && (e("NumberBadge", "variant=\"danger\"", "`tone=\"error\"`"), l = "error");
-	let u = l === "error" ? "danger" : l, d = n > a ? `${a}+` : String(n), f = s === !0 || s === "true";
+	let u = n > a ? `${a}+` : String(n), d = s === !0 || s === "true";
 	return /* @__PURE__ */ t("span", {
 		className: [
 			"number-badge",
-			`number-badge--${u}`,
+			`number-badge--${l}`,
 			c
 		].filter(Boolean).join(" "),
-		"aria-hidden": f || void 0,
-		"aria-label": f ? void 0 : o ?? d,
-		"aria-atomic": f ? void 0 : !0,
-		children: d
+		"aria-hidden": d || void 0,
+		"aria-label": d ? void 0 : o ?? u,
+		"aria-atomic": d ? void 0 : !0,
+		children: u
 	});
 }
 //#endregion

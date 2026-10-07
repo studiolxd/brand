@@ -25,7 +25,7 @@
     "diverging-cool-2": { "$value": "{color.chart.diverging-cool-2}", "$type": "color", "$description": "Divergente, brazo frío intermedio" },
     "diverging-cool-3": { "$value": "{color.chart.diverging-cool-3}", "$type": "color", "$description": "Divergente, brazo frío extremo" },
 
-    "surface":          { "$value": "{color.background.light}", "$type": "color", "$description": "Color del hueco de 2px entre marcas contiguas y del anillo de 2px de los puntos. Es la superficie, no un borde: separar con trazo añadiría tinta que no es dato" },
+    "surface":          { "$value": "{color.bg.light}", "$type": "color", "$description": "Color del hueco de 2px entre marcas contiguas y del anillo de 2px de los puntos. Es la superficie, no un borde: separar con trazo añadiría tinta que no es dato" },
     "grid-color":       { "$value": "{color.border.default-on-light}", "$type": "color", "$description": "Rejilla: filete de 1px a un paso de la superficie. Cromo recesivo" },
     "grid-width":       { "$value": "{border-width.default}",   "$type": "dimension", "$description": "Grosor de la rejilla. Sólida siempre: una rejilla discontinua se lee como umbral" },
     "axis-color":       { "$value": "{color.icon.secondary-on-light}", "$type": "color", "$description": "Línea base y eje: un paso más firme que la rejilla, porque es el ancla del cero" },
@@ -88,7 +88,7 @@
     "transition-easing":   { "$value": "{motion.easing.out}",    "$type": "string", "$description": "Curva de la respuesta al puntero" },
     "hover-opacity":       { "$value": "0.75",                   "$type": "number", "$description": "Atenuación de las marcas que no son la activa mientras el puntero está encima" },
 
-    "surface-dark-surface":      { "$value": "{color.background.dark}",     "$type": "color", "$description": "Hueco y anillo — surface-dark" },
+    "surface-dark-surface":      { "$value": "{color.bg.dark}",     "$type": "color", "$description": "Hueco y anillo — surface-dark" },
     "surface-dark-grid-color":   { "$value": "{color.border.recessive-on-dark}", "$type": "color", "$description": "Rejilla — surface-dark. Excepción declarada a la regla de derivación (borde → `text.on-dark`): la rejilla es cromo recesivo, no un borde con peso de dato; en blanco sobre prusia se leería como tinta. Procedencia corregida: apuntaba a `color.surface.secondary-on-dark`, un token de SUPERFICIE (el mismo defecto de origen que hizo invisible el carril del Stepper) — ahora apunta a `color.border.recessive-on-dark`, un token de LÍNEA, con el mismo `grey-darkest` y por tanto el mismo valor visual" },
     "surface-dark-axis-color":   { "$value": "{color.disabled.border-on-dark}", "$type": "color", "$description": "Eje — surface-dark: un paso por encima de la rejilla, igual que en claro. Excepción declarada como `grid-color`: mismo `grey-dark` que en claro, no el `text.muted-on-dark` de `axis-color`" },
     "surface-dark-label-color":  { "$value": "{color.text.muted-on-dark}",  "$type": "color", "$description": "Rótulos — surface-dark" },

@@ -19,7 +19,7 @@
   --sidebar-group-padding-block: var(--spacing-2); /** Aire vertical de una sección del panel */
   --sidebar-group-gap: var(--spacing-1); /** Entre elementos de una sección */
   --sidebar-rail-width: calc(2 * var(--app-header-padding-inline) + var(--size-component-md)); /** Ancho del rail (72px): inset simétrico `1rem` (16px) a los dos lados — el izquierdo alinea el centro del icono con el centro del `MenuButton` del header — + caja de icono `2.5rem` (40px). Ver `rail-padding-inline-start` */
-  --sidebar-bg: var(--color-background-light); /** Fondo */
+  --sidebar-bg: var(--color-bg-light); /** Fondo */
   --sidebar-border-width: var(--border-width-default); /** Borde que separa la sidebar del contenido */
   --sidebar-border-color: var(--color-primary); /** Color del borde */
   --sidebar-rail-padding-inline-start: var(--app-header-padding-inline); /** Inset del rail (16px), igual a `--app-header-padding-inline`, a AMBOS lados (simétrico): alinea el centro del icono del rail con el centro del `MenuButton` del header (x=36px) y evita el aire desigual de una columna estrecha. Desacoplado del padding de desplegada (`padding-inline`) para no romper su alineación, ya correcta por composición de otros tokens */
@@ -35,7 +35,7 @@
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --sidebar-bg: var(--color-background-dark); /** Fondo — surface-dark */
+  --sidebar-bg: var(--color-bg-dark); /** Fondo — surface-dark */
   --sidebar-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
   --sidebar-separator-color: var(--color-text-on-dark); /** Línea — surface-dark */
   --sidebar-resizer-hover-color: var(--color-text-on-dark); /** Asa de redimensionado bajo el puntero — surface-dark */

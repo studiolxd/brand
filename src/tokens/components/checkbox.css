@@ -37,7 +37,7 @@ html.dark {
   --checkbox-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
   --checkbox-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
   --checkbox-checked-bg: var(--color-text-on-dark); /** Background when checked — surface-dark */
-  --checkbox-check-color: var(--color-background-dark); /** Checkmark color — surface-dark */
+  --checkbox-check-color: var(--color-bg-dark); /** Checkmark color — surface-dark */
   --checkbox-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
   --checkbox-disabled-border-color: var(--color-text-muted-on-dark); /** Borde deshabilitado — surface-dark */
   --checkbox-checked-disabled-bg: var(--color-text-muted-on-dark); /** Fondo marcado deshabilitado — surface-dark */

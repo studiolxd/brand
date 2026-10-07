@@ -37,7 +37,7 @@
     "sm-font-size":                     { "$value": "{font-size.1}",             "$type": "dimension", "$description": "Font size — sm" },
     "lg-padding-inline":                { "$value": "{spacing.5}",               "$type": "dimension", "$description": "Inline padding — lg" },
     "lg-font-size":                     { "$value": "{font-size.3}",             "$type": "dimension", "$description": "Font size — lg" },
-    "surface-dark-bg":                     { "$value": "{color.background.dark}",     "$type": "color", "$description": "Background — surface-dark" },
+    "surface-dark-bg":                     { "$value": "{color.bg.dark}",     "$type": "color", "$description": "Background — surface-dark" },
     "surface-dark-color":                  { "$value": "{color.text.on-dark}",        "$type": "color", "$description": "Text color — surface-dark" },
     "surface-dark-border-color":           { "$value": "{color.text.on-dark}",        "$type": "color", "$description": "Border color — surface-dark" },
     "surface-dark-placeholder-color":      { "$value": "{color.text.placeholder-on-dark}",  "$type": "color", "$description": "Placeholder — surface-dark: blanco" },
@@ -48,7 +48,7 @@
     "surface-dark-disabled-bg": { "$value": "{color.disabled.bg-on-dark}", "$type": "color", "$description": "Fondo deshabilitado — surface-dark" },
     "surface-dark-disabled-color": { "$value": "{color.disabled.text-on-dark}", "$type": "color", "$description": "Texto deshabilitado — surface-dark" },
     "surface-dark-disabled-border-color": { "$value": "{color.disabled.border-on-dark}", "$type": "color", "$description": "Borde deshabilitado — surface-dark" },
-    "surface-dark-error-bg":           { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo en error — surface-dark (el del lienzo, no blanco)" },
+    "surface-dark-error-bg":           { "$value": "{color.bg.dark}", "$type": "color", "$description": "Fondo en error — surface-dark (el del lienzo, no blanco)" },
     "surface-dark-error-color":        { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Texto en error — surface-dark" },
     "surface-dark-error-placeholder-color": { "$value": "{color.text.placeholder-on-dark}", "$type": "color", "$description": "Placeholder en error — surface-dark" },
     "surface-dark-error-focus-border-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Borde en foco+error — surface-dark" }

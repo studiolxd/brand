@@ -9,12 +9,11 @@ function r(t, n, r) {
 	return i === "danger" ? (e(t, "variant=\"danger\"", "`tone=\"error\"`"), "error") : i;
 }
 var i = t(function({ tone: e, variant: t, className: i, children: a, ...o }, s) {
-	let c = r("Tag", e, t);
 	return /* @__PURE__ */ n("span", {
 		ref: s,
 		className: [
 			"tag",
-			`tag--${c === "error" ? "danger" : c}`,
+			`tag--${r("Tag", e, t)}`,
 			i ?? ""
 		].filter(Boolean).join(" "),
 		...o,

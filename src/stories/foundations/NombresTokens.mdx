@@ -23,7 +23,7 @@ Solo el componente y la propiedad son obligatorios. La talla va justo detrás de
 
 **El estado va antes de la propiedad.** `link-hover-color`, nunca `link-color-hover`. Así los tokens de un mismo estado se leen juntos y la propiedad queda siempre al final, donde se busca. Con dos estados, primero el del control y después el que lo modifica: `checkbox-checked-disabled-bg`.
 
-**`bg`, nunca `background`.** Es la abreviatura que ya usaba todo el sistema; `background` era la excepción.
+**`bg`, nunca `background`.** Es la abreviatura que ya usaba todo el sistema; `background` era la excepción. También en el espacio global de color: el rol del lienzo es `color.bg.light|dark` (`--color-bg-light`, `--color-bg-dark`).
 
 **`max-width` y `min-width`, nunca `width-max` ni `width-min`.** El nombre de la propiedad CSS tal cual: `modal-max-width`, `docs-search-results-max-height`.
 
@@ -31,9 +31,11 @@ Solo el componente y la propiedad son obligatorios. La talla va justo detrás de
 
 **La tinta es `color`.** El color del texto o del icono de un componente es su `color`, nunca `ink-color`. No hay que confundirlo con el **tono** `ink` de `Link` y de `Button` `text` (`tone="ink"`): ahí `ink` es la variante y `color` la propiedad, así que `link-ink-color` es «el color del tono ink» y cumple la convención.
 
+**El vocabulario de las props vale para los tokens.** El tono rojo es `error`, nunca `danger` (`--tag-error-bg`, `--step-tone-error-color`); `destructive` es otra cosa —una acción, no un estado— y se queda. Las tallas se escriben con la escala `xs`…`4xl`, nunca `xxl` (`--logo-height-2xl`). Un token no puede llamar a su variante de otra forma que la prop que la elige.
+
 **`color-picker` y `color-swatch` son componentes, no colores.** Sus grupos se quedan con su nombre. A cambio, el espacio global de color (`color.*`) no usará nunca `picker` ni `swatch` como tramo: así `--color-picker-*` y `--color-swatch-*` solo pueden ser de esos componentes.
 
-Lo vigila un test (`scripts/token-naming.test.ts`) que recorre todos los tokens y falla si alguno incumple una regla. Sus excepciones son explícitas y van comentadas: el rol global del lienzo (`color.background.light|dark`, un rol del espacio `color.*` y no una propiedad de componente) y el tono `ink`.
+Lo vigila un test (`scripts/token-naming.test.ts`) que recorre todos los tokens y falla si alguno incumple una regla. Sus excepciones son explícitas y van comentadas; hoy solo queda una, el tono `ink`.
 
 ## Los nombres anteriores (v51)
 
@@ -43,7 +45,7 @@ La convención entró en la v51 y renombró los tokens de la tabla de abajo. **L
 - **SCSS**: `$lxd-modal-width-max: $lxd-modal-max-width;`, al final del mismo fichero del token.
 - **`tokens.json` y `@studiolxd/brand/tokens`**: la clave vieja, con el mismo valor resuelto.
 
-Lo que un alias **no** hace es el camino contrario: el componente lee el nombre nuevo, así que **sobrescribir el viejo no lo cambia**. Una app que personalizaba `--modal-width-max` tiene que pasar a `--modal-max-width`; una que solo lo leía sigue funcionando hasta la v52. En nativo (SwiftUI y Compose) no hay alias: las constantes se renombraron sin más (`BrandModalTokens.maxWidth`, `BrandTabsTokens.triggerPillActiveBg`…).
+Lo que un alias **no** hace es el camino contrario: el componente lee el nombre nuevo, así que **sobrescribir el viejo no lo cambia**. Una app que personalizaba `--modal-width-max` tiene que pasar a `--modal-max-width`; una que solo lo leía sigue funcionando hasta la v52. En nativo (SwiftUI y Compose) los tokens de componente no tienen alias: las constantes se renombraron sin más (`BrandModalTokens.maxWidth`, `BrandTabsTokens.triggerPillActiveBg`…). Los colores **globales** sí, porque una app nativa los usa por su nombre: `BrandColorRoles.background` sigue compilando hasta la v52, marcado como obsoleto y apuntando a `BrandColorRoles.bg` (`@available(*, deprecated, renamed:)` en Swift, `@Deprecated(ReplaceWith)` en Kotlin).
 
 Los pares oscuros (`surface-dark-*`) siguen a su token: `checkbox.surface-dark-bg-checked` es ahora `checkbox.surface-dark-checked-bg`, y como se publica con el nombre claro, la custom property es la misma de la tabla.
 
@@ -59,6 +61,8 @@ Los pares oscuros (`surface-dark-*`) siguen a su token: `checkbox.surface-dark-b
 | `--tabs-trigger-pill-color-active` | `--tabs-trigger-pill-active-color` |
 | `--typing-indicator-dot-opacity-active` | `--typing-indicator-dot-active-opacity` |
 | `--text-background` | `--text-bg` |
+| `--color-background-light` | `--color-bg-light` |
+| `--color-background-dark` | `--color-bg-dark` |
 | `--modal-width-max` | `--modal-max-width` |
 | `--accordion-index-min-inline-size` | `--accordion-index-min-width` |
 | `--app-launcher-tile-badge-block-size` | `--app-launcher-tile-badge-height` |
@@ -97,3 +101,10 @@ Los pares oscuros (`surface-dark-*`) siguen a su token: `checkbox.surface-dark-b
 | `--site-search-ghost-section-inline-size` | `--site-search-ghost-section-width` |
 | `--site-search-ghost-title-inline-size` | `--site-search-ghost-title-width` |
 | `--site-search-ghost-url-inline-size` | `--site-search-ghost-url-width` |
+| `--tag-danger-bg` | `--tag-error-bg` |
+| `--tag-danger-color` | `--tag-error-color` |
+| `--number-badge-danger-bg` | `--number-badge-error-bg` |
+| `--number-badge-danger-color` | `--number-badge-error-color` |
+| `--step-tone-danger-bg` | `--step-tone-error-bg` |
+| `--step-tone-danger-color` | `--step-tone-error-color` |
+| `--logo-height-xxl` | `--logo-height-2xl` |

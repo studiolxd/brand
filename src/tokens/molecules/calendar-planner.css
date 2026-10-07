@@ -68,7 +68,7 @@ html.dark {
   --calendar-planner-cell-outside-bg: var(--color-surface-secondary-on-dark); /** Fondo de celdas fuera de mes — surface-dark */
   --calendar-planner-cell-focus-ring-color: var(--color-text-on-dark); /** Focus ring de la celda — surface-dark */
   --calendar-planner-cell-today-number-bg: var(--color-text-on-dark); /** Fondo del número de hoy — surface-dark */
-  --calendar-planner-cell-today-number-color: var(--color-background-dark); /** Texto del número de hoy — surface-dark */
+  --calendar-planner-cell-today-number-color: var(--color-bg-dark); /** Texto del número de hoy — surface-dark */
   --calendar-planner-day-number-color: var(--color-text-on-dark); /** Color del número de día — surface-dark */
   --calendar-planner-day-number-outside-color: var(--color-text-muted-on-dark); /** Número fuera de mes — surface-dark */
   --calendar-planner-more-color: var(--color-text-muted-on-dark); /** Texto '+N más' — surface-dark */

@@ -16,10 +16,10 @@
     "border-color":   { "$value": "{color.text.on-light}", "$type": "color",     "$description": "Contorno del globo. Único separador del mensaje: no hay relleno ni sombra" },
 
     "tail-size":      { "$value": "{spacing.3}",           "$type": "dimension", "$description": "Lado de la cola triangular que nace en la esquina inferior del lado del emisor y apunta hacia él" },
-    "tail-fill":      { "$value": "{color.background.light}", "$type": "color",  "$description": "Color con el que se vacía la cola: el de la superficie que hay detrás del globo. Es lo que interrumpe el borde donde nace la cola y deja el triángulo en puro contorno. Si el hilo vive sobre otra superficie, se repunta aquí" },
+    "tail-fill":      { "$value": "{color.bg.light}", "$type": "color",  "$description": "Color con el que se vacía la cola: el de la superficie que hay detrás del globo. Es lo que interrumpe el borde donde nace la cola y deja el triángulo en puro contorno. Si el hilo vive sobre otra superficie, se repunta aquí" },
 
     "surface-dark-color":        { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Tinta del mensaje — superficie oscura" },
     "surface-dark-border-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Contorno del globo — superficie oscura" },
-    "surface-dark-tail-fill":    { "$value": "{color.background.dark}",    "$type": "color", "$description": "Vaciado de la cola — superficie oscura" }
+    "surface-dark-tail-fill":    { "$value": "{color.bg.dark}",    "$type": "color", "$description": "Vaciado de la cola — superficie oscura" }
   }
 }

@@ -49,7 +49,7 @@
   --logo-height-md:  var(--site-header-content-height);
   --logo-height-lg:  var(--site-header-content-height);
   --logo-height-xl:  var(--site-header-content-height);
-  --logo-height-xxl: var(--site-header-content-height);
+  --logo-height-2xl: var(--site-header-content-height);
 }
 
 .site-header__logo > * {

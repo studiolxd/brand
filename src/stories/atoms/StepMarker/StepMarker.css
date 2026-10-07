@@ -31,7 +31,7 @@
 .step-marker--tone-accent-2  { background-color: var(--step-tone-accent-2-bg);  color: var(--step-tone-accent-2-color); }
 .step-marker--tone-support-1 { background-color: var(--step-tone-support-1-bg); color: var(--step-tone-support-1-color); }
 .step-marker--tone-support-2 { background-color: var(--step-tone-support-2-bg); color: var(--step-tone-support-2-color); }
-.step-marker--tone-danger    { background-color: var(--step-tone-danger-bg);    color: var(--step-tone-danger-color); }
+.step-marker--tone-error    { background-color: var(--step-tone-error-bg);    color: var(--step-tone-error-color); }
 .step-marker--tone-success   { background-color: var(--step-tone-success-bg);  color: var(--step-tone-success-color); }
 .step-marker--tone-neutral   { background-color: var(--step-tone-neutral-bg);  color: var(--step-tone-neutral-color); }
 

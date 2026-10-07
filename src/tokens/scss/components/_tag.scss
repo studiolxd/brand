@@ -26,5 +26,9 @@ $lxd-tag-warning-bg: #ffcd00; // Aviso — relleno universal del rol de feedback
 $lxd-tag-warning-color: #111e30; // Aviso — contenido sobre el relleno: el prusia (11,17:1, AAA)
 $lxd-tag-success-bg: #006616; // Éxito — relleno universal del sistema
 $lxd-tag-success-color: #ffffff; // Éxito — contenido sobre el relleno
-$lxd-tag-danger-bg: #b30000; // Peligro — relleno universal del sistema
-$lxd-tag-danger-color: #ffffff; // Peligro — contenido sobre el relleno
+$lxd-tag-error-bg: #b30000; // Error — relleno universal del sistema
+$lxd-tag-error-color: #ffffff; // Error — contenido sobre el relleno
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-tag-danger-bg: $lxd-tag-error-bg; // OBSOLETO (v51, se retira en la v52): usar $lxd-tag-error-bg
+$lxd-tag-danger-color: $lxd-tag-error-color; // OBSOLETO (v51, se retira en la v52): usar $lxd-tag-error-color

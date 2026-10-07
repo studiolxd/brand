@@ -58,7 +58,7 @@
     "primary-bg": {
       "$value": "{color.accent-1}",
       "$type": "color",
-      "$description": "Variante primary — fondo lavanda. No es `color.primary` (prussian): coincidiría con `color.background.dark` y desaparecería sobre `.surface-dark`. Mismo patrón autocontenido que `button.primary` — un par que no depende de la superficie ambiente, igual en claro y oscuro"
+      "$description": "Variante primary — fondo lavanda. No es `color.primary` (prussian): coincidiría con `color.bg.dark` y desaparecería sobre `.surface-dark`. Mismo patrón autocontenido que `button.primary` — un par que no depende de la superficie ambiente, igual en claro y oscuro"
     },
     "primary-color": {
       "$value": "{color.primary}",
@@ -106,7 +106,7 @@
       "$description": "Variante support-2 — texto. Sin par surface-dark: mismo motivo que accent-1"
     },
     "outline-bg": {
-      "$value": "{color.background.light}",
+      "$value": "{color.bg.light}",
       "$type": "color",
       "$description": "Variante outline — fondo blanco (light)"
     },
@@ -126,7 +126,7 @@
       "$description": "Variante outline — grosor de borde"
     },
     "surface-dark-outline-bg": {
-      "$value": "{color.background.dark}",
+      "$value": "{color.bg.dark}",
       "$type": "color",
       "$description": "Variante outline — fondo, surface-dark"
     },

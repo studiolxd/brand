@@ -125,7 +125,7 @@ export const TestTonoInvertido: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText('Empeora')).toBeInTheDocument();
-    await expect(canvasElement.querySelector('.stat-tile__delta')).toHaveClass('tag--danger');
+    await expect(canvasElement.querySelector('.stat-tile__delta')).toHaveClass('tag--error');
     await expect(canvasElement.querySelector('.stat-tile__delta-icon--up')).not.toBeNull();
   },
 };

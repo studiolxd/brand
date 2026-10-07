@@ -138,7 +138,7 @@ Text("Tus viviendas", style = BrandTypography.heading2.brandCssLineBox())   // u
 | Token de la web | Swift | Kotlin |
 | --- | --- | --- |
 | `color.*` primitivos, de marca y `*-fill` (iguales en claro y oscuro) | `BrandColors` | `BrandColors` |
-| `color.*-on-light` / `-on-dark`, `color.background.light/dark`, `color.chart.*` | `BrandColorRoles` (cada rol es un `Color` **dinámico**) | `BrandColorRoles` (una instancia `light` y otra `dark`) + `LocalBrandColorRoles` + `BrandTheme` |
+| `color.*-on-light` / `-on-dark`, `color.bg.light/dark`, `color.chart.*` | `BrandColorRoles` (cada rol es un `Color` **dinámico**) | `BrandColorRoles` (una instancia `light` y otra `dark`) + `LocalBrandColorRoles` + `BrandTheme` |
 | `spacing.*` | `BrandSpacing.s1…s8` (CGFloat, pt) | `BrandSpacing.s1…s8` (dp) |
 | `border-radius.*` | `BrandRadius` | `BrandRadius` |
 | `border-width.*` | `BrandBorderWidth` | `BrandBorderWidth` |

@@ -10,7 +10,7 @@ function r({ state: r = "neutral", tone: i = "primary", size: a = "md", count: o
 		"step-marker",
 		`step-marker--${a}`,
 		`step-marker--state-${r}`,
-		!d && `step-marker--tone-${l === "error" ? "danger" : l}`,
+		!d && `step-marker--tone-${l}`,
 		c
 	].filter(Boolean).join(" "), p = o;
 	return u ? p = /* @__PURE__ */ n(t, {

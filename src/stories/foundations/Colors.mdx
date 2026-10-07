@@ -17,7 +17,7 @@ El color se organiza en **tres capas**, y cada una solo puede apuntar a la anter
 |---|---|---|
 | **Primitivos** | Los valores crudos: la paleta de marca, los neutrales y los colores de sistema | Solo las capas de arriba. Ningún componente los referencia |
 | **Semánticos** | Un *rol* con nombre: `primary`, `error-fill`, `text-on-dark`, `background-light` | Los componentes, siempre |
-| **Componente** | `--button-primary-bg`, `--tag-danger-color`… | El CSS de cada componente |
+| **Componente** | `--button-primary-bg`, `--tag-error-color`… | El CSS de cada componente |
 
 La regla que lo sostiene: **un componente nunca nombra un color, nombra un rol**. Si mañana el rojo de error cambia, cambia en un sitio. Toda esta página se genera a partir de los ficheros de `tokens/color/`: no hay un solo valor escrito a mano.
 
@@ -190,7 +190,7 @@ No hay dos paletas: hay **una**, y cada token que necesita cambiar en oscuro lle
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --text-bg: var(--color-background-dark);
+  --text-bg: var(--color-bg-dark);
   --text-color: var(--color-text-on-dark);
   /* …y cada token de componente con par oscuro */
 }
@@ -222,7 +222,7 @@ El valor oscuro de un token **no se decide, se deriva**. Se mira a qué rol apun
 | Lo que es el token | Claro | Oscuro |
 |---|---|---|
 | **Texto** | `text.on-light`, `text.muted-on-light`, `text.placeholder-on-light` | El mismo rol en `-on-dark` |
-| **Superficie** | `background.light`, `surface.secondary-on-light`, `surface.inverse-on-light` | El mismo rol en `-on-dark` |
+| **Superficie** | `bg.light`, `surface.secondary-on-light`, `surface.inverse-on-light` | El mismo rol en `-on-dark` |
 | **Borde, separador, anillo de foco, línea o barra de estado** | `color.primary` (tinta) | `color.text.on-dark` (tinta blanca) |
 | **Marca: un relleno prusia** | `color.primary` | El par de `Button primary`: relleno `color.accent-1` con tinta `color.primary` |
 | **Feedback** | `*-text-on-light` / `*-fill` | `*-text-on-dark` / el mismo `*-fill` (es universal) |

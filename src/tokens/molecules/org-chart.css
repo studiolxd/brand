@@ -29,7 +29,7 @@
   --org-chart-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco */
   --org-chart-connector-color: var(--color-border-default-on-light); /** Color de las líneas que unen los nodos */
   --org-chart-connector-width: var(--border-width-default); /** Grosor de las líneas que unen los nodos */
-  --org-chart-card-bg: var(--color-background-light); /** Fondo de la tarjeta */
+  --org-chart-card-bg: var(--color-bg-light); /** Fondo de la tarjeta */
   --org-chart-card-border-color: var(--color-primary); /** Borde de la tarjeta */
   --org-chart-card-border-width: var(--border-width-default); /** Grosor del borde de la tarjeta */
   --org-chart-card-radius: var(--border-radius-default); /** Radio de la tarjeta */
@@ -49,7 +49,7 @@ html.dark {
   --org-chart-viewport-border-color: var(--color-text-on-dark); /** Borde del lienzo — surface-dark */
   --org-chart-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
   --org-chart-connector-color: var(--color-text-on-dark); /** Color de las líneas — surface-dark */
-  --org-chart-card-bg: var(--color-background-dark); /** Fondo de la tarjeta — surface-dark */
+  --org-chart-card-bg: var(--color-bg-dark); /** Fondo de la tarjeta — surface-dark */
   --org-chart-card-border-color: var(--color-text-on-dark); /** Borde de la tarjeta — surface-dark */
   --org-chart-name-color: var(--color-text-on-dark); /** Color del nombre del departamento — surface-dark */
   --org-chart-group-color: var(--color-text-muted-on-dark); /** Color del rótulo de grupo — surface-dark */

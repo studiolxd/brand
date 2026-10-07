@@ -5,13 +5,16 @@
  * Esta tabla NO es la fuente de los alias: cada token nuevo lleva sus nombres
  * antiguos en `$extensions["com.studiolxd"].deprecatedAliases`, y de ahí los
  * emite el build (`sd.config.mjs`). La tabla sirve de registro para la guía de
- * migración y para el test de convención (`src/tokens/naming.test.ts`), que
+ * migración y para el test de convención (`scripts/token-naming.test.ts`), que
  * comprueba que cada renombrado conserva su alias y que ningún nombre viejo
  * sigue existiendo como token. Se retira, con los alias, en la v52.
  *
  * Los pares oscuros siguen solos: `surface-dark-<viejo>` pasa a
  * `surface-dark-<nuevo>` y no necesita alias propio, porque se publica con el
  * nombre de su par claro.
+ *
+ * En nativo solo llevan alias los colores GLOBALES (`color.*`), que una app
+ * nativa puede usar por su nombre; los de componente se renombran sin más.
  */
 export const TOKEN_RENAMES_V51 = {
   // El estado va ANTES de la propiedad.
@@ -25,8 +28,12 @@ export const TOKEN_RENAMES_V51 = {
   'tabs.trigger-pill-color-active': 'tabs.trigger-pill-active-color',
   'typing-indicator.dot-opacity-active': 'typing-indicator.dot-active-opacity',
 
-  // `bg`, nunca `background`.
+  // `bg`, nunca `background`. También el rol global del lienzo, que fue la
+  // excepción de la primera tanda: un color global, y por eso el único de la
+  // tabla con alias también en nativo (`BrandColorRoles.background` → `.bg`).
   'text.background': 'text.bg',
+  'color.background.light': 'color.bg.light',
+  'color.background.dark': 'color.bg.dark',
 
   // `max-width`/`min-width`, nunca `width-max`/`width-min`.
   'modal.width-max': 'modal.max-width',
@@ -69,4 +76,15 @@ export const TOKEN_RENAMES_V51 = {
   'site-search.ghost-section-inline-size': 'site-search.ghost-section-width',
   'site-search.ghost-title-inline-size': 'site-search.ghost-title-width',
   'site-search.ghost-url-inline-size': 'site-search.ghost-url-width',
+
+  // El vocabulario de las props de la v51 llega a los tokens: el tono rojo es
+  // `error` (nunca `danger`; `destructive` es otra cosa, una acción) y las
+  // tallas se escriben `2xl`, nunca `xxl`.
+  'tag.danger-bg': 'tag.error-bg',
+  'tag.danger-color': 'tag.error-color',
+  'number-badge.danger-bg': 'number-badge.error-bg',
+  'number-badge.danger-color': 'number-badge.error-color',
+  'step.tone-danger-bg': 'step.tone-error-bg',
+  'step.tone-danger-color': 'step.tone-error-color',
+  'logo.height-xxl': 'logo.height-2xl',
 };

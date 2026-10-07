@@ -18,14 +18,14 @@
     "support-1-color":{ "$value": "{color.text.on-light}",    "$type": "color", "$description": "Texto sobre support-1" },
     "support-2-bg":   { "$value": "{color.support-2}",        "$type": "color", "$description": "Fondo support-2 (cayenne)" },
     "support-2-color":{ "$value": "{color.text.on-light}",    "$type": "color", "$description": "Texto sobre support-2" },
-    "danger-bg":      { "$value": "{color.error-fill}",     "$type": "color", "$description": "Fondo danger (red)" },
-    "danger-color":   { "$value": "{color.error-fill-text}",            "$type": "color", "$description": "Texto sobre danger" },
+    "error-bg":      { "$value": "{color.error-fill}",     "$type": "color", "$description": "Fondo error (rojo)", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["number-badge.danger-bg"] } } },
+    "error-color":   { "$value": "{color.error-fill-text}",            "$type": "color", "$description": "Texto sobre error", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["number-badge.danger-color"] } } },
     "success-bg":     { "$value": "{color.success-fill}", "$type": "color", "$description": "Fondo success (green)" },
     "success-color":  { "$value": "{color.success-fill-text}",            "$type": "color", "$description": "Texto sobre success" },
     "neutral-bg":     { "$value": "{color.surface.inverse-on-light}", "$type": "color", "$description": "Fondo neutral (dark grey)" },
     "neutral-color":  { "$value": "{color.text.on-dark}",            "$type": "color", "$description": "Texto sobre neutral" },
     "surface-dark-primary-bg":                   { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Relleno primary — surface-dark. El prusia es el lienzo y el contador desaparecería; se invierte en vez de pasar a lavanda porque `accent-1` ya es otra variante del mismo componente (mismo caso que `Tag`)" },
-    "surface-dark-primary-color":                { "$value": "{color.background.dark}", "$type": "color", "$description": "Texto sobre primary — surface-dark" },
+    "surface-dark-primary-color":                { "$value": "{color.bg.dark}", "$type": "color", "$description": "Texto sobre primary — surface-dark" },
     "surface-dark-neutral-bg":                   { "$value": "{color.surface.inverse-on-dark}", "$type": "color", "$description": "Relleno neutral — surface-dark: la superficie invertida, como en `Tag`" },
     "surface-dark-neutral-color":                { "$value": "{color.text.on-light}", "$type": "color", "$description": "Texto sobre neutral — surface-dark" }
   }

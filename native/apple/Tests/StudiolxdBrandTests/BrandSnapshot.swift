@@ -37,7 +37,7 @@ func assertBrandSnapshots<V: View>(
         let framed = view
             .padding(padding)
             .frame(width: width, height: height, alignment: .topLeading)
-            .background(BrandColorRoles.background)
+            .background(BrandColorRoles.bg)
             .environment(\.colorScheme, scheme)
             .environment(\.dynamicTypeSize, dynamicType)
             .transaction { $0.disablesAnimations = true }

@@ -84,7 +84,7 @@ html.dark {
   --calendar-today-color: var(--color-text-on-dark); /** Color del día de hoy — surface-dark */
   --calendar-today-marker-color: var(--color-text-on-dark); /** Marcador del día de hoy — surface-dark */
   --calendar-selected-bg: var(--color-text-on-dark); /** Fondo del día seleccionado — surface-dark */
-  --calendar-selected-color: var(--color-background-dark); /** Texto del día seleccionado — surface-dark */
+  --calendar-selected-color: var(--color-bg-dark); /** Texto del día seleccionado — surface-dark */
   --calendar-outside-color: var(--color-text-muted-on-dark); /** Días fuera de mes — surface-dark */
   --calendar-disabled-color: var(--color-text-muted-on-dark); /** Días deshabilitados — surface-dark */
   --calendar-hover-line-color: var(--color-text-on-dark); /** Color de la línea de hover — surface-dark */

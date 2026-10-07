@@ -1269,10 +1269,10 @@ object BrandTagTokens {
     val successBg: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF006616), Color(0xFF006616))
     /** Token `tag.success-color` — Éxito — contenido sobre el relleno */
     val successColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFFFFF), Color(0xFFFFFFFF))
-    /** Token `tag.danger-bg` — Peligro — relleno universal del sistema */
-    val dangerBg: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFB30000), Color(0xFFB30000))
-    /** Token `tag.danger-color` — Peligro — contenido sobre el relleno */
-    val dangerColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFFFFF), Color(0xFFFFFFFF))
+    /** Token `tag.error-bg` — Error — relleno universal del sistema */
+    val errorBg: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFB30000), Color(0xFFB30000))
+    /** Token `tag.error-color` — Error — contenido sobre el relleno */
+    val errorColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFFFFF), Color(0xFFFFFFFF))
 }
 
 /** Tokens del componente `alert` (`tokens/**/alert.json`). Todo color es un [BrandSchemeValue]: se resuelve con `.current` (los que no tienen par oscuro valen lo mismo en los dos esquemas). */
@@ -1697,7 +1697,7 @@ object BrandCardTokens {
     val titleFontWeight: FontWeight = FontWeight(500)
     /** Token `card.footer-gap` — Separación entre acciones del pie */
     val footerGap: Dp = 8.dp
-    /** Token `card.primary-bg` — Variante primary — fondo lavanda. No es `color.primary` (prussian): coincidiría con `color.background.dark` y desaparecería sobre `.surface-dark`. Mismo patrón autocontenido que `button.primary` — un par que no depende de la superficie ambiente, igual en claro y oscuro */
+    /** Token `card.primary-bg` — Variante primary — fondo lavanda. No es `color.primary` (prussian): coincidiría con `color.bg.dark` y desaparecería sobre `.surface-dark`. Mismo patrón autocontenido que `button.primary` — un par que no depende de la superficie ambiente, igual en claro y oscuro */
     val primaryBg: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFBAABFF), Color(0xFFBAABFF))
     /** Token `card.primary-color` — Variante primary — texto prussian sobre el fondo lavanda */
     val primaryColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFF111E30))

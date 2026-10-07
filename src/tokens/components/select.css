@@ -48,11 +48,11 @@
 [data-theme="dark"],
 html.dark {
   --select-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
-  --select-bg: var(--color-background-dark); /** Fondo del trigger — surface-dark */
+  --select-bg: var(--color-bg-dark); /** Fondo del trigger — surface-dark */
   --select-color: var(--color-text-on-dark); /** Color del texto — surface-dark */
   --select-border-color: var(--color-text-on-dark); /** Color del borde — surface-dark */
   --select-focus-ring-color: var(--color-text-on-dark); /** Color del anillo de foco — surface-dark */
-  --select-content-bg: var(--color-background-dark); /** Fondo del dropdown — surface-dark */
+  --select-content-bg: var(--color-bg-dark); /** Fondo del dropdown — surface-dark */
   --select-content-border-color: var(--color-text-on-dark); /** Borde del dropdown — surface-dark */
   --select-separator-color: var(--color-text-on-dark); /** Color del separador entre grupos — surface-dark */
   --select-item-highlighted-bg: var(--color-text-on-dark); /** Relleno de la opción resaltada — surface-dark: la misma inversión de marca, al revés */

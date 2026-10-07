@@ -29,7 +29,7 @@
     "row-hover-marker-color": { "$value": "{color.primary}",          "$type": "color",     "$description": "Color de la barra de hover — tinta de la superficie" },
     "row-selected-font-weight": { "$value": "{font-weight.emphasis}", "$type": "number",    "$description": "Peso de la fila seleccionada" },
 
-    "sticky-bg":               { "$value": "{color.background.light}", "$type": "color", "$description": "Fondo de la columna de acciones pegajosa (cabecera y celda): opaco, para tapar el resto de columnas que se deslizan debajo al hacer scroll horizontal" },
+    "sticky-bg":               { "$value": "{color.bg.light}", "$type": "color", "$description": "Fondo de la columna de acciones pegajosa (cabecera y celda): opaco, para tapar el resto de columnas que se deslizan debajo al hacer scroll horizontal" },
 
     "footer-bg":              { "$value": "{color.surface.secondary-on-light}", "$type": "color", "$description": "Fondo del tfoot: superficie clara secundaria, no un fondo de estado" },
     "footer-border-width":    { "$value": "{border-width.default}",        "$type": "dimension", "$description": "Borde superior del tfoot — 1px, como el del thead" },
@@ -54,7 +54,7 @@
     "surface-dark-sort-icon-active-color":{ "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Icono de sort activo — surface-dark" },
     "surface-dark-row-border-color":   { "$value": "{color.text.on-dark}",  "$type": "color", "$description": "Separador entre filas — surface-dark" },
     "surface-dark-row-selected-color": { "$value": "{color.accent-1}",          "$type": "color", "$description": "Tinta de la fila seleccionada — surface-dark: lavanda, como en el SidebarNav" },
-    "surface-dark-sticky-bg":             { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo de la columna pegajosa — surface-dark" },
+    "surface-dark-sticky-bg":             { "$value": "{color.bg.dark}", "$type": "color", "$description": "Fondo de la columna pegajosa — surface-dark" },
     "surface-dark-footer-bg":          { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo del tfoot — surface-dark" },
     "surface-dark-footer-border-color":{ "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Borde superior del tfoot — surface-dark" },
     "surface-dark-focus-ring-color":   { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring color — surface-dark" },

@@ -64,8 +64,7 @@ export function StepMarker({ state = 'neutral', tone: toneProp = 'primary', size
     'step-marker',
     `step-marker--${size}`,
     `step-marker--state-${state}`,
-    // La clase BEM del rojo sigue siendo `--tone-danger` (interna).
-    !pending && `step-marker--tone-${tone === 'error' ? 'danger' : tone}`,
+    !pending && `step-marker--tone-${tone}`,
     className,
   ]
     .filter(Boolean)

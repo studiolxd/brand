@@ -28,7 +28,7 @@
     "lg-check-size":          { "$value": "0.85rem",                      "$type": "dimension", "$description": "Tamaño del checkmark interior — variante lg" },
     "surface-dark-border-color":     { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Border color — surface-dark" },
     "surface-dark-checked-bg":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Background when checked — surface-dark" },
-    "surface-dark-check-color":      { "$value": "{color.background.dark}",    "$type": "color", "$description": "Checkmark color — surface-dark" },
+    "surface-dark-check-color":      { "$value": "{color.bg.dark}",    "$type": "color", "$description": "Checkmark color — surface-dark" },
     "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring color — surface-dark" },
     "surface-dark-disabled-border-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Borde deshabilitado — surface-dark" },
     "surface-dark-checked-disabled-bg": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Fondo marcado deshabilitado — surface-dark" }

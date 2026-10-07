@@ -52,7 +52,7 @@ private fun TagTone.background(): Color = when (this) {
     TagTone.Info -> T.infoBg
     TagTone.Warning -> T.warningBg
     TagTone.Success -> T.successBg
-    TagTone.Error -> T.dangerBg
+    TagTone.Error -> T.errorBg
 }.current
 
 @Composable
@@ -66,7 +66,7 @@ private fun TagTone.foreground(): Color = when (this) {
     TagTone.Info -> T.infoColor
     TagTone.Warning -> T.warningColor
     TagTone.Success -> T.successColor
-    TagTone.Error -> T.dangerColor
+    TagTone.Error -> T.errorColor
 }.current
 
 /**

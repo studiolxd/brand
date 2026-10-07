@@ -18,6 +18,10 @@
  * 5. La tinta es `color`, nunca `ink-color`… salvo el TONO `ink` de
  *    `Link`/`Button text` (`tone="ink"`), que es una variante y no una
  *    propiedad: `link-ink-color` es «el color del tono ink».
+ * 6. El vocabulario de las props (v51) vale también para los tokens: el tono
+ *    rojo es `error`, nunca `danger` (`destructive` es otra cosa: una
+ *    acción, y se queda), y las tallas se escriben `2xl`, `3xl`…, nunca
+ *    `xxl`, `xxxl`.
  *
  * Además vigila los alias obsoletos de la v51 (los nombres viejos siguen
  * leyéndose hasta la v52): cada renombrado de `TOKEN_RENAMES_V51` existe con su
@@ -99,11 +103,6 @@ function stateAfterProperty(name: string): boolean {
  * normal es que el nombre esté mal.
  */
 const EXCEPTIONS: Record<string, string> = {
-  // `color.*` es el espacio GLOBAL de roles, no un componente: `background` es
-  // ahí el nombre del rol del lienzo (`color.background.light|dark`), del que
-  // cuelgan decenas de referencias. La convención de componente no lo alcanza.
-  'color.background.light': 'rol global del lienzo',
-  'color.background.dark': 'rol global del lienzo',
   // Tono `ink` de Link y de Button text (`tone="ink"`): `ink` es la variante, y
   // `color` la propiedad. No es la propiedad `ink-color` que prohíbe la regla 5.
   'link.ink-color': 'tono ink',
@@ -118,6 +117,8 @@ const RULES: Array<[string, (t: Token) => boolean]> = [
   ['`max-width`/`min-width`, nunca `width-max`/`width-min`', (t) => /(^|-)(width|height)-(max|min)(-|$)/.test(ownName(t))],
   ['medidas: `width`/`height`, nunca `inline-size`/`block-size`', (t) => /(^|-)(inline|block)-size(-|$)/.test(ownName(t))],
   ['la tinta es `color`, nunca `ink-color`', (t) => /(^|-)ink-color$/.test(ownName(t))],
+  ['el tono rojo es `error`, nunca `danger`', (t) => /(^|[.-])danger($|[.-])/.test(dotted(t))],
+  ['las tallas se escriben `2xl`, nunca `xxl`', (t) => /(^|[.-])x{2,}[sl]($|[.-])/.test(dotted(t))],
 ];
 
 describe('D9: convención de nombres de los tokens', () => {
@@ -153,6 +154,13 @@ describe('D9: alias obsoletos de la v51', () => {
       const token = byName.get(current);
       expect(token, current).toBeDefined();
       expect(token!.extensions?.['com.studiolxd']?.deprecatedAliases).toContain(old);
+    }
+  });
+
+  it('la tabla de Foundations → Nombres de tokens lista cada renombrado', () => {
+    const doc = readFileSync(join(ROOT, 'src/stories/foundations/NombresTokens.mdx'), 'utf-8');
+    for (const [old, current] of renames) {
+      expect(doc, old).toContain(`| \`${cssName(old)}\` | \`${cssName(current)}\` |`);
     }
   });
 

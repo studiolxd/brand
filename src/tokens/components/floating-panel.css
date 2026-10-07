@@ -6,7 +6,7 @@
   --floating-panel-z-index: var(--z-index-floating); /** Capa z — por encima del modal (1001) para que los paneles flotantes sean visibles dentro de modales */
   --floating-panel-transition-duration: var(--motion-duration-fast); /** Duración de la animación de entrada/salida */
   --floating-panel-transition-easing: var(--motion-easing-default); /** Easing de la animación */
-  --floating-panel-bg: var(--color-background-light); /** Fondo de cualquier panel flotante (popover, context-menu…) */
+  --floating-panel-bg: var(--color-bg-light); /** Fondo de cualquier panel flotante (popover, context-menu…) */
   --floating-panel-border-width: var(--border-width-default); /** Grosor del borde */
   --floating-panel-border-color: var(--color-primary); /** Color del borde — prussian en modo claro */
   --floating-panel-border-radius: var(--border-radius-default); /** Sin radio de esquinas */
@@ -17,6 +17,6 @@
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --floating-panel-bg: var(--color-background-dark); /** Fondo — surface-dark */
+  --floating-panel-bg: var(--color-bg-dark); /** Fondo — surface-dark */
   --floating-panel-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
 }
