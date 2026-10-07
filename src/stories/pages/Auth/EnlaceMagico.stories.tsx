@@ -58,9 +58,11 @@ export const RegistroCerrado: Story = { name: 'Registro cerrado', args: { signup
  *  el conmutador de tema la acompaña. No hace falta `parameters.surface`. */
 export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',
-  // a11y pendiente de decisión (D16): `link-in-text-block`. El enlace dentro del texto,
-  // en oscuro, solo se distingue por color: #ffcd00 frente al texto #ffffff, 1,5:1
-  // (pide 3:1 o un subrayado).
+  // a11y falso positivo (D41): `link-in-text-block`. El enlace dentro del texto lleva
+  // su línea en reposo también en oscuro (Atoms/Link, «Dentro de texto corrido»), pero
+  // axe solo reconoce como marca `text-decoration`, un borde, `outline`,
+  // `background-image` o un cambio de fuente; la línea del sistema es una sombra
+  // interior (regla 7), así que mide el color: #ffcd00 frente a #ffffff, 1,5:1.
   parameters: { a11y: { config: { rules: [{ id: 'link-in-text-block', enabled: false }] } }, chromatic: SOLO_OSCURO },
   args: { surface: 'dark' },
 };
