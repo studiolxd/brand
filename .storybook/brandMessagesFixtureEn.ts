@@ -351,6 +351,7 @@ export const brandMessagesFixtureEn: BrandMessages = {
     label: 'Matrix',
     empty: 'no data',
     scale: 'Colour scale',
+    midpoint: (value) => `Midpoint: ${value}`,
   },
   orgChart: {
     label: 'Org chart',

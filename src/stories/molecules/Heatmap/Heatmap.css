@@ -95,6 +95,15 @@
 .heatmap__cell.heatmap__cell--step-5 { background-color: var(--heatmap-step-5-bg); color: var(--heatmap-step-5-color); }
 .heatmap__cell.heatmap__cell--step-6 { background-color: var(--heatmap-step-6-bg); color: var(--heatmap-step-6-color); }
 
+/* Escala divergente: tres peldaños por brazo y el neutro en el centro. */
+.heatmap__cell.heatmap__cell--diverging-warm-3 { background-color: var(--heatmap-diverging-warm-3-bg); color: var(--heatmap-diverging-warm-3-color); }
+.heatmap__cell.heatmap__cell--diverging-warm-2 { background-color: var(--heatmap-diverging-warm-2-bg); color: var(--heatmap-diverging-warm-2-color); }
+.heatmap__cell.heatmap__cell--diverging-warm-1 { background-color: var(--heatmap-diverging-warm-1-bg); color: var(--heatmap-diverging-warm-1-color); }
+.heatmap__cell.heatmap__cell--diverging-neutral { background-color: var(--heatmap-diverging-neutral-bg); color: var(--heatmap-diverging-neutral-color); }
+.heatmap__cell.heatmap__cell--diverging-cool-1 { background-color: var(--heatmap-diverging-cool-1-bg); color: var(--heatmap-diverging-cool-1-color); }
+.heatmap__cell.heatmap__cell--diverging-cool-2 { background-color: var(--heatmap-diverging-cool-2-bg); color: var(--heatmap-diverging-cool-2-color); }
+.heatmap__cell.heatmap__cell--diverging-cool-3 { background-color: var(--heatmap-diverging-cool-3-bg); color: var(--heatmap-diverging-cool-3-color); }
+
 /* Sin dato no es el mínimo: no lleva ningún paso de la rampa, lleva la
    superficie secundaria rayada. La trama es lo que lo separa del paso 1 sin
    depender del color. */
@@ -137,3 +146,11 @@
 .heatmap__swatch.heatmap__swatch--step-4 { background-color: var(--heatmap-step-4-bg); }
 .heatmap__swatch.heatmap__swatch--step-5 { background-color: var(--heatmap-step-5-bg); }
 .heatmap__swatch.heatmap__swatch--step-6 { background-color: var(--heatmap-step-6-bg); }
+
+.heatmap__swatch.heatmap__swatch--diverging-warm-3 { background-color: var(--heatmap-diverging-warm-3-bg); }
+.heatmap__swatch.heatmap__swatch--diverging-warm-2 { background-color: var(--heatmap-diverging-warm-2-bg); }
+.heatmap__swatch.heatmap__swatch--diverging-warm-1 { background-color: var(--heatmap-diverging-warm-1-bg); }
+.heatmap__swatch.heatmap__swatch--diverging-neutral { background-color: var(--heatmap-diverging-neutral-bg); }
+.heatmap__swatch.heatmap__swatch--diverging-cool-1 { background-color: var(--heatmap-diverging-cool-1-bg); }
+.heatmap__swatch.heatmap__swatch--diverging-cool-2 { background-color: var(--heatmap-diverging-cool-2-bg); }
+.heatmap__swatch.heatmap__swatch--diverging-cool-3 { background-color: var(--heatmap-diverging-cool-3-bg); }

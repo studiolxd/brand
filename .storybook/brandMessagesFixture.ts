@@ -347,6 +347,7 @@ export const brandMessagesFixture: BrandMessages = {
     label: 'Matriz',
     empty: 'sin dato',
     scale: 'Escala de color',
+    midpoint: (value) => `Centro: ${value}`,
   },
   orgChart: {
     label: 'Organigrama',
