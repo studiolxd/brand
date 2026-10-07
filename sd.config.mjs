@@ -5,6 +5,8 @@ import {
   registerDarkModeFormat,
   registerJsonVariablesFormat,
   registerNativeFormats,
+  registerShadowAlphaTransform,
+  outputReferencesUnlessAlpha,
   isDarkToken,
   isNativeToken,
   DARK_SELECTORS,
@@ -13,8 +15,10 @@ import {
 registerDarkModeFormat(StyleDictionary);
 registerJsonVariablesFormat(StyleDictionary);
 registerNativeFormats(StyleDictionary);
+registerShadowAlphaTransform(StyleDictionary);
 
-const cssOptions = { selector: ':root', outputReferences: true };
+// Todo sale con `var()` salvo las sombras con opacidad propia (ver `registerShadowAlphaTransform`).
+const cssOptions = { selector: ':root', outputReferences: outputReferencesUnlessAlpha };
 const scssOptions = { outputReferences: false };
 
 const filters = {
@@ -213,7 +217,7 @@ const sd = new StyleDictionary({
   source: ['tokens/**/*.json'],
   platforms: {
     css: {
-      transformGroup: 'css',
+      transformGroup: 'brand/css',
       buildPath: 'src/tokens/',
       files: [
         cssFile('global/colors.css',    'color'),
@@ -395,7 +399,7 @@ const sd = new StyleDictionary({
       ],
     },
     scss: {
-      transformGroup: 'scss',
+      transformGroup: 'brand/scss',
       prefix: 'lxd',
       buildPath: 'src/tokens/scss/',
       files: [
@@ -591,7 +595,7 @@ const sd = new StyleDictionary({
      * tokens normales.
      */
     js: {
-      transformGroup: 'css',
+      transformGroup: 'brand/css',
       buildPath: 'src/tokens/',
       files: [
         { destination: 'tokens.json', format: 'json/css-variables', filter: (t) => !isDarkToken(t) },
@@ -605,7 +609,7 @@ const sd = new StyleDictionary({
      * puntos/dp y a segundos las hace el formato (`sd.formats.mjs`).
      */
     swift: {
-      transformGroup: 'css',
+      transformGroup: 'brand/css',
       buildPath: 'native/apple/Sources/StudiolxdBrand/Tokens/',
       files: [
         { destination: 'BrandTokens.swift', format: 'swift/brand-tokens', filter: isNativeToken },
@@ -615,7 +619,7 @@ const sd = new StyleDictionary({
       ],
     },
     kotlin: {
-      transformGroup: 'css',
+      transformGroup: 'brand/css',
       buildPath: 'native/android/brand/src/main/kotlin/com/studiolxd/brand/tokens/',
       files: [
         { destination: 'BrandTokens.kt', format: 'kotlin/brand-tokens', filter: isNativeToken },

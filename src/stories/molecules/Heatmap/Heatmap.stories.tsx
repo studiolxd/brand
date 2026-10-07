@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
+import { expect, waitFor, within } from 'storybook/test';
 import { Heatmap, type HeatmapCell, type HeatmapColumn, type HeatmapRow } from './Heatmap';
 import { Link } from '../../atoms/Link/Link';
 import { SOLO_OSCURO } from '../../utils/chromaticModes';
@@ -148,3 +148,100 @@ export const TestCasillaSinDato: Story = {
     expect(within(tabla).getAllByRole('rowheader')).toHaveLength(4);
   },
 };
+
+/* ── Brecha de competencias ─────────────────────────────────────────────────
+   Nivel real − nivel exigido por el puesto, de −3 a +3. El cero es «cumple»;
+   lo que se queda corto pinta el brazo cálido y lo que sobra, el frío. */
+
+const EXIGIDO: Record<string, number> = { react: 3, css: 3, a11y: 3, node: 2, sql: 2, k8s: 1, ci: 2 };
+
+const BRECHA: HeatmapCell[] = NIVELES.map((c) => ({
+  ...c,
+  value: c.value === null ? null : c.value - EXIGIDO[c.columnKey],
+}));
+
+const signo = (v: number) => (v > 0 ? `+${v}` : `${v}`.replace('-', '−'));
+
+export const EscalaDivergente: Story = {
+  name: 'Escala divergente',
+  args: {
+    rows: PERSONAS,
+    columns: COMPETENCIAS,
+    cells: BRECHA,
+    scale: 'diverging',
+    midpoint: 0,
+    min: -3,
+    max: 3,
+    rowHeader: 'Persona',
+    label: 'Brecha de competencias frente al puesto',
+    formatValue: signo,
+    minLabel: 'Por debajo',
+    maxLabel: 'Por encima',
+    midpointLabel: 'Cumple lo exigido',
+  },
+};
+
+/** Una fila con los siete peldaños: −3…+3 en orden, más una casilla sin dato. */
+const GAMA_COLUMNAS: HeatmapColumn[] = [-3, -2, -1, 0, 1, 2, 3, null].map((v, i) => ({
+  key: `c${i}`,
+  label: v === null ? '—' : String(v),
+}));
+const GAMA: HeatmapCell[] = [-3, -2, -1, 0, 1, 2, 3, null].map((v, i) => ({
+  rowId: 'g',
+  columnKey: `c${i}`,
+  value: v,
+}));
+
+const peldañoDe = (td: Element | null) =>
+  [...(td?.classList ?? [])].find((c) => c.startsWith('heatmap__cell--'))?.replace('heatmap__cell--', '');
+
+export const TestPeldañosDivergentes: Story = {
+  name: 'Test — escala divergente: centro, extremos y los dos brazos',
+  tags: ['!dev'],
+  args: {
+    rows: [{ id: 'g', label: 'Gama' }],
+    columns: GAMA_COLUMNAS,
+    cells: GAMA,
+    scale: 'diverging',
+    label: 'Gama divergente',
+    rowHeader: 'Fila',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const tabla = canvas.getByRole('table', { name: 'Gama divergente' });
+    const celdas = [...tabla.querySelectorAll('tbody td')];
+    expect(celdas.map(peldañoDe)).toEqual([
+      'diverging-warm-3', 'diverging-warm-2', 'diverging-warm-1', 'diverging-neutral',
+      'diverging-cool-1', 'diverging-cool-2', 'diverging-cool-3', 'empty',
+    ]);
+    // El centro se pinta con su token, no con el de un brazo.
+    const centro = celdas[3] as HTMLElement;
+    const sonda = document.createElement('span');
+    sonda.style.backgroundColor = 'var(--heatmap-diverging-neutral-bg)';
+    canvasElement.appendChild(sonda);
+    await waitFor(() =>
+      expect(getComputedStyle(centro).backgroundColor).toBe(getComputedStyle(sonda).backgroundColor),
+    );
+    sonda.remove();
+  },
+};
+
+export const TestLeyendaDivergente: Story = {
+  name: 'Test — la leyenda divergente enseña los dos brazos y el centro',
+  tags: ['!dev'],
+  args: { ...TestPeldañosDivergentes.args, divergingDirection: 'warm-above' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const rampa = canvas.getByRole('img', { name: 'Escala de color' });
+    const peldaños = [...rampa.querySelectorAll('.heatmap__swatch')].map((s) =>
+      [...s.classList].find((c) => c.startsWith('heatmap__swatch--'))?.replace('heatmap__swatch--diverging-', ''),
+    );
+    // Invertida: lo de abajo es frío, así que la leyenda empieza por el frío.
+    expect(peldaños).toEqual(['cool-3', 'cool-2', 'cool-1', 'neutral', 'warm-1', 'warm-2', 'warm-3']);
+    const leyenda = rampa.closest('.heatmap__legend') as HTMLElement;
+    expect(within(leyenda).getByText('-3')).toBeInTheDocument();
+    expect(within(leyenda).getByText('3')).toBeInTheDocument();
+    expect(within(leyenda).getByText('Centro: 0')).toBeInTheDocument();
+  },
+};
+

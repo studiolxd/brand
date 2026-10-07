@@ -29,6 +29,35 @@ El motivo es la cifra que va dentro. Cada relleno tiene que admitir una de las d
 
 <Canvas of={HeatmapStories.SeisPasos} />
 
+## Escala divergente
+
+`scale` elige la rampa. La **secuencial** (`'sequential'`, la de siempre y la que sale sin decir nada) pinta una magnitud, de menos a más: niveles, cobertura, horas. La **divergente** (`scale="diverging"`) pinta **la distancia a un centro**: una brecha (nivel real − nivel exigido), una desviación sobre la meta, un saldo. Se usa cuando el valor tiene un punto que significa «nada» y lo que importa es hacia qué lado se aparta y cuánto; si el cero no significa nada especial, la escala es la secuencial.
+
+<Canvas of={HeatmapStories.EscalaDivergente} />
+
+- **El centro** es `midpoint` (0 por defecto) y se pinta con el gris neutro, no con un tono: el centro tiene que leerse como «nada». Es el mismo neutro que la escala divergente de `Chart`.
+- **Dos brazos de tres intensidades.** Por defecto, lo que queda **por debajo** del centro es cálido (cayena) y lo que queda **por encima**, frío (prusia): en una brecha de competencias, quedarse corto es lo que pide atención. `divergingDirection="warm-above"` invierte los brazos para las magnitudes en las que pasarse es lo que alarma (un retraso, un sobrecoste).
+- **El reparto.** El intervalo `[centro − radio, centro + radio]` se parte en **siete bandas iguales**, una por peldaño, igual que la secuencial parte su dominio en tantas bandas como pasos. La banda central es el neutro, así que un valor que apenas se separa del centro no toma brazo. Con niveles enteros y un radio de 3, cada nivel cae en su peldaño: 0 es el neutro, ±1 el primero de cada brazo, ±3 el extremo.
+- **El radio** es la distancia que pinta el extremo, y los dos brazos lo comparten: la misma distancia pinta la misma intensidad a los dos lados. Si se pasan `min` o `max`, el radio es la mayor distancia de esos extremos al centro; **sin ninguno, sale de los datos** (la mayor |valor − centro|), con la misma advertencia que el `max` de la secuencial: en cuanto haya dos matrices en el panel, se pasan los extremos.
+- `steps` no aplica: la divergente siempre tiene siete peldaños.
+- **La leyenda** enseña los siete peldaños del valor más bajo al más alto, con los dos extremos escritos a los lados y el centro rotulado detrás («Centro: 0», de `heatmap.midpoint`). `minLabel`, `maxLabel` y `midpointLabel` los sustituyen cuando tienen nombre («Por debajo», «Cumple lo exigido»).
+
+### El intermedio cálido sobre página clara
+
+Cada relleno tiene que admitir una de las dos tintas a 4,5:1, porque la cifra va dentro. El intermedio cálido de la paleta (`diverging-warm-2`, #D45C2C) no llega con ninguna: **4,29:1** con prusia y **3,91:1** con blanco. La matriz lo pinta con su par de superficie oscura, `diverging-warm-2-on-dark` (#E26330), que ya está en la paleta: **4,84:1** con prusia, y sigue quedando entre sus dos vecinos. Sin color nuevo (regla 9 de `CLAUDE.md`). Los siete peldaños, en las dos superficies:
+
+| Peldaño | Claro: relleno · tinta · razón | Oscuro: relleno · tinta · razón |
+| --- | --- | --- |
+| `warm-3` | #9F431F · blanco · 6,37:1 | #F48F6A · prusia · 7,17:1 |
+| `warm-2` | #E26330 · prusia · 4,84:1 | #E26330 · prusia · 4,84:1 |
+| `warm-1` | #F37F54 · prusia · 6,37:1 | #B54E24 · blanco · 5,15:1 |
+| `neutral` | #F2F2F2 · prusia · 14,98:1 | #4A4A4A · blanco · 8,86:1 |
+| `cool-1` | #70A6F2 · prusia · 6,73:1 | #256FCF · blanco · 4,94:1 |
+| `cool-2` | #3484EE · prusia · 4,54:1 | #488FEF · prusia · 5,15:1 |
+| `cool-3` | #1F61B6 · blanco · 6,10:1 | #80B0F3 · prusia · 7,52:1 |
+
+El neutro comparte relleno con la casilla **sin dato**; lo que las separa es lo de siempre: la sin dato lleva la trama y no lleva cifra.
+
 ## Sin dato no es el mínimo
 
 Una casilla que no viene en `cells` —o que viene con `value: null`— es **sin dato**: nadie midió ese cruce. No se pinta con el primer peldaño de la rampa, que significa «lo midieron y salió el mínimo», sino con la superficie secundaria **rayada**. La trama es lo que la separa del paso 1 sin depender del color, y también en una impresión en blanco y negro.
@@ -55,7 +84,7 @@ Una columna puede declarar `group`. Las columnas **consecutivas** con el mismo g
 
 ## Superficie oscura
 
-Los seis peldaños tienen su par `-on-dark` en la rampa del sistema, y la tinta de cada uno cambia con ellos: sobre página clara los cuatro primeros llevan prusia y los dos últimos blanco; sobre página oscura, al revés a partir del cuarto. Todo por tokens.
+Los seis peldaños de la secuencial y los siete de la divergente tienen su par `-on-dark` en la paleta, y la tinta de cada uno cambia con ellos. En la secuencial, sobre página clara los cuatro primeros llevan prusia y los dos últimos blanco; sobre página oscura, al revés a partir del cuarto. La divergente, en la tabla de su sección. Todo por tokens.
 
 <Canvas of={HeatmapStories.SuperficieOscura} />
 
@@ -68,7 +97,7 @@ Los seis peldaños tienen su par `-on-dark` en la rampa del sistema, y la tinta 
 
 ## Textos
 
-Tres, todos cromo, en el espacio `heatmap`: `label`, `empty` y `scale`. Los nombres de filas y columnas son contenido y los escribe quien pasa los datos.
+Todos cromo, en el espacio `heatmap`: `label`, `empty` y `scale`, y `midpoint` para el rótulo del centro de la divergente — una función del centro ya formateado, y la única clave **opcional** del espacio: solo se lee con `scale="diverging"` y la leyenda a la vista, así que un catálogo anterior sigue valiendo para la secuencial. Los nombres de filas y columnas son contenido y los escribe quien pasa los datos.
 
 ## Props
 

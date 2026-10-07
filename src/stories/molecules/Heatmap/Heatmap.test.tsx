@@ -118,3 +118,80 @@ describe('Heatmap', () => {
     expect(tabla.getByText('4 %')).toBeInTheDocument();
   });
 });
+
+describe('Heatmap — escala divergente', () => {
+  // Brecha de competencias: nivel real − nivel exigido.
+  const BRECHA: HeatmapCell[] = [
+    { rowId: 'p1', columnKey: 'react', value: -3 },
+    { rowId: 'p1', columnKey: 'css', value: 0 },
+    { rowId: 'p1', columnKey: 'sql', value: 3 },
+    { rowId: 'p2', columnKey: 'react', value: -1 },
+    { rowId: 'p2', columnKey: 'css', value: 2 },
+    { rowId: 'p2', columnKey: 'sql', value: null },
+  ];
+  const divergente = { rows: FILAS, columns: COLUMNAS, cells: BRECHA, scale: 'diverging' as const, label: 'Brecha' };
+  const celda = (texto: string) =>
+    within(screen.getByRole('table', { name: 'Brecha' })).getByText(texto).closest('td');
+
+  it('por defecto la escala es la secuencial: ninguna casilla toma un peldaño divergente', () => {
+    const { container } = render(<Heatmap {...base} label="Competencias" />);
+    expect(container.querySelector('[class*="heatmap__cell--diverging-"]')).toBeNull();
+  });
+
+  it('pinta el centro de neutro, los extremos en el último peldaño de cada brazo y lo de en medio por su distancia', () => {
+    render(<Heatmap {...divergente} />);
+    expect(celda('0')).toHaveClass('heatmap__cell--diverging-neutral');
+    expect(celda('-3')).toHaveClass('heatmap__cell--diverging-warm-3');
+    expect(celda('3')).toHaveClass('heatmap__cell--diverging-cool-3');
+    expect(celda('-1')).toHaveClass('heatmap__cell--diverging-warm-1');
+    expect(celda('2')).toHaveClass('heatmap__cell--diverging-cool-2');
+  });
+
+  it('la casilla sin dato mantiene su trama, también en la divergente', () => {
+    const { container } = render(<Heatmap {...divergente} />);
+    expect(container.querySelectorAll('.heatmap__cell--empty')).toHaveLength(1);
+  });
+
+  it('`midpoint` mueve el centro', () => {
+    render(<Heatmap {...divergente} midpoint={2} min={-1} max={5} />);
+    expect(celda('2')).toHaveClass('heatmap__cell--diverging-neutral');
+    expect(celda('-3')).toHaveClass('heatmap__cell--diverging-warm-3');
+  });
+
+  it('`divergingDirection="warm-above"` invierte los brazos', () => {
+    render(<Heatmap {...divergente} divergingDirection="warm-above" />);
+    expect(celda('-3')).toHaveClass('heatmap__cell--diverging-cool-3');
+    expect(celda('3')).toHaveClass('heatmap__cell--diverging-warm-3');
+  });
+
+  it('la leyenda enseña los dos brazos y el centro, del valor más bajo al más alto', () => {
+    const { container } = render(<Heatmap {...divergente} />);
+    const peldaños = [...container.querySelectorAll('.heatmap__swatch')].map((s) =>
+      [...s.classList].find((c) => c.startsWith('heatmap__swatch--'))?.replace('heatmap__swatch--diverging-', ''),
+    );
+    expect(peldaños).toEqual(['warm-3', 'warm-2', 'warm-1', 'neutral', 'cool-1', 'cool-2', 'cool-3']);
+    const leyenda = container.querySelector('.heatmap__legend');
+    expect(leyenda).toHaveTextContent('-3');
+    expect(leyenda).toHaveTextContent('3');
+    expect(leyenda).toHaveTextContent(ES.heatmap.midpoint!('0'));
+  });
+
+  it('`midpointLabel` sustituye el rótulo del centro', () => {
+    render(<Heatmap {...divergente} midpointLabel="Lo exigido" />);
+    expect(screen.getByText('Lo exigido')).toBeInTheDocument();
+  });
+
+  it('un catálogo sin `heatmap.midpoint` sigue valiendo para la secuencial y para la divergente sin leyenda', () => {
+    const { midpoint: _sinCentro, ...heatmapSinCentro } = ES.heatmap;
+    void _sinCentro;
+    const anterior = { ...ES, heatmap: heatmapSinCentro };
+    renderRTL(
+      <BrandMessagesProvider messages={anterior}>
+        <Heatmap {...base} label="Competencias" />
+        <Heatmap {...divergente} showLegend={false} />
+      </BrandMessagesProvider>,
+    );
+    expect(screen.getByRole('table', { name: 'Competencias' })).toBeInTheDocument();
+    expect(screen.getByRole('table', { name: 'Brecha' })).toBeInTheDocument();
+  });
+});

@@ -467,10 +467,10 @@ template {
  */
 :root {
   --shadow-none: none; /** Escala. Valor del rol default */
-  --shadow-sm: 0 1px 2px rgba(17,30,48,0.08); /** Escala. El sistema no lo usa */
-  --shadow-md: 0 2px 8px rgba(17,30,48,0.10); /** Escala. El sistema no lo usa */
-  --shadow-lg: 0 4px 16px rgba(17,30,48,0.12); /** Escala. El sistema no lo usa */
-  --shadow-xl: 0 8px 32px rgba(17,30,48,0.16); /** Escala. El sistema no lo usa */
+  --shadow-sm: 0 1px 2px rgba(17,30,48,0.08); /** Escala. El sistema no lo usa. El color es el prusia de la paleta con opacidad 0.08 (sale como rgba(17,30,48,0.08)) */
+  --shadow-md: 0 2px 8px rgba(17,30,48,0.10); /** Escala. El sistema no lo usa. El color es el prusia de la paleta con opacidad 0.10 (sale como rgba(17,30,48,0.10)) */
+  --shadow-lg: 0 4px 16px rgba(17,30,48,0.12); /** Escala. El sistema no lo usa. El color es el prusia de la paleta con opacidad 0.12 (sale como rgba(17,30,48,0.12)) */
+  --shadow-xl: 0 8px 32px rgba(17,30,48,0.16); /** Escala. El sistema no lo usa. El color es el prusia de la paleta con opacidad 0.16 (sale como rgba(17,30,48,0.16)) */
   --shadow-default: var(--shadow-none); /** Rol: ningún elemento del sistema proyecta sombra. La elevación se expresa con borde y con el fondo del panel */
 }
 /**
@@ -826,7 +826,7 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --kbd-bg: rgba(255, 255, 255, 0.08); /** Fondo del keycap — surface-dark: el gris claro no existe en superficie oscura, y el velo translúcido es el mismo recurso que usan Skeleton y Table */
+  --kbd-bg: var(--color-surface-secondary-on-dark); /** Fondo del keycap — surface-dark: la superficie secundaria en su par oscuro, el mismo rol (y el mismo token) que usa Skeleton. Antes era un velo blanco al 8 % escrito a mano */
   --kbd-color: var(--color-text-on-dark); /** Símbolo — surface-dark */
   --kbd-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
 }
@@ -5611,6 +5611,12 @@ html.dark {
   --heatmap-step-4-bg: var(--color-chart-sequential-500); /** Paso 4 de la rampa de la matriz — sequential-500 de la rampa secuencial del sistema */
   --heatmap-step-5-bg: var(--color-chart-sequential-600); /** Paso 5 de la rampa de la matriz — sequential-600 de la rampa secuencial del sistema */
   --heatmap-step-6-bg: var(--color-chart-sequential-700); /** Paso 6 de la rampa de la matriz — sequential-700 de la rampa secuencial del sistema */
+  --heatmap-diverging-warm-3-bg: var(--color-chart-diverging-warm-3); /** Escala divergente, peldaño warm-3 — diverging-warm-3 (#9F431F), extremo del brazo cálido */
+  --heatmap-diverging-warm-2-bg: var(--color-chart-diverging-warm-2-on-dark); /** Escala divergente, peldaño warm-2 — diverging-warm-2-on-dark (#E26330): ver la tinta */
+  --heatmap-diverging-warm-1-bg: var(--color-chart-diverging-warm-1); /** Escala divergente, peldaño warm-1 — diverging-warm-1 (#F37F54), junto al neutro */
+  --heatmap-diverging-cool-1-bg: var(--color-chart-diverging-cool-1); /** Escala divergente, peldaño cool-1 — diverging-cool-1 (#70A6F2), junto al neutro */
+  --heatmap-diverging-cool-2-bg: var(--color-chart-diverging-cool-2); /** Escala divergente, peldaño cool-2 — diverging-cool-2 (#3484EE), intermedio */
+  --heatmap-diverging-cool-3-bg: var(--color-chart-diverging-cool-3); /** Escala divergente, peldaño cool-3 — diverging-cool-3 (#1F61B6), extremo del brazo frío */
   --heatmap-radius: var(--border-radius-default); /** Radio del marco de la matriz */
   --heatmap-border-color: var(--color-primary); /** Color de la rejilla */
   --heatmap-border-width: var(--border-width-default); /** Grosor de la rejilla */
@@ -5631,6 +5637,14 @@ html.dark {
   --heatmap-step-4-color: var(--color-text-on-light); /** Tinta sobre el paso 4 — la que llega a 4,5:1 sobre ese relleno */
   --heatmap-step-5-color: var(--color-text-on-dark); /** Tinta sobre el paso 5 — la que llega a 4,5:1 sobre ese relleno */
   --heatmap-step-6-color: var(--color-text-on-dark); /** Tinta sobre el paso 6 — la que llega a 4,5:1 sobre ese relleno */
+  --heatmap-diverging-warm-3-color: var(--color-text-on-dark); /** Tinta sobre el peldaño divergente warm-3 — diverging-warm-3 (#9F431F), extremo del brazo cálido. Blanco: 6,37:1 (prusia daría 2,63:1) */
+  --heatmap-diverging-warm-2-color: var(--color-text-on-light); /** Tinta sobre el peldaño divergente warm-2 — diverging-warm-2-on-dark (#E26330), NO diverging-warm-2. El intermedio cálido del sistema (#D45C2C) no admite cifra con ninguna de las dos tintas: 4,29:1 con prusia y 3,91:1 con blanco. Su par de superficie oscura, ya en la paleta, sí: 4,84:1 con prusia, y queda entre sus dos vecinos (1,32:1 con warm-1, 1,84:1 con warm-3). Sin color nuevo (regla 9) */
+  --heatmap-diverging-warm-1-color: var(--color-text-on-light); /** Tinta sobre el peldaño divergente warm-1 — diverging-warm-1 (#F37F54), junto al neutro. Prusia: 6,37:1 (blanco daría 2,63:1) */
+  --heatmap-diverging-neutral-bg: var(--color-surface-secondary-on-light); /** Escala divergente, peldaño neutral — el centro: el mismo gris que chart.diverging-neutral (#F2F2F2), un rol de superficie porque el centro se retira hacia el lienzo */
+  --heatmap-diverging-neutral-color: var(--color-text-on-light); /** Tinta sobre el peldaño divergente neutral — el centro: el mismo gris que chart.diverging-neutral (#F2F2F2), un rol de superficie porque el centro se retira hacia el lienzo. Prusia: 14,98:1. Comparte relleno con la casilla sin dato, que se distingue por su trama y por no llevar cifra */
+  --heatmap-diverging-cool-1-color: var(--color-text-on-light); /** Tinta sobre el peldaño divergente cool-1 — diverging-cool-1 (#70A6F2), junto al neutro. Prusia: 6,73:1 (blanco daría 2,49:1) */
+  --heatmap-diverging-cool-2-color: var(--color-text-on-light); /** Tinta sobre el peldaño divergente cool-2 — diverging-cool-2 (#3484EE), intermedio. Prusia: 4,54:1 (blanco daría 3,70:1) */
+  --heatmap-diverging-cool-3-color: var(--color-text-on-dark); /** Tinta sobre el peldaño divergente cool-3 — diverging-cool-3 (#1F61B6), extremo del brazo frío. Blanco: 6,10:1 (prusia daría 2,75:1) */
 }
 .surface-dark,
 .surface-invert,
@@ -5642,12 +5656,26 @@ html.dark {
   --heatmap-step-4-bg: var(--color-chart-sequential-500-on-dark); /** Paso 4 de la rampa — surface-dark */
   --heatmap-step-5-bg: var(--color-chart-sequential-600-on-dark); /** Paso 5 de la rampa — surface-dark */
   --heatmap-step-6-bg: var(--color-chart-sequential-700-on-dark); /** Paso 6 de la rampa — surface-dark */
+  --heatmap-diverging-warm-3-bg: var(--color-chart-diverging-warm-3-on-dark); /** Peldaño divergente warm-3 — surface-dark: el par -on-dark del sistema */
+  --heatmap-diverging-warm-2-bg: var(--color-chart-diverging-warm-2-on-dark); /** Peldaño divergente warm-2 — surface-dark: el par -on-dark del sistema */
+  --heatmap-diverging-warm-1-bg: var(--color-chart-diverging-warm-1-on-dark); /** Peldaño divergente warm-1 — surface-dark: el par -on-dark del sistema */
+  --heatmap-diverging-cool-1-bg: var(--color-chart-diverging-cool-1-on-dark); /** Peldaño divergente cool-1 — surface-dark: el par -on-dark del sistema */
+  --heatmap-diverging-cool-2-bg: var(--color-chart-diverging-cool-2-on-dark); /** Peldaño divergente cool-2 — surface-dark: el par -on-dark del sistema */
+  --heatmap-diverging-cool-3-bg: var(--color-chart-diverging-cool-3-on-dark); /** Peldaño divergente cool-3 — surface-dark: el par -on-dark del sistema */
   --heatmap-step-1-color: var(--color-text-on-dark); /** Tinta sobre el paso 1 — surface-dark */
   --heatmap-step-2-color: var(--color-text-on-dark); /** Tinta sobre el paso 2 — surface-dark */
   --heatmap-step-3-color: var(--color-text-on-dark); /** Tinta sobre el paso 3 — surface-dark */
   --heatmap-step-4-color: var(--color-text-on-light); /** Tinta sobre el paso 4 — surface-dark */
   --heatmap-step-5-color: var(--color-text-on-light); /** Tinta sobre el paso 5 — surface-dark */
   --heatmap-step-6-color: var(--color-text-on-light); /** Tinta sobre el paso 6 — surface-dark */
+  --heatmap-diverging-warm-3-color: var(--color-text-on-light); /** Tinta sobre el peldaño divergente warm-3 — surface-dark. #F48F6A. Prusia: 7,17:1 (blanco daría 2,34:1) */
+  --heatmap-diverging-warm-2-color: var(--color-text-on-light); /** Tinta sobre el peldaño divergente warm-2 — surface-dark. #E26330. Prusia: 4,84:1 (blanco daría 3,46:1) */
+  --heatmap-diverging-warm-1-color: var(--color-text-on-dark); /** Tinta sobre el peldaño divergente warm-1 — surface-dark. #B54E24. Blanco: 5,15:1 (prusia daría 3,26:1) */
+  --heatmap-diverging-neutral-bg: var(--color-surface-secondary-on-dark); /** Peldaño divergente neutral — surface-dark: el par -on-dark del sistema */
+  --heatmap-diverging-neutral-color: var(--color-text-on-dark); /** Tinta sobre el peldaño divergente neutral — surface-dark. el mismo gris que surface-dark-diverging-neutral de Chart (#4A4A4A). Blanco: 8,86:1 (prusia daría 1,89:1) */
+  --heatmap-diverging-cool-1-color: var(--color-text-on-dark); /** Tinta sobre el peldaño divergente cool-1 — surface-dark. #256FCF. Blanco: 4,94:1 (prusia daría 3,40:1) */
+  --heatmap-diverging-cool-2-color: var(--color-text-on-light); /** Tinta sobre el peldaño divergente cool-2 — surface-dark. #488FEF. Prusia: 5,15:1 (blanco daría 3,26:1) */
+  --heatmap-diverging-cool-3-color: var(--color-text-on-light); /** Tinta sobre el peldaño divergente cool-3 — surface-dark. #80B0F3. Prusia: 7,52:1 (blanco daría 2,23:1) */
   --heatmap-border-color: var(--color-text-on-dark); /** Color de la rejilla — surface-dark */
   --heatmap-row-header-bg: var(--color-background-dark); /** Fondo de la columna de filas — surface-dark */
   --heatmap-row-header-color: var(--color-text-on-dark); /** Color del nombre de la fila — surface-dark */
@@ -6651,6 +6679,20 @@ html.dark .surface-light {
   --heatmap-step-5-color: var(--color-text-on-dark);
   --heatmap-step-6-bg: var(--color-chart-sequential-700);
   --heatmap-step-6-color: var(--color-text-on-dark);
+  --heatmap-diverging-warm-3-bg: var(--color-chart-diverging-warm-3);
+  --heatmap-diverging-warm-3-color: var(--color-text-on-dark);
+  --heatmap-diverging-warm-2-bg: var(--color-chart-diverging-warm-2-on-dark);
+  --heatmap-diverging-warm-2-color: var(--color-text-on-light);
+  --heatmap-diverging-warm-1-bg: var(--color-chart-diverging-warm-1);
+  --heatmap-diverging-warm-1-color: var(--color-text-on-light);
+  --heatmap-diverging-neutral-bg: var(--color-surface-secondary-on-light);
+  --heatmap-diverging-neutral-color: var(--color-text-on-light);
+  --heatmap-diverging-cool-1-bg: var(--color-chart-diverging-cool-1);
+  --heatmap-diverging-cool-1-color: var(--color-text-on-light);
+  --heatmap-diverging-cool-2-bg: var(--color-chart-diverging-cool-2);
+  --heatmap-diverging-cool-2-color: var(--color-text-on-light);
+  --heatmap-diverging-cool-3-bg: var(--color-chart-diverging-cool-3);
+  --heatmap-diverging-cool-3-color: var(--color-text-on-dark);
   --image-crop-dialog-area-bg: var(--color-surface-secondary-on-light);
   --input-field-search-icon-color: var(--color-primary);
   --input-field-search-clear-color: var(--color-primary);

@@ -346,13 +346,13 @@ public enum BrandLetterSpacing {
 public enum BrandShadows {
     /// Token `shadow.none` — Escala. Valor del rol default
     public static let none: BrandShadow = BrandShadow.none
-    /// Token `shadow.sm` — Escala. El sistema no lo usa
+    /// Token `shadow.sm` — Escala. El sistema no lo usa. El color es el prusia de la paleta con opacidad 0.08 (sale como rgba(17,30,48,0.08))
     public static let sm: BrandShadow = BrandShadow(x: 0, y: 1, blur: 2, color: Color(brandHex: 0x111E30, opacity: 0.08))
-    /// Token `shadow.md` — Escala. El sistema no lo usa
+    /// Token `shadow.md` — Escala. El sistema no lo usa. El color es el prusia de la paleta con opacidad 0.10 (sale como rgba(17,30,48,0.10))
     public static let md: BrandShadow = BrandShadow(x: 0, y: 2, blur: 8, color: Color(brandHex: 0x111E30, opacity: 0.1))
-    /// Token `shadow.lg` — Escala. El sistema no lo usa
+    /// Token `shadow.lg` — Escala. El sistema no lo usa. El color es el prusia de la paleta con opacidad 0.12 (sale como rgba(17,30,48,0.12))
     public static let lg: BrandShadow = BrandShadow(x: 0, y: 4, blur: 16, color: Color(brandHex: 0x111E30, opacity: 0.12))
-    /// Token `shadow.xl` — Escala. El sistema no lo usa
+    /// Token `shadow.xl` — Escala. El sistema no lo usa. El color es el prusia de la paleta con opacidad 0.16 (sale como rgba(17,30,48,0.16))
     public static let xl: BrandShadow = BrandShadow(x: 0, y: 8, blur: 32, color: Color(brandHex: 0x111E30, opacity: 0.16))
     /// Token `shadow.default` — Rol: ningún elemento del sistema proyecta sombra. La elevación se expresa con borde y con el fondo del panel
     public static let `default`: BrandShadow = BrandShadow.none

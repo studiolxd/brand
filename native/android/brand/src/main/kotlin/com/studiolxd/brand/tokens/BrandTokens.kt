@@ -418,13 +418,13 @@ class BrandShadow(val x: Dp, val y: Dp, val blur: Dp, val color: Color) {
 object BrandShadows {
     /** Token `shadow.none` — Escala. Valor del rol default */
     val none = BrandShadow.None
-    /** Token `shadow.sm` — Escala. El sistema no lo usa */
+    /** Token `shadow.sm` — Escala. El sistema no lo usa. El color es el prusia de la paleta con opacidad 0.08 (sale como rgba(17,30,48,0.08)) */
     val sm = BrandShadow(0.dp, 1.dp, 2.dp, Color(0x14111E30))
-    /** Token `shadow.md` — Escala. El sistema no lo usa */
+    /** Token `shadow.md` — Escala. El sistema no lo usa. El color es el prusia de la paleta con opacidad 0.10 (sale como rgba(17,30,48,0.10)) */
     val md = BrandShadow(0.dp, 2.dp, 8.dp, Color(0x1A111E30))
-    /** Token `shadow.lg` — Escala. El sistema no lo usa */
+    /** Token `shadow.lg` — Escala. El sistema no lo usa. El color es el prusia de la paleta con opacidad 0.12 (sale como rgba(17,30,48,0.12)) */
     val lg = BrandShadow(0.dp, 4.dp, 16.dp, Color(0x1F111E30))
-    /** Token `shadow.xl` — Escala. El sistema no lo usa */
+    /** Token `shadow.xl` — Escala. El sistema no lo usa. El color es el prusia de la paleta con opacidad 0.16 (sale como rgba(17,30,48,0.16)) */
     val xl = BrandShadow(0.dp, 8.dp, 32.dp, Color(0x29111E30))
     /** Token `shadow.default` — Rol: ningún elemento del sistema proyecta sombra. La elevación se expresa con borde y con el fondo del panel */
     val default = BrandShadow.None

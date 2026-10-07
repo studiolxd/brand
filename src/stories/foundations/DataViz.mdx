@@ -31,6 +31,8 @@ Un gráfico lo **lee una persona** y lo **ejecuta una máquina**. Por eso aquí 
 
 ## La paleta categórica
 
+Toda la paleta de esta página —ranuras categóricas, rampa secuencial y par divergente— vive en `tokens/color/chart.json` y es la **única excepción declarada** a la regla de no inventar colores: son hex propios, pero no inventados, porque salen de los tonos de marca en OKLCH con el método que cada `$description` deja escrito. Quedó aprobada el 2026-10-07, y no se amplía sin decisión del operador: una serie novena, un tono para un rol o un paso más de rampa se piden, no se añaden.
+
 Las ocho ranuras salen de los tonos de marca. Cinco son los de la paleta (`prussian`, `cayenne`, `yellow`, `emerald`, `lavender`), llevados al **paso de claridad** que un gráfico necesita: los valores de marca están fuera de la banda legible (el amarillo `#FFCD00` tiene 1.3:1 sobre blanco). Las otras tres son **tonos derivados**, interpolando el ángulo de tono en OKLCH entre pares de marca contiguos: aqua entre esmeralda y prusia, magenta entre lavanda y cayena, lima entre amarillo y esmeralda.
 
 <ColorPalette>
@@ -110,6 +112,12 @@ Para una rampa **ordinal** (marcas discretas ordenadas) el extremo claro no baja
 El par divergente es **cálido contra frío**: cayena y prusia leen como opuestos y el gris del medio lee como «nada». Un par de dos tonos fríos —prusia y aqua— no sirve, y en el punto medio nunca va un tono.
 
 El neutro es el **punto de menor saliencia** de la rampa, y eso manda por encima de cualquier otra consideración: el cero es «aquí no pasa nada», así que su trabajo es retirarse hacia el lienzo. Es el único dato que se viste con un rol de superficie, y por eso el par oscuro **no puede ser el gris claro invertido**: sobre prusia sería el color más brillante de la escala y el medio gritaría más que los extremos. Medido contra su lienzo, el neutro es el mínimo en las dos superficies —1,12:1 sobre blanco y 1,89:1 sobre prusia, frente a 2,49:1 y 3,26:1 del paso más flojo de los brazos— y la saliencia crece hacia los dos extremos sin saltos raros.
+
+### Quién pinta cada rampa
+
+- **La secuencial** la pintan `Heatmap` (su escala por defecto) y `CodeBlock`. `Heatmap` usa **seis** de los siete pasos —100, 200, 300, 500, 600 y 700—: la cifra va dentro de la celda y `sequential-400-on-dark` no admite ninguna de las dos tintas a 4,5:1 (4,34:1 con blanco, 3,86:1 con prusia). `CodeBlock` solo toma el extremo, el 700, para las palabras reservadas. **El 400 no lo usa hoy ningún componente**; sigue en la paleta porque una rampa sin cifra encima —una forma de `Chart`, por ejemplo— no tiene ese límite.
+- **La divergente** la pinta `Heatmap scale="diverging"`, con sus siete peldaños. Un matiz: sobre página clara el intermedio cálido (`diverging-warm-2`, #D45C2C) tampoco admite cifra —4,29:1 con prusia y 3,91:1 con blanco—, así que la matriz lo pinta con su par oscuro, `diverging-warm-2-on-dark` (#E26330, 4,84:1 con prusia). La razón y la tabla de contrastes, en la doc de `Heatmap`.
+- `Chart` publica las dos rampas como tokens propios (`--chart-sequential-*`, `--chart-diverging-*`) para quien las necesite, pero hoy no pinta ninguna forma con ellas.
 
 ## Estado no es identidad
 

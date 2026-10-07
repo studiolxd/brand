@@ -2,14 +2,29 @@
 
 import { forwardRef, useMemo, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
-import { heatmapRampIndex, heatmapStep, HEATMAP_RAMP_STEPS } from './heatmapScale';
+import {
+  heatmapDivergingLegend,
+  heatmapDivergingRadius,
+  heatmapDivergingStep,
+  heatmapRampIndex,
+  heatmapStep,
+  HEATMAP_RAMP_STEPS,
+  type HeatmapDivergingDirection,
+} from './heatmapScale';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import './Heatmap.css';
 
-export type { HeatmapScale } from './heatmapScale';
+export type {
+  HeatmapScale,
+  HeatmapDivergingDirection,
+  HeatmapDivergingStep,
+} from './heatmapScale';
+
+/** La rampa de la matriz: una magnitud (`sequential`) o una distancia a un centro (`diverging`). */
+export type HeatmapScaleKind = 'sequential' | 'diverging';
 
 /**
- * Los tres textos de la matriz, y los tres son **cromo**: cómo se llama la
+ * Los textos de la matriz, y todos son **cromo**: cómo se llama la
  * tabla, cómo se dice que una casilla no tiene dato y cómo se llama la
  * leyenda. Los nombres de filas y columnas son contenido, y los escribe quien
  * pasa los datos.
@@ -21,6 +36,13 @@ export interface HeatmapMessages {
   empty: string;
   /** Nombre accesible de la leyenda de la rampa. */
   scale: string;
+  /**
+   * Rótulo del centro en la leyenda de la escala divergente, con el valor ya
+   * formateado («Centro: 0»). **Opcional** en el tipo para que un catálogo
+   * anterior siga compilando; solo se lee con `scale="diverging"` y leyenda,
+   * y sin él ni `midpointLabel` la matriz lanza como cualquier clave ausente.
+   */
+  midpoint?: (value: string) => string;
 }
 
 /** Una fila: una persona, un puesto. */
@@ -56,16 +78,36 @@ export interface HeatmapProps extends Omit<ComponentPropsWithoutRef<'div'>, 'chi
   columns: HeatmapColumn[];
   /** Las casillas con dato. Las que falten se pintan sin dato. */
   cells: HeatmapCell[];
-  /** Extremo bajo del dominio. Default 0. */
+  /**
+   * La rampa. `'sequential'` (default) pinta una magnitud, de menos a más;
+   * `'diverging'` pinta la distancia a `midpoint`, con un brazo cálido y uno
+   * frío de tres intensidades y el neutro en el centro.
+   */
+  scale?: HeatmapScaleKind;
+  /**
+   * Extremo bajo del dominio. En la secuencial, default 0. En la divergente
+   * no tiene default: si se pasa (él o `max`), el radio de los brazos es la
+   * mayor distancia de los extremos pasados al centro.
+   */
   min?: number;
   /**
    * Extremo alto del dominio. **Sin él sale del mayor valor de `cells`**, que
    * sirve para explorar pero hace que dos matrices del mismo panel no se
-   * puedan comparar: en cuanto haya dos, se pasa.
+   * puedan comparar: en cuanto haya dos, se pasa. En la divergente, sin `min`
+   * ni `max` el radio sale de la mayor |valor − centro| de las casillas.
    */
   max?: number;
-  /** Pasos de la rampa, de 2 a 6. Default 5. */
+  /** Pasos de la rampa secuencial, de 2 a 6. Default 5. La divergente siempre tiene siete. */
   steps?: number;
+  /** El centro de la escala divergente: el valor que se lee como «nada». Default 0. */
+  midpoint?: number;
+  /**
+   * Qué brazo pinta lo que queda por debajo del centro. Default
+   * `'warm-below'`: lo que se queda corto es cálido y lo que sobra, frío.
+   * `'warm-above'` lo invierte, para magnitudes en las que pasarse es lo que
+   * alarma.
+   */
+  divergingDirection?: HeatmapDivergingDirection;
   /** Encabezado de la columna de filas («Persona», «Puesto»). */
   rowHeader?: ReactNode;
   /** Pinta la cifra dentro de la celda. Default `true`. Con `false` sigue leyéndose. */
@@ -80,6 +122,12 @@ export interface HeatmapProps extends Omit<ComponentPropsWithoutRef<'div'>, 'chi
   minLabel?: ReactNode;
   /** Rótulo del extremo alto de la leyenda. Default: el máximo formateado. */
   maxLabel?: ReactNode;
+  /**
+   * Rótulo del centro en la leyenda divergente. **Sin él**, sale de
+   * `heatmap.midpoint` del catálogo con el centro formateado. Solo se lee con
+   * `scale="diverging"` y leyenda.
+   */
+  midpointLabel?: ReactNode;
   /**
    * Nombre accesible de la matriz. **Sin él**, sale de `heatmap.label` del
    * `BrandMessagesProvider`.
@@ -117,9 +165,12 @@ export const Heatmap = forwardRef<HTMLDivElement, HeatmapProps>(function Heatmap
   rows,
   columns,
   cells,
-  min = 0,
+  scale = 'sequential',
+  min: minProp,
   max,
   steps = 5,
+  midpoint = 0,
+  divergingDirection = 'warm-below',
   rowHeader,
   showValues = true,
   formatValue,
@@ -127,6 +178,7 @@ export const Heatmap = forwardRef<HTMLDivElement, HeatmapProps>(function Heatmap
   showLegend = true,
   minLabel,
   maxLabel,
+  midpointLabel,
   label,
   emptyLabel,
   scaleLabel,
@@ -134,6 +186,8 @@ export const Heatmap = forwardRef<HTMLDivElement, HeatmapProps>(function Heatmap
   ...rest
 }, ref) {
   const t = useBrandMessages('heatmap');
+  const divergente = scale === 'diverging';
+  const min = minProp ?? 0;
 
   const índice = useMemo(() => {
     const mapa = new Map<string, number | null>();
@@ -149,6 +203,22 @@ export const Heatmap = forwardRef<HTMLDivElement, HeatmapProps>(function Heatmap
 
   const pasos = Math.max(2, Math.min(HEATMAP_RAMP_STEPS, Math.round(steps)));
   const escala = { min, max: techo, steps: pasos };
+
+  const radio = useMemo(
+    () => heatmapDivergingRadius(midpoint, cells.map((c) => c.value), minProp, max),
+    [cells, midpoint, minProp, max],
+  );
+  const escalaDivergente = { midpoint, radius: radio, direction: divergingDirection };
+
+  /** La clase de la casilla: el peldaño que le toca, o sin dato. */
+  const claseDePaso = (valor: number | null): string => {
+    if (divergente) {
+      const peldaño = heatmapDivergingStep(valor, escalaDivergente);
+      return peldaño === null ? 'heatmap__cell--empty' : `heatmap__cell--diverging-${peldaño}`;
+    }
+    const paso = heatmapStep(valor, escala);
+    return paso === null ? 'heatmap__cell--empty' : `heatmap__cell--step-${heatmapRampIndex(paso, pasos)}`;
+  };
 
   const número = useMemo(() => new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }), [locale]);
   const escribe = formatValue ?? ((value: number) => número.format(value));
@@ -205,13 +275,7 @@ export const Heatmap = forwardRef<HTMLDivElement, HeatmapProps>(function Heatmap
                 <th className="heatmap__row-header" scope="row">{row.label}</th>
                 {columns.map((column) => {
                   const valor = índice.get(clave(row.id, column.key)) ?? null;
-                  const paso = heatmapStep(valor, escala);
-                  const clases = [
-                    'heatmap__cell',
-                    paso === null
-                      ? 'heatmap__cell--empty'
-                      : `heatmap__cell--step-${heatmapRampIndex(paso, pasos)}`,
-                  ].join(' ');
+                  const clases = `heatmap__cell ${claseDePaso(valor)}`;
                   const texto = valor === null ? t('empty', emptyLabel) : escribe(valor);
 
                   return (
@@ -226,7 +290,25 @@ export const Heatmap = forwardRef<HTMLDivElement, HeatmapProps>(function Heatmap
         </table>
       </div>
 
-      {showLegend ? (
+      {showLegend && divergente ? (
+        <p className="heatmap__legend">
+          <span>{minLabel ?? escribe(midpoint - radio)}</span>
+          {/* Los dos brazos y el neutro, del valor más bajo al más alto. La
+              tira es decorativa: los extremos y el centro van en texto. */}
+          <span className="heatmap__ramp" role="img" aria-label={t('scale', scaleLabel)}>
+            {heatmapDivergingLegend(divergingDirection).map((peldaño) => (
+              <span
+                key={peldaño}
+                className={`heatmap__swatch heatmap__swatch--diverging-${peldaño}`}
+              />
+            ))}
+          </span>
+          <span>{maxLabel ?? escribe(midpoint + radio)}</span>
+          <span className="heatmap__midpoint">
+            {midpointLabel ?? t('midpoint')(escribe(midpoint))}
+          </span>
+        </p>
+      ) : showLegend ? (
         <p className="heatmap__legend">
           <span>{minLabel ?? escribe(min)}</span>
           {/* La rampa es decorativa: los dos extremos, que son lo que dice qué

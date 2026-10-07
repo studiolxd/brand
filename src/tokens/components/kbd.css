@@ -29,7 +29,7 @@
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --kbd-bg: rgba(255, 255, 255, 0.08); /** Fondo del keycap — surface-dark: el gris claro no existe en superficie oscura, y el velo translúcido es el mismo recurso que usan Skeleton y Table */
+  --kbd-bg: var(--color-surface-secondary-on-dark); /** Fondo del keycap — surface-dark: la superficie secundaria en su par oscuro, el mismo rol (y el mismo token) que usa Skeleton. Antes era un velo blanco al 8 % escrito a mano */
   --kbd-color: var(--color-text-on-dark); /** Símbolo — surface-dark */
   --kbd-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
 }
