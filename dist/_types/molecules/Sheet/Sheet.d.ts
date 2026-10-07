@@ -54,6 +54,11 @@ export interface SheetProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
      * Sirve para desmontar el panel solo después de que haya salido de pantalla.
      */
     onAnimationEndCapture?: (event: React.AnimationEvent) => void;
+    /**
+     * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+     * **Va al panel; el disparador, si lo hay, es tuyo y ya lleva tus clases**
+     * (regla de `className` en componentes con portal, CLAUDE.md § Base UI).
+     */
     className?: string;
 }
 /**

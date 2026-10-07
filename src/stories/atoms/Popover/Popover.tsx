@@ -93,7 +93,11 @@ export interface PopoverProps {
    * Pásalo solo para llevar la capa a otro sitio: gana siempre.
    */
   container?: HTMLElement | null;
-  /** Clase adicional para el panel. */
+  /**
+   * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+   * **Va al panel; el disparador es tuyo y ya lleva tus clases**
+   * (regla de `className` en componentes con portal, CLAUDE.md § Base UI).
+   */
   className?: string;
 }
 

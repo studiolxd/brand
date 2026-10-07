@@ -7,16 +7,11 @@
   border: var(--annotation-thread-border-width) var(--annotation-thread-border-style) var(--annotation-thread-border-color);
 }
 
-/* Un hilo atendido da un paso atrás: ya se ha mirado, pero sigue abierto. La
-   escala de presencia es el estado: plena → segundo plano → retirada. */
-.annotation-thread.annotation-thread--acknowledged {
-  opacity: var(--annotation-thread-acknowledged-opacity);
-}
-
-/* Un hilo resuelto se retira: sigue ahí, pero deja de pedir atención. */
-.annotation-thread.annotation-thread--resolved {
-  opacity: var(--annotation-thread-resolved-opacity);
-}
+/* El estado lo dice la etiqueta (`Tag`), no la opacidad (D41): un hilo
+   atendido o resuelto se lee a contraste pleno. Atenuarlo bajaba la letra
+   menor a 3,94:1 (atendido) y todo el hilo a 2:1–2,5:1 (resuelto). Los
+   modificadores `--acknowledged`/`--resolved` siguen en el HTML para quien
+   quiera engancharse a ellos, pero el sistema no los pinta. */
 
 .annotation-thread__status {
   display: flex;

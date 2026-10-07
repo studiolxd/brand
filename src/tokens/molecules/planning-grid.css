@@ -16,7 +16,7 @@
   --planning-grid-cell-padding-block: var(--spacing-1); /** Padding vertical de una celda */
   --planning-grid-cell-padding-inline: var(--spacing-1); /** Padding horizontal de una celda */
   --planning-grid-cell-font-size: var(--font-size-1); /** Tamaño de la cifra de una celda de solo lectura */
-  --planning-grid-pending-opacity: var(--opacity-disabled); /** Opacidad de una celda cuyo cambio está en vuelo */
+  --planning-grid-saving-gap: var(--spacing-1); /** Aire entre el campo de un cruce en vuelo y su marca de guardado (el Spinner sm) */
   --planning-grid-radius: var(--border-radius-default); /** Radio del marco de la rejilla */
   --planning-grid-border-color: var(--color-primary); /** Color de la rejilla */
   --planning-grid-border-width: var(--border-width-default); /** Grosor de la rejilla */

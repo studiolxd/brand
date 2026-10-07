@@ -99,11 +99,18 @@
   color: var(--planning-grid-cell-readonly-color);
 }
 
-/* Un cambio en vuelo se atenúa en vez de sustituirse por un indicador: la
-   cifra que se acaba de escribir sigue a la vista, que es lo que se está
-   comprobando. */
+/* Un cambio en vuelo no se atenúa (D41: la opacidad dejaba la cifra a
+   2,47:1) ni se sustituye por un indicador: la cifra que se acaba de escribir
+   sigue a la vista y a contraste pleno, que es lo que se está comprobando, y
+   un spinner pequeño al lado dice que se está guardando. En la misma línea
+   que el campo: la celda crece lo que haga falta antes que partirse. */
 .planning-grid__cell.planning-grid__cell--pending {
-  opacity: var(--planning-grid-pending-opacity);
+  white-space: nowrap;
+}
+
+.planning-grid__saving {
+  margin-inline-start: var(--planning-grid-saving-gap);
+  vertical-align: middle;
 }
 
 .planning-grid__input {

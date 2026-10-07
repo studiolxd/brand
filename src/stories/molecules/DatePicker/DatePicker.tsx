@@ -128,7 +128,12 @@ export interface DatePickerProps {
   name?: string;
   /** Se llama al salir del campo (react-hook-form lo usa para validar). */
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
-  /** Se añade DESPUÉS de las clases propias del componente. */
+  /**
+   * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+   * **Va al disparador, que pinta el componente** (el campo: la máscara y el botón del calendario): el panel sale por un
+   * portal y se personaliza con tokens (regla de `className` en componentes
+   * con portal, CLAUDE.md § Base UI).
+   */
   className?: string;
 }
 

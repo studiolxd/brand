@@ -50,14 +50,22 @@ el rótulo es una prop, así que una revisión puede escribir «Verificada» sob
 <AnnotationThread annotation={c} status="acknowledged" acknowledgedLabel={t('review.verified')} />
 ```
 
-### El tratamiento: una escala de presencia
+### El tratamiento: lo dice la etiqueta
 
-Los tres estados son el mismo hilo con **menos presencia** según avanza: plena
-(`open`), en segundo plano (`acknowledged`, `opacity.muted`) y retirada
-(`resolved`, `opacity.disabled`). No desaparece ninguno —el historial de una
-revisión es parte de lo revisado— y no se estrena ni un color: el `Tag` usa
-variantes que el sistema ya tenía. La opacidad además no depende de la
-superficie, así que la escala se lee igual en claro y en oscuro.
+Los tres estados son el mismo hilo **a contraste pleno**, y lo que los distingue
+es la etiqueta de estado (`Tag`) que abre el hilo: «Abierta» en amarillo
+(`warning`), «Atendida» en prusia (`info`) y «Resuelta» en verde (`success`). Su
+texto sale del catálogo (`annotationThread.open|acknowledged|resolved`) o de
+`openLabel`/`acknowledgedLabel`/`resolvedLabel`. No desaparece ninguno —el
+historial de una revisión es parte de lo revisado— y no se estrena ni un color:
+el `Tag` usa variantes que el sistema ya tenía.
+
+El hilo **no se atenúa** según avanza. Hasta D41 lo hacía, con opacidad
+(`opacity.muted` el atendido, `opacity.disabled` el resuelto), y eso bajaba el
+texto por debajo del contraste mínimo: la letra menor del atendido quedaba en
+3,94:1 y todo el hilo resuelto entre 2:1 y 2,5:1. La opacidad es la marca de lo
+**deshabilitado**, y un hilo resuelto no lo está: se puede leer, citar y
+reabrir.
 
 <Canvas of={AnnotationThreadStories.Atendido} />
 

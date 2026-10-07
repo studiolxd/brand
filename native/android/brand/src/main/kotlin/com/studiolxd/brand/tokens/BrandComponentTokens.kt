@@ -1185,6 +1185,10 @@ object BrandLinkTokens {
     val hoverUnderlineWidth: BrandSchemeValue<Dp> = BrandSchemeValue(0.dp, 1.dp)
     /** Token `link.underline-offset` — Separación entre el texto y la línea */
     val underlineOffset: Dp = 4.dp
+    /** Token `link.in-text-underline-width` — Enlace dentro de texto corrido (párrafo, etiqueta, Prose): línea en reposo, en las DOS superficies. Entre texto, el color no basta para distinguirlo (en oscuro, amarillo sobre blanco da 1,5:1; WCAG 1.4.1 pide 3:1 u otra marca), así que la marca es la línea (D41). Sin par oscuro a propósito */
+    val inTextUnderlineWidth: Dp = 1.dp
+    /** Token `link.in-text-hover-underline-width` — Enlace dentro de texto corrido: sin línea en hover, en las dos superficies (D41) */
+    val inTextHoverUnderlineWidth: Dp = 0.dp
     /** Token `link.icon-gap` — Aire entre el icono y el texto del enlace */
     val iconGap: Dp = 8.dp
     /** Token `link.focus-ring-width` — Grosor del anillo de foco */
@@ -1199,11 +1203,11 @@ object BrandLinkTokens {
     val inkUnderlineWidth: Dp = 1.dp
     /** Token `link.ink-hover-underline-width` — Tono ink: sin línea en hover */
     val inkHoverUnderlineWidth: Dp = 0.dp
-    /** Token `link.accent-1-color` — Tono accent-1 (lavanda): color saturado que ya contrasta en cualquier superficie, sin par surface-dark (mismo motivo que Card/Step/ProgressBar) */
-    val accent1Color: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFBAABFF), Color(0xFFBAABFF))
-    /** Token `link.accent-1-hover-color` — Tono accent-1: mismo color en hover, como accent — lo que cambia es la línea */
-    val accent1HoverColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFBAABFF), Color(0xFFBAABFF))
-    /** Token `link.accent-1-underline-width` — Tono accent-1: línea en reposo, igual en las dos superficies (el color no cambia) */
+    /** Token `link.accent-1-color` — Tono accent-1 (lavanda) en superficie clara: cae al tono por defecto. La lavanda sobre blanco da 2,02:1 (D41): el tono solo se ve en superficie oscura */
+    val accent1Color: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFBAABFF))
+    /** Token `link.accent-1-hover-color` — Tono accent-1 en hover, superficie clara: el del tono por defecto */
+    val accent1HoverColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFBAABFF))
+    /** Token `link.accent-1-underline-width` — Tono accent-1: línea en reposo, en las dos superficies */
     val accent1UnderlineWidth: Dp = 1.dp
     /** Token `link.accent-1-hover-underline-width` — Tono accent-1: sin línea en hover, como accent */
     val accent1HoverUnderlineWidth: Dp = 0.dp

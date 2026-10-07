@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
+import { expect, waitFor, within } from 'storybook/test';
 import { Link } from './Link';
 import { Paragraph } from '../Paragraph/Paragraph';
 import { Stack } from '../Stack/Stack';
 import { PageIntro } from '../../molecules/PageIntro/PageIntro';
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const meta: Meta<typeof Link> = {
   title: 'Atoms/Link',
@@ -18,13 +19,55 @@ type Story = StoryObj<typeof Link>;
 /** Subrayado en reposo, sin subrayar en hover; el color es el del texto. */
 export const PorDefecto: Story = {};
 
-/** Dentro de un párrafo: es texto, no un control. */
+/**
+ * Dentro de un párrafo: es texto, no un control. Dentro de texto corrido la
+ * línea va en reposo y se quita en hover en las DOS superficies: en oscuro el
+ * amarillo no se distingue lo bastante de la tinta blanca que lo rodea.
+ */
 export const EnTexto: Story = {
   render: () => (
     <Paragraph>
       Los proyectos se organizan por cliente; consulta <Link href="#">la guía de organización</Link> antes de crear uno.
     </Paragraph>
   ),
+};
+
+export const ContratoEnTextoOscuro: Story = {
+  name: 'Test — en texto corrido, línea en reposo y ninguna en hover también en oscuro; el suelto no cambia',
+  tags: ['!dev'],
+  parameters: {
+    surface: 'dark',
+    chromatic: SOLO_OSCURO,
+    // a11y falso positivo (D41): `link-in-text-block`. El enlace del párrafo SÍ
+    // lleva su marca —la línea en reposo, que es lo que comprueba este test—,
+    // pero axe solo reconoce como marca `text-decoration`, un borde, `outline`,
+    // `background-image` o un cambio de fuente, y la línea del sistema es una
+    // sombra interior (regla 7). Sin marca reconocible, mide el color: amarillo
+    // sobre blanco, 1,5:1.
+    a11y: { config: { rules: [{ id: 'link-in-text-block', enabled: false }] } },
+  },
+  render: () => (
+    <>
+      <Paragraph>
+        Consulta <a href="#guia" data-testid="en-texto">la guía de organización</a> antes de crear uno.
+      </Paragraph>
+      <Link href="#suelto" data-testid="suelto">Ver proyectos</Link>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const enTexto = canvasElement.querySelector('[data-testid="en-texto"]') as HTMLElement;
+    const suelto = canvasElement.querySelector('[data-testid="suelto"]') as HTMLElement;
+    // El oscuro lo pone un efecto (`withSurface`): se espera, no se da por hecho.
+    await waitFor(() => expect(document.documentElement.dataset.theme).toBe('dark'));
+    const grosor = (el: HTMLElement, prop: string) => getComputedStyle(el).getPropertyValue(prop).trim();
+    // En texto: línea de 1px en reposo (la sombra interior la pinta) y 0 en hover.
+    await waitFor(() => expect(getComputedStyle(enTexto).boxShadow).toContain('0px -1px 0px 0px inset'));
+    await expect(grosor(enTexto, '--link-hover-underline-width')).toBe('0px');
+    // Suelto: en oscuro, sin línea en reposo y con línea en hover, como siempre.
+    await expect(grosor(suelto, '--link-underline-width')).toBe('0px');
+    await expect(grosor(suelto, '--link-hover-underline-width')).toBe('1px');
+    await expect(getComputedStyle(suelto).boxShadow).not.toContain('-1px');
+  },
 };
 
 /** `external`: nueva pestaña con `rel` seguro. */
@@ -177,12 +220,10 @@ export const ContratoBoton: Story = {
  * Tres tonos: `accent` (por defecto) para texto y acciones —el ejemplo es
  * «¿olvidaste la contraseña?»—; `ink` para lo utilitario (legal, volver);
  * `accent-1` para lo que quiere destacar con el acento 1 de la paleta sin
- * ser un enlace de acción principal.
+ * ser un enlace de acción principal. `accent-1` solo se ve en superficie
+ * oscura: en claro la lavanda no contrasta y cae al tono por defecto.
  */
 export const Tonos: Story = {
-  // a11y pendiente de decisión (D16): `color-contrast` del tono `accent-1` de `Link`:
-  // #baabff sobre #ffffff, 2,02:1 (texto de 16px, pide 4,5:1).
-  parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } },
   render: () => (
     <div style={{ display: 'flex', gap: 'var(--spacing-5)' }}>
       <Link href="#recuperar">¿Olvidaste tu contraseña?</Link>
@@ -204,16 +245,39 @@ export const ContratoInk: Story = {
 };
 
 export const ContratoAccent1: Story = {
-  name: 'Test — el tono accent-1 lleva su clase y su color de acento 1',
+  name: 'Test — el tono accent-1 lleva su clase y, en claro, el color del tono por defecto',
   tags: ['!dev'],
-  // a11y pendiente de decisión (D16): `color-contrast` del tono `accent-1` de `Link`:
-  // #baabff sobre #ffffff, 2,02:1 (texto de 16px, pide 4,5:1).
-  parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } },
-  render: () => <Link href="#novedades" tone="accent-1" data-testid="accent-1">Descubre las novedades</Link>,
+  render: () => (
+    <>
+      <Link href="#novedades" tone="accent-1" data-testid="accent-1">Descubre las novedades</Link>{' '}
+      <Link href="#proyectos" data-testid="accent">Ver proyectos</Link>
+    </>
+  ),
   play: async ({ canvasElement }) => {
     const a = canvasElement.querySelector('[data-testid="accent-1"]') as HTMLElement;
+    const porDefecto = canvasElement.querySelector('[data-testid="accent"]') as HTMLElement;
     await expect(a).toHaveClass('link--accent-1');
     await expect(getComputedStyle(a).boxShadow).not.toBe('none');
+    // La lavanda sobre blanco da 2,02:1: en claro el tono cae al de por defecto.
+    await expect(getComputedStyle(a).color).toBe(getComputedStyle(porDefecto).color);
+  },
+};
+
+export const ContratoAccent1Oscuro: Story = {
+  name: 'Test — el tono accent-1, en oscuro, es la lavanda',
+  tags: ['!dev'],
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
+  render: () => (
+    <>
+      <Link href="#novedades" tone="accent-1" data-testid="accent-1">Descubre las novedades</Link>
+      {/* Sonda: el navegador resuelve el token, sin parsear el color a mano. */}
+      <span data-testid="sonda" style={{ color: 'var(--color-accent-1)' }} aria-hidden="true">·</span>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const a = canvasElement.querySelector('[data-testid="accent-1"]') as HTMLElement;
+    const sonda = canvasElement.querySelector('[data-testid="sonda"]') as HTMLElement;
+    await waitFor(() => expect(getComputedStyle(a).color).toBe(getComputedStyle(sonda).color));
   },
 };
 

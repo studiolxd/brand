@@ -38,7 +38,7 @@
     "footer-color":               { "$value": "{color.text.on-light}",            "$type": "color",     "$description": "Color de las filas de totales" },
     "over-color":                 { "$value": "{color.error-text-on-light}",      "$type": "color",     "$description": "Color de un resto negativo: hay más horas asignadas que disponibles" },
 
-    "pending-opacity":            { "$value": "{opacity.disabled}",               "$type": "number",    "$description": "Opacidad de una celda cuyo cambio está en vuelo" },
+    "saving-gap":                 { "$value": "{spacing.1}",                      "$type": "dimension", "$description": "Aire entre el campo de un cruce en vuelo y su marca de guardado (el Spinner sm)" },
 
     "surface-dark-border-color":            { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de la rejilla — surface-dark" },
     "surface-dark-row-header-bg":           { "$value": "{color.background.dark}",    "$type": "color", "$description": "Fondo de la columna de filas — surface-dark" },

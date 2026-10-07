@@ -33,4 +33,4 @@ $lxd-planning-grid-footer-bg: #f2f2f2; // Fondo de las filas de totales
 $lxd-planning-grid-footer-font-weight: 500; // Peso de las filas de totales
 $lxd-planning-grid-footer-color: #111e30; // Color de las filas de totales
 $lxd-planning-grid-over-color: #b30000; // Color de un resto negativo: hay más horas asignadas que disponibles
-$lxd-planning-grid-pending-opacity: 0.4; // Opacidad de una celda cuyo cambio está en vuelo
+$lxd-planning-grid-saving-gap: 0.25rem; // Aire entre el campo de un cruce en vuelo y su marca de guardado (el Spinner sm)

@@ -53,7 +53,12 @@ export interface AsyncSelectProps {
     required?: boolean;
     /** Se llama al salir del control (react-hook-form lo usa para validar). */
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
-    /** Se añade DESPUÉS de las clases propias del componente. */
+    /**
+     * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+     * **Va al disparador, que pinta el componente** (el campo de búsqueda): el panel sale por un
+     * portal y se personaliza con tokens (regla de `className` en componentes
+     * con portal, CLAUDE.md § Base UI).
+     */
     className?: string;
     /**
      * Nombre accesible cuando el control va suelto. En un campo lo nombra la

@@ -728,6 +728,7 @@ html.dark {
  */
 :root {
   --link-hover-underline-width: 0px; /** Grosor de la línea en hover (en claro desaparece) */
+  --link-in-text-hover-underline-width: 0px; /** Enlace dentro de texto corrido: sin línea en hover, en las dos superficies (D41) */
   --link-cursor: pointer; /** Cursor */
   --link-ink-hover-underline-width: 0px; /** Tono ink: sin línea en hover */
   --link-accent-1-hover-underline-width: 0px; /** Tono accent-1: sin línea en hover, como accent */
@@ -736,14 +737,15 @@ html.dark {
   --link-color: var(--color-text-on-light); /** El enlace no tiene color propio: es texto, y lo distingue el subrayado */
   --link-hover-color: var(--color-text-on-light); /** Color en hover */
   --link-underline-width: var(--border-width-default); /** El subrayado es una línea bajo el enlace (borde, no text-decoration): cubre texto e icono y se separa del texto. Su grosor */
+  --link-in-text-underline-width: var(--border-width-default); /** Enlace dentro de texto corrido (párrafo, etiqueta, Prose): línea en reposo, en las DOS superficies. Entre texto, el color no basta para distinguirlo (en oscuro, amarillo sobre blanco da 1,5:1; WCAG 1.4.1 pide 3:1 u otra marca), así que la marca es la línea (D41). Sin par oscuro a propósito */
   --link-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
   --link-focus-ring-offset: var(--border-width-default); /** Separación entre el enlace y el anillo */
   --link-focus-ring-color: var(--color-primary); /** Anillo de foco */
   --link-ink-color: var(--color-text-on-light); /** Tono ink (enlaces utilitarios: legal, volver): tinta */
   --link-ink-underline-width: var(--border-width-default); /** Tono ink: línea en reposo, en las dos superficies */
-  --link-accent-1-color: var(--color-accent-1); /** Tono accent-1 (lavanda): color saturado que ya contrasta en cualquier superficie, sin par surface-dark (mismo motivo que Card/Step/ProgressBar) */
-  --link-accent-1-hover-color: var(--color-accent-1); /** Tono accent-1: mismo color en hover, como accent — lo que cambia es la línea */
-  --link-accent-1-underline-width: var(--border-width-default); /** Tono accent-1: línea en reposo, igual en las dos superficies (el color no cambia) */
+  --link-accent-1-underline-width: var(--border-width-default); /** Tono accent-1: línea en reposo, en las dos superficies */
+  --link-accent-1-color: var(--link-color); /** Tono accent-1 (lavanda) en superficie clara: cae al tono por defecto. La lavanda sobre blanco da 2,02:1 (D41): el tono solo se ve en superficie oscura */
+  --link-accent-1-hover-color: var(--link-hover-color); /** Tono accent-1 en hover, superficie clara: el del tono por defecto */
 }
 .surface-dark,
 .surface-invert,
@@ -755,6 +757,8 @@ html.dark {
   --link-hover-underline-width: var(--border-width-default); /** Línea en hover — surface-dark */
   --link-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
   --link-ink-color: var(--color-text-on-dark); /** Tono ink — surface-dark: blanco, no amarillo */
+  --link-accent-1-color: var(--color-accent-1); /** Tono accent-1 — surface-dark: lavanda, que sobre prusia sí contrasta */
+  --link-accent-1-hover-color: var(--color-accent-1); /** Tono accent-1 en hover — surface-dark: lavanda */
 }
 /**
  * Do not edit directly, this file was auto-generated.
@@ -5215,8 +5219,6 @@ html.dark {
   --annotation-thread-item-gap: var(--spacing-2); /** Separación entre la cabecera, el cuerpo y las acciones de una anotación */
   --annotation-thread-items-gap: var(--spacing-4); /** Separación entre anotaciones */
   --annotation-thread-header-gap: var(--spacing-2); /** Separación entre autor, fecha y marca de editada */
-  --annotation-thread-acknowledged-opacity: var(--opacity-muted); /** Un hilo atendido da un paso atrás: sigue vivo, pero ya no es lo primero que hay que mirar */
-  --annotation-thread-resolved-opacity: var(--opacity-disabled); /** Un hilo resuelto se retira: baja de intensidad sin desaparecer */
   --annotation-thread-border-width: var(--border-width-default); /** Grosor del borde del hilo */
   --annotation-thread-border-color: var(--color-border-default-on-light); /** Borde del hilo */
   --annotation-thread-reply-guide-width: var(--border-width-default); /** Grosor de la guía que acompaña a las respuestas */
@@ -5723,7 +5725,7 @@ html.dark {
   --planning-grid-cell-padding-block: var(--spacing-1); /** Padding vertical de una celda */
   --planning-grid-cell-padding-inline: var(--spacing-1); /** Padding horizontal de una celda */
   --planning-grid-cell-font-size: var(--font-size-1); /** Tamaño de la cifra de una celda de solo lectura */
-  --planning-grid-pending-opacity: var(--opacity-disabled); /** Opacidad de una celda cuyo cambio está en vuelo */
+  --planning-grid-saving-gap: var(--spacing-1); /** Aire entre el campo de un cruce en vuelo y su marca de guardado (el Spinner sm) */
   --planning-grid-radius: var(--border-radius-default); /** Radio del marco de la rejilla */
   --planning-grid-border-color: var(--color-primary); /** Color de la rejilla */
   --planning-grid-border-width: var(--border-width-default); /** Grosor de la rejilla */
@@ -6298,6 +6300,8 @@ html.dark .surface-light {
   --link-hover-underline-width: 0px;
   --link-focus-ring-color: var(--color-primary);
   --link-ink-color: var(--color-text-on-light);
+  --link-accent-1-color: var(--link-color);
+  --link-accent-1-hover-color: var(--link-hover-color);
   --loading-state-spinner-color: var(--empty-state-icon-color);
   --loading-state-label-color: var(--empty-state-description-color);
   --logo-color: var(--color-text-on-light);
@@ -7157,7 +7161,8 @@ html.dark .surface-light {
 /* El subrayado es una línea bajo el enlace, no text-decoration: cubre texto e
    icono por igual y se separa del texto (offset). En claro: línea en reposo
    que desaparece en hover. En oscuro: amarillo sin línea, y línea en hover
-   (tokens link.*underline-width). Va como
+   (tokens link.*underline-width) — salvo dentro de texto corrido, donde la
+   línea va en reposo en las dos superficies (ver más abajo). Va como
    sombra interior para no tocar bordes ni maquetación. Especificidad mínima
    (:where): los componentes que visten sus propios enlaces la anulan con
    `box-shadow: none; padding-block-end: 0`, igual que anulaban el subrayado.
@@ -7221,6 +7226,31 @@ a:where(:not(.button)),
 :where(.stack > a:not([class])) {
   inline-size: fit-content;
 }
+/* El enlace dentro de texto corrido (D41): línea en reposo y ninguna en hover,
+   en las DOS superficies. Entre texto, el color no basta para distinguirlo —en
+   oscuro el amarillo sobre la tinta blanca da 1,5:1 y WCAG 1.4.1 pide 3:1 u
+   otra marca—, así que la marca es la línea. El enlace suelto (navegación,
+   pie, menús, `Button variant="text"`) no cambia: en oscuro sigue sin línea en
+   reposo.
+
+   «Texto corrido» lo dice el CONTENEDOR, no el enlace: un párrafo (`<p>`, y
+   con él `Paragraph`, la entradilla de `PageIntro`, el aviso de `Form`), una
+   etiqueta (`<label>`: el consentimiento de un `CheckboxField`), un título
+   con un enlace dentro (el dominio de cada aplicación en `StatusPage`; ver
+   Fundamentos › Tipografía, «Un enlace dentro de un título») o un `Prose` (el
+   HTML de un CMS, con sus listas y citas). Así lo cumple también un `<a>`
+   crudo que llega en ese texto, sin prop ni clase que recordar.
+
+   Va por las custom properties y no por un selector con `box-shadow`: el
+   contenedor solo vuelve a declarar el grosor que leen las reglas de arriba,
+   así que no compite en especificidad con los componentes que visten sus
+   propios enlaces —esos siguen anulando la línea con `box-shadow: none`—, y lo
+   que ya resolvió el grosor en `:root` (el `Button variant="text"`, que bebe
+   de `--link-*` por token) no se entera. Especificidad cero (`:where`). */
+:where(p, label, h1, h2, h3, h4, h5, h6, .prose) {
+  --link-underline-width: var(--link-in-text-underline-width);
+  --link-hover-underline-width: var(--link-in-text-hover-underline-width);
+}
 a:where(:not(.button)):hover,
 :where(.link):hover {
   color: var(--link-hover-color);
@@ -7256,11 +7286,10 @@ a:focus-visible,
   color: var(--link-ink-color);
   box-shadow: inset 0 calc(-1 * var(--link-ink-hover-underline-width)) 0 0 currentColor;
 }
-/* Tono accent-1: acento 1 de la paleta (lavanda) — color saturado que ya
-   contrasta en cualquier superficie, sin par surface-dark (mismo motivo que
-   Card/Step/ProgressBar). Línea en reposo que desaparece en hover, igual en
-   las dos superficies (el color no cambia). Ejemplo: «¿olvidaste la
-   contraseña?». */
+/* Tono accent-1: acento 1 de la paleta (lavanda), SOLO en superficie oscura.
+   La lavanda sobre blanco da 2,02:1, así que en claro el token cae al tono
+   por defecto (D41) y el par `surface-dark-*` la devuelve sobre prusia. Línea
+   en reposo que desaparece en hover, en las dos superficies. */
 .link--accent-1 {
   color: var(--link-accent-1-color);
   box-shadow: inset 0 calc(-1 * var(--link-accent-1-underline-width)) 0 0 currentColor;

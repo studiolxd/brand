@@ -67,7 +67,11 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLElement>, 'c
      * Pásalo solo para llevar la capa a otro sitio: gana siempre.
      */
     container?: HTMLElement | null;
-    /** Clase adicional para el **bocadillo** (no para el disparador). */
+    /**
+     * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
+     * **Va al panel (el bocadillo); el disparador es tuyo y ya lleva tus clases**
+     * (regla de `className` en componentes con portal, CLAUDE.md § Base UI).
+     */
     className?: string;
 }
 /**

@@ -1,10 +1,11 @@
 'use client';
 
-import { forwardRef, useId, useMemo, useState, type ComponentPropsWithoutRef, type ReactNode } from 'react';
+import { forwardRef, useContext, useId, useMemo, useState, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import { Input } from '../../atoms/Input/Input';
+import { Spinner } from '../../atoms/Spinner/Spinner';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { parsePlanningHours } from './planningHours';
-import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { BrandMessagesContext, useBrandMessages } from '../../messages/BrandMessagesContext';
 import './PlanningGrid.css';
 
 /**
@@ -28,6 +29,11 @@ export interface PlanningGridMessages {
   remaining: string;
   /** Lo que se lee tras un resto negativo: hay más horas asignadas que disponibles. */
   over: string;
+  /**
+   * Lo que anuncia la marca de guardado de un cruce en vuelo («Guardando…»).
+   * **Opcional**: un catálogo sin ella compila, y la rejilla cae al castellano.
+   */
+  saving?: string;
 }
 
 /** Una fila: un proyecto, una persona. Lo que se planifica. */
@@ -66,7 +72,7 @@ export interface PlanningGridCell {
   value: number | null;
   /** Este cruce en concreto no se edita. */
   readOnly?: boolean;
-  /** El cambio está en vuelo: la celda se atenúa. */
+  /** El cambio está en vuelo: la cifra sigue a contraste pleno y la celda lleva una marca de guardado (un `Spinner` pequeño). */
   pending?: boolean;
   /** Lo que falló al guardar este cruce. Pone el campo en error y se anuncia. */
   error?: string;
@@ -114,6 +120,12 @@ export interface PlanningGridProps extends Omit<ComponentPropsWithoutRef<'div'>,
   label?: string;
   /** Nombre accesible del campo de un cruce. Sin él, sale de `planningGrid.cellLabel`. */
   cellLabel?: (row: string, column: string) => string;
+  /**
+   * Lo que anuncia la marca de guardado de un cruce en vuelo. Sin ella, sale
+   * de `planningGrid.saving` del catálogo y, si el catálogo no la trae, del
+   * default castellano «Guardando…». Solo se lee cuando hay un cruce en vuelo.
+   */
+  savingLabel?: string;
 }
 
 const clave = (rowId: string, columnKey: string) => `${rowId}\u0000${columnKey}`;
@@ -148,10 +160,15 @@ export const PlanningGrid = forwardRef<HTMLDivElement, PlanningGridProps>(functi
   size = 'sm',
   label,
   cellLabel,
+  savingLabel,
   className,
   ...rest
 }, ref) {
   const t = useBrandMessages('planningGrid');
+  // `saving` es una clave opcional: se lee a mano, sin el lector, que lanza
+  // cuando falta. Y solo se lee si algún cruce está en vuelo.
+  const catálogo = useContext(BrandMessagesContext);
+  const guardando = () => savingLabel ?? catálogo?.planningGrid?.saving ?? 'Guardando…';
 
   const índice = useMemo(() => {
     const mapa = new Map<string, PlanningGridCell>();
@@ -232,6 +249,12 @@ export const PlanningGrid = forwardRef<HTMLDivElement, PlanningGridProps>(functi
                           onCommit={(siguiente) => onCellChange?.(row.id, column.key, siguiente)}
                         />
                       )}
+                      {/* La marca de guardado: la cifra no se atenúa —se lee a
+                          contraste pleno, que es lo que se está comprobando— y
+                          el «en vuelo» lo dice el spinner, que además lo anuncia. */}
+                      {cell?.pending ? (
+                        <Spinner size="sm" label={guardando()} className="planning-grid__saving" />
+                      ) : null}
                     </td>
                   );
                 })}

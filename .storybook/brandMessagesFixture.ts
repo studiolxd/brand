@@ -369,6 +369,7 @@ export const brandMessagesFixture: BrandMessages = {
     capacity: 'Disponible',
     remaining: 'Sin asignar',
     over: 'sobreasignado',
+    saving: 'Guardando…',
   },
   recurrenceField: {
     legend: 'Repetición',

@@ -25,6 +25,16 @@
       "$type": "dimension",
       "$description": "Separación entre el texto y la línea"
     },
+    "in-text-underline-width": {
+      "$value": "{border-width.default}",
+      "$type": "dimension",
+      "$description": "Enlace dentro de texto corrido (párrafo, etiqueta, Prose): línea en reposo, en las DOS superficies. Entre texto, el color no basta para distinguirlo (en oscuro, amarillo sobre blanco da 1,5:1; WCAG 1.4.1 pide 3:1 u otra marca), así que la marca es la línea (D41). Sin par oscuro a propósito"
+    },
+    "in-text-hover-underline-width": {
+      "$value": "0px",
+      "$type": "dimension",
+      "$description": "Enlace dentro de texto corrido: sin línea en hover, en las dos superficies (D41)"
+    },
     "icon-gap": {
       "$value": "{spacing.2}",
       "$type": "dimension",
@@ -96,24 +106,34 @@
       "$description": "Tono ink — surface-dark: blanco, no amarillo"
     },
     "accent-1-color": {
-      "$value": "{color.accent-1}",
+      "$value": "{link.color}",
       "$type": "color",
-      "$description": "Tono accent-1 (lavanda): color saturado que ya contrasta en cualquier superficie, sin par surface-dark (mismo motivo que Card/Step/ProgressBar)"
+      "$description": "Tono accent-1 (lavanda) en superficie clara: cae al tono por defecto. La lavanda sobre blanco da 2,02:1 (D41): el tono solo se ve en superficie oscura"
     },
     "accent-1-hover-color": {
-      "$value": "{color.accent-1}",
+      "$value": "{link.hover-color}",
       "$type": "color",
-      "$description": "Tono accent-1: mismo color en hover, como accent — lo que cambia es la línea"
+      "$description": "Tono accent-1 en hover, superficie clara: el del tono por defecto"
     },
     "accent-1-underline-width": {
       "$value": "{border-width.default}",
       "$type": "dimension",
-      "$description": "Tono accent-1: línea en reposo, igual en las dos superficies (el color no cambia)"
+      "$description": "Tono accent-1: línea en reposo, en las dos superficies"
     },
     "accent-1-hover-underline-width": {
       "$value": "0px",
       "$type": "dimension",
       "$description": "Tono accent-1: sin línea en hover, como accent"
+    },
+    "surface-dark-accent-1-color": {
+      "$value": "{color.accent-1}",
+      "$type": "color",
+      "$description": "Tono accent-1 — surface-dark: lavanda, que sobre prusia sí contrasta"
+    },
+    "surface-dark-accent-1-hover-color": {
+      "$value": "{color.accent-1}",
+      "$type": "color",
+      "$description": "Tono accent-1 en hover — surface-dark: lavanda"
     }
   }
 }

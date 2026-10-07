@@ -1176,6 +1176,10 @@ public enum BrandLinkTokens {
     public static let hoverUnderlineWidth: BrandSchemeValue<CGFloat> = BrandSchemeValue(light: 0, dark: 1)
     /// Token `link.underline-offset` — Separación entre el texto y la línea
     public static let underlineOffset: CGFloat = 4
+    /// Token `link.in-text-underline-width` — Enlace dentro de texto corrido (párrafo, etiqueta, Prose): línea en reposo, en las DOS superficies. Entre texto, el color no basta para distinguirlo (en oscuro, amarillo sobre blanco da 1,5:1; WCAG 1.4.1 pide 3:1 u otra marca), así que la marca es la línea (D41). Sin par oscuro a propósito
+    public static let inTextUnderlineWidth: CGFloat = 1
+    /// Token `link.in-text-hover-underline-width` — Enlace dentro de texto corrido: sin línea en hover, en las dos superficies (D41)
+    public static let inTextHoverUnderlineWidth: CGFloat = 0
     /// Token `link.icon-gap` — Aire entre el icono y el texto del enlace
     public static let iconGap: CGFloat = 8
     /// Token `link.focus-ring-width` — Grosor del anillo de foco
@@ -1190,11 +1194,11 @@ public enum BrandLinkTokens {
     public static let inkUnderlineWidth: CGFloat = 1
     /// Token `link.ink-hover-underline-width` — Tono ink: sin línea en hover
     public static let inkHoverUnderlineWidth: CGFloat = 0
-    /// Token `link.accent-1-color` — Tono accent-1 (lavanda): color saturado que ya contrasta en cualquier superficie, sin par surface-dark (mismo motivo que Card/Step/ProgressBar)
-    public static let accent1Color: Color = Color(brandHex: 0xBAABFF)
-    /// Token `link.accent-1-hover-color` — Tono accent-1: mismo color en hover, como accent — lo que cambia es la línea
-    public static let accent1HoverColor: Color = Color(brandHex: 0xBAABFF)
-    /// Token `link.accent-1-underline-width` — Tono accent-1: línea en reposo, igual en las dos superficies (el color no cambia)
+    /// Token `link.accent-1-color` — Tono accent-1 (lavanda) en superficie clara: cae al tono por defecto. La lavanda sobre blanco da 2,02:1 (D41): el tono solo se ve en superficie oscura
+    public static let accent1Color: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xBAABFF))
+    /// Token `link.accent-1-hover-color` — Tono accent-1 en hover, superficie clara: el del tono por defecto
+    public static let accent1HoverColor: Color = Color(brandLight: Color(brandHex: 0x111E30), dark: Color(brandHex: 0xBAABFF))
+    /// Token `link.accent-1-underline-width` — Tono accent-1: línea en reposo, en las dos superficies
     public static let accent1UnderlineWidth: CGFloat = 1
     /// Token `link.accent-1-hover-underline-width` — Tono accent-1: sin línea en hover, como accent
     public static let accent1HoverUnderlineWidth: CGFloat = 0
