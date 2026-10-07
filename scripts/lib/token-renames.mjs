@@ -5,7 +5,7 @@
  * Esta tabla NO es la fuente de los alias: cada token nuevo lleva sus nombres
  * antiguos en `$extensions["com.studiolxd"].deprecatedAliases`, y de ahí los
  * emite el build (`sd.config.mjs`). La tabla sirve de registro para la guía de
- * migración y para el test de convención (`src/tokens/naming.test.ts`), que
+ * migración y para el test de convención (`scripts/token-naming.test.ts`), que
  * comprueba que cada renombrado conserva su alias y que ningún nombre viejo
  * sigue existiendo como token. Se retira, con los alias, en la v52.
  *
