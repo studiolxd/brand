@@ -12,6 +12,19 @@ const DESKTOP_MQ = '(min-width: 1024px)';
 
 type TooltipSide = 'top' | 'right' | 'bottom' | 'left';
 
+/** Lo que la barra pone por su cuenta y `toolbarProps` no puede pisar. */
+const GOVERNED_BAR_PROPS = new Set(['className', 'role', 'aria-label', 'aria-orientation', 'children']);
+
+/**
+ * Los atributos que se pueden poner en la barra (`role="toolbar"`). Sin
+ * `className`, `role`, `aria-label`, `aria-orientation` ni `children`: esos
+ * los gobierna el componente. Los `data-*` se admiten tipados para poder
+ * pasarlos en un objeto (`{ 'data-editor-ui': '' }`).
+ */
+export type FloatingToolbarBarProps =
+  Omit<React.HTMLAttributes<HTMLDivElement>, 'className' | 'role' | 'aria-label' | 'aria-orientation' | 'children'>
+  & { [attribute: `data-${string}`]: string | undefined };
+
 /** El lado del bocadillo de cada botón: hacia fuera del elemento, nunca encima de él. */
 const GroupContext = createContext<TooltipSide>('top');
 
@@ -57,6 +70,14 @@ export interface FloatingToolbarProps
    * proveedor de textos.
    */
   label: string;
+  /**
+   * Atributos para la **barra** (el `role="toolbar"`), no para el ancla: la
+   * misma barra en `top` y en los raíles de `sides`. Para marcarla —un
+   * `data-*` que la saque del alcance de otra hoja, un `id`— o escuchar en
+   * ella. Lo que el componente gobierna (clase, rol, nombre, orientación) no
+   * se acepta.
+   */
+  toolbarProps?: FloatingToolbarBarProps;
   /** El elemento al que se ancla la barra. */
   children: ReactNode;
   /** Se añade DESPUÉS de las clases propias. */
@@ -74,7 +95,8 @@ export interface FloatingToolbarProps
  * en el orden de tabulación aunque no se vea, así que con teclado siempre se
  * alcanza; al recibir el foco aparece.
  *
- * Reenvía `ref` y `{...rest}` al elemento ancla (el contenedor), no a la barra.
+ * Reenvía `ref` y `{...rest}` al elemento ancla (el contenedor), no a la barra;
+ * los atributos de la barra van en `toolbarProps`.
  */
 export const FloatingToolbar = forwardRef<HTMLDivElement, FloatingToolbarProps>(function FloatingToolbar({
   start,
@@ -82,6 +104,7 @@ export const FloatingToolbar = forwardRef<HTMLDivElement, FloatingToolbarProps>(
   layout = 'auto',
   alwaysVisible = false,
   label,
+  toolbarProps,
   children,
   className,
   ...rest
@@ -91,6 +114,11 @@ export const FloatingToolbar = forwardRef<HTMLDivElement, FloatingToolbarProps>(
   // misma media query, así que antes de hidratar (`null`) no hay salto.
   const isWide = useMediaQuery(DESKTOP_MQ);
   const sides = layout === 'sides' || (layout === 'auto' && isWide === true);
+
+  // Lo que gobierna el componente no se acepta, tampoco colado sin tipos.
+  const barProps = toolbarProps
+    ? Object.fromEntries(Object.entries(toolbarProps).filter(([key]) => !GOVERNED_BAR_PROPS.has(key)))
+    : undefined;
 
   const classes = [
     'floating-toolbar',
@@ -102,6 +130,7 @@ export const FloatingToolbar = forwardRef<HTMLDivElement, FloatingToolbarProps>(
   return (
     <div ref={ref} className={classes} {...rest}>
       <BaseToolbar.Root
+        {...barProps}
         className="floating-toolbar__bar"
         aria-label={label}
         orientation={sides ? 'vertical' : 'horizontal'}

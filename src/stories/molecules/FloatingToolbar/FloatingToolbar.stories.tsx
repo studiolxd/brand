@@ -166,6 +166,28 @@ export const ConPanel: Story = {
   ),
 };
 
+/**
+ * Atributos para la barra. `ref` y el resto de props van al ancla; lo que
+ * tiene que ir en el `role="toolbar"` —aquí, la marca con la que un editor
+ * separa su interfaz del contenido que edita, para que la hoja del contenido
+ * no la alcance— va en `toolbarProps`. Llega a la misma barra arriba y en los
+ * raíles.
+ */
+export const AtributosDeLaBarra: Story = {
+  name: 'Atributos en la barra',
+  args: { alwaysVisible: true },
+  render: (args) => (
+    <FloatingToolbar
+      {...args}
+      label="Acciones del bloque 1"
+      toolbarProps={{ 'data-editor-ui': '' }}
+      {...acciones(0, BLOQUES.length)}
+    >
+      <Bloque {...BLOQUES[0]} />
+    </FloatingToolbar>
+  ),
+};
+
 /* ── Tests ─────────────────────────────────────────────────────────────── */
 
 function opacidad(el: HTMLElement) {
@@ -256,5 +278,28 @@ export const TestVisibilidad: Story = {
     within(suelta).getByRole('button', { name: 'Editar el bloque' }).focus();
     await waitFor(() => expect(opacidad(suelta)).toBe('1'));
     await expect(getComputedStyle(suelta).pointerEvents).toBe('auto');
+  },
+};
+
+export const TestAtributosDeLaBarra: Story = {
+  name: 'Test — toolbarProps llega a la barra arriba y en los raíles',
+  tags: ['!dev'],
+  render: () => (
+    <Stack gap="lg">
+      <FloatingToolbar layout="top" label="Barra arriba" toolbarProps={{ 'data-editor-ui': '' }} {...acciones(0, 2)}>
+        <Bloque {...BLOQUES[0]} />
+      </FloatingToolbar>
+      <FloatingToolbar layout="sides" label="Barra en raíles" toolbarProps={{ 'data-editor-ui': '' }} {...acciones(1, 2)}>
+        <Bloque {...BLOQUES[1]} />
+      </FloatingToolbar>
+    </Stack>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    for (const name of ['Barra arriba', 'Barra en raíles']) {
+      const toolbar = canvas.getByRole('toolbar', { name });
+      await expect(toolbar).toHaveAttribute('data-editor-ui', '');
+      await expect(toolbar.closest('.floating-toolbar')).not.toHaveAttribute('data-editor-ui');
+    }
   },
 };

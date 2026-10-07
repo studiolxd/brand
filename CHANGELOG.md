@@ -34,6 +34,9 @@ para breaking changes.
   recogida). `capture-story.mjs` gana `--hide <selector>` y aparta el puntero tras `--click`.
 - `release:npm` lee el stage-id en el formato de npm 11 («staged with id …»); con la v50.0.0 lo subió pero no supo
   imprimirlo. Solo afecta al script de publicación, no al paquete.
+- `FloatingToolbar`: prop nueva `toolbarProps` (minor), los atributos de la **barra** (`role="toolbar"`) en las dos
+  colocaciones, arriba y raíles. `ref` y el resto de props siguen yendo al ancla. Admite `data-*` tipados; la clase,
+  el rol, el nombre y la orientación los gobierna el componente y se descartan aunque lleguen sin tipos.
 
 ## [50.0.0] — 2026-10-07
 
