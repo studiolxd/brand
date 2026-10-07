@@ -9,6 +9,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.studiolxd.brand.components.button.BrandButton
 import com.studiolxd.brand.components.button.ButtonVariant
+import com.studiolxd.brand.components.closebutton.BrandCloseButton
 import com.studiolxd.brand.components.text.BrandHeading
 import com.studiolxd.brand.components.text.BrandParagraph
 import com.studiolxd.brand.components.text.HeadingLevel
@@ -17,6 +18,7 @@ import com.studiolxd.brand.components.text.ParagraphSize
 import com.studiolxd.brand.components.text.TextElement
 import com.studiolxd.brand.components.text.TextTone
 import com.studiolxd.brand.components.text.brandSpanStyle
+import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.tokens.BrandSpacing
 import org.junit.Rule
 import org.junit.Test
@@ -40,6 +42,14 @@ class ComparisonSnapshotTest {
                 BrandButton("Guardar", onClick = {}, variant = variant)
             }
         }
+    }
+
+    /** Las stories «Por defecto», «Compacto» y «Grande» de `Atoms/CloseButton`: el aspa en la esquina, con el margen del lienzo. */
+    @Test
+    fun closeButton() {
+        paparazzi.brandComparison("closebutton-por-defecto", 480, 72) { BrandCloseButton(onClick = {}) }
+        paparazzi.brandComparison("closebutton-compacto", 480, 67) { BrandCloseButton(onClick = {}, size = BrandControlSize.Sm) }
+        paparazzi.brandComparison("closebutton-grande", 480, 80) { BrandCloseButton(onClick = {}, size = BrandControlSize.Lg) }
     }
 
     @Test
