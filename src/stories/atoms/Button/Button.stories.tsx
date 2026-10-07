@@ -4,6 +4,7 @@ import { useRender } from '@base-ui/react/use-render';
 import { expect, fireEvent, userEvent, within, fn } from 'storybook/test';
 import { Button } from './Button';
 import { Icon } from '../Icon/Icon';
+import { SOLO_CLARO } from '../../utils/chromaticModes';
 
 /**
  * Inyecta props sobre su hijo con `useRender` de Base UI, igual que hace el
@@ -156,7 +157,10 @@ export const TextDestructiveOnDark: Story = {
 
 export const ContratoSubrayadoText: Story = {
   name: 'Test — el subrayado de text es text-decoration con grosor y distancia de token',
-  tags: ['!dev'],
+  // Solo en claro: afirma la línea en reposo, que en oscuro `text` no lleva
+  // (la tinta ya lo distingue; ver los `surface-dark-*` de `button.text`).
+  tags: ['!dev', 'solo-claro'],
+  parameters: { chromatic: SOLO_CLARO },
   args: { variant: 'text' },
   render: TextConIcono.render,
   play: async ({ canvasElement }) => {
