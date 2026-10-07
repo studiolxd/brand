@@ -34,7 +34,8 @@ $lxd-menu-item-destructive-color: #b30000; // Color de texto de ítem destructiv
 $lxd-menu-item-destructive-highlighted-bg: #b30000; // Relleno del ítem destructivo resaltado: el rojo sólido, universal en las dos superficies
 $lxd-menu-item-destructive-highlighted-color: #ffffff; // Texto del ítem destructivo resaltado
 $lxd-menu-label-padding-block: 0.5rem; // Padding vertical del rótulo de sección
-$lxd-menu-label-padding-inline: 1rem; // Padding horizontal del rótulo de sección
+$lxd-menu-label-margin-inline: 0.5rem; // Margen lateral del rótulo de sección: el mismo `margin-inline` que el ítem (`menu.padding-inline`), para que su texto quede alineado con el del ítem por construcción
+$lxd-menu-label-padding-inline: 1rem; // Padding horizontal del rótulo de sección: el mismo que el del ítem (`menu.item-padding-inline`). Con `label-margin-inline`, el texto del rótulo arranca donde arranca el contenido del ítem (su texto o, si lo lleva, su icono)
 $lxd-menu-label-font-size: 0.875rem; // Tamaño de texto del rótulo de sección
 $lxd-menu-label-font-weight: 500; // Peso del rótulo de sección
 $lxd-menu-label-color: #4a4a4a; // Color del rótulo de sección

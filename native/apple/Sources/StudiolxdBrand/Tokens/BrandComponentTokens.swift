@@ -1802,7 +1802,9 @@ public enum BrandMenuTokens {
     public static let itemDestructiveHighlightedColor: Color = Color(brandHex: 0xFFFFFF)
     /// Token `menu.label-padding-block` — Padding vertical del rótulo de sección
     public static let labelPaddingBlock: CGFloat = 8
-    /// Token `menu.label-padding-inline` — Padding horizontal del rótulo de sección
+    /// Token `menu.label-margin-inline` — Margen lateral del rótulo de sección: el mismo `margin-inline` que el ítem (`menu.padding-inline`), para que su texto quede alineado con el del ítem por construcción
+    public static let labelMarginInline: CGFloat = 8
+    /// Token `menu.label-padding-inline` — Padding horizontal del rótulo de sección: el mismo que el del ítem (`menu.item-padding-inline`). Con `label-margin-inline`, el texto del rótulo arranca donde arranca el contenido del ítem (su texto o, si lo lleva, su icono)
     public static let labelPaddingInline: CGFloat = 16
     /// Token `menu.label-font-size` — Tamaño de texto del rótulo de sección
     public static let labelFontSize: CGFloat = 14

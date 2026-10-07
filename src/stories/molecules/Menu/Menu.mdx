@@ -26,7 +26,7 @@ El desplegable de acciones del sistema, con el disparador que haga falta. Define
 | `button` | Una acción: `label`, `onClick`, `icon`, `description`, `destructive`, `disabled`. `closeOnSelect: false` deja el menú abierto tras la acción |
 | `link` | Un enlace: `href` y lo mismo. Lo renderiza `renderLink`, para que sea el enlace del router |
 | `separator` | Una línea entre grupos |
-| `label` | Un rótulo de sección, no interactivo |
+| `label` | Un rótulo de sección, no interactivo. Su texto arranca donde arranca el contenido de los ítems (su texto o, si lo llevan, su icono): `label-margin-inline` y `label-padding-inline` apuntan al margen y al relleno del ítem |
 | `radio` | Una opción de elección exclusiva, con `value`; el grupo lo gobiernan `value` y `onValueChange` del menú |
 
 <Canvas of={MenuStories.ConRadio} />

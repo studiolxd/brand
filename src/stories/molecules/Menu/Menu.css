@@ -111,9 +111,13 @@
   height: var(--menu-item-icon-size);
 }
 
+/* El rótulo de sección replica la caja del ítem en el eje inline —el mismo
+   margen y el mismo relleno, por tokens que apuntan a los del ítem—, así que
+   su texto arranca donde arranca el contenido del ítem (D49). */
 .menu__label {
   padding-block: var(--menu-label-padding-block);
   padding-inline: var(--menu-label-padding-inline);
+  margin-inline: var(--menu-label-margin-inline);
   font-family: var(--menu-item-font-family);
   font-size: var(--menu-label-font-size);
   font-weight: var(--menu-label-font-weight);

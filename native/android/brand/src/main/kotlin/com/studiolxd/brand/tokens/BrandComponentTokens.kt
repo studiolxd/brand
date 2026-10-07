@@ -1811,7 +1811,9 @@ object BrandMenuTokens {
     val itemDestructiveHighlightedColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFFFFF), Color(0xFFFFFFFF))
     /** Token `menu.label-padding-block` — Padding vertical del rótulo de sección */
     val labelPaddingBlock: Dp = 8.dp
-    /** Token `menu.label-padding-inline` — Padding horizontal del rótulo de sección */
+    /** Token `menu.label-margin-inline` — Margen lateral del rótulo de sección: el mismo `margin-inline` que el ítem (`menu.padding-inline`), para que su texto quede alineado con el del ítem por construcción */
+    val labelMarginInline: Dp = 8.dp
+    /** Token `menu.label-padding-inline` — Padding horizontal del rótulo de sección: el mismo que el del ítem (`menu.item-padding-inline`). Con `label-margin-inline`, el texto del rótulo arranca donde arranca el contenido del ítem (su texto o, si lo lleva, su icono) */
     val labelPaddingInline: Dp = 16.dp
     /** Token `menu.label-font-size` — Tamaño de texto del rótulo de sección */
     val labelFontSize: TextUnit = 14.sp

@@ -360,3 +360,42 @@ export const ContratoAnchoItemEnlace: Story = {
       .toBeCloseTo(ocultar.getBoundingClientRect().width, 0);
   },
 };
+
+/** Borde izquierdo del texto de un nodo: el de su primer nodo de texto, medido con un `Range`. */
+function textLeft(el: Element): number {
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  const node = walker.nextNode();
+  if (!node) throw new Error('sin texto');
+  const range = document.createRange();
+  range.selectNodeContents(node);
+  return range.getBoundingClientRect().left;
+}
+
+/**
+ * Test: el texto del rótulo de sección arranca donde arranca el del ítem
+ * (D49). El rótulo replica la caja del ítem en el eje inline —su margen y su
+ * relleno apuntan a `menu.padding-inline` y `menu.item-padding-inline`—; antes
+ * le faltaba el margen y quedaba 8 px más a la izquierda.
+ */
+export const ContratoRotuloAlineado: Story = {
+  name: 'Test — el texto del rótulo se alinea con el del ítem',
+  tags: ['!dev'],
+  args: {
+    trigger: <Button variant="outline">Vista</Button>,
+    items: [
+      { type: 'label', label: 'Orden' },
+      { type: 'button', label: 'Por fecha', onClick: () => {} },
+      { type: 'button', label: 'Por nombre', onClick: () => {} },
+    ],
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Vista' }));
+
+    const body = within(document.body);
+    const item = await body.findByRole('menuitem', { name: 'Por fecha' });
+    const rotulo = await body.findByText('Orden');
+
+    await waitFor(() => expect(textLeft(rotulo)).toBeCloseTo(textLeft(item), 0));
+  },
+};
