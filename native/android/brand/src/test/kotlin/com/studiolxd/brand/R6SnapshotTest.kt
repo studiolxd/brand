@@ -35,6 +35,8 @@ import com.studiolxd.brand.components.tabs.TabsVariant
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.support.BrandInteractionState
 import com.studiolxd.brand.tokens.BrandSpacing
+import java.lang.reflect.InvocationTargetException
+import java.lang.reflect.Proxy
 import org.junit.Rule
 import org.junit.Test
 
@@ -77,16 +79,64 @@ class MenuSnapshotTest {
         }
     }
 
-    /** El menú abierto de verdad, con su `Popup` bajo el disparador y alineado a su final (Paparazzi sí pinta la ventana emergente). */
+    /**
+     * El menú abierto de verdad, con su `Popup` bajo el disparador y alineado a su final (Paparazzi sí pinta la ventana
+     * emergente). Abierto con el dedo, sin ítem resaltado: además del foco automático del panel ([LocalBrandMenuAutoFocus])
+     * hace falta que la ventana del popup nazca en modo táctil ([inTouchMode]).
+     */
     @Test
-    fun openPopup() = paparazzi.brandSnapshots("popup") {
-        CompositionLocalProvider(LocalBrandMenuAutoFocus provides false) {
-            Box(Modifier.width(200.dp).height(260.dp), contentAlignment = Alignment.TopEnd) {
-                BrandMenuImpl(previewMenuItems, Modifier, null, null, null, alignEnd = true, initiallyExpanded = true) { _, toggle ->
-                    BrandContextMenuTrigger(toggle, BrandControlSize.Md, ContextMenuTriggerOrientation.Horizontal, "Más opciones")
+    fun openPopup() = inTouchMode {
+        paparazzi.brandSnapshots("popup") {
+            CompositionLocalProvider(LocalBrandMenuAutoFocus provides false) {
+                Box(Modifier.width(200.dp).height(260.dp), contentAlignment = Alignment.TopEnd) {
+                    BrandMenuImpl(previewMenuItems, Modifier, null, null, null, alignEnd = true, initiallyExpanded = true) { _, toggle ->
+                        BrandContextMenuTrigger(toggle, BrandControlSize.Md, ContextMenuTriggerOrientation.Horizontal, "Más opciones")
+                    }
                 }
             }
         }
+    }
+
+    /**
+     * Ejecuta [block] con las ventanas nuevas en modo táctil, como en un móvil que abre el menú con el dedo (D54).
+     *
+     * La sesión de ventanas de layoutlib (`BridgeWindowSession.addToDisplayAsUser`) devuelve 0, sin
+     * `ADD_FLAG_IN_TOUCH_MODE`, así que la ventana del `Popup(focusable = true)` nace fuera del modo táctil. En su primer
+     * recorrido `ViewRootImpl` le da entonces el foco por defecto (`restoreDefaultFocus`), Compose lo lleva al primer
+     * enfocable (el ítem «Duplicar») y, con `InputMode.Keyboard`, ese foco es `focusVisible`: el ítem se pinta
+     * resaltado. Ese foco llega en todas las ejecuciones; lo intermitente es solo si la recomposición que pinta el
+     * resaltado entra antes o después del fotograma que se captura, cosa que depende del reloj y de lo caliente que esté
+     * la JVM. Por eso fallaba con la suite entera y pasaba sola, y por eso apagar el foco automático del panel no
+     * bastaba: el foco no lo pide el panel, lo da la ventana. En un dispositivo es lo correcto (abierto con teclado, el
+     * primer ítem lleva el foco visible), así que no se toca el componente.
+     *
+     * Se envuelve la sesión global (`WindowManagerGlobal.sWindowSession`) para añadir el bit de modo táctil al alta de
+     * cada ventana, y se restaura al terminar. Es API oculta de la plataforma: por eso va por reflexión y solo aquí.
+     */
+    private inline fun inTouchMode(block: () -> Unit) {
+        val global = Class.forName("android.view.WindowManagerGlobal")
+        val field = global.getDeclaredField("sWindowSession").apply { isAccessible = true }
+        val sessionType = Class.forName("android.view.IWindowSession")
+        val original = global.getMethod("getWindowSession").invoke(null)
+        val touchSession = Proxy.newProxyInstance(sessionType.classLoader, arrayOf(sessionType)) { _, method, args ->
+            val result = try {
+                method.invoke(original, *(args ?: emptyArray()))
+            } catch (e: InvocationTargetException) {
+                throw e.targetException
+            }
+            if (method.name.startsWith("addToDisplay") && result is Int) result or ADD_FLAG_IN_TOUCH_MODE else result
+        }
+        field.set(null, touchSession)
+        try {
+            block()
+        } finally {
+            field.set(null, original)
+        }
+    }
+
+    private companion object {
+        /** `WindowManagerGlobal.ADD_FLAG_IN_TOUCH_MODE` (API oculta de la plataforma). */
+        const val ADD_FLAG_IN_TOUCH_MODE = 0x1
     }
 }
 
