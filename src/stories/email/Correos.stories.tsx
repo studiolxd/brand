@@ -33,6 +33,8 @@ import { SOLO_CLARO } from '../utils/chromaticModes';
 const meta: Meta = {
   title: 'Email/Correos de ejemplo',
   // El correo no gestiona modo oscuro (ver § «El correo» en CLAUDE.md).
+  // Sin superficie oscura: fuera del proyecto de stories en oscuro (D43).
+  tags: ['solo-claro'],
   parameters: { layout: 'fullscreen', chromatic: SOLO_CLARO },
 };
 export default meta;

@@ -980,7 +980,7 @@
     "build-storybook": "storybook build",
     "chromatic": "chromatic --exit-zero-on-changes",
     "test": "vitest run --project unit --project components",
-    "test:stories": "vitest run --project storybook",
+    "test:stories": "vitest run --project storybook --project storybook-dark",
     "build:all": "pnpm build:tokens && pnpm build:lib && pnpm build:css && pnpm build:tokens-css && pnpm build:fonts-css && pnpm build:icons && pnpm build:email-assets && pnpm build:native-icons",
     "release:check": "node scripts/release-check.mjs",
     "release:npm": "node scripts/publish-npm.mjs"
