@@ -121,6 +121,9 @@ internal fun BrandBannerImpl(
                 colors.ink,
                 brandTextStyle(T.fontSize, BrandTextTokens.fontWeight, T.lineHeight, BrandTextTokens.letterSpacing, color = colors.ink),
             ) {
+                // La caja de borde de CSS (`box-sizing: border-box`): `drawBehind` pinta los filetes sin ocupar sitio, así
+                // que el relleno lleva además su grosor arriba y abajo (una línea: 1 + 12 + 24 + 12 + 1 = 50, como la web),
+                // y el aspa se coloca desde el borde interior (`close-inset` + el filete: 9 del canto).
                 Box(
                     Modifier
                         .fillMaxWidth()
