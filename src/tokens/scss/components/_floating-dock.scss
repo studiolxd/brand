@@ -10,8 +10,8 @@ $lxd-floating-dock-trigger-icon-size: 24px; // Glifo del lanzador (24px), la tal
 $lxd-floating-dock-badge-offset: 0.25rem; // Distancia del borde del lanzador a la esquina donde se centra el contador
 $lxd-floating-dock-badge-fill: #b30000; // El contador es rojo: el relleno de error del sistema, universal en claro y oscuro
 $lxd-floating-dock-badge-color: #ffffff; // Cifra sobre el relleno
-$lxd-floating-dock-panel-inline-size: 22rem; // Ancho del panel (352px). Medida de layout, como `modal.width-max`: no sale de la escala de espaciado
-$lxd-floating-dock-panel-block-size: 32rem; // Alto del panel (512px). Se recorta contra la ventana: nunca sobrepasa el alto disponible
+$lxd-floating-dock-panel-width: 22rem; // Ancho del panel (352px). Medida de layout, como `modal.max-width`: no sale de la escala de espaciado
+$lxd-floating-dock-panel-height: 32rem; // Alto del panel (512px). Se recorta contra la ventana: nunca sobrepasa el alto disponible
 $lxd-floating-dock-panel-bg: #ffffff; // Fondo del panel
 $lxd-floating-dock-panel-border-width: 1px; // Grosor del borde: es lo que separa el panel del contenido que tiene debajo
 $lxd-floating-dock-panel-border-color: #111e30; // Color del borde
@@ -38,3 +38,7 @@ $lxd-floating-dock-focus-ring-offset: 2px; // Separación del anillo de foco del
 $lxd-floating-dock-focus-ring-color: #111e30; // Color del anillo de foco del panel: la tinta de la superficie
 $lxd-floating-dock-transition-duration: 250ms; // Duración de la entrada y la salida del panel
 $lxd-floating-dock-transition-easing: ease-in-out; // Curva de la entrada y la salida del panel
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-floating-dock-panel-inline-size: $lxd-floating-dock-panel-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-floating-dock-panel-width
+$lxd-floating-dock-panel-block-size: $lxd-floating-dock-panel-height; // OBSOLETO (v51, se retira en la v52): usar $lxd-floating-dock-panel-height

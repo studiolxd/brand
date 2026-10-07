@@ -3,8 +3,8 @@
  */
 
 :root {
-  --loading-state-min-block-size: 16rem; /** Alto que reserva la espera de una página o una zona: la caja no colapsa a la altura del girador mientras el contenido no llega */
-  --loading-state-sm-min-block-size: 8rem; /** Alto que reserva la espera en talla sm — el cuerpo de un diálogo, una hoja o un popover */
+  --loading-state-min-height: 16rem; /** Alto que reserva la espera de una página o una zona: la caja no colapsa a la altura del girador mientras el contenido no llega */
+  --loading-state-sm-min-height: 8rem; /** Alto que reserva la espera en talla sm — el cuerpo de un diálogo, una hoja o un popover */
   --loading-state-sm-padding-block: var(--spacing-5); /** Padding vertical en talla sm: dentro de un diálogo el aire ya lo pone el diálogo */
   --loading-state-gap: var(--empty-state-gap); /** Aire entre el girador y la acción — el mismo que EmptyState, porque ocupa su sitio */
   --loading-state-padding-block: var(--empty-state-padding-block); /** Padding vertical — el de EmptyState */

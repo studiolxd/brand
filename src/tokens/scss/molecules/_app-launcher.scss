@@ -33,7 +33,7 @@ $lxd-app-launcher-transition-easing: ease; // Easing de la animación
 $lxd-app-launcher-tile-padding-block: 0.5rem; // Padding vertical de cada tile — el de un ítem de Menu, para que la altura case con las listas de opciones del DS
 $lxd-app-launcher-tile-padding-inline: 1rem; // Padding horizontal de cada tile — el de un ítem de Menu
 $lxd-app-launcher-tile-gap: 0.25rem; // Espacio entre el distintivo y el nombre dentro del tile
-$lxd-app-launcher-tile-badge-block-size: calc(0.875rem * 1 + 2 * 0.25rem); // Alto de la fila del distintivo, que va ENCIMA del nombre. Es la caja de una `Tag` (cuerpo por interlineado más su aire) y se reserva SIEMPRE, lleve distintivo la baldosa o no: de ahí que todos los nombres de la rejilla queden a la misma altura. Sale de los tokens de `Tag`, así que sigue cuadrando si la píldora cambia de talla
+$lxd-app-launcher-tile-badge-height: calc(0.875rem * 1 + 2 * 0.25rem); // Alto de la fila del distintivo, que va ENCIMA del nombre. Es la caja de una `Tag` (cuerpo por interlineado más su aire) y se reserva SIEMPRE, lleve distintivo la baldosa o no: de ahí que todos los nombres de la rejilla queden a la misma altura. Sale de los tokens de `Tag`, así que sigue cuadrando si la píldora cambia de talla
 $lxd-app-launcher-tile-border-radius: 0px; // Radio de cada tile
 $lxd-app-launcher-tile-name-font-size: 0.875rem; // Tamaño de texto del nombre de app
 $lxd-app-launcher-tile-name-font-weight: 300; // Peso del nombre de app
@@ -47,3 +47,6 @@ $lxd-app-launcher-tile-highlighted-bg: #111e30; // Relleno del tile bajo el punt
 $lxd-app-launcher-tile-highlighted-color: #ffffff; // Texto del tile resaltado — el del Menu: nombre e inicial invierten con el relleno
 $lxd-app-launcher-tile-badge-hover-bg: #ffffff; // Fondo de la Tag «nuevo» cuando su tile está resaltado — invertido respecto al tile (`tile-highlighted-color`) para seguir leyéndose como una píldora de contraste sobre el relleno
 $lxd-app-launcher-tile-badge-hover-color: #111e30; // Texto de la Tag «nuevo» cuando su tile está resaltado — el mismo par invertido que `tile-badge-hover-bg`
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-app-launcher-tile-badge-block-size: $lxd-app-launcher-tile-badge-height; // OBSOLETO (v51, se retira en la v52): usar $lxd-app-launcher-tile-badge-height

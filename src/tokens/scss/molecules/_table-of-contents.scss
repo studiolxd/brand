@@ -22,6 +22,9 @@ $lxd-table-of-contents-focus-ring-width: 2px; // Grosor del anillo de foco de un
 $lxd-table-of-contents-focus-ring-offset: 1px; // Separación del anillo de foco
 $lxd-table-of-contents-focus-ring-color: #111e30; // Color del anillo de foco
 $lxd-table-of-contents-sticky-offset: 1.5rem; // Distancia al borde superior cuando el índice queda fijo (`sticky`). El consumidor la sube si tiene una cabecera fija más alta
-$lxd-table-of-contents-sticky-max-block-size: calc(100vh - (2 * 1.5rem)); // Alto máximo del índice fijo: el alto de la ventana menos su aire arriba y abajo. Un índice largo scrollea dentro
+$lxd-table-of-contents-sticky-max-height: calc(100vh - (2 * 1.5rem)); // Alto máximo del índice fijo: el alto de la ventana menos su aire arriba y abajo. Un índice largo scrollea dentro
 $lxd-table-of-contents-transition-duration: 150ms; // Duración de la transición de hover
 $lxd-table-of-contents-transition-easing: ease; // Easing de la transición de hover
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-table-of-contents-sticky-max-block-size: $lxd-table-of-contents-sticky-max-height; // OBSOLETO (v51, se retira en la v52): usar $lxd-table-of-contents-sticky-max-height

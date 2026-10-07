@@ -19,9 +19,9 @@ $lxd-modal-title-font-size: 2rem; // Tamaño del título (2rem)
 $lxd-modal-title-font-weight: 500; // Peso del título
 $lxd-modal-title-line-height: 1.1; // Interlineado del título — el de un título grande. Con el cuerpo del título da la altura de su primera línea, que es sobre la que se centra el aspa de cerrar
 $lxd-modal-title-color: #111e30; // Color del título
-$lxd-modal-width-max: 560px; // Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente
-$lxd-modal-inline-size: 90vw; // Ancho del panel antes del tope de `width-max`: deja aire a los lados en pantallas estrechas. Medida de layout, igual que width-max
-$lxd-modal-max-height: 90dvh; // Altura máxima del panel modal (dvh para móviles con barra de navegador variable). Medida de layout, igual que width-max
+$lxd-modal-max-width: 560px; // Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente
+$lxd-modal-width: 90vw; // Ancho del panel antes del tope de `max-width`: deja aire a los lados en pantallas estrechas. Medida de layout, igual que `max-width`
+$lxd-modal-max-height: 90dvh; // Altura máxima del panel modal (dvh para móviles con barra de navegador variable). Medida de layout, igual que `max-width`
 $lxd-modal-transition-duration: 250ms; // Duración de la animación entrada/salida
 $lxd-modal-transition-easing: ease-in-out; // Easing de la animación
 $lxd-modal-content-enter-offset: 0.5rem; // Desplazamiento vertical del panel al entrar/salir (8px)
@@ -34,3 +34,7 @@ $lxd-modal-close-color: #111e30; // Color del glifo: la tinta de la superficie, 
 $lxd-modal-close-focus-ring-width: 2px; // Grosor del anillo de foco
 $lxd-modal-close-focus-ring-offset: 2px; // Separación del anillo de foco (el rol focus gobierna ancho y separación)
 $lxd-modal-close-focus-ring-color: #111e30; // Color del anillo de foco: la tinta de la superficie
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-modal-width-max: $lxd-modal-max-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-modal-max-width
+$lxd-modal-inline-size: $lxd-modal-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-modal-width

@@ -11,7 +11,7 @@ import com.studiolxd.brand.tokens.BrandSpacing
 
 /**
  * El lienzo de una vista previa o de una captura: `BrandTheme` del esquema pedido sobre el fondo de página
- * (`text.background`), con el margen del sistema. Es `internal`: lo usan las `@Preview` y las pruebas de capturas.
+ * (`text.bg`), con el margen del sistema. Es `internal`: lo usan las `@Preview` y las pruebas de capturas.
  */
 @Composable
 internal fun BrandPreviewSurface(dark: Boolean, content: @Composable () -> Unit) {

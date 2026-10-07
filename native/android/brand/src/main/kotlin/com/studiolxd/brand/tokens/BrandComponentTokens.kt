@@ -799,8 +799,8 @@ object BrandCheckboxTokens {
     val borderColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
     /** Token `checkbox.bg` — Fondo sin marcar */
     val bg: BrandSchemeValue<Color> = BrandSchemeValue(Color(0x00000000), Color(0x00000000))
-    /** Token `checkbox.bg-checked` — Fondo cuando está marcado */
-    val bgChecked: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
+    /** Token `checkbox.checked-bg` — Fondo cuando está marcado */
+    val checkedBg: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
     /** Token `checkbox.check-color` — Color del checkmark */
     val checkColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFFFFF), Color(0xFF111E30))
     /** Token `checkbox.transition-duration` — Duración de transiciones En milisegundos. */
@@ -817,8 +817,8 @@ object BrandCheckboxTokens {
     val errorBorderColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFB30000), Color(0xFFFF8585))
     /** Token `checkbox.disabled-border-color` — Color del borde cuando está deshabilitado */
     val disabledBorderColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFD0D0D0), Color(0xFFD0D0D0))
-    /** Token `checkbox.disabled-bg-checked` — Fondo marcado/indeterminado cuando está deshabilitado */
-    val disabledBgChecked: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFD0D0D0), Color(0xFFD0D0D0))
+    /** Token `checkbox.checked-disabled-bg` — Fondo marcado/indeterminado cuando está deshabilitado */
+    val checkedDisabledBg: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFD0D0D0), Color(0xFFD0D0D0))
     /** Token `checkbox.sm-size` — Tamaño del checkbox — variante sm (16px) */
     val smSize: Dp = 16.dp
     /** Token `checkbox.sm-check-size` — Tamaño del checkmark interior — variante sm */
@@ -839,8 +839,8 @@ object BrandSwitcherTokens {
     val trackHeight: Float = 1.5f
     /** Token `switcher.track-bg` — Fondo del track — estado off */
     val trackBg: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFD0D0D0), Color(0xFFFFFFFF))
-    /** Token `switcher.track-bg-checked` — Fondo del track — estado on */
-    val trackBgChecked: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFBAABFF))
+    /** Token `switcher.track-checked-bg` — Fondo del track — estado on */
+    val trackCheckedBg: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFBAABFF))
     /** Token `switcher.track-border-radius` — Radio del track (pill) */
     val trackBorderRadius: Dp = 9999.dp
     /** Token `switcher.track-padding` — Padding interior del track — separa el thumb de los bordes Fracción del tamaño de fuente del propio componente (em). */
@@ -1031,8 +1031,8 @@ object BrandTextTokens {
     val lineHeight: Float = 1.5f
     /** Token `text.color` — Default text color */
     val color: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
-    /** Token `text.background` — Fondo del lienzo de página (body) */
-    val background: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFFFFF), Color(0xFF111E30))
+    /** Token `text.bg` — Fondo del lienzo de página (body) */
+    val bg: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFFFFF), Color(0xFF111E30))
     /** Token `text.letter-spacing` — Default letter spacing Fracción del tamaño de fuente del propio componente (em). */
     val letterSpacing: Float = 0f
     /** Token `text.size.1` — Paso 1 de la escala de títulos (14px) */
@@ -1503,8 +1503,8 @@ object BrandModalTokens {
     val titleLineHeight: Float = 1.1f
     /** Token `modal.title-color` — Color del título */
     val titleColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
-    /** Token `modal.width-max` — Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente */
-    val widthMax: Dp = 560.dp
+    /** Token `modal.max-width` — Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente */
+    val maxWidth: Dp = 560.dp
     /** Token `modal.transition-duration` — Duración de la animación entrada/salida En milisegundos. */
     val transitionDuration: Int = 250
     /** Token `modal.transition-easing` — Easing de la animación */
@@ -1863,8 +1863,8 @@ object BrandPasswordFieldTokens {
     val lgToggleIconSize: Dp = 24.dp
     /** Token `password-field.toggle-color` — Color del icono toggle: tinta, prusia sobre claro */
     val toggleColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
-    /** Token `password-field.toggle-color-hover` — Color del icono toggle en hover (sin cambio: la tinta no se atenúa; el foco se marca con el anillo) */
-    val toggleColorHover: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
+    /** Token `password-field.toggle-hover-color` — Color del icono toggle en hover (sin cambio: la tinta no se atenúa; el foco se marca con el anillo) */
+    val toggleHoverColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
     /** Token `password-field.toggle-focus-ring-width` — Grosor del anillo de foco del toggle */
     val toggleFocusRingWidth: Dp = 2.dp
     /** Token `password-field.toggle-focus-ring-offset` — Separación del anillo de foco del toggle (se dibuja hacia dentro de la caja: el toggle va a ras del borde del campo) */
@@ -1951,10 +1951,10 @@ object BrandTabsTokens {
     val triggerIndicatorWidth: Dp = 1.dp
     /** Token `tabs.trigger-indicator-color` — Color del indicador activo */
     val triggerIndicatorColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
-    /** Token `tabs.trigger-pill-bg-active` — Fondo del trigger activo en variante pill */
-    val triggerPillBgActive: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFBAABFF))
-    /** Token `tabs.trigger-pill-color-active` — Texto del trigger activo en variante pill */
-    val triggerPillColorActive: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFFFFF), Color(0xFF111E30))
+    /** Token `tabs.trigger-pill-active-bg` — Fondo del trigger activo en variante pill */
+    val triggerPillActiveBg: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFBAABFF))
+    /** Token `tabs.trigger-pill-active-color` — Texto del trigger activo en variante pill */
+    val triggerPillActiveColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFFFFFFFF), Color(0xFF111E30))
     /** Token `tabs.trigger-border-radius` — Radio de borde del trigger (pill + focus ring) */
     val triggerBorderRadius: Dp = 0.dp
     /** Token `tabs.trigger-disabled-opacity` — Opacidad del trigger deshabilitado Factor sin unidad. */

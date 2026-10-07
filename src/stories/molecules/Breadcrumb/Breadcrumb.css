@@ -37,7 +37,7 @@
 }
 
 .breadcrumb__link:hover {
-  color: var(--breadcrumb-link-color-hover);
+  color: var(--breadcrumb-link-hover-color);
 }
 
 .breadcrumb__link:focus-visible {

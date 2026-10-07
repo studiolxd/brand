@@ -31,9 +31,9 @@
 }
 
 .embed-frame.embed-frame--mobile {
-  inline-size: var(--embed-frame-device-mobile-inline-size);
+  inline-size: var(--embed-frame-device-mobile-width);
 }
 
 .embed-frame.embed-frame--tablet {
-  inline-size: var(--embed-frame-device-tablet-inline-size);
+  inline-size: var(--embed-frame-device-tablet-width);
 }

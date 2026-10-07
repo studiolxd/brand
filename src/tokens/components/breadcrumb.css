@@ -12,7 +12,7 @@
   --breadcrumb-font-weight: var(--font-weight-default); /** Font weight base */
   --breadcrumb-separator-color: var(--color-text-on-light); /** Color del separador */
   --breadcrumb-link-color: var(--color-text-on-light); /** Color del link navegable */
-  --breadcrumb-link-color-hover: var(--color-primary); /** Color del link en hover */
+  --breadcrumb-link-hover-color: var(--color-primary); /** Color del link en hover */
   --breadcrumb-current-color: var(--color-text-on-light); /** Color del item activo (página actual) */
   --breadcrumb-current-font-weight: var(--font-weight-emphasis); /** Peso del item activo */
   --breadcrumb-focus-ring-color: var(--color-primary); /** Color del focus ring */
@@ -25,7 +25,7 @@
 [data-theme="dark"],
 html.dark {
   --breadcrumb-link-color: var(--color-text-on-dark); /** Link color — surface-dark */
-  --breadcrumb-link-color-hover: var(--color-text-on-dark); /** Link hover color — surface-dark */
+  --breadcrumb-link-hover-color: var(--color-text-on-dark); /** Link hover color — surface-dark */
   --breadcrumb-current-color: var(--color-text-on-dark); /** Current color — surface-dark */
   --breadcrumb-separator-color: var(--color-text-on-dark); /** Separator color — surface-dark */
   --breadcrumb-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */

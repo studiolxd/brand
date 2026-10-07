@@ -5,7 +5,7 @@
 .search-form {
   display: flex;
   align-items: flex-end;
-  inline-size: var(--search-form-inline-size);
+  inline-size: var(--search-form-width);
 }
 
 /* Tallas — el hueco de la flecha es cuadrado a la talla del campo, y el glifo

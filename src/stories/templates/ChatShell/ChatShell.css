@@ -48,7 +48,7 @@
    superponen (2026-09-15). El aire lo siguen poniendo, como en la columna
    principal, los bloques de dentro. */
 .chat-shell .chat-shell__drawer {
-  --sheet-inline-size: 100%;
+  --sheet-width: 100%;
   --sheet-padding-block: 0;
   --sheet-padding-inline: 0;
   --sheet-gap: 0;

@@ -176,7 +176,7 @@ extension View {
     }
 }
 
-/// Medidas de la hoja en macOS, donde no hay detents. El token `sheet.inline-size` es `min(20rem, 85vw)` (una
+/// Medidas de la hoja en macOS, donde no hay detents. El token `sheet.width` es `min(20rem, 85vw)` (una
 /// función de CSS que no se genera): 20 rem = 320 pt es su primer término. El alto no tiene token en la web.
 enum BrandSheetContentMetrics {
     static let macOSMinWidth: CGFloat = 320

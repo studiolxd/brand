@@ -28,7 +28,7 @@
   --app-launcher-transition-easing: var(--floating-panel-transition-easing); /** Easing de la animación */
   --app-launcher-tile-padding-block: var(--menu-item-padding-block); /** Padding vertical de cada tile — el de un ítem de Menu, para que la altura case con las listas de opciones del DS */
   --app-launcher-tile-padding-inline: var(--menu-item-padding-inline); /** Padding horizontal de cada tile — el de un ítem de Menu */
-  --app-launcher-tile-badge-block-size: calc(var(--tag-font-size) * var(--tag-line-height) + 2 * var(--tag-padding-block)); /** Alto de la fila del distintivo, que va ENCIMA del nombre. Es la caja de una `Tag` (cuerpo por interlineado más su aire) y se reserva SIEMPRE, lleve distintivo la baldosa o no: de ahí que todos los nombres de la rejilla queden a la misma altura. Sale de los tokens de `Tag`, así que sigue cuadrando si la píldora cambia de talla */
+  --app-launcher-tile-badge-height: calc(var(--tag-font-size) * var(--tag-line-height) + 2 * var(--tag-padding-block)); /** Alto de la fila del distintivo, que va ENCIMA del nombre. Es la caja de una `Tag` (cuerpo por interlineado más su aire) y se reserva SIEMPRE, lleve distintivo la baldosa o no: de ahí que todos los nombres de la rejilla queden a la misma altura. Sale de los tokens de `Tag`, así que sigue cuadrando si la píldora cambia de talla */
   --app-launcher-tile-border-radius: var(--border-radius-default); /** Radio de cada tile */
   --app-launcher-tile-name-font-weight: var(--font-weight-default); /** Peso del nombre de app */
   --app-launcher-tile-name-line-height: var(--menu-item-line-height); /** Interlineado del nombre de app — el de un ítem de Menu, para que la altura case con las listas de opciones del DS */

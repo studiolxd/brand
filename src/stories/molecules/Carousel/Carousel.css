@@ -56,14 +56,14 @@
   border: 0;
   background: none;
   cursor: pointer;
-  inline-size: var(--carousel-indicator-inline-size);
-  block-size: var(--carousel-indicator-hit-block-size);
+  inline-size: var(--carousel-indicator-width);
+  block-size: var(--carousel-indicator-hit-height);
 }
 
 .carousel__indicator::before {
   content: '';
   inline-size: 100%;
-  block-size: var(--carousel-indicator-block-size);
+  block-size: var(--carousel-indicator-height);
   background-color: var(--carousel-indicator-color);
 }
 

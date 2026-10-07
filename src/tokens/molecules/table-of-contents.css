@@ -11,7 +11,7 @@
   --table-of-contents-item-padding-inline-start: var(--spacing-3); /** Sangría base de una entrada, que deja sitio a la barra de la entrada actual */
   --table-of-contents-item-indent: var(--spacing-3); /** Sangría que suma cada nivel de profundidad respecto al título más alto del índice */
   --table-of-contents-sticky-offset: var(--spacing-5); /** Distancia al borde superior cuando el índice queda fijo (`sticky`). El consumidor la sube si tiene una cabecera fija más alta */
-  --table-of-contents-sticky-max-block-size: calc(100vh - (2 * var(--spacing-5))); /** Alto máximo del índice fijo: el alto de la ventana menos su aire arriba y abajo. Un índice largo scrollea dentro */
+  --table-of-contents-sticky-max-height: calc(100vh - (2 * var(--spacing-5))); /** Alto máximo del índice fijo: el alto de la ventana menos su aire arriba y abajo. Un índice largo scrollea dentro */
   --table-of-contents-transition-duration: var(--motion-duration-fast); /** Duración de la transición de hover */
   --table-of-contents-transition-easing: var(--motion-easing-default); /** Easing de la transición de hover */
   --table-of-contents-title-font-weight: var(--font-weight-emphasis); /** Peso del rótulo del índice */

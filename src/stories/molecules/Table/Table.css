@@ -144,12 +144,12 @@
 
 /* ── Actions column ──────────────────────────────────── */
 
-/* Un ancho de 1px (`table.actions-inline-size`) no fija un ancho: con
+/* Un ancho de 1px (`table.actions-width`) no fija un ancho: con
    `table-layout: auto` el navegador reparte el sobrante entre las demás
    columnas y esta se encoge a su contenido. Es la forma estándar de decir
    «esta columna ocupa lo mínimo». */
 .table__header.table__header--actions {
-  inline-size: var(--table-actions-inline-size);
+  inline-size: var(--table-actions-width);
 }
 
 /* La columna se encoge a min-content por el ancho de 1px de arriba, así que

@@ -171,11 +171,68 @@ export function registerJsonVariablesFormat(StyleDictionary) {
   StyleDictionary.registerFormat({
     name: 'json/css-variables',
     format: ({ dictionary }) => {
-      const entries = dictionary.allTokens.map((token) => [
-        `--${token.name}`,
-        String(token.$value ?? token.value),
-      ]);
+      // Detrás de cada token renombrado, su nombre antiguo con el mismo valor
+      // (alias obsoleto de la v51, ver `deprecatedAliasesOf`).
+      const entries = dictionary.allTokens.flatMap((token) => {
+        const value = String(token.$value ?? token.value);
+        return [
+          [`--${token.name}`, value],
+          ...deprecatedAliasesOf(token).map((alias) => [`--${aliasName(token, alias)}`, value]),
+        ];
+      });
       return `${JSON.stringify(Object.fromEntries(entries), null, 2)}\n`;
+    },
+  });
+}
+
+/* ---------------------------------------------------------------------------
+ * Alias obsoletos de los tokens renombrados (D9, v51 → se retiran en la v52)
+ *
+ * La convención de nombres `<componente>-<parte>-<estado>-<propiedad>-<talla>`
+ * renombró unos cincuenta tokens. Para no romper a quien los lee por el nombre
+ * viejo, el token NUEVO declara sus nombres antiguos en
+ * `$extensions["com.studiolxd"].deprecatedAliases` (rutas con puntos, como en
+ * los JSON) y el build los emite en las tres salidas web:
+ *
+ * - CSS: `src/tokens/deprecated-aliases.css` (lo genera `sd.config.mjs`), con
+ *   `--viejo: var(--nuevo)` bajo `:root` y bajo cada selector de superficie, para
+ *   que el alias LEA el valor de la superficie en la que está.
+ * - SCSS: `$lxd-viejo: $lxd-nuevo;` al final del mismo fichero del token
+ *   (`scss/variables-with-deprecated-aliases`).
+ * - `tokens.json`: la clave vieja con el mismo valor resuelto.
+ *
+ * En nativo no hay alias: nadie sobrescribe allí, así que se renombra sin más.
+ * ------------------------------------------------------------------------- */
+
+/** Las rutas antiguas (con puntos) de un token renombrado; `[]` si no lo es. */
+export function deprecatedAliasesOf(token) {
+  return token.$extensions?.['com.studiolxd']?.deprecatedAliases ?? [];
+}
+
+/**
+ * El nombre de salida de un alias, con el mismo prefijo de plataforma que el
+ * token (`lxd-` en SCSS, ninguno en CSS/JSON): el nombre del token termina en
+ * su ruta unida por guiones, y lo que haya delante es el prefijo.
+ */
+function aliasName(token, alias) {
+  const own = token.path.join('-');
+  const prefix = token.name.endsWith(own) ? token.name.slice(0, token.name.length - own.length) : '';
+  return `${prefix}${alias.split('.').join('-')}`;
+}
+
+export function registerDeprecatedAliasFormats(StyleDictionary) {
+  StyleDictionary.registerFormat({
+    name: 'scss/variables-with-deprecated-aliases',
+    format: async (args) => {
+      const base = await StyleDictionary.hooks.formats['scss/variables'](args);
+      const lines = args.dictionary.allTokens.flatMap((token) =>
+        deprecatedAliasesOf(token).map(
+          (alias) =>
+            `$${aliasName(token, alias)}: $${token.name}; // OBSOLETO (v51, se retira en la v52): usar $${token.name}`,
+        ),
+      );
+      if (!lines.length) return base;
+      return `${base.replace(/\n*$/, '\n')}\n// Alias obsoletos: nombres anteriores a la convención D9.\n${lines.join('\n')}\n`;
     },
   });
 }

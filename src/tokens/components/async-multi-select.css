@@ -3,7 +3,7 @@
  */
 
 :root {
-  --async-multi-select-input-min-inline-size: 4rem; /** Ancho mínimo del texto de búsqueda junto a las píldoras: lo justo para escribir sin que salte de línea a cada letra */
+  --async-multi-select-input-min-width: 4rem; /** Ancho mínimo del texto de búsqueda junto a las píldoras: lo justo para escribir sin que salte de línea a cada letra */
   --async-multi-select-disabled-cursor: var(--input-disabled-cursor); /** Cursor cuando está deshabilitado: el de los campos */
   --async-multi-select-disabled-opacity: var(--async-select-disabled-opacity); /** Opacidad del control deshabilitado: la del buscador de selección única */
   --async-multi-select-pill-remove-opacity: var(--opacity-muted); /** Opacidad del aspa de la píldora en reposo: presente pero en segundo plano */

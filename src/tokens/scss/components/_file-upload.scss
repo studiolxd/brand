@@ -41,7 +41,7 @@ $lxd-file-upload-thumb-border-radius: 0px; // Radio del thumbnail
 $lxd-file-upload-thumb-bg: #f2f2f2; // Fondo del thumb para iconos (no imagen)
 $lxd-file-upload-thumb-icon-color: #6b6b6b; // Color del icono de archivo genérico
 $lxd-file-upload-remove-color: #4a4a4a; // Color del botón eliminar
-$lxd-file-upload-remove-color-hover: #b30000; // Color del botón eliminar al hacer hover
+$lxd-file-upload-remove-hover-color: #b30000; // Color del botón eliminar al hacer hover
 $lxd-file-upload-progress-margin-block-start: 0.75rem; // Margen superior de la barra de progreso
 $lxd-file-upload-padding-block: 3rem; // Aire vertical del dropzone — talla md
 $lxd-file-upload-sm-padding-block: 2rem; // Aire vertical del dropzone — talla sm
@@ -66,3 +66,6 @@ $lxd-file-upload-border-dash-length: 1rem; // Largo de cada trazo del borde disc
 $lxd-file-upload-border-dash-gap: 0.5rem; // Hueco entre trazos del borde discontinuo (antes 10px, fuera de la escala)
 $lxd-file-upload-remove-focus-ring-offset: 1px; // Separación del anillo de foco del aspa
 $lxd-file-upload-remove-border-radius: 0px; // Radio del aspa — recto, como toda esquina del sistema
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-file-upload-remove-color-hover: $lxd-file-upload-remove-hover-color; // OBSOLETO (v51, se retira en la v52): usar $lxd-file-upload-remove-hover-color

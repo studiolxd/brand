@@ -16,7 +16,7 @@
   display: flex;
   align-items: center;
   flex: 1;
-  block-size: var(--slider-control-block-size);
+  block-size: var(--slider-control-height);
   cursor: var(--slider-cursor);
   touch-action: none;
 }
@@ -24,7 +24,7 @@
 .slider--vertical .slider__control {
   flex-direction: column;
   justify-content: center;
-  inline-size: var(--slider-control-block-size);
+  inline-size: var(--slider-control-height);
   block-size: auto;
 }
 

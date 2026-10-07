@@ -38,7 +38,7 @@
    que dentro de .surface-dark ya resuelve al fondo oscuro. Fondo y color del
    contenido voltean juntos, que es la regla del lienzo emparejado. */
 .container.container--surface {
-  background-color: var(--text-background);
+  background-color: var(--text-bg);
   color: var(--text-color);
 }
 

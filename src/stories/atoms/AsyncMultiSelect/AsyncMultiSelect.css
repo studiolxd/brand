@@ -90,7 +90,7 @@
 .async-multi-select__input {
   all: unset;
   flex: 1;
-  min-inline-size: var(--async-multi-select-input-min-inline-size);
+  min-inline-size: var(--async-multi-select-input-min-width);
   cursor: text;
   font-family: inherit;
   font-size: inherit;

@@ -52,7 +52,7 @@
    hasta la misma línea que el rótulo. */
 .accordion__index {
   flex-shrink: 0;
-  min-inline-size: var(--accordion-index-min-inline-size);
+  min-inline-size: var(--accordion-index-min-width);
   font-family: var(--accordion-index-font-family);
   font-size: var(--accordion-index-font-size);
   color: var(--accordion-index-color);
@@ -60,7 +60,7 @@
 
 .accordion--numbered .accordion__content-inner {
   padding-inline-start: calc(
-    var(--accordion-index-min-inline-size) + var(--accordion-trigger-gap)
+    var(--accordion-index-min-width) + var(--accordion-trigger-gap)
   );
 }
 

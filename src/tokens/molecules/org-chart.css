@@ -3,8 +3,8 @@
  */
 
 :root {
-  --org-chart-viewport-block-size: 32rem; /** Alto del lienzo con desplazamiento */
-  --org-chart-card-inline-size: 14rem; /** Ancho de la tarjeta de un departamento */
+  --org-chart-viewport-height: 32rem; /** Alto del lienzo con desplazamiento */
+  --org-chart-card-width: 14rem; /** Ancho de la tarjeta de un departamento */
   --org-chart-font-family: var(--font-family-sans); /** Familia tipográfica del organigrama */
   --org-chart-gap: var(--spacing-3); /** Separación entre el lienzo y sus controles */
   --org-chart-viewport-padding: var(--spacing-5); /** Aire alrededor del árbol dentro del lienzo */

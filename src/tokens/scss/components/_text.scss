@@ -6,7 +6,7 @@ $lxd-text-font-size: 1rem; // Cuerpo base (16px). Es el cuerpo de la superficie 
 $lxd-text-font-weight: 300; // Default font weight
 $lxd-text-line-height: 1.5; // Default line height
 $lxd-text-color: #111e30; // Default text color
-$lxd-text-background: #ffffff; // Fondo del lienzo de página (body)
+$lxd-text-bg: #ffffff; // Fondo del lienzo de página (body)
 $lxd-text-letter-spacing: 0em; // Default letter spacing
 $lxd-text-size-1: 0.875rem; // Paso 1 de la escala de títulos (14px)
 $lxd-text-size-2: 1rem; // Paso 2 de la escala de títulos (16px)
@@ -78,3 +78,6 @@ $lxd-text-list-secondary-color: #4a4a4a; // Color atenuado de la línea secundar
 $lxd-text-list-separator-color: #111e30; // Línea entre filas de una lista con separadores
 $lxd-text-list-separator-thickness: 1px; // Grosor de la línea entre filas
 $lxd-text-list-separator-spacing: 0.5rem; // Aire a cada lado de la línea entre filas
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-text-background: $lxd-text-bg; // OBSOLETO (v51, se retira en la v52): usar $lxd-text-bg

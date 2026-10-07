@@ -28,7 +28,7 @@
 }
 
 .switcher[data-checked] {
-  background-color: var(--switcher-track-bg-checked);
+  background-color: var(--switcher-track-checked-bg);
 }
 
 .switcher__thumb {

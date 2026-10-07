@@ -5,7 +5,7 @@
 :root {
   --slider-cursor: pointer; /** Cursor sobre la banda */
   --slider-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
-  --slider-control-block-size: var(--spacing-5); /** Alto de la zona sensible: la banda es fina, pero el objetivo de pulsación no */
+  --slider-control-height: var(--spacing-5); /** Alto de la zona sensible: la banda es fina, pero el objetivo de pulsación no */
   --slider-track-size: var(--spacing-1); /** Grosor del carril */
   --slider-thumb-size: var(--icon-size-sm); /** Lado del pulgar (cuadrado, como el resto de formas del sistema) */
   --slider-value-gap: var(--spacing-3); /** Separación entre la banda y el valor */

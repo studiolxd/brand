@@ -184,7 +184,7 @@ grupos crece con cada componente que se porta (sale de los `var(--…)` de su CS
   `.current` dentro de `BrandTheme`; una medida con par oscuro, `BrandSchemeValue<Dp>`. Medidas → `Dp`; `*font-size` →
   `TextUnit` (sp); un número sin unidad (`line-height: 1.5`) → `Float`; `em` → `Float`; duraciones → `Int` en ms.
 - **Se omite el CSS puro**: `solid`, `center`, `pointer`, porcentajes, `vw`/`vh`, `min()`/`max()`/`clamp()`… (p. ej.
-  `sheet.inline-size`, `sheet.block-size`, `modal.max-height`): el componente los resuelve con lo que SwiftUI ofrece y
+  `sheet.width`, `sheet.height`, `modal.max-height`): el componente los resuelve con lo que SwiftUI ofrece y
   la ficha anota el valor copiado.
 
 ## Componentes de SwiftUI

@@ -1,7 +1,7 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-site-search-inline-size: 100%; // Anchura del buscador: la de su contenedor. Es la página de resultados entera, así que ocupa todo el hueco donde se monte — declarada y no heredada del flujo, para que tampoco se encoja dentro de una fila flex o una celda de retícula
+$lxd-site-search-width: 100%; // Anchura del buscador: la de su contenedor. Es la página de resultados entera, así que ocupa todo el hueco donde se monte — declarada y no heredada del flujo, para que tampoco se encoja dentro de una fila flex o una celda de retícula
 $lxd-site-search-gap: 1.5rem; // Aire entre los bloques del buscador: el formulario, el aviso de estado, los resultados y el pie
 $lxd-site-search-status-font-size: 0.875rem; // Cuerpo del aviso de estado: cuántos resultados hay, que se está buscando o que no hay nada
 $lxd-site-search-status-line-height: 1.5; // Interlineado del aviso de estado
@@ -33,7 +33,13 @@ $lxd-site-search-result-mark-color: #111e30; // Tinta del resaltado sobre el ama
 $lxd-site-search-suggestions-gap: 0.5rem; // Aire entre las sugerencias de búsqueda
 $lxd-site-search-suggestions-label-font-size: 0.75rem; // Cuerpo del rótulo de las sugerencias
 $lxd-site-search-suggestions-label-color: #4a4a4a; // Color del rótulo de las sugerencias — atenuado
-$lxd-site-search-ghost-section-inline-size: 30%; // Ancho de la barra fantasma del rastro de sección
-$lxd-site-search-ghost-title-inline-size: 70%; // Ancho de la barra fantasma del título
-$lxd-site-search-ghost-url-inline-size: 45%; // Ancho de la barra fantasma de la dirección
+$lxd-site-search-ghost-section-width: 30%; // Ancho de la barra fantasma del rastro de sección
+$lxd-site-search-ghost-title-width: 70%; // Ancho de la barra fantasma del título
+$lxd-site-search-ghost-url-width: 45%; // Ancho de la barra fantasma de la dirección
 $lxd-site-search-skeleton-gap: 0.5rem; // Aire entre las barras de un resultado fantasma
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-site-search-inline-size: $lxd-site-search-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-site-search-width
+$lxd-site-search-ghost-section-inline-size: $lxd-site-search-ghost-section-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-site-search-ghost-section-width
+$lxd-site-search-ghost-title-inline-size: $lxd-site-search-ghost-title-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-site-search-ghost-title-width
+$lxd-site-search-ghost-url-inline-size: $lxd-site-search-ghost-url-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-site-search-ghost-url-width

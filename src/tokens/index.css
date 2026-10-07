@@ -191,3 +191,8 @@
 /* Remapeo de la superficie pública (`.site-shell`) — va al final: los tokens
    que redefine tienen la misma especificidad que los `:root` de arriba. */
 @import "./surface-public.css";
+
+/* Alias obsoletos de la v51 (D9): los nombres de token anteriores a la
+   convención de nombres, cada uno leyendo su nombre nuevo. Generado; se retira
+   en la v52. */
+@import "./deprecated-aliases.css";

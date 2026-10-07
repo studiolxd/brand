@@ -10,7 +10,7 @@ $lxd-async-multi-select-disabled-cursor: not-allowed; // Cursor cuando está des
 $lxd-async-multi-select-disabled-opacity: 0.5; // Opacidad del control deshabilitado: la del buscador de selección única
 $lxd-async-multi-select-pill-remove-opacity: 0.7; // Opacidad del aspa de la píldora en reposo: presente pero en segundo plano
 $lxd-async-multi-select-pill-remove-hover-opacity: 1; // Opacidad del aspa de la píldora bajo el puntero
-$lxd-async-multi-select-input-min-inline-size: 4rem; // Ancho mínimo del texto de búsqueda junto a las píldoras: lo justo para escribir sin que salte de línea a cada letra
+$lxd-async-multi-select-input-min-width: 4rem; // Ancho mínimo del texto de búsqueda junto a las píldoras: lo justo para escribir sin que salte de línea a cada letra
 $lxd-async-multi-select-color: #111e30; // Hereda de `multi-select.color`: el buscador múltiple tiene la misma cara que el control síncrono
 $lxd-async-multi-select-content-bg: #ffffff; // Hereda de `multi-select.content-bg`: el buscador múltiple tiene la misma cara que el control síncrono
 $lxd-async-multi-select-content-border-color: #111e30; // Hereda de `multi-select.content-border-color`: el buscador múltiple tiene la misma cara que el control síncrono
@@ -54,3 +54,6 @@ $lxd-async-multi-select-empty-padding-inline: 1rem; // Aire horizontal del mensa
 $lxd-async-multi-select-empty-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía del mensaje de lista vacía
 $lxd-async-multi-select-empty-font-size: 1rem; // Tamaño del mensaje de lista vacía
 $lxd-async-multi-select-empty-color: #4a4a4a; // Tinta del mensaje de lista vacía: es texto secundario, no un valor
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-async-multi-select-input-min-inline-size: $lxd-async-multi-select-input-min-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-async-multi-select-input-min-width

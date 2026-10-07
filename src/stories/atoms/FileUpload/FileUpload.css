@@ -243,7 +243,7 @@
 }
 
 .file-upload__item-remove:hover {
-  color: var(--file-upload-remove-color-hover);
+  color: var(--file-upload-remove-hover-color);
 }
 
 .file-upload__item-remove:focus-visible {

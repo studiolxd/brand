@@ -13,7 +13,7 @@
     "header-padding-inline":  { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding inline del encabezado" },
     "header-font-weight":     { "$value": "{font-weight.emphasis}",   "$type": "number",    "$description": "Peso tipográfico del encabezado" },
     "header-border-width":    { "$value": "{border-width.default}",        "$type": "dimension", "$description": "Borde inferior del thead — 1px, como todo borde del sistema; la cabecera se lee por peso, no por grosor" },
-    "actions-inline-size":    { "$value": "1px", "$type": "dimension", "$description": "Ancho de la cabecera de la columna de acciones. No fija un ancho: con `table-layout: auto` el sobrante se reparte entre las demás columnas y esta se encoge a su contenido" },
+    "actions-width":          { "$value": "1px", "$type": "dimension", "$description": "Ancho de la cabecera de la columna de acciones. No fija un ancho: con `table-layout: auto` el sobrante se reparte entre las demás columnas y esta se encoge a su contenido", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["table.actions-inline-size"] } } },
     "header-content-gap":     { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Separación entre el rótulo de la columna y el icono de ordenación" },
     "header-border-color":    { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Color del borde inferior del thead" },
 

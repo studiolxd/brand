@@ -5,7 +5,7 @@
 .notification-panel {
   --popover-padding-block: 0;
   --popover-padding-inline: 0;
-  inline-size: var(--notification-panel-inline-size);
+  inline-size: var(--notification-panel-width);
 }
 
 .notification-panel__body {
@@ -24,7 +24,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--notification-panel-list-gap);
-  max-block-size: var(--notification-panel-list-max-block-size);
+  max-block-size: var(--notification-panel-list-max-height);
   overflow-y: auto;
 }
 

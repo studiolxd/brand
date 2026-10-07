@@ -149,7 +149,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    block-size: calc(var(--filter-bar-label-offset) + var(--filter-bar-control-block-size));
+    block-size: calc(var(--filter-bar-label-offset) + var(--filter-bar-control-height));
   }
 
   /* Las acciones ya son una fila con `align-items: center`: centran solas
@@ -157,7 +157,7 @@
      porque son varias y pueden envolver: si bajan a dos renglones, la celda
      crece con ellas en vez de derramarlas. */
   .filter-bar__row:has(.label:not(.visually-hidden)) > .filter-bar__actions {
-    min-block-size: calc(var(--filter-bar-label-offset) + var(--filter-bar-control-block-size));
+    min-block-size: calc(var(--filter-bar-label-offset) + var(--filter-bar-control-height));
   }
 }
 

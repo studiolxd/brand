@@ -1,11 +1,11 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-notification-panel-inline-size: min(22.5rem, calc(100vw - 2 * 1.5rem)); // Ancho del panel (360px), con tope para que no se salga en una pantalla estrecha. Medida de maqueta, como la de la Sidebar: no pertenece a la escala de tallas
+$lxd-notification-panel-width: min(22.5rem, calc(100vw - 2 * 1.5rem)); // Ancho del panel (360px), con tope para que no se salga en una pantalla estrecha. Medida de maqueta, como la de la Sidebar: no pertenece a la escala de tallas
 $lxd-notification-panel-offset: 0.25rem; // Separación entre la campana y el panel: el desplazamiento compartido de los flotantes de la cabecera
 $lxd-notification-panel-padding-inline: 1rem; // Aire lateral de las filas, del bloque de marcar todas y del pie: el mismo, para que todo alinee en una sola columna
 $lxd-notification-panel-mark-all-padding-block: 0.75rem; // Aire vertical del bloque de «Marcar todas», entre la lista y el pie
-$lxd-notification-panel-list-max-block-size: 21rem; // Alto máximo de la lista (336px): pasado ese alto la lista hace scroll y la cabecera y el pie se quedan quietos. Medida de maqueta
+$lxd-notification-panel-list-max-height: 21rem; // Alto máximo de la lista (336px): pasado ese alto la lista hace scroll y la cabecera y el pie se quedan quietos. Medida de maqueta
 $lxd-notification-panel-list-padding-block: 0.5rem; // Aire vertical de la lista dentro del panel
 $lxd-notification-panel-list-gap: 0.25rem; // Separación entre notificaciones. Las filas no llevan línea: se separan con aire
 $lxd-notification-panel-item-padding-block: 0.5rem; // Aire vertical de cada notificación
@@ -29,3 +29,7 @@ $lxd-notification-panel-footer-gap: 0.5rem; // Aire entre los enlaces del pie
 $lxd-notification-panel-footer-font-size: 0.875rem; // Tamaño de los enlaces del pie: letra menor
 $lxd-notification-panel-focus-ring-width: 2px; // Grosor del anillo de foco de una fila
 $lxd-notification-panel-focus-ring-color: #111e30; // Color del anillo de foco de una fila
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-notification-panel-inline-size: $lxd-notification-panel-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-notification-panel-width
+$lxd-notification-panel-list-max-block-size: $lxd-notification-panel-list-max-height; // OBSOLETO (v51, se retira en la v52): usar $lxd-notification-panel-list-max-height

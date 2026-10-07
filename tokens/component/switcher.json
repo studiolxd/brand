@@ -4,7 +4,7 @@
     "track-width":         { "$value": "2.75em",                      "$type": "dimension", "$description": "Ancho del track" },
     "track-height":        { "$value": "1.5em",                       "$type": "dimension", "$description": "Alto del track" },
     "track-bg":            { "$value": "{color.border.default-on-light}", "$type": "color",     "$description": "Fondo del track — estado off" },
-    "track-bg-checked":    { "$value": "{color.primary}",             "$type": "color",     "$description": "Fondo del track — estado on" },
+    "track-checked-bg":    { "$value": "{color.primary}",             "$type": "color",     "$description": "Fondo del track — estado on", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["switcher.track-bg-checked"] } } },
     "track-border-radius": { "$value": "{border-radius.round}",        "$type": "dimension", "$description": "Radio del track (pill)" },
     "track-padding":       { "$value": "0.1875em",                    "$type": "dimension", "$description": "Padding interior del track — separa el thumb de los bordes" },
     "thumb-size":          { "$value": "1.125em",                     "$type": "dimension", "$description": "Tamaño del thumb (cuadrado)" },
@@ -28,7 +28,7 @@
     "lg-track-width":      { "$value": "{size-component.lg}",          "$type": "dimension", "$description": "Ancho del track — variante lg: la talla lg del sistema (48px). En rem, no en em: como el resto de campos en lg, no se escala además con la fuente del párrafo large del campo" },
     "lg-track-height":     { "$value": "1.625rem",                    "$type": "dimension", "$description": "Alto del track — variante lg. En rem, ver lg-track-width" },
     "lg-thumb-size":       { "$value": "1.25rem",                     "$type": "dimension", "$description": "Tamaño del thumb — variante lg. En rem, ver lg-track-width" },
-    "surface-dark-track-bg-checked": { "$value": "{color.accent-1}",  "$type": "color", "$description": "Fondo del track (on) — surface-dark. `track-bg-checked` (prussian) coincide con el fondo de la superficie y quedaría invisible; se usa accent-1 en su lugar." },
+    "surface-dark-track-checked-bg": { "$value": "{color.accent-1}",  "$type": "color", "$description": "Fondo del track (on) — surface-dark. `track-checked-bg` (prussian) coincide con el fondo de la superficie y quedaría invisible; se usa accent-1 en su lugar." },
     "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Focus ring color — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro." },
     "surface-dark-track-bg":   { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Fondo del track (off) — surface-dark. `track-bg` es un rol de borde (`color.border.default-on-light`) y la regla de derivación le da `color.text.on-dark`, igual que el carril sin recorrer del Slider." },
     "surface-dark-thumb-bg":   { "$value": "{color.primary}",     "$type": "color", "$description": "Color del thumb — surface-dark. El thumb blanco desaparecería sobre el track claro del estado off; en prusia contrasta con los dos tracks oscuros (blanco en off, lavanda en on), como el pulgar lavanda del Slider sobre su carril blanco." }

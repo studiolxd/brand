@@ -1,0 +1,65 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ *
+ * OBSOLETOS (v51): los nombres de token anteriores a la convención D9
+ * (`<componente>-<parte>-<estado>-<propiedad>-<talla>`). Cada uno lee el valor
+ * de su nombre nuevo; sobrescribirlo NO cambia el componente, que lee el nuevo.
+ * Se retiran en la v52.
+ */
+
+:root,
+.surface-dark,
+.surface-invert,
+[data-theme="dark"],
+html.dark,
+.surface-light,
+.site-shell {
+  --accordion-index-min-inline-size: var(--accordion-index-min-width); /* obsoleto: usar --accordion-index-min-width */
+  --app-launcher-tile-badge-block-size: var(--app-launcher-tile-badge-height); /* obsoleto: usar --app-launcher-tile-badge-height */
+  --async-multi-select-input-min-inline-size: var(--async-multi-select-input-min-width); /* obsoleto: usar --async-multi-select-input-min-width */
+  --breadcrumb-link-color-hover: var(--breadcrumb-link-hover-color); /* obsoleto: usar --breadcrumb-link-hover-color */
+  --checkbox-bg-checked: var(--checkbox-checked-bg); /* obsoleto: usar --checkbox-checked-bg */
+  --checkbox-disabled-bg-checked: var(--checkbox-checked-disabled-bg); /* obsoleto: usar --checkbox-checked-disabled-bg */
+  --embed-frame-device-mobile-inline-size: var(--embed-frame-device-mobile-width); /* obsoleto: usar --embed-frame-device-mobile-width */
+  --embed-frame-device-tablet-inline-size: var(--embed-frame-device-tablet-width); /* obsoleto: usar --embed-frame-device-tablet-width */
+  --file-upload-remove-color-hover: var(--file-upload-remove-hover-color); /* obsoleto: usar --file-upload-remove-hover-color */
+  --floating-dock-panel-inline-size: var(--floating-dock-panel-width); /* obsoleto: usar --floating-dock-panel-width */
+  --floating-dock-panel-block-size: var(--floating-dock-panel-height); /* obsoleto: usar --floating-dock-panel-height */
+  --loading-state-min-block-size: var(--loading-state-min-height); /* obsoleto: usar --loading-state-min-height */
+  --loading-state-sm-min-block-size: var(--loading-state-sm-min-height); /* obsoleto: usar --loading-state-sm-min-height */
+  --modal-width-max: var(--modal-max-width); /* obsoleto: usar --modal-max-width */
+  --modal-inline-size: var(--modal-width); /* obsoleto: usar --modal-width */
+  --otp-input-cell-inline-size: var(--otp-input-cell-width); /* obsoleto: usar --otp-input-cell-width */
+  --password-field-toggle-color-hover: var(--password-field-toggle-hover-color); /* obsoleto: usar --password-field-toggle-hover-color */
+  --slider-control-block-size: var(--slider-control-height); /* obsoleto: usar --slider-control-height */
+  --switcher-track-bg-checked: var(--switcher-track-checked-bg); /* obsoleto: usar --switcher-track-checked-bg */
+  --table-actions-inline-size: var(--table-actions-width); /* obsoleto: usar --table-actions-width */
+  --tabs-trigger-pill-bg-active: var(--tabs-trigger-pill-active-bg); /* obsoleto: usar --tabs-trigger-pill-active-bg */
+  --tabs-trigger-pill-color-active: var(--tabs-trigger-pill-active-color); /* obsoleto: usar --tabs-trigger-pill-active-color */
+  --text-background: var(--text-bg); /* obsoleto: usar --text-bg */
+  --typing-indicator-dot-opacity-active: var(--typing-indicator-dot-active-opacity); /* obsoleto: usar --typing-indicator-dot-active-opacity */
+  --calendar-year-grid-min-inline-size: var(--calendar-year-grid-min-width); /* obsoleto: usar --calendar-year-grid-min-width */
+  --calendar-sm-year-grid-min-inline-size: var(--calendar-sm-year-grid-min-width); /* obsoleto: usar --calendar-sm-year-grid-min-width */
+  --calendar-lg-year-grid-min-inline-size: var(--calendar-lg-year-grid-min-width); /* obsoleto: usar --calendar-lg-year-grid-min-width */
+  --carousel-indicator-inline-size: var(--carousel-indicator-width); /* obsoleto: usar --carousel-indicator-width */
+  --carousel-indicator-block-size: var(--carousel-indicator-height); /* obsoleto: usar --carousel-indicator-height */
+  --carousel-indicator-hit-block-size: var(--carousel-indicator-hit-height); /* obsoleto: usar --carousel-indicator-hit-height */
+  --color-picker-panel-inline-size: var(--color-picker-panel-width); /* obsoleto: usar --color-picker-panel-width */
+  --color-picker-area-block-size: var(--color-picker-area-height); /* obsoleto: usar --color-picker-area-height */
+  --consent-banner-max-inline-size: var(--consent-banner-max-width); /* obsoleto: usar --consent-banner-max-width */
+  --date-picker-inline-size: var(--date-picker-width); /* obsoleto: usar --date-picker-width */
+  --docs-search-results-max-block-size: var(--docs-search-results-max-height); /* obsoleto: usar --docs-search-results-max-height */
+  --filter-bar-control-block-size: var(--filter-bar-control-height); /* obsoleto: usar --filter-bar-control-height */
+  --notification-panel-inline-size: var(--notification-panel-width); /* obsoleto: usar --notification-panel-width */
+  --notification-panel-list-max-block-size: var(--notification-panel-list-max-height); /* obsoleto: usar --notification-panel-list-max-height */
+  --search-form-inline-size: var(--search-form-width); /* obsoleto: usar --search-form-width */
+  --sheet-inline-size: var(--sheet-width); /* obsoleto: usar --sheet-width */
+  --sheet-block-size: var(--sheet-height); /* obsoleto: usar --sheet-height */
+  --table-of-contents-sticky-max-block-size: var(--table-of-contents-sticky-max-height); /* obsoleto: usar --table-of-contents-sticky-max-height */
+  --org-chart-viewport-block-size: var(--org-chart-viewport-height); /* obsoleto: usar --org-chart-viewport-height */
+  --org-chart-card-inline-size: var(--org-chart-card-width); /* obsoleto: usar --org-chart-card-width */
+  --site-search-inline-size: var(--site-search-width); /* obsoleto: usar --site-search-width */
+  --site-search-ghost-section-inline-size: var(--site-search-ghost-section-width); /* obsoleto: usar --site-search-ghost-section-width */
+  --site-search-ghost-title-inline-size: var(--site-search-ghost-title-width); /* obsoleto: usar --site-search-ghost-title-width */
+  --site-search-ghost-url-inline-size: var(--site-search-ghost-url-width); /* obsoleto: usar --site-search-ghost-url-width */
+}

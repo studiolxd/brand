@@ -3,10 +3,10 @@
  */
 
 :root {
-  --site-search-ghost-section-inline-size: 30%; /** Ancho de la barra fantasma del rastro de sección */
-  --site-search-ghost-title-inline-size: 70%; /** Ancho de la barra fantasma del título */
-  --site-search-ghost-url-inline-size: 45%; /** Ancho de la barra fantasma de la dirección */
-  --site-search-inline-size: var(--input-width); /** Anchura del buscador: la de su contenedor. Es la página de resultados entera, así que ocupa todo el hueco donde se monte — declarada y no heredada del flujo, para que tampoco se encoja dentro de una fila flex o una celda de retícula */
+  --site-search-ghost-section-width: 30%; /** Ancho de la barra fantasma del rastro de sección */
+  --site-search-ghost-title-width: 70%; /** Ancho de la barra fantasma del título */
+  --site-search-ghost-url-width: 45%; /** Ancho de la barra fantasma de la dirección */
+  --site-search-width: var(--input-width); /** Anchura del buscador: la de su contenedor. Es la página de resultados entera, así que ocupa todo el hueco donde se monte — declarada y no heredada del flujo, para que tampoco se encoja dentro de una fila flex o una celda de retícula */
   --site-search-gap: var(--spacing-5); /** Aire entre los bloques del buscador: el formulario, el aviso de estado, los resultados y el pie */
   --site-search-status-line-height: var(--line-height-normal); /** Interlineado del aviso de estado */
   --site-search-status-gap: var(--spacing-2); /** Aire entre el indicador de carga y su texto */

@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--loading-state-gap);
-  min-block-size: var(--loading-state-min-block-size);
+  min-block-size: var(--loading-state-min-height);
   padding-block: var(--loading-state-padding-block);
   padding-inline: var(--loading-state-padding-inline);
   text-align: center;
@@ -39,7 +39,7 @@
 }
 
 .loading-state.loading-state--sm {
-  min-block-size: var(--loading-state-sm-min-block-size);
+  min-block-size: var(--loading-state-sm-min-height);
   padding-block: var(--loading-state-sm-padding-block);
 }
 

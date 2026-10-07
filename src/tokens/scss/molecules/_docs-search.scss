@@ -3,7 +3,7 @@
 
 $lxd-docs-search-gap: 0.75rem; // Aire entre el campo de búsqueda y la lista de resultados
 $lxd-docs-search-results-gap: 0.25rem; // Aire entre dos resultados
-$lxd-docs-search-results-max-block-size: min(28rem, 60vh); // Alto máximo de la lista: a partir de ahí scrollea dentro en vez de empujar la página
+$lxd-docs-search-results-max-height: min(28rem, 60vh); // Alto máximo de la lista: a partir de ahí scrollea dentro en vez de empujar la página
 $lxd-docs-search-result-padding-block: 0.75rem; // Padding vertical de un resultado
 $lxd-docs-search-result-padding-inline: 0.75rem; // Padding horizontal de un resultado
 $lxd-docs-search-result-border-radius: 0px; // Radio de un resultado
@@ -25,3 +25,6 @@ $lxd-docs-search-status-padding-inline: 0.75rem; // Padding horizontal del aviso
 $lxd-docs-search-status-gap: 0.5rem; // Aire entre el indicador de carga y su texto
 $lxd-docs-search-status-font-size: 0.875rem; // Cuerpo del aviso de estado
 $lxd-docs-search-status-color: #4a4a4a; // Color del aviso de estado — atenuado
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-docs-search-results-max-block-size: $lxd-docs-search-results-max-height; // OBSOLETO (v51, se retira en la v52): usar $lxd-docs-search-results-max-height

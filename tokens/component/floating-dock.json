@@ -11,8 +11,8 @@
     "badge-fill":     { "$value": "{color.error-fill}",      "$type": "color", "$description": "El contador es rojo: el relleno de error del sistema, universal en claro y oscuro" },
     "badge-color":    { "$value": "{color.error-fill-text}", "$type": "color", "$description": "Cifra sobre el relleno" },
 
-    "panel-inline-size":    { "$value": "22rem",  "$type": "dimension", "$description": "Ancho del panel (352px). Medida de layout, como `modal.width-max`: no sale de la escala de espaciado" },
-    "panel-block-size":     { "$value": "32rem",  "$type": "dimension", "$description": "Alto del panel (512px). Se recorta contra la ventana: nunca sobrepasa el alto disponible" },
+    "panel-width":          { "$value": "22rem",  "$type": "dimension", "$description": "Ancho del panel (352px). Medida de layout, como `modal.max-width`: no sale de la escala de espaciado", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["floating-dock.panel-inline-size"] } } },
+    "panel-height":         { "$value": "32rem",  "$type": "dimension", "$description": "Alto del panel (512px). Se recorta contra la ventana: nunca sobrepasa el alto disponible", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["floating-dock.panel-block-size"] } } },
     "panel-bg":             { "$value": "{floating-panel.bg}",            "$type": "color",     "$description": "Fondo del panel" },
     "panel-border-width":   { "$value": "{floating-panel.border-width}",  "$type": "dimension", "$description": "Grosor del borde: es lo que separa el panel del contenido que tiene debajo" },
     "panel-border-color":   { "$value": "{floating-panel.border-color}",  "$type": "color",     "$description": "Color del borde" },

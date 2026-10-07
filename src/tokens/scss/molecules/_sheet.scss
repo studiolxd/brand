@@ -7,8 +7,8 @@ $lxd-sheet-z-index: 300; // Capa z del panel
 $lxd-sheet-padding-block: 2rem; // Padding vertical del panel
 $lxd-sheet-padding-inline: 2rem; // Padding horizontal del panel
 $lxd-sheet-gap: 1rem; // Separación entre bloques del panel
-$lxd-sheet-inline-size: min(20rem, 85vw); // Ancho cuando entra por un lateral
-$lxd-sheet-block-size: 85vh; // Alto máximo cuando entra por arriba o abajo
+$lxd-sheet-width: min(20rem, 85vw); // Ancho cuando entra por un lateral
+$lxd-sheet-height: 85vh; // Alto máximo cuando entra por arriba o abajo
 $lxd-sheet-backdrop-bg: #000000; // Color del velo
 $lxd-sheet-backdrop-opacity: 0.6; // Opacidad del velo
 $lxd-sheet-backdrop-z-index: 200; // Capa z del velo
@@ -28,3 +28,7 @@ $lxd-sheet-close-focus-ring-offset: 2px; // Separación del anillo de foco
 $lxd-sheet-close-focus-ring-color: #111e30; // Color del anillo de foco
 $lxd-sheet-transition-duration: 250ms; // Duración de la animación de entrada/salida
 $lxd-sheet-transition-easing: ease-in-out; // Easing de la animación
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-sheet-inline-size: $lxd-sheet-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-sheet-width
+$lxd-sheet-block-size: $lxd-sheet-height; // OBSOLETO (v51, se retira en la v52): usar $lxd-sheet-height

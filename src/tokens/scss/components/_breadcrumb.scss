@@ -10,9 +10,12 @@ $lxd-breadcrumb-padding-block: 0.25rem; // Padding vertical del nav
 $lxd-breadcrumb-padding-inline: 0; // Sin padding lateral
 $lxd-breadcrumb-separator-color: #111e30; // Color del separador
 $lxd-breadcrumb-link-color: #111e30; // Color del link navegable
-$lxd-breadcrumb-link-color-hover: #111e30; // Color del link en hover
+$lxd-breadcrumb-link-hover-color: #111e30; // Color del link en hover
 $lxd-breadcrumb-current-color: #111e30; // Color del item activo (página actual)
 $lxd-breadcrumb-current-font-weight: 500; // Peso del item activo
 $lxd-breadcrumb-focus-ring-color: #111e30; // Color del focus ring
 $lxd-breadcrumb-focus-ring-width: 2px; // Grosor del focus ring
 $lxd-breadcrumb-focus-ring-offset: 1px; // Separación del focus ring
+
+// Alias obsoletos: nombres anteriores a la convención D9.
+$lxd-breadcrumb-link-color-hover: $lxd-breadcrumb-link-hover-color; // OBSOLETO (v51, se retira en la v52): usar $lxd-breadcrumb-link-hover-color

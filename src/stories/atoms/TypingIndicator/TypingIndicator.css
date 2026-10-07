@@ -38,5 +38,5 @@
 
 @keyframes typing-bounce {
   0%, 60%, 100% { opacity: var(--typing-indicator-dot-opacity-inactive); transform: translateY(0); }
-  30%            { opacity: var(--typing-indicator-dot-opacity-active); transform: translateY(calc(-1 * var(--typing-indicator-dot-rise))); }
+  30%            { opacity: var(--typing-indicator-dot-active-opacity); transform: translateY(calc(-1 * var(--typing-indicator-dot-rise))); }
 }

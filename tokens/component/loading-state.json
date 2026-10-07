@@ -1,14 +1,16 @@
 {
   "loading-state": {
-    "min-block-size": {
+    "min-height":     {
       "$value": "16rem",
       "$type": "dimension",
-      "$description": "Alto que reserva la espera de una página o una zona: la caja no colapsa a la altura del girador mientras el contenido no llega"
+      "$description": "Alto que reserva la espera de una página o una zona: la caja no colapsa a la altura del girador mientras el contenido no llega",
+      "$extensions": { "com.studiolxd": { "deprecatedAliases": ["loading-state.min-block-size"] } }
     },
-    "sm-min-block-size": {
+    "sm-min-height":     {
       "$value": "8rem",
       "$type": "dimension",
-      "$description": "Alto que reserva la espera en talla sm — el cuerpo de un diálogo, una hoja o un popover"
+      "$description": "Alto que reserva la espera en talla sm — el cuerpo de un diálogo, una hoja o un popover",
+      "$extensions": { "com.studiolxd": { "deprecatedAliases": ["loading-state.sm-min-block-size"] } }
     },
     "gap": {
       "$value": "{empty-state.gap}",

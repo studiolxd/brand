@@ -237,7 +237,7 @@ fun BrandConfirmDialog(
                     scope.launch { state.confirm({ currentConfirm() }, { currentDismiss() }, currentError) }
                 },
                 modifier = modifier
-                    .width(minOf(maxWidth * 0.9f, M.widthMax))
+                    .width(minOf(maxWidth * 0.9f, M.maxWidth))
                     .graphicsLayer {
                         alpha = progress()
                         translationY = -(1f - progress()) * enterOffset

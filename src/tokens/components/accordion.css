@@ -8,7 +8,7 @@
   --accordion-trigger-padding-inline: var(--spacing-6); /** Aire horizontal del disparador */
   --accordion-trigger-gap: var(--spacing-4); /** Hueco entre el texto y el chevron */
   --accordion-index-font-family: var(--font-family-mono); /** Monoespaciada: los números del acordeón numerado se alinean en columna */
-  --accordion-index-min-inline-size: var(--spacing-5); /** Ancho mínimo de la ranura del número (24px): mantiene la columna aunque pase de una a dos cifras */
+  --accordion-index-min-width: var(--spacing-5); /** Ancho mínimo de la ranura del número (24px): mantiene la columna aunque pase de una a dos cifras */
   --accordion-content-padding-block: var(--spacing-6); /** Aire inferior del contenido */
   --accordion-content-padding-inline: var(--spacing-6); /** Aire horizontal del contenido */
   --accordion-transition-duration: var(--motion-duration-slow); /** Duración de abrir/cerrar (cambio de contexto: el panel entra) */

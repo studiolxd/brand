@@ -9,7 +9,7 @@
     "index-font-family":      { "$value": "{font-family.mono}",     "$type": "string",    "$description": "Monoespaciada: los números del acordeón numerado se alinean en columna" },
     "index-font-size":        { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Un peldaño por debajo del rótulo del apartado" },
     "index-color":            { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Color del número: texto secundario, para que no compita con el rótulo" },
-    "index-min-inline-size":  { "$value": "{spacing.5}",            "$type": "dimension", "$description": "Ancho mínimo de la ranura del número (24px): mantiene la columna aunque pase de una a dos cifras" },
+    "index-min-width":        { "$value": "{spacing.5}",            "$type": "dimension", "$description": "Ancho mínimo de la ranura del número (24px): mantiene la columna aunque pase de una a dos cifras", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["accordion.index-min-inline-size"] } } },
     "content-padding-block":  { "$value": "{spacing.6}",              "$type": "dimension", "$description": "Aire inferior del contenido" },
     "content-padding-inline": { "$value": "{spacing.6}",              "$type": "dimension", "$description": "Aire horizontal del contenido" },
     "transition-duration":    { "$value": "{motion.duration.slow}",   "$type": "number",    "$description": "Duración de abrir/cerrar (cambio de contexto: el panel entra)" },
