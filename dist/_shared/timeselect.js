@@ -1,5 +1,5 @@
 import '../timeselect.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { t } from "./select.js";
 import { forwardRef as n, useMemo as r } from "react";
 import { jsx as i, jsxs as a } from "react/jsx-runtime";
@@ -45,7 +45,6 @@ var c = n(function({ value: n, onChange: c, step: l = 5, size: u = "md", disable
 		"aria-labelledby": _,
 		"aria-describedby": v,
 		"aria-invalid": p || void 0,
-		"aria-required": g || void 0,
 		children: [
 			/* @__PURE__ */ i(t, {
 				ref: T,

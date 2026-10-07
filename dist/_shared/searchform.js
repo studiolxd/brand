@@ -1,5 +1,5 @@
 import '../searchform.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { Icon as t } from "../icon.js";
 import { n } from "./form-size.js";
 import { t as r } from "./inputfield.js";

@@ -1,5 +1,5 @@
 import '../typingindicator.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { VisuallyHidden as t } from "../visually-hidden.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/messages/es/typingIndicator.ts

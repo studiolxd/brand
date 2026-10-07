@@ -2,51 +2,52 @@
 import './async-multi-select-field.css';
 import { t as e } from "./_shared/asyncmultiselect.js";
 import { n as t } from "./_shared/form-size.js";
-import { n } from "./_shared/field-labels.js";
-import { n as r, t as i } from "./_shared/fieldshell.js";
-import { forwardRef as a } from "react";
-import { jsx as o } from "react/jsx-runtime";
+import { n } from "./_shared/field-optional.js";
+import { n as r } from "./_shared/field-labels.js";
+import { a as i, n as a } from "./_shared/fieldshell.js";
+import { forwardRef as o } from "react";
+import { jsx as s } from "react/jsx-runtime";
 //#region src/stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField.tsx
-var s = a(function({ id: a, label: s, optional: c, optionalLabel: l, labelHidden: u, onSearch: d, value: f, defaultValue: p, onValueChange: m, selectedOptions: h, placeholder: g, name: _, disabled: v, readOnly: y, size: b, debounceMs: x, required: S, error: C = !1, errorMessage: w, helperText: T, className: E, emptyMessage: D, removeLabel: O, loadingLabel: k, container: A, onBlur: j }, M) {
-	let N = n(u), P = t(b), F = r({
-		id: a,
-		error: C,
-		errorMessage: w,
-		helperText: T
-	}), { id: I } = F;
-	return /* @__PURE__ */ o(i, {
-		field: F,
+var c = o(function({ id: o, label: c, optional: l, optionalLabel: u, labelHidden: d, onSearch: f, value: p, defaultValue: m, onValueChange: h, selectedOptions: g, placeholder: _, name: v, disabled: y, readOnly: b, size: x, debounceMs: S, required: C, error: w = !1, errorMessage: T, helperText: E, className: D, emptyMessage: O, removeLabel: k, loadingLabel: A, container: j, onBlur: M }, N) {
+	let P = r(d), F = t(x), I = n(l, C), L = i({
+		id: o,
+		error: w,
+		errorMessage: T,
+		helperText: E
+	}), { id: R } = L;
+	return /* @__PURE__ */ s(a, {
+		field: L,
 		block: "async-multi-select-field",
-		className: E,
-		label: s,
-		optional: c,
-		optionalLabel: l,
-		labelHidden: N,
-		size: P,
-		children: /* @__PURE__ */ o(e, {
-			ref: M,
-			id: I,
-			name: _,
-			onSearch: d,
-			value: f,
-			defaultValue: p,
-			onValueChange: m,
-			selectedOptions: h,
-			placeholder: g,
-			disabled: v,
-			readOnly: y,
-			size: P,
-			debounceMs: x,
-			required: S,
-			error: F.hasError,
-			emptyMessage: D,
-			removeLabel: O,
-			loadingLabel: k,
-			container: A,
-			"aria-describedby": F.describedBy,
-			onBlur: j
+		className: D,
+		label: c,
+		optional: I,
+		optionalLabel: u,
+		labelHidden: P,
+		size: F,
+		children: /* @__PURE__ */ s(e, {
+			ref: N,
+			id: R,
+			name: v,
+			onSearch: f,
+			value: p,
+			defaultValue: m,
+			onValueChange: h,
+			selectedOptions: g,
+			placeholder: _,
+			disabled: y,
+			readOnly: b,
+			size: F,
+			debounceMs: S,
+			required: C,
+			error: L.hasError,
+			emptyMessage: O,
+			removeLabel: k,
+			loadingLabel: A,
+			container: j,
+			"aria-describedby": L.describedBy,
+			onBlur: M
 		})
 	});
 });
 //#endregion
-export { s as AsyncMultiSelectField };
+export { c as AsyncMultiSelectField };

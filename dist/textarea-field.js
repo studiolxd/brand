@@ -2,47 +2,48 @@
 import './textarea-field.css';
 import { n as e } from "./_shared/form-size.js";
 import { Textarea as t } from "./textarea.js";
-import { n } from "./_shared/field-labels.js";
-import { n as r, t as i } from "./_shared/fieldshell.js";
-import { forwardRef as a } from "react";
-import { jsx as o } from "react/jsx-runtime";
+import { n } from "./_shared/field-optional.js";
+import { n as r } from "./_shared/field-labels.js";
+import { a as i, n as a } from "./_shared/fieldshell.js";
+import { forwardRef as o } from "react";
+import { jsx as s } from "react/jsx-runtime";
 //#region src/stories/molecules/TextareaField/TextareaField.tsx
-var s = a(function({ id: a, label: s, optional: c, optionalLabel: l, labelHidden: u, name: d, placeholder: f, value: p, defaultValue: m, rows: h, disabled: g, readOnly: _, size: v, error: y = !1, errorMessage: b, helperText: x, onChange: S, onBlur: C, onFocus: w, className: T, "aria-describedby": E, ...D }, O) {
-	let k = n(u), A = e(v), j = r({
-		id: a,
-		error: y,
-		errorMessage: b,
-		helperText: x,
-		describedBy: E
+var c = o(function({ id: o, label: c, optional: l, optionalLabel: u, labelHidden: d, name: f, placeholder: p, value: m, defaultValue: h, rows: g, disabled: _, readOnly: v, size: y, error: b = !1, errorMessage: x, helperText: S, onChange: C, onBlur: w, onFocus: T, className: E, "aria-describedby": D, ...O }, k) {
+	let A = r(d), j = e(y), M = n(l, O.required), N = i({
+		id: o,
+		error: b,
+		errorMessage: x,
+		helperText: S,
+		describedBy: D
 	});
-	return /* @__PURE__ */ o(i, {
-		field: j,
+	return /* @__PURE__ */ s(a, {
+		field: N,
 		block: "textarea-field",
-		className: T,
-		label: s,
-		optional: c,
-		optionalLabel: l,
-		labelHidden: k,
-		size: A,
-		children: /* @__PURE__ */ o(t, {
-			ref: O,
-			...D,
-			id: a,
-			name: d,
-			placeholder: f ?? (k ? s : void 0),
-			value: p,
-			defaultValue: m,
-			rows: h,
-			disabled: g,
-			readOnly: _,
-			size: A,
-			error: j.hasError,
-			"aria-describedby": j.describedBy,
-			onChange: S,
-			onBlur: C,
-			onFocus: w
+		className: E,
+		label: c,
+		optional: M,
+		optionalLabel: u,
+		labelHidden: A,
+		size: j,
+		children: /* @__PURE__ */ s(t, {
+			ref: k,
+			...O,
+			id: o,
+			name: f,
+			placeholder: p ?? (A ? c : void 0),
+			value: m,
+			defaultValue: h,
+			rows: g,
+			disabled: _,
+			readOnly: v,
+			size: j,
+			error: N.hasError,
+			"aria-describedby": N.describedBy,
+			onChange: C,
+			onBlur: w,
+			onFocus: T
 		})
 	});
 });
 //#endregion
-export { s as TextareaField };
+export { c as TextareaField };

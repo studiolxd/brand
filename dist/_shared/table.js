@@ -1,5 +1,5 @@
 import '../table.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { Icon as t } from "../icon.js";
 import { VisuallyHidden as n } from "../visually-hidden.js";
 import { t as r } from "./overflow-focusable.js";

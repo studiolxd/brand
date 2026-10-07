@@ -1,6 +1,6 @@
 'use client';
 import './message-composer.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Button as t } from "./button.js";
 import { Textarea as n } from "./textarea.js";
 import { forwardRef as r, useId as i } from "react";

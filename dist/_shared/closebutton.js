@@ -1,5 +1,5 @@
 import '../closebutton.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { Icon as t } from "../icon.js";
 import { forwardRef as n } from "react";
 import { jsx as r } from "react/jsx-runtime";

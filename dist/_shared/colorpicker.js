@@ -1,5 +1,5 @@
 import '../colorpicker.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { VisuallyHidden as t } from "../visually-hidden.js";
 import { Button as n } from "../button.js";
 import { Input as r } from "../input.js";

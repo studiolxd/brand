@@ -1,6 +1,6 @@
 'use client';
 import './org-chart.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Icon as t } from "./icon.js";
 import { Button as n } from "./button.js";
 import { t as r } from "./_shared/css-properties.js";

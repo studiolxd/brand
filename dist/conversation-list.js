@@ -1,6 +1,6 @@
 'use client';
 import './conversation-list.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Icon as t } from "./icon.js";
 import { Button as n } from "./button.js";
 import { Skeleton as r } from "./skeleton.js";

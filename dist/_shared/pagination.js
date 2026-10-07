@@ -1,5 +1,5 @@
 import '../pagination.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { Icon as t } from "../icon.js";
 import { t as n } from "./select.js";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";

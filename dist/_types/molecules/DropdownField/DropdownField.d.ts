@@ -1,8 +1,8 @@
 import { type ReactNode } from 'react';
-import { type FieldOptionalProps } from '../_shared/FieldShell';
+import { type FieldOptionalProps, type FieldRequiredProps } from '../_shared/FieldShell';
 import { type MenuItem } from '../Menu/Menu';
 import './DropdownField.css';
-export interface DropdownFieldProps extends FieldOptionalProps {
+export interface DropdownFieldProps extends FieldOptionalProps, FieldRequiredProps {
     /** `id` del control; enlaza la etiqueta. Si no se pasa, se genera con `useId`. */
     id?: string;
     /** Etiqueta visible. Si no hay, es obligatorio `aria-label`. */
@@ -30,10 +30,11 @@ export interface DropdownFieldProps extends FieldOptionalProps {
     name?: string;
     /**
      * Campo obligatorio. El disparador es un botón, que no admite
-     * `aria-required`: lo obligatorio lo lleva el **grupo** que envuelve el
-     * campo (`role="group"`, nombrado por la etiqueta o por `aria-label`, con
-     * `aria-required`), y el `<form>` no se envía sin valor (`required` en el
-     * campo que sincroniza el valor, que devuelve el foco al disparador).
+     * `aria-required` (D73): lo obligatorio va en su **descripción**, un texto
+     * oculto «obligatorio» (`requiredLabel`, o `field.required` del catálogo)
+     * enlazado por `aria-describedby` detrás de la ayuda y el error. El `<form>`
+     * no se envía sin valor (`required` en el campo que sincroniza el valor,
+     * que devuelve el foco al disparador).
      */
     required?: boolean;
     /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */

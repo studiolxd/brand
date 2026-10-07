@@ -1,5 +1,5 @@
 import '../dotsbutton.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { Icon as t } from "../icon.js";
 import { Button as n } from "../button.js";
 import { forwardRef as r } from "react";

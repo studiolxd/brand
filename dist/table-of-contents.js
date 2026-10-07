@@ -1,6 +1,6 @@
 'use client';
 import './table-of-contents.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Link as t } from "./link.js";
 import { List as n } from "./list.js";
 import { forwardRef as r } from "react";

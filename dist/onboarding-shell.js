@@ -1,6 +1,6 @@
 'use client';
 import './onboarding-shell.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { t } from "./_shared/form-size.js";
 import { Container as n } from "./container.js";
 import { n as r, t as i } from "./_shared/publicpageshell.js";

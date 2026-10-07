@@ -1,5 +1,5 @@
 import '../imagecropdialog.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { Spinner as t } from "../spinner.js";
 import { Button as n } from "../button.js";
 import { t as r } from "./alert.js";

@@ -1,5 +1,5 @@
 import '../otpinput.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { Input as t } from "../input.js";
 import { forwardRef as n, useCallback as r, useEffect as i, useRef as a, useState as o } from "react";
 import { jsx as s, jsxs as c } from "react/jsx-runtime";

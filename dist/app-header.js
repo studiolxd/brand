@@ -1,6 +1,6 @@
 'use client';
 import './app-header.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { t } from "./_shared/menubutton.js";
 import { t as n } from "./_shared/default-render-link.js";
 import { t as r } from "./_shared/appshellcontext.js";

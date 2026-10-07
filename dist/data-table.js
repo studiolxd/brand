@@ -1,6 +1,6 @@
 'use client';
 import './data-table.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { Skeleton as n } from "./skeleton.js";
 import { t as r } from "./_shared/pagination.js";

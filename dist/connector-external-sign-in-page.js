@@ -1,5 +1,5 @@
 'use client';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Button as t } from "./button.js";
 import { Stack as n } from "./stack.js";
 import { Paragraph as r } from "./paragraph.js";

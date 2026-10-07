@@ -1,6 +1,6 @@
 'use client';
 import './carousel.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Icon as t } from "./icon.js";
 import { VisuallyHidden as n } from "./visually-hidden.js";
 import { Button as r } from "./button.js";

@@ -1,5 +1,5 @@
 import '../progressbar.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
 //#region tokens/component/progress-bar.json
 var r = { "progress-bar": {

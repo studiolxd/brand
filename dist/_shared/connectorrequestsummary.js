@@ -1,5 +1,5 @@
 import '../connectorrequestsummary.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { DescriptionDetails as t, DescriptionList as n, DescriptionTerm as r } from "../description-list.js";
 import { t as i } from "./untrustedtext.js";
 import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";

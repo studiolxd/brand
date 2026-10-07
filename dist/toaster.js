@@ -1,6 +1,6 @@
 'use client';
 import './toaster.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { n as t } from "./_shared/portal-container.js";
 import { Button as n } from "./button.js";
 import { t as r } from "./_shared/closebutton.js";

@@ -1,6 +1,6 @@
 'use client';
 import './chat-shell.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Icon as t } from "./icon.js";
 import { Button as n } from "./button.js";
 import { t as r } from "./_shared/assign-ref.js";

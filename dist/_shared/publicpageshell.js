@@ -1,5 +1,5 @@
 import '../publicpageshell.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { Container as t } from "../container.js";
 import { ErrorBoundary as n } from "../error-boundary.js";
 import { SiteShell as r } from "../site-shell.js";

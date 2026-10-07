@@ -1,5 +1,5 @@
 import '../select.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { Icon as t } from "../icon.js";
 import { n } from "./portal-container.js";
 import { Children as r, createContext as i, forwardRef as a, isValidElement as o, useContext as s, useMemo as c } from "react";

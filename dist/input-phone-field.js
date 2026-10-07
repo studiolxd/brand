@@ -2,48 +2,49 @@
 import './input-phone-field.css';
 import { n as e } from "./_shared/form-size.js";
 import { t } from "./_shared/inputphone.js";
-import { n } from "./_shared/field-labels.js";
-import { n as r, t as i } from "./_shared/fieldshell.js";
-import { forwardRef as a } from "react";
-import { jsx as o } from "react/jsx-runtime";
+import { n } from "./_shared/field-optional.js";
+import { n as r } from "./_shared/field-labels.js";
+import { a as i, n as a } from "./_shared/fieldshell.js";
+import { forwardRef as o } from "react";
+import { jsx as s } from "react/jsx-runtime";
 //#region src/stories/molecules/InputPhoneField/InputPhoneField.tsx
-var s = a(function({ id: a, label: s, optional: c, optionalLabel: l, labelHidden: u, value: d, defaultCountry: f, placeholder: p, disabled: m, readOnly: h, required: g, name: _, autoComplete: v, error: y = !1, errorMessage: b, helperText: x, size: S, className: C, countryLabel: w, internationalLabel: T, onChange: E, onBlur: D, onFocus: O }, k) {
-	let A = n(u), j = e(S), M = r({
-		id: a,
-		error: y,
-		errorMessage: b,
-		helperText: x
-	}), { id: N } = M;
-	return /* @__PURE__ */ o(i, {
-		field: M,
+var c = o(function({ id: o, label: c, optional: l, optionalLabel: u, labelHidden: d, value: f, defaultCountry: p, placeholder: m, disabled: h, readOnly: g, required: _, name: v, autoComplete: y, error: b = !1, errorMessage: x, helperText: S, size: C, className: w, countryLabel: T, internationalLabel: E, onChange: D, onBlur: O, onFocus: k }, A) {
+	let j = r(d), M = e(C), N = n(l, _), P = i({
+		id: o,
+		error: b,
+		errorMessage: x,
+		helperText: S
+	}), { id: F } = P;
+	return /* @__PURE__ */ s(a, {
+		field: P,
 		block: "input-phone-field",
-		className: C,
-		label: s,
-		optional: c,
-		optionalLabel: l,
-		labelHidden: A,
-		size: j,
-		children: /* @__PURE__ */ o(t, {
-			ref: k,
-			id: N,
-			name: _,
-			value: d,
-			defaultCountry: f,
-			placeholder: p,
-			disabled: m,
-			readOnly: h,
-			required: g,
-			autoComplete: v,
-			countryLabel: w,
-			internationalLabel: T,
-			error: M.hasError,
-			size: j,
-			"aria-describedby": M.describedBy,
-			onChange: E,
-			onBlur: D,
-			onFocus: O
+		className: w,
+		label: c,
+		optional: N,
+		optionalLabel: u,
+		labelHidden: j,
+		size: M,
+		children: /* @__PURE__ */ s(t, {
+			ref: A,
+			id: F,
+			name: v,
+			value: f,
+			defaultCountry: p,
+			placeholder: m,
+			disabled: h,
+			readOnly: g,
+			required: _,
+			autoComplete: y,
+			countryLabel: T,
+			internationalLabel: E,
+			error: P.hasError,
+			size: M,
+			"aria-describedby": P.describedBy,
+			onChange: D,
+			onBlur: O,
+			onFocus: k
 		})
 	});
 });
 //#endregion
-export { s as InputPhoneField };
+export { c as InputPhoneField };

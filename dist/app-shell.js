@@ -1,6 +1,6 @@
 'use client';
 import './app-shell.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { SkipLink as t } from "./skip-link.js";
 import { t as n } from "./_shared/css-properties.js";
 import { TooltipProvider as r } from "./tooltip.js";

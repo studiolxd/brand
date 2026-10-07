@@ -1,6 +1,6 @@
 'use client';
 import './annotation-thread.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Tag as t } from "./tag.js";
 import "react";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";

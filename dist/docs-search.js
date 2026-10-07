@@ -1,6 +1,6 @@
 'use client';
 import './docs-search.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Spinner as t } from "./spinner.js";
 import { t as n } from "./_shared/default-render-link.js";
 import { t as r } from "./_shared/inputfield.js";

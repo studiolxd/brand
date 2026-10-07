@@ -1,6 +1,6 @@
 'use client';
 import './heatmap.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { forwardRef as n, useMemo as r } from "react";
 import { jsx as i, jsxs as a } from "react/jsx-runtime";

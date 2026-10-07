@@ -1,5 +1,5 @@
 import '../alert.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { t } from "./closebutton.js";
 import { forwardRef as n, useState as r } from "react";
 import { jsx as i, jsxs as a } from "react/jsx-runtime";

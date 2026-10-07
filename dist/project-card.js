@@ -1,6 +1,6 @@
 'use client';
 import './project-card.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Heading as t } from "./heading.js";
 import { Paragraph as n } from "./paragraph.js";
 import { Tag as r } from "./tag.js";

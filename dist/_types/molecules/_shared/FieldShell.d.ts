@@ -8,6 +8,12 @@ import type { FormSize } from '../../constants/form-size';
 export interface FieldMessages {
     /** La marca tras la etiqueta de un campo `optional`. Castellano: «(opcional)». */
     optional: string;
+    /**
+     * La descripción oculta que anuncia un campo obligatorio cuyo disparador es
+     * un botón, que no admite `aria-required` (D73): `ColorPickerField` y
+     * `DropdownField`. Castellano: «obligatorio».
+     */
+    required: string;
 }
 /**
  * La marca de campo opcional (D70), común a todos los `*Field`. Se marca lo
@@ -20,7 +26,10 @@ export interface FieldOptionalProps {
     /**
      * Pinta « (opcional)» tras la etiqueta, en la tinta apagada de la etiqueta.
      * Va dentro del `<label>`, así que el lector de pantalla la lee como parte
-     * del nombre del campo. No se combina con `required`. Por defecto `false`.
+     * del nombre del campo. No se combina con `required`. Sin valor, lo decide
+     * el `Form` que lo envuelva: con `markOptional`, todo campo sin `required`
+     * la lleva (D74); `optional={false}` la apaga en un campo concreto. Sin
+     * `Form markOptional`, por defecto `false`.
      */
     optional?: boolean;
     /**
@@ -30,6 +39,31 @@ export interface FieldOptionalProps {
      */
     optionalLabel?: string;
 }
+/**
+ * Lo obligatorio de un campo cuyo disparador es un botón (D73). ARIA 1.2 no
+ * admite `aria-required` ni en `role="button"` ni en `role="group"`, así que
+ * lo obligatorio va en la **descripción** del disparador: un texto oculto
+ * («obligatorio») enlazado por su `aria-describedby`, detrás de la ayuda y el
+ * error. El `<form>` lo sigue validando el campo oculto con `required`.
+ */
+export interface FieldRequiredProps {
+    /**
+     * Texto que anuncia lo obligatorio. **Sin default en la prop**: sin ella,
+     * sale de `field.required` del `BrandMessagesProvider` y, si el catálogo no
+     * la trae, del castellano «obligatorio». Solo se lee con `required`.
+     */
+    requiredLabel?: string;
+}
+/** El `id` del texto oculto de obligatorio de un control. */
+export declare function requiredTextId(controlId: string): string;
+/**
+ * El texto oculto «obligatorio» al que apunta el `aria-describedby` del
+ * disparador (ver `FieldRequiredProps`). Se pinta solo con `required`.
+ */
+export declare function FieldRequiredText({ id, label }: {
+    id: string;
+    label?: string;
+}): import("react/jsx-runtime").JSX.Element;
 /** Une ids para un `aria-*` de referencias; sin ninguno, `undefined` (no un atributo vacío). */
 export declare function joinIds(...ids: Array<string | false | null | undefined>): string | undefined;
 export interface FieldShellOptions {

@@ -107,7 +107,8 @@ export interface ColorPickerProps {
      * El `<form>` no se envía sin color: el campo que sincroniza el hex lleva
      * `required` (y, si se enfoca para avisar, devuelve el foco al disparador).
      * El disparador es un botón y no admite `aria-required`: quien lo anuncia es
-     * el grupo de `ColorPickerField`. Suelto, el obligatorio se dice en el texto.
+     * `ColorPickerField`, con un «obligatorio» oculto en la descripción del
+     * disparador. Suelto, el obligatorio se dice en el texto.
      */
     required?: boolean;
     /** Nombre accesible del disparador cuando va suelto. */

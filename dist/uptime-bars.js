@@ -1,6 +1,6 @@
 'use client';
 import './uptime-bars.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Tooltip as t } from "./tooltip.js";
 import { forwardRef as n, useRef as r, useState as i } from "react";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";

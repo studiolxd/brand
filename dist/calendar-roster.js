@@ -1,6 +1,6 @@
 'use client';
 import './calendar-roster.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Tag as t } from "./tag.js";
 import { t as n } from "./_shared/prevnextnav.js";
 import { t as r } from "./_shared/overflow-focusable.js";

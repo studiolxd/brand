@@ -1,91 +1,92 @@
 import '../inputfield.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { Icon as t } from "../icon.js";
 import { n } from "./form-size.js";
 import { Input as r } from "../input.js";
-import { n as i } from "./field-labels.js";
-import { n as a, t as o } from "./fieldshell.js";
-import { forwardRef as s, useImperativeHandle as c, useRef as l, useState as u } from "react";
-import { jsx as d, jsxs as f } from "react/jsx-runtime";
+import { n as i } from "./field-optional.js";
+import { n as a } from "./field-labels.js";
+import { a as o, n as s } from "./fieldshell.js";
+import { forwardRef as c, useImperativeHandle as l, useRef as u, useState as d } from "react";
+import { jsx as f, jsxs as p } from "react/jsx-runtime";
 //#region src/stories/messages/es/inputField.ts
-var p = { clear: "Borrar" }, m = s(function({ id: s, label: m, optional: h, optionalLabel: g, labelHidden: _, name: v, type: y, kind: b = "text", clearable: x = !1, clearLabel: S, onClear: C, placeholder: w, value: T, defaultValue: E, disabled: D, readOnly: O, size: k, error: A = !1, errorMessage: j, helperText: M, onChange: N, onBlur: P, onFocus: F, className: I, ...L }, R) {
-	let z = e("inputField", p), B = i(_), V = n(k), H = a({
-		id: s,
-		error: A,
-		errorMessage: j,
-		helperText: M,
-		describedBy: L["aria-describedby"]
-	}), U = b === "search", W = l(null);
-	c(R, () => W.current);
-	let [G, K] = u(() => (E ?? "") !== ""), q = U && x && (T === void 0 ? G : T !== "") && !D && !O;
-	function J(e) {
-		T === void 0 && K(e.target.value !== ""), N?.(e);
+var m = { clear: "Borrar" }, h = c(function({ id: c, label: h, optional: g, optionalLabel: _, labelHidden: v, name: y, type: b, kind: x = "text", clearable: S = !1, clearLabel: C, onClear: w, placeholder: T, value: E, defaultValue: D, disabled: O, readOnly: k, size: A, error: j = !1, errorMessage: M, helperText: N, onChange: P, onBlur: F, onFocus: I, className: L, ...R }, z) {
+	let B = e("inputField", m), V = a(v), H = n(A), U = i(g, R.required), W = o({
+		id: c,
+		error: j,
+		errorMessage: M,
+		helperText: N,
+		describedBy: R["aria-describedby"]
+	}), G = x === "search", K = u(null);
+	l(z, () => K.current);
+	let [q, J] = d(() => (D ?? "") !== ""), Y = G && S && (E === void 0 ? q : E !== "") && !O && !k;
+	function X(e) {
+		E === void 0 && J(e.target.value !== ""), P?.(e);
 	}
-	function Y() {
-		let e = W.current;
-		e && ((Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value")?.set)?.call(e, ""), e.dispatchEvent(new Event("input", { bubbles: !0 })), K(!1), e.focus(), C?.());
+	function Z() {
+		let e = K.current;
+		e && ((Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value")?.set)?.call(e, ""), e.dispatchEvent(new Event("input", { bubbles: !0 })), J(!1), e.focus(), w?.());
 	}
-	let X = /* @__PURE__ */ d(r, {
-		ref: W,
-		...U ? {
+	let Q = /* @__PURE__ */ f(r, {
+		ref: K,
+		...G ? {
 			type: "text",
 			autoComplete: "off",
 			enterKeyHint: "search"
-		} : { type: y },
-		...L,
-		id: s,
-		name: v,
-		placeholder: w ?? (B ? m : void 0),
-		value: T,
-		defaultValue: E,
-		disabled: D,
-		readOnly: O,
-		size: V,
-		error: H.hasError,
-		"aria-describedby": H.describedBy,
-		onChange: J,
-		onBlur: P,
-		onFocus: F
+		} : { type: b },
+		...R,
+		id: c,
+		name: y,
+		placeholder: T ?? (V ? h : void 0),
+		value: E,
+		defaultValue: D,
+		disabled: O,
+		readOnly: k,
+		size: H,
+		error: W.hasError,
+		"aria-describedby": W.describedBy,
+		onChange: X,
+		onBlur: F,
+		onFocus: I
 	});
-	return /* @__PURE__ */ d(o, {
-		field: H,
+	return /* @__PURE__ */ f(s, {
+		field: W,
 		block: "input-field",
-		className: I,
-		label: m,
-		optional: h,
-		optionalLabel: g,
-		labelHidden: B,
-		size: V,
-		children: U ? /* @__PURE__ */ f("div", {
+		className: L,
+		label: h,
+		optional: U,
+		optionalLabel: _,
+		labelHidden: V,
+		size: H,
+		children: G ? /* @__PURE__ */ p("div", {
 			className: [
 				"input-field__search",
-				V === "md" ? "" : `input-field__search--${V}`,
-				x ? "input-field__search--clearable" : ""
+				H === "md" ? "" : `input-field__search--${H}`,
+				S ? "input-field__search--clearable" : ""
 			].filter(Boolean).join(" "),
 			children: [
-				/* @__PURE__ */ d("span", {
+				/* @__PURE__ */ f("span", {
 					className: "input-field__search-icon",
 					"aria-hidden": "true",
-					children: /* @__PURE__ */ d(t, {
+					children: /* @__PURE__ */ f(t, {
 						name: "search",
 						className: "input-field__search-glyph"
 					})
 				}),
-				X,
-				q && /* @__PURE__ */ d("button", {
+				Q,
+				Y && /* @__PURE__ */ f("button", {
 					type: "button",
 					className: "input-field__clear",
-					"aria-label": z("clear", S),
-					"aria-controls": s,
-					onClick: Y,
-					children: /* @__PURE__ */ d(t, {
+					"aria-label": B("clear", C),
+					"aria-controls": c,
+					onClick: Z,
+					children: /* @__PURE__ */ f(t, {
 						name: "close",
 						className: "input-field__search-glyph"
 					})
 				})
 			]
-		}) : X
+		}) : Q
 	});
 });
 //#endregion
-export { m as t };
+export { h as t };

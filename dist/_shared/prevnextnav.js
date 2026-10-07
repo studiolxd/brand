@@ -1,5 +1,5 @@
 import '../prevnextnav.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { Icon as t } from "../icon.js";
 import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/messages/es/prevNextNav.ts

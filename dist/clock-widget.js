@@ -1,6 +1,6 @@
 'use client';
 import './clock-widget.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Button as t } from "./button.js";
 import { Heading as n } from "./heading.js";
 import { t as r } from "./_shared/alert.js";

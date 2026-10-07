@@ -1,6 +1,6 @@
 'use client';
 import './org-switcher.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Icon as t } from "./icon.js";
 import { n } from "./_shared/portal-container.js";
 import { Avatar as r } from "./avatar.js";

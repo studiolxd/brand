@@ -1,6 +1,6 @@
 'use client';
 import './command-palette.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { t } from "./_shared/modal.js";
 import { useCallback as n, useEffect as r, useRef as i } from "react";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";

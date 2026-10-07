@@ -1,60 +1,61 @@
 'use client';
 import './password-field.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Icon as t } from "./icon.js";
 import { VisuallyHidden as n } from "./visually-hidden.js";
 import { n as r } from "./_shared/form-size.js";
 import { Input as i } from "./input.js";
-import { n as a } from "./_shared/field-labels.js";
-import { n as o, t as s } from "./_shared/fieldshell.js";
-import { forwardRef as c, useState as l } from "react";
-import { jsx as u, jsxs as d } from "react/jsx-runtime";
+import { n as a } from "./_shared/field-optional.js";
+import { n as o } from "./_shared/field-labels.js";
+import { a as s, n as c } from "./_shared/fieldshell.js";
+import { forwardRef as l, useState as u } from "react";
+import { jsx as d, jsxs as f } from "react/jsx-runtime";
 //#region src/stories/messages/es/passwordField.ts
-var f = {
+var p = {
 	show: "Mostrar contraseña",
 	hide: "Ocultar contraseña"
-}, p = c(function({ label: c, optional: p, optionalLabel: m, labelHidden: h, error: g = !1, errorMessage: _, helperText: v, action: y, size: b, showPasswordLabel: x, hidePasswordLabel: S, className: C, id: w, disabled: T, placeholder: E, "aria-describedby": D, ...O }, k) {
-	let A = e("passwordField", f), j = r(b), M = a(h), N = o({
-		id: w,
-		error: g,
-		errorMessage: _,
-		helperText: v,
-		describedBy: D
-	}), P = N.id, [F, I] = l(!1);
-	return /* @__PURE__ */ u(s, {
-		field: N,
+}, m = l(function({ label: l, optional: m, optionalLabel: h, labelHidden: g, error: _ = !1, errorMessage: v, helperText: y, action: b, size: x, showPasswordLabel: S, hidePasswordLabel: C, className: w, id: T, disabled: E, placeholder: D, "aria-describedby": O, ...k }, A) {
+	let j = e("passwordField", p), M = r(x), N = a(m, k.required), P = o(g), F = s({
+		id: T,
+		error: _,
+		errorMessage: v,
+		helperText: y,
+		describedBy: O
+	}), I = F.id, [L, R] = u(!1);
+	return /* @__PURE__ */ d(c, {
+		field: F,
 		block: "password-field",
-		className: C,
-		label: c,
-		optional: p,
-		optionalLabel: m,
-		labelHidden: M,
-		size: j,
-		footer: y && /* @__PURE__ */ u("div", {
+		className: w,
+		label: l,
+		optional: N,
+		optionalLabel: h,
+		labelHidden: P,
+		size: M,
+		footer: b && /* @__PURE__ */ d("div", {
 			className: "password-field__action",
-			children: y
+			children: b
 		}),
-		children: /* @__PURE__ */ d("div", {
-			className: ["password-field__wrapper", j === "md" ? "" : `password-field__wrapper--${j}`].filter(Boolean).join(" "),
-			children: [/* @__PURE__ */ u(i, {
-				ref: k,
-				id: P,
-				size: j,
-				error: N.hasError,
-				placeholder: E ?? (c && M ? c : void 0),
-				"aria-describedby": N.describedBy,
-				...O,
-				type: F ? "text" : "password",
-				disabled: T
-			}), /* @__PURE__ */ d("button", {
+		children: /* @__PURE__ */ f("div", {
+			className: ["password-field__wrapper", M === "md" ? "" : `password-field__wrapper--${M}`].filter(Boolean).join(" "),
+			children: [/* @__PURE__ */ d(i, {
+				ref: A,
+				id: I,
+				size: M,
+				error: F.hasError,
+				placeholder: D ?? (l && P ? l : void 0),
+				"aria-describedby": F.describedBy,
+				...k,
+				type: L ? "text" : "password",
+				disabled: E
+			}), /* @__PURE__ */ f("button", {
 				type: "button",
 				className: "password-field__toggle",
-				onClick: () => I((e) => !e),
-				disabled: T,
-				"aria-controls": P,
-				"aria-pressed": F,
-				children: [/* @__PURE__ */ u(n, { children: F ? A("hide", S) : A("show", x) }), /* @__PURE__ */ u(t, {
-					name: F ? "eye-off" : "eye",
+				onClick: () => R((e) => !e),
+				disabled: E,
+				"aria-controls": I,
+				"aria-pressed": L,
+				children: [/* @__PURE__ */ d(n, { children: L ? j("hide", C) : j("show", S) }), /* @__PURE__ */ d(t, {
+					name: L ? "eye-off" : "eye",
 					className: "password-field__icon"
 				})]
 			})]
@@ -62,4 +63,4 @@ var f = {
 	});
 });
 //#endregion
-export { p as PasswordField };
+export { m as PasswordField };

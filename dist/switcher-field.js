@@ -3,7 +3,7 @@ import './switcher-field.css';
 import { n as e } from "./_shared/form-size.js";
 import { Switcher as t } from "./switcher.js";
 import { n } from "./_shared/field-labels.js";
-import { n as r, t as i } from "./_shared/fieldshell.js";
+import { a as r, n as i } from "./_shared/fieldshell.js";
 import { forwardRef as a } from "react";
 import { jsx as o } from "react/jsx-runtime";
 //#region src/stories/molecules/SwitcherField/SwitcherField.tsx

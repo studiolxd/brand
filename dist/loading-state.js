@@ -1,6 +1,6 @@
 'use client';
 import './loading-state.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { t as n } from "./_shared/spinner.js";
 import { Spinner as r } from "./spinner.js";

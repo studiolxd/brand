@@ -1,6 +1,6 @@
 'use client';
 import './breadcrumb.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { t } from "./_shared/default-render-link.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/messages/es/breadcrumb.ts

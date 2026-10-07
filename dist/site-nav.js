@@ -1,6 +1,6 @@
 'use client';
 import './site-nav.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Heading as t } from "./heading.js";
 import { Tag as n } from "./tag.js";
 import { t as r } from "./_shared/default-render-link.js";

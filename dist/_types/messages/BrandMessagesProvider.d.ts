@@ -9,8 +9,20 @@ export interface BrandMessagesProviderProps {
      * Para que olvidar un texto sea un error de compilación y no un «Cancelar»
      * castellano dentro de una página en francés, escribe el catálogo con
      * `satisfies CompleteBrandMessages`.
+     *
+     * Opcional solo para la app que va **entera en castellano** y monta el
+     * proveedor con `fallback="es"` sin catálogo propio.
      */
-    messages: BrandMessages;
+    messages?: BrandMessages;
+    /**
+     * Declara que el castellano de respaldo es **intencionado** (D71): lo que el
+     * catálogo no traiga sale en castellano igual que sin la prop, pero sin el
+     * aviso de desarrollo «falta X en el catálogo; sale en castellano». Para la
+     * app que solo existe en castellano, con o sin `messages` (o con uno
+     * parcial para cambiar algún texto). Una app multiidioma no la pone: esos
+     * avisos son los que le dicen qué le falta a su catálogo.
+     */
+    fallback?: 'es';
     children: ReactNode;
 }
 /**
@@ -46,5 +58,11 @@ export interface BrandMessagesProviderProps {
  *   {children}
  * </BrandMessagesProvider>
  * ```
+ *
+ * Una app solo en castellano lo declara y se ahorra los avisos:
+ *
+ * ```tsx
+ * <BrandMessagesProvider fallback="es">{children}</BrandMessagesProvider>
+ * ```
  */
-export declare function BrandMessagesProvider({ messages, children }: BrandMessagesProviderProps): import("react/jsx-runtime").JSX.Element;
+export declare function BrandMessagesProvider({ messages, fallback, children }: BrandMessagesProviderProps): import("react/jsx-runtime").JSX.Element;

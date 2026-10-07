@@ -18,6 +18,14 @@ export interface FormProps extends Omit<ComponentProps<'form'>, 'children'> {
     alternativesLabel?: string;
     /** Talla de todos los campos y botones (32/40/48): `lg` en superficies públicas, `md` dentro de las aplicaciones. */
     size?: FormSize;
+    /**
+     * Marca lo opcional en todo el formulario (D74): cada `*Field` sin
+     * `required` pinta « (opcional)» tras la etiqueta, sin poner `optional`
+     * campo a campo. El `optional` de un campo sigue mandando: `optional={false}`
+     * la apaga en ese. Para formularios donde casi todo es obligatorio. Por
+     * defecto `false`: sin ella, nada cambia.
+     */
+    markOptional?: boolean;
     /** Acciones en bloque: los botones a todo el ancho, apilados, también en escritorio (acceso, registro…). */
     blockActions?: boolean;
     /** Mensaje de éxito que sustituye al formulario («Gracias — tu mensaje se ha enviado.»): texto anunciado (`role="status"`), sin caja. Con `success`, no se pintan campos ni acciones; `links` sí. */

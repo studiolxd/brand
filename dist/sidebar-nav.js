@@ -1,6 +1,6 @@
 'use client';
 import './sidebar-nav.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Icon as t } from "./icon.js";
 import { Tooltip as n } from "./tooltip.js";
 import { t as r } from "./_shared/default-render-link.js";

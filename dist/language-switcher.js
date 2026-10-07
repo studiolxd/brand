@@ -1,6 +1,6 @@
 'use client';
 import './language-switcher.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { t } from "./_shared/default-render-link.js";
 import { DropdownField as n } from "./dropdown-field.js";
 import { useId as r } from "react";

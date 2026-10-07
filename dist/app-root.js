@@ -1,5 +1,5 @@
 'use client';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { SkipLink as t } from "./skip-link.js";
 import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/messages/es/appRoot.ts

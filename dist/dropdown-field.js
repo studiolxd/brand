@@ -2,72 +2,73 @@
 import './dropdown-field.css';
 import { Icon as e } from "./icon.js";
 import { n as t } from "./_shared/form-size.js";
-import { n } from "./_shared/field-labels.js";
-import { n as r, t as i } from "./_shared/fieldshell.js";
-import { Menu as a } from "./menu.js";
-import { t as o } from "./_shared/requiredinput.js";
-import { forwardRef as s, useRef as c } from "react";
-import { jsx as l, jsxs as u } from "react/jsx-runtime";
+import { n } from "./_shared/field-optional.js";
+import { n as r } from "./_shared/field-labels.js";
+import { a as i, i as a, n as o, r as s, t as c } from "./_shared/fieldshell.js";
+import { Menu as l } from "./menu.js";
+import { t as u } from "./_shared/requiredinput.js";
+import { forwardRef as d, useRef as f } from "react";
+import { jsx as p, jsxs as m } from "react/jsx-runtime";
 //#region src/stories/molecules/DropdownField/DropdownField.tsx
-var d = s(function({ id: s, label: d, optional: f, optionalLabel: p, labelHidden: m, "aria-label": h, items: g, value: _, onValueChange: v, children: y, inline: b = !1, size: x, align: S = "start", disabled: C = !1, name: w, required: T = !1, error: E = !1, errorMessage: D, helperText: O, onBlur: k, className: A }, j) {
-	let M = n(m), N = t(x), P = r({
-		id: s,
-		error: E,
-		errorMessage: D,
-		helperText: O
-	}), { id: F, labelId: I } = P, L = c(null), R = (e) => {
-		L.current = e, typeof j == "function" ? j(e) : j && (j.current = e);
-	}, z = T ? {
-		role: "group",
-		"aria-labelledby": d ? I : void 0,
-		"aria-label": d ? void 0 : h,
-		"aria-required": !0
-	} : void 0;
-	return /* @__PURE__ */ u(i, {
-		field: P,
+var h = d(function({ id: d, label: h, optional: g, optionalLabel: _, labelHidden: v, "aria-label": y, items: b, value: x, onValueChange: S, children: C, inline: w = !1, size: T, align: E = "start", disabled: D = !1, name: O, required: k = !1, requiredLabel: A, error: j = !1, errorMessage: M, helperText: N, onBlur: P, className: F }, I) {
+	let L = r(v), R = t(T), z = n(g, k), B = i({
+		id: d,
+		error: j,
+		errorMessage: M,
+		helperText: N
+	}), { id: V } = B, H = k ? a(V) : void 0, U = f(null);
+	return /* @__PURE__ */ m(o, {
+		field: B,
 		block: "dropdown-field",
-		modifiers: [b && "dropdown-field--inline", N !== "md" && `dropdown-field--${N}`],
-		className: A,
-		label: d,
-		optional: f,
-		optionalLabel: p,
-		labelHidden: M,
-		size: N,
-		labelIdentified: T,
-		rootProps: z,
-		children: [/* @__PURE__ */ l(a, {
-			align: S,
-			size: N,
-			value: _,
-			onValueChange: v,
-			items: g,
-			trigger: /* @__PURE__ */ u("button", {
-				ref: R,
-				type: "button",
-				id: F,
-				className: "dropdown-field__control",
-				"aria-label": d ? void 0 : h,
-				"aria-describedby": P.describedBy,
-				"aria-invalid": P.hasError || void 0,
-				disabled: C,
-				onBlur: k,
-				children: [/* @__PURE__ */ l("span", {
-					className: "dropdown-field__value",
-					children: y
-				}), /* @__PURE__ */ l(e, {
-					name: "chevron",
-					size: "sm",
-					className: "dropdown-field__icon",
-					"aria-hidden": "true"
-				})]
+		modifiers: [w && "dropdown-field--inline", R !== "md" && `dropdown-field--${R}`],
+		className: F,
+		label: h,
+		optional: z,
+		optionalLabel: _,
+		labelHidden: L,
+		size: R,
+		children: [
+			/* @__PURE__ */ p(l, {
+				align: E,
+				size: R,
+				value: x,
+				onValueChange: S,
+				items: b,
+				trigger: /* @__PURE__ */ m("button", {
+					ref: (e) => {
+						U.current = e, typeof I == "function" ? I(e) : I && (I.current = e);
+					},
+					type: "button",
+					id: V,
+					className: "dropdown-field__control",
+					"aria-label": h ? void 0 : y,
+					"aria-describedby": s(B.describedBy, H),
+					"aria-invalid": B.hasError || void 0,
+					disabled: D,
+					onBlur: P,
+					children: [/* @__PURE__ */ p("span", {
+						className: "dropdown-field__value",
+						children: C
+					}), /* @__PURE__ */ p(e, {
+						name: "chevron",
+						size: "sm",
+						className: "dropdown-field__icon",
+						"aria-hidden": "true"
+					})]
+				})
+			}),
+			H && /* @__PURE__ */ p(c, {
+				id: H,
+				label: A
+			}),
+			/* @__PURE__ */ p(u, {
+				name: O,
+				value: x ?? "",
+				required: k,
+				focusTarget: () => U.current
 			})
-		}), /* @__PURE__ */ l(o, {
-			name: w,
-			value: _ ?? "",
-			required: T,
-			focusTarget: () => L.current
-		})]
+		]
 	});
 });
 //#endregion
-export { d as DropdownField };
+export { h as DropdownField };

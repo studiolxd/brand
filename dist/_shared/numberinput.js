@@ -1,5 +1,5 @@
 import '../numberinput.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { Icon as t } from "../icon.js";
 import { forwardRef as n, useCallback as r, useState as i } from "react";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";

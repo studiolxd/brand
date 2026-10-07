@@ -375,6 +375,7 @@ export declare const BrandMessagesContext: import("react").Context<{
     } | undefined;
     field?: {
         optional?: string | undefined;
+        required?: string | undefined;
     } | undefined;
     timeline?: {
         label?: string | undefined;
@@ -503,6 +504,12 @@ export declare const BrandMessagesContext: import("react").Context<{
     } | undefined;
 } | null>;
 /**
+ * `true` cuando la aplicación declaró con `<BrandMessagesProvider
+ * fallback="es">` que el castellano de respaldo es intencionado (D71): el
+ * lector sigue cayendo al castellano, pero sin avisar de cada clave que falta.
+ */
+export declare const BrandMessagesFallbackContext: import("react").Context<boolean>;
+/**
  * El espacio **entero** de un componente: el lector siempre devuelve un
  * texto, porque lo que no trae el catálogo sale del castellano de respaldo.
  */
@@ -533,7 +540,8 @@ export declare function resetMissingMessageWarnings(): void;
  * 3. el castellano de respaldo del espacio, que cada componente pasa como
  *    `fallback` (`useBrandMessages('pagination', paginationEs)`). Cada uno
  *    trae solo el suyo, así que el respaldo de un componente que la app no
- *    importa no viaja en su bundle. En desarrollo avisa una vez por clave.
+ *    importa no viaja en su bundle. En desarrollo avisa una vez por clave,
+ *    salvo que la app haya montado el proveedor con `fallback="es"` (D71).
  *
  * Sin `fallback` —un uso del lector fuera de la librería— un texto que falte
  * lanza, porque no hay castellano al que caer.

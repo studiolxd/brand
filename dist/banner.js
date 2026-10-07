@@ -1,6 +1,6 @@
 'use client';
 import './banner.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { t } from "./_shared/closebutton.js";
 import { forwardRef as n } from "react";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";

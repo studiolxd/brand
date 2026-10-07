@@ -1,5 +1,5 @@
 import '../slider.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
 import { Slider as r } from "@base-ui/react/slider";
 //#region src/stories/messages/es/slider.ts

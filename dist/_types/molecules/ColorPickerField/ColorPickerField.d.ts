@@ -1,7 +1,7 @@
-import { type FieldOptionalProps } from '../_shared/FieldShell';
+import { type FieldOptionalProps, type FieldRequiredProps } from '../_shared/FieldShell';
 import type { ColorPickerProps } from '../ColorPicker/ColorPicker';
 import './ColorPickerField.css';
-export interface ColorPickerFieldProps extends Omit<ColorPickerProps, 'id' | 'aria-describedby' | 'aria-label' | 'aria-labelledby'>, FieldOptionalProps {
+export interface ColorPickerFieldProps extends Omit<ColorPickerProps, 'id' | 'aria-describedby' | 'aria-label' | 'aria-labelledby'>, FieldOptionalProps, FieldRequiredProps {
     /** `id` del disparador. Si no se pasa, se genera con `useId`. */
     id?: string;
     label: string;
@@ -17,10 +17,10 @@ export interface ColorPickerFieldProps extends Omit<ColorPickerProps, 'id' | 'ar
     helperText?: string;
     /**
      * Campo obligatorio. El disparador es un botón, que no admite
-     * `aria-required`: lo obligatorio lo lleva el **grupo** que envuelve el
-     * campo (`role="group"`, nombrado por la etiqueta, con `aria-required`), y
-     * el `<form>` no se envía sin color (`required` en el campo que sincroniza
-     * el hex).
+     * `aria-required` (D73): lo obligatorio va en su **descripción**, un texto
+     * oculto «obligatorio» (`requiredLabel`, o `field.required` del catálogo)
+     * enlazado por `aria-describedby` detrás de la ayuda y el error. El `<form>`
+     * no se envía sin color (`required` en el campo que sincroniza el hex).
      */
     required?: boolean;
     /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */

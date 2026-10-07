@@ -1,5 +1,5 @@
 import '../sheet.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { VisuallyHidden as t } from "../visually-hidden.js";
 import { n } from "./portal-container.js";
 import { t as r } from "./closebutton.js";

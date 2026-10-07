@@ -1,6 +1,6 @@
 'use client';
 import './site-search.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Spinner as t } from "./spinner.js";
 import { Button as n } from "./button.js";
 import { Skeleton as r } from "./skeleton.js";

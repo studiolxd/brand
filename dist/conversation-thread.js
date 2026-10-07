@@ -1,6 +1,6 @@
 'use client';
 import './conversation-thread.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { UserMessage as t } from "./user-message.js";
 import { AssistantMessage as n } from "./assistant-message.js";
 import { forwardRef as r, useEffect as i, useRef as a } from "react";

@@ -1,6 +1,6 @@
 'use client';
 import './sidebar.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { n as t, t as n } from "./_shared/sidebarcontext.js";
 import { t as r } from "./_shared/appshellcontext.js";
 import { useCallback as i, useContext as a, useEffect as o, useRef as s, useState as c } from "react";

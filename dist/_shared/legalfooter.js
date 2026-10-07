@@ -1,5 +1,5 @@
 import '../legalfooter.css';
-import { n as e } from "./brandmessagescontext.js";
+import { r as e } from "./brandmessagescontext.js";
 import { Container as t } from "../container.js";
 import { Heading as n } from "../heading.js";
 import { t as r } from "./default-render-link.js";

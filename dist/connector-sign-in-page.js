@@ -1,5 +1,5 @@
 'use client';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Button as t } from "./button.js";
 import { Form as n } from "./form.js";
 import { ConnectorAuthShell as r } from "./connector-auth-shell.js";

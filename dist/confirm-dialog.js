@@ -1,6 +1,6 @@
 'use client';
 import './confirm-dialog.css';
-import { n as e } from "./_shared/brandmessagescontext.js";
+import { r as e } from "./_shared/brandmessagescontext.js";
 import { Button as t } from "./button.js";
 import { t as n } from "./_shared/modal.js";
 import { t as r } from "./_shared/inputfield.js";

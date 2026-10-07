@@ -2,50 +2,51 @@
 import './async-select-field.css';
 import { t as e } from "./_shared/asyncselect.js";
 import { n as t } from "./_shared/form-size.js";
-import { n } from "./_shared/field-labels.js";
-import { n as r, t as i } from "./_shared/fieldshell.js";
-import { forwardRef as a } from "react";
-import { jsx as o } from "react/jsx-runtime";
+import { n } from "./_shared/field-optional.js";
+import { n as r } from "./_shared/field-labels.js";
+import { a as i, n as a } from "./_shared/fieldshell.js";
+import { forwardRef as o } from "react";
+import { jsx as s } from "react/jsx-runtime";
 //#region src/stories/molecules/AsyncSelectField/AsyncSelectField.tsx
-var s = a(function({ id: a, label: s, optional: c, optionalLabel: l, labelHidden: u, onSearch: d, value: f, onValueChange: p, selectedOption: m, placeholder: h, name: g, disabled: _, readOnly: v, size: y, debounceMs: b, required: x, error: S = !1, errorMessage: C, helperText: w, className: T, emptyMessage: E, loadingLabel: D, clearLabel: O, container: k, onBlur: A }, j) {
-	let M = n(u), N = t(y), P = r({
-		id: a,
-		error: S,
-		errorMessage: C,
-		helperText: w
-	}), { id: F } = P;
-	return /* @__PURE__ */ o(i, {
-		field: P,
+var c = o(function({ id: o, label: c, optional: l, optionalLabel: u, labelHidden: d, onSearch: f, value: p, onValueChange: m, selectedOption: h, placeholder: g, name: _, disabled: v, readOnly: y, size: b, debounceMs: x, required: S, error: C = !1, errorMessage: w, helperText: T, className: E, emptyMessage: D, loadingLabel: O, clearLabel: k, container: A, onBlur: j }, M) {
+	let N = r(d), P = t(b), F = n(l, S), I = i({
+		id: o,
+		error: C,
+		errorMessage: w,
+		helperText: T
+	}), { id: L } = I;
+	return /* @__PURE__ */ s(a, {
+		field: I,
 		block: "async-select-field",
-		className: T,
-		label: s,
-		optional: c,
-		optionalLabel: l,
-		labelHidden: M,
-		size: N,
-		children: /* @__PURE__ */ o(e, {
-			ref: j,
-			id: F,
-			name: g,
-			onSearch: d,
-			value: f,
-			onValueChange: p,
-			selectedOption: m,
-			placeholder: h,
-			disabled: _,
-			readOnly: v,
-			size: N,
-			debounceMs: b,
-			required: x,
-			error: P.hasError,
-			emptyMessage: E,
-			loadingLabel: D,
-			clearLabel: O,
-			container: k,
-			"aria-describedby": P.describedBy,
-			onBlur: A
+		className: E,
+		label: c,
+		optional: F,
+		optionalLabel: u,
+		labelHidden: N,
+		size: P,
+		children: /* @__PURE__ */ s(e, {
+			ref: M,
+			id: L,
+			name: _,
+			onSearch: f,
+			value: p,
+			onValueChange: m,
+			selectedOption: h,
+			placeholder: g,
+			disabled: v,
+			readOnly: y,
+			size: P,
+			debounceMs: x,
+			required: S,
+			error: I.hasError,
+			emptyMessage: D,
+			loadingLabel: O,
+			clearLabel: k,
+			container: A,
+			"aria-describedby": I.describedBy,
+			onBlur: j
 		})
 	});
 });
 //#endregion
-export { s as AsyncSelectField };
+export { c as AsyncSelectField };
