@@ -245,3 +245,35 @@ export const TestLeyendaDivergente: Story = {
   },
 };
 
+
+/** Tira continua: cada peldaño empieza donde acaba el anterior, sin hueco, y
+    todos tienen el mismo alto. Vale para la secuencial y para la divergente. */
+function compruebaTiraContinua(rampa: HTMLElement) {
+  const peldaños = [...rampa.querySelectorAll<HTMLElement>('.heatmap__swatch')].map((s) =>
+    s.getBoundingClientRect(),
+  );
+  expect(peldaños.length).toBeGreaterThan(1);
+  for (let i = 1; i < peldaños.length; i++) {
+    expect(Math.abs(peldaños[i].left - peldaños[i - 1].right)).toBeLessThan(0.5);
+    expect(peldaños[i].top).toBeCloseTo(peldaños[0].top, 1);
+    expect(peldaños[i].height).toBeCloseTo(peldaños[0].height, 1);
+  }
+}
+
+export const TestTiraContinua: Story = {
+  name: 'Test — la leyenda es una tira continua, sin hueco entre peldaños',
+  tags: ['!dev'],
+  args: { ...PorDefecto.args },
+  play: async ({ canvasElement }) => {
+    compruebaTiraContinua(within(canvasElement).getByRole('img', { name: 'Escala de color' }));
+  },
+};
+
+export const TestTiraContinuaDivergente: Story = {
+  name: 'Test — la leyenda divergente también es una tira continua',
+  tags: ['!dev'],
+  args: { ...TestPeldañosDivergentes.args },
+  play: async ({ canvasElement }) => {
+    compruebaTiraContinua(within(canvasElement).getByRole('img', { name: 'Escala de color' }));
+  },
+};

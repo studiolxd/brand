@@ -19,8 +19,7 @@
   --heatmap-empty-pattern-width: var(--spacing-1); /** Ancho de la trama de la celda sin dato */
   --heatmap-legend-gap: var(--spacing-2); /** Separación entre los elementos de la leyenda */
   --heatmap-legend-font-size: var(--font-size-1); /** Tamaño del texto de la leyenda */
-  --heatmap-legend-swatch-size: var(--spacing-3); /** Lado del cuadradito de la leyenda */
-  --heatmap-legend-swatch-gap: var(--spacing-1); /** Separación entre cuadraditos de la leyenda */
+  --heatmap-legend-swatch-size: var(--spacing-3); /** Alto de la tira de la leyenda y ancho de cada uno de sus peldaños, que van pegados */
   --heatmap-margin-block-start: var(--spacing-3); /** Aire entre la matriz y su leyenda */
   --heatmap-step-1-bg: var(--color-chart-sequential-100); /** Paso 1 de la rampa de la matriz — sequential-100 de la rampa secuencial del sistema */
   --heatmap-step-2-bg: var(--color-chart-sequential-200); /** Paso 2 de la rampa de la matriz — sequential-200 de la rampa secuencial del sistema */

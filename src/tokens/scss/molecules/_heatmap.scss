@@ -31,8 +31,7 @@ $lxd-heatmap-empty-pattern-width: 0.25rem; // Ancho de la trama de la celda sin 
 $lxd-heatmap-legend-gap: 0.5rem; // Separación entre los elementos de la leyenda
 $lxd-heatmap-legend-font-size: 0.875rem; // Tamaño del texto de la leyenda
 $lxd-heatmap-legend-color: #4a4a4a; // Color del texto de la leyenda
-$lxd-heatmap-legend-swatch-size: 0.75rem; // Lado del cuadradito de la leyenda
-$lxd-heatmap-legend-swatch-gap: 0.25rem; // Separación entre cuadraditos de la leyenda
+$lxd-heatmap-legend-swatch-size: 0.75rem; // Alto de la tira de la leyenda y ancho de cada uno de sus peldaños, que van pegados
 $lxd-heatmap-margin-block-start: 0.75rem; // Aire entre la matriz y su leyenda
 $lxd-heatmap-step-1-bg: #dce9fc; // Paso 1 de la rampa de la matriz — sequential-100 de la rampa secuencial del sistema
 $lxd-heatmap-step-1-color: #111e30; // Tinta sobre el paso 1 — la que llega a 4,5:1 sobre ese relleno

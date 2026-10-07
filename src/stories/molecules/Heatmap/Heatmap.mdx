@@ -40,7 +40,7 @@ El motivo es la cifra que va dentro. Cada relleno tiene que admitir una de las d
 - **El reparto.** El intervalo `[centro − radio, centro + radio]` se parte en **siete bandas iguales**, una por peldaño, igual que la secuencial parte su dominio en tantas bandas como pasos. La banda central es el neutro, así que un valor que apenas se separa del centro no toma brazo. Con niveles enteros y un radio de 3, cada nivel cae en su peldaño: 0 es el neutro, ±1 el primero de cada brazo, ±3 el extremo.
 - **El radio** es la distancia que pinta el extremo, y los dos brazos lo comparten: la misma distancia pinta la misma intensidad a los dos lados. Si se pasan `min` o `max`, el radio es la mayor distancia de esos extremos al centro; **sin ninguno, sale de los datos** (la mayor |valor − centro|), con la misma advertencia que el `max` de la secuencial: en cuanto haya dos matrices en el panel, se pasan los extremos.
 - `steps` no aplica: la divergente siempre tiene siete peldaños.
-- **La leyenda** enseña los siete peldaños del valor más bajo al más alto, con los dos extremos escritos a los lados y el centro rotulado detrás («Centro: 0», de `heatmap.midpoint`). `minLabel`, `maxLabel` y `midpointLabel` los sustituyen cuando tienen nombre («Por debajo», «Cumple lo exigido»).
+- **La leyenda** enseña los siete peldaños en una sola tira, del valor más bajo al más alto, con los dos extremos escritos a los lados y el centro rotulado detrás («Centro: 0», de `heatmap.midpoint`). `minLabel`, `maxLabel` y `midpointLabel` los sustituyen cuando tienen nombre («Por debajo», «Cumple lo exigido»).
 
 ### El intermedio cálido sobre página clara
 
@@ -74,7 +74,7 @@ Lo que se sale del dominio se recorta contra él en vez de desbordar la rampa. L
 
 ## La leyenda
 
-Una tira de cuadraditos con los dos extremos escritos a los lados. La tira es decorativa (`role="img"` con el nombre de `heatmap.scale`); lo que dice qué significa el color son los rótulos, y por eso van en texto. `minLabel` y `maxLabel` los sustituyen cuando el extremo tiene nombre («Sin experiencia», «Referente») en vez de cifra.
+Una sola tira continua, con los peldaños pegados y sin hueco —de claro a oscuro en la secuencial; de un brazo al otro, con el neutro en medio, en la divergente—, y los dos extremos escritos a los lados. Va pegada a propósito: un peldaño claro suelto apenas se separa del lienzo (1,12:1 el neutro y 1,23:1 el paso 1 sobre blanco), mientras que la tira entera se reconoce como un solo objeto por su extremo oscuro (8,60:1 el paso 6; 6,37:1 y 6,10:1 los extremos de la divergente; en superficie oscura, sus pares `-on-dark`, por encima de 7:1). Sin filete alrededor. La tira es decorativa (`role="img"` con el nombre de `heatmap.scale`); lo que dice qué significa el color son los rótulos, y por eso van en texto. `minLabel` y `maxLabel` los sustituyen cuando el extremo tiene nombre («Sin experiencia», «Referente») en vez de cifra.
 
 <Canvas of={HeatmapStories.SinLeyenda} />
 
