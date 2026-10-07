@@ -574,7 +574,7 @@ html.dark {
   --accordion-trigger-padding-inline: var(--spacing-6); /** Aire horizontal del disparador */
   --accordion-trigger-gap: var(--spacing-4); /** Hueco entre el texto y el chevron */
   --accordion-index-font-family: var(--font-family-mono); /** Monoespaciada: los números del acordeón numerado se alinean en columna */
-  --accordion-index-min-inline-size: var(--spacing-5); /** Ancho mínimo de la ranura del número (24px): mantiene la columna aunque pase de una a dos cifras */
+  --accordion-index-min-width: var(--spacing-5); /** Ancho mínimo de la ranura del número (24px): mantiene la columna aunque pase de una a dos cifras */
   --accordion-content-padding-block: var(--spacing-6); /** Aire inferior del contenido */
   --accordion-content-padding-inline: var(--spacing-6); /** Aire horizontal del contenido */
   --accordion-transition-duration: var(--motion-duration-slow); /** Duración de abrir/cerrar (cambio de contexto: el panel entra) */
@@ -633,7 +633,7 @@ html.dark {
   --text-list-item-gap: var(--spacing-3); /** Aire entre el contenido de una fila y su accesorio final (trailing) (12px) */
   --text-font-weight: var(--font-weight-default); /** Default font weight */
   --text-color: var(--color-text-on-light); /** Default text color */
-  --text-background: var(--color-background-light); /** Fondo del lienzo de página (body) */
+  --text-bg: var(--color-background-light); /** Fondo del lienzo de página (body) */
   --text-heading-font-weight: var(--font-weight-emphasis); /** Heading font weight */
   --text-heading-color: var(--color-text-on-light); /** Heading color */
   --text-h1-font-family: var(--text-heading-font-family); /** H1 font family */
@@ -682,7 +682,7 @@ html.dark {
 [data-theme="dark"],
 html.dark {
   --text-color: var(--color-text-on-dark); /** Color de texto por defecto — surface-dark */
-  --text-background: var(--color-background-dark); /** Fondo del lienzo de página — surface-dark */
+  --text-bg: var(--color-background-dark); /** Fondo del lienzo de página — surface-dark */
   --text-h1-color: var(--color-text-on-dark); /** H1 color — surface-dark */
   --text-h2-color: var(--color-text-on-dark); /** H2 color — surface-dark */
   --text-h3-color: var(--color-text-on-dark); /** H3 color — surface-dark */
@@ -706,7 +706,7 @@ html.dark {
   --breadcrumb-font-weight: var(--font-weight-default); /** Font weight base */
   --breadcrumb-separator-color: var(--color-text-on-light); /** Color del separador */
   --breadcrumb-link-color: var(--color-text-on-light); /** Color del link navegable */
-  --breadcrumb-link-color-hover: var(--color-primary); /** Color del link en hover */
+  --breadcrumb-link-hover-color: var(--color-primary); /** Color del link en hover */
   --breadcrumb-current-color: var(--color-text-on-light); /** Color del item activo (página actual) */
   --breadcrumb-current-font-weight: var(--font-weight-emphasis); /** Peso del item activo */
   --breadcrumb-focus-ring-color: var(--color-primary); /** Color del focus ring */
@@ -718,7 +718,7 @@ html.dark {
 [data-theme="dark"],
 html.dark {
   --breadcrumb-link-color: var(--color-text-on-dark); /** Link color — surface-dark */
-  --breadcrumb-link-color-hover: var(--color-text-on-dark); /** Link hover color — surface-dark */
+  --breadcrumb-link-hover-color: var(--color-text-on-dark); /** Link hover color — surface-dark */
   --breadcrumb-current-color: var(--color-text-on-dark); /** Current color — surface-dark */
   --breadcrumb-separator-color: var(--color-text-on-dark); /** Separator color — surface-dark */
   --breadcrumb-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
@@ -1496,13 +1496,13 @@ html.dark {
   --checkbox-border-radius: var(--border-radius-default); /** Border radius */
   --checkbox-border-width: var(--border-width-default); /** Border width */
   --checkbox-border-color: var(--color-primary); /** Color del borde */
-  --checkbox-bg-checked: var(--color-primary); /** Fondo cuando está marcado */
+  --checkbox-checked-bg: var(--color-primary); /** Fondo cuando está marcado */
   --checkbox-focus-ring-width: var(--border-width-focus); /** Ancho del anillo de foco */
   --checkbox-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco respecto al borde */
   --checkbox-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
   --checkbox-error-border-color: var(--color-error-text-on-light); /** Borde en error: el color de error (texto/borde, nunca fondo) */
   --checkbox-disabled-border-color: var(--color-disabled-border-on-light); /** Color del borde cuando está deshabilitado */
-  --checkbox-disabled-bg-checked: var(--color-disabled-border-on-light); /** Fondo marcado/indeterminado cuando está deshabilitado */
+  --checkbox-checked-disabled-bg: var(--color-disabled-border-on-light); /** Fondo marcado/indeterminado cuando está deshabilitado */
 }
 .surface-dark,
 .surface-invert,
@@ -1510,11 +1510,11 @@ html.dark {
 html.dark {
   --checkbox-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
   --checkbox-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
-  --checkbox-bg-checked: var(--color-text-on-dark); /** Background when checked — surface-dark */
+  --checkbox-checked-bg: var(--color-text-on-dark); /** Background when checked — surface-dark */
   --checkbox-check-color: var(--color-background-dark); /** Checkmark color — surface-dark */
   --checkbox-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
   --checkbox-disabled-border-color: var(--color-text-muted-on-dark); /** Borde deshabilitado — surface-dark */
-  --checkbox-disabled-bg-checked: var(--color-text-muted-on-dark); /** Fondo marcado deshabilitado — surface-dark */
+  --checkbox-checked-disabled-bg: var(--color-text-muted-on-dark); /** Fondo marcado deshabilitado — surface-dark */
 }
 /**
  * Do not edit directly, this file was auto-generated.
@@ -1601,8 +1601,8 @@ html.dark {
  * Do not edit directly, this file was auto-generated.
  */
 :root {
-  --embed-frame-device-mobile-inline-size: 375px; /** Ancho del marco con `device="mobile"`: el de un teléfono en vertical, el ancho de referencia contra el que el sistema comprueba que una maqueta cabe. No es un punto de corte —el primero, `breakpoint.sm`, es el teléfono apaisado—: es la pantalla que se simula */
-  --embed-frame-device-tablet-inline-size: var(--breakpoint-md); /** Ancho del marco con `device="tablet"` (768px): la tableta. Apunta al breakpoint porque es justo lo que se simula —el ancho en el que el documento de dentro pasa de una columna a varias— */
+  --embed-frame-device-mobile-width: 375px; /** Ancho del marco con `device="mobile"`: el de un teléfono en vertical, el ancho de referencia contra el que el sistema comprueba que una maqueta cabe. No es un punto de corte —el primero, `breakpoint.sm`, es el teléfono apaisado—: es la pantalla que se simula */
+  --embed-frame-device-tablet-width: var(--breakpoint-md); /** Ancho del marco con `device="tablet"` (768px): la tableta. Apunta al breakpoint porque es justo lo que se simula —el ancho en el que el documento de dentro pasa de una columna a varias— */
 }
 /**
  * Do not edit directly, this file was auto-generated.
@@ -1743,7 +1743,7 @@ html.dark {
   --filter-bar-row-gap: var(--field-row-row-gap); /** Aire entre las filas de filtros cuando hay más de las que caben por punto de corte, y entre los filtros apilados en móvil */
   --filter-bar-actions-gap: var(--form-actions-gap); /** Aire entre las acciones de la barra — el de los botones de un formulario: la fila de acciones del sistema es una sola */
   --filter-bar-label-offset: calc(var(--label-font-size) * var(--label-line-height) + var(--input-field-gap)); /** El renglón que ocupa un rótulo sobre su control: cuerpo × interlineado del `Label` más el aire que los separa en un campo (29px en la aplicación; en la superficie pública el rótulo es mayor y el renglón sube con él). Es lo que la barra reserva sobre lo que NO lleva rótulo —un interruptor, el botón de limpiar— para que no se suba a la línea de las etiquetas */
-  --filter-bar-control-block-size: var(--control-height); /** La caja de un campo de una línea (40px, la talla md del sistema; 48px en la superficie pública, que parte de lg). Es la referencia contra la que se centra lo que no lleva rótulo: el interruptor queda a la altura óptica del recuadro que tiene al lado, no del renglón entero —que con un control alto al lado sería otra altura cada vez— */
+  --filter-bar-control-height: var(--control-height); /** La caja de un campo de una línea (40px, la talla md del sistema; 48px en la superficie pública, que parte de lg). Es la referencia contra la que se centra lo que no lleva rótulo: el interruptor queda a la altura óptica del recuadro que tiene al lado, no del renglón entero —que con un control alto al lado sería otra altura cada vez— */
 }
 /**
  * Do not edit directly, this file was auto-generated.
@@ -1941,9 +1941,9 @@ html.dark {
  * Do not edit directly, this file was auto-generated.
  */
 :root {
-  --notification-panel-list-max-block-size: 21rem; /** Alto máximo de la lista (336px): pasado ese alto la lista hace scroll y la cabecera y el pie se quedan quietos. Medida de maqueta */
+  --notification-panel-list-max-height: 21rem; /** Alto máximo de la lista (336px): pasado ese alto la lista hace scroll y la cabecera y el pie se quedan quietos. Medida de maqueta */
   --notification-panel-item-body-line-clamp: 2; /** Cuántas líneas del cuerpo se ven antes de recortar con elipsis. El panel es un adelanto: el texto entero está en la bandeja */
-  --notification-panel-inline-size: min(22.5rem, calc(100vw - 2 * var(--spacing-5))); /** Ancho del panel (360px), con tope para que no se salga en una pantalla estrecha. Medida de maqueta, como la de la Sidebar: no pertenece a la escala de tallas */
+  --notification-panel-width: min(22.5rem, calc(100vw - 2 * var(--spacing-5))); /** Ancho del panel (360px), con tope para que no se salga en una pantalla estrecha. Medida de maqueta, como la de la Sidebar: no pertenece a la escala de tallas */
   --notification-panel-padding-inline: var(--spacing-4); /** Aire lateral de las filas, del bloque de marcar todas y del pie: el mismo, para que todo alinee en una sola columna */
   --notification-panel-mark-all-padding-block: var(--spacing-3); /** Aire vertical del bloque de «Marcar todas», entre la lista y el pie */
   --notification-panel-list-padding-block: var(--spacing-2); /** Aire vertical de la lista dentro del panel */
@@ -2121,7 +2121,7 @@ html.dark {
  * Do not edit directly, this file was auto-generated.
  */
 :root {
-  --otp-input-cell-inline-size: 3.5ch; /** Anchura de una celda: medida en caracteres para que el dígito quepa centrado a cualquier talla de texto, sin recortarse con el texto ampliado (WCAG 1.4.4) */
+  --otp-input-cell-width: 3.5ch; /** Anchura de una celda: medida en caracteres para que el dígito quepa centrado a cualquier talla de texto, sin recortarse con el texto ampliado (WCAG 1.4.4) */
   --otp-input-gap: var(--spacing-2); /** Separación entre celdas del código */
 }
 /**
@@ -2442,7 +2442,7 @@ html.dark {
  * Do not edit directly, this file was auto-generated.
  */
 :root {
-  --async-multi-select-input-min-inline-size: 4rem; /** Ancho mínimo del texto de búsqueda junto a las píldoras: lo justo para escribir sin que salte de línea a cada letra */
+  --async-multi-select-input-min-width: 4rem; /** Ancho mínimo del texto de búsqueda junto a las píldoras: lo justo para escribir sin que salte de línea a cada letra */
   --async-multi-select-disabled-cursor: var(--input-disabled-cursor); /** Cursor cuando está deshabilitado: el de los campos */
   --async-multi-select-disabled-opacity: var(--async-select-disabled-opacity); /** Opacidad del control deshabilitado: la del buscador de selección única */
   --async-multi-select-pill-remove-opacity: var(--opacity-muted); /** Opacidad del aspa de la píldora en reposo: presente pero en segundo plano */
@@ -2652,8 +2652,8 @@ html.dark {
  * Do not edit directly, this file was auto-generated.
  */
 :root {
-  --floating-dock-panel-inline-size: 22rem; /** Ancho del panel (352px). Medida de layout, como `modal.width-max`: no sale de la escala de espaciado */
-  --floating-dock-panel-block-size: 32rem; /** Alto del panel (512px). Se recorta contra la ventana: nunca sobrepasa el alto disponible */
+  --floating-dock-panel-width: 22rem; /** Ancho del panel (352px). Medida de layout, como `modal.max-width`: no sale de la escala de espaciado */
+  --floating-dock-panel-height: 32rem; /** Alto del panel (512px). Se recorta contra la ventana: nunca sobrepasa el alto disponible */
   --floating-dock-z-index: var(--z-index-bar); /** Capa del ancla: la del chrome de aplicación (100). Por debajo del velo y del modal, para que un diálogo del producto siga tapando al dock */
   --floating-dock-offset-inline: var(--spacing-5); /** Distancia al borde lateral de la ventana (24px). Se suma al `safe-area-inset` del dispositivo, nunca lo sustituye */
   --floating-dock-offset-block: var(--spacing-5); /** Distancia al borde superior o inferior de la ventana (24px). Se suma al `safe-area-inset` */
@@ -2998,7 +2998,7 @@ html.dark {
   --consent-banner-color: var(--color-text-on-light); /** Texto de la banda */
   --consent-banner-border-color: var(--color-primary); /** Línea superior que separa la banda de la página */
   --consent-banner-border-width: var(--border-width-default); /** Grosor de la línea superior */
-  --consent-banner-max-inline-size: var(--container-max-width-xl); /** Ancho máximo del contenido dentro de la banda: el mismo del contenido de una página pública */
+  --consent-banner-max-width: var(--container-max-width-xl); /** Ancho máximo del contenido dentro de la banda: el mismo del contenido de una página pública */
   --consent-banner-title-font-size: var(--text-size-3); /** Cuerpo del título de la banda */
   --consent-banner-description-font-size: var(--text-font-size); /** Cuerpo del texto de la banda: el cuerpo de texto de la superficie, sin reducir (decisión del 2026-08-28) */
 }
@@ -3018,9 +3018,9 @@ html.dark {
   --carousel-gap: var(--spacing-4); /** Aire entre diapositivas */
   --carousel-controls-gap: var(--spacing-2); /** Aire entre los botones de la barra de control */
   --carousel-controls-space-before: var(--spacing-4); /** Aire entre la pista y la barra de control */
-  --carousel-indicator-inline-size: var(--spacing-6); /** Largo de la barra indicadora (32px) */
-  --carousel-indicator-hit-block-size: var(--spacing-4); /** Alto del área pulsable del indicador: la barra es fina, el objetivo táctil no */
-  --carousel-indicator-block-size: var(--border-width-focus); /** Grosor de la barra indicadora — el mismo peso que la barra de activo del sistema */
+  --carousel-indicator-width: var(--spacing-6); /** Largo de la barra indicadora (32px) */
+  --carousel-indicator-hit-height: var(--spacing-4); /** Alto del área pulsable del indicador: la barra es fina, el objetivo táctil no */
+  --carousel-indicator-height: var(--border-width-focus); /** Grosor de la barra indicadora — el mismo peso que la barra de activo del sistema */
   --carousel-indicator-color: var(--color-text-muted-on-light); /** Barra de una diapositiva que no está a la vista */
   --carousel-indicator-current-color: var(--color-text-on-light); /** Barra de la diapositiva a la vista. Es una barra de tinta, no un relleno: la posición no es un estado que se pinte de marca */
   --carousel-focus-ring-color: var(--color-primary); /** Color del anillo de foco de los indicadores */
@@ -3059,7 +3059,7 @@ html.dark {
  */
 :root {
   --table-bg: rgba(0, 0, 0, 0); /** Fondo de la tabla */
-  --table-actions-inline-size: 1px; /** Ancho de la cabecera de la columna de acciones. No fija un ancho: con `table-layout: auto` el sobrante se reparte entre las demás columnas y esta se encoge a su contenido */
+  --table-actions-width: 1px; /** Ancho de la cabecera de la columna de acciones. No fija un ancho: con `table-layout: auto` el sobrante se reparte entre las demás columnas y esta se encoge a su contenido */
   --table-font-family: var(--font-family-sans); /** Font family */
   --table-header-padding-block: var(--spacing-3); /** Padding block del encabezado */
   --table-header-padding-inline: var(--spacing-3); /** Padding inline del encabezado */
@@ -3348,7 +3348,7 @@ html.dark {
   --app-launcher-transition-easing: var(--floating-panel-transition-easing); /** Easing de la animación */
   --app-launcher-tile-padding-block: var(--menu-item-padding-block); /** Padding vertical de cada tile — el de un ítem de Menu, para que la altura case con las listas de opciones del DS */
   --app-launcher-tile-padding-inline: var(--menu-item-padding-inline); /** Padding horizontal de cada tile — el de un ítem de Menu */
-  --app-launcher-tile-badge-block-size: calc(var(--tag-font-size) * var(--tag-line-height) + 2 * var(--tag-padding-block)); /** Alto de la fila del distintivo, que va ENCIMA del nombre. Es la caja de una `Tag` (cuerpo por interlineado más su aire) y se reserva SIEMPRE, lleve distintivo la baldosa o no: de ahí que todos los nombres de la rejilla queden a la misma altura. Sale de los tokens de `Tag`, así que sigue cuadrando si la píldora cambia de talla */
+  --app-launcher-tile-badge-height: calc(var(--tag-font-size) * var(--tag-line-height) + 2 * var(--tag-padding-block)); /** Alto de la fila del distintivo, que va ENCIMA del nombre. Es la caja de una `Tag` (cuerpo por interlineado más su aire) y se reserva SIEMPRE, lleve distintivo la baldosa o no: de ahí que todos los nombres de la rejilla queden a la misma altura. Sale de los tokens de `Tag`, así que sigue cuadrando si la píldora cambia de talla */
   --app-launcher-tile-border-radius: var(--border-radius-default); /** Radio de cada tile */
   --app-launcher-tile-name-font-weight: var(--font-weight-default); /** Peso del nombre de app */
   --app-launcher-tile-name-line-height: var(--menu-item-line-height); /** Interlineado del nombre de app — el de un ítem de Menu, para que la altura case con las listas de opciones del DS */
@@ -3509,9 +3509,9 @@ html.dark {
  */
 :root {
   --modal-border-color: rgba(0, 0, 0, 0); /** Sin borde en superficie clara: el velo y el fondo blanco ya separan el panel */
-  --modal-width-max: 560px; /** Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente */
-  --modal-inline-size: 90vw; /** Ancho del panel antes del tope de `width-max`: deja aire a los lados en pantallas estrechas. Medida de layout, igual que width-max */
-  --modal-max-height: 90dvh; /** Altura máxima del panel modal (dvh para móviles con barra de navegador variable). Medida de layout, igual que width-max */
+  --modal-max-width: 560px; /** Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente */
+  --modal-width: 90vw; /** Ancho del panel antes del tope de `max-width`: deja aire a los lados en pantallas estrechas. Medida de layout, igual que `max-width` */
+  --modal-max-height: 90dvh; /** Altura máxima del panel modal (dvh para móviles con barra de navegador variable). Medida de layout, igual que `max-width` */
   --modal-z-index: var(--z-index-modal); /** z-index del panel modal */
   --modal-backdrop-z-index: var(--z-index-backdrop); /** z-index del backdrop */
   --modal-backdrop-bg: var(--color-black); /** Color del backdrop/scrim */
@@ -3557,8 +3557,8 @@ html.dark {
  * Do not edit directly, this file was auto-generated.
  */
 :root {
-  --sheet-inline-size: min(20rem, 85vw); /** Ancho cuando entra por un lateral */
-  --sheet-block-size: 85vh; /** Alto máximo cuando entra por arriba o abajo */
+  --sheet-width: min(20rem, 85vw); /** Ancho cuando entra por un lateral */
+  --sheet-height: 85vh; /** Alto máximo cuando entra por arriba o abajo */
   --sheet-gap: var(--spacing-4); /** Separación entre bloques del panel */
   --sheet-footer-gap: var(--spacing-2); /** Separación entre acciones del pie */
   --sheet-close-inset: var(--spacing-3); /** Distancia del botón de cierre a la esquina */
@@ -3594,7 +3594,7 @@ html.dark {
   --tabs-trigger-padding-block: var(--spacing-3); /** Padding vertical del trigger */
   --tabs-trigger-padding-inline: var(--spacing-4); /** Padding horizontal del trigger */
   --tabs-trigger-font-size: var(--font-size-2); /** Tamaño de fuente del trigger */
-  --tabs-trigger-pill-color-active: var(--color-white); /** Texto del trigger activo en variante pill */
+  --tabs-trigger-pill-active-color: var(--color-white); /** Texto del trigger activo en variante pill */
   --tabs-trigger-disabled-opacity: var(--opacity-disabled); /** Opacidad del trigger deshabilitado */
   --tabs-content-padding-block: var(--spacing-4); /** Padding vertical del panel de contenido */
   --tabs-transition-duration: var(--motion-duration-fast); /** Duración de la transición de color */
@@ -3608,7 +3608,7 @@ html.dark {
   --tabs-trigger-active-color: var(--color-text-on-light); /** Color del trigger activo */
   --tabs-trigger-indicator-width: var(--border-width-default); /** Grosor del indicador activo (underline) */
   --tabs-trigger-indicator-color: var(--color-primary); /** Color del indicador activo */
-  --tabs-trigger-pill-bg-active: var(--color-primary); /** Fondo del trigger activo en variante pill */
+  --tabs-trigger-pill-active-bg: var(--color-primary); /** Fondo del trigger activo en variante pill */
   --tabs-trigger-border-radius: var(--border-radius-default); /** Radio de borde del trigger (pill + focus ring) */
   --tabs-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
   --tabs-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
@@ -3622,8 +3622,8 @@ html.dark {
   --tabs-trigger-color: var(--color-text-muted-on-dark); /** Color del trigger inactivo — surface-dark */
   --tabs-trigger-hover-color: var(--color-text-on-dark); /** Color hover del trigger — surface-dark */
   --tabs-trigger-active-color: var(--color-text-on-dark); /** Color del trigger activo — surface-dark */
-  --tabs-trigger-pill-bg-active: var(--color-accent-1); /** Fondo del trigger activo, variante pill — surface-dark. `color.primary` coincide con el lienzo oscuro; toma el par de `Button primary` (lavanda con tinta prusia), la regla de derivación del sistema. Antes se invertía a blanco, que es el par de los componentes en los que `accent-1` ya es otra variante — no es el caso de Tabs */
-  --tabs-trigger-pill-color-active: var(--color-primary); /** Texto del trigger activo, variante pill — surface-dark */
+  --tabs-trigger-pill-active-bg: var(--color-accent-1); /** Fondo del trigger activo, variante pill — surface-dark. `color.primary` coincide con el lienzo oscuro; toma el par de `Button primary` (lavanda con tinta prusia), la regla de derivación del sistema. Antes se invertía a blanco, que es el par de los componentes en los que `accent-1` ya es otra variante — no es el caso de Tabs */
+  --tabs-trigger-pill-active-color: var(--color-primary); /** Texto del trigger activo, variante pill — surface-dark */
   --tabs-trigger-indicator-color: var(--color-text-on-dark); /** Indicador de pestaña activa (underline) — surface-dark: color.primary colisiona con el fondo */
   --tabs-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
 }
@@ -3682,9 +3682,9 @@ html.dark {
   --calendar-year-height: var(--calendar-day-size); /** Alto de la celda de año — md: el del día, para que la vista de años no cambie la altura del panel */
   --calendar-year-padding-inline: var(--calendar-grid-gap); /** Aire a los lados de la celda de año: el año lleva cuatro cifras y no cabe en el cuadrado del día */
   --calendar-year-font-size: var(--calendar-day-font-size); /** Cuerpo de letra del año */
-  --calendar-year-grid-min-inline-size: calc(7 * var(--calendar-day-size) + 6 * var(--calendar-grid-gap)); /** Ancho mínimo de la rejilla de años — md: el de la semana (siete días y sus seis huecos), para que el panel no encoja al pasar de los días a los años */
-  --calendar-sm-year-grid-min-inline-size: calc(7 * var(--calendar-sm-day-size) + 6 * var(--calendar-grid-gap)); /** Ancho mínimo de la rejilla de años — sm */
-  --calendar-lg-year-grid-min-inline-size: calc(7 * var(--calendar-lg-day-size) + 6 * var(--calendar-grid-gap)); /** Ancho mínimo de la rejilla de años — lg */
+  --calendar-year-grid-min-width: calc(7 * var(--calendar-day-size) + 6 * var(--calendar-grid-gap)); /** Ancho mínimo de la rejilla de años — md: el de la semana (siete días y sus seis huecos), para que el panel no encoja al pasar de los días a los años */
+  --calendar-sm-year-grid-min-width: calc(7 * var(--calendar-sm-day-size) + 6 * var(--calendar-grid-gap)); /** Ancho mínimo de la rejilla de años — sm */
+  --calendar-lg-year-grid-min-width: calc(7 * var(--calendar-lg-day-size) + 6 * var(--calendar-grid-gap)); /** Ancho mínimo de la rejilla de años — lg */
   --calendar-sm-year-height: var(--calendar-sm-day-size); /** Alto de la celda de año — sm */
   --calendar-lg-year-height: var(--calendar-lg-day-size); /** Alto de la celda de año — lg */
   --calendar-lg-year-font-size: var(--calendar-lg-day-font-size); /** Cuerpo de letra del año — lg */
@@ -3901,7 +3901,7 @@ html.dark {
  */
 :root {
   --date-picker-button-cursor: pointer; /** Cursor del botón: abre el calendario, no se escribe en él */
-  --date-picker-inline-size: var(--input-width); /** Anchura del control: la del campo, que siempre ocupa su contenedor */
+  --date-picker-width: var(--input-width); /** Anchura del control: la del campo, que siempre ocupa su contenedor */
   --date-picker-disabled-cursor: var(--input-disabled-cursor); /** Cursor con el control deshabilitado */
   --date-picker-button-slot-size: var(--size-component-md); /** Lado del hueco que ocupa el botón del calendario dentro del campo: la talla md, la misma que el campo — así el adorno queda cuadrado sobre el control y su borde inferior coincide con el del campo */
   --date-picker-button-sm-slot-size: var(--size-component-sm); /** Lado del hueco — sm */
@@ -4019,8 +4019,8 @@ html.dark {
   --color-picker-trigger-error-focus-ring-color: var(--input-error-focus-ring-color); /** Anillo de foco en error */
   --color-picker-trigger-disabled-bg: var(--input-disabled-bg); /** Fondo deshabilitado */
   --color-picker-trigger-disabled-border-color: var(--input-disabled-border-color); /** Borde deshabilitado */
-  --color-picker-panel-inline-size: calc(8 * var(--color-picker-preset-size) + 7 * var(--color-picker-preset-gap)); /** Ancho del panel: ocho predefinidos por fila y sus siete huecos. El área y las bandas lo ocupan entero */
-  --color-picker-area-block-size: calc(6 * var(--color-picker-preset-size) + 5 * var(--color-picker-preset-gap)); /** Alto del área de saturación y brillo: seis filas de la misma rejilla que mide el ancho */
+  --color-picker-panel-width: calc(8 * var(--color-picker-preset-size) + 7 * var(--color-picker-preset-gap)); /** Ancho del panel: ocho predefinidos por fila y sus siete huecos. El área y las bandas lo ocupan entero */
+  --color-picker-area-height: calc(6 * var(--color-picker-preset-size) + 5 * var(--color-picker-preset-gap)); /** Alto del área de saturación y brillo: seis filas de la misma rejilla que mide el ancho */
   --color-picker-trigger-focus-ring-width: var(--input-focus-ring-width); /** Grosor del anillo de foco, por dentro del borde como en un campo */
 }
 .surface-dark,
@@ -4089,7 +4089,7 @@ html.dark {
   --switcher-transition-easing: var(--motion-easing-default); /** Easing de la transición */
   --switcher-lg-track-width: var(--size-component-lg); /** Ancho del track — variante lg: la talla lg del sistema (48px). En rem, no en em: como el resto de campos en lg, no se escala además con la fuente del párrafo large del campo */
   --switcher-track-bg: var(--color-border-default-on-light); /** Fondo del track — estado off */
-  --switcher-track-bg-checked: var(--color-primary); /** Fondo del track — estado on */
+  --switcher-track-checked-bg: var(--color-primary); /** Fondo del track — estado on */
   --switcher-track-border-radius: var(--border-radius-round); /** Radio del track (pill) */
   --switcher-thumb-border-radius: var(--border-radius-round); /** Radio del thumb (circular) */
   --switcher-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
@@ -4104,7 +4104,7 @@ html.dark {
 [data-theme="dark"],
 html.dark {
   --switcher-error-ring-color: var(--color-error-text-on-dark); /** Anillo de error — surface-dark */
-  --switcher-track-bg-checked: var(--color-accent-1); /** Fondo del track (on) — surface-dark. `track-bg-checked` (prussian) coincide con el fondo de la superficie y quedaría invisible; se usa accent-1 en su lugar. */
+  --switcher-track-checked-bg: var(--color-accent-1); /** Fondo del track (on) — surface-dark. `track-checked-bg` (prussian) coincide con el fondo de la superficie y quedaría invisible; se usa accent-1 en su lugar. */
   --switcher-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro. */
   --switcher-track-bg: var(--color-text-on-dark); /** Fondo del track (off) — surface-dark. `track-bg` es un rol de borde (`color.border.default-on-light`) y la regla de derivación le da `color.text.on-dark`, igual que el carril sin recorrer del Slider. */
   --switcher-thumb-bg: var(--color-primary); /** Color del thumb — surface-dark. El thumb blanco desaparecería sobre el track claro del estado off; en prusia contrasta con los dos tracks oscuros (blanco en off, lavanda en on), como el pulgar lavanda del Slider sobre su carril blanco. */
@@ -4161,7 +4161,7 @@ html.dark {
   --password-field-lg-toggle-size: var(--size-component-lg); /** Lado del toggle — lg */
   --password-field-action-margin-block-start: var(--spacing-2); /** Aire extra sobre la acción bajo el campo («¿Olvidaste tu contraseña?»), además del gap del campo */
   --password-field-toggle-color: var(--color-primary); /** Color del icono toggle: tinta, prusia sobre claro */
-  --password-field-toggle-color-hover: var(--color-primary); /** Color del icono toggle en hover (sin cambio: la tinta no se atenúa; el foco se marca con el anillo) */
+  --password-field-toggle-hover-color: var(--color-primary); /** Color del icono toggle en hover (sin cambio: la tinta no se atenúa; el foco se marca con el anillo) */
   --password-field-toggle-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco del toggle */
   --password-field-toggle-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco del toggle (se dibuja hacia dentro de la caja: el toggle va a ras del borde del campo) */
   --password-field-toggle-focus-ring-color: var(--color-primary); /** Color del anillo de foco del toggle: la tinta de la superficie */
@@ -4172,7 +4172,7 @@ html.dark {
 [data-theme="dark"],
 html.dark {
   --password-field-toggle-color: var(--color-text-on-dark); /** Color del icono toggle — surface-dark (blanco) */
-  --password-field-toggle-color-hover: var(--color-text-on-dark); /** Color del icono toggle en hover — surface-dark */
+  --password-field-toggle-hover-color: var(--color-text-on-dark); /** Color del icono toggle en hover — surface-dark */
   --password-field-toggle-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco del toggle — surface-dark */
 }
 /**
@@ -4283,8 +4283,8 @@ html.dark {
  * Do not edit directly, this file was auto-generated.
  */
 :root {
-  --loading-state-min-block-size: 16rem; /** Alto que reserva la espera de una página o una zona: la caja no colapsa a la altura del girador mientras el contenido no llega */
-  --loading-state-sm-min-block-size: 8rem; /** Alto que reserva la espera en talla sm — el cuerpo de un diálogo, una hoja o un popover */
+  --loading-state-min-height: 16rem; /** Alto que reserva la espera de una página o una zona: la caja no colapsa a la altura del girador mientras el contenido no llega */
+  --loading-state-sm-min-height: 8rem; /** Alto que reserva la espera en talla sm — el cuerpo de un diálogo, una hoja o un popover */
   --loading-state-sm-padding-block: var(--spacing-5); /** Padding vertical en talla sm: dentro de un diálogo el aire ya lo pone el diálogo */
   --loading-state-gap: var(--empty-state-gap); /** Aire entre el girador y la acción — el mismo que EmptyState, porque ocupa su sitio */
   --loading-state-padding-block: var(--empty-state-padding-block); /** Padding vertical — el de EmptyState */
@@ -4529,7 +4529,7 @@ html.dark {
   --file-upload-thumb-bg: var(--color-surface-secondary-on-light); /** Fondo del thumb para iconos (no imagen) */
   --file-upload-thumb-icon-color: var(--color-icon-secondary-on-light); /** Color del icono de archivo genérico */
   --file-upload-remove-color: var(--color-text-muted-on-light); /** Color del botón eliminar */
-  --file-upload-remove-color-hover: var(--color-error-text-on-light); /** Color del botón eliminar al hacer hover */
+  --file-upload-remove-hover-color: var(--color-error-text-on-light); /** Color del botón eliminar al hacer hover */
   --file-upload-text-font-size: var(--text-font-size); /** El texto del dropzone es texto corriente: hereda el cuerpo de la superficie — talla md */
   --file-upload-sm-text-font-size: var(--text-paragraph-small-font-size); /** Texto del dropzone — talla sm: un peldaño por debajo del cuerpo */
   --file-upload-lg-text-font-size: var(--text-paragraph-large-font-size); /** Texto del dropzone — talla lg: un peldaño por encima */
@@ -4564,7 +4564,7 @@ html.dark {
   --file-upload-thumb-bg: var(--color-surface-secondary-on-dark); /** Fondo de la miniatura — surface-dark */
   --file-upload-thumb-icon-color: var(--color-text-muted-on-dark); /** Icono de archivo genérico — surface-dark: `grey-dark` no llega a 3:1 sobre prusia */
   --file-upload-remove-color: var(--color-text-muted-on-dark); /** Aspa de quitar — surface-dark */
-  --file-upload-remove-color-hover: var(--color-error-text-on-dark); /** Aspa de quitar, bajo el puntero — surface-dark */
+  --file-upload-remove-hover-color: var(--color-error-text-on-dark); /** Aspa de quitar, bajo el puntero — surface-dark */
 }
 /**
  * Do not edit directly, this file was auto-generated.
@@ -4696,7 +4696,7 @@ html.dark {
   --typing-indicator-dot-rise: 0.25rem; /** Cuánto sube el punto en lo alto del salto (4px): una fracción del propio punto, no un desplazamiento de maqueta */
   --typing-indicator-dot-gap: var(--spacing-1); /** Separación entre puntos */
   --typing-indicator-dot-opacity-inactive: var(--opacity-disabled); /** Opacidad del punto en reposo */
-  --typing-indicator-dot-opacity-active: var(--opacity-full); /** Opacidad del punto en lo alto del salto */
+  --typing-indicator-dot-active-opacity: var(--opacity-full); /** Opacidad del punto en lo alto del salto */
   --typing-indicator-animation-duration: var(--motion-duration-slow); /** Duración del ciclo de animación */
   --typing-indicator-animation-easing: var(--motion-easing-in-out); /** Curva del salto: movimiento */
   --typing-indicator-dot-color: var(--color-text-on-light); /** Color de los puntos */
@@ -5163,7 +5163,7 @@ html.dark {
 :root {
   --slider-cursor: pointer; /** Cursor sobre la banda */
   --slider-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
-  --slider-control-block-size: var(--spacing-5); /** Alto de la zona sensible: la banda es fina, pero el objetivo de pulsación no */
+  --slider-control-height: var(--spacing-5); /** Alto de la zona sensible: la banda es fina, pero el objetivo de pulsación no */
   --slider-track-size: var(--spacing-1); /** Grosor del carril */
   --slider-thumb-size: var(--icon-size-sm); /** Lado del pulgar (cuadrado, como el resto de formas del sistema) */
   --slider-value-gap: var(--spacing-3); /** Separación entre la banda y el valor */
@@ -5369,7 +5369,7 @@ html.dark {
   --table-of-contents-item-padding-inline-start: var(--spacing-3); /** Sangría base de una entrada, que deja sitio a la barra de la entrada actual */
   --table-of-contents-item-indent: var(--spacing-3); /** Sangría que suma cada nivel de profundidad respecto al título más alto del índice */
   --table-of-contents-sticky-offset: var(--spacing-5); /** Distancia al borde superior cuando el índice queda fijo (`sticky`). El consumidor la sube si tiene una cabecera fija más alta */
-  --table-of-contents-sticky-max-block-size: calc(100vh - (2 * var(--spacing-5))); /** Alto máximo del índice fijo: el alto de la ventana menos su aire arriba y abajo. Un índice largo scrollea dentro */
+  --table-of-contents-sticky-max-height: calc(100vh - (2 * var(--spacing-5))); /** Alto máximo del índice fijo: el alto de la ventana menos su aire arriba y abajo. Un índice largo scrollea dentro */
   --table-of-contents-transition-duration: var(--motion-duration-fast); /** Duración de la transición de hover */
   --table-of-contents-transition-easing: var(--motion-easing-default); /** Easing de la transición de hover */
   --table-of-contents-title-font-weight: var(--font-weight-emphasis); /** Peso del rótulo del índice */
@@ -5401,7 +5401,7 @@ html.dark {
  * Do not edit directly, this file was auto-generated.
  */
 :root {
-  --docs-search-results-max-block-size: min(28rem, 60vh); /** Alto máximo de la lista: a partir de ahí scrollea dentro en vez de empujar la página */
+  --docs-search-results-max-height: min(28rem, 60vh); /** Alto máximo de la lista: a partir de ahí scrollea dentro en vez de empujar la página */
   --docs-search-gap: var(--spacing-3); /** Aire entre el campo de búsqueda y la lista de resultados */
   --docs-search-results-gap: var(--spacing-1); /** Aire entre dos resultados */
   --docs-search-result-padding-block: var(--spacing-3); /** Padding vertical de un resultado */
@@ -5441,7 +5441,7 @@ html.dark {
  * Do not edit directly, this file was auto-generated.
  */
 :root {
-  --search-form-inline-size: var(--input-width); /** Anchura del formulario: la del campo, que siempre ocupa su contenedor. El buscador vive dentro del panel del menú y se estira con él */
+  --search-form-width: var(--input-width); /** Anchura del formulario: la del campo, que siempre ocupa su contenedor. El buscador vive dentro del panel del menú y se estira con él */
   --search-form-xl-height: var(--spacing-8); /** Altura del campo — xl (64px, el peldaño de espaciado que sigue a los 48 de lg). No es una talla de control del sistema: solo existe aquí, para el buscador del menú del sitio */
   --search-form-xl-padding-inline: var(--spacing-6); /** Aire horizontal del campo — xl: el peldaño de espaciado siguiente al de lg */
   --search-form-xl-font-size: var(--font-size-5); /** Cuerpo de letra del campo — xl (28px): la escala de títulos pequeños, no la del cuerpo de texto. A esta talla el buscador se lee como un titular */
@@ -5806,8 +5806,8 @@ html.dark {
  * Do not edit directly, this file was auto-generated.
  */
 :root {
-  --org-chart-viewport-block-size: 32rem; /** Alto del lienzo con desplazamiento */
-  --org-chart-card-inline-size: 14rem; /** Ancho de la tarjeta de un departamento */
+  --org-chart-viewport-height: 32rem; /** Alto del lienzo con desplazamiento */
+  --org-chart-card-width: 14rem; /** Ancho de la tarjeta de un departamento */
   --org-chart-font-family: var(--font-family-sans); /** Familia tipográfica del organigrama */
   --org-chart-gap: var(--spacing-3); /** Separación entre el lienzo y sus controles */
   --org-chart-viewport-padding: var(--spacing-5); /** Aire alrededor del árbol dentro del lienzo */
@@ -5863,10 +5863,10 @@ html.dark {
  * Do not edit directly, this file was auto-generated.
  */
 :root {
-  --site-search-ghost-section-inline-size: 30%; /** Ancho de la barra fantasma del rastro de sección */
-  --site-search-ghost-title-inline-size: 70%; /** Ancho de la barra fantasma del título */
-  --site-search-ghost-url-inline-size: 45%; /** Ancho de la barra fantasma de la dirección */
-  --site-search-inline-size: var(--input-width); /** Anchura del buscador: la de su contenedor. Es la página de resultados entera, así que ocupa todo el hueco donde se monte — declarada y no heredada del flujo, para que tampoco se encoja dentro de una fila flex o una celda de retícula */
+  --site-search-ghost-section-width: 30%; /** Ancho de la barra fantasma del rastro de sección */
+  --site-search-ghost-title-width: 70%; /** Ancho de la barra fantasma del título */
+  --site-search-ghost-url-width: 45%; /** Ancho de la barra fantasma de la dirección */
+  --site-search-width: var(--input-width); /** Anchura del buscador: la de su contenedor. Es la página de resultados entera, así que ocupa todo el hueco donde se monte — declarada y no heredada del flujo, para que tampoco se encoja dentro de una fila flex o una celda de retícula */
   --site-search-gap: var(--spacing-5); /** Aire entre los bloques del buscador: el formulario, el aviso de estado, los resultados y el pie */
   --site-search-status-line-height: var(--line-height-normal); /** Interlineado del aviso de estado */
   --site-search-status-gap: var(--spacing-2); /** Aire entre el indicador de carga y su texto */
@@ -6199,7 +6199,7 @@ html.dark .surface-light {
   --avatar-initials-color: var(--color-text-on-dark);
   --breadcrumb-separator-color: var(--color-text-on-light);
   --breadcrumb-link-color: var(--color-text-on-light);
-  --breadcrumb-link-color-hover: var(--color-primary);
+  --breadcrumb-link-hover-color: var(--color-primary);
   --breadcrumb-current-color: var(--color-text-on-light);
   --breadcrumb-focus-ring-color: var(--color-primary);
   --button-primary-focus-ring-color: var(--color-primary);
@@ -6243,12 +6243,12 @@ html.dark .surface-light {
   --card-outline-border-color: var(--color-primary);
   --card-selectable-focus-ring-color: var(--button-primary-focus-ring-color);
   --checkbox-border-color: var(--color-primary);
-  --checkbox-bg-checked: var(--color-primary);
+  --checkbox-checked-bg: var(--color-primary);
   --checkbox-check-color: var(--color-white);
   --checkbox-focus-ring-color: var(--color-primary);
   --checkbox-error-border-color: var(--color-error-text-on-light);
   --checkbox-disabled-border-color: var(--color-disabled-border-on-light);
-  --checkbox-disabled-bg-checked: var(--color-disabled-border-on-light);
+  --checkbox-checked-disabled-bg: var(--color-disabled-border-on-light);
   --close-button-color: var(--color-text-on-light);
   --close-button-focus-ring-color: var(--color-text-on-light);
   --code-block-border-color: var(--card-outline-border-color);
@@ -6300,7 +6300,7 @@ html.dark .surface-light {
   --file-upload-thumb-bg: var(--color-surface-secondary-on-light);
   --file-upload-thumb-icon-color: var(--color-icon-secondary-on-light);
   --file-upload-remove-color: var(--color-text-muted-on-light);
-  --file-upload-remove-color-hover: var(--color-error-text-on-light);
+  --file-upload-remove-hover-color: var(--color-error-text-on-light);
   --floating-dock-panel-bg: var(--floating-panel-bg);
   --floating-dock-panel-border-color: var(--floating-panel-border-color);
   --floating-dock-title-color: var(--modal-title-color);
@@ -6429,7 +6429,7 @@ html.dark .surface-light {
   --pagination-ellipsis-color: var(--color-text-muted-on-light);
   --pagination-focus-ring-color: var(--color-primary);
   --password-field-toggle-color: var(--color-primary);
-  --password-field-toggle-color-hover: var(--color-primary);
+  --password-field-toggle-hover-color: var(--color-primary);
   --password-field-toggle-focus-ring-color: var(--color-primary);
   --popover-bg: var(--floating-panel-bg);
   --popover-border-color: var(--floating-panel-border-color);
@@ -6502,7 +6502,7 @@ html.dark .surface-light {
   --step-connector-done-color: var(--color-primary);
   --step-description-color: var(--color-text-muted-on-light);
   --switcher-track-bg: var(--color-border-default-on-light);
-  --switcher-track-bg-checked: var(--color-primary);
+  --switcher-track-checked-bg: var(--color-primary);
   --switcher-thumb-bg: var(--color-white);
   --switcher-focus-ring-color: var(--color-primary);
   --switcher-error-ring-color: var(--color-error-text-on-light);
@@ -6522,8 +6522,8 @@ html.dark .surface-light {
   --tabs-trigger-hover-color: var(--color-text-on-light);
   --tabs-trigger-active-color: var(--color-text-on-light);
   --tabs-trigger-indicator-color: var(--color-primary);
-  --tabs-trigger-pill-bg-active: var(--color-primary);
-  --tabs-trigger-pill-color-active: var(--color-white);
+  --tabs-trigger-pill-active-bg: var(--color-primary);
+  --tabs-trigger-pill-active-color: var(--color-white);
   --tabs-focus-ring-color: var(--color-primary);
   --tag-primary-bg: var(--color-primary);
   --tag-primary-color: var(--color-text-on-dark);
@@ -6534,7 +6534,7 @@ html.dark .surface-light {
   --text-inline-success-color: var(--color-success-text-on-light);
   --text-inline-strikethrough-color: var(--color-text-muted-on-light);
   --text-color: var(--color-text-on-light);
-  --text-background: var(--color-background-light);
+  --text-bg: var(--color-background-light);
   --text-h1-color: var(--text-heading-color);
   --text-h2-color: var(--text-heading-color);
   --text-h3-color: var(--text-heading-color);
@@ -7003,7 +7003,7 @@ html.dark .surface-light {
   --calendar-day-size: var(--calendar-lg-day-size);
   --calendar-title-font-size: var(--calendar-lg-title-font-size);
   --calendar-day-font-size: var(--calendar-lg-day-font-size);
-  --calendar-year-grid-min-inline-size: var(--calendar-lg-year-grid-min-inline-size);
+  --calendar-year-grid-min-width: var(--calendar-lg-year-grid-min-width);
   --calendar-year-height: var(--calendar-lg-year-height);
   --calendar-year-font-size: var(--calendar-lg-year-font-size);
   --checkbox-field-gap: var(--checkbox-field-lg-gap);
@@ -7132,7 +7132,7 @@ html.dark .surface-light {
   --field-row-empty-font-size: var(--text-paragraph-small-font-size);
   --file-upload-field-helper-font-size: var(--form-helper-font-size);
   --filter-bar-label-offset: calc(var(--label-font-size) * var(--label-line-height) + var(--input-field-gap));
-  --filter-bar-control-block-size: var(--control-height);
+  --filter-bar-control-height: var(--control-height);
   --input-field-search-input-padding-inline-start: var(--input-field-search-slot-size);
   --input-field-search-input-padding-inline-end: var(--input-field-search-slot-size);
   --input-field-error-font-size: var(--form-error-font-size);
@@ -7199,6 +7199,73 @@ html.dark .surface-light {
   --site-search-result-excerpt-line-height: var(--text-line-height);
   --site-search-result-url-font-size: var(--text-font-size);
   --site-search-result-url-line-height: var(--text-line-height);
+}
+/* Alias obsoletos de la v51 (D9): los nombres de token anteriores a la
+   convención de nombres, cada uno leyendo su nombre nuevo. Generado; se retira
+   en la v52. */
+/**
+ * Do not edit directly, this file was auto-generated.
+ *
+ * OBSOLETOS (v51): los nombres de token anteriores a la convención D9
+ * (`<componente>-<parte>-<estado>-<propiedad>-<talla>`). Cada uno lee el valor
+ * de su nombre nuevo; sobrescribirlo NO cambia el componente, que lee el nuevo.
+ * Se retiran en la v52.
+ */
+:root,
+.surface-dark,
+.surface-invert,
+[data-theme="dark"],
+html.dark,
+.surface-light,
+.site-shell {
+  --accordion-index-min-inline-size: var(--accordion-index-min-width); /* obsoleto: usar --accordion-index-min-width */
+  --app-launcher-tile-badge-block-size: var(--app-launcher-tile-badge-height); /* obsoleto: usar --app-launcher-tile-badge-height */
+  --async-multi-select-input-min-inline-size: var(--async-multi-select-input-min-width); /* obsoleto: usar --async-multi-select-input-min-width */
+  --breadcrumb-link-color-hover: var(--breadcrumb-link-hover-color); /* obsoleto: usar --breadcrumb-link-hover-color */
+  --checkbox-bg-checked: var(--checkbox-checked-bg); /* obsoleto: usar --checkbox-checked-bg */
+  --checkbox-disabled-bg-checked: var(--checkbox-checked-disabled-bg); /* obsoleto: usar --checkbox-checked-disabled-bg */
+  --embed-frame-device-mobile-inline-size: var(--embed-frame-device-mobile-width); /* obsoleto: usar --embed-frame-device-mobile-width */
+  --embed-frame-device-tablet-inline-size: var(--embed-frame-device-tablet-width); /* obsoleto: usar --embed-frame-device-tablet-width */
+  --file-upload-remove-color-hover: var(--file-upload-remove-hover-color); /* obsoleto: usar --file-upload-remove-hover-color */
+  --floating-dock-panel-inline-size: var(--floating-dock-panel-width); /* obsoleto: usar --floating-dock-panel-width */
+  --floating-dock-panel-block-size: var(--floating-dock-panel-height); /* obsoleto: usar --floating-dock-panel-height */
+  --loading-state-min-block-size: var(--loading-state-min-height); /* obsoleto: usar --loading-state-min-height */
+  --loading-state-sm-min-block-size: var(--loading-state-sm-min-height); /* obsoleto: usar --loading-state-sm-min-height */
+  --modal-width-max: var(--modal-max-width); /* obsoleto: usar --modal-max-width */
+  --modal-inline-size: var(--modal-width); /* obsoleto: usar --modal-width */
+  --otp-input-cell-inline-size: var(--otp-input-cell-width); /* obsoleto: usar --otp-input-cell-width */
+  --password-field-toggle-color-hover: var(--password-field-toggle-hover-color); /* obsoleto: usar --password-field-toggle-hover-color */
+  --slider-control-block-size: var(--slider-control-height); /* obsoleto: usar --slider-control-height */
+  --switcher-track-bg-checked: var(--switcher-track-checked-bg); /* obsoleto: usar --switcher-track-checked-bg */
+  --table-actions-inline-size: var(--table-actions-width); /* obsoleto: usar --table-actions-width */
+  --tabs-trigger-pill-bg-active: var(--tabs-trigger-pill-active-bg); /* obsoleto: usar --tabs-trigger-pill-active-bg */
+  --tabs-trigger-pill-color-active: var(--tabs-trigger-pill-active-color); /* obsoleto: usar --tabs-trigger-pill-active-color */
+  --text-background: var(--text-bg); /* obsoleto: usar --text-bg */
+  --typing-indicator-dot-opacity-active: var(--typing-indicator-dot-active-opacity); /* obsoleto: usar --typing-indicator-dot-active-opacity */
+  --calendar-year-grid-min-inline-size: var(--calendar-year-grid-min-width); /* obsoleto: usar --calendar-year-grid-min-width */
+  --calendar-sm-year-grid-min-inline-size: var(--calendar-sm-year-grid-min-width); /* obsoleto: usar --calendar-sm-year-grid-min-width */
+  --calendar-lg-year-grid-min-inline-size: var(--calendar-lg-year-grid-min-width); /* obsoleto: usar --calendar-lg-year-grid-min-width */
+  --carousel-indicator-inline-size: var(--carousel-indicator-width); /* obsoleto: usar --carousel-indicator-width */
+  --carousel-indicator-block-size: var(--carousel-indicator-height); /* obsoleto: usar --carousel-indicator-height */
+  --carousel-indicator-hit-block-size: var(--carousel-indicator-hit-height); /* obsoleto: usar --carousel-indicator-hit-height */
+  --color-picker-panel-inline-size: var(--color-picker-panel-width); /* obsoleto: usar --color-picker-panel-width */
+  --color-picker-area-block-size: var(--color-picker-area-height); /* obsoleto: usar --color-picker-area-height */
+  --consent-banner-max-inline-size: var(--consent-banner-max-width); /* obsoleto: usar --consent-banner-max-width */
+  --date-picker-inline-size: var(--date-picker-width); /* obsoleto: usar --date-picker-width */
+  --docs-search-results-max-block-size: var(--docs-search-results-max-height); /* obsoleto: usar --docs-search-results-max-height */
+  --filter-bar-control-block-size: var(--filter-bar-control-height); /* obsoleto: usar --filter-bar-control-height */
+  --notification-panel-inline-size: var(--notification-panel-width); /* obsoleto: usar --notification-panel-width */
+  --notification-panel-list-max-block-size: var(--notification-panel-list-max-height); /* obsoleto: usar --notification-panel-list-max-height */
+  --search-form-inline-size: var(--search-form-width); /* obsoleto: usar --search-form-width */
+  --sheet-inline-size: var(--sheet-width); /* obsoleto: usar --sheet-width */
+  --sheet-block-size: var(--sheet-height); /* obsoleto: usar --sheet-height */
+  --table-of-contents-sticky-max-block-size: var(--table-of-contents-sticky-max-height); /* obsoleto: usar --table-of-contents-sticky-max-height */
+  --org-chart-viewport-block-size: var(--org-chart-viewport-height); /* obsoleto: usar --org-chart-viewport-height */
+  --org-chart-card-inline-size: var(--org-chart-card-width); /* obsoleto: usar --org-chart-card-width */
+  --site-search-inline-size: var(--site-search-width); /* obsoleto: usar --site-search-width */
+  --site-search-ghost-section-inline-size: var(--site-search-ghost-section-width); /* obsoleto: usar --site-search-ghost-section-width */
+  --site-search-ghost-title-inline-size: var(--site-search-ghost-title-width); /* obsoleto: usar --site-search-ghost-title-width */
+  --site-search-ghost-url-inline-size: var(--site-search-ghost-url-width); /* obsoleto: usar --site-search-ghost-url-width */
 }
 /* =========================================================
    STYLESHEETS
@@ -7446,7 +7513,7 @@ html {
    Ambos tokens tienen par surface-dark, así que el modo oscuro llega solo
    con .surface-dark / [data-theme="dark"] / html.dark. */
 body {
-  background-color: var(--text-background);
+  background-color: var(--text-bg);
   font-family: var(--text-font-family);
   font-weight: var(--text-font-weight);
   font-size: var(--text-font-size);
@@ -7457,7 +7524,7 @@ body {
    completo: fondo y color emparejados, como el body. Sin esto, los hijos que
    solo heredan (párrafos, enlaces) seguirían con el color del body. */
 .surface-dark {
-  background-color: var(--text-background);
+  background-color: var(--text-bg);
   color: var(--text-color);
 }
 /* El chrome nativo va con el lienzo, por los mismos selectores que voltean
