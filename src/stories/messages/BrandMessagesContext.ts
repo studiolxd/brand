@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext } from 'react';
+import { isDevelopment } from '../constants/env';
 import type { BrandMessages, CompleteBrandMessages } from './BrandMessages';
 
 /**
@@ -28,29 +29,11 @@ export interface BrandMessagesReader<K extends keyof CompleteBrandMessages> {
   ): BrandMessagesNamespace<K>[N];
 }
 
-/**
- * `process.env.NODE_ENV` escrito tal cual, para que el bundler del consumidor
- * (Next, Vite, Turbopack…) lo sustituya por su literal y el aviso desaparezca
- * del build de producción. Sin bundler que lo sustituya y sin `process` —un
- * navegador a pelo—, la referencia lanza y se trata como producción: el aviso
- * es una ayuda, nunca un requisito. Declarado aquí para no depender de los
- * tipos de `@types/node`.
- */
-declare const process: { env: { NODE_ENV?: string } };
-
-function enDesarrollo(): boolean {
-  try {
-    return process.env.NODE_ENV !== 'production';
-  } catch {
-    return false;
-  }
-}
-
 /** Las claves ya avisadas: el aviso sale **una vez por clave**, no por render. */
 const avisadas = new Set<string>();
 
 function avisar(clave: string): void {
-  if (avisadas.has(clave) || !enDesarrollo()) return;
+  if (avisadas.has(clave) || !isDevelopment()) return;
   avisadas.add(clave);
   console.warn(`@studiolxd/brand: falta «${clave}» en el catálogo; sale en castellano.`);
 }
