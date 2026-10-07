@@ -205,7 +205,9 @@ export function StarRating(props: StarRatingProps) {
     name: nameProp,
     // Ninguno de los cinco textos lleva default: el tipo ya obliga a pasar el
     // que corresponda. El `?? ''` de más abajo es la red para un consumidor sin
-    // tipos (JavaScript a pelo), que si no rompería con un `undefined`.
+    // tipos (JavaScript a pelo), que si no rompería con un `undefined`. En los
+    // `aria-label` la red es otra, `|| undefined`: sin texto no se emite el
+    // atributo, porque un nombre accesible vacío es peor que ninguno.
     valueLabel,
     optionLabel,
     groupLabel,
@@ -246,7 +248,7 @@ export function StarRating(props: StarRatingProps) {
     // estrellas, 24 reseñas»), no una imagen y un «(24)» suelto que el lector
     // tuviera que juntar por su cuenta.
     return (
-      <div className={clases} role="img" aria-label={valueLabel?.(redondeado, max, reviewCount) ?? ''} {...rest}>
+      <div className={clases} role="img" aria-label={valueLabel?.(redondeado, max, reviewCount) || undefined} {...rest}>
         <span className="star-rating__stars">
           {posiciones.map((i) => <Estrella key={i} fill={relleno(i, redondeado)} />)}
         </span>
@@ -270,7 +272,7 @@ export function StarRating(props: StarRatingProps) {
     <div
       className={clases}
       role="radiogroup"
-      aria-label={groupLabel ?? ''}
+      aria-label={groupLabel || undefined}
       onPointerLeave={() => setPrevisualizado(undefined)}
       {...rest}
     >

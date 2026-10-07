@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
+import { useId, useRef, useState, type ReactNode } from 'react';
 import { Button } from '../../atoms/Button/Button';
 import { InputField } from '../InputField/InputField';
 import { Modal, type ModalProps } from '../Modal/Modal';
@@ -198,14 +198,22 @@ export function ConfirmDialog({
   const coincide = confirmPhrase === undefined || tecleado.trim() === confirmPhrase;
   const discrepa = intento && !coincide;
 
-  // Una acción que falla deja el diálogo abierto; al cerrarlo, el botón vuelve
-  // a estar disponible para el siguiente intento y la barrera se rearma.
-  useEffect(() => {
-    if (open) return;
-    setPending(false);
-    setTecleado('');
-    setIntento(false);
-  }, [open]);
+  // Una acción que falla deja el diálogo abierto; la siguiente vez que se abra,
+  // el botón vuelve a estar disponible y la barrera se rearma. El reinicio va
+  // al ABRIR, no al cerrar: al cerrar, el diálogo sigue a la vista durante su
+  // animación de salida, y vaciarlo entonces enseñaría el campo borrándose
+  // mientras se va. Se ajusta en el render al ver el cambio de `open` (el
+  // patrón de React para «reiniciar estado cuando cambia una prop»), no en un
+  // efecto, que pintaría un fotograma con el estado viejo.
+  const [openAnterior, setOpenAnterior] = useState(open);
+  if (open !== openAnterior) {
+    setOpenAnterior(open);
+    if (open) {
+      setPending(false);
+      setTecleado('');
+      setIntento(false);
+    }
+  }
 
   const handleCancel = () => {
     if (pending) return;
