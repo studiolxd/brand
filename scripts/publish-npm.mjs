@@ -43,6 +43,8 @@ const spec = `${name}@${version}`;
  */
 function extraerStageId(texto) {
   return (
+    // npm 11: «+ @studiolxd/brand@X.Y.Z (staged with id <uuid>)».
+    /staged with id\s+([0-9a-f][0-9a-f-]{7,})/i.exec(texto)?.[1] ??
     /"id"\s*:\s*"([^"]+)"/.exec(texto)?.[1] ??
     /\bstage(?:[-\s]?id)?\b\s*[:=]?\s*([A-Za-z0-9][A-Za-z0-9._-]{5,})/i.exec(texto)?.[1] ??
     null

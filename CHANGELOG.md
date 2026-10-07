@@ -7,6 +7,11 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [Sin publicar]
+
+- `release:npm` lee el stage-id en el formato de npm 11 («staged with id …»); con la v50.0.0 lo subió pero no supo
+  imprimirlo. Solo afecta al script de publicación, no al paquete.
+
 ## [50.0.0] — 2026-10-07
 
 > **Major (50.0.0).** La auditoría del sistema de diseño (2026-10-06) y las decisiones que salieron de ella. Antes de
