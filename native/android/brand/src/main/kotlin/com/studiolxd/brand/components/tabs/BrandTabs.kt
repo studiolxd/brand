@@ -52,7 +52,6 @@ import com.studiolxd.brand.support.brandTextStyle
 import com.studiolxd.brand.support.collectBrandInteractionState
 import com.studiolxd.brand.support.rememberReduceMotion
 import com.studiolxd.brand.tokens.BrandTabsTokens as T
-import com.studiolxd.brand.tokens.BrandLineHeight
 
 /** `TabsList` `variant`: `underline` (una línea bajo la pestaña activa) o `pill` (relleno en la activa). */
 enum class TabsVariant(val value: String) {
@@ -277,15 +276,20 @@ internal fun <V> BrandTabSurface(
             .padding(horizontal = T.triggerPaddingInline, vertical = T.triggerPaddingBlock),
         contentAlignment = Alignment.Center,
     ) {
-        // El `<button>` de la web no hereda el interlineado del cuerpo: toma el `line-height: 1.15` de `normalize.css`, que no
-        // es un token; el peldaño más cercano es `line-height.tight` (1,1: 0,8 dp menos por pestaña a 16 sp). La caja de
-        // línea de CSS la pone `BrandBasicText`.
+        // La caja de línea de CSS la pone `BrandBasicText`, con el interlineado del disparador de la web ([TriggerLineHeight]).
         BrandBasicText(
             tab.label,
-            style = brandTextStyle(T.triggerFontSize, weight, BrandLineHeight.tight, color = ink)
+            style = brandTextStyle(T.triggerFontSize, weight, TriggerLineHeight, color = ink)
                 .copy(textAlign = if (vertical) TextAlign.Center else TextAlign.Unspecified),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
     }
 }
+
+/**
+ * El `line-height` del disparador en la web: es un `<button>` y `.tabs__trigger` no lo fija, así que manda el
+ * `line-height: 1.15` que `normalize.css` pone a los controles de formulario. No hay token (`tabs.trigger-line-height` no
+ * existe): se copia el valor, como en SwiftUI, y se anota en la ficha.
+ */
+private const val TriggerLineHeight = 1.15f

@@ -47,6 +47,7 @@
     "No es la barra de pestañas del sistema (`TabView` en iOS, `NavigationBar` en Android): esas son navegación de la app entera y siguen siendo del sistema. `BrandTabs` es el control de sección dentro de una pantalla.",
     "En VoiceOver y TalkBack cada pestaña es una pestaña (`isTab`/`Role.Tab`) con su estado seleccionado; las flechas del teclado (macOS, teclado físico) mueven la selección como en la web.",
     "iOS: no existe el rasgo `isTab` en SwiftUI: cada pestaña es `.isButton` + `.isSelected` y la barra `.isTabBar`. Una barra horizontal que no cabe desplaza (`ViewThatFits` con `ScrollView`). Teclado: flechas según orientación, `Inicio`/`Fin`, vuelta en los extremos, salta las deshabilitadas.",
-    "Android: `Role.Tab` y `selectableGroup`; `enabled` en lugar de `disabled`; no hay composable `BrandTab` suelto, sino el DSL `tab(label, value)` o `BrandTabs(tabs = listOf(BrandTab(…)))`; el `line-height` del trigger es `line-height.tight` (React usa `normal`, que no es token)."
+    "Android: `Role.Tab` y `selectableGroup`; `enabled` en lugar de `disabled`; no hay composable `BrandTab` suelto, sino el DSL `tab(label, value)` o `BrandTabs(tabs = listOf(BrandTab(…)))`.",
+    "El disparador lleva `line-height` 1,15, el que `normalize.css` da a los `<button>` y que React hereda: no hay token `tabs.trigger-line-height` y se copia el valor en las dos plataformas."
   ]
 }
