@@ -375,8 +375,8 @@ template {
   --color-text-placeholder-on-dark: var(--color-grey-light); /** Placeholder sobre superficie oscura. Mismo gris que el texto secundario */
   --color-text-muted-on-light: var(--color-grey-darkest); /** Texto secundario: ayudas, etiquetas, metadatos */
   --color-text-muted-on-dark: var(--color-grey-light); /** Muted text on dark backgrounds */
-  --color-background-light: var(--color-white); /** Light surface background */
-  --color-background-dark: var(--color-prussian); /** Dark surface background */
+  --color-bg-light: var(--color-white); /** Light surface background */
+  --color-bg-dark: var(--color-prussian); /** Dark surface background */
   --color-surface-secondary-on-light: var(--color-grey-lightest); /** Superficie clara secundaria sobre fondo claro: bloque de código, kbd, carril de progreso, pie de tabla */
   --color-surface-secondary-on-dark: var(--color-grey-darkest); /** Superficie clara secundaria — variante para superficie oscura */
   --color-surface-inverse-on-light: var(--color-grey-darkest); /** Superficie invertida sobre fondo claro: relleno neutral oscuro (Tag) */
@@ -633,7 +633,7 @@ html.dark {
   --text-list-item-gap: var(--spacing-3); /** Aire entre el contenido de una fila y su accesorio final (trailing) (12px) */
   --text-font-weight: var(--font-weight-default); /** Default font weight */
   --text-color: var(--color-text-on-light); /** Default text color */
-  --text-bg: var(--color-background-light); /** Fondo del lienzo de página (body) */
+  --text-bg: var(--color-bg-light); /** Fondo del lienzo de página (body) */
   --text-heading-font-weight: var(--font-weight-emphasis); /** Heading font weight */
   --text-heading-color: var(--color-text-on-light); /** Heading color */
   --text-h1-font-family: var(--text-heading-font-family); /** H1 font family */
@@ -682,7 +682,7 @@ html.dark {
 [data-theme="dark"],
 html.dark {
   --text-color: var(--color-text-on-dark); /** Color de texto por defecto — surface-dark */
-  --text-bg: var(--color-background-dark); /** Fondo del lienzo de página — surface-dark */
+  --text-bg: var(--color-bg-dark); /** Fondo del lienzo de página — surface-dark */
   --text-h1-color: var(--color-text-on-dark); /** H1 color — surface-dark */
   --text-h2-color: var(--color-text-on-dark); /** H2 color — surface-dark */
   --text-h3-color: var(--color-text-on-dark); /** H3 color — surface-dark */
@@ -798,8 +798,8 @@ html.dark {
   --tag-warning-bg: var(--color-warning-fill); /** Aviso — relleno universal del rol de feedback. Es el amarillo de siempre, pero llega por el rol, no por la marca */
   --tag-success-bg: var(--color-success-fill); /** Éxito — relleno universal del sistema */
   --tag-success-color: var(--color-success-fill-text); /** Éxito — contenido sobre el relleno */
-  --tag-danger-bg: var(--color-error-fill); /** Peligro — relleno universal del sistema */
-  --tag-danger-color: var(--color-error-fill-text); /** Peligro — contenido sobre el relleno */
+  --tag-error-bg: var(--color-error-fill); /** Error — relleno universal del sistema */
+  --tag-error-color: var(--color-error-fill-text); /** Error — contenido sobre el relleno */
   --tag-warning-color: var(--color-warning-fill-text); /** Aviso — contenido sobre el relleno: el prusia (11,17:1, AAA) */
 }
 .surface-dark,
@@ -807,9 +807,9 @@ html.dark {
 [data-theme="dark"],
 html.dark {
   --tag-primary-bg: var(--color-text-on-dark); /** Marca primaria, relleno — surface-dark (invertido: el prusia es el fondo de la superficie y el tag desaparecería) */
-  --tag-primary-color: var(--color-background-dark); /** Marca primaria, texto — surface-dark (invertido) */
+  --tag-primary-color: var(--color-bg-dark); /** Marca primaria, texto — surface-dark (invertido) */
   --tag-info-bg: var(--color-text-on-dark); /** Información, relleno — surface-dark (invertido, misma razón que primary) */
-  --tag-info-color: var(--color-background-dark); /** Información, texto — surface-dark (invertido) */
+  --tag-info-color: var(--color-bg-dark); /** Información, texto — surface-dark (invertido) */
 }
 /**
  * Do not edit directly, this file was auto-generated.
@@ -875,7 +875,7 @@ html.dark {
   --card-footer-gap: var(--spacing-2); /** Separación entre acciones del pie */
   --card-border-radius: var(--border-radius-default); /** Radio de esquinas — sin redondeado */
   --card-title-font-weight: var(--font-weight-emphasis); /** Peso del título de la tarjeta */
-  --card-primary-bg: var(--color-accent-1); /** Variante primary — fondo lavanda. No es `color.primary` (prussian): coincidiría con `color.background.dark` y desaparecería sobre `.surface-dark`. Mismo patrón autocontenido que `button.primary` — un par que no depende de la superficie ambiente, igual en claro y oscuro */
+  --card-primary-bg: var(--color-accent-1); /** Variante primary — fondo lavanda. No es `color.primary` (prussian): coincidiría con `color.bg.dark` y desaparecería sobre `.surface-dark`. Mismo patrón autocontenido que `button.primary` — un par que no depende de la superficie ambiente, igual en claro y oscuro */
   --card-primary-color: var(--color-primary); /** Variante primary — texto prussian sobre el fondo lavanda */
   --card-accent-1-bg: var(--color-accent-1); /** Variante accent-1 — fondo lavanda */
   --card-accent-1-color: var(--color-text-on-light); /** Variante accent-1 — texto. Color saturado que ya contrasta en cualquier superficie: sin par surface-dark, como las variantes semánticas de Alert/Tag */
@@ -885,7 +885,7 @@ html.dark {
   --card-support-1-color: var(--color-text-on-light); /** Variante support-1 — texto. Sin par surface-dark: mismo motivo que accent-1 */
   --card-support-2-bg: var(--color-support-2); /** Variante support-2 — fondo cayena */
   --card-support-2-color: var(--color-text-on-light); /** Variante support-2 — texto. Sin par surface-dark: mismo motivo que accent-1 */
-  --card-outline-bg: var(--color-background-light); /** Variante outline — fondo blanco (light) */
+  --card-outline-bg: var(--color-bg-light); /** Variante outline — fondo blanco (light) */
   --card-outline-color: var(--color-text-on-light); /** Variante outline — texto oscuro sobre blanco */
   --card-outline-border-color: var(--color-primary); /** Variante outline — borde prussian */
   --card-outline-border-width: var(--border-width-default); /** Variante outline — grosor de borde */
@@ -897,7 +897,7 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --card-outline-bg: var(--color-background-dark); /** Variante outline — fondo, surface-dark */
+  --card-outline-bg: var(--color-bg-dark); /** Variante outline — fondo, surface-dark */
   --card-outline-color: var(--color-text-on-dark); /** Variante outline — texto, surface-dark */
   --card-outline-border-color: var(--color-text-on-dark); /** Variante outline — borde, surface-dark */
 }
@@ -1003,11 +1003,11 @@ html.dark {
   --site-header-settings-gap: var(--spacing-5); /** Separación entre los ajustes del sitio: en fila en escritorio, apilados en móvil */
   --site-header-content-height-compact: var(--logo-height-lg); /** Lo más alto que lleva la barra en móvil (por debajo de md): el logotipo a talla lg (48px), para que quepa con los controles */
   --site-header-content-height-narrow: var(--logo-height-md); /** Lo más alto que lleva la barra en teléfono (por debajo de sm): el logotipo a talla md (40px), para caber en 360px con idioma y menú */
-  --site-header-bg: var(--color-background-light); /** Fondo de la barra */
+  --site-header-bg: var(--color-bg-light); /** Fondo de la barra */
   --site-header-z-index: var(--app-header-z-index); /** Capa z — sobre el contenido, bajo los paneles flotantes */
-  --site-header-panel-bg: var(--color-background-light); /** Fondo del panel de navegación */
+  --site-header-panel-bg: var(--color-bg-light); /** Fondo del panel de navegación */
   --site-header-panel-padding-block: var(--section-padding-block-xl); /** Aire superior del panel, entre la barra y el índice */
-  --site-header-content-height: var(--logo-height-xxl); /** Lo más alto que lleva la barra: el logotipo a talla xxl (85px) */
+  --site-header-content-height: var(--logo-height-2xl); /** Lo más alto que lleva la barra: el logotipo a talla 2xl (85px) */
   --site-header-height-narrow: calc(var(--site-header-content-height-narrow) + 2 * var(--app-header-padding-block)); /** Alto de la barra en teléfono (56px, la misma que la barra de aplicación) */
   --site-header-height-compact: calc(var(--site-header-content-height-compact) + 2 * var(--app-header-padding-block)); /** Alto de la barra en móvil (64px) */
   --site-header-logo-margin-inline-start: calc(-1 * var(--container-padding-inline)); /** La marca sale del aire lateral del Container: el logotipo trae su propio espacio de seguridad en el trazado, y con el padding encima se veía descolgado del borde del contenido */
@@ -1018,8 +1018,8 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --site-header-bg: var(--color-background-dark); /** Fondo de la barra — surface-dark */
-  --site-header-panel-bg: var(--color-background-dark); /** Fondo del panel — surface-dark */
+  --site-header-bg: var(--color-bg-dark); /** Fondo de la barra — surface-dark */
+  --site-header-panel-bg: var(--color-bg-dark); /** Fondo del panel — surface-dark */
 }
 /**
  * Do not edit directly, this file was auto-generated.
@@ -1168,7 +1168,7 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --input-bg: var(--color-background-dark); /** Background — surface-dark */
+  --input-bg: var(--color-bg-dark); /** Background — surface-dark */
   --input-color: var(--color-text-on-dark); /** Text color — surface-dark */
   --input-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
   --input-placeholder-color: var(--color-text-placeholder-on-dark); /** Placeholder — surface-dark: blanco */
@@ -1179,7 +1179,7 @@ html.dark {
   --input-disabled-bg: var(--color-disabled-bg-on-dark); /** Fondo deshabilitado — surface-dark */
   --input-disabled-color: var(--color-disabled-text-on-dark); /** Texto deshabilitado — surface-dark */
   --input-disabled-border-color: var(--color-disabled-border-on-dark); /** Borde deshabilitado — surface-dark */
-  --input-error-bg: var(--color-background-dark); /** Fondo en error — surface-dark (el del lienzo, no blanco) */
+  --input-error-bg: var(--color-bg-dark); /** Fondo en error — surface-dark (el del lienzo, no blanco) */
   --input-error-color: var(--color-text-on-dark); /** Texto en error — surface-dark */
   --input-error-placeholder-color: var(--color-text-placeholder-on-dark); /** Placeholder en error — surface-dark */
   --input-error-focus-border-color: var(--color-error-text-on-dark); /** Borde en foco+error — surface-dark */
@@ -1244,7 +1244,7 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --textarea-bg: var(--color-background-dark); /** Background — surface-dark */
+  --textarea-bg: var(--color-bg-dark); /** Background — surface-dark */
   --textarea-color: var(--color-text-on-dark); /** Text color — surface-dark */
   --textarea-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
   --textarea-placeholder-color: var(--color-text-placeholder-on-dark); /** Placeholder — surface-dark: blanco */
@@ -1255,7 +1255,7 @@ html.dark {
   --textarea-disabled-bg: var(--color-disabled-bg-on-dark); /** Fondo deshabilitado — surface-dark */
   --textarea-disabled-color: var(--color-disabled-text-on-dark); /** Texto deshabilitado — surface-dark */
   --textarea-disabled-border-color: var(--color-disabled-border-on-dark); /** Borde deshabilitado — surface-dark */
-  --textarea-error-bg: var(--color-background-dark); /** Fondo en error — surface-dark (el del lienzo, no blanco) */
+  --textarea-error-bg: var(--color-bg-dark); /** Fondo en error — surface-dark (el del lienzo, no blanco) */
   --textarea-error-color: var(--color-text-on-dark); /** Texto en error — surface-dark */
   --textarea-error-placeholder-color: var(--color-text-placeholder-on-dark); /** Placeholder en error — surface-dark */
   --textarea-error-focus-border-color: var(--color-error-text-on-dark); /** Borde en foco+error — surface-dark */
@@ -1511,7 +1511,7 @@ html.dark {
   --checkbox-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
   --checkbox-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
   --checkbox-checked-bg: var(--color-text-on-dark); /** Background when checked — surface-dark */
-  --checkbox-check-color: var(--color-background-dark); /** Checkmark color — surface-dark */
+  --checkbox-check-color: var(--color-bg-dark); /** Checkmark color — surface-dark */
   --checkbox-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
   --checkbox-disabled-border-color: var(--color-text-muted-on-dark); /** Borde deshabilitado — surface-dark */
   --checkbox-checked-disabled-bg: var(--color-text-muted-on-dark); /** Fondo marcado deshabilitado — surface-dark */
@@ -1612,7 +1612,7 @@ html.dark {
   --logo-height-md: var(--size-component-md); /** Alto por defecto: cabeceras y formularios de acceso */
   --logo-height-lg: var(--size-component-lg); /** Alto destacado: pie de página */
   --logo-height-xl: var(--icon-size-xl); /** Alto de marca: la cabecera del sitio. Es la talla ilustrativa de la escala de iconos (64px), no una talla de control */
-  --logo-height-xxl: calc(var(--logo-height-xl) * 4 / 3); /** Alto de marca mayor: la cabecera del sitio por defecto. Sigue la progresión de la escala —el mismo salto que hay de lg a xl (4/3)— sobre la talla xl: 85,33px */
+  --logo-height-2xl: calc(var(--logo-height-xl) * 4 / 3); /** Alto de marca mayor: la cabecera del sitio por defecto. Sigue la progresión de la escala —el mismo salto que hay de lg a xl (4/3)— sobre la talla xl: 85,33px */
   --logo-color: var(--color-text-on-light); /** Color del trazado sobre superficie clara */
 }
 .surface-dark,
@@ -1648,7 +1648,7 @@ html.dark {
   --app-header-flyout-offset: var(--spacing-1); /** Separación compartida entre el borde inferior de la cabecera y el flotante que anclan sus disparadores (menú de usuario, panel de notificaciones): la que ya tenía el menú de usuario */
   --app-header-z-index: var(--z-index-bar); /** Capa de barra fija */
   --app-header-height: calc(var(--app-header-content-height) + 2 * var(--app-header-padding-block)); /** Altura de la barra: compuesta, 56px */
-  --app-header-bg: var(--color-background-light); /** Fondo */
+  --app-header-bg: var(--color-bg-light); /** Fondo */
   --app-header-border-width: var(--border-width-default); /** Borde inferior que la separa del contenido */
   --app-header-border-color: var(--color-primary); /** Color del borde */
 }
@@ -1656,7 +1656,7 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --app-header-bg: var(--color-background-dark); /** Fondo — surface-dark */
+  --app-header-bg: var(--color-bg-dark); /** Fondo — surface-dark */
   --app-header-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
 }
 /**
@@ -1869,7 +1869,7 @@ html.dark {
 html.dark {
   --dropdown-field-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
   --dropdown-field-color: var(--color-text-on-dark); /** Texto — surface-dark */
-  --dropdown-field-bg: var(--color-background-dark); /** Fondo — surface-dark */
+  --dropdown-field-bg: var(--color-bg-dark); /** Fondo — surface-dark */
   --dropdown-field-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
   --dropdown-field-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
   --dropdown-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
@@ -2258,11 +2258,11 @@ html.dark {
 [data-theme="dark"],
 html.dark {
   --select-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
-  --select-bg: var(--color-background-dark); /** Fondo del trigger — surface-dark */
+  --select-bg: var(--color-bg-dark); /** Fondo del trigger — surface-dark */
   --select-color: var(--color-text-on-dark); /** Color del texto — surface-dark */
   --select-border-color: var(--color-text-on-dark); /** Color del borde — surface-dark */
   --select-focus-ring-color: var(--color-text-on-dark); /** Color del anillo de foco — surface-dark */
-  --select-content-bg: var(--color-background-dark); /** Fondo del dropdown — surface-dark */
+  --select-content-bg: var(--color-bg-dark); /** Fondo del dropdown — surface-dark */
   --select-content-border-color: var(--color-text-on-dark); /** Borde del dropdown — surface-dark */
   --select-separator-color: var(--color-text-on-dark); /** Color del separador entre grupos — surface-dark */
   --select-item-highlighted-bg: var(--color-text-on-dark); /** Relleno de la opción resaltada — surface-dark: la misma inversión de marca, al revés */
@@ -2329,12 +2329,12 @@ html.dark {
 [data-theme="dark"],
 html.dark {
   --multi-select-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
-  --multi-select-bg: var(--color-background-dark); /** Background — surface-dark */
+  --multi-select-bg: var(--color-bg-dark); /** Background — surface-dark */
   --multi-select-color: var(--color-text-on-dark); /** Text color — surface-dark */
   --multi-select-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
   --multi-select-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
   --multi-select-placeholder-color: var(--color-text-placeholder-on-dark); /** Placeholder color — surface-dark */
-  --multi-select-content-bg: var(--color-background-dark); /** Dropdown background — surface-dark */
+  --multi-select-content-bg: var(--color-bg-dark); /** Dropdown background — surface-dark */
   --multi-select-content-border-color: var(--color-text-on-dark); /** Dropdown border color — surface-dark */
   --multi-select-pill-bg: var(--color-accent-1); /** Relleno de las pills — surface-dark: el prusia coincidiría con el lienzo; par de `Button primary` (lavanda con tinta prusia) */
   --multi-select-pill-color: var(--color-primary); /** Texto de las pills — surface-dark */
@@ -2635,7 +2635,7 @@ html.dark {
   --floating-panel-z-index: var(--z-index-floating); /** Capa z — por encima del modal (1001) para que los paneles flotantes sean visibles dentro de modales */
   --floating-panel-transition-duration: var(--motion-duration-fast); /** Duración de la animación de entrada/salida */
   --floating-panel-transition-easing: var(--motion-easing-default); /** Easing de la animación */
-  --floating-panel-bg: var(--color-background-light); /** Fondo de cualquier panel flotante (popover, context-menu…) */
+  --floating-panel-bg: var(--color-bg-light); /** Fondo de cualquier panel flotante (popover, context-menu…) */
   --floating-panel-border-width: var(--border-width-default); /** Grosor del borde */
   --floating-panel-border-color: var(--color-primary); /** Color del borde — prussian en modo claro */
   --floating-panel-border-radius: var(--border-radius-default); /** Sin radio de esquinas */
@@ -2645,7 +2645,7 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --floating-panel-bg: var(--color-background-dark); /** Fondo — surface-dark */
+  --floating-panel-bg: var(--color-bg-dark); /** Fondo — surface-dark */
   --floating-panel-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
 }
 /**
@@ -2860,7 +2860,7 @@ html.dark {
   --tooltip-font-size: var(--font-size-1); /** Tamaño de texto del bocadillo */
   --tooltip-line-height: var(--line-height-snug); /** Interlineado del bocadillo */
   --tooltip-offset: var(--spacing-1); /** Separación entre disparador y bocadillo (4px). Fuente del sideOffset por defecto */
-  --tooltip-bg: var(--color-background-dark); /** Fondo del bocadillo — superficie invertida para máximo contraste */
+  --tooltip-bg: var(--color-bg-dark); /** Fondo del bocadillo — superficie invertida para máximo contraste */
   --tooltip-color: var(--color-text-on-dark); /** Color del texto del bocadillo */
   --tooltip-border-radius: var(--border-radius-default); /** Radio de esquinas del bocadillo */
   --tooltip-z-index: var(--floating-panel-z-index); /** Capa z — la misma que el resto de paneles flotantes */
@@ -2871,7 +2871,7 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --tooltip-bg: var(--color-background-light); /** Fondo del bocadillo — surface-dark. Mismo patrón de superficie invertida que en claro (ahí: fondo `background.dark`), pero simétrico para lienzo oscuro: fondo claro, texto oscuro. Sin acento de marca */
+  --tooltip-bg: var(--color-bg-light); /** Fondo del bocadillo — surface-dark. Mismo patrón de superficie invertida que en claro (ahí: fondo `background.dark`), pero simétrico para lienzo oscuro: fondo claro, texto oscuro. Sin acento de marca */
   --tooltip-color: var(--color-text-on-light); /** Texto del bocadillo — surface-dark, el par del fondo claro */
 }
 /**
@@ -2994,7 +2994,7 @@ html.dark {
   --consent-banner-z-index: var(--z-index-bar); /** Capa: la de las barras fijas de la aplicación. Por debajo del velo de un modal — el banner no bloquea nada */
   --consent-preferences-gap: var(--spacing-4); /** Separación entre los bloques del panel */
   --consent-preferences-category-gap: var(--spacing-3); /** Separación entre categorías de la lista */
-  --consent-banner-bg: var(--color-background-light); /** Fondo de la banda */
+  --consent-banner-bg: var(--color-bg-light); /** Fondo de la banda */
   --consent-banner-color: var(--color-text-on-light); /** Texto de la banda */
   --consent-banner-border-color: var(--color-primary); /** Línea superior que separa la banda de la página */
   --consent-banner-border-width: var(--border-width-default); /** Grosor de la línea superior */
@@ -3006,7 +3006,7 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --consent-banner-bg: var(--color-background-dark); /** Fondo de la banda — surface-dark */
+  --consent-banner-bg: var(--color-bg-dark); /** Fondo de la banda — surface-dark */
   --consent-banner-color: var(--color-text-on-dark); /** Texto de la banda — surface-dark */
   --consent-banner-border-color: var(--color-text-on-dark); /** Línea superior — surface-dark */
 }
@@ -3088,7 +3088,7 @@ html.dark {
   --table-row-hover-marker-width: var(--border-width-focus); /** Grosor de la barra que marca la fila bajo el puntero. El hover no pinta relleno (regla de Colores): la fila se señala con una barra de tinta en su borde de inicio, el mismo grafismo que la sección activa del SidebarNav en rail */
   --table-row-hover-marker-color: var(--color-primary); /** Color de la barra de hover — tinta de la superficie */
   --table-row-selected-font-weight: var(--font-weight-emphasis); /** Peso de la fila seleccionada */
-  --table-sticky-bg: var(--color-background-light); /** Fondo de la columna de acciones pegajosa (cabecera y celda): opaco, para tapar el resto de columnas que se deslizan debajo al hacer scroll horizontal */
+  --table-sticky-bg: var(--color-bg-light); /** Fondo de la columna de acciones pegajosa (cabecera y celda): opaco, para tapar el resto de columnas que se deslizan debajo al hacer scroll horizontal */
   --table-footer-bg: var(--color-surface-secondary-on-light); /** Fondo del tfoot: superficie clara secundaria, no un fondo de estado */
   --table-footer-border-width: var(--border-width-default); /** Borde superior del tfoot — 1px, como el del thead */
   --table-footer-border-color: var(--color-text-on-light); /** Color del borde superior del tfoot */
@@ -3107,7 +3107,7 @@ html.dark {
   --table-sort-icon-active-color: var(--color-text-on-dark); /** Icono de sort activo — surface-dark */
   --table-row-border-color: var(--color-text-on-dark); /** Separador entre filas — surface-dark */
   --table-row-selected-color: var(--color-accent-1); /** Tinta de la fila seleccionada — surface-dark: lavanda, como en el SidebarNav */
-  --table-sticky-bg: var(--color-background-dark); /** Fondo de la columna pegajosa — surface-dark */
+  --table-sticky-bg: var(--color-bg-dark); /** Fondo de la columna pegajosa — surface-dark */
   --table-footer-bg: var(--color-surface-secondary-on-dark); /** Fondo del tfoot — surface-dark */
   --table-footer-border-color: var(--color-text-on-dark); /** Borde superior del tfoot — surface-dark */
   --table-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
@@ -3136,7 +3136,7 @@ html.dark {
   --step-border-radius: var(--border-radius-default); /** Marca cuadrada, el radio del sistema — no `round`: la marca de un paso es identidad de marca, no un avatar ni una píldora */
   --step-border-width: var(--border-width-default); /** Filete de la marca hueca (estado `pending`). Todo borde del sistema mide lo mismo */
   --step-font-weight: var(--font-weight-default); /** Peso de la cifra: dentro de una marca rellena de otro color el peso no señala nada — el estado ya lo dicen el relleno y el filete */
-  --step-pending-bg: var(--color-background-light); /** Fondo de una marca hueca (`pending`): el lienzo de la página. Tiene que tapar el carril igual que una marca rellena — transparente, la línea lo cruzaría por la mitad */
+  --step-pending-bg: var(--color-bg-light); /** Fondo de una marca hueca (`pending`): el lienzo de la página. Tiene que tapar el carril igual que una marca rellena — transparente, la línea lo cruzaría por la mitad */
   --step-pending-border-color: var(--color-border-default-on-light); /** Filete de una marca hueca: el borde general del sistema */
   --step-pending-color: var(--color-text-muted-on-light); /** Cifra de una marca hueca: texto secundario */
   --step-tone-primary-bg: var(--color-primary); /** Relleno tono primary: la marca del sistema */
@@ -3149,8 +3149,8 @@ html.dark {
   --step-tone-support-1-color: var(--color-text-on-light); /** Tinta sobre support-1 */
   --step-tone-support-2-bg: var(--color-support-2); /** Relleno tono support-2 (cayenne) */
   --step-tone-support-2-color: var(--color-text-on-light); /** Tinta sobre support-2 */
-  --step-tone-danger-bg: var(--color-error-fill); /** Relleno tono danger */
-  --step-tone-danger-color: var(--color-error-fill-text); /** Tinta sobre danger */
+  --step-tone-error-bg: var(--color-error-fill); /** Relleno tono error */
+  --step-tone-error-color: var(--color-error-fill-text); /** Tinta sobre error */
   --step-tone-success-bg: var(--color-success-fill); /** Relleno tono success */
   --step-tone-success-color: var(--color-success-fill-text); /** Tinta sobre success */
   --step-tone-neutral-bg: var(--color-surface-inverse-on-light); /** Relleno tono neutral (gris oscuro) */
@@ -3164,7 +3164,7 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --step-pending-bg: var(--color-background-dark); /** Fondo de la marca hueca — surface-dark */
+  --step-pending-bg: var(--color-bg-dark); /** Fondo de la marca hueca — surface-dark */
   --step-pending-border-color: var(--color-text-on-dark); /** Filete de la marca hueca — surface-dark */
   --step-pending-color: var(--color-text-muted-on-dark); /** Cifra de la marca hueca — surface-dark */
   --step-tone-primary-bg: var(--color-accent-2); /** Relleno primary — surface-dark. El prusia es el lienzo; se aparta de la derivación (lavanda, el par de Button primary) a propósito, en amarillo, para que el progreso no se confunda con una acción — decisión heredada de Stepper */
@@ -3244,7 +3244,7 @@ html.dark {
   --sidebar-group-padding-block: var(--spacing-2); /** Aire vertical de una sección del panel */
   --sidebar-group-gap: var(--spacing-1); /** Entre elementos de una sección */
   --sidebar-rail-width: calc(2 * var(--app-header-padding-inline) + var(--size-component-md)); /** Ancho del rail (72px): inset simétrico `1rem` (16px) a los dos lados — el izquierdo alinea el centro del icono con el centro del `MenuButton` del header — + caja de icono `2.5rem` (40px). Ver `rail-padding-inline-start` */
-  --sidebar-bg: var(--color-background-light); /** Fondo */
+  --sidebar-bg: var(--color-bg-light); /** Fondo */
   --sidebar-border-width: var(--border-width-default); /** Borde que separa la sidebar del contenido */
   --sidebar-border-color: var(--color-primary); /** Color del borde */
   --sidebar-rail-padding-inline-start: var(--app-header-padding-inline); /** Inset del rail (16px), igual a `--app-header-padding-inline`, a AMBOS lados (simétrico): alinea el centro del icono del rail con el centro del `MenuButton` del header (x=36px) y evita el aire desigual de una columna estrecha. Desacoplado del padding de desplegada (`padding-inline`) para no romper su alineación, ya correcta por composición de otros tokens */
@@ -3259,7 +3259,7 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --sidebar-bg: var(--color-background-dark); /** Fondo — surface-dark */
+  --sidebar-bg: var(--color-bg-dark); /** Fondo — surface-dark */
   --sidebar-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
   --sidebar-separator-color: var(--color-text-on-dark); /** Línea — surface-dark */
   --sidebar-resizer-hover-color: var(--color-text-on-dark); /** Asa de redimensionado bajo el puntero — surface-dark */
@@ -3527,7 +3527,7 @@ html.dark {
   --modal-description-margin-block-end: var(--spacing-4); /** Separación entre la descripción y el cuerpo del modal */
   --modal-close-size: var(--size-component-md); /** Caja del botón de cerrar (40px). En la superficie pública (SiteShell) remapea a size-component.lg */
   --modal-close-icon-size: var(--icon-size-md); /** Glifo del botón de cerrar (24px), la talla por defecto de icono-botón. En la superficie pública remapea igualmente a icon.size-md */
-  --modal-bg: var(--color-background-light); /** Fondo del panel modal */
+  --modal-bg: var(--color-bg-light); /** Fondo del panel modal */
   --modal-border-width: var(--border-width-default); /** Grosor del borde del panel */
   --modal-border-radius: var(--border-radius-default); /** Radio del panel */
   --modal-shadow: var(--shadow-default); /** Sombra de elevación */
@@ -3546,7 +3546,7 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --modal-bg: var(--color-background-dark); /** Fondo del panel — surface-dark */
+  --modal-bg: var(--color-bg-dark); /** Fondo del panel — surface-dark */
   --modal-title-color: var(--color-text-on-dark); /** Color del título — surface-dark */
   --modal-border-color: var(--color-text-on-dark); /** Borde 1px — surface-dark: separa el panel del velo, que también es oscuro */
   --modal-description-color: var(--color-text-muted-on-dark); /** Color de la descripción — surface-dark */
@@ -3711,7 +3711,7 @@ html.dark {
   --calendar-today-color: var(--color-text-on-dark); /** Color del día de hoy — surface-dark */
   --calendar-today-marker-color: var(--color-text-on-dark); /** Marcador del día de hoy — surface-dark */
   --calendar-selected-bg: var(--color-text-on-dark); /** Fondo del día seleccionado — surface-dark */
-  --calendar-selected-color: var(--color-background-dark); /** Texto del día seleccionado — surface-dark */
+  --calendar-selected-color: var(--color-bg-dark); /** Texto del día seleccionado — surface-dark */
   --calendar-outside-color: var(--color-text-muted-on-dark); /** Días fuera de mes — surface-dark */
   --calendar-disabled-color: var(--color-text-muted-on-dark); /** Días deshabilitados — surface-dark */
   --calendar-hover-line-color: var(--color-text-on-dark); /** Color de la línea de hover — surface-dark */
@@ -3784,7 +3784,7 @@ html.dark {
   --calendar-planner-cell-outside-bg: var(--color-surface-secondary-on-dark); /** Fondo de celdas fuera de mes — surface-dark */
   --calendar-planner-cell-focus-ring-color: var(--color-text-on-dark); /** Focus ring de la celda — surface-dark */
   --calendar-planner-cell-today-number-bg: var(--color-text-on-dark); /** Fondo del número de hoy — surface-dark */
-  --calendar-planner-cell-today-number-color: var(--color-background-dark); /** Texto del número de hoy — surface-dark */
+  --calendar-planner-cell-today-number-color: var(--color-bg-dark); /** Texto del número de hoy — surface-dark */
   --calendar-planner-day-number-color: var(--color-text-on-dark); /** Color del número de día — surface-dark */
   --calendar-planner-day-number-outside-color: var(--color-text-muted-on-dark); /** Número fuera de mes — surface-dark */
   --calendar-planner-more-color: var(--color-text-muted-on-dark); /** Texto '+N más' — surface-dark */
@@ -3822,16 +3822,16 @@ html.dark {
   --calendar-roster-border-width: var(--border-width-default); /** Grosor de los bordes del grid */
   --calendar-roster-th-name-font-weight: var(--font-weight-emphasis); /** Peso del encabezado de nombre */
   --calendar-roster-th-name-color: var(--color-text-muted-on-light); /** Color del encabezado de nombre */
-  --calendar-roster-th-name-bg: var(--color-background-light); /** Fondo sticky de la columna de nombre */
+  --calendar-roster-th-name-bg: var(--color-bg-light); /** Fondo sticky de la columna de nombre */
   --calendar-roster-th-day-color: var(--color-text-on-light); /** Color del encabezado de día */
-  --calendar-roster-th-day-bg: var(--color-background-light); /** Fondo del encabezado de día */
-  --calendar-roster-th-day-today-color: var(--color-background-light); /** Texto del encabezado del día de hoy */
+  --calendar-roster-th-day-bg: var(--color-bg-light); /** Fondo del encabezado de día */
+  --calendar-roster-th-day-today-color: var(--color-bg-light); /** Texto del encabezado del día de hoy */
   --calendar-roster-th-day-today-bg: var(--color-primary); /** Fondo del encabezado del día de hoy */
   --calendar-roster-th-day-today-radius: var(--border-radius-default); /** Radio del badge del día de hoy */
   --calendar-roster-td-name-color: var(--color-text-on-light); /** Color del nombre del empleado */
   --calendar-roster-td-name-font-weight: var(--font-weight-default); /** Peso del nombre del empleado (la celda es th: el agente de usuario la pondría en negrita) */
-  --calendar-roster-td-name-bg: var(--color-background-light); /** Fondo sticky de la celda de nombre */
-  --calendar-roster-cell-bg: var(--color-background-light); /** Fondo de celdas de día laborable */
+  --calendar-roster-td-name-bg: var(--color-bg-light); /** Fondo sticky de la celda de nombre */
+  --calendar-roster-cell-bg: var(--color-bg-light); /** Fondo de celdas de día laborable */
   --calendar-roster-cell-weekend-bg: var(--color-surface-secondary-on-light); /** Fondo de celdas de fin de semana — superficie secundaria, la misma para todo día no laborable: lo que los distingue es el chip, no el gris */
   --calendar-roster-cell-holiday-bg: var(--color-surface-secondary-on-light); /** Fondo de celdas festivas — misma superficie secundaria; el festivo se nombra con su chip */
   --calendar-roster-cell-non-working-bg: var(--color-surface-secondary-on-light); /** Fondo de celdas no laborables (laborable sin turno asignado) */
@@ -3849,13 +3849,13 @@ html.dark {
 html.dark {
   --calendar-roster-cell-bg: rgba(0, 0, 0, 0); /** Fondo de celdas — surface-dark */
   --calendar-roster-border-color: var(--color-text-on-dark); /** Color de bordes del grid — surface-dark */
-  --calendar-roster-th-name-bg: var(--color-background-dark); /** Fondo columna de nombre — surface-dark */
+  --calendar-roster-th-name-bg: var(--color-bg-dark); /** Fondo columna de nombre — surface-dark */
   --calendar-roster-th-name-color: var(--color-text-muted-on-dark); /** Color columna de nombre — surface-dark */
   --calendar-roster-th-day-color: var(--color-text-on-dark); /** Color encabezado de día — surface-dark */
-  --calendar-roster-th-day-bg: var(--color-background-dark); /** Fondo encabezado de día — surface-dark */
+  --calendar-roster-th-day-bg: var(--color-bg-dark); /** Fondo encabezado de día — surface-dark */
   --calendar-roster-th-day-today-bg: var(--color-text-on-dark); /** Fondo del día de hoy — surface-dark */
-  --calendar-roster-th-day-today-color: var(--color-background-dark); /** Texto del día de hoy — surface-dark */
-  --calendar-roster-td-name-bg: var(--color-background-dark); /** Fondo celda de nombre — surface-dark */
+  --calendar-roster-th-day-today-color: var(--color-bg-dark); /** Texto del día de hoy — surface-dark */
+  --calendar-roster-td-name-bg: var(--color-bg-dark); /** Fondo celda de nombre — surface-dark */
   --calendar-roster-td-name-color: var(--color-text-on-dark); /** Color celda de nombre — surface-dark */
   --calendar-roster-cell-weekend-bg: var(--color-surface-secondary-on-dark); /** Fondo fin de semana — surface-dark */
   --calendar-roster-cell-holiday-bg: var(--color-surface-secondary-on-dark); /** Fondo festivo — surface-dark */
@@ -4551,16 +4551,16 @@ html.dark {
   --file-upload-subtext-color: var(--color-text-muted-on-dark); /** Texto secundario — surface-dark */
   --file-upload-icon-color: var(--color-text-on-dark); /** Icono de subida — surface-dark */
   --file-upload-drag-border-color: var(--color-text-on-dark); /** Borde con arrastre activo — surface-dark */
-  --file-upload-drag-bg: var(--color-background-dark); /** Fondo con arrastre activo — surface-dark: el lienzo, para que el dropzone se vacíe igual que en claro */
+  --file-upload-drag-bg: var(--color-bg-dark); /** Fondo con arrastre activo — surface-dark: el lienzo, para que el dropzone se vacíe igual que en claro */
   --file-upload-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
   --file-upload-error-bg: var(--color-surface-secondary-on-dark); /** Fondo en error — surface-dark */
-  --file-upload-item-bg: var(--color-background-dark); /** Fondo de cada archivo — surface-dark */
+  --file-upload-item-bg: var(--color-bg-dark); /** Fondo de cada archivo — surface-dark */
   --file-upload-item-border-color: var(--color-text-on-dark); /** Borde de cada archivo — surface-dark */
   --file-upload-item-name-color: var(--color-text-on-dark); /** Nombre del archivo — surface-dark */
   --file-upload-item-size-color: var(--color-text-muted-on-dark); /** Peso del archivo — surface-dark */
   --file-upload-item-error-color: var(--color-error-text-on-dark); /** Mensaje de error por archivo — surface-dark */
   --file-upload-item-error-border-color: var(--color-error-text-on-dark); /** Borde del archivo con error — surface-dark */
-  --file-upload-item-error-bg: var(--color-background-dark); /** Fondo del archivo con error — surface-dark */
+  --file-upload-item-error-bg: var(--color-bg-dark); /** Fondo del archivo con error — surface-dark */
   --file-upload-thumb-bg: var(--color-surface-secondary-on-dark); /** Fondo de la miniatura — surface-dark */
   --file-upload-thumb-icon-color: var(--color-text-muted-on-dark); /** Icono de archivo genérico — surface-dark: `grey-dark` no llega a 3:1 sobre prusia */
   --file-upload-remove-color: var(--color-text-muted-on-dark); /** Aspa de quitar — surface-dark */
@@ -4639,8 +4639,8 @@ html.dark {
   --number-badge-support-1-color: var(--color-text-on-light); /** Texto sobre support-1 */
   --number-badge-support-2-bg: var(--color-support-2); /** Fondo support-2 (cayenne) */
   --number-badge-support-2-color: var(--color-text-on-light); /** Texto sobre support-2 */
-  --number-badge-danger-bg: var(--color-error-fill); /** Fondo danger (red) */
-  --number-badge-danger-color: var(--color-error-fill-text); /** Texto sobre danger */
+  --number-badge-error-bg: var(--color-error-fill); /** Fondo error (rojo) */
+  --number-badge-error-color: var(--color-error-fill-text); /** Texto sobre error */
   --number-badge-success-bg: var(--color-success-fill); /** Fondo success (green) */
   --number-badge-success-color: var(--color-success-fill-text); /** Texto sobre success */
   --number-badge-neutral-bg: var(--color-surface-inverse-on-light); /** Fondo neutral (dark grey) */
@@ -4651,7 +4651,7 @@ html.dark {
 [data-theme="dark"],
 html.dark {
   --number-badge-primary-bg: var(--color-text-on-dark); /** Relleno primary — surface-dark. El prusia es el lienzo y el contador desaparecería; se invierte en vez de pasar a lavanda porque `accent-1` ya es otra variante del mismo componente (mismo caso que `Tag`) */
-  --number-badge-primary-color: var(--color-background-dark); /** Texto sobre primary — surface-dark */
+  --number-badge-primary-color: var(--color-bg-dark); /** Texto sobre primary — surface-dark */
   --number-badge-neutral-bg: var(--color-surface-inverse-on-dark); /** Relleno neutral — surface-dark: la superficie invertida, como en `Tag` */
   --number-badge-neutral-color: var(--color-text-on-light); /** Texto sobre neutral — surface-dark */
 }
@@ -4678,7 +4678,7 @@ html.dark {
   --message-bubble-font-weight: var(--font-weight-default); /** Peso tipográfico */
   --message-bubble-color: var(--color-text-on-light); /** Tinta del mensaje. La misma para los dos emisores: el globo no tiene relleno, así que el texto va sobre la superficie */
   --message-bubble-border-color: var(--color-text-on-light); /** Contorno del globo. Único separador del mensaje: no hay relleno ni sombra */
-  --message-bubble-tail-fill: var(--color-background-light); /** Color con el que se vacía la cola: el de la superficie que hay detrás del globo. Es lo que interrumpe el borde donde nace la cola y deja el triángulo en puro contorno. Si el hilo vive sobre otra superficie, se repunta aquí */
+  --message-bubble-tail-fill: var(--color-bg-light); /** Color con el que se vacía la cola: el de la superficie que hay detrás del globo. Es lo que interrumpe el borde donde nace la cola y deja el triángulo en puro contorno. Si el hilo vive sobre otra superficie, se repunta aquí */
 }
 .surface-dark,
 .surface-invert,
@@ -4686,7 +4686,7 @@ html.dark {
 html.dark {
   --message-bubble-color: var(--color-text-on-dark); /** Tinta del mensaje — superficie oscura */
   --message-bubble-border-color: var(--color-text-on-dark); /** Contorno del globo — superficie oscura */
-  --message-bubble-tail-fill: var(--color-background-dark); /** Vaciado de la cola — superficie oscura */
+  --message-bubble-tail-fill: var(--color-bg-dark); /** Vaciado de la cola — superficie oscura */
 }
 /**
  * Do not edit directly, this file was auto-generated.
@@ -4734,7 +4734,7 @@ html.dark {
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --message-composer-bg: var(--color-background-dark); /** Fondo del marco — superficie oscura */
+  --message-composer-bg: var(--color-bg-dark); /** Fondo del marco — superficie oscura */
   --message-composer-border-color: var(--color-text-on-dark); /** Color del marco — superficie oscura */
   --message-composer-focus-border-color: var(--color-text-on-dark); /** Color del marco con el foco dentro — superficie oscura */
   --message-composer-focus-ring-color: var(--color-text-on-dark); /** Color del anillo de foco — superficie oscura */
@@ -4849,13 +4849,13 @@ html.dark {
   --chat-shell-breakpoint: var(--breakpoint-lg); /** Donde el armazón pasa de dos columnas a una. El mismo punto en el que el chrome de aplicación pasa de barra superior a barra lateral */
   --chat-shell-drawer-gap: var(--chat-shell-thread-padding-block); /** Dentro del cajón de pantalla estrecha, el aire entre la fila del disparador y la lista. Cascada desde el aire de la ranura del hilo porque el cajón repite la maqueta de la columna principal: la lista tiene que arrancar donde arranca el hilo, para que al desplegar no se mueva más que el contenido. El cajón anula el relleno propio del `Sheet` (ver ChatShell.css), así que esta es la única medida que el armazón pone dentro de él */
   --chat-shell-thread-padding-inline: calc(var(--message-bubble-tail-size) + var(--message-bubble-border-width)); /** Pasillo lateral del hilo: exactamente lo que sobresale la cola del globo, que nace FUERA de su caja (el lado del triángulo más su contorno). Sin él la cola se corta contra el canto del desplazamiento. No es un margen de página —el aire alrededor del chat sigue poniéndolo quien lo monta—: es la anchura justa para que el pico respire */
-  --chat-shell-bg: var(--color-background-light); /** Fondo del armazón */
+  --chat-shell-bg: var(--color-bg-light); /** Fondo del armazón */
 }
 .surface-dark,
 .surface-invert,
 [data-theme="dark"],
 html.dark {
-  --chat-shell-bg: var(--color-background-dark); /** Fondo del armazón — superficie oscura */
+  --chat-shell-bg: var(--color-bg-dark); /** Fondo del armazón — superficie oscura */
 }
 /**
  * Do not edit directly, this file was auto-generated.
@@ -4937,7 +4937,7 @@ html.dark {
   --chart-transition-duration: var(--motion-duration-fast); /** Respuesta de la marca al puntero. Con `prefers-reduced-motion` no hay transición */
   --chart-transition-easing: var(--motion-easing-out); /** Curva de la respuesta al puntero */
   --chart-diverging-neutral: var(--color-surface-secondary-on-light); /** Punto medio divergente: gris neutro. Nunca un tono — el medio tiene que leerse como «nada». Es el único dato que se viste con un rol de SUPERFICIE, y a propósito: el cero es el punto de MENOR saliencia de la rampa, así que su trabajo es retirarse hacia el lienzo, no contrastar con él. Sobre blanco queda en 1,12:1, por debajo de los seis pasos de los dos brazos (2,49:1 el más flojo) */
-  --chart-surface: var(--color-background-light); /** Color del hueco de 2px entre marcas contiguas y del anillo de 2px de los puntos. Es la superficie, no un borde: separar con trazo añadiría tinta que no es dato */
+  --chart-surface: var(--color-bg-light); /** Color del hueco de 2px entre marcas contiguas y del anillo de 2px de los puntos. Es la superficie, no un borde: separar con trazo añadiría tinta que no es dato */
   --chart-grid-color: var(--color-border-default-on-light); /** Rejilla: filete de 1px a un paso de la superficie. Cromo recesivo */
   --chart-grid-width: var(--border-width-default); /** Grosor de la rejilla. Sólida siempre: una rejilla discontinua se lee como umbral */
   --chart-axis-color: var(--color-icon-secondary-on-light); /** Línea base y eje: un paso más firme que la rejilla, porque es el ancla del cero */
@@ -4991,7 +4991,7 @@ html.dark {
   --chart-diverging-cool-2: var(--color-chart-diverging-cool-2-on-dark); /** Divergente frío 2 — surface-dark */
   --chart-diverging-cool-3: var(--color-chart-diverging-cool-3-on-dark); /** Divergente frío 3 — surface-dark */
   --chart-radial-track-color: var(--color-disabled-border-on-dark); /** Carril del anillo — surface-dark. La misma tinta que el eje en oscuro, por el mismo motivo */
-  --chart-surface: var(--color-background-dark); /** Hueco y anillo — surface-dark */
+  --chart-surface: var(--color-bg-dark); /** Hueco y anillo — surface-dark */
   --chart-grid-color: var(--color-border-recessive-on-dark); /** Rejilla — surface-dark. Excepción declarada a la regla de derivación (borde → `text.on-dark`): la rejilla es cromo recesivo, no un borde con peso de dato; en blanco sobre prusia se leería como tinta. Procedencia corregida: apuntaba a `color.surface.secondary-on-dark`, un token de SUPERFICIE (el mismo defecto de origen que hizo invisible el carril del Stepper) — ahora apunta a `color.border.recessive-on-dark`, un token de LÍNEA, con el mismo `grey-darkest` y por tanto el mismo valor visual */
   --chart-axis-color: var(--color-disabled-border-on-dark); /** Eje — surface-dark: un paso por encima de la rejilla, igual que en claro. Excepción declarada como `grid-color`: mismo `grey-dark` que en claro, no el `text.muted-on-dark` de `axis-color` */
   --chart-label-color: var(--color-text-muted-on-dark); /** Rótulos — surface-dark */
@@ -5659,10 +5659,10 @@ html.dark {
   --heatmap-border-width: var(--border-width-default); /** Grosor de la rejilla */
   --heatmap-row-header-color: var(--color-text-on-light); /** Color del nombre de la fila */
   --heatmap-row-header-font-weight: var(--font-weight-default); /** Peso del nombre de la fila (la celda es th: el agente de usuario la pondría en negrita) */
-  --heatmap-row-header-bg: var(--color-background-light); /** Fondo sticky de la columna de filas */
+  --heatmap-row-header-bg: var(--color-bg-light); /** Fondo sticky de la columna de filas */
   --heatmap-column-header-font-weight: var(--font-weight-emphasis); /** Peso del nombre de la columna */
   --heatmap-column-header-color: var(--color-text-muted-on-light); /** Color del nombre de la columna */
-  --heatmap-column-header-bg: var(--color-background-light); /** Fondo del encabezado de columna */
+  --heatmap-column-header-bg: var(--color-bg-light); /** Fondo del encabezado de columna */
   --heatmap-group-header-color: var(--color-text-muted-on-light); /** Color del nombre del grupo de columnas */
   --heatmap-cell-font-weight: var(--font-weight-emphasis); /** Peso de la cifra de la celda */
   --heatmap-empty-bg: var(--color-surface-secondary-on-light); /** Fondo de una celda sin dato — superficie secundaria, no un paso de la rampa */
@@ -5714,9 +5714,9 @@ html.dark {
   --heatmap-diverging-cool-2-color: var(--color-text-on-light); /** Tinta sobre el peldaño divergente cool-2 — surface-dark. #488FEF. Prusia: 5,15:1 (blanco daría 3,26:1) */
   --heatmap-diverging-cool-3-color: var(--color-text-on-light); /** Tinta sobre el peldaño divergente cool-3 — surface-dark. #80B0F3. Prusia: 7,52:1 (blanco daría 2,23:1) */
   --heatmap-border-color: var(--color-text-on-dark); /** Color de la rejilla — surface-dark */
-  --heatmap-row-header-bg: var(--color-background-dark); /** Fondo de la columna de filas — surface-dark */
+  --heatmap-row-header-bg: var(--color-bg-dark); /** Fondo de la columna de filas — surface-dark */
   --heatmap-row-header-color: var(--color-text-on-dark); /** Color del nombre de la fila — surface-dark */
-  --heatmap-column-header-bg: var(--color-background-dark); /** Fondo del encabezado de columna — surface-dark */
+  --heatmap-column-header-bg: var(--color-bg-dark); /** Fondo del encabezado de columna — surface-dark */
   --heatmap-column-header-color: var(--color-text-muted-on-dark); /** Color del encabezado de columna — surface-dark */
   --heatmap-group-header-color: var(--color-text-muted-on-dark); /** Color del nombre del grupo — surface-dark */
   --heatmap-empty-bg: var(--color-surface-secondary-on-dark); /** Fondo de una celda sin dato — surface-dark */
@@ -5771,11 +5771,11 @@ html.dark {
   --planning-grid-border-width: var(--border-width-default); /** Grosor de la rejilla */
   --planning-grid-row-header-font-weight: var(--font-weight-default); /** Peso del nombre de la fila (la celda es th: el agente de usuario la pondría en negrita) */
   --planning-grid-row-header-color: var(--color-text-on-light); /** Color del nombre de la fila */
-  --planning-grid-row-header-bg: var(--color-background-light); /** Fondo sticky de la columna de filas */
+  --planning-grid-row-header-bg: var(--color-bg-light); /** Fondo sticky de la columna de filas */
   --planning-grid-column-header-font-weight: var(--font-weight-emphasis); /** Peso del nombre de la columna */
   --planning-grid-column-header-color: var(--color-text-on-light); /** Color del nombre de la columna */
   --planning-grid-column-header-sub-color: var(--color-text-muted-on-light); /** Color de la segunda línea del encabezado */
-  --planning-grid-column-header-bg: var(--color-background-light); /** Fondo del encabezado de columna */
+  --planning-grid-column-header-bg: var(--color-bg-light); /** Fondo del encabezado de columna */
   --planning-grid-current-outline-color: var(--color-primary); /** Recuadro de la columna en curso */
   --planning-grid-current-outline-width: var(--border-width-focus); /** Grosor del recuadro de la columna en curso */
   --planning-grid-cell-color: var(--color-text-on-light); /** Color de la cifra de una celda */
@@ -5792,9 +5792,9 @@ html.dark {
 [data-theme="dark"],
 html.dark {
   --planning-grid-border-color: var(--color-text-on-dark); /** Color de la rejilla — surface-dark */
-  --planning-grid-row-header-bg: var(--color-background-dark); /** Fondo de la columna de filas — surface-dark */
+  --planning-grid-row-header-bg: var(--color-bg-dark); /** Fondo de la columna de filas — surface-dark */
   --planning-grid-row-header-color: var(--color-text-on-dark); /** Color del nombre de la fila — surface-dark */
-  --planning-grid-column-header-bg: var(--color-background-dark); /** Fondo del encabezado de columna — surface-dark */
+  --planning-grid-column-header-bg: var(--color-bg-dark); /** Fondo del encabezado de columna — surface-dark */
   --planning-grid-column-header-color: var(--color-text-on-dark); /** Color del encabezado de columna — surface-dark */
   --planning-grid-column-header-sub-color: var(--color-text-muted-on-dark); /** Color de la segunda línea del encabezado — surface-dark */
   --planning-grid-current-outline-color: var(--color-text-on-dark); /** Recuadro de la columna en curso — surface-dark */
@@ -5834,7 +5834,7 @@ html.dark {
   --org-chart-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco */
   --org-chart-connector-color: var(--color-border-default-on-light); /** Color de las líneas que unen los nodos */
   --org-chart-connector-width: var(--border-width-default); /** Grosor de las líneas que unen los nodos */
-  --org-chart-card-bg: var(--color-background-light); /** Fondo de la tarjeta */
+  --org-chart-card-bg: var(--color-bg-light); /** Fondo de la tarjeta */
   --org-chart-card-border-color: var(--color-primary); /** Borde de la tarjeta */
   --org-chart-card-border-width: var(--border-width-default); /** Grosor del borde de la tarjeta */
   --org-chart-card-radius: var(--border-radius-default); /** Radio de la tarjeta */
@@ -5853,7 +5853,7 @@ html.dark {
   --org-chart-viewport-border-color: var(--color-text-on-dark); /** Borde del lienzo — surface-dark */
   --org-chart-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
   --org-chart-connector-color: var(--color-text-on-dark); /** Color de las líneas — surface-dark */
-  --org-chart-card-bg: var(--color-background-dark); /** Fondo de la tarjeta — surface-dark */
+  --org-chart-card-bg: var(--color-bg-dark); /** Fondo de la tarjeta — surface-dark */
   --org-chart-card-border-color: var(--color-text-on-dark); /** Borde de la tarjeta — surface-dark */
   --org-chart-name-color: var(--color-text-on-dark); /** Color del nombre del departamento — surface-dark */
   --org-chart-group-color: var(--color-text-muted-on-dark); /** Color del rótulo de grupo — surface-dark */
@@ -6148,7 +6148,7 @@ html.dark .surface-light {
   --alert-border-color: var(--color-text-on-dark);
   --alert-title-color: var(--color-text-on-dark);
   --alert-description-color: var(--color-text-on-dark);
-  --app-header-bg: var(--color-background-light);
+  --app-header-bg: var(--color-bg-light);
   --app-header-border-color: var(--color-primary);
   --app-launcher-trigger-color: var(--color-text-on-light);
   --app-launcher-focus-ring-color: var(--color-primary);
@@ -6240,7 +6240,7 @@ html.dark .surface-light {
   --button-ghost-hover-color: var(--color-text-on-dark);
   --button-ghost-active-bg: var(--color-primary);
   --button-ghost-active-color: var(--color-text-on-dark);
-  --card-outline-bg: var(--color-background-light);
+  --card-outline-bg: var(--color-bg-light);
   --card-outline-color: var(--color-text-on-light);
   --card-outline-border-color: var(--color-primary);
   --card-selectable-focus-ring-color: var(--button-primary-focus-ring-color);
@@ -6310,7 +6310,7 @@ html.dark .surface-light {
   --floating-dock-close-color: var(--modal-close-color);
   --floating-dock-close-focus-ring-color: var(--modal-close-focus-ring-color);
   --floating-dock-focus-ring-color: var(--color-primary);
-  --floating-panel-bg: var(--color-background-light);
+  --floating-panel-bg: var(--color-bg-light);
   --floating-panel-border-color: var(--color-primary);
   --form-error-color: var(--color-error-text-on-light);
   --form-helper-color: var(--color-text-on-light);
@@ -6366,8 +6366,8 @@ html.dark .surface-light {
   --menu-separator-color: var(--separator-color);
   --message-bubble-color: var(--color-text-on-light);
   --message-bubble-border-color: var(--color-text-on-light);
-  --message-bubble-tail-fill: var(--color-background-light);
-  --modal-bg: var(--color-background-light);
+  --message-bubble-tail-fill: var(--color-bg-light);
+  --modal-bg: var(--color-bg-light);
   --modal-border-color: rgba(0, 0, 0, 0);
   --modal-title-color: var(--color-text-on-light);
   --modal-description-color: var(--color-text-muted-on-light);
@@ -6467,13 +6467,13 @@ html.dark .surface-light {
   --sidebar-nav-focus-ring-color: var(--color-primary);
   --sidebar-nav-item-empty-color: var(--color-text-muted-on-light);
   --sidebar-nav-item-empty-mark-color: var(--color-text-muted-on-light);
-  --sidebar-bg: var(--color-background-light);
+  --sidebar-bg: var(--color-bg-light);
   --sidebar-border-color: var(--color-primary);
   --sidebar-resizer-hover-color: var(--color-primary);
   --sidebar-separator-color: var(--separator-color);
   --site-footer-legal-separator-color: var(--separator-color);
-  --site-header-bg: var(--color-background-light);
-  --site-header-panel-bg: var(--color-background-light);
+  --site-header-bg: var(--color-bg-light);
+  --site-header-panel-bg: var(--color-bg-light);
   --skeleton-bg: var(--color-surface-secondary-on-light);
   --skeleton-highlight: var(--color-white);
   --skip-link-bg: var(--color-primary);
@@ -6493,7 +6493,7 @@ html.dark .surface-light {
   --star-rating-empty-color: var(--color-text-muted-on-light);
   --star-rating-fill-color: var(--color-primary);
   --star-rating-focus-ring-color: var(--color-primary);
-  --step-pending-bg: var(--color-background-light);
+  --step-pending-bg: var(--color-bg-light);
   --step-pending-border-color: var(--color-border-default-on-light);
   --step-pending-color: var(--color-text-muted-on-light);
   --step-tone-primary-bg: var(--color-primary);
@@ -6515,7 +6515,7 @@ html.dark .surface-light {
   --table-row-border-color: var(--color-primary);
   --table-row-selected-color: var(--color-primary);
   --table-row-hover-marker-color: var(--color-primary);
-  --table-sticky-bg: var(--color-background-light);
+  --table-sticky-bg: var(--color-bg-light);
   --table-footer-bg: var(--color-surface-secondary-on-light);
   --table-footer-border-color: var(--color-text-on-light);
   --table-focus-ring-color: var(--color-primary);
@@ -6537,7 +6537,7 @@ html.dark .surface-light {
   --text-inline-success-color: var(--color-success-text-on-light);
   --text-inline-strikethrough-color: var(--color-text-muted-on-light);
   --text-color: var(--color-text-on-light);
-  --text-bg: var(--color-background-light);
+  --text-bg: var(--color-bg-light);
   --text-h1-color: var(--text-heading-color);
   --text-h2-color: var(--text-heading-color);
   --text-h3-color: var(--text-heading-color);
@@ -6570,7 +6570,7 @@ html.dark .surface-light {
   --toggle-pressed-color: var(--color-text-on-dark);
   --toggle-pressed-border-color: var(--color-primary);
   --toggle-focus-ring-color: var(--color-primary);
-  --tooltip-bg: var(--color-background-dark);
+  --tooltip-bg: var(--color-bg-dark);
   --tooltip-color: var(--color-text-on-dark);
   --typing-indicator-dot-color: var(--color-text-on-light);
   --user-menu-focus-ring-color: var(--color-primary);
@@ -6611,14 +6611,14 @@ html.dark .surface-light {
   --calendar-planner-hover-line-color: var(--calendar-hover-line-color);
   --calendar-roster-border-color: var(--color-primary);
   --calendar-roster-th-name-color: var(--color-text-muted-on-light);
-  --calendar-roster-th-name-bg: var(--color-background-light);
+  --calendar-roster-th-name-bg: var(--color-bg-light);
   --calendar-roster-th-day-color: var(--color-text-on-light);
-  --calendar-roster-th-day-bg: var(--color-background-light);
-  --calendar-roster-th-day-today-color: var(--color-background-light);
+  --calendar-roster-th-day-bg: var(--color-bg-light);
+  --calendar-roster-th-day-today-color: var(--color-bg-light);
   --calendar-roster-th-day-today-bg: var(--color-primary);
   --calendar-roster-td-name-color: var(--color-text-on-light);
-  --calendar-roster-td-name-bg: var(--color-background-light);
-  --calendar-roster-cell-bg: var(--color-background-light);
+  --calendar-roster-td-name-bg: var(--color-bg-light);
+  --calendar-roster-cell-bg: var(--color-bg-light);
   --calendar-roster-cell-weekend-bg: var(--color-surface-secondary-on-light);
   --calendar-roster-cell-holiday-bg: var(--color-surface-secondary-on-light);
   --calendar-roster-cell-non-working-bg: var(--color-surface-secondary-on-light);
@@ -6676,7 +6676,7 @@ html.dark .surface-light {
   --command-palette-item-color: var(--menu-item-color);
   --command-palette-item-highlighted-bg: var(--menu-item-highlighted-bg);
   --command-palette-item-highlighted-color: var(--menu-item-highlighted-color);
-  --consent-banner-bg: var(--color-background-light);
+  --consent-banner-bg: var(--color-bg-light);
   --consent-banner-color: var(--color-text-on-light);
   --consent-banner-border-color: var(--color-primary);
   --conversation-list-item-color: var(--color-text-muted-on-light);
@@ -6711,9 +6711,9 @@ html.dark .surface-light {
   --floating-toolbar-border-color: var(--floating-panel-border-color);
   --heatmap-border-color: var(--color-primary);
   --heatmap-row-header-color: var(--color-text-on-light);
-  --heatmap-row-header-bg: var(--color-background-light);
+  --heatmap-row-header-bg: var(--color-bg-light);
   --heatmap-column-header-color: var(--color-text-muted-on-light);
-  --heatmap-column-header-bg: var(--color-background-light);
+  --heatmap-column-header-bg: var(--color-bg-light);
   --heatmap-group-header-color: var(--color-text-muted-on-light);
   --heatmap-empty-bg: var(--color-surface-secondary-on-light);
   --heatmap-empty-pattern-color: var(--color-border-default-on-light);
@@ -6876,7 +6876,7 @@ html.dark .surface-light {
   --chart-diverging-cool-1: var(--color-chart-diverging-cool-1);
   --chart-diverging-cool-2: var(--color-chart-diverging-cool-2);
   --chart-diverging-cool-3: var(--color-chart-diverging-cool-3);
-  --chart-surface: var(--color-background-light);
+  --chart-surface: var(--color-bg-light);
   --chart-grid-color: var(--color-border-default-on-light);
   --chart-axis-color: var(--color-icon-secondary-on-light);
   --chart-label-color: var(--color-text-muted-on-light);
@@ -6887,13 +6887,13 @@ html.dark .surface-light {
   --chart-tooltip-bg: var(--tooltip-bg);
   --chart-tooltip-color: var(--tooltip-color);
   --chart-crosshair-color: var(--color-icon-secondary-on-light);
-  --chat-shell-bg: var(--color-background-light);
+  --chat-shell-bg: var(--color-bg-light);
   --connector-auth-untrusted-focus-ring-color: var(--link-focus-ring-color);
   --org-chart-viewport-bg: var(--color-surface-secondary-on-light);
   --org-chart-viewport-border-color: var(--color-border-default-on-light);
   --org-chart-focus-ring-color: var(--color-primary);
   --org-chart-connector-color: var(--color-border-default-on-light);
-  --org-chart-card-bg: var(--color-background-light);
+  --org-chart-card-bg: var(--color-bg-light);
   --org-chart-card-border-color: var(--color-primary);
   --org-chart-name-color: var(--color-text-on-light);
   --org-chart-group-color: var(--color-text-muted-on-light);
@@ -6902,10 +6902,10 @@ html.dark .surface-light {
   --org-chart-empty-color: var(--color-text-muted-on-light);
   --planning-grid-border-color: var(--color-primary);
   --planning-grid-row-header-color: var(--color-text-on-light);
-  --planning-grid-row-header-bg: var(--color-background-light);
+  --planning-grid-row-header-bg: var(--color-bg-light);
   --planning-grid-column-header-color: var(--color-text-on-light);
   --planning-grid-column-header-sub-color: var(--color-text-muted-on-light);
-  --planning-grid-column-header-bg: var(--color-background-light);
+  --planning-grid-column-header-bg: var(--color-bg-light);
   --planning-grid-current-outline-color: var(--color-primary);
   --planning-grid-cell-color: var(--color-text-on-light);
   --planning-grid-cell-readonly-color: var(--color-text-muted-on-light);
@@ -7221,6 +7221,8 @@ html.dark .surface-light {
 html.dark,
 .surface-light,
 .site-shell {
+  --color-background-light: var(--color-bg-light); /* obsoleto: usar --color-bg-light */
+  --color-background-dark: var(--color-bg-dark); /* obsoleto: usar --color-bg-dark */
   --accordion-index-min-inline-size: var(--accordion-index-min-width); /* obsoleto: usar --accordion-index-min-width */
   --app-launcher-tile-badge-block-size: var(--app-launcher-tile-badge-height); /* obsoleto: usar --app-launcher-tile-badge-height */
   --async-multi-select-input-min-inline-size: var(--async-multi-select-input-min-width); /* obsoleto: usar --async-multi-select-input-min-width */
@@ -7234,15 +7236,22 @@ html.dark,
   --floating-dock-panel-block-size: var(--floating-dock-panel-height); /* obsoleto: usar --floating-dock-panel-height */
   --loading-state-min-block-size: var(--loading-state-min-height); /* obsoleto: usar --loading-state-min-height */
   --loading-state-sm-min-block-size: var(--loading-state-sm-min-height); /* obsoleto: usar --loading-state-sm-min-height */
+  --logo-height-xxl: var(--logo-height-2xl); /* obsoleto: usar --logo-height-2xl */
   --modal-width-max: var(--modal-max-width); /* obsoleto: usar --modal-max-width */
   --modal-inline-size: var(--modal-width); /* obsoleto: usar --modal-width */
+  --number-badge-danger-bg: var(--number-badge-error-bg); /* obsoleto: usar --number-badge-error-bg */
+  --number-badge-danger-color: var(--number-badge-error-color); /* obsoleto: usar --number-badge-error-color */
   --otp-input-cell-inline-size: var(--otp-input-cell-width); /* obsoleto: usar --otp-input-cell-width */
   --password-field-toggle-color-hover: var(--password-field-toggle-hover-color); /* obsoleto: usar --password-field-toggle-hover-color */
   --slider-control-block-size: var(--slider-control-height); /* obsoleto: usar --slider-control-height */
+  --step-tone-danger-bg: var(--step-tone-error-bg); /* obsoleto: usar --step-tone-error-bg */
+  --step-tone-danger-color: var(--step-tone-error-color); /* obsoleto: usar --step-tone-error-color */
   --switcher-track-bg-checked: var(--switcher-track-checked-bg); /* obsoleto: usar --switcher-track-checked-bg */
   --table-actions-inline-size: var(--table-actions-width); /* obsoleto: usar --table-actions-width */
   --tabs-trigger-pill-bg-active: var(--tabs-trigger-pill-active-bg); /* obsoleto: usar --tabs-trigger-pill-active-bg */
   --tabs-trigger-pill-color-active: var(--tabs-trigger-pill-active-color); /* obsoleto: usar --tabs-trigger-pill-active-color */
+  --tag-danger-bg: var(--tag-error-bg); /* obsoleto: usar --tag-error-bg */
+  --tag-danger-color: var(--tag-error-color); /* obsoleto: usar --tag-error-color */
   --text-background: var(--text-bg); /* obsoleto: usar --text-bg */
   --typing-indicator-dot-opacity-active: var(--typing-indicator-dot-active-opacity); /* obsoleto: usar --typing-indicator-dot-active-opacity */
   --calendar-year-grid-min-inline-size: var(--calendar-year-grid-min-width); /* obsoleto: usar --calendar-year-grid-min-width */
