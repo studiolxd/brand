@@ -130,13 +130,13 @@ Un enlace en la `description` de un toast se pinta siempre con la tinta del prop
 
 ## Tokens
 
-### Propios del toast — capa, posición, apilado y movimiento
+### Propios del toast — capa, posición, apilado, movimiento y tracking del título
 
 <TokenTable tokens={toastTokens} />
 
 ### Heredados del `Alert` — la cara del aviso
 
-El relleno, el borde, el aire, la tipografía y las cuatro intenciones salen del juego `alert.*`. Personalizar el alert personaliza el toast.
+El relleno, el borde, el aire, la tipografía y las cuatro intenciones salen del juego `alert.*`. Personalizar el alert personaliza el toast. La única excepción es el tracking del título: el del toast es un `<h2>` y lleva el de los títulos (`toast.title-letter-spacing`, −0,02em), mientras que el del `Alert` es un `<p>` y lleva el del cuerpo (`alert.title-letter-spacing`).
 
 <TokenTable tokens={alertBaseTokens} />
 

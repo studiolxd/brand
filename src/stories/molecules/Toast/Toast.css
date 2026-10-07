@@ -86,6 +86,12 @@
     opacity var(--toast-duration-in) var(--toast-easing);
 }
 
+/* El título del aviso es un `<h2>` (`Toast.Title`) y lleva el tracking de un
+   título: lo fija su token en vez de dejarlo a la herencia de `base.css`. */
+.toast .alert__title {
+  letter-spacing: var(--toast-title-letter-spacing);
+}
+
 .toaster.toaster--top .toast {
   inset-block-start: 0;
   inset-block-end: auto;

@@ -339,6 +339,18 @@ export const ContratoCuerpo: Story = {
   },
 };
 
+export const ContratoTrackingTitulo: Story = {
+  name: 'Test — el título del alert lleva el tracking del cuerpo',
+  tags: ['!dev'],
+  args: { title: 'Un aviso' },
+  play: async ({ canvasElement }) => {
+    // El título es un `<p>`: su tracking es el del cuerpo (0), no el de los
+    // encabezados. Lo fija `alert.title-letter-spacing`.
+    const titulo = within(canvasElement).getByText('Un aviso');
+    await expect(parseFloat(getComputedStyle(titulo).letterSpacing) || 0).toBe(0);
+  },
+};
+
 /**
  * Un aviso que además ofrece una salida: el botón va en la ranura `actions`,
  * no dentro del cuerpo. El caso de referencia es «quitar la marca de revisión»

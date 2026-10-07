@@ -42,6 +42,7 @@
   font-weight: var(--alert-title-font-weight);
   color: var(--alert-title-ink);
   line-height: var(--alert-title-line-height);
+  letter-spacing: var(--alert-title-letter-spacing);
   margin: 0;
 }
 

@@ -5,6 +5,8 @@
     "inset-block":          { "$value": "{spacing.5}",            "$type": "dimension", "$description": "Distancia de la pila al borde superior o inferior de la ventana (24px)" },
     "inset-inline":         { "$value": "{spacing.5}",            "$type": "dimension", "$description": "Distancia de la pila al borde izquierdo o derecho de la ventana (24px)" },
 
+    "title-letter-spacing": { "$value": "{text.h2.letter-spacing}",  "$type": "dimension", "$description": "Tracking del título del aviso (−0,02em): el de un `<h2>`, que es el elemento que da el motor al título (`Toast.Title`). El token lo fija en la tarjeta para que no dependa de la herencia de `base.css` ni del nivel de encabezado; sustituye al `alert.title-letter-spacing` del `Alert`, cuyo título es un `<p>`" },
+
     "gap":                  { "$value": "{spacing.2}",            "$type": "dimension", "$description": "Aire entre avisos cuando la pila está desplegada (8px). El `Toaster` lo puede sobreescribir con su prop `gap`" },
     "stack-offset":         { "$value": "{spacing.3}",            "$type": "dimension", "$description": "Cuánto asoma cada aviso por detrás del de delante con la pila recogida (12px)" },
     "stack-scale":          { "$value": "0.05",                   "$type": "number",    "$description": "Cuánto encoge cada aviso por peldaño de profundidad con la pila recogida (5%)" },

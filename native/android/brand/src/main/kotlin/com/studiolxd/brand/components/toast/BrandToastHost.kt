@@ -133,9 +133,10 @@ fun BrandToastCard(
                 Modifier.semantics(mergeDescendants = true) { liveRegion = if (assertive) LiveRegionMode.Assertive else LiveRegionMode.Polite },
                 verticalArrangement = Arrangement.spacedBy(A.contentGap),
             ) {
-                // El título es un `<h2>` en React y hereda de él el tracking de los títulos (`text.h2-letter-spacing`). Su
+                // El tracking del título es el del aviso (`toast.title-letter-spacing`, −0,02 em: el de un `<h2>`, que es lo
+                // que es el título en React). Su
                 // `line-height` (1,3) es más apretado que la fuente: la caja se ajusta a la de CSS (20,8 a 16 sp).
-                val titleStyle = brandTextStyle(A.titleFontSize, A.titleFontWeight, A.titleLineHeight, BrandTextTokens.h2LetterSpacing, color = titleColor)
+                val titleStyle = brandTextStyle(A.titleFontSize, A.titleFontWeight, A.titleLineHeight, T.titleLetterSpacing, color = titleColor)
                 BasicText(item.title, Modifier.brandCssLineHeight(titleStyle), style = titleStyle)
                 if (item.description != null) {
                     BasicText(item.description, style = brandTextStyle(A.descriptionFontSize, BrandTextTokens.fontWeight, A.descriptionLineHeight, color = descriptionColor))

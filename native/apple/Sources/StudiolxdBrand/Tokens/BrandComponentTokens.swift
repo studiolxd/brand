@@ -1284,6 +1284,8 @@ public enum BrandAlertTokens {
     public static let titleFontWeight: Int = 500
     /// Token `alert.title-line-height` — Interlineado del título — el de un rótulo corto
     public static let titleLineHeight: CGFloat = 1.3
+    /// Token `alert.title-letter-spacing` — Tracking del título — el del cuerpo (0em). El título del `Alert` es un `<p>`, no un encabezado, así que no lleva el tracking de los títulos; el token lo fija para que no dependa del elemento. El `Toast`, cuyo título sí es un `<h2>`, lo cambia por el suyo (`toast.title-letter-spacing`) Fracción del tamaño de fuente del propio componente (em).
+    public static let titleLetterSpacing: CGFloat = 0
     /// Token `alert.title-color` — Texto blanco sobre el relleno prusia
     public static let titleColor: Color = Color(brandLight: Color(brandHex: 0xFFFFFF), dark: Color(brandHex: 0x111E30))
     /// Token `alert.description-font-size` — La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
@@ -1528,6 +1530,8 @@ public enum BrandToastTokens {
     public static let insetBlock: CGFloat = 24
     /// Token `toast.inset-inline` — Distancia de la pila al borde izquierdo o derecho de la ventana (24px)
     public static let insetInline: CGFloat = 24
+    /// Token `toast.title-letter-spacing` — Tracking del título del aviso (−0,02em): el de un `<h2>`, que es el elemento que da el motor al título (`Toast.Title`). El token lo fija en la tarjeta para que no dependa de la herencia de `base.css` ni del nivel de encabezado; sustituye al `alert.title-letter-spacing` del `Alert`, cuyo título es un `<p>` Fracción del tamaño de fuente del propio componente (em).
+    public static let titleLetterSpacing: CGFloat = -0.02
     /// Token `toast.gap` — Aire entre avisos cuando la pila está desplegada (8px). El `Toaster` lo puede sobreescribir con su prop `gap`
     public static let gap: CGFloat = 8
     /// Token `toast.stack-offset` — Cuánto asoma cada aviso por detrás del de delante con la pila recogida (12px)

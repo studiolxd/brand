@@ -278,6 +278,26 @@ export const ContratoCara: Story = {
   },
 };
 
+/** Test: el título del aviso lleva el tracking de un `<h2>` (−0,02em), fijado por `toast.title-letter-spacing`. */
+export const ContratoTrackingTitulo: Story = {
+  name: 'Test — el título del aviso lleva el tracking de un h2',
+  tags: ['!dev'],
+  render: () => <Button onClick={() => toast('Guardado')}>Lanzar</Button>,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Lanzar' }));
+    const medidas = await waitFor(() => {
+      const titulo = document.querySelector<HTMLElement>('.toast .alert__title');
+      if (!titulo) throw new Error('sin aviso');
+      const estilo = getComputedStyle(titulo);
+      if (!estilo.fontSize) throw new Error('aviso sin estilos');
+      return { tamano: parseFloat(estilo.fontSize), tracking: parseFloat(estilo.letterSpacing) };
+    });
+    await expect(medidas.tracking).toBeCloseTo(-0.02 * medidas.tamano, 3);
+    await despedirAvisos();
+  },
+};
+
 /**
  * Test: el rol lo pone la intención. `error` y `warning` interrumpen
  * (`alertdialog`); el resto informa sin interrumpir (`dialog`).

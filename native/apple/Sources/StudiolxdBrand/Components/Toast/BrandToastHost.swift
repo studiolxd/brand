@@ -46,11 +46,11 @@ public struct BrandToastCard: View {
         let fill = fill
         VStack(alignment: .leading, spacing: A.contentGap) {
             // El interlineado de CSS (`line-height` del título y de la descripción) como caja de línea entera: el título
-            // mide 16 × 1,3 = 20,8 y cada línea de la descripción 16 × 1,5 = 24, como en la web. El título es un `<h2>`
-            // en React y hereda de él el tracking de los títulos (`text.h2-letter-spacing`, −0,02 em).
+            // mide 16 × 1,3 = 20,8 y cada línea de la descripción 16 × 1,5 = 24, como en la web. El tracking del título es
+            // el del aviso (`toast.title-letter-spacing`, −0,02 em: el de un `<h2>`, que es lo que es el título en React).
             Text(item.title)
                 .brandLinedFont(size: A.titleFontSize, weight: A.titleFontWeight, lineHeight: A.titleLineHeight, halfLeading: true)
-                .tracking(BrandTextTokens.h2LetterSpacing * A.titleFontSize * scale)
+                .tracking(BrandToastTokens.titleLetterSpacing * A.titleFontSize * scale)
                 .foregroundStyle(fill.title)
                 .accessibilityAddTraits(.isHeader)
             if let description = item.description {
