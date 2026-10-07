@@ -1,6 +1,7 @@
 import { forwardRef, type ReactNode } from 'react';
 import './CheckboxField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useFieldOptional } from '../../constants/field-optional';
 import { useLabelHidden } from '../../constants/field-labels';
 import { Checkbox } from '../../atoms/Checkbox/Checkbox';
 import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
@@ -72,6 +73,7 @@ export const CheckboxField = forwardRef<HTMLElement, CheckboxFieldProps>(functio
 }: CheckboxFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
+  const showOptional = useFieldOptional(optional, required);
   const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
   const { id } = field;
 
@@ -83,7 +85,7 @@ export const CheckboxField = forwardRef<HTMLElement, CheckboxFieldProps>(functio
       className={className}
       layout="inline"
       label={label}
-      optional={optional}
+      optional={showOptional}
       optionalLabel={optionalLabel}
       labelHidden={labelHidden}
     >

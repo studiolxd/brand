@@ -1,5 +1,6 @@
 import { forwardRef, type ComponentProps, type ReactNode } from 'react';
 import { FormSizeContext, type FormSize } from '../../constants/form-size';
+import { FormMarkOptionalContext } from '../../constants/field-optional';
 import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 import './Form.css';
 
@@ -20,6 +21,14 @@ export interface FormProps extends Omit<ComponentProps<'form'>, 'children'> {
   alternativesLabel?: string;
   /** Talla de todos los campos y botones (32/40/48): `lg` en superficies públicas, `md` dentro de las aplicaciones. */
   size?: FormSize;
+  /**
+   * Marca lo opcional en todo el formulario (D74): cada `*Field` sin
+   * `required` pinta « (opcional)» tras la etiqueta, sin poner `optional`
+   * campo a campo. El `optional` de un campo sigue mandando: `optional={false}`
+   * la apaga en ese. Para formularios donde casi todo es obligatorio. Por
+   * defecto `false`: sin ella, nada cambia.
+   */
+  markOptional?: boolean;
   /** Acciones en bloque: los botones a todo el ancho, apilados, también en escritorio (acceso, registro…). */
   blockActions?: boolean;
   /** Mensaje de éxito que sustituye al formulario («Gracias — tu mensaje se ha enviado.»): texto anunciado (`role="status"`), sin caja. Con `success`, no se pintan campos ni acciones; `links` sí. */
@@ -35,32 +44,34 @@ export interface FormProps extends Omit<ComponentProps<'form'>, 'children'> {
  * producto (`FormField` para react-hook-form).
  */
 export const Form = forwardRef<HTMLFormElement, FormProps>(function Form(
-  { errors, actions, links, alternatives, alternativesLabel, captcha, size, blockActions = false, success, className, children, ...rest },
+  { errors, actions, links, alternatives, alternativesLabel, captcha, size, markOptional = false, blockActions = false, success, className, children, ...rest },
   ref,
 ) {
   const classes = ['form', size && size !== 'md' ? `form--${size}` : '', blockActions ? 'form--block-actions' : '', className].filter(Boolean).join(' ');
   return (
     <FormSizeContext.Provider value={size}>
-      <form ref={ref} className={classes} noValidate {...rest}>
-        {success && <p className="form__success" role="status">{success}</p>}
-        {!success && children && <div className="form__fields">{children}</div>}
-        {!success && captcha && <div className="form__captcha">{captcha}</div>}
-        {!success && errors && errors.length > 0 && (
-          <ul className="form__errors">
-            {errors.map((error) => (
-              <li key={error}><ErrorText as="span">{error}</ErrorText></li>
-            ))}
-          </ul>
-        )}
-        {!success && actions && <div className={['form__actions', blockActions ? 'form__actions--block' : ''].filter(Boolean).join(' ')}>{actions}</div>}
-        {links && <div className="form__links">{links}</div>}
-        {!success && alternatives && (
-          <div className="form__alternatives">
-            {alternativesLabel && <p className="form__alternatives-label">{alternativesLabel}</p>}
-            {alternatives}
-          </div>
-        )}
-      </form>
+      <FormMarkOptionalContext.Provider value={markOptional}>
+        <form ref={ref} className={classes} noValidate {...rest}>
+          {success && <p className="form__success" role="status">{success}</p>}
+          {!success && children && <div className="form__fields">{children}</div>}
+          {!success && captcha && <div className="form__captcha">{captcha}</div>}
+          {!success && errors && errors.length > 0 && (
+            <ul className="form__errors">
+              {errors.map((error) => (
+                <li key={error}><ErrorText as="span">{error}</ErrorText></li>
+              ))}
+            </ul>
+          )}
+          {!success && actions && <div className={['form__actions', blockActions ? 'form__actions--block' : ''].filter(Boolean).join(' ')}>{actions}</div>}
+          {links && <div className="form__links">{links}</div>}
+          {!success && alternatives && (
+            <div className="form__alternatives">
+              {alternativesLabel && <p className="form__alternatives-label">{alternativesLabel}</p>}
+              {alternatives}
+            </div>
+          )}
+        </form>
+      </FormMarkOptionalContext.Provider>
     </FormSizeContext.Provider>
   );
 });

@@ -1,6 +1,7 @@
 import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import './TextareaField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useFieldOptional } from '../../constants/field-optional';
 import { useLabelHidden } from '../../constants/field-labels';
 import { Textarea } from '../../atoms/Textarea/Textarea';
 import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
@@ -64,12 +65,13 @@ export const TextareaField = forwardRef<HTMLTextAreaElement, TextareaFieldProps>
 }: TextareaFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
+  const showOptional = useFieldOptional(optional, rest.required);
   // El `aria-describedby` del consumidor se suma al propio, como en
   // `InputField`: antes se pisaba y la pista del consumidor se perdía.
   const field = useFieldShell({ id, error, errorMessage, helperText, describedBy: ariaDescribedBy });
 
   return (
-    <FieldShell field={field} block="textarea-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="textarea-field" className={className} label={label} optional={showOptional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       <Textarea
         ref={ref}
         {...rest}

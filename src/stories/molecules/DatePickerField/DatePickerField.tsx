@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 import { useFormSize } from '../../constants/form-size';
+import { useFieldOptional } from '../../constants/field-optional';
 import { useLabelHidden } from '../../constants/field-labels';
 import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { DatePicker } from '../DatePicker/DatePicker';
@@ -46,11 +47,12 @@ export const DatePickerField = forwardRef<HTMLInputElement, DatePickerFieldProps
 }: DatePickerFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
+  const showOptional = useFieldOptional(optional, pickerProps.required);
   const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
   const { id } = field;
 
   return (
-    <FieldShell field={field} block="date-picker-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="date-picker-field" className={className} label={label} optional={showOptional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       <DatePicker
         calendarLabel={label}
         {...pickerProps}

@@ -3,6 +3,7 @@
 import { forwardRef, useImperativeHandle, useRef, useState, type ComponentPropsWithoutRef } from 'react';
 import './InputField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useFieldOptional } from '../../constants/field-optional';
 import { useLabelHidden } from '../../constants/field-labels';
 import { Input } from '../../atoms/Input/Input';
 import { Icon } from '../../atoms/Icon/Icon';
@@ -113,6 +114,7 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function
   const t = useBrandMessages('inputField', inputFieldEs);
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
+  const showOptional = useFieldOptional(optional, rest.required);
   // El `aria-describedby` que traiga el consumidor por `rest` (una pista suya,
   // un contador de caracteres…) se suma al propio: pisarlo lo dejaría mudo.
   const field = useFieldShell({ id, error, errorMessage, helperText, describedBy: rest['aria-describedby'] });
@@ -172,7 +174,7 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function
   );
 
   return (
-    <FieldShell field={field} block="input-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="input-field" className={className} label={label} optional={showOptional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       {isSearch ? (
         <div
           className={[

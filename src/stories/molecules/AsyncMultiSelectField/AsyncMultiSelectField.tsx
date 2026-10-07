@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import './AsyncMultiSelectField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useFieldOptional } from '../../constants/field-optional';
 import { useLabelHidden } from '../../constants/field-labels';
 import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { AsyncMultiSelect } from '../../atoms/AsyncMultiSelect/AsyncMultiSelect';
@@ -88,11 +89,12 @@ export const AsyncMultiSelectField = forwardRef<HTMLInputElement, AsyncMultiSele
 }: AsyncMultiSelectFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
+  const showOptional = useFieldOptional(optional, required);
   const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
   const { id } = field;
 
   return (
-    <FieldShell field={field} block="async-multi-select-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="async-multi-select-field" className={className} label={label} optional={showOptional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       <AsyncMultiSelect
         ref={ref}
         id={id}

@@ -2,6 +2,7 @@
 
 import { forwardRef } from 'react';
 import { useFormSize } from '../../constants/form-size';
+import { useFieldOptional } from '../../constants/field-optional';
 import { useLabelHidden } from '../../constants/field-labels';
 import {
   FieldRequiredText,
@@ -66,6 +67,7 @@ export const ColorPickerField = forwardRef<HTMLButtonElement, ColorPickerFieldPr
 }: ColorPickerFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
+  const showOptional = useFieldOptional(optional, required);
   const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
   const { id, labelId } = field;
   const requiredId = required ? requiredTextId(id) : undefined;
@@ -76,7 +78,7 @@ export const ColorPickerField = forwardRef<HTMLButtonElement, ColorPickerFieldPr
       block="color-picker-field"
       className={className}
       label={label}
-      optional={optional}
+      optional={showOptional}
       optionalLabel={optionalLabel}
       labelHidden={labelHidden}
       size={size}

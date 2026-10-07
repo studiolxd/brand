@@ -24,6 +24,7 @@ Con la etiqueta oculta y sin `placeholder` propio, el campo usa el texto de la e
 Se marca lo **opcional**, no lo obligatorio. En un formulario donde casi todo es obligatorio —el caso normal: se pide lo que hace falta—, lo que hay que señalar es la excepción, y llenar de asteriscos el resto solo añade ruido. Por eso la marca va con `optional`, que pinta « (opcional)» tras la etiqueta en la tinta apagada de la etiqueta (`label.optional-color`), al mismo tamaño.
 
 - **Es explícita.** Un campo sin `required` no la lleva solo: un buscador, un filtro o el correo del pie no son «opcionales» de ningún formulario, y marcarlos sería mentir. Se pone a mano en los campos que se pueden dejar vacíos de un formulario donde la mayoría no.
+- **O la reparte el formulario.** Dentro de un `Form markOptional`, todo `*Field` sin `required` la lleva solo: el formulario es el que sabe que sus campos son de un formulario. El `optional` del campo sigue mandando, y `optional={false}` la apaga en uno concreto (una casilla, donde no marcar ya es una respuesta). Ver la doc de `Form`.
 - **Va dentro de la etiqueta**, así que el lector de pantalla la lee como parte del nombre: «Teléfono (opcional)».
 - **No se combina con `required`.** Un campo es una cosa o la otra; lo obligatorio lo anuncia el `required` del control.
 - El texto sale de `field.optional` del catálogo (clave opcional; sin ella, «(opcional)»), y `optionalLabel` lo anula en un uso concreto.

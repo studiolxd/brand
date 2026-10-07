@@ -42,6 +42,10 @@ En un formulario donde casi todo es obligatorio, se marcan los pocos campos que 
 
 <Canvas of={FormStories.ConCamposOpcionales} />
 
+Cuando el formulario entero sigue ese criterio, `markOptional` lo dice una vez: todo `*Field` sin `required` lleva la marca sin escribir `optional` campo a campo. El `optional` de un campo sigue mandando —`optional={false}` la apaga en uno concreto, como una casilla, donde no marcar ya es una respuesta—. Sin `markOptional`, nada cambia.
+
+<Canvas of={FormStories.MarcaOpcionalEnTodo} />
+
 ## Lo que ya no es
 
 Antes el `Form` dibujaba un perímetro y separadores entre campos, y cada campo tapaba el fondo para que el hueco hiciera de línea. Era el formulario del DS anterior; se retiró el 2026-08-27. Los campos llevan su propio borde y el `Form` solo los separa con aire.

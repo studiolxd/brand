@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import './OtpField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useFieldOptional } from '../../constants/field-optional';
 import { useLabelHidden } from '../../constants/field-labels';
 import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { OtpInput } from '../../atoms/OtpInput/OtpInput';
@@ -72,11 +73,12 @@ export const OtpField = forwardRef<HTMLInputElement, OtpFieldProps>(function Otp
 }: OtpFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
+  const showOptional = useFieldOptional(optional, required);
   const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
   const { id } = field;
 
   return (
-    <FieldShell field={field} block="otp-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size} labelIdentified labelFor={`${id}-0`}>
+    <FieldShell field={field} block="otp-field" className={className} label={label} optional={showOptional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size} labelIdentified labelFor={`${id}-0`}>
       {/* La etiqueta nombra la primera celda (donde entra el foco) y, por
           aria-labelledby, el grupo: un solo nombre, no dos. */}
       <OtpInput

@@ -51,7 +51,10 @@ export interface FieldOptionalProps {
   /**
    * Pinta « (opcional)» tras la etiqueta, en la tinta apagada de la etiqueta.
    * Va dentro del `<label>`, así que el lector de pantalla la lee como parte
-   * del nombre del campo. No se combina con `required`. Por defecto `false`.
+   * del nombre del campo. No se combina con `required`. Sin valor, lo decide
+   * el `Form` que lo envuelva: con `markOptional`, todo campo sin `required`
+   * la lleva (D74); `optional={false}` la apaga en un campo concreto. Sin
+   * `Form markOptional`, por defecto `false`.
    */
   optional?: boolean;
   /**

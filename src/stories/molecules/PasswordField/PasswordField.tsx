@@ -1,5 +1,6 @@
 import { forwardRef, useState } from 'react';
 import { useFormSize } from '../../constants/form-size';
+import { useFieldOptional } from '../../constants/field-optional';
 import { useLabelHidden } from '../../constants/field-labels';
 import './PasswordField.css';
 import { Input } from '../../atoms/Input/Input';
@@ -98,6 +99,7 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(fu
 }, ref) {
   const t = useBrandMessages('passwordField', passwordFieldEs);
   const size = useFormSize(sizeProp);
+  const showOptional = useFieldOptional(optional, rest.required);
   const labelHidden = useLabelHidden(labelHiddenProp);
   // El `aria-describedby` del consumidor (o el que inyecta un `FormControl`)
   // se suma al propio, como en `InputField`; antes lo pisaba entero.
@@ -111,7 +113,7 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(fu
       block="password-field"
       className={className}
       label={label}
-      optional={optional}
+      optional={showOptional}
       optionalLabel={optionalLabel}
       labelHidden={labelHidden}
       size={size}

@@ -1,6 +1,7 @@
 import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import './NumberInputField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useFieldOptional } from '../../constants/field-optional';
 import { useLabelHidden } from '../../constants/field-labels';
 import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { NumberInput, type NumberInputCommitMode } from '../../atoms/NumberInput/NumberInput';
@@ -81,11 +82,12 @@ export const NumberInputField = forwardRef<HTMLInputElement, NumberInputFieldPro
 }: NumberInputFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
+  const showOptional = useFieldOptional(optional, rest.required);
   const field = useFieldShell({ id: idProp, error, errorMessage, helperText, describedBy: ariaDescribedBy });
   const { id } = field;
 
   return (
-    <FieldShell field={field} block="number-input-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="number-input-field" className={className} label={label} optional={showOptional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       <NumberInput
         ref={ref}
         {...rest}

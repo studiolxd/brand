@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import './SelectField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useFieldOptional } from '../../constants/field-optional';
 import { useLabelHidden } from '../../constants/field-labels';
 import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { Select, isSelectOptionGroup } from '../../atoms/Select/Select';
@@ -102,6 +103,7 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>(funct
 }: SelectFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
+  const showOptional = useFieldOptional(optional, required);
   const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
   const { id } = field;
 
@@ -119,7 +121,7 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>(funct
     : options;
 
   return (
-    <FieldShell field={field} block="select-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="select-field" className={className} label={label} optional={showOptional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       <Select
         ref={ref}
         id={id}

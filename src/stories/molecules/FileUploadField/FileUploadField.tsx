@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import './FileUploadField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useFieldOptional } from '../../constants/field-optional';
 import { useLabelHidden } from '../../constants/field-labels';
 import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { FileUpload } from '../../atoms/FileUpload/FileUpload';
@@ -50,11 +51,12 @@ export const FileUploadField = forwardRef<HTMLInputElement, FileUploadFieldProps
 }: FileUploadFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
+  const showOptional = useFieldOptional(optional, rest.required);
   const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
   const { id } = field;
 
   return (
-    <FieldShell field={field} block="file-upload-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="file-upload-field" className={className} label={label} optional={showOptional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       <FileUpload
         ref={ref}
         {...rest}

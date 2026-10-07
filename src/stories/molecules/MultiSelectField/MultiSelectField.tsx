@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import './MultiSelectField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useFieldOptional } from '../../constants/field-optional';
 import { useLabelHidden } from '../../constants/field-labels';
 import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { MultiSelect } from '../../atoms/MultiSelect/MultiSelect';
@@ -82,11 +83,12 @@ export const MultiSelectField = forwardRef<HTMLDivElement, MultiSelectFieldProps
 }: MultiSelectFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
+  const showOptional = useFieldOptional(optional, required);
   const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
   const { id } = field;
 
   return (
-    <FieldShell field={field} block="multi-select-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size} labelIdentified>
+    <FieldShell field={field} block="multi-select-field" className={className} label={label} optional={showOptional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size} labelIdentified>
       {/* El disparador es un `div` con `role="combobox"`: `htmlFor` no lo
           nombraría, así que la etiqueta lo nombra por `aria-labelledby`. */}
       <MultiSelect

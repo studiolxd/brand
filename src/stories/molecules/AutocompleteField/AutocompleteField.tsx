@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import './AutocompleteField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useFieldOptional } from '../../constants/field-optional';
 import { useLabelHidden } from '../../constants/field-labels';
 import { FieldShell, useFieldShell, type FieldOptionalProps } from '../_shared/FieldShell';
 import { Autocomplete } from '../../atoms/Autocomplete/Autocomplete';
@@ -91,11 +92,12 @@ export const AutocompleteField = forwardRef<HTMLInputElement, AutocompleteFieldP
 }: AutocompleteFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
+  const showOptional = useFieldOptional(optional, required);
   const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
   const { id } = field;
 
   return (
-    <FieldShell field={field} block="autocomplete-field" className={className} label={label} optional={optional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
+    <FieldShell field={field} block="autocomplete-field" className={className} label={label} optional={showOptional} optionalLabel={optionalLabel} labelHidden={labelHidden} size={size}>
       <Autocomplete
         ref={ref}
         id={id}

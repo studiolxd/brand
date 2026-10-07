@@ -102,6 +102,34 @@ export const ConCamposOpcionales: Story = {
   },
 };
 
+/**
+ * `markOptional`: el formulario marca solo lo opcional. Cada campo sin
+ * `required` lleva «(opcional)» sin poner `optional` campo a campo; la
+ * casilla de la newsletter la apaga con `optional={false}`, porque una casilla
+ * sin marcar ya es una respuesta.
+ */
+export const MarcaOpcionalEnTodo: Story = {
+  name: 'Marca de opcional en todo el formulario',
+  args: {
+    markOptional: true,
+    children: (
+      <>
+        <InputField id="form-mo-nombre" label="Nombre" autoComplete="name" required />
+        <InputField id="form-mo-email" label="Correo electrónico" type="email" autoComplete="email" required />
+        <InputField id="form-mo-telefono" label="Teléfono" type="tel" autoComplete="tel" />
+        <TextareaField id="form-mo-mensaje" label="Mensaje" required />
+        <CheckboxField id="form-mo-newsletter" label="Quiero recibir la newsletter" optional={false} />
+      </>
+    ),
+    actions: <Button variant="primary" type="submit">Enviar</Button>,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByLabelText('Teléfono (opcional)')).toBeInTheDocument();
+    await expect(canvasElement.querySelectorAll('.label__optional')).toHaveLength(1);
+  },
+};
+
 /** `blockActions`: botones y alternativas a todo el ancho, también en escritorio — el formulario de acceso. */
 export const AccionesEnBloque: Story = {
   args: { ...Completo.args, size: 'lg', blockActions: true },

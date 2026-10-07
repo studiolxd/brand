@@ -2,6 +2,7 @@
 
 import { forwardRef, useRef, type ReactNode } from 'react';
 import { useFormSize } from '../../constants/form-size';
+import { useFieldOptional } from '../../constants/field-optional';
 import { useLabelHidden } from '../../constants/field-labels';
 import {
   FieldRequiredText,
@@ -96,6 +97,7 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
 }: DropdownFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
+  const showOptional = useFieldOptional(optional, required);
   const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
   const { id } = field;
   const requiredId = required ? requiredTextId(id) : undefined;
@@ -112,7 +114,7 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
       modifiers={[inline && 'dropdown-field--inline', size !== 'md' && `dropdown-field--${size}`]}
       className={className}
       label={label}
-      optional={optional}
+      optional={showOptional}
       optionalLabel={optionalLabel}
       labelHidden={labelHidden}
       size={size}
