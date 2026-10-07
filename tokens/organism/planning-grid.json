@@ -36,7 +36,8 @@
     "footer-bg":                  { "$value": "{color.surface.secondary-on-light}","$type": "color",    "$description": "Fondo de las filas de totales" },
     "footer-font-weight":         { "$value": "{font-weight.emphasis}",           "$type": "number",    "$description": "Peso de las filas de totales" },
     "footer-color":               { "$value": "{color.text.on-light}",            "$type": "color",     "$description": "Color de las filas de totales" },
-    "over-color":                 { "$value": "{color.error-text-on-light}",      "$type": "color",     "$description": "Color de un resto negativo: hay más horas asignadas que disponibles" },
+    "over-bg":                    { "$value": "{color.error-fill}",               "$type": "color",     "$description": "Relleno de un resto negativo: hay más horas asignadas que disponibles. Relleno universal, igual en las dos superficies (sin par oscuro)" },
+    "over-color":                 { "$value": "{color.error-fill-text}",          "$type": "color",     "$description": "Tinta de un resto negativo, sobre su relleno de error" },
 
     "saving-gap":                 { "$value": "{spacing.1}",                      "$type": "dimension", "$description": "Aire entre el campo de un cruce en vuelo y su marca de guardado (el Spinner sm)" },
 
@@ -51,7 +52,6 @@
     "surface-dark-cell-readonly-color":     { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color de una celda que no se edita — surface-dark" },
     "surface-dark-cell-readonly-bg":        { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo de una celda que no se edita — surface-dark" },
     "surface-dark-footer-bg":               { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo de las filas de totales — surface-dark" },
-    "surface-dark-footer-color":            { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de las filas de totales — surface-dark" },
-    "surface-dark-over-color":              { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Color de un resto negativo — surface-dark" }
+    "surface-dark-footer-color":            { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de las filas de totales — surface-dark" }
   }
 }

@@ -123,15 +123,12 @@ export const TestEnVueloOscuro: Story = {
   tags: ['!dev'],
   parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   args: { rows: PROYECTOS, columns: SEMANAS, cells: HORAS },
-  // Sin la fila de resto: su total negativo en oscuro es el caso pendiente de
-  // `SuperficieOscura`, y aquí axe tiene que medir solo el cruce en vuelo.
   render: () => (
     <PlanningGrid
       rows={PROYECTOS}
       columns={SEMANAS}
       rowHeader="Proyecto"
       label="Planificación de Nuria Oliva"
-      showRemaining={false}
       onCellChange={() => {}}
       cells={HORAS.map((c) => (c.rowId === 'pr2' && c.columnKey === 's12' ? { ...c, pending: true } : c))}
     />
@@ -190,12 +187,8 @@ export const SuperficieOscura: Story = {
   name: 'En superficie oscura',
   args: { rows: PROYECTOS, columns: SEMANAS, cells: HORAS },
   render: () => <Rejilla showCapacity />,
-  // a11y pendiente de decisión (D16, D41): `color-contrast` del total que se pasa en el
-  // pie, en oscuro: #ff8585 sobre #4a4a4a, 3,77:1 a 14px (pide 4,5:1). El gris del pie
-  // es su banda (en claro, #f2f2f2): pasarlo al lienzo prusia lo confundiría con el
-  // cuerpo. Alternativa propuesta: el resto negativo como relleno `error-fill` con
-  // tinta `error-fill-text` (#ffffff sobre #b30000) en las dos superficies.
-  parameters: { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } }, surface: 'dark', chromatic: SOLO_OSCURO },
+  // El resto negativo del pie es un relleno de error (D63): se ve igual que en claro.
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
 };
 
 export const TestEscribirHoras: Story = {
