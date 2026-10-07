@@ -7,11 +7,118 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## [Sin publicar]
+## [51.0.0] — 2026-10-07
+
+> **Major (51.0.0).** Segunda vuelta de la auditoría: unificación de la API, convención de nombres de tokens,
+> subrayado con `text-decoration`, catálogo con respaldo castellano y paridad nativa de interlineado. **Casi todo lo que
+> se renombra sigue funcionando con su nombre viejo hasta la v52**, con un aviso en consola en desarrollo, así que el
+> bump no rompe la compilación salvo en lo marcado **(sin alias)**. Para migrar:
+> (1) props renombradas, tabla «Props»; (2) tokens renombrados, tabla «Tokens» —un alias viejo solo sirve para
+> LEER: si la app **sobrescribe** un token por su nombre viejo, el componente ya no lo ve—; (3) quitar `Fieldset
+> weight`; (4) `as` de `ListItem`/`DescriptionTerm`/`DescriptionDetails` solo acepta etiquetas; (5) opcional: montar
+> `BrandMessagesProvider fallback="es"` en apps solo en castellano y pasar a `satisfies CompleteBrandMessages` en las
+> multidioma.
+
+### Breaking (sin alias)
+
+- **`Fieldset weight` se retira.** El peso de la leyenda lo da `level` (los tokens `text.h<N>`), como en `Heading`. Sin
+  sustituto. Nadie en la suite la usaba.
+- **`as` de `ListItem`** pasa a `'li' | 'div'`, y el de `DescriptionTerm`/`DescriptionDetails` a `'dt' | 'div'` /
+  `'dd' | 'div'` (antes cualquier componente). Para sustituir la raíz por un componente, `render`.
+- **`className` de `NotificationPanel`** va a la campana (antes al panel); el de **`ConfirmDialog`** al panel del
+  diálogo (antes al pie); el de **`ColorPicker`** a la muestra cuando la pinta él y al panel con `trigger`/`anchor`
+  propio (antes al contenedor). Regla general: `className` va al disparador si lo pinta el componente y al panel si el
+  disparador es tuyo.
+- **Tokens retirados:** `annotation-thread.acknowledged-opacity`, `annotation-thread.resolved-opacity`,
+  `planning-grid.pending-opacity`, `planning-grid.surface-dark-over-color`, `heatmap.legend-swatch-gap`. Lo atenuado
+  por opacidad pasa a tinta plena con su marca (etiqueta, `Spinner`).
+- **Subrayado con `text-decoration`** (regla 7 reescrita): los iconos de un enlace o de `Button text` ya no se
+  subrayan, y la línea corta las colas (`skip-ink`). Se imprime y se mantiene en alto contraste. Quien sobrescribiera
+  el subrayado con `box-shadow` debe pasar a `text-decoration-*`; los tokens `*-underline-width` siguen siendo el
+  grosor y los nuevos `*-decoration-line` (`underline`/`none`) lo encienden o apagan.
+- **Dist:** 19 entradas (`pagination`, `spinner`, `close-button`…) reexportan un trozo compartido y su CSS cambia de
+  nombre interno. Las subrutas de import no cambian.
+
+### Props (con alias hasta la v52)
+
+| Componente | Antes | Después |
+|---|---|---|
+| `Alert`, `Banner`, `Tag`, `NumberBadge`, `ProgressBar` | `variant` (color) | `tone` (`AlertTone`, `BannerTone`, `TagTone`…) |
+| `Card` | `color` | `tone` (`variant` sigue siendo la maqueta) |
+| `CalendarPlanner` `events[]`, `ProjectCard` `tags[]` | `variant` | `tone` |
+| `Tag`, `NumberBadge`, `StepMarker` (y `Timeline`, `Steps`) | `danger` | `error` |
+| `Text` | `tone="destructive"` | `tone="error"` para estados; `destructive` se queda para avisos de acción |
+| `Paragraph` | `size="small" \| "default" \| "large"` | `size="sm" \| "md" \| "lg"` |
+| `Logo` (y `SiteHeader logoSize`) | `size="xxl"` | `size="2xl"` |
+| `Modal`, `ImageCropDialog` | `onClose()` | `onOpenChange(open)` |
+| `Input`, `NumberInput`, `Pagination`, `Breadcrumb`, `FilterBar`, `TableOfContents`, `Sparkline`, `FileUpload` | `ariaLabel` | `aria-label` (en `FileUpload`, una sola prop; el input la toma) |
+| `DataTable` `paginationLabels` | `{ ariaLabel }` | `{ 'aria-label' }` |
+| `Pagination`, `PrevNextNav`, `CalendarRoster` | `linkComponent={Link}` | `renderLink={(props) => <Link {...props} />}` (desde un componente de cliente) |
+| `Tooltip` | `disabledTrigger` | nada: el disparador deshabilitado del DS recibe foco solo |
+
+En nativo (SwiftUI/Compose), los mismos cambios en `Tag`, `Banner`, `Paragraph` y `Text`, con `@available(*,
+deprecated, renamed:)` / `@Deprecated(ReplaceWith)`; y `brandTextStyle` obsoleto en favor de `brandLinedFont` /
+`brandCssTextStyle` + `BrandBasicText`.
+
+### Tokens (con alias hasta la v52)
+
+Convención nueva, `<componente>-<talla>-<parte>-<estado>-<propiedad>` (regla 13 de `CLAUDE.md` y Foundations →
+Nombres de tokens): estado antes de la propiedad, `bg` y no `background`, `max-width` y no `width-max`,
+`width`/`height` y no `inline-size`/`block-size`. 48 renombrados; la tabla completa, en Foundations → Nombres de
+tokens. Los más tocados por las apps: `--modal-width-max` → `--modal-max-width`, `--modal-inline-size` →
+`--modal-width`, `--sheet-inline-size` → `--sheet-width`, `--checkbox-bg-checked` → `--checkbox-checked-bg`,
+`--text-background` → `--text-bg`.
+<!-- COLOR-BG -->
+
+### Nuevo
+
+- **Catálogo con respaldo castellano** (`BrandMessages`): todas las claves son opcionales; lo que falte sale en
+  castellano y avisa en desarrollo, una vez por clave. `CompleteBrandMessages` para el modo estricto
+  (`messages satisfies CompleteBrandMessages`). `BrandMessagesProvider fallback="es"` silencia los avisos en apps solo
+  en castellano. Cada componente lleva solo su espacio de respaldo (+0,3–0,65 KB gzip por entrada).
+- **`FieldShell`**: los 21 `*Field` comparten armazón. `aria-describedby` suma siempre el del consumidor (error →
+  ayuda), `required` en todos los que lo admiten (`CheckboxField`, `MultiSelectField`, `OtpField`, `DatePicker`,
+  `DatePickerField`, `DateTimeField`, `ColorPickerField`, `DropdownField`), `labelHidden` en `RadioField` y
+  `RecurrenceField`, ayuda y error en `RecurrenceField`.
+- **Marca de opcional:** `optional`/`optionalLabel` en 17 `*Field` (« (opcional)» tras la etiqueta, desde el
+  catálogo `field.optional`) y `Form markOptional` para marcar todos los no obligatorios. También en los cinco campos
+  nativos.
+- **Obligatorio en disparadores-botón** (`ColorPickerField`, `DropdownField`): «obligatorio» en la descripción del
+  disparador (`field.required`); `aria-required` solo donde ARIA lo admite.
+- **`Fieldset legendHidden`.**
+- **`Heatmap scale="diverging"`** con `midpoint` y `divergingDirection`; la leyenda es una tira continua.
+- **`focusableWhenDisabled`** en `Button`, `CloseButton`, `DotsButton`, `CopyButton` y `Toggle`; el `Tooltip` sobre un
+  control deshabilitado ya no envuelve.
+- **Nativo:** API pública de texto con la caja de línea de CSS (`brandLinedFont`, `BrandBasicText`,
+  `brandCssLineBox`, `brandCssTextStyle`); `required` en `BrandDatePickerField`; `optional` en cinco campos.
+
+### Cambios visibles
+
+- Nativo: todo texto mide la caja de línea de CSS (D52). El `h1` pasa de 50 a 44 pt en iOS y de 58,7 a 44 dp en
+  Android; `PageIntro` de 178 a 160 dp en Android; `Tag` de 26 a 22 pt en iOS. Los controles de alto fijo no cambian.
+  Un título de varias líneas con interlineado ajustado sigue midiendo algo más en iOS (declarado).
+- Nativo: `Banner` de iOS mide como la web (el filete ocupa sitio); `Toast` cuadra al medio punto.
+- `Alert`: el título lleva el tracking de `h2` (−0,02 em), como `Toast`.
+- `Button text`: 20 px de alto (antes 21: el `padding-top: 1px` del navegador).
+- Enlace dentro de texto corrido: subrayado en reposo y sin subrayar en hover, en las dos superficies.
+- `Link tone="accent-1"` solo se aplica en oscuro; en claro cae al tono por defecto.
+- `AnnotationThread`: hilo resuelto y reconocido con tinta plena; letra menor en `muted` (antes un gris fuera de
+  paleta).
+- `PlanningGrid`: la celda en vuelo lleva `Spinner`; el resto negativo del pie es un relleno de error.
+- `Kbd` en oscuro: fondo gris opaco (antes un velo blanco).
+- Interlineados que heredaban el 1,15 de `normalize.css` pasan a token: «+N más» de `CalendarPlanner` y la fila de
+  `ConversationList` se aprietan unos 2 px.
+
+### Accesibilidad y calidad
+
+- La auditoría de axe corre también en oscuro (`storybook-dark`). Exclusión global solo de los centinelas de foco de
+  Base UI.
+- `TableRow` ya no emite `aria-selected` fuera de un `grid`.
+- `isDevelopment()` leía `globalThis.process` y daba `true` en producción en el navegador; corregido.
+
+### Otros cambios
 
 - `StarRating`: si falta el texto, no emite un `aria-label` vacío en la escala de solo lectura ni en el grupo de radios.
-- `Tooltip` con `disabledTrigger`: el envoltorio enfocable lleva `role="group"`, `aria-disabled` y toma el nombre del
-  control que envuelve. No cambia nada visible.
 - `ConfirmDialog`: el reinicio del estado pasa del efecto de cierre a la apertura. Ya no se ve vaciarse el campo de la
   frase durante la animación de salida; tests nuevos de cerrar y reabrir.
 - Tokens: `switcher.lg-track-width` apunta a `{size-component.lg}` en lugar de `3rem`. Valor idéntico en todas las
@@ -39,8 +146,8 @@ para breaking changes.
   el rol, el nombre y la orientación los gobierna el componente y se descartan aunque lleguen sin tipos.
 - `EmbedFrame`: prop nueva `device` (`'mobile' | 'tablet' | 'desktop'`, por defecto `'desktop'`; minor), el ancho
   del dispositivo que simula: 375 px y 768 px, centrado y sin pasar del hueco; escritorio llena el contenedor. Sin
-  atributo `style`: modificadores `embed-frame--mobile|tablet`. Tokens nuevos `embed-frame.device-mobile-inline-size`
-  (`375px`) y `embed-frame.device-tablet-inline-size` (→ `{breakpoint.md}`).
+  atributo `style`: modificadores `embed-frame--mobile|tablet`. Tokens nuevos `embed-frame.device-mobile-width`
+  (`375px`) y `embed-frame.device-tablet-width` (→ `{breakpoint.md}`).
 
 ## [50.0.0] — 2026-10-07
 
