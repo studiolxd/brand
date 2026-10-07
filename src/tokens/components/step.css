@@ -27,8 +27,8 @@
   --step-tone-support-1-color: var(--color-text-on-light); /** Tinta sobre support-1 */
   --step-tone-support-2-bg: var(--color-support-2); /** Relleno tono support-2 (cayenne) */
   --step-tone-support-2-color: var(--color-text-on-light); /** Tinta sobre support-2 */
-  --step-tone-danger-bg: var(--color-error-fill); /** Relleno tono danger */
-  --step-tone-danger-color: var(--color-error-fill-text); /** Tinta sobre danger */
+  --step-tone-error-bg: var(--color-error-fill); /** Relleno tono error */
+  --step-tone-error-color: var(--color-error-fill-text); /** Tinta sobre error */
   --step-tone-success-bg: var(--color-success-fill); /** Relleno tono success */
   --step-tone-success-color: var(--color-success-fill-text); /** Tinta sobre success */
   --step-tone-neutral-bg: var(--color-surface-inverse-on-light); /** Relleno tono neutral (gris oscuro) */

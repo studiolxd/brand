@@ -29,15 +29,22 @@ html.dark,
   --floating-dock-panel-block-size: var(--floating-dock-panel-height); /* obsoleto: usar --floating-dock-panel-height */
   --loading-state-min-block-size: var(--loading-state-min-height); /* obsoleto: usar --loading-state-min-height */
   --loading-state-sm-min-block-size: var(--loading-state-sm-min-height); /* obsoleto: usar --loading-state-sm-min-height */
+  --logo-height-xxl: var(--logo-height-2xl); /* obsoleto: usar --logo-height-2xl */
   --modal-width-max: var(--modal-max-width); /* obsoleto: usar --modal-max-width */
   --modal-inline-size: var(--modal-width); /* obsoleto: usar --modal-width */
+  --number-badge-danger-bg: var(--number-badge-error-bg); /* obsoleto: usar --number-badge-error-bg */
+  --number-badge-danger-color: var(--number-badge-error-color); /* obsoleto: usar --number-badge-error-color */
   --otp-input-cell-inline-size: var(--otp-input-cell-width); /* obsoleto: usar --otp-input-cell-width */
   --password-field-toggle-color-hover: var(--password-field-toggle-hover-color); /* obsoleto: usar --password-field-toggle-hover-color */
   --slider-control-block-size: var(--slider-control-height); /* obsoleto: usar --slider-control-height */
+  --step-tone-danger-bg: var(--step-tone-error-bg); /* obsoleto: usar --step-tone-error-bg */
+  --step-tone-danger-color: var(--step-tone-error-color); /* obsoleto: usar --step-tone-error-color */
   --switcher-track-bg-checked: var(--switcher-track-checked-bg); /* obsoleto: usar --switcher-track-checked-bg */
   --table-actions-inline-size: var(--table-actions-width); /* obsoleto: usar --table-actions-width */
   --tabs-trigger-pill-bg-active: var(--tabs-trigger-pill-active-bg); /* obsoleto: usar --tabs-trigger-pill-active-bg */
   --tabs-trigger-pill-color-active: var(--tabs-trigger-pill-active-color); /* obsoleto: usar --tabs-trigger-pill-active-color */
+  --tag-danger-bg: var(--tag-error-bg); /* obsoleto: usar --tag-error-bg */
+  --tag-danger-color: var(--tag-error-color); /* obsoleto: usar --tag-error-color */
   --text-background: var(--text-bg); /* obsoleto: usar --text-bg */
   --typing-indicator-dot-opacity-active: var(--typing-indicator-dot-active-opacity); /* obsoleto: usar --typing-indicator-dot-active-opacity */
   --calendar-year-grid-min-inline-size: var(--calendar-year-grid-min-width); /* obsoleto: usar --calendar-year-grid-min-width */

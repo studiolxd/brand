@@ -27,8 +27,8 @@
   --tag-warning-bg: var(--color-warning-fill); /** Aviso — relleno universal del rol de feedback. Es el amarillo de siempre, pero llega por el rol, no por la marca */
   --tag-success-bg: var(--color-success-fill); /** Éxito — relleno universal del sistema */
   --tag-success-color: var(--color-success-fill-text); /** Éxito — contenido sobre el relleno */
-  --tag-danger-bg: var(--color-error-fill); /** Peligro — relleno universal del sistema */
-  --tag-danger-color: var(--color-error-fill-text); /** Peligro — contenido sobre el relleno */
+  --tag-error-bg: var(--color-error-fill); /** Error — relleno universal del sistema */
+  --tag-error-color: var(--color-error-fill-text); /** Error — contenido sobre el relleno */
   --tag-warning-color: var(--color-warning-fill-text); /** Aviso — contenido sobre el relleno: el prusia (11,17:1, AAA) */
 }
 

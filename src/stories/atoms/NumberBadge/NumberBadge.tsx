@@ -56,13 +56,11 @@ export function NumberBadge({
     warnDeprecated('NumberBadge', 'variant="danger"', '`tone="error"`');
     tone = 'error';
   }
-  // La clase BEM del rojo sigue siendo `--danger` (interna); el nombre público es `error`.
-  const modifier = tone === 'error' ? 'danger' : tone;
   const label = count > max ? `${max}+` : String(count);
   const hidden = ariaHidden === true || ariaHidden === 'true';
   return (
     <span
-      className={['number-badge', `number-badge--${modifier}`, className].filter(Boolean).join(' ')}
+      className={['number-badge', `number-badge--${tone}`, className].filter(Boolean).join(' ')}
       aria-hidden={hidden || undefined}
       // Un contador decorativo no se nombra ni se reanuncia: ya lo dice quien lo lleva
       aria-label={hidden ? undefined : (ariaLabel ?? label)}

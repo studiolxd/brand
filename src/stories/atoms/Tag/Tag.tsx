@@ -50,10 +50,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(function Tag({
   ...rest
 }, ref) {
   const tone = resolveTagTone('Tag', toneProp, variant);
-  // La clase BEM del rojo sigue siendo `tag--danger` (y sus tokens,
-  // `tag.danger-*`): es interna; el nombre público es `error`.
-  const modifier = tone === 'error' ? 'danger' : tone;
-  const classes = ['tag', `tag--${modifier}`, className ?? ''].filter(Boolean).join(' ');
+  const classes = ['tag', `tag--${tone}`, className ?? ''].filter(Boolean).join(' ');
   return (
     <span ref={ref} className={classes} {...rest}>
       {children}

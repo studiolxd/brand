@@ -55,7 +55,7 @@
   color: var(--tag-success-color);
 }
 
-.tag--danger {
-  background-color: var(--tag-danger-bg);
-  color: var(--tag-danger-color);
+.tag--error {
+  background-color: var(--tag-error-bg);
+  color: var(--tag-error-color);
 }

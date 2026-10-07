@@ -31,7 +31,7 @@
     "warning-color": { "$value": "{color.warning-fill-text}", "$type": "color", "$description": "Aviso — contenido sobre el relleno: el prusia (11,17:1, AAA)" },
     "success-bg":    { "$value": "{color.success-fill}",     "$type": "color", "$description": "Éxito — relleno universal del sistema" },
     "success-color": { "$value": "{color.success-fill-text}", "$type": "color", "$description": "Éxito — contenido sobre el relleno" },
-    "danger-bg":     { "$value": "{color.error-fill}",       "$type": "color", "$description": "Peligro — relleno universal del sistema" },
-    "danger-color":  { "$value": "{color.error-fill-text}",  "$type": "color", "$description": "Peligro — contenido sobre el relleno" }
+    "error-bg":     { "$value": "{color.error-fill}",       "$type": "color", "$description": "Error — relleno universal del sistema", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["tag.danger-bg"] } } },
+    "error-color":  { "$value": "{color.error-fill-text}",  "$type": "color", "$description": "Error — contenido sobre el relleno", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["tag.danger-color"] } } }
   }
 }

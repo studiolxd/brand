@@ -1260,10 +1260,10 @@ public enum BrandTagTokens {
     public static let successBg: Color = Color(brandHex: 0x006616)
     /// Token `tag.success-color` — Éxito — contenido sobre el relleno
     public static let successColor: Color = Color(brandHex: 0xFFFFFF)
-    /// Token `tag.danger-bg` — Peligro — relleno universal del sistema
-    public static let dangerBg: Color = Color(brandHex: 0xB30000)
-    /// Token `tag.danger-color` — Peligro — contenido sobre el relleno
-    public static let dangerColor: Color = Color(brandHex: 0xFFFFFF)
+    /// Token `tag.error-bg` — Error — relleno universal del sistema
+    public static let errorBg: Color = Color(brandHex: 0xB30000)
+    /// Token `tag.error-color` — Error — contenido sobre el relleno
+    public static let errorColor: Color = Color(brandHex: 0xFFFFFF)
 }
 
 /// Tokens del componente `alert` (`tokens/**/alert.json`). Un token con par `surface-dark-*` (o que lo hereda) es un `Color` dinámico.

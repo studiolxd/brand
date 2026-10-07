@@ -17,7 +17,7 @@ El color se organiza en **tres capas**, y cada una solo puede apuntar a la anter
 |---|---|---|
 | **Primitivos** | Los valores crudos: la paleta de marca, los neutrales y los colores de sistema | Solo las capas de arriba. Ningún componente los referencia |
 | **Semánticos** | Un *rol* con nombre: `primary`, `error-fill`, `text-on-dark`, `background-light` | Los componentes, siempre |
-| **Componente** | `--button-primary-bg`, `--tag-danger-color`… | El CSS de cada componente |
+| **Componente** | `--button-primary-bg`, `--tag-error-color`… | El CSS de cada componente |
 
 La regla que lo sostiene: **un componente nunca nombra un color, nombra un rol**. Si mañana el rojo de error cambia, cambia en un sitio. Toda esta página se genera a partir de los ficheros de `tokens/color/`: no hay un solo valor escrito a mano.
 

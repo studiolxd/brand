@@ -50,8 +50,8 @@
   inset-block-start: var(--floating-dock-badge-offset);
   inset-inline-end: var(--floating-dock-badge-offset);
   translate: 50% -50%;
-  --number-badge-danger-bg: var(--floating-dock-badge-fill);
-  --number-badge-danger-color: var(--floating-dock-badge-color);
+  --number-badge-error-bg: var(--floating-dock-badge-fill);
+  --number-badge-error-color: var(--floating-dock-badge-color);
 }
 
 /* ── Panel ───────────────────────────────────────────────────── */

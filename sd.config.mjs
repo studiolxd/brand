@@ -982,7 +982,7 @@ console.log('✔︎ src/tokens/surface-public.css');
   const toPx = (value) => {
     const rem = value.match(/^(-?[\d.]+)rem$/);
     if (rem) return `${Number(rem[1]) * ROOT_FONT_SIZE}px`;
-    // Un token del correo puede resolver a un `calc()` (p. ej. la talla xxl
+    // Un token del correo puede resolver a un `calc()` (p. ej. la talla 2xl
     // del logotipo, `calc(64px * 4 / 3)`): solo lleva número, `px`, `*` y `/`,
     // así que basta evaluarlo a mano — Outlook no resuelve `calc()` y el
     // correo necesita el número ya hecho.

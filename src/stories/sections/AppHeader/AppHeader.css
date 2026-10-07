@@ -49,7 +49,7 @@
   --logo-height-md:  var(--app-header-content-height);
   --logo-height-lg:  var(--app-header-content-height);
   --logo-height-xl:  var(--app-header-content-height);
-  --logo-height-xxl: var(--app-header-content-height);
+  --logo-height-2xl: var(--app-header-content-height);
 }
 /* También en hover: la regla de hover de la base (`a:where():hover`, 0-1-0)
    empata con esta clase y ganaría por orden de carga. */

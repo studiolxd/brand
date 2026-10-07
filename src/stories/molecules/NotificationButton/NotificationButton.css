@@ -13,6 +13,6 @@
   inset-block-start: var(--notification-button-badge-offset);
   inset-inline-end: var(--notification-button-badge-offset);
   translate: 50% -50%;
-  --number-badge-danger-bg: var(--notification-button-badge-fill);
-  --number-badge-danger-color: var(--notification-button-badge-color);
+  --number-badge-error-bg: var(--notification-button-badge-fill);
+  --number-badge-error-color: var(--notification-button-badge-color);
 }

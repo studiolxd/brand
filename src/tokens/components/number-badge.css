@@ -20,8 +20,8 @@
   --number-badge-support-1-color: var(--color-text-on-light); /** Texto sobre support-1 */
   --number-badge-support-2-bg: var(--color-support-2); /** Fondo support-2 (cayenne) */
   --number-badge-support-2-color: var(--color-text-on-light); /** Texto sobre support-2 */
-  --number-badge-danger-bg: var(--color-error-fill); /** Fondo danger (red) */
-  --number-badge-danger-color: var(--color-error-fill-text); /** Texto sobre danger */
+  --number-badge-error-bg: var(--color-error-fill); /** Fondo error (rojo) */
+  --number-badge-error-color: var(--color-error-fill-text); /** Texto sobre error */
   --number-badge-success-bg: var(--color-success-fill); /** Fondo success (green) */
   --number-badge-success-color: var(--color-success-fill-text); /** Texto sobre success */
   --number-badge-neutral-bg: var(--color-surface-inverse-on-light); /** Fondo neutral (dark grey) */

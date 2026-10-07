@@ -76,4 +76,15 @@ export const TOKEN_RENAMES_V51 = {
   'site-search.ghost-section-inline-size': 'site-search.ghost-section-width',
   'site-search.ghost-title-inline-size': 'site-search.ghost-title-width',
   'site-search.ghost-url-inline-size': 'site-search.ghost-url-width',
+
+  // El vocabulario de las props de la v51 llega a los tokens: el tono rojo es
+  // `error` (nunca `danger`; `destructive` es otra cosa, una acción) y las
+  // tallas se escriben `2xl`, nunca `xxl`.
+  'tag.danger-bg': 'tag.error-bg',
+  'tag.danger-color': 'tag.error-color',
+  'number-badge.danger-bg': 'number-badge.error-bg',
+  'number-badge.danger-color': 'number-badge.error-color',
+  'step.tone-danger-bg': 'step.tone-error-bg',
+  'step.tone-danger-color': 'step.tone-error-color',
+  'logo.height-xxl': 'logo.height-2xl',
 };

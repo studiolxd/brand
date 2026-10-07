@@ -66,7 +66,7 @@ function pngSize(file) {
 const px = (name) => {
   const value = tokens[name];
   if (value === undefined) throw new Error(`Token desconocido: ${name}`);
-  /* `--email-logo-height` puede resolver a un `calc()` (p. ej. la talla xxl del
+  /* `--email-logo-height` puede resolver a un `calc()` (p. ej. la talla 2xl del
      logotipo, `calc(64px * 4 / 3)`): solo lleva número, `px`, `*` y `/`, así
      que basta evaluar la expresión a mano en vez de tirar de `eval`. */
   const calc = value.match(/^calc\(([\d.\s*/px]+)\)$/);
