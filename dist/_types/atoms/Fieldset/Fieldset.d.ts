@@ -16,7 +16,9 @@ export interface FieldsetProps {
     id?: string;
     /** Deshabilita todos los controles descendientes en un solo punto. */
     disabled?: boolean;
+    /** Ids de ayuda/error que describen el grupo entero (lo pone el campo compuesto que lo use). */
+    'aria-describedby'?: string;
     children: React.ReactNode;
 }
-export declare function Fieldset({ legend, level, weight, size, className, id, disabled, children, }: FieldsetProps): import("react/jsx-runtime").JSX.Element;
+export declare function Fieldset({ legend, level, weight, size, className, id, disabled, 'aria-describedby': ariaDescribedBy, children, }: FieldsetProps): import("react/jsx-runtime").JSX.Element;
 export {};

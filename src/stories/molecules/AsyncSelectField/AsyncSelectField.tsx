@@ -1,11 +1,10 @@
-import { forwardRef, useId } from 'react';
+import { forwardRef } from 'react';
 import './AsyncSelectField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { Label } from '../../atoms/Label/Label';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import { AsyncSelect } from '../../atoms/AsyncSelect/AsyncSelect';
 import type { AsyncSelectOption } from '../../atoms/AsyncSelect/AsyncSelect';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export type { AsyncSelectOption };
 
@@ -85,19 +84,11 @@ export const AsyncSelectField = forwardRef<HTMLInputElement, AsyncSelectFieldPro
 }: AsyncSelectFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
-  const generatedId = useId();
-  const id = idProp ?? generatedId;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error
-  const hasError = error || !!errorMessage;
-
-  const containerClass = ['async-select-field', className].filter(Boolean).join(' ');
+  const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
+  const { id } = field;
 
   return (
-    <div className={containerClass}>
-      <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
+    <FieldShell field={field} block="async-select-field" className={className} label={label} labelHidden={labelHidden} size={size}>
       <AsyncSelect
         ref={ref}
         id={id}
@@ -112,20 +103,14 @@ export const AsyncSelectField = forwardRef<HTMLInputElement, AsyncSelectFieldPro
         size={size}
         debounceMs={debounceMs}
         required={required}
-        error={hasError}
+        error={field.hasError}
         emptyMessage={emptyMessage}
         loadingLabel={loadingLabel}
         clearLabel={clearLabel}
         container={container}
-        aria-describedby={describedBy}
+        aria-describedby={field.describedBy}
         onBlur={onBlur}
       />
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="async-select-field__helper">{helperText}</span>
-      )}
-    </div>
+    </FieldShell>
   );
 });

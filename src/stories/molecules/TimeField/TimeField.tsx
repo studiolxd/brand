@@ -1,11 +1,10 @@
-import { forwardRef, useId } from 'react';
+import { forwardRef } from 'react';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { Label } from '../../atoms/Label/Label';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import { TimeSelect } from '../../atoms/TimeSelect/TimeSelect';
 import type { TimeValue } from '../../atoms/TimeSelect/TimeSelect';
 import './TimeField.css';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface TimeFieldProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
@@ -78,19 +77,13 @@ export const TimeField = forwardRef<HTMLButtonElement, TimeFieldProps>(function 
 }: TimeFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
-  const generatedId = useId();
-  const id = idProp ?? generatedId;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error, como en el resto de campos
-  const hasError = error || !!errorMessage;
+  const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
+  const { id } = field;
 
   return (
-    <div className={['time-field', className].filter(Boolean).join(' ')}>
+    <FieldShell field={field} block="time-field" className={className} label={label} labelHidden={labelHidden} size={size} labelIdentified>
       {/* El control son dos desplegables: la etiqueta nombra al grupo, y cada
           desplegable conserva el suyo (Horas / Minutos). */}
-      <Label id={`${id}-label`} htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
       <TimeSelect
         ref={ref}
         id={id}
@@ -101,20 +94,14 @@ export const TimeField = forwardRef<HTMLButtonElement, TimeFieldProps>(function 
         disabled={disabled}
         readOnly={readOnly}
         required={required}
-        error={hasError}
+        error={field.hasError}
         hoursLabel={hoursLabel}
         minutesLabel={minutesLabel}
-        aria-labelledby={`${id}-label`}
-        aria-describedby={describedBy}
+        aria-labelledby={field.labelId}
+        aria-describedby={field.describedBy}
         onChange={onChange}
         onBlur={onBlur}
       />
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="time-field__helper">{helperText}</span>
-      )}
-    </div>
+    </FieldShell>
   );
 });

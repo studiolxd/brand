@@ -1,11 +1,10 @@
-import { forwardRef, useId } from 'react';
+import { forwardRef } from 'react';
 import './AutocompleteField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { Label } from '../../atoms/Label/Label';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import { Autocomplete } from '../../atoms/Autocomplete/Autocomplete';
 import type { AutocompleteOption } from '../../atoms/Autocomplete/Autocomplete';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export type { AutocompleteOption };
 
@@ -90,19 +89,11 @@ export const AutocompleteField = forwardRef<HTMLInputElement, AutocompleteFieldP
 }: AutocompleteFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
-  const generatedId = useId();
-  const id = idProp ?? generatedId;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error
-  const hasError = error || !!errorMessage;
-
-  const containerClass = ['autocomplete-field', className].filter(Boolean).join(' ');
+  const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
+  const { id } = field;
 
   return (
-    <div className={containerClass}>
-      <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
+    <FieldShell field={field} block="autocomplete-field" className={className} label={label} labelHidden={labelHidden} size={size}>
       <Autocomplete
         ref={ref}
         id={id}
@@ -121,17 +112,11 @@ export const AutocompleteField = forwardRef<HTMLInputElement, AutocompleteFieldP
         size={size}
         required={required}
         maxLength={maxLength}
-        error={hasError}
+        error={field.hasError}
         container={container}
-        aria-describedby={describedBy}
+        aria-describedby={field.describedBy}
         onBlur={onBlur}
       />
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="autocomplete-field__helper">{helperText}</span>
-      )}
-    </div>
+    </FieldShell>
   );
 });

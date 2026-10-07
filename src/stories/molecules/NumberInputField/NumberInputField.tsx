@@ -1,10 +1,9 @@
-import { forwardRef, useId, type ComponentPropsWithoutRef } from 'react';
+import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import './NumberInputField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { Label } from '../../atoms/Label/Label';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import { NumberInput, type NumberInputCommitMode } from '../../atoms/NumberInput/NumberInput';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface NumberInputFieldProps
   extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue' | 'onChange'> {
@@ -75,21 +74,16 @@ export const NumberInputField = forwardRef<HTMLInputElement, NumberInputFieldPro
   className,
   onChange,
   onEmpty,
+  'aria-describedby': ariaDescribedBy,
   ...rest
 }: NumberInputFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
-  const generatedId = useId();
-  const id = idProp ?? generatedId;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error, como en el resto de campos
-  const hasError = error || !!errorMessage;
+  const field = useFieldShell({ id: idProp, error, errorMessage, helperText, describedBy: ariaDescribedBy });
+  const { id } = field;
 
   return (
-    <div className={['number-input-field', className].filter(Boolean).join(' ')}>
-      <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
+    <FieldShell field={field} block="number-input-field" className={className} label={label} labelHidden={labelHidden} size={size}>
       <NumberInput
         ref={ref}
         {...rest}
@@ -105,17 +99,11 @@ export const NumberInputField = forwardRef<HTMLInputElement, NumberInputFieldPro
         size={size}
         compact={compact}
         commitMode={commitMode}
-        error={hasError}
-        aria-describedby={describedBy}
+        error={field.hasError}
+        aria-describedby={field.describedBy}
         onChange={onChange}
         onEmpty={onEmpty}
       />
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="number-input-field__helper">{helperText}</span>
-      )}
-    </div>
+    </FieldShell>
   );
 });

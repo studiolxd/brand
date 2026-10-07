@@ -1,14 +1,13 @@
-import { forwardRef, useCallback, useId } from 'react';
+import { forwardRef, useCallback } from 'react';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { Label } from '../../atoms/Label/Label';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import { DatePicker } from '../DatePicker/DatePicker';
 import type { DatePickerProps } from '../DatePicker/DatePicker';
 import { TimeSelect } from '../../atoms/TimeSelect/TimeSelect';
 import type { TimeValue } from '../../atoms/TimeSelect/TimeSelect';
 import type { CalendarProps } from '../Calendar/Calendar';
 import './DateTimeField.css';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface DateTimeFieldProps {
   /** `id` del campo. Si no se pasa, se genera con `useId`. */
@@ -130,14 +129,9 @@ export const DateTimeField = forwardRef<HTMLInputElement, DateTimeFieldProps>(fu
 }: DateTimeFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
-  const generatedId = useId();
-  const id = idProp ?? generatedId;
+  const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
+  const { id } = field;
   const dateId = `${id}-date`;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error, como en el resto de campos
-  const hasError = error || !!errorMessage;
 
   const handleDateChange = useCallback(
     (date: Date | null) => {
@@ -161,13 +155,12 @@ export const DateTimeField = forwardRef<HTMLInputElement, DateTimeFieldProps>(fu
   );
 
   return (
-    <div className={['date-time-field', className].filter(Boolean).join(' ')}>
-      <Label id={`${id}-label`} htmlFor={dateId} hidden={labelHidden} size={size}>{label}</Label>
+    <FieldShell field={field} block="date-time-field" className={className} label={label} labelHidden={labelHidden} size={size} labelIdentified labelFor={dateId}>
       <div
         className="date-time-field__controls"
         role="group"
-        aria-labelledby={`${id}-label`}
-        aria-describedby={describedBy}
+        aria-labelledby={field.labelId}
+        aria-describedby={field.describedBy}
       >
         <DatePicker
           ref={ref}
@@ -184,7 +177,7 @@ export const DateTimeField = forwardRef<HTMLInputElement, DateTimeFieldProps>(fu
           size={size}
           disabled={disabled}
           readOnly={readOnly}
-          error={hasError}
+          error={field.hasError}
           locale={locale}
           calendarLabel={calendarLabel ?? label}
           openCalendarLabel={openCalendarLabel}
@@ -206,17 +199,11 @@ export const DateTimeField = forwardRef<HTMLInputElement, DateTimeFieldProps>(fu
           size={size}
           disabled={disabled}
           readOnly={readOnly}
-          error={hasError}
+          error={field.hasError}
           hoursLabel={hoursLabel}
           minutesLabel={minutesLabel}
         />
       </div>
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="date-time-field__helper">{helperText}</span>
-      )}
-    </div>
+    </FieldShell>
   );
 });

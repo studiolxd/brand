@@ -1,11 +1,10 @@
-import { forwardRef, useId } from 'react';
+import { forwardRef } from 'react';
 import './SelectField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { Label } from '../../atoms/Label/Label';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import { Select, isSelectOptionGroup } from '../../atoms/Select/Select';
 import type { SelectOption, SelectOptionOrGroup } from '../../atoms/Select/Select';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface SelectFieldProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
@@ -101,13 +100,8 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>(funct
 }: SelectFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
-  const generatedId = useId();
-  const id = idProp ?? generatedId;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error
-  const hasError = error || !!errorMessage;
+  const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
+  const { id } = field;
 
   const hasEmptyOption = options.some((entry) =>
     isSelectOptionGroup(entry)
@@ -122,11 +116,8 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>(funct
       )
     : options;
 
-  const containerClass = ['select-field', className].filter(Boolean).join(' ');
-
   return (
-    <div className={containerClass}>
-      <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
+    <FieldShell field={field} block="select-field" className={className} label={label} labelHidden={labelHidden} size={size}>
       <Select
         ref={ref}
         id={id}
@@ -138,17 +129,11 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>(funct
         placeholder={placeholder}
         disabled={disabled}
         size={size}
-        aria-describedby={describedBy}
-        aria-invalid={hasError}
+        aria-describedby={field.describedBy}
+        aria-invalid={field.hasError}
         onValueChange={onValueChange ? (v) => onValueChange(decode(v)) : undefined}
         onBlur={onBlur}
       />
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="select-field__helper">{helperText}</span>
-      )}
-    </div>
+    </FieldShell>
   );
 });

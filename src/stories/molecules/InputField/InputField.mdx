@@ -94,7 +94,7 @@ El `ref` llega al `<input>` (también en la búsqueda, donde el `<input>` va den
 ## Accesibilidad
 
 - La etiqueta va enlazada por `htmlFor`/`id`: `id` es obligatorio.
-- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- Los `id` de error y ayuda se derivan del del campo (`<id>-error`, `<id>-helper`) y llegan al control por `aria-describedby` en ese orden, el mismo en que se pintan.
 - El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
 - El aspa de borrado es un `<button type="button">` real: entra en el orden de tabulación, se nombra con `clearLabel` y apunta al campo con `aria-controls`. Tras vaciar devuelve el foco al control, así que quien navega con teclado no pierde el sitio.
 

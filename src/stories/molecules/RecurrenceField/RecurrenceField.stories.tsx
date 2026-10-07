@@ -83,6 +83,23 @@ export const EnIngles: Story = {
   ),
 };
 
+export const ConAyudaYError: Story = {
+  name: 'Con ayuda y error',
+  args: { value: null, onValueChange: () => {} },
+  render: () => (
+    <Editor
+      inicial={parseRecurrenceRule('FREQ=WEEKLY;BYDAY=MO')}
+      legend="Repetición"
+      helperText="Se repite en tu zona horaria."
+      errorMessage="La fecha final no puede ser anterior al inicio."
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const grupo = within(canvasElement).getByRole('group', { name: 'Repetición' });
+    await expect(grupo.getAttribute('aria-describedby')?.split(' ')).toHaveLength(2);
+  },
+};
+
 export const Deshabilitado: Story = {
   args: { value: null, onValueChange: () => {} },
   render: () => (

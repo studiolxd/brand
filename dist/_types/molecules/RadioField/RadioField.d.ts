@@ -3,6 +3,14 @@ import './RadioField.css';
 export interface RadioFieldProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'id'> {
     /** Texto de la opción, a la derecha de la marca. Acepta JSX (un enlace, por ejemplo). */
     label: ReactNode;
+    /**
+     * Oculta el texto de la opción **visualmente**, sin quitarlo del árbol de
+     * accesibilidad: el radio conserva su nombre. Misma prop que en
+     * `CheckboxField` y `SwitcherField`. Default: `false`.
+     * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+     * es la primera de la lista, la etiqueta se oculta sola.
+     */
+    labelHidden?: boolean;
     /** `id` del control. Si no se pasa, se genera con `useId`. */
     id?: string;
     /** Talla del sistema. Sin ella, la del `Form` que lo envuelva; sin `Form`, `md`. */

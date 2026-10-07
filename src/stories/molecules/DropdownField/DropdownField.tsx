@@ -1,12 +1,11 @@
 'use client';
 
-import { forwardRef, useId, type ReactNode } from 'react';
+import { forwardRef, type ReactNode } from 'react';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { Label } from '../../atoms/Label/Label';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Menu, type MenuItem } from '../Menu/Menu';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 import './DropdownField.css';
 
 export interface DropdownFieldProps {
@@ -75,17 +74,18 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
 }: DropdownFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
-  const generatedId = useId();
-  const id = idProp ?? generatedId;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error, como en el resto de campos
-  const hasError = error || !!errorMessage;
-  const classes = ['dropdown-field', inline ? 'dropdown-field--inline' : '', size !== 'md' ? `dropdown-field--${size}` : '', className].filter(Boolean).join(' ');
+  const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
+  const { id } = field;
   return (
-    <div className={classes}>
-      {label && <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>}
+    <FieldShell
+      field={field}
+      block="dropdown-field"
+      modifiers={[inline && 'dropdown-field--inline', size !== 'md' && `dropdown-field--${size}`]}
+      className={className}
+      label={label}
+      labelHidden={labelHidden}
+      size={size}
+    >
       <Menu
         align={align}
         size={size}
@@ -99,8 +99,8 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
             id={id}
             className="dropdown-field__control"
             aria-label={label ? undefined : ariaLabel}
-            aria-describedby={describedBy}
-            aria-invalid={hasError || undefined}
+            aria-describedby={field.describedBy}
+            aria-invalid={field.hasError || undefined}
             disabled={disabled}
             onBlur={onBlur}
           >
@@ -111,12 +111,6 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
       />
       {/* Lo que se envía con el formulario. */}
       {name && <input type="hidden" name={name} value={value ?? ''} />}
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="dropdown-field__helper">{helperText}</span>
-      )}
-    </div>
+    </FieldShell>
   );
 });

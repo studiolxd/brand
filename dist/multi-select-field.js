@@ -1,54 +1,47 @@
 'use client';
 import './multi-select-field.css';
 import { n as e } from "./_shared/form-size.js";
-import { ErrorText as t } from "./error-text.js";
-import { Label as n } from "./label.js";
-import { MultiSelect as r } from "./multi-select.js";
-import { n as i } from "./_shared/field-labels.js";
-import { forwardRef as a, useId as o } from "react";
-import { jsx as s, jsxs as c } from "react/jsx-runtime";
+import { MultiSelect as t } from "./multi-select.js";
+import { n } from "./_shared/field-labels.js";
+import { n as r, t as i } from "./_shared/fieldshell.js";
+import { forwardRef as a } from "react";
+import { jsx as o } from "react/jsx-runtime";
 //#region src/stories/molecules/MultiSelectField/MultiSelectField.tsx
-var l = a(function({ id: a, label: l, labelHidden: u, options: d, value: f, defaultValue: p, placeholder: m, name: h, disabled: g, readOnly: _, size: v, error: y = !1, errorMessage: b, helperText: x, className: S, removeLabel: C, onValueChange: w, onBlur: T }, E) {
-	let D = i(u), O = e(v), k = o(), A = a ?? k, j = b ? `${A}-error` : void 0, M = x ? `${A}-helper` : void 0, N = [j, M].filter(Boolean).join(" ") || void 0, P = y || !!b;
-	return /* @__PURE__ */ c("div", {
-		className: ["multi-select-field", S].filter(Boolean).join(" "),
-		children: [
-			/* @__PURE__ */ s(n, {
-				id: `${A}-label`,
-				htmlFor: A,
-				hidden: D,
-				size: O,
-				children: l
-			}),
-			/* @__PURE__ */ s(r, {
-				ref: E,
-				id: A,
-				"aria-labelledby": `${A}-label`,
-				name: h,
-				options: d,
-				value: f,
-				defaultValue: p,
-				placeholder: m,
-				disabled: g,
-				readOnly: _,
-				size: O,
-				error: P,
-				removeLabel: C,
-				"aria-describedby": N,
-				onValueChange: w,
-				onBlur: T
-			}),
-			b && /* @__PURE__ */ s(t, {
-				id: j,
-				children: b
-			}),
-			x && /* @__PURE__ */ s("span", {
-				id: M,
-				className: "multi-select-field__helper",
-				children: x
-			})
-		]
+var s = a(function({ id: a, label: s, labelHidden: c, options: l, value: u, defaultValue: d, placeholder: f, name: p, disabled: m, readOnly: h, required: g, size: _, error: v = !1, errorMessage: y, helperText: b, className: x, removeLabel: S, onValueChange: C, onBlur: w }, T) {
+	let E = n(c), D = e(_), O = r({
+		id: a,
+		error: v,
+		errorMessage: y,
+		helperText: b
+	}), { id: k } = O;
+	return /* @__PURE__ */ o(i, {
+		field: O,
+		block: "multi-select-field",
+		className: x,
+		label: s,
+		labelHidden: E,
+		size: D,
+		labelIdentified: !0,
+		children: /* @__PURE__ */ o(t, {
+			ref: T,
+			id: k,
+			"aria-labelledby": O.labelId,
+			name: p,
+			options: l,
+			value: u,
+			defaultValue: d,
+			placeholder: f,
+			disabled: m,
+			readOnly: h,
+			required: g,
+			size: D,
+			error: O.hasError,
+			removeLabel: S,
+			"aria-describedby": O.describedBy,
+			onValueChange: C,
+			onBlur: w
+		})
 	});
 });
 //#endregion
-export { l as MultiSelectField };
+export { s as MultiSelectField };

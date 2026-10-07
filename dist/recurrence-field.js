@@ -4,13 +4,14 @@ import { n as e } from "./_shared/brandmessagescontext.js";
 import { Fieldset as t } from "./fieldset.js";
 import { Toggle as n } from "./toggle.js";
 import { ToggleGroup as r } from "./toggle-group.js";
-import { SelectField as i } from "./select-field.js";
-import { DatePickerField as a } from "./date-picker-field.js";
-import { NumberInputField as o } from "./number-input-field.js";
-import { useId as s, useMemo as c } from "react";
-import { Fragment as l, jsx as u, jsxs as d } from "react/jsx-runtime";
+import { n as i, t as a } from "./_shared/fieldshell.js";
+import { SelectField as o } from "./select-field.js";
+import { DatePickerField as s } from "./date-picker-field.js";
+import { NumberInputField as c } from "./number-input-field.js";
+import { useMemo as l } from "react";
+import { Fragment as u, jsx as d, jsxs as f } from "react/jsx-runtime";
 //#region src/stories/molecules/RecurrenceField/recurrenceRule.ts
-var f = [
+var p = [
 	"MO",
 	"TU",
 	"WE",
@@ -18,156 +19,166 @@ var f = [
 	"FR",
 	"SA",
 	"SU"
-], p = {
+], m = {
 	frequency: "weekly",
 	interval: 1,
 	weekdays: [],
 	end: { type: "never" }
-}, m = [
+}, h = [
 	"daily",
 	"weekly",
 	"monthly",
 	"yearly"
-], h = Date.UTC(2024, 0, 1);
-function g({ value: g, onValueChange: _, id: v, legend: y, disabled: b, size: x, locale: S = "es-ES", weekStartsOn: C = "monday", minDate: w, maxDate: T, today: E, className: D, frequencyLabel: O, weekdaysLabel: k, endLabel: A }) {
-	let j = e("recurrenceField"), M = s(), N = v ?? M, P = c(() => {
-		let e = new Intl.DateTimeFormat(S, {
+], g = Date.UTC(2024, 0, 1);
+function _({ value: _, onValueChange: v, id: y, legend: b, disabled: x, helperText: S, errorMessage: C, size: w, locale: T = "es-ES", weekStartsOn: E = "monday", minDate: D, maxDate: O, today: k, className: A, frequencyLabel: j, weekdaysLabel: M, endLabel: N }) {
+	let P = e("recurrenceField"), F = i({
+		id: y,
+		errorMessage: C,
+		helperText: S
+	}), { id: I } = F, L = l(() => {
+		let e = new Intl.DateTimeFormat(T, {
 			weekday: "short",
 			timeZone: "UTC"
-		}), t = new Intl.DateTimeFormat(S, {
+		}), t = new Intl.DateTimeFormat(T, {
 			weekday: "long",
 			timeZone: "UTC"
-		}), n = f.map((n, r) => {
-			let i = new Date(h + r * 864e5);
+		}), n = p.map((n, r) => {
+			let i = new Date(g + r * 864e5);
 			return {
 				key: n,
 				short: e.format(i),
 				long: t.format(i)
 			};
 		});
-		return C === "sunday" ? [n[6], ...n.slice(0, 6)] : n;
-	}, [S, C]), F = (e) => {
-		g && _({
-			...g,
+		return E === "sunday" ? [n[6], ...n.slice(0, 6)] : n;
+	}, [T, E]), R = (e) => {
+		_ && v({
+			..._,
 			...e
 		});
-	}, I = [{
+	}, z = [{
 		value: "",
-		label: j("never")
-	}, ...m.map((e) => ({
+		label: P("never")
+	}, ...h.map((e) => ({
 		value: e,
-		label: j(e)
-	}))], L = [
+		label: P(e)
+	}))], B = [
 		{
 			value: "never",
-			label: j("endNever")
+			label: P("endNever")
 		},
 		{
 			value: "until",
-			label: j("endUntil")
+			label: P("endUntil")
 		},
 		{
 			value: "count",
-			label: j("endCount")
+			label: P("endCount")
 		}
-	], R = /* @__PURE__ */ d("div", {
-		className: ["recurrence-field", D].filter(Boolean).join(" "),
-		children: [/* @__PURE__ */ u(i, {
-			id: `${N}-frequency`,
-			label: j("frequency", O),
-			options: I,
-			value: g?.frequency ?? "",
-			disabled: b,
-			size: x,
+	], V = /* @__PURE__ */ f(a, {
+		field: F,
+		block: "recurrence-field",
+		className: A,
+		rootProps: !b && F.describedBy ? {
+			role: "group",
+			"aria-describedby": F.describedBy
+		} : void 0,
+		children: [/* @__PURE__ */ d(o, {
+			id: `${I}-frequency`,
+			label: P("frequency", j),
+			options: z,
+			value: _?.frequency ?? "",
+			disabled: x,
+			size: w,
 			onValueChange: (e) => {
-				if (!e) return _(null);
-				_({
-					...g ?? p,
+				if (!e) return v(null);
+				v({
+					..._ ?? m,
 					frequency: e
 				});
 			}
-		}), g ? /* @__PURE__ */ d(l, { children: [
-			/* @__PURE__ */ u("div", {
+		}), _ ? /* @__PURE__ */ f(u, { children: [
+			/* @__PURE__ */ d("div", {
 				className: "recurrence-field__row",
-				children: /* @__PURE__ */ u(o, {
-					id: `${N}-interval`,
+				children: /* @__PURE__ */ d(c, {
+					id: `${I}-interval`,
 					className: "recurrence-field__interval",
-					label: j("interval")(g.frequency),
-					value: g.interval,
+					label: P("interval")(_.frequency),
+					value: _.interval,
 					min: 1,
 					max: 99,
-					disabled: b,
-					size: x,
-					onChange: (e) => F({ interval: Number.isFinite(e) ? Math.max(1, e) : 1 })
+					disabled: x,
+					size: w,
+					onChange: (e) => R({ interval: Number.isFinite(e) ? Math.max(1, e) : 1 })
 				})
 			}),
-			g.frequency === "weekly" ? /* @__PURE__ */ d("div", { children: [/* @__PURE__ */ u("span", {
+			_.frequency === "weekly" ? /* @__PURE__ */ f("div", { children: [/* @__PURE__ */ d("span", {
 				className: "recurrence-field__weekdays-label",
-				id: `${N}-weekdays-label`,
-				children: j("weekdays", k)
-			}), /* @__PURE__ */ u(r, {
+				id: `${I}-weekdays-label`,
+				children: P("weekdays", M)
+			}), /* @__PURE__ */ d(r, {
 				className: "recurrence-field__weekdays",
 				multiple: !0,
-				size: x,
-				value: g.weekdays,
-				"aria-labelledby": `${N}-weekdays-label`,
-				onValueChange: (e) => F({ weekdays: e }),
-				children: P.map((e) => /* @__PURE__ */ u(n, {
+				size: w,
+				value: _.weekdays,
+				"aria-labelledby": `${I}-weekdays-label`,
+				onValueChange: (e) => R({ weekdays: e }),
+				children: L.map((e) => /* @__PURE__ */ d(n, {
 					value: e.key,
 					"aria-label": e.long,
-					disabled: b,
+					disabled: x,
 					children: e.short
 				}, e.key))
 			})] }) : null,
-			/* @__PURE__ */ d("div", {
+			/* @__PURE__ */ f("div", {
 				className: "recurrence-field__row",
 				children: [
-					/* @__PURE__ */ u(i, {
-						id: `${N}-end`,
+					/* @__PURE__ */ d(o, {
+						id: `${I}-end`,
 						className: "recurrence-field__end",
-						label: j("end", A),
-						options: L,
-						value: g.end.type,
-						disabled: b,
-						size: x,
+						label: P("end", N),
+						options: B,
+						value: _.end.type,
+						disabled: x,
+						size: w,
 						onValueChange: (e) => {
-							if (e === "until") return F({ end: {
+							if (e === "until") return R({ end: {
 								type: "until",
 								date: null
 							} });
-							if (e === "count") return F({ end: {
+							if (e === "count") return R({ end: {
 								type: "count",
 								count: 10
 							} });
-							F({ end: { type: "never" } });
+							R({ end: { type: "never" } });
 						}
 					}),
-					g.end.type === "until" ? /* @__PURE__ */ u(a, {
-						id: `${N}-until`,
+					_.end.type === "until" ? /* @__PURE__ */ d(s, {
+						id: `${I}-until`,
 						className: "recurrence-field__end",
-						label: j("until"),
-						value: g.end.date,
-						locale: S,
-						minDate: w,
-						maxDate: T,
-						today: E,
-						disabled: b,
-						size: x,
-						onChange: (e) => F({ end: {
+						label: P("until"),
+						value: _.end.date,
+						locale: T,
+						minDate: D,
+						maxDate: O,
+						today: k,
+						disabled: x,
+						size: w,
+						onChange: (e) => R({ end: {
 							type: "until",
 							date: e
 						} })
 					}) : null,
-					g.end.type === "count" ? /* @__PURE__ */ u(o, {
-						id: `${N}-count`,
+					_.end.type === "count" ? /* @__PURE__ */ d(c, {
+						id: `${I}-count`,
 						className: "recurrence-field__end",
-						label: j("count"),
-						value: g.end.count,
+						label: P("count"),
+						value: _.end.count,
 						min: 1,
 						max: 999,
-						disabled: b,
-						size: x,
-						onChange: (e) => F({ end: {
+						disabled: x,
+						size: w,
+						onChange: (e) => R({ end: {
 							type: "count",
 							count: Number.isFinite(e) ? Math.max(1, e) : 1
 						} })
@@ -176,11 +187,12 @@ function g({ value: g, onValueChange: _, id: v, legend: y, disabled: b, size: x,
 			})
 		] }) : null]
 	});
-	return y ? /* @__PURE__ */ u(t, {
-		legend: y,
-		disabled: b,
-		children: R
-	}) : R;
+	return b ? /* @__PURE__ */ d(t, {
+		legend: b,
+		disabled: x,
+		"aria-describedby": F.describedBy,
+		children: V
+	}) : V;
 }
 //#endregion
-export { g as RecurrenceField };
+export { _ as RecurrenceField };

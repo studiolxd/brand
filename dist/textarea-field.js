@@ -1,53 +1,46 @@
 'use client';
 import './textarea-field.css';
 import { n as e } from "./_shared/form-size.js";
-import { ErrorText as t } from "./error-text.js";
-import { Label as n } from "./label.js";
-import { Textarea as r } from "./textarea.js";
-import { n as i } from "./_shared/field-labels.js";
+import { Textarea as t } from "./textarea.js";
+import { n } from "./_shared/field-labels.js";
+import { n as r, t as i } from "./_shared/fieldshell.js";
 import { forwardRef as a } from "react";
-import { jsx as o, jsxs as s } from "react/jsx-runtime";
+import { jsx as o } from "react/jsx-runtime";
 //#region src/stories/molecules/TextareaField/TextareaField.tsx
-var c = a(function({ id: a, label: c, labelHidden: l, name: u, placeholder: d, value: f, defaultValue: p, rows: m, disabled: h, readOnly: g, size: _, error: v = !1, errorMessage: y, helperText: b, onChange: x, onBlur: S, onFocus: C, className: w, ...T }, E) {
-	let D = i(l), O = e(_), k = y ? `${a}-error` : void 0, A = b ? `${a}-helper` : void 0, j = [k, A].filter(Boolean).join(" ") || void 0, M = v || !!y;
-	return /* @__PURE__ */ s("div", {
-		className: ["textarea-field", w].filter(Boolean).join(" "),
-		children: [
-			/* @__PURE__ */ o(n, {
-				htmlFor: a,
-				hidden: D,
-				size: O,
-				children: c
-			}),
-			/* @__PURE__ */ o(r, {
-				ref: E,
-				...T,
-				id: a,
-				name: u,
-				placeholder: d ?? (D ? c : void 0),
-				value: f,
-				defaultValue: p,
-				rows: m,
-				disabled: h,
-				readOnly: g,
-				size: O,
-				error: M,
-				"aria-describedby": j,
-				onChange: x,
-				onBlur: S,
-				onFocus: C
-			}),
-			y && /* @__PURE__ */ o(t, {
-				id: k,
-				children: y
-			}),
-			b && /* @__PURE__ */ o("span", {
-				id: A,
-				className: "textarea-field__helper",
-				children: b
-			})
-		]
+var s = a(function({ id: a, label: s, labelHidden: c, name: l, placeholder: u, value: d, defaultValue: f, rows: p, disabled: m, readOnly: h, size: g, error: _ = !1, errorMessage: v, helperText: y, onChange: b, onBlur: x, onFocus: S, className: C, "aria-describedby": w, ...T }, E) {
+	let D = n(c), O = e(g), k = r({
+		id: a,
+		error: _,
+		errorMessage: v,
+		helperText: y,
+		describedBy: w
+	});
+	return /* @__PURE__ */ o(i, {
+		field: k,
+		block: "textarea-field",
+		className: C,
+		label: s,
+		labelHidden: D,
+		size: O,
+		children: /* @__PURE__ */ o(t, {
+			ref: E,
+			...T,
+			id: a,
+			name: l,
+			placeholder: u ?? (D ? s : void 0),
+			value: d,
+			defaultValue: f,
+			rows: p,
+			disabled: m,
+			readOnly: h,
+			size: O,
+			error: k.hasError,
+			"aria-describedby": k.describedBy,
+			onChange: b,
+			onBlur: x,
+			onFocus: S
+		})
 	});
 });
 //#endregion
-export { c as TextareaField };
+export { s as TextareaField };

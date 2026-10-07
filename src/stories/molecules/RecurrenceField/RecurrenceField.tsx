@@ -1,6 +1,6 @@
 'use client';
 
-import { useId, useMemo, type ReactNode } from 'react';
+import { useMemo, type ReactNode } from 'react';
 import { Fieldset } from '../../atoms/Fieldset/Fieldset';
 import { Toggle } from '../../atoms/Toggle/Toggle';
 import { ToggleGroup } from '../../atoms/ToggleGroup/ToggleGroup';
@@ -15,6 +15,7 @@ import {
   type RecurrenceWeekday,
 } from './recurrenceRule';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import './RecurrenceField.css';
 
 export type {
@@ -82,6 +83,16 @@ export interface RecurrenceFieldProps {
   legend?: ReactNode;
   /** Deshabilita el editor entero. */
   disabled?: boolean;
+  /**
+   * Texto de ayuda del editor entero, bajo los campos. Describe el grupo
+   * (`aria-describedby` en el `fieldset`, o en el `role="group"` sin `legend`).
+   */
+  helperText?: string;
+  /**
+   * Mensaje de error del editor entero (una regla que no cuadra con el
+   * evento). Se anuncia (`role="alert"`) y describe el grupo, como la ayuda.
+   */
+  errorMessage?: string;
   /** Talla de los campos. Sin ella, la del contexto de formulario. */
   size?: 'sm' | 'md' | 'lg';
   /** Locale de los nombres de los días y del campo de fecha. Default `'es-ES'`. */
@@ -130,6 +141,8 @@ export function RecurrenceField({
   id: idProp,
   legend,
   disabled,
+  helperText,
+  errorMessage,
   size,
   locale = 'es-ES',
   weekStartsOn = 'monday',
@@ -142,8 +155,8 @@ export function RecurrenceField({
   endLabel,
 }: RecurrenceFieldProps) {
   const t = useBrandMessages('recurrenceField');
-  const generado = useId();
-  const id = idProp ?? generado;
+  const field = useFieldShell({ id: idProp, errorMessage, helperText });
+  const { id } = field;
 
   // Los nombres de los días salen del locale, no del catálogo de textos: es lo
   // que manda el sistema para meses, días y formatos de fecha.
@@ -173,8 +186,17 @@ export function RecurrenceField({
     { value: 'count', label: t('endCount') },
   ];
 
+  // La ayuda y el error describen el grupo: el `fieldset` si hay `legend`, y
+  // si no, el propio contenedor como `role="group"` (solo cuando hay algo que
+  // describir: un grupo sin nombre ni descripción no aporta nada).
+  const describesItself = !legend && !!field.describedBy;
   const cuerpo = (
-    <div className={['recurrence-field', className].filter(Boolean).join(' ')}>
+    <FieldShell
+      field={field}
+      block="recurrence-field"
+      className={className}
+      rootProps={describesItself ? { role: 'group', 'aria-describedby': field.describedBy } : undefined}
+    >
       <SelectField
         id={`${id}-frequency`}
         label={t('frequency', frequencyLabel)}
@@ -278,8 +300,10 @@ export function RecurrenceField({
           </div>
         </>
       ) : null}
-    </div>
+    </FieldShell>
   );
 
-  return legend ? <Fieldset legend={legend} disabled={disabled}>{cuerpo}</Fieldset> : cuerpo;
+  return legend
+    ? <Fieldset legend={legend} disabled={disabled} aria-describedby={field.describedBy}>{cuerpo}</Fieldset>
+    : cuerpo;
 }

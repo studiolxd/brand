@@ -9,6 +9,13 @@
     "legend-color":        { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color de la etiqueta del grupo de días" },
     "legend-font-weight":  { "$value": "{label.font-weight}",       "$type": "number",    "$description": "Peso de la etiqueta del grupo de días — el de una etiqueta de campo" },
     "legend-margin-block-end": { "$value": "{spacing.1}",           "$type": "dimension", "$description": "Aire entre la etiqueta del grupo de días y los días" },
+    "helper": {
+      "font-family":  { "$value": "{form.helper.font-family}",  "$type": "string",    "$description": "Font family del texto de ayuda del editor" },
+      "font-size":    { "$value": "{form.helper.font-size}",    "$type": "dimension", "$description": "Font size del texto de ayuda del editor" },
+      "font-weight":  { "$value": "{form.helper.font-weight}",  "$type": "number",    "$description": "Font weight del texto de ayuda del editor" },
+      "line-height":  { "$value": "{form.helper.line-height}",  "$type": "number",    "$description": "Line height del texto de ayuda del editor" },
+      "color":        { "$value": "{form.helper.color}",        "$type": "color",     "$description": "Color del texto de ayuda del editor" }
+    },
 
     "surface-dark-legend-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la etiqueta del grupo de días — surface-dark" }
   }

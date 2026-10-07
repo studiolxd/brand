@@ -1,14 +1,23 @@
-import { forwardRef, useId, type ComponentPropsWithoutRef, type ReactNode } from 'react';
+import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import './RadioField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useLabelHidden } from '../../constants/field-labels';
 import { Radio } from '../../atoms/Radio/Radio';
 import { useRadioGroup } from '../../atoms/RadioGroup/RadioGroupContext';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 
 export interface RadioFieldProps
   extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'id'> {
   /** Texto de la opción, a la derecha de la marca. Acepta JSX (un enlace, por ejemplo). */
   label: ReactNode;
+  /**
+   * Oculta el texto de la opción **visualmente**, sin quitarlo del árbol de
+   * accesibilidad: el radio conserva su nombre. Misma prop que en
+   * `CheckboxField` y `SwitcherField`. Default: `false`.
+   * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+   * es la primera de la lista, la etiqueta se oculta sola.
+   */
+  labelHidden?: boolean;
   /** `id` del control. Si no se pasa, se genera con `useId`. */
   id?: string;
   /** Talla del sistema. Sin ella, la del `Form` que lo envuelva; sin `Form`, `md`. */
@@ -35,6 +44,7 @@ export interface RadioFieldProps
  */
 export const RadioField = forwardRef<HTMLInputElement, RadioFieldProps>(function RadioField({
   label,
+  labelHidden: labelHiddenProp,
   id: idProp,
   size: sizeProp,
   disabled,
@@ -42,46 +52,43 @@ export const RadioField = forwardRef<HTMLInputElement, RadioFieldProps>(function
   errorMessage,
   helperText,
   className,
+  'aria-describedby': ariaDescribedBy,
   ...rest
 }: RadioFieldProps, ref) {
   const group = useRadioGroup();
+  const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp ?? group?.size);
-  const generatedId = useId();
-  const id = idProp ?? generatedId;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error, como en el resto de campos
-  const hasError = error || !!errorMessage || (group?.error ?? false);
+  // El error del grupo también pone la opción en error. El `aria-describedby`
+  // del consumidor se suma al propio (antes lo pisaba).
+  const field = useFieldShell({
+    id: idProp,
+    error: error || (group?.error ?? false),
+    errorMessage,
+    helperText,
+    describedBy: ariaDescribedBy,
+  });
+  const { id } = field;
   const isDisabled = disabled ?? group?.disabled;
 
   return (
-    <div
-      className={[
-        'radio-field',
-        size !== 'md' ? `radio-field--${size}` : '',
-        isDisabled ? 'radio-field--disabled' : '',
-        className,
-      ].filter(Boolean).join(' ')}
+    <FieldShell
+      field={field}
+      block="radio-field"
+      modifiers={[size !== 'md' && `radio-field--${size}`, isDisabled && 'radio-field--disabled']}
+      className={className}
+      layout="inline"
+      label={label}
+      labelHidden={labelHidden}
     >
-      <label className="radio-field__control" htmlFor={id}>
-        <Radio
-          ref={ref}
-          {...rest}
-          id={id}
-          size={size}
-          disabled={isDisabled}
-          error={hasError}
-          aria-describedby={describedBy}
-        />
-        <span className="radio-field__label">{label}</span>
-      </label>
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="radio-field__helper">{helperText}</span>
-      )}
-    </div>
+      <Radio
+        ref={ref}
+        {...rest}
+        id={id}
+        size={size}
+        disabled={isDisabled}
+        error={field.hasError}
+        aria-describedby={field.describedBy}
+      />
+    </FieldShell>
   );
 });

@@ -73,7 +73,12 @@ export interface TableRowProps extends Omit<React.HTMLAttributes<HTMLTableRowEle
     onClick?: () => void;
     /** Alternativa explícita a onClick para control manual */
     interactive?: boolean;
-    /** Marca la fila como seleccionada: se dice con tinta y peso, sin fondo. */
+    /**
+     * Marca la fila como seleccionada: **solo visual** (`table__row--selected`,
+     * tinta y peso, sin fondo). No emite `aria-selected`, que fuera de un
+     * `role="grid"` no es válido en una fila: el estado lo anuncia el control
+     * de la fila —normalmente una casilla, como en `DataTable`—.
+     */
     selected?: boolean;
     /**
      * Nombre accesible de la fila. Por defecto el rol `row` toma su nombre del

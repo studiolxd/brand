@@ -76,7 +76,8 @@ El `ref` llega al `<input>` de texto: `ref.current?.focus()` lleva el cursor al 
 ## Accesibilidad
 
 - La etiqueta va enlazada por `htmlFor`/`id`; sin `id`, el campo genera uno con `useId`.
-- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- Los `id` de error y ayuda se derivan del del campo (`<id>-error`, `<id>-helper`) y llegan al control por `aria-describedby` en ese orden, el mismo en que se pintan.
+- Si el consumidor trae su propio `aria-describedby`, se suma detrás de los del campo; no se pisa.
 - El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
 - Los botones de incremento y decremento están fuera del tabulador: el teclado escribe en el campo.
 

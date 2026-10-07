@@ -4,10 +4,9 @@ import { forwardRef, useImperativeHandle, useRef, useState, type ComponentPropsW
 import './InputField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { Label } from '../../atoms/Label/Label';
 import { Input } from '../../atoms/Input/Input';
 import { Icon } from '../../atoms/Icon/Icon';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 
 /**
@@ -111,14 +110,9 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function
   const t = useBrandMessages('inputField');
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  // Se combina con el `aria-describedby` que traiga el consumidor por `rest`
-  // (una pista suya, un contador de caracteres…): pisarlo lo dejaría mudo.
-  const describedBy =
-    [errorId, helperId, rest['aria-describedby']].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error, como en SelectField
-  const hasError = error || !!errorMessage;
+  // El `aria-describedby` que traiga el consumidor por `rest` (una pista suya,
+  // un contador de caracteres…) se suma al propio: pisarlo lo dejaría mudo.
+  const field = useFieldShell({ id, error, errorMessage, helperText, describedBy: rest['aria-describedby'] });
 
   const isSearch = kind === 'search';
   const innerRef = useRef<HTMLInputElement>(null);
@@ -153,7 +147,7 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function
     ? { type: 'text' as const, autoComplete: 'off', enterKeyHint: 'search' as const }
     : { type };
 
-  const field = (
+  const control = (
     <Input
       ref={innerRef}
       {...searchAttrs}
@@ -166,8 +160,8 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function
       disabled={disabled}
       readOnly={readOnly}
       size={size}
-      error={hasError}
-      aria-describedby={describedBy}
+      error={field.hasError}
+      aria-describedby={field.describedBy}
       onChange={handleChange}
       onBlur={onBlur}
       onFocus={onFocus}
@@ -175,8 +169,7 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function
   );
 
   return (
-    <div className={['input-field', className].filter(Boolean).join(' ')}>
-      <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
+    <FieldShell field={field} block="input-field" className={className} label={label} labelHidden={labelHidden} size={size}>
       {isSearch ? (
         <div
           className={[
@@ -188,7 +181,7 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function
           <span className="input-field__search-icon" aria-hidden="true">
             <Icon name="search" className="input-field__search-glyph" />
           </span>
-          {field}
+          {control}
           {showClear && (
             <button
               type="button"
@@ -201,13 +194,7 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function
             </button>
           )}
         </div>
-      ) : field}
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="input-field__helper">{helperText}</span>
-      )}
-    </div>
+      ) : control}
+    </FieldShell>
   );
 });

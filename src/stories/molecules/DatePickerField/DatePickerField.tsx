@@ -1,11 +1,10 @@
-import { forwardRef, useId } from 'react';
+import { forwardRef } from 'react';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { Label } from '../../atoms/Label/Label';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import { DatePicker } from '../DatePicker/DatePicker';
 import type { DatePickerProps } from '../DatePicker/DatePicker';
 import './DatePickerField.css';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface DatePickerFieldProps
   extends Omit<DatePickerProps, 'id' | 'describedBy' | 'aria-describedby' | 'aria-label'> {
@@ -45,32 +44,20 @@ export const DatePickerField = forwardRef<HTMLInputElement, DatePickerFieldProps
 }: DatePickerFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
-  const generatedId = useId();
-  const id = idProp ?? generatedId;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error, como en el resto de campos
-  const hasError = error || !!errorMessage;
+  const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
+  const { id } = field;
 
   return (
-    <div className={['date-picker-field', className].filter(Boolean).join(' ')}>
-      <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
+    <FieldShell field={field} block="date-picker-field" className={className} label={label} labelHidden={labelHidden} size={size}>
       <DatePicker
         calendarLabel={label}
         {...pickerProps}
         ref={ref}
         id={id}
         size={size}
-        error={hasError}
-        aria-describedby={describedBy}
+        error={field.hasError}
+        aria-describedby={field.describedBy}
       />
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="date-picker-field__helper">{helperText}</span>
-      )}
-    </div>
+    </FieldShell>
   );
 });

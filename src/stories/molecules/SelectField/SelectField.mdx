@@ -83,7 +83,7 @@ El control es de Base UI, así que el contrato **no** es el spread del `field`: 
 ## Accesibilidad
 
 - La etiqueta va enlazada por `htmlFor`/`id` al disparador.
-- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- Los `id` de error y ayuda se derivan del del campo (`<id>-error`, `<id>-helper`) y llegan al control por `aria-describedby` en ese orden, el mismo en que se pintan.
 - El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
 - Las cabeceras de grupo son etiquetas, no opciones: no son parada del teclado y nombran a su grupo por `role="group"` + `aria-labelledby`.
 

@@ -2,9 +2,8 @@ import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import './TextareaField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
-import { Label } from '../../atoms/Label/Label';
 import { Textarea } from '../../atoms/Textarea/Textarea';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 
 export interface TextareaFieldProps extends Omit<ComponentPropsWithoutRef<'textarea'>, 'value' | 'defaultValue' | 'rows'> {
   id: string;
@@ -58,19 +57,17 @@ export const TextareaField = forwardRef<HTMLTextAreaElement, TextareaFieldProps>
   onBlur,
   onFocus,
   className,
+  'aria-describedby': ariaDescribedBy,
   ...rest
 }: TextareaFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error, como en SelectField
-  const hasError = error || !!errorMessage;
+  // El `aria-describedby` del consumidor se suma al propio, como en
+  // `InputField`: antes se pisaba y la pista del consumidor se perdía.
+  const field = useFieldShell({ id, error, errorMessage, helperText, describedBy: ariaDescribedBy });
 
   return (
-    <div className={['textarea-field', className].filter(Boolean).join(' ')}>
-      <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
+    <FieldShell field={field} block="textarea-field" className={className} label={label} labelHidden={labelHidden} size={size}>
       <Textarea
         ref={ref}
         {...rest}
@@ -83,18 +80,12 @@ export const TextareaField = forwardRef<HTMLTextAreaElement, TextareaFieldProps>
         disabled={disabled}
         readOnly={readOnly}
         size={size}
-        error={hasError}
-        aria-describedby={describedBy}
+        error={field.hasError}
+        aria-describedby={field.describedBy}
         onChange={onChange}
         onBlur={onBlur}
         onFocus={onFocus}
       />
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="textarea-field__helper">{helperText}</span>
-      )}
-    </div>
+    </FieldShell>
   );
 });

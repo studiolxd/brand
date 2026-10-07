@@ -73,7 +73,7 @@ El control es de Base UI, así que el contrato **no** es el spread del `field`: 
 ## Accesibilidad
 
 - El texto está enlazado por `htmlFor`/`id`, y además por `aria-labelledby` desde el disparador.
-- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- Los `id` de error y ayuda se derivan del del campo (`<id>-error`, `<id>-helper`) y llegan al control por `aria-describedby` en ese orden, el mismo en que se pintan.
 - El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
 
 ## Tokens

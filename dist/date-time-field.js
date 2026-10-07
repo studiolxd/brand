@@ -1,105 +1,98 @@
 'use client';
 import './date-time-field.css';
 import { n as e } from "./_shared/form-size.js";
-import { ErrorText as t } from "./error-text.js";
-import { Label as n } from "./label.js";
-import { TimeSelect as r } from "./time-select.js";
-import { n as i } from "./_shared/field-labels.js";
+import { TimeSelect as t } from "./time-select.js";
+import { n } from "./_shared/field-labels.js";
+import { n as r, t as i } from "./_shared/fieldshell.js";
 import { t as a } from "./_shared/datepicker.js";
-import { forwardRef as o, useCallback as s, useId as c } from "react";
-import { jsx as l, jsxs as u } from "react/jsx-runtime";
+import { forwardRef as o, useCallback as s } from "react";
+import { jsx as c, jsxs as l } from "react/jsx-runtime";
 //#region src/stories/molecules/DateTimeField/DateTimeField.tsx
-function d(e, t) {
+function u(e, t) {
 	let n = new Date(e);
 	return n.setHours(t.h, t.m, 0, 0), n;
 }
-function f(e) {
+function d(e) {
 	return e ? {
 		h: e.getHours(),
 		m: e.getMinutes()
 	} : null;
 }
-var p = o(function({ id: o, label: p, labelHidden: m, value: h, placeholder: g, timeStep: _, minDate: v, maxDate: y, disabledDates: b, name: x, size: S, disabled: C, readOnly: w, error: T = !1, errorMessage: E, helperText: D, locale: O = "es-ES", className: k, calendarLabel: A, openCalendarLabel: j, invalidMessage: M, maskLetters: N, previousMonthLabel: P, nextMonthLabel: F, previousYearsLabel: I, nextYearsLabel: L, yearGridLabel: R, gridLabel: z, today: ee, hoursLabel: B, minutesLabel: V, onChange: H, onBlur: U }, W) {
-	let G = i(m), K = e(S), q = c(), J = o ?? q, Y = `${J}-date`, X = E ? `${J}-error` : void 0, Z = D ? `${J}-helper` : void 0, Q = [X, Z].filter(Boolean).join(" ") || void 0, $ = T || !!E, te = s((e) => {
+var f = o(function({ id: o, label: f, labelHidden: p, value: m, placeholder: h, timeStep: g, minDate: _, maxDate: v, disabledDates: y, name: b, size: x, disabled: S, readOnly: C, error: w = !1, errorMessage: T, helperText: E, locale: D = "es-ES", className: O, calendarLabel: k, openCalendarLabel: A, invalidMessage: j, maskLetters: M, previousMonthLabel: N, nextMonthLabel: P, previousYearsLabel: F, nextYearsLabel: I, yearGridLabel: L, gridLabel: R, today: z, hoursLabel: B, minutesLabel: V, onChange: H, onBlur: U }, W) {
+	let G = n(p), K = e(x), q = r({
+		id: o,
+		error: w,
+		errorMessage: T,
+		helperText: E
+	}), { id: J } = q, Y = `${J}-date`, X = s((e) => {
 		if (!e) {
 			H?.(null);
 			return;
 		}
-		let t = f(h) ?? {
+		let t = d(m) ?? {
 			h: 0,
 			m: 0
 		};
-		H?.(d(e, t));
-	}, [h, H]), ne = s((e) => {
-		h && H?.(d(h, e));
-	}, [h, H]);
-	return /* @__PURE__ */ u("div", {
-		className: ["date-time-field", k].filter(Boolean).join(" "),
-		children: [
-			/* @__PURE__ */ l(n, {
-				id: `${J}-label`,
-				htmlFor: Y,
-				hidden: G,
+		H?.(u(e, t));
+	}, [m, H]), Z = s((e) => {
+		m && H?.(u(m, e));
+	}, [m, H]);
+	return /* @__PURE__ */ c(i, {
+		field: q,
+		block: "date-time-field",
+		className: O,
+		label: f,
+		labelHidden: G,
+		size: K,
+		labelIdentified: !0,
+		labelFor: Y,
+		children: /* @__PURE__ */ l("div", {
+			className: "date-time-field__controls",
+			role: "group",
+			"aria-labelledby": q.labelId,
+			"aria-describedby": q.describedBy,
+			children: [/* @__PURE__ */ c(a, {
+				ref: W,
+				className: "date-time-field__date",
+				id: Y,
+				name: b,
+				value: m ?? null,
+				onChange: X,
+				onBlur: U,
+				placeholder: h,
+				minDate: _,
+				maxDate: v,
+				disabledDates: y,
 				size: K,
-				children: p
-			}),
-			/* @__PURE__ */ u("div", {
-				className: "date-time-field__controls",
-				role: "group",
-				"aria-labelledby": `${J}-label`,
-				"aria-describedby": Q,
-				children: [/* @__PURE__ */ l(a, {
-					ref: W,
-					className: "date-time-field__date",
-					id: Y,
-					name: x,
-					value: h ?? null,
-					onChange: te,
-					onBlur: U,
-					placeholder: g,
-					minDate: v,
-					maxDate: y,
-					disabledDates: b,
-					size: K,
-					disabled: C,
-					readOnly: w,
-					error: $,
-					locale: O,
-					calendarLabel: A ?? p,
-					openCalendarLabel: j,
-					invalidMessage: M,
-					maskLetters: N,
-					previousMonthLabel: P,
-					nextMonthLabel: F,
-					previousYearsLabel: I,
-					nextYearsLabel: L,
-					yearGridLabel: R,
-					gridLabel: z,
-					today: ee
-				}), /* @__PURE__ */ l(r, {
-					value: f(h),
-					onChange: ne,
-					onBlur: U,
-					step: _,
-					size: K,
-					disabled: C,
-					readOnly: w,
-					error: $,
-					hoursLabel: B,
-					minutesLabel: V
-				})]
-			}),
-			E && /* @__PURE__ */ l(t, {
-				id: X,
-				children: E
-			}),
-			D && /* @__PURE__ */ l("span", {
-				id: Z,
-				className: "date-time-field__helper",
-				children: D
-			})
-		]
+				disabled: S,
+				readOnly: C,
+				error: q.hasError,
+				locale: D,
+				calendarLabel: k ?? f,
+				openCalendarLabel: A,
+				invalidMessage: j,
+				maskLetters: M,
+				previousMonthLabel: N,
+				nextMonthLabel: P,
+				previousYearsLabel: F,
+				nextYearsLabel: I,
+				yearGridLabel: L,
+				gridLabel: R,
+				today: z
+			}), /* @__PURE__ */ c(t, {
+				value: d(m),
+				onChange: Z,
+				onBlur: U,
+				step: g,
+				size: K,
+				disabled: S,
+				readOnly: C,
+				error: q.hasError,
+				hoursLabel: B,
+				minutesLabel: V
+			})]
+		})
 	});
 });
 //#endregion
-export { p as DateTimeField };
+export { f as DateTimeField };

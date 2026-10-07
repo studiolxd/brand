@@ -40,7 +40,8 @@ Con la etiqueta oculta y sin `placeholder` propio, el campo usa el texto de la e
 ## Accesibilidad
 
 - La etiqueta va enlazada por `htmlFor`/`id`: `id` es obligatorio.
-- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- Los `id` de error y ayuda se derivan del del campo (`<id>-error`, `<id>-helper`) y llegan al control por `aria-describedby` en ese orden, el mismo en que se pintan.
+- Si el consumidor trae su propio `aria-describedby`, se suma detrás de los del campo; no se pisa.
 - El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
 
 ## Tokens

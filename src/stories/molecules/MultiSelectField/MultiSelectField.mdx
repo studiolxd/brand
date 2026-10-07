@@ -73,7 +73,8 @@ El control es de Base UI, así que el contrato **no** es el spread del `field`: 
 ## Accesibilidad
 
 - La etiqueta nombra el disparador por `aria-labelledby` (y apunta a su `id` por `htmlFor`).
-- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- Los `id` de error y ayuda se derivan del del campo (`<id>-error`, `<id>-helper`) y llegan al control por `aria-describedby` en ese orden, el mismo en que se pintan.
+- `required` pone `aria-required` en el `combobox` y `required` en el input oculto con que valida el formulario nativo.
 - El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
 - El texto del botón que quita una píldora es traducible con `removeLabel`. Ese botón vive **fuera** del elemento con `role="combobox"`: un combobox no admite controles dentro.
 - El teclado es el del `Select` múltiple de Base UI y está en la doc de [`MultiSelect`](?path=/docs/atoms-multiselect--docs): al abrir, el foco pasa a la lista y al cerrar vuelve a la caja; `onBlur` solo se avisa cuando el foco deja las dos.

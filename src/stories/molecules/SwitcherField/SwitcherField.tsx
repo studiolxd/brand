@@ -1,10 +1,9 @@
-import { forwardRef, useId, type ReactNode } from 'react';
+import { forwardRef, type ReactNode } from 'react';
 import './SwitcherField.css';
 import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
 import { Switcher } from '../../atoms/Switcher/Switcher';
-import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
-import { ErrorText } from '../../atoms/ErrorText/ErrorText';
+import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 
 export interface SwitcherFieldProps {
   /** Texto del interruptor, a su derecha. Acepta JSX. */
@@ -66,54 +65,36 @@ export const SwitcherField = forwardRef<HTMLElement, SwitcherFieldProps>(functio
 }: SwitcherFieldProps, ref) {
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
-  const generatedId = useId();
-  const id = idProp ?? generatedId;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
-  // Un mensaje de error implica estado de error, como en el resto de campos
-  const hasError = error || !!errorMessage;
+  const field = useFieldShell({ id: idProp, error, errorMessage, helperText });
+  const { id } = field;
 
   return (
-    <div
-      className={[
-        'switcher-field',
-        size !== 'md' ? `switcher-field--${size}` : '',
-        disabled ? 'switcher-field--disabled' : '',
-        className,
-      ].filter(Boolean).join(' ')}
+    <FieldShell
+      field={field}
+      block="switcher-field"
+      modifiers={[size !== 'md' && `switcher-field--${size}`, disabled && 'switcher-field--disabled']}
+      className={className}
+      layout="inline"
+      label={label}
+      labelHidden={labelHidden}
+      labelIdentified
     >
-      <label className="switcher-field__control" htmlFor={id}>
-        <Switcher
-          ref={ref}
-          id={id}
-          checked={checked}
-          defaultChecked={defaultChecked}
-          disabled={disabled}
-          size={size}
-          name={name}
-          value={value}
-          required={required}
-          error={hasError}
-          aria-labelledby={`${id}-label`}
-          aria-describedby={describedBy}
-          onCheckedChange={onCheckedChange}
-          onBlur={onBlur}
-        />
-        {labelHidden ? (
-          <VisuallyHidden id={`${id}-label`}>{label}</VisuallyHidden>
-        ) : (
-          <span id={`${id}-label`} className="switcher-field__label">
-            {label}
-          </span>
-        )}
-      </label>
-      {errorMessage && (
-        <ErrorText id={errorId}>{errorMessage}</ErrorText>
-      )}
-      {helperText && (
-        <span id={helperId} className="switcher-field__helper">{helperText}</span>
-      )}
-    </div>
+      <Switcher
+        ref={ref}
+        id={id}
+        checked={checked}
+        defaultChecked={defaultChecked}
+        disabled={disabled}
+        size={size}
+        name={name}
+        value={value}
+        required={required}
+        error={field.hasError}
+        aria-labelledby={field.labelId}
+        aria-describedby={field.describedBy}
+        onCheckedChange={onCheckedChange}
+        onBlur={onBlur}
+      />
+    </FieldShell>
   );
 });

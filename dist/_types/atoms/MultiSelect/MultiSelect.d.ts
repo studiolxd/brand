@@ -28,6 +28,11 @@ export interface MultiSelectProps {
     placeholder?: string;
     disabled?: boolean;
     readOnly?: boolean;
+    /**
+     * Obligatorio: Base UI pone `aria-required` en el `combobox` y `required` en
+     * el input oculto con que valida el formulario nativo.
+     */
+    required?: boolean;
     size?: 'sm' | 'md' | 'lg';
     onValueChange?: (value: string[]) => void;
     id?: string;

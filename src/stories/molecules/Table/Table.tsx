@@ -81,7 +81,12 @@ export interface TableRowProps extends Omit<React.HTMLAttributes<HTMLTableRowEle
   onClick?: () => void;
   /** Alternativa explícita a onClick para control manual */
   interactive?: boolean;
-  /** Marca la fila como seleccionada: se dice con tinta y peso, sin fondo. */
+  /**
+   * Marca la fila como seleccionada: **solo visual** (`table__row--selected`,
+   * tinta y peso, sin fondo). No emite `aria-selected`, que fuera de un
+   * `role="grid"` no es válido en una fila: el estado lo anuncia el control
+   * de la fila —normalmente una casilla, como en `DataTable`—.
+   */
   selected?: boolean;
   /**
    * Nombre accesible de la fila. Por defecto el rol `row` toma su nombre del
@@ -220,10 +225,6 @@ export function TableRow({
   ...rest
 }: TableRowProps) {
   const isInteractive = interactive || !!onClick;
-  // `aria-selected="false"` solo dice algo sobre lo que se puede seleccionar:
-  // en una fila interactiva se anuncian los dos estados; en una fila de solo
-  // lectura, únicamente la que está marcada.
-  const ariaSelected = isInteractive ? selected : selected || undefined;
   const classes = [
     'table__row',
     isInteractive ? 'table__row--interactive' : '',
@@ -239,7 +240,6 @@ export function TableRow({
         {...rest}
         className={classes}
         aria-label={label}
-        aria-selected={ariaSelected}
         onClick={onClick}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -255,7 +255,7 @@ export function TableRow({
   }
 
   return (
-    <tr {...rest} className={classes} aria-label={label} aria-selected={ariaSelected}>
+    <tr {...rest} className={classes} aria-label={label}>
       {children}
     </tr>
   );

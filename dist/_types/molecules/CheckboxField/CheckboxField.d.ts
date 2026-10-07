@@ -16,6 +16,12 @@ export interface CheckboxFieldProps {
     checked?: boolean;
     defaultChecked?: boolean;
     disabled?: boolean;
+    /**
+     * Casilla obligatoria (aceptar las condiciones): Base UI pone `aria-required`
+     * en la casilla y `required` en su input oculto, que es el que valida el
+     * formulario nativo.
+     */
+    required?: boolean;
     /** Talla del sistema. Sin ella, la del `Form` que lo envuelva; sin `Form`, `md`. */
     size?: 'sm' | 'md' | 'lg';
     /** `id` del control. Si no se pasa, se genera con `useId`. */
