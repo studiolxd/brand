@@ -30,6 +30,20 @@ final class ButtonSnapshotTests: XCTestCase {
         }
     }
 
+    /// `Text — con icono` (`atoms-button--text-con-icono`): el subrayado va bajo el texto y no bajo el icono (D64), a la
+    /// distancia del token bajo los descendentes. La pareja `text-icon` de `native/apple/Comparisons/Button/`.
+    func testComparisonTextWithIcon() {
+        let view = Button {} label: {
+            HStack(spacing: 0) {
+                BrandIcon(.arrowLeft, size: .sm)
+                Text("Volver al paso anterior").brandUnderlinedText()
+            }
+        }
+        .buttonStyle(.brand(.text))
+        .fixedSize()
+        assertBrandSnapshots(view, width: 212, height: 52, named: "compare-text-icon", padding: 16)
+    }
+
     func testTextInk() {
         assertBrandSnapshots(
             HStack(spacing: BrandSpacing.s4) {

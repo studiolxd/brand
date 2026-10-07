@@ -19,6 +19,7 @@ import com.studiolxd.brand.components.selectfield.BrandSelectField
 import com.studiolxd.brand.components.switcherfield.BrandSwitcherField
 import com.studiolxd.brand.components.themeswitcher.BrandThemeChoice
 import com.studiolxd.brand.components.themeswitcher.BrandThemeSwitcher
+import com.studiolxd.brand.components.themeswitcher.LocalThemeSwitcherForcedHover
 import com.studiolxd.brand.components.themeswitcher.ThemeSwitcherLayout
 import com.studiolxd.brand.components.themeswitcher.ThemeSwitcherVariant
 import com.studiolxd.brand.components.togglegroup.BrandToggleGroup
@@ -152,6 +153,14 @@ class FieldsComparisonSnapshotTest {
     @Test
     fun themeList() = paparazzi.brandComparison("theme-list", 480, 59) {
         BrandThemeSwitcher(BrandThemeChoice.System, {}, variant = ThemeSwitcherVariant.List)
+    }
+
+    /** `Lista` con el puntero sobre «Claro»: el subrayado de `Link`, bajo el texto y no bajo el icono (D64). */
+    @Test
+    fun themeListHover() = paparazzi.brandComparison("theme-list-hover", 480, 60) {
+        CompositionLocalProvider(LocalThemeSwitcherForcedHover provides BrandThemeChoice.Light) {
+            BrandThemeSwitcher(BrandThemeChoice.System, {}, variant = ThemeSwitcherVariant.List)
+        }
     }
 
     @Test

@@ -240,6 +240,9 @@ respecto a React están en el campo `differences` de cada ficha (`parity/compone
 Button("Guardar") { save() }.buttonStyle(.brand(.primary))
 BrandButton("Eliminar", variant: .outline, destructive: true) { delete() }
 BrandButton(icon: .close, accessibilityLabel: "Cerrar", variant: .ghost) { dismiss() }   // iconOnly
+// `text` con icono: el subrayado va bajo el texto, no bajo el icono (D64); el texto lo marca `brandUnderlinedText()`
+Button { back() } label: { HStack(spacing: 0) { BrandIcon(.arrowLeft, size: .sm); Text("Volver").brandUnderlinedText() } }
+    .buttonStyle(.brand(.text))
 Form { … }.brandControlSize(.lg)          // la talla por defecto de los controles del árbol (`Form size` en React)
 ```
 
