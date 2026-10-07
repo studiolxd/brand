@@ -9,6 +9,16 @@ para breaking changes.
 
 ## [Sin publicar]
 
+- `StarRating`: si falta el texto, no emite un `aria-label` vacío en la escala de solo lectura ni en el grupo de radios.
+- `Tooltip` con `disabledTrigger`: el envoltorio enfocable lleva `role="group"`, `aria-disabled` y toma el nombre del
+  control que envuelve. No cambia nada visible.
+- `ConfirmDialog`: el reinicio del estado pasa del efecto de cierre a la apertura. Ya no se ve vaciarse el campo de la
+  frase durante la animación de salida; tests nuevos de cerrar y reabrir.
+- Tokens: `switcher.lg-track-width` apunta a `{size-component.lg}` en lugar de `3rem`. Valor idéntico en todas las
+  salidas. Era el único literal de los tokens de componente con un primitivo del mismo valor, unidad y rol.
+- Nativo: parejas React ↔ SwiftUI y React ↔ Compose de `Menu`: disparadores a medida y de icono en las dos
+  plataformas, y paneles abiertos en Android. Las capturas de panel de menú en Android apagan el foco automático, que
+  hacía inestable la de `ContextMenu` abierto.
 - `release:npm` lee el stage-id en el formato de npm 11 («staged with id …»); con la v50.0.0 lo subió pero no supo
   imprimirlo. Solo afecta al script de publicación, no al paquete.
 
