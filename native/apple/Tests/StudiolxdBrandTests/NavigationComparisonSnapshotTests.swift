@@ -3,7 +3,7 @@ import XCTest
 @testable import StudiolxdBrand
 
 /// Las mismas composiciones que las stories de Storybook que se usan en `native/apple/Comparisons/` (Banner, Tabs,
-/// DatePickerField, PageIntro y ContextMenu): mismo contenido y mismo lienzo (el ancho del viewport de la captura de
+/// DatePickerField, PageIntro, ContextMenu y Menu): mismo contenido y mismo lienzo (el ancho del viewport de la captura de
 /// React y, salvo en el Banner, que va a sangre, 16 pt de margen). Las dimensiones son las de la captura de React
 /// (`capture-story.mjs`, @2x ÷ 2).
 @MainActor
@@ -170,5 +170,32 @@ final class NavigationComparisonSnapshotTests: XCTestCase {
         ]
         let view = BrandContextMenu(items).frame(maxWidth: .infinity, maxHeight: .infinity)
         assertBrandSnapshots(view, width: 480, height: 200, named: "contextmenu-cerrado", padding: 0)
+    }
+
+    // MARK: Menu (el disparador; el panel es el del sistema y no se captura abierto)
+
+    /// La story «Trigger a medida»: un botón `outline` con el icono `download` y «Exportar», centrado en el lienzo.
+    func testMenuCustomTriggerLikeStory() {
+        let items: [BrandMenuItem] = [.button("CSV", action: {}), .button("Excel", action: {})]
+        let view = BrandMenu(items) {
+            HStack(spacing: BrandSpacing.s2) {
+                BrandIcon(.download, size: .sm)
+                Text("Exportar")
+            }
+        }
+        .buttonStyle(.brand(.outline))
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        assertBrandSnapshots(view, width: 480, height: 200, named: "menu-a-medida", padding: 0)
+    }
+
+    /// La story «Trigger de icono»: un botón `ghost` de solo icono (`settings`), centrado en el lienzo.
+    func testMenuIconTriggerLikeStory() {
+        let items: [BrandMenuItem] = [
+            .button("English", action: {}), .button("Español", action: {}), .separator, .button("Français", action: {}),
+        ]
+        let view = BrandMenu(items) { AccessibleIcon(name: .settings, label: "Cambiar de idioma") }
+            .buttonStyle(.brand(.ghost, iconOnly: true))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        assertBrandSnapshots(view, width: 480, height: 200, named: "menu-icono", padding: 0)
     }
 }

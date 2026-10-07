@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layout
@@ -24,7 +25,10 @@ import com.studiolxd.brand.components.button.BrandButton
 import com.studiolxd.brand.components.button.ButtonVariant
 import com.studiolxd.brand.components.datepickerfield.BrandDatePickerField
 import com.studiolxd.brand.components.menu.BrandContextMenuTrigger
+import com.studiolxd.brand.components.menu.BrandMenu
+import com.studiolxd.brand.components.menu.BrandMenuItem
 import com.studiolxd.brand.components.menu.BrandMenuPanel
+import com.studiolxd.brand.components.menu.LocalBrandMenuAutoFocus
 import com.studiolxd.brand.components.menu.ContextMenuTriggerOrientation
 import com.studiolxd.brand.components.menu.previewMenuItems
 import com.studiolxd.brand.components.pageintro.BrandPageIntroImpl
@@ -35,6 +39,7 @@ import com.studiolxd.brand.components.tag.BrandTag
 import com.studiolxd.brand.components.tag.TagVariant
 import com.studiolxd.brand.components.text.BrandParagraph
 import com.studiolxd.brand.components.text.HeadingLevel
+import com.studiolxd.brand.icon.BrandIconName
 import com.studiolxd.brand.support.BrandControlSize
 import com.studiolxd.brand.tokens.BrandSpacing
 import java.time.LocalDate
@@ -213,6 +218,79 @@ class R6ComparisonSnapshotTest {
     /** El panel abierto: el contenido del `Popup` (layoutlib no pinta ventanas emergentes), a su ancho mínimo de 160 dp. */
     @Test
     fun contextMenuOpen() = paparazzi.brandComparison("contextmenu-abierto", 192, 231) {
-        Box(Modifier.padding(0.dp)) { BrandMenuPanel(previewMenuItems, selection = null, limitHeight = false) {} }
+        NoAutoFocus { Box(Modifier.padding(0.dp)) { BrandMenuPanel(previewMenuItems, selection = null, limitHeight = false) {} } }
+    }
+
+    // ── Menu ─────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+    /** Los ítems de la story «Trigger de icono»: tres idiomas con un separador antes del último. */
+    private val menuLanguageItems = listOf(
+        BrandMenuItem.Button("English", action = {}),
+        BrandMenuItem.Button("Español", action = {}),
+        BrandMenuItem.Separator,
+        BrandMenuItem.Button("Français", action = {}),
+    )
+
+    /** Los ítems de la story «Elección exclusiva (radio)»: el rótulo y tres opciones con icono. */
+    private val menuThemeItems = listOf(
+        BrandMenuItem.Label("Tema"),
+        BrandMenuItem.Radio("Claro", "light", icon = BrandIconName.Sun),
+        BrandMenuItem.Radio("Oscuro", "dark", icon = BrandIconName.Moon),
+        BrandMenuItem.Radio("Sistema", "system", icon = BrandIconName.DeviceDesktop),
+    )
+
+    /** Los ítems de la story «Radio + acciones + destructivo»: radio, acción, deshabilitado, separadores y destructivo. */
+    private val menuMixedItems = listOf(
+        BrandMenuItem.Label("Vista"),
+        BrandMenuItem.Radio("Cuadrícula", "grid"),
+        BrandMenuItem.Radio("Lista", "list"),
+        BrandMenuItem.Separator,
+        BrandMenuItem.Button("Duplicar", action = {}),
+        BrandMenuItem.Button("Publicar", action = {}, disabled = true),
+        BrandMenuItem.Separator,
+        BrandMenuItem.Button("Eliminar", action = {}, destructive = true),
+    )
+
+    /** El disparador centrado en el lienzo, como en la story (el alto del contenido es el de la pareja menos los 32 de margen). */
+    @Composable
+    private fun MenuTriggerPair(items: List<BrandMenuItem>, trigger: @Composable (toggle: () -> Unit) -> Unit) {
+        Box(Modifier.fillMaxWidth().height(168.dp), contentAlignment = Alignment.Center) {
+            BrandMenu(items) { _, toggle -> trigger(toggle) }
+        }
+    }
+
+    @Test
+    fun menuCustomTrigger() = paparazzi.brandComparison("menu-a-medida", 480, 200) {
+        val formats = listOf(BrandMenuItem.Button("CSV", action = {}), BrandMenuItem.Button("Excel", action = {}))
+        MenuTriggerPair(formats) { toggle -> BrandButton("Exportar", onClick = toggle, variant = ButtonVariant.Outline, icon = BrandIconName.Download) }
+    }
+
+    @Test
+    fun menuIconTrigger() = paparazzi.brandComparison("menu-icono", 480, 200) {
+        MenuTriggerPair(menuLanguageItems) { toggle -> BrandButton(BrandIconName.Settings, "Cambiar de idioma", onClick = toggle, variant = ButtonVariant.Ghost) }
+    }
+
+    /**
+     * Sin el foco automático del panel: layoutlib lo resuelve o no según la ejecución, y el primer ítem saldría resaltado
+     * unas veces sí y otras no. La story de React se abre con el puntero, que no resalta ningún ítem.
+     */
+    @Composable
+    private fun NoAutoFocus(content: @Composable () -> Unit) =
+        CompositionLocalProvider(LocalBrandMenuAutoFocus provides false, content = content)
+
+    /** Los paneles abiertos: el contenido del `Popup` (layoutlib no pinta ventanas emergentes), a su ancho mínimo de 160 dp. */
+    @Test
+    fun menuIconOpen() = paparazzi.brandComparison("menu-icono-abierto", 192, 177) {
+        NoAutoFocus { BrandMenuPanel(menuLanguageItems, selection = null, limitHeight = false) {} }
+    }
+
+    @Test
+    fun menuRadioOpen() = paparazzi.brandComparison("menu-radio-abierto", 192, 207) {
+        NoAutoFocus { BrandMenuPanel(menuThemeItems, selection = "system", limitHeight = false) {} }
+    }
+
+    @Test
+    fun menuMixedOpen() = paparazzi.brandComparison("menu-mixto-abierto", 192, 304) {
+        NoAutoFocus { BrandMenuPanel(menuMixedItems, selection = "grid", limitHeight = false) {} }
     }
 }
