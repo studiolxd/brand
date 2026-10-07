@@ -1,7 +1,7 @@
 'use client';
 import './multi-select-field.css';
 import { n as e } from "./_shared/form-size.js";
-import { MultiSelect as t } from "./multi-select.js";
+import { t } from "./_shared/multiselect.js";
 import { n } from "./_shared/field-labels.js";
 import { n as r, t as i } from "./_shared/fieldshell.js";
 import { forwardRef as a } from "react";

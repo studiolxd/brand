@@ -495,8 +495,8 @@ export const ContratoProveedor: Story = {
     const escena = within(canvasElement);
     await expect(escena.getByRole('button', { name: 'Close' })).toBeInTheDocument();
     await expect(escena.queryByRole('button', { name: 'Cerrar' })).toBeNull();
-    // El segundo aviso no pinta aspa: no lee la clave, y por eso no revienta
-    // aunque el catálogo no la trajera.
+    // El segundo aviso no pinta aspa: no lee la clave, y por eso ni la pide
+    // ni avisa aunque el catálogo no la trajera.
     await expect(escena.getAllByRole('button')).toHaveLength(1);
   },
 };

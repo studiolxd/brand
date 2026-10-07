@@ -6,57 +6,61 @@ import { VisuallyHidden as n } from "./visually-hidden.js";
 import { Tag as r } from "./tag.js";
 import { forwardRef as i } from "react";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";
-//#region src/stories/molecules/StatTile/StatTile.tsx
+//#region src/stories/messages/es/statTile.ts
 var s = {
+	up: "Sube",
+	down: "Baja",
+	flat: "Sin cambio"
+}, c = {
 	up: "positive",
 	down: "negative",
 	flat: "neutral"
-}, c = {
+}, l = {
 	positive: "success",
 	negative: "danger",
 	neutral: "neutral"
-}, l = i(function({ label: i, value: l, delta: u, description: d, icon: f, size: p = "md", className: m, ...h }, g) {
-	let _ = e("statTile"), v = [
+}, u = i(function({ label: i, value: u, delta: d, description: f, icon: p, size: m = "md", className: h, ...g }, _) {
+	let v = e("statTile", s), y = [
 		"stat-tile",
-		p === "md" ? "" : `stat-tile--${p}`,
-		m ?? ""
-	].filter(Boolean).join(" "), y = u?.direction ?? "flat", b = u?.tone ?? s[y];
+		m === "md" ? "" : `stat-tile--${m}`,
+		h ?? ""
+	].filter(Boolean).join(" "), b = d?.direction ?? "flat", x = d?.tone ?? c[b];
 	return /* @__PURE__ */ o("div", {
-		ref: g,
-		className: v,
-		...h,
+		ref: _,
+		className: y,
+		...g,
 		children: [
 			/* @__PURE__ */ o("p", {
 				className: "stat-tile__label",
-				children: [f && /* @__PURE__ */ a("span", {
+				children: [p && /* @__PURE__ */ a("span", {
 					className: "stat-tile__icon",
 					"aria-hidden": "true",
-					children: f
+					children: p
 				}), i]
 			}),
 			/* @__PURE__ */ a("p", {
 				className: "stat-tile__value",
-				children: l
+				children: u
 			}),
-			u && /* @__PURE__ */ o(r, {
-				variant: c[b],
+			d && /* @__PURE__ */ o(r, {
+				variant: l[x],
 				className: "stat-tile__delta",
 				children: [
 					/* @__PURE__ */ a(t, {
 						name: "arrow",
 						size: "sm",
-						className: `stat-tile__delta-icon stat-tile__delta-icon--${y}`
+						className: `stat-tile__delta-icon stat-tile__delta-icon--${b}`
 					}),
-					/* @__PURE__ */ a(n, { children: _(y, u.label) }),
-					u.value
+					/* @__PURE__ */ a(n, { children: v(b, d.label) }),
+					d.value
 				]
 			}),
-			d && /* @__PURE__ */ a("p", {
+			f && /* @__PURE__ */ a("p", {
 				className: "stat-tile__description",
-				children: d
+				children: f
 			})
 		]
 	});
 });
 //#endregion
-export { l as StatTile };
+export { u as StatTile };

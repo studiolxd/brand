@@ -5,6 +5,7 @@ import { useFormSize } from '../../constants/form-size';
 import { Icon } from '../../atoms/Icon/Icon';
 import { InputField } from '../InputField/InputField';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { searchFormEs } from '../../messages/es/searchForm';
 import './SearchForm.css';
 
 /**
@@ -117,7 +118,7 @@ export const SearchForm = forwardRef<HTMLInputElement, SearchFormProps>(function
   describedBy,
   controls,
 }: SearchFormProps, ref) {
-  const t = useBrandMessages('searchForm');
+  const t = useBrandMessages('searchForm', searchFormEs);
   // `xl` no es una talla de formulario: no viaja por el contexto de `Form` ni
   // se le pregunta a `useFormSize`, que solo conoce `sm|md|lg`. Cuando se pide
   // manda tal cual; el campo interior va a `lg` y el propio buscador lo estira

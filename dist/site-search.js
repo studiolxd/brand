@@ -4,74 +4,90 @@ import { n as e } from "./_shared/brandmessagescontext.js";
 import { Spinner as t } from "./spinner.js";
 import { Button as n } from "./button.js";
 import { Skeleton as r } from "./skeleton.js";
-import { Alert as i } from "./alert.js";
+import { t as i } from "./_shared/alert.js";
 import { t as a } from "./_shared/default-render-link.js";
 import { EmptyState as o } from "./empty-state.js";
-import { SearchForm as s } from "./search-form.js";
+import { t as s } from "./_shared/searchform.js";
 import { forwardRef as c, useId as l } from "react";
 import { jsx as u, jsxs as d } from "react/jsx-runtime";
-//#region src/stories/organisms/SiteSearch/SiteSearch.tsx
-var f = c(function({ query: c, onQueryChange: f, onSubmit: p, action: m, name: h = "q", status: g = "idle", results: _ = [], total: v, minLength: y = 2, suggestions: b, onSuggestionSelect: x, onRetry: S, toolbar: C, footer: w, headingLevel: T = 2, size: E, loadingRows: D = 3, onSelect: O, renderLink: k = a, label: A, labelHidden: j = !0, placeholder: M, submitLabel: N, resultsLabel: P, className: F, id: I, ...L }, R) {
-	let z = e("siteSearch"), B = l(), V = I ?? B, H = `${V}-input`, U = `${V}-status`, W = `${V}-results`, G = `h${T}`, K = c.trim(), q = v ?? _.length, J = g === "ready" && _.length > 0, Y = g === "idle" ? z("idle") : g === "typing" ? K.length < y ? z("minLength")(y) : z("pending") : g === "loading" ? z("loading") : g === "error" ? null : z("results")(q, K);
+//#region src/stories/messages/es/siteSearch.ts
+var f = {
+	label: "Buscar en el sitio",
+	placeholder: "¿Qué estás buscando?",
+	submit: "Buscar",
+	idle: "Escribe para buscar en todo el sitio",
+	minLength: (e) => `Escribe al menos ${e} caracteres`,
+	pending: "Pulsa Intro para buscar",
+	loading: "Buscando…",
+	results: (e, t) => e === 1 ? `1 resultado para «${t}»` : `${e} resultados para «${t}»`,
+	resultsLabel: "Resultados de la búsqueda",
+	emptyTitle: "Sin resultados",
+	emptyDescription: "Revisa la ortografía o prueba con menos palabras.",
+	suggestionsLabel: "Búsquedas frecuentes",
+	errorTitle: "No se ha podido buscar",
+	errorDescription: "El buscador no ha respondido. Vuelve a intentarlo en unos segundos.",
+	retry: "Reintentar"
+}, p = c(function({ query: c, onQueryChange: p, onSubmit: m, action: h, name: g = "q", status: _ = "idle", results: v = [], total: y, minLength: b = 2, suggestions: x, onSuggestionSelect: S, onRetry: C, toolbar: w, footer: T, headingLevel: E = 2, size: D, loadingRows: O = 3, onSelect: k, renderLink: A = a, label: j, labelHidden: M = !0, placeholder: N, submitLabel: P, resultsLabel: F, className: I, id: L, ...R }, z) {
+	let B = e("siteSearch", f), V = l(), H = L ?? V, U = `${H}-input`, W = `${H}-status`, G = `${H}-results`, K = `h${E}`, q = c.trim(), J = y ?? v.length, Y = _ === "ready" && v.length > 0, X = _ === "idle" ? B("idle") : _ === "typing" ? q.length < b ? B("minLength")(b) : B("pending") : _ === "loading" ? B("loading") : _ === "error" ? null : B("results")(J, q);
 	return /* @__PURE__ */ d("div", {
-		className: ["site-search", F].filter(Boolean).join(" "),
-		...L,
+		className: ["site-search", I].filter(Boolean).join(" "),
+		...R,
 		children: [
 			/* @__PURE__ */ u(s, {
-				ref: R,
+				ref: z,
 				className: "site-search__form",
-				id: H,
-				name: h,
-				label: z("label", A),
-				labelHidden: j,
-				placeholder: z("placeholder", M),
-				submitLabel: z("submit", N),
+				id: U,
+				name: g,
+				label: B("label", j),
+				labelHidden: M,
+				placeholder: B("placeholder", N),
+				submitLabel: B("submit", P),
 				value: c,
-				onChange: (e) => f(e.target.value),
-				...p ? { onSubmit: p } : {},
-				action: m,
-				describedBy: U,
-				...J ? { controls: W } : {},
-				...E ? { size: E } : {}
+				onChange: (e) => p(e.target.value),
+				...m ? { onSubmit: m } : {},
+				action: h,
+				describedBy: W,
+				...Y ? { controls: G } : {},
+				...D ? { size: D } : {}
 			}),
-			C ? /* @__PURE__ */ u("div", {
+			w ? /* @__PURE__ */ u("div", {
 				className: "site-search__toolbar",
-				children: C
+				children: w
 			}) : null,
 			/* @__PURE__ */ d("p", {
 				className: "site-search__status",
-				id: U,
+				id: W,
 				role: "status",
 				"aria-live": "polite",
-				children: [g === "loading" ? /* @__PURE__ */ u(t, {
+				children: [_ === "loading" ? /* @__PURE__ */ u(t, {
 					size: "sm",
 					"aria-hidden": !0
 				}) : null, /* @__PURE__ */ u("span", {
 					className: "site-search__status-text",
-					children: Y
+					children: X
 				})]
 			}),
-			g === "idle" && b && b.length > 0 && x ? /* @__PURE__ */ d("div", {
+			_ === "idle" && x && x.length > 0 && S ? /* @__PURE__ */ d("div", {
 				className: "site-search__suggestions",
 				children: [/* @__PURE__ */ u("span", {
 					className: "site-search__suggestions-label",
-					id: `${V}-suggestions`,
-					children: z("suggestionsLabel")
+					id: `${H}-suggestions`,
+					children: B("suggestionsLabel")
 				}), /* @__PURE__ */ u("ul", {
 					className: "site-search__suggestions-list",
-					"aria-labelledby": `${V}-suggestions`,
-					children: b.map((e) => /* @__PURE__ */ u("li", { children: /* @__PURE__ */ u(n, {
+					"aria-labelledby": `${H}-suggestions`,
+					children: x.map((e) => /* @__PURE__ */ u("li", { children: /* @__PURE__ */ u(n, {
 						variant: "outline",
 						size: "sm",
-						onClick: () => x(e),
+						onClick: () => S(e),
 						children: e
 					}) }, e))
 				})]
 			}) : null,
-			g === "loading" ? /* @__PURE__ */ u("div", {
+			_ === "loading" ? /* @__PURE__ */ u("div", {
 				className: "site-search__loading",
 				"aria-hidden": !0,
-				children: Array.from({ length: D }, (e, t) => /* @__PURE__ */ d("div", {
+				children: Array.from({ length: O }, (e, t) => /* @__PURE__ */ d("div", {
 					className: "site-search__ghost",
 					children: [
 						/* @__PURE__ */ u(r, { className: "site-search__ghost-section" }),
@@ -81,24 +97,24 @@ var f = c(function({ query: c, onQueryChange: f, onSubmit: p, action: m, name: h
 					]
 				}, t))
 			}) : null,
-			J ? /* @__PURE__ */ u("ol", {
+			Y ? /* @__PURE__ */ u("ol", {
 				className: "site-search__results",
-				id: W,
-				"aria-label": z("resultsLabel", P),
-				children: _.map((e) => /* @__PURE__ */ d("li", {
+				id: G,
+				"aria-label": B("resultsLabel", F),
+				children: v.map((e) => /* @__PURE__ */ d("li", {
 					className: "site-search__result",
 					children: [
 						e.section ? /* @__PURE__ */ u("p", {
 							className: "site-search__result-section",
 							children: e.section
 						}) : null,
-						/* @__PURE__ */ u(G, {
+						/* @__PURE__ */ u(K, {
 							className: "site-search__result-title",
-							children: k({
+							children: A({
 								href: e.href,
 								className: "site-search__result-link",
 								children: e.title,
-								onClick: () => O?.(e)
+								onClick: () => k?.(e)
 							})
 						}),
 						e.excerpt ? /* @__PURE__ */ u("p", {
@@ -112,28 +128,28 @@ var f = c(function({ query: c, onQueryChange: f, onSubmit: p, action: m, name: h
 					]
 				}, e.href))
 			}) : null,
-			g === "ready" && _.length === 0 ? /* @__PURE__ */ u(o, {
+			_ === "ready" && v.length === 0 ? /* @__PURE__ */ u(o, {
 				className: "site-search__empty",
-				title: z("emptyTitle"),
-				description: z("emptyDescription")
+				title: B("emptyTitle"),
+				description: B("emptyDescription")
 			}) : null,
-			g === "error" ? /* @__PURE__ */ u(i, {
+			_ === "error" ? /* @__PURE__ */ u(i, {
 				className: "site-search__error",
 				variant: "error",
-				title: z("errorTitle"),
-				description: z("errorDescription"),
-				actions: S ? /* @__PURE__ */ u(n, {
+				title: B("errorTitle"),
+				description: B("errorDescription"),
+				actions: C ? /* @__PURE__ */ u(n, {
 					variant: "outline",
-					onClick: S,
-					children: z("retry")
+					onClick: C,
+					children: B("retry")
 				}) : void 0
 			}) : null,
-			w && J ? /* @__PURE__ */ u("div", {
+			T && Y ? /* @__PURE__ */ u("div", {
 				className: "site-search__footer",
-				children: w
+				children: T
 			}) : null
 		]
 	});
 });
 //#endregion
-export { f as SiteSearch };
+export { p as SiteSearch };

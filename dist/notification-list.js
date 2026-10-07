@@ -7,14 +7,21 @@ import { Button as r } from "./button.js";
 import { Text as i } from "./text.js";
 import { t as a } from "./_shared/default-render-link.js";
 import { Fragment as o, jsx as s, jsxs as c } from "react/jsx-runtime";
+//#region src/stories/messages/es/notificationList.ts
+var l = {
+	label: "Notificaciones",
+	unread: "Sin leer",
+	markRead: "Marcar como leída"
+};
+//#endregion
 //#region src/stories/molecules/NotificationList/NotificationList.tsx
-function l({ items: l, renderLink: u = a, renderActions: d, onItemClick: f, onMarkRead: p, label: m, unreadLabel: h, markReadLabel: g, className: _ }) {
-	let v = e("notificationList");
-	return l.length === 0 ? null : /* @__PURE__ */ s("ul", {
-		className: ["notification-list", _].filter(Boolean).join(" "),
-		"aria-label": v("label", m),
-		children: l.map((e) => {
-			let a = e.unread, l = d?.(e);
+function u({ items: u, renderLink: d = a, renderActions: f, onItemClick: p, onMarkRead: m, label: h, unreadLabel: g, markReadLabel: _, className: v }) {
+	let y = e("notificationList", l);
+	return u.length === 0 ? null : /* @__PURE__ */ s("ul", {
+		className: ["notification-list", v].filter(Boolean).join(" "),
+		"aria-label": y("label", h),
+		children: u.map((e) => {
+			let a = e.unread, l = f?.(e);
 			return /* @__PURE__ */ c("li", {
 				className: "notification-list__item",
 				children: [
@@ -24,14 +31,14 @@ function l({ items: l, renderLink: u = a, renderActions: d, onItemClick: f, onMa
 							name: "dot",
 							size: "sm",
 							className: "notification-list__dot"
-						}), /* @__PURE__ */ s(n, { children: e.unreadLabel ?? v("unread", h) })] })
+						}), /* @__PURE__ */ s(n, { children: e.unreadLabel ?? y("unread", g) })] })
 					}),
 					/* @__PURE__ */ c("div", {
 						className: "notification-list__text",
-						children: [e.href ? u({
+						children: [e.href ? d({
 							href: e.href,
 							className: "notification-list__title",
-							onClick: f ? () => f(e) : void 0,
+							onClick: p ? () => p(e) : void 0,
 							children: e.title
 						}) : /* @__PURE__ */ s(i, {
 							className: "notification-list__title",
@@ -42,13 +49,13 @@ function l({ items: l, renderLink: u = a, renderActions: d, onItemClick: f, onMa
 							children: e.body
 						})]
 					}),
-					(p || l) && /* @__PURE__ */ c("div", {
+					(m || l) && /* @__PURE__ */ c("div", {
 						className: "notification-list__actions",
-						children: [p && a && /* @__PURE__ */ s(r, {
+						children: [m && a && /* @__PURE__ */ s(r, {
 							variant: "text",
 							size: "sm",
-							onClick: () => p(e.id),
-							children: v("markRead", g)
+							onClick: () => m(e.id),
+							children: y("markRead", _)
 						}), l]
 					}),
 					e.timeDateTime ? /* @__PURE__ */ s("time", {
@@ -65,4 +72,4 @@ function l({ items: l, renderLink: u = a, renderActions: d, onItemClick: f, onMa
 	});
 }
 //#endregion
-export { l as NotificationList };
+export { u as NotificationList };

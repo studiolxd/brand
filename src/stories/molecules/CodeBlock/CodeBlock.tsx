@@ -8,6 +8,8 @@ import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { useCopyToClipboard } from '../../constants/copy-to-clipboard';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { codeBlockEs } from '../../messages/es/codeBlock';
+import { copyEs } from '../../messages/es/copy';
 
 /**
  * Los dos textos propios del bloque de código. El acuse de copiar **no está
@@ -76,8 +78,8 @@ export function CodeBlock({
   className,
   ...rest
 }: CodeBlockProps) {
-  const t = useBrandMessages('codeBlock');
-  const tCopy = useBrandMessages('copy');
+  const t = useBrandMessages('codeBlock', codeBlockEs);
+  const tCopy = useBrandMessages('copy', copyEs);
   const codeRef = useRef<HTMLElement>(null);
   // Portapapeles no disponible (contexto no seguro, permiso denegado): el
   // estado `error` del hook no se pinta aquí, así que no hay acuse. El código

@@ -8,6 +8,7 @@ import { Calendar } from '../Calendar/Calendar';
 import type { CalendarProps } from '../Calendar/Calendar';
 import { getDateMask, type DateMaskLetters } from './dateMask';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { datePickerEs } from '../../messages/es/datePicker';
 import './DatePicker.css';
 import { assignRef } from '../../constants/assign-ref';
 
@@ -184,7 +185,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
   onBlur,
   className,
 }: DatePickerProps, ref) {
-  const t = useBrandMessages('datePicker');
+  const t = useBrandMessages('datePicker', datePickerEs);
   const [open, setOpen] = useState(false);
   const mask = useMemo(() => getDateMask(locale), [locale]);
 

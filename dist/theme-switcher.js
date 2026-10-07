@@ -7,8 +7,14 @@ import { Menu as r } from "./menu.js";
 import { DropdownField as i } from "./dropdown-field.js";
 import { useId as a } from "react";
 import { jsx as o, jsxs as s } from "react/jsx-runtime";
-//#region src/stories/molecules/ThemeSwitcher/ThemeSwitcher.tsx
-var c = [
+//#region src/stories/messages/es/themeSwitcher.ts
+var c = {
+	group: "Tema",
+	light: "Claro",
+	dark: "Oscuro",
+	system: "Sistema",
+	trigger: (e, t) => `${e}: ${t}`
+}, l = [
 	{
 		value: "light",
 		icon: "sun"
@@ -22,39 +28,39 @@ var c = [
 		icon: "device-desktop"
 	}
 ];
-function l({ value: l, onChange: u, labels: d, id: f, variant: p = "compact", layout: m = "inline", size: h = "md", className: g }) {
-	let _ = a(), v = f ?? _, y = e("themeSwitcher"), b = {
-		group: () => y("group", d?.group),
-		light: () => y("light", d?.light),
-		dark: () => y("dark", d?.dark),
-		system: () => y("system", d?.system)
-	}, x = c.find((e) => e.value === l) ?? c[2];
-	if (p === "list") return /* @__PURE__ */ o("div", {
+function u({ value: u, onChange: d, labels: f, id: p, variant: m = "compact", layout: h = "inline", size: g = "md", className: _ }) {
+	let v = a(), y = p ?? v, b = e("themeSwitcher", c), x = {
+		group: () => b("group", f?.group),
+		light: () => b("light", f?.light),
+		dark: () => b("dark", f?.dark),
+		system: () => b("system", f?.system)
+	}, S = l.find((e) => e.value === u) ?? l[2];
+	if (m === "list") return /* @__PURE__ */ o("div", {
 		className: [
 			"theme-switcher",
 			"theme-switcher--list",
-			g
+			_
 		].filter(Boolean).join(" "),
 		role: "group",
-		"aria-label": b.group(),
+		"aria-label": x.group(),
 		children: /* @__PURE__ */ o("ul", {
 			className: "theme-switcher__list",
-			children: c.map(({ value: e, icon: n }) => {
-				let r = e === l;
+			children: l.map(({ value: e, icon: n }) => {
+				let r = e === u;
 				return /* @__PURE__ */ o("li", { children: /* @__PURE__ */ s("button", {
 					type: "button",
 					className: ["theme-switcher__option", r ? "theme-switcher__option--current" : ""].filter(Boolean).join(" "),
 					"aria-pressed": r,
-					onClick: r ? void 0 : () => u?.(e),
+					onClick: r ? void 0 : () => d?.(e),
 					children: [/* @__PURE__ */ o(t, {
 						name: n,
 						size: "sm"
-					}), /* @__PURE__ */ o("span", { children: b[e]() })]
+					}), /* @__PURE__ */ o("span", { children: x[e]() })]
 				}) }, e);
 			})
 		})
 	});
-	let S = c.map(({ value: e, icon: n }) => ({
+	let C = l.map(({ value: e, icon: n }) => ({
 		type: "radio",
 		value: e,
 		label: /* @__PURE__ */ s("span", {
@@ -62,46 +68,46 @@ function l({ value: l, onChange: u, labels: d, id: f, variant: p = "compact", la
 			children: [/* @__PURE__ */ o(t, {
 				name: n,
 				size: "sm"
-			}), b[e]()]
+			}), x[e]()]
 		})
 	}));
-	if (p === "icon") return /* @__PURE__ */ o(r, {
-		className: g,
+	if (m === "icon") return /* @__PURE__ */ o(r, {
+		className: _,
 		align: "end",
-		size: h,
-		value: l,
-		onValueChange: (e) => u?.(e),
-		items: S,
+		size: g,
+		value: u,
+		onValueChange: (e) => d?.(e),
+		items: C,
 		trigger: /* @__PURE__ */ o(n, {
 			variant: "ghost",
-			size: h,
+			size: g,
 			iconOnly: !0,
-			"aria-label": y("trigger", d?.trigger)(b.group(), b[x.value]()),
+			"aria-label": b("trigger", f?.trigger)(x.group(), x[S.value]()),
 			children: /* @__PURE__ */ o(t, {
-				name: x.icon,
+				name: S.icon,
 				size: "md"
 			})
 		})
 	});
-	let C = [
+	let w = [
 		"theme-switcher",
 		"theme-switcher--compact",
-		g
+		_
 	].filter(Boolean).join(" ");
 	return /* @__PURE__ */ s(i, {
-		id: v,
-		label: b.group(),
-		inline: m === "inline",
-		size: h,
-		className: C,
-		value: l,
-		onValueChange: (e) => u?.(e),
-		items: S,
+		id: y,
+		label: x.group(),
+		inline: h === "inline",
+		size: g,
+		className: w,
+		value: u,
+		onValueChange: (e) => d?.(e),
+		items: C,
 		children: [/* @__PURE__ */ o(t, {
-			name: x.icon,
+			name: S.icon,
 			size: "sm"
-		}), b[x.value]()]
+		}), x[S.value]()]
 	});
 }
 //#endregion
-export { l as ThemeSwitcher };
+export { u as ThemeSwitcher };

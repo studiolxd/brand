@@ -5,6 +5,8 @@ import { PrevNextNav } from '../PrevNextNav/PrevNextNav';
 import { isSameDay, shiftMonth, useToday } from '../_shared/calendarGrid';
 import './CalendarRoster.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { calendarEs } from '../../messages/es/calendar';
+import { calendarRosterEs } from '../../messages/es/calendarRoster';
 import { useOverflowFocusable } from '../../constants/overflow-focusable';
 
 /**
@@ -190,8 +192,8 @@ export function CalendarRoster({
   today: todayProp,
   className,
 }: CalendarRosterProps) {
-  const t = useBrandMessages('calendar');
-  const tr = useBrandMessages('calendarRoster');
+  const t = useBrandMessages('calendar', calendarEs);
+  const tr = useBrandMessages('calendarRoster', calendarRosterEs);
   // La leyenda se arma DONDE se pinta: sin `showLegend` no se exige ninguna
   // de las seis claves.
   const leyenda = legendItems ?? (showLegend ? LEGEND_TYPES.map(({ type, key }) => ({ type, label: tr(key) })) : []);

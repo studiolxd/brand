@@ -6,6 +6,7 @@ import { Tooltip } from '../../atoms/Tooltip/Tooltip';
 import { useSidebar } from '../../sections/Sidebar/SidebarContext';
 import './SidebarNav.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { sidebarNavEs } from '../../messages/es/sidebarNav';
 import { defaultRenderLink } from '../../constants/default-render-link';
 
 export interface SidebarNavItem {
@@ -114,7 +115,7 @@ export function SidebarNav({
   renderLink = defaultRenderLink,
   className,
 }: SidebarNavProps) {
-  const t = useBrandMessages('sidebarNav');
+  const t = useBrandMessages('sidebarNav', sidebarNavEs);
   // El disparador del grupo es un botón con solo el chevrón: toma su nombre
   // accesible de la etiqueta del grupo (`aria-labelledby`), que ya está
   // pintada; el panel que despliega, también.

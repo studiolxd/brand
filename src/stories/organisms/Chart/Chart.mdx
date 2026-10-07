@@ -144,7 +144,7 @@ El cromo del gráfico sale del `BrandMessagesProvider`, **sin valor por defecto*
 | `shareLabel` | `chart.share` | solo en `pie` y `donut` |
 | `emptyMessage` | `chart.empty` | solo cuando no hay nada que pintar |
 
-El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**.
+El orden es **prop → proveedor → castellano de respaldo**, y cada texto se lee **donde se pinta**.
 
 **`ariaLabel` no va al catálogo y sigue siendo obligatorio**: dice qué cuenta ESTE gráfico —«Precio por millón de tokens, por mes»—, y un texto común lo dejaría diciendo «Gráfico» en todas partes sin que nada fallara. Es el mismo criterio que el `caption` de una `Table`. El `title`, el `caption` y los nombres de las series también son contenido.
 

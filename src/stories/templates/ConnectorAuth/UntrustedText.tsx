@@ -2,6 +2,7 @@
 
 import type { ReactNode } from 'react';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { untrustedTextEs } from '../../messages/es/untrustedText';
 import './UntrustedText.css';
 
 /**
@@ -136,7 +137,7 @@ export function UntrustedText({
   quotes,
   className,
 }: UntrustedTextProps) {
-  const t = useBrandMessages('untrustedText');
+  const t = useBrandMessages('untrustedText', untrustedTextEs);
   const clases = (...extra: (string | undefined)[]) => [...extra, className].filter(Boolean).join(' ');
 
   // Lo que no es una cadena no lo compuso un tercero: se pinta tal cual.

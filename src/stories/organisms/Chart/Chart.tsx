@@ -6,6 +6,7 @@ import { Inline } from '../../atoms/Inline/Inline';
 import { Tag } from '../../atoms/Tag/Tag';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { chartEs } from '../../messages/es/chart';
 import './Chart.css';
 
 /**
@@ -416,7 +417,7 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
   const hintId = useId();
 
   const numberFormat = useMemo(() => new Intl.NumberFormat(locale), [locale]);
-  const t = useBrandMessages('chart');
+  const t = useBrandMessages('chart', chartEs);
   const percentFormat = useMemo(() => new Intl.NumberFormat(locale, { style: 'percent', maximumFractionDigits: 1 }), [locale]);
   const fmtValue = (value: number, s?: ChartSeries) => (formatValue ? formatValue(value, s) : numberFormat.format(value));
   const fmtX = (value: string | number) => (formatX ? formatX(value) : String(value));

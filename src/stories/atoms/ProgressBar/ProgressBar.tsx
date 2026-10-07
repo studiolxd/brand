@@ -1,5 +1,6 @@
 import progressBarTokens from '../../../../tokens/component/progress-bar.json';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { progressBarEs } from '../../messages/es/progressBar';
 import './ProgressBar.css';
 
 /**
@@ -52,7 +53,7 @@ export function ProgressBar({
   label,
   className,
 }: ProgressBarProps) {
-  const t = useBrandMessages('progressBar');
+  const t = useBrandMessages('progressBar', progressBarEs);
   const clamped = Math.min(100, Math.max(0, Math.round(value)));
   const showLabel = size !== 'sm';
   const labelInside = showLabel && clamped >= INSIDE_THRESHOLD;

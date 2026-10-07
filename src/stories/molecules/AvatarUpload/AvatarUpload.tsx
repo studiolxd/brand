@@ -7,6 +7,7 @@ import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { DEFAULT_LOCALE, formatFileSize, formatList, validateFile } from '../../atoms/FileUpload/validate';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { avatarUploadEs } from '../../messages/es/avatarUpload';
 import { ImageCropDialog } from '../ImageCropDialog/ImageCropDialog';
 import { useFormSize, type FormSize } from '../../constants/form-size';
 import { isDevelopment } from '../../constants/env';
@@ -308,7 +309,7 @@ export function AvatarUpload({
   cropErrorMessage,
   className,
 }: AvatarUploadProps) {
-  const t = useBrandMessages('avatarUpload');
+  const t = useBrandMessages('avatarUpload', avatarUploadEs);
   const size = useFormSize(sizeProp);
   const inputRef = useRef<HTMLInputElement>(null);
   const sourceRef = useRef<{ url: string; file: File } | null>(null);

@@ -5,6 +5,7 @@ import { CloseButton } from '../../atoms/CloseButton/CloseButton';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { DialogFooter, DialogHeader, DialogOverlay } from '../_shared/dialogSurface';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { modalEs } from '../../messages/es/modal';
 import './Modal.css';
 import { usePortalContainer } from '../../constants/portal-container';
 
@@ -121,7 +122,7 @@ export function Modal({
   className,
   ...rest
 }: ModalProps) {
-  const t = useBrandMessages('modal');
+  const t = useBrandMessages('modal', modalEs);
   const portalContainer = usePortalContainer(container);
   // Base UI solo enlaza `aria-describedby` cuando hay un `Dialog.Description`
   // montado, así que basta con pasar la prop cuando el consumidor la trae.

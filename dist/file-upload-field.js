@@ -1,7 +1,7 @@
 'use client';
 import './file-upload-field.css';
 import { n as e } from "./_shared/form-size.js";
-import { FileUpload as t } from "./file-upload.js";
+import { t } from "./_shared/fileupload.js";
 import { n } from "./_shared/field-labels.js";
 import { n as r, t as i } from "./_shared/fieldshell.js";
 import { forwardRef as a } from "react";

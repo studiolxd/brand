@@ -1,6 +1,7 @@
 import { forwardRef, useMemo } from 'react';
 import { Select } from '../Select/Select';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { timeSelectEs } from '../../messages/es/timeSelect';
 import './TimeSelect.css';
 
 /**
@@ -104,7 +105,7 @@ export const TimeSelect = forwardRef<HTMLButtonElement, TimeSelectProps>(functio
   hoursPlaceholder,
   minutesPlaceholder,
 }: TimeSelectProps, ref) {
-  const t = useBrandMessages('timeSelect');
+  const t = useBrandMessages('timeSelect', timeSelectEs);
   const hourOptions = useMemo(
     () => Array.from({ length: 24 }, (_, i) => ({ value: String(i), label: pad(i) })),
     []

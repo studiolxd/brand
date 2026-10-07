@@ -7,6 +7,7 @@ import { Code } from '../../atoms/Code/Code';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Stack } from '../../atoms/Stack/Stack';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { connectorRejectionEs } from '../../messages/es/connectorRejection';
 
 /**
  * Por qué no se ha conectado nada. Son los cinco errores que el servidor de
@@ -145,7 +146,7 @@ export function ConnectorRejectionPage({
   shell,
   className,
 }: ConnectorRejectionPageProps) {
-  const t = useBrandMessages('connectorRejection');
+  const t = useBrandMessages('connectorRejection', connectorRejectionEs);
 
   const salida =
     retryAction ??

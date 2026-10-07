@@ -1,5 +1,6 @@
 import { Children, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { filterBarEs } from '../../messages/es/filterBar';
 import './FilterBar.css';
 
 /**
@@ -63,7 +64,7 @@ export function FilterBar({
   className,
   ...rest
 }: FilterBarProps) {
-  const t = useBrandMessages('filterBar');
+  const t = useBrandMessages('filterBar', filterBarEs);
   const filters = Children.toArray(children);
 
   return (

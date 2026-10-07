@@ -5,13 +5,16 @@ import { fileURLToPath } from 'node:url';
 import { entryPoints } from '../../../scripts/entry-points.mjs';
 
 /**
- * El fixture de textos del Storybook **no puede viajar en el paquete**.
+ * Dónde vive cada catálogo, y qué viaja en el paquete.
  *
- * Es la única objeción capaz de tumbar la campaña: si el catálogo castellano
- * que usa el Storybook acabara publicado —o si algún componente lo importara—
- * habríamos cambiado un default por otro, y seguiría habiendo un camino de
- * ejecución que cae en castellano dentro de una app en francés. Estos tests
- * son la garantía, no el comentario que lo promete.
+ * Desde D5 el castellano **sí viaja**: es el respaldo de lo que la app no
+ * traduce (`src/stories/messages/es/`). Pero viaja **troceado por espacio**:
+ * cada componente importa el suyo, y el ensamblado entero
+ * (`brandMessagesEs.ts`) no lo importa nadie que se compile a `dist/` —si lo
+ * hiciera, todos los espacios se compartirían entre entradas y el respaldo de
+ * todos acabaría en el bundle de cualquiera—. Los fixtures del Storybook
+ * siguen fuera del paquete. Estos tests son la garantía, no el comentario que
+ * lo promete.
  */
 
 const repoRoot = fileURLToPath(new URL('../../../', import.meta.url));
@@ -75,13 +78,59 @@ describe('los fixtures de textos se quedan fuera del paquete', () => {
 });
 
 /**
- * Un componente migrado no puede traer su castellano puesto: si quedara, la
- * prop ausente caería en él en vez de llegar al proveedor, y una app en
- * francés pintaría «Acciones» sin que falle nada.
+ * Un componente no escribe su castellano en su propio cuerpo: el respaldo
+ * vive en `messages/es/<espacio>.ts` y entra por el lector, que es quien sabe
+ * dar antes la prop y el catálogo y avisar cuando cae al castellano. Un
+ * literal suelto en el componente se saltaría las dos cosas.
  *
  * Se mira **el cuerpo**, no el JSDoc: la doc de una prop nombra el texto para
  * explicarlo, y eso no es un camino de ejecución.
  */
+const códigoDelPaquete = () =>
+  ficherosDe(join(repoRoot, 'src'), ['.ts', '.tsx'])
+    .filter((ruta) => !/\.(test|stories)\.tsx?$/.test(ruta))
+    .map((ruta) => ({ ruta: relative(repoRoot, ruta), código: readFileSync(ruta, 'utf8') }));
+
+const espacios = readdirSync(join(repoRoot, 'src/stories/messages/es'))
+  .map((fichero) => fichero.replace(/\.ts$/, ''))
+  .sort();
+
+describe('el respaldo castellano viaja troceado por espacio (D5)', () => {
+  it('hay un fichero de respaldo por espacio de BrandMessages, ni más ni menos', () => {
+    const forma = readFileSync(join(repoRoot, 'src/stories/messages/BrandMessages.ts'), 'utf8');
+    const cuerpo = forma.slice(forma.indexOf('interface BrandMessagesShape {'));
+    const declarados = [...cuerpo.slice(0, cuerpo.indexOf('\n}')).matchAll(/^ {2}(\w+): /gm)]
+      .map((m) => m[1])
+      .sort();
+
+    expect(espacios).toEqual(declarados);
+  });
+
+  it('cada lector de la librería pasa el respaldo de SU espacio', () => {
+    const mal = códigoDelPaquete()
+      .filter(({ ruta }) => !ruta.startsWith('src/stories/messages/'))
+      .flatMap(({ ruta, código }) =>
+        [...código.matchAll(/useBrandMessages\(\s*'(\w+)'\s*(?:,\s*(\w+)\s*)?\)/g)]
+          .filter(([, espacio, respaldo]) => respaldo !== `${espacio}Es`)
+          .map(([llamada]) => `${ruta}: ${llamada}`),
+      );
+
+    expect(mal).toEqual([]);
+  });
+
+  it('ningún código del paquete importa el catálogo ensamblado', () => {
+    const culpables = códigoDelPaquete()
+      .filter(({ ruta }) => ruta !== 'src/stories/messages/brandMessagesEs.ts')
+      .filter(({ código }) => /from\s+['"][^'"]*\/brandMessagesEs['"]/.test(código))
+      .map(({ ruta }) => ruta);
+
+    expect(culpables).toEqual([]);
+    expect(Object.values(entryPoints as Record<string, string>)).not.toContain(
+      'src/stories/messages/brandMessagesEs.ts',
+    );
+  });
+});
+
 describe.each([
   [
     'Pagination',

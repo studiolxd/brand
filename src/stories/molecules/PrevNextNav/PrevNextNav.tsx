@@ -2,6 +2,7 @@ import type { ComponentType, MouseEvent, ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
 import './PrevNextNav.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { prevNextNavEs } from '../../messages/es/prevNextNav';
 
 export interface PrevNextNavProps {
   /** href del enlace anterior. Mutuamente exclusivo con prevOnClick */
@@ -157,7 +158,7 @@ export function PrevNextNav({
   size = 'md',
   className,
 }: PrevNextNavProps) {
-  const t = useBrandMessages('prevNextNav');
+  const t = useBrandMessages('prevNextNav', prevNextNavEs);
   const chevronSize = size === 'sm' ? 'sm' : 'md';
   const titled = prevTitle !== undefined || nextTitle !== undefined;
   const classes = [

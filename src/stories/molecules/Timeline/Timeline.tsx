@@ -5,6 +5,7 @@ import { StepMarker, type StepMarkerTone } from '../../atoms/StepMarker/StepMark
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import type { IconName } from '../../atoms/Icon/Icon';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { timelineEs } from '../../messages/es/timeline';
 import './Timeline.css';
 
 /**
@@ -91,7 +92,7 @@ export const Timeline = forwardRef<HTMLOListElement, TimelineProps>(function Tim
   className,
   ...rest
 }, ref) {
-  const t = useBrandMessages('timeline');
+  const t = useBrandMessages('timeline', timelineEs);
 
   return (
     <ol

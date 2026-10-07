@@ -8,6 +8,7 @@ import { defaultRenderLink } from '../../constants/default-render-link';
 import { useSidebar } from '../../sections/Sidebar/SidebarContext';
 import './OrgSwitcher.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { orgSwitcherEs } from '../../messages/es/orgSwitcher';
 import { usePortalContainer } from '../../constants/portal-container';
 
 
@@ -55,7 +56,7 @@ export interface OrgSwitcherProps {
 }
 
 export function OrgSwitcher({ label, block = false, compact, current, organizations, onOrgChange, defaultOpen, items, renderLink = defaultRenderLink, className }: OrgSwitcherProps) {
-  const t = useBrandMessages('orgSwitcher');
+  const t = useBrandMessages('orgSwitcher', orgSwitcherEs);
   const portalContainer = usePortalContainer(undefined);
   const others = organizations.filter((o) => o.id !== current.id);
   const sidebar = useSidebar();

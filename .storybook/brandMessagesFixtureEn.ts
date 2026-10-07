@@ -1,4 +1,4 @@
-import type { BrandMessages } from '../src/stories/messages/BrandMessages';
+import type { CompleteBrandMessages } from '../src/stories/messages/BrandMessages';
 
 /**
  * El mismo catálogo que `brandMessagesFixture`, **en inglés**, para las
@@ -7,10 +7,13 @@ import type { BrandMessages } from '../src/stories/messages/BrandMessages';
  * Existe por economía, no por capricho: cada ola de la campaña del proveedor
  * añade espacios al tipo `BrandMessages`, y con el literal copiado dentro de
  * cada story eso obligaba a completar a mano el mismo objeto en una docena de
- * ficheros. Aquí se escribe una vez; el tipo obliga a que esté entero, así que
- * una ola que se deje un espacio no compila.
+ * ficheros. Aquí se escribe una vez; el tipo (`CompleteBrandMessages`) obliga a
+ * que esté entero, así que una clave nueva sin su inglés no compila: es la red
+ * para que el propio DS no se deje claves, ahora que `BrandMessages` es todo
+ * opcional (D5).
  *
- * Vale lo mismo que para el castellano: vive **fuera de `src/`**, no es punto
+ * A diferencia del castellano —que desde D5 es el respaldo del paquete y vive
+ * en `src/stories/messages/es/`—, el inglés vive **fuera de `src/`**, no es punto
  * de entrada de la librería, no lo importa ningún componente y
  * `package.json#files` no publica `.storybook/`. Ningún código de un
  * consumidor puede caer aquí. Lo vigila
@@ -19,7 +22,7 @@ import type { BrandMessages } from '../src/stories/messages/BrandMessages';
  * Solo lo importan `.stories.tsx` —que tampoco viajan en el paquete—, nunca un
  * componente.
  */
-export const brandMessagesFixtureEn: BrandMessages = {
+export const brandMessagesFixtureEn: CompleteBrandMessages = {
   pagination: {
     label: 'Pagination',
     pagesGroup: 'Pages',

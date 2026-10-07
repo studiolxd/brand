@@ -6,6 +6,7 @@ import { CloseButton } from '../../atoms/CloseButton/CloseButton';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { DialogFooter, DialogHeader, DialogOverlay } from '../_shared/dialogSurface';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { sheetEs } from '../../messages/es/sheet';
 import './Sheet.css';
 import { usePortalContainer } from '../../constants/portal-container';
 
@@ -110,7 +111,7 @@ export function Sheet({
   className,
   ...rest
 }: SheetProps) {
-  const t = useBrandMessages('sheet');
+  const t = useBrandMessages('sheet', sheetEs);
   const portalContainer = usePortalContainer(container);
 
   return (

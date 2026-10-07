@@ -1,6 +1,6 @@
 'use client';
 import './async-select-field.css';
-import { AsyncSelect as e } from "./async-select.js";
+import { t as e } from "./_shared/asyncselect.js";
 import { n as t } from "./_shared/form-size.js";
 import { n } from "./_shared/field-labels.js";
 import { n as r, t as i } from "./_shared/fieldshell.js";

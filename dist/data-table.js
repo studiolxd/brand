@@ -3,98 +3,104 @@ import './data-table.css';
 import { n as e } from "./_shared/brandmessagescontext.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { Skeleton as n } from "./skeleton.js";
-import { Pagination as r } from "./pagination.js";
-import { Table as i, TableBody as a, TableCell as o, TableHead as s, TableHeader as c, TableRow as l } from "./table.js";
-import { InputField as u } from "./input-field.js";
+import { t as r } from "./_shared/pagination.js";
+import { a as i, n as a, o, r as s, s as c, t as l } from "./_shared/table.js";
+import { t as u } from "./_shared/inputfield.js";
 import { EmptyState as d } from "./empty-state.js";
 import { useId as f, useState as p } from "react";
 import { jsx as m, jsxs as h } from "react/jsx-runtime";
 import { flexRender as g, getCoreRowModel as _, getFilteredRowModel as v, getPaginationRowModel as y, getSortedRowModel as b, useReactTable as x } from "@tanstack/react-table";
+//#region src/stories/messages/es/dataTable.ts
+var S = {
+	empty: "Sin resultados",
+	search: "Buscar…"
+};
+//#endregion
 //#region src/stories/organisms/DataTable/DataTable.tsx
-function S(e, t) {
+function C(e, t) {
 	let n = t.columnDef.meta?.align;
 	return n && n !== "start" ? `data-table__${e}--${n}` : "";
 }
-function C({ columns: C, data: w, ariaLabel: T, ariaLabelledBy: E, searchColumnId: D, search: O, searchPlaceholder: k, searchClearLabel: A, toolbar: j, footerActions: M, pageSize: N = 10, emptyMessage: P, emptyDescription: F, isLoading: I, pagination: L, headerLabels: R, paginationLabels: z, className: B }) {
+function w({ columns: w, data: T, ariaLabel: E, ariaLabelledBy: D, searchColumnId: O, search: k, searchPlaceholder: A, searchClearLabel: j, toolbar: M, footerActions: N, pageSize: P = 10, emptyMessage: F, emptyDescription: I, isLoading: L, pagination: R, headerLabels: z, paginationLabels: B, className: V }) {
 	"use no memo";
-	let V = e("dataTable"), [H, U] = p([]), [W, G] = p([]), K = x({
-		data: w,
-		columns: C,
+	let H = e("dataTable", S), [U, W] = p([]), [G, K] = p([]), q = x({
+		data: T,
+		columns: w,
 		state: {
-			sorting: H,
-			columnFilters: W
+			sorting: U,
+			columnFilters: G
 		},
-		onSortingChange: U,
-		onColumnFiltersChange: G,
+		onSortingChange: W,
+		onColumnFiltersChange: K,
 		getCoreRowModel: _(),
 		getSortedRowModel: b(),
 		getFilteredRowModel: v(),
-		...L ? { manualPagination: !0 } : {
+		...R ? { manualPagination: !0 } : {
 			getPaginationRowModel: y(),
-			initialState: { pagination: { pageSize: N } }
+			initialState: { pagination: { pageSize: P } }
 		}
-	}), q = L?.pageSize ?? N, J = D || O ? V("search", k) : "", Y = `${f()}-search`;
+	}), J = R?.pageSize ?? P, Y = O || k ? H("search", A) : "", X = `${f()}-search`;
 	return /* @__PURE__ */ h("div", {
-		className: ["data-table", B].filter(Boolean).join(" "),
+		className: ["data-table", V].filter(Boolean).join(" "),
 		children: [
-			(D || O || j) && /* @__PURE__ */ h("div", {
+			(O || k || M) && /* @__PURE__ */ h("div", {
 				className: "data-table__toolbar",
-				children: [O ? /* @__PURE__ */ m(u, {
+				children: [k ? /* @__PURE__ */ m(u, {
 					className: "data-table__search",
-					id: Y,
+					id: X,
 					kind: "search",
 					clearable: !0,
-					label: J,
+					label: Y,
 					labelHidden: !0,
-					...A ? { clearLabel: A } : {},
-					value: O.value,
-					onChange: (e) => O.onChange(e.target.value)
-				}) : D && /* @__PURE__ */ m(u, {
+					...j ? { clearLabel: j } : {},
+					value: k.value,
+					onChange: (e) => k.onChange(e.target.value)
+				}) : O && /* @__PURE__ */ m(u, {
 					className: "data-table__search",
-					id: Y,
+					id: X,
 					kind: "search",
 					clearable: !0,
-					label: J,
+					label: Y,
 					labelHidden: !0,
-					...A ? { clearLabel: A } : {},
-					value: K.getColumn(D)?.getFilterValue() ?? "",
-					onChange: (e) => K.getColumn(D)?.setFilterValue(e.target.value)
-				}), j && /* @__PURE__ */ m("div", {
+					...j ? { clearLabel: j } : {},
+					value: q.getColumn(O)?.getFilterValue() ?? "",
+					onChange: (e) => q.getColumn(O)?.setFilterValue(e.target.value)
+				}), M && /* @__PURE__ */ m("div", {
 					className: "data-table__toolbar-actions",
-					children: j
+					children: M
 				})]
 			}),
 			/* @__PURE__ */ m("div", {
 				className: "data-table__scroll",
-				children: /* @__PURE__ */ h(i, {
-					"aria-label": T,
-					"aria-labelledby": E,
-					"aria-busy": I || void 0,
-					children: [/* @__PURE__ */ m(s, { children: K.getHeaderGroups().map((e) => /* @__PURE__ */ m(l, { children: e.headers.map((e) => {
-						let n = e.column.getIsSorted(), r = e.column.getCanSort(), i = S("header-cell", e.column), a = e.column.columnDef.meta?.headerHidden === !0, o = e.isPlaceholder ? null : g(e.column.columnDef.header, e.getContext());
-						return /* @__PURE__ */ m(c, {
+				children: /* @__PURE__ */ h(l, {
+					"aria-label": E,
+					"aria-labelledby": D,
+					"aria-busy": L || void 0,
+					children: [/* @__PURE__ */ m(i, { children: q.getHeaderGroups().map((e) => /* @__PURE__ */ m(c, { children: e.headers.map((e) => {
+						let n = e.column.getIsSorted(), r = e.column.getCanSort(), i = C("header-cell", e.column), a = e.column.columnDef.meta?.headerHidden === !0, s = e.isPlaceholder ? null : g(e.column.columnDef.header, e.getContext());
+						return /* @__PURE__ */ m(o, {
 							className: ["data-table__header-cell", i].filter(Boolean).join(" "),
 							sortable: r,
 							sorted: n === "asc" || n === "desc" ? n : !1,
 							onSort: r ? () => e.column.toggleSorting() : void 0,
 							sticky: e.column.columnDef.meta?.sticky,
-							...R,
-							children: a ? /* @__PURE__ */ m(t, { children: o }) : o
+							...z,
+							children: a ? /* @__PURE__ */ m(t, { children: s }) : s
 						}, e.id);
-					}) }, e.id)) }), /* @__PURE__ */ m(a, { children: I ? Array.from({ length: q }).map((e, t) => /* @__PURE__ */ m(l, {
+					}) }, e.id)) }), /* @__PURE__ */ m(a, { children: L ? Array.from({ length: J }).map((e, t) => /* @__PURE__ */ m(c, {
 						"aria-hidden": "true",
-						children: C.map((e, t) => /* @__PURE__ */ m(o, { children: /* @__PURE__ */ m(n, {}) }, t))
-					}, t)) : K.getRowModel().rows.length === 0 ? /* @__PURE__ */ m(l, { children: /* @__PURE__ */ m(o, {
-						colSpan: C.length,
+						children: w.map((e, t) => /* @__PURE__ */ m(s, { children: /* @__PURE__ */ m(n, {}) }, t))
+					}, t)) : q.getRowModel().rows.length === 0 ? /* @__PURE__ */ m(c, { children: /* @__PURE__ */ m(s, {
+						colSpan: w.length,
 						children: /* @__PURE__ */ m(d, {
 							size: "sm",
-							title: V("empty", P),
-							description: F
+							title: H("empty", F),
+							description: I
 						})
-					}) }) : K.getRowModel().rows.map((e) => /* @__PURE__ */ m(l, {
+					}) }) : q.getRowModel().rows.map((e) => /* @__PURE__ */ m(c, {
 						selected: e.getIsSelected(),
-						children: e.getVisibleCells().map((e) => /* @__PURE__ */ m(o, {
-							className: ["data-table__cell", S("cell", e.column)].filter(Boolean).join(" "),
+						children: e.getVisibleCells().map((e) => /* @__PURE__ */ m(s, {
+							className: ["data-table__cell", C("cell", e.column)].filter(Boolean).join(" "),
 							sticky: e.column.columnDef.meta?.sticky,
 							children: g(e.column.columnDef.cell, e.getContext())
 						}, e.id))
@@ -103,26 +109,26 @@ function C({ columns: C, data: w, ariaLabel: T, ariaLabelledBy: E, searchColumnI
 			}),
 			/* @__PURE__ */ m("div", {
 				className: "data-table__footer",
-				children: L ? /* @__PURE__ */ m(r, {
-					total: L.total,
-					page: L.page,
-					pageSize: L.pageSize,
-					onPageChange: L.onPageChange,
-					onPageSizeChange: L.onPageSizeChange,
+				children: R ? /* @__PURE__ */ m(r, {
+					total: R.total,
+					page: R.page,
+					pageSize: R.pageSize,
+					onPageChange: R.onPageChange,
+					onPageSizeChange: R.onPageSizeChange,
 					showTotal: !0,
-					afterPageSize: M,
-					...z
+					afterPageSize: N,
+					...B
 				}) : /* @__PURE__ */ m(r, {
-					total: K.getFilteredRowModel().rows.length,
-					page: K.getState().pagination.pageIndex + 1,
-					pageSize: K.getState().pagination.pageSize,
-					onPageChange: (e) => K.setPageIndex(e - 1),
-					afterPageSize: M,
-					...z
+					total: q.getFilteredRowModel().rows.length,
+					page: q.getState().pagination.pageIndex + 1,
+					pageSize: q.getState().pagination.pageSize,
+					onPageChange: (e) => q.setPageIndex(e - 1),
+					afterPageSize: N,
+					...B
 				})
 			})
 		]
 	});
 }
 //#endregion
-export { C as DataTable };
+export { w as DataTable };

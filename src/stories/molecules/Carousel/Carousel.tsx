@@ -4,6 +4,7 @@ import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { useCssProperties } from '../../constants/css-properties';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { carouselEs } from '../../messages/es/carousel';
 import './Carousel.css';
 
 /**
@@ -137,7 +138,7 @@ export function Carousel({
   className,
   id,
 }: CarouselProps) {
-  const t = useBrandMessages('carousel');
+  const t = useBrandMessages('carousel', carouselEs);
   const trackRef = useRef<HTMLDivElement>(null);
   const [current, setCurrent] = useState(0);
   // El autoplay necesita la posición sin volver a montar su temporizador en
@@ -311,7 +312,7 @@ export function CarouselSlide({
   children,
   ...rest
 }: CarouselSlideProps) {
-  const t = useBrandMessages('carousel');
+  const t = useBrandMessages('carousel', carouselEs);
   return (
     <div
       className={['carousel__slide', className].filter(Boolean).join(' ')}

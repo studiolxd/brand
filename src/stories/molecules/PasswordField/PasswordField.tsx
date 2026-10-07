@@ -7,6 +7,7 @@ import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { Icon } from '../../atoms/Icon/Icon';
 import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { passwordFieldEs } from '../../messages/es/passwordField';
 
 /**
  * Los dos textos que el campo emite por su cuenta: las dos caras del
@@ -93,7 +94,7 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(fu
   'aria-describedby': ariaDescribedBy,
   ...rest
 }, ref) {
-  const t = useBrandMessages('passwordField');
+  const t = useBrandMessages('passwordField', passwordFieldEs);
   const size = useFormSize(sizeProp);
   const labelHidden = useLabelHidden(labelHiddenProp);
   // El `aria-describedby` del consumidor (o el que inyecta un `FormControl`)

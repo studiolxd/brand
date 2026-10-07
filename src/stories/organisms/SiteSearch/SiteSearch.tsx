@@ -9,6 +9,7 @@ import { Alert } from '../../molecules/Alert/Alert';
 import { EmptyState } from '../../molecules/EmptyState/EmptyState';
 import { SearchForm } from '../../molecules/SearchForm/SearchForm';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { siteSearchEs } from '../../messages/es/siteSearch';
 import './SiteSearch.css';
 import { defaultRenderLink } from '../../constants/default-render-link';
 
@@ -213,7 +214,7 @@ export const SiteSearch = forwardRef<HTMLInputElement, SiteSearchProps>(function
   id,
   ...rest
 }, ref) {
-  const t = useBrandMessages('siteSearch');
+  const t = useBrandMessages('siteSearch', siteSearchEs);
   const generatedId = useId();
   const raíz = id ?? generatedId;
   const campoId = `${raíz}-input`;

@@ -13,22 +13,25 @@ function c(e, t) {
 	return e === null || !Number.isFinite(e) ? "empty" : e >= t.ok ? "ok" : e >= t.degraded ? "degraded" : "down";
 }
 //#endregion
-//#region src/stories/molecules/UptimeBars/UptimeBars.tsx
-var l = n(function({ points: n, summary: l, label: u, startLabel: d, endLabel: f, thresholds: p, locale: m = "es-ES", maximumFractionDigits: h = 2, pointLabel: g, noDataLabel: _, tooltips: v = !0, className: y, ...b }, x) {
-	let S = e("uptimeBars"), C = {
+//#region src/stories/messages/es/uptimeBars.ts
+var l = {
+	label: "Disponibilidad",
+	noData: "sin datos"
+}, u = n(function({ points: n, summary: u, label: d, startLabel: f, endLabel: p, thresholds: m, locale: h = "es-ES", maximumFractionDigits: g = 2, pointLabel: _, noDataLabel: v, tooltips: y = !0, className: b, ...x }, S) {
+	let C = e("uptimeBars", l), w = {
 		...s,
-		...p
-	}, w = r([]), [T, E] = i(0), D = new Intl.NumberFormat(m, {
+		...m
+	}, T = r([]), [E, D] = i(0), O = new Intl.NumberFormat(h, {
 		style: "percent",
-		maximumFractionDigits: h
-	}), O = (e) => e === null || !Number.isFinite(e) ? null : D.format(e / 100), k = (e, t) => {
-		if (g) return g(e, t);
-		let n = `${e.label}: ${t ?? S("noData", _)}`;
+		maximumFractionDigits: g
+	}), k = (e) => e === null || !Number.isFinite(e) ? null : O.format(e / 100), A = (e, t) => {
+		if (_) return _(e, t);
+		let n = `${e.label}: ${t ?? C("noData", v)}`;
 		return e.detail ? `${n}. ${e.detail}` : n;
-	}, A = (e) => {
+	}, j = (e) => {
 		let t = Math.max(0, Math.min(n.length - 1, e));
-		E(t), w.current[t]?.focus();
-	}, j = (e, t) => {
+		D(t), T.current[t]?.focus();
+	}, M = (e, t) => {
 		let r = {
 			ArrowRight: 1,
 			ArrowDown: 1,
@@ -36,32 +39,32 @@ var l = n(function({ points: n, summary: l, label: u, startLabel: d, endLabel: f
 			ArrowUp: -1
 		}[e.key];
 		if (r) {
-			e.preventDefault(), A(t + r);
+			e.preventDefault(), j(t + r);
 			return;
 		}
-		e.key === "Home" ? (e.preventDefault(), A(0)) : e.key === "End" && (e.preventDefault(), A(n.length - 1));
-	}, M = Math.max(0, Math.min(T, n.length - 1));
+		e.key === "Home" ? (e.preventDefault(), j(0)) : e.key === "End" && (e.preventDefault(), j(n.length - 1));
+	}, N = Math.max(0, Math.min(E, n.length - 1));
 	return /* @__PURE__ */ o("div", {
-		ref: x,
-		className: ["uptime-bars", y].filter(Boolean).join(" "),
-		...b,
+		ref: S,
+		className: ["uptime-bars", b].filter(Boolean).join(" "),
+		...x,
 		children: [/* @__PURE__ */ a("ol", {
 			className: "uptime-bars__list",
-			"aria-label": S("label", u),
+			"aria-label": C("label", d),
 			children: n.map((e, n) => {
-				let r = O(e.value), i = /* @__PURE__ */ a("span", {
-					className: `uptime-bars__bar uptime-bars__bar--${c(e.value, C)}`,
+				let r = k(e.value), i = /* @__PURE__ */ a("span", {
+					className: `uptime-bars__bar uptime-bars__bar--${c(e.value, w)}`,
 					role: "img",
-					"aria-label": k(e, r),
-					tabIndex: v ? n === M ? 0 : -1 : void 0,
-					onKeyDown: v ? (e) => j(e, n) : void 0,
-					onFocus: v ? () => E(n) : void 0
+					"aria-label": A(e, r),
+					tabIndex: y ? n === N ? 0 : -1 : void 0,
+					onKeyDown: y ? (e) => M(e, n) : void 0,
+					onFocus: y ? () => D(n) : void 0
 				});
 				return /* @__PURE__ */ a("li", {
 					className: "uptime-bars__item",
-					children: v ? /* @__PURE__ */ a(t, {
+					children: y ? /* @__PURE__ */ a(t, {
 						ref: (e) => {
-							w.current[n] = e;
+							T.current[n] = e;
 						},
 						label: /* @__PURE__ */ o("span", {
 							className: "uptime-bars__tooltip",
@@ -70,7 +73,7 @@ var l = n(function({ points: n, summary: l, label: u, startLabel: d, endLabel: f
 									className: "uptime-bars__tooltip-label",
 									children: e.label
 								}),
-								/* @__PURE__ */ a("span", { children: r ?? S("noData", _) }),
+								/* @__PURE__ */ a("span", { children: r ?? C("noData", v) }),
 								e.detail ? /* @__PURE__ */ a("span", { children: e.detail }) : null
 							]
 						}),
@@ -83,19 +86,19 @@ var l = n(function({ points: n, summary: l, label: u, startLabel: d, endLabel: f
 			children: [
 				/* @__PURE__ */ a("span", {
 					className: "uptime-bars__edge",
-					children: d
+					children: f
 				}),
 				/* @__PURE__ */ a("span", {
 					className: "uptime-bars__summary",
-					children: l
+					children: u
 				}),
 				/* @__PURE__ */ a("span", {
 					className: "uptime-bars__edge uptime-bars__edge--end",
-					children: f
+					children: p
 				})
 			]
 		})]
 	});
 });
 //#endregion
-export { l as UptimeBars };
+export { u as UptimeBars };

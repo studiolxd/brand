@@ -3,6 +3,7 @@
 import { useId, type ReactNode } from 'react';
 import { DropdownField } from '../DropdownField/DropdownField';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { languageSwitcherEs } from '../../messages/es/languageSwitcher';
 import { defaultRenderLink } from '../../constants/default-render-link';
 import './LanguageSwitcher.css';
 
@@ -99,7 +100,7 @@ export function LanguageSwitcher({
   // selectores en la misma página (la barra y el pie).
   const autoId = useId();
   const id = idProp ?? autoId;
-  const t = useBrandMessages('languageSwitcher');
+  const t = useBrandMessages('languageSwitcher', languageSwitcherEs);
   const rotulo = t('label', label);
   if (variant === 'list') {
     const classes = ['language-switcher', 'language-switcher--list', className].filter(Boolean).join(' ');

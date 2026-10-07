@@ -8,6 +8,7 @@ import { Icon } from '../../atoms/Icon/Icon';
 import { NumberBadge } from '../../atoms/NumberBadge/NumberBadge';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { floatingDockEs } from '../../messages/es/floatingDock';
 import './FloatingDock.css';
 
 /**
@@ -133,7 +134,7 @@ export function FloatingDock({
   className,
   ...rest
 }: FloatingDockProps) {
-  const t = useBrandMessages('floatingDock');
+  const t = useBrandMessages('floatingDock', floatingDockEs);
 
   /**
    * El panel se monta DENTRO del ancla (`Dialog.Portal container`), no en

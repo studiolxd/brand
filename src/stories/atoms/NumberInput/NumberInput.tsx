@@ -1,5 +1,6 @@
 import { forwardRef, useState, useCallback, type ComponentPropsWithoutRef } from 'react';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { numberInputEs } from '../../messages/es/numberInput';
 import { Icon } from '../Icon/Icon';
 import './NumberInput.css';
 
@@ -114,7 +115,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
   onKeyDown,
   ...rest
 }: NumberInputProps, ref) {
-  const t = useBrandMessages('numberInput');
+  const t = useBrandMessages('numberInput', numberInputEs);
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<number | null>(defaultValue);
   const [focused, setFocused] = useState(false);

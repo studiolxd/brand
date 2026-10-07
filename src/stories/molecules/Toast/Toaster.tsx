@@ -14,6 +14,7 @@ import {
   type ToastIntent,
 } from './toast';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { toasterEs } from '../../messages/es/toaster';
 import './Toast.css';
 
 /**
@@ -112,7 +113,7 @@ interface ToastListProps extends Required<Pick<ToasterProps, 'position' | 'close
 }
 
 function ToastList({ position, containerAriaLabel, closeLabel, closeButton, gap, expand }: ToastListProps) {
-  const t = useBrandMessages('toaster');
+  const t = useBrandMessages('toaster', toasterEs);
   const { toasts } = Toast.useToastManager();
   const [side, align] = position.split('-') as ['top' | 'bottom', 'right' | 'left' | 'center'];
 

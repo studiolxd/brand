@@ -6,6 +6,8 @@ import { Container } from '../../atoms/Container/Container';
 import { FormSizeContext } from '../../constants/form-size';
 import './OnboardingShell.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { onboardingShellEs } from '../../messages/es/onboardingShell';
+import { publicPageShellEs } from '../../messages/es/publicPageShell';
 
 export interface OnboardingShellProps {
   /** El cuerpo del paso: el formulario, la explicación, lo que toque. */
@@ -143,11 +145,11 @@ export function OnboardingShell({
   width = 'md',
   className,
 }: OnboardingShellProps) {
-  const t = useBrandMessages('onboardingShell');
+  const t = useBrandMessages('onboardingShell', onboardingShellEs);
   // Es la MISMA banda y la MISMA clave: con marco la pinta `PublicPageShell`
   // (y `preferencesLabel` es un reenvío puro); sin marco (`shell={false}`) la
   // pinta esta plantilla, y entonces el texto lo tiene que leer ella.
-  const tMarco = useBrandMessages('publicPageShell');
+  const tMarco = useBrandMessages('publicPageShell', publicPageShellEs);
   const hayAcciones = Boolean(primaryAction || backAction || exitAction);
   // `switchers` es el nombre viejo de la misma ranura: manda el nuevo.
   const conmutadores = preferences ?? switchers;

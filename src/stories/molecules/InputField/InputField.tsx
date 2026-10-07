@@ -8,6 +8,7 @@ import { Input } from '../../atoms/Input/Input';
 import { Icon } from '../../atoms/Icon/Icon';
 import { FieldShell, useFieldShell } from '../_shared/FieldShell';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { inputFieldEs } from '../../messages/es/inputField';
 
 /**
  * El único texto que el campo emite por su cuenta: el nombre accesible del
@@ -107,7 +108,7 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function
   className,
   ...rest
 }: InputFieldProps, ref) {
-  const t = useBrandMessages('inputField');
+  const t = useBrandMessages('inputField', inputFieldEs);
   const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   // El `aria-describedby` que traiga el consumidor por `rest` (una pista suya,

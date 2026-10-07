@@ -5,6 +5,7 @@ import { Button, type ButtonBaseProps } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { NumberBadge } from '../../atoms/NumberBadge/NumberBadge';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { notificationButtonEs } from '../../messages/es/notificationButton';
 import './NotificationButton.css';
 
 /**
@@ -55,7 +56,7 @@ export const NotificationButton = forwardRef<HTMLButtonElement, NotificationButt
   },
   ref,
 ) {
-  const t = useBrandMessages('notificationButton');
+  const t = useBrandMessages('notificationButton', notificationButtonEs);
   // Cada texto se lee donde se pinta: una campana sin contador no exige
   // `countLabel`, y una con contador no exige `label`.
   const name = count > 0 ? t('countLabel', countLabel)(count) : t('label', label);

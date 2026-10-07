@@ -186,9 +186,9 @@ A partir de ahí la tabla se monta sin una sola prop de texto:
 | `sortedDescLabel` | `table.sortedDescending` | texto oculto de la columna ordenada de forma descendente |
 | `actionsLabel` | `table.actions` | rótulo oculto de la cabecera de la columna de acciones |
 
-El orden de resolución es **prop → proveedor → error**, y no hay cuarto escalón: si faltan las
-dos, la tabla revienta diciendo qué texto falta. El error se lanza **donde el texto se pinta**,
-así que una tabla sin columnas ordenables ni columna de acciones no exige ninguno.
+El orden de resolución es **prop → proveedor → castellano de respaldo**: si faltan las dos, sale
+el castellano del paquete y, en desarrollo, la consola avisa de qué clave faltaba. El texto se lee
+**donde se pinta**, así que una tabla sin columnas ordenables ni columna de acciones no pide ninguno.
 
 ### Lo que NO sale del catálogo
 

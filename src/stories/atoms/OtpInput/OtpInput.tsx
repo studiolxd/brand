@@ -1,5 +1,6 @@
 import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { otpInputEs } from '../../messages/es/otpInput';
 import { Input } from '../Input/Input';
 import './OtpInput.css';
 
@@ -89,7 +90,7 @@ export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>(function Otp
   className,
   digitLabel,
 }: OtpInputProps, ref) {
-  const t = useBrandMessages('otpInput');
+  const t = useBrandMessages('otpInput', otpInputEs);
   const isControlled = value !== undefined;
 
   const [internalCells, setInternalCells] = useState<string[]>(() => {

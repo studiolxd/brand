@@ -27,4 +27,11 @@ function i(i = r) {
 	};
 }
 //#endregion
-export { i as n, r as t };
+//#region src/stories/messages/es/copy.ts
+var a = {
+	label: "Copiar",
+	copied: "Copiado",
+	error: "No se pudo copiar"
+};
+//#endregion
+export { r as n, i as r, a as t };

@@ -5,6 +5,7 @@ import { Button } from '../../atoms/Button/Button';
 import { InputField } from '../InputField/InputField';
 import { Modal, type ModalProps } from '../Modal/Modal';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { confirmDialogEs } from '../../messages/es/confirmDialog';
 import './ConfirmDialog.css';
 
 /**
@@ -181,7 +182,7 @@ export function ConfirmDialog({
   container,
   className,
 }: ConfirmDialogProps) {
-  const t = useBrandMessages('confirmDialog');
+  const t = useBrandMessages('confirmDialog', confirmDialogEs);
   const cancelRef = useRef<HTMLElement>(null);
   const phraseRef = useRef<HTMLInputElement>(null);
   const campoId = useId();

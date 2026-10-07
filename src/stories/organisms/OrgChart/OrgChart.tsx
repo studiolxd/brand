@@ -5,6 +5,7 @@ import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { useCssProperties } from '../../constants/css-properties';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { orgChartEs } from '../../messages/es/orgChart';
 import './OrgChart.css';
 
 /**
@@ -134,7 +135,7 @@ export const OrgChart = forwardRef<HTMLDivElement, OrgChartProps>(function OrgCh
   className,
   ...rest
 }, ref) {
-  const t = useBrandMessages('orgChart');
+  const t = useBrandMessages('orgChart', orgChartEs);
 
   const [plegadosPropios, setPlegadosPropios] = useState<string[]>(defaultCollapsed ?? []);
   const plegados = collapsed ?? plegadosPropios;

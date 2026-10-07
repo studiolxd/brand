@@ -3,6 +3,7 @@ import { Icon } from '../../atoms/Icon/Icon';
 import { Tag, type TagVariant } from '../../atoms/Tag/Tag';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { statTileEs } from '../../messages/es/statTile';
 import './StatTile.css';
 
 export type StatTileDirection = 'up' | 'down' | 'flat';
@@ -89,7 +90,7 @@ export const StatTile = forwardRef<HTMLDivElement, StatTileProps>(function StatT
   className,
   ...rest
 }, ref) {
-  const t = useBrandMessages('statTile');
+  const t = useBrandMessages('statTile', statTileEs);
   const classes = [
     'stat-tile',
     size !== 'md' ? `stat-tile--${size}` : '',

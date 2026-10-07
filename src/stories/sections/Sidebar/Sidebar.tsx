@@ -5,6 +5,7 @@ import { AppShellContext } from '../AppShell/AppShellContext';
 import { SidebarContext } from './SidebarContext';
 import './Sidebar.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { sidebarEs } from '../../messages/es/sidebar';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export { useSidebar } from './SidebarContext';
@@ -82,7 +83,7 @@ export function Sidebar({
   mode,
   className,
 }: SidebarProps) {
-  const t = useBrandMessages('sidebar');
+  const t = useBrandMessages('sidebar', sidebarEs);
   const shell = useContext(AppShellContext);
   const state = shell ? shell.sidebar : (mode ?? 'open');
   const isDesktop = shell ? shell.isDesktop : true;

@@ -3,6 +3,7 @@ import { Heading } from '../../atoms/Heading/Heading';
 import { Tag } from '../../atoms/Tag/Tag';
 import './SiteNav.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { siteNavEs } from '../../messages/es/siteNav';
 import { defaultRenderLink } from '../../constants/default-render-link';
 
 export interface SiteNavItem {
@@ -112,7 +113,7 @@ export function SiteNav({
   renderLink = defaultRenderLink,
   className,
 }: SiteNavProps) {
-  const t = useBrandMessages('siteNav');
+  const t = useBrandMessages('siteNav', siteNavEs);
   const classes = ['site-nav', className].filter(Boolean).join(' ');
   // El tope de columnas cuenta TRAMOS, no grupos: un grupo ancho (`columns: 2`)
   // vale por dos, que es lo que ocupa en la rejilla. Si no, cinco grupos con uno

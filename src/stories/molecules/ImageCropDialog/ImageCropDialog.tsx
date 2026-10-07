@@ -8,6 +8,7 @@ import { Alert } from '../Alert/Alert';
 import { Modal } from '../Modal/Modal';
 import { cropImageToBlob, initialCrop } from './crop';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { imageCropDialogEs } from '../../messages/es/imageCropDialog';
 // El recortador es inservible sin su propia hoja (marco de selección y
 // tiradores). El DS la carga aquí para que ningún consumidor tenga que
 // acordarse — misma regla que el CSS BEM de cualquier otro componente.
@@ -101,7 +102,7 @@ export function ImageCropDialog({
   onClose,
   className,
 }: ImageCropDialogProps) {
-  const t = useBrandMessages('imageCropDialog');
+  const t = useBrandMessages('imageCropDialog', imageCropDialogEs);
   const imgRef = useRef<HTMLImageElement>(null);
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();

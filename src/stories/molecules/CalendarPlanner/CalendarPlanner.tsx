@@ -23,6 +23,8 @@ import {
 } from '../_shared/calendarGrid';
 import './CalendarPlanner.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { calendarEs } from '../../messages/es/calendar';
+import { calendarPlannerEs } from '../../messages/es/calendarPlanner';
 
 /**
  * Los textos propios del planificador: el botón que abre los eventos que no
@@ -299,8 +301,8 @@ export function CalendarPlanner({
     [currentMonth, currentWeek, handleMonthChange, handleWeekChange, onViewChange]
   );
 
-  const t = useBrandMessages('calendar');
-  const tp = useBrandMessages('calendarPlanner');
+  const t = useBrandMessages('calendar', calendarEs);
+  const tp = useBrandMessages('calendarPlanner', calendarPlannerEs);
   const chevronSize = size === 'lg' ? 'md' : 'sm';
 
   const titleFormatter = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' });

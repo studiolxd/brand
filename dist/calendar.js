@@ -1,56 +1,56 @@
 'use client';
 import './calendar.css';
 import { n as e } from "./_shared/brandmessagescontext.js";
-import { a as t, c as n, f as r, i, l as a, m as o, n as ee, o as s, s as te, t as c } from "./_shared/calendargrid.js";
-import { useCallback as l, useEffect as u, useId as ne, useRef as d, useState as f } from "react";
-import { jsx as p, jsxs as m } from "react/jsx-runtime";
+import { a as t, c as n, h as r, l as i, n as a, o, p as ee, r as te, s, t as c, u as l } from "./_shared/calendar.js";
+import { useCallback as u, useEffect as ne, useId as d, useRef as f, useState as p } from "react";
+import { jsx as m, jsxs as h } from "react/jsx-runtime";
 //#region src/stories/molecules/Calendar/Calendar.tsx
-var h = 12, g = 4;
-function _(e) {
-	return Math.floor(e / h) * h;
+var g = 12, _ = 4;
+function v(e) {
+	return Math.floor(e / g) * g;
 }
-function v({ value: v, onChange: y, defaultMonth: re, month: b, onMonthChange: x, navigable: S = !0, disabledDates: C, minDate: w, maxDate: T, locale: E = "es-ES", previousMonthLabel: ie, nextMonthLabel: D, previousYearsLabel: O, nextYearsLabel: ae, yearGridLabel: oe, gridLabel: k, today: se, size: A = "md", className: j }) {
-	let M = e("calendar"), N = o(se), [ce, le] = f(() => b ?? re ?? (v instanceof Date ? v : N)), P = b ?? ce, F = l((e) => {
-		le(e), x?.(e);
-	}, [x]), ue = l((e) => w && e < w || T && e > T ? !0 : Array.isArray(C) ? C.some((n) => t(n, e)) : typeof C == "function" ? C(e) : !1, [
+function y({ value: y, onChange: re, defaultMonth: ie, month: b, onMonthChange: x, navigable: S = !0, disabledDates: C, minDate: w, maxDate: T, locale: E = "es-ES", previousMonthLabel: D, nextMonthLabel: ae, previousYearsLabel: oe, nextYearsLabel: se, yearGridLabel: ce, gridLabel: O, today: le, size: k = "md", className: ue }) {
+	let A = e("calendar", c), j = r(le), [de, M] = p(() => b ?? ie ?? (y instanceof Date ? y : j)), N = b ?? de, P = u((e) => {
+		M(e), x?.(e);
+	}, [x]), fe = u((e) => w && e < w || T && e > T ? !0 : Array.isArray(C) ? C.some((t) => o(t, e)) : typeof C == "function" ? C(e) : !1, [
 		C,
 		w,
 		T
-	]), I = r({
-		month: P,
-		onMonthChange: F,
-		selected: v ?? null,
-		today: N,
+	]), F = ee({
+		month: N,
+		onMonthChange: P,
+		selected: y ?? null,
+		today: j,
 		minDate: w,
 		maxDate: T
-	}), [L, R] = f("days"), [z, B] = f(() => _(P.getFullYear())), [V, H] = f(() => P.getFullYear()), U = d(null), W = d(/* @__PURE__ */ new Map()), G = d(null), de = l(() => {
-		let e = P.getFullYear();
-		B(_(e)), H(e), G.current = "year", R("years");
-	}, [P]), K = l(() => {
-		G.current = "title", R("days");
-	}, []), fe = l((e) => {
-		F(new Date(e, P.getMonth(), 1)), K();
+	}), [I, L] = p("days"), [R, z] = p(() => v(N.getFullYear())), [B, V] = p(() => N.getFullYear()), H = f(null), U = f(/* @__PURE__ */ new Map()), W = f(null), pe = u(() => {
+		let e = N.getFullYear();
+		z(v(e)), V(e), W.current = "year", L("years");
+	}, [N]), G = u(() => {
+		W.current = "title", L("days");
+	}, []), me = u((e) => {
+		P(new Date(e, N.getMonth(), 1)), G();
 	}, [
-		K,
-		P,
-		F
+		G,
+		N,
+		P
 	]);
-	u(() => {
-		if (!G.current) return;
-		let e = G.current;
-		G.current = null, e === "title" ? U.current?.focus() : W.current.get(V)?.focus();
-	}, [L, V]);
-	let pe = A === "lg" ? "md" : "sm", me = new Intl.DateTimeFormat(E, {
+	ne(() => {
+		if (!W.current) return;
+		let e = W.current;
+		W.current = null, e === "title" ? H.current?.focus() : U.current.get(B)?.focus();
+	}, [I, B]);
+	let he = k === "lg" ? "md" : "sm", ge = new Intl.DateTimeFormat(E, {
 		month: "long",
 		year: "numeric"
-	}).format(P), he = new Intl.DateTimeFormat(E, { year: "numeric" }), q = (e) => he.format(new Date(e, 0, 1)), ge = Array.from({ length: h }, (e, t) => z + t), _e = `${q(z)}–${q(z + h - 1)}`, ve = new Intl.DateTimeFormat(E, {
+	}).format(N), _e = new Intl.DateTimeFormat(E, { year: "numeric" }), K = (e) => _e.format(new Date(e, 0, 1)), ve = Array.from({ length: g }, (e, t) => R + t), ye = `${K(R)}–${K(R + g - 1)}`, be = new Intl.DateTimeFormat(E, {
 		weekday: "long",
 		day: "numeric",
 		month: "long",
 		year: "numeric"
-	}), ye = i(E, "narrow"), be = c(ee(P)), J = a(P, -1), Y = a(P, 1), xe = w ? !s(J, w) && J < w : !1, Se = T ? !s(Y, T) && Y > T : !1, Ce = (e) => (w ? e < w.getFullYear() : !1) || (T ? e > T.getFullYear() : !1), we = w ? z - 1 < w.getFullYear() : !1, Te = T ? z + h > T.getFullYear() : !1, X = L === "years", Z = V >= z && V <= z + h - 1 ? V : z, Ee = (e) => {
-		(e < z || e > z + h - 1) && B(_(e)), G.current = "year", H(e);
-	}, De = (e) => {
+	}), xe = t(E, "narrow"), Se = a(te(N)), q = l(N, -1), J = l(N, 1), Y = w ? !s(q, w) && q < w : !1, Ce = T ? !s(J, T) && J > T : !1, we = (e) => (w ? e < w.getFullYear() : !1) || (T ? e > T.getFullYear() : !1), Te = w ? R - 1 < w.getFullYear() : !1, Ee = T ? R + g > T.getFullYear() : !1, X = I === "years", Z = B >= R && B <= R + g - 1 ? B : R, De = (e) => {
+		(e < R || e > R + g - 1) && z(v(e)), W.current = "year", V(e);
+	}, Oe = (e) => {
 		let t = null;
 		switch (e.key) {
 			case "ArrowLeft":
@@ -60,64 +60,64 @@ function v({ value: v, onChange: y, defaultMonth: re, month: b, onMonthChange: x
 				t = Z + 1;
 				break;
 			case "ArrowUp":
-				t = Z - g;
+				t = Z - _;
 				break;
 			case "ArrowDown":
-				t = Z + g;
+				t = Z + _;
 				break;
 			case "Home":
-				t = z;
+				t = R;
 				break;
 			case "End":
-				t = z + h - 1;
+				t = R + g - 1;
 				break;
 			case "PageUp":
-				t = Z - h;
+				t = Z - g;
 				break;
 			case "PageDown":
-				t = Z + h;
+				t = Z + g;
 				break;
 			case "Escape":
-				e.preventDefault(), K();
+				e.preventDefault(), G();
 				return;
 			default: return;
 		}
-		e.preventDefault(), Ee(t);
-	}, Q = ne(), $ = X ? `${Q}-calendar-title-${z}` : `${Q}-calendar-title-${P.getFullYear()}-${P.getMonth()}`;
-	return /* @__PURE__ */ m("div", {
+		e.preventDefault(), De(t);
+	}, Q = d(), $ = X ? `${Q}-calendar-title-${R}` : `${Q}-calendar-title-${N.getFullYear()}-${N.getMonth()}`;
+	return /* @__PURE__ */ h("div", {
 		className: [
 			"calendar",
-			`calendar--${A}`,
-			j
+			`calendar--${k}`,
+			ue
 		].filter(Boolean).join(" "),
-		children: [te({
+		children: [n({
 			block: "calendar",
-			title: X ? _e : me,
+			title: X ? ye : ge,
 			titleId: $,
 			navigable: S,
-			previousLabel: S ? X ? M("previousYears", O) : M("previousMonth", ie) : void 0,
-			nextLabel: S ? X ? M("nextYears", ae) : M("nextMonth", D) : void 0,
-			prevDisabled: X ? we : xe,
-			nextDisabled: X ? Te : Se,
-			onPrev: X ? () => B(z - h) : () => F(J),
-			onNext: X ? () => B(z + h) : () => F(Y),
-			chevronSize: pe,
-			onTitleClick: X ? K : de,
+			previousLabel: S ? X ? A("previousYears", oe) : A("previousMonth", D) : void 0,
+			nextLabel: S ? X ? A("nextYears", se) : A("nextMonth", ae) : void 0,
+			prevDisabled: X ? Te : Y,
+			nextDisabled: X ? Ee : Ce,
+			onPrev: X ? () => z(R - g) : () => P(q),
+			onNext: X ? () => z(R + g) : () => P(J),
+			chevronSize: he,
+			onTitleClick: X ? G : pe,
 			titleExpanded: X,
-			titleRef: U
-		}), X ? /* @__PURE__ */ p("div", {
+			titleRef: H
+		}), X ? /* @__PURE__ */ m("div", {
 			className: "calendar__years",
 			role: "grid",
-			"aria-label": M("yearGrid", oe),
-			onKeyDown: De,
-			children: Array.from({ length: h / g }, (e, t) => /* @__PURE__ */ p("div", {
+			"aria-label": A("yearGrid", ce),
+			onKeyDown: Oe,
+			children: Array.from({ length: g / _ }, (e, t) => /* @__PURE__ */ m("div", {
 				role: "row",
 				className: "calendar__row",
-				children: ge.slice(t * g, t * g + g).map((e) => {
-					let t = Ce(e), n = e === N.getFullYear(), r = v instanceof Date ? v.getFullYear() === e : !1;
-					return /* @__PURE__ */ p("button", {
+				children: ve.slice(t * _, t * _ + _).map((e) => {
+					let t = we(e), n = e === j.getFullYear(), r = y instanceof Date ? y.getFullYear() === e : !1;
+					return /* @__PURE__ */ m("button", {
 						ref: (t) => {
-							t ? W.current.set(e, t) : W.current.delete(e);
+							t ? U.current.set(e, t) : U.current.delete(e);
 						},
 						type: "button",
 						role: "gridcell",
@@ -131,50 +131,50 @@ function v({ value: v, onChange: y, defaultMonth: re, month: b, onMonthChange: x
 						"aria-disabled": t ? "true" : void 0,
 						"aria-current": n ? "date" : void 0,
 						tabIndex: e === Z ? 0 : -1,
-						onFocus: () => H(e),
-						onClick: t ? void 0 : () => fe(e),
-						children: q(e)
+						onFocus: () => V(e),
+						onClick: t ? void 0 : () => me(e),
+						children: K(e)
 					}, e);
 				})
 			}, t))
-		}) : /* @__PURE__ */ m("div", {
+		}) : /* @__PURE__ */ h("div", {
 			className: "calendar__grid",
 			role: "grid",
-			"aria-label": k,
-			"aria-labelledby": k ? void 0 : $,
-			onKeyDown: I.onKeyDown,
-			children: [n({
+			"aria-label": O,
+			"aria-labelledby": O ? void 0 : $,
+			onKeyDown: F.onKeyDown,
+			children: [i({
 				block: "calendar",
-				weekdays: ye
-			}), be.map((e, n) => /* @__PURE__ */ p("div", {
+				weekdays: xe
+			}), Se.map((e, t) => /* @__PURE__ */ m("div", {
 				role: "row",
 				className: "calendar__row",
-				children: e.map(({ date: e, outside: n }) => {
-					let r = ue(e), i = t(e, N), a = v instanceof Date ? t(e, v) : !1, o = [
+				children: e.map(({ date: e, outside: t }) => {
+					let n = fe(e), r = o(e, j), i = y instanceof Date ? o(e, y) : !1, a = [
 						"calendar__day",
-						n && "calendar__day--outside",
-						i && "calendar__day--today",
-						a && "calendar__day--selected",
-						r && "calendar__day--disabled"
+						t && "calendar__day--outside",
+						r && "calendar__day--today",
+						i && "calendar__day--selected",
+						n && "calendar__day--disabled"
 					].filter(Boolean).join(" ");
-					return /* @__PURE__ */ p("button", {
-						ref: I.cellRef(e),
+					return /* @__PURE__ */ m("button", {
+						ref: F.cellRef(e),
 						type: "button",
 						role: "gridcell",
-						className: o,
-						"aria-label": ve.format(e),
-						"aria-selected": a,
-						"aria-disabled": r ? "true" : void 0,
-						"aria-current": i ? "date" : void 0,
-						tabIndex: I.isTabbable(e) ? 0 : -1,
-						onFocus: () => I.onCellFocus(e),
-						onClick: r ? void 0 : () => y?.(e),
+						className: a,
+						"aria-label": be.format(e),
+						"aria-selected": i,
+						"aria-disabled": n ? "true" : void 0,
+						"aria-current": r ? "date" : void 0,
+						tabIndex: F.isTabbable(e) ? 0 : -1,
+						onFocus: () => F.onCellFocus(e),
+						onClick: n ? void 0 : () => re?.(e),
 						children: e.getDate()
 					}, e.toISOString());
 				})
-			}, n))]
+			}, t))]
 		})]
 	});
 }
 //#endregion
-export { v as Calendar };
+export { y as Calendar };

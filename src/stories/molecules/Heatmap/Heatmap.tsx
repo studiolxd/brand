@@ -12,6 +12,7 @@ import {
   type HeatmapDivergingDirection,
 } from './heatmapScale';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { heatmapEs } from '../../messages/es/heatmap';
 import './Heatmap.css';
 
 export type {
@@ -185,7 +186,7 @@ export const Heatmap = forwardRef<HTMLDivElement, HeatmapProps>(function Heatmap
   className,
   ...rest
 }, ref) {
-  const t = useBrandMessages('heatmap');
+  const t = useBrandMessages('heatmap', heatmapEs);
   const divergente = scale === 'diverging';
   const min = minProp ?? 0;
 

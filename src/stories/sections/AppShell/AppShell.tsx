@@ -8,6 +8,7 @@ import { useCssProperties } from '../../constants/css-properties';
 import { useMediaQuery } from '../../constants/media-query';
 import './AppShell.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { appShellEs } from '../../messages/es/appShell';
 
 // Re-export de API pública del subpath ./app-shell; solo penaliza el HMR de
 // desarrollo (full reload en lugar de hot reload para este archivo).
@@ -95,7 +96,7 @@ export function AppShell({
   skipLabel,
   className,
 }: AppShellProps) {
-  const t = useBrandMessages('appShell');
+  const t = useBrandMessages('appShell', appShellEs);
   // `null` en el servidor y en el render de hidratación: el ancho no se sabe
   // todavía y se pinta la columna de escritorio, la misma en los dos lados. Por
   // debajo del punto de ruptura, `AppShell.css` la esconde hasta que React

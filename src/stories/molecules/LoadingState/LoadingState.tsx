@@ -3,6 +3,7 @@ import { Button } from '../../atoms/Button/Button';
 import { Spinner } from '../../atoms/Spinner/Spinner';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { spinnerEs } from '../../messages/es/spinner';
 import type { EmptyStateAction } from '../EmptyState/EmptyState';
 import './LoadingState.css';
 
@@ -63,7 +64,7 @@ export function LoadingState({
   className,
   ...rest
 }: LoadingStateProps) {
-  const t = useBrandMessages('spinner');
+  const t = useBrandMessages('spinner', spinnerEs);
   const labelId = useId();
   const texto = t('label', label);
   const mostrarTexto = labelVisible && Boolean(label);

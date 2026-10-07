@@ -6,6 +6,7 @@ import { Logo, type LogoSize } from '../../atoms/Logo/Logo';
 import { MenuButton } from '../../atoms/MenuButton/MenuButton';
 import './SiteHeader.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { siteHeaderEs } from '../../messages/es/siteHeader';
 import { defaultRenderLink } from '../../constants/default-render-link';
 
 export type SiteHeaderLogoLinkProps = {
@@ -101,7 +102,7 @@ export function SiteHeader({
   actions,
   language,
 }: SiteHeaderProps) {
-  const t = useBrandMessages('siteHeader');
+  const t = useBrandMessages('siteHeader', siteHeaderEs);
   // Sin `panelId` del consumidor, uno único por instancia: un fijo chocaba con
   // dos cabeceras en la misma página.
   const autoPanelId = useId();

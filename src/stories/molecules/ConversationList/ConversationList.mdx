@@ -165,7 +165,7 @@ Los cinco textos de la lista salen del `BrandMessagesProvider`, **sin valor por 
 | `emptyMessage` | `conversationList.empty` | con la lista vacía |
 | `errorTitle` | `conversationList.error` | con `error` |
 
-`deleteLabel` interpola el título de la conversación, así que es **función**. El orden es **prop → proveedor → error**, y cada texto se lee **donde se pinta**: una lista que carga bien no exige el título del aviso de error.
+`deleteLabel` interpola el título de la conversación, así que es **función**. El orden es **prop → proveedor → castellano de respaldo**, y cada texto se lee **donde se pinta**: una lista que carga bien no exige el título del aviso de error.
 
 El **mensaje** de `error`, los títulos de `conversations` y `emptyDescription` quedan
 fuera: son datos de la pantalla — `emptyDescription` nunca tuvo clave de catálogo (es

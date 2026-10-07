@@ -3,6 +3,7 @@ import { Icon } from '../../atoms/Icon/Icon';
 import { Select } from '../../atoms/Select/Select';
 import type { SelectOption } from '../../atoms/Select/Select';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { paginationEs } from '../../messages/es/pagination';
 import './Pagination.css';
 
 /**
@@ -184,7 +185,7 @@ export function Pagination({
 }: PaginationProps) {
   // Cada texto se lee donde se pinta, nunca antes: un paginador sin selector
   // de tamaño no exige el texto del selector.
-  const t = useBrandMessages('pagination');
+  const t = useBrandMessages('pagination', paginationEs);
   const hrefBuilder = hrefBuilderProp ?? (hrefs ? (p: number) => hrefs[p] : undefined);
   const A = linkComponent ?? 'a';
 

@@ -2,6 +2,7 @@
 
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { typingIndicatorEs } from '../../messages/es/typingIndicator';
 import './TypingIndicator.css';
 
 /**
@@ -41,7 +42,7 @@ export interface TypingIndicatorProps {
 
 /** Tres puntos cuadrados que laten en secuencia: «alguien está escribiendo». */
 export function TypingIndicator({ name, label, className }: TypingIndicatorProps) {
-  const t = useBrandMessages('typingIndicator');
+  const t = useBrandMessages('typingIndicator', typingIndicatorEs);
 
   return (
     <span className={['typing-indicator', className].filter(Boolean).join(' ')} role="status">

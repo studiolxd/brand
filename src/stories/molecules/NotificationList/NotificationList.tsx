@@ -6,6 +6,7 @@ import { Icon } from '../../atoms/Icon/Icon';
 import { Text } from '../../atoms/Text/Text';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { notificationListEs } from '../../messages/es/notificationList';
 import './NotificationList.css';
 import { defaultRenderLink } from '../../constants/default-render-link';
 
@@ -138,7 +139,7 @@ export function NotificationList({
   markReadLabel,
   className,
 }: NotificationListProps) {
-  const t = useBrandMessages('notificationList');
+  const t = useBrandMessages('notificationList', notificationListEs);
   if (items.length === 0) return null;
 
   return (

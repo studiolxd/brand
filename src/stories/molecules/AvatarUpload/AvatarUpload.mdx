@@ -158,7 +158,7 @@ import { BrandMessagesProvider } from "@studiolxd/brand/messages";
 
 > **`cropCancelLabel` y `cropConfirmLabel` salen del catálogo aquí y son obligatorias en `ImageCropDialog`.** No es una incoherencia: el diálogo genérico no sabe qué confirma («Aplicar», «Usar esta imagen»), y esta subida sí — se descarta o se guarda un recorte, y eso vale igual en todas las pantallas.
 
-El orden es **prop → proveedor → error**. El texto se lee **donde se pinta**: una subida sin `maxSize` no exige su pista, y una que nunca ha rechazado un archivo no exige los dos errores.
+El orden es **prop → proveedor → castellano de respaldo**. El texto se lee **donde se pinta**: una subida sin `maxSize` no exige su pista, y una que nunca ha rechazado un archivo no exige los dos errores.
 
 ### El peso y la lista de formatos son formato, no idioma
 

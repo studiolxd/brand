@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { AppHeader, type AppHeaderLogoLinkProps } from './AppHeader';
 import { BrandMessagesProvider } from '../../messages';
 import { brandMessagesFixture as ES } from '../../../../.storybook/brandMessagesFixture';
+import { expectRespaldo } from '../../../../test/respaldo';
 
 const marca = <svg viewBox="0 0 120 24" data-testid="marca" />;
 
@@ -38,22 +39,19 @@ describe('AppHeader — ranura logo', () => {
     expect(hijos[2]).toHaveClass('app-header__start');
   });
 
-  it('con logo, sin logoLabel y sin appHeader.logo en el catálogo, lanza como cualquier clave ausente', () => {
+  it('con logo, sin logoLabel y sin appHeader.logo en el catálogo, sale el castellano de respaldo y avisa (D5)', () => {
     const { appHeader: _sinAppHeader, ...catalogo } = ES;
     void _sinAppHeader;
-    const consola = console.error;
-    console.error = () => {};
-    try {
-      expect(() =>
+    expectRespaldo(
+      () =>
         render(
           <BrandMessagesProvider messages={catalogo}>
             <AppHeader logo={marca} />
           </BrandMessagesProvider>,
         ),
-      ).toThrow('el catálogo montado no trae «appHeader.logo»');
-    } finally {
-      console.error = consola;
-    }
+      /appHeader\.logo/,
+    );
+    expect(screen.getByRole('link', { name: 'Ir al inicio' })).toBeInTheDocument();
   });
 
   it('con logo y logoLabel, el catálogo no necesita appHeader', () => {

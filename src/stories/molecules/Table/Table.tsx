@@ -2,6 +2,7 @@ import { useId, useRef, type ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { tableEs } from '../../messages/es/table';
 import { useOverflowFocusable } from '../../constants/overflow-focusable';
 import './Table.css';
 
@@ -154,7 +155,7 @@ export function TableHeader({
 }: TableHeaderProps) {
   // Cada texto se lee donde se pinta: una cabecera corriente no exige
   // ninguno, y una ordenable solo el de su estado vigente.
-  const t = useBrandMessages('table');
+  const t = useBrandMessages('table', tableEs);
   const classes = [
     'table__header',
     sortable ? 'table__header--sortable' : '',

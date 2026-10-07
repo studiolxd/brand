@@ -5,6 +5,7 @@ import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Sheet } from '../../molecules/Sheet/Sheet';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { chatShellEs } from '../../messages/es/chatShell';
 import { useMediaQuery } from '../../constants/media-query';
 import './ChatShell.css';
 import { assignRef } from '../../constants/assign-ref';
@@ -99,7 +100,7 @@ export const ChatShell = forwardRef<HTMLDivElement, ChatShellProps>(function Cha
   className,
   ...rest
 }, ref) {
-  const t = useBrandMessages('chatShell');
+  const t = useBrandMessages('chatShell', chatShellEs);
   // `null` en el servidor y al hidratar: se pinta la columna, la misma en los
   // dos lados, y `ChatShell.css` la esconde por debajo del punto de ruptura
   // hasta que React vuelve a pintar con el cajón (`data-layout`).

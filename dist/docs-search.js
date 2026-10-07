@@ -3,44 +3,53 @@ import './docs-search.css';
 import { n as e } from "./_shared/brandmessagescontext.js";
 import { Spinner as t } from "./spinner.js";
 import { t as n } from "./_shared/default-render-link.js";
-import { InputField as r } from "./input-field.js";
+import { t as r } from "./_shared/inputfield.js";
 import { useId as i } from "react";
 import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
 import { Autocomplete as c } from "@base-ui/react/autocomplete";
+//#region src/stories/messages/es/docsSearch.ts
+var l = {
+	label: "Buscar en la documentación",
+	placeholder: "Buscar…",
+	results: "Resultados",
+	empty: "Sin resultados.",
+	loading: "Buscando…"
+};
+//#endregion
 //#region src/stories/molecules/DocsSearch/DocsSearch.tsx
-function l({ id: l, query: u, onQueryChange: d, results: f, loading: p = !1, label: m, labelHidden: h, placeholder: g, clearable: _ = !0, clearLabel: v, resultsLabel: y, emptyLabel: b, loadingLabel: x, size: S, renderLink: C = n, onSelect: w, className: T }) {
-	let E = e("docsSearch"), D = i(), O = l ?? D, k = u.trim() !== "" && f.length === 0 ? p ? E("loading", x) : E("empty", b) : null;
+function u({ id: u, query: d, onQueryChange: f, results: p, loading: m = !1, label: h, labelHidden: g, placeholder: _, clearable: v = !0, clearLabel: y, resultsLabel: b, emptyLabel: x, loadingLabel: S, size: C, renderLink: w = n, onSelect: T, className: E }) {
+	let D = e("docsSearch", l), O = i(), k = u ?? O, A = d.trim() !== "" && p.length === 0 ? m ? D("loading", S) : D("empty", x) : null;
 	return /* @__PURE__ */ o(c.Root, {
 		inline: !0,
 		open: !0,
-		items: f,
+		items: p,
 		filter: null,
-		value: u,
-		onValueChange: d,
+		value: d,
+		onValueChange: f,
 		children: /* @__PURE__ */ s("div", {
-			className: ["docs-search", T].filter(Boolean).join(" "),
+			className: ["docs-search", E].filter(Boolean).join(" "),
 			children: [
 				/* @__PURE__ */ o(c.Input, {
-					id: O,
+					id: k,
 					render: /* @__PURE__ */ o(r, {
-						id: O,
-						label: E("label", m),
-						labelHidden: h,
+						id: k,
+						label: D("label", h),
+						labelHidden: g,
 						kind: "search",
-						clearable: _,
-						...v === void 0 ? {} : { clearLabel: v },
-						placeholder: E("placeholder", g),
-						...S ? { size: S } : {}
+						clearable: v,
+						...y === void 0 ? {} : { clearLabel: y },
+						placeholder: D("placeholder", _),
+						...C ? { size: C } : {}
 					})
 				}),
 				/* @__PURE__ */ o(c.List, {
 					className: "docs-search__results",
-					"aria-label": E("results", y),
+					"aria-label": D("results", b),
 					children: (e) => /* @__PURE__ */ o(c.Item, {
 						value: e,
 						className: "docs-search__result",
-						onClick: () => w?.(e),
-						render: (t) => C({
+						onClick: () => T?.(e),
+						render: (t) => w({
 							...t,
 							href: e.href,
 							className: t.className ?? "docs-search__result",
@@ -61,17 +70,17 @@ function l({ id: l, query: u, onQueryChange: d, results: f, loading: p = !1, lab
 						})
 					}, e.href)
 				}),
-				k && /* @__PURE__ */ s("p", {
+				A && /* @__PURE__ */ s("p", {
 					className: "docs-search__status",
 					role: "status",
-					children: [p && /* @__PURE__ */ o(t, {
+					children: [m && /* @__PURE__ */ o(t, {
 						size: "sm",
 						"aria-hidden": !0
-					}), k]
+					}), A]
 				})
 			]
 		})
 	});
 }
 //#endregion
-export { l as DocsSearch };
+export { u as DocsSearch };

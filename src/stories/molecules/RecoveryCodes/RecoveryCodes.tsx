@@ -15,7 +15,7 @@ export interface RecoveryCodesLabels {
   /**
    * Aviso del botón de copiar si el portapapeles falla (contexto no seguro,
    * permiso denegado). Opcional: sin él sale de `copy.error` del
-   * `BrandMessagesProvider`, y sin ninguno de los dos el componente lanza.
+   * `BrandMessagesProvider`, y sin ninguno de los dos, del castellano de respaldo.
    */
   error?: string;
 }

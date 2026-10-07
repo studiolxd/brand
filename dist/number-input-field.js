@@ -1,7 +1,7 @@
 'use client';
 import './number-input-field.css';
 import { n as e } from "./_shared/form-size.js";
-import { NumberInput as t } from "./number-input.js";
+import { t } from "./_shared/numberinput.js";
 import { n } from "./_shared/field-labels.js";
 import { n as r, t as i } from "./_shared/fieldshell.js";
 import { forwardRef as a } from "react";

@@ -1,6 +1,7 @@
 import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import { Icon } from '../Icon/Icon';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { closeButtonEs } from '../../messages/es/closeButton';
 import './CloseButton.css';
 
 /**
@@ -41,7 +42,7 @@ export const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(funct
   { label, size = 'md', className, ...rest },
   ref,
 ) {
-  const t = useBrandMessages('closeButton');
+  const t = useBrandMessages('closeButton', closeButtonEs);
   const classes = ['close-button', size !== 'md' ? `close-button--${size}` : '', className]
     .filter(Boolean)
     .join(' ');

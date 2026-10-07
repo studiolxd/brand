@@ -5,41 +5,44 @@ import { UserMessage as t } from "./user-message.js";
 import { AssistantMessage as n } from "./assistant-message.js";
 import { forwardRef as r, useEffect as i, useRef as a } from "react";
 import { jsx as o, jsxs as s } from "react/jsx-runtime";
+//#region src/stories/messages/es/conversationThread.ts
+var c = { label: "Conversación" };
+//#endregion
 //#region src/stories/organisms/ConversationThread/ConversationThread.tsx
-function c() {
+function l() {
 	return typeof window > "u" || typeof window.matchMedia != "function" || window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
 }
-var l = r(function({ messages: r = [], children: l, streamingName: u, streamingLabel: d, ariaLabel: f, locale: p, timestampFormat: m, className: h, ...g }, _) {
-	let v = a(null), y = e("conversationThread");
+var u = r(function({ messages: r = [], children: u, streamingName: d, streamingLabel: f, ariaLabel: p, locale: m, timestampFormat: h, className: g, ..._ }, v) {
+	let y = a(null), b = e("conversationThread", c);
 	return i(() => {
-		v.current?.scrollIntoView({ behavior: c() });
-	}, [r, l]), /* @__PURE__ */ s("div", {
-		ref: _,
-		className: `conversation-thread${h ? ` ${h}` : ""}`,
+		y.current?.scrollIntoView({ behavior: l() });
+	}, [r, u]), /* @__PURE__ */ s("div", {
+		ref: v,
+		className: `conversation-thread${g ? ` ${g}` : ""}`,
 		role: "log",
-		"aria-label": y("label", f),
+		"aria-label": b("label", p),
 		tabIndex: 0,
-		"data-content": l == null ? "messages" : "children",
-		...g,
-		children: [l ?? r.map((e) => e.role === "user" ? /* @__PURE__ */ o(t, {
+		"data-content": u == null ? "messages" : "children",
+		..._,
+		children: [u ?? r.map((e) => e.role === "user" ? /* @__PURE__ */ o(t, {
 			timestamp: e.timestamp,
-			locale: p,
-			timestampFormat: m,
+			locale: m,
+			timestampFormat: h,
 			children: e.content
 		}, e.id) : /* @__PURE__ */ o(n, {
 			model: e.model,
 			timestamp: e.timestamp,
-			locale: p,
-			timestampFormat: m,
+			locale: m,
+			timestampFormat: h,
 			isStreaming: e.isStreaming,
-			streamingName: u,
-			streamingLabel: d,
+			streamingName: d,
+			streamingLabel: f,
 			children: e.content
 		}, e.id)), /* @__PURE__ */ o("div", {
-			ref: v,
+			ref: y,
 			"aria-hidden": "true"
 		})]
 	});
 });
 //#endregion
-export { l as ConversationThread };
+export { u as ConversationThread };

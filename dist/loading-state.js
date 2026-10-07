@@ -2,51 +2,52 @@
 import './loading-state.css';
 import { n as e } from "./_shared/brandmessagescontext.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
-import { Spinner as n } from "./spinner.js";
-import { Button as r } from "./button.js";
-import { useId as i } from "react";
-import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { t as n } from "./_shared/spinner.js";
+import { Spinner as r } from "./spinner.js";
+import { Button as i } from "./button.js";
+import { useId as a } from "react";
+import { jsx as o, jsxs as s } from "react/jsx-runtime";
 //#region src/stories/molecules/LoadingState/LoadingState.tsx
-function s({ label: s, labelVisible: c = !1, size: l = "md", fill: u = !1, action: d, className: f, ...p }) {
-	let m = e("spinner"), h = i(), g = m("label", s), _ = c && !!s;
-	return /* @__PURE__ */ o("div", {
+function c({ label: c, labelVisible: l = !1, size: u = "md", fill: d = !1, action: f, className: p, ...m }) {
+	let h = e("spinner", n), g = a(), _ = h("label", c), v = l && !!c;
+	return /* @__PURE__ */ s("div", {
 		className: [
 			"loading-state",
-			l === "sm" ? "loading-state--sm" : "",
-			u ? "loading-state--fill" : "",
-			f
+			u === "sm" ? "loading-state--sm" : "",
+			d ? "loading-state--fill" : "",
+			p
 		].filter(Boolean).join(" "),
 		role: "status",
 		"aria-busy": "true",
-		"aria-labelledby": h,
+		"aria-labelledby": g,
 		"aria-live": "polite",
 		"aria-atomic": "false",
-		...p,
+		...m,
 		children: [
-			/* @__PURE__ */ a("span", {
+			/* @__PURE__ */ o("span", {
 				className: "loading-state__spinner",
-				children: /* @__PURE__ */ a(n, {
-					size: l === "sm" ? "md" : "lg",
+				children: /* @__PURE__ */ o(r, {
+					size: u === "sm" ? "md" : "lg",
 					"aria-hidden": !0
 				})
 			}),
-			_ ? /* @__PURE__ */ a("p", {
-				id: h,
+			v ? /* @__PURE__ */ o("p", {
+				id: g,
 				className: "loading-state__label",
-				children: g
-			}) : /* @__PURE__ */ a(t, {
-				id: h,
-				children: g
+				children: _
+			}) : /* @__PURE__ */ o(t, {
+				id: g,
+				children: _
 			}),
-			d && /* @__PURE__ */ a(r, {
+			f && /* @__PURE__ */ o(i, {
 				variant: "outline",
-				size: l === "sm" ? "sm" : "md",
-				onClick: d.onClick,
-				href: d.href,
-				children: d.label
+				size: u === "sm" ? "sm" : "md",
+				onClick: f.onClick,
+				href: f.href,
+				children: f.label
 			})
 		]
 	});
 }
 //#endregion
-export { s as LoadingState };
+export { c as LoadingState };

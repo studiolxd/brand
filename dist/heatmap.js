@@ -39,43 +39,48 @@ function u(e, t, n, r) {
 	return (i.length > 0 ? i : t.filter((e) => e !== null && Number.isFinite(e))).reduce((t, n) => Math.max(t, Math.abs(n - e)), 0);
 }
 //#endregion
-//#region src/stories/molecules/Heatmap/Heatmap.tsx
-var d = (e, t) => `${e}\u0000${t}`, f = n(function({ rows: n, columns: f, cells: p, scale: m = "sequential", min: h, max: g, steps: _ = 5, midpoint: v = 0, divergingDirection: y = "warm-below", rowHeader: b, showValues: x = !0, formatValue: S, locale: C = "es-ES", showLegend: w = !0, minLabel: T, maxLabel: E, midpointLabel: D, label: O, emptyLabel: k, scaleLabel: A, className: j, ...M }, N) {
-	let P = e("heatmap"), F = m === "diverging", I = h ?? 0, L = r(() => {
+//#region src/stories/messages/es/heatmap.ts
+var d = {
+	label: "Matriz",
+	empty: "sin dato",
+	scale: "Escala de color",
+	midpoint: (e) => `Centro: ${e}`
+}, f = (e, t) => `${e}\u0000${t}`, p = n(function({ rows: n, columns: p, cells: m, scale: h = "sequential", min: g, max: _, steps: v = 5, midpoint: y = 0, divergingDirection: b = "warm-below", rowHeader: x, showValues: S = !0, formatValue: C, locale: w = "es-ES", showLegend: T = !0, minLabel: E, maxLabel: D, midpointLabel: O, label: k, emptyLabel: A, scaleLabel: j, className: M, ...N }, P) {
+	let F = e("heatmap", d), I = h === "diverging", L = g ?? 0, R = r(() => {
 		let e = /* @__PURE__ */ new Map();
-		for (let t of p) e.set(d(t.rowId, t.columnKey), t.value);
+		for (let t of m) e.set(f(t.rowId, t.columnKey), t.value);
 		return e;
-	}, [p]), R = r(() => {
-		if (g !== void 0) return g;
-		let e = p.map((e) => e.value).filter((e) => e !== null && Number.isFinite(e));
-		return e.length > 0 ? Math.max(...e) : I + 1;
+	}, [m]), z = r(() => {
+		if (_ !== void 0) return _;
+		let e = m.map((e) => e.value).filter((e) => e !== null && Number.isFinite(e));
+		return e.length > 0 ? Math.max(...e) : L + 1;
 	}, [
-		p,
+		m,
+		_,
+		L
+	]), B = Math.max(2, Math.min(6, Math.round(v))), V = {
+		min: L,
+		max: z,
+		steps: B
+	}, H = r(() => u(y, m.map((e) => e.value), g, _), [
+		m,
+		y,
 		g,
-		I
-	]), z = Math.max(2, Math.min(6, Math.round(_))), B = {
-		min: I,
-		max: R,
-		steps: z
-	}, V = r(() => u(v, p.map((e) => e.value), h, g), [
-		p,
-		v,
-		h,
-		g
-	]), H = {
-		midpoint: v,
-		radius: V,
-		direction: y
-	}, U = (e) => {
-		if (F) {
-			let t = c(e, H);
+		_
+	]), U = {
+		midpoint: y,
+		radius: H,
+		direction: b
+	}, W = (e) => {
+		if (I) {
+			let t = c(e, U);
 			return t === null ? "heatmap__cell--empty" : `heatmap__cell--diverging-${t}`;
 		}
-		let t = o(e, B);
-		return t === null ? "heatmap__cell--empty" : `heatmap__cell--step-${s(t, z)}`;
-	}, W = r(() => new Intl.NumberFormat(C, { maximumFractionDigits: 1 }), [C]), G = S ?? ((e) => W.format(e)), K = r(() => {
+		let t = o(e, V);
+		return t === null ? "heatmap__cell--empty" : `heatmap__cell--step-${s(t, B)}`;
+	}, G = r(() => new Intl.NumberFormat(w, { maximumFractionDigits: 1 }), [w]), K = C ?? ((e) => G.format(e)), q = r(() => {
 		let e = [];
-		for (let t of f) {
+		for (let t of p) {
 			let n = e[e.length - 1];
 			n && n.group === t.group ? n.span += 1 : e.push({
 				group: t.group,
@@ -83,11 +88,11 @@ var d = (e, t) => `${e}\u0000${t}`, f = n(function({ rows: n, columns: f, cells:
 			});
 		}
 		return e;
-	}, [f]), q = f.some((e) => e.group !== void 0);
+	}, [p]), J = p.some((e) => e.group !== void 0);
 	return /* @__PURE__ */ a("div", {
-		ref: N,
-		className: ["heatmap", j].filter(Boolean).join(" "),
-		...M,
+		ref: P,
+		className: ["heatmap", M].filter(Boolean).join(" "),
+		...N,
 		children: [/* @__PURE__ */ i("div", {
 			className: "heatmap__wrap",
 			children: /* @__PURE__ */ a("table", {
@@ -95,9 +100,9 @@ var d = (e, t) => `${e}\u0000${t}`, f = n(function({ rows: n, columns: f, cells:
 				children: [
 					/* @__PURE__ */ i("caption", {
 						className: "visually-hidden",
-						children: P("label", O)
+						children: F("label", k)
 					}),
-					/* @__PURE__ */ a("thead", { children: [q ? /* @__PURE__ */ a("tr", { children: [/* @__PURE__ */ i("td", { className: "heatmap__corner" }), K.map((e, t) => /* @__PURE__ */ i("th", {
+					/* @__PURE__ */ a("thead", { children: [J ? /* @__PURE__ */ a("tr", { children: [/* @__PURE__ */ i("td", { className: "heatmap__corner" }), q.map((e, t) => /* @__PURE__ */ i("th", {
 						className: "heatmap__group",
 						scope: "colgroup",
 						colSpan: e.span,
@@ -105,8 +110,8 @@ var d = (e, t) => `${e}\u0000${t}`, f = n(function({ rows: n, columns: f, cells:
 					}, `${e.group ?? ""}-${t}`))] }) : null, /* @__PURE__ */ a("tr", { children: [/* @__PURE__ */ i("th", {
 						className: "heatmap__corner",
 						scope: "col",
-						children: b
-					}), f.map((e) => /* @__PURE__ */ i("th", {
+						children: x
+					}), p.map((e) => /* @__PURE__ */ i("th", {
 						className: "heatmap__column-header",
 						scope: "col",
 						children: e.label
@@ -115,45 +120,45 @@ var d = (e, t) => `${e}\u0000${t}`, f = n(function({ rows: n, columns: f, cells:
 						className: "heatmap__row-header",
 						scope: "row",
 						children: e.label
-					}), f.map((n) => {
-						let r = L.get(d(e.id, n.key)) ?? null, a = `heatmap__cell ${U(r)}`, o = r === null ? P("empty", k) : G(r);
+					}), p.map((n) => {
+						let r = R.get(f(e.id, n.key)) ?? null, a = `heatmap__cell ${W(r)}`, o = r === null ? F("empty", A) : K(r);
 						return /* @__PURE__ */ i("td", {
 							className: a,
-							children: x && r !== null ? o : /* @__PURE__ */ i(t, { children: o })
+							children: S && r !== null ? o : /* @__PURE__ */ i(t, { children: o })
 						}, n.key);
 					})] }, e.id)) })
 				]
 			})
-		}), w && F ? /* @__PURE__ */ a("p", {
+		}), T && I ? /* @__PURE__ */ a("p", {
 			className: "heatmap__legend",
 			children: [
-				/* @__PURE__ */ i("span", { children: T ?? G(v - V) }),
+				/* @__PURE__ */ i("span", { children: E ?? K(y - H) }),
 				/* @__PURE__ */ i("span", {
 					className: "heatmap__ramp",
 					role: "img",
-					"aria-label": P("scale", A),
-					children: l(y).map((e) => /* @__PURE__ */ i("span", { className: `heatmap__swatch heatmap__swatch--diverging-${e}` }, e))
+					"aria-label": F("scale", j),
+					children: l(b).map((e) => /* @__PURE__ */ i("span", { className: `heatmap__swatch heatmap__swatch--diverging-${e}` }, e))
 				}),
-				/* @__PURE__ */ i("span", { children: E ?? G(v + V) }),
+				/* @__PURE__ */ i("span", { children: D ?? K(y + H) }),
 				/* @__PURE__ */ i("span", {
 					className: "heatmap__midpoint",
-					children: D ?? P("midpoint")(G(v))
+					children: O ?? F("midpoint")(K(y))
 				})
 			]
-		}) : w ? /* @__PURE__ */ a("p", {
+		}) : T ? /* @__PURE__ */ a("p", {
 			className: "heatmap__legend",
 			children: [
-				/* @__PURE__ */ i("span", { children: T ?? G(I) }),
+				/* @__PURE__ */ i("span", { children: E ?? K(L) }),
 				/* @__PURE__ */ i("span", {
 					className: "heatmap__ramp",
 					role: "img",
-					"aria-label": P("scale", A),
-					children: Array.from({ length: z }, (e, t) => /* @__PURE__ */ i("span", { className: `heatmap__swatch heatmap__swatch--step-${s(t + 1, z)}` }, t))
+					"aria-label": F("scale", j),
+					children: Array.from({ length: B }, (e, t) => /* @__PURE__ */ i("span", { className: `heatmap__swatch heatmap__swatch--step-${s(t + 1, B)}` }, t))
 				}),
-				/* @__PURE__ */ i("span", { children: E ?? G(R) })
+				/* @__PURE__ */ i("span", { children: D ?? K(z) })
 			]
 		}) : null]
 	});
 });
 //#endregion
-export { f as Heatmap };
+export { p as Heatmap };

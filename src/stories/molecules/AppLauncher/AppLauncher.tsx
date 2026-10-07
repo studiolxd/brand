@@ -4,6 +4,7 @@ import { Icon } from '../../atoms/Icon/Icon';
 import { Tag } from '../../atoms/Tag/Tag';
 import { Modal } from '../Modal/Modal';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { appLauncherEs } from '../../messages/es/appLauncher';
 import './AppLauncher.css';
 import { usePortalContainer } from '../../constants/portal-container';
 
@@ -112,7 +113,7 @@ export interface AppLauncherProps {
 }
 
 function LauncherTile({ app, isCurrent, newLabel }: { app: LauncherApp; isCurrent: boolean; newLabel?: string }) {
-  const t = useBrandMessages('appLauncher');
+  const t = useBrandMessages('appLauncher', appLauncherEs);
   // El distintivo es uno solo: `badge` manda y trae su texto; `isNew` sigue
   // valiendo y lo saca del catálogo. Se lee donde se pinta: una rejilla sin
   // novedades no exige la clave.
@@ -207,7 +208,7 @@ function AppLauncherPopover({
   onOpenChange,
   className,
 }: AppLauncherPresentationProps) {
-  const t = useBrandMessages('appLauncher');
+  const t = useBrandMessages('appLauncher', appLauncherEs);
   const portalContainer = usePortalContainer(undefined);
   return (
     <BasePopover.Root
@@ -265,7 +266,7 @@ function AppLauncherModal({
   onOpenChange,
   className,
 }: AppLauncherPresentationProps) {
-  const t = useBrandMessages('appLauncher');
+  const t = useBrandMessages('appLauncher', appLauncherEs);
   const [isOpen, setOpen] = useAppLauncherOpenState(open, defaultOpen, onOpenChange);
 
   return (

@@ -1,7 +1,7 @@
 'use client';
 import './select-field.css';
 import { n as e } from "./_shared/form-size.js";
-import { Select as t, isSelectOptionGroup as n } from "./select.js";
+import { t, u as n } from "./_shared/select.js";
 import { n as r } from "./_shared/field-labels.js";
 import { n as i, t as a } from "./_shared/fieldshell.js";
 import { forwardRef as o } from "react";

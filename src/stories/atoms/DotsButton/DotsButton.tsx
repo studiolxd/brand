@@ -2,6 +2,7 @@ import { forwardRef } from 'react';
 import { Button, type ButtonBaseProps } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
+import { dotsButtonEs } from '../../messages/es/dotsButton';
 import './DotsButton.css';
 
 /**
@@ -36,7 +37,7 @@ export const DotsButton = forwardRef<HTMLButtonElement, DotsButtonProps>(functio
   { size = 'md', orientation = 'horizontal', 'aria-label': ariaLabel, className, ...rest },
   ref,
 ) {
-  const t = useBrandMessages('dotsButton');
+  const t = useBrandMessages('dotsButton', dotsButtonEs);
   const classes = ['dots-button', orientation === 'vertical' ? 'dots-button--vertical' : '', className]
     .filter(Boolean).join(' ');
   return (
