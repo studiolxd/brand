@@ -9,9 +9,9 @@ export interface DescriptionTermProps extends React.ComponentPropsWithoutRef<'dt
    * Elemento a renderizar. Default `'dt'`, que es lo correcto dentro de una
    * `DescriptionList`. Solo se cambia cuando el término no cuelga de una lista
    * de descripción real y hay que darle el rol a mano (`as="div"
-   * role="term"`).
+   * role="term"`). Solo cambia la etiqueta.
    */
-  as?: React.ElementType;
+  as?: 'dt' | 'div';
   children?: React.ReactNode;
 }
 
@@ -19,9 +19,9 @@ export interface DescriptionDetailsProps extends React.ComponentPropsWithoutRef<
   /**
    * Elemento a renderizar. Default `'dd'`. Mismo criterio que en
    * `DescriptionTerm`: solo se cambia fuera de un `<dl>` real (`as="div"
-   * role="definition"`).
+   * role="definition"`). Solo cambia la etiqueta.
    */
-  as?: React.ElementType;
+  as?: 'dd' | 'div';
   children?: React.ReactNode;
   /**
    * Añade un botón de copiar en línea, pegado al final del valor (nunca al
@@ -84,7 +84,8 @@ export const DescriptionList = forwardRef<HTMLDListElement, DescriptionListProps
  * propia.
  */
 export const DescriptionTerm = forwardRef<HTMLElement, DescriptionTermProps>(
-  function DescriptionTerm({ as: Element = 'dt', className, children, ...rest }, ref) {
+  function DescriptionTerm({ as = 'dt', className, children, ...rest }, ref) {
+    const Element = as as React.ElementType;
     const classes = ['description-list__term', className].filter(Boolean).join(' ');
     return (
       <Element ref={ref} className={classes} {...rest}>
@@ -106,7 +107,7 @@ export const DescriptionTerm = forwardRef<HTMLElement, DescriptionTermProps>(
  */
 export const DescriptionDetails = forwardRef<HTMLElement, DescriptionDetailsProps>(
   function DescriptionDetails({
-    as: Element = 'dd',
+    as = 'dd',
     className,
     children,
     copyable = false,
@@ -115,6 +116,7 @@ export const DescriptionDetails = forwardRef<HTMLElement, DescriptionDetailsProp
     copiedLabel,
     ...rest
   }, ref) {
+    const Element = as as React.ElementType;
     const classes = [
       'description-list__details',
       copyable ? 'description-list__details--copyable' : '',

@@ -9,9 +9,11 @@ import { Pagination } from '../molecules/Pagination/Pagination';
 import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb';
 import { FilterBar } from '../molecules/FilterBar/FilterBar';
 import { TableOfContents } from '../molecules/TableOfContents/TableOfContents';
+import { PrevNextNav } from '../molecules/PrevNextNav/PrevNextNav';
+import { CalendarRoster } from '../molecules/CalendarRoster/CalendarRoster';
 
 /**
- * Los alias obsoletos de la v51 (D6.4): `ariaLabel` → `aria-label`. Cada uno
+ * Los alias obsoletos de la v51. Cada uno
  * sigue funcionando y avisa una vez en desarrollo. Este fichero entero se
  * borra en la v52, cuando se retiran.
  */
@@ -71,4 +73,54 @@ describe('alias obsoleto ariaLabel → aria-label (v51)', () => {
     rerender(<FileUpload ariaLabel="Viejo" aria-label="Nuevo" />);
     expect(input).toHaveAttribute('aria-label', 'Nuevo');
   });
+});
+
+/** D6.5: `linkComponent` → `renderLink` en Pagination, PrevNextNav y CalendarRoster. */
+describe('alias obsoleto linkComponent → renderLink (v51)', () => {
+  let warn: MockInstance;
+  beforeEach(() => {
+    resetWarnings();
+    warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+  afterEach(() => warn.mockRestore());
+
+  function RouterLink(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+    return <a data-router="" {...props} />;
+  }
+
+  const casos: Array<[string, (props: Record<string, unknown>) => React.ReactElement]> = [
+    ['Pagination', (p) => <Pagination total={30} page={1} pageSize={10} hrefBuilder={(n) => `?p=${n}`} {...p} />],
+    ['PrevNextNav', (p) => <PrevNextNav prevHref="/a" nextHref="/b" {...p} />],
+    [
+      'CalendarRoster',
+      (p) => (
+        <CalendarRoster month={new Date(2026, 0, 1)} rows={[]} hrefBuilder={(m) => `?m=${m.getMonth()}`} {...p} />
+      ),
+    ],
+  ];
+
+  for (const [nombre, pinta] of casos) {
+    it(`${nombre}: renderLink pinta los enlaces con todas sus props`, () => {
+      const { container } = render(
+        pinta({ renderLink: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => <RouterLink {...props} /> }),
+      );
+      const enlaces = container.querySelectorAll('a[href]');
+      expect(enlaces.length).toBeGreaterThan(0);
+      for (const a of enlaces) {
+        expect(a).toHaveAttribute('data-router');
+        expect(a.getAttribute('class')).toBeTruthy();
+      }
+      expect(warn).not.toHaveBeenCalledWith(expect.stringContaining('obsoleta'));
+    });
+
+    it(`${nombre}: el alias linkComponent sigue funcionando y avisa`, () => {
+      const { container } = render(pinta({ linkComponent: RouterLink }));
+      const enlaces = container.querySelectorAll('a[href]');
+      expect(enlaces.length).toBeGreaterThan(0);
+      for (const a of enlaces) expect(a).toHaveAttribute('data-router');
+      expect(warn).toHaveBeenCalledWith(
+        expect.stringContaining(`\`<${nombre} linkComponent>\` está obsoleta; usa \`renderLink\``),
+      );
+    });
+  }
 });

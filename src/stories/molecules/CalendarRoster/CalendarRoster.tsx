@@ -1,7 +1,12 @@
 import { useId, useRef, type ComponentType, type MouseEvent, type ReactNode } from 'react';
 import { Tag } from '../../atoms/Tag/Tag';
 import type { TagVariant } from '../../atoms/Tag/Tag';
-import { PrevNextNav } from '../PrevNextNav/PrevNextNav';
+import { PrevNextNav, type PrevNextNavRenderLinkProps } from '../PrevNextNav/PrevNextNav';
+import { warnDeprecated } from '../../constants/env';
+import { renderLinkFromComponent } from '../../constants/default-render-link';
+
+/** Lo que recibe `renderLink`: el mismo contrato que el de `PrevNextNav`. */
+export type CalendarRosterRenderLinkProps = PrevNextNavRenderLinkProps;
 import { isSameDay, shiftMonth, useToday } from '../_shared/calendarGrid';
 import './CalendarRoster.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
@@ -83,7 +88,16 @@ export interface CalendarRosterProps {
    */
    
   hrefBuilder?: (month: Date) => string;
-  /** Componente Link del router. Default: "a" */
+  /**
+   * Pinta los enlaces de mes (con `hrefBuilder`) con el `Link` del router:
+   * `renderLink={(props) => <Link {...props} />}`. Recibe todos los atributos
+   * del `<a>` y tiene que reenviarlos todos. Sin él, un `<a>`.
+   */
+  renderLink?: (props: CalendarRosterRenderLinkProps) => ReactNode;
+  /**
+   * @deprecated Usa `renderLink` (`renderLink={(props) => <Link {...props} />}`).
+   * Sigue funcionando y avisa en desarrollo; se retira en la v52.
+   */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   linkComponent?: ComponentType<any>;
   /**
@@ -179,6 +193,7 @@ export function CalendarRoster({
   month,
   onMonthChange,
   hrefBuilder,
+  renderLink,
   linkComponent,
   renderCell,
   nameLabel,
@@ -192,6 +207,7 @@ export function CalendarRoster({
   today: todayProp,
   className,
 }: CalendarRosterProps) {
+  if (linkComponent !== undefined) warnDeprecated('CalendarRoster', 'linkComponent', '`renderLink`');
   const t = useBrandMessages('calendar', calendarEs);
   const tr = useBrandMessages('calendarRoster', calendarRosterEs);
   // La leyenda se arma DONDE se pinta: sin `showLegend` no se exige ninguna
@@ -240,7 +256,7 @@ export function CalendarRoster({
           nextOnClick={navHandler?.(nextMonth)}
           prevLabel={t('previousMonth', previousMonthLabel)}
           nextLabel={t('nextMonth', nextMonthLabel)}
-          linkComponent={linkComponent}
+          renderLink={renderLink ?? (linkComponent ? renderLinkFromComponent(linkComponent) : undefined)}
         />
       </div>
 

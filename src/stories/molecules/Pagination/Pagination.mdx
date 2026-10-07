@@ -137,6 +137,23 @@ import { Pagination } from '@studiolxd/brand/pagination';
 
 Sin `onPageChange`, la navegación ocurre únicamente mediante el href nativo.
 
+Para que esos enlaces sean los del router (prefijo de idioma, precarga), `renderLink` los pinta
+con su `Link`. Recibe todos los atributos del `<a>` y tiene que reenviarlos todos:
+
+```tsx
+<Pagination
+  total={200}
+  page={currentPage}
+  hrefBuilder={(p) => `/proyectos?page=${p}`}
+  renderLink={(props) => <Link {...props} />}
+/>
+```
+
+`renderLink` es una función, así que no cruza de un Server Component a uno de cliente: el
+paginador con `renderLink` se monta en un fichero de cliente. Hasta la v51 la prop era
+`linkComponent` (el componente, no la función); sigue funcionando como alias obsoleto, avisa en
+desarrollo y se retira en la v52.
+
 <Canvas of={PaginationStories.ConLinks} />
 
 ## Internacionalización de las etiquetas

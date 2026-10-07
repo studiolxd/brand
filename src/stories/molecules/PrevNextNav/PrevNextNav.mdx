@@ -16,8 +16,8 @@ navegación de mes de `CalendarRoster`.
 ## Enlace o handler
 
 Cada control acepta `href` (navegación real, funciona sin JavaScript y es la
-opción por defecto) o un handler. Con `linkComponent` el `href` se rinde con el
-`Link` del router; y si se pasan los dos, el handler se dispara además del
+opción por defecto) o un handler. Con `renderLink` el `href` se rinde con el
+`Link` del router (`renderLink={(props) => <Link {...props} />}`); y si se pasan los dos, el handler se dispara además del
 enlace, que es como se hace la navegación SPA: `preventDefault()` dentro y ruta
 por el router.
 

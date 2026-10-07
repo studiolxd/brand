@@ -7,9 +7,11 @@ export interface ListItemProps extends React.ComponentPropsWithoutRef<'li'> {
   /**
    * Elemento a renderizar. Default `'li'`, que es lo correcto dentro de una
    * `List`. Solo se cambia cuando el ítem no cuelga de una lista real y hay
-   * que darle el rol a mano (`as="div" role="listitem"`).
+   * que darle el rol a mano (`as="div" role="listitem"`). Solo cambia la
+   * etiqueta: para sustituir el elemento entero por otro componente no hay
+   * prop, y una fila pulsable lleva el botón o el enlace **dentro** del ítem.
    */
-  as?: React.ElementType;
+  as?: 'li' | 'div';
   children?: React.ReactNode;
   /**
    * Accesorio al principio de la fila: un icono, un avatar. Pareja de
@@ -75,7 +77,7 @@ export const List = forwardRef<HTMLUListElement & HTMLOListElement, ListProps>(f
  * propia.
  */
 export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(function ListItem({
-  as: Element = 'li',
+  as = 'li',
   leading,
   secondary,
   trailing,
@@ -83,6 +85,9 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(function ListIt
   children,
   ...rest
 }, ref) {
+  // La unión cierra lo que se puede pedir; dentro, el elemento se pinta como
+  // cualquier etiqueta (el `ref` es el mismo para `li` y `div`).
+  const Element = as as React.ElementType;
   const classes = ['list__item', className ?? ''].filter(Boolean).join(' ');
   const hasSecondary = secondary !== undefined && secondary !== null && secondary !== false;
   const hasLeading = leading !== undefined && leading !== null && leading !== false;

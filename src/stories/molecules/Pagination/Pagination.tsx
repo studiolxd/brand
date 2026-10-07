@@ -1,4 +1,4 @@
-import type { ComponentType, ReactNode } from 'react';
+import { Fragment, type AnchorHTMLAttributes, type ComponentType, type ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Select } from '../../atoms/Select/Select';
 import type { SelectOption } from '../../atoms/Select/Select';
@@ -6,6 +6,17 @@ import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { paginationEs } from '../../messages/es/pagination';
 import './Pagination.css';
 import { warnDeprecated } from '../../constants/env';
+import { defaultRenderLink, renderLinkFromComponent } from '../../constants/default-render-link';
+
+/**
+ * Lo que recibe `renderLink`: los atributos del `<a>` que pintaría el
+ * paginador. Hay que reenviarlos **todos** al enlace del router.
+ */
+export type PaginationRenderLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+  href: string;
+  className: string;
+  children: ReactNode;
+};
 
 /**
  * Los textos que el paginador emite por su cuenta. Los nombres calcan el
@@ -98,9 +109,19 @@ export interface PaginationProps {
   /** Mostrar "X resultados" antes de los controles. Default: false */
   showTotal?: boolean;
   /**
-   * Componente Link del router. Default: "a" (recarga completa).
-   * Acepta next/link, react-router Link, etc. — cualquier componente
-   * que acepte las props estándar de <a> (href, className, …).
+   * Pinta cada enlace del paginador con el `Link` del router:
+   * `renderLink={(props) => <Link {...props} />}`. Recibe todos los atributos
+   * del `<a>` (`href`, `className`, `aria-label`, `onClick`, `children`) y
+   * tiene que reenviarlos todos. Sin él, un `<a>` (recarga completa).
+   *
+   * Es una función: desde un Server Component no cruza al cliente. Ahí, o se
+   * monta el paginador en un fichero de cliente propio, o se navega con
+   * `<a>` (sin `renderLink`).
+   */
+  renderLink?: (props: PaginationRenderLinkProps) => ReactNode;
+  /**
+   * @deprecated Usa `renderLink` (`renderLink={(props) => <Link {...props} />}`).
+   * Sigue funcionando y avisa en desarrollo; se retira en la v52.
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   linkComponent?: ComponentType<any>;
@@ -171,6 +192,7 @@ export function Pagination({
   onNext,
   onPageChange,
   hrefBuilder: hrefBuilderProp,
+  renderLink: renderLinkProp,
   linkComponent,
   onPageSizeChange,
   pageSizeOptions,
@@ -193,7 +215,9 @@ export function Pagination({
   // de tamaño no exige el texto del selector.
   const t = useBrandMessages('pagination', paginationEs);
   const hrefBuilder = hrefBuilderProp ?? (hrefs ? (p: number) => hrefs[p] : undefined);
-  const A = linkComponent ?? 'a';
+  if (linkComponent !== undefined) warnDeprecated('Pagination', 'linkComponent', '`renderLink`');
+  const renderLink =
+    renderLinkProp ?? (linkComponent ? renderLinkFromComponent(linkComponent) : defaultRenderLink);
 
   if (mode === 'cursor') {
     const chevronSize = size === 'lg' ? 'md' : 'sm';
@@ -204,9 +228,7 @@ export function Pagination({
       const label = direction === 'prev' ? t('previous', previousLabel) : t('next', nextLabel);
       const icon = <Icon name="chevron" size={chevronSize} className={direction === 'prev' ? 'pagination__chevron--prev' : undefined} />;
       if (href) {
-        return (
-          <A href={href} className="pagination__btn pagination__btn--nav" aria-label={label}>{icon}</A>
-        );
+        return renderLink({ href, className: 'pagination__btn pagination__btn--nav', 'aria-label': label, children: icon });
       }
       return (
         <button type="button" className="pagination__btn pagination__btn--nav" disabled={disabled} aria-label={label} onClick={handler}>{icon}</button>
@@ -254,19 +276,17 @@ export function Pagination({
     // enfocable ni anunciable como enlace, así que se pinta como botón.
     if (hrefBuilder && !isCurrent) {
       return (
-        <A
-          key={item}
-          href={hrefBuilder(item)}
-          className={btnClass}
-          aria-label={t('goToPage', pageLabel)(item)}
-          onClick={
-            onPageChange
+        <Fragment key={item}>
+          {renderLink({
+            href: hrefBuilder(item),
+            className: btnClass,
+            'aria-label': t('goToPage', pageLabel)(item),
+            onClick: onPageChange
               ? (e) => { e.preventDefault(); onPageChange(item as number); }
-              : undefined
-          }
-        >
-          {item}
-        </A>
+              : undefined,
+            children: item,
+          })}
+        </Fragment>
       );
     }
 
@@ -293,20 +313,15 @@ export function Pagination({
     // Sin página a la que ir no hay destino: igual que arriba, el enlace sin
     // `href` se cambia por un botón deshabilitado, que sí es un control real.
     if (hrefBuilder && !isDisabled) {
-      return (
-        <A
-          href={hrefBuilder(targetPage)}
-          className="pagination__btn pagination__btn--nav"
-          aria-label={ariaLabelText}
-          onClick={
-            onPageChange
-              ? (e) => { e.preventDefault(); onPageChange(targetPage); }
-              : undefined
-          }
-        >
-          {icon}
-        </A>
-      );
+      return renderLink({
+        href: hrefBuilder(targetPage),
+        className: 'pagination__btn pagination__btn--nav',
+        'aria-label': ariaLabelText,
+        onClick: onPageChange
+          ? (e) => { e.preventDefault(); onPageChange(targetPage); }
+          : undefined,
+        children: icon,
+      });
     }
 
     return (

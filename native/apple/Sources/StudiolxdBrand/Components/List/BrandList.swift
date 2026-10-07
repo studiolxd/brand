@@ -107,7 +107,7 @@ private extension View {
 /// **Fila pulsable.** Con `action` la fila **entera** es un botón (zona táctil completa, también bajo los
 /// accesorios): se atenúa mientras se pulsa (o con el puntero encima, en macOS y iPad), la lee VoiceOver como botón
 /// y recibe el foco del teclado. Sin `action` es una fila de lectura, sin rasgo ni estados. Es la misma semántica que
-/// `onClick` en Compose; en React la fila pulsable es `as="button"`.
+/// `onClick` en Compose; en React la fila pulsable lleva un botón o un enlace dentro del ítem.
 public struct BrandListItem<Leading: View, Content: View, Secondary: View, Trailing: View>: View {
     private let action: (() -> Void)?
     private let leading: Leading

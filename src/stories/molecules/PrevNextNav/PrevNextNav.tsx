@@ -1,8 +1,20 @@
-import type { ComponentType, MouseEvent, ReactNode } from 'react';
+import type { AnchorHTMLAttributes, ComponentType, MouseEvent, ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
 import './PrevNextNav.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { prevNextNavEs } from '../../messages/es/prevNextNav';
+import { warnDeprecated } from '../../constants/env';
+import { defaultRenderLink, renderLinkFromComponent } from '../../constants/default-render-link';
+
+/**
+ * Lo que recibe `renderLink`: los atributos del `<a>` que pintaría el
+ * control. Hay que reenviarlos **todos** al enlace del router.
+ */
+export type PrevNextNavRenderLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+  href: string;
+  className: string;
+  children: ReactNode;
+};
 
 export interface PrevNextNavProps {
   /** href del enlace anterior. Mutuamente exclusivo con prevOnClick */
@@ -48,8 +60,15 @@ export interface PrevNextNavProps {
    */
   labelId?: string;
   /**
-   * Componente `Link` del router para los controles con `href`. Default: `"a"`.
-   * Recibe `href` y el resto de props tal cual.
+   * Pinta los controles con `href` con el `Link` del router:
+   * `renderLink={(props) => <Link {...props} />}`. Recibe todos los atributos
+   * del `<a>` (`href`, `className`, `aria-label`, `onClick`, `children`) y
+   * tiene que reenviarlos todos. Sin él, un `<a>`.
+   */
+  renderLink?: (props: PrevNextNavRenderLinkProps) => ReactNode;
+  /**
+   * @deprecated Usa `renderLink` (`renderLink={(props) => <Link {...props} />}`).
+   * Sigue funcionando y avisa en desarrollo; se retira en la v52.
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   linkComponent?: ComponentType<any>;
@@ -67,8 +86,7 @@ interface NavControlProps {
   disabled: boolean;
   direction: 'prev' | 'next';
   chevronSize: 'xs' | 'sm' | 'md';
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  linkComponent?: ComponentType<any>;
+  renderLink: (props: PrevNextNavRenderLinkProps) => ReactNode;
 }
 
 function NavControl({
@@ -79,7 +97,7 @@ function NavControl({
   disabled,
   direction,
   chevronSize,
-  linkComponent,
+  renderLink,
 }: NavControlProps) {
   const className = [
     'prev-next-nav__btn',
@@ -116,12 +134,7 @@ function NavControl({
   }
 
   if (href) {
-    const A = linkComponent ?? 'a';
-    return (
-      <A href={href} className={className} aria-label={ariaLabel} onClick={onClick}>
-        {content}
-      </A>
-    );
+    return renderLink({ href, className, 'aria-label': ariaLabel, onClick, children: content });
   }
 
   return (
@@ -154,10 +167,14 @@ export function PrevNextNav({
   nextTitle,
   label,
   labelId,
+  renderLink: renderLinkProp,
   linkComponent,
   size = 'md',
   className,
 }: PrevNextNavProps) {
+  if (linkComponent !== undefined) warnDeprecated('PrevNextNav', 'linkComponent', '`renderLink`');
+  const renderLink =
+    renderLinkProp ?? (linkComponent ? renderLinkFromComponent(linkComponent) : defaultRenderLink);
   const t = useBrandMessages('prevNextNav', prevNextNavEs);
   const chevronSize = size === 'sm' ? 'sm' : 'md';
   const titled = prevTitle !== undefined || nextTitle !== undefined;
@@ -180,7 +197,7 @@ export function PrevNextNav({
         direction="prev"
         title={prevTitle}
         chevronSize={chevronSize}
-        linkComponent={linkComponent}
+        renderLink={renderLink}
       />
       {label !== undefined && (
         <strong id={labelId} className="prev-next-nav__label">
@@ -195,7 +212,7 @@ export function PrevNextNav({
         direction="next"
         title={nextTitle}
         chevronSize={chevronSize}
-        linkComponent={linkComponent}
+        renderLink={renderLink}
       />
     </div>
   );
