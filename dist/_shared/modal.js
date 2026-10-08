@@ -3,7 +3,7 @@ import { n as e } from "./env.js";
 import { r as t } from "./brandmessagescontext.js";
 import { VisuallyHidden as n } from "../visually-hidden.js";
 import { n as r } from "./portal-container.js";
-import { t as i } from "./closebutton.js";
+import { CloseButton as i } from "../close-button.js";
 import { n as a, r as o, t as s } from "./dialogsurface.js";
 import { Fragment as c, jsx as l, jsxs as u } from "react/jsx-runtime";
 import { Dialog as d } from "@base-ui/react/dialog";

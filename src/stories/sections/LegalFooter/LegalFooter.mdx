@@ -17,6 +17,10 @@ El pie legal de las aplicaciones de la suite: los enlaces a aviso legal, privaci
 
 <Canvas of={LegalFooterStories.ConTitulo} />
 
+## Desde un Server Component
+
+`LegalFooter` no es un componente cliente: se renderiza desde un Server Component, y el `renderLink` puede venir del servidor. Lo único que lee el catálogo de textos —el nombre del `nav`, cuando no llega `label`— lo resuelve una pieza cliente interna que recibe los enlaces ya pintados, así que el pie sigue saliendo traducido por el `BrandMessagesProvider` de la aplicación.
+
 ## En móvil
 
 Por debajo de `md` (768px) los enlaces van apilados (`links-gap-stacked`): en fila se partían a media palabra. En escritorio, en fila con `links-gap`.

@@ -49,5 +49,10 @@ export interface LegalFooterProps {
  * (`--legal-footer-padding-block`) y el contenido acotado por su `Container`
  * interior. Es el pie de las aplicaciones de la suite; la web tiene su pie
  * propio con más cosas.
+ *
+ * Se puede renderizar desde un Server Component, con su `renderLink` incluido:
+ * no lee ningún contexto. Lo único que sale del catálogo, el nombre del `nav`,
+ * lo resuelve una isla cliente (`LegalFooterNav`) que recibe los enlaces ya
+ * pintados.
  */
 export declare function LegalFooter({ label, title, links, renderLink, width, surface, as: Root, className, }: LegalFooterProps): import("react/jsx-runtime").JSX.Element;

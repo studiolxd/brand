@@ -92,7 +92,7 @@ Cada componente tiene tres archivos co-localizados:
 
 Cada componente nuevo debe registrarse en **dos sitios** o no estará disponible para los consumidores del paquete:
 
-1. **`scripts/entry-points.mjs`** — añadir entrada en `entryPoints` con la ruta al `.tsx`. Si el componente tiene estado interno, eventos o usa hooks del browser, añadirlo también a `clientComponents` (genera el `'use client'` en el `.js` compilado).
+1. **`scripts/entry-points.mjs`** — añadir entrada en `entryPoints` con la ruta al `.tsx`. Si el componente tiene estado interno, eventos o usa hooks del browser, añadirlo también a `clientComponents` (genera el `'use client'` en el `.js` compilado). Si además recibe funciones (`renderLink`) y tiene que poder usarse desde un Server Component, no se marca entero: lo que lee el contexto se aparta a una isla cliente con su propia entrada interna (sin subruta en `exports`), como `LegalFooterNav`. El post-build hace que un módulo de servidor importe un componente cliente siempre por su entrada `'use client'` y no por su cuerpo en `_shared/` (`scripts/lib/client-boundary.mjs`), y `scripts/client-boundary.test.ts` falla si una entrada de servidor alcanza contexto o hooks sin cruzar esa frontera.
 2. **`package.json` › `exports`** — añadir entrada `"./nombre"` con `types` apuntando a `dist/_types/.../Component.d.ts` e `import` apuntando a `dist/nombre.js`.
 
 > **IMPORTANTE:** Olvidar `entry-points.mjs` o `package.json › exports` deja el componente con tipos pero sin `.js` compilado — el consumidor puede importar el tipo pero falla en runtime.

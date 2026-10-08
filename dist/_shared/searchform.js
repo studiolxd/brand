@@ -2,7 +2,7 @@ import '../searchform.css';
 import { r as e } from "./brandmessagescontext.js";
 import { Icon as t } from "../icon.js";
 import { n } from "./form-size.js";
-import { t as r } from "./inputfield.js";
+import { InputField as r } from "../input-field.js";
 import { forwardRef as i, useId as a } from "react";
 import { jsx as o, jsxs as s } from "react/jsx-runtime";
 //#region src/stories/messages/es/searchForm.ts

@@ -1,6 +1,6 @@
 import '../timeselect.css';
 import { r as e } from "./brandmessagescontext.js";
-import { t } from "./select.js";
+import { Select as t } from "../select.js";
 import { forwardRef as n, useMemo as r } from "react";
 import { jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/messages/es/timeSelect.ts

@@ -2,7 +2,7 @@ import '../pagination.css';
 import { n as e } from "./env.js";
 import { r as t } from "./brandmessagescontext.js";
 import { Icon as n } from "../icon.js";
-import { t as r } from "./select.js";
+import { Select as r } from "../select.js";
 import { n as i, t as a } from "./default-render-link.js";
 import { Fragment as o } from "react";
 import { jsx as s, jsxs as c } from "react/jsx-runtime";

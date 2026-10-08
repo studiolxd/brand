@@ -2,7 +2,7 @@ import '../sheet.css';
 import { r as e } from "./brandmessagescontext.js";
 import { VisuallyHidden as t } from "../visually-hidden.js";
 import { n } from "./portal-container.js";
-import { t as r } from "./closebutton.js";
+import { CloseButton as r } from "../close-button.js";
 import { n as i, r as a, t as o } from "./dialogsurface.js";
 import { jsx as s, jsxs as c } from "react/jsx-runtime";
 import { Dialog as l } from "@base-ui/react/dialog";

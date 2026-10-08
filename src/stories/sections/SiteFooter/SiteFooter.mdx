@@ -33,6 +33,8 @@ El bloque `aside` es un slot: los datos de contacto, el formulario de newsletter
 
 Columnas y bloque se reparten con `auto-fit`: en una pantalla estrecha se apilan solos.
 
+`SiteFooter` se renderiza desde un Server Component, con su `renderLink` incluido: no lee ningún contexto, y el `LegalFooter` que lleva en `legal` tampoco (ver su doc).
+
 <Canvas of={SiteFooterStories.SoloEnlaces} />
 
 ## Tokens

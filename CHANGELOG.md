@@ -7,6 +7,28 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [Sin publicar]
+
+> Propuesta: **patch (51.0.1)**. No cambia ninguna API pública: se arregla el uso desde un Server Component.
+
+### Arreglado
+
+- **`SiteFooter` y `AssistantMessage` vuelven a importarse desde un Server Component.** En la v50/v51 el build de
+  producción de Next moría al importar `@studiolxd/brand/site-footer` (`(0, k.createContext) is not a function`): la
+  entrada es de servidor, pero componía el cuerpo de `LegalFooter`, que leía el catálogo de textos con un contexto, y
+  el bundler lo había sacado a `dist/_shared/` sin `'use client'`. `assistant-message` tenía el mismo fallo con el
+  `TypingIndicator`.
+- **`LegalFooter` deja de ser componente cliente**: se renderiza desde el servidor y su `renderLink` (una función)
+  puede venir de un Server Component, cosa que antes fallaba. El nombre del `nav`, lo único que sale del catálogo, lo
+  resuelve una isla cliente interna (`LegalFooterNav`, entrada de `dist/` sin subruta en `exports`) que recibe los
+  enlaces ya pintados: el pie sigue saliendo traducido.
+- **Post-build:** un módulo de servidor que compone un componente cliente lo importa por su entrada (`'use client'`),
+  nunca por el cuerpo compartido (`scripts/lib/client-boundary.mjs`). Cambian los imports internos de `dist/`; las
+  subrutas no.
+- **Guardián nuevo** (`scripts/client-boundary.test.ts`): recorre el `dist/` desde cada entrada de servidor, parando en
+  cada `'use client'`, y falla si alcanza algo de React que no exista con la condición `react-server` (contexto, estado,
+  efectos…) o Base UI.
+
 ## [51.0.0] — 2026-10-08
 
 > **Major (51.0.0).** Segunda vuelta de la auditoría: unificación de la API, convención de nombres de tokens,

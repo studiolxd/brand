@@ -178,6 +178,9 @@ export const entryPoints = {
   'page-intro':          'src/stories/molecules/PageIntro/PageIntro.tsx',
   'site-shell':          'src/stories/sections/SiteShell/SiteShell.tsx',
   'legal-footer':        'src/stories/sections/LegalFooter/LegalFooter.tsx',
+  // Interna, sin subruta en exports: la isla cliente de LegalFooter. Va como
+  // entrada para que salga a dist/ con 'use client' (ver LegalFooterNav.tsx).
+  'legal-footer-nav':    'src/stories/sections/LegalFooter/LegalFooterNav.tsx',
   'hero':                'src/stories/sections/Hero/Hero.tsx',
   'site-footer':         'src/stories/sections/SiteFooter/SiteFooter.tsx',
   'highlight':           'src/stories/sections/Highlight/Highlight.tsx',
@@ -291,6 +294,6 @@ export const clientComponents = new Set([
   'spinner',
   'stat-tile',
   'loading-state', 'loading-region',
-  'legal-footer',
+  'legal-footer-nav',
   'figure',
 ]);

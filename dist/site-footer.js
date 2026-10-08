@@ -5,7 +5,7 @@ import { List as n } from "./list.js";
 import { t as r } from "./_shared/logo.js";
 import { Paragraph as i } from "./paragraph.js";
 import { t as a } from "./_shared/default-render-link.js";
-import { t as o } from "./_shared/legalfooter.js";
+import { LegalFooter as o } from "./legal-footer.js";
 import { cloneElement as s, isValidElement as c } from "react";
 import { jsx as l, jsxs as u } from "react/jsx-runtime";
 //#region src/stories/sections/SiteFooter/SiteFooter.tsx

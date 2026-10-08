@@ -1,7 +1,7 @@
 import '../alert.css';
 import { n as e } from "./env.js";
 import { r as t } from "./brandmessagescontext.js";
-import { t as n } from "./closebutton.js";
+import { CloseButton as n } from "../close-button.js";
 import { forwardRef as r, useState as i } from "react";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/messages/es/alert.ts

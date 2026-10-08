@@ -6,7 +6,7 @@ import { VisuallyHidden as r } from "../visually-hidden.js";
 import { Spinner as i } from "../spinner.js";
 import { n as ee } from "./form-size.js";
 import { t as te } from "./assign-ref.js";
-import { t as a } from "./progressbar.js";
+import { ProgressBar as a } from "../progress-bar.js";
 import { i as ne, n as o, t as re } from "./validate.js";
 import { forwardRef as s, useCallback as c, useEffect as l, useId as ie, useRef as u, useState as d } from "react";
 import { Fragment as f, jsx as p, jsxs as m } from "react/jsx-runtime";

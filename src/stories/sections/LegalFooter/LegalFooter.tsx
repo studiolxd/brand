@@ -1,8 +1,7 @@
 import type { ReactNode } from 'react';
 import { Container, type ContainerWidth } from '../../atoms/Container/Container';
 import { Heading } from '../../atoms/Heading/Heading';
-import { useBrandMessages } from '../../messages/BrandMessagesContext';
-import { legalFooterEs } from '../../messages/es/legalFooter';
+import { LegalFooterNav } from './LegalFooterNav';
 import './LegalFooter.css';
 import { defaultRenderLink } from '../../constants/default-render-link';
 
@@ -58,6 +57,11 @@ export interface LegalFooterProps {
  * (`--legal-footer-padding-block`) y el contenido acotado por su `Container`
  * interior. Es el pie de las aplicaciones de la suite; la web tiene su pie
  * propio con más cosas.
+ *
+ * Se puede renderizar desde un Server Component, con su `renderLink` incluido:
+ * no lee ningún contexto. Lo único que sale del catálogo, el nombre del `nav`,
+ * lo resuelve una isla cliente (`LegalFooterNav`) que recibe los enlaces ya
+ * pintados.
  */
 export function LegalFooter({
   label,
@@ -69,12 +73,11 @@ export function LegalFooter({
   as: Root = 'footer',
   className,
 }: LegalFooterProps) {
-  const t = useBrandMessages('legalFooter', legalFooterEs);
   return (
     <Root className={['legal-footer', surface === 'dark' && 'surface-dark', className].filter(Boolean).join(' ')}>
       <Container width={width} innerClassName="legal-footer__inner">
         {title && <Heading level={2} size={6} className="legal-footer__title">{title}</Heading>}
-        <nav aria-label={t('label', label)}>
+        <LegalFooterNav label={label}>
           <ul className="legal-footer__links">
             {links.map((link) => (
               <li key={link.id}>
@@ -82,7 +85,7 @@ export function LegalFooter({
               </li>
             ))}
           </ul>
-        </nav>
+        </LegalFooterNav>
       </Container>
     </Root>
   );

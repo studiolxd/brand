@@ -4,7 +4,7 @@ import { VisuallyHidden as t } from "../visually-hidden.js";
 import { Button as n } from "../button.js";
 import { Input as r } from "../input.js";
 import { Popover as i } from "../popover.js";
-import { t as a } from "./slider.js";
+import { Slider as a } from "../slider.js";
 import { t as o } from "./css-properties.js";
 import { ColorSwatch as s } from "../color-swatch.js";
 import { t as c } from "./requiredinput.js";

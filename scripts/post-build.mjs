@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync, readdirSync } from 'node:fs';
 import { entryPoints, clientComponents } from './entry-points.mjs';
+import { rewriteFacadeImports } from './lib/client-boundary.mjs';
 
 const dist = 'dist';
 
@@ -57,6 +58,25 @@ if (existsSync(sharedDir)) {
 
     writeFileSync(jsFile, content);
     console.log(`✔︎ dist/_shared/${file} [css]`);
+  }
+}
+
+/* Frontera cliente: un módulo de servidor que compone un componente cliente lo
+   importa por su entrada (`'use client'`), nunca por el cuerpo que el bundler
+   sacó a `_shared/` sin la directiva. Ver `scripts/lib/client-boundary.mjs`. */
+{
+  const files = new Map();
+  for (const file of readdirSync(dist).filter((f) => f.endsWith('.js'))) {
+    files.set(file, readFileSync(`${dist}/${file}`, 'utf-8'));
+  }
+  if (existsSync(sharedDir)) {
+    for (const file of readdirSync(sharedDir).filter((f) => f.endsWith('.js'))) {
+      files.set(`_shared/${file}`, readFileSync(`${sharedDir}/${file}`, 'utf-8'));
+    }
+  }
+  for (const [file, content] of rewriteFacadeImports(files)) {
+    writeFileSync(`${dist}/${file}`, content);
+    console.log(`✔︎ dist/${file} [frontera cliente]`);
   }
 }
 
