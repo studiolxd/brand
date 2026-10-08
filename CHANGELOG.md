@@ -7,9 +7,9 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## [Sin publicar]
+## [51.0.1] — 2026-10-08
 
-> Propuesta: **patch (51.0.1)**. No cambia ninguna API pública: se arregla el uso desde un Server Component.
+> **Patch (51.0.1).** No cambia ninguna API pública: se arregla el uso desde un Server Component.
 
 ### Arreglado
 
