@@ -122,6 +122,21 @@ describe('EmailLayout', () => {
     expect(hojas).toContain(`[data-ogsb] .email-canvas { background-color: ${lienzo} !important;`);
   });
 
+  it('el hover del botón lleva su degradado, también en la media query oscura', async () => {
+    // El botón lleva inline un `background-image` de su color de reposo: sin un
+    // degradado de hover con `!important`, taparía el `background-color` del hover.
+    const out = await html(mensaje);
+    const hoja = [...out.matchAll(/<style>([\s\S]*?)<\/style>/g)].map((m) => m[1]).join('\n');
+    const hover = emailToken('--email-button-hover-bg');
+    const regla = `a.email-button:hover {\n    background-color: ${hover} !important;\n    background-image: linear-gradient(${hover}, ${hover}) !important;`;
+
+    expect(hoja).toContain(regla);
+    // Y repetida dentro de la media query, después de las forzadas.
+    const oscuro = hoja.slice(hoja.indexOf('@media (prefers-color-scheme: dark)'));
+    expect(oscuro.indexOf(regla)).toBeGreaterThan(oscuro.indexOf('.email-button { background-color'));
+    expect(oscuro).toContain(regla);
+  });
+
   it('el lienzo, la banda, el recuadro y el pie llevan las clases a las que apuntan las reglas', async () => {
     const out = await html(
       <EmailLayout

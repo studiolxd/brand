@@ -481,6 +481,19 @@ function forcedLightRules(prefix: string, only?: 'color' | 'background', indent 
 }
 
 /**
+ * El hover del botón. Lleva también `background-image`: el botón tiene inline un
+ * degradado de su color de reposo (ver `emailSolidBackground`) que taparía el
+ * `background-color` del hover. Se repite dentro de la media query oscura,
+ * después de las reglas forzadas, para que ahí tampoco pierda el orden.
+ */
+const buttonHoverBg = emailToken('--email-button-hover-bg');
+const buttonHoverRule = `a.${emailButtonClassName}:hover {
+    background-color: ${buttonHoverBg} !important;
+    background-image: linear-gradient(${buttonHoverBg}, ${buttonHoverBg}) !important;
+    color: ${emailToken('--email-button-hover-color')} !important;
+  }`;
+
+/**
  * La hoja del correo: lo que no cabe en un atributo `style`.
  *
  * Dos asuntos:
@@ -511,12 +524,10 @@ function forcedLightRules(prefix: string, only?: 'color' | 'background', indent 
 export const emailStyleSheet = `
   :root { color-scheme: light only; supported-color-schemes: light only; }
   a:hover { text-decoration: none !important; }
-  a.${emailButtonClassName}:hover {
-    background-color: ${emailToken('--email-button-hover-bg')} !important;
-    color: ${emailToken('--email-button-hover-color')} !important;
-  }
+  ${buttonHoverRule}
   @media (prefers-color-scheme: dark) {
 ${forcedLightRules('', undefined, '    ')}
+    ${buttonHoverRule}
   }
 ${forcedLightRules('[data-ogsc] ', 'color')}
 ${forcedLightRules('[data-ogsb] ', 'background')}
