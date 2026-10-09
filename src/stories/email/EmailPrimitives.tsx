@@ -10,7 +10,7 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { Button, Heading, Hr, Link, Section, Text } from 'react-email';
 
-import { emailButtonClassName, emailStyles, emailTones, type EmailTone } from './emailTheme';
+import { emailButtonClassName, emailClassNames, emailStyles, emailTones, type EmailTone } from './emailTheme';
 
 export interface EmailHeadingProps {
   children: ReactNode;
@@ -38,7 +38,11 @@ export interface EmailHeadingProps {
 export function EmailHeading({ children, level = 1, style }: EmailHeadingProps) {
   const base = level === 1 ? emailStyles.heading : emailStyles.heading2;
   return (
-    <Heading as={`h${level}`} style={{ ...base, ...style }}>
+    <Heading
+      as={`h${level}`}
+      className={level === 1 ? emailClassNames.text : emailClassNames.heading2}
+      style={{ ...base, ...style }}
+    >
       {children}
     </Heading>
   );
@@ -58,7 +62,10 @@ export interface EmailTextProps {
 /** Un párrafo del cuerpo del correo. */
 export function EmailText({ children, emphasis = false, style }: EmailTextProps) {
   return (
-    <Text style={{ ...emailStyles.text, ...(emphasis && emailStyles.textEmphasis), ...style }}>
+    <Text
+      className={emailClassNames.text}
+      style={{ ...emailStyles.text, ...(emphasis && emailStyles.textEmphasis), ...style }}
+    >
       {children}
     </Text>
   );
@@ -82,7 +89,11 @@ export interface EmailListProps {
  */
 export function EmailList({ children, ordered = false, style }: EmailListProps) {
   const List = ordered ? 'ol' : 'ul';
-  return <List style={{ ...emailStyles.list, ...style }}>{children}</List>;
+  return (
+    <List className={emailClassNames.text} style={{ ...emailStyles.list, ...style }}>
+      {children}
+    </List>
+  );
 }
 
 export interface EmailListItemProps {
@@ -108,7 +119,11 @@ export interface EmailQuoteProps {
  * correo no está diciendo. Para avisar está `EmailCallout`.
  */
 export function EmailQuote({ children, style }: EmailQuoteProps) {
-  return <Section style={{ ...emailStyles.quote, ...style }}>{children}</Section>;
+  return (
+    <Section className={emailClassNames.quote} style={{ ...emailStyles.quote, ...style }}>
+      {children}
+    </Section>
+  );
 }
 
 export interface EmailTagProps {
@@ -137,7 +152,7 @@ export interface EmailTagProps {
  */
 export function EmailTag({ children, tone, style }: EmailTagProps) {
   return (
-    <span style={{ ...emailStyles.tag, ...emailTones[tone], ...style }}>
+    <span className={emailClassNames.tag[tone]} style={{ ...emailStyles.tag, ...emailTones[tone], ...style }}>
       {children}
     </span>
   );
@@ -155,7 +170,7 @@ export interface EmailDividerProps {
  * borde en relieve por los cuatro lados que los clientes heredan tal cual.
  */
 export function EmailDivider({ style }: EmailDividerProps) {
-  return <Hr style={{ ...emailStyles.divider, ...style }} />;
+  return <Hr className={emailClassNames.divider} style={{ ...emailStyles.divider, ...style }} />;
 }
 
 export interface EmailNoteProps {
@@ -173,7 +188,7 @@ export interface EmailNoteProps {
 export function EmailNote({ children, tone = 'muted', style }: EmailNoteProps) {
   const base = tone === 'muted' ? emailStyles.muted : emailStyles.footnote;
   return (
-    <Text style={{ ...base, ...style }}>
+    <Text className={tone === 'muted' ? emailClassNames.muted : emailClassNames.text} style={{ ...base, ...style }}>
       {children}
     </Text>
   );
@@ -188,7 +203,7 @@ export interface EmailLinkProps {
 /** Un enlace dentro del texto. */
 export function EmailLink({ href, children, style }: EmailLinkProps) {
   return (
-    <Link href={href} style={{ ...emailStyles.link, ...style }}>
+    <Link href={href} className={emailClassNames.link} style={{ ...emailStyles.link, ...style }}>
       {children}
     </Link>
   );
@@ -249,10 +264,12 @@ export function EmailButton({ href, children, fallbackLabel, style }: EmailButto
       >
         {children}
       </Button>
-      <Text style={emailStyles.buttonFallback}>
+      <Text className={emailClassNames.muted} style={emailStyles.buttonFallback}>
         {fallbackLabel}
         <br />
-        <span style={emailStyles.buttonFallbackUrl}>{href}</span>
+        <span className={emailClassNames.text} style={emailStyles.buttonFallbackUrl}>
+          {href}
+        </span>
       </Text>
     </>
   );

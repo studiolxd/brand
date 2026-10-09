@@ -11,11 +11,13 @@ import { Body, Container, Font, Head, Html, Img, Link, Preview, Section, Text } 
 
 import {
   emailAssetsBaseUrl,
+  emailClassNames,
   emailFontFilename,
   emailFontWeightRange,
   emailLogo,
   emailMaxWidth,
   emailPalette,
+  emailSolidBackground,
   emailStyleSheet,
   emailStyles,
   emailToken,
@@ -147,9 +149,9 @@ function EmailOptOutBlock(optOut: EmailOptOut) {
   // es una pantalla que no puede abrir.
   if (optOut.reasonLabel !== undefined) {
     return (
-      <Text style={emailStyles.footnote}>
+      <Text className={emailClassNames.text} style={emailStyles.footnote}>
         {optOut.reasonLabel}{' '}
-        <Link href={optOut.unsubscribeUrl} style={emailStyles.link}>
+        <Link href={optOut.unsubscribeUrl} className={emailClassNames.link} style={emailStyles.link}>
           {optOut.unsubscribeLabel}
         </Link>
       </Text>
@@ -171,24 +173,24 @@ function EmailOptOutBlock(optOut: EmailOptOut) {
   };
 
   const link = (
-    <Link href={unsubscribeUrl} style={emailStyles.link}>
+    <Link href={unsubscribeUrl} className={emailClassNames.link} style={emailStyles.link}>
       {texto('unsubscribeLabel', unsubscribeLabel)}
     </Link>
   );
 
   if (!preferencesUrl) {
     return (
-      <Text style={emailStyles.footnote}>
+      <Text className={emailClassNames.text} style={emailStyles.footnote}>
         {texto('manageLabel', optOut.manageLabel)} {link}
       </Text>
     );
   }
 
   return (
-    <Text style={emailStyles.footnote}>
+    <Text className={emailClassNames.text} style={emailStyles.footnote}>
       {link}
       {texto('manageBeforeLabel', optOut.manageBeforeLabel)}
-      <Link href={preferencesUrl} style={emailStyles.link}>
+      <Link href={preferencesUrl} className={emailClassNames.link} style={emailStyles.link}>
         {texto('managePreferencesLabel', optOut.managePreferencesLabel)}
       </Link>
       {texto('manageAfterLabel', optOut.manageAfterLabel)}
@@ -199,7 +201,12 @@ function EmailOptOutBlock(optOut: EmailOptOut) {
 export interface EmailLayoutProps {
   /** La línea que el cliente enseña junto al asunto en la bandeja. */
   preview: string;
-  /** Quién manda. Es el texto alternativo del logotipo si no se da otro. */
+  /**
+   * Quién manda: la app que envía el correo. El layout no lo pinta —la marca
+   * del encabezado es siempre el logotipo «Studio LXD», con su `alt` fijo
+   * (`emailLogo.alt`)—; queda en la API para que el consumidor identifique el
+   * correo.
+   */
   appName: string;
   /** Idioma del documento. Por defecto, castellano. */
   locale?: string;
@@ -212,13 +219,6 @@ export interface EmailLayoutProps {
    * `emailLogo.filename` y `emailFontFilename` para saber qué hay que subir.
    */
   assetsBaseUrl?: string;
-  /**
-   * Texto alternativo del logotipo. Por defecto, `appName`.
-   *
-   * Muchos clientes bloquean las imágenes de serie: sin esto, la cabecera del
-   * correo sale en blanco y no se sabe quién escribe.
-   */
-  logoAlt?: string;
   /** Omitir en el correo transaccional que no pertenece a ninguna categoría. */
   optOut?: EmailOptOut;
   children: ReactNode;
@@ -226,10 +226,8 @@ export interface EmailLayoutProps {
 
 export function EmailLayout({
   preview,
-  appName,
   locale = 'es',
   assetsBaseUrl = emailAssetsBaseUrl,
-  logoAlt,
   optOut,
   children,
 }: EmailLayoutProps) {
@@ -255,12 +253,19 @@ export function EmailLayout({
           fontWeight={emailFontWeightRange}
           fontStyle="normal"
         />
+        {/* El correo se pide SIEMPRE en claro. La primera capa: decirle al
+            cliente que no hay versión oscura. Las demás (fondos que
+            sobreviven a la inversión, la media query y los selectores de
+            Outlook) están en `emailStyleSheet` y en los estilos de cada pieza. */}
+        <meta name="color-scheme" content="light only" />
+        <meta name="supported-color-schemes" content="light only" />
         <style dangerouslySetInnerHTML={{ __html: emailStyleSheet }} />
       </Head>
       <Preview>{preview}</Preview>
       <Body
+        className={emailClassNames.canvas}
         style={{
-          backgroundColor: emailPalette.canvas,
+          ...emailSolidBackground(emailPalette.canvas),
           color: emailPalette.text,
           fontFamily: emailStyles.text.fontFamily,
           fontSize: emailStyles.text.fontSize,
@@ -276,8 +281,9 @@ export function EmailLayout({
             el contenido en su propio documento — ahí el fondo se perdería.
             Body conserva el suyo para los que sí lo respetan. */}
         <Section
+          className={emailClassNames.canvas}
           style={{
-            backgroundColor: emailPalette.canvas,
+            ...emailSolidBackground(emailPalette.canvas),
             padding: `${emailToken('--email-canvas-padding-block')} ${emailToken('--email-canvas-padding-inline')}`,
             width: '100%',
           }}
@@ -287,7 +293,8 @@ export function EmailLayout({
               vista que digan de quién es, así que la marca tiene que leerse.
               Es un PNG con el blanco horneado dentro: Outlook Windows y Gmail
               Android invierten colores por su cuenta y un `background-color`
-              no sobrevive a esa inversión, una imagen sí.
+              no sobrevive a esa inversión, una imagen sí. Es la última red:
+              el correo ya pide ir en claro por otras capas (ver `<Head>`).
 
               La celda va sin padding: el aire de seguridad ya lo da el margen
               del lienzo (`canvas-padding-*`) y el PNG trae su propio padding
@@ -300,8 +307,9 @@ export function EmailLayout({
               para conservar el aire que antes daba el padding inferior de la
               banda respecto al recuadro de abajo. */}
           <Container
+            className={emailClassNames.surface}
             style={{
-              backgroundColor: emailPalette.background,
+              ...emailSolidBackground(emailPalette.background),
               margin: '0 auto',
               maxWidth: emailMaxWidth,
               padding: 0,
@@ -309,7 +317,7 @@ export function EmailLayout({
           >
             <Img
               src={`${base}/${emailLogo.filename}`}
-              alt={logoAlt ?? appName}
+              alt={emailLogo.alt}
               width={emailLogo.width}
               height={emailLogo.height}
               style={{
@@ -324,8 +332,9 @@ export function EmailLayout({
           {/* El recuadro guarda el mensaje. La marca va encima y los enlaces de
               baja debajo: ninguno de los dos es parte del mensaje. */}
           <Container
+            className={`${emailClassNames.surface} ${emailClassNames.box}`}
             style={{
-              backgroundColor: emailPalette.background,
+              ...emailSolidBackground(emailPalette.background),
               border: `${emailToken('--email-border-width')} solid ${emailPalette.border}`,
               borderRadius: 0,
               margin: '0 auto',
@@ -338,8 +347,9 @@ export function EmailLayout({
 
           {optOut && (
             <Container
+              className={emailClassNames.canvas}
               style={{
-                backgroundColor: emailPalette.canvas,
+                ...emailSolidBackground(emailPalette.canvas),
                 margin: '0 auto',
                 maxWidth: emailMaxWidth,
                 // Sin padding lateral: este bloque alinea con el borde EXTERIOR

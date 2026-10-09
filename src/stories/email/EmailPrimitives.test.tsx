@@ -10,6 +10,7 @@ import { render } from 'react-email';
 import { describe, expect, it } from 'vitest';
 
 import {
+  EmailButton,
   EmailDivider,
   EmailHeading,
   EmailList,
@@ -136,6 +137,57 @@ describe('EmailDivider', () => {
     expect(out).toContain(
       `border-top:${emailTokens['--email-divider-width']} solid ${emailTokens['--email-divider-color']}`,
     );
+  });
+});
+
+describe('EmailButton', () => {
+  const boton = () =>
+    correo(
+      <EmailButton href="https://example.com/a" fallbackLabel="O copia y pega:">
+        Confirmar
+      </EmailButton>,
+    );
+
+  it('lleva `background-image` además del color, para sobrevivir a la inversión de colores', async () => {
+    const out = await boton();
+    const bg = emailTokens['--email-button-bg'];
+    const a = out.match(/<a [^>]*class="email-button"[^>]*>/)?.[0] ?? '';
+
+    expect(a).toContain(`background-color:${bg}`);
+    expect(a).toContain(`background-image:linear-gradient(${bg}, ${bg})`);
+  });
+
+  it('el respaldo y la dirección llevan sus clases de tinta para el modo claro forzado', async () => {
+    const out = await boton();
+
+    expect(out).toMatch(/<p [^>]*class="email-muted"/);
+    expect(out).toMatch(/<span class="email-text"/);
+  });
+});
+
+describe('el modo claro forzado en las primitivas', () => {
+  it('cada tono de `EmailTag` lleva su clase y el fondo que sobrevive a la inversión', async () => {
+    const out = await correo(<EmailText><EmailTag tone="error">Rechazado</EmailTag></EmailText>);
+    const bg = emailTokens['--email-tone-error-bg'];
+
+    expect(out).toMatch(/<span class="email-tag-error"/);
+    expect(out).toContain(`background-image:linear-gradient(${bg}, ${bg})`);
+  });
+
+  it('título, párrafo, cita y separador llevan la clase a la que apunta la hoja', async () => {
+    const out = await correo(
+      <>
+        <EmailHeading level={2}>Bloque</EmailHeading>
+        <EmailText>Cuerpo</EmailText>
+        <EmailQuote><EmailText>Cita</EmailText></EmailQuote>
+        <EmailDivider />
+      </>,
+    );
+
+    expect(out).toMatch(/<h2 class="email-heading-2"/);
+    expect(out).toMatch(/<p class="email-text"/);
+    expect(out).toMatch(/class="email-quote"/);
+    expect(out).toMatch(/<hr class="email-divider"/);
   });
 });
 

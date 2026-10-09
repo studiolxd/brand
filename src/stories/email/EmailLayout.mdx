@@ -83,7 +83,7 @@ decisión detrás de ella es una cicatriz de un cliente concreto:
 | PNG, no SVG | Gmail y Outlook no renderizan SVG: el correo saldría sin marca en los dos clientes que más pesan |
 | Blanco horneado dentro, con su aire | Outlook Windows y Gmail Android invierten colores por su cuenta; un `background-color` blanco no sobrevive a esa inversión, una imagen sí — es lo que deja al logotipo a salvo aunque el correo no gestione tema |
 | Exportado a 2x, con `width`/`height` explícitos | Nítido en pantallas densas, y sin que el cliente tenga que adivinar el hueco mientras carga |
-| `alt` con el nombre de quien manda | Muchos clientes bloquean las imágenes de serie: sin `alt`, la cabecera sale en blanco |
+| `alt` fijo, «Studio LXD» (`emailLogo.alt`) | Muchos clientes bloquean las imágenes de serie: sin `alt`, la cabecera sale en blanco. La imagen es siempre el logotipo de Studio LXD, mande el correo la app que mande, así que el `alt` describe la imagen y no a quien escribe: por eso `EmailLayout` ya no tiene prop `logoAlt` |
 | Nombre versionado (`logo-v3.png`) | Gmail proxea y cachea las imágenes y no admite forzar un refresco: cada versión tiene que ser una URL nueva — el `v1`, cuadrado y con el isotipo, ya no se genera; `v2` cambió de medidas sin cambiar de nombre (256×96 → 626×202) y Gmail estiró la versión cacheada, deformada y pixelada — 2026-09-14 |
 | Celda sin padding, logotipo con `marginLeft` negativo | La celda de la banda de marca ya no lleva `padding`: el aire de seguridad lo da el margen del lienzo (`canvas-padding-*`) y el PNG trae su propio padding horneado, así que un padding aquí solo desplazaba el logotipo hacia dentro respecto al recuadro del mensaje, que comparte el mismo `maxWidth` y por tanto el mismo borde izquierdo. El `<Img>` sale con `marginLeft: -{--email-brand-padding-inline}` para alinearse con ese borde en vez de con el de su propia celda, y con `marginBottom: {--email-brand-padding-block}` para conservar el aire que antes daba el padding inferior de la banda — 2026-09-14 |
 
@@ -136,27 +136,43 @@ regenerarlo con ese nombre, y publicar el `logo-v4.png` resultante en el host
 de marketing junto al anterior (que se retira cuando ya no quede correo enviado
 con la URL vieja en la bandeja).
 
-## Por qué no hay modo oscuro
+## El correo va siempre en claro
 
-El correo es **solo claro**. No es que no se haya probado: el mecanismo se
-retiró — la paleta oscura, la media query `prefers-color-scheme`, las `meta` que
-la anunciaban y las clases (`.email-body`, `.email-surface`, `.email-text`…) que
-existían solo para que esas reglas pudieran engancharse.
+El correo es **solo claro**, y se pide así en capas. No hay paleta oscura: el
+mecanismo de modo oscuro se retiró, y lo que hay es la petición de no pintarlo
+en oscuro. Con ello, el nuevo Outlook para Mac, que lo pintaba oscuro (lienzo y
+recuadro negros, texto claro y el PNG del logotipo como un rectángulo blanco
+suelto), lo muestra con fondo blanco y los colores de siempre.
 
-**Esto no impide que Outlook Windows o Gmail Android inviertan los colores por
-su cuenta.** Lo hacen igual, y no hay forma de pedirles que no. Lo que se deja de
-hacer es *gestionarlo*: con fondo blanco y tinta oscura, el resultado invertido
-sigue siendo legible, y el logotipo lleva su blanco horneado dentro, así que
-aguanta la inversión sin quedarse sin marca.
+Las capas, de la más limpia a la más tosca:
 
-Lo que se gana: un solo juego de valores, ninguna regla que dependa de que el
-cliente conserve el `<body>` —que es por donde se rompía— y una hoja de estilos
-reducida a lo único que un correo no puede llevar inline: las pseudoclases.
+1. **`color-scheme: light only`**, en las `meta` del `<head>` (`color-scheme` y
+   `supported-color-schemes`) y en `:root` de la hoja embebida.
+2. **Fondos que sobreviven a la inversión.** Junto a cada `background-color` de
+   lienzo, banda del logotipo, recuadro, pie y botón va un `background-image:
+   linear-gradient(c, c)` del mismo color: los clientes que reescriben el
+   `background-color` no tocan el `background-image`.
+3. **`@media (prefers-color-scheme: dark)`** que reafirma con `!important` los
+   colores claros (fondos, tinta, enlaces, botón) por clase.
+4. **`[data-ogsc]` y `[data-ogsb]`**, los selectores con los que Outlook.com y el
+   nuevo Outlook marcan lo que recolorean (tinta y fondo): las mismas reglas,
+   ganando a lo que el cliente haya reescrito.
 
-## La hoja embebida: dos pseudoclases
+Todos los valores son los tokens que ya van inline; ningún color nuevo. En un
+cliente sin modo oscuro el correo sale idéntico. Las clases (`email-canvas`,
+`email-surface`, `email-text`…, en `emailClassNames`) no dan estilo —todo sigue
+inline—: son solo el gancho de esas reglas.
 
-Un `:hover` no cabe en un atributo `style`, así que las dos únicas reglas del
-correo viven en el `<style>` que el layout monta en el `<head>`:
+**Qué queda fuera:** Outlook Windows clásico y Gmail Android invierten los
+colores por su cuenta y no hay forma de pedirles que no. Ahí la red es el
+logotipo, un PNG con el blanco horneado dentro, que aguanta la inversión sin
+quedarse sin marca.
+
+## La hoja embebida
+
+Un `:hover` no cabe en un atributo `style`, así que sus dos reglas viven en el
+`<style>` que el layout monta en el `<head>`, junto a las capas de modo claro
+(arriba):
 
 ```css
 a:hover { text-decoration: none !important; }
@@ -170,11 +186,10 @@ a.email-button:hover {
   (`accent-1`) al amarillo (`accent-2`), con la tinta prusia quieta. Los valores
   salen de los tokens del botón web, no escritos a mano.
 - **`!important` no es un atajo:** la regla compite con el estilo inline del
-  propio botón, que le gana por especificidad. Es el mismo motivo por el que lo
-  llevaban las reglas de modo oscuro cuando existían.
-- **Engancha por clase, no por `a`.** `email-button` es la única clase que queda
-  en el correo, y existe justo para eso: el enlace de respaldo y los del pie de
-  baja son enlaces del correo y no deben ponerse amarillos.
+  propio botón, que le gana por especificidad.
+- **Engancha por clase, no por `a`.** `email-button` existe justo para eso: el
+  enlace de respaldo y los del pie de baja son enlaces del correo y no deben
+  ponerse amarillos.
 - **Dónde se ve y dónde no, dicho sin adornos.** Funciona donde el cliente
   respeta el `<style>` del head —Gmail web, Apple Mail—; **no** en Outlook de
   escritorio, que renderiza con el motor de Word, y en el móvil no hay puntero

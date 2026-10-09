@@ -7,6 +7,35 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [Sin publicar]
+
+> **Breaking (major).** `EmailLayout` pierde la prop `logoAlt`; el correo pasa a pedirse siempre en claro.
+
+### Cambiado
+
+- **El correo se pide SIEMPRE en claro.** El nuevo Outlook para Mac lo pintaba en oscuro (lienzo y recuadro negros,
+  texto claro y el PNG del logotipo, con su blanco horneado, como un rectángulo blanco suelto). Ahora `EmailLayout`
+  declara `color-scheme: light only` (`meta` `color-scheme` y `supported-color-schemes` en el `<head>` y `:root` de
+  `emailStyleSheet`); lleva un `background-image: linear-gradient(c, c)` junto a cada fondo liso (lienzo, banda del
+  logotipo, recuadro, pie, botón y etiquetas de estado), que los clientes que reescriben `background-color` no tocan;
+  y `emailStyleSheet` reafirma los colores claros con `!important` por clase en `@media (prefers-color-scheme: dark)`
+  y con `[data-ogsc]`/`[data-ogsb]` (Outlook.com y el nuevo Outlook). Sin colores nuevos: los mismos tokens de siempre.
+  En un cliente sin modo oscuro el correo sale idéntico. Outlook Windows clásico y Gmail Android siguen invirtiendo por
+  su cuenta; el PNG con blanco horneado es la red.
+- Las piezas del correo llevan ahora clases estables `email-*` (`emailClassNames`, exportado también desde
+  `@studiolxd/brand/email` junto a `emailSolidBackground`). No dan estilo —todo sigue inline—: son el gancho de las reglas
+  anteriores. Antes la única clase era `email-button`.
+
+### Arreglado
+
+- **El `alt` del logotipo del correo era el nombre de la app** (`appName`), pero la imagen es siempre el logotipo «Studio
+  LXD». Ahora es siempre «Studio LXD» (`emailLogo.alt`).
+
+### Eliminado
+
+- **`EmailLayout` `logoAlt`** (sin alias): el `alt` es fijo. Quien la pasaba debe quitarla. `appName` sigue siendo
+  obligatoria, pero ya no es el texto alternativo del logotipo.
+
 ## [51.0.1] — 2026-10-08
 
 > **Patch (51.0.1).** No cambia ninguna API pública: se arregla el uso desde un Server Component.

@@ -14,7 +14,7 @@ import { describe, expect, it } from 'vitest';
 import { EMAIL_LOGO_FILENAME } from '../../assets/brand-assets';
 import { EmailButton, EmailHeading, EmailNote, EmailText } from './EmailPrimitives';
 import { EmailLayout, type EmailOptOut } from './EmailLayout';
-import { emailLogo, emailToken } from './emailTheme';
+import { emailLogo, emailPalette, emailToken } from './emailTheme';
 import { emailTokens } from './emailTokens';
 
 const URL =
@@ -48,7 +48,11 @@ describe('EmailLayout', () => {
     expect(out).toContain(EMAIL_LOGO_FILENAME);
     expect(out).not.toContain('logomark.svg');
     // Muchos clientes bloquean las imágenes: sin alt no se sabe quién escribe.
-    expect(out).toContain('alt="Bricks"');
+    // La imagen es siempre el logotipo «Studio LXD», sea cual sea la app que
+    // manda el correo: el alt describe la imagen, no al remitente.
+    expect(emailLogo.alt).toBe('Studio LXD');
+    expect(out).toContain('alt="Studio LXD"');
+    expect(out).not.toContain('alt="Bricks"');
     // Rectangular: es el logotipo completo, no el isotipo cuadrado.
     expect(out).toContain(`width="${emailLogo.width}"`);
     expect(out).toContain(`height="${emailLogo.height}"`);
@@ -84,15 +88,66 @@ describe('EmailLayout', () => {
     expect(out).not.toContain(`e//${EMAIL_LOGO_FILENAME}`);
   });
 
-  it('no gestiona modo oscuro', async () => {
-    // Decisión del operador: el correo es solo claro. Esto no impide que
-    // Outlook Windows o Gmail Android inviertan los colores por su cuenta; lo
-    // que se deja de hacer es gestionarlo.
+  it('pide el correo siempre en claro, en todas las capas', async () => {
+    // Decisión del operador: el correo va SIEMPRE en claro (el nuevo Outlook
+    // para Mac lo pintaba oscuro, con el PNG del logotipo como un rectángulo
+    // blanco suelto). No hay paleta oscura: lo que hay son capas que piden no
+    // pintarlo así. Outlook Windows clásico y Gmail Android invierten igual.
     const out = await html(mensaje);
+    const hojas = [...out.matchAll(/<style>([\s\S]*?)<\/style>/g)].map((m) => m[1]).join('\n');
 
-    expect(out).not.toContain('prefers-color-scheme');
-    expect(out).not.toContain('color-scheme');
-    expect(out).not.toContain('supported-color-schemes');
+    // 1. Las metas y el `color-scheme` de la hoja.
+    expect(out).toContain('<meta name="color-scheme" content="light only"/>');
+    expect(out).toContain('<meta name="supported-color-schemes" content="light only"/>');
+    expect(hojas).toContain(':root { color-scheme: light only; supported-color-schemes: light only; }');
+
+    // 2. Los fondos que sobreviven a la inversión: lienzo, banda del logotipo,
+    //    recuadro y pie llevan `background-image` además de `background-color`.
+    const lienzo = emailPalette.canvas;
+    const caja = emailPalette.background;
+    expect(out).toContain(`background-image:linear-gradient(${lienzo}, ${lienzo})`);
+    expect(out).toContain(`background-image:linear-gradient(${caja}, ${caja})`);
+
+    // 3. La media query que reafirma los colores claros con `!important`.
+    expect(hojas).toContain('@media (prefers-color-scheme: dark)');
+    const oscuro = hojas.slice(hojas.indexOf('@media (prefers-color-scheme: dark)'));
+    expect(oscuro).toContain(`.email-canvas { background-color: ${lienzo} !important;`);
+    expect(oscuro).toContain(`.email-text { color: ${emailPalette.text} !important; }`);
+    expect(oscuro).toContain(`.email-link { color: ${emailPalette.text} !important; }`);
+    expect(oscuro).toContain(`.email-button { background-color: ${emailToken('--email-button-bg')} !important;`);
+
+    // 4. Las reglas con las que Outlook.com y el nuevo Outlook marcan lo que
+    //    recolorean: la tinta con `ogsc`, el fondo con `ogsb`.
+    expect(hojas).toContain(`[data-ogsc] .email-text { color: ${emailPalette.text} !important; }`);
+    expect(hojas).toContain(`[data-ogsb] .email-canvas { background-color: ${lienzo} !important;`);
+  });
+
+  it('el lienzo, la banda, el recuadro y el pie llevan las clases a las que apuntan las reglas', async () => {
+    const out = await html(
+      <EmailLayout
+        preview="p"
+        appName="Bricks"
+        optOut={{ unsubscribeUrl: 'https://example.com/baja', manageLabel: 'Para dejar de recibir,', unsubscribeLabel: 'baja' }}
+      >
+        <EmailText>Hola</EmailText>
+      </EmailLayout>,
+    );
+
+    expect(out).toMatch(/<body[^>]*class="email-canvas"/);
+    // Banda del logotipo, recuadro (con su borde) y pie de baja.
+    expect(out).toMatch(/class="email-surface"/);
+    expect(out).toMatch(/class="email-surface email-box"/);
+    expect(out.match(/class="email-canvas"/g)!.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('el recuadro del mensaje lleva `background-image`, no solo `background-color`', async () => {
+    const out = await html(mensaje);
+    const recuadro = out.match(/<table[^>]*class="email-surface email-box"[^>]*>/)?.[0] ?? '';
+
+    expect(recuadro).toContain(`background-color:${emailPalette.background}`);
+    expect(recuadro).toContain(
+      `background-image:linear-gradient(${emailPalette.background}, ${emailPalette.background})`,
+    );
   });
 
   it('lleva la hoja mínima de lo que no puede ir inline', async () => {
@@ -101,12 +156,15 @@ describe('EmailLayout', () => {
     const hojas = [...out.matchAll(/<style>([\s\S]*?)<\/style>/g)].map((m) => m[1]);
 
     expect(hojas.some((hoja) => hoja.includes('a:hover'))).toBe(true);
-    // El hover del botón es la otra pseudoclase, y engancha por la única clase
-    // del correo. Las clases `email-*` del modo oscuro no vuelven: la lista de
-    // las que puede haber es esta y nada más.
+    // El hover del botón es la otra pseudoclase, y engancha por la clase del
+    // botón, no por `a`: el enlace de respaldo y los de baja no se ponen amarillos.
     expect(hojas.some((hoja) => hoja.includes('a.email-button:hover'))).toBe(true);
-    const clases = new Set([...out.matchAll(/\bemail-[a-z-]+/g)].map((m) => m[0]));
-    expect([...clases]).toEqual(['email-button']);
+    // Las clases `email-*` no dan estilo —todo va inline—: son los ganchos de
+    // las reglas de modo claro forzado. Que cada una que aparece en el HTML
+    // exista como gancho en la hoja, y no al revés.
+    const clases = new Set([...out.matchAll(/class="([^"]*email-[^"]*)"/g)].flatMap((m) => m[1].split(' ')));
+    const hoja = hojas.join('\n');
+    for (const clase of clases) expect(hoja).toContain(`.${clase} `);
   });
 
   it('no escribe ningún valor a mano: todo sale de los tokens', async () => {
@@ -220,7 +278,7 @@ describe('EmailLayout', () => {
     // Y en su propia línea, debajo de la frase: una dirección que arranca a
     // media línea entra ya partida y cuesta encontrarle el principio.
     expect(out).toContain('O copia y pega esta dirección:<br/>');
-    const respaldo = out.match(/<span style="[^"]*word-break[^"]*"/)?.[0] ?? '';
+    const respaldo = out.match(/<span [^>]*style="[^"]*word-break[^"]*"/)?.[0] ?? '';
     expect(respaldo).toContain('word-break:break-all');
     expect(respaldo).toContain('word-wrap:break-word');
     // Con `overflow` la dirección se cortaría de la vista, que es justo lo

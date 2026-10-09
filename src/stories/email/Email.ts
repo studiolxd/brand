@@ -41,11 +41,13 @@ export type {
 
 export {
   emailAssetsBaseUrl,
+  emailClassNames,
   emailFontFamily,
   emailFontFilename,
   emailLogo,
   emailMaxWidth,
   emailPalette,
+  emailSolidBackground,
   emailStyleSheet,
   emailStyles,
   emailTones,

@@ -46,11 +46,11 @@ export function negatedEmailToken(name: EmailTokenName): string {
 /**
  * La paleta del correo. Un solo juego: el correo es solo claro.
  *
- * El modo oscuro se retiró a propósito, no por no haberlo probado. Eso NO
- * impide que Outlook Windows o Gmail Android inviertan los colores por su
- * cuenta: lo que se deja de hacer es gestionarlo. Con fondo blanco y tinta
- * oscura el resultado invertido es legible, y el logotipo lleva su blanco
- * horneado, así que aguanta.
+ * No hay paleta oscura, y a propósito: el correo se pide SIEMPRE en claro
+ * (`emailStyleSheet`, `EmailLayout`). Lo que hace el DS es pedirlo, en capas;
+ * no puede impedir que Outlook Windows clásico o Gmail Android inviertan los
+ * colores por su cuenta. Con fondo blanco y tinta oscura el resultado
+ * invertido es legible, y el logotipo lleva su blanco horneado, así que aguanta.
  */
 export const emailPalette = {
   /** Fondo general, fuera de la caja. */
@@ -98,6 +98,13 @@ export const emailLogo = {
   height: Math.round(emailLogoHeight + emailLogoPadding * 2),
   /** El nombre lleva versión: Gmail cachea las imágenes y no admite refresco. */
   filename: EMAIL_LOGO_FILENAME,
+  /**
+   * El texto alternativo, fijo: la imagen es SIEMPRE el logotipo «Studio LXD»,
+   * lo mande la app que lo mande, así que el `alt` dice lo que la imagen es y
+   * no quién escribe. Muchos clientes bloquean las imágenes de serie y es lo
+   * único que se lee entonces en la cabecera.
+   */
+  alt: 'Studio LXD',
 } as const;
 
 /**
@@ -111,6 +118,52 @@ export const emailAssetsBaseUrl = 'https://slxd.app/brand/email';
 
 /** La cara latina de la sans, servida desde el mismo sitio que el logotipo. */
 export const emailFontFilename = EMAIL_FONT_FILENAME;
+
+/**
+ * Un fondo liso que sobrevive a la inversión de colores.
+ *
+ * Los clientes que pintan el correo en oscuro por su cuenta reescriben
+ * `background-color` y no tocan `background-image`: un degradado de un solo
+ * color, igual al del fondo, lo mantiene. En un cliente sin modo oscuro es
+ * indistinguible de `background-color` a secas, y donde no se entiende (el
+ * motor de Word de Outlook) cae a él.
+ */
+export function emailSolidBackground(color: string): Pick<CSSProperties, 'backgroundColor' | 'backgroundImage'> {
+  return { backgroundColor: color, backgroundImage: `linear-gradient(${color}, ${color})` };
+}
+
+/**
+ * Las clases estables del correo. Ninguna da estilo —todo va inline—: existen
+ * para que `emailStyleSheet` pueda reafirmar los colores claros cuando un
+ * cliente pinta el correo en oscuro, que desde un atributo `style` no se puede.
+ */
+export const emailClassNames = {
+  /** El lienzo: `Body`, la sección que lo envuelve y el pie de baja. */
+  canvas: 'email-canvas',
+  /** La banda del logotipo y el recuadro del mensaje. */
+  surface: 'email-surface',
+  /** El recuadro del mensaje (además de `surface`): lleva el borde. */
+  box: 'email-box',
+  /** La tinta del cuerpo: título, párrafos, listas, la nota del pie y los enlaces de respaldo. */
+  text: 'email-text',
+  /** La tinta secundaria: `EmailNote`. */
+  muted: 'email-muted',
+  /** El título de un bloque (`EmailHeading level={2}`). */
+  heading2: 'email-heading-2',
+  /** Un enlace del texto o del pie de baja. */
+  link: 'email-link',
+  /** El botón. Es además el gancho de su `:hover`. */
+  button: 'email-button',
+  /** La cita (su barra). */
+  quote: 'email-quote',
+  /** El separador. */
+  divider: 'email-divider',
+  tag: {
+    success: 'email-tag-success',
+    warning: 'email-tag-warning',
+    error: 'email-tag-error',
+  },
+} as const;
 
 /**
  * Estilos inline compartidos por las plantillas.
@@ -175,7 +228,7 @@ export const emailStyles = {
     margin: 0,
   },
   button: {
-    backgroundColor: emailToken('--email-button-bg'),
+    ...emailSolidBackground(emailToken('--email-button-bg')),
     /*
      * Tinta fija, sin par oscuro: el relleno es el par autocontenido de
      * `Button primary` (lavanda con tinta prusia), que se ve igual sobre
@@ -335,15 +388,15 @@ export const emailStyles = {
  */
 export const emailTones = {
   success: {
-    backgroundColor: emailToken('--email-tone-success-bg'),
+    ...emailSolidBackground(emailToken('--email-tone-success-bg')),
     color: emailToken('--email-tone-success-color'),
   },
   warning: {
-    backgroundColor: emailToken('--email-tone-warning-bg'),
+    ...emailSolidBackground(emailToken('--email-tone-warning-bg')),
     color: emailToken('--email-tone-warning-color'),
   },
   error: {
-    backgroundColor: emailToken('--email-tone-error-bg'),
+    ...emailSolidBackground(emailToken('--email-tone-error-bg')),
     color: emailToken('--email-tone-error-color'),
   },
 } as const satisfies Record<string, CSSProperties>;
@@ -351,38 +404,120 @@ export const emailTones = {
 /** El veredicto que pinta una `EmailTag`. */
 export type EmailTone = keyof typeof emailTones;
 
-/**
- * La única clase del correo. Existe porque el hover del botón no cabe inline y
- * su regla necesita un gancho que no atrape a los demás enlaces.
+/** La clase del botón, gancho de su `:hover` y de su color forzado en claro. */
+export const emailButtonClassName = emailClassNames.button;
+
+/*
+ * Lo que `emailStyleSheet` reafirma cuando un cliente pinta el correo en oscuro:
+ * por clase, los colores CLAROS de siempre, los mismos tokens que van inline.
+ * Una sola tabla para las tres capas (media query, `[data-ogsc]` y
+ * `[data-ogsb]`), de modo que no puedan discrepar entre sí.
  */
-export const emailButtonClassName = 'email-button';
+const forcedLight: ReadonlyArray<{
+  selector: string;
+  /** Fondo liso. */
+  background?: string;
+  /** Tinta. */
+  color?: string;
+  /** Color del borde que ya pinta el elemento (solo el lado que lleva). */
+  border?: { side: 'left' | 'top' | 'all'; color: string };
+}> = [
+  { selector: emailClassNames.canvas, background: emailPalette.canvas },
+  { selector: emailClassNames.surface, background: emailPalette.background },
+  { selector: emailClassNames.box, border: { side: 'all', color: emailPalette.border } },
+  { selector: emailClassNames.text, color: emailPalette.text },
+  { selector: emailClassNames.muted, color: emailPalette.muted },
+  { selector: emailClassNames.heading2, color: emailToken('--email-heading-2-color') },
+  { selector: emailClassNames.link, color: emailPalette.text },
+  {
+    selector: emailClassNames.button,
+    background: emailToken('--email-button-bg'),
+    color: emailToken('--email-button-color'),
+  },
+  { selector: emailClassNames.quote, border: { side: 'left', color: emailToken('--email-quote-border-color') } },
+  { selector: emailClassNames.divider, border: { side: 'top', color: emailToken('--email-divider-color') } },
+  {
+    selector: emailClassNames.tag.success,
+    background: emailToken('--email-tone-success-bg'),
+    color: emailToken('--email-tone-success-color'),
+  },
+  {
+    selector: emailClassNames.tag.warning,
+    background: emailToken('--email-tone-warning-bg'),
+    color: emailToken('--email-tone-warning-color'),
+  },
+  {
+    selector: emailClassNames.tag.error,
+    background: emailToken('--email-tone-error-bg'),
+    color: emailToken('--email-tone-error-color'),
+  },
+];
+
+const BORDER_PROPERTY = { all: 'border-color', left: 'border-left-color', top: 'border-top-color' } as const;
+
+/** Las declaraciones de una entrada de `forcedLight`, filtradas por lo que cada capa puede tocar. */
+function forcedLightDeclarations(
+  entry: (typeof forcedLight)[number],
+  only?: 'color' | 'background',
+): string {
+  const out: string[] = [];
+  if (entry.background && only !== 'color') {
+    out.push(`background-color: ${entry.background} !important;`);
+    out.push(`background-image: linear-gradient(${entry.background}, ${entry.background}) !important;`);
+  }
+  if (entry.color && only !== 'background') out.push(`color: ${entry.color} !important;`);
+  if (entry.border && only !== 'background') {
+    out.push(`${BORDER_PROPERTY[entry.border.side]}: ${entry.border.color} !important;`);
+  }
+  return out.join(' ');
+}
+
+function forcedLightRules(prefix: string, only?: 'color' | 'background', indent = '  '): string {
+  return forcedLight
+    .map((entry) => ({ entry, decl: forcedLightDeclarations(entry, only) }))
+    .filter(({ decl }) => decl !== '')
+    .map(({ entry, decl }) => `${indent}${prefix}.${entry.selector} { ${decl} }`)
+    .join('\n');
+}
 
 /**
- * Lo único que el correo no puede llevar inline: las pseudoclases.
+ * La hoja del correo: lo que no cabe en un atributo `style`.
  *
- * Es toda la hoja de estilos del correo. Antes había un bloque mucho mayor con
- * las reglas de modo oscuro y las clases (`.email-body`, `.email-surface`,
- * `.email-text`…) que existían solo para que esas reglas pudieran engancharse;
- * al retirarse el modo oscuro se fueron con él.
+ * Dos asuntos:
  *
- * Dos reglas:
+ * **1. Las pseudoclases.**
  *
- * 1. El enlace se desubraya bajo el puntero, como en la web.
- * 2. El botón hace el salto de `Button primary`: del lavanda al amarillo, con
- *    la tinta prusia quieta. Va con `!important` porque compite con el estilo
- *    inline del propio botón, que le gana por especificidad. Y engancha por la
- *    clase `email-button`, no por `a`: el enlace de respaldo y los de baja son
- *    enlaces del correo y no deben ponerse amarillos.
+ * - El enlace se desubraya bajo el puntero, como en la web.
+ * - El botón hace el salto de `Button primary`: del lavanda al amarillo, con la
+ *   tinta prusia quieta. Va con `!important` porque compite con el estilo
+ *   inline del propio botón, que le gana por especificidad. Y engancha por la
+ *   clase `email-button`, no por `a`: el enlace de respaldo y los de baja son
+ *   enlaces del correo y no deben ponerse amarillos.
  *
  * Esto solo se ve donde el cliente respeta el `<style>` del head —Gmail web,
  * Apple Mail—; en Outlook de escritorio, que renderiza con el motor de Word, no,
  * y en el móvil no hay puntero. Donde no llegue, el botón se queda en su reposo,
  * que es la lectura correcta: es pulido, no una señal de la que dependa nada.
+ *
+ * **2. El correo se pide siempre en claro.** No hay paleta oscura: lo que hay
+ * son capas que piden al cliente no pintar el correo en oscuro, de la más
+ * limpia a la más tosca —el `color-scheme` de `:root` (y las `meta` del
+ * layout), la media query `prefers-color-scheme: dark` que reafirma con
+ * `!important` los colores claros por clase, y los selectores `[data-ogsc]` /
+ * `[data-ogsb]` con los que Outlook.com y el nuevo Outlook marcan lo que
+ * recolorean—. Los valores son los mismos tokens que van inline; ningún color
+ * nuevo. Las clases son las de `emailClassNames`.
  */
 export const emailStyleSheet = `
+  :root { color-scheme: light only; supported-color-schemes: light only; }
   a:hover { text-decoration: none !important; }
   a.${emailButtonClassName}:hover {
     background-color: ${emailToken('--email-button-hover-bg')} !important;
     color: ${emailToken('--email-button-hover-color')} !important;
   }
+  @media (prefers-color-scheme: dark) {
+${forcedLightRules('', undefined, '    ')}
+  }
+${forcedLightRules('[data-ogsc] ', 'color')}
+${forcedLightRules('[data-ogsb] ', 'background')}
 `;
