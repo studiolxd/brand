@@ -7,6 +7,27 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [Sin publicar]
+
+> **Minor.** Solo añade: glifos nuevos y su publicación como SVG sueltos.
+
+### Añadido
+
+- **30 glifos nuevos en `Icon`** (`ICONS`, mismo criterio que el resto: retícula de 24, área útil de 18, trazo de 1),
+  los iconos de los bricks y de la navegación del reproductor de creator: `lock`, `layers`, `layers-2`, `puzzle`,
+  `images`, `paperclip`, `list-collapse`, `panel-top`, `gallery-horizontal`, `mouse-pointer-click`, `clock`, `circle`,
+  `circle-dot`, `circle-dot-dashed`, `square-check`, `toggle-left`, `arrow-up-down`, `link`, `folder-kanban`,
+  `text-cursor-input`, `pen-line`, `move-horizontal`, `letter-text`, `person-standing`, `gem`, `message-circle`,
+  `message-square-quote`, `headphones`, `chevron-left` y `delete-left`. El catálogo pasa de 77 a 107. No hay
+  `rotate-cw`: `retry` ya es la flecha que gira en el sentido de las agujas del reloj.
+- **Cada glifo, también como SVG suelto**: `@studiolxd/brand/assets/icons/glyphs/<nombre>.svg` (por el export
+  `./assets/*` que ya existía), para quien no puede cargar el componente (un reproductor exportado a SCORM, un tema que
+  guarda iconos como ficheros). Es el `<svg>` de `Icon` sin hoja: `viewBox="0 0 24 24"`, `fill="none"`,
+  `stroke="currentColor"`. Lo genera `pnpm build:icon-glyphs` (nuevo, dentro de `build:all`), de forma determinista y
+  desde el mismo AST que los iconos nativos (`scripts/lib/icon-shapes.mjs`). Documentado en Foundations → Iconografía
+  § «Los glifos como SVG sueltos».
+- Nativo: `BrandIconName` (Swift y Kotlin) gana los 30 casos nuevos, regenerados con `pnpm build:native-icons`.
+
 ## [52.0.0] — 2026-10-09
 
 > **Breaking (major).** `EmailLayout` pierde la prop `logoAlt`; el correo pasa a pedirse siempre en claro.

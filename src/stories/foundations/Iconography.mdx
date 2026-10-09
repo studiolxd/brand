@@ -69,6 +69,23 @@ Dos ejemplos del criterio en esta fase:
 
 `spinner` no está en este catálogo a propósito: el spinner de carga es un componente propio, `Spinner` (con su propia animación), no un icono estático — ver `Atoms/Spinner`.
 
+## Los glifos como SVG sueltos
+
+Cada glifo del catálogo se publica además como un **fichero SVG suelto**, generado desde el mismo `ICONS` que dibuja `Icon` (`pnpm build:icon-glyphs`, dentro de `build:all`):
+
+```txt
+@studiolxd/brand/assets/icons/glyphs/<nombre>.svg     →  dist/assets/icons/glyphs/<nombre>.svg
+```
+
+Es para quien **no puede cargar el componente** pero quiere el mismo dibujo, no uno parecido de otra librería: un reproductor que se exporta fuera de la app (un paquete SCORM no lleva la hoja de brand), un tema que guarda sus iconos como ficheros, una herramienta que solo acepta una URL. En una aplicación React la respuesta sigue siendo `Icon`.
+
+Cada fichero es el `<svg>` que pinta `Icon` y nada más: retícula `0 0 24 24`, `fill="none"`, `stroke="currentColor"` y las formas con sus atributos de presentación (trazo de 1 que no escala y, donde el glifo los lleva, uniones y remates redondos), sin clases ni hoja. Los puntos (`dot`, `dots`, `grid`) van rellenos de `currentColor`, como en el componente. Lo que **no** viaja en el fichero es lo que pone la hoja de `Icon`: la talla (el fichero mide 24 y se escala con quien lo pinta) y el color, que depende de cómo se cargue:
+
+- **En línea** (el SVG dentro del HTML) o como **máscara** (`mask-image` con un fondo de `currentColor`), el glifo toma el color del texto y cambia con él, también en la superficie oscura.
+- Como **`<img>`** o `background-image`, `currentColor` no hereda nada: el navegador lo pinta en negro. Sirve solo sobre fondo claro y sin estados.
+
+Los ficheros son deterministas (mismas fuentes, mismos bytes) y se versionan con el paquete: un glifo redibujado llega a quien sube de versión. Un test compara cada fichero con lo que pinta `Icon`, y `release:check` falla si `dist/` no está regenerado.
+
 ---
 
 ## Tokens

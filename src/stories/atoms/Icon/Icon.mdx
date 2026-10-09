@@ -23,6 +23,7 @@ import { Icon } from '@studiolxd/brand/icon';
 - **El glifo no llena la caja**: el lienzo es de 24 y el dibujo ocupa el área útil de 18, de 3 a 21 (un 12,5% de aire por lado), centrado. Un icono de 24px pinta unos 18px de glifo; quien alinee un icono con otra cosa cuenta con ese aire. El porqué y la retícula del catálogo entero, en **Foundations → Iconografía § «El área útil»**.
 - **`size`** es una de las cinco tallas de icono, `md` por defecto, o `text`: esa no es una talla sino una relación — el glifo mide `1em`, o sea el texto que lo rodea, y sube y baja con él. Es la que llevan por dentro el enlace y el botón. Los valores y su uso, en Iconografía.
 - **No hay prop de color**: el icono es `currentColor`. Si un componente necesita un icono de otro color, lo fija en su propio token sobre el elemento que lo contiene.
+- **Sin React**: cada glifo se publica también como SVG suelto en `@studiolxd/brand/assets/icons/glyphs/<nombre>.svg`, para quien no puede cargar el componente. Para qué sirve y cómo toma el color, en **Iconografía § «Los glifos como SVG sueltos»**.
 - **No admite `aria-label` ni `title`**: el icono es siempre decorativo y el nombre lo lleva el control que lo contiene. La regla y su porqué, en Iconografía.
 
 <Canvas of={IconStories.Tallas} />

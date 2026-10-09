@@ -970,6 +970,7 @@
     "build:tokens-css": "postcss src/tokens/index.css --use postcss-import --no-map -o dist/tokens.css",
     "build:fonts-css": "node scripts/build-fonts-css.mjs",
     "build:icons": "node scripts/build-icons.mjs",
+    "build:icon-glyphs": "node scripts/build-icon-glyphs.mjs",
     "lint": "eslint .",
     "build:tokens": "node sd.config.mjs",
     "build:email-assets": "node scripts/build-email-assets.mjs",
@@ -981,7 +982,7 @@
     "chromatic": "chromatic --exit-zero-on-changes",
     "test": "vitest run --project unit --project components",
     "test:stories": "vitest run --project storybook --project storybook-dark",
-    "build:all": "pnpm build:tokens && pnpm build:lib && pnpm build:css && pnpm build:tokens-css && pnpm build:fonts-css && pnpm build:icons && pnpm build:email-assets && pnpm build:native-icons",
+    "build:all": "pnpm build:tokens && pnpm build:lib && pnpm build:css && pnpm build:tokens-css && pnpm build:fonts-css && pnpm build:icons && pnpm build:icon-glyphs && pnpm build:email-assets && pnpm build:native-icons",
     "release:check": "node scripts/release-check.mjs",
     "release:npm": "node scripts/publish-npm.mjs"
   },
