@@ -7,7 +7,7 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## [Sin publicar]
+## [52.1.0] — 2026-10-10
 
 > **Minor.** Solo añade: glifos nuevos y su publicación como SVG sueltos.
 
