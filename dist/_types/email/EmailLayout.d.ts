@@ -85,7 +85,12 @@ export type EmailOptOut = EmailOptOutAccount | EmailOptOutGuest;
 export interface EmailLayoutProps {
     /** La línea que el cliente enseña junto al asunto en la bandeja. */
     preview: string;
-    /** Quién manda. Es el texto alternativo del logotipo si no se da otro. */
+    /**
+     * Quién manda: la app que envía el correo. El layout no lo pinta —la marca
+     * del encabezado es siempre el logotipo «Studio LXD», con su `alt` fijo
+     * (`emailLogo.alt`)—; queda en la API para que el consumidor identifique el
+     * correo.
+     */
     appName: string;
     /** Idioma del documento. Por defecto, castellano. */
     locale?: string;
@@ -98,16 +103,9 @@ export interface EmailLayoutProps {
      * `emailLogo.filename` y `emailFontFilename` para saber qué hay que subir.
      */
     assetsBaseUrl?: string;
-    /**
-     * Texto alternativo del logotipo. Por defecto, `appName`.
-     *
-     * Muchos clientes bloquean las imágenes de serie: sin esto, la cabecera del
-     * correo sale en blanco y no se sabe quién escribe.
-     */
-    logoAlt?: string;
     /** Omitir en el correo transaccional que no pertenece a ninguna categoría. */
     optOut?: EmailOptOut;
     children: ReactNode;
 }
-export declare function EmailLayout({ preview, appName, locale, assetsBaseUrl, logoAlt, optOut, children, }: EmailLayoutProps): import("react/jsx-runtime").JSX.Element;
+export declare function EmailLayout({ preview, locale, assetsBaseUrl, optOut, children, }: EmailLayoutProps): import("react/jsx-runtime").JSX.Element;
 export {};

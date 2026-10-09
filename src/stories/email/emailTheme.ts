@@ -128,7 +128,7 @@ export const emailFontFilename = EMAIL_FONT_FILENAME;
  * indistinguible de `background-color` a secas, y donde no se entiende (el
  * motor de Word de Outlook) cae a él.
  */
-export function emailSolidBackground(color: string): Pick<CSSProperties, 'backgroundColor' | 'backgroundImage'> {
+export function emailSolidBackground(color: string): { backgroundColor: string; backgroundImage: string } {
   return { backgroundColor: color, backgroundImage: `linear-gradient(${color}, ${color})` };
 }
 
