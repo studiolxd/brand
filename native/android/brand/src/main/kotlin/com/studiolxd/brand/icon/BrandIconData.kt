@@ -615,8 +615,10 @@ internal val BrandIconName.shapes: List<BrandIconShape>
         )
         BrandIconName.MessageSquareQuote -> listOf(
             BrandIconShape.Path("M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3z", round = true, roundJoin = true),
-            BrandIconShape.Path("M9 8.5h2v3a2 2 0 0 1 -2 2", round = true, roundJoin = true),
-            BrandIconShape.Path("M13 8.5h2v3a2 2 0 0 1 -2 2", round = true, roundJoin = true),
+            BrandIconShape.Circle(10.25f, 9.5f, 1f),
+            BrandIconShape.Path("M11.25 9.5c0 2 -1 3.5 -2.5 4", round = true, roundJoin = true),
+            BrandIconShape.Circle(14.25f, 9.5f, 1f),
+            BrandIconShape.Path("M15.25 9.5c0 2 -1 3.5 -2.5 4", round = true, roundJoin = true),
         )
         BrandIconName.Headphones -> listOf(
             BrandIconShape.Path("M4 15v-3a8 8 0 1 1 16 0v3", round = true, roundJoin = true),

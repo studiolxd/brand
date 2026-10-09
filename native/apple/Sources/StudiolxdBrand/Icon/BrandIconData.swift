@@ -719,8 +719,10 @@ extension BrandIconName {
         case .messageSquareQuote:
             [
                 .path("M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3z", round: true, roundJoin: true),
-                .path("M9 8.5h2v3a2 2 0 0 1 -2 2", round: true, roundJoin: true),
-                .path("M13 8.5h2v3a2 2 0 0 1 -2 2", round: true, roundJoin: true),
+                .circle(cx: 10.25, cy: 9.5, r: 1),
+                .path("M11.25 9.5c0 2 -1 3.5 -2.5 4", round: true, roundJoin: true),
+                .circle(cx: 14.25, cy: 9.5, r: 1),
+                .path("M15.25 9.5c0 2 -1 3.5 -2.5 4", round: true, roundJoin: true),
             ]
         case .headphones:
             [
