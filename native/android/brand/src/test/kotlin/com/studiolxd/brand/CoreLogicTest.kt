@@ -24,7 +24,7 @@ class CoreLogicTest {
 
     @Test
     fun iconCatalogHasEveryIconOfReactWithUniqueNames() {
-        assertEquals(77, BrandIconName.entries.size)
+        assertEquals(107, BrandIconName.entries.size)
         assertEquals(BrandIconName.entries.size, BrandIconName.entries.map { it.value }.toSet().size)
         assertEquals("arrow-left", BrandIconName.ArrowLeft.value)
     }

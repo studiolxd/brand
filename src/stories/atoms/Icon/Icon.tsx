@@ -603,6 +603,13 @@ const ICONS = {
       <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 16.5 L12 7.5 L21 16.5" />
     ),
   },
+  // `chevron` reflejado: los mismos tres puntos girados 180° sobre el centro.
+  'chevron-left': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M16.5 3 L7.5 12 L16.5 21" />
+    ),
+  },
   info: {
     viewBox: '0 0 24 24',
     render: () => (
@@ -777,6 +784,330 @@ const ICONS = {
         <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="12" r="9" />
         <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M3 12l18 0" />
         <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0 -18" />
+      </>
+    ),
+  },
+  // Glifos del reproductor de creator (2026-10-10): los iconos de los bricks
+  // y de la navegación que el catálogo no tenía. Mismo criterio que el resto
+  // (Foundations → Iconografía): retícula de 24, área útil de 18, trazo de 1.
+  // Candado: cuerpo de 14×10 con radio 2 y arco de radio 4, sin bocallave (la
+  // lleva `shield-lock`, que es otra cosa: protección, no bloqueo).
+  lock: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M7 10.5h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6a2 2 0 0 1 2 -2z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M8 10.5v-3a4 4 0 0 1 8 0v3" />
+      </>
+    ),
+  },
+  // Capas: el rombo de `package` (pendiente 1:2) y dos capas más a 4,5 de
+  // paso. `layers-2` es el mismo dibujo con una capa menos, centrado.
+  layers: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 3l9 4.5l-9 4.5l-9 -4.5z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 12l9 4.5l9 -4.5" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 16.5l9 4.5l9 -4.5" />
+      </>
+    ),
+  },
+  'layers-2': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 5.25l9 4.5l-9 4.5l-9 -4.5z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 14.25l9 4.5l9 -4.5" />
+      </>
+    ),
+  },
+  // Pieza de puzle: un marco de 13 con radio 2 y dos lengüetas de radio 2,5
+  // centradas en su lado (arriba y a la derecha), que llegan al borde del área.
+  puzzle: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5.5 7.5h2.5a2.5 2.5 0 1 1 4 0h2.5a2 2 0 0 1 2 2v2.5a2.5 2.5 0 1 1 0 4v2.5a2 2 0 0 1 -2 2h-9a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2z" />
+    ),
+  },
+  // Varias imágenes: la construcción de `copy` (marco delante, el de detrás
+  // solo asoma) con el monte y el sol dentro del marco delantero.
+  images: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M7 7v-2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-2" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 7h10a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 18l4 -4l7 7" />
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12.5" cy="11.5" r="1.5" />
+      </>
+    ),
+  },
+  // Clip: dibujado en vertical (tres tramos rectos y tres medias vueltas de
+  // radio 3,5, 2,5 y 1,75) y girado 45° sobre el centro, con la caja recentrada.
+  paperclip: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M16.74 12.91L11.44 18.22A3.5 3.5 0 0 1 6.49 13.27L14.27 5.49A2.5 2.5 0 0 1 17.8 9.03L10.03 16.8A1.75 1.75 0 0 1 7.55 14.33L12.85 9.03" />
+    ),
+  },
+  // Lista plegable: tres renglones y, delante del primero y del último, un
+  // chevron de 3×6 a 45° (el de `chevron`, en pequeño) que indica que se despliega.
+  'list-collapse': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 3l3 3l-3 3" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 15l3 3l-3 3" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M10 6h11" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M10 12h11" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M10 18h11" />
+      </>
+    ),
+  },
+  // Panel con franja superior: el marco de `layout-sidebar` con la división en
+  // horizontal, a la misma distancia del borde.
+  'panel-top': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5.5 3.5h13a2 2 0 0 1 2 2v13a2 2 0 0 1 -2 2h-13a2 2 0 0 1 -2 -2v-13a2 2 0 0 1 2 -2z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3.5 9l17 0" />
+      </>
+    ),
+  },
+  // Galería horizontal: la pieza visible en el centro (radio 2) y el canto de
+  // la anterior y la siguiente a los lados, a la altura del marco.
+  'gallery-horizontal': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3.5 3.5l0 17" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M20.5 3.5l0 17" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 3.5h6a2 2 0 0 1 2 2v13a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2v-13a2 2 0 0 1 2 -2z" />
+      </>
+    ),
+  },
+  // Puntero haciendo clic: la flecha del puntero, simétrica sobre la diagonal y
+  // con la punta en (9, 9), y cuatro rayos de 2,5 alrededor de la punta.
+  'mouse-pointer-click': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 9l11 4.5l-4.5 2l-2 4.5z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 3l0 2.5" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 9l2.5 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5l-1.75 1.75" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4.5 13.5l1.75 -1.75" />
+      </>
+    ),
+  },
+  clock: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="12" r="9" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 7l0 5l3 3" />
+      </>
+    ),
+  },
+  // Círculo de contorno: el de `info`, `target` o `clock`, solo. `circle-dot` le
+  // añade el centro de `target`, y `circle-dot-dashed` parte el contorno en ocho
+  // arcos de 30° con huecos de 15°, dibujados (no con `stroke-dasharray`, que
+  // con `non-scaling-stroke` no guarda la proporción y que no llega a nativo).
+  circle: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="12" r="9" />
+    ),
+  },
+  'circle-dot': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="12" r="9" />
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="12" r="1" />
+      </>
+    ),
+  },
+  'circle-dot-dashed': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M13.17 3.08A9 9 0 0 1 17.48 4.86M19.14 6.52A9 9 0 0 1 20.92 10.83M20.92 13.17A9 9 0 0 1 19.14 17.48M17.48 19.14A9 9 0 0 1 13.17 20.92M10.83 20.92A9 9 0 0 1 6.52 19.14M4.86 17.48A9 9 0 0 1 3.08 13.17M3.08 10.83A9 9 0 0 1 4.86 6.52M6.52 4.86A9 9 0 0 1 10.83 3.08" />
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="12" r="1" />
+      </>
+    ),
+  },
+  // Casilla marcada: el marco de `layout-sidebar` con la marca de `circle-check`.
+  'square-check': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5.5 3.5h13a2 2 0 0 1 2 2v13a2 2 0 0 1 -2 2h-13a2 2 0 0 1 -2 -2v-13a2 2 0 0 1 2 -2z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2l4 -4" />
+      </>
+    ),
+  },
+  // Interruptor apagado: cápsula de 18×11 con el mando a la izquierda.
+  'toggle-left': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M8.5 6.5h7a5.5 5.5 0 0 1 0 11h-7a5.5 5.5 0 0 1 0 -11z" />
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="8.5" cy="12" r="2.5" />
+      </>
+    ),
+  },
+  // Flechas arriba/abajo: dos astas de 18 con la punta a 45° (brazos de 4, la
+  // misma abertura que `upload`/`download` a la escala de dos flechas juntas).
+  'arrow-up-down': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M7 21l0 -18" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 7l4 -4l4 4" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M17 3l0 18" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M13 17l4 4l4 -4" />
+      </>
+    ),
+  },
+  // Enlace: dos eslabones abiertos de radio 3,5 y el trazo que los une,
+  // dibujados en horizontal y girados 45° sobre el centro.
+  link: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M8.11 10.94L5.64 13.41A3.5 3.5 0 0 0 10.59 18.36L13.06 15.89" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M10.94 8.11L13.41 5.64A3.5 3.5 0 0 1 18.36 10.59L15.89 13.06" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9.88 14.12L14.12 9.88" />
+      </>
+    ),
+  },
+  // Carpeta con tablero: el dibujo de `folder` con las tres columnas dentro.
+  'folder-kanban': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M21 18a2 2 0 0 1 -2 2H5a2 2 0 0 1 -2 -2V6a2 2 0 0 1 2 -2h4l2 3h8a2 2 0 0 1 2 2z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M8 11l0 4" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 11l0 2" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M16 11l0 6" />
+      </>
+    ),
+  },
+  // Campo con cursor de texto: el campo (radio 2) se interrumpe donde lo cruza
+  // el cursor, con remates rectos (sin las curvas de la letra de lucide).
+  'text-cursor-input': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M6 8h-1a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h1" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 8h7a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-7" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 4l0 16" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M7 4l4 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M7 20l4 0" />
+      </>
+    ),
+  },
+  // Lápiz con línea: el lápiz en diagonal, de la punta (4, 20) a la goma, y la
+  // línea que escribe sobre la misma base.
+  'pen-line': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M13.5 6.5l4 4" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 20l8 0" />
+      </>
+    ),
+  },
+  'move-horizontal': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 12l18 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M7 8l-4 4l4 4" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4l-4 4" />
+      </>
+    ),
+  },
+  // Texto con inicial: una «A» de trazo (base y altura de los dos primeros
+  // renglones) y los renglones que la siguen.
+  'letter-text': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 12.5l4 -8l4 8" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4.5 9.5l5 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M15 5.5l6 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M15 12.5l6 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 19.5l18 0" />
+      </>
+    ),
+  },
+  'person-standing': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="4.5" r="1.5" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M6 8.5l6 2l6 -2" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 10.5l0 4" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 21l3 -6.5l3 6.5" />
+      </>
+    ),
+  },
+  // Gema: corona de 5, pabellón hasta la punta y las facetas que bajan de la
+  // tabla a la punta.
+  gem: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M7 4h10l4 5l-9 11l-9 -11z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 9l18 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M10 4l-2 5l4 11l4 -11l-2 -5" />
+      </>
+    ),
+  },
+  // Bocadillo redondo: círculo de radio 9 abierto entre 120° y 150° para la
+  // cola, que llega a la esquina del área. `message` es el bocadillo cuadrado
+  // con renglones; `message-square-quote` es ese mismo bocadillo con comillas.
+  'message-circle': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M7.5 19.79A9 9 0 1 0 4.21 16.5L3 21z" />
+    ),
+  },
+  'message-square-quote': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 8.5h2v3a2 2 0 0 1 -2 2" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M13 8.5h2v3a2 2 0 0 1 -2 2" />
+      </>
+    ),
+  },
+  // Auriculares: el arco y las copas de `headset`, sin micro, y bajados una
+  // unidad para quedar centrados (sin el micro el dibujo cabe en el área).
+  headphones: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 15v-3a8 8 0 1 1 16 0v3" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 15a2 2 0 0 1 2 -2h1a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-1a2 2 0 0 1 -2 -2v-3" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M15 15a2 2 0 0 1 2 -2h1a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-1a2 2 0 0 1 -2 -2v-3" />
+      </>
+    ),
+  },
+  // Tecla de borrar (⌫): la tecla con la punta hacia la izquierda y el aspa
+  // de `alert-error` centrada en su parte recta.
+  'delete-left': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 5h10a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-10l-6 -7z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12.5 9.5l5 5M17.5 9.5l-5 5" />
       </>
     ),
   },

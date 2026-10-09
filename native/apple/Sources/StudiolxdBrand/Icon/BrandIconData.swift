@@ -63,6 +63,7 @@ public enum BrandIconName: String, CaseIterable, Sendable {
     case chevronRight = "chevron-right"
     case chevronDown = "chevron-down"
     case chevronUp = "chevron-up"
+    case chevronLeft = "chevron-left"
     case info
     case alertTriangle = "alert-triangle"
     case alertError = "alert-error"
@@ -79,6 +80,35 @@ public enum BrandIconName: String, CaseIterable, Sendable {
     case calendar
     case target
     case languages
+    case lock
+    case layers
+    case layers2 = "layers-2"
+    case puzzle
+    case images
+    case paperclip
+    case listCollapse = "list-collapse"
+    case panelTop = "panel-top"
+    case galleryHorizontal = "gallery-horizontal"
+    case mousePointerClick = "mouse-pointer-click"
+    case clock
+    case circle
+    case circleDot = "circle-dot"
+    case circleDotDashed = "circle-dot-dashed"
+    case squareCheck = "square-check"
+    case toggleLeft = "toggle-left"
+    case arrowUpDown = "arrow-up-down"
+    case link
+    case folderKanban = "folder-kanban"
+    case textCursorInput = "text-cursor-input"
+    case penLine = "pen-line"
+    case moveHorizontal = "move-horizontal"
+    case letterText = "letter-text"
+    case personStanding = "person-standing"
+    case gem
+    case messageCircle = "message-circle"
+    case messageSquareQuote = "message-square-quote"
+    case headphones
+    case deleteLeft = "delete-left"
 }
 
 extension BrandIconName {
@@ -437,6 +467,10 @@ extension BrandIconName {
             [
                 .path("M3 16.5 L12 7.5 L21 16.5", round: true, roundJoin: true),
             ]
+        case .chevronLeft:
+            [
+                .path("M16.5 3 L7.5 12 L16.5 21", round: true, roundJoin: true),
+            ]
         case .info:
             [
                 .circle(cx: 12, cy: 12, r: 9),
@@ -529,6 +563,175 @@ extension BrandIconName {
                 .circle(cx: 12, cy: 12, r: 9),
                 .path("M3 12l18 0", round: true),
                 .path("M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0 -18", round: true, roundJoin: true),
+            ]
+        case .lock:
+            [
+                .path("M7 10.5h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6a2 2 0 0 1 2 -2z", round: true, roundJoin: true),
+                .path("M8 10.5v-3a4 4 0 0 1 8 0v3", round: true, roundJoin: true),
+            ]
+        case .layers:
+            [
+                .path("M12 3l9 4.5l-9 4.5l-9 -4.5z", round: true, roundJoin: true),
+                .path("M3 12l9 4.5l9 -4.5", round: true, roundJoin: true),
+                .path("M3 16.5l9 4.5l9 -4.5", round: true, roundJoin: true),
+            ]
+        case .layers2:
+            [
+                .path("M12 5.25l9 4.5l-9 4.5l-9 -4.5z", round: true, roundJoin: true),
+                .path("M3 14.25l9 4.5l9 -4.5", round: true, roundJoin: true),
+            ]
+        case .puzzle:
+            [
+                .path("M5.5 7.5h2.5a2.5 2.5 0 1 1 4 0h2.5a2 2 0 0 1 2 2v2.5a2.5 2.5 0 1 1 0 4v2.5a2 2 0 0 1 -2 2h-9a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2z", round: true, roundJoin: true),
+            ]
+        case .images:
+            [
+                .path("M7 7v-2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-2", round: true, roundJoin: true),
+                .path("M5 7h10a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2z", round: true, roundJoin: true),
+                .path("M3 18l4 -4l7 7", round: true, roundJoin: true),
+                .circle(cx: 12.5, cy: 11.5, r: 1.5),
+            ]
+        case .paperclip:
+            [
+                .path("M16.74 12.91L11.44 18.22A3.5 3.5 0 0 1 6.49 13.27L14.27 5.49A2.5 2.5 0 0 1 17.8 9.03L10.03 16.8A1.75 1.75 0 0 1 7.55 14.33L12.85 9.03", round: true, roundJoin: true),
+            ]
+        case .listCollapse:
+            [
+                .path("M3 3l3 3l-3 3", round: true, roundJoin: true),
+                .path("M3 15l3 3l-3 3", round: true, roundJoin: true),
+                .path("M10 6h11", round: true, roundJoin: true),
+                .path("M10 12h11", round: true, roundJoin: true),
+                .path("M10 18h11", round: true, roundJoin: true),
+            ]
+        case .panelTop:
+            [
+                .path("M5.5 3.5h13a2 2 0 0 1 2 2v13a2 2 0 0 1 -2 2h-13a2 2 0 0 1 -2 -2v-13a2 2 0 0 1 2 -2z", round: true, roundJoin: true),
+                .path("M3.5 9l17 0", round: true, roundJoin: true),
+            ]
+        case .galleryHorizontal:
+            [
+                .path("M3.5 3.5l0 17", round: true, roundJoin: true),
+                .path("M20.5 3.5l0 17", round: true, roundJoin: true),
+                .path("M9 3.5h6a2 2 0 0 1 2 2v13a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2v-13a2 2 0 0 1 2 -2z", round: true, roundJoin: true),
+            ]
+        case .mousePointerClick:
+            [
+                .path("M9 9l11 4.5l-4.5 2l-2 4.5z", round: true, roundJoin: true),
+                .path("M9 3l0 2.5", round: true, roundJoin: true),
+                .path("M3 9l2.5 0", round: true, roundJoin: true),
+                .path("M13.5 4.5l-1.75 1.75", round: true, roundJoin: true),
+                .path("M4.5 13.5l1.75 -1.75", round: true, roundJoin: true),
+            ]
+        case .clock:
+            [
+                .circle(cx: 12, cy: 12, r: 9),
+                .path("M12 7l0 5l3 3", round: true, roundJoin: true),
+            ]
+        case .circle:
+            [
+                .circle(cx: 12, cy: 12, r: 9),
+            ]
+        case .circleDot:
+            [
+                .circle(cx: 12, cy: 12, r: 9),
+                .circle(cx: 12, cy: 12, r: 1),
+            ]
+        case .circleDotDashed:
+            [
+                .path("M13.17 3.08A9 9 0 0 1 17.48 4.86M19.14 6.52A9 9 0 0 1 20.92 10.83M20.92 13.17A9 9 0 0 1 19.14 17.48M17.48 19.14A9 9 0 0 1 13.17 20.92M10.83 20.92A9 9 0 0 1 6.52 19.14M4.86 17.48A9 9 0 0 1 3.08 13.17M3.08 10.83A9 9 0 0 1 4.86 6.52M6.52 4.86A9 9 0 0 1 10.83 3.08", round: true, roundJoin: true),
+                .circle(cx: 12, cy: 12, r: 1),
+            ]
+        case .squareCheck:
+            [
+                .path("M5.5 3.5h13a2 2 0 0 1 2 2v13a2 2 0 0 1 -2 2h-13a2 2 0 0 1 -2 -2v-13a2 2 0 0 1 2 -2z", round: true, roundJoin: true),
+                .path("M9 12l2 2l4 -4", round: true, roundJoin: true),
+            ]
+        case .toggleLeft:
+            [
+                .path("M8.5 6.5h7a5.5 5.5 0 0 1 0 11h-7a5.5 5.5 0 0 1 0 -11z", round: true, roundJoin: true),
+                .circle(cx: 8.5, cy: 12, r: 2.5),
+            ]
+        case .arrowUpDown:
+            [
+                .path("M7 21l0 -18", round: true, roundJoin: true),
+                .path("M3 7l4 -4l4 4", round: true, roundJoin: true),
+                .path("M17 3l0 18", round: true, roundJoin: true),
+                .path("M13 17l4 4l4 -4", round: true, roundJoin: true),
+            ]
+        case .link:
+            [
+                .path("M8.11 10.94L5.64 13.41A3.5 3.5 0 0 0 10.59 18.36L13.06 15.89", round: true, roundJoin: true),
+                .path("M10.94 8.11L13.41 5.64A3.5 3.5 0 0 1 18.36 10.59L15.89 13.06", round: true, roundJoin: true),
+                .path("M9.88 14.12L14.12 9.88", round: true, roundJoin: true),
+            ]
+        case .folderKanban:
+            [
+                .path("M21 18a2 2 0 0 1 -2 2H5a2 2 0 0 1 -2 -2V6a2 2 0 0 1 2 -2h4l2 3h8a2 2 0 0 1 2 2z", round: true, roundJoin: true),
+                .path("M8 11l0 4", round: true, roundJoin: true),
+                .path("M12 11l0 2", round: true, roundJoin: true),
+                .path("M16 11l0 6", round: true, roundJoin: true),
+            ]
+        case .textCursorInput:
+            [
+                .path("M6 8h-1a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h1", round: true, roundJoin: true),
+                .path("M12 8h7a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-7", round: true, roundJoin: true),
+                .path("M9 4l0 16", round: true, roundJoin: true),
+                .path("M7 4l4 0", round: true, roundJoin: true),
+                .path("M7 20l4 0", round: true, roundJoin: true),
+            ]
+        case .penLine:
+            [
+                .path("M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4", round: true, roundJoin: true),
+                .path("M13.5 6.5l4 4", round: true, roundJoin: true),
+                .path("M12 20l8 0", round: true, roundJoin: true),
+            ]
+        case .moveHorizontal:
+            [
+                .path("M3 12l18 0", round: true, roundJoin: true),
+                .path("M7 8l-4 4l4 4", round: true, roundJoin: true),
+                .path("M17 8l4 4l-4 4", round: true, roundJoin: true),
+            ]
+        case .letterText:
+            [
+                .path("M3 12.5l4 -8l4 8", round: true, roundJoin: true),
+                .path("M4.5 9.5l5 0", round: true, roundJoin: true),
+                .path("M15 5.5l6 0", round: true, roundJoin: true),
+                .path("M15 12.5l6 0", round: true, roundJoin: true),
+                .path("M3 19.5l18 0", round: true, roundJoin: true),
+            ]
+        case .personStanding:
+            [
+                .circle(cx: 12, cy: 4.5, r: 1.5),
+                .path("M6 8.5l6 2l6 -2", round: true, roundJoin: true),
+                .path("M12 10.5l0 4", round: true, roundJoin: true),
+                .path("M9 21l3 -6.5l3 6.5", round: true, roundJoin: true),
+            ]
+        case .gem:
+            [
+                .path("M7 4h10l4 5l-9 11l-9 -11z", round: true, roundJoin: true),
+                .path("M3 9l18 0", round: true, roundJoin: true),
+                .path("M10 4l-2 5l4 11l4 -11l-2 -5", round: true, roundJoin: true),
+            ]
+        case .messageCircle:
+            [
+                .path("M7.5 19.79A9 9 0 1 0 4.21 16.5L3 21z", round: true, roundJoin: true),
+            ]
+        case .messageSquareQuote:
+            [
+                .path("M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3z", round: true, roundJoin: true),
+                .path("M9 8.5h2v3a2 2 0 0 1 -2 2", round: true, roundJoin: true),
+                .path("M13 8.5h2v3a2 2 0 0 1 -2 2", round: true, roundJoin: true),
+            ]
+        case .headphones:
+            [
+                .path("M4 15v-3a8 8 0 1 1 16 0v3", round: true, roundJoin: true),
+                .path("M4 15a2 2 0 0 1 2 -2h1a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-1a2 2 0 0 1 -2 -2v-3", round: true, roundJoin: true),
+                .path("M15 15a2 2 0 0 1 2 -2h1a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-1a2 2 0 0 1 -2 -2v-3", round: true, roundJoin: true),
+            ]
+        case .deleteLeft:
+            [
+                .path("M9 5h10a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-10l-6 -7z", round: true, roundJoin: true),
+                .path("M12.5 9.5l5 5M17.5 9.5l-5 5", round: true, roundJoin: true),
             ]
         }
     }

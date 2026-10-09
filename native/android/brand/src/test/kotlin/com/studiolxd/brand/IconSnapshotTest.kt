@@ -12,7 +12,7 @@ import com.studiolxd.brand.tokens.BrandSpacing
 import org.junit.Rule
 import org.junit.Test
 
-/** Capturas de `Icon`: las seis tallas y el catálogo entero (77 iconos), claro y oscuro. */
+/** Capturas de `Icon`: las seis tallas y el catálogo entero (107 iconos), claro y oscuro. */
 class IconSnapshotTest {
     @get:Rule
     val paparazzi = brandPaparazzi(400, 460)

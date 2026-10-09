@@ -254,7 +254,7 @@ BrandParagraph(Text("Esta acción ") + Text("borra").brand(.strong, tone: .destr
 BrandIcon(.search)                                     // xs 8 · sm 16 · md 24 · lg 48 · xl 64 · text = 1em
 ```
 
-`BrandIcon` dibuja los mismos 77 iconos que el `Icon` de React (retícula de 24, trazo de 1 pt): `pnpm build:native-icons` los
+`BrandIcon` dibuja los mismos 107 iconos que el `Icon` de React (retícula de 24, trazo de 1 pt): `pnpm build:native-icons` los
 genera desde `Icon.tsx`, así que no hay SF Symbols ni dos catálogos que diverjan.
 
 ### Campos de formulario
@@ -424,7 +424,7 @@ BrandParagraph(buildAnnotatedString {
 BrandIcon(BrandIconName.Search, size = BrandIconSize.Lg, contentDescription = "Buscar")   // sin descripción: decorativo
 ```
 
-`BrandIcon` dibuja los mismos 77 iconos que React (`pnpm build:native-icons` genera también `BrandIconData.kt`). En `Text`,
+`BrandIcon` dibuja los mismos 107 iconos que React (`pnpm build:native-icons` genera también `BrandIconData.kt`). En `Text`,
 la prop `as` de React se llama `element` (`as` es palabra reservada en Kotlin).
 
 ### Campos de formulario
