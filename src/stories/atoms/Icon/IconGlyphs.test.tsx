@@ -1,4 +1,5 @@
 import { readdirSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { Icon, ICON_NAMES } from './Icon';
@@ -9,8 +10,9 @@ import { Icon, ICON_NAMES } from './Icon';
  * `release:check` (`git status -- dist` limpio tras `build:all`); aquí, que no
  * falte ni sobre ninguno y que cada uno lleve las formas del componente.
  */
-const DIR = new URL('../../../../dist/assets/icons/glyphs/', import.meta.url);
-const leer = (nombre: string) => readFileSync(new URL(`${nombre}.svg`, DIR), 'utf8');
+// En jsdom `import.meta.url` no es `file:`: la ruta sale de la raíz del repo, donde corre vitest.
+const DIR = resolve(process.cwd(), 'dist/assets/icons/glyphs');
+const leer = (nombre: string) => readFileSync(resolve(DIR, `${nombre}.svg`), 'utf8');
 
 /** Las formas de un `<svg>`: etiqueta y geometría, en orden. */
 const GEOMETRIA = ['d', 'cx', 'cy', 'r', 'x1', 'y1', 'x2', 'y2', 'fill', 'stroke'];
