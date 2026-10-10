@@ -26,7 +26,11 @@ pnpm test             # Vitest: proyectos unit (node) + components (jsdom + Test
 pnpm test:stories     # Vitest: stories en navegador (Playwright/Chromium), en claro (`storybook`) y en oscuro (`storybook-dark`) — pesado
 pnpm release:check    # Puerta de calidad: lint + tsc + test + paridad + build:all + sync de dist/ y de native/ + npm pack sin nativo (--with-stories añade test:stories; --with-native añade swift build/test y ./gradlew build)
 
-# Docker — Storybook image → ghcr.io
+# Despliegue del Storybook (https://brand.studiolxd.com) — tras aprobar el stage de npm
+pnpm deploy:storybook             # construye en el VPS, sube a ghcr.io y recrea el contenedor
+pnpm deploy:storybook --dry-run   # solo imprime las guardas y los comandos
+
+# Docker — Storybook image → ghcr.io (a mano)
 docker buildx build --platform linux/amd64 -t ghcr.io/studiolxd/studiolxd-brand:latest --push .
 ```
 
@@ -461,6 +465,15 @@ justo lo que no se podía hacer publicando directo:
    (o desde npmjs.com). Hasta aquí la versión no existe en el registro, así que
    este es el último momento para mirarla (`npm stage view`/`download`) o
    retirarla (`npm stage reject`). Ver § «Dónde está la credencial de npm».
+7. Desplegar el Storybook: `pnpm deploy:storybook` (`scripts/deploy-storybook.mjs`).
+   Construye la imagen en el VPS D por el contexto Docker `vps-slxd` (amd64; el Mac
+   es arm64), sube `latest` y `vX.Y.Z` a GHCR y recrea el servicio `brand` del
+   compose `/root/studiolxd_brand` (`docker compose up -d --no-deps --pull never`).
+   Se niega a correr con el árbol sucio, sin el tag `v<version>` en `HEAD` o sin el
+   contexto `vps-slxd`; `--dry-run` imprime los comandos sin ejecutar nada. Host,
+   contexto, ruta e imagen: constantes en `scripts/lib/deploy-storybook.mjs`
+   (sobrescribibles con `STORYBOOK_DEPLOY_*`). Después, `https://brand.studiolxd.com`
+   tiene que responder 200 con un `last-modified` nuevo.
 
 > **`main` puede ir por delante del último tag.** Un push a `main` sin tag no publica nada: las apps instalan del registro de npm, y Swift Package Manager y JitPack resuelven por tag. Lo que esté en `main` sin publicar va en el CHANGELOG bajo `## [Sin publicar]` hasta que se saque la versión (pasos 1–6). Lo que no se empuja nunca es un `main` con `release:check` en rojo. Esta regla sustituye a la de la época de los tags de git («cada push a `main` con cambios funcionales lleva tag»), cuando un consumidor podía leer `main` directamente.
 >

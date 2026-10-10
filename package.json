@@ -984,7 +984,8 @@
     "test:stories": "vitest run --project storybook --project storybook-dark",
     "build:all": "pnpm build:tokens && pnpm build:lib && pnpm build:css && pnpm build:tokens-css && pnpm build:fonts-css && pnpm build:icons && pnpm build:icon-glyphs && pnpm build:email-assets && pnpm build:native-icons",
     "release:check": "node scripts/release-check.mjs",
-    "release:npm": "node scripts/publish-npm.mjs"
+    "release:npm": "node scripts/publish-npm.mjs",
+    "deploy:storybook": "node scripts/deploy-storybook.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
