@@ -57,7 +57,7 @@ final class TokensTests: XCTestCase {
     func testEveryTextStyleBuildsAFont() {
         for style in BrandTextStyle.allCases {
             XCTAssertGreaterThan(style.size, 0)
-            XCTAssertGreaterThanOrEqual(style.lineSpacing, 0)
+            XCTAssertGreaterThanOrEqual(style.lineHeight, 1)
             _ = Font.brand(style)
         }
     }

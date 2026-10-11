@@ -7,6 +7,16 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [55.0.0] — 2026-10-11
+
+> **Major, solo nativo (SwiftUI).** La web no cambia: una app React o SCSS puede subir de la 54 a la 55 sin tocar nada.
+
+### Breaking
+
+- **`BrandTextStyle.lineSpacing`** (SwiftUI) fuera, sin paso previo por obsoleto: solo existía para `brandTextStyle`,
+  retirado en la v54, y no la usa nadie (Homenize tampoco). El interlineado lo pone `brandLinedFont`; quien necesite el
+  múltiplo tiene `lineHeight`.
+
 ## [54.0.0] — 2026-10-11
 
 > **Major.** Se retiran los últimos alias obsoletos, que no usaba ninguna app de la suite. Sale el mismo día que la

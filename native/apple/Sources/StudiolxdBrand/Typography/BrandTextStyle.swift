@@ -60,11 +60,6 @@ public enum BrandTextStyle: CaseIterable, Sendable {
     }
 }
 
-extension BrandTextStyle {
-    /// El interlineado extra que pide SwiftUI (`.lineSpacing(_:)`): lo que sobra de `lineHeight` sobre el alto natural.
-    public var lineSpacing: CGFloat { size * (lineHeight - 1) }
-}
-
 extension Font {
     /// La fuente de un estilo de texto de la marca. Registra las fuentes la primera vez
     /// (ver `StudiolxdBrand.registerFonts()`).
