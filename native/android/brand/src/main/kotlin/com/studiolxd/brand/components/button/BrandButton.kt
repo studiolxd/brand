@@ -89,7 +89,7 @@ private fun buttonColors(variant: ButtonVariant, tone: ButtonTone, destructive: 
             ButtonVariant.Primary -> ButtonColors(T.primaryDisabledBg.current, T.primaryDisabledColor.current, T.primaryDisabledBorder.current)
             ButtonVariant.Outline -> ButtonColors(T.outlineBg.current, T.outlineDisabledColor.current, T.outlineDisabledBorder.current)
             ButtonVariant.Ghost -> ButtonColors(T.ghostBg.current, T.ghostDisabledColor.current, T.ghostBorder.current)
-            ButtonVariant.Text -> ButtonColors(T.textBg.current, T.textDisabledColor.current, T.textBorder.current, T.textUnderlineWidth.current)
+            ButtonVariant.Text -> ButtonColors(T.textBg.current, T.textDisabledColor.current, T.textBorder.current, T.textUnderlineWidth)
         }
     }
     return when (variant) {
@@ -139,7 +139,7 @@ private fun buttonColors(variant: ButtonVariant, tone: ButtonTone, destructive: 
             val underline = if (ink) {
                 if (active) T.textInkHoverUnderlineWidth else T.textInkUnderlineWidth
             } else {
-                if (active) T.textHoverUnderlineWidth.current else T.textUnderlineWidth.current
+                if (active) T.textHoverUnderlineWidth else T.textUnderlineWidth
             }
             ButtonColors(background, foreground, border, underline)
         }

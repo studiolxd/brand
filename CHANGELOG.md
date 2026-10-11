@@ -7,6 +7,33 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [56.0.0] — 2026-10-11
+
+> **Major** (lo rompe el tipo de dos tokens nativos). En la web no cambia ninguna API: cambia cómo se ve el enlace en
+> oscuro.
+
+### Breaking
+
+- **El enlace se subraya en reposo también en superficie oscura.** Hasta ahora el enlace suelto (navegación, pie, menús,
+  `Button variant="text"`) iba en oscuro en amarillo sin línea, y la línea aparecía en hover. Ahora lleva la misma línea
+  que en claro: en reposo, y desaparece en hover. El amarillo junto al texto blanco da 1,5:1 (WCAG 1.4.1 pide 3:1 u otra
+  marca), y el sistema no puede saber si un enlace está suelto o entre texto: solo reconocía como texto corrido `<p>`,
+  `<label>`, los títulos y `Prose`, así que un enlace dentro de un `<li>`, una celda o un `<div>` con texto quedaba sin
+  marca. Fuera los tokens `link.surface-dark-{underline-width,hover-underline-width,decoration-line,hover-decoration-line}`
+  y sus homólogos en `button.text`; el color amarillo sigue.
+- **Fuera los tokens `link.in-text-{underline-width,hover-underline-width,decoration-line,hover-decoration-line}`** y la
+  regla que los aplicaba dentro de `<p>`, `<label>`, títulos y `Prose` (D41): con el enlace subrayado siempre, repetían
+  los valores del enlace por defecto. Quien los leyera (`--link-in-text-*`, `$slxd-link-in-text-*`) pasa a
+  `--link-decoration-line`, `--link-hover-decoration-line`, `--link-underline-width` y `--link-hover-underline-width`. En nativo
+  salen igual `BrandLinkTokens.inText*`: `underlineWidth`, `hoverUnderlineWidth`.
+- **Nativo:** `BrandLinkTokens.underlineWidth`/`hoverUnderlineWidth` y `BrandButtonTokens.textUnderlineWidth`/
+  `textHoverUnderlineWidth` pasan de `BrandSchemeValue` a un valor suelto (`CGFloat` en SwiftUI, `Dp` en Compose): ya no
+  cambian con la superficie. Quien los leía con `.value(for: scheme)` / `.current` quita esa llamada.
+
+### Otros cambios
+
+- `ThemeSwitcher`: la opción en hover se subraya ahora también en oscuro (leía la línea de reposo del enlace).
+
 ## [55.0.0] — 2026-10-11
 
 > **Major, solo nativo (SwiftUI).** La web no cambia: una app React o SCSS puede subir de la 54 a la 55 sin tocar nada.

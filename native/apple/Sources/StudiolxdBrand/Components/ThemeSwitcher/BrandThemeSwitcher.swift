@@ -272,7 +272,6 @@ private struct ThemeListOption: View {
     let action: () -> Void
 
     @Environment(\.isFocused) private var isFocused
-    @Environment(\.colorScheme) private var scheme
     @State private var isHovering = false
     @Environment(\.themeSwitcherForcedHover) private var forcedHover
 
@@ -290,7 +289,7 @@ private struct ThemeListOption: View {
                 Text(verbatim: text).brandUnderlinedText()
             }
             .environment(\.brandTextUnderline, showsLine
-                ? BrandTextUnderline(width: BrandLinkTokens.underlineWidth.value(for: scheme), offset: BrandLinkTokens.underlineOffset,
+                ? BrandTextUnderline(width: BrandLinkTokens.underlineWidth, offset: BrandLinkTokens.underlineOffset,
                                      color: BrandColorRoles.text)
                 : nil)
             // `.theme-switcher__option` lleva `font: inherit`: el `line-height` es el del cuerpo (`text.line-height`).

@@ -334,7 +334,7 @@ export const ContratoPie: Story = {
     // Y se ven como cualquier enlace del sistema: el tono por defecto de
     // `Link`, el mismo que un `<a>` crudo, no el de tinta. En claro los dos
     // tonos coinciden, así que la comprobación se hace también en oscuro, que
-    // es donde se separan (amarillo sin línea, frente a blanco con línea).
+    // es donde se separan (amarillo frente a blanco).
     const patron = document.createElement('a');
     patron.href = '#';
     patron.textContent = 'patrón';

@@ -8,10 +8,6 @@ $slxd-link-hover-underline-width: 0px; // Grosor del subrayado en hover (en clar
 $slxd-link-decoration-line: underline; // Si el enlace se subraya en reposo (`text-decoration-line`): `underline` o `none`. En claro, sí
 $slxd-link-hover-decoration-line: none; // Si el enlace se subraya en hover (`text-decoration-line`): en claro la línea desaparece
 $slxd-link-underline-offset: 0.25rem; // Separación entre el texto y la línea. Se reserva como `padding-block-end` (el hueco de la línea: nada se mueve al aparecer) y la línea se coloca con `text-underline-position: under` y `text-underline-offset: calc(<separación> - <grosor>)`, de modo que cae en el borde inferior de ese hueco
-$slxd-link-in-text-underline-width: 1px; // Enlace dentro de texto corrido (párrafo, etiqueta, Prose): línea en reposo, en las DOS superficies. Entre texto, el color no basta para distinguirlo (en oscuro, amarillo sobre blanco da 1,5:1; WCAG 1.4.1 pide 3:1 u otra marca), así que la marca es la línea (D41). Sin par oscuro a propósito
-$slxd-link-in-text-hover-underline-width: 0px; // Enlace dentro de texto corrido: sin línea en hover, en las dos superficies (D41)
-$slxd-link-in-text-decoration-line: underline; // Enlace dentro de texto corrido: subrayado en reposo, en las DOS superficies (D41). Sin par oscuro a propósito
-$slxd-link-in-text-hover-decoration-line: none; // Enlace dentro de texto corrido: sin subrayado en hover, en las dos superficies (D41)
 $slxd-link-icon-gap: 0.5rem; // Aire entre el icono y el texto del enlace
 $slxd-link-cursor: pointer; // Cursor
 $slxd-link-focus-ring-width: 2px; // Grosor del anillo de foco

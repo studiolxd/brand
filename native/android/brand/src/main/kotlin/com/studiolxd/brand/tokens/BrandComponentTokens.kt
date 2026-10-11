@@ -182,9 +182,9 @@ object BrandButtonTokens {
     /** Token `button.text.line-height` — Line height Factor sin unidad. */
     val textLineHeight: Float = 1f
     /** Token `button.text.underline-width` — Grosor del subrayado en reposo (`text-decoration-thickness`). La variante `text` se subraya igual que `Link` —`text-decoration` con grosor y distancia de token (D64)—, y apunta a sus tokens para que las dos piezas no puedan separarse. El icono del botón no se subraya */
-    val textUnderlineWidth: BrandSchemeValue<Dp> = BrandSchemeValue(1.dp, 0.dp)
+    val textUnderlineWidth: Dp = 1.dp
     /** Token `button.text.hover-underline-width` — Grosor de la línea en hover y en activo — el de `Link` */
-    val textHoverUnderlineWidth: BrandSchemeValue<Dp> = BrandSchemeValue(0.dp, 1.dp)
+    val textHoverUnderlineWidth: Dp = 0.dp
     /** Token `button.text.ink-color` — tone=ink: la tinta de la superficie, como en Link */
     val textInkColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFFFFF))
     /** Token `button.text.ink-underline-width` — tone=ink: grosor del subrayado en reposo */
@@ -1184,15 +1184,11 @@ object BrandLinkTokens {
     /** Token `link.hover-color` — Color en hover */
     val hoverColor: BrandSchemeValue<Color> = BrandSchemeValue(Color(0xFF111E30), Color(0xFFFFCD00))
     /** Token `link.underline-width` — Grosor del subrayado (`text-decoration-thickness`). El subrayado es `text-decoration` con grosor y distancia de token (D64): se mantiene en alto contraste, se imprime y lo reconocen las herramientas de accesibilidad. Si se pinta o no lo dice `link.decoration-line`: un grosor 0 no oculta la línea (el navegador pinta como mínimo un píxel de dispositivo) */
-    val underlineWidth: BrandSchemeValue<Dp> = BrandSchemeValue(1.dp, 0.dp)
+    val underlineWidth: Dp = 1.dp
     /** Token `link.hover-underline-width` — Grosor del subrayado en hover (en claro no hay línea: la quita `link.hover-decoration-line`) */
-    val hoverUnderlineWidth: BrandSchemeValue<Dp> = BrandSchemeValue(0.dp, 1.dp)
+    val hoverUnderlineWidth: Dp = 0.dp
     /** Token `link.underline-offset` — Separación entre el texto y la línea. Se reserva como `padding-block-end` (el hueco de la línea: nada se mueve al aparecer) y la línea se coloca con `text-underline-position: under` y `text-underline-offset: calc(<separación> - <grosor>)`, de modo que cae en el borde inferior de ese hueco */
     val underlineOffset: Dp = 4.dp
-    /** Token `link.in-text-underline-width` — Enlace dentro de texto corrido (párrafo, etiqueta, Prose): línea en reposo, en las DOS superficies. Entre texto, el color no basta para distinguirlo (en oscuro, amarillo sobre blanco da 1,5:1; WCAG 1.4.1 pide 3:1 u otra marca), así que la marca es la línea (D41). Sin par oscuro a propósito */
-    val inTextUnderlineWidth: Dp = 1.dp
-    /** Token `link.in-text-hover-underline-width` — Enlace dentro de texto corrido: sin línea en hover, en las dos superficies (D41) */
-    val inTextHoverUnderlineWidth: Dp = 0.dp
     /** Token `link.icon-gap` — Aire entre el icono y el texto del enlace */
     val iconGap: Dp = 8.dp
     /** Token `link.focus-ring-width` — Grosor del anillo de foco */

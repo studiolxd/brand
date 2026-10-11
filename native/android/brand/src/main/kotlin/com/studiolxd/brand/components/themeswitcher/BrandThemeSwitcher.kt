@@ -406,7 +406,7 @@ private fun ThemeListOption(choice: BrandThemeChoice, text: String, isCurrent: B
     val source = remember { MutableInteractionSource() }
     val state = source.collectBrandInteractionState()
     val ink = BrandTheme.colors.text
-    val underline = BrandLinkTokens.underlineWidth.current
+    val underline = BrandLinkTokens.underlineWidth
     val offset = BrandLinkTokens.underlineOffset
     val showsLine = (state.hovered || state.pressed || LocalThemeSwitcherForcedHover.current == choice) && !isCurrent
     val weight: FontWeight = if (isCurrent) T.listCurrentFontWeight else BrandFontWeight.default

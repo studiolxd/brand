@@ -35,26 +35,6 @@
       "$type": "dimension",
       "$description": "Separación entre el texto y la línea. Se reserva como `padding-block-end` (el hueco de la línea: nada se mueve al aparecer) y la línea se coloca con `text-underline-position: under` y `text-underline-offset: calc(<separación> - <grosor>)`, de modo que cae en el borde inferior de ese hueco"
     },
-    "in-text-underline-width": {
-      "$value": "{border-width.default}",
-      "$type": "dimension",
-      "$description": "Enlace dentro de texto corrido (párrafo, etiqueta, Prose): línea en reposo, en las DOS superficies. Entre texto, el color no basta para distinguirlo (en oscuro, amarillo sobre blanco da 1,5:1; WCAG 1.4.1 pide 3:1 u otra marca), así que la marca es la línea (D41). Sin par oscuro a propósito"
-    },
-    "in-text-hover-underline-width": {
-      "$value": "0px",
-      "$type": "dimension",
-      "$description": "Enlace dentro de texto corrido: sin línea en hover, en las dos superficies (D41)"
-    },
-    "in-text-decoration-line": {
-      "$value": "underline",
-      "$type": "string",
-      "$description": "Enlace dentro de texto corrido: subrayado en reposo, en las DOS superficies (D41). Sin par oscuro a propósito"
-    },
-    "in-text-hover-decoration-line": {
-      "$value": "none",
-      "$type": "string",
-      "$description": "Enlace dentro de texto corrido: sin subrayado en hover, en las dos superficies (D41)"
-    },
     "icon-gap": {
       "$value": "{spacing.2}",
       "$type": "dimension",
@@ -83,32 +63,12 @@
     "surface-dark-color": {
       "$value": "{color.accent-2}",
       "$type": "color",
-      "$description": "Color — surface-dark: amarillo (accent-2), y sin línea en reposo"
+      "$description": "Color — surface-dark: amarillo (accent-2). La línea es la misma que en claro, sin par oscuro: subrayado en reposo y sin él en hover. El amarillo solo no basta para distinguirlo del texto blanco (1,5:1; WCAG 1.4.1 pide 3:1 u otra marca), y el DS no puede saber si un enlace está suelto o entre texto"
     },
     "surface-dark-hover-color": {
       "$value": "{color.accent-2}",
       "$type": "color",
-      "$description": "Hover — surface-dark: amarillo, con línea"
-    },
-    "surface-dark-underline-width": {
-      "$value": "0px",
-      "$type": "dimension",
-      "$description": "Sin línea en reposo — surface-dark"
-    },
-    "surface-dark-hover-underline-width": {
-      "$value": "{border-width.default}",
-      "$type": "dimension",
-      "$description": "Línea en hover — surface-dark"
-    },
-    "surface-dark-decoration-line": {
-      "$value": "none",
-      "$type": "string",
-      "$description": "Sin subrayado en reposo — surface-dark: el amarillo ya lo distingue fuera del texto corrido"
-    },
-    "surface-dark-hover-decoration-line": {
-      "$value": "underline",
-      "$type": "string",
-      "$description": "Subrayado en hover — surface-dark"
+      "$description": "Hover — surface-dark: amarillo; como en claro, sin línea"
     },
     "surface-dark-focus-ring-color": {
       "$value": "{color.text.on-dark}",

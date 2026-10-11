@@ -42,7 +42,7 @@ text-underline-offset: calc(var(--link-underline-offset) - var(--link-underline-
 
 La línea es siempre `currentColor`: subrayado y texto no pueden ir de distinto color. **Los iconos (SVG) de un enlace no se subrayan**: `text-decoration` decora texto, y la línea queda bajo el rótulo.
 
-**Si hay línea lo dice un token de `text-decoration-line`, no un grosor 0.** `text-decoration-thickness: 0` no oculta la línea —el navegador pinta como mínimo un píxel de dispositivo—, así que cada estado declara `underline` o `none` en su token (`link.decoration-line`, `link.hover-decoration-line`, sus pares `surface-dark-*`, `link.in-text-*`…) y el grosor solo dice cuánto mide.
+**Si hay línea lo dice un token de `text-decoration-line`, no un grosor 0.** `text-decoration-thickness: 0` no oculta la línea —el navegador pinta como mínimo un píxel de dispositivo—, así que cada estado declara `underline` o `none` en su token (`link.decoration-line`, `link.hover-decoration-line`, `site-nav.surface-dark-item-hover-decoration-line`…) y el grosor solo dice cuánto mide.
 
 Un componente que **viste sus propios enlaces** anula la línea de la base con `text-decoration-line: none; padding-block-end: 0` (o la shorthand `text-decoration: none`) en su clase. Basta con hacerlo en reposo: el hover de la base no escribe `text-decoration-*`, solo le pasa el estado a la regla de reposo por dos alias locales, así que una anulación en la clase vale también bajo el puntero.
 

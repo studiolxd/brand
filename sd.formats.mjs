@@ -819,7 +819,7 @@ function swiftComponentSource(groups, header) {
             : swiftColor(light.color);
           break;
         case 'points':
-          // Una medida con par oscuro (el subrayado de `Link`, que en oscuro desaparece en reposo) no puede ser un
+          // Una medida con par oscuro no puede ser un
           // número suelto: sale como `BrandSchemeValue`, que el componente resuelve con su `colorScheme`.
           type = dark ? 'BrandSchemeValue<CGFloat>' : 'CGFloat';
           literal = dark ? `BrandSchemeValue(light: ${trimNum(light.points)}, dark: ${trimNum(dark.points)})` : trimNum(light.points);

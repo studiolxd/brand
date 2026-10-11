@@ -10,17 +10,14 @@ export interface LinkProps extends React.ComponentPropsWithoutRef<'a'> {
   /** Abre en nueva pestaña con `rel="noopener noreferrer"`. */
   external?: boolean;
   /**
-   * Tono. `accent` (por defecto): el enlace de texto y de acción — prusia con
-   * línea en claro, amarillo con línea en hover en oscuro (el ejemplo es
+   * Tono. `accent` (por defecto): el enlace de texto y de acción — prusia en
+   * claro y amarillo en oscuro, con línea en reposo y ninguna en hover en las
+   * dos superficies (el ejemplo es
    * «¿olvidaste la contraseña?»). `ink`: el enlace utilitario (legal,
    * volver) — tinta, línea en reposo y ninguna en hover, en las dos
    * superficies. `accent-1`: acento 1 de la paleta (lavanda), solo en
    * superficie oscura — en claro la lavanda no contrasta (2,02:1) y cae al
    * tono por defecto; línea en reposo que desaparece en hover.
-   *
-   * Dentro de texto corrido (un párrafo, una etiqueta, un título, `Prose`)
-   * la línea va en reposo y se quita en hover en las dos superficies, sea
-   * cual sea el tono: lo decide el contenedor, no la prop.
    */
   tone?: 'accent' | 'ink' | 'accent-1';
   /** Un icono junto al texto («← Volver», «Descargar ↓»). Decorativo: el texto ya lo dice. Mide lo que el texto del enlace (`1em`) y sube y baja con él. */

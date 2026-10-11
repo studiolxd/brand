@@ -182,9 +182,6 @@ html.dark {
   --button-outline-active-bg: var(--color-white); /** Active background — surface-dark */
   --button-outline-active-border: var(--color-white); /** Active border color — surface-dark */
   --button-outline-focus-ring-color: var(--color-white); /** Focus ring color — surface-dark */
-  --button-text-underline-width: var(--link-underline-width); /** Grosor de la línea en reposo — surface-dark: el de `Link`, que sobre fondo oscuro no lleva línea en reposo */
-  --button-text-decoration-line: var(--link-decoration-line); /** Si se subraya en reposo — surface-dark: el de `Link`, sin línea */
-  --button-text-hover-decoration-line: var(--link-hover-decoration-line); /** Si se subraya en hover y activo — surface-dark: el de `Link`, con línea */
   --button-primary-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark (blanco) */
   --button-destructive-color: var(--color-destructive-text-on-dark); /** Text color — surface-dark */
   --button-destructive-border: var(--color-destructive-text-on-dark); /** Border color — surface-dark */
@@ -207,7 +204,6 @@ html.dark {
   --button-ghost-hover-bg: var(--color-text-on-dark); /** Hover background — surface-dark */
   --button-ghost-active-bg: var(--color-text-on-dark); /** Active background — surface-dark */
   --button-ghost-disabled-color: var(--color-text-muted-on-dark); /** Text color when disabled — surface-dark */
-  --button-text-hover-underline-width: var(--link-hover-underline-width); /** Grosor de la línea en hover y activo — surface-dark: el de `Link`, que sobre fondo oscuro pone la línea en el hover */
   --button-text-color: var(--link-color); /** Text color — surface-dark */
   --button-text-hover-color: var(--link-hover-color); /** Hover text color — surface-dark */
   --button-text-ink-color: var(--link-ink-color); /** tone=ink sobre superficie oscura */

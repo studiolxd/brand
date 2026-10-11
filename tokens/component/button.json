@@ -797,26 +797,6 @@
         "$type": "color",
         "$description": "Active border — stays transparent"
       },
-      "surface-dark-underline-width": {
-        "$value": "{link.surface-dark-underline-width}",
-        "$type": "dimension",
-        "$description": "Grosor de la línea en reposo — surface-dark: el de `Link`, que sobre fondo oscuro no lleva línea en reposo"
-      },
-      "surface-dark-hover-underline-width": {
-        "$value": "{link.surface-dark-hover-underline-width}",
-        "$type": "dimension",
-        "$description": "Grosor de la línea en hover y activo — surface-dark: el de `Link`, que sobre fondo oscuro pone la línea en el hover"
-      },
-      "surface-dark-decoration-line": {
-        "$value": "{link.surface-dark-decoration-line}",
-        "$type": "string",
-        "$description": "Si se subraya en reposo — surface-dark: el de `Link`, sin línea"
-      },
-      "surface-dark-hover-decoration-line": {
-        "$value": "{link.surface-dark-hover-decoration-line}",
-        "$type": "string",
-        "$description": "Si se subraya en hover y activo — surface-dark: el de `Link`, con línea"
-      },
       "surface-dark-color": {
         "$value": "{link.surface-dark-color}",
         "$type": "color",

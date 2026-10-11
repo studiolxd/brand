@@ -20,9 +20,9 @@ type Story = StoryObj<typeof Link>;
 export const PorDefecto: Story = {};
 
 /**
- * Dentro de un párrafo: es texto, no un control. Dentro de texto corrido la
- * línea va en reposo y se quita en hover en las DOS superficies: en oscuro el
- * amarillo no se distingue lo bastante de la tinta blanca que lo rodea.
+ * Dentro de un párrafo: es texto, no un control. La línea va en reposo y se
+ * quita en hover en las DOS superficies: en oscuro el amarillo no se distingue
+ * lo bastante de la tinta blanca que lo rodea.
  */
 export const EnTexto: Story = {
   render: () => (
@@ -33,7 +33,7 @@ export const EnTexto: Story = {
 };
 
 export const ContratoEnTextoOscuro: Story = {
-  name: 'Test — en texto corrido, línea en reposo y ninguna en hover también en oscuro; el suelto no cambia',
+  name: 'Test — en oscuro, línea en reposo y ninguna en hover, en texto corrido y suelto',
   tags: ['!dev'],
   parameters: {
     surface: 'dark',
@@ -59,10 +59,12 @@ export const ContratoEnTextoOscuro: Story = {
     await waitFor(() => expect(getComputedStyle(enTexto).textDecorationLine).toBe('underline'));
     await expect(getComputedStyle(enTexto).textDecorationThickness).toBe('1px');
     await expect(grosor(enTexto, '--link-hover-decoration-line')).toBe('none');
-    // Suelto: en oscuro, sin línea en reposo y con línea en hover, como siempre.
-    await expect(getComputedStyle(suelto).textDecorationLine).toBe('none');
-    await expect(grosor(suelto, '--link-hover-decoration-line')).toBe('underline');
-    await expect(grosor(suelto, '--link-hover-underline-width')).toBe('1px');
+    // Suelto: igual. En oscuro el amarillo solo no lo distingue del texto
+    // blanco (1,5:1), y el DS no sabe si un enlace está suelto o entre texto,
+    // así que la línea no depende del contenedor.
+    await expect(getComputedStyle(suelto).textDecorationLine).toBe('underline');
+    await expect(getComputedStyle(suelto).textDecorationThickness).toBe('1px');
+    await expect(grosor(suelto, '--link-hover-decoration-line')).toBe('none');
   },
 };
 
@@ -73,10 +75,7 @@ export const Externo: Story = {
 
 export const Contrato: Story = {
   name: 'Test — externo seguro, atributos reenviados, misma cara que un <a> crudo',
-  // Solo en claro: afirma la línea en reposo del enlace suelto, que en oscuro
-  // no la lleva (la tinta amarilla ya lo distingue; ver `surface-dark-*`).
-  tags: ['!dev', 'solo-claro'],
-  parameters: { chromatic: SOLO_CLARO },
+  tags: ['!dev'],
   render: () => (
     <>
       <Link href="https://studiolxd.com" external data-testid="externo">Externo</Link>

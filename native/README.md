@@ -169,9 +169,9 @@ grupos crece con cada componente que se porta (sale de los `var(--…)` de su CS
 - **Colores**: `Color` dinámico. El lado oscuro es el `surface-dark-<nombre>` hermano **o el heredado por referencia**
   (un token que apunta a otro con par oscuro hereda ese par, la misma regla que `surface-dark-derived.css`).
   `transparent` sale como color con alfa 0.
-- **Medidas** (`rem`/`px`, `calc()` de rem y px): `CGFloat` en puntos. Una medida con par oscuro (hoy, el grosor del
-  subrayado de `Link` y de `Button text`, que en oscuro desaparece en reposo) sale como `BrandSchemeValue<CGFloat>`:
-  `BrandButtonTokens.textUnderlineWidth.value(for: scheme)`.
+- **Medidas** (`rem`/`px`, `calc()` de rem y px): `CGFloat` en puntos. Una medida con par oscuro sale como
+  `BrandSchemeValue<CGFloat>` y se resuelve con `.value(for: scheme)`. Hoy no hay ninguna: el grosor del subrayado de
+  `Link` y de `Button text`, la única que lo era, es el mismo en las dos superficies desde la v56.
 - **`em`**: fracción del tamaño de fuente del propio componente (`switcher.track-width` = 2.75 → 2.75 × tamaño).
 - Duraciones (segundos), curvas (`BrandCubicBezier`), sombras (`BrandShadow`), pesos (`Int`) y familias (`String`).
 - **Kotlin** (`BrandComponentTokens.kt`, mismos grupos y mismas reglas): `object Brand<Grupo>Tokens`. Todo color es un

@@ -53,7 +53,7 @@ Dos enlaces fijos —la bandeja y las preferencias—, debajo del botón de marc
 
 Los dos enlaces son **enlaces corrientes del sistema** —el tono por defecto de `Link`, el que tiene cualquier enlace dentro de una app— y van **uno por línea**, que es lo que cabe centrado a 360 px. Son los únicos sitios a los que se navega desde el panel: tienen que verse y comportarse como enlaces, no como una variante aparte.
 
-Iban en tono tinta (`link--ink`). **En claro los dos tonos son idénticos** —tinta, línea en reposo y ninguna en hover: el enlace por defecto del sistema tampoco tiene color propio (ver `Link`)—, así que el cambio no se nota ahí. Donde sí se nota es **en superficie oscura**: en tinta salían en blanco y con línea en reposo, y ahora salen en amarillo, sin línea en reposo y con línea en hover, que es como se lee cualquier otro enlace del sistema sobre fondo oscuro.
+Iban en tono tinta (`link--ink`). **En claro los dos tonos son idénticos** —tinta, línea en reposo y ninguna en hover: el enlace por defecto del sistema tampoco tiene color propio (ver `Link`)—, así que el cambio no se nota ahí. Donde sí se nota es **en superficie oscura**: en tinta salían en blanco, y ahora salen en amarillo, que es como se lee cualquier otro enlace del sistema sobre fondo oscuro.
 
 Los dos se montan sobre el router de la aplicación con `renderLink`, igual que en `SiteNav` o `LegalFooter`: el panel pone `href` y la clase que les da su talla; el consumidor pone el `Link` (ver `Link`). Un `renderLink` que no propague todo lo que recibe se deja por el camino esa cara.
 

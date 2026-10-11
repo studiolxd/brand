@@ -2,7 +2,7 @@
 // Captura una story de Storybook en claro u oscuro, para compararla con la captura de SwiftUI.
 //
 //   node native/apple/scripts/capture-story.mjs <storyId> <salida.png> [--dark] [--args "k:v;k2:v2"]
-//        [--width 480] [--selector "#storybook-root"] [--click "#storybook-root button"] [--hide "#storybook-root"] [--pad 16] [--height 800] [--scale 2] [--url http://localhost:6006]
+//        [--width 480] [--selector "#storybook-root"] [--click "#storybook-root button"] [--hover "#storybook-root button"] [--hide "#storybook-root"] [--pad 16] [--height 800] [--scale 2] [--url http://localhost:6006]
 //
 // Requiere el Storybook en marcha (`pnpm storybook`). `storyId` es el de la URL (`atoms-button--primary`).
 // Recorta al elemento de la story (con 16 px de margen) y fija el factor de escala, para que las parejas
@@ -29,6 +29,7 @@ const scale = Number(opt('scale', 2));
 const selector = opt('selector', '#storybook-root');
 const args = opt('args', '');
 const click = opt('click', '');
+const hover = opt('hover', '');
 const hide = opt('hide', '');
 const pad = Number(opt('pad', 16));
 
@@ -51,6 +52,8 @@ try {
   // sin sacarlo de la maqueta: `visibility: hidden`, por CSSOM.
   if (hide) await page.evaluate((sel) => document.querySelectorAll(sel).forEach((el) => el.style.setProperty('visibility', 'hidden')), hide);
   await page.waitForSelector(selector, { timeout: 20000 });
+  // `--hover` deja el puntero sobre un elemento: el estado de hover de verdad, no una clase que lo imite.
+  if (hover) await page.locator(hover).first().hover();
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(400);
   if (dark) {

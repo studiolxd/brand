@@ -7,7 +7,7 @@ import com.studiolxd.brand.BrandTheme
 
 /**
  * Un valor de token con su cara clara y su cara oscura (`surface-dark-*` de la web, o heredada por referencia).
- * Todo color de componente generado lo es; también las medidas con par oscuro (p. ej. el subrayado de `Button text`).
+ * Todo color de componente generado lo es; también las medidas con par oscuro.
  * Se resuelve con [current] (esquema de [BrandTheme]) o con [value] (esquema explícito).
  */
 @Immutable
