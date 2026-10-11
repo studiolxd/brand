@@ -54,8 +54,6 @@ export interface NumberInputProps
   error?: boolean;
   id?: string;
   name?: string;
-  /** @deprecated Usa el atributo nativo `aria-describedby`. */
-  describedBy?: string;
   /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
   className?: string;
   /**
@@ -101,7 +99,6 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
   error = false,
   id,
   name,
-  describedBy,
   decrementLabel,
   incrementLabel,
   className,
@@ -110,6 +107,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
   onBlur,
   onFocus,
   onKeyDown,
+  'aria-describedby': ariaDescribedBy,
   ...rest
 }: NumberInputProps, ref) {
   const t = useBrandMessages('numberInput', numberInputEs);
@@ -224,7 +222,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
         inputMode={decimal ? 'decimal' : 'numeric'}
         pattern={decimal ? '[0-9]*[.,]?[0-9]*' : '[0-9]*'}
         aria-invalid={error || undefined}
-        aria-describedby={describedBy}
+        aria-describedby={ariaDescribedBy}
         {...rest}
         id={id}
         name={name}

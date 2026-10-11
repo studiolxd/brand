@@ -25,7 +25,9 @@
  *
  * Además vigila los renombrados de la v51 (sus alias obsoletos se retiraron en
  * la v53): cada uno de `TOKEN_RENAMES_V51` existe con su nombre nuevo y ya no
- * con el viejo, ni como token ni como alias en ninguna salida.
+ * con el viejo, ni como token ni como alias en ninguna salida. Y que el
+ * mecanismo de alias, que se queda para el próximo renombrado, casa con el
+ * manifiesto: hay `deprecated-aliases.css` y su `@import` solo si hay alias.
  */
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -161,14 +163,18 @@ describe('D9: renombrados de la v51', () => {
     }
   });
 
-  it('los alias obsoletos se retiraron (v53): ningún token los declara y ninguna salida los emite', () => {
-    const declaring = tokens.filter((t) => t.extensions?.['com.studiolxd']?.deprecatedAliases).map(dotted);
-    expect(declaring).toEqual([]);
-    expect(existsSync(join(ROOT, 'src/tokens/deprecated-aliases.css'))).toBe(false);
-    expect(readFileSync(join(ROOT, 'src/tokens/index.css'), 'utf-8')).not.toContain('deprecated-aliases');
+  it('ningún nombre de la v51 vuelve como alias (se retiraron en la v53)', () => {
+    const olds = new Set(renames.map(([old]) => old));
+    const back = tokens.flatMap((t) => ((t.extensions?.['com.studiolxd']?.deprecatedAliases as string[] | undefined) ?? []).filter((a) => olds.has(a)));
+    expect(back).toEqual([]);
     const json = JSON.parse(readFileSync(join(ROOT, 'src/tokens/tokens.json'), 'utf-8'));
-    const scss = readFileSync(join(ROOT, 'src/tokens/scss/molecules/_modal.scss'), 'utf-8');
     for (const [old] of renames) expect(json[cssName(old)], old).toBeUndefined();
-    expect(scss).not.toContain('$slxd-modal-width-max');
+  });
+
+  it('deprecated-aliases.css y su @import existen solo si algún token declara alias', () => {
+    const hasAliases = tokens.some((t) => ((t.extensions?.['com.studiolxd']?.deprecatedAliases as string[] | undefined) ?? []).length > 0);
+    const imported = readFileSync(join(ROOT, 'src/tokens/index.css'), 'utf-8').includes('@import "./deprecated-aliases.css";');
+    expect(existsSync(join(ROOT, 'src/tokens/deprecated-aliases.css'))).toBe(hasAliases);
+    expect(imported).toBe(hasAliases);
   });
 });

@@ -92,8 +92,6 @@ export interface DatePickerProps {
   locale?: string;
   /** id aplicado al campo de texto */
   id?: string;
-  /** @deprecated Usa el atributo nativo `aria-describedby`. */
-  describedBy?: string;
   /** Ids de ayuda/error que describen el control (lo pone el campo). */
   'aria-describedby'?: string;
   /** Nombre accesible cuando el control va suelto. En un campo lo nombra la etiqueta. */
@@ -178,7 +176,6 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
   locale = 'es-ES',
   id,
   name,
-  describedBy,
   'aria-describedby': ariaDescribedBy,
   'aria-label': ariaLabel,
   calendarLabel,
@@ -228,7 +225,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
   const instanceId = useId();
   const invalidId = `${instanceId}-date-picker-invalid`;
   const describedByValue =
-    [describedBy ?? ariaDescribedBy, invalid ? invalidId : undefined].filter(Boolean).join(' ') ||
+    [ariaDescribedBy, invalid ? invalidId : undefined].filter(Boolean).join(' ') ||
     undefined;
 
   const handleOpenChange = useCallback(

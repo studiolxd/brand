@@ -17,8 +17,6 @@ export interface TextareaProps
   bare?: boolean;
   /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
   className?: string;
-  /** @deprecated Usa el atributo nativo `aria-describedby`. */
-  describedBy?: string;
 }
 
 /**
@@ -31,7 +29,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
   error = false,
   bare = false,
   className,
-  describedBy,
+  'aria-describedby': ariaDescribedBy,
   ...rest
 }, ref) {
   const classes = [
@@ -47,7 +45,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
       ref={ref}
       className={classes}
       aria-invalid={error || undefined}
-      aria-describedby={describedBy}
+      aria-describedby={ariaDescribedBy}
       {...rest}
     />
   );

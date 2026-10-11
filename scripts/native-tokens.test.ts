@@ -58,6 +58,14 @@ describe('tokens nativos: el modelo', () => {
     expect(roles.chartSeries1).toMatchObject({ light: '#1e7ff6', dark: '#1d7cf0' });
   });
 
+  it('un color global renombrado lleva su nombre viejo como alias nativo', () => {
+    const aliased = buildNativeModel([
+      { path: ['color', 'error-text-on-light'], $value: '#b30000', $extensions: { 'com.studiolxd': { deprecatedAliases: ['color.danger-text-on-light'] } } },
+      { path: ['color', 'error-text-on-dark'], $value: '#ff8585', $extensions: { 'com.studiolxd': { deprecatedAliases: ['color.danger-text-on-dark'] } } },
+    ]);
+    expect(aliased.colors.roles).toEqual([expect.objectContaining({ name: 'errorText', aliases: ['dangerText'] })]);
+  });
+
   it('un rol con un solo lado cae al mismo valor en el otro', () => {
     const role = model.colors.roles.find((r: { name: string }) => r.name === 'borderRecessive');
     expect(role).toMatchObject({ light: '#4a4a4a', dark: '#4a4a4a', oneSided: 'dark' });

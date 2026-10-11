@@ -47,8 +47,6 @@ export interface NumberInputProps extends Omit<ComponentPropsWithoutRef<'input'>
     error?: boolean;
     id?: string;
     name?: string;
-    /** @deprecated Usa el atributo nativo `aria-describedby`. */
-    describedBy?: string;
     /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
     className?: string;
     /**

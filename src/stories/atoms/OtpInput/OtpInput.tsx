@@ -31,8 +31,6 @@ export interface OtpInputProps {
   required?: boolean;
   error?: boolean;
   size?: 'sm' | 'md' | 'lg';
-  /** @deprecated Usa el atributo nativo `aria-describedby`. */
-  describedBy?: string;
   /** Ids de ayuda/error que describen el grupo de celdas (lo pone el campo). */
   'aria-describedby'?: string;
   /** Nombre accesible explícito del grupo: prevalece sobre `groupLabel`. */
@@ -79,7 +77,6 @@ export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>(function Otp
   required,
   error = false,
   size = 'md',
-  describedBy,
   'aria-describedby': ariaDescribedBy,
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
@@ -185,7 +182,7 @@ export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>(function Otp
       role="group"
       aria-label={ariaLabelledBy ? undefined : (ariaLabel ?? t('group', groupLabel))}
       aria-labelledby={ariaLabelledBy}
-      aria-describedby={describedBy ?? ariaDescribedBy}
+      aria-describedby={ariaDescribedBy}
       aria-invalid={error || undefined}
       className={[
         'otp-input',
@@ -208,7 +205,7 @@ export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>(function Otp
           disabled={disabled}
           readOnly={readOnly}
           required={required}
-          aria-describedby={i === 0 ? (describedBy ?? ariaDescribedBy) : undefined}
+          aria-describedby={i === 0 ? ariaDescribedBy : undefined}
           inputMode="numeric"
           pattern="\d*"
           maxLength={1}

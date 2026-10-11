@@ -48,7 +48,7 @@ export interface ConsentCategory {
     description?: string;
     /**
      * Categoría necesaria: siempre activa y sin interruptor operable. No se
-     * incluye en el objeto que devuelven `onSave`/`onChange` como algo que
+     * incluye en el objeto que devuelve `onChange` como algo que
      * decidir — se guarda siempre a `true`.
      */
     required?: boolean;
@@ -147,14 +147,6 @@ export interface ConsentPreferencesProps {
      * `value` cada vez que se abre.
      */
     onChange?: (value: ConsentValue) => void;
-    /**
-     * @deprecated Alias de `onChange`, por compatibilidad con quien ya lo
-     * pasaba. Desde que el panel dejó de tener botón «Guardar» (v25.32.0),
-     * `onSave` se llama en el mismo momento y con la misma decisión que
-     * `onChange` — en cada conmutación de interruptor, no al pulsar un guardado
-     * explícito que ya no existe. Pasa a `onChange`.
-     */
-    onSave?: (value: ConsentValue) => void;
     /** Superficie sobre la que se abre el panel. Default: `'sheet'`. */
     surface?: 'sheet' | 'modal';
     /** Borde por el que entra el panel (solo con `surface="sheet"`, la alternativa lateral que el sistema conserva para otros usos). Default: `'right'`. */
@@ -196,11 +188,10 @@ export interface ConsentPreferencesProps {
  *
  * **No hay pie de acciones**: ni «Guardar» ni «Aceptar todas»/«Rechazar
  * todas». Quien entra aquí viene a decidir categoría por categoría, así que
- * cada interruptor persiste al instante — se conmuta y `onChange` (u `onSave`,
- * su alias) se llama en el momento con la decisión completa. Las salidas de un
+ * cada interruptor persiste al instante — se conmuta y `onChange` se llama en el
+ * momento con la decisión completa. Las salidas de un
  * clic («Aceptar todas»/«Rechazar») viven en `ConsentBanner`, que es donde la
  * ePrivacy las pide. Sin `onChange` el panel lleva su propio estado interno,
- * sembrado de `value` cada vez que se abre, y sigue disparando `onSave` en
- * cada cambio.
+ * sembrado de `value` cada vez que se abre.
  */
-export declare function ConsentPreferences({ open, onOpenChange, categories, value, onChange, onSave, surface, side, title, closeLabel, alwaysOnLabel, container, className, }: ConsentPreferencesProps): import("react/jsx-runtime").JSX.Element;
+export declare function ConsentPreferences({ open, onOpenChange, categories, value, onChange, surface, side, title, closeLabel, alwaysOnLabel, container, className, }: ConsentPreferencesProps): import("react/jsx-runtime").JSX.Element;

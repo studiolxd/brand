@@ -126,9 +126,7 @@ extension View {
                                 relativeTo: textStyle))
     }
 
-    /// Un estilo de texto de la marca entero —fuente, caja de línea de CSS y tracking—, escalado con el tipo dinámico:
-    /// sustituye a `brandTextStyle(_:)`, que pone el interlineado solo entre líneas (una línea mide el alto natural de la
-    /// fuente y no el `line-height` de la web).
+    /// Un estilo de texto de la marca entero —fuente, caja de línea de CSS y tracking—, escalado con el tipo dinámico.
     ///
     /// ```swift
     /// Text("Tus viviendas").brandLinedFont(.heading2)

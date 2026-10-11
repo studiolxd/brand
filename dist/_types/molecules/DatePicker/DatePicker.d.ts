@@ -80,8 +80,6 @@ export interface DatePickerProps {
     locale?: string;
     /** id aplicado al campo de texto */
     id?: string;
-    /** @deprecated Usa el atributo nativo `aria-describedby`. */
-    describedBy?: string;
     /** Ids de ayuda/error que describen el control (lo pone el campo). */
     'aria-describedby'?: string;
     /** Nombre accesible cuando el control va suelto. En un campo lo nombra la etiqueta. */

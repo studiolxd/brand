@@ -8,7 +8,6 @@ const meta: Meta<typeof Textarea> = {
   parameters: { layout: 'padded' },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    describedBy: { table: { disable: true } },
   },
   args: {
     placeholder: 'Escribe algo…',

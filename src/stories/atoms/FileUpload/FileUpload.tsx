@@ -91,8 +91,6 @@ export interface FileUploadProps {
    * Sin ella, la del `Form` que lo envuelva; sin `Form`, `md`.
    */
   size?: FormSize;
-  /** @deprecated Usa el atributo nativo `aria-describedby`. */
-  describedBy?: string;
   /** Ids de ayuda/error que describen el control (lo pone el campo). */
   'aria-describedby'?: string;
   /**
@@ -213,7 +211,6 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
   error = false,
   id,
   name,
-  describedBy,
   'aria-describedby': ariaDescribedBy,
   'aria-label': ariaLabel,
   required,
@@ -343,7 +340,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
   // instrucción del control: se le cuelga al input como descripción, porque
   // visualmente lo acompaña pero no es su nombre.
   const hintId = `${inputId}-hint`;
-  const describedByIds = [describedBy ?? ariaDescribedBy, hintId].filter(Boolean).join(' ');
+  const describedByIds = [ariaDescribedBy, hintId].filter(Boolean).join(' ');
 
   const dropzoneText = t('dropzone', dropzoneLabel);
   const dropzoneHintText = t('dropzoneHint', dropzoneHintLabel);

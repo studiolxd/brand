@@ -66,7 +66,6 @@ const meta: Meta<typeof OnboardingShell> = {
   argTypes: {
     brand: { table: { disable: true } },
     preferences: { table: { disable: true } },
-    switchers: { table: { disable: true } },
     stepper: { table: { disable: true } },
     children: { table: { disable: true } },
     backAction: { table: { disable: true } },

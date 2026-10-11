@@ -22,14 +22,6 @@ export interface OnboardingShellProps {
      */
     preferences?: ReactNode;
     /**
-     * Alias histórico de `preferences`, de cuando el alta montaba la banda por
-     * su cuenta. Se conserva para no romper a quien ya lo pasa; en pantallas
-     * nuevas, `preferences`. Si se pasan los dos, manda `preferences`.
-     *
-     * @deprecated Usa `preferences`.
-     */
-    switchers?: ReactNode;
-    /**
      * Nombre accesible de la banda de preferencias. **Reenvío puro** al
      * `PublicPageShell`: sin él, la banda lee `publicPageShell.preferences`.
      */
@@ -118,4 +110,4 @@ export interface OnboardingShellMessages {
     /** Nombre accesible del grupo de acciones del pie. */
     actions: string;
 }
-export declare function OnboardingShell({ children, brand, preferences, switchers, preferencesLabel, stepper, primaryAction, backAction, exitAction, actionsLabel, id, shell, width, className, }: OnboardingShellProps): import("react/jsx-runtime").JSX.Element;
+export declare function OnboardingShell({ children, brand, preferences, preferencesLabel, stepper, primaryAction, backAction, exitAction, actionsLabel, id, shell, width, className, }: OnboardingShellProps): import("react/jsx-runtime").JSX.Element;

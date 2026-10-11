@@ -24,8 +24,6 @@ export interface StepsProps {
     orientation?: 'vertical' | 'horizontal';
     /** Color de la marca. Por defecto `primary`. */
     tone?: StepMarkerTone;
-    /** @deprecated Usar `tone`. Se mantiene como alias por compatibilidad. */
-    badgeVariant?: StepMarkerTone;
     /** Nivel semántico del título de cada paso. Por defecto `3`. */
     titleLevel?: HeadingLevel;
     /** Talla del título de cada paso. Por defecto `1` (14px, la de la etiqueta de `Stepper`). */
@@ -51,7 +49,7 @@ export interface StepsProps {
  * repetirla en voz alta sobraría. La línea que une un paso con el siguiente
  * comparte color y grosor con la de `Stepper` (`step.connector-*`).
  */
-export declare function Steps({ items, orientation, tone, badgeVariant, titleLevel, titleSize, label, children, className, id, }: StepsProps): import("react/jsx-runtime").JSX.Element;
+export declare function Steps({ items, orientation, tone, titleLevel, titleSize, label, children, className, id, }: StepsProps): import("react/jsx-runtime").JSX.Element;
 export interface StepProps extends Omit<React.ComponentPropsWithoutRef<'li'>, 'title'> {
     /** Título del paso. */
     title: ReactNode;

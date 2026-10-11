@@ -44,45 +44,45 @@ function f({ value: r, onChange: i, options: a, disabled: l, size: f = "md", cou
 		})]
 	});
 }
-var p = i(function({ value: e, defaultCountry: t = "ES", placeholder: n, disabled: s, error: c = !1, size: u = "md", id: d, name: p, describedBy: m, "aria-describedby": h, "aria-label": g, autoComplete: _, required: v, readOnly: y, onChange: b, onBlur: x, onFocus: S, countryLabel: C, internationalLabel: w, container: T, className: E }, D) {
+var p = i(function({ value: e, defaultCountry: t = "ES", placeholder: n, disabled: s, error: c = !1, size: u = "md", id: d, name: p, "aria-describedby": m, "aria-label": h, autoComplete: g, required: _, readOnly: v, onChange: y, onBlur: b, onFocus: x, countryLabel: S, internationalLabel: C, container: w, className: T }, E) {
 	return /* @__PURE__ */ o(l, {
 		className: [
 			"input-phone",
 			c ? "input-phone--error" : "",
 			u === "md" ? "" : `input-phone--${u}`,
-			E ?? ""
+			T ?? ""
 		].filter(Boolean).join(" "),
 		value: e,
 		defaultCountry: t,
 		placeholder: n,
 		disabled: s,
-		readOnly: y,
-		required: v,
-		autoComplete: _,
+		readOnly: v,
+		required: _,
+		autoComplete: g,
 		id: d,
 		name: p,
 		inputComponent: a(() => i(function(e, t) {
 			return /* @__PURE__ */ o("input", {
 				...e,
 				ref: (e) => {
-					r(t, e), r(D, e);
+					r(t, e), r(E, e);
 				},
 				className: "input-phone__number"
 			});
-		}), [D]),
+		}), [E]),
 		countrySelectComponent: f,
 		countrySelectProps: {
 			size: u,
-			countryLabel: C,
-			internationalLabel: w,
-			container: T
+			countryLabel: S,
+			internationalLabel: C,
+			container: w
 		},
-		onChange: (e) => b?.(e),
-		onBlur: x,
-		onFocus: S,
+		onChange: (e) => y?.(e),
+		onBlur: b,
+		onFocus: x,
 		numberInputProps: {
-			"aria-describedby": h ?? m,
-			"aria-label": g,
+			"aria-describedby": m,
+			"aria-label": h,
 			"aria-invalid": c || void 0
 		}
 	});

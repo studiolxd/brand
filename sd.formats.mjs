@@ -171,8 +171,73 @@ export function registerJsonVariablesFormat(StyleDictionary) {
   StyleDictionary.registerFormat({
     name: 'json/css-variables',
     format: ({ dictionary }) => {
-      const entries = dictionary.allTokens.map((token) => [`--${token.name}`, String(token.$value ?? token.value)]);
+      // Detrás de cada token renombrado, su nombre antiguo con el mismo valor
+      // (alias obsoleto, ver `deprecatedAliasesOf`).
+      const entries = dictionary.allTokens.flatMap((token) => {
+        const value = String(token.$value ?? token.value);
+        return [
+          [`--${token.name}`, value],
+          ...deprecatedAliasesOf(token).map((alias) => [`--${aliasName(token, alias)}`, value]),
+        ];
+      });
       return `${JSON.stringify(Object.fromEntries(entries), null, 2)}\n`;
+    },
+  });
+}
+
+/* ---------------------------------------------------------------------------
+ * Alias obsoletos de los tokens renombrados
+ *
+ * Un token renombrado conserva su nombre viejo durante un major (la misma
+ * política que las props). Para no romper a quien lo lee por el nombre viejo,
+ * el token NUEVO declara sus nombres antiguos en
+ * `$extensions["com.studiolxd"].deprecatedAliases` (rutas con puntos, como en
+ * los JSON) y el build los emite en las tres salidas web:
+ *
+ * - CSS: `src/tokens/deprecated-aliases.css` (lo genera `sd.config.mjs` solo
+ *   si hay algún alias), con `--viejo: var(--nuevo)` bajo `:root` y bajo cada
+ *   selector de superficie, para que el alias LEA el valor de la superficie en
+ *   la que está.
+ * - SCSS: `$slxd-viejo: $slxd-nuevo;` al final del mismo fichero del token
+ *   (`scss/variables-with-deprecated-aliases`).
+ * - `tokens.json`: la clave vieja con el mismo valor resuelto.
+ *
+ * En nativo solo los llevan los colores globales (ver `buildColors`).
+ *
+ * Hoy no hay ningún alias: los de la v51 se retiraron en la v53. El mecanismo
+ * se queda para el próximo renombrado; cómo usarlo, en la regla 13 de
+ * `CLAUDE.md`.
+ * ------------------------------------------------------------------------- */
+
+/** Las rutas antiguas (con puntos) de un token renombrado; `[]` si no lo es. */
+export function deprecatedAliasesOf(token) {
+  return token.$extensions?.['com.studiolxd']?.deprecatedAliases ?? [];
+}
+
+/**
+ * El nombre de salida de un alias, con el mismo prefijo de plataforma que el
+ * token (`slxd-` en SCSS, ninguno en CSS/JSON): el nombre del token termina en
+ * su ruta unida por guiones, y lo que haya delante es el prefijo.
+ */
+function aliasName(token, alias) {
+  const own = token.path.join('-');
+  const prefix = token.name.endsWith(own) ? token.name.slice(0, token.name.length - own.length) : '';
+  return `${prefix}${alias.split('.').join('-')}`;
+}
+
+export function registerDeprecatedAliasFormats(StyleDictionary) {
+  StyleDictionary.registerFormat({
+    name: 'scss/variables-with-deprecated-aliases',
+    format: async (args) => {
+      const base = await StyleDictionary.hooks.formats['scss/variables'](args);
+      const lines = args.dictionary.allTokens.flatMap((token) =>
+        deprecatedAliasesOf(token).map(
+          (alias) =>
+            `$${aliasName(token, alias)}: $${token.name}; // OBSOLETO (se retira en el próximo major): usar $${token.name}`,
+        ),
+      );
+      if (!lines.length) return base;
+      return `${base.replace(/\n*$/, '\n')}\n// Alias obsoletos: nombres anteriores a la convención D9.\n${lines.join('\n')}\n`;
     },
   });
 }
@@ -299,6 +364,12 @@ export function parseShadow(value) {
  * superficies: primitivos, marca, `*-fill`) y roles (par claro/oscuro, por los
  * sufijos `-on-light`/`-on-dark` o `bg.light|dark`). Un rol al que solo
  * le definen un lado cae, en el otro, al mismo valor.
+ *
+ * Los colores globales SÍ llevan alias nativos de sus renombrados: una app
+ * nativa puede usar un rol global por su nombre, así que el nombre viejo sigue
+ * compilando, marcado como obsoleto (`@available(*, deprecated, renamed:)` en
+ * Swift, `@Deprecated(ReplaceWith)` en Kotlin). Salen de los mismos
+ * `deprecatedAliases` que los alias web. Los tokens de componente no los llevan.
  */
 function colorKey(rest) {
   const last = rest[rest.length - 1];
@@ -318,6 +389,7 @@ function buildColors(tokens) {
     const [, ...rest] = token.path;
     const value = token.$value ?? token.value;
     const doc = token.$description ?? token.comment ?? '';
+    const aliasPaths = deprecatedAliasesOf(token).map((alias) => alias.split('.').slice(1));
     // Sin sufijo `-on-light`, el token base de un grupo con lado oscuro es el claro:
     // `chart.series-1` y `chart.series-1-on-dark` son el mismo rol.
     const chartLight = rest[0] === 'chart';
@@ -329,14 +401,20 @@ function buildColors(tokens) {
         token: token.path.join('.'),
         doc,
         chart: chartLight,
+        aliases: aliasPaths.map((p) => camel(p)),
       });
       continue;
     }
     const { key, which } = found;
     const name = camel(key);
-    const role = roles.get(name) ?? { name, tokens: {} };
+    const role = roles.get(name) ?? { name, tokens: {}, aliases: [] };
     role[which] = value;
     role.tokens[which] = token.path.join('.');
+    for (const p of aliasPaths) {
+      const old = colorKey(p);
+      const alias = old ? camel(old.key) : camel(p);
+      if (alias !== name && !role.aliases.includes(alias)) role.aliases.push(alias);
+    }
 
     roles.set(name, role);
   }
@@ -433,8 +511,8 @@ function assertUnique(label, names) {
 
 function checkModel(model) {
   assertUnique('colores', [
-    ...model.colors.singles.map((c) => c.name),
-    ...model.colors.roles.map((r) => r.name),
+    ...model.colors.singles.flatMap((c) => [c.name, ...c.aliases]),
+    ...model.colors.roles.flatMap((r) => [r.name, ...r.aliases]),
   ]);
   for (const key of ['spacing', 'radius', 'borderWidth', 'size', 'opacity', 'fontFamily', 'fontSize', 'fontWeight', 'lineHeight', 'letterSpacing', 'shadow', 'duration', 'easing']) {
     assertUnique(key, model[key].map((e) => e.name));
@@ -451,6 +529,23 @@ const kotlinColor = ({ r, g, b, a }) => {
   const alpha = channel(a * 255);
   return `Color(0x${(alpha + channel(r) + channel(g) + channel(b)).toUpperCase()})`;
 };
+
+/** Un nombre de color renombrado, obsoleto y apuntando al nuevo. */
+const DEPRECATED_NOTE = 'Renombrado; el nombre viejo se retira en el próximo major.';
+function swiftDeprecatedAlias(alias, current, sw) {
+  return [
+    `/// Obsoleto: usar \`${current}\`. ${DEPRECATED_NOTE}`,
+    `@available(*, deprecated, renamed: "${current}")`,
+    `public static var ${sw(alias)}: Color { ${sw(current)} }`,
+  ].join('\n');
+}
+function kotlinDeprecatedAlias(alias, current, kt) {
+  return [
+    `/** Obsoleto: usar [${current}]. ${DEPRECATED_NOTE} */`,
+    `@Deprecated("Usar ${current}. ${DEPRECATED_NOTE}", ReplaceWith("${current}"))`,
+    `val ${kt(alias)}: Color get() = ${kt(current)}`,
+  ].join('\n');
+}
 
 function swiftSource(model, header) {
   const sw = (n) => (SWIFT_KEYWORDS.has(n) ? `\`${n}\`` : n);
@@ -472,10 +567,12 @@ function swiftSource(model, header) {
     ...block('BrandColors', 'Colores primitivos, de marca y rellenos universales: el mismo valor en superficie clara y oscura.',
       [
         ...model.colors.singles.map((c) => member(c, 'Color', swiftColor(rgb(c.value)))),
+        ...model.colors.singles.flatMap((c) => c.aliases.map((alias) => swiftDeprecatedAlias(alias, c.name, sw))),
       ]),
     ...block('BrandColorRoles', 'Roles de color: cada uno es un `Color` dinámico que resuelve su valor claro u oscuro según el esquema.',
       [
         ...model.colors.roles.map((r) => `/// ${roleDocLine(r)}\npublic static let ${sw(r.name)} = Color(brandLight: ${swiftColor(rgb(r.light))}, dark: ${swiftColor(rgb(r.dark))})`),
+        ...model.colors.roles.flatMap((r) => r.aliases.map((alias) => swiftDeprecatedAlias(alias, r.name, sw))),
         '/// Todos los roles por nombre, por ejemplo para pintar una paleta de muestra.',
         `public static let all: [(name: String, color: Color)] = [\n${model.colors.roles.map((r) => `    ("${r.name}", ${sw(r.name)}),`).join('\n')}\n]`,
       ]),
@@ -535,6 +632,7 @@ function kotlinSource(model, header) {
     ...block('BrandColors', 'Colores primitivos, de marca y rellenos universales: el mismo valor en superficie clara y oscura.',
       [
         ...model.colors.singles.map((c) => member(c, kotlinColor(parseColor(c.value)))),
+        ...model.colors.singles.flatMap((c) => c.aliases.map((alias) => kotlinDeprecatedAlias(alias, c.name, kt))),
       ]),
     '/**',
     ' * Roles de color: una instancia por esquema, [BrandColorRoles.light] y [BrandColorRoles.dark].',
@@ -544,6 +642,7 @@ function kotlinSource(model, header) {
     'class BrandColorRoles(',
     ...roles.flatMap((r) => [`    /** ${roleDocLine(r)} */`, `    val ${kt(r.name)}: Color,`]),
     ') {',
+    ...roles.flatMap((r) => r.aliases.flatMap((alias) => [...kotlinDeprecatedAlias(alias, r.name, kt).split('\n').map((l) => `    ${l}`), ''])),
     '    companion object {',
     '        /** Valores para superficie clara (`-on-light`). */',
     '        val light = BrandColorRoles(',

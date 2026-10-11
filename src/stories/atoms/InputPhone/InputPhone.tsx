@@ -94,8 +94,6 @@ export interface InputPhoneProps {
   size?: 'sm' | 'md' | 'lg';
   id?: string;
   name?: string;
-  /** @deprecated Usa el atributo nativo `aria-describedby`. */
-  describedBy?: string;
   /** Ids de ayuda/error que describen el control (lo pone el campo). */
   'aria-describedby'?: string;
   /** Nombre accesible cuando el control va suelto. */
@@ -154,7 +152,6 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(function
   size = 'md',
   id,
   name,
-  describedBy,
   'aria-describedby': ariaDescribedBy,
   'aria-label': ariaLabel,
   autoComplete,
@@ -213,7 +210,7 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(function
       onBlur={onBlur}
       onFocus={onFocus}
       numberInputProps={{
-        'aria-describedby': ariaDescribedBy ?? describedBy,
+        'aria-describedby': ariaDescribedBy,
         'aria-label': ariaLabel,
         'aria-invalid': error || undefined,
       }}

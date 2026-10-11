@@ -31,14 +31,6 @@ export interface OnboardingShellProps {
    */
   preferences?: ReactNode;
   /**
-   * Alias histórico de `preferences`, de cuando el alta montaba la banda por
-   * su cuenta. Se conserva para no romper a quien ya lo pasa; en pantallas
-   * nuevas, `preferences`. Si se pasan los dos, manda `preferences`.
-   *
-   * @deprecated Usa `preferences`.
-   */
-  switchers?: ReactNode;
-  /**
    * Nombre accesible de la banda de preferencias. **Reenvío puro** al
    * `PublicPageShell`: sin él, la banda lee `publicPageShell.preferences`.
    */
@@ -133,7 +125,6 @@ export function OnboardingShell({
   children,
   brand,
   preferences,
-  switchers,
   preferencesLabel,
   stepper,
   primaryAction,
@@ -151,8 +142,6 @@ export function OnboardingShell({
   // pinta esta plantilla, y entonces el texto lo tiene que leer ella.
   const tMarco = useBrandMessages('publicPageShell', publicPageShellEs);
   const hayAcciones = Boolean(primaryAction || backAction || exitAction);
-  // `switchers` es el nombre viejo de la misma ranura: manda el nuevo.
-  const conmutadores = preferences ?? switchers;
   const marca = brand && <div className="onboarding-shell__brand">{brand}</div>;
 
   return (
@@ -170,7 +159,7 @@ export function OnboardingShell({
           </Container>
         )
       }
-      preferences={conmutadores}
+      preferences={preferences}
       preferencesLabel={preferencesLabel}
     >
       <div className={['onboarding-shell', className].filter(Boolean).join(' ')}>
@@ -201,9 +190,9 @@ export function OnboardingShell({
           </div>
         </FormSizeContext.Provider>
 
-        {!shell && conmutadores && (
+        {!shell && preferences && (
           <section className="onboarding-shell__settings" aria-label={tMarco('preferences', preferencesLabel)}>
-            {conmutadores}
+            {preferences}
           </section>
         )}
       </div>

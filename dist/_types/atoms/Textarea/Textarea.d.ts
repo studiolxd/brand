@@ -14,8 +14,6 @@ export interface TextareaProps extends React.ComponentPropsWithoutRef<'textarea'
     bare?: boolean;
     /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
     className?: string;
-    /** @deprecated Usa el atributo nativo `aria-describedby`. */
-    describedBy?: string;
 }
 /**
  * Textarea. Extiende los atributos nativos de `<textarea>` y reenvía `{...rest}`

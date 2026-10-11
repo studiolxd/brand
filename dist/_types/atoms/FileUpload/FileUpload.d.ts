@@ -80,8 +80,6 @@ export interface FileUploadProps {
      * Sin ella, la del `Form` que lo envuelva; sin `Form`, `md`.
      */
     size?: FormSize;
-    /** @deprecated Usa el atributo nativo `aria-describedby`. */
-    describedBy?: string;
     /** Ids de ayuda/error que describen el control (lo pone el campo). */
     'aria-describedby'?: string;
     /**

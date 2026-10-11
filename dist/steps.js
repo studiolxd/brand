@@ -8,23 +8,23 @@ import { Children as i, createContext as a, useContext as o } from "react";
 import { jsx as s, jsxs as c } from "react/jsx-runtime";
 //#region src/stories/organisms/Steps/Steps.tsx
 var l = a(null);
-function u({ items: a, orientation: o = "vertical", tone: u, badgeVariant: d, titleLevel: f = 3, titleSize: p = 1, label: m, children: h, className: g, id: _ }) {
-	let v = [
+function u({ items: a, orientation: o = "vertical", tone: u, titleLevel: d = 3, titleSize: f = 1, label: p, children: m, className: h, id: g }) {
+	let _ = [
 		"steps",
 		`steps--${o}`,
-		g
-	].filter(Boolean).join(" "), y = u ?? d ?? "primary";
-	return h === void 0 ? /* @__PURE__ */ s("ol", {
-		id: _,
-		className: v,
-		"aria-label": m,
+		h
+	].filter(Boolean).join(" "), v = u ?? "primary";
+	return m === void 0 ? /* @__PURE__ */ s("ol", {
+		id: g,
+		className: _,
+		"aria-label": p,
 		children: (a ?? []).map((i, a) => /* @__PURE__ */ c("li", {
 			className: "steps__item",
 			children: [/* @__PURE__ */ s("span", {
 				className: "steps__marker",
 				children: /* @__PURE__ */ s(r, {
 					state: "neutral",
-					tone: y,
+					tone: v,
 					count: a + 1,
 					icon: i.icon,
 					className: "steps__number"
@@ -32,8 +32,8 @@ function u({ items: a, orientation: o = "vertical", tone: u, badgeVariant: d, ti
 			}), /* @__PURE__ */ c("div", {
 				className: "steps__body",
 				children: [/* @__PURE__ */ c(t, {
-					level: f,
-					size: p,
+					level: d,
+					size: f,
 					className: "steps__title",
 					children: [i.icon && /* @__PURE__ */ s(e, {
 						name: i.icon,
@@ -46,15 +46,15 @@ function u({ items: a, orientation: o = "vertical", tone: u, badgeVariant: d, ti
 			})]
 		}, i.id ?? a))
 	}) : /* @__PURE__ */ s("ol", {
-		id: _,
-		className: v,
-		"aria-label": m,
-		children: i.map(h, (e, t) => /* @__PURE__ */ s(l.Provider, {
+		id: g,
+		className: _,
+		"aria-label": p,
+		children: i.map(m, (e, t) => /* @__PURE__ */ s(l.Provider, {
 			value: {
 				index: t,
-				tone: y,
-				titleLevel: f,
-				titleSize: p
+				tone: v,
+				titleLevel: d,
+				titleSize: f
 			},
 			children: e
 		}))

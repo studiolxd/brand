@@ -7,6 +7,30 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [54.0.0] — 2026-10-11
+
+> **Major.** Se retiran los últimos alias obsoletos, que no usaba ninguna app de la suite. Sale el mismo día que la
+> v53.0.0 para que las apps hagan un solo salto (de la 52 a la 54). Quien venga de la 52 aplica también la migración de
+> la [53.0.0].
+
+### Breaking
+
+- **`describedBy`** fuera de `Input`, `Textarea`, `NumberInput`, `OtpInput`, `InputPhone`, `FileUpload` y `DatePicker`:
+  el atributo nativo `aria-describedby`, que ya se fusionaba con los ids propios (la pista de `FileUpload`, el error de
+  `DatePicker`). El HTML que sale no cambia.
+- **`Consent onSave`** fuera: `onChange`, que se llama en el mismo momento y con la misma decisión.
+- **`OnboardingShell switchers`** fuera: `preferences`.
+- **`Steps badgeVariant`** fuera: `tone`.
+- **Nativo: `brandTextStyle`** fuera en SwiftUI y Compose: `brandLinedFont` (SwiftUI) / `brandCssTextStyle` +
+  `BrandBasicText` (Compose), que miden la caja de línea de CSS (D60). Ninguna pantalla del paquete lo usaba.
+
+### Otros cambios
+
+- El generador de alias de tokens se queda, inerte: un token renombrado declara sus nombres viejos en
+  `deprecatedAliases` y el build los emite en CSS, SCSS, `tokens.json` y, para los colores globales, en nativo. Sin
+  ningún alias no se genera `deprecated-aliases.css` (ni su `@import`), y el build falla si el manifiesto y los alias no
+  casan. Cómo usarlo, en la regla 13 de `CLAUDE.md`.
+
 ## [53.0.0] — 2026-10-11
 
 > **Major.** Dos cambios que rompen, y ninguno con alias: el prefijo de las variables SCSS y la retirada de los alias

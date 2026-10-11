@@ -81,11 +81,6 @@ es persistirlo). Sin `onChange` el panel lleva su propio estado interno,
 sembrado de `value` cada vez que se abre — sigue siendo instantáneo, solo que
 sin que el consumidor lo escuche.
 
-`onSave` es el **alias deprecado** de `onChange`: quien ya lo pasaba sigue
-funcionando igual, pero ahora se llama en cada conmutación, no solo al pulsar
-un guardado explícito que ya no existe. Los consumidores nuevos deben usar
-`onChange`.
-
 ## El panel no tiene pie
 
 El panel **no lleva ninguna acción global**: ni «Guardar» ni «Aceptar
@@ -221,7 +216,6 @@ Definidos en `tokens/molecule/consent.json`.
 | `categories` | `ConsentCategory[]` | — | Las categorías, en orden. `required` las fija |
 | `value` | `ConsentValue` | — | La decisión vigente, por `id` de categoría |
 | `onChange` | `(value) => void` | — | Se llama con la decisión completa en cada conmutación (sin botón «Guardar»). Si se pasa, el panel es controlado |
-| `onSave` | `(value) => void` | — | **Deprecado**, alias de `onChange`: se llama en el mismo momento y con la misma decisión |
 | `surface` | `'sheet' \| 'modal'` | `'modal'` | Sobre qué se abre: modal (decisión del sistema, 2026-08-29) o sheet lateral, que se conserva para usos futuros |
 | `side` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Borde de entrada (solo `sheet`) |
 | `title` | `ReactNode` | — | Título del panel; sin él, `consent.preferencesTitle` del proveedor |

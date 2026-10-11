@@ -27,7 +27,6 @@ const meta: Meta<typeof Input> = {
       options: ['text', 'email', 'password', 'number', 'tel', 'url', 'search', 'date', 'datetime-local'],
     },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    describedBy: { table: { disable: true } },
   },
   args: {
     placeholder: 'Escribe algo…',

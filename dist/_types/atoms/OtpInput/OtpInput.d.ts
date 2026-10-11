@@ -25,8 +25,6 @@ export interface OtpInputProps {
     required?: boolean;
     error?: boolean;
     size?: 'sm' | 'md' | 'lg';
-    /** @deprecated Usa el atributo nativo `aria-describedby`. */
-    describedBy?: string;
     /** Ids de ayuda/error que describen el grupo de celdas (lo pone el campo). */
     'aria-describedby'?: string;
     /** Nombre accesible explícito del grupo: prevalece sobre `groupLabel`. */

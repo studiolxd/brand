@@ -6,8 +6,6 @@ export interface InputProps extends Omit<React.ComponentPropsWithoutRef<'input'>
     error?: boolean;
     /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
     className?: string;
-    /** @deprecated Usa el atributo nativo `aria-describedby`. */
-    describedBy?: string;
 }
 /**
  * Input de texto. Extiende los atributos nativos de `<input>` y reenvía `{...rest}`

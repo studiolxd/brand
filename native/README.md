@@ -100,38 +100,33 @@ propio de una app, estas son las piezas públicas:
 | Un estilo de la marca entero | `.brandLinedFont(.heading2)` (fuente, caja y tracking de `BrandTextStyle`) | `BrandBasicText(texto, style = BrandTypography.heading2)` |
 | Tokens sueltos | `.brandLinedFont(size:weight:family:lineHeight:)` | `brandCssTextStyle(size, weight, lineHeight, …)` (`@Composable`) |
 | Un `TextStyle` propio o para un `Text` de Material | — | `estilo.brandCssLineBox()` (`@Composable`) |
-| **Obsoleto** (sigue funcionando igual, con aviso) | `.brandTextStyle(_:)` | `brandTextStyle(…)` |
 
-Lo obsoleto no cambia de comportamiento: compila con un aviso de obsolescencia (`@available(*, deprecated)` en Swift,
-`@Deprecated` con `ReplaceWith` en Kotlin, que Android Studio ofrece sustituir con un clic). Ninguno de los dos
-proyectos de la librería trata los avisos como errores; si la app sí lo hace (`-warnings-as-errors` /
-`SWIFT_TREAT_WARNINGS_AS_ERRORS` en Xcode, `allWarningsAsErrors` en Kotlin), tendrá que migrar al subir de versión.
+`BrandTextStyle` (Swift) y `BrandTypography` (Kotlin) son los datos de cada estilo (tamaño, peso, `line-height`,
+tracking); la caja se aplica al pintar, porque depende de la fuente medida. `Font.brand(_:)` da solo la fuente, sin la
+caja: si se usa suelta, una línea mide el alto natural de la fuente y no el `line-height` de la web.
 
-`BrandTextStyle` (Swift) y `BrandTypography` (Kotlin) **no** quedan obsoletos: son los datos de cada estilo (tamaño,
-peso, `line-height`, tracking), y la caja se aplica al pintar porque depende de la fuente medida. Lo que cambia es con
-qué se pintan. `Font.brand(_:)` sigue dando solo la fuente.
-
-Migración en SwiftUI:
+En SwiftUI:
 
 ```swift
-// Antes: una línea medía el alto natural de la fuente (20 a 16 pt), no los 24 de la web.
-Text("Tus viviendas").brandTextStyle(.heading2)
-// Ahora: la caja de línea de CSS.
 Text("Tus viviendas").brandLinedFont(.heading2)
 Text("Resumen").brandLinedFont(size: BrandFontSize.s3, weight: BrandFontWeight.emphasis, lineHeight: BrandLineHeight.snug)
 ```
 
-Migración en Compose:
+En Compose:
 
 ```kotlin
-// Antes: con un interlineado apretado (títulos), la primera línea salía más alta que en la web.
-BasicText("Tus viviendas", style = brandTextStyle(BrandFontSize.s6, BrandFontWeight.emphasis, BrandLineHeight.tight))
-Text("Tus viviendas", style = BrandTypography.heading2)
-// Ahora: la caja de línea de CSS.
-BasicText("Tus viviendas", style = brandCssTextStyle(BrandFontSize.s6, BrandFontWeight.emphasis, BrandLineHeight.tight))
 BrandBasicText("Tus viviendas", style = BrandTypography.heading2)
+BasicText("Tus viviendas", style = brandCssTextStyle(BrandFontSize.s6, BrandFontWeight.emphasis, BrandLineHeight.tight))
 Text("Tus viviendas", style = BrandTypography.heading2.brandCssLineBox())   // un Text de Material
 ```
+
+Un `TextStyle` de `BrandTypography` pasado tal cual a un `BasicText` o a un `Text` de Material, sin `BrandBasicText` ni
+`brandCssLineBox()`, no lleva la caja: con un interlineado apretado (títulos), la primera línea sale más alta que en la
+web.
+
+> `brandTextStyle` (`.brandTextStyle(_:)` en SwiftUI, `brandTextStyle(…)` en Compose), que ponía el interlineado solo
+> entre líneas, quedó obsoleta en la v51 y se retiró en la v54. Se sustituye por `.brandLinedFont(_:)` y por
+> `brandCssTextStyle(…)`/`BrandBasicText`, con los mismos argumentos.
 
 ## Qué trae (los tokens globales)
 

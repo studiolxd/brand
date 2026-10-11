@@ -3,7 +3,7 @@ import './textarea.css';
 import { forwardRef as e } from "react";
 import { jsx as t } from "react/jsx-runtime";
 //#region src/stories/atoms/Textarea/Textarea.tsx
-var n = e(function({ size: e = "md", error: n = !1, bare: r = !1, className: i, describedBy: a, ...o }, s) {
+var n = e(function({ size: e = "md", error: n = !1, bare: r = !1, className: i, "aria-describedby": a, ...o }, s) {
 	return /* @__PURE__ */ t("textarea", {
 		ref: s,
 		className: [

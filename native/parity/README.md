@@ -61,18 +61,21 @@ Dos casos que el esquema cubre además de los de arriba:
 
 ### Alias obsoletos
 
-Un renombrado de la API (v51: `Tag variant` → `tone`, `Paragraph size="small"` → `sm`) deja el nombre viejo como
-alias obsoleto durante un major. La ficha lo declara para que la paridad siga siendo exacta:
+Un renombrado de la API deja el nombre viejo como alias obsoleto durante un major. La ficha lo declara para que la
+paridad siga siendo exacta. Hoy ninguna ficha declara alias (los de la v51 —`Tag variant` → `tone`,
+`Paragraph size="small"` → `sm`— se retiraron en la v53), así que los ejemplos de abajo son **ilustrativos**: muestran
+la forma que tendría un renombrado así, no algo que exista en el código.
 
-- **Una prop obsoleta** va en `deprecated`, con la prop que la sustituye: `{ "prop": "variant", "replacement": "tone" }`.
+- **Una prop obsoleta** va en `deprecated`, con la prop que la sustituye (por ejemplo,
+  `{ "prop": "variant", "replacement": "tone" }`).
   En React tiene que llevar `@deprecated` en su JSDoc, y `replacement` tiene que estar en `props`. No se registra en las
   pruebas nativas: en Swift es un inicializador o parámetro `@available(*, deprecated, renamed: "…")` y en Kotlin una
   sobrecarga `@Deprecated(…, ReplaceWith("…"))`.
-- **Un literal obsoleto** de una unión va en `deprecatedValues` de esa prop (`"values": ["sm", "md", "lg"],
+- **Un literal obsoleto** de una unión va en `deprecatedValues` de esa prop (por ejemplo, `"values": ["sm", "md", "lg"],
   "deprecatedValues": ["small", "default", "large"]`). `values` + `deprecatedValues` son exactamente los literales de
   React. En nativo **no son casos del enum** —el enum tiene exactamente `values`—, sino miembros estáticos obsoletos
-  que devuelven el caso nuevo: `@available(*, deprecated, renamed: "sm") public static let small = Self.sm` en Swift,
-  y en el `companion object` del enum de Kotlin `@Deprecated(…, ReplaceWith("ParagraphSize.Sm")) val Small = Sm`.
+  que devuelven el caso nuevo; en el ejemplo, `@available(*, deprecated, renamed: "sm") public static let small = Self.sm`
+  en Swift, y en el `companion object` del enum de Kotlin `@Deprecated(…, ReplaceWith("ParagraphSize.Sm")) val Small = Sm`.
 
 ### Qué comprueba `pnpm native:parity`
 

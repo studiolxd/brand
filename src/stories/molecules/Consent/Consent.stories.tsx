@@ -357,42 +357,6 @@ export const ContratoPreferencias: Story = {
 };
 
 /**
- * Test: `onSave` es el alias deprecado de `onChange` — sigue disparándose en
- * cada conmutación, no solo al cerrar, para no romper a quien ya lo pasaba.
- */
-export const ContratoOnSaveAlias: Story = {
-  name: 'Test — onSave, alias deprecado, dispara en cada cambio',
-  tags: ['!dev'],
-  render: () => {
-    function Demo() {
-      const [llamadas, setLlamadas] = useState<ConsentValue[]>([]);
-      return (
-        <>
-          <p data-testid="llamadas">{llamadas.length}</p>
-          <ConsentPreferences
-            open
-            onOpenChange={() => {}}
-            categories={categorias}
-            value={decisionInicial}
-            onSave={(next) => setLlamadas((prev) => [...prev, next])}
-          />
-        </>
-      );
-    }
-    return <Demo />;
-  },
-  play: async ({ canvasElement }) => {
-    const panel = within(document.body);
-    const analitica = await panel.findByRole('switch', { name: /Analítica/ });
-    await userEvent.click(analitica);
-    await expect(within(canvasElement).getByTestId('llamadas')).toHaveTextContent('1');
-    const marketing = panel.getByRole('switch', { name: /Marketing/ });
-    await userEvent.click(marketing);
-    await expect(within(canvasElement).getByTestId('llamadas')).toHaveTextContent('2');
-  },
-};
-
-/**
  * Test: el panel no lleva párrafo de descripción, ni línea entre categorías,
  * y la marca «Siempre activa» de la categoría necesaria es accesible pero no
  * se ve.

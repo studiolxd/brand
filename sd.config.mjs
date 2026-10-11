@@ -1,11 +1,12 @@
 import StyleDictionary from 'style-dictionary';
-import { readdirSync, readFileSync, writeFileSync } from 'fs';
+import { readdirSync, readFileSync, rmSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import {
   registerDarkModeFormat,
   registerJsonVariablesFormat,
   registerNativeFormats,
   registerShadowAlphaTransform,
+  registerDeprecatedAliasFormats,
   outputReferencesUnlessAlpha,
   isDarkToken,
   isNativeToken,
@@ -16,6 +17,7 @@ registerDarkModeFormat(StyleDictionary);
 registerJsonVariablesFormat(StyleDictionary);
 registerNativeFormats(StyleDictionary);
 registerShadowAlphaTransform(StyleDictionary);
+registerDeprecatedAliasFormats(StyleDictionary);
 
 // Todo sale con `var()` salvo las sombras con opacidad propia (ver `registerShadowAlphaTransform`).
 const cssOptions = { selector: ':root', outputReferences: outputReferencesUnlessAlpha };
@@ -210,7 +212,7 @@ function scssFile(destination, filterKey) {
   // Los tokens `surface-dark-*` no se exponen a SCSS: no hay modo runtime
   // para consumidores no-React, así que solo reciben el valor claro.
   const filter = (t) => baseFilter(t) && !isDarkToken(t);
-  return { destination, format: 'scss/variables', filter, options: scssOptions };
+  return { destination, format: 'scss/variables-with-deprecated-aliases', filter, options: scssOptions };
 }
 
 const sd = new StyleDictionary({
@@ -918,6 +920,63 @@ const surfaceLines = [
 ];
 writeFileSync('src/tokens/surface-public.css', surfaceLines.join('\n'));
 console.log('✔︎ src/tokens/surface-public.css');
+
+/* ---------------------------------------------------------------------------
+ * Alias obsoletos de tokens renombrados: `src/tokens/deprecated-aliases.css`
+ *
+ * Un token renombrado lleva sus nombres viejos en
+ * `$extensions["com.studiolxd"].deprecatedAliases`. Aquí salen como
+ * `--viejo: var(--nuevo)`, y no solo en `:root`: un `var()` dentro de una custom
+ * property se resuelve en el elemento que la declara, así que un alias que
+ * viviera solo en `:root` daría el valor claro y de aplicación en todas partes.
+ * Se vuelve a declarar en cada selector que genera este build (superficie
+ * oscura, invertida, siempre clara y pública), y así el alias LEE el valor de la
+ * superficie en la que está.
+ *
+ * Lo que un alias NO hace es el camino inverso: los componentes leen el nombre
+ * nuevo, así que sobrescribir el viejo no les llega. Se retiran en el major
+ * siguiente al renombrado.
+ *
+ * Sin ningún alias no hay fichero (ni su `@import` en `src/tokens/index.css`):
+ * así no viaja un bloque vacío en `tokens.css`/`brand.css`. El `@import` se
+ * añade a mano al final del manifiesto cuando entra el primer alias, y se quita
+ * cuando sale el último; el build falla si el manifiesto y los alias no casan.
+ * ------------------------------------------------------------------------- */
+{
+  const aliases = allTokens.flatMap(({ path, extensions }) =>
+    (extensions?.['com.studiolxd']?.deprecatedAliases ?? []).map((alias) => [cssName(alias.split('.')), cssName(path)]),
+  );
+  const aliasFile = 'src/tokens/deprecated-aliases.css';
+  const imported = readFileSync('src/tokens/index.css', 'utf-8').includes('@import "./deprecated-aliases.css";');
+  if (aliases.length && !imported) {
+    throw new Error(`Hay ${aliases.length} alias de token pero src/tokens/index.css no importa ./deprecated-aliases.css: añade \`@import "./deprecated-aliases.css";\` al final del manifiesto.`);
+  }
+  if (!aliases.length && imported) {
+    throw new Error('No queda ningún alias de token: quita el `@import "./deprecated-aliases.css";` de src/tokens/index.css.');
+  }
+  if (!aliases.length) {
+    rmSync(aliasFile, { force: true });
+    console.log(`○ ${aliasFile}: sin alias, no se genera`);
+  } else {
+    const aliasSelectors = [':root', ...DARK_SELECTORS, '.surface-light', '.site-shell'];
+    const aliasLines = [
+      '/**',
+      ' * Do not edit directly, this file was auto-generated.',
+      ' *',
+      ' * OBSOLETOS: los nombres anteriores de tokens renombrados. Cada uno lee el',
+      ' * valor de su nombre nuevo; sobrescribirlo NO cambia el componente, que lee',
+      ' * el nuevo. Se retiran en el próximo major.',
+      ' */',
+      '',
+      `${aliasSelectors.join(',\n')} {`,
+      ...aliases.map(([old, current]) => `  ${old}: var(${current}); /* obsoleto: usar ${current} */`),
+      '}',
+      '',
+    ];
+    writeFileSync(aliasFile, aliasLines.join('\n'));
+    console.log(`✔︎ ${aliasFile}`);
+  }
+}
 
 /* ---------------------------------------------------------------------------
  * Los tokens del correo, junto a sus componentes

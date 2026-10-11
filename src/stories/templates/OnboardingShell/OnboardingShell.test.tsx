@@ -95,27 +95,6 @@ describe('OnboardingShell — el chrome, fuera del `main`', () => {
     expect(ajustes).toHaveAttribute('aria-label', 'Preferencias');
   });
 
-  it('`switchers` sigue valiendo como alias de `preferences`', () => {
-    const { container } = render(
-      <OnboardingShell brand={<span>Marca</span>} switchers={<span>Idioma</span>}>
-        <p>el paso</p>
-      </OnboardingShell>,
-    );
-    const banda = container.querySelector('.public-page-shell__preferences')!;
-    expect(banda).toHaveTextContent('Idioma');
-  });
-
-  it('con los dos, manda `preferences`', () => {
-    const { container } = render(
-      <OnboardingShell preferences={<span>Nuevo</span>} switchers={<span>Viejo</span>}>
-        <p>el paso</p>
-      </OnboardingShell>,
-    );
-    const banda = container.querySelector('.public-page-shell__preferences')!;
-    expect(banda).toHaveTextContent('Nuevo');
-    expect(banda).not.toHaveTextContent('Viejo');
-  });
-
   it('sin marco, marca y preferencias vuelven a la columna y sin la banda', () => {
     const { container } = render(
       <OnboardingShell shell={false} brand={<span>Marca</span>} preferences={<span>Idioma</span>}>

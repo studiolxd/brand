@@ -27,8 +27,6 @@ export interface StepsProps {
   orientation?: 'vertical' | 'horizontal';
   /** Color de la marca. Por defecto `primary`. */
   tone?: StepMarkerTone;
-  /** @deprecated Usar `tone`. Se mantiene como alias por compatibilidad. */
-  badgeVariant?: StepMarkerTone;
   /** Nivel semántico del título de cada paso. Por defecto `3`. */
   titleLevel?: HeadingLevel;
   /** Talla del título de cada paso. Por defecto `1` (14px, la de la etiqueta de `Stepper`). */
@@ -72,7 +70,6 @@ export function Steps({
   items,
   orientation = 'vertical',
   tone,
-  badgeVariant,
   titleLevel = 3,
   titleSize = 1,
   label,
@@ -81,7 +78,7 @@ export function Steps({
   id,
 }: StepsProps) {
   const classes = ['steps', `steps--${orientation}`, className].filter(Boolean).join(' ');
-  const marcaTono = tone ?? badgeVariant ?? 'primary';
+  const marcaTono = tone ?? 'primary';
 
   // Forma compuesta: cada hijo es un paso y la lista le dice qué número le
   // toca. El consumidor nunca escribe el número, igual que con `items`.

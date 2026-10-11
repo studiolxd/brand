@@ -3,7 +3,7 @@ import './input.css';
 import { forwardRef as e } from "react";
 import { jsx as t } from "react/jsx-runtime";
 //#region src/stories/atoms/Input/Input.tsx
-var n = e(function({ size: e = "md", error: n = !1, className: r, describedBy: i, ...a }, o) {
+var n = e(function({ size: e = "md", error: n = !1, className: r, "aria-describedby": i, ...a }, o) {
 	return /* @__PURE__ */ t("input", {
 		ref: o,
 		className: [

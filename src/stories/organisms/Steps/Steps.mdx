@@ -21,7 +21,7 @@ El título de cada paso es un `Heading` de verdad, con el nivel y la talla por s
 
 `Steps` y `Stepper` no se fusionan —uno documenta un proceso, el otro acompaña un flujo con estado, ver [`Stepper` › «No es `Steps`»](/docs/molecules-stepper--docs#no-es-steps)— pero comparten la misma base visual: el átomo [`StepMarker`](/docs/atoms-stepmarker--docs) y sus tokens `step.*`. La marca es **cuadrada**, con el radio del sistema (`{border-radius.default}`, rectas) y no `round`: es identidad de marca, no un avatar ni una píldora. `Steps` la usa siempre en estado `neutral` —relleno con la cifra o el icono del paso, nunca hueca: no tiene noción de «pendiente»—, mientras que `Stepper` recorre los cuatro estados según el progreso. El conector entre marcas y la línea de detalle bajo el título comparten también color y grosor con `Stepper` (`step.connector-*`, `step.description-color`).
 
-`badgeVariant` sigue existiendo por compatibilidad, pero pasa a llamarse `tone`: es el color del relleno de la marca, las mismas variantes que admitía antes.
+El color del relleno de la marca lo pone `tone`, con las mismas variantes que `StepMarker`.
 
 <Canvas of={StepsStories.LadoALado} />
 

@@ -73,49 +73,49 @@ function g(e, t) {
 	for (let e of t) e.required && (n[e.id] = !0);
 	return n;
 }
-function _({ open: n, onOpenChange: r, categories: i, value: a, onChange: h, onSave: _, surface: v = "modal", side: y = "right", title: b, closeLabel: x, alwaysOnLabel: S, container: C, className: w }) {
-	let T = e("consent", m), E = h !== void 0, [D, O] = u(() => g(a, i));
+function _({ open: n, onOpenChange: r, categories: i, value: a, onChange: h, surface: _ = "modal", side: v = "right", title: y, closeLabel: b, alwaysOnLabel: x, container: S, className: C }) {
+	let w = e("consent", m), T = h !== void 0, [E, D] = u(() => g(a, i));
 	l(() => {
-		n && !E && O(g(a, i));
-	}, [n, E]);
-	let k = E ? g(a, i) : D, A = (e) => {
-		E ? h(e) : O(e), _?.(e);
-	}, j = (e, t) => {
-		A({
-			...k,
+		n && !T && D(g(a, i));
+	}, [n, T]);
+	let O = T ? g(a, i) : E, k = (e) => {
+		T ? h(e) : D(e);
+	}, A = (e, t) => {
+		k({
+			...O,
 			[e]: t
 		});
-	}, M = /* @__PURE__ */ f("div", {
-		className: ["consent-preferences", w].filter(Boolean).join(" "),
+	}, j = /* @__PURE__ */ f("div", {
+		className: ["consent-preferences", C].filter(Boolean).join(" "),
 		children: /* @__PURE__ */ f("ul", {
 			className: "consent-preferences__list",
 			children: i.map((e) => /* @__PURE__ */ f("li", {
 				className: "consent-preferences__category",
 				children: /* @__PURE__ */ f(o, {
-					label: e.required ? /* @__PURE__ */ p(d, { children: [e.name, /* @__PURE__ */ f(t, { children: `, ${T("alwaysOn", S)}` })] }) : e.name,
+					label: e.required ? /* @__PURE__ */ p(d, { children: [e.name, /* @__PURE__ */ f(t, { children: `, ${w("alwaysOn", x)}` })] }) : e.name,
 					helperText: e.description,
-					checked: e.required ? !0 : k[e.id] === !0,
+					checked: e.required ? !0 : O[e.id] === !0,
 					disabled: e.required,
-					onCheckedChange: (t) => j(e.id, t)
+					onCheckedChange: (t) => A(e.id, t)
 				})
 			}, e.id))
 		})
-	}), N = b === void 0 ? T("preferencesTitle") : b;
-	return v === "modal" ? /* @__PURE__ */ f(c, {
+	}), M = y === void 0 ? w("preferencesTitle") : y;
+	return _ === "modal" ? /* @__PURE__ */ f(c, {
 		open: n,
 		onOpenChange: r,
-		title: typeof N == "string" ? N : void 0,
-		...x === void 0 ? {} : { closeLabel: x },
-		container: C,
-		children: M
+		title: typeof M == "string" ? M : void 0,
+		...b === void 0 ? {} : { closeLabel: b },
+		container: S,
+		children: j
 	}) : /* @__PURE__ */ f(s, {
 		open: n,
 		onOpenChange: r,
-		side: y,
-		title: N,
-		...x === void 0 ? {} : { closeLabel: x },
-		container: C,
-		children: M
+		side: v,
+		title: M,
+		...b === void 0 ? {} : { closeLabel: b },
+		container: S,
+		children: j
 	});
 }
 //#endregion
