@@ -1,33 +1,33 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-sidebar-nav-gap: 0.25rem; // Gap entre grupos
-$lxd-sidebar-nav-group-trigger-padding-block: 0.5rem; // Padding vertical del trigger de grupo
-$lxd-sidebar-nav-group-trigger-padding-inline: 0.75rem; // Padding horizontal del trigger de grupo
-$lxd-sidebar-nav-group-trigger-gap: 0.5rem; // Gap entre texto y chevron del grupo
-$lxd-sidebar-nav-group-label-font-size: 1rem; // Tamaño de texto de etiqueta de grupo
-$lxd-sidebar-nav-group-label-font-weight: 500; // Peso del texto de etiqueta de grupo
-$lxd-sidebar-nav-group-label-color: #111e30; // Color de la etiqueta de grupo
-$lxd-sidebar-nav-item-padding-block: 0.5rem; // Padding vertical de cada ítem
-$lxd-sidebar-nav-item-padding-inline: 1rem; // Padding horizontal de cada ítem
-$lxd-sidebar-nav-item-padding-inline-start: calc(0.75rem + 2rem + 0.5rem); // Sangría de los ítems: alineados con el texto de la cabecera de su grupo (aire + icono + gap)
-$lxd-sidebar-nav-item-border-radius: 0px; // Radio de cada ítem
-$lxd-sidebar-nav-item-font-size: 1rem; // Tamaño de texto de ítems
-$lxd-sidebar-nav-item-font-weight: 300; // Peso de ítems
-$lxd-sidebar-nav-item-line-height: 1.3; // Interlineado de ítems
-$lxd-sidebar-nav-item-color: #111e30; // Color de ítems
-$lxd-sidebar-nav-item-active-font-weight: 500; // Peso de ítem activo
-$lxd-sidebar-nav-focus-ring-color: #111e30; // Color del focus ring
-$lxd-sidebar-nav-focus-ring-width: 2px; // Grosor del anillo de foco
-$lxd-sidebar-nav-item-gap: 0.25rem; // Gap entre ítems dentro de un grupo
-$lxd-sidebar-nav-rail-item-size: 2.5rem; // En rail cada entrada es un cuadrado a talla md, como un botón de icono
-$lxd-sidebar-nav-item-icon-size: 2rem; // Icono de ítem: talla sm del sistema
-$lxd-sidebar-nav-item-icon-gap: 0.5rem; // Gap entre icono y texto del ítem
-$lxd-sidebar-nav-transition-duration: 150ms; // Duración de transición de ítems
-$lxd-sidebar-nav-transition-easing: ease-in-out; // Easing de transición de ítems
-$lxd-sidebar-nav-group-transition-duration: 150ms; // Duración de la animación de apertura/cierre de grupo
-$lxd-sidebar-nav-group-transition-easing: ease-in-out; // Easing de la animación de apertura/cierre de grupo
-$lxd-sidebar-nav-item-empty-color: #4a4a4a; // Tinta de una entrada vacía: sigue leyéndose, pero no invita a pulsarla
-$lxd-sidebar-nav-item-empty-cursor: not-allowed; // Cursor de una entrada vacía
-$lxd-sidebar-nav-item-empty-mark-font-size: 0.875rem; // Tamaño de la marca «sin docs»
-$lxd-sidebar-nav-item-empty-mark-color: #4a4a4a; // Tinta de la marca «sin docs»
+$slxd-sidebar-nav-gap: 0.25rem; // Gap entre grupos
+$slxd-sidebar-nav-group-trigger-padding-block: 0.5rem; // Padding vertical del trigger de grupo
+$slxd-sidebar-nav-group-trigger-padding-inline: 0.75rem; // Padding horizontal del trigger de grupo
+$slxd-sidebar-nav-group-trigger-gap: 0.5rem; // Gap entre texto y chevron del grupo
+$slxd-sidebar-nav-group-label-font-size: 1rem; // Tamaño de texto de etiqueta de grupo
+$slxd-sidebar-nav-group-label-font-weight: 500; // Peso del texto de etiqueta de grupo
+$slxd-sidebar-nav-group-label-color: #111e30; // Color de la etiqueta de grupo
+$slxd-sidebar-nav-item-padding-block: 0.5rem; // Padding vertical de cada ítem
+$slxd-sidebar-nav-item-padding-inline: 1rem; // Padding horizontal de cada ítem
+$slxd-sidebar-nav-item-padding-inline-start: calc(0.75rem + 2rem + 0.5rem); // Sangría de los ítems: alineados con el texto de la cabecera de su grupo (aire + icono + gap)
+$slxd-sidebar-nav-item-border-radius: 0px; // Radio de cada ítem
+$slxd-sidebar-nav-item-font-size: 1rem; // Tamaño de texto de ítems
+$slxd-sidebar-nav-item-font-weight: 300; // Peso de ítems
+$slxd-sidebar-nav-item-line-height: 1.3; // Interlineado de ítems
+$slxd-sidebar-nav-item-color: #111e30; // Color de ítems
+$slxd-sidebar-nav-item-active-font-weight: 500; // Peso de ítem activo
+$slxd-sidebar-nav-focus-ring-color: #111e30; // Color del focus ring
+$slxd-sidebar-nav-focus-ring-width: 2px; // Grosor del anillo de foco
+$slxd-sidebar-nav-item-gap: 0.25rem; // Gap entre ítems dentro de un grupo
+$slxd-sidebar-nav-rail-item-size: 2.5rem; // En rail cada entrada es un cuadrado a talla md, como un botón de icono
+$slxd-sidebar-nav-item-icon-size: 2rem; // Icono de ítem: talla sm del sistema
+$slxd-sidebar-nav-item-icon-gap: 0.5rem; // Gap entre icono y texto del ítem
+$slxd-sidebar-nav-transition-duration: 150ms; // Duración de transición de ítems
+$slxd-sidebar-nav-transition-easing: ease-in-out; // Easing de transición de ítems
+$slxd-sidebar-nav-group-transition-duration: 150ms; // Duración de la animación de apertura/cierre de grupo
+$slxd-sidebar-nav-group-transition-easing: ease-in-out; // Easing de la animación de apertura/cierre de grupo
+$slxd-sidebar-nav-item-empty-color: #4a4a4a; // Tinta de una entrada vacía: sigue leyéndose, pero no invita a pulsarla
+$slxd-sidebar-nav-item-empty-cursor: not-allowed; // Cursor de una entrada vacía
+$slxd-sidebar-nav-item-empty-mark-font-size: 0.875rem; // Tamaño de la marca «sin docs»
+$slxd-sidebar-nav-item-empty-mark-color: #4a4a4a; // Tinta de la marca «sin docs»

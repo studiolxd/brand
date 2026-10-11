@@ -1,24 +1,24 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-search-form-width: 100%; // Anchura del formulario: la del campo, que siempre ocupa su contenedor. El buscador vive dentro del panel del menú y se estira con él
-$lxd-search-form-xl-height: 4rem; // Altura del campo — xl (64px, el peldaño de espaciado que sigue a los 48 de lg). No es una talla de control del sistema: solo existe aquí, para el buscador del menú del sitio
-$lxd-search-form-xl-padding-inline: 2rem; // Aire horizontal del campo — xl: el peldaño de espaciado siguiente al de lg
-$lxd-search-form-xl-font-size: 1.75rem; // Cuerpo de letra del campo — xl (28px): la escala de títulos pequeños, no la del cuerpo de texto. A esta talla el buscador se lee como un titular
-$lxd-search-form-xl-slot-size: 4rem; // Lado del hueco de la flecha — xl: cuadrado a la altura del campo, como en el resto de tallas
-$lxd-search-form-xl-icon-size: 2rem; // Tamaño del glifo de la flecha — xl (32px): la mitad del hueco, la misma proporción que guardan md y lg
-$lxd-search-form-submit-slot-size: 2.5rem; // Lado del hueco que ocupa la flecha dentro del campo: la talla md, la misma que el campo — así el adorno queda cuadrado sobre el control
-$lxd-search-form-submit-sm-slot-size: 2rem; // Lado del hueco de la flecha — sm
-$lxd-search-form-submit-lg-slot-size: 3rem; // Lado del hueco de la flecha — lg
-$lxd-search-form-submit-icon-size: 1.25rem; // Tamaño del glifo de la flecha — md (20px, acorde al campo de 40). El mismo peldaño que la lupa y el aspa de InputField
-$lxd-search-form-submit-sm-icon-size: 16px; // Tamaño del glifo — sm (16px)
-$lxd-search-form-submit-lg-icon-size: 24px; // Tamaño del glifo — lg (24px)
-$lxd-search-form-submit-color: #111e30; // Color de la flecha: la tinta del campo, prusia sobre claro
-$lxd-search-form-submit-hover-color: #111e30; // Color de la flecha en hover: la misma tinta. El adorno no pinta fondo al pasar el puntero —la regla del sistema— y la tinta no se atenúa
-$lxd-search-form-submit-disabled-color: #4a4a4a; // Color de la flecha con el campo deshabilitado: el del texto del campo deshabilitado
-$lxd-search-form-submit-focus-ring-width: 2px; // Grosor del anillo de foco de la flecha: el del sistema. Es lo único que marca el foco, porque el adorno no tiene fondo
-$lxd-search-form-submit-focus-ring-color: #111e30; // Color del anillo de foco de la flecha: el del borde del campo en foco
-$lxd-search-form-submit-input-padding-inline-end: 2.5rem; // Padding derecho del campo — el texto termina donde empieza la flecha, que va dentro del borde
+$slxd-search-form-width: 100%; // Anchura del formulario: la del campo, que siempre ocupa su contenedor. El buscador vive dentro del panel del menú y se estira con él
+$slxd-search-form-xl-height: 4rem; // Altura del campo — xl (64px, el peldaño de espaciado que sigue a los 48 de lg). No es una talla de control del sistema: solo existe aquí, para el buscador del menú del sitio
+$slxd-search-form-xl-padding-inline: 2rem; // Aire horizontal del campo — xl: el peldaño de espaciado siguiente al de lg
+$slxd-search-form-xl-font-size: 1.75rem; // Cuerpo de letra del campo — xl (28px): la escala de títulos pequeños, no la del cuerpo de texto. A esta talla el buscador se lee como un titular
+$slxd-search-form-xl-slot-size: 4rem; // Lado del hueco de la flecha — xl: cuadrado a la altura del campo, como en el resto de tallas
+$slxd-search-form-xl-icon-size: 2rem; // Tamaño del glifo de la flecha — xl (32px): la mitad del hueco, la misma proporción que guardan md y lg
+$slxd-search-form-submit-slot-size: 2.5rem; // Lado del hueco que ocupa la flecha dentro del campo: la talla md, la misma que el campo — así el adorno queda cuadrado sobre el control
+$slxd-search-form-submit-sm-slot-size: 2rem; // Lado del hueco de la flecha — sm
+$slxd-search-form-submit-lg-slot-size: 3rem; // Lado del hueco de la flecha — lg
+$slxd-search-form-submit-icon-size: 1.25rem; // Tamaño del glifo de la flecha — md (20px, acorde al campo de 40). El mismo peldaño que la lupa y el aspa de InputField
+$slxd-search-form-submit-sm-icon-size: 16px; // Tamaño del glifo — sm (16px)
+$slxd-search-form-submit-lg-icon-size: 24px; // Tamaño del glifo — lg (24px)
+$slxd-search-form-submit-color: #111e30; // Color de la flecha: la tinta del campo, prusia sobre claro
+$slxd-search-form-submit-hover-color: #111e30; // Color de la flecha en hover: la misma tinta. El adorno no pinta fondo al pasar el puntero —la regla del sistema— y la tinta no se atenúa
+$slxd-search-form-submit-disabled-color: #4a4a4a; // Color de la flecha con el campo deshabilitado: el del texto del campo deshabilitado
+$slxd-search-form-submit-focus-ring-width: 2px; // Grosor del anillo de foco de la flecha: el del sistema. Es lo único que marca el foco, porque el adorno no tiene fondo
+$slxd-search-form-submit-focus-ring-color: #111e30; // Color del anillo de foco de la flecha: el del borde del campo en foco
+$slxd-search-form-submit-input-padding-inline-end: 2.5rem; // Padding derecho del campo — el texto termina donde empieza la flecha, que va dentro del borde
 
 // Alias obsoletos: nombres anteriores a la convención D9.
-$lxd-search-form-inline-size: $lxd-search-form-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-search-form-width
+$slxd-search-form-inline-size: $slxd-search-form-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-search-form-width

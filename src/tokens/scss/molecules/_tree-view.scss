@@ -1,34 +1,34 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-tree-view-icon-size: 16px; // Tamaño de la marca (la carpeta) de cada fila
-$lxd-tree-view-indent: calc(16px + 0.5rem); // Sangría que gana cada nivel: exactamente lo que ocupa la marca de la fila padre más su hueco, de modo que el nivel de un hijo se lee contra el rótulo del padre
-$lxd-tree-view-row-gap: 0.5rem; // Separación entre el chevron, la marca y el rótulo — el hueco icono-texto del ítem de la barra
-$lxd-tree-view-row-padding-block: 0.5rem; // Aire vertical de cada fila — el del ítem de la barra
-$lxd-tree-view-row-padding-inline: 1rem; // Aire horizontal de cada fila — el del ítem de la barra
-$lxd-tree-view-row-border-radius: 0px; // Radio de la fila — el del ítem de la barra
-$lxd-tree-view-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica de las filas
-$lxd-tree-view-font-size: 1rem; // Tamaño de fuente de las filas — el del ítem de la barra
-$lxd-tree-view-font-weight: 300; // Peso de una fila cualquiera — el del ítem de la barra
-$lxd-tree-view-line-height: 1.3; // Interlineado de las filas — el del ítem de la barra
-$lxd-tree-view-color: #111e30; // Tinta de las filas — la del ítem de la barra
-$lxd-tree-view-selected-color: #111e30; // Tinta de la fila elegida: la MISMA tinta, no un acento. En la barra lateral solo el activo lleva color de marca; una carpeta elegida se marca únicamente con el peso
-$lxd-tree-view-selected-font-weight: 500; // Peso de la fila elegida — el del ítem activo de la barra
-$lxd-tree-view-chevron-size: 16px; // Tamaño del chevron que abre y cierra una rama
-$lxd-tree-view-chevron-color: #4a4a4a; // Tinta del chevron: atenuada, para que no compita con el rótulo
-$lxd-tree-view-actions-gap: 0.25rem; // Hueco entre el rótulo y las acciones de la fila
-$lxd-tree-view-drop-target-bg: #baabff; // Relleno de la carpeta que puede recibir lo que se arrastra: el acento de estado activo del sistema
-$lxd-tree-view-drop-target-color: #111e30; // Tinta sobre el relleno de destino. Es el par autocontenido de `Button primary`: se lee igual en claro y en oscuro, así que no lleva par `surface-dark-*`
-$lxd-tree-view-drop-target-border-width: 1px; // Grosor del borde discontinuo del destino de arrastre
-$lxd-tree-view-drop-target-border-style: dashed; // Estilo del borde del destino: discontinuo, el dibujo universal de «suéltalo aquí»
-$lxd-tree-view-drop-target-border-color: #111e30; // Color del borde discontinuo del destino de arrastre
-$lxd-tree-view-drop-disabled-opacity: 0.4; // Opacidad de una carpeta que NO puede recibir lo que se arrastra
-$lxd-tree-view-drop-disabled-cursor: not-allowed; // Cursor sobre una carpeta que no puede recibir lo que se arrastra
-$lxd-tree-view-cursor: pointer; // Cursor sobre una fila
-$lxd-tree-view-disabled-cursor: not-allowed; // Cursor de una fila deshabilitada
-$lxd-tree-view-disabled-opacity: 0.4; // Opacidad de una fila deshabilitada
-$lxd-tree-view-transition-duration: 150ms; // Duración del giro del chevron y de la aparición de las acciones
-$lxd-tree-view-transition-easing: ease; // Easing del giro del chevron y de la aparición de las acciones
-$lxd-tree-view-focus-ring-width: 2px; // Grosor del anillo de foco — el de la barra
-$lxd-tree-view-focus-ring-offset: 1px; // Separación del anillo de foco
-$lxd-tree-view-focus-ring-color: #111e30; // Color del anillo de foco — el de la barra
+$slxd-tree-view-icon-size: 16px; // Tamaño de la marca (la carpeta) de cada fila
+$slxd-tree-view-indent: calc(16px + 0.5rem); // Sangría que gana cada nivel: exactamente lo que ocupa la marca de la fila padre más su hueco, de modo que el nivel de un hijo se lee contra el rótulo del padre
+$slxd-tree-view-row-gap: 0.5rem; // Separación entre el chevron, la marca y el rótulo — el hueco icono-texto del ítem de la barra
+$slxd-tree-view-row-padding-block: 0.5rem; // Aire vertical de cada fila — el del ítem de la barra
+$slxd-tree-view-row-padding-inline: 1rem; // Aire horizontal de cada fila — el del ítem de la barra
+$slxd-tree-view-row-border-radius: 0px; // Radio de la fila — el del ítem de la barra
+$slxd-tree-view-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica de las filas
+$slxd-tree-view-font-size: 1rem; // Tamaño de fuente de las filas — el del ítem de la barra
+$slxd-tree-view-font-weight: 300; // Peso de una fila cualquiera — el del ítem de la barra
+$slxd-tree-view-line-height: 1.3; // Interlineado de las filas — el del ítem de la barra
+$slxd-tree-view-color: #111e30; // Tinta de las filas — la del ítem de la barra
+$slxd-tree-view-selected-color: #111e30; // Tinta de la fila elegida: la MISMA tinta, no un acento. En la barra lateral solo el activo lleva color de marca; una carpeta elegida se marca únicamente con el peso
+$slxd-tree-view-selected-font-weight: 500; // Peso de la fila elegida — el del ítem activo de la barra
+$slxd-tree-view-chevron-size: 16px; // Tamaño del chevron que abre y cierra una rama
+$slxd-tree-view-chevron-color: #4a4a4a; // Tinta del chevron: atenuada, para que no compita con el rótulo
+$slxd-tree-view-actions-gap: 0.25rem; // Hueco entre el rótulo y las acciones de la fila
+$slxd-tree-view-drop-target-bg: #baabff; // Relleno de la carpeta que puede recibir lo que se arrastra: el acento de estado activo del sistema
+$slxd-tree-view-drop-target-color: #111e30; // Tinta sobre el relleno de destino. Es el par autocontenido de `Button primary`: se lee igual en claro y en oscuro, así que no lleva par `surface-dark-*`
+$slxd-tree-view-drop-target-border-width: 1px; // Grosor del borde discontinuo del destino de arrastre
+$slxd-tree-view-drop-target-border-style: dashed; // Estilo del borde del destino: discontinuo, el dibujo universal de «suéltalo aquí»
+$slxd-tree-view-drop-target-border-color: #111e30; // Color del borde discontinuo del destino de arrastre
+$slxd-tree-view-drop-disabled-opacity: 0.4; // Opacidad de una carpeta que NO puede recibir lo que se arrastra
+$slxd-tree-view-drop-disabled-cursor: not-allowed; // Cursor sobre una carpeta que no puede recibir lo que se arrastra
+$slxd-tree-view-cursor: pointer; // Cursor sobre una fila
+$slxd-tree-view-disabled-cursor: not-allowed; // Cursor de una fila deshabilitada
+$slxd-tree-view-disabled-opacity: 0.4; // Opacidad de una fila deshabilitada
+$slxd-tree-view-transition-duration: 150ms; // Duración del giro del chevron y de la aparición de las acciones
+$slxd-tree-view-transition-easing: ease; // Easing del giro del chevron y de la aparición de las acciones
+$slxd-tree-view-focus-ring-width: 2px; // Grosor del anillo de foco — el de la barra
+$slxd-tree-view-focus-ring-offset: 1px; // Separación del anillo de foco
+$slxd-tree-view-focus-ring-color: #111e30; // Color del anillo de foco — el de la barra

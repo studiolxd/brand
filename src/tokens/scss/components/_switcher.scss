@@ -1,33 +1,33 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-switcher-target-size: 1.5rem; // Área sensible al puntero: 24×24 px como pide WCAG 2.5.8, aunque el track (sm) sea menor en bloque. Se extiende de forma invisible y centrada, sin mover la maqueta
-$lxd-switcher-track-width: 2.75em; // Ancho del track
-$lxd-switcher-track-height: 1.5em; // Alto del track
-$lxd-switcher-track-bg: #d0d0d0; // Fondo del track — estado off
-$lxd-switcher-track-checked-bg: #111e30; // Fondo del track — estado on
-$lxd-switcher-track-border-radius: 9999px; // Radio del track (pill)
-$lxd-switcher-track-padding: 0.1875em; // Padding interior del track — separa el thumb de los bordes
-$lxd-switcher-thumb-size: 1.125em; // Tamaño del thumb (cuadrado)
-$lxd-switcher-thumb-bg: #ffffff; // Color del thumb
-$lxd-switcher-thumb-border-radius: 9999px; // Radio del thumb (circular)
-$lxd-switcher-cursor: pointer; // Cursor
-$lxd-switcher-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado
-$lxd-switcher-disabled-opacity: 0.4; // Opacidad cuando está deshabilitado
-$lxd-switcher-transition-duration: 150ms; // Duración de la transición
-$lxd-switcher-transition-easing: ease; // Easing de la transición
-$lxd-switcher-focus-ring-width: 2px; // Grosor del anillo de foco
-$lxd-switcher-focus-ring-offset: 1px; // Separación del anillo de foco
-$lxd-switcher-focus-ring-color: #111e30; // Color del anillo de foco
-$lxd-switcher-error-ring-width: 1px; // Grosor del anillo que marca el error (el track no tiene borde)
-$lxd-switcher-error-ring-offset: 1px; // Separación del anillo de error
-$lxd-switcher-error-ring-color: #b30000; // Color del anillo de error
-$lxd-switcher-sm-track-width: 2.25em; // Ancho del track — variante sm
-$lxd-switcher-sm-track-height: 1.25em; // Alto del track — variante sm
-$lxd-switcher-sm-thumb-size: 0.875em; // Tamaño del thumb — variante sm
-$lxd-switcher-lg-track-width: 3rem; // Ancho del track — variante lg: la talla lg del sistema (48px). En rem, no en em: como el resto de campos en lg, no se escala además con la fuente del párrafo large del campo
-$lxd-switcher-lg-track-height: 1.625rem; // Alto del track — variante lg. En rem, ver lg-track-width
-$lxd-switcher-lg-thumb-size: 1.25rem; // Tamaño del thumb — variante lg. En rem, ver lg-track-width
+$slxd-switcher-target-size: 1.5rem; // Área sensible al puntero: 24×24 px como pide WCAG 2.5.8, aunque el track (sm) sea menor en bloque. Se extiende de forma invisible y centrada, sin mover la maqueta
+$slxd-switcher-track-width: 2.75em; // Ancho del track
+$slxd-switcher-track-height: 1.5em; // Alto del track
+$slxd-switcher-track-bg: #d0d0d0; // Fondo del track — estado off
+$slxd-switcher-track-checked-bg: #111e30; // Fondo del track — estado on
+$slxd-switcher-track-border-radius: 9999px; // Radio del track (pill)
+$slxd-switcher-track-padding: 0.1875em; // Padding interior del track — separa el thumb de los bordes
+$slxd-switcher-thumb-size: 1.125em; // Tamaño del thumb (cuadrado)
+$slxd-switcher-thumb-bg: #ffffff; // Color del thumb
+$slxd-switcher-thumb-border-radius: 9999px; // Radio del thumb (circular)
+$slxd-switcher-cursor: pointer; // Cursor
+$slxd-switcher-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado
+$slxd-switcher-disabled-opacity: 0.4; // Opacidad cuando está deshabilitado
+$slxd-switcher-transition-duration: 150ms; // Duración de la transición
+$slxd-switcher-transition-easing: ease; // Easing de la transición
+$slxd-switcher-focus-ring-width: 2px; // Grosor del anillo de foco
+$slxd-switcher-focus-ring-offset: 1px; // Separación del anillo de foco
+$slxd-switcher-focus-ring-color: #111e30; // Color del anillo de foco
+$slxd-switcher-error-ring-width: 1px; // Grosor del anillo que marca el error (el track no tiene borde)
+$slxd-switcher-error-ring-offset: 1px; // Separación del anillo de error
+$slxd-switcher-error-ring-color: #b30000; // Color del anillo de error
+$slxd-switcher-sm-track-width: 2.25em; // Ancho del track — variante sm
+$slxd-switcher-sm-track-height: 1.25em; // Alto del track — variante sm
+$slxd-switcher-sm-thumb-size: 0.875em; // Tamaño del thumb — variante sm
+$slxd-switcher-lg-track-width: 3rem; // Ancho del track — variante lg: la talla lg del sistema (48px). En rem, no en em: como el resto de campos en lg, no se escala además con la fuente del párrafo large del campo
+$slxd-switcher-lg-track-height: 1.625rem; // Alto del track — variante lg. En rem, ver lg-track-width
+$slxd-switcher-lg-thumb-size: 1.25rem; // Tamaño del thumb — variante lg. En rem, ver lg-track-width
 
 // Alias obsoletos: nombres anteriores a la convención D9.
-$lxd-switcher-track-bg-checked: $lxd-switcher-track-checked-bg; // OBSOLETO (v51, se retira en la v52): usar $lxd-switcher-track-checked-bg
+$slxd-switcher-track-bg-checked: $slxd-switcher-track-checked-bg; // OBSOLETO (v51, se retira en la v52): usar $slxd-switcher-track-checked-bg

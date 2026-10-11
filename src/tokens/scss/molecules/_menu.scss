@@ -1,47 +1,47 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-menu-bg: #ffffff; // Fondo del panel — mismo lenguaje que ContextMenu
-$lxd-menu-border-width: 1px; // Grosor del borde del panel
-$lxd-menu-border-color: #111e30; // Color del borde del panel
-$lxd-menu-border-radius: 0px; // Radio del panel
-$lxd-menu-shadow: none; // Sombra del panel
-$lxd-menu-z-index: 400; // Capa z del panel flotante
-$lxd-menu-content-max-height: var(--available-height); // Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — con muchos ítems, el panel hace scroll en vez de salirse de la pantalla
-$lxd-menu-padding-block: 0.5rem; // Padding vertical del panel
-$lxd-menu-padding-inline: 0.5rem; // Padding lateral del panel
-$lxd-menu-item-padding-block: 0.5rem; // Padding vertical de cada ítem
-$lxd-menu-item-padding-inline: 1rem; // Padding horizontal de cada ítem
-$lxd-menu-item-icon-gap: 0.5rem; // Gap entre icono y texto del ítem
-$lxd-menu-item-icon-size: 1.5rem; // Talla del icono y del glifo de radio
-$lxd-menu-sm-item-icon-size: 16px; // Talla del icono de ítem — talla sm (16px)
-$lxd-menu-lg-item-icon-size: 1.5rem; // Talla del icono de ítem — talla lg (24px, la base: el ítem ya es grande)
-$lxd-menu-item-border-radius: 0px; // Radio de cada ítem
-$lxd-menu-item-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de ítems
-$lxd-menu-item-font-size: 1rem; // Tamaño de texto de ítems
-$lxd-menu-sm-item-font-size: 0.875rem; // Tamaño de texto de ítems — talla sm (la del Select, para que el panel case con su disparador)
-$lxd-menu-sm-item-padding-block: 0.25rem; // Padding vertical de cada ítem — talla sm
-$lxd-menu-lg-item-font-size: 1.25rem; // Tamaño de texto de ítems — talla lg (la del Select)
-$lxd-menu-lg-item-padding-block: 0.75rem; // Padding vertical de cada ítem — talla lg
-$lxd-menu-item-font-weight: 300; // Peso de texto de ítems
-$lxd-menu-item-line-height: 1.3; // Interlineado de ítems
-$lxd-menu-item-color: #111e30; // Color de texto de ítems
-$lxd-menu-item-highlighted-bg: #111e30; // Relleno del ítem bajo el puntero o el teclado (`[data-highlighted]`): la inversión de marca. Excepción declarada a «los estados no se rellenan» (Foundations → Colores): en una lista de opciones densa el relleno es lo único que se lee de un vistazo mientras el teclado la recorre
-$lxd-menu-item-highlighted-color: #ffffff; // Texto del ítem resaltado: invierte con el relleno — iconos y atajos lo heredan por `currentColor`
-$lxd-menu-item-selected-font-weight: 500; // La opción elegida de un grupo de radio, en énfasis: sin glifo
-$lxd-menu-item-cursor: pointer; // Cursor de ítems
-$lxd-menu-item-destructive-color: #b30000; // Color de texto de ítem destructivo
-$lxd-menu-item-destructive-highlighted-bg: #b30000; // Relleno del ítem destructivo resaltado: el rojo sólido, universal en las dos superficies
-$lxd-menu-item-destructive-highlighted-color: #ffffff; // Texto del ítem destructivo resaltado
-$lxd-menu-label-padding-block: 0.5rem; // Padding vertical del rótulo de sección
-$lxd-menu-label-margin-inline: 0.5rem; // Margen lateral del rótulo de sección: el mismo `margin-inline` que el ítem (`menu.padding-inline`), para que su texto quede alineado con el del ítem por construcción
-$lxd-menu-label-padding-inline: 1rem; // Padding horizontal del rótulo de sección: el mismo que el del ítem (`menu.item-padding-inline`). Con `label-margin-inline`, el texto del rótulo arranca donde arranca el contenido del ítem (su texto o, si lo lleva, su icono)
-$lxd-menu-label-font-size: 0.875rem; // Tamaño de texto del rótulo de sección
-$lxd-menu-label-font-weight: 500; // Peso del rótulo de sección
-$lxd-menu-label-color: #4a4a4a; // Color del rótulo de sección
-$lxd-menu-separator-color: #111e30; // Color del separador — el de la línea del sistema
-$lxd-menu-separator-height: 1px; // Alto del separador — el grosor de la línea del sistema
-$lxd-menu-separator-margin-block: 0.5rem; // Margen vertical del separador — el aire md de la línea del sistema
-$lxd-menu-disabled-opacity: 0.4; // Opacidad de ítems deshabilitados
-$lxd-menu-transition-duration: 150ms; // Duración de transición
-$lxd-menu-transition-easing: ease; // Easing de transición
+$slxd-menu-bg: #ffffff; // Fondo del panel — mismo lenguaje que ContextMenu
+$slxd-menu-border-width: 1px; // Grosor del borde del panel
+$slxd-menu-border-color: #111e30; // Color del borde del panel
+$slxd-menu-border-radius: 0px; // Radio del panel
+$slxd-menu-shadow: none; // Sombra del panel
+$slxd-menu-z-index: 400; // Capa z del panel flotante
+$slxd-menu-content-max-height: var(--available-height); // Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — con muchos ítems, el panel hace scroll en vez de salirse de la pantalla
+$slxd-menu-padding-block: 0.5rem; // Padding vertical del panel
+$slxd-menu-padding-inline: 0.5rem; // Padding lateral del panel
+$slxd-menu-item-padding-block: 0.5rem; // Padding vertical de cada ítem
+$slxd-menu-item-padding-inline: 1rem; // Padding horizontal de cada ítem
+$slxd-menu-item-icon-gap: 0.5rem; // Gap entre icono y texto del ítem
+$slxd-menu-item-icon-size: 1.5rem; // Talla del icono y del glifo de radio
+$slxd-menu-sm-item-icon-size: 16px; // Talla del icono de ítem — talla sm (16px)
+$slxd-menu-lg-item-icon-size: 1.5rem; // Talla del icono de ítem — talla lg (24px, la base: el ítem ya es grande)
+$slxd-menu-item-border-radius: 0px; // Radio de cada ítem
+$slxd-menu-item-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de ítems
+$slxd-menu-item-font-size: 1rem; // Tamaño de texto de ítems
+$slxd-menu-sm-item-font-size: 0.875rem; // Tamaño de texto de ítems — talla sm (la del Select, para que el panel case con su disparador)
+$slxd-menu-sm-item-padding-block: 0.25rem; // Padding vertical de cada ítem — talla sm
+$slxd-menu-lg-item-font-size: 1.25rem; // Tamaño de texto de ítems — talla lg (la del Select)
+$slxd-menu-lg-item-padding-block: 0.75rem; // Padding vertical de cada ítem — talla lg
+$slxd-menu-item-font-weight: 300; // Peso de texto de ítems
+$slxd-menu-item-line-height: 1.3; // Interlineado de ítems
+$slxd-menu-item-color: #111e30; // Color de texto de ítems
+$slxd-menu-item-highlighted-bg: #111e30; // Relleno del ítem bajo el puntero o el teclado (`[data-highlighted]`): la inversión de marca. Excepción declarada a «los estados no se rellenan» (Foundations → Colores): en una lista de opciones densa el relleno es lo único que se lee de un vistazo mientras el teclado la recorre
+$slxd-menu-item-highlighted-color: #ffffff; // Texto del ítem resaltado: invierte con el relleno — iconos y atajos lo heredan por `currentColor`
+$slxd-menu-item-selected-font-weight: 500; // La opción elegida de un grupo de radio, en énfasis: sin glifo
+$slxd-menu-item-cursor: pointer; // Cursor de ítems
+$slxd-menu-item-destructive-color: #b30000; // Color de texto de ítem destructivo
+$slxd-menu-item-destructive-highlighted-bg: #b30000; // Relleno del ítem destructivo resaltado: el rojo sólido, universal en las dos superficies
+$slxd-menu-item-destructive-highlighted-color: #ffffff; // Texto del ítem destructivo resaltado
+$slxd-menu-label-padding-block: 0.5rem; // Padding vertical del rótulo de sección
+$slxd-menu-label-margin-inline: 0.5rem; // Margen lateral del rótulo de sección: el mismo `margin-inline` que el ítem (`menu.padding-inline`), para que su texto quede alineado con el del ítem por construcción
+$slxd-menu-label-padding-inline: 1rem; // Padding horizontal del rótulo de sección: el mismo que el del ítem (`menu.item-padding-inline`). Con `label-margin-inline`, el texto del rótulo arranca donde arranca el contenido del ítem (su texto o, si lo lleva, su icono)
+$slxd-menu-label-font-size: 0.875rem; // Tamaño de texto del rótulo de sección
+$slxd-menu-label-font-weight: 500; // Peso del rótulo de sección
+$slxd-menu-label-color: #4a4a4a; // Color del rótulo de sección
+$slxd-menu-separator-color: #111e30; // Color del separador — el de la línea del sistema
+$slxd-menu-separator-height: 1px; // Alto del separador — el grosor de la línea del sistema
+$slxd-menu-separator-margin-block: 0.5rem; // Margen vertical del separador — el aire md de la línea del sistema
+$slxd-menu-disabled-opacity: 0.4; // Opacidad de ítems deshabilitados
+$slxd-menu-transition-duration: 150ms; // Duración de transición
+$slxd-menu-transition-easing: ease; // Easing de transición

@@ -1,48 +1,48 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-number-input-border-radius: 0px; // Border radius del contenedor
-$lxd-number-input-border-width: 1px; // Grosor del borde
-$lxd-number-input-border-style: solid; // Estilo del borde
-$lxd-number-input-border-color: #111e30; // Color del borde
-$lxd-number-input-bg: #ffffff; // Fondo del contenedor
-$lxd-number-input-color: #111e30; // Color del texto
-$lxd-number-input-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$lxd-number-input-font-size: 1rem; // Font size
-$lxd-number-input-font-weight: 300; // Font weight
-$lxd-number-input-line-height: 1; // Line height
-$lxd-number-input-height: 2.5rem; // Altura del control: la talla del sistema, heredada de input
-$lxd-number-input-padding-inline: 1rem; // Padding horizontal del campo
-$lxd-number-input-transition-duration: 150ms; // Duración de la transición
-$lxd-number-input-transition-easing: ease; // Easing de la transición
-$lxd-number-input-btn-width: 2rem; // Ancho de los botones +/−
-$lxd-number-input-btn-color: #111e30; // Color del icono de los botones
-$lxd-number-input-btn-bg: transparent; // Fondo de los botones
-$lxd-number-input-btn-hover-line-width: 1px; // Grosor de la línea de hover de los botones +/−. El hover no pinta relleno (regla de Colores): deja una línea de tinta bajo el botón
-$lxd-number-input-btn-hover-line-color: #111e30; // Color de la línea de hover de los botones +/−
-$lxd-number-input-btn-separator-color: #111e30; // Color del separador entre botón y campo
-$lxd-number-input-focus-ring-width: 2px; // Grosor del focus ring
-$lxd-number-input-focus-ring-inset-offset: 1px; // Gap entre borde y focus ring
-$lxd-number-input-focus-ring-color: #111e30; // Color del focus ring
-$lxd-number-input-focus-border-color: #111e30; // Color del borde en foco
-$lxd-number-input-disabled-cursor: not-allowed; // Cursor cuando deshabilitado
-$lxd-number-input-disabled-bg: #f2f2f2; // Fondo cuando deshabilitado
-$lxd-number-input-disabled-color: #4a4a4a; // Texto cuando deshabilitado
-$lxd-number-input-disabled-border-color: #d0d0d0; // Borde cuando deshabilitado
-$lxd-number-input-disabled-btn-color: #4a4a4a; // Color del icono de botones cuando deshabilitado
-$lxd-number-input-error-border-color: #b30000; // Color del borde en error
-$lxd-number-input-error-bg: #ffffff; // Fondo en error
-$lxd-number-input-error-color: #111e30; // Texto en error
-$lxd-number-input-error-focus-border-color: #b30000; // Borde en foco+error
-$lxd-number-input-error-focus-ring-color: #b30000; // Focus ring en error
-$lxd-number-input-sm-font-size: 0.875rem; // Font size — sm
-$lxd-number-input-sm-height: 2rem; // Altura — sm
-$lxd-number-input-sm-padding-inline: 0.75rem; // Padding horizontal — sm
-$lxd-number-input-lg-font-size: 1.25rem; // Font size — lg
-$lxd-number-input-lg-height: 3rem; // Altura — lg
-$lxd-number-input-lg-padding-inline: 1.5rem; // Padding horizontal — lg
-$lxd-number-input-compact-height: 2rem; // Altura — compacto (fila de lista): la talla mínima del sistema
-$lxd-number-input-compact-font-size: 0.875rem; // Font size — compacto
-$lxd-number-input-compact-btn-width: 1.5rem; // Ancho de los botones +/− — compacto. En nativo la zona táctil se amplía a 44 pt / 48 dp sin cambiar este ancho
-$lxd-number-input-compact-field-width: 2.5rem; // Ancho de la cifra — compacto: lo justo para 2–3 dígitos. El control no se estira
-$lxd-number-input-compact-padding-inline: 0.25rem; // Padding horizontal de la cifra — compacto
+$slxd-number-input-border-radius: 0px; // Border radius del contenedor
+$slxd-number-input-border-width: 1px; // Grosor del borde
+$slxd-number-input-border-style: solid; // Estilo del borde
+$slxd-number-input-border-color: #111e30; // Color del borde
+$slxd-number-input-bg: #ffffff; // Fondo del contenedor
+$slxd-number-input-color: #111e30; // Color del texto
+$slxd-number-input-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
+$slxd-number-input-font-size: 1rem; // Font size
+$slxd-number-input-font-weight: 300; // Font weight
+$slxd-number-input-line-height: 1; // Line height
+$slxd-number-input-height: 2.5rem; // Altura del control: la talla del sistema, heredada de input
+$slxd-number-input-padding-inline: 1rem; // Padding horizontal del campo
+$slxd-number-input-transition-duration: 150ms; // Duración de la transición
+$slxd-number-input-transition-easing: ease; // Easing de la transición
+$slxd-number-input-btn-width: 2rem; // Ancho de los botones +/−
+$slxd-number-input-btn-color: #111e30; // Color del icono de los botones
+$slxd-number-input-btn-bg: transparent; // Fondo de los botones
+$slxd-number-input-btn-hover-line-width: 1px; // Grosor de la línea de hover de los botones +/−. El hover no pinta relleno (regla de Colores): deja una línea de tinta bajo el botón
+$slxd-number-input-btn-hover-line-color: #111e30; // Color de la línea de hover de los botones +/−
+$slxd-number-input-btn-separator-color: #111e30; // Color del separador entre botón y campo
+$slxd-number-input-focus-ring-width: 2px; // Grosor del focus ring
+$slxd-number-input-focus-ring-inset-offset: 1px; // Gap entre borde y focus ring
+$slxd-number-input-focus-ring-color: #111e30; // Color del focus ring
+$slxd-number-input-focus-border-color: #111e30; // Color del borde en foco
+$slxd-number-input-disabled-cursor: not-allowed; // Cursor cuando deshabilitado
+$slxd-number-input-disabled-bg: #f2f2f2; // Fondo cuando deshabilitado
+$slxd-number-input-disabled-color: #4a4a4a; // Texto cuando deshabilitado
+$slxd-number-input-disabled-border-color: #d0d0d0; // Borde cuando deshabilitado
+$slxd-number-input-disabled-btn-color: #4a4a4a; // Color del icono de botones cuando deshabilitado
+$slxd-number-input-error-border-color: #b30000; // Color del borde en error
+$slxd-number-input-error-bg: #ffffff; // Fondo en error
+$slxd-number-input-error-color: #111e30; // Texto en error
+$slxd-number-input-error-focus-border-color: #b30000; // Borde en foco+error
+$slxd-number-input-error-focus-ring-color: #b30000; // Focus ring en error
+$slxd-number-input-sm-font-size: 0.875rem; // Font size — sm
+$slxd-number-input-sm-height: 2rem; // Altura — sm
+$slxd-number-input-sm-padding-inline: 0.75rem; // Padding horizontal — sm
+$slxd-number-input-lg-font-size: 1.25rem; // Font size — lg
+$slxd-number-input-lg-height: 3rem; // Altura — lg
+$slxd-number-input-lg-padding-inline: 1.5rem; // Padding horizontal — lg
+$slxd-number-input-compact-height: 2rem; // Altura — compacto (fila de lista): la talla mínima del sistema
+$slxd-number-input-compact-font-size: 0.875rem; // Font size — compacto
+$slxd-number-input-compact-btn-width: 1.5rem; // Ancho de los botones +/− — compacto. En nativo la zona táctil se amplía a 44 pt / 48 dp sin cambiar este ancho
+$slxd-number-input-compact-field-width: 2.5rem; // Ancho de la cifra — compacto: lo justo para 2–3 dígitos. El control no se estira
+$slxd-number-input-compact-padding-inline: 0.25rem; // Padding horizontal de la cifra — compacto

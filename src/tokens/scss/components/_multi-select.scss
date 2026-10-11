@@ -1,54 +1,54 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-multi-select-border-radius: 0px; // Radio del borde del trigger
-$lxd-multi-select-border-width: 1px; // Grosor del borde
-$lxd-multi-select-border-style: solid; // Estilo del borde
-$lxd-multi-select-border-color: #111e30; // Color del borde
-$lxd-multi-select-error-border-color: #b30000; // Borde en error: el color de error
-$lxd-multi-select-height: 2.5rem; // Altura mínima del trigger: la talla md del sistema. Crece solo si las pills ocupan más de una línea
-$lxd-multi-select-sm-height: 2rem; // Altura mínima del trigger — sm
-$lxd-multi-select-lg-height: 3rem; // Altura mínima del trigger — lg
-$lxd-multi-select-padding-inline: 1rem; // Padding inline del trigger
-$lxd-multi-select-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica
-$lxd-multi-select-font-size: 1rem; // Tamaño de fuente
-$lxd-multi-select-line-height: 1; // Interlineado del trigger
-$lxd-multi-select-font-weight: 300; // Peso tipográfico
-$lxd-multi-select-color: #111e30; // Color del texto
-$lxd-multi-select-placeholder-color: #4a4a4a; // Color del placeholder
-$lxd-multi-select-bg: #ffffff; // Fondo del trigger
-$lxd-multi-select-content-gap: 0.5rem; // Aire entre el contenido del disparador y el chevron
-$lxd-multi-select-icon-transition: 150ms; // Duración de la transición del icono
-$lxd-multi-select-focus-ring-width: 2px; // Grosor del anillo de foco
-$lxd-multi-select-focus-ring-color: #111e30; // Color del anillo de foco
-$lxd-multi-select-content-bg: #ffffff; // Fondo del dropdown
-$lxd-multi-select-content-border-color: #111e30; // Borde del dropdown
-$lxd-multi-select-content-z-index: 400; // Z-index del dropdown
-$lxd-multi-select-content-max-height: var(--available-height); // Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Base UI)
-$lxd-multi-select-item-padding-block: 0.5rem; // Padding block de cada opción
-$lxd-multi-select-pill-bg: #111e30; // Fondo de la pill de valor seleccionado
-$lxd-multi-select-pill-color: #ffffff; // Texto de la pill
-$lxd-multi-select-pill-border-radius: 9999px; // Radio de la pill
-$lxd-multi-select-pill-padding-block: 0.25rem; // Padding block de la pill
-$lxd-multi-select-pill-padding-inline: 0.5rem; // Padding inline de la pill
-$lxd-multi-select-pill-gap: 0.25rem; // Separación entre texto y botón × en la pill
-$lxd-multi-select-pill-font-size: 0.875rem; // Tamaño de fuente de la pill
-$lxd-multi-select-disabled-opacity: 0.4; // Opacidad del control deshabilitado: el mismo velo que el resto de controles del sistema
-$lxd-multi-select-disabled-cursor: not-allowed; // Cursor sobre el control deshabilitado
-$lxd-multi-select-pill-line-height: 1; // Interlineado de la píldora: sin holgura, la píldora la mide su propio aire
-$lxd-multi-select-pill-remove-opacity: 0.7; // Opacidad del aspa en reposo: presente pero en segundo plano
-$lxd-multi-select-pill-remove-hover-opacity: 1; // Opacidad del aspa bajo el puntero
-$lxd-multi-select-item-selected-font-weight: 700; // Peso de la opción ya elegida en la lista: lo elegido se dice con peso, no con relleno
-$lxd-multi-select-icon-transition-easing: ease; // Curva del giro del chevron al abrir
-$lxd-multi-select-selection-gap: 0.25rem; // Separación entre pills. Nombrado `selection-gap`, no `values-gap`: Style Dictionary 4.4.0 confunde un segmento de ruta que empieza por «value» (`values-gap`) con el sufijo `.value`/`.$value` del propio alias DTCG (`getReferences.js`, `variable.replace('.value', '')` con un `String.replace` de texto plano, no una regex anclada) y no resuelve la referencia encadenada — ver `surface-dark-derived.css`/release-check § tokens sin resolver
-$lxd-multi-select-icon-size: 16px; // Glifo del chevron del trigger — el del Select
-$lxd-multi-select-sm-icon-size: 16px; // Glifo del chevron — variante sm
-$lxd-multi-select-lg-icon-size: 24px; // Glifo del chevron — variante lg
-$lxd-multi-select-sm-font-size: 0.875rem; // Tamaño de fuente — variante sm
-$lxd-multi-select-sm-padding-inline: 0.5rem; // Padding inline del trigger — variante sm
-$lxd-multi-select-sm-item-padding-block: 0.25rem; // Padding block de cada opción — variante sm
-$lxd-multi-select-lg-font-size: 1.25rem; // Tamaño de fuente — variante lg
-$lxd-multi-select-lg-padding-inline: 1.5rem; // Padding inline del trigger — variante lg
-$lxd-multi-select-lg-item-padding-block: 0.75rem; // Padding block de cada opción — variante lg
-$lxd-multi-select-item-highlighted-bg: #111e30; // Relleno de la opción resaltada — el del Select: la inversión de marca
-$lxd-multi-select-item-highlighted-color: #ffffff; // Texto de la opción resaltada — el del Select
+$slxd-multi-select-border-radius: 0px; // Radio del borde del trigger
+$slxd-multi-select-border-width: 1px; // Grosor del borde
+$slxd-multi-select-border-style: solid; // Estilo del borde
+$slxd-multi-select-border-color: #111e30; // Color del borde
+$slxd-multi-select-error-border-color: #b30000; // Borde en error: el color de error
+$slxd-multi-select-height: 2.5rem; // Altura mínima del trigger: la talla md del sistema. Crece solo si las pills ocupan más de una línea
+$slxd-multi-select-sm-height: 2rem; // Altura mínima del trigger — sm
+$slxd-multi-select-lg-height: 3rem; // Altura mínima del trigger — lg
+$slxd-multi-select-padding-inline: 1rem; // Padding inline del trigger
+$slxd-multi-select-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica
+$slxd-multi-select-font-size: 1rem; // Tamaño de fuente
+$slxd-multi-select-line-height: 1; // Interlineado del trigger
+$slxd-multi-select-font-weight: 300; // Peso tipográfico
+$slxd-multi-select-color: #111e30; // Color del texto
+$slxd-multi-select-placeholder-color: #4a4a4a; // Color del placeholder
+$slxd-multi-select-bg: #ffffff; // Fondo del trigger
+$slxd-multi-select-content-gap: 0.5rem; // Aire entre el contenido del disparador y el chevron
+$slxd-multi-select-icon-transition: 150ms; // Duración de la transición del icono
+$slxd-multi-select-focus-ring-width: 2px; // Grosor del anillo de foco
+$slxd-multi-select-focus-ring-color: #111e30; // Color del anillo de foco
+$slxd-multi-select-content-bg: #ffffff; // Fondo del dropdown
+$slxd-multi-select-content-border-color: #111e30; // Borde del dropdown
+$slxd-multi-select-content-z-index: 400; // Z-index del dropdown
+$slxd-multi-select-content-max-height: var(--available-height); // Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Base UI)
+$slxd-multi-select-item-padding-block: 0.5rem; // Padding block de cada opción
+$slxd-multi-select-pill-bg: #111e30; // Fondo de la pill de valor seleccionado
+$slxd-multi-select-pill-color: #ffffff; // Texto de la pill
+$slxd-multi-select-pill-border-radius: 9999px; // Radio de la pill
+$slxd-multi-select-pill-padding-block: 0.25rem; // Padding block de la pill
+$slxd-multi-select-pill-padding-inline: 0.5rem; // Padding inline de la pill
+$slxd-multi-select-pill-gap: 0.25rem; // Separación entre texto y botón × en la pill
+$slxd-multi-select-pill-font-size: 0.875rem; // Tamaño de fuente de la pill
+$slxd-multi-select-disabled-opacity: 0.4; // Opacidad del control deshabilitado: el mismo velo que el resto de controles del sistema
+$slxd-multi-select-disabled-cursor: not-allowed; // Cursor sobre el control deshabilitado
+$slxd-multi-select-pill-line-height: 1; // Interlineado de la píldora: sin holgura, la píldora la mide su propio aire
+$slxd-multi-select-pill-remove-opacity: 0.7; // Opacidad del aspa en reposo: presente pero en segundo plano
+$slxd-multi-select-pill-remove-hover-opacity: 1; // Opacidad del aspa bajo el puntero
+$slxd-multi-select-item-selected-font-weight: 700; // Peso de la opción ya elegida en la lista: lo elegido se dice con peso, no con relleno
+$slxd-multi-select-icon-transition-easing: ease; // Curva del giro del chevron al abrir
+$slxd-multi-select-selection-gap: 0.25rem; // Separación entre pills. Nombrado `selection-gap`, no `values-gap`: Style Dictionary 4.4.0 confunde un segmento de ruta que empieza por «value» (`values-gap`) con el sufijo `.value`/`.$value` del propio alias DTCG (`getReferences.js`, `variable.replace('.value', '')` con un `String.replace` de texto plano, no una regex anclada) y no resuelve la referencia encadenada — ver `surface-dark-derived.css`/release-check § tokens sin resolver
+$slxd-multi-select-icon-size: 16px; // Glifo del chevron del trigger — el del Select
+$slxd-multi-select-sm-icon-size: 16px; // Glifo del chevron — variante sm
+$slxd-multi-select-lg-icon-size: 24px; // Glifo del chevron — variante lg
+$slxd-multi-select-sm-font-size: 0.875rem; // Tamaño de fuente — variante sm
+$slxd-multi-select-sm-padding-inline: 0.5rem; // Padding inline del trigger — variante sm
+$slxd-multi-select-sm-item-padding-block: 0.25rem; // Padding block de cada opción — variante sm
+$slxd-multi-select-lg-font-size: 1.25rem; // Tamaño de fuente — variante lg
+$slxd-multi-select-lg-padding-inline: 1.5rem; // Padding inline del trigger — variante lg
+$slxd-multi-select-lg-item-padding-block: 0.75rem; // Padding block de cada opción — variante lg
+$slxd-multi-select-item-highlighted-bg: #111e30; // Relleno de la opción resaltada — el del Select: la inversión de marca
+$slxd-multi-select-item-highlighted-color: #ffffff; // Texto de la opción resaltada — el del Select

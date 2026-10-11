@@ -1,39 +1,39 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-org-switcher-trigger-padding-block: 0.5rem; // Padding vertical del trigger
-$lxd-org-switcher-trigger-padding-inline: 0.75rem; // Padding horizontal del trigger
-$lxd-org-switcher-trigger-gap: 0.75rem; // Espacio entre logo y nombre
-$lxd-org-switcher-trigger-border-radius: 0px; // Radio del trigger
-$lxd-org-switcher-focus-ring-color: #111e30; // Color del focus ring
-$lxd-org-switcher-focus-ring-width: 2px; // Grosor del focus ring
-$lxd-org-switcher-focus-ring-offset: 1px; // Separación del focus ring
-$lxd-org-switcher-name-font-size: 1rem; // Tamaño de texto del nombre de la org
-$lxd-org-switcher-name-font-weight: 500; // Peso del nombre de la org
-$lxd-org-switcher-name-color: #111e30; // Color del nombre de la org
-$lxd-org-switcher-content-min-width: 14rem; // Ancho mínimo del panel: nombres de organización (no es una talla de componente)
-$lxd-org-switcher-content-bg: #ffffff; // Fondo del panel
-$lxd-org-switcher-content-border-width: 1px; // Borde del panel
-$lxd-org-switcher-content-border-color: #111e30; // Color del borde del panel
-$lxd-org-switcher-content-border-radius: 0px; // Radio del panel
-$lxd-org-switcher-content-shadow: none; // Sombra del panel
-$lxd-org-switcher-content-z-index: 400; // Z-index del dropdown (por encima del sidebar en mobile)
-$lxd-org-switcher-content-max-height: var(--available-height); // Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — con muchas organizaciones, el panel hace scroll en vez de salirse de la pantalla
-$lxd-org-switcher-content-padding-block: 0.5rem; // Padding vertical del panel
-$lxd-org-switcher-content-padding-inline: 0.5rem; // Padding horizontal del panel
-$lxd-org-switcher-item-padding-block: 0.5rem; // Padding vertical de cada ítem
-$lxd-org-switcher-item-padding-inline: 0.75rem; // Padding horizontal de cada ítem
-$lxd-org-switcher-item-border-radius: 0px; // Radio de cada ítem
-$lxd-org-switcher-item-font-size: 1rem; // Tamaño de texto de ítems
-$lxd-org-switcher-item-font-weight: 300; // Peso de ítems
-$lxd-org-switcher-item-color: #111e30; // Color de ítems
-$lxd-org-switcher-item-highlighted-bg: #111e30; // Relleno del ítem resaltado — el del Menu: la inversión de marca
-$lxd-org-switcher-item-highlighted-color: #ffffff; // Texto del ítem resaltado — el del Menu
-$lxd-org-switcher-item-destructive-color: #b30000; // Color de ítem destructivo — el del Menu
-$lxd-org-switcher-item-destructive-highlighted-bg: #b30000; // Relleno del ítem destructivo resaltado — el del Menu
-$lxd-org-switcher-item-destructive-highlighted-color: #ffffff; // Texto del ítem destructivo resaltado — el del Menu
-$lxd-org-switcher-separator-color: #111e30; // Color del separador — el de la línea del sistema
-$lxd-org-switcher-separator-height: 1px; // Alto del separador — el grosor de la línea del sistema
-$lxd-org-switcher-separator-margin-block: 0.5rem; // Margen vertical del separador — el aire md de la línea del sistema
-$lxd-org-switcher-transition-duration: 150ms; // Duración de transición
-$lxd-org-switcher-transition-easing: ease; // Easing de transición
+$slxd-org-switcher-trigger-padding-block: 0.5rem; // Padding vertical del trigger
+$slxd-org-switcher-trigger-padding-inline: 0.75rem; // Padding horizontal del trigger
+$slxd-org-switcher-trigger-gap: 0.75rem; // Espacio entre logo y nombre
+$slxd-org-switcher-trigger-border-radius: 0px; // Radio del trigger
+$slxd-org-switcher-focus-ring-color: #111e30; // Color del focus ring
+$slxd-org-switcher-focus-ring-width: 2px; // Grosor del focus ring
+$slxd-org-switcher-focus-ring-offset: 1px; // Separación del focus ring
+$slxd-org-switcher-name-font-size: 1rem; // Tamaño de texto del nombre de la org
+$slxd-org-switcher-name-font-weight: 500; // Peso del nombre de la org
+$slxd-org-switcher-name-color: #111e30; // Color del nombre de la org
+$slxd-org-switcher-content-min-width: 14rem; // Ancho mínimo del panel: nombres de organización (no es una talla de componente)
+$slxd-org-switcher-content-bg: #ffffff; // Fondo del panel
+$slxd-org-switcher-content-border-width: 1px; // Borde del panel
+$slxd-org-switcher-content-border-color: #111e30; // Color del borde del panel
+$slxd-org-switcher-content-border-radius: 0px; // Radio del panel
+$slxd-org-switcher-content-shadow: none; // Sombra del panel
+$slxd-org-switcher-content-z-index: 400; // Z-index del dropdown (por encima del sidebar en mobile)
+$slxd-org-switcher-content-max-height: var(--available-height); // Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — con muchas organizaciones, el panel hace scroll en vez de salirse de la pantalla
+$slxd-org-switcher-content-padding-block: 0.5rem; // Padding vertical del panel
+$slxd-org-switcher-content-padding-inline: 0.5rem; // Padding horizontal del panel
+$slxd-org-switcher-item-padding-block: 0.5rem; // Padding vertical de cada ítem
+$slxd-org-switcher-item-padding-inline: 0.75rem; // Padding horizontal de cada ítem
+$slxd-org-switcher-item-border-radius: 0px; // Radio de cada ítem
+$slxd-org-switcher-item-font-size: 1rem; // Tamaño de texto de ítems
+$slxd-org-switcher-item-font-weight: 300; // Peso de ítems
+$slxd-org-switcher-item-color: #111e30; // Color de ítems
+$slxd-org-switcher-item-highlighted-bg: #111e30; // Relleno del ítem resaltado — el del Menu: la inversión de marca
+$slxd-org-switcher-item-highlighted-color: #ffffff; // Texto del ítem resaltado — el del Menu
+$slxd-org-switcher-item-destructive-color: #b30000; // Color de ítem destructivo — el del Menu
+$slxd-org-switcher-item-destructive-highlighted-bg: #b30000; // Relleno del ítem destructivo resaltado — el del Menu
+$slxd-org-switcher-item-destructive-highlighted-color: #ffffff; // Texto del ítem destructivo resaltado — el del Menu
+$slxd-org-switcher-separator-color: #111e30; // Color del separador — el de la línea del sistema
+$slxd-org-switcher-separator-height: 1px; // Alto del separador — el grosor de la línea del sistema
+$slxd-org-switcher-separator-margin-block: 0.5rem; // Margen vertical del separador — el aire md de la línea del sistema
+$slxd-org-switcher-transition-duration: 150ms; // Duración de transición
+$slxd-org-switcher-transition-easing: ease; // Easing de transición

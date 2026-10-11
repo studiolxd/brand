@@ -1,23 +1,23 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-accordion-border-width: 1px; // Grosor del separador entre ítems
-$lxd-accordion-border-color: #111e30; // Color del separador: tinta de la superficie (prusia en claro)
-$lxd-accordion-trigger-padding-block: 1.5rem; // Aire vertical del disparador
-$lxd-accordion-trigger-padding-inline: 2rem; // Aire horizontal del disparador
-$lxd-accordion-trigger-gap: 1rem; // Hueco entre el texto y el chevron
-$lxd-accordion-trigger-cursor: pointer; // Cursor del disparador
-$lxd-accordion-index-font-family: "Google Sans Code", ui-monospace, monospace; // Monoespaciada: los números del acordeón numerado se alinean en columna
-$lxd-accordion-index-font-size: 0.875rem; // Un peldaño por debajo del rótulo del apartado
-$lxd-accordion-index-color: #4a4a4a; // Color del número: texto secundario, para que no compita con el rótulo
-$lxd-accordion-index-min-width: 1.5rem; // Ancho mínimo de la ranura del número (24px): mantiene la columna aunque pase de una a dos cifras
-$lxd-accordion-content-padding-block: 2rem; // Aire inferior del contenido
-$lxd-accordion-content-padding-inline: 2rem; // Aire horizontal del contenido
-$lxd-accordion-transition-duration: 400ms; // Duración de abrir/cerrar (cambio de contexto: el panel entra)
-$lxd-accordion-transition-easing: ease-in-out; // Curva de abrir/cerrar
-$lxd-accordion-focus-ring-width: 2px; // Grosor del anillo de foco
-$lxd-accordion-focus-ring-offset: 2px; // Separación del anillo de foco (el rol focus gobierna ancho y separación)
-$lxd-accordion-focus-ring-color: #111e30; // Color del anillo de foco: la tinta de la superficie
+$slxd-accordion-border-width: 1px; // Grosor del separador entre ítems
+$slxd-accordion-border-color: #111e30; // Color del separador: tinta de la superficie (prusia en claro)
+$slxd-accordion-trigger-padding-block: 1.5rem; // Aire vertical del disparador
+$slxd-accordion-trigger-padding-inline: 2rem; // Aire horizontal del disparador
+$slxd-accordion-trigger-gap: 1rem; // Hueco entre el texto y el chevron
+$slxd-accordion-trigger-cursor: pointer; // Cursor del disparador
+$slxd-accordion-index-font-family: "Google Sans Code", ui-monospace, monospace; // Monoespaciada: los números del acordeón numerado se alinean en columna
+$slxd-accordion-index-font-size: 0.875rem; // Un peldaño por debajo del rótulo del apartado
+$slxd-accordion-index-color: #4a4a4a; // Color del número: texto secundario, para que no compita con el rótulo
+$slxd-accordion-index-min-width: 1.5rem; // Ancho mínimo de la ranura del número (24px): mantiene la columna aunque pase de una a dos cifras
+$slxd-accordion-content-padding-block: 2rem; // Aire inferior del contenido
+$slxd-accordion-content-padding-inline: 2rem; // Aire horizontal del contenido
+$slxd-accordion-transition-duration: 400ms; // Duración de abrir/cerrar (cambio de contexto: el panel entra)
+$slxd-accordion-transition-easing: ease-in-out; // Curva de abrir/cerrar
+$slxd-accordion-focus-ring-width: 2px; // Grosor del anillo de foco
+$slxd-accordion-focus-ring-offset: 2px; // Separación del anillo de foco (el rol focus gobierna ancho y separación)
+$slxd-accordion-focus-ring-color: #111e30; // Color del anillo de foco: la tinta de la superficie
 
 // Alias obsoletos: nombres anteriores a la convención D9.
-$lxd-accordion-index-min-inline-size: $lxd-accordion-index-min-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-accordion-index-min-width
+$slxd-accordion-index-min-inline-size: $slxd-accordion-index-min-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-accordion-index-min-width

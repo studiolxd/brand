@@ -1,61 +1,61 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-heatmap-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica de la matriz
-$lxd-heatmap-radius: 0px; // Radio del marco de la matriz
-$lxd-heatmap-border-color: #111e30; // Color de la rejilla
-$lxd-heatmap-border-width: 1px; // Grosor de la rejilla
-$lxd-heatmap-row-header-width: 10rem; // Ancho de la columna de filas
-$lxd-heatmap-row-header-font-size: 0.875rem; // Tamaño del nombre de la fila
-$lxd-heatmap-row-header-color: #111e30; // Color del nombre de la fila
-$lxd-heatmap-row-header-font-weight: 300; // Peso del nombre de la fila (la celda es th: el agente de usuario la pondría en negrita)
-$lxd-heatmap-row-header-bg: #ffffff; // Fondo sticky de la columna de filas
-$lxd-heatmap-row-header-padding-block: 0.5rem; // Padding vertical del nombre de la fila
-$lxd-heatmap-row-header-padding-inline: 0.75rem; // Padding horizontal del nombre de la fila
-$lxd-heatmap-column-header-font-size: 0.75rem; // Tamaño del nombre de la columna
-$lxd-heatmap-column-header-font-weight: 500; // Peso del nombre de la columna
-$lxd-heatmap-column-header-color: #4a4a4a; // Color del nombre de la columna
-$lxd-heatmap-column-header-bg: #ffffff; // Fondo del encabezado de columna
-$lxd-heatmap-column-header-padding-block: 0.5rem; // Padding vertical del encabezado de columna
-$lxd-heatmap-column-header-padding-inline: 0.5rem; // Padding horizontal del encabezado de columna
-$lxd-heatmap-column-header-width: 3rem; // Ancho mínimo de una columna de datos
-$lxd-heatmap-group-header-font-size: 0.75rem; // Tamaño del nombre del grupo de columnas
-$lxd-heatmap-group-header-color: #4a4a4a; // Color del nombre del grupo de columnas
-$lxd-heatmap-cell-padding-block: 0.5rem; // Padding vertical de una celda de dato
-$lxd-heatmap-cell-padding-inline: 0.5rem; // Padding horizontal de una celda de dato
-$lxd-heatmap-cell-font-size: 0.875rem; // Tamaño de la cifra de la celda
-$lxd-heatmap-cell-font-weight: 500; // Peso de la cifra de la celda
-$lxd-heatmap-empty-bg: #f2f2f2; // Fondo de una celda sin dato — superficie secundaria, no un paso de la rampa
-$lxd-heatmap-empty-pattern-color: #d0d0d0; // Color de la trama de la celda sin dato: lo que la separa de la rampa sin depender del color
-$lxd-heatmap-empty-pattern-width: 0.25rem; // Ancho de la trama de la celda sin dato
-$lxd-heatmap-legend-gap: 0.5rem; // Separación entre los elementos de la leyenda
-$lxd-heatmap-legend-font-size: 0.875rem; // Tamaño del texto de la leyenda
-$lxd-heatmap-legend-color: #4a4a4a; // Color del texto de la leyenda
-$lxd-heatmap-legend-swatch-size: 0.75rem; // Alto de la tira de la leyenda y ancho de cada uno de sus peldaños, que van pegados
-$lxd-heatmap-margin-block-start: 0.75rem; // Aire entre la matriz y su leyenda
-$lxd-heatmap-step-1-bg: #dce9fc; // Paso 1 de la rampa de la matriz — sequential-100 de la rampa secuencial del sistema
-$lxd-heatmap-step-1-color: #111e30; // Tinta sobre el paso 1 — la que llega a 4,5:1 sobre ese relleno
-$lxd-heatmap-step-2-bg: #b6d2f8; // Paso 2 de la rampa de la matriz — sequential-200 de la rampa secuencial del sistema
-$lxd-heatmap-step-2-color: #111e30; // Tinta sobre el paso 2 — la que llega a 4,5:1 sobre ese relleno
-$lxd-heatmap-step-3-bg: #8fbaf5; // Paso 3 de la rampa de la matriz — sequential-300 de la rampa secuencial del sistema
-$lxd-heatmap-step-3-color: #111e30; // Tinta sobre el paso 3 — la que llega a 4,5:1 sobre ese relleno
-$lxd-heatmap-step-4-bg: #3b88ee; // Paso 4 de la rampa de la matriz — sequential-500 de la rampa secuencial del sistema
-$lxd-heatmap-step-4-color: #111e30; // Tinta sobre el paso 4 — la que llega a 4,5:1 sobre ese relleno
-$lxd-heatmap-step-5-bg: #236ac5; // Paso 5 de la rampa de la matriz — sequential-600 de la rampa secuencial del sistema
-$lxd-heatmap-step-5-color: #ffffff; // Tinta sobre el paso 5 — la que llega a 4,5:1 sobre ese relleno
-$lxd-heatmap-step-6-bg: #164b90; // Paso 6 de la rampa de la matriz — sequential-700 de la rampa secuencial del sistema
-$lxd-heatmap-step-6-color: #ffffff; // Tinta sobre el paso 6 — la que llega a 4,5:1 sobre ese relleno
-$lxd-heatmap-diverging-warm-3-bg: #9f431f; // Escala divergente, peldaño warm-3 — diverging-warm-3 (#9F431F), extremo del brazo cálido
-$lxd-heatmap-diverging-warm-3-color: #ffffff; // Tinta sobre el peldaño divergente warm-3 — diverging-warm-3 (#9F431F), extremo del brazo cálido. Blanco: 6,37:1 (prusia daría 2,63:1)
-$lxd-heatmap-diverging-warm-2-bg: #e26330; // Escala divergente, peldaño warm-2 — diverging-warm-2-on-dark (#E26330): ver la tinta
-$lxd-heatmap-diverging-warm-2-color: #111e30; // Tinta sobre el peldaño divergente warm-2 — diverging-warm-2-on-dark (#E26330), NO diverging-warm-2. El intermedio cálido del sistema (#D45C2C) no admite cifra con ninguna de las dos tintas: 4,29:1 con prusia y 3,91:1 con blanco. Su par de superficie oscura, ya en la paleta, sí: 4,84:1 con prusia, y queda entre sus dos vecinos (1,32:1 con warm-1, 1,84:1 con warm-3). Sin color nuevo (regla 9)
-$lxd-heatmap-diverging-warm-1-bg: #f37f54; // Escala divergente, peldaño warm-1 — diverging-warm-1 (#F37F54), junto al neutro
-$lxd-heatmap-diverging-warm-1-color: #111e30; // Tinta sobre el peldaño divergente warm-1 — diverging-warm-1 (#F37F54), junto al neutro. Prusia: 6,37:1 (blanco daría 2,63:1)
-$lxd-heatmap-diverging-neutral-bg: #f2f2f2; // Escala divergente, peldaño neutral — el centro: el mismo gris que chart.diverging-neutral (#F2F2F2), un rol de superficie porque el centro se retira hacia el lienzo
-$lxd-heatmap-diverging-neutral-color: #111e30; // Tinta sobre el peldaño divergente neutral — el centro: el mismo gris que chart.diverging-neutral (#F2F2F2), un rol de superficie porque el centro se retira hacia el lienzo. Prusia: 14,98:1. Comparte relleno con la casilla sin dato, que se distingue por su trama y por no llevar cifra
-$lxd-heatmap-diverging-cool-1-bg: #70a6f2; // Escala divergente, peldaño cool-1 — diverging-cool-1 (#70A6F2), junto al neutro
-$lxd-heatmap-diverging-cool-1-color: #111e30; // Tinta sobre el peldaño divergente cool-1 — diverging-cool-1 (#70A6F2), junto al neutro. Prusia: 6,73:1 (blanco daría 2,49:1)
-$lxd-heatmap-diverging-cool-2-bg: #3484ee; // Escala divergente, peldaño cool-2 — diverging-cool-2 (#3484EE), intermedio
-$lxd-heatmap-diverging-cool-2-color: #111e30; // Tinta sobre el peldaño divergente cool-2 — diverging-cool-2 (#3484EE), intermedio. Prusia: 4,54:1 (blanco daría 3,70:1)
-$lxd-heatmap-diverging-cool-3-bg: #1f61b6; // Escala divergente, peldaño cool-3 — diverging-cool-3 (#1F61B6), extremo del brazo frío
-$lxd-heatmap-diverging-cool-3-color: #ffffff; // Tinta sobre el peldaño divergente cool-3 — diverging-cool-3 (#1F61B6), extremo del brazo frío. Blanco: 6,10:1 (prusia daría 2,75:1)
+$slxd-heatmap-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica de la matriz
+$slxd-heatmap-radius: 0px; // Radio del marco de la matriz
+$slxd-heatmap-border-color: #111e30; // Color de la rejilla
+$slxd-heatmap-border-width: 1px; // Grosor de la rejilla
+$slxd-heatmap-row-header-width: 10rem; // Ancho de la columna de filas
+$slxd-heatmap-row-header-font-size: 0.875rem; // Tamaño del nombre de la fila
+$slxd-heatmap-row-header-color: #111e30; // Color del nombre de la fila
+$slxd-heatmap-row-header-font-weight: 300; // Peso del nombre de la fila (la celda es th: el agente de usuario la pondría en negrita)
+$slxd-heatmap-row-header-bg: #ffffff; // Fondo sticky de la columna de filas
+$slxd-heatmap-row-header-padding-block: 0.5rem; // Padding vertical del nombre de la fila
+$slxd-heatmap-row-header-padding-inline: 0.75rem; // Padding horizontal del nombre de la fila
+$slxd-heatmap-column-header-font-size: 0.75rem; // Tamaño del nombre de la columna
+$slxd-heatmap-column-header-font-weight: 500; // Peso del nombre de la columna
+$slxd-heatmap-column-header-color: #4a4a4a; // Color del nombre de la columna
+$slxd-heatmap-column-header-bg: #ffffff; // Fondo del encabezado de columna
+$slxd-heatmap-column-header-padding-block: 0.5rem; // Padding vertical del encabezado de columna
+$slxd-heatmap-column-header-padding-inline: 0.5rem; // Padding horizontal del encabezado de columna
+$slxd-heatmap-column-header-width: 3rem; // Ancho mínimo de una columna de datos
+$slxd-heatmap-group-header-font-size: 0.75rem; // Tamaño del nombre del grupo de columnas
+$slxd-heatmap-group-header-color: #4a4a4a; // Color del nombre del grupo de columnas
+$slxd-heatmap-cell-padding-block: 0.5rem; // Padding vertical de una celda de dato
+$slxd-heatmap-cell-padding-inline: 0.5rem; // Padding horizontal de una celda de dato
+$slxd-heatmap-cell-font-size: 0.875rem; // Tamaño de la cifra de la celda
+$slxd-heatmap-cell-font-weight: 500; // Peso de la cifra de la celda
+$slxd-heatmap-empty-bg: #f2f2f2; // Fondo de una celda sin dato — superficie secundaria, no un paso de la rampa
+$slxd-heatmap-empty-pattern-color: #d0d0d0; // Color de la trama de la celda sin dato: lo que la separa de la rampa sin depender del color
+$slxd-heatmap-empty-pattern-width: 0.25rem; // Ancho de la trama de la celda sin dato
+$slxd-heatmap-legend-gap: 0.5rem; // Separación entre los elementos de la leyenda
+$slxd-heatmap-legend-font-size: 0.875rem; // Tamaño del texto de la leyenda
+$slxd-heatmap-legend-color: #4a4a4a; // Color del texto de la leyenda
+$slxd-heatmap-legend-swatch-size: 0.75rem; // Alto de la tira de la leyenda y ancho de cada uno de sus peldaños, que van pegados
+$slxd-heatmap-margin-block-start: 0.75rem; // Aire entre la matriz y su leyenda
+$slxd-heatmap-step-1-bg: #dce9fc; // Paso 1 de la rampa de la matriz — sequential-100 de la rampa secuencial del sistema
+$slxd-heatmap-step-1-color: #111e30; // Tinta sobre el paso 1 — la que llega a 4,5:1 sobre ese relleno
+$slxd-heatmap-step-2-bg: #b6d2f8; // Paso 2 de la rampa de la matriz — sequential-200 de la rampa secuencial del sistema
+$slxd-heatmap-step-2-color: #111e30; // Tinta sobre el paso 2 — la que llega a 4,5:1 sobre ese relleno
+$slxd-heatmap-step-3-bg: #8fbaf5; // Paso 3 de la rampa de la matriz — sequential-300 de la rampa secuencial del sistema
+$slxd-heatmap-step-3-color: #111e30; // Tinta sobre el paso 3 — la que llega a 4,5:1 sobre ese relleno
+$slxd-heatmap-step-4-bg: #3b88ee; // Paso 4 de la rampa de la matriz — sequential-500 de la rampa secuencial del sistema
+$slxd-heatmap-step-4-color: #111e30; // Tinta sobre el paso 4 — la que llega a 4,5:1 sobre ese relleno
+$slxd-heatmap-step-5-bg: #236ac5; // Paso 5 de la rampa de la matriz — sequential-600 de la rampa secuencial del sistema
+$slxd-heatmap-step-5-color: #ffffff; // Tinta sobre el paso 5 — la que llega a 4,5:1 sobre ese relleno
+$slxd-heatmap-step-6-bg: #164b90; // Paso 6 de la rampa de la matriz — sequential-700 de la rampa secuencial del sistema
+$slxd-heatmap-step-6-color: #ffffff; // Tinta sobre el paso 6 — la que llega a 4,5:1 sobre ese relleno
+$slxd-heatmap-diverging-warm-3-bg: #9f431f; // Escala divergente, peldaño warm-3 — diverging-warm-3 (#9F431F), extremo del brazo cálido
+$slxd-heatmap-diverging-warm-3-color: #ffffff; // Tinta sobre el peldaño divergente warm-3 — diverging-warm-3 (#9F431F), extremo del brazo cálido. Blanco: 6,37:1 (prusia daría 2,63:1)
+$slxd-heatmap-diverging-warm-2-bg: #e26330; // Escala divergente, peldaño warm-2 — diverging-warm-2-on-dark (#E26330): ver la tinta
+$slxd-heatmap-diverging-warm-2-color: #111e30; // Tinta sobre el peldaño divergente warm-2 — diverging-warm-2-on-dark (#E26330), NO diverging-warm-2. El intermedio cálido del sistema (#D45C2C) no admite cifra con ninguna de las dos tintas: 4,29:1 con prusia y 3,91:1 con blanco. Su par de superficie oscura, ya en la paleta, sí: 4,84:1 con prusia, y queda entre sus dos vecinos (1,32:1 con warm-1, 1,84:1 con warm-3). Sin color nuevo (regla 9)
+$slxd-heatmap-diverging-warm-1-bg: #f37f54; // Escala divergente, peldaño warm-1 — diverging-warm-1 (#F37F54), junto al neutro
+$slxd-heatmap-diverging-warm-1-color: #111e30; // Tinta sobre el peldaño divergente warm-1 — diverging-warm-1 (#F37F54), junto al neutro. Prusia: 6,37:1 (blanco daría 2,63:1)
+$slxd-heatmap-diverging-neutral-bg: #f2f2f2; // Escala divergente, peldaño neutral — el centro: el mismo gris que chart.diverging-neutral (#F2F2F2), un rol de superficie porque el centro se retira hacia el lienzo
+$slxd-heatmap-diverging-neutral-color: #111e30; // Tinta sobre el peldaño divergente neutral — el centro: el mismo gris que chart.diverging-neutral (#F2F2F2), un rol de superficie porque el centro se retira hacia el lienzo. Prusia: 14,98:1. Comparte relleno con la casilla sin dato, que se distingue por su trama y por no llevar cifra
+$slxd-heatmap-diverging-cool-1-bg: #70a6f2; // Escala divergente, peldaño cool-1 — diverging-cool-1 (#70A6F2), junto al neutro
+$slxd-heatmap-diverging-cool-1-color: #111e30; // Tinta sobre el peldaño divergente cool-1 — diverging-cool-1 (#70A6F2), junto al neutro. Prusia: 6,73:1 (blanco daría 2,49:1)
+$slxd-heatmap-diverging-cool-2-bg: #3484ee; // Escala divergente, peldaño cool-2 — diverging-cool-2 (#3484EE), intermedio
+$slxd-heatmap-diverging-cool-2-color: #111e30; // Tinta sobre el peldaño divergente cool-2 — diverging-cool-2 (#3484EE), intermedio. Prusia: 4,54:1 (blanco daría 3,70:1)
+$slxd-heatmap-diverging-cool-3-bg: #1f61b6; // Escala divergente, peldaño cool-3 — diverging-cool-3 (#1F61B6), extremo del brazo frío
+$slxd-heatmap-diverging-cool-3-color: #ffffff; // Tinta sobre el peldaño divergente cool-3 — diverging-cool-3 (#1F61B6), extremo del brazo frío. Blanco: 6,10:1 (prusia daría 2,75:1)

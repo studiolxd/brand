@@ -1,26 +1,26 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-stepper-gap: 1rem; // Aire entre pasos en la forma horizontal
-$lxd-stepper-item-gap: 0.5rem; // Aire entre la marca del paso (`StepMarker`) y su etiqueta
-$lxd-stepper-text-gap: 0.25rem; // Aire entre la etiqueta del paso y su línea de detalle
-$lxd-stepper-padding-block: 0.25rem; // Aire vertical de cada paso: deja sitio al anillo de foco del paso alcanzable
-$lxd-stepper-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de las etiquetas
-$lxd-stepper-font-size: 0.875rem; // 14px — etiqueta de interfaz, no texto corriente
-$lxd-stepper-font-weight: 300; // Peso de la etiqueta de un paso
-$lxd-stepper-line-height: 1.3; // Interlineado de la etiqueta: cabe en dos líneas sin apelmazarse
-$lxd-stepper-current-font-weight: 500; // Peso de la etiqueta del paso actual: el énfasis dice dónde está el usuario sin depender del color. Es la segunda señal del estado y por eso solo lo lleva la etiqueta — la cifra de la marca va en peso de cuerpo (`step.font-weight`), porque dentro de un círculo relleno el peso no señala nada
-$lxd-stepper-label-color: #111e30; // Etiqueta de un paso completado o actual
-$lxd-stepper-pending-color: #4a4a4a; // Etiqueta de un paso pendiente: texto secundario
-$lxd-stepper-description-font-size: 0.75rem; // 12px — la línea de detalle bajo la etiqueta
-$lxd-stepper-description-color: #4a4a4a; // Línea de detalle: texto secundario
-$lxd-stepper-label-hover-line-width: 1px; // Grosor de la línea bajo la etiqueta de un paso navegable con el puntero encima. Todo subrayado del DS es una línea de 1px, el grosor único del sistema. Apunta al rol de borde y no al grosor de subrayado de `Link` porque ese token vale 0 en superficie oscura —el enlace no lleva línea en reposo sobre prusia— y arrastrarlo borraría esta línea, que sí es de hover
-$lxd-stepper-label-hover-line-offset: 0.25rem; // Separación entre la etiqueta y su línea de hover. La reserva el sitio siempre, aunque la línea solo se pinte en hover: si el hueco apareciese al pasar el puntero, la línea de detalle de debajo daría un salto
-$lxd-stepper-compact-gap: 0.5rem; // Aire entre el contador («Paso 2 de 4») y la etiqueta del paso actual en la forma compacta
-$lxd-stepper-compact-font-size: 0.875rem; // 14px — la forma compacta es una etiqueta de interfaz
-$lxd-stepper-compact-count-font-weight: 500; // Peso del contador de la forma compacta
-$lxd-stepper-compact-color: #111e30; // Color del contador de la forma compacta
-$lxd-stepper-compact-label-color: #4a4a4a; // Color de la etiqueta del paso actual en la forma compacta
-$lxd-stepper-focus-ring-color: #111e30; // Anillo de foco del paso alcanzable
-$lxd-stepper-focus-ring-width: 2px; // Grosor del anillo de foco
-$lxd-stepper-focus-ring-offset: 2px; // Separación del anillo de foco
+$slxd-stepper-gap: 1rem; // Aire entre pasos en la forma horizontal
+$slxd-stepper-item-gap: 0.5rem; // Aire entre la marca del paso (`StepMarker`) y su etiqueta
+$slxd-stepper-text-gap: 0.25rem; // Aire entre la etiqueta del paso y su línea de detalle
+$slxd-stepper-padding-block: 0.25rem; // Aire vertical de cada paso: deja sitio al anillo de foco del paso alcanzable
+$slxd-stepper-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de las etiquetas
+$slxd-stepper-font-size: 0.875rem; // 14px — etiqueta de interfaz, no texto corriente
+$slxd-stepper-font-weight: 300; // Peso de la etiqueta de un paso
+$slxd-stepper-line-height: 1.3; // Interlineado de la etiqueta: cabe en dos líneas sin apelmazarse
+$slxd-stepper-current-font-weight: 500; // Peso de la etiqueta del paso actual: el énfasis dice dónde está el usuario sin depender del color. Es la segunda señal del estado y por eso solo lo lleva la etiqueta — la cifra de la marca va en peso de cuerpo (`step.font-weight`), porque dentro de un círculo relleno el peso no señala nada
+$slxd-stepper-label-color: #111e30; // Etiqueta de un paso completado o actual
+$slxd-stepper-pending-color: #4a4a4a; // Etiqueta de un paso pendiente: texto secundario
+$slxd-stepper-description-font-size: 0.75rem; // 12px — la línea de detalle bajo la etiqueta
+$slxd-stepper-description-color: #4a4a4a; // Línea de detalle: texto secundario
+$slxd-stepper-label-hover-line-width: 1px; // Grosor de la línea bajo la etiqueta de un paso navegable con el puntero encima. Todo subrayado del DS es una línea de 1px, el grosor único del sistema. Apunta al rol de borde y no al grosor de subrayado de `Link` porque ese token vale 0 en superficie oscura —el enlace no lleva línea en reposo sobre prusia— y arrastrarlo borraría esta línea, que sí es de hover
+$slxd-stepper-label-hover-line-offset: 0.25rem; // Separación entre la etiqueta y su línea de hover. La reserva el sitio siempre, aunque la línea solo se pinte en hover: si el hueco apareciese al pasar el puntero, la línea de detalle de debajo daría un salto
+$slxd-stepper-compact-gap: 0.5rem; // Aire entre el contador («Paso 2 de 4») y la etiqueta del paso actual en la forma compacta
+$slxd-stepper-compact-font-size: 0.875rem; // 14px — la forma compacta es una etiqueta de interfaz
+$slxd-stepper-compact-count-font-weight: 500; // Peso del contador de la forma compacta
+$slxd-stepper-compact-color: #111e30; // Color del contador de la forma compacta
+$slxd-stepper-compact-label-color: #4a4a4a; // Color de la etiqueta del paso actual en la forma compacta
+$slxd-stepper-focus-ring-color: #111e30; // Anillo de foco del paso alcanzable
+$slxd-stepper-focus-ring-width: 2px; // Grosor del anillo de foco
+$slxd-stepper-focus-ring-offset: 2px; // Separación del anillo de foco

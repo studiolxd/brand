@@ -1,29 +1,29 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-date-picker-width: 100%; // Anchura del control: la del campo, que siempre ocupa su contenedor
-$lxd-date-picker-border-width: 1px; // Grosor del borde del campo: el del sistema. Lo usa el anillo de foco del botón, que va justo por dentro de esa línea
-$lxd-date-picker-disabled-cursor: not-allowed; // Cursor con el control deshabilitado
-$lxd-date-picker-transition-duration: 150ms; // Duración de la transición de tinta del botón
-$lxd-date-picker-transition-easing: ease; // Curva de la transición
-$lxd-date-picker-button-slot-size: 2.5rem; // Lado del hueco que ocupa el botón del calendario dentro del campo: la talla md, la misma que el campo — así el adorno queda cuadrado sobre el control y su borde inferior coincide con el del campo
-$lxd-date-picker-button-sm-slot-size: 2rem; // Lado del hueco — sm
-$lxd-date-picker-button-lg-slot-size: 3rem; // Lado del hueco — lg
-$lxd-date-picker-button-icon-size: 1.25rem; // Tamaño del glifo del calendario — md (20px, acorde al campo de 40). El mismo peldaño que la flecha de `SearchForm`
-$lxd-date-picker-button-sm-icon-size: 16px; // Tamaño del glifo — sm (16px)
-$lxd-date-picker-button-lg-icon-size: 24px; // Tamaño del glifo — lg (24px)
-$lxd-date-picker-button-cursor: pointer; // Cursor del botón: abre el calendario, no se escribe en él
-$lxd-date-picker-button-color: #111e30; // Color del glifo: la tinta del campo, prusia sobre claro
-$lxd-date-picker-button-hover-color: #111e30; // Color del glifo bajo el puntero: la misma tinta. El adorno no pinta fondo ni línea al pasar el puntero
-$lxd-date-picker-button-disabled-color: #4a4a4a; // Color del glifo con el campo deshabilitado
-$lxd-date-picker-button-focus-ring-width: 2px; // Grosor del anillo de foco del botón: el del sistema. Es lo único que marca el foco, porque el adorno no tiene fondo
-$lxd-date-picker-button-focus-ring-color: #111e30; // Color del anillo de foco del botón: el del borde del campo en foco
-$lxd-date-picker-message-gap: 0.5rem; // Espacio entre el campo y el aviso de fecha incompleta: el mismo que separa las partes de un campo de formulario
-$lxd-date-picker-message-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia del aviso de fecha incompleta
-$lxd-date-picker-message-font-size: 0.875rem; // Cuerpo del aviso
-$lxd-date-picker-message-font-weight: 300; // Peso del aviso
-$lxd-date-picker-message-line-height: 1.5; // Interlineado del aviso
-$lxd-date-picker-message-color: #b30000; // Color del aviso: el del error de formulario — lo que se escribió no es una fecha
+$slxd-date-picker-width: 100%; // Anchura del control: la del campo, que siempre ocupa su contenedor
+$slxd-date-picker-border-width: 1px; // Grosor del borde del campo: el del sistema. Lo usa el anillo de foco del botón, que va justo por dentro de esa línea
+$slxd-date-picker-disabled-cursor: not-allowed; // Cursor con el control deshabilitado
+$slxd-date-picker-transition-duration: 150ms; // Duración de la transición de tinta del botón
+$slxd-date-picker-transition-easing: ease; // Curva de la transición
+$slxd-date-picker-button-slot-size: 2.5rem; // Lado del hueco que ocupa el botón del calendario dentro del campo: la talla md, la misma que el campo — así el adorno queda cuadrado sobre el control y su borde inferior coincide con el del campo
+$slxd-date-picker-button-sm-slot-size: 2rem; // Lado del hueco — sm
+$slxd-date-picker-button-lg-slot-size: 3rem; // Lado del hueco — lg
+$slxd-date-picker-button-icon-size: 1.25rem; // Tamaño del glifo del calendario — md (20px, acorde al campo de 40). El mismo peldaño que la flecha de `SearchForm`
+$slxd-date-picker-button-sm-icon-size: 16px; // Tamaño del glifo — sm (16px)
+$slxd-date-picker-button-lg-icon-size: 24px; // Tamaño del glifo — lg (24px)
+$slxd-date-picker-button-cursor: pointer; // Cursor del botón: abre el calendario, no se escribe en él
+$slxd-date-picker-button-color: #111e30; // Color del glifo: la tinta del campo, prusia sobre claro
+$slxd-date-picker-button-hover-color: #111e30; // Color del glifo bajo el puntero: la misma tinta. El adorno no pinta fondo ni línea al pasar el puntero
+$slxd-date-picker-button-disabled-color: #4a4a4a; // Color del glifo con el campo deshabilitado
+$slxd-date-picker-button-focus-ring-width: 2px; // Grosor del anillo de foco del botón: el del sistema. Es lo único que marca el foco, porque el adorno no tiene fondo
+$slxd-date-picker-button-focus-ring-color: #111e30; // Color del anillo de foco del botón: el del borde del campo en foco
+$slxd-date-picker-message-gap: 0.5rem; // Espacio entre el campo y el aviso de fecha incompleta: el mismo que separa las partes de un campo de formulario
+$slxd-date-picker-message-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia del aviso de fecha incompleta
+$slxd-date-picker-message-font-size: 0.875rem; // Cuerpo del aviso
+$slxd-date-picker-message-font-weight: 300; // Peso del aviso
+$slxd-date-picker-message-line-height: 1.5; // Interlineado del aviso
+$slxd-date-picker-message-color: #b30000; // Color del aviso: el del error de formulario — lo que se escribió no es una fecha
 
 // Alias obsoletos: nombres anteriores a la convención D9.
-$lxd-date-picker-inline-size: $lxd-date-picker-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-date-picker-width
+$slxd-date-picker-inline-size: $slxd-date-picker-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-date-picker-width

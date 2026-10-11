@@ -1,31 +1,31 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-card-padding-inline: 1rem; // Padding horizontal
-$lxd-card-padding-block-start: 1rem; // Padding block start
-$lxd-card-padding-block-end: 0.75rem; // Padding block end
-$lxd-card-gap: 0.75rem; // Separación entre elementos internos
-$lxd-card-border-radius: 0px; // Radio de esquinas — sin redondeado
-$lxd-card-description-font-size: 1.25rem; // Tamaño de fuente de la descripción
-$lxd-card-description-margin-block-end: 3rem; // Margen inferior de la descripción
-$lxd-card-header-gap: 0.75rem; // Separación entre el bloque de texto y la acción en la cabecera
-$lxd-card-header-row-gap: 0.25rem; // Separación entre el título y la descripción en la cabecera
-$lxd-card-title-font-weight: 500; // Peso del título de la tarjeta
-$lxd-card-footer-gap: 0.5rem; // Separación entre acciones del pie
-$lxd-card-primary-bg: #baabff; // Variante primary — fondo lavanda. No es `color.primary` (prussian): coincidiría con `color.bg.dark` y desaparecería sobre `.surface-dark`. Mismo patrón autocontenido que `button.primary` — un par que no depende de la superficie ambiente, igual en claro y oscuro
-$lxd-card-primary-color: #111e30; // Variante primary — texto prussian sobre el fondo lavanda
-$lxd-card-accent-1-bg: #baabff; // Variante accent-1 — fondo lavanda
-$lxd-card-accent-1-color: #111e30; // Variante accent-1 — texto. Color saturado que ya contrasta en cualquier superficie: sin par surface-dark, como las variantes semánticas de Alert/Tag
-$lxd-card-accent-2-bg: #ffcd00; // Variante accent-2 — fondo amarillo
-$lxd-card-accent-2-color: #111e30; // Variante accent-2 — texto. Sin par surface-dark: mismo motivo que accent-1
-$lxd-card-support-1-bg: #20e38e; // Variante support-1 — fondo esmeralda
-$lxd-card-support-1-color: #111e30; // Variante support-1 — texto. Sin par surface-dark: mismo motivo que accent-1
-$lxd-card-support-2-bg: #f05e1c; // Variante support-2 — fondo cayena
-$lxd-card-support-2-color: #111e30; // Variante support-2 — texto. Sin par surface-dark: mismo motivo que accent-1
-$lxd-card-outline-bg: #ffffff; // Variante outline — fondo blanco (light)
-$lxd-card-outline-color: #111e30; // Variante outline — texto oscuro sobre blanco
-$lxd-card-outline-border-color: #111e30; // Variante outline — borde prussian
-$lxd-card-outline-border-width: 1px; // Variante outline — grosor de borde
-$lxd-card-selectable-focus-ring-width: 2px; // Tarjeta-opción: grosor del anillo de foco, el del botón
-$lxd-card-selectable-focus-ring-color: #111e30; // Tarjeta-opción: color del anillo de foco (prusia), el del botón primario
-$lxd-card-selectable-focus-ring-offset: 0.25rem; // Tarjeta-opción: separación del anillo, la del botón
+$slxd-card-padding-inline: 1rem; // Padding horizontal
+$slxd-card-padding-block-start: 1rem; // Padding block start
+$slxd-card-padding-block-end: 0.75rem; // Padding block end
+$slxd-card-gap: 0.75rem; // Separación entre elementos internos
+$slxd-card-border-radius: 0px; // Radio de esquinas — sin redondeado
+$slxd-card-description-font-size: 1.25rem; // Tamaño de fuente de la descripción
+$slxd-card-description-margin-block-end: 3rem; // Margen inferior de la descripción
+$slxd-card-header-gap: 0.75rem; // Separación entre el bloque de texto y la acción en la cabecera
+$slxd-card-header-row-gap: 0.25rem; // Separación entre el título y la descripción en la cabecera
+$slxd-card-title-font-weight: 500; // Peso del título de la tarjeta
+$slxd-card-footer-gap: 0.5rem; // Separación entre acciones del pie
+$slxd-card-primary-bg: #baabff; // Variante primary — fondo lavanda. No es `color.primary` (prussian): coincidiría con `color.bg.dark` y desaparecería sobre `.surface-dark`. Mismo patrón autocontenido que `button.primary` — un par que no depende de la superficie ambiente, igual en claro y oscuro
+$slxd-card-primary-color: #111e30; // Variante primary — texto prussian sobre el fondo lavanda
+$slxd-card-accent-1-bg: #baabff; // Variante accent-1 — fondo lavanda
+$slxd-card-accent-1-color: #111e30; // Variante accent-1 — texto. Color saturado que ya contrasta en cualquier superficie: sin par surface-dark, como las variantes semánticas de Alert/Tag
+$slxd-card-accent-2-bg: #ffcd00; // Variante accent-2 — fondo amarillo
+$slxd-card-accent-2-color: #111e30; // Variante accent-2 — texto. Sin par surface-dark: mismo motivo que accent-1
+$slxd-card-support-1-bg: #20e38e; // Variante support-1 — fondo esmeralda
+$slxd-card-support-1-color: #111e30; // Variante support-1 — texto. Sin par surface-dark: mismo motivo que accent-1
+$slxd-card-support-2-bg: #f05e1c; // Variante support-2 — fondo cayena
+$slxd-card-support-2-color: #111e30; // Variante support-2 — texto. Sin par surface-dark: mismo motivo que accent-1
+$slxd-card-outline-bg: #ffffff; // Variante outline — fondo blanco (light)
+$slxd-card-outline-color: #111e30; // Variante outline — texto oscuro sobre blanco
+$slxd-card-outline-border-color: #111e30; // Variante outline — borde prussian
+$slxd-card-outline-border-width: 1px; // Variante outline — grosor de borde
+$slxd-card-selectable-focus-ring-width: 2px; // Tarjeta-opción: grosor del anillo de foco, el del botón
+$slxd-card-selectable-focus-ring-color: #111e30; // Tarjeta-opción: color del anillo de foco (prusia), el del botón primario
+$slxd-card-selectable-focus-ring-offset: 0.25rem; // Tarjeta-opción: separación del anillo, la del botón

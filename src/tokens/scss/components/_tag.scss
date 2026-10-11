@@ -1,34 +1,34 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-tag-border-radius: 9999px; // Píldora: el tag es una de las formas redondas del sistema
-$lxd-tag-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía
-$lxd-tag-font-size: 0.875rem; // 14px — cuerpo de interfaz, no de prosa
-$lxd-tag-font-weight: 500; // Peso de énfasis
-$lxd-tag-line-height: 1; // Una línea
-$lxd-tag-padding-block: 0.25rem; // Aire vertical
-$lxd-tag-padding-inline: 0.75rem; // Aire horizontal
-$lxd-tag-primary-bg: #111e30; // Marca primaria (prusia) — relleno
-$lxd-tag-primary-color: #ffffff; // Marca primaria — texto sobre el relleno
-$lxd-tag-accent-1-bg: #baabff; // Acento 1 (lavanda) — relleno
-$lxd-tag-accent-1-color: #111e30; // Acento 1 — texto sobre el relleno
-$lxd-tag-accent-2-bg: #ffcd00; // Acento 2 (amarillo) — relleno
-$lxd-tag-accent-2-color: #111e30; // Acento 2 — texto sobre el relleno
-$lxd-tag-support-1-bg: #20e38e; // Soporte 1 (esmeralda) — relleno
-$lxd-tag-support-1-color: #111e30; // Soporte 1 — texto sobre el relleno
-$lxd-tag-support-2-bg: #f05e1c; // Soporte 2 (cayena) — relleno
-$lxd-tag-support-2-color: #111e30; // Soporte 2 — texto sobre el relleno
-$lxd-tag-neutral-bg: #4a4a4a; // Neutral — relleno gris oscuro (AAA con texto blanco)
-$lxd-tag-neutral-color: #ffffff; // Neutral — texto sobre el relleno
-$lxd-tag-info-bg: #111e30; // Información — relleno prusia (AAA con texto blanco)
-$lxd-tag-info-color: #ffffff; // Información — texto sobre el relleno
-$lxd-tag-warning-bg: #ffcd00; // Aviso — relleno universal del rol de feedback. Es el amarillo de siempre, pero llega por el rol, no por la marca
-$lxd-tag-warning-color: #111e30; // Aviso — contenido sobre el relleno: el prusia (11,17:1, AAA)
-$lxd-tag-success-bg: #006616; // Éxito — relleno universal del sistema
-$lxd-tag-success-color: #ffffff; // Éxito — contenido sobre el relleno
-$lxd-tag-error-bg: #b30000; // Error — relleno universal del sistema
-$lxd-tag-error-color: #ffffff; // Error — contenido sobre el relleno
+$slxd-tag-border-radius: 9999px; // Píldora: el tag es una de las formas redondas del sistema
+$slxd-tag-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía
+$slxd-tag-font-size: 0.875rem; // 14px — cuerpo de interfaz, no de prosa
+$slxd-tag-font-weight: 500; // Peso de énfasis
+$slxd-tag-line-height: 1; // Una línea
+$slxd-tag-padding-block: 0.25rem; // Aire vertical
+$slxd-tag-padding-inline: 0.75rem; // Aire horizontal
+$slxd-tag-primary-bg: #111e30; // Marca primaria (prusia) — relleno
+$slxd-tag-primary-color: #ffffff; // Marca primaria — texto sobre el relleno
+$slxd-tag-accent-1-bg: #baabff; // Acento 1 (lavanda) — relleno
+$slxd-tag-accent-1-color: #111e30; // Acento 1 — texto sobre el relleno
+$slxd-tag-accent-2-bg: #ffcd00; // Acento 2 (amarillo) — relleno
+$slxd-tag-accent-2-color: #111e30; // Acento 2 — texto sobre el relleno
+$slxd-tag-support-1-bg: #20e38e; // Soporte 1 (esmeralda) — relleno
+$slxd-tag-support-1-color: #111e30; // Soporte 1 — texto sobre el relleno
+$slxd-tag-support-2-bg: #f05e1c; // Soporte 2 (cayena) — relleno
+$slxd-tag-support-2-color: #111e30; // Soporte 2 — texto sobre el relleno
+$slxd-tag-neutral-bg: #4a4a4a; // Neutral — relleno gris oscuro (AAA con texto blanco)
+$slxd-tag-neutral-color: #ffffff; // Neutral — texto sobre el relleno
+$slxd-tag-info-bg: #111e30; // Información — relleno prusia (AAA con texto blanco)
+$slxd-tag-info-color: #ffffff; // Información — texto sobre el relleno
+$slxd-tag-warning-bg: #ffcd00; // Aviso — relleno universal del rol de feedback. Es el amarillo de siempre, pero llega por el rol, no por la marca
+$slxd-tag-warning-color: #111e30; // Aviso — contenido sobre el relleno: el prusia (11,17:1, AAA)
+$slxd-tag-success-bg: #006616; // Éxito — relleno universal del sistema
+$slxd-tag-success-color: #ffffff; // Éxito — contenido sobre el relleno
+$slxd-tag-error-bg: #b30000; // Error — relleno universal del sistema
+$slxd-tag-error-color: #ffffff; // Error — contenido sobre el relleno
 
 // Alias obsoletos: nombres anteriores a la convención D9.
-$lxd-tag-danger-bg: $lxd-tag-error-bg; // OBSOLETO (v51, se retira en la v52): usar $lxd-tag-error-bg
-$lxd-tag-danger-color: $lxd-tag-error-color; // OBSOLETO (v51, se retira en la v52): usar $lxd-tag-error-color
+$slxd-tag-danger-bg: $slxd-tag-error-bg; // OBSOLETO (v51, se retira en la v52): usar $slxd-tag-error-bg
+$slxd-tag-danger-color: $slxd-tag-error-color; // OBSOLETO (v51, se retira en la v52): usar $slxd-tag-error-color

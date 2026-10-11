@@ -1,41 +1,41 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-step-size-sm: 1.5rem; // 24px — marca compacta: listas de proceso densas
-$lxd-step-size-md: 2rem; // 32px — por defecto: la talla que ya usaba Stepper
-$lxd-step-border-radius: 0px; // Marca cuadrada, el radio del sistema — no `round`: la marca de un paso es identidad de marca, no un avatar ni una píldora
-$lxd-step-border-width: 1px; // Filete de la marca hueca (estado `pending`). Todo borde del sistema mide lo mismo
-$lxd-step-icon-size: 16px; // El check de un paso `done`, o el icono que trae el paso: el icono dentro de un control
-$lxd-step-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de la cifra
-$lxd-step-font-size-sm: 0.75rem; // 12px — cifra en marca `sm`
-$lxd-step-font-size-md: 0.875rem; // 14px — cifra en marca `md`
-$lxd-step-font-weight: 300; // Peso de la cifra: dentro de una marca rellena de otro color el peso no señala nada — el estado ya lo dicen el relleno y el filete
-$lxd-step-pending-bg: #ffffff; // Fondo de una marca hueca (`pending`): el lienzo de la página. Tiene que tapar el carril igual que una marca rellena — transparente, la línea lo cruzaría por la mitad
-$lxd-step-pending-border-color: #d0d0d0; // Filete de una marca hueca: el borde general del sistema
-$lxd-step-pending-color: #4a4a4a; // Cifra de una marca hueca: texto secundario
-$lxd-step-tone-primary-bg: #111e30; // Relleno tono primary: la marca del sistema
-$lxd-step-tone-primary-color: #ffffff; // Tinta sobre el relleno primary
-$lxd-step-tone-accent-1-bg: #baabff; // Relleno tono accent-1 (lavender)
-$lxd-step-tone-accent-1-color: #111e30; // Tinta sobre accent-1
-$lxd-step-tone-accent-2-bg: #ffcd00; // Relleno tono accent-2 (yellow)
-$lxd-step-tone-accent-2-color: #111e30; // Tinta sobre accent-2
-$lxd-step-tone-support-1-bg: #20e38e; // Relleno tono support-1 (emerald)
-$lxd-step-tone-support-1-color: #111e30; // Tinta sobre support-1
-$lxd-step-tone-support-2-bg: #f05e1c; // Relleno tono support-2 (cayenne)
-$lxd-step-tone-support-2-color: #111e30; // Tinta sobre support-2
-$lxd-step-tone-error-bg: #b30000; // Relleno tono error
-$lxd-step-tone-error-color: #ffffff; // Tinta sobre error
-$lxd-step-tone-success-bg: #006616; // Relleno tono success
-$lxd-step-tone-success-color: #ffffff; // Tinta sobre success
-$lxd-step-tone-neutral-bg: #4a4a4a; // Relleno tono neutral (gris oscuro)
-$lxd-step-tone-neutral-color: #ffffff; // Tinta sobre neutral
-$lxd-step-connector-thickness: 1px; // Grosor de la línea entre pasos. Compartido por Stepper y Steps
-$lxd-step-connector-color: #d0d0d0; // Tramo sin recorrer / línea de unión: el rol de borde del sistema, el mismo que el filete de la marca `pending`
-$lxd-step-connector-done-color: #111e30; // Tramo recorrido (solo Stepper, que tiene estado): la marca del sistema
-$lxd-step-description-color: #4a4a4a; // Línea de detalle bajo una marca: texto secundario. La usan la descripción de Stepper y la de Steps, para que digan lo mismo con el mismo color
-$lxd-step-transition-duration: 150ms; // Duración del cambio de fondo de la marca (un paso que pasa a completado, o vuelve a pendiente)
-$lxd-step-transition-easing: ease; // Curva del cambio de fondo
+$slxd-step-size-sm: 1.5rem; // 24px — marca compacta: listas de proceso densas
+$slxd-step-size-md: 2rem; // 32px — por defecto: la talla que ya usaba Stepper
+$slxd-step-border-radius: 0px; // Marca cuadrada, el radio del sistema — no `round`: la marca de un paso es identidad de marca, no un avatar ni una píldora
+$slxd-step-border-width: 1px; // Filete de la marca hueca (estado `pending`). Todo borde del sistema mide lo mismo
+$slxd-step-icon-size: 16px; // El check de un paso `done`, o el icono que trae el paso: el icono dentro de un control
+$slxd-step-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de la cifra
+$slxd-step-font-size-sm: 0.75rem; // 12px — cifra en marca `sm`
+$slxd-step-font-size-md: 0.875rem; // 14px — cifra en marca `md`
+$slxd-step-font-weight: 300; // Peso de la cifra: dentro de una marca rellena de otro color el peso no señala nada — el estado ya lo dicen el relleno y el filete
+$slxd-step-pending-bg: #ffffff; // Fondo de una marca hueca (`pending`): el lienzo de la página. Tiene que tapar el carril igual que una marca rellena — transparente, la línea lo cruzaría por la mitad
+$slxd-step-pending-border-color: #d0d0d0; // Filete de una marca hueca: el borde general del sistema
+$slxd-step-pending-color: #4a4a4a; // Cifra de una marca hueca: texto secundario
+$slxd-step-tone-primary-bg: #111e30; // Relleno tono primary: la marca del sistema
+$slxd-step-tone-primary-color: #ffffff; // Tinta sobre el relleno primary
+$slxd-step-tone-accent-1-bg: #baabff; // Relleno tono accent-1 (lavender)
+$slxd-step-tone-accent-1-color: #111e30; // Tinta sobre accent-1
+$slxd-step-tone-accent-2-bg: #ffcd00; // Relleno tono accent-2 (yellow)
+$slxd-step-tone-accent-2-color: #111e30; // Tinta sobre accent-2
+$slxd-step-tone-support-1-bg: #20e38e; // Relleno tono support-1 (emerald)
+$slxd-step-tone-support-1-color: #111e30; // Tinta sobre support-1
+$slxd-step-tone-support-2-bg: #f05e1c; // Relleno tono support-2 (cayenne)
+$slxd-step-tone-support-2-color: #111e30; // Tinta sobre support-2
+$slxd-step-tone-error-bg: #b30000; // Relleno tono error
+$slxd-step-tone-error-color: #ffffff; // Tinta sobre error
+$slxd-step-tone-success-bg: #006616; // Relleno tono success
+$slxd-step-tone-success-color: #ffffff; // Tinta sobre success
+$slxd-step-tone-neutral-bg: #4a4a4a; // Relleno tono neutral (gris oscuro)
+$slxd-step-tone-neutral-color: #ffffff; // Tinta sobre neutral
+$slxd-step-connector-thickness: 1px; // Grosor de la línea entre pasos. Compartido por Stepper y Steps
+$slxd-step-connector-color: #d0d0d0; // Tramo sin recorrer / línea de unión: el rol de borde del sistema, el mismo que el filete de la marca `pending`
+$slxd-step-connector-done-color: #111e30; // Tramo recorrido (solo Stepper, que tiene estado): la marca del sistema
+$slxd-step-description-color: #4a4a4a; // Línea de detalle bajo una marca: texto secundario. La usan la descripción de Stepper y la de Steps, para que digan lo mismo con el mismo color
+$slxd-step-transition-duration: 150ms; // Duración del cambio de fondo de la marca (un paso que pasa a completado, o vuelve a pendiente)
+$slxd-step-transition-easing: ease; // Curva del cambio de fondo
 
 // Alias obsoletos: nombres anteriores a la convención D9.
-$lxd-step-tone-danger-bg: $lxd-step-tone-error-bg; // OBSOLETO (v51, se retira en la v52): usar $lxd-step-tone-error-bg
-$lxd-step-tone-danger-color: $lxd-step-tone-error-color; // OBSOLETO (v51, se retira en la v52): usar $lxd-step-tone-error-color
+$slxd-step-tone-danger-bg: $slxd-step-tone-error-bg; // OBSOLETO (v51, se retira en la v52): usar $slxd-step-tone-error-bg
+$slxd-step-tone-danger-color: $slxd-step-tone-error-color; // OBSOLETO (v51, se retira en la v52): usar $slxd-step-tone-error-color

@@ -1,40 +1,40 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-modal-z-index: 300; // z-index del panel modal
-$lxd-modal-backdrop-z-index: 200; // z-index del backdrop
-$lxd-modal-backdrop-bg: #000000; // Color del backdrop/scrim
-$lxd-modal-backdrop-opacity: 0.6; // Opacidad del backdrop (0.6)
-$lxd-modal-bg: #ffffff; // Fondo del panel modal
-$lxd-modal-border-width: 1px; // Grosor del borde del panel
-$lxd-modal-border-color: rgba(0, 0, 0, 0); // Sin borde en superficie clara: el velo y el fondo blanco ya separan el panel
-$lxd-modal-border-radius: 0px; // Radio del panel
-$lxd-modal-shadow: none; // Sombra de elevación
-$lxd-modal-padding-block: 2rem; // Padding vertical del panel
-$lxd-modal-padding-inline: 2rem; // Padding horizontal del panel
-$lxd-modal-header-gap: 1rem; // Gap entre título y botón ✕
-$lxd-modal-footer-gap: 0.75rem; // Aire entre los botones del pie. Es el de las acciones de un formulario: la fila de acciones del sistema es una sola, esté en un formulario o en un diálogo
-$lxd-modal-footer-margin-block-start: 2rem; // Aire entre el cuerpo del diálogo y su pie — el mismo que separa el último campo de las acciones en un formulario
-$lxd-modal-title-font-size: 2rem; // Tamaño del título (2rem)
-$lxd-modal-title-font-weight: 500; // Peso del título
-$lxd-modal-title-line-height: 1.1; // Interlineado del título — el de un título grande. Con el cuerpo del título da la altura de su primera línea, que es sobre la que se centra el aspa de cerrar
-$lxd-modal-title-color: #111e30; // Color del título
-$lxd-modal-max-width: 560px; // Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente
-$lxd-modal-width: 90vw; // Ancho del panel antes del tope de `max-width`: deja aire a los lados en pantallas estrechas. Medida de layout, igual que `max-width`
-$lxd-modal-max-height: 90dvh; // Altura máxima del panel modal (dvh para móviles con barra de navegador variable). Medida de layout, igual que `max-width`
-$lxd-modal-transition-duration: 250ms; // Duración de la animación entrada/salida
-$lxd-modal-transition-easing: ease-in-out; // Easing de la animación
-$lxd-modal-content-enter-offset: 0.5rem; // Desplazamiento vertical del panel al entrar/salir (8px)
-$lxd-modal-description-font-size: 1rem; // La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
-$lxd-modal-description-color: #4a4a4a; // Color de la descripción del modal
-$lxd-modal-description-margin-block-end: 1rem; // Separación entre la descripción y el cuerpo del modal
-$lxd-modal-close-size: 2.5rem; // Caja del botón de cerrar (40px). En la superficie pública (SiteShell) remapea a size-component.lg
-$lxd-modal-close-icon-size: 24px; // Glifo del botón de cerrar (24px), la talla por defecto de icono-botón. En la superficie pública remapea igualmente a icon.size-md
-$lxd-modal-close-color: #111e30; // Color del glifo: la tinta de la superficie, ya en reposo. El aspa no se atenúa ni cambia de color al pasar el puntero — el foco se marca con el anillo
-$lxd-modal-close-focus-ring-width: 2px; // Grosor del anillo de foco
-$lxd-modal-close-focus-ring-offset: 2px; // Separación del anillo de foco (el rol focus gobierna ancho y separación)
-$lxd-modal-close-focus-ring-color: #111e30; // Color del anillo de foco: la tinta de la superficie
+$slxd-modal-z-index: 300; // z-index del panel modal
+$slxd-modal-backdrop-z-index: 200; // z-index del backdrop
+$slxd-modal-backdrop-bg: #000000; // Color del backdrop/scrim
+$slxd-modal-backdrop-opacity: 0.6; // Opacidad del backdrop (0.6)
+$slxd-modal-bg: #ffffff; // Fondo del panel modal
+$slxd-modal-border-width: 1px; // Grosor del borde del panel
+$slxd-modal-border-color: rgba(0, 0, 0, 0); // Sin borde en superficie clara: el velo y el fondo blanco ya separan el panel
+$slxd-modal-border-radius: 0px; // Radio del panel
+$slxd-modal-shadow: none; // Sombra de elevación
+$slxd-modal-padding-block: 2rem; // Padding vertical del panel
+$slxd-modal-padding-inline: 2rem; // Padding horizontal del panel
+$slxd-modal-header-gap: 1rem; // Gap entre título y botón ✕
+$slxd-modal-footer-gap: 0.75rem; // Aire entre los botones del pie. Es el de las acciones de un formulario: la fila de acciones del sistema es una sola, esté en un formulario o en un diálogo
+$slxd-modal-footer-margin-block-start: 2rem; // Aire entre el cuerpo del diálogo y su pie — el mismo que separa el último campo de las acciones en un formulario
+$slxd-modal-title-font-size: 2rem; // Tamaño del título (2rem)
+$slxd-modal-title-font-weight: 500; // Peso del título
+$slxd-modal-title-line-height: 1.1; // Interlineado del título — el de un título grande. Con el cuerpo del título da la altura de su primera línea, que es sobre la que se centra el aspa de cerrar
+$slxd-modal-title-color: #111e30; // Color del título
+$slxd-modal-max-width: 560px; // Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente
+$slxd-modal-width: 90vw; // Ancho del panel antes del tope de `max-width`: deja aire a los lados en pantallas estrechas. Medida de layout, igual que `max-width`
+$slxd-modal-max-height: 90dvh; // Altura máxima del panel modal (dvh para móviles con barra de navegador variable). Medida de layout, igual que `max-width`
+$slxd-modal-transition-duration: 250ms; // Duración de la animación entrada/salida
+$slxd-modal-transition-easing: ease-in-out; // Easing de la animación
+$slxd-modal-content-enter-offset: 0.5rem; // Desplazamiento vertical del panel al entrar/salir (8px)
+$slxd-modal-description-font-size: 1rem; // La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
+$slxd-modal-description-color: #4a4a4a; // Color de la descripción del modal
+$slxd-modal-description-margin-block-end: 1rem; // Separación entre la descripción y el cuerpo del modal
+$slxd-modal-close-size: 2.5rem; // Caja del botón de cerrar (40px). En la superficie pública (SiteShell) remapea a size-component.lg
+$slxd-modal-close-icon-size: 24px; // Glifo del botón de cerrar (24px), la talla por defecto de icono-botón. En la superficie pública remapea igualmente a icon.size-md
+$slxd-modal-close-color: #111e30; // Color del glifo: la tinta de la superficie, ya en reposo. El aspa no se atenúa ni cambia de color al pasar el puntero — el foco se marca con el anillo
+$slxd-modal-close-focus-ring-width: 2px; // Grosor del anillo de foco
+$slxd-modal-close-focus-ring-offset: 2px; // Separación del anillo de foco (el rol focus gobierna ancho y separación)
+$slxd-modal-close-focus-ring-color: #111e30; // Color del anillo de foco: la tinta de la superficie
 
 // Alias obsoletos: nombres anteriores a la convención D9.
-$lxd-modal-width-max: $lxd-modal-max-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-modal-max-width
-$lxd-modal-inline-size: $lxd-modal-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-modal-width
+$slxd-modal-width-max: $slxd-modal-max-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-modal-max-width
+$slxd-modal-inline-size: $slxd-modal-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-modal-width

@@ -184,6 +184,6 @@ describe('D9: alias obsoletos de la v51', () => {
       expect(json[cssName(old)], old).toBe(json[cssName(current)]);
     }
     const scss = readFileSync(join(ROOT, 'src/tokens/scss/molecules/_modal.scss'), 'utf-8');
-    expect(scss).toContain('$lxd-modal-width-max: $lxd-modal-max-width;');
+    expect(scss).toContain('$slxd-modal-width-max: $slxd-modal-max-width;');
   });
 });

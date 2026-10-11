@@ -1,53 +1,53 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-user-menu-offset: 0.25rem; // Separación entre el disparador y el panel: el desplazamiento compartido de los flotantes de la cabecera
-$lxd-user-menu-trigger-padding-block: 0.5rem; // Padding vertical del trigger
-$lxd-user-menu-trigger-padding-inline: 0.75rem; // Padding horizontal del trigger
-$lxd-user-menu-trigger-compact-padding-inline: 0.25rem; // Padding horizontal del botón compacto (solo avatar)
-$lxd-user-menu-trigger-gap: 0.75rem; // Espacio entre avatar y nombre
-$lxd-user-menu-trigger-border-radius: 0px; // Radio del trigger
-$lxd-user-menu-focus-ring-color: #111e30; // Color del focus ring
-$lxd-user-menu-focus-ring-width: 2px; // Grosor del focus ring
-$lxd-user-menu-focus-ring-offset: 1px; // Separación del focus ring
-$lxd-user-menu-name-font-size: 1rem; // Tamaño de texto del nombre
-$lxd-user-menu-name-font-weight: 500; // Peso del nombre
-$lxd-user-menu-name-color: #111e30; // Color del nombre
-$lxd-user-menu-content-min-width: 14rem; // Ancho mínimo del panel: que quepan nombre y correo en una línea (no es una talla de componente)
-$lxd-user-menu-badge-offset: 0.25rem; // Cuánto asoma el badge de notificaciones por la esquina del avatar
-$lxd-user-menu-header-gap: 0.25rem; // Entre nombre y correo en la cabecera del panel
-$lxd-user-menu-content-bg: #ffffff; // Fondo del panel
-$lxd-user-menu-content-border-width: 1px; // Borde del panel
-$lxd-user-menu-content-border-color: #111e30; // Color del borde del panel
-$lxd-user-menu-content-border-radius: 0px; // Radio del panel
-$lxd-user-menu-content-shadow: none; // Sombra del panel
-$lxd-user-menu-content-z-index: 400; // Z-index del dropdown (por encima del sidebar en mobile)
-$lxd-user-menu-content-max-height: var(--available-height); // Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — con muchos ítems, el panel hace scroll en vez de salirse de la pantalla
-$lxd-user-menu-content-padding-block: 0.5rem; // Padding vertical del panel
-$lxd-user-menu-content-padding-inline: 0.5rem; // Padding horizontal del panel
-$lxd-user-menu-header-padding-block: 0.75rem; // Padding vertical de la cabecera del dropdown
-$lxd-user-menu-header-padding-inline: 1rem; // Padding horizontal de la cabecera del dropdown
-$lxd-user-menu-header-name-font-size: 1rem; // Tamaño del nombre en la cabecera
-$lxd-user-menu-header-name-font-weight: 500; // Peso del nombre en la cabecera
-$lxd-user-menu-header-name-color: #111e30; // Color del nombre en la cabecera
-$lxd-user-menu-header-email-font-size: 0.875rem; // Tamaño del email en la cabecera
-$lxd-user-menu-header-email-color: #4a4a4a; // Color del email en la cabecera
-$lxd-user-menu-item-padding-block: 0.5rem; // Padding vertical de cada ítem
-$lxd-user-menu-item-padding-inline: 1rem; // Padding horizontal de cada ítem
-$lxd-user-menu-item-icon-gap: 0.5rem; // Gap entre icono y texto del ítem
-$lxd-user-menu-item-border-radius: 0px; // Radio de cada ítem
-$lxd-user-menu-item-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de ítems
-$lxd-user-menu-item-font-size: 1rem; // Tamaño de texto de ítems
-$lxd-user-menu-item-font-weight: 300; // Peso de ítems
-$lxd-user-menu-item-color: #111e30; // Color de ítems
-$lxd-user-menu-item-highlighted-bg: #111e30; // Relleno del ítem resaltado — el del Menu: la inversión de marca
-$lxd-user-menu-item-highlighted-color: #ffffff; // Texto del ítem resaltado — el del Menu
-$lxd-user-menu-item-destructive-color: #b30000; // Color de ítem destructivo
-$lxd-user-menu-item-destructive-highlighted-bg: #b30000; // Relleno del ítem destructivo resaltado — el del Menu
-$lxd-user-menu-item-destructive-highlighted-color: #ffffff; // Texto del ítem destructivo resaltado — el del Menu
-$lxd-user-menu-separator-color: #111e30; // Color del separador — el de la línea del sistema
-$lxd-user-menu-separator-height: 1px; // Alto del separador — el grosor de la línea del sistema
-$lxd-user-menu-separator-margin-block: 0.5rem; // Margen vertical del separador — el aire md de la línea del sistema
-$lxd-user-menu-disabled-opacity: 0.4; // Opacidad de ítems deshabilitados
-$lxd-user-menu-transition-duration: 150ms; // Duración de transición
-$lxd-user-menu-transition-easing: ease; // Easing de transición
+$slxd-user-menu-offset: 0.25rem; // Separación entre el disparador y el panel: el desplazamiento compartido de los flotantes de la cabecera
+$slxd-user-menu-trigger-padding-block: 0.5rem; // Padding vertical del trigger
+$slxd-user-menu-trigger-padding-inline: 0.75rem; // Padding horizontal del trigger
+$slxd-user-menu-trigger-compact-padding-inline: 0.25rem; // Padding horizontal del botón compacto (solo avatar)
+$slxd-user-menu-trigger-gap: 0.75rem; // Espacio entre avatar y nombre
+$slxd-user-menu-trigger-border-radius: 0px; // Radio del trigger
+$slxd-user-menu-focus-ring-color: #111e30; // Color del focus ring
+$slxd-user-menu-focus-ring-width: 2px; // Grosor del focus ring
+$slxd-user-menu-focus-ring-offset: 1px; // Separación del focus ring
+$slxd-user-menu-name-font-size: 1rem; // Tamaño de texto del nombre
+$slxd-user-menu-name-font-weight: 500; // Peso del nombre
+$slxd-user-menu-name-color: #111e30; // Color del nombre
+$slxd-user-menu-content-min-width: 14rem; // Ancho mínimo del panel: que quepan nombre y correo en una línea (no es una talla de componente)
+$slxd-user-menu-badge-offset: 0.25rem; // Cuánto asoma el badge de notificaciones por la esquina del avatar
+$slxd-user-menu-header-gap: 0.25rem; // Entre nombre y correo en la cabecera del panel
+$slxd-user-menu-content-bg: #ffffff; // Fondo del panel
+$slxd-user-menu-content-border-width: 1px; // Borde del panel
+$slxd-user-menu-content-border-color: #111e30; // Color del borde del panel
+$slxd-user-menu-content-border-radius: 0px; // Radio del panel
+$slxd-user-menu-content-shadow: none; // Sombra del panel
+$slxd-user-menu-content-z-index: 400; // Z-index del dropdown (por encima del sidebar en mobile)
+$slxd-user-menu-content-max-height: var(--available-height); // Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — con muchos ítems, el panel hace scroll en vez de salirse de la pantalla
+$slxd-user-menu-content-padding-block: 0.5rem; // Padding vertical del panel
+$slxd-user-menu-content-padding-inline: 0.5rem; // Padding horizontal del panel
+$slxd-user-menu-header-padding-block: 0.75rem; // Padding vertical de la cabecera del dropdown
+$slxd-user-menu-header-padding-inline: 1rem; // Padding horizontal de la cabecera del dropdown
+$slxd-user-menu-header-name-font-size: 1rem; // Tamaño del nombre en la cabecera
+$slxd-user-menu-header-name-font-weight: 500; // Peso del nombre en la cabecera
+$slxd-user-menu-header-name-color: #111e30; // Color del nombre en la cabecera
+$slxd-user-menu-header-email-font-size: 0.875rem; // Tamaño del email en la cabecera
+$slxd-user-menu-header-email-color: #4a4a4a; // Color del email en la cabecera
+$slxd-user-menu-item-padding-block: 0.5rem; // Padding vertical de cada ítem
+$slxd-user-menu-item-padding-inline: 1rem; // Padding horizontal de cada ítem
+$slxd-user-menu-item-icon-gap: 0.5rem; // Gap entre icono y texto del ítem
+$slxd-user-menu-item-border-radius: 0px; // Radio de cada ítem
+$slxd-user-menu-item-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de ítems
+$slxd-user-menu-item-font-size: 1rem; // Tamaño de texto de ítems
+$slxd-user-menu-item-font-weight: 300; // Peso de ítems
+$slxd-user-menu-item-color: #111e30; // Color de ítems
+$slxd-user-menu-item-highlighted-bg: #111e30; // Relleno del ítem resaltado — el del Menu: la inversión de marca
+$slxd-user-menu-item-highlighted-color: #ffffff; // Texto del ítem resaltado — el del Menu
+$slxd-user-menu-item-destructive-color: #b30000; // Color de ítem destructivo
+$slxd-user-menu-item-destructive-highlighted-bg: #b30000; // Relleno del ítem destructivo resaltado — el del Menu
+$slxd-user-menu-item-destructive-highlighted-color: #ffffff; // Texto del ítem destructivo resaltado — el del Menu
+$slxd-user-menu-separator-color: #111e30; // Color del separador — el de la línea del sistema
+$slxd-user-menu-separator-height: 1px; // Alto del separador — el grosor de la línea del sistema
+$slxd-user-menu-separator-margin-block: 0.5rem; // Margen vertical del separador — el aire md de la línea del sistema
+$slxd-user-menu-disabled-opacity: 0.4; // Opacidad de ítems deshabilitados
+$slxd-user-menu-transition-duration: 150ms; // Duración de transición
+$slxd-user-menu-transition-easing: ease; // Easing de transición

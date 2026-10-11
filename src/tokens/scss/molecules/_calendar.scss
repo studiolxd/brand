@@ -1,73 +1,73 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-calendar-gap: 0.5rem; // Gap entre cabecera y cuadrícula
-$lxd-calendar-grid-gap: 0.25rem; // Gap entre celdas del grid
-$lxd-calendar-padding-block: 0.75rem; // Padding vertical del componente
-$lxd-calendar-padding-inline: 0.75rem; // Padding horizontal del componente
-$lxd-calendar-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica base
-$lxd-calendar-nav-color: #111e30; // Color de los botones prev/next
-$lxd-calendar-nav-disabled-color: #6b6b6b; // Color deshabilitado de los botones de navegación
-$lxd-calendar-nav-disabled-cursor: not-allowed; // Cursor deshabilitado
-$lxd-calendar-nav-focus-ring-color: #111e30; // Color del focus ring de los botones de navegación
-$lxd-calendar-nav-focus-ring-width: 2px; // Grosor del focus ring
-$lxd-calendar-nav-focus-ring-offset: 1px; // Separación del focus ring
-$lxd-calendar-title-font-size: 1rem; // Tamaño del título del mes — md
-$lxd-calendar-title-font-weight: 500; // Peso del título del mes
-$lxd-calendar-title-color: #111e30; // Color del título del mes
-$lxd-calendar-weekday-font-size: 0.875rem; // Tamaño de las cabeceras de día de semana
-$lxd-calendar-weekday-color: #4a4a4a; // Color de las cabeceras de día de semana
-$lxd-calendar-day-size: 2rem; // Tamaño (ancho y alto) de los botones de día — md
-$lxd-calendar-day-font-size: 0.875rem; // Tamaño de fuente de los días
-$lxd-calendar-day-font-weight: 300; // Peso de fuente de los días
-$lxd-calendar-day-line-height: 1; // Interlineado de los días y de los años: el de los controles. Sin él, el botón heredaba el 1,15 de normalize.css
-$lxd-calendar-day-radius: 0px; // Radio de borde de los botones de día
-$lxd-calendar-day-color: #111e30; // Color de texto de los días
-$lxd-calendar-day-bg: rgba(0, 0, 0, 0); // Fondo base de los días
-$lxd-calendar-day-focus-ring-color: #111e30; // Color del focus ring de los días
-$lxd-calendar-day-focus-ring-width: 2px; // Grosor del focus ring de los días
-$lxd-calendar-day-focus-ring-offset: 1px; // Separación del focus ring de los días
-$lxd-calendar-today-color: #111e30; // Color de texto del día de hoy
-$lxd-calendar-today-font-weight: 500; // Peso de fuente del día de hoy
-$lxd-calendar-today-marker-color: #111e30; // Color del marcador del día de hoy
-$lxd-calendar-today-marker-size: 0.25rem; // Lado del marcador del día de hoy
-$lxd-calendar-today-marker-offset: 0.25rem; // Separación del marcador respecto al borde inferior de la celda
-$lxd-calendar-today-marker-radius: 0px; // Radio del marcador del día de hoy — recto, como toda esquina del sistema
-$lxd-calendar-selected-bg: #111e30; // Fondo del día seleccionado
-$lxd-calendar-selected-color: #ffffff; // Texto del día seleccionado
-$lxd-calendar-outside-color: #4a4a4a; // Color de los días fuera del mes actual — se leen, así que son texto secundario, no gris de icono
-$lxd-calendar-disabled-color: #6b6b6b; // Color de los días deshabilitados
-$lxd-calendar-disabled-cursor: not-allowed; // Cursor de los días deshabilitados
-$lxd-calendar-transition-duration: 150ms; // Duración de las transiciones
-$lxd-calendar-transition-easing: ease; // Easing de las transiciones
-$lxd-calendar-sm-day-size: 1.5rem; // Tamaño de los botones de día — sm
-$lxd-calendar-sm-title-font-size: 0.875rem; // Tamaño del título — sm
-$lxd-calendar-lg-day-size: 3rem; // Tamaño de los botones de día — lg
-$lxd-calendar-lg-title-font-size: 1rem; // Tamaño del título — lg
-$lxd-calendar-lg-day-font-size: 1rem; // Tamaño de fuente de los días — lg
-$lxd-calendar-title-button-cursor: pointer; // Cursor del título: lleva a la rejilla de años
-$lxd-calendar-title-button-padding-inline: 0.25rem; // Aire a los lados del título pulsable: el mismo hueco que separa las celdas
-$lxd-calendar-year-columns: 4; // Columnas de la rejilla de años: doce años en tres filas de cuatro
-$lxd-calendar-year-height: 2rem; // Alto de la celda de año — md: el del día, para que la vista de años no cambie la altura del panel
-$lxd-calendar-year-padding-inline: 0.25rem; // Aire a los lados de la celda de año: el año lleva cuatro cifras y no cabe en el cuadrado del día
-$lxd-calendar-year-font-size: 0.875rem; // Cuerpo de letra del año
-$lxd-calendar-year-bg: rgba(0, 0, 0, 0); // Fondo base de la celda de año
-$lxd-calendar-year-color: #111e30; // Color de texto del año
-$lxd-calendar-year-current-color: #111e30; // Color del año en curso: el mismo que el día de hoy
-$lxd-calendar-year-current-font-weight: 500; // Peso del año en curso
-$lxd-calendar-year-selected-bg: #111e30; // Fondo del año de la fecha elegida
-$lxd-calendar-year-selected-color: #ffffff; // Texto del año de la fecha elegida
-$lxd-calendar-year-disabled-color: #6b6b6b; // Color de los años fuera de rango
-$lxd-calendar-year-grid-min-width: calc(7 * 2rem + 6 * 0.25rem); // Ancho mínimo de la rejilla de años — md: el de la semana (siete días y sus seis huecos), para que el panel no encoja al pasar de los días a los años
-$lxd-calendar-sm-year-grid-min-width: calc(7 * 1.5rem + 6 * 0.25rem); // Ancho mínimo de la rejilla de años — sm
-$lxd-calendar-lg-year-grid-min-width: calc(7 * 3rem + 6 * 0.25rem); // Ancho mínimo de la rejilla de años — lg
-$lxd-calendar-sm-year-height: 1.5rem; // Alto de la celda de año — sm
-$lxd-calendar-lg-year-height: 3rem; // Alto de la celda de año — lg
-$lxd-calendar-lg-year-font-size: 1rem; // Cuerpo de letra del año — lg
-$lxd-calendar-hover-line-width: 1px; // Grosor de la línea de hover del día, del año y del título. Nada se rellena bajo el puntero (regla de Colores): lo que se puede pulsar y es texto deja una línea de tinta debajo. Las flechas no la llevan: son un glifo, y la línea del sistema subraya texto
-$lxd-calendar-hover-line-color: #111e30; // Color de la línea de hover — tinta de la superficie
+$slxd-calendar-gap: 0.5rem; // Gap entre cabecera y cuadrícula
+$slxd-calendar-grid-gap: 0.25rem; // Gap entre celdas del grid
+$slxd-calendar-padding-block: 0.75rem; // Padding vertical del componente
+$slxd-calendar-padding-inline: 0.75rem; // Padding horizontal del componente
+$slxd-calendar-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica base
+$slxd-calendar-nav-color: #111e30; // Color de los botones prev/next
+$slxd-calendar-nav-disabled-color: #6b6b6b; // Color deshabilitado de los botones de navegación
+$slxd-calendar-nav-disabled-cursor: not-allowed; // Cursor deshabilitado
+$slxd-calendar-nav-focus-ring-color: #111e30; // Color del focus ring de los botones de navegación
+$slxd-calendar-nav-focus-ring-width: 2px; // Grosor del focus ring
+$slxd-calendar-nav-focus-ring-offset: 1px; // Separación del focus ring
+$slxd-calendar-title-font-size: 1rem; // Tamaño del título del mes — md
+$slxd-calendar-title-font-weight: 500; // Peso del título del mes
+$slxd-calendar-title-color: #111e30; // Color del título del mes
+$slxd-calendar-weekday-font-size: 0.875rem; // Tamaño de las cabeceras de día de semana
+$slxd-calendar-weekday-color: #4a4a4a; // Color de las cabeceras de día de semana
+$slxd-calendar-day-size: 2rem; // Tamaño (ancho y alto) de los botones de día — md
+$slxd-calendar-day-font-size: 0.875rem; // Tamaño de fuente de los días
+$slxd-calendar-day-font-weight: 300; // Peso de fuente de los días
+$slxd-calendar-day-line-height: 1; // Interlineado de los días y de los años: el de los controles. Sin él, el botón heredaba el 1,15 de normalize.css
+$slxd-calendar-day-radius: 0px; // Radio de borde de los botones de día
+$slxd-calendar-day-color: #111e30; // Color de texto de los días
+$slxd-calendar-day-bg: rgba(0, 0, 0, 0); // Fondo base de los días
+$slxd-calendar-day-focus-ring-color: #111e30; // Color del focus ring de los días
+$slxd-calendar-day-focus-ring-width: 2px; // Grosor del focus ring de los días
+$slxd-calendar-day-focus-ring-offset: 1px; // Separación del focus ring de los días
+$slxd-calendar-today-color: #111e30; // Color de texto del día de hoy
+$slxd-calendar-today-font-weight: 500; // Peso de fuente del día de hoy
+$slxd-calendar-today-marker-color: #111e30; // Color del marcador del día de hoy
+$slxd-calendar-today-marker-size: 0.25rem; // Lado del marcador del día de hoy
+$slxd-calendar-today-marker-offset: 0.25rem; // Separación del marcador respecto al borde inferior de la celda
+$slxd-calendar-today-marker-radius: 0px; // Radio del marcador del día de hoy — recto, como toda esquina del sistema
+$slxd-calendar-selected-bg: #111e30; // Fondo del día seleccionado
+$slxd-calendar-selected-color: #ffffff; // Texto del día seleccionado
+$slxd-calendar-outside-color: #4a4a4a; // Color de los días fuera del mes actual — se leen, así que son texto secundario, no gris de icono
+$slxd-calendar-disabled-color: #6b6b6b; // Color de los días deshabilitados
+$slxd-calendar-disabled-cursor: not-allowed; // Cursor de los días deshabilitados
+$slxd-calendar-transition-duration: 150ms; // Duración de las transiciones
+$slxd-calendar-transition-easing: ease; // Easing de las transiciones
+$slxd-calendar-sm-day-size: 1.5rem; // Tamaño de los botones de día — sm
+$slxd-calendar-sm-title-font-size: 0.875rem; // Tamaño del título — sm
+$slxd-calendar-lg-day-size: 3rem; // Tamaño de los botones de día — lg
+$slxd-calendar-lg-title-font-size: 1rem; // Tamaño del título — lg
+$slxd-calendar-lg-day-font-size: 1rem; // Tamaño de fuente de los días — lg
+$slxd-calendar-title-button-cursor: pointer; // Cursor del título: lleva a la rejilla de años
+$slxd-calendar-title-button-padding-inline: 0.25rem; // Aire a los lados del título pulsable: el mismo hueco que separa las celdas
+$slxd-calendar-year-columns: 4; // Columnas de la rejilla de años: doce años en tres filas de cuatro
+$slxd-calendar-year-height: 2rem; // Alto de la celda de año — md: el del día, para que la vista de años no cambie la altura del panel
+$slxd-calendar-year-padding-inline: 0.25rem; // Aire a los lados de la celda de año: el año lleva cuatro cifras y no cabe en el cuadrado del día
+$slxd-calendar-year-font-size: 0.875rem; // Cuerpo de letra del año
+$slxd-calendar-year-bg: rgba(0, 0, 0, 0); // Fondo base de la celda de año
+$slxd-calendar-year-color: #111e30; // Color de texto del año
+$slxd-calendar-year-current-color: #111e30; // Color del año en curso: el mismo que el día de hoy
+$slxd-calendar-year-current-font-weight: 500; // Peso del año en curso
+$slxd-calendar-year-selected-bg: #111e30; // Fondo del año de la fecha elegida
+$slxd-calendar-year-selected-color: #ffffff; // Texto del año de la fecha elegida
+$slxd-calendar-year-disabled-color: #6b6b6b; // Color de los años fuera de rango
+$slxd-calendar-year-grid-min-width: calc(7 * 2rem + 6 * 0.25rem); // Ancho mínimo de la rejilla de años — md: el de la semana (siete días y sus seis huecos), para que el panel no encoja al pasar de los días a los años
+$slxd-calendar-sm-year-grid-min-width: calc(7 * 1.5rem + 6 * 0.25rem); // Ancho mínimo de la rejilla de años — sm
+$slxd-calendar-lg-year-grid-min-width: calc(7 * 3rem + 6 * 0.25rem); // Ancho mínimo de la rejilla de años — lg
+$slxd-calendar-sm-year-height: 1.5rem; // Alto de la celda de año — sm
+$slxd-calendar-lg-year-height: 3rem; // Alto de la celda de año — lg
+$slxd-calendar-lg-year-font-size: 1rem; // Cuerpo de letra del año — lg
+$slxd-calendar-hover-line-width: 1px; // Grosor de la línea de hover del día, del año y del título. Nada se rellena bajo el puntero (regla de Colores): lo que se puede pulsar y es texto deja una línea de tinta debajo. Las flechas no la llevan: son un glifo, y la línea del sistema subraya texto
+$slxd-calendar-hover-line-color: #111e30; // Color de la línea de hover — tinta de la superficie
 
 // Alias obsoletos: nombres anteriores a la convención D9.
-$lxd-calendar-year-grid-min-inline-size: $lxd-calendar-year-grid-min-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-calendar-year-grid-min-width
-$lxd-calendar-sm-year-grid-min-inline-size: $lxd-calendar-sm-year-grid-min-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-calendar-sm-year-grid-min-width
-$lxd-calendar-lg-year-grid-min-inline-size: $lxd-calendar-lg-year-grid-min-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-calendar-lg-year-grid-min-width
+$slxd-calendar-year-grid-min-inline-size: $slxd-calendar-year-grid-min-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-calendar-year-grid-min-width
+$slxd-calendar-sm-year-grid-min-inline-size: $slxd-calendar-sm-year-grid-min-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-calendar-sm-year-grid-min-width
+$slxd-calendar-lg-year-grid-min-inline-size: $slxd-calendar-lg-year-grid-min-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-calendar-lg-year-grid-min-width

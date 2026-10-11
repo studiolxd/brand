@@ -1,32 +1,32 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-progress-bar-height-sm: 0.5rem; // 8px — barra compacta, sin etiqueta
-$lxd-progress-bar-height-md: 1.5rem; // 24px — barra por defecto: la etiqueta cabe dentro
-$lxd-progress-bar-height-lg: 2rem; // 32px — barra destacada
-$lxd-progress-bar-border-radius: 0px; // Esquina recta, como todo el sistema
-$lxd-progress-bar-inside-label-threshold: 15; // Porcentaje mínimo de relleno para que la cifra se escriba dentro; por debajo, fuera. Se consume también en JS (no solo CSS) para decidir la posición de la etiqueta
-$lxd-progress-bar-track-bg: #f2f2f2; // Fondo del carril: la superficie clara secundaria del sistema (no es un estado, es una superficie)
-$lxd-progress-bar-transition-duration: 250ms; // Duración del avance del relleno (cambio de estado)
-$lxd-progress-bar-transition-easing: ease-in-out; // Curva del avance del relleno
-$lxd-progress-bar-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de la cifra
-$lxd-progress-bar-font-size: 0.875rem; // 14px — cuerpo de interfaz de la cifra
-$lxd-progress-bar-font-weight: 500; // Peso de énfasis de la cifra
-$lxd-progress-bar-line-height: 1; // Una línea: la cifra se centra con la altura del carril
-$lxd-progress-bar-label-gap: 0.5rem; // Hueco entre el borde del relleno y la cifra cuando va fuera
-$lxd-progress-bar-label-padding-inline: 0.5rem; // Aire de la cifra dentro del relleno
-$lxd-progress-bar-fill-border-width: 1px; // Filete de contorno del relleno. Los rellenos de marca (lavanda, amarillo, esmeralda, cayena) son claros y saturados: contra un carril claro no llegan a 3:1, y WCAG 1.4.11 admite que el contorno sea quien identifique el elemento
-$lxd-progress-bar-fill-border-color: #111e30; // Color del filete del relleno: la tinta del sistema, que contrasta a la vez con el carril y con los rellenos claros
-$lxd-progress-bar-track-border-width: 1px; // Filete de contorno del carril, a juego con el del relleno
-$lxd-progress-bar-track-border-color: #111e30; // Color del filete del carril: la tinta del sistema, que lo distingue de la superficie ambiente
-$lxd-progress-bar-primary-fill: #111e30; // Marca primaria (prusia) — relleno
-$lxd-progress-bar-primary-label-inside-color: #ffffff; // Cifra sobre el relleno prusia
-$lxd-progress-bar-accent-1-fill: #baabff; // Acento 1 (lavanda) — relleno
-$lxd-progress-bar-accent-1-label-inside-color: #111e30; // Cifra sobre el relleno lavanda
-$lxd-progress-bar-accent-2-fill: #ffcd00; // Acento 2 (amarillo) — relleno
-$lxd-progress-bar-accent-2-label-inside-color: #111e30; // Cifra sobre el relleno amarillo
-$lxd-progress-bar-support-1-fill: #20e38e; // Soporte 1 (esmeralda) — relleno
-$lxd-progress-bar-support-1-label-inside-color: #111e30; // Cifra sobre el relleno esmeralda
-$lxd-progress-bar-support-2-fill: #f05e1c; // Soporte 2 (cayena) — relleno
-$lxd-progress-bar-support-2-label-inside-color: #111e30; // Cifra sobre el relleno cayena
-$lxd-progress-bar-label-outside-color: #111e30; // Color de la cifra cuando va fuera, sobre el carril
+$slxd-progress-bar-height-sm: 0.5rem; // 8px — barra compacta, sin etiqueta
+$slxd-progress-bar-height-md: 1.5rem; // 24px — barra por defecto: la etiqueta cabe dentro
+$slxd-progress-bar-height-lg: 2rem; // 32px — barra destacada
+$slxd-progress-bar-border-radius: 0px; // Esquina recta, como todo el sistema
+$slxd-progress-bar-inside-label-threshold: 15; // Porcentaje mínimo de relleno para que la cifra se escriba dentro; por debajo, fuera. Se consume también en JS (no solo CSS) para decidir la posición de la etiqueta
+$slxd-progress-bar-track-bg: #f2f2f2; // Fondo del carril: la superficie clara secundaria del sistema (no es un estado, es una superficie)
+$slxd-progress-bar-transition-duration: 250ms; // Duración del avance del relleno (cambio de estado)
+$slxd-progress-bar-transition-easing: ease-in-out; // Curva del avance del relleno
+$slxd-progress-bar-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de la cifra
+$slxd-progress-bar-font-size: 0.875rem; // 14px — cuerpo de interfaz de la cifra
+$slxd-progress-bar-font-weight: 500; // Peso de énfasis de la cifra
+$slxd-progress-bar-line-height: 1; // Una línea: la cifra se centra con la altura del carril
+$slxd-progress-bar-label-gap: 0.5rem; // Hueco entre el borde del relleno y la cifra cuando va fuera
+$slxd-progress-bar-label-padding-inline: 0.5rem; // Aire de la cifra dentro del relleno
+$slxd-progress-bar-fill-border-width: 1px; // Filete de contorno del relleno. Los rellenos de marca (lavanda, amarillo, esmeralda, cayena) son claros y saturados: contra un carril claro no llegan a 3:1, y WCAG 1.4.11 admite que el contorno sea quien identifique el elemento
+$slxd-progress-bar-fill-border-color: #111e30; // Color del filete del relleno: la tinta del sistema, que contrasta a la vez con el carril y con los rellenos claros
+$slxd-progress-bar-track-border-width: 1px; // Filete de contorno del carril, a juego con el del relleno
+$slxd-progress-bar-track-border-color: #111e30; // Color del filete del carril: la tinta del sistema, que lo distingue de la superficie ambiente
+$slxd-progress-bar-primary-fill: #111e30; // Marca primaria (prusia) — relleno
+$slxd-progress-bar-primary-label-inside-color: #ffffff; // Cifra sobre el relleno prusia
+$slxd-progress-bar-accent-1-fill: #baabff; // Acento 1 (lavanda) — relleno
+$slxd-progress-bar-accent-1-label-inside-color: #111e30; // Cifra sobre el relleno lavanda
+$slxd-progress-bar-accent-2-fill: #ffcd00; // Acento 2 (amarillo) — relleno
+$slxd-progress-bar-accent-2-label-inside-color: #111e30; // Cifra sobre el relleno amarillo
+$slxd-progress-bar-support-1-fill: #20e38e; // Soporte 1 (esmeralda) — relleno
+$slxd-progress-bar-support-1-label-inside-color: #111e30; // Cifra sobre el relleno esmeralda
+$slxd-progress-bar-support-2-fill: #f05e1c; // Soporte 2 (cayena) — relleno
+$slxd-progress-bar-support-2-label-inside-color: #111e30; // Cifra sobre el relleno cayena
+$slxd-progress-bar-label-outside-color: #111e30; // Color de la cifra cuando va fuera, sobre el carril

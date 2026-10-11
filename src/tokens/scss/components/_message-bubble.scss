@@ -1,17 +1,17 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-message-bubble-padding-block: 0.75rem; // Aire vertical del globo
-$lxd-message-bubble-padding-inline: 1rem; // Aire horizontal del globo
-$lxd-message-bubble-border-radius: 0px; // Radio del globo: recto en las cuatro esquinas, como todo el sistema. Quien distingue al emisor es la alineación y la cola, no una esquina redondeada
-$lxd-message-bubble-border-width: 1px; // Grosor del contorno del globo y de su cola
-$lxd-message-bubble-border-style: solid; // Estilo del contorno
-$lxd-message-bubble-max-width: 75%; // Anchura máxima del globo dentro del hilo — cascada desde `chat`, la medida es del hilo, no del globo
-$lxd-message-bubble-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica
-$lxd-message-bubble-font-size: 1rem; // El mensaje hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
-$lxd-message-bubble-font-weight: 300; // Peso tipográfico
-$lxd-message-bubble-line-height: 1.65; // Interlineado
-$lxd-message-bubble-color: #111e30; // Tinta del mensaje. La misma para los dos emisores: el globo no tiene relleno, así que el texto va sobre la superficie
-$lxd-message-bubble-border-color: #111e30; // Contorno del globo. Único separador del mensaje: no hay relleno ni sombra
-$lxd-message-bubble-tail-size: 0.75rem; // Lado de la cola triangular que nace en la esquina inferior del lado del emisor y apunta hacia él
-$lxd-message-bubble-tail-fill: #ffffff; // Color con el que se vacía la cola: el de la superficie que hay detrás del globo. Es lo que interrumpe el borde donde nace la cola y deja el triángulo en puro contorno. Si el hilo vive sobre otra superficie, se repunta aquí
+$slxd-message-bubble-padding-block: 0.75rem; // Aire vertical del globo
+$slxd-message-bubble-padding-inline: 1rem; // Aire horizontal del globo
+$slxd-message-bubble-border-radius: 0px; // Radio del globo: recto en las cuatro esquinas, como todo el sistema. Quien distingue al emisor es la alineación y la cola, no una esquina redondeada
+$slxd-message-bubble-border-width: 1px; // Grosor del contorno del globo y de su cola
+$slxd-message-bubble-border-style: solid; // Estilo del contorno
+$slxd-message-bubble-max-width: 75%; // Anchura máxima del globo dentro del hilo — cascada desde `chat`, la medida es del hilo, no del globo
+$slxd-message-bubble-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica
+$slxd-message-bubble-font-size: 1rem; // El mensaje hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
+$slxd-message-bubble-font-weight: 300; // Peso tipográfico
+$slxd-message-bubble-line-height: 1.65; // Interlineado
+$slxd-message-bubble-color: #111e30; // Tinta del mensaje. La misma para los dos emisores: el globo no tiene relleno, así que el texto va sobre la superficie
+$slxd-message-bubble-border-color: #111e30; // Contorno del globo. Único separador del mensaje: no hay relleno ni sombra
+$slxd-message-bubble-tail-size: 0.75rem; // Lado de la cola triangular que nace en la esquina inferior del lado del emisor y apunta hacia él
+$slxd-message-bubble-tail-fill: #ffffff; // Color con el que se vacía la cola: el de la superficie que hay detrás del globo. Es lo que interrumpe el borde donde nace la cola y deja el triángulo en puro contorno. Si el hilo vive sobre otra superficie, se repunta aquí

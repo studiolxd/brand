@@ -1,30 +1,30 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-docs-search-gap: 0.75rem; // Aire entre el campo de búsqueda y la lista de resultados
-$lxd-docs-search-results-gap: 0.25rem; // Aire entre dos resultados
-$lxd-docs-search-results-max-height: min(28rem, 60vh); // Alto máximo de la lista: a partir de ahí scrollea dentro en vez de empujar la página
-$lxd-docs-search-result-padding-block: 0.75rem; // Padding vertical de un resultado
-$lxd-docs-search-result-padding-inline: 0.75rem; // Padding horizontal de un resultado
-$lxd-docs-search-result-border-radius: 0px; // Radio de un resultado
-$lxd-docs-search-result-gap: 0.25rem; // Aire entre las tres líneas de un resultado: producto, título y extracto
-$lxd-docs-search-result-color: #111e30; // Color del resultado — tinta de la superficie
-$lxd-docs-search-result-title-font-size: 1rem; // Cuerpo del título del resultado: el del texto que indexa
-$lxd-docs-search-result-title-font-weight: 500; // Peso del título del resultado
-$lxd-docs-search-result-excerpt-font-size: 0.875rem; // Cuerpo del extracto: un peldaño por debajo del título
-$lxd-docs-search-result-excerpt-line-height: 1.5; // Interlineado del extracto
-$lxd-docs-search-result-excerpt-color: #4a4a4a; // Color del extracto — atenuado: acompaña al título, no compite con él
-$lxd-docs-search-result-product-font-size: 0.875rem; // Cuerpo del rótulo de producto del resultado
-$lxd-docs-search-result-product-color: #4a4a4a; // Color del rótulo de producto — atenuado
-$lxd-docs-search-result-mark-bg: #ffcd00; // Fondo del resaltado de coincidencias (`<mark>`) dentro del extracto: amarillo de marca. Es un relleno autocontenido —fondo y tinta emparejados—, así que no cambia en superficie oscura
-$lxd-docs-search-result-mark-color: #111e30; // Tinta del resaltado de coincidencias sobre el amarillo
-$lxd-docs-search-result-highlighted-bg: #111e30; // Relleno del resultado resaltado — el del Menu: la inversión de marca. El foco es virtual, así que puntero y teclado marcan el mismo relleno
-$lxd-docs-search-result-highlighted-color: #ffffff; // Texto del resultado resaltado — el del Menu: producto y extracto lo heredan por `currentColor`
-$lxd-docs-search-status-padding-block: 0.75rem; // Padding vertical del aviso de estado (buscando / sin resultados)
-$lxd-docs-search-status-padding-inline: 0.75rem; // Padding horizontal del aviso de estado
-$lxd-docs-search-status-gap: 0.5rem; // Aire entre el indicador de carga y su texto
-$lxd-docs-search-status-font-size: 0.875rem; // Cuerpo del aviso de estado
-$lxd-docs-search-status-color: #4a4a4a; // Color del aviso de estado — atenuado
+$slxd-docs-search-gap: 0.75rem; // Aire entre el campo de búsqueda y la lista de resultados
+$slxd-docs-search-results-gap: 0.25rem; // Aire entre dos resultados
+$slxd-docs-search-results-max-height: min(28rem, 60vh); // Alto máximo de la lista: a partir de ahí scrollea dentro en vez de empujar la página
+$slxd-docs-search-result-padding-block: 0.75rem; // Padding vertical de un resultado
+$slxd-docs-search-result-padding-inline: 0.75rem; // Padding horizontal de un resultado
+$slxd-docs-search-result-border-radius: 0px; // Radio de un resultado
+$slxd-docs-search-result-gap: 0.25rem; // Aire entre las tres líneas de un resultado: producto, título y extracto
+$slxd-docs-search-result-color: #111e30; // Color del resultado — tinta de la superficie
+$slxd-docs-search-result-title-font-size: 1rem; // Cuerpo del título del resultado: el del texto que indexa
+$slxd-docs-search-result-title-font-weight: 500; // Peso del título del resultado
+$slxd-docs-search-result-excerpt-font-size: 0.875rem; // Cuerpo del extracto: un peldaño por debajo del título
+$slxd-docs-search-result-excerpt-line-height: 1.5; // Interlineado del extracto
+$slxd-docs-search-result-excerpt-color: #4a4a4a; // Color del extracto — atenuado: acompaña al título, no compite con él
+$slxd-docs-search-result-product-font-size: 0.875rem; // Cuerpo del rótulo de producto del resultado
+$slxd-docs-search-result-product-color: #4a4a4a; // Color del rótulo de producto — atenuado
+$slxd-docs-search-result-mark-bg: #ffcd00; // Fondo del resaltado de coincidencias (`<mark>`) dentro del extracto: amarillo de marca. Es un relleno autocontenido —fondo y tinta emparejados—, así que no cambia en superficie oscura
+$slxd-docs-search-result-mark-color: #111e30; // Tinta del resaltado de coincidencias sobre el amarillo
+$slxd-docs-search-result-highlighted-bg: #111e30; // Relleno del resultado resaltado — el del Menu: la inversión de marca. El foco es virtual, así que puntero y teclado marcan el mismo relleno
+$slxd-docs-search-result-highlighted-color: #ffffff; // Texto del resultado resaltado — el del Menu: producto y extracto lo heredan por `currentColor`
+$slxd-docs-search-status-padding-block: 0.75rem; // Padding vertical del aviso de estado (buscando / sin resultados)
+$slxd-docs-search-status-padding-inline: 0.75rem; // Padding horizontal del aviso de estado
+$slxd-docs-search-status-gap: 0.5rem; // Aire entre el indicador de carga y su texto
+$slxd-docs-search-status-font-size: 0.875rem; // Cuerpo del aviso de estado
+$slxd-docs-search-status-color: #4a4a4a; // Color del aviso de estado — atenuado
 
 // Alias obsoletos: nombres anteriores a la convención D9.
-$lxd-docs-search-results-max-block-size: $lxd-docs-search-results-max-height; // OBSOLETO (v51, se retira en la v52): usar $lxd-docs-search-results-max-height
+$slxd-docs-search-results-max-block-size: $slxd-docs-search-results-max-height; // OBSOLETO (v51, se retira en la v52): usar $slxd-docs-search-results-max-height

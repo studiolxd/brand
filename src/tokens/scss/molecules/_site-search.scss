@@ -1,45 +1,45 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-site-search-width: 100%; // Anchura del buscador: la de su contenedor. Es la página de resultados entera, así que ocupa todo el hueco donde se monte — declarada y no heredada del flujo, para que tampoco se encoja dentro de una fila flex o una celda de retícula
-$lxd-site-search-gap: 1.5rem; // Aire entre los bloques del buscador: el formulario, el aviso de estado, los resultados y el pie
-$lxd-site-search-status-font-size: 0.875rem; // Cuerpo del aviso de estado: cuántos resultados hay, que se está buscando o que no hay nada
-$lxd-site-search-status-line-height: 1.5; // Interlineado del aviso de estado
-$lxd-site-search-status-color: #4a4a4a; // Color del aviso de estado — atenuado: acompaña a los resultados, no compite con ellos
-$lxd-site-search-status-gap: 0.5rem; // Aire entre el indicador de carga y su texto
-$lxd-site-search-results-gap: 2rem; // Aire entre dos resultados (32px). Sin filete que los separe, es el aire el que dice dónde acaba uno y empieza el siguiente: tiene que ser claramente mayor que el que hay entre las líneas de un mismo resultado
-$lxd-site-search-result-gap: 0.5rem; // Aire entre las cuatro líneas de un resultado: sección, título, extracto y dirección
-$lxd-site-search-result-title-font-size: 1.25rem; // Cuerpo del título del resultado: un peldaño por encima del cuerpo de la superficie, para que siga mandando ahora que el extracto y la dirección leen al cuerpo entero
-$lxd-site-search-result-title-line-height: 1.3; // Interlineado del título del resultado: el de un título, más cerrado que el del texto que lleva debajo
-$lxd-site-search-result-title-font-weight: 500; // Peso del título del resultado
-$lxd-site-search-result-title-color: #111e30; // Color del título del resultado
-$lxd-site-search-result-section-font-size: 1rem; // Cuerpo del rastro de sección («Documentación › Creator»): el cuerpo de la superficie, que en la página pública es el grande. Lo que lo separa del extracto es la tinta atenuada, no un cuerpo menor
-$lxd-site-search-result-section-line-height: 1.5; // Interlineado del rastro de sección
-$lxd-site-search-result-section-color: #4a4a4a; // Color del rastro de sección — atenuado
-$lxd-site-search-result-excerpt-font-size: 1rem; // Cuerpo del extracto: el cuerpo de la superficie, que en la página pública es el grande (20px). Es el texto que se lee para decidir si el resultado sirve, así que lee a la talla de lectura de la página, no a una menor
-$lxd-site-search-result-excerpt-line-height: 1.5; // Interlineado del extracto: el del cuerpo de la superficie
-$lxd-site-search-result-excerpt-color: #111e30; // Color del extracto — la tinta de la superficie: es lo que se lee para decidir si el resultado sirve
-$lxd-site-search-result-measure: 70ch; // Medida de lectura del extracto: la del sistema (70ch). El filete y la lista siguen ocupando todo el ancho —son estructura—, pero el texto que se lee para decidir si el resultado sirve no se estira a lo ancho de una pantalla grande
-$lxd-site-search-result-url-font-size: 1rem; // Cuerpo de la dirección del resultado: el cuerpo de la superficie, el mismo que el extracto y el rastro de sección
-$lxd-site-search-result-url-line-height: 1.5; // Interlineado de la dirección
-$lxd-site-search-result-url-color: #4a4a4a; // Color de la dirección — atenuada
-$lxd-site-search-result-link-hover-line-width: 1px; // Grosor de la línea bajo el título del resultado con el puntero encima. Un estado se marca con una línea de tinta, nunca con relleno
-$lxd-site-search-result-link-hover-line-offset: 0.25rem; // Separación entre el título y su línea de hover. Apunta a la del enlace: en el DS todo subrayado se separa del texto lo mismo
-$lxd-site-search-result-focus-ring-color: #111e30; // Color del anillo de foco del enlace del resultado
-$lxd-site-search-result-focus-ring-width: 2px; // Grosor del anillo de foco
-$lxd-site-search-result-focus-ring-offset: 1px; // Separación del anillo de foco
-$lxd-site-search-result-mark-bg: #ffcd00; // Fondo del resaltado de coincidencias (`<mark>`): el amarillo de marca, el mismo que usa `DocsSearch`. Es un relleno autocontenido —fondo y tinta emparejados—, así que no cambia en superficie oscura
-$lxd-site-search-result-mark-color: #111e30; // Tinta del resaltado sobre el amarillo
-$lxd-site-search-suggestions-gap: 0.5rem; // Aire entre las sugerencias de búsqueda
-$lxd-site-search-suggestions-label-font-size: 0.75rem; // Cuerpo del rótulo de las sugerencias
-$lxd-site-search-suggestions-label-color: #4a4a4a; // Color del rótulo de las sugerencias — atenuado
-$lxd-site-search-ghost-section-width: 30%; // Ancho de la barra fantasma del rastro de sección
-$lxd-site-search-ghost-title-width: 70%; // Ancho de la barra fantasma del título
-$lxd-site-search-ghost-url-width: 45%; // Ancho de la barra fantasma de la dirección
-$lxd-site-search-skeleton-gap: 0.5rem; // Aire entre las barras de un resultado fantasma
+$slxd-site-search-width: 100%; // Anchura del buscador: la de su contenedor. Es la página de resultados entera, así que ocupa todo el hueco donde se monte — declarada y no heredada del flujo, para que tampoco se encoja dentro de una fila flex o una celda de retícula
+$slxd-site-search-gap: 1.5rem; // Aire entre los bloques del buscador: el formulario, el aviso de estado, los resultados y el pie
+$slxd-site-search-status-font-size: 0.875rem; // Cuerpo del aviso de estado: cuántos resultados hay, que se está buscando o que no hay nada
+$slxd-site-search-status-line-height: 1.5; // Interlineado del aviso de estado
+$slxd-site-search-status-color: #4a4a4a; // Color del aviso de estado — atenuado: acompaña a los resultados, no compite con ellos
+$slxd-site-search-status-gap: 0.5rem; // Aire entre el indicador de carga y su texto
+$slxd-site-search-results-gap: 2rem; // Aire entre dos resultados (32px). Sin filete que los separe, es el aire el que dice dónde acaba uno y empieza el siguiente: tiene que ser claramente mayor que el que hay entre las líneas de un mismo resultado
+$slxd-site-search-result-gap: 0.5rem; // Aire entre las cuatro líneas de un resultado: sección, título, extracto y dirección
+$slxd-site-search-result-title-font-size: 1.25rem; // Cuerpo del título del resultado: un peldaño por encima del cuerpo de la superficie, para que siga mandando ahora que el extracto y la dirección leen al cuerpo entero
+$slxd-site-search-result-title-line-height: 1.3; // Interlineado del título del resultado: el de un título, más cerrado que el del texto que lleva debajo
+$slxd-site-search-result-title-font-weight: 500; // Peso del título del resultado
+$slxd-site-search-result-title-color: #111e30; // Color del título del resultado
+$slxd-site-search-result-section-font-size: 1rem; // Cuerpo del rastro de sección («Documentación › Creator»): el cuerpo de la superficie, que en la página pública es el grande. Lo que lo separa del extracto es la tinta atenuada, no un cuerpo menor
+$slxd-site-search-result-section-line-height: 1.5; // Interlineado del rastro de sección
+$slxd-site-search-result-section-color: #4a4a4a; // Color del rastro de sección — atenuado
+$slxd-site-search-result-excerpt-font-size: 1rem; // Cuerpo del extracto: el cuerpo de la superficie, que en la página pública es el grande (20px). Es el texto que se lee para decidir si el resultado sirve, así que lee a la talla de lectura de la página, no a una menor
+$slxd-site-search-result-excerpt-line-height: 1.5; // Interlineado del extracto: el del cuerpo de la superficie
+$slxd-site-search-result-excerpt-color: #111e30; // Color del extracto — la tinta de la superficie: es lo que se lee para decidir si el resultado sirve
+$slxd-site-search-result-measure: 70ch; // Medida de lectura del extracto: la del sistema (70ch). El filete y la lista siguen ocupando todo el ancho —son estructura—, pero el texto que se lee para decidir si el resultado sirve no se estira a lo ancho de una pantalla grande
+$slxd-site-search-result-url-font-size: 1rem; // Cuerpo de la dirección del resultado: el cuerpo de la superficie, el mismo que el extracto y el rastro de sección
+$slxd-site-search-result-url-line-height: 1.5; // Interlineado de la dirección
+$slxd-site-search-result-url-color: #4a4a4a; // Color de la dirección — atenuada
+$slxd-site-search-result-link-hover-line-width: 1px; // Grosor de la línea bajo el título del resultado con el puntero encima. Un estado se marca con una línea de tinta, nunca con relleno
+$slxd-site-search-result-link-hover-line-offset: 0.25rem; // Separación entre el título y su línea de hover. Apunta a la del enlace: en el DS todo subrayado se separa del texto lo mismo
+$slxd-site-search-result-focus-ring-color: #111e30; // Color del anillo de foco del enlace del resultado
+$slxd-site-search-result-focus-ring-width: 2px; // Grosor del anillo de foco
+$slxd-site-search-result-focus-ring-offset: 1px; // Separación del anillo de foco
+$slxd-site-search-result-mark-bg: #ffcd00; // Fondo del resaltado de coincidencias (`<mark>`): el amarillo de marca, el mismo que usa `DocsSearch`. Es un relleno autocontenido —fondo y tinta emparejados—, así que no cambia en superficie oscura
+$slxd-site-search-result-mark-color: #111e30; // Tinta del resaltado sobre el amarillo
+$slxd-site-search-suggestions-gap: 0.5rem; // Aire entre las sugerencias de búsqueda
+$slxd-site-search-suggestions-label-font-size: 0.75rem; // Cuerpo del rótulo de las sugerencias
+$slxd-site-search-suggestions-label-color: #4a4a4a; // Color del rótulo de las sugerencias — atenuado
+$slxd-site-search-ghost-section-width: 30%; // Ancho de la barra fantasma del rastro de sección
+$slxd-site-search-ghost-title-width: 70%; // Ancho de la barra fantasma del título
+$slxd-site-search-ghost-url-width: 45%; // Ancho de la barra fantasma de la dirección
+$slxd-site-search-skeleton-gap: 0.5rem; // Aire entre las barras de un resultado fantasma
 
 // Alias obsoletos: nombres anteriores a la convención D9.
-$lxd-site-search-inline-size: $lxd-site-search-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-site-search-width
-$lxd-site-search-ghost-section-inline-size: $lxd-site-search-ghost-section-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-site-search-ghost-section-width
-$lxd-site-search-ghost-title-inline-size: $lxd-site-search-ghost-title-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-site-search-ghost-title-width
-$lxd-site-search-ghost-url-inline-size: $lxd-site-search-ghost-url-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-site-search-ghost-url-width
+$slxd-site-search-inline-size: $slxd-site-search-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-site-search-width
+$slxd-site-search-ghost-section-inline-size: $slxd-site-search-ghost-section-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-site-search-ghost-section-width
+$slxd-site-search-ghost-title-inline-size: $slxd-site-search-ghost-title-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-site-search-ghost-title-width
+$slxd-site-search-ghost-url-inline-size: $slxd-site-search-ghost-url-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-site-search-ghost-url-width

@@ -1,23 +1,23 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-kbd-border-radius: 0px; // Esquina recta, como todo el sistema
-$lxd-kbd-border-width: 1px; // Grosor del borde: es lo que da relieve a la tecla (el sistema no proyecta sombras)
-$lxd-kbd-border-color: #111e30; // Borde del keycap: tinta de la superficie
-$lxd-kbd-bg: #f2f2f2; // Fondo del keycap: la superficie clara secundaria del sistema
-$lxd-kbd-color: #111e30; // Color del símbolo de la tecla
-$lxd-kbd-font-family: "Google Sans Code", ui-monospace, monospace; // Monoespaciada (Google Sans Code) — alineada con el contenido técnico
-$lxd-kbd-font-size: 1rem; // 16px — talla md (por defecto)
-$lxd-kbd-font-weight: 500; // Peso de énfasis: legibilidad en tamaño compacto
-$lxd-kbd-line-height: 1; // Sin interlineado extra — el contenido se centra con flexbox
-$lxd-kbd-padding-block: 0.25rem; // Aire vertical (4px)
-$lxd-kbd-padding-inline: 0.75rem; // Aire horizontal (12px)
-$lxd-kbd-min-size: calc(1rem * 1 + 2 * 0.25rem + 2 * 1px); // Ancho mínimo: exactamente la altura de la tecla, así una tecla de un carácter sale casi cuadrada (el ancho real crece por el aire horizontal y el propio carácter, siempre mayor que este mínimo). No es una talla de componente —un keycap es una marca dentro del texto, no un control— sino la medida que sale de su propio cuerpo, su aire y sus bordes (26px en md)
-$lxd-kbd-sm-font-size: 0.875rem; // 14px — talla sm
-$lxd-kbd-sm-padding-block: 0.25rem; // Aire vertical sm (4px)
-$lxd-kbd-sm-padding-inline: 0.5rem; // Aire horizontal sm (8px)
-$lxd-kbd-sm-min-size: calc(0.875rem * 1 + 2 * 0.25rem + 2 * 1px); // Ancho mínimo sm: la misma fórmula con el cuerpo y el aire de la talla (24px)
-$lxd-kbd-lg-font-size: 1.25rem; // 20px — talla lg (el cuerpo de la superficie pública)
-$lxd-kbd-lg-padding-block: 0.5rem; // Aire vertical lg (8px)
-$lxd-kbd-lg-padding-inline: 1rem; // Aire horizontal lg (16px)
-$lxd-kbd-lg-min-size: calc(1.25rem * 1 + 2 * 0.5rem + 2 * 1px); // Ancho mínimo lg: la misma fórmula con el cuerpo y el aire de la talla (38px)
+$slxd-kbd-border-radius: 0px; // Esquina recta, como todo el sistema
+$slxd-kbd-border-width: 1px; // Grosor del borde: es lo que da relieve a la tecla (el sistema no proyecta sombras)
+$slxd-kbd-border-color: #111e30; // Borde del keycap: tinta de la superficie
+$slxd-kbd-bg: #f2f2f2; // Fondo del keycap: la superficie clara secundaria del sistema
+$slxd-kbd-color: #111e30; // Color del símbolo de la tecla
+$slxd-kbd-font-family: "Google Sans Code", ui-monospace, monospace; // Monoespaciada (Google Sans Code) — alineada con el contenido técnico
+$slxd-kbd-font-size: 1rem; // 16px — talla md (por defecto)
+$slxd-kbd-font-weight: 500; // Peso de énfasis: legibilidad en tamaño compacto
+$slxd-kbd-line-height: 1; // Sin interlineado extra — el contenido se centra con flexbox
+$slxd-kbd-padding-block: 0.25rem; // Aire vertical (4px)
+$slxd-kbd-padding-inline: 0.75rem; // Aire horizontal (12px)
+$slxd-kbd-min-size: calc(1rem * 1 + 2 * 0.25rem + 2 * 1px); // Ancho mínimo: exactamente la altura de la tecla, así una tecla de un carácter sale casi cuadrada (el ancho real crece por el aire horizontal y el propio carácter, siempre mayor que este mínimo). No es una talla de componente —un keycap es una marca dentro del texto, no un control— sino la medida que sale de su propio cuerpo, su aire y sus bordes (26px en md)
+$slxd-kbd-sm-font-size: 0.875rem; // 14px — talla sm
+$slxd-kbd-sm-padding-block: 0.25rem; // Aire vertical sm (4px)
+$slxd-kbd-sm-padding-inline: 0.5rem; // Aire horizontal sm (8px)
+$slxd-kbd-sm-min-size: calc(0.875rem * 1 + 2 * 0.25rem + 2 * 1px); // Ancho mínimo sm: la misma fórmula con el cuerpo y el aire de la talla (24px)
+$slxd-kbd-lg-font-size: 1.25rem; // 20px — talla lg (el cuerpo de la superficie pública)
+$slxd-kbd-lg-padding-block: 0.5rem; // Aire vertical lg (8px)
+$slxd-kbd-lg-padding-inline: 1rem; // Aire horizontal lg (16px)
+$slxd-kbd-lg-min-size: calc(1.25rem * 1 + 2 * 0.5rem + 2 * 1px); // Ancho mínimo lg: la misma fórmula con el cuerpo y el aire de la talla (38px)

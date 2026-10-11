@@ -1,20 +1,20 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-notification-list-item-padding-block: 1rem; // Aire vertical de cada notificación. No hay línea entre filas: este aire, dos veces, es lo único que separa una notificación de la siguiente. Es una fila de página, no de popover: respira más que la del `NotificationPanel`
-$lxd-notification-list-item-gap: 0.75rem; // Aire entre la columna del punto y el texto
-$lxd-notification-list-item-row-gap: 0.5rem; // Aire entre las líneas de una fila: entre el texto y las acciones (por debajo de `md`) y entre el texto y la hora, que va siempre en una línea propia
-$lxd-notification-list-item-column-gap: 1.5rem; // Aire entre el texto y las acciones cuando comparten línea (a partir de `md`)
-$lxd-notification-list-item-text-gap: 0.25rem; // Aire entre el título y el cuerpo
-$lxd-notification-list-item-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica de la notificación
-$lxd-notification-list-title-font-size: 1rem; // El título de una notificación es texto corriente: hereda el cuerpo de la superficie
-$lxd-notification-list-title-line-height: 1.3; // Interlineado del título
-$lxd-notification-list-title-font-weight: 300; // Peso del título, leída o sin leer: el del cuerpo de texto. Lo no leído lo dice el punto del indicador, no el peso
-$lxd-notification-list-body-font-size: 1rem; // Cuerpo de la notificación: texto corriente. En la página se lee entero y a la talla de lectura, no recortado como en el panel
-$lxd-notification-list-body-line-height: 1.5; // Interlineado del cuerpo: el de un texto que se lee entero
-$lxd-notification-list-actions-gap: 0.75rem; // Aire entre las acciones de una fila — el de los botones de un formulario: la fila de acciones del sistema es una sola
-$lxd-notification-list-time-font-size: 0.875rem; // Fecha relativa: letra menor y tinta atenuada (la del texto secundario, vía `Text tone="muted"`)
-$lxd-notification-list-time-color: #4a4a4a; // Tinta de la hora: el gris de texto secundario del sistema, el mismo que da `Text tone="muted"` al resto de textos secundarios
-$lxd-notification-list-dot-size: 16px; // Caja del punto de no leída: la talla de icono dentro de un texto (16px), la misma con la que el panel pinta ese punto
-$lxd-notification-list-dot-color: #b30000; // Color del punto: el mismo rojo del contador de la campana (`error-fill`), que es universal en claro y oscuro. No hay un rojo aparte para notificaciones
-$lxd-notification-list-dot-margin-block-start: 0.25rem; // Baja el punto hasta el centro óptico de la primera línea del título
+$slxd-notification-list-item-padding-block: 1rem; // Aire vertical de cada notificación. No hay línea entre filas: este aire, dos veces, es lo único que separa una notificación de la siguiente. Es una fila de página, no de popover: respira más que la del `NotificationPanel`
+$slxd-notification-list-item-gap: 0.75rem; // Aire entre la columna del punto y el texto
+$slxd-notification-list-item-row-gap: 0.5rem; // Aire entre las líneas de una fila: entre el texto y las acciones (por debajo de `md`) y entre el texto y la hora, que va siempre en una línea propia
+$slxd-notification-list-item-column-gap: 1.5rem; // Aire entre el texto y las acciones cuando comparten línea (a partir de `md`)
+$slxd-notification-list-item-text-gap: 0.25rem; // Aire entre el título y el cuerpo
+$slxd-notification-list-item-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica de la notificación
+$slxd-notification-list-title-font-size: 1rem; // El título de una notificación es texto corriente: hereda el cuerpo de la superficie
+$slxd-notification-list-title-line-height: 1.3; // Interlineado del título
+$slxd-notification-list-title-font-weight: 300; // Peso del título, leída o sin leer: el del cuerpo de texto. Lo no leído lo dice el punto del indicador, no el peso
+$slxd-notification-list-body-font-size: 1rem; // Cuerpo de la notificación: texto corriente. En la página se lee entero y a la talla de lectura, no recortado como en el panel
+$slxd-notification-list-body-line-height: 1.5; // Interlineado del cuerpo: el de un texto que se lee entero
+$slxd-notification-list-actions-gap: 0.75rem; // Aire entre las acciones de una fila — el de los botones de un formulario: la fila de acciones del sistema es una sola
+$slxd-notification-list-time-font-size: 0.875rem; // Fecha relativa: letra menor y tinta atenuada (la del texto secundario, vía `Text tone="muted"`)
+$slxd-notification-list-time-color: #4a4a4a; // Tinta de la hora: el gris de texto secundario del sistema, el mismo que da `Text tone="muted"` al resto de textos secundarios
+$slxd-notification-list-dot-size: 16px; // Caja del punto de no leída: la talla de icono dentro de un texto (16px), la misma con la que el panel pinta ese punto
+$slxd-notification-list-dot-color: #b30000; // Color del punto: el mismo rojo del contador de la campana (`error-fill`), que es universal en claro y oscuro. No hay un rojo aparte para notificaciones
+$slxd-notification-list-dot-margin-block-start: 0.25rem; // Baja el punto hasta el centro óptico de la primera línea del título

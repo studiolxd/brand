@@ -101,13 +101,13 @@ se consumen como custom properties.
 
 Una aplicación que no use React —PHP, un servidor, una herramienta de diseño—
 recibe los mismos tokens en SCSS, con los valores ya resueltos y prefijo
-`$lxd-`. Hay un entrypoint moderno con `@forward` y otro legacy con `@import`,
+`$slxd-`. Hay un entrypoint moderno con `@forward` y otro legacy con `@import`,
 para compiladores sin `@use`.
 
 ```scss
 @use '@studiolxd/brand/scss' as brand;
 
-.mi-bloque { color: brand.$lxd-color-primary; }
+.mi-bloque { color: brand.$slxd-color-primary; }
 ```
 
 Y quien necesite el valor como dato y no como CSS —un correo, un canvas, un

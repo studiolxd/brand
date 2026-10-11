@@ -1,83 +1,83 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-text-font-family: "Google Sans Flex", system-ui, sans-serif; // Default font family
-$lxd-text-font-size: 1rem; // Cuerpo base (16px). Es el cuerpo de la superficie de aplicación; el SiteShell lo remapea a 20px
-$lxd-text-font-weight: 300; // Default font weight
-$lxd-text-line-height: 1.5; // Default line height
-$lxd-text-color: #111e30; // Default text color
-$lxd-text-bg: #ffffff; // Fondo del lienzo de página (body)
-$lxd-text-letter-spacing: 0em; // Default letter spacing
-$lxd-text-size-1: 0.875rem; // Paso 1 de la escala de títulos (14px)
-$lxd-text-size-2: 1rem; // Paso 2 de la escala de títulos (16px)
-$lxd-text-size-3: 1rem; // Paso 3 de la escala de títulos (16px) — el de H6
-$lxd-text-size-4: 1.25rem; // Paso 4 de la escala de títulos (20px) — el de H5
-$lxd-text-size-5: 1.5rem; // Paso 5 de la escala de títulos (24px) — el de H4
-$lxd-text-size-6: 1.75rem; // Paso 6 de la escala de títulos (28px) — el de H3
-$lxd-text-size-7: 2rem; // Paso 7 de la escala de títulos (32px) — el de H2
-$lxd-text-size-8: 2.5rem; // Paso 8 de la escala de títulos (40px) — el de H1
-$lxd-text-size-9: 3.5rem; // Paso 9 de la escala de títulos (56px) — display pequeño
-$lxd-text-size-10: 6rem; // Paso 10 de la escala de títulos (96px) — display
-$lxd-text-heading-font-family: "Google Sans Flex", system-ui, sans-serif; // Heading font family
-$lxd-text-heading-font-weight: 500; // Heading font weight
-$lxd-text-heading-color: #111e30; // Heading color
-$lxd-text-heading-letter-spacing: -0.02em; // Heading letter spacing
-$lxd-text-heading-space-after: 0.5em; // Aire bajo un título, en em: escala con su tamaño (nivel, size o superficie). Se anula si el título es el último hijo
-$lxd-text-h1-font-family: "Google Sans Flex", system-ui, sans-serif; // H1 font family
-$lxd-text-h1-font-size: 2.5rem; // H1 font size — paso 8 de la escala (40px en base, un peldaño más en la superficie pública)
-$lxd-text-h1-font-weight: 500; // H1 font weight
-$lxd-text-h1-line-height: 1.1; // H1 line height
-$lxd-text-h1-color: #111e30; // H1 color
-$lxd-text-h1-letter-spacing: -0.02em; // H1 letter spacing
-$lxd-text-h2-font-family: "Google Sans Flex", system-ui, sans-serif; // H2 font family
-$lxd-text-h2-font-size: 2rem; // H2 font size — paso 7 de la escala (32px en base, un peldaño más en la superficie pública)
-$lxd-text-h2-font-weight: 500; // H2 font weight
-$lxd-text-h2-line-height: 1.1; // H2 line height
-$lxd-text-h2-color: #111e30; // H2 color
-$lxd-text-h2-letter-spacing: -0.02em; // H2 letter spacing
-$lxd-text-h3-font-family: "Google Sans Flex", system-ui, sans-serif; // H3 font family
-$lxd-text-h3-font-size: 1.75rem; // H3 font size — paso 6 de la escala (28px en base, un peldaño más en la superficie pública)
-$lxd-text-h3-font-weight: 500; // H3 font weight
-$lxd-text-h3-line-height: 1.1; // H3 line height
-$lxd-text-h3-color: #111e30; // H3 color
-$lxd-text-h3-letter-spacing: -0.02em; // H3 letter spacing
-$lxd-text-h4-font-family: "Google Sans Flex", system-ui, sans-serif; // H4 font family
-$lxd-text-h4-font-size: 1.5rem; // H4 font size — paso 5 de la escala (24px en base, un peldaño más en la superficie pública)
-$lxd-text-h4-font-weight: 500; // H4 font weight
-$lxd-text-h4-line-height: 1.3; // H4 line height
-$lxd-text-h4-color: #111e30; // H4 color
-$lxd-text-h4-letter-spacing: -0.02em; // H4 letter spacing
-$lxd-text-h5-font-family: "Google Sans Flex", system-ui, sans-serif; // H5 font family
-$lxd-text-h5-font-size: 1.25rem; // H5 font size — paso 4 de la escala (20px en base, un peldaño más en la superficie pública)
-$lxd-text-h5-font-weight: 500; // H5 font weight
-$lxd-text-h5-line-height: 1.3; // H5 line height
-$lxd-text-h5-color: #111e30; // H5 color
-$lxd-text-h5-letter-spacing: 0em; // H5 letter spacing
-$lxd-text-h6-font-family: "Google Sans Flex", system-ui, sans-serif; // H6 font family
-$lxd-text-h6-font-size: 1rem; // H6 font size — paso 3 de la escala (16px en base, un peldaño más en la superficie pública)
-$lxd-text-h6-font-weight: 500; // H6 font weight
-$lxd-text-h6-line-height: 1.3; // H6 line height
-$lxd-text-h6-color: #111e30; // H6 color
-$lxd-text-h6-letter-spacing: 0em; // H6 letter spacing
-$lxd-text-paragraph-small-font-size: 0.875rem; // Párrafo pequeño: un peldaño por debajo del cuerpo (14px en base, 16px en la superficie pública)
-$lxd-text-paragraph-small-line-height: 1.65; // Small paragraph line height
-$lxd-text-paragraph-large-font-size: 1.25rem; // Párrafo grande: un peldaño por encima del cuerpo (20px en base, 24px en la superficie pública)
-$lxd-text-paragraph-large-line-height: 1.3; // Large paragraph line height
-$lxd-text-list-font-family: "Google Sans Flex", system-ui, sans-serif; // List font family
-$lxd-text-list-font-size: 1rem; // List font size
-$lxd-text-list-font-weight: 300; // List font weight
-$lxd-text-list-line-height: 1.5; // List line height
-$lxd-text-list-color: #111e30; // List text color
-$lxd-text-list-letter-spacing: 0em; // List letter spacing
-$lxd-text-list-gap: 0.5rem; // Spacing between list items (8px)
-$lxd-text-list-padding-inline-start: 2rem; // Left indent for list (32px)
-$lxd-text-list-item-gap: 0.75rem; // Aire entre el contenido de una fila y su accesorio final (trailing) (12px)
-$lxd-text-list-secondary-font-size: 0.875rem; // Línea secundaria de una fila: un peldaño por debajo del cuerpo
-$lxd-text-list-secondary-line-height: 1.65; // Interlineado de la línea secundaria de una fila
-$lxd-text-list-secondary-color: #4a4a4a; // Color atenuado de la línea secundaria de una fila
-$lxd-text-list-separator-color: #111e30; // Línea entre filas de una lista con separadores
-$lxd-text-list-separator-thickness: 1px; // Grosor de la línea entre filas
-$lxd-text-list-separator-spacing: 0.5rem; // Aire a cada lado de la línea entre filas
+$slxd-text-font-family: "Google Sans Flex", system-ui, sans-serif; // Default font family
+$slxd-text-font-size: 1rem; // Cuerpo base (16px). Es el cuerpo de la superficie de aplicación; el SiteShell lo remapea a 20px
+$slxd-text-font-weight: 300; // Default font weight
+$slxd-text-line-height: 1.5; // Default line height
+$slxd-text-color: #111e30; // Default text color
+$slxd-text-bg: #ffffff; // Fondo del lienzo de página (body)
+$slxd-text-letter-spacing: 0em; // Default letter spacing
+$slxd-text-size-1: 0.875rem; // Paso 1 de la escala de títulos (14px)
+$slxd-text-size-2: 1rem; // Paso 2 de la escala de títulos (16px)
+$slxd-text-size-3: 1rem; // Paso 3 de la escala de títulos (16px) — el de H6
+$slxd-text-size-4: 1.25rem; // Paso 4 de la escala de títulos (20px) — el de H5
+$slxd-text-size-5: 1.5rem; // Paso 5 de la escala de títulos (24px) — el de H4
+$slxd-text-size-6: 1.75rem; // Paso 6 de la escala de títulos (28px) — el de H3
+$slxd-text-size-7: 2rem; // Paso 7 de la escala de títulos (32px) — el de H2
+$slxd-text-size-8: 2.5rem; // Paso 8 de la escala de títulos (40px) — el de H1
+$slxd-text-size-9: 3.5rem; // Paso 9 de la escala de títulos (56px) — display pequeño
+$slxd-text-size-10: 6rem; // Paso 10 de la escala de títulos (96px) — display
+$slxd-text-heading-font-family: "Google Sans Flex", system-ui, sans-serif; // Heading font family
+$slxd-text-heading-font-weight: 500; // Heading font weight
+$slxd-text-heading-color: #111e30; // Heading color
+$slxd-text-heading-letter-spacing: -0.02em; // Heading letter spacing
+$slxd-text-heading-space-after: 0.5em; // Aire bajo un título, en em: escala con su tamaño (nivel, size o superficie). Se anula si el título es el último hijo
+$slxd-text-h1-font-family: "Google Sans Flex", system-ui, sans-serif; // H1 font family
+$slxd-text-h1-font-size: 2.5rem; // H1 font size — paso 8 de la escala (40px en base, un peldaño más en la superficie pública)
+$slxd-text-h1-font-weight: 500; // H1 font weight
+$slxd-text-h1-line-height: 1.1; // H1 line height
+$slxd-text-h1-color: #111e30; // H1 color
+$slxd-text-h1-letter-spacing: -0.02em; // H1 letter spacing
+$slxd-text-h2-font-family: "Google Sans Flex", system-ui, sans-serif; // H2 font family
+$slxd-text-h2-font-size: 2rem; // H2 font size — paso 7 de la escala (32px en base, un peldaño más en la superficie pública)
+$slxd-text-h2-font-weight: 500; // H2 font weight
+$slxd-text-h2-line-height: 1.1; // H2 line height
+$slxd-text-h2-color: #111e30; // H2 color
+$slxd-text-h2-letter-spacing: -0.02em; // H2 letter spacing
+$slxd-text-h3-font-family: "Google Sans Flex", system-ui, sans-serif; // H3 font family
+$slxd-text-h3-font-size: 1.75rem; // H3 font size — paso 6 de la escala (28px en base, un peldaño más en la superficie pública)
+$slxd-text-h3-font-weight: 500; // H3 font weight
+$slxd-text-h3-line-height: 1.1; // H3 line height
+$slxd-text-h3-color: #111e30; // H3 color
+$slxd-text-h3-letter-spacing: -0.02em; // H3 letter spacing
+$slxd-text-h4-font-family: "Google Sans Flex", system-ui, sans-serif; // H4 font family
+$slxd-text-h4-font-size: 1.5rem; // H4 font size — paso 5 de la escala (24px en base, un peldaño más en la superficie pública)
+$slxd-text-h4-font-weight: 500; // H4 font weight
+$slxd-text-h4-line-height: 1.3; // H4 line height
+$slxd-text-h4-color: #111e30; // H4 color
+$slxd-text-h4-letter-spacing: -0.02em; // H4 letter spacing
+$slxd-text-h5-font-family: "Google Sans Flex", system-ui, sans-serif; // H5 font family
+$slxd-text-h5-font-size: 1.25rem; // H5 font size — paso 4 de la escala (20px en base, un peldaño más en la superficie pública)
+$slxd-text-h5-font-weight: 500; // H5 font weight
+$slxd-text-h5-line-height: 1.3; // H5 line height
+$slxd-text-h5-color: #111e30; // H5 color
+$slxd-text-h5-letter-spacing: 0em; // H5 letter spacing
+$slxd-text-h6-font-family: "Google Sans Flex", system-ui, sans-serif; // H6 font family
+$slxd-text-h6-font-size: 1rem; // H6 font size — paso 3 de la escala (16px en base, un peldaño más en la superficie pública)
+$slxd-text-h6-font-weight: 500; // H6 font weight
+$slxd-text-h6-line-height: 1.3; // H6 line height
+$slxd-text-h6-color: #111e30; // H6 color
+$slxd-text-h6-letter-spacing: 0em; // H6 letter spacing
+$slxd-text-paragraph-small-font-size: 0.875rem; // Párrafo pequeño: un peldaño por debajo del cuerpo (14px en base, 16px en la superficie pública)
+$slxd-text-paragraph-small-line-height: 1.65; // Small paragraph line height
+$slxd-text-paragraph-large-font-size: 1.25rem; // Párrafo grande: un peldaño por encima del cuerpo (20px en base, 24px en la superficie pública)
+$slxd-text-paragraph-large-line-height: 1.3; // Large paragraph line height
+$slxd-text-list-font-family: "Google Sans Flex", system-ui, sans-serif; // List font family
+$slxd-text-list-font-size: 1rem; // List font size
+$slxd-text-list-font-weight: 300; // List font weight
+$slxd-text-list-line-height: 1.5; // List line height
+$slxd-text-list-color: #111e30; // List text color
+$slxd-text-list-letter-spacing: 0em; // List letter spacing
+$slxd-text-list-gap: 0.5rem; // Spacing between list items (8px)
+$slxd-text-list-padding-inline-start: 2rem; // Left indent for list (32px)
+$slxd-text-list-item-gap: 0.75rem; // Aire entre el contenido de una fila y su accesorio final (trailing) (12px)
+$slxd-text-list-secondary-font-size: 0.875rem; // Línea secundaria de una fila: un peldaño por debajo del cuerpo
+$slxd-text-list-secondary-line-height: 1.65; // Interlineado de la línea secundaria de una fila
+$slxd-text-list-secondary-color: #4a4a4a; // Color atenuado de la línea secundaria de una fila
+$slxd-text-list-separator-color: #111e30; // Línea entre filas de una lista con separadores
+$slxd-text-list-separator-thickness: 1px; // Grosor de la línea entre filas
+$slxd-text-list-separator-spacing: 0.5rem; // Aire a cada lado de la línea entre filas
 
 // Alias obsoletos: nombres anteriores a la convención D9.
-$lxd-text-background: $lxd-text-bg; // OBSOLETO (v51, se retira en la v52): usar $lxd-text-bg
+$slxd-text-background: $slxd-text-bg; // OBSOLETO (v51, se retira en la v52): usar $slxd-text-bg

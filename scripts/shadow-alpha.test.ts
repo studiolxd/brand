@@ -34,7 +34,7 @@ describe('sombras con el prusia de la paleta', () => {
     const json = JSON.parse(leer('src/tokens/tokens.json')) as Record<string, string>;
     for (const [nombre, valor] of Object.entries(ESPERADAS)) {
       expect(css).toContain(`--shadow-${nombre}: ${valor};`);
-      expect(scss).toContain(`$lxd-shadow-${nombre}: ${valor};`);
+      expect(scss).toContain(`$slxd-shadow-${nombre}: ${valor};`);
       expect(json[`--shadow-${nombre}`]).toBe(valor);
     }
   });

@@ -7,6 +7,18 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [Sin publicar]
+
+> **Major.** Rompe la salida SCSS: cambia el prefijo de todas sus variables.
+
+### Cambiado
+
+- **Las variables SCSS pasan de `$lxd-` a `$slxd-`** (`$lxd-color-primary` → `$slxd-color-primary`), en los dos
+  entrypoints (`./scss` y `./scss/legacy`) y en los exports por fichero. Lo fija `prefix` en la plataforma `scss` de
+  `sd.config.mjs`; los alias obsoletos de la v51 siguen el prefijo nuevo (`$slxd-modal-width-max`). Sin alias de
+  transición: ningún consumidor usaba la salida SCSS. Las custom properties CSS, `tokens.json`/`@studiolxd/brand/tokens`
+  y los tokens nativos no llevaban prefijo y no cambian. Para migrar: buscar y reemplazar `$lxd-` por `$slxd-`.
+
 ## [52.1.0] — 2026-10-10
 
 > **Minor.** Solo añade: glifos nuevos y su publicación como SVG sueltos.

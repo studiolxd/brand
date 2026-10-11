@@ -1,23 +1,23 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-site-header-content-height: calc(64px * 4 / 3); // Lo más alto que lleva la barra: el logotipo a talla 2xl (85px)
-$lxd-site-header-content-height-compact: 3rem; // Lo más alto que lleva la barra en móvil (por debajo de md): el logotipo a talla lg (48px), para que quepa con los controles
-$lxd-site-header-content-height-narrow: 2.5rem; // Lo más alto que lleva la barra en teléfono (por debajo de sm): el logotipo a talla md (40px), para caber en 360px con idioma y menú
-$lxd-site-header-height-narrow: calc(2.5rem + 2 * 0.5rem); // Alto de la barra en teléfono (56px, la misma que la barra de aplicación)
-$lxd-site-header-height-compact: calc(3rem + 2 * 0.5rem); // Alto de la barra en móvil (64px)
-$lxd-site-header-height: calc(calc(64px * 4 / 3) + 2 * 0.5rem); // Alto de la barra: el logotipo más el aire del sistema arriba y abajo (101px). La barra de aplicación mide 56: en la web manda la marcacación, para que ambas superficies coincidan
-$lxd-site-header-bg: #ffffff; // Fondo de la barra
-$lxd-site-header-logo-margin-inline-start: calc(-1 * 1rem); // La marca sale del aire lateral del Container: el logotipo trae su propio espacio de seguridad en el trazado, y con el padding encima se veía descolgado del borde del contenido
-$lxd-site-header-gap-narrow: 0.5rem; // Separación entre marca y controles en teléfono (por debajo de sm)
-$lxd-site-header-gap: 0.75rem; // Separación entre logo y controles
-$lxd-site-header-z-index: 100; // Capa z — sobre el contenido, bajo los paneles flotantes
-$lxd-site-header-panel-bg: #ffffff; // Fondo del panel de navegación
-$lxd-site-header-panel-padding-inline: 1rem; // Aire lateral del panel: el mismo del Container, para que su contenido caiga en la misma columna que la barra. El panel es `position: fixed`, así que sale del flujo de la banda y no hereda el aire que esta ya puso
-$lxd-site-header-panel-padding-block: 3rem; // Aire superior del panel, entre la barra y el índice
-$lxd-site-header-panel-padding-block-end: 1.5rem; // Aire inferior del panel, bajo los ajustes (idioma, tema), que van pegados al fondo: menos que arriba
-$lxd-site-header-panel-z-index: 300; // El panel a pantalla completa es una capa modal: sobre el contenido, bajo lo flotante
-$lxd-site-header-panel-transition-duration: 400ms; // Entrada y salida del panel: cambio de contexto
-$lxd-site-header-panel-transition-easing: ease-in-out; // Curva del panel: movimiento
-$lxd-site-header-panel-gap: 3rem; // Ritmo vertical entre las secciones del panel: el índice, el buscador y los ajustes del sitio. Es un solo aire para todas, no uno por sección
-$lxd-site-header-settings-gap: 1.5rem; // Separación entre los ajustes del sitio: en fila en escritorio, apilados en móvil
+$slxd-site-header-content-height: calc(64px * 4 / 3); // Lo más alto que lleva la barra: el logotipo a talla 2xl (85px)
+$slxd-site-header-content-height-compact: 3rem; // Lo más alto que lleva la barra en móvil (por debajo de md): el logotipo a talla lg (48px), para que quepa con los controles
+$slxd-site-header-content-height-narrow: 2.5rem; // Lo más alto que lleva la barra en teléfono (por debajo de sm): el logotipo a talla md (40px), para caber en 360px con idioma y menú
+$slxd-site-header-height-narrow: calc(2.5rem + 2 * 0.5rem); // Alto de la barra en teléfono (56px, la misma que la barra de aplicación)
+$slxd-site-header-height-compact: calc(3rem + 2 * 0.5rem); // Alto de la barra en móvil (64px)
+$slxd-site-header-height: calc(calc(64px * 4 / 3) + 2 * 0.5rem); // Alto de la barra: el logotipo más el aire del sistema arriba y abajo (101px). La barra de aplicación mide 56: en la web manda la marcacación, para que ambas superficies coincidan
+$slxd-site-header-bg: #ffffff; // Fondo de la barra
+$slxd-site-header-logo-margin-inline-start: calc(-1 * 1rem); // La marca sale del aire lateral del Container: el logotipo trae su propio espacio de seguridad en el trazado, y con el padding encima se veía descolgado del borde del contenido
+$slxd-site-header-gap-narrow: 0.5rem; // Separación entre marca y controles en teléfono (por debajo de sm)
+$slxd-site-header-gap: 0.75rem; // Separación entre logo y controles
+$slxd-site-header-z-index: 100; // Capa z — sobre el contenido, bajo los paneles flotantes
+$slxd-site-header-panel-bg: #ffffff; // Fondo del panel de navegación
+$slxd-site-header-panel-padding-inline: 1rem; // Aire lateral del panel: el mismo del Container, para que su contenido caiga en la misma columna que la barra. El panel es `position: fixed`, así que sale del flujo de la banda y no hereda el aire que esta ya puso
+$slxd-site-header-panel-padding-block: 3rem; // Aire superior del panel, entre la barra y el índice
+$slxd-site-header-panel-padding-block-end: 1.5rem; // Aire inferior del panel, bajo los ajustes (idioma, tema), que van pegados al fondo: menos que arriba
+$slxd-site-header-panel-z-index: 300; // El panel a pantalla completa es una capa modal: sobre el contenido, bajo lo flotante
+$slxd-site-header-panel-transition-duration: 400ms; // Entrada y salida del panel: cambio de contexto
+$slxd-site-header-panel-transition-easing: ease-in-out; // Curva del panel: movimiento
+$slxd-site-header-panel-gap: 3rem; // Ritmo vertical entre las secciones del panel: el índice, el buscador y los ajustes del sitio. Es un solo aire para todas, no uno por sección
+$slxd-site-header-settings-gap: 1.5rem; // Separación entre los ajustes del sitio: en fila en escritorio, apilados en móvil

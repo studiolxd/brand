@@ -1,26 +1,26 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-radio-target-size: 1.5rem; // Área sensible al puntero: 24×24 px como pide WCAG 2.5.8, aunque el dibujo sea menor. Se extiende de forma invisible y centrada, sin mover la maqueta
-$lxd-radio-size: 1.25em; // Tamaño del radio (ancho y alto)
-$lxd-radio-dot-size: 0.5em; // Tamaño del punto interior
-$lxd-radio-border-radius: 50%; // Border radius (círculo)
-$lxd-radio-border-width: 1px; // Border width
-$lxd-radio-border-style: solid; // Border style
-$lxd-radio-border-color: #111e30; // Color del borde
-$lxd-radio-error-border-color: #b30000; // Borde en error: el color de error (texto/borde, nunca fondo)
-$lxd-radio-bg: transparent; // Fondo sin seleccionar
-$lxd-radio-dot-color: #111e30; // Color del punto cuando está seleccionado
-$lxd-radio-cursor: pointer; // Cursor
-$lxd-radio-transition-duration: 150ms; // Duración de transiciones
-$lxd-radio-transition-easing: ease; // Easing de transiciones
-$lxd-radio-focus-ring-width: 2px; // Ancho del anillo de foco
-$lxd-radio-focus-ring-offset: 1px; // Separación del anillo de foco respecto al borde
-$lxd-radio-focus-ring-color: #111e30; // Color del anillo de foco
-$lxd-radio-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado
-$lxd-radio-disabled-border-color: #d0d0d0; // Color del borde cuando está deshabilitado
-$lxd-radio-disabled-dot-color: #d0d0d0; // Color del punto cuando está deshabilitado y seleccionado
-$lxd-radio-sm-size: 1rem; // Tamaño del radio — variante sm (16px)
-$lxd-radio-sm-dot-size: 0.4rem; // Tamaño del punto interior — variante sm
-$lxd-radio-lg-size: 1.5rem; // Tamaño del radio — variante lg (24px)
-$lxd-radio-lg-dot-size: 0.65rem; // Tamaño del punto interior — variante lg
+$slxd-radio-target-size: 1.5rem; // Área sensible al puntero: 24×24 px como pide WCAG 2.5.8, aunque el dibujo sea menor. Se extiende de forma invisible y centrada, sin mover la maqueta
+$slxd-radio-size: 1.25em; // Tamaño del radio (ancho y alto)
+$slxd-radio-dot-size: 0.5em; // Tamaño del punto interior
+$slxd-radio-border-radius: 50%; // Border radius (círculo)
+$slxd-radio-border-width: 1px; // Border width
+$slxd-radio-border-style: solid; // Border style
+$slxd-radio-border-color: #111e30; // Color del borde
+$slxd-radio-error-border-color: #b30000; // Borde en error: el color de error (texto/borde, nunca fondo)
+$slxd-radio-bg: transparent; // Fondo sin seleccionar
+$slxd-radio-dot-color: #111e30; // Color del punto cuando está seleccionado
+$slxd-radio-cursor: pointer; // Cursor
+$slxd-radio-transition-duration: 150ms; // Duración de transiciones
+$slxd-radio-transition-easing: ease; // Easing de transiciones
+$slxd-radio-focus-ring-width: 2px; // Ancho del anillo de foco
+$slxd-radio-focus-ring-offset: 1px; // Separación del anillo de foco respecto al borde
+$slxd-radio-focus-ring-color: #111e30; // Color del anillo de foco
+$slxd-radio-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado
+$slxd-radio-disabled-border-color: #d0d0d0; // Color del borde cuando está deshabilitado
+$slxd-radio-disabled-dot-color: #d0d0d0; // Color del punto cuando está deshabilitado y seleccionado
+$slxd-radio-sm-size: 1rem; // Tamaño del radio — variante sm (16px)
+$slxd-radio-sm-dot-size: 0.4rem; // Tamaño del punto interior — variante sm
+$slxd-radio-lg-size: 1.5rem; // Tamaño del radio — variante lg (24px)
+$slxd-radio-lg-dot-size: 0.65rem; // Tamaño del punto interior — variante lg

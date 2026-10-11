@@ -1,44 +1,44 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-table-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$lxd-table-font-size: 1rem; // Las celdas heredan el cuerpo de la superficie (16px en aplicación, 20px en la pública)
-$lxd-table-font-weight: 300; // Font weight base
-$lxd-table-line-height: 1.5; // Interlineado heredado del cuerpo de la superficie, para celdas multilínea
-$lxd-table-color: #111e30; // Color de texto base
-$lxd-table-bg: rgba(0, 0, 0, 0); // Fondo de la tabla
-$lxd-table-border-width: 1px; // Grosor de separadores de fila
-$lxd-table-header-padding-block: 0.75rem; // Padding block del encabezado
-$lxd-table-header-padding-inline: 0.75rem; // Padding inline del encabezado
-$lxd-table-header-font-weight: 500; // Peso tipográfico del encabezado
-$lxd-table-header-border-width: 1px; // Borde inferior del thead — 1px, como todo borde del sistema; la cabecera se lee por peso, no por grosor
-$lxd-table-actions-width: 1px; // Ancho de la cabecera de la columna de acciones. No fija un ancho: con `table-layout: auto` el sobrante se reparte entre las demás columnas y esta se encoge a su contenido
-$lxd-table-header-content-gap: 0.5rem; // Separación entre el rótulo de la columna y el icono de ordenación
-$lxd-table-header-border-color: #111e30; // Color del borde inferior del thead
-$lxd-table-sort-icon-color: #4a4a4a; // Icono de ordenación en reposo, tinta plana; el hover lo lleva al color activo
-$lxd-table-sort-icon-active-color: #111e30; // Color del icono de sort activo
-$lxd-table-cell-padding-block: 0.75rem; // Padding block de celda
-$lxd-table-cell-padding-inline: 0.75rem; // Padding inline de celda
-$lxd-table-row-border-color: #111e30; // Color del separador entre filas
-$lxd-table-row-selected-color: #111e30; // Tinta de la fila seleccionada: la selección se dice con tinta y peso, no con un fondo gris
-$lxd-table-row-hover-marker-width: 2px; // Grosor de la barra que marca la fila bajo el puntero. El hover no pinta relleno (regla de Colores): la fila se señala con una barra de tinta en su borde de inicio, el mismo grafismo que la sección activa del SidebarNav en rail
-$lxd-table-row-hover-marker-color: #111e30; // Color de la barra de hover — tinta de la superficie
-$lxd-table-row-selected-font-weight: 500; // Peso de la fila seleccionada
-$lxd-table-sticky-bg: #ffffff; // Fondo de la columna de acciones pegajosa (cabecera y celda): opaco, para tapar el resto de columnas que se deslizan debajo al hacer scroll horizontal
-$lxd-table-footer-bg: #f2f2f2; // Fondo del tfoot: superficie clara secundaria, no un fondo de estado
-$lxd-table-footer-border-width: 1px; // Borde superior del tfoot — 1px, como el del thead
-$lxd-table-footer-border-color: #111e30; // Color del borde superior del tfoot
-$lxd-table-footer-font-weight: 500; // Peso tipográfico de las celdas del footer
-$lxd-table-focus-ring-color: #111e30; // Color del focus ring
-$lxd-table-focus-ring-width: 2px; // Grosor del focus ring
-$lxd-table-focus-ring-offset: 1px; // Separación del focus ring
-$lxd-table-transition-duration: 150ms; // Duración de transiciones de hover
-$lxd-table-transition-easing: ease; // Easing de transiciones
-$lxd-table-sm-font-size: 0.875rem; // 14px — UI label size — variante sm
-$lxd-table-sm-header-padding-block: 0.5rem; // Padding block del encabezado — variante sm
-$lxd-table-sm-header-padding-inline: 0.5rem; // Padding inline del encabezado — variante sm
-$lxd-table-sm-cell-padding-block: 0.5rem; // Padding block de celda — variante sm
-$lxd-table-sm-cell-padding-inline: 0.5rem; // Padding inline de celda — variante sm
+$slxd-table-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
+$slxd-table-font-size: 1rem; // Las celdas heredan el cuerpo de la superficie (16px en aplicación, 20px en la pública)
+$slxd-table-font-weight: 300; // Font weight base
+$slxd-table-line-height: 1.5; // Interlineado heredado del cuerpo de la superficie, para celdas multilínea
+$slxd-table-color: #111e30; // Color de texto base
+$slxd-table-bg: rgba(0, 0, 0, 0); // Fondo de la tabla
+$slxd-table-border-width: 1px; // Grosor de separadores de fila
+$slxd-table-header-padding-block: 0.75rem; // Padding block del encabezado
+$slxd-table-header-padding-inline: 0.75rem; // Padding inline del encabezado
+$slxd-table-header-font-weight: 500; // Peso tipográfico del encabezado
+$slxd-table-header-border-width: 1px; // Borde inferior del thead — 1px, como todo borde del sistema; la cabecera se lee por peso, no por grosor
+$slxd-table-actions-width: 1px; // Ancho de la cabecera de la columna de acciones. No fija un ancho: con `table-layout: auto` el sobrante se reparte entre las demás columnas y esta se encoge a su contenido
+$slxd-table-header-content-gap: 0.5rem; // Separación entre el rótulo de la columna y el icono de ordenación
+$slxd-table-header-border-color: #111e30; // Color del borde inferior del thead
+$slxd-table-sort-icon-color: #4a4a4a; // Icono de ordenación en reposo, tinta plana; el hover lo lleva al color activo
+$slxd-table-sort-icon-active-color: #111e30; // Color del icono de sort activo
+$slxd-table-cell-padding-block: 0.75rem; // Padding block de celda
+$slxd-table-cell-padding-inline: 0.75rem; // Padding inline de celda
+$slxd-table-row-border-color: #111e30; // Color del separador entre filas
+$slxd-table-row-selected-color: #111e30; // Tinta de la fila seleccionada: la selección se dice con tinta y peso, no con un fondo gris
+$slxd-table-row-hover-marker-width: 2px; // Grosor de la barra que marca la fila bajo el puntero. El hover no pinta relleno (regla de Colores): la fila se señala con una barra de tinta en su borde de inicio, el mismo grafismo que la sección activa del SidebarNav en rail
+$slxd-table-row-hover-marker-color: #111e30; // Color de la barra de hover — tinta de la superficie
+$slxd-table-row-selected-font-weight: 500; // Peso de la fila seleccionada
+$slxd-table-sticky-bg: #ffffff; // Fondo de la columna de acciones pegajosa (cabecera y celda): opaco, para tapar el resto de columnas que se deslizan debajo al hacer scroll horizontal
+$slxd-table-footer-bg: #f2f2f2; // Fondo del tfoot: superficie clara secundaria, no un fondo de estado
+$slxd-table-footer-border-width: 1px; // Borde superior del tfoot — 1px, como el del thead
+$slxd-table-footer-border-color: #111e30; // Color del borde superior del tfoot
+$slxd-table-footer-font-weight: 500; // Peso tipográfico de las celdas del footer
+$slxd-table-focus-ring-color: #111e30; // Color del focus ring
+$slxd-table-focus-ring-width: 2px; // Grosor del focus ring
+$slxd-table-focus-ring-offset: 1px; // Separación del focus ring
+$slxd-table-transition-duration: 150ms; // Duración de transiciones de hover
+$slxd-table-transition-easing: ease; // Easing de transiciones
+$slxd-table-sm-font-size: 0.875rem; // 14px — UI label size — variante sm
+$slxd-table-sm-header-padding-block: 0.5rem; // Padding block del encabezado — variante sm
+$slxd-table-sm-header-padding-inline: 0.5rem; // Padding inline del encabezado — variante sm
+$slxd-table-sm-cell-padding-block: 0.5rem; // Padding block de celda — variante sm
+$slxd-table-sm-cell-padding-inline: 0.5rem; // Padding inline de celda — variante sm
 
 // Alias obsoletos: nombres anteriores a la convención D9.
-$lxd-table-actions-inline-size: $lxd-table-actions-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-table-actions-width
+$slxd-table-actions-inline-size: $slxd-table-actions-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-table-actions-width

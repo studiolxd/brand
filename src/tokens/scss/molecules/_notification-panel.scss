@@ -1,35 +1,35 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-notification-panel-width: min(22.5rem, calc(100vw - 2 * 1.5rem)); // Ancho del panel (360px), con tope para que no se salga en una pantalla estrecha. Medida de maqueta, como la de la Sidebar: no pertenece a la escala de tallas
-$lxd-notification-panel-offset: 0.25rem; // Separación entre la campana y el panel: el desplazamiento compartido de los flotantes de la cabecera
-$lxd-notification-panel-padding-inline: 1rem; // Aire lateral de las filas, del bloque de marcar todas y del pie: el mismo, para que todo alinee en una sola columna
-$lxd-notification-panel-mark-all-padding-block: 0.75rem; // Aire vertical del bloque de «Marcar todas», entre la lista y el pie
-$lxd-notification-panel-list-max-height: 21rem; // Alto máximo de la lista (336px): pasado ese alto la lista hace scroll y la cabecera y el pie se quedan quietos. Medida de maqueta
-$lxd-notification-panel-list-padding-block: 0.5rem; // Aire vertical de la lista dentro del panel
-$lxd-notification-panel-list-gap: 0.25rem; // Separación entre notificaciones. Las filas no llevan línea: se separan con aire
-$lxd-notification-panel-item-padding-block: 0.5rem; // Aire vertical de cada notificación
-$lxd-notification-panel-item-border-radius: 0px; // Radio de cada notificación: recto, como todo el sistema
-$lxd-notification-panel-item-gap: 0.5rem; // Aire entre el punto de no leída y el texto
-$lxd-notification-panel-item-text-gap: 0.25rem; // Aire entre el título, el cuerpo y la fecha
-$lxd-notification-panel-item-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica de la notificación
-$lxd-notification-panel-item-title-font-size: 1rem; // El título de una notificación es texto corriente: hereda el cuerpo de la superficie
-$lxd-notification-panel-item-title-line-height: 1.3; // Interlineado del título
-$lxd-notification-panel-item-title-font-weight: 300; // Peso del título, leída o sin leer: el del cuerpo de texto. Lo no leído lo dice el punto del indicador, no el peso
-$lxd-notification-panel-item-body-font-size: 0.875rem; // Cuerpo de la notificación: letra menor, un peldaño por debajo del cuerpo de la superficie
-$lxd-notification-panel-item-body-line-height: 1.3; // Interlineado del cuerpo
-$lxd-notification-panel-item-body-line-clamp: 2; // Cuántas líneas del cuerpo se ven antes de recortar con elipsis. El panel es un adelanto: el texto entero está en la bandeja
-$lxd-notification-panel-item-time-font-size: 0.875rem; // Fecha relativa: letra menor y tinta atenuada (la del texto secundario, vía `Text tone="muted"`)
-$lxd-notification-panel-dot-size: 16px; // Caja del punto de no leída: la talla de icono dentro de un texto (16px), la misma con la que la bandeja pinta ese punto. El círculo dibujado dentro mide unos 7px
-$lxd-notification-panel-dot-color: #b30000; // Color del punto: el mismo rojo del contador de la campana (`error-fill`), que es universal en claro y oscuro. No hay un rojo aparte para notificaciones
-$lxd-notification-panel-dot-margin-block-start: 0.25rem; // Baja el punto hasta el centro óptico de la primera línea del título
-$lxd-notification-panel-empty-padding-block: 2rem; // Aire vertical del estado vacío: el hueco de la lista sin encogerse
-$lxd-notification-panel-footer-padding-block: 0.75rem; // Aire vertical del pie
-$lxd-notification-panel-footer-gap: 0.5rem; // Aire entre los enlaces del pie
-$lxd-notification-panel-footer-font-size: 0.875rem; // Tamaño de los enlaces del pie: letra menor
-$lxd-notification-panel-focus-ring-width: 2px; // Grosor del anillo de foco de una fila
-$lxd-notification-panel-focus-ring-color: #111e30; // Color del anillo de foco de una fila
+$slxd-notification-panel-width: min(22.5rem, calc(100vw - 2 * 1.5rem)); // Ancho del panel (360px), con tope para que no se salga en una pantalla estrecha. Medida de maqueta, como la de la Sidebar: no pertenece a la escala de tallas
+$slxd-notification-panel-offset: 0.25rem; // Separación entre la campana y el panel: el desplazamiento compartido de los flotantes de la cabecera
+$slxd-notification-panel-padding-inline: 1rem; // Aire lateral de las filas, del bloque de marcar todas y del pie: el mismo, para que todo alinee en una sola columna
+$slxd-notification-panel-mark-all-padding-block: 0.75rem; // Aire vertical del bloque de «Marcar todas», entre la lista y el pie
+$slxd-notification-panel-list-max-height: 21rem; // Alto máximo de la lista (336px): pasado ese alto la lista hace scroll y la cabecera y el pie se quedan quietos. Medida de maqueta
+$slxd-notification-panel-list-padding-block: 0.5rem; // Aire vertical de la lista dentro del panel
+$slxd-notification-panel-list-gap: 0.25rem; // Separación entre notificaciones. Las filas no llevan línea: se separan con aire
+$slxd-notification-panel-item-padding-block: 0.5rem; // Aire vertical de cada notificación
+$slxd-notification-panel-item-border-radius: 0px; // Radio de cada notificación: recto, como todo el sistema
+$slxd-notification-panel-item-gap: 0.5rem; // Aire entre el punto de no leída y el texto
+$slxd-notification-panel-item-text-gap: 0.25rem; // Aire entre el título, el cuerpo y la fecha
+$slxd-notification-panel-item-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica de la notificación
+$slxd-notification-panel-item-title-font-size: 1rem; // El título de una notificación es texto corriente: hereda el cuerpo de la superficie
+$slxd-notification-panel-item-title-line-height: 1.3; // Interlineado del título
+$slxd-notification-panel-item-title-font-weight: 300; // Peso del título, leída o sin leer: el del cuerpo de texto. Lo no leído lo dice el punto del indicador, no el peso
+$slxd-notification-panel-item-body-font-size: 0.875rem; // Cuerpo de la notificación: letra menor, un peldaño por debajo del cuerpo de la superficie
+$slxd-notification-panel-item-body-line-height: 1.3; // Interlineado del cuerpo
+$slxd-notification-panel-item-body-line-clamp: 2; // Cuántas líneas del cuerpo se ven antes de recortar con elipsis. El panel es un adelanto: el texto entero está en la bandeja
+$slxd-notification-panel-item-time-font-size: 0.875rem; // Fecha relativa: letra menor y tinta atenuada (la del texto secundario, vía `Text tone="muted"`)
+$slxd-notification-panel-dot-size: 16px; // Caja del punto de no leída: la talla de icono dentro de un texto (16px), la misma con la que la bandeja pinta ese punto. El círculo dibujado dentro mide unos 7px
+$slxd-notification-panel-dot-color: #b30000; // Color del punto: el mismo rojo del contador de la campana (`error-fill`), que es universal en claro y oscuro. No hay un rojo aparte para notificaciones
+$slxd-notification-panel-dot-margin-block-start: 0.25rem; // Baja el punto hasta el centro óptico de la primera línea del título
+$slxd-notification-panel-empty-padding-block: 2rem; // Aire vertical del estado vacío: el hueco de la lista sin encogerse
+$slxd-notification-panel-footer-padding-block: 0.75rem; // Aire vertical del pie
+$slxd-notification-panel-footer-gap: 0.5rem; // Aire entre los enlaces del pie
+$slxd-notification-panel-footer-font-size: 0.875rem; // Tamaño de los enlaces del pie: letra menor
+$slxd-notification-panel-focus-ring-width: 2px; // Grosor del anillo de foco de una fila
+$slxd-notification-panel-focus-ring-color: #111e30; // Color del anillo de foco de una fila
 
 // Alias obsoletos: nombres anteriores a la convención D9.
-$lxd-notification-panel-inline-size: $lxd-notification-panel-width; // OBSOLETO (v51, se retira en la v52): usar $lxd-notification-panel-width
-$lxd-notification-panel-list-max-block-size: $lxd-notification-panel-list-max-height; // OBSOLETO (v51, se retira en la v52): usar $lxd-notification-panel-list-max-height
+$slxd-notification-panel-inline-size: $slxd-notification-panel-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-notification-panel-width
+$slxd-notification-panel-list-max-block-size: $slxd-notification-panel-list-max-height; // OBSOLETO (v51, se retira en la v52): usar $slxd-notification-panel-list-max-height

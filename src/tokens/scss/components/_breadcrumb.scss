@@ -1,21 +1,21 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-breadcrumb-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$lxd-breadcrumb-font-size: 0.875rem; // Texto de navegación, no control: peldaño por debajo del cuerpo (respira en la superficie pública)
-$lxd-breadcrumb-font-weight: 300; // Font weight base
-$lxd-breadcrumb-line-height: 1; // Single-line
-$lxd-breadcrumb-gap: 0.5rem; // Gap entre items y separadores
-$lxd-breadcrumb-padding-block: 0.25rem; // Padding vertical del nav
-$lxd-breadcrumb-padding-inline: 0; // Sin padding lateral
-$lxd-breadcrumb-separator-color: #111e30; // Color del separador
-$lxd-breadcrumb-link-color: #111e30; // Color del link navegable
-$lxd-breadcrumb-link-hover-color: #111e30; // Color del link en hover
-$lxd-breadcrumb-current-color: #111e30; // Color del item activo (página actual)
-$lxd-breadcrumb-current-font-weight: 500; // Peso del item activo
-$lxd-breadcrumb-focus-ring-color: #111e30; // Color del focus ring
-$lxd-breadcrumb-focus-ring-width: 2px; // Grosor del focus ring
-$lxd-breadcrumb-focus-ring-offset: 1px; // Separación del focus ring
+$slxd-breadcrumb-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
+$slxd-breadcrumb-font-size: 0.875rem; // Texto de navegación, no control: peldaño por debajo del cuerpo (respira en la superficie pública)
+$slxd-breadcrumb-font-weight: 300; // Font weight base
+$slxd-breadcrumb-line-height: 1; // Single-line
+$slxd-breadcrumb-gap: 0.5rem; // Gap entre items y separadores
+$slxd-breadcrumb-padding-block: 0.25rem; // Padding vertical del nav
+$slxd-breadcrumb-padding-inline: 0; // Sin padding lateral
+$slxd-breadcrumb-separator-color: #111e30; // Color del separador
+$slxd-breadcrumb-link-color: #111e30; // Color del link navegable
+$slxd-breadcrumb-link-hover-color: #111e30; // Color del link en hover
+$slxd-breadcrumb-current-color: #111e30; // Color del item activo (página actual)
+$slxd-breadcrumb-current-font-weight: 500; // Peso del item activo
+$slxd-breadcrumb-focus-ring-color: #111e30; // Color del focus ring
+$slxd-breadcrumb-focus-ring-width: 2px; // Grosor del focus ring
+$slxd-breadcrumb-focus-ring-offset: 1px; // Separación del focus ring
 
 // Alias obsoletos: nombres anteriores a la convención D9.
-$lxd-breadcrumb-link-color-hover: $lxd-breadcrumb-link-hover-color; // OBSOLETO (v51, se retira en la v52): usar $lxd-breadcrumb-link-hover-color
+$slxd-breadcrumb-link-color-hover: $slxd-breadcrumb-link-hover-color; // OBSOLETO (v51, se retira en la v52): usar $slxd-breadcrumb-link-hover-color

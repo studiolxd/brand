@@ -197,7 +197,7 @@ export function registerJsonVariablesFormat(StyleDictionary) {
  * - CSS: `src/tokens/deprecated-aliases.css` (lo genera `sd.config.mjs`), con
  *   `--viejo: var(--nuevo)` bajo `:root` y bajo cada selector de superficie, para
  *   que el alias LEA el valor de la superficie en la que está.
- * - SCSS: `$lxd-viejo: $lxd-nuevo;` al final del mismo fichero del token
+ * - SCSS: `$slxd-viejo: $slxd-nuevo;` al final del mismo fichero del token
  *   (`scss/variables-with-deprecated-aliases`).
  * - `tokens.json`: la clave vieja con el mismo valor resuelto.
  *
@@ -211,7 +211,7 @@ export function deprecatedAliasesOf(token) {
 
 /**
  * El nombre de salida de un alias, con el mismo prefijo de plataforma que el
- * token (`lxd-` en SCSS, ninguno en CSS/JSON): el nombre del token termina en
+ * token (`slxd-` en SCSS, ninguno en CSS/JSON): el nombre del token termina en
  * su ruta unida por guiones, y lo que haya delante es el prefijo.
  */
 function aliasName(token, alias) {

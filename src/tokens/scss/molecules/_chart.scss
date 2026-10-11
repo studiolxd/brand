@@ -1,80 +1,80 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-chart-series-1: #1e7ff6; // Ranura categórica 1. El orden de las ranuras es el mecanismo de seguridad para daltonismo: se asignan en orden, nunca se ciclan
-$lxd-chart-series-2: #f16123; // Ranura categórica 2
-$lxd-chart-series-3: #27a0af; // Ranura categórica 3
-$lxd-chart-series-4: #b29124; // Ranura categórica 4
-$lxd-chart-series-5: #c62c90; // Ranura categórica 5
-$lxd-chart-series-6: #7d9d22; // Ranura categórica 6
-$lxd-chart-series-7: #6332c4; // Ranura categórica 7
-$lxd-chart-series-8: #28a86b; // Ranura categórica 8 — techo. Una novena serie se pliega en «Otros» o se factoriza en múltiplos pequeños
-$lxd-chart-sequential-100: #dce9fc; // Rampa secuencial (magnitud) — mínimo
-$lxd-chart-sequential-200: #b6d2f8; // Rampa secuencial — paso 200
-$lxd-chart-sequential-300: #8fbaf5; // Rampa secuencial — paso 300; extremo claro de una rampa ordinal
-$lxd-chart-sequential-400: #67a1f1; // Rampa secuencial — paso 400
-$lxd-chart-sequential-500: #3b88ee; // Rampa secuencial — paso 500
-$lxd-chart-sequential-600: #236ac5; // Rampa secuencial — paso 600
-$lxd-chart-sequential-700: #164b90; // Rampa secuencial — máximo
-$lxd-chart-diverging-warm-1: #f37f54; // Divergente, brazo cálido junto al neutro
-$lxd-chart-diverging-warm-2: #d45c2c; // Divergente, brazo cálido intermedio
-$lxd-chart-diverging-warm-3: #9f431f; // Divergente, brazo cálido extremo
-$lxd-chart-diverging-neutral: #f2f2f2; // Punto medio divergente: gris neutro. Nunca un tono — el medio tiene que leerse como «nada». Es el único dato que se viste con un rol de SUPERFICIE, y a propósito: el cero es el punto de MENOR saliencia de la rampa, así que su trabajo es retirarse hacia el lienzo, no contrastar con él. Sobre blanco queda en 1,12:1, por debajo de los seis pasos de los dos brazos (2,49:1 el más flojo)
-$lxd-chart-diverging-cool-1: #70a6f2; // Divergente, brazo frío junto al neutro
-$lxd-chart-diverging-cool-2: #3484ee; // Divergente, brazo frío intermedio
-$lxd-chart-diverging-cool-3: #1f61b6; // Divergente, brazo frío extremo
-$lxd-chart-surface: #ffffff; // Color del hueco de 2px entre marcas contiguas y del anillo de 2px de los puntos. Es la superficie, no un borde: separar con trazo añadiría tinta que no es dato
-$lxd-chart-grid-color: #d0d0d0; // Rejilla: filete de 1px a un paso de la superficie. Cromo recesivo
-$lxd-chart-grid-width: 1px; // Grosor de la rejilla. Sólida siempre: una rejilla discontinua se lee como umbral
-$lxd-chart-axis-color: #6b6b6b; // Línea base y eje: un paso más firme que la rejilla, porque es el ancla del cero
-$lxd-chart-axis-width: 1px; // Grosor del eje
-$lxd-chart-label-color: #4a4a4a; // Rótulos de eje y de valor. El texto nunca lleva el color de la serie: la identidad la trae la marca de color que va al lado
-$lxd-chart-label-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de los rótulos
-$lxd-chart-label-font-size: 0.875rem; // 14px — rótulo de interfaz
-$lxd-chart-label-font-weight: 400; // Peso de los rótulos de eje
-$lxd-chart-value-font-weight: 500; // Peso de la etiqueta directa de valor: la cifra es lo que se lee
-$lxd-chart-muted-color: #6b6b6b; // Serie apagada del patrón de énfasis (una serie en color, el resto en gris) y ranura «Otros»
-$lxd-chart-line-width: 2px; // 2px — grosor de la línea de serie
-$lxd-chart-marker-size: 0.5rem; // 8px de diámetro — punto de serie y marcador de extremo
-$lxd-chart-marker-ring-width: 2px; // 2px — anillo del color de la superficie alrededor del punto, para que siga legible al cruzarse con una línea
-$lxd-chart-mark-gap: 2px; // 2px — hueco de superficie entre marcas que se tocan: segmentos de una barra apilada y barras contiguas
-$lxd-chart-bar-thickness-max: 1.5rem; // 24px — la barra nunca llena su banda; el sobrante es aire
-$lxd-chart-bar-radius: 0.25rem; // 4px — extremo de dato redondeado; el extremo de la línea base queda recto
-$lxd-chart-area-fill-opacity: 0.1; // El área es un velo del tono de la serie, nunca un bloque saturado
-$lxd-chart-donut-thickness: 0.55; // Fracción del radio que ocupa el anillo del donut
-$lxd-chart-funnel-gap: 0.25rem; // 4px — hueco de superficie entre tramos del embudo
-$lxd-chart-treemap-gap: 2px; // 2px — hueco entre baldosas del treemap
-$lxd-chart-radial-bar-gap: 0.25rem; // 4px — hueco entre anillos de la barra radial
-$lxd-chart-radial-track-color: #6b6b6b; // Carril del anillo sin recorrer en la barra radial: es la geometría de referencia del dato, como el eje, así que lleva su misma tinta (≥3:1 contra la superficie, WCAG 1.4.11)
-$lxd-chart-dot-size: 10px; // 10px de diámetro — medida propia del componente (no hay peldaño de 10 en `spacing.*`). Punto de la nube de dispersión, mayor que el marcador de línea porque aquí el punto es la marca, no un remate
-$lxd-chart-radar-fill-opacity: 0.15; // El polígono del radar es un velo del tono de la serie, como el área
-$lxd-chart-tile-label-color: #ffffff; // Rótulo sobre una baldosa del treemap cuando el relleno lo elige el producto (`color`/`colors`): va encima del relleno de la serie, no de la superficie, y con un color desconocido el sistema no puede elegir la tinta
-$lxd-chart-tile-label-color-1: #000000; // Rótulo sobre la baldosa de la ranura 1. La tinta se elige por ranura: ninguna de las dos (blanco o negro) llega a 4.5:1 sobre las ocho series, así que cada una lleva la que cumple. Negro, no prusia: el prusia es un casi-negro entintado y se queda corto sobre el azul de la ranura 1
-$lxd-chart-tile-label-color-2: #000000; // Rótulo sobre la baldosa de la ranura 2
-$lxd-chart-tile-label-color-3: #000000; // Rótulo sobre la baldosa de la ranura 3
-$lxd-chart-tile-label-color-4: #000000; // Rótulo sobre la baldosa de la ranura 4
-$lxd-chart-tile-label-color-5: #ffffff; // Rótulo sobre la baldosa de la ranura 5 — el magenta es lo bastante oscuro para llevar tinta clara
-$lxd-chart-tile-label-color-6: #000000; // Rótulo sobre la baldosa de la ranura 6
-$lxd-chart-tile-label-color-7: #ffffff; // Rótulo sobre la baldosa de la ranura 7 — la lavanda de gráfico es la más oscura de las ocho
-$lxd-chart-tile-label-color-8: #000000; // Rótulo sobre la baldosa de la ranura 8
-$lxd-chart-padding-block: 0.5rem; // Aire vertical del área de dibujo
-$lxd-chart-padding-inline: 0.5rem; // Aire horizontal del área de dibujo
-$lxd-chart-axis-gap: 0.5rem; // Separación entre el eje y sus rótulos
-$lxd-chart-block-gap: 0.75rem; // Separación entre título, lienzo y leyenda
-$lxd-chart-legend-gap: 0.5rem; // Aire entre las piezas de la leyenda
-$lxd-chart-legend-swatch-size: 0.5rem; // 8px — lado de la muestra de color de la leyenda
-$lxd-chart-legend-swatch-line-width: 0.75rem; // 12px — largo de la muestra cuando la marca es una línea: la leyenda imita la marca
-$lxd-chart-tooltip-bg: #111e30; // Bocadillo del gráfico: los mismos tokens que Tooltip, para que no haya dos bocadillos distintos en el sistema
-$lxd-chart-tooltip-color: #ffffff; // Texto del bocadillo
-$lxd-chart-tooltip-border-radius: 0px; // Radio del bocadillo
-$lxd-chart-tooltip-padding-block: 0.25rem; // Padding vertical del bocadillo
-$lxd-chart-tooltip-padding-inline: 0.5rem; // Padding horizontal del bocadillo
-$lxd-chart-tooltip-font-size: 0.875rem; // Tamaño de texto del bocadillo
-$lxd-chart-tooltip-line-height: 1.3; // Interlineado del bocadillo
-$lxd-chart-tooltip-offset: 0.25rem; // Separación entre el punto activo y el bocadillo
-$lxd-chart-tooltip-row-gap: 0.25rem; // Aire entre las filas del bocadillo
-$lxd-chart-tooltip-max-width: 20rem; // Ancho máximo del bocadillo
-$lxd-chart-crosshair-color: #6b6b6b; // Filete vertical que sigue al puntero y se engancha a la posición de dato más cercana
-$lxd-chart-transition-duration: 150ms; // Respuesta de la marca al puntero. Con `prefers-reduced-motion` no hay transición
-$lxd-chart-transition-easing: ease-out; // Curva de la respuesta al puntero
-$lxd-chart-hover-opacity: 0.75; // Atenuación de las marcas que no son la activa mientras el puntero está encima
+$slxd-chart-series-1: #1e7ff6; // Ranura categórica 1. El orden de las ranuras es el mecanismo de seguridad para daltonismo: se asignan en orden, nunca se ciclan
+$slxd-chart-series-2: #f16123; // Ranura categórica 2
+$slxd-chart-series-3: #27a0af; // Ranura categórica 3
+$slxd-chart-series-4: #b29124; // Ranura categórica 4
+$slxd-chart-series-5: #c62c90; // Ranura categórica 5
+$slxd-chart-series-6: #7d9d22; // Ranura categórica 6
+$slxd-chart-series-7: #6332c4; // Ranura categórica 7
+$slxd-chart-series-8: #28a86b; // Ranura categórica 8 — techo. Una novena serie se pliega en «Otros» o se factoriza en múltiplos pequeños
+$slxd-chart-sequential-100: #dce9fc; // Rampa secuencial (magnitud) — mínimo
+$slxd-chart-sequential-200: #b6d2f8; // Rampa secuencial — paso 200
+$slxd-chart-sequential-300: #8fbaf5; // Rampa secuencial — paso 300; extremo claro de una rampa ordinal
+$slxd-chart-sequential-400: #67a1f1; // Rampa secuencial — paso 400
+$slxd-chart-sequential-500: #3b88ee; // Rampa secuencial — paso 500
+$slxd-chart-sequential-600: #236ac5; // Rampa secuencial — paso 600
+$slxd-chart-sequential-700: #164b90; // Rampa secuencial — máximo
+$slxd-chart-diverging-warm-1: #f37f54; // Divergente, brazo cálido junto al neutro
+$slxd-chart-diverging-warm-2: #d45c2c; // Divergente, brazo cálido intermedio
+$slxd-chart-diverging-warm-3: #9f431f; // Divergente, brazo cálido extremo
+$slxd-chart-diverging-neutral: #f2f2f2; // Punto medio divergente: gris neutro. Nunca un tono — el medio tiene que leerse como «nada». Es el único dato que se viste con un rol de SUPERFICIE, y a propósito: el cero es el punto de MENOR saliencia de la rampa, así que su trabajo es retirarse hacia el lienzo, no contrastar con él. Sobre blanco queda en 1,12:1, por debajo de los seis pasos de los dos brazos (2,49:1 el más flojo)
+$slxd-chart-diverging-cool-1: #70a6f2; // Divergente, brazo frío junto al neutro
+$slxd-chart-diverging-cool-2: #3484ee; // Divergente, brazo frío intermedio
+$slxd-chart-diverging-cool-3: #1f61b6; // Divergente, brazo frío extremo
+$slxd-chart-surface: #ffffff; // Color del hueco de 2px entre marcas contiguas y del anillo de 2px de los puntos. Es la superficie, no un borde: separar con trazo añadiría tinta que no es dato
+$slxd-chart-grid-color: #d0d0d0; // Rejilla: filete de 1px a un paso de la superficie. Cromo recesivo
+$slxd-chart-grid-width: 1px; // Grosor de la rejilla. Sólida siempre: una rejilla discontinua se lee como umbral
+$slxd-chart-axis-color: #6b6b6b; // Línea base y eje: un paso más firme que la rejilla, porque es el ancla del cero
+$slxd-chart-axis-width: 1px; // Grosor del eje
+$slxd-chart-label-color: #4a4a4a; // Rótulos de eje y de valor. El texto nunca lleva el color de la serie: la identidad la trae la marca de color que va al lado
+$slxd-chart-label-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de los rótulos
+$slxd-chart-label-font-size: 0.875rem; // 14px — rótulo de interfaz
+$slxd-chart-label-font-weight: 400; // Peso de los rótulos de eje
+$slxd-chart-value-font-weight: 500; // Peso de la etiqueta directa de valor: la cifra es lo que se lee
+$slxd-chart-muted-color: #6b6b6b; // Serie apagada del patrón de énfasis (una serie en color, el resto en gris) y ranura «Otros»
+$slxd-chart-line-width: 2px; // 2px — grosor de la línea de serie
+$slxd-chart-marker-size: 0.5rem; // 8px de diámetro — punto de serie y marcador de extremo
+$slxd-chart-marker-ring-width: 2px; // 2px — anillo del color de la superficie alrededor del punto, para que siga legible al cruzarse con una línea
+$slxd-chart-mark-gap: 2px; // 2px — hueco de superficie entre marcas que se tocan: segmentos de una barra apilada y barras contiguas
+$slxd-chart-bar-thickness-max: 1.5rem; // 24px — la barra nunca llena su banda; el sobrante es aire
+$slxd-chart-bar-radius: 0.25rem; // 4px — extremo de dato redondeado; el extremo de la línea base queda recto
+$slxd-chart-area-fill-opacity: 0.1; // El área es un velo del tono de la serie, nunca un bloque saturado
+$slxd-chart-donut-thickness: 0.55; // Fracción del radio que ocupa el anillo del donut
+$slxd-chart-funnel-gap: 0.25rem; // 4px — hueco de superficie entre tramos del embudo
+$slxd-chart-treemap-gap: 2px; // 2px — hueco entre baldosas del treemap
+$slxd-chart-radial-bar-gap: 0.25rem; // 4px — hueco entre anillos de la barra radial
+$slxd-chart-radial-track-color: #6b6b6b; // Carril del anillo sin recorrer en la barra radial: es la geometría de referencia del dato, como el eje, así que lleva su misma tinta (≥3:1 contra la superficie, WCAG 1.4.11)
+$slxd-chart-dot-size: 10px; // 10px de diámetro — medida propia del componente (no hay peldaño de 10 en `spacing.*`). Punto de la nube de dispersión, mayor que el marcador de línea porque aquí el punto es la marca, no un remate
+$slxd-chart-radar-fill-opacity: 0.15; // El polígono del radar es un velo del tono de la serie, como el área
+$slxd-chart-tile-label-color: #ffffff; // Rótulo sobre una baldosa del treemap cuando el relleno lo elige el producto (`color`/`colors`): va encima del relleno de la serie, no de la superficie, y con un color desconocido el sistema no puede elegir la tinta
+$slxd-chart-tile-label-color-1: #000000; // Rótulo sobre la baldosa de la ranura 1. La tinta se elige por ranura: ninguna de las dos (blanco o negro) llega a 4.5:1 sobre las ocho series, así que cada una lleva la que cumple. Negro, no prusia: el prusia es un casi-negro entintado y se queda corto sobre el azul de la ranura 1
+$slxd-chart-tile-label-color-2: #000000; // Rótulo sobre la baldosa de la ranura 2
+$slxd-chart-tile-label-color-3: #000000; // Rótulo sobre la baldosa de la ranura 3
+$slxd-chart-tile-label-color-4: #000000; // Rótulo sobre la baldosa de la ranura 4
+$slxd-chart-tile-label-color-5: #ffffff; // Rótulo sobre la baldosa de la ranura 5 — el magenta es lo bastante oscuro para llevar tinta clara
+$slxd-chart-tile-label-color-6: #000000; // Rótulo sobre la baldosa de la ranura 6
+$slxd-chart-tile-label-color-7: #ffffff; // Rótulo sobre la baldosa de la ranura 7 — la lavanda de gráfico es la más oscura de las ocho
+$slxd-chart-tile-label-color-8: #000000; // Rótulo sobre la baldosa de la ranura 8
+$slxd-chart-padding-block: 0.5rem; // Aire vertical del área de dibujo
+$slxd-chart-padding-inline: 0.5rem; // Aire horizontal del área de dibujo
+$slxd-chart-axis-gap: 0.5rem; // Separación entre el eje y sus rótulos
+$slxd-chart-block-gap: 0.75rem; // Separación entre título, lienzo y leyenda
+$slxd-chart-legend-gap: 0.5rem; // Aire entre las piezas de la leyenda
+$slxd-chart-legend-swatch-size: 0.5rem; // 8px — lado de la muestra de color de la leyenda
+$slxd-chart-legend-swatch-line-width: 0.75rem; // 12px — largo de la muestra cuando la marca es una línea: la leyenda imita la marca
+$slxd-chart-tooltip-bg: #111e30; // Bocadillo del gráfico: los mismos tokens que Tooltip, para que no haya dos bocadillos distintos en el sistema
+$slxd-chart-tooltip-color: #ffffff; // Texto del bocadillo
+$slxd-chart-tooltip-border-radius: 0px; // Radio del bocadillo
+$slxd-chart-tooltip-padding-block: 0.25rem; // Padding vertical del bocadillo
+$slxd-chart-tooltip-padding-inline: 0.5rem; // Padding horizontal del bocadillo
+$slxd-chart-tooltip-font-size: 0.875rem; // Tamaño de texto del bocadillo
+$slxd-chart-tooltip-line-height: 1.3; // Interlineado del bocadillo
+$slxd-chart-tooltip-offset: 0.25rem; // Separación entre el punto activo y el bocadillo
+$slxd-chart-tooltip-row-gap: 0.25rem; // Aire entre las filas del bocadillo
+$slxd-chart-tooltip-max-width: 20rem; // Ancho máximo del bocadillo
+$slxd-chart-crosshair-color: #6b6b6b; // Filete vertical que sigue al puntero y se engancha a la posición de dato más cercana
+$slxd-chart-transition-duration: 150ms; // Respuesta de la marca al puntero. Con `prefers-reduced-motion` no hay transición
+$slxd-chart-transition-easing: ease-out; // Curva de la respuesta al puntero
+$slxd-chart-hover-opacity: 0.75; // Atenuación de las marcas que no son la activa mientras el puntero está encima

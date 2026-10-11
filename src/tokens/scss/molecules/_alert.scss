@@ -1,36 +1,36 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-alert-padding-block: 1rem; // Padding vertical del alert (16px)
-$lxd-alert-padding-inline: 1.5rem; // Padding horizontal del alert (24px)
-$lxd-alert-border-radius: 0px; // Sin radio de esquinas
-$lxd-alert-border-width: 1px; // Grosor del borde
-$lxd-alert-gap: 0.75rem; // Aire entre el contenido y el botón de cierre (12px)
-$lxd-alert-content-gap: 0.5rem; // Aire entre el título y la descripción, y entre los bloques de la descripción (8px)
-$lxd-alert-actions-gap: 0.75rem; // Aire entre las acciones del aviso — el de los botones de un formulario: la fila de acciones del sistema es una sola
-$lxd-alert-actions-margin-block-start: 0.75rem; // Aire entre el cuerpo del aviso y su fila de acciones (12px): más que el que separa título y descripción, porque lo que viene ya no es texto
-$lxd-alert-bg: #111e30; // Fondo por defecto — prussian. El relleno neutro invierte el lienzo: sobre página clara es prusia y sobre página oscura, blanco (ver `surface-dark-bg`)
-$lxd-alert-border-color: #ffffff; // Borde por defecto — blanco. Sobre página clara dibuja el contorno del relleno prusia
-$lxd-alert-title-font-size: 1rem; // El título hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
-$lxd-alert-title-font-weight: 500; // Peso del título
-$lxd-alert-title-line-height: 1.3; // Interlineado del título — el de un rótulo corto
-$lxd-alert-title-letter-spacing: -0.02em; // Tracking del título (−0,02em): el de los títulos (`text.h2.letter-spacing`), aunque el título del `Alert` sea un `<p>`. Es el mismo que el del `Toast` (`toast.title-letter-spacing` hereda de aquí), para que los dos avisos pinten el título igual; el token lo fija para que no dependa del elemento
-$lxd-alert-title-color: #ffffff; // Texto blanco sobre el relleno prusia
-$lxd-alert-description-font-size: 1rem; // La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
-$lxd-alert-description-line-height: 1.5; // Interlineado de la descripción — el del cuerpo
-$lxd-alert-description-color: #ffffff; // Descripción blanca sobre el relleno prusia — igual que el título
-$lxd-alert-close-size: 2rem; // Lado del botón de cierre — talla sm (32px), la mínima del sistema. El color del aspa y su hover los pone el Button ghost, que voltea con la superficie del relleno
-$lxd-alert-close-inset: 0.5rem; // Distancia del botón de cierre a la esquina superior derecha (8px)
-$lxd-alert-success-bg: #006616; // Fondo success — verde semántico
-$lxd-alert-success-border-color: #006616; // Borde igual al fondo success
-$lxd-alert-success-title-color: #ffffff; // Título blanco sobre fondo success
-$lxd-alert-success-description-color: #ffffff; // Descripción blanca sobre fondo success
-$lxd-alert-error-bg: #b30000; // Fondo error — rojo semántico
-$lxd-alert-error-border-color: #b30000; // Borde igual al fondo error
-$lxd-alert-error-title-color: #ffffff; // Título blanco sobre fondo error
-$lxd-alert-error-description-color: #ffffff; // Descripción blanca sobre fondo error
-$lxd-alert-warning-bg: #ffcd00; // Fondo warning — el relleno del rol de aviso. Es el amarillo de siempre, pero la procedencia es el rol de feedback, no la marca
-$lxd-alert-warning-border-color: #ffcd00; // Borde igual al fondo warning
-$lxd-alert-warning-title-color: #111e30; // Título prusia sobre fondo warning (11,17:1, AAA)
-$lxd-alert-warning-description-color: #111e30; // Descripción prusia sobre fondo warning
-$lxd-alert-warning-close-color: #111e30; // Aspa y su anillo de foco sobre el relleno de aviso. Es el único relleno claro del componente, así que el aspa no puede tomar la tinta ambiente: con `[data-theme="dark"]` en la raíz saldría blanca sobre amarillo (1,50:1). Va fijada a la tinta del rol, que es universal
+$slxd-alert-padding-block: 1rem; // Padding vertical del alert (16px)
+$slxd-alert-padding-inline: 1.5rem; // Padding horizontal del alert (24px)
+$slxd-alert-border-radius: 0px; // Sin radio de esquinas
+$slxd-alert-border-width: 1px; // Grosor del borde
+$slxd-alert-gap: 0.75rem; // Aire entre el contenido y el botón de cierre (12px)
+$slxd-alert-content-gap: 0.5rem; // Aire entre el título y la descripción, y entre los bloques de la descripción (8px)
+$slxd-alert-actions-gap: 0.75rem; // Aire entre las acciones del aviso — el de los botones de un formulario: la fila de acciones del sistema es una sola
+$slxd-alert-actions-margin-block-start: 0.75rem; // Aire entre el cuerpo del aviso y su fila de acciones (12px): más que el que separa título y descripción, porque lo que viene ya no es texto
+$slxd-alert-bg: #111e30; // Fondo por defecto — prussian. El relleno neutro invierte el lienzo: sobre página clara es prusia y sobre página oscura, blanco (ver `surface-dark-bg`)
+$slxd-alert-border-color: #ffffff; // Borde por defecto — blanco. Sobre página clara dibuja el contorno del relleno prusia
+$slxd-alert-title-font-size: 1rem; // El título hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
+$slxd-alert-title-font-weight: 500; // Peso del título
+$slxd-alert-title-line-height: 1.3; // Interlineado del título — el de un rótulo corto
+$slxd-alert-title-letter-spacing: -0.02em; // Tracking del título (−0,02em): el de los títulos (`text.h2.letter-spacing`), aunque el título del `Alert` sea un `<p>`. Es el mismo que el del `Toast` (`toast.title-letter-spacing` hereda de aquí), para que los dos avisos pinten el título igual; el token lo fija para que no dependa del elemento
+$slxd-alert-title-color: #ffffff; // Texto blanco sobre el relleno prusia
+$slxd-alert-description-font-size: 1rem; // La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
+$slxd-alert-description-line-height: 1.5; // Interlineado de la descripción — el del cuerpo
+$slxd-alert-description-color: #ffffff; // Descripción blanca sobre el relleno prusia — igual que el título
+$slxd-alert-close-size: 2rem; // Lado del botón de cierre — talla sm (32px), la mínima del sistema. El color del aspa y su hover los pone el Button ghost, que voltea con la superficie del relleno
+$slxd-alert-close-inset: 0.5rem; // Distancia del botón de cierre a la esquina superior derecha (8px)
+$slxd-alert-success-bg: #006616; // Fondo success — verde semántico
+$slxd-alert-success-border-color: #006616; // Borde igual al fondo success
+$slxd-alert-success-title-color: #ffffff; // Título blanco sobre fondo success
+$slxd-alert-success-description-color: #ffffff; // Descripción blanca sobre fondo success
+$slxd-alert-error-bg: #b30000; // Fondo error — rojo semántico
+$slxd-alert-error-border-color: #b30000; // Borde igual al fondo error
+$slxd-alert-error-title-color: #ffffff; // Título blanco sobre fondo error
+$slxd-alert-error-description-color: #ffffff; // Descripción blanca sobre fondo error
+$slxd-alert-warning-bg: #ffcd00; // Fondo warning — el relleno del rol de aviso. Es el amarillo de siempre, pero la procedencia es el rol de feedback, no la marca
+$slxd-alert-warning-border-color: #ffcd00; // Borde igual al fondo warning
+$slxd-alert-warning-title-color: #111e30; // Título prusia sobre fondo warning (11,17:1, AAA)
+$slxd-alert-warning-description-color: #111e30; // Descripción prusia sobre fondo warning
+$slxd-alert-warning-close-color: #111e30; // Aspa y su anillo de foco sobre el relleno de aviso. Es el único relleno claro del componente, así que el aspa no puede tomar la tinta ambiente: con `[data-theme="dark"]` en la raíz saldría blanca sobre amarillo (1,50:1). Va fijada a la tinta del rol, que es universal
