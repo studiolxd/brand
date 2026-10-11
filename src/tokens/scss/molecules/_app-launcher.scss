@@ -47,6 +47,3 @@ $slxd-app-launcher-tile-highlighted-bg: #111e30; // Relleno del tile bajo el pun
 $slxd-app-launcher-tile-highlighted-color: #ffffff; // Texto del tile resaltado — el del Menu: nombre e inicial invierten con el relleno
 $slxd-app-launcher-tile-badge-hover-bg: #ffffff; // Fondo de la Tag «nuevo» cuando su tile está resaltado — invertido respecto al tile (`tile-highlighted-color`) para seguir leyéndose como una píldora de contraste sobre el relleno
 $slxd-app-launcher-tile-badge-hover-color: #111e30; // Texto de la Tag «nuevo» cuando su tile está resaltado — el mismo par invertido que `tile-badge-hover-bg`
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-app-launcher-tile-badge-block-size: $slxd-app-launcher-tile-badge-height; // OBSOLETO (v51, se retira en la v52): usar $slxd-app-launcher-tile-badge-height

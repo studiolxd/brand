@@ -12,7 +12,3 @@ $slxd-loading-state-label-font-family: "Google Sans Flex", system-ui, sans-serif
 $slxd-loading-state-label-font-size: 1rem; // Tamaño del texto visible de la espera — el de la descripción de EmptyState (cuerpo de la superficie)
 $slxd-loading-state-sm-label-font-size: 0.875rem; // Tamaño del texto visible en talla sm — el de la descripción de EmptyState sm
 $slxd-loading-state-label-color: #4a4a4a; // Color del texto visible de la espera — el de la descripción de EmptyState (texto atenuado, nunca grey-dark)
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-loading-state-min-block-size: $slxd-loading-state-min-height; // OBSOLETO (v51, se retira en la v52): usar $slxd-loading-state-min-height
-$slxd-loading-state-sm-min-block-size: $slxd-loading-state-sm-min-height; // OBSOLETO (v51, se retira en la v52): usar $slxd-loading-state-sm-min-height

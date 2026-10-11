@@ -39,17 +39,11 @@ Lo vigila un test (`scripts/token-naming.test.ts`) que recorre todos los tokens 
 
 ## Los nombres anteriores (v51)
 
-La convención entró en la v51 y renombró los tokens de la tabla de abajo. **Los nombres viejos siguen existiendo hasta la v52** como alias obsoletos, en las tres salidas web:
-
-- **CSS** (`tokens.css`, `brand.css`): `--modal-width-max: var(--modal-max-width)`, declarado en `:root` y en cada superficie (oscura, invertida, siempre clara y pública), así que el alias **lee** el valor de la superficie en la que está.
-- **SCSS**: `$slxd-modal-width-max: $slxd-modal-max-width;`, al final del mismo fichero del token.
-- **`tokens.json` y `@studiolxd/brand/tokens`**: la clave vieja, con el mismo valor resuelto.
-
-Lo que un alias **no** hace es el camino contrario: el componente lee el nombre nuevo, así que **sobrescribir el viejo no lo cambia**. Una app que personalizaba `--modal-width-max` tiene que pasar a `--modal-max-width`; una que solo lo leía sigue funcionando hasta la v52. En nativo (SwiftUI y Compose) los tokens de componente no tienen alias: las constantes se renombraron sin más (`BrandModalTokens.maxWidth`, `BrandTabsTokens.triggerPillActiveBg`…). Los colores **globales** sí, porque una app nativa los usa por su nombre: `BrandColorRoles.background` sigue compilando hasta la v52, marcado como obsoleto y apuntando a `BrandColorRoles.bg` (`@available(*, deprecated, renamed:)` en Swift, `@Deprecated(ReplaceWith)` en Kotlin).
+La convención entró en la v51 y renombró los tokens de la tabla de abajo. Los nombres viejos se mantuvieron como alias obsoletos durante la v51 y la v52, y **se retiraron en la v53**: hoy no existen en ninguna salida (CSS, SCSS, `tokens.json` ni nativo). Una app que venga de antes de la v51 tiene que pasar al nombre nuevo, tanto si lo lee como si lo sobrescribe: `--modal-width-max` es `--modal-max-width`. En nativo, `BrandColorRoles.background` es `BrandColorRoles.bg`, y las constantes de componente siguen el mismo cambio (`BrandModalTokens.maxWidth`, `BrandTabsTokens.triggerPillActiveBg`…).
 
 Los pares oscuros (`surface-dark-*`) siguen a su token: `checkbox.surface-dark-bg-checked` es ahora `checkbox.surface-dark-checked-bg`, y como se publica con el nombre claro, la custom property es la misma de la tabla.
 
-| Antes (obsoleto) | Ahora |
+| Antes (retirado) | Ahora |
 | --- | --- |
 | `--breadcrumb-link-color-hover` | `--breadcrumb-link-hover-color` |
 | `--checkbox-bg-checked` | `--checkbox-checked-bg` |

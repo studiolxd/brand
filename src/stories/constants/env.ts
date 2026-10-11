@@ -32,12 +32,15 @@ export function warnOnce(key: string, message: string): void {
 /**
  * Aviso de API obsoleta (alias que se retira en el major siguiente), una vez
  * por componente y prop: «`<Tag variant>` está obsoleta; usa `tone`. Se
- * retira en la v52.»
+ * retira en el próximo major.»
+ *
+ * Hoy no lo usa ningún componente: los alias de la v51 se retiraron en la v53.
+ * Se queda para el próximo renombrado (CLAUDE.md § «Nombres de props»).
  */
 export function warnDeprecated(component: string, old: string, replacement: string): void {
   warnOnce(
     `deprecated:${component}:${old}`,
-    `\`<${component} ${old}>\` está obsoleta; usa ${replacement}. Se retira en la v52.`,
+    `\`<${component} ${old}>\` está obsoleta; usa ${replacement}. Se retira en el próximo major.`,
   );
 }
 

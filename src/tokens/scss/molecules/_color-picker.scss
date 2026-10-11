@@ -48,7 +48,3 @@ $slxd-color-picker-preset-focus-ring-color: #111e30; // Color del anillo de foco
 $slxd-color-picker-preset-selected-ring-width: 2px; // Marca del predefinido que coincide con el valor: un aro por fuera
 $slxd-color-picker-preset-selected-ring-offset: 1px; // Separación de la marca
 $slxd-color-picker-preset-selected-ring-color: #111e30; // Color de la marca del seleccionado
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-color-picker-panel-inline-size: $slxd-color-picker-panel-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-color-picker-panel-width
-$slxd-color-picker-area-block-size: $slxd-color-picker-area-height; // OBSOLETO (v51, se retira en la v52): usar $slxd-color-picker-area-height

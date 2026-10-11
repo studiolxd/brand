@@ -3,10 +3,5 @@ import { jsx as e } from "react/jsx-runtime";
 function t(t) {
 	return /* @__PURE__ */ e("a", { ...t });
 }
-function n(t) {
-	return function(n) {
-		return /* @__PURE__ */ e(t, { ...n });
-	};
-}
 //#endregion
-export { n, t };
+export { t };

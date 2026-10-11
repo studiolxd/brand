@@ -16,6 +16,3 @@ $slxd-breadcrumb-current-font-weight: 500; // Peso del item activo
 $slxd-breadcrumb-focus-ring-color: #111e30; // Color del focus ring
 $slxd-breadcrumb-focus-ring-width: 2px; // Grosor del focus ring
 $slxd-breadcrumb-focus-ring-offset: 1px; // Separación del focus ring
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-breadcrumb-link-color-hover: $slxd-breadcrumb-link-hover-color; // OBSOLETO (v51, se retira en la v52): usar $slxd-breadcrumb-link-hover-color

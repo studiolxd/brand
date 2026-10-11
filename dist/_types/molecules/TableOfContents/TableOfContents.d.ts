@@ -21,8 +21,6 @@ export interface TableOfContentsProps extends Omit<React.ComponentPropsWithoutRe
      * `tableOfContents.label` del `BrandMessagesProvider`.
      */
     'aria-label'?: string;
-    /** @deprecated Usa `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
-    ariaLabel?: string;
     /** Rótulo visible sobre la lista. Sin él, no se pinta ninguno. */
     title?: string;
     /**

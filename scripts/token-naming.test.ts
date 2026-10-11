@@ -23,18 +23,17 @@
  *    acción, y se queda), y las tallas se escriben `2xl`, `3xl`…, nunca
  *    `xxl`, `xxxl`.
  *
- * Además vigila los alias obsoletos de la v51 (los nombres viejos siguen
- * leyéndose hasta la v52): cada renombrado de `TOKEN_RENAMES_V51` existe con su
- * nombre nuevo, ya no existe con el viejo, y su alias sale a CSS, SCSS y
- * `tokens.json`.
+ * Además vigila los renombrados de la v51 (sus alias obsoletos se retiraron en
+ * la v53): cada uno de `TOKEN_RENAMES_V51` existe con su nombre nuevo y ya no
+ * con el viejo, ni como token ni como alias en ninguna salida.
  */
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 // @ts-expect-error — módulo .mjs sin tipos
 import { TOKEN_RENAMES_V51 } from './lib/token-renames.mjs';
 
-type Token = { path: string[]; file: string; extensions?: Record<string, { deprecatedAliases?: string[] }> };
+type Token = { path: string[]; file: string; extensions?: Record<string, Record<string, unknown>> };
 
 const ROOT = join(__dirname, '..');
 
@@ -143,17 +142,15 @@ describe('D9: convención de nombres de los tokens', () => {
   });
 });
 
-describe('D9: alias obsoletos de la v51', () => {
+describe('D9: renombrados de la v51', () => {
   const renames = Object.entries(TOKEN_RENAMES_V51 as Record<string, string>);
   const byName = new Map(tokens.map((t) => [dotted(t), t]));
   const cssName = (path: string) => `--${path.split('.').join('-')}`;
 
-  it('cada renombrado existe con el nombre nuevo y lleva el viejo como alias', () => {
+  it('cada renombrado existe con el nombre nuevo y ya no con el viejo', () => {
     for (const [old, current] of renames) {
       expect(byName.has(old), `${old} ya no debería existir`).toBe(false);
-      const token = byName.get(current);
-      expect(token, current).toBeDefined();
-      expect(token!.extensions?.['com.studiolxd']?.deprecatedAliases).toContain(old);
+      expect(byName.get(current), current).toBeDefined();
     }
   });
 
@@ -164,26 +161,14 @@ describe('D9: alias obsoletos de la v51', () => {
     }
   });
 
-  it('no hay alias fuera de la tabla de renombrados', () => {
-    const declared = tokens.flatMap((t) =>
-      (t.extensions?.['com.studiolxd']?.deprecatedAliases ?? []).map((alias) => [alias, dotted(t)]),
-    );
-    expect(Object.fromEntries(declared)).toEqual(TOKEN_RENAMES_V51);
-  });
-
-  it('el alias sale a CSS (en cada superficie), a SCSS y a tokens.json', () => {
-    const css = readFileSync(join(ROOT, 'src/tokens/deprecated-aliases.css'), 'utf-8');
+  it('los alias obsoletos se retiraron (v53): ningún token los declara y ninguna salida los emite', () => {
+    const declaring = tokens.filter((t) => t.extensions?.['com.studiolxd']?.deprecatedAliases).map(dotted);
+    expect(declaring).toEqual([]);
+    expect(existsSync(join(ROOT, 'src/tokens/deprecated-aliases.css'))).toBe(false);
+    expect(readFileSync(join(ROOT, 'src/tokens/index.css'), 'utf-8')).not.toContain('deprecated-aliases');
     const json = JSON.parse(readFileSync(join(ROOT, 'src/tokens/tokens.json'), 'utf-8'));
-    const index = readFileSync(join(ROOT, 'src/tokens/index.css'), 'utf-8');
-    expect(index).toContain('@import "./deprecated-aliases.css";');
-    for (const selector of [':root', '.surface-dark', '.surface-invert', '[data-theme="dark"]', 'html.dark', '.surface-light', '.site-shell']) {
-      expect(css).toContain(`${selector}${selector === '.site-shell' ? ' {' : ','}`);
-    }
-    for (const [old, current] of renames) {
-      expect(css).toContain(`${cssName(old)}: var(${cssName(current)});`);
-      expect(json[cssName(old)], old).toBe(json[cssName(current)]);
-    }
     const scss = readFileSync(join(ROOT, 'src/tokens/scss/molecules/_modal.scss'), 'utf-8');
-    expect(scss).toContain('$slxd-modal-width-max: $slxd-modal-max-width;');
+    for (const [old] of renames) expect(json[cssName(old)], old).toBeUndefined();
+    expect(scss).not.toContain('$slxd-modal-width-max');
   });
 });

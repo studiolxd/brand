@@ -113,7 +113,7 @@ export const ConRenderDay: Story = {
         renderDay={(date, dayEvents) => (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
             {dayEvents.map((e) => (
-              <Tag key={e.id} variant={e.variant}>
+              <Tag key={e.id} tone={e.tone}>
                 {e.label}
               </Tag>
             ))}

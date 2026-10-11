@@ -24,7 +24,3 @@ $slxd-number-badge-success-bg: #006616; // Fondo success (green)
 $slxd-number-badge-success-color: #ffffff; // Texto sobre success
 $slxd-number-badge-neutral-bg: #4a4a4a; // Fondo neutral (dark grey)
 $slxd-number-badge-neutral-color: #ffffff; // Texto sobre neutral
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-number-badge-danger-bg: $slxd-number-badge-error-bg; // OBSOLETO (v51, se retira en la v52): usar $slxd-number-badge-error-bg
-$slxd-number-badge-danger-color: $slxd-number-badge-error-color; // OBSOLETO (v51, se retira en la v52): usar $slxd-number-badge-error-color

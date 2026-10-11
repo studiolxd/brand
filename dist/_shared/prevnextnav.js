@@ -1,36 +1,35 @@
 import '../prevnextnav.css';
-import { n as e } from "./env.js";
-import { r as t } from "./brandmessagescontext.js";
-import { Icon as n } from "../icon.js";
-import { n as r, t as i } from "./default-render-link.js";
-import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
+import { r as e } from "./brandmessagescontext.js";
+import { Icon as t } from "../icon.js";
+import { t as n } from "./default-render-link.js";
+import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/messages/es/prevNextNav.ts
-var c = {
+var o = {
 	previous: "Anterior",
 	next: "Siguiente"
 };
 //#endregion
 //#region src/stories/molecules/PrevNextNav/PrevNextNav.tsx
-function l({ href: e, onClick: t, label: r, title: i, disabled: c, direction: l, chevronSize: u, renderLink: d }) {
+function s({ href: e, onClick: n, label: o, title: s, disabled: c, direction: l, chevronSize: u, renderLink: d }) {
 	let f = [
 		"prev-next-nav__btn",
 		`prev-next-nav__btn--${l}`,
-		i ? "prev-next-nav__btn--titled" : "",
+		s ? "prev-next-nav__btn--titled" : "",
 		c ? "prev-next-nav__btn--disabled" : ""
-	].filter(Boolean).join(" "), p = /* @__PURE__ */ o(n, {
+	].filter(Boolean).join(" "), p = /* @__PURE__ */ i(t, {
 		name: "chevron",
 		size: u
-	}), m = i ? /* @__PURE__ */ s(a, { children: [p, /* @__PURE__ */ s("span", {
+	}), m = s ? /* @__PURE__ */ a(r, { children: [p, /* @__PURE__ */ a("span", {
 		className: "prev-next-nav__text",
-		children: [/* @__PURE__ */ o("span", {
+		children: [/* @__PURE__ */ i("span", {
 			className: "prev-next-nav__eyebrow",
-			children: r
-		}), /* @__PURE__ */ o("span", {
+			children: o
+		}), /* @__PURE__ */ i("span", {
 			className: "prev-next-nav__title",
-			children: i
+			children: s
 		})]
-	})] }) : p, h = i ? void 0 : r;
-	return c ? /* @__PURE__ */ o("button", {
+	})] }) : p, h = s ? void 0 : o;
+	return c ? /* @__PURE__ */ i("button", {
 		type: "button",
 		className: f,
 		"aria-label": h,
@@ -40,54 +39,53 @@ function l({ href: e, onClick: t, label: r, title: i, disabled: c, direction: l,
 		href: e,
 		className: f,
 		"aria-label": h,
-		onClick: t,
+		onClick: n,
 		children: m
-	}) : /* @__PURE__ */ o("button", {
+	}) : /* @__PURE__ */ i("button", {
 		type: "button",
 		className: f,
 		"aria-label": h,
-		onClick: t,
+		onClick: n,
 		children: m
 	});
 }
-function u({ prevHref: n, nextHref: a, prevOnClick: u, nextOnClick: d, prevLabel: f, nextLabel: p, prevTitle: m, nextTitle: h, label: g, labelId: _, renderLink: v, linkComponent: y, size: b = "md", className: x }) {
-	y !== void 0 && e("PrevNextNav", "linkComponent", "`renderLink`");
-	let S = v ?? (y ? r(y) : i), C = t("prevNextNav", c), w = b === "sm" ? "sm" : "md";
-	return /* @__PURE__ */ s("div", {
+function c({ prevHref: t, nextHref: r, prevOnClick: c, nextOnClick: l, prevLabel: u, nextLabel: d, prevTitle: f, nextTitle: p, label: m, labelId: h, renderLink: g = n, size: _ = "md", className: v }) {
+	let y = e("prevNextNav", o), b = _ === "sm" ? "sm" : "md";
+	return /* @__PURE__ */ a("div", {
 		className: [
 			"prev-next-nav",
-			b === "sm" ? "prev-next-nav--sm" : "",
-			m !== void 0 || h !== void 0 ? "prev-next-nav--titled" : "",
-			x
+			_ === "sm" ? "prev-next-nav--sm" : "",
+			f !== void 0 || p !== void 0 ? "prev-next-nav--titled" : "",
+			v
 		].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ o(l, {
-				href: n,
-				onClick: u,
-				label: C("previous", f),
-				disabled: !n && !u,
+			/* @__PURE__ */ i(s, {
+				href: t,
+				onClick: c,
+				label: y("previous", u),
+				disabled: !t && !c,
 				direction: "prev",
-				title: m,
-				chevronSize: w,
-				renderLink: S
+				title: f,
+				chevronSize: b,
+				renderLink: g
 			}),
-			g !== void 0 && /* @__PURE__ */ o("strong", {
-				id: _,
+			m !== void 0 && /* @__PURE__ */ i("strong", {
+				id: h,
 				className: "prev-next-nav__label",
-				children: g
+				children: m
 			}),
-			/* @__PURE__ */ o(l, {
-				href: a,
-				onClick: d,
-				label: C("next", p),
-				disabled: !a && !d,
+			/* @__PURE__ */ i(s, {
+				href: r,
+				onClick: l,
+				label: y("next", d),
+				disabled: !r && !l,
 				direction: "next",
-				title: h,
-				chevronSize: w,
-				renderLink: S
+				title: p,
+				chevronSize: b,
+				renderLink: g
 			})
 		]
 	});
 }
 //#endregion
-export { u as t };
+export { c as t };

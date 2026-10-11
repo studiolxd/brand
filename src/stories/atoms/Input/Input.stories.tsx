@@ -28,7 +28,6 @@ const meta: Meta<typeof Input> = {
     },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     describedBy: { table: { disable: true } },
-    ariaLabel: { table: { disable: true } },
   },
   args: {
     placeholder: 'Escribe algo…',

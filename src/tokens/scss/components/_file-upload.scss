@@ -66,6 +66,3 @@ $slxd-file-upload-border-dash-length: 1rem; // Largo de cada trazo del borde dis
 $slxd-file-upload-border-dash-gap: 0.5rem; // Hueco entre trazos del borde discontinuo (antes 10px, fuera de la escala)
 $slxd-file-upload-remove-focus-ring-offset: 1px; // Separación del anillo de foco del aspa
 $slxd-file-upload-remove-border-radius: 0px; // Radio del aspa — recto, como toda esquina del sistema
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-file-upload-remove-color-hover: $slxd-file-upload-remove-hover-color; // OBSOLETO (v51, se retira en la v52): usar $slxd-file-upload-remove-hover-color

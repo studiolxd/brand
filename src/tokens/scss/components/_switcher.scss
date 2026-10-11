@@ -28,6 +28,3 @@ $slxd-switcher-sm-thumb-size: 0.875em; // Tamaño del thumb — variante sm
 $slxd-switcher-lg-track-width: 3rem; // Ancho del track — variante lg: la talla lg del sistema (48px). En rem, no en em: como el resto de campos en lg, no se escala además con la fuente del párrafo large del campo
 $slxd-switcher-lg-track-height: 1.625rem; // Alto del track — variante lg. En rem, ver lg-track-width
 $slxd-switcher-lg-thumb-size: 1.25rem; // Tamaño del thumb — variante lg. En rem, ver lg-track-width
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-switcher-track-bg-checked: $slxd-switcher-track-checked-bg; // OBSOLETO (v51, se retira en la v52): usar $slxd-switcher-track-checked-bg

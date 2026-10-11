@@ -1,57 +1,55 @@
 import './sparkline.css';
-import { n as e } from "./_shared/env.js";
-import { forwardRef as t } from "react";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { forwardRef as e } from "react";
+import { jsx as t, jsxs as n } from "react/jsx-runtime";
 //#region src/stories/atoms/Sparkline/Sparkline.tsx
-var i = {
+var r = {
 	width: 80,
 	height: 24,
 	markerSize: 8
-}, a = t(function({ values: t, type: a = "line", width: o = i.width, height: s = i.height, marker: c = !0, baseline: l = !0, series: u, "aria-label": d, ariaLabel: f, className: p, ...m }, h) {
-	f !== void 0 && e("Sparkline", "ariaLabel", "`aria-label`");
-	let g = d ?? f, _ = [
+}, i = e(function({ values: e, type: i = "line", width: a = r.width, height: o = r.height, marker: s = !0, baseline: c = !0, series: l, "aria-label": u, className: d, ...f }, p) {
+	let m = [
 		"sparkline",
-		`sparkline--${a}`,
-		p
-	].filter(Boolean).join(" "), v = t.filter((e) => Number.isFinite(e)), y = i.markerSize / 2, b = v.length ? Math.min(...v) : 0, x = v.length ? Math.max(...v) : 1, S = x - b || 1, C = v.map((e, t) => ({
-		x: y + (v.length > 1 ? t * (o - y * 2) / (v.length - 1) : (o - y * 2) / 2),
-		y: s - y - (e - b) / S * (s - y * 2)
-	})), w = C.map((e, t) => `${t === 0 ? "M" : "L"} ${e.x} ${e.y}`).join(" "), T = C[C.length - 1], E = b < 0 && x > 0, D = s - y - (0 - b) / S * (s - y * 2);
-	return C.length === 0 ? null : /* @__PURE__ */ r("svg", {
-		ref: h,
-		className: _,
-		"data-series": u,
-		viewBox: `0 0 ${o} ${s}`,
-		width: o,
-		height: s,
-		role: g ? "img" : void 0,
-		"aria-label": g,
-		"aria-hidden": g ? void 0 : !0,
-		...m,
+		`sparkline--${i}`,
+		d
+	].filter(Boolean).join(" "), h = e.filter((e) => Number.isFinite(e)), g = r.markerSize / 2, _ = h.length ? Math.min(...h) : 0, v = h.length ? Math.max(...h) : 1, y = v - _ || 1, b = h.map((e, t) => ({
+		x: g + (h.length > 1 ? t * (a - g * 2) / (h.length - 1) : (a - g * 2) / 2),
+		y: o - g - (e - _) / y * (o - g * 2)
+	})), x = b.map((e, t) => `${t === 0 ? "M" : "L"} ${e.x} ${e.y}`).join(" "), S = b[b.length - 1], C = _ < 0 && v > 0, w = o - g - (0 - _) / y * (o - g * 2);
+	return b.length === 0 ? null : /* @__PURE__ */ n("svg", {
+		ref: p,
+		className: m,
+		"data-series": l,
+		viewBox: `0 0 ${a} ${o}`,
+		width: a,
+		height: o,
+		role: u ? "img" : void 0,
+		"aria-label": u,
+		"aria-hidden": u ? void 0 : !0,
+		...f,
 		children: [
-			l && E ? /* @__PURE__ */ n("line", {
+			c && C ? /* @__PURE__ */ t("line", {
 				className: "sparkline__baseline",
 				x1: 0,
-				y1: D,
-				x2: o,
-				y2: D
+				y1: w,
+				x2: a,
+				y2: w
 			}) : null,
-			a === "area" && T ? /* @__PURE__ */ n("path", {
+			i === "area" && S ? /* @__PURE__ */ t("path", {
 				className: "sparkline__area",
-				d: `${w} L ${T.x} ${s} L ${C[0]?.x ?? 0} ${s} Z`
+				d: `${x} L ${S.x} ${o} L ${b[0]?.x ?? 0} ${o} Z`
 			}) : null,
-			/* @__PURE__ */ n("path", {
+			/* @__PURE__ */ t("path", {
 				className: "sparkline__line",
-				d: w
+				d: x
 			}),
-			c && T ? /* @__PURE__ */ n("circle", {
+			s && S ? /* @__PURE__ */ t("circle", {
 				className: "sparkline__marker",
-				cx: T.x,
-				cy: T.y,
-				r: i.markerSize / 2
+				cx: S.x,
+				cy: S.y,
+				r: r.markerSize / 2
 			}) : null
 		]
 	});
 });
 //#endregion
-export { a as Sparkline };
+export { i as Sparkline };

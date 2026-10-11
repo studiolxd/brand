@@ -3,6 +3,3 @@
 
 $slxd-otp-input-gap: 0.5rem; // Separación entre celdas del código
 $slxd-otp-input-cell-width: 3.5ch; // Anchura de una celda: medida en caracteres para que el dígito quepa centrado a cualquier talla de texto, sin recortarse con el texto ampliado (WCAG 1.4.4)
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-otp-input-cell-inline-size: $slxd-otp-input-cell-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-otp-input-cell-width

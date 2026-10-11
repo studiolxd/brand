@@ -7,6 +7,3 @@ $slxd-logo-height-lg: 3rem; // Alto destacado: pie de página
 $slxd-logo-height-xl: 64px; // Alto de marca: la cabecera del sitio. Es la talla ilustrativa de la escala de iconos (64px), no una talla de control
 $slxd-logo-height-2xl: calc(64px * 4 / 3); // Alto de marca mayor: la cabecera del sitio por defecto. Sigue la progresión de la escala —el mismo salto que hay de lg a xl (4/3)— sobre la talla xl: 85,33px
 $slxd-logo-color: #111e30; // Color del trazado sobre superficie clara
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-logo-height-xxl: $slxd-logo-height-2xl; // OBSOLETO (v51, se retira en la v52): usar $slxd-logo-height-2xl

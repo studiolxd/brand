@@ -7,7 +7,6 @@
    de librería. */
 import { forwardRef, useState } from 'react';
 import { CloseButton } from '../../atoms/CloseButton/CloseButton';
-import { warnDeprecated } from '../../constants/env';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { alertEs } from '../../messages/es/alert';
 import './Alert.css';
@@ -25,17 +24,10 @@ export interface AlertMessages {
 
 /** Intención del aviso: decide el relleno y el rol ARIA. */
 export type AlertTone = 'default' | 'success' | 'error' | 'warning';
-/** @deprecated Usa `AlertTone`: la prop de color se llama `tone` desde la v51. Se retira en la v52. */
-export type AlertVariant = AlertTone;
 
 export interface AlertProps extends React.ComponentPropsWithoutRef<'div'> {
   /** Intención del aviso. Default `'default'` (relleno prusia). */
   tone?: AlertTone;
-  /**
-   * @deprecated Usa `tone`. Sigue funcionando, con un aviso en desarrollo,
-   * hasta la v52.
-   */
-  variant?: AlertTone;
   /** Título del alert. **Opcional**: en modo composición usa `children` (p. ej. `<Alert.Title>`). */
   title?: string;
   description?: React.ReactNode;
@@ -136,8 +128,7 @@ export const AlertActions = forwardRef<HTMLDivElement, AlertActionsProps>(functi
  * se puede forzar con la prop `role`.
  */
 const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
-  tone: toneProp,
-  variant,
+  tone = 'default',
   title,
   description,
   actions,
@@ -151,8 +142,6 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
   ...rest
 }, ref) {
   const t = useBrandMessages('alert', alertEs);
-  if (variant !== undefined) warnDeprecated('Alert', 'variant', '`tone`');
-  const tone = toneProp ?? variant ?? 'default';
   const [dismissed, setDismissed] = useState(false);
 
   if (dismissed) return null;

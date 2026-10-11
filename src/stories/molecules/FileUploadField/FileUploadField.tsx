@@ -8,7 +8,7 @@ import { FileUpload } from '../../atoms/FileUpload/FileUpload';
 import type { FileUploadProps } from '../../atoms/FileUpload/FileUpload';
 
 export interface FileUploadFieldProps
-  extends Omit<FileUploadProps, 'describedBy' | 'ariaLabel' | 'aria-describedby' | 'id'>, FieldOptionalProps {
+  extends Omit<FileUploadProps, 'describedBy' | 'aria-describedby' | 'id'>, FieldOptionalProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
   id?: string;
   label: string;

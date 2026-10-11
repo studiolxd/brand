@@ -1,5 +1,4 @@
 import progressBarTokens from '../../../../tokens/component/progress-bar.json';
-import { warnDeprecated } from '../../constants/env';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { progressBarEs } from '../../messages/es/progressBar';
 import './ProgressBar.css';
@@ -16,8 +15,6 @@ export interface ProgressBarMessages {
 
 /** Color del relleno. */
 export type ProgressBarTone = 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
-/** @deprecated Usa `ProgressBarTone`: la prop de color se llama `tone` desde la v51. Se retira en la v52. */
-export type ProgressBarVariant = ProgressBarTone;
 export type ProgressBarSize = 'sm' | 'md' | 'lg';
 
 export interface ProgressBarProps {
@@ -25,11 +22,6 @@ export interface ProgressBarProps {
   value: number;
   /** Color del relleno. Default `'primary'`. */
   tone?: ProgressBarTone;
-  /**
-   * @deprecated Usa `tone`. Sigue funcionando, con un aviso en desarrollo,
-   * hasta la v52.
-   */
-  variant?: ProgressBarTone;
   /** Talla de la barra. En `sm` no se muestra la cifra. */
   size?: ProgressBarSize;
   /**
@@ -57,15 +49,12 @@ const INSIDE_THRESHOLD = Number(progressBarTokens['progress-bar']['inside-label-
 
 export function ProgressBar({
   value,
-  tone: toneProp,
-  variant,
+  tone = 'primary',
   size = 'md',
   label,
   className,
 }: ProgressBarProps) {
   const t = useBrandMessages('progressBar', progressBarEs);
-  if (variant !== undefined) warnDeprecated('ProgressBar', 'variant', '`tone`');
-  const tone = toneProp ?? variant ?? 'primary';
   const clamped = Math.min(100, Math.max(0, Math.round(value)));
   const showLabel = size !== 'sm';
   const labelInside = showLabel && clamped >= INSIDE_THRESHOLD;

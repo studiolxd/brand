@@ -1,7 +1,7 @@
 import { Children, createContext, useContext, type ReactNode } from 'react';
 import { Heading, type HeadingLevel, type HeadingSize } from '../../atoms/Heading/Heading';
 import { Icon, type IconName } from '../../atoms/Icon/Icon';
-import { StepMarker, type StepMarkerTone, type StepMarkerToneDeprecated } from '../../atoms/StepMarker/StepMarker';
+import { StepMarker, type StepMarkerTone } from '../../atoms/StepMarker/StepMarker';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import './Steps.css';
 
@@ -26,9 +26,9 @@ export interface StepsProps {
   /** Uno debajo de otro (por defecto) o en fila. */
   orientation?: 'vertical' | 'horizontal';
   /** Color de la marca. Por defecto `primary`. */
-  tone?: StepMarkerTone | StepMarkerToneDeprecated;
+  tone?: StepMarkerTone;
   /** @deprecated Usar `tone`. Se mantiene como alias por compatibilidad. */
-  badgeVariant?: StepMarkerTone | StepMarkerToneDeprecated;
+  badgeVariant?: StepMarkerTone;
   /** Nivel semántico del título de cada paso. Por defecto `3`. */
   titleLevel?: HeadingLevel;
   /** Talla del título de cada paso. Por defecto `1` (14px, la de la etiqueta de `Stepper`). */
@@ -51,7 +51,7 @@ export interface StepsProps {
  */
 interface StepsContextValue {
   index: number;
-  tone: StepMarkerTone | StepMarkerToneDeprecated;
+  tone: StepMarkerTone;
   titleLevel: HeadingLevel;
   titleSize: HeadingSize;
 }

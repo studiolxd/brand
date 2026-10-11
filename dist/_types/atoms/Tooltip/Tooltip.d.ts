@@ -42,17 +42,6 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLElement>, 'c
      */
     describe?: boolean;
     /**
-     * @deprecated Ya no hace falta: con un disparador deshabilitado (`Button`,
-     * `CloseButton`, `DotsButton`, `CopyButton`, `Toggle` o un `<button>`
-     * nativo con `disabled`) el `Tooltip` le pide `focusableWhenDisabled` y el
-     * control, sin `disabled` nativo, recibe foco y puntero y se anuncia con
-     * `aria-disabled`. Sigue funcionando (para cualquier otro disparador cae en
-     * el envoltorio de siempre), avisa en desarrollo y se retira en la v52.
-     *
-     * @default false
-     */
-    disabledTrigger?: boolean;
-    /**
      * Nodo DOM donde montar el portal. Por defecto, el nodo de la superficie que
      * llegue por contexto —`SiteShell` publica el suyo, para que la capa herede
      * la talla de la superficie pública— y, si no hay ninguna, `document.body`.

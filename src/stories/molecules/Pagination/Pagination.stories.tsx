@@ -70,7 +70,7 @@ export const EtiquetasPorDefecto: Story = {
 
 /**
  * Test: la prop suelta gana al proveedor. Es la anulación puntual — el
- * `ariaLabel` de un paginador concreto no tiene por qué ser el de todos.
+ * `aria-label` de un paginador concreto no tiene por qué ser el de todos.
  */
 export const EtiquetasTraducidas: Story = {
   name: 'Test — la prop gana al proveedor',

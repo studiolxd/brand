@@ -66,8 +66,3 @@ $slxd-calendar-lg-year-height: 3rem; // Alto de la celda de año — lg
 $slxd-calendar-lg-year-font-size: 1rem; // Cuerpo de letra del año — lg
 $slxd-calendar-hover-line-width: 1px; // Grosor de la línea de hover del día, del año y del título. Nada se rellena bajo el puntero (regla de Colores): lo que se puede pulsar y es texto deja una línea de tinta debajo. Las flechas no la llevan: son un glifo, y la línea del sistema subraya texto
 $slxd-calendar-hover-line-color: #111e30; // Color de la línea de hover — tinta de la superficie
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-calendar-year-grid-min-inline-size: $slxd-calendar-year-grid-min-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-calendar-year-grid-min-width
-$slxd-calendar-sm-year-grid-min-inline-size: $slxd-calendar-sm-year-grid-min-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-calendar-sm-year-grid-min-width
-$slxd-calendar-lg-year-grid-min-inline-size: $slxd-calendar-lg-year-grid-min-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-calendar-lg-year-grid-min-width

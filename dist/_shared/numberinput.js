@@ -1,98 +1,95 @@
 import '../numberinput.css';
-import { n as e } from "./env.js";
-import { r as t } from "./brandmessagescontext.js";
-import { Icon as n } from "../icon.js";
-import { forwardRef as r, useCallback as i, useState as a } from "react";
-import { jsx as o, jsxs as s } from "react/jsx-runtime";
+import { r as e } from "./brandmessagescontext.js";
+import { Icon as t } from "../icon.js";
+import { forwardRef as n, useCallback as r, useState as i } from "react";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/messages/es/numberInput.ts
-var c = {
+var s = {
 	decrement: "Decrementar",
 	increment: "Incrementar"
-}, l = r(function({ value: r, defaultValue: l = 0, min: u, max: d, step: f = 1, decimal: p = !1, disabled: m = !1, readOnly: h = !1, size: g = "md", compact: _ = !1, commitMode: v = "change", error: y = !1, id: b, name: x, describedBy: S, ariaLabel: C, decrementLabel: w, incrementLabel: T, className: E, onChange: D, onEmpty: O, onBlur: k, onFocus: A, onKeyDown: j, ...M }, N) {
-	C !== void 0 && e("NumberInput", "ariaLabel", "`aria-label`");
-	let P = t("numberInput", c), F = r !== void 0, [I, L] = a(l), [R, z] = a(!1), [B, V] = a(null), H = F ? r : I, U = B === null ? H === null ? "" : String(H) : B, W = H ?? 0, G = i((e) => {
+}, c = n(function({ value: n, defaultValue: c = 0, min: l, max: u, step: d = 1, decimal: f = !1, disabled: p = !1, readOnly: m = !1, size: h = "md", compact: g = !1, commitMode: _ = "change", error: v = !1, id: y, name: b, describedBy: x, decrementLabel: S, incrementLabel: C, className: w, onChange: T, onEmpty: E, onBlur: D, onFocus: O, onKeyDown: k, ...A }, j) {
+	let M = e("numberInput", s), N = n !== void 0, [P, F] = i(c), [I, L] = i(!1), [R, z] = i(null), B = N ? n : P, V = R === null ? B === null ? "" : String(B) : R, H = B ?? 0, U = r((e) => {
 		let t = e;
-		return u !== void 0 && (t = Math.max(u, t)), d !== void 0 && (t = Math.min(d, t)), t;
-	}, [u, d]), K = i((e) => {
-		let t = G(e);
-		F || L(t), D?.(t);
+		return l !== void 0 && (t = Math.max(l, t)), u !== void 0 && (t = Math.min(u, t)), t;
+	}, [l, u]), W = r((e) => {
+		let t = U(e);
+		N || F(t), T?.(t);
 	}, [
-		G,
-		F,
-		D
-	]), q = () => {
-		m || h || (V(null), K(W - f));
-	}, J = () => {
-		m || h || (V(null), K(W + f));
-	}, Y = (e) => {
-		let t = p ? e.replace(",", ".") : e, n = parseFloat(t);
+		U,
+		N,
+		T
+	]), G = () => {
+		p || m || (z(null), W(H - d));
+	}, K = () => {
+		p || m || (z(null), W(H + d));
+	}, q = (e) => {
+		let t = f ? e.replace(",", ".") : e, n = parseFloat(t);
 		if (!isNaN(n)) {
-			if (v === "blur" && G(n) === H) return;
-			K(n);
-		} else if (O && e.trim() === "") {
-			if (v === "blur" && H === null) return;
-			F || L(null), O();
+			if (_ === "blur" && U(n) === B) return;
+			W(n);
+		} else if (E && e.trim() === "") {
+			if (_ === "blur" && B === null) return;
+			N || F(null), E();
 		}
-	}, X = (e) => {
+	}, J = (e) => {
 		let t = e.target.value;
-		V(t), v === "change" && Y(t);
+		z(t), _ === "change" && q(t);
+	}, Y = (e) => {
+		k?.(e), !(e.defaultPrevented || _ !== "blur" || R === null) && (e.key === "Enter" ? (q(R), z(null)) : e.key === "Escape" && (e.preventDefault(), z(null)));
+	}, X = (e) => {
+		L(!0), O?.(e);
 	}, Z = (e) => {
-		j?.(e), !(e.defaultPrevented || v !== "blur" || B === null) && (e.key === "Enter" ? (Y(B), V(null)) : e.key === "Escape" && (e.preventDefault(), V(null)));
-	}, Q = (e) => {
-		z(!0), A?.(e);
-	}, $ = (e) => {
-		z(!1), v === "blur" && B !== null && Y(B), V(null), k?.(e);
-	}, ee = [
+		L(!1), _ === "blur" && R !== null && q(R), z(null), D?.(e);
+	}, Q = [
 		"number-input",
-		_ ? "number-input--compact" : g === "md" ? "" : `number-input--${g}`,
-		y ? "number-input--error" : "",
-		m ? "number-input--disabled" : "",
-		R ? "number-input--focused" : "",
-		E ?? ""
-	].filter(Boolean).join(" "), te = m || h || H !== null && u !== void 0 && H <= u, ne = m || h || H !== null && d !== void 0 && H >= d;
-	return /* @__PURE__ */ s("div", {
-		className: ee,
+		g ? "number-input--compact" : h === "md" ? "" : `number-input--${h}`,
+		v ? "number-input--error" : "",
+		p ? "number-input--disabled" : "",
+		I ? "number-input--focused" : "",
+		w ?? ""
+	].filter(Boolean).join(" "), $ = p || m || B !== null && l !== void 0 && B <= l, ee = p || m || B !== null && u !== void 0 && B >= u;
+	return /* @__PURE__ */ o("div", {
+		className: Q,
 		children: [
-			/* @__PURE__ */ o("button", {
+			/* @__PURE__ */ a("button", {
 				className: "number-input__btn number-input__btn--decrement",
 				type: "button",
-				onClick: q,
-				disabled: te,
-				"aria-label": P("decrement", w),
+				onClick: G,
+				disabled: $,
+				"aria-label": M("decrement", S),
 				tabIndex: -1,
-				children: /* @__PURE__ */ o(n, {
+				children: /* @__PURE__ */ a(t, {
 					name: "minus",
 					size: "sm"
 				})
 			}),
-			/* @__PURE__ */ o("input", {
-				ref: N,
+			/* @__PURE__ */ a("input", {
+				ref: j,
 				className: "number-input__field",
 				type: "text",
-				inputMode: p ? "decimal" : "numeric",
-				pattern: p ? "[0-9]*[.,]?[0-9]*" : "[0-9]*",
-				"aria-invalid": y || void 0,
-				"aria-describedby": S,
-				"aria-label": C,
-				...M,
-				id: b,
-				name: x,
-				value: U,
-				disabled: m,
-				readOnly: h,
-				onChange: X,
-				onKeyDown: Z,
-				onFocus: Q,
-				onBlur: $
+				inputMode: f ? "decimal" : "numeric",
+				pattern: f ? "[0-9]*[.,]?[0-9]*" : "[0-9]*",
+				"aria-invalid": v || void 0,
+				"aria-describedby": x,
+				...A,
+				id: y,
+				name: b,
+				value: V,
+				disabled: p,
+				readOnly: m,
+				onChange: J,
+				onKeyDown: Y,
+				onFocus: X,
+				onBlur: Z
 			}),
-			/* @__PURE__ */ o("button", {
+			/* @__PURE__ */ a("button", {
 				className: "number-input__btn number-input__btn--increment",
 				type: "button",
-				onClick: J,
-				disabled: ne,
-				"aria-label": P("increment", T),
+				onClick: K,
+				disabled: ee,
+				"aria-label": M("increment", C),
 				tabIndex: -1,
-				children: /* @__PURE__ */ o(n, {
+				children: /* @__PURE__ */ a(t, {
 					name: "plus",
 					size: "sm"
 				})
@@ -101,4 +98,4 @@ var c = {
 	});
 });
 //#endregion
-export { l as t };
+export { c as t };

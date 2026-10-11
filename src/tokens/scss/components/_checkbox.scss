@@ -26,7 +26,3 @@ $slxd-checkbox-sm-size: 1rem; // Tamaño del checkbox — variante sm (16px)
 $slxd-checkbox-sm-check-size: 0.55rem; // Tamaño del checkmark interior — variante sm
 $slxd-checkbox-lg-size: 1.5rem; // Tamaño del checkbox — variante lg (24px)
 $slxd-checkbox-lg-check-size: 0.85rem; // Tamaño del checkmark interior — variante lg
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-checkbox-bg-checked: $slxd-checkbox-checked-bg; // OBSOLETO (v51, se retira en la v52): usar $slxd-checkbox-checked-bg
-$slxd-checkbox-disabled-bg-checked: $slxd-checkbox-checked-disabled-bg; // OBSOLETO (v51, se retira en la v52): usar $slxd-checkbox-checked-disabled-bg

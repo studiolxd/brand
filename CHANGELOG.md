@@ -7,17 +7,43 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## [Sin publicar]
+## [53.0.0] — 2026-10-11
 
-> **Major.** Rompe la salida SCSS: cambia el prefijo de todas sus variables.
+> **Major.** Dos cambios que rompen, y ninguno con alias: el prefijo de las variables SCSS y la retirada de los alias
+> obsoletos de la v51, que se prometieron «hasta la v52». Para migrar: (1) en SCSS, buscar y reemplazar `$lxd-` por
+> `$slxd-`; (2) quien siga usando un nombre anterior a la v51, pasarlo al nuevo con las tablas «Props» y «Tokens» de la
+> entrada [51.0.0] (o Foundations → Nombres de tokens).
 
-### Cambiado
+### Breaking
 
 - **Las variables SCSS pasan de `$lxd-` a `$slxd-`** (`$lxd-color-primary` → `$slxd-color-primary`), en los dos
-  entrypoints (`./scss` y `./scss/legacy`) y en los exports por fichero. Lo fija `prefix` en la plataforma `scss` de
-  `sd.config.mjs`; los alias obsoletos de la v51 siguen el prefijo nuevo (`$slxd-modal-width-max`). Sin alias de
-  transición: ningún consumidor usaba la salida SCSS. Las custom properties CSS, `tokens.json`/`@studiolxd/brand/tokens`
-  y los tokens nativos no llevaban prefijo y no cambian. Para migrar: buscar y reemplazar `$lxd-` por `$slxd-`.
+  entrypoints (`./scss` y `./scss/legacy`) y en los exports por fichero. Ningún consumidor usaba la salida SCSS. Las
+  custom properties CSS, `tokens.json`/`@studiolxd/brand/tokens` y los tokens nativos no llevaban prefijo y no cambian.
+- **Se retiran los 57 alias de tokens de la v51.** Desaparecen `src/tokens/deprecated-aliases.css` (y su `@import` en
+  `tokens.css`/`brand.css`), los `$slxd-<viejo>` al final de cada `.scss` y las claves viejas de `tokens.json`. Una app
+  que leyera o sobrescribiera `--modal-width-max`, `--checkbox-bg-checked`, `--tag-danger-*`, `--color-background-*`…
+  tiene que pasar al nombre nuevo. El build ya no sabe emitir alias de token (`deprecatedAliases` y el formato
+  `scss/variables-with-deprecated-aliases` se retiran del generador); la tabla de renombrados queda como registro en
+  `scripts/lib/token-renames.mjs`, y el test de convención falla si un nombre viejo vuelve.
+- **Se retiran las props, tipos y valores obsoletos de la v51**, sin aviso intermedio:
+  - `variant` de color en `Alert`, `Banner`, `Tag`, `NumberBadge`, `ProgressBar` (y los tipos `AlertVariant`,
+    `BannerVariant`, `TagVariant`, `NumberBadgeVariant`, `ProgressBarVariant`): `tone`.
+  - `Card color` (y `CardColor`): `tone`. `color` ya no se acepta tampoco como atributo HTML suelto.
+  - `variant` en `CalendarPlanner events[]` y `ProjectCard tags[]`: `tone`.
+  - El valor `danger` en `Tag`, `NumberBadge`, `StepMarker`, `Timeline` y `Steps`: `error`.
+  - `Paragraph size="small" | "default" | "large"`: `sm | md | lg`.
+  - `Logo size="xxl"` (y `SiteHeader logoSize`, y el tipo `LogoSizeDeprecated`): `2xl`.
+  - `Modal` e `ImageCropDialog` `onClose`: `onOpenChange(open)`.
+  - `ariaLabel` en `Input`, `NumberInput`, `Pagination`, `Breadcrumb`, `FilterBar`, `TableOfContents`, `Sparkline` y
+    `FileUpload`, y en `DataTable paginationLabels`: `aria-label`. (El `ariaLabel` propio de `Chart`,
+    `ConversationThread` y `DataTable` no era alias y se queda.)
+  - `linkComponent` en `Pagination`, `PrevNextNav` y `CalendarRoster`: `renderLink`.
+  - `Tooltip disabledTrigger` (y su `span.tooltip__trigger` de reserva): nada, el disparador deshabilitado del DS recibe
+    foco solo.
+- **Nativo:** fuera `BrandColorRoles.background` (es `.bg`), `TagTone.danger`, `TagVariant`, `BannerVariant`, los
+  inicializadores con `variant:` de `BrandTag`/`BrandBanner` y `ParagraphSize.small|default|large`, en SwiftUI y en
+  Compose. Las fichas de paridad de `Tag`, `Banner` y `Paragraph` dejan de declarar obsoletos. `brandTextStyle` se
+  queda: no es un renombrado (su sustituto cambia el interlineado) y no tiene fecha de retirada.
 
 ## [52.1.0] — 2026-10-10
 

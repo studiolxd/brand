@@ -9,7 +9,6 @@ import { Modal } from '../Modal/Modal';
 import { cropImageToBlob, initialCrop } from './crop';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { imageCropDialogEs } from '../../messages/es/imageCropDialog';
-import { warnDeprecated } from '../../constants/env';
 // El recortador es inservible sin su propia hoja (marco de selección y
 // tiradores). El DS la carga aquí para que ningún consumidor tenga que
 // acordarse — misma regla que el CSS BEM de cualquier otro componente.
@@ -77,11 +76,6 @@ export interface ImageCropDialogProps {
    */
   onOpenChange?: (open: boolean) => void;
   /**
-   * @deprecated Usa `onOpenChange`. Sigue funcionando y avisa en desarrollo;
-   * se retira en la v52.
-   */
-  onClose?: () => void;
-  /**
    * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
    * **Va al panel (su contenido, dentro del diálogo); el disparador, si lo hay, es tuyo y ya lleva tus clases**
    * (regla de `className` en componentes con portal, CLAUDE.md § Base UI).
@@ -112,10 +106,8 @@ export function ImageCropDialog({
   errorMessage,
   onConfirm,
   onOpenChange,
-  onClose,
   className,
 }: ImageCropDialogProps) {
-  if (onClose !== undefined) warnDeprecated('ImageCropDialog', 'onClose', '`onOpenChange`');
   const t = useBrandMessages('imageCropDialog', imageCropDialogEs);
   const imgRef = useRef<HTMLImageElement>(null);
   const [crop, setCrop] = useState<Crop>();
@@ -138,7 +130,6 @@ export function ImageCropDialog({
     setCrop(undefined);
     setCompletedCrop(undefined);
     onOpenChange?.(false);
-    onClose?.();
   };
 
   const handleConfirm = async () => {

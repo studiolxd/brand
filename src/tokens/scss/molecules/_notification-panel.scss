@@ -29,7 +29,3 @@ $slxd-notification-panel-footer-gap: 0.5rem; // Aire entre los enlaces del pie
 $slxd-notification-panel-footer-font-size: 0.875rem; // Tamaño de los enlaces del pie: letra menor
 $slxd-notification-panel-focus-ring-width: 2px; // Grosor del anillo de foco de una fila
 $slxd-notification-panel-focus-ring-color: #111e30; // Color del anillo de foco de una fila
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-notification-panel-inline-size: $slxd-notification-panel-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-notification-panel-width
-$slxd-notification-panel-list-max-block-size: $slxd-notification-panel-list-max-height; // OBSOLETO (v51, se retira en la v52): usar $slxd-notification-panel-list-max-height

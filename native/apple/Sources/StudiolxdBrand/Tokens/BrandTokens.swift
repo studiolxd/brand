@@ -138,9 +138,6 @@ public enum BrandColorRoles {
     public static let chartDivergingCool2 = Color(brandLight: Color(brandHex: 0x3484EE), dark: Color(brandHex: 0x488FEF))
     /// Rol claro/oscuro. Tokens `color.chart.diverging-cool-3` / `color.chart.diverging-cool-3-on-dark`.
     public static let chartDivergingCool3 = Color(brandLight: Color(brandHex: 0x1F61B6), dark: Color(brandHex: 0x80B0F3))
-    /// Obsoleto: usar `bg`. Renombrado en la v51 (D9); el nombre viejo se retira en la v52.
-    @available(*, deprecated, renamed: "bg")
-    public static var background: Color { bg }
     /// Todos los roles por nombre, por ejemplo para pintar una paleta de muestra.
     public static let all: [(name: String, color: Color)] = [
         ("errorText", errorText),

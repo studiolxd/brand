@@ -6,12 +6,9 @@ import { Heading, type HeadingLevel, type HeadingSize } from '../../atoms/Headin
 import { Paragraph, type ParagraphProps } from '../../atoms/Paragraph/Paragraph';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { assignRef } from '../../constants/assign-ref';
-import { warnDeprecated } from '../../constants/env';
 
 /** Color de fondo de la tarjeta. */
 export type CardTone = 'primary' | 'outline' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
-/** @deprecated Usa `CardTone`: la prop de color se llama `tone` desde la v51. Se retira en la v52. */
-export type CardColor = CardTone;
 
 /**
  * Maqueta de la tarjeta. `default` es la de siempre: una columna de texto.
@@ -29,7 +26,7 @@ export interface CardMedia {
   alt: string;
 }
 
-export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
+export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title' | 'color'> {
   /**
    * URL de destino. **Con `href`** el Card es una *link-card*: todo el bloque es un
    * `<a>` (título + descripción + `children` + flecha). **Sin `href`** es una
@@ -78,11 +75,6 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
   ctaLabel?: string;
   /** Color de fondo. Default: `'outline'`. */
   tone?: CardTone;
-  /**
-   * @deprecated Usa `tone`. Sigue funcionando, con un aviso en desarrollo,
-   * hasta la v52.
-   */
-  color?: CardTone;
   /** Maqueta de la tarjeta. Default: `'default'`. */
   variant?: CardVariant;
   /**
@@ -140,8 +132,7 @@ export const Card = forwardRef<HTMLElement, CardProps>(function Card({
   title,
   description,
   ctaLabel,
-  tone: toneProp,
-  color,
+  tone = 'outline',
   variant = 'default',
   media,
   linkOverlay = false,
@@ -151,8 +142,6 @@ export const Card = forwardRef<HTMLElement, CardProps>(function Card({
   children,
   ...rest
 }, ref) {
-  if (color !== undefined) warnDeprecated('Card', 'color', '`tone`');
-  const tone = toneProp ?? color ?? 'outline';
   const classes = [
     'card',
     `card--${tone}`,

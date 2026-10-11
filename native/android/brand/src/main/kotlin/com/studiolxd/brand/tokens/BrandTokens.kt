@@ -155,10 +155,6 @@ class BrandColorRoles(
     /** Rol claro/oscuro. Tokens `color.chart.diverging-cool-3` / `color.chart.diverging-cool-3-on-dark`. */
     val chartDivergingCool3: Color,
 ) {
-    /** Obsoleto: usar [bg]. Renombrado en la v51 (D9); el nombre viejo se retira en la v52. */
-    @Deprecated("Usar bg. Renombrado en la v51 (D9); el nombre viejo se retira en la v52.", ReplaceWith("bg"))
-    val background: Color get() = bg
-
     companion object {
         /** Valores para superficie clara (`-on-light`). */
         val light = BrandColorRoles(

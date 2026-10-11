@@ -3,7 +3,6 @@ import './Breadcrumb.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { breadcrumbEs } from '../../messages/es/breadcrumb';
 import { defaultRenderLink } from '../../constants/default-render-link';
-import { warnDeprecated } from '../../constants/env';
 
 export type BreadcrumbItem = {
   label: string;
@@ -25,8 +24,6 @@ export interface BreadcrumbProps {
    * `breadcrumb.label` del `BrandMessagesProvider`.
    */
   'aria-label'?: string;
-  /** @deprecated Usa `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
-  ariaLabel?: string;
   className?: string;
 }
 
@@ -43,12 +40,9 @@ export function Breadcrumb({
   items,
   renderLink = defaultRenderLink,
   separator = '/',
-  'aria-label': ariaLabelProp,
-  ariaLabel: ariaLabelDeprecated,
+  'aria-label': ariaLabel,
   className,
 }: BreadcrumbProps) {
-  if (ariaLabelDeprecated !== undefined) warnDeprecated('Breadcrumb', 'ariaLabel', '`aria-label`');
-  const ariaLabel = ariaLabelProp ?? ariaLabelDeprecated;
   const t = useBrandMessages('breadcrumb', breadcrumbEs);
   return (
     <nav

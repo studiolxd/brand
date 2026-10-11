@@ -23,6 +23,3 @@ $slxd-slider-transition-easing: ease; // Easing de la transición del pulgar
 $slxd-slider-focus-ring-width: 2px; // Grosor del anillo de foco
 $slxd-slider-focus-ring-offset: 0.25rem; // Separación del anillo de foco
 $slxd-slider-focus-ring-color: #111e30; // Color del anillo de foco
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-slider-control-block-size: $slxd-slider-control-height; // OBSOLETO (v51, se retira en la v52): usar $slxd-slider-control-height

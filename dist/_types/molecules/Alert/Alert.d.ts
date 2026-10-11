@@ -11,16 +11,9 @@ export interface AlertMessages {
 }
 /** Intención del aviso: decide el relleno y el rol ARIA. */
 export type AlertTone = 'default' | 'success' | 'error' | 'warning';
-/** @deprecated Usa `AlertTone`: la prop de color se llama `tone` desde la v51. Se retira en la v52. */
-export type AlertVariant = AlertTone;
 export interface AlertProps extends React.ComponentPropsWithoutRef<'div'> {
     /** Intención del aviso. Default `'default'` (relleno prusia). */
     tone?: AlertTone;
-    /**
-     * @deprecated Usa `tone`. Sigue funcionando, con un aviso en desarrollo,
-     * hasta la v52.
-     */
-    variant?: AlertTone;
     /** Título del alert. **Opcional**: en modo composición usa `children` (p. ej. `<Alert.Title>`). */
     title?: string;
     description?: React.ReactNode;

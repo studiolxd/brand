@@ -2,19 +2,14 @@
  * D9 — Tokens renombrados en la v51 por la convención de nombres
  * `<componente>-<parte>-<estado>-<propiedad>-<talla>`.
  *
- * Esta tabla NO es la fuente de los alias: cada token nuevo lleva sus nombres
- * antiguos en `$extensions["com.studiolxd"].deprecatedAliases`, y de ahí los
- * emite el build (`sd.config.mjs`). La tabla sirve de registro para la guía de
- * migración y para el test de convención (`scripts/token-naming.test.ts`), que
- * comprueba que cada renombrado conserva su alias y que ningún nombre viejo
- * sigue existiendo como token. Se retira, con los alias, en la v52.
+ * Los nombres viejos tuvieron alias obsoletos hasta la v52; se retiraron en la
+ * v53. La tabla queda como registro para la guía de migración (Foundations →
+ * Nombres de tokens) y para el test de convención
+ * (`scripts/token-naming.test.ts`), que comprueba que ningún nombre viejo
+ * vuelve a existir.
  *
- * Los pares oscuros siguen solos: `surface-dark-<viejo>` pasa a
- * `surface-dark-<nuevo>` y no necesita alias propio, porque se publica con el
- * nombre de su par claro.
- *
- * En nativo solo llevan alias los colores GLOBALES (`color.*`), que una app
- * nativa puede usar por su nombre; los de componente se renombran sin más.
+ * Los pares oscuros siguen solos: `surface-dark-<viejo>` pasó a
+ * `surface-dark-<nuevo>`, que se publica con el nombre de su par claro.
  */
 export const TOKEN_RENAMES_V51 = {
   // El estado va ANTES de la propiedad.

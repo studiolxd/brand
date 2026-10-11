@@ -157,7 +157,7 @@ export const Contrato: Story = {
   },
 };
 
-/** Test: sin `variant` el tag es `neutral`. */
+/** Test: sin `tone` el tag es `neutral`. */
 export const ContratoPorDefecto: Story = {
   name: 'Test — variante por defecto',
   tags: ['!dev'],

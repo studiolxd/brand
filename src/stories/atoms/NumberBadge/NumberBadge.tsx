@@ -1,4 +1,3 @@
-import { warnDeprecated } from '../../constants/env';
 import './NumberBadge.css';
 
 /** Color del contador: los de marca, los de feedback y `neutral`. */
@@ -12,21 +11,10 @@ export type NumberBadgeTone =
   | 'success'
   | 'neutral';
 
-/**
- * @deprecated Usa `NumberBadgeTone`. La prop de color se llama `tone` desde la
- * v51 y `danger` es `error`. Se retira en la v52.
- */
-export type NumberBadgeVariant = NumberBadgeTone | 'danger';
-
 export interface NumberBadgeProps {
   count: number;
   /** Color del contador. Default `'primary'`. */
   tone?: NumberBadgeTone;
-  /**
-   * @deprecated Usa `tone`. `variant="danger"` es `tone="error"`. Sigue
-   * funcionando, con un aviso en desarrollo, hasta la v52.
-   */
-  variant?: NumberBadgeVariant;
   /** Límite a partir del cual se muestra «99+». Por defecto 99. */
   max?: number;
   /** Texto accesible completo (ej. «12 notificaciones sin leer»). */
@@ -43,19 +31,12 @@ export interface NumberBadgeProps {
 
 export function NumberBadge({
   count,
-  tone: toneProp,
-  variant,
+  tone = 'primary',
   max = 99,
   'aria-label': ariaLabel,
   'aria-hidden': ariaHidden,
   className,
 }: NumberBadgeProps) {
-  if (variant !== undefined) warnDeprecated('NumberBadge', 'variant', '`tone`');
-  let tone = toneProp ?? variant ?? 'primary';
-  if (tone === 'danger') {
-    warnDeprecated('NumberBadge', 'variant="danger"', '`tone="error"`');
-    tone = 'error';
-  }
   const label = count > max ? `${max}+` : String(count);
   const hidden = ariaHidden === true || ariaHidden === 'true';
   return (

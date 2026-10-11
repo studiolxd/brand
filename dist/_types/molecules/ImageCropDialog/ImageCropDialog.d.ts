@@ -61,11 +61,6 @@ export interface ImageCropDialogProps {
      */
     onOpenChange?: (open: boolean) => void;
     /**
-     * @deprecated Usa `onOpenChange`. Sigue funcionando y avisa en desarrollo;
-     * se retira en la v52.
-     */
-    onClose?: () => void;
-    /**
      * Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye).
      * **Va al panel (su contenido, dentro del diálogo); el disparador, si lo hay, es tuyo y ya lleva tus clases**
      * (regla de `className` en componentes con portal, CLAUDE.md § Base UI).
@@ -79,4 +74,4 @@ export interface ImageCropDialogProps {
  * `react-image-crop` aporta el gesto de selección; el DS pone el diálogo, las
  * acciones y el volcado a lienzo (`cropImageToBlob`).
  */
-export declare function ImageCropDialog({ sourceUrl, title, description, circularCrop, aspect, outputSize, outputMimeType, busy, cancelLabel, confirmLabel, closeLabel, loadingLabel, errorMessage, onConfirm, onOpenChange, onClose, className, }: ImageCropDialogProps): import("react/jsx-runtime").JSX.Element;
+export declare function ImageCropDialog({ sourceUrl, title, description, circularCrop, aspect, outputSize, outputMimeType, busy, cancelLabel, confirmLabel, closeLabel, loadingLabel, errorMessage, onConfirm, onOpenChange, className, }: ImageCropDialogProps): import("react/jsx-runtime").JSX.Element;

@@ -1,37 +1,35 @@
 'use client';
 import './breadcrumb.css';
-import { n as e } from "./_shared/env.js";
-import { r as t } from "./_shared/brandmessagescontext.js";
-import { t as n } from "./_shared/default-render-link.js";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { r as e } from "./_shared/brandmessagescontext.js";
+import { t } from "./_shared/default-render-link.js";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/messages/es/breadcrumb.ts
-var a = { label: "Migas de pan" };
+var i = { label: "Migas de pan" };
 //#endregion
 //#region src/stories/molecules/Breadcrumb/Breadcrumb.tsx
-function o({ items: o, renderLink: s = n, separator: c = "/", "aria-label": l, ariaLabel: u, className: d }) {
-	u !== void 0 && e("Breadcrumb", "ariaLabel", "`aria-label`");
-	let f = l ?? u, p = t("breadcrumb", a);
-	return /* @__PURE__ */ r("nav", {
-		"aria-label": p("label", f),
-		className: ["breadcrumb", d].filter(Boolean).join(" "),
-		children: /* @__PURE__ */ r("ol", {
+function a({ items: a, renderLink: o = t, separator: s = "/", "aria-label": c, className: l }) {
+	let u = e("breadcrumb", i);
+	return /* @__PURE__ */ n("nav", {
+		"aria-label": u("label", c),
+		className: ["breadcrumb", l].filter(Boolean).join(" "),
+		children: /* @__PURE__ */ n("ol", {
 			className: "breadcrumb__list",
-			children: o.map((e, t) => {
-				let n = t === o.length - 1;
-				return /* @__PURE__ */ i("li", {
-					className: ["breadcrumb__item", n ? "breadcrumb__item--current" : ""].filter(Boolean).join(" "),
-					children: [n || !e.href ? /* @__PURE__ */ r("span", {
-						className: n ? "breadcrumb__current" : "breadcrumb__static",
-						...n ? { "aria-current": "page" } : {},
+			children: a.map((e, t) => {
+				let i = t === a.length - 1;
+				return /* @__PURE__ */ r("li", {
+					className: ["breadcrumb__item", i ? "breadcrumb__item--current" : ""].filter(Boolean).join(" "),
+					children: [i || !e.href ? /* @__PURE__ */ n("span", {
+						className: i ? "breadcrumb__current" : "breadcrumb__static",
+						...i ? { "aria-current": "page" } : {},
 						children: e.label
-					}) : s({
+					}) : o({
 						href: e.href,
 						children: e.label,
 						className: "breadcrumb__link"
-					}), !n && /* @__PURE__ */ r("span", {
+					}), !i && /* @__PURE__ */ n("span", {
 						className: "breadcrumb__separator",
 						"aria-hidden": "true",
-						children: c
+						children: s
 					})]
 				}, `${e.label}-${t}`);
 			})
@@ -39,4 +37,4 @@ function o({ items: o, renderLink: s = n, separator: c = "/", "aria-label": l, a
 	});
 }
 //#endregion
-export { o as Breadcrumb };
+export { a as Breadcrumb };

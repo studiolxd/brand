@@ -4,7 +4,6 @@ import { Link } from '../../atoms/Link/Link';
 import './TableOfContents.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { tableOfContentsEs } from '../../messages/es/tableOfContents';
-import { warnDeprecated } from '../../constants/env';
 
 export interface TableOfContentsItem {
   /** `id` del encabezado al que apunta la entrada. El enlace será `#id`. */
@@ -28,8 +27,6 @@ export interface TableOfContentsProps extends Omit<React.ComponentPropsWithoutRe
    * `tableOfContents.label` del `BrandMessagesProvider`.
    */
   'aria-label'?: string;
-  /** @deprecated Usa `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
-  ariaLabel?: string;
   /** Rótulo visible sobre la lista. Sin él, no se pinta ninguno. */
   title?: string;
   /**
@@ -74,16 +71,13 @@ export interface TableOfContentsMessages {
 export const TableOfContents = forwardRef<HTMLElement, TableOfContentsProps>(function TableOfContents({
   items,
   activeId,
-  'aria-label': ariaLabelProp,
-  ariaLabel: ariaLabelDeprecated,
+  'aria-label': ariaLabel,
   title,
   sticky = false,
   onItemClick,
   className,
   ...rest
 }, ref): ReactNode {
-  if (ariaLabelDeprecated !== undefined) warnDeprecated('TableOfContents', 'ariaLabel', '`aria-label`');
-  const ariaLabel = ariaLabelProp ?? ariaLabelDeprecated;
   const t = useBrandMessages('tableOfContents', tableOfContentsEs);
   if (items.length === 0) return null;
 

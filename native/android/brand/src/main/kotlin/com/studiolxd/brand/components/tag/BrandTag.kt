@@ -28,18 +28,7 @@ enum class TagTone(val value: String) {
     Warning("warning"),
     Success("success"),
     Error("error"),
-    ;
-
-    companion object {
-        /** `danger` es `error` desde la v51 (el vocabulario de estado del sistema). Se retira en la v52. */
-        @Deprecated("`danger` es `error` desde la v51. Se retira en la v52.", ReplaceWith("TagTone.Error"))
-        val Danger: TagTone get() = Error
-    }
 }
-
-/** El nombre de [TagTone] hasta la v50. Se retira en la v52. */
-@Deprecated("La prop de color se llama `tone` desde la v51. Se retira en la v52.", ReplaceWith("TagTone"))
-typealias TagVariant = TagTone
 
 @Composable
 private fun TagTone.background(): Color = when (this) {
@@ -114,13 +103,3 @@ fun BrandTag(
         }
     }
 }
-
-/** `variant` es `tone` desde la v51. Se retira en la v52. */
-@Deprecated("`variant` es `tone` desde la v51. Se retira en la v52.", ReplaceWith("BrandTag(text, modifier, tone = variant)"))
-@Composable
-fun BrandTag(text: String, variant: TagTone, modifier: Modifier = Modifier) = BrandTag(text, modifier, variant)
-
-/** `variant` es `tone` desde la v51. Se retira en la v52. */
-@Deprecated("`variant` es `tone` desde la v51. Se retira en la v52.", ReplaceWith("BrandTag(modifier, tone = variant, content = content)"))
-@Composable
-fun BrandTag(variant: TagTone, modifier: Modifier = Modifier, content: @Composable () -> Unit) = BrandTag(modifier, variant, content)

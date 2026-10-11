@@ -8,8 +8,6 @@ export interface InputProps extends Omit<React.ComponentPropsWithoutRef<'input'>
     className?: string;
     /** @deprecated Usa el atributo nativo `aria-describedby`. */
     describedBy?: string;
-    /** @deprecated Usa el atributo nativo `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
-    ariaLabel?: string;
 }
 /**
  * Input de texto. Extiende los atributos nativos de `<input>` y reenvía `{...rest}`

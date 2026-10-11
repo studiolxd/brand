@@ -10,8 +10,6 @@ export interface BannerMessages {
 }
 /** Intención de la barra: decide el relleno y el rol ARIA. */
 export type BannerTone = 'info' | 'warning' | 'error';
-/** @deprecated Usa `BannerTone`: la prop de color se llama `tone` desde la v51. Se retira en la v52. */
-export type BannerVariant = BannerTone;
 export interface BannerProps extends React.ComponentPropsWithoutRef<'div'> {
     /**
      * Intención de la barra. Default `'info'` (relleno prusia); `'warning'` es el
@@ -19,11 +17,6 @@ export interface BannerProps extends React.ComponentPropsWithoutRef<'div'> {
      * antes que nada.
      */
     tone?: BannerTone;
-    /**
-     * @deprecated Usa `tone`. Sigue funcionando, con un aviso en desarrollo,
-     * hasta la v52.
-     */
-    variant?: BannerTone;
     /** El mensaje. Texto corriente: una frase, no un bloque. */
     children?: React.ReactNode;
     /** Ranura para las acciones — normalmente un `Button` del sistema. */

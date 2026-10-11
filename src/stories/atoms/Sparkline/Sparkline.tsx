@@ -1,6 +1,5 @@
 import { forwardRef } from 'react';
 import './Sparkline.css';
-import { warnDeprecated } from '../../constants/env';
 
 /** Las ocho ranuras categóricas del sistema — `chart-series-1`…`8`. */
 export type SparklineSeries = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
@@ -30,8 +29,6 @@ export interface SparklineProps extends Omit<React.ComponentPropsWithoutRef<'svg
    * variación ya dicen lo que la chispa enseña—.
    */
   'aria-label'?: string;
-  /** @deprecated Usa `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
-  ariaLabel?: string;
   /** Se añade DESPUÉS de las clases propias. */
   className?: string;
 }
@@ -60,13 +57,10 @@ export const Sparkline = forwardRef<SVGSVGElement, SparklineProps>(function Spar
   marker = true,
   baseline = true,
   series,
-  'aria-label': ariaLabelProp,
-  ariaLabel: ariaLabelDeprecated,
+  'aria-label': ariaLabel,
   className,
   ...rest
 }, ref) {
-  if (ariaLabelDeprecated !== undefined) warnDeprecated('Sparkline', 'ariaLabel', '`aria-label`');
-  const ariaLabel = ariaLabelProp ?? ariaLabelDeprecated;
   const classes = ['sparkline', `sparkline--${type}`, className].filter(Boolean).join(' ');
   const clean = values.filter((v) => Number.isFinite(v));
   const pad = GEOMETRY.markerSize / 2;

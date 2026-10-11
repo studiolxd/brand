@@ -28,7 +28,3 @@ $slxd-sheet-close-focus-ring-offset: 2px; // Separación del anillo de foco
 $slxd-sheet-close-focus-ring-color: #111e30; // Color del anillo de foco
 $slxd-sheet-transition-duration: 250ms; // Duración de la animación de entrada/salida
 $slxd-sheet-transition-easing: ease-in-out; // Easing de la animación
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-sheet-inline-size: $slxd-sheet-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-sheet-width
-$slxd-sheet-block-size: $slxd-sheet-height; // OBSOLETO (v51, se retira en la v52): usar $slxd-sheet-height

@@ -9,7 +9,7 @@
     "padding-inline":             { "$value": "0",                           "$type": "dimension", "$description": "Sin padding lateral" },
     "separator-color":            { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Color del separador" },
     "link-color":                 { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Color del link navegable" },
-    "link-hover-color":           { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del link en hover", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["breadcrumb.link-color-hover"] } } },
+    "link-hover-color":           { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del link en hover" },
     "current-color":              { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Color del item activo (página actual)" },
     "current-font-weight":        { "$value": "{font-weight.emphasis}",        "$type": "number",    "$description": "Peso del item activo" },
     "focus-ring-color":           { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del focus ring" },

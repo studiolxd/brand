@@ -4,11 +4,6 @@ import './StepMarker.css';
 export type StepMarkerState = 'done' | 'current' | 'pending' | 'neutral';
 /** Color del relleno. Los mismos tonos que `NumberBadgeTone`, mapeados 1:1. */
 export type StepMarkerTone = 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2' | 'error' | 'success' | 'neutral';
-/**
- * @deprecated `danger` es `error` desde la v51 (el vocabulario de estado del
- * sistema). Sigue funcionando, con un aviso en desarrollo, hasta la v52.
- */
-export type StepMarkerToneDeprecated = 'danger';
 export type StepMarkerSize = 'sm' | 'md';
 export interface StepMarkerProps {
     /**
@@ -19,7 +14,7 @@ export interface StepMarkerProps {
      */
     state?: StepMarkerState;
     /** Color del relleno en los estados rellenos (`done`, `current`, `neutral`). Sin efecto en `pending`. Default `primary`. */
-    tone?: StepMarkerTone | StepMarkerToneDeprecated;
+    tone?: StepMarkerTone;
     /** Talla de la marca. Default `md` (32px, la de `Stepper`). */
     size?: StepMarkerSize;
     /** La cifra del paso. Se ignora si hay `icon` o si `state` es `done`. */
@@ -37,4 +32,4 @@ export interface StepMarkerProps {
  * Es puramente decorativa: `aria-hidden` siempre, porque la numeración
  * semántica la da el `<ol>` que la contiene, no la cifra pintada dentro.
  */
-export declare function StepMarker({ state, tone: toneProp, size, count, icon, className }: StepMarkerProps): import("react/jsx-runtime").JSX.Element;
+export declare function StepMarker({ state, tone, size, count, icon, className }: StepMarkerProps): import("react/jsx-runtime").JSX.Element;

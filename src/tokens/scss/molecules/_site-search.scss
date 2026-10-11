@@ -37,9 +37,3 @@ $slxd-site-search-ghost-section-width: 30%; // Ancho de la barra fantasma del ra
 $slxd-site-search-ghost-title-width: 70%; // Ancho de la barra fantasma del título
 $slxd-site-search-ghost-url-width: 45%; // Ancho de la barra fantasma de la dirección
 $slxd-site-search-skeleton-gap: 0.5rem; // Aire entre las barras de un resultado fantasma
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-site-search-inline-size: $slxd-site-search-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-site-search-width
-$slxd-site-search-ghost-section-inline-size: $slxd-site-search-ghost-section-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-site-search-ghost-section-width
-$slxd-site-search-ghost-title-inline-size: $slxd-site-search-ghost-title-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-site-search-ghost-title-width
-$slxd-site-search-ghost-url-inline-size: $slxd-site-search-ghost-url-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-site-search-ghost-url-width

@@ -100,7 +100,3 @@ $slxd-color-red: #b30000; // System red — base (AAA sobre blanco; fill univers
 $slxd-color-red-light: #ff8585; // System red light — SOLO texto/icono/borde sobre prussian, nunca como fondo
 $slxd-color-green: #006616; // System green — base (AAA sobre blanco; fill universal de success)
 $slxd-color-green-light: #00cc2c; // System green light — SOLO texto/icono/borde sobre prussian, nunca como fondo
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-color-background-light: $slxd-color-bg-light; // OBSOLETO (v51, se retira en la v52): usar $slxd-color-bg-light
-$slxd-color-background-dark: $slxd-color-bg-dark; // OBSOLETO (v51, se retira en la v52): usar $slxd-color-bg-dark

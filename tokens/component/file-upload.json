@@ -48,7 +48,7 @@
     "thumb-icon-color":            { "$value": "{color.icon.secondary-on-light}",   "$type": "color",     "$description": "Color del icono de archivo genérico" },
 
     "remove-color":                { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Color del botón eliminar" },
-    "remove-hover-color":          { "$value": "{color.error-text-on-light}",      "$type": "color",     "$description": "Color del botón eliminar al hacer hover", "$extensions": { "com.studiolxd": { "deprecatedAliases": ["file-upload.remove-color-hover"] } } },
+    "remove-hover-color":          { "$value": "{color.error-text-on-light}",      "$type": "color",     "$description": "Color del botón eliminar al hacer hover" },
 
     "progress-margin-block-start": { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Margen superior de la barra de progreso" },
     "surface-dark-border-color":                 { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Borde del dropzone — surface-dark: la tinta de la superficie" },

@@ -18,7 +18,6 @@ const meta: Meta<typeof CalendarRoster> = {
     onMonthChange:  { control: false },
     hrefBuilder:    { control: false },
     renderLink:     { control: false },
-    linkComponent:  { table: { disable: true } },
     renderCell:     { control: false },
     legendItems:    { control: false },
     nameLabel:      { control: { type: 'text' } },

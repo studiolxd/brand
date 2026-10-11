@@ -298,7 +298,7 @@ export const ContratoControlesLg: Story = {
       </div>
       <div data-testid="fuera-lg">
         <FilterBar
-          ariaLabel="Filtros fuera del shell (lg)"
+          aria-label="Filtros fuera del shell (lg)"
           search={<InputField id="fuera-lg-buscar" size="lg" kind="search" label="Buscar" labelHidden />}
           actions={<Button size="lg" variant="outline">Limpiar filtros</Button>}
         >

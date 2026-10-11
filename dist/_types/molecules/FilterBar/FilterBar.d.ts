@@ -34,8 +34,6 @@ export interface FilterBarProps extends Omit<ComponentPropsWithoutRef<'div'>, 'c
      * **Sin default**: sale de `filterBar.label` del `BrandMessagesProvider`.
      */
     'aria-label'?: string;
-    /** @deprecated Usa `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
-    ariaLabel?: string;
     /** Se añade DESPUÉS de las clases propias. */
     className?: string;
 }
@@ -53,4 +51,4 @@ export interface FilterBarProps extends Omit<ComponentPropsWithoutRef<'div'>, 'c
  *
  * `{...rest}` (`id`, `data-*`, `aria-*`…) va al `<div>`.
  */
-export declare function FilterBar({ search, children, actions, 'aria-label': ariaLabelProp, ariaLabel: ariaLabelDeprecated, className, ...rest }: FilterBarProps): import("react/jsx-runtime").JSX.Element;
+export declare function FilterBar({ search, children, actions, 'aria-label': ariaLabel, className, ...rest }: FilterBarProps): import("react/jsx-runtime").JSX.Element;

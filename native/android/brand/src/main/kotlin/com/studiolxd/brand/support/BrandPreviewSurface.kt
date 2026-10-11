@@ -16,6 +16,6 @@ import com.studiolxd.brand.tokens.BrandSpacing
 @Composable
 internal fun BrandPreviewSurface(dark: Boolean, content: @Composable () -> Unit) {
     BrandTheme(darkTheme = dark) {
-        Box(Modifier.fillMaxSize().background(BrandTheme.colors.background).padding(BrandSpacing.s4)) { content() }
+        Box(Modifier.fillMaxSize().background(BrandTheme.colors.bg).padding(BrandSpacing.s4)) { content() }
     }
 }

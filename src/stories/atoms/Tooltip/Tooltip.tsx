@@ -7,7 +7,6 @@ import './Tooltip.css';
 import { usePortalContainer } from '../../constants/portal-container';
 import { sideOffsetFromToken } from '../../constants/side-offset';
 import { supportsFocusableWhenDisabled } from '../../constants/focusable-when-disabled';
-import { warnDeprecated } from '../../constants/env';
 
 export interface TooltipProviderProps {
   children: ReactNode;
@@ -75,17 +74,6 @@ export interface TooltipProps
    */
   describe?: boolean;
   /**
-   * @deprecated Ya no hace falta: con un disparador deshabilitado (`Button`,
-   * `CloseButton`, `DotsButton`, `CopyButton`, `Toggle` o un `<button>`
-   * nativo con `disabled`) el `Tooltip` le pide `focusableWhenDisabled` y el
-   * control, sin `disabled` nativo, recibe foco y puntero y se anuncia con
-   * `aria-disabled`. Sigue funcionando (para cualquier otro disparador cae en
-   * el envoltorio de siempre), avisa en desarrollo y se retira en la v52.
-   *
-   * @default false
-   */
-  disabledTrigger?: boolean;
-  /**
    * Nodo DOM donde montar el portal. Por defecto, el nodo de la superficie que
    * llegue por contexto —`SiteShell` publica el suyo, para que la capa herede
    * la talla de la superficie pública— y, si no hay ninguna, `document.body`.
@@ -125,20 +113,14 @@ export const Tooltip = forwardRef<HTMLElement, TooltipProps>(function Tooltip({
   onOpenChange,
   delayDuration,
   describe = true,
-  disabledTrigger = false,
   container,
   className,
   ...rest
 }, ref) {
   const portalContainer = usePortalContainer(container);
   const popupId = useId();
-  const generatedTriggerId = useId();
-  // Un `id` del consumidor llega al envoltorio por `rest` y pisaría el
-  // generado: el `aria-labelledby` tiene que apuntar al que quede.
-  const triggerId = rest.id ?? generatedTriggerId;
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen ?? false);
   const isOpen = open ?? uncontrolledOpen;
-  if (disabledTrigger) warnDeprecated('Tooltip', 'disabledTrigger', 'nada: el disparador deshabilitado ya recibe foco solo');
 
   // Un control deshabilitado no recibe foco ni eventos de puntero, y quien no
   // puede pulsar es justo quien necesita leer el porqué. Si el disparador lo
@@ -146,9 +128,8 @@ export const Tooltip = forwardRef<HTMLElement, TooltipProps>(function Tooltip({
   // envoltorio, el foco, el `aria-describedby` y el estado van en el propio
   // control.
   const child = isValidElement<Record<string, unknown>>(children) ? children : null;
-  const childDisabled = Boolean(child?.props.disabled) || disabledTrigger;
-  let trigger: React.ReactElement<Record<string, unknown>> | null = null;
-  if (child && childDisabled && supportsFocusableWhenDisabled(child.type)) {
+  let trigger: React.ReactElement<Record<string, unknown>>;
+  if (child && child.props.disabled && supportsFocusableWhenDisabled(child.type)) {
     trigger = cloneElement(child, { focusableWhenDisabled: true });
   } else if (child && child.props.disabled && typeof child.type === 'string') {
     // Un `<button disabled>` nativo: la misma receta, a mano.
@@ -160,7 +141,7 @@ export const Tooltip = forwardRef<HTMLElement, TooltipProps>(function Tooltip({
         event.stopPropagation();
       },
     });
-  } else if (!disabledTrigger) {
+  } else {
     trigger = children as React.ReactElement<Record<string, unknown>>;
   }
 
@@ -175,31 +156,7 @@ export const Tooltip = forwardRef<HTMLElement, TooltipProps>(function Tooltip({
     >
       <BaseTooltip.Trigger
         ref={ref as React.Ref<HTMLButtonElement>}
-        render={
-          trigger ?? (
-            /* Solo el alias obsoleto `disabledTrigger` con un disparador que
-               no entiende `focusableWhenDisabled` llega aquí (se retira en la
-               v52). El envoltorio recibe el foco, así que tiene que decir qué es:
-               `role="group"` (vale para cualquier control apagado, no solo un
-               botón), el nombre del control que envuelve —`aria-labelledby`
-               a sí mismo calcula el nombre desde su contenido, y con él el
-               `aria-label` de un botón de solo icono— y su estado,
-               `aria-disabled`. Un `aria-label`/`aria-labelledby` del
-               consumidor (llega por `rest`) gana. */
-            <span
-              id={triggerId}
-              className="tooltip__trigger"
-              tabIndex={0}
-              role="group"
-              aria-disabled
-              {...(rest['aria-label'] === undefined && rest['aria-labelledby'] === undefined
-                ? { 'aria-labelledby': triggerId }
-                : {})}
-            >
-              {children}
-            </span>
-          )
-        }
+        render={trigger}
         aria-describedby={isOpen && describe ? popupId : undefined}
         {...(delayDuration !== undefined ? { delay: delayDuration } : {})}
         {...rest}

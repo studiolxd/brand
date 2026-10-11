@@ -1,12 +1,11 @@
-import { Fragment, type AnchorHTMLAttributes, type ComponentType, type ReactNode } from 'react';
+import { Fragment, type AnchorHTMLAttributes, type ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Select } from '../../atoms/Select/Select';
 import type { SelectOption } from '../../atoms/Select/Select';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { paginationEs } from '../../messages/es/pagination';
 import './Pagination.css';
-import { warnDeprecated } from '../../constants/env';
-import { defaultRenderLink, renderLinkFromComponent } from '../../constants/default-render-link';
+import { defaultRenderLink } from '../../constants/default-render-link';
 
 /**
  * Lo que recibe `renderLink`: los atributos del `<a>` que pintaría el
@@ -119,12 +118,6 @@ export interface PaginationProps {
    * `<a>` (sin `renderLink`).
    */
   renderLink?: (props: PaginationRenderLinkProps) => ReactNode;
-  /**
-   * @deprecated Usa `renderLink` (`renderLink={(props) => <Link {...props} />}`).
-   * Sigue funcionando y avisa en desarrollo; se retira en la v52.
-   */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  linkComponent?: ComponentType<any>;
   /** Tamaño del componente. Default: "md" */
   size?: 'sm' | 'md' | 'lg';
   /**
@@ -132,8 +125,6 @@ export interface PaginationProps {
    * `pagination.label` del `BrandMessagesProvider`.
    */
   'aria-label'?: string;
-  /** @deprecated Usa `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
-  ariaLabel?: string;
   /** `aria-label` de cada botón/enlace de página. Sin default: `pagination.goToPage`. */
   pageLabel?: (page: number) => string;
   /** `aria-label` del botón «anterior». Sin default: `pagination.previous`. */
@@ -192,15 +183,13 @@ export function Pagination({
   onNext,
   onPageChange,
   hrefBuilder: hrefBuilderProp,
-  renderLink: renderLinkProp,
-  linkComponent,
+  renderLink = defaultRenderLink,
   onPageSizeChange,
   pageSizeOptions,
   afterPageSize,
   showTotal = false,
   size = 'md',
-  'aria-label': ariaLabelProp,
-  ariaLabel: ariaLabelDeprecated,
+  'aria-label': ariaLabel,
   pageLabel,
   previousLabel,
   nextLabel,
@@ -209,15 +198,10 @@ export function Pagination({
   totalLabel,
   className,
 }: PaginationProps) {
-  if (ariaLabelDeprecated !== undefined) warnDeprecated('Pagination', 'ariaLabel', '`aria-label`');
-  const ariaLabel = ariaLabelProp ?? ariaLabelDeprecated;
   // Cada texto se lee donde se pinta, nunca antes: un paginador sin selector
   // de tamaño no exige el texto del selector.
   const t = useBrandMessages('pagination', paginationEs);
   const hrefBuilder = hrefBuilderProp ?? (hrefs ? (p: number) => hrefs[p] : undefined);
-  if (linkComponent !== undefined) warnDeprecated('Pagination', 'linkComponent', '`renderLink`');
-  const renderLink =
-    renderLinkProp ?? (linkComponent ? renderLinkFromComponent(linkComponent) : defaultRenderLink);
 
   if (mode === 'cursor') {
     const chevronSize = size === 'lg' ? 'md' : 'sm';

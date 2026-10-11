@@ -25,12 +25,6 @@ export interface ModalProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
      * pide cerrarse, así que en la práctica llega siempre `false`.
      */
     onOpenChange?: (open: boolean) => void;
-    /**
-     * @deprecated Usa `onOpenChange` (`onOpenChange={(open) => { if (!open) cerrar(); }}`,
-     * o directamente `onOpenChange={setOpen}`). Sigue funcionando y avisa en
-     * desarrollo; se retira en la v52.
-     */
-    onClose?: () => void;
     title?: string;
     children: React.ReactNode;
     /**
@@ -105,4 +99,4 @@ export interface ModalProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
  * `className` se concatena tras las clases propias del popup, como en `Sheet`.
  * La cara del diálogo sigue personalizándose por tokens.
  */
-export declare function Modal({ open, onOpenChange, onClose, title, children, closeLabel, fallbackTitle, container, description, 'aria-describedby': ariaDescribedBy, initialFocus, footer, footerClassName, className, ...rest }: ModalProps): import("react/jsx-runtime").JSX.Element;
+export declare function Modal({ open, onOpenChange, title, children, closeLabel, fallbackTitle, container, description, 'aria-describedby': ariaDescribedBy, initialFocus, footer, footerClassName, className, ...rest }: ModalProps): import("react/jsx-runtime").JSX.Element;

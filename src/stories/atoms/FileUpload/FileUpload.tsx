@@ -9,7 +9,6 @@ import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { fileUploadEs } from '../../messages/es/fileUpload';
 import './FileUpload.css';
 import { assignRef } from '../../constants/assign-ref';
-import { warnDeprecated } from '../../constants/env';
 
 /**
  * El cromo de la zona de subida: lo que dice la zona, lo que dice de los
@@ -94,8 +93,6 @@ export interface FileUploadProps {
   size?: FormSize;
   /** @deprecated Usa el atributo nativo `aria-describedby`. */
   describedBy?: string;
-  /** @deprecated Usa el atributo nativo `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
-  ariaLabel?: string;
   /** Ids de ayuda/error que describen el control (lo pone el campo). */
   'aria-describedby'?: string;
   /**
@@ -217,9 +214,8 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
   id,
   name,
   describedBy,
-  ariaLabel,
   'aria-describedby': ariaDescribedBy,
-  'aria-label': ariaLabelNative,
+  'aria-label': ariaLabel,
   required,
   onBlur,
   className,
@@ -236,7 +232,6 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
   invalidTypeError,
   size: sizeProp,
 }: FileUploadProps, ref) {
-  if (ariaLabel !== undefined) warnDeprecated('FileUpload', 'ariaLabel', '`aria-label`');
   const t = useBrandMessages('fileUpload', fileUploadEs);
   const size = useFormSize(sizeProp);
   // El icono del dropzone mide con la escala del propio `Icon`, que es de donde
@@ -374,7 +369,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
           accept={accept}
           disabled={disabled}
           required={required}
-          aria-label={ariaLabelNative ?? ariaLabel}
+          aria-label={ariaLabel}
           aria-describedby={describedByIds}
           aria-invalid={error || undefined}
           aria-busy={uploading || undefined}

@@ -145,21 +145,6 @@ enum class ParagraphSize(val value: String) {
     Sm("sm"),
     Md("md"),
     Lg("lg"),
-    ;
-
-    companion object {
-        /** `small` es `sm` desde la v51 (las tallas se escriben `xs`…`4xl`). Se retira en la v52. */
-        @Deprecated("`small` es `sm` desde la v51. Se retira en la v52.", ReplaceWith("ParagraphSize.Sm"))
-        val Small: ParagraphSize get() = Sm
-
-        /** `default` es `md` desde la v51. Se retira en la v52. */
-        @Deprecated("`default` es `md` desde la v51. Se retira en la v52.", ReplaceWith("ParagraphSize.Md"))
-        val Default: ParagraphSize get() = Md
-
-        /** `large` es `lg` desde la v51. Se retira en la v52. */
-        @Deprecated("`large` es `lg` desde la v51. Se retira en la v52.", ReplaceWith("ParagraphSize.Lg"))
-        val Large: ParagraphSize get() = Lg
-    }
 }
 
 @Composable

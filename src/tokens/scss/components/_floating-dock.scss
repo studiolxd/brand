@@ -38,7 +38,3 @@ $slxd-floating-dock-focus-ring-offset: 2px; // Separación del anillo de foco de
 $slxd-floating-dock-focus-ring-color: #111e30; // Color del anillo de foco del panel: la tinta de la superficie
 $slxd-floating-dock-transition-duration: 250ms; // Duración de la entrada y la salida del panel
 $slxd-floating-dock-transition-easing: ease-in-out; // Curva de la entrada y la salida del panel
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-floating-dock-panel-inline-size: $slxd-floating-dock-panel-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-floating-dock-panel-width
-$slxd-floating-dock-panel-block-size: $slxd-floating-dock-panel-height; // OBSOLETO (v51, se retira en la v52): usar $slxd-floating-dock-panel-height

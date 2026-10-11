@@ -1,10 +1,9 @@
-import type { AnchorHTMLAttributes, ComponentType, MouseEvent, ReactNode } from 'react';
+import type { AnchorHTMLAttributes, MouseEvent, ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
 import './PrevNextNav.css';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { prevNextNavEs } from '../../messages/es/prevNextNav';
-import { warnDeprecated } from '../../constants/env';
-import { defaultRenderLink, renderLinkFromComponent } from '../../constants/default-render-link';
+import { defaultRenderLink } from '../../constants/default-render-link';
 
 /**
  * Lo que recibe `renderLink`: los atributos del `<a>` que pintaría el
@@ -66,12 +65,6 @@ export interface PrevNextNavProps {
    * tiene que reenviarlos todos. Sin él, un `<a>`.
    */
   renderLink?: (props: PrevNextNavRenderLinkProps) => ReactNode;
-  /**
-   * @deprecated Usa `renderLink` (`renderLink={(props) => <Link {...props} />}`).
-   * Sigue funcionando y avisa en desarrollo; se retira en la v52.
-   */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  linkComponent?: ComponentType<any>;
   /** Variante de densidad. Default: "md" */
   size?: 'sm' | 'md';
   /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
@@ -167,14 +160,10 @@ export function PrevNextNav({
   nextTitle,
   label,
   labelId,
-  renderLink: renderLinkProp,
-  linkComponent,
+  renderLink = defaultRenderLink,
   size = 'md',
   className,
 }: PrevNextNavProps) {
-  if (linkComponent !== undefined) warnDeprecated('PrevNextNav', 'linkComponent', '`renderLink`');
-  const renderLink =
-    renderLinkProp ?? (linkComponent ? renderLinkFromComponent(linkComponent) : defaultRenderLink);
   const t = useBrandMessages('prevNextNav', prevNextNavEs);
   const chevronSize = size === 'sm' ? 'sm' : 'md';
   const titled = prevTitle !== undefined || nextTitle !== undefined;

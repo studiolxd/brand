@@ -1,6 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it, vi, type MockInstance } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { resetWarnings } from './env';
 import { Input } from '../atoms/Input/Input';
 import { NumberInput } from '../atoms/NumberInput/NumberInput';
 import { FileUpload } from '../atoms/FileUpload/FileUpload';
@@ -13,28 +12,11 @@ import { PrevNextNav } from '../molecules/PrevNextNav/PrevNextNav';
 import { CalendarRoster } from '../molecules/CalendarRoster/CalendarRoster';
 
 /**
- * Los alias obsoletos de la v51. Cada uno
- * sigue funcionando y avisa una vez en desarrollo. Este fichero entero se
- * borra en la v52, cuando se retiran.
+ * Los nombres de la v51 (D6.5): el nombre accesible se pasa con el atributo
+ * nativo `aria-label`, y los enlaces internos se pintan con `renderLink`. Sus
+ * alias obsoletos (`ariaLabel`, `linkComponent`) se retiraron en la v53.
  */
-describe('alias obsoleto ariaLabel → aria-label (v51)', () => {
-  let warn: MockInstance;
-  beforeEach(() => {
-    resetWarnings();
-    warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-  });
-  afterEach(() => warn.mockRestore());
-
-  const avisa = (componente: string) =>
-    expect(warn).toHaveBeenCalledWith(
-      expect.stringContaining(`\`<${componente} ariaLabel>\` está obsoleta; usa \`aria-label\``),
-    );
-
-  // Sin proveedor, el catálogo avisa de las claves que faltan: lo que se mira
-  // aquí es solo el aviso de obsolescencia.
-  const noAvisa = () =>
-    expect(warn).not.toHaveBeenCalledWith(expect.stringContaining('obsoleta'));
-
+describe('aria-label', () => {
   const casos: Array<[string, (props: Record<string, string>) => React.ReactElement, string]> = [
     ['Input', (p) => <Input {...p} />, 'textbox'],
     ['NumberInput', (p) => <NumberInput {...p} />, 'textbox'],
@@ -46,44 +28,19 @@ describe('alias obsoleto ariaLabel → aria-label (v51)', () => {
   ];
 
   for (const [nombre, pinta, rol] of casos) {
-    it(`${nombre}: aria-label nombra el control sin avisar`, () => {
+    it(`${nombre}: aria-label nombra el control`, () => {
       render(pinta({ 'aria-label': 'Nombre nuevo' }));
       expect(screen.getByRole(rol, { name: 'Nombre nuevo' })).toBeInTheDocument();
-      noAvisa();
-    });
-
-    it(`${nombre}: el alias ariaLabel sigue nombrando y avisa`, () => {
-      render(pinta({ ariaLabel: 'Nombre viejo' }));
-      expect(screen.getByRole(rol, { name: 'Nombre viejo' })).toBeInTheDocument();
-      avisa(nombre);
     });
   }
 
   it('FileUpload: una sola prop de nombre; el input nativo la toma', () => {
     const { container } = render(<FileUpload aria-label="Subir factura" />);
     expect(container.querySelector('input[type="file"]')).toHaveAttribute('aria-label', 'Subir factura');
-    noAvisa();
-  });
-
-  it('FileUpload: el alias ariaLabel sigue nombrando y avisa; si llegan las dos, gana aria-label', () => {
-    const { container, rerender } = render(<FileUpload ariaLabel="Viejo" />);
-    const input = container.querySelector('input[type="file"]');
-    expect(input).toHaveAttribute('aria-label', 'Viejo');
-    avisa('FileUpload');
-    rerender(<FileUpload ariaLabel="Viejo" aria-label="Nuevo" />);
-    expect(input).toHaveAttribute('aria-label', 'Nuevo');
   });
 });
 
-/** D6.5: `linkComponent` → `renderLink` en Pagination, PrevNextNav y CalendarRoster. */
-describe('alias obsoleto linkComponent → renderLink (v51)', () => {
-  let warn: MockInstance;
-  beforeEach(() => {
-    resetWarnings();
-    warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-  });
-  afterEach(() => warn.mockRestore());
-
+describe('renderLink', () => {
   function RouterLink(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
     return <a data-router="" {...props} />;
   }
@@ -110,17 +67,6 @@ describe('alias obsoleto linkComponent → renderLink (v51)', () => {
         expect(a).toHaveAttribute('data-router');
         expect(a.getAttribute('class')).toBeTruthy();
       }
-      expect(warn).not.toHaveBeenCalledWith(expect.stringContaining('obsoleta'));
-    });
-
-    it(`${nombre}: el alias linkComponent sigue funcionando y avisa`, () => {
-      const { container } = render(pinta({ linkComponent: RouterLink }));
-      const enlaces = container.querySelectorAll('a[href]');
-      expect(enlaces.length).toBeGreaterThan(0);
-      for (const a of enlaces) expect(a).toHaveAttribute('data-router');
-      expect(warn).toHaveBeenCalledWith(
-        expect.stringContaining(`\`<${nombre} linkComponent>\` está obsoleta; usa \`renderLink\``),
-      );
     });
   }
 });

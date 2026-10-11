@@ -82,8 +82,6 @@ export interface FileUploadProps {
     size?: FormSize;
     /** @deprecated Usa el atributo nativo `aria-describedby`. */
     describedBy?: string;
-    /** @deprecated Usa el atributo nativo `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
-    ariaLabel?: string;
     /** Ids de ayuda/error que describen el control (lo pone el campo). */
     'aria-describedby'?: string;
     /**

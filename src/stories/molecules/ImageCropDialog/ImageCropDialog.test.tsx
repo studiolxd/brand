@@ -3,7 +3,6 @@ import { render as renderRTL, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ImageCropDialog } from './ImageCropDialog';
 import { initialCrop } from './crop';
-import { resetWarnings } from '../../constants/env';
 import type { ReactNode } from 'react';
 import { BrandMessagesProvider } from '../../messages/BrandMessagesProvider';
 import { brandMessagesFixture as ES } from '../../../../.storybook/brandMessagesFixture';
@@ -75,20 +74,6 @@ describe('ImageCropDialog', () => {
     await user.click(screen.getByRole('button', { name: 'Cancelar' }));
     expect(onOpenChange).toHaveBeenCalledTimes(1);
     expect(onOpenChange).toHaveBeenCalledWith(false);
-  });
-
-  it('el alias obsoleto onClose sigue funcionando y avisa en desarrollo', async () => {
-    resetWarnings();
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const onClose = vi.fn();
-    const user = userEvent.setup();
-    const { onOpenChange: _omit, ...props } = baseProps;
-    void _omit;
-    render(<ImageCropDialog {...props} sourceUrl="blob:fake" onClose={onClose} />);
-    await user.click(screen.getByRole('button', { name: 'Cancelar' }));
-    expect(onClose).toHaveBeenCalledTimes(1);
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('`<ImageCropDialog onClose>` está obsoleta'));
-    warn.mockRestore();
   });
 
   it('mantiene confirmar deshabilitado hasta que hay selección', () => {

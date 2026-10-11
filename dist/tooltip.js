@@ -1,69 +1,58 @@
 'use client';
 import './tooltip.css';
-import { n as e } from "./_shared/env.js";
-import { n as t } from "./_shared/portal-container.js";
-import { n } from "./_shared/focusable-when-disabled.js";
-import { t as r } from "./_shared/side-offset.js";
-import { cloneElement as i, forwardRef as a, isValidElement as o, useId as s, useState as c } from "react";
-import { jsx as l, jsxs as u } from "react/jsx-runtime";
-import { Tooltip as d } from "@base-ui/react/tooltip";
+import { n as e } from "./_shared/portal-container.js";
+import { n as t } from "./_shared/focusable-when-disabled.js";
+import { t as n } from "./_shared/side-offset.js";
+import { cloneElement as r, forwardRef as i, isValidElement as a, useId as o, useState as s } from "react";
+import { jsx as c, jsxs as l } from "react/jsx-runtime";
+import { Tooltip as u } from "@base-ui/react/tooltip";
 //#region src/stories/atoms/Tooltip/Tooltip.tsx
-function f({ children: e, delayDuration: t = 0, skipDelayDuration: n }) {
-	return /* @__PURE__ */ l(d.Provider, {
+function d({ children: e, delayDuration: t = 0, skipDelayDuration: n }) {
+	return /* @__PURE__ */ c(u.Provider, {
 		delay: t,
 		...n === void 0 ? {} : { timeout: n },
 		children: e
 	});
 }
-var p = r("--tooltip-offset"), m = a(function({ label: r, children: a, side: f = "top", align: m = "center", sideOffset: h, open: g, defaultOpen: _, onOpenChange: v, delayDuration: y, describe: b = !0, disabledTrigger: x = !1, container: S, className: C, ...w }, T) {
-	let E = t(S), D = s(), O = s(), k = w.id ?? O, [A, j] = c(_ ?? !1), M = g ?? A;
-	x && e("Tooltip", "disabledTrigger", "nada: el disparador deshabilitado ya recibe foco solo");
-	let N = o(a) ? a : null, P = !!N?.props.disabled || x, F = null;
-	return N && P && n(N.type) ? F = i(N, { focusableWhenDisabled: !0 }) : N && N.props.disabled && typeof N.type == "string" ? F = i(N, {
+var f = n("--tooltip-offset"), p = i(function({ label: n, children: i, side: d = "top", align: p = "center", sideOffset: m, open: h, defaultOpen: g, onOpenChange: _, delayDuration: v, describe: y = !0, container: b, className: x, ...S }, C) {
+	let w = e(b), T = o(), [E, D] = s(g ?? !1), O = h ?? E, k = a(i) ? i : null, A;
+	return A = k && k.props.disabled && t(k.type) ? r(k, { focusableWhenDisabled: !0 }) : k && k.props.disabled && typeof k.type == "string" ? r(k, {
 		disabled: void 0,
 		"aria-disabled": !0,
 		onClick: (e) => {
 			e.preventDefault(), e.stopPropagation();
 		}
-	}) : x || (F = a), /* @__PURE__ */ u(d.Root, {
-		open: g,
-		defaultOpen: _,
+	}) : i, /* @__PURE__ */ l(u.Root, {
+		open: h,
+		defaultOpen: g,
 		onOpenChange: (e) => {
-			g === void 0 && j(e), v?.(e);
+			h === void 0 && D(e), _?.(e);
 		},
-		children: [/* @__PURE__ */ l(d.Trigger, {
-			ref: T,
-			render: F ?? /* @__PURE__ */ l("span", {
-				id: k,
-				className: "tooltip__trigger",
-				tabIndex: 0,
-				role: "group",
-				"aria-disabled": !0,
-				...w["aria-label"] === void 0 && w["aria-labelledby"] === void 0 ? { "aria-labelledby": k } : {},
-				children: a
-			}),
-			"aria-describedby": M && b ? D : void 0,
-			...y === void 0 ? {} : { delay: y },
-			...w
-		}), /* @__PURE__ */ l(d.Portal, {
-			container: E,
-			children: /* @__PURE__ */ l(d.Positioner, {
+		children: [/* @__PURE__ */ c(u.Trigger, {
+			ref: C,
+			render: A,
+			"aria-describedby": O && y ? T : void 0,
+			...v === void 0 ? {} : { delay: v },
+			...S
+		}), /* @__PURE__ */ c(u.Portal, {
+			container: w,
+			children: /* @__PURE__ */ c(u.Positioner, {
 				className: "tooltip__positioner",
-				side: f,
-				align: m,
-				sideOffset: h ?? p,
-				children: /* @__PURE__ */ u(d.Popup, {
-					id: D,
+				side: d,
+				align: p,
+				sideOffset: m ?? f,
+				children: /* @__PURE__ */ l(u.Popup, {
+					id: T,
 					role: "tooltip",
-					className: ["tooltip", C].filter(Boolean).join(" "),
-					children: [r, /* @__PURE__ */ l(d.Arrow, {
+					className: ["tooltip", x].filter(Boolean).join(" "),
+					children: [n, /* @__PURE__ */ c(u.Arrow, {
 						className: "tooltip__arrow",
-						children: /* @__PURE__ */ l("svg", {
+						children: /* @__PURE__ */ c("svg", {
 							width: "10",
 							height: "5",
 							viewBox: "0 0 30 10",
 							preserveAspectRatio: "none",
-							children: /* @__PURE__ */ l("polygon", { points: "0,0 30,0 15,10" })
+							children: /* @__PURE__ */ c("polygon", { points: "0,0 30,0 15,10" })
 						})
 					})]
 				})
@@ -72,4 +61,4 @@ var p = r("--tooltip-offset"), m = a(function({ label: r, children: a, side: f =
 	});
 });
 //#endregion
-export { m as Tooltip, f as TooltipProvider };
+export { p as Tooltip, d as TooltipProvider };

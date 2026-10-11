@@ -151,16 +151,6 @@ public struct BrandHeading: View {
 /// `Paragraph` `size`: `sm` para notas y metadatos, `md` (el cuerpo) para leer, `lg` para entradillas.
 public enum ParagraphSize: String, CaseIterable, Sendable {
     case sm, md, lg
-
-    /// `small` es `sm` desde la v51 (las tallas se escriben `xs`…`4xl`). Se retira en la v52.
-    @available(*, deprecated, renamed: "sm")
-    public static let small = ParagraphSize.sm
-    /// `default` es `md` desde la v51. Se retira en la v52.
-    @available(*, deprecated, renamed: "md")
-    public static let `default` = ParagraphSize.md
-    /// `large` es `lg` desde la v51. Se retira en la v52.
-    @available(*, deprecated, renamed: "lg")
-    public static let large = ParagraphSize.lg
 }
 
 /// Un párrafo de la marca: el cuerpo del sistema (16 pt) y, en `sm` y `lg`, un peldaño por debajo y por encima.

@@ -6,10 +6,6 @@ public enum BannerTone: String, CaseIterable, Sendable {
     case info, warning, error
 }
 
-/// El nombre de `BannerTone` hasta la v50. Se retira en la v52.
-@available(*, deprecated, renamed: "BannerTone")
-public typealias BannerVariant = BannerTone
-
 /// Una barra de sistema (`Banner` de React): un aviso persistente, a ancho completo, que acompaña a toda la sesión y
 /// vive **fuera** del contenido —el caso de referencia es «estás viendo la aplicación como alguien» con el botón de
 /// dejar de suplantar—.
@@ -200,79 +196,6 @@ extension BrandBanner where Content == Text, Actions == EmptyView {
         dismissLabel: LocalizedStringKey = "Descartar"
     ) {
         self.init(tone: tone, onDismiss: onDismiss, dismissLabel: dismissLabel, content: { Text(verbatim: message) })
-    }
-}
-
-// MARK: - Alias obsoletos (v51): `variant` es `tone`. Se retiran en la v52.
-
-extension BrandBanner {
-    @available(*, deprecated, renamed: "init(tone:onDismiss:dismissLabel:content:actions:)")
-    public init(
-        variant: BannerTone,
-        onDismiss: (() -> Void)? = nil,
-        dismissLabel: LocalizedStringKey = "Descartar",
-        @ViewBuilder content: () -> Content,
-        @ViewBuilder actions: () -> Actions
-    ) {
-        self.init(tone: variant, onDismiss: onDismiss, dismissLabel: dismissLabel, content: content, actions: actions)
-    }
-}
-
-extension BrandBanner where Actions == EmptyView {
-    @available(*, deprecated, renamed: "init(tone:onDismiss:dismissLabel:content:)")
-    public init(
-        variant: BannerTone,
-        onDismiss: (() -> Void)? = nil,
-        dismissLabel: LocalizedStringKey = "Descartar",
-        @ViewBuilder content: () -> Content
-    ) {
-        self.init(tone: variant, onDismiss: onDismiss, dismissLabel: dismissLabel, content: content)
-    }
-}
-
-extension BrandBanner where Content == Text {
-    @available(*, deprecated, renamed: "init(_:tone:onDismiss:dismissLabel:actions:)")
-    public init(
-        _ message: LocalizedStringKey,
-        variant: BannerTone,
-        onDismiss: (() -> Void)? = nil,
-        dismissLabel: LocalizedStringKey = "Descartar",
-        @ViewBuilder actions: () -> Actions
-    ) {
-        self.init(message, tone: variant, onDismiss: onDismiss, dismissLabel: dismissLabel, actions: actions)
-    }
-
-    @available(*, deprecated, renamed: "init(verbatim:tone:onDismiss:dismissLabel:actions:)")
-    public init(
-        verbatim message: String,
-        variant: BannerTone,
-        onDismiss: (() -> Void)? = nil,
-        dismissLabel: LocalizedStringKey = "Descartar",
-        @ViewBuilder actions: () -> Actions
-    ) {
-        self.init(verbatim: message, tone: variant, onDismiss: onDismiss, dismissLabel: dismissLabel, actions: actions)
-    }
-}
-
-extension BrandBanner where Content == Text, Actions == EmptyView {
-    @available(*, deprecated, renamed: "init(_:tone:onDismiss:dismissLabel:)")
-    public init(
-        _ message: LocalizedStringKey,
-        variant: BannerTone,
-        onDismiss: (() -> Void)? = nil,
-        dismissLabel: LocalizedStringKey = "Descartar"
-    ) {
-        self.init(message, tone: variant, onDismiss: onDismiss, dismissLabel: dismissLabel)
-    }
-
-    @available(*, deprecated, renamed: "init(verbatim:tone:onDismiss:dismissLabel:)")
-    public init(
-        verbatim message: String,
-        variant: BannerTone,
-        onDismiss: (() -> Void)? = nil,
-        dismissLabel: LocalizedStringKey = "Descartar"
-    ) {
-        self.init(verbatim: message, tone: variant, onDismiss: onDismiss, dismissLabel: dismissLabel)
     }
 }
 

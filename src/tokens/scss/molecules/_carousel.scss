@@ -13,8 +13,3 @@ $slxd-carousel-indicator-current-color: #111e30; // Barra de la diapositiva a la
 $slxd-carousel-focus-ring-color: #111e30; // Color del anillo de foco de los indicadores
 $slxd-carousel-focus-ring-width: 2px; // Grosor del anillo de foco
 $slxd-carousel-focus-ring-offset: 1px; // Separación del anillo de foco
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-carousel-indicator-inline-size: $slxd-carousel-indicator-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-carousel-indicator-width
-$slxd-carousel-indicator-block-size: $slxd-carousel-indicator-height; // OBSOLETO (v51, se retira en la v52): usar $slxd-carousel-indicator-height
-$slxd-carousel-indicator-hit-block-size: $slxd-carousel-indicator-hit-height; // OBSOLETO (v51, se retira en la v52): usar $slxd-carousel-indicator-hit-height

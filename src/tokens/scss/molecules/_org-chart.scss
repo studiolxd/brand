@@ -37,7 +37,3 @@ $slxd-org-chart-person-role-font-size: 0.75rem; // Tamaño del puesto de una per
 $slxd-org-chart-person-role-color: #4a4a4a; // Color del puesto de una persona
 $slxd-org-chart-person-gap: 0.25rem; // Separación entre personas
 $slxd-org-chart-empty-color: #4a4a4a; // Color del «sin responsable» / «sin equipo»
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-org-chart-viewport-block-size: $slxd-org-chart-viewport-height; // OBSOLETO (v51, se retira en la v52): usar $slxd-org-chart-viewport-height
-$slxd-org-chart-card-inline-size: $slxd-org-chart-card-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-org-chart-card-width

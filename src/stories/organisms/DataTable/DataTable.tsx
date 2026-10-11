@@ -115,7 +115,6 @@ export type DataTableHeaderLabels = Pick<
 export type DataTablePaginationLabels = Pick<
   PaginationProps,
   | 'aria-label'
-  | 'ariaLabel'
   | 'pageLabel'
   | 'previousLabel'
   | 'nextLabel'

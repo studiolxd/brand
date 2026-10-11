@@ -25,7 +25,3 @@ $slxd-tabs-focus-ring-offset: 1px; // Separación del anillo de foco
 $slxd-tabs-content-padding-block: 1rem; // Padding vertical del panel de contenido
 $slxd-tabs-transition-duration: 150ms; // Duración de la transición de color
 $slxd-tabs-transition-easing: ease-in-out; // Easing de la transición
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-tabs-trigger-pill-bg-active: $slxd-tabs-trigger-pill-active-bg; // OBSOLETO (v51, se retira en la v52): usar $slxd-tabs-trigger-pill-active-bg
-$slxd-tabs-trigger-pill-color-active: $slxd-tabs-trigger-pill-active-color; // OBSOLETO (v51, se retira en la v52): usar $slxd-tabs-trigger-pill-active-color

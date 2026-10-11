@@ -95,7 +95,7 @@ export function buildEmailAssets({ distOutDir = 'dist/assets/email', publicOutDi
   const logoWidth = emailLogoWidthFor(logoHeight);
   const boxWidth = logoWidth + padding * 2;
   /* Redondeado: `logoHeight` puede venir de un `calc()` fraccionario (la talla
-     xxl del logotipo da 85,33px) y un PNG no tiene medio píxel — sin redondear
+     2xl del logotipo da 85,33px) y un PNG no tiene medio píxel — sin redondear
      aquí, el tamaño real del fichero queda a merced de cómo `magick` redondee
      el `-resize`, y puede no coincidir con los atributos `width`/`height` que
      calcula `emailLogo` en `emailTheme.ts` a partir del mismo token. */

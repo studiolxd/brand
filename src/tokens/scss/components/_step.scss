@@ -35,7 +35,3 @@ $slxd-step-connector-done-color: #111e30; // Tramo recorrido (solo Stepper, que 
 $slxd-step-description-color: #4a4a4a; // Línea de detalle bajo una marca: texto secundario. La usan la descripción de Stepper y la de Steps, para que digan lo mismo con el mismo color
 $slxd-step-transition-duration: 150ms; // Duración del cambio de fondo de la marca (un paso que pasa a completado, o vuelve a pendiente)
 $slxd-step-transition-easing: ease; // Curva del cambio de fondo
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-step-tone-danger-bg: $slxd-step-tone-error-bg; // OBSOLETO (v51, se retira en la v52): usar $slxd-step-tone-error-bg
-$slxd-step-tone-danger-color: $slxd-step-tone-error-color; // OBSOLETO (v51, se retira en la v52): usar $slxd-step-tone-error-color

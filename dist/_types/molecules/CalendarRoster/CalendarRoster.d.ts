@@ -1,4 +1,4 @@
-import { type ComponentType, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { type PrevNextNavRenderLinkProps } from '../PrevNextNav/PrevNextNav';
 /** Lo que recibe `renderLink`: el mismo contrato que el de `PrevNextNav`. */
 export type CalendarRosterRenderLinkProps = PrevNextNavRenderLinkProps;
@@ -71,11 +71,6 @@ export interface CalendarRosterProps {
      */
     renderLink?: (props: CalendarRosterRenderLinkProps) => ReactNode;
     /**
-     * @deprecated Usa `renderLink` (`renderLink={(props) => <Link {...props} />}`).
-     * Sigue funcionando y avisa en desarrollo; se retira en la v52.
-     */
-    linkComponent?: ComponentType<any>;
-    /**
      * Render prop para personalizar el contenido interno de cada celda.
      * El componente sigue siendo responsable del <td> y sus clases (--weekend, --today, --holiday, --non-working).
      * Cuando se pasa, sustituye al renderizado por defecto de chips/schedule.
@@ -129,4 +124,4 @@ export interface CalendarRosterProps {
     today?: Date;
     className?: string;
 }
-export declare function CalendarRoster({ rows, month, onMonthChange, hrefBuilder, renderLink, linkComponent, renderCell, nameLabel, birthdayPrefix, showLegend, locale, legendItems, legendLabel, previousMonthLabel, nextMonthLabel, today: todayProp, className, }: CalendarRosterProps): import("react/jsx-runtime").JSX.Element;
+export declare function CalendarRoster({ rows, month, onMonthChange, hrefBuilder, renderLink, renderCell, nameLabel, birthdayPrefix, showLegend, locale, legendItems, legendLabel, previousMonthLabel, nextMonthLabel, today: todayProp, className, }: CalendarRosterProps): import("react/jsx-runtime").JSX.Element;

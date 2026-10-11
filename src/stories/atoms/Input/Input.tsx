@@ -1,6 +1,5 @@
 import { forwardRef } from 'react';
 import './Input.css';
-import { warnDeprecated } from '../../constants/env';
 
 export interface InputProps
   extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size'> {
@@ -12,8 +11,6 @@ export interface InputProps
   className?: string;
   /** @deprecated Usa el atributo nativo `aria-describedby`. */
   describedBy?: string;
-  /** @deprecated Usa el atributo nativo `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
-  ariaLabel?: string;
 }
 
 /**
@@ -30,10 +27,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input({
   error = false,
   className,
   describedBy,
-  ariaLabel,
   ...rest
 }, ref) {
-  if (ariaLabel !== undefined) warnDeprecated('Input', 'ariaLabel', '`aria-label`');
   const classes = [
     'input',
     size !== 'md' ? `input--${size}` : '',
@@ -47,7 +42,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input({
       className={classes}
       aria-invalid={error || undefined}
       aria-describedby={describedBy}
-      aria-label={ariaLabel}
       {...rest}
     />
   );

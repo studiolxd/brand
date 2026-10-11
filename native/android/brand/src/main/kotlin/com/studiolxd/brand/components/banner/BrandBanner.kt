@@ -37,10 +37,6 @@ enum class BannerTone(val value: String) {
     Error("error"),
 }
 
-/** El nombre de [BannerTone] hasta la v50. Se retira en la v52. */
-@Deprecated("La prop de intención se llama `tone` desde la v51. Se retira en la v52.", ReplaceWith("BannerTone"))
-typealias BannerVariant = BannerTone
-
 private class BannerColors(val background: Color, val ink: Color, val border: Color, val close: Color)
 
 @Composable
@@ -174,33 +170,3 @@ fun BrandBanner(
         BrandBasicText(text, style = com.studiolxd.brand.support.LocalBrandTextStyle.current)
     }
 }
-
-/** `variant` es `tone` desde la v51. Se retira en la v52. */
-@Deprecated(
-    "`variant` es `tone` desde la v51. Se retira en la v52.",
-    ReplaceWith("BrandBanner(modifier, tone = variant, actions = actions, onDismiss = onDismiss, dismissLabel = dismissLabel, content = content)"),
-)
-@Composable
-fun BrandBanner(
-    variant: BannerTone,
-    modifier: Modifier = Modifier,
-    actions: (@Composable () -> Unit)? = null,
-    onDismiss: (() -> Unit)? = null,
-    dismissLabel: String = "Descartar",
-    content: @Composable () -> Unit,
-) = BrandBanner(modifier, variant, actions, onDismiss, dismissLabel, content)
-
-/** `variant` es `tone` desde la v51. Se retira en la v52. */
-@Deprecated(
-    "`variant` es `tone` desde la v51. Se retira en la v52.",
-    ReplaceWith("BrandBanner(text, modifier, tone = variant, actions = actions, onDismiss = onDismiss, dismissLabel = dismissLabel)"),
-)
-@Composable
-fun BrandBanner(
-    text: String,
-    variant: BannerTone,
-    modifier: Modifier = Modifier,
-    actions: (@Composable () -> Unit)? = null,
-    onDismiss: (() -> Unit)? = null,
-    dismissLabel: String = "Descartar",
-) = BrandBanner(text, modifier, variant, actions, onDismiss, dismissLabel)

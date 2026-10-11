@@ -18,6 +18,3 @@ $slxd-accordion-transition-easing: ease-in-out; // Curva de abrir/cerrar
 $slxd-accordion-focus-ring-width: 2px; // Grosor del anillo de foco
 $slxd-accordion-focus-ring-offset: 2px; // Separación del anillo de foco (el rol focus gobierna ancho y separación)
 $slxd-accordion-focus-ring-color: #111e30; // Color del anillo de foco: la tinta de la superficie
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-accordion-index-min-inline-size: $slxd-accordion-index-min-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-accordion-index-min-width

@@ -63,8 +63,6 @@ El `Tooltip` lo resuelve solo: si su disparador está deshabilitado, le pide `fo
 
 Lo entienden `Button`, `CloseButton`, `DotsButton`, `CopyButton` y `Toggle`, y un `<button disabled>` nativo (al que se le aplica la misma receta). Fuera de un `Tooltip` el control deshabilitado sigue siendo `disabled` de verdad y queda fuera del orden de tabulación; `focusableWhenDisabled` se puede pasar a mano, pero solo tiene sentido cuando el control apagado tiene algo que decir al recibir el foco.
 
-Hasta la v51 esto pedía `disabledTrigger`, que ponía un envoltorio focusable (`span.tooltip__trigger`) alrededor del control. Queda como **alias obsoleto**: ya no hace falta, avisa en desarrollo y se retira en la v52. Con un disparador que no entienda `focusableWhenDisabled` sigue cayendo en el envoltorio de siempre.
-
 La alternativa —que `Button` ganara un `disabledReason` y montara él el bocadillo— se descartó: ataría el átomo más usado del sistema a `Tooltip` y a su proveedor, y lo obligaría a ser componente de cliente en apps que hoy lo pintan desde el servidor. Y el problema no es de `Button`: le pasa igual a un `Select`, a un `Switcher` o a cualquier control apagado.
 
 ## Accesibilidad

@@ -24,6 +24,3 @@ $slxd-date-picker-message-font-size: 0.875rem; // Cuerpo del aviso
 $slxd-date-picker-message-font-weight: 300; // Peso del aviso
 $slxd-date-picker-message-line-height: 1.5; // Interlineado del aviso
 $slxd-date-picker-message-color: #b30000; // Color del aviso: el del error de formulario — lo que se escribió no es una fecha
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-date-picker-inline-size: $slxd-date-picker-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-date-picker-width

@@ -1,24 +1,18 @@
 import './tag.css';
-import { n as e } from "./_shared/env.js";
-import { forwardRef as t } from "react";
-import { jsx as n } from "react/jsx-runtime";
+import { forwardRef as e } from "react";
+import { jsx as t } from "react/jsx-runtime";
 //#region src/stories/atoms/Tag/Tag.tsx
-function r(t, n, r) {
-	r !== void 0 && e(t, "variant", "`tone`");
-	let i = n ?? r ?? "neutral";
-	return i === "danger" ? (e(t, "variant=\"danger\"", "`tone=\"error\"`"), "error") : i;
-}
-var i = t(function({ tone: e, variant: t, className: i, children: a, ...o }, s) {
-	return /* @__PURE__ */ n("span", {
-		ref: s,
+var n = e(function({ tone: e = "neutral", className: n, children: r, ...i }, a) {
+	return /* @__PURE__ */ t("span", {
+		ref: a,
 		className: [
 			"tag",
-			`tag--${r("Tag", e, t)}`,
-			i ?? ""
+			`tag--${e}`,
+			n ?? ""
 		].filter(Boolean).join(" "),
-		...o,
-		children: a
+		...i,
+		children: r
 	});
 });
 //#endregion
-export { i as Tag };
+export { n as Tag };

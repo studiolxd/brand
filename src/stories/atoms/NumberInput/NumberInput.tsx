@@ -3,7 +3,6 @@ import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { numberInputEs } from '../../messages/es/numberInput';
 import { Icon } from '../Icon/Icon';
 import './NumberInput.css';
-import { warnDeprecated } from '../../constants/env';
 
 /**
  * Los dos textos que el control emite por su cuenta: los nombres accesibles de
@@ -57,8 +56,6 @@ export interface NumberInputProps
   name?: string;
   /** @deprecated Usa el atributo nativo `aria-describedby`. */
   describedBy?: string;
-  /** @deprecated Usa el atributo nativo `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
-  ariaLabel?: string;
   /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
   className?: string;
   /**
@@ -105,7 +102,6 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
   id,
   name,
   describedBy,
-  ariaLabel,
   decrementLabel,
   incrementLabel,
   className,
@@ -116,7 +112,6 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
   onKeyDown,
   ...rest
 }: NumberInputProps, ref) {
-  if (ariaLabel !== undefined) warnDeprecated('NumberInput', 'ariaLabel', '`aria-label`');
   const t = useBrandMessages('numberInput', numberInputEs);
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<number | null>(defaultValue);
@@ -230,7 +225,6 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
         pattern={decimal ? '[0-9]*[.,]?[0-9]*' : '[0-9]*'}
         aria-invalid={error || undefined}
         aria-describedby={describedBy}
-        aria-label={ariaLabel}
         {...rest}
         id={id}
         name={name}

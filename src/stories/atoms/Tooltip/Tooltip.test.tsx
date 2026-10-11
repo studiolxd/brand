@@ -7,7 +7,6 @@ import { CloseButton } from '../CloseButton/CloseButton';
 import { DotsButton } from '../DotsButton/DotsButton';
 import { Toggle } from '../Toggle/Toggle';
 import { CopyButton } from '../../molecules/CopyButton/CopyButton';
-import { resetWarnings } from '../../constants/env';
 import { Tooltip, TooltipProvider } from './Tooltip';
 
 /**
@@ -109,41 +108,5 @@ describe('Tooltip — disparador deshabilitado (focusableWhenDisabled)', () => {
     const boton = screen.getByRole('button', { name: 'Guardar' });
     expect(boton.closest('.tooltip__trigger')).toBeNull();
     expect(boton).not.toHaveAttribute('aria-disabled');
-  });
-});
-
-describe('Tooltip — alias obsoleto disabledTrigger (v51)', () => {
-  it('con un control del DS, ya no envuelve: activa focusableWhenDisabled y avisa', () => {
-    resetWarnings();
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    render(
-      <TooltipProvider>
-        <Tooltip label="Hace falta una matriz publicada" disabledTrigger>
-          <Button disabled>Generar</Button>
-        </Tooltip>
-      </TooltipProvider>,
-    );
-    const boton = screen.getByRole('button', { name: 'Generar' });
-    expect(boton.closest('.tooltip__trigger')).toBeNull();
-    expect(boton).toHaveAttribute('aria-disabled', 'true');
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('`<Tooltip disabledTrigger>` está obsoleta'));
-    warn.mockRestore();
-  });
-
-  it('con un disparador que no entiende focusableWhenDisabled, cae en el envoltorio de siempre', () => {
-    function Ajeno(props: { disabled?: boolean }) {
-      return <button type="button" disabled={props.disabled}>Campo ajeno</button>;
-    }
-    render(
-      <TooltipProvider>
-        <Tooltip label="Motivo" disabledTrigger>
-          <Ajeno disabled />
-        </Tooltip>
-      </TooltipProvider>,
-    );
-    const envoltorio = screen.getByRole('group', { name: 'Campo ajeno' });
-    expect(envoltorio).toHaveClass('tooltip__trigger');
-    expect(envoltorio).toHaveAttribute('tabindex', '0');
-    expect(envoltorio).toHaveAttribute('aria-disabled', 'true');
   });
 });

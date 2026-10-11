@@ -25,6 +25,3 @@ $slxd-table-of-contents-sticky-offset: 1.5rem; // Distancia al borde superior cu
 $slxd-table-of-contents-sticky-max-height: calc(100vh - (2 * 1.5rem)); // Alto máximo del índice fijo: el alto de la ventana menos su aire arriba y abajo. Un índice largo scrollea dentro
 $slxd-table-of-contents-transition-duration: 150ms; // Duración de la transición de hover
 $slxd-table-of-contents-transition-easing: ease; // Easing de la transición de hover
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-table-of-contents-sticky-max-block-size: $slxd-table-of-contents-sticky-max-height; // OBSOLETO (v51, se retira en la v52): usar $slxd-table-of-contents-sticky-max-height

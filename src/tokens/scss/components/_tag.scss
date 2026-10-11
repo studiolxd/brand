@@ -28,7 +28,3 @@ $slxd-tag-success-bg: #006616; // Éxito — relleno universal del sistema
 $slxd-tag-success-color: #ffffff; // Éxito — contenido sobre el relleno
 $slxd-tag-error-bg: #b30000; // Error — relleno universal del sistema
 $slxd-tag-error-color: #ffffff; // Error — contenido sobre el relleno
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-tag-danger-bg: $slxd-tag-error-bg; // OBSOLETO (v51, se retira en la v52): usar $slxd-tag-error-bg
-$slxd-tag-danger-color: $slxd-tag-error-color; // OBSOLETO (v51, se retira en la v52): usar $slxd-tag-error-color

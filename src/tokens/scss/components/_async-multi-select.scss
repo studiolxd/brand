@@ -54,6 +54,3 @@ $slxd-async-multi-select-empty-padding-inline: 1rem; // Aire horizontal del mens
 $slxd-async-multi-select-empty-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía del mensaje de lista vacía
 $slxd-async-multi-select-empty-font-size: 1rem; // Tamaño del mensaje de lista vacía
 $slxd-async-multi-select-empty-color: #4a4a4a; // Tinta del mensaje de lista vacía: es texto secundario, no un valor
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-async-multi-select-input-min-inline-size: $slxd-async-multi-select-input-min-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-async-multi-select-input-min-width

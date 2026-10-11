@@ -19,6 +19,3 @@ $slxd-search-form-submit-disabled-color: #4a4a4a; // Color de la flecha con el c
 $slxd-search-form-submit-focus-ring-width: 2px; // Grosor del anillo de foco de la flecha: el del sistema. Es lo único que marca el foco, porque el adorno no tiene fondo
 $slxd-search-form-submit-focus-ring-color: #111e30; // Color del anillo de foco de la flecha: el del borde del campo en foco
 $slxd-search-form-submit-input-padding-inline-end: 2.5rem; // Padding derecho del campo — el texto termina donde empieza la flecha, que va dentro del borde
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-search-form-inline-size: $slxd-search-form-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-search-form-width

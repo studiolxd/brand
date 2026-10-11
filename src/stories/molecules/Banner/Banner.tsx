@@ -2,7 +2,6 @@
 
 import { forwardRef } from 'react';
 import { CloseButton } from '../../atoms/CloseButton/CloseButton';
-import { warnDeprecated } from '../../constants/env';
 import { useBrandMessages } from '../../messages/BrandMessagesContext';
 import { bannerEs } from '../../messages/es/banner';
 import './Banner.css';
@@ -19,8 +18,6 @@ export interface BannerMessages {
 
 /** Intención de la barra: decide el relleno y el rol ARIA. */
 export type BannerTone = 'info' | 'warning' | 'error';
-/** @deprecated Usa `BannerTone`: la prop de color se llama `tone` desde la v51. Se retira en la v52. */
-export type BannerVariant = BannerTone;
 
 export interface BannerProps extends React.ComponentPropsWithoutRef<'div'> {
   /**
@@ -29,11 +26,6 @@ export interface BannerProps extends React.ComponentPropsWithoutRef<'div'> {
    * antes que nada.
    */
   tone?: BannerTone;
-  /**
-   * @deprecated Usa `tone`. Sigue funcionando, con un aviso en desarrollo,
-   * hasta la v52.
-   */
-  variant?: BannerTone;
   /** El mensaje. Texto corriente: una frase, no un bloque. */
   children?: React.ReactNode;
   /** Ranura para las acciones — normalmente un `Button` del sistema. */
@@ -83,8 +75,7 @@ const ROLE_BY_TONE: Record<BannerTone, 'alert' | 'status'> = {
  * Extiende los atributos nativos de `<div>` y reenvía `{...rest}` al raíz.
  */
 export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner({
-  tone: toneProp,
-  variant,
+  tone = 'info',
   children,
   actions,
   onDismiss,
@@ -95,8 +86,6 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner({
   ...rest
 }, ref) {
   const t = useBrandMessages('banner', bannerEs);
-  if (variant !== undefined) warnDeprecated('Banner', 'variant', '`tone`');
-  const tone = toneProp ?? variant ?? 'info';
   const rol = role ?? ROLE_BY_TONE[tone];
   const classes = [
     'banner',

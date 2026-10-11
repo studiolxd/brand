@@ -1,4 +1,4 @@
-import { type AnchorHTMLAttributes, type ComponentType, type ReactNode } from 'react';
+import { type AnchorHTMLAttributes, type ReactNode } from 'react';
 import type { SelectOption } from '../../atoms/Select/Select';
 import './Pagination.css';
 /**
@@ -110,11 +110,6 @@ export interface PaginationProps {
      * `<a>` (sin `renderLink`).
      */
     renderLink?: (props: PaginationRenderLinkProps) => ReactNode;
-    /**
-     * @deprecated Usa `renderLink` (`renderLink={(props) => <Link {...props} />}`).
-     * Sigue funcionando y avisa en desarrollo; se retira en la v52.
-     */
-    linkComponent?: ComponentType<any>;
     /** Tamaño del componente. Default: "md" */
     size?: 'sm' | 'md' | 'lg';
     /**
@@ -122,8 +117,6 @@ export interface PaginationProps {
      * `pagination.label` del `BrandMessagesProvider`.
      */
     'aria-label'?: string;
-    /** @deprecated Usa `aria-label`. Sigue funcionando y avisa en desarrollo; se retira en la v52. */
-    ariaLabel?: string;
     /** `aria-label` de cada botón/enlace de página. Sin default: `pagination.goToPage`. */
     pageLabel?: (page: number) => string;
     /** `aria-label` del botón «anterior». Sin default: `pagination.previous`. */
@@ -141,4 +134,4 @@ export interface PaginationProps {
     totalLabel?: (total: number) => string;
     className?: string;
 }
-export declare function Pagination({ mode, total, pageCount, page, pageSize, hrefs, previousHref, nextHref, onPrevious, onNext, onPageChange, hrefBuilder: hrefBuilderProp, renderLink: renderLinkProp, linkComponent, onPageSizeChange, pageSizeOptions, afterPageSize, showTotal, size, 'aria-label': ariaLabelProp, ariaLabel: ariaLabelDeprecated, pageLabel, previousLabel, nextLabel, pagesGroupLabel, pageSizeLabel, totalLabel, className, }: PaginationProps): import("react/jsx-runtime").JSX.Element | null;
+export declare function Pagination({ mode, total, pageCount, page, pageSize, hrefs, previousHref, nextHref, onPrevious, onNext, onPageChange, hrefBuilder: hrefBuilderProp, renderLink, onPageSizeChange, pageSizeOptions, afterPageSize, showTotal, size, 'aria-label': ariaLabel, pageLabel, previousLabel, nextLabel, pagesGroupLabel, pageSizeLabel, totalLabel, className, }: PaginationProps): import("react/jsx-runtime").JSX.Element | null;

@@ -17,6 +17,3 @@ $slxd-consent-banner-title-font-size: 1rem; // Cuerpo del título de la banda
 $slxd-consent-banner-description-font-size: 1rem; // Cuerpo del texto de la banda: el cuerpo de texto de la superficie, sin reducir (decisión del 2026-08-28)
 $slxd-consent-preferences-gap: 1rem; // Separación entre los bloques del panel
 $slxd-consent-preferences-category-gap: 0.75rem; // Separación entre categorías de la lista
-
-// Alias obsoletos: nombres anteriores a la convención D9.
-$slxd-consent-banner-max-inline-size: $slxd-consent-banner-max-width; // OBSOLETO (v51, se retira en la v52): usar $slxd-consent-banner-max-width

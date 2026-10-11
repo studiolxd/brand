@@ -35,7 +35,7 @@ export const Descriptiva: Story = {
 };
 
 export const TestDecorativaPorDefecto: Story = {
-  name: 'Test — sin ariaLabel la chispa es decorativa',
+  name: 'Test — sin aria-label la chispa es decorativa',
   tags: ['!dev'],
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -45,7 +45,7 @@ export const TestDecorativaPorDefecto: Story = {
 };
 
 export const TestConNombre: Story = {
-  name: 'Test — con ariaLabel es una imagen con nombre',
+  name: 'Test — con aria-label es una imagen con nombre',
   tags: ['!dev'],
   args: { 'aria-label': 'Tendencia de usuarios activos' },
   play: async ({ canvasElement }) => {
